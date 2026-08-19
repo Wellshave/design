@@ -77,121 +77,110 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
 .devicecap{font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
   color:var(--fg-soft);margin:0 0 8px}
 .scaler{width:100%;overflow:hidden;border:1px solid var(--frame);border-radius:4px;
-  background:#ede7db;box-shadow:var(--shadow)}
+  background:#EDE7DB;box-shadow:var(--shadow)}
 .scaler > .inner{transform-origin:top left}
-.desk-scaler{aspect-ratio:1440/860}
-.desk-scaler > .inner{width:1440px;height:860px}
+.desk-scaler{aspect-ratio:1440/900}
+.desk-scaler > .inner{width:1440px;height:900px}
 .phonecol{max-width:390px;margin:0 auto}
-.phone-scaler{aspect-ratio:390/1240;border-radius:14px}
-.phone-scaler > .inner{width:390px;height:1240px}
+.phone-scaler{aspect-ratio:390/1160;border-radius:14px}
+.phone-scaler > .inner{width:390px;height:1160px}
 .stage{display:grid;gap:30px;margin:0 0 10px}
 
 /* ══ MOCKUP — vaste merkkleuren in beide thema's ══ */
 .pf{font-family:"Montserrat",sans-serif;background:#EDE7DB;color:#111111;
   height:100%;padding:56px 40px;overflow:hidden}
-.pf-inner{max-width:1400px;margin:0 auto;height:100%;display:flex;flex-direction:column;gap:26px}
-.pf-head{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap}
+.pf-in{max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+
+/* band A — kop */
+.pf-top{display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
 .pf-eyebrow{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
-  color:#BC813E;margin:0 0 10px}
-.pf-h2{font-size:34px;line-height:120%;font-weight:500;letter-spacing:-.015em;margin:0;max-width:20ch}
+  color:#BC813E;margin:0 0 12px}
+.pf-h2{font-size:34px;line-height:120%;font-weight:500;letter-spacing:-.015em;margin:0;max-width:17ch}
 .pf-h2 b{font-weight:700}
-.pf-lede{font-size:16px;line-height:150%;color:rgba(17,17,17,.65);margin:8px 0 0;max-width:44ch}
+.pf-note{font-size:15px;line-height:150%;color:rgba(17,17,17,.6);margin:10px 0 0;max-width:46ch}
 
-.pf-grid{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:minmax(0,1fr);
-  gap:16px;flex:1;min-height:0}
-.t{background:#FFFFFF;border-radius:12px;padding:24px;display:flex;flex-direction:column;
-  min-width:0;min-height:0;overflow:hidden}
-.t-label{font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
-  color:rgba(17,17,17,.45);margin:0 0 auto}
-
-/* score-tegel */
-.t-score{grid-column:span 4;grid-row:span 2;justify-content:space-between;gap:14px}
-.score-big{font-size:96px;line-height:.9;font-weight:700;letter-spacing:-.05em;margin:0;
-  display:flex;align-items:baseline;gap:10px}
-.score-big small{font-size:22px;font-weight:500;letter-spacing:-.02em;color:rgba(17,17,17,.45)}
-.tp-stars{display:flex;gap:3px;margin:14px 0 10px}
-.tp-stars i{width:26px;height:26px;background:#00B67A;display:grid;place-items:center;position:relative}
+.tp-mini{flex:none;text-align:right}
+.tp-stars{display:flex;gap:3px;justify-content:flex-end;margin:0 0 8px}
+.tp-stars i{width:24px;height:24px;background:#00B67A;display:grid;place-items:center;position:relative}
 .tp-stars i.half{background:#DCDCE6}
 .tp-stars i.half::before{content:"";position:absolute;inset:0;width:50%;background:#00B67A}
-.tp-stars svg{width:18px;height:18px;fill:#fff;position:relative}
-.tp-line{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500}
-.tp-brand{display:inline-flex;align-items:center;gap:5px;font-weight:700;letter-spacing:-.03em}
-.tp-brand svg{width:17px;height:17px;fill:#00B67A}
+.tp-stars svg{width:16px;height:16px;fill:#fff;position:relative}
+.tp-txt{font-size:13px;font-weight:500;color:rgba(17,17,17,.65);margin:0;white-space:nowrap}
+.tp-txt b{color:#111;font-weight:700}
+.tp-brand{display:inline-flex;align-items:center;gap:4px;font-weight:700;letter-spacing:-.03em;color:#111}
+.tp-brand svg{width:14px;height:14px;fill:#00B67A}
 
-/* fototegels */
-.t-photo{padding:0;position:relative;background:#111}
-.t-photo img{width:100%;height:100%;object-fit:cover}
-.t-person{grid-column:span 3;grid-row:span 3}
-.t-life{grid-column:span 5;grid-row:span 2}
-.t-cap{position:absolute;left:16px;right:16px;bottom:16px;color:#fff;font-size:12.5px;
-  font-weight:500;line-height:140%;text-shadow:0 1px 12px rgba(0,0,0,.7)}
+/* band B — garantie + één foto */
+.pf-mid{display:grid;grid-template-columns:1fr 400px;gap:20px;align-items:stretch}
+.gcard{background:#191816;color:#fff;border-radius:12px;padding:36px 40px;
+  display:flex;flex-direction:column;justify-content:center;gap:20px}
+.gcard-num{font-size:74px;line-height:.95;font-weight:700;letter-spacing:-.04em;margin:0;color:#F5D18A}
+.gcard-num small{display:block;font-size:26px;font-weight:600;letter-spacing:-.02em;color:#fff;margin-top:6px}
+.gcard-p{font-size:16px;line-height:155%;color:rgba(255,255,255,.78);margin:0;max-width:42ch}
+.gcard-list{display:flex;flex-wrap:wrap;gap:10px 28px;margin:4px 0 0;padding:0;list-style:none}
+.gcard-list li{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:500;margin:0}
+.gcard-list svg{width:16px;height:16px;flex:none;color:#F5D18A}
+.gcard-team{margin:0;padding-top:20px;border-top:1px solid rgba(255,255,255,.15);
+  font-size:13px;line-height:150%;color:rgba(255,255,255,.6)}
+.gcard-team b{color:#fff;font-weight:600}
 
-/* reviewtegels */
-.t-rev{grid-column:span 5;grid-row:span 2;gap:12px}
-.t-rev.small{grid-column:span 4}
-.rev-stars{display:flex;gap:2px;margin:0 0 2px}
+.shot{border-radius:12px;overflow:hidden;background:#111;aspect-ratio:1/1;align-self:stretch}
+.shot img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* band C — drie reviews */
+.pf-revs{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.rev{background:#fff;border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:12px}
+.rev-stars{display:flex;gap:2px}
 .rev-stars svg{width:14px;height:14px;fill:#BC813E}
-.rev-q{font-size:16px;line-height:150%;font-weight:500;margin:0;color:#111}
-.t-rev.small .rev-q{font-size:14.5px;line-height:145%}
-.rev-by{margin:auto 0 0;padding-top:14px;border-top:1px solid rgba(17,17,17,.1);
-  display:flex;align-items:center;gap:10px;font-size:12.5px;color:rgba(17,17,17,.6)}
-.rev-av{width:32px;height:32px;border-radius:100px;background:#BC813E;color:#fff;
+.rev-q{font-size:15px;line-height:155%;font-weight:500;margin:0;color:#111}
+.rev-by{margin:auto 0 0;padding-top:16px;border-top:1px solid rgba(17,17,17,.1);
+  display:flex;align-items:center;gap:10px;font-size:12.5px;color:rgba(17,17,17,.55)}
+.rev-av{width:32px;height:32px;border-radius:100px;background:#EDE7DB;color:#BC813E;
   display:grid;place-items:center;font-size:12px;font-weight:700;flex:none}
-.rev-by b{color:#111;font-weight:600}
-.rev-src{margin-left:auto;display:inline-flex;align-items:center;gap:4px;font-weight:700;
-  letter-spacing:-.03em;color:#111;font-size:12px}
-.rev-src svg{width:13px;height:13px;fill:#00B67A}
+.rev-by b{color:#111;font-weight:600;display:block}
+.rev-src{margin-left:auto;display:inline-flex;align-items:center;gap:4px;
+  font-weight:700;letter-spacing:-.03em;color:#111;font-size:11.5px}
+.rev-src svg{width:12px;height:12px;fill:#00B67A}
 
-/* autoriteitstegel */
-.t-auth{grid-column:span 4;grid-row:span 2;background:#191816;color:#fff;gap:10px}
-.t-auth .t-label{color:rgba(255,255,255,.45)}
-.t-auth h3{font-size:20px;line-height:130%;font-weight:600;margin:0;color:#fff}
-.t-auth p{font-size:13.5px;line-height:150%;color:rgba(255,255,255,.72);margin:0}
-.t-auth .faces{display:flex;margin:auto 0 0;padding-top:14px}
-.t-auth .faces i{width:30px;height:30px;border-radius:100px;background:#BC813E;color:#111;
-  display:grid;place-items:center;font-size:11px;font-weight:700;margin-left:-8px;
-  border:2px solid #191816}
-.t-auth .faces i:first-child{margin-left:0}
-
-/* bundeltegel */
-.t-bundle{grid-column:span 4;grid-row:span 2;padding:0;position:relative;overflow:hidden;
-  background:#fff;display:flex;flex-direction:column}
-.t-bundle .bundle-img{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;
-  padding:14px 18px 0}
-.t-bundle .bundle-img img{max-width:100%;max-height:100%;width:auto;object-fit:contain}
-.t-bundle .bundle-foot{padding:14px 20px 20px;display:flex;align-items:center;gap:12px}
-.bundle-txt{min-width:0}
-.bundle-txt b{display:block;font-size:15px;font-weight:600;line-height:130%}
-.bundle-txt span{font-size:13px;color:rgba(17,17,17,.6)}
-.bundle-txt s{color:rgba(17,17,17,.4)}
-.bundle-cta{margin-left:auto;flex:none;background:#BC813E;color:#111;font-size:12px;font-weight:700;
-  letter-spacing:.06em;text-transform:uppercase;padding:12px 18px;border-radius:100px;
-  display:inline-flex;align-items:center;gap:6px}
-.bundle-tag{position:absolute;top:14px;left:14px;background:#F5D18A;color:#111;font-size:10.5px;
-  font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 11px;border-radius:100px}
+/* band D — zachte bundelregel */
+.pf-bundle{background:#fff;border-radius:12px;padding:14px 20px 14px 14px;
+  display:flex;align-items:center;gap:18px}
+.pf-bundle .bimg{width:120px;flex:none;aspect-ratio:3/2;border-radius:8px;overflow:hidden;background:#F4F4F4}
+.pf-bundle .bimg img{width:100%;height:100%;object-fit:cover;display:block}
+.btxt{min-width:0}
+.btxt span{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#BC813E}
+.btxt b{display:block;font-size:16px;font-weight:600;line-height:140%;margin-top:3px}
+.btxt em{font-style:normal;font-size:14px;color:rgba(17,17,17,.6)}
+.btxt em s{color:rgba(17,17,17,.38)}
+.bcta{margin-left:auto;flex:none;background:#BC813E;color:#111;font-size:13px;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;padding:14px 24px;border-radius:100px}
 
 /* mobiel */
-.pf-m{padding:32px 18px;height:auto}
-.pf-m .pf-inner{gap:18px}
+.pf-m{padding:34px 18px;height:auto}
+.pf-m .pf-in{gap:18px}
+.pf-m .pf-top{flex-direction:column;align-items:flex-start;gap:18px}
 .pf-m .pf-h2{font-size:24px;max-width:none}
-.pf-m .pf-lede{font-size:14px;line-height:145%}
-.pf-m .pf-grid{grid-template-columns:1fr;grid-auto-rows:auto;gap:12px;flex:none}
-.pf-m .t{padding:20px}
-.pf-m .t-score,.pf-m .t-rev,.pf-m .t-rev.small,.pf-m .t-auth,.pf-m .t-bundle,
-.pf-m .t-person,.pf-m .t-life{grid-column:span 1;grid-row:auto}
-.pf-m .score-big{font-size:68px}
-.pf-m .t-person{height:320px;padding:0}
-.pf-m .t-life{height:190px;padding:0}
-.pf-m .rev-q{font-size:15px}
-.pf-m .t-bundle{padding:0}
-.pf-m .t-bundle .bundle-img{height:150px;padding:14px 16px 0}
+.pf-m .pf-note{font-size:14px;line-height:145%}
+.pf-m .tp-mini{text-align:left}
+.pf-m .tp-stars{justify-content:flex-start}
+.pf-m .pf-mid{grid-template-columns:1fr;gap:14px}
+.pf-m .gcard{padding:24px 22px;gap:16px;border-radius:12px}
+.pf-m .gcard-num{font-size:56px}
+.pf-m .gcard-num small{font-size:20px}
+.pf-m .gcard-p{font-size:14px;line-height:150%}
+.pf-m .pf-revs{grid-template-columns:1fr;gap:12px}
+.pf-m .rev{padding:20px}
+.pf-m .rev-q{font-size:14.5px}
+.pf-m .pf-bundle{flex-wrap:wrap;padding:14px}
+.pf-m .pf-bundle .bimg{width:96px}
+.pf-m .bcta{width:100%;margin-left:0;text-align:center;justify-content:center;display:flex}
 
 /* ── annotaties ── */
 .anno{background:var(--surface);border:1px solid var(--rule);border-left:2px solid var(--gold-dark-100);
   border-radius:3px;padding:18px 22px;margin:0 0 13px;box-shadow:var(--shadow)}
 .anno > :last-child{margin-bottom:0}
 .anno h3{margin:0 0 7px;font-size:16.5px}
-.anno p{font-size:15px;margin-bottom:0;color:var(--fg-soft);max-width:66ch}
+.anno p{font-size:15px;margin-bottom:0;color:var(--fg-soft);max-width:68ch}
 .anno p b{color:var(--fg);font-weight:600}
 .anno p + p{margin-top:9px}
 .tablewrap{overflow-x:auto;margin:20px 0;border:1px solid var(--rule);border-radius:3px}
@@ -200,6 +189,7 @@ th,td{text-align:left;padding:12px 15px;border-bottom:1px solid var(--rule);vert
 th{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
   color:var(--fg-soft);background:var(--surface-2)}
 tr:last-child td{border-bottom:0}
+td b{font-weight:600;color:var(--fg)}
 .callout{background:var(--surface-2);border-radius:3px;padding:20px 24px;margin:24px 0}
 .callout > :last-child{margin-bottom:0}
 .callout ul,.callout p{max-width:none}
@@ -217,15 +207,15 @@ footer p{max-width:none}
 </style>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01z"/></symbol>
-<symbol id="arw" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="chk" viewBox="0 0 24 24"><path d="M4 12.5l5.2 5.2L20 6.9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </defs></svg>
 
 <div class="wrap">
 
 <header class="masthead">
-  <p class="eyebrow">Homepage-redesign · blok 2 van 12 · versie 2</p>
+  <p class="eyebrow">Homepage-redesign · blok 2 van 12 · versie 3</p>
   <h1>Autoriteit en bewijs</h1>
-  <p class="dek">Herbouwd. De vorige versie was een verkoopargument in drie grijze rechthoeken; dit is een proof-blok dat autoriteit uitstraalt en het product er zacht in laat meeliften.</p>
+  <p class="dek">Opnieuw ontworpen. Van zeven concurrerende tegels naar vier banden met één leesrichting, en de vervormde foto is opgelost — die zat in het bestand, niet in de opmaak.</p>
   <p class="byline">Ontwerp — nog niets live. Akkoord → dan pas Shopify.</p>
   <div class="progress" aria-hidden="true">
     <i class="done"></i><i class="done"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
@@ -234,87 +224,77 @@ footer p{max-width:none}
 </header>
 
 <div class="callout fix">
-  <h3 style="margin-top:0">Je had op alle drie de punten gelijk</h3>
-  <p><strong>Te hard verkopend.</strong> Ik behandelde je homepage als een landingspagina met één aanbod. Dat is hij niet: hij vangt mensen op die je merk al kennen, die via zoek binnenkomen en die van social komen — allemaal met een andere vraag. De regel "sectie 2 wordt een pijnpunt" geldt voor koud advertentieverkeer op een pagina met één aanbod. Voor een homepage is <strong>bewijs</strong> de betere tweede sectie.</p>
-  <p><strong>De donkere achtergrond klopte niet.</strong> En hier moet ik iets rechtzetten dat ik eerder verkeerd heb gezegd: ik beweerde dat de zandkleur uit je merklaag nergens in je theme voorkomt. Dat klopt niet — ik had alleen <code>base.css</code> doorzocht. Je <code>reviews.css</code> gebruikt <code>#ede7db</code>, je <code>categories.css</code> gebruikt <code>#f4f4f4</code>. <strong>Je site is grotendeels licht;</strong> alleen de hero, de balk en de footer zijn donker. Dit blok staat nu op <code>#ede7db</code>, je eigen reviewkleur.</p>
-  <p style="margin-bottom:0"><strong>Statisch en niet mooi.</strong> Ook terecht. Drie gelijke rechthoeken naast elkaar hebben geen ritme. Dit is een mozaïek met tegels van verschillende maten, echte gezichten, één groot getal en afgeronde hoeken van 12px — de radius die je theme zelf gebruikt in de UGC- en benefits-secties. Ik zat op 4px.</p>
+  <h3 style="margin-top:0">Wat er mis was, letterlijk</h3>
+  <p><strong>De uitgerekte foto.</strong> Het bronbestand uit je UGC-sectie is <code>750 × 750</code>, dus vierkant. Ik heb het geëxporteerd als <code>560 × 700</code>. Dat is geen bijsnijden maar uitrekken: de persoon is 25% in de hoogte opgetrokken. <b>Die fout zat in het bestand, niet in de CSS</b> — geen enkele opmaakregel had dat nog kunnen redden. De foto is opnieuw uitgesneden op 1:1 en elke beeldhouder heeft nu een vaste <code>aspect-ratio</code>, zodat vervorming er domweg niet meer in kan.</p>
+  <p><strong>Te druk.</strong> Ook terecht, en het was erger dan een smaakkwestie: het waren zeven tegels in een raster van twaalf kolommen waarvan de rijen niet opgingen. Vier plus drie plus vijf is twaalf, maar de rij daaronder telde dertien. Dat raster brak, tegels vielen in gaten, en er was geen leesvolgorde. <b>Ik heb het nooit nagerekend en jij zag het meteen.</b></p>
+  <p style="margin-bottom:0"><strong>De kop is veranderd.</strong> Uit de concurrentie-analyse: Brothers in Style toont 5.500 reviews en een 4,8. Openen met "4,5 uit 950" is de vergelijking aangaan die je verliest. De sectie opent nu met de 100 dagen — het beste aanbod van alle vier de merken — en Trustpilot staat er rechtsboven bij, zichtbaar maar niet als hoofdargument.</p>
 </div>
 
 <h2>Het ontwerp</h2>
-<p class="sub">Desktop 1440px en mobiel 390px. Achtergrond <code>#ede7db</code>, tegels wit met 12px radius, Montserrat in de schaal van je theme.</p>
+<p class="sub">Vier banden onder elkaar. Elke band heeft één taak, dus er is maar één leesrichting: van boven naar beneden.</p>
 
 <div class="stage">
   <div>
     <p class="devicecap">Desktop — 1440px</p>
     <div class="scaler desk-scaler"><div class="inner">
-      <section class="pf"><div class="pf-inner">
-          <div class="pf-head">
-            <div>
-              <p class="pf-eyebrow">Beoordeeld door echte klanten</p>
-              <h2 class="pf-h2">4,5 sterren uit <b>950+ beoordelingen.</b></h2>
+      <section class="pf"><div class="pf-in">
+
+        <div class="pf-top">
+          <div>
+            <p class="pf-eyebrow">Zonder risico uitproberen</p>
+            <h2 class="pf-h2">Neem er <b>100 dagen</b> de tijd voor.</h2>
+            <p class="pf-note">Past het niet bij je routine, dan stuur je hem terug en krijg je je geld terug. Twee jaar garantie zit er sowieso op.</p>
+          </div>
+          <div class="tp-mini">
+            <div class="tp-stars">
+              <i><svg><use href="#star"/></svg></i><i><svg><use href="#star"/></svg></i>
+              <i><svg><use href="#star"/></svg></i><i><svg><use href="#star"/></svg></i>
+              <i class="half"><svg><use href="#star"/></svg></i>
             </div>
-            <p class="pf-lede">Wat er in die beoordelingen staat, wie je aan de lijn krijgt als er iets is, en waar mensen mee begonnen.</p>
+            <p class="tp-txt"><b>4,5</b> uit 950+ beoordelingen op <span class="tp-brand"><svg><use href="#star"/></svg>Trustpilot</span></p>
           </div>
-          <div class="pf-grid">
+        </div>
 
-            <article class="t t-score">
-              <span class="t-label">Trustpilot</span>
-              <div>
-                <p class="score-big">4,5<small>/ 5</small></p>
-                <div class="tp-stars">
-                  <i><svg><use href="#star"/></svg></i><i><svg><use href="#star"/></svg></i>
-                  <i><svg><use href="#star"/></svg></i><i><svg><use href="#star"/></svg></i>
-                  <i class="half"><svg><use href="#star"/></svg></i>
-                </div>
-                <p class="tp-line">950+ beoordelingen op <span class="tp-brand"><svg><use href="#star"/></svg>Trustpilot</span></p>
-              </div>
-            </article>
-
-            <article class="t t-photo t-person">
-              <img src="__PERSON__" alt="Klant met een Wellshave-trimmer">
-              <span class="t-cap">Wellshave in actie — 40+ klantvideo's</span>
-            </article>
-
-            <article class="t t-rev">
-              <div class="rev-stars">
-                <svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg>
-              </div>
-              <p class="rev-q">"Door de keramische bladen geen wondjes bij de schaamstreek. Scheermesjes? Prullenbak in!"</p>
-              <p class="rev-by"><span class="rev-av">B</span><span><b>Barend P.</b><br>Groom Guard PRO™</span>
-                <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
-            </article>
-
-            <article class="t t-auth">
-              <span class="t-label">Wie je aan de lijn krijgt</span>
-              <h3>Zes mensen in Helmond. Geen callcenter.</h3>
-              <p>We verzorgen zelf de verzending, de verbeteringen en de klantenservice. Voor 23:59 besteld is morgen in huis.</p>
-              <div class="faces"><i>D</i><i>W</i><i>Y</i><i>A</i><i>V</i><i>T</i></div>
-            </article>
-
-            <article class="t t-photo t-life">
-              <img src="__LIFE__" alt="Wellshave-trimmer in gebruik in de badkamer">
-              <span class="t-cap">Waterdicht — gewoon mee onder de douche</span>
-            </article>
-
-            <article class="t t-rev small">
-              <div class="rev-stars">
-                <svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg>
-              </div>
-              <p class="rev-q">"Neustrim-opzetstuk kwijtgeraakt en kosteloos nageleverd door de klantenservice."</p>
-              <p class="rev-by"><span class="rev-av">A</span><span><b>Aiden M.</b><br>Shave Package 3.0™</span>
-                <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
-            </article>
-
-            <article class="t t-bundle">
-              <span class="bundle-tag">Meest gekozen</span>
-              <div class="bundle-img"><img src="__BUNDLE__" alt="Essential Flex Bundel"></div>
-              <div class="bundle-foot">
-                <span class="bundle-txt"><b>Essential Flex Bundel</b><span>€79,95 <s>€133,25</s></span></span>
-                <span class="bundle-cta">Bekijk</span>
-              </div>
-            </article>
-
+        <div class="pf-mid">
+          <div class="gcard">
+            <p class="gcard-num">100<small>dagen proberen</small></p>
+            <p class="gcard-p">Thuis, in je eigen badkamer, zo vaak als je wilt. Geen proefperiode van twee weken waarin je nog niets weet.</p>
+            <ul class="gcard-list">
+              <li><svg><use href="#chk"/></svg>Geld terug</li>
+              <li><svg><use href="#chk"/></svg>2 jaar garantie</li>
+              <li><svg><use href="#chk"/></svg>Gratis verzending vanaf €30</li>
+            </ul>
+            <p class="gcard-team"><b>Zes mensen in Helmond.</b> Wij pakken je bestelling zelf in en beantwoorden zelf je mail. Geen callcenter, geen tussenpersoon.</p>
           </div>
+          <div class="shot"><img src="__PERSON__" alt="Klant met een Wellshave-trimmer"></div>
+        </div>
+
+        <div class="pf-revs">
+          <article class="rev">
+            <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+            <p class="rev-q">"Door de keramische bladen geen wondjes bij de schaamstreek. Scheermesjes? Prullenbak in!"</p>
+            <p class="rev-by"><span class="rev-av">B</span><span><b>Barend P.</b>Groom Guard PRO</span>
+              <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+          </article>
+          <article class="rev">
+            <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+            <p class="rev-q">"Opzetstuk kwijtgeraakt en kosteloos nageleverd door de klantenservice."</p>
+            <p class="rev-by"><span class="rev-av">A</span><span><b>Aiden M.</b>Shave Package 3.0</span>
+              <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+          </article>
+          <article class="rev">
+            <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+            <p class="rev-q">"Geweldig pakket, had ik eerder moeten kopen. Scheren gaat moeiteloos en zonder wondjes."</p>
+            <p class="rev-by"><span class="rev-av">R</span><span><b>Rik T.</b>Shave Package Ultimate</span>
+              <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+          </article>
+        </div>
+
+        <div class="pf-bundle">
+          <span class="bimg"><img src="__BUNDLE__" alt="Essential Flex Bundel"></span>
+          <span class="btxt"><span>Meest gekozen</span><b>Essential Flex Bundel</b><em>€79,95 <s>€133,25</s></em></span>
+          <span class="bcta">Bekijk</span>
+        </div>
 
       </div></section>
     </div></div>
@@ -323,152 +303,130 @@ footer p{max-width:none}
   <div class="phonecol">
     <p class="devicecap">Mobiel — 390px · gestapeld</p>
     <div class="scaler phone-scaler"><div class="inner">
-      <section class="pf pf-m"><div class="pf-inner">
-          <div class="pf-head">
-            <div>
-              <p class="pf-eyebrow">Beoordeeld door echte klanten</p>
-              <h2 class="pf-h2">4,5 sterren uit <b>950+ beoordelingen.</b></h2>
+      <section class="pf pf-m"><div class="pf-in">
+
+        <div class="pf-top">
+          <div>
+            <p class="pf-eyebrow">Zonder risico uitproberen</p>
+            <h2 class="pf-h2">Neem er <b>100 dagen</b> de tijd voor.</h2>
+            <p class="pf-note">Past het niet bij je routine, dan stuur je hem terug en krijg je je geld terug. Twee jaar garantie zit er sowieso op.</p>
+          </div>
+          <div class="tp-mini">
+            <div class="tp-stars">
+              <i><svg><use href="#star"/></svg></i><i><svg><use href="#star"/></svg></i>
+              <i><svg><use href="#star"/></svg></i><i><svg><use href="#star"/></svg></i>
+              <i class="half"><svg><use href="#star"/></svg></i>
             </div>
-            <p class="pf-lede">Wat er in die beoordelingen staat, wie je aan de lijn krijgt als er iets is, en waar mensen mee begonnen.</p>
+            <p class="tp-txt"><b>4,5</b> uit 950+ beoordelingen op <span class="tp-brand"><svg><use href="#star"/></svg>Trustpilot</span></p>
           </div>
-          <div class="pf-grid">
+        </div>
 
-            <article class="t t-score">
-              <span class="t-label">Trustpilot</span>
-              <div>
-                <p class="score-big">4,5<small>/ 5</small></p>
-                <div class="tp-stars">
-                  <i><svg><use href="#star"/></svg></i><i><svg><use href="#star"/></svg></i>
-                  <i><svg><use href="#star"/></svg></i><i><svg><use href="#star"/></svg></i>
-                  <i class="half"><svg><use href="#star"/></svg></i>
-                </div>
-                <p class="tp-line">950+ beoordelingen op <span class="tp-brand"><svg><use href="#star"/></svg>Trustpilot</span></p>
-              </div>
-            </article>
-
-            <article class="t t-photo t-person">
-              <img src="__PERSON__" alt="Klant met een Wellshave-trimmer">
-              <span class="t-cap">Wellshave in actie — 40+ klantvideo's</span>
-            </article>
-
-            <article class="t t-rev">
-              <div class="rev-stars">
-                <svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg>
-              </div>
-              <p class="rev-q">"Door de keramische bladen geen wondjes bij de schaamstreek. Scheermesjes? Prullenbak in!"</p>
-              <p class="rev-by"><span class="rev-av">B</span><span><b>Barend P.</b><br>Groom Guard PRO™</span>
-                <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
-            </article>
-
-            <article class="t t-auth">
-              <span class="t-label">Wie je aan de lijn krijgt</span>
-              <h3>Zes mensen in Helmond. Geen callcenter.</h3>
-              <p>We verzorgen zelf de verzending, de verbeteringen en de klantenservice. Voor 23:59 besteld is morgen in huis.</p>
-              <div class="faces"><i>D</i><i>W</i><i>Y</i><i>A</i><i>V</i><i>T</i></div>
-            </article>
-
-            <article class="t t-photo t-life">
-              <img src="__LIFE__" alt="Wellshave-trimmer in gebruik in de badkamer">
-              <span class="t-cap">Waterdicht — gewoon mee onder de douche</span>
-            </article>
-
-            <article class="t t-rev small">
-              <div class="rev-stars">
-                <svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg>
-              </div>
-              <p class="rev-q">"Neustrim-opzetstuk kwijtgeraakt en kosteloos nageleverd door de klantenservice."</p>
-              <p class="rev-by"><span class="rev-av">A</span><span><b>Aiden M.</b><br>Shave Package 3.0™</span>
-                <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
-            </article>
-
-            <article class="t t-bundle">
-              <span class="bundle-tag">Meest gekozen</span>
-              <div class="bundle-img"><img src="__BUNDLE__" alt="Essential Flex Bundel"></div>
-              <div class="bundle-foot">
-                <span class="bundle-txt"><b>Essential Flex Bundel</b><span>€79,95 <s>€133,25</s></span></span>
-                <span class="bundle-cta">Bekijk</span>
-              </div>
-            </article>
-
+        <div class="pf-mid">
+          <div class="gcard">
+            <p class="gcard-num">100<small>dagen proberen</small></p>
+            <p class="gcard-p">Thuis, in je eigen badkamer, zo vaak als je wilt. Geen proefperiode van twee weken waarin je nog niets weet.</p>
+            <ul class="gcard-list">
+              <li><svg><use href="#chk"/></svg>Geld terug</li>
+              <li><svg><use href="#chk"/></svg>2 jaar garantie</li>
+              <li><svg><use href="#chk"/></svg>Gratis verzending vanaf €30</li>
+            </ul>
+            <p class="gcard-team"><b>Zes mensen in Helmond.</b> Wij pakken je bestelling zelf in en beantwoorden zelf je mail. Geen callcenter, geen tussenpersoon.</p>
           </div>
+          <div class="shot"><img src="__PERSON__" alt="Klant met een Wellshave-trimmer"></div>
+        </div>
+
+        <div class="pf-revs">
+          <article class="rev">
+            <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+            <p class="rev-q">"Door de keramische bladen geen wondjes bij de schaamstreek. Scheermesjes? Prullenbak in!"</p>
+            <p class="rev-by"><span class="rev-av">B</span><span><b>Barend P.</b>Groom Guard PRO</span>
+              <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+          </article>
+          <article class="rev">
+            <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+            <p class="rev-q">"Opzetstuk kwijtgeraakt en kosteloos nageleverd door de klantenservice."</p>
+            <p class="rev-by"><span class="rev-av">A</span><span><b>Aiden M.</b>Shave Package 3.0</span>
+              <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+          </article>
+          <article class="rev">
+            <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+            <p class="rev-q">"Geweldig pakket, had ik eerder moeten kopen. Scheren gaat moeiteloos en zonder wondjes."</p>
+            <p class="rev-by"><span class="rev-av">R</span><span><b>Rik T.</b>Shave Package Ultimate</span>
+              <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+          </article>
+        </div>
+
+        <div class="pf-bundle">
+          <span class="bimg"><img src="__BUNDLE__" alt="Essential Flex Bundel"></span>
+          <span class="btxt"><span>Meest gekozen</span><b>Essential Flex Bundel</b><em>€79,95 <s>€133,25</s></em></span>
+          <span class="bcta">Bekijk</span>
+        </div>
 
       </div></section>
     </div></div>
   </div>
 </div>
 
-<h2>Wat elke tegel doet</h2>
-<p class="sub">Bewijs werkt alleen als het bewust gekozen is. Elke tegel neemt één specifiek bezwaar weg.</p>
-
+<h2>De vier banden</h2>
 <div class="tablewrap">
 <table>
-  <thead><tr><th>Tegel</th><th>Neemt dit bezwaar weg</th></tr></thead>
+  <thead><tr><th>Band</th><th>Taak</th><th>Waarom hier</th></tr></thead>
   <tbody>
-    <tr><td><b>4,5 / 950+ op Trustpilot</b></td><td>"Is dit een serieus merk of een dropshipper?"</td></tr>
-    <tr><td><b>Review Barend P.</b></td><td>"Gaat dit mij snijden in gevoelige zones?"</td></tr>
-    <tr><td><b>Zes mensen in Helmond</b></td><td>"Wie krijg ik als er iets misgaat?"</td></tr>
-    <tr><td><b>Review Aiden M.</b></td><td>"En als er een onderdeel kwijtraakt?" — het antwoord is een bewezen daad, geen belofte</td></tr>
-    <tr><td><b>Klantfoto en badkamerbeeld</b></td><td>"Gebruiken echte mensen dit, of staat het alleen op productfoto's?"</td></tr>
-    <tr><td><b>Bundeltegel</b></td><td>Geen bezwaar — dit is de zachte verkoop, en de enige plek in het blok waar een prijs staat</td></tr>
+    <tr><td><b>1 — Kop</b></td><td>De belofte, plus de score klein rechts</td><td>Eén zin waar het over gaat. De score staat er wel, maar hoeft de vergelijking niet te winnen</td></tr>
+    <tr><td><b>2 — Garantie en foto</b></td><td>Het zwaartepunt: 100 dagen, groot, met de garanties en het team eronder</td><td>Dit is het enige waar je van de vier merken het beste aanbod hebt</td></tr>
+    <tr><td><b>3 — Drie reviews</b></td><td>Bewijs, elk met een ander bezwaar</td><td>Gelijke kaarten, want het zijn gelijkwaardige stemmen. Hier hoort geen hiërarchie</td></tr>
+    <tr><td><b>4 — Bundelregel</b></td><td>De zachte verkoop</td><td>Eén regel, geen tegel. Wie overtuigd is kan door, wie dat niet is scrollt eroverheen</td></tr>
   </tbody>
 </table>
 </div>
 
 <div class="anno">
-  <h3>De kop noemt het cijfer, niet het onderwerp</h3>
-  <p>"Wat klanten over ons zeggen" staat nu op je site en voegt niets toe — men ziet zelf wel dat het reviews zijn. <b>"4,5 sterren uit 950+ beoordelingen"</b> is meteen het bewijs. Het getal doet het werk, de kop hoeft alleen te wijzen.</p>
+  <h3>Waarom vier banden en geen mozaïek</h3>
+  <p>Een mozaïek werkt alleen als het ritme klopt. Bij zeven tegels van verschillende maten moet je oog steeds opnieuw beslissen waar het heen gaat, en dat is precies wat jij ervoer. <b>Banden hebben één richting.</b> Je leest de kop, dan het grote getal, dan de reviews, dan de bundel. De variatie zit nu in de hoogte van de banden en in het contrast tussen de donkere kaart en de lichte reviews — niet in zeven verschillende tegelmaten.</p>
 </div>
 
 <div class="anno">
-  <h3>Bewijs met een zichtbare bron telt zwaarder</h3>
-  <p>Een reviewtekst alleen staat onderaan de geloofwaardigheidsladder. Elke trede erboven — een naam erbij, een gezicht, een zichtbare bron, een verhaal — telt zwaarder dan de trede eronder. <b>Jouw reviews staan nu op trede één.</b> In dit ontwerp staat bij elke review het Trustpilot-merk als herkomst, plus de naam en het product. De volgende trede is een echte foto van de klant; die heb je nog niet.</p>
+  <h3>Het getal draagt de sectie</h3>
+  <p>"100" staat op 74px in <code>#F5D18A</code> op de donkere kaart, tegenover bodytekst van 16px. Die sprong is wat de sectie dynamiek geeft — niet meer elementen, maar één element dat veel groter is dan de rest. <b>Eén brandpunt per band</b> is genoeg.</p>
 </div>
 
 <div class="anno">
-  <h3>De autoriteit zit in de donkere tegel</h3>
-  <p>"Zes mensen in Helmond, geen callcenter" is de enige tegel in <code>#191816</code>, en daarmee het zwaartepunt van het mozaïek. Dat is bewust: <b>autoriteit komt bij jou niet uit een keurmerk maar uit het feit dat je geen anoniem merk bent</b> — dat staat op je Over-pagina en het is precies wat een dropshipper niet kan claimen. De zes initialen zijn je eigen team.</p>
+  <h3>Het teamverhaal is ingekort en verplaatst</h3>
+  <p>Uit de concurrentie-analyse bleek dat Balzy dit al beter doet: elf man, oprichter bij naam, en dat detail dat DHL om 00:30 de rolcontainers ophaalt. Een eigen tegel maakt het geen sterker verhaal. Het staat nu als voetregel onder de garantie, waar het hoort: <b>bewijs dat de belofte gedekt wordt door mensen die je kunt aanspreken.</b></p>
+  <p>Wil je hier écht winnen, dan moet het concreter dan Balzy: namen, gezichten, en één specifiek detail dat niemand kan verzinnen. Dat is beschikbaar — je hebt zes mensen met naam en functie op je over-pagina staan.</p>
 </div>
 
 <div class="anno">
-  <h3>De verkoop is één tegel van de zes</h3>
-  <p>Geen productgrid, geen "shop nu" boven elke tegel. Eén bundel met een "Meest gekozen"-badge in <code>#F5D18A</code> — precies de badge die je productkaarten al gebruiken — en een zachte knop. <b>Bewijs eerst, aanbod erachteraan</b>, in dezelfde oogopslag zodat wie overtuigd raakt meteen ergens heen kan.</p>
+  <h3>Elke beeldhouder heeft nu een vaste verhouding</h3>
+  <p>De foto zit in <code>aspect-ratio:1/1</code>, de bundelafbeelding in <code>3/2</code>, allebei gelijk aan de verhouding van het bestand zelf. Met <code>object-fit:cover</code> erbovenop kan een beeld alleen nog bijgesneden worden, nooit vervormd. <b>Dat is een structurele oplossing</b>, geen correctie per foto — vervang je later het bestand, dan gaat het nog steeds goed.</p>
 </div>
-
-<div class="anno">
-  <h3>Waarom een mozaïek en geen rij</h3>
-  <p>Gelijke tegels naast elkaar lezen als een tabel: je oog scant en stopt. Ongelijke tegels dwingen een leesvolgorde af — eerst het grote getal, dan het gezicht, dan de quote. <b>Het formaat van een tegel is de rangorde van wat erin staat.</b> Op mobiel stapelt hetzelfde mozaïek in die volgorde, zodat de hiërarchie overeind blijft.</p>
-</div>
-
-<h2>Waar het pijnpunt heen gaat</h2>
-<p>Het verhaal uit de vorige versie — goedkoop-en-ruw tegenover mooi-maar-onpraktisch — verdwijnt niet. Het is nog steeds je scherpste zin. Maar het is een <strong>argument</strong>, en dat hoort niet op plek twee van een homepage die vertrouwen moet opbouwen.</p>
-<p>Mijn voorstel: het verhuist naar <strong>blok 4</strong>, waar het samenvalt met de vergelijking tussen Wellshave en de alternatieven. Daar staat het naast bewijs in plaats van ervoor, en heeft het meer ruimte dan drie kaartjes. De volgorde wordt dan: hero belooft → blok 2 bewijst dat je te vertrouwen bent → blok 3 laat het assortiment zien → blok 4 legt uit waarom het anders is.</p>
 
 <div class="callout ask">
-  <h3 style="margin-top:0">Wat dit blok echt af maakt</h3>
+  <h3 style="margin-top:0">Wat ik van jou nodig heb</h3>
   <ul style="margin-bottom:0">
-    <li><strong>Foto's bij je reviews.</strong> Dit is de goedkoopste grote winst in het hele plan. Vraag klanten in je nabestel-mail om een foto bij hun review. Tekst-plus-beeld tilt proof twee treden omhoog.</li>
-    <li><strong>Klopt "40+ klantvideo's"?</strong> Ik telde er zes in je UGC-sectie en heb het aantal als plaatsaanduiding neergezet. Zeg me het echte getal, of ik haal het weg.</li>
-    <li><strong>Mag "zes mensen in Helmond"?</strong> Ik leid het af van de zes teamleden op je Over-pagina en de vermelding dat je vanuit Helmond levert. Klopt dat aantal nog?</li>
-    <li><strong>Welke bundel op de tegel?</strong> Nu de Essential Flex Bundel omdat die het hoogste kortingspercentage heeft. Als een andere bundel beter converteert, hoort die hier.</li>
+    <li><strong>Is dit leesbaar en rustig genoeg?</strong> Zo niet, zeg welke band eruit mag — mijn eerste kandidaat is de bundelregel, die kan ook naar blok 3.</li>
+    <li><strong>Een echte foto voor deze plek.</strong> Dit is een still uit een klantvideo van 750 pixels. Voor een blok dat vertrouwen moet wekken is dat aan de krappe kant.</li>
+    <li><strong>Klopt "zes mensen in Helmond"?</strong> Afgeleid van je over-pagina en je FAQ.</li>
+    <li><strong>Mag ik reviewfoto's gaan verzamelen?</strong> Nog steeds de goedkoopste grote winst in het hele plan.</li>
   </ul>
 </div>
 
 <h2>Bouwnotities voor straks</h2>
 <ul>
-  <li>Achtergrond <code>#ede7db</code> — bestaat al in <code>reviews.css</code>. Tegels wit met <code>border-radius:12px</code>, gelijk aan je UGC- en benefits-secties.</li>
-  <li>Mozaïek als CSS-grid van 12 kolommen met <code>grid-column: span n</code> per tegel, zodat je tegels kunt herschikken zonder de opmaak te breken.</li>
-  <li>Stapelvolgorde op 390px: score → klantfoto → review 1 → team → badkamerbeeld → review 2 → bundel. De bundel altijd als laatste.</li>
-  <li>Reviews uit je bestaande reviewsectie halen, niet opnieuw intypen — dan blijft er één bron.</li>
-  <li>Trustpilot: officieel asset uit je Business-portaal, met de vaste score als terugval.</li>
+  <li>Achtergrond <code>#EDE7DB</code> en hoekradius 12px komen uit je eigen <code>reviews.css</code> en <code>ugc-videos.css</code>.</li>
+  <li>Elke beeldhouder krijgt een <code>aspect-ratio</code> en het beeld <code>object-fit:cover</code>. Nooit een <code>height</code>-attribuut in de HTML combineren met <code>width:100%</code> in CSS zonder <code>height:auto</code>.</li>
+  <li>Vier banden als losse blokken in één sectie, zodat je band 4 kunt uitzetten zonder de rest aan te raken.</li>
+  <li>Stapelvolgorde op 390px: kop → score → garantiekaart → foto → drie reviews → bundelregel.</li>
+  <li>Reviews betrekken uit je bestaande reviewsectie, niet opnieuw intypen.</li>
   <li>Beelden <code>loading="lazy"</code>; dit blok staat onder de vouw.</li>
-  <li>Overweeg de klantvideo's als lopende band in plaats van een statische tegel — je theme heeft die marquee al.</li>
+  <li>Na de bouw de verhoudingen meten: <code>naturalWidth/naturalHeight</code> tegen <code>getBoundingClientRect()</code>. Niet op het oog beoordelen — een vervorming van 25% zag ik zelf ook over het hoofd.</li>
 </ul>
 
 <h2>Daarna</h2>
-<p><strong>Blok 3 — het assortiment.</strong> Nu heb je een categoriegrid met alleen namen. Iemand die net overtuigd is dat je te vertrouwen bent, wil zien wát je maakt en welke bij hem past — met beeld, niet met een lijst woorden.</p>
+<p><strong>Blok 3 — het assortiment.</strong> En daar komt de vondst uit de concurrentie-analyse binnen: sorteren op lichaamszone in plaats van op apparaattype, zoals Brothers in Style doet. Iemand weet welk lichaamsdeel hij wil aanpakken, niet welke productcategorie daarbij hoort.</p>
 
 <footer>
-  <p>Achtergrondkleur, hoekradius en type-schaal uit <code>reviews.css</code>, <code>ugc-videos.css</code> en <code>base.css</code> van je live theme. Reviewteksten letterlijk van je homepage. Team en herkomst van <code>wellshave.com/pages/over-wellshave</code> en je FAQ. Beeld uit je eigen Shopify-bestanden en UGC-sectie. De mockup houdt de merkkleuren vast in zowel licht als donker thema; dat is de site, niet deze pagina.</p>
+  <p>Achtergrondkleur, hoekradius en type-schaal uit <code>reviews.css</code>, <code>ugc-videos.css</code> en <code>base.css</code> van je live theme. Reviewteksten letterlijk van je homepage. Team en herkomst van <code>wellshave.com/pages/over-wellshave</code> en je FAQ. Beeld uit je eigen UGC-sectie en Shopify-bestanden, opnieuw uitgesneden op de oorspronkelijke verhouding. De mockup houdt de merkkleuren vast in zowel licht als donker thema; dat is de site, niet deze pagina.</p>
 </footer>
 
 </div>
