@@ -124,7 +124,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
   text-transform:uppercase;background:#F5D18A;color:#111111;padding:7px 14px;border-radius:100px}
 .ws-h1{font-size:44px;line-height:115%;font-weight:600;letter-spacing:-.01em;margin:0;color:#fff}
 .ws-sub{font-size:16px;line-height:150%;font-weight:400;color:rgba(255,255,255,.8);margin:0}
-.ws-cta{background:#FFFFFF;color:#111111;font-weight:500;font-size:16px;line-height:110%;
+.ws-cta{background:#BC813E;color:#111111;font-weight:600;font-size:16px;line-height:110%;
   text-transform:uppercase;padding:18px 24px;border-radius:100px;
   display:inline-flex;align-items:center;gap:8px;margin:4px 0}
 .ws-fud{display:flex;flex-wrap:wrap;align-items:center;font-size:12px;line-height:140%;
@@ -132,7 +132,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
 .ws-fud span{display:inline-flex;align-items:center;gap:7px;padding:0 14px}
 .ws-fud span:first-child{padding-left:0}
 .ws-fud span + span{border-left:1px solid rgba(255,255,255,.25)}
-.ws-fud svg{width:13px;height:13px;flex:none;color:#F5D18A}
+.ws-fud svg{width:13px;height:13px;flex:none;color:rgba(255,255,255,.85)}
 .ws-shotnote{position:absolute;right:14px;bottom:14px;background:rgba(17,17,17,.82);
   color:#F5D18A;font-size:9.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
   padding:6px 11px;border-radius:100px;z-index:3}
@@ -214,9 +214,9 @@ footer p{max-width:none}
 <div class="wrap">
 
 <header class="masthead">
-  <p class="eyebrow">Homepage-redesign · blok 1 van 12 · versie 4</p>
-  <h1>De hero op je eigen theme</h1>
-  <p class="dek">Teruggedraaid. De merklaag is eruit — die hoort bij de losse advertentie-landingspagina, niet bij je homepage. Deze versie gebruikt uitsluitend het design, de typografie en het kleurgebruik zoals ze vandaag in je Shopify-theme staan, met richting A als copy.</p>
+  <p class="eyebrow">Homepage-redesign · blok 1 van 12 · versie 5</p>
+  <h1>De algemene hero</h1>
+  <p class="dek">De copy was ingestoken op één product. Dit is nu een merkbrede banner die je hele assortiment dekt, met de knop in je merkkleur. Design, typografie en tokens komen onverkort uit je Shopify-theme.</p>
   <p class="byline">Ontwerp — nog niets live. Akkoord → dan pas Shopify.</p>
   <div class="progress" aria-hidden="true">
     <i class="done"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
@@ -225,13 +225,12 @@ footer p{max-width:none}
 </header>
 
 <div class="callout fix">
-  <h3 style="margin-top:0">Wat is teruggedraaid</h3>
+  <h3 style="margin-top:0">Wat er is aangepast</h3>
   <ul style="margin-bottom:0">
-    <li><strong>De zandkleur is weg.</strong> Die stond nergens in je theme; de hero is weer donker, zoals je site is.</li>
-    <li><strong>Het goudverloop op de kop is weg.</strong> Ik heb je hele theme nagelopen: <b>je hero gebruikt helemaal geen goud</b>. Witte Montserrat op beeld, witte pil-knop. Dat is nu ook zo.</li>
-    <li><strong>De mechanisme-copy is weg.</strong> Terug naar richting A, die je koos.</li>
-    <li><strong>De 800-900 koppen zijn weg.</strong> Terug naar gewicht 600 op 44px/115%, precies wat <code>.h1</code> in je <code>base.css</code> doet.</li>
-    <li><strong>De split-layout is weg.</strong> Terug naar jouw eigen bannerpatroon: beeld full-bleed, tekstblok van maximaal 560px eroverheen.</li>
+    <li><strong>De kop is merkbreed geworden.</strong> De vorige versie ging over keramische messen in de schaamstreek — dat is de Groom Guard, één product uit acht categorieën. De banner dekt nu je hele assortiment.</li>
+    <li><strong>De knop staat in de merkkleur</strong> <code>#BC813E</code>, met zwarte tekst voor de leesbaarheid.</li>
+    <li><strong>De vinkjes zijn wit geworden</strong>, zodat goud niet gaat overheersen. Goud zit nu op de badge en de knop, verder nergens.</li>
+    <li>Structuur, typografie, tokens en beeldbehandeling blijven ongewijzigd ten opzichte van versie 4.</li>
   </ul>
 </div>
 
@@ -249,9 +248,16 @@ footer p{max-width:none}
   </tbody>
 </table>
 </div>
-<p>Conclusie: goud is bij jou een <strong>vlak accent</strong>, geen verlooptekst. In deze hero gebruik ik het daarom op precies twee plekken — de Summer Sale-badge in <code>#F5D18A</code> (identiek aan je "Best Seller"-badge op de productkaart) en de vinkjes in de garantieregel.</p>
+<p>Conclusie: goud is bij jou een <strong>vlak accent</strong>, geen verlooptekst. In deze hero zit het op twee plekken — de Summer Sale-badge in <code>#F5D18A</code> (identiek aan je "Best Seller"-badge op de productkaart) en de knop in <code>#BC813E</code>. Die knop is de enige bewuste afwijking van je theme: je banner gebruikt vandaag <code>button--light</code>, en op jouw verzoek gaat hij naar de merkkleur.</p>
 
 <h2>Het ontwerp</h2>
+<p class="sub">Twee merkbrede koppen. Beide dekken het hele assortiment in plaats van één product; de rest van de banner blijft gelijk.</p>
+
+<div class="switch" role="group" aria-label="Copy-richting">
+  <button type="button" data-v="breed" aria-pressed="true">Uitkomst — aanbevolen</button>
+  <button type="button" data-v="assort" aria-pressed="false">Assortiment</button>
+</div>
+<p class="switch-note" id="vnote"></p>
 
 <div class="switch" role="group" aria-label="Beeldkeuze">
   <button type="button" data-s="mirror" aria-pressed="true">Spiegelshot</button>
@@ -279,8 +285,8 @@ footer p{max-width:none}
           <div class="ws-scrim"></div>
           <div class="ws-inner"><div class="ws-blocks">
             <span class="ws-badge">Summer Sale · tot 40% korting</span>
-            <h2 class="ws-h1">Overal glad. Zonder sneetjes, zonder rode bultjes.</h2>
-            <p class="ws-sub">Keramische SkinSafe™-messen glijden over je huid in plaats van erin — ook in de schaamstreek. Vandaag besteld, morgen scheren.</p>
+            <h2 class="ws-h1" data-slot="h1"></h2>
+            <p class="ws-sub" data-slot="sub"></p>
             <div class="tp">
               <span class="tp-stars">
                 <i><svg><use href="#star"/></svg></i><i><svg><use href="#star"/></svg></i>
@@ -319,8 +325,8 @@ footer p{max-width:none}
           <div class="ws-scrim"></div>
           <div class="ws-inner"><div class="ws-blocks">
             <span class="ws-badge">Summer Sale · tot 40%</span>
-            <h2 class="ws-h1">Overal glad. Zonder sneetjes.</h2>
-            <p class="ws-sub">Keramische SkinSafe™-messen glijden over je huid in plaats van erin — ook in de schaamstreek.</p>
+            <h2 class="ws-h1" data-slot="h1m"></h2>
+            <p class="ws-sub" data-slot="subm"></p>
             <div class="tp">
               <span class="tp-stars">
                 <i><svg><use href="#star"/></svg></i><i><svg><use href="#star"/></svg></i>
@@ -353,7 +359,8 @@ footer p{max-width:none}
     <tr><td>Kop mobiel</td><td>32px / 115%</td><td><code>.h1</code> mobiele override</td></tr>
     <tr><td>Subline</td><td>16px / 150% / gewicht 400</td><td><code>.body-lg</code></td></tr>
     <tr><td>Garantieregel</td><td>12px / 140%</td><td><code>.body-sm</code></td></tr>
-    <tr><td>Knop</td><td>Pil 100px, uppercase, 18px/24px, gewicht 500, wit op zwart</td><td><code>.button</code> + <code>.button--light</code></td></tr>
+    <tr><td>Knopvorm</td><td>Pil 100px, uppercase, 18px/24px</td><td><code>.button</code></td></tr>
+    <tr><td>Knopkleur</td><td><code>#BC813E</code> met zwarte tekst</td><td><b>Afwijking</b> — theme gebruikt <code>button--light</code></td></tr>
     <tr><td>Tekstblok</td><td>max. 560px breed</td><td><code>.banner__blocks</code></td></tr>
     <tr><td>Contentbreedte</td><td>1400px</td><td><code>--page-width</code></td></tr>
     <tr><td>Secundaire tekst op beeld</td><td>wit op 80%</td><td><code>--white-80</code></td></tr>
@@ -371,7 +378,20 @@ footer p{max-width:none}
 
 <div class="anno">
   <h3>De headline verkoopt een resultaat, geen korting</h3>
-  <p><b>Was:</b> "SUMMER SALE — profiteer van kortingen tot wel 40%". <b>Wordt:</b> een belofte met het bezwaar er direct achteraan. De sale verdwijnt niet — die zakt naar de badge boven de kop, in dezelfde vorm en kleur als je "Best Seller"-badge op de productkaart.</p>
+  <p><b>Was:</b> "SUMMER SALE — profiteer van kortingen tot wel 40%". <b>Wordt:</b> een belofte over het resultaat, geldig voor je hele assortiment. De sale verdwijnt niet — die zakt naar de badge boven de kop, in dezelfde vorm en kleur als je "Best Seller"-badge op de productkaart.</p>
+</div>
+
+<div class="anno">
+  <h3>De banner is nu merkbreed, niet productgericht</h3>
+  <p>De vorige versie ging volledig over keramische messen in de schaamstreek — dat is de Groom Guard, één product uit een assortiment van acht categorieën. <b>Een homepage-hero moet het merk verkopen, niet de bestseller.</b> De kop dekt nu de hele routine en de subline noemt de productlijnen bij naam, zodat iemand die voor een baardtrimmer of een neustrimmer komt zich net zo goed aangesproken voelt.</p>
+  <p>De CTA blijft wel naar de bestsellers wijzen. Een knop die naar het complete assortiment leidt, zet mensen in een lijst van tientallen producten — dat is de keuzestress waar je nu al last van hebt. Brede boodschap, smalle landing.</p>
+</div>
+
+<div class="anno">
+  <h3>De knop staat in de merkkleur</h3>
+  <p>Was wit, is nu <code>#BC813E</code>. Dat wijkt af van de <code>button--light</code> die je banner vandaag gebruikt — een bewuste afwijking op jouw verzoek, en het maakt de knop het duidelijkste kleurpunt van de hele pagina.</p>
+  <p><b>De tekst op de knop is zwart, niet wit.</b> Wit op <code>#BC813E</code> haalt ongeveer 3,3:1 aan contrast en zakt daarmee door de toegankelijkheidsnorm; zwart komt op ongeveer 6:1 en leest gewoon. Als je toch wit wilt, dan moet het goud donkerder — dat kan, maar dan is het je merkkleur niet meer.</p>
+  <p>Om te voorkomen dat goud gaat overheersen, zijn de vinkjes in de garantieregel wit geworden. Goud zit nu op twee plekken: de badge en de knop.</p>
 </div>
 
 <div class="anno">
@@ -430,13 +450,15 @@ footer p{max-width:none}
   <h3 style="margin-top:0">Wat ik van jou nodig heb</h3>
   <ul style="margin-bottom:0">
     <li><strong>Akkoord op deze hero?</strong> Zo ja, dan ontwerp ik blok 2 in dezelfde taal.</li>
+    <li><strong>Welke kop</strong> — uitkomst of assortiment?</li>
     <li><strong>Welk beeld</strong>, en kunnen we een liggende opname maken voor desktop?</li>
     <li><strong>Klopt "180.000+"?</strong> Ik heb het weggelaten omdat ik het niet kon verifiëren. Klopt het, dan zet ik het terug onder de garantieregel.</li>
   </ul>
 </div>
 
 <h2>Eén ding om te weten</h2>
-<p>De kop zegt "zonder sneetjes", terwijl je eigen Groom Guard-pagina schrijft dat SkinSafe sneetjes en irritatie <em>"helpt verminderen"</em> en het risico <em>"sterk reduceert"</em>. Dat is een absolute claim op een onderbouwing die dat niet helemaal dekt. <strong>Wil je dat dichttimmeren</strong>, dan wordt het "Overal glad. Ook daar beneden." — zelfde belofte, geen claim die je moet verdedigen. Jouw keuze; ik heb richting A laten staan zoals je hem koos.</p>
+<p>Beide koppen hierboven vermijden bewust "zonder sneetjes". Je eigen Groom Guard-pagina schrijft dat SkinSafe sneetjes en irritatie <em>"helpt verminderen"</em> en het risico <em>"sterk reduceert"</em> — een absolute claim is daarmee niet gedekt. "Ook daar beneden" en "ontworpen voor gevoelige zones" brengen dezelfde boodschap over zonder iets dat je moet verdedigen.</p>
+<p>Let ook op de reikwijdte van SkinSafe: je Design DNA beschrijft het als de technologie op je <em>trimmer- en scheerlijnen</em>. In de subline staat daarom "onze trimmers en scheerapparaten" en niet "elk Wellshave-product" — je safety razors en ladyshaves vallen er buiten.</p>
 
 <h2>Daarna</h2>
 <p><strong>Blok 2 — de pijnpunt-sectie.</strong> Het blok dat er nu niet is en dat voor koud verkeer het zwaarst weegt. Zelfde werkwijze, zelfde merktaal: ontwerp, jouw feedback, dan pas Shopify.</p>
@@ -448,6 +470,35 @@ footer p{max-width:none}
 </div>
 
 <script>
+const COPY={
+  breed:{
+    h1:"Overal glad. Van kaaklijn tot enkel.",
+    sub:"Keramische SkinSafe™-messen in onze trimmers en scheerapparaten, ontworpen voor gevoelige zones. Vandaag besteld, morgen in huis.",
+    h1m:"Overal glad. Van kaaklijn tot enkel.",
+    subm:"Keramische SkinSafe™-messen, ontworpen voor gevoelige zones. Vandaag besteld, morgen in huis.",
+    note:"Verkoopt het resultaat en dekt in één zin je hele lichaam — gezicht, hoofd, lichaam. Kort genoeg voor mobiel, en het mechanisme staat direct in de subline."
+  },
+  assort:{
+    h1:"Van top tot teen verzorgd. In één routine.",
+    sub:"Baardtrimmers, bodygroomers, scheerapparaten en neustrimmers met keramische SkinSafe™-messen. Waterdicht, dus gewoon onder de douche.",
+    h1m:"Van top tot teen verzorgd.",
+    subm:"Baardtrimmers, bodygroomers, scheerapparaten en neustrimmers. Waterdicht, dus gewoon onder de douche.",
+    note:"Noemt de productlijnen bij naam, dus iedereen ziet meteen of je verkoopt wat hij zoekt. Iets minder scherp op het resultaat, sterker op de breedte van je assortiment."
+  }
+};
+function applyCopy(v){
+  const c=COPY[v];
+  ["h1","sub","h1m","subm"].forEach(k=>{
+    document.querySelectorAll('[data-slot="'+k+'"]').forEach(e=>e.textContent=c[k]);
+  });
+  document.getElementById('vnote').textContent=c.note;
+  document.querySelectorAll('.switch button[data-v]').forEach(b=>
+    b.setAttribute('aria-pressed',String(b.dataset.v===v)));
+}
+document.querySelectorAll('.switch button[data-v]').forEach(b=>
+  b.addEventListener('click',()=>applyCopy(b.dataset.v)));
+applyCopy('breed');
+
 const NOTE={
   mirror:"Ontspannen gezicht, echte ochtendroutine, trimmer in de hand, case herkenbaar in beeld. Let op: dit is een vierkante bronfoto in een breed hero-kader geduwd — voor de echte build is een liggende opname nodig.",
   portrait:"Meer huid en het product prominenter in beeld, maar de pose zit dicht tegen macho-bravoure aan — punt 6 op je lijst van wat je juist niet wilt uitstralen."
