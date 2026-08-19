@@ -1,0 +1,441 @@
+<title>Wellshave Het mechanisme</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
+
+<style>
+:root{
+  /* exact de tokens uit :root van je live theme */
+  --graphite:#191816;
+  --grey:#8E8E8E;
+  --white-100:#FFFFFF;
+  --white-80:rgba(255,255,255,.8);
+  --white-40:rgba(255,255,255,.4);
+  --black-100:#111111;
+  --black-60:rgba(17,17,17,.6);
+  --black-40:rgba(17,17,17,.4);
+  --black-10:rgba(17,17,17,.1);
+  --gold-light-100:#F5D18A;
+  --gold-dark-100:#BC813E;
+  --error-color:#C14A3A;
+  --success-color:#1E7F63;
+
+  /* documentchroom, uit dezelfde tokens */
+  --bg:#FBFAF9; --surface:#FFFFFF; --surface-2:#F2F0ED;
+  --fg:var(--black-100); --fg-soft:var(--black-60); --rule:var(--black-10);
+  --accent:#8F6428;
+  --ok:var(--success-color); --ok-bg:#E6F0EC;
+  --crit:#A3271B; --crit-bg:#F6EAE7;
+  --shadow:0 1px 2px rgba(17,17,17,.05), 0 12px 30px -20px rgba(17,17,17,.35);
+  --frame:#E2DFDA;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141413; --surface:#1C1B1A; --surface-2:#252423;
+    --fg:#EEECE9; --fg-soft:rgba(238,236,233,.62); --rule:rgba(238,236,233,.13);
+    --accent:#D9A557; --ok:#7FBF9F; --ok-bg:#182420; --crit:#E38477; --crit-bg:#2A1C19;
+    --shadow:0 1px 2px rgba(0,0,0,.45), 0 12px 30px -20px rgba(0,0,0,.9);
+    --frame:#312F2C;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141413; --surface:#1C1B1A; --surface-2:#252423;
+  --fg:#EEECE9; --fg-soft:rgba(238,236,233,.62); --rule:rgba(238,236,233,.13);
+  --accent:#D9A557; --ok:#7FBF9F; --ok-bg:#182420; --crit:#E38477; --crit-bg:#2A1C19;
+  --shadow:0 1px 2px rgba(0,0,0,.45), 0 12px 30px -20px rgba(0,0,0,.9);
+  --frame:#312F2C;
+}
+
+*{box-sizing:border-box}
+img{max-width:100%;height:auto;display:block}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font-family:"Montserrat",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:16px;line-height:150%;font-weight:400;-webkit-font-smoothing:antialiased}
+.wrap{max-width:940px;margin:0 auto;padding:0 24px 96px}
+@media(max-width:600px){.wrap{padding:0 16px 64px}}
+
+.masthead{padding:60px 0 28px;border-bottom:1px solid var(--rule)}
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);margin:0 0 18px}
+h1{font-weight:600;font-size:clamp(32px,5.6vw,50px);line-height:115%;letter-spacing:-.015em;
+  margin:0 0 16px;text-wrap:balance}
+.dek{font-size:17px;color:var(--fg-soft);margin:0;max-width:64ch;line-height:160%;text-wrap:pretty}
+.byline{font-size:12.5px;color:var(--fg-soft);margin-top:20px}
+
+h2{font-weight:600;font-size:clamp(22px,3.4vw,30px);line-height:120%;letter-spacing:-.01em;
+  margin:56px 0 8px;text-wrap:balance}
+h2 + .sub{color:var(--fg-soft);margin:0 0 22px;font-size:15px;max-width:66ch;line-height:160%}
+h3{font-size:17px;font-weight:600;margin:26px 0 8px}
+p{margin:0 0 14px;max-width:68ch;line-height:160%}
+ul{margin:0 0 14px;padding-left:20px;max-width:68ch}
+li{margin-bottom:7px}
+strong{font-weight:600}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
+  background:var(--surface-2);padding:1px 5px;border-radius:3px}
+
+/* ── podium ── */
+.devicecap{font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--fg-soft);margin:0 0 8px}
+.scaler{width:100%;overflow:hidden;border:1px solid var(--frame);border-radius:4px;
+  background:#EDE7DB;box-shadow:var(--shadow)}
+.scaler > .inner{transform-origin:top left}
+.desk-scaler{min-height:400px}
+.desk-scaler > .inner{width:1440px}
+.phonecol{max-width:390px;margin:0 auto}
+.phone-scaler{border-radius:14px;min-height:400px}
+.phone-scaler > .inner{width:390px}
+.stage{display:grid;gap:30px;margin:0 0 10px}
+
+/* ══ MOCKUP — vaste merkkleuren in beide thema's ══ */
+.mc{font-family:"Montserrat",sans-serif;background:#191816;color:#FFFFFF;padding:60px 40px}
+.mc-in{max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:34px;min-width:0}
+/* het documentproza zet p{max-width:68ch}; dat mag hier niet gelden.
+   Daarna de componenten terugzetten met hogere specificiteit, anders wint
+   deze regel van hun eigen breedte — dat ging twee keer eerder mis. */
+.mc p{max-width:none;margin:0}
+.mc p.mc-note{max-width:44ch}
+
+.mc-top{display:flex;align-items:flex-end;justify-content:space-between;gap:48px}
+.mc-eyebrow{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(255,255,255,.4)}
+.mc-h2{font-size:36px;line-height:118%;font-weight:600;letter-spacing:-.025em;margin:12px 0 0;
+  max-width:20ch;text-wrap:balance}
+.mc-h2 b{display:block;font-weight:600;color:#F5D18A}
+.mc-note{font-size:15px;line-height:158%;color:rgba(255,255,255,.65);flex:none;min-width:0;
+  padding-bottom:4px}
+.mc-note b{color:#fff;font-weight:600}
+
+/* de twee productlijnen als bewijs: wat er tussen twee generaties veranderde */
+.mc-gens{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.mc-gen{background:#211F1D;border:1px solid rgba(245,209,138,.14);border-radius:12px;
+  padding:24px 26px 26px;display:flex;flex-direction:column;gap:18px;min-width:0}
+.mc-line{font-size:10.5px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:#C99A4E}
+.mc-pair{display:flex;align-items:center;gap:14px;min-width:0}
+.mc-step{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;min-width:0}
+.mc-shot{width:100%;aspect-ratio:1/1;position:relative;background:#191816;border-radius:9px;
+  overflow:hidden}
+.mc-shot > img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;
+  padding:9px;display:block}
+.mc-jaar{font-size:10px;font-weight:700;letter-spacing:.14em;color:rgba(255,255,255,.38)}
+.mc-naam{font-size:12.5px;font-weight:600;text-align:center;line-height:135%;min-width:0;
+  overflow-wrap:anywhere}
+.mc-arrow{flex:none;width:26px;height:26px;border-radius:100px;
+  border:1px solid rgba(245,209,138,.35);color:#F5D18A;
+  display:flex;align-items:center;justify-content:center;margin-top:-26px}
+.mc-arrow svg{width:13px;height:13px}
+.mc-delta{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+.mc-delta li{display:flex;gap:11px;font-size:13.5px;line-height:145%;
+  color:rgba(255,255,255,.78);min-width:0}
+.mc-delta b{color:#fff;font-weight:600}
+.mc-delta i{flex:none;width:15px;font-style:normal;font-weight:700;color:#C99A4E;font-size:14px;
+  line-height:145%}
+
+.mc-bottom{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;
+  border-top:1px solid rgba(255,255,255,.12);padding-top:26px}
+.mc-fact{display:flex;flex-direction:column;gap:7px;min-width:0}
+.mc-fact b{font-size:26px;font-weight:600;letter-spacing:-.03em;line-height:1;color:#F5D18A}
+.mc-fact span{font-size:13.5px;line-height:150%;color:rgba(255,255,255,.66)}
+.mc-fact span em{font-style:normal;color:#fff;font-weight:600}
+
+/* mobiel */
+.mc-m{padding:38px 18px}
+.mc-m .mc-in{gap:24px}
+.mc-m .mc-top{flex-direction:column;align-items:flex-start;gap:16px}
+.mc-m .mc-h2{font-size:26px;max-width:none;margin-top:10px}
+.mc-m p.mc-note{font-size:14px;max-width:none;padding-bottom:0}
+.mc-m .mc-gens{grid-template-columns:1fr;gap:12px}
+.mc-m .mc-gen{padding:20px 18px 22px;gap:16px}
+.mc-m .mc-delta li{font-size:12.5px}
+.mc-m .mc-bottom{grid-template-columns:1fr;gap:18px;padding-top:22px}
+.mc-m .mc-fact b{font-size:23px}
+.mc-m .mc-fact span{font-size:13px}
+
+/* ── annotaties ── */
+.anno{background:var(--surface);border:1px solid var(--rule);border-left:2px solid var(--gold-dark-100);
+  border-radius:3px;padding:18px 22px;margin:0 0 13px;box-shadow:var(--shadow)}
+.anno > :last-child{margin-bottom:0}
+.anno h3{margin:0 0 7px;font-size:16.5px}
+.anno p{font-size:15px;margin-bottom:0;color:var(--fg-soft);max-width:68ch}
+.anno p b{color:var(--fg);font-weight:600}
+.anno p + p{margin-top:9px}
+.tablewrap{overflow-x:auto;margin:20px 0;border:1px solid var(--rule);border-radius:3px}
+table{border-collapse:collapse;width:100%;min-width:560px;background:var(--surface);font-size:14.5px}
+th,td{text-align:left;padding:12px 15px;border-bottom:1px solid var(--rule);vertical-align:top;line-height:150%}
+th{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--fg-soft);background:var(--surface-2)}
+tr:last-child td{border-bottom:0}
+td b{font-weight:600;color:var(--fg)}
+.callout{background:var(--surface-2);border-radius:3px;padding:20px 24px;margin:24px 0}
+.callout > :last-child{margin-bottom:0}
+.callout ul,.callout p{max-width:none}
+.ask{border-left:2px solid var(--crit);background:var(--crit-bg)}
+.fix{border-left:2px solid var(--ok);background:var(--ok-bg)}
+.progress{display:flex;flex-wrap:wrap;gap:5px;margin:18px 0 0}
+.progress i{width:26px;height:4px;background:var(--rule);display:block}
+.progress i.done{background:var(--gold-dark-100)}
+.progress-cap{font-size:11.5px;color:var(--fg-soft);margin:10px 0 0}
+footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--rule);
+  color:var(--fg-soft);font-size:13px}
+footer p{max-width:none}
+:focus-visible{outline:2px solid var(--gold-dark-100);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}
+  .revtrack{width:auto;overflow-x:auto}}
+</style>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01z"/></symbol>
+<symbol id="chk" viewBox="0 0 24 24"><path d="M4 12.5l5.2 5.2L20 6.9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="shield" viewBox="0 0 24 24"><path d="M12 2.6l7.2 2.8v6.1c0 4.4-3 8.4-7.2 9.9-4.2-1.5-7.2-5.5-7.2-9.9V5.4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M8.7 12.1l2.3 2.3 4.3-4.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="guarantee" viewBox="0 0 24 24"><circle cx="12" cy="9.6" r="6.4" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8.3 15.1L7 21.6l5-2.4 5 2.4-1.3-6.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+<symbol id="truck" viewBox="0 0 24 24"><path d="M1.9 6.2h12.2v9.4H1.9zM14.1 9.7h3.9l3.1 3.1v2.8h-7z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="6.6" cy="18" r="1.9" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="17.3" cy="18" r="1.9" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+<symbol id="chkc" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10.1" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M7.7 12.3l2.9 2.9 5.7-6.1" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="arw" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
+<div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow">Homepage-redesign · blok 4 van 12 · versie 1</p>
+  <h1>Het mechanisme</h1>
+  <p class="dek">In blok 1 stelden we vast dat SkinSafe geen merkbreed mechanisme kan zijn — het zit alleen in je bodygroomers. Wat overbleef was je bouwproces, en dat is een zwakker mechanisme. Dit blok maakt het sterk door het na te rekenen te maken: twee productlijnen, twee generaties, en wat er precies veranderde.</p>
+  <p class="byline">Ontwerp — nog niets live. Akkoord → dan pas Shopify.</p>
+  <div class="progress" aria-hidden="true">
+    <i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+  </div>
+  <p class="progress-cap">Blok 4 in ontwerp · 8 blokken volgen</p>
+</header>
+
+<div class="callout fix">
+  <h3 style="margin-top:0">Het probleem met dit blok, en hoe het opgelost is</h3>
+  <p>"Wij testen op prestaties en verbeteren op klantfeedback" is een zin die elk merk kan opschrijven. Als mechanisme is dat zwak — het is geen materiaal en geen techniek, het is een belofte over jezelf. In een markt waarin je concurrenten allemaal al een mechanisme claimen, wint zo'n zin niets.</p>
+  <p><b>Wat het redt, is dat het bij jou toevallig te controleren is.</b> Je catalogus staat vol met tweede en derde generaties, en die staan gedateerd in Shopify. De Groom Guard is van augustus 2022; de Groom Guard PRO van september 2025 — en je eigen productpagina noemt hem letterlijk "de upgrade van de Groom Guard". De Neustrimmer Basic is van maart 2023, de 4in1 Ultra van juni 2026. Dat is geen bewering meer, dat is een spoor.</p>
+  <p style="margin-bottom:0">Daarom bestaat dit blok niet uit uitleg maar uit <b>twee lijnen met het verschil ertussen</b>. Geen prijzen, geen knoppen — dit blok verkoopt niets, het maakt geloofwaardig wat blok 1 belooft. De veranderingen die er staan komen letterlijk uit je eigen productteksten: de foil shaver-kop, het LED-licht, IPX7, USB-C en de standaard bij de PRO; vier functies, 7000 toeren, de batterij-indicator en snelladen bij de Ultra.</p>
+</div>
+
+<div class="callout ask">
+  <h3 style="margin-top:0">Je mechanisme heeft twee namen</h3>
+  <p>Op de Groom Guard heet het <b>SkinSafe</b>. Op de Neustrimmer 4in1 Ultra heet het <b>SafeShave™</b>. Uit de teksten kan ik niet opmaken of dat twee verschillende technieken zijn of twee namen voor hetzelfde idee.</p>
+  <p style="margin-bottom:0">Voor dit blok is dat geen blokkade — ik noem geen van beide, want de mechanismen horen op de categoriepagina's. <b>Maar het verzwakt je wel</b>: een merknaam voor een techniek wordt pas iets waard als hij overal hetzelfde is en over meerdere producten terugkomt. Twee namen betekent twee halve merken. Als het hetzelfde is, kies er één.</p>
+</div>
+
+<div class="callout ask">
+  <h3 style="margin-top:0">Twee productpagina's claimen verschillend sterk over dezelfde techniek</h3>
+  <p style="margin-bottom:0">De Groom Guard-pagina schrijft dat SkinSafe het risico op sneetjes <b>"sterk reduceert"</b>. De Groom Guard PRO-pagina schrijft <b>"zonder de sneetjes en ingegroeide haren van een gewoon mesje"</b> en <b>"leggen je huid nooit bloot"</b>. Dat is dezelfde techniek met twee verschillende sterktes. In blok 1 heb ik "zonder sneetjes" om die reden laten vallen. Op een blok dat draait om "wij zijn eerlijk over wat het doet" is zo'n verschil precies het soort detail dat het onderuithaalt zodra iemand beide pagina's leest. Ik zou de PRO-tekst gelijktrekken met de voorzichtigste van de twee.</p>
+</div>
+
+<div class="callout fix">
+  <h3 style="margin-top:0">Twee open vragen uit blok 2 zijn beantwoord</h3>
+  <p style="margin-bottom:0">Je over-pagina noemt <b>zes mensen bij naam</b>: Dustin, Willem, Yvonne, Aaron, Virgil en Tom. Dat bevestigt de "zes mensen" uit blok 2. Er staat ook letterlijk: <em>"We zijn geen anoniem merk: we verzorgen zelf de verzending, de verbeteringen en de klantenservice"</em> — die zin is het fundament onder dit blok en staat er in verkorte vorm in. <b>Helmond staat er níét op.</b> Dat had ik uit je FAQ; controleer even of dat nog klopt voordat het in blok 2 blijft staan.</p>
+</div>
+
+<h2>Het ontwerp</h2>
+<p class="sub">Donker, want dit blok hoort tussen twee lichte in en het is het enige blok dat niets verkoopt. Twee lijnen naast elkaar op desktop, onder elkaar op mobiel.</p>
+
+<div class="stage">
+  <div>
+    <p class="devicecap">Desktop — 1440px</p>
+    <div class="scaler desk-scaler"><div class="inner">
+      <section class="mc"><div class="mc-in">
+
+        <div class="mc-top">
+          <div>
+            <p class="mc-eyebrow">Hoe we bouwen</p>
+            <h2 class="mc-h2">Niets wat hier staat is een eerste poging. <b>Alles is minstens versie twee.</b></h2>
+          </div>
+          <p class="mc-note">We maken geen nieuw apparaat omdat er een trend is. We maken een nieuwe versie omdat klanten ons schreven wat er beter kon — en <b>dat is na te rekenen</b>: hieronder staat wat er tussen twee generaties daadwerkelijk veranderde.</p>
+        </div>
+
+        <div class="mc-gens">
+            <div class="mc-gen">
+              <p class="mc-line">Bodygroomers</p>
+              <div class="mc-pair">
+                <span class="mc-step">
+                  <span class="mc-shot"><img src="__GEN_GG__" alt="Groom Guard™"></span>
+                  <span class="mc-jaar">2022</span>
+                  <span class="mc-naam">Groom Guard™</span>
+                </span>
+                <span class="mc-arrow"><svg><use href="#arw"/></svg></span>
+                <span class="mc-step">
+                  <span class="mc-shot"><img src="__BEST_LICHAAM__" alt="Groom Guard™ PRO"></span>
+                  <span class="mc-jaar">2025</span>
+                  <span class="mc-naam">Groom Guard™ PRO</span>
+                </span>
+              </div>
+              <ul class="mc-delta">
+                  <li><i>+</i><span><b>Foil shaver-kop erbij</b> — werkt glad af waar de trimmer stopt</span></li>
+                  <li><i>+</i><span><b>LED-licht</b> — je ziet wat je doet, ook op je rug</span></li>
+                  <li><i>+</i><span><b>IPX7 in plaats van spatdicht</b> — mag mee onder de douche</span></li>
+                  <li><i>+</i><span><b>USB-C en een standaard</b> — 120 minuten op één lading</span></li>
+              </ul>
+            </div>
+            <div class="mc-gen">
+              <p class="mc-line">Neustrimmers</p>
+              <div class="mc-pair">
+                <span class="mc-step">
+                  <span class="mc-shot"><img src="__GEN_NT__" alt="Neustrimmer Basic™"></span>
+                  <span class="mc-jaar">2023</span>
+                  <span class="mc-naam">Neustrimmer Basic™</span>
+                </span>
+                <span class="mc-arrow"><svg><use href="#arw"/></svg></span>
+                <span class="mc-step">
+                  <span class="mc-shot"><img src="__BEST_NEUS__" alt="Neustrimmer 4in1 Ultra™"></span>
+                  <span class="mc-jaar">2026</span>
+                  <span class="mc-naam">Neustrimmer 4in1 Ultra™</span>
+                </span>
+              </div>
+              <ul class="mc-delta">
+                  <li><i>+</i><span><b>Van één functie naar vier</b> — neus, oor, wenkbrauw en scheren</span></li>
+                  <li><i>+</i><span><b>7000 toeren</b> — trekt niet meer bij dikkere haren</span></li>
+                  <li><i>+</i><span><b>Batterij-indicator</b> — hij valt niet meer stil zonder waarschuwing</span></li>
+                  <li><i>+</i><span><b>Snelladen via USB</b> — klaar terwijl je je aankleedt</span></li>
+              </ul>
+            </div>
+        </div>
+
+        <div class="mc-bottom">
+          <p class="mc-fact"><b>950+</b><span>beoordelingen waar we de verbeteringen uit halen. <em>Niet uit trends of gimmicks.</em></span></p>
+          <p class="mc-fact"><b>6</b><span>mensen. <em>Verzending, verbeteringen en klantenservice doen we zelf</em> — dus komt het terug bij wie het apparaat ontwerpt.</span></p>
+          <p class="mc-fact"><b>100 dagen</b><span>om te toetsen of we gelijk hebben. <em>Werkt het bij jou niet, dan gaat het terug.</em></span></p>
+        </div>
+
+      </div></section>
+    </div></div>
+  </div>
+  <div class="phonecol">
+    <p class="devicecap">Mobiel — 390px · 73% van je verkeer</p>
+    <div class="scaler phone-scaler"><div class="inner">
+      <section class="mc mc-m"><div class="mc-in">
+
+        <div class="mc-top">
+          <div>
+            <p class="mc-eyebrow">Hoe we bouwen</p>
+            <h2 class="mc-h2">Niets wat hier staat is een eerste poging. <b>Alles is minstens versie twee.</b></h2>
+          </div>
+          <p class="mc-note">We maken geen nieuw apparaat omdat er een trend is. We maken een nieuwe versie omdat klanten ons schreven wat er beter kon — en <b>dat is na te rekenen</b>: hieronder staat wat er tussen twee generaties daadwerkelijk veranderde.</p>
+        </div>
+
+        <div class="mc-gens">
+            <div class="mc-gen">
+              <p class="mc-line">Bodygroomers</p>
+              <div class="mc-pair">
+                <span class="mc-step">
+                  <span class="mc-shot"><img src="__GEN_GG__" alt="Groom Guard™"></span>
+                  <span class="mc-jaar">2022</span>
+                  <span class="mc-naam">Groom Guard™</span>
+                </span>
+                <span class="mc-arrow"><svg><use href="#arw"/></svg></span>
+                <span class="mc-step">
+                  <span class="mc-shot"><img src="__BEST_LICHAAM__" alt="Groom Guard™ PRO"></span>
+                  <span class="mc-jaar">2025</span>
+                  <span class="mc-naam">Groom Guard™ PRO</span>
+                </span>
+              </div>
+              <ul class="mc-delta">
+                  <li><i>+</i><span><b>Foil shaver-kop erbij</b> — werkt glad af waar de trimmer stopt</span></li>
+                  <li><i>+</i><span><b>LED-licht</b> — je ziet wat je doet, ook op je rug</span></li>
+                  <li><i>+</i><span><b>IPX7 in plaats van spatdicht</b> — mag mee onder de douche</span></li>
+                  <li><i>+</i><span><b>USB-C en een standaard</b> — 120 minuten op één lading</span></li>
+              </ul>
+            </div>
+            <div class="mc-gen">
+              <p class="mc-line">Neustrimmers</p>
+              <div class="mc-pair">
+                <span class="mc-step">
+                  <span class="mc-shot"><img src="__GEN_NT__" alt="Neustrimmer Basic™"></span>
+                  <span class="mc-jaar">2023</span>
+                  <span class="mc-naam">Neustrimmer Basic™</span>
+                </span>
+                <span class="mc-arrow"><svg><use href="#arw"/></svg></span>
+                <span class="mc-step">
+                  <span class="mc-shot"><img src="__BEST_NEUS__" alt="Neustrimmer 4in1 Ultra™"></span>
+                  <span class="mc-jaar">2026</span>
+                  <span class="mc-naam">Neustrimmer 4in1 Ultra™</span>
+                </span>
+              </div>
+              <ul class="mc-delta">
+                  <li><i>+</i><span><b>Van één functie naar vier</b> — neus, oor, wenkbrauw en scheren</span></li>
+                  <li><i>+</i><span><b>7000 toeren</b> — trekt niet meer bij dikkere haren</span></li>
+                  <li><i>+</i><span><b>Batterij-indicator</b> — hij valt niet meer stil zonder waarschuwing</span></li>
+                  <li><i>+</i><span><b>Snelladen via USB</b> — klaar terwijl je je aankleedt</span></li>
+              </ul>
+            </div>
+        </div>
+
+        <div class="mc-bottom">
+          <p class="mc-fact"><b>950+</b><span>beoordelingen waar we de verbeteringen uit halen. <em>Niet uit trends of gimmicks.</em></span></p>
+          <p class="mc-fact"><b>6</b><span>mensen. <em>Verzending, verbeteringen en klantenservice doen we zelf</em> — dus komt het terug bij wie het apparaat ontwerpt.</span></p>
+          <p class="mc-fact"><b>100 dagen</b><span>om te toetsen of we gelijk hebben. <em>Werkt het bij jou niet, dan gaat het terug.</em></span></p>
+        </div>
+
+      </div></section>
+    </div></div>
+  </div>
+</div>
+
+<h2>Waar elk cijfer vandaan komt</h2>
+<div class="tablewrap">
+<table>
+  <thead><tr><th>Wat er staat</th><th>Bron</th></tr></thead>
+  <tbody>
+    <tr><td>Groom Guard™ — 2022</td><td>Aanmaakdatum in Shopify: 15 augustus 2022</td></tr>
+    <tr><td>Groom Guard™ PRO — 2025</td><td>Aanmaakdatum in Shopify: 18 september 2025</td></tr>
+    <tr><td>Foil shaver, LED, IPX7, USB-C, 120 minuten</td><td>Letterlijk uit de productomschrijving van de PRO</td></tr>
+    <tr><td>Neustrimmer Basic™ — 2023</td><td>Aanmaakdatum in Shopify: 24 maart 2023</td></tr>
+    <tr><td>Neustrimmer 4in1 Ultra™ — 2026</td><td>Aanmaakdatum in Shopify: 4 juni 2026</td></tr>
+    <tr><td>Vier functies, 7000 toeren, batterij-indicator, snelladen</td><td>Letterlijk uit de productomschrijving van de Ultra</td></tr>
+    <tr><td>950+ beoordelingen</td><td>Trustpilot, zoals ook in blok 1 en 2 gebruikt</td></tr>
+    <tr><td>Zes mensen, zelf verzenden en verbeteren</td><td><code>wellshave.com/pages/over-wellshave</code></td></tr>
+    <tr><td>100 dagen</td><td>Je eigen proefperiode, ongewijzigd uit blok 1 en 2</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="callout fix">
+  <h3 style="margin-top:0">Waarom er geen prijzen en geen knop in staan</h3>
+  <p>Dit is het enige blok in het plan dat niets verkoopt, en dat is opzet. Blok 3 erboven verkoopt vier apparaten; als dit blok dat ook doet, is het een tweede productrooster en heeft de bezoeker geen reden om verder te lezen dan de prijs.</p>
+  <p style="margin-bottom:0"><b>Er staan ook bewust oudere generaties in beeld.</b> Die verkoop je nog steeds, dus het is geen "oud versus nieuw" — het is het spoor van hoe je bouwt. Daarom staan er geen prijzen bij en is de pijl tussen de twee een tijdlijn, geen aanbeveling. Wil je dat mensen hier wél doorklikken, dan is de juiste plek de productlijn zelf en niet het apparaat: "bekijk de bodygroomers".</p>
+</div>
+
+<h2>Bouwnotities voor straks</h2>
+<ul>
+  <li><b>De datums uit Shopify halen, niet intypen.</b> De aanmaakdatum van een product is beschikbaar in Liquid; dan klopt het jaartal ook nadat er iets verhuist of opnieuw wordt aangemaakt.</li>
+  <li><b>De verandering per generatie is redactie, geen data.</b> Die vier regels heb ik uit je productteksten gehaald en teruggebracht tot wat een klant ervan merkt. Dat kan geen veld uit Shopify worden — bij een nieuwe generatie moet iemand die regels schrijven.</li>
+  <li><b>Vrijstaande beelden, net als in blok 3.</b> Alle vier de packshots zijn WebP met een doorzichtige achtergrond, hier op een donkere ondergrond. Een JPEG op wit valt hier meteen door de mand als een wit vierkant.</li>
+  <li><b>Het blok schaalt naar drie of vier lijnen.</b> Het raster staat op twee kolommen; met een derde lijn erbij wordt het twee-plus-één. Voeg alleen een lijn toe als je er ook echt twee generaties van hebt met een te benoemen verschil.</li>
+  <li><b>Beelden <code>loading="lazy"</code></b>; dit blok staat ver onder de vouw.</li>
+</ul>
+
+<div class="callout ask">
+  <h3 style="margin-top:0">Wat ik van jou nodig heb</h3>
+  <ul style="margin-bottom:0">
+    <li><b>SkinSafe of SafeShave — is het hetzelfde?</b> Zo ja, kies één naam. Zo nee, dan moet het verschil ergens uitgelegd worden.</li>
+    <li><b>De claim op de Groom Guard PRO-pagina.</b> "Zonder sneetjes" versus "sterk reduceert" op de gewone Groom Guard — welke is de juiste?</li>
+    <li><b>Kloppen de twee lijnen die ik gekozen heb?</b> Ik nam bodygroomers en neustrimmers omdat daar het duidelijkste spoor ligt. Heb je een lijn waar het verhaal nog sterker is — bijvoorbeeld iets dat je hebt aangepast ná een specifieke klacht — dan is dat een betere dan een van deze twee.</li>
+    <li><b>Zit er een concreet voorbeeld bij van feedback die tot een verandering leidde?</b> Eén echte klantzin plus wat je erna veranderde, is het sterkste dat in dit blok kan staan. Dat heb ik nergens kunnen vinden.</li>
+    <li><b>Helmond:</b> staat niet op je over-pagina. Klopt het nog?</li>
+  </ul>
+</div>
+
+<h2>Daarna</h2>
+<p><b>Blok 5 — de waardeproposities, herschreven.</b> Vier tot zes stuks, elk met kenmerk plus opbrengst, opbrengst vooraan en een getal erin. De audit noemde de huidige versie "zegt niets dat een concurrent niet ook kan zeggen"; dat is dezelfde ziekte als dit blok had, en dezelfde behandeling: concreet maken tot het na te rekenen is.</p>
+
+<footer>
+  <p>Aanmaakdatums, productnamen en productteksten live uit Shopify op 19 augustus 2026. Teamsamenstelling en de zin over verzending, verbeteringen en klantenservice letterlijk van <code>wellshave.com/pages/over-wellshave</code>. Kleuren en type-schaal uit <code>base.css</code> van je live theme; het donkere vlak is <code>#191816</code>, dezelfde tint als je bovenbalk. Productbeelden uit je eigen Shopify-bestanden, vrijstaand gemaakt op de oorspronkelijke vierkante verhouding.</p>
+</footer>
+
+</div>
+
+<script>
+function fit(){
+  document.querySelectorAll('.scaler').forEach(s=>{
+    const inner=s.firstElementChild;
+    const w=parseFloat(getComputedStyle(inner).width);
+    const scale=s.clientWidth/w;
+    inner.style.transform='scale('+scale+')';
+    s.style.height=Math.ceil(inner.offsetHeight*scale)+'px';
+  });
+}
+document.fonts&&document.fonts.ready.then(fit);
+window.addEventListener('resize',fit);
+new ResizeObserver(fit).observe(document.body);
+window.addEventListener('load',fit); fit();
+</script>

@@ -23,13 +23,15 @@ for (const file of files) {
   await page.waitForTimeout(1200);
 
   const out = await page.evaluate(() => {
-    const MOCKUP = '.ws, .pf, .bs, .az';
-    const scope = (sel) => MOCKUP.split(', ').map(m => `${m} ${sel}`).join(', ');
+    // de mockups zelf opzoeken in plaats van hun klassen opsommen: elk blok
+    // staat in een .scaler > .inner, dus een nieuw blok valt er nooit buiten
+    const wortels = [...document.querySelectorAll('.scaler > .inner > *')];
+    const binnen = (sel) => wortels.flatMap(w => [...w.querySelectorAll(sel)]);
     // deze lopen bewust buiten hun kader; de ouder knipt ze af
     const DECORATIEF = /gcard-mark|revtrack|bs-mark|az-mark/;
 
     const buiten = [];
-    document.querySelectorAll(`${MOCKUP}, ${scope('*')}`).forEach(el => {
+    [...wortels, ...binnen('*')].forEach(el => {
       const par = el.parentElement;
       if (!par || DECORATIEF.test(el.className || '')) return;
       const r = el.getBoundingClientRect(), pr = par.getBoundingClientRect();
@@ -40,14 +42,14 @@ for (const file of files) {
     });
 
     const tekst = [];
-    document.querySelectorAll(scope('*')).forEach(el => {
+    binnen('*').forEach(el => {
       if (el.children.length) return;
       if (el.scrollWidth - el.clientWidth > 1 && getComputedStyle(el).overflow === 'visible')
         tekst.push({ el: el.className || el.tagName, over: el.scrollWidth - el.clientWidth,
                      txt: (el.textContent || '').trim().slice(0, 26) });
     });
 
-    const beelden = [...document.querySelectorAll(scope('img'))].map(i => {
+    const beelden = binnen('img').map(i => {
       const r = i.getBoundingClientRect();
       const nat = i.naturalWidth / i.naturalHeight, box = r.width / r.height;
       return { alt: i.alt.slice(0, 30), nat: +nat.toFixed(3), box: +box.toFixed(3),

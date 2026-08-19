@@ -15,6 +15,8 @@ const ASSETS = {
   __BEST_GEZICHT__: ['assets/best-gezicht.webp','image/webp'],
   __BEST_HOOFD__:   ['assets/best-hoofd.webp',  'image/webp'],
   __KKMARK__:       ['assets/kieskeurig-woordmerk.png','image/png'],
+  __GEN_GG__:       ['assets/gen-groomguard.webp','image/webp'],
+  __GEN_NT__:       ['assets/gen-neustrimmer.webp','image/webp'],
   __KKBEST__:       ['assets/kk-best-reviewed.png','image/png'],
   __KKTEST__:       ['assets/kk-testpanel.png',   'image/png'],
 };
@@ -24,6 +26,11 @@ if (!name) throw new Error('gebruik: node build.mjs <bestandsnaam-zonder-extensi
 
 const dir = new URL('.', import.meta.url).pathname;
 let html = readFileSync(`${dir}${name}.template.html`, 'utf8');
+
+// Zonder dit raadt de browser de codering bij het openen van een lokaal
+// bestand. Dat ging bij drie blokken goed en bij het vierde niet: ™ werd â„¢
+// en één werd Ã©Ã©n. Nooit op raden vertrouwen.
+if (!/<meta\s+charset/i.test(html)) html = '<meta charset="utf-8">\n' + html;
 
 for (const [token, [file, mime]] of Object.entries(ASSETS)) {
   const hits = html.split(token).length - 1;
