@@ -116,6 +116,14 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
   color:rgba(17,17,17,.38)}
 .bs-name{font-size:17px;font-weight:600;letter-spacing:-.015em;margin:0}
 .bs-what{font-size:13px;line-height:148%;color:rgba(17,17,17,.6);flex:1}
+/* onderscheiding van een derde partij; staat alleen op de kaart die er een heeft */
+.bs-award{display:flex;align-items:center;gap:9px;background:#F5F1EA;
+  border:1px solid rgba(17,17,17,.09);border-radius:8px;padding:7px 9px;margin-top:4px;
+  font-size:11px;line-height:132%;color:rgba(17,17,17,.65)}
+.bs-award b{display:block;color:#111;font-weight:700;font-size:11.5px}
+.bs-award i{width:24px;height:24px;border-radius:5px;flex:none;font-style:normal;
+  border:1px dashed rgba(17,17,17,.3);display:flex;align-items:center;justify-content:center;
+  font-size:7px;font-weight:700;letter-spacing:.02em;color:rgba(17,17,17,.4);text-align:center}
 .bs-price{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;margin-top:6px}
 .bs-now{font-size:20px;font-weight:700;letter-spacing:-.025em}
 .bs-was{font-size:13px;color:rgba(17,17,17,.38);text-decoration:line-through}
@@ -145,6 +153,9 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
 .bs-m .bs-body{padding:14px 13px 15px;gap:5px}
 .bs-m .bs-name{font-size:14.5px}
 .bs-m .bs-what{font-size:11.5px;line-height:142%}
+.bs-m .bs-award{padding:6px 7px;gap:7px;font-size:10px;margin-top:3px}
+.bs-m .bs-award b{font-size:10.5px}
+.bs-m .bs-award i{width:20px;height:20px;font-size:6px}
 .bs-m .bs-price{gap:6px;margin-top:5px}
 .bs-m .bs-now{font-size:17px}
 .bs-m .bs-was{font-size:11.5px}
@@ -197,9 +208,9 @@ footer p{max-width:none}
 <div class="wrap">
 
 <header class="masthead">
-  <p class="eyebrow">Homepage-redesign · blok 3 van 12 · versie 2</p>
+  <p class="eyebrow">Homepage-redesign · blok 3 van 12 · versie 3</p>
   <h1>Bestsellers</h1>
-  <p class="dek">Je had gelijk: versie 1 was een categorierooster, geen productrooster. Dit is de bestsellerversie — met de zone-indeling bewaard als label in plaats van als klik. Hieronder waarom dat op deze plek beter uitpakt, en wat er gebeurt als je op dat pijltje drukt.</p>
+  <p class="dek">De bestsellerversie, nu met de Kieskeurig-onderscheiding op de Neustrimmer 4in1 Ultra. Die lost meteen het probleem op dat in versie 2 nog op tafel lag: de zwakste kaart van de rij heeft nu de sterkste reden om te kopen. Ik heb wel de bewoording aangescherpt — zie hieronder.</p>
   <p class="byline">Ontwerp — nog niets live. Akkoord → dan pas Shopify.</p>
   <div class="progress" aria-hidden="true">
     <i class="done"></i><i class="done"></i><i class="done"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
@@ -271,10 +282,13 @@ footer p{max-width:none}
                 <p class="bs-zone">Neus &amp; oren</p>
                 <h3 class="bs-name">Neustrimmer 4in1 Ultra™</h3>
                 <p class="bs-what">Neus, oren, wenkbrauwen en contouren in één.</p>
+                <span class="bs-award">
+                  <i>badge</i>
+                  <span><b>Best beoordeeld op Kieskeurig</b>Testpanel 8,5 · juni 2026</span>
+                </span>
                 <span class="bs-price">
                   <span class="bs-now">€32,95</span>
                   <span class="bs-was">€36,95</span>
-                  <span class="bs-save">Bespaar €4,00</span>
                 </span>
                 <span class="bs-go">Bekijk <i><svg><use href="#arw"/></svg></i></span>
               </span>
@@ -358,10 +372,13 @@ footer p{max-width:none}
                 <p class="bs-zone">Neus &amp; oren</p>
                 <h3 class="bs-name">Neustrimmer 4in1 Ultra™</h3>
                 <p class="bs-what">Neus, oren, wenkbrauwen en contouren in één.</p>
+                <span class="bs-award">
+                  <i>badge</i>
+                  <span><b>Best beoordeeld op Kieskeurig</b>Testpanel 8,5 · juni 2026</span>
+                </span>
                 <span class="bs-price">
                   <span class="bs-now">€32,95</span>
                   <span class="bs-was">€36,95</span>
-                  <span class="bs-save">Bespaar €4,00</span>
                 </span>
                 <span class="bs-go">Bekijk <i><svg><use href="#arw"/></svg></i></span>
               </span>
@@ -420,10 +437,22 @@ footer p{max-width:none}
 </table>
 </div>
 
+<div class="callout fix">
+  <h3 style="margin-top:0">De Kieskeurig-onderscheiding lost het kortingsprobleem op</h3>
+  <p>In versie 2 stond op deze kaart "Bespaar €4,00", naast een buurman die "Bespaar €35,70" roept. Dat was het zwakste element van de hele rij, op je op één na best verkopende apparaat. <b>Die pil is nu weg en vervangen door de onderscheiding.</b> De doorgestreepte adviesprijs blijft staan — dat is gewoon waar — maar de reden om te kopen is niet langer een korting die het aflegt tegen de rest.</p>
+  <p><b>Dit is de hoogste vorm van bewijs die tot nu toe ergens op de pagina staat.</b> De audit noemde je social proof kritiek: alles wat je toont is je eigen woord over jezelf. Een oordeel van een derde partij, met een naam, een cijfer en een datum erbij, is van een andere orde — het is te controleren. Dat is precies het gat dat hier gedicht wordt.</p>
+  <p style="margin-bottom:0"><b>De badges zelf staan bewust niet op de kaart.</b> Op deze breedte zou een badge ongeveer 44 pixels hoog worden, en dan is "BEST REVIEWED · 2 keer · JUN 2026" onleesbaar. Een onleesbare badge is een gekleurd blokje: het suggereert iets, maar het bewijst niets. Op de kaart staat daarom de tekst met de bron erbij; <b>de badges op ware grootte horen op de productpagina</b>, waar ruimte is om ze te lezen en aan te klikken naar de Kieskeurig-vermelding.</p>
+</div>
+
 <div class="callout ask">
-  <h3 style="margin-top:0">Naast elkaar valt er iets op aan de korting</h3>
-  <p>Drie van de vier staan op 30 tot 42% korting. De Neustrimmer 4in1 Ultra staat op <b>11%</b> — €32,95 tegenover een adviesprijs van €36,95. Los op een productpagina valt dat niemand op. In een rij van vier waar de buurman "bespaar €35,70" roept, staat "bespaar €4,00" er zwak bij, terwijl het juist je op één na best verkopende apparaat is.</p>
-  <p style="margin-bottom:0">Twee mogelijkheden, en ik weet niet welke: óf de adviesprijs van de Ultra klopt niet en staat te laag, óf de andere drie staan structureel te diep in de korting en die 11% is de eerlijke. <b>Dit is jouw call, niet de mijne</b> — maar hij moet gemaakt worden voordat deze vier naast elkaar staan.</p>
+  <h3 style="margin-top:0">Eén ding over de bewoording</h3>
+  <p>Je schrijft "uitgeroepen tot best getest". Dat staat er net niet. Op de badges staat <b>"Best Reviewed"</b> — best beoordeeld, dus op basis van reviews — en <b>"Testpanel 8,5"</b>, een cijfer van een panel. Dat zijn twee verschillende dingen, en "best getest" is geen van beide.</p>
+  <p style="margin-bottom:0">Ik heb er daarom <b>"Best beoordeeld op Kieskeurig · Testpanel 8,5 · juni 2026"</b> van gemaakt. Dat is wat er staat, en het is sterk genoeg zoals het is. Dit is dezelfde afweging als bij SkinSafe en "zonder sneetjes" in blok 1: een claim die een tandje te hoog staat, kost je meer dan hij oplevert zodra iemand hem natrekt. Kieskeurig heeft bovendien voorwaarden over hoe je hun label mag gebruiken; die zijn het nakijken waard voordat dit live gaat.</p>
+</div>
+
+<div class="callout ask">
+  <h3 style="margin-top:0">De korting zelf blijft een vraag</h3>
+  <p style="margin-bottom:0">De onderscheiding haalt de scherpe kant eraf, maar het onderliggende gegeven staat er nog: drie van de vier staan op 30 tot 42% korting, de Ultra op <b>11%</b>. Óf de adviesprijs van de Ultra staat te laag, óf de andere drie staan structureel te diep in de korting en die 11% is de eerlijke. Dat is jouw call, niet de mijne — maar hij komt terug zodra je deze vier prijzen naast elkaar zet.</p>
 </div>
 
 <div class="callout ask">
@@ -442,6 +471,7 @@ footer p{max-width:none}
   <li><b>De hele kaart is de link</b>, niet het pijltje. In de mockup zijn het <code>span</code>-elementen; in de bouw wordt het één <code>a</code> per kaart naar de productpagina, met de productnaam als toegankelijke naam.</li>
   <li><b>De vier producten uit een collectie halen, niet vastzetten in de sectie.</b> Maak in Shopify een collectie "Bestsellers homepage" met deze vier erin; dan wissel je ze zonder de code aan te raken. Automatisch sorteren op verkoopaantal is verleidelijk maar niet wat je wilt: dan staan er binnen een maand twee bodygroomers naast elkaar en verlies je de dekking over de zones.</li>
   <li><b>Prijs, adviesprijs en besparing live uit Shopify.</b> Dit blok toont vier prijzen naast elkaar; één die achterloopt is hier meteen zichtbaar.</li>
+  <li><b>De badgedatum veroudert zichtbaar.</b> Er staat "JUN 2026" op gedrukt en Kieskeurig geeft ze per maand uit. Zet ze zo neer dat vervangen één handeling is — een bestand wisselen, niet de sectie aanpassen — anders staat er over een jaar een badge van vorig jaar.</li>
   <li><b>De 125 in de kop is een momentopname.</b> Laat hem live meelopen over dertig dagen, of haal hem weg. Een getal dat een half jaar stilstaat is erger dan geen getal.</li>
   <li><b>Voorraad checken bij het vullen.</b> Een uitverkocht apparaat op de best gepresenteerde plek van de pagina is duurder dan een lege plek.</li>
   <li><b>Beelden <code>loading="lazy"</code></b>; dit blok staat onder de vouw. Alle vier zijn vierkant en staan op <code>object-fit:cover</code>, dus ze kunnen niet vervormen.</li>
@@ -451,6 +481,9 @@ footer p{max-width:none}
 <div class="callout ask">
   <h3 style="margin-top:0">Wat ik van jou nodig heb</h3>
   <ul style="margin-bottom:0">
+    <li><b>De twee badgebestanden.</b> Ik kan een geplakt beeld niet als bestand oppakken, en Kieskeurig blokkeert geautomatiseerde verzoeken met een 403 — net als Trustpilot en Manscaped eerder. Zet ze in Shopify onder Content → Bestanden, of in <code>audits/assets/</code>, dan zet ik ze op de productpagina op ware grootte. Op de kaart staat nu een gestippeld vakje op de plek waar het merkteken hoort.</li>
+    <li><b>In welke categorie is hij best beoordeeld?</b> "Best beoordeeld in neustrimmers" is aanzienlijk sterker en geloofwaardiger dan een label dat in de lucht hangt. Dat staat op je Kieskeurig-vermelding.</li>
+    <li><b>Hebben andere producten ook badges?</b> Als er meer zijn, horen ze op hun eigen productpagina's én is het genoeg om er in blok 2 iets mee te doen op merkniveau.</li>
     <li><b>De korting op de 4in1 Ultra:</b> klopt de adviesprijs, of kloppen de andere drie niet?</li>
     <li><b>Zijn dit de vier die je vooraan wilt?</b> Ik heb gekozen op verkoopaantal per zone. Wil je liever op marge sturen, of een apparaat pushen dat je juist wilt laten groeien, dan is dat een ander rijtje en dat is een prima reden.</li>
     <li><b>Naar de productpagina of direct in de winkelwagen?</b> Mijn voorstel staat hierboven: eerst de productpagina, de directe knop als eerste test.</li>
