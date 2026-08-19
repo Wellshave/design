@@ -106,8 +106,15 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
 .bs-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
 .bs-card{position:relative;background:#fff;border-radius:12px;overflow:hidden;min-width:0;
   border:1px solid rgba(17,17,17,.08);display:flex;flex-direction:column}
-.bs-shot{position:relative;aspect-ratio:1/1;background:#F5F1EA;min-width:0}
+.bs-shot{position:relative;aspect-ratio:1/1;background:#F5F1EA;min-width:0;overflow:hidden}
 .bs-shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+/* het monogram ligt áchter de packshot en komt op hover naar voren */
+.bs-mark{position:absolute;z-index:0;left:50%;top:50%;width:96%;
+  transform:translate(-50%,-50%) scale(1.14);opacity:0;
+  transition:opacity .62s cubic-bezier(.22,.61,.36,1),transform .62s cubic-bezier(.22,.61,.36,1)}
+.bs-mark img{position:static;width:100%;height:auto;object-fit:contain}
+.bs-shot > img.bs-pack{position:absolute;z-index:1;
+  transition:transform .62s cubic-bezier(.22,.61,.36,1)}
 .bs-tag{position:absolute;z-index:2;top:12px;left:12px;background:#111;color:#fff;
   font-size:9.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
   padding:6px 12px;border-radius:100px;white-space:nowrap}
@@ -121,9 +128,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
   border:1px solid rgba(17,17,17,.09);border-radius:8px;padding:7px 9px;margin-top:4px;
   font-size:11px;line-height:132%;color:rgba(17,17,17,.65)}
 .bs-award b{display:block;color:#111;font-weight:700;font-size:11.5px}
-.bs-award i{width:24px;height:24px;border-radius:5px;flex:none;font-style:normal;
-  border:1px dashed rgba(17,17,17,.3);display:flex;align-items:center;justify-content:center;
-  font-size:7px;font-weight:700;letter-spacing:.02em;color:rgba(17,17,17,.4);text-align:center}
+.bs-award img{width:84px;height:auto;flex:none;display:block;border-radius:3px}
 .bs-price{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;margin-top:6px}
 .bs-now{font-size:20px;font-weight:700;letter-spacing:-.025em}
 .bs-was{font-size:13px;color:rgba(17,17,17,.38);text-decoration:line-through}
@@ -135,6 +140,20 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
 .bs-go i{width:29px;height:29px;border-radius:100px;border:1px solid rgba(17,17,17,.15);
   display:flex;align-items:center;justify-content:center;flex:none;color:#BC813E}
 .bs-go svg{width:14px;height:14px}
+.bs-card{transition:border-color .45s ease,box-shadow .45s ease,background-color .45s ease}
+@media (hover:hover) and (pointer:fine){
+  .bs-card:hover{border-color:rgba(188,129,62,.45);background:#FCFAF6;
+    box-shadow:0 10px 30px -14px rgba(17,17,17,.22)}
+  .bs-card:hover .bs-mark{opacity:.22;transform:translate(-50%,-50%) scale(1)}
+  .bs-card:hover .bs-pack{transform:scale(1.035)}
+  .bs-card:hover .bs-go i{background:#BC813E;border-color:#BC813E;color:#fff}
+}
+.bs-go i{transition:background-color .35s ease,border-color .35s ease,color .35s ease}
+@media (prefers-reduced-motion:reduce){
+  .bs-mark,.bs-pack,.bs-card,.bs-go i{transition:none}
+  .bs-card:hover .bs-mark{transform:translate(-50%,-50%) scale(1)}
+  .bs-card:hover .bs-pack{transform:none}
+}
 .bs-foot{display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(17,17,17,.6)}
 .bs-foot svg{width:16px;height:16px;color:#BC813E;flex:none}
 .bs-foot a{color:#111;text-underline-offset:3px}
@@ -155,7 +174,10 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
 .bs-m .bs-what{font-size:11.5px;line-height:142%}
 .bs-m .bs-award{padding:6px 7px;gap:7px;font-size:10px;margin-top:3px}
 .bs-m .bs-award b{font-size:10.5px}
-.bs-m .bs-award i{width:20px;height:20px;font-size:6px}
+.bs-m .bs-award img{width:70px}
+/* 73% van je verkeer heeft geen muis en dus geen hover; daar staat het
+   monogram permanent zacht aan zodat de kaart niet vlakker wordt */
+.bs-m .bs-mark{opacity:.1;transform:translate(-50%,-50%) scale(1)}
 .bs-m .bs-price{gap:6px;margin-top:5px}
 .bs-m .bs-now{font-size:17px}
 .bs-m .bs-was{font-size:11.5px}
@@ -208,9 +230,9 @@ footer p{max-width:none}
 <div class="wrap">
 
 <header class="masthead">
-  <p class="eyebrow">Homepage-redesign · blok 3 van 12 · versie 3</p>
+  <p class="eyebrow">Homepage-redesign · blok 3 van 12 · versie 4</p>
   <h1>Bestsellers</h1>
-  <p class="dek">De bestsellerversie, nu met de Kieskeurig-onderscheiding op de Neustrimmer 4in1 Ultra. Die lost meteen het probleem op dat in versie 2 nog op tafel lag: de zwakste kaart van de rij heeft nu de sterkste reden om te kopen. Ik heb wel de bewoording aangescherpt — zie hieronder.</p>
+  <p class="dek">De badges staan erin en de hover werkt: het monogram komt achter het product vandaan. Om dat mogelijk te maken moesten de packshots wel echt vrijstaand worden — daar zat een fout in mijn eerste poging. Eén ding om te weten voordat je hier veel waarde aan hecht: hover bestaat niet op een telefoon.</p>
   <p class="byline">Ontwerp — nog niets live. Akkoord → dan pas Shopify.</p>
   <div class="progress" aria-hidden="true">
     <i class="done"></i><i class="done"></i><i class="done"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
@@ -259,7 +281,8 @@ footer p{max-width:none}
         <div class="bs-grid">
             <span class="bs-card">
               <span class="bs-shot">
-                <img src="__BEST_LICHAAM__" alt="Groom Guard PRO bodygroomer met foil-opzetstuk">
+                <span class="bs-mark"><img src="__MARK__" alt=""></span>
+                <img class="bs-pack" src="__BEST_LICHAAM__" alt="Groom Guard PRO bodygroomer met foil-opzetstuk">
                 <span class="bs-tag">Best verkocht</span>
               </span>
               <span class="bs-body">
@@ -276,15 +299,16 @@ footer p{max-width:none}
             </span>
             <span class="bs-card">
               <span class="bs-shot">
-                <img src="__BEST_NEUS__" alt="Neustrimmer 4in1 Ultra met vier opzetstukken">
+                <span class="bs-mark"><img src="__MARK__" alt=""></span>
+                <img class="bs-pack" src="__BEST_NEUS__" alt="Neustrimmer 4in1 Ultra met vier opzetstukken">
               </span>
               <span class="bs-body">
                 <p class="bs-zone">Neus &amp; oren</p>
                 <h3 class="bs-name">Neustrimmer 4in1 Ultra™</h3>
                 <p class="bs-what">Neus, oren, wenkbrauwen en contouren in één.</p>
                 <span class="bs-award">
-                  <i>badge</i>
-                  <span><b>Best beoordeeld op Kieskeurig</b>Testpanel 8,5 · juni 2026</span>
+                  <img src="__KKMARK__" alt="Kieskeurig.nl">
+                  <span><b>Best beoordeeld</b>Testpanel 8,5 · juni 2026</span>
                 </span>
                 <span class="bs-price">
                   <span class="bs-now">€32,95</span>
@@ -295,7 +319,8 @@ footer p{max-width:none}
             </span>
             <span class="bs-card">
               <span class="bs-shot">
-                <img src="__BEST_GEZICHT__" alt="The Gentleman Shaver op de oplaadstandaard">
+                <span class="bs-mark"><img src="__MARK__" alt=""></span>
+                <img class="bs-pack" src="__BEST_GEZICHT__" alt="The Gentleman Shaver op de oplaadstandaard">
               </span>
               <span class="bs-body">
                 <p class="bs-zone">Gezicht &amp; baard</p>
@@ -311,7 +336,8 @@ footer p{max-width:none}
             </span>
             <span class="bs-card">
               <span class="bs-shot">
-                <img src="__BEST_HOOFD__" alt="Tondeuse Elegant met LED-display">
+                <span class="bs-mark"><img src="__MARK__" alt=""></span>
+                <img class="bs-pack" src="__BEST_HOOFD__" alt="Tondeuse Elegant met LED-display">
               </span>
               <span class="bs-body">
                 <p class="bs-zone">Hoofd</p>
@@ -349,7 +375,8 @@ footer p{max-width:none}
         <div class="bs-grid">
             <span class="bs-card">
               <span class="bs-shot">
-                <img src="__BEST_LICHAAM__" alt="Groom Guard PRO bodygroomer met foil-opzetstuk">
+                <span class="bs-mark"><img src="__MARK__" alt=""></span>
+                <img class="bs-pack" src="__BEST_LICHAAM__" alt="Groom Guard PRO bodygroomer met foil-opzetstuk">
                 <span class="bs-tag">Best verkocht</span>
               </span>
               <span class="bs-body">
@@ -366,15 +393,16 @@ footer p{max-width:none}
             </span>
             <span class="bs-card">
               <span class="bs-shot">
-                <img src="__BEST_NEUS__" alt="Neustrimmer 4in1 Ultra met vier opzetstukken">
+                <span class="bs-mark"><img src="__MARK__" alt=""></span>
+                <img class="bs-pack" src="__BEST_NEUS__" alt="Neustrimmer 4in1 Ultra met vier opzetstukken">
               </span>
               <span class="bs-body">
                 <p class="bs-zone">Neus &amp; oren</p>
                 <h3 class="bs-name">Neustrimmer 4in1 Ultra™</h3>
                 <p class="bs-what">Neus, oren, wenkbrauwen en contouren in één.</p>
                 <span class="bs-award">
-                  <i>badge</i>
-                  <span><b>Best beoordeeld op Kieskeurig</b>Testpanel 8,5 · juni 2026</span>
+                  <img src="__KKMARK__" alt="Kieskeurig.nl">
+                  <span><b>Best beoordeeld</b>Testpanel 8,5 · juni 2026</span>
                 </span>
                 <span class="bs-price">
                   <span class="bs-now">€32,95</span>
@@ -385,7 +413,8 @@ footer p{max-width:none}
             </span>
             <span class="bs-card">
               <span class="bs-shot">
-                <img src="__BEST_GEZICHT__" alt="The Gentleman Shaver op de oplaadstandaard">
+                <span class="bs-mark"><img src="__MARK__" alt=""></span>
+                <img class="bs-pack" src="__BEST_GEZICHT__" alt="The Gentleman Shaver op de oplaadstandaard">
               </span>
               <span class="bs-body">
                 <p class="bs-zone">Gezicht &amp; baard</p>
@@ -401,7 +430,8 @@ footer p{max-width:none}
             </span>
             <span class="bs-card">
               <span class="bs-shot">
-                <img src="__BEST_HOOFD__" alt="Tondeuse Elegant met LED-display">
+                <span class="bs-mark"><img src="__MARK__" alt=""></span>
+                <img class="bs-pack" src="__BEST_HOOFD__" alt="Tondeuse Elegant met LED-display">
               </span>
               <span class="bs-body">
                 <p class="bs-zone">Hoofd</p>
@@ -438,9 +468,20 @@ footer p{max-width:none}
 </div>
 
 <div class="callout fix">
+  <h3 style="margin-top:0">De hover, en waarom mijn eerste poging niet werkte</h3>
+  <p>Het monogram ligt nu als tweede laag áchter de packshot en komt bij hover naar voren: 0 naar 22% dekking, met een lichte inzoom van het product en een schaalbeweging van het monogram over 620 milliseconden. De kaart wordt tegelijk een tint warmer, de rand goud en het pijltje vult zich. Eén beweging, één timing — dat is wat het cinematisch maakt in plaats van druk.</p>
+  <p><b>Mijn eerste versie liet niets zien, en de reden is het vermelden waard.</b> De packshots waren JPEG's met een dichtgetrokken zandkleurige achtergrond, dus ze bedekten het hele vlak. Een laag eronder is dan per definitie onzichtbaar. De vier beelden zijn nu <b>echt vrijstaand</b> — WebP met een doorzichtige achtergrond, vrijgemaakt met dezelfde vulling vanaf de rand als eerder — zodat het monogram er letterlijk achter doorloopt. Ze werden er ook nog kleiner van: 13 kB per beeld tegenover 20 tot 33 kB als JPEG.</p>
+  <p style="margin-bottom:0"><b>Waar je rekening mee moet houden: hover bestaat niet op een telefoon.</b> 73% van je verkeer heeft geen muis, dus dit effect bereikt ongeveer een kwart van je bezoekers. Daarom staat het los van de inhoud — alles op de kaart is zonder hover volledig leesbaar, er zit geen informatie in verstopt. Op mobiel heb ik het monogram permanent zacht aangezet op 10%, zodat die kaarten niet vlakker worden dan de desktopversie. Wie bewegingsreductie aan heeft staan, krijgt de kleurwissel zonder de beweging.</p>
+</div>
+
+<div class="callout fix">
   <h3 style="margin-top:0">De Kieskeurig-onderscheiding lost het kortingsprobleem op</h3>
   <p>In versie 2 stond op deze kaart "Bespaar €4,00", naast een buurman die "Bespaar €35,70" roept. Dat was het zwakste element van de hele rij, op je op één na best verkopende apparaat. <b>Die pil is nu weg en vervangen door de onderscheiding.</b> De doorgestreepte adviesprijs blijft staan — dat is gewoon waar — maar de reden om te kopen is niet langer een korting die het aflegt tegen de rest.</p>
   <p><b>Dit is de hoogste vorm van bewijs die tot nu toe ergens op de pagina staat.</b> De audit noemde je social proof kritiek: alles wat je toont is je eigen woord over jezelf. Een oordeel van een derde partij, met een naam, een cijfer en een datum erbij, is van een andere orde — het is te controleren. Dat is precies het gat dat hier gedicht wordt.</p>
+  <div style="display:flex;gap:16px;align-items:flex-start;margin:18px 0">
+    <img src="__KKBEST__" alt="Kieskeurig Best Reviewed, 2 keer, juni 2026" style="height:180px;width:auto;display:block">
+    <img src="__KKTEST__" alt="Kieskeurig Testpanel 8,5, juni 2026" style="height:180px;width:auto;display:block">
+  </div>
   <p style="margin-bottom:0"><b>De badges zelf staan bewust niet op de kaart.</b> Op deze breedte zou een badge ongeveer 44 pixels hoog worden, en dan is "BEST REVIEWED · 2 keer · JUN 2026" onleesbaar. Een onleesbare badge is een gekleurd blokje: het suggereert iets, maar het bewijst niets. Op de kaart staat daarom de tekst met de bron erbij; <b>de badges op ware grootte horen op de productpagina</b>, waar ruimte is om ze te lezen en aan te klikken naar de Kieskeurig-vermelding.</p>
 </div>
 
@@ -471,6 +512,8 @@ footer p{max-width:none}
   <li><b>De hele kaart is de link</b>, niet het pijltje. In de mockup zijn het <code>span</code>-elementen; in de bouw wordt het één <code>a</code> per kaart naar de productpagina, met de productnaam als toegankelijke naam.</li>
   <li><b>De vier producten uit een collectie halen, niet vastzetten in de sectie.</b> Maak in Shopify een collectie "Bestsellers homepage" met deze vier erin; dan wissel je ze zonder de code aan te raken. Automatisch sorteren op verkoopaantal is verleidelijk maar niet wat je wilt: dan staan er binnen een maand twee bodygroomers naast elkaar en verlies je de dekking over de zones.</li>
   <li><b>Prijs, adviesprijs en besparing live uit Shopify.</b> Dit blok toont vier prijzen naast elkaar; één die achterloopt is hier meteen zichtbaar.</li>
+  <li><b>Vrijstaande beelden zijn nu een vereiste, geen voorkeur.</b> Zodra er een laag achter de packshot zit, moet die packshot doorzichtig zijn. Een nieuw product met een JPEG op wit breekt het effect meteen — dat is niet zichtbaar in de code, alleen in het beeldbestand.</li>
+  <li><b>De hover hoort bij de kaart, niet bij het pijltje.</b> Zelfde vlak als de link: de hele kaart.</li>
   <li><b>De badgedatum veroudert zichtbaar.</b> Er staat "JUN 2026" op gedrukt en Kieskeurig geeft ze per maand uit. Zet ze zo neer dat vervangen één handeling is — een bestand wisselen, niet de sectie aanpassen — anders staat er over een jaar een badge van vorig jaar.</li>
   <li><b>De 125 in de kop is een momentopname.</b> Laat hem live meelopen over dertig dagen, of haal hem weg. Een getal dat een half jaar stilstaat is erger dan geen getal.</li>
   <li><b>Voorraad checken bij het vullen.</b> Een uitverkocht apparaat op de best gepresenteerde plek van de pagina is duurder dan een lege plek.</li>
@@ -481,7 +524,6 @@ footer p{max-width:none}
 <div class="callout ask">
   <h3 style="margin-top:0">Wat ik van jou nodig heb</h3>
   <ul style="margin-bottom:0">
-    <li><b>De twee badgebestanden.</b> Ik kan een geplakt beeld niet als bestand oppakken, en Kieskeurig blokkeert geautomatiseerde verzoeken met een 403 — net als Trustpilot en Manscaped eerder. Zet ze in Shopify onder Content → Bestanden, of in <code>audits/assets/</code>, dan zet ik ze op de productpagina op ware grootte. Op de kaart staat nu een gestippeld vakje op de plek waar het merkteken hoort.</li>
     <li><b>In welke categorie is hij best beoordeeld?</b> "Best beoordeeld in neustrimmers" is aanzienlijk sterker en geloofwaardiger dan een label dat in de lucht hangt. Dat staat op je Kieskeurig-vermelding.</li>
     <li><b>Hebben andere producten ook badges?</b> Als er meer zijn, horen ze op hun eigen productpagina's én is het genoeg om er in blok 2 iets mee te doen op merkniveau.</li>
     <li><b>De korting op de 4in1 Ultra:</b> klopt de adviesprijs, of kloppen de andere drie niet?</li>
