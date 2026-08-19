@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WELLSHAVE — SENTINEL PRO</title>
+<meta name="description" content="The SENTINEL PRO. A single billet of aerospace titanium, machined to a 0.42 mm blade gap. Five finishes. Built to outlive you.">
+<link rel="preload" href="fonts/anton.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/plexmono-500.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<header class="nav" id="nav">
+  <a href="#top" class="nav__mark">WELL<span>SHAVE</span></a>
+  <nav class="nav__links">
+    <a href="#specs">Engineering</a>
+    <a href="#buy">Configure</a>
+    <a href="#spin">360°</a>
+    <a href="#macro">Materials</a>
+  </nav>
+  <button class="bag" id="bagBtn" aria-label="Bag">
+    Bag <span class="bag__count" id="bagCount" data-count="0">0</span>
+  </button>
+</header>
+
+<!-- ══ HERO — clip 1, scrubbed by scroll ══ -->
+<section class="hero" id="top">
+  <div class="hero__stage">
+    <img class="hero__poster" id="heroPoster" src="assets/gunmetal.jpg" alt="">
+    <video class="hero__video" id="heroVideo"
+           muted playsinline preload="auto" aria-hidden="true">
+      <source src="assets/clip1-hero.mp4" type="video/mp4">
+      <source src="assets/clip1-hero.webm" type="video/webm">
+    </video>
+    <div class="hero__veil"></div>
+    <div class="hero__copy">
+      <div class="hero__eyebrow"><span class="label">WELLSHAVE — Release 001 / Aug 2026</span></div>
+      <h1 class="hero__title">Sentinel<br><em>Pro</em></h1>
+      <div class="hero__foot">
+        <p class="hero__lede">One billet of grade-5 titanium. Forty-one machining passes. A 0.42 mm blade gap held to two microns — so the blade does the work and your face never files a complaint.</p>
+        <div class="hero__scrub">
+          <span class="label">Scroll</span>
+          <span class="hero__track"><i class="hero__fill" id="heroFill"></i></span>
+          <span class="label" id="heroDeg">000°</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SPEC STRIP — counts up on scroll ══ -->
+<section class="specs" id="specs">
+  <div class="specs__grid">
+    <div class="specs__cell">
+      <div class="specs__num"><span class="count" data-to="0.42" data-dec="2">0.00</span><span class="specs__unit">mm</span></div>
+      <div class="specs__cap label">Blade gap</div>
+      <p class="specs__note">Held to ±2 µm across the full arc of the cap.</p>
+    </div>
+    <div class="specs__cell">
+      <div class="specs__num"><span class="count" data-to="41">0</span><span class="specs__unit">passes</span></div>
+      <div class="specs__cap label">CNC operations</div>
+      <p class="specs__note">Nine hours on a five-axis bed. One part, no castings.</p>
+    </div>
+    <div class="specs__cell">
+      <div class="specs__num"><span class="count" data-to="86">0</span><span class="specs__unit">grams</span></div>
+      <div class="specs__cap label">Balanced mass</div>
+      <p class="specs__note">Centre of gravity 4 mm below the head. It steers itself.</p>
+    </div>
+    <div class="specs__cell">
+      <div class="specs__num"><span class="count" data-to="100">0</span><span class="specs__unit">years</span></div>
+      <div class="specs__cap label">Warranty</div>
+      <p class="specs__note">Transferable. We expect to service it, not replace it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ BUY ══ -->
+<section class="buy wrap" id="buy">
+  <div class="buy__grid">
+    <figure class="shot reveal" style="margin:0">
+      <img class="shot__img" id="shotImg" src="assets/gunmetal.jpg" alt="SENTINEL PRO in Gunmetal Titanium">
+      <span class="shot__glow"></span>
+      <figcaption class="shot__tag" id="shotTag">Gunmetal Titanium</figcaption>
+    </figure>
+
+    <div class="panel reveal">
+      <div class="panel__head">
+        <span class="label">Configure — Release 001</span>
+        <h2 class="panel__name" id="prodName">Sentinel Pro<br>Gunmetal Titanium</h2>
+        <div class="panel__price"><span id="prodPrice">€189</span><s id="prodWas">€240</s></div>
+        <p class="panel__desc">Double-edge, closed comb, machined from one piece. Ships with the stitched full-grain sheath and thirty Swedish steel blades.</p>
+      </div>
+
+      <!-- colourway -->
+      <div class="opt">
+        <div class="opt__head">
+          <span class="label">Finish</span>
+          <span class="opt__val" id="finishVal">Gunmetal Titanium</span>
+        </div>
+        <div class="swatches" id="swatches" role="radiogroup" aria-label="Finish"></div>
+      </div>
+
+      <!-- size -->
+      <div class="opt">
+        <div class="opt__head">
+          <span class="label">Handle length</span>
+          <span class="opt__val" id="sizeVal">Not selected</span>
+        </div>
+        <div class="sizes" id="sizes" role="radiogroup" aria-label="Handle length"></div>
+      </div>
+
+      <div class="warn" id="warn" role="status" aria-live="polite">
+        <span id="warnText">Select a handle length first</span>
+      </div>
+
+      <button class="cta" id="addBtn">
+        <span id="addLabel">Add to bag — €189</span>
+        <span class="cta__arrow">→</span>
+      </button>
+
+      <div class="assure">
+        <span>Free carbon-neutral shipping</span>
+        <span>60-night trial</span>
+        <span>100-year warranty</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DRAG-TO-SPIN — 72 frames sliced from clip 2 ══ -->
+<section class="spin" id="spin">
+  <div class="wrap">
+    <div class="spin__head">
+      <div>
+        <span class="label">72 frames — one true revolution</span>
+        <h2 class="spin__title">Turn it<br>over</h2>
+      </div>
+      <p class="hero__lede" style="max-width:34ch">Shot as a locked-off turntable and sliced frame by frame. Drag left or right — you are scrubbing real footage, not a 3D approximation.</p>
+    </div>
+    <div class="spin__stage" id="spinStage">
+      <canvas class="spin__canvas" id="spinCanvas" width="1280" height="720"
+              role="img" aria-label="Drag to rotate the SENTINEL PRO"></canvas>
+      <span class="spin__deg" id="spinDeg">000°</span>
+      <div class="spin__hint" id="spinHint"><i></i> Drag to spin</div>
+      <div class="spin__meter"><i id="spinMeter"></i></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MACRO — clip 3 ══ -->
+<section class="macro" id="macro">
+  <video class="macro__video" id="macroVideo"
+         muted loop playsinline preload="metadata" aria-hidden="true">
+    <source src="assets/clip3-macro.mp4" type="video/mp4">
+    <source src="assets/clip3-macro.webm" type="video/webm">
+  </video>
+  <div class="macro__veil"></div>
+  <div class="macro__copy">
+    <span class="label">Materials — 03</span>
+    <h2 class="macro__title">Close enough<br>to count the<br>stitches</h2>
+    <p class="macro__body">Knurl cut at 0.6 mm pitch for grip in wet hands. Chamfers broken by hand. The sheath is vegetable-tanned full grain, saddle-stitched with waxed linen — the one part of this object that is allowed to age.</p>
+  </div>
+</section>
+
+<!-- ══ DETAIL ══ -->
+<section class="detail wrap">
+  <div class="detail__grid">
+    <article class="detail__cell reveal">
+      <span class="detail__idx">01</span>
+      <h3 class="detail__h">One piece</h3>
+      <p class="detail__p">No welds, no press-fits, no glue. A joint is just a failure with a schedule, so we removed all of them.</p>
+    </article>
+    <article class="detail__cell reveal">
+      <span class="detail__idx">02</span>
+      <h3 class="detail__h">Wet grip</h3>
+      <p class="detail__p">A diamond knurl at 0.6 mm pitch, rolled rather than cut, so it grips soap-slick fingers without shredding them.</p>
+    </article>
+    <article class="detail__cell reveal">
+      <span class="detail__idx">03</span>
+      <h3 class="detail__h">Any blade</h3>
+      <p class="detail__p">Standard double-edge. Ten cents a blade, anywhere on earth, for the next hundred years.</p>
+    </article>
+  </div>
+</section>
+
+<footer class="foot wrap">
+  <div class="foot__grid">
+    <h2 class="foot__mark">WELL<span>SHAVE</span></h2>
+    <div class="foot__meta">
+      <span class="label">Sentinel Pro — Release 001</span>
+      <span class="label">Fictional brand · Concept site</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ══ STICKY BUY BAR ══ -->
+<div class="stickybar" id="stickybar">
+  <div class="stickybar__in">
+    <img class="stickybar__thumb" id="barThumb" src="assets/gunmetal.jpg" alt="">
+    <div class="stickybar__txt">
+      <span class="stickybar__name" id="barName">Sentinel Pro — Gunmetal Titanium</span>
+      <span class="stickybar__sub" id="barSub">No length selected</span>
+    </div>
+    <span class="stickybar__price" id="barPrice">€189</span>
+    <button class="stickybar__cta" id="barBtn">Add to bag</button>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
