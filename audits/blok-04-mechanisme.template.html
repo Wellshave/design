@@ -87,70 +87,144 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
 .stage{display:grid;gap:30px;margin:0 0 10px}
 
 /* ══ MOCKUP — vaste merkkleuren in beide thema's ══ */
-.mc{font-family:"Montserrat",sans-serif;background:#191816;color:#FFFFFF;padding:60px 0}
-.mc-in{max-width:1240px;margin:0 auto;padding:0 40px;display:flex;flex-direction:column;gap:30px;min-width:0}
+.mc{font-family:"Montserrat",sans-serif;background:#0E0D0C;color:#FFFFFF;padding:56px 0 0}
+.mc-in{max-width:1240px;margin:0 auto;padding:0 40px;min-width:0}
 .mc p{max-width:none;margin:0}
-.mc p.mc-note{max-width:46ch}
 
-.mc-top{display:flex;align-items:flex-end;justify-content:space-between;gap:48px}
+.mc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:56px}
 .mc-eyebrow{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
-  color:rgba(255,255,255,.4)}
-.mc-h2{font-size:36px;line-height:118%;font-weight:600;letter-spacing:-.025em;margin:12px 0 0;
-  max-width:24ch;text-wrap:balance}
-.mc-h2 b{display:block;font-weight:600;color:#F5D18A}
-.mc-note{font-size:15px;line-height:158%;color:rgba(255,255,255,.65);flex:none;min-width:0;
-  padding-bottom:4px}
-.mc-note b{color:#fff;font-weight:600}
+  color:#C99A4E}
+.mc-h2{font-size:38px;line-height:116%;font-weight:600;letter-spacing:-.028em;margin:14px 0 0;
+  max-width:16ch;text-wrap:balance}
+.mc-h2 b{display:block;font-weight:600;color:#E8C88A}
+.mc-right{flex:none;max-width:44ch;padding-top:6px}
+.mc-note{font-size:15px;line-height:158%;color:rgba(255,255,255,.62)}
+.mc-flow{display:inline-flex;align-items:center;gap:12px;margin-top:20px;
+  font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#C99A4E}
+.mc-flow svg{width:22px;height:12px;flex:none}
 
-/* de band met upgrades — zelfde techniek als de reviewband in blok 2:
-   de inhoud staat er twee keer in en schuift 50% op, dat geeft een naadloze lus */
-.mc-wrap{position:relative;overflow:hidden;
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);
-  mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
-.mc-track{display:flex;gap:14px;width:max-content;animation:mcslide 68s linear infinite}
-.mc-wrap:hover .mc-track{animation-play-state:paused}
-@keyframes mcslide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+/* de tijdlijn: één rail met een punt per upgrade, chronologisch */
+.mc-rail{position:relative;margin:38px 0 0;padding:0 40px}
+.mc-railline{position:absolute;left:0;right:0;top:23px;height:1px;
+  background:linear-gradient(90deg,rgba(201,154,78,0) 0%,rgba(201,154,78,.45) 6%,
+    rgba(201,154,78,.45) 94%,rgba(201,154,78,0) 100%)}
+.mc-dots{position:relative;display:flex;justify-content:space-between;max-width:1160px;margin:0 auto}
+.mc-dot{display:flex;flex-direction:column;align-items:center;gap:9px;
+  font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.34);white-space:nowrap}
+.mc-dot i{width:9px;height:9px;border-radius:100px;background:#0E0D0C;
+  border:1.5px solid rgba(201,154,78,.5);display:block;flex:none}
+.mc-dot.aan{color:#fff}
+.mc-dot.aan i{background:#E8C88A;border-color:#E8C88A;box-shadow:0 0 0 4px rgba(232,200,138,.16)}
 
-.mc-card{width:296px;flex:none;background:#211F1D;border:1px solid rgba(245,209,138,.14);
-  border-radius:12px;padding:20px 20px 22px;display:flex;flex-direction:column;gap:14px}
-.mc-line{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#C99A4E}
-.mc-pair{display:flex;align-items:center;gap:10px}
-.mc-step{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0}
-.mc-shot{width:100%;aspect-ratio:1/1;position:relative;background:#191816;border-radius:8px;
+/* de kaartenbaan */
+.mc-wrap{position:relative;overflow:hidden;padding:26px 0 0;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
+.mc-track{display:flex;gap:22px;width:max-content;
+  transition:transform .72s cubic-bezier(.22,.61,.36,1)}
+.mc-card{width:358px;flex:none;background:#161514;border:1px solid rgba(255,255,255,.07);
+  border-radius:14px;padding:0 0 22px;display:flex;flex-direction:column;
+  opacity:.34;transition:opacity .6s ease,border-color .6s ease,box-shadow .6s ease,
+    transform .6s cubic-bezier(.22,.61,.36,1);transform:scale(.965)}
+.mc-card.aan{opacity:1;border-color:rgba(232,200,138,.55);transform:scale(1);
+  box-shadow:0 0 0 1px rgba(232,200,138,.12),0 20px 50px -24px rgba(0,0,0,.9)}
+.mc-badge{align-self:center;margin:-11px 0 0;background:linear-gradient(120deg,#F7DCA4,#C99A4E);
+  color:#141414;font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  padding:6px 15px;border-radius:100px;white-space:nowrap}
+/* kaarten zonder badge krijgen dezelfde bovenruimte, anders staat de
+   nieuwste kaart een centimeter hoger dan de rest */
+.mc-card{padding-top:11px}
+.mc-badge{margin-top:-22px}
+.mc-body{padding:20px 24px 0;display:flex;flex-direction:column;gap:13px;flex:1;min-width:0}
+.mc-line{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:#C99A4E}
+.mc-pair{display:flex;align-items:center;gap:12px}
+.mc-step{flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;min-width:0}
+.mc-shot{width:100%;aspect-ratio:1/1;position:relative;background:#0E0D0C;border-radius:9px;
   overflow:hidden}
-.mc-shot > img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:8px;
+.mc-shot > img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:10px;
   display:block}
-.mc-jaar{font-size:10px;font-weight:700;letter-spacing:.12em;color:rgba(255,255,255,.4)}
-.mc-arrow{flex:none;width:24px;height:24px;border-radius:100px;
-  border:1px solid rgba(245,209,138,.32);color:#F5D18A;
-  display:flex;align-items:center;justify-content:center;margin-bottom:16px}
-.mc-arrow svg{width:12px;height:12px}
-.mc-naam{font-size:14px;font-weight:600;letter-spacing:-.015em;line-height:132%;
+.mc-jaar{font-size:10px;font-weight:700;letter-spacing:.12em;color:rgba(255,255,255,.42)}
+.mc-arrowmid{flex:none;color:rgba(232,200,138,.6)}
+.mc-arrowmid svg{width:15px;height:15px;margin-bottom:17px}
+.mc-naam{font-size:18px;font-weight:600;letter-spacing:-.02em;line-height:128%;
   overflow-wrap:anywhere}
-.mc-wat{display:flex;gap:9px;font-size:12.5px;line-height:145%;color:rgba(255,255,255,.72);
-  margin-top:auto;padding-top:13px;border-top:1px solid rgba(255,255,255,.1)}
-.mc-wat i{flex:none;font-style:normal;font-weight:700;color:#C99A4E}
+.mc-datum{font-size:11.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  color:#C99A4E;margin-top:-6px}
+.mc-tag{align-self:flex-start;display:inline-flex;align-items:center;gap:7px;
+  border:1px solid rgba(232,200,138,.4);border-radius:100px;padding:6px 13px;
+  font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#E8C88A}
+.mc-tag svg{width:12px;height:12px}
+.mc-wat{display:flex;gap:10px;font-size:13.5px;line-height:150%;color:rgba(255,255,255,.76);
+  margin-top:auto;padding-top:15px;border-top:1px solid rgba(255,255,255,.09)}
+.mc-wat svg{width:16px;height:16px;flex:none;color:#C99A4E;margin-top:1px}
 
-.mc-bottom{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;
-  border-top:1px solid rgba(255,255,255,.12);padding-top:26px}
-.mc-fact{display:flex;flex-direction:column;gap:7px;min-width:0}
-.mc-fact b{font-size:26px;font-weight:600;letter-spacing:-.03em;line-height:1;color:#F5D18A}
-.mc-fact span{font-size:13.5px;line-height:150%;color:rgba(255,255,255,.66)}
-.mc-fact span em{font-style:normal;color:#fff;font-weight:600}
+/* bediening */
+.mc-ctrl{display:flex;align-items:center;justify-content:center;gap:26px;margin:26px 0 0}
+.mc-nav{width:46px;height:46px;border-radius:100px;border:1px solid rgba(232,200,138,.35);
+  background:transparent;color:#E8C88A;display:flex;align-items:center;justify-content:center;
+  flex:none;cursor:pointer;transition:background-color .3s ease,border-color .3s ease}
+.mc-nav:hover{background:rgba(232,200,138,.12);border-color:rgba(232,200,138,.6)}
+.mc-nav svg{width:17px;height:17px}
+.mc-nav.terug svg{transform:scaleX(-1)}
+.mc-teller{display:flex;flex-direction:column;align-items:center;gap:9px;min-width:230px}
+.mc-teller b{font-size:12px;font-weight:600;letter-spacing:.12em;color:rgba(255,255,255,.62)}
+.mc-teller b em{font-style:normal;color:#fff}
+.mc-bar{width:100%;height:2px;background:rgba(255,255,255,.12);border-radius:2px;overflow:hidden}
+.mc-bar i{display:block;height:100%;background:#E8C88A;border-radius:2px;
+  transition:width .3s linear}
+
+/* cijferrij */
+.mc-bottom{margin-top:46px;border-top:1px solid rgba(255,255,255,.1);background:#0A0908}
+.mc-facts{max-width:1240px;margin:0 auto;padding:30px 40px;
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.mc-fact{display:flex;align-items:center;gap:17px;min-width:0;padding:0 26px}
+.mc-fact + .mc-fact{border-left:1px solid rgba(255,255,255,.1)}
+.mc-fact:first-child{padding-left:0}
+.mc-ico{width:52px;height:52px;border-radius:100px;border:1px solid rgba(232,200,138,.3);
+  display:flex;align-items:center;justify-content:center;flex:none;color:#E8C88A}
+/* de ster heeft geen fill-attribuut, dus zonder deze regel valt hij zwart uit */
+.mc-ico svg{width:23px;height:23px;fill:currentColor}
+/* het tekstblok heeft een eigen klasse: een selector als .mc-fact span pakte
+   ook het icoonvlak en zette dat op display:block, waardoor het icoon uit
+   het midden schoot. Vierde keer dat een te brede selector dit doet. */
+.mc-txt{min-width:0}
+.mc-txt b{display:block;font-size:25px;font-weight:700;letter-spacing:-.03em;line-height:1.1;
+  color:#E8C88A}
+.mc-txt b em{font-style:normal;font-size:17px;font-weight:600;color:#fff}
+.mc-txt > span{display:block;font-size:13.5px;color:rgba(255,255,255,.6);margin-top:3px}
 
 /* mobiel */
-.mc-m{padding:38px 0}
-.mc-m .mc-in{gap:22px;padding:0 18px}
-.mc-m .mc-top{flex-direction:column;align-items:flex-start;gap:14px}
-.mc-m .mc-h2{font-size:26px;max-width:none;margin-top:10px}
-.mc-m p.mc-note{font-size:14px;max-width:none;padding-bottom:0}
-.mc-m .mc-card{width:250px;padding:16px 16px 18px;gap:12px}
-.mc-m .mc-naam{font-size:13px}
-.mc-m .mc-wat{font-size:11.5px;padding-top:11px}
-.mc-m .mc-track{animation-duration:54s;gap:11px}
-.mc-m .mc-bottom{grid-template-columns:1fr;gap:18px;padding-top:22px}
-.mc-m .mc-fact b{font-size:23px}
-.mc-m .mc-fact span{font-size:13px}
+.mc-m{padding:38px 0 0}
+.mc-m .mc-in{padding:0 18px}
+.mc-m .mc-top{flex-direction:column;gap:18px}
+.mc-m .mc-h2{font-size:27px;max-width:none;margin-top:11px}
+.mc-m .mc-right{max-width:none;padding-top:0}
+.mc-m .mc-note{font-size:14px}
+.mc-m .mc-flow{margin-top:15px;font-size:10px;letter-spacing:.12em}
+.mc-m .mc-rail{margin-top:28px;padding:0 16px}
+.mc-m .mc-dot{font-size:9px;letter-spacing:.06em;gap:7px}
+.mc-m .mc-dot i{width:7px;height:7px}
+.mc-m .mc-railline{top:20px}
+.mc-m .mc-wrap{padding-top:20px;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.mc-m .mc-track{gap:14px}
+.mc-m .mc-card{width:284px}
+.mc-m .mc-body{padding:17px 18px 0;gap:11px}
+.mc-m .mc-naam{font-size:16px}
+.mc-m .mc-wat{font-size:12.5px;padding-top:13px}
+.mc-m .mc-ctrl{gap:16px;margin-top:20px}
+.mc-m .mc-nav{width:40px;height:40px}
+.mc-m .mc-teller{min-width:0;flex:1}
+.mc-m .mc-bottom{margin-top:34px}
+.mc-m .mc-facts{grid-template-columns:1fr;padding:22px 18px;gap:18px}
+.mc-m .mc-fact{padding:0}
+.mc-m .mc-fact + .mc-fact{border-left:0;border-top:1px solid rgba(255,255,255,.1);padding-top:18px}
+.mc-m .mc-ico{width:44px;height:44px}
+.mc-m .mc-ico svg{width:20px;height:20px}
+.mc-m .mc-txt b{font-size:22px}
 
 /* ── annotaties ── */
 .anno{background:var(--surface);border:1px solid var(--rule);border-left:2px solid var(--gold-dark-100);
@@ -190,13 +264,14 @@ footer p{max-width:none}
 <symbol id="guarantee" viewBox="0 0 24 24"><circle cx="12" cy="9.6" r="6.4" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8.3 15.1L7 21.6l5-2.4 5 2.4-1.3-6.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
 <symbol id="truck" viewBox="0 0 24 24"><path d="M1.9 6.2h12.2v9.4H1.9zM14.1 9.7h3.9l3.1 3.1v2.8h-7z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="6.6" cy="18" r="1.9" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="17.3" cy="18" r="1.9" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
 <symbol id="chkc" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10.1" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M7.7 12.3l2.9 2.9 5.7-6.1" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M2.8 19.4c0-3.2 2.8-5.2 6.2-5.2s6.2 2 6.2 5.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M16.4 5.2a3.3 3.3 0 0 1 0 6.4M17.6 14.6c2.3.5 3.9 2.2 3.9 4.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
 <symbol id="arw" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </defs></svg><div class="wrap">
 
 <header class="masthead">
-  <p class="eyebrow">Homepage-redesign · blok 4 van 12 · versie 2</p>
+  <p class="eyebrow">Homepage-redesign · blok 4 van 12 · versie 3</p>
   <h1>Het mechanisme</h1>
-  <p class="dek">Je vroeg wat dit blok eigenlijk zegt, en dat was een terechte vraag — versie 1 zei "wij verbeteren onszelf" en dat is een uitspraak over ons. Je keuze om het te behouden en uit te bouwen tot een doorlopende band verandert dat: het gaat nu niet meer over één argument, maar over hoeveel het er zijn.</p>
+  <p class="dek">Jouw ontwerp overgenomen: de tijdlijn, de gefocuste kaart, de bediening en de iconenrij. Twee dingen heb ik gecorrigeerd — de jaartallen in het ontwerp kloppen niet met Shopify, en de band beweegt nu vanzelf in plaats van alleen op klik. Hieronder waarom.</p>
   <p class="byline">Ontwerp — nog niets live. Akkoord → dan pas Shopify.</p>
   <div class="progress" aria-hidden="true">
     <i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
@@ -205,461 +280,382 @@ footer p{max-width:none}
 </header>
 
 <div class="callout fix">
-  <h3 style="margin-top:0">Waarom de band het argument redt</h3>
-  <p>Met twee voorbeelden was dit een bewering met wat bewijs erbij. <b>Met zes wordt het een patroon</b>, en een patroon hoef je niet te geloven — je ziet het gebeuren. Dat is precies waarom de band hier werkt en in blok 2 ook: het volume ís de boodschap. Niemand leest alle zes de kaarten, en dat hoeft ook niet. Wat blijft hangen is "ze blijven hieraan sleutelen".</p>
-  <p><b>De kop is meegedraaid naar wat jij wilde zeggen.</b> Versie 1 opende met "niets is een eerste poging" — een uitspraak over het product. Nu staat er <em>"We zijn nooit klaar met een apparaat. Ook niet als hij goed verkoopt."</em> Dat tweede zinnetje doet het werk: de meeste merken stoppen met verbeteren zodra iets loopt. Daarnaast staat waarom dat bij jullie anders werkt — met z'n zessen alles zelf doen betekent dat feedback bij de ontwerper terechtkomt in plaats van in een postbus.</p>
-  <p style="margin-bottom:0"><b>Zes lijnen, zes echte generatiesprongen</b>, elk met één verandering die letterlijk uit je eigen productteksten komt. Geen prijzen, geen knoppen — dit blok verkoopt nog steeds niets.</p>
+  <h3 style="margin-top:0">Wat je ontwerp beter maakt, en waarom</h3>
+  <p><b>De tijdlijn is de echte vondst.</b> Mijn versie had jaartallen op de kaarten maar geen ruggengraat, dus het bleven losse voorbeelden. Met een rail eronder wordt het een chronologie, en dat is precies wat dit blok moet bewijzen: niet dát we verbeteren, maar dat we het al jaren doen. De rail draagt nu het volume-argument, waardoor de kaarten zelf rustiger mogen zijn.</p>
+  <p><b>"Van klantvraag → productverbetering" hoort erbij.</b> Dat benoemt het mechanisme in vier woorden, iets wat mijn versie aan de lezer overliet. En je herschrijving van de bijtekst is beter dan de mijne: <em>"Elke upgrade begint bij wat jij terugstuurt, mist of beter wilt"</em> gaat over hem, terwijl ik schreef over ons.</p>
+  <p style="margin-bottom:0"><b>De iconenrij onderaan is strakker.</b> "950+ beoordelingen geanalyseerd", "6 mensen — alles in eigen huis", "100 dagen proberen zonder risico". Drie labels in plaats van drie zinnen, met een icoon dat het aanklikbaar-ogende gewicht geeft dat het verdient.</p>
 </div>
 
-<div class="callout fix">
-  <h3 style="margin-top:0">De band gedraagt zich als die in blok 2</h3>
-  <p style="margin-bottom:0">Dezelfde techniek, en dus dezelfde afspraken: hij loopt vanzelf, stopt als je er met de muis overheen gaat zodat je kunt lezen, en bij bewegingsreductie wordt het een gewone scrollbare rij in plaats van een animatie. De inhoud staat er twee keer in en schuift 50% op; dat geeft een naadloze lus. Voeg je een zevende lijn toe, dan hoeft alleen de duur mee te groeien — anders gaat hij sneller lopen.</p>
+<div class="callout ask">
+  <h3 style="margin-top:0">De jaartallen in het ontwerp klopten niet</h3>
+  <p>Dat is geen kritiek op het ontwerp — een visual is een visual — maar het moet wel rechtgezet voordat het gebouwd wordt, want dit blok draait volledig op controleerbaarheid.</p>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>In het ontwerp</th><th>In Shopify</th></tr></thead>
+    <tbody>
+      <tr><td>Sentinel PRO — 2022</td><td>The Sentinel PRO is van <b>augustus 2026</b>; zijn voorganger Head Shaver Deluxe van maart 2023</td></tr>
+      <tr><td>Groom Guard PRO — 2024 → 2026</td><td>Groom Guard van <b>augustus 2022</b>, de PRO van <b>september 2025</b></td></tr>
+      <tr><td>Barber Bro 1.0 — 2024 → 2026</td><td>Tondeuse Deluxe van augustus 2024, Barber Bro 1.0 van <b>augustus 2026</b></td></tr>
+      <tr><td>Flex Guard Blade Trio — JAN 2026</td><td>Het losse mes is van januari 2026, de <b>Trio Pack van juni 2026</b></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p style="margin-bottom:0"><b>Ook "3-in-1 upgrade" op de Trio-kaart heb ik weggelaten.</b> Het is een pak van drie messen, geen 3-in-1 apparaat. Op die kaart staat nu "Op verzoek van klanten", wat wél waar is en bovendien het punt van het hele blok maakt. De tijdlijn loopt nu chronologisch op de datum van de nieuwe versie, van februari 2025 tot augustus 2026.</p>
+</div>
+
+<div class="callout ask">
+  <h3 style="margin-top:0">Eén ding waar ik van je ontwerp afwijk, en waarom</h3>
+  <p>Je ontwerp heeft pijltjes, een teller en een balk — dat is een klikcarrousel. <b>Twee blokken geleden hebben we die er samen uitgehaald</b>, met het cijfer erbij: 1 tot 2% van de bezoekers klikt door naar dia twee. Daarom werd de reviewband in blok 2 een lopende band. En je vorige bericht vroeg zelf om "een automatische carousel, gewoon rustig".</p>
+  <p><b>Hoe ik het heb opgelost:</b> hij schuift vanzelf door, elke 5,5 seconde, en stopt zodra je er met de muis overheen gaat of ergens focus krijgt. De pijltjes, de punten op de tijdlijn en de teller blijven werken voor wie wil sturen. De balk loopt mee met de tijd, zodat zichtbaar is dat hij vanzelf gaat en niet wacht. Bij bewegingsreductie staat hij stil en blijven alleen de pijltjes over.</p>
+  <p style="margin-bottom:0"><b>Wat het je wel kost, en dat moet je weten:</b> in mijn vorige versie waren vier tot vijf upgrades tegelijk leesbaar. Nu is er één scherp en zijn de buren gedimd. Dat leest rustiger en ziet er beter uit — maar iemand die drie seconden kijkt, ziet één upgrade in plaats van vijf. <b>De tijdlijn eronder vangt dat op</b>, want die laat in één blik zien dat het er zes zijn over vier jaar. Dat is precies waarom die rail zo belangrijk is: hij draagt nu het argument dat de kaarten niet meer alleen dragen.</p>
 </div>
 
 <h2>Het ontwerp</h2>
-<p class="sub">Donker, want dit blok hoort tussen twee lichte in en het is het enige blok dat niets verkoopt. De band loopt over de volle breedte van het scherm; de kop en de drie cijfers eronder blijven binnen de contentbreedte.</p>
+<p class="sub">De kop, de tijdlijn en de bediening blijven binnen de contentbreedte; de kaartenbaan loopt over de volle breedte van het scherm. De cijferrij staat op een eigen, nog iets donkerder vlak zodat het blok een voet krijgt.</p>
 
 <div class="stage">
   <div>
     <p class="devicecap">Desktop — 1440px</p>
     <div class="scaler desk-scaler"><div class="inner">
-      <section class="mc"><div class="mc-in">
-
-        <div class="mc-top">
-          <div>
-            <p class="mc-eyebrow">Hoe we bouwen</p>
-            <h2 class="mc-h2">We zijn nooit klaar met een apparaat. <b>Ook niet als hij goed verkoopt.</b></h2>
+      <section class="mc">
+        <div class="mc-in">
+          <div class="mc-top">
+            <div>
+              <p class="mc-eyebrow">Hoe we bouwen</p>
+              <h2 class="mc-h2">We zijn nooit klaar met een apparaat. <b>Ook niet als hij goed verkoopt.</b></h2>
+            </div>
+            <div class="mc-right">
+              <p class="mc-note">Met z'n zessen bouwen, testen en verbeteren we alles zelf. Elke upgrade begint bij wat jij terugstuurt, mist of beter wilt.</p>
+              <p class="mc-flow">Van klantvraag <svg viewBox="0 0 22 12" fill="none"><path d="M0 6h18M14 1.5 19.5 6 14 10.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg> productverbetering</p>
+            </div>
           </div>
-          <p class="mc-note">Met z'n zessen bouwen, verzenden en verbeteren we alles zelf. Wat klanten terugschrijven komt dus rechtstreeks terecht bij wie het apparaat ontwerpt — en dat zie je terug in de volgende versie. <b>Hieronder staat wat er per lijn veranderde.</b></p>
+
+          <div class="mc-rail">
+            <span class="mc-railline"></span>
+            <div class="mc-dots">
+            <span class="mc-dot"><i></i>feb 2025</span>
+            <span class="mc-dot"><i></i>sep 2025</span>
+            <span class="mc-dot"><i></i>jun 2026</span>
+            <span class="mc-dot"><i></i>jun 2026</span>
+            <span class="mc-dot"><i></i>aug 2026</span>
+            <span class="mc-dot"><i></i>aug 2026</span>
+            </div>
+          </div>
         </div>
 
-      </div>
-
-      <div class="mc-wrap" aria-label="Upgrades per productlijn">
-        <div class="mc-track">
-          <div class="mc-card">
-            <p class="mc-line">Bodygroomers</p>
-            <div class="mc-pair">
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_GG__" alt=""></span>
-                <span class="mc-jaar">2022</span>
-              </span>
-              <span class="mc-arrow"><svg><use href="#arw"/></svg></span>
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__BEST_LICHAAM__" alt="Groom Guard™ PRO"></span>
-                <span class="mc-jaar">2025</span>
-              </span>
-            </div>
-            <p class="mc-naam">Groom Guard™ PRO</p>
-            <p class="mc-wat"><i>+</i><span>Foil shaver-kop erbij, die glad afwerkt waar de trimmer stopt</span></p>
-          </div>
-          <div class="mc-card">
-            <p class="mc-line">Neustrimmers</p>
-            <div class="mc-pair">
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_NT__" alt=""></span>
-                <span class="mc-jaar">2023</span>
-              </span>
-              <span class="mc-arrow"><svg><use href="#arw"/></svg></span>
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__BEST_NEUS__" alt="Neustrimmer 4in1 Ultra™"></span>
-                <span class="mc-jaar">2026</span>
-              </span>
-            </div>
-            <p class="mc-naam">Neustrimmer 4in1 Ultra™</p>
-            <p class="mc-wat"><i>+</i><span>Van één functie naar vier: neus, oor, wenkbrauw en scheren</span></p>
-          </div>
-          <div class="mc-card">
-            <p class="mc-line">Baardtrimmers</p>
-            <div class="mc-pair">
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_MSGOLD__" alt=""></span>
-                <span class="mc-jaar">2022</span>
-              </span>
-              <span class="mc-arrow"><svg><use href="#arw"/></svg></span>
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_MSSUPREME__" alt="Men Shaper Supreme™ 6-in-1"></span>
-                <span class="mc-jaar">2025</span>
-              </span>
-            </div>
-            <p class="mc-naam">Men Shaper Supreme™ 6-in-1</p>
-            <p class="mc-wat"><i>+</i><span>Waterdicht, en een display dat toont hoelang hij nog meegaat</span></p>
-          </div>
-          <div class="mc-card">
-            <p class="mc-line">Scheerapparaten</p>
-            <div class="mc-pair">
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_HEADDELUXE__" alt=""></span>
-                <span class="mc-jaar">2023</span>
-              </span>
-              <span class="mc-arrow"><svg><use href="#arw"/></svg></span>
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_SENTINEL__" alt="The Sentinel PRO"></span>
-                <span class="mc-jaar">2026</span>
-              </span>
-            </div>
-            <p class="mc-naam">The Sentinel PRO</p>
-            <p class="mc-wat"><i>+</i><span>Reinigt zichzelf in de meegeleverde Cleaning Pod</span></p>
-          </div>
-          <div class="mc-card">
-            <p class="mc-line">Tondeuses</p>
-            <div class="mc-pair">
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_TONDELUXE__" alt=""></span>
-                <span class="mc-jaar">2024</span>
-              </span>
-              <span class="mc-arrow"><svg><use href="#arw"/></svg></span>
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_BARBERBRO__" alt="Barber Bro 1.0"></span>
-                <span class="mc-jaar">2026</span>
-              </span>
-            </div>
-            <p class="mc-naam">Barber Bro 1.0</p>
-            <p class="mc-wat"><i>+</i><span>Precisietrimmer erbij voor contouren en neklijnen</span></p>
-          </div>
-          <div class="mc-card">
-            <p class="mc-line">Vervangingsmessen</p>
-            <div class="mc-pair">
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_FLEXBLADE__" alt=""></span>
-                <span class="mc-jaar">jan 2026</span>
-              </span>
-              <span class="mc-arrow"><svg><use href="#arw"/></svg></span>
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_FLEXTRIO__" alt="Flex Guard™ Blade Trio"></span>
-                <span class="mc-jaar">jun 2026</span>
-              </span>
-            </div>
-            <p class="mc-naam">Flex Guard™ Blade Trio</p>
-            <p class="mc-wat"><i>+</i><span>Drie in één bestelling, zodat je nooit zonder zit</span></p>
-          </div>
-          <div class="mc-card">
-            <p class="mc-line">Bodygroomers</p>
-            <div class="mc-pair">
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_GG__" alt=""></span>
-                <span class="mc-jaar">2022</span>
-              </span>
-              <span class="mc-arrow"><svg><use href="#arw"/></svg></span>
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__BEST_LICHAAM__" alt="Groom Guard™ PRO"></span>
-                <span class="mc-jaar">2025</span>
-              </span>
-            </div>
-            <p class="mc-naam">Groom Guard™ PRO</p>
-            <p class="mc-wat"><i>+</i><span>Foil shaver-kop erbij, die glad afwerkt waar de trimmer stopt</span></p>
-          </div>
-          <div class="mc-card">
-            <p class="mc-line">Neustrimmers</p>
-            <div class="mc-pair">
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_NT__" alt=""></span>
-                <span class="mc-jaar">2023</span>
-              </span>
-              <span class="mc-arrow"><svg><use href="#arw"/></svg></span>
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__BEST_NEUS__" alt="Neustrimmer 4in1 Ultra™"></span>
-                <span class="mc-jaar">2026</span>
-              </span>
-            </div>
-            <p class="mc-naam">Neustrimmer 4in1 Ultra™</p>
-            <p class="mc-wat"><i>+</i><span>Van één functie naar vier: neus, oor, wenkbrauw en scheren</span></p>
-          </div>
-          <div class="mc-card">
-            <p class="mc-line">Baardtrimmers</p>
-            <div class="mc-pair">
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_MSGOLD__" alt=""></span>
-                <span class="mc-jaar">2022</span>
-              </span>
-              <span class="mc-arrow"><svg><use href="#arw"/></svg></span>
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_MSSUPREME__" alt="Men Shaper Supreme™ 6-in-1"></span>
-                <span class="mc-jaar">2025</span>
-              </span>
-            </div>
-            <p class="mc-naam">Men Shaper Supreme™ 6-in-1</p>
-            <p class="mc-wat"><i>+</i><span>Waterdicht, en een display dat toont hoelang hij nog meegaat</span></p>
-          </div>
-          <div class="mc-card">
-            <p class="mc-line">Scheerapparaten</p>
-            <div class="mc-pair">
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_HEADDELUXE__" alt=""></span>
-                <span class="mc-jaar">2023</span>
-              </span>
-              <span class="mc-arrow"><svg><use href="#arw"/></svg></span>
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_SENTINEL__" alt="The Sentinel PRO"></span>
-                <span class="mc-jaar">2026</span>
-              </span>
-            </div>
-            <p class="mc-naam">The Sentinel PRO</p>
-            <p class="mc-wat"><i>+</i><span>Reinigt zichzelf in de meegeleverde Cleaning Pod</span></p>
-          </div>
-          <div class="mc-card">
-            <p class="mc-line">Tondeuses</p>
-            <div class="mc-pair">
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_TONDELUXE__" alt=""></span>
-                <span class="mc-jaar">2024</span>
-              </span>
-              <span class="mc-arrow"><svg><use href="#arw"/></svg></span>
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_BARBERBRO__" alt="Barber Bro 1.0"></span>
-                <span class="mc-jaar">2026</span>
-              </span>
-            </div>
-            <p class="mc-naam">Barber Bro 1.0</p>
-            <p class="mc-wat"><i>+</i><span>Precisietrimmer erbij voor contouren en neklijnen</span></p>
-          </div>
-          <div class="mc-card">
-            <p class="mc-line">Vervangingsmessen</p>
-            <div class="mc-pair">
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_FLEXBLADE__" alt=""></span>
-                <span class="mc-jaar">jan 2026</span>
-              </span>
-              <span class="mc-arrow"><svg><use href="#arw"/></svg></span>
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_FLEXTRIO__" alt="Flex Guard™ Blade Trio"></span>
-                <span class="mc-jaar">jun 2026</span>
-              </span>
-            </div>
-            <p class="mc-naam">Flex Guard™ Blade Trio</p>
-            <p class="mc-wat"><i>+</i><span>Drie in één bestelling, zodat je nooit zonder zit</span></p>
+        <div class="mc-wrap">
+          <div class="mc-track">
+            <article class="mc-card">
+              <div class="mc-body">
+                <p class="mc-line">Baardtrimmers</p>
+                <div class="mc-pair">
+                  <span class="mc-step">
+                    <span class="mc-shot"><img src="__GEN_MSGOLD__" alt=""></span>
+                    <span class="mc-jaar">2022</span>
+                  </span>
+                  <span class="mc-arrowmid"><svg><use href="#arw"/></svg></span>
+                  <span class="mc-step">
+                    <span class="mc-shot"><img src="__GEN_MSSUPREME__" alt="Men Shaper Supreme™ 6-in-1"></span>
+                    <span class="mc-jaar">feb 2025</span>
+                  </span>
+                </div>
+                <h3 class="mc-naam">Men Shaper Supreme™ 6-in-1</h3>
+                <p class="mc-datum">feb 2025</p>
+                <p class="mc-wat"><svg><use href="#chkc"/></svg><span>Waterdicht, en een display dat toont hoelang hij nog meegaat</span></p>
+              </div>
+            </article>
+            <article class="mc-card">
+              <div class="mc-body">
+                <p class="mc-line">Bodygroomers</p>
+                <div class="mc-pair">
+                  <span class="mc-step">
+                    <span class="mc-shot"><img src="__GEN_GG__" alt=""></span>
+                    <span class="mc-jaar">2022</span>
+                  </span>
+                  <span class="mc-arrowmid"><svg><use href="#arw"/></svg></span>
+                  <span class="mc-step">
+                    <span class="mc-shot"><img src="__BEST_LICHAAM__" alt="Groom Guard™ PRO"></span>
+                    <span class="mc-jaar">sep 2025</span>
+                  </span>
+                </div>
+                <h3 class="mc-naam">Groom Guard™ PRO</h3>
+                <p class="mc-datum">sep 2025</p>
+                <p class="mc-wat"><svg><use href="#chkc"/></svg><span>Foil shaver-kop erbij, die glad afwerkt waar de trimmer stopt</span></p>
+              </div>
+            </article>
+            <article class="mc-card">
+              <div class="mc-body">
+                <p class="mc-line">Neustrimmers</p>
+                <div class="mc-pair">
+                  <span class="mc-step">
+                    <span class="mc-shot"><img src="__GEN_NT__" alt=""></span>
+                    <span class="mc-jaar">2023</span>
+                  </span>
+                  <span class="mc-arrowmid"><svg><use href="#arw"/></svg></span>
+                  <span class="mc-step">
+                    <span class="mc-shot"><img src="__BEST_NEUS__" alt="Neustrimmer 4in1 Ultra™"></span>
+                    <span class="mc-jaar">jun 2026</span>
+                  </span>
+                </div>
+                <h3 class="mc-naam">Neustrimmer 4in1 Ultra™</h3>
+                <p class="mc-datum">jun 2026</p>
+                <p class="mc-wat"><svg><use href="#chkc"/></svg><span>Van één functie naar vier: neus, oor, wenkbrauw en scheren</span></p>
+              </div>
+            </article>
+            <article class="mc-card">
+              <div class="mc-body">
+                <p class="mc-line">Vervangingsmessen</p>
+                <div class="mc-pair">
+                  <span class="mc-step">
+                    <span class="mc-shot"><img src="__GEN_FLEXBLADE__" alt=""></span>
+                    <span class="mc-jaar">jan 2026</span>
+                  </span>
+                  <span class="mc-arrowmid"><svg><use href="#arw"/></svg></span>
+                  <span class="mc-step">
+                    <span class="mc-shot"><img src="__GEN_FLEXTRIO__" alt="Flex Guard™ Blade Trio"></span>
+                    <span class="mc-jaar">jun 2026</span>
+                  </span>
+                </div>
+                <h3 class="mc-naam">Flex Guard™ Blade Trio</h3>
+                <p class="mc-datum">jun 2026</p>
+                <span class="mc-tag"><svg><use href="#chkc"/></svg>Op verzoek van klanten</span>
+                <p class="mc-wat"><svg><use href="#chkc"/></svg><span>Drie in één bestelling, zodat je nooit zonder zit</span></p>
+              </div>
+            </article>
+            <article class="mc-card">
+              <div class="mc-body">
+                <p class="mc-line">Scheerapparaten</p>
+                <div class="mc-pair">
+                  <span class="mc-step">
+                    <span class="mc-shot"><img src="__GEN_HEADDELUXE__" alt=""></span>
+                    <span class="mc-jaar">2023</span>
+                  </span>
+                  <span class="mc-arrowmid"><svg><use href="#arw"/></svg></span>
+                  <span class="mc-step">
+                    <span class="mc-shot"><img src="__GEN_SENTINEL__" alt="The Sentinel PRO"></span>
+                    <span class="mc-jaar">aug 2026</span>
+                  </span>
+                </div>
+                <h3 class="mc-naam">The Sentinel PRO</h3>
+                <p class="mc-datum">aug 2026</p>
+                <p class="mc-wat"><svg><use href="#chkc"/></svg><span>Reinigt zichzelf in de meegeleverde Cleaning Pod</span></p>
+              </div>
+            </article>
+            <article class="mc-card">
+              <span class="mc-badge">Nieuwste upgrade</span>
+              <div class="mc-body">
+                <p class="mc-line">Tondeuses</p>
+                <div class="mc-pair">
+                  <span class="mc-step">
+                    <span class="mc-shot"><img src="__GEN_TONDELUXE__" alt=""></span>
+                    <span class="mc-jaar">2024</span>
+                  </span>
+                  <span class="mc-arrowmid"><svg><use href="#arw"/></svg></span>
+                  <span class="mc-step">
+                    <span class="mc-shot"><img src="__GEN_BARBERBRO__" alt="Barber Bro 1.0"></span>
+                    <span class="mc-jaar">aug 2026</span>
+                  </span>
+                </div>
+                <h3 class="mc-naam">Barber Bro 1.0</h3>
+                <p class="mc-datum">aug 2026</p>
+                <p class="mc-wat"><svg><use href="#chkc"/></svg><span>Precisietrimmer erbij voor contouren en neklijnen</span></p>
+              </div>
+            </article>
           </div>
         </div>
-      </div>
 
-      <div class="mc-in">
-        <div class="mc-bottom">
-          <p class="mc-fact"><b>950+</b><span>beoordelingen waar we de verbeteringen uit halen. <em>Niet uit trends of gimmicks.</em></span></p>
-          <p class="mc-fact"><b>6</b><span>mensen. <em>Verzending, verbeteringen en klantenservice doen we zelf.</em></span></p>
-          <p class="mc-fact"><b>100 dagen</b><span>om te toetsen of we gelijk hebben. <em>Werkt het bij jou niet, dan gaat het terug.</em></span></p>
+        <div class="mc-in">
+          <div class="mc-ctrl">
+            <button class="mc-nav terug" type="button" aria-label="Vorige upgrade"><svg><use href="#arw"/></svg></button>
+            <span class="mc-teller">
+              <b><em>03</em> / 06</b>
+              <span class="mc-bar"><i style="width:0%"></i></span>
+            </span>
+            <button class="mc-nav verder" type="button" aria-label="Volgende upgrade"><svg><use href="#arw"/></svg></button>
+          </div>
         </div>
-      </div></section>
+
+        <div class="mc-bottom"><div class="mc-facts">
+          <p class="mc-fact"><span class="mc-ico"><svg><use href="#star"/></svg></span>
+            <span class="mc-txt"><b>950+</b><span>beoordelingen geanalyseerd</span></span></p>
+          <p class="mc-fact"><span class="mc-ico"><svg><use href="#people"/></svg></span>
+            <span class="mc-txt"><b>6 <em>mensen</em></b><span>alles in eigen huis</span></span></p>
+          <p class="mc-fact"><span class="mc-ico"><svg><use href="#shield"/></svg></span>
+            <span class="mc-txt"><b>100 <em>dagen</em></b><span>proberen zonder risico</span></span></p>
+        </div></div>
+      </section>
     </div></div>
   </div>
   <div class="phonecol">
     <p class="devicecap">Mobiel — 390px · 73% van je verkeer</p>
     <div class="scaler phone-scaler"><div class="inner">
-      <section class="mc mc-m"><div class="mc-in">
-
-        <div class="mc-top">
-          <div>
-            <p class="mc-eyebrow">Hoe we bouwen</p>
-            <h2 class="mc-h2">We zijn nooit klaar met een apparaat. <b>Ook niet als hij goed verkoopt.</b></h2>
+      <section class="mc mc-m">
+        <div class="mc-in">
+          <div class="mc-top">
+            <div>
+              <p class="mc-eyebrow">Hoe we bouwen</p>
+              <h2 class="mc-h2">We zijn nooit klaar met een apparaat. <b>Ook niet als hij goed verkoopt.</b></h2>
+            </div>
+            <div class="mc-right">
+              <p class="mc-note">Met z'n zessen bouwen, testen en verbeteren we alles zelf. Elke upgrade begint bij wat jij terugstuurt, mist of beter wilt.</p>
+              <p class="mc-flow">Van klantvraag <svg viewBox="0 0 22 12" fill="none"><path d="M0 6h18M14 1.5 19.5 6 14 10.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg> productverbetering</p>
+            </div>
           </div>
-          <p class="mc-note">Met z'n zessen bouwen, verzenden en verbeteren we alles zelf. Wat klanten terugschrijven komt dus rechtstreeks terecht bij wie het apparaat ontwerpt — en dat zie je terug in de volgende versie. <b>Hieronder staat wat er per lijn veranderde.</b></p>
+
+          <div class="mc-rail">
+            <span class="mc-railline"></span>
+            <div class="mc-dots">
+            <span class="mc-dot"><i></i>feb 2025</span>
+            <span class="mc-dot"><i></i>sep 2025</span>
+            <span class="mc-dot"><i></i>jun 2026</span>
+            <span class="mc-dot"><i></i>jun 2026</span>
+            <span class="mc-dot"><i></i>aug 2026</span>
+            <span class="mc-dot"><i></i>aug 2026</span>
+            </div>
+          </div>
         </div>
 
-      </div>
-
-      <div class="mc-wrap" aria-label="Upgrades per productlijn">
-        <div class="mc-track">
-          <div class="mc-card">
-            <p class="mc-line">Bodygroomers</p>
-            <div class="mc-pair">
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_GG__" alt=""></span>
-                <span class="mc-jaar">2022</span>
-              </span>
-              <span class="mc-arrow"><svg><use href="#arw"/></svg></span>
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__BEST_LICHAAM__" alt="Groom Guard™ PRO"></span>
-                <span class="mc-jaar">2025</span>
-              </span>
-            </div>
-            <p class="mc-naam">Groom Guard™ PRO</p>
-            <p class="mc-wat"><i>+</i><span>Foil shaver-kop erbij, die glad afwerkt waar de trimmer stopt</span></p>
-          </div>
-          <div class="mc-card">
-            <p class="mc-line">Neustrimmers</p>
-            <div class="mc-pair">
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_NT__" alt=""></span>
-                <span class="mc-jaar">2023</span>
-              </span>
-              <span class="mc-arrow"><svg><use href="#arw"/></svg></span>
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__BEST_NEUS__" alt="Neustrimmer 4in1 Ultra™"></span>
-                <span class="mc-jaar">2026</span>
-              </span>
-            </div>
-            <p class="mc-naam">Neustrimmer 4in1 Ultra™</p>
-            <p class="mc-wat"><i>+</i><span>Van één functie naar vier: neus, oor, wenkbrauw en scheren</span></p>
-          </div>
-          <div class="mc-card">
-            <p class="mc-line">Baardtrimmers</p>
-            <div class="mc-pair">
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_MSGOLD__" alt=""></span>
-                <span class="mc-jaar">2022</span>
-              </span>
-              <span class="mc-arrow"><svg><use href="#arw"/></svg></span>
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_MSSUPREME__" alt="Men Shaper Supreme™ 6-in-1"></span>
-                <span class="mc-jaar">2025</span>
-              </span>
-            </div>
-            <p class="mc-naam">Men Shaper Supreme™ 6-in-1</p>
-            <p class="mc-wat"><i>+</i><span>Waterdicht, en een display dat toont hoelang hij nog meegaat</span></p>
-          </div>
-          <div class="mc-card">
-            <p class="mc-line">Scheerapparaten</p>
-            <div class="mc-pair">
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_HEADDELUXE__" alt=""></span>
-                <span class="mc-jaar">2023</span>
-              </span>
-              <span class="mc-arrow"><svg><use href="#arw"/></svg></span>
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_SENTINEL__" alt="The Sentinel PRO"></span>
-                <span class="mc-jaar">2026</span>
-              </span>
-            </div>
-            <p class="mc-naam">The Sentinel PRO</p>
-            <p class="mc-wat"><i>+</i><span>Reinigt zichzelf in de meegeleverde Cleaning Pod</span></p>
-          </div>
-          <div class="mc-card">
-            <p class="mc-line">Tondeuses</p>
-            <div class="mc-pair">
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_TONDELUXE__" alt=""></span>
-                <span class="mc-jaar">2024</span>
-              </span>
-              <span class="mc-arrow"><svg><use href="#arw"/></svg></span>
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_BARBERBRO__" alt="Barber Bro 1.0"></span>
-                <span class="mc-jaar">2026</span>
-              </span>
-            </div>
-            <p class="mc-naam">Barber Bro 1.0</p>
-            <p class="mc-wat"><i>+</i><span>Precisietrimmer erbij voor contouren en neklijnen</span></p>
-          </div>
-          <div class="mc-card">
-            <p class="mc-line">Vervangingsmessen</p>
-            <div class="mc-pair">
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_FLEXBLADE__" alt=""></span>
-                <span class="mc-jaar">jan 2026</span>
-              </span>
-              <span class="mc-arrow"><svg><use href="#arw"/></svg></span>
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_FLEXTRIO__" alt="Flex Guard™ Blade Trio"></span>
-                <span class="mc-jaar">jun 2026</span>
-              </span>
-            </div>
-            <p class="mc-naam">Flex Guard™ Blade Trio</p>
-            <p class="mc-wat"><i>+</i><span>Drie in één bestelling, zodat je nooit zonder zit</span></p>
-          </div>
-          <div class="mc-card">
-            <p class="mc-line">Bodygroomers</p>
-            <div class="mc-pair">
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_GG__" alt=""></span>
-                <span class="mc-jaar">2022</span>
-              </span>
-              <span class="mc-arrow"><svg><use href="#arw"/></svg></span>
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__BEST_LICHAAM__" alt="Groom Guard™ PRO"></span>
-                <span class="mc-jaar">2025</span>
-              </span>
-            </div>
-            <p class="mc-naam">Groom Guard™ PRO</p>
-            <p class="mc-wat"><i>+</i><span>Foil shaver-kop erbij, die glad afwerkt waar de trimmer stopt</span></p>
-          </div>
-          <div class="mc-card">
-            <p class="mc-line">Neustrimmers</p>
-            <div class="mc-pair">
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_NT__" alt=""></span>
-                <span class="mc-jaar">2023</span>
-              </span>
-              <span class="mc-arrow"><svg><use href="#arw"/></svg></span>
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__BEST_NEUS__" alt="Neustrimmer 4in1 Ultra™"></span>
-                <span class="mc-jaar">2026</span>
-              </span>
-            </div>
-            <p class="mc-naam">Neustrimmer 4in1 Ultra™</p>
-            <p class="mc-wat"><i>+</i><span>Van één functie naar vier: neus, oor, wenkbrauw en scheren</span></p>
-          </div>
-          <div class="mc-card">
-            <p class="mc-line">Baardtrimmers</p>
-            <div class="mc-pair">
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_MSGOLD__" alt=""></span>
-                <span class="mc-jaar">2022</span>
-              </span>
-              <span class="mc-arrow"><svg><use href="#arw"/></svg></span>
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_MSSUPREME__" alt="Men Shaper Supreme™ 6-in-1"></span>
-                <span class="mc-jaar">2025</span>
-              </span>
-            </div>
-            <p class="mc-naam">Men Shaper Supreme™ 6-in-1</p>
-            <p class="mc-wat"><i>+</i><span>Waterdicht, en een display dat toont hoelang hij nog meegaat</span></p>
-          </div>
-          <div class="mc-card">
-            <p class="mc-line">Scheerapparaten</p>
-            <div class="mc-pair">
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_HEADDELUXE__" alt=""></span>
-                <span class="mc-jaar">2023</span>
-              </span>
-              <span class="mc-arrow"><svg><use href="#arw"/></svg></span>
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_SENTINEL__" alt="The Sentinel PRO"></span>
-                <span class="mc-jaar">2026</span>
-              </span>
-            </div>
-            <p class="mc-naam">The Sentinel PRO</p>
-            <p class="mc-wat"><i>+</i><span>Reinigt zichzelf in de meegeleverde Cleaning Pod</span></p>
-          </div>
-          <div class="mc-card">
-            <p class="mc-line">Tondeuses</p>
-            <div class="mc-pair">
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_TONDELUXE__" alt=""></span>
-                <span class="mc-jaar">2024</span>
-              </span>
-              <span class="mc-arrow"><svg><use href="#arw"/></svg></span>
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_BARBERBRO__" alt="Barber Bro 1.0"></span>
-                <span class="mc-jaar">2026</span>
-              </span>
-            </div>
-            <p class="mc-naam">Barber Bro 1.0</p>
-            <p class="mc-wat"><i>+</i><span>Precisietrimmer erbij voor contouren en neklijnen</span></p>
-          </div>
-          <div class="mc-card">
-            <p class="mc-line">Vervangingsmessen</p>
-            <div class="mc-pair">
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_FLEXBLADE__" alt=""></span>
-                <span class="mc-jaar">jan 2026</span>
-              </span>
-              <span class="mc-arrow"><svg><use href="#arw"/></svg></span>
-              <span class="mc-step">
-                <span class="mc-shot"><img src="__GEN_FLEXTRIO__" alt="Flex Guard™ Blade Trio"></span>
-                <span class="mc-jaar">jun 2026</span>
-              </span>
-            </div>
-            <p class="mc-naam">Flex Guard™ Blade Trio</p>
-            <p class="mc-wat"><i>+</i><span>Drie in één bestelling, zodat je nooit zonder zit</span></p>
+        <div class="mc-wrap">
+          <div class="mc-track">
+            <article class="mc-card">
+              <div class="mc-body">
+                <p class="mc-line">Baardtrimmers</p>
+                <div class="mc-pair">
+                  <span class="mc-step">
+                    <span class="mc-shot"><img src="__GEN_MSGOLD__" alt=""></span>
+                    <span class="mc-jaar">2022</span>
+                  </span>
+                  <span class="mc-arrowmid"><svg><use href="#arw"/></svg></span>
+                  <span class="mc-step">
+                    <span class="mc-shot"><img src="__GEN_MSSUPREME__" alt="Men Shaper Supreme™ 6-in-1"></span>
+                    <span class="mc-jaar">feb 2025</span>
+                  </span>
+                </div>
+                <h3 class="mc-naam">Men Shaper Supreme™ 6-in-1</h3>
+                <p class="mc-datum">feb 2025</p>
+                <p class="mc-wat"><svg><use href="#chkc"/></svg><span>Waterdicht, en een display dat toont hoelang hij nog meegaat</span></p>
+              </div>
+            </article>
+            <article class="mc-card">
+              <div class="mc-body">
+                <p class="mc-line">Bodygroomers</p>
+                <div class="mc-pair">
+                  <span class="mc-step">
+                    <span class="mc-shot"><img src="__GEN_GG__" alt=""></span>
+                    <span class="mc-jaar">2022</span>
+                  </span>
+                  <span class="mc-arrowmid"><svg><use href="#arw"/></svg></span>
+                  <span class="mc-step">
+                    <span class="mc-shot"><img src="__BEST_LICHAAM__" alt="Groom Guard™ PRO"></span>
+                    <span class="mc-jaar">sep 2025</span>
+                  </span>
+                </div>
+                <h3 class="mc-naam">Groom Guard™ PRO</h3>
+                <p class="mc-datum">sep 2025</p>
+                <p class="mc-wat"><svg><use href="#chkc"/></svg><span>Foil shaver-kop erbij, die glad afwerkt waar de trimmer stopt</span></p>
+              </div>
+            </article>
+            <article class="mc-card">
+              <div class="mc-body">
+                <p class="mc-line">Neustrimmers</p>
+                <div class="mc-pair">
+                  <span class="mc-step">
+                    <span class="mc-shot"><img src="__GEN_NT__" alt=""></span>
+                    <span class="mc-jaar">2023</span>
+                  </span>
+                  <span class="mc-arrowmid"><svg><use href="#arw"/></svg></span>
+                  <span class="mc-step">
+                    <span class="mc-shot"><img src="__BEST_NEUS__" alt="Neustrimmer 4in1 Ultra™"></span>
+                    <span class="mc-jaar">jun 2026</span>
+                  </span>
+                </div>
+                <h3 class="mc-naam">Neustrimmer 4in1 Ultra™</h3>
+                <p class="mc-datum">jun 2026</p>
+                <p class="mc-wat"><svg><use href="#chkc"/></svg><span>Van één functie naar vier: neus, oor, wenkbrauw en scheren</span></p>
+              </div>
+            </article>
+            <article class="mc-card">
+              <div class="mc-body">
+                <p class="mc-line">Vervangingsmessen</p>
+                <div class="mc-pair">
+                  <span class="mc-step">
+                    <span class="mc-shot"><img src="__GEN_FLEXBLADE__" alt=""></span>
+                    <span class="mc-jaar">jan 2026</span>
+                  </span>
+                  <span class="mc-arrowmid"><svg><use href="#arw"/></svg></span>
+                  <span class="mc-step">
+                    <span class="mc-shot"><img src="__GEN_FLEXTRIO__" alt="Flex Guard™ Blade Trio"></span>
+                    <span class="mc-jaar">jun 2026</span>
+                  </span>
+                </div>
+                <h3 class="mc-naam">Flex Guard™ Blade Trio</h3>
+                <p class="mc-datum">jun 2026</p>
+                <span class="mc-tag"><svg><use href="#chkc"/></svg>Op verzoek van klanten</span>
+                <p class="mc-wat"><svg><use href="#chkc"/></svg><span>Drie in één bestelling, zodat je nooit zonder zit</span></p>
+              </div>
+            </article>
+            <article class="mc-card">
+              <div class="mc-body">
+                <p class="mc-line">Scheerapparaten</p>
+                <div class="mc-pair">
+                  <span class="mc-step">
+                    <span class="mc-shot"><img src="__GEN_HEADDELUXE__" alt=""></span>
+                    <span class="mc-jaar">2023</span>
+                  </span>
+                  <span class="mc-arrowmid"><svg><use href="#arw"/></svg></span>
+                  <span class="mc-step">
+                    <span class="mc-shot"><img src="__GEN_SENTINEL__" alt="The Sentinel PRO"></span>
+                    <span class="mc-jaar">aug 2026</span>
+                  </span>
+                </div>
+                <h3 class="mc-naam">The Sentinel PRO</h3>
+                <p class="mc-datum">aug 2026</p>
+                <p class="mc-wat"><svg><use href="#chkc"/></svg><span>Reinigt zichzelf in de meegeleverde Cleaning Pod</span></p>
+              </div>
+            </article>
+            <article class="mc-card">
+              <span class="mc-badge">Nieuwste upgrade</span>
+              <div class="mc-body">
+                <p class="mc-line">Tondeuses</p>
+                <div class="mc-pair">
+                  <span class="mc-step">
+                    <span class="mc-shot"><img src="__GEN_TONDELUXE__" alt=""></span>
+                    <span class="mc-jaar">2024</span>
+                  </span>
+                  <span class="mc-arrowmid"><svg><use href="#arw"/></svg></span>
+                  <span class="mc-step">
+                    <span class="mc-shot"><img src="__GEN_BARBERBRO__" alt="Barber Bro 1.0"></span>
+                    <span class="mc-jaar">aug 2026</span>
+                  </span>
+                </div>
+                <h3 class="mc-naam">Barber Bro 1.0</h3>
+                <p class="mc-datum">aug 2026</p>
+                <p class="mc-wat"><svg><use href="#chkc"/></svg><span>Precisietrimmer erbij voor contouren en neklijnen</span></p>
+              </div>
+            </article>
           </div>
         </div>
-      </div>
 
-      <div class="mc-in">
-        <div class="mc-bottom">
-          <p class="mc-fact"><b>950+</b><span>beoordelingen waar we de verbeteringen uit halen. <em>Niet uit trends of gimmicks.</em></span></p>
-          <p class="mc-fact"><b>6</b><span>mensen. <em>Verzending, verbeteringen en klantenservice doen we zelf.</em></span></p>
-          <p class="mc-fact"><b>100 dagen</b><span>om te toetsen of we gelijk hebben. <em>Werkt het bij jou niet, dan gaat het terug.</em></span></p>
+        <div class="mc-in">
+          <div class="mc-ctrl">
+            <button class="mc-nav terug" type="button" aria-label="Vorige upgrade"><svg><use href="#arw"/></svg></button>
+            <span class="mc-teller">
+              <b><em>03</em> / 06</b>
+              <span class="mc-bar"><i style="width:0%"></i></span>
+            </span>
+            <button class="mc-nav verder" type="button" aria-label="Volgende upgrade"><svg><use href="#arw"/></svg></button>
+          </div>
         </div>
-      </div></section>
+
+        <div class="mc-bottom"><div class="mc-facts">
+          <p class="mc-fact"><span class="mc-ico"><svg><use href="#star"/></svg></span>
+            <span class="mc-txt"><b>950+</b><span>beoordelingen geanalyseerd</span></span></p>
+          <p class="mc-fact"><span class="mc-ico"><svg><use href="#people"/></svg></span>
+            <span class="mc-txt"><b>6 <em>mensen</em></b><span>alles in eigen huis</span></span></p>
+          <p class="mc-fact"><span class="mc-ico"><svg><use href="#shield"/></svg></span>
+            <span class="mc-txt"><b>100 <em>dagen</em></b><span>proberen zonder risico</span></span></p>
+        </div></div>
+      </section>
     </div></div>
   </div>
 </div>
@@ -715,4 +711,69 @@ document.fonts&&document.fonts.ready.then(fit);
 window.addEventListener('resize',fit);
 new ResizeObserver(fit).observe(document.body);
 window.addEventListener('load',fit); fit();
+</script>
+
+<script>
+/* ══ MOCKUP-SCRIPT ══ */
+// De upgradetijdlijn. Elke .mc krijgt zijn eigen instantie, want desktop en
+// mobiel staan als twee losse mockups op dezelfde pagina.
+document.querySelectorAll('.mc').forEach(function (sec) {
+  var wrap  = sec.querySelector('.mc-wrap');
+  var track = sec.querySelector('.mc-track');
+  var kaart = [].slice.call(sec.querySelectorAll('.mc-card'));
+  var punt  = [].slice.call(sec.querySelectorAll('.mc-dot'));
+  var teller= sec.querySelector('.mc-teller em');
+  var balk  = sec.querySelector('.mc-bar i');
+  if (!track || !kaart.length) return;
+
+  var traag = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var DUUR  = 5500;
+  var i = Math.min(2, kaart.length - 1), start = Date.now(), pauze = false, rest = 0;
+
+  function plaats() {
+    // offsetWidth/offsetLeft zijn opmaakwaarden en dus niet beïnvloed door de
+    // schaal van het mockupkader eromheen; getBoundingClientRect wel
+    var k = kaart[i];
+    var x = wrap.clientWidth / 2 - (k.offsetLeft + k.offsetWidth / 2);
+    track.style.transform = 'translateX(' + Math.round(x) + 'px)';
+    kaart.forEach(function (c, n) { c.classList.toggle('aan', n === i); });
+    punt.forEach(function (p, n) { p.classList.toggle('aan', n === i); });
+    if (teller) teller.textContent = ('0' + (i + 1)).slice(-2);
+  }
+  function ga(n) { i = (n + kaart.length) % kaart.length; start = Date.now(); rest = 0; plaats(); }
+
+  sec.querySelector('.mc-nav.verder').addEventListener('click', function () { ga(i + 1); });
+  sec.querySelector('.mc-nav.terug').addEventListener('click', function () { ga(i - 1); });
+  punt.forEach(function (p, n) {
+    p.setAttribute('role', 'button'); p.tabIndex = 0;
+    p.addEventListener('click', function () { ga(n); });
+    p.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); ga(n); }
+    });
+  });
+
+  // stilstaan zolang iemand kijkt of leest
+  ['mouseenter', 'focusin'].forEach(function (e) {
+    sec.addEventListener(e, function () { if (!pauze) { pauze = true; rest = Date.now() - start; } });
+  });
+  ['mouseleave', 'focusout'].forEach(function (e) {
+    sec.addEventListener(e, function () { if (pauze) { pauze = false; start = Date.now() - rest; } });
+  });
+
+  function tik() {
+    if (!traag && !pauze) {
+      var v = Date.now() - start;
+      if (v >= DUUR) ga(i + 1);
+      else if (balk) balk.style.width = (v / DUUR * 100).toFixed(1) + '%';
+    } else if (balk && pauze) balk.style.width = (rest / DUUR * 100).toFixed(1) + '%';
+    else if (balk && traag) balk.style.width = ((i + 1) / kaart.length * 100).toFixed(1) + '%';
+  }
+  if (!traag) setInterval(tik, 90);
+
+  addEventListener('resize', plaats);
+  if (document.fonts) document.fonts.ready.then(plaats);
+  addEventListener('load', plaats);
+  plaats();
+});
+
 </script>

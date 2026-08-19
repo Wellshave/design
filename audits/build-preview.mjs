@@ -62,6 +62,18 @@ function bakeCopy(markup, source) {
 
 const sprite = element(proof, '<svg width="0" height="0"', 'svg');
 
+// Sommige blokken hebben eigen gedrag nodig — blok 4 heeft een tijdlijn die
+// vanzelf doorschuift. Dat script staat in het blokdocument achter een
+// sentinel; hier wordt het opgehaald zodat de preview zich net zo gedraagt.
+function mockupScript(html) {
+  const sentinel = '/* ══ MOCKUP-SCRIPT ══ */';
+  const s = html.indexOf(sentinel);
+  if (s < 0) return '';
+  const e = html.indexOf('</script>', s);
+  if (e < 0) throw new Error('mockup-script niet afgesloten');
+  return html.slice(s, e);
+}
+
 const blocks = [
   { id: 'blok1', naam: 'Blok 1 — Hero',
     desk: bakeCopy(rename(element(hero, '<div class="ws">', 'div')), hero),
@@ -73,8 +85,8 @@ const blocks = [
     desk: element(best, '<section class="bs"><div class="bs-in">', 'section'),
     mob:  element(best, '<section class="bs bs-m"><div class="bs-in">', 'section') },
   { id: 'blok4', naam: 'Blok 4 — Het mechanisme',
-    desk: element(mech, '<section class="mc"><div class="mc-in">', 'section'),
-    mob:  element(mech, '<section class="mc mc-m"><div class="mc-in">', 'section') },
+    desk: element(mech, '<section class="mc">', 'section'),
+    mob:  element(mech, '<section class="mc mc-m">', 'section') },
 ];
 
 const css = `:root{--bg:#FBFAF9;--surface:#fff;--fg:#1A1A1A;--fg-soft:#6B6560;--rule:#E6E1DC;--gold:#BC813E}
@@ -174,6 +186,9 @@ ${body}
       Shopify. De voorraadstand in het bundelblok is nu een vast getal en moet in de bouw live meelopen.</p>
   </footer>
 </div>
+<script>
+${[hero, proof, best, mech].map(mockupScript).filter(Boolean).join('\n')}
+</script>
 <script>
 function fit(){
   document.querySelectorAll('.scaler').forEach(s=>{
