@@ -11,8 +11,14 @@ const BASE = process.env.SITE_URL || 'http://localhost:5180/';
 const pass = [], fail = [];
 const check = (name, ok, detail = '') => (ok ? pass : fail).push(`${ok ? 'PASS' : 'FAIL'}  ${name}${detail ? ' — ' + detail : ''}`);
 
-const browser = await chromium.launch();
-const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+const launchOpts = {};
+if (process.env.SITE_URL && process.env.HTTPS_PROXY) {
+  // remote targets must egress through this container's proxy
+  launchOpts.proxy = { server: process.env.HTTPS_PROXY };
+  launchOpts.ignoreHTTPSErrors = true;
+}
+const browser = await chromium.launch(launchOpts);
+const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, ignoreHTTPSErrors: true });
 const errors = [];
 page.on('pageerror', e => errors.push(String(e)));
 page.on('console', m => { if (m.type() === 'error') errors.push('console: ' + m.text()); });
