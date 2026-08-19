@@ -1,57 +1,69 @@
-# WELLSHAVE — SENTINEL PRO
+# WELLSHAVE — Flex Guard™ 3-in-1
 
-Cinematic product site for a fictional premium razor brand. No build step, no
-dependencies — open `index.html` through any static server.
+Cinematic product site for the Flex Guard™ 3-in-1 bodygroomer. Dutch copy,
+no build step, no dependencies.
 
     npx http-server site -p 5180 -c-1   # any free port
 
+## Sources
+
+Product data comes from the live PDP
+(`wellshave.com/products/wellshave-flex-guard™`) — name, prices, bundle
+contents, specs, trial and warranty terms are all taken from that page. The
+reference packshot came from the "Flex Guard Content" Drive folder.
+
+Nothing on this page is an invented product claim. Where the PDP gave no
+number, the page says nothing rather than filling the gap.
+
 ## Media provenance
 
-All assets generated through the Higgsfield MCP.
+All generated through the Higgsfield MCP, from one real product photo.
 
 | Asset | Model | Settings |
 |---|---|---|
-| `assets/gunmetal.jpg` (hero) | GPT Image 2 | 16:9, 2k, quality high |
-| `assets/{obsidian,rose,platinum,copper}.jpg` | GPT Image 2 | hero passed as `image` reference so composition, camera and lighting stay identical across finishes |
+| `assets/flexguard.jpg` (hero) | GPT Image 2 | 16:9, 2k, high — real packshot passed as `image` reference |
+| `assets/bundle.jpg` | GPT Image 2 | same, hero passed as reference so lighting and floor match |
 | `assets/clip1-hero.*` | Seedance 2.5 | `omni_reference`, 720p, 16:9, 10 s, `generate_audio: false` |
 | `assets/clip2-turntable.mp4` | Seedance 2.5 | same, 10 s |
 | `assets/clip3-macro.*` | Seedance 2.5 | same, 8 s |
 
-The hero image job id was passed as `start_image` on all three clips, so every
-frame of motion is the same physical object as the stills.
+The hero image job id was passed as `start_image` on all three clips, so the
+motion is the same object as the stills.
 
 ### Post-processing
 
 - `clip1-hero` re-encoded **all-intra** (`keyint=1`) so scroll-scrubbing seeks
   to any frame without waiting on a GOP.
-- Every clip ships as **MP4 (H.264) + WebM (VP9)**. Chromium builds without
-  proprietary codecs fall through to the WebM source.
-- `assets/spin/000–071.jpg` — 72 frames sliced from clip 2. The loop point was
-  measured rather than assumed: frame 240 matched frame 0 with a mean absolute
-  difference of 0.66 (vs 11.32 at mid-rotation), confirming exactly one
-  revolution, so the frames are sampled across source frames 0–239.
+- Every clip ships **MP4 (H.264) + WebM (VP9)**; Chromium builds without
+  proprietary codecs fall through to WebM.
+- `assets/spin/000–071.jpg` — 72 frames sliced from clip 2 at a **measured**
+  loop point: frame 240 matched frame 0 at a mean absolute difference of 0.75,
+  against 5.41 at mid-rotation, confirming exactly one revolution. Frames are
+  sampled across source frames 0–239 so the viewer wraps without a jump.
 
 ## Interaction
 
-- **Hero** — clip 1 scrubbed by scroll position; the scrub completes at 90% of
-  the pinned range so the final macro frame holds while the section unpins.
-- **Spec strip** — counts up once, on first intersection.
-- **Colourway switcher** — five finishes; swaps the hero image, product name,
-  price and the page accent colour (`--accent` on `:root`, inherited by nav,
-  swatch ring, size selection, CTA, sticky bar and spec units).
-- **Size selector** — four handle lengths, two `disabled` and unselectable.
-- **Size guard** — add-to-bag refuses and shows a visible warning until a
-  length is chosen, then increments the nav bag counter.
-- **Sticky buy bar** — slides up once the hero is scrolled past, retracts at the footer.
-- **Drag-to-spin** — 72-frame canvas viewer; auto-spins gently until the first
-  pointer/touch contact, then follows the drag. Arrow keys also work.
+- **Hero** — clip 1 scrubbed by scroll; completes at 90% of the pinned range so
+  the final macro frame holds while the section unpins.
+- **Spec strip** — counts up once on first intersection. All four figures are
+  from the PDP: 7000 tpm, 90 min, 100 dagen, 2 jaar.
+- **Bundle selector** — two real bundles. Swaps the hero image, name, price and
+  the "wat je krijgt" list. Nothing is preselected.
+- **Buy guard** — add-to-bag refuses with a visible warning ("Kies eerst je
+  bundel") until a bundle is chosen, then increments the nav counter.
+- **Sticky buy bar** — slides up past the hero, retracts at the footer.
+- **Drag-to-spin** — 72-frame canvas viewer; auto-spins gently until first
+  pointer/touch contact. Arrow keys work.
+
+The product has one colourway, so the page carries a single brand accent
+(`#FFBE2E`) sampled from the gold emblem and LED display, rather than the
+per-colourway accent swapping of the earlier build.
 
 ## Verification
 
     node verify.mjs                     # defaults to :5180
-    SITE_URL=http://localhost:8080/ node verify.mjs
+    SITE_URL=https://… node verify.mjs  # routes through HTTPS_PROXY if set
 
-32 Playwright assertions covering the drag-spin (frame advance both directions,
-auto-spin start/stop, canvas repaint), the size guard (refusal, warning
-visibility, sold-out unselectability, then success and increment), the
-colourway switcher, count-up, hero scrub and sticky bar.
+30 Playwright assertions covering the drag-spin, the buy guard, the bundle
+switcher (including that the two prices match the live PDP), the count-up,
+the hero scrub and the sticky bar.

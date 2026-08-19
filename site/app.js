@@ -7,68 +7,76 @@ const $  = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const clamp = (v, a, b) => v < a ? a : v > b ? b : v;
 
-/* ---------- catalogue ---------- */
-const FINISHES = [
-  { id:'gunmetal', name:'Gunmetal Titanium', img:'assets/gunmetal.jpg', price:189, was:240, accent:'#FF4A1C', ink:'#0A0A0A', swatch:'linear-gradient(145deg,#8A9096,#4A5055 55%,#6E757B)' },
-  { id:'obsidian', name:'Obsidian PVD',      img:'assets/obsidian.jpg', price:209, was:265, accent:'#3D7BFF', ink:'#04060C', swatch:'linear-gradient(145deg,#3A3D42,#0C0D0F 55%,#26282C)' },
-  { id:'rose',     name:'Rose Titanium',     img:'assets/rose.jpg',     price:219, was:275, accent:'#FF5C8A', ink:'#12040A', swatch:'linear-gradient(145deg,#E8B49E,#B57960 55%,#D79B84)' },
-  { id:'platinum', name:'Platinum Mirror',   img:'assets/platinum.jpg', price:199, was:250, accent:'#00E3C4', ink:'#02120F', swatch:'linear-gradient(145deg,#FFFFFF,#B9BFC6 55%,#E6EAEE)' },
-  { id:'copper',   name:'Burnished Copper',  img:'assets/copper.jpg',   price:229, was:290, accent:'#FFA51F', ink:'#140A00', swatch:'linear-gradient(145deg,#D98B54,#8A4A24 55%,#B96A38)' },
+/* ---------- catalogue — real data from the Flex Guard PDP ---------- */
+const BASE_INCL = [
+  'Trimmer met Skin Safe-mes',
+  'Foil shaver-opzetstuk',
+  'Neus- & oorhaartrimmer',
+  'Opzetkam 1,5 – 4,5 mm',
+  'Sierstandaard',
+  'USB-C oplaadkabel',
 ];
-const SIZES = [
-  { id:'70',  label:'70 mm',  sub:'Travel',   soldOut:false },
-  { id:'85',  label:'85 mm',  sub:'Standard', soldOut:false },
-  { id:'95',  label:'95 mm',  sub:'Long',     soldOut:true  },
-  { id:'110', label:'110 mm', sub:'Barber',   soldOut:true  },
+const BUNDLES = [
+  {
+    id:'solo', name:'Flex Guard™ 3-in-1', short:'Flex Guard™ 3-in-1',
+    note:'De complete 3-in-1 met standaard en alle opzetstukken.',
+    price:'€54,95', was:'€85,65', save:'-36%',
+    img:'assets/flexguard.jpg', incl:BASE_INCL,
+  },
+  {
+    id:'essential', name:'Essential Flex Bundel', short:'Essential Flex Bundel',
+    note:'Alles uit de 3-in-1, plus een extra mes, hard case en toilettas.',
+    price:'€79,95', was:'€133,25', save:'-40%',
+    img:'assets/bundle.jpg',
+    incl:[...BASE_INCL, 'Extra Skin Safe-mes', 'Hard case', 'Toilettas'],
+  },
 ];
 
-const state = { finish: FINISHES[0], size: null, bag: 0 };
-const money = n => '€' + n;
+const state = { bundle: null, bag: 0 };
 
 /* ---------- shared refs ---------- */
-const root      = document.documentElement;
-const warnEl    = $('#warn');
-const warnText  = $('#warnText');
-const addBtn    = $('#addBtn');
-const barBtn    = $('#barBtn');
-const bagCount  = $('#bagCount');
+const warnEl   = $('#warn');
+const warnText = $('#warnText');
+const addBtn   = $('#addBtn');
+const barBtn   = $('#barBtn');
+const bagCount = $('#bagCount');
 
 /* ---------- render ---------- */
-function paintFinish() {
-  const f = state.finish;
-  root.style.setProperty('--accent', f.accent);
-  root.style.setProperty('--accent-ink', f.ink);
+function paintBundle() {
+  const b = state.bundle;
+
+  $$('#bundles .bundle').forEach(el =>
+    el.setAttribute('aria-checked', String(!!b && el.dataset.id === b.id)));
+
+  $('#bundleVal').textContent = b ? b.short : 'Nog niets gekozen';
+  $('#barSub').textContent    = b ? 'Bundel gekozen' : 'Geen bundel gekozen';
+
+  // until a bundle is picked the page shows the base product
+  const shown = b || BUNDLES[0];
 
   const img = $('#shotImg');
-  img.classList.add('is-swapping');
-  setTimeout(() => {
-    img.src = f.img;
-    img.alt = 'SENTINEL PRO in ' + f.name;
-    img.classList.remove('is-swapping');
-  }, 180);
+  if (img.getAttribute('src') !== shown.img) {
+    img.classList.add('is-swapping');
+    setTimeout(() => {
+      img.src = shown.img;
+      img.alt = shown.name;
+      img.classList.remove('is-swapping');
+    }, 180);
+  }
 
-  $('#shotTag').textContent   = f.name;
-  $('#finishVal').textContent = f.name;
-  $('#prodName').innerHTML    = 'Sentinel Pro<br>' + f.name;
-  $('#prodPrice').textContent = money(f.price);
-  $('#prodWas').textContent   = money(f.was);
-  $('#heroPoster').src        = f.img;
-  $('#barThumb').src          = f.img;
-  $('#barName').textContent   = 'Sentinel Pro — ' + f.name;
-  $('#barPrice').textContent  = money(f.price);
-  $('#addLabel').textContent  = 'Add to bag — ' + money(f.price);
+  $('#shotTag').textContent   = shown.name;
+  $('#prodName').innerHTML    = shown.name.replace('™ ', '™<br>').replace('Essential ', 'Essential<br>');
+  $('#prodPrice').textContent = shown.price;
+  $('#prodWas').textContent   = shown.was;
+  $('#heroPoster').src        = shown.img;
+  $('#barThumb').src          = shown.img;
+  $('#barName').textContent   = shown.name;
+  $('#barPrice').textContent  = shown.price;
+  $('#addLabel').textContent  = b ? 'In de mand — ' + b.price : 'In de mand';
 
-  $$('#swatches .swatch').forEach(b =>
-    b.setAttribute('aria-checked', String(b.dataset.id === f.id)));
-}
+  $('#incl').innerHTML = shown.incl.map(i => `<li>${i}</li>`).join('');
 
-function paintSize() {
-  const s = state.size;
-  $('#sizeVal').textContent = s ? s.label + ' · ' + s.sub : 'Not selected';
-  $('#barSub').textContent  = s ? s.label + ' selected'   : 'No length selected';
-  $$('#sizes .size').forEach(b =>
-    b.setAttribute('aria-checked', String(!!s && b.dataset.id === s.id)));
-  if (s) hideWarn();
+  if (b) hideWarn();
 }
 
 function paintBag() {
@@ -80,36 +88,28 @@ function paintBag() {
 }
 
 /* ---------- build controls ---------- */
-$('#swatches').innerHTML = FINISHES.map(f => `
-  <button class="swatch" type="button" role="radio" aria-checked="false"
-          data-id="${f.id}" title="${f.name}" aria-label="${f.name}">
-    <span class="swatch__disc" style="background:${f.swatch}"></span>
+$('#bundles').innerHTML = BUNDLES.map(b => `
+  <button class="bundle" type="button" role="radio" aria-checked="false" data-id="${b.id}">
+    <span class="bundle__save">${b.save}</span>
+    <span class="bundle__tick"></span>
+    <span class="bundle__body">
+      <span class="bundle__name">${b.name}</span>
+      <span class="bundle__note">${b.note}</span>
+    </span>
+    <span class="bundle__cost">
+      <span class="bundle__now">${b.price}</span>
+      <span class="bundle__was">${b.was}</span>
+    </span>
   </button>`).join('');
 
-$('#swatches').addEventListener('click', e => {
-  const btn = e.target.closest('.swatch');
+$('#bundles').addEventListener('click', e => {
+  const btn = e.target.closest('.bundle');
   if (!btn) return;
-  state.finish = FINISHES.find(f => f.id === btn.dataset.id);
-  paintFinish();
+  state.bundle = BUNDLES.find(b => b.id === btn.dataset.id);
+  paintBundle();
 });
 
-$('#sizes').innerHTML = SIZES.map(s => `
-  <button class="size" type="button" role="radio" aria-checked="false"
-          data-id="${s.id}" data-soldout="${s.soldOut}"
-          ${s.soldOut ? 'disabled aria-disabled="true" tabindex="-1"' : ''}>
-    ${s.label}<span class="size__sub">${s.soldOut ? 'Sold out' : s.sub}</span>
-  </button>`).join('');
-
-$('#sizes').addEventListener('click', e => {
-  const btn = e.target.closest('.size');
-  if (!btn) return;
-  const s = SIZES.find(x => x.id === btn.dataset.id);
-  if (!s || s.soldOut) return;           // sold-out sizes are unselectable
-  state.size = s;
-  paintSize();
-});
-
-/* ---------- the size guard ---------- */
+/* ---------- the buy guard ---------- */
 function showWarn(msg) {
   warnText.textContent = msg;
   warnEl.classList.add('is-visible');
@@ -117,8 +117,8 @@ function showWarn(msg) {
 function hideWarn() { warnEl.classList.remove('is-visible'); }
 
 function addToBag(sourceBtn) {
-  if (!state.size) {
-    showWarn('Select a handle length first');
+  if (!state.bundle) {
+    showWarn('Kies eerst je bundel');
     sourceBtn.classList.remove('is-blocked');
     void sourceBtn.offsetWidth;          // restart the refusal animation
     sourceBtn.classList.add('is-blocked');
@@ -368,13 +368,11 @@ barBtn.addEventListener('click', () => {
 })();
 
 /* ---------- boot ---------- */
-paintFinish();
-paintSize();
+paintBundle();
 paintBag();
 
 window.__store = {
-  get finish() { return state.finish.id; },
-  get size()   { return state.size ? state.size.id : null; },
+  get bundle() { return state.bundle ? state.bundle.id : null; },
   get bag()    { return state.bag; },
   get warned() { return warnEl.classList.contains('is-visible'); },
 };

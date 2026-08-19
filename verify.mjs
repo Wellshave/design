@@ -85,36 +85,30 @@ await page.locator('#buy').scrollIntoViewIfNeeded();
 await page.waitForTimeout(600);
 
 check('bag starts empty', await page.evaluate(() => window.__store.bag) === 0);
-check('no size selected initially', await page.evaluate(() => window.__store.size) === null);
+check('no bundle selected initially', await page.evaluate(() => window.__store.bundle) === null);
 
-// add-to-bag with no size → must refuse
+// add-to-bag with no bundle → must refuse
 await page.click('#addBtn');
 await page.waitForTimeout(450);
-check('add-to-bag refuses without a size',
+check('add-to-bag refuses without a bundle',
   await page.evaluate(() => window.__store.bag) === 0,
   `bag = ${await page.evaluate(() => window.__store.bag)}`);
 check('warning is visible', await page.locator('#warn').evaluate(el => el.classList.contains('is-visible')));
 const warnBox = await page.locator('#warn').boundingBox();
 check('warning is actually on screen', !!warnBox && warnBox.height > 4, `height ${warnBox?.height?.toFixed(1)}px`);
-check('warning text reads correctly',
-  (await page.locator('#warnText').textContent()).toLowerCase().includes('length'),
+check('warning text is Dutch and names the bundle',
+  (await page.locator('#warnText').textContent()).toLowerCase().includes('bundel'),
   await page.locator('#warnText').textContent());
 
-// sold-out sizes must be unselectable
-const soldOut = page.locator('.size[data-soldout="true"]');
-check('exactly two sizes are sold out', await soldOut.count() === 2, `${await soldOut.count()} found`);
-check('sold-out sizes are disabled', await soldOut.evaluateAll(els => els.every(e => e.disabled)));
-await soldOut.first().click({ force: true });
-await page.waitForTimeout(200);
-check('clicking a sold-out size selects nothing', await page.evaluate(() => window.__store.size) === null);
+// refusing again must not leak a stray increment
 await page.click('#addBtn');
 await page.waitForTimeout(300);
-check('still refuses after a sold-out click', await page.evaluate(() => window.__store.bag) === 0);
+check('still refuses on a second attempt', await page.evaluate(() => window.__store.bag) === 0);
 
-// select an available size → guard lifts
-await page.locator('.size:not([disabled])').first().click();
+// select a bundle → guard lifts
+await page.locator('.bundle').first().click();
 await page.waitForTimeout(350);
-check('available size selects', await page.evaluate(() => window.__store.size) === '70');
+check('bundle selects', await page.evaluate(() => window.__store.bundle) === 'solo');
 check('warning clears on selection', !(await page.locator('#warn').evaluate(el => el.classList.contains('is-visible'))));
 
 await page.click('#addBtn');
@@ -125,32 +119,35 @@ await page.click('#addBtn');
 await page.waitForTimeout(400);
 check('counter increments again', (await page.locator('#bagCount').textContent()).trim() === '2');
 
-/* ── 3. COLOURWAY SWITCHER ─────────────────────────────── */
-check('five swatches render', await page.locator('.swatch').count() === 5);
+/* ── 3. BUNDLE SWITCHER ────────────────────────────────── */
+check('two bundles render', await page.locator('.bundle').count() === 2);
 const before = await page.evaluate(() => ({
   img: document.querySelector('#shotImg').getAttribute('src'),
   name: document.querySelector('#prodName').textContent,
   price: document.querySelector('#prodPrice').textContent,
-  accent: getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(),
+  incl: document.querySelectorAll('#incl li').length,
 }));
-await page.locator('.swatch[data-id="copper"]').click();
+await page.locator('.bundle[data-id="essential"]').click();
 await page.waitForTimeout(700);
 const after = await page.evaluate(() => ({
   img: document.querySelector('#shotImg').getAttribute('src'),
   name: document.querySelector('#prodName').textContent,
   price: document.querySelector('#prodPrice').textContent,
-  accent: getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(),
+  incl: document.querySelectorAll('#incl li').length,
 }));
-check('swatch swaps hero image', before.img !== after.img, `${before.img} → ${after.img}`);
-check('swatch swaps name', before.name !== after.name, after.name.replace(/\s+/g, ' ').trim());
-check('swatch swaps price', before.price !== after.price, `${before.price} → ${after.price}`);
-check('swatch swaps page accent', before.accent !== after.accent, `${before.accent} → ${after.accent}`);
+check('bundle swaps hero image', before.img !== after.img, `${before.img} → ${after.img}`);
+check('bundle swaps name', before.name !== after.name, after.name.replace(/\s+/g, ' ').trim());
+check('bundle swaps price', before.price !== after.price, `${before.price} → ${after.price}`);
+check('bundle swaps the included list', after.incl > before.incl, `${before.incl} → ${after.incl} items`);
+check('prices match the live PDP',
+  before.price === '€54,95' && after.price === '€79,95',
+  `${before.price} / ${after.price}`);
 
 /* ── 4. SPEC COUNT-UP ──────────────────────────────────── */
 await page.locator('#specs').scrollIntoViewIfNeeded();
 await page.waitForTimeout(2200);
 const nums = await page.locator('.count').allTextContents();
-check('spec strip counted up', nums.join(',') === '0.42,41,86,100', nums.join(' / '));
+check('spec strip counted up', nums.join(',') === '7000,90,100,2', nums.join(' / '));
 
 /* ── 5. HERO SCROLL-SCRUB ──────────────────────────────── */
 await page.evaluate(() => window.scrollTo(0, 0));
