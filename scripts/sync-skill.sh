@@ -33,8 +33,11 @@ else:
 pathlib.Path(doel).write_text(s, encoding="utf-8")
 PY
 
-for f in "$BRON"/references/*.md; do
-  { printf '%s\n' "$KOP"; cat "$f"; } > "$DOEL/references/$(basename "$f")"
+for f in "$BRON"/references/*; do
+  case "$f" in
+    *.md)  { printf '%s\n' "$KOP"; cat "$f"; } > "$DOEL/references/$(basename "$f")" ;;
+    *)     cp "$f" "$DOEL/references/$(basename "$f")" ;;   # o.a. het startbestand, ongewijzigd
+  esac
 done
 
 echo "Gespiegeld naar $DOEL"
