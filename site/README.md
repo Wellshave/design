@@ -3,7 +3,7 @@
 Cinematic product site for a fictional premium razor brand. No build step, no
 dependencies — open `index.html` through any static server.
 
-    npx http-server site -p 4173 -c-1
+    npx http-server site -p 5180 -c-1   # any free port
 
 ## Media provenance
 
@@ -48,7 +48,8 @@ frame of motion is the same physical object as the stills.
 
 ## Verification
 
-    node verify.mjs        # requires a server on :4173
+    node verify.mjs                     # defaults to :5180
+    SITE_URL=http://localhost:8080/ node verify.mjs
 
 32 Playwright assertions covering the drag-spin (frame advance both directions,
 auto-spin start/stop, canvas repaint), the size guard (refusal, warning

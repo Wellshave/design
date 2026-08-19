@@ -7,7 +7,7 @@ catch {
   ({ chromium } = await import(`${root}/playwright/index.mjs`));
 }
 
-const BASE = 'http://localhost:4173/';
+const BASE = process.env.SITE_URL || 'http://localhost:5180/';
 const pass = [], fail = [];
 const check = (name, ok, detail = '') => (ok ? pass : fail).push(`${ok ? 'PASS' : 'FAIL'}  ${name}${detail ? ' — ' + detail : ''}`);
 
