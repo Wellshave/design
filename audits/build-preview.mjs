@@ -34,7 +34,7 @@ function element(html, openTag, tagName) {
 
 const hero = read('blok-01-hero.html');
 const proof = read('blok-02-pijnpunt.html');
-const range = read('blok-03-assortiment.html');
+const best = read('blok-03-bestsellers.html');
 
 // blok 1 en blok 2 delen drie Trustpilot-klassen met verschillende waarden.
 // In de preview staan ze op één pagina, dus krijgt blok 1 een eigen naam.
@@ -68,9 +68,9 @@ const blocks = [
   { id: 'blok2', naam: 'Blok 2 — Autoriteit en bewijs',
     desk: element(proof, '<section class="pf"><div class="pf-in">', 'section'),
     mob:  element(proof, '<section class="pf pf-m"><div class="pf-in">', 'section') },
-  { id: 'blok3', naam: 'Blok 3 — Het assortiment, op zone',
-    desk: element(range, '<section class="az"><div class="az-in">', 'section'),
-    mob:  element(range, '<section class="az az-m"><div class="az-in">', 'section') },
+  { id: 'blok3', naam: 'Blok 3 — Bestsellers',
+    desk: element(best, '<section class="bs"><div class="bs-in">', 'section'),
+    mob:  element(best, '<section class="bs bs-m"><div class="bs-in">', 'section') },
 ];
 
 const css = `:root{--bg:#FBFAF9;--surface:#fff;--fg:#1A1A1A;--fg-soft:#6B6560;--rule:#E6E1DC;--gold:#BC813E}
@@ -128,7 +128,7 @@ ${rename(mockupCss(hero))}
 ${mockupCss(proof)}
 
 /* ── blok 3 ── */
-${mockupCss(range)}`;
+${mockupCss(best)}`;
 
 const body = blocks.map(b => `
   <section class="blok">

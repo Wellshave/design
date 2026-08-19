@@ -10,6 +10,10 @@ const ASSETS = {
   __ZONE_GEZICHT__: ['assets/zone-gezicht.jpg', 'image/jpeg'],
   __ZONE_HOOFD__:   ['assets/zone-hoofd.jpg',   'image/jpeg'],
   __ZONE_NEUS__:    ['assets/zone-neus.jpg',    'image/jpeg'],
+  __BEST_LICHAAM__: ['assets/best-lichaam.jpg', 'image/jpeg'],
+  __BEST_NEUS__:    ['assets/best-neus.jpg',    'image/jpeg'],
+  __BEST_GEZICHT__: ['assets/best-gezicht.jpg', 'image/jpeg'],
+  __BEST_HOOFD__:   ['assets/best-hoofd.jpg',   'image/jpeg'],
 };
 
 const name = process.argv[2];
