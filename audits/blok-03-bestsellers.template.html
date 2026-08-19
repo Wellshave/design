@@ -107,7 +107,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
 .bs-card{position:relative;background:#fff;border-radius:12px;overflow:hidden;min-width:0;
   border:1px solid rgba(17,17,17,.08);display:flex;flex-direction:column}
 .bs-shot{position:relative;aspect-ratio:1/1;background:#F5F1EA;min-width:0;overflow:hidden}
-.bs-shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.bs-shot > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 /* het monogram ligt áchter de packshot en komt op hover naar voren */
 .bs-mark{position:absolute;z-index:0;left:50%;top:50%;width:96%;
   transform:translate(-50%,-50%) scale(1.14);opacity:0;
@@ -123,12 +123,16 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
   color:rgba(17,17,17,.38)}
 .bs-name{font-size:17px;font-weight:600;letter-spacing:-.015em;margin:0}
 .bs-what{font-size:13px;line-height:148%;color:rgba(17,17,17,.6);flex:1}
-/* onderscheiding van een derde partij; staat alleen op de kaart die er een heeft */
-.bs-award{display:flex;align-items:center;gap:9px;background:#F5F1EA;
-  border:1px solid rgba(17,17,17,.09);border-radius:8px;padding:7px 9px;margin-top:4px;
-  font-size:11px;line-height:132%;color:rgba(17,17,17,.65)}
-.bs-award b{display:block;color:#111;font-weight:700;font-size:11.5px}
-.bs-award img{width:84px;height:auto;flex:none;display:block;border-radius:3px}
+/* onderscheiding van een derde partij, als zegel op de foto zelf. Onder de
+   tekst kostte het een regel die er op 390px niet was, en werd het uitgerekt. */
+.bs-seal{position:absolute;z-index:3;top:12px;right:12px;
+  display:flex;flex-direction:column;align-items:flex-start;gap:4px;
+  background:rgba(255,255,255,.94);border:1px solid rgba(17,17,17,.08);
+  border-radius:7px;padding:6px 7px;box-shadow:0 2px 9px -4px rgba(17,17,17,.28);
+  max-width:calc(100% - 24px);min-width:0}
+.bs-seal img{position:static;width:78px;height:auto;object-fit:contain;display:block;border-radius:2px}
+.bs-seal span{font-size:9px;font-weight:700;color:#111;line-height:1.25;
+  letter-spacing:.005em;white-space:nowrap}
 .bs-price{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;margin-top:6px}
 .bs-now{font-size:20px;font-weight:700;letter-spacing:-.025em}
 .bs-was{font-size:13px;color:rgba(17,17,17,.38);text-decoration:line-through}
@@ -172,9 +176,9 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
 .bs-m .bs-body{padding:14px 13px 15px;gap:5px}
 .bs-m .bs-name{font-size:14.5px}
 .bs-m .bs-what{font-size:11.5px;line-height:142%}
-.bs-m .bs-award{padding:6px 7px;gap:7px;font-size:10px;margin-top:3px}
-.bs-m .bs-award b{font-size:10.5px}
-.bs-m .bs-award img{width:70px}
+.bs-m .bs-seal{top:8px;right:8px;padding:5px 6px;gap:3px;border-radius:6px}
+.bs-m .bs-seal img{width:62px}
+.bs-m .bs-seal span{font-size:7.5px}
 /* 73% van je verkeer heeft geen muis en dus geen hover; daar staat het
    monogram permanent zacht aan zodat de kaart niet vlakker wordt */
 .bs-m .bs-mark{opacity:.1;transform:translate(-50%,-50%) scale(1)}
@@ -230,9 +234,9 @@ footer p{max-width:none}
 <div class="wrap">
 
 <header class="masthead">
-  <p class="eyebrow">Homepage-redesign · blok 3 van 12 · versie 4</p>
+  <p class="eyebrow">Homepage-redesign · blok 3 van 12 · versie 5</p>
   <h1>Bestsellers</h1>
-  <p class="dek">De badges staan erin en de hover werkt: het monogram komt achter het product vandaan. Om dat mogelijk te maken moesten de packshots wel echt vrijstaand worden — daar zat een fout in mijn eerste poging. Eén ding om te weten voordat je hier veel waarde aan hecht: hover bestaat niet op een telefoon.</p>
+  <p class="dek">De onderscheiding zit nu als zegel in de foto in plaats van als strook eronder. Je zag terecht dat die strook op mobiel uitgerekt raakte en buiten zijn kader liep — er zaten twee fouten in, allebei van hetzelfde soort, en ik heb de controle uitgebreid zodat ze de volgende keer vóór jou aan de beurt zijn.</p>
   <p class="byline">Ontwerp — nog niets live. Akkoord → dan pas Shopify.</p>
   <div class="progress" aria-hidden="true">
     <i class="done"></i><i class="done"></i><i class="done"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
@@ -301,15 +305,15 @@ footer p{max-width:none}
               <span class="bs-shot">
                 <span class="bs-mark"><img src="__MARK__" alt=""></span>
                 <img class="bs-pack" src="__BEST_NEUS__" alt="Neustrimmer 4in1 Ultra met vier opzetstukken">
+                <span class="bs-seal">
+                  <img src="__KKMARK__" alt="Kieskeurig.nl">
+                  <span>Best beoordeeld · 8,5</span>
+                </span>
               </span>
               <span class="bs-body">
                 <p class="bs-zone">Neus &amp; oren</p>
                 <h3 class="bs-name">Neustrimmer 4in1 Ultra™</h3>
                 <p class="bs-what">Neus, oren, wenkbrauwen en contouren in één.</p>
-                <span class="bs-award">
-                  <img src="__KKMARK__" alt="Kieskeurig.nl">
-                  <span><b>Best beoordeeld</b>Testpanel 8,5 · juni 2026</span>
-                </span>
                 <span class="bs-price">
                   <span class="bs-now">€32,95</span>
                   <span class="bs-was">€36,95</span>
@@ -395,15 +399,15 @@ footer p{max-width:none}
               <span class="bs-shot">
                 <span class="bs-mark"><img src="__MARK__" alt=""></span>
                 <img class="bs-pack" src="__BEST_NEUS__" alt="Neustrimmer 4in1 Ultra met vier opzetstukken">
+                <span class="bs-seal">
+                  <img src="__KKMARK__" alt="Kieskeurig.nl">
+                  <span>Best beoordeeld · 8,5</span>
+                </span>
               </span>
               <span class="bs-body">
                 <p class="bs-zone">Neus &amp; oren</p>
                 <h3 class="bs-name">Neustrimmer 4in1 Ultra™</h3>
                 <p class="bs-what">Neus, oren, wenkbrauwen en contouren in één.</p>
-                <span class="bs-award">
-                  <img src="__KKMARK__" alt="Kieskeurig.nl">
-                  <span><b>Best beoordeeld</b>Testpanel 8,5 · juni 2026</span>
-                </span>
                 <span class="bs-price">
                   <span class="bs-now">€32,95</span>
                   <span class="bs-was">€36,95</span>
@@ -482,7 +486,21 @@ footer p{max-width:none}
     <img src="__KKBEST__" alt="Kieskeurig Best Reviewed, 2 keer, juni 2026" style="height:180px;width:auto;display:block">
     <img src="__KKTEST__" alt="Kieskeurig Testpanel 8,5, juni 2026" style="height:180px;width:auto;display:block">
   </div>
-  <p style="margin-bottom:0"><b>De badges zelf staan bewust niet op de kaart.</b> Op deze breedte zou een badge ongeveer 44 pixels hoog worden, en dan is "BEST REVIEWED · 2 keer · JUN 2026" onleesbaar. Een onleesbare badge is een gekleurd blokje: het suggereert iets, maar het bewijst niets. Op de kaart staat daarom de tekst met de bron erbij; <b>de badges op ware grootte horen op de productpagina</b>, waar ruimte is om ze te lezen en aan te klikken naar de Kieskeurig-vermelding.</p>
+  <p style="margin-bottom:0"><b>De badges op ware grootte horen op de productpagina.</b> Op de kaart zou een volledige badge ongeveer 44 pixels hoog worden, en dan is "BEST REVIEWED · 2 keer · JUN 2026" onleesbaar — een gekleurd blokje dat iets suggereert maar niets bewijst. De kaart draagt daarom een zegel met het woordmerk en de kortste versie van de claim; het volledige bewijsstuk, met datum en de vermelding waar het vandaan komt, staat op de productpagina.</p>
+</div>
+
+<div class="callout fix">
+  <h3 style="margin-top:0">Het zegel zit nu in de foto, en waarom dat beter is</h3>
+  <p>Als strook onder de tekst kostte de onderscheiding een regel die er op 390 pixels niet is. Twee kaarten naast elkaar liepen daardoor uit de pas: de prijs van de ene zakte weg terwijl de buurman al bij de knop was. <b>In de foto kost het geen enkele regel</b>, want daar stond toch lege ruimte in de rechterbovenhoek.</p>
+  <p><b>Wat er op past en wat niet.</b> Het zegel is 108 bij 41 pixels op desktop en 90 bij 34 op mobiel. Daar past het woordmerk in — dat leest, want het is een vorm die mensen herkennen — plus "Best beoordeeld · 8,5". Het woord "Testpanel" en de datum "juni 2026" zijn eraf; die staan op de productpagina bij de volledige badge. Dat is een bewuste inruil: op een tegel van 180 pixels breed wint de kortste ware claim het van de volledige.</p>
+  <p style="margin-bottom:0">Het zegel staat rechtsboven en niet linksboven, waar "Best verkocht" zit. Zo kunnen beide labels op één kaart staan zonder dat ik daar later iets aan hoef te veranderen.</p>
+</div>
+
+<div class="callout fix">
+  <h3 style="margin-top:0">Twee fouten, allebei hetzelfde soort — en wat de controle nu extra doet</h3>
+  <p><b>De eerste zag jij.</b> De tekst in de strook liep buiten zijn kader. Mijn controle vergelijkt het kader van elk element met dat van zijn ouder, en dat kader klopte: het waren de létters die eroverheen schilderden. Een blok kan netjes binnen de lijntjes staan terwijl de tekst erin dat niet doet. De controle meet nu ook <code>scrollWidth</code> tegen <code>clientWidth</code>, wat precies dit vangt.</p>
+  <p><b>De tweede zat er bij mijn eerste poging tot het zegel in.</b> De regel <code>.bs-shot img</code> gold voor élke afbeelding in het fotovlak — bedoeld voor de packshot, maar hij pakte ook het woordmerk in het zegel en rekte dat uit tot het hele vlak. Nu geldt hij alleen voor directe kinderen. <b>Dit is dezelfde fout als het stijllek uit blok 2</b>, waar <code>p{max-width:68ch}</code> uit de documentopmaak de mockup in liep: een te brede selector die iets raakt wat er later bij komt.</p>
+  <p style="margin-bottom:0">En de controle zelf draaide hardgecodeerd op blok 2. Dat betekende dat blok 1 en 3 er nooit doorheen zijn gegaan. <b>Hij loopt nu over alle gebouwde blokken</b>, sluit af met een foutcode zodra er iets is, en de verhoudingscontrole meldt elke afbeelding die meer dan 2% van zijn bronverhouding afwijkt — precies wat een uitgerekt woordmerk is. Blok 1 bleek trouwens vier beelden te hebben die nooit gemeten waren; die zijn schoon.</p>
 </div>
 
 <div class="callout ask">
