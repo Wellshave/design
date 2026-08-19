@@ -6,6 +6,10 @@ const ASSETS = {
   __MARK__:      ['assets/mark.png',            'image/png'],
   __USE__:       ['assets/use-neustrimmer.jpg', 'image/jpeg'],
   __BUNDLEBIG__: ['assets/bundel-dark.jpg',     'image/jpeg'],
+  __ZONE_LICHAAM__: ['assets/zone-lichaam.jpg', 'image/jpeg'],
+  __ZONE_GEZICHT__: ['assets/zone-gezicht.jpg', 'image/jpeg'],
+  __ZONE_HOOFD__:   ['assets/zone-hoofd.jpg',   'image/jpeg'],
+  __ZONE_NEUS__:    ['assets/zone-neus.jpg',    'image/jpeg'],
 };
 
 const name = process.argv[2];

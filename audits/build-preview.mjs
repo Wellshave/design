@@ -34,6 +34,7 @@ function element(html, openTag, tagName) {
 
 const hero = read('blok-01-hero.html');
 const proof = read('blok-02-pijnpunt.html');
+const range = read('blok-03-assortiment.html');
 
 // blok 1 en blok 2 delen drie Trustpilot-klassen met verschillende waarden.
 // In de preview staan ze op één pagina, dus krijgt blok 1 een eigen naam.
@@ -67,6 +68,9 @@ const blocks = [
   { id: 'blok2', naam: 'Blok 2 — Autoriteit en bewijs',
     desk: element(proof, '<section class="pf"><div class="pf-in">', 'section'),
     mob:  element(proof, '<section class="pf pf-m"><div class="pf-in">', 'section') },
+  { id: 'blok3', naam: 'Blok 3 — Het assortiment, op zone',
+    desk: element(range, '<section class="az"><div class="az-in">', 'section'),
+    mob:  element(range, '<section class="az az-m"><div class="az-in">', 'section') },
 ];
 
 const css = `:root{--bg:#FBFAF9;--surface:#fff;--fg:#1A1A1A;--fg-soft:#6B6560;--rule:#E6E1DC;--gold:#BC813E}
@@ -121,7 +125,10 @@ ${rename(mockupCss(hero))}
 .ws.ws-m{min-height:800px}
 
 /* ── blok 2 ── */
-${mockupCss(proof)}`;
+${mockupCss(proof)}
+
+/* ── blok 3 ── */
+${mockupCss(range)}`;
 
 const body = blocks.map(b => `
   <section class="blok">
@@ -148,7 +155,7 @@ ${css}
 ${sprite}
 <div class="shell">
   <div class="lede">
-    <p class="kicker">Homepage-redesign · 2 van 12 blokken</p>
+    <p class="kicker">Homepage-redesign · 3 van 12 blokken</p>
     <h1>De nieuwe blokken, zoals ze op de pagina komen te staan</h1>
     <p class="sub">Beide blokken draaien hier echt: de reviewband loopt, de knoppen reageren, en het
       mobiele beeld is de werkelijke opmaak op 390&nbsp;px — niet een verkleinde desktopversie.
