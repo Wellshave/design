@@ -88,45 +88,87 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
 
 /* ══ MOCKUP — vaste merkkleuren in beide thema's ══ */
 .vp{font-family:"Montserrat",sans-serif;background:#FFFFFF;color:#111111;padding:64px 40px}
-.vp-in{max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:34px;min-width:0}
+.vp-in{max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:36px;min-width:0}
 .vp p{max-width:none;margin:0}
-.vp p.vp-note{max-width:52ch}
+.vp p.vp-note{max-width:46ch}
 
 .vp-top{display:flex;align-items:flex-end;justify-content:space-between;gap:56px}
 .vp-eyebrow{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
   color:rgba(17,17,17,.4)}
 .vp-h2{font-size:35px;line-height:118%;font-weight:600;letter-spacing:-.025em;margin:12px 0 0;
-  max-width:19ch;text-wrap:balance}
-.vp-h2 b{font-weight:600;color:#111}
+  max-width:26ch;text-wrap:balance}
 .vp-note{font-size:15px;line-height:158%;color:rgba(17,17,17,.6);flex:none;padding-bottom:4px}
 
-.vp-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
-.vp-card{background:#F5F1EA;border-radius:13px;padding:26px 24px 26px;
-  display:flex;flex-direction:column;gap:14px;min-width:0}
-.vp-spec{font-size:27px;font-weight:700;letter-spacing:-.03em;line-height:1;color:#BC813E;
-  overflow-wrap:anywhere}
-.vp-spec span{font-size:15px;font-weight:600;letter-spacing:-.01em;color:rgba(188,129,62,.75)}
-.vp-rule{height:1px;background:rgba(17,17,17,.1)}
-.vp-kop{font-size:17px;font-weight:600;letter-spacing:-.018em;line-height:132%;margin:0}
-.vp-uitleg{font-size:13.5px;line-height:155%;color:rgba(17,17,17,.62);margin-top:auto}
-.vp-scope{display:flex;align-items:flex-start;gap:11px;font-size:12.5px;line-height:155%;
-  color:rgba(17,17,17,.5)}
-.vp-scope svg{width:15px;height:15px;flex:none;color:#BC813E;margin-top:2px}
-.vp-scope b{color:rgba(17,17,17,.72);font-weight:600}
+/* links de figuur met de vier zones, rechts wat er in die zone waar is */
+.vp-body{display:grid;grid-template-columns:352px minmax(0,1fr);gap:26px;align-items:stretch}
+.vp-fig{background:#F5F1EA;border-radius:14px;padding:24px;position:relative;
+  display:flex;flex-direction:column;gap:18px;min-width:0}
+.vp-silhouet{position:relative;flex:1;display:flex;align-items:center;justify-content:center;
+  min-height:0}
+.vp-silhouet svg{width:auto;height:100%;max-height:212px;max-width:100%;display:block;overflow:visible}
+.vp-lijn{fill:none;stroke:rgba(17,17,17,.28);stroke-width:2;stroke-linecap:round;
+  stroke-linejoin:round}
+.vp-punt{cursor:pointer}
+.vp-punt:focus{outline:none}
+.vp-punt:focus-visible circle.raak{fill:none;stroke:#111;stroke-width:1.6}
+.vp-punt circle.raak{fill:transparent;stroke:none}
+.vp-punt circle.stip{fill:#FFFFFF;stroke:rgba(188,129,62,.55);stroke-width:2;
+  transition:fill .35s ease,stroke .35s ease,r .35s ease}
+.vp-punt.aan circle.stip{fill:#BC813E;stroke:#BC813E;r:8}
+.vp-punt circle.gloed{fill:none;stroke:#BC813E;stroke-width:1.5;opacity:0;
+  transition:opacity .45s ease,r .45s ease}
+.vp-punt.aan circle.gloed{opacity:.3}
 
-/* mobiel — twee naast twee; vier onder elkaar maakt het blok onnodig lang */
+.vp-keuze{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.vp-tab{font-family:inherit;font-size:12px;font-weight:600;letter-spacing:.02em;
+  border:1px solid rgba(17,17,17,.14);background:#fff;color:rgba(17,17,17,.62);
+  border-radius:100px;padding:8px 14px;cursor:pointer;
+  transition:background-color .3s ease,border-color .3s ease,color .3s ease}
+.vp-tab:hover{border-color:rgba(188,129,62,.5);color:#111}
+.vp-tab.aan{background:#111;border-color:#111;color:#fff}
+
+.vp-panelen{display:flex;min-width:0}
+.vp-paneel{background:#F5F1EA;border-radius:14px;padding:30px 32px;flex:1;
+  display:flex;flex-direction:column;justify-content:center;gap:18px;min-width:0;
+  animation:vp-in .45s ease both}
+.vp-paneel[hidden]{display:none}
+@keyframes vp-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.vp-zone{font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:#BC813E}
+.vp-appnaam{font-size:23px;font-weight:600;letter-spacing:-.022em;margin:0}
+.vp-appnaam span{display:block;font-size:12.5px;font-weight:500;letter-spacing:0;
+  color:rgba(17,17,17,.5);margin-top:5px}
+.vp-punten{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+.vp-punten li{display:flex;gap:13px;font-size:14px;line-height:152%;min-width:0}
+.vp-punten svg{width:18px;height:18px;flex:none;color:#BC813E;margin-top:2px}
+.vp-punten b{font-weight:600;color:#111}
+.vp-punten span{color:rgba(17,17,17,.64)}
+
+.vp-altijd{display:flex;flex-wrap:wrap;align-items:center;gap:10px 26px;
+  border-top:1px solid rgba(17,17,17,.1);padding-top:22px;
+  font-size:13.5px;color:rgba(17,17,17,.62)}
+.vp-altijd b{display:block;font-size:10.5px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:rgba(17,17,17,.4);width:100%}
+.vp-altijd span{display:inline-flex;align-items:center;gap:9px}
+.vp-altijd svg{width:16px;height:16px;flex:none;color:#BC813E}
+.vp-altijd em{font-style:normal;font-weight:600;color:#111}
+
+/* mobiel */
 .vp-m{padding:40px 18px}
 .vp-m .vp-in{gap:24px}
 .vp-m .vp-top{flex-direction:column;align-items:flex-start;gap:14px}
 .vp-m .vp-h2{font-size:26px;max-width:none;margin-top:10px}
 .vp-m p.vp-note{font-size:14px;max-width:none;padding-bottom:0}
-.vp-m .vp-grid{grid-template-columns:1fr 1fr;gap:11px}
-.vp-m .vp-card{padding:18px 16px;gap:11px}
-.vp-m .vp-spec{font-size:22px}
-.vp-m .vp-spec span{font-size:13px}
-.vp-m .vp-kop{font-size:14.5px}
-.vp-m .vp-uitleg{font-size:12px;line-height:150%}
-.vp-m .vp-scope{font-size:11.5px;line-height:150%}
+.vp-m .vp-body{grid-template-columns:1fr;gap:12px}
+.vp-m .vp-fig{flex-direction:row;align-items:center;gap:16px;padding:16px}
+.vp-m .vp-silhouet{flex:none;width:104px}
+.vp-m .vp-silhouet svg{max-height:148px}
+.vp-m .vp-keuze{flex:1;grid-template-columns:1fr;gap:6px}
+.vp-m .vp-tab{text-align:left;font-size:12.5px;padding:9px 13px}
+.vp-m .vp-paneel{padding:20px 18px;gap:15px;justify-content:flex-start}
+.vp-m .vp-appnaam{font-size:19px}
+.vp-m .vp-punten li{font-size:13px;gap:11px}
+.vp-m .vp-altijd{gap:10px 18px;font-size:12.5px;padding-top:18px}
 
 /* ── annotaties ── */
 .anno{background:var(--surface);border:1px solid var(--rule);border-left:2px solid var(--gold-dark-100);
@@ -170,9 +212,9 @@ footer p{max-width:none}
 </defs></svg><div class="wrap">
 
 <header class="masthead">
-  <p class="eyebrow">Homepage-redesign · blok 5 van 12 · versie 1</p>
+  <p class="eyebrow">Homepage-redesign · blok 5 van 12 · versie 2</p>
   <h1>De waardeproposities</h1>
-  <p class="dek">Wat er nu staat — "Ontworpen voor dagelijks gebruik", "Getest op kwaliteit en prestaties", "Premium, maar toegankelijk" — kan elk merk in elke categorie letterlijk overnemen. Vier proposities ervoor in de plaats, elk met een kenmerk dat alleen jij kunt noemen.</p>
+  <p class="dek">Je had gelijk: versie 1 beschreef één product. Drie van de vier kaarten waren Groom Guard-specs met een voetnoot eronder die de reikwijdte moest goedpraten. Dit is dezelfde fout als bij SkinSafe in blok 1, en ik liep er alsnog in. Deze versie draait het om: de belofte staat vast, het bewijs verspringt per zone.</p>
   <p class="byline">Ontwerp — nog niets live. Akkoord → dan pas Shopify.</p>
   <div class="progress" aria-hidden="true">
     <i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
@@ -180,31 +222,28 @@ footer p{max-width:none}
   <p class="progress-cap">Blok 5 in ontwerp · 7 blokken volgen</p>
 </header>
 
-<div class="callout fix">
-  <h3 style="margin-top:0">Waarom de huidige drie niets doen</h3>
-  <p>"Ontworpen voor dagelijks gebruik." "Getest op kwaliteit en prestaties." "Premium, maar toegankelijk." <b>Er zit geen kenmerk in, geen getal en geen mechanisme.</b> Balzac kan ze morgen overnemen, en Brothers in Style ook. Een bezoeker leest ze en weet daarna precies evenveel als ervoor.</p>
-  <p><b>De behandeling is per stuk dezelfde:</b> pak een kenmerk dat je echt hebt, trek het door met "zodat…" tot je bij iets menselijks uitkomt, en zet die opbrengst vooraan. Mensen lezen ongeveer een vijfde van je tekst en scannen de rest, dus elke kop moet in zijn eentje verkopen. "Mag mee onder de douche" verkoopt; "IPX7 waterdicht" is een specificatie.</p>
-  <p style="margin-bottom:0"><b>Daarom staat het getal apart bovenaan de kaart.</b> Wie scant ziet vier ankers — <em>Keramisch · 120 minuten · IPX7 · €9,95</em> — en dat zijn vier dingen die een concurrent niet zomaar overschrijft. Wie doorleest krijgt de opbrengst en pas daarna het mechanisme.</p>
-</div>
-
-<div class="callout fix">
-  <h3 style="margin-top:0">Dit blok heeft bewust geen beeld</h3>
-  <p style="margin-bottom:0">Blok 1 tot en met 4 zijn alle vier beeldzwaar: een hero, een garantiezegel met foto, vier packshots en een tijdlijn met twaalf productbeelden. <b>Een vijfde beeldblok maakt de pagina een catalogus.</b> Dit blok is tekst op wit, met het getal als enige visuele anker — dat geeft de pagina lucht op precies de plek waar iemand na vier blokken toe is aan iets dat in één blik te lezen is. Het is ook het lichtste blok van de vijf: blok 4 eindigt donker, en dit zet daar wit tegenover.</p>
-</div>
-
 <div class="callout ask">
-  <h3 style="margin-top:0">Het voorbeeld uit de audit kan niet zoals het er staat</h3>
-  <p style="margin-bottom:0">De audit stelde als voorbeeldkop voor: <em>"Trim je liezen zonder één sneetje — de messen raken je huid niet"</em>. Dat is geschreven vóór we vaststelden dat je Groom Guard-pagina zegt dat SkinSafe het risico <b>"sterk reduceert"</b>, niet uitsluit. Diezelfde kop zou de claim dus een tandje te hoog zetten. <b>Ik heb er een mechanismebeschrijving van gemaakt in plaats van een uitkomstbelofte:</b> "De messen liggen achter een kam" is natrekbaar en belooft niets wat je niet waar kunt maken. De opbrengst staat in de regel eronder, en die gaat over de beweging die je kunt maken — niet over het resultaat.</p>
+  <h3 style="margin-top:0">Wat er mis was, en waarom het een patroon is</h3>
+  <p><b>Keramische messen, 120 minuten, IPX7 — dat zijn alle drie de Groom Guard.</b> Alleen de vierde, het losse vervangingsmes, gold over het hele assortiment. Ik had een reikwijdteregel eronder gezet om dat op te vangen, maar een voetnoot repareert geen blok dat zich als een specsheet van één apparaat leest.</p>
+  <p style="margin-bottom:0"><b>De oorzaak is een volgordefout.</b> Ik koos eerst kenmerken die goed klonken en probeerde ze daarna af te bakenen. Dat is precies andersom als wat we in blok 1 hadden afgesproken: eerst vaststellen wat over het hele assortiment waar is, en pas daarna de tekst schrijven. Toen ging het over SkinSafe, nu over dit — het is dezelfde fout, twee blokken later.</p>
 </div>
 
-<div class="callout ask">
-  <h3 style="margin-top:0">Een derde productomschrijving bevat geplakte rommel, en deze is riskanter</h3>
-  <p>Bij het ophalen van de specs kwam ik er nog een tegen. De <b>Head Shaver™ 7D Scheerkop</b> bevat de complete interface van ChatGPT: <code>react-scroll-to-bottom--css-bywgj-79elbk</code>, <code>data-testid="conversation-turn-13"</code>, <code>data-message-author-role="assistant"</code>.</p>
-  <p style="margin-bottom:0"><b>Wat deze anders maakt dan de vorige twee:</b> er zit een <code>&lt;form&gt;</code>-element in. Een formulier binnen een formulier is ongeldige HTML, en de browser sluit het buitenste dan vroegtijdig af. Als je thema de productomschrijving binnen het bestelformulier zet, kan dat de winkelwagenknop van díé pagina raken. Ik weet niet of dat hier gebeurt — dat hangt van de volgorde in je thema af — maar het is het nakijken waard, en het staat live. Daarmee zijn het er drie: Men Shaper Gold (bol.com), The Dial Master (ChatGPT) en deze.</p>
+<div class="callout fix">
+  <h3 style="margin-top:0">De omkering: de belofte staat vast, het bewijs verspringt</h3>
+  <p>De kop is nu wat wél over alles waar is: <b>"Elk apparaat is gemaakt voor één plek."</b> Dat is geen kenmerk maar een ontwerpprincipe, en het klopt van je bodygroomers tot je neustrimmers. Daaronder kies je een zone, en pas dán zie je specificaties — die van dát apparaat, met de naam erbij.</p>
+  <p><b>Zo hoeft geen enkele claim meer afgezwakt te worden.</b> "6.600 toeren en een LED-licht" staat onder Lichaam, waar het waar is. "7.000 toeren en SafeShave-mesjes" staat onder Neus &amp; oren. Niemand hoeft een voetnoot te lezen om te weten waar iets voor geldt, want de zone staat erboven.</p>
+  <p style="margin-bottom:0"><b>Wat over álles waar is, staat apart onderaan:</b> het mes of opzetstuk is los te vervangen vanaf €9,95, en 100 dagen proberen met twee jaar garantie. Twee regels, en ze gelden zonder uitzondering.</p>
+</div>
+
+<div class="callout fix">
+  <h3 style="margin-top:0">Het dynamische deel, en waarom een figuur en geen tabbladen</h3>
+  <p>Je merkte terecht op dat blok 5 het enige stilstaande blok was. Blok 2 heeft een lopende reviewband, blok 3 een hover die het monogram achter het product vandaan haalt, blok 4 een tijdlijn die doorschuift — en blok 5 was vier kaarten die niets doen.</p>
+  <p><b>Nu klik je op het lichaam zelf.</b> Vier punten op een profiel: kruin, neus, kaaklijn en borst. Dat is geen versiering — het zegt in één beeld wat de kop beweert, namelijk dat er per plek iets anders nodig is. Tabbladen hadden hetzelfde gedaan en niets betekend.</p>
+  <p style="margin-bottom:0"><b>Hij loopt vanzelf rond, tot jij iets kiest.</b> Elke zes seconden schuift hij een zone op, zodat iemand die niets doet toch alle vier ziet. Maar zodra je zelf een zone aanklikt, stopt dat definitief — dit is een keuzeblok, en iets dat onder je handen wegschuift terwijl je leest is hinderlijk in plaats van levendig. Bij bewegingsreductie staat hij van begin af aan stil. De punten zijn met de tab-toets te bereiken en met Enter te bedienen, en de tekstknoppen eronder doen hetzelfde voor wie liever leest dan mikt.</p>
 </div>
 
 <h2>Het ontwerp</h2>
-<p class="sub">Vier kaarten op een rij. Op mobiel twee naast twee, want vier onder elkaar maakt het blok onnodig lang voor vier korte teksten.</p>
+<p class="sub">Links de figuur met de vier zones, rechts wat er in die zone waar is. Op mobiel staat de figuur naast de knoppen en het paneel eronder.</p>
 
 <div class="stage">
   <div>
@@ -215,39 +254,80 @@ footer p{max-width:none}
         <div class="vp-top">
           <div>
             <p class="vp-eyebrow">Waarom dit anders werkt</p>
-            <h2 class="vp-h2">Vier dingen die je pas merkt als je hem vasthoudt.</h2>
+            <h2 class="vp-h2">Elk apparaat is gemaakt voor één plek. Kies er een.</h2>
           </div>
-          <p class="vp-note">Niet wat er op de doos staat, maar wat erin zit en wat je eraan hebt. Wat er precies op jouw apparaat zit, staat op de productpagina.</p>
+          <p class="vp-note">Wat een bodygroomer moet kunnen is iets anders dan wat een neustrimmer moet kunnen. Daarom staat hieronder per zone wat er dáár waar is — met het apparaat erbij waar het vandaan komt.</p>
         </div>
 
-        <div class="vp-grid">
-            <div class="vp-card">
-              <p class="vp-spec">Keramisch</p>
-              <span class="vp-rule"></span>
-              <h3 class="vp-kop">De messen liggen achter een kam</h3>
-              <p class="vp-uitleg">Daarom kun je op je schaamstreek dezelfde beweging maken als op je arm.</p>
+        <div class="vp-body">
+          <div class="vp-fig">
+            <div class="vp-silhouet"><svg viewBox="0 0 200 252" role="img" aria-label="Zones op het lichaam">
+                <ellipse class="vp-lijn" cx="100" cy="58" rx="34" ry="42"/>
+                <path class="vp-lijn" d="M66 54 C59 51 58 64 65 66" opacity=".6"/>
+                <path class="vp-lijn" d="M134 54 C141 51 142 64 135 66" opacity=".6"/>
+                <path class="vp-lijn" d="M88 98 L88 118 M112 98 L112 118" opacity=".5"/>
+                <path class="vp-lijn" d="M88 116 C68 121 54 130 50 146 L44 222 C43 231 48 237 57 237
+                  L143 237 C152 237 157 231 156 222 L150 146 C146 130 132 121 112 116"/>
+                <path class="vp-lijn" d="M52 144 C40 154 34 180 33 216" opacity=".55"/>
+                <path class="vp-lijn" d="M148 144 C160 154 166 180 167 216" opacity=".55"/>
+                <g class="vp-punt aan" data-zone="lichaam" role="button" tabindex="0" aria-label="Zone lichaam"><circle class="gloed" cx="100" cy="172" r="14"/><circle class="stip" cx="100" cy="172" r="6.5"/><circle class="raak" cx="100" cy="172" r="20"/></g>
+                <g class="vp-punt" data-zone="gezicht" role="button" tabindex="0" aria-label="Zone gezicht en baard"><circle class="gloed" cx="100" cy="90" r="12"/><circle class="stip" cx="100" cy="90" r="6.5"/><circle class="raak" cx="100" cy="90" r="16"/></g>
+                <g class="vp-punt" data-zone="hoofd" role="button" tabindex="0" aria-label="Zone hoofd"><circle class="gloed" cx="100" cy="22" r="12"/><circle class="stip" cx="100" cy="22" r="6.5"/><circle class="raak" cx="100" cy="22" r="16"/></g>
+                <g class="vp-punt" data-zone="neus" role="button" tabindex="0" aria-label="Zone neus en oren"><circle class="gloed" cx="100" cy="58" r="12"/><circle class="stip" cx="100" cy="58" r="6.5"/><circle class="raak" cx="100" cy="58" r="16"/></g>
+              </svg>
             </div>
-            <div class="vp-card">
-              <p class="vp-spec">120<span> minuten</span></p>
-              <span class="vp-rule"></span>
-              <h3 class="vp-kop">Je ziet hoeveel er nog in zit</h3>
-              <p class="vp-uitleg">Een display met de resterende tijd, en opladen gaat via USB-C.</p>
+            <div class="vp-keuze">
+              <button class="vp-tab aan" type="button" data-zone="lichaam">Lichaam</button>
+              <button class="vp-tab" type="button" data-zone="gezicht">Gezicht &amp; baard</button>
+              <button class="vp-tab" type="button" data-zone="hoofd">Hoofd</button>
+              <button class="vp-tab" type="button" data-zone="neus">Neus &amp; oren</button>
             </div>
-            <div class="vp-card">
-              <p class="vp-spec">IPX7</p>
-              <span class="vp-rule"></span>
-              <h3 class="vp-kop">Mag mee onder de douche</h3>
-              <p class="vp-uitleg">Niet spatdicht maar echt waterdicht: nat scheren, en daarna schoonspoelen onder de kraan.</p>
-            </div>
-            <div class="vp-card">
-              <p class="vp-spec"><span>vanaf </span>€9,95</p>
-              <span class="vp-rule"></span>
-              <h3 class="vp-kop">Bot mes? Dan koop je een mes</h3>
-              <p class="vp-uitleg">Elk opzetstuk en elk mes is los te bestellen. Het apparaat zelf blijft.</p>
-            </div>
+          </div>
+          <div class="vp-panelen">
+          <div class="vp-paneel" data-zone="lichaam">
+            <p class="vp-zone">Lichaam</p>
+            <h3 class="vp-appnaam">Groom Guard™ PRO<span>Wat er in deze zone waar is, staat hieronder — en het geldt voor de andere apparaten in dezelfde zone.</span></h3>
+            <ul class="vp-punten">
+                <li><svg><use href="#chkc"/></svg><span><b>Keramische SkinSafe-mesjes</b> — liggen achter een kam, zodat je op je schaamstreek dezelfde beweging maakt als op je arm</span></li>
+                <li><svg><use href="#chkc"/></svg><span><b>6.600 toeren en een LED-licht</b> — gaat door dikke haren heen, en je ziet wat je doet — ook op je rug</span></li>
+                <li><svg><use href="#chkc"/></svg><span><b>IPX7 waterdicht</b> — mag mee onder de douche, en daarna onder de kraan schoon</span></li>
+            </ul>
+          </div>
+          <div class="vp-paneel" data-zone="gezicht" hidden>
+            <p class="vp-zone">Gezicht &amp; baard</p>
+            <h3 class="vp-appnaam">Men Shaper Supreme™ 6-in-1<span>Wat er in deze zone waar is, staat hieronder — en het geldt voor de andere apparaten in dezelfde zone.</span></h3>
+            <ul class="vp-punten">
+                <li><svg><use href="#chkc"/></svg><span><b>8.000 toeren</b> — de snelste motor in het assortiment, voor baard, snor en lichaamshaar</span></li>
+                <li><svg><use href="#chkc"/></svg><span><b>LCD-display</b> — toont hoeveel draadloze tijd je nog hebt, dus je valt niet halverwege stil</span></li>
+                <li><svg><use href="#chkc"/></svg><span><b>IPX7 en skin-safe</b> — onder de douche te gebruiken, en gemaakt om irritatie te voorkomen</span></li>
+            </ul>
+          </div>
+          <div class="vp-paneel" data-zone="hoofd" hidden>
+            <p class="vp-zone">Hoofd</p>
+            <h3 class="vp-appnaam">Head Shaver Deluxe<span>Wat er in deze zone waar is, staat hieronder — en het geldt voor de andere apparaten in dezelfde zone.</span></h3>
+            <ul class="vp-punten">
+                <li><svg><use href="#chkc"/></svg><span><b>Scheerkop met 7 mesjes</b> — pakt elk oppervlak waar haar groeit, ook waar je niet bij kijkt</span></li>
+                <li><svg><use href="#chkc"/></svg><span><b>Vijf opzetstukken</b> — hoofd, baard, neus en oorhaar met één apparaat</span></li>
+                <li><svg><use href="#chkc"/></svg><span><b>Trimlengtes van 1,5 tot 13 mm</b> — op de Tondeuse Deluxe, voor fades en elke lengte daartussen</span></li>
+            </ul>
+          </div>
+          <div class="vp-paneel" data-zone="neus" hidden>
+            <p class="vp-zone">Neus &amp; oren</p>
+            <h3 class="vp-appnaam">Neustrimmer 4in1 Ultra™<span>Wat er in deze zone waar is, staat hieronder — en het geldt voor de andere apparaten in dezelfde zone.</span></h3>
+            <ul class="vp-punten">
+                <li><svg><use href="#chkc"/></svg><span><b>7.000 toeren en SafeShave-mesjes</b> — snijdt af zonder te trekken, ook op gevoelige plekken</span></li>
+                <li><svg><use href="#chkc"/></svg><span><b>Vier opzetstukken</b> — neus, oor, wenkbrauw en een scheeropzetstuk voor kleine zones</span></li>
+                <li><svg><use href="#chkc"/></svg><span><b>USB Fast Charge en batterij-indicator</b> — je ziet wanneer hij bijna leeg is, en hij is snel weer vol</span></li>
+            </ul>
+          </div>
+          </div>
         </div>
 
-        <p class="vp-scope"><svg><use href="#chkc"/></svg><span><b>Waar dit voor geldt:</b> de keramische messen zitten op de bodygroomers en de neustrimmers; IPX7 op de meeste apparaten. Vervangingsonderdelen zijn er voor elk apparaat dat een mes of opzetstuk heeft.</span></p>
+        <p class="vp-altijd">
+          <b>Bij elk apparaat, in elke zone</b>
+          <span><svg><use href="#chkc"/></svg><em>Mes of opzetstuk los te vervangen</em>, vanaf €9,95</span>
+          <span><svg><use href="#chkc"/></svg><em>100 dagen proberen</em>, en twee jaar garantie</span>
+        </p>
 
       </div></section>
     </div></div>
@@ -260,90 +340,131 @@ footer p{max-width:none}
         <div class="vp-top">
           <div>
             <p class="vp-eyebrow">Waarom dit anders werkt</p>
-            <h2 class="vp-h2">Vier dingen die je pas merkt als je hem vasthoudt.</h2>
+            <h2 class="vp-h2">Elk apparaat is gemaakt voor één plek. Kies er een.</h2>
           </div>
-          <p class="vp-note">Niet wat er op de doos staat, maar wat erin zit en wat je eraan hebt. Wat er precies op jouw apparaat zit, staat op de productpagina.</p>
+          <p class="vp-note">Wat een bodygroomer moet kunnen is iets anders dan wat een neustrimmer moet kunnen. Daarom staat hieronder per zone wat er dáár waar is — met het apparaat erbij waar het vandaan komt.</p>
         </div>
 
-        <div class="vp-grid">
-            <div class="vp-card">
-              <p class="vp-spec">Keramisch</p>
-              <span class="vp-rule"></span>
-              <h3 class="vp-kop">De messen liggen achter een kam</h3>
-              <p class="vp-uitleg">Daarom kun je op je schaamstreek dezelfde beweging maken als op je arm.</p>
+        <div class="vp-body">
+          <div class="vp-fig">
+            <div class="vp-silhouet"><svg viewBox="0 0 200 252" role="img" aria-label="Zones op het lichaam">
+                <ellipse class="vp-lijn" cx="100" cy="58" rx="34" ry="42"/>
+                <path class="vp-lijn" d="M66 54 C59 51 58 64 65 66" opacity=".6"/>
+                <path class="vp-lijn" d="M134 54 C141 51 142 64 135 66" opacity=".6"/>
+                <path class="vp-lijn" d="M88 98 L88 118 M112 98 L112 118" opacity=".5"/>
+                <path class="vp-lijn" d="M88 116 C68 121 54 130 50 146 L44 222 C43 231 48 237 57 237
+                  L143 237 C152 237 157 231 156 222 L150 146 C146 130 132 121 112 116"/>
+                <path class="vp-lijn" d="M52 144 C40 154 34 180 33 216" opacity=".55"/>
+                <path class="vp-lijn" d="M148 144 C160 154 166 180 167 216" opacity=".55"/>
+                <g class="vp-punt aan" data-zone="lichaam" role="button" tabindex="0" aria-label="Zone lichaam"><circle class="gloed" cx="100" cy="172" r="14"/><circle class="stip" cx="100" cy="172" r="6.5"/><circle class="raak" cx="100" cy="172" r="20"/></g>
+                <g class="vp-punt" data-zone="gezicht" role="button" tabindex="0" aria-label="Zone gezicht en baard"><circle class="gloed" cx="100" cy="90" r="12"/><circle class="stip" cx="100" cy="90" r="6.5"/><circle class="raak" cx="100" cy="90" r="16"/></g>
+                <g class="vp-punt" data-zone="hoofd" role="button" tabindex="0" aria-label="Zone hoofd"><circle class="gloed" cx="100" cy="22" r="12"/><circle class="stip" cx="100" cy="22" r="6.5"/><circle class="raak" cx="100" cy="22" r="16"/></g>
+                <g class="vp-punt" data-zone="neus" role="button" tabindex="0" aria-label="Zone neus en oren"><circle class="gloed" cx="100" cy="58" r="12"/><circle class="stip" cx="100" cy="58" r="6.5"/><circle class="raak" cx="100" cy="58" r="16"/></g>
+              </svg>
             </div>
-            <div class="vp-card">
-              <p class="vp-spec">120<span> minuten</span></p>
-              <span class="vp-rule"></span>
-              <h3 class="vp-kop">Je ziet hoeveel er nog in zit</h3>
-              <p class="vp-uitleg">Een display met de resterende tijd, en opladen gaat via USB-C.</p>
+            <div class="vp-keuze">
+              <button class="vp-tab aan" type="button" data-zone="lichaam">Lichaam</button>
+              <button class="vp-tab" type="button" data-zone="gezicht">Gezicht &amp; baard</button>
+              <button class="vp-tab" type="button" data-zone="hoofd">Hoofd</button>
+              <button class="vp-tab" type="button" data-zone="neus">Neus &amp; oren</button>
             </div>
-            <div class="vp-card">
-              <p class="vp-spec">IPX7</p>
-              <span class="vp-rule"></span>
-              <h3 class="vp-kop">Mag mee onder de douche</h3>
-              <p class="vp-uitleg">Niet spatdicht maar echt waterdicht: nat scheren, en daarna schoonspoelen onder de kraan.</p>
-            </div>
-            <div class="vp-card">
-              <p class="vp-spec"><span>vanaf </span>€9,95</p>
-              <span class="vp-rule"></span>
-              <h3 class="vp-kop">Bot mes? Dan koop je een mes</h3>
-              <p class="vp-uitleg">Elk opzetstuk en elk mes is los te bestellen. Het apparaat zelf blijft.</p>
-            </div>
+          </div>
+          <div class="vp-panelen">
+          <div class="vp-paneel" data-zone="lichaam">
+            <p class="vp-zone">Lichaam</p>
+            <h3 class="vp-appnaam">Groom Guard™ PRO<span>Wat er in deze zone waar is, staat hieronder — en het geldt voor de andere apparaten in dezelfde zone.</span></h3>
+            <ul class="vp-punten">
+                <li><svg><use href="#chkc"/></svg><span><b>Keramische SkinSafe-mesjes</b> — liggen achter een kam, zodat je op je schaamstreek dezelfde beweging maakt als op je arm</span></li>
+                <li><svg><use href="#chkc"/></svg><span><b>6.600 toeren en een LED-licht</b> — gaat door dikke haren heen, en je ziet wat je doet — ook op je rug</span></li>
+                <li><svg><use href="#chkc"/></svg><span><b>IPX7 waterdicht</b> — mag mee onder de douche, en daarna onder de kraan schoon</span></li>
+            </ul>
+          </div>
+          <div class="vp-paneel" data-zone="gezicht" hidden>
+            <p class="vp-zone">Gezicht &amp; baard</p>
+            <h3 class="vp-appnaam">Men Shaper Supreme™ 6-in-1<span>Wat er in deze zone waar is, staat hieronder — en het geldt voor de andere apparaten in dezelfde zone.</span></h3>
+            <ul class="vp-punten">
+                <li><svg><use href="#chkc"/></svg><span><b>8.000 toeren</b> — de snelste motor in het assortiment, voor baard, snor en lichaamshaar</span></li>
+                <li><svg><use href="#chkc"/></svg><span><b>LCD-display</b> — toont hoeveel draadloze tijd je nog hebt, dus je valt niet halverwege stil</span></li>
+                <li><svg><use href="#chkc"/></svg><span><b>IPX7 en skin-safe</b> — onder de douche te gebruiken, en gemaakt om irritatie te voorkomen</span></li>
+            </ul>
+          </div>
+          <div class="vp-paneel" data-zone="hoofd" hidden>
+            <p class="vp-zone">Hoofd</p>
+            <h3 class="vp-appnaam">Head Shaver Deluxe<span>Wat er in deze zone waar is, staat hieronder — en het geldt voor de andere apparaten in dezelfde zone.</span></h3>
+            <ul class="vp-punten">
+                <li><svg><use href="#chkc"/></svg><span><b>Scheerkop met 7 mesjes</b> — pakt elk oppervlak waar haar groeit, ook waar je niet bij kijkt</span></li>
+                <li><svg><use href="#chkc"/></svg><span><b>Vijf opzetstukken</b> — hoofd, baard, neus en oorhaar met één apparaat</span></li>
+                <li><svg><use href="#chkc"/></svg><span><b>Trimlengtes van 1,5 tot 13 mm</b> — op de Tondeuse Deluxe, voor fades en elke lengte daartussen</span></li>
+            </ul>
+          </div>
+          <div class="vp-paneel" data-zone="neus" hidden>
+            <p class="vp-zone">Neus &amp; oren</p>
+            <h3 class="vp-appnaam">Neustrimmer 4in1 Ultra™<span>Wat er in deze zone waar is, staat hieronder — en het geldt voor de andere apparaten in dezelfde zone.</span></h3>
+            <ul class="vp-punten">
+                <li><svg><use href="#chkc"/></svg><span><b>7.000 toeren en SafeShave-mesjes</b> — snijdt af zonder te trekken, ook op gevoelige plekken</span></li>
+                <li><svg><use href="#chkc"/></svg><span><b>Vier opzetstukken</b> — neus, oor, wenkbrauw en een scheeropzetstuk voor kleine zones</span></li>
+                <li><svg><use href="#chkc"/></svg><span><b>USB Fast Charge en batterij-indicator</b> — je ziet wanneer hij bijna leeg is, en hij is snel weer vol</span></li>
+            </ul>
+          </div>
+          </div>
         </div>
 
-        <p class="vp-scope"><svg><use href="#chkc"/></svg><span><b>Waar dit voor geldt:</b> de keramische messen zitten op de bodygroomers en de neustrimmers; IPX7 op de meeste apparaten. Vervangingsonderdelen zijn er voor elk apparaat dat een mes of opzetstuk heeft.</span></p>
+        <p class="vp-altijd">
+          <b>Bij elk apparaat, in elke zone</b>
+          <span><svg><use href="#chkc"/></svg><em>Mes of opzetstuk los te vervangen</em>, vanaf €9,95</span>
+          <span><svg><use href="#chkc"/></svg><em>100 dagen proberen</em>, en twee jaar garantie</span>
+        </p>
 
       </div></section>
     </div></div>
   </div>
 </div>
 
-<h2>Waar elke propositie vandaan komt</h2>
+<h2>Waar elke regel vandaan komt</h2>
 <div class="tablewrap">
 <table>
-  <thead><tr><th>Anker</th><th>Kop</th><th>Bron</th><th>Geldt voor</th></tr></thead>
+  <thead><tr><th>Zone</th><th>Apparaat</th><th>Wat er staat</th><th>Bron</th></tr></thead>
   <tbody>
-    <tr><td><b>Keramisch</b></td><td>De messen liggen achter een kam</td><td>"SkinSafe keramische messen" — Groom Guard, Flex Guard, Blade Trio Pack. "SafeShave™-mesjes" op de neustrimmers, bevestigd dezelfde techniek</td><td>Bodygroomers en neustrimmers</td></tr>
-    <tr><td><b>120 minuten</b></td><td>Je ziet hoeveel er nog in zit</td><td>"tot 120 minuten gebruik" en "opladen via USB-C" — Groom Guard PRO. Display op onder meer de Men Shaper Supreme ("LCD-display toont je resterende draadloze tijd")</td><td>De apparaten met een display</td></tr>
-    <tr><td><b>IPX7</b></td><td>Mag mee onder de douche</td><td>"IPX7 gebruik je 'm gewoon onder de douche" — Groom Guard PRO. "volledig IPX7 waterdicht" — Dual Groomer. Ook Men Shaper Supreme, Sentinel PRO, Dial Master</td><td>De meeste apparaten</td></tr>
-    <tr><td><b>€9,95</b></td><td>Bot mes? Dan koop je een mes</td><td>Goedkoopste vervangingsonderdeel: neustrimmer-opzetstuk en Blade Guard Blades, beide €9,95. Verder Groom Guard Blade, Flex Guard Blade en 7D Scheerkop à €14,95, Gentleman Shaver-scheerkop €19,95</td><td>Elk apparaat met een mes of opzetstuk</td></tr>
+    <tr><td rowspan="3"><b>Lichaam</b></td><td rowspan="3">Groom Guard™ PRO</td><td>Keramische SkinSafe-mesjes achter een kam</td><td>"De SkinSafe keramische mesjes leggen je huid nooit bloot"</td></tr>
+    <tr><td>6.600 toeren en een LED-licht</td><td>"De krachtige 6600RPM motor glijdt door de dikste haren, het LED-licht laat elk haartje zien"</td></tr>
+    <tr><td>IPX7 waterdicht</td><td>"dankzij IPX7 gebruik je 'm gewoon onder de douche"</td></tr>
+    <tr><td rowspan="3"><b>Gezicht &amp; baard</b></td><td rowspan="3">Men Shaper Supreme™ 6-in-1</td><td>8.000 toeren</td><td>"De krachtige 8000 RPM motor zorgt voor een efficiënte, moeiteloze trimbeurt"</td></tr>
+    <tr><td>LCD-display met resterende tijd</td><td>"het LCD-display toont je resterende draadloze tijd"</td></tr>
+    <tr><td>IPX7 en skin-safe</td><td>"dankzij de IPX7 waterdichte behuizing gebruik je hem ook onder de douche. De skin-safe technologie voorkomt irritatie"</td></tr>
+    <tr><td rowspan="3"><b>Hoofd</b></td><td rowspan="2">Head Shaver Deluxe</td><td>Scheerkop met 7 mesjes</td><td>"De scheerkop bevat 7 scheermessen om elk oppervlak waar haar groeit glad te scheren"</td></tr>
+    <tr><td>Vijf opzetstukken</td><td>"5 opzetstukken die je hoofd, baard, neus en oorhaar volledig aanpakken"</td></tr>
+    <tr><td>Tondeuse Deluxe™</td><td>Trimlengtes 1,5 tot 13 mm</td><td>"instelbare trimlengtes van 1,5, 3, 4,5, 6, 10 en 13 mm"</td></tr>
+    <tr><td rowspan="3"><b>Neus &amp; oren</b></td><td rowspan="3">Neustrimmer 4in1 Ultra™</td><td>7.000 toeren en SafeShave-mesjes</td><td>"De krachtige 7000 RPM motor en SafeShave™-mesjes zorgen voor een veilig, pijnloos resultaat"</td></tr>
+    <tr><td>Vier opzetstukken</td><td>"Verwijder moeiteloos neus-, oor- en wenkbrauwhaar … en werk kleinere zones bij met het scheeropzetstuk"</td></tr>
+    <tr><td>USB Fast Charge en batterij-indicator</td><td>"met USB Fast Charge en LED-batterij-indicator"</td></tr>
   </tbody>
 </table>
 </div>
-<p>De regel onder de kaarten benoemt de reikwijdte, zodat geen van de vier breder klinkt dan hij is. Dat is dezelfde afspraak als in blok 1: een claim die een tandje te hoog staat, kost je meer dan hij oplevert zodra iemand hem natrekt.</p>
-
-<div class="callout fix">
-  <h3 style="margin-top:0">Waarom juist deze vier</h3>
-  <p><b>De eerste is die van je klanten.</b> Van de acht reviewteksten op je site gaan er vijf over hetzelfde: <em>"zonder wondjes"</em>, <em>"geen wondjes bij de schaamstreek"</em>, <em>"met een gerust hart scheren"</em>, <em>"zonder sneetjes"</em>. Als vijf van de acht mensen uit zichzelf hetzelfde noemen, hoort dat de eerste propositie te zijn.</p>
-  <p><b>De tweede komt ook uit een review:</b> <em>"Hele fijne en stille trimmer met accudisplay, dus nooit meer een lege batterij."</em> Een accudisplay klinkt als een detail tot iemand halverwege zijn nek stilvalt.</p>
-  <p><b>De derde is het enige waar je het mechanisme kunt uitleggen dat niemand uitlegt.</b> Vrijwel elk merk zet "waterdicht" op de doos. Het verschil tussen spatdicht en IPX7 — kort onderdompelen aankunnen — is precies wat bepaalt of je hem onder de kraan mag schoonspoelen. Dat is een kenmerk waar je een zin aan mag besteden.</p>
-  <p style="margin-bottom:0"><b>De vierde beantwoordt de vraag die niemand hardop stelt:</b> is dit wegwerpspul? Een apparaat van €60 waarvan het mes voor €14,95 te vervangen is, is dat aantoonbaar niet. Dit is bovendien de enige van de vier die je concurrenten niet kunnen kopiëren zonder hun eigen onderdelenvoorraad — Balzac en Balzy verkopen die niet.</p>
-</div>
+<p>Alles komt letterlijk uit je eigen productomschrijvingen in Shopify, opgehaald op 19 augustus 2026. <b>Eén ding heb ik afgezwakt:</b> de PRO-pagina schrijft dat de mesjes je huid "nooit bloot leggen"; op de kaart staat dat ze achter een kam liggen. Dat is dezelfde techniek, maar beschreven in plaats van beloofd — om dezelfde reden als in blok 1, waar de gewone Groom Guard-pagina "sterk reduceert" zegt.</p>
 
 <h2>Bouwnotities voor straks</h2>
 <ul>
-  <li><b>Vier kaarten, niet zes.</b> De audit noemde 4 tot 6. Ik hou het op vier: elke extra kaart verwatert de vier ankers, en er is geen vijfde kenmerk dat over het hele assortiment even hard is.</li>
-  <li><b>Het anker is tekst, geen beeld.</b> Dat scheelt vier afbeeldingen en houdt de kaart vertaalbaar en aanpasbaar zonder ontwerper.</li>
-  <li><b>De reikwijdteregel hoort erbij en mag niet weggelaten worden.</b> Zonder die zin claimen alle vier over het hele assortiment, en dat is bij twee ervan niet waar.</li>
-  <li><b>De prijs in de vierde kaart uit Shopify halen.</b> €9,95 is nu het goedkoopste onderdeel; verandert dat, dan klopt de kaart niet meer. Laat hem het minimum berekenen over de collectie met vervangingsonderdelen.</li>
-  <li><b>Nooit een vaste hoogte op de kaarten.</b> De langste uitlegregel bepaalt de rijhoogte; met <code>grid</code> groeien ze samen mee.</li>
+  <li><b>Vier zones, dezelfde vier als in blok 3.</b> Als daar iets verschuift, moet het hier mee. Overweeg één bron voor de zone-indeling in plaats van twee losse lijsten.</li>
+  <li><b>Drie punten per zone, niet meer.</b> Het paneel heeft een vaste hoogte nodig, anders springt het blok bij elke wisseling. Met drie regels van maximaal twee zinnen blijft dat stabiel.</li>
+  <li><b>De figuur is één SVG zonder externe afhankelijkheden</b> en schaalt mee; de raakvlakken van de punten zijn 40 pixels breed, ruim boven de 24 die een duim nodig heeft.</li>
+  <li><b>Het apparaat per zone uit een collectie halen</b>, of als productkiezer per zone instellen. Nu staat de naam vast in de tekst.</li>
+  <li><b>De specificaties zelf blijven redactie.</b> Ze komen uit de productomschrijvingen maar zijn ingekort tot wat een klant ervan merkt; dat kan geen veld worden.</li>
 </ul>
 
 <div class="callout ask">
   <h3 style="margin-top:0">Wat ik van jou nodig heb</h3>
   <ul style="margin-bottom:0">
-    <li><b>Klopt "de meeste apparaten" bij IPX7?</b> Ik heb het bij vijf apparaten letterlijk teruggevonden. Als het er meer zijn, of juist minder, moet die regel mee.</li>
-    <li><b>Zijn er nog kenmerken die ik mis?</b> Ik heb gezocht in je productteksten, maar iets dat je zelf belangrijk vindt en dat nergens opgeschreven staat, kan ik niet vinden.</li>
-    <li><b>De derde vervuilde producttekst</b> — met het <code>&lt;form&gt;</code>-element erin. Zal ik alle drie opschonen, of pak jij dat op?</li>
+    <li><b>Klopt het apparaat dat ik per zone gekozen heb?</b> Ik nam per zone de bestseller of het meest complete apparaat. Bij Hoofd heb ik twee apparaten gecombineerd omdat de Head Shaver geen trimlengtes noemt en de Tondeuse Deluxe wel.</li>
+    <li><b>Is er een zone waar je meer over kunt vertellen dan wat er in de productomschrijving staat?</b> Bij Hoofd is het aanbod aan harde specificaties het dunst — daar staat nergens een toerental of een waterdichtheidsklasse.</li>
+    <li><b>De drie vervuilde productteksten</b> staan er nog steeds. Zal ik ze opschonen?</li>
   </ul>
 </div>
 
 <h2>Daarna</h2>
-<p><b>Blok 6 — het koopblok van de bundel.</b> Dat staat al gebouwd in blok 2, als donker koopvak onderin. In het oorspronkelijke plan was dat een eigen blok; nu het al staat, is de vraag of het daar blijft of alsnog naar deze plek verhuist. Daarna volgen het zonerooster (blok 8, al klaar), de UGC-sectie, de vergelijkingstabel, garantie en FAQ, en de afsluiter.</p>
+<p><b>Blok 6 — het koopblok van de bundel.</b> Dat staat al gebouwd in blok 2, als donker koopvak onderin. De vraag is of het daar blijft of alsnog naar deze plek verhuist. Daarna volgen het zonerooster (blok 8, al klaar), de UGC-sectie, de vergelijkingstabel, garantie en FAQ, en de afsluiter.</p>
 
 <footer>
-  <p>Kenmerken, prijzen en productnamen live uit Shopify op 19 augustus 2026, letterlijk uit de productomschrijvingen. Reviewteksten van je eigen homepage. De huidige drie waardeproposities staan zo op wellshave.com. Kleuren, hoekradius en type-schaal uit <code>base.css</code> van je live theme; het zandvlak is <code>#F5F1EA</code>, de merkachtergrond uit je theme.</p>
+  <p>Alle specificaties letterlijk uit de productomschrijvingen in Shopify, opgehaald op 19 augustus 2026. De vier zones zijn dezelfde als in blok 3 en blok 8. De huidige drie waardeproposities staan zo op wellshave.com. Kleuren, hoekradius en type-schaal uit <code>base.css</code> van je live theme; het zandvlak is <code>#F5F1EA</code>.</p>
 </footer>
 
 </div>
@@ -362,4 +483,44 @@ document.fonts&&document.fonts.ready.then(fit);
 window.addEventListener('resize',fit);
 new ResizeObserver(fit).observe(document.body);
 window.addEventListener('load',fit); fit();
+</script>
+
+<script>
+/* ══ MOCKUP-SCRIPT ══ */
+// De zonekiezer. Elke .vp krijgt zijn eigen instantie, want desktop en mobiel
+// staan als twee losse mockups op dezelfde pagina.
+document.querySelectorAll('.vp').forEach(function (sec) {
+  var punten  = [].slice.call(sec.querySelectorAll('.vp-punt'));
+  var tabs    = [].slice.call(sec.querySelectorAll('.vp-tab'));
+  var panelen = [].slice.call(sec.querySelectorAll('.vp-paneel'));
+  if (!panelen.length) return;
+
+  var traag = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var i = 0, gestuurd = false, klok = null;
+
+  function toon(n) {
+    i = (n + panelen.length) % panelen.length;
+    var zone = panelen[i].dataset.zone;
+    panelen.forEach(function (p) { p.hidden = p.dataset.zone !== zone; });
+    tabs.forEach(function (t) { t.classList.toggle('aan', t.dataset.zone === zone); });
+    punten.forEach(function (p) { p.classList.toggle('aan', p.dataset.zone === zone); });
+  }
+  function kies(zone) {
+    // zodra iemand zelf kiest, stopt het rondlopen: dit is een keuzeblok,
+    // en dan is doorschuiven onder iemands handen weg hinderlijk
+    gestuurd = true; if (klok) clearInterval(klok);
+    toon(panelen.findIndex(function (p) { return p.dataset.zone === zone; }));
+  }
+  [].concat(punten, tabs).forEach(function (el) {
+    el.addEventListener('click', function () { kies(el.dataset.zone); });
+    el.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); kies(el.dataset.zone); }
+    });
+  });
+
+  if (!traag) klok = setInterval(function () { if (!gestuurd) toon(i + 1); }, 6000);
+  sec.addEventListener('mouseenter', function () { if (klok) clearInterval(klok); });
+  toon(0);
+});
+
 </script>
