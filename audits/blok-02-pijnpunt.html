@@ -89,7 +89,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
 /* ══ MOCKUP — vaste merkkleuren in beide thema's ══ */
 .pf{font-family:"Montserrat",sans-serif;background:#EDE7DB;color:#111111;
   padding:56px 40px}
-.pf-in{max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+.pf-in{max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:28px;min-width:0}
 
 /* band A — kop */
 .pf-top{display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
@@ -111,7 +111,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
 .tp-brand svg{width:14px;height:14px;fill:#00B67A}
 
 /* band B — garantie + één foto */
-.pf-mid{display:grid;grid-template-columns:1fr 400px;gap:20px;align-items:stretch}
+.pf-mid{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:20px;align-items:stretch}
 .gcard{position:relative;background:#191816;color:#fff;border-radius:12px;
   padding:36px 40px;display:flex;gap:34px;align-items:center;overflow:hidden}
 .gcard::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;
@@ -129,7 +129,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
 .seal-in span{font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
   color:rgba(255,255,255,.7)}
 
-.gcard-body{position:relative;display:flex;flex-direction:column;gap:14px;min-width:0}
+.gcard-body{position:relative;display:flex;flex-direction:column;gap:14px;min-width:0;overflow-wrap:anywhere}
 .gcard-h{font-size:26px;line-height:130%;font-weight:600;letter-spacing:-.015em;margin:0}
 .gcard-h em{font-style:normal;color:#F5D18A}
 .gcard-p{font-size:15px;line-height:155%;color:rgba(255,255,255,.72);margin:0;max-width:44ch}
@@ -184,35 +184,40 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
 
 /* band D — bundel in de schijnwerpers */
 .spot{background:#fff;border-radius:12px;overflow:hidden;
-  display:grid;grid-template-columns:1fr 1fr;align-items:stretch}
-.spot-img{position:relative;background:#F4F4F4;aspect-ratio:4/3}
-.spot-img img{width:100%;height:100%;object-fit:cover;display:block}
-.spot-tag{position:absolute;top:16px;left:16px;background:#F5D18A;color:#111;
+  display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr)}
+.spot-img{position:relative;background:#F2EEED;min-height:380px;min-width:0}
+.spot-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;
+  padding:26px;display:block}
+.spot-tag{position:absolute;z-index:2;top:16px;left:16px;background:#F5D18A;color:#111;
   font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
-  padding:7px 14px;border-radius:100px}
-.spot-body{padding:34px 38px;display:flex;flex-direction:column;justify-content:center;gap:14px}
+  padding:7px 14px;border-radius:100px;white-space:nowrap}
+.spot-body{min-width:0;padding:32px 34px;display:flex;flex-direction:column;
+  justify-content:center;gap:13px}
 .spot-eyebrow{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
   color:#BC813E;margin:0}
-.spot-h{font-size:28px;line-height:125%;font-weight:600;letter-spacing:-.015em;margin:0}
-.spot-p{font-size:15px;line-height:155%;color:rgba(17,17,17,.7);margin:0}
-.spot-list{list-style:none;margin:2px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
-.spot-list li{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500}
+.spot-h{font-size:26px;line-height:125%;font-weight:600;letter-spacing:-.015em;margin:0;
+  overflow-wrap:anywhere}
+.spot-p{font-size:14.5px;line-height:155%;color:rgba(17,17,17,.7);margin:0}
+.spot-list{list-style:none;margin:2px 0 0;padding:0;display:flex;flex-direction:column;gap:7px}
+.spot-list li{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500;min-width:0}
 .spot-list svg{width:16px;height:16px;flex:none;color:#BC813E}
-.spot-price{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-top:4px}
-.spot-now{font-size:34px;font-weight:700;letter-spacing:-.03em;line-height:1}
-.spot-was{font-size:17px;color:rgba(17,17,17,.4);text-decoration:line-through}
-.spot-save{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
-  background:#EDE7DB;color:#8F6428;padding:6px 12px;border-radius:100px}
-.spot-cta{background:#BC813E;color:#111;font-weight:700;font-size:16px;line-height:110%;
-  letter-spacing:.06em;text-transform:uppercase;padding:19px 28px;border-radius:100px;
-  display:flex;align-items:center;justify-content:center;gap:9px;margin-top:6px}
-.spot-fud{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12px;font-weight:500;
-  color:rgba(17,17,17,.6);margin:0}
-.spot-fud span{display:inline-flex;align-items:center;gap:7px}
-.spot-fud svg{width:14px;height:14px;flex:none;color:#BC813E}
+.spot-price{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-top:2px}
+.spot-now{font-size:32px;font-weight:700;letter-spacing:-.03em;line-height:1}
+.spot-was{font-size:16px;color:rgba(17,17,17,.4);text-decoration:line-through}
+.spot-save{font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+  background:#EDE7DB;color:#8F6428;padding:6px 11px;border-radius:100px;white-space:nowrap}
 .spot-stock{font-size:12.5px;font-weight:600;color:#C14A3A;margin:0;
   display:flex;align-items:center;gap:8px}
 .spot-stock i{width:7px;height:7px;border-radius:100px;background:#C14A3A;display:block;flex:none}
+.spot-cta{flex:none;align-self:stretch;background:#BC813E;color:#111;font-weight:700;
+  font-size:15px;line-height:1;letter-spacing:.06em;text-transform:uppercase;
+  padding:18px 24px;border-radius:100px;white-space:nowrap;
+  display:flex;align-items:center;justify-content:center;gap:9px;margin-top:2px}
+.spot-cta svg{width:17px;height:17px;flex:none}
+.spot-fud{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;font-weight:500;
+  color:rgba(17,17,17,.6);margin:0}
+.spot-fud span{display:inline-flex;align-items:center;gap:6px}
+.spot-fud svg{width:14px;height:14px;flex:none;color:#BC813E}
 
 /* mobiel */
 .pf-m{padding:34px 18px}
@@ -230,14 +235,16 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
 .pf-m .gcard-h{font-size:21px}
 .pf-m .gcard-mark{right:-30px;bottom:-34px;width:170px}
 .pf-m .gcard-p{font-size:14px;line-height:150%}
+.pf-m .revcount{flex-direction:column;align-items:flex-start;gap:2px}
 .pf-m .rev{width:266px;padding:18px}
 .pf-m .revtrack{animation-duration:34s}
 .pf-m .spot{grid-template-columns:1fr}
+.pf-m .spot-img{min-height:0;aspect-ratio:4/3}
 .pf-m .spot-body{padding:22px 20px 24px;gap:12px}
 .pf-m .spot-h{font-size:21px}
 .pf-m .spot-p{font-size:14px}
 .pf-m .spot-now{font-size:28px}
-.pf-m .spot-cta{font-size:15px;padding:17px 22px}
+.pf-m .spot-cta{font-size:14px;padding:17px 20px}
 
 /* ── annotaties ── */
 .anno{background:var(--surface);border:1px solid var(--rule);border-left:2px solid var(--gold-dark-100);
@@ -279,15 +286,27 @@ footer p{max-width:none}
 <div class="wrap">
 
 <header class="masthead">
-  <p class="eyebrow">Homepage-redesign · blok 2 van 12 · versie 6</p>
+  <p class="eyebrow">Homepage-redesign · blok 2 van 12 · versie 7</p>
   <h1>Autoriteit en bewijs</h1>
-  <p class="dek">De reviews lopen nu als een doorlopende band en de Essential Flex Bundel heeft een volwaardig koopblok gekregen. Eén kanttekening bij de carrousel, en één probleem met het aantal reviews.</p>
+  <p class="dek">Het koopblok van de bundel liep buiten zijn kolom en de knop was een blob. Opgelost — en vanaf nu render en meet ik elk blok voordat ik het naar je stuur.</p>
   <p class="byline">Ontwerp — nog niets live. Akkoord → dan pas Shopify.</p>
   <div class="progress" aria-hidden="true">
     <i class="done"></i><i class="done"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
   </div>
   <p class="progress-cap">Blok 2 in ontwerp · 10 blokken volgen</p>
 </header>
+
+<div class="callout fix">
+  <h3 style="margin-top:0">Het bundelblok was stuk, en waarom</h3>
+  <p>De rechterkolom liep buiten het koopblok — de titel en de besparing werden afgeknipt — en de knop was uitgegroeid tot een grote ronde vlek. <b>Oorzaak: een rasterkolom krimpt standaard niet kleiner dan zijn eigen inhoud.</b> De prijsregel en de knop dwongen die kolom breder dan de helft die hij kreeg, en omdat het blok afgeronde hoeken heeft met <code>overflow:hidden</code> werd het verschil er gewoon afgesneden in plaats van dat het zichtbaar werd.</p>
+  <p>Opgelost door beide kolommen op <code>minmax(0,1fr)</code> te zetten, zodat ze wél mogen krimpen, en de knop een vaste hoogte te geven in plaats van hem te laten meegroeien met de ruimte. Hij meet nu 537 × 53 pixels in plaats van een blok van ruim 150 hoog.</p>
+  <p style="margin-bottom:0"><b>De productfoto wordt niet meer aangesneden.</b> Die stond op <code>cover</code>, wat prima is voor een sfeerfoto maar niet voor een packshot — de onderkant van de trimmer viel weg. Nu <code>contain</code> met wat lucht eromheen, op een achtergrond die exact de tint van de foto zelf heeft (<code>#F2EEED</code>). Alles wat in de bundel zit is nu ook echt te zien.</p>
+</div>
+
+<div class="callout fix">
+  <h3 style="margin-top:0">Vanaf nu meet ik het, in plaats van het in te schatten</h3>
+  <p style="margin-bottom:0">Ik heb ontdekt dat ik dit blok lokaal kan renderen en opmeten. Er loopt nu een controle overheen die elk element vergelijkt met zijn container en meldt wat eruit steekt, plus een vergelijking van elke beeldverhouding tegen het bronbestand. Deze versie komt er schoon doorheen: geen overloop, en elke foto staat op zijn eigen verhouding of op <code>cover</code>, wat bijsnijdt maar nooit vervormt. <b>Dit had de vervormde foto, het gebroken raster, de afgesneden reviews en dit koopblok alle vier kunnen vangen voordat jij ze zag.</b></p>
+</div>
 
 <div class="callout ask">
   <h3 style="margin-top:0">Eén kanttekening bij de carrousel, en dan bouwen we hem</h3>
