@@ -79,16 +79,16 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
 .scaler{width:100%;overflow:hidden;border:1px solid var(--frame);border-radius:4px;
   background:#EDE7DB;box-shadow:var(--shadow)}
 .scaler > .inner{transform-origin:top left}
-.desk-scaler{aspect-ratio:1440/900}
-.desk-scaler > .inner{width:1440px;height:900px}
+.desk-scaler{min-height:400px}
+.desk-scaler > .inner{width:1440px}
 .phonecol{max-width:390px;margin:0 auto}
-.phone-scaler{aspect-ratio:390/1160;border-radius:14px}
-.phone-scaler > .inner{width:390px;height:1160px}
+.phone-scaler{border-radius:14px;min-height:400px}
+.phone-scaler > .inner{width:390px}
 .stage{display:grid;gap:30px;margin:0 0 10px}
 
 /* ══ MOCKUP — vaste merkkleuren in beide thema's ══ */
 .pf{font-family:"Montserrat",sans-serif;background:#EDE7DB;color:#111111;
-  height:100%;padding:56px 40px;overflow:hidden}
+  padding:56px 40px}
 .pf-in{max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
 
 /* band A — kop */
@@ -140,7 +140,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
   font-size:13.5px;line-height:155%;color:rgba(255,255,255,.72)}
 .gcard-team b{color:#fff;font-weight:600}
 
-.shot{border-radius:12px;overflow:hidden;background:#111;aspect-ratio:1/1;align-self:stretch}
+.shot{border-radius:12px;overflow:hidden;background:#111;aspect-ratio:1/1;align-self:start}
 .shot img{width:100%;height:100%;object-fit:cover;display:block}
 
 /* band C — drie reviews */
@@ -172,7 +172,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
   letter-spacing:.06em;text-transform:uppercase;padding:14px 24px;border-radius:100px}
 
 /* mobiel */
-.pf-m{padding:34px 18px;height:auto}
+.pf-m{padding:34px 18px}
 .pf-m .pf-in{gap:18px}
 .pf-m .pf-top{flex-direction:column;align-items:flex-start;gap:18px}
 .pf-m .pf-h2{font-size:24px;max-width:none}
@@ -232,9 +232,9 @@ footer p{max-width:none}
 <div class="wrap">
 
 <header class="masthead">
-  <p class="eyebrow">Homepage-redesign · blok 2 van 12 · versie 4</p>
+  <p class="eyebrow">Homepage-redesign · blok 2 van 12 · versie 5</p>
   <h1>Autoriteit en bewijs</h1>
-  <p class="dek">Drie aanpassingen: een garantiezegel in het merkgoud in plaats van een grijs tekstvak, een ander beeld, en een teamregel die iets concreets zegt in plaats van iets bescheidens.</p>
+  <p class="dek">De afgesneden reviews zijn opgelost, en structureel: de mockup-kaders meten hun eigen inhoud in plaats van dat ik de hoogte inschat.</p>
   <p class="byline">Ontwerp — nog niets live. Akkoord → dan pas Shopify.</p>
   <div class="progress" aria-hidden="true">
     <i class="done"></i><i class="done"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
@@ -243,10 +243,16 @@ footer p{max-width:none}
 </header>
 
 <div class="callout fix">
-  <h3 style="margin-top:0">Wat er is veranderd</h3>
-  <p><strong>Het grijze vak is een zegel geworden.</strong> Je had gelijk dat het niet gebrand was: het was een rechthoek in <code>#191816</code> met een groot getal erin — dat kan van elk merk zijn. Nu staat er een <b>garantiezegel</b> met jouw monogram erin, in de gouden verloopring uit je eigen theme (<code>--gradient-horizontal</code>, die je al gebruikt in de benefits-sectie). Daarboven een gouden verlooplijn over de volle breedte, en het monogram nog eens groot en vervaagd op de achtergrond. Een stempel is bovendien de vorm die mensen al kennen van een garantie — die herkenning krijg je gratis.</p>
-  <p><strong>Een ander beeld.</strong> De vorige foto was een still van 750 pixels uit een klantvideo: iemand met een tattoo die een trimmer vasthoudt, zonder context. Nu een opname uit je eigen bestanden waarin het apparaat <b>daadwerkelijk gebruikt wordt</b> — natte huid, het LED-display zichtbaar, het merk op het apparaat. Dat past bij "probeer hem honderd dagen in je eigen routine".</p>
-  <p style="margin-bottom:0"><strong>De teamregel is herschreven.</strong> "Wij pakken je bestelling zelf in en beantwoorden zelf je mail" was bescheiden zonder overtuigend te zijn — het klinkt klein in plaats van betrouwbaar. De nieuwe regel koppelt het team aan de garantie en noemt een mens bij naam. Zie de toelichting hieronder.</p>
+  <h3 style="margin-top:0">De afgesneden reviews</h3>
+  <p>Weer dezelfde fout als bij het raster: ik had de hoogte van het desktopkader vastgezet op 900px omdat dat er ongeveer goed uitzag, terwijl de inhoud ongeveer 1.000px nodig heeft. De sectie stond op <code>height:100%</code> met <code>overflow:hidden</code>, dus alles onder die grens werd er gewoon afgeknipt — de onderste reviewkaarten en de bundelregel.</p>
+  <p style="margin-bottom:0"><strong>Nu meet het kader zelf.</strong> De sectie heeft geen vaste hoogte meer en het kader neemt de gemeten hoogte van de inhoud over, ook nadat de lettertypes geladen zijn. Dat kan niet meer misgaan als er straks een regel bijkomt. Dezelfde soort fout dus als de vervormde foto en het gebroken raster: ik schatte een maat in plaats van hem uit te rekenen. Vanaf hier laat ik de opmaak zelf meten in plaats van te gokken.</p>
+</div>
+
+<div class="callout fix">
+  <h3 style="margin-top:0">Uit versie 4, ter herinnering</h3>
+  <p><strong>Het grijze vak is een zegel geworden</strong> met jouw monogram in de gouden verloopring uit je eigen theme, met een gouden verlooplijn over de kaart en het monogram vervaagd op de achtergrond.</p>
+  <p><strong>Een ander beeld:</strong> een opname waarin het apparaat daadwerkelijk gebruikt wordt, in plaats van een still van 750 pixels uit een klantvideo.</p>
+  <p style="margin-bottom:0"><strong>De teamregel noemt nu een mens</strong> en koppelt het team aan de garantie in plaats van aan de logistiek.</p>
 </div>
 
 <h2>Het ontwerp</h2>
@@ -459,6 +465,7 @@ footer p{max-width:none}
   <li>Stapelvolgorde op 390px: kop → score → garantiekaart → foto → drie reviews → bundelregel.</li>
   <li>Reviews betrekken uit je bestaande reviewsectie, niet opnieuw intypen.</li>
   <li>Beelden <code>loading="lazy"</code>; dit blok staat onder de vouw.</li>
+  <li>De sectie nooit op een vaste hoogte zetten. Vier banden onder elkaar met <code>gap</code>; de sectie groeit dan mee met de langste reviewtekst in plaats van hem af te snijden.</li>
   <li>Na de bouw de verhoudingen meten: <code>naturalWidth/naturalHeight</code> tegen <code>getBoundingClientRect()</code>. Niet op het oog beoordelen — een vervorming van 25% zag ik zelf ook over het hoofd.</li>
 </ul>
 
@@ -476,9 +483,13 @@ function fit(){
   document.querySelectorAll('.scaler').forEach(s=>{
     const inner=s.firstElementChild;
     const w=parseFloat(getComputedStyle(inner).width);
-    inner.style.transform='scale('+(s.clientWidth/w)+')';
+    const scale=s.clientWidth/w;
+    inner.style.transform='scale('+scale+')';
+    s.style.height=Math.ceil(inner.offsetHeight*scale)+'px';
   });
 }
+document.fonts&&document.fonts.ready.then(fit);
+window.addEventListener('resize',fit);
 new ResizeObserver(fit).observe(document.body);
 window.addEventListener('load',fit); fit();
 </script>
