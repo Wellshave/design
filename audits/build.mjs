@@ -3,6 +3,9 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 
 const ASSETS = {
+  __LOGO__:         ['assets/hero-logo.png',    'image/png'],
+  __PORTRAIT__:     ['assets/hero-portrait.jpg','image/jpeg'],
+  __MIRROR__:       ['assets/hero-mirror.jpg',  'image/jpeg'],
   __MARK__:      ['assets/mark.png',            'image/png'],
   __USE__:       ['assets/use-neustrimmer.jpg', 'image/jpeg'],
   __BUNDLEBIG__: ['assets/bundel-dark.jpg',     'image/jpeg'],
