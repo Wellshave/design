@@ -112,16 +112,32 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
 
 /* band B — garantie + één foto */
 .pf-mid{display:grid;grid-template-columns:1fr 400px;gap:20px;align-items:stretch}
-.gcard{background:#191816;color:#fff;border-radius:12px;padding:36px 40px;
-  display:flex;flex-direction:column;justify-content:center;gap:20px}
-.gcard-num{font-size:74px;line-height:.95;font-weight:700;letter-spacing:-.04em;margin:0;color:#F5D18A}
-.gcard-num small{display:block;font-size:26px;font-weight:600;letter-spacing:-.02em;color:#fff;margin-top:6px}
-.gcard-p{font-size:16px;line-height:155%;color:rgba(255,255,255,.78);margin:0;max-width:42ch}
-.gcard-list{display:flex;flex-wrap:wrap;gap:10px 28px;margin:4px 0 0;padding:0;list-style:none}
+.gcard{position:relative;background:#191816;color:#fff;border-radius:12px;
+  padding:36px 40px;display:flex;gap:34px;align-items:center;overflow:hidden}
+.gcard::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,#BC813E 0%,#F5D18A 50%,#BC813E 100%)}
+.gcard-mark{position:absolute;right:-40px;bottom:-46px;width:230px;opacity:.06;pointer-events:none}
+.gcard-mark img{width:100%;height:auto;display:block}
+
+.seal{flex:none;width:152px;height:152px;border-radius:100px;
+  background:linear-gradient(135deg,#F5D18A 0%,#BC813E 55%,#F5D18A 100%);
+  display:grid;place-items:center}
+.seal-in{width:134px;height:134px;border-radius:100px;background:#191816;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}
+.seal-in img{width:24px;height:auto;display:block;margin-bottom:2px}
+.seal-in b{font-size:40px;line-height:1;font-weight:700;letter-spacing:-.03em;color:#F5D18A}
+.seal-in span{font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,.7)}
+
+.gcard-body{position:relative;display:flex;flex-direction:column;gap:14px;min-width:0}
+.gcard-h{font-size:26px;line-height:130%;font-weight:600;letter-spacing:-.015em;margin:0}
+.gcard-h em{font-style:normal;color:#F5D18A}
+.gcard-p{font-size:15px;line-height:155%;color:rgba(255,255,255,.72);margin:0;max-width:44ch}
+.gcard-list{display:flex;flex-wrap:wrap;gap:9px 26px;margin:2px 0 0;padding:0;list-style:none}
 .gcard-list li{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:500;margin:0}
 .gcard-list svg{width:16px;height:16px;flex:none;color:#F5D18A}
-.gcard-team{margin:0;padding-top:20px;border-top:1px solid rgba(255,255,255,.15);
-  font-size:13px;line-height:150%;color:rgba(255,255,255,.6)}
+.gcard-team{margin:0;padding-top:18px;border-top:1px solid rgba(255,255,255,.15);
+  font-size:13.5px;line-height:155%;color:rgba(255,255,255,.72)}
 .gcard-team b{color:#fff;font-weight:600}
 
 .shot{border-radius:12px;overflow:hidden;background:#111;aspect-ratio:1/1;align-self:stretch}
@@ -164,9 +180,12 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
 .pf-m .tp-mini{text-align:left}
 .pf-m .tp-stars{justify-content:flex-start}
 .pf-m .pf-mid{grid-template-columns:1fr;gap:14px}
-.pf-m .gcard{padding:24px 22px;gap:16px;border-radius:12px}
-.pf-m .gcard-num{font-size:56px}
-.pf-m .gcard-num small{font-size:20px}
+.pf-m .gcard{padding:24px 22px;gap:20px;flex-direction:column;align-items:flex-start}
+.pf-m .seal{width:124px;height:124px}
+.pf-m .seal-in{width:108px;height:108px}
+.pf-m .seal-in b{font-size:32px}
+.pf-m .gcard-h{font-size:21px}
+.pf-m .gcard-mark{right:-30px;bottom:-34px;width:170px}
 .pf-m .gcard-p{font-size:14px;line-height:150%}
 .pf-m .pf-revs{grid-template-columns:1fr;gap:12px}
 .pf-m .rev{padding:20px}
@@ -213,9 +232,9 @@ footer p{max-width:none}
 <div class="wrap">
 
 <header class="masthead">
-  <p class="eyebrow">Homepage-redesign · blok 2 van 12 · versie 3</p>
+  <p class="eyebrow">Homepage-redesign · blok 2 van 12 · versie 4</p>
   <h1>Autoriteit en bewijs</h1>
-  <p class="dek">Opnieuw ontworpen. Van zeven concurrerende tegels naar vier banden met één leesrichting, en de vervormde foto is opgelost — die zat in het bestand, niet in de opmaak.</p>
+  <p class="dek">Drie aanpassingen: een garantiezegel in het merkgoud in plaats van een grijs tekstvak, een ander beeld, en een teamregel die iets concreets zegt in plaats van iets bescheidens.</p>
   <p class="byline">Ontwerp — nog niets live. Akkoord → dan pas Shopify.</p>
   <div class="progress" aria-hidden="true">
     <i class="done"></i><i class="done"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
@@ -224,10 +243,10 @@ footer p{max-width:none}
 </header>
 
 <div class="callout fix">
-  <h3 style="margin-top:0">Wat er mis was, letterlijk</h3>
-  <p><strong>De uitgerekte foto.</strong> Het bronbestand uit je UGC-sectie is <code>750 × 750</code>, dus vierkant. Ik heb het geëxporteerd als <code>560 × 700</code>. Dat is geen bijsnijden maar uitrekken: de persoon is 25% in de hoogte opgetrokken. <b>Die fout zat in het bestand, niet in de CSS</b> — geen enkele opmaakregel had dat nog kunnen redden. De foto is opnieuw uitgesneden op 1:1 en elke beeldhouder heeft nu een vaste <code>aspect-ratio</code>, zodat vervorming er domweg niet meer in kan.</p>
-  <p><strong>Te druk.</strong> Ook terecht, en het was erger dan een smaakkwestie: het waren zeven tegels in een raster van twaalf kolommen waarvan de rijen niet opgingen. Vier plus drie plus vijf is twaalf, maar de rij daaronder telde dertien. Dat raster brak, tegels vielen in gaten, en er was geen leesvolgorde. <b>Ik heb het nooit nagerekend en jij zag het meteen.</b></p>
-  <p style="margin-bottom:0"><strong>De kop is veranderd.</strong> Uit de concurrentie-analyse: Brothers in Style toont 5.500 reviews en een 4,8. Openen met "4,5 uit 950" is de vergelijking aangaan die je verliest. De sectie opent nu met de 100 dagen — het beste aanbod van alle vier de merken — en Trustpilot staat er rechtsboven bij, zichtbaar maar niet als hoofdargument.</p>
+  <h3 style="margin-top:0">Wat er is veranderd</h3>
+  <p><strong>Het grijze vak is een zegel geworden.</strong> Je had gelijk dat het niet gebrand was: het was een rechthoek in <code>#191816</code> met een groot getal erin — dat kan van elk merk zijn. Nu staat er een <b>garantiezegel</b> met jouw monogram erin, in de gouden verloopring uit je eigen theme (<code>--gradient-horizontal</code>, die je al gebruikt in de benefits-sectie). Daarboven een gouden verlooplijn over de volle breedte, en het monogram nog eens groot en vervaagd op de achtergrond. Een stempel is bovendien de vorm die mensen al kennen van een garantie — die herkenning krijg je gratis.</p>
+  <p><strong>Een ander beeld.</strong> De vorige foto was een still van 750 pixels uit een klantvideo: iemand met een tattoo die een trimmer vasthoudt, zonder context. Nu een opname uit je eigen bestanden waarin het apparaat <b>daadwerkelijk gebruikt wordt</b> — natte huid, het LED-display zichtbaar, het merk op het apparaat. Dat past bij "probeer hem honderd dagen in je eigen routine".</p>
+  <p style="margin-bottom:0"><strong>De teamregel is herschreven.</strong> "Wij pakken je bestelling zelf in en beantwoorden zelf je mail" was bescheiden zonder overtuigend te zijn — het klinkt klein in plaats van betrouwbaar. De nieuwe regel koppelt het team aan de garantie en noemt een mens bij naam. Zie de toelichting hieronder.</p>
 </div>
 
 <h2>Het ontwerp</h2>
@@ -241,9 +260,9 @@ footer p{max-width:none}
 
         <div class="pf-top">
           <div>
-            <p class="pf-eyebrow">Zonder risico uitproberen</p>
-            <h2 class="pf-h2">Neem er <b>100 dagen</b> de tijd voor.</h2>
-            <p class="pf-note">Past het niet bij je routine, dan stuur je hem terug en krijg je je geld terug. Twee jaar garantie zit er sowieso op.</p>
+            <p class="pf-eyebrow">Zonder risico</p>
+            <h2 class="pf-h2">Het enige wat jij hoeft te doen, is hem <b>uitproberen</b>.</h2>
+            <p class="pf-note">De rest hebben wij dichtgetimmerd: honderd dagen bedenktijd, twee jaar garantie, en een klantenservice die je gewoon te pakken krijgt.</p>
           </div>
           <div class="tp-mini">
             <div class="tp-stars">
@@ -257,16 +276,23 @@ footer p{max-width:none}
 
         <div class="pf-mid">
           <div class="gcard">
-            <p class="gcard-num">100<small>dagen proberen</small></p>
-            <p class="gcard-p">Thuis, in je eigen badkamer, zo vaak als je wilt. Geen proefperiode van twee weken waarin je nog niets weet.</p>
-            <ul class="gcard-list">
-              <li><svg><use href="#chk"/></svg>Geld terug</li>
-              <li><svg><use href="#chk"/></svg>2 jaar garantie</li>
-              <li><svg><use href="#chk"/></svg>Gratis verzending vanaf €30</li>
-            </ul>
-            <p class="gcard-team"><b>Zes mensen in Helmond.</b> Wij pakken je bestelling zelf in en beantwoorden zelf je mail. Geen callcenter, geen tussenpersoon.</p>
+            <span class="gcard-mark"><img src="__MARK__" alt=""></span>
+            <span class="seal"><span class="seal-in">
+              <img src="__MARK__" alt="">
+              <b>100</b><span>dagen</span>
+            </span></span>
+            <div class="gcard-body">
+              <h3 class="gcard-h">Koop hem, gebruik hem 100 dagen.<br><em>Bevalt het niet? Geld terug.</em></h3>
+              <p class="gcard-p">Geen proefperiode van twee weken waarin je nog niets weet. Honderd dagen in je eigen badkamer, zo vaak als je wilt.</p>
+              <ul class="gcard-list">
+                <li><svg><use href="#chk"/></svg>Geld terug</li>
+                <li><svg><use href="#chk"/></svg>2 jaar garantie</li>
+                <li><svg><use href="#chk"/></svg>Gratis verzending vanaf €30</li>
+              </ul>
+              <p class="gcard-team">Stuur je hem terug, dan komt je mail bij <b>Yvonne</b> terecht — niet bij een chatbot. Klantenservice en magazijn zitten in hetzelfde pand in Helmond.</p>
+            </div>
           </div>
-          <div class="shot"><img src="__PERSON__" alt="Klant met een Wellshave-trimmer"></div>
+          <div class="shot"><img src="__USE__" alt="Man gebruikt de Wellshave neustrimmer"></div>
         </div>
 
         <div class="pf-revs">
@@ -307,9 +333,9 @@ footer p{max-width:none}
 
         <div class="pf-top">
           <div>
-            <p class="pf-eyebrow">Zonder risico uitproberen</p>
-            <h2 class="pf-h2">Neem er <b>100 dagen</b> de tijd voor.</h2>
-            <p class="pf-note">Past het niet bij je routine, dan stuur je hem terug en krijg je je geld terug. Twee jaar garantie zit er sowieso op.</p>
+            <p class="pf-eyebrow">Zonder risico</p>
+            <h2 class="pf-h2">Het enige wat jij hoeft te doen, is hem <b>uitproberen</b>.</h2>
+            <p class="pf-note">De rest hebben wij dichtgetimmerd: honderd dagen bedenktijd, twee jaar garantie, en een klantenservice die je gewoon te pakken krijgt.</p>
           </div>
           <div class="tp-mini">
             <div class="tp-stars">
@@ -323,16 +349,23 @@ footer p{max-width:none}
 
         <div class="pf-mid">
           <div class="gcard">
-            <p class="gcard-num">100<small>dagen proberen</small></p>
-            <p class="gcard-p">Thuis, in je eigen badkamer, zo vaak als je wilt. Geen proefperiode van twee weken waarin je nog niets weet.</p>
-            <ul class="gcard-list">
-              <li><svg><use href="#chk"/></svg>Geld terug</li>
-              <li><svg><use href="#chk"/></svg>2 jaar garantie</li>
-              <li><svg><use href="#chk"/></svg>Gratis verzending vanaf €30</li>
-            </ul>
-            <p class="gcard-team"><b>Zes mensen in Helmond.</b> Wij pakken je bestelling zelf in en beantwoorden zelf je mail. Geen callcenter, geen tussenpersoon.</p>
+            <span class="gcard-mark"><img src="__MARK__" alt=""></span>
+            <span class="seal"><span class="seal-in">
+              <img src="__MARK__" alt="">
+              <b>100</b><span>dagen</span>
+            </span></span>
+            <div class="gcard-body">
+              <h3 class="gcard-h">Koop hem, gebruik hem 100 dagen.<br><em>Bevalt het niet? Geld terug.</em></h3>
+              <p class="gcard-p">Geen proefperiode van twee weken waarin je nog niets weet. Honderd dagen in je eigen badkamer, zo vaak als je wilt.</p>
+              <ul class="gcard-list">
+                <li><svg><use href="#chk"/></svg>Geld terug</li>
+                <li><svg><use href="#chk"/></svg>2 jaar garantie</li>
+                <li><svg><use href="#chk"/></svg>Gratis verzending vanaf €30</li>
+              </ul>
+              <p class="gcard-team">Stuur je hem terug, dan komt je mail bij <b>Yvonne</b> terecht — niet bij een chatbot. Klantenservice en magazijn zitten in hetzelfde pand in Helmond.</p>
+            </div>
           </div>
-          <div class="shot"><img src="__PERSON__" alt="Klant met een Wellshave-trimmer"></div>
+          <div class="shot"><img src="__USE__" alt="Man gebruikt de Wellshave neustrimmer"></div>
         </div>
 
         <div class="pf-revs">
@@ -386,12 +419,19 @@ footer p{max-width:none}
 </div>
 
 <div class="anno">
-  <h3>Het getal draagt de sectie</h3>
-  <p>"100" staat op 74px in <code>#F5D18A</code> op de donkere kaart, tegenover bodytekst van 16px. Die sprong is wat de sectie dynamiek geeft — niet meer elementen, maar één element dat veel groter is dan de rest. <b>Eén brandpunt per band</b> is genoeg.</p>
+  <h3>Het zegel is het brandpunt</h3>
+  <p>De sectie heeft één blikvanger, en dat is nu een vorm in plaats van alleen een getal. Het zegel is 152px in de gouden verloopring, met het monogram erboven — daarmee is het herkenbaar van jou, ook zonder dat er "Wellshave" bij staat. <b>Eén brandpunt per band is genoeg</b>; de rest van de kaart is bewust rustig gehouden.</p>
 </div>
 
 <div class="anno">
-  <h3>Het teamverhaal is ingekort en verplaatst</h3>
+  <h3>Waarom "Yvonne" sterker is dan "wij"</h3>
+  <p>"Wij pakken je bestelling zelf in" is een uitspraak over jullie werkwijze. Die overtuigt niet, want elke webshop kan hem doen en niemand kan hem controleren. <b>Een naam is wel controleerbaar</b> — en hij beantwoordt precies de vraag die bij een retour opkomt: wie krijg ik straks aan de lijn?</p>
+  <p>De regel koppelt het team bovendien aan de garantie in plaats van aan de logistiek. Dat is waar hij hoort: honderd dagen bedenktijd is alleen iets waard als er ook echt iemand is die je retour afhandelt.</p>
+  <p><b>Twee dingen om te bevestigen:</b> doet Yvonne nog de klantenservice, en wil je een voornaam op je homepage? Zo niet, dan wordt het "dan komt je mail bij ons klantenserviceteam in Helmond terecht" — zwakker, maar nog altijd concreter dan de vorige regel.</p>
+</div>
+
+<div class="anno">
+  <h3>Het teamverhaal blijft ondergeschikt</h3>
   <p>Uit de concurrentie-analyse bleek dat Balzy dit al beter doet: elf man, oprichter bij naam, en dat detail dat DHL om 00:30 de rolcontainers ophaalt. Een eigen tegel maakt het geen sterker verhaal. Het staat nu als voetregel onder de garantie, waar het hoort: <b>bewijs dat de belofte gedekt wordt door mensen die je kunt aanspreken.</b></p>
   <p>Wil je hier écht winnen, dan moet het concreter dan Balzy: namen, gezichten, en één specifiek detail dat niemand kan verzinnen. Dat is beschikbaar — je hebt zes mensen met naam en functie op je over-pagina staan.</p>
 </div>
