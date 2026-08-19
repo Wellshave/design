@@ -8,9 +8,9 @@
 
   const MAX_RPM = 6600;
   const CHAPTERS = [
-    { t: 0.00, no: '01', title: 'DE TRIM',           txt: 'Droog trimmen — 6600 RPM door de dikste haren.' },
-    { t: 0.34, no: '02', title: 'ONDER DE DOUCHE',   txt: 'IPX7 — de hele body mag gewoon onder water.' },
-    { t: 0.68, no: '03', title: 'SKINSAFE',          txt: 'Foil shaver kop werkt af. Geen sneetjes, geen ingegroeide haren.' }
+    { t: 0,     no: '01', title: 'DE TRIM',         txt: 'Droog trimmen — 6600 RPM door de dikste haren.' },
+    { t: 1 / 3, no: '02', title: 'ONDER DE DOUCHE', txt: 'IPX7 — de hele body mag gewoon onder water.' },
+    { t: 2 / 3, no: '03', title: 'SKINSAFE',        txt: 'Foil shaver kop werkt af. Geen sneetjes, geen ingegroeide haren.' }
   ];
 
   const $  = (s, r = document) => r.querySelector(s);
@@ -99,7 +99,7 @@
   function draw(p) {
     if (!ready) return;
     const n = frames.length;
-    const idx = clamp(Math.round(ease(p) * (n - 1)), 0, n - 1);
+    const idx = clamp(Math.round(p * (n - 1)), 0, n - 1);
     if (idx !== currentFrame) { drawFrame(frames[idx]); currentFrame = idx; }
 
     // HUD — RPM climbs with scroll progress through the pass

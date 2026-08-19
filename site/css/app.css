@@ -80,8 +80,8 @@ h1,h2,h3{font-family:var(--cond);font-weight:700;margin:0;line-height:.9;letter-
   color:var(--ink);text-shadow:0 0 34px rgba(0,229,255,.32);margin-top:4px;
 }
 .hud__value em{
-  font-style:normal;font-size:.22em;letter-spacing:.36em;color:var(--accent);
-  display:inline-block;margin-left:.5em;vertical-align:.9em;
+  font-style:normal;font-size:.2em;letter-spacing:.42em;color:var(--accent);
+  display:block;margin-top:.5em;
 }
 .hud__track{height:2px;background:rgba(255,255,255,.1);margin-top:12px;overflow:hidden}
 .hud__track span{display:block;height:100%;width:0%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
@@ -106,8 +106,9 @@ h1,h2,h3{font-family:var(--cond);font-weight:700;margin:0;line-height:.9;letter-
 
 /* Hero title over the sequence */
 .scrub__title{
-  position:absolute;left:clamp(18px,4vw,54px);bottom:clamp(24px,6vh,72px);z-index:20;
+  position:absolute;left:clamp(18px,4vw,54px);bottom:clamp(24px,6vh,72px);z-index:15;
   max-width:min(620px,60vw);transition:opacity .5s var(--ease),transform .5s var(--ease);
+  pointer-events:none; /* mag de hoofdstukrail nooit afvangen */
 }
 .scrub__title h1{
   font-size:clamp(64px,13vw,190px);letter-spacing:.02em;
