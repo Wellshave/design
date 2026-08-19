@@ -36,6 +36,7 @@ const hero = read('blok-01-hero.html');
 const proof = read('blok-02-pijnpunt.html');
 const best = read('blok-03-bestsellers.html');
 const mech = read('blok-04-mechanisme.html');
+const usps = read('blok-05-waardeproposities.html');
 
 // blok 1 en blok 2 delen drie Trustpilot-klassen met verschillende waarden.
 // In de preview staan ze op één pagina, dus krijgt blok 1 een eigen naam.
@@ -87,6 +88,9 @@ const blocks = [
   { id: 'blok4', naam: 'Blok 4 — Het mechanisme',
     desk: element(mech, '<section class="mc">', 'section'),
     mob:  element(mech, '<section class="mc mc-m">', 'section') },
+  { id: 'blok5', naam: 'Blok 5 — De waardeproposities',
+    desk: element(usps, '<section class="vp"><div class="vp-in">', 'section'),
+    mob:  element(usps, '<section class="vp vp-m"><div class="vp-in">', 'section') },
 ];
 
 const css = `:root{--bg:#FBFAF9;--surface:#fff;--fg:#1A1A1A;--fg-soft:#6B6560;--rule:#E6E1DC;--gold:#BC813E}
@@ -147,7 +151,10 @@ ${mockupCss(proof)}
 ${mockupCss(best)}
 
 /* ── blok 4 ── */
-${mockupCss(mech)}`;
+${mockupCss(mech)}
+
+/* ── blok 5 ── */
+${mockupCss(usps)}`;
 
 const body = blocks.map(b => `
   <section class="blok">
@@ -174,7 +181,7 @@ ${css}
 ${sprite}
 <div class="shell">
   <div class="lede">
-    <p class="kicker">Homepage-redesign · 4 van 12 blokken</p>
+    <p class="kicker">Homepage-redesign · 5 van 12 blokken</p>
     <h1>De nieuwe blokken, zoals ze op de pagina komen te staan</h1>
     <p class="sub">Beide blokken draaien hier echt: de reviewband loopt, de knoppen reageren, en het
       mobiele beeld is de werkelijke opmaak op 390&nbsp;px — niet een verkleinde desktopversie.
@@ -187,7 +194,7 @@ ${body}
   </footer>
 </div>
 <script>
-${[hero, proof, best, mech].map(mockupScript).filter(Boolean).join('\n')}
+${[hero, proof, best, mech, usps].map(mockupScript).filter(Boolean).join('\n')}
 </script>
 <script>
 function fit(){

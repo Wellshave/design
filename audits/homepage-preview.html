@@ -590,6 +590,49 @@ footer p{margin:0;max-width:72ch}
 .mc-m .mc-txt b{font-size:18px}
 .mc-m .mc-txt b em{font-size:12.5px}
 .mc-m .mc-txt > span{font-size:10.5px;line-height:138%;margin-top:3px}
+
+/* ── blok 5 ── */
+/* ══ MOCKUP — vaste merkkleuren in beide thema's ══ */
+.vp{font-family:"Montserrat",sans-serif;background:#FFFFFF;color:#111111;padding:64px 40px}
+.vp-in{max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:34px;min-width:0}
+.vp p{max-width:none;margin:0}
+.vp p.vp-note{max-width:52ch}
+
+.vp-top{display:flex;align-items:flex-end;justify-content:space-between;gap:56px}
+.vp-eyebrow{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(17,17,17,.4)}
+.vp-h2{font-size:35px;line-height:118%;font-weight:600;letter-spacing:-.025em;margin:12px 0 0;
+  max-width:19ch;text-wrap:balance}
+.vp-h2 b{font-weight:600;color:#111}
+.vp-note{font-size:15px;line-height:158%;color:rgba(17,17,17,.6);flex:none;padding-bottom:4px}
+
+.vp-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.vp-card{background:#F5F1EA;border-radius:13px;padding:26px 24px 26px;
+  display:flex;flex-direction:column;gap:14px;min-width:0}
+.vp-spec{font-size:27px;font-weight:700;letter-spacing:-.03em;line-height:1;color:#BC813E;
+  overflow-wrap:anywhere}
+.vp-spec span{font-size:15px;font-weight:600;letter-spacing:-.01em;color:rgba(188,129,62,.75)}
+.vp-rule{height:1px;background:rgba(17,17,17,.1)}
+.vp-kop{font-size:17px;font-weight:600;letter-spacing:-.018em;line-height:132%;margin:0}
+.vp-uitleg{font-size:13.5px;line-height:155%;color:rgba(17,17,17,.62);margin-top:auto}
+.vp-scope{display:flex;align-items:flex-start;gap:11px;font-size:12.5px;line-height:155%;
+  color:rgba(17,17,17,.5)}
+.vp-scope svg{width:15px;height:15px;flex:none;color:#BC813E;margin-top:2px}
+.vp-scope b{color:rgba(17,17,17,.72);font-weight:600}
+
+/* mobiel — twee naast twee; vier onder elkaar maakt het blok onnodig lang */
+.vp-m{padding:40px 18px}
+.vp-m .vp-in{gap:24px}
+.vp-m .vp-top{flex-direction:column;align-items:flex-start;gap:14px}
+.vp-m .vp-h2{font-size:26px;max-width:none;margin-top:10px}
+.vp-m p.vp-note{font-size:14px;max-width:none;padding-bottom:0}
+.vp-m .vp-grid{grid-template-columns:1fr 1fr;gap:11px}
+.vp-m .vp-card{padding:18px 16px;gap:11px}
+.vp-m .vp-spec{font-size:22px}
+.vp-m .vp-spec span{font-size:13px}
+.vp-m .vp-kop{font-size:14.5px}
+.vp-m .vp-uitleg{font-size:12px;line-height:150%}
+.vp-m .vp-scope{font-size:11.5px;line-height:150%}
 </style>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01z"/></symbol>
@@ -602,7 +645,7 @@ footer p{margin:0;max-width:72ch}
 </defs></svg>
 <div class="shell">
   <div class="lede">
-    <p class="kicker">Homepage-redesign · 4 van 12 blokken</p>
+    <p class="kicker">Homepage-redesign · 5 van 12 blokken</p>
     <h1>De nieuwe blokken, zoals ze op de pagina komen te staan</h1>
     <p class="sub">Beide blokken draaien hier echt: de reviewband loopt, de knoppen reageren, en het
       mobiele beeld is de werkelijke opmaak op 390&nbsp;px — niet een verkleinde desktopversie.
@@ -1593,6 +1636,98 @@ footer p{margin:0;max-width:72ch}
             <span class="mc-txt"><b>100 <em>dagen</em></b><span>proberen zonder risico</span></span></p>
         </div></div>
       </section></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blok">
+    <div class="blok-h"><h2>Blok 5 — De waardeproposities</h2><span>Ontwerp — nog niets live</span></div>
+    <div class="views">
+      <div>
+        <p class="devicecap">Desktop — 1440px</p>
+        <div class="scaler desk-scaler"><div class="inner"><section class="vp"><div class="vp-in">
+
+        <div class="vp-top">
+          <div>
+            <p class="vp-eyebrow">Waarom dit anders werkt</p>
+            <h2 class="vp-h2">Vier dingen die je pas merkt als je hem vasthoudt.</h2>
+          </div>
+          <p class="vp-note">Niet wat er op de doos staat, maar wat erin zit en wat je eraan hebt. Wat er precies op jouw apparaat zit, staat op de productpagina.</p>
+        </div>
+
+        <div class="vp-grid">
+            <div class="vp-card">
+              <p class="vp-spec">Keramisch</p>
+              <span class="vp-rule"></span>
+              <h3 class="vp-kop">De messen liggen achter een kam</h3>
+              <p class="vp-uitleg">Daarom kun je op je schaamstreek dezelfde beweging maken als op je arm.</p>
+            </div>
+            <div class="vp-card">
+              <p class="vp-spec">120<span> minuten</span></p>
+              <span class="vp-rule"></span>
+              <h3 class="vp-kop">Je ziet hoeveel er nog in zit</h3>
+              <p class="vp-uitleg">Een display met de resterende tijd, en opladen gaat via USB-C.</p>
+            </div>
+            <div class="vp-card">
+              <p class="vp-spec">IPX7</p>
+              <span class="vp-rule"></span>
+              <h3 class="vp-kop">Mag mee onder de douche</h3>
+              <p class="vp-uitleg">Niet spatdicht maar echt waterdicht: nat scheren, en daarna schoonspoelen onder de kraan.</p>
+            </div>
+            <div class="vp-card">
+              <p class="vp-spec"><span>vanaf </span>€9,95</p>
+              <span class="vp-rule"></span>
+              <h3 class="vp-kop">Bot mes? Dan koop je een mes</h3>
+              <p class="vp-uitleg">Elk opzetstuk en elk mes is los te bestellen. Het apparaat zelf blijft.</p>
+            </div>
+        </div>
+
+        <p class="vp-scope"><svg><use href="#chkc"/></svg><span><b>Waar dit voor geldt:</b> de keramische messen zitten op de bodygroomers en de neustrimmers; IPX7 op de meeste apparaten. Vervangingsonderdelen zijn er voor elk apparaat dat een mes of opzetstuk heeft.</span></p>
+
+      </div></section></div></div>
+      </div>
+      <div class="mobcol">
+        <p class="devicecap">Mobiel — 390px</p>
+        <div class="scaler phone-scaler"><div class="inner"><section class="vp vp-m"><div class="vp-in">
+
+        <div class="vp-top">
+          <div>
+            <p class="vp-eyebrow">Waarom dit anders werkt</p>
+            <h2 class="vp-h2">Vier dingen die je pas merkt als je hem vasthoudt.</h2>
+          </div>
+          <p class="vp-note">Niet wat er op de doos staat, maar wat erin zit en wat je eraan hebt. Wat er precies op jouw apparaat zit, staat op de productpagina.</p>
+        </div>
+
+        <div class="vp-grid">
+            <div class="vp-card">
+              <p class="vp-spec">Keramisch</p>
+              <span class="vp-rule"></span>
+              <h3 class="vp-kop">De messen liggen achter een kam</h3>
+              <p class="vp-uitleg">Daarom kun je op je schaamstreek dezelfde beweging maken als op je arm.</p>
+            </div>
+            <div class="vp-card">
+              <p class="vp-spec">120<span> minuten</span></p>
+              <span class="vp-rule"></span>
+              <h3 class="vp-kop">Je ziet hoeveel er nog in zit</h3>
+              <p class="vp-uitleg">Een display met de resterende tijd, en opladen gaat via USB-C.</p>
+            </div>
+            <div class="vp-card">
+              <p class="vp-spec">IPX7</p>
+              <span class="vp-rule"></span>
+              <h3 class="vp-kop">Mag mee onder de douche</h3>
+              <p class="vp-uitleg">Niet spatdicht maar echt waterdicht: nat scheren, en daarna schoonspoelen onder de kraan.</p>
+            </div>
+            <div class="vp-card">
+              <p class="vp-spec"><span>vanaf </span>€9,95</p>
+              <span class="vp-rule"></span>
+              <h3 class="vp-kop">Bot mes? Dan koop je een mes</h3>
+              <p class="vp-uitleg">Elk opzetstuk en elk mes is los te bestellen. Het apparaat zelf blijft.</p>
+            </div>
+        </div>
+
+        <p class="vp-scope"><svg><use href="#chkc"/></svg><span><b>Waar dit voor geldt:</b> de keramische messen zitten op de bodygroomers en de neustrimmers; IPX7 op de meeste apparaten. Vervangingsonderdelen zijn er voor elk apparaat dat een mes of opzetstuk heeft.</span></p>
+
+      </div></section></div></div>
       </div>
     </div>
   </section>

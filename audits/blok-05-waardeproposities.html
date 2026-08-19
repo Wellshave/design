@@ -1,0 +1,366 @@
+<meta charset="utf-8">
+<title>Wellshave Waardeproposities</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
+
+<style>
+:root{
+  /* exact de tokens uit :root van je live theme */
+  --graphite:#191816;
+  --grey:#8E8E8E;
+  --white-100:#FFFFFF;
+  --white-80:rgba(255,255,255,.8);
+  --white-40:rgba(255,255,255,.4);
+  --black-100:#111111;
+  --black-60:rgba(17,17,17,.6);
+  --black-40:rgba(17,17,17,.4);
+  --black-10:rgba(17,17,17,.1);
+  --gold-light-100:#F5D18A;
+  --gold-dark-100:#BC813E;
+  --error-color:#C14A3A;
+  --success-color:#1E7F63;
+
+  /* documentchroom, uit dezelfde tokens */
+  --bg:#FBFAF9; --surface:#FFFFFF; --surface-2:#F2F0ED;
+  --fg:var(--black-100); --fg-soft:var(--black-60); --rule:var(--black-10);
+  --accent:#8F6428;
+  --ok:var(--success-color); --ok-bg:#E6F0EC;
+  --crit:#A3271B; --crit-bg:#F6EAE7;
+  --shadow:0 1px 2px rgba(17,17,17,.05), 0 12px 30px -20px rgba(17,17,17,.35);
+  --frame:#E2DFDA;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141413; --surface:#1C1B1A; --surface-2:#252423;
+    --fg:#EEECE9; --fg-soft:rgba(238,236,233,.62); --rule:rgba(238,236,233,.13);
+    --accent:#D9A557; --ok:#7FBF9F; --ok-bg:#182420; --crit:#E38477; --crit-bg:#2A1C19;
+    --shadow:0 1px 2px rgba(0,0,0,.45), 0 12px 30px -20px rgba(0,0,0,.9);
+    --frame:#312F2C;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141413; --surface:#1C1B1A; --surface-2:#252423;
+  --fg:#EEECE9; --fg-soft:rgba(238,236,233,.62); --rule:rgba(238,236,233,.13);
+  --accent:#D9A557; --ok:#7FBF9F; --ok-bg:#182420; --crit:#E38477; --crit-bg:#2A1C19;
+  --shadow:0 1px 2px rgba(0,0,0,.45), 0 12px 30px -20px rgba(0,0,0,.9);
+  --frame:#312F2C;
+}
+
+*{box-sizing:border-box}
+img{max-width:100%;height:auto;display:block}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font-family:"Montserrat",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:16px;line-height:150%;font-weight:400;-webkit-font-smoothing:antialiased}
+.wrap{max-width:940px;margin:0 auto;padding:0 24px 96px}
+@media(max-width:600px){.wrap{padding:0 16px 64px}}
+
+.masthead{padding:60px 0 28px;border-bottom:1px solid var(--rule)}
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);margin:0 0 18px}
+h1{font-weight:600;font-size:clamp(32px,5.6vw,50px);line-height:115%;letter-spacing:-.015em;
+  margin:0 0 16px;text-wrap:balance}
+.dek{font-size:17px;color:var(--fg-soft);margin:0;max-width:64ch;line-height:160%;text-wrap:pretty}
+.byline{font-size:12.5px;color:var(--fg-soft);margin-top:20px}
+
+h2{font-weight:600;font-size:clamp(22px,3.4vw,30px);line-height:120%;letter-spacing:-.01em;
+  margin:56px 0 8px;text-wrap:balance}
+h2 + .sub{color:var(--fg-soft);margin:0 0 22px;font-size:15px;max-width:66ch;line-height:160%}
+h3{font-size:17px;font-weight:600;margin:26px 0 8px}
+p{margin:0 0 14px;max-width:68ch;line-height:160%}
+ul{margin:0 0 14px;padding-left:20px;max-width:68ch}
+li{margin-bottom:7px}
+strong{font-weight:600}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
+  background:var(--surface-2);padding:1px 5px;border-radius:3px}
+
+/* ── podium ── */
+.devicecap{font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--fg-soft);margin:0 0 8px}
+.scaler{width:100%;overflow:hidden;border:1px solid var(--frame);border-radius:4px;
+  background:#EDE7DB;box-shadow:var(--shadow)}
+.scaler > .inner{transform-origin:top left}
+.desk-scaler{min-height:400px}
+.desk-scaler > .inner{width:1440px}
+.phonecol{max-width:390px;margin:0 auto}
+.phone-scaler{border-radius:14px;min-height:400px}
+.phone-scaler > .inner{width:390px}
+.stage{display:grid;gap:30px;margin:0 0 10px}
+
+/* ══ MOCKUP — vaste merkkleuren in beide thema's ══ */
+.vp{font-family:"Montserrat",sans-serif;background:#FFFFFF;color:#111111;padding:64px 40px}
+.vp-in{max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:34px;min-width:0}
+.vp p{max-width:none;margin:0}
+.vp p.vp-note{max-width:52ch}
+
+.vp-top{display:flex;align-items:flex-end;justify-content:space-between;gap:56px}
+.vp-eyebrow{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(17,17,17,.4)}
+.vp-h2{font-size:35px;line-height:118%;font-weight:600;letter-spacing:-.025em;margin:12px 0 0;
+  max-width:19ch;text-wrap:balance}
+.vp-h2 b{font-weight:600;color:#111}
+.vp-note{font-size:15px;line-height:158%;color:rgba(17,17,17,.6);flex:none;padding-bottom:4px}
+
+.vp-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.vp-card{background:#F5F1EA;border-radius:13px;padding:26px 24px 26px;
+  display:flex;flex-direction:column;gap:14px;min-width:0}
+.vp-spec{font-size:27px;font-weight:700;letter-spacing:-.03em;line-height:1;color:#BC813E;
+  overflow-wrap:anywhere}
+.vp-spec span{font-size:15px;font-weight:600;letter-spacing:-.01em;color:rgba(188,129,62,.75)}
+.vp-rule{height:1px;background:rgba(17,17,17,.1)}
+.vp-kop{font-size:17px;font-weight:600;letter-spacing:-.018em;line-height:132%;margin:0}
+.vp-uitleg{font-size:13.5px;line-height:155%;color:rgba(17,17,17,.62);margin-top:auto}
+.vp-scope{display:flex;align-items:flex-start;gap:11px;font-size:12.5px;line-height:155%;
+  color:rgba(17,17,17,.5)}
+.vp-scope svg{width:15px;height:15px;flex:none;color:#BC813E;margin-top:2px}
+.vp-scope b{color:rgba(17,17,17,.72);font-weight:600}
+
+/* mobiel — twee naast twee; vier onder elkaar maakt het blok onnodig lang */
+.vp-m{padding:40px 18px}
+.vp-m .vp-in{gap:24px}
+.vp-m .vp-top{flex-direction:column;align-items:flex-start;gap:14px}
+.vp-m .vp-h2{font-size:26px;max-width:none;margin-top:10px}
+.vp-m p.vp-note{font-size:14px;max-width:none;padding-bottom:0}
+.vp-m .vp-grid{grid-template-columns:1fr 1fr;gap:11px}
+.vp-m .vp-card{padding:18px 16px;gap:11px}
+.vp-m .vp-spec{font-size:22px}
+.vp-m .vp-spec span{font-size:13px}
+.vp-m .vp-kop{font-size:14.5px}
+.vp-m .vp-uitleg{font-size:12px;line-height:150%}
+.vp-m .vp-scope{font-size:11.5px;line-height:150%}
+
+/* ── annotaties ── */
+.anno{background:var(--surface);border:1px solid var(--rule);border-left:2px solid var(--gold-dark-100);
+  border-radius:3px;padding:18px 22px;margin:0 0 13px;box-shadow:var(--shadow)}
+.anno > :last-child{margin-bottom:0}
+.anno h3{margin:0 0 7px;font-size:16.5px}
+.anno p{font-size:15px;margin-bottom:0;color:var(--fg-soft);max-width:68ch}
+.anno p b{color:var(--fg);font-weight:600}
+.anno p + p{margin-top:9px}
+.tablewrap{overflow-x:auto;margin:20px 0;border:1px solid var(--rule);border-radius:3px}
+table{border-collapse:collapse;width:100%;min-width:560px;background:var(--surface);font-size:14.5px}
+th,td{text-align:left;padding:12px 15px;border-bottom:1px solid var(--rule);vertical-align:top;line-height:150%}
+th{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--fg-soft);background:var(--surface-2)}
+tr:last-child td{border-bottom:0}
+td b{font-weight:600;color:var(--fg)}
+.callout{background:var(--surface-2);border-radius:3px;padding:20px 24px;margin:24px 0}
+.callout > :last-child{margin-bottom:0}
+.callout ul,.callout p{max-width:none}
+.ask{border-left:2px solid var(--crit);background:var(--crit-bg)}
+.fix{border-left:2px solid var(--ok);background:var(--ok-bg)}
+.progress{display:flex;flex-wrap:wrap;gap:5px;margin:18px 0 0}
+.progress i{width:26px;height:4px;background:var(--rule);display:block}
+.progress i.done{background:var(--gold-dark-100)}
+.progress-cap{font-size:11.5px;color:var(--fg-soft);margin:10px 0 0}
+footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--rule);
+  color:var(--fg-soft);font-size:13px}
+footer p{max-width:none}
+:focus-visible{outline:2px solid var(--gold-dark-100);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}
+  .revtrack{width:auto;overflow-x:auto}}
+</style>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01z"/></symbol>
+<symbol id="chk" viewBox="0 0 24 24"><path d="M4 12.5l5.2 5.2L20 6.9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="shield" viewBox="0 0 24 24"><path d="M12 2.6l7.2 2.8v6.1c0 4.4-3 8.4-7.2 9.9-4.2-1.5-7.2-5.5-7.2-9.9V5.4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M8.7 12.1l2.3 2.3 4.3-4.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="guarantee" viewBox="0 0 24 24"><circle cx="12" cy="9.6" r="6.4" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8.3 15.1L7 21.6l5-2.4 5 2.4-1.3-6.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+<symbol id="truck" viewBox="0 0 24 24"><path d="M1.9 6.2h12.2v9.4H1.9zM14.1 9.7h3.9l3.1 3.1v2.8h-7z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="6.6" cy="18" r="1.9" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="17.3" cy="18" r="1.9" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+<symbol id="chkc" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10.1" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M7.7 12.3l2.9 2.9 5.7-6.1" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="arw" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg><div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow">Homepage-redesign · blok 5 van 12 · versie 1</p>
+  <h1>De waardeproposities</h1>
+  <p class="dek">Wat er nu staat — "Ontworpen voor dagelijks gebruik", "Getest op kwaliteit en prestaties", "Premium, maar toegankelijk" — kan elk merk in elke categorie letterlijk overnemen. Vier proposities ervoor in de plaats, elk met een kenmerk dat alleen jij kunt noemen.</p>
+  <p class="byline">Ontwerp — nog niets live. Akkoord → dan pas Shopify.</p>
+  <div class="progress" aria-hidden="true">
+    <i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+  </div>
+  <p class="progress-cap">Blok 5 in ontwerp · 7 blokken volgen</p>
+</header>
+
+<div class="callout fix">
+  <h3 style="margin-top:0">Waarom de huidige drie niets doen</h3>
+  <p>"Ontworpen voor dagelijks gebruik." "Getest op kwaliteit en prestaties." "Premium, maar toegankelijk." <b>Er zit geen kenmerk in, geen getal en geen mechanisme.</b> Balzac kan ze morgen overnemen, en Brothers in Style ook. Een bezoeker leest ze en weet daarna precies evenveel als ervoor.</p>
+  <p><b>De behandeling is per stuk dezelfde:</b> pak een kenmerk dat je echt hebt, trek het door met "zodat…" tot je bij iets menselijks uitkomt, en zet die opbrengst vooraan. Mensen lezen ongeveer een vijfde van je tekst en scannen de rest, dus elke kop moet in zijn eentje verkopen. "Mag mee onder de douche" verkoopt; "IPX7 waterdicht" is een specificatie.</p>
+  <p style="margin-bottom:0"><b>Daarom staat het getal apart bovenaan de kaart.</b> Wie scant ziet vier ankers — <em>Keramisch · 120 minuten · IPX7 · €9,95</em> — en dat zijn vier dingen die een concurrent niet zomaar overschrijft. Wie doorleest krijgt de opbrengst en pas daarna het mechanisme.</p>
+</div>
+
+<div class="callout fix">
+  <h3 style="margin-top:0">Dit blok heeft bewust geen beeld</h3>
+  <p style="margin-bottom:0">Blok 1 tot en met 4 zijn alle vier beeldzwaar: een hero, een garantiezegel met foto, vier packshots en een tijdlijn met twaalf productbeelden. <b>Een vijfde beeldblok maakt de pagina een catalogus.</b> Dit blok is tekst op wit, met het getal als enige visuele anker — dat geeft de pagina lucht op precies de plek waar iemand na vier blokken toe is aan iets dat in één blik te lezen is. Het is ook het lichtste blok van de vijf: blok 4 eindigt donker, en dit zet daar wit tegenover.</p>
+</div>
+
+<div class="callout ask">
+  <h3 style="margin-top:0">Het voorbeeld uit de audit kan niet zoals het er staat</h3>
+  <p style="margin-bottom:0">De audit stelde als voorbeeldkop voor: <em>"Trim je liezen zonder één sneetje — de messen raken je huid niet"</em>. Dat is geschreven vóór we vaststelden dat je Groom Guard-pagina zegt dat SkinSafe het risico <b>"sterk reduceert"</b>, niet uitsluit. Diezelfde kop zou de claim dus een tandje te hoog zetten. <b>Ik heb er een mechanismebeschrijving van gemaakt in plaats van een uitkomstbelofte:</b> "De messen liggen achter een kam" is natrekbaar en belooft niets wat je niet waar kunt maken. De opbrengst staat in de regel eronder, en die gaat over de beweging die je kunt maken — niet over het resultaat.</p>
+</div>
+
+<div class="callout ask">
+  <h3 style="margin-top:0">Een derde productomschrijving bevat geplakte rommel, en deze is riskanter</h3>
+  <p>Bij het ophalen van de specs kwam ik er nog een tegen. De <b>Head Shaver™ 7D Scheerkop</b> bevat de complete interface van ChatGPT: <code>react-scroll-to-bottom--css-bywgj-79elbk</code>, <code>data-testid="conversation-turn-13"</code>, <code>data-message-author-role="assistant"</code>.</p>
+  <p style="margin-bottom:0"><b>Wat deze anders maakt dan de vorige twee:</b> er zit een <code>&lt;form&gt;</code>-element in. Een formulier binnen een formulier is ongeldige HTML, en de browser sluit het buitenste dan vroegtijdig af. Als je thema de productomschrijving binnen het bestelformulier zet, kan dat de winkelwagenknop van díé pagina raken. Ik weet niet of dat hier gebeurt — dat hangt van de volgorde in je thema af — maar het is het nakijken waard, en het staat live. Daarmee zijn het er drie: Men Shaper Gold (bol.com), The Dial Master (ChatGPT) en deze.</p>
+</div>
+
+<h2>Het ontwerp</h2>
+<p class="sub">Vier kaarten op een rij. Op mobiel twee naast twee, want vier onder elkaar maakt het blok onnodig lang voor vier korte teksten.</p>
+
+<div class="stage">
+  <div>
+    <p class="devicecap">Desktop — 1440px</p>
+    <div class="scaler desk-scaler"><div class="inner">
+      <section class="vp"><div class="vp-in">
+
+        <div class="vp-top">
+          <div>
+            <p class="vp-eyebrow">Waarom dit anders werkt</p>
+            <h2 class="vp-h2">Vier dingen die je pas merkt als je hem vasthoudt.</h2>
+          </div>
+          <p class="vp-note">Niet wat er op de doos staat, maar wat erin zit en wat je eraan hebt. Wat er precies op jouw apparaat zit, staat op de productpagina.</p>
+        </div>
+
+        <div class="vp-grid">
+            <div class="vp-card">
+              <p class="vp-spec">Keramisch</p>
+              <span class="vp-rule"></span>
+              <h3 class="vp-kop">De messen liggen achter een kam</h3>
+              <p class="vp-uitleg">Daarom kun je op je schaamstreek dezelfde beweging maken als op je arm.</p>
+            </div>
+            <div class="vp-card">
+              <p class="vp-spec">120<span> minuten</span></p>
+              <span class="vp-rule"></span>
+              <h3 class="vp-kop">Je ziet hoeveel er nog in zit</h3>
+              <p class="vp-uitleg">Een display met de resterende tijd, en opladen gaat via USB-C.</p>
+            </div>
+            <div class="vp-card">
+              <p class="vp-spec">IPX7</p>
+              <span class="vp-rule"></span>
+              <h3 class="vp-kop">Mag mee onder de douche</h3>
+              <p class="vp-uitleg">Niet spatdicht maar echt waterdicht: nat scheren, en daarna schoonspoelen onder de kraan.</p>
+            </div>
+            <div class="vp-card">
+              <p class="vp-spec"><span>vanaf </span>€9,95</p>
+              <span class="vp-rule"></span>
+              <h3 class="vp-kop">Bot mes? Dan koop je een mes</h3>
+              <p class="vp-uitleg">Elk opzetstuk en elk mes is los te bestellen. Het apparaat zelf blijft.</p>
+            </div>
+        </div>
+
+        <p class="vp-scope"><svg><use href="#chkc"/></svg><span><b>Waar dit voor geldt:</b> de keramische messen zitten op de bodygroomers en de neustrimmers; IPX7 op de meeste apparaten. Vervangingsonderdelen zijn er voor elk apparaat dat een mes of opzetstuk heeft.</span></p>
+
+      </div></section>
+    </div></div>
+  </div>
+  <div class="phonecol">
+    <p class="devicecap">Mobiel — 390px · 73% van je verkeer</p>
+    <div class="scaler phone-scaler"><div class="inner">
+      <section class="vp vp-m"><div class="vp-in">
+
+        <div class="vp-top">
+          <div>
+            <p class="vp-eyebrow">Waarom dit anders werkt</p>
+            <h2 class="vp-h2">Vier dingen die je pas merkt als je hem vasthoudt.</h2>
+          </div>
+          <p class="vp-note">Niet wat er op de doos staat, maar wat erin zit en wat je eraan hebt. Wat er precies op jouw apparaat zit, staat op de productpagina.</p>
+        </div>
+
+        <div class="vp-grid">
+            <div class="vp-card">
+              <p class="vp-spec">Keramisch</p>
+              <span class="vp-rule"></span>
+              <h3 class="vp-kop">De messen liggen achter een kam</h3>
+              <p class="vp-uitleg">Daarom kun je op je schaamstreek dezelfde beweging maken als op je arm.</p>
+            </div>
+            <div class="vp-card">
+              <p class="vp-spec">120<span> minuten</span></p>
+              <span class="vp-rule"></span>
+              <h3 class="vp-kop">Je ziet hoeveel er nog in zit</h3>
+              <p class="vp-uitleg">Een display met de resterende tijd, en opladen gaat via USB-C.</p>
+            </div>
+            <div class="vp-card">
+              <p class="vp-spec">IPX7</p>
+              <span class="vp-rule"></span>
+              <h3 class="vp-kop">Mag mee onder de douche</h3>
+              <p class="vp-uitleg">Niet spatdicht maar echt waterdicht: nat scheren, en daarna schoonspoelen onder de kraan.</p>
+            </div>
+            <div class="vp-card">
+              <p class="vp-spec"><span>vanaf </span>€9,95</p>
+              <span class="vp-rule"></span>
+              <h3 class="vp-kop">Bot mes? Dan koop je een mes</h3>
+              <p class="vp-uitleg">Elk opzetstuk en elk mes is los te bestellen. Het apparaat zelf blijft.</p>
+            </div>
+        </div>
+
+        <p class="vp-scope"><svg><use href="#chkc"/></svg><span><b>Waar dit voor geldt:</b> de keramische messen zitten op de bodygroomers en de neustrimmers; IPX7 op de meeste apparaten. Vervangingsonderdelen zijn er voor elk apparaat dat een mes of opzetstuk heeft.</span></p>
+
+      </div></section>
+    </div></div>
+  </div>
+</div>
+
+<h2>Waar elke propositie vandaan komt</h2>
+<div class="tablewrap">
+<table>
+  <thead><tr><th>Anker</th><th>Kop</th><th>Bron</th><th>Geldt voor</th></tr></thead>
+  <tbody>
+    <tr><td><b>Keramisch</b></td><td>De messen liggen achter een kam</td><td>"SkinSafe keramische messen" — Groom Guard, Flex Guard, Blade Trio Pack. "SafeShave™-mesjes" op de neustrimmers, bevestigd dezelfde techniek</td><td>Bodygroomers en neustrimmers</td></tr>
+    <tr><td><b>120 minuten</b></td><td>Je ziet hoeveel er nog in zit</td><td>"tot 120 minuten gebruik" en "opladen via USB-C" — Groom Guard PRO. Display op onder meer de Men Shaper Supreme ("LCD-display toont je resterende draadloze tijd")</td><td>De apparaten met een display</td></tr>
+    <tr><td><b>IPX7</b></td><td>Mag mee onder de douche</td><td>"IPX7 gebruik je 'm gewoon onder de douche" — Groom Guard PRO. "volledig IPX7 waterdicht" — Dual Groomer. Ook Men Shaper Supreme, Sentinel PRO, Dial Master</td><td>De meeste apparaten</td></tr>
+    <tr><td><b>€9,95</b></td><td>Bot mes? Dan koop je een mes</td><td>Goedkoopste vervangingsonderdeel: neustrimmer-opzetstuk en Blade Guard Blades, beide €9,95. Verder Groom Guard Blade, Flex Guard Blade en 7D Scheerkop à €14,95, Gentleman Shaver-scheerkop €19,95</td><td>Elk apparaat met een mes of opzetstuk</td></tr>
+  </tbody>
+</table>
+</div>
+<p>De regel onder de kaarten benoemt de reikwijdte, zodat geen van de vier breder klinkt dan hij is. Dat is dezelfde afspraak als in blok 1: een claim die een tandje te hoog staat, kost je meer dan hij oplevert zodra iemand hem natrekt.</p>
+
+<div class="callout fix">
+  <h3 style="margin-top:0">Waarom juist deze vier</h3>
+  <p><b>De eerste is die van je klanten.</b> Van de acht reviewteksten op je site gaan er vijf over hetzelfde: <em>"zonder wondjes"</em>, <em>"geen wondjes bij de schaamstreek"</em>, <em>"met een gerust hart scheren"</em>, <em>"zonder sneetjes"</em>. Als vijf van de acht mensen uit zichzelf hetzelfde noemen, hoort dat de eerste propositie te zijn.</p>
+  <p><b>De tweede komt ook uit een review:</b> <em>"Hele fijne en stille trimmer met accudisplay, dus nooit meer een lege batterij."</em> Een accudisplay klinkt als een detail tot iemand halverwege zijn nek stilvalt.</p>
+  <p><b>De derde is het enige waar je het mechanisme kunt uitleggen dat niemand uitlegt.</b> Vrijwel elk merk zet "waterdicht" op de doos. Het verschil tussen spatdicht en IPX7 — kort onderdompelen aankunnen — is precies wat bepaalt of je hem onder de kraan mag schoonspoelen. Dat is een kenmerk waar je een zin aan mag besteden.</p>
+  <p style="margin-bottom:0"><b>De vierde beantwoordt de vraag die niemand hardop stelt:</b> is dit wegwerpspul? Een apparaat van €60 waarvan het mes voor €14,95 te vervangen is, is dat aantoonbaar niet. Dit is bovendien de enige van de vier die je concurrenten niet kunnen kopiëren zonder hun eigen onderdelenvoorraad — Balzac en Balzy verkopen die niet.</p>
+</div>
+
+<h2>Bouwnotities voor straks</h2>
+<ul>
+  <li><b>Vier kaarten, niet zes.</b> De audit noemde 4 tot 6. Ik hou het op vier: elke extra kaart verwatert de vier ankers, en er is geen vijfde kenmerk dat over het hele assortiment even hard is.</li>
+  <li><b>Het anker is tekst, geen beeld.</b> Dat scheelt vier afbeeldingen en houdt de kaart vertaalbaar en aanpasbaar zonder ontwerper.</li>
+  <li><b>De reikwijdteregel hoort erbij en mag niet weggelaten worden.</b> Zonder die zin claimen alle vier over het hele assortiment, en dat is bij twee ervan niet waar.</li>
+  <li><b>De prijs in de vierde kaart uit Shopify halen.</b> €9,95 is nu het goedkoopste onderdeel; verandert dat, dan klopt de kaart niet meer. Laat hem het minimum berekenen over de collectie met vervangingsonderdelen.</li>
+  <li><b>Nooit een vaste hoogte op de kaarten.</b> De langste uitlegregel bepaalt de rijhoogte; met <code>grid</code> groeien ze samen mee.</li>
+</ul>
+
+<div class="callout ask">
+  <h3 style="margin-top:0">Wat ik van jou nodig heb</h3>
+  <ul style="margin-bottom:0">
+    <li><b>Klopt "de meeste apparaten" bij IPX7?</b> Ik heb het bij vijf apparaten letterlijk teruggevonden. Als het er meer zijn, of juist minder, moet die regel mee.</li>
+    <li><b>Zijn er nog kenmerken die ik mis?</b> Ik heb gezocht in je productteksten, maar iets dat je zelf belangrijk vindt en dat nergens opgeschreven staat, kan ik niet vinden.</li>
+    <li><b>De derde vervuilde producttekst</b> — met het <code>&lt;form&gt;</code>-element erin. Zal ik alle drie opschonen, of pak jij dat op?</li>
+  </ul>
+</div>
+
+<h2>Daarna</h2>
+<p><b>Blok 6 — het koopblok van de bundel.</b> Dat staat al gebouwd in blok 2, als donker koopvak onderin. In het oorspronkelijke plan was dat een eigen blok; nu het al staat, is de vraag of het daar blijft of alsnog naar deze plek verhuist. Daarna volgen het zonerooster (blok 8, al klaar), de UGC-sectie, de vergelijkingstabel, garantie en FAQ, en de afsluiter.</p>
+
+<footer>
+  <p>Kenmerken, prijzen en productnamen live uit Shopify op 19 augustus 2026, letterlijk uit de productomschrijvingen. Reviewteksten van je eigen homepage. De huidige drie waardeproposities staan zo op wellshave.com. Kleuren, hoekradius en type-schaal uit <code>base.css</code> van je live theme; het zandvlak is <code>#F5F1EA</code>, de merkachtergrond uit je theme.</p>
+</footer>
+
+</div>
+
+<script>
+function fit(){
+  document.querySelectorAll('.scaler').forEach(s=>{
+    const inner=s.firstElementChild;
+    const w=parseFloat(getComputedStyle(inner).width);
+    const scale=s.clientWidth/w;
+    inner.style.transform='scale('+scale+')';
+    s.style.height=Math.ceil(inner.offsetHeight*scale)+'px';
+  });
+}
+document.fonts&&document.fonts.ready.then(fit);
+window.addEventListener('resize',fit);
+new ResizeObserver(fit).observe(document.body);
+window.addEventListener('load',fit); fit();
+</script>
