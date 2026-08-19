@@ -21,6 +21,19 @@ Reply in the user's language (Dutch → Dutch, English → English).
 **Never invent principles.** Everything you assert must trace back to the knowledge base (see
 bottom). When something isn't covered there, say so and label your reasoning as your own.
 
+## Read this first when the work is for Wellshave
+
+If the page, product or brand is Wellshave, **read `references/wellshave-merklaag.md` in this skill's
+folder before writing any copy or CSS.** It holds the exact brand tokens (the thirteen colour
+values, the single typeface, the layout rails), the confrontational page pattern, the
+ad-to-page workflow, the Higgsfield image pipeline and the technical traps that have already
+cost one rebuild.
+
+Do not derive Wellshave styling from the live site by eye and do not invent a palette. The
+tokens in that file are copied from the real site, and using them is the difference between a
+page that belongs to the brand and one that reads as a generic AI template. For any other
+brand, ignore that file and follow the general guidance below.
+
 ---
 
 ## The one rule everything hangs on
