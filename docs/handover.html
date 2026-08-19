@@ -1,0 +1,349 @@
+<title>Flex Guard Overdracht</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;800;900&display=swap">
+<style>
+/* Deze pagina is zelf opgemaakt in de Wellshave-merklaag,
+   zodat je meteen ziet waar de site naartoe moet. */
+:root{
+  --ink:#111111;
+  --ink-80:rgba(17,17,17,.8);
+  --ink-60:rgba(17,17,17,.6);
+  --ink-40:rgba(17,17,17,.4);
+  --ink-10:rgba(17,17,17,.10);
+  --paper:#FFFFFF;
+  --sand:#F5F1EA;
+  --sand-deep:#EDE6DA;
+  --carbon:#191816;
+  --bronze:#BC813E;
+  --gold:#F5D18A;
+  --alert:#E61C1C;
+  --tint-rose:#F4E3DE;
+  --tint-sage:#E5EBE1;
+  --grad-gold:linear-gradient(158deg,#F8DFAB 0%,#E5BC77 42%,#C8913F 100%);
+  --grad-dark:linear-gradient(168deg,#242220 0%,#171614 58%,#0E0D0C 100%);
+  --grad-gold-tekst:linear-gradient(100deg,#B0742A 0%,#8C5A1A 100%);
+  --r-s:12px; --r-m:18px; --r-l:26px;
+  --rail:1140px; --read:660px;
+  --mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{
+  margin:0;background:var(--sand);color:var(--ink);
+  font-family:'Montserrat',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-weight:400;line-height:1.7;-webkit-font-smoothing:antialiased;
+}
+.rail{max-width:var(--rail);margin:0 auto;padding-inline:clamp(20px,5vw,40px)}
+p{color:var(--ink-80);max-width:var(--read)}
+a{color:#8C5A1A;text-decoration:underline;text-underline-offset:3px}
+code{font-family:var(--mono);font-size:.88em;background:var(--sand-deep);
+     padding:.14em .42em;border-radius:6px;color:#5E4718}
+
+.eyebrow{font-weight:800;letter-spacing:.2em;text-transform:uppercase;
+         font-size:10.5px;color:var(--ink-40);margin:0}
+.duo{font-weight:900;letter-spacing:-.025em;line-height:1.02;margin:0;
+     font-size:clamp(31px,4.6vw,54px);text-wrap:balance}
+.duo .b{display:block;color:#B0742A}
+.duo.on-dark{color:#fff}
+.duo.on-dark .b{color:var(--gold)}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  .duo .b{background-image:var(--grad-gold-tekst);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:transparent}
+  .duo.on-dark .b{background-image:var(--grad-gold)}
+}
+h3{font-weight:900;letter-spacing:-.022em;font-size:clamp(19px,2.2vw,24px);
+   margin:0;text-wrap:balance}
+
+header.top{background:var(--grad-dark);color:#fff;padding:clamp(56px,9vw,104px) 0 clamp(48px,7vw,80px)}
+header.top .eyebrow{color:rgba(255,255,255,.45)}
+header.top p{color:rgba(255,255,255,.76)}
+.stack{display:flex;flex-direction:column;gap:22px}
+
+section{padding:clamp(48px,7vw,86px) 0}
+section.sand{background:var(--sand)}
+section.paper{background:var(--paper)}
+section.dark{background:var(--carbon);color:#fff}
+section.dark p{color:rgba(255,255,255,.74)}
+section.dark code{background:rgba(255,255,255,.09);color:var(--gold)}
+.sec-head{display:flex;flex-direction:column;gap:14px;margin-bottom:34px}
+
+.grid{display:grid;gap:18px}
+@media(min-width:760px){.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}}
+.card{background:var(--paper);border:1px solid var(--ink-10);border-radius:var(--r-m);
+      padding:clamp(20px,2.6vw,28px);display:flex;flex-direction:column;gap:10px}
+.card p{margin:0;font-size:14.5px}
+section.dark .card{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.14)}
+
+.flag{background:var(--tint-rose);border:1px solid rgba(230,28,28,.22);
+      border-radius:var(--r-l);padding:clamp(22px,3vw,34px);
+      display:flex;flex-direction:column;gap:14px}
+.flag .tag{font-weight:800;letter-spacing:.2em;text-transform:uppercase;
+           font-size:10.5px;color:var(--alert)}
+.ok{background:var(--tint-sage);border:1px solid rgba(90,120,80,.24);
+    border-radius:var(--r-l);padding:clamp(22px,3vw,34px);
+    display:flex;flex-direction:column;gap:14px}
+.ok .tag{font-weight:800;letter-spacing:.2em;text-transform:uppercase;
+         font-size:10.5px;color:#4A6A3C}
+
+.tablewrap{overflow-x:auto;border:1px solid var(--ink-10);border-radius:var(--r-m);background:var(--paper)}
+table{border-collapse:collapse;width:100%;min-width:600px;font-size:14.5px}
+th,td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--ink-10);vertical-align:top}
+th{font-weight:800;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-40)}
+tr:last-child td{border-bottom:0}
+td.num{font-variant-numeric:tabular-nums;font-family:var(--mono);font-size:13px}
+.was{color:var(--ink-40)}
+
+ul.plain{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;max-width:var(--read)}
+ul.plain li{display:flex;gap:12px;align-items:baseline;color:var(--ink-80);font-size:15px}
+ul.plain li::before{content:'';flex:none;width:6px;height:6px;border-radius:50%;
+  background:var(--bronze);transform:translateY(-2px)}
+section.dark ul.plain li{color:rgba(255,255,255,.74)}
+section.dark ul.plain li::before{background:var(--gold)}
+
+pre{margin:0;overflow-x:auto;background:var(--carbon);color:#EDE6DA;
+    border-radius:var(--r-m);padding:22px;font-family:var(--mono);
+    font-size:12.5px;line-height:1.65}
+pre b{color:var(--gold);font-weight:400}
+
+.pill{display:inline-flex;align-items:center;gap:8px;border-radius:100px;
+      padding:13px 26px;font-weight:800;font-size:13.5px;text-decoration:none;
+      background:var(--grad-gold);color:#2A1E06;border:0;width:fit-content}
+.pill.ghost{background:transparent;border:1.5px solid rgba(255,255,255,.3);color:#fff}
+a.pill{text-decoration:none}
+
+footer{background:var(--sand-deep);padding:44px 0;font-size:13px;color:var(--ink-60)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<header class="top">
+  <div class="rail stack">
+    <p class="eyebrow">Overdracht — Flex Guard™ 3-in-1</p>
+    <h1 class="duo on-dark">De pagina staat en werkt,<span class="b">maar hij is nog niet Wellshave.</span></h1>
+    <p>Alles wat je nodig hebt om in een nieuwe Claude Design-chat verder te bouwen: het designsysteem zoals het er nu staat, de merklaag waar het naartoe moet, de techniek achter de interacties, en de harde productdata voor Shopify.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px">
+      <a class="pill" href="https://wellshave-sentinel-pro.netlify.app">Bekijk de pagina</a>
+      <a class="pill ghost" href="https://github.com/Wellshave/design/pull/3">PR #3</a>
+    </div>
+  </div>
+</header>
+
+<!-- ══ 1. DE BOTSING ══ -->
+<section class="sand">
+  <div class="rail">
+    <div class="sec-head">
+      <p class="eyebrow">Lees dit eerst</p>
+      <h2 class="duo">Deze pagina volgt je merklaag niet,<span class="b">en dat was niet de bedoeling.</span></h2>
+    </div>
+    <div class="flag" style="margin-bottom:30px">
+      <span class="tag">Waarom dit gebeurde</span>
+      <p style="max-width:none">De pagina is gebouwd naar een briefing van "near-black, één verzadigd accent, zwaar display-font". Dat was een prima briefing — maar hij botst met <code>wellshave-merklaag.md</code>, die pas ná het bouwen op <code>main</code> landde (commits <code>0d10f26</code>, <code>79d917e</code>, <code>64902c4</code>). Die merklaag geldt expliciet voor "landingspagina's, productpagina's en de website". Er is dus geen bug: er zijn twee geldige richtlijnen die elkaar tegenspreken, en jij moet kiezen welke wint.</p>
+    </div>
+
+    <div class="tablewrap" style="margin-bottom:30px">
+      <table>
+        <thead><tr><th>Onderdeel</th><th>Merklaag op main</th><th>Deze pagina</th></tr></thead>
+        <tbody>
+          <tr><td>Grond</td><td>zand <code>#F5F1EA</code>, wit, carbon <code>#191816</code></td><td>near-black <code>#07080A</code></td></tr>
+          <tr><td>Accent</td><td>brons <code>#BC813E</code> op licht, goud <code>#F5D18A</code> op donker — altijd verloop</td><td>effen goud <code>#FFBE2E</code></td></tr>
+          <tr><td>Typografie</td><td>uitsluitend Montserrat 400–900</td><td>Anton + IBM Plex Mono + Inter</td></tr>
+          <tr><td>Koppen</td><td>tweeslags <code>.duo</code>, tweede regel in verloop</td><td>één regel, Anton</td></tr>
+          <tr><td>Knoppen</td><td>pillen, <code>border-radius:100px</code></td><td>rechthoekig, radius 0</td></tr>
+          <tr><td>Radius</td><td>12 / 18 / 26px</td><td>0 overal</td></tr>
+          <tr><td>Rail</td><td>1140px</td><td>1440px</td></tr>
+          <tr><td>Startpunt</td><td><code>references/startbestand.html</code></td><td>vanaf nul gebouwd</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ok">
+      <span class="tag">Mijn advies — je hoeft niet te kiezen</span>
+      <p style="max-width:none">De merklaag zegt zelf: <em>"carbon of <code>--grad-dark</code> waar het serieus wordt: mechanisme, aanbod, afsluiter."</em> Donkere secties zijn dus toegestaan, mits ze uitzondering zijn en niet de grond. De scherpste uitkomst is daarom niet "alles wordt zand" maar: <strong>bouw de pagina op zand vanuit het startbestand, en houd de cinematografische blokken — de scroll-hero, de 360°-viewer, het macroblok — als donkere <code>--grad-dark</code>-secties daarbinnen.</strong> Je behoudt dan het filmische effect precies waar het werkt, en de pagina blijft herkenbaar Wellshave. Montserrat, de pillen, het tweeslags-kopapparaat en de radiusschaal neem je wél volledig over; die dragen de herkenning, niet de achtergrondkleur.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 2. WAT ER LIGT ══ -->
+<section class="paper">
+  <div class="rail">
+    <div class="sec-head">
+      <p class="eyebrow">Wat je krijgt</p>
+      <h2 class="duo">Een werkende pagina,<span class="b">geen mockup.</span></h2>
+    </div>
+    <div class="grid g3">
+      <div class="card">
+        <h3>De code</h3>
+        <p>Branch <code>claude/wellshave-sentinel-pro-site-5dm277</code>, map <code>site/</code>. Losse <code>index.html</code>, <code>styles.css</code>, <code>app.js</code>. Geen build, geen dependencies, geen framework.</p>
+      </div>
+      <div class="card">
+        <h3>De media</h3>
+        <p>Twee productbeelden, drie clips in MP4 én WebM, en 72 losse spinframes. Samen 18 MB in <code>site/assets/</code>.</p>
+      </div>
+      <div class="card">
+        <h3>De test</h3>
+        <p><code>verify.mjs</code> — 30 Playwright-asserties over de spinner, de koopblokkade, de bundelwissel, het optellen en de scroll-scrub.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 3. DE INTERACTIES ══ -->
+<section class="dark">
+  <div class="rail">
+    <div class="sec-head">
+      <p class="eyebrow">Techniek</p>
+      <h2 class="duo on-dark">Vijf interacties,<span class="b">en waar ze stukgaan.</span></h2>
+      <p>Dit is het deel dat tijd kostte. Neem deze valkuilen mee, anders loop je er opnieuw tegenaan.</p>
+    </div>
+    <div class="grid g2">
+      <div class="card">
+        <h3 style="color:#fff">Scroll-scrub hero</h3>
+        <p>Clip 1 hangt aan de scrollpositie: <code>video.currentTime = voortgang × duur</code>, geëased via rAF. De sectie is 420vh hoog met een sticky stage.</p>
+        <p><strong style="color:var(--gold)">Valkuil 1:</strong> de video kan <code>loadedmetadata</code> vuren vóórdat je listener hangt. Dan blijft de scrub dood. Check ook <code>readyState &gt;= 1</code> bij init.</p>
+        <p><strong style="color:var(--gold)">Valkuil 2:</strong> zonder all-intra encoding springt het beeld, omdat de browser naar het vorige keyframe zoekt. Coderen met <code>keyint=1</code>.</p>
+      </div>
+      <div class="card">
+        <h3 style="color:#fff">360°-sleepviewer</h3>
+        <p>72 JPEG's op een canvas. Sleept naar links en rechts, draait zachtjes vanzelf tot de eerste aanraking en stopt dan definitief.</p>
+        <p><strong style="color:var(--gold)">Valkuil:</strong> ga er niet vanuit dat de clip precies één omwenteling is. Meet het: frame 240 kwam op 0,75 gemiddeld absoluut verschil tegen frame 0, tegenover 5,41 halverwege. Pas daarna weet je waar je mag knippen.</p>
+      </div>
+      <div class="card">
+        <h3 style="color:#fff">Koopblokkade</h3>
+        <p>Er staat bewust niets voorgeselecteerd. Toevoegen weigert met een zichtbare waarschuwing tot je een bundel kiest, en telt daarna pas op.</p>
+        <p><strong style="color:var(--gold)">Let op:</strong> de knop schudt én er verschijnt tekst. Alleen schudden leest als een bug, alleen tekst wordt gemist.</p>
+      </div>
+      <div class="card">
+        <h3 style="color:#fff">Bundelwissel &amp; telstrip</h3>
+        <p>De bundelkeuze wisselt beeld, naam, prijs en de inhoudslijst. De specstrip telt één keer op bij binnenkomst in beeld.</p>
+        <p><strong style="color:var(--gold)">Let op:</strong> alle vier de getallen komen van je PDP. Verzin er geen bij — zie de regel hieronder.</p>
+      </div>
+    </div>
+    <div style="margin-top:24px">
+      <div class="card">
+        <h3 style="color:#fff">Codecs — dit kost je een uur als je het niet weet</h3>
+        <p>Chromium-builds zonder propriëtaire codecs spelen geen H.264. De video laadt dan simpelweg niet en je scrub lijkt kapot. Elke clip staat er daarom dubbel op, MP4 én WebM/VP9, met twee <code>&lt;source&gt;</code>-tags. Houd dat zo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 4. PRODUCTDATA ══ -->
+<section class="sand">
+  <div class="rail">
+    <div class="sec-head">
+      <p class="eyebrow">Geverifieerd tegen products.json</p>
+      <h2 class="duo">De harde gegevens,<span class="b">nagewezen bij de bron.</span></h2>
+      <p>Niet van de gerenderde pagina overgetypt maar opgehaald uit <code>wellshave.com/products.json?limit=250</code>, zoals de merklaag voorschrijft. De variant-ID's heb je nodig voor Shopify.</p>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Product</th><th>Handle</th><th>Prijs</th><th>Van</th><th>Variant-ID</th><th>Voorraad</th></tr></thead>
+        <tbody>
+          <tr><td>Flex Guard™ 3-in-1</td><td><code>wellshave-flex-guard™</code></td><td class="num">€54,95</td><td class="num was">€85,65</td><td class="num">55880465580364</td><td>op voorraad</td></tr>
+          <tr><td>Essential Flex Bundel</td><td><code>essential-flex-bundel</code></td><td class="num">€79,95</td><td class="num was">€133,25</td><td class="num">56588785746252</td><td>op voorraad</td></tr>
+          <tr><td>Flex-line Bundel</td><td><code>body-beard-kit</code></td><td class="num">€89,95</td><td class="num was">€156,60</td><td class="num">56569863864652</td><td>op voorraad</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="grid g2" style="margin-top:24px">
+      <div class="ok">
+        <span class="tag">Bevestigd</span>
+        <p style="max-width:none">Beide prijzen op de pagina kloppen exact met de bron. En allebei de bundels staan op <code>available: true</code> — dat bevestigt de keuze om géén nep-uitverkochte opties te tonen, zoals de oorspronkelijke briefing vroeg. Dat zou je winkel verkeerd voorstellen.</p>
+      </div>
+      <div class="flag">
+        <span class="tag">Nog niet op de pagina</span>
+        <p style="max-width:none">Er bestaat een <strong>derde</strong> bundel: de Flex-line Bundel à €89,95, met de Detailtrimmer Sharpline plus de 3-in-1. De merklaag zegt "forceer geen derde pakket als het niet bestaat" — maar dit bestaat wél. Ik heb 'm niet toegevoegd omdat er nog geen beeld van is en het een merchandising-keuze is. Wil je 'm erbij, dan is dat een klein blok werk.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 5. NAAR SHOPIFY ══ -->
+<section class="paper">
+  <div class="rail">
+    <div class="sec-head">
+      <p class="eyebrow">Livegang</p>
+      <h2 class="duo">Statische HTML wordt geen Shopify-pagina<span class="b">door 'm te uploaden.</span></h2>
+      <p>Reken hierop, want dit is het stuk dat het meeste werk is en het makkelijkst onderschat wordt.</p>
+    </div>
+    <ul class="plain" style="margin-bottom:26px">
+      <li><strong>Het wordt een custom sectie in je thema.</strong> <code>index.html</code> gaat naar een Liquid-sectie met een <code>schema</code>, zodat je de teksten in de themabewerker kunt aanpassen in plaats van in code.</li>
+      <li><strong>De twee bundels zijn losse producten, geen varianten.</strong> Dat is de belangrijkste val: je kunt ze niet als één variantkiezer bouwen. Toevoegen aan winkelwagen is <code>POST /cart/add.js</code> met de variant-ID van het gekozen product.</li>
+      <li><strong>De 18 MB media hoort in Files, niet in Assets.</strong> Verwijs naar de <code>cdn.shopify.com</code>-URL's. Themabestanden hebben limieten die je hiermee raakt.</li>
+      <li><strong>72 losse afbeeldingen zijn 72 requests.</strong> Op mobiel is dat zwaar. Laad ze lui, of val op mobiel terug op 36 frames — dat is visueel nauwelijks te zien.</li>
+      <li><strong>Prijzen uit Liquid halen, niet hardcoden.</strong> Nu staan ze in <code>app.js</code>. Op Shopify moeten ze uit het productobject komen, anders lopen ze uit de pas zodra jullie een actie draaien.</li>
+    </ul>
+    <pre><b>// toevoegen aan winkelwagen, per gekozen bundel</b>
+fetch('/cart/add.js', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ items: [{ id: gekozenVariantId, quantity: 1 }] })
+}).then(r =&gt; r.json())
+
+<b>// 55880465580364</b>  Flex Guard 3-in-1      €54,95
+<b>// 56588785746252</b>  Essential Flex Bundel  €79,95
+<b>// 56569863864652</b>  Flex-line Bundel       €89,95</pre>
+  </div>
+</section>
+
+<!-- ══ 6. MEDIA ══ -->
+<section class="sand">
+  <div class="rail">
+    <div class="sec-head">
+      <p class="eyebrow">Beeld</p>
+      <h2 class="duo">Alles komt uit één echte packshot,<span class="b">en is opnieuw te draaien.</span></h2>
+    </div>
+    <ul class="plain">
+      <li>De packshot uit de Drive-map "Flex Guard Content" ging als referentie naar <strong>GPT Image 2</strong> — dat gaf de hero op de zwarte spiegelvloer, met de echte behuizing, het woordmerk, het LED-display en het gouden embleem intact.</li>
+      <li>Het job-ID van die hero ging als <code>start_image</code> naar <strong>alle drie</strong> de Seedance 2.5-clips (<code>omni_reference</code>, 720p, 16:9, zonder audio). Daardoor is het bewegende beeld hetzelfde object als de stills.</li>
+      <li>De bundelfoto is uit diezelfde hero gegenereerd, zodat licht, vloer en reflecties matchen.</li>
+      <li>Wil je alles opnieuw: het hangt aan één hero-ID. Vervang die en de hele keten draait opnieuw.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══ 7. BRIEFING ══ -->
+<section class="dark">
+  <div class="rail">
+    <div class="sec-head">
+      <p class="eyebrow">Voor de nieuwe chat</p>
+      <h2 class="duo on-dark">Plak dit blok,<span class="b">dan mist er niets.</span></h2>
+    </div>
+    <pre>Bouw de productpagina voor de Wellshave Flex Guard 3-in-1.
+
+UITGANGSPUNT
+- Volg .claude/skills/sanwarwala-landing-pages/references/wellshave-merklaag.md
+- Begin bij references/startbestand.html, niet bij nul
+- Bestaande werkende versie: github.com/Wellshave/design PR #3, map site/
+  (die volgt de merklaag NIET — near-black i.p.v. zand; zie overdracht)
+
+GROND
+- Zand #F5F1EA als basis, Montserrat overal, pillen, radius 12/18/26, rail 1140
+- De filmische blokken (scroll-hero, 360-viewer, macro) als donkere
+  --grad-dark secties BINNEN de zandpagina houden, niet als grond
+
+OVER TE NEMEN INTERACTIES (code staat in site/app.js)
+- Scroll-scrub hero: currentTime volgt scrollpositie, video all-intra coderen,
+  ook readyState >= 1 checken bij init
+- 360-viewer: 72 frames op canvas, autodraai tot eerste aanraking
+- Koopblokkade: niets voorgeselecteerd, weigert zichtbaar tot bundel gekozen
+- Telstrip, sticky koopbalk
+
+HARDE DATA (geverifieerd via products.json)
+- Flex Guard 3-in-1      EUR 54,95 van 85,65  variant 55880465580364
+- Essential Flex Bundel  EUR 79,95 van 133,25 variant 56588785746252
+- Flex-line Bundel       EUR 89,95 van 156,60 variant 56569863864652
+- Specs: 7000 tpm, 90 min gebruik, 800 mAh, IPX7, 100 dagen proef, 2 jaar garantie
+- 4,5/5 uit 800+ reviews
+- Geen enkel cijfer gebruiken dat hier niet in staat
+
+DOEL: live als custom sectie in het Shopify-thema, prijzen uit Liquid,
+media via Files/CDN, toevoegen via /cart/add.js</pre>
+  </div>
+</section>
+
+<footer>
+  <div class="rail">
+    Overdrachtsdocument — Flex Guard™ 3-in-1 · Deze pagina is zelf opgemaakt in de Wellshave-merklaag, als voorbeeld van waar de site naartoe moet.
+  </div>
+</footer>
