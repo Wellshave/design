@@ -1,184 +1,204 @@
 <title>Wellshave Hero Redesign</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,600;6..96,700&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Archivo:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap">
 
 <style>
 :root{
-  --paper:#FAF8F5; --surface:#FFFFFF; --surface-2:#F2EEE7;
-  --ink:#16130F; --muted:#6B6259; --brass:#9A6B22; --rule:#E3DCD1;
-  --crit:#A82A1E; --ok:#2C6349; --crit-bg:#F6E9E7; --ok-bg:#E6F0EA;
-  --shadow:0 1px 2px rgba(22,19,15,.05), 0 8px 24px -16px rgba(22,19,15,.25);
-  --frame:#DCD4C7;
-  /* Wellshave merkkleuren — vast in beide thema's, dit is de site zelf */
-  --ws-black:#1D1D1D; --ws-ink:#111010; --ws-gold:#C4A868; --ws-white:#FFFFFF;
+  /* documentchroom — afgeleid van het merkpalet */
+  --paper:#FAF9F7; --surface:#FFFFFF; --surface-2:#F1EFEB;
+  --ink:#171717; --muted:#615F5C; --rule:#E4E1DC;
+  --gold:#8F6428;            /* leesbaar goud voor kleine tekst op licht */
+  --gold-brand:#BC813E;      /* merkgoud, decoratief */
+  --crit:#A82A1E; --ok:#1E7F63; --crit-bg:#F7EBE9; --ok-bg:#E6F1EC;
+  --shadow:0 1px 2px rgba(23,23,23,.05), 0 10px 28px -18px rgba(23,23,23,.3);
+  --frame:#DAD6CF;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --paper:#131211; --surface:#1B1917; --surface-2:#232120;
-    --ink:#ECE7DF; --muted:#9A9188; --brass:#D9A94F; --rule:#2E2B27;
-    --crit:#E88377; --ok:#7FBF9F; --crit-bg:#2A1D1B; --ok-bg:#182420;
-    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
-    --frame:#33302B;
+    --paper:#131313; --surface:#1B1B1B; --surface-2:#232323;
+    --ink:#EDEBE7; --muted:#928F8A; --rule:#2D2D2D;
+    --gold:#D9A557; --gold-brand:#D9A557;
+    --crit:#E88377; --ok:#7FBF9F; --crit-bg:#2A1C1A; --ok-bg:#17241F;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -18px rgba(0,0,0,.9);
+    --frame:#333;
   }
 }
 :root[data-theme="dark"]{
-  --paper:#131211; --surface:#1B1917; --surface-2:#232120;
-  --ink:#ECE7DF; --muted:#9A9188; --brass:#D9A94F; --rule:#2E2B27;
-  --crit:#E88377; --ok:#7FBF9F; --crit-bg:#2A1D1B; --ok-bg:#182420;
-  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
-  --frame:#33302B;
+  --paper:#131313; --surface:#1B1B1B; --surface-2:#232323;
+  --ink:#EDEBE7; --muted:#928F8A; --rule:#2D2D2D;
+  --gold:#D9A557; --gold-brand:#D9A557;
+  --crit:#E88377; --ok:#7FBF9F; --crit-bg:#2A1C1A; --ok-bg:#17241F;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -18px rgba(0,0,0,.9);
+  --frame:#333;
 }
 
 *{box-sizing:border-box}
 body{margin:0;background:var(--paper);color:var(--ink);
-  font-family:"Instrument Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased}
+  font-family:"Montserrat",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:16px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased}
 .wrap{max-width:900px;margin:0 auto;padding:0 24px 96px}
-@media(max-width:600px){body{font-size:16px}.wrap{padding:0 16px 64px}}
+@media(max-width:600px){.wrap{padding:0 16px 64px}}
 
-.masthead{padding:64px 0 32px;border-bottom:1px solid var(--rule)}
-.eyebrow{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11.5px;
-  letter-spacing:.14em;text-transform:uppercase;color:var(--brass);margin:0 0 16px}
-h1{font-family:"Bodoni Moda",Georgia,serif;font-weight:700;
-  font-size:clamp(34px,6.4vw,54px);line-height:1.04;letter-spacing:-.015em;
+.masthead{padding:64px 0 30px;border-bottom:1px solid var(--rule)}
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold);margin:0 0 18px}
+h1{font-weight:300;font-size:clamp(34px,6.6vw,56px);line-height:1.08;letter-spacing:-.01em;
   margin:0 0 16px;text-wrap:balance}
-.dek{font-size:19px;color:var(--muted);margin:0;max-width:62ch;text-wrap:pretty}
-.byline{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;
-  color:var(--muted);margin-top:24px}
+h1 b{font-weight:600;
+  background-image:linear-gradient(90deg,#BC813E 0%,#F5D18A 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.dek{font-size:18px;color:var(--muted);margin:0;max-width:60ch;text-wrap:pretty}
+.byline{font-size:12.5px;color:var(--muted);margin-top:22px;letter-spacing:.02em}
 
-h2{font-family:"Bodoni Moda",Georgia,serif;font-weight:700;
-  font-size:clamp(24px,4vw,32px);line-height:1.14;letter-spacing:-.01em;
+h2{font-weight:600;font-size:clamp(22px,3.6vw,30px);line-height:1.2;letter-spacing:-.005em;
   margin:56px 0 6px;text-wrap:balance}
-h2 + .sub{color:var(--muted);margin:0 0 24px;font-size:16px;max-width:64ch}
-h3{font-size:18px;font-weight:600;margin:30px 0 8px}
-p{margin:0 0 16px;max-width:68ch}
-ul{margin:0 0 16px;padding-left:22px;max-width:68ch}
-li{margin-bottom:8px}
+h2 + .sub{color:var(--muted);margin:0 0 22px;font-size:15.5px;max-width:64ch}
+h3{font-size:17px;font-weight:600;margin:28px 0 8px;letter-spacing:-.005em}
+p{margin:0 0 15px;max-width:68ch}
+ul{margin:0 0 15px;padding-left:20px;max-width:68ch}
+li{margin-bottom:7px}
 strong{font-weight:600}
-code{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.87em;
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
   background:var(--surface-2);padding:1px 5px;border-radius:3px}
-.label{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;
-  letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:block;margin:0 0 6px}
+.label{font-size:10.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--muted);display:block;margin:0 0 6px}
 
-/* ── keuzeschakelaar ── */
-.switch{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px}
-.switch button{
-  font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.08em;
-  text-transform:uppercase;background:var(--surface);color:var(--muted);
-  border:1px solid var(--rule);border-radius:100px;padding:8px 16px;cursor:pointer;
-  transition:background .15s,color .15s,border-color .15s}
-.switch button:hover{border-color:var(--brass);color:var(--ink)}
-.switch button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-.switch-note{font-size:14px;color:var(--muted);margin:0 0 26px}
-
-/* ── mockup podium ── */
-.stage{display:grid;gap:26px;margin:0 0 8px}
-.devicecap{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;
-  letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+/* ── podium ── */
+.devicecap{font-size:10.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--muted);margin:0 0 8px}
 .scaler{width:100%;overflow:hidden;border:1px solid var(--frame);border-radius:6px;
-  background:var(--ws-black);box-shadow:var(--shadow)}
+  background:#111111;box-shadow:var(--shadow)}
 .scaler > .inner{transform-origin:top left}
-.desk-scaler{aspect-ratio:1440/700}
-.desk-scaler > .inner{width:1440px;height:700px}
+.desk-scaler{aspect-ratio:1440/720}
+.desk-scaler > .inner{width:1440px;height:720px}
 .phonecol{max-width:390px;margin:0 auto}
-.phone-scaler{aspect-ratio:390/780;border-radius:22px}
-.phone-scaler > .inner{width:390px;height:780px}
-.foldline{position:relative}
-.foldline::after{
-  content:"vouwlijn 844px";position:absolute;left:0;right:0;
-  font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:9px;letter-spacing:.08em;
-  color:var(--brass);text-align:right;padding-right:6px;bottom:-15px}
+.phone-scaler{aspect-ratio:390/800;border-radius:20px}
+.phone-scaler > .inner{width:390px;height:800px}
+.stage{display:grid;gap:28px;margin:0 0 10px}
 
-/* ── DE MOCKUP ZELF (vaste merkkleuren, beide thema's) ── */
-.ws{font-family:"Archivo",system-ui,sans-serif;background:var(--ws-black);color:var(--ws-white);
+.imgswitch{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px}
+.imgswitch button{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--surface);color:var(--muted);border:1px solid var(--rule);border-radius:100px;
+  padding:8px 16px;cursor:pointer;font-family:inherit;transition:.15s}
+.imgswitch button:hover{border-color:var(--gold);color:var(--ink)}
+.imgswitch button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.switch-note{font-size:14px;color:var(--muted);margin:0 0 24px;max-width:66ch}
+
+/* ══ DE MOCKUP — vaste merkkleuren in beide thema's ══ */
+.ws{font-family:"Montserrat",sans-serif;background:#111111;color:#FFFFFF;
   height:100%;display:flex;flex-direction:column;overflow:hidden}
-.ws-bar{background:#000;color:#EDE7DA;font-size:11px;letter-spacing:.06em;
-  display:flex;align-items:center;justify-content:center;gap:26px;padding:8px 12px;flex:none}
-.ws-bar span{white-space:nowrap;opacity:.9}
-.ws-bar .dot{color:var(--ws-gold)}
+.ws-bar{background:#000;color:#E8E5DF;font-size:12px;font-weight:400;
+  display:flex;align-items:center;justify-content:center;gap:30px;padding:9px 12px;flex:none}
+.ws-bar span{white-space:nowrap}
+.ws-bar .tick{color:#BC813E;margin-right:6px;font-weight:600}
 .ws-nav{display:flex;align-items:center;justify-content:space-between;
-  padding:14px 34px;border-bottom:1px solid rgba(255,255,255,.09);flex:none}
-.ws-nav img{height:20px;width:auto;display:block}
-.ws-links{display:flex;gap:26px;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:#DCD6CB}
-.ws-icons{display:flex;gap:16px;font-size:12.5px;letter-spacing:.08em;color:#DCD6CB}
+  padding:16px 40px;border-bottom:1px solid rgba(255,255,255,.08);flex:none;background:#171717}
+.ws-nav img{height:22px;width:auto;display:block}
+.ws-links{display:flex;gap:28px;font-size:13px;font-weight:500;letter-spacing:.09em;
+  text-transform:uppercase;color:#D8D5CF}
+.ws-icons{display:flex;gap:18px;font-size:13px;font-weight:500;letter-spacing:.06em;color:#D8D5CF}
 
-.ws-hero{flex:1;display:grid;grid-template-columns:1fr 1fr;min-height:0}
-.ws-copy{padding:44px 54px;display:flex;flex-direction:column;justify-content:center;gap:14px;
-  background:linear-gradient(180deg,#1D1D1D 0%,#151515 100%)}
-.ws-badge{align-self:flex-start;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--ws-gold);border:1px solid rgba(196,168,104,.45);border-radius:100px;padding:5px 12px}
-.ws-h1{font-size:44px;line-height:1.06;font-weight:700;letter-spacing:-.02em;margin:0;text-wrap:balance}
-.ws-sub{font-size:16px;line-height:1.5;color:#C9C3B8;margin:0;max-width:44ch}
-.ws-proof{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;font-size:13px;color:#DCD6CB}
-.ws-proof .stars{color:var(--ws-gold);letter-spacing:2px}
-.ws-proof .sep{width:1px;height:14px;background:rgba(255,255,255,.2)}
-.ws-cta{align-self:flex-start;background:var(--ws-gold);color:#161616;font-weight:600;
-  font-size:15px;letter-spacing:.04em;padding:15px 32px;border-radius:3px;
-  display:inline-flex;align-items:center;gap:10px;margin-top:4px}
-.ws-fud{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12px;color:#A9A296}
-.ws-fud b{color:var(--ws-gold);font-weight:700;margin-right:5px}
-.ws-shot{position:relative;overflow:hidden;background:#0C0C0C}
-.ws-shot img{width:100%;height:100%;object-fit:cover;object-position:52% 22%;display:block}
+.ws-hero{flex:1;display:grid;grid-template-columns:1.02fr 1fr;min-height:0}
+.ws-copy{padding:40px 52px;display:flex;flex-direction:column;justify-content:center;gap:16px;
+  background:#171717}
+.ws-badge{align-self:flex-start;font-size:11px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:#F5D18A;border:1px solid rgba(188,129,62,.55);
+  border-radius:100px;padding:6px 14px}
+.ws-h1{font-size:44px;line-height:115%;font-weight:300;margin:0;letter-spacing:-.01em}
+.ws-h1 b{display:block;font-weight:600;
+  background-image:linear-gradient(90deg,#BC813E 0%,#F5D18A 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.ws-sub{font-size:16px;line-height:150%;font-weight:400;color:#FFFFFF;margin:0;max-width:42ch;opacity:.88}
+.ws-cta{align-self:flex-start;background:#FFFFFF;color:#111111;font-weight:500;
+  font-size:16px;line-height:110%;letter-spacing:.02em;text-transform:uppercase;
+  padding:18px 24px;border-radius:100px;display:inline-flex;align-items:center;gap:8px}
+.ws-fud{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:#FFFFFF;opacity:.82}
+.ws-fud span{display:inline-flex;align-items:center;gap:7px}
+.ws-fud svg{width:15px;height:15px;flex:none}
+.ws-shot{position:relative;overflow:hidden;background:#0B0B0B}
+.ws-shot img{width:100%;height:100%;object-fit:cover;display:block}
+.ws-shot img[data-shot="mirror"]{object-position:46% 30%}
+.ws-shot img[data-shot="portrait"]{object-position:52% 18%}
 
-/* mobiele variant van de mockup */
-.ws-m .ws-nav{padding:12px 16px}
+/* Trustpilot-blok */
+.tp{display:flex;align-items:center;gap:11px;flex-wrap:wrap;font-size:13px;color:#FFF}
+.tp-stars{display:flex;gap:2.5px}
+.tp-stars i{width:22px;height:22px;background:#00B67A;display:grid;place-items:center;position:relative}
+.tp-stars i.half{background:#DCDCE6}
+.tp-stars i.half::before{content:"";position:absolute;inset:0;width:50%;background:#00B67A}
+.tp-stars svg{width:15px;height:15px;fill:#fff;position:relative}
+.tp-score{font-weight:600}
+.tp-brand{display:inline-flex;align-items:center;gap:5px;font-weight:700;letter-spacing:-.02em}
+.tp-brand svg{width:16px;height:16px;fill:#00B67A}
+.tp-rev{opacity:.72}
+.ws-proof2{font-size:13px;color:#FFF;opacity:.72}
+
+/* mobiele mockup */
+.ws-m .ws-nav{padding:13px 16px;background:#171717}
 .ws-m .ws-links,.ws-m .ws-icons{display:none}
-.ws-m .ws-burger{display:flex;flex-direction:column;gap:4px}
-.ws-m .ws-burger i{display:block;width:20px;height:1.5px;background:#DCD6CB}
-.ws-m .ws-hero{grid-template-columns:1fr;grid-template-rows:246px 1fr}
-.ws-m .ws-shot img{object-position:52% 18%}
-.ws-m .ws-copy{padding:20px 20px 22px;gap:11px;justify-content:flex-start}
-.ws-m .ws-h1{font-size:29px;line-height:1.08}
-.ws-m .ws-sub{font-size:14px;line-height:1.45}
-.ws-m .ws-proof{font-size:12px;gap:6px 12px}
-.ws-m .ws-cta{align-self:stretch;justify-content:center;padding:15px 20px;font-size:15px}
-.ws-m .ws-fud{font-size:11px;gap:4px 12px;justify-content:center}
-.ws-m .ws-bar{gap:0;font-size:10.5px}
+.ws-m .ws-burger{display:flex;flex-direction:column;gap:4.5px}
+.ws-m .ws-burger i{display:block;width:21px;height:1.5px;background:#D8D5CF}
+.ws-m .ws-hero{grid-template-columns:1fr;grid-template-rows:238px 1fr}
+.ws-m .ws-copy{padding:18px 18px 20px;gap:12px;justify-content:flex-start}
+.ws-m .ws-h1{font-size:32px;line-height:115%}
+.ws-m .ws-sub{font-size:14px;line-height:145%}
+.ws-m .ws-cta{align-self:stretch;justify-content:center;font-size:15px;padding:17px 20px}
+.ws-m .ws-fud{font-size:11.5px;gap:5px 14px;justify-content:center}
+.ws-m .ws-bar{gap:0;font-size:11px}
 .ws-m .ws-bar span:not(:first-child){display:none}
+.ws-m .tp{font-size:12px;gap:8px}
+.ws-m .tp-stars i{width:19px;height:19px}
+.ws-m .tp-stars svg{width:13px;height:13px}
+.ws-m .ws-proof2{font-size:11.5px}
 
 /* ── annotaties ── */
-.anno{background:var(--surface);border:1px solid var(--rule);border-left:3px solid var(--brass);
-  border-radius:3px;padding:18px 22px;margin:0 0 14px;box-shadow:var(--shadow)}
+.anno{background:var(--surface);border:1px solid var(--rule);border-left:3px solid var(--gold-brand);
+  border-radius:3px;padding:18px 22px;margin:0 0 13px;box-shadow:var(--shadow)}
 .anno > :last-child{margin-bottom:0}
-.anno h3{margin:0 0 8px;font-size:17px}
-.anno p{font-size:15.5px;margin-bottom:0;color:var(--muted)}
+.anno h3{margin:0 0 7px;font-size:16.5px}
+.anno p{font-size:15px;margin-bottom:0;color:var(--muted)}
 .anno p b{color:var(--ink);font-weight:600}
 
-.ba{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin:18px 0}
 @media(max-width:640px){.ba{grid-template-columns:1fr}}
-.ba > div{background:var(--surface-2);border-radius:3px;padding:16px 18px}
-.ba p{margin:0;font-size:15.5px}
+.ba > div{background:var(--surface-2);border-radius:3px;padding:15px 17px}
+.ba p{margin:0;font-size:15px}
 .ba .now{color:var(--muted)}
 
 .tablewrap{overflow-x:auto;margin:20px 0;border:1px solid var(--rule);border-radius:3px}
-table{border-collapse:collapse;width:100%;min-width:520px;background:var(--surface);font-size:15px}
+table{border-collapse:collapse;width:100%;min-width:540px;background:var(--surface);font-size:14.5px}
 th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--rule);vertical-align:top}
-th{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--surface-2)}
+th{font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);background:var(--surface-2)}
 tr:last-child td{border-bottom:0}
 
 .callout{background:var(--surface-2);border-radius:3px;padding:20px 22px;margin:24px 0}
 .callout > :last-child{margin-bottom:0}
 .ask{border-left:3px solid var(--crit);background:var(--crit-bg)}
+.fix{border-left:3px solid var(--ok);background:var(--ok-bg)}
 
 .progress{display:flex;flex-wrap:wrap;gap:5px;margin:20px 0 0}
 .progress i{width:26px;height:5px;border-radius:100px;background:var(--rule);display:block}
-.progress i.done{background:var(--brass)}
-.progress-cap{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;
-  color:var(--muted);letter-spacing:.06em;margin:10px 0 0}
+.progress i.done{background:var(--gold-brand)}
+.progress-cap{font-size:11.5px;color:var(--muted);letter-spacing:.05em;margin:10px 0 0}
 
-footer{margin-top:64px;padding-top:22px;border-top:1px solid var(--rule);color:var(--muted);font-size:13.5px}
-:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+footer{margin-top:64px;padding-top:22px;border-top:1px solid var(--rule);color:var(--muted);font-size:13px}
+:focus-visible{outline:2px solid var(--gold-brand);outline-offset:3px}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01z"/></symbol>
+<symbol id="chk" viewBox="0 0 24 24"><path d="M4 12.5l5.2 5.2L20 6.9" fill="none" stroke="#BC813E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
 
 <div class="wrap">
 
 <header class="masthead">
-  <p class="eyebrow">Homepage-redesign · blok 1 van 12</p>
-  <h1>De hero</h1>
-  <p class="dek">Het enige blok dat 100% van je bezoekers ziet, en waar 50-60% ook weer afhaakt. Hieronder het ontwerp, gebouwd met je eigen beeldmateriaal, in drie copy-richtingen die je live kunt omschakelen.</p>
+  <p class="eyebrow">Homepage-redesign · blok 1 van 12 · versie 2</p>
+  <h1>De hero, nu <b>op huisstijl</b></h1>
+  <p class="dek">Richting A vastgelegd, 950+ reviews doorgevoerd, echte Trustpilot-branding toegepast — en de hele typografie herbouwd op je eigen Design DNA en de tokens uit je Shopify-theme.</p>
   <p class="byline">Ontwerp — nog niets live. Akkoord → dan pas Shopify.</p>
   <div class="progress" aria-hidden="true">
     <i class="done"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
@@ -186,25 +206,37 @@ footer{margin-top:64px;padding-top:22px;border-top:1px solid var(--rule);color:v
   <p class="progress-cap">Blok 1 in ontwerp · 11 blokken volgen</p>
 </header>
 
-<h2>Kies een copy-richting</h2>
-<p class="sub">Alleen de headline en subheadline verschillen. Beeld, CTA, proof en garantieregel blijven gelijk, zodat je puur de boodschap vergelijkt.</p>
-
-<div class="switch" role="group" aria-label="Copy-richting">
-  <button type="button" data-v="a" aria-pressed="true">A · Pijn + mechanisme</button>
-  <button type="button" data-v="b" aria-pressed="false">B · Uitkomst + tijd</button>
-  <button type="button" data-v="c" aria-pressed="false">C · Verliesgedreven</button>
+<div class="callout fix">
+  <h3 style="margin-top:0">Wat er is rechtgezet sinds versie 1</h3>
+  <ul style="margin-bottom:0">
+    <li><strong>Montserrat overal</strong> — was Archivo. Je theme laadt Montserrat als <code>--font-family</code> en je Design DNA legt hem vast voor alles behalve packaging.</li>
+    <li><strong>De tweetrapskop.</strong> Regel 1 wit in Light, regel 2 in het horizontale goudverloop van <code>#BC813E</code> links naar <code>#F5D18A</code> rechts, in SemiBold. Nooit de hele kop in wit, nooit de hele kop in goud.</li>
+    <li><strong>Goud is nu accent, geen vlak.</strong> Versie 1 had een volledig gouden knop — dat is precies de 80/20-regel schenden. De knop is nu wit, exact zoals <code>.button--light</code> in je theme.</li>
+    <li><strong>Echte knopvorm:</strong> pil van 100px, uppercase, 18px/24px padding, gewicht 500 — de waarden uit je eigen <code>base.css</code>.</li>
+    <li><strong>Type-schaal uit het theme:</strong> h1 44px op 115%, mobiel 32px. Body 16px op 150%.</li>
+    <li><strong>Trustpilot in eigen huisstijl</strong> — groene sterblokken <code>#00B67A</code>, halve ster voor de 4,5, en het merk met de groene ster ernaast.</li>
+    <li><strong>950+ reviews</strong> doorgevoerd op alle plekken.</li>
+  </ul>
 </div>
-<p class="switch-note" id="vnote">Aanbevolen start. Gebruikt letterlijk de woorden uit je eigen reviews en zet het mechanisme direct achter de belofte.</p>
+
+<h2>Kies het beeld</h2>
+<p class="sub">Je Design DNA is streng over fotografie: no-fuss mornings, ontspannen gezichten, accessible luxury — en expliciet géén macho-bravoure. Dat maakt de keuze tussen deze twee niet vrijblijvend.</p>
+
+<div class="imgswitch" role="group" aria-label="Beeldkeuze">
+  <button type="button" data-s="mirror" aria-pressed="true">Spiegelshot — aanbevolen</button>
+  <button type="button" data-s="portrait" aria-pressed="false">Portretshot</button>
+</div>
+<p class="switch-note" id="snote">Ontspannen gezicht, echte ochtendroutine, trimmer in de hand, toilettas en case herkenbaar in beeld, matte zwarte badkamer. Raakt vijf punten van je fotografielijst tegelijk.</p>
 
 <div class="stage">
   <div>
     <p class="devicecap">Desktop — 1440px</p>
     <div class="scaler desk-scaler"><div class="inner">
-      <div class="ws" id="deskmock">
+      <div class="ws">
         <div class="ws-bar">
-          <span><b class="dot">★</b> Uitstekend 4,5 / 5 op Trustpilot</span>
-          <span>100 dagen zorgeloos retourneren</span>
-          <span>Vandaag besteld, morgen in huis</span>
+          <span><b class="tick">✓</b>Vandaag besteld, morgen in huis</span>
+          <span><b class="tick">✓</b>100 dagen zorgeloos retourneren</span>
+          <span><b class="tick">✓</b>Gratis verzending vanaf €30</span>
         </div>
         <div class="ws-nav">
           <img src="__LOGO__" alt="Wellshave">
@@ -214,52 +246,61 @@ footer{margin-top:64px;padding-top:22px;border-top:1px solid var(--rule);color:v
         <div class="ws-hero">
           <div class="ws-copy">
             <span class="ws-badge">Summer Sale · tot 40% korting</span>
-            <h2 class="ws-h1" data-slot="h1"></h2>
-            <p class="ws-sub" data-slot="sub"></p>
-            <div class="ws-proof">
-              <span><span class="stars">★★★★</span><span class="stars" style="opacity:.5">★</span> 4,5 · 800+ reviews op Trustpilot</span>
-              <span class="sep"></span>
-              <span>180.000+ mannen gingen je voor</span>
+            <h2 class="ws-h1">Overal glad.<b>Zonder sneetjes.</b></h2>
+            <p class="ws-sub">Keramische SkinSafe™-messen glijden over je huid in plaats van erin. Ook in de schaamstreek.</p>
+            <div class="tp">
+              <span class="tp-stars">
+                <i><svg><use href="#star"/></svg></i><i><svg><use href="#star"/></svg></i>
+                <i><svg><use href="#star"/></svg></i><i><svg><use href="#star"/></svg></i>
+                <i class="half"><svg><use href="#star"/></svg></i>
+              </span>
+              <span class="tp-score">Uitstekend · 4,5</span>
+              <span class="tp-brand"><svg><use href="#star"/></svg>Trustpilot</span>
+              <span class="tp-rev">950+ reviews</span>
             </div>
             <span class="ws-cta">Shop de bestsellers →</span>
             <div class="ws-fud">
-              <span><b>✓</b>100 dagen proberen</span>
-              <span><b>✓</b>2 jaar garantie</span>
-              <span><b>✓</b>Gratis verzending vanaf €30</span>
+              <span><svg><use href="#chk"/></svg>100 dagen proberen</span>
+              <span><svg><use href="#chk"/></svg>2 jaar garantie</span>
+              <span><svg><use href="#chk"/></svg>Gratis verzending vanaf €30</span>
             </div>
+            <p class="ws-proof2">180.000+ mannen gingen je voor</p>
           </div>
-          <div class="ws-shot"><img src="__HERO__" alt="Man met Wellshave-trimmer in de badkamer"></div>
+          <div class="ws-shot"><img data-shot="mirror" src="__MIRROR__" alt="Man scheert zich met een Wellshave-trimmer in de badkamer"></div>
         </div>
       </div>
     </div></div>
   </div>
 
-  <div class="phonecol foldline">
+  <div class="phonecol">
     <p class="devicecap">Mobiel — 390px · 73% van je verkeer</p>
     <div class="scaler phone-scaler"><div class="inner">
-      <div class="ws ws-m" id="mobmock">
-        <div class="ws-bar"><span><b class="dot">★</b> 4,5 / 5 · Vandaag besteld, morgen in huis</span></div>
+      <div class="ws ws-m">
+        <div class="ws-bar"><span><b class="tick">✓</b>Vandaag besteld, morgen in huis</span></div>
         <div class="ws-nav">
           <div class="ws-burger"><i></i><i></i><i></i></div>
           <img src="__LOGO__" alt="Wellshave">
-          <div class="ws-burger" style="gap:0"><i style="width:16px;height:16px;border:1.5px solid #DCD6CB;background:none;border-radius:2px"></i></div>
+          <div class="ws-burger" style="gap:0"><i style="width:17px;height:17px;border:1.5px solid #D8D5CF;background:none;border-radius:2px"></i></div>
         </div>
         <div class="ws-hero">
-          <div class="ws-shot"><img src="__HERO__" alt="Man met Wellshave-trimmer in de badkamer"></div>
+          <div class="ws-shot"><img data-shot="mirror" src="__MIRROR__" alt="Man scheert zich met een Wellshave-trimmer in de badkamer"></div>
           <div class="ws-copy">
             <span class="ws-badge">Summer Sale · tot 40%</span>
-            <h2 class="ws-h1" data-slot="h1"></h2>
-            <p class="ws-sub" data-slot="sub"></p>
-            <div class="ws-proof">
-              <span><span class="stars">★★★★</span><span class="stars" style="opacity:.5">★</span> 4,5 · 800+ reviews</span>
-              <span class="sep"></span>
-              <span>180.000+ mannen</span>
+            <h2 class="ws-h1">Overal glad.<b>Zonder sneetjes.</b></h2>
+            <p class="ws-sub">Keramische SkinSafe™-messen glijden over je huid in plaats van erin. Ook in de schaamstreek.</p>
+            <div class="tp">
+              <span class="tp-stars">
+                <i><svg><use href="#star"/></svg></i><i><svg><use href="#star"/></svg></i>
+                <i><svg><use href="#star"/></svg></i><i><svg><use href="#star"/></svg></i>
+                <i class="half"><svg><use href="#star"/></svg></i>
+              </span>
+              <span class="tp-brand"><svg><use href="#star"/></svg>Trustpilot</span>
+              <span class="tp-rev">4,5 · 950+</span>
             </div>
             <span class="ws-cta">Shop de bestsellers →</span>
             <div class="ws-fud">
-              <span><b>✓</b>100 dagen proberen</span>
-              <span><b>✓</b>2 jaar garantie</span>
-              <span><b>✓</b>Gratis vanaf €30</span>
+              <span><svg><use href="#chk"/></svg>100 dagen proberen</span>
+              <span><svg><use href="#chk"/></svg>2 jaar garantie</span>
             </div>
           </div>
         </div>
@@ -268,105 +309,123 @@ footer{margin-top:64px;padding-top:22px;border-top:1px solid var(--rule);color:v
   </div>
 </div>
 
+<h2>De copy, definitief</h2>
+<p class="sub">Richting A, herschreven naar de tweetrapskop uit je Design DNA en naar de schrijfregels: actief, gewone taal, "je/jij" voor voordelen, leiden met een gekwantificeerd of hard feit.</p>
+
+<div class="tablewrap">
+<table>
+  <thead><tr><th>Onderdeel</th><th>Tekst</th><th>Behandeling</th></tr></thead>
+  <tbody>
+    <tr><td>Kopregel 1</td><td>Overal glad.</td><td>Wit, Montserrat Light</td></tr>
+    <tr><td>Kopregel 2</td><td>Zonder sneetjes.</td><td>Goudverloop horizontaal, SemiBold</td></tr>
+    <tr><td>Subline</td><td>Keramische SkinSafe™-messen glijden over je huid in plaats van erin. Ook in de schaamstreek.</td><td>Wit, Regular, 16px/150%</td></tr>
+    <tr><td>Badge</td><td>Summer Sale · tot 40% korting</td><td>Licht goud, dunne gouden rand</td></tr>
+    <tr><td>CTA</td><td>Shop de bestsellers</td><td>Witte pil, uppercase, gewicht 500</td></tr>
+    <tr><td>Garantieregel</td><td>100 dagen proberen · 2 jaar garantie · Gratis verzending vanaf €30</td><td>Wit, gouden vinkjes in open lijnstijl</td></tr>
+  </tbody>
+</table>
+</div>
+
 <h2>Wat er verandert en waarom</h2>
-<p class="sub">Elk element zit er om een reden. Kun je ergens naar wijzen zonder dat ik kan uitleggen waarom het er staat, dan moet het weg.</p>
 
 <div class="anno">
-  <h3>De headline verkoopt nu een resultaat, geen korting</h3>
-  <p><b>Was:</b> "SUMMER SALE — profiteer van kortingen tot wel 40%". <b>Wordt:</b> een belofte met het bezwaar er direct achteraan. De sale verdwijnt niet — die zakt naar een badge boven de headline, waar hij hoort. Korting versterkt een reden om te kopen; het ís er geen.</p>
+  <h3>De headline verkoopt een resultaat, geen korting</h3>
+  <p><b>Was:</b> "SUMMER SALE — profiteer van kortingen tot wel 40%". <b>Wordt:</b> een belofte met het bezwaar er direct achteraan. De sale verdwijnt niet — die zakt naar een badge boven de kop. Korting versterkt een reden om te kopen; het ís er geen.</p>
 </div>
 
 <div class="anno">
-  <h3>De subheadline levert het mechanisme</h3>
-  <p>Een belofte zonder uitleg waaróm het werkt converteert niet in een markt waar iedereen hetzelfde belooft. "Keramische SkinSafe-messen glijden over je huid in plaats van erin" is het enige wat Philips en een scheermesje niet kunnen zeggen. <b>Dit is je scherpste wapen en het staat nu nergens op de homepage.</b></p>
+  <h3>De tweetrapskop wordt je herkenningspunt op de site</h3>
+  <p>Je Design DNA noemt de wit/goud-tweetrapskop letterlijk "het handelsmerk van de set" — hij staat op alle zes je listingfoto's. Op je website staat hij nergens. <b>Dit trekt je advertenties, je bol.com-listings en je homepage voor het eerst in één visuele taal.</b></p>
+  <p style="margin-top:9px"><b>Let op:</b> die regel is in je DNA vastgelegd voor listingfoto's, niet voor de site. Ik trek hem hier door omdat het je sterkste herkenningspunt is — maar het is jouw beslissing of hij ook op web geldt.</p>
 </div>
 
 <div class="anno">
-  <h3>Twee stukjes bewijs, direct zichtbaar</h3>
-  <p>Sterrenscore mét bron én het aantal klanten. Nu hangt je enige bewijs aan een Trustpilot-widget die via JavaScript inlaadt — als die traag is of geblokkeerd wordt, staat er niets. <b>Zet het cijfer als gewone tekst neer</b> en laat de widget er eventueel naast staan.</p>
+  <h3>SkinSafe™ komt eindelijk boven de vouw</h3>
+  <p>Het is de enige claim die Philips en een scheermesje niet kunnen maken, en je Design DNA noemt hem als toegestane kernclaim. Nu staat hij alleen in een FAQ-antwoord onderaan de pagina. <b>Dit is je scherpste wapen en het lag begraven.</b></p>
 </div>
 
 <div class="anno">
-  <h3>Eén CTA, en de garanties staan eronder</h3>
-  <p>De 100 dagen, de 2 jaar garantie en de gratis verzending stonden in een losse balk ónder de hero. Ze horen op het punt waar iemand moet beslissen: pal onder de knop. Dat is de plek waar de laatste twijfel wordt weggenomen — nergens anders.</p>
+  <h3>Trustpilot in de eigen huisstijl van Trustpilot</h3>
+  <p>Groene sterblokken, halve ster voor de 4,5, de groene ster naast het woordmerk. Dat is herkenbaar in een halve seconde — een rij gouden sterretjes is dat niet. Nu hangt je enige bewijs aan een widget die via JavaScript inlaadt; laadt die traag of wordt hij geblokkeerd, dan staat er niets. <b>Zet het cijfer als gewone tekst neer</b> en laat de officiële widget er desgewenst naast lopen.</p>
 </div>
 
 <div class="anno">
-  <h3>Het beeld toont een mens, huid en het apparaat</h3>
-  <p>Dit is jouw eigen bestand <code>freepik_portrait-lifestyle-shot</code> uit je media library. Er is een man, er is huid, er is een badkamer, en het apparaat ligt herkenbaar in beeld met de case ernaast. <b>Voor het eerst kan iemand in één blik zien wat je verkoopt en waarvoor.</b> Het huidige beeld — zes zwarte apparaten op zwart — laat dat allemaal weg.</p>
+  <h3>Goud terug naar 20%</h3>
+  <p>Versie 1 had een volledig gouden knop. Je DNA is daar expliciet over: 80% zwart/grijs, 20% goud, en <b>goud is accent, nooit vlak</b>. In dit ontwerp draagt goud alleen kopregel 2, de badge, de vinkjes en de Summer Sale-rand. De knop is wit — precies de <code>.button--light</code> die je theme al heeft.</p>
+</div>
+
+<div class="anno">
+  <h3>De garanties staan nu onder de knop</h3>
+  <p>100 dagen, 2 jaar garantie en gratis verzending stonden in een losse balk ónder de hero. Ze horen op het punt waar iemand beslist: pal onder de knop. Dat is de plek waar de laatste twijfel wordt weggenomen, nergens anders.</p>
 </div>
 
 <div class="anno">
   <h3>Split-layout in plaats van tekst óver de foto</h3>
-  <p>Tekst over een drukke foto is op mobiel bijna altijd slecht leesbaar, en jouw huidige oplossing daarvoor is een leeg zwart vlak van 35% onderin de foto. Een split — beeld boven, tekst op merkzwart eronder — houdt de foto heel én de tekst scherp, en past het hele blok binnen de vouw op 390px.</p>
+  <p>Je DNA zegt het zelf: tekst nooit direct over drukke fotostructuur. Je huidige oplossing daarvoor is een leeg zwart vlak van 35% onderin de foto — dat vreet je bovenste scherm op. Een split houdt de foto heel én de tekst scherp, en past het hele blok binnen de vouw op 390px.</p>
 </div>
 
-<h2>Voor en na, in cijfers</h2>
+<h2>Voor en na</h2>
 <div class="tablewrap">
 <table>
   <thead><tr><th>Element boven de vouw</th><th>Nu</th><th>Ontwerp</th></tr></thead>
   <tbody>
-    <tr><td>Headline met eindresultaat</td><td>Ontbreekt</td><td>Aanwezig</td></tr>
-    <tr><td>Subheadline met mechanisme</td><td>Ontbreekt</td><td>Aanwezig</td></tr>
-    <tr><td>Social proof</td><td>1× JS-widget</td><td>2× als vaste tekst</td></tr>
+    <tr><td>Headline met eindresultaat</td><td>Ontbreekt</td><td>Aanwezig, in huisstijl-tweetrapskop</td></tr>
+    <tr><td>Mechanisme (SkinSafe™)</td><td>Alleen in de FAQ onderaan</td><td>In de subline</td></tr>
+    <tr><td>Social proof</td><td>1× JS-widget</td><td>Trustpilot als vaste tekst + klantaantal</td></tr>
     <tr><td>CTA</td><td>1</td><td>1</td></tr>
     <tr><td>FUD-reducers onder de knop</td><td>Ontbreekt</td><td>3</td></tr>
-    <tr><td>Beeld met mens en gebruik</td><td>Nee</td><td>Ja</td></tr>
-    <tr><td>Announcement bars boven de header</td><td>2 gestapeld</td><td>1</td></tr>
-    <tr><td>Correcte <code>h1</code> op de homepage</td><td>Nee — twee productnamen</td><td>Ja — de headline</td></tr>
+    <tr><td>Beeld met mens en gebruik</td><td>Nee — zes zwarte apparaten op zwart</td><td>Ja</td></tr>
+    <tr><td>Announcement bars</td><td>2 gestapeld</td><td>1</td></tr>
+    <tr><td>Correcte <code>h1</code></td><td>Nee — twee productnamen</td><td>Ja</td></tr>
+    <tr><td>Reviewaantal</td><td>700+ én 800+ door elkaar</td><td>950+, overal gelijk</td></tr>
   </tbody>
 </table>
 </div>
 
 <h2>Bouwnotities voor straks</h2>
-<p class="sub">Niet uitvoeren tot je akkoord bent. Dit is wat er in Shopify moet gebeuren zodra het ontwerp staat.</p>
+<p class="sub">Niet uitvoeren tot je akkoord bent.</p>
 <ul>
+  <li>Kopregel 2 krijgt <code>background-image: linear-gradient(90deg,#BC813E,#F5D18A)</code> met <code>background-clip: text</code>. Fallback-kleur <code>#F5D18A</code> voor oudere browsers, zodat de tekst nooit onzichtbaar wordt.</li>
   <li>De hero-titel wordt een echte <code>&lt;h1&gt;</code>; de twee productblokken lager op de pagina zakken naar <code>&lt;h2&gt;</code>.</li>
-  <li>Op de hero-afbeelding: <code>loading="eager"</code> en <code>fetchpriority="high"</code>. Nu staat daar <code>lazy</code>, terwijl dit je Largest Contentful Paint is op mobiel.</li>
+  <li>Op de hero-afbeelding: <code>loading="eager"</code> en <code>fetchpriority="high"</code>. Nu staat daar <code>lazy</code> terwijl dit je Largest Contentful Paint is.</li>
   <li>Twee losse beeldbestanden: staand voor mobiel, liggend voor desktop. Niet één bestand uitrekken.</li>
-  <li>De tweede announcement bar uit, de overgebleven bar terug naar één regel op mobiel.</li>
-  <li>Stapelvolgorde op 390px: bar → header → beeld (246px) → badge → headline → sub → proof → CTA over volle breedte → garantieregel. Alles binnen 844px.</li>
-  <li>Sale-badge als aparte instelling in de sectie, zodat je hem buiten actieperiodes uit kunt zetten zonder de headline aan te raken.</li>
+  <li>Trustpilot: gebruik het officiële Trustpilot-asset uit hun Business-portaal voor de definitieve build, met de vaste tekst als fallback eronder. Wat je hier ziet is een nagebouwde weergave voor het ontwerp.</li>
+  <li>Stapelvolgorde op 390px: bar → header → beeld (238px) → badge → kop → subline → Trustpilot → CTA over volle breedte → garantieregel. Alles binnen 844px.</li>
+  <li>Sale-badge als aparte sectie-instelling, zodat je hem buiten actieperiodes uit kunt zetten zonder de kop aan te raken.</li>
 </ul>
 
 <div class="callout ask">
-  <h3 style="margin-top:0">Drie dingen die ik van jou nodig heb</h3>
+  <h3 style="margin-top:0">Nog twee dingen die ik van jou nodig heb</h3>
   <ul style="margin-bottom:0">
-    <li><strong>Welke copy-richting?</strong> A, B of C — of een combinatie. Zeg het gerust in je eigen woorden, dan schrijf ik hem om.</li>
-    <li><strong>Klopt "180.000+"?</strong> Dat cijfer staat nu in het Engels op je pagina en ik gebruik het prominent. Is het klanten, of iets anders?</li>
-    <li><strong>700+ of 800+ reviews?</strong> Beide staan nu op dezelfde pagina. Ik zet overal hetzelfde cijfer neer zodra jij zegt welk.</li>
+    <li><strong>Klopt "180.000+"?</strong> Dat staat nu in het Engels op je site en ik gebruik het onder de garantieregel. Zijn dat klanten, of iets anders? Klopt het niet, dan haal ik het weg.</li>
+    <li><strong>Welk beeld?</strong> Spiegelshot of portretshot. Mijn advies is de spiegelshot, omdat de portretshot dicht tegen "macho-bravoure" aan zit — een van de tien dingen die je DNA expliciet uitsluit.</li>
   </ul>
 </div>
 
+<h2>Eén ding dat ik onderweg tegenkwam</h2>
+<p>Je Design DNA noemt als toegestane kernclaim <strong>"90 minuten Li-ion runtime"</strong>. De specificaties op je homepage zeggen voor de Groom Guard <strong>"120 minuten opladen / 120 minuten gebruik"</strong>. Die twee spreken elkaar tegen. Voor deze hero maakt het niet uit — ik gebruik geen runtime-claim — maar zodra we bij de waardeproposities komen, moet er één waarheid zijn.</p>
+
 <h2>Daarna</h2>
-<p><strong>Blok 2 — de pijnpunt-sectie.</strong> Het blok dat er nu helemaal niet is en dat voor koud verkeer het zwaarst weegt: waarom een scheermesje voor je liezen de verkeerde tool is, en wat keramische messen anders doen. Zodra je akkoord bent op de hero, ontwerp ik die op dezelfde manier.</p>
+<p><strong>Blok 2 — de pijnpunt-sectie.</strong> Het blok dat er nu helemaal niet is en dat voor koud verkeer het zwaarst weegt: waarom een scheermesje voor je liezen de verkeerde tool is, en wat keramische messen anders doen. Zelfde werkwijze: ontwerp, jouw feedback, dan pas Shopify.</p>
 
 <footer>
-  <p>Mockup gebouwd met je eigen assets: <code>freepik_portrait-lifestyle-shot-o_2812538722.png</code> en <code>redesign_header_logo.webp</code> uit je Shopify-bestanden. De mockup staat bewust in merkzwart in zowel licht als donker thema — dat is de site, niet deze pagina. Definitieve fotografie kan afwijken; deze foto laat vooral zien wát voor beeld hier hoort te staan.</p>
+  <p>Typografie, kleuren, knopvorm en type-schaal komen uit <code>WellShave-Listing-Design-DNA.md</code> (Google Drive) en uit de tokens in <code>base.css</code> van je live theme. Beeld: <code>freepik_lifestyle-photography-of-_2812060866.png</code> en <code>freepik_portrait-lifestyle-shot-o_2812538722.png</code> uit je Shopify-bestanden. De mockup staat bewust in merkzwart in zowel licht als donker thema — dat is de site, niet deze pagina.</p>
 </footer>
 
 </div>
 
 <script>
-const COPY = {
-  a:{h1:"Overal glad. Zonder sneetjes, zonder rode bultjes.",
-     sub:"Keramische SkinSafe-messen glijden over je huid in plaats van erin — ook in de schaamstreek. Vandaag besteld, morgen scheren.",
-     note:"Aanbevolen start. Gebruikt letterlijk de woorden uit je eigen reviews en zet het mechanisme direct achter de belofte."},
-  b:{h1:"Van top tot teen verzorgd in 10 minuten.",
-     sub:"Eén apparaat voor je lichaam, baard, neus en hoofd. Waterdicht, dus gewoon onder de douche. 100 dagen proberen, anders geld terug.",
-     note:"Sterkste kaart voor je bundels: “één apparaat voor alles” rechtvaardigt de prijs al in de headline."},
-  c:{h1:"Nooit meer sneetjes daar beneden.",
-     sub:"Ruil je scheermes in voor keramische messen die je huid niet raken. Vandaag besteld, morgen in huis.",
-     note:"Kortst, dus het sterkst op mobiel. Belooft geen voordeel maar het einde van een ongemak — verlies weegt zwaarder dan winst."}
+const NOTE={
+  mirror:"Ontspannen gezicht, echte ochtendroutine, trimmer in de hand, toilettas en case herkenbaar in beeld, matte zwarte badkamer. Raakt vijf punten van je fotografielijst tegelijk.",
+  portrait:"Sterker product in beeld en meer huid, maar de pose zit dicht tegen macho-bravoure aan — punt 6 op je lijst van wat je juist niet wilt uitstralen."
 };
-function apply(v){
-  document.querySelectorAll('[data-slot="h1"]').forEach(e=>e.textContent=COPY[v].h1);
-  document.querySelectorAll('[data-slot="sub"]').forEach(e=>e.textContent=COPY[v].sub);
-  document.getElementById('vnote').textContent=COPY[v].note;
-  document.querySelectorAll('.switch button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.v===v)));
-}
-document.querySelectorAll('.switch button').forEach(b=>b.addEventListener('click',()=>apply(b.dataset.v)));
-apply('a');
+const SRC={mirror:"__MIRROR__",portrait:"__PORTRAIT__"};
+document.querySelectorAll('.imgswitch button').forEach(b=>b.addEventListener('click',()=>{
+  const s=b.dataset.s;
+  document.querySelectorAll('.ws-shot img').forEach(img=>{img.src=SRC[s];img.dataset.shot=s;});
+  document.getElementById('snote').textContent=NOTE[s];
+  document.querySelectorAll('.imgswitch button').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.s===s)));
+}));
 
 function fit(){
   document.querySelectorAll('.scaler').forEach(s=>{
