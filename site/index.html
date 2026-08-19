@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Groom Guard PRO — Wellshave</title>
+<meta name="description" content="Wellshave Groom Guard PRO — 6600 RPM SkinSafe bodygroomer met foil shaver kop. Eén onafgebroken pass, van droog trimmen tot glad.">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+<div id="loader" class="loader">
+  <div class="loader__inner">
+    <div class="loader__mark">WELLSHAVE</div>
+    <div class="loader__bar"><span id="loaderFill"></span></div>
+    <div class="loader__pct"><span id="loaderPct">0</span>%</div>
+  </div>
+</div>
+
+<header class="topbar">
+  <div class="topbar__mark">WELLSHAVE</div>
+  <div class="topbar__mid">GROOM&nbsp;GUARD<span class="pro">PRO</span></div>
+  <a class="topbar__cta" href="#bestel">€59,95</a>
+</header>
+
+<!-- ============ SCROLL-SCRUB DRIVE ============ -->
+<section class="scrub" id="scrub">
+  <div class="scrub__stage">
+    <canvas id="seq" class="scrub__canvas"></canvas>
+    <div class="scrub__vignette"></div>
+
+    <div class="hud" id="hud">
+      <div class="hud__label">TOERENTAL</div>
+      <div class="hud__value"><span id="rpm">0</span><em>RPM</em></div>
+      <div class="hud__track"><span id="rpmFill"></span></div>
+      <div class="hud__meta"><span id="hudPct">0</span>% VAN DE PASS</div>
+    </div>
+
+    <nav class="rail" id="rail" aria-label="Hoofdstukken">
+      <button class="rail__item is-active" data-t="0.00"><i></i><span>DE TRIM</span></button>
+      <button class="rail__item" data-t="0.34"><i></i><span>ONDER DE DOUCHE</span></button>
+      <button class="rail__item" data-t="0.68"><i></i><span>SKINSAFE</span></button>
+    </nav>
+
+    <div class="scrub__title" id="scrubTitle">
+      <h1>ÉÉN<br>PASS.</h1>
+      <p>Van droog trimmen tot glad. Zonder onderbreking.</p>
+      <div class="scrollcue">SCROLL</div>
+    </div>
+
+    <div class="chapcard" id="chapCard">
+      <span class="chapcard__no">01</span>
+      <span class="chapcard__txt">Droog trimmen — 6600 RPM door de dikste haren.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATS ============ -->
+<section class="stats blur-in" id="stats">
+  <div class="stats__head">
+    <span class="eyebrow">SPECIFICATIES</span>
+    <h2>WAT ER ONDER<br>DE KAP ZIT</h2>
+  </div>
+  <div class="stats__grid">
+    <div class="stat"><div class="stat__num" data-to="6600" data-suffix="">0</div><div class="stat__unit">RPM</div><div class="stat__cap">Motor die niet vastloopt in dik haar</div></div>
+    <div class="stat"><div class="stat__num" data-to="120" data-suffix="">0</div><div class="stat__unit">MIN</div><div class="stat__cap">Gebruikstijd per lading via USB-C</div></div>
+    <div class="stat"><div class="stat__num" data-to="7" data-prefix="IPX">0</div><div class="stat__unit">WATERPROOF</div><div class="stat__cap">Gewoon mee onder de douche</div></div>
+    <div class="stat"><div class="stat__num" data-to="0">0</div><div class="stat__unit">SNEETJES</div><div class="stat__cap">SkinSafe keramiek raakt je huid nooit</div></div>
+  </div>
+</section>
+
+<!-- ============ DESIGN / MACRO ============ -->
+<section class="design blur-in" id="design">
+  <div class="design__head">
+    <span class="eyebrow">ONTWERP</span>
+    <h2>ELK DETAIL<br>DOET IETS</h2>
+    <p>Geen versiering. Drie onderdelen die samen bepalen of je huid glad wordt of geïrriteerd.</p>
+  </div>
+  <div class="design__grid" id="designGrid"></div>
+</section>
+
+<!-- ============ CONFIGURATOR ============ -->
+<section class="config blur-in" id="config">
+  <div class="config__copy">
+    <span class="eyebrow">CONFIGURATIE</span>
+    <h2>DRIE KOPPEN.<br>ÉÉN BODY.</h2>
+    <p id="configDesc">Klik een kop om te zien wat je krijgt.</p>
+    <div class="config__opts" id="configOpts">
+      <button class="opt is-active" data-key="trimmer"><i></i><span>Trimmer</span></button>
+      <button class="opt" data-key="foil"><i></i><span>Foil shaver</span></button>
+      <button class="opt" data-key="precisie"><i></i><span>Precisie</span></button>
+    </div>
+    <dl class="config__spec" id="configSpec"></dl>
+  </div>
+  <div class="config__stage">
+    <img id="configImg" src="" alt="Groom Guard PRO">
+    <div class="config__glow"></div>
+  </div>
+</section>
+
+<!-- ============ BESTEL ============ -->
+<section class="order blur-in" id="bestel">
+  <div class="order__panel">
+    <div class="order__left">
+      <span class="eyebrow">BESTEL</span>
+      <h2>GROOM GUARD<br>PRO</h2>
+      <ul class="order__list">
+        <li>Bodytrimmer + foil shaver kop</li>
+        <li>Oplaadstandaard en USB-C kabel</li>
+        <li>2 jaar garantie</li>
+      </ul>
+    </div>
+    <div class="order__right">
+      <div class="order__price"><span class="cur">€</span>59,<span class="cents">95</span></div>
+      <div class="order__ship">Voor 23:59 besteld, morgen in huis</div>
+      <form class="order__form" id="orderForm" novalidate>
+        <input type="email" id="orderEmail" placeholder="jouw@email.nl" autocomplete="email" required>
+        <button type="submit" id="orderBtn">RESERVEER — €59,95</button>
+        <p class="order__err" id="orderErr" hidden>Vul een geldig e-mailadres in.</p>
+      </form>
+      <div class="order__done" id="orderDone" hidden>
+        <div class="order__check">✓</div>
+        <strong>Gereserveerd.</strong>
+        <span id="orderDoneMail"></span>
+        <button type="button" id="orderReset">Wijzigen</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <span>WELLSHAVE®</span>
+  <span>GROOM GUARD PRO · 6600 RPM · IPX7</span>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>
