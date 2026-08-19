@@ -27,8 +27,10 @@ for (const file of files) {
     // staat in een .scaler > .inner, dus een nieuw blok valt er nooit buiten
     const wortels = [...document.querySelectorAll('.scaler > .inner > *')];
     const binnen = (sel) => wortels.flatMap(w => [...w.querySelectorAll(sel)]);
-    // deze lopen bewust buiten hun kader; de ouder knipt ze af
-    const DECORATIEF = /gcard-mark|revtrack|bs-mark|az-mark/;
+    // deze lopen bewust buiten hun kader; de ouder knipt ze af met overflow:hidden.
+    // Op naam matchen brak zodra er een blok bijkwam, dus nu op patroon:
+    // *-mark is een decoratief monogram, *track is een lopende band.
+    const DECORATIEF = /-mark\b|track\b/;
 
     const buiten = [];
     [...wortels, ...binnen('*')].forEach(el => {
