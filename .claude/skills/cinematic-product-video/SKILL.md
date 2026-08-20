@@ -1,6 +1,6 @@
 ---
 name: cinematic-product-video
-description: Produceer een cinematische commercial van een product met Higgsfield MCP en Seedance 2.5, plus een merkeigen annotatielaag die lokaal wordt ingebrand en nul credits kost. Dekt de hele run — product en formaat kiezen, referentiefoto's verzamelen en per shot toewijzen, de shotlijst schrijven, de credits vooraf aftasten, shot voor shot genereren met omni-reference zodat het product identiek blijft, elke clip zelf bekijken voordat je hem goedkeurt, en tot slot monteren met USP-teksten in Montserrat en het merkgoud. ALWAYS use this skill when someone wants a cinematic, commercial or product film made — even when they never mention Higgsfield or Seedance. Trigger on "maak een cinematic video", "cinematische productvideo", "commercial video van [product]", "productfilm", "macro video van ons product", "video met Seedance", "Higgsfield video", "video van de [product] maken", "voeg USP's toe aan de video", "tekst over de video", "annotaties in de video", "ons font over de video", "make a cinematic product video", "commercial film for [product]", "hero video for the product page", "add our USPs as text over the video", "brand this video with our font and colours". Gebruik hem ook bij het opnieuw monteren, hermonteren of uitbreiden van een bestaande cinematic film, en bij het maken van een verticale 9:16-versie. Werkt voor elk Wellshave-product; de merklaag levert kleur en typografie. Bilingual (Nederlands/English): reply in the user's language.
+description: Produceer een cinematische commercial van een product met Higgsfield MCP en Seedance 2.5, plus een merkeigen annotatielaag die lokaal wordt ingebrand en nul credits kost. Dekt de hele run — product en formaat kiezen, referentiefoto's verzamelen en per shot toewijzen, de shotlijst schrijven, de credits vooraf aftasten, shot voor shot genereren met omni-reference zodat het product identiek blijft, elke clip zelf bekijken voordat je hem goedkeurt, en tot slot monteren met USP-teksten in Montserrat en het merkgoud. ALWAYS use this skill when someone wants a cinematic, commercial or product film made — even when they never mention Higgsfield or Seedance. Trigger on "maak een cinematic video", "cinematische productvideo", "commercial video van [product]", "productfilm", "macro video van ons product", "video met Seedance", "Higgsfield video", "video van de [product] maken", "voeg USP's toe aan de video", "tekst over de video", "annotaties in de video", "ons font over de video", "make a cinematic product video", "commercial film for [product]", "hero video for the product page", "add our USPs as text over the video", "brand this video with our font and colours". Gebruik hem ook bij het opnieuw monteren, hermonteren of uitbreiden van een bestaande cinematic film, en bij het maken van een verticale 9:16-versie. Trigger ook op een vage of onvolledige opening — "ik wil een video van [product]", "kun je een video maken", "video voor de productpagina", "iets moois met dit product", "we hebben beeld nodig voor de ads" — want de skill begint met een intake die de ontbrekende gegevens ophaalt en een verkeerd gestelde vraag bijstuurt naar de juiste werkwijze. Trigger eveneens wanneer iemand vraagt om productbeeld te laten genereren zonder eigen referentiefoto's aan te leveren: de skill dringt daar juist op aan, omdat het model anders een product verzint dat niet bestaat. Werkt voor elk Wellshave-product; de merklaag levert kleur en typografie. Bilingual (Nederlands/English): reply in the user's language.
 ---
 
 # Cinematische productvideo
@@ -37,6 +37,33 @@ Wat er voor video het meest toe doet: `--gold:#F5D18A` is het accent op donker, 
 beelden zijn per definitie donker. `--bronze:#BC813E` is het accent op licht en hoort hier dus
 vrijwel nooit. Montserrat is het enige merkfont.
 
+## Stap 0 — De intake, vóór alles
+
+Drie dingen moeten vaststaan voordat er één credit weggaat: **welk product**, **welk formaat en
+welke lengte**, en **referentiefoto's van de gebruiker zelf**. Ontbreekt er één, vraag ernaar.
+Gokken is hier duurder dan vragen: een shotlijst herzien is gratis, een gegenereerd shot niet.
+
+Een brief komt zelden compleet binnen, en dat is normaal. Het is jouw werk om hem compleet te
+maken zonder de gebruiker het gevoel te geven dat hij het verkeerd vroeg. Stel de ontbrekende
+vragen in één keer, met een aanbeveling erbij, in plaats van er drie beurten over te doen.
+
+### Openingen die bijsturing vragen
+
+| Wat er binnenkomt | Wat je doet |
+|---|---|
+| "Maak een video van [product]" — verder niets | Vraag formaat en lengte, en open het uploadvenster voor foto's. Begin niet met genereren op basis van alleen een productnaam. |
+| "Gebruik gewoon de foto's van de website" | Kan, maar controleer ze eerst: winkelfoto's dragen vaak prijsbadges, tekstoverlays of vergelijkingsbalken, en het model neemt die over. Vraag de schone studiobestanden. |
+| "Maak hem lekker traag en sfeervol" | Cinematisch is niet traag. Leg uit dat een stilvallende camera in een commercial leest als een hapering, en werk met doorlopende beweging op gematigd tempo. |
+| "Zet onze USP's erin met AI" | Tekst wordt niet gegenereerd maar lokaal ingebrand — scherper, in het merkfont, en gratis te herzien. Zie `annotatielaag.md`. |
+| "Snijd hem bij naar 9:16 voor TikTok" | Bijsnijden werkt niet: de macro's zijn op de breedte gekadreerd. Een verticale versie is opnieuw genereren, tegen het volle bedrag. |
+| "Doe er iemand bij die hem vasthoudt" | Dit is een productfilm zonder mensen. Wil de gebruiker een presentator, unboxing of review, wijs dan naar `higgsfield-content-factory`. |
+| "Maak zoveel mogelijk shots" | Noem de prijs per shot en stel zes tot acht voor. Meer shots maakt een commercial niet beter, alleen langer. |
+| Eén foto aangeleverd | Werkbaar, maar zeg wat het kost: minder hoeken betekent meer kans dat het model de vorm herziet. Vraag of er meer zijn. |
+| Een sfeerfoto van iemand die het product gebruikt | Onbruikbaar als referentie. Het model neemt de omgeving en de handen over. Vraag een productfoto op een schone achtergrond. |
+
+Twijfel je of een verzoek binnen deze werkwijze valt: de toets is of het **product de hoofdrol
+speelt en er verder niemand in beeld is**. Zo niet, dan is dit de verkeerde skill en zeg je dat.
+
 ## De werkwijze
 
 ### 1. Bepaal product, formaat en lengte
@@ -55,9 +82,19 @@ opzetstukken in de volgorde waarin ze horen, en de features die het product echt
 
 ### 2. Verzamel en herken de referentiefoto's
 
-Bijlagen uit de Claude-chat zijn onleesbaar voor remote MCP-tools. Roep
-`media_upload_widget` aan; de browser van de gebruiker uploadt dan rechtstreeks naar Higgsfield.
-Werkt de widget niet, vraag dan een publieke https-URL en gebruik `media_import_url`.
+**Bied altijd zelf het uploadvenster aan, ook als de gebruiker niet over foto's begint.** Dit is
+de belangrijkste foutpreventie in de hele werkwijze. Zonder eigen referentie verzint het model
+een apparaat dat er ongeveer zo uitziet, en dan staat er een product in je commercial dat niet
+bestaat. Ga er nooit van uit dat Shopify of de website genoeg is: die beelden zijn gekozen om te
+verkopen, niet om een model mee te sturen, en dragen vaak badges en overlays.
+
+Roep `media_upload_widget` aan — bijlagen uit de Claude-chat zijn onleesbaar voor remote
+MCP-tools, dus vraag daar niet om. De browser van de gebruiker uploadt rechtstreeks naar
+Higgsfield. Werkt de widget niet in hun client, vraag dan een publieke https-URL en gebruik
+`media_import_url`.
+
+Wil de gebruiker echt zonder eigen foto's door, zeg dan expliciet wat dat betekent voor de
+gelijkenis met het echte product en laat hen kiezen. Doe dat niet stilzwijgend.
 
 Wat een goede set is: één schone studiofoto van het hele product, één close-up per opzetstuk of
 uitgelicht detail, en minstens één achterkant. Geen foto's met bestaande tekstoverlays of
