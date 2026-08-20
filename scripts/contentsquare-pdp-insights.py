@@ -11,6 +11,11 @@ inclusief de twee die via de Clarity-API niet konden:
   4. Desktop-checkout die afbreekt        -> via JS- en API-fouten per apparaat
   5. Klikken op het koopblok              -> via targets_clicks
 
+LET OP - dit script vereist een betaald Contentsquare-plan. De Export API zit
+vanaf Growth in het pakket; op het Free-plan is de APIs-regel leeg en levert
+het inloggen niets op. Op Free is de MCP-connector de route (300 tool calls per
+maand), niet dit script. Bewaard voor als het plan ooit meegroeit.
+
 Werkt met server-to-server OAuth, dus zonder de Claude-connector:
 
     export CS_CLIENT_ID='...'
