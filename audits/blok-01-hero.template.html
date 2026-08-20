@@ -80,11 +80,11 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
 .scaler{width:100%;overflow:hidden;border:1px solid var(--frame);border-radius:4px;
   background:#111;box-shadow:var(--shadow)}
 .scaler > .inner{transform-origin:top left}
-.desk-scaler{aspect-ratio:1440/728}
-.desk-scaler > .inner{width:1440px;height:728px}
+.desk-scaler{aspect-ratio:1440/770}
+.desk-scaler > .inner{width:1440px;height:770px}
 .phonecol{max-width:390px;margin:0 auto}
-.phone-scaler{aspect-ratio:390/800;border-radius:18px}
-.phone-scaler > .inner{width:390px;height:800px}
+.phone-scaler{aspect-ratio:390/1210;border-radius:18px}
+.phone-scaler > .inner{width:390px;height:1210px}
 .stage{display:grid;gap:30px;margin:0 0 10px}
 
 .switch{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px}
@@ -96,86 +96,149 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
 .switch-note{font-size:14px;color:var(--fg-soft);margin:0 0 24px;max-width:66ch;line-height:160%}
 
 /* ══ MOCKUP — exact de merkkleuren, vast in beide thema's ══ */
-.ws{font-family:"Montserrat",sans-serif;background:#111111;color:#FFFFFF;
-  height:100%;display:flex;flex-direction:column;overflow:hidden}
-.ws-bar{background:#191816;color:rgba(255,255,255,.8);font-size:12px;font-weight:500;
-  line-height:140%;display:flex;align-items:center;justify-content:center;gap:34px;
-  padding:10px 12px;flex:none}
-.ws-bar span{white-space:nowrap;display:inline-flex;align-items:center;gap:8px}
-.ws-bar svg{width:13px;height:13px;flex:none;color:#F5D18A}
-.ws-nav{display:flex;align-items:center;justify-content:space-between;
-  padding:16px 40px;flex:none;background:#111111;border-bottom:1px solid rgba(255,255,255,.08)}
-.ws-nav img{height:22px;width:auto}
-.ws-links{display:flex;gap:28px;font-size:12px;font-weight:500;letter-spacing:.12em;
-  text-transform:uppercase;color:rgba(255,255,255,.8)}
-.ws-icons{display:flex;gap:18px;font-size:12px;font-weight:500;letter-spacing:.1em;
-  text-transform:uppercase;color:rgba(255,255,255,.8)}
+.ws{font-family:"Montserrat",sans-serif;background:#0B0B0A;color:#FFFFFF;
+  display:flex;flex-direction:column;height:100%}
+.ws *{box-sizing:border-box}
+.ws p{margin:0;max-width:none}
+.ws ul{margin:0;padding:0;max-width:none}
 
-/* de bannerstructuur van het theme: beeld full-bleed, tekstblok max 560 */
-.ws-hero{flex:1;position:relative;min-height:0;overflow:hidden;background:#111;
-  display:grid;grid-template-columns:1fr 540px}
-.ws-media{grid-column:2;position:relative;overflow:hidden;background:#0C0C0C}
-.ws-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.ws-hero img[data-shot="mirror"]{object-position:50% 42%}
-.ws-hero img[data-shot="portrait"]{object-position:50% 40%}
+/* aankondigingsbalk en navigatie */
+.ws-bar{background:#0B0B0A;color:rgba(255,255,255,.82);font-size:12.5px;font-weight:500;
+  display:flex;justify-content:center;gap:56px;padding:13px 40px;
+  border-bottom:1px solid rgba(245,209,138,.16)}
+.ws-bar span{white-space:nowrap;display:inline-flex;align-items:center;gap:9px}
+.ws-bar svg{width:17px;height:17px;flex:none;color:#BC813E}
+.ws-nav{display:flex;align-items:center;justify-content:space-between;gap:30px;
+  padding:19px 40px;border-bottom:1px solid rgba(245,209,138,.14);position:relative;z-index:3}
+.ws-nav img{height:30px;width:auto}
+.ws-links{display:flex;gap:34px;font-size:13px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:rgba(255,255,255,.88)}
+.ws-icons{display:flex;gap:26px;font-size:12.5px;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:rgba(255,255,255,.88)}
+.ws-icons span{display:inline-flex;align-items:center;gap:8px}
+.ws-icons svg{width:17px;height:17px;color:rgba(255,255,255,.88)}
+
+/* de hero zelf */
+.ws-hero{flex:1;position:relative;min-height:0;overflow:hidden;background:#0B0B0A;display:flex}
+.ws-media{position:absolute;inset:0 0 0 56%;overflow:hidden}
+.ws-hero img.ws-foto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  object-position:50% 34%}
 .ws-scrim{position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(90deg,rgba(17,17,17,1) 0%,rgba(17,17,17,.35) 22%,rgba(17,17,17,0) 55%)}
-.ws-inner{grid-column:1;grid-row:1;position:relative;height:100%;padding:0 44px 0 40px;z-index:2;
-  display:flex;align-items:center;justify-content:flex-end}
-.ws-blocks{width:100%;max-width:560px;margin-right:auto;display:flex;flex-direction:column;gap:14px;align-items:flex-start}
-.ws-badge{font-size:12px;font-weight:600;line-height:140%;letter-spacing:.06em;
-  text-transform:uppercase;background:#F5D18A;color:#111111;padding:7px 14px;border-radius:100px}
-.ws-h1{font-size:44px;line-height:115%;font-weight:600;letter-spacing:-.01em;margin:0;color:#fff}
-.ws-sub{font-size:16px;line-height:150%;font-weight:400;color:rgba(255,255,255,.8);margin:0}
-.ws-cta{background:#BC813E;color:#111111;font-weight:600;font-size:16px;line-height:110%;
-  text-transform:uppercase;padding:18px 24px;border-radius:100px;
-  display:inline-flex;align-items:center;gap:8px;margin:4px 0}
-.ws-fud{display:flex;flex-wrap:wrap;align-items:center;font-size:12px;line-height:140%;
-  color:rgba(255,255,255,.8);font-weight:500}
-.ws-fud span{display:inline-flex;align-items:center;gap:7px;padding:0 14px}
-.ws-fud span:first-child{padding-left:0}
-.ws-fud span + span{border-left:1px solid rgba(255,255,255,.25)}
-.ws-fud svg{width:13px;height:13px;flex:none;color:rgba(255,255,255,.85)}
-.ws-shotnote{position:absolute;right:14px;bottom:14px;background:rgba(17,17,17,.82);
-  color:#F5D18A;font-size:9.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
-  padding:6px 11px;border-radius:100px;z-index:3}
+  background:linear-gradient(90deg,#0B0B0A 0%,rgba(11,11,10,.92) 12%,rgba(11,11,10,.35) 34%,rgba(11,11,10,0) 62%)}
+.ws-merk{position:absolute;left:30%;top:8%;width:26%;opacity:.06;pointer-events:none;
+  filter:brightness(0) invert(1)}
+.ws-bogen{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+.ws-bogen path{fill:none;stroke:url(#goudlijn);stroke-linecap:round}
+.ws-streep{position:absolute;left:57%;top:6%;bottom:10%;width:2px;pointer-events:none;z-index:1;
+  background:linear-gradient(180deg,rgba(245,209,138,0),rgba(245,209,138,.75) 42%,rgba(245,209,138,0));
+  transform:rotate(9deg);filter:blur(.4px)}
+
+.ws-inner{position:relative;z-index:2;display:flex;align-items:center;
+  padding:24px 30px 24px 40px;width:58%}
+.ws-blocks{width:100%;max-width:600px;display:flex;flex-direction:column;
+  gap:19px;align-items:flex-start}
+.ws-badge{font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:#F5D18A;border:1px solid rgba(245,209,138,.45);border-radius:100px;padding:11px 22px;
+  background:rgba(245,209,138,.07)}
+.ws-h1{font-size:58px;line-height:104%;font-weight:700;letter-spacing:-.035em;margin:0;color:#fff}
+.ws-h1 em{font-style:normal;color:#F5D18A}
+.ws-sub{font-size:18px;line-height:158%;font-weight:400;color:rgba(255,255,255,.72);margin:0;
+  max-width:34em}
+
+.ws-knoppen{display:flex;flex-wrap:wrap;gap:14px;align-items:stretch}
+.ws-cta{display:inline-flex;align-items:center;gap:14px;
+  background:linear-gradient(135deg,#F5D18A 0%,#D8AC5D 52%,#BC813E 100%);
+  color:#111111;font-weight:700;font-size:14px;letter-spacing:.13em;text-transform:uppercase;
+  padding:20px 30px;border-radius:100px;text-decoration:none;
+  box-shadow:0 14px 34px -18px rgba(245,209,138,.9)}
+.ws-cta svg{width:17px;height:17px}
+.ws-cta2{display:inline-flex;align-items:center;justify-content:center;
+  border:1px solid rgba(255,255,255,.34);color:#fff;font-weight:700;font-size:14px;
+  letter-spacing:.13em;text-transform:uppercase;padding:20px 30px;border-radius:100px;
+  text-decoration:none;background:rgba(255,255,255,.03)}
+
+/* het label bij het apparaat en het aantal bestellingen */
+.ws-wijzer{position:absolute;left:69%;top:64%;z-index:2;padding-left:52px}
+.ws-wijzer::before{content:"";position:absolute;left:0;top:50%;width:42px;height:1px;
+  background:linear-gradient(90deg,rgba(245,209,138,0),#F5D18A)}
+.ws-wijzer b{display:block;font-size:13px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:#fff}
+.ws-wijzer em{display:block;font-style:normal;font-size:12px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:#F5D18A;margin-top:5px}
+.ws-telling{position:absolute;left:57.5%;right:auto;bottom:30px;top:auto;z-index:2;display:flex;align-items:center;
+  gap:14px;background:rgba(11,11,10,.62);border:1px solid rgba(245,209,138,.32);
+  border-radius:14px;padding:14px 20px;backdrop-filter:blur(8px)}
+.ws-telling svg{width:24px;height:24px;color:#F5D18A;flex:none}
+.ws-telling b{display:block;font-size:19px;font-weight:700;letter-spacing:-.01em;color:#fff}
+.ws-telling em{display:block;font-style:normal;font-size:10.5px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:rgba(255,255,255,.62);margin-top:3px}
+
+/* de garantiestrook onderaan de hero */
+.ws-strook{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  background:#0B0B0A;border-top:1px solid rgba(245,209,138,.16);padding:26px 40px}
+.ws-strook > div{display:flex;align-items:center;gap:18px;padding:0 34px;min-width:0}
+.ws-strook > div + div{border-left:1px solid rgba(255,255,255,.1)}
+.ws-zegel{width:46px;height:46px;flex:none;border-radius:50%;border:1px solid rgba(245,209,138,.4);
+  display:flex;align-items:center;justify-content:center;color:#F5D18A;
+  font-size:13px;font-weight:700}
+.ws-zegel svg{width:23px;height:23px}
+.ws-strook b{display:block;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:#F5D18A}
+.ws-strook span{display:block;font-size:13.5px;color:rgba(255,255,255,.6);margin-top:5px}
 
 /* Trustpilot */
-.tp{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:13px;
-  color:rgba(255,255,255,.8);font-weight:500}
-.tp-stars{display:flex;gap:2.5px}
-.tp-stars i{width:21px;height:21px;background:#00B67A;display:grid;place-items:center;position:relative}
+.tp{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:14px;
+  color:rgba(255,255,255,.68)}
+.tp-stars{display:flex;gap:3px}
+.tp-stars i{width:25px;height:25px;background:#00B67A;display:grid;place-items:center;position:relative}
 .tp-stars i.half{background:#DCDCE6}
 .tp-stars i.half::before{content:"";position:absolute;inset:0;width:50%;background:#00B67A}
-.tp-stars svg{width:14px;height:14px;fill:#fff;position:relative}
-.tp-score{font-weight:600;color:#fff}
-.tp-brand{display:inline-flex;align-items:center;gap:5px;font-weight:700;
-  letter-spacing:-.03em;color:#fff}
-.tp-brand svg{width:16px;height:16px;fill:#00B67A}
+.tp-stars svg{width:16px;height:16px;fill:#fff;position:relative}
+.tp-score{font-weight:600;color:#fff;font-size:15px}
+.tp-brand{display:inline-flex;align-items:center;gap:6px;font-weight:700;color:#fff;font-size:15px}
+.tp-brand svg{width:18px;height:18px;fill:#00B67A}
 
-/* mobiel */
-.ws-m .ws-nav{padding:13px 16px}
-.ws-m .ws-links,.ws-m .ws-icons{display:none}
-.ws-m .ws-burger{display:flex;flex-direction:column;gap:4.5px}
-.ws-m .ws-burger i{display:block;width:21px;height:1.5px;background:rgba(255,255,255,.8)}
-.ws-m .ws-hero{grid-template-columns:1fr}
-.ws-m .ws-media{grid-column:1;position:absolute;inset:0}
-.ws-m .ws-hero img[data-shot="mirror"]{object-position:52% 26%}
-.ws-m .ws-hero img[data-shot="portrait"]{object-position:52% 20%}
-.ws-m .ws-scrim{background:linear-gradient(180deg,rgba(17,17,17,.1) 0%,rgba(17,17,17,.35) 34%,rgba(17,17,17,.88) 60%,rgba(17,17,17,.97) 100%)}
-.ws-m .ws-inner{grid-column:1;padding:0 18px;align-items:flex-end;justify-content:flex-start}
-.ws-m .ws-blocks{max-width:none;gap:11px;padding-bottom:22px}
-.ws-m .ws-h1{font-size:32px;line-height:115%}
-.ws-m .ws-sub{font-size:14px;line-height:140%}
-.ws-m .ws-cta{align-self:stretch;justify-content:center;font-size:15px;padding:17px 20px}
-.ws-m .ws-fud{font-size:11px;width:100%;justify-content:center}
-.ws-m .ws-fud span{padding:0 9px}
-.ws-m .ws-bar{gap:0;font-size:11px}
+/* ── mobiel ── */
+.ws-m{height:auto;min-height:100%}
+.ws-m .ws-hero{flex:0 0 auto}
+.ws-m .ws-wijzer,.ws-m .ws-bogen,.ws-m .ws-streep{display:none}
+.ws-m .ws-merk{display:none}
+.ws-m .ws-bar{gap:0;font-size:11.5px;padding:11px 16px;justify-content:center}
 .ws-m .ws-bar span:not(:first-child){display:none}
+.ws-m .ws-nav{padding:15px 16px}
+.ws-m .ws-links,.ws-m .ws-icons{display:none}
+.ws-m .ws-burger{display:flex;flex-direction:column;gap:5px}
+.ws-m .ws-burger i{display:block;width:22px;height:1.5px;background:rgba(255,255,255,.85)}
+.ws-m .ws-nav img{height:26px}
+.ws-m .ws-hero{flex-direction:column;min-height:0}
+.ws-m .ws-media{position:relative;inset:auto;width:100%;height:330px;flex:none}
+.ws-m .ws-hero img.ws-foto{object-position:52% 26%}
+.ws-m .ws-scrim{background:linear-gradient(180deg,rgba(11,11,10,.1) 0%,rgba(11,11,10,.35) 52%,rgba(11,11,10,.94) 92%,#0B0B0A 100%)}
+.ws-m .ws-merk{left:auto;right:-8%;top:2%;width:52%}
+.ws-m .ws-streep{left:24%;top:4%;bottom:32%}
+.ws-m .ws-inner{width:100%;padding:0 18px 26px;margin-top:-34px}
+.ws-m .ws-blocks{gap:16px;max-width:none}
+.ws-m .ws-badge{font-size:11px;padding:9px 16px}
+.ws-m .ws-h1{font-size:40px;letter-spacing:-.032em}
+.ws-m .ws-sub{font-size:15px;line-height:152%}
+.ws-m .ws-knoppen{width:100%;flex-direction:column;gap:10px}
+.ws-m .ws-cta,.ws-m .ws-cta2{justify-content:center;font-size:13px;padding:18px 22px}
+.ws-m .ws-wijzer{left:16px;top:auto;bottom:176px;padding-left:0}
+.ws-m .ws-wijzer::before{display:none}
+.ws-m .ws-telling{left:16px;right:auto;top:18px;bottom:auto;margin-top:0;padding:10px 14px;gap:10px}
+.ws-m .ws-telling b{font-size:15px}
+.ws-m .ws-telling em{font-size:9px}
+.ws-m .ws-strook{grid-template-columns:1fr;padding:6px 18px 22px;gap:0}
+.ws-m .ws-strook > div{padding:15px 0;gap:14px}
+.ws-m .ws-strook > div + div{border-left:0;border-top:1px solid rgba(255,255,255,.1)}
+.ws-m .ws-zegel{width:38px;height:38px}
+.ws-m .ws-zegel svg{width:19px;height:19px}
+.ws-m .ws-strook b{font-size:11.5px}
+.ws-m .ws-strook span{font-size:12.5px}
 .ws-m .tp{font-size:12px;gap:8px}
-.ws-m .tp-stars i{width:18px;height:18px}
-.ws-m .tp-stars svg{width:12px;height:12px}
-.ws-m .ws-badge{font-size:11px;padding:6px 12px}
+.ws-m .tp-stars i{width:19px;height:19px}
+.ws-m .tp-stars svg{width:13px;height:13px}
+.ws-m .tp-score,.ws-m .tp-brand{font-size:12.5px}
 
 /* ── annotaties ── */
 .anno{background:var(--surface);border:1px solid var(--rule);border-left:2px solid var(--gold-dark-100);
@@ -214,21 +277,43 @@ footer p{max-width:none}
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01z"/></symbol>
+<symbol id="truck" viewBox="0 0 24 24"><path d="M1.9 6.2h12.2v9.4H1.9zM14.1 9.7h3.9l3.1 3.1v2.8h-7z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.6" cy="18" r="1.9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="17.3" cy="18" r="1.9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="retour" viewBox="0 0 24 24"><path d="M3.6 12a8.4 8.4 0 1 0 2.6-6.1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.4 3.6v4.6h4.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="doos" viewBox="0 0 24 24"><path d="M3.4 7.4 12 3.4l8.6 4v9.2L12 20.6l-8.6-4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.4 7.4 12 11.5l8.6-4.1M12 11.5v9.1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="zoek" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M15.8 15.8 20.4 20.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="account" viewBox="0 0 24 24"><circle cx="12" cy="8.6" r="3.9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.9 20c.6-3.6 3.6-5.9 7.1-5.9s6.5 2.3 7.1 5.9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="tas" viewBox="0 0 24 24"><path d="M5.2 7.6h13.6l1 12.2H4.2z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.8 10V6.6a3.2 3.2 0 0 1 6.4 0V10" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="mensen" viewBox="0 0 24 24"><circle cx="9.2" cy="8.4" r="3.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M2.9 19.4c.5-3.2 3.2-5.2 6.3-5.2s5.8 2 6.3 5.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M15.8 5.4a3.4 3.4 0 0 1 0 6.6M17.4 14.6c2.1.5 3.5 2.2 3.8 4.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="shield" viewBox="0 0 24 24"><path d="M12 2.6l7.2 2.8v6.1c0 4.4-3 8.4-7.2 9.9-4.2-1.5-7.2-5.5-7.2-9.9V5.4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.7 12.1l2.3 2.3 4.3-4.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="arw" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 <symbol id="chk" viewBox="0 0 24 24"><path d="M4 12.5l5.2 5.2L20 6.9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </defs></svg>
 
 <div class="wrap">
 
 <header class="masthead">
-  <p class="eyebrow">Homepage-redesign · blok 1 van 12 · vastgesteld</p>
+  <p class="eyebrow">Homepage-redesign · blok 1 van 12 · versie 2</p>
   <h1>De hero, met mijn advies</h1>
-  <p class="dek">Het beeld is opnieuw opgebouwd: model én product zichtbaar, niets uitgerekt. En er staat een derde kop bij — mijn aanbeveling, met de onderbouwing waarom ik de missiekop naar blok 2 wil verplaatsen in plaats van hem in de hero te laten.</p>
+  <p class="dek">Versie 2 neemt jouw aangeleverde hero over: dieper zwart, veel meer goud, een tweede knop, een label bij het apparaat en een garantiestrook onder de vouw. De kop blijft dezelfde als in versie 1, met dezelfde onderbouwing eronder. De drie losse USP's onder de knoppen zijn eruit.</p>
   <p class="byline">Ontwerp — nog niets live. Akkoord → dan pas Shopify.</p>
   <div class="progress" aria-hidden="true">
     <i class="done"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
   </div>
   <p class="progress-cap">Blok 1 in ontwerp · 11 blokken volgen</p>
 </header>
+
+<div class="callout fix">
+  <h3 style="margin-top:0">Wat er uit jouw ontwerp is overgenomen, en wat eruit is gehaald</h3>
+  <p><b>Je had gelijk over het goud.</b> Versie 1 gebruikte één gouden knop en verder wit op zwart. Jouw versie zet goud op zes plekken tegelijk — de balk-iconen, de rand van de sale-pil, de derde regel van de kop, het verloop in de knop, de lichtbogen bij het product en de koppen in de strook — en juist door die herhaling wordt het een merkkleur in plaats van een accentje. Dat is één op één overgenomen, inclusief de tweede knop, het label bij het apparaat en de strook met drie garanties onderaan.</p>
+  <p><b>De drie USP's onder de knoppen zijn eruit, zoals je vroeg.</b> Ze zeiden letterlijk hetzelfde als de strook eronder — 100 dagen proberen, 2 jaar garantie, gratis verzending — dus je las hetzelfde twee keer binnen 200 pixels. De strook wint omdat daar ruimte is voor een onderregel: "Niet goed? Geld terug" doet meer dan "100 dagen proberen" alleen.</p>
+  <p style="margin-bottom:0"><b>Het logo moest wel aangepast.</b> Je logobestand heeft een zwart woordmerk met een gouden monogram; op deze zwarte achtergrond verdween het woord volledig. Er staat nu een variant met een wit woordmerk en hetzelfde gouden monogram. Voor het theme betekent dat één extra logobestand voor donkere secties.</p>
+</div>
+
+<div class="callout ask">
+  <h3 style="margin-top:0">Het getal in het ontwerp klopte niet, en het echte getal is lager</h3>
+  <p>In jouw versie staat <b>"10.000+ mannen trimmen al mee"</b>. Shopify meldt inderdaad minstens 10.000 klantprofielen — dat is waar het getal vandaan komt. Maar in diezelfde periode staan er <b>7.434 bestellingen</b>. Er zijn dus meer profielen dan bestellingen, wat betekent dat die 10.000 ook mensen bevat die een account of een nieuwsbrief hebben maar nooit iets kochten.</p>
+  <p style="margin-bottom:0"><b>Op de kaart staat nu "7.400+ bestellingen sinds 2022".</b> Lager, en specifieker — en dat laatste helpt: een rond getal leest als marketing, een scherp getal leest als een feit. Wil je toch naar de klantkant, dan kan "7.400+ mannen kochten al" — dat is dezelfde bron, maar dan als koper geformuleerd. Wat niet kan is 10.000 mannen, want dat zijn ze niet allemaal en het zijn geen kopers.</p>
+</div>
 
 <div class="callout fix">
   <h3 style="margin-top:0">Wat er mis was, en wat ervoor in de plaats komt</h3>
@@ -259,20 +344,7 @@ footer p{max-width:none}
 <p>Conclusie: goud is bij jou een <strong>vlak accent</strong>, geen verlooptekst. In deze hero zit het op twee plekken — de Summer Sale-badge in <code>#F5D18A</code> (identiek aan je "Best Seller"-badge op de productkaart) en de knop in <code>#BC813E</code>. Die knop is de enige bewuste afwijking van je theme: je banner gebruikt vandaag <code>button--light</code>, en op jouw verzoek gaat hij naar de merkkleur.</p>
 
 <h2>Het ontwerp</h2>
-<p class="sub">Drie merkbrede koppen. Geen enkele claim die maar voor één productlijn opgaat. De onderbouwing van mijn advies staat direct onder het ontwerp.</p>
-
-<div class="switch" role="group" aria-label="Copy-richting">
-  <button type="button" data-v="uitkomst" aria-pressed="true">Uitkomst — gekozen</button>
-  <button type="button" data-v="missie" aria-pressed="false">Missie</button>
-  <button type="button" data-v="la" aria-pressed="false">De la</button>
-</div>
-<p class="switch-note" id="vnote"></p>
-
-<div class="switch" role="group" aria-label="Beeldkeuze">
-  <button type="button" data-s="portrait" aria-pressed="true">Portretshot — advies</button>
-  <button type="button" data-s="mirror" aria-pressed="false">Spiegelshot</button>
-</div>
-<p class="switch-note" id="snote">Model, trimmer en hardcase met logo allemaal in beeld. Staat nu in een bijna vierkant paneel, dus de foto wordt nergens opgerekt.</p>
+<p class="sub">De hero zoals jij hem hebt aangeleverd, met je eigen foto en de cijfers uit Shopify. De drie losse USP's onder de knoppen zijn eruit; ze stonden dubbel met de strook eronder.</p>
 
 <div class="stage">
   <div>
@@ -280,24 +352,36 @@ footer p{max-width:none}
     <div class="scaler desk-scaler"><div class="inner">
       <div class="ws">
         <div class="ws-bar">
-          <span><svg><use href="#chk"/></svg>Vandaag besteld, morgen in huis</span>
-          <span><svg><use href="#chk"/></svg>100 dagen zorgeloos retourneren</span>
-          <span><svg><use href="#chk"/></svg>Gratis verzending vanaf €30</span>
+          <span><svg><use href="#truck"/></svg>Vandaag besteld, morgen in huis</span>
+          <span><svg><use href="#retour"/></svg>100 dagen zorgeloos retourneren</span>
+          <span><svg><use href="#doos"/></svg>Gratis verzending vanaf €30</span>
         </div>
         <div class="ws-nav">
-          <img src="__LOGO__" alt="Wellshave">
+          <img src="__LOGODONKER__" alt="Wellshave">
           <div class="ws-links"><span>Shop</span><span>Bundels</span><span>Sale</span><span>Over ons</span><span>FAQ</span></div>
-          <div class="ws-icons"><span>Zoeken</span><span>Account</span><span>Tas (0)</span></div>
+          <div class="ws-icons"><span>Zoeken<svg><use href="#zoek"/></svg></span><span>Account<svg><use href="#account"/></svg></span><span>Tas (0)<svg><use href="#tas"/></svg></span></div>
         </div>
         <div class="ws-hero">
           <div class="ws-media">
-            <img data-shot="portrait" src="__PORTRAIT__" alt="Model met een Wellshave-trimmer en hardcase in de badkamer">
+            <img class="ws-foto" src="__PORTRAIT__" alt="Model met een Wellshave-trimmer en hardcase in de badkamer">
             <div class="ws-scrim"></div>
           </div>
+          <img class="ws-merk" src="__MARK__" alt="">
+          <span class="ws-streep"></span>
+          <svg class="ws-bogen" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            <defs><linearGradient id="goudlijn" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#F5D18A" stop-opacity="0"/>
+              <stop offset=".45" stop-color="#F5D18A" stop-opacity=".85"/>
+              <stop offset="1" stop-color="#BC813E" stop-opacity="0"/>
+            </linearGradient></defs>
+            <path d="M92 34 C74 44 66 62 70 84" stroke="url(#goudlijn)" stroke-width=".45"/>
+            <path d="M97 42 C79 52 70 70 74 92" stroke="url(#goudlijn)" stroke-width=".3"/>
+            <path d="M60 96 C64 78 72 68 88 62" stroke="url(#goudlijn)" stroke-width=".35"/>
+          </svg>
           <div class="ws-inner"><div class="ws-blocks">
             <span class="ws-badge">Summer Sale · tot 40% korting</span>
-            <h2 class="ws-h1" data-slot="h1"></h2>
-            <p class="ws-sub" data-slot="sub"></p>
+            <h2 class="ws-h1">Elke dag verzorgd.<br>Zonder dat het je<br><em>ochtend kost.</em></h2>
+            <p class="ws-sub">Trimmers, scheerapparaten en neustrimmers die getest zijn op wat ze dóén, niet op hoe ze eruitzien. 100 dagen proberen, morgen in huis.</p>
             <div class="tp">
               <span class="tp-stars">
                 <i><svg><use href="#star"/></svg></i><i><svg><use href="#star"/></svg></i>
@@ -308,54 +392,79 @@ footer p{max-width:none}
               <span class="tp-brand"><svg><use href="#star"/></svg>Trustpilot</span>
               <span>950+ reviews</span>
             </div>
-            <span class="ws-cta">Shop de bestsellers →</span>
-            <div class="ws-fud">
-              <span><svg><use href="#chk"/></svg>100 dagen proberen</span>
-              <span><svg><use href="#chk"/></svg>2 jaar garantie</span>
-              <span><svg><use href="#chk"/></svg>Gratis verzending vanaf €30</span>
+            <div class="ws-knoppen">
+              <a class="ws-cta" href="#">Shop de bestsellers<svg><use href="#arw"/></svg></a>
+              <a class="ws-cta2" href="#">Vind jouw tool</a>
             </div>
           </div></div>
-          <span class="ws-shotnote">Tijdelijk beeld</span>
+          <p class="ws-wijzer"><b>Groom Guard™ PRO</b><em>Meest gekozen</em></p>
+          <p class="ws-telling"><svg><use href="#mensen"/></svg><span><b>7.400+</b><em>bestellingen sinds 2022</em></span></p>
+        </div>
+        <div class="ws-strook">
+          <div><span class="ws-zegel"><svg><use href="#shield"/></svg></span><span style="min-width:0"><b>100 dagen proberen</b><span>Niet goed? Geld terug.</span></span></div>
+          <div><span class="ws-zegel">2</span><span style="min-width:0"><b>2 jaar garantie</b><span>Kwaliteit waarop je kunt vertrouwen.</span></span></div>
+          <div><span class="ws-zegel"><svg><use href="#truck"/></svg></span><span style="min-width:0"><b>Morgen in huis</b><span>Vandaag besteld, morgen in huis.</span></span></div>
         </div>
       </div>
     </div></div>
   </div>
-
   <div class="phonecol">
     <p class="devicecap">Mobiel — 390px · 73% van je verkeer</p>
     <div class="scaler phone-scaler"><div class="inner">
       <div class="ws ws-m">
-        <div class="ws-bar"><span><svg><use href="#chk"/></svg>Vandaag besteld, morgen in huis</span></div>
+        <div class="ws-bar">
+          <span><svg><use href="#truck"/></svg>Vandaag besteld, morgen in huis</span>
+          <span><svg><use href="#retour"/></svg>100 dagen zorgeloos retourneren</span>
+          <span><svg><use href="#doos"/></svg>Gratis verzending vanaf €30</span>
+        </div>
         <div class="ws-nav">
           <div class="ws-burger"><i></i><i></i><i></i></div>
-          <img src="__LOGO__" alt="Wellshave">
-          <div class="ws-burger" style="gap:0"><i style="width:17px;height:17px;border:1.5px solid rgba(255,255,255,.8);background:none"></i></div>
+          <img src="__LOGODONKER__" alt="Wellshave">
+          <div class="ws-icons" style="display:flex;gap:14px"><svg><use href="#zoek"/></svg><svg><use href="#tas"/></svg></div>
         </div>
         <div class="ws-hero">
           <div class="ws-media">
-            <img data-shot="portrait" src="__PORTRAIT__" alt="Model met een Wellshave-trimmer en hardcase in de badkamer">
+            <img class="ws-foto" src="__PORTRAIT__" alt="Model met een Wellshave-trimmer en hardcase in de badkamer">
             <div class="ws-scrim"></div>
           </div>
+          <img class="ws-merk" src="__MARK__" alt="">
+          <span class="ws-streep"></span>
+          <svg class="ws-bogen" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            <defs><linearGradient id="goudlijnm" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#F5D18A" stop-opacity="0"/>
+              <stop offset=".45" stop-color="#F5D18A" stop-opacity=".85"/>
+              <stop offset="1" stop-color="#BC813E" stop-opacity="0"/>
+            </linearGradient></defs>
+            <path d="M92 34 C74 44 66 62 70 84" stroke="url(#goudlijnm)" stroke-width=".45"/>
+            <path d="M97 42 C79 52 70 70 74 92" stroke="url(#goudlijnm)" stroke-width=".3"/>
+            <path d="M60 96 C64 78 72 68 88 62" stroke="url(#goudlijnm)" stroke-width=".35"/>
+          </svg>
           <div class="ws-inner"><div class="ws-blocks">
-            <span class="ws-badge">Summer Sale · tot 40%</span>
-            <h2 class="ws-h1" data-slot="h1m"></h2>
-            <p class="ws-sub" data-slot="subm"></p>
+            <span class="ws-badge">Summer Sale · tot 40% korting</span>
+            <h2 class="ws-h1">Elke dag verzorgd.<br>Zonder dat het je<br><em>ochtend kost.</em></h2>
+            <p class="ws-sub">Trimmers, scheerapparaten en neustrimmers die getest zijn op wat ze dóén, niet op hoe ze eruitzien. 100 dagen proberen, morgen in huis.</p>
             <div class="tp">
               <span class="tp-stars">
                 <i><svg><use href="#star"/></svg></i><i><svg><use href="#star"/></svg></i>
                 <i><svg><use href="#star"/></svg></i><i><svg><use href="#star"/></svg></i>
                 <i class="half"><svg><use href="#star"/></svg></i>
               </span>
+              <span class="tp-score">Uitstekend · 4,5</span>
               <span class="tp-brand"><svg><use href="#star"/></svg>Trustpilot</span>
-              <span>4,5 · 950+</span>
+              <span>950+ reviews</span>
             </div>
-            <span class="ws-cta">Shop de bestsellers →</span>
-            <div class="ws-fud">
-              <span><svg><use href="#chk"/></svg>100 dagen proberen</span>
-              <span><svg><use href="#chk"/></svg>2 jaar garantie</span>
+            <div class="ws-knoppen">
+              <a class="ws-cta" href="#">Shop de bestsellers<svg><use href="#arw"/></svg></a>
+              <a class="ws-cta2" href="#">Vind jouw tool</a>
             </div>
           </div></div>
-          <span class="ws-shotnote">Tijdelijk beeld</span>
+          <p class="ws-wijzer"><b>Groom Guard™ PRO</b><em>Meest gekozen</em></p>
+          <p class="ws-telling"><svg><use href="#mensen"/></svg><span><b>7.400+</b><em>bestellingen sinds 2022</em></span></p>
+        </div>
+        <div class="ws-strook">
+          <div><span class="ws-zegel"><svg><use href="#shield"/></svg></span><span style="min-width:0"><b>100 dagen proberen</b><span>Niet goed? Geld terug.</span></span></div>
+          <div><span class="ws-zegel">2</span><span style="min-width:0"><b>2 jaar garantie</b><span>Kwaliteit waarop je kunt vertrouwen.</span></span></div>
+          <div><span class="ws-zegel"><svg><use href="#truck"/></svg></span><span style="min-width:0"><b>Morgen in huis</b><span>Vandaag besteld, morgen in huis.</span></span></div>
         </div>
       </div>
     </div></div>
@@ -419,7 +528,7 @@ footer p{max-width:none}
 <div class="anno">
   <h3>Wat ik niet kon doen, en dat moet je weten</h3>
   <p>De methodiek vraagt om <b>hyperspecifieke getallen</b> in de kop — niet "sneller" maar hoeveel sneller, niet "duizenden klanten" maar 50.400. Ik heb er geen die merkbreed én verifieerbaar is. "Zonder dat het je ochtend kost" is daarom een formulering, geen getal.</p>
-  <p>Heb je één van deze wél: <b>hoeveel minuten</b> een complete routine kost, <b>hoeveel procent</b> van je klanten opnieuw bestelt, of <b>hoeveel</b> klanten je inmiddels hebt (die 180.000+ die ik niet kon verifiëren) — dan wordt deze kop meteen een stuk sterker. Dat is de goedkoopste verbetering die er nu ligt.</p>
+  <p><b>Eén van die getallen is er inmiddels wel</b>, en hij staat nu in het ontwerp: 7.434 bestellingen sinds juli 2022, rechtstreeks uit Shopify. Die staat niet in de kop maar op de kaart in het beeld, want in de kop zou hij het eindresultaat verdringen. Wat nog steeds ontbreekt: <b>hoeveel minuten</b> een complete routine kost en <b>hoeveel procent</b> van je klanten opnieuw bestelt. Met een van die twee wordt de kop zelf sterker.</p>
 </div>
 
 <h2>Wat er verandert en waarom</h2>
@@ -561,55 +670,6 @@ footer p{max-width:none}
 </div>
 
 <script>
-const COPY={
-  uitkomst:{
-    h1:"Elke dag verzorgd. Zonder dat het je ochtend kost.",
-    sub:"Trimmers, scheerapparaten en neustrimmers die getest zijn op wat ze dóén, niet op hoe ze eruitzien. 100 dagen proberen, morgen in huis.",
-    h1m:"Elke dag verzorgd. Zonder dat het je ochtend kost.",
-    subm:"Getest op wat ze dóén, niet op hoe ze eruitzien. 100 dagen proberen, morgen in huis.",
-    note:"Eindresultaat plus tijdsbestek plus emotionele opbrengst, in jouw taal en niet in die van ons. De missie zit er wel in, maar als belofte aan de lezer in plaats van als verhaal over het merk."
-  },
-  missie:{
-    h1:"Het meeste groominggereedschap voelt goedkoop. Of ligt ongebruikt in de la.",
-    sub:"Wij bouwden het midden. Elk apparaat getest op wat het dóét in plaats van hoe het eruitziet, en verbeterd op wat 950+ klanten ons terugschreven. 100 dagen om het zelf te proberen.",
-    h1m:"Voelt goedkoop. Of ligt ongebruikt in de la.",
-    subm:"Wij bouwden het midden. Getest op prestaties, verbeterd op echte klantfeedback. 100 dagen om het te proberen.",
-    note:"Je eigen probleemstelling, bijna letterlijk. De kop benoemt de valse keuze waar je klant in zit, de bodytekst geeft je bouwproces als antwoord. Elke claim geldt voor elk product in je winkel."
-  },
-  la:{
-    h1:"Een la vol apparaten die je niet meer gebruikt.",
-    sub:"Wij bouwen er één die je wél elke dag pakt. Getest op wat het dóét in plaats van hoe het eruitziet, verbeterd op echte klantfeedback, en 100 dagen te proberen.",
-    h1m:"Een la vol apparaten die je niet meer gebruikt.",
-    subm:"Wij bouwen er één die je wél elke dag pakt. 100 dagen om het te proberen.",
-    note:"Dezelfde pijn, korter en concreter. Iedereen kent die la. Past in één regel op mobiel, waar 73% van je verkeer zit — dat is het praktische voordeel boven de missiekop."
-  }
-};
-function applyCopy(v){
-  const c=COPY[v];
-  ["h1","sub","h1m","subm"].forEach(k=>{
-    document.querySelectorAll('[data-slot="'+k+'"]').forEach(e=>e.textContent=c[k]);
-  });
-  document.getElementById('vnote').textContent=c.note;
-  document.querySelectorAll('.switch button[data-v]').forEach(b=>
-    b.setAttribute('aria-pressed',String(b.dataset.v===v)));
-}
-document.querySelectorAll('.switch button[data-v]').forEach(b=>
-  b.addEventListener('click',()=>applyCopy(b.dataset.v)));
-applyCopy('uitkomst');
-
-const NOTE={
-  portrait:"Model, trimmer en hardcase met logo allemaal in beeld. Staat nu in een bijna vierkant paneel, dus de foto wordt nergens opgerekt.",
-  mirror:"Ontspannen gezicht en een echte ochtendroutine, maar de trimmer is klein en de case valt half buiten beeld — zwakker op jouw eis dat het product zichtbaar is."
-};
-const SRC={mirror:"__MIRROR__",portrait:"__PORTRAIT__"};
-document.querySelectorAll('.switch button[data-s]').forEach(b=>b.addEventListener('click',()=>{
-  const s=b.dataset.s;
-  document.querySelectorAll('.ws-hero img').forEach(img=>{img.src=SRC[s];img.dataset.shot=s;});
-  document.getElementById('snote').textContent=NOTE[s];
-  document.querySelectorAll('.switch button[data-s]').forEach(x=>
-    x.setAttribute('aria-pressed',String(x.dataset.s===s)));
-}));
-
 function fit(){
   document.querySelectorAll('.scaler').forEach(s=>{
     const inner=s.firstElementChild;

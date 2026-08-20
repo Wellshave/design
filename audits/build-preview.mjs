@@ -45,21 +45,9 @@ const rename = (s) => s
   .replace(/\btp-brand\b/g, 'h-tp-brand')
   .replace(/(\.|")half\b/g, '$1h-half');
 
-// De kop van blok 1 zit in het auditdocument achter een wisselaar met drie
-// richtingen; die wordt daar door script ingevuld. Hier is de keuze gemaakt,
-// dus bakken we de vastgestelde richting in de markup.
-const VARIANT = 'uitkomst';
-function bakeCopy(markup, source) {
-  const block = source.slice(source.indexOf(`${VARIANT}:{`));
-  const copy = {};
-  for (const key of ['h1m', 'subm', 'h1', 'sub']) {
-    const m = block.match(new RegExp(`\\b${key}:"((?:[^"\\\\]|\\\\.)*)"`));
-    if (!m) throw new Error(`koptekst ${key} niet gevonden`);
-    copy[key] = m[1];
-  }
-  return markup.replace(/(data-slot="(h1m|subm|h1|sub)"[^>]*>)(<\/)/g,
-    (_, open, slot, close) => open + copy[slot] + close);
-}
+// De kop van blok 1 stond eerder achter een wisselaar met drie richtingen
+// en werd hier ingebakken. Sinds versie 2 staat de vastgestelde kop
+// gewoon in de markup, dus dat is niet meer nodig.
 
 const sprite = element(proof, '<svg width="0" height="0"', 'svg');
 
@@ -77,8 +65,8 @@ function mockupScript(html) {
 
 const blocks = [
   { id: 'blok1', naam: 'Blok 1 — Hero',
-    desk: bakeCopy(rename(element(hero, '<div class="ws">', 'div')), hero),
-    mob:  bakeCopy(rename(element(hero, '<div class="ws ws-m">', 'div')), hero) },
+    desk: rename(element(hero, '<div class="ws">', 'div')),
+    mob:  rename(element(hero, '<div class="ws ws-m">', 'div')) },
   { id: 'blok2', naam: 'Blok 2 — Autoriteit en bewijs',
     desk: element(proof, '<section class="pf"><div class="pf-in">', 'section'),
     mob:  element(proof, '<section class="pf pf-m"><div class="pf-in">', 'section') },
