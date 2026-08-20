@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WELLSHAVE — Flex Guard™ 3-in-1</title>
+<meta name="description" content="Flex Guard™ 3-in-1. Skin Safe-technologie voorkomt irritatie en sneetjes. Bodytrimmer, neustrimmer en foil shaver in één. IPX7 waterdicht, 7000 toeren, 90 minuten gebruiksduur.">
+<link rel="preload" href="fonts/anton.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/plexmono-500.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<header class="nav" id="nav">
+  <a href="#top" class="nav__mark">WELL<span>SHAVE</span></a>
+  <nav class="nav__links">
+    <a href="#specs">Techniek</a>
+    <a href="#buy">Samenstellen</a>
+    <a href="#spin">360°</a>
+    <a href="#macro">Detail</a>
+  </nav>
+  <button class="bag" id="bagBtn" aria-label="Winkelmand">
+    Mand <span class="bag__count" id="bagCount" data-count="0">0</span>
+  </button>
+</header>
+
+<!-- ══ HERO — clip 1, gescrubd door scroll ══ -->
+<section class="hero" id="top">
+  <div class="hero__stage">
+    <img class="hero__poster" id="heroPoster" src="assets/flexguard.jpg" alt="">
+    <video class="hero__video" id="heroVideo"
+           muted playsinline preload="auto" aria-hidden="true">
+      <source src="assets/clip1-hero.mp4" type="video/mp4">
+      <source src="assets/clip1-hero.webm" type="video/webm">
+    </video>
+    <div class="hero__veil"></div>
+    <div class="hero__copy">
+      <div class="hero__eyebrow"><span class="label">WELLSHAVE — #1 multifunctionele bodygroomer</span></div>
+      <h1 class="hero__title">Flex Guard<br><em>3-in-1</em></h1>
+      <div class="hero__foot">
+        <p class="hero__lede">Skin Safe-technologie voorkomt irritatie en sneetjes, ook op de gevoeligste plekken. Bodytrimmer, neustrimmer en foil shaver in één — nat of droog, met LED-licht voor precisie.</p>
+        <div class="hero__scrub">
+          <span class="label">Scroll</span>
+          <span class="hero__track"><i class="hero__fill" id="heroFill"></i></span>
+          <span class="label" id="heroDeg">000°</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SPEC STRIP — telt op bij scroll ══ -->
+<section class="specs" id="specs">
+  <div class="specs__grid">
+    <div class="specs__cell">
+      <div class="specs__num"><span class="count" data-to="7000">0</span><span class="specs__unit">tpm</span></div>
+      <div class="specs__cap label">Motorvermogen</div>
+      <p class="specs__note">Constant vermogen, geen gestotter — ook door dikker haar.</p>
+    </div>
+    <div class="specs__cell">
+      <div class="specs__num"><span class="count" data-to="90">0</span><span class="specs__unit">minuten</span></div>
+      <div class="specs__cap label">Gebruiksduur</div>
+      <p class="specs__note">800 mAh li-ion. In 90 minuten weer vol via USB-C.</p>
+    </div>
+    <div class="specs__cell">
+      <div class="specs__num"><span class="count" data-to="100">0</span><span class="specs__unit">dagen</span></div>
+      <div class="specs__cap label">Proefperiode</div>
+      <p class="specs__note">Niet tevreden binnen 100 dagen? Je krijgt je geld terug.</p>
+    </div>
+    <div class="specs__cell">
+      <div class="specs__num"><span class="count" data-to="2">0</span><span class="specs__unit">jaar</span></div>
+      <div class="specs__cap label">Garantie</div>
+      <p class="specs__note">Volledige fabrieksgarantie op motor, accu en mesjes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SAMENSTELLEN ══ -->
+<section class="buy wrap" id="buy">
+  <div class="buy__grid">
+    <figure class="shot reveal" style="margin:0">
+      <img class="shot__img" id="shotImg" src="assets/flexguard.jpg" alt="Flex Guard 3-in-1">
+      <span class="shot__glow"></span>
+      <figcaption class="shot__tag" id="shotTag">Flex Guard™ 3-in-1</figcaption>
+    </figure>
+
+    <div class="panel reveal">
+      <div class="panel__head">
+        <span class="label">Stel samen</span>
+        <h2 class="panel__name" id="prodName">Flex Guard™<br>3-in-1</h2>
+        <div class="stars">
+          <span class="stars__s">★★★★★</span>
+          <span class="stars__n">4,5 / 5 — 800+ reviews</span>
+        </div>
+        <div class="panel__price"><span id="prodPrice">€54,95</span><s id="prodWas">€85,65</s></div>
+        <p class="panel__desc">Skin-safe mes, neustrimmer &amp; foil shaver. Werkt op borst, intieme zones of gezicht — voelt als een upgrade, niet als zomaar een trimmer.</p>
+      </div>
+
+      <!-- bundelkeuze — niets voorgeselecteerd -->
+      <div class="opt">
+        <div class="opt__head">
+          <span class="label">Kies je bundel</span>
+          <span class="opt__val" id="bundleVal">Nog niets gekozen</span>
+        </div>
+        <div class="bundles" id="bundles" role="radiogroup" aria-label="Bundel"></div>
+      </div>
+
+      <div class="opt">
+        <div class="opt__head"><span class="label">Wat je krijgt</span></div>
+        <ul class="incl" id="incl"></ul>
+      </div>
+
+      <div class="warn" id="warn" role="status" aria-live="polite">
+        <span id="warnText">Kies eerst je bundel</span>
+      </div>
+
+      <button class="cta" id="addBtn">
+        <span id="addLabel">In de mand</span>
+        <span class="cta__arrow">→</span>
+      </button>
+
+      <div class="assure">
+        <span>Voor 23:59 besteld, morgen in huis</span>
+        <span>Gratis verzending vanaf €30</span>
+        <span>100 dagen proef</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DRAG-TO-SPIN — 72 frames uit clip 2 ══ -->
+<section class="spin" id="spin">
+  <div class="wrap">
+    <div class="spin__head">
+      <div>
+        <span class="label">72 frames — één volledige omwenteling</span>
+        <h2 class="spin__title">Draai<br>rond</h2>
+      </div>
+      <p class="hero__lede" style="max-width:34ch">Opgenomen als vaste turntable en frame voor frame uitgesneden. Sleep naar links of rechts — je scrubt door echte beelden, geen 3D-benadering.</p>
+    </div>
+    <div class="spin__stage" id="spinStage">
+      <canvas class="spin__canvas" id="spinCanvas" width="1280" height="720"
+              role="img" aria-label="Sleep om de Flex Guard te draaien"></canvas>
+      <span class="spin__deg" id="spinDeg">000°</span>
+      <div class="spin__hint" id="spinHint"><i></i> Sleep om te draaien</div>
+      <div class="spin__meter"><i id="spinMeter"></i></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MACRO — clip 3 ══ -->
+<section class="macro" id="macro">
+  <video class="macro__video" id="macroVideo"
+         muted loop playsinline preload="metadata" aria-hidden="true">
+    <source src="assets/clip3-macro.mp4" type="video/mp4">
+    <source src="assets/clip3-macro.webm" type="video/webm">
+  </video>
+  <div class="macro__veil"></div>
+  <div class="macro__copy">
+    <span class="label">Detail — 03</span>
+    <h2 class="macro__title">Tot in<br>het kleinste<br>detail</h2>
+    <p class="macro__body">Keramische Skin Safe-mesjes met afgeronde punten, zodat er niets in je huid kan haken. Geribbelde rubberen grip die vast blijft zitten met natte handen. En een foil shaver-kop die er strak overheen gaat waar het mes te grof zou zijn.</p>
+  </div>
+</section>
+
+<!-- ══ DETAIL ══ -->
+<section class="detail wrap">
+  <div class="detail__grid">
+    <article class="detail__cell reveal">
+      <span class="detail__idx">01</span>
+      <h3 class="detail__h">Skin Safe</h3>
+      <p class="detail__p">Keramische mesjes met een beschermlaag ertussen. Geen sneetjes of huidirritatie, ook op gevoelige huid en op de plekken waar je het niet kunt hebben.</p>
+    </article>
+    <article class="detail__cell reveal">
+      <span class="detail__idx">02</span>
+      <h3 class="detail__h">IPX7 waterdicht</h3>
+      <p class="detail__p">Volledig waterdicht. Gebruik 'm droog op de rand van het bad of gewoon onder de douche, en spoel 'm daarna schoon onder de kraan.</p>
+    </article>
+    <article class="detail__cell reveal">
+      <span class="detail__idx">03</span>
+      <h3 class="detail__h">LED-licht</h3>
+      <p class="detail__p">Geïntegreerde LED verlicht de zones die je anders op gevoel doet. Het display laat zien hoeveel accu er nog in zit — geen verrassingen halverwege.</p>
+    </article>
+  </div>
+</section>
+
+<footer class="foot wrap">
+  <div class="foot__grid">
+    <h2 class="foot__mark">WELL<span>SHAVE</span></h2>
+    <div class="foot__meta">
+      <span class="label">Flex Guard™ 3-in-1</span>
+      <span class="label">Conceptpagina</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ══ STICKY KOOPBALK ══ -->
+<div class="stickybar" id="stickybar">
+  <div class="stickybar__in">
+    <img class="stickybar__thumb" id="barThumb" src="assets/flexguard.jpg" alt="">
+    <div class="stickybar__txt">
+      <span class="stickybar__name" id="barName">Flex Guard™ 3-in-1</span>
+      <span class="stickybar__sub" id="barSub">Geen bundel gekozen</span>
+    </div>
+    <span class="stickybar__price" id="barPrice">€54,95</span>
+    <button class="stickybar__cta" id="barBtn">In de mand</button>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
