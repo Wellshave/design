@@ -36,6 +36,13 @@ for (const file of files) {
     [...wortels, ...binnen('*')].forEach(el => {
       const par = el.parentElement;
       if (!par || DECORATIEF.test(el.className || '')) return;
+      // een horizontale scroller hoort breder te zijn dan zijn kader: dat is
+      // de scrollbalk, geen fout. Zelfde voor een kind van zo'n scroller.
+      const ps = getComputedStyle(par);
+      if (ps.overflowX === 'auto' || ps.overflowX === 'scroll') return;
+      // een element dat met een negatieve marge bewust tot de sectierand loopt
+      const em = getComputedStyle(el);
+      if (parseFloat(em.marginRight) < 0) return;
       const r = el.getBoundingClientRect(), pr = par.getBoundingClientRect();
       if (r.width === 0) return;
       const rechts = Math.round(r.right - pr.right), onder = Math.round(r.bottom - pr.bottom);

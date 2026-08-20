@@ -205,8 +205,27 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
 .zf-m .zf-hintring svg{width:20px;height:20px}
 .zf-m .zf-hint em{font-size:14px;font-weight:500;letter-spacing:0;text-transform:none;
   color:rgba(17,17,17,.72)}
-.zf-chips{display:grid;grid-template-columns:1fr;gap:8px}
-.zf-chip{display:flex;align-items:center;gap:11px;font-family:inherit;text-align:left;
+/* de zonekiezer op mobiel: één veegbare rij in plaats van vijf regels, zodat
+   de kaart er direct onder past en je de wissel ziet gebeuren */
+.zf-rail{position:relative;margin:0 -16px}
+.zf-chips{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x proximity;
+  padding:2px 16px 4px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.zf-chips::-webkit-scrollbar{display:none}
+.zf-chips{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 34px),transparent);
+  mask-image:linear-gradient(90deg,#000 calc(100% - 34px),transparent)}
+.zf-chips.rand-links{-webkit-mask-image:linear-gradient(90deg,transparent,#000 34px calc(100% - 34px),transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 34px calc(100% - 34px),transparent)}
+.zf-chips.rand-eind{-webkit-mask-image:linear-gradient(90deg,transparent,#000 34px);
+  mask-image:linear-gradient(90deg,transparent,#000 34px)}
+.zf-veeg{display:flex;align-items:center;gap:10px;margin-top:10px !important;
+  font-size:12.5px;color:rgba(17,17,17,.5)}
+.zf-veeg em{font-style:normal}
+.zf-veeg svg{width:14px;height:14px;color:#BC813E;flex:none}
+.zf-schuif{position:relative;flex:none;width:54px;height:3px;border-radius:3px;
+  background:rgba(17,17,17,.12);overflow:hidden}
+.zf-schuif i{position:absolute;top:0;bottom:0;left:0;width:40%;border-radius:3px;
+  background:#BC813E;transition:left .18s ease,width .18s ease}
+.zf-chip{display:flex;align-items:center;gap:11px;flex:0 0 auto;scroll-snap-align:center;font-family:inherit;text-align:left;
   font-size:11.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:rgba(17,17,17,.8);
   background:rgba(255,255,255,.8);border:1px solid rgba(188,129,62,.2);border-radius:14px;
   padding:14px 14px;cursor:pointer;min-width:0;
@@ -223,7 +242,10 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
 .zf-chip.aan{background:#F5D18A;border-color:#F5D18A;color:#111}
 .zf-chip.aan i{display:flex}
 .zf-chip.aan i svg{color:#F5D18A}
-.zf-m .zf-body{grid-template-columns:1fr;gap:0}
+.zf-m .zf-body{display:flex;flex-direction:column;gap:0}
+.zf-m .zf-kaart{order:1}
+.zf-m .zf-pijl{order:2}
+.zf-m .zf-fig{order:3}
 .zf-m .zf-fig{border-radius:16px}
 .zf-m .zf-vlak{aspect-ratio:1/1}
 .zf-m .zf-foto{object-position:50% 0}
@@ -237,11 +259,13 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
   border-radius:100px;padding:9px 16px;font-size:11.5px;font-weight:700;letter-spacing:.1em;
   text-transform:uppercase}
 .zf-m .zf-fighint{left:16px;bottom:16px;font-size:12px}
-.zf-pijl{display:flex;justify-content:center;margin:-15px 0 -15px;position:relative;z-index:4}
+.zf-pijl{display:flex;align-items:center;justify-content:center;gap:11px;
+  margin:16px 0 12px;position:relative;z-index:4}
+.zf-pijl em{font-style:normal;font-size:12.5px;color:rgba(17,17,17,.5)}
 .zf-pijl span{width:34px;height:34px;border-radius:50%;background:#F5D18A;color:#111;
   display:flex;align-items:center;justify-content:center}
 .zf-pijl svg{width:16px;height:16px}
-.zf-m .zf-kaart{padding:22px 20px;margin-top:14px}
+.zf-m .zf-kaart{padding:22px 20px;margin-top:2px}
 .zf-m .zf-naam{font-size:26px}
 .zf-m .zf-claim{font-size:14.5px}
 .zf-m .zf-mid{grid-template-columns:1fr;gap:14px}
@@ -253,7 +277,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
 .zf-m .zf-well{width:34px;height:34px}
 .zf-m .zf-well svg{width:17px;height:17px}
 .zf-m .zf-prijs{justify-content:center}
-.zf-m .zf-cta{justify-content:center;padding:9px 9px 9px 20px;font-size:12.5px}
+.zf-m .zf-cta{justify-content:center;padding:9px 9px 9px 18px;font-size:12px;letter-spacing:.07em}
 .zf-m .zf-alle{font-size:13px}
 .zf-m .zf-strip{padding:14px 4px}
 .zf-m .zf-strip > div{flex-direction:column;gap:8px;text-align:center;font-size:10.5px;
@@ -344,6 +368,13 @@ footer p{max-width:none}
   <p style="margin-bottom:0"><b>De kaart is de Flex Guard™ 3-in-1 (€54,95), niet de Groom Guard PRO.</b> Twee zones met hetzelfde apparaat zou de kiezer betekenisloos maken, en de Flex Guard-pagina is degene die letterlijk over deze zone gaat: "voorkomt irritatie &amp; sneetjes, zelfs bij de meest gevoelige huid" en "of het nu gaat om borst, schaamstreek of gezicht". Beide zones putten wel uit dezelfde vier bodygroomers, dus daar staat twee keer "4 geschikte apparaten".</p>
 </div>
 
+<div class="callout fix">
+  <h3 style="margin-top:0">Mobiel omgedraaid: eerst de uitkomst, dan de foto</h3>
+  <p><b>Je zag het goed en het was een echte fout.</b> De vijf zoneknoppen stonden onder elkaar en daaronder stond de foto van 390 bij 390. Samen met de kop was dat ruim 700 pixels vóór de kaart begon — dus wisselde je van zone en veranderde er zichtbaar niets. Een kiezer waarvan je de uitkomst niet ziet is geen kiezer.</p>
+  <p><b>De kaart staat nu direct onder de zonekiezer</b>, en de foto eronder met de regel "Of kies rechtstreeks op de foto". Dat is een omkering van het aangeleverde ontwerp, alleen op mobiel: de foto blijft de tweede manier om te kiezen, maar hij staat niet meer tussen jouw duim en het antwoord in.</p>
+  <p style="margin-bottom:0"><b>De vijf knoppen zijn één veegbare rij geworden</b> in plaats van vijf regels. Dat scheelt zo'n 250 pixels. Dat je kunt vegen wordt op drie manieren gezegd: de derde knop steekt half in beeld en vervaagt naar de rand, er staat een streepje onder dat meebeweegt met hoever je bent, en er staat letterlijk "Veeg voor alle vijf de zones" met een pijl naast. Kies je een zone op de foto, dan schuift de bijbehorende knop vanzelf in beeld, zodat de twee bedieningen niet uit de pas lopen.</p>
+</div>
+
 <div class="callout ask">
   <h3 style="margin-top:0">Wat de kaart per zone laat zien, en waar het wringt</h3>
   <p><b>De vier apparaten zijn dezelfde als in blok 3</b>, zodat de twee blokken elkaar niet tegenspreken: Groom Guard PRO, The Gentleman Shaver, Tondeuse Elegant en de Neustrimmer 4in1 Ultra. Blok 3 noemt ze bestsellers, blok 5 noemt ze de beste match — dat is hetzelfde rijtje, andere reden.</p>
@@ -351,7 +382,7 @@ footer p{max-width:none}
 </div>
 
 <h2>Het ontwerp</h2>
-<p class="sub">Links de figuur met de vijf zones, rechts het apparaat dat voor die zone gemaakt is. Op mobiel staan de zones als knoppen boven de foto en schuift de kaart eronder.</p>
+<p class="sub">Links de figuur met de vijf zones, rechts het apparaat dat voor die zone gemaakt is. Op mobiel staat de zonekiezer als veegbare rij bovenaan, met de kaart er direct onder en de foto daaronder.</p>
 
 <div class="stage">
   <div>
@@ -381,20 +412,20 @@ footer p{max-width:none}
               <line data-zone="hoofd" x1="21.0" y1="9.0" x2="55.0" y2="6.5"/>
               <line data-zone="neus" x1="29.0" y1="20.5" x2="56.0" y2="18.5"/>
             </svg>
-            <button class="zf-pin" type="button" data-zone="lichaam" style="left:34.0%;top:51.0%" aria-label="Zone Lichaam"><i></i></button>
-            <button class="zf-label" type="button" data-zone="lichaam" style="left:4.0%;top:58.0%">LICHAAM</button>
+            <button class="zf-pin aan" type="button" data-zone="lichaam" style="left:34.0%;top:51.0%" aria-label="Zone Lichaam"><i></i></button>
+            <button class="zf-label aan" type="button" data-zone="lichaam" style="left:4.0%;top:58.0%">LICHAAM</button>
             <button class="zf-pin" type="button" data-zone="schaam" style="left:38.0%;top:91.5%" aria-label="Zone Schaamstreek"><i></i></button>
             <button class="zf-label" type="button" data-zone="schaam" style="left:4.0%;top:84.0%">SCHAAMSTREEK</button>
             <button class="zf-pin" type="button" data-zone="gezicht" style="left:53.5%;top:25.0%" aria-label="Zone Gezicht en baard"><i></i></button>
             <button class="zf-label" type="button" data-zone="gezicht" style="left:4.0%;top:32.0%">GEZICHT &amp; BAARD</button>
             <button class="zf-pin" type="button" data-zone="hoofd" style="left:55.0%;top:6.5%" aria-label="Zone Hoofd"><i></i></button>
             <button class="zf-label" type="button" data-zone="hoofd" style="left:4.0%;top:9.0%">HOOFD</button>
-            <button class="zf-pin aan" type="button" data-zone="neus" style="left:56.0%;top:18.5%" aria-label="Zone Neus en oren"><i></i></button>
-            <button class="zf-label aan" type="button" data-zone="neus" style="left:4.0%;top:20.5%">NEUS &amp; OREN</button>
+            <button class="zf-pin" type="button" data-zone="neus" style="left:56.0%;top:18.5%" aria-label="Zone Neus en oren"><i></i></button>
+            <button class="zf-label" type="button" data-zone="neus" style="left:4.0%;top:20.5%">NEUS &amp; OREN</button>
             <p class="zf-fighint"><svg><use href="#tik"/></svg>Selecteer een hotspot om van zone te wisselen.</p>
           </div>
           <div class="zf-kaart">
-            <div class="zf-paneel" data-zone="lichaam" data-naam="Lichaam" hidden>
+            <div class="zf-paneel" data-zone="lichaam" data-naam="Lichaam">
               <div class="zf-kop">
                 <p class="zf-match">Beste match voor lichaam</p>
                 <p class="zf-aantal">4 geschikte apparaten</p>
@@ -470,7 +501,7 @@ footer p{max-width:none}
               <a class="zf-cta" href="#">Bekijk de Tondeuse Elegant<span><svg><use href="#arw"/></svg></span></a>
               <a class="zf-alle" href="#">Bekijk alle 3 producten voor hoofd — vanaf €54,95 <svg><use href="#arw"/></svg></a>
             </div>
-            <div class="zf-paneel" data-zone="neus" data-naam="Neus &amp; oren">
+            <div class="zf-paneel" data-zone="neus" data-naam="Neus &amp; oren" hidden>
               <div class="zf-kop">
                 <p class="zf-match">Beste match voor neus &amp; oren</p>
                 <p class="zf-aantal">8 geschikte apparaten</p>
@@ -512,33 +543,34 @@ footer p{max-width:none}
             <h2 class="zf-h2">Waar wil je trimmen?</h2>
             <p class="zf-sub"><b>Kies de plek.</b> Wij tonen de beste match.</p>
           </div>
-          <p class="zf-note">Selecteer een zone en ontdek welke tool ervoor gemaakt is.</p>
-          <div class="zf-hint"><span class="zf-hintring"><svg><use href="#tik"/></svg></span><em>Tik op een zone</em></div>
         </div>
 
-        <div class="zf-chips">
-          <button class="zf-chip" type="button" data-zone="lichaam"><span class="zf-thumb" style="background-position:18.0% 44.2%;background-size:320%"></span><span>LICHAAM</span><i><svg><use href="#chk"/></svg></i></button>
+        <div class="zf-rail">
+          <div class="zf-chips">
+          <button class="zf-chip aan" type="button" data-zone="lichaam"><span class="zf-thumb" style="background-position:18.0% 44.2%;background-size:320%"></span><span>LICHAAM</span><i><svg><use href="#chk"/></svg></i></button>
           <button class="zf-chip" type="button" data-zone="schaam"><span class="zf-thumb" style="background-position:30.5% 100.0%;background-size:300%"></span><span>SCHAAMSTREEK</span><i><svg><use href="#chk"/></svg></i></button>
           <button class="zf-chip" type="button" data-zone="gezicht"><span class="zf-thumb" style="background-position:54.1% 23.2%;background-size:700%"></span><span>GEZICHT &amp; BAARD</span><i><svg><use href="#chk"/></svg></i></button>
           <button class="zf-chip" type="button" data-zone="hoofd"><span class="zf-thumb" style="background-position:55.8% 0.0%;background-size:700%"></span><span>HOOFD</span><i><svg><use href="#chk"/></svg></i></button>
-          <button class="zf-chip aan" type="button" data-zone="neus"><span class="zf-thumb" style="background-position:57.4% 13.2%;background-size:850%"></span><span>NEUS &amp; OREN</span><i><svg><use href="#chk"/></svg></i></button>
+          <button class="zf-chip" type="button" data-zone="neus"><span class="zf-thumb" style="background-position:57.4% 13.2%;background-size:850%"></span><span>NEUS &amp; OREN</span><i><svg><use href="#chk"/></svg></i></button>
+          </div>
         </div>
+        <p class="zf-veeg"><span class="zf-schuif" aria-hidden="true"><i></i></span><em>Veeg voor alle vijf de zones</em><svg><use href="#arw"/></svg></p>
 
         <div class="zf-body">
           <div class="zf-fig">
             <span class="zf-vlak"></span>
             <img class="zf-foto" src="__PORTRAIT__" alt="">
             <img class="zf-merk" src="__MARK__" alt="">
-            <button class="zf-pin" type="button" data-zone="lichaam" style="left:34.0%;top:51.0%" aria-label="Zone Lichaam"><i></i></button>
+            <button class="zf-pin aan" type="button" data-zone="lichaam" style="left:34.0%;top:51.0%" aria-label="Zone Lichaam"><i></i></button>
             <button class="zf-pin" type="button" data-zone="schaam" style="left:38.0%;top:91.5%" aria-label="Zone Schaamstreek"><i></i></button>
             <button class="zf-pin" type="button" data-zone="gezicht" style="left:53.5%;top:25.0%" aria-label="Zone Gezicht en baard"><i></i></button>
             <button class="zf-pin" type="button" data-zone="hoofd" style="left:55.0%;top:6.5%" aria-label="Zone Hoofd"><i></i></button>
-            <button class="zf-pin aan" type="button" data-zone="neus" style="left:56.0%;top:18.5%" aria-label="Zone Neus en oren"><i></i></button>
-            <p class="zf-actief">Actieve zone · <span data-actief>Neus &amp; oren</span></p>
+            <button class="zf-pin" type="button" data-zone="neus" style="left:56.0%;top:18.5%" aria-label="Zone Neus en oren"><i></i></button>
+            <p class="zf-actief">Actieve zone · <span data-actief>Lichaam</span></p>
           </div>
-          <p class="zf-pijl"><span><svg><use href="#dwn"/></svg></span></p>
+          <p class="zf-pijl"><span><svg><use href="#dwn"/></svg></span><em>Of kies rechtstreeks op de foto</em></p>
           <div class="zf-kaart">
-            <div class="zf-paneel" data-zone="lichaam" data-naam="Lichaam" hidden>
+            <div class="zf-paneel" data-zone="lichaam" data-naam="Lichaam">
               <div class="zf-kop">
                 <p class="zf-match">Beste match</p>
                 <p class="zf-aantal">4 geschikte apparaten</p>
@@ -614,7 +646,7 @@ footer p{max-width:none}
               <a class="zf-cta" href="#">Bekijk de Tondeuse Elegant<span><svg><use href="#arw"/></svg></span></a>
               <a class="zf-alle" href="#">Alle 3 producten vanaf €54,95 <svg><use href="#arw"/></svg></a>
             </div>
-            <div class="zf-paneel" data-zone="neus" data-naam="Neus &amp; oren">
+            <div class="zf-paneel" data-zone="neus" data-naam="Neus &amp; oren" hidden>
               <div class="zf-kop">
                 <p class="zf-match">Beste match</p>
                 <p class="zf-aantal">8 geschikte apparaten</p>
@@ -687,7 +719,8 @@ footer p{max-width:none}
   <li><b>De aantallen en "vanaf"-prijzen moeten uit een collectie komen</b>, niet uit vaste tekst. Zodra jij een product toevoegt of een prijs wijzigt, klopt "8 geschikte apparaten — vanaf €16,95" anders niet meer. Dat betekent vier collecties die vandaag nog niet bestaan; dat is dezelfde randvoorwaarde die bij blok 3 al opkwam.</li>
   <li><b>Vijf zones, waarvan er twee uit dezelfde vier apparaten putten.</b> Als je liever vier zones hebt, is Schaamstreek de eerste die samengaat met Lichaam — maar dan verdwijnt wel de zone met de sterkste reden om te kopen.</li>
   <li><b>De hotspots zijn percentages op de foto</b>, geen vaste pixels. Wissel je de foto, dan verschuiven de vier punten mee in de sectie-instellingen — vier keer een x en een y.</li>
-  <li><b>De raakvlakken van de hotspots zijn 30 pixels</b> op desktop en 26 op mobiel, met een extra onzichtbare rand eromheen. Op mobiel zijn de vier zoneknoppen de hoofdbediening; de punten op de foto zijn de tweede weg erheen.</li>
+  <li><b>De raakvlakken van de hotspots zijn 30 pixels</b> op desktop en 26 op mobiel, met een extra onzichtbare rand eromheen. Op mobiel is de veegbare knoppenrij de hoofdbediening; de punten op de foto zijn de tweede weg erheen.</li>
+  <li><b>De volgorde verschilt per breedte.</b> Desktop: figuur links, kaart rechts. Mobiel: kiezer, kaart, figuur. In het theme is dat één breekpunt met <code>order</code>, geen tweede sectie.</li>
   <li><b>Drie feiten per kaart, niet meer.</b> Vier maakt de kaart hoger dan de foto ernaast en dan gaat het blok springen bij elke wisseling.</li>
   <li><b>Het blok schuift elke zes seconden door tot iemand zelf kiest</b>, en stopt dan definitief. Bij bewegingsreductie staat hij van begin af aan stil.</li>
 </ul>
@@ -752,6 +785,12 @@ document.querySelectorAll('.zf').forEach(function (sec) {
     if (actief) {
       actief.textContent = panelen[i].dataset.naam || zone;
     }
+    var chip = sec.querySelector('.zf-chip[data-zone="' + zone + '"]');
+    if (chip && chip.parentElement.scrollWidth > chip.parentElement.clientWidth) {
+      var r = chip.parentElement;
+      var doel = chip.offsetLeft - (r.clientWidth - chip.offsetWidth) / 2;
+      r.scrollTo({ left: Math.max(0, doel), behavior: traag ? 'auto' : 'smooth' });
+    }
   }
   function kies(zone) {
     // zodra iemand zelf kiest stopt het rondlopen: dit is een keuzeblok, en
@@ -763,6 +802,24 @@ document.querySelectorAll('.zf').forEach(function (sec) {
   knoppen.forEach(function (k) {
     k.addEventListener('click', function () { kies(k.dataset.zone); });
   });
+
+  // de veegbare zonerail: de balk laat zien hoever je bent, en bij een keuze
+  // via de foto schuift de bijbehorende knop vanzelf in beeld
+  var rail = sec.querySelector('.zf-chips');
+  var balk = sec.querySelector('.zf-schuif i');
+  if (rail && balk) {
+    var meet = function () {
+      var deel = rail.clientWidth / rail.scrollWidth;
+      var speling = rail.scrollWidth - rail.clientWidth;
+      balk.style.width = Math.min(100, deel * 100) + '%';
+      balk.style.left = (speling > 0 ? (rail.scrollLeft / speling) * (100 - deel * 100) : 0) + '%';
+      rail.classList.toggle('rand-links', rail.scrollLeft > 6 && speling - rail.scrollLeft > 6);
+      rail.classList.toggle('rand-eind', speling > 0 && speling - rail.scrollLeft <= 6);
+    };
+    rail.addEventListener('scroll', meet);
+    new ResizeObserver(meet).observe(rail);
+    meet();
+  }
 
   toon(i);
   if (!traag) klok = setInterval(function () { if (!gestuurd) toon(i + 1); }, 6000);
