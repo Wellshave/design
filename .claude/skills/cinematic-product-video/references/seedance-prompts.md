@@ -80,6 +80,14 @@ Dien opnieuw in met dezelfde prompt plus het preset-ID dat je terugkreeg:
 { "declined_preset_id": "24bae836-2c4a-48e0-89b6-49fcc0b21612" }
 ```
 
+In een batch gebeurt dit **per item, niet per batch**. Bij de Blade Baron werden vijf van de zes
+shots onderschept en ging de zesde gewoon door. Lees dus het antwoord regel voor regel: dien
+alleen de items met `submission_failed` opnieuw in, en laat het item dat wél een `job_id` kreeg
+met rust. Draai je de hele batch over, dan betaal je dat ene shot dubbel.
+
+Het is hetzelfde preset-ID bij elke onderschepping tot nu toe. Zet het bij een donkere film dus
+meteen in de eerste inzending — dat scheelt een ronde.
+
 ### De behuizing verkleurt naar goud
 
 Vraag je een warm randlicht zonder begrenzing, dan kleurt het model het hele apparaat
@@ -89,6 +97,28 @@ champagne. Begrens het licht en verbied de verkleuring apart:
 > for the entire shot: the housing never turns gold, bronze, champagne, tan or warm metallic at
 > any moment. […] one thin warm rim highlight confined strictly to the outer edge of the
 > silhouette.
+
+**Tel hoe vaak je goud noemt, inclusief je referentiefoto's.** Bij de Blade Baron ging het mis
+op een shot waar drie dingen tegelijk goud duwden: een `hard gold key light`, `gold light
+streaking along the transparent plastic`, én een referentiefoto die zelf een goudverlicht
+sfeerbeeld was. Het resultaat was niet alleen een bronzen behuizing — de doorzichtige
+beschermkap was een massief gouden kap geworden.
+
+Een product dat écht gouden accenten heeft maakt dit lastiger, want je kunt goud niet simpelweg
+verbieden. Begrens het dan bij naam, per onderdeel:
+
+> No gold spreads beyond the existing thin gold band around its middle and the thin gold ring
+> around the circular power button.
+
+En verbied verkleuring apart voor elk doorzichtig of andersgekleurd onderdeel, want de
+behuizingsclausule dekt die niet:
+
+> That cap stays clear, colourless and fully see-through for the entire shot: it never becomes
+> gold, bronze, brass, champagne, metallic, tinted, opaque or solid, and the metal foil blades
+> stay visible straight through it the whole time.
+
+Zet het sleutellicht in zo'n shot op **koel wit** en laat het goud alleen in het randlicht
+zitten. Dat was de herkansing die het wél haalde.
 
 ### Tekst kantelt in spiegelbeeld
 

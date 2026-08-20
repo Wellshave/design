@@ -29,8 +29,8 @@ in de statusmelding.
 ## De merklaag geldt ook hier
 
 Kleur en typografie staan al vast in
-`.claude/skills/sanwarwala-landing-pages/references/wellshave-merklaag.md`. **Lees §2 Tokens en
-§3 Typografie voordat je een annotatie ontwerpt, en §10 Cijfers en claims voordat je copy
+`.claude/skills/sanwarwala-landing-pages/references/wellshave-merklaag.md`. **Lees §3 Tokens en
+§4 Typografie voordat je een annotatie ontwerpt, en §11 Cijfers en claims voordat je copy
 schrijft.** Neem die waarden hier niet over — één bron, anders lopen ze uit elkaar.
 
 Wat er voor video het meest toe doet: `--gold:#F5D18A` is het accent op donker, en cinematische
@@ -104,6 +104,19 @@ prijsbadges — het model neemt die over.
 een tabel van media-ID naar shot. Zonder die stap koppel je de neustrimmer aan het shot over de
 scheerkop, en dat merk je pas als de credits op zijn.
 
+**Kijk daarbij ook naar het woordmerk op het product.** Een gespiegeld merk is niet altijd iets
+wat het model ervan maakt — het kan al in de aangeleverde render zitten. Bij de Blade Baron
+stond de logodecal in twee van de tien foto's gespiegeld op het bovenvlak, terwijl het display
+op diezelfde foto's gewoon goed om las en het vooraanzicht wél klopte. Voer je zo'n foto in als
+referentie, dan brandt het model die fout in je commercial.
+
+Zoom in voordat je het gelooft: snijd het logogebied uit op volle resolutie en leg het naast
+dezelfde foto horizontaal gespiegeld. Zit de fout er inderdaad in, kies dan een uitsnede die
+het woordmerk buiten beeld laat in plaats van de hele foto te spiegelen — spiegelen zet
+namelijk het display en de poorten verkeerd om. Upload die uitsnede als eigen media
+(`media_upload`, bytes naar de presigned URL, dan `media_confirm`) en gebruik hem voor dat ene
+shot. Meld de fout ook aan de gebruiker: die renders staan doorgaans ook op de productpagina.
+
 ### 3. Schrijf de shotlijst
 
 Lees `references/shotgrammatica.md`. Daar staat de beatstructuur, waar het brede shot hoort,
@@ -126,12 +139,18 @@ resultaat met precies één `show_generation_by_ids`.
 
 ### 6. Keur elk shot af of goed
 
-Download alle clips en trek per clip drie frames — begin, midden, eind — als contactstrook:
+Download alle clips en trek per clip vier frames — begin, twee keer midden, eind — als
+contactstrook. Een clip van vijf seconden komt terug als **121** frames op 24 fps, niet 120:
 
 ```bash
-ffmpeg -i shot.mp4 -vf "select='eq(n\,2)+eq(n\,60)+eq(n\,118)',scale=640:-1,tile=3x1" \
+ffmpeg -i shot.mp4 -vf "select='eq(n\,2)+eq(n\,40)+eq(n\,78)+eq(n\,117)',scale=470:-1,tile=2x2" \
   -frames:v 1 strook.jpg
 ```
+
+**Controleer eerst of ffmpeg er is.** In een verse websessie staat het er niet, en zonder
+ffmpeg kun je geen enkel shot beoordelen en niets monteren. Installeren duurt een halve minuut:
+`apt-get update -qq && apt-get install -y -qq ffmpeg`. Doe dat vóór je gaat genereren, niet
+erna — anders staan er clips klaar die je niet kunt bekijken.
 
 Kijk naar elke strook. Let op verkleurende behuizing, morfende vormen, tekst die kantelt, en
 compositie die wegdrijft van waar je hem wilde hebben. Draai fout materiaal opnieuw met de fout
@@ -143,7 +162,7 @@ patroon, geen pech.
 
 ### 7. Schrijf de annotatiecopy
 
-Lees `references/annotatielaag.md` voor de opmaak, en `wellshave-merklaag.md` §10 voor de
+Lees `references/annotatielaag.md` voor de opmaak, en `wellshave-merklaag.md` §11 voor de
 claimdiscipline.
 
 Elke annotatie is een goud labeltje plus één witte regel, en moet twee toetsen doorstaan.
@@ -180,9 +199,15 @@ Let op de uploadlimiet van 30 MB per bestand — splits een te grote map op.
 
 ## Wat dit kost
 
-Eén shot van 5 seconden op 1080p met `bitrate_mode:"high"` kostte 45 credits. Zes shots plus
-twee herkansingen kwamen uit op 360. Reken op ongeveer 300–400 credits voor een film van 30
+Eén shot van 5 seconden op 1080p met `bitrate_mode:"high"` kostte 45 credits, in beide runs tot
+nu toe. De Flex Guard-film kwam met zes shots plus twee herkansingen op 360; de Blade Baron met
+zes shots plus één herkansing op 315. Reken op ongeveer 300–400 credits voor een film van 30
 seconden, en op nul voor alle tekst, montage en herzieningen daarna.
+
+Een door een preset onderschepte inzending kost niets: bij de Blade Baron werden vijf van de zes
+shots teruggestuurd en het saldo bewoog pas bij de tweede inzending. Controleer dat na afloop
+door `balance` voor en na te vergelijken — het verschil hoort precies het aantal geslaagde
+generaties maal 45 te zijn.
 
 Een verticale 9:16-versie kost het volledige bedrag opnieuw. Bijsnijden van 16:9 is geen
 alternatief: de macro's zijn op de breedte gekadreerd en verliezen hun compositie.
@@ -210,8 +235,10 @@ van een tweede te schrijven.
 
 ## Wat deze werkwijze nog niet weet
 
-- **Eén product, één run.** Alles hierboven komt uit de Flex Guard-film. Of de beatstructuur
-  net zo werkt voor een klein product zoals een neustrimmer is niet gebleken.
+- **Twee producten, twee runs.** De Flex Guard-film en de Blade Baron-film. De beatstructuur
+  hield stand bij een klein, compact product, met één aanpassing: de Blade Baron heeft geen
+  opzetstukken, dus beat 6 (de reeks) verviel en de heropvoering ging naar een shot van de
+  beschermkap. Of het ook werkt voor iets zonder bewegende delen is nog niet gebleken.
 - **Geen prestatiecijfers.** Er is niet gemeten of deze films beter converteren dan bestaande
   advertenties. Zodra daar cijfers over zijn, horen ze hier te staan.
 - **Alleen 16:9 gedraaid.** De verticale variant is beredeneerd, niet getest.
