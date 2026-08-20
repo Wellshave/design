@@ -176,15 +176,18 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
 /* de garantiestrook onderaan de hero */
 .ws-strook{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
   background:#0B0B0A;border-top:1px solid rgba(245,209,138,.16);padding:26px 40px}
-.ws-strook > div{display:flex;align-items:center;gap:18px;padding:0 34px;min-width:0}
+.ws-strook > div{display:flex;align-items:center;justify-content:center;gap:18px;
+  padding:0 26px;min-width:0}
 .ws-strook > div + div{border-left:1px solid rgba(255,255,255,.1)}
 .ws-zegel{width:46px;height:46px;flex:none;border-radius:50%;border:1px solid rgba(245,209,138,.4);
   display:flex;align-items:center;justify-content:center;color:#F5D18A;
-  font-size:13px;font-weight:700}
+  font-size:13.5px;font-weight:700;letter-spacing:.02em;line-height:1}
 .ws-zegel svg{width:23px;height:23px}
-.ws-strook b{display:block;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
-  color:#F5D18A}
-.ws-strook span{display:block;font-size:13.5px;color:rgba(255,255,255,.6);margin-top:5px}
+.ws-tekst{display:flex;flex-direction:column;gap:5px;min-width:0}
+.ws-tekst b{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:#F5D18A;line-height:130%}
+.ws-tekst em{font-style:normal;font-size:13.5px;color:rgba(255,255,255,.6);line-height:140%}
+
 
 /* Trustpilot */
 .tp{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:14px;
@@ -229,12 +232,12 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
 .ws-m .ws-telling b{font-size:15px}
 .ws-m .ws-telling em{font-size:9px}
 .ws-m .ws-strook{grid-template-columns:1fr;padding:6px 18px 22px;gap:0}
-.ws-m .ws-strook > div{padding:15px 0;gap:14px}
+.ws-m .ws-strook > div{padding:15px 0;gap:14px;justify-content:flex-start}
 .ws-m .ws-strook > div + div{border-left:0;border-top:1px solid rgba(255,255,255,.1)}
 .ws-m .ws-zegel{width:38px;height:38px}
 .ws-m .ws-zegel svg{width:19px;height:19px}
-.ws-m .ws-strook b{font-size:11.5px}
-.ws-m .ws-strook span{font-size:12.5px}
+.ws-m .ws-tekst b{font-size:11.5px}
+.ws-m .ws-tekst em{font-size:12.5px}
 .ws-m .tp{font-size:12px;gap:8px}
 .ws-m .tp-stars i{width:19px;height:19px}
 .ws-m .tp-stars svg{width:13px;height:13px}
@@ -307,6 +310,13 @@ footer p{max-width:none}
   <p><b>Je had gelijk over het goud.</b> Versie 1 gebruikte één gouden knop en verder wit op zwart. Jouw versie zet goud op zes plekken tegelijk — de balk-iconen, de rand van de sale-pil, de derde regel van de kop, het verloop in de knop, de lichtbogen bij het product en de koppen in de strook — en juist door die herhaling wordt het een merkkleur in plaats van een accentje. Dat is één op één overgenomen, inclusief de tweede knop, het label bij het apparaat en de strook met drie garanties onderaan.</p>
   <p><b>De drie USP's onder de knoppen zijn eruit, zoals je vroeg.</b> Ze zeiden letterlijk hetzelfde als de strook eronder — 100 dagen proberen, 2 jaar garantie, gratis verzending — dus je las hetzelfde twee keer binnen 200 pixels. De strook wint omdat daar ruimte is voor een onderregel: "Niet goed? Geld terug" doet meer dan "100 dagen proberen" alleen.</p>
   <p style="margin-bottom:0"><b>Het logo moest wel aangepast.</b> Je logobestand heeft een zwart woordmerk met een gouden monogram; op deze zwarte achtergrond verdween het woord volledig. Er staat nu een variant met een wit woordmerk en hetzelfde gouden monogram. Voor het theme betekent dat één extra logobestand voor donkere secties.</p>
+</div>
+
+<div class="callout fix">
+  <h3 style="margin-top:0">De garantiestrook: de inhoud viel uit de rondjes</h3>
+  <p><b>Je zag het goed, en het was dezelfde soort fout als eerder.</b> De regel <code>.ws-strook span</code> gold ook voor de rondjes zelf, want dat zijn ook spans. Hij is één punt specifieker dan <code>.ws-zegel</code>, dus hij won: het rondje werd een blok in plaats van een gecentreerde doos, de "2" en de iconen zakten naar linksboven, ze verloren hun goudkleur, en de hele cirkel schoof vijf pixels omlaag door een marge die voor de onderregel bedoeld was.</p>
+  <p><b>De tekstkolom heeft nu een eigen klasse</b> in plaats van een kale span, dus er is geen selector meer die per ongeluk over het rondje heen gaat. De drie items staan bovendien gecentreerd in hun kolom in plaats van links, zoals in jouw ontwerp.</p>
+  <p style="margin-bottom:0"><b>De controle kon dit niet zien en kan het nu wel.</b> Er zat niets buiten zijn kader en er was geen tekst die overliep — het was gewoon een rondje met iets erin, alleen niet in het midden. <code>verify-layout.mjs</code> meet nu bij elk rond element of de inhoud daadwerkelijk in het midden zit. Ik heb de fout er expres weer ingezet om te controleren dat de meting hem echt vangt; dat doet hij, op alle zes de rondjes tegelijk.</p>
 </div>
 
 <div class="callout ask">
@@ -401,9 +411,9 @@ footer p{max-width:none}
           <p class="ws-telling"><svg><use href="#mensen"/></svg><span><b>7.400+</b><em>bestellingen sinds 2022</em></span></p>
         </div>
         <div class="ws-strook">
-          <div><span class="ws-zegel"><svg><use href="#shield"/></svg></span><span style="min-width:0"><b>100 dagen proberen</b><span>Niet goed? Geld terug.</span></span></div>
-          <div><span class="ws-zegel">2</span><span style="min-width:0"><b>2 jaar garantie</b><span>Kwaliteit waarop je kunt vertrouwen.</span></span></div>
-          <div><span class="ws-zegel"><svg><use href="#truck"/></svg></span><span style="min-width:0"><b>Morgen in huis</b><span>Vandaag besteld, morgen in huis.</span></span></div>
+          <div><span class="ws-zegel"><svg><use href="#shield"/></svg></span><span class="ws-tekst"><b>100 dagen proberen</b><em>Niet goed? Geld terug.</em></span></div>
+          <div><span class="ws-zegel">2</span><span class="ws-tekst"><b>2 jaar garantie</b><em>Kwaliteit waarop je kunt vertrouwen.</em></span></div>
+          <div><span class="ws-zegel"><svg><use href="#truck"/></svg></span><span class="ws-tekst"><b>Morgen in huis</b><em>Vandaag besteld, morgen in huis.</em></span></div>
         </div>
       </div>
     </div></div>
@@ -462,9 +472,9 @@ footer p{max-width:none}
           <p class="ws-telling"><svg><use href="#mensen"/></svg><span><b>7.400+</b><em>bestellingen sinds 2022</em></span></p>
         </div>
         <div class="ws-strook">
-          <div><span class="ws-zegel"><svg><use href="#shield"/></svg></span><span style="min-width:0"><b>100 dagen proberen</b><span>Niet goed? Geld terug.</span></span></div>
-          <div><span class="ws-zegel">2</span><span style="min-width:0"><b>2 jaar garantie</b><span>Kwaliteit waarop je kunt vertrouwen.</span></span></div>
-          <div><span class="ws-zegel"><svg><use href="#truck"/></svg></span><span style="min-width:0"><b>Morgen in huis</b><span>Vandaag besteld, morgen in huis.</span></span></div>
+          <div><span class="ws-zegel"><svg><use href="#shield"/></svg></span><span class="ws-tekst"><b>100 dagen proberen</b><em>Niet goed? Geld terug.</em></span></div>
+          <div><span class="ws-zegel">2</span><span class="ws-tekst"><b>2 jaar garantie</b><em>Kwaliteit waarop je kunt vertrouwen.</em></span></div>
+          <div><span class="ws-zegel"><svg><use href="#truck"/></svg></span><span class="ws-tekst"><b>Morgen in huis</b><em>Vandaag besteld, morgen in huis.</em></span></div>
         </div>
       </div>
     </div></div>

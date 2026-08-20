@@ -58,6 +58,31 @@ for (const file of files) {
                      txt: (el.textContent || '').trim().slice(0, 26) });
     });
 
+    // Ronde badges: als een bredere selector hun display of centrering
+    // overschrijft, valt de inhoud uit het rondje. Op het oog lastig te zien,
+    // want het blijft een rondje met iets erin.
+    const rondjes = [];
+    binnen('*').forEach(el => {
+      const st = getComputedStyle(el);
+      const r = el.getBoundingClientRect();
+      if (r.width < 12 || r.height < 12) return;
+      if (Math.abs(r.width - r.height) > 3) return;
+      const straal = parseFloat(st.borderRadius);
+      if (!(straal >= r.width * 0.38)) return;
+      if (!el.textContent.trim() && !el.querySelector('svg,img')) return;
+      const bereik = document.createRange();
+      bereik.selectNodeContents(el);
+      const c = bereik.getBoundingClientRect();
+      if (!c.width || !c.height) return;
+      const dx = Math.round((c.left + c.right) / 2 - (r.left + r.right) / 2);
+      const dy = Math.round((c.top + c.bottom) / 2 - (r.top + r.bottom) / 2);
+      const uit = Math.round(Math.max(0, r.left - c.left, c.right - r.right,
+                                      r.top - c.top, c.bottom - r.bottom));
+      if (Math.abs(dx) > 2 || Math.abs(dy) > 2 || uit > 0)
+        rondjes.push({ el: el.className || el.tagName, dx, dy, buiten: uit,
+                       txt: el.textContent.trim().slice(0, 14) });
+    });
+
     const beelden = binnen('img').map(i => {
       const r = i.getBoundingClientRect();
       const nat = i.naturalWidth / i.naturalHeight, box = r.width / r.height;
@@ -66,16 +91,18 @@ for (const file of files) {
                vervormd: getComputedStyle(i).objectFit === 'fill' && Math.abs(nat - box) > 0.02 };
     });
 
-    return { buiten: buiten.slice(0, 15), tekst: tekst.slice(0, 10), beelden };
+    return { buiten: buiten.slice(0, 15), tekst: tekst.slice(0, 10),
+             rondjes: rondjes.slice(0, 10), beelden };
   });
 
   const scheef = out.beelden.filter(b => b.vervormd);
-  const aantal = out.buiten.length + out.tekst.length + scheef.length;
+  const aantal = out.buiten.length + out.tekst.length + out.rondjes.length + scheef.length;
   if (aantal) {
     stuk++;
     console.log(`\n${file} — ${aantal} punt(en)`);
     if (out.buiten.length) console.log('  buiten container:  ', JSON.stringify(out.buiten));
     if (out.tekst.length)  console.log('  tekst buiten kader:', JSON.stringify(out.tekst));
+    if (out.rondjes.length) console.log('  scheef in rondje:  ', JSON.stringify(out.rondjes));
     if (scheef.length)     console.log('  vervormd beeld:    ', JSON.stringify(scheef));
   } else {
     console.log(`${file} — schoon (${out.beelden.length} beelden gemeten)`);
