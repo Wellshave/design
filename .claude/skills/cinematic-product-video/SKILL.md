@@ -104,6 +104,28 @@ prijsbadges — het model neemt die over.
 een tabel van media-ID naar shot. Zonder die stap koppel je de neustrimmer aan het shot over de
 scheerkop, en dat merk je pas als de credits op zijn.
 
+**Leid het materiaal van een onderdeel nooit af uit een sfeerfoto.** Een studiofoto met hard
+strijklicht is gemaakt om vorm te laten zien, niet om kleur af te lezen. Bij de Blade Baron las
+ik de zwarte magnetische beschermkap als doorzichtig, omdat het gouden licht er langs schoot
+naar de scheerkop eronder en de glansstrepen op het glanzende plastic op reflecties in glas
+leken. Het shot kwam er precies zo uit, en de gebruiker moest melden dat de kap gewoon zwart is.
+
+De controle kost niets. Snijd het onderdeel uit en krik de helderheid op:
+
+```bash
+ffmpeg -i referentie.png -vf "crop=760:620:130:20,eq=brightness=0.25:contrast=1.4" op.jpg
+```
+
+Blijft het zwart, dan is het zwart. Zie je er ineens iets doorheen, dan was het doorzichtig.
+Twijfel je nog steeds over kleur, materiaal of hoe een onderdeel beweegt: **vraag het**, samen
+met de shotlijst. De gebruiker heeft het product in handen en jij hebt een render.
+
+En als een onderdeel dekt in het echt ook dekt in beeld, zeg dan in de prompt wat het onderdeel
+tegen de achtergrond aftekent, anders verdwijnt zwart op zwart:
+
+> What defines its shape against the dark background is a crisp white specular highlight running
+> along its curved top edge and down its rounded corner, exactly as in the reference photograph.
+
 **Kijk daarbij ook naar het woordmerk op het product.** Een gespiegeld merk is niet altijd iets
 wat het model ervan maakt — het kan al in de aangeleverde render zitten. Bij de Blade Baron
 stond de logodecal in twee van de tien foto's gespiegeld op het bovenvlak, terwijl het display
@@ -200,9 +222,14 @@ Let op de uploadlimiet van 30 MB per bestand — splits een te grote map op.
 ## Wat dit kost
 
 Eén shot van 5 seconden op 1080p met `bitrate_mode:"high"` kostte 45 credits, in beide runs tot
-nu toe. De Flex Guard-film kwam met zes shots plus twee herkansingen op 360; de Blade Baron met
-zes shots plus één herkansing op 315. Reken op ongeveer 300–400 credits voor een film van 30
-seconden, en op nul voor alle tekst, montage en herzieningen daarna.
+nu toe. Beide films kwamen met zes shots plus twee herkansingen op 360. Reken op ongeveer
+300–400 credits voor een film van 30 seconden, en op nul voor alle tekst, montage en
+herzieningen daarna.
+
+Van die vier herkansingen ging er één over een fout van het model en drie over een fout in de
+opdracht: te veel goud gevraagd, en een onderdeel verkeerd beschreven omdat de referentiefoto
+verkeerd gelezen was. De rekening valt dus vooral lager uit door beter kijken vooraf, niet door
+betere prompts achteraf.
 
 Een door een preset onderschepte inzending kost niets: bij de Blade Baron werden vijf van de zes
 shots teruggestuurd en het saldo bewoog pas bij de tweede inzending. Controleer dat na afloop
