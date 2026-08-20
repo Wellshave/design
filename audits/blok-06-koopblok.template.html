@@ -1,0 +1,492 @@
+<title>Wellshave Koopblok bundel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
+
+<style>
+
+:root{
+  /* exact de tokens uit :root van je live theme */
+  --graphite:#191816;
+  --grey:#8E8E8E;
+  --white-100:#FFFFFF;
+  --white-80:rgba(255,255,255,.8);
+  --white-40:rgba(255,255,255,.4);
+  --black-100:#111111;
+  --black-60:rgba(17,17,17,.6);
+  --black-40:rgba(17,17,17,.4);
+  --black-10:rgba(17,17,17,.1);
+  --gold-light-100:#F5D18A;
+  --gold-dark-100:#BC813E;
+  --error-color:#C14A3A;
+  --success-color:#1E7F63;
+
+  /* documentchroom, uit dezelfde tokens */
+  --bg:#FBFAF9; --surface:#FFFFFF; --surface-2:#F2F0ED;
+  --fg:var(--black-100); --fg-soft:var(--black-60); --rule:var(--black-10);
+  --accent:#8F6428;
+  --ok:var(--success-color); --ok-bg:#E6F0EC;
+  --crit:#A3271B; --crit-bg:#F6EAE7;
+  --shadow:0 1px 2px rgba(17,17,17,.05), 0 12px 30px -20px rgba(17,17,17,.35);
+  --frame:#E2DFDA;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141413; --surface:#1C1B1A; --surface-2:#252423;
+    --fg:#EEECE9; --fg-soft:rgba(238,236,233,.62); --rule:rgba(238,236,233,.13);
+    --accent:#D9A557; --ok:#7FBF9F; --ok-bg:#182420; --crit:#E38477; --crit-bg:#2A1C19;
+    --shadow:0 1px 2px rgba(0,0,0,.45), 0 12px 30px -20px rgba(0,0,0,.9);
+    --frame:#312F2C;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141413; --surface:#1C1B1A; --surface-2:#252423;
+  --fg:#EEECE9; --fg-soft:rgba(238,236,233,.62); --rule:rgba(238,236,233,.13);
+  --accent:#D9A557; --ok:#7FBF9F; --ok-bg:#182420; --crit:#E38477; --crit-bg:#2A1C19;
+  --shadow:0 1px 2px rgba(0,0,0,.45), 0 12px 30px -20px rgba(0,0,0,.9);
+  --frame:#312F2C;
+}
+
+*{box-sizing:border-box}
+img{max-width:100%;height:auto;display:block}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font-family:"Montserrat",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:16px;line-height:150%;font-weight:400;-webkit-font-smoothing:antialiased}
+.wrap{max-width:940px;margin:0 auto;padding:0 24px 96px}
+@media(max-width:600px){.wrap{padding:0 16px 64px}}
+
+.masthead{padding:60px 0 28px;border-bottom:1px solid var(--rule)}
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);margin:0 0 18px}
+h1{font-weight:600;font-size:clamp(32px,5.6vw,50px);line-height:115%;letter-spacing:-.015em;
+  margin:0 0 16px;text-wrap:balance}
+.dek{font-size:17px;color:var(--fg-soft);margin:0;max-width:64ch;line-height:160%;text-wrap:pretty}
+.byline{font-size:12.5px;color:var(--fg-soft);margin-top:20px}
+
+h2{font-weight:600;font-size:clamp(22px,3.4vw,30px);line-height:120%;letter-spacing:-.01em;
+  margin:56px 0 8px;text-wrap:balance}
+h2 + .sub{color:var(--fg-soft);margin:0 0 22px;font-size:15px;max-width:66ch;line-height:160%}
+h3{font-size:17px;font-weight:600;margin:26px 0 8px}
+p{margin:0 0 14px;max-width:68ch;line-height:160%}
+ul{margin:0 0 14px;padding-left:20px;max-width:68ch}
+li{margin-bottom:7px}
+strong{font-weight:600}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
+  background:var(--surface-2);padding:1px 5px;border-radius:3px}
+
+/* ── podium ── */
+.devicecap{font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--fg-soft);margin:0 0 8px}
+.scaler{width:100%;overflow:hidden;border:1px solid var(--frame);border-radius:4px;
+  background:#EDE7DB;box-shadow:var(--shadow)}
+.scaler > .inner{transform-origin:top left}
+.desk-scaler{min-height:400px}
+.desk-scaler > .inner{width:1440px}
+.phonecol{max-width:390px;margin:0 auto}
+.phone-scaler{border-radius:14px;min-height:400px}
+.phone-scaler > .inner{width:390px}
+.stage{display:grid;gap:30px;margin:0 0 10px}
+
+/* ══ MOCKUP — vaste merkkleuren in beide thema's ══ */
+.kb{font-family:"Montserrat",sans-serif;background:#0B0B0A;color:#FFFFFF;padding:64px 44px}
+.kb *{box-sizing:border-box}
+.kb p{margin:0;max-width:none}
+.kb ul{margin:0;padding:0;max-width:none;list-style:none}
+.kb-in{max-width:1240px;margin:0 auto;display:grid;
+  grid-template-columns:minmax(0,1.02fr) minmax(0,1fr);gap:56px;align-items:center}
+
+/* het beeld */
+.kb-beeld{position:relative;border-radius:20px;padding:34px 30px 30px;
+  background:radial-gradient(120% 100% at 50% 12%,rgba(245,209,138,.12) 0%,rgba(11,11,10,0) 62%),
+             linear-gradient(160deg,#171614 0%,#0E0E0D 100%);
+  border:1px solid rgba(245,209,138,.16)}
+.kb-shot{position:relative;display:block;width:100%}
+.kb-shot > img{width:100%;height:auto;display:block;
+  filter:drop-shadow(0 34px 40px rgba(0,0,0,.6))}
+.kb-punt{position:absolute;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;
+  border:1px solid rgba(245,209,138,.5);background:rgba(245,209,138,.1);
+  opacity:0;transform:scale(.7);transition:opacity .3s ease,transform .3s ease;pointer-events:none}
+.kb-punt.aan{opacity:1;transform:scale(1);
+  box-shadow:0 0 0 6px rgba(245,209,138,.14),0 0 30px 8px rgba(245,209,138,.28)}
+.kb-zegel{position:absolute;left:30px;top:-16px;display:inline-flex;align-items:center;gap:9px;
+  background:linear-gradient(135deg,#F5D18A 0%,#D8AC5D 100%);color:#111;border-radius:100px;
+  padding:9px 18px;font-size:11.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+.kb-zegel svg{width:15px;height:15px}
+.kb-cijfer{margin-top:22px;display:flex;align-items:center;gap:11px;
+  font-size:13px;color:rgba(255,255,255,.6);justify-content:center}
+.kb-cijfer b{color:#fff;font-weight:600}
+.kb-cijfer svg{width:16px;height:16px;color:#BC813E;flex:none}
+
+/* de tekstkant */
+.kb-tekst{display:flex;flex-direction:column;gap:20px;align-items:flex-start;min-width:0}
+.kb-eyebrow{font-size:11.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#BC813E}
+.kb-h2{font-size:42px;font-weight:700;letter-spacing:-.03em;line-height:106%;margin:0}
+.kb-claim{font-size:17px;line-height:158%;color:rgba(255,255,255,.7);max-width:34em}
+.kb-lijst{display:flex;flex-direction:column;gap:2px;width:100%}
+.kb-lijst li{display:flex;gap:14px;align-items:flex-start;font-size:15px;line-height:150%;
+  color:rgba(255,255,255,.82);padding:11px 12px;border-radius:12px;cursor:default;
+  transition:background-color .3s ease}
+.kb-lijst li:hover,.kb-lijst li.aan{background:rgba(245,209,138,.08)}
+.kb-lijst svg{width:19px;height:19px;flex:none;color:#F5D18A;margin-top:2px}
+.kb-lijst b{font-weight:600;color:#fff}
+.kb-lijst span{color:rgba(255,255,255,.6)}
+
+.kb-prijs{display:flex;align-items:baseline;flex-wrap:wrap;gap:14px;padding-top:4px}
+.kb-nu{font-size:38px;font-weight:700;letter-spacing:-.03em;color:#fff;line-height:1}
+.kb-was{font-size:18px;color:rgba(255,255,255,.42);text-decoration:line-through}
+.kb-korting{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:#111;background:#F5D18A;border-radius:100px;padding:7px 14px}
+.kb-voorraad{display:inline-flex;align-items:center;gap:9px;font-size:13.5px;
+  color:rgba(255,255,255,.6)}
+.kb-stip{width:8px;height:8px;border-radius:50%;background:#1E7F63;flex:none;
+  box-shadow:0 0 0 4px rgba(30,127,99,.22)}
+.kb-knop{display:inline-flex;align-items:center;justify-content:space-between;gap:18px;width:100%;
+  max-width:420px;background:linear-gradient(135deg,#F5D18A 0%,#D8AC5D 52%,#BC813E 100%);
+  color:#111;text-decoration:none;border-radius:100px;padding:9px 9px 9px 30px;
+  font-size:14px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  box-shadow:0 16px 38px -20px rgba(245,209,138,.9)}
+.kb-knop span{display:flex;align-items:center;justify-content:center;flex:none;
+  width:44px;height:44px;border-radius:50%;background:#111;color:#F5D18A}
+.kb-knop span svg{width:18px;height:18px}
+.kb-fud{display:flex;flex-wrap:wrap;align-items:center;gap:10px 0;font-size:12.5px;
+  color:rgba(255,255,255,.58)}
+.kb-fud span{display:inline-flex;align-items:center;gap:8px;padding:0 16px}
+.kb-fud span:first-child{padding-left:0}
+.kb-fud span + span{border-left:1px solid rgba(255,255,255,.16)}
+.kb-fud svg{width:15px;height:15px;flex:none;color:#BC813E}
+.kb-los{font-size:13px;color:rgba(255,255,255,.5)}
+.kb-los a{color:rgba(255,255,255,.8)}
+
+/* ── mobiel ── */
+.kb-m{padding:36px 16px 30px}
+.kb-m .kb-in{grid-template-columns:1fr;gap:26px}
+.kb-m .kb-beeld{padding:28px 18px 22px;border-radius:16px}
+.kb-m .kb-zegel{left:16px;font-size:10.5px;padding:8px 14px}
+.kb-m .kb-cijfer{margin-top:16px;font-size:12px}
+.kb-m .kb-tekst{gap:16px}
+.kb-m .kb-h2{font-size:29px}
+.kb-m .kb-claim{font-size:15px;line-height:152%}
+.kb-m .kb-lijst li{font-size:14px;gap:12px;padding:9px 10px}
+.kb-m .kb-nu{font-size:32px}
+.kb-m .kb-was{font-size:16px}
+.kb-m .kb-knop{max-width:none;font-size:13px;padding:9px 9px 9px 22px}
+.kb-m .kb-knop span{width:40px;height:40px}
+.kb-m .kb-fud{font-size:11.5px;width:100%}
+.kb-m .kb-fud span{padding:0 10px}
+.kb-m .kb-fud{gap:0;flex-wrap:nowrap}
+
+@media (prefers-reduced-motion: reduce){
+  .kb-punt{transition:none}
+}
+
+/* ── annotaties ── */
+.anno{background:var(--surface);border:1px solid var(--rule);border-left:2px solid var(--gold-dark-100);
+  border-radius:3px;padding:18px 22px;margin:0 0 13px;box-shadow:var(--shadow)}
+.anno > :last-child{margin-bottom:0}
+.anno h3{margin:0 0 7px;font-size:16.5px}
+.anno p{font-size:15px;margin-bottom:0;color:var(--fg-soft);max-width:68ch}
+.anno p b{color:var(--fg);font-weight:600}
+.anno p + p{margin-top:9px}
+.tablewrap{overflow-x:auto;margin:20px 0;border:1px solid var(--rule);border-radius:3px}
+table{border-collapse:collapse;width:100%;min-width:560px;background:var(--surface);font-size:14.5px}
+th,td{text-align:left;padding:12px 15px;border-bottom:1px solid var(--rule);vertical-align:top;line-height:150%}
+th{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--fg-soft);background:var(--surface-2)}
+tr:last-child td{border-bottom:0}
+td b{font-weight:600;color:var(--fg)}
+.callout{background:var(--surface-2);border-radius:3px;padding:20px 24px;margin:24px 0}
+.callout > :last-child{margin-bottom:0}
+.callout ul,.callout p{max-width:none}
+.ask{border-left:2px solid var(--crit);background:var(--crit-bg)}
+.fix{border-left:2px solid var(--ok);background:var(--ok-bg)}
+.progress{display:flex;flex-wrap:wrap;gap:5px;margin:18px 0 0}
+.progress i{width:26px;height:4px;background:var(--rule);display:block}
+.progress i.done{background:var(--gold-dark-100)}
+.progress-cap{font-size:11.5px;color:var(--fg-soft);margin:10px 0 0}
+footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--rule);
+  color:var(--fg-soft);font-size:13px}
+footer p{max-width:none}
+:focus-visible{outline:2px solid var(--gold-dark-100);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}
+  .revtrack{width:auto;overflow-x:auto}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01z"/></symbol>
+<symbol id="chk" viewBox="0 0 24 24"><path d="M4 12.5l5.2 5.2L20 6.9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="shield" viewBox="0 0 24 24"><path d="M12 2.6l7.2 2.8v6.1c0 4.4-3 8.4-7.2 9.9-4.2-1.5-7.2-5.5-7.2-9.9V5.4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M8.7 12.1l2.3 2.3 4.3-4.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="guarantee" viewBox="0 0 24 24"><circle cx="12" cy="9.6" r="6.4" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8.3 15.1L7 21.6l5-2.4 5 2.4-1.3-6.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+<symbol id="truck" viewBox="0 0 24 24"><path d="M1.9 6.2h12.2v9.4H1.9zM14.1 9.7h3.9l3.1 3.1v2.8h-7z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="6.6" cy="18" r="1.9" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="17.3" cy="18" r="1.9" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+<symbol id="chkc" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10.1" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M7.7 12.3l2.9 2.9 5.7-6.1" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="tik" viewBox="0 0 24 24"><path d="M9 11.4V5.6a1.8 1.8 0 013.6 0v5.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.6 10.8V9.4a1.7 1.7 0 013.4 0v1.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 11V10a1.7 1.7 0 013.4 0v4.6c0 3.4-2.4 6.2-5.8 6.2h-1.4c-2 0-3.4-1-4.4-2.6l-2.6-4.3a1.7 1.7 0 012.7-2l1.1 1.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="gauge" viewBox="0 0 24 24"><path d="M3.6 17.4a9.4 9.4 0 1116.8 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 16.4l4-5.1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="17.2" r="1.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="parts" viewBox="0 0 24 24"><rect x="3.4" y="4.2" width="6.2" height="15.6" rx="2.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><rect x="14.4" y="4.2" width="6.2" height="15.6" rx="2.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.4 8.6h6.2M14.4 8.6h6.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="drop" viewBox="0 0 24 24"><path d="M12 2.9s6 6.4 6 10.4a6 6 0 01-12 0c0-4 6-10.4 6-10.4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.3 14.1a2.9 2.9 0 002.9 2.9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="power" viewBox="0 0 24 24"><rect x="2.6" y="7.2" width="15.4" height="9.6" rx="2.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 10.6v2.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.6 9.6l-2.2 3.2h2.8l-2 2.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="scissors" viewBox="0 0 24 24"><circle cx="6" cy="17.6" r="2.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="6.4" r="2.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.3 7.8L20 17.2M8.3 16.2L20 6.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="nose" viewBox="0 0 24 24"><path d="M12.6 3.4v5.4l2.8 5.1c.5 1-.1 2.1-1.2 2.1h-1.1c0 1.8-1.3 3.2-3.1 3.2-1.7 0-3-1.2-3.2-2.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.6 8.4c1.5 0 2.7 1.2 2.7 2.7 0 2-1.2 2.4-1.2 4.1 0 1.4.4 2 .4 3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="dwn" viewBox="0 0 24 24"><path d="M12 4.6v14.2M6.2 13.4L12 19.2l5.8-5.8" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="arw" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg><div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow">Homepage-redesign · blok 6 van 12 · versie 1</p>
+  <h1>Het koopblok van de bundel</h1>
+  <p class="dek">Eén compact koopvak dat de twee volledige productpagina's vervangt die nu midden in je homepage geplakt staan. En een bevinding die het blok van vorm veranderde: allebei die geplakte bundels hebben in zes maanden nul keer verkocht.</p>
+  <p class="byline">Ontwerp — nog niets live. Akkoord → dan pas Shopify.</p>
+  <div class="progress" aria-hidden="true">
+    <i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i></i><i></i><i></i><i></i><i></i><i></i>
+  </div>
+  <p class="progress-cap">Blok 6 in ontwerp · 6 blokken volgen</p>
+</header>
+
+<div class="callout ask">
+  <h3 style="margin-top:0">De bundels op je homepage verkopen niets</h3>
+  <p><b>De twee bundels die als volledige productpagina in je homepage geplakt staan, hebben in 180 dagen samen nul verkocht.</b> De Shave Package Ultimate™ (€89,95, live sinds 29 september 2025) staat er bijna elf maanden en heeft geen enkele bestelling. De Essential Flex Bundel (€79,95, live sinds 25 mei 2026) staat er bijna drie maanden, ook nul. Ze staan allebei niet in de verkooplijst over 180 dagen, en dat is geen afronding: producten met één verkocht exemplaar staan er wel in.</p>
+  <p><b>Dat raakt ook wat ik zelf eerder heb gebouwd.</b> In blok 2 heb ik de Essential Flex Bundel als donker koopvak neergezet. Ik koos hem omdat hij op je homepage staat, niet omdat hij verkoopt — ik heb toen zijn voorraad en prijs opgehaald maar niet zijn verkoopcijfer. Dat was de verkeerde volgorde, en het is dezelfde fout als bij blok 5: eerst iets kiezen dat goed oogt en pas daarna controleren of het klopt.</p>
+  <p style="margin-bottom:0"><b>De bundel die wél verkoopt is de Shave Package 3.0.</b> 92 stuks en €5.006 in de afgelopen 180 dagen, live sinds oktober 2024. Dat is de bundel in dit blok. Alleen de Skull Deal 1.0 doet er meer (130 stuks) — maar dat is één apparaat met een reservescheerkop tegen 14% korting, geen set, en de bijbehorende tekst is letterlijk de productomschrijving van de Head Shaver Deluxe.</p>
+</div>
+
+<div class="callout fix">
+  <h3 style="margin-top:0">Wat dit blok doet, en waar het staat</h3>
+  <p><b>Dit is het enige blok op de pagina met een winkelwagenknop erin.</b> Blok 3 toont bestsellers met een doorklik naar de productpagina; hier kun je direct kopen. Dat is bewust: op deze plek heeft iemand de hero, het bewijs, de bestsellers, het bouwproces en de zonekiezer gezien. Wie dan nog leest, weet genoeg om te beslissen — en de bundel is het antwoord op "ik wil niet kiezen".</p>
+  <p><b>De prijs doet het werk, niet de urgentie.</b> €64,95 tegenover €99,95 los, met de besparing als bedrag in plaats van als percentage: €35 is concreter dan 35%. Er staat geen afteller, geen "nog maar 3 op voorraad" en geen "de actie loopt af" — die zijn er niet, dus staan ze er niet.</p>
+  <p style="margin-bottom:0"><b>De vier regels zijn aanwijsbaar.</b> Raak je een regel aan, dan licht dat onderdeel in de foto op. Dat is geen versiering: "scheeropzetstuk voor een gladde afwerking" is een zin die je twee keer moet lezen, en één keer aanwijzen scheelt dat.</p>
+</div>
+
+<div class="callout ask">
+  <h3 style="margin-top:0">Wat er in blok 2 moet gebeuren</h3>
+  <p><b>Het koopvak dat nu in blok 2 staat, moet daar weg.</b> Twee redenen. De eerste is inhoudelijk: blok 2 is je bewijsblok — garantiezegel en doorlopende reviewband — en een koopvak maakt er een blok van dat twee dingen tegelijk wil. De tweede is deze bevinding: het vak toont een bundel die niets verkoopt.</p>
+  <p style="margin-bottom:0"><b>Als jij akkoord bent, haal ik dat vak uit blok 2</b> en blijft daar het zegel met de reviewband over. Dat maakt blok 2 lichter en geeft dit blok het alleenrecht op de knop. Ik heb het nog niet gedaan, want blok 2 stond al vast.</p>
+</div>
+
+<h2>Het ontwerp</h2>
+<p class="sub">Links de set met de vier onderdelen, rechts wat erin zit met de prijs en de knop. Op mobiel staat het beeld boven en de tekst eronder.</p>
+
+<div class="stage">
+  <div>
+    <p class="devicecap">Desktop — 1440px</p>
+    <div class="scaler desk-scaler"><div class="inner">
+      <section class="kb"><div class="kb-in">
+
+        <div class="kb-beeld">
+          <p class="kb-zegel"><svg><use href="#star"/></svg>Bestverkochte bundel</p>
+          <div class="kb-shot">
+            <img src="__BUNDELPACK__" alt="Shave Package 3.0: bodygroomer, neustrimmer, opzetstukken, oplaadstation en opbergzakje">
+            <span class="kb-punt" data-deel="groomer" style="left:11.0%;top:50.0%"></span>
+            <span class="kb-punt" data-deel="neus" style="left:33.0%;top:52.0%"></span>
+            <span class="kb-punt" data-deel="opzet" style="left:55.0%;top:33.0%"></span>
+            <span class="kb-punt" data-deel="station" style="left:55.0%;top:76.0%"></span>
+          </div>
+          <p class="kb-cijfer"><svg><use href="#doos"/></svg><b>92 keer besteld</b> in de afgelopen zes maanden</p>
+        </div>
+
+        <div class="kb-tekst">
+          <p class="kb-eyebrow">Alles in één set</p>
+          <h2 class="kb-h2">Shave Package 3.0</h2>
+          <p class="kb-claim">Vier apparaten die je los €99,95 kosten, in één set met een station waar ze allemaal op passen.</p>
+          <ul class="kb-lijst">
+            <li data-deel="groomer"><svg><use href="#chkc"/></svg><span><b>Bodygroomer met extra scheerblad</b> — de krachtige body­groomer uit de Groom Guard-lijn, plus een blad in reserve</span></li>
+            <li data-deel="neus"><svg><use href="#chkc"/></svg><span><b>Neustrimmer met detail-trim opzetstuk</b> — voor neus en wenkbrauwen, in hetzelfde apparaat</span></li>
+            <li data-deel="opzet"><svg><use href="#chkc"/></svg><span><b>Scheeropzetstuk voor een gladde afwerking</b> — trimmen en scheren zonder van apparaat te wisselen</span></li>
+            <li data-deel="station"><svg><use href="#chkc"/></svg><span><b>Oplaadstation</b> — alles opgeladen en op één plek, in plaats van los in een la</span></li>
+          </ul>
+          <p class="kb-prijs"><span class="kb-nu">€64,95</span><span class="kb-was">€99,95</span><span class="kb-korting">Je bespaart €35</span></p>
+          <p class="kb-voorraad"><span class="kb-stip"></span>Op voorraad · vandaag besteld, morgen in huis</p>
+          <a class="kb-knop" href="#">In winkelwagen<span><svg><use href="#arw"/></svg></span></a>
+          <p class="kb-fud"><span><svg><use href="#shield"/></svg>100 dagen proberen</span><span><svg><use href="#chk"/></svg>2 jaar garantie</span><span><svg><use href="#truck"/></svg>Gratis verzending</span></p>
+          <p class="kb-los">Liever los? <a href="#">Bekijk de losse apparaten</a></p>
+        </div>
+
+      </div></section>
+    </div></div>
+  </div>
+  <div class="phonecol">
+    <p class="devicecap">Mobiel — 390px · 73% van je verkeer</p>
+    <div class="scaler phone-scaler"><div class="inner">
+      <section class="kb kb-m"><div class="kb-in">
+
+        <div class="kb-beeld">
+          <p class="kb-zegel"><svg><use href="#star"/></svg>Bestverkochte bundel</p>
+          <div class="kb-shot">
+            <img src="__BUNDELPACK__" alt="Shave Package 3.0: bodygroomer, neustrimmer, opzetstukken, oplaadstation en opbergzakje">
+            <span class="kb-punt" data-deel="groomer" style="left:11.0%;top:50.0%"></span>
+            <span class="kb-punt" data-deel="neus" style="left:33.0%;top:52.0%"></span>
+            <span class="kb-punt" data-deel="opzet" style="left:55.0%;top:33.0%"></span>
+            <span class="kb-punt" data-deel="station" style="left:55.0%;top:76.0%"></span>
+          </div>
+          <p class="kb-cijfer"><svg><use href="#doos"/></svg><b>92 keer besteld</b> in de afgelopen zes maanden</p>
+        </div>
+
+        <div class="kb-tekst">
+          <p class="kb-eyebrow">Alles in één set</p>
+          <h2 class="kb-h2">Shave Package 3.0</h2>
+          <p class="kb-claim">Vier apparaten die je los €99,95 kosten, in één set met een station waar ze allemaal op passen.</p>
+          <ul class="kb-lijst">
+            <li data-deel="groomer"><svg><use href="#chkc"/></svg><span><b>Bodygroomer met extra scheerblad</b> — de krachtige body­groomer uit de Groom Guard-lijn, plus een blad in reserve</span></li>
+            <li data-deel="neus"><svg><use href="#chkc"/></svg><span><b>Neustrimmer met detail-trim opzetstuk</b> — voor neus en wenkbrauwen, in hetzelfde apparaat</span></li>
+            <li data-deel="opzet"><svg><use href="#chkc"/></svg><span><b>Scheeropzetstuk voor een gladde afwerking</b> — trimmen en scheren zonder van apparaat te wisselen</span></li>
+            <li data-deel="station"><svg><use href="#chkc"/></svg><span><b>Oplaadstation</b> — alles opgeladen en op één plek, in plaats van los in een la</span></li>
+          </ul>
+          <p class="kb-prijs"><span class="kb-nu">€64,95</span><span class="kb-was">€99,95</span><span class="kb-korting">Je bespaart €35</span></p>
+          <p class="kb-voorraad"><span class="kb-stip"></span>Op voorraad · vandaag besteld, morgen in huis</p>
+          <a class="kb-knop" href="#">In winkelwagen<span><svg><use href="#arw"/></svg></span></a>
+          <p class="kb-fud"><span><svg><use href="#shield"/></svg>100 dagen</span><span><svg><use href="#chk"/></svg>2 jaar garantie</span><span><svg><use href="#truck"/></svg>Gratis verzending</span></p>
+          <p class="kb-los">Liever los? <a href="#">Bekijk de losse apparaten</a></p>
+        </div>
+
+      </div></section>
+    </div></div>
+  </div>
+</div>
+
+<h2>Waar elke regel vandaan komt</h2>
+<div class="tablewrap">
+<table>
+  <thead><tr><th>Wat er staat</th><th>Bron</th></tr></thead>
+  <tbody>
+    <tr><td>Shave Package 3.0 · €64,95</td><td>Shopify, prijs van de enige variant</td></tr>
+    <tr><td>€99,95 doorgestreept · je bespaart €35</td><td>Shopify, <code>compareAtPrice</code>. €99,95 − €64,95 = €35,00</td></tr>
+    <tr><td>92 keer besteld in de afgelopen zes maanden</td><td>ShopifyQL, 92 stuks en €5.006 netto over 180 dagen</td></tr>
+    <tr><td>Bestverkochte bundel</td><td>Van alle sets met meerdere apparaten verkoopt deze het meest over 180 dagen</td></tr>
+    <tr><td>Bodygroomer met extra scheerblad</td><td>"Met een krachtige bodygroomer plus extra scheerblad"</td></tr>
+    <tr><td>Neustrimmer met detail-trim opzetstuk</td><td>"een veelzijdige neustrimmer met detail-trim opzetstuk voor wenkbrauwen en neus"</td></tr>
+    <tr><td>Scheeropzetstuk voor een gladde afwerking</td><td>"en een scheeropzetstuk voor een gladde afwerking"</td></tr>
+    <tr><td>Oplaadstation</td><td>"Inclusief handig oplaadstation, zodat alles altijd opgeladen binnen handbereik is"</td></tr>
+    <tr><td>Op voorraad · morgen in huis</td><td>Shopify: 93 stuks. De verzendbelofte staat in je aankondigingsbalk</td></tr>
+  </tbody>
+</table>
+</div>
+<p><b>Eén ding klopt niet tussen tekst en foto.</b> De productfoto toont ook een opbergzakje met logo; de omschrijving noemt dat niet. Ik heb het niet in de vier regels gezet, want ik kan niet vaststellen of het meegeleverd wordt. Zit het erbij, dan is dat een vijfde regel waard — een tasje is precies het soort ding dat een set compleet laat voelen.</p>
+
+<h2>Bouwnotities voor straks</h2>
+<ul>
+  <li><b>Prijs, doorgestreepte prijs en besparing komen uit het product</b>, niet uit vaste tekst. De besparing is <code>compare_at_price − price</code>; toont het product geen <code>compare_at_price</code>, dan verdwijnen de doorgestreepte prijs en het label vanzelf.</li>
+  <li><b>Het verkoopcijfer is geen Liquid.</b> "92 keer besteld" komt uit de analytics en moet met de hand gezet worden, of uit een app die verkoopaantallen bijhoudt. Zet er een datum bij in de sectie-instellingen, zodat duidelijk is wanneer het voor het laatst is bijgewerkt.</li>
+  <li><b>De voorraadregel heeft twee standen.</b> Boven een drempel: "Op voorraad · morgen in huis". Eronder: het werkelijke aantal. Nooit een verzonnen aantal — dat is de enige manier waarop schaarste op termijn werkt.</li>
+  <li><b>De vier punten op de foto zijn percentages</b>, net als de hotspots in blok 5. Wissel je de foto, dan verschuiven ze mee in de sectie-instellingen.</li>
+  <li><b>De knop is één product, geen variantkiezer.</b> Heeft de bundel straks varianten, dan moet hier een kiezer bij en wordt dit blok een stuk hoger.</li>
+</ul>
+
+<div class="callout ask">
+  <h3 style="margin-top:0">Wat ik van jou nodig heb</h3>
+  <ul style="margin-bottom:0">
+    <li><b>Akkoord om het koopvak uit blok 2 te halen?</b> Dan houdt blok 2 het zegel en de reviewband, en heeft dit blok als enige een winkelwagenknop.</li>
+    <li><b>Wat gebeurt er met de twee bundels die niets verkopen?</b> De Shave Package Ultimate staat elf maanden op nul en de Essential Flex Bundel drie. Van de homepage halen is sowieso goed; de vraag is of ze überhaupt in de winkel blijven.</li>
+    <li><b>Zit het opbergzakje bij de Shave Package 3.0?</b> Het staat op de foto maar niet in de tekst.</li>
+    <li><b>De Skull Deal 1.0 verkoopt het best van alles wat op een set lijkt</b> (130 stuks), maar staat op 14% korting waar de rest op 30 tot 42% zit — dezelfde scheefheid als bij de 4in1 Ultra in blok 3. Wil je daar iets mee?</li>
+  </ul>
+</div>
+
+<h2>Daarna</h2>
+<p>Blok 7 zijn de waardeproposities uit je Over-pagina, herschreven met een kenmerk erbij — die staan nu bijna woordelijk al halverwege je homepage. Daarna het zonerooster (blok 8, al klaar), de UGC-sectie, de vergelijkingstabel, garantie en FAQ, en de afsluiter.</p>
+
+<footer>
+  <p>Alle prijzen, voorraden, verkoopaantallen en publicatiedata live uit Shopify, opgehaald op 20 augustus 2026. Productteksten letterlijk uit de eigen omschrijvingen. Ontwerp — nog niets live.</p>
+</footer>
+
+</div>
+
+<script>
+/* ══ MOCKUP-SCRIPT ══ */
+// De regels en het beeld horen bij elkaar: raak je een regel aan, dan licht
+// het onderdeel in de foto op. Elke .kb krijgt zijn eigen instantie, want
+// desktop en mobiel staan als twee losse mockups op dezelfde pagina.
+document.querySelectorAll('.kb').forEach(function (sec) {
+  var regels = [].slice.call(sec.querySelectorAll('.kb-lijst li'));
+  var punten = [].slice.call(sec.querySelectorAll('.kb-punt'));
+  if (!regels.length) return;
+
+  function toon(deel) {
+    punten.forEach(function (p) { p.classList.toggle('aan', p.dataset.deel === deel); });
+    regels.forEach(function (r) { r.classList.toggle('aan', r.dataset.deel === deel); });
+  }
+  regels.forEach(function (r) {
+    ['mouseenter', 'focus', 'click', 'touchstart'].forEach(function (e) {
+      r.addEventListener(e, function () { toon(r.dataset.deel); }, { passive: true });
+    });
+  });
+  sec.querySelector('.kb-lijst').addEventListener('mouseleave', function () { toon(null); });
+});
+</script>
+
+<script>
+function fit(){
+  document.querySelectorAll('.scaler').forEach(s=>{
+    const inner=s.firstElementChild;
+    const w=parseFloat(getComputedStyle(inner).width);
+    const scale=s.clientWidth/w;
+    inner.style.transform='scale('+scale+')';
+    s.style.height=Math.ceil(inner.offsetHeight*scale)+'px';
+  });
+}
+document.fonts&&document.fonts.ready.then(fit);
+window.addEventListener('resize',fit);
+new ResizeObserver(fit).observe(document.body);
+window.addEventListener('load',fit); fit();
+</script>
+
+<script>
+/* ══ MOCKUP-SCRIPT ══ */
+// De zonekiezer. Elke .zf krijgt zijn eigen instantie, want desktop en mobiel
+// staan als twee losse mockups op dezelfde pagina.
+document.querySelectorAll('.zf').forEach(function (sec) {
+  var panelen = [].slice.call(sec.querySelectorAll('.zf-paneel'));
+  if (!panelen.length) return;
+  var knoppen = [].slice.call(sec.querySelectorAll('.zf-pin, .zf-label, .zf-chip'));
+  var lijnen  = [].slice.call(sec.querySelectorAll('.zf-lijnen line'));
+  var actief  = sec.querySelector('[data-actief]');
+
+  var traag = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var i = Math.max(0, panelen.findIndex(function (p) { return !p.hidden; }));
+  var gestuurd = false, klok = null;
+
+  function toon(n) {
+    i = (n + panelen.length) % panelen.length;
+    var zone = panelen[i].dataset.zone;
+    panelen.forEach(function (p) { p.hidden = p.dataset.zone !== zone; });
+    knoppen.forEach(function (k) { k.classList.toggle('aan', k.dataset.zone === zone); });
+    lijnen.forEach(function (l) { l.classList.toggle('aan', l.dataset.zone === zone); });
+    if (actief) {
+      actief.textContent = panelen[i].dataset.naam || zone;
+    }
+    var chip = sec.querySelector('.zf-chip[data-zone="' + zone + '"]');
+    if (chip && chip.parentElement.scrollWidth > chip.parentElement.clientWidth) {
+      var r = chip.parentElement;
+      var doel = chip.offsetLeft - (r.clientWidth - chip.offsetWidth) / 2;
+      r.scrollTo({ left: Math.max(0, doel), behavior: traag ? 'auto' : 'smooth' });
+    }
+  }
+  function kies(zone) {
+    // zodra iemand zelf kiest stopt het rondlopen: dit is een keuzeblok, en
+    // dan is doorschuiven onder iemands handen weg hinderlijk in plaats van levendig
+    gestuurd = true;
+    if (klok) { clearInterval(klok); klok = null; }
+    toon(panelen.findIndex(function (p) { return p.dataset.zone === zone; }));
+  }
+  knoppen.forEach(function (k) {
+    k.addEventListener('click', function () { kies(k.dataset.zone); });
+  });
+
+  // de veegbare zonerail: de balk laat zien hoever je bent, en bij een keuze
+  // via de foto schuift de bijbehorende knop vanzelf in beeld
+  var rail = sec.querySelector('.zf-chips');
+  var balk = sec.querySelector('.zf-schuif i');
+  if (rail && balk) {
+    var meet = function () {
+      var deel = rail.clientWidth / rail.scrollWidth;
+      var speling = rail.scrollWidth - rail.clientWidth;
+      balk.style.width = Math.min(100, deel * 100) + '%';
+      balk.style.left = (speling > 0 ? (rail.scrollLeft / speling) * (100 - deel * 100) : 0) + '%';
+      rail.classList.toggle('rand-links', rail.scrollLeft > 6 && speling - rail.scrollLeft > 6);
+      rail.classList.toggle('rand-eind', speling > 0 && speling - rail.scrollLeft <= 6);
+    };
+    rail.addEventListener('scroll', meet);
+    new ResizeObserver(meet).observe(rail);
+    meet();
+  }
+
+  toon(i);
+  if (!traag) klok = setInterval(function () { if (!gestuurd) toon(i + 1); }, 6000);
+});
+</script>

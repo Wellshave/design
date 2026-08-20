@@ -10,6 +10,7 @@ const ASSETS = {
   __MARK__:      ['assets/mark.png',            'image/png'],
   __USE__:       ['assets/use-neustrimmer.jpg', 'image/jpeg'],
   __BUNDLEBIG__: ['assets/bundel-dark.jpg',     'image/jpeg'],
+  __BUNDELPACK__: ['assets/bundel-pack.webp',   'image/webp'],
   __ZONE_LICHAAM__: ['assets/best-lichaam.webp', 'image/webp'],
   __ZONE_GEZICHT__: ['assets/best-gezicht.webp', 'image/webp'],
   __ZONE_HOOFD__:   ['assets/best-hoofd.webp',   'image/webp'],

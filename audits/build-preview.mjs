@@ -37,6 +37,7 @@ const proof = read('blok-02-pijnpunt.html');
 const best = read('blok-03-bestsellers.html');
 const mech = read('blok-04-mechanisme.html');
 const usps = read('blok-05-waardeproposities.html');
+const koop = read('blok-06-koopblok.html');
 
 // blok 1 en blok 2 delen drie Trustpilot-klassen met verschillende waarden.
 // In de preview staan ze op één pagina, dus krijgt blok 1 een eigen naam.
@@ -79,6 +80,9 @@ const blocks = [
   { id: 'blok5', naam: 'Blok 5 — Waar wil je trimmen?',
     desk: element(usps, '<section class="zf"><div class="zf-in">', 'section'),
     mob:  element(usps, '<section class="zf zf-m"><div class="zf-in">', 'section') },
+  { id: 'blok6', naam: 'Blok 6 — Het koopblok van de bundel',
+    desk: element(koop, '<section class="kb"><div class="kb-in">', 'section'),
+    mob:  element(koop, '<section class="kb kb-m"><div class="kb-in">', 'section') },
 ];
 
 const css = `:root{--bg:#FBFAF9;--surface:#fff;--fg:#1A1A1A;--fg-soft:#6B6560;--rule:#E6E1DC;--gold:#BC813E}
@@ -182,7 +186,7 @@ ${body}
   </footer>
 </div>
 <script>
-${[hero, proof, best, mech, usps].map(mockupScript).filter(Boolean).join('\n')}
+${[hero, proof, best, mech, usps, koop].map(mockupScript).filter(Boolean).join('\n')}
 </script>
 <script>
 function fit(){
