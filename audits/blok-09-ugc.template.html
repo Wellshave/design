@@ -1,4 +1,4 @@
-<title>Wellshave in actie</title>
+<title>De Wellshave-familie</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
@@ -90,38 +90,49 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
 .stage{display:grid;gap:30px;margin:0 0 10px}
 
 /* ══ MOCKUP — vaste merkkleuren in beide thema's ══ */
-.ug{font-family:"Montserrat",sans-serif;background:#F5F1EA;color:#111111;padding:62px 40px}
+.ug{font-family:"Montserrat",sans-serif;background:#F5F1EA;color:#111111;padding:62px 0}
 .ug *{box-sizing:border-box}
+/* de prozastijl van dit document mag de mockup niet raken. Let op de
+   volgorde: deze regel is een punt specifieker dan een losse klasse, dus
+   elke breedte per klasse moet .ug ervoor krijgen — dat ging hier eerst mis */
 .ug p{margin:0;max-width:none}
-.ug-in{max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:30px;min-width:0}
-
-/* kop */
-.ug-kop{display:flex;align-items:flex-end;justify-content:space-between;gap:44px}
+.ug-in{display:flex;flex-direction:column;gap:28px;min-width:0}
+.ug-kopblok{max-width:1240px;margin:0 auto;padding:0 40px;width:100%;
+  display:flex;align-items:flex-end;justify-content:space-between;gap:44px}
+.ug-kopblok > div{flex:1;min-width:0}
 .ug-eyebrow{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
   color:#BC813E;margin:0 0 12px}
 .ug-h2{font-size:34px;line-height:118%;font-weight:600;letter-spacing:-.022em;margin:0;
-  max-width:19ch;text-wrap:balance}
+  max-width:22ch;text-wrap:balance}
 .ug-h2 b{font-weight:600;color:#BC813E}
-.ug-sub{flex:none;max-width:42ch;font-size:14.5px;line-height:158%;color:rgba(17,17,17,.6);
+.ug .ug-sub{flex:none;max-width:37ch;font-size:14.5px;line-height:158%;color:rgba(17,17,17,.6);
   padding-bottom:4px}
+.ug-sub a{color:#111;font-weight:600;text-decoration:none;border-bottom:1px solid rgba(188,129,62,.5)}
 
-/* de rij video's */
-.ug-rij{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-.ug-kaart{background:#191816;border-radius:14px;overflow:hidden;display:flex;
-  flex-direction:column;min-width:0}
+/* de band schuift vanzelf door en staat stil zodra je hem aanwijst.
+   Zelfde principe als de reviewband in blok 2: geen knoppen, want op de
+   klikcarrousel van blok 2 klikte 1 tot 2 procent. */
+.ug-baan{position:relative;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 2.5%,#000 97.5%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 2.5%,#000 97.5%,transparent)}
+.ug-spoor{display:flex;gap:18px;width:max-content;align-items:stretch;
+  animation:ugschuif 72s linear infinite}
+.ug-baan:hover .ug-spoor{animation-play-state:paused}
+@keyframes ugschuif{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+.ug-kaart{width:296px;flex:none;background:#191816;border-radius:14px;overflow:hidden;
+  display:flex;flex-direction:column;min-width:0}
 .ug-beeld{position:relative;aspect-ratio:1/1;background:#0B0B0A;overflow:hidden}
 .ug-beeld img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .ug-beeld::after{content:"";position:absolute;inset:0;pointer-events:none;
   background:linear-gradient(180deg,rgba(11,11,10,.42) 0%,rgba(11,11,10,0) 34%,
-    rgba(11,11,10,0) 58%,rgba(11,11,10,.72) 100%)}
-
-/* de knop staat midden op het beeld: dit is een video, niet een foto */
+    rgba(11,11,10,0) 56%,rgba(11,11,10,.76) 100%)}
 .ug-play{position:absolute;z-index:2;left:50%;top:50%;transform:translate(-50%,-50%);
-  width:58px;height:58px;border-radius:50%;
+  width:54px;height:54px;border-radius:50%;
   background:linear-gradient(135deg,#F5D18A 0%,#D8AC5D 52%,#BC813E 100%);
   display:flex;align-items:center;justify-content:center;
   box-shadow:0 12px 30px -12px rgba(11,11,10,.8)}
-.ug-play svg{width:19px;height:19px;color:#141414;margin-left:3px}
+.ug-play svg{width:18px;height:18px;color:#141414;margin-left:3px}
 .ug-duur{position:absolute;z-index:2;left:12px;top:12px;
   font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
   color:#fff;background:rgba(11,11,10,.6);border:1px solid rgba(255,255,255,.2);
@@ -130,54 +141,75 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
   border-radius:50%;background:rgba(11,11,10,.6);border:1px solid rgba(255,255,255,.2);
   display:flex;align-items:center;justify-content:center;color:#fff}
 .ug-geluid svg{width:16px;height:16px}
-.ug-zone{position:absolute;z-index:2;left:12px;bottom:12px;
-  font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
-  color:#F5D18A}
+.ug-wie{position:absolute;z-index:2;left:12px;right:12px;bottom:11px;
+  display:flex;align-items:center;gap:9px;min-width:0}
+.ug-av{width:29px;height:29px;border-radius:50%;flex:none;
+  border:1px solid rgba(245,209,138,.55);background:rgba(11,11,10,.5);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;color:#F5D18A;line-height:1}
+.ug-wie b{display:block;font-size:12.5px;font-weight:600;color:#fff;line-height:1.25}
+.ug-wie em{display:block;font-style:normal;font-size:10px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:2px}
 
-.ug-body{padding:20px 22px 22px;display:flex;flex-direction:column;gap:9px;flex:1;min-width:0}
-.ug-kaartkop{font-size:17.5px;line-height:132%;font-weight:600;letter-spacing:-.015em;
+.ug-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px;flex:1;min-width:0}
+.ug-kaartkop{font-size:16.5px;line-height:134%;font-weight:600;letter-spacing:-.015em;
   color:#fff;margin:0}
-.ug-tekst{font-size:13.5px;line-height:156%;color:rgba(255,255,255,.6)}
-.ug-voet{margin-top:auto;padding-top:15px;border-top:1px solid rgba(255,255,255,.12);
-  display:flex;align-items:center;justify-content:space-between;gap:12px;
-  font-size:12px;font-weight:600;letter-spacing:.02em;color:rgba(255,255,255,.72)}
-.ug-voet i{width:27px;height:27px;border-radius:50%;border:1px solid rgba(245,209,138,.4);
-  display:flex;align-items:center;justify-content:center;flex:none;color:#F5D18A}
-.ug-voet svg{width:13px;height:13px}
+.ug-tekst{font-size:13px;line-height:154%;color:rgba(255,255,255,.58)}
+
+/* de open plekken: dit is de band zoals hij er nu voor staat, niet zoals
+   hij eruit hoort te zien. Vier plekken zijn nog niet gefilmd. */
+.ug-leeg{background:transparent;border:1px dashed rgba(188,129,62,.5)}
+.ug-leegbeeld{position:relative;aspect-ratio:1/1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:11px;padding:0 22px;text-align:center}
+.ug-leegbeeld i{width:46px;height:46px;border-radius:50%;border:1px solid rgba(188,129,62,.45);
+  display:flex;align-items:center;justify-content:center;color:#BC813E}
+.ug-leegbeeld svg{width:20px;height:20px}
+.ug-leegbeeld b{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:#BC813E}
+.ug-leeg .ug-body{gap:7px}
+.ug-leeg .ug-kaartkop{color:#111}
+.ug-leeg .ug-tekst{color:rgba(17,17,17,.55)}
+
+/* de uitnodiging aan het einde van de band */
+.ug-nodig{background:#191816;border:1px solid rgba(245,209,138,.28)}
+.ug-nodigbeeld{position:relative;aspect-ratio:1/1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:13px;padding:0 24px;text-align:center}
+.ug-nodigbeeld i{width:52px;height:52px;border-radius:50%;
+  background:linear-gradient(135deg,#F5D18A 0%,#D8AC5D 52%,#BC813E 100%);
+  display:flex;align-items:center;justify-content:center;color:#141414}
+.ug-nodigbeeld svg{width:22px;height:22px}
+.ug-nodigbeeld b{font-size:15.5px;font-weight:600;color:#fff;line-height:134%}
+.ug-nodigbeeld em{font-style:normal;font-size:12.5px;font-weight:600;color:#F5D18A}
 
 /* onderregel */
-.ug-slot{display:flex;align-items:center;justify-content:center;gap:12px;
+.ug-slot{max-width:1240px;margin:0 auto;padding:0 40px;width:100%;
+  display:flex;align-items:center;justify-content:center;gap:12px;
   font-size:13.5px;color:rgba(17,17,17,.58);text-align:center}
 .ug-slot svg{width:16px;height:16px;color:#BC813E;flex:none}
 .ug-slot b{color:#111;font-weight:600}
 
-/* ── mobiel: één veegbare rij, zoals de zonekiezer in blok 5 ── */
+/* ── mobiel ── */
 .ug-m{padding:38px 0}
-.ug-m .ug-in{gap:20px;padding:0 18px}
-.ug-m .ug-kop{flex-direction:column;align-items:flex-start;gap:12px}
+.ug-m .ug-in{gap:20px}
+.ug-m .ug-kopblok{flex-direction:column;align-items:flex-start;gap:12px;padding:0 18px}
 .ug-m .ug-h2{font-size:25px;max-width:none}
 .ug-m .ug-sub{font-size:13.5px;max-width:none;padding-bottom:0}
-.ug-m .ug-rij{display:flex;grid-template-columns:none;gap:12px;padding:2px 18px 4px;
-  margin:0 -18px;overflow-x:auto;scroll-snap-type:x proximity;
-  scrollbar-width:none;-webkit-overflow-scrolling:touch;
-  -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 30px),transparent);
-  mask-image:linear-gradient(90deg,#000 calc(100% - 30px),transparent)}
-.ug-m .ug-rij::-webkit-scrollbar{display:none}
-/* 82% van de breedte: de volgende kaart steekt er altijd half in beeld uit,
-   anders leest de rij als één kaart en veegt niemand */
-.ug-m .ug-kaart{flex:none;width:82%;scroll-snap-align:start}
-.ug-m .ug-body{padding:16px 17px 18px;gap:7px}
-.ug-m .ug-kaartkop{font-size:16px}
-.ug-m .ug-tekst{font-size:13px}
-.ug-m .ug-voet{font-size:11.5px;padding-top:13px}
-.ug-m .ug-play{width:50px;height:50px}
-.ug-m .ug-veeg{display:flex;align-items:center;gap:9px;font-size:11px;font-weight:600;
-  letter-spacing:.13em;text-transform:uppercase;color:rgba(17,17,17,.42)}
-.ug-m .ug-veeg svg{width:15px;height:15px;color:#BC813E}
-.ug-m .ug-slot{justify-content:flex-start;text-align:left;font-size:12.5px;
+.ug-m .ug-spoor{gap:12px;animation-duration:54s}
+.ug-m .ug-kaart{width:250px}
+.ug-m .ug-body{padding:15px 16px 17px;gap:6px}
+.ug-m .ug-kaartkop{font-size:15px}
+.ug-m .ug-tekst{font-size:12.5px}
+.ug-m .ug-play{width:46px;height:46px}
+.ug-m .ug-slot{padding:0 18px;justify-content:flex-start;text-align:left;font-size:12.5px;
   align-items:flex-start}
 .ug-m .ug-slot svg{margin-top:2px}
-.ug-veeg{display:none}
+/* een band stilzetten door hem aan te wijzen bestaat niet op een telefoon */
+.ug-m .ug-desk{display:none}
+
+@media (prefers-reduced-motion:reduce){
+  .ug-baan{overflow-x:auto}
+  .ug-spoor{animation:none;width:auto}
+}
 
 /* ── annotaties ── */
 .progress-cap{font-size:11.5px;color:var(--fg-soft);margin:10px 0 0}
@@ -193,15 +225,15 @@ footer p{max-width:none}
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="play" viewBox="0 0 24 24"><path d="M8 5.2v13.6L19 12z" fill="currentColor"/></symbol>
 <symbol id="geluid" viewBox="0 0 24 24"><path d="M4 9.4h3.4L12 5.6v12.8L7.4 14.6H4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M15.4 9.6a3.4 3.4 0 010 4.8M17.9 7.1a6.9 6.9 0 010 9.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
-<symbol id="arw" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-<symbol id="chkc" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 12.3l2.7 2.7L16 9.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-<symbol id="veeg" viewBox="0 0 24 24"><path d="M3 12h15M13 6.5l5.5 5.5L13 17.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="camera" viewBox="0 0 24 24"><rect x="2.8" y="6.6" width="18.4" height="12.6" rx="2.6" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12.9" r="3.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8.6 6.6l1.3-2.2h4.2l1.3 2.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+<symbol id="insta" viewBox="0 0 24 24"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.1" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.1" cy="6.9" r="1.25" fill="currentColor"/></symbol>
+<symbol id="hart" viewBox="0 0 24 24"><path d="M12 20.2s-7.4-4.4-7.4-9.4a4.1 4.1 0 017.4-2.4 4.1 4.1 0 017.4 2.4c0 5-7.4 9.4-7.4 9.4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
 </defs></svg><div class="wrap">
 
 <header class="masthead">
-  <p class="eyebrow">Homepage-redesign · blok 9 van 12 · versie 1</p>
-  <h1>Wellshave in actie</h1>
-  <p class="dek">De videosectie blijft, maar krijgt boven elke video een regel die zegt wat erin gebeurt. En er gaan er drie uit, want die zijn geen opname maar een render.</p>
+  <p class="eyebrow">Homepage-redesign · blok 9 van 12 · versie 2</p>
+  <h1>De Wellshave-familie</h1>
+  <p class="dek">Een doorlopende band met de video's van klanten. Het blok gaat over de mannen die erin staan, niet over de apparaten in hun hand — die staan al vier blokken hoger.</p>
   <p class="byline">Ontwerp — nog niets live. Akkoord → dan pas Shopify.</p>
   <div class="progress" aria-hidden="true">
     <i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i></i><i></i><i></i>
@@ -209,34 +241,15 @@ footer p{max-width:none}
   <p class="progress-cap">Blok 9 in ontwerp · blok 11 en 12 volgen</p>
 </header>
 
-<div class="callout crit">
-  <h3 style="margin-top:0">Wat er nu in die sectie staat</h3>
-  <p><b>Zes video's, en drie ervan zijn 3D-renders zonder mens erin.</b> Ik heb ze alle zes opgehaald en frame voor frame bekeken. Dit staat er:</p>
-  <div class="tablewrap">
-  <table>
-    <thead><tr><th>#</th><th>Duur en formaat</th><th>Wat je ziet</th></tr></thead>
-    <tbody>
-      <tr><td>1</td><td>56 sec · 1920×1080 liggend · met geluid</td><td><b>Render.</b> Producten die door een landschap en over een printplaat zweven, titelkaart "ULTIMATE", eindigt op het logo. Dit is een commercial</td></tr>
-      <tr><td>2</td><td>3 sec · vierkant · <b>zonder geluidsspoor</b></td><td><b>Render.</b> Een apparaat op een oplaadstandaard waarvan het display van 0 naar 23 telt. Drie seconden, geen mens, geen handeling</td></tr>
-      <tr><td>3</td><td>6 sec · vierkant · met geluid</td><td><b>Echt.</b> Een wegwerpmesje wordt weggekruist, daarna scheert iemand zijn hoofd met een zevenkoppige roterende scheerder</td></tr>
-      <tr><td>4</td><td>10 sec · vierkant · met geluid</td><td><b>Echt.</b> Iemand trimt borst en buik met een apparaat waarvan de LED aanstaat</td></tr>
-      <tr><td>5</td><td>53 sec · 1920×1080 liggend · met geluid</td><td><b>Render.</b> Dezelfde stijl als video 1, nu voor de neustrimmer, titelkaart "PREMIUM", eindigt op de Nose Sculptor-verpakking</td></tr>
-      <tr><td>6</td><td>30 sec · vierkant · met geluid</td><td><b>Echt.</b> Doos open, neus voor de spiegel, dan onderarm, borst en oksel. De volledige routine</td></tr>
-    </tbody>
-  </table>
-  </div>
-  <p style="margin-bottom:0"><b>De sectie heet "Wellshave in actie" en de helft ervan is geen actie.</b> Twee van de renders duren bijna een minuut en zijn liggend, in een carrousel die vierkant is — die worden dus ook nog eens bijgesneden. Een bezoeker die op de eerste tegel klikt, krijgt een reclamefilm te zien op de plek waar hij een mens verwachtte.</p>
-</div>
-
 <div class="callout fix">
-  <h3 style="margin-top:0">Wat het wordt</h3>
-  <p><b>Drie video's in plaats van zes</b>, en boven elke video een regel die zegt wat erin gebeurt. Dat is het hele punt van dit blok: video's op een homepage starten zonder geluid, dus wat er gezegd wordt hoor je niet. Zonder kop is elke tegel een gok, en niemand gokt drie keer.</p>
-  <p><b>De koppen beschrijven wat er te zien is, niet wat het oplevert.</b> "Kaal in één hand, zonder het mesje erbij" is na te kijken door op play te drukken. Een kop als "de snelste scheerbeurt van je leven" is dat niet, en die kost je meer dan hij oplevert.</p>
-  <p style="margin-bottom:0"><b>Licht blok met donkere kaarten</b>, hetzelfde principe als blok 6. Blok 7 is donker, dus dit blok moet licht zijn — anders staan er twee zwarte vlakken tegen elkaar. De kaarten zelf zijn donker omdat de beelden dat ook zijn.</p>
+  <h3 style="margin-top:0">Wat er in versie 2 veranderd is</h3>
+  <p><b>Het blok gaat nu over mensen.</b> Versie 1 zette "echte handen, geen renders" boven de rij en beschreef per kaart welk apparaat waar overheen ging. Dat was een antwoord op de renders die eruit gaan, geen reden om te kijken. Nu staat er wie het doet: hij doet zijn eigen hoofd met één hand, hij houdt de camera vlak op zijn huid, hij pakt uit en gaat meteen door. Geen productnamen, geen specificaties.</p>
+  <p><b>Het is een doorlopende band geworden</b> in plaats van drie kaarten. Die schuift vanzelf en staat stil zodra je hem aanwijst, precies zoals de reviewband in blok 2. Reden is dezelfde: op de klikcarrousel die er nu staat klikt 1 à 2 procent, en een band die uit zichzelf beweegt laat zien dat er meer is zonder dat iemand iets hoeft te doen.</p>
+  <p style="margin-bottom:0"><b>De band is gebouwd voor acht tegels en er zijn er drie gefilmd.</b> Ik heb de vijf open plekken niet volgezet met dezelfde drie video's in een andere volgorde. Ze staan er als open plek in, met erbij wat er zou moeten staan — zie hieronder.</p>
 </div>
 
 <h2>Het ontwerp</h2>
-<p class="sub">Drie kaarten naast elkaar op desktop. Op mobiel één veegbare rij, met de volgende kaart altijd half in beeld — dezelfde oplossing als de zonekiezer in blok 5.</p>
+<p class="sub">Acht tegels in een band die vanzelf doorschuift. Op mobiel dezelfde band, smallere tegels, iets sneller.</p>
 
 <div class="stage">
   <div>
@@ -244,26 +257,26 @@ footer p{max-width:none}
     <div class="scaler desk-scaler"><div class="inner">
       <section class="ug">
         <div class="ug-in">
-          <div class="ug-kop">
+          <div class="ug-kopblok">
             <div>
-              <p class="ug-eyebrow">Wellshave in actie</p>
-              <h2 class="ug-h2">Echte handen, <b>geen renders.</b></h2>
+              <p class="ug-eyebrow">De Wellshave-familie</p>
+              <h2 class="ug-h2">Dit zijn de mannen die het <b>gewoon zelf doen.</b></h2>
             </div>
-            <p class="ug-sub">Drie opnames uit de praktijk. Boven elke video staat wat erin gebeurt, zodat je kunt kiezen voordat je op play drukt — ze starten zonder geluid.</p>
+            <p class="ug-sub">Klanten die hun telefoon neerzetten en het filmen zoals het thuis gaat. Wij hebben er niets aan geregisseerd. Meer daarvan staat op <a href="#">Instagram</a>.</p>
           </div>
-          <div class="ug-rij">
+          <div class="ug-baan">
+            <div class="ug-spoor">
             <article class="ug-kaart">
               <div class="ug-beeld">
                 <img src="__UGC_HOOFD__" alt="">
                 <span class="ug-duur">6 sec</span>
                 <span class="ug-geluid"><svg><use href="#geluid"/></svg></span>
                 <span class="ug-play"><svg><use href="#play"/></svg></span>
-                <span class="ug-zone">Hoofd</span>
+                <span class="ug-wie"><i class="ug-av">?</i><span><b>Klant</b><em>Zelf gefilmd</em></span></span>
               </div>
               <div class="ug-body">
-                <p class="ug-kaartkop">Kaal in één hand, zonder het mesje erbij</p>
-                <p class="ug-tekst">De video begint met een wegwerpmesje dat wordt weggekruist. Daarna zeven roterende koppen over de schedel, één hand, geen tweede spiegel.</p>
-                <p class="ug-voet">Naar de zone Hoofd<i><svg><use href="#arw"/></svg></i></p>
+                <p class="ug-kaartkop">Doet zijn eigen hoofd, met één hand</p>
+                <p class="ug-tekst">Geen kapper, geen tweede spiegel, geen hulp. Hij begint met het wegwerpmesje weg te kruisen en gaat daarna gewoon door.</p>
               </div>
             </article>
             <article class="ug-kaart">
@@ -272,12 +285,11 @@ footer p{max-width:none}
                 <span class="ug-duur">10 sec</span>
                 <span class="ug-geluid"><svg><use href="#geluid"/></svg></span>
                 <span class="ug-play"><svg><use href="#play"/></svg></span>
-                <span class="ug-zone">Borst & buik</span>
+                <span class="ug-wie"><i class="ug-av">?</i><span><b>Klant</b><em>Zelf gefilmd</em></span></span>
               </div>
               <div class="ug-body">
-                <p class="ug-kaartkop">Een lampje dat laat zien wat je anders mist</p>
-                <p class="ug-tekst">Trimmen over borst en buik met de LED aan, van dichtbij gefilmd. Je ziet waar het apparaat overheen gaat en wat er blijft staan.</p>
-                <p class="ug-voet">Naar de zone Lichaam<i><svg><use href="#arw"/></svg></i></p>
+                <p class="ug-kaartkop">Houdt de camera vlak op zijn huid</p>
+                <p class="ug-tekst">Hij filmt van zo dichtbij dat je meekijkt over zijn schouder. Wat er blijft staan zie je net zo goed als wat eraf gaat.</p>
               </div>
             </article>
             <article class="ug-kaart">
@@ -286,16 +298,157 @@ footer p{max-width:none}
                 <span class="ug-duur">30 sec</span>
                 <span class="ug-geluid"><svg><use href="#geluid"/></svg></span>
                 <span class="ug-play"><svg><use href="#play"/></svg></span>
-                <span class="ug-zone">Neus, armen & oksels</span>
+                <span class="ug-wie"><i class="ug-av">?</i><span><b>Klant</b><em>Zelf gefilmd</em></span></span>
               </div>
               <div class="ug-body">
-                <p class="ug-kaartkop">Van uitpakken tot oksel in één opname</p>
-                <p class="ug-tekst">De doos open, dan de neus voor de spiegel, dan onderarm, borst en oksel. De langste van de drie en de enige die de hele routine laat zien.</p>
-                <p class="ug-voet">Naar de zone Neus<i><svg><use href="#arw"/></svg></i></p>
+                <p class="ug-kaartkop">Pakt uit en gaat meteen door tot de oksels</p>
+                <p class="ug-tekst">Van de doos openmaken tot vier plekken verder, in één opname. Niemand die zegt wat hij moet doen.</p>
               </div>
             </article>
+            <article class="ug-kaart ug-leeg">
+              <div class="ug-leegbeeld">
+                <i><svg><use href="#camera"/></svg></i>
+                <b>Gezicht & baard</b>
+              </div>
+              <div class="ug-body">
+                <p class="ug-kaartkop">Hier hoort iemand met een baard</p>
+                <p class="ug-tekst">De zone met de meeste twijfel en de minste beelden. Eén klant die zijn lijnen zet is genoeg.</p>
+              </div>
+            </article>
+            <article class="ug-kaart ug-leeg">
+              <div class="ug-leegbeeld">
+                <i><svg><use href="#camera"/></svg></i>
+                <b>Schaamstreek</b>
+              </div>
+              <div class="ug-body">
+                <p class="ug-kaartkop">Hier hoort de zone waar niemand over praat</p>
+                <p class="ug-tekst">Hoeft niets bloot te laten zien — de handeling en het gezicht erbij doen het werk.</p>
+              </div>
+            </article>
+            <article class="ug-kaart ug-nodig">
+              <div class="ug-nodigbeeld">
+                <i><svg><use href="#insta"/></svg></i>
+                <b>Ook jouw video<br>hoort hier</b>
+                <em>@wellshave.nl</em>
+              </div>
+              <div class="ug-body">
+                <p class="ug-kaartkop">Tag ons en je staat erin</p>
+                <p class="ug-tekst">Je hoeft niets te kunnen. Zet je telefoon neer, film een minuut en stuur hem op. Wij vragen het altijd eerst.</p>
+              </div>
+            </article>
+            <article class="ug-kaart ug-leeg">
+              <div class="ug-leegbeeld">
+                <i><svg><use href="#camera"/></svg></i>
+                <b>De eerste keer</b>
+              </div>
+              <div class="ug-body">
+                <p class="ug-kaartkop">Hier hoort iemand die het net binnen heeft</p>
+                <p class="ug-tekst">Doos open, apparaat in de hand, eerste keer aanzetten. Twijfel voor de aankoop wordt hier weggenomen.</p>
+              </div>
+            </article>
+            <article class="ug-kaart ug-leeg">
+              <div class="ug-leegbeeld">
+                <i><svg><use href="#camera"/></svg></i>
+                <b>Na een paar maanden</b>
+              </div>
+              <div class="ug-body">
+                <p class="ug-kaartkop">Hier hoort iemand die het al langer heeft</p>
+                <p class="ug-tekst">Dezelfde man, maanden later. Dat is het enige beeld dat laat zien dat het blijft werken.</p>
+              </div>
+            </article>
+            <article class="ug-kaart">
+              <div class="ug-beeld">
+                <img src="__UGC_HOOFD__" alt="">
+                <span class="ug-duur">6 sec</span>
+                <span class="ug-geluid"><svg><use href="#geluid"/></svg></span>
+                <span class="ug-play"><svg><use href="#play"/></svg></span>
+                <span class="ug-wie"><i class="ug-av">?</i><span><b>Klant</b><em>Zelf gefilmd</em></span></span>
+              </div>
+              <div class="ug-body">
+                <p class="ug-kaartkop">Doet zijn eigen hoofd, met één hand</p>
+                <p class="ug-tekst">Geen kapper, geen tweede spiegel, geen hulp. Hij begint met het wegwerpmesje weg te kruisen en gaat daarna gewoon door.</p>
+              </div>
+            </article>
+            <article class="ug-kaart">
+              <div class="ug-beeld">
+                <img src="__UGC_BORST__" alt="">
+                <span class="ug-duur">10 sec</span>
+                <span class="ug-geluid"><svg><use href="#geluid"/></svg></span>
+                <span class="ug-play"><svg><use href="#play"/></svg></span>
+                <span class="ug-wie"><i class="ug-av">?</i><span><b>Klant</b><em>Zelf gefilmd</em></span></span>
+              </div>
+              <div class="ug-body">
+                <p class="ug-kaartkop">Houdt de camera vlak op zijn huid</p>
+                <p class="ug-tekst">Hij filmt van zo dichtbij dat je meekijkt over zijn schouder. Wat er blijft staan zie je net zo goed als wat eraf gaat.</p>
+              </div>
+            </article>
+            <article class="ug-kaart">
+              <div class="ug-beeld">
+                <img src="__UGC_NEUS__" alt="">
+                <span class="ug-duur">30 sec</span>
+                <span class="ug-geluid"><svg><use href="#geluid"/></svg></span>
+                <span class="ug-play"><svg><use href="#play"/></svg></span>
+                <span class="ug-wie"><i class="ug-av">?</i><span><b>Klant</b><em>Zelf gefilmd</em></span></span>
+              </div>
+              <div class="ug-body">
+                <p class="ug-kaartkop">Pakt uit en gaat meteen door tot de oksels</p>
+                <p class="ug-tekst">Van de doos openmaken tot vier plekken verder, in één opname. Niemand die zegt wat hij moet doen.</p>
+              </div>
+            </article>
+            <article class="ug-kaart ug-leeg">
+              <div class="ug-leegbeeld">
+                <i><svg><use href="#camera"/></svg></i>
+                <b>Gezicht & baard</b>
+              </div>
+              <div class="ug-body">
+                <p class="ug-kaartkop">Hier hoort iemand met een baard</p>
+                <p class="ug-tekst">De zone met de meeste twijfel en de minste beelden. Eén klant die zijn lijnen zet is genoeg.</p>
+              </div>
+            </article>
+            <article class="ug-kaart ug-leeg">
+              <div class="ug-leegbeeld">
+                <i><svg><use href="#camera"/></svg></i>
+                <b>Schaamstreek</b>
+              </div>
+              <div class="ug-body">
+                <p class="ug-kaartkop">Hier hoort de zone waar niemand over praat</p>
+                <p class="ug-tekst">Hoeft niets bloot te laten zien — de handeling en het gezicht erbij doen het werk.</p>
+              </div>
+            </article>
+            <article class="ug-kaart ug-nodig">
+              <div class="ug-nodigbeeld">
+                <i><svg><use href="#insta"/></svg></i>
+                <b>Ook jouw video<br>hoort hier</b>
+                <em>@wellshave.nl</em>
+              </div>
+              <div class="ug-body">
+                <p class="ug-kaartkop">Tag ons en je staat erin</p>
+                <p class="ug-tekst">Je hoeft niets te kunnen. Zet je telefoon neer, film een minuut en stuur hem op. Wij vragen het altijd eerst.</p>
+              </div>
+            </article>
+            <article class="ug-kaart ug-leeg">
+              <div class="ug-leegbeeld">
+                <i><svg><use href="#camera"/></svg></i>
+                <b>De eerste keer</b>
+              </div>
+              <div class="ug-body">
+                <p class="ug-kaartkop">Hier hoort iemand die het net binnen heeft</p>
+                <p class="ug-tekst">Doos open, apparaat in de hand, eerste keer aanzetten. Twijfel voor de aankoop wordt hier weggenomen.</p>
+              </div>
+            </article>
+            <article class="ug-kaart ug-leeg">
+              <div class="ug-leegbeeld">
+                <i><svg><use href="#camera"/></svg></i>
+                <b>Na een paar maanden</b>
+              </div>
+              <div class="ug-body">
+                <p class="ug-kaartkop">Hier hoort iemand die het al langer heeft</p>
+                <p class="ug-tekst">Dezelfde man, maanden later. Dat is het enige beeld dat laat zien dat het blijft werken.</p>
+              </div>
+            </article>
+            </div>
           </div>
-          <p class="ug-slot"><svg><use href="#geluid"/></svg><span>Elk fragment start zonder geluid — <b>de knop rechtsboven zet hem aan.</b></span></p>
+          <p class="ug-slot"><svg><use href="#hart"/></svg><span>Elke video is met toestemming gedeeld<span class="ug-desk"> — <b>en de band staat stil zodra je hem aanwijst.</b></span></span></p>
         </div>
       </section>
     </div></div>
@@ -305,27 +458,26 @@ footer p{max-width:none}
     <div class="scaler phone-scaler"><div class="inner">
       <section class="ug ug-m">
         <div class="ug-in">
-          <div class="ug-kop">
+          <div class="ug-kopblok">
             <div>
-              <p class="ug-eyebrow">Wellshave in actie</p>
-              <h2 class="ug-h2">Echte handen, <b>geen renders.</b></h2>
+              <p class="ug-eyebrow">De Wellshave-familie</p>
+              <h2 class="ug-h2">Dit zijn de mannen die het <b>gewoon zelf doen.</b></h2>
             </div>
-            <p class="ug-sub">Drie opnames uit de praktijk. Boven elke video staat wat erin gebeurt, zodat je kunt kiezen voordat je op play drukt — ze starten zonder geluid.</p>
+            <p class="ug-sub">Klanten die hun telefoon neerzetten en het filmen zoals het thuis gaat. Wij hebben er niets aan geregisseerd. Meer daarvan staat op <a href="#">Instagram</a>.</p>
           </div>
-          <p class="ug-veeg"><svg><use href="#veeg"/></svg>Veeg voor alle drie</p>
-          <div class="ug-rij">
+          <div class="ug-baan">
+            <div class="ug-spoor">
             <article class="ug-kaart">
               <div class="ug-beeld">
                 <img src="__UGC_HOOFD__" alt="">
                 <span class="ug-duur">6 sec</span>
                 <span class="ug-geluid"><svg><use href="#geluid"/></svg></span>
                 <span class="ug-play"><svg><use href="#play"/></svg></span>
-                <span class="ug-zone">Hoofd</span>
+                <span class="ug-wie"><i class="ug-av">?</i><span><b>Klant</b><em>Zelf gefilmd</em></span></span>
               </div>
               <div class="ug-body">
-                <p class="ug-kaartkop">Kaal in één hand, zonder het mesje erbij</p>
-                <p class="ug-tekst">De video begint met een wegwerpmesje dat wordt weggekruist. Daarna zeven roterende koppen over de schedel, één hand, geen tweede spiegel.</p>
-                <p class="ug-voet">Naar de zone Hoofd<i><svg><use href="#arw"/></svg></i></p>
+                <p class="ug-kaartkop">Doet zijn eigen hoofd, met één hand</p>
+                <p class="ug-tekst">Geen kapper, geen tweede spiegel, geen hulp. Hij begint met het wegwerpmesje weg te kruisen en gaat daarna gewoon door.</p>
               </div>
             </article>
             <article class="ug-kaart">
@@ -334,12 +486,11 @@ footer p{max-width:none}
                 <span class="ug-duur">10 sec</span>
                 <span class="ug-geluid"><svg><use href="#geluid"/></svg></span>
                 <span class="ug-play"><svg><use href="#play"/></svg></span>
-                <span class="ug-zone">Borst & buik</span>
+                <span class="ug-wie"><i class="ug-av">?</i><span><b>Klant</b><em>Zelf gefilmd</em></span></span>
               </div>
               <div class="ug-body">
-                <p class="ug-kaartkop">Een lampje dat laat zien wat je anders mist</p>
-                <p class="ug-tekst">Trimmen over borst en buik met de LED aan, van dichtbij gefilmd. Je ziet waar het apparaat overheen gaat en wat er blijft staan.</p>
-                <p class="ug-voet">Naar de zone Lichaam<i><svg><use href="#arw"/></svg></i></p>
+                <p class="ug-kaartkop">Houdt de camera vlak op zijn huid</p>
+                <p class="ug-tekst">Hij filmt van zo dichtbij dat je meekijkt over zijn schouder. Wat er blijft staan zie je net zo goed als wat eraf gaat.</p>
               </div>
             </article>
             <article class="ug-kaart">
@@ -348,59 +499,229 @@ footer p{max-width:none}
                 <span class="ug-duur">30 sec</span>
                 <span class="ug-geluid"><svg><use href="#geluid"/></svg></span>
                 <span class="ug-play"><svg><use href="#play"/></svg></span>
-                <span class="ug-zone">Neus, armen & oksels</span>
+                <span class="ug-wie"><i class="ug-av">?</i><span><b>Klant</b><em>Zelf gefilmd</em></span></span>
               </div>
               <div class="ug-body">
-                <p class="ug-kaartkop">Van uitpakken tot oksel in één opname</p>
-                <p class="ug-tekst">De doos open, dan de neus voor de spiegel, dan onderarm, borst en oksel. De langste van de drie en de enige die de hele routine laat zien.</p>
-                <p class="ug-voet">Naar de zone Neus<i><svg><use href="#arw"/></svg></i></p>
+                <p class="ug-kaartkop">Pakt uit en gaat meteen door tot de oksels</p>
+                <p class="ug-tekst">Van de doos openmaken tot vier plekken verder, in één opname. Niemand die zegt wat hij moet doen.</p>
               </div>
             </article>
+            <article class="ug-kaart ug-leeg">
+              <div class="ug-leegbeeld">
+                <i><svg><use href="#camera"/></svg></i>
+                <b>Gezicht & baard</b>
+              </div>
+              <div class="ug-body">
+                <p class="ug-kaartkop">Hier hoort iemand met een baard</p>
+                <p class="ug-tekst">De zone met de meeste twijfel en de minste beelden. Eén klant die zijn lijnen zet is genoeg.</p>
+              </div>
+            </article>
+            <article class="ug-kaart ug-leeg">
+              <div class="ug-leegbeeld">
+                <i><svg><use href="#camera"/></svg></i>
+                <b>Schaamstreek</b>
+              </div>
+              <div class="ug-body">
+                <p class="ug-kaartkop">Hier hoort de zone waar niemand over praat</p>
+                <p class="ug-tekst">Hoeft niets bloot te laten zien — de handeling en het gezicht erbij doen het werk.</p>
+              </div>
+            </article>
+            <article class="ug-kaart ug-nodig">
+              <div class="ug-nodigbeeld">
+                <i><svg><use href="#insta"/></svg></i>
+                <b>Ook jouw video<br>hoort hier</b>
+                <em>@wellshave.nl</em>
+              </div>
+              <div class="ug-body">
+                <p class="ug-kaartkop">Tag ons en je staat erin</p>
+                <p class="ug-tekst">Je hoeft niets te kunnen. Zet je telefoon neer, film een minuut en stuur hem op. Wij vragen het altijd eerst.</p>
+              </div>
+            </article>
+            <article class="ug-kaart ug-leeg">
+              <div class="ug-leegbeeld">
+                <i><svg><use href="#camera"/></svg></i>
+                <b>De eerste keer</b>
+              </div>
+              <div class="ug-body">
+                <p class="ug-kaartkop">Hier hoort iemand die het net binnen heeft</p>
+                <p class="ug-tekst">Doos open, apparaat in de hand, eerste keer aanzetten. Twijfel voor de aankoop wordt hier weggenomen.</p>
+              </div>
+            </article>
+            <article class="ug-kaart ug-leeg">
+              <div class="ug-leegbeeld">
+                <i><svg><use href="#camera"/></svg></i>
+                <b>Na een paar maanden</b>
+              </div>
+              <div class="ug-body">
+                <p class="ug-kaartkop">Hier hoort iemand die het al langer heeft</p>
+                <p class="ug-tekst">Dezelfde man, maanden later. Dat is het enige beeld dat laat zien dat het blijft werken.</p>
+              </div>
+            </article>
+            <article class="ug-kaart">
+              <div class="ug-beeld">
+                <img src="__UGC_HOOFD__" alt="">
+                <span class="ug-duur">6 sec</span>
+                <span class="ug-geluid"><svg><use href="#geluid"/></svg></span>
+                <span class="ug-play"><svg><use href="#play"/></svg></span>
+                <span class="ug-wie"><i class="ug-av">?</i><span><b>Klant</b><em>Zelf gefilmd</em></span></span>
+              </div>
+              <div class="ug-body">
+                <p class="ug-kaartkop">Doet zijn eigen hoofd, met één hand</p>
+                <p class="ug-tekst">Geen kapper, geen tweede spiegel, geen hulp. Hij begint met het wegwerpmesje weg te kruisen en gaat daarna gewoon door.</p>
+              </div>
+            </article>
+            <article class="ug-kaart">
+              <div class="ug-beeld">
+                <img src="__UGC_BORST__" alt="">
+                <span class="ug-duur">10 sec</span>
+                <span class="ug-geluid"><svg><use href="#geluid"/></svg></span>
+                <span class="ug-play"><svg><use href="#play"/></svg></span>
+                <span class="ug-wie"><i class="ug-av">?</i><span><b>Klant</b><em>Zelf gefilmd</em></span></span>
+              </div>
+              <div class="ug-body">
+                <p class="ug-kaartkop">Houdt de camera vlak op zijn huid</p>
+                <p class="ug-tekst">Hij filmt van zo dichtbij dat je meekijkt over zijn schouder. Wat er blijft staan zie je net zo goed als wat eraf gaat.</p>
+              </div>
+            </article>
+            <article class="ug-kaart">
+              <div class="ug-beeld">
+                <img src="__UGC_NEUS__" alt="">
+                <span class="ug-duur">30 sec</span>
+                <span class="ug-geluid"><svg><use href="#geluid"/></svg></span>
+                <span class="ug-play"><svg><use href="#play"/></svg></span>
+                <span class="ug-wie"><i class="ug-av">?</i><span><b>Klant</b><em>Zelf gefilmd</em></span></span>
+              </div>
+              <div class="ug-body">
+                <p class="ug-kaartkop">Pakt uit en gaat meteen door tot de oksels</p>
+                <p class="ug-tekst">Van de doos openmaken tot vier plekken verder, in één opname. Niemand die zegt wat hij moet doen.</p>
+              </div>
+            </article>
+            <article class="ug-kaart ug-leeg">
+              <div class="ug-leegbeeld">
+                <i><svg><use href="#camera"/></svg></i>
+                <b>Gezicht & baard</b>
+              </div>
+              <div class="ug-body">
+                <p class="ug-kaartkop">Hier hoort iemand met een baard</p>
+                <p class="ug-tekst">De zone met de meeste twijfel en de minste beelden. Eén klant die zijn lijnen zet is genoeg.</p>
+              </div>
+            </article>
+            <article class="ug-kaart ug-leeg">
+              <div class="ug-leegbeeld">
+                <i><svg><use href="#camera"/></svg></i>
+                <b>Schaamstreek</b>
+              </div>
+              <div class="ug-body">
+                <p class="ug-kaartkop">Hier hoort de zone waar niemand over praat</p>
+                <p class="ug-tekst">Hoeft niets bloot te laten zien — de handeling en het gezicht erbij doen het werk.</p>
+              </div>
+            </article>
+            <article class="ug-kaart ug-nodig">
+              <div class="ug-nodigbeeld">
+                <i><svg><use href="#insta"/></svg></i>
+                <b>Ook jouw video<br>hoort hier</b>
+                <em>@wellshave.nl</em>
+              </div>
+              <div class="ug-body">
+                <p class="ug-kaartkop">Tag ons en je staat erin</p>
+                <p class="ug-tekst">Je hoeft niets te kunnen. Zet je telefoon neer, film een minuut en stuur hem op. Wij vragen het altijd eerst.</p>
+              </div>
+            </article>
+            <article class="ug-kaart ug-leeg">
+              <div class="ug-leegbeeld">
+                <i><svg><use href="#camera"/></svg></i>
+                <b>De eerste keer</b>
+              </div>
+              <div class="ug-body">
+                <p class="ug-kaartkop">Hier hoort iemand die het net binnen heeft</p>
+                <p class="ug-tekst">Doos open, apparaat in de hand, eerste keer aanzetten. Twijfel voor de aankoop wordt hier weggenomen.</p>
+              </div>
+            </article>
+            <article class="ug-kaart ug-leeg">
+              <div class="ug-leegbeeld">
+                <i><svg><use href="#camera"/></svg></i>
+                <b>Na een paar maanden</b>
+              </div>
+              <div class="ug-body">
+                <p class="ug-kaartkop">Hier hoort iemand die het al langer heeft</p>
+                <p class="ug-tekst">Dezelfde man, maanden later. Dat is het enige beeld dat laat zien dat het blijft werken.</p>
+              </div>
+            </article>
+            </div>
           </div>
-          <p class="ug-slot"><svg><use href="#geluid"/></svg><span>Elk fragment start zonder geluid — <b>de knop rechtsboven zet hem aan.</b></span></p>
+          <p class="ug-slot"><svg><use href="#hart"/></svg><span>Elke video is met toestemming gedeeld<span class="ug-desk"> — <b>en de band staat stil zodra je hem aanwijst.</b></span></span></p>
         </div>
       </section>
     </div></div>
   </div>
 </div>
 
-<h2>Waar de koppen vandaan komen</h2>
-<p>Elke kop is geschreven na het bekijken van de video zelf, frame voor frame. Er staat niets in dat je niet ziet als je op play drukt.</p>
+<div class="callout ask">
+  <h3 style="margin-top:0">De vijf open plekken zijn een opnamelijst</h3>
+  <p>Je zei dat je naar vijf à tien video's wil. Er zijn er drie. Dit is wat de andere vijf zouden moeten zijn, op volgorde van wat het meeste oplevert:</p>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Plek</th><th>Wat erin moet</th><th>Waarom deze</th></tr></thead>
+    <tbody>
+      <tr><td><b>Gezicht &amp; baard</b></td><td>Iemand die zijn lijnen zet, in zijn eigen badkamerspiegel</td><td>De grootste zone in je assortiment — acht apparaten — en er is geen enkel beeld van</td></tr>
+      <tr><td><b>Schaamstreek</b></td><td>De handeling en het gezicht erbij; er hoeft niets bloot in beeld</td><td>Blok 5 zet deze zone vooraan omdat daar de aarzeling zit. Een mens die er gewoon over doet, haalt die aarzeling weg</td></tr>
+      <tr><td><b>De eerste keer</b></td><td>Doos open, apparaat in de hand, eerste keer aanzetten</td><td>Dit is de video die twijfel vóór de aankoop wegneemt: hoe voelt het als het binnenkomt</td></tr>
+      <tr><td><b>Na een paar maanden</b></td><td>Dezelfde man, maanden later, gewoon in gebruik</td><td>Het enige beeld dat laat zien dat het blijft werken. Sluit aan op blok 4, waar het over doorontwikkeling gaat</td></tr>
+      <tr><td><b>De uitnodiging</b></td><td>Staat er al in: de kaart die naar Instagram wijst</td><td>Die maakt van de band iets waar mensen bij willen horen in plaats van iets om naar te kijken</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p style="margin-bottom:0"><b>Zodra er een video bijkomt, vervangt hij een open plek.</b> Bij acht gevulde tegels verdwijnen de stippellijnen vanzelf en is het blok af. Tot die tijd laat het zien wat er nog mist — ook aan jou.</p>
+</div>
+
+<div class="callout crit">
+  <h3 style="margin-top:0">Wat er onder elke video ontbreekt: een naam</h3>
+  <p><b>Op de kaarten staat nu "Klant" met een vraagteken in de cirkel.</b> Dat is geen ontwerpkeuze, dat is wat ik weet. De video's staan als losse mediabestanden in je theme, zonder naam, zonder plaats, zonder verwijzing naar wie het gefilmd heeft.</p>
+  <p style="margin-bottom:0">Een voornaam plus een plaats — "Mark, Tilburg" — is het verschil tussen een video en een mens. Het is de goedkoopste verbetering op deze hele pagina, en jij bent de enige die dat weet. Bij dezelfde stap hoort de toestemming: als iemand op je homepage komt te staan, wil je dat zwart op wit hebben, ook al gaf hij het je in een DM.</p>
+</div>
+
+<h2>Wat er in de zes bestaande video's zit</h2>
+<p>Ik heb ze alle zes van je live homepage gehaald en frame voor frame bekeken. <b>Drie ervan zijn 3D-renders zonder mens erin</b>, in een sectie die "Wellshave in actie" heet.</p>
 <div class="tablewrap">
 <table>
-  <thead><tr><th>Kop</th><th>Wat er in beeld gebeurt</th></tr></thead>
+  <thead><tr><th>#</th><th>Duur en formaat</th><th>Wat je ziet</th></tr></thead>
   <tbody>
-    <tr><td><b>Kaal in één hand, zonder het mesje erbij</b><br><span style="opacity:.6">Hoofd · 6 sec</span></td><td>Eerste twee seconden: een schoen en een wegwerpmesje op de grond, met een rood kruis eroverheen. Daarna een man die met één hand een zevenkoppige roterende scheerder over zijn schedel haalt. Geen schuim, geen tweede spiegel</td></tr>
-    <tr><td><b>Een lampje dat laat zien wat je anders mist</b><br><span style="opacity:.6">Borst &amp; buik · 10 sec</span></td><td>Een apparaat met een brandende LED gaat over borst en buik. Het licht is de hele video zichtbaar; dat is het enige kenmerk dat de opname zelf laat zien</td></tr>
-    <tr><td><b>Van uitpakken tot oksel in één opname</b><br><span style="opacity:.6">Neus, armen &amp; oksels · 30 sec</span></td><td>Doos met "ELEVATE YOUR GROOMING GAME" gaat open, dan de neustrimmer voor de spiegel, dan onderarm, borst en oksel. Vier plekken in dertig seconden</td></tr>
+    <tr><td>1</td><td>56 sec · 1920×1080 liggend</td><td><b>Render.</b> Producten die door een landschap en over een printplaat zweven, titelkaart "ULTIMATE", eindigt op het logo. Dit is een commercial</td></tr>
+    <tr><td>2</td><td>3 sec · vierkant · <b>zonder geluidsspoor</b></td><td><b>Render.</b> Een apparaat op een standaard waarvan het display van 0 naar 23 telt. Geen mens, geen handeling</td></tr>
+    <tr><td>3</td><td>6 sec · vierkant</td><td><b>Klant.</b> Wegwerpmesje wordt weggekruist, daarna scheert hij zijn hoofd met één hand</td></tr>
+    <tr><td>4</td><td>10 sec · vierkant</td><td><b>Klant.</b> Trimt borst en buik, camera vlak op de huid</td></tr>
+    <tr><td>5</td><td>53 sec · 1920×1080 liggend</td><td><b>Render.</b> Zelfde stijl als 1, nu de neustrimmer, titelkaart "PREMIUM"</td></tr>
+    <tr><td>6</td><td>30 sec · vierkant</td><td><b>Klant.</b> Doos open, neus voor de spiegel, dan onderarm, borst en oksel</td></tr>
   </tbody>
 </table>
 </div>
+<p><b>De twee lange renders zijn bovendien liggend in een vierkante carrousel</b>, dus die worden ook nog bijgesneden. Mijn voorstel: video 1 en 5 zijn advertenties en horen op de productpagina's of in je advertenties. De 3-secondenrender van het oplopende display hoort op de productpagina van dat apparaat, als uitleg bij de accuduur.</p>
+
+<h2>Bouwnotities voor straks</h2>
+<ul>
+  <li><b>De sectie bestaat al in je theme</b> als <code>ugc-videos</code>. Wat erbij komt: een tekstveld voor de kop, een tekstveld voor de omschrijving, en een naam- plus plaatsveld per video. De klikcarrousel wordt een band die vanzelf doorschuift.</li>
+  <li><b>De open plekken zijn geen ontwerp maar een lege staat.</b> Bouw ze als: staat er geen video op deze positie, toon dan de stippellijn met de zonenaam. Dan verdwijnen ze vanzelf zodra je filmt.</li>
+  <li><b>De band verdubbelt zijn eigen inhoud</b> om naadloos rond te lopen. De tweede helft moet <code>aria-hidden</code> krijgen, anders leest een schermlezer alles twee keer voor.</li>
+  <li><b>Bij bewegingsreductie staat de band stil</b> en wordt hij handmatig veegbaar. Dat is een systeeminstelling, geen keuze van de bezoeker.</li>
+  <li><b>De posters zijn frames uit de video zelf</b>, niet het eerste frame — dat is bij twee van de drie nog zwart of onscherp.</li>
+  <li><b>Vierkant, niet liggend.</b> Zolang er liggend materiaal in de band staat, wordt het bijgesneden.</li>
+</ul>
 
 <div class="callout ask">
   <h3 style="margin-top:0">Wat ik van jou nodig heb</h3>
   <ul style="margin-bottom:0">
-    <li><b>Zijn dit klanten of ingehuurde makers?</b> Dat verschil bepaalt wat er onder de rij mag staan. Nu staat er alleen "opgenomen op iemands eigen telefoon" — dat klopt in beide gevallen. Zijn het klanten, dan mag daar "door klanten" staan en dat is een stuk sterker. Zijn het betaalde makers, dan moet dat er ook niet suggestief staan.</li>
-    <li><b>Welk apparaat is het in video 3 en 4?</b> Ik heb ze naast je productfoto's gelegd. Video 4 lijkt sterk op de Groom Guard PRO met de foil-scheerkop erop: dezelfde vorm, hetzelfde woordmerk, dezelfde LED. Video 3 is een zevenkoppige roterende scheerder — dat past bij de Head Shaver Deluxe, maar <b>de gouden kap in de video staat op geen enkele productfoto</b>. Weet jij welk apparaat dat is, dan kan elke kaart naar het juiste product linken in plaats van naar de zone.</li>
-    <li><b>Waar gaan de drie renders heen?</b> Mijn voorstel: video 1 en 5 zijn advertenties — die horen op de productpagina's of in je advertenties, niet in een sectie die "in actie" heet. De 3-secondenrender van het oplopende display hoort op de productpagina van dat apparaat, als uitleg bij de accuduur.</li>
-    <li><b>Heb je er meer?</b> Drie is genoeg om de rij te vullen, maar niet genoeg om alle vijf de zones te dekken. Gezicht en schaamstreek — de twee zones waar de meeste twijfel zit — staan er niet bij.</li>
+    <li><b>De namen bij de drie video's die er zijn.</b> Voornaam en plaats is genoeg, en het maakt het blok in één klap sterker.</li>
+    <li><b>Mag de Instagram-kaart in de band staan?</b> Hij wijst naar @wellshave.nl. Wil je liever dat mensen op de pagina blijven, dan wordt het een uitnodiging zonder link.</li>
+    <li><b>Wie vraagt de video's op?</b> De vier open plekken vullen zich niet vanzelf. Dit blok werkt pas als er iemand na een bestelling vraagt of iemand het wil filmen.</li>
+    <li><b>Welk apparaat is het in video 3?</b> Een zevenkoppige roterende scheerder met een gouden kap — die kap staat op geen enkele productfoto. Niet nodig voor de tekst, wel als je ooit wil doorlinken.</li>
   </ul>
 </div>
-
-<h2>Bouwnotities voor straks</h2>
-<ul>
-  <li><b>De sectie bestaat al in je theme</b> als <code>ugc-videos</code> met een eigen stylesheet. Dit blok is dezelfde sectie met drie dingen erbij: een tekstveld voor de kop, een tekstveld voor de omschrijving en een zonelabel. Het is geen nieuwe sectie.</li>
-  <li><b>De video's staan al als Shopify-media in je winkel</b> en hebben allemaal een poster. De poster in dit ontwerp is een frame uit de video zelf — niet de eerste, want die is bij twee van de drie nog zwart of onscherp.</li>
-  <li><b>De duur komt uit het mediabestand</b>, niet uit een tekstveld. Dan klopt hij ook als er een video wordt vervangen.</li>
-  <li><b>Vierkant, niet liggend.</b> De carrousel snijdt liggende video's bij. Zolang er liggend materiaal in staat, is dat zichtbaar.</li>
-  <li><b>De geluidsknop staat er al</b> in je huidige sectie en blijft. Wat erbij komt is dat de kop het werk doet als er nooit op gedrukt wordt.</li>
-</ul>
 
 <h2>Daarna</h2>
 <p>Blok 11 is garantie en FAQ, blok 12 de afsluiter. Blok 8, het zonerooster, ligt klaar. Blok 10 — de vergelijkingstabel — is op jouw verzoek vervallen.</p>
 
 <footer>
-  <p>De zes video's zijn op 20 augustus 2026 van je eigen homepage gehaald en frame voor frame bekeken; duur, formaat en de aan- of afwezigheid van een geluidsspoor komen uit de bestanden zelf. Wat er gezegd wordt is niet meegewogen — dat is niet te horen in een sectie die zonder geluid start. Ontwerp — nog niets live.</p>
+  <p>De zes video's zijn op 20 augustus 2026 van je eigen homepage gehaald en frame voor frame bekeken; duur, formaat en de aan- of afwezigheid van een geluidsspoor komen uit de bestanden zelf. Dat het klanten zijn, heb jij bevestigd. Namen, plaatsen en toestemming ontbreken nog. Ontwerp — nog niets live.</p>
 </footer>
 
 </div>

@@ -40,8 +40,12 @@ for (const file of files) {
       // de scrollbalk, geen fout. Zelfde voor een kind van zo'n scroller.
       const ps = getComputedStyle(par);
       if (ps.overflowX === 'auto' || ps.overflowX === 'scroll') return;
-      // een element dat met een negatieve marge bewust tot de sectierand loopt
       const em = getComputedStyle(el);
+      // een lopende band: schuift met een animatie langs een ouder die hem
+      // afknipt. Op structuur getoetst in plaats van op naam, want die
+      // veranderde per blok. Een stilstaand element krijgt deze vrijstelling niet.
+      if (ps.overflowX === 'hidden' && em.animationName !== 'none') return;
+      // een element dat met een negatieve marge bewust tot de sectierand loopt
       if (parseFloat(em.marginRight) < 0) return;
       const r = el.getBoundingClientRect(), pr = par.getBoundingClientRect();
       if (r.width === 0) return;
