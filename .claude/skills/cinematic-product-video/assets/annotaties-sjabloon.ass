@@ -1,0 +1,40 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1920
+PlayResY: 1080
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Eyebrow,WS Mont SemiBold,26,&H008AD1F5,&H008AD1F5,&H64000000,&H78000000,0,0,0,0,100,100,4.5,0,1,7,0,0,0,1
+Style: Main,WS Mont Medium,56,&H00FFFFFF,&H00FFFFFF,&H64000000,&H78000000,0,0,0,0,100,100,1.2,0,1,7,0,0,0,1
+Style: Rule,WS Mont Medium,26,&H008AD1F5,&H008AD1F5,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,7,0,0,0,1
+Style: EndBig,WS Mont SemiBold,64,&H00FFFFFF,&H00FFFFFF,&H64000000,&H78000000,0,0,0,0,100,100,2.0,0,1,7,0,0,0,1
+Style: EndSmall,WS Mont Medium,30,&H008AD1F5,&H008AD1F5,&H64000000,&H78000000,0,0,0,0,100,100,5.0,0,1,7,0,0,0,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.65,0:00:03.60,Rule,,0,0,0,,{\pos(130,838)\fad(300,300)\bord0\shad0\p1}m 0 0 l 56 0 l 56 2 l 0 2{\p0}
+Dialogue: 0,0:00:00.73,0:00:03.60,Eyebrow,,0,0,0,,{\pos(130,862)\fad(300,300)\bord0\shad2}WELLSHAVE
+Dialogue: 0,0:00:00.81,0:00:03.60,Main,,0,0,0,,{\pos(130,900)\fad(320,300)\bord0\shad2}Controle, tot in elk detail
+Dialogue: 0,0:00:04.65,0:00:08.64,Rule,,0,0,0,,{\pos(130,838)\fad(300,300)\bord0\shad0\p1}m 0 0 l 56 0 l 56 2 l 0 2{\p0}
+Dialogue: 0,0:00:04.73,0:00:08.64,Eyebrow,,0,0,0,,{\pos(130,862)\fad(300,300)\bord0\shad2}NAT OF DROOG
+Dialogue: 0,0:00:04.81,0:00:08.64,Main,,0,0,0,,{\pos(130,900)\fad(320,300)\bord0\shad2}Gewoon mee de douche in
+Dialogue: 0,0:00:09.69,0:00:13.68,Rule,,0,0,0,,{\pos(130,838)\fad(300,300)\bord0\shad0\p1}m 0 0 l 56 0 l 56 2 l 0 2{\p0}
+Dialogue: 0,0:00:09.77,0:00:13.68,Eyebrow,,0,0,0,,{\pos(130,862)\fad(300,300)\bord0\shad2}LED-DISPLAY
+Dialogue: 0,0:00:09.85,0:00:13.68,Main,,0,0,0,,{\pos(130,900)\fad(320,300)\bord0\shad2}Je ziet precies hoeveel er nog in zit
+Dialogue: 0,0:00:14.73,0:00:18.72,Rule,,0,0,0,,{\pos(130,838)\fad(300,300)\bord0\shad0\p1}m 0 0 l 56 0 l 56 2 l 0 2{\p0}
+Dialogue: 0,0:00:14.81,0:00:18.72,Eyebrow,,0,0,0,,{\pos(130,862)\fad(300,300)\bord0\shad2}SKIN SAFE-TECHNOLOGIE
+Dialogue: 0,0:00:14.89,0:00:18.72,Main,,0,0,0,,{\pos(130,900)\fad(320,300)\bord0\shad2}Geen sneetjes, geen irritatie
+Dialogue: 0,0:00:19.77,0:00:23.76,Rule,,0,0,0,,{\pos(130,838)\fad(300,300)\bord0\shad0\p1}m 0 0 l 56 0 l 56 2 l 0 2{\p0}
+Dialogue: 0,0:00:19.85,0:00:23.76,Eyebrow,,0,0,0,,{\pos(130,862)\fad(300,300)\bord0\shad2}LED-LAMP
+Dialogue: 0,0:00:19.93,0:00:23.76,Main,,0,0,0,,{\pos(130,900)\fad(320,300)\bord0\shad2}Verlicht de zones die je niet ziet
+Dialogue: 0,0:00:24.81,0:00:28.80,Rule,,0,0,0,,{\pos(130,838)\fad(300,300)\bord0\shad0\p1}m 0 0 l 56 0 l 56 2 l 0 2{\p0}
+Dialogue: 0,0:00:24.89,0:00:28.80,Eyebrow,,0,0,0,,{\pos(130,862)\fad(300,300)\bord0\shad2}3-IN-1
+Dialogue: 0,0:00:24.97,0:00:28.80,Main,,0,0,0,,{\pos(130,900)\fad(320,300)\bord0\shad2}Trimmen, scheren, neushaar verwijderen
+Dialogue: 0,0:00:29.85,0:00:32.80,Rule,,0,0,0,,{\pos(130,140)\fad(300,300)\bord0\shad0\p1}m 0 0 l 56 0 l 56 2 l 0 2{\p0}
+Dialogue: 0,0:00:29.93,0:00:32.80,Eyebrow,,0,0,0,,{\pos(130,164)\fad(300,300)\bord0\shad2}CONSTANTE KRACHT
+Dialogue: 0,0:00:30.01,0:00:32.80,Main,,0,0,0,,{\pos(130,202)\fad(320,300)\bord0\shad2}Een motor die niet hapert
+Dialogue: 0,0:00:33.45,0:00:35.50,EndBig,,0,0,0,,{\pos(1180,470)\fad(300,250)\bord0\shad2}Flex Guard™
+Dialogue: 0,0:00:33.60,0:00:35.50,EndSmall,,0,0,0,,{\pos(1184,562)\fad(300,250)\bord0\shad2}WELLSHAVE.COM
