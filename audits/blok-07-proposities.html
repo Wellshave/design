@@ -1,0 +1,385 @@
+<meta charset="utf-8">
+<title>Wellshave Waardeproposities</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
+
+<style>
+
+
+:root{
+  /* exact de tokens uit :root van je live theme */
+  --graphite:#191816;
+  --grey:#8E8E8E;
+  --white-100:#FFFFFF;
+  --white-80:rgba(255,255,255,.8);
+  --white-40:rgba(255,255,255,.4);
+  --black-100:#111111;
+  --black-60:rgba(17,17,17,.6);
+  --black-40:rgba(17,17,17,.4);
+  --black-10:rgba(17,17,17,.1);
+  --gold-light-100:#F5D18A;
+  --gold-dark-100:#BC813E;
+  --error-color:#C14A3A;
+  --success-color:#1E7F63;
+
+  /* documentchroom, uit dezelfde tokens */
+  --bg:#FBFAF9; --surface:#FFFFFF; --surface-2:#F2F0ED;
+  --fg:var(--black-100); --fg-soft:var(--black-60); --rule:var(--black-10);
+  --accent:#8F6428;
+  --ok:var(--success-color); --ok-bg:#E6F0EC;
+  --crit:#A3271B; --crit-bg:#F6EAE7;
+  --shadow:0 1px 2px rgba(17,17,17,.05), 0 12px 30px -20px rgba(17,17,17,.35);
+  --frame:#E2DFDA;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141413; --surface:#1C1B1A; --surface-2:#252423;
+    --fg:#EEECE9; --fg-soft:rgba(238,236,233,.62); --rule:rgba(238,236,233,.13);
+    --accent:#D9A557; --ok:#7FBF9F; --ok-bg:#182420; --crit:#E38477; --crit-bg:#2A1C19;
+    --shadow:0 1px 2px rgba(0,0,0,.45), 0 12px 30px -20px rgba(0,0,0,.9);
+    --frame:#312F2C;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141413; --surface:#1C1B1A; --surface-2:#252423;
+  --fg:#EEECE9; --fg-soft:rgba(238,236,233,.62); --rule:rgba(238,236,233,.13);
+  --accent:#D9A557; --ok:#7FBF9F; --ok-bg:#182420; --crit:#E38477; --crit-bg:#2A1C19;
+  --shadow:0 1px 2px rgba(0,0,0,.45), 0 12px 30px -20px rgba(0,0,0,.9);
+  --frame:#312F2C;
+}
+
+*{box-sizing:border-box}
+img{max-width:100%;height:auto;display:block}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font-family:"Montserrat",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:16px;line-height:150%;font-weight:400;-webkit-font-smoothing:antialiased}
+.wrap{max-width:940px;margin:0 auto;padding:0 24px 96px}
+@media(max-width:600px){.wrap{padding:0 16px 64px}}
+
+.masthead{padding:60px 0 28px;border-bottom:1px solid var(--rule)}
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);margin:0 0 18px}
+h1{font-weight:600;font-size:clamp(32px,5.6vw,50px);line-height:115%;letter-spacing:-.015em;
+  margin:0 0 16px;text-wrap:balance}
+.dek{font-size:17px;color:var(--fg-soft);margin:0;max-width:64ch;line-height:160%;text-wrap:pretty}
+.byline{font-size:12.5px;color:var(--fg-soft);margin-top:20px}
+
+h2{font-weight:600;font-size:clamp(22px,3.4vw,30px);line-height:120%;letter-spacing:-.01em;
+  margin:56px 0 8px;text-wrap:balance}
+h2 + .sub{color:var(--fg-soft);margin:0 0 22px;font-size:15px;max-width:66ch;line-height:160%}
+h3{font-size:17px;font-weight:600;margin:26px 0 8px}
+p{margin:0 0 14px;max-width:68ch;line-height:160%}
+ul{margin:0 0 14px;padding-left:20px;max-width:68ch}
+li{margin-bottom:7px}
+strong{font-weight:600}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
+  background:var(--surface-2);padding:1px 5px;border-radius:3px}
+
+/* ── podium ── */
+.devicecap{font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--fg-soft);margin:0 0 8px}
+.scaler{width:100%;overflow:hidden;border:1px solid var(--frame);border-radius:4px;
+  background:#EDE7DB;box-shadow:var(--shadow)}
+.scaler > .inner{transform-origin:top left}
+.desk-scaler{min-height:400px}
+.desk-scaler > .inner{width:1440px}
+.phonecol{max-width:390px;margin:0 auto}
+.phone-scaler{border-radius:14px;min-height:400px}
+.phone-scaler > .inner{width:390px}
+.stage{display:grid;gap:30px;margin:0 0 10px}
+
+/* ══ MOCKUP — vaste merkkleuren in beide thema's ══ */
+.vp{font-family:"Montserrat",sans-serif;background:#0B0B0A;color:#FFFFFF;padding:70px 44px;
+  position:relative;overflow:hidden}
+.vp::before{content:"";position:absolute;left:50%;top:-40%;width:120%;height:120%;
+  transform:translateX(-50%);pointer-events:none;
+  background:radial-gradient(52% 40% at 50% 34%,rgba(245,209,138,.10) 0%,rgba(11,11,10,0) 70%)}
+.vp *{box-sizing:border-box}
+.vp p{margin:0;max-width:none}
+.vp ul{margin:0;padding:0;max-width:none;list-style:none}
+.vp-in{max-width:1240px;margin:0 auto;position:relative;z-index:1}
+
+.vp-kop{text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px;
+  margin-bottom:46px}
+.vp-eyebrow{display:flex;align-items:center;gap:16px;font-size:11px;font-weight:700;
+  letter-spacing:.24em;text-transform:uppercase;color:#BC813E}
+.vp-eyebrow::before,.vp-eyebrow::after{content:"";width:70px;height:1px;
+  background:linear-gradient(90deg,rgba(188,129,62,0),rgba(188,129,62,.75))}
+.vp-eyebrow::after{background:linear-gradient(90deg,rgba(188,129,62,.75),rgba(188,129,62,0))}
+.vp-h2{font-size:40px;font-weight:700;letter-spacing:-.03em;line-height:116%;margin:0;color:#fff}
+.vp-h2 em{font-style:normal;color:#F5D18A}
+.vp-sub{font-size:15.5px;line-height:160%;color:rgba(255,255,255,.58);max-width:64ch}
+
+.vp-rij{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vp-kaart{display:flex;flex-direction:column;gap:13px;padding:6px 30px 26px;min-width:0;
+  position:relative;cursor:default}
+.vp-kaart + .vp-kaart{border-left:1px solid rgba(255,255,255,.12)}
+.vp-kaart::after{content:"";position:absolute;left:30px;right:30px;bottom:0;height:2px;
+  background:linear-gradient(90deg,#F5D18A,rgba(245,209,138,0));
+  opacity:0;transform:scaleX(0);transform-origin:left;
+  transition:transform .4s ease,opacity .3s ease}
+.vp-kaart:hover::after,.vp-kaart.aan::after{opacity:1;transform:scaleX(1)}
+.vp-cijfer{font-size:46px;font-weight:700;letter-spacing:-.035em;line-height:1;color:#F5D18A;
+  transition:text-shadow .4s ease}
+.vp-kaart:hover .vp-cijfer,.vp-kaart.aan .vp-cijfer{text-shadow:0 0 34px rgba(245,209,138,.45)}
+.vp-cijfer small{font-size:17px;font-weight:600;letter-spacing:0;color:rgba(245,209,138,.7);
+  margin-left:7px}
+.vp-label{font-size:13px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:#fff;
+  line-height:150%}
+.vp-tekst{font-size:14px;line-height:158%;color:rgba(255,255,255,.58)}
+
+.vp-slot{margin-top:44px;padding-top:26px;border-top:1px solid rgba(255,255,255,.12);
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  font-size:13.5px;color:rgba(255,255,255,.5);text-align:center}
+.vp-slot svg{width:16px;height:16px;color:#BC813E;flex:none}
+.vp-slot b{color:rgba(255,255,255,.8);font-weight:600}
+
+/* ── mobiel ── */
+.vp-m{padding:40px 18px 32px}
+.vp-m .vp-kop{margin-bottom:24px;gap:10px}
+.vp-m .vp-eyebrow{font-size:10px;gap:10px}
+.vp-m .vp-eyebrow::before,.vp-m .vp-eyebrow::after{width:32px}
+.vp-m .vp-h2{font-size:27px}
+.vp-m .vp-sub{font-size:14px}
+.vp-m .vp-rij{grid-template-columns:1fr}
+.vp-m .vp-kaart{padding:20px 0;gap:9px}
+.vp-m .vp-kaart + .vp-kaart{border-left:0;border-top:1px solid rgba(255,255,255,.12)}
+.vp-m .vp-kaart::after{left:0;right:auto;width:56px;bottom:auto;top:0;
+  opacity:1;transform:scaleX(1);background:linear-gradient(90deg,rgba(245,209,138,.5),rgba(245,209,138,0))}
+.vp-m .vp-kaart:first-child::after{display:none}
+.vp-m .vp-cijfer{font-size:36px}
+.vp-m .vp-cijfer small{font-size:15px}
+.vp-m .vp-label{font-size:12px}
+.vp-m .vp-tekst{font-size:13.5px}
+.vp-m .vp-slot{margin-top:24px;padding-top:20px;font-size:12.5px;text-align:left}
+
+@media (prefers-reduced-motion: reduce){
+  .vp-kaart::after,.vp-cijfer{transition:none}
+}
+
+/* ── annotaties ── */
+.anno{background:var(--surface);border:1px solid var(--rule);border-left:2px solid var(--gold-dark-100);
+  border-radius:3px;padding:18px 22px;margin:0 0 13px;box-shadow:var(--shadow)}
+.anno > :last-child{margin-bottom:0}
+.anno h3{margin:0 0 7px;font-size:16.5px}
+.anno p{font-size:15px;margin-bottom:0;color:var(--fg-soft);max-width:68ch}
+.anno p b{color:var(--fg);font-weight:600}
+.anno p + p{margin-top:9px}
+.tablewrap{overflow-x:auto;margin:20px 0;border:1px solid var(--rule);border-radius:3px}
+table{border-collapse:collapse;width:100%;min-width:560px;background:var(--surface);font-size:14.5px}
+th,td{text-align:left;padding:12px 15px;border-bottom:1px solid var(--rule);vertical-align:top;line-height:150%}
+th{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--fg-soft);background:var(--surface-2)}
+tr:last-child td{border-bottom:0}
+td b{font-weight:600;color:var(--fg)}
+.callout{background:var(--surface-2);border-radius:3px;padding:20px 24px;margin:24px 0}
+.callout > :last-child{margin-bottom:0}
+.callout ul,.callout p{max-width:none}
+.ask{border-left:2px solid var(--crit);background:var(--crit-bg)}
+.fix{border-left:2px solid var(--ok);background:var(--ok-bg)}
+.progress{display:flex;flex-wrap:wrap;gap:5px;margin:18px 0 0}
+.progress i{width:26px;height:4px;background:var(--rule);display:block}
+.progress i.done{background:var(--gold-dark-100)}
+.progress-cap{font-size:11.5px;color:var(--fg-soft);margin:10px 0 0}
+footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--rule);
+  color:var(--fg-soft);font-size:13px}
+footer p{max-width:none}
+:focus-visible{outline:2px solid var(--gold-dark-100);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}
+  .revtrack{width:auto;overflow-x:auto}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01z"/></symbol>
+<symbol id="chk" viewBox="0 0 24 24"><path d="M4 12.5l5.2 5.2L20 6.9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="shield" viewBox="0 0 24 24"><path d="M12 2.6l7.2 2.8v6.1c0 4.4-3 8.4-7.2 9.9-4.2-1.5-7.2-5.5-7.2-9.9V5.4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M8.7 12.1l2.3 2.3 4.3-4.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="guarantee" viewBox="0 0 24 24"><circle cx="12" cy="9.6" r="6.4" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8.3 15.1L7 21.6l5-2.4 5 2.4-1.3-6.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+<symbol id="truck" viewBox="0 0 24 24"><path d="M1.9 6.2h12.2v9.4H1.9zM14.1 9.7h3.9l3.1 3.1v2.8h-7z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="6.6" cy="18" r="1.9" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="17.3" cy="18" r="1.9" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+<symbol id="chkc" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10.1" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M7.7 12.3l2.9 2.9 5.7-6.1" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="tik" viewBox="0 0 24 24"><path d="M9 11.4V5.6a1.8 1.8 0 013.6 0v5.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.6 10.8V9.4a1.7 1.7 0 013.4 0v1.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 11V10a1.7 1.7 0 013.4 0v4.6c0 3.4-2.4 6.2-5.8 6.2h-1.4c-2 0-3.4-1-4.4-2.6l-2.6-4.3a1.7 1.7 0 012.7-2l1.1 1.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="gauge" viewBox="0 0 24 24"><path d="M3.6 17.4a9.4 9.4 0 1116.8 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 16.4l4-5.1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="17.2" r="1.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="parts" viewBox="0 0 24 24"><rect x="3.4" y="4.2" width="6.2" height="15.6" rx="2.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><rect x="14.4" y="4.2" width="6.2" height="15.6" rx="2.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.4 8.6h6.2M14.4 8.6h6.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="drop" viewBox="0 0 24 24"><path d="M12 2.9s6 6.4 6 10.4a6 6 0 01-12 0c0-4 6-10.4 6-10.4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.3 14.1a2.9 2.9 0 002.9 2.9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="power" viewBox="0 0 24 24"><rect x="2.6" y="7.2" width="15.4" height="9.6" rx="2.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 10.6v2.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.6 9.6l-2.2 3.2h2.8l-2 2.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="scissors" viewBox="0 0 24 24"><circle cx="6" cy="17.6" r="2.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="6.4" r="2.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.3 7.8L20 17.2M8.3 16.2L20 6.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="nose" viewBox="0 0 24 24"><path d="M12.6 3.4v5.4l2.8 5.1c.5 1-.1 2.1-1.2 2.1h-1.1c0 1.8-1.3 3.2-3.1 3.2-1.7 0-3-1.2-3.2-2.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.6 8.4c1.5 0 2.7 1.2 2.7 2.7 0 2-1.2 2.4-1.2 4.1 0 1.4.4 2 .4 3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="dwn" viewBox="0 0 24 24"><path d="M12 4.6v14.2M6.2 13.4L12 19.2l5.8-5.8" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="klok" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 7.2V12l3.2 2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="arw" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg><div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow">Homepage-redesign · blok 7 van 12 · versie 1</p>
+  <h1>De waardeproposities</h1>
+  <p class="dek">Vier uitspraken die voor het hele assortiment gelden, elk met een getal dat je kunt nakijken. Dit is het blok dat de drie holle regels vervangt die nu halverwege je homepage staan.</p>
+  <p class="byline">Ontwerp — nog niets live. Akkoord → dan pas Shopify.</p>
+  <div class="progress" aria-hidden="true">
+    <i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i></i><i></i><i></i><i></i><i></i>
+  </div>
+  <p class="progress-cap">Blok 7 in ontwerp · blok 9, 11 en 12 volgen</p>
+</header>
+
+<div class="callout ask">
+  <h3 style="margin-top:0">Wat er nu staat, en waarom het niets doet</h3>
+  <p>Op je homepage staan drie proposities: <b>"Ontworpen voor dagelijks gebruik"</b>, <b>"Getest op kwaliteit en prestaties"</b> en <b>"Premium, maar toegankelijk"</b>. Op je over-pagina staat een variant daarvan. Geen van de zes bevat een kenmerk, een getal of een mechanisme.</p>
+  <p style="margin-bottom:0"><b>De toets is simpel: kan een concurrent dit letterlijk overnemen?</b> Balzac, Balzy en Brothers in Style kunnen alle drie die regels vandaag op hun homepage zetten zonder één woord te veranderen en zonder te liegen. Dan zegt het niets over jou.</p>
+</div>
+
+<div class="callout fix">
+  <h3 style="margin-top:0">Vier uitspraken die alleen jij kunt doen</h3>
+  <p><b>Elk met een getal, en elk over het hele assortiment.</b> Dat laatste is de reden dat dit blok pas nu kan: blok 5 heeft de zone-specifieke claims opgevangen, dus hier blijft over wat er hoe dan ook waar is. In versie 1 van blok 5 ging dat mis — toen stonden Groom Guard-specs op een plek waar ze over alles moesten gelden.</p>
+  <p><b>Ze beantwoorden de vier twijfels die op deze plek nog over zijn.</b> Is dit wegwerpspul? Nee, het mes is los te koop. Moet ik kiezen uit één ding dat alles half doet? Nee, 27 apparaten over vijf zones. Word ik straks naar iets duurders geduwd? Nee, €89,95 is het plafond. En als er iets is, krijg ik dan een mens? Ja, en die heeft een naam.</p>
+  <p style="margin-bottom:0"><b>Wat er bewust níét in staat:</b> 100 dagen proberen, 2 jaar garantie, gratis verzending en morgen in huis. Die staan al in de aankondigingsbalk en in de strook onder de hero. Nog een keer herhalen maakt ze niet sterker.</p>
+</div>
+
+<div class="callout fix">
+  <h3 style="margin-top:0">Donker, en waarom juist hier</h3>
+  <p>Blok 2 tot en met 6 zijn licht. Als dit blok dat ook wordt, is het het zesde lichte vlak op rij en scrollt het weg. <b>Zwart met goud maakt er een statement van in plaats van een opsomming</b>, en het is de enige plek na de hero waar dat past: er staat geen product, geen prijs en geen knop — alleen vier uitspraken.</p>
+  <p style="margin-bottom:0">Daarmee krijgt de pagina ook ritme: donkere hero → licht middenstuk → donkere onderbreking → licht naar de afsluiter. Wil je het liever licht, dan is het één regel.</p>
+</div>
+
+<h2>Het ontwerp</h2>
+<p class="sub">Vier kolommen met een getal dat opvalt, gescheiden door haarlijnen. Op mobiel onder elkaar met dezelfde volgorde.</p>
+
+<div class="stage">
+  <div>
+    <p class="devicecap">Desktop — 1440px</p>
+    <div class="scaler desk-scaler"><div class="inner">
+      <section class="vp"><div class="vp-in">
+
+        <div class="vp-kop">
+          <p class="vp-eyebrow">Wat voor élk apparaat geldt</p>
+          <h2 class="vp-h2">Vier dingen die <em>niet per product</em> verschillen.</h2>
+          <p class="vp-sub">De rest van deze pagina gaat over welk apparaat bij jou past. Dit gaat over wat er hoe dan ook waar is, welk apparaat je ook kiest.</p>
+        </div>
+
+        <div class="vp-rij">
+          <div class="vp-kaart" data-vp="mes">
+            <p class="vp-cijfer">€14,95<small>vanaf</small></p>
+            <p class="vp-label">Het mes los, niet een nieuw apparaat</p>
+            <p class="vp-tekst">Voor je bodygroomer, je hoofdscheerder en je scheerapparaat ligt de scheerkop apart op voorraad. Zeven losse onderdelen, zodat een bot mes geen nieuwe aankoop is.</p>
+          </div>
+          <div class="vp-kaart" data-vp="aantal">
+            <p class="vp-cijfer">27<small>apparaten</small></p>
+            <p class="vp-label">Eén voor elke plek, niet één voor alles</p>
+            <p class="vp-tekst">Verdeeld over vijf zones — kruin, gezicht, neus, lichaam en schaamstreek. Geen universele trimmer die overal half werkt.</p>
+          </div>
+          <div class="vp-kaart" data-vp="prijs">
+            <p class="vp-cijfer">€89,95<small>maximaal</small></p>
+            <p class="vp-label">Er staat niets duurders in de winkel</p>
+            <p class="vp-tekst">De hele lijn ligt tussen €16,95 en €89,95, dus je weet vooraf waar het plafond ligt. Geen apparaat dat pas boven de honderd euro interessant wordt.</p>
+          </div>
+          <div class="vp-kaart" data-vp="mens">
+            <p class="vp-cijfer">Yvonne</p>
+            <p class="vp-label">Geen ticketnummer maar een naam</p>
+            <p class="vp-tekst">Bij een vraag krijg je meestal Yvonne. Ze staat met naam en functie op onze over-pagina, samen met de rest van het team.</p>
+          </div>
+        </div>
+
+        <p class="vp-slot"><svg><use href="#chkc"/></svg>Alle vier zijn na te rekenen: <b>in de winkel, op de productpagina en op de over-pagina.</b></p>
+
+      </div></section>
+    </div></div>
+  </div>
+  <div class="phonecol">
+    <p class="devicecap">Mobiel — 390px · 73% van je verkeer</p>
+    <div class="scaler phone-scaler"><div class="inner">
+      <section class="vp vp-m"><div class="vp-in">
+
+        <div class="vp-kop">
+          <p class="vp-eyebrow">Wat voor élk apparaat geldt</p>
+          <h2 class="vp-h2">Vier dingen die <em>niet per product</em> verschillen.</h2>
+          <p class="vp-sub">De rest van deze pagina gaat over welk apparaat bij jou past. Dit gaat over wat er hoe dan ook waar is, welk apparaat je ook kiest.</p>
+        </div>
+
+        <div class="vp-rij">
+          <div class="vp-kaart" data-vp="mes">
+            <p class="vp-cijfer">€14,95<small>vanaf</small></p>
+            <p class="vp-label">Het mes los, niet een nieuw apparaat</p>
+            <p class="vp-tekst">Voor je bodygroomer, je hoofdscheerder en je scheerapparaat ligt de scheerkop apart op voorraad. Zeven losse onderdelen, zodat een bot mes geen nieuwe aankoop is.</p>
+          </div>
+          <div class="vp-kaart" data-vp="aantal">
+            <p class="vp-cijfer">27<small>apparaten</small></p>
+            <p class="vp-label">Eén voor elke plek, niet één voor alles</p>
+            <p class="vp-tekst">Verdeeld over vijf zones — kruin, gezicht, neus, lichaam en schaamstreek. Geen universele trimmer die overal half werkt.</p>
+          </div>
+          <div class="vp-kaart" data-vp="prijs">
+            <p class="vp-cijfer">€89,95<small>maximaal</small></p>
+            <p class="vp-label">Er staat niets duurders in de winkel</p>
+            <p class="vp-tekst">De hele lijn ligt tussen €16,95 en €89,95, dus je weet vooraf waar het plafond ligt. Geen apparaat dat pas boven de honderd euro interessant wordt.</p>
+          </div>
+          <div class="vp-kaart" data-vp="mens">
+            <p class="vp-cijfer">Yvonne</p>
+            <p class="vp-label">Geen ticketnummer maar een naam</p>
+            <p class="vp-tekst">Bij een vraag krijg je meestal Yvonne. Ze staat met naam en functie op onze over-pagina, samen met de rest van het team.</p>
+          </div>
+        </div>
+
+        <p class="vp-slot"><svg><use href="#chkc"/></svg>Alle vier zijn na te rekenen: <b>in de winkel, op de productpagina en op de over-pagina.</b></p>
+
+      </div></section>
+    </div></div>
+  </div>
+</div>
+
+<h2>Waar elk getal vandaan komt</h2>
+<div class="tablewrap">
+<table>
+  <thead><tr><th>Wat er staat</th><th>Hoe het is vastgesteld</th></tr></thead>
+  <tbody>
+    <tr><td><b>€14,95</b> · zeven losse onderdelen</td><td>Negen vervangingsartikelen in de winkel, waarvan zeven op voorraad. Goedkoopste op voorraad: Groom Guard Blade, Head Shaver 7D Scheerkop, Foil shaver Groom Guard en Flex Guard Blade, alle vier €14,95. De twee van €9,95 staan op nul voorraad en tellen daarom niet mee</td></tr>
+    <tr><td><b>27</b> apparaten over vijf zones</td><td>Alle actieve producten in Shopify, min de vervangingsonderdelen, bundels, tassen, garantieverlengingen en verzendopties. De telling staat hieronder uitgeschreven</td></tr>
+    <tr><td><b>€89,95</b> maximaal · lijn van €16,95 tot €89,95</td><td>The Sentinel PRO is het duurste apparaat, Neustrimmer Basic het goedkoopste. Bundels gaan hoger — daarom staat er "apparaat" en niet "product". Er staat bewust niet dat elk apparaat het topmodel van zijn serie is: de Groom Guard heeft een PRO boven zich, dus dat zou niet kloppen</td></tr>
+    <tr><td><b>Yvonne</b> · klantenservice</td><td>Je over-pagina: "Yvonne, Klantenservice Specialist – Yvonne staat klaar om je te helpen met al je vragen. Ze is vaak het eerste contactpunt." Vandaar "meestal" en niet "altijd"</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3>De telling van 27</h3>
+<p>Meegeteld als apparaat, van goedkoop naar duur: Neustrimmer Basic €16,95 · Neustrimmer Premium 2-in-1 €19,95 · Neustrimmer Essential €19,95 · Blade Guard Black €19,95 · Blade Guard Gold €19,95 · Neustrimmer 2in1 Elite €23,95 · Neustrimmer Advance 3-in-1 €24,95 · Neustrimmer Ultimate 4-in-1 €29,95 · Neustrimmer 3in1 Platinum €29,95 · Neustrimmer 4in1 Ultra €32,95 · Men Shaper Iced 5-in-1 €33,95 · Edge Blade €33,95 · The Dial Master €34,95 · Men Shaper Gold 5-in-1 €36,95 · Scheerapparaat Elegant 4-in-1 €39,95 · Dual Groomer 2-in-1 €39,95 · Men Shaper Supreme 6-in-1 €39,95 · Groom Guard €44,95 · The Gentleman Shaver €49,95 · Detailtrimmer Sharpline €49,95 · 4 Foil Blade Baron €49,95 · Head Shaver Deluxe €54,95 · Flex Guard 3-in-1 €54,95 · Tondeuse Elegant €59,95 · Groom Guard PRO €59,95 · Tondeuse Deluxe €69,95 · The Sentinel PRO €89,95.</p>
+<p><b>Twee kanttekeningen.</b> De Blade Guards zijn scheermessen zonder motor; ik heb ze meegeteld omdat het apparaten zijn die je koopt en gebruikt, maar als jij ze liever als accessoire ziet wordt het 25. En de Tondeuse Deluxe staat op nul voorraad, dus in de praktijk zijn er 26 te koop. Zeg welke telling je wil, dan staat dat getal er.</p>
+
+<h2>Bouwnotities voor straks</h2>
+<ul>
+  <li><b>Alle vier de getallen zijn tekstvelden in de sectie-instellingen</b>, geen Liquid. Ze veranderen zelden, maar als ze veranderen moet iemand ze met de hand bijwerken — zet er een datum bij van wanneer ze voor het laatst zijn nagekeken.</li>
+  <li><b>Het aantal apparaten kan wél live</b> als er ooit een collectie "alle apparaten" komt: dan is het <code>collections.alle-apparaten.products_count</code>. Dezelfde randvoorwaarde als bij blok 3 en 5.</li>
+  <li><b>Vier kolommen is het maximum</b> op 1440px. Een vijfde maakt de tekst te smal; dan moet het een rij van drie plus één worden.</li>
+  <li><b>De naam in de vierde kolom is een instelling</b>, geen vaste tekst — als Yvonne weggaat, moet dat blok in één handeling te wijzigen zijn.</li>
+</ul>
+
+<div class="callout ask">
+  <h3 style="margin-top:0">Wat ik van jou nodig heb</h3>
+  <ul style="margin-bottom:0">
+    <li><b>Mag Yvonne met naam op de homepage?</b> Ze staat al op je over-pagina, maar de homepage is iets anders. Vraag het haar. Zo niet, dan wordt het "je krijgt ons team, geen callcenter" — zwakker, want zonder naam.</li>
+    <li><b>Tellen de Blade Guards mee als apparaat?</b> 27 met, 25 zonder.</li>
+    <li><b>De twee onderdelen van €9,95 staan op nul voorraad.</b> Komen ze terug, dan wordt "vanaf €14,95" weer "vanaf €9,95" — dat scheelt in de claim.</li>
+    <li><b>Donker of licht?</b> Ik heb hem donker gemaakt om het lichte middenstuk te onderbreken. Eén regel om te wisselen.</li>
+  </ul>
+</div>
+
+<h2>Daarna</h2>
+<p>Blok 9 is de UGC-sectie: behouden, maar elke video een kop geven die samenvat wat erin gezegd wordt. Daarna garantie en FAQ (blok 11) en de afsluiter (blok 12). Blok 8, het zonerooster, ligt al klaar. Blok 10 — de vergelijkingstabel — is op jouw verzoek vervallen.</p>
+
+<footer>
+  <p>Alle aantallen en prijzen live uit Shopify, opgehaald op 20 augustus 2026. De naam en functie van Yvonne letterlijk van je eigen over-pagina. Ontwerp — nog niets live.</p>
+</footer>
+
+</div>
+
+<script>
+function fit(){
+  document.querySelectorAll('.scaler').forEach(s=>{
+    const inner=s.firstElementChild;
+    const w=parseFloat(getComputedStyle(inner).width);
+    const scale=s.clientWidth/w;
+    inner.style.transform='scale('+scale+')';
+    s.style.height=Math.ceil(inner.offsetHeight*scale)+'px';
+  });
+}
+document.fonts&&document.fonts.ready.then(fit);
+window.addEventListener('resize',fit);
+new ResizeObserver(fit).observe(document.body);
+window.addEventListener('load',fit); fit();
+</script>
+

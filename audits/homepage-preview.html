@@ -1027,6 +1027,76 @@ footer p{margin:0;max-width:72ch}
 @media (prefers-reduced-motion: reduce){
   .kb-nr,.kb-stap i,.kb-stap b{transition:none}
 }
+
+/* ── Blok 7 — De waardeproposities ── */
+/* ══ MOCKUP — vaste merkkleuren in beide thema's ══ */
+.vp{font-family:"Montserrat",sans-serif;background:#0B0B0A;color:#FFFFFF;padding:70px 44px;
+  position:relative;overflow:hidden}
+.vp::before{content:"";position:absolute;left:50%;top:-40%;width:120%;height:120%;
+  transform:translateX(-50%);pointer-events:none;
+  background:radial-gradient(52% 40% at 50% 34%,rgba(245,209,138,.10) 0%,rgba(11,11,10,0) 70%)}
+.vp *{box-sizing:border-box}
+.vp p{margin:0;max-width:none}
+.vp ul{margin:0;padding:0;max-width:none;list-style:none}
+.vp-in{max-width:1240px;margin:0 auto;position:relative;z-index:1}
+
+.vp-kop{text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px;
+  margin-bottom:46px}
+.vp-eyebrow{display:flex;align-items:center;gap:16px;font-size:11px;font-weight:700;
+  letter-spacing:.24em;text-transform:uppercase;color:#BC813E}
+.vp-eyebrow::before,.vp-eyebrow::after{content:"";width:70px;height:1px;
+  background:linear-gradient(90deg,rgba(188,129,62,0),rgba(188,129,62,.75))}
+.vp-eyebrow::after{background:linear-gradient(90deg,rgba(188,129,62,.75),rgba(188,129,62,0))}
+.vp-h2{font-size:40px;font-weight:700;letter-spacing:-.03em;line-height:116%;margin:0;color:#fff}
+.vp-h2 em{font-style:normal;color:#F5D18A}
+.vp-sub{font-size:15.5px;line-height:160%;color:rgba(255,255,255,.58);max-width:64ch}
+
+.vp-rij{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vp-kaart{display:flex;flex-direction:column;gap:13px;padding:6px 30px 26px;min-width:0;
+  position:relative;cursor:default}
+.vp-kaart + .vp-kaart{border-left:1px solid rgba(255,255,255,.12)}
+.vp-kaart::after{content:"";position:absolute;left:30px;right:30px;bottom:0;height:2px;
+  background:linear-gradient(90deg,#F5D18A,rgba(245,209,138,0));
+  opacity:0;transform:scaleX(0);transform-origin:left;
+  transition:transform .4s ease,opacity .3s ease}
+.vp-kaart:hover::after,.vp-kaart.aan::after{opacity:1;transform:scaleX(1)}
+.vp-cijfer{font-size:46px;font-weight:700;letter-spacing:-.035em;line-height:1;color:#F5D18A;
+  transition:text-shadow .4s ease}
+.vp-kaart:hover .vp-cijfer,.vp-kaart.aan .vp-cijfer{text-shadow:0 0 34px rgba(245,209,138,.45)}
+.vp-cijfer small{font-size:17px;font-weight:600;letter-spacing:0;color:rgba(245,209,138,.7);
+  margin-left:7px}
+.vp-label{font-size:13px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:#fff;
+  line-height:150%}
+.vp-tekst{font-size:14px;line-height:158%;color:rgba(255,255,255,.58)}
+
+.vp-slot{margin-top:44px;padding-top:26px;border-top:1px solid rgba(255,255,255,.12);
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  font-size:13.5px;color:rgba(255,255,255,.5);text-align:center}
+.vp-slot svg{width:16px;height:16px;color:#BC813E;flex:none}
+.vp-slot b{color:rgba(255,255,255,.8);font-weight:600}
+
+/* ── mobiel ── */
+.vp-m{padding:40px 18px 32px}
+.vp-m .vp-kop{margin-bottom:24px;gap:10px}
+.vp-m .vp-eyebrow{font-size:10px;gap:10px}
+.vp-m .vp-eyebrow::before,.vp-m .vp-eyebrow::after{width:32px}
+.vp-m .vp-h2{font-size:27px}
+.vp-m .vp-sub{font-size:14px}
+.vp-m .vp-rij{grid-template-columns:1fr}
+.vp-m .vp-kaart{padding:20px 0;gap:9px}
+.vp-m .vp-kaart + .vp-kaart{border-left:0;border-top:1px solid rgba(255,255,255,.12)}
+.vp-m .vp-kaart::after{left:0;right:auto;width:56px;bottom:auto;top:0;
+  opacity:1;transform:scaleX(1);background:linear-gradient(90deg,rgba(245,209,138,.5),rgba(245,209,138,0))}
+.vp-m .vp-kaart:first-child::after{display:none}
+.vp-m .vp-cijfer{font-size:36px}
+.vp-m .vp-cijfer small{font-size:15px}
+.vp-m .vp-label{font-size:12px}
+.vp-m .vp-tekst{font-size:13.5px}
+.vp-m .vp-slot{margin-top:24px;padding-top:20px;font-size:12.5px;text-align:left}
+
+@media (prefers-reduced-motion: reduce){
+  .vp-kaart::after,.vp-cijfer{transition:none}
+}
 </style>
 <svg width="0" height="0" style="position:absolute"><defs>
 <symbol id="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01z"/></symbol>
@@ -1055,7 +1125,7 @@ footer p{margin:0;max-width:72ch}
 </defs></svg>
 <div class="shell">
   <div class="lede">
-    <p class="kicker">Homepage-redesign · 6 van 12 blokken</p>
+    <p class="kicker">Homepage-redesign · 7 van 12 blokken</p>
     <h1>De nieuwe blokken, zoals ze op de pagina komen te staan</h1>
     <p class="sub">Beide blokken draaien hier echt: de reviewband loopt, de knoppen reageren, en het
       mobiele beeld is de werkelijke opmaak op 390&nbsp;px — niet een verkleinde desktopversie.
@@ -2490,6 +2560,86 @@ footer p{margin:0;max-width:72ch}
           </div>
         </div>
 
+
+      </div></section></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blok">
+    <div class="blok-h"><h2>Blok 7 — De waardeproposities</h2><span>Ontwerp — nog niets live</span></div>
+    <div class="views">
+      <div>
+        <p class="devicecap">Desktop — 1440px</p>
+        <div class="scaler desk-scaler"><div class="inner"><section class="vp"><div class="vp-in">
+
+        <div class="vp-kop">
+          <p class="vp-eyebrow">Wat voor élk apparaat geldt</p>
+          <h2 class="vp-h2">Vier dingen die <em>niet per product</em> verschillen.</h2>
+          <p class="vp-sub">De rest van deze pagina gaat over welk apparaat bij jou past. Dit gaat over wat er hoe dan ook waar is, welk apparaat je ook kiest.</p>
+        </div>
+
+        <div class="vp-rij">
+          <div class="vp-kaart" data-vp="mes">
+            <p class="vp-cijfer">€14,95<small>vanaf</small></p>
+            <p class="vp-label">Het mes los, niet een nieuw apparaat</p>
+            <p class="vp-tekst">Voor je bodygroomer, je hoofdscheerder en je scheerapparaat ligt de scheerkop apart op voorraad. Zeven losse onderdelen, zodat een bot mes geen nieuwe aankoop is.</p>
+          </div>
+          <div class="vp-kaart" data-vp="aantal">
+            <p class="vp-cijfer">27<small>apparaten</small></p>
+            <p class="vp-label">Eén voor elke plek, niet één voor alles</p>
+            <p class="vp-tekst">Verdeeld over vijf zones — kruin, gezicht, neus, lichaam en schaamstreek. Geen universele trimmer die overal half werkt.</p>
+          </div>
+          <div class="vp-kaart" data-vp="prijs">
+            <p class="vp-cijfer">€89,95<small>maximaal</small></p>
+            <p class="vp-label">Er staat niets duurders in de winkel</p>
+            <p class="vp-tekst">De hele lijn ligt tussen €16,95 en €89,95, dus je weet vooraf waar het plafond ligt. Geen apparaat dat pas boven de honderd euro interessant wordt.</p>
+          </div>
+          <div class="vp-kaart" data-vp="mens">
+            <p class="vp-cijfer">Yvonne</p>
+            <p class="vp-label">Geen ticketnummer maar een naam</p>
+            <p class="vp-tekst">Bij een vraag krijg je meestal Yvonne. Ze staat met naam en functie op onze over-pagina, samen met de rest van het team.</p>
+          </div>
+        </div>
+
+        <p class="vp-slot"><svg><use href="#chkc"/></svg>Alle vier zijn na te rekenen: <b>in de winkel, op de productpagina en op de over-pagina.</b></p>
+
+      </div></section></div></div>
+      </div>
+      <div class="mobcol">
+        <p class="devicecap">Mobiel — 390px</p>
+        <div class="scaler phone-scaler"><div class="inner"><section class="vp vp-m"><div class="vp-in">
+
+        <div class="vp-kop">
+          <p class="vp-eyebrow">Wat voor élk apparaat geldt</p>
+          <h2 class="vp-h2">Vier dingen die <em>niet per product</em> verschillen.</h2>
+          <p class="vp-sub">De rest van deze pagina gaat over welk apparaat bij jou past. Dit gaat over wat er hoe dan ook waar is, welk apparaat je ook kiest.</p>
+        </div>
+
+        <div class="vp-rij">
+          <div class="vp-kaart" data-vp="mes">
+            <p class="vp-cijfer">€14,95<small>vanaf</small></p>
+            <p class="vp-label">Het mes los, niet een nieuw apparaat</p>
+            <p class="vp-tekst">Voor je bodygroomer, je hoofdscheerder en je scheerapparaat ligt de scheerkop apart op voorraad. Zeven losse onderdelen, zodat een bot mes geen nieuwe aankoop is.</p>
+          </div>
+          <div class="vp-kaart" data-vp="aantal">
+            <p class="vp-cijfer">27<small>apparaten</small></p>
+            <p class="vp-label">Eén voor elke plek, niet één voor alles</p>
+            <p class="vp-tekst">Verdeeld over vijf zones — kruin, gezicht, neus, lichaam en schaamstreek. Geen universele trimmer die overal half werkt.</p>
+          </div>
+          <div class="vp-kaart" data-vp="prijs">
+            <p class="vp-cijfer">€89,95<small>maximaal</small></p>
+            <p class="vp-label">Er staat niets duurders in de winkel</p>
+            <p class="vp-tekst">De hele lijn ligt tussen €16,95 en €89,95, dus je weet vooraf waar het plafond ligt. Geen apparaat dat pas boven de honderd euro interessant wordt.</p>
+          </div>
+          <div class="vp-kaart" data-vp="mens">
+            <p class="vp-cijfer">Yvonne</p>
+            <p class="vp-label">Geen ticketnummer maar een naam</p>
+            <p class="vp-tekst">Bij een vraag krijg je meestal Yvonne. Ze staat met naam en functie op onze over-pagina, samen met de rest van het team.</p>
+          </div>
+        </div>
+
+        <p class="vp-slot"><svg><use href="#chkc"/></svg>Alle vier zijn na te rekenen: <b>in de winkel, op de productpagina en op de over-pagina.</b></p>
 
       </div></section></div></div>
       </div>

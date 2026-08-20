@@ -52,6 +52,8 @@ const BLOKKEN = [
     desk: '<section class="zf"><div class="zf-in">', mob: '<section class="zf zf-m"><div class="zf-in">' },
   { id: 'blok6', naam: 'Blok 6 — Het koopblok van de bundel', bestand: 'blok-06-koopblok.html', tag: 'section',
     desk: '<section class="kb"><div class="kb-in">', mob: '<section class="kb kb-m"><div class="kb-in">' },
+  { id: 'blok7', naam: 'Blok 7 — De waardeproposities', bestand: 'blok-07-proposities.html', tag: 'section',
+    desk: '<section class="vp"><div class="vp-in">', mob: '<section class="vp vp-m"><div class="vp-in">' },
 ];
 
 // blok 1 en blok 2 delen drie Trustpilot-klassen met verschillende waarden.
