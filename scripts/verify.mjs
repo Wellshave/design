@@ -64,7 +64,7 @@ check('framewissel loopt monotoon mee', rows.every((r, i) => i === 0 || r.frame 
 check('frame 0 bij start, laatste frame bij einde',
   rows[0].frame === 0 && rows.at(-1).frame === frames - 1);
 // de drie hoofdstukken zijn de drie 12-secondensegmenten van de 36s drive
-const expectChapter = p => p < 1 / 3 ? 'DE TRIM' : p < 2 / 3 ? 'ONDER DE DOUCHE' : 'SKINSAFE';
+const expectChapter = p => p < 1 / 3 ? 'DE TRIM' : p < 2 / 3 ? 'ONDER DE DOUCHE' : 'LED PRECISIE';
 check('hoofdstukrail volgt de segmentgrenzen',
   rows.every(r => r.chapter === expectChapter(r.p)),
   rows.map(r => r.chapter).join(' / '));

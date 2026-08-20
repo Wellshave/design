@@ -10,7 +10,7 @@
   const CHAPTERS = [
     { t: 0,     no: '01', title: 'DE TRIM',         txt: 'Droog trimmen — 6600 RPM door de dikste haren.' },
     { t: 1 / 3, no: '02', title: 'ONDER DE DOUCHE', txt: 'IPX7 — de hele body mag gewoon onder water.' },
-    { t: 2 / 3, no: '03', title: 'SKINSAFE',        txt: 'Foil shaver kop werkt af. Geen sneetjes, geen ingegroeide haren.' }
+    { t: 2 / 3, no: '03', title: 'LED PRECISIE',    txt: 'Het LED-precisielicht laat elk haartje zien, ook in de schaduw.' }
   ];
 
   const $  = (s, r = document) => r.querySelector(s);
@@ -153,8 +153,8 @@
   /* ---------- 6. DESIGN MACRO STILLS ---------- */
 
   const MACROS = [
-    { file: 'macro-head.jpg',  t: 'DE KERAMISCHE KOP', s: 'SkinSafe mesjes die je huid nooit blootleggen.' },
-    { file: 'macro-led.jpg',   t: 'DE LED-RING',       s: 'Laat elk haartje zien, ook in de schaduw.' },
+    { file: 'macro-head.jpg',  t: 'DE SKINSAFE KOP',   s: 'Keramische mesjes die je huid nooit blootleggen.' },
+    { file: 'macro-led.jpg',   t: 'HET LED-LICHT',     s: 'Schijnt vooruit op de zone waar je bezig bent.' },
     { file: 'macro-foil.jpg',  t: 'DE FOIL SHAVER',    s: 'Werkt af tot strak glad, zonder mesje op je huid.' }
   ];
   $('#designGrid').innerHTML = MACROS.map(m => `
@@ -176,10 +176,10 @@
       desc: 'De upgrade van de Groom Guard. Werkt na het trimmen af tot strak glad — zonder de sneetjes van een gewoon mesje.',
       spec: { 'KOP': 'Foil shaver', 'GEBRUIK': 'Afwerken na de trim', 'RESULTAAT': 'Glad, geen ingegroeide haren' }
     },
-    precisie: {
-      img: 'assets/config-precisie.jpg', accent: '#ff7a45',
-      desc: 'Smalle kop voor randen en kleine zones. Voor waar de grote kop niet bij komt.',
-      spec: { 'KOP': 'Precisie', 'GEBRUIK': 'Randen en details', 'RESULTAAT': 'Strakke lijnen' }
+    kammen: {
+      img: 'assets/config-kammen.jpg', accent: '#ff7a45',
+      desc: 'Vier opzetkammen, van 0,5 tot 4 mm. Kies je lengte en houd hem over je hele lichaam gelijk.',
+      spec: { 'OPZETSTUK': '4 kammen, 0,5–4 mm', 'GEBRUIK': 'Op lengte trimmen', 'RESULTAAT': 'Overal dezelfde lengte' }
     }
   };
 
