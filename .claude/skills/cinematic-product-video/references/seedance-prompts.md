@@ -99,6 +99,36 @@ Behandel het daarom als een montageprobleem: zoek op de contactstrook het frame 
 omslaat, en kap het shot daarvoor af. Een korte, hard landende afsluiter is beter dan een lange
 met een gespiegeld logo. Meld de inkorting aan de gebruiker, met het alternatief erbij.
 
+### Een lampje verschijnt op de verkeerde plek
+
+Vraag je om een oplichtende LED, een display of een indicator zonder te zeggen waar die zit, dan
+verzint het model een locatie — of laat het halve apparaat gloeien. Dat is dodelijk voor een
+productfilm, want dan klopt je product niet meer.
+
+**Zoek eerst fysiek op waar het onderdeel zit.** De referentiefoto's zijn doorgaans 4000×4000;
+snijd het gebied uit en zoom in tot je het echt ziet:
+
+```bash
+ffmpeg -i referentie.png -vf "crop=1400:900:1450:800,scale=1000:-1" zoom.jpg
+```
+
+Bij de Flex Guard bleek de LED een klein matwit rechthoekig venstertje onderin de schuine
+uitsparing onder de snijkop, net boven het woordmerk, identiek bij alle drie de opzetstukken.
+Zonder inzoomen was het niet meer dan een lichte vlek.
+
+**Beschrijf daarna drie dingen, in deze volgorde:** waar het venster zit ten opzichte van
+herkenbare onderdelen, dat het de enige lichtbron op het product is, en waar het licht heen
+gaat. Som vervolgens expliciet op wat **niet** mag oplichten — dat laatste doet het meeste werk:
+
+> That window is the only light source on the product and the only place light comes out of it.
+> […] Nothing else on the housing lights up: no glow from the control panel, no illuminated ring
+> around the button, no glowing digits, no light running along the edges of the body, and no
+> light coming from the blade itself.
+
+Dezelfde aanpak werkt voor elk onderdeel dat op een vaste plek hoort te zitten: een knop die
+indrukt, een klepje dat opengaat, een indicator die verspringt. Eerst opzoeken, dan positie
+beschrijven, dan opsommen wat er niet mag gebeuren.
+
 ### Detailgeometrie wordt herzien
 
 Een vlakke foilkop met twee stroken werd een gebogen geperforeerde gaastrommel. Mooi beeld,
@@ -115,7 +145,7 @@ en laat de gebruiker beslissen of het opnieuw moet.
 Een batch van zes shots op 1080p duurde ongeveer tien minuten. Herkansingen kunnen langer duren
 dan de eerste ronde.
 
-## De zes prompts uit de Flex Guard-film
+## De zeven prompts uit de Flex Guard-film
 
 Bewaard als werkend vertrekpunt. Vervang het onderwerp, houd de structuur.
 
@@ -189,4 +219,23 @@ Bewaard als werkend vertrekpunt. Vervang het onderwerp, houd de structuur.
 > the light, and the digital display glows. The body itself stays matte black, never turning
 > gold or bronze. Background deep black with soft haze and a faint reflection on the surface
 > below. Anamorphic 35mm lens look, shallow depth of field, fine film grain. No text, no
+> captions, no subtitles, no added logos, no hands, no people.
+
+**7 — Een feature die oplicht (LED-lamp)**
+> Extreme macro commercial shot of the matte black body groomer from the reference, framed
+> tightly on the front face of the body just below its cutting head. Set into the bottom of the
+> recessed sloping channel directly beneath the cutting head, immediately above the vertical
+> WELLSHAVE wordmark, sits one small frosted white rectangular LED window. That window is the
+> only light source on the product and the only place light comes out of it. During the shot the
+> LED switches on and throws a soft warm white beam upward and forward past the cutting blade
+> onto the dark surface in front of the head, so a small pool of light opens up ahead of the
+> blade while the rest of the frame stays in near darkness. Nothing else on the housing lights
+> up: no glow from the control panel, no illuminated ring around the button, no glowing digits,
+> no light running along the edges of the body, and no light coming from the blade itself. The
+> camera drifts in at a steady moderate continuous pace, keeping the lit LED window and the
+> blade above it in frame. The housing stays matte black and dark gunmetal grey for the entire
+> shot and never turns gold, bronze or champagne. Deep crushed blacks, one cool rim light
+> tracing the silhouette, faint haze in the air catching the LED beam. Macro lens, very shallow
+> depth of field, anamorphic look, fine film grain. Product geometry, the exact position and
+> shape of the LED window, and the wordmark must match the reference exactly. No text, no
 > captions, no subtitles, no added logos, no hands, no people.

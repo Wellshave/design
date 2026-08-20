@@ -16,11 +16,17 @@ is*.
 | 2 | **Materiaal** — oppervlak vult het frame, licht schuift over de textuur | Kwaliteit voelbaar maken |
 | 3 | **Bediening** — de knop, het lampje, het display dat aanspringt | Het tastbare moment |
 | 4 | **Het werkende deel** — mesjes, kam, gaas, in beweging | De feature, zonder erover te praten |
-| 5 | **De reeks** — opzetstukken of onderdelen die één voor één door het licht gaan | Wat je allemaal krijgt |
-| 6 | **Hero** — het hele product opnieuw, nu vol in het licht | Ademhalen voor de landing |
-| 7 | **Eindshot** — product met vrije ruimte ernaast | Merknaam en claim landen |
+| 5 | **Wat oplicht** — een LED, display of indicator die aanspringt in het donker | Techniek zichtbaar maken |
+| 6 | **De reeks** — opzetstukken of onderdelen die één voor één door het licht gaan | Wat je allemaal krijgt |
+| 7 | **Hero** — het hele product opnieuw, nu vol in het licht | Ademhalen voor de landing |
+| 8 | **Eindshot** — product met vrije ruimte ernaast | Merknaam en claim landen |
 
-Beat 2 tot en met 5 zijn inwisselbaar en uitbreidbaar. Beat 1, 6 en 7 liggen vast.
+Beat 2 tot en met 6 zijn inwisselbaar en uitbreidbaar; laat er gerust een weg als het product hem
+niet heeft. Beat 1, 7 en 8 liggen vast.
+
+Beat 5 verdient een eigen plek omdat een lampje dat in het donker aanspringt het enige moment is
+waarop de film techniek *toont* in plaats van beweert. Zie `seedance-prompts.md` over het
+lokaliseren van zo'n onderdeel voordat je het prompt.
 
 ## Waar het brede shot hoort
 
@@ -31,7 +37,8 @@ totaalbeeld even kwijt, en dat brede shot geeft het terug op het moment dat het 
 
 ## Tempo
 
-Vijf seconden per shot bij 24 fps. Zes shots is dan precies dertig seconden.
+Vijf seconden per shot bij 24 fps. Zes shots is dan precies dertig seconden; acht shots komt met
+een ingekorte opening en afsluiter op ruim vijfendertig uit.
 
 Het is verleidelijk om cinematisch te vertalen naar traag. Doe dat niet. Een shot waarin de
 camera stilvalt voelt in een commercial als een haperende video, niet als rust. Schrijf in de
@@ -49,6 +56,7 @@ Harde cuts, geen dissolves. Een dissolve tussen twee macro's leest als een diavo
 | Materiaal | Zijwaartse slider langs het oppervlak, ondiepe scherptediepte |
 | Bediening | Kleine push, dan één snelle rack focus naar het detail |
 | Werkend deel | Meelopen met de lengte van het onderdeel, dan focusverschuiving naar de rand |
+| Wat oplicht | Trage drift naar binnen, camera stil genoeg om het aanspringen te laten landen |
 | Reeks | Lage glide langs de onderdelen, elk vangt om beurten het licht |
 | Hero | Trage orbit of stilstaand met bewegend licht |
 | Eindshot | Rechte pull-back met minimale stijging, **niet** orbiten |
