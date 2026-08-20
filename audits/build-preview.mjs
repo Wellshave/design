@@ -88,9 +88,9 @@ const blocks = [
   { id: 'blok4', naam: 'Blok 4 — Het mechanisme',
     desk: element(mech, '<section class="mc">', 'section'),
     mob:  element(mech, '<section class="mc mc-m">', 'section') },
-  { id: 'blok5', naam: 'Blok 5 — De waardeproposities',
-    desk: element(usps, '<section class="vp"><div class="vp-in">', 'section'),
-    mob:  element(usps, '<section class="vp vp-m"><div class="vp-in">', 'section') },
+  { id: 'blok5', naam: 'Blok 5 — Waar wil je trimmen?',
+    desk: element(usps, '<section class="zf"><div class="zf-in">', 'section'),
+    mob:  element(usps, '<section class="zf zf-m"><div class="zf-in">', 'section') },
 ];
 
 const css = `:root{--bg:#FBFAF9;--surface:#fff;--fg:#1A1A1A;--fg-soft:#6B6560;--rule:#E6E1DC;--gold:#BC813E}

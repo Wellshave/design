@@ -87,88 +87,182 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
 .stage{display:grid;gap:30px;margin:0 0 10px}
 
 /* ══ MOCKUP — vaste merkkleuren in beide thema's ══ */
-.vp{font-family:"Montserrat",sans-serif;background:#FFFFFF;color:#111111;padding:64px 40px}
-.vp-in{max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:36px;min-width:0}
-.vp p{max-width:none;margin:0}
-.vp p.vp-note{max-width:46ch}
+.zf{font-family:"Montserrat",sans-serif;color:#111111;padding:60px 44px 48px;
+  background:linear-gradient(160deg,#FFFDFA 0%,#FBF6EE 46%,#F6EEE0 100%)}
+.zf-in{max-width:1300px;margin:0 auto;display:flex;flex-direction:column;gap:30px;min-width:0}
+.zf p{max-width:none;margin:0}
 
-.vp-top{display:flex;align-items:flex-end;justify-content:space-between;gap:56px}
-.vp-eyebrow{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
-  color:rgba(17,17,17,.4)}
-.vp-h2{font-size:35px;line-height:118%;font-weight:600;letter-spacing:-.025em;margin:12px 0 0;
-  max-width:26ch;text-wrap:balance}
-.vp-note{font-size:15px;line-height:158%;color:rgba(17,17,17,.6);flex:none;padding-bottom:4px}
+/* ── kop ── */
+.zf-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,26em) auto;
+  align-items:start;gap:44px}
+.zf-eyebrow{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:#BC813E;margin-bottom:14px !important}
+.zf-h2{font-size:44px;font-weight:700;letter-spacing:-.03em;line-height:106%;margin:0 0 10px}
+.zf-sub{font-size:20px;font-weight:500;color:rgba(17,17,17,.72)}
+.zf-sub b{color:#BC813E;font-weight:700}
+.zf-note{font-size:15px;line-height:165%;color:rgba(17,17,17,.6);padding-top:6px}
+.zf-hint{display:flex;align-items:center;gap:13px;padding-top:4px}
+.zf-hintring{width:52px;height:52px;flex:none;border-radius:50%;border:1px solid rgba(188,129,62,.4);
+  display:flex;align-items:center;justify-content:center;color:#BC813E;background:rgba(255,255,255,.6)}
+.zf-hintring svg{width:22px;height:22px}
+.zf-hint em{font-style:normal;font-size:11.5px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:rgba(17,17,17,.72);line-height:150%}
 
-/* links de figuur met de vier zones, rechts wat er in die zone waar is */
-.vp-body{display:grid;grid-template-columns:352px minmax(0,1fr);gap:26px;align-items:stretch}
-.vp-fig{background:#F5F1EA;border-radius:14px;padding:24px;position:relative;
-  display:flex;flex-direction:column;gap:18px;min-width:0}
-.vp-silhouet{position:relative;flex:1;display:flex;align-items:center;justify-content:center;
-  min-height:0}
-.vp-silhouet svg{width:auto;height:100%;max-height:212px;max-width:100%;display:block;overflow:visible}
-.vp-lijn{fill:none;stroke:rgba(17,17,17,.28);stroke-width:2;stroke-linecap:round;
-  stroke-linejoin:round}
-.vp-punt{cursor:pointer}
-.vp-punt:focus{outline:none}
-.vp-punt:focus-visible circle.raak{fill:none;stroke:#111;stroke-width:1.6}
-.vp-punt circle.raak{fill:transparent;stroke:none}
-.vp-punt circle.stip{fill:#FFFFFF;stroke:rgba(188,129,62,.55);stroke-width:2;
-  transition:fill .35s ease,stroke .35s ease,r .35s ease}
-.vp-punt.aan circle.stip{fill:#BC813E;stroke:#BC813E;r:8}
-.vp-punt circle.gloed{fill:none;stroke:#BC813E;stroke-width:1.5;opacity:0;
-  transition:opacity .45s ease,r .45s ease}
-.vp-punt.aan circle.gloed{opacity:.3}
+/* ── romp: figuur links, kaart rechts ── */
+.zf-body{display:grid;grid-template-columns:minmax(0,0.86fr) minmax(0,1fr);gap:26px;align-items:stretch}
 
-.vp-keuze{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.vp-tab{font-family:inherit;font-size:12px;font-weight:600;letter-spacing:.02em;
-  border:1px solid rgba(17,17,17,.14);background:#fff;color:rgba(17,17,17,.62);
-  border-radius:100px;padding:8px 14px;cursor:pointer;
+.zf-fig{position:relative;border-radius:18px;overflow:hidden;background:#0B0B0A;
+  box-shadow:0 30px 60px -40px rgba(17,17,17,.6)}
+.zf-fig::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(105deg,rgba(11,11,10,.86) 0%,rgba(11,11,10,.42) 42%,rgba(11,11,10,.1) 70%,rgba(188,129,62,.18) 100%)}
+.zf-foto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:52% 12%}
+.zf-merk{position:absolute;right:-4%;top:20%;width:46%;opacity:.13;filter:brightness(0) invert(1);
+  pointer-events:none}
+.zf-vlak{width:100%;aspect-ratio:1/1;display:block}
+.zf-lijnen{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
+.zf-lijnen line{stroke:rgba(245,209,138,.5);stroke-width:.18;transition:stroke .35s ease}
+.zf-lijnen line.aan{stroke:#F5D18A}
+
+.zf-pin{position:absolute;z-index:3;width:30px;height:30px;margin:-15px 0 0 -15px;padding:0;
+  border:0;background:none;cursor:pointer;border-radius:50%}
+.zf-pin i{position:absolute;inset:9px;border-radius:50%;background:#FFFFFF;display:block;
+  box-shadow:0 0 0 4px rgba(245,209,138,.22);transition:inset .3s ease,box-shadow .3s ease,background .3s ease}
+.zf-pin.aan i{inset:6px;background:#F5D18A;
+  box-shadow:0 0 0 6px rgba(245,209,138,.28),0 0 34px 10px rgba(245,209,138,.45)}
+.zf-pin:focus-visible{outline:2px solid #F5D18A;outline-offset:3px}
+
+.zf-label{position:absolute;z-index:3;transform:translateY(-50%);
+  font-family:inherit;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.9);background:rgba(11,11,10,.55);cursor:pointer;
+  border:1px solid rgba(255,255,255,.28);border-radius:100px;padding:9px 17px;white-space:nowrap;
+  backdrop-filter:blur(6px);transition:background-color .3s ease,color .3s ease,border-color .3s ease}
+.zf-label:hover{border-color:rgba(245,209,138,.7);color:#fff}
+.zf-label.aan{background:#F5D18A;border-color:#F5D18A;color:#111}
+.zf-fighint{position:absolute;left:22px;bottom:18px;z-index:3;display:flex;align-items:center;gap:9px;
+  font-size:12.5px;color:rgba(255,255,255,.66)}
+.zf-fighint svg{width:16px;height:16px;color:#F5D18A;flex:none}
+
+/* ── kaart ── */
+.zf-kaart{background:rgba(255,255,255,.72);border:1px solid rgba(188,129,62,.16);border-radius:18px;
+  padding:32px 34px;display:flex;min-width:0}
+.zf-paneel{display:flex;flex-direction:column;gap:14px;flex:1;min-width:0;
+  animation:zf-in .45s ease both}
+.zf-paneel[hidden]{display:none}
+@keyframes zf-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.zf-kop{display:flex;align-items:baseline;justify-content:space-between;gap:20px}
+.zf-match{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#BC813E}
+.zf-aantal{font-size:12.5px;color:rgba(17,17,17,.45);white-space:nowrap}
+.zf-naam{font-size:31px;font-weight:700;letter-spacing:-.028em;margin:0}
+.zf-claim{font-size:15.5px;color:rgba(17,17,17,.6)}
+.zf-mid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.06fr);gap:22px;align-items:center;
+  margin:4px 0}
+.zf-shot{position:relative;display:flex;align-items:center;justify-content:center;padding:6px 0}
+.zf-shot > img{width:100%;max-width:250px;height:auto;object-fit:contain;
+  filter:drop-shadow(0 22px 26px rgba(17,17,17,.22))}
+.zf-badge{position:absolute;left:0;bottom:12px;background:#F5D18A;color:#111;
+  font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  border-radius:100px;padding:8px 15px;white-space:nowrap}
+.zf-feiten{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:17px}
+.zf-feiten li{display:flex;gap:14px;align-items:center;font-size:14px;line-height:148%;
+  color:rgba(17,17,17,.72);min-width:0}
+.zf-well{width:42px;height:42px;flex:none;border-radius:50%;border:1px solid rgba(188,129,62,.35);
+  display:flex;align-items:center;justify-content:center;color:#BC813E}
+.zf-well svg{width:20px;height:20px}
+.zf-prijs{display:flex;align-items:baseline;gap:10px;font-size:15px;color:rgba(17,17,17,.5)}
+.zf-prijs b{font-size:27px;font-weight:700;color:#111;letter-spacing:-.02em}
+.zf-cta{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  background:#111;color:#fff;text-decoration:none;border-radius:100px;padding:9px 9px 9px 26px;
+  font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.zf-cta span{display:flex;align-items:center;justify-content:center;flex:none;
+  width:38px;height:38px;border-radius:50%;background:#F5D18A;color:#111}
+.zf-cta span svg{width:18px;height:18px}
+.zf-alle{align-self:center;display:inline-flex;align-items:center;gap:9px;font-size:13px;
+  color:rgba(17,17,17,.62);text-decoration:none;border-bottom:1px solid rgba(17,17,17,.25);
+  padding-bottom:3px}
+.zf-alle svg{width:15px;height:15px}
+
+/* ── garantiestrip ── */
+.zf-strip{background:rgba(255,255,255,.72);border:1px solid rgba(188,129,62,.16);border-radius:16px;
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:center;padding:18px 10px}
+.zf-strip > div{display:flex;align-items:center;justify-content:center;gap:14px;
+  font-size:14px;color:rgba(17,17,17,.66);padding:2px 14px}
+.zf-strip > div + div{border-left:1px solid rgba(17,17,17,.1)}
+.zf-strip b{font-weight:600;color:#111}
+.zf-zegel{width:38px;height:38px;flex:none;border-radius:50%;border:1px solid rgba(188,129,62,.4);
+  display:flex;align-items:center;justify-content:center;color:#BC813E;
+  font-size:11px;font-weight:700;letter-spacing:.02em}
+.zf-zegel svg{width:19px;height:19px}
+
+/* ── mobiel ── */
+.zf-m{padding:34px 16px 30px}
+.zf-m .zf-in{gap:18px}
+.zf-m .zf-top{grid-template-columns:1fr;gap:10px}
+.zf-m .zf-h2{font-size:33px}
+.zf-m .zf-sub{font-size:18px}
+.zf-m .zf-note{font-size:14px;padding-top:0}
+.zf-m .zf-hint{gap:10px;padding-top:2px}
+.zf-m .zf-hintring{width:30px;height:30px;border:0;background:none}
+.zf-m .zf-hintring svg{width:20px;height:20px}
+.zf-m .zf-hint em{font-size:14px;font-weight:500;letter-spacing:0;text-transform:none;
+  color:rgba(17,17,17,.72)}
+.zf-chips{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.zf-chip{display:flex;align-items:center;gap:11px;font-family:inherit;text-align:left;
+  font-size:11.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:rgba(17,17,17,.8);
+  background:rgba(255,255,255,.8);border:1px solid rgba(188,129,62,.2);border-radius:14px;
+  padding:14px 14px;cursor:pointer;min-width:0;
   transition:background-color .3s ease,border-color .3s ease,color .3s ease}
-.vp-tab:hover{border-color:rgba(188,129,62,.5);color:#111}
-.vp-tab.aan{background:#111;border-color:#111;color:#fff}
+.zf-thumb{width:34px;height:34px;flex:none;border-radius:50%;display:block;
+  background-image:url("__PORTRAIT__");background-repeat:no-repeat;
+  border:1px solid rgba(17,17,17,.12)}
+.zf-chip.aan .zf-thumb{border-color:rgba(17,17,17,.28)}
+.zf-chip span{min-width:0;overflow:hidden;text-overflow:ellipsis}
+.zf-chip i{margin-left:auto;display:none;width:22px;height:22px;flex:none;border-radius:50%;
+  background:#111;color:#F5D18A;align-items:center;justify-content:center}
+.zf-chip i svg{width:12px;height:12px}
+.zf-chip.aan i svg{color:#F5D18A}
+.zf-chip.aan{background:#F5D18A;border-color:#F5D18A;color:#111}
+.zf-chip.aan i{display:flex}
+.zf-chip.aan i svg{color:#F5D18A}
+.zf-m .zf-body{grid-template-columns:1fr;gap:0}
+.zf-m .zf-fig{border-radius:16px}
+.zf-m .zf-vlak{aspect-ratio:1/.86}
+.zf-m .zf-foto{object-position:52% 6%}
+.zf-m .zf-label{display:none}
+.zf-m .zf-lijnen{display:none}
+.zf-m .zf-merk{width:60%;right:-10%;top:14%}
+.zf-m .zf-pin{width:26px;height:26px;margin:-13px 0 0 -13px}
+.zf-m .zf-pin i{inset:8px}
+.zf-m .zf-pin:not(.aan) i{background:rgba(255,255,255,.55);box-shadow:none}
+.zf-actief{position:absolute;left:16px;bottom:46px;z-index:3;background:#F5D18A;color:#111;
+  border-radius:100px;padding:9px 16px;font-size:11.5px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase}
+.zf-m .zf-fighint{left:16px;bottom:16px;font-size:12px}
+.zf-pijl{display:flex;justify-content:center;margin:-15px 0 -15px;position:relative;z-index:4}
+.zf-pijl span{width:34px;height:34px;border-radius:50%;background:#F5D18A;color:#111;
+  display:flex;align-items:center;justify-content:center}
+.zf-pijl svg{width:16px;height:16px}
+.zf-m .zf-kaart{padding:22px 20px;margin-top:14px}
+.zf-m .zf-naam{font-size:26px}
+.zf-m .zf-claim{font-size:14.5px}
+.zf-m .zf-mid{grid-template-columns:1fr;gap:14px}
+.zf-m .zf-shot > img{max-width:210px}
+.zf-m .zf-feiten{flex-direction:row;gap:0}
+.zf-m .zf-feiten li{flex-direction:column;text-align:center;gap:8px;flex:1;min-width:0;
+  font-size:12.5px;line-height:135%;padding:0 6px}
+.zf-m .zf-feiten li + li{border-left:1px solid rgba(17,17,17,.1)}
+.zf-m .zf-well{width:34px;height:34px}
+.zf-m .zf-well svg{width:17px;height:17px}
+.zf-m .zf-prijs{justify-content:center}
+.zf-m .zf-cta{justify-content:center;padding:9px 9px 9px 20px;font-size:12.5px}
+.zf-m .zf-alle{font-size:13px}
+.zf-m .zf-strip{padding:14px 4px}
+.zf-m .zf-strip > div{flex-direction:column;gap:8px;text-align:center;font-size:10.5px;
+  font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:2px 4px;color:rgba(17,17,17,.72)}
+.zf-m .zf-strip b{display:block}
 
-.vp-panelen{display:flex;min-width:0}
-.vp-paneel{background:#F5F1EA;border-radius:14px;padding:30px 32px;flex:1;
-  display:flex;flex-direction:column;justify-content:center;gap:18px;min-width:0;
-  animation:vp-in .45s ease both}
-.vp-paneel[hidden]{display:none}
-@keyframes vp-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-.vp-zone{font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
-  color:#BC813E}
-.vp-appnaam{font-size:23px;font-weight:600;letter-spacing:-.022em;margin:0}
-.vp-appnaam span{display:block;font-size:12.5px;font-weight:500;letter-spacing:0;
-  color:rgba(17,17,17,.5);margin-top:5px}
-.vp-punten{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
-.vp-punten li{display:flex;gap:13px;font-size:14px;line-height:152%;min-width:0}
-.vp-punten svg{width:18px;height:18px;flex:none;color:#BC813E;margin-top:2px}
-.vp-punten b{font-weight:600;color:#111}
-.vp-punten span{color:rgba(17,17,17,.64)}
-
-.vp-altijd{display:flex;flex-wrap:wrap;align-items:center;gap:10px 26px;
-  border-top:1px solid rgba(17,17,17,.1);padding-top:22px;
-  font-size:13.5px;color:rgba(17,17,17,.62)}
-.vp-altijd b{display:block;font-size:10.5px;font-weight:700;letter-spacing:.16em;
-  text-transform:uppercase;color:rgba(17,17,17,.4);width:100%}
-.vp-altijd span{display:inline-flex;align-items:center;gap:9px}
-.vp-altijd svg{width:16px;height:16px;flex:none;color:#BC813E}
-.vp-altijd em{font-style:normal;font-weight:600;color:#111}
-
-/* mobiel */
-.vp-m{padding:40px 18px}
-.vp-m .vp-in{gap:24px}
-.vp-m .vp-top{flex-direction:column;align-items:flex-start;gap:14px}
-.vp-m .vp-h2{font-size:26px;max-width:none;margin-top:10px}
-.vp-m p.vp-note{font-size:14px;max-width:none;padding-bottom:0}
-.vp-m .vp-body{grid-template-columns:1fr;gap:12px}
-.vp-m .vp-fig{flex-direction:row;align-items:center;gap:16px;padding:16px}
-.vp-m .vp-silhouet{flex:none;width:104px}
-.vp-m .vp-silhouet svg{max-height:148px}
-.vp-m .vp-keuze{flex:1;grid-template-columns:1fr;gap:6px}
-.vp-m .vp-tab{text-align:left;font-size:12.5px;padding:9px 13px}
-.vp-m .vp-paneel{padding:20px 18px;gap:15px;justify-content:flex-start}
-.vp-m .vp-appnaam{font-size:19px}
-.vp-m .vp-punten li{font-size:13px;gap:11px}
-.vp-m .vp-altijd{gap:10px 18px;font-size:12.5px;padding-top:18px}
+@media (prefers-reduced-motion: reduce){
+  .zf-paneel{animation:none}
+}
 
 /* ── annotaties ── */
 .anno{background:var(--surface);border:1px solid var(--rule);border-left:2px solid var(--gold-dark-100);
@@ -208,13 +302,21 @@ footer p{max-width:none}
 <symbol id="guarantee" viewBox="0 0 24 24"><circle cx="12" cy="9.6" r="6.4" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8.3 15.1L7 21.6l5-2.4 5 2.4-1.3-6.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
 <symbol id="truck" viewBox="0 0 24 24"><path d="M1.9 6.2h12.2v9.4H1.9zM14.1 9.7h3.9l3.1 3.1v2.8h-7z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="6.6" cy="18" r="1.9" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="17.3" cy="18" r="1.9" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
 <symbol id="chkc" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10.1" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M7.7 12.3l2.9 2.9 5.7-6.1" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="tik" viewBox="0 0 24 24"><path d="M9 11.4V5.6a1.8 1.8 0 013.6 0v5.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.6 10.8V9.4a1.7 1.7 0 013.4 0v1.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 11V10a1.7 1.7 0 013.4 0v4.6c0 3.4-2.4 6.2-5.8 6.2h-1.4c-2 0-3.4-1-4.4-2.6l-2.6-4.3a1.7 1.7 0 012.7-2l1.1 1.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="gauge" viewBox="0 0 24 24"><path d="M3.6 17.4a9.4 9.4 0 1116.8 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 16.4l4-5.1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="17.2" r="1.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="parts" viewBox="0 0 24 24"><rect x="3.4" y="4.2" width="6.2" height="15.6" rx="2.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><rect x="14.4" y="4.2" width="6.2" height="15.6" rx="2.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.4 8.6h6.2M14.4 8.6h6.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="drop" viewBox="0 0 24 24"><path d="M12 2.9s6 6.4 6 10.4a6 6 0 01-12 0c0-4 6-10.4 6-10.4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.3 14.1a2.9 2.9 0 002.9 2.9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="power" viewBox="0 0 24 24"><rect x="2.6" y="7.2" width="15.4" height="9.6" rx="2.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 10.6v2.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.6 9.6l-2.2 3.2h2.8l-2 2.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="scissors" viewBox="0 0 24 24"><circle cx="6" cy="17.6" r="2.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="6.4" r="2.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.3 7.8L20 17.2M8.3 16.2L20 6.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="nose" viewBox="0 0 24 24"><path d="M12.6 3.4v5.4l2.8 5.1c.5 1-.1 2.1-1.2 2.1h-1.1c0 1.8-1.3 3.2-3.1 3.2-1.7 0-3-1.2-3.2-2.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.6 8.4c1.5 0 2.7 1.2 2.7 2.7 0 2-1.2 2.4-1.2 4.1 0 1.4.4 2 .4 3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="dwn" viewBox="0 0 24 24"><path d="M12 4.6v14.2M6.2 13.4L12 19.2l5.8-5.8" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 <symbol id="arw" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </defs></svg><div class="wrap">
 
 <header class="masthead">
-  <p class="eyebrow">Homepage-redesign · blok 5 van 12 · versie 2</p>
+  <p class="eyebrow">Homepage-redesign · blok 5 van 12 · versie 3</p>
   <h1>De waardeproposities</h1>
-  <p class="dek">Je had gelijk: versie 1 beschreef één product. Drie van de vier kaarten waren Groom Guard-specs met een voetnoot eronder die de reikwijdte moest goedpraten. Dit is dezelfde fout als bij SkinSafe in blok 1, en ik liep er alsnog in. Deze versie draait het om: de belofte staat vast, het bewijs verspringt per zone.</p>
+  <p class="dek">Versie 3 neemt jouw ontwerp over: geen bewering maar een vraag — "Waar wil je trimmen?" — met de zones op je eigen hero-foto en per zone het apparaat dat ervoor gemaakt is. Eén regel uit het aangeleverde ontwerp klopte niet en is rechtgezet: de "vanaf"-prijs stond bij het verkeerde product.</p>
   <p class="byline">Ontwerp — nog niets live. Akkoord → dan pas Shopify.</p>
   <div class="progress" aria-hidden="true">
     <i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
@@ -222,112 +324,150 @@ footer p{max-width:none}
   <p class="progress-cap">Blok 5 in ontwerp · 7 blokken volgen</p>
 </header>
 
+<div class="callout fix">
+  <h3 style="margin-top:0">Ik neem je ontwerp over — en één ding erin klopte niet</h3>
+  <p><b>Jouw versie is beter dan de mijne, en om een reden die het waard is om vast te leggen.</b> Mijn versie 2 stelde een bewering: "elk apparaat is gemaakt voor één plek". Jouw versie stelt een vraag: <b>"Waar wil je trimmen?"</b> Dat is hetzelfde inzicht, maar dan vanaf de kant van de bezoeker. Het blok is daarmee geen bewijsblok meer maar een keuzehulp, en dat is precies wat het lek in de audit vraagt: 3,1% legt iets in de winkelwagen, dus mensen weten niet wát ze moeten kiezen.</p>
+  <p><b>De prijs stond verkeerd.</b> In het aangeleverde ontwerp staat "Vanaf €16,95" onder de Neustrimmer 4in1 Ultra. €16,95 is de Neustrimmer Basic — de goedkoopste van de acht in die zone. De Ultra zelf kost €32,95. Dat is precies het soort regel dat één keer nagekeken wordt en daarna je hele pagina verdacht maakt. Op de kaart staat nu de prijs van het getoonde apparaat; de "vanaf" is verhuisd naar de regel eronder, waar hij over de hele zone gaat: <em>"Bekijk alle 8 producten voor neus &amp; oren — vanaf €16,95."</em></p>
+  <p style="margin-bottom:0"><b>De rest is één op één overgenomen:</b> de donkere figuur met hotspots links, de lichte kaart met beste match rechts, de zwarte knop met de gouden pijl, de garantiestrip eronder, en op mobiel de vier zoneknoppen boven de foto met het pijltje naar de kaart.</p>
+</div>
+
+<div class="callout fix">
+  <h3 style="margin-top:0">De figuur is je eigen foto, geen gerenderd model</h3>
+  <p>In jouw ontwerp staat een grijs, gegenereerd naaktmodel. Ik heb daar de foto voor in de plaats gezet die al op je hero staat: <b>dezelfde man, dezelfde badkamer, je eigen apparaat en etui in beeld.</b> Vier redenen: het is echt materiaal, het rijmt met blok 1, het scheelt een gegenereerd mens op je homepage, en de zones zitten er allemaal op — kruin, neus, kaaklijn en borst.</p>
+  <p style="margin-bottom:0"><b>Op mobiel kregen de vier zoneknoppen geen pictogram maar een uitsnede van diezelfde foto</b>, rond precies dezelfde hotspot. Ik heb eerst vier lijnpictogrammen getekend; op 26 pixels werden het een T-shirt, een smiley en twee krabbels. De uitsnede is meteen duidelijk en hij hoort bij het beeld ernaast.</p>
+</div>
+
 <div class="callout ask">
-  <h3 style="margin-top:0">Wat er mis was, en waarom het een patroon is</h3>
-  <p><b>Keramische messen, 120 minuten, IPX7 — dat zijn alle drie de Groom Guard.</b> Alleen de vierde, het losse vervangingsmes, gold over het hele assortiment. Ik had een reikwijdteregel eronder gezet om dat op te vangen, maar een voetnoot repareert geen blok dat zich als een specsheet van één apparaat leest.</p>
-  <p style="margin-bottom:0"><b>De oorzaak is een volgordefout.</b> Ik koos eerst kenmerken die goed klonken en probeerde ze daarna af te bakenen. Dat is precies andersom als wat we in blok 1 hadden afgesproken: eerst vaststellen wat over het hele assortiment waar is, en pas daarna de tekst schrijven. Toen ging het over SkinSafe, nu over dit — het is dezelfde fout, twee blokken later.</p>
-</div>
-
-<div class="callout fix">
-  <h3 style="margin-top:0">De omkering: de belofte staat vast, het bewijs verspringt</h3>
-  <p>De kop is nu wat wél over alles waar is: <b>"Elk apparaat is gemaakt voor één plek."</b> Dat is geen kenmerk maar een ontwerpprincipe, en het klopt van je bodygroomers tot je neustrimmers. Daaronder kies je een zone, en pas dán zie je specificaties — die van dát apparaat, met de naam erbij.</p>
-  <p><b>Zo hoeft geen enkele claim meer afgezwakt te worden.</b> "6.600 toeren en een LED-licht" staat onder Lichaam, waar het waar is. "7.000 toeren en SafeShave-mesjes" staat onder Neus &amp; oren. Niemand hoeft een voetnoot te lezen om te weten waar iets voor geldt, want de zone staat erboven.</p>
-  <p style="margin-bottom:0"><b>Wat over álles waar is, staat apart onderaan:</b> het mes of opzetstuk is los te vervangen vanaf €9,95, en 100 dagen proberen met twee jaar garantie. Twee regels, en ze gelden zonder uitzondering.</p>
-</div>
-
-<div class="callout fix">
-  <h3 style="margin-top:0">Het dynamische deel, en waarom een figuur en geen tabbladen</h3>
-  <p>Je merkte terecht op dat blok 5 het enige stilstaande blok was. Blok 2 heeft een lopende reviewband, blok 3 een hover die het monogram achter het product vandaan haalt, blok 4 een tijdlijn die doorschuift — en blok 5 was vier kaarten die niets doen.</p>
-  <p><b>Nu klik je op het lichaam zelf.</b> Vier punten op een profiel: kruin, neus, kaaklijn en borst. Dat is geen versiering — het zegt in één beeld wat de kop beweert, namelijk dat er per plek iets anders nodig is. Tabbladen hadden hetzelfde gedaan en niets betekend.</p>
-  <p style="margin-bottom:0"><b>Hij loopt vanzelf rond, tot jij iets kiest.</b> Elke zes seconden schuift hij een zone op, zodat iemand die niets doet toch alle vier ziet. Maar zodra je zelf een zone aanklikt, stopt dat definitief — dit is een keuzeblok, en iets dat onder je handen wegschuift terwijl je leest is hinderlijk in plaats van levendig. Bij bewegingsreductie staat hij van begin af aan stil. De punten zijn met de tab-toets te bereiken en met Enter te bedienen, en de tekstknoppen eronder doen hetzelfde voor wie liever leest dan mikt.</p>
+  <h3 style="margin-top:0">Wat de kaart per zone laat zien, en waar het wringt</h3>
+  <p><b>De vier apparaten zijn dezelfde als in blok 3</b>, zodat de twee blokken elkaar niet tegenspreken: Groom Guard PRO, The Gentleman Shaver, Tondeuse Elegant en de Neustrimmer 4in1 Ultra. Blok 3 noemt ze bestsellers, blok 5 noemt ze de beste match — dat is hetzelfde rijtje, andere reden.</p>
+  <p style="margin-bottom:0"><b>Daardoor lopen twee zones leeg op harde specificaties.</b> De Groom Guard PRO en de 4in1 Ultra hebben toerentallen, IPX7 en opzetstukken in hun productomschrijving staan. De Gentleman Shaver en de Tondeuse Elegant hebben dat niet: daar staat "krachtige lithium batterij", "LCD display", "precisiescherpe messen" en "krachtig motormechanisme" — bijvoeglijke naamwoorden, geen getallen. Ik heb niets bijverzonnen, dus die twee kaarten lezen zwakker dan de andere twee. Dat is op te lossen door de specificaties aan die twee productpagina's toe te voegen, of door de kaart te wisselen naar de Men Shaper Supreme (8.000 toeren, LCD met resterende tijd, IPX7) en de Head Shaver Deluxe (scheerkop met 7 mesjes, vijf opzetstukken). Jouw keuze.</p>
 </div>
 
 <h2>Het ontwerp</h2>
-<p class="sub">Links de figuur met de vier zones, rechts wat er in die zone waar is. Op mobiel staat de figuur naast de knoppen en het paneel eronder.</p>
+<p class="sub">Links de figuur met de vier zones, rechts het apparaat dat voor die zone gemaakt is. Op mobiel staan de zones als knoppen boven de foto en schuift de kaart eronder.</p>
 
 <div class="stage">
   <div>
     <p class="devicecap">Desktop — 1440px</p>
     <div class="scaler desk-scaler"><div class="inner">
-      <section class="vp"><div class="vp-in">
+      <section class="zf"><div class="zf-in">
 
-        <div class="vp-top">
+        <div class="zf-top">
           <div>
-            <p class="vp-eyebrow">Waarom dit anders werkt</p>
-            <h2 class="vp-h2">Elk apparaat is gemaakt voor één plek. Kies er een.</h2>
+            <p class="zf-eyebrow">Vind je perfecte tool</p>
+            <h2 class="zf-h2">Waar wil je trimmen?</h2>
+            <p class="zf-sub"><b>Kies de plek.</b> Wij tonen de beste match.</p>
           </div>
-          <p class="vp-note">Wat een bodygroomer moet kunnen is iets anders dan wat een neustrimmer moet kunnen. Daarom staat hieronder per zone wat er dáár waar is — met het apparaat erbij waar het vandaan komt.</p>
+          <p class="zf-note">Elk gebied vraagt om een andere kop, messtand en vorm. Selecteer een zone en ontdek welke tool ervoor gemaakt is.</p>
+          <div class="zf-hint"><span class="zf-hintring"><svg><use href="#tik"/></svg></span><em>Klik op<br>een zone</em></div>
         </div>
 
-        <div class="vp-body">
-          <div class="vp-fig">
-            <div class="vp-silhouet"><svg viewBox="0 0 200 252" role="img" aria-label="Zones op het lichaam">
-                <ellipse class="vp-lijn" cx="100" cy="58" rx="34" ry="42"/>
-                <path class="vp-lijn" d="M66 54 C59 51 58 64 65 66" opacity=".6"/>
-                <path class="vp-lijn" d="M134 54 C141 51 142 64 135 66" opacity=".6"/>
-                <path class="vp-lijn" d="M88 98 L88 118 M112 98 L112 118" opacity=".5"/>
-                <path class="vp-lijn" d="M88 116 C68 121 54 130 50 146 L44 222 C43 231 48 237 57 237
-                  L143 237 C152 237 157 231 156 222 L150 146 C146 130 132 121 112 116"/>
-                <path class="vp-lijn" d="M52 144 C40 154 34 180 33 216" opacity=".55"/>
-                <path class="vp-lijn" d="M148 144 C160 154 166 180 167 216" opacity=".55"/>
-                <g class="vp-punt aan" data-zone="lichaam" role="button" tabindex="0" aria-label="Zone lichaam"><circle class="gloed" cx="100" cy="172" r="14"/><circle class="stip" cx="100" cy="172" r="6.5"/><circle class="raak" cx="100" cy="172" r="20"/></g>
-                <g class="vp-punt" data-zone="gezicht" role="button" tabindex="0" aria-label="Zone gezicht en baard"><circle class="gloed" cx="100" cy="90" r="12"/><circle class="stip" cx="100" cy="90" r="6.5"/><circle class="raak" cx="100" cy="90" r="16"/></g>
-                <g class="vp-punt" data-zone="hoofd" role="button" tabindex="0" aria-label="Zone hoofd"><circle class="gloed" cx="100" cy="22" r="12"/><circle class="stip" cx="100" cy="22" r="6.5"/><circle class="raak" cx="100" cy="22" r="16"/></g>
-                <g class="vp-punt" data-zone="neus" role="button" tabindex="0" aria-label="Zone neus en oren"><circle class="gloed" cx="100" cy="58" r="12"/><circle class="stip" cx="100" cy="58" r="6.5"/><circle class="raak" cx="100" cy="58" r="16"/></g>
-              </svg>
+        <div class="zf-body">
+          <div class="zf-fig">
+            <span class="zf-vlak"></span>
+            <img class="zf-foto" src="__PORTRAIT__" alt="">
+            <img class="zf-merk" src="__MARK__" alt="">
+            <svg class="zf-lijnen" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+    <line data-zone="lichaam" x1="25.0" y1="58.0" x2="34.0" y2="51.0"/>
+    <line data-zone="gezicht" x1="35.0" y1="32.0" x2="53.5" y2="25.0"/>
+    <line data-zone="hoofd" x1="21.0" y1="9.0" x2="55.0" y2="6.5"/>
+    <line data-zone="neus" x1="29.0" y1="20.5" x2="56.0" y2="18.5"/>
+            </svg>
+            <button class="zf-pin" type="button" data-zone="lichaam" style="left:34.0%;top:51.0%" aria-label="Zone Lichaam"><i></i></button>
+            <button class="zf-label" type="button" data-zone="lichaam" style="left:4.0%;top:58.0%">LICHAAM</button>
+            <button class="zf-pin" type="button" data-zone="gezicht" style="left:53.5%;top:25.0%" aria-label="Zone Gezicht en baard"><i></i></button>
+            <button class="zf-label" type="button" data-zone="gezicht" style="left:4.0%;top:32.0%">GEZICHT &amp; BAARD</button>
+            <button class="zf-pin" type="button" data-zone="hoofd" style="left:55.0%;top:6.5%" aria-label="Zone Hoofd"><i></i></button>
+            <button class="zf-label" type="button" data-zone="hoofd" style="left:4.0%;top:9.0%">HOOFD</button>
+            <button class="zf-pin aan" type="button" data-zone="neus" style="left:56.0%;top:18.5%" aria-label="Zone Neus en oren"><i></i></button>
+            <button class="zf-label aan" type="button" data-zone="neus" style="left:4.0%;top:20.5%">NEUS &amp; OREN</button>
+            <p class="zf-fighint"><svg><use href="#tik"/></svg>Selecteer een hotspot om van zone te wisselen.</p>
+          </div>
+          <div class="zf-kaart">
+            <div class="zf-paneel" data-zone="lichaam" hidden>
+              <div class="zf-kop">
+                <p class="zf-match">Beste match voor lichaam</p>
+                <p class="zf-aantal">4 geschikte apparaten</p>
+              </div>
+              <h3 class="zf-naam">Groom Guard™ PRO</h3>
+              <p class="zf-claim">Grote vlakken en gevoelige plekken, met dezelfde beweging.</p>
+              <div class="zf-mid">
+                <div class="zf-shot"><img src="__BEST_LICHAAM__" alt="Groom Guard PRO bodygroomer met foil-opzetstuk"><span class="zf-badge">Keramische mesjes</span></div>
+                <ul class="zf-feiten">
+                  <li><span class="zf-well"><svg><use href="#gauge"/></svg></span><span>6.600 toeren en een LED-licht</span></li>
+                  <li><span class="zf-well"><svg><use href="#parts"/></svg></span><span>Mesjes achter een kam</span></li>
+                  <li><span class="zf-well"><svg><use href="#drop"/></svg></span><span>IPX7 waterdicht</span></li>
+                </ul>
+              </div>
+              <p class="zf-prijs"><b>€59,95</b></p>
+              <a class="zf-cta" href="#">Bekijk de Groom Guard PRO<span><svg><use href="#arw"/></svg></span></a>
+              <a class="zf-alle" href="#">Bekijk alle 4 producten voor bodygroomers — vanaf €39,95 <svg><use href="#arw"/></svg></a>
             </div>
-            <div class="vp-keuze">
-              <button class="vp-tab aan" type="button" data-zone="lichaam">Lichaam</button>
-              <button class="vp-tab" type="button" data-zone="gezicht">Gezicht &amp; baard</button>
-              <button class="vp-tab" type="button" data-zone="hoofd">Hoofd</button>
-              <button class="vp-tab" type="button" data-zone="neus">Neus &amp; oren</button>
+            <div class="zf-paneel" data-zone="gezicht" hidden>
+              <div class="zf-kop">
+                <p class="zf-match">Beste match voor gezicht &amp; baard</p>
+                <p class="zf-aantal">8 geschikte apparaten</p>
+              </div>
+              <h3 class="zf-naam">The Gentleman Shaver™</h3>
+              <p class="zf-claim">Baard, snor en randen — in één apparaat.</p>
+              <div class="zf-mid">
+                <div class="zf-shot"><img src="__BEST_GEZICHT__" alt="The Gentleman Shaver op de oplaadstandaard"><span class="zf-badge">3 opzetstukken</span></div>
+                <ul class="zf-feiten">
+                  <li><span class="zf-well"><svg><use href="#parts"/></svg></span><span>Trimmer, neustrimmer en baardtrimmer</span></li>
+                  <li><span class="zf-well"><svg><use href="#power"/></svg></span><span>LCD-display en lithium-accu</span></li>
+                  <li><span class="zf-well"><svg><use href="#drop"/></svg></span><span>Waterdichte behuizing</span></li>
+                </ul>
+              </div>
+              <p class="zf-prijs"><b>€49,95</b></p>
+              <a class="zf-cta" href="#">Bekijk de Gentleman Shaver<span><svg><use href="#arw"/></svg></span></a>
+              <a class="zf-alle" href="#">Bekijk alle 8 producten voor gezicht &amp; baard — vanaf €33,95 <svg><use href="#arw"/></svg></a>
             </div>
-          </div>
-          <div class="vp-panelen">
-          <div class="vp-paneel" data-zone="lichaam">
-            <p class="vp-zone">Lichaam</p>
-            <h3 class="vp-appnaam">Groom Guard™ PRO<span>Wat er in deze zone waar is, staat hieronder — en het geldt voor de andere apparaten in dezelfde zone.</span></h3>
-            <ul class="vp-punten">
-                <li><svg><use href="#chkc"/></svg><span><b>Keramische SkinSafe-mesjes</b> — liggen achter een kam, zodat je op je schaamstreek dezelfde beweging maakt als op je arm</span></li>
-                <li><svg><use href="#chkc"/></svg><span><b>6.600 toeren en een LED-licht</b> — gaat door dikke haren heen, en je ziet wat je doet — ook op je rug</span></li>
-                <li><svg><use href="#chkc"/></svg><span><b>IPX7 waterdicht</b> — mag mee onder de douche, en daarna onder de kraan schoon</span></li>
-            </ul>
-          </div>
-          <div class="vp-paneel" data-zone="gezicht" hidden>
-            <p class="vp-zone">Gezicht &amp; baard</p>
-            <h3 class="vp-appnaam">Men Shaper Supreme™ 6-in-1<span>Wat er in deze zone waar is, staat hieronder — en het geldt voor de andere apparaten in dezelfde zone.</span></h3>
-            <ul class="vp-punten">
-                <li><svg><use href="#chkc"/></svg><span><b>8.000 toeren</b> — de snelste motor in het assortiment, voor baard, snor en lichaamshaar</span></li>
-                <li><svg><use href="#chkc"/></svg><span><b>LCD-display</b> — toont hoeveel draadloze tijd je nog hebt, dus je valt niet halverwege stil</span></li>
-                <li><svg><use href="#chkc"/></svg><span><b>IPX7 en skin-safe</b> — onder de douche te gebruiken, en gemaakt om irritatie te voorkomen</span></li>
-            </ul>
-          </div>
-          <div class="vp-paneel" data-zone="hoofd" hidden>
-            <p class="vp-zone">Hoofd</p>
-            <h3 class="vp-appnaam">Head Shaver Deluxe<span>Wat er in deze zone waar is, staat hieronder — en het geldt voor de andere apparaten in dezelfde zone.</span></h3>
-            <ul class="vp-punten">
-                <li><svg><use href="#chkc"/></svg><span><b>Scheerkop met 7 mesjes</b> — pakt elk oppervlak waar haar groeit, ook waar je niet bij kijkt</span></li>
-                <li><svg><use href="#chkc"/></svg><span><b>Vijf opzetstukken</b> — hoofd, baard, neus en oorhaar met één apparaat</span></li>
-                <li><svg><use href="#chkc"/></svg><span><b>Trimlengtes van 1,5 tot 13 mm</b> — op de Tondeuse Deluxe, voor fades en elke lengte daartussen</span></li>
-            </ul>
-          </div>
-          <div class="vp-paneel" data-zone="neus" hidden>
-            <p class="vp-zone">Neus &amp; oren</p>
-            <h3 class="vp-appnaam">Neustrimmer 4in1 Ultra™<span>Wat er in deze zone waar is, staat hieronder — en het geldt voor de andere apparaten in dezelfde zone.</span></h3>
-            <ul class="vp-punten">
-                <li><svg><use href="#chkc"/></svg><span><b>7.000 toeren en SafeShave-mesjes</b> — snijdt af zonder te trekken, ook op gevoelige plekken</span></li>
-                <li><svg><use href="#chkc"/></svg><span><b>Vier opzetstukken</b> — neus, oor, wenkbrauw en een scheeropzetstuk voor kleine zones</span></li>
-                <li><svg><use href="#chkc"/></svg><span><b>USB Fast Charge en batterij-indicator</b> — je ziet wanneer hij bijna leeg is, en hij is snel weer vol</span></li>
-            </ul>
-          </div>
+            <div class="zf-paneel" data-zone="hoofd" hidden>
+              <div class="zf-kop">
+                <p class="zf-match">Beste match voor hoofd</p>
+                <p class="zf-aantal">3 geschikte apparaten</p>
+              </div>
+              <h3 class="zf-naam">Tondeuse Elegant™</h3>
+              <p class="zf-claim">Van fade tot strak kort, met controle.</p>
+              <div class="zf-mid">
+                <div class="zf-shot"><img src="__BEST_HOOFD__" alt="Tondeuse Elegant met opzetkam"><span class="zf-badge">Precisiemessen</span></div>
+                <ul class="zf-feiten">
+                  <li><span class="zf-well"><svg><use href="#scissors"/></svg></span><span>Precisiescherpe messen</span></li>
+                  <li><span class="zf-well"><svg><use href="#gauge"/></svg></span><span>Krachtig motormechanisme</span></li>
+                  <li><span class="zf-well"><svg><use href="#parts"/></svg></span><span>Voor fades en korte kapsels</span></li>
+                </ul>
+              </div>
+              <p class="zf-prijs"><b>€59,95</b></p>
+              <a class="zf-cta" href="#">Bekijk de Tondeuse Elegant<span><svg><use href="#arw"/></svg></span></a>
+              <a class="zf-alle" href="#">Bekijk alle 3 producten voor hoofd — vanaf €54,95 <svg><use href="#arw"/></svg></a>
+            </div>
+            <div class="zf-paneel" data-zone="neus">
+              <div class="zf-kop">
+                <p class="zf-match">Beste match voor neus &amp; oren</p>
+                <p class="zf-aantal">8 geschikte apparaten</p>
+              </div>
+              <h3 class="zf-naam">Neustrimmer 4in1 Ultra™</h3>
+              <p class="zf-claim">Precies detailwerk, zonder trekken of irriteren.</p>
+              <div class="zf-mid">
+                <div class="zf-shot"><img src="__BEST_NEUS__" alt="Neustrimmer 4in1 Ultra met vier opzetstukken"><span class="zf-badge">4 opzetkoppen</span></div>
+                <ul class="zf-feiten">
+                  <li><span class="zf-well"><svg><use href="#gauge"/></svg></span><span>7.000 toeren — snijdt zonder te trekken</span></li>
+                  <li><span class="zf-well"><svg><use href="#nose"/></svg></span><span>Voor neus, oren, wenkbrauw en details</span></li>
+                  <li><span class="zf-well"><svg><use href="#power"/></svg></span><span>USB Fast Charge en batterij-indicator</span></li>
+                </ul>
+              </div>
+              <p class="zf-prijs"><b>€32,95</b></p>
+              <a class="zf-cta" href="#">Bekijk de neustrimmer<span><svg><use href="#arw"/></svg></span></a>
+              <a class="zf-alle" href="#">Bekijk alle 8 producten voor neus &amp; oren — vanaf €16,95 <svg><use href="#arw"/></svg></a>
+            </div>
           </div>
         </div>
 
-        <p class="vp-altijd">
-          <b>Bij elk apparaat, in elke zone</b>
-          <span><svg><use href="#chkc"/></svg><em>Mes of opzetstuk los te vervangen</em>, vanaf €9,95</span>
-          <span><svg><use href="#chkc"/></svg><em>100 dagen proberen</em>, en twee jaar garantie</span>
-        </p>
+        <div class="zf-strip">
+          <div><span class="zf-zegel"><svg><use href="#chk"/></svg></span><span><b>Mes of opzetstuk</b> los verkrijgbaar</span></div>
+          <div><span class="zf-zegel">100</span><span><b>100 dagen</b> proberen</span></div>
+          <div><span class="zf-zegel">2</span><span><b>2 jaar</b> garantie</span></div>
+        </div>
 
       </div></section>
     </div></div>
@@ -335,85 +475,123 @@ footer p{max-width:none}
   <div class="phonecol">
     <p class="devicecap">Mobiel — 390px · 73% van je verkeer</p>
     <div class="scaler phone-scaler"><div class="inner">
-      <section class="vp vp-m"><div class="vp-in">
+      <section class="zf zf-m"><div class="zf-in">
 
-        <div class="vp-top">
+        <div class="zf-top">
           <div>
-            <p class="vp-eyebrow">Waarom dit anders werkt</p>
-            <h2 class="vp-h2">Elk apparaat is gemaakt voor één plek. Kies er een.</h2>
+            <p class="zf-eyebrow">Vind je perfecte tool</p>
+            <h2 class="zf-h2">Waar wil je trimmen?</h2>
+            <p class="zf-sub"><b>Kies de plek.</b> Wij tonen de beste match.</p>
           </div>
-          <p class="vp-note">Wat een bodygroomer moet kunnen is iets anders dan wat een neustrimmer moet kunnen. Daarom staat hieronder per zone wat er dáár waar is — met het apparaat erbij waar het vandaan komt.</p>
+          <p class="zf-note">Selecteer een zone en ontdek welke tool ervoor gemaakt is.</p>
+          <div class="zf-hint"><span class="zf-hintring"><svg><use href="#tik"/></svg></span><em>Tik op een zone</em></div>
         </div>
 
-        <div class="vp-body">
-          <div class="vp-fig">
-            <div class="vp-silhouet"><svg viewBox="0 0 200 252" role="img" aria-label="Zones op het lichaam">
-                <ellipse class="vp-lijn" cx="100" cy="58" rx="34" ry="42"/>
-                <path class="vp-lijn" d="M66 54 C59 51 58 64 65 66" opacity=".6"/>
-                <path class="vp-lijn" d="M134 54 C141 51 142 64 135 66" opacity=".6"/>
-                <path class="vp-lijn" d="M88 98 L88 118 M112 98 L112 118" opacity=".5"/>
-                <path class="vp-lijn" d="M88 116 C68 121 54 130 50 146 L44 222 C43 231 48 237 57 237
-                  L143 237 C152 237 157 231 156 222 L150 146 C146 130 132 121 112 116"/>
-                <path class="vp-lijn" d="M52 144 C40 154 34 180 33 216" opacity=".55"/>
-                <path class="vp-lijn" d="M148 144 C160 154 166 180 167 216" opacity=".55"/>
-                <g class="vp-punt aan" data-zone="lichaam" role="button" tabindex="0" aria-label="Zone lichaam"><circle class="gloed" cx="100" cy="172" r="14"/><circle class="stip" cx="100" cy="172" r="6.5"/><circle class="raak" cx="100" cy="172" r="20"/></g>
-                <g class="vp-punt" data-zone="gezicht" role="button" tabindex="0" aria-label="Zone gezicht en baard"><circle class="gloed" cx="100" cy="90" r="12"/><circle class="stip" cx="100" cy="90" r="6.5"/><circle class="raak" cx="100" cy="90" r="16"/></g>
-                <g class="vp-punt" data-zone="hoofd" role="button" tabindex="0" aria-label="Zone hoofd"><circle class="gloed" cx="100" cy="22" r="12"/><circle class="stip" cx="100" cy="22" r="6.5"/><circle class="raak" cx="100" cy="22" r="16"/></g>
-                <g class="vp-punt" data-zone="neus" role="button" tabindex="0" aria-label="Zone neus en oren"><circle class="gloed" cx="100" cy="58" r="12"/><circle class="stip" cx="100" cy="58" r="6.5"/><circle class="raak" cx="100" cy="58" r="16"/></g>
-              </svg>
+        <div class="zf-chips">
+          <button class="zf-chip" type="button" data-zone="lichaam"><span class="zf-thumb" style="background-position:18.0% 44.2%;background-size:320%"></span><span>LICHAAM</span><i><svg><use href="#chk"/></svg></i></button>
+          <button class="zf-chip" type="button" data-zone="gezicht"><span class="zf-thumb" style="background-position:54.1% 23.2%;background-size:700%"></span><span>GEZICHT &amp; BAARD</span><i><svg><use href="#chk"/></svg></i></button>
+          <button class="zf-chip" type="button" data-zone="hoofd"><span class="zf-thumb" style="background-position:55.8% 0.0%;background-size:700%"></span><span>HOOFD</span><i><svg><use href="#chk"/></svg></i></button>
+          <button class="zf-chip aan" type="button" data-zone="neus"><span class="zf-thumb" style="background-position:57.4% 13.2%;background-size:850%"></span><span>NEUS &amp; OREN</span><i><svg><use href="#chk"/></svg></i></button>
+        </div>
+
+        <div class="zf-body">
+          <div class="zf-fig">
+            <span class="zf-vlak"></span>
+            <img class="zf-foto" src="__PORTRAIT__" alt="">
+            <img class="zf-merk" src="__MARK__" alt="">
+            <button class="zf-pin" type="button" data-zone="lichaam" style="left:34.0%;top:51.0%" aria-label="Zone Lichaam"><i></i></button>
+            <button class="zf-pin" type="button" data-zone="gezicht" style="left:53.5%;top:25.0%" aria-label="Zone Gezicht en baard"><i></i></button>
+            <button class="zf-pin" type="button" data-zone="hoofd" style="left:55.0%;top:6.5%" aria-label="Zone Hoofd"><i></i></button>
+            <button class="zf-pin aan" type="button" data-zone="neus" style="left:56.0%;top:18.5%" aria-label="Zone Neus en oren"><i></i></button>
+            <p class="zf-actief">Actieve zone · <span data-actief>Neus &amp; oren</span></p>
+            <p class="zf-fighint"><svg><use href="#tik"/></svg>Tik op een hotspot om te wisselen.</p>
+          </div>
+          <p class="zf-pijl"><span><svg><use href="#dwn"/></svg></span></p>
+          <div class="zf-kaart">
+            <div class="zf-paneel" data-zone="lichaam" hidden>
+              <div class="zf-kop">
+                <p class="zf-match">Beste match</p>
+                <p class="zf-aantal">4 geschikte apparaten</p>
+              </div>
+              <h3 class="zf-naam">Groom Guard™ PRO</h3>
+              <p class="zf-claim">Grote vlakken en gevoelige plekken, met dezelfde beweging.</p>
+              <div class="zf-mid">
+                <div class="zf-shot"><img src="__BEST_LICHAAM__" alt="Groom Guard PRO bodygroomer met foil-opzetstuk"><span class="zf-badge">Keramische mesjes</span></div>
+                <ul class="zf-feiten">
+                  <li><span class="zf-well"><svg><use href="#gauge"/></svg></span><span>6.600 toeren en een LED-licht</span></li>
+                  <li><span class="zf-well"><svg><use href="#parts"/></svg></span><span>Mesjes achter een kam</span></li>
+                  <li><span class="zf-well"><svg><use href="#drop"/></svg></span><span>IPX7 waterdicht</span></li>
+                </ul>
+              </div>
+              <p class="zf-prijs"><b>€59,95</b></p>
+              <a class="zf-cta" href="#">Bekijk de Groom Guard PRO<span><svg><use href="#arw"/></svg></span></a>
+              <a class="zf-alle" href="#">Alle 4 producten vanaf €39,95 <svg><use href="#arw"/></svg></a>
             </div>
-            <div class="vp-keuze">
-              <button class="vp-tab aan" type="button" data-zone="lichaam">Lichaam</button>
-              <button class="vp-tab" type="button" data-zone="gezicht">Gezicht &amp; baard</button>
-              <button class="vp-tab" type="button" data-zone="hoofd">Hoofd</button>
-              <button class="vp-tab" type="button" data-zone="neus">Neus &amp; oren</button>
+            <div class="zf-paneel" data-zone="gezicht" hidden>
+              <div class="zf-kop">
+                <p class="zf-match">Beste match</p>
+                <p class="zf-aantal">8 geschikte apparaten</p>
+              </div>
+              <h3 class="zf-naam">The Gentleman Shaver™</h3>
+              <p class="zf-claim">Baard, snor en randen — in één apparaat.</p>
+              <div class="zf-mid">
+                <div class="zf-shot"><img src="__BEST_GEZICHT__" alt="The Gentleman Shaver op de oplaadstandaard"><span class="zf-badge">3 opzetstukken</span></div>
+                <ul class="zf-feiten">
+                  <li><span class="zf-well"><svg><use href="#parts"/></svg></span><span>Trimmer, neustrimmer en baardtrimmer</span></li>
+                  <li><span class="zf-well"><svg><use href="#power"/></svg></span><span>LCD-display en lithium-accu</span></li>
+                  <li><span class="zf-well"><svg><use href="#drop"/></svg></span><span>Waterdichte behuizing</span></li>
+                </ul>
+              </div>
+              <p class="zf-prijs"><b>€49,95</b></p>
+              <a class="zf-cta" href="#">Bekijk de Gentleman Shaver<span><svg><use href="#arw"/></svg></span></a>
+              <a class="zf-alle" href="#">Alle 8 producten vanaf €33,95 <svg><use href="#arw"/></svg></a>
             </div>
-          </div>
-          <div class="vp-panelen">
-          <div class="vp-paneel" data-zone="lichaam">
-            <p class="vp-zone">Lichaam</p>
-            <h3 class="vp-appnaam">Groom Guard™ PRO<span>Wat er in deze zone waar is, staat hieronder — en het geldt voor de andere apparaten in dezelfde zone.</span></h3>
-            <ul class="vp-punten">
-                <li><svg><use href="#chkc"/></svg><span><b>Keramische SkinSafe-mesjes</b> — liggen achter een kam, zodat je op je schaamstreek dezelfde beweging maakt als op je arm</span></li>
-                <li><svg><use href="#chkc"/></svg><span><b>6.600 toeren en een LED-licht</b> — gaat door dikke haren heen, en je ziet wat je doet — ook op je rug</span></li>
-                <li><svg><use href="#chkc"/></svg><span><b>IPX7 waterdicht</b> — mag mee onder de douche, en daarna onder de kraan schoon</span></li>
-            </ul>
-          </div>
-          <div class="vp-paneel" data-zone="gezicht" hidden>
-            <p class="vp-zone">Gezicht &amp; baard</p>
-            <h3 class="vp-appnaam">Men Shaper Supreme™ 6-in-1<span>Wat er in deze zone waar is, staat hieronder — en het geldt voor de andere apparaten in dezelfde zone.</span></h3>
-            <ul class="vp-punten">
-                <li><svg><use href="#chkc"/></svg><span><b>8.000 toeren</b> — de snelste motor in het assortiment, voor baard, snor en lichaamshaar</span></li>
-                <li><svg><use href="#chkc"/></svg><span><b>LCD-display</b> — toont hoeveel draadloze tijd je nog hebt, dus je valt niet halverwege stil</span></li>
-                <li><svg><use href="#chkc"/></svg><span><b>IPX7 en skin-safe</b> — onder de douche te gebruiken, en gemaakt om irritatie te voorkomen</span></li>
-            </ul>
-          </div>
-          <div class="vp-paneel" data-zone="hoofd" hidden>
-            <p class="vp-zone">Hoofd</p>
-            <h3 class="vp-appnaam">Head Shaver Deluxe<span>Wat er in deze zone waar is, staat hieronder — en het geldt voor de andere apparaten in dezelfde zone.</span></h3>
-            <ul class="vp-punten">
-                <li><svg><use href="#chkc"/></svg><span><b>Scheerkop met 7 mesjes</b> — pakt elk oppervlak waar haar groeit, ook waar je niet bij kijkt</span></li>
-                <li><svg><use href="#chkc"/></svg><span><b>Vijf opzetstukken</b> — hoofd, baard, neus en oorhaar met één apparaat</span></li>
-                <li><svg><use href="#chkc"/></svg><span><b>Trimlengtes van 1,5 tot 13 mm</b> — op de Tondeuse Deluxe, voor fades en elke lengte daartussen</span></li>
-            </ul>
-          </div>
-          <div class="vp-paneel" data-zone="neus" hidden>
-            <p class="vp-zone">Neus &amp; oren</p>
-            <h3 class="vp-appnaam">Neustrimmer 4in1 Ultra™<span>Wat er in deze zone waar is, staat hieronder — en het geldt voor de andere apparaten in dezelfde zone.</span></h3>
-            <ul class="vp-punten">
-                <li><svg><use href="#chkc"/></svg><span><b>7.000 toeren en SafeShave-mesjes</b> — snijdt af zonder te trekken, ook op gevoelige plekken</span></li>
-                <li><svg><use href="#chkc"/></svg><span><b>Vier opzetstukken</b> — neus, oor, wenkbrauw en een scheeropzetstuk voor kleine zones</span></li>
-                <li><svg><use href="#chkc"/></svg><span><b>USB Fast Charge en batterij-indicator</b> — je ziet wanneer hij bijna leeg is, en hij is snel weer vol</span></li>
-            </ul>
-          </div>
+            <div class="zf-paneel" data-zone="hoofd" hidden>
+              <div class="zf-kop">
+                <p class="zf-match">Beste match</p>
+                <p class="zf-aantal">3 geschikte apparaten</p>
+              </div>
+              <h3 class="zf-naam">Tondeuse Elegant™</h3>
+              <p class="zf-claim">Van fade tot strak kort, met controle.</p>
+              <div class="zf-mid">
+                <div class="zf-shot"><img src="__BEST_HOOFD__" alt="Tondeuse Elegant met opzetkam"><span class="zf-badge">Precisiemessen</span></div>
+                <ul class="zf-feiten">
+                  <li><span class="zf-well"><svg><use href="#scissors"/></svg></span><span>Precisiescherpe messen</span></li>
+                  <li><span class="zf-well"><svg><use href="#gauge"/></svg></span><span>Krachtig motormechanisme</span></li>
+                  <li><span class="zf-well"><svg><use href="#parts"/></svg></span><span>Voor fades en korte kapsels</span></li>
+                </ul>
+              </div>
+              <p class="zf-prijs"><b>€59,95</b></p>
+              <a class="zf-cta" href="#">Bekijk de Tondeuse Elegant<span><svg><use href="#arw"/></svg></span></a>
+              <a class="zf-alle" href="#">Alle 3 producten vanaf €54,95 <svg><use href="#arw"/></svg></a>
+            </div>
+            <div class="zf-paneel" data-zone="neus">
+              <div class="zf-kop">
+                <p class="zf-match">Beste match</p>
+                <p class="zf-aantal">8 geschikte apparaten</p>
+              </div>
+              <h3 class="zf-naam">Neustrimmer 4in1 Ultra™</h3>
+              <p class="zf-claim">Precies detailwerk, zonder trekken of irriteren.</p>
+              <div class="zf-mid">
+                <div class="zf-shot"><img src="__BEST_NEUS__" alt="Neustrimmer 4in1 Ultra met vier opzetstukken"><span class="zf-badge">4 opzetkoppen</span></div>
+                <ul class="zf-feiten">
+                  <li><span class="zf-well"><svg><use href="#gauge"/></svg></span><span>7.000 toeren — snijdt zonder te trekken</span></li>
+                  <li><span class="zf-well"><svg><use href="#nose"/></svg></span><span>Voor neus, oren, wenkbrauw en details</span></li>
+                  <li><span class="zf-well"><svg><use href="#power"/></svg></span><span>USB Fast Charge en batterij-indicator</span></li>
+                </ul>
+              </div>
+              <p class="zf-prijs"><b>€32,95</b></p>
+              <a class="zf-cta" href="#">Bekijk de neustrimmer<span><svg><use href="#arw"/></svg></span></a>
+              <a class="zf-alle" href="#">Alle 8 producten vanaf €16,95 <svg><use href="#arw"/></svg></a>
+            </div>
           </div>
         </div>
 
-        <p class="vp-altijd">
-          <b>Bij elk apparaat, in elke zone</b>
-          <span><svg><use href="#chkc"/></svg><em>Mes of opzetstuk los te vervangen</em>, vanaf €9,95</span>
-          <span><svg><use href="#chkc"/></svg><em>100 dagen proberen</em>, en twee jaar garantie</span>
-        </p>
+        <div class="zf-strip">
+          <div><span class="zf-zegel"><svg><use href="#chk"/></svg></span><span>Los verkrijgbaar</span></div>
+          <div><span class="zf-zegel">100</span><span>100 dagen</span></div>
+          <div><span class="zf-zegel">2</span><span>2 jaar garantie</span></div>
+        </div>
 
       </div></section>
     </div></div>
@@ -423,40 +601,51 @@ footer p{max-width:none}
 <h2>Waar elke regel vandaan komt</h2>
 <div class="tablewrap">
 <table>
-  <thead><tr><th>Zone</th><th>Apparaat</th><th>Wat er staat</th><th>Bron</th></tr></thead>
+  <thead><tr><th>Zone</th><th>Apparaat · prijs</th><th>Wat er op de kaart staat</th><th>Bron in Shopify</th></tr></thead>
   <tbody>
-    <tr><td rowspan="3"><b>Lichaam</b></td><td rowspan="3">Groom Guard™ PRO</td><td>Keramische SkinSafe-mesjes achter een kam</td><td>"De SkinSafe keramische mesjes leggen je huid nooit bloot"</td></tr>
-    <tr><td>6.600 toeren en een LED-licht</td><td>"De krachtige 6600RPM motor glijdt door de dikste haren, het LED-licht laat elk haartje zien"</td></tr>
+    <tr><td rowspan="3"><b>Lichaam</b><br>4 apparaten<br>vanaf €39,95</td><td rowspan="3">Groom Guard™ PRO<br>€59,95</td><td>6.600 toeren en een LED-licht</td><td>"De krachtige 6600RPM motor glijdt door de dikste haren, het LED-licht laat elk haartje zien"</td></tr>
+    <tr><td>Mesjes achter een kam</td><td>"De SkinSafe keramische mesjes leggen je huid nooit bloot"</td></tr>
     <tr><td>IPX7 waterdicht</td><td>"dankzij IPX7 gebruik je 'm gewoon onder de douche"</td></tr>
-    <tr><td rowspan="3"><b>Gezicht &amp; baard</b></td><td rowspan="3">Men Shaper Supreme™ 6-in-1</td><td>8.000 toeren</td><td>"De krachtige 8000 RPM motor zorgt voor een efficiënte, moeiteloze trimbeurt"</td></tr>
-    <tr><td>LCD-display met resterende tijd</td><td>"het LCD-display toont je resterende draadloze tijd"</td></tr>
-    <tr><td>IPX7 en skin-safe</td><td>"dankzij de IPX7 waterdichte behuizing gebruik je hem ook onder de douche. De skin-safe technologie voorkomt irritatie"</td></tr>
-    <tr><td rowspan="3"><b>Hoofd</b></td><td rowspan="2">Head Shaver Deluxe</td><td>Scheerkop met 7 mesjes</td><td>"De scheerkop bevat 7 scheermessen om elk oppervlak waar haar groeit glad te scheren"</td></tr>
-    <tr><td>Vijf opzetstukken</td><td>"5 opzetstukken die je hoofd, baard, neus en oorhaar volledig aanpakken"</td></tr>
-    <tr><td>Tondeuse Deluxe™</td><td>Trimlengtes 1,5 tot 13 mm</td><td>"instelbare trimlengtes van 1,5, 3, 4,5, 6, 10 en 13 mm"</td></tr>
-    <tr><td rowspan="3"><b>Neus &amp; oren</b></td><td rowspan="3">Neustrimmer 4in1 Ultra™</td><td>7.000 toeren en SafeShave-mesjes</td><td>"De krachtige 7000 RPM motor en SafeShave™-mesjes zorgen voor een veilig, pijnloos resultaat"</td></tr>
-    <tr><td>Vier opzetstukken</td><td>"Verwijder moeiteloos neus-, oor- en wenkbrauwhaar … en werk kleinere zones bij met het scheeropzetstuk"</td></tr>
+    <tr><td rowspan="3"><b>Gezicht &amp; baard</b><br>8 apparaten<br>vanaf €33,95</td><td rowspan="3">The Gentleman Shaver™<br>€49,95</td><td>Trimmer, neustrimmer en baardtrimmer</td><td>"Deze multifunctionele shaver voor mannen met baarden bevat een trimmer, neustrimmer en baardtrimmer"</td></tr>
+    <tr><td>LCD-display en lithium-accu</td><td>"Met de krachtige lithium batterij, LCD display en waterdichte behuizing"</td></tr>
+    <tr><td>Waterdichte behuizing</td><td>idem</td></tr>
+    <tr><td rowspan="3"><b>Hoofd</b><br>3 apparaten<br>vanaf €54,95</td><td rowspan="3">Tondeuse Elegant™<br>€59,95</td><td>Precisiescherpe messen</td><td>"Met zijn precisiescherpe messen en ergonomisch design"</td></tr>
+    <tr><td>Krachtig motormechanisme</td><td>"Dankzij het krachtige motormechanisme en duurzame materialen"</td></tr>
+    <tr><td>Voor fades en korte kapsels</td><td>"Of je nu korte kapsels, fades of strak gestyled haar wilt"</td></tr>
+    <tr><td rowspan="3"><b>Neus &amp; oren</b><br>8 apparaten<br>vanaf €16,95</td><td rowspan="3">Neustrimmer 4in1 Ultra™<br>€32,95</td><td>7.000 toeren — snijdt zonder te trekken</td><td>"De krachtige 7000 RPM motor en SafeShave™-mesjes zorgen voor een veilig, pijnloos resultaat"</td></tr>
+    <tr><td>Voor neus, oren, wenkbrauw en details</td><td>"Verwijder moeiteloos neus-, oor- en wenkbrauwhaar … en werk kleinere zones bij met het scheeropzetstuk"</td></tr>
     <tr><td>USB Fast Charge en batterij-indicator</td><td>"met USB Fast Charge en LED-batterij-indicator"</td></tr>
   </tbody>
 </table>
 </div>
-<p>Alles komt letterlijk uit je eigen productomschrijvingen in Shopify, opgehaald op 19 augustus 2026. <b>Eén ding heb ik afgezwakt:</b> de PRO-pagina schrijft dat de mesjes je huid "nooit bloot leggen"; op de kaart staat dat ze achter een kam liggen. Dat is dezelfde techniek, maar beschreven in plaats van beloofd — om dezelfde reden als in blok 1, waar de gewone Groom Guard-pagina "sterk reduceert" zegt.</p>
+<p>Alle teksten komen letterlijk uit je eigen productomschrijvingen; alle prijzen en aantallen live uit Shopify, opgehaald op 20 augustus 2026. <b>Eén regel heb ik bewust afgezwakt:</b> de PRO-pagina schrijft dat de mesjes je huid "nooit bloot leggen"; op de kaart staat dat ze achter een kam liggen. Dezelfde techniek, beschreven in plaats van beloofd — om dezelfde reden als in blok 1.</p>
+
+<h3>De aantallen per zone, en hoe ik ze geteld heb</h3>
+<p>Het aantal naast "beste match" is het aantal <b>apparaten</b> in die zone: geen messen, opzetstukken, tassen, garantieverlengingen of bundels. Zo kwam ik erop:</p>
+<ul>
+  <li><b>Neus &amp; oren — 8.</b> Basic €16,95 · Essential €19,95 · Premium 2-in-1 €19,95 · 2in1 Elite €23,95 · Advance 3-in-1 €24,95 · Ultimate 4-in-1 €29,95 · 3in1 Platinum €29,95 · 4in1 Ultra €32,95. Dit is dezelfde acht als de dubbele reeks die ik bij blok 3 aankaartte, en die staat nog open.</li>
+  <li><b>Lichaam — 4.</b> Dual Groomer 2-in-1 €39,95 · Groom Guard €44,95 · Flex Guard 3-in-1 €54,95 · Groom Guard PRO €59,95.</li>
+  <li><b>Gezicht &amp; baard — 8.</b> Men Shaper Iced €33,95 · The Dial Master €34,95 · Men Shaper Gold €36,95 · Men Shaper Supreme €39,95 · Scheerapparaat Elegant 4-in-1 €39,95 · The Gentleman Shaver €49,95 · Detailtrimmer Sharpline €49,95 · The Sentinel PRO €89,95.</li>
+  <li><b>Hoofd — 3.</b> Head Shaver Deluxe €54,95 · Tondeuse Elegant €59,95 · Tondeuse Deluxe €69,95.</li>
+</ul>
+<p><b>Twee dingen om te weten voordat dit live gaat.</b> De Tondeuse Deluxe staat op nul voorraad, dus de zone Hoofd is in de praktijk twee apparaten. En vier producten zijn niet in te delen zonder dat jij zegt waar ze horen: Blade Guard Black en Gold (scheermessen, gezicht?), de 4 Foil Blade Baron en de Edge Blade. Die staan nu in geen enkele telling.</p>
 
 <h2>Bouwnotities voor straks</h2>
 <ul>
-  <li><b>Vier zones, dezelfde vier als in blok 3.</b> Als daar iets verschuift, moet het hier mee. Overweeg één bron voor de zone-indeling in plaats van twee losse lijsten.</li>
-  <li><b>Drie punten per zone, niet meer.</b> Het paneel heeft een vaste hoogte nodig, anders springt het blok bij elke wisseling. Met drie regels van maximaal twee zinnen blijft dat stabiel.</li>
-  <li><b>De figuur is één SVG zonder externe afhankelijkheden</b> en schaalt mee; de raakvlakken van de punten zijn 40 pixels breed, ruim boven de 24 die een duim nodig heeft.</li>
-  <li><b>Het apparaat per zone uit een collectie halen</b>, of als productkiezer per zone instellen. Nu staat de naam vast in de tekst.</li>
-  <li><b>De specificaties zelf blijven redactie.</b> Ze komen uit de productomschrijvingen maar zijn ingekort tot wat een klant ervan merkt; dat kan geen veld worden.</li>
+  <li><b>De aantallen en "vanaf"-prijzen moeten uit een collectie komen</b>, niet uit vaste tekst. Zodra jij een product toevoegt of een prijs wijzigt, klopt "8 geschikte apparaten — vanaf €16,95" anders niet meer. Dat betekent vier collecties die vandaag nog niet bestaan; dat is dezelfde randvoorwaarde die bij blok 3 al opkwam.</li>
+  <li><b>De hotspots zijn percentages op de foto</b>, geen vaste pixels. Wissel je de foto, dan verschuiven de vier punten mee in de sectie-instellingen — vier keer een x en een y.</li>
+  <li><b>De raakvlakken van de hotspots zijn 30 pixels</b> op desktop en 26 op mobiel, met een extra onzichtbare rand eromheen. Op mobiel zijn de vier zoneknoppen de hoofdbediening; de punten op de foto zijn de tweede weg erheen.</li>
+  <li><b>Drie feiten per kaart, niet meer.</b> Vier maakt de kaart hoger dan de foto ernaast en dan gaat het blok springen bij elke wisseling.</li>
+  <li><b>Het blok schuift elke zes seconden door tot iemand zelf kiest</b>, en stopt dan definitief. Bij bewegingsreductie staat hij van begin af aan stil.</li>
 </ul>
 
 <div class="callout ask">
   <h3 style="margin-top:0">Wat ik van jou nodig heb</h3>
   <ul style="margin-bottom:0">
-    <li><b>Klopt het apparaat dat ik per zone gekozen heb?</b> Ik nam per zone de bestseller of het meest complete apparaat. Bij Hoofd heb ik twee apparaten gecombineerd omdat de Head Shaver geen trimlengtes noemt en de Tondeuse Deluxe wel.</li>
-    <li><b>Is er een zone waar je meer over kunt vertellen dan wat er in de productomschrijving staat?</b> Bij Hoofd is het aanbod aan harde specificaties het dunst — daar staat nergens een toerental of een waterdichtheidsklasse.</li>
-    <li><b>De drie vervuilde productteksten</b> staan er nog steeds. Zal ik ze opschonen?</li>
+    <li><b>De twee zwakke kaarten:</b> specificaties toevoegen aan de Gentleman Shaver en de Tondeuse Elegant, of die kaarten wisselen naar de Men Shaper Supreme en de Head Shaver Deluxe?</li>
+    <li><b>Waar horen Blade Guard, Blade Baron en Edge Blade?</b> Zonder die indeling kloppen de aantallen per zone niet helemaal.</li>
+    <li><b>De Tondeuse Deluxe staat op nul voorraad</b> en de vier negatieve voorraden uit blok 3 staan er ook nog. Dat is geen ontwerpvraag maar het raakt wel wat dit blok toont.</li>
+    <li><b>De drie vervuilde productteksten</b> staan er nog steeds — inclusief het form-element in de Head Shaver 7D Scheerkop. Zal ik ze opschonen?</li>
   </ul>
 </div>
 
@@ -487,40 +676,45 @@ window.addEventListener('load',fit); fit();
 
 <script>
 /* ══ MOCKUP-SCRIPT ══ */
-// De zonekiezer. Elke .vp krijgt zijn eigen instantie, want desktop en mobiel
+// De zonekiezer. Elke .zf krijgt zijn eigen instantie, want desktop en mobiel
 // staan als twee losse mockups op dezelfde pagina.
-document.querySelectorAll('.vp').forEach(function (sec) {
-  var punten  = [].slice.call(sec.querySelectorAll('.vp-punt'));
-  var tabs    = [].slice.call(sec.querySelectorAll('.vp-tab'));
-  var panelen = [].slice.call(sec.querySelectorAll('.vp-paneel'));
+document.querySelectorAll('.zf').forEach(function (sec) {
+  var panelen = [].slice.call(sec.querySelectorAll('.zf-paneel'));
   if (!panelen.length) return;
+  var knoppen = [].slice.call(sec.querySelectorAll('.zf-pin, .zf-label, .zf-chip'));
+  var lijnen  = [].slice.call(sec.querySelectorAll('.zf-lijnen line'));
+  var actief  = sec.querySelector('[data-actief]');
 
   var traag = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var i = 0, gestuurd = false, klok = null;
+  var i = Math.max(0, panelen.findIndex(function (p) { return !p.hidden; }));
+  var gestuurd = false, klok = null;
 
   function toon(n) {
     i = (n + panelen.length) % panelen.length;
     var zone = panelen[i].dataset.zone;
     panelen.forEach(function (p) { p.hidden = p.dataset.zone !== zone; });
-    tabs.forEach(function (t) { t.classList.toggle('aan', t.dataset.zone === zone); });
-    punten.forEach(function (p) { p.classList.toggle('aan', p.dataset.zone === zone); });
+    knoppen.forEach(function (k) { k.classList.toggle('aan', k.dataset.zone === zone); });
+    lijnen.forEach(function (l) { l.classList.toggle('aan', l.dataset.zone === zone); });
+    if (actief) {
+      var kop = sec.querySelector('.zf-paneel[data-zone="' + zone + '"] .zf-cta');
+      actief.textContent = knoppen.filter(function (k) {
+        return k.dataset.zone === zone && k.classList.contains('zf-chip');
+      }).map(function (k) { return k.querySelector('span').textContent; })[0] || zone;
+      void kop;
+    }
   }
   function kies(zone) {
-    // zodra iemand zelf kiest, stopt het rondlopen: dit is een keuzeblok,
-    // en dan is doorschuiven onder iemands handen weg hinderlijk
-    gestuurd = true; if (klok) clearInterval(klok);
+    // zodra iemand zelf kiest stopt het rondlopen: dit is een keuzeblok, en
+    // dan is doorschuiven onder iemands handen weg hinderlijk in plaats van levendig
+    gestuurd = true;
+    if (klok) { clearInterval(klok); klok = null; }
     toon(panelen.findIndex(function (p) { return p.dataset.zone === zone; }));
   }
-  [].concat(punten, tabs).forEach(function (el) {
-    el.addEventListener('click', function () { kies(el.dataset.zone); });
-    el.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); kies(el.dataset.zone); }
-    });
+  knoppen.forEach(function (k) {
+    k.addEventListener('click', function () { kies(k.dataset.zone); });
   });
 
+  toon(i);
   if (!traag) klok = setInterval(function () { if (!gestuurd) toon(i + 1); }, 6000);
-  sec.addEventListener('mouseenter', function () { if (klok) clearInterval(klok); });
-  toon(0);
 });
-
 </script>

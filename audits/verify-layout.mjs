@@ -30,7 +30,7 @@ for (const file of files) {
     // deze lopen bewust buiten hun kader; de ouder knipt ze af met overflow:hidden.
     // Op naam matchen brak zodra er een blok bijkwam, dus nu op patroon:
     // *-mark is een decoratief monogram, *track is een lopende band.
-    const DECORATIEF = /-mark\b|track\b/;
+    const DECORATIEF = /-mark\b|track\b|-merk\b/;
 
     const buiten = [];
     [...wortels, ...binnen('*')].forEach(el => {
