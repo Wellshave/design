@@ -86,7 +86,18 @@ for (const b of BLOKKEN) {
   if (!b.css.includes('.' + hoofd)) throw new Error(`geen CSS voor .${hoofd} in ${b.bestand}`);
 }
 
-const sprite = element(read('blok-02-pijnpunt.html'), '<svg width="0" height="0"', 'svg');
+// De iconenset is per blok gegroeid. Eerst werd de sprite uit één blok
+// gelift, waardoor een icoon dat alleen in blok 6 bestaat als leeg rondje
+// verscheen. Nu worden de symbolen uit alle blokken samengevoegd, ontdubbeld
+// op id — het eerste blok dat een id definieert, wint.
+const symbolen = new Map();
+for (const b of BLOKKEN) {
+  const html = read(b.bestand);
+  for (const m of html.matchAll(/<symbol id="([a-z0-9-]+)"[\s\S]*?<\/symbol>/g)) {
+    if (!symbolen.has(m[1])) symbolen.set(m[1], m[0]);
+  }
+}
+const sprite = `<svg width="0" height="0" style="position:absolute"><defs>\n${[...symbolen.values()].join('\n')}\n</defs></svg>`;
 
 const css = `:root{--bg:#FBFAF9;--surface:#fff;--fg:#1A1A1A;--fg-soft:#6B6560;--rule:#E6E1DC;--gold:#BC813E}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
