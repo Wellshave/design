@@ -31,6 +31,9 @@ const ASSETS = {
   __GEN_BARBERBRO__: ['assets/gen-barberbro.webp','image/webp'],
   __GEN_FLEXBLADE__: ['assets/gen-flexblade.webp','image/webp'],
   __GEN_FLEXTRIO__:  ['assets/gen-flextrio.webp','image/webp'],
+  __UGC_HOOFD__:    ['assets/ugc-hoofd.webp','image/webp'],
+  __UGC_BORST__:    ['assets/ugc-borst.webp','image/webp'],
+  __UGC_NEUS__:     ['assets/ugc-neus.webp','image/webp'],
   __KKBEST__:       ['assets/kk-best-reviewed.png','image/png'],
   __KKTEST__:       ['assets/kk-testpanel.png',   'image/png'],
 };
