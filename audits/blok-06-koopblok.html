@@ -217,17 +217,6 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
 .kb-los{text-align:center;font-size:12.5px;color:rgba(255,255,255,.5)}
 .kb-los a{color:rgba(255,255,255,.85)}
 
-/* garantiestrook */
-.kb-strook{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:22px;
-  border-top:1px solid rgba(188,129,62,.2);padding-top:20px}
-.kb-strook > div{display:flex;align-items:center;justify-content:center;gap:13px;
-  font-size:12px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;
-  color:rgba(17,17,17,.66);padding:0 12px;min-width:0;text-align:left}
-.kb-strook > div + div{border-left:1px solid rgba(17,17,17,.1)}
-.kb-zegel{width:38px;height:38px;flex:none;border-radius:50%;border:1px solid rgba(188,129,62,.4);
-  display:flex;align-items:center;justify-content:center;color:#BC813E;
-  font-size:12px;font-weight:700;line-height:1}
-.kb-zegel svg{width:19px;height:19px}
 
 /* ── mobiel ── */
 .kb-m{padding:28px 12px}
@@ -264,11 +253,6 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
 .kb-m .kb-verschil span{font-size:14px}
 .kb-m .kb-knop{justify-content:center;font-size:12.5px;padding:8px 8px 8px 18px}
 .kb-m .kb-knop span{width:38px;height:38px}
-.kb-m .kb-strook{grid-template-columns:1fr 1fr;gap:14px 0;margin-top:18px;padding-top:16px}
-.kb-m .kb-strook > div{font-size:10px;letter-spacing:.08em;gap:10px;padding:0 6px}
-.kb-m .kb-strook > div:nth-child(odd){border-left:0}
-.kb-m .kb-zegel{width:32px;height:32px;font-size:11px}
-.kb-m .kb-zegel svg{width:16px;height:16px}
 
 @media (prefers-reduced-motion: reduce){
   .kb-nr,.kb-stap i,.kb-stap b{transition:none}
@@ -357,6 +341,12 @@ footer p{max-width:none}
   <p style="margin-bottom:0"><b>De prijsvergelijking staat als balk.</b> Normaal €99,95 tegenover €64,95 als bundel, naast elkaar met een pijl ertussen. Eén ding heb ik anders geformuleerd dan in jouw ontwerp: daar staat "los kopen €99,95". Dat kan ik niet hardmaken — €99,95 is de doorgestreepte prijs die in Shopify bij het product staat, en de losse onderdelen tellen daar voor zover ik ze kan terugvinden niet naar op. Vandaar "normaal" in plaats van "los kopen".</p>
 </div>
 
+<div class="callout fix">
+  <h3 style="margin-top:0">De garantiestrook is eruit</h3>
+  <p><b>Hij stond er voor de vierde keer.</b> 100 dagen proberen, 2 jaar garantie, gratis verzending en morgen in huis staan al in de aankondigingsbalk bovenaan, in de strook onder de hero, en in de strip onder blok 5 — en dan nog een keer onderaan dit blok. Vier keer dezelfde vier regels op één pagina maakt ze niet geloofwaardiger, alleen makkelijker om overheen te lezen.</p>
+  <p style="margin-bottom:0"><b>Wat blijft is wat hier iets toevoegt:</b> "op voorraad · morgen in huis" staat vlak boven de knop, want dat is de vraag die je op het moment van klikken hebt. De rest is op deze plek herhaling.</p>
+</div>
+
 <div class="callout ask">
   <h3 style="margin-top:0">Wat er in blok 2 moet gebeuren</h3>
   <p><b>Het koopvak dat nu in blok 2 staat, moet daar weg.</b> Twee redenen. De eerste is inhoudelijk: blok 2 is je bewijsblok — garantiezegel en doorlopende reviewband — en een koopvak maakt er een blok van dat twee dingen tegelijk wil. De tweede is deze bevinding: het vak toont een bundel die niets verkoopt.</p>
@@ -364,7 +354,7 @@ footer p{max-width:none}
 </div>
 
 <h2>Het ontwerp</h2>
-<p class="sub">Licht blok met één donker vlak: de koopkaart. Links de set met vier genummerde onderdelen en de routine eronder, rechts de kaart met de prijs en de knop. Op mobiel staat alles onder elkaar in dezelfde volgorde.</p>
+<p class="sub">Licht blok met één donker vlak: de koopkaart. Links de set met vier genummerde onderdelen en de routine eronder, rechts de kaart met de prijs en de knop. Geen garantiestrook meer onderaan — die staat elders op de pagina al drie keer. Op mobiel staat alles onder elkaar in dezelfde volgorde.</p>
 
 <div class="stage">
   <div>
@@ -419,12 +409,6 @@ footer p{max-width:none}
           </div>
         </div>
 
-        <div class="kb-strook">
-          <div><span class="kb-zegel"><svg><use href="#shield"/></svg></span><span>100 dagen proberen</span></div>
-          <div><span class="kb-zegel">2</span><span>2 jaar garantie</span></div>
-          <div><span class="kb-zegel"><svg><use href="#truck"/></svg></span><span>Gratis verzending</span></div>
-          <div><span class="kb-zegel"><svg><use href="#klok"/></svg></span><span>Morgen in huis</span></div>
-        </div>
 
       </div></section>
     </div></div>
@@ -481,12 +465,6 @@ footer p{max-width:none}
           </div>
         </div>
 
-        <div class="kb-strook">
-          <div><span class="kb-zegel"><svg><use href="#shield"/></svg></span><span>100 dagen proberen</span></div>
-          <div><span class="kb-zegel">2</span><span>2 jaar garantie</span></div>
-          <div><span class="kb-zegel"><svg><use href="#truck"/></svg></span><span>Gratis verzending</span></div>
-          <div><span class="kb-zegel"><svg><use href="#klok"/></svg></span><span>Morgen in huis</span></div>
-        </div>
 
       </div></section>
     </div></div>
@@ -578,67 +556,3 @@ new ResizeObserver(fit).observe(document.body);
 window.addEventListener('load',fit); fit();
 </script>
 
-<script>
-/* ══ MOCKUP-SCRIPT ══ */
-// De zonekiezer. Elke .zf krijgt zijn eigen instantie, want desktop en mobiel
-// staan als twee losse mockups op dezelfde pagina.
-document.querySelectorAll('.zf').forEach(function (sec) {
-  var panelen = [].slice.call(sec.querySelectorAll('.zf-paneel'));
-  if (!panelen.length) return;
-  var knoppen = [].slice.call(sec.querySelectorAll('.zf-pin, .zf-label, .zf-chip'));
-  var lijnen  = [].slice.call(sec.querySelectorAll('.zf-lijnen line'));
-  var actief  = sec.querySelector('[data-actief]');
-
-  var traag = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var i = Math.max(0, panelen.findIndex(function (p) { return !p.hidden; }));
-  var gestuurd = false, klok = null;
-
-  function toon(n) {
-    i = (n + panelen.length) % panelen.length;
-    var zone = panelen[i].dataset.zone;
-    panelen.forEach(function (p) { p.hidden = p.dataset.zone !== zone; });
-    knoppen.forEach(function (k) { k.classList.toggle('aan', k.dataset.zone === zone); });
-    lijnen.forEach(function (l) { l.classList.toggle('aan', l.dataset.zone === zone); });
-    if (actief) {
-      actief.textContent = panelen[i].dataset.naam || zone;
-    }
-    var chip = sec.querySelector('.zf-chip[data-zone="' + zone + '"]');
-    if (chip && chip.parentElement.scrollWidth > chip.parentElement.clientWidth) {
-      var r = chip.parentElement;
-      var doel = chip.offsetLeft - (r.clientWidth - chip.offsetWidth) / 2;
-      r.scrollTo({ left: Math.max(0, doel), behavior: traag ? 'auto' : 'smooth' });
-    }
-  }
-  function kies(zone) {
-    // zodra iemand zelf kiest stopt het rondlopen: dit is een keuzeblok, en
-    // dan is doorschuiven onder iemands handen weg hinderlijk in plaats van levendig
-    gestuurd = true;
-    if (klok) { clearInterval(klok); klok = null; }
-    toon(panelen.findIndex(function (p) { return p.dataset.zone === zone; }));
-  }
-  knoppen.forEach(function (k) {
-    k.addEventListener('click', function () { kies(k.dataset.zone); });
-  });
-
-  // de veegbare zonerail: de balk laat zien hoever je bent, en bij een keuze
-  // via de foto schuift de bijbehorende knop vanzelf in beeld
-  var rail = sec.querySelector('.zf-chips');
-  var balk = sec.querySelector('.zf-schuif i');
-  if (rail && balk) {
-    var meet = function () {
-      var deel = rail.clientWidth / rail.scrollWidth;
-      var speling = rail.scrollWidth - rail.clientWidth;
-      balk.style.width = Math.min(100, deel * 100) + '%';
-      balk.style.left = (speling > 0 ? (rail.scrollLeft / speling) * (100 - deel * 100) : 0) + '%';
-      rail.classList.toggle('rand-links', rail.scrollLeft > 6 && speling - rail.scrollLeft > 6);
-      rail.classList.toggle('rand-eind', speling > 0 && speling - rail.scrollLeft <= 6);
-    };
-    rail.addEventListener('scroll', meet);
-    new ResizeObserver(meet).observe(rail);
-    meet();
-  }
-
-  toon(i);
-  if (!traag) klok = setInterval(function () { if (!gestuurd) toon(i + 1); }, 6000);
-});
-</script>
