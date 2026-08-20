@@ -1291,6 +1291,82 @@ footer p{margin:0;max-width:72ch}
 @media (prefers-reduced-motion:reduce){
   .fam-spoor,.fam-kaart,.fam-play,.fam-lint,.fam-balk i{transition:none}
 }
+
+/* ── Blok 11 — Zekerheden en vragen ── */
+/* ══ MOCKUP — vaste merkkleuren in beide thema's ══ */
+.zk{font-family:"Montserrat",sans-serif;background:#F5F1EA;color:#111111;padding:60px 40px}
+.zk *{box-sizing:border-box}
+.zk p{margin:0;max-width:none}
+.zk-in{max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:38px;min-width:0}
+
+/* de vier zekerheden */
+.zk-zeker{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;
+  background:#191816;border-radius:16px;overflow:hidden}
+.zk-kaart{padding:30px 26px;display:flex;flex-direction:column;gap:12px;min-width:0;
+  border-left:1px solid rgba(255,255,255,.1)}
+.zk-kaart:first-child{border-left:0}
+.zk-zegel{width:46px;height:46px;border-radius:50%;flex:none;
+  border:1px solid rgba(245,209,138,.4);display:flex;align-items:center;justify-content:center;
+  color:#F5D18A}
+.zk-zegel svg{width:22px;height:22px}
+.zk-groot{font-size:23px;line-height:118%;font-weight:700;letter-spacing:-.025em;color:#F5D18A}
+.zk-groot small{display:inline;font-size:13px;font-weight:600;letter-spacing:0;
+  color:rgba(255,255,255,.6);margin-left:6px}
+.zk-wat{font-size:12.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  color:#fff;line-height:140%}
+.zk-mits{font-size:12.5px;line-height:152%;color:rgba(255,255,255,.55)}
+
+/* de vragen */
+.zk-onder{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:44px;
+  align-items:start}
+.zk-eyebrow{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:#BC813E;margin:0 0 12px}
+.zk-h2{font-size:33px;line-height:118%;font-weight:600;letter-spacing:-.024em;margin:0;
+  max-width:16ch;text-wrap:balance}
+.zk-h2 b{font-weight:600;color:#BC813E}
+.zk .zk-note{font-size:14.5px;line-height:158%;color:rgba(17,17,17,.6);margin-top:14px;
+  max-width:34ch}
+.zk-mail{display:inline-flex;align-items:center;gap:11px;margin-top:20px;
+  border:1px solid rgba(17,17,17,.14);border-radius:100px;padding:13px 20px;background:#fff;
+  font-size:13px;font-weight:600;color:#111;text-decoration:none}
+.zk-mail svg{width:16px;height:16px;color:#BC813E;flex:none}
+
+.zk-lijst{display:flex;flex-direction:column;gap:10px;min-width:0}
+.zk-vraag{background:#fff;border:1px solid rgba(17,17,17,.08);border-radius:12px;
+  padding:20px 22px;min-width:0}
+.zk-vraag.aan{border-color:rgba(188,129,62,.4);box-shadow:0 10px 30px -22px rgba(17,17,17,.5)}
+.zk-kop{display:flex;align-items:center;gap:16px;min-width:0}
+.zk-kop b{font-size:15.5px;font-weight:600;letter-spacing:-.01em;line-height:140%;min-width:0}
+.zk-teken{margin-left:auto;flex:none;width:28px;height:28px;border-radius:50%;
+  border:1px solid rgba(17,17,17,.14);display:flex;align-items:center;justify-content:center;
+  color:#BC813E}
+.zk-teken svg{width:13px;height:13px;transition:transform .35s ease}
+.zk-vraag.aan .zk-teken{background:#BC813E;border-color:#BC813E;color:#fff}
+.zk-vraag.aan .zk-teken svg{transform:rotate(45deg)}
+.zk-antwoord{font-size:14px;line-height:162%;color:rgba(17,17,17,.62);
+  padding:14px 44px 0 0}
+.zk-antwoord b{color:#111;font-weight:600}
+.zk-vraag:not(.aan) .zk-antwoord{display:none}
+
+/* ── mobiel ── */
+.zk-m{padding:36px 18px}
+.zk-m .zk-in{gap:26px}
+.zk-m .zk-zeker{grid-template-columns:1fr 1fr}
+.zk-m .zk-kaart{padding:20px 16px;gap:9px}
+.zk-m .zk-kaart:nth-child(-n+2){border-bottom:1px solid rgba(255,255,255,.1)}
+.zk-m .zk-kaart:nth-child(odd){border-left:0}
+.zk-m .zk-zegel{width:38px;height:38px}
+.zk-m .zk-zegel svg{width:18px;height:18px}
+.zk-m .zk-groot{font-size:19px}
+.zk-m .zk-groot small{display:block;margin:4px 0 0;font-size:11.5px}
+.zk-m .zk-wat{font-size:11px}
+.zk-m .zk-mits{font-size:11.5px}
+.zk-m .zk-onder{grid-template-columns:1fr;gap:22px}
+.zk-m .zk-h2{font-size:24px;max-width:none}
+.zk-m .zk-note{font-size:13.5px;max-width:none}
+.zk-m .zk-vraag{padding:16px 16px}
+.zk-m .zk-kop b{font-size:14px}
+.zk-m .zk-antwoord{font-size:13px;padding-right:0}
 </style>
 <svg width="0" height="0" style="position:absolute"><defs>
 <symbol id="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01z"/></symbol>
@@ -1328,10 +1404,13 @@ footer p{margin:0;max-width:72ch}
 <symbol id="tiktok" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" fill="currentColor"/></symbol>
 <symbol id="fb" viewBox="0 0 24 24"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z" fill="currentColor"/></symbol>
 <symbol id="yt" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="currentColor"/></symbol>
+<symbol id="bus" viewBox="0 0 24 24"><rect x="2.6" y="7.4" width="12" height="9.2" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M14.6 10.4h3.2l3.6 3.2v3h-6.8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="7" cy="18.2" r="1.7" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17.4" cy="18.2" r="1.7" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+<symbol id="plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+<symbol id="mail" viewBox="0 0 24 24"><rect x="2.8" y="5.4" width="18.4" height="13.2" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.4 7l8.6 6 8.6-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </defs></svg>
 <div class="shell">
   <div class="lede">
-    <p class="kicker">Homepage-redesign · 8 van 12 blokken</p>
+    <p class="kicker">Homepage-redesign · 9 van 12 blokken</p>
     <h1>De nieuwe blokken, zoals ze op de pagina komen te staan</h1>
     <p class="sub">Beide blokken draaien hier echt: de reviewband loopt, de knoppen reageren, en het
       mobiele beeld is de werkelijke opmaak op 390&nbsp;px — niet een verkleinde desktopversie.
@@ -3127,6 +3206,146 @@ footer p{margin:0;max-width:72ch}
       </div>
     </div>
   </section>
+
+  <section class="blok">
+    <div class="blok-h"><h2>Blok 11 — Zekerheden en vragen</h2><span>Ontwerp — nog niets live</span></div>
+    <div class="views">
+      <div>
+        <p class="devicecap">Desktop — 1440px</p>
+        <div class="scaler desk-scaler"><div class="inner"><section class="zk">
+        <div class="zk-in">
+          <div class="zk-zeker">
+            <div class="zk-kaart">
+              <span class="zk-zegel"><svg><use href="#klok"/></svg></span>
+              <p class="zk-groot">100 dagen<small>proberen</small></p>
+              <p class="zk-wat">Thuis, niet in de winkel</p>
+              <p class="zk-mits">Bevalt het niet, dan gaat het terug en krijg je het hele bedrag terug.</p>
+            </div>
+            <div class="zk-kaart">
+              <span class="zk-zegel"><svg><use href="#schild"/></svg></span>
+              <p class="zk-groot">2 jaar<small>garantie</small></p>
+              <p class="zk-wat">Op elk apparaat</p>
+              <p class="zk-mits">Gaat er binnen twee jaar iets stuk aan het apparaat zelf, dan lossen wij het op.</p>
+            </div>
+            <div class="zk-kaart">
+              <span class="zk-zegel"><svg><use href="#bus"/></svg></span>
+              <p class="zk-groot">Gratis<small>verzending</small></p>
+              <p class="zk-wat">In heel Nederland</p>
+              <p class="zk-mits">Naar België gratis vanaf €49,95, daaronder €2,95.</p>
+            </div>
+            <div class="zk-kaart">
+              <span class="zk-zegel"><svg><use href="#doos"/></svg></span>
+              <p class="zk-groot">Morgen<small>in huis</small></p>
+              <p class="zk-wat">Besteld voor 23:59</p>
+              <p class="zk-mits">Nederland en België. De rest van Europa duurt één tot drie werkdagen.</p>
+            </div>
+          </div>
+          <div class="zk-onder">
+            <div>
+              <p class="zk-eyebrow">Nog vragen</p>
+              <h2 class="zk-h2">Alles wat je wil weten <b>voordat je klikt.</b></h2>
+              <p class="zk-note">De vragen die het vaakst binnenkomen, met het antwoord erbij. Staat die van jou er niet bij, dan mail je ons gewoon.</p>
+              <a class="zk-mail" href="#"><svg><use href="#mail"/></svg>contact@wellshave.com</a>
+            </div>
+            <div class="zk-lijst">
+            <article class="zk-vraag aan" data-vraag="0">
+              <p class="zk-kop"><b>Wat als het me toch niet bevalt?</b><span class="zk-teken"><svg><use href="#plus"/></svg></span></p>
+              <p class="zk-antwoord">Je hebt honderd dagen om het apparaat gewoon te gebruiken. Bevalt het niet, dan stuur je het terug en krijg je het volledige bedrag terug. <b>Je hoeft geen reden op te geven</b> en je hoeft het niet ongebruikt te laten — dat is het punt van proberen.</p>
+            </article>
+            <article class="zk-vraag" data-vraag="1">
+              <p class="zk-kop"><b>Wanneer is mijn bestelling binnen?</b><span class="zk-teken"><svg><use href="#plus"/></svg></span></p>
+              <p class="zk-antwoord">Bestel je voor 23:59, dan ligt je pakket de volgende dag in huis in Nederland en België. Duitsland en Oostenrijk duren één tot twee werkdagen, de rest van Europa twee tot drie.</p>
+            </article>
+            <article class="zk-vraag" data-vraag="2">
+              <p class="zk-kop"><b>Kan ik het apparaat onder de douche gebruiken?</b><span class="zk-teken"><svg><use href="#plus"/></svg></span></p>
+              <p class="zk-antwoord">De meeste apparaten zijn IPX7-gecertificeerd: die kun je onder de douche gebruiken en onder de kraan afspoelen. <b>Niet allemaal</b> — op elke productpagina staat of het voor dat apparaat geldt.</p>
+            </article>
+            <article class="zk-vraag" data-vraag="3">
+              <p class="zk-kop"><b>Hoe vaak moet ik het mes vervangen?</b><span class="zk-teken"><svg><use href="#plus"/></svg></span></p>
+              <p class="zk-antwoord">Bij dagelijks gebruik gaat een scheerkop zes tot twaalf maanden mee. Merk je dat hij trekt of minder goed pakt, dan is het tijd. <b>De koppen liggen apart op voorraad</b>, dus een bot mes kost je geen nieuw apparaat.</p>
+            </article>
+            <article class="zk-vraag" data-vraag="4">
+              <p class="zk-kop"><b>Welk apparaat heb ik nodig?</b><span class="zk-teken"><svg><use href="#plus"/></svg></span></p>
+              <p class="zk-antwoord">Dat hangt af van waar je het voor gebruikt. Hierboven staat een kiezer per plek — kruin, gezicht, neus, lichaam en schaamstreek — met per zone het apparaat dat daarvoor gemaakt is.</p>
+            </article>
+            <article class="zk-vraag" data-vraag="5">
+              <p class="zk-kop"><b>Hoe bereik ik jullie?</b><span class="zk-teken"><svg><use href="#plus"/></svg></span></p>
+              <p class="zk-antwoord">Per e-mail op contact@wellshave.com. Je krijgt antwoord van iemand uit ons team, geen ticketnummer.</p>
+            </article>
+            </div>
+          </div>
+        </div>
+      </section></div></div>
+      </div>
+      <div class="mobcol">
+        <p class="devicecap">Mobiel — 390px</p>
+        <div class="scaler phone-scaler"><div class="inner"><section class="zk zk-m">
+        <div class="zk-in">
+          <div class="zk-zeker">
+            <div class="zk-kaart">
+              <span class="zk-zegel"><svg><use href="#klok"/></svg></span>
+              <p class="zk-groot">100 dagen<small>proberen</small></p>
+              <p class="zk-wat">Thuis, niet in de winkel</p>
+              <p class="zk-mits">Bevalt het niet, dan gaat het terug en krijg je het hele bedrag terug.</p>
+            </div>
+            <div class="zk-kaart">
+              <span class="zk-zegel"><svg><use href="#schild"/></svg></span>
+              <p class="zk-groot">2 jaar<small>garantie</small></p>
+              <p class="zk-wat">Op elk apparaat</p>
+              <p class="zk-mits">Gaat er binnen twee jaar iets stuk aan het apparaat zelf, dan lossen wij het op.</p>
+            </div>
+            <div class="zk-kaart">
+              <span class="zk-zegel"><svg><use href="#bus"/></svg></span>
+              <p class="zk-groot">Gratis<small>verzending</small></p>
+              <p class="zk-wat">In heel Nederland</p>
+              <p class="zk-mits">Naar België gratis vanaf €49,95, daaronder €2,95.</p>
+            </div>
+            <div class="zk-kaart">
+              <span class="zk-zegel"><svg><use href="#doos"/></svg></span>
+              <p class="zk-groot">Morgen<small>in huis</small></p>
+              <p class="zk-wat">Besteld voor 23:59</p>
+              <p class="zk-mits">Nederland en België. De rest van Europa duurt één tot drie werkdagen.</p>
+            </div>
+          </div>
+          <div class="zk-onder">
+            <div>
+              <p class="zk-eyebrow">Nog vragen</p>
+              <h2 class="zk-h2">Alles wat je wil weten <b>voordat je klikt.</b></h2>
+              <p class="zk-note">De vragen die het vaakst binnenkomen, met het antwoord erbij. Staat die van jou er niet bij, dan mail je ons gewoon.</p>
+              <a class="zk-mail" href="#"><svg><use href="#mail"/></svg>contact@wellshave.com</a>
+            </div>
+            <div class="zk-lijst">
+            <article class="zk-vraag aan" data-vraag="0">
+              <p class="zk-kop"><b>Wat als het me toch niet bevalt?</b><span class="zk-teken"><svg><use href="#plus"/></svg></span></p>
+              <p class="zk-antwoord">Je hebt honderd dagen om het apparaat gewoon te gebruiken. Bevalt het niet, dan stuur je het terug en krijg je het volledige bedrag terug. <b>Je hoeft geen reden op te geven</b> en je hoeft het niet ongebruikt te laten — dat is het punt van proberen.</p>
+            </article>
+            <article class="zk-vraag" data-vraag="1">
+              <p class="zk-kop"><b>Wanneer is mijn bestelling binnen?</b><span class="zk-teken"><svg><use href="#plus"/></svg></span></p>
+              <p class="zk-antwoord">Bestel je voor 23:59, dan ligt je pakket de volgende dag in huis in Nederland en België. Duitsland en Oostenrijk duren één tot twee werkdagen, de rest van Europa twee tot drie.</p>
+            </article>
+            <article class="zk-vraag" data-vraag="2">
+              <p class="zk-kop"><b>Kan ik het apparaat onder de douche gebruiken?</b><span class="zk-teken"><svg><use href="#plus"/></svg></span></p>
+              <p class="zk-antwoord">De meeste apparaten zijn IPX7-gecertificeerd: die kun je onder de douche gebruiken en onder de kraan afspoelen. <b>Niet allemaal</b> — op elke productpagina staat of het voor dat apparaat geldt.</p>
+            </article>
+            <article class="zk-vraag" data-vraag="3">
+              <p class="zk-kop"><b>Hoe vaak moet ik het mes vervangen?</b><span class="zk-teken"><svg><use href="#plus"/></svg></span></p>
+              <p class="zk-antwoord">Bij dagelijks gebruik gaat een scheerkop zes tot twaalf maanden mee. Merk je dat hij trekt of minder goed pakt, dan is het tijd. <b>De koppen liggen apart op voorraad</b>, dus een bot mes kost je geen nieuw apparaat.</p>
+            </article>
+            <article class="zk-vraag" data-vraag="4">
+              <p class="zk-kop"><b>Welk apparaat heb ik nodig?</b><span class="zk-teken"><svg><use href="#plus"/></svg></span></p>
+              <p class="zk-antwoord">Dat hangt af van waar je het voor gebruikt. Hierboven staat een kiezer per plek — kruin, gezicht, neus, lichaam en schaamstreek — met per zone het apparaat dat daarvoor gemaakt is.</p>
+            </article>
+            <article class="zk-vraag" data-vraag="5">
+              <p class="zk-kop"><b>Hoe bereik ik jullie?</b><span class="zk-teken"><svg><use href="#plus"/></svg></span></p>
+              <p class="zk-antwoord">Per e-mail op contact@wellshave.com. Je krijgt antwoord van iemand uit ons team, geen ticketnummer.</p>
+            </article>
+            </div>
+          </div>
+        </div>
+      </section></div></div>
+      </div>
+    </div>
+  </section>
   <footer>
     <p><b>Nog niets hiervan staat live.</b> Dit is de ontwerpversie; pas na jouw akkoord gaat het naar
       Shopify. De voorraadstand in het bundelblok is nu een vast getal en moet in de bouw live meelopen.</p>
@@ -3326,6 +3545,20 @@ document.querySelectorAll('.fam').forEach(function (sec) {
   window.addEventListener('resize', plaats);
   // de baan staat stil als het systeem om minder beweging vraagt
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) start();
+});
+
+/* ══ MOCKUP-SCRIPT ══ */
+// Eén vraag tegelijk open. Elke .zk krijgt zijn eigen instantie, want desktop
+// en mobiel staan als twee losse mockups op dezelfde pagina.
+document.querySelectorAll('.zk').forEach(function (sec) {
+  var vragen = [].slice.call(sec.querySelectorAll('.zk-vraag'));
+  vragen.forEach(function (v) {
+    v.addEventListener('click', function () {
+      var open = v.classList.contains('aan');
+      vragen.forEach(function (a) { a.classList.remove('aan'); });
+      if (!open) v.classList.add('aan');
+    });
+  });
 });
 
 </script>
