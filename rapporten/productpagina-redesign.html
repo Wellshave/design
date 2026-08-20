@@ -451,20 +451,36 @@ ul.plain li::before{content:"—";color:var(--accent);font-family:"IBM Plex Mono
 </section>
 
 <section>
-  <div class="eyebrow">06 — Clarity</div>
-  <h2>Wat ik niet kon meten, en hoe je het alsnog krijgt</h2>
+  <div class="eyebrow">06 — Gedragsdata koppelen</div>
+  <h2>Twee routes, en één ervan is bijna gratis</h2>
   <div class="prose">
-    <p>Je vroeg naar Microsoft Clarity. Twee dingen daarover.</p>
-    <p><strong>Clarity draait al op de pagina</strong> — ik vond <code>clarity.ms/tag/</code> in de uitgeleverde HTML. Naast ContentSquare en Hotjar. Er wordt dus al gemeten; er wordt alleen niet naar gekeken.</p>
-    <p><strong>Ik kan er in deze sessie niet bij.</strong> Er is geen Clarity-koppeling beschikbaar en geen API-token in de omgeving. Alles hierboven komt daarom uit Shopify-analytics en de ruwe HTML — nul gedragsdata. Dat is de grootste blinde vlek in dit rapport en ik wil hem niet wegpoetsen.</p>
-    <p>Wil je dat ik het alsnog analyseer, dan zijn er twee routes. Genereer een Data Export-token in Clarity (Instellingen → Data Export) en zet die als omgevingsvariabele — niet in de repo — dan haal ik de cijfers zelf op. Of exporteer de vijf views hieronder en stuur ze door; dan lees ik ze zo.</p>
+    <p><strong>Clarity draait al op de pagina</strong> — ik vond <code>clarity.ms/tag/</code> in de uitgeleverde HTML. Naast ContentSquare en Hotjar. Er wordt dus al gemeten; er wordt alleen niet naar gekeken. Alles in dit rapport komt uit Shopify-analytics en de ruwe HTML, dus zonder gedragsdata. Dat is de grootste blinde vlek, en die is te dichten.</p>
+  </div>
+
+  <div class="callout">
+    <h4>Route A — ContentSquare, aanbevolen</h4>
+    <p>Er is een <strong>officiële ContentSquare-connector in de Claude-directory</strong>. Eén keer koppelen via je connector-instellingen op claude.ai, verder geen token-beheer. Hij brengt onder meer <code>computeFunnel</code>, <code>getTopPageGroupsByLostConversions</code>, <code>getTopPagesBySessionsWithErrors</code> en <code>getTopErrorsByImpactOnGoal</code> mee.</p>
+    <p>Dat is precies je vraag — <em>waar haken klanten af</em> — als kant-en-klare aanroep, zonder dagelijkse limiet en zonder venster van drie dagen. Je betaalt al voor ContentSquare; dit is het gebruiken.</p>
+  </div>
+
+  <div class="callout">
+    <h4>Route B — Clarity Data Export API, al gebouwd</h4>
+    <p><code>scripts/clarity-pdp-insights.py</code> staat klaar in deze repo. Ik heb geverifieerd dat het endpoint vanuit deze omgeving bereikbaar is; het wacht alleen op een token.</p>
+    <p>Maak er een aan via <strong>Clarity → Instellingen → Data&nbsp;Export → Generate new API token</strong> (alleen projectbeheerders), zet hem als <code>CLARITY_API_TOKEN</code> in de omgeving — <strong>niet in de repo</strong> — en draai het script. Het doet 4 van de 10 toegestane verzoeken en houdt er 6 over.</p>
+  </div>
+
+  <div class="prose">
+    <h3>Wat de Clarity-API wél en niet geeft</h3>
+    <p>Belangrijk voordat je erop rekent: de API levert <strong>geaggregeerde cijfers, geen opnames en geen klikkaarten</strong>. Van mijn vijf vragen hieronder beantwoordt hij er drie. De twee waardevolste — de desktop-opnames en de klikkaart — blijven handwerk in de Clarity-interface. Verder: maximaal 10 verzoeken per project per dag, en <strong>alleen de laatste 1 tot 3 dagen</strong>. Wil je een reeks opbouwen, dan moet het script op een cron.</p>
+    <p>De metrics die je wél krijgt, per dimensie <code>URL</code>, <code>Device</code>, <code>Browser</code>, <code>Source</code>, <code>Medium</code>, <code>Campaign</code>, <code>Channel</code>, <code>OS</code> of <code>Country/Region</code>: Scroll Depth, Engagement Time, Traffic, Popular Pages, Dead Click Count, Rage Click Count, Quickback Click, Excessive Scroll, Script Error Count en Error Click Count.</p>
+    <p>Er bestaat ook een officiële <code>@microsoft/clarity-mcp-server</code>, maar die draait via <code>npx</code> op je eigen machine. Bruikbaar in Claude Code lokaal, niet als connector op claude.ai — daarvoor is een remote server nodig.</p>
     <h3>De vijf dingen die ik zou opvragen</h3>
     <ul class="plain">
-      <li><strong>Scrolldiepte op de PDP, gesplitst mobiel/desktop.</strong> Dit toetst de hele redesign-these direct: haalt iemand plek 6 überhaupt? Als de mediaan onder de 50% ligt, is het mechanisme-blok effectief onzichtbaar en is het naar voren halen de goedkoopste winst die je hebt.</li>
-      <li><strong>Rage clicks en dead clicks.</strong> Met name op de vergelijkingstabel, de gallerij-thumbnails en het kapotte aanbevelingsblok. Dead clicks op productkaarten met €0,00 zou het vermoeden hard maken.</li>
-      <li><strong>Desktop-opnames van sessies die de checkout bereikten maar niet afrondten.</strong> Dit is de gerichtste vraag in de lijst: 44,8% tegen 70,5% is een defect, geen voorkeur. Tien opnames laten waarschijnlijk in vijf minuten zien wát er stukgaat.</li>
-      <li><strong>Quick-backs op de PDP.</strong> Wie binnen enkele seconden terugklikt, kreeg iets anders dan de advertentie beloofde. Dat toetst of het eerste beeld matcht met de creative.</li>
-      <li><strong>Klikkaart van het koopblok.</strong> Hoeveel mensen openen «Verzending &amp; Retourneren» en «Specificaties» op plek 1 en 2 werkelijk? Als dat laag is, kost die plaatsing je alleen maar ruimte.</li>
+      <li><strong>Scrolldiepte op de PDP, gesplitst mobiel/desktop.</strong> <em>Via de API.</em> Dit toetst de hele redesign-these direct: haalt iemand plek 6 überhaupt? Als de mediaan onder de 50% ligt, is het mechanisme-blok effectief onzichtbaar en is het naar voren halen de goedkoopste winst die je hebt.</li>
+      <li><strong>Rage clicks en dead clicks.</strong> <em>Via de API.</em> Met name op de vergelijkingstabel, de gallerij-thumbnails en het kapotte aanbevelingsblok. Dead clicks op productkaarten met €0,00 zou het vermoeden hard maken.</li>
+      <li><strong>Quick-backs op de PDP.</strong> <em>Via de API.</em> Wie binnen enkele seconden terugklikt, kreeg iets anders dan de advertentie beloofde. Dat toetst of het eerste beeld matcht met de creative.</li>
+      <li><strong>Desktop-opnames van sessies die de checkout bereikten maar niet afrondden.</strong> <em>Handmatig — zit niet in de API.</em> Dit is de gerichtste vraag in de lijst: 44,8% tegen 70,5% is een defect, geen voorkeur. Tien opnames laten waarschijnlijk in vijf minuten zien wát er stukgaat.</li>
+      <li><strong>Klikkaart van het koopblok.</strong> <em>Handmatig — zit niet in de API.</em> Hoeveel mensen openen «Verzending &amp; Retourneren» en «Specificaties» op plek 1 en 2 werkelijk? Als dat laag is, kost die plaatsing je alleen maar ruimte.</li>
     </ul>
     <p>En los daarvan: kies één van de drie meettools. Drie scripts die grotendeels hetzelfde vastleggen, kosten laadtijd — en volgens Chappell kost elke extra seconde ongeveer 7% van je conversie.</p>
   </div>
