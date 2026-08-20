@@ -44,8 +44,14 @@ vrijwel nooit. Montserrat is het enige merkfont.
 Vraag dit voordat je iets uitgeeft. Het verandert de hele film, en gokken kost credits.
 
 Haal het product daarna op uit Shopify (`search_products`, of `graphql_query` op `title:*Naam*`
-als de zoekterm genegeerd wordt). De productomschrijving is je **enige bron voor claims** — zie
-stap 7. Noteer prijs, opzetstukken en de features die het product echt heeft.
+als de zoekterm genegeerd wordt) **en haal ook de live productpagina op**. Dat tweede is geen
+dubbel werk: de omschrijving in Shopify is verkoopproza, terwijl de pagina een specificatielijst
+draagt met de dingen die je nodig hebt — hoe de opzetstukken officieel heten, welke onderdelen
+er zijn, wat er op het display staat. In de Flex Guard-film stond "LED display" alleen in die
+lijst en nergens in de omschrijving.
+
+Samen zijn ze je **enige bron voor claims** — zie stap 7. Noteer prijs, de namen van de
+opzetstukken in de volgorde waarin ze horen, en de features die het product echt heeft.
 
 ### 2. Verzamel en herken de referentiefoto's
 
@@ -103,10 +109,15 @@ patroon, geen pech.
 Lees `references/annotatielaag.md` voor de opmaak, en `wellshave-merklaag.md` §10 voor de
 claimdiscipline.
 
-Elke annotatie is een goud labeltje plus één witte regel. **Elke claim moet herleidbaar zijn tot
-de productomschrijving uit stap 1.** Zet de bron in je verantwoording naar de gebruiker, zodat
-die kan controleren dat er niets verzonnen is. Geen batterijduur, geen scheertijden, geen
+Elke annotatie is een goud labeltje plus één witte regel, en moet twee toetsen doorstaan.
+
+**Is de claim waar?** Alles moet herleidbaar zijn tot de bronnen uit stap 1. Zet de bron per
+regel in je verantwoording naar de gebruiker. Geen batterijduur, geen scheertijden, geen
 materialen die bij een ander artikel horen.
+
+**Gaat het shot eronder over die claim?** Een juiste claim boven het verkeerde beeld is alsnog
+fout, en dit is de toets die het makkelijkst wordt overgeslagen omdat de eerste geslaagd is.
+Zet de shotlijst en de copy naast elkaar voordat je rendert.
 
 ### 8. Monteer en brand in
 

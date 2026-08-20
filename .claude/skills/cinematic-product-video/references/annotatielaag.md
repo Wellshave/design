@@ -76,19 +76,36 @@ Elke annotatie is één goud label plus één witte regel.
 Het label noemt wat het ís, de regel wat het dóét. Twee keer hetzelfde zeggen is een gemiste
 annotatie.
 
-**Elke claim moet herleidbaar zijn tot de productomschrijving.** Dit is dezelfde discipline als
-§10 van de merklaag, en het geldt hier extra: een regel over beeld leest als vaststaand feit.
-Geen batterijduur, geen scheertijden, geen materialen die bij een ander artikel horen. Zet de
-bron per regel in je verantwoording naar de gebruiker.
+**Elke claim moet herleidbaar zijn tot de productpagina.** Dit is dezelfde discipline als §10
+van de merklaag, en het geldt hier extra: een regel over beeld leest als vaststaand feit. Geen
+batterijduur, geen scheertijden, geen materialen die bij een ander artikel horen. Zet de bron
+per regel in je verantwoording naar de gebruiker.
+
+**En de claim moet passen bij wat er op dát moment in beeld is.** Dit is de tweede toets, en de
+makkelijkste om over te slaan. In de eerste versie van de Flex Guard-film stond boven het shot
+van het bedieningspaneel "LED-LICHT — je ziet precies wat je doet". Volkomen waar, netjes te
+herleiden tot de productomschrijving, en tóch fout: het shot toont het display met het
+batterijpercentage, niet het lampje dat de huid verlicht. De kijker leest de regel en zoekt in
+beeld naar iets wat er niet is.
+
+Loop daarom elke annotatie twee keer na: klopt de claim, en gaat het shot eronder daadwerkelijk
+over die claim. Een juiste claim op het verkeerde shot is alsnog een fout, en hij kost je niets
+om te herstellen — dus er is geen excuus om hem te laten staan.
 
 Voorbeeld uit de Flex Guard-film, met de bronzin ernaast:
 
-| Label | Regel | Bron in de productomschrijving |
+| Label | Regel | Bron op de productpagina |
 |---|---|---|
-| NAT OF DROOG | Gewoon mee de douche in | "Gebruik hem nat of droog" |
-| LED-LICHT | Je ziet precies wat je doet | "het geïntegreerde LED-licht voor ultieme precisie" |
+| NAT OF DROOG | Gewoon mee de douche in | "Geschikt voor nat en droog trimmen" |
+| LED-DISPLAY | Je ziet precies hoeveel er nog in zit | "LED display" in de specificaties |
 | SKIN SAFE-TECHNOLOGIE | Geen sneetjes, geen irritatie | "voorkomt irritatie & sneetjes" |
+| 3-IN-1 | Trimmen, scheren, neushaar verwijderen | "Bodytrimmer / Foil shaver / Neustrimmer opzetstuk" |
 | CONSTANTE KRACHT | Een motor die niet hapert | "constante kracht zonder hapering" |
+
+Let bij dat laatste voorbeeld op de volgorde: noem de opzetstukken in de volgorde waarin ze in
+beeld staan, en gebruik de namen die de productpagina zelf hanteert. "Detailleren" klinkt
+aantrekkelijker dan "neushaar verwijderen", maar het is niet wat het opzetstuk is en niet wat de
+klant koopt.
 
 ## Renderen
 
