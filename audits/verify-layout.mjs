@@ -45,6 +45,14 @@ for (const file of files) {
       // afknipt. Op structuur getoetst in plaats van op naam, want die
       // veranderde per blok. Een stilstaand element krijgt deze vrijstelling niet.
       if (ps.overflowX === 'hidden' && em.animationName !== 'none') return;
+      // een verschoven of vergroot element: de gemeten rechthoek is de
+      // verplaatste rechthoek, niet de plek die de opmaak eraan geeft. Dat is
+      // een ontwerpkeuze (een baan die opzij staat, een kaart die uitvergroot
+      // is) en geen fout. Wat de opmaak zelf doet, wordt bij de ouder gemeten.
+      if (em.transform !== 'none') return;
+      // absoluut geplaatst met een negatieve uitsprong: bewust over de rand
+      if (em.position === 'absolute' &&
+          (parseFloat(em.right) < 0 || parseFloat(em.left) < 0)) return;
       // een element dat met een negatieve marge bewust tot de sectierand loopt
       if (parseFloat(em.marginRight) < 0) return;
       const r = el.getBoundingClientRect(), pr = par.getBoundingClientRect();
