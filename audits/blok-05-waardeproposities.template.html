@@ -205,7 +205,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
 .zf-m .zf-hintring svg{width:20px;height:20px}
 .zf-m .zf-hint em{font-size:14px;font-weight:500;letter-spacing:0;text-transform:none;
   color:rgba(17,17,17,.72)}
-.zf-chips{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.zf-chips{display:grid;grid-template-columns:1fr;gap:8px}
 .zf-chip{display:flex;align-items:center;gap:11px;font-family:inherit;text-align:left;
   font-size:11.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:rgba(17,17,17,.8);
   background:rgba(255,255,255,.8);border:1px solid rgba(188,129,62,.2);border-radius:14px;
@@ -215,7 +215,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
   background-image:url("__PORTRAIT__");background-repeat:no-repeat;
   border:1px solid rgba(17,17,17,.12)}
 .zf-chip.aan .zf-thumb{border-color:rgba(17,17,17,.28)}
-.zf-chip span{min-width:0;overflow:hidden;text-overflow:ellipsis}
+.zf-chip span{min-width:0}
 .zf-chip i{margin-left:auto;display:none;width:22px;height:22px;flex:none;border-radius:50%;
   background:#111;color:#F5D18A;align-items:center;justify-content:center}
 .zf-chip i svg{width:12px;height:12px}
@@ -225,15 +225,15 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
 .zf-chip.aan i svg{color:#F5D18A}
 .zf-m .zf-body{grid-template-columns:1fr;gap:0}
 .zf-m .zf-fig{border-radius:16px}
-.zf-m .zf-vlak{aspect-ratio:1/.86}
-.zf-m .zf-foto{object-position:52% 6%}
+.zf-m .zf-vlak{aspect-ratio:1/1}
+.zf-m .zf-foto{object-position:50% 0}
 .zf-m .zf-label{display:none}
 .zf-m .zf-lijnen{display:none}
 .zf-m .zf-merk{width:60%;right:-10%;top:14%}
 .zf-m .zf-pin{width:26px;height:26px;margin:-13px 0 0 -13px}
 .zf-m .zf-pin i{inset:8px}
 .zf-m .zf-pin:not(.aan) i{background:rgba(255,255,255,.55);box-shadow:none}
-.zf-actief{position:absolute;left:16px;bottom:46px;z-index:3;background:#F5D18A;color:#111;
+.zf-actief{position:absolute;left:14px;top:14px;z-index:3;background:#F5D18A;color:#111;
   border-radius:100px;padding:9px 16px;font-size:11.5px;font-weight:700;letter-spacing:.1em;
   text-transform:uppercase}
 .zf-m .zf-fighint{left:16px;bottom:16px;font-size:12px}
@@ -316,7 +316,7 @@ footer p{max-width:none}
 <header class="masthead">
   <p class="eyebrow">Homepage-redesign · blok 5 van 12 · versie 3</p>
   <h1>De waardeproposities</h1>
-  <p class="dek">Versie 3 neemt jouw ontwerp over: geen bewering maar een vraag — "Waar wil je trimmen?" — met de zones op je eigen hero-foto en per zone het apparaat dat ervoor gemaakt is. Eén regel uit het aangeleverde ontwerp klopte niet en is rechtgezet: de "vanaf"-prijs stond bij het verkeerde product.</p>
+  <p class="dek">Versie 3 neemt jouw ontwerp over: geen bewering maar een vraag — "Waar wil je trimmen?" — met vijf zones op je eigen hero-foto en per zone het apparaat dat ervoor gemaakt is. Eén regel uit het aangeleverde ontwerp klopte niet en is rechtgezet: de "vanaf"-prijs stond bij het verkeerde product.</p>
   <p class="byline">Ontwerp — nog niets live. Akkoord → dan pas Shopify.</p>
   <div class="progress" aria-hidden="true">
     <i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
@@ -337,6 +337,13 @@ footer p{max-width:none}
   <p style="margin-bottom:0"><b>Op mobiel kregen de vier zoneknoppen geen pictogram maar een uitsnede van diezelfde foto</b>, rond precies dezelfde hotspot. Ik heb eerst vier lijnpictogrammen getekend; op 26 pixels werden het een T-shirt, een smiley en twee krabbels. De uitsnede is meteen duidelijk en hij hoort bij het beeld ernaast.</p>
 </div>
 
+<div class="callout fix">
+  <h3 style="margin-top:0">De vijfde lijn: de schaamstreek</h3>
+  <p><b>Die hoorde er inderdaad bij, en niet als extraatje.</b> Dit is de zone waar de aarzeling zit — sneetjes, ingegroeide haren, gevoelige huid — en het is precies de zone waar je productteksten het hardst over zijn. Hem weglaten betekende dat de sterkste reden om een bodygroomer te kopen nergens op de homepage stond.</p>
+  <p><b>Het punt zit onderaan de foto en de lijn loopt vandaar omhoog naar het label.</b> De schaamstreek zelf staat niet in beeld — de foto stopt bij het aanrecht — dus het punt zit op de onderbuik en wijst naar wat eronder zit. Dat is genoeg om te begrijpen wat er bedoeld wordt, zonder dat er iets getoond hoeft te worden.</p>
+  <p style="margin-bottom:0"><b>De kaart is de Flex Guard™ 3-in-1 (€54,95), niet de Groom Guard PRO.</b> Twee zones met hetzelfde apparaat zou de kiezer betekenisloos maken, en de Flex Guard-pagina is degene die letterlijk over deze zone gaat: "voorkomt irritatie &amp; sneetjes, zelfs bij de meest gevoelige huid" en "of het nu gaat om borst, schaamstreek of gezicht". Beide zones putten wel uit dezelfde vier bodygroomers, dus daar staat twee keer "4 geschikte apparaten".</p>
+</div>
+
 <div class="callout ask">
   <h3 style="margin-top:0">Wat de kaart per zone laat zien, en waar het wringt</h3>
   <p><b>De vier apparaten zijn dezelfde als in blok 3</b>, zodat de twee blokken elkaar niet tegenspreken: Groom Guard PRO, The Gentleman Shaver, Tondeuse Elegant en de Neustrimmer 4in1 Ultra. Blok 3 noemt ze bestsellers, blok 5 noemt ze de beste match — dat is hetzelfde rijtje, andere reden.</p>
@@ -344,7 +351,7 @@ footer p{max-width:none}
 </div>
 
 <h2>Het ontwerp</h2>
-<p class="sub">Links de figuur met de vier zones, rechts het apparaat dat voor die zone gemaakt is. Op mobiel staan de zones als knoppen boven de foto en schuift de kaart eronder.</p>
+<p class="sub">Links de figuur met de vijf zones, rechts het apparaat dat voor die zone gemaakt is. Op mobiel staan de zones als knoppen boven de foto en schuift de kaart eronder.</p>
 
 <div class="stage">
   <div>
@@ -368,13 +375,16 @@ footer p{max-width:none}
             <img class="zf-foto" src="__PORTRAIT__" alt="">
             <img class="zf-merk" src="__MARK__" alt="">
             <svg class="zf-lijnen" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-    <line data-zone="lichaam" x1="25.0" y1="58.0" x2="34.0" y2="51.0"/>
-    <line data-zone="gezicht" x1="35.0" y1="32.0" x2="53.5" y2="25.0"/>
-    <line data-zone="hoofd" x1="21.0" y1="9.0" x2="55.0" y2="6.5"/>
-    <line data-zone="neus" x1="29.0" y1="20.5" x2="56.0" y2="18.5"/>
+              <line data-zone="lichaam" x1="25.0" y1="58.0" x2="34.0" y2="51.0"/>
+              <line data-zone="schaam" x1="32.0" y1="84.0" x2="38.0" y2="91.5"/>
+              <line data-zone="gezicht" x1="35.0" y1="32.0" x2="53.5" y2="25.0"/>
+              <line data-zone="hoofd" x1="21.0" y1="9.0" x2="55.0" y2="6.5"/>
+              <line data-zone="neus" x1="29.0" y1="20.5" x2="56.0" y2="18.5"/>
             </svg>
             <button class="zf-pin" type="button" data-zone="lichaam" style="left:34.0%;top:51.0%" aria-label="Zone Lichaam"><i></i></button>
             <button class="zf-label" type="button" data-zone="lichaam" style="left:4.0%;top:58.0%">LICHAAM</button>
+            <button class="zf-pin" type="button" data-zone="schaam" style="left:38.0%;top:91.5%" aria-label="Zone Schaamstreek"><i></i></button>
+            <button class="zf-label" type="button" data-zone="schaam" style="left:4.0%;top:84.0%">SCHAAMSTREEK</button>
             <button class="zf-pin" type="button" data-zone="gezicht" style="left:53.5%;top:25.0%" aria-label="Zone Gezicht en baard"><i></i></button>
             <button class="zf-label" type="button" data-zone="gezicht" style="left:4.0%;top:32.0%">GEZICHT &amp; BAARD</button>
             <button class="zf-pin" type="button" data-zone="hoofd" style="left:55.0%;top:6.5%" aria-label="Zone Hoofd"><i></i></button>
@@ -384,7 +394,7 @@ footer p{max-width:none}
             <p class="zf-fighint"><svg><use href="#tik"/></svg>Selecteer een hotspot om van zone te wisselen.</p>
           </div>
           <div class="zf-kaart">
-            <div class="zf-paneel" data-zone="lichaam" hidden>
+            <div class="zf-paneel" data-zone="lichaam" data-naam="Lichaam" hidden>
               <div class="zf-kop">
                 <p class="zf-match">Beste match voor lichaam</p>
                 <p class="zf-aantal">4 geschikte apparaten</p>
@@ -401,9 +411,28 @@ footer p{max-width:none}
               </div>
               <p class="zf-prijs"><b>€59,95</b></p>
               <a class="zf-cta" href="#">Bekijk de Groom Guard PRO<span><svg><use href="#arw"/></svg></span></a>
-              <a class="zf-alle" href="#">Bekijk alle 4 producten voor bodygroomers — vanaf €39,95 <svg><use href="#arw"/></svg></a>
+              <a class="zf-alle" href="#">Bekijk alle 4 producten voor lichaam — vanaf €39,95 <svg><use href="#arw"/></svg></a>
             </div>
-            <div class="zf-paneel" data-zone="gezicht" hidden>
+            <div class="zf-paneel" data-zone="schaam" data-naam="Schaamstreek" hidden>
+              <div class="zf-kop">
+                <p class="zf-match">Beste match voor de schaamstreek</p>
+                <p class="zf-aantal">4 geschikte apparaten</p>
+              </div>
+              <h3 class="zf-naam">Flex Guard™ 3-in-1</h3>
+              <p class="zf-claim">De gevoeligste zone, zonder irritatie of sneetjes.</p>
+              <div class="zf-mid">
+                <div class="zf-shot"><img src="__BEST_SCHAAM__" alt="Flex Guard 3-in-1 met foil- en neusopzetstuk op de standaard"><span class="zf-badge">Skin Safe</span></div>
+                <ul class="zf-feiten">
+                  <li><span class="zf-well"><svg><use href="#parts"/></svg></span><span>Skin Safe tegen irritatie en sneetjes</span></li>
+                  <li><span class="zf-well"><svg><use href="#gauge"/></svg></span><span>Constante kracht zonder hapering</span></li>
+                  <li><span class="zf-well"><svg><use href="#drop"/></svg></span><span>Nat of droog, met LED-licht</span></li>
+                </ul>
+              </div>
+              <p class="zf-prijs"><b>€54,95</b></p>
+              <a class="zf-cta" href="#">Bekijk de Flex Guard<span><svg><use href="#arw"/></svg></span></a>
+              <a class="zf-alle" href="#">Bekijk alle 4 producten voor de schaamstreek — vanaf €39,95 <svg><use href="#arw"/></svg></a>
+            </div>
+            <div class="zf-paneel" data-zone="gezicht" data-naam="Gezicht &amp; baard" hidden>
               <div class="zf-kop">
                 <p class="zf-match">Beste match voor gezicht &amp; baard</p>
                 <p class="zf-aantal">8 geschikte apparaten</p>
@@ -422,7 +451,7 @@ footer p{max-width:none}
               <a class="zf-cta" href="#">Bekijk de Gentleman Shaver<span><svg><use href="#arw"/></svg></span></a>
               <a class="zf-alle" href="#">Bekijk alle 8 producten voor gezicht &amp; baard — vanaf €33,95 <svg><use href="#arw"/></svg></a>
             </div>
-            <div class="zf-paneel" data-zone="hoofd" hidden>
+            <div class="zf-paneel" data-zone="hoofd" data-naam="Hoofd" hidden>
               <div class="zf-kop">
                 <p class="zf-match">Beste match voor hoofd</p>
                 <p class="zf-aantal">3 geschikte apparaten</p>
@@ -441,7 +470,7 @@ footer p{max-width:none}
               <a class="zf-cta" href="#">Bekijk de Tondeuse Elegant<span><svg><use href="#arw"/></svg></span></a>
               <a class="zf-alle" href="#">Bekijk alle 3 producten voor hoofd — vanaf €54,95 <svg><use href="#arw"/></svg></a>
             </div>
-            <div class="zf-paneel" data-zone="neus">
+            <div class="zf-paneel" data-zone="neus" data-naam="Neus &amp; oren">
               <div class="zf-kop">
                 <p class="zf-match">Beste match voor neus &amp; oren</p>
                 <p class="zf-aantal">8 geschikte apparaten</p>
@@ -489,6 +518,7 @@ footer p{max-width:none}
 
         <div class="zf-chips">
           <button class="zf-chip" type="button" data-zone="lichaam"><span class="zf-thumb" style="background-position:18.0% 44.2%;background-size:320%"></span><span>LICHAAM</span><i><svg><use href="#chk"/></svg></i></button>
+          <button class="zf-chip" type="button" data-zone="schaam"><span class="zf-thumb" style="background-position:30.5% 100.0%;background-size:300%"></span><span>SCHAAMSTREEK</span><i><svg><use href="#chk"/></svg></i></button>
           <button class="zf-chip" type="button" data-zone="gezicht"><span class="zf-thumb" style="background-position:54.1% 23.2%;background-size:700%"></span><span>GEZICHT &amp; BAARD</span><i><svg><use href="#chk"/></svg></i></button>
           <button class="zf-chip" type="button" data-zone="hoofd"><span class="zf-thumb" style="background-position:55.8% 0.0%;background-size:700%"></span><span>HOOFD</span><i><svg><use href="#chk"/></svg></i></button>
           <button class="zf-chip aan" type="button" data-zone="neus"><span class="zf-thumb" style="background-position:57.4% 13.2%;background-size:850%"></span><span>NEUS &amp; OREN</span><i><svg><use href="#chk"/></svg></i></button>
@@ -500,15 +530,15 @@ footer p{max-width:none}
             <img class="zf-foto" src="__PORTRAIT__" alt="">
             <img class="zf-merk" src="__MARK__" alt="">
             <button class="zf-pin" type="button" data-zone="lichaam" style="left:34.0%;top:51.0%" aria-label="Zone Lichaam"><i></i></button>
+            <button class="zf-pin" type="button" data-zone="schaam" style="left:38.0%;top:91.5%" aria-label="Zone Schaamstreek"><i></i></button>
             <button class="zf-pin" type="button" data-zone="gezicht" style="left:53.5%;top:25.0%" aria-label="Zone Gezicht en baard"><i></i></button>
             <button class="zf-pin" type="button" data-zone="hoofd" style="left:55.0%;top:6.5%" aria-label="Zone Hoofd"><i></i></button>
             <button class="zf-pin aan" type="button" data-zone="neus" style="left:56.0%;top:18.5%" aria-label="Zone Neus en oren"><i></i></button>
             <p class="zf-actief">Actieve zone · <span data-actief>Neus &amp; oren</span></p>
-            <p class="zf-fighint"><svg><use href="#tik"/></svg>Tik op een hotspot om te wisselen.</p>
           </div>
           <p class="zf-pijl"><span><svg><use href="#dwn"/></svg></span></p>
           <div class="zf-kaart">
-            <div class="zf-paneel" data-zone="lichaam" hidden>
+            <div class="zf-paneel" data-zone="lichaam" data-naam="Lichaam" hidden>
               <div class="zf-kop">
                 <p class="zf-match">Beste match</p>
                 <p class="zf-aantal">4 geschikte apparaten</p>
@@ -527,7 +557,26 @@ footer p{max-width:none}
               <a class="zf-cta" href="#">Bekijk de Groom Guard PRO<span><svg><use href="#arw"/></svg></span></a>
               <a class="zf-alle" href="#">Alle 4 producten vanaf €39,95 <svg><use href="#arw"/></svg></a>
             </div>
-            <div class="zf-paneel" data-zone="gezicht" hidden>
+            <div class="zf-paneel" data-zone="schaam" data-naam="Schaamstreek" hidden>
+              <div class="zf-kop">
+                <p class="zf-match">Beste match</p>
+                <p class="zf-aantal">4 geschikte apparaten</p>
+              </div>
+              <h3 class="zf-naam">Flex Guard™ 3-in-1</h3>
+              <p class="zf-claim">De gevoeligste zone, zonder irritatie of sneetjes.</p>
+              <div class="zf-mid">
+                <div class="zf-shot"><img src="__BEST_SCHAAM__" alt="Flex Guard 3-in-1 met foil- en neusopzetstuk op de standaard"><span class="zf-badge">Skin Safe</span></div>
+                <ul class="zf-feiten">
+                  <li><span class="zf-well"><svg><use href="#parts"/></svg></span><span>Skin Safe tegen irritatie en sneetjes</span></li>
+                  <li><span class="zf-well"><svg><use href="#gauge"/></svg></span><span>Constante kracht zonder hapering</span></li>
+                  <li><span class="zf-well"><svg><use href="#drop"/></svg></span><span>Nat of droog, met LED-licht</span></li>
+                </ul>
+              </div>
+              <p class="zf-prijs"><b>€54,95</b></p>
+              <a class="zf-cta" href="#">Bekijk de Flex Guard<span><svg><use href="#arw"/></svg></span></a>
+              <a class="zf-alle" href="#">Alle 4 producten vanaf €39,95 <svg><use href="#arw"/></svg></a>
+            </div>
+            <div class="zf-paneel" data-zone="gezicht" data-naam="Gezicht &amp; baard" hidden>
               <div class="zf-kop">
                 <p class="zf-match">Beste match</p>
                 <p class="zf-aantal">8 geschikte apparaten</p>
@@ -546,7 +595,7 @@ footer p{max-width:none}
               <a class="zf-cta" href="#">Bekijk de Gentleman Shaver<span><svg><use href="#arw"/></svg></span></a>
               <a class="zf-alle" href="#">Alle 8 producten vanaf €33,95 <svg><use href="#arw"/></svg></a>
             </div>
-            <div class="zf-paneel" data-zone="hoofd" hidden>
+            <div class="zf-paneel" data-zone="hoofd" data-naam="Hoofd" hidden>
               <div class="zf-kop">
                 <p class="zf-match">Beste match</p>
                 <p class="zf-aantal">3 geschikte apparaten</p>
@@ -565,7 +614,7 @@ footer p{max-width:none}
               <a class="zf-cta" href="#">Bekijk de Tondeuse Elegant<span><svg><use href="#arw"/></svg></span></a>
               <a class="zf-alle" href="#">Alle 3 producten vanaf €54,95 <svg><use href="#arw"/></svg></a>
             </div>
-            <div class="zf-paneel" data-zone="neus">
+            <div class="zf-paneel" data-zone="neus" data-naam="Neus &amp; oren">
               <div class="zf-kop">
                 <p class="zf-match">Beste match</p>
                 <p class="zf-aantal">8 geschikte apparaten</p>
@@ -606,6 +655,9 @@ footer p{max-width:none}
     <tr><td rowspan="3"><b>Lichaam</b><br>4 apparaten<br>vanaf €39,95</td><td rowspan="3">Groom Guard™ PRO<br>€59,95</td><td>6.600 toeren en een LED-licht</td><td>"De krachtige 6600RPM motor glijdt door de dikste haren, het LED-licht laat elk haartje zien"</td></tr>
     <tr><td>Mesjes achter een kam</td><td>"De SkinSafe keramische mesjes leggen je huid nooit bloot"</td></tr>
     <tr><td>IPX7 waterdicht</td><td>"dankzij IPX7 gebruik je 'm gewoon onder de douche"</td></tr>
+    <tr><td rowspan="3"><b>Schaamstreek</b><br>4 apparaten<br>vanaf €39,95</td><td rowspan="3">Flex Guard™ 3-in-1<br>€54,95</td><td>Skin Safe tegen irritatie en sneetjes</td><td>"De geavanceerde Skin Safe-technologie voorkomt irritatie &amp; sneetjes, zelfs bij de meest gevoelige huid"</td></tr>
+    <tr><td>Constante kracht zonder hapering</td><td>"De motor levert constante kracht zonder hapering"</td></tr>
+    <tr><td>Nat of droog, met LED-licht</td><td>"Gebruik hem nat of droog, met het geïntegreerde LED-licht voor ultieme precisie"</td></tr>
     <tr><td rowspan="3"><b>Gezicht &amp; baard</b><br>8 apparaten<br>vanaf €33,95</td><td rowspan="3">The Gentleman Shaver™<br>€49,95</td><td>Trimmer, neustrimmer en baardtrimmer</td><td>"Deze multifunctionele shaver voor mannen met baarden bevat een trimmer, neustrimmer en baardtrimmer"</td></tr>
     <tr><td>LCD-display en lithium-accu</td><td>"Met de krachtige lithium batterij, LCD display en waterdichte behuizing"</td></tr>
     <tr><td>Waterdichte behuizing</td><td>idem</td></tr>
@@ -624,7 +676,7 @@ footer p{max-width:none}
 <p>Het aantal naast "beste match" is het aantal <b>apparaten</b> in die zone: geen messen, opzetstukken, tassen, garantieverlengingen of bundels. Zo kwam ik erop:</p>
 <ul>
   <li><b>Neus &amp; oren — 8.</b> Basic €16,95 · Essential €19,95 · Premium 2-in-1 €19,95 · 2in1 Elite €23,95 · Advance 3-in-1 €24,95 · Ultimate 4-in-1 €29,95 · 3in1 Platinum €29,95 · 4in1 Ultra €32,95. Dit is dezelfde acht als de dubbele reeks die ik bij blok 3 aankaartte, en die staat nog open.</li>
-  <li><b>Lichaam — 4.</b> Dual Groomer 2-in-1 €39,95 · Groom Guard €44,95 · Flex Guard 3-in-1 €54,95 · Groom Guard PRO €59,95.</li>
+  <li><b>Lichaam — 4</b> en <b>Schaamstreek — 4</b>: dezelfde vier bodygroomers. Dual Groomer 2-in-1 €39,95 · Groom Guard €44,95 · Flex Guard 3-in-1 €54,95 · Groom Guard PRO €59,95. Alle vier noemen de schaamstreek in hun eigen omschrijving, dus de zones splitsen op beste match en niet op voorraad.</li>
   <li><b>Gezicht &amp; baard — 8.</b> Men Shaper Iced €33,95 · The Dial Master €34,95 · Men Shaper Gold €36,95 · Men Shaper Supreme €39,95 · Scheerapparaat Elegant 4-in-1 €39,95 · The Gentleman Shaver €49,95 · Detailtrimmer Sharpline €49,95 · The Sentinel PRO €89,95.</li>
   <li><b>Hoofd — 3.</b> Head Shaver Deluxe €54,95 · Tondeuse Elegant €59,95 · Tondeuse Deluxe €69,95.</li>
 </ul>
@@ -633,6 +685,7 @@ footer p{max-width:none}
 <h2>Bouwnotities voor straks</h2>
 <ul>
   <li><b>De aantallen en "vanaf"-prijzen moeten uit een collectie komen</b>, niet uit vaste tekst. Zodra jij een product toevoegt of een prijs wijzigt, klopt "8 geschikte apparaten — vanaf €16,95" anders niet meer. Dat betekent vier collecties die vandaag nog niet bestaan; dat is dezelfde randvoorwaarde die bij blok 3 al opkwam.</li>
+  <li><b>Vijf zones, waarvan er twee uit dezelfde vier apparaten putten.</b> Als je liever vier zones hebt, is Schaamstreek de eerste die samengaat met Lichaam — maar dan verdwijnt wel de zone met de sterkste reden om te kopen.</li>
   <li><b>De hotspots zijn percentages op de foto</b>, geen vaste pixels. Wissel je de foto, dan verschuiven de vier punten mee in de sectie-instellingen — vier keer een x en een y.</li>
   <li><b>De raakvlakken van de hotspots zijn 30 pixels</b> op desktop en 26 op mobiel, met een extra onzichtbare rand eromheen. Op mobiel zijn de vier zoneknoppen de hoofdbediening; de punten op de foto zijn de tweede weg erheen.</li>
   <li><b>Drie feiten per kaart, niet meer.</b> Vier maakt de kaart hoger dan de foto ernaast en dan gaat het blok springen bij elke wisseling.</li>
@@ -642,6 +695,7 @@ footer p{max-width:none}
 <div class="callout ask">
   <h3 style="margin-top:0">Wat ik van jou nodig heb</h3>
   <ul style="margin-bottom:0">
+    <li><b>Is "Schaamstreek" het woord dat je wil?</b> Het staat zo in je eigen productteksten, en het is duidelijker dan "intiem" of "gevoelige zones". Maar het staat straks wel in kapitalen op je homepage.</li>
     <li><b>De twee zwakke kaarten:</b> specificaties toevoegen aan de Gentleman Shaver en de Tondeuse Elegant, of die kaarten wisselen naar de Men Shaper Supreme en de Head Shaver Deluxe?</li>
     <li><b>Waar horen Blade Guard, Blade Baron en Edge Blade?</b> Zonder die indeling kloppen de aantallen per zone niet helemaal.</li>
     <li><b>De Tondeuse Deluxe staat op nul voorraad</b> en de vier negatieve voorraden uit blok 3 staan er ook nog. Dat is geen ontwerpvraag maar het raakt wel wat dit blok toont.</li>
@@ -696,11 +750,7 @@ document.querySelectorAll('.zf').forEach(function (sec) {
     knoppen.forEach(function (k) { k.classList.toggle('aan', k.dataset.zone === zone); });
     lijnen.forEach(function (l) { l.classList.toggle('aan', l.dataset.zone === zone); });
     if (actief) {
-      var kop = sec.querySelector('.zf-paneel[data-zone="' + zone + '"] .zf-cta');
-      actief.textContent = knoppen.filter(function (k) {
-        return k.dataset.zone === zone && k.classList.contains('zf-chip');
-      }).map(function (k) { return k.querySelector('span').textContent; })[0] || zone;
-      void kop;
+      actief.textContent = panelen[i].dataset.naam || zone;
     }
   }
   function kies(zone) {

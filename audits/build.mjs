@@ -17,6 +17,7 @@ const ASSETS = {
   __BEST_NEUS__:    ['assets/best-neus.webp',   'image/webp'],
   __BEST_GEZICHT__: ['assets/best-gezicht.webp','image/webp'],
   __BEST_HOOFD__:   ['assets/best-hoofd.webp',  'image/webp'],
+  __BEST_SCHAAM__:  ['assets/best-schaamstreek.webp','image/webp'],
   __KKMARK__:       ['assets/kieskeurig-woordmerk.png','image/png'],
   __GEN_GG__:       ['assets/gen-groomguard.webp','image/webp'],
   __GEN_NT__:       ['assets/gen-neustrimmer.webp','image/webp'],
