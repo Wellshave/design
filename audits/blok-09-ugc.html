@@ -151,8 +151,8 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
   border-radius:16px}
 .fam-beeld img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .fam-beeld::after{content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(180deg,rgba(11,11,10,.5) 0%,rgba(11,11,10,0) 26%,
-    rgba(11,11,10,.15) 52%,rgba(11,11,10,.9) 100%)}
+  background:linear-gradient(180deg,rgba(11,11,10,.45) 0%,rgba(11,11,10,0) 24%,
+    rgba(11,11,10,0) 62%,rgba(11,11,10,.78) 100%)}
 
 .fam-duur{position:absolute;z-index:2;left:11px;top:11px;
   font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;
@@ -184,23 +184,18 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
   letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:2px}
 
 /* de tekst onderin de kaart */
-.fam-onder{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:0 14px 14px;
+.fam-onder{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:0 14px 15px;
   display:flex;flex-direction:column;gap:9px}
-.fam-titel{font-size:15px;line-height:130%;font-weight:600;letter-spacing:-.015em;color:#fff}
-.fam-kaart.aan .fam-titel{font-size:16px}
 .fam-wie{display:flex;align-items:center;gap:9px;min-width:0}
-.fam-av{width:26px;height:26px;border-radius:50%;flex:none;overflow:hidden;
+.fam-av{width:30px;height:30px;border-radius:50%;flex:none;overflow:hidden;
   border:1px solid rgba(245,209,138,.5);background:rgba(11,11,10,.5);
   display:flex;align-items:center;justify-content:center;
   font-size:10px;font-weight:700;color:#F5D18A}
 .fam-av img{width:100%;height:100%;object-fit:cover;display:block}
 .fam-naam{min-width:0}
-.fam-naam b{display:block;font-size:12.5px;font-weight:600;color:#fff;line-height:1.25}
-.fam-naam em{display:block;font-style:normal;font-size:9px;font-weight:700;letter-spacing:.12em;
-  text-transform:uppercase;color:#F5D18A;margin-top:3px}
-.fam-zone{align-self:flex-start;font-size:9.5px;font-weight:700;letter-spacing:.13em;
-  text-transform:uppercase;color:#fff;background:rgba(255,255,255,.12);
-  border:1px solid rgba(255,255,255,.18);border-radius:7px;padding:6px 10px}
+.fam-naam b{display:block;font-size:13.5px;font-weight:600;color:#fff;line-height:1.25}
+.fam-naam em{display:block;font-style:normal;font-size:11px;font-weight:600;letter-spacing:.01em;
+  color:#F5D18A;margin-top:2px}
 
 /* de open plekken in dezelfde vorm */
 .fam-leeg{background:#EFE8DC;color:#111;border:1px dashed rgba(188,129,62,.55);
@@ -277,8 +272,6 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
    en buiten de kaart wordt het afgeknipt. Daar valt hij weg — de gouden rand,
    de uitvergroting en de afspeelknop zeggen al welke kaart aan de beurt is. */
 .fam-m .fam-lint{display:none}
-.fam-m .fam-titel{font-size:13.5px}
-.fam-m .fam-kaart.aan .fam-titel{font-size:14px}
 .fam-m .fam-voetin{flex-direction:column;align-items:flex-start;gap:20px;padding:0 18px}
 .fam-m .fam-cta{width:100%;justify-content:center}
 .fam-m .fam-balk{width:180px}
@@ -314,7 +307,7 @@ footer p{max-width:none}
 </defs></svg><div class="wrap">
 
 <header class="masthead">
-  <p class="eyebrow">Homepage-redesign · blok 9 van 12 · versie 5</p>
+  <p class="eyebrow">Homepage-redesign · blok 9 van 12 · versie 6</p>
   <h1>De Wellshave-familie</h1>
   <p class="dek">Het aangeleverde ontwerp: één uitgelichte kaart in het midden, de rest kleiner ernaast, en een baan die vanzelf doorschuift. Vier dingen uit dat ontwerp zijn aangepast omdat ze niet na te kijken zijn, en twee onderdelen zijn op jouw besluit vervallen — dat staat hieronder.</p>
   <p class="byline">Ontwerp — nog niets live. Akkoord → dan pas Shopify.</p>
@@ -374,12 +367,10 @@ footer p{max-width:none}
                 <span class="fam-geluid"><svg><use href="#geluid"/></svg></span>
                 <span class="fam-play"><svg><use href="#play"/></svg></span>
                 <div class="fam-onder">
-                  <p class="fam-titel">Mijn hoofd, mijn routine.</p>
                   <div class="fam-wie">
                     <span class="fam-av">?</span>
-                    <span class="fam-naam"><b>Naam · plaats</b><em>Nog in te vullen</em></span>
+                    <span class="fam-naam"><b>Naam · plaats</b><em>@instagramtag</em></span>
                   </div>
-                  <span class="fam-zone">Hoofd</span>
                 </div>
               </div>
             </article>
@@ -398,12 +389,10 @@ footer p{max-width:none}
                 <span class="fam-geluid"><svg><use href="#geluid"/></svg></span>
                 <span class="fam-play"><svg><use href="#play"/></svg></span>
                 <div class="fam-onder">
-                  <p class="fam-titel">Voor het hele lichaam.</p>
                   <div class="fam-wie">
                     <span class="fam-av">?</span>
-                    <span class="fam-naam"><b>Naam · plaats</b><em>Nog in te vullen</em></span>
+                    <span class="fam-naam"><b>Naam · plaats</b><em>@instagramtag</em></span>
                   </div>
-                  <span class="fam-zone">Lichaam</span>
                 </div>
               </div>
             </article>
@@ -422,12 +411,10 @@ footer p{max-width:none}
                 <span class="fam-geluid"><svg><use href="#geluid"/></svg></span>
                 <span class="fam-play"><svg><use href="#play"/></svg></span>
                 <div class="fam-onder">
-                  <p class="fam-titel">Klein apparaat, groot verschil.</p>
                   <div class="fam-wie">
                     <span class="fam-av">?</span>
-                    <span class="fam-naam"><b>Naam · plaats</b><em>Nog in te vullen</em></span>
+                    <span class="fam-naam"><b>Naam · plaats</b><em>@instagramtag</em></span>
                   </div>
-                  <span class="fam-zone">Neus & oren</span>
                 </div>
               </div>
             </article>
@@ -517,12 +504,10 @@ footer p{max-width:none}
                 <span class="fam-geluid"><svg><use href="#geluid"/></svg></span>
                 <span class="fam-play"><svg><use href="#play"/></svg></span>
                 <div class="fam-onder">
-                  <p class="fam-titel">Mijn hoofd, mijn routine.</p>
                   <div class="fam-wie">
                     <span class="fam-av">?</span>
-                    <span class="fam-naam"><b>Naam · plaats</b><em>Nog in te vullen</em></span>
+                    <span class="fam-naam"><b>Naam · plaats</b><em>@instagramtag</em></span>
                   </div>
-                  <span class="fam-zone">Hoofd</span>
                 </div>
               </div>
             </article>
@@ -541,12 +526,10 @@ footer p{max-width:none}
                 <span class="fam-geluid"><svg><use href="#geluid"/></svg></span>
                 <span class="fam-play"><svg><use href="#play"/></svg></span>
                 <div class="fam-onder">
-                  <p class="fam-titel">Voor het hele lichaam.</p>
                   <div class="fam-wie">
                     <span class="fam-av">?</span>
-                    <span class="fam-naam"><b>Naam · plaats</b><em>Nog in te vullen</em></span>
+                    <span class="fam-naam"><b>Naam · plaats</b><em>@instagramtag</em></span>
                   </div>
-                  <span class="fam-zone">Lichaam</span>
                 </div>
               </div>
             </article>
@@ -565,12 +548,10 @@ footer p{max-width:none}
                 <span class="fam-geluid"><svg><use href="#geluid"/></svg></span>
                 <span class="fam-play"><svg><use href="#play"/></svg></span>
                 <div class="fam-onder">
-                  <p class="fam-titel">Klein apparaat, groot verschil.</p>
                   <div class="fam-wie">
                     <span class="fam-av">?</span>
-                    <span class="fam-naam"><b>Naam · plaats</b><em>Nog in te vullen</em></span>
+                    <span class="fam-naam"><b>Naam · plaats</b><em>@instagramtag</em></span>
                   </div>
-                  <span class="fam-zone">Neus & oren</span>
                 </div>
               </div>
             </article>
@@ -632,9 +613,10 @@ footer p{max-width:none}
 </div>
 
 <div class="callout fix">
-  <h3 style="margin-top:0">Twee besluiten, verwerkt</h3>
+  <h3 style="margin-top:0">Drie besluiten, verwerkt</h3>
   <p><b>Het hartje is eruit.</b> Een hart dat niets doet is een knop die liegt, en een hart dat wél telt heeft opslag nodig — likes moeten ergens vandaan komen en ergens blijven staan. Dat is maatwerk, geen sectie-instelling. Weg dus. De kaart is er rustiger van geworden: titel, naam, zonelabel, klaar.</p>
-  <p style="margin-bottom:0"><b>"Bekijk alle video's" is "Bekijk Instagram" geworden.</b> Die knop had geen bestemming — er is geen pagina met alle video's. Instagram bestaat wel, staat vol met precies dit materiaal, en het past bij wat het blok doet: laten zien dat er een groep achter zit. <b>De losse Instagram-cirkel ernaast is daarmee vervallen</b>, want die wees naar dezelfde plek; TikTok en YouTube blijven staan. Wil je toch alle drie de cirkels naast de knop, dan is dat één regel.</p>
+  <p><b>"Bekijk alle video's" is "Bekijk Instagram" geworden.</b> Die knop had geen bestemming — er is geen pagina met alle video's. Instagram bestaat wel, staat vol met precies dit materiaal, en het past bij wat het blok doet: laten zien dat er een groep achter zit. <b>De losse Instagram-cirkel ernaast is daarmee vervallen</b>, want die wees naar dezelfde plek; TikTok en YouTube blijven staan. Wil je toch alle drie de cirkels naast de knop, dan is dat één regel.</p>
+  <p style="margin-bottom:0"><b>De kaarten zijn leeggemaakt.</b> De kop op de video en het zonelabel zijn eraf; wat overblijft is de naam met plaats en de Instagram-tag. Er stonden vier lagen tekst over een beeld van 236 bij 340 pixels — dat is een affiche, geen video. Wat je nu ziet is het beeld, en wie het gemaakt heeft. De beschrijving van wat er in elke video gebeurt staat nog wel in dit document, in de tabel hieronder: die is voor jou bij het bouwen, niet voor de bezoeker.</p>
 </div>
 
 <h2>De acht plekken</h2>
@@ -674,8 +656,9 @@ footer p{max-width:none}
 
 <h2>Bouwnotities voor straks</h2>
 <ul>
-  <li><b>Elke kaart is een blok dat je zelf vult.</b> Per kaart: de video, een titel, een naam met plaats, een zonelabel en het platform waar hij vandaan komt. Allemaal velden in de sectie-instellingen, en de volgorde versleep je. De teksten die er nu in staan zijn mijn voorstel, geen vaste tekst.</li>
+  <li><b>Elke kaart is een blok dat je zelf vult.</b> Er zijn nog maar drie velden over: de video, de naam met plaats, en de Instagram-tag. De volgorde versleep je. Laat de tag leeg en de naamregel schuift vanzelf naar één regel.</li>
   <li><b>Het rondje bij de naam is het bronveld.</b> Daar komt de foto van de klant of het merkicoon van het platform. Nu staat er een vraagteken.</li>
+  <li><b>De zone staat alleen nog op de open plekken.</b> Op een gevulde kaart is dat weggehaald: daar is het beeld het onderwerp. Op een lege plek is het label juist het enige wat er staat, want dat is de opnameopdracht.</li>
   <li><b>De open plekken zijn een lege staat, geen ontwerp.</b> Staat er geen video op een positie, dan verschijnt de stippellijn met het label. Ze verdwijnen vanzelf zodra je filmt.</li>
   <li><b>Het lint hangt buiten de kaart</b>, dus de kaart mag zijn inhoud niet afknippen. De afronding zit daarom op het beeld en niet op de kaart. Zet je dat terug, dan verdwijnt de rechterhelft van het lint — dat is precies wat er in de eerste bouw gebeurde.</li>
   <li><b>Op mobiel valt het lint weg.</b> Een kaart is daar 200 pixels breed: het lint bedekt dan het halve beeld, en buiten de kaart wordt het door de baan afgeknipt. De gouden rand, de uitvergroting en de afspeelknop zeggen al welke kaart aan de beurt is.</li>

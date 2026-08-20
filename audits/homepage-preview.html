@@ -1163,8 +1163,8 @@ footer p{margin:0;max-width:72ch}
   border-radius:16px}
 .fam-beeld img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .fam-beeld::after{content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(180deg,rgba(11,11,10,.5) 0%,rgba(11,11,10,0) 26%,
-    rgba(11,11,10,.15) 52%,rgba(11,11,10,.9) 100%)}
+  background:linear-gradient(180deg,rgba(11,11,10,.45) 0%,rgba(11,11,10,0) 24%,
+    rgba(11,11,10,0) 62%,rgba(11,11,10,.78) 100%)}
 
 .fam-duur{position:absolute;z-index:2;left:11px;top:11px;
   font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;
@@ -1196,23 +1196,18 @@ footer p{margin:0;max-width:72ch}
   letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:2px}
 
 /* de tekst onderin de kaart */
-.fam-onder{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:0 14px 14px;
+.fam-onder{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:0 14px 15px;
   display:flex;flex-direction:column;gap:9px}
-.fam-titel{font-size:15px;line-height:130%;font-weight:600;letter-spacing:-.015em;color:#fff}
-.fam-kaart.aan .fam-titel{font-size:16px}
 .fam-wie{display:flex;align-items:center;gap:9px;min-width:0}
-.fam-av{width:26px;height:26px;border-radius:50%;flex:none;overflow:hidden;
+.fam-av{width:30px;height:30px;border-radius:50%;flex:none;overflow:hidden;
   border:1px solid rgba(245,209,138,.5);background:rgba(11,11,10,.5);
   display:flex;align-items:center;justify-content:center;
   font-size:10px;font-weight:700;color:#F5D18A}
 .fam-av img{width:100%;height:100%;object-fit:cover;display:block}
 .fam-naam{min-width:0}
-.fam-naam b{display:block;font-size:12.5px;font-weight:600;color:#fff;line-height:1.25}
-.fam-naam em{display:block;font-style:normal;font-size:9px;font-weight:700;letter-spacing:.12em;
-  text-transform:uppercase;color:#F5D18A;margin-top:3px}
-.fam-zone{align-self:flex-start;font-size:9.5px;font-weight:700;letter-spacing:.13em;
-  text-transform:uppercase;color:#fff;background:rgba(255,255,255,.12);
-  border:1px solid rgba(255,255,255,.18);border-radius:7px;padding:6px 10px}
+.fam-naam b{display:block;font-size:13.5px;font-weight:600;color:#fff;line-height:1.25}
+.fam-naam em{display:block;font-style:normal;font-size:11px;font-weight:600;letter-spacing:.01em;
+  color:#F5D18A;margin-top:2px}
 
 /* de open plekken in dezelfde vorm */
 .fam-leeg{background:#EFE8DC;color:#111;border:1px dashed rgba(188,129,62,.55);
@@ -1289,8 +1284,6 @@ footer p{margin:0;max-width:72ch}
    en buiten de kaart wordt het afgeknipt. Daar valt hij weg — de gouden rand,
    de uitvergroting en de afspeelknop zeggen al welke kaart aan de beurt is. */
 .fam-m .fam-lint{display:none}
-.fam-m .fam-titel{font-size:13.5px}
-.fam-m .fam-kaart.aan .fam-titel{font-size:14px}
 .fam-m .fam-voetin{flex-direction:column;align-items:flex-start;gap:20px;padding:0 18px}
 .fam-m .fam-cta{width:100%;justify-content:center}
 .fam-m .fam-balk{width:180px}
@@ -2900,12 +2893,10 @@ footer p{margin:0;max-width:72ch}
                 <span class="fam-geluid"><svg><use href="#geluid"/></svg></span>
                 <span class="fam-play"><svg><use href="#play"/></svg></span>
                 <div class="fam-onder">
-                  <p class="fam-titel">Mijn hoofd, mijn routine.</p>
                   <div class="fam-wie">
                     <span class="fam-av">?</span>
-                    <span class="fam-naam"><b>Naam · plaats</b><em>Nog in te vullen</em></span>
+                    <span class="fam-naam"><b>Naam · plaats</b><em>@instagramtag</em></span>
                   </div>
-                  <span class="fam-zone">Hoofd</span>
                 </div>
               </div>
             </article>
@@ -2924,12 +2915,10 @@ footer p{margin:0;max-width:72ch}
                 <span class="fam-geluid"><svg><use href="#geluid"/></svg></span>
                 <span class="fam-play"><svg><use href="#play"/></svg></span>
                 <div class="fam-onder">
-                  <p class="fam-titel">Voor het hele lichaam.</p>
                   <div class="fam-wie">
                     <span class="fam-av">?</span>
-                    <span class="fam-naam"><b>Naam · plaats</b><em>Nog in te vullen</em></span>
+                    <span class="fam-naam"><b>Naam · plaats</b><em>@instagramtag</em></span>
                   </div>
-                  <span class="fam-zone">Lichaam</span>
                 </div>
               </div>
             </article>
@@ -2948,12 +2937,10 @@ footer p{margin:0;max-width:72ch}
                 <span class="fam-geluid"><svg><use href="#geluid"/></svg></span>
                 <span class="fam-play"><svg><use href="#play"/></svg></span>
                 <div class="fam-onder">
-                  <p class="fam-titel">Klein apparaat, groot verschil.</p>
                   <div class="fam-wie">
                     <span class="fam-av">?</span>
-                    <span class="fam-naam"><b>Naam · plaats</b><em>Nog in te vullen</em></span>
+                    <span class="fam-naam"><b>Naam · plaats</b><em>@instagramtag</em></span>
                   </div>
-                  <span class="fam-zone">Neus & oren</span>
                 </div>
               </div>
             </article>
@@ -3041,12 +3028,10 @@ footer p{margin:0;max-width:72ch}
                 <span class="fam-geluid"><svg><use href="#geluid"/></svg></span>
                 <span class="fam-play"><svg><use href="#play"/></svg></span>
                 <div class="fam-onder">
-                  <p class="fam-titel">Mijn hoofd, mijn routine.</p>
                   <div class="fam-wie">
                     <span class="fam-av">?</span>
-                    <span class="fam-naam"><b>Naam · plaats</b><em>Nog in te vullen</em></span>
+                    <span class="fam-naam"><b>Naam · plaats</b><em>@instagramtag</em></span>
                   </div>
-                  <span class="fam-zone">Hoofd</span>
                 </div>
               </div>
             </article>
@@ -3065,12 +3050,10 @@ footer p{margin:0;max-width:72ch}
                 <span class="fam-geluid"><svg><use href="#geluid"/></svg></span>
                 <span class="fam-play"><svg><use href="#play"/></svg></span>
                 <div class="fam-onder">
-                  <p class="fam-titel">Voor het hele lichaam.</p>
                   <div class="fam-wie">
                     <span class="fam-av">?</span>
-                    <span class="fam-naam"><b>Naam · plaats</b><em>Nog in te vullen</em></span>
+                    <span class="fam-naam"><b>Naam · plaats</b><em>@instagramtag</em></span>
                   </div>
-                  <span class="fam-zone">Lichaam</span>
                 </div>
               </div>
             </article>
@@ -3089,12 +3072,10 @@ footer p{margin:0;max-width:72ch}
                 <span class="fam-geluid"><svg><use href="#geluid"/></svg></span>
                 <span class="fam-play"><svg><use href="#play"/></svg></span>
                 <div class="fam-onder">
-                  <p class="fam-titel">Klein apparaat, groot verschil.</p>
                   <div class="fam-wie">
                     <span class="fam-av">?</span>
-                    <span class="fam-naam"><b>Naam · plaats</b><em>Nog in te vullen</em></span>
+                    <span class="fam-naam"><b>Naam · plaats</b><em>@instagramtag</em></span>
                   </div>
-                  <span class="fam-zone">Neus & oren</span>
                 </div>
               </div>
             </article>
