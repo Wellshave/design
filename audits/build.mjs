@@ -34,6 +34,9 @@ const ASSETS = {
   __UGC_HOOFD__:    ['assets/ugc-hoofd.webp','image/webp'],
   __UGC_BORST__:    ['assets/ugc-borst.webp','image/webp'],
   __UGC_NEUS__:     ['assets/ugc-neus.webp','image/webp'],
+  __TEAM1__:        ['assets/team-1.webp','image/webp'],
+  __TEAM2__:        ['assets/team-2.webp','image/webp'],
+  __TEAM3__:        ['assets/team-3.webp','image/webp'],
   __KKBEST__:       ['assets/kk-best-reviewed.png','image/png'],
   __KKTEST__:       ['assets/kk-testpanel.png',   'image/png'],
 };

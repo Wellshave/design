@@ -145,11 +145,10 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
   color:rgba(255,255,255,.62)}
 .zk-team{position:relative;z-index:1;display:flex;align-items:center;gap:16px}
 .zk-koppen{display:flex;flex:none}
-/* de gezichten staan er leeg in tot er eigen teamfoto's zijn; zwart op zwart
-   leest als een vlek, dus ze zijn zichtbaar leeg */
-.zk-koppen i{width:46px;height:46px;border-radius:50%;display:block;flex:none;
-  border:2px solid #141312;box-shadow:inset 0 0 0 1px rgba(245,209,138,.5);
-  background:rgba(255,255,255,.12);margin-left:-13px}
+.zk-koppen i{width:46px;height:46px;border-radius:50%;display:block;flex:none;overflow:hidden;
+  border:2px solid #141312;box-shadow:0 0 0 1px rgba(245,209,138,.4);
+  background:#2A2724;margin-left:-13px}
+.zk-koppen img{width:100%;height:100%;object-fit:cover;display:block}
 .zk-koppen i:first-child{margin-left:0}
 .zk-team b{display:block;font-size:11px;font-weight:700;letter-spacing:.15em;
   text-transform:uppercase;color:#F5D18A}
@@ -265,7 +264,7 @@ footer p{max-width:none}
 </defs></svg><div class="wrap">
 
 <header class="masthead">
-  <p class="eyebrow">Homepage-redesign · blok 11 van 12 · versie 4</p>
+  <p class="eyebrow">Homepage-redesign · blok 11 van 12 · versie 5</p>
   <h1>Goed geregeld</h1>
   <p class="dek">Het aangeleverde ontwerp: één omkaderd vlak met de vier zekerheden, een donkere hulpkaart en de vragen met onderwerpknoppen ernaast.</p>
   <p class="byline">Ontwerp — nog niets live. Akkoord → dan pas Shopify.</p>
@@ -286,7 +285,7 @@ footer p{max-width:none}
   <h3 style="margin-top:0">Vier dingen uit het ontwerp die ik heb aangepast of weggelaten</h3>
   <p><b>1. "Geen kleine lettertjes. Gewoon duidelijk geregeld" is eruit</b>, met de verbindingslijnen tussen de kaarten, zoals je vroeg.</p>
   <p><b>2. "Binnen één werkdag antwoord" staat er weer in.</b> Ik had hem eruit gehaald omdat ik een reactietijd nergens kan nakijken; jij hebt bevestigd dat je die termijn haalt, dus hij staat er. Het is de sterkste regel van die kaart: het is het enige wat een concurrent niet zomaar kan overnemen zonder het waar te maken. Eén ding hoort erbij: <b>een beloofde termijn moet ook op een drukke maandag gehaald worden</b>, anders kost hij meer dan hij opbrengt.</p>
-  <p><b>3. De drie gezichten staan er leeg in.</b> In het ontwerp staan drie portretten van mensen die niet bij jou werken. Dat is hetzelfde probleem als de zes gezichten in blok 9: het staat naast "een echt mens", en dan moet het ook een echt mens zijn. Vul ze met je eigen team of haal de rij weg — het ontwerp werkt ook zonder.</p>
+  <p><b>3. De drie gezichten zijn nu je eigen team.</b> In het aangeleverde ontwerp stonden drie portretten van mensen die niet bij jou werken; die stonden naast "een echt mens" en dat is precies waar het misgaat. Er staan nu drie van de zes teamfoto's van je over-pagina (<code>redesign_team_member_1</code> tot en met <code>6</code>), bijgesneden op het gezicht. <b>Dat zijn de zwart-witversies die live staan</b> — jij hebt me de kleurenversies gestuurd; staan die ook in je Shopify-bestanden, dan is dat één regel wisselen.</p>
   <p style="margin-bottom:0"><b>4. "Volledige garantie" is "Garantie op elk apparaat" geworden.</b> "Volledig" leest als: alles is gedekt, ook als je hem laat vallen. Dat kan niet waar zijn, en het is de kaart waar je juist wil dat mensen je op hun woord geloven. Wat er nu staat is nog steeds sterk en wel houdbaar.</p>
 </div>
 
@@ -358,7 +357,7 @@ footer p{max-width:none}
                 <h3 class="zk-hulph">Je krijgt antwoord<b>van een echt mens.</b></h3>
                 <p class="zk-hulpp">Stuur ons je vraag. We denken mee over je bestelling, productkeuze of gebruik.</p>
                 <div class="zk-team">
-                  <span class="zk-koppen"><i></i><i></i><i></i></span>
+                  <span class="zk-koppen"><i><img src="__TEAM1__" alt=""></i><i><img src="__TEAM2__" alt=""></i><i><img src="__TEAM3__" alt=""></i></span>
                   <span><b>Persoonlijke hulp</b><em>Binnen één werkdag antwoord</em></span>
                 </div>
                 <a class="zk-knop" href="#"><svg><use href="#mail"/></svg>contact@wellshave.com</a>
@@ -465,7 +464,7 @@ footer p{max-width:none}
                 <h3 class="zk-hulph">Je krijgt antwoord<b>van een echt mens.</b></h3>
                 <p class="zk-hulpp">Stuur ons je vraag. We denken mee over je bestelling, productkeuze of gebruik.</p>
                 <div class="zk-team">
-                  <span class="zk-koppen"><i></i><i></i><i></i></span>
+                  <span class="zk-koppen"><i><img src="__TEAM1__" alt=""></i><i><img src="__TEAM2__" alt=""></i><i><img src="__TEAM3__" alt=""></i></span>
                   <span><b>Persoonlijke hulp</b><em>Binnen één werkdag antwoord</em></span>
                 </div>
                 <a class="zk-knop" href="#"><svg><use href="#mail"/></svg>contact@wellshave.com</a>
@@ -539,7 +538,7 @@ footer p{max-width:none}
     <tr><td>Gebruik</td><td><b>Kan ik het apparaat onder de douche gebruiken?</b></td><td>Je twee waterdicht-vragen samengevoegd; die stonden er twee keer met vrijwel hetzelfde antwoord</td></tr>
     <tr><td>Gebruik</td><td><b>Hoe vaak moet ik het mes vervangen?</b></td><td>Je eigen FAQ (6 tot 12 maanden), met de verwijzing naar losse scheerkoppen erbij</td></tr>
     <tr><td>Gebruik</td><td><b>Welk apparaat heb ik nodig?</b></td><td>Nieuw. Dit is de vraag achter 3,1% add-to-cart uit de audit; het antwoord staat al op de pagina, in blok 5</td></tr>
-    <tr><td>Garantie</td><td><b>Wat valt er onder de garantie?</b></td><td>Nieuw, en nodig omdat het onderwerp Garantie anders leeg was. <b>Dit antwoord moet jij bevestigen</b> — er is geen garantiebepaling in je beleid, dus ik heb geschreven wat gebruikelijk is: twee jaar op het apparaat, slijtdelen uitgezonderd</td></tr>
+    <tr><td>Garantie</td><td><b>Wat valt er onder de garantie?</b></td><td>Nieuw, en nodig omdat het onderwerp Garantie anders leeg was. <b>Door jou bevestigd:</b> twee jaar standaardgarantie op het apparaat, slijtdelen uitgezonderd. Staat nog steeds niet in je Shopify-beleid — daar hoort het ook te komen</td></tr>
     <tr><td>Garantie</td><td><b>Hoe bereik ik jullie?</b></td><td>Je eigen FAQ. Geen naam, geen reactietijd</td></tr>
   </tbody>
 </table>
@@ -548,9 +547,8 @@ footer p{max-width:none}
 <div class="callout ask">
   <h3 style="margin-top:0">Wat ik van jou nodig heb</h3>
   <ul style="margin-bottom:0">
-    <li><b>Klopt het garantie-antwoord?</b> Twee jaar op het apparaat, slijtdelen uitgezonderd. Dat is mijn invulling, geen bron — er staat niets over garantie in je beleid.</li>
-    <li><b>Haal je "binnen één werkdag"?</b> Zo ja, dan gaat die regel terug het ontwerp in.</li>
-    <li><b>Heb je drie teamfoto's?</b> Zo niet, dan halen we de rij gezichten weg.</li>
+    <li><b>Welke drie van de zes wil je tonen?</b> Er staan er nu drie, gekozen op een leesbare rij. Het zijn er niet meer omdat drie cirkels naast elkaar op 390px al bijna de halve regel vullen; het aantal is wel een instelling.</li>
+    <li><b>Kleur of zwart-wit?</b> Op je over-pagina staan ze in zwart-wit, dus dat is nu overgenomen. De kleurenversies die je stuurde staan warmer naast de gouden knop eronder.</li>
   </ul>
 </div>
 
