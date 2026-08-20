@@ -119,7 +119,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
   opacity:0;transform:scaleX(0);transform-origin:left;
   transition:transform .4s ease,opacity .3s ease}
 .vp-kaart:hover::after,.vp-kaart.aan::after{opacity:1;transform:scaleX(1)}
-.vp-cijfer{font-size:46px;font-weight:700;letter-spacing:-.035em;line-height:1;color:#F5D18A;
+.vp-cijfer{font-size:38px;font-weight:700;letter-spacing:-.035em;line-height:1;color:#F5D18A;
   transition:text-shadow .4s ease}
 .vp-kaart:hover .vp-cijfer,.vp-kaart.aan .vp-cijfer{text-shadow:0 0 34px rgba(245,209,138,.45)}
 .vp-cijfer small{font-size:17px;font-weight:600;letter-spacing:0;color:rgba(245,209,138,.7);
@@ -132,6 +132,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
   display:flex;align-items:center;justify-content:center;gap:12px;
   font-size:13.5px;color:rgba(255,255,255,.5);text-align:center}
 .vp-slot svg{width:16px;height:16px;color:#BC813E;flex:none}
+.vp-slot span{min-width:0}
 .vp-slot b{color:rgba(255,255,255,.8);font-weight:600}
 
 /* ── mobiel ── */
@@ -147,11 +148,13 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
 .vp-m .vp-kaart::after{left:0;right:auto;width:56px;bottom:auto;top:0;
   opacity:1;transform:scaleX(1);background:linear-gradient(90deg,rgba(245,209,138,.5),rgba(245,209,138,0))}
 .vp-m .vp-kaart:first-child::after{display:none}
-.vp-m .vp-cijfer{font-size:36px}
+.vp-m .vp-cijfer{font-size:31px}
 .vp-m .vp-cijfer small{font-size:15px}
 .vp-m .vp-label{font-size:12px}
 .vp-m .vp-tekst{font-size:13.5px}
-.vp-m .vp-slot{margin-top:24px;padding-top:20px;font-size:12.5px;text-align:left}
+.vp-m .vp-slot{margin-top:24px;padding-top:20px;font-size:12.5px;text-align:left;
+  align-items:flex-start;justify-content:flex-start;gap:10px}
+.vp-m .vp-slot svg{margin-top:2px}
 
 @media (prefers-reduced-motion: reduce){
   .vp-kaart::after,.vp-cijfer{transition:none}
@@ -209,9 +212,9 @@ footer p{max-width:none}
 </defs></svg><div class="wrap">
 
 <header class="masthead">
-  <p class="eyebrow">Homepage-redesign · blok 7 van 12 · versie 1</p>
+  <p class="eyebrow">Homepage-redesign · blok 7 van 12 · versie 2</p>
   <h1>De waardeproposities</h1>
-  <p class="dek">Vier uitspraken die voor het hele assortiment gelden, elk met een getal dat je kunt nakijken. Dit is het blok dat de drie holle regels vervangt die nu halverwege je homepage staan.</p>
+  <p class="dek">Vier uitspraken die voor het hele assortiment gelden en die waar blijven als je morgen een product uitverkoopt of lanceert. Dit is het blok dat de drie holle regels vervangt die nu halverwege je homepage staan.</p>
   <p class="byline">Ontwerp — nog niets live. Akkoord → dan pas Shopify.</p>
   <div class="progress" aria-hidden="true">
     <i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i></i><i></i><i></i><i></i><i></i>
@@ -228,7 +231,7 @@ footer p{max-width:none}
 <div class="callout fix">
   <h3 style="margin-top:0">Vier uitspraken die alleen jij kunt doen</h3>
   <p><b>Elk met een getal, en elk over het hele assortiment.</b> Dat laatste is de reden dat dit blok pas nu kan: blok 5 heeft de zone-specifieke claims opgevangen, dus hier blijft over wat er hoe dan ook waar is. In versie 1 van blok 5 ging dat mis — toen stonden Groom Guard-specs op een plek waar ze over alles moesten gelden.</p>
-  <p><b>Ze beantwoorden de vier twijfels die op deze plek nog over zijn.</b> Is dit wegwerpspul? Nee, het mes is los te koop. Moet ik kiezen uit één ding dat alles half doet? Nee, 27 apparaten over vijf zones. Word ik straks naar iets duurders geduwd? Nee, €89,95 is het plafond. En als er iets is, krijg ik dan een mens? Ja, en die heeft een naam.</p>
+  <p><b>Ze beantwoorden de vier twijfels die op deze plek nog over zijn.</b> Moet ik kiezen uit één ding dat alles half doet? Nee, het assortiment is per plek opgebouwd. Koop ik iets dat al twee jaar hetzelfde is? Nee, elke serie gaat verbeterd de fabriek weer in. Is dit wegwerpspul? Nee, het mes ligt vanaf €14,95 apart op voorraad. Word ik straks een abonnement in geduwd? Nee, dat bestaat niet bij jullie.</p>
   <p style="margin-bottom:0"><b>Wat er bewust níét in staat:</b> 100 dagen proberen, 2 jaar garantie, gratis verzending en morgen in huis. Die staan al in de aankondigingsbalk en in de strook onder de hero. Nog een keer herhalen maakt ze niet sterker.</p>
 </div>
 
@@ -248,35 +251,35 @@ footer p{max-width:none}
       <section class="vp"><div class="vp-in">
 
         <div class="vp-kop">
-          <p class="vp-eyebrow">Wat voor élk apparaat geldt</p>
+          <p class="vp-eyebrow">Waar we voor staan</p>
           <h2 class="vp-h2">Vier dingen die <em>niet per product</em> verschillen.</h2>
-          <p class="vp-sub">De rest van deze pagina gaat over welk apparaat bij jou past. Dit gaat over wat er hoe dan ook waar is, welk apparaat je ook kiest.</p>
+          <p class="vp-sub">Wellshave bestaat om in elk huishouden één apparaat te hebben liggen voor de plek waar jij iets weg wilt hebben — zonder dat het een luxeaankoop wordt. Dat vertaalt zich in vier dingen die voor elk apparaat gelden.</p>
         </div>
 
         <div class="vp-rij">
+          <div class="vp-kaart" data-vp="plek">
+            <p class="vp-cijfer">Elke plek</p>
+            <p class="vp-label">Een apparaat dat daarvoor gemaakt is</p>
+            <p class="vp-tekst">Kruin, gezicht, neus, lichaam en schaamstreek. Het assortiment is opgebouwd per plek, niet als één dure alleskunner die overal half werkt.</p>
+          </div>
+          <div class="vp-kaart" data-vp="serie">
+            <p class="vp-cijfer">Elke serie</p>
+            <p class="vp-label">Doorgetest, verbeterd, opnieuw uitgebracht</p>
+            <p class="vp-tekst">Wat er uit reviews, retouren en de klantenservice komt, gaat de volgende productieserie in. Wat je vandaag koopt is de opvolger van wat we vorig jaar verkochten.</p>
+          </div>
           <div class="vp-kaart" data-vp="mes">
             <p class="vp-cijfer">€14,95<small>vanaf</small></p>
-            <p class="vp-label">Het mes los, niet een nieuw apparaat</p>
-            <p class="vp-tekst">Voor je bodygroomer, je hoofdscheerder en je scheerapparaat ligt de scheerkop apart op voorraad. Zeven losse onderdelen, zodat een bot mes geen nieuwe aankoop is.</p>
+            <p class="vp-label">Een bot mes kost geen nieuw apparaat</p>
+            <p class="vp-tekst">Voor je bodygroomer, je hoofdscheerder en je scheerapparaat ligt de scheerkop apart op voorraad. Vervangen in plaats van vervangen worden.</p>
           </div>
-          <div class="vp-kaart" data-vp="aantal">
-            <p class="vp-cijfer">27<small>apparaten</small></p>
-            <p class="vp-label">Eén voor elke plek, niet één voor alles</p>
-            <p class="vp-tekst">Verdeeld over vijf zones — kruin, gezicht, neus, lichaam en schaamstreek. Geen universele trimmer die overal half werkt.</p>
-          </div>
-          <div class="vp-kaart" data-vp="prijs">
-            <p class="vp-cijfer">€89,95<small>maximaal</small></p>
-            <p class="vp-label">Er staat niets duurders in de winkel</p>
-            <p class="vp-tekst">De hele lijn ligt tussen €16,95 en €89,95, dus je weet vooraf waar het plafond ligt. Geen apparaat dat pas boven de honderd euro interessant wordt.</p>
-          </div>
-          <div class="vp-kaart" data-vp="mens">
-            <p class="vp-cijfer">Yvonne</p>
-            <p class="vp-label">Geen ticketnummer maar een naam</p>
-            <p class="vp-tekst">Bij een vraag krijg je meestal Yvonne. Ze staat met naam en functie op onze over-pagina, samen met de rest van het team.</p>
+          <div class="vp-kaart" data-vp="eenmalig">
+            <p class="vp-cijfer">Eén keer<small>betalen</small></p>
+            <p class="vp-label">Geen abonnement, geen navulplicht</p>
+            <p class="vp-tekst">Je koopt een apparaat en daar houdt het op. Geen maandelijkse mesjes die vanzelf komen, geen opzegtermijn, geen account dat je moet beheren.</p>
           </div>
         </div>
 
-        <p class="vp-slot"><svg><use href="#chkc"/></svg>Alle vier zijn na te rekenen: <b>in de winkel, op de productpagina en op de over-pagina.</b></p>
+        <p class="vp-slot"><svg><use href="#chkc"/></svg><span>Hoe die verbeteringen er in de praktijk uitzien, <b>staat hierboven in de tijdlijn.</b></span></p>
 
       </div></section>
     </div></div>
@@ -287,81 +290,89 @@ footer p{max-width:none}
       <section class="vp vp-m"><div class="vp-in">
 
         <div class="vp-kop">
-          <p class="vp-eyebrow">Wat voor élk apparaat geldt</p>
+          <p class="vp-eyebrow">Waar we voor staan</p>
           <h2 class="vp-h2">Vier dingen die <em>niet per product</em> verschillen.</h2>
-          <p class="vp-sub">De rest van deze pagina gaat over welk apparaat bij jou past. Dit gaat over wat er hoe dan ook waar is, welk apparaat je ook kiest.</p>
+          <p class="vp-sub">Wellshave bestaat om in elk huishouden één apparaat te hebben liggen voor de plek waar jij iets weg wilt hebben — zonder dat het een luxeaankoop wordt. Dat vertaalt zich in vier dingen die voor elk apparaat gelden.</p>
         </div>
 
         <div class="vp-rij">
+          <div class="vp-kaart" data-vp="plek">
+            <p class="vp-cijfer">Elke plek</p>
+            <p class="vp-label">Een apparaat dat daarvoor gemaakt is</p>
+            <p class="vp-tekst">Kruin, gezicht, neus, lichaam en schaamstreek. Het assortiment is opgebouwd per plek, niet als één dure alleskunner die overal half werkt.</p>
+          </div>
+          <div class="vp-kaart" data-vp="serie">
+            <p class="vp-cijfer">Elke serie</p>
+            <p class="vp-label">Doorgetest, verbeterd, opnieuw uitgebracht</p>
+            <p class="vp-tekst">Wat er uit reviews, retouren en de klantenservice komt, gaat de volgende productieserie in. Wat je vandaag koopt is de opvolger van wat we vorig jaar verkochten.</p>
+          </div>
           <div class="vp-kaart" data-vp="mes">
             <p class="vp-cijfer">€14,95<small>vanaf</small></p>
-            <p class="vp-label">Het mes los, niet een nieuw apparaat</p>
-            <p class="vp-tekst">Voor je bodygroomer, je hoofdscheerder en je scheerapparaat ligt de scheerkop apart op voorraad. Zeven losse onderdelen, zodat een bot mes geen nieuwe aankoop is.</p>
+            <p class="vp-label">Een bot mes kost geen nieuw apparaat</p>
+            <p class="vp-tekst">Voor je bodygroomer, je hoofdscheerder en je scheerapparaat ligt de scheerkop apart op voorraad. Vervangen in plaats van vervangen worden.</p>
           </div>
-          <div class="vp-kaart" data-vp="aantal">
-            <p class="vp-cijfer">27<small>apparaten</small></p>
-            <p class="vp-label">Eén voor elke plek, niet één voor alles</p>
-            <p class="vp-tekst">Verdeeld over vijf zones — kruin, gezicht, neus, lichaam en schaamstreek. Geen universele trimmer die overal half werkt.</p>
-          </div>
-          <div class="vp-kaart" data-vp="prijs">
-            <p class="vp-cijfer">€89,95<small>maximaal</small></p>
-            <p class="vp-label">Er staat niets duurders in de winkel</p>
-            <p class="vp-tekst">De hele lijn ligt tussen €16,95 en €89,95, dus je weet vooraf waar het plafond ligt. Geen apparaat dat pas boven de honderd euro interessant wordt.</p>
-          </div>
-          <div class="vp-kaart" data-vp="mens">
-            <p class="vp-cijfer">Yvonne</p>
-            <p class="vp-label">Geen ticketnummer maar een naam</p>
-            <p class="vp-tekst">Bij een vraag krijg je meestal Yvonne. Ze staat met naam en functie op onze over-pagina, samen met de rest van het team.</p>
+          <div class="vp-kaart" data-vp="eenmalig">
+            <p class="vp-cijfer">Eén keer<small>betalen</small></p>
+            <p class="vp-label">Geen abonnement, geen navulplicht</p>
+            <p class="vp-tekst">Je koopt een apparaat en daar houdt het op. Geen maandelijkse mesjes die vanzelf komen, geen opzegtermijn, geen account dat je moet beheren.</p>
           </div>
         </div>
 
-        <p class="vp-slot"><svg><use href="#chkc"/></svg>Alle vier zijn na te rekenen: <b>in de winkel, op de productpagina en op de over-pagina.</b></p>
+        <p class="vp-slot"><svg><use href="#chkc"/></svg><span>Hoe die verbeteringen er in de praktijk uitzien, <b>staat hierboven in de tijdlijn.</b></span></p>
 
       </div></section>
     </div></div>
   </div>
 </div>
 
-<h2>Waar elk getal vandaan komt</h2>
+<h2>Waar elke uitspraak vandaan komt</h2>
 <div class="tablewrap">
 <table>
   <thead><tr><th>Wat er staat</th><th>Hoe het is vastgesteld</th></tr></thead>
   <tbody>
-    <tr><td><b>€14,95</b> · zeven losse onderdelen</td><td>Negen vervangingsartikelen in de winkel, waarvan zeven op voorraad. Goedkoopste op voorraad: Groom Guard Blade, Head Shaver 7D Scheerkop, Foil shaver Groom Guard en Flex Guard Blade, alle vier €14,95. De twee van €9,95 staan op nul voorraad en tellen daarom niet mee</td></tr>
-    <tr><td><b>27</b> apparaten over vijf zones</td><td>Alle actieve producten in Shopify, min de vervangingsonderdelen, bundels, tassen, garantieverlengingen en verzendopties. De telling staat hieronder uitgeschreven</td></tr>
-    <tr><td><b>€89,95</b> maximaal · lijn van €16,95 tot €89,95</td><td>The Sentinel PRO is het duurste apparaat, Neustrimmer Basic het goedkoopste. Bundels gaan hoger — daarom staat er "apparaat" en niet "product". Er staat bewust niet dat elk apparaat het topmodel van zijn serie is: de Groom Guard heeft een PRO boven zich, dus dat zou niet kloppen</td></tr>
-    <tr><td><b>Yvonne</b> · klantenservice</td><td>Je over-pagina: "Yvonne, Klantenservice Specialist – Yvonne staat klaar om je te helpen met al je vragen. Ze is vaak het eerste contactpunt." Vandaar "meestal" en niet "altijd"</td></tr>
+    <tr><td><b>Elke plek</b> · een apparaat dat daarvoor gemaakt is</td><td>De vijf zones uit blok 5: kruin, gezicht, neus, lichaam en schaamstreek. Voor elke zone staat er minstens één apparaat in de winkel dat er expliciet voor verkocht wordt. Er staat bewust geen aantal bij — zie hieronder</td></tr>
+    <tr><td><b>Elke serie</b> · doorgetest, verbeterd, opnieuw uitgebracht</td><td>Jouw eigen werkwijze, niet uit Shopify af te leiden. Wat er wél in Shopify zichtbaar van is: producten dragen serienummers (Barber Pack 3.0, Shave Package 3.0, Skull Deal 1.0) en er staan opvolgers naast voorgangers (Groom Guard en Groom Guard PRO). De formulering blijft daarom bij het mechanisme — reviews, retouren en klantenservice gaan de volgende serie in — en claimt geen aantal versies</td></tr>
+    <tr><td><b>€14,95</b> vanaf · de scheerkop apart</td><td>Negen vervangingsartikelen in de winkel, waarvan zeven op voorraad. Goedkoopste op voorraad: Groom Guard Blade, Head Shaver 7D Scheerkop, Foil shaver Groom Guard en Flex Guard Blade, alle vier €14,95. De twee van €9,95 staan op nul voorraad en tellen daarom niet mee</td></tr>
+    <tr><td><b>Eén keer betalen</b> · geen abonnement</td><td>Hard te controleren: in Shopify bestaat er geen enkele abonnementsgroep op je winkel (<code>sellingPlanGroups</code> is leeg). Er is dus geen enkel product dat je op herhaling kúnt kopen. Deze uitspraak is daarmee de best bewijsbare van de vier</td></tr>
   </tbody>
 </table>
 </div>
 
-<h3>De telling van 27</h3>
-<p>Meegeteld als apparaat, van goedkoop naar duur: Neustrimmer Basic €16,95 · Neustrimmer Premium 2-in-1 €19,95 · Neustrimmer Essential €19,95 · Blade Guard Black €19,95 · Blade Guard Gold €19,95 · Neustrimmer 2in1 Elite €23,95 · Neustrimmer Advance 3-in-1 €24,95 · Neustrimmer Ultimate 4-in-1 €29,95 · Neustrimmer 3in1 Platinum €29,95 · Neustrimmer 4in1 Ultra €32,95 · Men Shaper Iced 5-in-1 €33,95 · Edge Blade €33,95 · The Dial Master €34,95 · Men Shaper Gold 5-in-1 €36,95 · Scheerapparaat Elegant 4-in-1 €39,95 · Dual Groomer 2-in-1 €39,95 · Men Shaper Supreme 6-in-1 €39,95 · Groom Guard €44,95 · The Gentleman Shaver €49,95 · Detailtrimmer Sharpline €49,95 · 4 Foil Blade Baron €49,95 · Head Shaver Deluxe €54,95 · Flex Guard 3-in-1 €54,95 · Tondeuse Elegant €59,95 · Groom Guard PRO €59,95 · Tondeuse Deluxe €69,95 · The Sentinel PRO €89,95.</p>
-<p><b>Twee kanttekeningen.</b> De Blade Guards zijn scheermessen zonder motor; ik heb ze meegeteld omdat het apparaten zijn die je koopt en gebruikt, maar als jij ze liever als accessoire ziet wordt het 25. En de Tondeuse Deluxe staat op nul voorraad, dus in de praktijk zijn er 26 te koop. Zeg welke telling je wil, dan staat dat getal er.</p>
+<h3>Waarom er geen getallen meer in staan</h3>
+<p><b>In versie 1 stonden hier "27 apparaten" en "€89,95 maximaal".</b> Allebei weg, om twee verschillende redenen.</p>
+<p><b>€89,95 was gewoon fout.</b> Ik had het plafond op het duurste losse apparaat gelegd (The Sentinel PRO), maar je verkoopt bundels die daarboven zitten — Barber Pack 3.0 staat op €124,95. Als iemand die op je homepage tegenkomt na "€89,95 is het plafond", ben je een claim kwijt en geloofwaardigheid erbij. Weg.</p>
+<p><b>27 was juist, maar niet houdbaar.</b> Jouw punt: elk product dat uitverkoopt of erbij komt maakt dat getal onwaar, en dan moet iemand eraan denken het bij te werken. Een getal dat onderhoud vraagt om waar te blijven, hoort niet in een blok dat over het hele assortiment gaat. "Elke plek" zegt hetzelfde en veroudert niet.</p>
+<p><b>Wat overblijft aan getal is €14,95</b> — en dat staat er als <i>vanaf</i>, dus het blijft waar zolang er geen goedkopere scheerkop bijkomt. Komen de twee onderdelen van €9,95 terug op voorraad, dan wordt het sterker, niet onwaar.</p>
+
+<h3>Wat er niet in staat, en waarom</h3>
+<ul>
+  <li><b>Geen naam bij de klantenservice.</b> Stond in versie 1, op jouw verzoek eruit. De vierde kolom gaat nu over het ontbreken van een abonnement, wat harder te controleren is dan een naam.</li>
+  <li><b>Niet "elk apparaat is het topmodel van zijn serie".</b> Dat klopt niet — de Groom Guard heeft een PRO boven zich.</li>
+  <li><b>Niet 100 dagen proberen, 2 jaar garantie, gratis verzending of morgen in huis.</b> Die staan al in de aankondigingsbalk en in de strook onder de hero.</li>
+</ul>
 
 <h2>Bouwnotities voor straks</h2>
 <ul>
-  <li><b>Alle vier de getallen zijn tekstvelden in de sectie-instellingen</b>, geen Liquid. Ze veranderen zelden, maar als ze veranderen moet iemand ze met de hand bijwerken — zet er een datum bij van wanneer ze voor het laatst zijn nagekeken.</li>
-  <li><b>Het aantal apparaten kan wél live</b> als er ooit een collectie "alle apparaten" komt: dan is het <code>collections.alle-apparaten.products_count</code>. Dezelfde randvoorwaarde als bij blok 3 en 5.</li>
+  <li><b>Alle teksten zijn tekstvelden in de sectie-instellingen</b>, geen Liquid. Door de getallen eruit te halen is er nog maar één veld dat kan verouderen: de €14,95.</li>
+  <li><b>De €14,95 kan wél live</b> als de vervangingsonderdelen ooit in één collectie staan: dan is het de laagste prijs binnen die collectie, en hoeft niemand er meer naar te kijken.</li>
   <li><b>Vier kolommen is het maximum</b> op 1440px. Een vijfde maakt de tekst te smal; dan moet het een rij van drie plus één worden.</li>
-  <li><b>De naam in de vierde kolom is een instelling</b>, geen vaste tekst — als Yvonne weggaat, moet dat blok in één handeling te wijzigen zijn.</li>
+  <li><b>De eerste twee kolommen hebben geen cijfer maar een woordpaar</b> ("Elke plek", "Elke serie"). Die krijgen dezelfde grote goudletter als een prijs, zodat de rij optisch één ritme houdt.</li>
 </ul>
 
 <div class="callout ask">
   <h3 style="margin-top:0">Wat ik van jou nodig heb</h3>
   <ul style="margin-bottom:0">
-    <li><b>Mag Yvonne met naam op de homepage?</b> Ze staat al op je over-pagina, maar de homepage is iets anders. Vraag het haar. Zo niet, dan wordt het "je krijgt ons team, geen callcenter" — zwakker, want zonder naam.</li>
-    <li><b>Tellen de Blade Guards mee als apparaat?</b> 27 met, 25 zonder.</li>
-    <li><b>De twee onderdelen van €9,95 staan op nul voorraad.</b> Komen ze terug, dan wordt "vanaf €14,95" weer "vanaf €9,95" — dat scheelt in de claim.</li>
-    <li><b>Donker of licht?</b> Ik heb hem donker gemaakt om het lichte middenstuk te onderbreken. Eén regel om te wisselen.</li>
-  </ul>
+    <li><b>Klopt "elke serie" zoals ik het geformuleerd heb?</b> Ik schrijf dat wat er uit reviews, retouren en klantenservice komt de volgende productieserie in gaat. Als dat in de praktijk anders loopt — bijvoorbeeld alleen bij bepaalde productlijnen — moet die zin mee veranderen.</li>
+    <li><b>De twee onderdelen van €9,95 staan op nul voorraad.</b> Komen ze terug, dan wordt "vanaf €14,95" gewoon "vanaf €9,95".</li>
+    <li><b>Voor elke zone een apparaat: blijft dat zo?</b> De claim staat of valt met minstens één leverbaar apparaat per zone. Nu is dat zo. Verdwijnt een hele zone uit het assortiment, dan is dit het blok dat als eerste onwaar wordt.</li>
+  </ul></ul>
 </div>
 
 <h2>Daarna</h2>
 <p>Blok 9 is de UGC-sectie: behouden, maar elke video een kop geven die samenvat wat erin gezegd wordt. Daarna garantie en FAQ (blok 11) en de afsluiter (blok 12). Blok 8, het zonerooster, ligt al klaar. Blok 10 — de vergelijkingstabel — is op jouw verzoek vervallen.</p>
 
 <footer>
-  <p>Alle aantallen en prijzen live uit Shopify, opgehaald op 20 augustus 2026. De naam en functie van Yvonne letterlijk van je eigen over-pagina. Ontwerp — nog niets live.</p>
+  <p>Prijzen, voorraad en het ontbreken van abonnementen live uit Shopify, opgehaald op 20 augustus 2026. De uitspraak over doorontwikkeling per serie komt van jou, niet uit de data. Ontwerp — nog niets live.</p>
 </footer>
 
 </div>
