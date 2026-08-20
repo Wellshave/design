@@ -32,12 +32,27 @@ function element(html, openTag, tagName) {
   }
 }
 
-const hero = read('blok-01-hero.html');
-const proof = read('blok-02-pijnpunt.html');
-const best = read('blok-03-bestsellers.html');
-const mech = read('blok-04-mechanisme.html');
-const usps = read('blok-05-waardeproposities.html');
-const koop = read('blok-06-koopblok.html');
+// Eén lijst, en daaruit volgt alles: de markup, de CSS én het gedrag. Dat is
+// niet netjesheid maar noodzaak — blok 6 stond wel in de markuplijst en niet
+// in de CSS, en dan verschijnt het blok volledig zonder opmaak terwijl elke
+// telling klopt. Wie hier een blok toevoegt, voegt het overal tegelijk toe.
+const BLOKKEN = [
+  { id: 'blok1', naam: 'Blok 1 — Hero', bestand: 'blok-01-hero.html', tag: 'div',
+    desk: '<div class="ws">', mob: '<div class="ws ws-m">', hernoem: true,
+    // de hero is getekend op een vast kader; in deze doorlopende preview
+    // mag hij zijn eigen hoogte bepalen
+    extra: '.ws{height:auto;min-height:770px}\n.ws.ws-m{min-height:1210px}' },
+  { id: 'blok2', naam: 'Blok 2 — Autoriteit en bewijs', bestand: 'blok-02-pijnpunt.html', tag: 'section',
+    desk: '<section class="pf"><div class="pf-in">', mob: '<section class="pf pf-m"><div class="pf-in">' },
+  { id: 'blok3', naam: 'Blok 3 — Bestsellers', bestand: 'blok-03-bestsellers.html', tag: 'section',
+    desk: '<section class="bs"><div class="bs-in">', mob: '<section class="bs bs-m"><div class="bs-in">' },
+  { id: 'blok4', naam: 'Blok 4 — Het mechanisme', bestand: 'blok-04-mechanisme.html', tag: 'section',
+    desk: '<section class="mc">', mob: '<section class="mc mc-m">' },
+  { id: 'blok5', naam: 'Blok 5 — Waar wil je trimmen?', bestand: 'blok-05-waardeproposities.html', tag: 'section',
+    desk: '<section class="zf"><div class="zf-in">', mob: '<section class="zf zf-m"><div class="zf-in">' },
+  { id: 'blok6', naam: 'Blok 6 — Het koopblok van de bundel', bestand: 'blok-06-koopblok.html', tag: 'section',
+    desk: '<section class="kb"><div class="kb-in">', mob: '<section class="kb kb-m"><div class="kb-in">' },
+];
 
 // blok 1 en blok 2 delen drie Trustpilot-klassen met verschillende waarden.
 // In de preview staan ze op één pagina, dus krijgt blok 1 een eigen naam.
@@ -46,15 +61,9 @@ const rename = (s) => s
   .replace(/\btp-brand\b/g, 'h-tp-brand')
   .replace(/(\.|")half\b/g, '$1h-half');
 
-// De kop van blok 1 stond eerder achter een wisselaar met drie richtingen
-// en werd hier ingebakken. Sinds versie 2 staat de vastgestelde kop
-// gewoon in de markup, dus dat is niet meer nodig.
-
-const sprite = element(proof, '<svg width="0" height="0"', 'svg');
-
 // Sommige blokken hebben eigen gedrag nodig — blok 4 heeft een tijdlijn die
-// vanzelf doorschuift. Dat script staat in het blokdocument achter een
-// sentinel; hier wordt het opgehaald zodat de preview zich net zo gedraagt.
+// vanzelf doorschuift, blok 5 een zonekiezer, blok 6 een aanwijsbare lijst.
+// Dat script staat in het blokdocument achter een sentinel.
 function mockupScript(html) {
   const sentinel = '/* ══ MOCKUP-SCRIPT ══ */';
   const s = html.indexOf(sentinel);
@@ -64,26 +73,20 @@ function mockupScript(html) {
   return html.slice(s, e);
 }
 
-const blocks = [
-  { id: 'blok1', naam: 'Blok 1 — Hero',
-    desk: rename(element(hero, '<div class="ws">', 'div')),
-    mob:  rename(element(hero, '<div class="ws ws-m">', 'div')) },
-  { id: 'blok2', naam: 'Blok 2 — Autoriteit en bewijs',
-    desk: element(proof, '<section class="pf"><div class="pf-in">', 'section'),
-    mob:  element(proof, '<section class="pf pf-m"><div class="pf-in">', 'section') },
-  { id: 'blok3', naam: 'Blok 3 — Bestsellers',
-    desk: element(best, '<section class="bs"><div class="bs-in">', 'section'),
-    mob:  element(best, '<section class="bs bs-m"><div class="bs-in">', 'section') },
-  { id: 'blok4', naam: 'Blok 4 — Het mechanisme',
-    desk: element(mech, '<section class="mc">', 'section'),
-    mob:  element(mech, '<section class="mc mc-m">', 'section') },
-  { id: 'blok5', naam: 'Blok 5 — Waar wil je trimmen?',
-    desk: element(usps, '<section class="zf"><div class="zf-in">', 'section'),
-    mob:  element(usps, '<section class="zf zf-m"><div class="zf-in">', 'section') },
-  { id: 'blok6', naam: 'Blok 6 — Het koopblok van de bundel',
-    desk: element(koop, '<section class="kb"><div class="kb-in">', 'section'),
-    mob:  element(koop, '<section class="kb kb-m"><div class="kb-in">', 'section') },
-];
+for (const b of BLOKKEN) {
+  const html = read(b.bestand);
+  const f = b.hernoem ? rename : (x) => x;
+  b.deskHtml = f(element(html, b.desk, b.tag));
+  b.mobHtml  = f(element(html, b.mob, b.tag));
+  b.css      = f(mockupCss(html)) + (b.extra ? '\n' + b.extra : '');
+  b.script   = mockupScript(html);
+  // de hoofdklasse van het blok moet in zijn eigen CSS voorkomen, anders is
+  // er markup zonder opmaak — precies wat er bij blok 6 misging
+  const hoofd = b.desk.match(/class="([a-z0-9-]+)/)[1];
+  if (!b.css.includes('.' + hoofd)) throw new Error(`geen CSS voor .${hoofd} in ${b.bestand}`);
+}
+
+const sprite = element(read('blok-02-pijnpunt.html'), '<svg width="0" height="0"', 'svg');
 
 const css = `:root{--bg:#FBFAF9;--surface:#fff;--fg:#1A1A1A;--fg-soft:#6B6560;--rule:#E6E1DC;--gold:#BC813E}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
@@ -128,37 +131,20 @@ footer p{margin:0;max-width:72ch}
   *{animation:none!important;transition:none!important}
   .revtrack{width:auto;overflow-x:auto}}
 
-/* ── blok 1 ── */
-${rename(mockupCss(hero))}
+${BLOKKEN.map(b => `/* ── ${b.naam} ── */
+${b.css}`).join('\n\n')}`;
 
-/* de hero is getekend op een vast kader van 728px hoog; in deze doorlopende
-   preview mag hij zijn eigen hoogte bepalen */
-.ws{height:auto;min-height:728px}
-.ws.ws-m{min-height:800px}
-
-/* ── blok 2 ── */
-${mockupCss(proof)}
-
-/* ── blok 3 ── */
-${mockupCss(best)}
-
-/* ── blok 4 ── */
-${mockupCss(mech)}
-
-/* ── blok 5 ── */
-${mockupCss(usps)}`;
-
-const body = blocks.map(b => `
+const body = BLOKKEN.map(b => `
   <section class="blok">
     <div class="blok-h"><h2>${b.naam}</h2><span>Ontwerp — nog niets live</span></div>
     <div class="views">
       <div>
         <p class="devicecap">Desktop — 1440px</p>
-        <div class="scaler desk-scaler"><div class="inner">${b.desk}</div></div>
+        <div class="scaler desk-scaler"><div class="inner">${b.deskHtml}</div></div>
       </div>
       <div class="mobcol">
         <p class="devicecap">Mobiel — 390px</p>
-        <div class="scaler phone-scaler"><div class="inner">${b.mob}</div></div>
+        <div class="scaler phone-scaler"><div class="inner">${b.mobHtml}</div></div>
       </div>
     </div>
   </section>`).join('\n');
@@ -173,7 +159,7 @@ ${css}
 ${sprite}
 <div class="shell">
   <div class="lede">
-    <p class="kicker">Homepage-redesign · 5 van 12 blokken</p>
+    <p class="kicker">Homepage-redesign · ${BLOKKEN.length} van 12 blokken</p>
     <h1>De nieuwe blokken, zoals ze op de pagina komen te staan</h1>
     <p class="sub">Beide blokken draaien hier echt: de reviewband loopt, de knoppen reageren, en het
       mobiele beeld is de werkelijke opmaak op 390&nbsp;px — niet een verkleinde desktopversie.
@@ -186,7 +172,7 @@ ${body}
   </footer>
 </div>
 <script>
-${[hero, proof, best, mech, usps, koop].map(mockupScript).filter(Boolean).join('\n')}
+${BLOKKEN.map(b => b.script).filter(Boolean).join('\n')}
 </script>
 <script>
 function fit(){

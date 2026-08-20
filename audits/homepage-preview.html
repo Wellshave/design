@@ -46,7 +46,7 @@ footer p{margin:0;max-width:72ch}
   *{animation:none!important;transition:none!important}
   .revtrack{width:auto;overflow-x:auto}}
 
-/* ── blok 1 ── */
+/* ── Blok 1 — Hero ── */
 /* ══ MOCKUP — exact de merkkleuren, vast in beide thema's ══ */
 .ws{font-family:"Montserrat",sans-serif;background:#0B0B0A;color:#FFFFFF;
   display:flex;flex-direction:column;height:100%}
@@ -194,13 +194,10 @@ footer p{margin:0;max-width:72ch}
 .ws-m .h-tp-stars i{width:19px;height:19px}
 .ws-m .h-tp-stars svg{width:13px;height:13px}
 .ws-m .tp-score,.ws-m .h-tp-brand{font-size:12.5px}
+.ws{height:auto;min-height:770px}
+.ws.ws-m{min-height:1210px}
 
-/* de hero is getekend op een vast kader van 728px hoog; in deze doorlopende
-   preview mag hij zijn eigen hoogte bepalen */
-.ws{height:auto;min-height:728px}
-.ws.ws-m{min-height:800px}
-
-/* ── blok 2 ── */
+/* ── Blok 2 — Autoriteit en bewijs ── */
 /* ══ MOCKUP — vaste merkkleuren in beide thema's ══ */
 .pf{font-family:"Montserrat",sans-serif;background:#EDE7DB;color:#111111;
   padding:56px 40px}
@@ -403,7 +400,7 @@ footer p{margin:0;max-width:72ch}
 .pf-m .spot-fud{display:grid;grid-template-columns:1fr 1fr;gap:10px 8px;font-size:9.5px}
 .pf-m .spot-fud i{display:none}
 
-/* ── blok 3 ── */
+/* ── Blok 3 — Bestsellers ── */
 /* ══ MOCKUP — vaste merkkleuren in beide thema's ══ */
 .bs{font-family:"Montserrat",sans-serif;background:#F5F1EA;color:#111111;padding:56px 40px}
 .bs-in{max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:26px;min-width:0}
@@ -509,7 +506,7 @@ footer p{margin:0;max-width:72ch}
 .bs-m .bs-go svg{width:12px;height:12px}
 .bs-m .bs-foot{font-size:12px;align-items:flex-start;line-height:150%}
 
-/* ── blok 4 ── */
+/* ── Blok 4 — Het mechanisme ── */
 /* ══ MOCKUP — vaste merkkleuren in beide thema's ══ */
 .mc{font-family:"Montserrat",sans-serif;background:#0E0D0C;color:#FFFFFF;padding:56px 0 0}
 .mc-in{max-width:1240px;margin:0 auto;padding:0 40px;min-width:0}
@@ -657,7 +654,7 @@ footer p{margin:0;max-width:72ch}
 .mc-m .mc-txt b em{font-size:12.5px}
 .mc-m .mc-txt > span{font-size:10.5px;line-height:138%;margin-top:3px}
 
-/* ── blok 5 ── */
+/* ── Blok 5 — Waar wil je trimmen? ── */
 /* ══ MOCKUP — vaste merkkleuren in beide thema's ══ */
 .zf{font-family:"Montserrat",sans-serif;color:#111111;padding:60px 44px 48px;
   background:linear-gradient(160deg,#FFFDFA 0%,#FBF6EE 46%,#F6EEE0 100%)}
@@ -859,6 +856,99 @@ footer p{margin:0;max-width:72ch}
 @media (prefers-reduced-motion: reduce){
   .zf-paneel{animation:none}
 }
+
+/* ── Blok 6 — Het koopblok van de bundel ── */
+/* ══ MOCKUP — vaste merkkleuren in beide thema's ══ */
+.kb{font-family:"Montserrat",sans-serif;background:#0B0B0A;color:#FFFFFF;padding:64px 44px}
+.kb *{box-sizing:border-box}
+.kb p{margin:0;max-width:none}
+.kb ul{margin:0;padding:0;max-width:none;list-style:none}
+.kb-in{max-width:1240px;margin:0 auto;display:grid;
+  grid-template-columns:minmax(0,1.02fr) minmax(0,1fr);gap:56px;align-items:center}
+
+/* het beeld */
+.kb-beeld{position:relative;border-radius:20px;padding:34px 30px 30px;
+  background:radial-gradient(120% 100% at 50% 12%,rgba(245,209,138,.12) 0%,rgba(11,11,10,0) 62%),
+             linear-gradient(160deg,#171614 0%,#0E0E0D 100%);
+  border:1px solid rgba(245,209,138,.16)}
+.kb-shot{position:relative;display:block;width:100%}
+.kb-shot > img{width:100%;height:auto;display:block;
+  filter:drop-shadow(0 34px 40px rgba(0,0,0,.6))}
+.kb-punt{position:absolute;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;
+  border:1px solid rgba(245,209,138,.5);background:rgba(245,209,138,.1);
+  opacity:0;transform:scale(.7);transition:opacity .3s ease,transform .3s ease;pointer-events:none}
+.kb-punt.aan{opacity:1;transform:scale(1);
+  box-shadow:0 0 0 6px rgba(245,209,138,.14),0 0 30px 8px rgba(245,209,138,.28)}
+.kb-zegel{position:absolute;left:30px;top:-16px;display:inline-flex;align-items:center;gap:9px;
+  background:linear-gradient(135deg,#F5D18A 0%,#D8AC5D 100%);color:#111;border-radius:100px;
+  padding:9px 18px;font-size:11.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+.kb-zegel svg{width:15px;height:15px}
+.kb-cijfer{margin-top:22px;display:flex;align-items:center;gap:11px;
+  font-size:13px;color:rgba(255,255,255,.6);justify-content:center}
+.kb-cijfer b{color:#fff;font-weight:600}
+.kb-cijfer svg{width:16px;height:16px;color:#BC813E;flex:none}
+
+/* de tekstkant */
+.kb-tekst{display:flex;flex-direction:column;gap:20px;align-items:flex-start;min-width:0}
+.kb-eyebrow{font-size:11.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#BC813E}
+.kb-h2{font-size:42px;font-weight:700;letter-spacing:-.03em;line-height:106%;margin:0}
+.kb-claim{font-size:17px;line-height:158%;color:rgba(255,255,255,.7);max-width:34em}
+.kb-lijst{display:flex;flex-direction:column;gap:2px;width:100%}
+.kb-lijst li{display:flex;gap:14px;align-items:flex-start;font-size:15px;line-height:150%;
+  color:rgba(255,255,255,.82);padding:11px 12px;border-radius:12px;cursor:default;
+  transition:background-color .3s ease}
+.kb-lijst li:hover,.kb-lijst li.aan{background:rgba(245,209,138,.08)}
+.kb-lijst svg{width:19px;height:19px;flex:none;color:#F5D18A;margin-top:2px}
+.kb-lijst b{font-weight:600;color:#fff}
+.kb-lijst span{color:rgba(255,255,255,.6)}
+
+.kb-prijs{display:flex;align-items:baseline;flex-wrap:wrap;gap:14px;padding-top:4px}
+.kb-nu{font-size:38px;font-weight:700;letter-spacing:-.03em;color:#fff;line-height:1}
+.kb-was{font-size:18px;color:rgba(255,255,255,.42);text-decoration:line-through}
+.kb-korting{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:#111;background:#F5D18A;border-radius:100px;padding:7px 14px}
+.kb-voorraad{display:inline-flex;align-items:center;gap:9px;font-size:13.5px;
+  color:rgba(255,255,255,.6)}
+.kb-stip{width:8px;height:8px;border-radius:50%;background:#1E7F63;flex:none;
+  box-shadow:0 0 0 4px rgba(30,127,99,.22)}
+.kb-knop{display:inline-flex;align-items:center;justify-content:space-between;gap:18px;width:100%;
+  max-width:420px;background:linear-gradient(135deg,#F5D18A 0%,#D8AC5D 52%,#BC813E 100%);
+  color:#111;text-decoration:none;border-radius:100px;padding:9px 9px 9px 30px;
+  font-size:14px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  box-shadow:0 16px 38px -20px rgba(245,209,138,.9)}
+.kb-knop span{display:flex;align-items:center;justify-content:center;flex:none;
+  width:44px;height:44px;border-radius:50%;background:#111;color:#F5D18A}
+.kb-knop span svg{width:18px;height:18px}
+.kb-fud{display:flex;flex-wrap:wrap;align-items:center;gap:10px 0;font-size:12.5px;
+  color:rgba(255,255,255,.58)}
+.kb-fud span{display:inline-flex;align-items:center;gap:8px;padding:0 16px}
+.kb-fud span:first-child{padding-left:0}
+.kb-fud span + span{border-left:1px solid rgba(255,255,255,.16)}
+.kb-fud svg{width:15px;height:15px;flex:none;color:#BC813E}
+.kb-los{font-size:13px;color:rgba(255,255,255,.5)}
+.kb-los a{color:rgba(255,255,255,.8)}
+
+/* ── mobiel ── */
+.kb-m{padding:36px 16px 30px}
+.kb-m .kb-in{grid-template-columns:1fr;gap:26px}
+.kb-m .kb-beeld{padding:28px 18px 22px;border-radius:16px}
+.kb-m .kb-zegel{left:16px;font-size:10.5px;padding:8px 14px}
+.kb-m .kb-cijfer{margin-top:16px;font-size:12px}
+.kb-m .kb-tekst{gap:16px}
+.kb-m .kb-h2{font-size:29px}
+.kb-m .kb-claim{font-size:15px;line-height:152%}
+.kb-m .kb-lijst li{font-size:14px;gap:12px;padding:9px 10px}
+.kb-m .kb-nu{font-size:32px}
+.kb-m .kb-was{font-size:16px}
+.kb-m .kb-knop{max-width:none;font-size:13px;padding:9px 9px 9px 22px}
+.kb-m .kb-knop span{width:40px;height:40px}
+.kb-m .kb-fud{font-size:11.5px;width:100%}
+.kb-m .kb-fud span{padding:0 10px}
+.kb-m .kb-fud{gap:0;flex-wrap:nowrap}
+
+@media (prefers-reduced-motion: reduce){
+  .kb-punt{transition:none}
+}
 </style>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01z"/></symbol>
@@ -871,7 +961,7 @@ footer p{margin:0;max-width:72ch}
 </defs></svg>
 <div class="shell">
   <div class="lede">
-    <p class="kicker">Homepage-redesign · 5 van 12 blokken</p>
+    <p class="kicker">Homepage-redesign · 6 van 12 blokken</p>
     <h1>De nieuwe blokken, zoals ze op de pagina komen te staan</h1>
     <p class="sub">Beide blokken draaien hier echt: de reviewband loopt, de knoppen reageren, en het
       mobiele beeld is de werkelijke opmaak op 390&nbsp;px — niet een verkleinde desktopversie.
