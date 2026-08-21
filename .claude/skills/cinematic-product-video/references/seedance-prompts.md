@@ -80,6 +80,14 @@ Dien opnieuw in met dezelfde prompt plus het preset-ID dat je terugkreeg:
 { "declined_preset_id": "24bae836-2c4a-48e0-89b6-49fcc0b21612" }
 ```
 
+In een batch gebeurt dit **per item, niet per batch**. Bij de Blade Baron werden vijf van de zes
+shots onderschept en ging de zesde gewoon door. Lees dus het antwoord regel voor regel: dien
+alleen de items met `submission_failed` opnieuw in, en laat het item dat wél een `job_id` kreeg
+met rust. Draai je de hele batch over, dan betaal je dat ene shot dubbel.
+
+Het is hetzelfde preset-ID bij elke onderschepping tot nu toe. Zet het bij een donkere film dus
+meteen in de eerste inzending — dat scheelt een ronde.
+
 ### De behuizing verkleurt naar goud
 
 Vraag je een warm randlicht zonder begrenzing, dan kleurt het model het hele apparaat
@@ -89,6 +97,28 @@ champagne. Begrens het licht en verbied de verkleuring apart:
 > for the entire shot: the housing never turns gold, bronze, champagne, tan or warm metallic at
 > any moment. […] one thin warm rim highlight confined strictly to the outer edge of the
 > silhouette.
+
+**Tel hoe vaak je goud noemt, inclusief je referentiefoto's.** Bij de Blade Baron ging het mis
+op een shot waar drie dingen tegelijk goud duwden: een `hard gold key light`, `gold light
+streaking along the transparent plastic`, én een referentiefoto die zelf een goudverlicht
+sfeerbeeld was. Het resultaat was niet alleen een bronzen behuizing — de doorzichtige
+beschermkap was een massief gouden kap geworden.
+
+Een product dat écht gouden accenten heeft maakt dit lastiger, want je kunt goud niet simpelweg
+verbieden. Begrens het dan bij naam, per onderdeel:
+
+> No gold spreads beyond the existing thin gold band around its middle and the thin gold ring
+> around the circular power button.
+
+En verbied verkleuring apart voor elk doorzichtig of andersgekleurd onderdeel, want de
+behuizingsclausule dekt die niet:
+
+> That cap stays clear, colourless and fully see-through for the entire shot: it never becomes
+> gold, bronze, brass, champagne, metallic, tinted, opaque or solid, and the metal foil blades
+> stay visible straight through it the whole time.
+
+Zet het sleutellicht in zo'n shot op **koel wit** en laat het goud alleen in het randlicht
+zitten. Dat was de herkansing die het wél haalde.
 
 ### Tekst kantelt in spiegelbeeld
 
@@ -134,6 +164,41 @@ beschrijven, dan opsommen wat er niet mag gebeuren.
 Een vlakke foilkop met twee stroken werd een gebogen geperforeerde gaastrommel. Mooi beeld,
 verkeerd product. In extreme macro valt het zelden op, maar het is wel een afwijking — meld het
 en laat de gebruiker beslissen of het opnieuw moet.
+
+### Twee harde onderdelen die in elkaar moeten passen
+
+Dit is de duurste valkuil tot nu toe, en de enige waarbij herkansen structureel niet helpt.
+
+Een beschermkap die over een scheerkop zakt en vastklikt, kostte drie generaties en werd nooit
+goed. De kap kwam eerst goud, toen doorzichtig, en toen — met een prompt die kleur en materiaal
+correct beschreef — als een dekkende zwarte kap die **breder was dan de behuizing** en er niet
+op paste. Bij het derde resultaat zweefde hij van frame één af los boven het apparaat en
+versmolt hij aan het eind tot een vage naad.
+
+De reden is dat het model de *pasvorm* moet volhouden terwijl beide onderdelen bewegen. Kleur
+en licht zijn met een clausule te sturen; een mechanische passing niet. Herkansen levert alleen
+een nieuwe variant van dezelfde fout.
+
+**Vraag geen mechanische handeling maar een lichtgebeurtenis.** Datzelfde beat — "hier bedien je
+het, hier zit techniek in" — kwam er in één generatie goed uit als een puls die uit de aan-knop
+komt:
+
+> During the shot the button presses in a fraction and one soft warm gold pulse of light blooms
+> out of the gold ring and travels outward along the thin gold band toward both edges of the
+> frame before fading; a moment later a second, brighter and faster pulse follows the same path.
+> The gold ring and the gold band are the only things that light up.
+
+Twee pulsen dragen bovendien een claim die één puls niet draagt: twee snelheidsstanden. Zoek dus
+eerst welke USP je met licht kunt vertellen, voordat je iets in elkaar laat schuiven.
+
+Wat wél veilig beweegt: licht dat over een oppervlak strijkt, een indicator die aanspringt, een
+knop die een fractie indrukt, druppels, en de camera zelf. Wat niet: kappen, klepjes,
+opzetstukken die wisselen, scharnieren, alles wat moet klikken of sluiten. Wil de gebruiker zo'n
+onderdeel toch in beeld, film het dan **in één toestand** — al gesloten of al open — met een
+referentiefoto van precies die toestand, en laat de camera het werk doen.
+
+Meld dit vóór je genereert wanneer een shot erom vraagt, niet erna. Twee mislukte pogingen op
+dezelfde fout zijn een patroon; drie op één shot is een ontwerpfout in de shotlijst.
 
 ## Werkwijze bij genereren
 

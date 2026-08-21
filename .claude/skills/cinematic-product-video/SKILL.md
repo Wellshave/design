@@ -29,8 +29,8 @@ in de statusmelding.
 ## De merklaag geldt ook hier
 
 Kleur en typografie staan al vast in
-`.claude/skills/sanwarwala-landing-pages/references/wellshave-merklaag.md`. **Lees §2 Tokens en
-§3 Typografie voordat je een annotatie ontwerpt, en §10 Cijfers en claims voordat je copy
+`.claude/skills/sanwarwala-landing-pages/references/wellshave-merklaag.md`. **Lees §3 Tokens en
+§4 Typografie voordat je een annotatie ontwerpt, en §11 Cijfers en claims voordat je copy
 schrijft.** Neem die waarden hier niet over — één bron, anders lopen ze uit elkaar.
 
 Wat er voor video het meest toe doet: `--gold:#F5D18A` is het accent op donker, en cinematische
@@ -104,6 +104,41 @@ prijsbadges — het model neemt die over.
 een tabel van media-ID naar shot. Zonder die stap koppel je de neustrimmer aan het shot over de
 scheerkop, en dat merk je pas als de credits op zijn.
 
+**Leid het materiaal van een onderdeel nooit af uit een sfeerfoto.** Een studiofoto met hard
+strijklicht is gemaakt om vorm te laten zien, niet om kleur af te lezen. Bij de Blade Baron las
+ik de zwarte magnetische beschermkap als doorzichtig, omdat het gouden licht er langs schoot
+naar de scheerkop eronder en de glansstrepen op het glanzende plastic op reflecties in glas
+leken. Het shot kwam er precies zo uit, en de gebruiker moest melden dat de kap gewoon zwart is.
+
+De controle kost niets. Snijd het onderdeel uit en krik de helderheid op:
+
+```bash
+ffmpeg -i referentie.png -vf "crop=760:620:130:20,eq=brightness=0.25:contrast=1.4" op.jpg
+```
+
+Blijft het zwart, dan is het zwart. Zie je er ineens iets doorheen, dan was het doorzichtig.
+Twijfel je nog steeds over kleur, materiaal of hoe een onderdeel beweegt: **vraag het**, samen
+met de shotlijst. De gebruiker heeft het product in handen en jij hebt een render.
+
+En als een onderdeel dekt in het echt ook dekt in beeld, zeg dan in de prompt wat het onderdeel
+tegen de achtergrond aftekent, anders verdwijnt zwart op zwart:
+
+> What defines its shape against the dark background is a crisp white specular highlight running
+> along its curved top edge and down its rounded corner, exactly as in the reference photograph.
+
+**Kijk daarbij ook naar het woordmerk op het product.** Een gespiegeld merk is niet altijd iets
+wat het model ervan maakt — het kan al in de aangeleverde render zitten. Bij de Blade Baron
+stond de logodecal in twee van de tien foto's gespiegeld op het bovenvlak, terwijl het display
+op diezelfde foto's gewoon goed om las en het vooraanzicht wél klopte. Voer je zo'n foto in als
+referentie, dan brandt het model die fout in je commercial.
+
+Zoom in voordat je het gelooft: snijd het logogebied uit op volle resolutie en leg het naast
+dezelfde foto horizontaal gespiegeld. Zit de fout er inderdaad in, kies dan een uitsnede die
+het woordmerk buiten beeld laat in plaats van de hele foto te spiegelen — spiegelen zet
+namelijk het display en de poorten verkeerd om. Upload die uitsnede als eigen media
+(`media_upload`, bytes naar de presigned URL, dan `media_confirm`) en gebruik hem voor dat ene
+shot. Meld de fout ook aan de gebruiker: die renders staan doorgaans ook op de productpagina.
+
 ### 3. Schrijf de shotlijst
 
 Lees `references/shotgrammatica.md`. Daar staat de beatstructuur, waar het brede shot hoort,
@@ -126,12 +161,18 @@ resultaat met precies één `show_generation_by_ids`.
 
 ### 6. Keur elk shot af of goed
 
-Download alle clips en trek per clip drie frames — begin, midden, eind — als contactstrook:
+Download alle clips en trek per clip vier frames — begin, twee keer midden, eind — als
+contactstrook. Een clip van vijf seconden komt terug als **121** frames op 24 fps, niet 120:
 
 ```bash
-ffmpeg -i shot.mp4 -vf "select='eq(n\,2)+eq(n\,60)+eq(n\,118)',scale=640:-1,tile=3x1" \
+ffmpeg -i shot.mp4 -vf "select='eq(n\,2)+eq(n\,40)+eq(n\,78)+eq(n\,117)',scale=470:-1,tile=2x2" \
   -frames:v 1 strook.jpg
 ```
+
+**Controleer eerst of ffmpeg er is.** In een verse websessie staat het er niet, en zonder
+ffmpeg kun je geen enkel shot beoordelen en niets monteren. Installeren duurt een halve minuut:
+`apt-get update -qq && apt-get install -y -qq ffmpeg`. Doe dat vóór je gaat genereren, niet
+erna — anders staan er clips klaar die je niet kunt bekijken.
 
 Kijk naar elke strook. Let op verkleurende behuizing, morfende vormen, tekst die kantelt, en
 compositie die wegdrijft van waar je hem wilde hebben. Draai fout materiaal opnieuw met de fout
@@ -143,7 +184,7 @@ patroon, geen pech.
 
 ### 7. Schrijf de annotatiecopy
 
-Lees `references/annotatielaag.md` voor de opmaak, en `wellshave-merklaag.md` §10 voor de
+Lees `references/annotatielaag.md` voor de opmaak, en `wellshave-merklaag.md` §11 voor de
 claimdiscipline.
 
 Elke annotatie is een goud labeltje plus één witte regel, en moet twee toetsen doorstaan.
@@ -166,6 +207,31 @@ Het script plakt de shots aan elkaar, brandt de annotatielaag in met de meegelev
 fontgewichten en levert H.264 8-bit. Zie `scripts/monteer.sh --help` voor het inkorten van losse
 shots.
 
+### 8b. De muzieklaag
+
+Elke clip wordt zonder audio gegenereerd, dus de film is stil tot je er één track onder legt:
+
+```bash
+scripts/monteer.sh --uit film.mp4 --ass annotaties.ass \
+  --muziek track.mp3 --muziek-start 12 shot1.mp4 shot2.mp4 ...
+```
+
+**Genereer die muziek niet.** Higgsfields audiotool is uitdrukkelijk alleen spraak, en de
+muziekmodellen die er staan horen bij hun game-pipeline en zijn niet voor los gebruik. De
+Artlist-koppeling geeft beeld, video en voice-over maar geen toegang tot hun muziekcatalogus.
+Belangrijker nog: dit wordt een advertentie, en bij een track uit de bibliotheek van de gebruiker
+is het commerciële gebruiksrecht geregeld. Vraag dus om een bestand of een link, en zeg erbij
+waarom.
+
+Het niveau gaat in LUFS en niet in dB. Een vaste verlaging laat het eindniveau afhangen van hoe
+hard de aangeleverde track gemasterd is; twee testtracks die 18 LUFS uit elkaar lagen kwamen met
+`loudnorm` allebei op −16,1 LUFS uit. Standaard is −16, gangbaar voor een muziekbed op web.
+
+Help de gebruiker kiezen in plaats van te vragen om "iets spannends". Geef de cutmomenten en de
+lengte door, en zeg waar de opbouw moet landen — dat is bij het eindshot, waar de merknaam in
+beeld komt. `--muziek-start` schuift de track zodat zijn opbouw op jouw montage valt in plaats
+van andersom; dat is bijna altijd nodig, want een track begint zelden precies goed.
+
 ### 9. Lever op
 
 Drie dingen, want de gebruiker gaat hier verder mee werken:
@@ -175,14 +241,34 @@ Drie dingen, want de gebruiker gaat hier verder mee werken:
 - de annotatiekit: `annotaties.ass`, de twee fontbestanden en een leesmij met het
   render-commando, zodat teksten aangepast kunnen worden zonder credits en zonder jou
 
+Ligt er muziek onder, lever dan ook de stille versie: die heeft de monteur nodig om er een
+andere track onder te leggen.
+
 Seedance levert HEVC 10-bit, wat niet overal soepel afspeelt; lever daarom altijd ook H.264.
 Let op de uploadlimiet van 30 MB per bestand — splits een te grote map op.
 
 ## Wat dit kost
 
-Eén shot van 5 seconden op 1080p met `bitrate_mode:"high"` kostte 45 credits. Zes shots plus
-twee herkansingen kwamen uit op 360. Reken op ongeveer 300–400 credits voor een film van 30
-seconden, en op nul voor alle tekst, montage en herzieningen daarna.
+Eén shot van 5 seconden op 1080p met `bitrate_mode:"high"` kostte 45 credits, in beide runs tot
+nu toe. De Flex Guard-film kwam met zes shots plus twee herkansingen op 360, de Blade Baron met
+zes plus drie op 405. Reken op ongeveer 300–450 credits voor een film van 30 seconden, en op nul
+voor alle tekst, montage en herzieningen daarna.
+
+Van die vijf herkansingen ging er één over een fout van het model en gingen er vier over een
+fout in de opdracht: te veel goud gevraagd, een onderdeel verkeerd beschreven omdat de
+referentiefoto verkeerd gelezen was, en twee keer een mechanische handeling gevraagd die niet te
+genereren is. De rekening valt dus vooral lager uit door beter kijken en beter kiezen vooraf,
+niet door betere prompts achteraf.
+
+Controleer het bedrag achteraf met `transactions` en niet met een aftreksom op `balance`. Bij de
+Blade Baron stond er een post van 32 credits tussen met de naam **Cinematic Video Editor**, die
+niet uit de sessie kwam maar uit een klik van de gebruiker in de Higgsfield-webinterface.
+Zonder dat overzicht had die 32 als eigen verbruik in de verantwoording gestaan.
+
+Een door een preset onderschepte inzending kost niets: bij de Blade Baron werden vijf van de zes
+shots teruggestuurd en het saldo bewoog pas bij de tweede inzending. Controleer dat na afloop
+door `balance` voor en na te vergelijken — het verschil hoort precies het aantal geslaagde
+generaties maal 45 te zijn.
 
 Een verticale 9:16-versie kost het volledige bedrag opnieuw. Bijsnijden van 16:9 is geen
 alternatief: de macro's zijn op de breedte gekadreerd en verliezen hun compositie.
@@ -210,13 +296,17 @@ van een tweede te schrijven.
 
 ## Wat deze werkwijze nog niet weet
 
-- **Eén product, één run.** Alles hierboven komt uit de Flex Guard-film. Of de beatstructuur
-  net zo werkt voor een klein product zoals een neustrimmer is niet gebleken.
+- **Twee producten, twee runs.** De Flex Guard-film en de Blade Baron-film. De beatstructuur
+  hield stand bij een klein, compact product, met één aanpassing: de Blade Baron heeft geen
+  opzetstukken, dus beat 6 (de reeks) verviel en de heropvoering ging naar een shot van de
+  beschermkap. Of het ook werkt voor iets zonder bewegende delen is nog niet gebleken.
 - **Geen prestatiecijfers.** Er is niet gemeten of deze films beter converteren dan bestaande
   advertenties. Zodra daar cijfers over zijn, horen ze hier te staan.
 - **Alleen 16:9 gedraaid.** De verticale variant is beredeneerd, niet getest.
-- **Geen geluid.** Elke clip wordt zonder audio gegenereerd, omdat losse generaties elk hun
-  eigen ruistapijt opleveren. Hoe de muzieklaag eronder komt is nog niet vastgelegd.
+- **De muzieklaag is technisch af, redactioneel niet.** Het onderleggen en uitnivelleren staat
+  in stap 8b en is getest, maar er is nog geen film mee opgeleverd: hoe je een track kiest die
+  op de cuts valt, en of `--muziek-start` in de praktijk genoeg is om een opbouw te laten
+  landen, moet de eerste echte track uitwijzen.
 - **Het model haalt niet elk productdetail.** In de Flex Guard-film werd de vlakke foilkop een
   gebogen gaastrommel. Wanneer dat acceptabel is en wanneer niet, is een oordeel dat per film
   opnieuw gemaakt moet worden.

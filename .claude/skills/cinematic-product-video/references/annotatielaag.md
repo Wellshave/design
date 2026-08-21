@@ -62,8 +62,30 @@ Geen kader, geen balk achter de tekst — dat leest goedkoop. `\shad2` volstaat 
 Valt een annotatie toch over een verlicht vlak, verplaats hem dan naar linksboven (lijntje 140,
 label 164, regel 202) in plaats van er een balk onder te leggen.
 
+**Meet dat, ga niet op je oog af.** De gemiddelde helderheid van beide hoeken haal je gratis op:
+
+```bash
+ffprobe -v error -f lavfi -i "movie=shot.mp4,crop=900:130:130:825,signalstats" \
+  -show_entries frame_tags=lavfi.signalstats.YAVG -of csv=p=0 \
+  | awk -F, '{s+=$1;c++} END{printf "%.0f\n", s/c}'
+```
+
+Let op de schaal: Seedance levert 10 bits, dus dat gemiddelde loopt tot 1023 en niet tot 255.
+Vergelijk dus alleen zones onderling, of deel door vier.
+
+Bij een macro die het hele kader vult is **linksboven vaak nóg lichter dan linksonder** — bij de
+Blade Baron was de bladenmacro linksonder 173 en linksboven 337. Verplaatsen maakt het dan
+erger. Verzwaar in dat geval de schaduw van dát ene shot naar `\bord0.9\shad3` en laat de rest
+op `\shad2` staan. Dat is geen balk en het leest niet goedkoop; het is precies genoeg om goud
+van metaal los te trekken.
+
 **Timing per shot:** verschijnen 0,65 s na de cut, verdwijnen 0,40 s ervoor, met `\fad(300,300)`.
 Label en regel komen 0,08 s na elkaar binnen, zodat het oog van boven naar beneden meeleest.
+
+**Reken de cuts uit, tel ze niet af per vijf seconden.** Een clip van vijf seconden komt terug
+als 121 frames op 24 fps, dus 5,0417 s. Over zes shots loopt dat een kwart seconde uit de pas,
+en dan hangt je eindkaart te vroeg in het beeld. Bepaal de shotduur uit het bestand zelf en
+bereken elke in- en uittijd daaruit.
 
 ## De copy
 
@@ -76,10 +98,23 @@ Elke annotatie is één goud label plus één witte regel.
 Het label noemt wat het ís, de regel wat het dóét. Twee keer hetzelfde zeggen is een gemiste
 annotatie.
 
-**Elke claim moet herleidbaar zijn tot de productpagina.** Dit is dezelfde discipline als §10
+**Elke claim moet herleidbaar zijn tot de productpagina.** Dit is dezelfde discipline als §11
 van de merklaag, en het geldt hier extra: een regel over beeld leest als vaststaand feit. Geen
 batterijduur, geen scheertijden, geen materialen die bij een ander artikel horen. Zet de bron
 per regel in je verantwoording naar de gebruiker.
+
+Twee vallen die zich bij de Blade Baron voordeden, allebei bronnen die betrouwbaar *lijken*:
+
+**De verkoopomschrijving spreekt de specificatielijst tegen.** De omschrijving zei "volledig
+waterdicht", de specificatie zei IPX6 — spatwaterdicht, niet onderdompelbaar. Bij tegenspraak
+wint de specificatielijst, want die is geschreven om te kloppen en de omschrijving om te
+verkopen. De regel werd "Nat of droog scheren, allebei goed" en niet "Gewoon mee de douche in".
+
+**Reviews horen soms bij een ander artikel.** Onder de Blade Baron stonden 639 beoordelingen,
+waarvan een flink deel opzetstukken, een oplaadstandaard, een neustrimmer en een flesje olie
+beschreef — allemaal niet in deze doos. Gebruik reviews dus niet als bron voor wat een product
+kán of wat erbij zit; daarvoor bestaan de specificatielijst en de doosinhoud. Meld het wel aan
+de gebruiker, want die reviews staan ondertussen wel op de verkooppagina.
 
 **En de claim moet passen bij wat er op dát moment in beeld is.** Dit is de tweede toets, en de
 makkelijkste om over te slaan. In de eerste versie van de Flex Guard-film stond boven het shot
