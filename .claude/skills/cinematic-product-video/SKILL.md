@@ -207,6 +207,31 @@ Het script plakt de shots aan elkaar, brandt de annotatielaag in met de meegelev
 fontgewichten en levert H.264 8-bit. Zie `scripts/monteer.sh --help` voor het inkorten van losse
 shots.
 
+### 8b. De muzieklaag
+
+Elke clip wordt zonder audio gegenereerd, dus de film is stil tot je er één track onder legt:
+
+```bash
+scripts/monteer.sh --uit film.mp4 --ass annotaties.ass \
+  --muziek track.mp3 --muziek-start 12 shot1.mp4 shot2.mp4 ...
+```
+
+**Genereer die muziek niet.** Higgsfields audiotool is uitdrukkelijk alleen spraak, en de
+muziekmodellen die er staan horen bij hun game-pipeline en zijn niet voor los gebruik. De
+Artlist-koppeling geeft beeld, video en voice-over maar geen toegang tot hun muziekcatalogus.
+Belangrijker nog: dit wordt een advertentie, en bij een track uit de bibliotheek van de gebruiker
+is het commerciële gebruiksrecht geregeld. Vraag dus om een bestand of een link, en zeg erbij
+waarom.
+
+Het niveau gaat in LUFS en niet in dB. Een vaste verlaging laat het eindniveau afhangen van hoe
+hard de aangeleverde track gemasterd is; twee testtracks die 18 LUFS uit elkaar lagen kwamen met
+`loudnorm` allebei op −16,1 LUFS uit. Standaard is −16, gangbaar voor een muziekbed op web.
+
+Help de gebruiker kiezen in plaats van te vragen om "iets spannends". Geef de cutmomenten en de
+lengte door, en zeg waar de opbouw moet landen — dat is bij het eindshot, waar de merknaam in
+beeld komt. `--muziek-start` schuift de track zodat zijn opbouw op jouw montage valt in plaats
+van andersom; dat is bijna altijd nodig, want een track begint zelden precies goed.
+
 ### 9. Lever op
 
 Drie dingen, want de gebruiker gaat hier verder mee werken:
@@ -215,6 +240,9 @@ Drie dingen, want de gebruiker gaat hier verder mee werken:
 - dezelfde film zonder tekst, om zelf mee te monteren
 - de annotatiekit: `annotaties.ass`, de twee fontbestanden en een leesmij met het
   render-commando, zodat teksten aangepast kunnen worden zonder credits en zonder jou
+
+Ligt er muziek onder, lever dan ook de stille versie: die heeft de monteur nodig om er een
+andere track onder te leggen.
 
 Seedance levert HEVC 10-bit, wat niet overal soepel afspeelt; lever daarom altijd ook H.264.
 Let op de uploadlimiet van 30 MB per bestand — splits een te grote map op.
@@ -275,8 +303,10 @@ van een tweede te schrijven.
 - **Geen prestatiecijfers.** Er is niet gemeten of deze films beter converteren dan bestaande
   advertenties. Zodra daar cijfers over zijn, horen ze hier te staan.
 - **Alleen 16:9 gedraaid.** De verticale variant is beredeneerd, niet getest.
-- **Geen geluid.** Elke clip wordt zonder audio gegenereerd, omdat losse generaties elk hun
-  eigen ruistapijt opleveren. Hoe de muzieklaag eronder komt is nog niet vastgelegd.
+- **De muzieklaag is technisch af, redactioneel niet.** Het onderleggen en uitnivelleren staat
+  in stap 8b en is getest, maar er is nog geen film mee opgeleverd: hoe je een track kiest die
+  op de cuts valt, en of `--muziek-start` in de praktijk genoeg is om een opbouw te laten
+  landen, moet de eerste echte track uitwijzen.
 - **Het model haalt niet elk productdetail.** In de Flex Guard-film werd de vlakke foilkop een
   gebogen gaastrommel. Wanneer dat acceptabel is en wanneer niet, is een oordeel dat per film
   opnieuw gemaakt moet worden.
