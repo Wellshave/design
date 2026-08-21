@@ -158,8 +158,8 @@ code{font-family:"IBM Plex Mono",monospace;font-size:13px;background:var(--surfa
   border:1px solid var(--line);border-radius:2px;padding:3px 8px;white-space:nowrap}
 
 ul.plain{padding-left:0;list-style:none;display:flex;flex-direction:column;gap:11px;margin:18px 0}
-ul.plain li{display:grid;grid-template-columns:16px 1fr;gap:12px;font-size:17px;line-height:1.52;color:var(--ink-2)}
-ul.plain li::before{content:"—";color:var(--accent);font-family:"IBM Plex Mono",monospace;font-size:13px}
+ul.plain li{display:block;position:relative;padding-left:28px;font-size:17px;line-height:1.52;color:var(--ink-2)}
+ul.plain li::before{content:"—";position:absolute;left:0;top:0;color:var(--accent);font-family:"IBM Plex Mono",monospace;font-size:13px;line-height:1.95}
 
 .callout{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:3px;padding:20px 24px;margin:28px 0}
 .callout h4{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);margin-bottom:9px}
@@ -452,37 +452,109 @@ ul.plain li::before{content:"—";color:var(--accent);font-family:"IBM Plex Mono
 
 <section>
   <div class="eyebrow">06 — Gedragsdata koppelen</div>
-  <h2>Twee routes, en één ervan is bijna gratis</h2>
+  <h2>De connector is aangezet. Vier van de vijf vragen bleven dicht.</h2>
   <div class="prose">
-    <p><strong>Clarity draait al op de pagina</strong> — ik vond <code>clarity.ms/tag/</code> in de uitgeleverde HTML. Naast ContentSquare en Hotjar. Er wordt dus al gemeten; er wordt alleen niet naar gekeken. Alles in dit rapport komt uit Shopify-analytics en de ruwe HTML, dus zonder gedragsdata. Dat is de grootste blinde vlek, en die is te dichten.</p>
+    <p><strong>Clarity, ContentSquare én Hotjar draaien alle drie op de pagina</strong> — ik vond <code>clarity.ms/tag/</code> in de uitgeleverde HTML, naast de andere twee. Er wordt dus al gemeten; er werd alleen niet naar gekeken. Deel 01 tot en met 05 komen uit Shopify-analytics en de ruwe HTML, dus zonder gedragsdata. Dat was de grootste blinde vlek van dit rapport.</p>
+    <p>Op 21 augustus is de ContentSquare-connector aangezet en heb ik de meting gedraaid. Wat eruit kwam staat hieronder — maar het bruikbaarste deel is wat er <em>niet</em> uit kwam.</p>
   </div>
 
   <div class="callout">
-    <h4>Route A — ContentSquare, aanbevolen</h4>
-    <p>Er is een <strong>officiële ContentSquare-connector in de Claude-directory</strong>. Eén keer koppelen via je connector-instellingen op claude.ai, verder geen token-beheer. Hij brengt onder meer <code>computeFunnel</code>, <code>getTopPageGroupsByLostConversions</code>, <code>getTopPagesBySessionsWithErrors</code> en <code>getTopErrorsByImpactOnGoal</code> mee.</p>
-    <p>Dat is precies je vraag — <em>waar haken klanten af</em> — als kant-en-klare aanroep, zonder dagelijkse limiet en zonder venster van drie dagen. Je betaalt al voor ContentSquare; dit is het gebruiken.</p>
-  </div>
-
-  <div class="callout">
-    <h4>Route B — Clarity Data Export API, al gebouwd</h4>
-    <p><code>scripts/clarity-pdp-insights.py</code> staat klaar in deze repo. Ik heb geverifieerd dat het endpoint vanuit deze omgeving bereikbaar is; het wacht alleen op een token.</p>
-    <p>Maak er een aan via <strong>Clarity → Instellingen → Data&nbsp;Export → Generate new API token</strong> (alleen projectbeheerders), zet hem als <code>CLARITY_API_TOKEN</code> in de omgeving — <strong>niet in de repo</strong> — en draai het script. Het doet 4 van de 10 toegestane verzoeken en houdt er 6 over.</p>
+    <h4>Correctie op de eerste versie van dit deel</h4>
+    <p>Hier stond «Route A — ContentSquare, aanbevolen», met de zin <em>«Je betaalt al voor ContentSquare; dit is het gebruiken.»</em> Dat was onjuist. Het project staat op het gratis plan. De vier tools die hier werden aangeprezen — <code>computeFunnel</code>, <code>getTopPageGroupsByLostConversions</code>, <code>getTopPagesBySessionsWithErrors</code> en <code>getTopErrorsByImpactOnGoal</code> — zijn alle vier onbruikbaar op dit project. Route B was al die tijd de hoofdroute.</p>
   </div>
 
   <div class="prose">
-    <h3>Wat de Clarity-API wél en niet geeft</h3>
-    <p>Belangrijk voordat je erop rekent: de API levert <strong>geaggregeerde cijfers, geen opnames en geen klikkaarten</strong>. Van mijn vijf vragen hieronder beantwoordt hij er drie. De twee waardevolste — de desktop-opnames en de klikkaart — blijven handwerk in de Clarity-interface. Verder: maximaal 10 verzoeken per project per dag, en <strong>alleen de laatste 1 tot 3 dagen</strong>. Wil je een reeks opbouwen, dan moet het script op een cron.</p>
-    <p>De metrics die je wél krijgt, per dimensie <code>URL</code>, <code>Device</code>, <code>Browser</code>, <code>Source</code>, <code>Medium</code>, <code>Campaign</code>, <code>Channel</code>, <code>OS</code> of <code>Country/Region</code>: Scroll Depth, Engagement Time, Traffic, Popular Pages, Dead Click Count, Rage Click Count, Quickback Click, Excessive Scroll, Script Error Count en Error Click Count.</p>
-    <p>Er bestaat ook een officiële <code>@microsoft/clarity-mcp-server</code>, maar die draait via <code>npx</code> op je eigen machine. Bruikbaar in Claude Code lokaal, niet als connector op claude.ai — daarvoor is een remote server nodig.</p>
-    <h3>De vijf dingen die ik zou opvragen</h3>
+    <h3>Waar het op vastliep</h3>
     <ul class="plain">
-      <li><strong>Scrolldiepte op de PDP, gesplitst mobiel/desktop.</strong> <em>Via de API.</em> Dit toetst de hele redesign-these direct: haalt iemand plek 6 überhaupt? Als de mediaan onder de 50% ligt, is het mechanisme-blok effectief onzichtbaar en is het naar voren halen de goedkoopste winst die je hebt.</li>
-      <li><strong>Rage clicks en dead clicks.</strong> <em>Via de API.</em> Met name op de vergelijkingstabel, de gallerij-thumbnails en het kapotte aanbevelingsblok. Dead clicks op productkaarten met €0,00 zou het vermoeden hard maken.</li>
-      <li><strong>Quick-backs op de PDP.</strong> <em>Via de API.</em> Wie binnen enkele seconden terugklikt, kreeg iets anders dan de advertentie beloofde. Dat toetst of het eerste beeld matcht met de creative.</li>
-      <li><strong>Desktop-opnames van sessies die de checkout bereikten maar niet afrondden.</strong> <em>Handmatig — zit niet in de API.</em> Dit is de gerichtste vraag in de lijst: 44,8% tegen 70,5% is een defect, geen voorkeur. Tien opnames laten waarschijnlijk in vijf minuten zien wát er stukgaat.</li>
-      <li><strong>Klikkaart van het koopblok.</strong> <em>Handmatig — zit niet in de API.</em> Hoeveel mensen openen «Verzending &amp; Retourneren» en «Specificaties» op plek 1 en 2 werkelijk? Als dat laag is, kost die plaatsing je alleen maar ruimte.</li>
+      <li><strong>Er is geen enkele paginagroep aangemaakt.</strong> <code>searchMappings</code>, <code>recommendMappings</code> en <code>recommendPageGroups</code> geven alle drie een lege lijst terug. Scrolldiepte, trechter, journey en paginavergelijking eisen stuk voor stuk een <code>mappingId</code>. Zonder mapping kan ContentSquare geen enkele uitspraak over een specifieke pagina doen — ook niet over de PDP.</li>
+      <li><strong>Er zijn geen conversiedoelen ingesteld.</strong> <code>searchGoals</code> is leeg. De twee tools die verloren conversies aan fouten koppelen, eisen allebei een <code>goalId</code>.</li>
+      <li><strong>Error Analysis zit niet in het abonnement.</strong> Letterlijk: <em>«Access denied to Error Analysis metrics.»</em> Daarmee is de JS-/API-foutsplitsing per apparaat op gratis definitief onbereikbaar.</li>
+      <li><strong>Frustration Score evenmin.</strong> Zelfde weigering. Dat was de enige route naar rage clicks binnen ContentSquare.</li>
+      <li><strong>Het project staat op <code>isEcommerce: false</code>.</strong> Omzet, transacties en winkelwagenwaarde blijven daardoor leeg, ook op gratis.</li>
     </ul>
-    <p>En los daarvan: kies één van de drie meettools. Drie scripts die grotendeels hetzelfde vastleggen, kosten laadtijd — en volgens Chappell kost elke extra seconde ongeveer 7% van je conversie.</p>
+    <p>En los van het abonnement: <strong>rage clicks, dead clicks, quickbacks en klikkaarten zitten helemaal niet in het API-oppervlak van ContentSquare.</strong> Dat is zoning-analyse in de interface. Ook op een betaald plan waren vraag 2, 3 en 5 hierlangs niet te beantwoorden. Die aanname klopte niet.</p>
+  </div>
+
+  <div class="prose">
+    <h3>Wat er wél binnenkwam</h3>
+    <p>Sitemetrics zijn basismetrics en die werken wel. 22 dagen, 18.837 sessies — het volledige datavenster dat het gratis plan bewaart.</p>
+  </div>
+
+  <div class="scroll">
+    <table>
+      <thead><tr>
+        <th>Platform</th><th>Sessies</th><th>Bounce</th><th>Pagina's/sessie</th><th>Sessieduur</th>
+      </tr></thead>
+      <tbody>
+        <tr><td>Android</td><td>8.410</td><td>72,9%</td><td>1,67</td><td>105 s</td></tr>
+        <tr><td>iOS</td><td>5.305</td><td class="bad">82,5%</td><td>1,57</td><td>85 s</td></tr>
+        <tr><td>Windows</td><td>2.539</td><td>77,2%</td><td>1,75</td><td>106 s</td></tr>
+        <tr><td>Mac OS</td><td>948</td><td class="ok">72,8%</td><td class="ok">2,20</td><td class="ok">283 s</td></tr>
+        <tr><td>Linux</td><td>1.200</td><td class="bad">94,7%</td><td>1,13</td><td>12 s</td></tr>
+        <tr><td>Cloud</td><td>365</td><td class="bad">98,6%</td><td>1,02</td><td>9 s</td></tr>
+        <tr><td>Overig</td><td>70</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr class="total"><td>Totaal</td><td>18.837</td><td>—</td><td>—</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">Bron: ContentSquare <code>computeSiteMetrics</code>, project 955088, 30 juli – 20 augustus 2026. Dit zijn platformen, geen apparaten.</p>
+
+  <div class="prose">
+    <p>Mac OS springt eruit: 2,20 pagina's en 283 seconden, ruim drie keer zo lang als iOS. Dat lijkt de desktop-these van deel 01 te bevestigen — mensen die dieper kijken maar niet kopen zitten ergens vast. <strong>Die conclusie houdt geen stand.</strong> Uitgesplitst naar browser, alleen desktop:</p>
+  </div>
+
+  <div class="scroll">
+    <table>
+      <thead><tr>
+        <th>Desktopbrowser</th><th>Sessies</th><th>Aandeel</th><th>Bounce</th><th>Pagina's/sessie</th><th>Sessieduur</th>
+      </tr></thead>
+      <tbody>
+        <tr><td>Chrome</td><td>3.068</td><td>80,2%</td><td>78,0%</td><td>1,77</td><td>142 s</td></tr>
+        <tr><td>Edge</td><td>360</td><td>9,4%</td><td>73,3%</td><td>1,90</td><td>156 s</td></tr>
+        <tr><td>Safari</td><td>244</td><td>6,4%</td><td class="ok">61,1%</td><td class="ok">2,65</td><td class="ok">208 s</td></tr>
+        <tr><td>Firefox</td><td>118</td><td>3,1%</td><td>71,2%</td><td>1,80</td><td>133 s</td></tr>
+        <tr><td>Opera</td><td>18</td><td>0,5%</td><td class="bad">88,9%</td><td>1,11</td><td>6 s</td></tr>
+        <tr class="total"><td>Totaal</td><td>3.824</td><td>100%</td><td>—</td><td>—</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">Inclusief 16 sessies van virusscanners en prefetch-bots (Norton, AVG, Avast, CCleaner), hier niet apart uitgesplitst.</p>
+
+  <div class="callout">
+    <h4>Het diepe bezoek zit volledig in Safari, en Safari is 6% van desktop</h4>
+    <p><strong>Chrome is 80% van je desktopverkeer en gedraagt zich volstrekt gewoon</strong> — 78% bounce, 1,77 pagina's, 142 seconden. Het engagement-patroon van Mac OS kan de 44,8% checkout-afronding dus niet verklaren; het geldt voor een zesde van het verkeer.</p>
+    <p>De meting bevestigt de desktop-defectthese van deel 01 <em>niet</em>. Ze weerlegt hem ook niet — zonder conversiedoel is er geen conversie per browser te meten. Wat er wél uit volgt is bruikbaar: <strong>filter die tien opnames op Chrome desktop.</strong> Daar zit het volume en dus het geld. Ga geen Safari-edge-case jagen.</p>
+  </div>
+
+  <div class="prose">
+    <h3>Er zit botverkeer in de cijfers</h3>
+    <p>Linux (1.200) plus Cloud (365) is <strong>8,3% van de sessies met 95–99% bounce en ongeveer tien seconden</strong>. Dat is geen publiek. Shopify filtert dat er grotendeels uit, ContentSquare niet: over dezelfde 22 dagen telt ContentSquare 3.824 desktopsessies waar Shopify er ongeveer 2.265 zou tellen — ruim 60% meer. <strong>Leg de twee datasets nooit naast elkaar.</strong> De trechter in deel 01 blijft Shopify; deze tabellen blijven ContentSquare.</p>
+  </div>
+
+  <div class="callout">
+    <h4>De goedkoopste reparatie in dit hele rapport</h4>
+    <p>De belangrijkste vraag — <strong>scrolldiepte</strong>, de vraag die de volgorde-omzetting van deel 05 bewijst of onderuithaalt — is <em>niet</em> geblokkeerd door het gratis plan. <code>scrollRate</code>, <code>pageHeight</code>, <code>foldHeight</code> en <code>activityRate</code> staan in de basismetrics, beschikbaar voor alle projecten. Ze zijn alleen onbereikbaar omdat er nul paginagroepen bestaan.</p>
+    <p>Eén page mapping met een groep «Productpagina» op <code>/products/*</code>, handmatig aangemaakt in de ContentSquare-interface, kost tien minuten en kost niets. Daarna is de vraag gewoon te meten. Er is geen API-tool om die mapping aan te maken — dit moet je zelf doen, één keer.</p>
+  </div>
+
+  <div class="prose">
+    <h3>Route B — Clarity Data Export API</h3>
+    <p><code>scripts/clarity-pdp-insights.py</code> staat klaar in deze repo. Ik heb geverifieerd dat het endpoint vanuit deze omgeving bereikbaar is; het wacht alleen op een token. Maak er een aan via <strong>Clarity → Instellingen → Data&nbsp;Export → Generate new API token</strong> (alleen projectbeheerders), zet hem als <code>CLARITY_API_TOKEN</code> in de omgeving — <strong>niet in de repo</strong> — en draai het script.</p>
+    <p>De API levert <strong>geaggregeerde cijfers, geen opnames en geen klikkaarten</strong>. Maximaal 10 verzoeken per project per dag, en <strong>alleen de laatste 1 tot 3 dagen</strong>. Wil je een reeks opbouwen, dan moet het script op een cron. De metrics die je krijgt, per dimensie <code>URL</code>, <code>Device</code>, <code>Browser</code>, <code>Source</code>, <code>Medium</code>, <code>Campaign</code>, <code>Channel</code>, <code>OS</code> of <code>Country/Region</code>: Scroll Depth, Engagement Time, Traffic, Popular Pages, Dead Click Count, Rage Click Count, Quickback Click, Excessive Scroll, Script Error Count en Error Click Count.</p>
+    <p>Er bestaat ook een officiële <code>@microsoft/clarity-mcp-server</code>, maar die draait via <code>npx</code> op je eigen machine. Bruikbaar in Claude Code lokaal, niet als connector op claude.ai — daarvoor is een remote server nodig.</p>
+    <p><code>scripts/contentsquare-pdp-insights.py</code> staat er ook, maar vereist de Export API en die zit pas vanaf Growth. Laat staan voor later.</p>
+
+    <h3>De vijf vragen, en waar ze nu vandaan komen</h3>
+    <ul class="plain">
+      <li><strong>Scrolldiepte op de PDP, mobiel/desktop gesplitst.</strong> <em>ContentSquare, zodra er één paginagroep bestaat — óf de Clarity-API.</em> Dit toetst de hele redesign-these direct: haalt iemand plek 6 überhaupt? Ligt de mediaan onder de 50%, dan is het mechanismeblok effectief onzichtbaar en is het naar voren halen een reparatie, geen smaakkwestie. Begin hier.</li>
+      <li><strong>Rage clicks en dead clicks.</strong> <em>Alleen de Clarity-API.</em> Met name op de vergelijkingstabel, de gallerij-thumbnails en het kapotte aanbevelingsblok. Dead clicks op productkaarten met €0,00 zou het vermoeden hard maken.</li>
+      <li><strong>Quick-backs op de PDP.</strong> <em>Alleen de Clarity-API.</em> Wie binnen enkele seconden terugklikt, kreeg iets anders dan de advertentie beloofde. Dat toetst of het eerste beeld matcht met de creative.</li>
+      <li><strong>Desktop-opnames van sessies die de checkout bereikten maar niet afrondden.</strong> <em>Handwerk in de Clarity-interface — zit in geen van beide API's.</em> Dit is de gerichtste vraag in de lijst: 44,8% tegen 70,5% is een defect, geen voorkeur. <strong>Filter op Chrome desktop</strong> — 80% van het verkeer. Tien opnames laten waarschijnlijk in vijf minuten zien wát er stukgaat.</li>
+      <li><strong>Klikkaart van het koopblok.</strong> <em>Handwerk in de interface — zit in geen van beide API's.</em> Hoeveel mensen openen «Verzending &amp; Retourneren» en «Specificaties» op plek 1 en 2 werkelijk? Als dat laag is, kost die plaatsing je alleen maar ruimte.</li>
+    </ul>
+
+    <h3>En kies één meettool</h3>
+    <p>De meting maakt die keuze concreet. <strong>ContentSquare draait mee in je 797 KB met nul mappings, nul doelen, ecommerce uit en de twee interessantste featuresets buiten het abonnement.</strong> Het levert op dit moment letterlijk niets op en kost wel laadtijd. Dat is geen smaakoordeel meer maar een vaststelling: eruit, of binnen een dag configureren. Volgens Chappell kost elke extra seconde ongeveer 7% van je conversie.</p>
   </div>
 </section>
 
@@ -502,7 +574,7 @@ ul.plain li::before{content:"—";color:var(--accent);font-family:"IBM Plex Mono
 
     <div class="p-item p2"><span class="lvl mono">P2</span><span class="txt"><b>De sectievolgorde omzetten</b><span>Het template één keer aanpassen volgens deel 05. Elk product erft de nieuwe volgorde.</span></span><span class="pil">Boven de vouw · Aanbod</span></div>
     <div class="p-item p2"><span class="lvl mono">P2</span><span class="txt"><b>Koopblok openen met een klantcitaat + risicostrook onder de knop</b><span>Vier nieuwe metafields aanmaken en vullen.</span></span><span class="pil">Vertrouwen</span></div>
-    <div class="p-item p2"><span class="lvl mono">P2</span><span class="txt"><b>Desktop-checkout uitzoeken</b><span>44,8% tegen 70,5% op mobiel. Begin met tien Clarity-opnames van afgebroken desktop-checkouts.</span></span><span class="pil">Mobiel/desktop</span></div>
+    <div class="p-item p2"><span class="lvl mono">P2</span><span class="txt"><b>Desktop-checkout uitzoeken</b><span>44,8% tegen 70,5% op mobiel. Tien Clarity-opnames van afgebroken desktop-checkouts, gefilterd op Chrome — 80% van je desktopverkeer.</span></span><span class="pil">Mobiel/desktop</span></div>
     <div class="p-item p2"><span class="lvl mono">P2</span><span class="txt"><b>Foto-reviews aanzetten in Loox</b><span>Een getal overtuigt niet; een foto van een echte klant wel.</span></span><span class="pil">Sociaal bewijs</span></div>
 
     <div class="p-item p3"><span class="lvl mono">P3</span><span class="txt"><b>Jaarkostenblok bouwen</b><span>Eerlijke vervangmesjes-vergelijking. Onderbenut argument volgens je eigen VoC-dossier.</span></span><span class="pil">Copy · Aanbod</span></div>
@@ -527,7 +599,8 @@ ul.plain li::before{content:"—";color:var(--accent);font-family:"IBM Plex Mono
       <li><strong>Metafields:</strong> Shopify Admin API — 33 metafields op de PRO.</li>
       <li><strong>Concurrentie:</strong> live HTML van <code>balzac.nl/products/the-hedgeman-5-0</code> en <code>balzy.nl/products/bushbuster-4-0</code>. Manscaped (403) en Brothers in Style (certificaatfout) waren niet bereikbaar.</li>
       <li><strong>Normen:</strong> ATC 8–12%, CVR 2–4%, checkout 65%+. Genoemde uplifts zijn testresultaten van Firestone en Chappell bij andere winkels — indicatief, geen voorspelling voor Wellshave.</li>
-      <li><strong>Niet gemeten:</strong> gedragsdata (Clarity/ContentSquare/Hotjar), volledige PageSpeed-score, weergave op een echt mobiel toestel.</li>
+      <li><strong>Gedragsdata:</strong> ContentSquare-connector, project 955088, 30 juli – 20 augustus 2026 (het volledige venster dat het gratis plan bewaart). Alleen sitemetrics — paginaniveau, fouten en frustratiescore waren niet beschikbaar; zie deel 06. <b>Niet te vergelijken met de Shopify-cijfers:</b> ContentSquare filtert botverkeer niet en telt over dezelfde periode ruim 60% meer desktopsessies.</li>
+      <li><strong>Nog steeds niet gemeten:</strong> scrolldiepte, rage clicks, quickbacks, klikkaarten, volledige PageSpeed-score, weergave op een echt mobiel toestel.</li>
     </ul>
   </div>
 </section>

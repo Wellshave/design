@@ -1,57 +1,55 @@
-# Vervolgprompt — ContentSquare-meting
+# ContentSquare-meting — uitgevoerd op 21 augustus 2026
 
-Plak onderstaande blok in een nieuwe chat. De ContentSquare-connector moet
-aanstaan én aangezet zijn voor die chat; tools worden bij sessiestart geladen.
+Deze vervolgprompt is gedraaid. De uitkomst staat in
+`rapporten/productpagina-redesign.html`, deel 06. Hieronder kort wat eruit kwam,
+zodat niemand hem nog een keer draait.
 
----
+## Uitkomst
 
-Repo `Wellshave/design`, branch `claude/product-page-redesign-gzb7s9`. Werk daarop verder.
+Connector werkt. Project **Wellshave**, id `955088`, datavenster 30 juli –
+21 augustus 2026 (22 dagen, rollend).
 
-De ContentSquare-connector staat nu aan. Draai de meting die in `rapporten/productpagina-redesign.html` deel 06 als blinde vlek gemarkeerd staat, en vul dat deel met echte cijfers.
+Vier van de vijf vragen bleven dicht:
 
-**Context die al vaststaat — niet opnieuw ophalen.**
+| blokkade | gevolg |
+|---|---|
+| Geen page mappings (`searchMappings` → `[]`) | Scrolldiepte, funnel, journey en paginavergelijking eisen allemaal een `mappingId`. |
+| Geen conversiedoelen (`searchGoals` → `[]`) | De twee tools die conversieverlies aan fouten koppelen eisen een `goalId`. |
+| Error Analysis niet in het abonnement | JS-/API-foutsplitsing per apparaat definitief dicht op gratis. |
+| Frustration Score niet in het abonnement | Rage clicks niet meetbaar via ContentSquare. |
 
-Wellshave (wellshave.com, Shopify, NL/EUR) verkoopt bodygroomers. De productpagina's zijn volledig op metafields gebouwd: ~20 `custom.*` velden plus metaobjects, één sjabloon voor alle producten. Dat is de hefboom — één sjabloonwijziging raakt het hele assortiment.
+Daarbovenop: **rage clicks, dead clicks, quickbacks en klikkaarten zitten
+helemaal niet in het API-oppervlak van ContentSquare** — dat is zoning-analyse
+in de interface. Ook op een betaald plan waren vraag 2, 3 en 5 hierlangs niet te
+beantwoorden. Die aanname in de oorspronkelijke prompt klopte niet.
 
-Shopify-funnel, laatste 90 dagen (winkelbreed, niet per product):
+Het project staat ook op `isEcommerce: false`, dus omzet en winkelwagenwaarde
+blijven leeg.
 
-| | sessies | ATC | checkout | aankoop | CVR |
-|---|---|---|---|---|---|
-| mobiel | 36.830 | 1.635 (4,44%) | 1.156 | 815 | 2,21% |
-| desktop | 9.267 | 349 (3,77%) | 270 | 121 | 1,31% |
-| tablet | 769 | 35 (4,55%) | 22 | 17 | 2,21% |
+Wat wél binnenkwam: sitemetrics per platform en per browser. Zie deel 06 voor de
+tabellen. Het bruikbaarste cijfer is dat het diepe desktopbezoek volledig in
+Safari zit (6% van desktop) terwijl Chrome 80% is en zich gewoon gedraagt — de
+desktop-defectthese wordt dus *niet* bevestigd, en de Clarity-opnames moeten op
+Chrome desktop gefilterd worden.
 
-Twee lekken, allebei bevestigd:
-1. **Sessie → ATC is 4,31%** tegen een norm van 8–12%. Dat is de productpagina zelf.
-2. **Desktop checkout-afronding 44,8%** (121/270) tegen mobiel 70,5% en een norm van 65%+. Ruikt naar een technisch defect, niet naar een ontwerpkeuze.
+Verbruik: 11 tool calls van de 300 per maand.
 
-Op de heldenpagina `/products/groom-guard-pro` (€59,95, was €85,65) is in de ruwe HTML geverifieerd:
-- 4× `Lorem ipsum dolor sit amet.` en 5× prijs `0,00` live in het aanbevelingsblok
-- 2× `EMPTY DOM REMOVE PROTECTOR` — themacode lekt naar de pagina
-- drie verschillende reviewaantallen: 950+, 650+ en 431, terwijl Loox er werkelijk **442** telt (4.6)
-- `levenslang jaar garantie` naast `2 jaar garantie`
-- Duits in de meta-description (`Messgeräte`, `120 Min. Batterie`) op een Nederlandse pagina
-- 70 van de 161 `<img>` zonder alt-tekst
-- sectievolgorde zet specificaties vóór de bewijs- en mechanismeblokken
+## Wat er nog wél te doen is
 
-**Wat ik van je wil.**
+1. **Maak één page mapping aan** in de ContentSquare-interface, met een groep
+   «Productpagina» op `/products/*`. Kost tien minuten, kost niets, en er is geen
+   API-tool voor — dit is handwerk. Daarna zijn `scrollRate`, `pageHeight`,
+   `foldHeight` en `activityRate` beschikbaar (basismetrics, zitten in gratis) en
+   is de scrolldiepte-vraag alsnog te beantwoorden. Dat is de vraag die de
+   volgorde-omzetting van deel 05 bewijst of onderuithaalt.
+2. **Zet een conversiedoel op** als je iets met de fout-tools wil, al blijven die
+   op gratis achter de betaalmuur.
+3. **Vraag een Clarity-token aan** — Clarity → Instellingen → Data Export →
+   Generate new API token. Dat dekt vraag 1, 2 en 3.
+   `scripts/clarity-pdp-insights.py` staat klaar en wacht alleen op
+   `CLARITY_API_TOKEN` in de omgeving (**niet in de repo**).
+4. **Of zet ContentSquare uit.** Het draait nu mee in 797 KB met nul mappings,
+   nul doelen en de twee interessantste featuresets buiten het abonnement.
 
-Beantwoord met de ContentSquare-tools deze vijf vragen, in deze volgorde van belang:
-
-1. **Scrolldiepte per pagina en apparaat.** Het mechanismeblok begint rond 55–65% van de pagina. Ligt de mediane scrolldiepte daaronder, dan is dat blok voor de helft van je bezoek onzichtbaar en is het naar voren halen een reparatie, geen smaakkwestie. Dit is de vraag die de hele redesign-these bevestigt of onderuithaalt — begin hier.
-2. **Waar zitten rage clicks en frustratie op de PDP?** Toets specifiek of het kapotte aanbevelingsblok meetbaar schade doet.
-3. **Quickbacks** — sluit de pagina aan op de advertentie die de klik opleverde?
-4. **Desktop-checkout**: is die 44,8% een JS- of API-fout? Splits foutindicatoren per apparaat.
-5. **Klikgedrag op het koopblok** — wordt er geklikt op dingen die niet klikbaar zijn?
-
-Relevante tools: `computeSiteMetrics`, `computeFunnel`, `getTopPageGroupsByLostConversions`, `getTopPagesBySessionsWithErrors`, `getTopErrorsByImpactOnGoal`.
-
-**Randvoorwaarden.**
-
-- Gratis plan: **300 tool calls per maand**, teller stond op 18,71K/200K sessies. Begroot ~5–10 calls, niet meer. Zeg vooraf welke je gaat doen.
-- Gratis plan geeft **1 maand historie**. Vraag niets daarbuiten.
-- `scripts/contentsquare-pdp-insights.py` staat in de repo maar vereist een betaald plan (de Export API zit pas vanaf Growth). Niet gebruiken, staat er voor later.
-- **Verzin geen cijfers.** Lukt een meting niet, zeg dat dan. Het rapport is nu eerlijk over wat het niet weet; houd dat zo.
-- Nederlands, en schrijf voor iemand die de pagina zelf gebouwd heeft.
-
-Werk daarna deel 06 van het rapport bij, commit en push naar dezelfde branch.
+`scripts/contentsquare-pdp-insights.py` blijft staan voor als er ooit een
+Growth-plan komt; de Export API zit daar pas vanaf.
