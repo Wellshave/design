@@ -222,14 +222,20 @@ Let op de uploadlimiet van 30 MB per bestand — splits een te grote map op.
 ## Wat dit kost
 
 Eén shot van 5 seconden op 1080p met `bitrate_mode:"high"` kostte 45 credits, in beide runs tot
-nu toe. Beide films kwamen met zes shots plus twee herkansingen op 360. Reken op ongeveer
-300–400 credits voor een film van 30 seconden, en op nul voor alle tekst, montage en
-herzieningen daarna.
+nu toe. De Flex Guard-film kwam met zes shots plus twee herkansingen op 360, de Blade Baron met
+zes plus drie op 405. Reken op ongeveer 300–450 credits voor een film van 30 seconden, en op nul
+voor alle tekst, montage en herzieningen daarna.
 
-Van die vier herkansingen ging er één over een fout van het model en drie over een fout in de
-opdracht: te veel goud gevraagd, en een onderdeel verkeerd beschreven omdat de referentiefoto
-verkeerd gelezen was. De rekening valt dus vooral lager uit door beter kijken vooraf, niet door
-betere prompts achteraf.
+Van die vijf herkansingen ging er één over een fout van het model en gingen er vier over een
+fout in de opdracht: te veel goud gevraagd, een onderdeel verkeerd beschreven omdat de
+referentiefoto verkeerd gelezen was, en twee keer een mechanische handeling gevraagd die niet te
+genereren is. De rekening valt dus vooral lager uit door beter kijken en beter kiezen vooraf,
+niet door betere prompts achteraf.
+
+Controleer het bedrag achteraf met `transactions` en niet met een aftreksom op `balance`. Bij de
+Blade Baron stond er een post van 32 credits tussen met de naam **Cinematic Video Editor**, die
+niet uit de sessie kwam maar uit een klik van de gebruiker in de Higgsfield-webinterface.
+Zonder dat overzicht had die 32 als eigen verbruik in de verantwoording gestaan.
 
 Een door een preset onderschepte inzending kost niets: bij de Blade Baron werden vijf van de zes
 shots teruggestuurd en het saldo bewoog pas bij de tweede inzending. Controleer dat na afloop

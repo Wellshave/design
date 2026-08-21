@@ -165,6 +165,41 @@ Een vlakke foilkop met twee stroken werd een gebogen geperforeerde gaastrommel. 
 verkeerd product. In extreme macro valt het zelden op, maar het is wel een afwijking — meld het
 en laat de gebruiker beslissen of het opnieuw moet.
 
+### Twee harde onderdelen die in elkaar moeten passen
+
+Dit is de duurste valkuil tot nu toe, en de enige waarbij herkansen structureel niet helpt.
+
+Een beschermkap die over een scheerkop zakt en vastklikt, kostte drie generaties en werd nooit
+goed. De kap kwam eerst goud, toen doorzichtig, en toen — met een prompt die kleur en materiaal
+correct beschreef — als een dekkende zwarte kap die **breder was dan de behuizing** en er niet
+op paste. Bij het derde resultaat zweefde hij van frame één af los boven het apparaat en
+versmolt hij aan het eind tot een vage naad.
+
+De reden is dat het model de *pasvorm* moet volhouden terwijl beide onderdelen bewegen. Kleur
+en licht zijn met een clausule te sturen; een mechanische passing niet. Herkansen levert alleen
+een nieuwe variant van dezelfde fout.
+
+**Vraag geen mechanische handeling maar een lichtgebeurtenis.** Datzelfde beat — "hier bedien je
+het, hier zit techniek in" — kwam er in één generatie goed uit als een puls die uit de aan-knop
+komt:
+
+> During the shot the button presses in a fraction and one soft warm gold pulse of light blooms
+> out of the gold ring and travels outward along the thin gold band toward both edges of the
+> frame before fading; a moment later a second, brighter and faster pulse follows the same path.
+> The gold ring and the gold band are the only things that light up.
+
+Twee pulsen dragen bovendien een claim die één puls niet draagt: twee snelheidsstanden. Zoek dus
+eerst welke USP je met licht kunt vertellen, voordat je iets in elkaar laat schuiven.
+
+Wat wél veilig beweegt: licht dat over een oppervlak strijkt, een indicator die aanspringt, een
+knop die een fractie indrukt, druppels, en de camera zelf. Wat niet: kappen, klepjes,
+opzetstukken die wisselen, scharnieren, alles wat moet klikken of sluiten. Wil de gebruiker zo'n
+onderdeel toch in beeld, film het dan **in één toestand** — al gesloten of al open — met een
+referentiefoto van precies die toestand, en laat de camera het werk doen.
+
+Meld dit vóór je genereert wanneer een shot erom vraagt, niet erna. Twee mislukte pogingen op
+dezelfde fout zijn een patroon; drie op één shot is een ontwerpfout in de shotlijst.
+
 ## Werkwijze bij genereren
 
 `generate_video_batch` met één item per shot, `index` gelijk aan het shotnummer. Daarna
