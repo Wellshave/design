@@ -1,0 +1,113 @@
+{% comment %}
+  Wellshave — blok 8, het hele assortiment per zone.
+  Ontwerp en onderbouwing: audits/blok-08-zonerooster.template.html
+  Het aantal apparaten en de vanaf-prijs per zone komen uit de collectie;
+  het totaal bovenaan is de som daarvan. Niemand hoeft die bij te werken.
+{% endcomment %}
+
+{{ 'ws-zonerooster.css' | asset_url | stylesheet_tag }}
+
+{% render 'indent-settings', section: section %}
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="ws-az-arw" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-az-chk" viewBox="0 0 24 24"><path d="M4 12.5l5.2 5.2L20 6.9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+{%- assign totaal = 0 -%}
+{%- for block in section.blocks -%}
+  {%- assign totaal = totaal | plus: block.settings.collectie.all_products_count -%}
+{%- endfor -%}
+
+<div class="ws-az"><div class="ws-az__in">
+
+  <div class="ws-az__top">
+    <div>
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="ws-az__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      {%- if section.settings.kop != blank -%}
+        <h2 class="ws-az__h2">{{ section.settings.kop }}</h2>
+      {%- endif -%}
+      {%- if section.settings.note != blank -%}
+        <p class="ws-az__note">{{ section.settings.note }}</p>
+      {%- endif -%}
+    </div>
+    {%- if totaal > 0 -%}
+      <p class="ws-az__count"><b>{{ totaal }}</b>apparaten,<br>verdeeld over {{ section.blocks.size }} zones</p>
+    {%- endif -%}
+  </div>
+
+  <div class="ws-az__grid" style="grid-template-columns:repeat({{ section.blocks.size | at_most: 4 | at_least: 1 }},minmax(0,1fr))">
+    {%- for block in section.blocks -%}
+      {%- assign col = block.settings.collectie -%}
+      <a class="ws-az__kaart" href="{{ col.url | default: '#' }}" {{ block.shopify_attributes }}>
+        <span class="ws-az__shot">
+          {%- if block.settings.foto != blank -%}
+            {{ block.settings.foto | image_url: width: 700 | image_tag }}
+          {%- endif -%}
+          {%- if block.settings.tag != blank -%}
+            <span class="ws-az__tag">{{ block.settings.tag }}</span>
+          {%- endif -%}
+        </span>
+        <span class="ws-az__body">
+          <span class="ws-az__zone">{{ block.settings.zone | default: col.title }}</span>
+          {%- if block.settings.wat != blank -%}
+            <span class="ws-az__wat">{{ block.settings.wat }}</span>
+          {%- endif -%}
+          {%- if block.settings.lead != blank -%}
+            <span class="ws-az__lead">{{ section.settings.lead_label }} <b>{{ block.settings.lead }}</b></span>
+          {%- endif -%}
+          <span class="ws-az__meta">
+            <span class="ws-az__van">
+              {%- capture vanaf %}{% render 'ws-vanaf', collectie: col %}{% endcapture -%}
+              {%- if vanaf != blank -%}vanaf {{ vanaf }} {%- endif -%}
+              <span>· {{ col.all_products_count }} apparaten</span>
+            </span>
+            <span class="ws-az__go"><svg><use href="#ws-az-arw"/></svg></span>
+          </span>
+        </span>
+      </a>
+    {%- endfor -%}
+  </div>
+
+  {%- if section.settings.foot != blank -%}
+    <p class="ws-az__foot"><svg><use href="#ws-az-chk"/></svg><span>{{ section.settings.foot }}</span></p>
+  {%- endif -%}
+
+</div></div>
+
+{% schema %}
+{
+  "name": "WS · Assortiment per zone",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Bovenregel", "default": "Het hele assortiment" },
+    { "type": "inline_richtext", "id": "kop", "label": "Kop (vet = brons, eigen regel)", "default": "Jij weet waar je wilt beginnen. <b>Wij weten waarmee.</b>" },
+    { "type": "textarea", "id": "note", "label": "Onderregel", "default": "Kies de zone waar je aan de slag wilt. Je krijgt dan alleen te zien wat daarvoor gemaakt is — in plaats van een keuze uit acht productcategorieën." },
+    { "type": "text", "id": "lead_label", "label": "Label voor het populairste product", "default": "Populairst:" },
+    { "type": "text", "id": "foot", "label": "Slotregel", "default": "Elk apparaat 100 dagen te proberen, met 2 jaar garantie." },
+    { "type": "header", "content": "Indent settings" },
+    { "type": "range", "id": "desk_indent_top", "label": "Indent top (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "desk_indent_bottom", "label": "Indent bottom (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_top", "label": "Indent top (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_bottom", "label": "Indent bottom (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "blocks": [
+    {
+      "type": "zone",
+      "name": "Zone",
+      "settings": [
+        { "type": "collection", "id": "collectie", "label": "Collectie", "info": "Aantal apparaten, vanaf-prijs en de link komen hieruit." },
+        { "type": "image_picker", "id": "foto", "label": "Foto" },
+        { "type": "text", "id": "zone", "label": "Naam", "info": "Leeg = de naam van de collectie." },
+        { "type": "textarea", "id": "wat", "label": "Wat er in deze zone hoort" },
+        { "type": "text", "id": "lead", "label": "Populairste product" },
+        { "type": "text", "id": "tag", "label": "Label linksboven" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "WS · Assortiment per zone" } ]
+}
+{% endschema %}

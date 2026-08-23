@@ -1,0 +1,83 @@
+{% comment %}
+  Wellshave — blok 7, waar we voor staan.
+  Ontwerp en onderbouwing: audits/blok-07-proposities.template.html
+  Bewust zonder cijfers of prijzen in de kop van elke kaart: prijzen in een
+  tekstveld worden een valkuil zodra ze veranderen.
+{% endcomment %}
+
+{{ 'ws-proposities.css' | asset_url | stylesheet_tag }}
+
+{% render 'indent-settings', section: section %}
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="ws-vp-chk" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.4" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7.8 12.3l2.9 2.9 5.5-6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<div class="ws-vp"><div class="ws-vp__in">
+
+  <div class="ws-vp__kop">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="ws-vp__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+    {%- if section.settings.kop != blank -%}
+      <h2 class="ws-vp__h2">{{ section.settings.kop }}</h2>
+    {%- endif -%}
+    {%- if section.settings.sub != blank -%}
+      <p class="ws-vp__sub">{{ section.settings.sub }}</p>
+    {%- endif -%}
+  </div>
+
+  <div class="ws-vp__rij" style="grid-template-columns:repeat({{ section.blocks.size | at_most: 4 | at_least: 1 }},minmax(0,1fr))">
+    {%- for block in section.blocks -%}
+      <div class="ws-vp__kaart" {{ block.shopify_attributes }}>
+        <p class="ws-vp__cijfer">{{ block.settings.kop }}
+          {%- if block.settings.klein != blank -%}<small>{{ block.settings.klein }}</small>{%- endif -%}
+        </p>
+        {%- if block.settings.label != blank -%}
+          <p class="ws-vp__label">{{ block.settings.label }}</p>
+        {%- endif -%}
+        {%- if block.settings.tekst != blank -%}
+          <p class="ws-vp__tekst">{{ block.settings.tekst }}</p>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+
+  {%- if section.settings.slot != blank -%}
+    <p class="ws-vp__slot"><svg><use href="#ws-vp-chk"/></svg><span>{{ section.settings.slot }}</span></p>
+  {%- endif -%}
+
+</div></div>
+
+{% schema %}
+{
+  "name": "WS · Waar we voor staan",
+  "tag": "section",
+  "max_blocks": 4,
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Bovenregel", "default": "Waar we voor staan" },
+    { "type": "inline_richtext", "id": "kop", "label": "Kop (vet = goud)", "default": "Vier dingen die <b>niet per product</b> verschillen." },
+    { "type": "textarea", "id": "sub", "label": "Subkop", "default": "Wellshave bestaat om in elk huishouden één apparaat te hebben liggen voor de plek waar jij iets weg wilt hebben — zonder dat het een luxeaankoop wordt. Dat vertaalt zich in vier dingen die voor elk apparaat gelden." },
+    { "type": "inline_richtext", "id": "slot", "label": "Slotregel", "default": "Hoe die verbeteringen er in de praktijk uitzien, <b>staat hierboven in de tijdlijn.</b>" },
+    { "type": "header", "content": "Indent settings" },
+    { "type": "range", "id": "desk_indent_top", "label": "Indent top (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "desk_indent_bottom", "label": "Indent bottom (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_top", "label": "Indent top (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_bottom", "label": "Indent bottom (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "blocks": [
+    {
+      "type": "belofte",
+      "name": "Belofte",
+      "settings": [
+        { "type": "text", "id": "kop", "label": "Kop" },
+        { "type": "text", "id": "klein", "label": "Klein woord erachter" },
+        { "type": "text", "id": "label", "label": "Label" },
+        { "type": "textarea", "id": "tekst", "label": "Tekst" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "WS · Waar we voor staan" } ]
+}
+{% endschema %}
