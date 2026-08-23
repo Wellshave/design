@@ -180,7 +180,7 @@ strong{font-weight:700}
 
 <section>
   <div class="shead"><span class="snum">02</span><h2 class="duo">Het koopblok, slot voor slot,<span class="b">met de tekst er al in.</span></h2></div>
-  <p class="sintro">Ezra Firestone's volgorde: open met een klant, niet met de productnaam. Alles hieronder past boven de vouw op 390px. Slot 7 is voorwaardelijk: het staat altijd in het sjabloon, maar rendert niets als het veld leeg is. Gouden regels zijn nieuwe metafields.</p>
+  <p class="sintro">Ezra Firestone's volgorde: open met een klant, niet met de productnaam. Alles hieronder past boven de vouw op 390px. Slot 7 is voorwaardelijk: het staat altijd in het sjabloon, maar rendert niets als het veld leeg is. Slot 10 is de betaalrij &mdash; nu nog een app die zich met JavaScript achter de knop plakt, straks server-side uit Shopify zelf. Gouden regels zijn nieuwe metafields.</p>
 
   <div class="slots">
     <div class="slot new"><div class="n">1</div><div class="k">Citaat</div><div class="v"><span class="q">Eén korte klantzin die het snij-bezwaar wegneemt, boven de titel.</span><span class="mf">nieuw → custom.buybox_quote + custom.buybox_quote_author</span></div></div>
@@ -189,9 +189,10 @@ strong{font-weight:700}
     <div class="slot"><div class="n">4</div><div class="k">Sterren</div><div class="v"><span class="q">Trustpilot-logo · TrustScore 4,4 · 966 reviews — winkelbreed, op elk product hetzelfde</span><span class="mf">Trustpilot-widget, business unit 63c511d4e1339e2200c204a1 · niet per product</span></div></div>
     <div class="slot"><div class="n">5</div><div class="k">Prijs</div><div class="v"><span class="q">€59,95 · <s>€85,65</s> · Bespaar 30%</span><span class="mf">variant.price + compare_at_price</span></div></div>
     <div class="slot"><div class="n">6</div><div class="k">USP's</div><div class="v"><span class="q">Vijf regels, benefit vooraan — zie sectie 03</span><span class="mf">custom.product_usp</span></div></div>
-    <div class="slot new"><div class="n">7</div><div class="k">Cadeaubalk</div><div class="v"><span class="q">&laquo;Gratis Skin-Safe Blade t.w.v. &euro;19,95&raquo; &mdash; omlijnde gouden pil, valt weg als het veld leeg is</span><span class="mf">nieuw &rarr; custom.product_offer (metaobject_reference &rarr; limited_offer)</span></div></div>
+    <div class="slot new"><div class="n">7</div><div class="k">Cadeaubalk</div><div class="v"><span class="q">&laquo;Gratis Groom Guard&trade; Blade t.w.v. &euro;14,95&raquo; &mdash; omlijnde gouden pil, valt weg als het veld leeg is</span><span class="mf">nieuw &rarr; custom.product_offer (metaobject_reference &rarr; limited_offer)</span></div></div>
     <div class="slot"><div class="n">8</div><div class="k">Knop</div><div class="v"><span class="q">IN WINKELWAGEN — volle breedte, één actie</span><span class="mf">—</span></div></div>
     <div class="slot new"><div class="n">9</div><div class="k">Risicostrook</div><div class="v"><span class="q">100 dagen thuis proberen · 2 jaar garantie · Voor 23:59 besteld = morgen in huis</span><span class="mf">nieuw → custom.risk_strip (list) · vervangt losse shipping_information</span></div></div>
+    <div class="slot new"><div class="n">10</div><div class="k">Betaalrij</div><div class="v"><span class="q">Kleine grijze rij onder de risicostrook — iDEAL, Bancontact, PayPal, Klarna, Visa, Mastercard, Maestro, Amex, Apple Pay, Google Pay</span><span class="mf">nieuw → shop.enabled_payment_types · vervangt de app-sectie ss_payment_icons</span></div></div>
   </div>
 
   <div class="note warn">
@@ -274,7 +275,7 @@ strong{font-weight:700}
 
 <section>
   <div class="shead"><span class="snum">05</span><h2 class="duo">De sectievolgorde,<span class="b">met licht en donker om beurten.</span></h2></div>
-  <p class="sintro">Zestien blokken. Twaalf bestaan al als metafield, één is nieuw, drie zijn herbouwd. De donkere secties vallen waar het serieus wordt: het mechanisme en het aanbod.</p>
+  <p class="sintro">Zeventien blokken. Dertien bestaan al als metafield, één is nieuw, drie zijn herbouwd. De donkere secties vallen waar het serieus wordt: het mechanisme en het aanbod.</p>
 
   <div class="ord">
     <div class="orow"><div class="i">01</div><div class="t"><b>Koopblok</b><em>herbouwd — zie sectie 02</em></div><div class="g zand">zand</div></div>
@@ -289,10 +290,11 @@ strong{font-weight:700}
     <div class="orow"><div class="i">10</div><div class="t"><b>UGC-video's</b><em>custom.ugc_video_list — staat al gevuld</em></div><div class="g wit">wit</div></div>
     <div class="orow"><div class="i">11</div><div class="t"><b>Wat zit er in de doos</b><em>was plek 10</em></div><div class="g zand">zand</div></div>
     <div class="orow"><div class="i">12</div><div class="t"><b>Waarom Wellshave</b><em>was plek 9</em></div><div class="g wit">wit</div></div>
-    <div class="orow"><div class="i">13</div><div class="t"><b>Specificaties</b><em>was plek 2 — hier hoort hij</em></div><div class="g wit">wit</div></div>
+    <div class="orow"><div class="i">13</div><div class="t"><b>Omschrijving en specificaties</b><em>samen in één blad — betoog links, tabel rechts</em></div><div class="g zand">zand</div></div>
     <div class="orow"><div class="i">14</div><div class="t"><b>Verzending &amp; Retourneren</b><em>was plek 1 — hier hoort hij</em></div><div class="g wit">wit</div></div>
     <div class="orow"><div class="i">15</div><div class="t"><b>Veelgestelde vragen</b><em>custom.faq</em></div><div class="g zand">zand</div></div>
-    <div class="orow"><div class="i">16</div><div class="t"><b>Afsluiter</b><em>mini-koopblok: kop, prijs, knop, bewijs</em></div><div class="g donker">donker</div></div>
+    <div class="orow nieuw"><div class="i">16</div><div class="t"><b>Maak het compleet</b><em>vijf accessoires uit custom.cart_upsell — de aanvulling, niet de ladder</em></div><div class="g donker">donker</div></div>
+    <div class="orow"><div class="i">17</div><div class="t"><b>Afsluiter</b><em>mini-koopblok: kop, prijs, knop, bewijs, betaalrij</em></div><div class="g donker">donker</div></div>
   </div>
 
   <div class="note">
@@ -315,6 +317,9 @@ strong{font-weight:700}
         <tr><td><code>custom.risk_strip</code></td><td>list.single_line_text</td><td class="no">aanmaken</td></tr>
         <tr><td><code>custom.yearly_cost</code></td><td>metaobject_reference</td><td class="no">aanmaken</td></tr>
         <tr><td><code>custom.product_offer</code></td><td>metaobject_reference</td><td class="no">aanmaken</td></tr>
+        <tr><td><code>custom.specification</code></td><td>rich_text &rarr; label/waarde</td><td class="ok">herschrijven als «Label: waarde»</td></tr>
+        <tr><td><code>custom.cart_upsell</code></td><td>list.product_reference</td><td class="ok">bestaat, blok 16</td></tr>
+        <tr><td><code>custom.upgrade</code> &middot; <code>custom.upgrade_details</code></td><td>metaobject_reference</td><td class="ok">verwijderen</td></tr>
         <tr><td><code>custom.product_usp</code></td><td>list.single_line_text</td><td class="ok">herschrijven</td></tr>
         <tr><td>Trustpilot-widget <span class="mono">63c511d4&hellip;</span></td><td>widget</td><td class="ok">binden i.p.v. intypen</td></tr>
         <tr><td><code>compare_table</code> · <code>included_box</code> · <code>image_with_text</code> · <code>ugc_video_list</code> · <code>specification</code> · <code>faq</code> · <code>store_usp</code> · <code>upgrade</code> · <code>cart_upsell</code></td><td>diverse</td><td class="ok">staan al gevuld</td></tr>

@@ -159,14 +159,14 @@ strong{font-weight:700}
 
 <section>
   <div class="shead"><span class="snum">03</span><h2 class="duo">Het skelet, blok voor blok,<span class="b">met de bron per blok.</span></h2></div>
-  <p class="sintro">Zestien blokken. Wat vastligt is de vorm en de plek; wat verschilt is de inhoud in de rechterkolom. «Kern» betekent verplicht vullen, «uitbreiding» betekent: leeg is weg, maar de rest verschuift niet.</p>
+  <p class="sintro">Zeventien blokken. Wat vastligt is de vorm en de plek; wat verschilt is de inhoud in de rechterkolom. «Kern» betekent verplicht vullen, «uitbreiding» betekent: leeg is weg, maar de rest verschuift niet.</p>
 
   <div class="tw">
     <table>
       <thead><tr><th>&nbsp;</th><th>Blok</th><th>Wat vastligt</th><th>Wat per product verschilt</th><th>Bron</th><th>Klasse</th><th>Grond</th></tr></thead>
       <tbody>
         <tr class="fold"><td colspan="7">Boven de vouw</td></tr>
-        <tr><td class="i">01</td><td><b>Koopblok</b><br>gallerij + negen slots</td><td>De negen slots, hun volgorde, de knop, de risicostrook. Vijf uitgeklapte thumbnails.</td><td>Citaat, titel, belofte, prijs, USP's, beeld</td><td><code>custom.buybox_quote</code><br><code>custom.hero_promise</code><br><code>custom.product_usp</code><br><code>custom.risk_strip</code></td><td><span class="pill kern">kern</span></td><td class="g zand">zand</td></tr>
+        <tr><td class="i">01</td><td><b>Koopblok</b><br>gallerij + tien slots</td><td>De tien slots, hun volgorde, de knop, de risicostrook. Vijf uitgeklapte thumbnails.</td><td>Citaat, titel, belofte, prijs, USP's, beeld</td><td><code>custom.buybox_quote</code><br><code>custom.hero_promise</code><br><code>custom.product_usp</code><br><code>custom.risk_strip</code></td><td><span class="pill kern">kern</span></td><td class="g zand">zand</td></tr>
         <tr class="fold"><td colspan="7">Onder de vouw</td></tr>
         <tr><td class="i">02</td><td><b>Geruststrook</b></td><td>Vier items naast elkaar, rond icoonvlak, vette regel plus onderregel</td><td>Niets &mdash; winkelbreed en identiek</td><td><code>custom.store_usp</code></td><td><span class="pill kern">kern</span></td><td class="g wit">wit</td></tr>
         <tr><td class="i">03</td><td><b>Het aanbodblok</b><br>drie kaarten</td><td>Drie kaarten, nooit meer, nooit als lijst. Instap / uitgelicht / beste waarde. Besparing op elke kaart.</td><td>Welke drie producten de ladder vormen</td><td><code>custom.upgrade_products</code><br>live prijzen</td><td><span class="pill kern">kern</span></td><td class="g donker">donker</td></tr>
@@ -179,10 +179,11 @@ strong{font-weight:700}
         <tr><td class="i">10</td><td><b>UGC-video's</b></td><td>Band van verticale video's met kop per video</td><td>De video's</td><td><code>custom.ugc_video_list</code></td><td><span class="pill uit">uitbreiding</span></td><td class="g wit">wit</td></tr>
         <tr><td class="i">11</td><td><b>Wat zit er in de doos</b></td><td>Uitgestald op &eacute;&eacute;n vlak, met bijschrift per onderdeel</td><td>De inhoud</td><td><code>custom.included_box</code><br><code>custom.included_box_image</code></td><td><span class="pill kern">kern</span></td><td class="g zand">zand</td></tr>
         <tr><td class="i">12</td><td><b>Waarom Wellshave</b></td><td>Vier beloftes plus het bestelaantal met bronlabel</td><td>Niets &mdash; winkelbreed</td><td>sectie-instelling</td><td><span class="pill kern">kern</span></td><td class="g wit">wit</td></tr>
-        <tr><td class="i">13</td><td><b>Specificaties</b></td><td>Twee kolommen, label en waarde</td><td>De specificaties</td><td><code>custom.specification</code></td><td><span class="pill uit">uitbreiding</span></td><td class="g wit">wit</td></tr>
+        <tr><td class="i">13</td><td><b>Omschrijving en specificaties</b><br>&eacute;&eacute;n blad</td><td>Betoog links op de leesmaat, tabel rechts in een wit vlak. Eén leadzin, drie &laquo;waarom&raquo;-koppen, afsluitregel. Elke belofte links heeft een regel rechts.</td><td>De tekst en de specificaties</td><td><code>product.descriptionHtml</code><br><code>custom.specification</code></td><td><span class="pill kern">kern</span></td><td class="g zand">zand</td></tr>
         <tr><td class="i">14</td><td><b>Verzending &amp; retour</b></td><td>Uitklappers, drie stuks</td><td>Niets &mdash; winkelbreed</td><td><code>custom.shipping_information</code></td><td><span class="pill kern">kern</span></td><td class="g wit">wit</td></tr>
         <tr><td class="i">15</td><td><b>Veelgestelde vragen</b></td><td>Uitklappers, bezwaar-eerst gesorteerd</td><td>De vragen</td><td><code>custom.faq</code></td><td><span class="pill kern">kern</span></td><td class="g zand">zand</td></tr>
-        <tr><td class="i">16</td><td><b>Afsluiter</b></td><td>Mini-koopblok: kop, prijs, knop, bewijsregel</td><td>Erft alles uit blok 01</td><td>&mdash;</td><td><span class="pill kern">kern</span></td><td class="g donker">donker</td></tr>
+        <tr><td class="i">16</td><td><b>Maak het compleet</b><br>accessoires</td><td>Vijf compacte kaarten naast elkaar, foto, naam, prijs, &laquo;+ toevoegen&raquo;. De aanvulling, niet de ladder.</td><td>Welke accessoires erbij horen</td><td><code>custom.cart_upsell</code></td><td><span class="pill uit">uitbreiding</span></td><td class="g donker">donker</td></tr>
+        <tr><td class="i">17</td><td><b>Afsluiter</b></td><td>Mini-koopblok: kop, prijs, knop, bewijsregel, betaalrij</td><td>Erft alles uit blok 01</td><td>&mdash;</td><td><span class="pill kern">kern</span></td><td class="g donker">donker</td></tr>
       </tbody>
     </table>
   </div>
@@ -211,6 +212,7 @@ strong{font-weight:700}
         <tr><td><code>custom.hero_promise</code></td><td>single_line_text</td><td>Slot 3, vervangt de ondertitel boven de vouw</td><td><span class="pill nieuw">aanmaken</span></td></tr>
         <tr><td><code>custom.risk_strip</code></td><td>list.single_line_text</td><td>Slot 8, onder de knop</td><td><span class="pill nieuw">aanmaken</span></td></tr>
         <tr><td><code>custom.yearly_cost</code></td><td>metaobject_reference</td><td>Blok 09, de jaarkosten</td><td><span class="pill nieuw">aanmaken</span></td></tr>
+        <tr><td>&mdash;</td><td>&mdash;</td><td>Slot 10, de betaalrij &mdash; komt uit <code>shop.enabled_payment_types</code>, geen metafield nodig</td><td><span class="pill uit">bestaat al</span></td></tr>
         <tr><td><code>custom.product_offer</code></td><td>metaobject_reference</td><td>Slot 7, de cadeaubalk &mdash; wijst naar de bestaande definitie <code>limited_offer</code></td><td><span class="pill nieuw">aanmaken</span></td></tr>
         <tr><td><code>custom.product_usp</code></td><td>list.single_line_text</td><td>Slot 6 &mdash; bestaat, maar moet herschreven</td><td>herschrijven</td></tr>
         <tr><td><code>compare_table</code> · <code>included_box</code> · <code>image_with_text</code> · <code>ugc_video_list</code> · <code>specification</code> · <code>faq</code> · <code>store_usp</code> · <code>upgrade_products</code> · <code>cart_upsell</code> · <code>use_case_title</code></td><td>diverse</td><td>Blok 02 t/m 15</td><td>staan gevuld</td></tr>
