@@ -209,6 +209,7 @@ footer p{max-width:none}
 <symbol id="ster" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01z"/></symbol>
 <symbol id="klok" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 7.2V12l3.2 2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 <symbol id="doos" viewBox="0 0 24 24"><path d="M3.4 7.6L12 3.4l8.6 4.2v8.8L12 20.6l-8.6-4.2z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M3.4 7.6L12 11.8l8.6-4.2M12 11.8v8.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+<symbol id="quiz" viewBox="0 0 24 24"><path d="M4 6.4h8.6M4 12h8.6M4 17.6h5.4" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M15.4 16.3l2 2 3.6-4.2" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 <symbol id="tp" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01z"/></symbol>
 </defs></svg><div class="wrap">
 
@@ -226,7 +227,7 @@ footer p{max-width:none}
 <div class="callout fix">
   <h3 style="margin-top:0">Wat dit blok doet</h3>
   <p><b>Het vangt de bezoeker op die de hele pagina heeft gelezen en nog niet geklikt heeft.</b> Op dit moment staat er onder je FAQ een strook met "Zie onze 950+ reviews op Trustpilot" en daaronder de nieuwsbriefbalk. Dat is geen afsluiting; dat is nog twee dingen naast elkaar zonder dat er één iets vraagt.</p>
-  <p><b>De kop herhaalt de belofte van blok 7, niet die van de hero.</b> Wie hier is, weet inmiddels wat je verkoopt. "Eén apparaat voor de plek waar jij iets weg wilt hebben" is de zin die de hele pagina samenvat, en hij verwijst terug naar de zonekiezer — de plek waar de keuze gemaakt wordt.</p>
+  <p><b>De kop herhaalt de belofte van blok 7, niet die van de hero.</b> Wie hier is, weet inmiddels wat je verkoopt. "Eén apparaat voor de plek waar jij iets weg wilt hebben" is de zin die de hele pagina samenvat, en hij zegt waar het blok voor staat: de keuze. Wie hem al gemaakt heeft, klikt door naar de apparaten; wie hem nog niet gemaakt heeft, laat de quiz hem maken.</p>
   <p style="margin-bottom:0"><b>Donker, als sluitstuk.</b> Blok 11 is licht, de footer is licht. Een donker vlak ertussen sluit de pagina af zoals de hero hem opende, met hetzelfde monogram groot en zacht op de achtergrond.</p>
 </div>
 
@@ -249,10 +250,10 @@ footer p{max-width:none}
         <div class="af-in">
           <p class="af-eyebrow">Klaar om te kiezen</p>
           <h2 class="af-h2">Eén apparaat voor de plek <b>waar jij iets weg wilt hebben.</b></h2>
-          <p class="af-sub">Kies de zone, kies het apparaat, en probeer het thuis. Bevalt het niet, dan stuur je het terug.</p>
+          <p class="af-sub">Kies zelf het apparaat, of laat de quiz het in een paar vragen voor je doen — voor jezelf of voor iemand anders.</p>
           <div class="af-knoppen">
             <a class="af-cta" href="#">Bekijk alle apparaten<svg><use href="#pijl-r"/></svg></a>
-            <a class="af-cta af-cta2" href="#">Terug naar de zonekiezer</a>
+            <a class="af-cta af-cta2" href="#"><svg><use href="#quiz"/></svg>Start de quiz</a>
           </div>
           <p class="af-reden"><svg><use href="#klok"/></svg><span>Vandaag beslissen kost je niets: <b>je hebt honderd dagen om van gedachten te veranderen.</b></span></p>
           <div class="af-bewijs">
@@ -286,10 +287,10 @@ footer p{max-width:none}
         <div class="af-in">
           <p class="af-eyebrow">Klaar om te kiezen</p>
           <h2 class="af-h2">Eén apparaat voor de plek <b>waar jij iets weg wilt hebben.</b></h2>
-          <p class="af-sub">Kies de zone, kies het apparaat, en probeer het thuis. Bevalt het niet, dan stuur je het terug.</p>
+          <p class="af-sub">Kies zelf het apparaat, of laat de quiz het in een paar vragen voor je doen — voor jezelf of voor iemand anders.</p>
           <div class="af-knoppen">
             <a class="af-cta" href="#">Bekijk alle apparaten<svg><use href="#pijl-r"/></svg></a>
-            <a class="af-cta af-cta2" href="#">Terug naar de zonekiezer</a>
+            <a class="af-cta af-cta2" href="#"><svg><use href="#quiz"/></svg>Start de quiz</a>
           </div>
           <p class="af-reden"><svg><use href="#klok"/></svg><span>Vandaag beslissen kost je niets: <b>je hebt honderd dagen om van gedachten te veranderen.</b></span></p>
           <div class="af-bewijs">
@@ -336,13 +337,15 @@ footer p{max-width:none}
   <ul style="margin-bottom:0">
     <li><b>Stapelt die 10% op de Summer Sale?</b> In je aankondigingsbalk staat "Summer Deals tot 40%". Als de nieuwsbriefcode daar niet bovenop mag, moet dat erbij staan — anders meldt iemand zich aan, probeert de code en haakt af op het moment dat hij bijna afrekende.</li>
     <li><b>Blijft de nieuwsbrief in dit blok, of eronder?</b> Ik heb hem eronder gehangen als aparte regel, zodat de knop de hoofdrol houdt. Wil je hem als eigen sectie behouden, dan haal ik hem hier weg — dan eindigt de pagina op de knop.</li>
-    <li><b>Waar wijst "Terug naar de zonekiezer" heen?</b> Nu naar blok 5 op dezelfde pagina. Dat is een sprong omhoog van bijna de hele pagina; dat werkt, maar het is wel het enige element op de homepage dat de bezoeker terugstuurt in plaats van door.</li>
+    <li><b>Wat is het adres van de quizpagina?</b> De knop staat nu op <code>#</code>. Zodra de pagina er is — bijvoorbeeld <code>/pages/quiz</code> — vul ik hem in. Zolang hij niet bestaat, kan deze knop niet live: een tweede knop die nergens heen gaat is erger dan geen tweede knop.</li>
+    <li><b>Welke knop moet de hoofdknop zijn?</b> Nu is "Bekijk alle apparaten" goud en de quiz de omlijnde knop. Te verdedigen valt ook het omgekeerde: iedereen die hier nog steeds leest, heeft de hele pagina gezien en nóg niet gekozen — dat is precies de bezoeker voor wie de quiz gemaakt is. Zeg het woord en ik draai ze om.</li>
     <li><b>De 100 dagen in het beleid.</b> Derde keer dat ik het noem, en het is de laatste: dit blok zet die belofte als sluitzin neer.</li>
   </ul>
 </div>
 
 <h2>Bouwnotities voor straks</h2>
 <ul>
+  <li><b>De quizknop wijst naar een aparte pagina</b>, niet naar een blok op de homepage. Dat is het verschil met de knop die er eerst stond: die stuurde de bezoeker terug omhoog naar de zonekiezer, dit stuurt hem door naar een vraag die hij kan beantwoorden. Het eindpunt van de quiz is één apparaat met een koopknop — anders heb je de keuze alleen maar verplaatst.</li>
   <li><b>Dit blok vervangt de logostrook</b> ("Zie onze 950+ reviews op Trustpilot") die nu onder de FAQ staat: die zegt hetzelfde als de bewijsregel hier, maar zonder knop erbij.</li>
   <li><b>De sterren zijn getekend, niet de Trustpilot-widget.</b> Die widget laadt traag en verschijnt pas na de rest van de pagina — precies op de plek waar iemand op het punt staat te klikken. De echte widget hoort in blok 2, waar hij tijd heeft om te laden.</li>
   <li><b>De cijfers zijn tekstvelden</b>, net als in blok 1. Ze veranderen zelden, maar als ze veranderen moeten ze op beide plekken tegelijk mee — anders zegt je hero iets anders dan je afsluiter.</li>
