@@ -35,7 +35,11 @@
         <p class="ws-pf__note">{{ section.settings.note }}</p>
       {%- endif -%}
     </div>
-    {%- if section.settings.tp_tonen -%}
+    {%- if section.settings.tp_widget != blank -%}
+      {%- comment -%} de score komt live uit Trustpilot; de ingetypte tekst
+        hieronder is alleen de terugval als de widget nog leeg is {%- endcomment -%}
+      <div class="ws-pf__tp ws-pf__tp--live" data-ws-tp>{{ section.settings.tp_widget }}</div>
+    {%- elsif section.settings.tp_tonen -%}
       <div class="ws-pf__tp">
         <div class="ws-pf__sterren">
           {%- assign heel = section.settings.tp_sterren | floor -%}
@@ -86,7 +90,19 @@
     {%- endif -%}
   </div>
 
-  {%- if section.blocks.size > 0 -%}
+  {%- if section.settings.rev_widget != blank -%}
+    {%- comment -%} De band komt uit Trustpilot zelf. Dat is hun vormgeving in
+      onze sectie — bewuste ruil: altijd actueel en verifieerbaar, in plaats van
+      teksten die iemand moet bijhouden. De eigen kaarten blijven als blok
+      bestaan, dus terugschakelen kan door dit veld leeg te maken. {%- endcomment -%}
+    <div>
+      {%- if section.settings.rev_kop != blank -%}
+        <p class="ws-pf__revcount"><b>{{ section.settings.rev_kop }}</b>
+          <span>{{ section.settings.rev_totaal }}</span></p>
+      {%- endif -%}
+      <div class="ws-pf__tpband" data-ws-tp>{{ section.settings.rev_widget }}</div>
+    </div>
+  {%- elsif section.blocks.size > 0 -%}
     <div>
       {%- if section.settings.rev_kop != blank -%}
         <p class="ws-pf__revcount"><b>{{ section.settings.rev_kop }}</b>
@@ -192,6 +208,28 @@
 
 </div></div>
 
+<script>
+  // De bootstrap van Trustpilot bouwt de widgets op bij het laden van de pagina.
+  // Herlaadt de thema-editor deze sectie, dan is dat moment al voorbij en blijft
+  // het vak leeg. Daarom bouwen we hem hier zelf opnieuw op.
+  (function () {
+    function bouw() {
+      if (!window.Trustpilot) return false;
+      document.querySelectorAll('[data-ws-tp] .trustpilot-widget').forEach(function (el) {
+        window.Trustpilot.loadFromElement(el, true);
+      });
+      return true;
+    }
+    if (!bouw()) {
+      var pogingen = 0;
+      var klok = setInterval(function () {
+        if (bouw() || ++pogingen > 40) clearInterval(klok);
+      }, 250);
+    }
+    document.addEventListener('shopify:section:load', bouw);
+  })();
+</script>
+
 {% schema %}
 {
   "name": "WS · Zonder risico",
@@ -202,6 +240,7 @@
     { "type": "inline_richtext", "id": "kop", "label": "Kop (vet = zwaarder)", "default": "Het enige wat jij hoeft te doen, is hem <b>uitproberen</b>." },
     { "type": "textarea", "id": "note", "label": "Onderregel", "default": "De rest hebben wij dichtgetimmerd: honderd dagen bedenktijd, twee jaar garantie, en een klantenservice die je gewoon te pakken krijgt." },
     { "type": "header", "content": "Trustpilot" },
+    { "type": "html", "id": "tp_widget", "label": "Widgetcode voor de score", "info": "Plak hier de TrustBox van Trustpilot (Micro Combo of Micro TrustScore). Alleen het <div>-deel is nodig; het script laadt al via de Trustpilot-app. Leeg = de ingetypte tekst hieronder." },
     { "type": "checkbox", "id": "tp_tonen", "label": "Tonen", "default": true },
     { "type": "range", "id": "tp_sterren", "label": "Volle sterren", "min": 0, "max": 5, "step": 1, "default": 4 },
     { "type": "inline_richtext", "id": "tp_tekst", "label": "Tekst", "default": "<b>4,5</b> uit 950+ beoordelingen op" },
@@ -219,6 +258,7 @@
     { "type": "header", "content": "Reviewband" },
     { "type": "text", "id": "rev_kop", "label": "Kop", "default": "Wat klanten schrijven" },
     { "type": "text", "id": "rev_totaal", "label": "Totaal", "default": "950+ beoordelingen" },
+    { "type": "html", "id": "rev_widget", "label": "Widgetcode voor de band", "info": "Plak hier de Review Carousel van Trustpilot. De band vervangt dan de reviewkaarten hieronder; die blijven bewaard. Leeg = onze eigen kaarten." },
     { "type": "header", "content": "Bundel in de schijnwerpers" },
     { "type": "product", "id": "product", "label": "Product", "info": "Prijs, van-prijs, voordeel en voorraad komen hieruit." },
     { "type": "image_picker", "id": "spot_foto", "label": "Foto", "info": "Leeg = de hoofdafbeelding van het product." },

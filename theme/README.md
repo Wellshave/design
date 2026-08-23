@@ -138,7 +138,21 @@ de bedoeling. Er zijn drie nette routes:
 3. **Handmatig woordelijk overnemen.** Geen sleutel nodig, volledig in ons
    ontwerp, maar het veroudert: iemand moet het bijhouden.
 
-Het reviewblok is voor route 2 en 3 klaargemaakt. Per review kun je nu instellen:
+**Gekozen: route 1 voor allebei.** Blok 2 heeft nu twee velden waar een
+TrustBox in gaat:
+
+* **Widgetcode voor de score** — vervangt de ingetypte regel "4,5 uit 950+
+  beoordelingen" rechtsboven. Dat cijfer veroudert anders stilletjes.
+* **Widgetcode voor de band** — vervangt de reviewkaarten door Trustpilots
+  eigen carrousel.
+
+Beide velden leeg laten geeft de oude situatie terug; de reviewkaarten blijven
+als blok bewaard. Alleen het `<div class="trustpilot-widget" …>`-deel plakken:
+de bootstrap laadt al via de Trustpilot-app op de winkel. In de sectie zit een
+klein script dat `Trustpilot.loadFromElement` opnieuw aanroept, want anders
+blijft het vak leeg zodra de thema-editor de sectie herlaadt.
+
+Het reviewblok is daarnaast voor route 2 en 3 klaargemaakt. Per review kun je nu instellen:
 citaat, **sterren** (niet elke echte review is er vijf), naam, **foto van de
 klant**, product, **datum** en **bron**. Laat je de bron leeg, dan verdwijnt de
 bronvermelding — zo kan een review die niet van Trustpilot komt daar ook niet
