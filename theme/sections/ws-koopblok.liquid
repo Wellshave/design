@@ -1,0 +1,192 @@
+{% comment %}
+  Wellshave — blok 6, het koopblok.
+  Ontwerp en onderbouwing: audits/blok-06-koopblok.template.html
+  Dit is het enige blok op de homepage met een echte koopknop. Naam, prijs,
+  van-prijs, voorraad en de knop komen uit het gekozen product.
+  Elk onderdeel is een blok: het nummer op de foto, de regel in de kaart en de
+  stap in de balk horen bij elkaar en lichten samen op.
+{% endcomment %}
+
+{{ 'ws-koopblok.css' | asset_url | stylesheet_tag }}
+
+{% render 'indent-settings', section: section %}
+
+{%- assign p = section.settings.product -%}
+{%- assign v = p.selected_or_first_available_variant -%}
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="ws-kb-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01z"/></symbol>
+  <symbol id="ws-kb-doos" viewBox="0 0 24 24"><path d="M3.4 7.4 12 3.4l8.6 4v9.2L12 20.6l-8.6-4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M3.4 7.4 12 11.5l8.6-4.1M12 11.5v9.1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-kb-arw" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<div class="ws-kb" data-ws-koopblok><div class="ws-kb__in">
+
+  <div class="ws-kb__kop">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="ws-kb__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+    {%- if section.settings.kop != blank -%}
+      <h2 class="ws-kb__h2">{{ section.settings.kop }}</h2>
+    {%- endif -%}
+    {%- if section.settings.sub != blank -%}
+      <p class="ws-kb__sub">{{ section.settings.sub }}</p>
+    {%- endif -%}
+  </div>
+
+  <div class="ws-kb__body">
+    <div class="ws-kb__links">
+      <div class="ws-kb__beeld">
+        {%- if section.settings.merk != blank -%}
+          <span class="ws-kb__knip">{{ section.settings.merk | image_url: width: 600 | image_tag: class: 'ws-kb__merk', alt: '' }}</span>
+        {%- endif -%}
+        {%- if section.settings.pil_best != blank -%}
+          <p class="ws-kb__pil ws-kb__pil--best"><svg><use href="#ws-kb-star"/></svg>{{ section.settings.pil_best }}</p>
+        {%- endif -%}
+        {%- if section.settings.pil_tel != blank -%}
+          <p class="ws-kb__pil ws-kb__pil--tel"><svg><use href="#ws-kb-doos"/></svg>{{ section.settings.pil_tel }}</p>
+        {%- endif -%}
+        <div class="ws-kb__shot">
+          {%- if section.settings.foto != blank -%}
+            {{ section.settings.foto | image_url: width: 1240 | image_tag }}
+          {%- elsif p.featured_image -%}
+            {{ p.featured_image | image_url: width: 1240 | image_tag }}
+          {%- endif -%}
+          {%- for block in section.blocks -%}
+            <span class="ws-kb__nr" data-deel="{{ block.id }}"
+              style="left:{{ block.settings.nr_x }}%;top:{{ block.settings.nr_y }}%">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+          {%- endfor -%}
+        </div>
+      </div>
+      <div class="ws-kb__stappen">
+        {%- for block in section.blocks -%}
+          <div class="ws-kb__stap" data-deel="{{ block.id }}">
+            <i>{{ forloop.index | prepend: '0' | slice: -2, 2 }}</i><b>{{ block.settings.stap }}</b>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <div class="ws-kb__kaart">
+      {%- if section.settings.kaart_eyebrow != blank -%}
+        <p class="ws-kb__eyebrow">{{ section.settings.kaart_eyebrow }}</p>
+      {%- endif -%}
+      <h3 class="ws-kb__naam">{{ section.settings.naam | default: p.title }}</h3>
+      {%- if section.settings.claim != blank -%}
+        <p class="ws-kb__claim">{{ section.settings.claim }}</p>
+      {%- endif -%}
+      <ul class="ws-kb__rooster">
+        {%- for block in section.blocks -%}
+          <li data-deel="{{ block.id }}" {{ block.shopify_attributes }}>
+            <i>{{ forloop.index | prepend: '0' | slice: -2, 2 }}</i>
+            <span><b>{{ block.settings.titel }}</b><span>{{ block.settings.tekst }}</span></span>
+          </li>
+        {%- endfor -%}
+      </ul>
+
+      {%- if p != blank -%}
+        <p class="ws-kb__prijslabel">{{ section.settings.prijslabel }}</p>
+        <p class="ws-kb__prijs">
+          <span class="ws-kb__nu">{{ v.price | money }}</span>
+          {%- if v.compare_at_price > v.price -%}
+            <span class="ws-kb__was">{{ v.compare_at_price | money }}</span>
+            <span class="ws-kb__korting">Je bespaart {{ v.compare_at_price | minus: v.price | money }}</span>
+          {%- endif -%}
+        </p>
+        {%- if v.compare_at_price > v.price -%}
+          <div class="ws-kb__verschil">
+            <div><b>{{ section.settings.verschil_links }}</b><span>{{ v.compare_at_price | money }}</span></div>
+            <svg><use href="#ws-kb-arw"/></svg>
+            <div><b>{{ section.settings.verschil_rechts }}</b><span>{{ v.price | money }}</span></div>
+          </div>
+        {%- endif -%}
+        <p class="ws-kb__voorraad"><span class="ws-kb__stip"></span>
+          {%- if v.available -%}{{ section.settings.voorraad_wel }}{%- else -%}{{ section.settings.voorraad_niet }}{%- endif -%}</p>
+        {%- form 'product', p, id: 'ws-kb-form' -%}
+          <input type="hidden" name="id" value="{{ v.id }}">
+          <button class="ws-kb__knop" type="submit" {% unless v.available %}disabled{% endunless %}>
+            {{ section.settings.knop }}<span><svg><use href="#ws-kb-arw"/></svg></span>
+          </button>
+        {%- endform -%}
+        {%- if section.settings.los != blank -%}
+          <p class="ws-kb__los">{{ section.settings.los }}
+            <a href="{{ section.settings.los_link | default: p.url }}">{{ section.settings.los_link_label }}</a></p>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+  </div>
+
+</div></div>
+
+<script>
+  (function () {
+    document.querySelectorAll('[data-ws-koopblok]').forEach(function (sec) {
+      if (sec.dataset.wsKlaar) return;
+      sec.dataset.wsKlaar = '1';
+      var groepen = [].slice.call(sec.querySelectorAll('[data-deel]'));
+      if (!groepen.length) return;
+      function toon(deel) {
+        groepen.forEach(function (g) {
+          g.classList.toggle('is-aan', deel !== null && g.dataset.deel === deel);
+        });
+      }
+      groepen.forEach(function (g) {
+        ['mouseenter', 'focus', 'click', 'touchstart'].forEach(function (e) {
+          g.addEventListener(e, function () { toon(g.dataset.deel); }, { passive: true });
+        });
+      });
+      sec.addEventListener('mouseleave', function () { toon(null); });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "WS · Koopblok",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "product", "id": "product", "label": "Product", "info": "Naam, prijs, van-prijs, voorraad en de koopknop komen hieruit." },
+    { "type": "text", "id": "eyebrow", "label": "Bovenregel", "default": "De complete routine" },
+    { "type": "inline_richtext", "id": "kop", "label": "Kop (vet = brons, eigen regel)", "default": "Alles wat je nodig hebt.<b>Eén station. Geen losse rommel.</b>" },
+    { "type": "textarea", "id": "sub", "label": "Subkop", "default": "Trimmen, detailwerk en glad afwerken — met alles wat daarvoor nodig is op één plek, in plaats van los in een la." },
+    { "type": "header", "content": "Het beeld" },
+    { "type": "image_picker", "id": "foto", "label": "Foto", "info": "Leeg = de hoofdafbeelding van het product." },
+    { "type": "image_picker", "id": "merk", "label": "Monogram" },
+    { "type": "text", "id": "pil_best", "label": "Pil linksboven", "default": "Bestverkochte bundel" },
+    { "type": "text", "id": "pil_tel", "label": "Pil eronder", "default": "92× besteld · afgelopen 6 maanden" },
+    { "type": "header", "content": "De koopkaart" },
+    { "type": "text", "id": "kaart_eyebrow", "label": "Bovenregel", "default": "Alles in één set" },
+    { "type": "inline_richtext", "id": "naam", "label": "Naam (vet = goud)", "info": "Leeg = de producttitel." },
+    { "type": "textarea", "id": "claim", "label": "Claim", "default": "Twee apparaten, de opzetstukken en het station in één set — samen goedkoper dan de losse adviesprijs." },
+    { "type": "text", "id": "prijslabel", "label": "Label boven de prijs", "default": "Bundelprijs" },
+    { "type": "text", "id": "verschil_links", "label": "Vergelijking links", "default": "Normaal" },
+    { "type": "text", "id": "verschil_rechts", "label": "Vergelijking rechts", "default": "Als bundel" },
+    { "type": "text", "id": "voorraad_wel", "label": "Tekst bij voorraad", "default": "Op voorraad · morgen in huis" },
+    { "type": "text", "id": "voorraad_niet", "label": "Tekst zonder voorraad", "default": "Tijdelijk uitverkocht" },
+    { "type": "text", "id": "knop", "label": "Knop", "default": "Pak de complete set" },
+    { "type": "text", "id": "los", "label": "Regel onderaan", "default": "Liever los?" },
+    { "type": "text", "id": "los_link_label", "label": "Linktekst", "default": "Bekijk de apparaten" },
+    { "type": "url", "id": "los_link", "label": "Link", "info": "Leeg = de productpagina." },
+    { "type": "header", "content": "Indent settings" },
+    { "type": "range", "id": "desk_indent_top", "label": "Indent top (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "desk_indent_bottom", "label": "Indent bottom (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_top", "label": "Indent top (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_bottom", "label": "Indent bottom (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "blocks": [
+    {
+      "type": "onderdeel",
+      "name": "Onderdeel",
+      "settings": [
+        { "type": "text", "id": "stap", "label": "Stap in de balk" },
+        { "type": "text", "id": "titel", "label": "Titel in de kaart" },
+        { "type": "text", "id": "tekst", "label": "Onderregel in de kaart" },
+        { "type": "range", "id": "nr_x", "label": "Nummer horizontaal", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+        { "type": "range", "id": "nr_y", "label": "Nummer verticaal", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 }
+      ]
+    }
+  ],
+  "presets": [ { "name": "WS · Koopblok" } ]
+}
+{% endschema %}
