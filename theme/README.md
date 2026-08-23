@@ -49,8 +49,8 @@ gaan alleen naar het duplicaat.
 | 6 — koopblok | `ws-koopblok` | staat erin, koopknop getest |
 | 7 — proposities | `ws-proposities` | staat erin, gecontroleerd |
 | 8 — zonerooster | `ws-zonerooster` | staat erin |
-| 9 — de familie (UGC) | — | nog te doen |
-| 11 — goed geregeld | — | nog te doen |
+| 9 — de familie (UGC) | `ws-familie` | staat erin, video's zelf in te vullen |
+| 11 — goed geregeld | `ws-garantie` | staat erin |
 | 12 — de afsluiter | `ws-afsluiter` | staat erin, desktop en mobiel gecontroleerd |
 
 > **Let op:** de secties vanaf blok 4 staan nu alleen in het thema, nog niet
