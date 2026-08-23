@@ -74,11 +74,15 @@
   display:flex;flex-direction:column;gap:11px}
 .ws-rev__sterren{display:flex;gap:2px}
 .ws-rev__sterren svg{width:14px;height:14px;fill:#BC813E}
+/* een ster die niet meetelt blijft staan maar valt weg in de achtergrond: zo
+   zie je in één oogopslag dat het er vier van de vijf zijn */
+.ws-rev__sterren svg.is-uit{fill:rgba(17,17,17,.16)}
 .ws-rev__q{font-size:14.5px;line-height:155%;font-weight:500;margin:0;color:#111}
 .ws-rev__by{margin:auto 0 0;padding-top:14px;border-top:1px solid rgba(17,17,17,.1);
   display:flex;align-items:center;gap:10px;font-size:12px;color:rgba(17,17,17,.55)}
 .ws-rev__av{width:30px;height:30px;border-radius:100px;background:#EDE7DB;color:#BC813E;
-  display:grid;place-items:center;font-size:12px;font-weight:700;flex:none}
+  display:grid;place-items:center;font-size:12px;font-weight:700;flex:none;overflow:hidden}
+.ws-rev__av img{width:100%;height:100%;object-fit:cover;display:block}
 .ws-rev__by b{color:#111;font-weight:600;display:block}
 .ws-rev__src{margin-left:auto;display:inline-flex;align-items:center;gap:4px;font-weight:700;
   letter-spacing:-.03em;color:#111;font-size:11px}

@@ -98,13 +98,31 @@
           {%- for block in section.blocks -%}
             <article class="ws-rev" {% if ronde == 1 %}{{ block.shopify_attributes }}{% endif %}>
               <div class="ws-rev__sterren">
-                {%- for i in (1..5) -%}<svg><use href="#ws-pf-star"/></svg>{%- endfor -%}
+                {%- comment -%} niet elke echte review is vijf sterren; die van vier
+                  moet er ook als vier uitzien {%- endcomment -%}
+                {%- for i in (1..5) -%}
+                  <svg{% if i > block.settings.sterren %} class="is-uit"{% endif %}><use href="#ws-pf-star"/></svg>
+                {%- endfor -%}
               </div>
               <p class="ws-rev__q">{{ block.settings.quote }}</p>
               <p class="ws-rev__by">
-                <span class="ws-rev__av">{{ block.settings.naam | strip | slice: 0 }}</span>
-                <span><b>{{ block.settings.naam }}</b>{{ block.settings.product }}</span>
-                <span class="ws-rev__src"><svg><use href="#ws-pf-star"/></svg>Trustpilot</span>
+                <span class="ws-rev__av">
+                  {%- if block.settings.foto != blank -%}
+                    {{ block.settings.foto | image_url: width: 96 | image_tag: alt: block.settings.naam }}
+                  {%- else -%}
+                    {{ block.settings.naam | strip | slice: 0 }}
+                  {%- endif -%}
+                </span>
+                <span><b>{{ block.settings.naam }}</b>{{ block.settings.product }}
+                  {%- if block.settings.datum != blank -%}
+                    {%- if block.settings.product != blank %} · {% endif -%}{{ block.settings.datum }}
+                  {%- endif -%}
+                </span>
+                {%- comment -%} de bron staat per review, want een review die niet van
+                  Trustpilot komt mag daar ook niet het logo van dragen {%- endcomment -%}
+                {%- if block.settings.bron != blank -%}
+                  <span class="ws-rev__src"><svg><use href="#ws-pf-star"/></svg>{{ block.settings.bron }}</span>
+                {%- endif -%}
               </p>
             </article>
           {%- endfor -%}
@@ -228,9 +246,13 @@
       "type": "review",
       "name": "Review",
       "settings": [
-        { "type": "textarea", "id": "quote", "label": "Citaat" },
+        { "type": "textarea", "id": "quote", "label": "Citaat", "info": "Woordelijk overnemen, niet mooier maken." },
+        { "type": "range", "id": "sterren", "label": "Sterren", "min": 1, "max": 5, "step": 1, "default": 5 },
         { "type": "text", "id": "naam", "label": "Naam" },
-        { "type": "text", "id": "product", "label": "Product" }
+        { "type": "image_picker", "id": "foto", "label": "Foto van de klant", "info": "Leeg = een cirkel met de eerste letter van de naam." },
+        { "type": "text", "id": "product", "label": "Product" },
+        { "type": "text", "id": "datum", "label": "Datum", "info": "Bijvoorbeeld: 12 mei 2026." },
+        { "type": "text", "id": "bron", "label": "Bron", "info": "Leeg = geen bronvermelding.", "default": "Trustpilot" }
       ]
     }
   ],

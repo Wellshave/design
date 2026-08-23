@@ -115,6 +115,35 @@ beheeromgeving 14 en 5 zegt. Dat is goed: een bezoeker hoort geen apparaten
 geteld te zien die hij niet kan kopen. Haal je er een uit het archief, dan komt
 hij vanzelf in de juiste zone terecht.
 
+## De reviews in blok 2
+
+**De acht reviews die er nu in staan zijn geen gecontroleerde Trustpilot-reviews.**
+Het zijn de acht teksten die tijdens de ontwerpfase van de bestaande site zijn
+overgenomen, en ze dragen alle acht het Trustpilot-logo. Voor het live gaat moet
+elke review woordelijk uit het Trustpilot Business-account komen, of moet het
+logo eraf. De ontwerpnotitie in `audits/blok-02-pijnpunt.template.html`
+waarschuwde hier al voor, inclusief dat drie ervan met een vrouwennaam zijn
+ondertekend — op een merk voor mannen ondermijnt dat de geloofwaardigheid.
+
+Trustpilot laat zich niet scrapen (403 op de reviewpagina), en dat is ook niet
+de bedoeling. Er zijn drie nette routes:
+
+1. **De officiële TrustBox-carrousel.** De Trustpilot-app draait al op de winkel
+   en het widget-script laadt al mee; de business unit is
+   `63c511d4e1339e2200c204a1`. Altijd actueel en gelicentieerd, maar het is
+   Trustpilots eigen vormgeving — blauw-groen midden in ons crème-en-goud.
+2. **De Trustpilot Reviews API in onze eigen kaarten.** Geeft tekst, sterren,
+   naam, datum én de profielfoto. Vraagt een API-sleutel uit het
+   Business-account en een plek om de sync te draaien.
+3. **Handmatig woordelijk overnemen.** Geen sleutel nodig, volledig in ons
+   ontwerp, maar het veroudert: iemand moet het bijhouden.
+
+Het reviewblok is voor route 2 en 3 klaargemaakt. Per review kun je nu instellen:
+citaat, **sterren** (niet elke echte review is er vijf), naam, **foto van de
+klant**, product, **datum** en **bron**. Laat je de bron leeg, dan verdwijnt de
+bronvermelding — zo kan een review die niet van Trustpilot komt daar ook niet
+het logo van dragen.
+
 ## Beelden
 
 Alle beelden uit `audits/assets` staan als bestand in Shopify onder de naam
