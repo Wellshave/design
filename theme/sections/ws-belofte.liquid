@@ -1,0 +1,239 @@
+{% comment %}
+  Wellshave — blok 2, zonder risico.
+  Ontwerp en onderbouwing: audits/blok-02-pijnpunt.template.html
+  Prijs, van-prijs, bundelvoordeel en voorraad komen live uit het gekozen
+  product: nooit een prijs in een tekstveld.
+{% endcomment %}
+
+{{ 'ws-belofte.css' | asset_url | stylesheet_tag }}
+
+{% render 'indent-settings', section: section %}
+
+{%- assign p = section.settings.product -%}
+{%- assign v = p.selected_or_first_available_variant -%}
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="ws-pf-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01z"/></symbol>
+  <symbol id="ws-pf-chk" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.4" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7.8 12.3l2.9 2.9 5.5-6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-pf-arw" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-pf-shield" viewBox="0 0 24 24"><path d="M12 2.6l7.2 2.8v6.1c0 4.4-3 8.4-7.2 9.9-4.2-1.5-7.2-5.5-7.2-9.9V5.4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.7 12.1l2.3 2.3 4.3-4.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-pf-garantie" viewBox="0 0 24 24"><circle cx="12" cy="9.6" r="5.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8.6 14.4L7.4 21l4.6-2.3 4.6 2.3-1.2-6.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-pf-truck" viewBox="0 0 24 24"><path d="M1.9 6.2h12.2v9.4H1.9zM14.1 9.7h3.9l3.1 3.1v2.8h-7z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.6" cy="18" r="1.9" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="17.3" cy="18" r="1.9" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+</svg>
+
+<div class="ws-pf"><div class="ws-pf__in">
+
+  <div class="ws-pf__top">
+    <div>
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="ws-pf__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      {%- if section.settings.kop != blank -%}
+        <h2 class="ws-pf__h2">{{ section.settings.kop | replace: '|br|', '<br>' }}</h2>
+      {%- endif -%}
+      {%- if section.settings.note != blank -%}
+        <p class="ws-pf__note">{{ section.settings.note }}</p>
+      {%- endif -%}
+    </div>
+    {%- if section.settings.tp_tonen -%}
+      <div class="ws-pf__tp">
+        <div class="ws-pf__sterren">
+          {%- assign heel = section.settings.tp_sterren | floor -%}
+          {%- for i in (1..5) -%}
+            <i class="{% if i > heel %}is-half{% endif %}"><svg><use href="#ws-pf-star"/></svg></i>
+          {%- endfor -%}
+        </div>
+        <p class="ws-pf__tptxt">{{ section.settings.tp_tekst }}
+          <span class="ws-pf__tpmerk"><svg><use href="#ws-pf-star"/></svg>Trustpilot</span></p>
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="ws-pf__mid">
+    <div class="ws-gk">
+      {%- if section.settings.merk != blank -%}
+        <span class="ws-gk__mark">{{ section.settings.merk | image_url: width: 460 | image_tag: alt: '' }}</span>
+      {%- endif -%}
+      <span class="ws-gk__zegel"><span class="ws-gk__zegelin">
+        {%- if section.settings.merk != blank -%}
+          {{ section.settings.merk | image_url: width: 48 | image_tag: alt: '' }}
+        {%- endif -%}
+        <b>{{ section.settings.zegel_getal }}</b><span>{{ section.settings.zegel_label }}</span>
+      </span></span>
+      <div class="ws-gk__body">
+        {%- if section.settings.gk_kop != blank -%}
+          <h3 class="ws-gk__h">{{ section.settings.gk_kop | replace: '|br|', '<br>' }}</h3>
+        {%- endif -%}
+        {%- if section.settings.gk_tekst != blank -%}
+          <p class="ws-gk__p">{{ section.settings.gk_tekst }}</p>
+        {%- endif -%}
+        <ul class="ws-gk__lijst">
+          {%- for n in (1..3) -%}
+            {%- assign sleutel = 'gk_punt_' | append: n -%}
+            {%- assign punt = section.settings[sleutel] -%}
+            {%- if punt != blank -%}
+              <li><svg><use href="#ws-pf-chk"/></svg>{{ punt }}</li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+        {%- if section.settings.gk_team != blank -%}
+          <p class="ws-gk__team">{{ section.settings.gk_team }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+    {%- if section.settings.foto != blank -%}
+      <div class="ws-pf__shot">{{ section.settings.foto | image_url: width: 800 | image_tag }}</div>
+    {%- endif -%}
+  </div>
+
+  {%- if section.blocks.size > 0 -%}
+    <div>
+      {%- if section.settings.rev_kop != blank -%}
+        <p class="ws-pf__revcount"><b>{{ section.settings.rev_kop }}</b>
+          <span>{{ section.blocks.size }} van de {{ section.settings.rev_totaal }}</span></p>
+      {%- endif -%}
+      <div class="ws-pf__revwrap"><div class="ws-pf__revtrack">
+        {%- comment -%} tweemaal dezelfde reeks: de band schuift -50%, dus zo sluit hij naadloos {%- endcomment -%}
+        {%- for ronde in (1..2) -%}
+          {%- for block in section.blocks -%}
+            <article class="ws-rev" {% if ronde == 1 %}{{ block.shopify_attributes }}{% endif %}>
+              <div class="ws-rev__sterren">
+                {%- for i in (1..5) -%}<svg><use href="#ws-pf-star"/></svg>{%- endfor -%}
+              </div>
+              <p class="ws-rev__q">{{ block.settings.quote }}</p>
+              <p class="ws-rev__by">
+                <span class="ws-rev__av">{{ block.settings.naam | strip | slice: 0 }}</span>
+                <span><b>{{ block.settings.naam }}</b>{{ block.settings.product }}</span>
+                <span class="ws-rev__src"><svg><use href="#ws-pf-star"/></svg>Trustpilot</span>
+              </p>
+            </article>
+          {%- endfor -%}
+        {%- endfor -%}
+      </div></div>
+    </div>
+  {%- endif -%}
+
+  {%- if p != blank -%}
+    <div class="ws-spot">
+      <div class="ws-spot__img">
+        {%- if section.settings.spot_foto != blank -%}
+          {{ section.settings.spot_foto | image_url: width: 1200 | image_tag }}
+        {%- elsif p.featured_image -%}
+          {{ p.featured_image | image_url: width: 1200 | image_tag }}
+        {%- endif -%}
+        {%- if v.compare_at_price > v.price -%}
+          <span class="ws-spot__deal"><b>{{ section.settings.deal_label }}</b>
+            <span>{{ v.compare_at_price | minus: v.price | money }}</span></span>
+        {%- endif -%}
+      </div>
+      <div class="ws-spot__body">
+        {%- if section.settings.spot_badge != blank -%}
+          <span class="ws-spot__badge"><i><svg><use href="#ws-pf-star"/></svg></i>{{ section.settings.spot_badge }}</span>
+        {%- endif -%}
+        {%- if section.settings.spot_eyebrow != blank -%}
+          <p class="ws-spot__eyebrow">{{ section.settings.spot_eyebrow }}</p>
+        {%- endif -%}
+        <h3 class="ws-spot__h">{{ section.settings.spot_kop | default: p.title | replace: '|br|', '<br>' }}</h3>
+        {%- if section.settings.spot_tekst != blank -%}
+          <p class="ws-spot__p">{{ section.settings.spot_tekst }}</p>
+        {%- endif -%}
+        <div class="ws-spot__rule"></div>
+        <ul class="ws-spot__lijst">
+          {%- for n in (1..4) -%}
+            {%- assign sleutel = 'spot_punt_' | append: n -%}
+            {%- assign punt = section.settings[sleutel] -%}
+            {%- if punt != blank -%}
+              <li><svg><use href="#ws-pf-chk"/></svg>{{ punt }}</li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+        <div class="ws-spot__prijs">
+          <span class="ws-spot__nu"><b>Nu</b><span>{{ v.price | money }}</span></span>
+          {%- if v.compare_at_price > v.price -%}
+            <span class="ws-spot__cmp">
+              <span class="ws-spot__was">{{ v.compare_at_price | money }}</span>
+              <span class="ws-spot__save">Je bespaart {{ v.compare_at_price | minus: v.price | money }}</span>
+            </span>
+          {%- endif -%}
+        </div>
+        {%- if v.inventory_management != blank and v.inventory_quantity > 0 -%}
+          <p class="ws-spot__stock"><i></i>Nog {{ v.inventory_quantity }} op voorraad</p>
+        {%- elsif v.available -%}
+          <p class="ws-spot__stock"><i></i>Op voorraad</p>
+        {%- endif -%}
+        <a class="ws-spot__cta" href="{{ p.url }}">{{ section.settings.spot_cta }}<svg><use href="#ws-pf-arw"/></svg></a>
+        <div class="ws-spot__rule"></div>
+        <p class="ws-spot__fud">
+          <span><svg><use href="#ws-pf-shield"/></svg>{{ section.settings.fud_1 }}</span><i></i>
+          <span><svg><use href="#ws-pf-garantie"/></svg>{{ section.settings.fud_2 }}</span><i></i>
+          <span><svg><use href="#ws-pf-truck"/></svg>{{ section.settings.fud_3 }}</span>
+        </p>
+      </div>
+    </div>
+  {%- endif -%}
+
+</div></div>
+
+{% schema %}
+{
+  "name": "WS · Zonder risico",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Bovenregel", "default": "Zonder risico" },
+    { "type": "inline_richtext", "id": "kop", "label": "Kop (vet = zwaarder)", "default": "Het enige wat jij hoeft te doen, is hem <b>uitproberen</b>." },
+    { "type": "textarea", "id": "note", "label": "Onderregel", "default": "De rest hebben wij dichtgetimmerd: honderd dagen bedenktijd, twee jaar garantie, en een klantenservice die je gewoon te pakken krijgt." },
+    { "type": "header", "content": "Trustpilot" },
+    { "type": "checkbox", "id": "tp_tonen", "label": "Tonen", "default": true },
+    { "type": "range", "id": "tp_sterren", "label": "Volle sterren", "min": 0, "max": 5, "step": 1, "default": 4 },
+    { "type": "inline_richtext", "id": "tp_tekst", "label": "Tekst", "default": "<b>4,5</b> uit 950+ beoordelingen op" },
+    { "type": "header", "content": "Garantiekaart" },
+    { "type": "image_picker", "id": "merk", "label": "Monogram" },
+    { "type": "text", "id": "zegel_getal", "label": "Getal in het zegel", "default": "100" },
+    { "type": "text", "id": "zegel_label", "label": "Woord in het zegel", "default": "dagen" },
+    { "type": "inline_richtext", "id": "gk_kop", "label": "Kop (vet = goud, |br| = regeleinde)", "default": "Koop hem, gebruik hem 100 dagen.|br|<b>Bevalt het niet? Geld terug.</b>" },
+    { "type": "textarea", "id": "gk_tekst", "label": "Tekst", "default": "Geen proefperiode van twee weken waarin je nog niets weet. Honderd dagen in je eigen badkamer, zo vaak als je wilt." },
+    { "type": "text", "id": "gk_punt_1", "label": "Punt 1", "default": "Geld terug" },
+    { "type": "text", "id": "gk_punt_2", "label": "Punt 2", "default": "2 jaar garantie" },
+    { "type": "text", "id": "gk_punt_3", "label": "Punt 3", "default": "Gratis verzending vanaf €30" },
+    { "type": "inline_richtext", "id": "gk_team", "label": "Slotregel", "default": "Stuur je hem terug, dan komt je mail bij <b>ons eigen team</b> terecht — niet bij een chatbot. Klantenservice en magazijn zitten in hetzelfde pand in Helmond." },
+    { "type": "image_picker", "id": "foto", "label": "Foto naast de kaart" },
+    { "type": "header", "content": "Reviewband" },
+    { "type": "text", "id": "rev_kop", "label": "Kop", "default": "Wat klanten schrijven" },
+    { "type": "text", "id": "rev_totaal", "label": "Totaal", "default": "950+ beoordelingen" },
+    { "type": "header", "content": "Bundel in de schijnwerpers" },
+    { "type": "product", "id": "product", "label": "Product", "info": "Prijs, van-prijs, voordeel en voorraad komen hieruit." },
+    { "type": "image_picker", "id": "spot_foto", "label": "Foto", "info": "Leeg = de hoofdafbeelding van het product." },
+    { "type": "text", "id": "deal_label", "label": "Label bij het voordeel", "default": "Bundelvoordeel" },
+    { "type": "text", "id": "spot_badge", "label": "Badge", "default": "Meest gekozen" },
+    { "type": "text", "id": "spot_eyebrow", "label": "Bovenregel", "default": "4 producten. één complete routine." },
+    { "type": "inline_richtext", "id": "spot_kop", "label": "Kop (vet = goud, op eigen regel)", "default": "Essential<b>Flex Bundel</b>" },
+    { "type": "text", "id": "spot_tekst", "label": "Tekst", "default": "Trimmen, scheren en detailwerk — thuis én onderweg." },
+    { "type": "text", "id": "spot_punt_1", "label": "Punt 1", "default": "3-in-1 Flex Guard" },
+    { "type": "text", "id": "spot_punt_2", "label": "Punt 2", "default": "Travel Hard Case" },
+    { "type": "text", "id": "spot_punt_3", "label": "Punt 3", "default": "Luxe toilettas" },
+    { "type": "text", "id": "spot_punt_4", "label": "Punt 4", "default": "Extra Skin Safe mes" },
+    { "type": "text", "id": "spot_cta", "label": "Knop", "default": "Pak de complete bundel" },
+    { "type": "text", "id": "fud_1", "label": "Trustregel 1", "default": "100 dagen proberen" },
+    { "type": "text", "id": "fud_2", "label": "Trustregel 2", "default": "2 jaar garantie" },
+    { "type": "text", "id": "fud_3", "label": "Trustregel 3", "default": "Morgen in huis" },
+    { "type": "header", "content": "Indent settings" },
+    { "type": "range", "id": "desk_indent_top", "label": "Indent top (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "desk_indent_bottom", "label": "Indent bottom (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_top", "label": "Indent top (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_bottom", "label": "Indent bottom (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "textarea", "id": "quote", "label": "Citaat" },
+        { "type": "text", "id": "naam", "label": "Naam" },
+        { "type": "text", "id": "product", "label": "Product" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "WS · Zonder risico" } ]
+}
+{% endschema %}

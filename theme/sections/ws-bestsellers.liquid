@@ -1,0 +1,132 @@
+{% comment %}
+  Wellshave — blok 3, de bestsellers.
+  Ontwerp en onderbouwing: audits/blok-03-bestsellers.template.html
+  Naam, prijs, van-prijs en link komen uit het gekozen product.
+{% endcomment %}
+
+{{ 'ws-bestsellers.css' | asset_url | stylesheet_tag }}
+
+{% render 'indent-settings', section: section %}
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="ws-bs-arw" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-bs-chk" viewBox="0 0 24 24"><path d="M4 12.5l5.2 5.2L20 6.9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<div class="ws-bs"><div class="ws-bs__in">
+
+  <div class="ws-bs__top">
+    <div>
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="ws-bs__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      {%- if section.settings.kop != blank -%}
+        <h2 class="ws-bs__h2">{{ section.settings.kop | replace: '|br|', '<br>' }}</h2>
+      {%- endif -%}
+      {%- if section.settings.note != blank -%}
+        <p class="ws-bs__note">{{ section.settings.note }}</p>
+      {%- endif -%}
+    </div>
+    {%- if section.settings.tel_waarde != blank -%}
+      <p class="ws-bs__count"><b>{{ section.settings.tel_waarde }}</b>{{ section.settings.tel_label }}</p>
+    {%- endif -%}
+  </div>
+
+  <div class="ws-bs__grid">
+    {%- for block in section.blocks -%}
+      {%- assign p = block.settings.product -%}
+      {%- assign v = p.selected_or_first_available_variant -%}
+      <a class="ws-bs__kaart" href="{{ p.url | default: '#' }}" {{ block.shopify_attributes }}>
+        <span class="ws-bs__shot">
+          {%- if section.settings.merk != blank -%}
+            <span class="ws-bs__mark">{{ section.settings.merk | image_url: width: 600 | image_tag: alt: '' }}</span>
+          {%- endif -%}
+          {%- if block.settings.foto != blank -%}
+            {{ block.settings.foto | image_url: width: 700 | image_tag: class: 'ws-bs__pack' }}
+          {%- elsif p.featured_image -%}
+            {{ p.featured_image | image_url: width: 700 | image_tag: class: 'ws-bs__pack' }}
+          {%- endif -%}
+          {%- if block.settings.tag != blank -%}
+            <span class="ws-bs__tag">{{ block.settings.tag }}</span>
+          {%- endif -%}
+          {%- if block.settings.zegel_beeld != blank -%}
+            <span class="ws-bs__zegel">
+              {{ block.settings.zegel_beeld | image_url: width: 200 | image_tag }}
+              {%- if block.settings.zegel_tekst != blank -%}<span>{{ block.settings.zegel_tekst }}</span>{%- endif -%}
+            </span>
+          {%- endif -%}
+        </span>
+        <span class="ws-bs__body">
+          {%- if block.settings.zone != blank -%}
+            <span class="ws-bs__zone">{{ block.settings.zone }}</span>
+          {%- endif -%}
+          <span class="ws-bs__naam">{{ block.settings.naam | default: p.title }}</span>
+          {%- if block.settings.wat != blank -%}
+            <span class="ws-bs__wat">{{ block.settings.wat }}</span>
+          {%- endif -%}
+          <span class="ws-bs__prijs">
+            <span class="ws-bs__nu">{{ v.price | money }}</span>
+            {%- if v.compare_at_price > v.price -%}
+              <span class="ws-bs__was">{{ v.compare_at_price | money }}</span>
+              <span class="ws-bs__save">Bespaar {{ v.compare_at_price | minus: v.price | money }}</span>
+            {%- endif -%}
+          </span>
+          <span class="ws-bs__go">{{ section.settings.kaart_cta }}<i><svg><use href="#ws-bs-arw"/></svg></i></span>
+        </span>
+      </a>
+    {%- endfor -%}
+  </div>
+
+  {%- if section.settings.foot != blank -%}
+    <p class="ws-bs__foot"><svg><use href="#ws-bs-chk"/></svg>
+      <span>{{ section.settings.foot }}
+        {%- if section.settings.foot_link_label != blank -%}
+          <a href="{{ section.settings.foot_link | default: '#' }}">{{ section.settings.foot_link_label }}</a>
+        {%- endif -%}
+      </span></p>
+  {%- endif -%}
+
+</div></div>
+
+{% schema %}
+{
+  "name": "WS · Bestsellers",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Bovenregel", "default": "Meest verkocht · afgelopen 30 dagen" },
+    { "type": "inline_richtext", "id": "kop", "label": "Kop (vet = goud, eigen regel)", "default": "Dit kochten mannen deze maand <b>het vaakst.</b>" },
+    { "type": "textarea", "id": "note", "label": "Onderregel", "default": "Eén uit elke zone, op volgorde van hoe vaak ze over de toonbank gingen." },
+    { "type": "text", "id": "tel_waarde", "label": "Getal rechts", "default": "125" },
+    { "type": "text", "id": "tel_label", "label": "Label rechts", "default": "keer verkocht in dertig dagen" },
+    { "type": "image_picker", "id": "merk", "label": "Monogram achter de packshot" },
+    { "type": "text", "id": "kaart_cta", "label": "Tekst onderin de kaart", "default": "Bekijk" },
+    { "type": "header", "content": "Slotregel" },
+    { "type": "text", "id": "foot", "label": "Tekst", "default": "Elk apparaat 100 dagen te proberen." },
+    { "type": "text", "id": "foot_link_label", "label": "Linktekst", "default": "Bekijk het hele assortiment" },
+    { "type": "url", "id": "foot_link", "label": "Link" },
+    { "type": "header", "content": "Indent settings" },
+    { "type": "range", "id": "desk_indent_top", "label": "Indent top (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "desk_indent_bottom", "label": "Indent bottom (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_top", "label": "Indent top (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_bottom", "label": "Indent bottom (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "blocks": [
+    {
+      "type": "kaart",
+      "name": "Kaart",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product", "info": "Prijs, van-prijs en link komen hieruit." },
+        { "type": "image_picker", "id": "foto", "label": "Foto", "info": "Leeg = de hoofdafbeelding van het product." },
+        { "type": "text", "id": "zone", "label": "Zone" },
+        { "type": "text", "id": "naam", "label": "Naam", "info": "Leeg = de producttitel." },
+        { "type": "text", "id": "wat", "label": "Wat het doet" },
+        { "type": "text", "id": "tag", "label": "Label linksboven" },
+        { "type": "image_picker", "id": "zegel_beeld", "label": "Zegel rechtsboven" },
+        { "type": "text", "id": "zegel_tekst", "label": "Tekst bij het zegel" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "WS · Bestsellers" } ]
+}
+{% endschema %}
