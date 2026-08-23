@@ -38,7 +38,7 @@
     {%- endif -%}
   </div>
 
-  <div class="ws-az__grid" style="grid-template-columns:repeat({{ section.blocks.size | at_most: 4 | at_least: 1 }},minmax(0,1fr))">
+  <div class="ws-az__grid" style="--ws-kol:{{ section.blocks.size | at_most: 4 | at_least: 1 }}">
     {%- for block in section.blocks -%}
       {%- assign col = block.settings.collectie -%}
       <a class="ws-az__kaart" href="{{ col.url | default: '#' }}" {{ block.shopify_attributes }}>

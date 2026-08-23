@@ -94,9 +94,10 @@
   .ws-bs__zegel{top:8px;right:8px;padding:5px 6px;gap:3px;border-radius:6px}
   .ws-bs__zegel img{width:62px}
   .ws-bs__zegel span{font-size:7.5px}
-  /* het merendeel van je verkeer heeft geen muis en dus geen hover; daar staat
-     het monogram permanent zacht aan zodat de kaart niet vlakker wordt */
-  .ws-bs__mark{opacity:.1;transform:translate(-50%,-50%) scale(1)}
+  /* op mobiel blijft het monogram weg. Er is geen hover, dus stond het
+     permanent aan — en dan leest het als een vlek achter de packshot in plaats
+     van als een detail dat tevoorschijn komt. Op desktop werkt de hover wel. */
+  .ws-bs__mark{display:none}
   .ws-bs__prijs{gap:6px;margin-top:5px}
   .ws-bs__nu{font-size:17px}
   .ws-bs__was{font-size:11.5px}

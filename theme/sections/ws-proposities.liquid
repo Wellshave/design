@@ -27,7 +27,7 @@
     {%- endif -%}
   </div>
 
-  <div class="ws-vp__rij" style="grid-template-columns:repeat({{ section.blocks.size | at_most: 4 | at_least: 1 }},minmax(0,1fr))">
+  <div class="ws-vp__rij" style="--ws-kol:{{ section.blocks.size | at_most: 4 | at_least: 1 }}">
     {%- for block in section.blocks -%}
       <div class="ws-vp__kaart" {{ block.shopify_attributes }}>
         <p class="ws-vp__cijfer">{{ block.settings.kop }}
