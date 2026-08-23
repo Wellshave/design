@@ -1,0 +1,193 @@
+{% comment %}
+  Wellshave — blok 1, de hero.
+  Ontwerp en onderbouwing: audits/blok-01-hero.template.html
+  De aankondigingsbalk en de navigatie uit de mockup zitten hier niet in:
+  die komen uit de header van het thema zelf.
+{% endcomment %}
+
+{{ 'ws-hero.css' | asset_url | stylesheet_tag }}
+
+{% render 'indent-settings', section: section %}
+
+{%- assign gid = 'ws-goud-' | append: section.id -%}
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="ws-h-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01z"/></symbol>
+  <symbol id="ws-h-arw" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-h-mensen" viewBox="0 0 24 24"><circle cx="9.2" cy="8.4" r="3.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M2.9 19.4c.5-3.2 3.2-5.2 6.3-5.2s5.8 2 6.3 5.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M15.8 5.4a3.4 3.4 0 0 1 0 6.6M17.4 14.6c2.1.5 3.5 2.2 3.8 4.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-h-shield" viewBox="0 0 24 24"><path d="M12 2.6l7.2 2.8v6.1c0 4.4-3 8.4-7.2 9.9-4.2-1.5-7.2-5.5-7.2-9.9V5.4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.7 12.1l2.3 2.3 4.3-4.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-h-truck" viewBox="0 0 24 24"><path d="M1.9 6.2h12.2v9.4H1.9zM14.1 9.7h3.9l3.1 3.1v2.8h-7z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.6" cy="18" r="1.9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="17.3" cy="18" r="1.9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-h-retour" viewBox="0 0 24 24"><path d="M3.6 12a8.4 8.4 0 1 0 2.6-6.1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.4 3.6v4.6h4.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-h-doos" viewBox="0 0 24 24"><path d="M3.4 7.4 12 3.4l8.6 4v9.2L12 20.6l-8.6-4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.4 7.4 12 11.5l8.6-4.1M12 11.5v9.1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<div class="ws-hero-blok">
+  <div class="ws-hero" style="--ws-hero-h: {{ section.settings.hoogte }}px">
+    <div class="ws-hero__media">
+      {%- if section.settings.foto != blank -%}
+        {{ section.settings.foto | image_url: width: 1400 | image_tag: class: 'ws-hero__foto', sizes: '50vw', widths: '600,900,1200,1400' }}
+      {%- endif -%}
+      <div class="ws-hero__scrim"></div>
+    </div>
+
+    {%- if section.settings.merk != blank -%}
+      {{ section.settings.merk | image_url: width: 600 | image_tag: class: 'ws-hero__merk', alt: '' }}
+    {%- endif -%}
+
+    <span class="ws-hero__streep"></span>
+    <svg class="ws-hero__bogen" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      <defs><linearGradient id="{{ gid }}" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#F5D18A" stop-opacity="0"/>
+        <stop offset=".45" stop-color="#F5D18A" stop-opacity=".85"/>
+        <stop offset="1" stop-color="#BC813E" stop-opacity="0"/>
+      </linearGradient></defs>
+      <path d="M92 34 C74 44 66 62 70 84" stroke="url(#{{ gid }})" stroke-width=".45"/>
+      <path d="M97 42 C79 52 70 70 74 92" stroke="url(#{{ gid }})" stroke-width=".3"/>
+      <path d="M60 96 C64 78 72 68 88 62" stroke="url(#{{ gid }})" stroke-width=".35"/>
+    </svg>
+
+    <div class="ws-hero__inner"><div class="ws-hero__blocks">
+      {%- if section.settings.badge != blank -%}
+        <span class="ws-hero__badge">{{ section.settings.badge }}</span>
+      {%- endif -%}
+
+      {%- if section.settings.kop != blank -%}
+        <h1 class="ws-hero__h1">{{ section.settings.kop | replace: '|br|', '<br>' }}</h1>
+      {%- endif -%}
+
+      {%- if section.settings.sub != blank -%}
+        <p class="ws-hero__sub">{{ section.settings.sub }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.tp_tonen -%}
+        <div class="ws-hero__tp">
+          <span class="ws-hero__sterren">
+            {%- assign heel = section.settings.tp_sterren | floor -%}
+            {%- for i in (1..5) -%}
+              <i class="{% if i > heel %}is-half{% endif %}"><svg><use href="#ws-h-star"/></svg></i>
+            {%- endfor -%}
+          </span>
+          {%- if section.settings.tp_score != blank -%}
+            <span class="ws-hero__tpscore">{{ section.settings.tp_score }}</span>
+          {%- endif -%}
+          <span class="ws-hero__tpmerk"><svg><use href="#ws-h-star"/></svg>Trustpilot</span>
+          {%- if section.settings.tp_aantal != blank -%}
+            <span>{{ section.settings.tp_aantal }}</span>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.cta1_label != blank or section.settings.cta2_label != blank -%}
+        <div class="ws-hero__knoppen">
+          {%- if section.settings.cta1_label != blank -%}
+            <a class="ws-hero__cta" href="{{ section.settings.cta1_link | default: '#' }}">
+              {{- section.settings.cta1_label -}}<svg><use href="#ws-h-arw"/></svg>
+            </a>
+          {%- endif -%}
+          {%- if section.settings.cta2_label != blank -%}
+            <a class="ws-hero__cta2" href="{{ section.settings.cta2_link | default: '#' }}">
+              {{- section.settings.cta2_label -}}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div></div>
+
+    {%- if section.settings.wijzer_titel != blank -%}
+      <p class="ws-hero__wijzer">
+        <b>{{ section.settings.wijzer_titel }}</b>
+        {%- if section.settings.wijzer_sub != blank -%}<em>{{ section.settings.wijzer_sub }}</em>{%- endif -%}
+      </p>
+    {%- endif -%}
+
+    {%- if section.settings.tel_waarde != blank -%}
+      <p class="ws-hero__telling">
+        <svg><use href="#ws-h-mensen"/></svg>
+        <span>
+          <b>{{ section.settings.tel_waarde }}</b>
+          {%- if section.settings.tel_label != blank -%}<em>{{ section.settings.tel_label }}</em>{%- endif -%}
+        </span>
+      </p>
+    {%- endif -%}
+  </div>
+
+  {%- if section.blocks.size > 0 -%}
+    <div class="ws-hero__strook">
+      {%- for block in section.blocks -%}
+        <div {{ block.shopify_attributes }}>
+          <span class="ws-hero__zegel">
+            {%- if block.settings.icoon == 'tekst' -%}
+              {{ block.settings.cijfer }}
+            {%- else -%}
+              <svg><use href="#ws-h-{{ block.settings.icoon }}"/></svg>
+            {%- endif -%}
+          </span>
+          <span class="ws-hero__tekst">
+            <b>{{ block.settings.titel }}</b>
+            {%- if block.settings.tekst != blank -%}<em>{{ block.settings.tekst }}</em>{%- endif -%}
+          </span>
+        </div>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "WS · Hero",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "image_picker", "id": "foto", "label": "Hero-foto" },
+    { "type": "image_picker", "id": "merk", "label": "Monogram op de achtergrond" },
+    { "type": "range", "id": "hoogte", "label": "Hoogte van de hero (desktop)", "min": 420, "max": 860, "step": 10, "unit": "px", "default": 600 },
+    { "type": "header", "content": "Tekst" },
+    { "type": "text", "id": "badge", "label": "Badge", "default": "Summer Sale · tot 40% korting" },
+    { "type": "inline_richtext", "id": "kop", "label": "Kop (vet = goud, |br| = regeleinde)", "default": "Elke dag verzorgd.|br|Zonder dat het je|br|<b>ochtend kost.</b>" },
+    { "type": "textarea", "id": "sub", "label": "Subkop", "default": "Trimmers, scheerapparaten en neustrimmers die getest zijn op wat ze dóén, niet op hoe ze eruitzien. 100 dagen proberen, morgen in huis." },
+    { "type": "header", "content": "Trustpilot" },
+    { "type": "checkbox", "id": "tp_tonen", "label": "Beoordeling tonen", "default": true },
+    { "type": "range", "id": "tp_sterren", "label": "Volle sterren", "min": 0, "max": 5, "step": 1, "default": 4 },
+    { "type": "text", "id": "tp_score", "label": "Score", "default": "Uitstekend · 4,5" },
+    { "type": "text", "id": "tp_aantal", "label": "Aantal reviews", "default": "950+ reviews" },
+    { "type": "header", "content": "Knoppen" },
+    { "type": "text", "id": "cta1_label", "label": "Hoofdknop", "default": "Shop de bestsellers" },
+    { "type": "url", "id": "cta1_link", "label": "Link hoofdknop" },
+    { "type": "text", "id": "cta2_label", "label": "Tweede knop", "default": "Vind jouw tool" },
+    { "type": "url", "id": "cta2_link", "label": "Link tweede knop" },
+    { "type": "header", "content": "Label bij het apparaat" },
+    { "type": "text", "id": "wijzer_titel", "label": "Naam", "default": "Groom Guard™ PRO" },
+    { "type": "text", "id": "wijzer_sub", "label": "Onderregel", "default": "Meest gekozen" },
+    { "type": "header", "content": "Teller" },
+    { "type": "text", "id": "tel_waarde", "label": "Getal", "default": "200.000+" },
+    { "type": "text", "id": "tel_label", "label": "Label", "default": "bestellingen sinds 2021" },
+    { "type": "header", "content": "Indent settings" },
+    { "type": "range", "id": "desk_indent_top", "label": "Indent top (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "desk_indent_bottom", "label": "Indent bottom (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_top", "label": "Indent top (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_bottom", "label": "Indent bottom (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "blocks": [
+    {
+      "type": "belofte",
+      "name": "Belofte",
+      "settings": [
+        { "type": "select", "id": "icoon", "label": "Icoon", "options": [ { "value": "shield", "label": "Schild" }, { "value": "truck", "label": "Bezorging" }, { "value": "retour", "label": "Retour" }, { "value": "doos", "label": "Doos" }, { "value": "tekst", "label": "Tekst in de cirkel" } ], "default": "shield" },
+        { "type": "text", "id": "cijfer", "label": "Tekst in de cirkel", "default": "2" },
+        { "type": "text", "id": "titel", "label": "Titel", "default": "100 dagen proberen" },
+        { "type": "text", "id": "tekst", "label": "Onderregel", "default": "Niet goed? Geld terug." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "WS · Hero",
+      "blocks": [
+        { "type": "belofte", "settings": { "icoon": "shield", "titel": "100 dagen proberen", "tekst": "Niet goed? Geld terug." } },
+        { "type": "belofte", "settings": { "icoon": "tekst", "cijfer": "2", "titel": "2 jaar garantie", "tekst": "Kwaliteit waarop je kunt vertrouwen." } },
+        { "type": "belofte", "settings": { "icoon": "truck", "titel": "Morgen in huis", "tekst": "Vandaag besteld, morgen in huis." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
