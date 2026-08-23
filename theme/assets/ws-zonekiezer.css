@@ -1,0 +1,213 @@
+/* ═══ Wellshave — blok 5, de zonekiezer ═══
+   Bron: audits/blok-05-waardeproposities.template.html
+   Mobiel is een media query in plaats van de klasse .zf-m. */
+
+.ws-zf{font-family:"Montserrat",sans-serif;color:#111;padding:60px 44px 48px;
+  background:linear-gradient(160deg,#FFFDFA 0%,#FBF6EE 46%,#F6EEE0 100%)}
+.ws-zf *{box-sizing:border-box}
+.ws-zf p{max-width:none;margin:0}
+.ws-zf__in{max-width:1300px;margin:0 auto;display:flex;flex-direction:column;gap:30px;min-width:0}
+
+/* ── kop ── */
+.ws-zf__top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,26em) auto;
+  align-items:start;gap:44px}
+.ws-zf__eyebrow{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:#BC813E;margin-bottom:14px}
+.ws-zf__h2{font-size:44px;font-weight:700;letter-spacing:-.03em;line-height:106%;margin:0 0 10px;
+  color:#111;text-transform:none}
+.ws-zf__sub{font-size:20px;font-weight:500;color:rgba(17,17,17,.72)}
+.ws-zf__sub b,.ws-zf__sub strong{color:#BC813E;font-weight:700}
+.ws-zf__note{font-size:15px;line-height:165%;color:rgba(17,17,17,.6);padding-top:6px}
+.ws-zf__hint{display:flex;align-items:center;gap:13px;padding-top:4px}
+.ws-zf__hintring{width:52px;height:52px;flex:none;border-radius:50%;
+  border:1px solid rgba(188,129,62,.4);display:flex;align-items:center;justify-content:center;
+  color:#BC813E;background:rgba(255,255,255,.6)}
+.ws-zf__hintring svg{width:22px;height:22px}
+.ws-zf__hint em{font-style:normal;font-size:11.5px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:rgba(17,17,17,.72);line-height:150%}
+
+/* ── romp: figuur links, kaart rechts ── */
+.ws-zf__body{display:grid;grid-template-columns:minmax(0,0.86fr) minmax(0,1fr);gap:26px;
+  align-items:stretch}
+.ws-zf__fig{position:relative;border-radius:18px;overflow:hidden;background:#0B0B0A;
+  box-shadow:0 30px 60px -40px rgba(17,17,17,.6)}
+.ws-zf__fig::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(105deg,rgba(11,11,10,.86) 0%,rgba(11,11,10,.42) 42%,rgba(11,11,10,.1) 70%,rgba(188,129,62,.18) 100%)}
+.ws-zf__foto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  object-position:52% 12%}
+.ws-zf__merk{position:absolute;right:-4%;top:20%;width:46%;height:auto;opacity:.13;
+  filter:brightness(0) invert(1);pointer-events:none}
+.ws-zf__vlak{width:100%;aspect-ratio:1/1;display:block}
+.ws-zf__lijnen{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
+.ws-zf__lijnen line{stroke:rgba(245,209,138,.5);stroke-width:.18;transition:stroke .35s ease}
+.ws-zf__lijnen line.is-aan{stroke:#F5D18A}
+.ws-zf__pin{position:absolute;z-index:3;width:30px;height:30px;margin:-15px 0 0 -15px;padding:0;
+  border:0;background:none;cursor:pointer;border-radius:50%}
+.ws-zf__pin i{position:absolute;inset:9px;border-radius:50%;background:#fff;display:block;
+  box-shadow:0 0 0 4px rgba(245,209,138,.22);
+  transition:inset .3s ease,box-shadow .3s ease,background .3s ease}
+.ws-zf__pin.is-aan i{inset:6px;background:#F5D18A;
+  box-shadow:0 0 0 6px rgba(245,209,138,.28),0 0 34px 10px rgba(245,209,138,.45)}
+.ws-zf__pin:focus-visible{outline:2px solid #F5D18A;outline-offset:3px}
+.ws-zf__label{position:absolute;z-index:3;transform:translateY(-50%);font-family:inherit;
+  font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.9);background:rgba(11,11,10,.55);cursor:pointer;
+  border:1px solid rgba(255,255,255,.28);border-radius:100px;padding:9px 17px;white-space:nowrap;
+  backdrop-filter:blur(6px);
+  transition:background-color .3s ease,color .3s ease,border-color .3s ease}
+.ws-zf__label:hover{border-color:rgba(245,209,138,.7);color:#fff}
+.ws-zf__label.is-aan{background:#F5D18A;border-color:#F5D18A;color:#111}
+.ws-zf__fighint{position:absolute;left:22px;bottom:18px;z-index:3;display:flex;align-items:center;
+  gap:9px;font-size:12.5px;color:rgba(255,255,255,.66)}
+.ws-zf__fighint svg{width:16px;height:16px;color:#F5D18A;flex:none}
+
+/* ── kaart ── */
+.ws-zf__kaart{background:rgba(255,255,255,.72);border:1px solid rgba(188,129,62,.16);
+  border-radius:18px;padding:32px 34px;display:flex;min-width:0}
+.ws-zf__paneel{display:flex;flex-direction:column;gap:14px;flex:1;min-width:0;
+  animation:ws-zf-in .45s ease both}
+.ws-zf__paneel[hidden]{display:none}
+@keyframes ws-zf-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.ws-zf__paneel{animation:none}}
+.ws-zf__kop{display:flex;align-items:baseline;justify-content:space-between;gap:20px}
+.ws-zf__match{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:#BC813E}
+.ws-zf__aantal{font-size:12.5px;color:rgba(17,17,17,.45);white-space:nowrap}
+.ws-zf__naam{font-size:31px;font-weight:700;letter-spacing:-.028em;margin:0;color:#111;
+  text-transform:none}
+.ws-zf__claim{font-size:15.5px;color:rgba(17,17,17,.6)}
+.ws-zf__mid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.06fr);gap:22px;
+  align-items:center;margin:4px 0}
+.ws-zf__shot{position:relative;display:flex;align-items:center;justify-content:center;padding:6px 0}
+.ws-zf__shot > img{width:100%;max-width:250px;height:auto;object-fit:contain;
+  filter:drop-shadow(0 22px 26px rgba(17,17,17,.22))}
+.ws-zf__badge{position:absolute;left:0;bottom:12px;background:#F5D18A;color:#111;font-size:11px;
+  font-weight:700;letter-spacing:.1em;text-transform:uppercase;border-radius:100px;padding:8px 15px;
+  white-space:nowrap}
+.ws-zf__feiten{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:17px}
+.ws-zf__feiten li{display:flex;gap:14px;align-items:center;font-size:14px;line-height:148%;
+  color:rgba(17,17,17,.72);min-width:0}
+.ws-zf__well{width:42px;height:42px;flex:none;border-radius:50%;
+  border:1px solid rgba(188,129,62,.35);display:flex;align-items:center;justify-content:center;
+  color:#BC813E}
+.ws-zf__well svg{width:20px;height:20px}
+.ws-zf__prijs{display:flex;align-items:baseline;gap:10px;font-size:15px;color:rgba(17,17,17,.5)}
+.ws-zf__prijs b{font-size:27px;font-weight:700;color:#111;letter-spacing:-.02em}
+.ws-zf__cta{display:flex;align-items:center;justify-content:space-between;gap:16px;background:#111;
+  color:#fff;text-decoration:none;border-radius:100px;padding:9px 9px 9px 26px;font-size:13px;
+  font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.ws-zf__cta:hover{color:#fff;text-decoration:none}
+.ws-zf__cta span{display:flex;align-items:center;justify-content:center;flex:none;width:38px;
+  height:38px;border-radius:50%;background:#F5D18A;color:#111}
+.ws-zf__cta span svg{width:18px;height:18px}
+.ws-zf__alle{align-self:center;display:inline-flex;align-items:center;gap:9px;font-size:13px;
+  color:rgba(17,17,17,.62);text-decoration:none;border-bottom:1px solid rgba(17,17,17,.25);
+  padding-bottom:3px}
+.ws-zf__alle svg{width:15px;height:15px}
+
+/* ── garantiestrip ── */
+.ws-zf__strip{background:rgba(255,255,255,.72);border:1px solid rgba(188,129,62,.16);
+  border-radius:16px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:center;
+  padding:18px 10px}
+.ws-zf__strip > div{display:flex;align-items:center;justify-content:center;gap:14px;font-size:14px;
+  color:rgba(17,17,17,.66);padding:2px 14px}
+.ws-zf__strip > div + div{border-left:1px solid rgba(17,17,17,.1)}
+.ws-zf__strip b{font-weight:600;color:#111}
+.ws-zf__zegel{width:38px;height:38px;flex:none;border-radius:50%;
+  border:1px solid rgba(188,129,62,.4);display:flex;align-items:center;justify-content:center;
+  color:#BC813E;font-size:11px;font-weight:700;letter-spacing:.02em}
+.ws-zf__zegel svg{width:19px;height:19px}
+
+/* de veegbare zonerail staat alleen op mobiel */
+.ws-zf__rail{display:none}
+.ws-zf__pijl{display:none}
+.ws-zf__actief{display:none}
+
+/* ── mobiel ── */
+@media (max-width:749px){
+  .ws-zf{padding:34px 16px 30px}
+  .ws-zf__in{gap:18px}
+  .ws-zf__top{grid-template-columns:1fr;gap:10px}
+  .ws-zf__h2{font-size:33px}
+  .ws-zf__sub{font-size:18px}
+  .ws-zf__note{font-size:14px;padding-top:0}
+  .ws-zf__hint{gap:10px;padding-top:2px}
+  .ws-zf__hintring{width:30px;height:30px;border:0;background:none}
+  .ws-zf__hintring svg{width:20px;height:20px}
+  .ws-zf__hint em{font-size:14px;font-weight:500;letter-spacing:0;text-transform:none;
+    color:rgba(17,17,17,.72)}
+
+  /* één veegbare rij in plaats van vijf regels, zodat de kaart er direct
+     onder past en je de wissel ziet gebeuren */
+  .ws-zf__rail{display:block;position:relative;margin:0 -16px}
+  .ws-zf__chips{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x proximity;
+    padding:2px 16px 4px;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+    -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 34px),transparent);
+    mask-image:linear-gradient(90deg,#000 calc(100% - 34px),transparent)}
+  .ws-zf__chips::-webkit-scrollbar{display:none}
+  .ws-zf__chips.rand-links{-webkit-mask-image:linear-gradient(90deg,transparent,#000 34px calc(100% - 34px),transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 34px calc(100% - 34px),transparent)}
+  .ws-zf__chips.rand-eind{-webkit-mask-image:linear-gradient(90deg,transparent,#000 34px);
+    mask-image:linear-gradient(90deg,transparent,#000 34px)}
+  .ws-zf__veeg{display:flex;align-items:center;gap:10px;margin-top:10px;font-size:12.5px;
+    color:rgba(17,17,17,.5)}
+  .ws-zf__veeg em{font-style:normal}
+  .ws-zf__veeg svg{width:14px;height:14px;color:#BC813E;flex:none}
+  .ws-zf__schuif{position:relative;flex:none;width:54px;height:3px;border-radius:3px;
+    background:rgba(17,17,17,.12);overflow:hidden}
+  .ws-zf__schuif i{position:absolute;top:0;bottom:0;left:0;width:40%;border-radius:3px;
+    background:#BC813E;transition:left .18s ease,width .18s ease}
+  .ws-zf__chip{display:flex;align-items:center;gap:11px;flex:0 0 auto;scroll-snap-align:center;
+    font-family:inherit;text-align:left;font-size:11.5px;font-weight:700;letter-spacing:.04em;
+    text-transform:uppercase;color:rgba(17,17,17,.8);background:rgba(255,255,255,.8);
+    border:1px solid rgba(188,129,62,.2);border-radius:14px;padding:14px;cursor:pointer;min-width:0;
+    transition:background-color .3s ease,border-color .3s ease,color .3s ease}
+  .ws-zf__thumb{width:34px;height:34px;flex:none;border-radius:50%;display:block;object-fit:cover;
+    border:1px solid rgba(17,17,17,.12)}
+  .ws-zf__chip.is-aan .ws-zf__thumb{border-color:rgba(17,17,17,.28)}
+  .ws-zf__chip span{min-width:0}
+  .ws-zf__chip i{margin-left:auto;display:none;width:22px;height:22px;flex:none;border-radius:50%;
+    background:#111;color:#F5D18A;align-items:center;justify-content:center}
+  .ws-zf__chip i svg{width:12px;height:12px}
+  .ws-zf__chip.is-aan{background:#F5D18A;border-color:#F5D18A;color:#111}
+  .ws-zf__chip.is-aan i{display:flex}
+
+  .ws-zf__body{display:flex;flex-direction:column;gap:0}
+  .ws-zf__kaart{order:1;padding:22px 20px;margin-top:2px}
+  .ws-zf__pijl{order:2;display:flex;align-items:center;justify-content:center;gap:11px;
+    margin:16px 0 12px;position:relative;z-index:4}
+  .ws-zf__pijl em{font-style:normal;font-size:12.5px;color:rgba(17,17,17,.5)}
+  .ws-zf__pijl span{width:34px;height:34px;border-radius:50%;background:#F5D18A;color:#111;
+    display:flex;align-items:center;justify-content:center}
+  .ws-zf__pijl svg{width:16px;height:16px}
+  .ws-zf__fig{order:3;border-radius:16px}
+  .ws-zf__foto{object-position:50% 0}
+  .ws-zf__label{display:none}
+  .ws-zf__lijnen{display:none}
+  .ws-zf__merk{width:60%;right:-10%;top:14%}
+  .ws-zf__pin{width:26px;height:26px;margin:-13px 0 0 -13px}
+  .ws-zf__pin i{inset:8px}
+  .ws-zf__pin:not(.is-aan) i{background:rgba(255,255,255,.55);box-shadow:none}
+  .ws-zf__actief{display:block;position:absolute;left:14px;top:14px;z-index:3;background:#F5D18A;
+    color:#111;border-radius:100px;padding:9px 16px;font-size:11.5px;font-weight:700;
+    letter-spacing:.1em;text-transform:uppercase}
+  .ws-zf__fighint{left:16px;bottom:16px;font-size:12px}
+  .ws-zf__naam{font-size:26px}
+  .ws-zf__claim{font-size:14.5px}
+  .ws-zf__mid{grid-template-columns:1fr;gap:14px}
+  .ws-zf__shot > img{max-width:210px}
+  .ws-zf__feiten{flex-direction:row;gap:0}
+  .ws-zf__feiten li{flex-direction:column;text-align:center;gap:8px;flex:1;min-width:0;
+    font-size:12.5px;line-height:135%;padding:0 6px}
+  .ws-zf__feiten li + li{border-left:1px solid rgba(17,17,17,.1)}
+  .ws-zf__well{width:34px;height:34px}
+  .ws-zf__well svg{width:17px;height:17px}
+  .ws-zf__prijs{justify-content:center}
+  .ws-zf__cta{justify-content:center;padding:9px 9px 9px 18px;font-size:12px;letter-spacing:.07em}
+  .ws-zf__alle{font-size:13px}
+  .ws-zf__strip{padding:14px 4px}
+  .ws-zf__strip > div{flex-direction:column;gap:8px;text-align:center;font-size:10.5px;
+    font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:2px 4px;
+    color:rgba(17,17,17,.72)}
+  .ws-zf__strip b{display:block}
+}

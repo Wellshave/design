@@ -1,0 +1,288 @@
+{% comment %}
+  Wellshave — blok 9, de Wellshave-familie.
+  Ontwerp en onderbouwing: audits/blok-09-ugc.template.html
+  Elke video is een blok: je kunt er zelf bij zetten, wisselen of weghalen.
+  Een blok zonder video wordt een open plek in dezelfde vorm.
+  De social-iconen en -links komen uit het thema zelf.
+{% endcomment %}
+
+{{ 'ws-familie.css' | asset_url | stylesheet_tag }}
+
+{% render 'indent-settings', section: section %}
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="ws-fam-play" viewBox="0 0 24 24"><path d="M8 5.2v13.6L19 12z" fill="currentColor"/></symbol>
+  <symbol id="ws-fam-geluid" viewBox="0 0 24 24"><path d="M4 9.4h3.4L12 5.6v12.8L7.4 14.6H4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M15.4 9.6a3.4 3.4 0 010 4.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+  <symbol id="ws-fam-camera" viewBox="0 0 24 24"><rect x="2.8" y="6.6" width="18.4" height="12.6" rx="2.6" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12.9" r="3.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8.6 6.6l1.3-2.2h4.2l1.3 2.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-fam-ster" viewBox="0 0 24 24"><path d="M12 3.4l1.7 4.5 4.8.3-3.7 3 1.2 4.6L12 13.3l-4 2.5 1.2-4.6-3.7-3 4.8-.3z" fill="currentColor"/></symbol>
+  <symbol id="ws-fam-schild" viewBox="0 0 24 24"><path d="M12 3.2l7 2.6v5.4c0 4.4-3 8-7 9.6-4-1.6-7-5.2-7-9.6V5.8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8.7 12.2l2.3 2.3 4.3-4.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-fam-film" viewBox="0 0 24 24"><circle cx="8.4" cy="8" r="2.9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.2 19.4c0-2.9 2.3-5.2 5.2-5.2s5.2 2.3 5.2 5.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><rect x="14.4" y="9.4" width="6.6" height="5.2" rx="1.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M21 11l1.8-1.1v4.4L21 13.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-fam-pijl-l" viewBox="0 0 24 24"><path d="M20 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-fam-pijl-r" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+{%- assign videos = section.blocks | where: 'type', 'video' -%}
+
+<div class="ws-fam" data-ws-familie>
+  {%- if section.settings.merk != blank -%}
+    {{ section.settings.merk | image_url: width: 460 | image_tag: class: 'ws-fam__merk', alt: '' }}
+  {%- endif -%}
+  <div class="ws-fam__sier"><svg viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 44C120 20 210 20 300 40" fill="none" stroke="rgba(188,129,62,.35)" stroke-width="1" stroke-dasharray="3 6" stroke-linecap="round"/>
+    <path d="M1140 40C1230 20 1320 20 1440 44" fill="none" stroke="rgba(188,129,62,.35)" stroke-width="1" stroke-dasharray="3 6" stroke-linecap="round"/>
+    <path d="M340 34l3.4 6.4L350 44l-6.6 3.6L340 54l-3.4-6.4L330 44l6.6-3.6z" fill="rgba(188,129,62,.4)"/>
+    <path d="M1100 34l3.4 6.4L1110 44l-6.6 3.6L1100 54l-3.4-6.4L1090 44l6.6-3.6z" fill="rgba(188,129,62,.4)"/>
+    <path d="M392 47s-6-3.6-6-7.6a3.3 3.3 0 016-2 3.3 3.3 0 016 2c0 4-6 7.6-6 7.6z" fill="none" stroke="rgba(188,129,62,.45)" stroke-width="1.1"/>
+    <path d="M1048 47s-6-3.6-6-7.6a3.3 3.3 0 016-2 3.3 3.3 0 016 2c0 4-6 7.6-6 7.6z" fill="none" stroke="rgba(188,129,62,.45)" stroke-width="1.1"/>
+  </svg></div>
+
+  <div class="ws-fam__in">
+    <div class="ws-fam__kop">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="ws-fam__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        {%- if section.settings.kop != blank -%}
+          <h2 class="ws-fam__h2">{{ section.settings.kop }}</h2>
+        {%- endif -%}
+      </div>
+      <div class="ws-fam__rechts">
+        {%- if section.settings.intro != blank -%}
+          <p class="ws-fam__intro">{{ section.settings.intro }}</p>
+        {%- endif -%}
+        {%- if section.settings.tel_waarde != blank -%}
+          <div class="ws-fam__telling">
+            <span class="ws-fam__koppen">
+              {%- for block in videos limit: 6 -%}
+                <i>{% if block.settings.poster != blank %}{{ block.settings.poster | image_url: width: 90 | image_tag: alt: '' }}{% endif %}</i>
+              {%- endfor -%}
+            </span>
+            <span><b>{{ section.settings.tel_waarde }}</b>
+              {%- if section.settings.tel_label != blank -%}<em>{{ section.settings.tel_label }}</em>{%- endif -%}
+            </span>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.pil != blank -%}
+          <span class="ws-fam__pil"><svg><use href="#ws-fam-camera"/></svg>{{ section.settings.pil }}</span>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  <div class="ws-fam__baan">
+    <div class="ws-fam__spoor">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'open' -%}
+          <article class="ws-fam__kaart ws-fam__kaart--leeg" {{ block.shopify_attributes }}>
+            <div class="ws-fam__beeld">
+              <i class="ws-fam__cam"><svg><use href="#ws-fam-camera"/></svg></i>
+              <p class="ws-fam__leeglabel">{{ block.settings.label }}</p>
+              <p class="ws-fam__leegtekst">{{ block.settings.tekst }}</p>
+            </div>
+          </article>
+        {%- else -%}
+          <article class="ws-fam__kaart" {{ block.shopify_attributes }}>
+            {%- if block.settings.lint_kop != blank -%}
+              <span class="ws-fam__lint"><svg><use href="#ws-fam-ster"/></svg>
+                <span><b>{{ block.settings.lint_kop }}</b>
+                  {%- if block.settings.lint_sub != blank -%}<em>{{ block.settings.lint_sub }}</em>{%- endif -%}
+                </span></span>
+            {%- endif -%}
+            <div class="ws-fam__beeld">
+              {%- if block.settings.video != blank -%}
+                {{ block.settings.video | video_tag: image_size: '600x', muted: true, playsinline: true, loop: true, controls: false, preload: 'none' }}
+              {%- elsif block.settings.poster != blank -%}
+                {{ block.settings.poster | image_url: width: 600 | image_tag: alt: '' }}
+              {%- endif -%}
+              {%- if block.settings.duur != blank -%}
+                <span class="ws-fam__duur">{{ block.settings.duur }}</span>
+              {%- endif -%}
+              <button class="ws-fam__geluid" type="button" aria-label="Geluid aan of uit"><svg><use href="#ws-fam-geluid"/></svg></button>
+              <button class="ws-fam__play" type="button" aria-label="Afspelen"><svg><use href="#ws-fam-play"/></svg></button>
+              <div class="ws-fam__onder">
+                <div class="ws-fam__wie">
+                  <span class="ws-fam__av">
+                    {%- if block.settings.avatar != blank -%}
+                      {{ block.settings.avatar | image_url: width: 90 | image_tag: alt: '' }}
+                    {%- else -%}
+                      {{ block.settings.naam | strip | slice: 0 | default: '?' }}
+                    {%- endif -%}
+                  </span>
+                  <span class="ws-fam__naam"><b>{{ block.settings.naam }}</b>
+                    {%- if block.settings.tag != blank -%}<em>{{ block.settings.tag }}</em>{%- endif -%}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </article>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    <button class="ws-fam__pijl ws-fam__pijl--links" type="button" aria-label="Vorige"><svg><use href="#ws-fam-pijl-l"/></svg></button>
+    <button class="ws-fam__pijl ws-fam__pijl--rechts" type="button" aria-label="Volgende"><svg><use href="#ws-fam-pijl-r"/></svg></button>
+  </div>
+
+  <div class="ws-fam__teller">
+    <p class="ws-fam__cijfers"></p>
+    <span class="ws-fam__balk"><i></i></span>
+  </div>
+
+  <div class="ws-fam__voet"><div class="ws-fam__voetin">
+    {%- if section.settings.voet_1 != blank -%}
+      <div class="ws-fam__blok">
+        <span class="ws-fam__ring" style="border-style:solid"><svg><use href="#ws-fam-schild"/></svg></span>
+        <p>{{ section.settings.voet_1 }}</p>
+      </div>
+    {%- endif -%}
+    {%- if section.settings.voet_2 != blank -%}
+      <div class="ws-fam__blok">
+        <span class="ws-fam__ring"><svg><use href="#ws-fam-film"/></svg></span>
+        <p><b>{{ section.settings.voet_2 }}</b>
+          {%- if section.settings.hashtag != blank -%}<em>{{ section.settings.hashtag }}</em>{%- endif -%}
+        </p>
+      </div>
+    {%- endif -%}
+    {%- assign insta = section.settings.instagram | default: settings.social_instagram_link -%}
+    {%- if insta != blank -%}
+      <a class="ws-fam__cta" href="{{ insta }}">{{ 'icon-social-instagram.svg' | inline_asset_content }}{{ section.settings.cta }}</a>
+    {%- endif -%}
+    <span class="ws-fam__volg">
+      {%- if settings.social_tiktok_link != blank -%}
+        <a href="{{ settings.social_tiktok_link }}" aria-label="TikTok">{{ 'icon-social-tiktok.svg' | inline_asset_content }}</a>
+      {%- endif -%}
+      {%- if settings.social_youtube_link != blank -%}
+        <a href="{{ settings.social_youtube_link }}" aria-label="YouTube">{{ 'icon-social-youtube.svg' | inline_asset_content }}</a>
+      {%- endif -%}
+      {%- if settings.social_facebook_link != blank -%}
+        <a href="{{ settings.social_facebook_link }}" aria-label="Facebook">{{ 'icon-social-facebook.svg' | inline_asset_content }}</a>
+      {%- endif -%}
+    </span>
+  </div></div>
+</div>
+
+<script>
+  (function () {
+    document.querySelectorAll('[data-ws-familie]').forEach(function (sec) {
+      if (sec.dataset.wsKlaar) return;
+      sec.dataset.wsKlaar = '1';
+      var spoor = sec.querySelector('.ws-fam__spoor');
+      var kaarten = [].slice.call(sec.querySelectorAll('.ws-fam__kaart'));
+      var baan = sec.querySelector('.ws-fam__baan');
+      var cijfers = sec.querySelector('.ws-fam__cijfers');
+      var balk = sec.querySelector('.ws-fam__balk i');
+      if (!spoor || !kaarten.length) return;
+      var actief = Math.min(2, kaarten.length - 1), timer = null;
+
+      function twee(n) { return (n < 10 ? '0' : '') + n; }
+
+      function plaats() {
+        kaarten.forEach(function (k, i) {
+          k.classList.toggle('is-aan', i === actief);
+          if (i !== actief) {
+            var v = k.querySelector('video');
+            if (v && !v.paused) { v.pause(); k.classList.remove('is-speelt'); }
+          }
+        });
+        var k = kaarten[actief];
+        // de kaart precies midden in de baan zetten, ongeacht kaartbreedtes
+        var mid = k.offsetLeft + k.offsetWidth / 2;
+        spoor.style.transform = 'translateX(' + (baan.clientWidth / 2 - mid) + 'px)';
+        if (cijfers) cijfers.innerHTML = '<b>' + twee(actief + 1) + '</b> / ' + twee(kaarten.length);
+        if (balk) balk.style.transform = 'translateX(' + (actief * 100) + '%)';
+      }
+      function stap(r) { actief = (actief + r + kaarten.length) % kaarten.length; plaats(); }
+      function start() { stop(); timer = setInterval(function () { stap(1); }, 4200); }
+      function stop() { if (timer) { clearInterval(timer); timer = null; } }
+
+      kaarten.forEach(function (k, i) {
+        k.addEventListener('click', function () { actief = i; plaats(); start(); });
+        var play = k.querySelector('.ws-fam__play');
+        var geluid = k.querySelector('.ws-fam__geluid');
+        var video = k.querySelector('video');
+        if (play && video) {
+          play.addEventListener('click', function (e) {
+            e.stopPropagation();
+            actief = i; plaats(); stop();
+            video.play().then(function () { k.classList.add('is-speelt'); }).catch(function () {});
+          });
+          video.addEventListener('click', function (e) {
+            e.stopPropagation();
+            if (video.paused) { video.play(); k.classList.add('is-speelt'); }
+            else { video.pause(); k.classList.remove('is-speelt'); }
+          });
+        }
+        if (geluid && video) {
+          geluid.addEventListener('click', function (e) {
+            e.stopPropagation();
+            video.muted = !video.muted;
+            geluid.style.color = video.muted ? '' : '#F5D18A';
+          });
+        }
+      });
+      var l = sec.querySelector('.ws-fam__pijl--links'), r = sec.querySelector('.ws-fam__pijl--rechts');
+      if (l) l.addEventListener('click', function () { stap(-1); start(); });
+      if (r) r.addEventListener('click', function () { stap(1); start(); });
+      sec.addEventListener('mouseenter', stop);
+      sec.addEventListener('mouseleave', start);
+
+      if (balk) balk.style.width = (100 / kaarten.length) + '%';
+      plaats();
+      addEventListener('resize', plaats);
+      // de baan staat stil als het systeem om minder beweging vraagt
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) start();
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "WS · De familie",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Bovenregel", "default": "De Wellshave-familie" },
+    { "type": "inline_richtext", "id": "kop", "label": "Kop (vet = brons, eigen regel)", "default": "Echte mannen. Echte routines. <b>Samen één familie.</b>" },
+    { "type": "textarea", "id": "intro", "label": "Intro", "default": "Geen acteurs en geen ingestudeerde scripts. Gewoon klanten die laten zien hoe Wellshave onderdeel werd van hun routine." },
+    { "type": "image_picker", "id": "merk", "label": "Monogram" },
+    { "type": "text", "id": "tel_waarde", "label": "Getal", "default": "200.000+ bestellingen" },
+    { "type": "text", "id": "tel_label", "label": "Label", "default": "sinds 2021" },
+    { "type": "text", "id": "pil", "label": "Pil", "default": "Door klanten zelf gefilmd" },
+    { "type": "header", "content": "Onder de band" },
+    { "type": "text", "id": "voet_1", "label": "Links", "default": "Elke video is met toestemming gedeeld." },
+    { "type": "text", "id": "voet_2", "label": "Midden", "default": "Jouw routine hier tussen?" },
+    { "type": "text", "id": "hashtag", "label": "Hashtag", "default": "#wellshavefamilie" },
+    { "type": "text", "id": "cta", "label": "Knop", "default": "Bekijk Instagram" },
+    { "type": "url", "id": "instagram", "label": "Instagram-link", "info": "Leeg = de link uit je thema-instellingen." },
+    { "type": "header", "content": "Indent settings" },
+    { "type": "range", "id": "desk_indent_top", "label": "Indent top (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "desk_indent_bottom", "label": "Indent bottom (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_top", "label": "Indent top (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_bottom", "label": "Indent bottom (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "Video",
+      "settings": [
+        { "type": "video", "id": "video", "label": "Video", "info": "Kies een video uit je bestanden." },
+        { "type": "image_picker", "id": "poster", "label": "Stilstaand beeld", "info": "Wordt getoond als er nog geen video is gekozen." },
+        { "type": "text", "id": "duur", "label": "Duur", "info": "Bijvoorbeeld: 10 sec." },
+        { "type": "image_picker", "id": "avatar", "label": "Profielfoto" },
+        { "type": "text", "id": "naam", "label": "Naam · plaats" },
+        { "type": "text", "id": "tag", "label": "Instagramtag" },
+        { "type": "text", "id": "lint_kop", "label": "Lint — kop" },
+        { "type": "text", "id": "lint_sub", "label": "Lint — onderregel" }
+      ]
+    },
+    {
+      "type": "open",
+      "name": "Open plek",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label" },
+        { "type": "textarea", "id": "tekst", "label": "Tekst" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "WS · De familie" } ]
+}
+{% endschema %}
