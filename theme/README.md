@@ -47,8 +47,8 @@ gaan alleen naar het duplicaat.
 | 4 — upgradetijdlijn | `ws-tijdlijn` | staat erin, carrousel werkt |
 | 5 — zonekiezer | `ws-zonekiezer` | staat erin, desktop en mobiel gecontroleerd |
 | 6 — koopblok | `ws-koopblok` | staat erin, koopknop getest |
-| 7 — proposities | — | nog te doen |
-| 8 — zonerooster | — | nog te doen |
+| 7 — proposities | `ws-proposities` | staat erin, gecontroleerd |
+| 8 — zonerooster | `ws-zonerooster` | staat erin |
 | 9 — de familie (UGC) | — | nog te doen |
 | 11 — goed geregeld | — | nog te doen |
 | 12 — de afsluiter | `ws-afsluiter` | staat erin, desktop en mobiel gecontroleerd |
