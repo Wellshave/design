@@ -41,4 +41,29 @@ gaan alleen naar het duplicaat.
 
 | Blok | Sectie | Status |
 |---|---|---|
-| 12 — de afsluiter | `ws-afsluiter` | staat in het testthema, desktop en mobiel gecontroleerd |
+| 1 — hero | `ws-hero` | staat erin, desktop en mobiel gecontroleerd |
+| 2 — zonder risico | `ws-belofte` | staat erin, prijs/voorraad live uit het product |
+| 3 — bestsellers | `ws-bestsellers` | staat erin, prijzen live uit de producten |
+| 4 — upgradetijdlijn | `ws-tijdlijn` | staat erin, carrousel werkt |
+| 5 — zonekiezer | — | nog te doen |
+| 6 — koopblok | — | nog te doen |
+| 7 — proposities | — | nog te doen |
+| 8 — zonerooster | — | nog te doen |
+| 9 — de familie (UGC) | — | nog te doen |
+| 11 — goed geregeld | — | nog te doen |
+| 12 — de afsluiter | `ws-afsluiter` | staat erin, desktop en mobiel gecontroleerd |
+
+## Beelden
+
+Alle beelden uit `audits/assets` staan als bestand in Shopify onder de naam
+`ws-…`. Ze gaan er met `stagedUploadsCreate` + `fileCreate` in; de bytes lopen
+via curl rechtstreeks van schijf naar Shopify.
+
+## Wat opviel in de winkel
+
+* **De prijsopmaak van de winkel heeft geen €-teken.** `moneyFormat` staat op
+  `{{amount_with_comma_separator}}`, dus overal op de site staat `79,95` en niet
+  `€79,95`. Onze secties volgen dat, zodat ze niet uit de toon vallen. Wordt de
+  instelling aangepast, dan komt het teken er vanzelf overal bij.
+* **De naam van de klantenservicemedewerker is uit blok 2 gehaald**; daar staat
+  nu "ons eigen team".
