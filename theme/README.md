@@ -46,14 +46,14 @@ gaan alleen naar het duplicaat.
 | 3 — bestsellers | `ws-bestsellers` | staat erin, prijzen live uit de producten |
 | 4 — upgradetijdlijn | `ws-tijdlijn` | staat erin, carrousel werkt |
 | 5 — zonekiezer | `ws-zonekiezer` | staat erin, desktop en mobiel gecontroleerd |
-| 6 — koopblok | — | nog te doen |
+| 6 — koopblok | `ws-koopblok` | staat erin, koopknop getest |
 | 7 — proposities | — | nog te doen |
 | 8 — zonerooster | — | nog te doen |
 | 9 — de familie (UGC) | — | nog te doen |
 | 11 — goed geregeld | — | nog te doen |
 | 12 — de afsluiter | `ws-afsluiter` | staat erin, desktop en mobiel gecontroleerd |
 
-> **Let op:** de secties van blok 4 en 5 staan nu alleen in het thema, nog niet
+> **Let op:** de secties vanaf blok 4 staan nu alleen in het thema, nog niet
 > als bestand in deze repo. Ze worden in één keer teruggehaald zodra alle
 > blokken erin zitten, zodat de repo weer de bron is.
 
