@@ -166,7 +166,7 @@ strong{font-weight:700}
       <thead><tr><th>&nbsp;</th><th>Blok</th><th>Wat vastligt</th><th>Wat per product verschilt</th><th>Bron</th><th>Klasse</th><th>Grond</th></tr></thead>
       <tbody>
         <tr class="fold"><td colspan="7">Boven de vouw</td></tr>
-        <tr><td class="i">01</td><td><b>Koopblok</b><br>gallerij + acht slots</td><td>De acht slots, hun volgorde, de knop, de risicostrook. Vijf uitgeklapte thumbnails.</td><td>Citaat, titel, belofte, prijs, USP's, beeld</td><td><code>custom.buybox_quote</code><br><code>custom.hero_promise</code><br><code>custom.product_usp</code><br><code>custom.risk_strip</code></td><td><span class="pill kern">kern</span></td><td class="g zand">zand</td></tr>
+        <tr><td class="i">01</td><td><b>Koopblok</b><br>gallerij + negen slots</td><td>De negen slots, hun volgorde, de knop, de risicostrook. Vijf uitgeklapte thumbnails.</td><td>Citaat, titel, belofte, prijs, USP's, beeld</td><td><code>custom.buybox_quote</code><br><code>custom.hero_promise</code><br><code>custom.product_usp</code><br><code>custom.risk_strip</code></td><td><span class="pill kern">kern</span></td><td class="g zand">zand</td></tr>
         <tr class="fold"><td colspan="7">Onder de vouw</td></tr>
         <tr><td class="i">02</td><td><b>Geruststrook</b></td><td>Vier items naast elkaar, rond icoonvlak, vette regel plus onderregel</td><td>Niets &mdash; winkelbreed en identiek</td><td><code>custom.store_usp</code></td><td><span class="pill kern">kern</span></td><td class="g wit">wit</td></tr>
         <tr><td class="i">03</td><td><b>Het aanbodblok</b><br>drie kaarten</td><td>Drie kaarten, nooit meer, nooit als lijst. Instap / uitgelicht / beste waarde. Besparing op elke kaart.</td><td>Welke drie producten de ladder vormen</td><td><code>custom.upgrade_products</code><br>live prijzen</td><td><span class="pill kern">kern</span></td><td class="g donker">donker</td></tr>
@@ -201,7 +201,7 @@ strong{font-weight:700}
 
 <section>
   <div class="shead"><span class="snum">04</span><h2 class="duo">Wat je aanmaakt,<span class="b">en wat er al staat.</span></h2></div>
-  <p class="sintro">Uitgelezen per product, niet aangenomen. De Groom Guard en de PRO delen 21 <code>custom.*</code>-velden; de basis heeft er twee extra. Het sjabloon is dus al grotendeels gedekt.</p>
+  <p class="sintro">Uitgelezen per product, niet aangenomen. De Groom Guard en de PRO delen 21 <code>custom.*</code>-velden &mdash; waaronder <code>limited_offer</code>, dat bij alle achttien producten naar hetzelfde record wijst en dus een campagneveld is, geen productveld; de basis heeft er twee extra. Het sjabloon is dus al grotendeels gedekt.</p>
 
   <div class="tw">
     <table>
@@ -211,6 +211,7 @@ strong{font-weight:700}
         <tr><td><code>custom.hero_promise</code></td><td>single_line_text</td><td>Slot 3, vervangt de ondertitel boven de vouw</td><td><span class="pill nieuw">aanmaken</span></td></tr>
         <tr><td><code>custom.risk_strip</code></td><td>list.single_line_text</td><td>Slot 8, onder de knop</td><td><span class="pill nieuw">aanmaken</span></td></tr>
         <tr><td><code>custom.yearly_cost</code></td><td>metaobject_reference</td><td>Blok 09, de jaarkosten</td><td><span class="pill nieuw">aanmaken</span></td></tr>
+        <tr><td><code>custom.product_offer</code></td><td>metaobject_reference</td><td>Slot 7, de cadeaubalk &mdash; wijst naar de bestaande definitie <code>limited_offer</code></td><td><span class="pill nieuw">aanmaken</span></td></tr>
         <tr><td><code>custom.product_usp</code></td><td>list.single_line_text</td><td>Slot 6 &mdash; bestaat, maar moet herschreven</td><td>herschrijven</td></tr>
         <tr><td><code>compare_table</code> · <code>included_box</code> · <code>image_with_text</code> · <code>ugc_video_list</code> · <code>specification</code> · <code>faq</code> · <code>store_usp</code> · <code>upgrade_products</code> · <code>cart_upsell</code> · <code>use_case_title</code></td><td>diverse</td><td>Blok 02 t/m 15</td><td>staan gevuld</td></tr>
       </tbody>

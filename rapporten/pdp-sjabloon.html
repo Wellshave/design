@@ -180,7 +180,7 @@ strong{font-weight:700}
 
 <section>
   <div class="shead"><span class="snum">02</span><h2 class="duo">Het koopblok, slot voor slot,<span class="b">met de tekst er al in.</span></h2></div>
-  <p class="sintro">Ezra Firestone's volgorde: open met een klant, niet met de productnaam. Alles hieronder past boven de vouw op 390px. Gouden regels zijn nieuwe metafields.</p>
+  <p class="sintro">Ezra Firestone's volgorde: open met een klant, niet met de productnaam. Alles hieronder past boven de vouw op 390px. Slot 7 is voorwaardelijk: het staat altijd in het sjabloon, maar rendert niets als het veld leeg is. Gouden regels zijn nieuwe metafields.</p>
 
   <div class="slots">
     <div class="slot new"><div class="n">1</div><div class="k">Citaat</div><div class="v"><span class="q">Eén korte klantzin die het snij-bezwaar wegneemt, boven de titel.</span><span class="mf">nieuw → custom.buybox_quote + custom.buybox_quote_author</span></div></div>
@@ -189,8 +189,9 @@ strong{font-weight:700}
     <div class="slot"><div class="n">4</div><div class="k">Sterren</div><div class="v"><span class="q">4,6 · 442 reviews — live gebonden, niet ingetypt</span><span class="mf">loox.avg_rating + loox.num_reviews</span></div></div>
     <div class="slot"><div class="n">5</div><div class="k">Prijs</div><div class="v"><span class="q">€59,95 · <s>€85,65</s> · Bespaar 30%</span><span class="mf">variant.price + compare_at_price</span></div></div>
     <div class="slot"><div class="n">6</div><div class="k">USP's</div><div class="v"><span class="q">Vijf regels, benefit vooraan — zie sectie 03</span><span class="mf">custom.product_usp</span></div></div>
-    <div class="slot"><div class="n">7</div><div class="k">Knop</div><div class="v"><span class="q">IN WINKELWAGEN — volle breedte, één actie</span><span class="mf">—</span></div></div>
-    <div class="slot new"><div class="n">8</div><div class="k">Risicostrook</div><div class="v"><span class="q">100 dagen thuis proberen · 2 jaar garantie · Voor 23:59 besteld = morgen in huis</span><span class="mf">nieuw → custom.risk_strip (list) · vervangt losse shipping_information</span></div></div>
+    <div class="slot new"><div class="n">7</div><div class="k">Cadeaubalk</div><div class="v"><span class="q">&laquo;Gratis Skin-Safe Blade t.w.v. &euro;19,95&raquo; &mdash; omlijnde gouden pil, valt weg als het veld leeg is</span><span class="mf">nieuw &rarr; custom.product_offer (metaobject_reference &rarr; limited_offer)</span></div></div>
+    <div class="slot"><div class="n">8</div><div class="k">Knop</div><div class="v"><span class="q">IN WINKELWAGEN — volle breedte, één actie</span><span class="mf">—</span></div></div>
+    <div class="slot new"><div class="n">9</div><div class="k">Risicostrook</div><div class="v"><span class="q">100 dagen thuis proberen · 2 jaar garantie · Voor 23:59 besteld = morgen in huis</span><span class="mf">nieuw → custom.risk_strip (list) · vervangt losse shipping_information</span></div></div>
   </div>
 
   <div class="note warn">
@@ -308,6 +309,7 @@ strong{font-weight:700}
         <tr><td><code>custom.hero_promise</code></td><td>single_line_text</td><td class="no">aanmaken</td></tr>
         <tr><td><code>custom.risk_strip</code></td><td>list.single_line_text</td><td class="no">aanmaken</td></tr>
         <tr><td><code>custom.yearly_cost</code></td><td>metaobject_reference</td><td class="no">aanmaken</td></tr>
+        <tr><td><code>custom.product_offer</code></td><td>metaobject_reference</td><td class="no">aanmaken</td></tr>
         <tr><td><code>custom.product_usp</code></td><td>list.single_line_text</td><td class="ok">herschrijven</td></tr>
         <tr><td><code>loox.num_reviews</code> · <code>loox.avg_rating</code></td><td>number</td><td class="ok">binden i.p.v. intypen</td></tr>
         <tr><td><code>compare_table</code> · <code>included_box</code> · <code>image_with_text</code> · <code>ugc_video_list</code> · <code>specification</code> · <code>faq</code> · <code>store_usp</code> · <code>upgrade</code> · <code>cart_upsell</code></td><td>diverse</td><td class="ok">staan al gevuld</td></tr>
