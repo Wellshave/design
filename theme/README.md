@@ -72,9 +72,12 @@ misstond is gerepareerd:
   stond als `style`-attribuut op het element, en een inline stijl wint van elke
   media query. Het gaat nu via `--ws-kol`, die de media query wél kan
   overschrijven.
-* **Het monogram in blok 3 stond mobiel permanent op de achtergrond.** Het was
-  bedoeld als hover-detail, maar op een telefoon is er geen hover. Op mobiel is
-  het weg, op desktop werkt de hover als vanouds.
+* **Het monogram in blok 3.** Bedoeld als hover-detail, maar op een telefoon is
+  er geen hover. Eerst mobiel weggehaald, daarna op verzoek teruggezet: zonder
+  muis staat het er permanent en zacht (opacity .1), met muis komt het pas bij
+  hover tevoorschijn (.22). Het hangt aan `@media (hover:none),(pointer:coarse)`
+  en niet aan de schermbreedte, zodat een tablet met aanraakscherm hem ook
+  krijgt.
 * **De vier zekerheden in blok 11 hingen half buiten beeld.** Een veegbare rij
   van 58% brede kaarten knipte de tweede kaart middenin een woord af. Ze staan
   nu twee bij twee.
