@@ -1,4 +1,4 @@
-<title>Above the fold, licht en donker</title>
+<title>Above the fold, af</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap">
@@ -194,16 +194,65 @@ strong{font-weight:700}
 @media (max-width:1000px){.pdp{grid-template-columns:1fr}.bb{border-left:0;border-top:1px solid rgba(245,209,138,.12)}
   .mobrow{grid-template-columns:1fr}.phone{width:100%;max-width:390px}}
 @media (max-width:700px){.comps{grid-template-columns:1fr}
-  .strook{grid-template-columns:1fr;padding:6px 20px 18px}
-  .strook > div{padding:14px 0;justify-content:flex-start}
-  .strook > div + div{border-left:0;border-top:1px solid rgba(255,255,255,.1)}}
+  /* variant C: horizontaal blijven, icoon boven de tekst */
+  .strook{padding:16px 10px 18px}
+  .strook > div{flex-direction:column;text-align:center;gap:8px;padding:0 6px}
+  .strook .zegel{width:34px;height:34px}
+  .strook .zegel svg{width:15px;height:15px}
+  .strook .zegel b{font-size:11px}
+  .strook .tx b{font-size:8.5px;letter-spacing:.1em;line-height:1.25}
+  .strook .tx span{font-size:9px;line-height:1.3;display:block;margin-top:2px}}
+
+/* het telefoonframe is 390px maar staat in een breed venster:
+   de mobiele behandeling van de strook hier forceren */
+.phone .strook{padding:14px 8px 16px}
+.phone .strook > div{flex-direction:column;text-align:center;gap:7px;padding:0 5px}
+.phone .strook .zegel{width:32px;height:32px}
+.phone .strook .zegel svg{width:14px;height:14px}
+.phone .strook .zegel b{font-size:10.5px}
+.phone .strook .tx b{font-size:8px;letter-spacing:.09em;line-height:1.22}
+.phone .strook .tx span{font-size:8.5px;line-height:1.28;display:block;margin-top:2px}
+
+/* beweging — merklaag deel 10: reveal 0.6s, 16px omhoog, een keer */
+.reveal{opacity:0;transform:translateY(16px);
+  transition:opacity .6s cubic-bezier(.22,.61,.36,1),transform .6s cubic-bezier(.22,.61,.36,1)}
+.reveal.in{opacity:1;transform:none}
+.strook > div:nth-child(2).reveal{transition-delay:.10s}
+.strook > div:nth-child(3).reveal{transition-delay:.20s}
+.zegel{transition:transform .18s ease,border-color .18s ease,background-color .18s ease}
+.strook > div:hover .zegel{transform:translateY(-1px);border-color:var(--gold);background:rgba(245,209,138,.08)}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  .zegel{transition:none}}
+
+/* optie 2: de lijn wordt getekend — nieuw patroon, staat nog niet in de merklaag */
+.draw svg path,.draw svg circle{stroke-dasharray:var(--L,60);stroke-dashoffset:var(--L,60);
+  transition:stroke-dashoffset .85s cubic-bezier(.22,.61,.36,1)}
+.draw.in svg path,.draw.in svg circle{stroke-dashoffset:0}
+.draw .zegel{transition:border-color .5s ease .3s}
+.draw:not(.in) .zegel{border-color:rgba(245,209,138,.14)}
+@media(prefers-reduced-motion:reduce){
+  .draw svg path,.draw svg circle{stroke-dashoffset:0!important;transition:none}
+  .draw .zegel{transition:none}}
+
+.mo{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:24px 0 0}
+.mo-box{border:1px solid var(--ink-10);border-radius:var(--r-m);background:var(--paper);overflow:hidden}
+.mo-box .stage2{background:var(--carbon);padding:8px 10px 18px}
+.mo-box .cap{padding:15px 19px 17px}
+.mo-box .cap b{display:block;font-size:14.5px;font-weight:700;margin-bottom:3px}
+.mo-box .cap p{margin:0;font-size:13.5px;line-height:1.5;color:var(--ink-60)}
+.mo-box .cap em{font-style:normal;font-weight:700;color:var(--bronze)}
+.replay{display:inline-flex;align-items:center;gap:8px;margin:20px 0 0;background:var(--ink);color:#fff;
+  border:0;border-radius:100px;padding:11px 20px;font-family:inherit;font-size:11.5px;font-weight:800;
+  letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+.replay:hover{background:#2A2A28}
 </style>
 <div class="wrap">
 
 <header class="mast">
-  <div class="eyebrow">Blok 01 van 16 &middot; versie 4 &middot; gesplitste grond</div>
-  <h1>Above the fold,<br>licht &eacute;n donker</h1>
-  <p class="lede">Beide gronden van het merk in &eacute;&eacute;n scherm: <strong>links wit met de productfoto's, rechts bijna zwart met het koopblok</strong>. De lichte kant volgt <code>ws-bestsellers.css</code> &mdash; zandvlak, radius 12px, haarlijn op 8% &mdash; de donkere kant volgt <code>ws-hero.css</code>. Beide waarden komen uit het testthema (id 204178161996), niet uit de mockup.</p>
+  <div class="eyebrow">Blok 01 van 16 &middot; versie 5 &middot; variant C met beweging</div>
+  <h1>Above the fold,<br>af</h1>
+  <p class="lede">Variant C verwerkt: de dubbele regel onder de knoppen is weg, de garantiestrook staat horizontaal op elke breedte. Beide gronden van het merk in &eacute;&eacute;n scherm &mdash; <strong>links wit met de productfoto's, rechts bijna zwart met het koopblok</strong>. De lichte kant volgt <code>ws-bestsellers.css</code> &mdash; zandvlak, radius 12px, haarlijn op 8% &mdash; de donkere kant volgt <code>ws-hero.css</code>. Beide waarden komen uit het testthema (id 204178161996), niet uit de mockup.</p>
 </header>
 
 <section>
@@ -260,18 +309,13 @@ strong{font-weight:700}
         </ul>
         <div class="cta">In winkelwagen &mdash; &euro;59,95</div>
         <div class="cta2">Vergelijk de modellen</div>
-        <div class="risk">
-          <span><i></i>100 dagen thuis proberen</span>
-          <span><i></i>2 jaar garantie</span>
-          <span><i></i>Voor 23:59 = morgen in huis</span>
-        </div>
       </div>
     </div>
 
     <div class="strook">
-      <div><span class="zegel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.6l7.2 2.8v6.1c0 4.4-3 8.4-7.2 9.9-4.2-1.5-7.2-5.5-7.2-9.9V5.4z"/><path d="M8.7 12.1l2.3 2.3 4.3-4.6"/></svg></span><span class="tx"><b>100 dagen proberen</b><span>Niet goed? Geld terug.</span></span></div>
-      <div><span class="zegel"><b>2</b></span><span class="tx"><b>2 jaar garantie</b><span>Kwaliteit waarop je kunt vertrouwen.</span></span></div>
-      <div><span class="zegel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M1.9 6.2h12.2v9.4H1.9zM14.1 9.7h3.9l3.1 3.1v2.8h-7z"/><circle cx="6.6" cy="18" r="1.9"/><circle cx="17.3" cy="18" r="1.9"/></svg></span><span class="tx"><b>Morgen in huis</b><span>Vandaag besteld, morgen in huis.</span></span></div>
+      <div class="reveal"><span class="zegel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.6l7.2 2.8v6.1c0 4.4-3 8.4-7.2 9.9-4.2-1.5-7.2-5.5-7.2-9.9V5.4z"/><path d="M8.7 12.1l2.3 2.3 4.3-4.6"/></svg></span><span class="tx"><b>100 dagen proberen</b><span>Niet goed? Geld terug.</span></span></div>
+      <div class="reveal"><span class="zegel"><b>2</b></span><span class="tx"><b>2 jaar garantie</b><span>Kwaliteit waarop je kunt vertrouwen.</span></span></div>
+      <div class="reveal"><span class="zegel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M1.9 6.2h12.2v9.4H1.9zM14.1 9.7h3.9l3.1 3.1v2.8h-7z"/><circle cx="6.6" cy="18" r="1.9"/><circle cx="17.3" cy="18" r="1.9"/></svg></span><span class="tx"><b>Morgen in huis</b><span>Vandaag besteld, morgen in huis.</span></span></div>
     </div>
   </div>
 </section>
@@ -292,7 +336,12 @@ strong{font-weight:700}
         <div class="mprom">Vergevend genoeg voor je gevoeligste plekken.</div>
         <div class="mprice"><span class="now">&euro;59,95</span><span class="was">&euro;85,65</span><span class="off">&minus;30%</span></div>
         <div class="mcta">In winkelwagen</div>
-        <div class="mrisk"><span><i></i>100 dagen</span><span><i></i>2 jaar garantie</span><span><i></i>Morgen in huis</span></div>
+        <div style="height:14px"></div>
+      </div>
+      <div class="strook" style="padding:14px 8px 16px">
+        <div class="reveal"><span class="zegel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.6l7.2 2.8v6.1c0 4.4-3 8.4-7.2 9.9-4.2-1.5-7.2-5.5-7.2-9.9V5.4z"/><path d="M8.7 12.1l2.3 2.3 4.3-4.6"/></svg></span><span class="tx"><b>100 dagen</b><span>Niet goed? Geld terug.</span></span></div>
+        <div class="reveal"><span class="zegel"><b>2</b></span><span class="tx"><b>2 jaar garantie</b><span>Op elk apparaat.</span></span></div>
+        <div class="reveal"><span class="zegel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M1.9 6.2h12.2v9.4H1.9zM14.1 9.7h3.9l3.1 3.1v2.8h-7z"/><circle cx="6.6" cy="18" r="1.9"/><circle cx="17.3" cy="18" r="1.9"/></svg></span><span class="tx"><b>Morgen in huis</b><span>Voor 23:59 besteld.</span></span></div>
       </div>
       <div class="mfold"><b>&darr; hier begint de vouw op een iPhone</b></div>
     </div>
@@ -345,9 +394,88 @@ strong{font-weight:700}
   </div>
 </section>
 
+
+<section>
+  <div class="shead"><span class="snum">BEWEGING</span><h2 class="duo">Twee soorten opvallen,<span class="b">allebei ingehouden.</span></h2></div>
+  <p class="sintro">Je merklaag is streng: geen parallax, geen oplopende tellers, niets dat bij elke scroll opnieuw speelt. Wat w&eacute;l mag is een onthulling van 0,6 seconde, &eacute;&eacute;n keer, met 16 pixels omhoog. Beide opties hieronder blijven daarbinnen.</p>
+
+  <div class="mo">
+    <div class="mo-box">
+      <div class="stage2">
+        <div class="strook" id="d1" style="border-top:0;padding:14px 8px 10px">
+          <div class="reveal"><span class="zegel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.6l7.2 2.8v6.1c0 4.4-3 8.4-7.2 9.9-4.2-1.5-7.2-5.5-7.2-9.9V5.4z"/><path d="M8.7 12.1l2.3 2.3 4.3-4.6"/></svg></span><span class="tx"><b>100 dagen</b><span>Niet goed? Geld terug.</span></span></div>
+          <div class="reveal"><span class="zegel"><b>2</b></span><span class="tx"><b>2 jaar garantie</b><span>Op elk apparaat.</span></span></div>
+          <div class="reveal"><span class="zegel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M1.9 6.2h12.2v9.4H1.9zM14.1 9.7h3.9l3.1 3.1v2.8h-7z"/><circle cx="6.6" cy="18" r="1.9"/><circle cx="17.3" cy="18" r="1.9"/></svg></span><span class="tx"><b>Morgen in huis</b><span>Voor 23:59 besteld.</span></span></div>
+        </div>
+      </div>
+      <div class="cap"><b>1 &mdash; Onthulling, gestaffeld</b><p><em>Staat al in de merklaag.</em> Opacity 0 naar 1 met 16px omhoog, 0,6s, per item 100ms later. Precies het patroon dat je homepage al gebruikt, alleen met een trap erin zodat het oog van links naar rechts loopt.</p></div>
+    </div>
+
+    <div class="mo-box">
+      <div class="stage2">
+        <div class="strook" id="d2" style="border-top:0;padding:14px 8px 10px">
+          <div class="reveal draw"><span class="zegel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.6l7.2 2.8v6.1c0 4.4-3 8.4-7.2 9.9-4.2-1.5-7.2-5.5-7.2-9.9V5.4z"/><path d="M8.7 12.1l2.3 2.3 4.3-4.6"/></svg></span><span class="tx"><b>100 dagen</b><span>Niet goed? Geld terug.</span></span></div>
+          <div class="reveal draw"><span class="zegel"><b>2</b></span><span class="tx"><b>2 jaar garantie</b><span>Op elk apparaat.</span></span></div>
+          <div class="reveal draw"><span class="zegel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M1.9 6.2h12.2v9.4H1.9zM14.1 9.7h3.9l3.1 3.1v2.8h-7z"/><circle cx="6.6" cy="18" r="1.9"/><circle cx="17.3" cy="18" r="1.9"/></svg></span><span class="tx"><b>Morgen in huis</b><span>Voor 23:59 besteld.</span></span></div>
+        </div>
+      </div>
+      <div class="cap"><b>2 &mdash; De lijn wordt getekend</b><p><em>Nieuw patroon.</em> Hetzelfde als 1, plus dat de icoonlijn zichzelf tekent in 0,85s en de gouden rand van het rondje daarna aanzet. Valt meer op, en het past bij dunne lijniconen. Kies je deze, dan hoort hij in de merklaag bijgeschreven te worden.</p></div>
+    </div>
+  </div>
+
+  <button class="replay" id="rp">&#8635;&nbsp; Speel allebei opnieuw af</button>
+
+  <div class="note warn">
+    <h4>Waar ik zou stoppen</h4>
+    <p>Alles wat verder gaat dan dit &mdash; kloppende rondjes, iconen die blijven bewegen, iets dat elke keer opnieuw speelt als je langs scrollt &mdash; staat op de verbodslijst in deel 10 van je merklaag. En terecht: dit is een garantiestrook, geen etalage. Hij moet opvallen op het moment dat je hem passeert en daarna stil zijn.</p>
+    <p>Allebei de opties zetten zichzelf uit bij <code>prefers-reduced-motion</code>, en tonen dan gewoon het eindbeeld.</p>
+  </div>
+</section>
+
 <div class="foot">
   <strong>Herkomst.</strong> Componentwaarden overgenomen uit <code>audits/blok-01-hero.template.html</code> en <code>theme/sections/</code> op de tak <code>claude/homepage-analysis-redesign-u38dwu</code>. Prijs &euro;59,95 en van-prijs &euro;85,65: Shopify Admin API. 4,6 en 442 reviews: <code>loox.avg_rating</code> en <code>loox.num_reviews</code> op dit product. 200.000+ bestellingen sinds 2021: bevestigd op de homepage-tak. Productbeeld: je eigen Shopify-CDN.<br><br>
   <strong>Waarom gesplitst.</strong> Je apparaten zijn zwart; op <code>#0B0B0A</code> zijn ze niet te zien. De hero op de homepage heeft dat probleem niet omdat die een fotografisch beeld met een model gebruikt. Door de grond te splitsen krijgt het beeld de lichte kant die het nodig heeft, en houdt het aanbod het donker dat de prijs en de gouden knop dragen &mdash; zonder dat er een kleur bij verzonnen wordt.
 </div>
 
 </div>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // padlengtes voor de tekenanimatie
+  document.querySelectorAll('.draw svg').forEach(function(svg){
+    svg.querySelectorAll('path,circle').forEach(function(el){
+      var L = 60;
+      try { L = Math.ceil(el.getTotalLength()) || 60; } catch(e){}
+      el.style.setProperty('--L', L);
+    });
+  });
+
+  var items = document.querySelectorAll('.reveal');
+  if (reduce) { items.forEach(function(el){ el.classList.add('in'); }); return; }
+
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+    });
+  }, { rootMargin: '0px 0px -12% 0px' });
+  items.forEach(function(el){ io.observe(el); });
+
+  // alleen in dit spec-document: opnieuw afspelen om te kunnen beoordelen
+  var btn = document.getElementById('rp');
+  if (btn) btn.addEventListener('click', function(){
+    ['d1','d2'].forEach(function(id){
+      var box = document.getElementById(id); if (!box) return;
+      box.querySelectorAll('.reveal').forEach(function(el){ el.classList.remove('in'); });
+    });
+    void document.body.offsetWidth;
+    setTimeout(function(){
+      ['d1','d2'].forEach(function(id){
+        var box = document.getElementById(id); if (!box) return;
+        box.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+      });
+    }, 60);
+  });
+})();
+</script>
