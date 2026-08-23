@@ -262,7 +262,7 @@ strong{font-weight:700}
   margin:26px 0 0;border-radius:var(--r-l);overflow:hidden;background:var(--v-cream);
   box-shadow:0 2px 4px rgba(17,17,17,.06),0 26px 60px -34px rgba(17,17,17,.55)}
 .v6 .w-tb1{background:linear-gradient(100deg,#F5DEAA,#EBC382 44%,#DDA548);
-  color:#3A2405;font-size:12px;font-weight:600;text-align:center;padding:11px 16px}
+  color:#3A2405;font-size:10.5px;font-weight:600;letter-spacing:.01em;text-align:center;padding:5px 16px}
 .v6 .w-tb1 u{text-decoration:underline;font-weight:800}
 .v6 .w-tb2{background:var(--v-zwart);color:rgba(255,255,255,.78);font-size:11.5px;text-align:center;padding:10px 16px}
 .v6 .w-nv{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:15px 26px;background:#fff}
@@ -374,8 +374,11 @@ strong{font-weight:700}
 .v6 .w-usp b{display:block;font-size:14px;font-weight:700;color:#fff;line-height:1.3}
 .v6 .w-usp span{display:block;font-size:12.5px;color:var(--v-w52);line-height:1.35;margin-top:2px}
 
-.v6 .w-vrd{display:flex;align-items:flex-start;gap:9px;margin-top:15px;font-size:12.5px;
-  line-height:1.45;color:var(--v-w52)}
+/* levering: een eigen blokje, direct onder de knop. Neutraal omlijnd, want
+   goud is van het aanbod en dit is een geruststelling. */
+.v6 .w-vrd{display:flex;align-items:flex-start;gap:10px;margin-top:11px;font-size:12px;
+  line-height:1.45;color:var(--v-w52);border:1px solid rgba(255,255,255,.13);border-radius:10px;
+  background:rgba(255,255,255,.04);padding:10px 14px}
 .v6 .w-vrd span{min-width:0}
 .v6 .w-vrd i{width:8px;height:8px;border-radius:50%;background:#22C55E;flex:none;margin-top:5px;
   box-shadow:0 0 0 3px rgba(34,197,94,.18)}
@@ -467,7 +470,7 @@ strong{font-weight:700}
 .p6 .m-bar{height:24px;display:flex;align-items:center;justify-content:center;background:#fff}
 .p6 .m-bar u{width:74px;height:4px;border-radius:100px;background:rgba(17,17,17,.18);text-decoration:none}
 .p6 .m-top{background:linear-gradient(100deg,#F5DEAA,#EBC382 44%,#DDA548);color:#3A2405;
-  font-size:9px;font-weight:700;text-align:center;padding:7px}
+  font-size:8px;font-weight:700;text-align:center;padding:3px}
 .p6 .m-nav{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:#fff;
   font-size:9.5px;font-weight:600;color:var(--ink-60)}
 .p6 .m-nav .m-lg{font-weight:900;font-size:13px;letter-spacing:.02em;color:var(--ink)}
@@ -481,7 +484,7 @@ strong{font-weight:700}
   background:linear-gradient(150deg,#C9A15C 0%,#8C6A2A 55%,#6E5220 100%);
   -webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
   -webkit-mask-position:center;mask-position:center}
-.p6 .m-plaat img.m-hoofd{position:relative;z-index:2;display:block;width:100%;aspect-ratio:1/.54;
+.p6 .m-plaat img.m-hoofd{position:relative;z-index:2;display:block;width:100%;aspect-ratio:1/.50;
   object-fit:contain;mix-blend-mode:multiply}
 .p6 .m-tag{position:absolute;top:10px;left:10px;z-index:3;background:#111;color:#fff;font-size:7.5px;
   font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:6px 11px;border-radius:100px}
@@ -506,9 +509,9 @@ strong{font-weight:700}
 .p6 .m-tp .w-st svg{width:8.5px;height:8.5px;fill:#fff}
 .p6 .m-tp b{font-size:10px;font-weight:700;color:#fff}
 .p6 .m-tp span{font-size:10px;color:var(--v-w52);font-weight:600}
-.p6 h3{margin:7px 0 0;font-size:21px;font-weight:800;letter-spacing:-.03em;color:#fff;line-height:1.06}
+.p6 h3{margin:6px 0 0;font-size:21px;font-weight:800;letter-spacing:-.03em;color:#fff;line-height:1.06}
 .p6 .m-sub{font-size:15px;font-weight:800;letter-spacing:-.02em;line-height:1.2;margin-top:6px;color:var(--v-tekstgoud)}
-.p6 .m-prijs{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;margin-top:9px}
+.p6 .m-prijs{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;margin-top:8px}
 .p6 .m-prijs .m-nu{font-size:27px;font-weight:900;letter-spacing:-.035em;color:#fff;line-height:1}
 .p6 .m-prijs .m-was{font-size:13px;color:var(--v-w38);text-decoration:line-through;font-weight:600}
 .p6 .m-prijs .m-off{background:var(--v-rood);color:#fff;font-size:9.5px;font-weight:800;padding:4px 8px;border-radius:6px}
@@ -516,17 +519,17 @@ strong{font-weight:700}
   border:1px solid rgba(233,190,114,.5);border-radius:8px;background:rgba(233,190,114,.07)}
 .p6 .m-besp svg{width:12px;height:12px;color:var(--v-gold3)}
 .p6 .m-besp span{font-size:10.5px;font-weight:700;color:var(--v-gold3)}
-.p6 .m-gift{display:flex;align-items:center;gap:9px;margin-top:9px;padding:8px 12px 8px 9px;
+.p6 .m-gift{display:flex;align-items:center;gap:9px;margin-top:8px;padding:8px 12px 8px 9px;
   border:1px solid rgba(233,190,114,.5);border-radius:11px;background:rgba(233,190,114,.07)}
 .p6 .m-gift .m-ic{width:24px;height:24px;flex:none;border-radius:50%;background:rgba(233,190,114,.14);
   display:flex;align-items:center;justify-content:center;color:var(--v-gold3)}
 .p6 .m-gift .m-ic svg{width:13px;height:13px}
 .p6 .m-gift b{display:block;font-size:10.5px;font-weight:800;color:var(--v-gold3);line-height:1.28}
 .p6 .m-gift span{display:block;font-size:9px;font-weight:600;color:var(--v-w38);line-height:1.3;margin-top:1px}
-.p6 .m-cta{display:flex;align-items:center;justify-content:center;width:100%;margin-top:10px;
+.p6 .m-cta{display:flex;align-items:center;justify-content:center;width:100%;margin-top:9px;
   background:linear-gradient(100deg,#F5DEAA,#EBC382 46%,#DDA548);color:#26170A;border-radius:10px;
-  padding:15px;font-size:11.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
-.p6 .m-pay{display:flex;align-items:center;justify-content:center;gap:7px;flex-wrap:wrap;margin-top:10px}
+  padding:14px;font-size:11.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
+.p6 .m-pay{display:flex;align-items:center;justify-content:center;gap:7px;flex-wrap:wrap;margin-top:9px}
 .p6 .m-pay .w-mk{height:19px;display:flex;align-items:center;justify-content:center;padding:0 6px;
   background:#fff;border-radius:4px}
 .p6 .m-pay .w-mk svg{display:block;max-width:30px;height:auto}
@@ -552,14 +555,15 @@ strong{font-weight:700}
 .p6 .m-rev .m-wie{display:block;margin-top:5px;font-size:9.5px;color:var(--v-w52)}
 .p6 .m-rev .m-wie b{color:#fff;font-weight:700}
 /* boven de knop, een regel per punt: in een oogopslag te lezen */
-.p6 .m-usp{list-style:none;margin:11px 0 0;padding:0;display:flex;flex-direction:column;gap:7px}
+.p6 .m-usp{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
 .p6 .m-usp li{display:grid;grid-template-columns:17px minmax(0,1fr);gap:8px;align-items:center}
 .p6 .m-usp .m-vk{width:17px;height:17px;border-radius:50%;border:1.3px solid rgba(233,190,114,.55);
   display:flex;align-items:center;justify-content:center}
 .p6 .m-usp .m-vk svg{width:9px;height:9px}
 .p6 .m-usp li > span{font-size:11.5px;line-height:1.32;color:var(--v-w52)}
 .p6 .m-usp b{font-weight:700;color:#fff}
-.p6 .m-vrd{display:flex;align-items:flex-start;gap:8px;margin-top:11px;font-size:10.5px;
+.p6 .m-vrd{display:flex;align-items:flex-start;gap:8px;margin-top:9px;font-size:10px;
+  border:1px solid rgba(255,255,255,.13);border-radius:9px;background:rgba(255,255,255,.04);padding:8px 11px;
   line-height:1.42;color:var(--v-w52)}
 .p6 .m-vrd i{width:7px;height:7px;border-radius:50%;background:#22C55E;flex:none;margin-top:4px;
   box-shadow:0 0 0 3px rgba(34,197,94,.18)}
@@ -698,12 +702,12 @@ strong{font-weight:700}
         <li><span class="w-vk"><svg viewBox="0 0 12 12" fill="none" stroke="#EBC77E" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2 4.7 8.9 10 3.3"/></svg></span><span><b>Trimmen &eacute;n glad afwerken</b><span>inclusief losse foil-kop</span></span></li>
       </ul>
 
-      <div class="w-vrd"><i></i><span><b>Op voorraad</b> &middot; vandaag v&oacute;&oacute;r 23:59 besteld, morgen in huis</span></div>
 
       <div class="w-gift"><span class="w-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.6 11.6h16.8v8.8H3.6z"/><path d="M2.4 7.6h19.2v4H2.4zM12 7.6v12.8"/><path d="M12 7.6S10.7 3.2 8.4 3.2a2.2 2.2 0 0 0 0 4.4zM12 7.6s1.3-4.4 3.6-4.4a2.2 2.2 0 0 1 0 4.4z"/></svg></span><span><b>Gratis Groom Guard&trade; Blade t.w.v. &euro;14,95</b><span>Wordt vanzelf meegeleverd &middot; zolang de voorraad strekt</span></span></div>
 
       <div class="w-cta">In winkelwagen &nbsp;&mdash;&nbsp; &euro;59,95</div>
 
+      <div class="w-vrd"><i></i><span><b>Op voorraad</b> &middot; vandaag v&oacute;&oacute;r 23:59 besteld, morgen in huis</span></div>
       <div class="w-pay"><span class="w-mk w-ideal"><svg width="34" height="15" viewBox="0 0 34 15"><rect width="34" height="15" rx="2" fill="#fff"/><path d="M3 3.2h4.4c3.3 0 5.4 1.9 5.4 4.3S10.7 11.8 7.4 11.8H3z" fill="#CC0066"/><text x="14" y="10.6" font-family="Montserrat,Arial" font-size="7.2" font-weight="800" fill="#000">DEAL</text></svg></span><span class="w-mk"><svg width="42" height="14" viewBox="0 0 42 14"><rect width="42" height="14" rx="2" fill="#fff"/><text x="21" y="10.6" text-anchor="middle" font-family="Montserrat,Arial" font-size="9.4" font-weight="800" fill="#0B051D">Klarna</text></svg></span><span class="w-mk"><svg width="30" height="18" viewBox="0 0 30 18"><rect width="30" height="18" rx="2" fill="#fff"/><circle cx="12" cy="9" r="5.6" fill="#EB001B"/><circle cx="18" cy="9" r="5.6" fill="#F79E1B"/><path d="M15 4.6a5.6 5.6 0 0 0 0 8.8 5.6 5.6 0 0 0 0-8.8z" fill="#FF5F00"/></svg></span><span class="w-mk"><svg width="36" height="14" viewBox="0 0 36 14"><rect width="36" height="14" rx="2" fill="#fff"/><text x="18" y="10.8" text-anchor="middle" font-family="Montserrat,Arial" font-size="9.6" font-weight="900" font-style="italic" fill="#1A1F71" letter-spacing=".5">VISA</text></svg></span><span class="w-sep"></span><span class="w-vl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4.2" y="10.4" width="15.6" height="10.4" rx="2.2"/><path d="M8 10.4V7.6a4 4 0 0 1 8 0v2.8"/></svg>Veilig afrekenen</span></div>
 
       <div class="w-cta2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect class="vgl-a" x="2.6" y="9.4" width="7.2" height="11.4" rx="1.6"/><rect x="14.2" y="3.2" width="7.2" height="17.6" rx="1.6"/><path d="M12 3.2v17.6" stroke-dasharray="2.6 2.6" opacity=".5"/></svg>Vergelijk de modellen</div>
@@ -761,6 +765,7 @@ strong{font-weight:700}
         </ul>
         <div class="m-gift"><span class="m-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.6 11.6h16.8v8.8H3.6z"/><path d="M2.4 7.6h19.2v4H2.4zM12 7.6v12.8"/><path d="M12 7.6S10.7 3.2 8.4 3.2a2.2 2.2 0 0 0 0 4.4zM12 7.6s1.3-4.4 3.6-4.4a2.2 2.2 0 0 1 0 4.4z"/></svg></span><span><b>Gratis Groom Guard&trade; Blade t.w.v. &euro;14,95</b><span>Wordt vanzelf meegeleverd</span></span></div>
         <div class="m-cta">In winkelwagen &mdash; &euro;59,95</div>
+        <div class="m-vrd"><i></i><span><b>Op voorraad</b> &middot; vandaag v&oacute;&oacute;r 23:59 besteld, morgen in huis</span></div>
         <div class="m-pay"><span class="w-mk w-ideal"><svg width="34" height="15" viewBox="0 0 34 15"><rect width="34" height="15" rx="2" fill="#fff"/><path d="M3 3.2h4.4c3.3 0 5.4 1.9 5.4 4.3S10.7 11.8 7.4 11.8H3z" fill="#CC0066"/><text x="14" y="10.6" font-family="Montserrat,Arial" font-size="7.2" font-weight="800" fill="#000">DEAL</text></svg></span><span class="w-mk"><svg width="42" height="14" viewBox="0 0 42 14"><rect width="42" height="14" rx="2" fill="#fff"/><text x="21" y="10.6" text-anchor="middle" font-family="Montserrat,Arial" font-size="9.4" font-weight="800" fill="#0B051D">Klarna</text></svg></span><span class="w-mk"><svg width="30" height="18" viewBox="0 0 30 18"><rect width="30" height="18" rx="2" fill="#fff"/><circle cx="12" cy="9" r="5.6" fill="#EB001B"/><circle cx="18" cy="9" r="5.6" fill="#F79E1B"/><path d="M15 4.6a5.6 5.6 0 0 0 0 8.8 5.6 5.6 0 0 0 0-8.8z" fill="#FF5F00"/></svg></span><span class="w-mk"><svg width="36" height="14" viewBox="0 0 36 14"><rect width="36" height="14" rx="2" fill="#fff"/><text x="18" y="10.8" text-anchor="middle" font-family="Montserrat,Arial" font-size="9.6" font-weight="900" font-style="italic" fill="#1A1F71" letter-spacing=".5">VISA</text></svg></span><span class="w-sep"></span><span class="w-vl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4.2" y="10.4" width="15.6" height="10.4" rx="2.2"/><path d="M8 10.4V7.6a4 4 0 0 1 8 0v2.8"/></svg>Veilig afrekenen</span></div>
 
         <div class="m-onder">
@@ -773,7 +778,6 @@ strong{font-weight:700}
             <q>Erg fijne trimmer die z&rsquo;n werk goed doet (&hellip;) zeker een aanrader dus als je zonder pijn en gedoe je lichaamshaar wil verwijderen!</q>
             <span class="m-wie"><b>Yven</b> &middot; 8 juli 2026</span>
           </div>
-          <div class="m-vrd"><i></i><span><b>Op voorraad</b> &middot; vandaag v&oacute;&oacute;r 23:59 besteld, morgen in huis</span></div>
           <div class="m-cta2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect class="vgl-a" x="2.6" y="9.4" width="7.2" height="11.4" rx="1.6"/><rect x="14.2" y="3.2" width="7.2" height="17.6" rx="1.6"/><path d="M12 3.2v17.6" stroke-dasharray="2.6 2.6" opacity=".5"/></svg>Vergelijk de modellen</div>
           <div class="m-tel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M2.8 19.6c.9-3 3.2-4.8 6.2-4.8s5.3 1.8 6.2 4.8"/><path d="M16.4 5.2a3.2 3.2 0 0 1 0 5.6M18.2 19.6c-.3-1.3-.8-2.4-1.5-3.3"/></svg><span>Al door <b>200.000+</b> mannen gekozen</span></div>
         </div>
@@ -788,18 +792,18 @@ strong{font-weight:700}
     </div>
     <div>
       <ul class="why">
-        <li><span class="n">01</span><div><b>Alles staat boven de vouw, de knop incluis</b><p>Gemeten, niet geschat: de vouwlijn ligt op 769px &mdash; 745 pixels zichtbare pagina op een iPhone 14 in Safari, plus de browserrand. De vinkjes lopen van 564 tot 629, de cadeaubalk van 638 tot 683, en de koopknop van 693 tot 743. Dat is <strong>26 pixels marge</strong>. De betaalrij begint op 753 en wordt half afgesneden; dat is precies goed, want een half zichtbare rij nodigt uit om te scrollen.</p></div></li>
+        <li><span class="n">01</span><div><b>Alles staat boven de vouw, tot en met de levering</b><p>Gemeten, niet geschat: de vouwlijn ligt op 769px &mdash; 745 pixels zichtbare pagina op een iPhone 14 in Safari, plus de browserrand. De vinkjes lopen van 537 tot 600, de cadeaubalk van 608 tot 653, de koopknop van 662 tot 710 en het leverblokje van 719 tot 751. Dat is <strong>18 pixels marge</strong>. De betaalrij begint op 760 en wordt half afgesneden; dat is precies goed, want een half zichtbare rij nodigt uit om te scrollen.</p></div></li>
         <li><span class="n">02</span><div><b>De vinkjes zijn &eacute;&eacute;nregelig geworden</b><p>Op desktop staan ze op twee regels: een vette kop met een uitleg eronder. Dat kost hier te veel hoogte en het leest ook niet sneller. Nu is het &eacute;&eacute;n regel per punt, met het voordeel vet vooraan en het bewijs erachter &mdash; <em>&laquo;Geen sneetjes &mdash; ook op je gevoeligste plekken&raquo;</em>. Drie regels, drie seconden.</p></div></li>
         <li><span class="n">03</span><div><b>De besparingspil is hier weg</b><p>&laquo;Je bespaart &euro;25,70&raquo; was op deze telefoonhoogte de <strong>derde</strong> keer dat dezelfde korting er stond &mdash; na &laquo;Bespaar 30%&raquo; in de pil en &laquo;&minus;30%&raquo; naast de prijs. Hij kostte 34 pixels die de vinkjes nu gebruiken. De cadeaubalk bleef w&eacute;l staan: die zegt iets anders, en hij is het enige dat per product verschilt.</p></div></li>
-        <li><span class="n">04</span><div><b>De aanwijzers vallen weg</b><p>De haaklijntjes naar de keramische kop en de foil-kop staan op desktop naast de foto. Op 390 pixels is daar geen ruimte voor zonder over het product heen te lopen, dus ze verdwijnen onder de 1000 pixels. De foto zelf blijft hetzelfde.</p></div></li>
-        <li><span class="n">05</span><div><b>De garantiestrook blijft vier kolommen</b><p>Icoon boven de tekst, vier naast elkaar, ook op de smalste telefoon. Twee rijen van twee zou een halve schermhoogte kosten en de vouw nog verder omhoog duwen.</p></div></li>
+        <li><span class="n">04</span><div><b>De campagnebalk is half zo hoog</b><p>&laquo;Summer Deals tot 40%&raquo; stond op 30 pixels. Hij valt met dat gouden verloop over de volle breedte toch wel op, en hij is niet waar iemand voor kwam. Nu 20 pixels, en die tien gingen naar het leverblokje. Zelfde ingreep op desktop: van 40 naar 24.</p></div></li>
+        <li><span class="n">05</span><div><b>Het leverblokje staat onder de knop, op beide schermen</b><p>Een omlijnd blokje met een groen stipje: <em>&laquo;Op voorraad &middot; vandaag v&oacute;&oacute;r 23:59 besteld, morgen in huis&raquo;</em>. Neutraal omlijnd en niet goud, want goud is van het aanbod en dit is een geruststelling. Op desktop stond hij eerst b&oacute;ven de cadeaubalk; hij staat nu op beide schermen op dezelfde plek, zodat het &eacute;&eacute;n slot blijft. Direct na de beslissing, v&oacute;&oacute;r het betalen &mdash; daar hoort levertijd.</p></div></li>
       </ul>
     </div>
   </div>
 
   <div class="note win">
     <h4>Wat je boven de vouw krijgt, in de volgorde waarin je het leest</h4>
-    <p><strong>Deal &rarr; wie zegt dat &rarr; wat het is &rarr; wat het doet &rarr; wat het kost &rarr; waarom &rarr; wat je erbij krijgt &rarr; kopen.</strong> Acht stappen, geen ervan overslaanbaar, allemaal binnen 769 pixels. De drie vinkjes zitten er precies tussen de prijs en de knop: op het moment dat iemand de prijs ziet, staat de reden er direct onder.</p>
+    <p><strong>Deal &rarr; wie zegt dat &rarr; wat het is &rarr; wat het doet &rarr; wat het kost &rarr; waarom &rarr; wat je erbij krijgt &rarr; kopen &rarr; wanneer het er is.</strong> Negen stappen, geen ervan overslaanbaar, allemaal binnen 769 pixels. De drie vinkjes zitten precies tussen de prijs en de knop: op het moment dat iemand de prijs ziet, staat de reden er direct onder. En het laatste wat je boven de vouw leest is dat het morgen in huis is.</p>
     <p>Wat op mobiel onder de knop staat is de <em>onderbouwing</em>, niet het argument: de uitgeschreven belofte, het Trustpilot-kaartje met de review van Yven, de voorraadregel, de vergelijkknop en de telling. Wie doorscrolt wil bevestiging; wie niet doorscrolt heeft alles al gezien. Op desktop is er ruimte om die onderbouwing w&eacute;l boven de prijs te zetten, en daar staat hij dus.</p>
   </div>
 </section>
