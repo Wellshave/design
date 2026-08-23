@@ -121,7 +121,7 @@ strong{font-weight:700}
     <div class="rule"><span class="n">1</span><div><b>De volgorde ligt vast en wordt nooit herschikt</b><p>Blok 07 staat op elk product op plek 07. Een bezoeker die van de Groom Guard naar de Flex Guard klikt, krijgt hetzelfde betoog in dezelfde volgorde. Dat is wat &laquo;dezelfde structuur&raquo; betekent en het is niet onderhandelbaar per product.</p></div></div>
     <div class="rule"><span class="n">2</span><div><b>Structuur zit in het sjabloon, inhoud in de metafields</b><p>Geen enkele tekst, prijs of afbeelding staat in de themacode. Alles komt uit een veld op het product. Dat is de enige manier waarop dertig pagina's van &eacute;&eacute;n wijziging kunnen profiteren.</p></div></div>
     <div class="rule"><span class="n">3</span><div><b>Kernblokken zijn verplicht, uitbreidingen verbergen zich</b><p>Kernblokken dragen het betoog: zonder die blokken is de pagina stuk. Hun velden m&oacute;&eacute;ten gevuld zijn. Uitbreidingen zijn productspecifiek; is het veld leeg, dan valt het blok weg &mdash; maar de blokken eromheen schuiven niet op. Zie deel 03 voor welk blok wat is.</p></div></div>
-    <div class="rule"><span class="n">4</span><div><b>Nooit een prijs of aantal in een tekstveld</b><p>Overgenomen uit de homepage-tak, waar deze regel al geldt. Prijs, van-prijs, voorraad, reviewscore en aantal komen live uit het product en uit Loox. Een ingetypt cijfer is hoe je aan drie verschillende reviewaantallen komt.</p></div></div>
+    <div class="rule"><span class="n">4</span><div><b>Nooit een prijs of aantal in een tekstveld</b><p>Overgenomen uit de homepage-tak, waar deze regel al geldt. Prijs, van-prijs, voorraad, reviewscore en aantal komen live uit het product en uit Trustpilot. Een ingetypt cijfer is hoe je aan drie verschillende reviewaantallen komt.</p></div></div>
   </div>
 </section>
 
@@ -170,7 +170,7 @@ strong{font-weight:700}
         <tr class="fold"><td colspan="7">Onder de vouw</td></tr>
         <tr><td class="i">02</td><td><b>Geruststrook</b></td><td>Vier items naast elkaar, rond icoonvlak, vette regel plus onderregel</td><td>Niets &mdash; winkelbreed en identiek</td><td><code>custom.store_usp</code></td><td><span class="pill kern">kern</span></td><td class="g wit">wit</td></tr>
         <tr><td class="i">03</td><td><b>Het aanbodblok</b><br>drie kaarten</td><td>Drie kaarten, nooit meer, nooit als lijst. Instap / uitgelicht / beste waarde. Besparing op elke kaart.</td><td>Welke drie producten de ladder vormen</td><td><code>custom.upgrade_products</code><br>live prijzen</td><td><span class="pill kern">kern</span></td><td class="g donker">donker</td></tr>
-        <tr><td class="i">04</td><td><b>Bewijs met foto's</b></td><td>Muur van reviews, geen carrousel. Score en aantal live gebonden.</td><td>De reviews zelf</td><td><code>loox.reviews</code><br><code>loox.avg_rating</code></td><td><span class="pill kern">kern</span></td><td class="g wit">wit</td></tr>
+        <tr><td class="i">04</td><td><b>Bewijs</b></td><td>Muur van reviews, geen carrousel. Score en aantal live gebonden. Zonder foto's — die heeft Trustpilot niet.</td><td>Niets — winkelbreed</td><td>Trustpilot-widget</td><td><span class="pill kern">kern</span></td><td class="g wit">wit</td></tr>
         <tr><td class="i">05</td><td><b>Waarom dit werkt</b><br>mechanisme</td><td>Herkadering eerst, techniek daarna. Beeld links, betoog rechts.</td><td>Het mechanisme van dit product</td><td><code>custom.image_with_text</code></td><td><span class="pill kern">kern</span></td><td class="g donker">donker</td></tr>
         <tr><td class="i">06</td><td><b>Toepassing per zone</b></td><td>Rooster van zones met beeld per zone</td><td>Welke zones dit product aankan</td><td><code>custom.use_case_title</code><br><code>custom.image_with_text</code></td><td><span class="pill uit">uitbreiding</span></td><td class="g zand">zand</td></tr>
         <tr><td class="i">07</td><td><b>Zie waar je trimt</b></td><td>E&eacute;n beeld, &eacute;&eacute;n claim, volle breedte</td><td>De functie die dit product onderscheidt</td><td><code>custom.image_with_text</code></td><td><span class="pill uit">uitbreiding</span></td><td class="g zand">zand</td></tr>
@@ -233,7 +233,7 @@ strong{font-weight:700}
           <li>Duits uit <code>global.description_tag</code> van de PRO</li>
           <li>Lorem ipsum-blok uitzetten, <code>EMPTY DOM REMOVE PROTECTOR</code> weg</li>
           <li>&laquo;levenslang jaar garantie&raquo; in de winkelwagen</li>
-          <li>Judge.me en Shopify-reviews eruit, alleen Loox houden</li>
+          <li>Judge.me, Shopify-reviews &eacute;n Loox eruit &mdash; alleen Trustpilot houden</li>
           <li>Alt-teksten op alle productmedia</li>
           <li><strong>Mesjes-driepak van &euro;24,95 naar &euro;19,95</strong>, met een jaar in de naam &mdash; beide concurrenten zitten daar</li>
         </ul>
@@ -290,7 +290,7 @@ strong{font-weight:700}
   <div class="note warn">
     <h4>Drie dingen waar ik geen data voor heb</h4>
     <p><strong>Scrolldiepte.</strong> De volgorde in deel 03 rust op de concurrentievergelijking, de PDP-anatomie uit de skill en je eigen VoC-dossier &mdash; niet op hoe ver jouw bezoekers werkelijk scrollen. Dat cijfer zit in Clarity en is vanuit deze sessie niet te bereiken. Het zou de volgorde bevestigen of bijstellen, niet omgooien.</p>
-    <p><strong>Het klantcitaat in slot 1.</strong> Nog een voorbeeldzin. De echte staan in <code>loox.reviews</code> &mdash; 27.534 tekens op de PRO, 17.866 op de basis. Zeg het en ik haal ze eruit.</p>
+    <p><strong>Het klantcitaat in slot 1.</strong> Voor de Groom Guard staat er een echte in blok 01 (Yven, vijf sterren op Trustpilot, 8 juli 2026). Voor de rest van het assortiment moet dit per product langs: van de honderd recentste Nederlandse Trustpilot-reviews gaan er vijf over het product zelf, de rest over levering en service. Waar geen productreview bestaat, blijft slot 1 leeg.</p>
     <p><strong>De &euro;52,85 besparing</strong> uit deel 05 van de audit komt nergens op uit. Tot iemand de bron aanwijst, staat er op de bundelkaart wat ik w&eacute;l kan narekenen: minstens &euro;9,90.</p>
   </div>
 
@@ -302,7 +302,7 @@ strong{font-weight:700}
 
 <div class="foot">
   <strong>Waar dit vandaan komt.</strong> Blokvolgorde en koopblok: <code>rapporten/pdp-sjabloon.html</code> en <code>rapporten/blokken/01-above-the-fold.html</code>. Bevindingen op de live pagina: <code>rapporten/productpagina-redesign.html</code>. Concurrentie: <code>rapporten/concurrentie-aanbod-en-ads.html</code> plus <code>audits/concurrentie-analyse.html</code> op de homepage-tak. Themaconventies: <code>theme/README.md</code>, ook op de homepage-tak.<br><br>
-  <strong>Cijfers.</strong> Prijzen, varianten, voorraad, productType en metafields: Shopify Admin API, 23 augustus 2026. Omzet en bestellingen: Shopify-analytics, 90 dagen. Reviewscores: <code>loox.avg_rating</code> en <code>loox.num_reviews</code> per product. Concurrentiecijfers: TrendTrack, 23 augustus 2026.
+  <strong>Cijfers.</strong> Prijzen, varianten, voorraad, productType en metafields: Shopify Admin API, 23 augustus 2026. Omzet en bestellingen: Shopify-analytics, 90 dagen. Reviewscore en -aantal: Trustpilot &mdash; TrustScore 4,4 &middot; 966 reviews, opgehaald 23 augustus 2026. Concurrentiecijfers: TrendTrack, 23 augustus 2026.
 </div>
 
 </div>
