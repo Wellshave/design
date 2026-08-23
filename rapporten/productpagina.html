@@ -489,8 +489,10 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
 #deel-boven .v6 .w-usp .w-vk svg{width:10px;height:10px}
 #deel-boven .v6 .w-usp b{display:block;font-size:14px;font-weight:700;color:#fff;line-height:1.3}
 #deel-boven .v6 .w-usp span{display:block;font-size:12.5px;color:var(--v-w52);line-height:1.35;margin-top:2px}
-#deel-boven .v6 .w-vrd{display:flex;align-items:center;gap:9px;margin-top:15px;font-size:12.5px;color:var(--v-w52)}
-#deel-boven .v6 .w-vrd i{width:8px;height:8px;border-radius:50%;background:#22C55E;flex:none;
+#deel-boven .v6 .w-vrd{display:flex;align-items:flex-start;gap:9px;margin-top:15px;font-size:12.5px;
+  line-height:1.45;color:var(--v-w52)}
+#deel-boven .v6 .w-vrd span{min-width:0}
+#deel-boven .v6 .w-vrd i{width:8px;height:8px;border-radius:50%;background:#22C55E;flex:none;margin-top:5px;
   box-shadow:0 0 0 3px rgba(34,197,94,.18)}
 #deel-boven .v6 .w-vrd b{color:#fff;font-weight:700}
 #deel-boven .v6 .w-gift{display:flex;align-items:center;gap:12px;margin-top:15px;padding:11px 16px 11px 12px;
@@ -502,10 +504,13 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
 #deel-boven .v6 .w-gift span{display:block;font-size:11px;font-weight:600;color:var(--v-w38);line-height:1.35;margin-top:2px}
 #deel-boven .v6 .w-cta{display:flex;align-items:center;justify-content:center;width:100%;margin-top:15px;
   background:linear-gradient(100deg,#F5DEAA,#EBC382 46%,#DDA548);color:#26170A;border:0;border-radius:11px;
-  padding:19px;font-family:inherit;font-size:14px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
-#deel-boven .v6 .w-cta2{display:flex;align-items:center;justify-content:center;width:100%;margin-top:11px;
+  padding:19px;font-family:inherit;font-size:14px;font-weight:800;letter-spacing:.1em;
+  text-transform:uppercase;text-align:center;white-space:nowrap}
+#deel-boven .v6 .w-cta2{display:flex;align-items:center;justify-content:center;gap:11px;width:100%;margin-top:11px;
   border:1px solid var(--v-lijn2);border-radius:11px;padding:16px;color:#fff;
   font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+#deel-boven .v6 .w-cta2 svg{width:17px;height:17px;flex:none;color:var(--v-gold3)}
+#deel-boven .v6 .w-cta2 svg .vgl-a{opacity:.55}
 #deel-boven .v6 .w-pay{display:flex;align-items:center;gap:11px;flex-wrap:wrap;margin-top:13px}
 #deel-boven .v6 .w-pay .w-mk{height:23px;display:flex;align-items:center;justify-content:center;padding:0 7px;
   background:#fff;border-radius:4px;min-width:37px}
@@ -528,10 +533,24 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
 #deel-boven .v6 .w-strk b{display:block;font-size:11px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;color:var(--v-gold3)}
 #deel-boven .v6 .w-strk span{display:block;font-size:11.5px;color:var(--v-w38);line-height:1.35;margin-top:3px}
 @media (max-width:1000px){#deel-boven .v6 .w-pdp{grid-template-columns:1fr}
-#deel-boven .v6 .w-strk{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 0}
-#deel-boven .v6 .w-strk > div:nth-child(3){border-left:0}
-#deel-boven .v6 .w-bij{display:none}
-#deel-boven .v6 .w-wijzers{display:none}}
+#deel-boven .v6 .w-bij{display:none}}
+@media (max-width:880px){#deel-boven .v6 .w-strk{padding:20px 8px}
+#deel-boven .v6 .w-strk > div{flex-direction:column;text-align:center;gap:9px;padding:0 7px}
+#deel-boven .v6 .w-strk .w-zg{width:36px;height:36px;border-radius:10px}
+#deel-boven .v6 .w-strk .w-zg svg{width:16px;height:16px}
+#deel-boven .v6 .w-strk b{font-size:9px;letter-spacing:.07em;line-height:1.25}
+#deel-boven .v6 .w-strk span{font-size:9.5px;line-height:1.3;margin-top:3px}
+#deel-boven .v6 .w-pay{justify-content:center;gap:8px 10px}
+#deel-boven .v6 .w-pay .w-sep{display:none}
+#deel-boven .v6 .w-pay .w-vl{flex-basis:100%;justify-content:center;margin-top:2px}}
+@media (max-width:560px){#deel-boven .v6 .w-cta{font-size:12px;letter-spacing:.05em;padding:17px 10px}
+#deel-boven .v6 .w-cta2{font-size:10.5px;letter-spacing:.07em;gap:9px;padding:15px 10px}
+#deel-boven .v6 .w-strk{padding:18px 10px}
+#deel-boven .v6 .w-strk > div{padding:0 4px;gap:7px}
+#deel-boven .v6 .w-strk .w-zg{width:32px;height:32px;border-radius:9px}
+#deel-boven .v6 .w-strk .w-zg svg{width:14px;height:14px}
+#deel-boven .v6 .w-strk b{font-size:8px;letter-spacing:.05em}
+#deel-boven .v6 .w-strk span{font-size:8.5px;line-height:1.28}}
 #deel-boven .reveal{opacity:0;transform:translateY(16px);
   transition:opacity .6s cubic-bezier(.22,.61,.36,1),transform .6s cubic-bezier(.22,.61,.36,1)}
 #deel-boven .reveal.in{opacity:1;transform:none}
@@ -1178,7 +1197,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
         <li><span class="w-vk"><svg viewBox="0 0 12 12" fill="none" stroke="#EBC77E" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2 4.7 8.9 10 3.3"/></svg></span><span><b>Trimmen &eacute;n glad afwerken</b><span>inclusief losse foil-kop</span></span></li>
       </ul>
 
-      <div class="w-vrd"><i></i><b>Op voorraad</b> &middot; vandaag v&oacute;&oacute;r 23:59 besteld, morgen in huis</div>
+      <div class="w-vrd"><i></i><span><b>Op voorraad</b> &middot; vandaag v&oacute;&oacute;r 23:59 besteld, morgen in huis</span></div>
 
       <div class="w-gift"><span class="w-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.6 11.6h16.8v8.8H3.6z"/><path d="M2.4 7.6h19.2v4H2.4zM12 7.6v12.8"/><path d="M12 7.6S10.7 3.2 8.4 3.2a2.2 2.2 0 0 0 0 4.4zM12 7.6s1.3-4.4 3.6-4.4a2.2 2.2 0 0 1 0 4.4z"/></svg></span><span><b>Gratis Groom Guard&trade; Blade t.w.v. &euro;14,95</b><span>Wordt vanzelf meegeleverd &middot; zolang de voorraad strekt</span></span></div>
 
@@ -1186,7 +1205,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
 
       <div class="w-pay"><span class="w-mk w-ideal"><svg width="34" height="15" viewBox="0 0 34 15"><rect width="34" height="15" rx="2" fill="#fff"/><path d="M3 3.2h4.4c3.3 0 5.4 1.9 5.4 4.3S10.7 11.8 7.4 11.8H3z" fill="#CC0066"/><text x="14" y="10.6" font-family="Montserrat,Arial" font-size="7.2" font-weight="800" fill="#000">DEAL</text></svg></span><span class="w-mk"><svg width="42" height="14" viewBox="0 0 42 14"><rect width="42" height="14" rx="2" fill="#fff"/><text x="21" y="10.6" text-anchor="middle" font-family="Montserrat,Arial" font-size="9.4" font-weight="800" fill="#0B051D">Klarna</text></svg></span><span class="w-mk"><svg width="30" height="18" viewBox="0 0 30 18"><rect width="30" height="18" rx="2" fill="#fff"/><circle cx="12" cy="9" r="5.6" fill="#EB001B"/><circle cx="18" cy="9" r="5.6" fill="#F79E1B"/><path d="M15 4.6a5.6 5.6 0 0 0 0 8.8 5.6 5.6 0 0 0 0-8.8z" fill="#FF5F00"/></svg></span><span class="w-mk"><svg width="36" height="14" viewBox="0 0 36 14"><rect width="36" height="14" rx="2" fill="#fff"/><text x="18" y="10.8" text-anchor="middle" font-family="Montserrat,Arial" font-size="9.6" font-weight="900" font-style="italic" fill="#1A1F71" letter-spacing=".5">VISA</text></svg></span><span class="w-sep"></span><span class="w-vl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4.2" y="10.4" width="15.6" height="10.4" rx="2.2"/><path d="M8 10.4V7.6a4 4 0 0 1 8 0v2.8"/></svg>Veilig afrekenen</span></div>
 
-      <div class="w-cta2">Vergelijk de modellen</div>
+      <div class="w-cta2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect class="vgl-a" x="2.6" y="9.4" width="7.2" height="11.4" rx="1.6"/><rect x="14.2" y="3.2" width="7.2" height="17.6" rx="1.6"/><path d="M12 3.2v17.6" stroke-dasharray="2.6 2.6" opacity=".5"/></svg>Vergelijk de modellen</div>
 
       <div class="w-tel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M2.8 19.6c.9-3 3.2-4.8 6.2-4.8s5.3 1.8 6.2 4.8"/><path d="M16.4 5.2a3.2 3.2 0 0 1 0 5.6M18.2 19.6c-.3-1.3-.8-2.4-1.5-3.3"/></svg><span>Al door <b>200.000+</b> mannen gekozen</span></div>
     </div>
