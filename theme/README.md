@@ -32,8 +32,13 @@ geminificeerd — die is geen bron, de commentaren staan er niet meer in.
 
 * **Padding komt uit de sectie-instellingen, niet uit de CSS.** Het thema zet
   `#shopify-section-ID > * { padding-top/bottom }` via `snippets/indent-settings`,
-  en dat wint van een klasse. Boven- en ondermarge dus altijd via
-  `desk_indent_top` en `mob_indent_top` in `index.json`.
+  en dat is een ID-selector: die wint van elke klasse. Staat de instelling op 0
+  — de standaard — dan wordt de boven- en ondermarge van de sectie op nul
+  gezet, hoeveel er ook in de CSS staat. Boven- en ondermarge dus altijd via
+  `desk_indent_top`, `desk_indent_bottom`, `mob_indent_top` en
+  `mob_indent_bottom` in `index.json`, voor **elke** sectie. De waarden daar
+  zijn gelijk aan wat de CSS bedoelde; de CSS-regel blijft staan als terugval
+  en voor de linker- en rechtermarge, die de snippet niet aanraakt.
 * **Mobiel is een echte media query** (`max-width: 749px`, de grens die het
   thema zelf aanhoudt), niet de `.xx-m`-klasse uit de mockups.
 * **Alle teksten zijn instellingen**, zodat ze in de thema-editor aanpasbaar

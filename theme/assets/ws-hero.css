@@ -27,9 +27,30 @@
   padding:24px 30px 24px 40px;width:58%}
 .ws-hero__blocks{width:100%;max-width:600px;display:flex;flex-direction:column;
   gap:19px;align-items:flex-start}
-.ws-hero__badge{font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
-  color:#F5D18A;border:1px solid rgba(245,209,138,.45);border-radius:100px;padding:11px 22px;
-  background:rgba(245,209,138,.07)}
+/* de zomerbadge — vol goud met donkere letters, niet gouden letters op een
+   doorzichtig vlak. Hij ligt op een foto waarvan de helderheid per beeld
+   verschilt, en dan is een gevuld vlak het verschil tussen lezen en gokken.
+   De korting zit in een eigen donkere chip zodat het percentage het eerste is
+   wat je ziet, en niet de laatste woorden van een lange regel. */
+.ws-hero__badge{position:relative;display:inline-flex;align-items:center;gap:11px;
+  padding:7px 8px 7px 15px;border-radius:100px;overflow:hidden;
+  background:linear-gradient(100deg,#FFE7B0 0%,#F8C55E 44%,#E29A31 100%);
+  box-shadow:0 12px 32px -12px rgba(242,182,74,.85),inset 0 0 0 1px rgba(255,255,255,.3)}
+.ws-hero__zon{width:19px;height:19px;flex:none;color:#8A4E12}
+.ws-hero__badgetekst{font-size:12.5px;font-weight:800;letter-spacing:.15em;
+  text-transform:uppercase;color:#38220A;white-space:nowrap}
+.ws-hero__badgeactie{font-size:12.5px;font-weight:800;letter-spacing:.08em;
+  text-transform:uppercase;color:#FFDC94;background:#241703;border-radius:100px;
+  padding:8px 15px;white-space:nowrap}
+/* een trage glans die er eens per zeven seconden overheen loopt: genoeg om het
+   oog te trekken, te traag om te gaan storen. De baan staat stil als het
+   systeem om minder beweging vraagt. */
+.ws-hero__badge::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:42%;
+  pointer-events:none;transform:skewX(-18deg);
+  background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.55),rgba(255,255,255,0));
+  animation:ws-hero-glans 7s ease-in-out infinite}
+@keyframes ws-hero-glans{0%,74%{left:-60%}100%{left:118%}}
+@media (prefers-reduced-motion:reduce){.ws-hero__badge::after{display:none}}
 .ws-hero__h1{font-size:58px;line-height:104%;font-weight:700;letter-spacing:-.035em;margin:0;
   color:#fff;text-transform:none}
 .ws-hero__h1 b,.ws-hero__h1 strong,.ws-hero__h1 em{font-style:normal;font-weight:700;color:#F5D18A}
@@ -107,7 +128,10 @@
   .ws-hero__foto{object-position:52% 26%}
   .ws-hero__inner{width:100%;padding:0 18px 26px;margin-top:-34px}
   .ws-hero__blocks{gap:16px;max-width:none}
-  .ws-hero__badge{font-size:11px;padding:9px 16px}
+  .ws-hero__badge{gap:8px;padding:6px 6px 6px 13px}
+  .ws-hero__zon{width:16px;height:16px}
+  .ws-hero__badgetekst{font-size:10.5px;letter-spacing:.12em}
+  .ws-hero__badgeactie{font-size:10.5px;padding:7px 12px;letter-spacing:.06em}
   .ws-hero__h1{font-size:40px;letter-spacing:-.032em}
   .ws-hero__sub{font-size:15px;line-height:152%}
   .ws-hero__knoppen{width:100%;flex-direction:column;gap:10px}

@@ -18,6 +18,7 @@
   <symbol id="ws-h-shield" viewBox="0 0 24 24"><path d="M12 2.6l7.2 2.8v6.1c0 4.4-3 8.4-7.2 9.9-4.2-1.5-7.2-5.5-7.2-9.9V5.4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.7 12.1l2.3 2.3 4.3-4.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="ws-h-truck" viewBox="0 0 24 24"><path d="M1.9 6.2h12.2v9.4H1.9zM14.1 9.7h3.9l3.1 3.1v2.8h-7z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.6" cy="18" r="1.9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="17.3" cy="18" r="1.9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="ws-h-retour" viewBox="0 0 24 24"><path d="M3.6 12a8.4 8.4 0 1 0 2.6-6.1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.4 3.6v4.6h4.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-h-zon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.3" fill="currentColor"/><path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.2 5.2l1.85 1.85M16.95 16.95l1.85 1.85M18.8 5.2l-1.85 1.85M7.05 16.95L5.2 18.8" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></symbol>
   <symbol id="ws-h-doos" viewBox="0 0 24 24"><path d="M3.4 7.4 12 3.4l8.6 4v9.2L12 20.6l-8.6-4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.4 7.4 12 11.5l8.6-4.1M12 11.5v9.1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </svg>
 
@@ -48,7 +49,13 @@
 
     <div class="ws-hero__inner"><div class="ws-hero__blocks">
       {%- if section.settings.badge != blank -%}
-        <span class="ws-hero__badge">{{ section.settings.badge }}</span>
+        <span class="ws-hero__badge">
+          <svg class="ws-hero__zon"><use href="#ws-h-zon"/></svg>
+          <span class="ws-hero__badgetekst">{{ section.settings.badge }}</span>
+          {%- if section.settings.badge_actie != blank -%}
+            <b class="ws-hero__badgeactie">{{ section.settings.badge_actie }}</b>
+          {%- endif -%}
+        </span>
       {%- endif -%}
 
       {%- if section.settings.kop != blank -%}
@@ -142,7 +149,8 @@
     { "type": "image_picker", "id": "merk", "label": "Monogram op de achtergrond" },
     { "type": "range", "id": "hoogte", "label": "Hoogte van de hero (desktop)", "min": 420, "max": 860, "step": 10, "unit": "px", "default": 600 },
     { "type": "header", "content": "Tekst" },
-    { "type": "text", "id": "badge", "label": "Badge", "default": "Summer Sale · tot 40% korting" },
+    { "type": "text", "id": "badge", "label": "Badge", "default": "Summer Sale" },
+    { "type": "text", "id": "badge_actie", "label": "Badge — de actie", "info": "Komt in een eigen donker vlak achter de badge. Leeg = alleen de badge.", "default": "tot 40% korting" },
     { "type": "inline_richtext", "id": "kop", "label": "Kop (vet = goud, |br| = regeleinde)", "default": "Elke dag verzorgd.|br|Zonder dat het je|br|<b>ochtend kost.</b>" },
     { "type": "textarea", "id": "sub", "label": "Subkop", "default": "Trimmers, scheerapparaten en neustrimmers die getest zijn op wat ze dóén, niet op hoe ze eruitzien. 100 dagen proberen, morgen in huis." },
     { "type": "header", "content": "Trustpilot" },
