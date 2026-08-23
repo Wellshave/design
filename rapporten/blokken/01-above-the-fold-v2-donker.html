@@ -461,6 +461,9 @@ strong{font-weight:700}
 
 
 /* ---------- versie 6 op de telefoon ---------- */
+.p6-houder{min-width:0}
+@media (max-width:1000px){.p6-houder{overflow-x:auto;margin:0 -20px;padding:0 20px 4px}}
+
 .p6{position:relative;width:390px;border-radius:26px;overflow:hidden;background:var(--v-cream);
   box-shadow:0 2px 4px rgba(17,17,17,.06),0 20px 48px -28px rgba(17,17,17,.5);
   --v-cream:#F7F3EB;--v-cream2:#FBF8F3;--v-zwart:#0B0B0A;--v-gold3:#E9BE72;--v-gold4:#DDA548;
@@ -735,6 +738,7 @@ strong{font-weight:700}
   <div class="shead"><span class="snum">MOBIEL</span><h2 class="duo">78,5% van je verkeer,<span class="b">en alles wat telt erboven.</span></h2></div>
   <p class="sintro">Alles waarop iemand zijn beslissing baseert staat boven de knop: de deal, de naam, de belofte, de prijs, <strong>de drie vinkjes</strong> en het cadeau. In &eacute;&eacute;n oogopslag, zonder scrollen. Wat eronder ging is de onderbouwing &mdash; de uitleg, het reviewkaartje, de voorraadregel. Voor elk product dezelfde volgorde, dus het sjabloon blijft &eacute;&eacute;n sjabloon.</p>
   <div class="mobrow">
+    <div class="p6-houder">
     <div class="p6">
       <div class="m-vouw"><b>vouw &mdash; iPhone</b></div>
       <div class="m-bar"><u></u></div>
@@ -789,6 +793,7 @@ strong{font-weight:700}
         <div><span class="m-zg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1.9 6.2h12.2v9.4H1.9zM14.1 9.7h3.9l3.1 3.1v2.8h-7z"/><circle cx="6.6" cy="18" r="1.9"/><circle cx="17.3" cy="18" r="1.9"/></svg></span><span><b>Gratis verzending</b><span>NL en Belgi&euml;.</span></span></div>
         <div><span class="m-zg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.6" y="4.6" width="18.8" height="16.8" rx="2.6"/><path d="M2.6 9.4h18.8M8 2.6v4M16 2.6v4"/><path d="M8.6 14.6l2.2 2.2 4.4-4.6"/></svg></span><span><b>Morgen in huis</b><span>Voor 23:59 besteld.</span></span></div>
       </div>
+    </div>
     </div>
     <div>
       <ul class="why">
