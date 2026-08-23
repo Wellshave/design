@@ -1,4 +1,4 @@
-<title>Above the fold, donker</title>
+<title>Above the fold, tegen het testthema</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap">
@@ -38,14 +38,17 @@ section{padding:50px 0 0}
 /* ---------- het scherm ---------- */
 .screen{margin:26px 0 0;border-radius:var(--r-l);overflow:hidden;background:var(--carbon);
   box-shadow:0 2px 4px rgba(17,17,17,.06),0 26px 60px -34px rgba(17,17,17,.55)}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:26px;padding:17px 30px;
-  border-bottom:1px solid rgba(245,209,138,.14)}
-.nav .lg{font-weight:900;font-size:15px;letter-spacing:.02em;color:#fff}
-.nav .lg i{color:var(--gold);font-style:normal}
-.nav ul{display:flex;gap:24px;list-style:none;margin:0;padding:0}
-.nav li{font-size:10.5px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--w80)}
-.nav .rt{display:flex;gap:20px}
-.nav .rt span{font-size:10.5px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--w80)}
+.topbar{background:linear-gradient(100deg,#ffe7b0,#f8c55e 44%,#e29a31);color:#3A2405;
+  font-size:11.5px;font-weight:600;text-align:center;padding:9px 16px}
+.topbar u{text-decoration:underline;font-weight:800}
+.topbar2{background:var(--graphite);color:rgba(255,255,255,.72);font-size:11px;text-align:center;padding:8px 16px}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px 26px;background:#fff}
+.nav .lg{font-weight:900;font-size:15px;letter-spacing:.02em;color:var(--ink)}
+.nav .lg i{color:var(--bronze);font-style:normal}
+.nav ul{display:flex;gap:19px;list-style:none;margin:0;padding:0}
+.nav li{font-size:11.5px;font-weight:500;color:var(--ink-80)}
+.nav .rt{display:flex;gap:14px;align-items:center}
+.nav .rt span{font-size:11px;font-weight:500;color:var(--ink-60)}
 
 .pdp{display:grid;grid-template-columns:1.04fr 1fr;gap:0}
 /* podium */
@@ -71,14 +74,18 @@ section{padding:50px 0 0}
 
 /* koopvak */
 .bb{padding:30px 30px 26px;border-left:1px solid rgba(245,209,138,.12);min-width:0}
-.pil{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--gold);border:1px solid rgba(245,209,138,.45);border-radius:100px;padding:8px 16px;
-  background:rgba(245,209,138,.07)}
+.pil{position:relative;display:inline-flex;align-items:center;gap:11px;padding:7px 8px 7px 15px;
+  border-radius:100px;overflow:hidden;background:linear-gradient(100deg,#ffe7b0,#f8c55e 44%,#e29a31);
+  box-shadow:0 0 26px -8px rgba(245,209,138,.55)}
+.pil .zon{width:15px;height:15px;color:#7A4E12;flex:none}
+.pil .tk{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#4A2E08}
+.pil .ac{font-size:11px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--gold);
+  background:var(--carbon);border-radius:100px;padding:7px 14px}
 .quote{margin-top:15px;border-left:2px solid var(--gold);padding:2px 0 2px 14px;
   font-size:14.5px;line-height:1.45;font-style:italic;color:var(--w72)}
 .quote b{display:block;font-style:normal;font-size:10px;font-weight:700;letter-spacing:.11em;
   text-transform:uppercase;color:var(--w40);margin-top:6px}
-.ttl{font-size:30px;font-weight:900;letter-spacing:-.032em;color:#fff;margin-top:15px;line-height:1.04}
+.ttl{font-size:31px;font-weight:700;letter-spacing:-.035em;color:#fff;margin-top:15px;line-height:1.04}
 .prom{font-size:15.5px;line-height:1.5;color:var(--w72);margin-top:9px;max-width:34em}
 .rev{display:flex;align-items:center;gap:9px;margin-top:14px}
 .rev .st{color:var(--gold);font-size:14px;letter-spacing:1.5px}
@@ -100,7 +107,7 @@ section{padding:50px 0 0}
   font-family:inherit;font-size:13px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;
   box-shadow:0 0 34px -6px rgba(245,209,138,.42)}
 .cta2{display:flex;align-items:center;justify-content:center;width:100%;margin-top:10px;
-  border:1px solid rgba(255,255,255,.28);border-radius:100px;padding:15px;color:#fff;
+  border:1px solid rgba(255,255,255,.34);border-radius:100px;padding:16px;color:#fff;
   font-size:11.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
 .risk{display:flex;flex-wrap:wrap;gap:7px 16px;margin-top:14px;justify-content:center}
 .risk span{font-size:11px;font-weight:600;color:var(--w40);display:flex;align-items:center;gap:6px}
@@ -111,7 +118,7 @@ section{padding:50px 0 0}
   border-top:1px solid var(--gline);padding:24px 30px}
 .strook > div{display:flex;align-items:center;justify-content:center;gap:16px;padding:2px 10px}
 .strook > div + div{border-left:1px solid rgba(255,255,255,.1)}
-.zegel{width:44px;height:44px;flex:none;border-radius:50%;border:1px solid var(--gline-2);
+.zegel{width:46px;height:46px;flex:none;border-radius:50%;border:1px solid var(--gline-2);
   display:flex;align-items:center;justify-content:center;color:var(--gold)}
 .zegel svg{width:19px;height:19px}
 .zegel b{font-size:13px;font-weight:700}
@@ -141,7 +148,7 @@ section{padding:50px 0 0}
 .mrev{display:flex;align-items:center;gap:6px;margin-top:11px}
 .mrev .st{color:var(--gold);font-size:11px;letter-spacing:1px}
 .mrev .n{font-size:10.5px;font-weight:700;color:var(--w80)}
-.mttl{font-size:21px;font-weight:900;letter-spacing:-.032em;color:#fff;margin-top:6px;line-height:1.04}
+.mttl{font-size:22px;font-weight:700;letter-spacing:-.035em;color:#fff;margin-top:6px;line-height:1.04}
 .mprom{font-size:12.5px;line-height:1.4;color:var(--w72);margin-top:5px}
 .mprice{display:flex;align-items:baseline;gap:8px;margin-top:10px;flex-wrap:wrap}
 .mprice .now{font-size:24px;font-weight:900;letter-spacing:-.035em;color:#fff}
@@ -191,9 +198,9 @@ strong{font-weight:700}
 <div class="wrap">
 
 <header class="mast">
-  <div class="eyebrow">Blok 01 van 16 · versie 2 · in de taal van de homepage</div>
-  <h1>Above the fold,<br>maar dan donker</h1>
-  <p class="lede">Versie 1 was zand met een zwarte knop. Dat sluit niet aan op wat er nu op je homepage staat: bijna zwart, goud op zes plekken, gouden lichtbogen en een garantiestrook met rondjes. Dit is hetzelfde koopblok, opnieuw gebouwd met j&oacute;uw componenten.</p>
+  <div class="eyebrow">Blok 01 van 16 &middot; versie 3 &middot; getoetst aan het testthema</div>
+  <h1>Above the fold,<br>tegen het testthema</h1>
+  <p class="lede">Gebouwd tegen het <strong>testthema</strong> (id 204178161996), niet tegen live en niet tegen de mockup. Ik heb de preview opgehaald, de assets gespiegeld en de pagina gerenderd, en daarna de componentwaarden uit <code>ws-hero.css</code> overgenomen zoals ze er werkelijk in staan.</p>
 </header>
 
 <section>
@@ -201,10 +208,12 @@ strong{font-weight:700}
   <p class="sintro">Het product staat op een lichte plaat &mdash; een zwart apparaat op een zwarte grond verdwijnt. Die plaat drijft op de donkere grond met de lichtbogen erachter, precies zoals de hero het doet.</p>
 
   <div class="screen">
+    <div class="topbar">Summer Deals tot 40%. &nbsp;&ndash;&nbsp; <u>Shop nu &rarr;</u></div>
+    <div class="topbar2">100 dagen zorgeloos retourneren</div>
     <div class="nav">
+      <ul><li>Shop &#9662;</li><li>Sale</li><li>Bundles</li><li>Over ons</li><li>FAQ</li></ul>
       <div class="lg">WELL<i>SHAVE</i></div>
-      <ul><li>Shop</li><li>Bundels</li><li>Sale</li><li>Over ons</li><li>FAQ</li></ul>
-      <div class="rt"><span>Zoeken</span><span>Account</span><span>Tas (1)</span></div>
+      <div class="rt"><span>NL (EUR &euro;)</span><span>Nederlands &#9662;</span><span>Tas (1)</span></div>
     </div>
 
     <div class="pdp">
@@ -229,11 +238,11 @@ strong{font-weight:700}
           <div class="th">Onder de<br>douche</div>
           <div class="th">In de<br>doos</div>
         </div>
-        <div class="telling"><div><b>200.000+</b><span>Bestellingen sinds 2021</span></div></div>
+        <div class="telling"><svg viewBox="0 0 24 24" fill="none" stroke="#F5D18A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px;flex:none"><circle cx="9" cy="8" r="3.2"/><path d="M2.6 19.4c0-3.2 2.9-5.2 6.4-5.2s6.4 2 6.4 5.2"/><path d="M16.4 5.4a3 3 0 0 1 0 5.6M18 19.4c0-2.2-.9-3.9-2.4-4.8"/></svg><div><b>200.000+</b><span>Bestellingen sinds 2021</span></div></div>
       </div>
 
       <div class="bb">
-        <span class="pil">Bespaar 30% &middot; nog vandaag</span>
+        <span class="pil"><svg class="zon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.6M12 19v2.6M4.2 4.2l1.9 1.9M17.9 17.9l1.9 1.9M2.4 12h2.6M19 12h2.6M4.2 19.8l1.9-1.9M17.9 6.1l1.9-1.9"/></svg><span class="tk">Groom Guard PRO</span><b class="ac">Bespaar 30%</b></span>
         <div class="quote">&laquo;Eerste keer in jaren dat ik geen enkel sneetje had. En ik ben echt niet voorzichtig.&raquo;<b>Echte Loox-review &mdash; nog te kiezen</b></div>
         <div class="ttl">Groom Guard&trade; PRO</div>
         <div class="prom">Vergevend genoeg voor je gevoeligste plekken. Ook als je niet precies bent.</div>
@@ -300,20 +309,20 @@ strong{font-weight:700}
 
   <div class="comps">
     <div class="comp">
-      <div class="demo"><span class="pil">Bespaar 30% &middot; nog vandaag</span></div>
-      <div class="cap"><b>De gouden pil</b><p><em>ws-badge</em> &mdash; rand <code>rgba(245,209,138,.45)</code>, vulling op 7%, letterspatiëring .14em. Op de homepage draagt hij de seizoenskorting.</p></div>
+      <div class="demo"><span class="pil"><svg class="zon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.6M12 19v2.6M4.2 4.2l1.9 1.9M17.9 17.9l1.9 1.9M2.4 12h2.6M19 12h2.6M4.2 19.8l1.9-1.9M17.9 6.1l1.9-1.9"/></svg><span class="tk">Groom Guard PRO</span><b class="ac">Bespaar 30%</b></span></div>
+      <div class="cap"><b>De gouden pil</b><p><em>ws-hero__badge</em> &mdash; gevuld verloop <code>100deg #ffe7b0 &rarr; #f8c55e &rarr; #e29a31</code> met een donkere actiepil erin. Op de homepage: &laquo;Summer Sale&raquo; plus &laquo;tot 40% korting&raquo;.</p></div>
     </div>
     <div class="comp">
       <div class="demo"><span class="cta" style="max-width:270px">In winkelwagen</span></div>
-      <div class="cap"><b>De hoofdknop</b><p><em>ws-cta</em> &mdash; verloop 135&deg; van <code>#F5D18A</code> via <code>#D8AC5D</code> naar <code>#BC813E</code>, met de gloed eronder. Ongewijzigd overgenomen.</p></div>
+      <div class="cap"><b>De hoofdknop</b><p><em>ws-hero__cta</em> &mdash; verloop 135&deg; van <code>#F5D18A</code> via <code>#D8AC5D</code> naar <code>#BC813E</code>, met de gloed eronder. Ongewijzigd overgenomen.</p></div>
     </div>
     <div class="comp">
       <div class="demo"><span class="zegel"><b>2</b></span></div>
-      <div class="cap"><b>Het zegel</b><p><em>ws-zegel</em> &mdash; 44px rondje, rand <code>rgba(245,209,138,.4)</code>, goud vanbinnen. Draagt de drie garanties in de strook.</p></div>
+      <div class="cap"><b>Het zegel</b><p><em>ws-hero__zegel</em> &mdash; 46px rondje, rand <code>rgba(245,209,138,.4)</code>, goud vanbinnen. Draagt de drie garanties in de strook.</p></div>
     </div>
     <div class="comp">
       <div class="demo"><div class="telling" style="position:static"><div><b>200.000+</b><span>Bestellingen sinds 2021</span></div></div></div>
-      <div class="cap"><b>Het telkaartje</b><p><em>ws-telling</em> &mdash; halfdoorzichtig zwart met gouden rand en <code>backdrop-filter</code>. Het enige cijfer waarmee je naast Balzy (200.000+) en Balzac (100.000+) staat.</p></div>
+      <div class="cap"><b>Het telkaartje</b><p><em>ws-hero__telling</em> &mdash; halfdoorzichtig zwart met gouden rand en <code>backdrop-filter</code>. Het enige cijfer waarmee je naast Balzy (200.000+) en Balzac (100.000+) staat.</p></div>
     </div>
   </div>
 
