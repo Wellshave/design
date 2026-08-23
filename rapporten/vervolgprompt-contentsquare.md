@@ -13,7 +13,7 @@ Vier van de vijf vragen bleven dicht:
 
 | blokkade | gevolg |
 |---|---|
-| Geen page mappings (`searchMappings` → `[]`) | Scrolldiepte, funnel, journey en paginavergelijking eisen allemaal een `mappingId`. |
+| Geen page mappings (`searchMappings` → `[]`) | Scrolldiepte, funnel, journey en paginavergelijking eisen allemaal een `mappingId`. **Mappings zitten pas vanaf Growth** — op gratis toont Analysis setup alleen Segments en MCP, dus dit is niet op te lossen door iets aan te maken. |
 | Geen conversiedoelen (`searchGoals` → `[]`) | De twee tools die conversieverlies aan fouten koppelen eisen een `goalId`. |
 | Error Analysis niet in het abonnement | JS-/API-foutsplitsing per apparaat dicht sinds de proef afliep. |
 | Frustration Score niet in het abonnement | Rage clicks niet meetbaar via ContentSquare. |
@@ -30,9 +30,10 @@ blijven leeg. Dat is een tagging-instelling, geen abonnementskwestie.
 plan maar een afgelopen proefperiode (19,03K van 200K sessies, teller reset
 30 augustus). De weigeringen zijn dus een aankoopbeslissing, geen muur.
 
-**En:** Session Replay, Heatmaps en Voice of customer staan gewoon in de
-linkernavigatie van het account. Vraag 4 en 5 zijn daarmee mogelijk zonder
-Clarity te beantwoorden. Onbevestigd of die schermen na de proef nog data tonen.
+**En:** het gratis plan bevat Heatmaps (scroll, click, zoning), Session Replay
+(10K replays/maand), funnels, dashboards en de MCP-koppeling. Vraag 1, 4 en 5
+zijn daarmee vandaag te beantwoorden zonder Clarity en zonder upgrade — via de
+interface, niet via de API.
 
 Wat wél binnenkwam: sitemetrics per platform en per browser. Zie deel 06 voor de
 tabellen. Het bruikbaarste cijfer is dat het diepe desktopbezoek volledig in
@@ -44,23 +45,21 @@ Verbruik: 11 tool calls van de 300 per maand.
 
 ## Wat er nog wél te doen is
 
-1. **Maak één page mapping aan** in de ContentSquare-interface, met een groep
-   «Productpagina» op `/products/*`. Kost tien minuten, kost niets, en er is geen
-   API-tool voor — dit is handwerk. Daarna zijn `scrollRate`, `pageHeight`,
-   `foldHeight` en `activityRate` beschikbaar (basismetrics, zitten in gratis) en
-   is de scrolldiepte-vraag alsnog te beantwoorden. Dat is de vraag die de
-   volgorde-omzetting van deel 05 bewijst of onderuithaalt.
-2. **Zet een conversiedoel op** als je iets met de fout-tools wil, al blijven die
-   op gratis achter de betaalmuur.
-3. **Klik één keer op Session Replay** en kijk of er data staat of een
-   upgrade-muur. Staat het open, dan zijn de desktop-opnames (vraag 4) en de
-   klikkaart (vraag 5) direct te doen in ContentSquare en heb je Clarity alleen
-   nog nodig voor vraag 2 en 3.
-4. **Vraag een Clarity-token aan** — Clarity → Instellingen → Data Export →
+1. **Maak een scroll-heatmap** op `/products/groom-guard-pro`, apart voor mobiel
+   en desktop. Heatmaps → New Heatmap → type «Scroll». Zit in het gratis plan.
+   Lees de lijn «AVERAGE FOLD» af en het percentage dat «Veilig trimmen waar het
+   telt» bereikt. Dat is de vraag die de volgorde-omzetting van deel 05 bewijst
+   of onderuithaalt. **Niet** via een mapping proberen — die zitten pas vanaf
+   Growth.
+2. **Maak een click- of zoning-map** op dezelfde pagina voor het koopblok
+   (vraag 5), en pak **tien Session Replay-opnames** van afgebroken
+   desktop-checkouts, gefilterd op Chrome (vraag 4). Beide zitten in het gratis
+   plan.
+3. **Vraag een Clarity-token aan** — Clarity → Instellingen → Data Export →
    Generate new API token. Dat dekt vraag 1, 2 en 3.
    `scripts/clarity-pdp-insights.py` staat klaar en wacht alleen op
    `CLARITY_API_TOKEN` in de omgeving (**niet in de repo**).
-5. **Of zet ContentSquare uit.** Het draait nu mee in 797 KB met nul mappings,
+4. **Of zet ContentSquare uit.** Het draait nu mee in 797 KB met nul mappings,
    nul doelen en de twee interessantste featuresets buiten het abonnement.
 
 `scripts/contentsquare-pdp-insights.py` blijft staan voor als er ooit een

@@ -466,7 +466,7 @@ ul.plain li::before{content:"—";position:absolute;left:0;top:0;color:var(--acc
   <div class="prose">
     <h3>Waar het op vastliep</h3>
     <ul class="plain">
-      <li><strong>Er is geen enkele paginagroep aangemaakt.</strong> <code>searchMappings</code>, <code>recommendMappings</code> en <code>recommendPageGroups</code> geven alle drie een lege lijst terug. Scrolldiepte, trechter, journey en paginavergelijking eisen stuk voor stuk een <code>mappingId</code>. Zonder mapping kan ContentSquare geen enkele uitspraak over een specifieke pagina doen — ook niet over de PDP.</li>
+      <li><strong>Er is geen enkele paginagroep aangemaakt, en die kán er ook niet komen.</strong> <code>searchMappings</code>, <code>recommendMappings</code> en <code>recommendPageGroups</code> geven alle drie een lege lijst terug — mappings zitten pas vanaf Growth in het abonnement. Scrolldiepte, trechter, journey en paginavergelijking eisen stuk voor stuk een <code>mappingId</code>. Zonder mapping kan ContentSquare geen enkele uitspraak over een specifieke pagina doen — ook niet over de PDP.</li>
       <li><strong>Er zijn geen conversiedoelen ingesteld.</strong> <code>searchGoals</code> is leeg. De twee tools die verloren conversies aan fouten koppelen, eisen allebei een <code>goalId</code>.</li>
       <li><strong>Error Analysis zit niet in het abonnement.</strong> Letterlijk: <em>«Access denied to Error Analysis metrics.»</em> De JS-/API-foutsplitsing per apparaat is daarmee onbereikbaar sinds de proef afliep. Dit is dus een aankoopbeslissing, geen permanente muur.</li>
       <li><strong>Frustration Score evenmin.</strong> Zelfde weigering. Dat was de enige route naar rage clicks binnen ContentSquare.</li>
@@ -532,9 +532,9 @@ ul.plain li::before{content:"—";position:absolute;left:0;top:0;color:var(--acc
   </div>
 
   <div class="callout">
-    <h4>De goedkoopste reparatie in dit hele rapport</h4>
-    <p>De belangrijkste vraag — <strong>scrolldiepte</strong>, de vraag die de volgorde-omzetting van deel 05 bewijst of onderuithaalt — is <em>niet</em> geblokkeerd door het abonnement. <code>scrollRate</code>, <code>pageHeight</code>, <code>foldHeight</code> en <code>activityRate</code> staan in de basismetrics, beschikbaar voor alle projecten. Ze zijn alleen onbereikbaar omdat er nul paginagroepen bestaan.</p>
-    <p>Eén page mapping met een groep «Productpagina» op <code>/products/*</code>, aan te maken onder <strong>Analysis setup</strong> linksonder in de ContentSquare-interface, kost tien minuten en kost niets. Daarna is de vraag gewoon te meten. Er is geen API-tool om die mapping aan te maken — dit moet je zelf doen, één keer.</p>
+    <h4>Scrolldiepte is te meten, maar niet via de API</h4>
+    <p>De page-group-metrics (<code>scrollRate</code>, <code>pageHeight</code>, <code>foldHeight</code>) zijn onbereikbaar omdat er nul paginagroepen bestaan — en die zijn er niet omdat <strong>mappings pas vanaf Growth in het abonnement zitten</strong>. Op het gratis plan toont Analysis setup alleen Segments en MCP. Via de API is deze vraag dus dicht, en daar valt niets aan te configureren.</p>
+    <p><strong>Maar de vraag zelf is gewoon te beantwoorden.</strong> Scrolldiepte zit in <strong>Heatmaps</strong>, en Heatmaps zit wél in het gratis plan: Heatmaps → New Heatmap → de URL van de PRO → type «Scroll», apart voor mobiel en desktop. De map tekent een lijn «AVERAGE FOLD» en geeft bij hover het percentage bezoekers dat een bepaalde hoogte haalt. Dat is directer dan één gemiddeld getal uit de API — je leest het per blok af.</p>
   </div>
 
   <div class="prose">
@@ -543,7 +543,7 @@ ul.plain li::before{content:"—";position:absolute;left:0;top:0;color:var(--acc
   <div class="callout">
     <h4>Session Replay en Heatmaps staan in je eigen ContentSquare-interface</h4>
     <p>Wat via de API onbereikbaar is, zit wél in de linkernavigatie van het account: <strong>Session Replay</strong>, <strong>Heatmaps</strong> (zoning, dus klikkaarten) en <strong>Voice of customer</strong>. Vraag 4 en 5 — de desktop-opnames en de klikkaart van het koopblok — zijn daarmee mogelijk gewoon te beantwoorden in de tool die al op je pagina staat, met de 19.030 sessies die er al in zitten. Dat is een kortere weg dan een Clarity-token aanvragen.</p>
-    <p><strong>Onbevestigd:</strong> of die schermen na het aflopen van de proef nog data tonen of een upgrade-muur geven. Eén klik op Session Replay geeft het antwoord. Blijkt het open, dan vervalt Route B voor vraag 4 en 5 en hoef je alleen nog voor vraag 2 en 3 naar Clarity.</p>
+    <p><strong>Bevestigd in het plan-overzicht:</strong> Heatmaps en Session Replay (10K replays per maand) zitten in het gratis plan, samen met funnels, dashboards en de MCP-koppeling. Route B via Clarity is daarmee voor vraag 4 en 5 niet meer nodig — alleen quickbacks (vraag 3) hebben nog een Clarity-token nodig.</p>
   </div>
 
   <div class="prose">
@@ -555,7 +555,7 @@ ul.plain li::before{content:"—";position:absolute;left:0;top:0;color:var(--acc
 
     <h3>De vijf vragen, en waar ze nu vandaan komen</h3>
     <ul class="plain">
-      <li><strong>Scrolldiepte op de PDP, mobiel/desktop gesplitst.</strong> <em>ContentSquare, zodra er één paginagroep bestaat — óf de Clarity-API.</em> Dit toetst de hele redesign-these direct: haalt iemand plek 6 überhaupt? Ligt de mediaan onder de 50%, dan is het mechanismeblok effectief onzichtbaar en is het naar voren halen een reparatie, geen smaakkwestie. Begin hier.</li>
+      <li><strong>Scrolldiepte op de PDP, mobiel/desktop gesplitst.</strong> <em>ContentSquare Heatmaps — zit in het gratis plan, kan vandaag.</em> Dit toetst de hele redesign-these direct: haalt iemand plek 6 überhaupt? Ligt de mediaan onder de 50%, dan is het mechanismeblok effectief onzichtbaar en is het naar voren halen een reparatie, geen smaakkwestie. Begin hier.</li>
       <li><strong>Rage clicks en dead clicks.</strong> <em>De Clarity-API — of visueel in ContentSquare Heatmaps.</em> Met name op de vergelijkingstabel, de gallerij-thumbnails en het kapotte aanbevelingsblok. Dead clicks op productkaarten met €0,00 zou het vermoeden hard maken.</li>
       <li><strong>Quick-backs op de PDP.</strong> <em>Alleen de Clarity-API.</em> Wie binnen enkele seconden terugklikt, kreeg iets anders dan de advertentie beloofde. Dat toetst of het eerste beeld matcht met de creative.</li>
       <li><strong>Desktop-opnames van sessies die de checkout bereikten maar niet afrondden.</strong> <em>Session Replay in ContentSquare, anders de Clarity-interface — zit in geen van beide API's.</em> Dit is de gerichtste vraag in de lijst: 44,8% tegen 70,5% is een defect, geen voorkeur. <strong>Filter op Chrome desktop</strong> — 80% van het verkeer. Tien opnames laten waarschijnlijk in vijf minuten zien wát er stukgaat.</li>
