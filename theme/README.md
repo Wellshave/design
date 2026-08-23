@@ -82,6 +82,39 @@ misstond is gerepareerd:
   van 58% brede kaarten knipte de tweede kaart middenin een woord af. Ze staan
   nu twee bij twee.
 
+## De zones
+
+Blok 5 en blok 8 werken per zone, en een zone is een collectie. Vier daarvan
+bestonden al; voor gezicht en hoofd waren ze er niet, want een scheerapparaat is
+geen baardtrimmer en een head shaver geen tondeuse.
+
+| Zone | Collectie | Waar hij van vult |
+|---|---|---|
+| Lichaam | `bodygroomers` | handmatig |
+| Gezicht & baard | `zone-gezicht` | tag `zone:gezicht` |
+| Hoofd | `zone-hoofd` | tag `zone:hoofd` |
+| Neus & oren | `neustrimmers` | tag/type |
+
+`zone-gezicht` en `zone-hoofd` zijn slimme collecties: ze vullen zichzelf uit
+een tag op het product. Een nieuw apparaat komt in de juiste zone door er
+`zone:gezicht` of `zone:hoofd` op te zetten, en verder niets.
+
+Wat er getagd is:
+
+* **`zone:gezicht`** — de 5 baardtrimmers, de 4 face shavers (Sentinel PRO,
+  Blade Baron, Gentleman Shaver, Elegant 4-in-1) en de 5 safety razors.
+* **`zone:hoofd`** — de 4 tondeuses en de Head Shaver Deluxe.
+
+Losse scheerkoppen en mesjes zijn niet getagd: dat zijn accessoires, geen
+apparaten, en ze zouden de telling opblazen.
+
+De homepage telt met `all_products_count`, en dat telt alleen wat in de Online
+Store staat. Vier getagde producten staan op archief — Safety Razor Rosé,
+Silver en Matt Grey, en Tondeuse Pro™ — dus de winkel toont 11 en 4 waar de
+beheeromgeving 14 en 5 zegt. Dat is goed: een bezoeker hoort geen apparaten
+geteld te zien die hij niet kan kopen. Haal je er een uit het archief, dan komt
+hij vanzelf in de juiste zone terecht.
+
 ## Beelden
 
 Alle beelden uit `audits/assets` staan als bestand in Shopify onder de naam
