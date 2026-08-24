@@ -994,39 +994,55 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
 #deel-onder .foot{margin-top:52px;padding-top:22px;border-top:1px solid var(--ink-10);font-size:13px;color:var(--ink-60);line-height:1.75}
 #deel-onder .mech{--m-zwart:#0B0B0A;--m-gold:#E9BE72;--m-gold2:#C79A52;--m-rood:#E5342A;
   --m-w72:rgba(255,255,255,.72);--m-w52:rgba(255,255,255,.52);--m-w38:rgba(255,255,255,.38);
-  background:var(--m-zwart);border-radius:var(--r-l);padding:42px 38px 38px;margin:26px 0 0;
-  position:relative;overflow:hidden}
-#deel-onder .mech .rij{display:grid;grid-template-columns:1.02fr 1fr;gap:38px;align-items:center}
-#deel-onder .mech .kop{font-size:clamp(26px,3.4vw,37px);font-weight:800;letter-spacing:-.032em;line-height:1.08;color:#fff}
+  background:var(--m-zwart);border-radius:var(--r-l);padding:40px 36px 34px;margin:26px 0 0;overflow:hidden}
+#deel-onder .mech .hd{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:end;margin-bottom:28px}
+#deel-onder .mech .kop{font-size:clamp(27px,3.5vw,38px);font-weight:800;letter-spacing:-.032em;line-height:1.06;color:#fff}
 #deel-onder .mech .kop b{display:block;font-weight:800;
   background-image:linear-gradient(100deg,#F5D18A 0%,#C79A52 100%);
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:#E9BE72}
-#deel-onder .mech .lead{margin:15px 0 0;font-size:16px;line-height:1.6;color:var(--m-w72);max-width:34em}
-#deel-onder .mech h5{margin:26px 0 0;font-size:13px;font-weight:800;letter-spacing:.02em;color:var(--m-gold)}
-#deel-onder .mech p.b{margin:6px 0 0;font-size:14.5px;line-height:1.6;color:var(--m-w72)}
-#deel-onder .mech p.b em{font-style:normal;color:#fff;font-weight:700}
-#deel-onder .mech .slot{margin-top:28px;padding-top:18px;border-top:1px solid rgba(255,255,255,.12);
-  font-size:17px;font-weight:700;letter-spacing:-.02em;color:#fff;line-height:1.35}
-#deel-onder .mech .slot span{color:var(--m-gold)}
-#deel-onder .dsn{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-m);
-  padding:22px 20px 18px}
-#deel-onder .dsn .duo2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-#deel-onder .dsn .paneel{min-width:0}
+#deel-onder .mech .lead{margin:0;font-size:16.5px;line-height:1.5;color:var(--m-w72);padding-bottom:4px}
+#deel-onder .mech .lead em{font-style:normal;color:#fff;font-weight:700}
+#deel-onder .dsn{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+#deel-onder .dsn .paneel{border-radius:var(--r-m);overflow:hidden;background:rgba(255,255,255,.035);
+  border:1px solid rgba(255,255,255,.1);min-width:0}
+#deel-onder .dsn .paneel.b{border-color:rgba(233,190,114,.34);background:rgba(233,190,114,.05)}
 #deel-onder .dsn .paneel svg{display:block;width:100%;height:auto}
-#deel-onder .dsn .plab{display:flex;align-items:center;gap:7px;margin-bottom:9px;font-size:10px;font-weight:800;
-  letter-spacing:.13em;text-transform:uppercase}
-#deel-onder .dsn .plab i{width:7px;height:7px;border-radius:50%;flex:none}
-#deel-onder .dsn .paneel.a .plab{color:rgba(255,255,255,.5)}
-#deel-onder .dsn .paneel.a .plab i{background:var(--m-rood)}
-#deel-onder .dsn .paneel.b .plab{color:var(--m-gold)}
-#deel-onder .dsn .paneel.b .plab i{background:var(--m-gold)}
-#deel-onder .dsn .onder{margin-top:11px;font-size:11.5px;line-height:1.4;color:var(--m-w38)}
-#deel-onder .dsn .paneel.b .onder{color:var(--m-w52)}
-#deel-onder .dsn .voet{margin-top:16px;padding-top:13px;border-top:1px solid rgba(255,255,255,.1);
-  font-size:11px;line-height:1.45;color:var(--m-w38)}
+#deel-onder .dsn .cap{padding:14px 17px 16px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+#deel-onder .dsn .cap b{font-size:11px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;white-space:nowrap;
+  display:flex;align-items:center;gap:7px}
+#deel-onder .dsn .cap b i{width:7px;height:7px;border-radius:50%;flex:none}
+#deel-onder .dsn .paneel.a .cap b{color:rgba(255,255,255,.5)}
+#deel-onder .dsn .paneel.a .cap b i{background:var(--m-rood)}
+#deel-onder .dsn .paneel.b .cap b{color:var(--m-gold)}
+#deel-onder .dsn .paneel.b .cap b i{background:var(--m-gold)}
+#deel-onder .dsn .cap span{font-size:13.5px;line-height:1.35;color:var(--m-w72);min-width:0}
+#deel-onder .dsn .paneel.a .cap span{color:var(--m-w52)}
+#deel-onder .punt3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:16px}
+#deel-onder .punt{display:grid;grid-template-columns:34px minmax(0,1fr);gap:13px;align-items:start;
+  border-top:1px solid rgba(255,255,255,.11);padding-top:15px}
+#deel-onder .punt .ic{width:34px;height:34px;border-radius:10px;border:1px solid rgba(233,190,114,.38);
+  display:flex;align-items:center;justify-content:center;color:var(--m-gold)}
+#deel-onder .punt .ic svg{width:19px;height:19px}
+#deel-onder .punt .tx{min-width:0}
+#deel-onder .punt .tx b{display:block;font-size:14.5px;font-weight:700;color:#fff;letter-spacing:-.015em;line-height:1.2}
+#deel-onder .punt .tx span{display:block;font-size:13px;line-height:1.4;color:var(--m-w52);margin-top:4px}
+#deel-onder .mech .slot{margin-top:24px;padding-top:17px;border-top:1px solid rgba(255,255,255,.11);
+  font-size:18px;font-weight:700;letter-spacing:-.02em;color:#fff;line-height:1.3}
+#deel-onder .mech .slot span{color:var(--m-gold)}
+#deel-onder .mech .voet{margin-top:12px;font-size:11px;color:var(--m-w38)}
 @media (max-width:900px){#deel-onder .mech{padding:26px 18px 22px}
-#deel-onder .mech .rij{grid-template-columns:1fr;gap:26px}
-#deel-onder .dsn .duo2{grid-template-columns:1fr;gap:20px}}
+#deel-onder .mech .hd{grid-template-columns:1fr;gap:14px;align-items:start;margin-bottom:20px}
+#deel-onder .dsn{grid-template-columns:1fr}
+#deel-onder .punt3{grid-template-columns:1fr;gap:0}
+#deel-onder .punt{padding:14px 0}
+#deel-onder .punt3 .punt + .punt{border-top:1px solid rgba(255,255,255,.11)}}
+#deel-onder .invul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin:22px 0 0}
+#deel-onder .veld{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:baseline;
+  background:var(--paper);border:1px solid var(--ink-10);border-radius:12px;padding:12px 15px}
+#deel-onder .veld code{font-size:11px;background:var(--sand-deep);border-radius:4px;padding:2px 7px;white-space:nowrap;color:var(--ink-60)}
+#deel-onder .veld span{font-size:13.5px;line-height:1.4;color:var(--ink-80);min-width:0}
+#deel-onder .veld span u{text-decoration:none;color:var(--ink-40);display:block;font-size:11.5px;margin-top:2px}
+@media (max-width:700px){#deel-onder .invul{grid-template-columns:1fr}}
 #deel-onder .lad{--l-zwart:#0B0B0A;--l-kaart:#141312;--l-gold3:#E9BE72;--l-gold4:#DDA548;
   --l-w72:rgba(255,255,255,.72);--l-w52:rgba(255,255,255,.52);--l-w38:rgba(255,255,255,.38);
   background:var(--l-zwart);border-radius:var(--r-l);padding:38px 30px 32px;margin:26px 0 0;
@@ -1199,7 +1215,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
 #deel-onder .specs dt{border-bottom:0;padding-bottom:2px;white-space:normal}}</style>
 <header class="dossier"><svg class="bogen" viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="dg" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="#F5D18A" stop-opacity="0"/><stop offset="45%" stop-color="#F5D18A" stop-opacity=".5"/><stop offset="100%" stop-color="#BC813E" stop-opacity="0"/></linearGradient></defs><path d="M-40 280 C 300 220 700 140 1240 20" stroke="url(#dg)" stroke-width="1.4" fill="none"/><path d="M-40 320 C 340 270 760 190 1240 70" stroke="url(#dg)" stroke-width="1" fill="none"/><path d="M180 340 C 460 280 820 220 1240 130" stroke="url(#dg)" stroke-width=".7" fill="none"/></svg><div class="rail"><span class="eyebrow">Wellshave &middot; herontwerp productpagina &middot; 23 augustus 2026</span><h1>Eén sjabloon in plaats van tien,<b>voor achtenvijftig producten.</b></h1><p>Je 58 actieve producten draaien vandaag op tien verschillende sjablonen. Dit is het ene dat ze vervangt: het plan met de zeventien blokken, het koopvak boven de vouw, en het productblad met de aanvulling en de betaalrij eronder. Wat nog niet is uitgetekend staat in het plan beschreven maar hier nog niet in beeld.</p></div></header>
 <nav class="balk" aria-label="Delen"><div class="rail"><span class="lg">WELL<i>SHAVE</i></span><a href="#deel-volgorde" data-deel="volgorde">De volgorde</a><a href="#deel-plan" data-deel="plan">Het plan</a><a href="#deel-boven" data-deel="boven">Boven de vouw</a><a href="#deel-onder" data-deel="onder">Onder de vouw</a></div></nav>
-<div class="inhoud"><h2>Inhoud</h2><div class="kolommen"><div class="kol"><a href="#deel-volgorde">De volgorde</a><p>Alle zeventien blokken op een rij, met grond, klasse en wat er al getekend is.</p><ol></ol></div><div class="kol"><a href="#deel-plan">Het plan</a><p>De kaart: vier regels, drie producttypes, zeventien blokken.</p><ol><li><a href="#plan-1"><span>01</span>Het contract, in vier regels.</a></li><li><a href="#plan-2"><span>02</span>Drie producttypes, één skelet.</a></li><li><a href="#plan-3"><span>03</span>Het skelet, blok voor blok, met de bron per blok.</a></li><li><a href="#plan-4"><span>04</span>Wat je aanmaakt, en wat er al staat.</a></li><li><a href="#plan-5"><span>05</span>De bouwvolgorde, in vier fasen.</a></li><li><a href="#plan-6"><span>06</span>Wat dit plan niet oplost, en waar het op rust.</a></li></ol></div><div class="kol"><a href="#deel-boven">Boven de vouw</a><p>Het koopvak, de seizoensdeal, het sociale bewijs, de beweging.</p><ol><li><a href="#boven-1"><span>DESKTOP</span>Het voorstel, nagebouwd, met het cadeau erin.</a></li><li><a href="#boven-2"><span>MOBIEL</span>78,5% van je verkeer, en alles wat telt erboven.</a></li><li><a href="#boven-3"><span>SEIZOENSDEAL</span>Vier plekken voor een aanbieding, elk met een andere taak.</a></li><li><a href="#boven-4"><span>COMPONENTEN</span>Wat er één op één overkomt, uit je eigen thema.</a></li><li><a href="#boven-5"><span>SOCIAAL BEWIJS</span>Trustpilot in plaats van Loox, en wat dat kost.</a></li><li><a href="#boven-6"><span>BEWEGING</span>Twee soorten opvallen, allebei ingehouden.</a></li></ol></div><div class="kol"><a href="#deel-onder">Onder de vouw</a><p>Het productblad, de aanvulling, de betaalrij.</p><ol><li><a href="#onder-1"><span>BLOK 03</span>Het eerste blok onder de vouw, en het enige echte onderscheid.</a></li><li><a href="#onder-2"><span>BLOK 05</span>Drie kaarten, drie echte producten, en drie besparingen die kloppen.</a></li><li><a href="#onder-3"><span>BLOK 13</span>De omschrijving en de specificaties, in één blad.</a></li><li><a href="#onder-4"><span>BLOK 16</span>Maak het compleet, zonder de pagina te verlaten.</a></li><li><a href="#onder-5"><span>BETAALMETHODEN</span>Twee plekken, allebei stil, en geen van beide een app.</a></li><li><a href="#onder-6"><span>WAT IK AANTROF</span>Vier up-sellvelden op één product, en ze spreken elkaar tegen.</a></li></ol></div></div></div>
+<div class="inhoud"><h2>Inhoud</h2><div class="kolommen"><div class="kol"><a href="#deel-volgorde">De volgorde</a><p>Alle zeventien blokken op een rij, met grond, klasse en wat er al getekend is.</p><ol></ol></div><div class="kol"><a href="#deel-plan">Het plan</a><p>De kaart: vier regels, drie producttypes, zeventien blokken.</p><ol><li><a href="#plan-1"><span>01</span>Het contract, in vier regels.</a></li><li><a href="#plan-2"><span>02</span>Drie producttypes, één skelet.</a></li><li><a href="#plan-3"><span>03</span>Het skelet, blok voor blok, met de bron per blok.</a></li><li><a href="#plan-4"><span>04</span>Wat je aanmaakt, en wat er al staat.</a></li><li><a href="#plan-5"><span>05</span>De bouwvolgorde, in vier fasen.</a></li><li><a href="#plan-6"><span>06</span>Wat dit plan niet oplost, en waar het op rust.</a></li></ol></div><div class="kol"><a href="#deel-boven">Boven de vouw</a><p>Het koopvak, de seizoensdeal, het sociale bewijs, de beweging.</p><ol><li><a href="#boven-1"><span>DESKTOP</span>Het voorstel, nagebouwd, met het cadeau erin.</a></li><li><a href="#boven-2"><span>MOBIEL</span>78,5% van je verkeer, en alles wat telt erboven.</a></li><li><a href="#boven-3"><span>SEIZOENSDEAL</span>Vier plekken voor een aanbieding, elk met een andere taak.</a></li><li><a href="#boven-4"><span>COMPONENTEN</span>Wat er één op één overkomt, uit je eigen thema.</a></li><li><a href="#boven-5"><span>SOCIAAL BEWIJS</span>Trustpilot in plaats van Loox, en wat dat kost.</a></li><li><a href="#boven-6"><span>BEWEGING</span>Twee soorten opvallen, allebei ingehouden.</a></li></ol></div><div class="kol"><a href="#deel-onder">Onder de vouw</a><p>Het productblad, de aanvulling, de betaalrij.</p><ol><li><a href="#onder-1"><span>BLOK 03</span>Het mechanisme, in beeld in plaats van in tekst.</a></li><li><a href="#onder-2"><span>BLOK 05</span>Drie kaarten, drie echte producten, en drie besparingen die kloppen.</a></li><li><a href="#onder-3"><span>BLOK 13</span>De omschrijving en de specificaties, in één blad.</a></li><li><a href="#onder-4"><span>BLOK 16</span>Maak het compleet, zonder de pagina te verlaten.</a></li><li><a href="#onder-5"><span>BETAALMETHODEN</span>Twee plekken, allebei stil, en geen van beide een app.</a></li><li><a href="#onder-6"><span>WAT IK AANTROF</span>Vier up-sellvelden op één product, en ze spreken elkaar tegen.</a></li></ol></div></div></div>
 <div id="deel-volgorde" class="deel">
 <div class="vg">
 <header class="vg-mast"><span class="eyebrow">De volgorde &middot; zeventien blokken &middot; 23 augustus 2026</span><h2>Zo loopt de pagina,<br>van boven naar beneden.</h2><p class="lede">De volgorde ligt vast en wordt nooit per product herschikt. Blok 07 staat op elk product op plek 07. Wat per product verschilt is de inhoud in de velden rechts &mdash; nooit de plek. Het streepje in de linkerkolom laat de grond zien: zand, wit of donker, om beurten, zodat je bij het scrollen voelt dat er een nieuw blok begint.</p><div class="vg-tel"><span class="af">5 van 17 getekend</span><span>10 kern</span><span>7 uitbreiding</span><span>1 nieuw veld</span></div></header>
@@ -1816,63 +1832,59 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
 </header>
 
 <section id="onder-1">
-  <div class="shead"><span class="snum">BLOK 03</span><h2 class="duo">Het eerste blok onder de vouw,<span class="b">en het enige echte onderscheid.</span></h2></div>
-  <p class="sintro">Dit is de plek waar iedereen langskomt die boven de vouw niet klikte. Ze hebben geen bewijs nodig maar een reden om te k&uuml;nnen geloven &mdash; en in een markt waar elke concurrent dezelfde uitkomst belooft, blijft alleen het mechanisme over. Daarom begint dit blok niet met techniek maar met een <strong>herkadering</strong>: het probleem is niet hoe voorzichtig je bent.</p>
+  <div class="shead"><span class="snum">BLOK 03</span><h2 class="duo">Het mechanisme,<span class="b">in beeld in plaats van in tekst.</span></h2></div>
+  <p class="sintro">Het eerste blok onder de vouw, en het enige echte onderscheid in deze markt. Het moet in vijf seconden binnenkomen, dus de tekening draagt het argument en de tekst is een bijschrift. <strong>Negen korte velden en twee beelden</strong> &mdash; meer is er per product niet in te vullen.</p>
 
   <div class="mech">
-    <div class="rij">
-      <div class="dsn">
-        <div class="duo2">
-          <div class="paneel a">
-            <div class="plab"><i></i>Een mesje</div>
-            <svg viewBox="0 0 240 180" role="img" aria-label="Doorsnede: het snijvlak van een mesje raakt de huid"><rect x="0" y="126" width="240" height="54" fill="#1C1A17"/><path d="M0 126 Q60 121 120 126 T240 126" stroke="#4A4239" stroke-width="1.6" fill="none"/><path d="M0 126 Q60 121 120 126 T240 126 L240 180 L0 180 Z" fill="#232019"/><path d="M36 150 L36 96" stroke="#5C5348" stroke-width="2.4" stroke-linecap="round"/><path d="M72 150 L72 96" stroke="#5C5348" stroke-width="2.4" stroke-linecap="round"/><path d="M150 150 L150 96" stroke="#5C5348" stroke-width="2.4" stroke-linecap="round"/><path d="M186 150 L186 96" stroke="#5C5348" stroke-width="2.4" stroke-linecap="round"/><g transform="rotate(-24 128 124)"><rect x="88" y="86" width="112" height="26" rx="3" fill="#3A3730"/><path d="M88 112 L200 112 L192 124 L96 124 Z" fill="#8E8B84"/><path d="M96 124 L192 124" stroke="#D9D6D0" stroke-width="2.4"/></g><path d="M96 128 L102 121 L107 130 L113 122 L118 129" stroke="#E5342A" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="107" cy="126" r="14" fill="none" stroke="#E5342A" stroke-width="1.1" stroke-dasharray="3 3" opacity=".65"/></svg>
-            <p class="onder">Het snijvlak m&oacute;&eacute;t de huid raken om het haar op huidniveau door te snijden. Dat is geen fout &mdash; dat is hoe een mesje werkt.</p>
-          </div>
-          <div class="paneel b">
-            <div class="plab"><i></i>SkinSafe-kop</div>
-            <svg viewBox="0 0 240 180" role="img" aria-label="Doorsnede: het snijvlak zit achter de kam, op afstand van de huid"><rect x="0" y="126" width="240" height="54" fill="#1C1A17"/><path d="M0 126 Q60 121 120 126 T240 126" stroke="#4A4239" stroke-width="1.6" fill="none"/><path d="M0 126 Q60 121 120 126 T240 126 L240 180 L0 180 Z" fill="#232019"/><path d="M48 150 L48 112" stroke="#7A7166" stroke-width="2.4" stroke-linecap="round"/><path d="M84 150 L84 112" stroke="#7A7166" stroke-width="2.4" stroke-linecap="round"/><path d="M120 150 L120 112" stroke="#7A7166" stroke-width="2.4" stroke-linecap="round"/><path d="M156 150 L156 112" stroke="#7A7166" stroke-width="2.4" stroke-linecap="round"/><rect x="18" y="78" width="170" height="22" rx="4" fill="#3A3730"/><path d="M18 100 L188 100" stroke="#D9D6D0" stroke-width="2.6"/><rect x="30" y="104" width="13" height="22" rx="4.5" fill="#C79A52"/><rect x="66" y="104" width="13" height="22" rx="4.5" fill="#C79A52"/><rect x="102" y="104" width="13" height="22" rx="4.5" fill="#C79A52"/><rect x="138" y="104" width="13" height="22" rx="4.5" fill="#C79A52"/><rect x="174" y="104" width="13" height="22" rx="4.5" fill="#C79A52"/><path d="M204 100 L204 126" stroke="#E9BE72" stroke-width="1.3"/><path d="M199 103 L204 99 L209 103" stroke="#E9BE72" stroke-width="1.3" fill="none" stroke-linecap="round"/><path d="M199 123 L204 127 L209 123" stroke="#E9BE72" stroke-width="1.3" fill="none" stroke-linecap="round"/></svg>
-            <p class="onder">Het snijvlak zit &aacute;chter de kam. De kam ligt op je huid, het mes niet. Het haar wordt naar binnen geleid en daar doorgeknipt.</p>
-          </div>
-        </div>
-        <p class="voet">Doorsnede, schematisch. Bedoeld om het verschil te laten zien, niet om op schaal te zijn.</p>
-      </div>
-
-      <div>
-        <div class="kop">Het ligt niet aan jou.<b>Het ligt aan het mesje.</b></div>
-        <p class="lead">Bijna iedereen die zich hier ooit heeft gesneden denkt dat hij te snel of te onvoorzichtig was. Dat is niet zo. Een scheermesje m&oacute;&eacute;t snijden om te werken &mdash; en juist op deze plekken werkt dat tegen je.</p>
-
-        <h5>Waarom een mesje niet anders k&aacute;n</h5>
-        <p class="b">Op een vlakke wang gaat het goed: de huid staat strak en het mes glijdt eroverheen. <em>Huid die plooit, meebeweegt en dunner is, doet dat niet.</em> Daar loopt hetzelfde snijvlak over oneffenheden heen &mdash; en dan pakt het niet alleen haar.</p>
-
-        <h5>Wat de keramische kop anders doet</h5>
-        <p class="b">De kam ligt op je huid, het mes zit erachter. Het haar wordt door de kam naar het snijvlak geleid en daar doorgeknipt, <em>op afstand van je huid</em>. Je kunt dus drukken waar je moet drukken zonder dat er iets bij je huid in de buurt komt.</p>
-
-        <h5>Waarom je er ook geen bultjes van krijgt</h5>
-        <p class="b">Een haar dat onder de huidlijn wordt afgesneden trekt terug in de follikel en kan er scheef weer uit groeien. Dat is een ingegroeid haar. <em>Knipt het mes n&eacute;t boven de huid, dan blijft het uiteinde waar het hoort.</em></p>
-
-        <div class="slot">Het verschil is niet beter je best doen.<br><span>Het is ander gereedschap.</span></div>
-      </div>
+    <div class="hd">
+      <div class="kop">Het ligt niet aan jou.<b>Het ligt aan het mesje.</b></div>
+      <p class="lead">Een scheermesje m&oacute;&eacute;t je huid raken om te werken. <em>Deze kop niet.</em></p>
     </div>
+
+    <div class="dsn">
+      <div class="paneel a"><svg viewBox="0 52 240 128" role="img" aria-label="Doorsnede: het snijvlak van een mesje raakt de huid"><title>Mesje: snijvlak op de huid</title><rect x="0" y="128" width="240" height="52" fill="#1C1A17"/><path d="M0 128 Q60 123 120 128 T240 128 L240 180 L0 180 Z" fill="#232019"/><path d="M0 128 Q60 123 120 128 T240 128" stroke="#4A4239" stroke-width="1.6" fill="none"/><path d="M36 152 L36 96" stroke="#5C5348" stroke-width="2.4" stroke-linecap="round"/><path d="M72 152 L72 96" stroke="#5C5348" stroke-width="2.4" stroke-linecap="round"/><path d="M150 152 L150 96" stroke="#5C5348" stroke-width="2.4" stroke-linecap="round"/><path d="M186 152 L186 96" stroke="#5C5348" stroke-width="2.4" stroke-linecap="round"/><g transform="rotate(-24 128 126)"><rect x="88" y="88" width="112" height="26" rx="3" fill="#3A3730"/><path d="M88 114 L200 114 L192 126 L96 126 Z" fill="#8E8B84"/><path d="M96 126 L192 126" stroke="#D9D6D0" stroke-width="2.4"/></g><path d="M96 130 L102 123 L107 132 L113 124 L118 131" stroke="#E5342A" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="107" cy="128" r="14" fill="none" stroke="#E5342A" stroke-width="1.1" stroke-dasharray="3 3" opacity=".65"/></svg><div class="cap"><b><i></i>Een mesje</b><span>Snijvlak op de huid. Daarom die sneetjes.</span></div></div>
+      <div class="paneel b"><svg viewBox="0 52 240 128" role="img" aria-label="Doorsnede: het snijvlak zit achter de kam, op afstand van de huid"><title>SkinSafe-kop: snijvlak achter de kam</title><rect x="0" y="128" width="240" height="52" fill="#1C1A17"/><path d="M0 128 Q60 123 120 128 T240 128 L240 180 L0 180 Z" fill="#232019"/><path d="M0 128 Q60 123 120 128 T240 128" stroke="#4A4239" stroke-width="1.6" fill="none"/><path d="M48 152 L48 114" stroke="#7A7166" stroke-width="2.4" stroke-linecap="round"/><path d="M84 152 L84 114" stroke="#7A7166" stroke-width="2.4" stroke-linecap="round"/><path d="M120 152 L120 114" stroke="#7A7166" stroke-width="2.4" stroke-linecap="round"/><path d="M156 152 L156 114" stroke="#7A7166" stroke-width="2.4" stroke-linecap="round"/><rect x="18" y="80" width="170" height="22" rx="4" fill="#3A3730"/><path d="M18 102 L188 102" stroke="#D9D6D0" stroke-width="2.6"/><rect x="30" y="106" width="13" height="22" rx="4.5" fill="#C79A52"/><rect x="66" y="106" width="13" height="22" rx="4.5" fill="#C79A52"/><rect x="102" y="106" width="13" height="22" rx="4.5" fill="#C79A52"/><rect x="138" y="106" width="13" height="22" rx="4.5" fill="#C79A52"/><rect x="174" y="106" width="13" height="22" rx="4.5" fill="#C79A52"/><path d="M204 102 L204 128" stroke="#E9BE72" stroke-width="1.3"/><path d="M199 105 L204 101 L209 105" stroke="#E9BE72" stroke-width="1.3" fill="none" stroke-linecap="round"/><path d="M199 125 L204 129 L209 125" stroke="#E9BE72" stroke-width="1.3" fill="none" stroke-linecap="round"/></svg><div class="cap"><b><i></i>SkinSafe-kop</b><span>Snijvlak achter de kam. Nooit op je huid.</span></div></div>
+    </div>
+
+    <div class="punt3">
+      <div class="punt"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2.4 15.6h19.2"/><rect x="4.6" y="9.4" width="2.8" height="6.2" rx="1.3"/><rect x="10.6" y="9.4" width="2.8" height="6.2" rx="1.3"/><rect x="16.6" y="9.4" width="2.8" height="6.2" rx="1.3"/><path d="M3.4 6.6h17.2"/></svg></span><div class="tx"><b>Geen sneetjes</b><span>De kam ligt op je huid, het mes erachter.</span></div></div>
+      <div class="punt"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2.6 17.4h18.8"/><path d="M7 17.4v-5M12 17.4v-5M17 17.4v-5"/><path d="M4.6 9.4h14.8" stroke-dasharray="2.4 2.6"/></svg></span><div class="tx"><b>Geen bultjes</b><span>Geknipt b&oacute;ven de huid, dus niets trekt terug.</span></div></div>
+      <div class="punt"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2.4 16.2c3.4-3.4 6.2 3.4 9.6 0s6.2 3.4 9.6 0"/><path d="M12 3.2v6.4M9.2 7.2 12 10l2.8-2.8"/></svg></span><div class="tx"><b>Druk gerust</b><span>Ook op huid die plooit en meebeweegt.</span></div></div>
+    </div>
+
+    <div class="slot">Niet beter je best doen.<br><span>Ander gereedschap.</span></div>
+    <p class="voet">Doorsnede, schematisch. Bedoeld om het verschil te laten zien, niet om op schaal te zijn.</p>
   </div>
 
-  <ul class="why" style="margin-top:24px">
-    <li><span class="n">01</span><div><b>Herkadering v&oacute;&oacute;r mechanisme, niet andersom</b><p>De eerste zin haalt de schuld weg bij de lezer. Dat is geen vriendelijkheid maar techniek: zolang iemand denkt dat h&iacute;j het fout deed, is een beter apparaat overbodig. Pas als het gereedschap de schuldige is, is er een reden om ander gereedschap te kopen.</p></div></li>
-    <li><span class="n">02</span><div><b>De tekening doet het werk dat tekst niet kan</b><p>&laquo;Het snijvlak zit achter de kam&raquo; is een zin die je moet gel&oacute;ven. Twee doorsneden naast elkaar laat je het z&iacute;en: bij de een raakt het mes de huid, bij de ander niet. Beeld wordt vele malen sneller verwerkt dan tekst, en dit is precies het soort verschil dat in &eacute;&eacute;n oogopslag te vatten is.</p></div></li>
-    <li><span class="n">03</span><div><b>Elke alinea eindigt in iets controleerbaars</b><p>Geen &laquo;revolutionaire technologie&raquo; en geen &laquo;ultieme oplossing&raquo;. Wat er staat is na te lopen: waar het snijvlak zit, wat de kam doet, waarom een te kort afgesneden haar terugtrekt. Dat is ook de test voor het blok &mdash; staat er iets dat je niet kunt aanwijzen, dan hoort het er niet.</p></div></li>
-    <li><span class="n">04</span><div><b>Donkere grond, en dat is geen smaak</b><p>Blok 02 is wit, blok 04 is wit. Dit blok ertussenin is donker, zodat je bij het scrollen v&oacute;&eacute;lt dat er iets anders begint. Het is het zwaarste argument van de pagina; het mag zwaarder ogen.</p></div></li>
-  </ul>
+  <div class="note win">
+    <h4>Wat er veranderd is ten opzichte van de eerste versie</h4>
+    <p>De eerste versie had drie alinea&rsquo;s lopende tekst naast de tekening &mdash; ongeveer 250 woorden. Dat is een muur voor iemand die op een telefoon aan het scrollen is, en het maakte het blok bovendien onbruikbaar als sjabloon: je kunt een klant niet vragen drie alinea&rsquo;s te schrijven voor elk van de dertig producten.</p>
+    <p>Nu staat er <strong>ongeveer 60 woorden</strong>, in stukjes die los van elkaar te lezen zijn: kop, &eacute;&eacute;n zin, twee bijschriften en drie korte punten. Het argument is niet ingekort &mdash; het is verplaatst naar de tekening, en de tekst wijst er alleen nog naar.</p>
+  </div>
 
   <div class="note warn">
-    <h4>Drie dingen om na te lopen v&oacute;&oacute;r dit live gaat</h4>
-    <p><strong>De afstand tussen mes en huid staat er niet in cijfers.</strong> Ik heb bewust &laquo;op afstand van je huid&raquo; geschreven en geen millimeters, omdat ik dat getal nergens in je specificaties kan vinden. Als je het w&eacute;l weet, zet het erin: een getal is geloofwaardiger dan een omschrijving, en het is precies het soort detail dat een concurrent niet kan kopi&euml;ren zonder het ook te meten.</p>
-    <p><strong>De uitleg over ingegroeide haren is een claim over huid.</strong> Je eigen <code>custom.product_usp</code> zegt al &laquo;geen ingegroeide haren of bultjes&raquo;, dus de belofte staat er al. De uitleg erbij is de gangbare verklaring, maar het blijft een uitspraak over wat er in een follikel gebeurt. Laat hem &eacute;&eacute;n keer nalezen door iemand die dat kan beoordelen, of zwak hem af tot wat je zelf hebt gezien in reviews.</p>
-    <p><strong>De doorsnede is schematisch en zegt dat er ook bij.</strong> Hij is getekend om het verschil te laten zien, niet om op schaal te zijn. Dat staat er letterlijk onder. Wil je hem sterker maken, dan is een macro-foto van de echte kop naast een mesje het volgende niveau &mdash; dan is het geen tekening meer maar bewijs.</p>
+    <h4>De tekening is inhoud, geen code</h4>
+    <p>De doorsnede hierboven is een SVG die ik met de hand heb getekend voor de Groom Guard-familie. Voor een neustrimmer of een tondeuse klopt hij niet, en niemand gaat per product een SVG tekenen. <strong>In het sjabloon zijn de twee panelen dus twee beeldvelden</strong> &mdash; een file_reference per paneel &mdash; en is deze tekening het eerste bestand dat je erin hangt.</p>
+    <p>Dat is meteen de plek waar je het blok het sterkst kunt maken: vervang de tekening ooit door een <strong>macro-foto van de echte kop naast een mesje</strong>. Dan is het geen schema meer maar bewijs, en dat is een trede hoger op de geloofwaardigheidsladder.</p>
+  </div>
+
+  <div class="shead" style="margin-top:34px"><span class="snum">INVULLEN</span><h2 class="duo" style="font-size:clamp(20px,2.4vw,26px)">Wat je per product invult,<span class="b">en verder niets.</span></h2></div>
+  <div class="invul">
+    <div class="veld"><code>mech_kop_a</code><span>&laquo;Het ligt niet aan jou.&raquo;<u>eerste regel van de kop &mdash; de herkadering</u></span></div>
+    <div class="veld"><code>mech_kop_b</code><span>&laquo;Het ligt aan het mesje.&raquo;<u>tweede regel, in goud</u></span></div>
+    <div class="veld"><code>mech_lead</code><span>&laquo;Een scheermesje m&oacute;&eacute;t je huid raken om te werken. Deze kop niet.&raquo;<u>&eacute;&eacute;n zin, maximaal twee regels</u></span></div>
+    <div class="veld"><code>mech_beeld_a</code><span>De doorsnede links<u>file_reference &mdash; wat de concurrent doet</u></span></div>
+    <div class="veld"><code>mech_label_a</code><span>&laquo;Een mesje&raquo; + &laquo;Snijvlak op de huid. Daarom die sneetjes.&raquo;<u>label plus &eacute;&eacute;n regel</u></span></div>
+    <div class="veld"><code>mech_beeld_b</code><span>De doorsnede rechts<u>file_reference &mdash; wat wij doen</u></span></div>
+    <div class="veld"><code>mech_label_b</code><span>&laquo;SkinSafe-kop&raquo; + &laquo;Snijvlak achter de kam. Nooit op je huid.&raquo;<u>label plus &eacute;&eacute;n regel</u></span></div>
+    <div class="veld"><code>mech_punten</code><span>Drie keer: kop van twee woorden plus &eacute;&eacute;n regel<u>list.single_line_text, gesplitst op de streep</u></span></div>
+    <div class="veld"><code>mech_slot</code><span>&laquo;Niet beter je best doen. / Ander gereedschap.&raquo;<u>twee regels, de tweede in goud</u></span></div>
   </div>
 
   <div class="note">
-    <h4>Waar het vandaan komt</h4>
-    <p>De inhoud van dit blok komt uit <code>custom.image_with_text</code>, dat op de Groom Guard al drie items bevat. Wat vastligt is de vorm: herkadering, dan drie keer &laquo;waarom&raquo; met een controleerbare afsluiting, dan de slotregel. Wat per product verschilt is welk mechanisme er wordt uitgelegd &mdash; bij een neustrimmer is dat een ander verhaal, bij een tondeuse weer een ander.</p>
-    <p>Voor een accessoire zonder eigen mechanisme valt dit blok weg. Het is een kernblok voor apparaten en een uitbreiding voor de rest.</p>
+    <h4>Waarom dit als sjabloon werkt</h4>
+    <p>Negen velden, allemaal kort genoeg om in &eacute;&eacute;n zitting voor tien producten te schrijven. Geen lopende tekst, dus ook geen risico dat het per product uit elkaar loopt in toon of lengte. En het dwingt de discipline af die de merklaag toch al eist: als een punt niet in &eacute;&eacute;n regel past, is het geen punt maar een claim die je nog moet bewijzen.</p>
+    <p>Voor een accessoire zonder eigen mechanisme laat je de velden leeg en valt het blok weg. Kernblok voor apparaten, uitbreiding voor de rest.</p>
   </div>
 </section>
 
