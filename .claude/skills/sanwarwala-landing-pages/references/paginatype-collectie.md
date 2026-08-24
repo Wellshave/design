@@ -175,3 +175,48 @@ is precies de pagina die je aan het vervangen bent.
   plek waar de bezoeker juist aan het kiezen is.
 - **Knoppen die rechtstreeks in de winkelwagen leggen, alleen bij onderdelen.** Bij een apparaat
   valt er nog te kiezen; daar is de productpagina de volgende stap, geen omweg.
+
+## Hetzelfde sjabloon over meerdere zones uitrollen
+
+Zodra de eerste zonepagina staat en is goedgekeurd, is het sjabloon vast en verandert alleen de
+inhoud. Bouw de volgende zones dan uit één generator met een inhoudsbestand per zone, niet door
+het HTML-bestand te kopiëren: de kaart, de keuzehulp, het raster en de slotband zijn dan
+gegarandeerd identiek, en een correctie landt in één keer op alle pagina's. Wat per zone
+verschilt is inhoud, en dat hoort in een `dict` te staan — niet in de opmaak.
+
+- **Controleer eerst status en voorraad, dan pas tel je.** `status:ARCHIVED` met voorraad erop
+  betekent dat het product niet te koop is maar wel in elke telling meeloopt; negatieve voorraad
+  op een actief product betekent uitverkocht zonder dat de winkel dat toont. Beide zijn een
+  bevinding voor de audit én een reden om de kaart anders te tonen. Laat de keuzehulp nooit
+  uitkomen op iets wat niet leverbaar is; geef zo'n apparaat een grijze kaart met een eerlijke
+  regel in plaats van een koopknop.
+- **`custom.included_box` is de beste bron voor "wat kan dit apparaat".** Zoek de metaobjecten op
+  in plaats van op de marketingtekst te vertrouwen: daar staat letterlijk of er een neus- en
+  oorhaaropzetstuk, een reinigingsstation of een travelbag in de doos zit. Spreken de USP en de
+  doosinhoud elkaar tegen, houd dan de doosinhoud aan en meld het verschil.
+- **Laat het aantal vragen de zone volgen.** Drie vragen is geen wet. Een zone met vier apparaten
+  waarvan één uitverkocht heeft genoeg aan twee vragen; een zone die uit twee parallelle
+  productlijnen bestaat wordt het scherpst met één vraag van vier opties (de trede) maal één van
+  twee (de lijn), zodat elk apparaat precies één combinatie wint. Een derde vraag die niets
+  verandert is decoratie, en de bezoeker merkt dat.
+- **Twee producten die alleen in afwerking verschillen zijn een bevinding, geen keuze.** Staan er
+  twee varianten met dezelfde doosinhoud en alleen een andere kleur, dan laat je de keuzehulp de
+  goedkoopste aanwijzen en zet je de ander ernaast in het raster met de reden waarom hij bestaat.
+  Vier losse kaarten die in werkelijkheid twee keer een kleur zijn, laten de bezoeker vier keer
+  afwegen wat hij één keer moet kiezen. Meld het in de audit: dit hoort een variant op één
+  productpagina te zijn.
+- **Beoordelingen worden bij verwante producten gedeeld.** Loox toont bij gegroepeerde producten
+  grotendeels dezelfde stroom, met de productnaam ín de tekst vervangen — dezelfde recensie
+  verschijnt dan onder twee apparaten met een ander woord erin. Meet dat vóór je een cijfer
+  opschrijft: vergelijk de namen en de eerste tekens van de teksten tussen twee producten. Bij
+  noemenswaardige overlap tel je de aantallen niet bij elkaar op maar noem je één apparaat met
+  zijn eigen aantal, of je zet de score één keer boven de groep met de uitleg erbij. Kies citaten
+  die inhoudelijk over dát apparaat gaan, en schrijf in de bronregel wat er aan de hand is: dat is
+  geloofwaardiger dan acht keer hetzelfde cijfer op acht kaarten — precies het gebrek waar de
+  redesign mee begon.
+- **Een tekening die niet in één blik leesbaar is, moet een ander onderwerp krijgen.** Een
+  mechanische doorsnede werkt alleen als het mechanisme in twee vormen te vatten is. Lukt dat
+  niet, kies dan een kaart in plaats van een doorsnede: welk apparaat doet welk stuk. Dat legt
+  vaak méér uit dan het mechanisme, want het beantwoordt de vraag waarmee de bezoeker binnenkomt.
+- **Houd lintjes op kaarten kort.** Meer dan ongeveer twintig tekens wordt afgekapt in de tegel;
+  het aantal bestellingen hoort dan in het matchpaneel of in de audit, niet op de kaart.
