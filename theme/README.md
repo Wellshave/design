@@ -146,6 +146,12 @@ TrustBox in gaat:
 * **Widgetcode voor de band** — vervangt de reviewkaarten door Trustpilots
   eigen carrousel.
 
+De carrousel van Trustpilot **schuift niet vanzelf door**. Er is geen
+data-attribuut voor, en aansturen van buitenaf kan niet: de widget draait in een
+iframe op een ander domein, dus zijn pijltjes zijn voor onze JavaScript
+onbereikbaar. Wie een band wil die vanzelf beweegt, moet de **Slider**-TrustBox
+pakken; die doet het van huis uit.
+
 **Let op bij het controleren.** `scripts.trustpilot.com` is vanuit deze
 werkomgeving niet bereikbaar (502 op de proxy), en dat is precies de loader die
 de widgetbootstrap injecteert. De widgets zijn hier dus niet te renderen: het

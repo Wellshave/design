@@ -96,9 +96,11 @@
       teksten die iemand moet bijhouden. De eigen kaarten blijven als blok
       bestaan, dus terugschakelen kan door dit veld leeg te maken. {%- endcomment -%}
     <div>
+      {%- comment -%} geen aantal achter de kop: de widget noemt het zelf, en dan
+        wel het echte. Twee tellingen naast elkaar waarvan er één veroudert is
+        precies wat we met deze widget wilden voorkomen. {%- endcomment -%}
       {%- if section.settings.rev_kop != blank -%}
-        <p class="ws-pf__revcount"><b>{{ section.settings.rev_kop }}</b>
-          <span>{{ section.settings.rev_totaal }}</span></p>
+        <p class="ws-pf__revcount ws-pf__revcount--live"><b>{{ section.settings.rev_kop }}</b></p>
       {%- endif -%}
       <div class="ws-pf__tpband" data-ws-tp>{{ section.settings.rev_widget }}</div>
     </div>
