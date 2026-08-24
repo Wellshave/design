@@ -31,6 +31,12 @@ de site verandert.
 
 Het bestand heet `.ttf` maar is in werkelijkheid WOFF2; het script pakt dat uit.
 
+## Bijzondere tekens
+
+ASS kent geen HTML-entiteiten. `&#176;` en `&#8482;` komen letterlijk in beeld te staan. Schrijf
+`°`, `™` en `é` gewoon als UTF-8 in het bestand; libass rendert ze correct uit de meegeleverde
+fontgewichten.
+
 ## Kleuren omrekenen
 
 ASS schrijft kleuren als `&HAABBGGRR` — alfa vooraan en **de kanalen omgekeerd** ten opzichte
@@ -61,6 +67,29 @@ met ruime tracking op y 562.
 Geen kader, geen balk achter de tekst — dat leest goedkoop. `\shad2` volstaat op donker beeld.
 Valt een annotatie toch over een verlicht vlak, verplaats hem dan naar linksboven (lijntje 140,
 label 164, regel 202) in plaats van er een balk onder te leggen.
+
+Is ook linksboven verlicht — bij een macro die het hele kader vult, gebeurt dat — wijk dan uit
+naar rechtsboven op `x 1060` met dezelfde y-waarden als linksboven. De langste regel blijft dan
+ruim binnen het kader. In de Gentleman Shaver-film gold dat voor het materiaalshot: het gouden
+paneel veegde door de linkeronderhoek.
+
+### Kies die positie met een meting, niet met je oog
+
+Een hoek die op een stilstaand frame donker lijkt, kan halverwege het shot vollopen. Meet de
+gemiddelde helderheid van het annotatievlak op drie momenten per shot en vergelijk de hoeken:
+
+```python
+from PIL import Image, ImageStat
+zones = {'linksonder': (100,810,900,970), 'linksboven': (100,110,900,240),
+         'rechtsonder': (1020,810,1820,970), 'rechtsboven': (1020,110,1820,240)}
+im = Image.open('frame.png').convert('L')
+for naam, vak in zones.items():
+    print(naam, round(ImageStat.Stat(im.crop(vak)).mean[0], 1))
+```
+
+Onder de 45 op een schaal van 255 leest witte tekst met `\shad2` moeiteloos; boven de 90 niet
+meer. Het materiaalshot mat 24 aan het begin en 112 halverwege — precies het geval dat je op één
+frame mist.
 
 **Timing per shot:** verschijnen 0,65 s na de cut, verdwijnen 0,40 s ervoor, met `\fad(300,300)`.
 Label en regel komen 0,08 s na elkaar binnen, zodat het oog van boven naar beneden meeleest.

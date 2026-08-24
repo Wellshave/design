@@ -180,9 +180,15 @@ Let op de uploadlimiet van 30 MB per bestand — splits een te grote map op.
 
 ## Wat dit kost
 
-Eén shot van 5 seconden op 1080p met `bitrate_mode:"high"` kostte 45 credits. Zes shots plus
-twee herkansingen kwamen uit op 360. Reken op ongeveer 300–400 credits voor een film van 30
-seconden, en op nul voor alle tekst, montage en herzieningen daarna.
+Eén shot van 5 seconden op 1080p met `bitrate_mode:"high"` kostte 45 credits, in twee runs
+gemeten. Zes shots plus twee herkansingen kwamen uit op 360; acht shots zonder herkansing ook op
+360. Reken op ongeveer 300–400 credits voor een film van 30 tot 36 seconden, en op nul voor alle
+tekst, montage en herzieningen daarna.
+
+Herkansingen zijn geen vast gegeven. De Flex Guard-film had er twee nodig op zes shots, de
+Gentleman Shaver-film nul op acht. Het verschil zat in de referentiefoto's: negen schone
+studiobestanden van 4000×4000 tegenover een krappere set. Vraag dus door op de foto's voordat je
+op herkansingen begroot.
 
 Een verticale 9:16-versie kost het volledige bedrag opnieuw. Bijsnijden van 16:9 is geen
 alternatief: de macro's zijn op de breedte gekadreerd en verliezen hun compositie.
@@ -210,8 +216,13 @@ van een tweede te schrijven.
 
 ## Wat deze werkwijze nog niet weet
 
-- **Eén product, één run.** Alles hierboven komt uit de Flex Guard-film. Of de beatstructuur
-  net zo werkt voor een klein product zoals een neustrimmer is niet gebleken.
+- **Twee producten, twee runs.** De Flex Guard-film (zes shots) en de Gentleman Shaver-film
+  (acht shots, met pop-uptrimmer en los hero-shot). Beide zijn handapparaten van vergelijkbaar
+  formaat. Of de beatstructuur net zo werkt voor een klein product zoals een neustrimmer is nog
+  steeds niet gebleken.
+- **De volle achtshotsvorm is één keer gedraaid.** Dat die vorm op 36 seconden uitkomt in plaats
+  van de beredeneerde 35 is geen probleem gebleken, maar er is niet gemeten of een kijker die
+  extra beats uitzit.
 - **Geen prestatiecijfers.** Er is niet gemeten of deze films beter converteren dan bestaande
   advertenties. Zodra daar cijfers over zijn, horen ze hier te staan.
 - **Alleen 16:9 gedraaid.** De verticale variant is beredeneerd, niet getest.
