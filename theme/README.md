@@ -146,6 +146,14 @@ TrustBox in gaat:
 * **Widgetcode voor de band** — vervangt de reviewkaarten door Trustpilots
   eigen carrousel.
 
+**Let op bij het controleren.** `scripts.trustpilot.com` is vanuit deze
+werkomgeving niet bereikbaar (502 op de proxy), en dat is precies de loader die
+de widgetbootstrap injecteert. De widgets zijn hier dus niet te renderen: het
+vak blijft leeg en er verschijnt een JS-fout. Op de live winkel werkt dezelfde
+bedrading wel — daar laadt de bootstrap en staan er vier widgets met een iframe
+in. Controleren van de TrustBoxen doe je dus in een echte browser, niet via
+`mirror.mjs`.
+
 Beide velden leeg laten geeft de oude situatie terug; de reviewkaarten blijven
 als blok bewaard. Alleen het `<div class="trustpilot-widget" …>`-deel plakken:
 de bootstrap laadt al via de Trustpilot-app op de winkel. In de sectie zit een
