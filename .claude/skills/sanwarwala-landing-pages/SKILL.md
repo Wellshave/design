@@ -42,7 +42,8 @@ those five exists because building without it went wrong.
 with the workflow — follow it from step 1. Its part 2 makes you choose the page type *before*
 any design happens, because the type decides the spine and the spine decides which sections
 exist. The test: can the points be reordered without the argument collapsing? If yes it is a
-listicle, if no it is an advertorial.
+listicle, if no it is an advertorial. A page that belongs to the shop itself — the whole
+collection or one collection — is neither: read `references/paginatype-collectie.md`.
 
 Then read the matching page-type file, which carries the section order, what is exclusive to
 that type, and how to set up its copy:
@@ -51,6 +52,7 @@ that type, and how to set up its copy:
 |---|---|---|---|
 | Advertorial | Unaware, problem-aware; reader has mis-diagnosed the problem | `references/paginatype-advertorial.md` | `references/startbestand-advertorial.html` |
 | Listicle | Solution-aware, product-aware; reader wants to know why you beat the lookalike | `references/paginatype-listicle.md` | `references/startbestand-listicle.html` |
+| Collection page | Shop navigation and Google, not one ad; the reader asks "which of these" | `references/paginatype-collectie.md` | the component CSS in either skeleton |
 
 Both skeletons carry the identical token block and component CSS, with placeholder content in
 square brackets. **Start from the matching skeleton, never from a blank page.** Replace what is

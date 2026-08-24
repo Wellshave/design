@@ -34,8 +34,10 @@ zelf ophalen, doe dat dan en laat de vraag weg; verzin nooit een antwoord.
    zonder dat erbij te zetten is misleidend. Heb je geen cijfer, meld het als gat.
 4. **Bestemming.** Welke URL, en draait de pagina binnen het thema of als kale pagina? De handle
    ligt daarna vast, want advertenties wijzen erheen.
-5. **Type.** Advertorial of listicle. Meestal leid je dit zelf af uit de creative en de
-   awareness; leg je afleiding voor en laat hem bevestigen in plaats van hem te vragen te kiezen.
+5. **Type.** Advertorial, listicle of collectiepagina. Meestal leid je dit zelf af uit de
+   creative en de awareness; leg je afleiding voor en laat hem bevestigen in plaats van hem te
+   vragen te kiezen. Gaat het om een pagina van de winkel zelf, dan vervallen vraag 1 en 2 en
+   komt er één voor in de plaats: welke zone, en welke producten horen daarbij.
 
 Blijft er iets onbeantwoord, benoem dan expliciet welke aanname je maakt en bouw door. Niet
 stilvallen, maar ook niet stilzwijgend invullen.
@@ -66,6 +68,8 @@ Kies eerst het type (deel 2), pak dan het bijbehorende skelet:
 dragen ze het volledige tokenblok en alle component-CSS, met tijdelijke inhoud tussen
 blokhaken. **Begin daar, niet bij nul.** Elke sectie die
 je niet nodig hebt verwijder je; wat je houdt is dan gegarandeerd consistent met de rest.
+Een collectiepagina heeft geen eigen skelet: neem het tokenblok en de component-CSS uit een van
+beide over en volg de sectievolgorde uit `paginatype-collectie.md`.
 
 Vervang alleen wat tussen blokhaken staat. Raak de CSS niet aan tenzij je iets toevoegt dat er
 echt niet in zit — en zet dat dan ook in deze merklaag.
@@ -91,16 +95,17 @@ Volg deel 16. Publiceren is niet af zonder de controle achteraf.
 ## 2. Welk paginatype
 
 **Kies het type voordat je iets ontwerpt.** Het type bepaalt de ruggengraat, en de ruggengraat
-bepaalt welke secties er zijn en in welke volgorde. Alles in dit bestand geldt voor allebei;
-alleen de opbouw verschilt.
+bepaalt welke secties er zijn en in welke volgorde. Alles in dit bestand geldt voor alle drie;
+alleen de opbouw verschilt. De eerste twee zijn advertentiepagina's; de derde hoort bij de
+winkel zelf en houdt zijn navigatie juist wel.
 
-| | Advertorial | Listicle |
-|---|---|---|
-| Ruggengraat | Een doorlopend argument | Losse punten, meestal genummerd |
-| Past bij | Unaware en problem-aware | Solution-aware en product-aware |
-| Kies als | De lezer zijn probleem verkeerd diagnosticeert | De lezer het probleem kent en wil weten waarom jij beter bent |
-| Uitwerking | `references/paginatype-advertorial.md` | `references/paginatype-listicle.md` |
-| Startbestand | `startbestand-advertorial.html` | `startbestand-listicle.html` |
+| | Advertorial | Listicle | Collectiepagina |
+|---|---|---|---|
+| Ruggengraat | Een doorlopend argument | Losse punten, meestal genummerd | De plek op het lichaam |
+| Past bij | Unaware en problem-aware | Solution-aware en product-aware | Wie in de winkel rondkijkt of via Google binnenkomt |
+| Kies als | De lezer zijn probleem verkeerd diagnosticeert | De lezer het probleem kent en wil weten waarom jij beter bent | De vraag is welke van deze apparaten hij moet hebben |
+| Uitwerking | `references/paginatype-advertorial.md` | `references/paginatype-listicle.md` | `references/paginatype-collectie.md` |
+| Startbestand | `startbestand-advertorial.html` | `startbestand-listicle.html` | de component-CSS uit een van beide |
 
 **De toets: kun je de punten omwisselen zonder dat het betoog omvalt?** Kan dat, dan is het een
 listicle. Kan dat niet, dan is het een advertorial en moet je hem ook zo bouwen.
@@ -111,10 +116,10 @@ een voordeel of toont hij een aanbod, dan weet de lezer al wat hij wil: listicle
 
 **Lees daarna het bijbehorende typebestand.** Daar staat de sectievolgorde, wat exclusief bij
 dat type hoort, en hoe je de copy ervoor opzet. Hero, geruststrook, beeldband, aanbodblok,
-bewijs, FAQ en afsluiter zijn in beide gevallen identiek.
+bewijs, FAQ en afsluiter zijn in alle gevallen identiek.
 
-Bouw je een nieuw component voor een van de twee, zet het dan in de gedeelde CSS zodat het
-andere type het ook kan gebruiken.
+Bouw je een nieuw component voor een van de drie, zet het dan in de gedeelde CSS zodat de andere
+typen het ook kunnen gebruiken.
 
 ---
 
