@@ -81,7 +81,10 @@
                   <img src="{{ media.preview_image | image_url: width: 300 }}" alt="{{ media.alt | escape }}"
                        loading="lazy" width="300" height="300">
                 </button>
-                {%- if media.alt != blank -%}<figcaption>{{ media.alt }}</figcaption>{%- endif -%}
+                {%- comment -%} media.alt valt terug op de producttitel; dan is het bijschrift ruis {%- endcomment -%}
+                {%- if media.alt != blank and media.alt != product.title -%}
+                  <figcaption>{{ media.alt }}</figcaption>
+                {%- endif -%}
               </figure>
             {%- endfor -%}
           </div>

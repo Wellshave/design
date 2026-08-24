@@ -28,7 +28,10 @@
   opacity:.09}
 .ws-pdp .ws-tg{position:absolute;top:20px;left:20px;z-index:4;background:#111;color:#fff;font-size:10px;
   font-weight:800;letter-spacing:.13em;text-transform:uppercase;padding:9px 16px;border-radius:100px}
-.ws-pdp .ws-held{position:relative;z-index:2;display:block;width:100%;flex:none;
+/* height:auto moet erbij. Het height-attribuut dat image_tag meegeeft is een
+   presentatiehint; zolang de CSS geen height zet, wint 2080px van de foto en
+   doet aspect-ratio niets. */
+.ws-pdp .ws-held{position:relative;z-index:2;display:block;width:100%;height:auto;flex:none;
   aspect-ratio:1/1;object-fit:contain;mix-blend-mode:multiply}
 
 /* ---- bijschriften met een haaklijn ---- */
@@ -226,7 +229,10 @@
 .ws-pdp .ws-baan{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:16px;
   scrollbar-width:none;margin:0;padding:0;list-style:none}
 .ws-pdp .ws-baan::-webkit-scrollbar{display:none}
-.ws-pdp .ws-baan > li{flex:0 0 100%;scroll-snap-align:start;margin:0}
+/* min-width:0 is hier niet optioneel: een flexitem krijgt standaard
+   min-width:auto, en dan duwt de eigen breedte van de foto (2080 px)
+   de dia open in plaats van dat hij zich naar de kolom voegt. */
+.ws-pdp .ws-baan > li{flex:0 0 100%;min-width:0;scroll-snap-align:start;margin:0}
 @media screen and (max-width:749px){.ws-pdp .ws-baan{gap:12px}}
 
 /* ---- keuzeknoppen voor varianten ---- */
