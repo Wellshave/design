@@ -95,9 +95,22 @@ is ruim genoeg; wat detail is, hoort achter een uitklap in plaats van in een eig
    zandverloop bij hover. Dat verloop van koel naar warm is de helft van het effect; het monogram
    alleen is te subtiel, zeker in een verkleinde weergave.
 4. **Over deze categorie** &mdash; zand. De uitleg die anders als SEO-tekst onderaan verdwijnt:
-   wat de categorie is, hoe de apparaten zich tot elkaar verhouden, en het mechanisme waarom het
-   werkt op déze plek. Haal de inhoud voor dat mechanisme uit de reviews: waar goede en slechte
+   wat de categorie is, waarin ze verschilt van de buurcategorie, hoe de apparaten zich tot elkaar
+   verhouden, het mechanisme waarom het werkt op déze plek, hoe je het veilig gebruikt en wat je
+   los kunt vervangen. Haal de inhoud voor dat mechanisme uit de reviews: waar goede en slechte
    ervaringen uiteenlopen, zit een uitlegfout die vóór de aankoop hoort.
+
+   Dit blok is ook het SEO-blok, en dat stelt eisen aan de vórm, niet alleen aan de tekst:
+   één `<section>`, een `<h2>` met de vraag die de bezoeker stelt, `<h3>`'s boven de vergelijking
+   en de gebruikstips, echte alinea's, een echte `<ol>` voor de stappen, en beschrijvende links
+   naar de productpagina's — nooit "klik hier". De tekst staat gewoon zichtbaar in de HTML: niet
+   achter een accordeon, niet in een afbeelding, niet door JavaScript ingeladen. Zoek de routes op
+   in de winkel en controleer ze; een verzonnen URL kost meer dan een ontbrekende link.
+
+   Zet de leesregel op 65 tot 70 tekens (`max-width` in `ch`) en laat de illustratie in een
+   `<figure>` staan met een bijschrift dat het mechanisme in één zin herhaalt. Een getekende
+   doorsnede krijgt `role="img"` met dezelfde beschrijving als alt, zodat hij niet als lege plek
+   in een schermlezer valt.
 5. **Bewijs uit deze zone** &mdash; donker. De score per apparaat, en drie beoordelingen gekozen op
    het bezwaar dat ze wegnemen.
 6. **Compleet maken** &mdash; donker. De bundel die al bestaat, plus de losse messen en koppen.
@@ -131,6 +144,12 @@ is precies de pagina die je aan het vervangen bent.
 - **De keuzehulp en het raster horen aan elkaar vast.** Het antwoord bovenaan bepaalt welke kaart
   het label 'beste match' krijgt en staat als leesbare regel boven het raster, met een knop om het
   te wissen. Anders is de keuzehulp een speeltje dat losstaat van de pagina eronder.
+- **Geen absolute belofte over sneetjes.** Schrijf dat het ontwerp de káns op sneetjes en trekken
+  helpt verkleinen, of dat het daarvoor gemaakt is. "Nooit meer wondjes" is niet waar te maken,
+  staat haaks op de reviews die er zelf over schrijven, en is precies het soort claim waarop een
+  bezoeker de rest van de pagina afrekent. Een klant mag het in zijn review wel zo zeggen; wij niet.
+- **Geen prijzen in de categorietekst.** Prijzen staan op de kaarten en veranderen; een prijs in
+  lopende tekst veroudert stil.
 - **Getallen op een bundelkaart komen uit `included_box`.** Het aantal onderdelen dat de
   productpagina toont, is hetzelfde aantal dat hier hoort te staan; iets anders tellen levert twee
   pagina's op die elkaar tegenspreken.
