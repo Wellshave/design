@@ -57,10 +57,13 @@
 .ws-qz__vraagsub{font-size:14.5px;line-height:160%;color:rgba(17,17,17,.58);
   text-align:center;margin-top:-8px !important}
 
-/* ── antwoordkaarten ── */
+/* ── antwoordkaarten ──
+   Let op de expliciete color: een <button> erft anders de systeemkleur
+   buttontext, en die wordt wit zodra de pagina in een donker kleurschema
+   staat. Dan verdwijnt de tekst op onze witte kaarten. */
 .ws-qz__twee{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 .ws-qz__kaart{position:relative;display:flex;flex-direction:column;align-items:flex-start;
-  gap:5px;text-align:left;cursor:pointer;font:inherit;background:#fff;
+  gap:5px;text-align:left;cursor:pointer;font:inherit;background:#fff;color:#111;
   border:1px solid rgba(17,17,17,.1);border-radius:16px;padding:22px 46px 22px 22px;
   transition:border-color .18s,box-shadow .18s,transform .18s}
 .ws-qz__kaart b{font-size:17px;font-weight:700;letter-spacing:-.01em}
@@ -79,7 +82,7 @@
 /* ── de zoneknoppen ── */
 .ws-qz__zones{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
 .ws-qz__zone{position:relative;display:flex;flex-direction:column;gap:0;cursor:pointer;
-  font:inherit;text-align:left;background:#fff;border:1px solid rgba(17,17,17,.1);
+  font:inherit;text-align:left;background:#fff;color:#111;border:1px solid rgba(17,17,17,.1);
   border-radius:16px;overflow:hidden;padding:0;
   transition:border-color .18s,box-shadow .18s,transform .18s}
 .ws-qz__zone:hover{border-color:rgba(188,129,62,.55);transform:translateY(-2px);
@@ -106,7 +109,7 @@
   background:rgba(188,129,62,.12);border-radius:100px;padding:8px 15px;margin:0 auto 14px !important}
 .ws-qz__uitlabel svg{width:15px;height:15px}
 .ws-qz__uitbody{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1fr);
-  gap:0;background:#fff;border:1px solid rgba(17,17,17,.09);border-radius:20px;
+  gap:0;background:#fff;color:#111;border:1px solid rgba(17,17,17,.09);border-radius:20px;
   overflow:hidden;box-shadow:0 34px 60px -46px rgba(17,17,17,.55)}
 .ws-qz__uitbeeld{position:relative;background:linear-gradient(155deg,#FBF4E9 0%,#F1E4D0 100%);
   display:grid;place-items:center;padding:26px;min-height:280px}

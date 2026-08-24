@@ -281,7 +281,22 @@ Ze staan hier omdat het alle drie vallen zijn die zich in dit thema herhalen:
    wint van `.ws-qz__merk` (0,1,0) en zette het monogram terug op
    `position:relative`, waardoor het 230px in de flow innam. Dat gat was op het
    oog een marge-probleem en was het niet.
-3. **`[hidden]` verliest van een klasse met `display`.** `.ws-qz__terug{display:
+3. **Een `<button>` erft zijn tekstkleur van het systeem.** Zet je op een knop
+   wel een achtergrond maar geen `color`, dan pakt hij de systeemkleur
+   `buttontext`. Die is zwart in een licht kleurschema en **wit in een donker**.
+   De antwoordkaarten van de quiz hebben een witte achtergrond, dus zodra de
+   pagina in een donker kleurschema stond was de tekst onzichtbaar — terwijl
+   alle `<p>`-tekst gewoon zichtbaar bleef, want die erft van `body`, waar de
+   kleur wél staat. Regel: elk element dat zijn eigen achtergrond zet, zet ook
+   zijn eigen `color`. Nalopen kan zo:
+
+   ```
+   selectors met een background én zonder color, die op een <button> staan
+   ```
+
+   In de andere secties bleek dit goed te gaan: `.ws-fam__play` zet de kleur op
+   het icoon zelf, en de pins in blok 5 bevatten geen tekst.
+4. **`[hidden]` verliest van een klasse met `display`.** `.ws-qz__terug{display:
    inline-flex}` overrulet de browserregel `[hidden]{display:none}`, dus de
    terugknop stond op stap 1 gewoon in beeld terwijl het attribuut wél goed
    gezet was. Elk element dat via `hidden` geschakeld wordt heeft een eigen
