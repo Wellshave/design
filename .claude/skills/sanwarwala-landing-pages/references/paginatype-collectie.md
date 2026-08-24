@@ -65,11 +65,27 @@ is ruim genoeg; wat detail is, hoort achter een uitklap in plaats van in een eig
 
 2. **Zonebalk** &mdash; plakkend, direct onder de kop. Kruimelpad, de zones met hun aantal, en één
    regel die zegt wat je bekijkt. Dit vervangt de kale titel met chips.
-3. **Het raster** &mdash; wit, meteen erna. Alles wat bij de zone hoort: apparaten, bundels, en de
-   messen en koppen die erbij horen, met de typefilters erboven. De kaart draagt de eigen
-   beoordeling mét aantal, de besparing in euro's, en bij onderdelen een snelknop die
-   rechtstreeks in de winkelwagen legt. De volledige vergelijking van de apparaten &mdash;
-   waarvoor gemaakt, wat hij extra kan, wat hij niet doet &mdash; zit eronder in een uitklap.
+3. **Het raster** &mdash; meteen na de zonebalk, en opgedeeld in drie groepen met een eigen kop:
+   de apparaten waar je uit kiest, de bundels die goedkoper zijn dan los, en de messen en koppen
+   die je later nodig hebt. Eén lange rij van twaalf kaarten leest als een magazijn; drie groepen
+   van vier lezen als een winkel. Boven het raster staat een balk met de typefilters, de sortering
+   en een vergelijkknop; daaronder een regel die laat zien op welke antwoorden uit de keuzehulp
+   de pagina is afgestemd, met een manier om die te wissen.
+
+   De kaart draagt: label linksboven, vergelijkvinkje rechtsboven, de eigen beoordeling mét
+   aantal (of eerlijk 'nog geen reviews'), twee kenmerkchips, prijs met doorgestreepte vanprijs,
+   de besparing als aparte pil, en een volle knop. Bij een bundel vervangt het aantal onderdelen
+   uit de doos de beoordeling; bij een mes of kop komt er een snelknop naast die rechtstreeks in
+   de winkelwagen legt. De volledige vergelijking &mdash; waarvoor gemaakt, wat hij extra kan, wat
+   hij niet doet &mdash; zit in een uitklap die opent vanuit de vergelijkknop en alleen de
+   aangevinkte apparaten toont.
+
+   **De kaart komt uit het thema, niet uit een nieuw ontwerp.** `assets/ws-bestsellers.css` bevat
+   de kaart met het monogram achter de packshot dat bij hover naar voren komt (dekking 0,22,
+   0,62s, `cubic-bezier(.22,.61,.36,1)`, packshot 1,035×). Neem die waarden letterlijk over,
+   inclusief de twee uitzonderingen die er al in zitten: op een apparaat zonder muis staat het
+   monogram zacht aan (0,1) omdat hover daar nergens vandaan komt, en bij `prefers-reduced-motion`
+   vervallen de overgangen. De kaart die de keuzehulp aanwijst, krijgt het monogram permanent.
 4. **Over deze categorie** &mdash; zand. De uitleg die anders als SEO-tekst onderaan verdwijnt:
    wat de categorie is, hoe de apparaten zich tot elkaar verhouden, en het mechanisme waarom het
    werkt op déze plek. Haal de inhoud voor dat mechanisme uit de reviews: waar goede en slechte
@@ -104,6 +120,12 @@ is precies de pagina die je aan het vervangen bent.
   geen heeft. Heeft een product nog geen beoordelingen, schrijf dat dan op.
 - **De hele zone hoort op de pagina.** Messen, koppen en bundels staan vaak in een andere
   collectie terwijl ze bij dezelfde plek horen en goed verkopen.
+- **De keuzehulp en het raster horen aan elkaar vast.** Het antwoord bovenaan bepaalt welke kaart
+  het label 'beste match' krijgt en staat als leesbare regel boven het raster, met een knop om het
+  te wissen. Anders is de keuzehulp een speeltje dat losstaat van de pagina eronder.
+- **Getallen op een bundelkaart komen uit `included_box`.** Het aantal onderdelen dat de
+  productpagina toont, is hetzelfde aantal dat hier hoort te staan; iets anders tellen levert twee
+  pagina's op die elkaar tegenspreken.
 - **Controleer de achtergrond van elke productfoto voordat je ze naast elkaar zet.** Setfoto's
   staan door elkaar op wit en op zwart; in één raster springt dat eruit. Er is meestal een
   lichte variant van dezelfde set.
