@@ -1,0 +1,632 @@
+{
+  "sections": {
+    "kop": {
+      "type": "ws-collectie-kop",
+      "blocks": {
+        "vraag_1": {
+          "type": "vraag",
+          "settings": {
+            "groep": "doel",
+            "vraag": "Wat wil je bijwerken?",
+            "opties": "neus|Alleen neus & oren|neus & oren\nwenk|Ook wenkbrauwen|ook wenkbrauwen\nscheer|Ook kort scheren|ook kort scheren\nbody|Ook baard of lichaam|ook baard of lichaam",
+            "start": "neus"
+          }
+        },
+        "vraag_2": {
+          "type": "vraag",
+          "settings": {
+            "groep": "lijn",
+            "vraag": "Wat weegt zwaarder?",
+            "opties": "nieuw|De nieuwste lijn|nieuwste lijn\nprijs|De scherpste prijs|scherpste prijs",
+            "start": "nieuw"
+          }
+        },
+        "match_1": {
+          "type": "match",
+          "settings": {
+            "id": "ess",
+            "product": "neustrimmer-essential",
+            "naam": "Neustrimmer Essential™",
+            "badge": "Instap, nieuwe lijn",
+            "zin": "Eén opzetstuk, één knop: neus- en oorhaar en verder niets.",
+            "reden_1": "Neus- en oorhaar zonder trekken",
+            "reden_2": "Drie onderdelen in de doos",
+            "reden_3": "USB-C oplaadbaar"
+          }
+        },
+        "match_2": {
+          "type": "match",
+          "settings": {
+            "id": "basic",
+            "product": "wellshave-neustrimmer-basic",
+            "naam": "Neustrimmer Basic™",
+            "badge": "Laagste prijs in de collectie",
+            "zin": "Hetzelfde werk uit de vertrouwde lijn, voor drie euro minder.",
+            "reden_1": "Neus- en oorhaar zonder trekken",
+            "reden_2": "Drie onderdelen in de doos",
+            "reden_3": "Eén druk op de knop"
+          }
+        },
+        "match_3": {
+          "type": "match",
+          "settings": {
+            "id": "elite",
+            "product": "neustrimmer-2in1-elite",
+            "naam": "Neustrimmer 2in1 Elite™",
+            "badge": "Nieuwe lijn",
+            "zin": "Met het detailopzetstuk erbij, voor wenkbrauwen en strakke lijntjes.",
+            "reden_1": "Neus- en oorhaar zonder trekken",
+            "reden_2": "Detailtrimmer voor wenkbrauwen",
+            "reden_3": "Vier onderdelen in de doos"
+          }
+        },
+        "match_4": {
+          "type": "match",
+          "settings": {
+            "id": "prem",
+            "product": "wellshave-2-in-1-neustrimmer-premium",
+            "naam": "Neustrimmer Premium™ 2-in-1",
+            "badge": "Zelfde trede, lagere prijs",
+            "zin": "Dezelfde twee opzetstukken uit de vertrouwde lijn.",
+            "reden_1": "Neus- en oorhaar zonder trekken",
+            "reden_2": "Detailtrimmer voor wenkbrauwen",
+            "reden_3": "Vier onderdelen in de doos"
+          }
+        },
+        "match_5": {
+          "type": "match",
+          "settings": {
+            "id": "plat",
+            "product": "neustrimmer-3in1-platinum",
+            "naam": "Neustrimmer 3in1 Platinum™",
+            "badge": "Nieuwe lijn",
+            "zin": "Plus het shaver-opzetstuk, voor kort haar op kleine vlakken.",
+            "reden_1": "Neus- en oorhaar zonder trekken",
+            "reden_2": "Detailtrimmer voor wenkbrauwen",
+            "reden_3": "Shaver-opzetstuk voor kort haar"
+          }
+        },
+        "match_6": {
+          "type": "match",
+          "settings": {
+            "id": "adv",
+            "product": "wellshave-3-in-1-neustrimmer-advance",
+            "naam": "Neustrimmer Advance™ 3-in-1",
+            "badge": "Zelfde trede, lagere prijs",
+            "zin": "Dezelfde drie opzetstukken uit de vertrouwde lijn.",
+            "reden_1": "Neus- en oorhaar zonder trekken",
+            "reden_2": "Detailtrimmer voor wenkbrauwen",
+            "reden_3": "Shaver-opzetstuk voor kort haar"
+          }
+        },
+        "match_7": {
+          "type": "match",
+          "settings": {
+            "id": "ultra",
+            "product": "neustrimmer-4in1-ultra",
+            "naam": "Neustrimmer 4in1 Ultra™",
+            "badge": "57× besteld in 30 dagen",
+            "zin": "De bovenste trede van de nieuwe lijn, met een baardtrimmer-opzetstuk erbij.",
+            "reden_1": "Vier opzetstukken, zes onderdelen",
+            "reden_2": "Ook je baardlijn met hetzelfde apparaat",
+            "reden_3": "SkinGuard tegen wondjes en irritatie"
+          }
+        },
+        "match_8": {
+          "type": "match",
+          "settings": {
+            "id": "ultimate",
+            "product": "wellshave-4-in-1-neustrimmer-ultimate",
+            "naam": "Neustrimmer Ultimate™ 4-in-1",
+            "badge": "Grootste voordeel",
+            "zin": "De bovenste trede van de vertrouwde lijn, met een bodygroomer-opzetstuk erbij.",
+            "reden_1": "Vier opzetstukken, zes onderdelen",
+            "reden_2": "Ook lichaamshaar met hetzelfde apparaat",
+            "reden_3": "SkinGuard tegen wondjes en irritatie"
+          }
+        },
+        "zone_1": {
+          "type": "zone",
+          "settings": {
+            "naam": "Lichaam & schaamstreek",
+            "aantal": "4",
+            "url": "",
+            "huidig": false
+          }
+        },
+        "zone_2": {
+          "type": "zone",
+          "settings": {
+            "naam": "Gezicht & baard",
+            "aantal": "11",
+            "url": "",
+            "huidig": false
+          }
+        },
+        "zone_3": {
+          "type": "zone",
+          "settings": {
+            "naam": "Hoofd",
+            "aantal": "4",
+            "url": "",
+            "huidig": false
+          }
+        },
+        "zone_4": {
+          "type": "zone",
+          "settings": {
+            "naam": "Neus & oren",
+            "aantal": "8",
+            "url": "",
+            "huidig": true
+          }
+        }
+      },
+      "block_order": [
+        "vraag_1",
+        "vraag_2",
+        "match_1",
+        "match_2",
+        "match_3",
+        "match_4",
+        "match_5",
+        "match_6",
+        "match_7",
+        "match_8",
+        "zone_1",
+        "zone_2",
+        "zone_3",
+        "zone_4"
+      ],
+      "settings": {
+        "eyebrow": "Neus & oren · 8 modellen",
+        "kop_1": "Eruit halen zonder",
+        "kop_2": "eraan te trekken.",
+        "lede": "Acht modellen die op dezelfde manier werken: het mes draait binnen een gesloten kap. Wat ze onderscheidt is niet het cijfer eronder, maar hoeveel opzetstukken erbij zitten.",
+        "foto": "shopify://shop_images/ws-use-neustrimmer.jpg",
+        "foto_alt": "Man werkt zijn neushaar bij met een Wellshave-neustrimmer",
+        "monogram_letter": "S",
+        "score": "4,5/5",
+        "sterren": 4,
+        "halve_ster": true,
+        "score_bron": "één stroom over de hele lijn",
+        "quote": "Prima ding. Doet wat hij moet doen, geruisloos en precies. Ook geen last van pijn door haartjes die worden uitgetrokken.",
+        "quote_bron": "MarkA83 · geverifieerde koper · neustrimmerlijn",
+        "gerust_1": "100 dagen proberen",
+        "gerust_2": "2 jaar garantie",
+        "gerust_3": "Morgen in huis",
+        "kaartkop": "Jouw neustrimmer in 20 seconden",
+        "kaartsub": "2 keuzes · acht mogelijke uitkomsten",
+        "kaartvraag": "Hoe ver wil je gaan?",
+        "tabel": "doel=neus, lijn=nieuw > ess\ndoel=neus, lijn=prijs > basic\ndoel=wenk, lijn=nieuw > elite\ndoel=wenk, lijn=prijs > prem\ndoel=scheer, lijn=nieuw > plat\ndoel=scheer, lijn=prijs > adv\ndoel=body, lijn=nieuw > ultra\ndoel=body, lijn=prijs > ultimate",
+        "standaard": "ess",
+        "kruimel": "Neus & oren",
+        "zone_aantal": "8",
+        "zonemelding": "verdeeld over twee lijnen, plus twee bundels.",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 0
+      }
+    },
+    "raster": {
+      "type": "ws-collectie-raster",
+      "blocks": {
+        "groep_1": {
+          "type": "groep",
+          "settings": {
+            "kop": "De Nose Sculptor-lijn",
+            "sub": "De nieuwste vier, van één opzetstuk tot vier.",
+            "cat": "app",
+            "producten": [
+              "neustrimmer-4in1-ultra",
+              "neustrimmer-3in1-platinum",
+              "neustrimmer-2in1-elite",
+              "neustrimmer-essential"
+            ],
+            "noot": "<b>4,5 uit 5</b> bij deze lijn. Loox toont bij alle acht neustrimmers grotendeels dezelfde beoordelingenstroom van ruim 740 beoordelingen, met de productnaam in de tekst vervangen. Er is dus géén aparte score per model — daarom staat het cijfer hier één keer, en niet acht keer op een kaart.",
+            "kicker": "",
+            "labels": "neustrimmer-4in1-ultra = Best verkocht\nneustrimmer-3in1-platinum = Nieuwe lijn\nneustrimmer-2in1-elite = Nieuwe lijn\nneustrimmer-essential = Instap, nieuwe lijn",
+            "link_label": "",
+            "link_url": ""
+          }
+        },
+        "groep_2": {
+          "type": "groep",
+          "settings": {
+            "kop": "De vertrouwde lijn",
+            "sub": "Dezelfde vier tredes, elk een paar euro voordeliger.",
+            "cat": "app",
+            "producten": [
+              "wellshave-4-in-1-neustrimmer-ultimate",
+              "wellshave-3-in-1-neustrimmer-advance",
+              "wellshave-2-in-1-neustrimmer-premium",
+              "wellshave-neustrimmer-basic"
+            ],
+            "noot": "Zelfde ladder, andere generatie. Het verschil zit bovenaan: de Ultimate heeft een <b>bodygroomer</b>-opzetstuk, de Ultra een <b>baardtrimmer</b>-opzetstuk.",
+            "kicker": "",
+            "labels": "wellshave-4-in-1-neustrimmer-ultimate = Grootste voordeel\nwellshave-3-in-1-neustrimmer-advance = Vertrouwde lijn\nwellshave-2-in-1-neustrimmer-premium = Vertrouwde lijn\nwellshave-neustrimmer-basic = Laagste prijs",
+            "link_label": "",
+            "link_url": ""
+          }
+        },
+        "groep_3": {
+          "type": "groep",
+          "settings": {
+            "kop": "Of neem het mee in een bundel",
+            "sub": "Voordeliger samengesteld dan de losse onderdelen.",
+            "cat": "bundel",
+            "producten": [
+              "wellshave-shave-package-3-0",
+              "wellshave-shave-package-2-0"
+            ],
+            "noot": "",
+            "kicker": "",
+            "labels": "wellshave-shave-package-3-0 = Bundel\nwellshave-shave-package-2-0 = Bundel",
+            "link_label": "",
+            "link_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "groep_1",
+        "groep_2",
+        "groep_3"
+      ],
+      "settings": {
+        "filter_alles": "Alles",
+        "filter_app": "Apparaten",
+        "filter_bundel": "Bundels",
+        "filter_mes": "Onderdelen",
+        "vergelijken": true,
+        "sorteer_label": "Meest relevant",
+        "keuzeregel": "Afgestemd op jouw keuzes:",
+        "keuzeregel_start": "neus & oren · nieuwste lijn",
+        "wis_label": "Wis keuzes",
+        "monogram": "shopify://shop_images/ws-mark.png",
+        "geen_score": "Nieuw · nog geen beoordelingen",
+        "uitverkocht_label": "Tijdelijk uitverkocht",
+        "uitverkocht_voet": "Tijdelijk niet leverbaar",
+        "blik_voet": "100 dagen proberen · 2 jaar garantie",
+        "mes_voet": "Vandaag besteld, morgen in huis",
+        "aanbod_product": "shave-package-ultimate",
+        "aanbod_eyebrow": "Alles in één set",
+        "aanbod_zin": "Acht onderdelen voor lichaam, neus en detailwerk — samen goedkoper dan los.",
+        "aanbod_knop": "Bekijk de set",
+        "slot_tekst": "in deze zone · elk apparaat 100 dagen te proberen",
+        "slot_link_label": "Bekijk de hele collectie",
+        "slot_link": "shopify://collections/all",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 0
+      }
+    },
+    "uitleg": {
+      "type": "ws-collectie-uitleg",
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "product": "neustrimmer-essential",
+            "naam": "Neustrimmer Essential™",
+            "url": "",
+            "tekst": "Eén opzetstuk voor neus en oren, uit de nieuwe lijn."
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "product": "wellshave-neustrimmer-basic",
+            "naam": "Neustrimmer Basic™",
+            "url": "",
+            "tekst": "Dezelfde eerste trede uit de vertrouwde lijn, voor de laagste prijs."
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "product": "neustrimmer-2in1-elite",
+            "naam": "Neustrimmer 2in1 Elite™",
+            "url": "",
+            "tekst": "Met detailtrimmer erbij voor wenkbrauwen en strakke lijntjes."
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "product": "wellshave-2-in-1-neustrimmer-premium",
+            "naam": "Neustrimmer Premium™ 2-in-1",
+            "url": "",
+            "tekst": "Dezelfde twee opzetstukken uit de vertrouwde lijn."
+          }
+        },
+        "item_5": {
+          "type": "item",
+          "settings": {
+            "product": "neustrimmer-3in1-platinum",
+            "naam": "Neustrimmer 3in1 Platinum™",
+            "url": "",
+            "tekst": "Met shaver-opzetstuk voor kort haar op kleine vlakken."
+          }
+        },
+        "item_6": {
+          "type": "item",
+          "settings": {
+            "product": "wellshave-3-in-1-neustrimmer-advance",
+            "naam": "Neustrimmer Advance™ 3-in-1",
+            "url": "",
+            "tekst": "Dezelfde drie opzetstukken uit de vertrouwde lijn."
+          }
+        },
+        "item_7": {
+          "type": "item",
+          "settings": {
+            "product": "neustrimmer-4in1-ultra",
+            "naam": "Neustrimmer 4in1 Ultra™",
+            "url": "",
+            "tekst": "De bovenste trede, met een baardtrimmer-opzetstuk erbij."
+          }
+        },
+        "item_8": {
+          "type": "item",
+          "settings": {
+            "product": "wellshave-4-in-1-neustrimmer-ultimate",
+            "naam": "Neustrimmer Ultimate™ 4-in-1",
+            "url": "",
+            "tekst": "De bovenste trede van de vertrouwde lijn, met een bodygroomer-opzetstuk."
+          }
+        },
+        "tip_1": {
+          "type": "tip",
+          "settings": {
+            "kop": "Werk droog en schoon",
+            "tekst": "Snuit je neus eerst en gebruik hem op een droge binnenkant. Vocht plakt haartjes aan elkaar, en dan trekt de kap in plaats van te knippen."
+          }
+        },
+        "tip_2": {
+          "type": "tip",
+          "settings": {
+            "kop": "Draai, duw niet",
+            "tekst": "Breng de punt een klein stukje naar binnen en draai hem rustig rond. Verder naar binnen duwen levert niets op en is precies waar irritatie ontstaat."
+          }
+        },
+        "tip_3": {
+          "type": "tip",
+          "settings": {
+            "kop": "Spoel hem na elke beurt om",
+            "tekst": "De kap loopt vol met haartjes en dat is wat de motor laat zwoegen. Een paar seconden onder de kraan is genoeg."
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4",
+        "item_5",
+        "item_6",
+        "item_7",
+        "item_8",
+        "tip_1",
+        "tip_2",
+        "tip_3"
+      ],
+      "settings": {
+        "eyebrow": "Over deze categorie",
+        "h2_1": "Welke neustrimmer heb je nodig,",
+        "h2_2": "en waarin verschillen de acht?",
+        "inleiding": "<p>Neus- en oorhaar zit op de lastigste plek van je hele lichaam: in een nauwe holte, met dunne huid eromheen die snel bloedt en snel irriteert. Daarom werkt geen enkele neustrimmer met een blootliggend mes. Het mes draait binnen een gesloten kap met gleuven: de haren komen door de gleuven naar binnen en worden daar afgeknipt, terwijl de huid buiten de kap blijft. Dat helpt de kans op wondjes en op het trekkende gevoel van uitgetrokken haartjes te verkleinen.</p><p>Omdat alle acht modellen dat op dezelfde manier doen, zit het verschil ergens anders: in het aantal opzetstukken. Eén opzetstuk betekent neus en oren. Twee betekent daarnaast een detailtrimmer voor wenkbrauwen en lijntjes. Drie voegt een shaver-opzetstuk toe voor kort haar op kleine vlakken. Vier gaat verder: bij de nieuwe lijn met een baardtrimmer, bij de vertrouwde lijn met een bodygroomer. Meer opzetstukken maken de trimmer niet beter in de neus — ze maken hem breder inzetbaar.</p>",
+        "h3_lijst": "De acht modellen op volgorde van de ladder",
+        "slotalinea": "<p>Alle acht laden op met een USB-C-kabel en zijn compact genoeg voor de toilettas. Wil je meer dan alleen detailwerk, kijk dan naar de <a href=\"https://wellshave.com/collections/all\">hele collectie</a>: de bovenste trede van deze ladder doet je baardlijn of je lichaamshaar erbij, maar een echte bodygroomer of baardtrimmer doet dat werk beter.</p>",
+        "tekening": "<svg viewBox=\"0 0 460 330\" style=\"width:100%;height:auto\" fill=\"none\"\n   stroke-linecap=\"round\" stroke-linejoin=\"round\" role=\"img\"\n   aria-label=\"Doorsnede van een neustrimmerpunt: het ronddraaiende mes zit achter een gesloten kap met gleuven, zodat haren er wel in kunnen maar de huid het mes niet raakt.\">\n<title>Doorsnede van een neustrimmerpunt: het ronddraaiende mes zit achter een gesloten kap met gleuven, zodat haren er wel in kunnen maar de huid het mes niet raakt.</title>\n<text x=\"0\" y=\"14\" font-family=\"Montserrat\" font-size=\"10.5\" font-weight=\"800\" letter-spacing=\"1.8\" fill=\"rgba(17,17,17,.4)\">DOORSNEDE VAN DE PUNT</text>\n<path d=\"M256 10h14\" stroke=\"#BC813E\" stroke-width=\"2.6\"/>\n<text x=\"276\" y=\"14\" font-family=\"Montserrat\" font-size=\"10.5\" font-weight=\"700\" fill=\"rgba(17,17,17,.55)\">het draaiende mes</text>\n<path d=\"M392 10h14\" stroke=\"#111\" stroke-width=\"2.6\"/>\n<text x=\"412\" y=\"14\" font-family=\"Montserrat\" font-size=\"10.5\" font-weight=\"700\" fill=\"rgba(17,17,17,.55)\">de kap</text>\n\n<!-- neuswand links en rechts -->\n<path d=\"M60 300c-4-70 6-124 26-160 10-18 18-30 18-44\" stroke=\"rgba(188,129,62,.16)\" stroke-width=\"18\"/>\n<path d=\"M60 300c-4-70 6-124 26-160 10-18 18-30 18-44\" stroke=\"#111\" stroke-width=\"2.2\"/>\n<path d=\"M300 300c4-70-6-124-26-160-10-18-18-30-18-44\" stroke=\"rgba(188,129,62,.16)\" stroke-width=\"18\"/>\n<path d=\"M300 300c4-70-6-124-26-160-10-18-18-30-18-44\" stroke=\"#111\" stroke-width=\"2.2\"/>\n<text x=\"14\" y=\"252\" font-family=\"Montserrat\" font-size=\"10.5\" font-weight=\"800\" letter-spacing=\"1.2\" fill=\"rgba(17,17,17,.35)\">HUID</text>\n\n<!-- haren die naar binnen groeien -->\n<path d=\"M96 214c14 6 24 16 30 26M104 178c18 8 30 22 36 36M114 146c16 12 26 28 30 44\" stroke=\"rgba(17,17,17,.42)\" stroke-width=\"2.1\"/>\n<path d=\"M264 214c-14 6-24 16-30 26M256 178c-18 8-30 22-36 36M246 146c-16 12-26 28-30 44\" stroke=\"rgba(17,17,17,.42)\" stroke-width=\"2.1\"/>\n\n<!-- de kap met gleuven -->\n<path d=\"M150 250v-52a30 30 0 0 1 60 0v52\" stroke=\"#111\" stroke-width=\"2.4\"/>\n<path d=\"M150 250h60\" stroke=\"#111\" stroke-width=\"2.4\"/>\n<path d=\"M152 210h12M152 226h12M196 210h12M196 226h12M168 176h9M183 176h9\" stroke=\"#fff\" stroke-width=\"4.6\"/>\n<path d=\"M152 210h12M152 226h12M196 210h12M196 226h12M168 176h9M183 176h9\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"2\"/>\n\n<!-- het draaiende mes erachter -->\n<circle cx=\"180\" cy=\"206\" r=\"21\" stroke=\"#BC813E\" stroke-width=\"2.4\"/>\n<path d=\"M180 185v42M159 206h42M165 191l30 30M195 191l-30 30\" stroke=\"#BC813E\" stroke-width=\"2\"/>\n<path d=\"M206 178a30 30 0 0 1 5 14\" stroke=\"#BC813E\" stroke-width=\"2.2\"/>\n<path d=\"M206 190l6 4 4-6\" stroke=\"#BC813E\" stroke-width=\"2.2\"/>\n\n<!-- steel -->\n<path d=\"M156 250v78h48v-78\" stroke=\"#111\" stroke-width=\"2.2\"/>\n\n<path d=\"M228 206h74\" stroke=\"#BC813E\" stroke-width=\"1.6\" stroke-dasharray=\"3 4\"/>\n<text x=\"310\" y=\"196\" font-family=\"Montserrat\" font-size=\"11\" font-weight=\"800\" fill=\"#BC813E\">Het mes blijft</text>\n<text x=\"310\" y=\"211\" font-family=\"Montserrat\" font-size=\"11\" font-weight=\"800\" fill=\"#BC813E\">binnen de kap</text>\n<text x=\"310\" y=\"228\" font-family=\"Montserrat\" font-size=\"11\" font-weight=\"600\" fill=\"rgba(17,17,17,.55)\">Haren komen door</text>\n<text x=\"310\" y=\"242\" font-family=\"Montserrat\" font-size=\"11\" font-weight=\"600\" fill=\"rgba(17,17,17,.55)\">de gleuven naar</text>\n<text x=\"310\" y=\"256\" font-family=\"Montserrat\" font-size=\"11\" font-weight=\"600\" fill=\"rgba(17,17,17,.55)\">binnen; je huid</text>\n<text x=\"310\" y=\"270\" font-family=\"Montserrat\" font-size=\"11\" font-weight=\"600\" fill=\"rgba(17,17,17,.55)\">komt er niet bij.</text>\n\n<path d=\"M126 122h-38\" stroke=\"rgba(17,17,17,.22)\" stroke-width=\"1.6\" stroke-dasharray=\"3 4\"/>\n<text x=\"8\" y=\"112\" font-family=\"Montserrat\" font-size=\"11\" font-weight=\"800\" fill=\"#111\">Neushaar</text>\n<text x=\"8\" y=\"128\" font-family=\"Montserrat\" font-size=\"11\" font-weight=\"600\" fill=\"rgba(17,17,17,.55)\">groeit naar</text>\n<text x=\"8\" y=\"142\" font-family=\"Montserrat\" font-size=\"11\" font-weight=\"600\" fill=\"rgba(17,17,17,.55)\">binnen toe</text>\n</svg>",
+        "bijschrift": "Het ronddraaiende mes zit achter een gesloten kap; de haren komen door de gleuven naar binnen en je huid raakt het mes niet.",
+        "h3_tips": "Hoe gebruik je een neustrimmer zonder irritatie?",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 0
+      }
+    },
+    "bewijs": {
+      "type": "ws-collectie-bewijs",
+      "blocks": {
+        "citaat_1": {
+          "type": "citaat",
+          "settings": {
+            "product": "neustrimmer-3in1-platinum",
+            "url": "",
+            "tag": "Over het trekken",
+            "tekst": "Prima ding. Doet wat hij moet doen, geruisloos en precies. Ook geen last van pijn door haartjes die worden uitgetrokken.",
+            "naam": "MarkA83",
+            "product_naam": "Neustrimmerlijn",
+            "toon_score": false,
+            "bijschrift": "beoordeling bij de lijn"
+          }
+        },
+        "citaat_2": {
+          "type": "citaat",
+          "settings": {
+            "product": "wellshave-4-in-1-neustrimmer-ultimate",
+            "url": "",
+            "tag": "Over de opzetstukken",
+            "tekst": "Doet alles wat het belooft. Echt. Beste trimmer voor lichaam, baard, neus en oor. Ook voor glad scheren van de bovenlip. Zeer blij mee.",
+            "naam": "Lucas0412",
+            "product_naam": "Neustrimmer Ultimate™ 4-in-1",
+            "toon_score": false,
+            "bijschrift": "beoordeling bij de lijn"
+          }
+        },
+        "citaat_3": {
+          "type": "citaat",
+          "settings": {
+            "product": "wellshave-neustrimmer-basic",
+            "url": "",
+            "tag": "Over wat er ook gebeurt",
+            "tekst": "Doet wat het moet doen. Geeft bij mij wel irritatie in de neus na gebruik.",
+            "naam": "Stratocaster",
+            "product_naam": "Neustrimmerlijn",
+            "toon_score": false,
+            "bijschrift": "beoordeling bij de lijn"
+          }
+        }
+      },
+      "block_order": [
+        "citaat_1",
+        "citaat_2",
+        "citaat_3"
+      ],
+      "settings": {
+        "eyebrow": "Uit de beoordelingen",
+        "kop": "Drie beoordelingen, waarvan één die je liever niet leest.",
+        "bron": "<p><b>Let op bij het lezen:</b> de acht neustrimmers delen bij Loox grotendeels één beoordelingenstroom, met de productnaam in de tekst vervangen. Deze regels horen dus bij de líjn en niet bij één model; het apparaat ernaast is het model waar de beoordeling op stond. Alle drie zijn geverifieerde kopers.</p>",
+        "koper_label": "geverifieerde koper",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 0
+      }
+    },
+    "slot": {
+      "type": "ws-collectie-slot",
+      "blocks": {
+        "zeker_1": {
+          "type": "zekerheid",
+          "settings": {
+            "icoon": "retour",
+            "kop": "100 dagen thuis proberen",
+            "tekst": "Niet goed? Je krijgt je geld terug."
+          }
+        },
+        "zeker_2": {
+          "type": "zekerheid",
+          "settings": {
+            "icoon": "schild",
+            "kop": "2 jaar garantie",
+            "tekst": "Op elk apparaat in deze zone."
+          }
+        },
+        "zeker_3": {
+          "type": "zekerheid",
+          "settings": {
+            "icoon": "truck",
+            "kop": "Gratis verzending vanaf €30",
+            "tekst": "Naar België gratis vanaf €49,95."
+          }
+        },
+        "zeker_4": {
+          "type": "zekerheid",
+          "settings": {
+            "icoon": "klok",
+            "kop": "Morgen in huis",
+            "tekst": "Besteld voor 23:59."
+          }
+        },
+        "vraag_1": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Welke van de acht moet ik hebben?",
+            "antwoord": "<p>Kies eerst hoe ver je wilt gaan: alleen <b>neus en oren</b> is de Essential of de Basic; <b>ook wenkbrauwen</b> is de Elite of de Premium; <b>ook kort scheren</b> is de Platinum of de Advance; <b>ook je baard of lichaam</b> is de Ultra of de Ultimate. Kies daarna de lijn: de nieuwe is nieuwer, de vertrouwde is bij elke trede een paar euro goedkoper. Bovenaan staat een keuzehulp die het in twee vragen voor je doet.</p>"
+          }
+        },
+        "vraag_2": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Waarom staat er bij elk model hetzelfde cijfer?",
+            "antwoord": "<p>Omdat het cijfer over de líjn gaat en niet over het losse model: bij alle acht toont Loox grotendeels dezelfde beoordelingenstroom, met de productnaam in de tekst vervangen. Daarom staat de score op deze pagina één keer boven de groep, met die uitleg erbij, in plaats van acht keer op een kaart waar hij niets onderscheidt.</p>"
+          }
+        },
+        "vraag_3": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Doet het pijn?",
+            "antwoord": "<p>Het mes draait binnen een gesloten kap met gleuven, zodat de huid het mes niet raakt en de haren worden afgeknipt in plaats van uitgetrokken. Dat helpt de kans op wondjes en trekken te verkleinen. <b>Het is geen garantie:</b> in de beoordelingen staat ook “geeft bij mij wel irritatie in de neus na gebruik”. Werk droog, draai rustig en duw hem niet verder naar binnen dan nodig.</p>"
+          }
+        },
+        "vraag_4": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Wat is het verschil tussen de Ultra en de Ultimate?",
+            "antwoord": "<p>Allebei vier opzetstukken en zes onderdelen in de doos. Het vierde opzetstuk verschilt: bij de <b>Ultra</b> is dat een <b>baardtrimmer</b>, bij de <b>Ultimate</b> een <b>bodygroomer</b>. De Ultimate is het goedkoopst van de twee.</p>"
+          }
+        },
+        "vraag_5": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Wat als het me toch niet bevalt?",
+            "antwoord": "<p>Je hebt 100 dagen om het thuis te proberen, zonder reden op te geven. Je meldt de retour aan en hebt daarna veertien dagen om te versturen; <b>de verzendkosten van de retour zijn voor jou</b>, het aankoopbedrag krijg je binnen veertien dagen terug.</p>"
+          }
+        },
+        "zone_1": {
+          "type": "zone",
+          "settings": {
+            "naam": "Lichaam & schaamstreek",
+            "tekst": "Trimmen zonder wondjes.",
+            "slot": "4 apparaten →",
+            "url": ""
+          }
+        },
+        "zone_2": {
+          "type": "zone",
+          "settings": {
+            "naam": "Gezicht & baard",
+            "tekst": "Scheren, trimmen en randen zetten.",
+            "slot": "11 apparaten →",
+            "url": ""
+          }
+        },
+        "zone_3": {
+          "type": "zone",
+          "settings": {
+            "naam": "Hoofd",
+            "tekst": "Tondeuses en hoofdscheerders.",
+            "slot": "4 apparaten →",
+            "url": ""
+          }
+        },
+        "zone_4": {
+          "type": "zone",
+          "settings": {
+            "naam": "Alles bij elkaar",
+            "tekst": "De hele collectie, per zone gesorteerd.",
+            "slot": "Bekijk alles →",
+            "url": "https://wellshave.com/collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "zeker_1",
+        "zeker_2",
+        "zeker_3",
+        "zeker_4",
+        "vraag_1",
+        "vraag_2",
+        "vraag_3",
+        "vraag_4",
+        "vraag_5",
+        "zone_1",
+        "zone_2",
+        "zone_3",
+        "zone_4"
+      ],
+      "settings": {
+        "eyebrow": "Vragen over deze acht",
+        "h2_1": "Alles wat je",
+        "h2_2": "wilt weten.",
+        "mail_regel": "<p>Staat je vraag er niet bij? Mail <b>contact@wellshave.com</b> — je krijgt antwoord van iemand uit het team, binnen één werkdag.</p>",
+        "zones_eyebrow": "Andere plek in gedachten?",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "kop",
+    "raster",
+    "uitleg",
+    "bewijs",
+    "slot"
+  ]
+}

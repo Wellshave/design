@@ -1,0 +1,726 @@
+{
+  "sections": {
+    "kop": {
+      "type": "ws-collectie-kop",
+      "blocks": {
+        "vraag_1": {
+          "type": "vraag",
+          "settings": {
+            "groep": "klus",
+            "vraag": "Wat is de klus?",
+            "opties": "scheren|Glad scheren|glad scheren\nbaard|Baard op lengte|baard op lengte\nlijnen|Lijnen & stoppels|lijnen en stoppels\nmes|Klassiek met een mesje|klassiek mesje",
+            "start": "scheren"
+          }
+        },
+        "vraag_2": {
+          "type": "vraag",
+          "settings": {
+            "groep": "set",
+            "vraag": "Alleen het apparaat, of een set?",
+            "opties": "los|Alleen het apparaat|alleen het apparaat\nset|Set met opzetstukken|set met opzetstukken",
+            "start": "los"
+          }
+        },
+        "vraag_3": {
+          "type": "vraag",
+          "settings": {
+            "groep": "neus",
+            "vraag": "Ook neus- en oorhaar erbij?",
+            "opties": "geen|Niet nodig|geen neushaar\nneus|Ja, graag|ook neushaar",
+            "start": "geen"
+          }
+        },
+        "match_1": {
+          "type": "match",
+          "settings": {
+            "id": "baron",
+            "product": "wellshave-blade-baron",
+            "naam": "4 Foil Blade Baron™",
+            "badge": "Compact",
+            "zin": "Foilkop voor korte stoppels, waterdicht, drie onderdelen in de doos.",
+            "reden_1": "Meerdere bladen grijpen meer haar tegelijk",
+            "reden_2": "Nat en droog te gebruiken",
+            "reden_3": "Past in elke toilettas"
+          }
+        },
+        "match_2": {
+          "type": "match",
+          "settings": {
+            "id": "gentleman",
+            "product": "wellshave-scheerapparaat-elite",
+            "naam": "The Gentleman Shaver™",
+            "badge": "26× besteld in 30 dagen",
+            "zin": "Roterend scheren, met een neus- en oorhaaropzetstuk en een baardtrimmer in dezelfde doos.",
+            "reden_1": "Neus- en oorhaaropzetstuk meegeleverd",
+            "reden_2": "Baardtrimmer en kammen 3-6-9 mm",
+            "reden_3": "LCD-display en oplaadstandaard"
+          }
+        },
+        "match_3": {
+          "type": "match",
+          "settings": {
+            "id": "sentinel",
+            "product": "the-sentinel-pro",
+            "naam": "The Sentinel PRO",
+            "badge": "Nieuw in de lijn",
+            "zin": "Zet hem terug in het station en hij reinigt en laadt zichzelf.",
+            "reden_1": "Reinigingsstation met reinigingsvloeistof",
+            "reden_2": "Zes onderdelen in de doos",
+            "reden_3": "Comfortabel scheren zonder irritatie"
+          }
+        },
+        "match_4": {
+          "type": "match",
+          "settings": {
+            "id": "elegant",
+            "product": "wellshave-4-in-1-scheerapparaat",
+            "naam": "Scheerapparaat Elegant™ 4-in-1",
+            "badge": "Meeste voor je geld",
+            "zin": "Vier koppen: scheren, neushaar, bakkebaarden en de baardtrimmer.",
+            "reden_1": "Neus- en oorhaaropzetstuk meegeleverd",
+            "reden_2": "Sidetrimmer voor de bakkebaarden",
+            "reden_3": "Zes onderdelen in de doos"
+          }
+        },
+        "match_5": {
+          "type": "match",
+          "settings": {
+            "id": "dial",
+            "product": "the-dial-master",
+            "naam": "The Dial Master",
+            "badge": "Nieuw in de lijn",
+            "zin": "Twintig lengtestanden op één draaiknop — je wisselt geen kammen meer.",
+            "reden_1": "20 nauwkeurige lengtestanden",
+            "reden_2": "Verstelbare draaiknop",
+            "reden_3": "IPX7 waterdicht, LED-display"
+          }
+        },
+        "match_6": {
+          "type": "match",
+          "settings": {
+            "id": "msiced",
+            "product": "wellshave-5-in-1-baardtrimmer-man-shaper-iced",
+            "naam": "Men Shaper Iced™ 5-in-1",
+            "badge": "Laagste prijs van het paar",
+            "zin": "Vijf opzetstukken en elf onderdelen — dezelfde set als de Gold, voor €3,00 minder.",
+            "reden_1": "T-Blade en precisietrimmer voor de lijnen",
+            "reden_2": "Verstelbaar opzetstuk 1–9 mm",
+            "reden_3": "Opbergstandaard en travelbag erbij"
+          }
+        },
+        "match_7": {
+          "type": "match",
+          "settings": {
+            "id": "supreme",
+            "product": "6-in-1-baardtrimmer-supreme",
+            "naam": "Men Shaper Supreme™ 6-in-1",
+            "badge": "Meest compleet",
+            "zin": "Zes opzetstukken en twaalf onderdelen, met een micro shaver voor de gladde afwerking.",
+            "reden_1": "Micro shaver die de 5-in-1 niet heeft",
+            "reden_2": "Neus- en oorhaaropzetstuk meegeleverd",
+            "reden_3": "T-Blade, precisietrimmer en bodygroomer"
+          }
+        },
+        "match_8": {
+          "type": "match",
+          "settings": {
+            "id": "edge",
+            "product": "wellshave-edge-blade",
+            "naam": "Edge Blade",
+            "badge": "Voor de lijnen",
+            "zin": "4D-flexkop die meekantelt over kaak en hals, met kammen van 1 tot 5 mm.",
+            "reden_1": "Kammen van 1, 2, 3 en 5 mm",
+            "reden_2": "Flexkop volgt kaaklijn en hals",
+            "reden_3": "Volledig waterdicht, ook voor het lichaam"
+          }
+        },
+        "match_9": {
+          "type": "match",
+          "settings": {
+            "id": "bgold",
+            "product": "wellshave-safety-razor-gold",
+            "naam": "Blade Guard Gold",
+            "badge": "Geen accu nodig",
+            "zin": "Een klassiek scheermes met wisselbare mesjes — ook in het zwart, voor dezelfde prijs.",
+            "reden_1": "Geen batterij, geen oplader",
+            "reden_2": "Mesjes los verkrijgbaar",
+            "reden_3": "Drie onderdelen in de doos"
+          }
+        },
+        "zone_1": {
+          "type": "zone",
+          "settings": {
+            "naam": "Lichaam & schaamstreek",
+            "aantal": "4",
+            "url": "",
+            "huidig": false
+          }
+        },
+        "zone_2": {
+          "type": "zone",
+          "settings": {
+            "naam": "Gezicht & baard",
+            "aantal": "11",
+            "url": "",
+            "huidig": true
+          }
+        },
+        "zone_3": {
+          "type": "zone",
+          "settings": {
+            "naam": "Hoofd",
+            "aantal": "4",
+            "url": "",
+            "huidig": false
+          }
+        },
+        "zone_4": {
+          "type": "zone",
+          "settings": {
+            "naam": "Neus & oren",
+            "aantal": "8",
+            "url": "",
+            "huidig": false
+          }
+        }
+      },
+      "block_order": [
+        "vraag_1",
+        "vraag_2",
+        "vraag_3",
+        "match_1",
+        "match_2",
+        "match_3",
+        "match_4",
+        "match_5",
+        "match_6",
+        "match_7",
+        "match_8",
+        "match_9",
+        "zone_1",
+        "zone_2",
+        "zone_3",
+        "zone_4"
+      ],
+      "settings": {
+        "eyebrow": "Gezicht & baard · 11 apparaten",
+        "kop_1": "Glad, stoppels of vol.",
+        "kop_2": "Jouw gezicht, jouw lengte.",
+        "lede": "Roterende en foilscheerapparaten voor glad, trimmerkits voor de baard en de lijnen, en twee klassieke scheermessen. Wat je nodig hebt hangt af van wat je doet — niet van de prijs.",
+        "foto": "",
+        "foto_alt": "Man trimt zijn baard met een Wellshave-trimmer voor de spiegel",
+        "monogram_letter": "S",
+        "score": "4,6/5",
+        "sterren": 4,
+        "halve_ster": true,
+        "score_bron": "7 van 11 beoordeeld",
+        "quote": "Moet nog wennen denk ik na 50 jaar met mes scheren. Gaat niet vlugger wat veel mensen zeggen. Wel net zo glad het eindresultaat.",
+        "quote_bron": "John N. · geverifieerde koper · The Gentleman Shaver",
+        "gerust_1": "100 dagen proberen",
+        "gerust_2": "2 jaar garantie",
+        "gerust_3": "Morgen in huis",
+        "kaartkop": "Jouw gezichtsapparaat in 30 seconden",
+        "kaartsub": "3 keuzes · direct een match",
+        "kaartvraag": "Wat doe je het vaakst?",
+        "tabel": "klus=mes > bgold\nklus=lijnen > edge\nklus=scheren, set=los, neus=geen > baron\nklus=scheren, set=los, neus=neus > gentleman\nklus=scheren, set=set, neus=geen > sentinel\nklus=scheren, set=set, neus=neus > elegant\nklus=baard, set=los > dial\nklus=baard, set=set, neus=geen > msiced\nklus=baard, set=set, neus=neus > supreme",
+        "standaard": "baron",
+        "kruimel": "Gezicht & baard",
+        "zone_aantal": "11",
+        "zonemelding": "verdeeld over vier soorten, plus bundels en de onderdelen die je later vervangt.",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 0
+      }
+    },
+    "raster": {
+      "type": "ws-collectie-raster",
+      "blocks": {
+        "groep_1": {
+          "type": "groep",
+          "settings": {
+            "kop": "Scheren tot glad",
+            "sub": "Vier scheerapparaten: drie roterend, één met een foilkop.",
+            "cat": "app",
+            "producten": [
+              "the-sentinel-pro",
+              "wellshave-scheerapparaat-elite",
+              "wellshave-blade-baron",
+              "wellshave-4-in-1-scheerapparaat"
+            ],
+            "noot": "",
+            "kicker": "",
+            "labels": "the-sentinel-pro = Nieuw · met station\nwellshave-scheerapparaat-elite = 26× deze maand\nwellshave-blade-baron = Compact\nwellshave-4-in-1-scheerapparaat = Meeste voor je geld",
+            "link_label": "",
+            "link_url": ""
+          }
+        },
+        "groep_2": {
+          "type": "groep",
+          "settings": {
+            "kop": "Trimmen, lengte en lijnen",
+            "sub": "Vijf apparaten voor wie lengte wil houden of randen wil zetten.",
+            "cat": "app",
+            "producten": [
+              "6-in-1-baardtrimmer-supreme",
+              "wellshave-5-in-1-baardtrimmer-man-shaper-iced",
+              "wellshave-5-in-1-baardtrimmer-men-shaper",
+              "the-dial-master",
+              "wellshave-edge-blade"
+            ],
+            "noot": "<b>De Iced en de Gold zijn dezelfde set.</b> Elf onderdelen, vijf opzetstukken, alleen de afwerking verschilt — en de Gold kost €3,00 meer. Wil je goud, dan is dat de reden; wil je het apparaat, neem dan de Iced.",
+            "kicker": "",
+            "labels": "6-in-1-baardtrimmer-supreme = Meest compleet\nwellshave-5-in-1-baardtrimmer-man-shaper-iced = Laagste prijs van het paar\nwellshave-5-in-1-baardtrimmer-men-shaper = Zelfde set, in goud\nthe-dial-master = Nieuw\nwellshave-edge-blade = Voor de lijnen",
+            "link_label": "",
+            "link_url": ""
+          }
+        },
+        "groep_3": {
+          "type": "groep",
+          "settings": {
+            "kop": "Klassiek met een mesje",
+            "sub": "Twee scheermessen zonder accu, voor wie het liever met de hand doet.",
+            "cat": "app",
+            "producten": [
+              "wellshave-safety-razor-gold",
+              "wellshave-safety-razor-black"
+            ],
+            "noot": "Ook hier: <b>Gold en Black zijn hetzelfde mes</b> met dezelfde drie onderdelen, voor exact dezelfde prijs. Kies op kleur.",
+            "kicker": "",
+            "labels": "wellshave-safety-razor-gold = Klassiek\nwellshave-safety-razor-black = Zelfde mes, in zwart",
+            "link_label": "",
+            "link_url": ""
+          }
+        },
+        "groep_4": {
+          "type": "groep",
+          "settings": {
+            "kop": "Of pak het in één keer compleet",
+            "sub": "Voordeliger samengesteld dan de losse onderdelen.",
+            "cat": "bundel",
+            "producten": [
+              "body-beard-kit",
+              "essential-flex-bundel",
+              "wellshave-shave-package-3-0"
+            ],
+            "noot": "",
+            "kicker": "",
+            "labels": "body-beard-kit = Grootste voordeel\nessential-flex-bundel = Bundel\nwellshave-shave-package-3-0 = Bundel",
+            "link_label": "",
+            "link_url": ""
+          }
+        },
+        "groep_5": {
+          "type": "groep",
+          "settings": {
+            "kop": "Blijf scherp",
+            "sub": "Vervang alleen wat slijt — niet het hele apparaat.",
+            "cat": "mes",
+            "producten": [
+              "elite-scheerkop",
+              "wellshave-safety-razor-blades",
+              "toiletry-bag",
+              "wellshave-hard-case"
+            ],
+            "noot": "",
+            "kicker": "Onderdeel",
+            "labels": "",
+            "link_label": "",
+            "link_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "groep_1",
+        "groep_2",
+        "groep_3",
+        "groep_4",
+        "groep_5"
+      ],
+      "settings": {
+        "filter_alles": "Alles",
+        "filter_app": "Apparaten",
+        "filter_bundel": "Bundels",
+        "filter_mes": "Onderdelen",
+        "vergelijken": true,
+        "sorteer_label": "Meest relevant",
+        "keuzeregel": "Afgestemd op jouw keuzes:",
+        "keuzeregel_start": "glad scheren · alleen het apparaat · geen neushaar",
+        "wis_label": "Wis keuzes",
+        "monogram": "shopify://shop_images/ws-mark.png",
+        "geen_score": "Nieuw · nog geen beoordelingen",
+        "uitverkocht_label": "Tijdelijk uitverkocht",
+        "uitverkocht_voet": "Tijdelijk niet leverbaar",
+        "blik_voet": "100 dagen proberen · 2 jaar garantie",
+        "mes_voet": "Vandaag besteld, morgen in huis",
+        "aanbod_product": "body-beard-kit",
+        "aanbod_eyebrow": "Grootste voordeel in deze zone",
+        "aanbod_zin": "Negen onderdelen voor gezicht, baard en lichaam, inclusief de Sharpline-detailtrimmer.",
+        "aanbod_knop": "Bekijk de bundel",
+        "slot_tekst": "in deze zone · elk apparaat 100 dagen te proberen",
+        "slot_link_label": "Bekijk de hele collectie",
+        "slot_link": "shopify://collections/all",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 0
+      }
+    },
+    "uitleg": {
+      "type": "ws-collectie-uitleg",
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "product": "the-sentinel-pro",
+            "naam": "The Sentinel PRO",
+            "url": "",
+            "tekst": "Roterend, met een station dat de kop reinigt en het apparaat oplaadt."
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "product": "wellshave-scheerapparaat-elite",
+            "naam": "The Gentleman Shaver™",
+            "url": "",
+            "tekst": "Roterend, met neus- en oorhaaropzetstuk, baardtrimmer en oplaadstandaard."
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "product": "wellshave-4-in-1-scheerapparaat",
+            "naam": "Scheerapparaat Elegant™ 4-in-1",
+            "url": "",
+            "tekst": "Roterend, met neustrimmer, sidetrimmer en baardtrimmer erbij."
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "product": "wellshave-blade-baron",
+            "naam": "4 Foil Blade Baron™",
+            "url": "",
+            "tekst": "De foilkop van de vier: kort, snel en compact genoeg voor onderweg."
+          }
+        },
+        "item_5": {
+          "type": "item",
+          "settings": {
+            "product": "6-in-1-baardtrimmer-supreme",
+            "naam": "Men Shaper Supreme™ 6-in-1",
+            "url": "",
+            "tekst": "De ruimste trimmerkit: zes opzetstukken en twaalf onderdelen."
+          }
+        },
+        "item_6": {
+          "type": "item",
+          "settings": {
+            "product": "wellshave-5-in-1-baardtrimmer-man-shaper-iced",
+            "naam": "Men Shaper Iced™ 5-in-1",
+            "url": "",
+            "tekst": "Vijf opzetstukken en elf onderdelen, in de Iced-afwerking."
+          }
+        },
+        "item_7": {
+          "type": "item",
+          "settings": {
+            "product": "wellshave-5-in-1-baardtrimmer-men-shaper",
+            "naam": "Men Shaper Gold™ 5-in-1",
+            "url": "",
+            "tekst": "Dezelfde set als de Iced, in goud, voor €3,00 meer."
+          }
+        },
+        "item_8": {
+          "type": "item",
+          "settings": {
+            "product": "the-dial-master",
+            "naam": "The Dial Master",
+            "url": "",
+            "tekst": "Twintig lengtestanden op één draaiknop, zonder kammen te wisselen."
+          }
+        },
+        "item_9": {
+          "type": "item",
+          "settings": {
+            "product": "wellshave-edge-blade",
+            "naam": "Edge Blade",
+            "url": "",
+            "tekst": "Flexkop voor korte stoppels en scherpe randen, met kammen van 1 tot 5 mm."
+          }
+        },
+        "item_10": {
+          "type": "item",
+          "settings": {
+            "product": "wellshave-safety-razor-gold",
+            "naam": "Blade Guard Gold",
+            "url": "",
+            "tekst": "Klassiek scheermes met wisselbare mesjes, zonder accu."
+          }
+        },
+        "item_11": {
+          "type": "item",
+          "settings": {
+            "product": "wellshave-safety-razor-black",
+            "naam": "Blade Guard Black",
+            "url": "",
+            "tekst": "Hetzelfde mes in het zwart, voor dezelfde prijs."
+          }
+        },
+        "tip_1": {
+          "type": "tip",
+          "settings": {
+            "kop": "Geef jezelf twee weken",
+            "tekst": "Stap je over van een mes, dan voelt elektrisch scheren de eerste dagen anders en soms minder glad. Je huid en je routine hebben tijd nodig; in de beoordelingen komt dat telkens terug."
+          }
+        },
+        "tip_2": {
+          "type": "tip",
+          "settings": {
+            "kop": "Beweeg tegen de groeirichting in",
+            "tekst": "Bij een roterende kop maak je rustige, kleine rondjes; bij een foilkop rechte halen. Harder drukken maakt het resultaat niet gladder, wel roder."
+          }
+        },
+        "tip_3": {
+          "type": "tip",
+          "settings": {
+            "kop": "Maak de kop na elke beurt schoon",
+            "tekst": "Haar en huidschilfers tussen de messen zijn de eerste reden dat een apparaat gaat trekken. Spoelen of uitborstelen is genoeg; het station doet het zelf."
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4",
+        "item_5",
+        "item_6",
+        "item_7",
+        "item_8",
+        "item_9",
+        "item_10",
+        "item_11",
+        "tip_1",
+        "tip_2",
+        "tip_3"
+      ],
+      "settings": {
+        "eyebrow": "Over deze categorie",
+        "h2_1": "Roterend of foil,",
+        "h2_2": "scheren of trimmen?",
+        "inleiding": "<p>De grootste zone van de collectie begint met een vraag die geen enkele productpagina stelt: wil je het háár weg, of wil je het op een lengte houden? Een scheerapparaat brengt je huid terug naar glad en kent geen lengtes. Een trimmer laat juist lengte staan en heeft daar kammen of een draaiknop voor. Een apparaat dat allebei zegt te doen, doet meestal één van de twee goed en het andere er een beetje bij.</p><p>Kies je voor scheren, dan volgt de tweede vraag: <b>roterend of foil</b>. Een roterende kop heeft drie ronde messen die onafhankelijk kantelen; ze volgen de bolling van je kaak, kin en hals en werken goed als je baardgroei alle kanten op staat. Een foilkop heeft rechte messen die onder een geperforeerd vlak heen en weer gaan; dat werkt het snelst op een vlak stuk huid met korte stoppels. Geen van beide is beter — ze passen bij een ander gezicht en een ander ritme.</p><p>Ga je trimmen, dan zit het verschil niet in de motor maar in de doos. Een 5-in-1-kit heeft vijf opzetstukken en elf onderdelen; de 6-in-1 heeft er een micro shaver bij. Wil je juist één ding heel precies kunnen herhalen, dan is een draaiknop met vaste standen praktischer dan een la vol kammen.</p>",
+        "h3_lijst": "De elf apparaten, per soort",
+        "slotalinea": "<p>Wat slijt is de kop, niet het apparaat. De <a href=\"https://wellshave.com/products/elite-scheerkop\">scheerkop van de Gentleman Shaver</a> en de <a href=\"https://wellshave.com/products/wellshave-safety-razor-blades\">mesjes van de Blade Guard</a> zijn los te bestellen, net als de <a href=\"https://wellshave.com/collections/accesoires\">tassen en koffers</a>. Merk je dat een kop trekt of minder pakt, dan hoef je geen nieuw apparaat te kopen.</p>",
+        "tekening": "<svg viewBox=\"0 0 460 376\" style=\"width:100%;height:auto\" fill=\"none\"\n   stroke-linecap=\"round\" stroke-linejoin=\"round\" role=\"img\"\n   aria-label=\"Twee scheerkoppen naast elkaar: een roterende kop met drie ronde messen die onafhankelijk kantelen en de bolling van kaak en hals volgen, en een foilkop met een recht, geperforeerd vlak waaronder de messen heen en weer gaan.\">\n<title>Twee scheerkoppen naast elkaar: een roterende kop met drie ronde messen die onafhankelijk kantelen en de bolling van kaak en hals volgen, en een foilkop met een recht, geperforeerd vlak waaronder de messen heen en weer gaan.</title>\n<text x=\"0\" y=\"14\" font-family=\"Montserrat\" font-size=\"10.5\" font-weight=\"800\" letter-spacing=\"1.8\" fill=\"rgba(17,17,17,.4)\">TWEE SOORTEN KOPPEN</text>\n\n<text x=\"14\" y=\"52\" font-family=\"Montserrat\" font-size=\"12.5\" font-weight=\"800\" fill=\"#BC813E\">ROTEREND</text>\n<text x=\"272\" y=\"52\" font-family=\"Montserrat\" font-size=\"12.5\" font-weight=\"800\" fill=\"#111\">FOIL</text>\n\n<!-- roterend: vooraanzicht -->\n<circle cx=\"76\" cy=\"112\" r=\"34\" stroke=\"#BC813E\" stroke-width=\"2.4\"/>\n<circle cx=\"146\" cy=\"112\" r=\"34\" stroke=\"#BC813E\" stroke-width=\"2.4\"/>\n<circle cx=\"111\" cy=\"170\" r=\"34\" stroke=\"#BC813E\" stroke-width=\"2.4\"/>\n<circle cx=\"76\" cy=\"112\" r=\"21\" stroke=\"rgba(188,129,62,.5)\" stroke-width=\"1.8\"/>\n<circle cx=\"146\" cy=\"112\" r=\"21\" stroke=\"rgba(188,129,62,.5)\" stroke-width=\"1.8\"/>\n<circle cx=\"111\" cy=\"170\" r=\"21\" stroke=\"rgba(188,129,62,.5)\" stroke-width=\"1.8\"/>\n<path d=\"M76 91v42M55 112h42M146 91v42M125 112h42M111 149v42M90 170h42\" stroke=\"rgba(188,129,62,.5)\" stroke-width=\"1.7\"/>\n<path d=\"M30 128a70 70 0 0 0 12 40\" stroke=\"rgba(17,17,17,.2)\" stroke-width=\"2\"/>\n<path d=\"M180 96a70 70 0 0 1 10 34\" stroke=\"rgba(17,17,17,.2)\" stroke-width=\"2\"/>\n\n<!-- roterend: doorsnede op een bolling -->\n<path d=\"M18 288c34-26 78-38 122-34 30 3 52 12 66 20\" stroke=\"rgba(188,129,62,.16)\" stroke-width=\"16\"/>\n<path d=\"M18 288c34-26 78-38 122-34 30 3 52 12 66 20\" stroke=\"#111\" stroke-width=\"2.2\"/>\n<g transform=\"translate(44,244) rotate(-24)\"><rect x=\"0\" y=\"0\" width=\"42\" height=\"15\" rx=\"7\" stroke=\"#BC813E\" stroke-width=\"2.2\"/></g>\n<g transform=\"translate(90,236) rotate(-8)\"><rect x=\"0\" y=\"0\" width=\"42\" height=\"15\" rx=\"7\" stroke=\"#BC813E\" stroke-width=\"2.2\"/></g>\n<g transform=\"translate(138,242) rotate(9)\"><rect x=\"0\" y=\"0\" width=\"42\" height=\"15\" rx=\"7\" stroke=\"#BC813E\" stroke-width=\"2.2\"/></g>\n<path d=\"M34 232h164\" stroke=\"rgba(17,17,17,.2)\" stroke-width=\"2\" stroke-dasharray=\"4 5\"/>\n<text x=\"14\" y=\"334\" font-family=\"Montserrat\" font-size=\"11\" font-weight=\"700\" fill=\"rgba(17,17,17,.6)\">Drie ronde messen die</text>\n<text x=\"14\" y=\"349\" font-family=\"Montserrat\" font-size=\"11\" font-weight=\"700\" fill=\"rgba(17,17,17,.6)\">apart kantelen: ze volgen</text>\n<text x=\"14\" y=\"364\" font-family=\"Montserrat\" font-size=\"11\" font-weight=\"700\" fill=\"rgba(17,17,17,.6)\">je kaak, kin en hals.</text>\n\n<!-- foil: vooraanzicht -->\n<rect x=\"272\" y=\"94\" width=\"160\" height=\"86\" rx=\"10\" stroke=\"#111\" stroke-width=\"2.4\"/>\n<circle cx=\"282.0\" cy=\"104.0\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"295.4\" cy=\"104.0\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"308.8\" cy=\"104.0\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"322.2\" cy=\"104.0\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"335.6\" cy=\"104.0\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"349.0\" cy=\"104.0\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"362.4\" cy=\"104.0\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"375.8\" cy=\"104.0\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"389.2\" cy=\"104.0\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"402.6\" cy=\"104.0\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"416.0\" cy=\"104.0\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"282.0\" cy=\"114.2\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"295.4\" cy=\"114.2\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"308.8\" cy=\"114.2\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"322.2\" cy=\"114.2\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"335.6\" cy=\"114.2\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"349.0\" cy=\"114.2\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"362.4\" cy=\"114.2\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"375.8\" cy=\"114.2\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"389.2\" cy=\"114.2\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"402.6\" cy=\"114.2\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"416.0\" cy=\"114.2\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"282.0\" cy=\"124.4\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"295.4\" cy=\"124.4\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"308.8\" cy=\"124.4\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"322.2\" cy=\"124.4\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"335.6\" cy=\"124.4\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"349.0\" cy=\"124.4\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"362.4\" cy=\"124.4\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"375.8\" cy=\"124.4\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"389.2\" cy=\"124.4\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"402.6\" cy=\"124.4\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"416.0\" cy=\"124.4\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"282.0\" cy=\"134.6\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"295.4\" cy=\"134.6\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"308.8\" cy=\"134.6\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"322.2\" cy=\"134.6\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"335.6\" cy=\"134.6\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"349.0\" cy=\"134.6\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"362.4\" cy=\"134.6\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"375.8\" cy=\"134.6\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"389.2\" cy=\"134.6\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"402.6\" cy=\"134.6\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"416.0\" cy=\"134.6\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"282.0\" cy=\"144.8\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"295.4\" cy=\"144.8\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"308.8\" cy=\"144.8\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"322.2\" cy=\"144.8\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"335.6\" cy=\"144.8\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"349.0\" cy=\"144.8\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"362.4\" cy=\"144.8\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"375.8\" cy=\"144.8\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"389.2\" cy=\"144.8\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"402.6\" cy=\"144.8\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"416.0\" cy=\"144.8\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"282.0\" cy=\"155.0\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"295.4\" cy=\"155.0\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"308.8\" cy=\"155.0\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"322.2\" cy=\"155.0\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"335.6\" cy=\"155.0\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"349.0\" cy=\"155.0\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"362.4\" cy=\"155.0\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"375.8\" cy=\"155.0\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"389.2\" cy=\"155.0\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"402.6\" cy=\"155.0\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"416.0\" cy=\"155.0\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"282.0\" cy=\"165.2\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"295.4\" cy=\"165.2\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"308.8\" cy=\"165.2\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"322.2\" cy=\"165.2\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"335.6\" cy=\"165.2\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"349.0\" cy=\"165.2\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"362.4\" cy=\"165.2\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"375.8\" cy=\"165.2\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"389.2\" cy=\"165.2\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"402.6\" cy=\"165.2\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<circle cx=\"416.0\" cy=\"165.2\" r=\"2.5\" stroke=\"rgba(17,17,17,.3)\" stroke-width=\"1.3\"/>\n<!-- foil: doorsnede op een vlak -->\n<path d=\"M266 288h176\" stroke=\"rgba(188,129,62,.16)\" stroke-width=\"16\"/>\n<path d=\"M266 288h176\" stroke=\"#111\" stroke-width=\"2.2\"/>\n<rect x=\"282\" y=\"248\" width=\"146\" height=\"12\" rx=\"5\" stroke=\"#111\" stroke-width=\"2.2\"/>\n<path d=\"M290 260v10M304 260v10M318 260v10M332 260v10M346 260v10M360 260v10M374 260v10M388 260v10M402 260v10M416 260v10\" stroke=\"#111\" stroke-width=\"1.9\"/>\n<path d=\"M282 244h146\" stroke=\"#BC813E\" stroke-width=\"2.4\"/>\n<path d=\"M334 228h44M370 222l10 6-10 6\" stroke=\"#BC813E\" stroke-width=\"2.1\"/>\n<path d=\"M376 228h-44M336 222l-10 6 10 6\" stroke=\"#BC813E\" stroke-width=\"2.1\"/>\n<text x=\"266\" y=\"334\" font-family=\"Montserrat\" font-size=\"11\" font-weight=\"700\" fill=\"rgba(17,17,17,.6)\">Rechte messen die onder</text>\n<text x=\"266\" y=\"349\" font-family=\"Montserrat\" font-size=\"11\" font-weight=\"700\" fill=\"rgba(17,17,17,.6)\">een geperforeerd vlak heen</text>\n<text x=\"266\" y=\"364\" font-family=\"Montserrat\" font-size=\"11\" font-weight=\"700\" fill=\"rgba(17,17,17,.6)\">en weer gaan: kort en snel.</text>\n\n<path d=\"M232 60v250\" stroke=\"rgba(17,17,17,.12)\" stroke-width=\"1.6\"/>\n</svg>",
+        "bijschrift": "Een roterende kop heeft drie ronde messen die apart kantelen en de bolling van je gezicht volgen; een foilkop heeft rechte messen onder een geperforeerd vlak, voor korte stoppels op een vlak stuk huid.",
+        "h3_tips": "Hoe haal je er het meeste uit?",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 0
+      }
+    },
+    "bewijs": {
+      "type": "ws-collectie-bewijs",
+      "blocks": {
+        "citaat_1": {
+          "type": "citaat",
+          "settings": {
+            "product": "wellshave-scheerapparaat-elite",
+            "url": "",
+            "tag": "Over de overstap van mes naar apparaat",
+            "tekst": "Moet nog wennen denk ik na 50 jaar met mes scheren. Gaat niet vlugger wat veel mensen zeggen. Wel net zo glad het eindresultaat.",
+            "naam": "John N.",
+            "product_naam": "The Gentleman Shaver™",
+            "toon_score": true,
+            "bijschrift": ""
+          }
+        },
+        "citaat_2": {
+          "type": "citaat",
+          "settings": {
+            "product": "wellshave-blade-baron",
+            "url": "",
+            "tag": "Over meenemen",
+            "tekst": "Ik ben er erg tevreden over. Doet wat het hoort te doen, namelijk glad scheren. Fijn met usb-c. Compact vorm gegeven dus ook makkelijk mee te nemen. Ligt prettig in de hand.",
+            "naam": "reviewvanSjors",
+            "product_naam": "4 Foil Blade Baron™",
+            "toon_score": true,
+            "bijschrift": ""
+          }
+        },
+        "citaat_3": {
+          "type": "citaat",
+          "settings": {
+            "product": "wellshave-5-in-1-baardtrimmer-man-shaper-iced",
+            "url": "",
+            "tag": "Over hoe lang hij meegaat",
+            "tekst": "Produkt doet wat het moet doen. Gebruik het al meer dan een jaar en geen problemen mee. Batterij gaat zeer lang mee en verschillende opzetkammen mogelijk.",
+            "naam": "Krstof001",
+            "product_naam": "Men Shaper Iced™ 5-in-1",
+            "toon_score": true,
+            "bijschrift": ""
+          }
+        }
+      },
+      "block_order": [
+        "citaat_1",
+        "citaat_2",
+        "citaat_3"
+      ],
+      "settings": {
+        "eyebrow": "Uit de beoordelingen",
+        "kop": "Drie dingen die je wilt weten voordat je op elektrisch overstapt.",
+        "bron": "<p>Elke regel is een echte beoordeling bij het apparaat dat ernaast staat, geschreven door een geverifieerde koper. <b>Let op bij het lezen:</b> Loox toont bij verwante modellen soms dezelfde beoordelingenstroom met de productnaam vervangen, dus ik heb alleen regels gekozen die inhoudelijk over dít apparaat gaan.</p>",
+        "koper_label": "geverifieerde koper",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 0
+      }
+    },
+    "slot": {
+      "type": "ws-collectie-slot",
+      "blocks": {
+        "zeker_1": {
+          "type": "zekerheid",
+          "settings": {
+            "icoon": "retour",
+            "kop": "100 dagen thuis proberen",
+            "tekst": "Niet goed? Je krijgt je geld terug."
+          }
+        },
+        "zeker_2": {
+          "type": "zekerheid",
+          "settings": {
+            "icoon": "schild",
+            "kop": "2 jaar garantie",
+            "tekst": "Op elk apparaat in deze zone."
+          }
+        },
+        "zeker_3": {
+          "type": "zekerheid",
+          "settings": {
+            "icoon": "truck",
+            "kop": "Gratis verzending vanaf €30",
+            "tekst": "Naar België gratis vanaf €49,95."
+          }
+        },
+        "zeker_4": {
+          "type": "zekerheid",
+          "settings": {
+            "icoon": "klok",
+            "kop": "Morgen in huis",
+            "tekst": "Besteld voor 23:59."
+          }
+        },
+        "vraag_1": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Roterend of foil — wat past bij mij?",
+            "antwoord": "<p>Een <b>roterende</b> kop heeft drie ronde messen die apart kantelen en de bolling van kaak, kin en hals volgen; die werkt goed als je baardgroei alle kanten op staat. Een <b>foilkop</b> heeft rechte messen onder een geperforeerd vlak en is het snelst op vlakke huid met korte stoppels. Drie van de vier scheerapparaten hier zijn roterend; de 4 Foil Blade Baron is de foil.</p>"
+          }
+        },
+        "vraag_2": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Wat is het verschil tussen de Men Shaper Gold en de Iced?",
+            "antwoord": "<p>De afwerking, en verder niets. Beide hebben dezelfde vijf opzetstukken en dezelfde elf onderdelen in de doos: T-Blade, standaardtrimmer, neus- en oorhaaropzetstuk, precisietrimmer, bodygroomer, een verstelbaar opzetstuk van 1 tot 9 mm, opzetkammen, kabel, opbergstandaard en travelbag. <b>De Gold kost €3,00 meer.</b> Hetzelfde geldt voor de Blade Guard Gold en Black, die zelfs even duur zijn.</p>"
+          }
+        },
+        "vraag_3": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Kan ik er ook mijn neushaar mee doen?",
+            "antwoord": "<p>Bij vijf van de elf zit een neus- en oorhaaropzetstuk in de doos: de Gentleman Shaver, de Scheerapparaat Elegant 4-in-1 en alle drie de Men Shapers. Bij de Baron, de Sentinel PRO, de Dial Master, de Edge Blade en de Blade Guards niet. De keuzehulp bovenaan heeft daar een aparte vraag voor.</p>"
+          }
+        },
+        "vraag_4": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Hoe vaak moet ik de scheerkop vervangen?",
+            "antwoord": "<p>Merk je dat hij trekt of minder pakt, dan is het zover. De <b>scheerkop van de Gentleman Shaver ligt apart op voorraad vanaf €19,95</b> en de <b>mesjes van de Blade Guard vanaf €9,95</b>. Een bot mes kost je dus geen nieuw apparaat.</p>"
+          }
+        },
+        "vraag_5": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Wat als het me toch niet bevalt?",
+            "antwoord": "<p>Je hebt 100 dagen om het thuis te proberen, zonder reden op te geven. Je meldt de retour aan en hebt daarna veertien dagen om te versturen; <b>de verzendkosten van de retour zijn voor jou</b>, het aankoopbedrag krijg je binnen veertien dagen terug.</p>"
+          }
+        },
+        "zone_1": {
+          "type": "zone",
+          "settings": {
+            "naam": "Lichaam & schaamstreek",
+            "tekst": "Trimmen zonder wondjes.",
+            "slot": "4 apparaten →",
+            "url": ""
+          }
+        },
+        "zone_2": {
+          "type": "zone",
+          "settings": {
+            "naam": "Hoofd",
+            "tekst": "Tondeuses en hoofdscheerders.",
+            "slot": "4 apparaten →",
+            "url": ""
+          }
+        },
+        "zone_3": {
+          "type": "zone",
+          "settings": {
+            "naam": "Neus & oren",
+            "tekst": "Detailwerk zonder trekken.",
+            "slot": "8 apparaten →",
+            "url": ""
+          }
+        },
+        "zone_4": {
+          "type": "zone",
+          "settings": {
+            "naam": "Alles bij elkaar",
+            "tekst": "De hele collectie, per zone gesorteerd.",
+            "slot": "Bekijk alles →",
+            "url": "https://wellshave.com/collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "zeker_1",
+        "zeker_2",
+        "zeker_3",
+        "zeker_4",
+        "vraag_1",
+        "vraag_2",
+        "vraag_3",
+        "vraag_4",
+        "vraag_5",
+        "zone_1",
+        "zone_2",
+        "zone_3",
+        "zone_4"
+      ],
+      "settings": {
+        "eyebrow": "Vragen over deze elf",
+        "h2_1": "Alles wat je",
+        "h2_2": "wilt weten.",
+        "mail_regel": "<p>Staat je vraag er niet bij? Mail <b>contact@wellshave.com</b> — je krijgt antwoord van iemand uit het team, binnen één werkdag.</p>",
+        "zones_eyebrow": "Andere plek in gedachten?",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "kop",
+    "raster",
+    "uitleg",
+    "bewijs",
+    "slot"
+  ]
+}

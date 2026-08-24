@@ -1,0 +1,104 @@
+{% comment %}
+  Wellshave — collectiepagina, blok 4: wat kopers schrijven.
+  Hang elk citaat aan het apparaat waar het over gaat: foto, link naar die
+  productpagina, de score van dát apparaat en het feit dat de schrijver een
+  geverifieerde koper is. Een los citaat van een gebruikersnaam staat op de
+  laagste trede van de geloofwaardigheidsladder.
+{% endcomment %}
+
+{{ 'ws-collectie.css' | asset_url | stylesheet_tag }}
+
+<div class="wsc">
+<section class="sectie wit"><div class="rail">
+  <div class="bewijs-kop">
+    <div>
+      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h2 class="bewijs-h2">{{ section.settings.kop }}</h2>
+    </div>
+    {%- if section.settings.bron != blank -%}
+      <p class="bewijs-bron">{{ section.settings.bron }}</p>
+    {%- endif -%}
+  </div>
+
+  <div class="bewijsrijen">
+    {%- for block in section.blocks -%}
+      {%- assign p = block.settings.product -%}
+      {%- assign score = p.metafields.loox.avg_rating.value -%}
+      {%- assign tellen = p.metafields.loox.num_reviews.value -%}
+      <blockquote class="bwr" {{ block.shopify_attributes }}>
+        {%- if block.settings.foto != blank -%}
+          {{ block.settings.foto | image_url: width: 300 | image_tag: alt: p.title, loading: 'lazy' }}
+        {%- elsif p.featured_image -%}
+          {{ p.featured_image | image_url: width: 300 | image_tag: alt: p.title, loading: 'lazy' }}
+        {%- endif -%}
+        <div class="bwr-tekst">
+          {%- if block.settings.tag != blank -%}<p class="bwr-tag">{{ block.settings.tag }}</p>{%- endif -%}
+          <p>&ldquo;{{ block.settings.tekst }}&rdquo;</p>
+        </div>
+        <footer class="bwr-bron">
+          <b>{{ block.settings.naam }}</b>
+          <span>{{ section.settings.koper_label | default: 'geverifieerde koper' }}</span>
+          <a href="{{ block.settings.url | default: p.url | default: '#' }}">{{ block.settings.product_naam | default: p.title }}</a>
+          {%- if block.settings.toon_score and score and tellen and tellen > 0 -%}
+            {%- assign heel = score | floor -%}
+            {%- assign rest = score | minus: heel -%}
+            {%- assign halve_index = heel | plus: 1 -%}
+            <span class="wsk-score">
+              <span class="sterren5">
+                {%- for i in (1..5) -%}
+                  {%- if i <= heel -%}<i></i>
+                  {%- elsif rest >= 0.25 and i == halve_index -%}<i class="half"></i>
+                  {%- else -%}<i class="leeg"></i>{%- endif -%}
+                {%- endfor -%}
+              </span>
+              <b>{{ score | round: 1 | replace: '.', ',' }}</b> ({{ tellen }})
+            </span>
+          {%- elsif block.settings.bijschrift != blank -%}
+            <span class="bwr-vanaf">{{ block.settings.bijschrift }}</span>
+          {%- endif -%}
+        </footer>
+      </blockquote>
+    {%- endfor -%}
+  </div>
+</div></section>
+</div>
+
+{% schema %}
+{
+  "name": "WS · Collectie bewijs",
+  "tag": "section",
+  "class": "ws-collectie-bewijs",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "paragraph", "content": "Neem beoordelingen letterlijk over en verzin er nooit een. Let op: Loox toont bij verwante modellen dezelfde beoordelingenstroom met de productnaam vervangen — kies dus alleen regels die inhoudelijk over dít apparaat gaan, en schrijf dat in de bronregel." },
+    { "type": "text", "id": "eyebrow", "label": "Bovenregel", "default": "Uit de beoordelingen" },
+    { "type": "textarea", "id": "kop", "label": "Kop", "default": "Drie bezwaren, beantwoord door iemand die hier al doorheen is." },
+    { "type": "richtext", "id": "bron", "label": "Bronregel", "info": "Zeg waar de citaten vandaan komen en waar de lezer op moet letten." },
+    { "type": "text", "id": "koper_label", "label": "Label onder de naam", "default": "geverifieerde koper" },
+    { "type": "header", "content": "Indent settings" },
+    { "type": "range", "id": "desk_indent_top", "label": "Indent top (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "desk_indent_bottom", "label": "Indent bottom (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_top", "label": "Indent top (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_bottom", "label": "Indent bottom (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "blocks": [
+    {
+      "type": "citaat",
+      "name": "Beoordeling",
+      "limit": 4,
+      "settings": [
+        { "type": "product", "id": "product", "label": "Het apparaat waar het over gaat", "info": "Foto, link en score komen hieruit." },
+        { "type": "text", "id": "tag", "label": "Waar het citaat over gaat", "default": "Over de eerste keer" },
+        { "type": "textarea", "id": "tekst", "label": "Het citaat", "info": "Letterlijk overnemen." },
+        { "type": "text", "id": "naam", "label": "Naam van de koper" },
+        { "type": "text", "id": "product_naam", "label": "Linktekst", "info": "Leeg = de producttitel." },
+        { "type": "url", "id": "url", "label": "Of een eigen link" },
+        { "type": "image_picker", "id": "foto", "label": "Foto", "info": "Leeg = de hoofdafbeelding." },
+        { "type": "checkbox", "id": "toon_score", "label": "Score van dit apparaat tonen", "default": true },
+        { "type": "text", "id": "bijschrift", "label": "Anders: een regel in plaats van de score", "info": "Bijvoorbeeld \"beoordeling bij de lijn\" als de modellen één stroom delen." }
+      ]
+    }
+  ],
+  "presets": [{ "name": "WS · Collectie bewijs" }]
+}
+{% endschema %}
