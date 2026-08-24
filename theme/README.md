@@ -2,6 +2,25 @@
 
 Werkwijze en stand van zaken voor het live zetten van de ontworpen homepage.
 
+## De design-artifact
+
+De homepage staat ook als ontwerpbeeld op
+<https://claude.ai/code/artifact/d4943559-5f56-4b4b-a466-4040947f74b3> —
+"Wellshave homepage-redesign". Daar staan de blokken op desktop en mobiel naast
+elkaar, met onderaan een verantwoording van wat er sinds het oorspronkelijke
+ontwerp is veranderd.
+
+**Die moet mee bij elke wijziging.** Het thema is de bron, de artifact is het
+beeld ernaast; loopt hij achter, dan gaat iemand naar een verouderd ontwerp
+kijken. Het bestand staat in `artifacts/wellshave-homepage.html`. Bijwerken doe
+je door dat bestand aan te passen en het opnieuw te publiceren met dezelfde
+URL — dan blijft de link werken. Publiceren gaat via een bestandspad, dus dat is
+goedkoop, ook al is het bestand 3,7 MB aan ingebedde beelden.
+
+Twee dingen wijken bewust af van het thema: blok 8 — het assortiment per zone —
+zit niet in de artifact, en de Trustpilot-carrousel is daar nagebouwd omdat een
+echte TrustBox alleen op de winkel zelf laadt.
+
 ## Waar het staat
 
 | | |
