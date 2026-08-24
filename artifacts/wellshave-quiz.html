@@ -207,6 +207,20 @@ p{margin:0}
 .zeker span::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);
   width:5px;height:5px;border-radius:50%;background:var(--brons)}
 
+/* ── wat het knelpunt voor jou betekent ── */
+.knel{margin-top:2px;margin-bottom:16px;width:100%;border-left:2px solid var(--brons);
+  padding:2px 0 2px 14px;display:flex;flex-direction:column;gap:5px}
+.knel-kop{font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--brons)}
+.knel p{font-size:13.5px;line-height:1.6;color:var(--inkt-70)}
+.knel .zacht{color:var(--inkt-55);font-style:italic}
+.wijzer{margin-top:6px;font-size:12.5px;line-height:1.6;color:var(--inkt-70);
+  background:var(--brons-zacht);border-radius:10px;padding:10px 13px}
+.wijzer button{font:inherit;font-size:12.5px;font-weight:700;color:var(--brons-diep);
+  background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;
+  text-underline-offset:3px}
+.wijzer button:hover{color:var(--inkt)}
+
 /* ── het spoor: wat heb je aangeklikt ── */
 .spoor{background:var(--lab-grond);border-radius:16px;padding:15px 18px;
   display:flex;flex-wrap:wrap;align-items:center;gap:10px;
@@ -277,12 +291,12 @@ p{margin:0}
     <div>
       <p class="lab-merk">Wellshave · proefbank</p>
       <h1>De quiz, klikbaar</h1>
-      <p>Dezelfde drie vragen, dezelfde tien routes en dezelfde teksten als op
+      <p>Dezelfde vier vragen, dezelfde elf routes en dezelfde teksten als in het voorstel voor
         <code>/pages/quiz</code>. Klik hem door zoals een bezoeker dat doet, of spring met de
         balk hieronder rechtstreeks naar een uitkomst.</p>
     </div>
     <div class="lab-peil">
-      <span class="peil"><b>11</b> uitkomsten</span>
+      <span class="peil"><b>11</b> routes</span>
       <span class="peil"><b>5</b> zones</span>
       <span class="peil">prijzen van <b>24-08-2026</b></span>
     </div>
@@ -298,10 +312,10 @@ p{margin:0}
   <main class="qz"><div class="qz-in">
 
     <div class="qz-kop">
-      <p class="qz-eyebrow">Drie vragen</p>
+      <p class="qz-eyebrow">Vier vragen</p>
       <h2 class="qz-h2">Welk apparaat past bij <b>wat jij wilt doen?</b></h2>
-      <p class="qz-sub">Beantwoord drie vragen en je krijgt één apparaat te zien — met prijs,
-        voorraad en waarom juist die.</p>
+      <p class="qz-sub">Vier vragen over wat je wilt bereiken en waar je nu op vastloopt. Je krijgt één
+        apparaat te zien — met prijs, voorraad en waarom juist die.</p>
     </div>
 
     <div class="qz-balk">
@@ -311,7 +325,8 @@ p{margin:0}
       <ol class="qz-stappen" id="stappen">
         <li data-stip="1"><i>1</i><span>Voor wie</span></li>
         <li data-stip="2"><i>2</i><span>Waar</span></li>
-        <li data-stip="3"><i>3</i><span>Wat</span></li>
+        <li data-stip="3"><i>3</i><span>Doel</span></li>
+        <li data-stip="4"><i>4</i><span>Knelpunt</span></li>
       </ol>
     </div>
 
@@ -337,9 +352,16 @@ p{margin:0}
     </section>
 
     <section class="qz-vak" data-vak="keuze" hidden>
-      <p class="qz-vraag" id="v3kop">Wat wil je met {zone} doen?</p>
-      <p class="qz-vraagsub">Kort houden en glad scheren vragen om een ander apparaat.</p>
+      <p class="qz-vraag" id="v3kop">Hoe wil je dat {zone} eruitziet als je klaar bent?</p>
+      <p class="qz-vraagsub">Kort houden en glad afwerken vragen om een ander apparaat.</p>
       <div id="keuzes"></div>
+    </section>
+
+    <section class="qz-vak" data-vak="knel" hidden>
+      <p class="qz-vraag">Waar loopt het nu op stuk?</p>
+      <p class="qz-vraagsub">Hier komt het meeste ongemak vandaan. Zeg welke jij herkent, dan
+        vertellen we wat dit apparaat daaraan doet.</p>
+      <div id="knelpunten"></div>
     </section>
 
     <section class="qz-vak" data-vak="uit" hidden>
@@ -363,118 +385,246 @@ p{margin:0}
 </div>
 
 <script>
+/* ── de routes ──────────────────────────────────────────────────────────────
+   Elke route is één weg door de quiz. `doel` is het antwoord op vraag 3 (wat
+   wil je bereiken), `antw` zijn de antwoorden op vraag 4 (waar loopt het op
+   stuk). Ontbreekt een antwoord, dan claimen we niets: dan wijzen we naar een
+   apparaat in dezelfde zone dat het wél kan, of naar de honderd dagen.
+   Elke regel hieronder staat in de productomschrijving van dat apparaat. */
 const ROUTES = [
-  { id:'l1', zone:'Lichaam', icoon:'z-lichaam', zoneWat:'Borst, rug, buik en benen.',
-    keuze:'Trimmen én glad afwerken', keuzeWat:'Grote vlakken kort houden en daarna strak glad maken.',
+  { id:'l1', zone:'Lichaam',
+    doel:'Glad, alsof er niets groeit', doelWat:'Eerst kort, daarna strak afgewerkt.',
     naam:'Groom Guard™ <b>PRO</b>', mono:'GG', pil:'Best verkocht',
     waarom:'Je trimt eerst met de bodytrimmer en werkt daarna glad af met de foil shaver-kop — zonder de sneetjes en ingegroeide haren van een gewoon mesje.',
     punten:['6600 RPM motor en een LED-licht','SkinSafe keramische mesjes achter een kam','IPX7 waterdicht, tot 120 minuten op één lading'],
-    nu:'59,95', was:'85,65', bespaar:'25,70' },
-  { id:'l2', zone:'Lichaam', keuze:'Alleen kort houden', keuzeWat:'Zonder de gladde afwerking erna.',
+    nu:'59,95', was:'85,65', bespaar:'25,70',
+    antw:{
+      sneetjes:'De keramische SkinSafe-mesjes zitten achter een kam en komen niet los op je huid — ook niet in de gevoelige zones.',
+      ingegroeid:'De foil shaver-kop werkt glad af zonder de sneetjes en ingegroeide haren die een gewoon mesje achterlaat.',
+      trekken:'6600 toeren gaat door de dikste haren heen, dus hij blijft niet halverwege steken.'
+    } },
+  { id:'l2', zone:'Lichaam',
+    doel:'Kort, maar niet kaal', doelWat:'Bijhouden, zonder gladde afwerking.',
     naam:'Groom Guard™', mono:'GG',
     waarom:'Dezelfde SkinSafe-mesjes als de PRO, maar zonder de foil shaver-kop die daarna glad afwerkt. Genoeg als je je haar vooral kort wilt houden.',
     punten:['SkinSafe Technology','Voor lichaams- én gezichtshaar'],
-    nu:'44,95', was:'71,35', bespaar:'26,40' },
-  { id:'s1', zone:'Schaamstreek', icoon:'z-schaam', zoneWat:'De gevoeligste zone.',
-    keuze:'Zonder irritatie of sneetjes', keuzeWat:'De zone waar het mis kan gaan.',
+    nu:'44,95', was:'71,35', bespaar:'26,40',
+    antw:{ sneetjes:'SkinSafe Technology — dezelfde mesjes als in de PRO.' } },
+
+  { id:'s1', zone:'Schaamstreek',
+    doel:'Kort en zonder risico', doelWat:'De veiligste manier om bij te houden.',
     naam:'Flex Guard™ <b>3-in-1</b>', mono:'FG',
     waarom:'De Skin Safe-technologie voorkomt irritatie en sneetjes, ook bij een gevoelige huid. De motor levert constante kracht zonder hapering, dus hij blijft niet halverwege steken.',
     punten:['Skin Safe tegen irritatie en sneetjes','Constante kracht zonder hapering','Nat of droog te gebruiken, met LED-licht'],
-    nu:'54,95', was:'85,65', bespaar:'30,70' },
-  { id:'g1', zone:'Gezicht & baard', icoon:'z-gezicht', zoneWat:'Baard, snor en randen.',
-    keuze:'Mijn baard bijhouden', keuzeWat:'Vormgeven en op lengte houden.',
+    nu:'54,95', was:'85,65', bespaar:'30,70',
+    antw:{
+      sneetjes:'De Skin Safe-technologie is hier precies voor gemaakt: geen irritatie en geen sneetjes, ook bij een gevoelige huid.',
+      trekken:'De motor levert constante kracht zonder hapering.'
+    } },
+  { id:'s2', zone:'Schaamstreek',
+    doel:'Zo glad mogelijk', doelWat:'Niet alleen kort — echt glad.',
+    naam:'Groom Guard™ <b>PRO</b>', mono:'GG',
+    waarom:'Je trimt eerst het schaamhaar en werkt daarna glad af met de foil shaver-kop. De keramische mesjes leggen je huid niet bloot, ook niet in de gevoelige zones.',
+    punten:['Foil shaver-kop voor de gladde afwerking','SkinSafe keramische mesjes','IPX7 waterdicht — ook onder de douche'],
+    nu:'59,95', was:'85,65', bespaar:'25,70',
+    antw:{
+      sneetjes:'De keramische SkinSafe-mesjes zitten achter een kam en komen niet los op je huid.',
+      ingegroeid:'De foil shaver-kop werkt glad af zonder de sneetjes en ingegroeide haren die een gewoon mesje achterlaat.',
+      trekken:'6600 toeren gaat door de dikste haren heen zonder te blijven steken.'
+    } },
+
+  { id:'g1', zone:'Gezicht & baard',
+    doel:'Baard in model, op lengte', doelWat:'Vormgeven en kort houden.',
     naam:'Men Shaper Supreme™ <b>6-in-1</b>', mono:'MS', pil:'Nieuwste model',
     waarom:'Gemaakt voor het stylen en onderhouden van baard, snor en lichaamshaar. Het LCD-display laat zien hoeveel draadloze tijd er nog in zit, dus hij valt niet halverwege stil.',
     punten:['8000 RPM motor','IPX7 waterdicht — ook onder de douche','Skin-safe technologie tegen irritatie'],
-    nu:'39,95', was:'71,35', bespaar:'31,40' },
-  { id:'g2', zone:'Gezicht & baard', keuze:'Glad scheren', keuzeWat:'Elke dag schoon en glad.',
+    nu:'39,95', was:'71,35', bespaar:'31,40',
+    antw:{
+      rommel:'Zes opzetstukken voor baard, snor én lichaamshaar in één apparaat.',
+      accu:'Het LCD-display toont hoeveel draadloze tijd er nog in zit.',
+      wegwerp:'Elektrisch, dus je koopt nooit meer een pakje wegwerpmesjes.'
+    } },
+  { id:'g2', zone:'Gezicht & baard',
+    doel:'Elke dag glad geschoren', doelWat:'Schoon gezicht, elektrisch.',
     naam:'The Gentleman Shaver™', mono:'GS',
-    waarom:'Trimmer, neustrimmer en baardtrimmer zitten in hetzelfde apparaat, dus je hebt er niets extra\'s naast nodig.',
+    waarom:'Trimmer, neustrimmer en baardtrimmer zitten in hetzelfde apparaat, dus je hebt er niets extra’s naast nodig.',
     punten:['Trimmer, neustrimmer en baardtrimmer','LCD-display en lithium-accu','Waterdichte behuizing'],
-    nu:'49,95', was:'85,65', bespaar:'35,70' },
-  { id:'g3', zone:'Gezicht & baard', keuze:'Met de hand, klassiek', keuzeWat:'Nat scheren met een echt mes.',
+    nu:'49,95', was:'85,65', bespaar:'35,70',
+    antw:{
+      rommel:'Trimmer, neustrimmer en baardtrimmer zitten in hetzelfde apparaat.',
+      accu:'Een LCD-display en een lithium-accu, dus je ziet wanneer hij bij moet.',
+      wegwerp:'Elektrisch scheren — geen pakjes mesjes meer.'
+    } },
+  { id:'g3', zone:'Gezicht & baard',
+    doel:'Glad, maar met een echt mes', doelWat:'Klassiek nat scheren.',
     naam:'Blade Guard <b>Gold</b>', mono:'BG',
     waarom:'Eén scheermes in plaats van een la vol wegwerpmesjes. Geschikt voor alle lichaamsdelen, dus je hebt er maar één nodig.',
     punten:['Vervangt wegwerpscheermesjes','Voor alle lichaamsdelen'],
-    nu:'19,95', was:'21,58', bespaar:'1,63' },
-  { id:'h1', zone:'Hoofd', icoon:'z-hoofd', zoneWat:'Van kaal tot kort geknipt.',
-    keuze:'Kaal tot op de huid', keuzeWat:'Scheren, niet knippen.',
+    nu:'19,95', was:'21,58', bespaar:'1,63',
+    antw:{
+      wegwerp:'Eén scheermes in plaats van wegwerpmesjes — daar is hij voor gemaakt.',
+      rommel:'Eén mes voor alle lichaamsdelen, dus je hebt er verder niets voor nodig.',
+      accu:'Hij heeft geen accu, dus die kan ook nooit leeg zijn.'
+    } },
+
+  { id:'h1', zone:'Hoofd',
+    doel:'Kaal tot op de huid', doelWat:'Scheren, niet knippen.',
     naam:'Head Shaver <b>Deluxe</b>', mono:'HS',
     waarom:'De scheerkop heeft zeven messen en gaat over elk oppervlak waar haar groeit. Er zitten vijf opzetstukken bij, voor hoofd, baard, neus en oren.',
     punten:['Scheerkop met 7 scheermessen','5 opzetstukken in de set','Twee borstels voor de huid'],
-    nu:'54,95', was:'64,95', bespaar:'10,00' },
-  { id:'h2', zone:'Hoofd', keuze:'Kort houden of een fade', keuzeWat:'Jij bepaalt hoe kort het wordt.',
+    nu:'54,95', was:'64,95', bespaar:'10,00',
+    antw:{
+      bijkomen:'De scheerkop heeft zeven messen en gaat over elk oppervlak waar haar groeit — ook waar je niet kijkt.',
+      gelijk:'Tot op de huid, dus er blijft geen lengte over die ongelijk kan worden.',
+      kapper:'Vijf opzetstukken voor hoofd, baard, neus en oren, met twee borstels erbij.'
+    } },
+  { id:'h2', zone:'Hoofd',
+    doel:'Kort geknipt, of een fade', doelWat:'Jij bepaalt hoe kort het wordt.',
     naam:'Tondeuse <b>Elegant™</b>', mono:'TE',
     waarom:'Gemaakt voor hoofdhaar: korte kapsels, fades of strak gestyled, met precisiescherpe messen en genoeg controle om het zelf te doen.',
     punten:['Precisiescherpe messen','Krachtig motormechanisme','Geschikt voor elk haartype'],
-    nu:'59,95', was:'92,79', bespaar:'32,84' },
-  { id:'n1', zone:'Neus & oren', icoon:'z-neus', zoneWat:'Detailwerk waar je slecht bij kunt.',
-    keuze:'Alleen neus en oren', keuzeWat:'Eén ding, en dat goed.',
+    nu:'59,95', was:'92,79', bespaar:'32,84',
+    antw:{
+      gelijk:'Precisiescherpe messen en een ergonomisch model, gemaakt om het gelijkmatig te houden.',
+      kapper:'Gemaakt voor korte kapsels, fades en strak gestyled haar.'
+    } },
+
+  { id:'n1', zone:'Neus & oren',
+    doel:'Alleen weg wat uitsteekt', doelWat:'Eén ding, en dat goed.',
     naam:'Neustrimmer <b>Basic™</b>', mono:'NB',
     waarom:'Compact en licht, en doet precies één ding: neus-, wenkbrauw- en oorhaar weghalen. De goedkoopste manier om er verzorgd uit te zien.',
     punten:['Voor neus, wenkbrauw en oren','Compact en licht'],
-    nu:'16,95', was:'29,92', bespaar:'12,97' },
-  { id:'n2', zone:'Neus & oren', keuze:'Ook wenkbrauwen en details', keuzeWat:'Al het detailwerk in één apparaat.',
+    nu:'16,95', was:'29,92', bespaar:'12,97',
+    antw:{
+      trekken:'Krachtige mesjes op een hoog scheerniveau.',
+      wenkbrauw:'Wenkbrauwen zitten er al bij — neus, wenkbrauw en oor met hetzelfde apparaat.',
+      grof:'Compact en licht, gemaakt voor neus, wenkbrauw en oor.'
+    } },
+  { id:'n2', zone:'Neus & oren',
+    doel:'Ook wenkbrauwen en randjes', doelWat:'Al het detailwerk in één apparaat.',
     naam:'Neustrimmer Ultimate™ <b>4-in-1</b>', mono:'NU', pil:'Best beoordeeld · 8,5',
     waarom:'Neus, oren, wenkbrauwen en lichaamshaar met vier opzetstukken erbij, zodat je er niets naast nodig hebt.',
     punten:['4 extra opzetstukken','Voor neus, oor, wenkbrauw en lichaam','Compact en licht'],
-    nu:'29,95', was:'50,00', bespaar:'20,05' }
+    nu:'29,95', was:'50,00', bespaar:'20,05',
+    antw:{
+      trekken:'Krachtige mesjes op een hoog scheerniveau, en hij scheert de haren gelijk met de huid.',
+      wenkbrauw:'Vier extra opzetstukken voor neus, oor, wenkbrauw en lichaamshaar.',
+      grof:'Compact en licht — gemaakt voor detailwerk, niet voor grote vlakken.'
+    } }
 ];
+
+/* ── vraag 4, per zone. Alleen knelpunten die in deze zone echt spelen. ── */
+const KNELPUNTEN = {
+  'Lichaam':        [['sneetjes','Sneetjes en rode bultjes'],['ingegroeid','Ingegroeide haren'],['trekken','Hij blijft haken en trekken']],
+  'Schaamstreek':   [['sneetjes','Sneetjes en rode bultjes'],['ingegroeid','Ingegroeide haren'],['trekken','Hij blijft haken en trekken']],
+  'Gezicht & baard':[['rommel','Ik heb er drie apparaten voor nodig'],['accu','De accu is leeg als ik hem nodig heb'],['wegwerp','Ik blijf mesjes kopen']],
+  'Hoofd':          [['bijkomen','Ik kom er zelf slecht bij'],['gelijk','Ik krijg het niet gelijkmatig'],['kapper','Ik wil niet meer naar de kapper']],
+  'Neus & oren':    [['trekken','Het trekt aan de haren'],['wenkbrauw','Wenkbrauwen moeten ook mee'],['grof','Gewone trimmers zijn te grof']]
+};
+const GEEN = ['geen','Nergens — ik begin net'];
 
 const CADEAU = {
   id:'cadeau', label:'Het veiligste cadeau', zone:'Cadeau · dekt meerdere zones',
   naam:'Shave Package <b>3.0</b>', mono:'SP', pil:'Bestverkochte set',
   waarom:'Wie voor een ander koopt, weet zelden welke plek hij aanpakt. In deze set zitten een bodygroomer, een neustrimmer en een scheeropzetstuk met een oplaadstation — samen dekken ze trimmen, detailwerk en glad afwerken.',
   punten:['Bodygroomer met extra scheerblad','Neustrimmer met detail-trim opzetstuk','Scheeropzetstuk en oplaadstation'],
-  nu:'64,95', was:'99,95', bespaar:'35,00'
+  nu:'64,95', was:'99,95', bespaar:'35,00', antw:{}
 };
 
 const ZONES = [];
 ROUTES.forEach(r => {
   let z = ZONES.find(x => x.naam === r.zone);
-  if (!z) { z = { naam:r.zone, icoon:r.icoon, wat:r.zoneWat, routes:[] }; ZONES.push(z); }
+  if (!z) { z = { naam:r.zone, routes:[] }; ZONES.push(z); }
   z.routes.push(r);
 });
+const ZONE_ICOON = { 'Lichaam':'z-lichaam','Schaamstreek':'z-schaam','Gezicht & baard':'z-gezicht','Hoofd':'z-hoofd','Neus & oren':'z-neus' };
+const ZONE_WAT = { 'Lichaam':'Borst, rug, buik en benen.','Schaamstreek':'De gevoeligste zone.','Gezicht & baard':'Baard, snor en randen.','Hoofd':'Van kaal tot kort geknipt.','Neus & oren':'Detailwerk waar je slecht bij kunt.' };
 
 const $ = s => document.querySelector(s);
 const vakken = {};
 document.querySelectorAll('[data-vak]').forEach(v => vakken[v.dataset.vak] = v);
 const v3sjabloon = $('#v3kop').textContent;
-let pad = [];
-let spoorTekst = [];
+const kaal = h => h.replace(/<\/?b>/g, '');
 
-/* ── de zoneknoppen ── */
+let pad = [], spoorTekst = [], keuze = { zone:null, route:null, knel:null };
+
+/* ── vraag 2 ── */
 $('#zones').innerHTML = ZONES.map(z => `
   <button class="zone" type="button" data-zone="${z.naam}">
-    <span class="zone-mark"><svg><use href="#${z.icoon}"/></svg></span>
-    <b>${z.naam}</b><span>${z.wat}</span>
-    <em>${z.routes.length === 1 ? 'één route — vraag 3 vervalt' : z.routes.length + ' routes'}</em>
+    <span class="zone-mark"><svg><use href="#${ZONE_ICOON[z.naam]}"/></svg></span>
+    <b>${z.naam}</b><span>${ZONE_WAT[z.naam]}</span>
+    <em>${z.routes.length} doelen</em>
   </button>`).join('');
 
-/* ── de keuzes per zone ── */
+/* ── vraag 3 ── */
 $('#keuzes').innerHTML = ZONES.map(z => `
   <div class="qz-keuzes" data-keuzes="${z.naam}" hidden>
     ${z.routes.map(r => `
       <button class="kaart" type="button" data-route="${r.id}">
-        <b>${r.keuze}</b><span>${r.keuzeWat}</span>
+        <b>${r.doel}</b><span>${r.doelWat}</span>
         <svg class="pijl"><use href="#i-arw"/></svg>
       </button>`).join('')}
   </div>`).join('');
 
-/* ── de uitkomstkaarten ── */
-function kaartHtml(r, label, zonelijn, zusjes) {
-  return `
-  <article class="uit" data-uit="${r.id}" hidden>
-    <p class="uit-label"><svg><use href="#i-vink"/></svg>${label}</p>
+/* ── vraag 4 ── */
+$('#knelpunten').innerHTML = Object.keys(KNELPUNTEN).map(zn => `
+  <div class="qz-keuzes" data-knel="${zn}" hidden>
+    ${KNELPUNTEN[zn].concat([GEEN]).map(([sleutel, label]) => `
+      <button class="kaart" type="button" data-knelkeuze="${sleutel}">
+        <b>${label}</b>
+        <svg class="pijl"><use href="#i-arw"/></svg>
+      </button>`).join('')}
+  </div>`).join('');
+
+/* ── de uitkomst, opnieuw opgebouwd bij elke keuze ── */
+function knelBlok(r, sleutel) {
+  if (!sleutel) return '';
+  if (sleutel === 'geen') {
+    return `<div class="knel"><p class="knel-kop">Je begint net</p>
+      <p>Dan hoef je nu niets zeker te weten. Je hebt honderd dagen om thuis te merken of dit
+      voor jou werkt — en anders krijg je je geld terug.</p></div>`;
+  }
+  const paar = (KNELPUNTEN[r.zone] || []).find(k => k[0] === sleutel);
+  const label = paar ? paar[1].toLowerCase() : sleutel;
+  if (r.antw[sleutel]) {
+    return `<div class="knel"><p class="knel-kop">Jouw knelpunt: ${label}</p>
+      <p>${r.antw[sleutel]}</p></div>`;
+  }
+  const beter = ROUTES.find(x => x.zone === r.zone && x.id !== r.id && x.antw[sleutel]);
+  const wijzer = beter
+    ? `<div class="wijzer">Wél opgelost door de
+        <button type="button" data-route="${beter.id}">${kaal(beter.naam)}</button> —
+        ${beter.antw[sleutel].charAt(0).toLowerCase() + beter.antw[sleutel].slice(1)}</div>`
+    : '';
+  return `<div class="knel"><p class="knel-kop">Jouw knelpunt: ${label}</p>
+    <p class="zacht">Daar doet dit apparaat volgens zijn eigen omschrijving niets specifieks aan.
+    We beweren het dus ook niet.</p>${wijzer}</div>`;
+}
+
+function toonUitkomst(r) {
+  if (!r) { $('#uitkomsten').innerHTML = ''; return; }
+  const zus = ROUTES.filter(x => x.zone === r.zone && x.id !== r.id);
+  const anders = zus.length ? `
+    <div class="anders"><p>Wilde je toch iets anders in deze zone?</p>
+      <div>${zus.map(x => `<button class="chip" type="button" data-route="${x.id}">${x.doel} — ${kaal(x.naam)}</button>`).join('')}</div>
+    </div>` : (r.id === 'cadeau' ? `
+    <div class="anders"><p>Weet je toch precies wat hij gebruikt?</p>
+      <div><button class="chip" type="button" data-opnieuw>Doe de quiz alsnog per zone</button></div>
+    </div>` : '');
+
+  $('#uitkomsten').innerHTML = `
+  <article class="uit">
+    <p class="uit-label"><svg><use href="#i-vink"/></svg>${r.id === 'cadeau' ? r.label : 'Dit past bij jouw antwoorden'}</p>
     <div class="uit-body">
       <div class="uit-beeld">
         <p class="uit-mono"><b>${r.mono}</b>packshot uit Shopify<br>staat hier in de winkel</p>
         ${r.pil ? `<span class="pil">${r.pil}</span>` : ''}
       </div>
       <div class="uit-kaart">
-        <p class="uit-zone">${zonelijn}</p>
+        <p class="uit-zone">${r.id === 'cadeau' ? r.zone : r.zone + ' · ' + r.doel}</p>
         <h3 class="uit-naam">${r.naam}</h3>
         <p class="waarom">${r.waarom}</p>
+        ${knelBlok(r, keuze.knel)}
         <ul class="punten">${r.punten.map(p => `<li><svg><use href="#i-vink"/></svg>${p}</li>`).join('')}</ul>
         <p class="prijs"><span class="nu">${r.nu}</span><span class="was">${r.was}</span>
           <span class="korting">Je bespaart ${r.bespaar}</span></p>
@@ -483,105 +633,73 @@ function kaartHtml(r, label, zonelijn, zusjes) {
         <p class="meer">Bekijk alle specificaties</p>
       </div>
     </div>
-    ${zusjes}
+    ${anders}
   </article>`;
+  document.querySelectorAll('[data-spring]').forEach(b =>
+    b.classList.toggle('is-aan', b.dataset.spring === r.id));
+  toon('uit');
 }
-
-$('#uitkomsten').innerHTML = ROUTES.map(r => {
-  const zus = ROUTES.filter(x => x.zone === r.zone && x.id !== r.id);
-  const anders = zus.length ? `
-    <div class="anders">
-      <p>Wilde je toch iets anders in deze zone?</p>
-      <div>${zus.map(x => `<button class="chip" type="button" data-route="${x.id}">${x.keuze} — ${x.naam.replace(/<\/?b>/g,'')}</button>`).join('')}</div>
-    </div>` : '';
-  return kaartHtml(r, 'Dit past bij jouw antwoorden', `${r.zone} · ${r.keuze}`, anders);
-}).join('') + kaartHtml(CADEAU, CADEAU.label, CADEAU.zone, `
-  <div class="anders">
-    <p>Weet je toch precies wat hij gebruikt?</p>
-    <div><button class="chip" type="button" data-opnieuw>Doe de quiz alsnog per zone</button></div>
-  </div>`);
 
 /* ── de sprongbalk ── */
 $('#sprong').innerHTML = ROUTES.map(r =>
-  `<button type="button" data-spring="${r.id}">${r.id} · ${r.zone.split(' ')[0]} — ${r.naam.replace(/<\/?b>/g,'')}</button>`
+  `<button type="button" data-spring="${r.id}">${r.id} · ${r.zone.split(' ')[0]} — ${kaal(r.naam)}</button>`
 ).join('') + `<button type="button" data-spring="cadeau">cadeau · Shave Package 3.0</button>`;
 
-/* ── het spoor ── */
 function tekenSpoor() {
   const el = $('#spoor');
-  if (!spoorTekst.length) {
-    el.innerHTML = `<strong>Spoor</strong><span>nog niets aangeklikt</span>`;
-    return;
-  }
-  el.innerHTML = `<strong>Spoor</strong>` + spoorTekst
-    .map(t => `<code>${t}</code>`).join('<span class="scheiding">→</span>');
+  el.innerHTML = spoorTekst.length
+    ? `<strong>Spoor</strong>` + spoorTekst.map(t => `<code>${t}</code>`).join('<span class="scheiding">→</span>')
+    : `<strong>Spoor</strong><span>nog niets aangeklikt</span>`;
 }
 
-/* ── de motor ── */
 function toon(naam) {
   Object.keys(vakken).forEach(k => vakken[k].hidden = k !== naam);
-  const nr = naam === 'wie' ? 1 : naam === 'zone' ? 2 : 3;
+  const nr = { wie:1, zone:2, keuze:3, knel:4 }[naam] || 4;
   document.querySelectorAll('[data-stip]').forEach(s => {
     const eigen = +s.dataset.stip;
     s.classList.toggle('is-aan', eigen === nr && naam !== 'uit');
-    s.classList.toggle('is-klaar', eigen < nr || naam === 'uit');
+    s.classList.toggle('is-klaar', naam === 'uit' ? true : eigen < nr);
   });
   $('#terug').hidden = pad.length === 0;
   tekenSpoor();
-}
-
-function toonUitkomst(id) {
-  document.querySelectorAll('[data-uit]').forEach(u => u.hidden = u.dataset.uit !== id);
-  document.querySelectorAll('[data-spring]').forEach(b =>
-    b.classList.toggle('is-aan', b.dataset.spring === id));
-  toon('uit');
 }
 
 document.addEventListener('click', e => {
   const wie = e.target.closest('[data-wie]');
   const zone = e.target.closest('[data-zone]');
   const route = e.target.closest('[data-route]');
+  const knelkeuze = e.target.closest('[data-knelkeuze]');
   const spring = e.target.closest('[data-spring]');
   const opnieuw = e.target.closest('[data-opnieuw]');
 
-  if (opnieuw) { pad = []; spoorTekst = []; toonUitkomst(null); toon('wie'); return; }
+  if (opnieuw) {
+    pad = []; spoorTekst = []; keuze = { zone:null, route:null, knel:null };
+    toonUitkomst(null); toon('wie'); return;
+  }
 
   if (spring) {
-    const id = spring.dataset.spring;
-    const r = ROUTES.find(x => x.id === id);
-    pad = r ? ['wie','zone','keuze'] : ['wie'];
-    spoorTekst = r ? ['zelf', r.zone, r.keuze] : ['cadeau'];
-    if (r) {
-      document.querySelectorAll('[data-keuzes]').forEach(g => g.hidden = g.dataset.keuzes !== r.zone);
-    }
-    toonUitkomst(id);
-    return;
+    const r = spring.dataset.spring === 'cadeau' ? CADEAU : ROUTES.find(x => x.id === spring.dataset.spring);
+    keuze = { zone:r.zone, route:r, knel:null };
+    pad = r.id === 'cadeau' ? ['wie'] : ['wie','zone','keuze'];
+    spoorTekst = r.id === 'cadeau' ? ['cadeau'] : ['zelf', r.zone, r.doel];
+    document.querySelectorAll('[data-keuzes]').forEach(g => g.hidden = g.dataset.keuzes !== r.zone);
+    toonUitkomst(r); return;
   }
 
   if (wie) {
     pad.push('wie');
     spoorTekst = [wie.dataset.wie === 'cadeau' ? 'cadeau' : 'zelf'];
-    if (wie.dataset.wie === 'cadeau') toonUitkomst('cadeau'); else toon('zone');
+    if (wie.dataset.wie === 'cadeau') { keuze = { zone:null, route:CADEAU, knel:null }; toonUitkomst(CADEAU); }
+    else toon('zone');
     return;
   }
 
   if (zone) {
     const naam = zone.dataset.zone;
-    let mijn = null;
-    document.querySelectorAll('[data-keuzes]').forEach(g => {
-      const raak = g.dataset.keuzes === naam;
-      g.hidden = !raak;
-      if (raak) mijn = g;
-    });
+    keuze.zone = naam;
+    document.querySelectorAll('[data-keuzes]').forEach(g => g.hidden = g.dataset.keuzes !== naam);
     pad.push('zone');
-    spoorTekst = [spoorTekst[0], naam];
-    const routes = mijn ? mijn.querySelectorAll('[data-route]') : [];
-    if (routes.length === 1) {
-      const r = ROUTES.find(x => x.id === routes[0].dataset.route);
-      spoorTekst.push(r.keuze + ' (overgeslagen)');
-      toonUitkomst(routes[0].dataset.route);
-      return;
-    }
+    spoorTekst = [spoorTekst[0] || 'zelf', naam];
     $('#v3kop').textContent = v3sjabloon.replace('{zone}', naam.toLowerCase());
     toon('keuze');
     return;
@@ -589,10 +707,26 @@ document.addEventListener('click', e => {
 
   if (route) {
     const r = ROUTES.find(x => x.id === route.dataset.route);
-    if (!vakken.uit.hidden) { spoorTekst[2] = r.keuze; toonUitkomst(r.id); return; }
+    keuze.route = r;
+    // vanuit de uitkomst (chip of doorverwijzing) blijven we op de uitkomst staan
+    if (!vakken.uit.hidden) {
+      spoorTekst[1] = r.zone; spoorTekst[2] = r.doel;
+      document.querySelectorAll('[data-keuzes]').forEach(g => g.hidden = g.dataset.keuzes !== r.zone);
+      keuze.zone = r.zone;
+      toonUitkomst(r); return;
+    }
     pad.push('keuze');
-    spoorTekst = [spoorTekst[0], spoorTekst[1], r.keuze];
-    toonUitkomst(r.id);
+    spoorTekst = [spoorTekst[0], r.zone, r.doel];
+    document.querySelectorAll('[data-knel]').forEach(g => g.hidden = g.dataset.knel !== r.zone);
+    toon('knel');
+    return;
+  }
+
+  if (knelkeuze) {
+    keuze.knel = knelkeuze.dataset.knelkeuze;
+    pad.push('knel');
+    spoorTekst = spoorTekst.slice(0, 3).concat([knelkeuze.querySelector('b').textContent]);
+    toonUitkomst(keuze.route);
   }
 });
 
@@ -603,4 +737,5 @@ $('#terug').addEventListener('click', () => {
 });
 
 toon('wie');
+
 </script>
