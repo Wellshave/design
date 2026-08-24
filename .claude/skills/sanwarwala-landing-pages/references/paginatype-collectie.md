@@ -117,8 +117,12 @@ is ruim genoeg; wat detail is, hoort achter een uitklap in plaats van in een eig
    Een los citaat van een gebruikersnaam staat op de laagste trede van de geloofwaardigheidsladder;
    met de bron erbij klimt het twee treden, zonder dat er iets verzonnen wordt. Een aparte rij met
    scores erboven kan dan weg &mdash; die cijfers staan al op de kaarten in het raster.
-6. **Slotband** &mdash; donker. De garanties als smalle strook, vijf vragen over déze apparaten, en
-   daaronder de andere zones voor wie hier verkeerd zit.
+6. **Slotband** &mdash; donker. De garanties, vijf vragen over déze apparaten, en daaronder de
+   andere zones voor wie hier verkeerd zit. Geef elke garantie een icoon: vier tekstjes onder
+   elkaar lezen als kleine lettertjes, terwijl dit juist de regels zijn die de aarzeling wegnemen.
+   Op desktop staan ze als één rij van vier in een omlijnde strook; op mobiel worden het vier
+   kaarten in een schuifstrip van ongeveer 72% breed, zodat de rand van de volgende zichtbaar
+   blijft. Een raster van twee bij twee maakt er een grijs vierkant van dat niemand leest.
 
 Blok 1, 2, 3 en 6 zijn verplicht. De keuzehulp in blok 1 en het mechanisme in blok 4 zijn dat
 zodra de producten in een collectie op elkaar lijken. Verwijder wat een zone niet heeft in plaats
