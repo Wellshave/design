@@ -1,14 +1,14 @@
 ---
 name: cinematic-product-video
-description: Produceer een cinematische commercial van een product met Higgsfield MCP en Seedance 2.5, plus een merkeigen annotatielaag die lokaal wordt ingebrand en nul credits kost. Dekt de hele run — product en formaat kiezen, referentiefoto's verzamelen en per shot toewijzen, de shotlijst schrijven, de credits vooraf aftasten, shot voor shot genereren met omni-reference zodat het product identiek blijft, elke clip zelf bekijken voordat je hem goedkeurt, en tot slot monteren met USP-teksten in Montserrat en het merkgoud. ALWAYS use this skill when someone wants a cinematic, commercial or product film made — even when they never mention Higgsfield or Seedance. Trigger on "maak een cinematic video", "cinematische productvideo", "commercial video van [product]", "productfilm", "macro video van ons product", "video met Seedance", "Higgsfield video", "video van de [product] maken", "voeg USP's toe aan de video", "tekst over de video", "annotaties in de video", "ons font over de video", "make a cinematic product video", "commercial film for [product]", "hero video for the product page", "add our USPs as text over the video", "brand this video with our font and colours". Gebruik hem ook bij het opnieuw monteren, hermonteren of uitbreiden van een bestaande cinematic film, en bij het maken van een verticale 9:16-versie. Trigger ook op een vage of onvolledige opening — "ik wil een video van [product]", "kun je een video maken", "video voor de productpagina", "iets moois met dit product", "we hebben beeld nodig voor de ads" — want de skill begint met een intake die de ontbrekende gegevens ophaalt en een verkeerd gestelde vraag bijstuurt naar de juiste werkwijze. Trigger eveneens wanneer iemand vraagt om productbeeld te laten genereren zonder eigen referentiefoto's aan te leveren: de skill dringt daar juist op aan, omdat het model anders een product verzint dat niet bestaat. Werkt voor elk Wellshave-product; de merklaag levert kleur en typografie. Bilingual (Nederlands/English): reply in the user's language.
+description: Produceer een cinematische commercial van een product met Higgsfield MCP en Seedance 2.5, plus een merkeigen annotatielaag die lokaal wordt ingebrand en nul credits kost. Dekt de hele run — product en formaat kiezen, referentiefoto's verzamelen en per shot toewijzen, de shotlijst schrijven, de credits vooraf aftasten, shot voor shot genereren met omni-reference zodat het product identiek blijft, elke clip zelf bekijken voordat je hem goedkeurt, en tot slot monteren met USP-teksten in Montserrat en het merkgoud. ALWAYS use this skill when someone wants a cinematic, commercial or product film made — even when they never mention Higgsfield or Seedance. Trigger on "maak een cinematic video", "cinematische productvideo", "commercial video van [product]", "productfilm", "macro video van ons product", "video met Seedance", "Higgsfield video", "video van de [product] maken", "voeg USP's toe aan de video", "tekst over de video", "annotaties in de video", "ons font over de video", "make a cinematic product video", "commercial film for [product]", "hero video for the product page", "add our USPs as text over the video", "brand this video with our font and colours", "zet muziek onder de video", "muziekje eronder", "add music to the film", "score this video". Gebruik hem ook bij het opnieuw monteren, hermonteren of uitbreiden van een bestaande cinematic film, en bij het maken van een verticale 9:16-versie. Trigger ook op een vage of onvolledige opening — "ik wil een video van [product]", "kun je een video maken", "video voor de productpagina", "iets moois met dit product", "we hebben beeld nodig voor de ads" — want de skill begint met een intake die de ontbrekende gegevens ophaalt en een verkeerd gestelde vraag bijstuurt naar de juiste werkwijze. Trigger eveneens wanneer iemand vraagt om productbeeld te laten genereren zonder eigen referentiefoto's aan te leveren: de skill dringt daar juist op aan, omdat het model anders een product verzint dat niet bestaat. Werkt voor elk Wellshave-product; de merklaag levert kleur en typografie. Bilingual (Nederlands/English): reply in the user's language.
 ---
 
 # Cinematische productvideo
 
-Een commercial van 30 seconden waarin het product de hoofdrol speelt en verder niemand. Veel
+Een commercial van 30 tot 36 seconden waarin het product de hoofdrol speelt en verder niemand. Veel
 macro, kleine bewegingen, één feature per shot, een opening die nieuwsgierig maakt en een
-eindshot waar de merknaam landt. Geen presentator, geen voice-over, geen UGC — daarvoor
-bestaan andere werkwijzen.
+eindshot waar de merknaam landt, met één muziekspoor eronder. Geen presentator, geen
+voice-over, geen UGC — daarvoor bestaan andere werkwijzen.
 
 Antwoord in de taal van de gebruiker (Nederlands → Nederlands, English → English).
 
@@ -164,16 +164,33 @@ scripts/monteer.sh --uit film.mp4 --ass annotaties.ass shot1.mp4 shot2.mp4 ...
 
 Het script plakt de shots aan elkaar, brandt de annotatielaag in met de meegeleverde
 fontgewichten en levert H.264 8-bit. Zie `scripts/monteer.sh --help` voor het inkorten van losse
-shots.
+shots, aan de kop of aan de staart.
 
-### 9. Lever op
+### 9. Leg de muziek eronder
 
-Drie dingen, want de gebruiker gaat hier verder mee werken:
+Lees `references/muzieklaag.md`. Vraag de gebruiker om een track — dit is niets om zelf te
+verzinnen, en de rechten liggen niet bij jou.
 
-- de gemonteerde film met annotaties
-- dezelfde film zonder tekst, om zelf mee te monteren
+Kies het fragment op de vorm van de film in plaats van op smaak: je zoekt een venster ter lengte
+van de film waarin de energie oploopt, zodat beeld en muziek samen stijgen. Laat één cut op de
+muziek vallen — die naar het eindshot, want daar landt de merknaam — door het hero-shot te
+verlengen en het eindshot met evenveel in te korten.
+
+Komt er geen muziek, lever dan gewoon zonder. De film werkt ook stil, maar zeg er dan bij dat er
+een spoor onder hoort.
+
+### 10. Lever op
+
+Vier dingen, want de gebruiker gaat hier verder mee werken:
+
+- de gemonteerde film met annotaties en muziek — de versie om te publiceren
+- dezelfde film met annotaties maar zonder muziek
+- de film zonder tekst en zonder muziek, om zelf mee te monteren
 - de annotatiekit: `annotaties.ass`, de twee fontbestanden en een leesmij met het
   render-commando, zodat teksten aangepast kunnen worden zonder credits en zonder jou
+
+Zet het muziekrecept in die leesmij, met de gekozen in- en uitpunten erbij. Dan kan de gebruiker
+een andere track leggen zonder opnieuw uit te zoeken hoe.
 
 Seedance levert HEVC 10-bit, wat niet overal soepel afspeelt; lever daarom altijd ook H.264.
 Let op de uploadlimiet van 30 MB per bestand — splits een te grote map op.
@@ -200,6 +217,7 @@ alternatief: de macro's zijn op de breedte gekadreerd en verliezen hun compositi
 | `references/shotgrammatica.md` | Bij stap 3, voordat je de shotlijst schrijft |
 | `references/seedance-prompts.md` | Bij stap 5, voordat je genereert |
 | `references/annotatielaag.md` | Bij stap 7, voordat je copy of opmaak maakt |
+| `references/muzieklaag.md` | Bij stap 9, voordat je een fragment kiest |
 | `scripts/monteer.sh` | Bij stap 8 |
 | `scripts/maak-fonts.py` | Alleen als het merkfont op de site verandert |
 | `assets/fonts/` | Montserrat 500 en 600, OFL 1.1 — licentie ligt ernaast |
@@ -226,8 +244,10 @@ van een tweede te schrijven.
 - **Geen prestatiecijfers.** Er is niet gemeten of deze films beter converteren dan bestaande
   advertenties. Zodra daar cijfers over zijn, horen ze hier te staan.
 - **Alleen 16:9 gedraaid.** De verticale variant is beredeneerd, niet getest.
-- **Geen geluid.** Elke clip wordt zonder audio gegenereerd, omdat losse generaties elk hun
-  eigen ruistapijt opleveren. Hoe de muzieklaag eronder komt is nog niet vastgelegd.
+- **Eén muziektrack, één film.** De werkwijze voor de muzieklaag staat nu vast, maar is op één
+  instrumentale track gedraaid die gestaag opbouwt. Bij zang of een harde drop kan de keuze van
+  het fragment anders uitpakken. Sound design — een klik bij het uitklappen van de trimmer,
+  bijvoorbeeld — is niet geprobeerd.
 - **Het model haalt niet elk productdetail.** In de Flex Guard-film werd de vlakke foilkop een
   gebogen gaastrommel. Wanneer dat acceptabel is en wanneer niet, is een oordeel dat per film
   opnieuw gemaakt moet worden.
