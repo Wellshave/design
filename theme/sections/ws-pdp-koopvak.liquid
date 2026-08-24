@@ -458,7 +458,10 @@
 {% stylesheet %}
   /* rijke tekst uit offer_title moet zich in de vetregel voegen */
   .ws-pdp .ws-gift b > *{margin:0;font:inherit;color:inherit;display:inline}
-  .ws-pdp .ws-gift .ws-ic img{width:100%;height:100%;object-fit:contain;border-radius:50%}
+  /* let op: laat geen procentteken direct tegen een sluitende accolade staan.
+     Liquid leest die twee tekens als het einde van een tag en slikt dan de
+     rest van het bestand. Vandaar de spatie ervoor. */
+  .ws-pdp .ws-gift .ws-ic img{width:100%;height:100%;object-fit:contain;border-radius:50% }
   .ws-pdp .ws-apps{margin-top:13px}
   .ws-pdp .ws-apps:empty{display:none}
   .ws-pdp .ws-apps > div:empty{display:none}
