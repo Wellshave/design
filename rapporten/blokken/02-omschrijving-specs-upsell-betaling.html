@@ -231,6 +231,49 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.86em;bac
 strong{font-weight:700}
 .foot{margin-top:52px;padding-top:22px;border-top:1px solid var(--ink-10);font-size:13px;color:var(--ink-60);line-height:1.75}
 
+
+/* ---------- blok 03: het mechanisme ---------- */
+.mech{--m-zwart:#0B0B0A;--m-gold:#E9BE72;--m-gold2:#C79A52;--m-rood:#E5342A;
+  --m-w72:rgba(255,255,255,.72);--m-w52:rgba(255,255,255,.52);--m-w38:rgba(255,255,255,.38);
+  background:var(--m-zwart);border-radius:var(--r-l);padding:42px 38px 38px;margin:26px 0 0;
+  position:relative;overflow:hidden}
+.mech .rij{display:grid;grid-template-columns:1.02fr 1fr;gap:38px;align-items:center}
+.mech .kop{font-size:clamp(26px,3.4vw,37px);font-weight:800;letter-spacing:-.032em;line-height:1.08;color:#fff}
+.mech .kop b{display:block;font-weight:800;
+  background-image:linear-gradient(100deg,#F5D18A 0%,#C79A52 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:#E9BE72}
+.mech .lead{margin:15px 0 0;font-size:16px;line-height:1.6;color:var(--m-w72);max-width:34em}
+.mech h5{margin:26px 0 0;font-size:13px;font-weight:800;letter-spacing:.02em;color:var(--m-gold)}
+.mech p.b{margin:6px 0 0;font-size:14.5px;line-height:1.6;color:var(--m-w72)}
+.mech p.b em{font-style:normal;color:#fff;font-weight:700}
+.mech .slot{margin-top:28px;padding-top:18px;border-top:1px solid rgba(255,255,255,.12);
+  font-size:17px;font-weight:700;letter-spacing:-.02em;color:#fff;line-height:1.35}
+.mech .slot span{color:var(--m-gold)}
+
+/* de doorsnede */
+.dsn{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-m);
+  padding:22px 20px 18px}
+.dsn .duo2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.dsn .paneel{min-width:0}
+.dsn .paneel svg{display:block;width:100%;height:auto}
+.dsn .plab{display:flex;align-items:center;gap:7px;margin-bottom:9px;font-size:10px;font-weight:800;
+  letter-spacing:.13em;text-transform:uppercase}
+.dsn .plab i{width:7px;height:7px;border-radius:50%;flex:none}
+.dsn .paneel.a .plab{color:rgba(255,255,255,.5)}
+.dsn .paneel.a .plab i{background:var(--m-rood)}
+.dsn .paneel.b .plab{color:var(--m-gold)}
+.dsn .paneel.b .plab i{background:var(--m-gold)}
+.dsn .onder{margin-top:11px;font-size:11.5px;line-height:1.4;color:var(--m-w38)}
+.dsn .paneel.b .onder{color:var(--m-w52)}
+.dsn .voet{margin-top:16px;padding-top:13px;border-top:1px solid rgba(255,255,255,.1);
+  font-size:11px;line-height:1.45;color:var(--m-w38)}
+
+@media (max-width:900px){
+  .mech{padding:26px 18px 22px}
+  .mech .rij{grid-template-columns:1fr;gap:26px}
+  .dsn .duo2{grid-template-columns:1fr;gap:20px}
+}
+
 /* ---------- blok 03: de ladder ---------- */
 .lad{--l-zwart:#0B0B0A;--l-kaart:#141312;--l-gold3:#E9BE72;--l-gold4:#DDA548;
   --l-w72:rgba(255,255,255,.72);--l-w52:rgba(255,255,255,.52);--l-w38:rgba(255,255,255,.38);
@@ -430,10 +473,71 @@ strong{font-weight:700}
 <div class="wrap">
 
 <header class="mast">
-  <span class="eyebrow">Blokken 05, 13 en 16 van 17 &middot; plus slot 10 &middot; 23 augustus 2026</span>
+  <span class="eyebrow">Blokken 03, 05, 13 en 16 van 17 &middot; plus slot 10 &middot; 23 augustus 2026</span>
   <h1>Onder de vouw</h1>
-  <p class="lede">Onder de vouw: eerst de <strong>ladder</strong> &mdash; welk model neem je &mdash; en daarna het <strong>productblad</strong> met de omschrijving en de specificaties, de <strong>aanvulling</strong> met de accessoires, en de <strong>betaalrij</strong>. Alle vier bestaan ze al in je winkel; ze stonden alleen los van elkaar, in vier verschillende vormen. Onder elk blok staat wat me tijdens het bouwen opviel.</p>
+  <p class="lede">Onder de vouw, op volgorde: eerst het <strong>mechanisme</strong> &mdash; waarom een mesje niet anders k&aacute;n en de keramische kop wel &mdash; en daarna de <strong>ladder</strong>, het <strong>productblad</strong> met de omschrijving en de specificaties, de <strong>aanvulling</strong> met de accessoires, en de <strong>betaalrij</strong>. Onder elk blok staat wat me tijdens het bouwen opviel.</p>
 </header>
+
+<section>
+  <div class="shead"><span class="snum">BLOK 03</span><h2 class="duo">Het eerste blok onder de vouw,<span class="b">en het enige echte onderscheid.</span></h2></div>
+  <p class="sintro">Dit is de plek waar iedereen langskomt die boven de vouw niet klikte. Ze hebben geen bewijs nodig maar een reden om te k&uuml;nnen geloven &mdash; en in een markt waar elke concurrent dezelfde uitkomst belooft, blijft alleen het mechanisme over. Daarom begint dit blok niet met techniek maar met een <strong>herkadering</strong>: het probleem is niet hoe voorzichtig je bent.</p>
+
+  <div class="mech">
+    <div class="rij">
+      <div class="dsn">
+        <div class="duo2">
+          <div class="paneel a">
+            <div class="plab"><i></i>Een mesje</div>
+            <svg viewBox="0 0 240 180" role="img" aria-label="Doorsnede: het snijvlak van een mesje raakt de huid"><rect x="0" y="126" width="240" height="54" fill="#1C1A17"/><path d="M0 126 Q60 121 120 126 T240 126" stroke="#4A4239" stroke-width="1.6" fill="none"/><path d="M0 126 Q60 121 120 126 T240 126 L240 180 L0 180 Z" fill="#232019"/><path d="M36 150 L36 96" stroke="#5C5348" stroke-width="2.4" stroke-linecap="round"/><path d="M72 150 L72 96" stroke="#5C5348" stroke-width="2.4" stroke-linecap="round"/><path d="M150 150 L150 96" stroke="#5C5348" stroke-width="2.4" stroke-linecap="round"/><path d="M186 150 L186 96" stroke="#5C5348" stroke-width="2.4" stroke-linecap="round"/><g transform="rotate(-24 128 124)"><rect x="88" y="86" width="112" height="26" rx="3" fill="#3A3730"/><path d="M88 112 L200 112 L192 124 L96 124 Z" fill="#8E8B84"/><path d="M96 124 L192 124" stroke="#D9D6D0" stroke-width="2.4"/></g><path d="M96 128 L102 121 L107 130 L113 122 L118 129" stroke="#E5342A" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="107" cy="126" r="14" fill="none" stroke="#E5342A" stroke-width="1.1" stroke-dasharray="3 3" opacity=".65"/></svg>
+            <p class="onder">Het snijvlak m&oacute;&eacute;t de huid raken om het haar op huidniveau door te snijden. Dat is geen fout &mdash; dat is hoe een mesje werkt.</p>
+          </div>
+          <div class="paneel b">
+            <div class="plab"><i></i>SkinSafe-kop</div>
+            <svg viewBox="0 0 240 180" role="img" aria-label="Doorsnede: het snijvlak zit achter de kam, op afstand van de huid"><rect x="0" y="126" width="240" height="54" fill="#1C1A17"/><path d="M0 126 Q60 121 120 126 T240 126" stroke="#4A4239" stroke-width="1.6" fill="none"/><path d="M0 126 Q60 121 120 126 T240 126 L240 180 L0 180 Z" fill="#232019"/><path d="M48 150 L48 112" stroke="#7A7166" stroke-width="2.4" stroke-linecap="round"/><path d="M84 150 L84 112" stroke="#7A7166" stroke-width="2.4" stroke-linecap="round"/><path d="M120 150 L120 112" stroke="#7A7166" stroke-width="2.4" stroke-linecap="round"/><path d="M156 150 L156 112" stroke="#7A7166" stroke-width="2.4" stroke-linecap="round"/><rect x="18" y="78" width="170" height="22" rx="4" fill="#3A3730"/><path d="M18 100 L188 100" stroke="#D9D6D0" stroke-width="2.6"/><rect x="30" y="104" width="13" height="22" rx="4.5" fill="#C79A52"/><rect x="66" y="104" width="13" height="22" rx="4.5" fill="#C79A52"/><rect x="102" y="104" width="13" height="22" rx="4.5" fill="#C79A52"/><rect x="138" y="104" width="13" height="22" rx="4.5" fill="#C79A52"/><rect x="174" y="104" width="13" height="22" rx="4.5" fill="#C79A52"/><path d="M204 100 L204 126" stroke="#E9BE72" stroke-width="1.3"/><path d="M199 103 L204 99 L209 103" stroke="#E9BE72" stroke-width="1.3" fill="none" stroke-linecap="round"/><path d="M199 123 L204 127 L209 123" stroke="#E9BE72" stroke-width="1.3" fill="none" stroke-linecap="round"/></svg>
+            <p class="onder">Het snijvlak zit &aacute;chter de kam. De kam ligt op je huid, het mes niet. Het haar wordt naar binnen geleid en daar doorgeknipt.</p>
+          </div>
+        </div>
+        <p class="voet">Doorsnede, schematisch. Bedoeld om het verschil te laten zien, niet om op schaal te zijn.</p>
+      </div>
+
+      <div>
+        <div class="kop">Het ligt niet aan jou.<b>Het ligt aan het mesje.</b></div>
+        <p class="lead">Bijna iedereen die zich hier ooit heeft gesneden denkt dat hij te snel of te onvoorzichtig was. Dat is niet zo. Een scheermesje m&oacute;&eacute;t snijden om te werken &mdash; en juist op deze plekken werkt dat tegen je.</p>
+
+        <h5>Waarom een mesje niet anders k&aacute;n</h5>
+        <p class="b">Op een vlakke wang gaat het goed: de huid staat strak en het mes glijdt eroverheen. <em>Huid die plooit, meebeweegt en dunner is, doet dat niet.</em> Daar loopt hetzelfde snijvlak over oneffenheden heen &mdash; en dan pakt het niet alleen haar.</p>
+
+        <h5>Wat de keramische kop anders doet</h5>
+        <p class="b">De kam ligt op je huid, het mes zit erachter. Het haar wordt door de kam naar het snijvlak geleid en daar doorgeknipt, <em>op afstand van je huid</em>. Je kunt dus drukken waar je moet drukken zonder dat er iets bij je huid in de buurt komt.</p>
+
+        <h5>Waarom je er ook geen bultjes van krijgt</h5>
+        <p class="b">Een haar dat onder de huidlijn wordt afgesneden trekt terug in de follikel en kan er scheef weer uit groeien. Dat is een ingegroeid haar. <em>Knipt het mes n&eacute;t boven de huid, dan blijft het uiteinde waar het hoort.</em></p>
+
+        <div class="slot">Het verschil is niet beter je best doen.<br><span>Het is ander gereedschap.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <ul class="why" style="margin-top:24px">
+    <li><span class="n">01</span><div><b>Herkadering v&oacute;&oacute;r mechanisme, niet andersom</b><p>De eerste zin haalt de schuld weg bij de lezer. Dat is geen vriendelijkheid maar techniek: zolang iemand denkt dat h&iacute;j het fout deed, is een beter apparaat overbodig. Pas als het gereedschap de schuldige is, is er een reden om ander gereedschap te kopen.</p></div></li>
+    <li><span class="n">02</span><div><b>De tekening doet het werk dat tekst niet kan</b><p>&laquo;Het snijvlak zit achter de kam&raquo; is een zin die je moet gel&oacute;ven. Twee doorsneden naast elkaar laat je het z&iacute;en: bij de een raakt het mes de huid, bij de ander niet. Beeld wordt vele malen sneller verwerkt dan tekst, en dit is precies het soort verschil dat in &eacute;&eacute;n oogopslag te vatten is.</p></div></li>
+    <li><span class="n">03</span><div><b>Elke alinea eindigt in iets controleerbaars</b><p>Geen &laquo;revolutionaire technologie&raquo; en geen &laquo;ultieme oplossing&raquo;. Wat er staat is na te lopen: waar het snijvlak zit, wat de kam doet, waarom een te kort afgesneden haar terugtrekt. Dat is ook de test voor het blok &mdash; staat er iets dat je niet kunt aanwijzen, dan hoort het er niet.</p></div></li>
+    <li><span class="n">04</span><div><b>Donkere grond, en dat is geen smaak</b><p>Blok 02 is wit, blok 04 is wit. Dit blok ertussenin is donker, zodat je bij het scrollen v&oacute;&eacute;lt dat er iets anders begint. Het is het zwaarste argument van de pagina; het mag zwaarder ogen.</p></div></li>
+  </ul>
+
+  <div class="note warn">
+    <h4>Drie dingen om na te lopen v&oacute;&oacute;r dit live gaat</h4>
+    <p><strong>De afstand tussen mes en huid staat er niet in cijfers.</strong> Ik heb bewust &laquo;op afstand van je huid&raquo; geschreven en geen millimeters, omdat ik dat getal nergens in je specificaties kan vinden. Als je het w&eacute;l weet, zet het erin: een getal is geloofwaardiger dan een omschrijving, en het is precies het soort detail dat een concurrent niet kan kopi&euml;ren zonder het ook te meten.</p>
+    <p><strong>De uitleg over ingegroeide haren is een claim over huid.</strong> Je eigen <code>custom.product_usp</code> zegt al &laquo;geen ingegroeide haren of bultjes&raquo;, dus de belofte staat er al. De uitleg erbij is de gangbare verklaring, maar het blijft een uitspraak over wat er in een follikel gebeurt. Laat hem &eacute;&eacute;n keer nalezen door iemand die dat kan beoordelen, of zwak hem af tot wat je zelf hebt gezien in reviews.</p>
+    <p><strong>De doorsnede is schematisch en zegt dat er ook bij.</strong> Hij is getekend om het verschil te laten zien, niet om op schaal te zijn. Dat staat er letterlijk onder. Wil je hem sterker maken, dan is een macro-foto van de echte kop naast een mesje het volgende niveau &mdash; dan is het geen tekening meer maar bewijs.</p>
+  </div>
+
+  <div class="note">
+    <h4>Waar het vandaan komt</h4>
+    <p>De inhoud van dit blok komt uit <code>custom.image_with_text</code>, dat op de Groom Guard al drie items bevat. Wat vastligt is de vorm: herkadering, dan drie keer &laquo;waarom&raquo; met een controleerbare afsluiting, dan de slotregel. Wat per product verschilt is welk mechanisme er wordt uitgelegd &mdash; bij een neustrimmer is dat een ander verhaal, bij een tondeuse weer een ander.</p>
+    <p>Voor een accessoire zonder eigen mechanisme valt dit blok weg. Het is een kernblok voor apparaten en een uitbreiding voor de rest.</p>
+  </div>
+</section>
 
 <section>
   <div class="shead"><span class="snum">BLOK 05</span><h2 class="duo">Drie kaarten, drie echte producten,<span class="b">en drie besparingen die kloppen.</span></h2></div>

@@ -1,0 +1,81 @@
+<title>De volgorde</title>
+<style>
+:root{
+  --ink:#111111;--ink-80:rgba(17,17,17,.8);--ink-60:rgba(17,17,17,.6);
+  --ink-40:rgba(17,17,17,.4);--ink-10:rgba(17,17,17,.10);
+  --paper:#FFFFFF;--sand:#F5F1EA;--sand-deep:#EDE6DA;
+  --carbon:#0B0B0A;--gold:#F5D18A;--bronze:#BC813E;--alert:#E61C1C;
+  --grad-gold-tekst:linear-gradient(100deg,#B0742A 0%,#8C5A1A 100%);
+  --r-m:18px;--rail:1140px;--read:660px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--sand);color:var(--ink);
+  font-family:"Montserrat",-apple-system,BlinkMacSystemFont,Arial,sans-serif;
+  font-size:16.5px;line-height:1.7;-webkit-font-smoothing:antialiased}
+h2{margin:0;text-wrap:balance}
+.eyebrow{font-weight:800;letter-spacing:.2em;text-transform:uppercase;font-size:10.5px;color:var(--ink-40)}
+.note{margin:24px 0 0;border-radius:var(--r-m);padding:19px 23px;background:var(--paper);
+  border:1px solid var(--ink-10);border-left:3px solid var(--bronze)}
+.note h4{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--bronze);margin:0 0 8px}
+.note p{margin:0;font-size:15.5px;line-height:1.6;color:var(--ink-80)}
+.note p+p{margin-top:10px}
+strong{font-weight:700}
+.vg{max-width:var(--rail);margin:0 auto;padding:0 24px 110px}
+.vg-mast{padding:60px 0 28px;border-bottom:2px solid var(--ink)}
+.vg-mast h2{font-size:clamp(31px,4.9vw,50px);margin:13px 0 0;font-weight:900;letter-spacing:-.025em;line-height:1.06}
+.vg-mast .lede{max-width:var(--read);margin:17px 0 0;font-size:17.5px;color:var(--ink-80);line-height:1.6}
+.vg-tel{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.vg-tel span{font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;background:var(--paper);
+  border:1px solid var(--ink-10);border-radius:100px;padding:6px 13px;color:var(--ink-60)}
+.vg-tel span.af{background:#E5EBE1;border-color:transparent;color:#2E6B3E}
+
+.vouwlabel{display:flex;align-items:center;gap:14px;margin:34px 0 14px}
+.vouwlabel b{font-size:10.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--bronze);white-space:nowrap}
+.vouwlabel i{flex:1;height:1px;background:var(--ink-10)}
+.vouwlabel.knip b{color:var(--alert)}
+.vouwlabel.knip i{background:repeating-linear-gradient(90deg,var(--alert) 0 7px,transparent 7px 14px);height:2px}
+
+.stapel{display:flex;flex-direction:column;gap:9px}
+.blok{display:grid;grid-template-columns:8px 46px minmax(0,1fr) auto;gap:0 16px;align-items:start;
+  background:var(--paper);border:1px solid var(--ink-10);border-radius:14px;overflow:hidden;
+  transition:border-color .18s ease,transform .18s ease}
+.blok:hover{border-color:rgba(188,129,62,.45);transform:translateY(-1px)}
+.blok .grond{align-self:stretch}
+.blok .grond.wit{background:#EDE9E1}
+.blok .grond.zand{background:#D8C9A8}
+.blok .grond.donker{background:#191816}
+.blok .nr{font-size:13px;font-weight:800;color:var(--ink-40);padding:17px 0 17px 14px;
+  font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.blok .mid{padding:15px 0 16px;min-width:0}
+.blok .mid b{display:block;font-size:16.5px;font-weight:700;letter-spacing:-.02em;line-height:1.25}
+.blok .mid p{margin:4px 0 0;font-size:14px;line-height:1.5;color:var(--ink-60)}
+.blok .mid code{font-size:11.5px;background:var(--sand-deep);border-radius:4px;padding:1.5px 6px;
+  color:var(--ink-60);white-space:nowrap}
+.blok .mid .bron{margin-top:8px;font-size:11.5px;color:var(--ink-40);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  word-break:break-word}
+.blok .mid .bron .nw{font-family:inherit;font-size:9px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
+  background:#E5EBE1;color:#2E6B3E;border-radius:100px;padding:2px 7px;margin-left:4px}
+.blok .rt{display:flex;flex-direction:column;align-items:flex-end;gap:6px;padding:16px 16px 16px 0;white-space:nowrap}
+.blok .rt em{font-style:normal;font-size:9px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
+  padding:4px 9px;border-radius:100px}
+.blok .rt em.kern{background:var(--carbon);color:var(--gold)}
+.blok .rt em.uit{background:var(--sand-deep);color:var(--ink-60)}
+.blok .rt em.af{background:#E5EBE1;color:#2E6B3E}
+.blok .rt em.todo{background:transparent;border:1px solid var(--ink-10);color:var(--ink-40)}
+.blok .rt .gr{font-size:9px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-40)}
+
+@media (max-width:760px){
+  .blok{grid-template-columns:6px minmax(0,1fr);gap:0 13px}
+  .blok .nr{grid-column:2;padding:14px 14px 0 0;font-size:11.5px}
+  .blok .mid{grid-column:2;padding:2px 14px 14px 0}
+  .blok .rt{grid-column:2;flex-direction:row;align-items:center;flex-wrap:wrap;padding:0 14px 14px 0}
+}
+</style>
+<div class="vg">
+<header class="vg-mast"><span class="eyebrow">De volgorde &middot; zeventien blokken &middot; 23 augustus 2026</span><h2>Zo loopt de pagina,<br>van boven naar beneden.</h2><p class="lede">De volgorde ligt vast en wordt nooit per product herschikt. Blok 07 staat op elk product op plek 07. Wat per product verschilt is de inhoud in de velden rechts &mdash; nooit de plek. Het streepje in de linkerkolom laat de grond zien: zand, wit of donker, om beurten, zodat je bij het scrollen voelt dat er een nieuw blok begint.</p><div class="vg-tel"><span class="af">5 van 17 getekend</span><span>10 kern</span><span>7 uitbreiding</span><span>1 nieuw veld</span></div></header>
+<div class="vouwlabel"><b>Boven de vouw</b><i></i></div>
+<div class="stapel"><div class="blok"><span class="grond zand"></span><span class="nr">01</span><div class="mid"><b>Koopblok</b><p>Gallerij plus tien slots: pil, sterren, titel, belofte, prijs, vinkjes, cadeaubalk, knop, levering, betaalrij.</p><div class="bron">custom.buybox_quote · hero_promise · product_usp · product_offer</div></div><div class="rt"><em class="kern">kern</em><em class="af">getekend</em><span class="gr">zand</span></div></div></div>
+<div class="vouwlabel knip"><b>&darr; hier begint de vouw</b><i></i></div>
+<div class="stapel"><div class="blok"><span class="grond wit"></span><span class="nr">02</span><div class="mid"><b>Geruststrook</b><p>Vier items naast elkaar: proberen, garantie, verzending, levertijd. Winkelbreed, op elk product hetzelfde.</p><div class="bron">custom.store_usp</div></div><div class="rt"><em class="kern">kern</em><em class="todo">nog te tekenen</em><span class="gr">wit</span></div></div><div class="blok"><span class="grond donker"></span><span class="nr">03</span><div class="mid"><b>Veilig trimmen waar het telt</b><p>Herkadering eerst, mechanisme daarna. Waarom een mesje wel móet snijden en de keramische kop niet.</p><div class="bron">custom.image_with_text</div></div><div class="rt"><em class="kern">kern</em><em class="af">getekend</em><span class="gr">donker</span></div></div><div class="blok"><span class="grond wit"></span><span class="nr">04</span><div class="mid"><b>Beoordelingen</b><p>Muur van Trustpilot-reviews, geen carrousel. Score en aantal live gebonden.</p><div class="bron">Trustpilot-widget</div></div><div class="rt"><em class="kern">kern</em><em class="todo">nog te tekenen</em><span class="gr">wit</span></div></div><div class="blok"><span class="grond donker"></span><span class="nr">05</span><div class="mid"><b>Het aanbodblok</b><p>Drie kaarten: instap, uitgelicht, beste waarde. Besparing op elke kaart, cadeau op de middelste.</p><div class="bron">custom.upgrade_products</div></div><div class="rt"><em class="kern">kern</em><em class="af">getekend</em><span class="gr">donker</span></div></div><div class="blok"><span class="grond zand"></span><span class="nr">06</span><div class="mid"><b>Toepassing per zone</b><p>Rooster van zones met beeld per zone. Welke plekken dit apparaat aankan.</p><div class="bron">custom.use_case_title · image_with_text</div></div><div class="rt"><em class="uit">uitbreiding</em><em class="todo">nog te tekenen</em><span class="gr">zand</span></div></div><div class="blok"><span class="grond zand"></span><span class="nr">07</span><div class="mid"><b>Zie precies waar je trimt</b><p>E&eacute;n beeld, &eacute;&eacute;n claim, volle breedte. De functie die dit model onderscheidt.</p><div class="bron">custom.image_with_text</div></div><div class="rt"><em class="uit">uitbreiding</em><em class="todo">nog te tekenen</em><span class="gr">zand</span></div></div><div class="blok"><span class="grond wit"></span><span class="nr">08</span><div class="mid"><b>UGC-video&rsquo;s</b><p>Band van verticale video&rsquo;s. Staat midden in de uitleg, niet erna &mdash; daar verlies je mensen.</p><div class="bron">custom.ugc_video_list</div></div><div class="rt"><em class="uit">uitbreiding</em><em class="todo">nog te tekenen</em><span class="gr">wit</span></div></div><div class="blok"><span class="grond wit"></span><span class="nr">09</span><div class="mid"><b>Vergelijk de modellen</b><p>Tabel, wij gemarkeerd, kolom per model. Telt zwaarder naarmate de markt volwassener is.</p><div class="bron">custom.compare_table · compare_products</div></div><div class="rt"><em class="uit">uitbreiding</em><em class="todo">nog te tekenen</em><span class="gr">wit</span></div></div><div class="blok"><span class="grond donker"></span><span class="nr">10</span><div class="mid"><b>Wat kost het je per jaar</b><p>Jouw mesjes tegen die van de concurrent, per jaar. De eerlijke rekensom.</p><div class="bron">custom.yearly_cost <span class="nw">nieuw</span></div></div><div class="rt"><em class="uit">uitbreiding</em><em class="todo">nog te tekenen</em><span class="gr">donker</span></div></div><div class="blok"><span class="grond zand"></span><span class="nr">11</span><div class="mid"><b>Wat zit er in de doos</b><p>Uitgestald op &eacute;&eacute;n vlak, met bijschrift per onderdeel.</p><div class="bron">custom.included_box · included_box_image</div></div><div class="rt"><em class="kern">kern</em><em class="todo">nog te tekenen</em><span class="gr">zand</span></div></div><div class="blok"><span class="grond wit"></span><span class="nr">12</span><div class="mid"><b>Waarom Wellshave</b><p>Vier beloftes plus het bestelaantal met bronlabel. Winkelbreed.</p><div class="bron">sectie-instelling</div></div><div class="rt"><em class="kern">kern</em><em class="todo">nog te tekenen</em><span class="gr">wit</span></div></div><div class="blok"><span class="grond zand"></span><span class="nr">13</span><div class="mid"><b>Omschrijving en specificaties</b><p>E&eacute;n blad: betoog links op de leesmaat, specificatietabel rechts in een wit vlak.</p><div class="bron">product.descriptionHtml · custom.specification</div></div><div class="rt"><em class="kern">kern</em><em class="af">getekend</em><span class="gr">zand</span></div></div><div class="blok"><span class="grond wit"></span><span class="nr">14</span><div class="mid"><b>Verzending &amp; retour</b><p>Uitklappers, drie stuks. Winkelbreed.</p><div class="bron">custom.shipping_information</div></div><div class="rt"><em class="kern">kern</em><em class="todo">nog te tekenen</em><span class="gr">wit</span></div></div><div class="blok"><span class="grond zand"></span><span class="nr">15</span><div class="mid"><b>Veelgestelde vragen</b><p>Uitklappers, bezwaar-eerst gesorteerd.</p><div class="bron">custom.faq</div></div><div class="rt"><em class="kern">kern</em><em class="todo">nog te tekenen</em><span class="gr">zand</span></div></div><div class="blok"><span class="grond donker"></span><span class="nr">16</span><div class="mid"><b>Maak het compleet</b><p>Vijf accessoires naast elkaar. De aanvulling, niet de ladder.</p><div class="bron">custom.cart_upsell</div></div><div class="rt"><em class="uit">uitbreiding</em><em class="af">getekend</em><span class="gr">donker</span></div></div><div class="blok"><span class="grond donker"></span><span class="nr">17</span><div class="mid"><b>Afsluiter</b><p>Mini-koopblok: kop, prijs, knop, bewijsregel, betaalrij. Erft alles uit blok 01.</p><div class="bron">&mdash;</div></div><div class="rt"><em class="kern">kern</em><em class="todo">nog te tekenen</em><span class="gr">donker</span></div></div></div>
+<div class="note" style="margin-top:26px"><h4>Twee regels die de volgorde overeind houden</h4><p><strong>Kernblokken zijn verplicht, uitbreidingen verbergen zich.</strong> Een kernblok zonder inhoud is een gat in het betoog en moet dus gevuld. Een uitbreiding die leeg is, rendert niet &mdash; en de blokken eronder schuiven gewoon op. Voor een vervangmes van &euro;14,95 valt zo de halve pagina weg zonder dat er iets kapotgaat.</p><p><strong>De grond wisselt om beurten.</strong> Zand, wit, donker &mdash; nooit twee dezelfde achter elkaar behalve waar twee donkere blokken bewust aan elkaar plakken (16 en 17, de afsluiting). Dat ritme is het enige dat een bezoeker vertelt dat hij een nieuw argument in gaat, zonder dat er een streep of een kop voor nodig is.</p></div>
+</div>

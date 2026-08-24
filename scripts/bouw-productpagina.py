@@ -66,7 +66,8 @@ import sys, io, re, html
 
 
 
-DELEN=[('plan',  'rapporten/pdp-plan.html',                                  u'Het plan',      u'De kaart: vier regels, drie producttypes, zeventien blokken.'),
+DELEN=[('volgorde','rapporten/volgorde.html',                                u'De volgorde',   u'Alle zeventien blokken op een rij, met grond, klasse en wat er al getekend is.'),
+       ('plan',  'rapporten/pdp-plan.html',                                  u'Het plan',      u'De kaart: vier regels, drie producttypes, zeventien blokken.'),
        ('boven', 'rapporten/blokken/01-above-the-fold-v2-donker.html',       u'Boven de vouw', u'Het koopvak, de seizoensdeal, het sociale bewijs, de beweging.'),
        ('onder', 'rapporten/blokken/02-omschrijving-specs-upsell-betaling.html', u'Onder de vouw', u'Het productblad, de aanvulling, de betaalrij.')]
 
