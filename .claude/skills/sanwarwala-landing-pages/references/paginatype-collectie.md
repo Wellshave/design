@@ -34,29 +34,41 @@ tag als gat.
 
 ## De sectievolgorde
 
-1. **Hero van de zone** &mdash; donker. Eyebrow met de zone, tweeslags kop met de belofte in de
-   taal van díe plek, lede, twee ongelijke acties (keuzehulp / raster), geruststellers, en een
-   bewijsrij die scheidt wat over het bedrijf gaat en wat over deze apparaten gaat.
-2. **Zonebalk** &mdash; plakkend. Kruimelpad, de zones met hun aantal, daaronder de typefilters
-   en de sortering. Dit vervangt de kale titel met chips.
-3. **Keuzehulp** &mdash; zand. Twee of drie vragen die naar precies één apparaat leiden, plus een
-   vergelijking die per apparaat ook noemt wát het niet doet. Bouw hem zo dat elk apparaat
-   precies één combinatie wint; wint een apparaat niets, dan staat het er voor de vorm bij en
-   hoort het uit de collectie.
-4. **Het raster** &mdash; wit. Alles wat bij de zone hoort: apparaten, bundels, en de messen en
-   koppen die erbij horen. De kaart draagt de eigen beoordeling mét aantal, de besparing in
-   euro's, en bij onderdelen een snelknop die rechtstreeks in de winkelwagen legt.
-5. **Bewijs uit deze zone** &mdash; donker. Beoordelingen van déze apparaten, gekozen op het
-   bezwaar dat ze wegnemen, met de score per apparaat erboven.
-6. **Het mechanisme** &mdash; zand. Waarom dit werkt op déze plek, en wat de gebruiker zelf moet
-   doen. Haal de inhoud uit de reviews: waar goede en slechte ervaringen uiteenlopen, zit een
-   uitlegfout die vóór de aankoop hoort.
-7. **Compleet maken** &mdash; donker. De bundel die al bestaat, plus de losse messen en koppen.
-8. **Zekerheden en vragen** &mdash; wit. Vragen over déze apparaten, niet over de winkel.
-9. **Afsluiter met de andere zones** &mdash; donker, met de SEO-tekst ingeklapt onderaan.
+**De keuzehulp hoort boven de vouw, niet onder een hero.** Een collectiepagina heeft geen
+advertentie te continueren; de bezoeker is er al uit dat hij zoiets wil en zit met de vraag
+welke. Een schermvullende hero met een groot beeld duwt precies het gereedschap weg dat die
+vraag beantwoordt. Houd de kop kort en zet de keuzehulp ernaast, zodat kop, keuze, match en
+navigatie samen in de eerste schermhoogte staan en het raster één scroll verderop begint.
 
-Blok 1, 2, 4, 8 en 9 zijn verplicht; 3 en 6 zijn dat zodra de producten in een collectie op
-elkaar lijken. Verwijder wat een zone niet heeft in plaats van het te vullen.
+**Houd de pagina kort.** Elke sectie die niet kiest, uitlegt of bewijst, gaat eruit. Zes blokken
+is ruim genoeg; wat detail is, hoort achter een uitklap in plaats van in een eigen sectie.
+
+1. **Kop met keuzehulp** &mdash; donker en compact. Links de zone-eyebrow met het aantal, een korte
+   tweeslags kop, één regel lede, de geruststellers en een bewijsregel die scheidt wat over het
+   bedrijf gaat en wat over deze producten gaat. Rechts een lichte kaart met twee of drie vragen
+   en de uitkomst eronder: foto, naam, prijs en knop van het apparaat dat eruit komt. Bouw hem zo
+   dat elk apparaat precies één combinatie wint; wint een apparaat niets, dan staat het er voor
+   de vorm bij en hoort het uit de collectie.
+2. **Zonebalk** &mdash; plakkend, direct onder de kop. Kruimelpad, de zones met hun aantal, en één
+   regel die zegt wat je bekijkt. Dit vervangt de kale titel met chips.
+3. **Het raster** &mdash; wit, meteen erna. Alles wat bij de zone hoort: apparaten, bundels, en de
+   messen en koppen die erbij horen, met de typefilters erboven. De kaart draagt de eigen
+   beoordeling mét aantal, de besparing in euro's, en bij onderdelen een snelknop die
+   rechtstreeks in de winkelwagen legt. De volledige vergelijking van de apparaten &mdash;
+   waarvoor gemaakt, wat hij extra kan, wat hij niet doet &mdash; zit eronder in een uitklap.
+4. **Over deze categorie** &mdash; zand. De uitleg die anders als SEO-tekst onderaan verdwijnt:
+   wat de categorie is, hoe de apparaten zich tot elkaar verhouden, en het mechanisme waarom het
+   werkt op déze plek. Haal de inhoud voor dat mechanisme uit de reviews: waar goede en slechte
+   ervaringen uiteenlopen, zit een uitlegfout die vóór de aankoop hoort.
+5. **Bewijs uit deze zone** &mdash; donker. De score per apparaat, en drie beoordelingen gekozen op
+   het bezwaar dat ze wegnemen.
+6. **Compleet maken** &mdash; donker. De bundel die al bestaat, plus de losse messen en koppen.
+7. **Slotband** &mdash; donker. De garanties als smalle strook, vijf vragen over déze apparaten, en
+   daaronder de andere zones voor wie hier verkeerd zit.
+
+Blok 1, 2, 3 en 7 zijn verplicht. De keuzehulp in blok 1 en het mechanisme in blok 4 zijn dat
+zodra de producten in een collectie op elkaar lijken. Verwijder wat een zone niet heeft in plaats
+van het te vullen.
 
 ## Wat per collectie verandert, en wat niet
 
