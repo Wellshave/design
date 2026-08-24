@@ -1,145 +1,1178 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "ws_hero": {
       "type": "ws-hero",
       "blocks": {
-        "b1": {"type": "belofte", "settings": {"icoon": "shield", "titel": "100 dagen proberen", "tekst": "Niet goed? Geld terug."}},
-        "b2": {"type": "belofte", "settings": {"icoon": "tekst", "cijfer": "2", "titel": "2 jaar garantie", "tekst": "Kwaliteit waarop je kunt vertrouwen."}},
-        "b3": {"type": "belofte", "settings": {"icoon": "truck", "titel": "Morgen in huis", "tekst": "Vandaag besteld, morgen in huis."}}
+        "b1": {
+          "type": "belofte",
+          "settings": {
+            "icoon": "shield",
+            "cijfer": "2",
+            "titel": "100 dagen proberen",
+            "tekst": "Niet goed? Geld terug."
+          }
+        },
+        "b2": {
+          "type": "belofte",
+          "settings": {
+            "icoon": "tekst",
+            "cijfer": "2",
+            "titel": "2 jaar garantie",
+            "tekst": "Kwaliteit waarop je kunt vertrouwen."
+          }
+        },
+        "b3": {
+          "type": "belofte",
+          "settings": {
+            "icoon": "truck",
+            "cijfer": "2",
+            "titel": "Morgen in huis",
+            "tekst": "Vandaag besteld, morgen in huis."
+          }
+        }
       },
-      "block_order": ["b1", "b2", "b3"],
-      "settings": {"foto": "shopify://shop_images/ws-hero-portrait.jpg", "merk": "shopify://shop_images/ws-mark.png", "hoogte": 600, "cta1_link": "shopify://collections/bestsellers", "desk_indent_top": 0, "desk_indent_bottom": 0, "mob_indent_top": 0, "mob_indent_bottom": 0, "badge": "Summer Sale", "badge_actie": "tot 40% korting"}
-    },
-    "ws_belofte": {
-      "type": "ws-belofte",
-      "blocks": {
-        "r1": {"type": "review", "settings": {"quote": "“Doet wat hij moet doen. Ook bij de edele delen kun je zonder wondjes gaan trimmen. Ligt ook goed in de hand. Zeker goeie prijs kwaliteit.”", "naam": "Maarten A.", "product": "Groom Guard"}},
-        "r2": {"type": "review", "settings": {"quote": "“Door de keramische bladen geen wondjes bij de schaamstreek. Scheermesjes? Prullenbak in!”", "naam": "Barend P.", "product": "Groom Guard PRO"}},
-        "r3": {"type": "review", "settings": {"quote": "“Hele fijne en stille trimmer met accudisplay, dus nooit meer een lege batterij. Direct op de huid te gebruiken zonder sneetjes.”", "naam": "Aiden M.", "product": "Shave Package 3.0"}},
-        "r4": {"type": "review", "settings": {"quote": "“Geweldig pakket, had ik eerder moeten kopen. Scheren gaat moeiteloos en zonder wondjes, zelfs de schaamstreek wordt super glad.”", "naam": "Rik T.", "product": "Shave Package Ultimate"}},
-        "r5": {"type": "review", "settings": {"quote": "“Merk was nieuw voor mij, maar door de veelzijdigheid en reviews toch besteld. Snel geleverd en netjes verpakt. Scheerresultaat boven verwachting.”", "naam": "Britt J.", "product": "Gentleman Shaver Elite"}},
-        "r6": {"type": "review", "settings": {"quote": "“Prettig apparaat, klein en ligt goed in de hand. Ik gebruik hem om mijn hoofd kaal te scheren, doet wat het belooft.”", "naam": "Emma B.", "product": "Head Shaver Deluxe"}},
-        "r7": {"type": "review", "settings": {"quote": "“Fijn apparaat, werkt naar behoren. Als je de mesjes goed plat over de huid laat gaan kun je met een gerust hart scheren.”", "naam": "Lisa Z.", "product": "Flex Guard"}},
-        "r8": {"type": "review", "settings": {"quote": "“Neustrim-opzetstuk kwijtgeraakt en kosteloos nageleverd door de klantenservice.”", "naam": "Aiden M.", "product": "Shave Package 3.0"}}
-      },
-      "block_order": ["r1", "r2", "r3", "r4", "r5", "r6", "r7", "r8"],
-      "settings": {"merk": "shopify://shop_images/ws-mark.png", "foto": "shopify://shop_images/ws-use-neustrimmer.jpg", "product": "essential-flex-bundel", "spot_foto": "shopify://shop_images/ws-bundel-dark.jpg", "desk_indent_top": 60, "desk_indent_bottom": 56, "mob_indent_top": 40, "mob_indent_bottom": 34, "tp_widget": "<div class='trustpilot-widget' data-locale='nl-NL' data-template-id='5419b6ffb0d04a076446a9af' data-businessunit-id='63c511d4e1339e2200c204a1' data-style-height='20px' data-style-width='100%' data-token='fd603884-2e8c-4a1f-87b2-e6d851e558f0'><a href='https://nl.trustpilot.com/review/wellshave.nl' target='_blank' rel='noopener'>Trustpilot</a></div>", "rev_widget": "<!-- TrustBox widget - Slider -->\n<div class=\"trustpilot-widget\" data-locale=\"nl-NL\" data-template-id=\"54ad5defc6454f065c28af8b\" data-businessunit-id=\"63c511d4e1339e2200c204a1\" data-style-height=\"240px\" data-style-width=\"100%\" data-token=\"71f79cef-6f37-4201-b234-8b22cd9af07e\" data-stars=\"4,5\" data-review-languages=\"nl\">\n  <a href=\"https://nl.trustpilot.com/review/wellshave.nl\" target=\"_blank\" rel=\"noopener\">Trustpilot</a>\n</div>\n<!-- End TrustBox widget -->", "rev_live_sub": "Live van Trustpilot"}
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ],
+      "settings": {
+        "foto": "shopify://shop_images/ws-hero-portrait.jpg",
+        "merk": "shopify://shop_images/ws-mark.png",
+        "hoogte": 600,
+        "badge": "Summer Sale",
+        "badge_actie": "tot 40% korting",
+        "kop": "Elke dag verzorgd.|br|Zonder dat het je|br|<b>ochtend kost.</b>",
+        "sub": "Trimmers, scheerapparaten en neustrimmers die getest zijn op wat ze dóén, niet op hoe ze eruitzien. 100 dagen proberen, morgen in huis.",
+        "tp_tonen": true,
+        "tp_sterren": 4,
+        "tp_score": "Uitstekend · 4,5",
+        "tp_aantal": "950+ reviews",
+        "cta1_label": "Shop de bestsellers",
+        "cta1_link": "shopify://collections/bestsellers",
+        "cta2_label": "Vind jouw tool",
+        "cta2_link": "",
+        "wijzer_titel": "Groom Guard™ PRO",
+        "wijzer_sub": "Meest gekozen",
+        "tel_waarde": "200.000+",
+        "tel_label": "bestellingen sinds 2021",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 0
+      }
     },
     "ws_bestsellers": {
       "type": "ws-bestsellers",
       "blocks": {
-        "k1": {"type": "kaart", "settings": {"product": "groom-guard-pro", "foto": "shopify://shop_images/ws-zone-lichaam.webp", "zone": "Lichaam", "naam": "Groom Guard™ PRO", "wat": "Bodygroomer voor borst, rug en schaamstreek.", "tag": "Best verkocht"}},
-        "k2": {"type": "kaart", "settings": {"product": "wellshave-4-in-1-neustrimmer-ultimate", "foto": "shopify://shop_images/ws-zone-neus-v3.png", "zone": "Neus & oren", "naam": "Neustrimmer Ultimate™ 4-in-1", "wat": "Neus, oren, wenkbrauwen en contouren in één.", "zegel_beeld": "shopify://shop_images/ws-kieskeurig.png", "zegel_tekst": "Best beoordeeld · 8,5"}},
-        "k3": {"type": "kaart", "settings": {"product": "wellshave-scheerapparaat-elite", "foto": "shopify://shop_images/ws-zone-gezicht.webp", "zone": "Gezicht & baard", "naam": "The Gentleman Shaver™", "wat": "Scheerapparaat voor dagelijks glad scheren."}},
-        "k4": {"type": "kaart", "settings": {"product": "wellshave-tondeuse-elegant", "foto": "shopify://shop_images/ws-zone-hoofd.webp", "zone": "Hoofd", "naam": "Tondeuse Elegant™", "wat": "Tondeuse die bepaalt hoe kort het wordt."}}
+        "k1": {
+          "type": "kaart",
+          "settings": {
+            "product": "groom-guard-pro",
+            "foto": "shopify://shop_images/ws-zone-lichaam.webp",
+            "zone": "Lichaam",
+            "naam": "Groom Guard™ PRO",
+            "wat": "Bodygroomer voor borst, rug en schaamstreek.",
+            "tag": "Best verkocht",
+            "zegel_tekst": ""
+          }
+        },
+        "k2": {
+          "type": "kaart",
+          "settings": {
+            "product": "wellshave-4-in-1-neustrimmer-ultimate",
+            "foto": "shopify://shop_images/ws-zone-neus-v3.png",
+            "zone": "Neus & oren",
+            "naam": "Neustrimmer Ultimate™ 4-in-1",
+            "wat": "Neus, oren, wenkbrauwen en contouren in één.",
+            "tag": "",
+            "zegel_beeld": "shopify://shop_images/ws-kieskeurig.png",
+            "zegel_tekst": "Best beoordeeld · 8,5"
+          }
+        },
+        "k3": {
+          "type": "kaart",
+          "settings": {
+            "product": "wellshave-scheerapparaat-elite",
+            "foto": "shopify://shop_images/ws-zone-gezicht.webp",
+            "zone": "Gezicht & baard",
+            "naam": "The Gentleman Shaver™",
+            "wat": "Scheerapparaat voor dagelijks glad scheren.",
+            "tag": "",
+            "zegel_tekst": ""
+          }
+        },
+        "k4": {
+          "type": "kaart",
+          "settings": {
+            "product": "wellshave-tondeuse-elegant",
+            "foto": "shopify://shop_images/ws-zone-hoofd.webp",
+            "zone": "Hoofd",
+            "naam": "Tondeuse Elegant™",
+            "wat": "Tondeuse die bepaalt hoe kort het wordt.",
+            "tag": "",
+            "zegel_tekst": ""
+          }
+        }
       },
-      "block_order": ["k1", "k2", "k3", "k4"],
-      "settings": {"merk": "shopify://shop_images/ws-mark.png", "foot_link": "shopify://collections/all", "desk_indent_top": 56, "desk_indent_bottom": 56, "mob_indent_top": 34, "mob_indent_bottom": 34}
+      "block_order": [
+        "k1",
+        "k2",
+        "k3",
+        "k4"
+      ],
+      "settings": {
+        "eyebrow": "Meest verkocht · afgelopen 30 dagen",
+        "kop": "Dit kochten mannen deze maand <b>het vaakst.</b>",
+        "note": "Eén uit elke zone, op volgorde van hoe vaak ze over de toonbank gingen.",
+        "tel_waarde": "125",
+        "tel_label": "keer verkocht in dertig dagen",
+        "merk": "shopify://shop_images/ws-mark.png",
+        "kaart_cta": "Bekijk",
+        "foot": "Elk apparaat 100 dagen te proberen.",
+        "foot_link_label": "Bekijk het hele assortiment",
+        "foot_link": "shopify://collections/all",
+        "desk_indent_top": 56,
+        "desk_indent_bottom": 56,
+        "mob_indent_top": 34,
+        "mob_indent_bottom": 34
+      }
+    },
+    "ws_belofte": {
+      "type": "ws-belofte",
+      "blocks": {
+        "r1": {
+          "type": "review",
+          "settings": {
+            "quote": "“Doet wat hij moet doen. Ook bij de edele delen kun je zonder wondjes gaan trimmen. Ligt ook goed in de hand. Zeker goeie prijs kwaliteit.”",
+            "sterren": 5,
+            "naam": "Maarten A.",
+            "product": "Groom Guard",
+            "datum": "",
+            "bron": "Trustpilot"
+          }
+        },
+        "r2": {
+          "type": "review",
+          "settings": {
+            "quote": "“Door de keramische bladen geen wondjes bij de schaamstreek. Scheermesjes? Prullenbak in!”",
+            "sterren": 5,
+            "naam": "Barend P.",
+            "product": "Groom Guard PRO",
+            "datum": "",
+            "bron": "Trustpilot"
+          }
+        },
+        "r3": {
+          "type": "review",
+          "settings": {
+            "quote": "“Hele fijne en stille trimmer met accudisplay, dus nooit meer een lege batterij. Direct op de huid te gebruiken zonder sneetjes.”",
+            "sterren": 5,
+            "naam": "Aiden M.",
+            "product": "Shave Package 3.0",
+            "datum": "",
+            "bron": "Trustpilot"
+          }
+        },
+        "r4": {
+          "type": "review",
+          "settings": {
+            "quote": "“Geweldig pakket, had ik eerder moeten kopen. Scheren gaat moeiteloos en zonder wondjes, zelfs de schaamstreek wordt super glad.”",
+            "sterren": 5,
+            "naam": "Rik T.",
+            "product": "Shave Package Ultimate",
+            "datum": "",
+            "bron": "Trustpilot"
+          }
+        },
+        "r5": {
+          "type": "review",
+          "settings": {
+            "quote": "“Merk was nieuw voor mij, maar door de veelzijdigheid en reviews toch besteld. Snel geleverd en netjes verpakt. Scheerresultaat boven verwachting.”",
+            "sterren": 5,
+            "naam": "Britt J.",
+            "product": "Gentleman Shaver Elite",
+            "datum": "",
+            "bron": "Trustpilot"
+          }
+        },
+        "r6": {
+          "type": "review",
+          "settings": {
+            "quote": "“Prettig apparaat, klein en ligt goed in de hand. Ik gebruik hem om mijn hoofd kaal te scheren, doet wat het belooft.”",
+            "sterren": 5,
+            "naam": "Emma B.",
+            "product": "Head Shaver Deluxe",
+            "datum": "",
+            "bron": "Trustpilot"
+          }
+        },
+        "r7": {
+          "type": "review",
+          "settings": {
+            "quote": "“Fijn apparaat, werkt naar behoren. Als je de mesjes goed plat over de huid laat gaan kun je met een gerust hart scheren.”",
+            "sterren": 5,
+            "naam": "Lisa Z.",
+            "product": "Flex Guard",
+            "datum": "",
+            "bron": "Trustpilot"
+          }
+        },
+        "r8": {
+          "type": "review",
+          "settings": {
+            "quote": "“Neustrim-opzetstuk kwijtgeraakt en kosteloos nageleverd door de klantenservice.”",
+            "sterren": 5,
+            "naam": "Aiden M.",
+            "product": "Shave Package 3.0",
+            "datum": "",
+            "bron": "Trustpilot"
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4",
+        "r5",
+        "r6",
+        "r7",
+        "r8"
+      ],
+      "settings": {
+        "eyebrow": "Zonder risico",
+        "kop": "Het enige wat jij hoeft te doen, is hem <strong>uitproberen</strong>.",
+        "note": "De rest hebben wij dichtgetimmerd: honderd dagen bedenktijd, twee jaar garantie, en een klantenservice die je gewoon te pakken krijgt.",
+        "tp_widget": "<div class=\"trustpilot-widget\" data-locale=\"nl-NL\" data-template-id=\"5419b6ffb0d04a076446a9af\" data-businessunit-id=\"63c511d4e1339e2200c204a1\" data-style-height=\"20px\" data-style-width=\"100%\" data-token=\"fd603884-2e8c-4a1f-87b2-e6d851e558f0\"><a href=\"https://nl.trustpilot.com/review/wellshave.nl\" target=\"_blank\" rel=\"noopener\">Trustpilot</a></div>",
+        "tp_tonen": true,
+        "tp_sterren": 4,
+        "tp_tekst": "<strong>4,5</strong> uit 950+ beoordelingen op",
+        "merk": "shopify://shop_images/ws-mark.png",
+        "zegel_getal": "100",
+        "zegel_label": "dagen",
+        "gk_kop": "Koop hem, gebruik hem 100 dagen.|br|<strong>Bevalt het niet? Geld terug.</strong>",
+        "gk_tekst": "Geen proefperiode van twee weken waarin je nog niets weet. Honderd dagen in je eigen badkamer, zo vaak als je wilt.",
+        "gk_punt_1": "Geld terug",
+        "gk_punt_2": "2 jaar garantie",
+        "gk_punt_3": "Gratis verzending vanaf €30",
+        "gk_team": "Stuur je hem terug, dan komt je mail bij <strong>ons eigen team</strong> terecht — niet bij een chatbot. Klantenservice en magazijn zitten in hetzelfde pand in Helmond.",
+        "foto": "shopify://shop_images/ws-use-neustrimmer.jpg",
+        "rev_kop": "Wat klanten schrijven",
+        "rev_totaal": "950+ beoordelingen",
+        "rev_live_sub": "Live van Trustpilot",
+        "rev_widget": "<!-- TrustBox widget - Slider -->\n<div class=\"trustpilot-widget\" data-locale=\"nl-NL\" data-template-id=\"54ad5defc6454f065c28af8b\" data-businessunit-id=\"63c511d4e1339e2200c204a1\" data-style-height=\"240px\" data-style-width=\"100%\" data-token=\"71f79cef-6f37-4201-b234-8b22cd9af07e\" data-stars=\"4,5\" data-review-languages=\"nl\">\n  <a href=\"https://nl.trustpilot.com/review/wellshave.nl\" target=\"_blank\" rel=\"noopener\">Trustpilot</a>\n</div>\n<!-- End TrustBox widget -->",
+        "product": "essential-flex-bundel",
+        "spot_foto": "shopify://shop_images/ws-bundel-dark.jpg",
+        "deal_label": "Bundelvoordeel",
+        "spot_badge": "Meest gekozen",
+        "spot_eyebrow": "4 producten. één complete routine.",
+        "spot_kop": "Essential<strong>Flex Bundel</strong>",
+        "spot_tekst": "Trimmen, scheren en detailwerk — thuis én onderweg.",
+        "spot_punt_1": "3-in-1 Flex Guard",
+        "spot_punt_2": "Travel Hard Case",
+        "spot_punt_3": "Luxe toilettas",
+        "spot_punt_4": "Extra Skin Safe mes",
+        "spot_cta": "Pak de complete bundel",
+        "fud_1": "100 dagen proberen",
+        "fud_2": "2 jaar garantie",
+        "fud_3": "Morgen in huis",
+        "desk_indent_top": 60,
+        "desk_indent_bottom": 56,
+        "mob_indent_top": 40,
+        "mob_indent_bottom": 34
+      }
     },
     "ws_tijdlijn": {
       "type": "ws-tijdlijn",
       "blocks": {
-        "u1": {"type": "upgrade", "settings": {"groep": "Baardtrimmers", "foto_oud": "shopify://shop_images/ws-gen-msgold.webp", "jaar_oud": "2022", "foto_nieuw": "shopify://shop_images/ws-gen-mssupreme.webp", "naam": "Men Shaper Supreme™ 6-in-1", "datum": "feb 2025", "wat": "Waterdicht, en een display dat toont hoelang hij nog meegaat"}},
-        "u2": {"type": "upgrade", "settings": {"groep": "Bodygroomers", "foto_oud": "shopify://shop_images/ws-gen-groomguard.webp", "jaar_oud": "2022", "foto_nieuw": "shopify://shop_images/ws-zone-lichaam.webp", "naam": "Groom Guard™ PRO", "datum": "sep 2025", "wat": "Foil shaver-kop erbij, die glad afwerkt waar de trimmer stopt"}},
-        "u3": {"type": "upgrade", "settings": {"groep": "Neustrimmers", "foto_oud": "shopify://shop_images/ws-gen-neustrimmer.webp", "jaar_oud": "2023", "foto_nieuw": "shopify://shop_images/ws-zone-neus-v3.png", "naam": "Neustrimmer Ultimate™ 4-in-1", "datum": "jun 2026", "wat": "Van één functie naar vier: neus, oor, wenkbrauw en scheren"}},
-        "u4": {"type": "upgrade", "settings": {"groep": "Vervangingsmessen", "foto_oud": "shopify://shop_images/ws-gen-flexblade.webp", "jaar_oud": "jan 2026", "foto_nieuw": "shopify://shop_images/ws-gen-flextrio.webp", "naam": "Flex Guard™ Blade Trio", "datum": "jun 2026", "tag": "Op verzoek van klanten", "wat": "Drie in één bestelling, zodat je nooit zonder zit"}},
-        "u5": {"type": "upgrade", "settings": {"groep": "Scheerapparaten", "foto_oud": "shopify://shop_images/ws-gen-headdeluxe.webp", "jaar_oud": "2023", "foto_nieuw": "shopify://shop_images/ws-gen-sentinel.webp", "naam": "The Sentinel PRO", "datum": "aug 2026", "wat": "Reinigt zichzelf in de meegeleverde Cleaning Pod"}},
-        "u6": {"type": "upgrade", "settings": {"groep": "Tondeuses", "foto_oud": "shopify://shop_images/ws-gen-tondeluxe.webp", "jaar_oud": "2024", "foto_nieuw": "shopify://shop_images/ws-gen-barberbro.webp", "naam": "Barber Bro 1.0", "datum": "aug 2026", "badge": "Nieuwste upgrade", "wat": "Precisietrimmer erbij voor contouren en neklijnen"}},
-        "f1": {"type": "feit", "settings": {"icoon": "star", "waarde": "950+", "label": "beoordelingen geanalyseerd"}},
-        "f2": {"type": "feit", "settings": {"icoon": "people", "waarde": "6", "eenheid": "mensen", "label": "alles in eigen huis"}},
-        "f3": {"type": "feit", "settings": {"icoon": "shield", "waarde": "100", "eenheid": "dagen", "label": "proberen zonder risico"}}
+        "u1": {
+          "type": "upgrade",
+          "settings": {
+            "groep": "Baardtrimmers",
+            "foto_oud": "shopify://shop_images/ws-gen-msgold.webp",
+            "jaar_oud": "2022",
+            "foto_nieuw": "shopify://shop_images/ws-gen-mssupreme.webp",
+            "naam": "Men Shaper Supreme™ 6-in-1",
+            "datum": "feb 2025",
+            "tag": "",
+            "wat": "Waterdicht, en een display dat toont hoelang hij nog meegaat",
+            "badge": ""
+          }
+        },
+        "u2": {
+          "type": "upgrade",
+          "settings": {
+            "groep": "Bodygroomers",
+            "foto_oud": "shopify://shop_images/ws-gen-groomguard.webp",
+            "jaar_oud": "2022",
+            "foto_nieuw": "shopify://shop_images/ws-zone-lichaam.webp",
+            "naam": "Groom Guard™ PRO",
+            "datum": "sep 2025",
+            "tag": "",
+            "wat": "Foil shaver-kop erbij, die glad afwerkt waar de trimmer stopt",
+            "badge": ""
+          }
+        },
+        "u3": {
+          "type": "upgrade",
+          "settings": {
+            "groep": "Neustrimmers",
+            "foto_oud": "shopify://shop_images/ws-gen-neustrimmer.webp",
+            "jaar_oud": "2023",
+            "foto_nieuw": "shopify://shop_images/ws-zone-neus-v3.png",
+            "naam": "Neustrimmer Ultimate™ 4-in-1",
+            "datum": "jun 2026",
+            "tag": "",
+            "wat": "Van één functie naar vier: neus, oor, wenkbrauw en scheren",
+            "badge": ""
+          }
+        },
+        "u4": {
+          "type": "upgrade",
+          "settings": {
+            "groep": "Vervangingsmessen",
+            "foto_oud": "shopify://shop_images/ws-gen-flexblade.webp",
+            "jaar_oud": "jan 2026",
+            "foto_nieuw": "shopify://shop_images/ws-gen-flextrio.webp",
+            "naam": "Flex Guard™ Blade Trio",
+            "datum": "jun 2026",
+            "tag": "Op verzoek van klanten",
+            "wat": "Drie in één bestelling, zodat je nooit zonder zit",
+            "badge": ""
+          }
+        },
+        "u5": {
+          "type": "upgrade",
+          "settings": {
+            "groep": "Scheerapparaten",
+            "foto_oud": "shopify://shop_images/ws-gen-headdeluxe.webp",
+            "jaar_oud": "2023",
+            "foto_nieuw": "shopify://shop_images/ws-gen-sentinel.webp",
+            "naam": "The Sentinel PRO",
+            "datum": "aug 2026",
+            "tag": "",
+            "wat": "Reinigt zichzelf in de meegeleverde Cleaning Pod",
+            "badge": ""
+          }
+        },
+        "u6": {
+          "type": "upgrade",
+          "settings": {
+            "groep": "Tondeuses",
+            "foto_oud": "shopify://shop_images/ws-gen-tondeluxe.webp",
+            "jaar_oud": "2024",
+            "foto_nieuw": "shopify://shop_images/ws-gen-barberbro.webp",
+            "naam": "Barber Bro 1.0",
+            "datum": "aug 2026",
+            "tag": "",
+            "wat": "Precisietrimmer erbij voor contouren en neklijnen",
+            "badge": "Nieuwste upgrade"
+          }
+        },
+        "f1": {
+          "type": "feit",
+          "settings": {
+            "icoon": "star",
+            "waarde": "950+",
+            "eenheid": "",
+            "label": "beoordelingen geanalyseerd"
+          }
+        },
+        "f2": {
+          "type": "feit",
+          "settings": {
+            "icoon": "people",
+            "waarde": "6",
+            "eenheid": "mensen",
+            "label": "alles in eigen huis"
+          }
+        },
+        "f3": {
+          "type": "feit",
+          "settings": {
+            "icoon": "shield",
+            "waarde": "100",
+            "eenheid": "dagen",
+            "label": "proberen zonder risico"
+          }
+        }
       },
-      "block_order": ["u1", "u2", "u3", "u4", "u5", "u6", "f1", "f2", "f3"],
-      "settings": {"desk_indent_top": 56, "desk_indent_bottom": 0, "mob_indent_top": 38, "mob_indent_bottom": 0}
+      "block_order": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "f1",
+        "f2",
+        "f3"
+      ],
+      "settings": {
+        "eyebrow": "Hoe we bouwen",
+        "kop": "We zijn nooit klaar met een apparaat. <b>Ook niet als hij goed verkoopt.</b>",
+        "note": "Met z'n zessen bouwen, testen en verbeteren we alles zelf. Elke upgrade begint bij wat jij terugstuurt, mist of beter wilt.",
+        "flow_van": "Van klantvraag",
+        "flow_naar": "productverbetering",
+        "desk_indent_top": 56,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 38,
+        "mob_indent_bottom": 0
+      }
     },
     "ws_zonekiezer": {
       "type": "ws-zonekiezer",
       "blocks": {
-        "z1": {"type": "zone", "settings": {"zone": "Lichaam", "product": "groom-guard-pro", "collectie": "bodygroomers", "foto": "shopify://shop_images/ws-zone-lichaam.webp", "match": "Beste match voor lichaam", "naam": "Groom Guard™ PRO", "claim": "Grote vlakken en gevoelige plekken, met dezelfde beweging.", "badge": "Keramische mesjes", "cta": "Bekijk de Groom Guard PRO", "feit_1_icoon": "gauge", "feit_1": "6.600 toeren en een LED-licht", "feit_2_icoon": "parts", "feit_2": "Mesjes achter een kam", "feit_3_icoon": "drop", "feit_3": "IPX7 waterdicht", "pin_x": 34, "pin_y": 51, "label_y": 58, "lijn_x": 25}},
-        "z2": {"type": "zone", "settings": {"zone": "Schaamstreek", "product": "wellshave-flex-guard™", "collectie": "bodygroomers", "foto": "shopify://shop_images/ws-zone-schaamstreek.webp", "match": "Beste match voor de schaamstreek", "naam": "Flex Guard™ 3-in-1", "claim": "De gevoeligste zone, zonder irritatie of sneetjes.", "badge": "Skin Safe", "cta": "Bekijk de Flex Guard", "feit_1_icoon": "parts", "feit_1": "Skin Safe tegen irritatie en sneetjes", "feit_2_icoon": "gauge", "feit_2": "Constante kracht zonder hapering", "feit_3_icoon": "drop", "feit_3": "Nat of droog, met LED-licht", "pin_x": 38, "pin_y": 92, "label_y": 84, "lijn_x": 32}},
-        "z3": {"type": "zone", "settings": {"zone": "Gezicht & baard", "product": "wellshave-scheerapparaat-elite", "collectie": "zone-gezicht", "foto": "shopify://shop_images/ws-zone-gezicht.webp", "match": "Beste match voor gezicht & baard", "naam": "The Gentleman Shaver™", "claim": "Baard, snor en randen — in één apparaat.", "badge": "3 opzetstukken", "cta": "Bekijk de Gentleman Shaver", "feit_1_icoon": "parts", "feit_1": "Trimmer, neustrimmer en baardtrimmer", "feit_2_icoon": "power", "feit_2": "LCD-display en lithium-accu", "feit_3_icoon": "drop", "feit_3": "Waterdichte behuizing", "pin_x": 54, "pin_y": 25, "label_y": 32, "lijn_x": 35}},
-        "z4": {"type": "zone", "settings": {"zone": "Hoofd", "product": "wellshave-tondeuse-elegant", "collectie": "zone-hoofd", "foto": "shopify://shop_images/ws-zone-hoofd.webp", "match": "Beste match voor hoofd", "naam": "Tondeuse Elegant™", "claim": "Van fade tot strak kort, met controle.", "badge": "Precisiemessen", "cta": "Bekijk de Tondeuse Elegant", "feit_1_icoon": "scissors", "feit_1": "Precisiescherpe messen", "feit_2_icoon": "gauge", "feit_2": "Krachtig motormechanisme", "feit_3_icoon": "parts", "feit_3": "Voor fades en korte kapsels", "pin_x": 55, "pin_y": 7, "label_y": 9, "lijn_x": 21}},
-        "z5": {"type": "zone", "settings": {"zone": "Neus & oren", "product": "wellshave-4-in-1-neustrimmer-ultimate", "collectie": "neustrimmers", "foto": "shopify://shop_images/ws-zone-neus-v3.png", "match": "Beste match voor neus & oren", "naam": "Neustrimmer Ultimate™ 4-in-1", "claim": "Precies detailwerk, zonder trekken of irriteren.", "badge": "4 opzetkoppen", "cta": "Bekijk de neustrimmer", "feit_1_icoon": "gauge", "feit_1": "7.000 toeren — snijdt zonder te trekken", "feit_2_icoon": "nose", "feit_2": "Voor neus, oren, wenkbrauw en details", "feit_3_icoon": "power", "feit_3": "USB Fast Charge en batterij-indicator", "pin_x": 56, "pin_y": 19, "label_y": 21, "lijn_x": 29}}
+        "z1": {
+          "type": "zone",
+          "settings": {
+            "zone": "Lichaam",
+            "product": "groom-guard-pro",
+            "collectie": "bodygroomers",
+            "foto": "shopify://shop_images/ws-zone-lichaam.webp",
+            "match": "Beste match voor lichaam",
+            "naam": "Groom Guard™ PRO",
+            "claim": "Grote vlakken en gevoelige plekken, met dezelfde beweging.",
+            "badge": "Keramische mesjes",
+            "cta": "Bekijk de Groom Guard PRO",
+            "feit_1_icoon": "gauge",
+            "feit_1": "6.600 toeren en een LED-licht",
+            "feit_2_icoon": "parts",
+            "feit_2": "Mesjes achter een kam",
+            "feit_3_icoon": "drop",
+            "feit_3": "IPX7 waterdicht",
+            "pin_x": 34,
+            "pin_y": 51,
+            "label_y": 58,
+            "lijn_x": 25
+          }
+        },
+        "z2": {
+          "type": "zone",
+          "settings": {
+            "zone": "Schaamstreek",
+            "product": "wellshave-flex-guard™",
+            "collectie": "bodygroomers",
+            "foto": "shopify://shop_images/ws-zone-schaamstreek.webp",
+            "match": "Beste match voor de schaamstreek",
+            "naam": "Flex Guard™ 3-in-1",
+            "claim": "De gevoeligste zone, zonder irritatie of sneetjes.",
+            "badge": "Skin Safe",
+            "cta": "Bekijk de Flex Guard",
+            "feit_1_icoon": "parts",
+            "feit_1": "Skin Safe tegen irritatie en sneetjes",
+            "feit_2_icoon": "gauge",
+            "feit_2": "Constante kracht zonder hapering",
+            "feit_3_icoon": "drop",
+            "feit_3": "Nat of droog, met LED-licht",
+            "pin_x": 38,
+            "pin_y": 92,
+            "label_y": 84,
+            "lijn_x": 32
+          }
+        },
+        "z3": {
+          "type": "zone",
+          "settings": {
+            "zone": "Gezicht & baard",
+            "product": "wellshave-scheerapparaat-elite",
+            "collectie": "zone-gezicht",
+            "foto": "shopify://shop_images/ws-zone-gezicht.webp",
+            "match": "Beste match voor gezicht & baard",
+            "naam": "The Gentleman Shaver™",
+            "claim": "Baard, snor en randen — in één apparaat.",
+            "badge": "3 opzetstukken",
+            "cta": "Bekijk de Gentleman Shaver",
+            "feit_1_icoon": "parts",
+            "feit_1": "Trimmer, neustrimmer en baardtrimmer",
+            "feit_2_icoon": "power",
+            "feit_2": "LCD-display en lithium-accu",
+            "feit_3_icoon": "drop",
+            "feit_3": "Waterdichte behuizing",
+            "pin_x": 54,
+            "pin_y": 25,
+            "label_y": 32,
+            "lijn_x": 35
+          }
+        },
+        "z4": {
+          "type": "zone",
+          "settings": {
+            "zone": "Hoofd",
+            "product": "wellshave-tondeuse-elegant",
+            "collectie": "zone-hoofd",
+            "foto": "shopify://shop_images/ws-zone-hoofd.webp",
+            "match": "Beste match voor hoofd",
+            "naam": "Tondeuse Elegant™",
+            "claim": "Van fade tot strak kort, met controle.",
+            "badge": "Precisiemessen",
+            "cta": "Bekijk de Tondeuse Elegant",
+            "feit_1_icoon": "scissors",
+            "feit_1": "Precisiescherpe messen",
+            "feit_2_icoon": "gauge",
+            "feit_2": "Krachtig motormechanisme",
+            "feit_3_icoon": "parts",
+            "feit_3": "Voor fades en korte kapsels",
+            "pin_x": 55,
+            "pin_y": 7,
+            "label_y": 9,
+            "lijn_x": 21
+          }
+        },
+        "z5": {
+          "type": "zone",
+          "settings": {
+            "zone": "Neus & oren",
+            "product": "wellshave-4-in-1-neustrimmer-ultimate",
+            "collectie": "neustrimmers",
+            "foto": "shopify://shop_images/ws-zone-neus-v3.png",
+            "match": "Beste match voor neus & oren",
+            "naam": "Neustrimmer Ultimate™ 4-in-1",
+            "claim": "Precies detailwerk, zonder trekken of irriteren.",
+            "badge": "4 opzetkoppen",
+            "cta": "Bekijk de neustrimmer",
+            "feit_1_icoon": "gauge",
+            "feit_1": "7.000 toeren — snijdt zonder te trekken",
+            "feit_2_icoon": "nose",
+            "feit_2": "Voor neus, oren, wenkbrauw en details",
+            "feit_3_icoon": "power",
+            "feit_3": "USB Fast Charge en batterij-indicator",
+            "pin_x": 56,
+            "pin_y": 19,
+            "label_y": 21,
+            "lijn_x": 29
+          }
+        }
       },
-      "block_order": ["z1", "z2", "z3", "z4", "z5"],
-      "settings": {"figuur": "shopify://shop_images/ws-hero-portrait.jpg", "merk": "shopify://shop_images/ws-mark.png", "desk_indent_top": 60, "desk_indent_bottom": 48, "mob_indent_top": 34, "mob_indent_bottom": 30}
+      "block_order": [
+        "z1",
+        "z2",
+        "z3",
+        "z4",
+        "z5"
+      ],
+      "settings": {
+        "eyebrow": "Vind je perfecte tool",
+        "kop": "Waar wil je trimmen?",
+        "sub": "<b>Kies de plek.</b> Wij tonen de beste match.",
+        "note": "Elk gebied vraagt om een andere kop, messtand en vorm. Selecteer een zone en ontdek welke tool ervoor gemaakt is.",
+        "hint": "Klik op|br|een zone",
+        "figuur": "shopify://shop_images/ws-hero-portrait.jpg",
+        "merk": "shopify://shop_images/ws-mark.png",
+        "fighint": "Selecteer een hotspot om van zone te wisselen.",
+        "pijl": "Kies hieronder je zone",
+        "veeg": "Veeg voor alle zones",
+        "strip_1": "<b>Mes of opzetstuk</b> los verkrijgbaar",
+        "strip_2": "<b>100 dagen</b> proberen",
+        "strip_3": "<b>2 jaar</b> garantie",
+        "desk_indent_top": 60,
+        "desk_indent_bottom": 48,
+        "mob_indent_top": 34,
+        "mob_indent_bottom": 30
+      }
     },
     "ws_koopblok": {
       "type": "ws-koopblok",
       "blocks": {
-        "o1": {"type": "onderdeel", "settings": {"stap": "Trimmen", "titel": "Bodygroomer", "tekst": "met extra scheerblad", "nr_x": 11, "nr_y": 50}},
-        "o2": {"type": "onderdeel", "settings": {"stap": "Detail", "titel": "Detailtrimmer", "tekst": "voor neus & wenkbrauw", "nr_x": 33, "nr_y": 52}},
-        "o3": {"type": "onderdeel", "settings": {"stap": "Glad", "titel": "Gladscheerkop", "tekst": "voor een gladde finish", "nr_x": 82, "nr_y": 41}},
-        "o4": {"type": "onderdeel", "settings": {"stap": "Opladen", "titel": "Oplaadstation", "tekst": "alles op één plek", "nr_x": 55, "nr_y": 76}}
+        "o1": {
+          "type": "onderdeel",
+          "settings": {
+            "stap": "Trimmen",
+            "titel": "Bodygroomer",
+            "tekst": "met skin-safe trimblad",
+            "nr_x": 11,
+            "nr_y": 50
+          }
+        },
+        "o2": {
+          "type": "onderdeel",
+          "settings": {
+            "stap": "Neushaar",
+            "titel": "Neustrimmer",
+            "tekst": "voor neus & oor",
+            "nr_x": 33,
+            "nr_y": 52
+          }
+        },
+        "o3": {
+          "type": "onderdeel",
+          "settings": {
+            "stap": "Detail & Glad",
+            "titel": "Opzetstukken",
+            "tekst": "voor finish & detail",
+            "nr_x": 70,
+            "nr_y": 29
+          }
+        },
+        "o4": {
+          "type": "onderdeel",
+          "settings": {
+            "stap": "Opladen",
+            "titel": "Oplaadstation",
+            "tekst": "alles op één plek",
+            "nr_x": 55,
+            "nr_y": 76
+          }
+        },
+        "onderdeel_B98KA6": {
+          "type": "onderdeel",
+          "settings": {
+            "stap": "Opbergen",
+            "titel": "Travelbag",
+            "tekst": "organiseer",
+            "nr_x": 83,
+            "nr_y": 76
+          }
+        }
       },
-      "block_order": ["o1", "o2", "o3", "o4"],
-      "settings": {"product": "wellshave-shave-package-3-0", "foto": "shopify://shop_images/ws-bundel-pack.webp", "merk": "shopify://shop_images/ws-mark.png", "naam": "Shave Package <b>3.0</b>", "los_link": "shopify://collections/all", "desk_indent_top": 52, "desk_indent_bottom": 52, "mob_indent_top": 28, "mob_indent_bottom": 28}
+      "block_order": [
+        "o1",
+        "o2",
+        "o3",
+        "o4",
+        "onderdeel_B98KA6"
+      ],
+      "settings": {
+        "product": "wellshave-shave-package-3-0",
+        "eyebrow": "De complete routine",
+        "kop": "Alles wat je nodig hebt.<strong>Eén station. Geen losse rommel.</strong>",
+        "sub": "Trimmen, detailwerk en glad afwerken — met alles wat daarvoor nodig is op één plek, in plaats van los in een la.",
+        "foto": "shopify://shop_images/ws-bundel-pack.webp",
+        "merk": "shopify://shop_images/ws-mark.png",
+        "pil_best": "Bestverkochte bundel",
+        "pil_tel": "92× besteld · afgelopen 6 maanden",
+        "kaart_eyebrow": "Alles in één set",
+        "naam": "Shave Package <strong>3.0</strong>",
+        "claim": "Twee apparaten, de opzetstukken en het station in één set — samen goedkoper dan de losse adviesprijs.",
+        "prijslabel": "Bundelprijs",
+        "verschil_links": "Normaal",
+        "verschil_rechts": "Als bundel",
+        "voorraad_wel": "Op voorraad · morgen in huis",
+        "voorraad_niet": "Tijdelijk uitverkocht",
+        "knop": "Pak de complete set",
+        "los": "Liever los?",
+        "los_link_label": "Bekijk de apparaten",
+        "los_link": "shopify://collections/all",
+        "desk_indent_top": 52,
+        "desk_indent_bottom": 52,
+        "mob_indent_top": 28,
+        "mob_indent_bottom": 28
+      }
     },
     "ws_proposities": {
       "type": "ws-proposities",
       "blocks": {
-        "p1": {"type": "belofte", "settings": {"kop": "Elke plek", "label": "Een apparaat dat daarvoor gemaakt is", "tekst": "Kruin, gezicht, neus, lichaam en schaamstreek. Het assortiment is opgebouwd per plek, niet als één dure alleskunner die overal half werkt."}},
-        "p2": {"type": "belofte", "settings": {"kop": "Elke serie", "label": "Doorgetest, verbeterd, opnieuw uitgebracht", "tekst": "Wat er uit reviews, retouren en de klantenservice komt, gaat de volgende productieserie in. Wat je vandaag koopt is de opvolger van wat we vorig jaar verkochten."}},
-        "p3": {"type": "belofte", "settings": {"kop": "Het mes", "klein": "apart", "label": "Een botte kop kost geen nieuw apparaat", "tekst": "Voor je bodygroomer, je hoofdscheerder en je scheerapparaat ligt de scheerkop apart op voorraad. Een kop vervangen kost een fractie van een nieuw apparaat."}},
-        "p4": {"type": "belofte", "settings": {"kop": "Eén keer", "klein": "betalen", "label": "Geen abonnement, geen navulplicht", "tekst": "Je koopt een apparaat en daar houdt het op. Geen maandelijkse mesjes die vanzelf komen, geen opzegtermijn, geen account dat je moet beheren."}}
+        "p1": {
+          "type": "belofte",
+          "settings": {
+            "kop": "Elke plek",
+            "klein": "",
+            "label": "Een apparaat dat daarvoor gemaakt is",
+            "tekst": "Kruin, gezicht, neus, lichaam en schaamstreek. Het assortiment is opgebouwd per plek, niet als één dure alleskunner die overal half werkt."
+          }
+        },
+        "p2": {
+          "type": "belofte",
+          "settings": {
+            "kop": "Elke serie",
+            "klein": "",
+            "label": "Doorgetest, verbeterd, opnieuw uitgebracht",
+            "tekst": "Wat er uit reviews, retouren en de klantenservice komt, gaat de volgende productieserie in. Wat je vandaag koopt is de opvolger van wat we vorig jaar verkochten."
+          }
+        },
+        "p3": {
+          "type": "belofte",
+          "settings": {
+            "kop": "Het mes",
+            "klein": "apart",
+            "label": "Een botte kop kost geen nieuw apparaat",
+            "tekst": "Voor je bodygroomer, je hoofdscheerder en je scheerapparaat ligt de scheerkop apart op voorraad. Een kop vervangen kost een fractie van een nieuw apparaat."
+          }
+        },
+        "p4": {
+          "type": "belofte",
+          "settings": {
+            "kop": "Eén keer",
+            "klein": "betalen",
+            "label": "Geen abonnement, geen navulplicht",
+            "tekst": "Je koopt een apparaat en daar houdt het op. Geen maandelijkse mesjes die vanzelf komen, geen opzegtermijn, geen account dat je moet beheren."
+          }
+        }
       },
-      "block_order": ["p1", "p2", "p3", "p4"],
-      "settings": {"desk_indent_top": 70, "desk_indent_bottom": 70, "mob_indent_top": 40, "mob_indent_bottom": 32}
+      "block_order": [
+        "p1",
+        "p2",
+        "p3",
+        "p4"
+      ],
+      "settings": {
+        "eyebrow": "Waar we voor staan",
+        "kop": "Vier dingen die <b>niet per product</b> verschillen.",
+        "sub": "Wellshave bestaat om in elk huishouden één apparaat te hebben liggen voor de plek waar jij iets weg wilt hebben — zonder dat het een luxeaankoop wordt. Dat vertaalt zich in vier dingen die voor elk apparaat gelden.",
+        "slot": "Hoe die verbeteringen er in de praktijk uitzien, <b>staat hierboven in de tijdlijn.</b>",
+        "desk_indent_top": 70,
+        "desk_indent_bottom": 70,
+        "mob_indent_top": 40,
+        "mob_indent_bottom": 32
+      }
     },
     "ws_zonerooster": {
       "type": "ws-zonerooster",
       "blocks": {
-        "a1": {"type": "zone", "settings": {"collectie": "bodygroomers", "foto": "shopify://shop_images/ws-zone-lichaam.webp", "zone": "Lichaam", "wat": "Borst, rug en schaamstreek. Gemaakt voor gevoelige huid en lastige hoeken.", "lead": "Groom Guard™ PRO", "tag": "Bestseller"}},
-        "a2": {"type": "zone", "settings": {"collectie": "zone-gezicht", "foto": "shopify://shop_images/ws-zone-gezicht.webp", "zone": "Gezicht & baard", "wat": "Van een strak afgetekende kaaklijn tot glad geschoren. Of allebei, met één apparaat.", "lead": "The Gentleman Shaver™"}},
-        "a3": {"type": "zone", "settings": {"collectie": "zone-hoofd", "foto": "shopify://shop_images/ws-zone-hoofd.webp", "zone": "Hoofd", "wat": "Van fade tot strak kort. Jij bepaalt hoe kort het wordt.", "lead": "Tondeuse Elegant™"}},
-        "a4": {"type": "zone", "settings": {"collectie": "neustrimmers", "foto": "shopify://shop_images/ws-zone-neus-v3.png", "zone": "Neus & oren", "wat": "Detailwerk waar je zelf slecht bij kunt. Zonder trekken of irriteren.", "lead": "Neustrimmer Ultimate™ 4-in-1"}}
+        "a1": {
+          "type": "zone",
+          "settings": {
+            "collectie": "bodygroomers",
+            "foto": "shopify://shop_images/ws-zone-lichaam.webp",
+            "zone": "Lichaam",
+            "wat": "Borst, rug en schaamstreek. Gemaakt voor gevoelige huid en lastige hoeken.",
+            "lead": "Groom Guard™ PRO",
+            "tag": "Bestseller"
+          }
+        },
+        "a2": {
+          "type": "zone",
+          "settings": {
+            "collectie": "zone-gezicht",
+            "foto": "shopify://shop_images/ws-zone-gezicht.webp",
+            "zone": "Gezicht & baard",
+            "wat": "Van een strak afgetekende kaaklijn tot glad geschoren. Of allebei, met één apparaat.",
+            "lead": "The Gentleman Shaver™",
+            "tag": ""
+          }
+        },
+        "a3": {
+          "type": "zone",
+          "settings": {
+            "collectie": "zone-hoofd",
+            "foto": "shopify://shop_images/ws-zone-hoofd.webp",
+            "zone": "Hoofd",
+            "wat": "Van fade tot strak kort. Jij bepaalt hoe kort het wordt.",
+            "lead": "Tondeuse Elegant™",
+            "tag": ""
+          }
+        },
+        "a4": {
+          "type": "zone",
+          "settings": {
+            "collectie": "neustrimmers",
+            "foto": "shopify://shop_images/ws-zone-neus-v3.png",
+            "zone": "Neus & oren",
+            "wat": "Detailwerk waar je zelf slecht bij kunt. Zonder trekken of irriteren.",
+            "lead": "Neustrimmer Ultimate™ 4-in-1",
+            "tag": ""
+          }
+        }
       },
-      "block_order": ["a1", "a2", "a3", "a4"],
-      "settings": {"desk_indent_top": 56, "desk_indent_bottom": 56, "mob_indent_top": 34, "mob_indent_bottom": 34}
+      "block_order": [
+        "a1",
+        "a2",
+        "a3",
+        "a4"
+      ],
+      "settings": {
+        "eyebrow": "Het hele assortiment",
+        "kop": "Jij weet waar je wilt beginnen. <b>Wij weten waarmee.</b>",
+        "note": "Kies de zone waar je aan de slag wilt. Je krijgt dan alleen te zien wat daarvoor gemaakt is — in plaats van een keuze uit acht productcategorieën.",
+        "lead_label": "Populairst:",
+        "foot": "Elk apparaat 100 dagen te proberen, met 2 jaar garantie.",
+        "desk_indent_top": 56,
+        "desk_indent_bottom": 56,
+        "mob_indent_top": 34,
+        "mob_indent_bottom": 34
+      }
     },
     "ws_familie": {
       "type": "ws-familie",
       "blocks": {
-        "v1": {"type": "video", "settings": {"poster": "shopify://shop_images/ws-ugc-hoofd.webp", "duur": "6 sec", "naam": "Naam · plaats", "tag": "@instagramtag", "lint_kop": "Uit de community", "lint_sub": "Deze week uitgelicht"}},
-        "l1": {"type": "open", "settings": {"label": "Gezicht & baard", "tekst": "De grootste zone in het assortiment, en er is nog geen beeld van."}},
-        "v2": {"type": "video", "settings": {"poster": "shopify://shop_images/ws-ugc-borst.webp", "duur": "10 sec", "naam": "Naam · plaats", "tag": "@instagramtag", "lint_kop": "Uit de community", "lint_sub": "Deze week uitgelicht"}},
-        "v3": {"type": "video", "settings": {"poster": "shopify://shop_images/ws-ugc-neus.webp", "duur": "8 sec", "naam": "Naam · plaats", "tag": "@instagramtag"}},
-        "l2": {"type": "open", "settings": {"label": "Hoofd", "tekst": "Plek vrij voor een klant die zijn hoofd kaal scheert."}},
-        "l3": {"type": "open", "settings": {"label": "Jouw video hier", "tekst": "Stuur je routine in en hij komt hier te staan."}}
+        "v1": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/32-7 2 _ WS007..mp4",
+            "poster": "shopify://shop_images/ws-ugc-hoofd.webp",
+            "duur": "6 sec",
+            "naam": "Naam · plaats",
+            "tag": "@instagramtag",
+            "lint_kop": "Uit de community",
+            "lint_sub": "Deze week uitgelicht"
+          }
+        },
+        "v2": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/Testimonial Bol Sharpline.mov",
+            "poster": "shopify://shop_images/ws-ugc-borst.webp",
+            "duur": "10 sec",
+            "naam": "Naam · plaats",
+            "tag": "@instagramtag",
+            "lint_kop": "Uit de community",
+            "lint_sub": "Deze week uitgelicht"
+          }
+        },
+        "v3": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/brolls21 - clips-67b65accbf47b.mov",
+            "poster": "shopify://shop_images/ws-ugc-neus.webp",
+            "duur": "8 sec",
+            "naam": "Naam · plaats",
+            "tag": "@instagramtag",
+            "lint_kop": "",
+            "lint_sub": ""
+          }
+        },
+        "video_kcYnGq": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/brolls15 - clips-68dc322176506.mov",
+            "poster": "shopify://shop_images/ws-ugc-neus.webp",
+            "duur": "8 sec",
+            "naam": "Naam · plaats",
+            "tag": "@instagramtag",
+            "lint_kop": "",
+            "lint_sub": ""
+          }
+        },
+        "video_7gbBhR": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/brolls35 - clips-68ec8bfe5e17a.mov",
+            "poster": "shopify://shop_images/ws-ugc-neus.webp",
+            "duur": "8 sec",
+            "naam": "Naam · plaats",
+            "tag": "@instagramtag",
+            "lint_kop": "",
+            "lint_sub": ""
+          }
+        },
+        "video_k9wtzV": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/Shaving Armpit.mov",
+            "poster": "shopify://shop_images/ws-ugc-neus.webp",
+            "duur": "8 sec",
+            "naam": "Naam · plaats",
+            "tag": "@instagramtag",
+            "lint_kop": "",
+            "lint_sub": ""
+          }
+        },
+        "video_wycEHg": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/Hook 3.mov",
+            "poster": "shopify://shop_images/ws-ugc-neus.webp",
+            "duur": "8 sec",
+            "naam": "Naam · plaats",
+            "tag": "@instagramtag",
+            "lint_kop": "",
+            "lint_sub": ""
+          }
+        },
+        "video_zQabfA": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/In the car.mp4",
+            "poster": "shopify://shop_images/ws-ugc-neus.webp",
+            "duur": "8 sec",
+            "naam": "Naam · plaats",
+            "tag": "@instagramtag",
+            "lint_kop": "",
+            "lint_sub": ""
+          }
+        },
+        "video_EaMQJ3": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/tolstoy_3224a93b-19f3-45f4-8926-d59bb7ea044f.webm",
+            "poster": "shopify://shop_images/ws-ugc-neus.webp",
+            "duur": "8 sec",
+            "naam": "Naam · plaats",
+            "tag": "@instagramtag",
+            "lint_kop": "",
+            "lint_sub": ""
+          }
+        },
+        "video_V6VLq9": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/tolstoy_f693aa47-dfcb-40f0-87cd-76854724c395.webm",
+            "poster": "shopify://shop_images/ws-ugc-neus.webp",
+            "duur": "8 sec",
+            "naam": "Naam · plaats",
+            "tag": "@instagramtag",
+            "lint_kop": "",
+            "lint_sub": ""
+          }
+        }
       },
-      "block_order": ["v1", "l1", "v2", "v3", "l2", "l3"],
-      "settings": {"merk": "shopify://shop_images/ws-mark.png", "desk_indent_top": 56, "desk_indent_bottom": 0, "mob_indent_top": 40, "mob_indent_bottom": 0}
+      "block_order": [
+        "v1",
+        "v2",
+        "v3",
+        "video_kcYnGq",
+        "video_7gbBhR",
+        "video_k9wtzV",
+        "video_wycEHg",
+        "video_zQabfA",
+        "video_EaMQJ3",
+        "video_V6VLq9"
+      ],
+      "settings": {
+        "eyebrow": "De Wellshave-familie",
+        "kop": "Echte mannen. Echte routines. <strong>Samen één familie.</strong>",
+        "intro": "Geen acteurs en geen ingestudeerde scripts. Gewoon klanten die laten zien hoe Wellshave onderdeel werd van hun routine.",
+        "merk": "shopify://shop_images/ws-mark.png",
+        "tel_waarde": "200.000+ bestellingen",
+        "tel_label": "sinds 2021",
+        "pil": "Door klanten zelf gefilmd",
+        "voet_1": "Elke video is met toestemming gedeeld.",
+        "voet_2": "Jouw routine hier tussen?",
+        "hashtag": "#wellshavefamilie",
+        "cta": "Bekijk Instagram",
+        "instagram": "",
+        "desk_indent_top": 56,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 40,
+        "mob_indent_bottom": 0
+      }
     },
     "ws_garantie": {
       "type": "ws-garantie",
       "blocks": {
-        "g1": {"type": "zekerheid", "settings": {"icoon": "klok", "groot": "100 dagen", "wat": "Thuis proberen", "mits": "Niet goed? Dan krijg je je geld terug."}},
-        "g2": {"type": "zekerheid", "settings": {"icoon": "schild", "groot": "2 jaar", "wat": "Garantie op elk apparaat", "mits": "Gaat er iets mis, dan lossen we het op."}},
-        "g3": {"type": "zekerheid", "settings": {"icoon": "bus", "groot": "Gratis verzending", "wat": "In heel Nederland", "mits": "Naar België gratis vanaf €49,95."}},
-        "g4": {"type": "zekerheid", "settings": {"icoon": "pakje", "groot": "Morgen in huis", "wat": "Besteld voor 23:59", "mits": "Nederland en België."}},
-        "q1": {"type": "vraag", "settings": {"onderwerp": "Bestellen", "vraag": "Wat als het me toch niet bevalt?", "antwoord": "<p>Je hebt 100 dagen om het apparaat thuis te proberen. Bevalt het niet? Stuur het terug en ontvang het volledige aankoopbedrag. <strong>Je hoeft geen reden op te geven.</strong></p>"}},
-        "q2": {"type": "vraag", "settings": {"onderwerp": "Bestellen", "vraag": "Wanneer is mijn bestelling binnen?", "antwoord": "<p>Bestel je voor 23:59, dan ligt je pakket de volgende dag in huis in Nederland en België. Duitsland en Oostenrijk duren één tot twee werkdagen, de rest van Europa twee tot drie.</p>"}},
-        "q3": {"type": "vraag", "settings": {"onderwerp": "Bestellen", "vraag": "Wat kost verzending naar België?", "antwoord": "<p>Boven €49,95 gratis, daaronder €2,95. Binnen Nederland is verzending altijd gratis.</p>"}},
-        "q4": {"type": "vraag", "settings": {"onderwerp": "Gebruik", "vraag": "Kan ik het apparaat onder de douche gebruiken?", "antwoord": "<p><strong>Niet allemaal.</strong> De meeste apparaten zijn waterdicht, maar niet alle. Op de productpagina staat per apparaat of hij nat gebruikt mag worden.</p>"}},
-        "q5": {"type": "vraag", "settings": {"onderwerp": "Gebruik", "vraag": "Hoe vaak moet ik het mes vervangen?", "antwoord": "<p>Gemiddeld gaat een kop zes tot twaalf maanden mee, afhankelijk van hoe vaak je hem gebruikt. <strong>De koppen liggen apart op voorraad</strong>, dus een botte kop kost geen nieuw apparaat.</p>"}},
-        "q6": {"type": "vraag", "settings": {"onderwerp": "Gebruik", "vraag": "Welk apparaat heb ik nodig?", "antwoord": "<p>Kies hierboven de zone waar je aan de slag wilt. Kom je er niet uit, stuur ons dan een bericht — dan denken we mee.</p>"}},
-        "q7": {"type": "vraag", "settings": {"onderwerp": "Garantie", "vraag": "Wat valt er onder de garantie?", "antwoord": "<p>Twee jaar op het apparaat zelf. <strong>Scheerkoppen en messen zijn slijtdelen</strong> en vallen daarbuiten; die zijn los te bestellen.</p>"}},
-        "q8": {"type": "vraag", "settings": {"onderwerp": "Garantie", "vraag": "Hoe stuur ik iets terug?", "antwoord": "<p>Stuur ons een bericht, dan krijg je van ons de instructies. <strong>De verzendkosten van de retour zijn voor jou</strong>, het aankoopbedrag krijg je volledig terug.</p>"}},
-        "q9": {"type": "vraag", "settings": {"onderwerp": "Garantie", "vraag": "Hoe bereik ik jullie?", "antwoord": "<p>Per e-mail op contact@wellshave.com, of via het contactformulier. Je krijgt binnen één werkdag antwoord van een van ons.</p>"}}
+        "g1": {
+          "type": "zekerheid",
+          "settings": {
+            "icoon": "klok",
+            "groot": "100 dagen",
+            "wat": "Thuis proberen",
+            "mits": "Niet goed? Dan krijg je je geld terug."
+          }
+        },
+        "g2": {
+          "type": "zekerheid",
+          "settings": {
+            "icoon": "schild",
+            "groot": "2 jaar",
+            "wat": "Garantie op elk apparaat",
+            "mits": "Gaat er iets mis, dan lossen we het op."
+          }
+        },
+        "g3": {
+          "type": "zekerheid",
+          "settings": {
+            "icoon": "bus",
+            "groot": "Gratis verzending",
+            "wat": "In heel Nederland",
+            "mits": "Naar België gratis vanaf €49,95."
+          }
+        },
+        "g4": {
+          "type": "zekerheid",
+          "settings": {
+            "icoon": "pakje",
+            "groot": "Morgen in huis",
+            "wat": "Besteld voor 23:59",
+            "mits": "Nederland en België."
+          }
+        },
+        "q1": {
+          "type": "vraag",
+          "settings": {
+            "onderwerp": "Bestellen",
+            "vraag": "Wat als het me toch niet bevalt?",
+            "antwoord": "<p>Je hebt 100 dagen om het apparaat thuis te proberen. Bevalt het niet? Stuur het terug en ontvang het volledige aankoopbedrag. <strong>Je hoeft geen reden op te geven.</strong></p>"
+          }
+        },
+        "q2": {
+          "type": "vraag",
+          "settings": {
+            "onderwerp": "Bestellen",
+            "vraag": "Wanneer is mijn bestelling binnen?",
+            "antwoord": "<p>Bestel je voor 23:59, dan ligt je pakket de volgende dag in huis in Nederland en België. Duitsland en Oostenrijk duren één tot twee werkdagen, de rest van Europa twee tot drie.</p>"
+          }
+        },
+        "q3": {
+          "type": "vraag",
+          "settings": {
+            "onderwerp": "Bestellen",
+            "vraag": "Wat kost verzending naar België?",
+            "antwoord": "<p>Boven €49,95 gratis, daaronder €2,95. Binnen Nederland is verzending altijd gratis.</p>"
+          }
+        },
+        "q4": {
+          "type": "vraag",
+          "settings": {
+            "onderwerp": "Gebruik",
+            "vraag": "Kan ik het apparaat onder de douche gebruiken?",
+            "antwoord": "<p><strong>Niet allemaal.</strong> De meeste apparaten zijn waterdicht, maar niet alle. Op de productpagina staat per apparaat of hij nat gebruikt mag worden.</p>"
+          }
+        },
+        "q5": {
+          "type": "vraag",
+          "settings": {
+            "onderwerp": "Gebruik",
+            "vraag": "Hoe vaak moet ik het mes vervangen?",
+            "antwoord": "<p>Gemiddeld gaat een kop zes tot twaalf maanden mee, afhankelijk van hoe vaak je hem gebruikt. <strong>De koppen liggen apart op voorraad</strong>, dus een botte kop kost geen nieuw apparaat.</p>"
+          }
+        },
+        "q6": {
+          "type": "vraag",
+          "settings": {
+            "onderwerp": "Gebruik",
+            "vraag": "Welk apparaat heb ik nodig?",
+            "antwoord": "<p>Kies hierboven de zone waar je aan de slag wilt. Kom je er niet uit, stuur ons dan een bericht — dan denken we mee.</p>"
+          }
+        },
+        "q7": {
+          "type": "vraag",
+          "settings": {
+            "onderwerp": "Garantie",
+            "vraag": "Wat valt er onder de garantie?",
+            "antwoord": "<p>Twee jaar op het apparaat zelf. <strong>Scheerkoppen en messen zijn slijtdelen</strong> en vallen daarbuiten; die zijn los te bestellen.</p>"
+          }
+        },
+        "q8": {
+          "type": "vraag",
+          "settings": {
+            "onderwerp": "Garantie",
+            "vraag": "Hoe stuur ik iets terug?",
+            "antwoord": "<p>Stuur ons een bericht, dan krijg je van ons de instructies. <strong>De verzendkosten van de retour zijn voor jou</strong>, het aankoopbedrag krijg je volledig terug.</p>"
+          }
+        },
+        "q9": {
+          "type": "vraag",
+          "settings": {
+            "onderwerp": "Garantie",
+            "vraag": "Hoe bereik ik jullie?",
+            "antwoord": "<p>Per e-mail op contact@wellshave.com, of via het contactformulier. Je krijgt binnen één werkdag antwoord van een van ons.</p>"
+          }
+        }
       },
-      "block_order": ["g1", "g2", "g3", "g4", "q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9"],
-      "settings": {"merk": "shopify://shop_images/ws-mark.png", "team_1": "shopify://shop_images/ws-team-1.webp", "team_2": "shopify://shop_images/ws-team-2.webp", "team_3": "shopify://shop_images/ws-team-3.webp", "knop2_link": "/pages/neem-contact-op", "desk_indent_top": 44, "desk_indent_bottom": 44, "mob_indent_top": 24, "mob_indent_bottom": 24}
+      "block_order": [
+        "g1",
+        "g2",
+        "g3",
+        "g4",
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6",
+        "q7",
+        "q8",
+        "q9"
+      ],
+      "settings": {
+        "eyebrow": "Zeker voor je bestelt",
+        "kop": "Goed geregeld.<b>Voor én na je aankoop.</b>",
+        "sub": "Probeer rustig thuis, reken op duidelijke garantie en krijg hulp van echte mensen als je ergens niet uitkomt.",
+        "merk": "shopify://shop_images/ws-mark.png",
+        "hulp_kop": "Kom je er niet uit?",
+        "hulp_h": "Je krijgt antwoord<b>van een echt mens.</b>",
+        "hulp_p": "Stuur ons je vraag. We denken mee over je bestelling, productkeuze of gebruik.",
+        "team_1": "shopify://shop_images/ws-team-1.webp",
+        "team_2": "shopify://shop_images/ws-team-2.webp",
+        "team_3": "shopify://shop_images/ws-team-3.webp",
+        "team_kop": "Persoonlijke hulp",
+        "team_sub": "Binnen één werkdag antwoord",
+        "mail": "contact@wellshave.com",
+        "knop2": "Stuur een bericht",
+        "knop2_link": "/pages/neem-contact-op",
+        "hulp_slot": "Geen chatbot als je een mens nodig hebt.",
+        "vak_kop": "Veelgestelde vragen",
+        "vak_h": "Alles wat je wilt weten.",
+        "vak_p": "Kies een onderwerp of open een vraag.",
+        "vak_slot": "Staat je vraag er niet bij? Stuur ons een bericht.",
+        "desk_indent_top": 44,
+        "desk_indent_bottom": 44,
+        "mob_indent_top": 24,
+        "mob_indent_bottom": 24
+      }
     },
     "ws_afsluiter": {
       "type": "ws-afsluiter",
       "blocks": {
-        "cel_1": {"type": "bewijs", "settings": {"soort": "sterren", "sterren": 4, "waarde": "", "label": "4,5 uit 950+ beoordelingen"}},
-        "cel_2": {"type": "bewijs", "settings": {"soort": "tekst", "icoon": "doos", "waarde": "200.000+", "label": "Bestellingen sinds 2021"}},
-        "cel_3": {"type": "bewijs", "settings": {"soort": "tekst", "icoon": "klok", "waarde": "Voor 23:59", "label": "Besteld, morgen in huis"}}
+        "cel_1": {
+          "type": "bewijs",
+          "settings": {
+            "soort": "sterren",
+            "sterren": 4,
+            "icoon": "geen",
+            "waarde": "",
+            "label": "4,5 uit 950+ beoordelingen"
+          }
+        },
+        "cel_2": {
+          "type": "bewijs",
+          "settings": {
+            "soort": "tekst",
+            "sterren": 4,
+            "icoon": "doos",
+            "waarde": "200.000+",
+            "label": "Bestellingen sinds 2021"
+          }
+        },
+        "cel_3": {
+          "type": "bewijs",
+          "settings": {
+            "soort": "tekst",
+            "sterren": 4,
+            "icoon": "klok",
+            "waarde": "Voor 23:59",
+            "label": "Besteld, morgen in huis"
+          }
+        }
       },
-      "block_order": ["cel_1", "cel_2", "cel_3"],
-      "settings": {"merk": "shopify://shop_images/ws-mark.png", "cta1_link": "shopify://collections/all", "nieuws_tonen": true, "desk_indent_top": 66, "desk_indent_bottom": 0, "mob_indent_top": 44, "mob_indent_bottom": 0}
+      "block_order": [
+        "cel_1",
+        "cel_2",
+        "cel_3"
+      ],
+      "settings": {
+        "eyebrow": "Klaar om te kiezen",
+        "kop": "Eén apparaat voor de plek <b>waar jij iets weg wilt hebben.</b>",
+        "sub": "Kies zelf het apparaat, of laat de quiz het in een paar vragen voor je doen — voor jezelf of voor iemand anders.",
+        "cta1_label": "Bekijk alle apparaten",
+        "cta1_link": "shopify://collections/all",
+        "cta2_label": "Start de quiz",
+        "cta2_link": "",
+        "reden": "Vandaag beslissen kost je niets: <b>je hebt honderd dagen om van gedachten te veranderen.</b>",
+        "merk": "shopify://shop_images/ws-mark.png",
+        "nieuws_tonen": true,
+        "nieuws_kop": "Nog niet zover?",
+        "nieuws_sub": "10% korting op je eerste bestelling, plus tips die je kunt gebruiken.",
+        "nieuws_placeholder": "jouw@e-mail.nl",
+        "nieuws_knop": "Aanmelden",
+        "desk_indent_top": 66,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 44,
+        "mob_indent_bottom": 0
+      }
     }
   },
-  "order": ["ws_hero", "ws_belofte", "ws_bestsellers", "ws_tijdlijn", "ws_zonekiezer", "ws_koopblok", "ws_proposities", "ws_zonerooster", "ws_familie", "ws_garantie", "ws_afsluiter"]
+  "order": [
+    "ws_hero",
+    "ws_bestsellers",
+    "ws_belofte",
+    "ws_tijdlijn",
+    "ws_zonekiezer",
+    "ws_koopblok",
+    "ws_proposities",
+    "ws_zonerooster",
+    "ws_familie",
+    "ws_garantie",
+    "ws_afsluiter"
+  ]
 }

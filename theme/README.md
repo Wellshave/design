@@ -198,6 +198,33 @@ klant**, product, **datum** en **bron**. Laat je de bron leeg, dan verdwijnt de
 bronvermelding — zo kan een review die niet van Trustpilot komt daar ook niet
 het logo van dragen.
 
+## Repo en thema gelijk houden
+
+Het thema is de bron van waarheid; de repo is de spiegel. Vergelijken gaat het
+snelst op checksum, zonder de bestanden op te halen:
+
+```graphql
+theme(id: "...") { files(first: 40, filenames: [...]) { nodes { filename checksumMd5 size } } }
+```
+
+Twee dingen die daarbij misleiden:
+
+* **Shopify knipt de afsluitende regelovergang weg.** Vrijwel elk bestand is
+  lokaal precies één byte groter dan in het thema. Dat is geen verschil.
+  Vergelijk dus `md5(inhoud zonder slot-newline)`.
+* **`templates/index.json` is niet byte-voor-byte gelijk te krijgen.** De `size`
+  en `checksumMd5` die de API meldt (28.915 bytes) horen niet bij de inhoud die
+  diezelfde API teruggeeft (ruim 42.000 bytes opgemaakt). Voor bestanden die
+  wij zelf pushen klopt de checksum wél — het loopt alleen mis bij bestanden
+  die de thema-editor het laatst geschreven heeft. Voor dit bestand is
+  **inhoudelijke** gelijkheid het doel: parse beide en vergelijk secties,
+  volgorde, blokken en instellingen. Niet de bytes.
+
+De laatste keer dat dit is nagelopen liepen vijf bestanden echt uit de pas —
+`index.json` plus vier waar een commentaarregel of een stukje `info`-tekst
+lokaal ontbrak. Die stonden alleen in de push en waren nooit teruggeschreven.
+Push je iets naar het thema, schrijf het dan in dezelfde beurt lokaal weg.
+
 ## De quiz
 
 De quiz staat op een **eigen pagina**, niet op de homepage. Drie bestanden plus

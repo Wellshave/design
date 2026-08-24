@@ -3,6 +3,8 @@
   Ontwerp en onderbouwing: audits/blok-08-zonerooster.template.html
   Het aantal apparaten en de vanaf-prijs per zone komen uit de collectie;
   het totaal bovenaan is de som daarvan. Niemand hoeft die bij te werken.
+  Het aantal kolommen gaat via de variabele --ws-kol en niet via een inline
+  stijl: een inline stijl wint van elke media query, ook van de mobiele.
 {% endcomment %}
 
 {{ 'ws-zonerooster.css' | asset_url | stylesheet_tag }}

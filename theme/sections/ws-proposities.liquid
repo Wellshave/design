@@ -3,6 +3,8 @@
   Ontwerp en onderbouwing: audits/blok-07-proposities.template.html
   Bewust zonder cijfers of prijzen in de kop van elke kaart: prijzen in een
   tekstveld worden een valkuil zodra ze veranderen.
+  Het aantal kolommen gaat via de variabele --ws-kol en niet via een inline
+  stijl: een inline stijl wint van elke media query, ook van de mobiele.
 {% endcomment %}
 
 {{ 'ws-proposities.css' | asset_url | stylesheet_tag }}
