@@ -22,12 +22,11 @@ BRON2 = 'rapporten/blokken/02-omschrijving-specs-upsell-betaling.html'
 BLOKKEN = [
  ('01', u'Koopblok',            1, 'screen v6', 'p6',    u'zand · kern',        False),
  ('03', u'UGC-band',            2, 'ugc',       'ugc',   u'donker · uitbreiding', True),
- ('04', u'Het mechanisme',      2, 'mch',       'mch',   u'zand · kern',        True),
- ('05', u'De Trustpilot-muur',  2, 'tpm',       'tpm',   u'wit · kern',         True),
- ('06', u'Het aanbodblok',      2, 'lad',       'lad',   u'donker · kern',      True),
- ('07', u'De film',             2, 'film',      'film',  u'zand · uitbreiding', True),
- ('14', u'Omschrijving en specificaties', 2, 'blad', 'blad', u'zand · kern',   True),
- ('17', u'Maak het compleet',   2, 'erbij',     'erbij', u'donker · uitbreiding', True),
+ ('05', u'Het aanbodblok',      2, 'lad',       'lad',   u'donker · kern',      True),
+ ('07', u'Maak het compleet',   2, 'erbij',     'erbij', u'wit · uitbreiding', True),
+ ('08', u'De reviewmuur',       2, 'tpm',       'tpm',   u'zand · kern',         True),
+ (u'—', u'De film — buiten de negen', 2, 'film', 'film', u'af, maar niet ingedeeld', True),
+ (u'—', u'Accordeon: omschrijving en specificaties', 2, 'blad', 'blad', u'zit in blok 01',   True),
  (u'—', u'Betaalmethoden', 2, 'betaal',    'betaal', u'onderdeel van blok 01 en 18', True),
 ]
 
