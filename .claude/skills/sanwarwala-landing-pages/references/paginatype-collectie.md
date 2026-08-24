@@ -81,11 +81,19 @@ is ruim genoeg; wat detail is, hoort achter een uitklap in plaats van in een eig
    aangevinkte apparaten toont.
 
    **De kaart komt uit het thema, niet uit een nieuw ontwerp.** `assets/ws-bestsellers.css` bevat
-   de kaart met het monogram achter de packshot dat bij hover naar voren komt (dekking 0,22,
-   0,62s, `cubic-bezier(.22,.61,.36,1)`, packshot 1,035×). Neem die waarden letterlijk over,
-   inclusief de twee uitzonderingen die er al in zitten: op een apparaat zonder muis staat het
-   monogram zacht aan (0,1) omdat hover daar nergens vandaan komt, en bij `prefers-reduced-motion`
-   vervallen de overgangen. De kaart die de keuzehulp aanwijst, krijgt het monogram permanent.
+   de kaart met het monogram achter de packshot dat bij hover naar voren komt (0,62s,
+   `cubic-bezier(.22,.61,.36,1)`, van `scale(1.14)` naar 1, packshot 1,035×). Neem die waarden
+   letterlijk over, inclusief de twee uitzonderingen die er al in zitten: op een apparaat zonder
+   muis staat het monogram zacht aan omdat hover daar nergens vandaan komt, en bij
+   `prefers-reduced-motion` vervallen de overgangen. De kaart die de keuzehulp aanwijst, krijgt
+   het monogram permanent.
+
+   **Het monogram werkt alleen achter een vrijstaande packshot.** Staat de productfoto op zijn
+   eigen lichte vlak, dan dekt dat vlak het monogram af en zie je bij hover hooguit een randje
+   goud — het effect lijkt stuk terwijl de CSS klopt. Maak de packshots dus vrij (zie de
+   werkwijze bij blok 1) en laat de tegel zelf de kleur dragen: neutraal grijs in rust, een warm
+   zandverloop bij hover. Dat verloop van koel naar warm is de helft van het effect; het monogram
+   alleen is te subtiel, zeker in een verkleinde weergave.
 4. **Over deze categorie** &mdash; zand. De uitleg die anders als SEO-tekst onderaan verdwijnt:
    wat de categorie is, hoe de apparaten zich tot elkaar verhouden, en het mechanisme waarom het
    werkt op déze plek. Haal de inhoud voor dat mechanisme uit de reviews: waar goede en slechte
