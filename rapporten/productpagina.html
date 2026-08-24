@@ -660,6 +660,27 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
   border:0;border-radius:100px;padding:11px 20px;font-family:inherit;font-size:11.5px;font-weight:800;
   letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
 #deel-schermen .br1 .replay:hover{background:#2A2A28}
+#deel-schermen .br1 .v6 .w-acc,#deel-schermen .br1 .p6 .m-acc{margin-top:14px;border-top:1px solid rgba(255,255,255,.13)}
+#deel-schermen .br1 .v6 .w-acc details,#deel-schermen .br1 .p6 .m-acc details{border-bottom:1px solid rgba(255,255,255,.13)}
+#deel-schermen .br1 .v6 .w-acc summary,#deel-schermen .br1 .p6 .m-acc summary{list-style:none;cursor:pointer;display:flex;align-items:center;
+  justify-content:space-between;gap:12px;padding:13px 0;
+  font-size:13px;font-weight:700;letter-spacing:-.01em;color:#fff}
+#deel-schermen .br1 .v6 .w-acc summary::-webkit-details-marker,#deel-schermen .br1 .p6 .m-acc summary::-webkit-details-marker{display:none}
+#deel-schermen .br1 .v6 .w-acc summary i,#deel-schermen .br1 .p6 .m-acc summary i{position:relative;width:13px;height:13px;flex:none}
+#deel-schermen .br1 .v6 .w-acc summary i::before,#deel-schermen .br1 .p6 .m-acc summary i::before,#deel-schermen .br1 .v6 .w-acc summary i::after,#deel-schermen .br1 .p6 .m-acc summary i::after{content:'';position:absolute;background:#F5D18A;
+  left:50%;top:50%;transform:translate(-50%,-50%)}
+#deel-schermen .br1 .v6 .w-acc summary i::before,#deel-schermen .br1 .p6 .m-acc summary i::before{width:13px;height:1.6px}
+#deel-schermen .br1 .v6 .w-acc summary i::after,#deel-schermen .br1 .p6 .m-acc summary i::after{width:1.6px;height:13px;transition:transform .18s ease}
+#deel-schermen .br1 .v6 .w-acc details[open] summary i::after,#deel-schermen .br1 .p6 .m-acc details[open] summary i::after{transform:translate(-50%,-50%) scaleY(0)}
+#deel-schermen .br1 .v6 .w-acc .in,#deel-schermen .br1 .p6 .m-acc .in{padding:0 0 15px;font-size:12.5px;line-height:1.55;color:rgba(255,255,255,.62)}
+#deel-schermen .br1 .v6 .w-acc .in p,#deel-schermen .br1 .p6 .m-acc .in p{margin:0 0 8px}
+#deel-schermen .br1 .v6 .w-acc .in p:last-child,#deel-schermen .br1 .p6 .m-acc .in p:last-child{margin-bottom:0}
+#deel-schermen .br1 .v6 .w-acc .sp,#deel-schermen .br1 .p6 .m-acc .sp{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;margin:0}
+#deel-schermen .br1 .v6 .w-acc .sp dt,#deel-schermen .br1 .p6 .m-acc .sp dt{color:rgba(255,255,255,.42);white-space:nowrap}
+#deel-schermen .br1 .v6 .w-acc .sp dd,#deel-schermen .br1 .p6 .m-acc .sp dd{margin:0;color:rgba(255,255,255,.78)}
+#deel-schermen .br1 .v6 .w-acc ul,#deel-schermen .br1 .p6 .m-acc ul{margin:0;padding-left:16px}
+#deel-schermen .br1 .v6 .w-acc li,#deel-schermen .br1 .p6 .m-acc li{margin:0 0 4px}
+@media  (prefers-reduced-motion:reduce){#deel-schermen .br1 .v6 .w-acc summary i::after,#deel-schermen .br1 .p6 .m-acc summary i::after{transition:none}}
 #deel-schermen .br2{
   --ink:#111111;--ink-80:rgba(17,17,17,.8);--ink-60:rgba(17,17,17,.6);
   --ink-40:rgba(17,17,17,.4);--ink-10:rgba(17,17,17,.10);
@@ -2125,6 +2146,27 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
   border:0;border-radius:100px;padding:11px 20px;font-family:inherit;font-size:11.5px;font-weight:800;
   letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
 #deel-boven .replay:hover{background:#2A2A28}
+#deel-boven .v6 .w-acc,#deel-boven .p6 .m-acc{margin-top:14px;border-top:1px solid rgba(255,255,255,.13)}
+#deel-boven .v6 .w-acc details,#deel-boven .p6 .m-acc details{border-bottom:1px solid rgba(255,255,255,.13)}
+#deel-boven .v6 .w-acc summary,#deel-boven .p6 .m-acc summary{list-style:none;cursor:pointer;display:flex;align-items:center;
+  justify-content:space-between;gap:12px;padding:13px 0;
+  font-size:13px;font-weight:700;letter-spacing:-.01em;color:#fff}
+#deel-boven .v6 .w-acc summary::-webkit-details-marker,#deel-boven .p6 .m-acc summary::-webkit-details-marker{display:none}
+#deel-boven .v6 .w-acc summary i,#deel-boven .p6 .m-acc summary i{position:relative;width:13px;height:13px;flex:none}
+#deel-boven .v6 .w-acc summary i::before,#deel-boven .p6 .m-acc summary i::before,#deel-boven .v6 .w-acc summary i::after,#deel-boven .p6 .m-acc summary i::after{content:'';position:absolute;background:#F5D18A;
+  left:50%;top:50%;transform:translate(-50%,-50%)}
+#deel-boven .v6 .w-acc summary i::before,#deel-boven .p6 .m-acc summary i::before{width:13px;height:1.6px}
+#deel-boven .v6 .w-acc summary i::after,#deel-boven .p6 .m-acc summary i::after{width:1.6px;height:13px;transition:transform .18s ease}
+#deel-boven .v6 .w-acc details[open] summary i::after,#deel-boven .p6 .m-acc details[open] summary i::after{transform:translate(-50%,-50%) scaleY(0)}
+#deel-boven .v6 .w-acc .in,#deel-boven .p6 .m-acc .in{padding:0 0 15px;font-size:12.5px;line-height:1.55;color:rgba(255,255,255,.62)}
+#deel-boven .v6 .w-acc .in p,#deel-boven .p6 .m-acc .in p{margin:0 0 8px}
+#deel-boven .v6 .w-acc .in p:last-child,#deel-boven .p6 .m-acc .in p:last-child{margin-bottom:0}
+#deel-boven .v6 .w-acc .sp,#deel-boven .p6 .m-acc .sp{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;margin:0}
+#deel-boven .v6 .w-acc .sp dt,#deel-boven .p6 .m-acc .sp dt{color:rgba(255,255,255,.42);white-space:nowrap}
+#deel-boven .v6 .w-acc .sp dd,#deel-boven .p6 .m-acc .sp dd{margin:0;color:rgba(255,255,255,.78)}
+#deel-boven .v6 .w-acc ul,#deel-boven .p6 .m-acc ul{margin:0;padding-left:16px}
+#deel-boven .v6 .w-acc li,#deel-boven .p6 .m-acc li{margin:0 0 4px}
+@media (prefers-reduced-motion:reduce){#deel-boven .v6 .w-acc summary i::after,#deel-boven .p6 .m-acc summary i::after{transition:none}}
 /* ===== Onder de vouw ===== */
 #deel-onder{
   --ink:#111111;--ink-80:rgba(17,17,17,.8);--ink-60:rgba(17,17,17,.6);
@@ -2836,6 +2878,25 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
       <div class="w-cta2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect class="vgl-a" x="2.6" y="9.4" width="7.2" height="11.4" rx="1.6"/><rect x="14.2" y="3.2" width="7.2" height="17.6" rx="1.6"/><path d="M12 3.2v17.6" stroke-dasharray="2.6 2.6" opacity=".5"/></svg>Vergelijk de modellen</div>
 
       <div class="w-tel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M2.8 19.6c.9-3 3.2-4.8 6.2-4.8s5.3 1.8 6.2 4.8"/><path d="M16.4 5.2a3.2 3.2 0 0 1 0 5.6M18.2 19.6c-.3-1.3-.8-2.4-1.5-3.3"/></svg><span>Al door <b>200.000+</b> mannen gekozen</span></div>
+
+      <div class="w-acc">
+      <details><summary>Omschrijving &amp; specificaties<i></i></summary><div class="in">
+        <p>Bodygroomer met SkinSafe&trade; keramische kop voor lichaam en gezicht. Trimmen en glad afwerken met &eacute;&eacute;n apparaat.</p>
+        <dl class="sp"><dt>Kop</dt><dd>SkinSafe&trade; keramisch, afneembaar</dd>
+        <dt>Waterdicht</dt><dd>IPX7, geschikt onder de douche</dd>
+        <dt>Accu</dt><dd>90 minuten, USB-C, 2 uur laden</dd>
+        <dt>Opzetkammen</dt><dd>3, 4 en 6 mm</dd></dl></div></details>
+      <details><summary>Wat zit er in de doos<i></i></summary><div class="in">
+        <ul><li>Groom Guard&trade; PRO</li><li>Losse foil-kop voor glad afwerken</li>
+        <li>Drie opzetkammen</li><li>Oplaadstandaard en USB-C-kabel</li>
+        <li>Reisetui en schoonmaakborsteltje</li></ul></div></details>
+      <details><summary>Verzending &amp; retour<i></i></summary><div class="in">
+        <p>Voor 23:59 besteld, morgen in huis. Gratis verzending binnen Nederland en Belgi&euml;.</p>
+        <p>Retourneren kan 100 dagen lang, ook als de doos open is. Het retourlabel zit in de bevestigingsmail.</p></div></details>
+      <details><summary>Garantie en proberen<i></i></summary><div class="in">
+        <p><b>100 dagen thuis proberen.</b> Niet goed? Geld terug, zonder uitleg.</p>
+        <p><b>2 jaar garantie</b> op het apparaat. Gaat er binnen die tijd iets stuk, dan sturen we een nieuwe.</p></div></details>
+      </div>
     </div>
   </div>
 
@@ -2894,6 +2955,25 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
           </div>
           <div class="m-cta2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect class="vgl-a" x="2.6" y="9.4" width="7.2" height="11.4" rx="1.6"/><rect x="14.2" y="3.2" width="7.2" height="17.6" rx="1.6"/><path d="M12 3.2v17.6" stroke-dasharray="2.6 2.6" opacity=".5"/></svg>Vergelijk de modellen</div>
           <div class="m-tel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M2.8 19.6c.9-3 3.2-4.8 6.2-4.8s5.3 1.8 6.2 4.8"/><path d="M16.4 5.2a3.2 3.2 0 0 1 0 5.6M18.2 19.6c-.3-1.3-.8-2.4-1.5-3.3"/></svg><span>Al door <b>200.000+</b> mannen gekozen</span></div>
+
+          <div class="m-acc">
+          <details><summary>Omschrijving &amp; specificaties<i></i></summary><div class="in">
+            <p>Bodygroomer met SkinSafe&trade; keramische kop voor lichaam en gezicht. Trimmen en glad afwerken met &eacute;&eacute;n apparaat.</p>
+            <dl class="sp"><dt>Kop</dt><dd>SkinSafe&trade; keramisch, afneembaar</dd>
+            <dt>Waterdicht</dt><dd>IPX7, geschikt onder de douche</dd>
+            <dt>Accu</dt><dd>90 minuten, USB-C, 2 uur laden</dd>
+            <dt>Opzetkammen</dt><dd>3, 4 en 6 mm</dd></dl></div></details>
+      <details><summary>Wat zit er in de doos<i></i></summary><div class="in">
+            <ul><li>Groom Guard&trade; PRO</li><li>Losse foil-kop voor glad afwerken</li>
+            <li>Drie opzetkammen</li><li>Oplaadstandaard en USB-C-kabel</li>
+            <li>Reisetui en schoonmaakborsteltje</li></ul></div></details>
+      <details><summary>Verzending &amp; retour<i></i></summary><div class="in">
+            <p>Voor 23:59 besteld, morgen in huis. Gratis verzending binnen Nederland en Belgi&euml;.</p>
+            <p>Retourneren kan 100 dagen lang, ook als de doos open is. Het retourlabel zit in de bevestigingsmail.</p></div></details>
+      <details><summary>Garantie en proberen<i></i></summary><div class="in">
+            <p><b>100 dagen thuis proberen.</b> Niet goed? Geld terug, zonder uitleg.</p>
+            <p><b>2 jaar garantie</b> op het apparaat. Gaat er binnen die tijd iets stuk, dan sturen we een nieuwe.</p></div></details>
+          </div>
         </div>
       </div>
 
@@ -3634,18 +3714,18 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
 </div>
 <div id="deel-volgorde" class="deel">
 <div class="vg">
-<header class="vg-mast"><span class="eyebrow">De volgorde &middot; achttien blokken &middot; 23 augustus 2026</span><h2>Zo loopt de pagina,<br>van boven naar beneden.</h2><p class="lede">De volgorde ligt vast en wordt nooit per product herschikt. Blok 09 staat op elk product op plek 09. Wat per product verschilt is de inhoud in de velden rechts &mdash; nooit de plek. Het streepje in de linkerkolom laat de grond zien: zand, wit of donker, om beurten, zodat je bij het scrollen voelt dat er een nieuw blok begint.</p><div class="vg-tel"><span class="af">8 van 18 getekend</span><span>11 kern</span><span>7 uitbreiding</span><span>2 nieuwe velden</span></div></header>
+<header class="vg-mast"><span class="eyebrow">De volgorde &middot; tien blokken &middot; 23 augustus 2026</span><h2>Zo loopt de pagina,<br>van boven naar beneden.</h2><p class="lede">De volgorde ligt vast en wordt nooit per product herschikt. Blok 06 staat op elk product op plek 06. Wat per product verschilt is de inhoud in de velden rechts &mdash; nooit de plek. Het streepje in de linkerkolom laat de grond zien: zand, wit of donker, om beurten, zodat je bij het scrollen voelt dat er een nieuw blok begint.</p><div class="vg-tel"><span class="af">6 van 10 getekend</span><span>6 kern</span><span>4 uitbreiding</span><span>4 accordeons</span></div></header>
 <div class="vouwlabel"><b>Boven de vouw</b><i></i></div>
-<div class="stapel"><div class="blok"><span class="grond zand"></span><span class="nr">01</span><div class="mid"><b>Koopblok</b><p>Gallerij plus tien slots: pil, sterren, titel, belofte, prijs, vinkjes, cadeaubalk, knop, levering, betaalrij.</p><div class="bron">custom.buybox_quote · hero_promise · product_usp · product_offer</div></div><div class="rt"><em class="kern">kern</em><em class="af">getekend</em><span class="gr">zand</span></div></div></div>
+<div class="stapel"><div class="blok"><span class="grond zand"></span><span class="nr">01</span><div class="mid"><b>Koopblok</b><p>Gallerij plus het koopvak, en onderin <b>vier accordeons</b>: omschrijving &amp; specificaties, wat er in de doos zit, verzending &amp; retour, garantie en proberen.</p><div class="bron">custom.buybox_quote &middot; hero_promise &middot; product_usp &middot; product_offer &middot; specification &middot; included_box &middot; shipping_information</div></div><div class="rt"><em class="kern">kern</em><em class="af">getekend</em><span class="gr">zand</span></div></div></div>
 <div class="vouwlabel knip"><b>&darr; hier begint de vouw</b><i></i></div>
-<div class="stapel"><div class="blok"><span class="grond wit"></span><span class="nr">02</span><div class="mid"><b>Geruststrook</b><p>Vier items naast elkaar: proberen, garantie, verzending, levertijd. Winkelbreed, op elk product hetzelfde.</p><div class="bron">custom.store_usp</div></div><div class="rt"><em class="kern">kern</em><em class="todo">nog te tekenen</em><span class="gr">wit</span></div></div><div class="blok"><span class="grond donker"></span><span class="nr">03</span><div class="mid"><b>UGC-video&rsquo;s</b><p>Band van verticale video&rsquo;s, horizontaal te vegen. Stond op plek acht; bij 27,52% scrolldiepte haalt daar een minderheid.</p><div class="bron">custom.ugc_videos &middot; nieuw</div></div><div class="rt"><em class="uit">uitbreiding</em><em class="af">getekend</em><span class="gr">donker</span></div></div><div class="blok"><span class="grond zand"></span><span class="nr">04</span><div class="mid"><b>Veilig trimmen waar het telt</b><p>Herkadering eerst, mechanisme daarna. Waarom een mesje wel móet snijden en de keramische kop niet.</p><div class="bron">custom.image_with_text</div></div><div class="rt"><em class="kern">kern</em><em class="af">getekend</em><span class="gr">zand</span></div></div><div class="blok"><span class="grond wit"></span><span class="nr">05</span><div class="mid"><b>Beoordelingen</b><p>Muur van Trustpilot-reviews, geen carrousel. Score en aantal live gebonden.</p><div class="bron">Trustpilot-widget</div></div><div class="rt"><em class="kern">kern</em><em class="af">getekend</em><span class="gr">wit</span></div></div><div class="blok"><span class="grond donker"></span><span class="nr">06</span><div class="mid"><b>Het aanbodblok</b><p>Drie kaarten: instap, uitgelicht, beste waarde. Besparing op elke kaart, cadeau op de middelste.</p><div class="bron">custom.upgrade_products</div></div><div class="rt"><em class="kern">kern</em><em class="af">getekend</em><span class="gr">donker</span></div></div><div class="blok"><span class="grond zand"></span><span class="nr">07</span><div class="mid"><b>De film</b><p>E&eacute;n liggende video op volle breedte, met drie tijdmarkeringen eronder. Staat n&aacute; het aanbod: vijftig seconden vraag je pas als iemand al bijna om is.</p><div class="bron">custom.product_film &middot; nieuw</div></div><div class="rt"><em class="uit">uitbreiding</em><em class="af">getekend</em><span class="gr">zand</span></div></div><div class="blok"><span class="grond wit"></span><span class="nr">08</span><div class="mid"><b>Toepassing per zone</b><p>Rooster van zones met beeld per zone. Welke plekken dit apparaat aankan.</p><div class="bron">custom.use_case_title · image_with_text</div></div><div class="rt"><em class="uit">uitbreiding</em><em class="todo">nog te tekenen</em><span class="gr">wit</span></div></div><div class="blok"><span class="grond zand"></span><span class="nr">09</span><div class="mid"><b>Zie precies waar je trimt</b><p>E&eacute;n beeld, &eacute;&eacute;n claim, volle breedte. De functie die dit model onderscheidt.</p><div class="bron">custom.image_with_text</div></div><div class="rt"><em class="uit">uitbreiding</em><em class="todo">nog te tekenen</em><span class="gr">zand</span></div></div><div class="blok"><span class="grond wit"></span><span class="nr">10</span><div class="mid"><b>Vergelijk de modellen</b><p>Tabel, wij gemarkeerd, kolom per model. Telt zwaarder naarmate de markt volwassener is.</p><div class="bron">custom.compare_table · compare_products</div></div><div class="rt"><em class="uit">uitbreiding</em><em class="todo">nog te tekenen</em><span class="gr">wit</span></div></div><div class="blok"><span class="grond donker"></span><span class="nr">11</span><div class="mid"><b>Wat kost het je per jaar</b><p>Jouw mesjes tegen die van de concurrent, per jaar. De eerlijke rekensom.</p><div class="bron">custom.yearly_cost <span class="nw">nieuw</span></div></div><div class="rt"><em class="uit">uitbreiding</em><em class="todo">nog te tekenen</em><span class="gr">donker</span></div></div><div class="blok"><span class="grond zand"></span><span class="nr">12</span><div class="mid"><b>Wat zit er in de doos</b><p>Uitgestald op &eacute;&eacute;n vlak, met bijschrift per onderdeel.</p><div class="bron">custom.included_box · included_box_image</div></div><div class="rt"><em class="kern">kern</em><em class="todo">nog te tekenen</em><span class="gr">zand</span></div></div><div class="blok"><span class="grond wit"></span><span class="nr">13</span><div class="mid"><b>Waarom Wellshave</b><p>Vier beloftes plus het bestelaantal met bronlabel. Winkelbreed.</p><div class="bron">sectie-instelling</div></div><div class="rt"><em class="kern">kern</em><em class="todo">nog te tekenen</em><span class="gr">wit</span></div></div><div class="blok"><span class="grond zand"></span><span class="nr">14</span><div class="mid"><b>Omschrijving en specificaties</b><p>E&eacute;n blad: betoog links op de leesmaat, specificatietabel rechts in een wit vlak.</p><div class="bron">product.descriptionHtml · custom.specification</div></div><div class="rt"><em class="kern">kern</em><em class="af">getekend</em><span class="gr">zand</span></div></div><div class="blok"><span class="grond wit"></span><span class="nr">15</span><div class="mid"><b>Verzending &amp; retour</b><p>Uitklappers, drie stuks. Winkelbreed.</p><div class="bron">custom.shipping_information</div></div><div class="rt"><em class="kern">kern</em><em class="todo">nog te tekenen</em><span class="gr">wit</span></div></div><div class="blok"><span class="grond zand"></span><span class="nr">16</span><div class="mid"><b>Veelgestelde vragen</b><p>Uitklappers, bezwaar-eerst gesorteerd.</p><div class="bron">custom.faq</div></div><div class="rt"><em class="kern">kern</em><em class="todo">nog te tekenen</em><span class="gr">zand</span></div></div><div class="blok"><span class="grond donker"></span><span class="nr">17</span><div class="mid"><b>Maak het compleet</b><p>Vijf accessoires naast elkaar. De aanvulling, niet de ladder.</p><div class="bron">custom.cart_upsell</div></div><div class="rt"><em class="uit">uitbreiding</em><em class="af">getekend</em><span class="gr">donker</span></div></div><div class="blok"><span class="grond donker"></span><span class="nr">18</span><div class="mid"><b>Afsluiter</b><p>Mini-koopblok: kop, prijs, knop, bewijsregel, betaalrij. Erft alles uit blok 01.</p><div class="bron">&mdash;</div></div><div class="rt"><em class="kern">kern</em><em class="todo">nog te tekenen</em><span class="gr">donker</span></div></div></div>
-<div class="note" style="margin-top:26px"><h4>Twee regels die de volgorde overeind houden</h4><p><strong>Kernblokken zijn verplicht, uitbreidingen verbergen zich.</strong> Een kernblok zonder inhoud is een gat in het betoog en moet dus gevuld. Een uitbreiding die leeg is, rendert niet &mdash; en de blokken eronder schuiven gewoon op. Voor een vervangmes van &euro;14,95 valt zo de halve pagina weg zonder dat er iets kapotgaat.</p><p><strong>De grond wisselt om beurten.</strong> Zand, wit, donker &mdash; nooit twee dezelfde achter elkaar behalve waar twee donkere blokken bewust aan elkaar plakken (17 en 18, de afsluiting). Dat ritme is het enige dat een bezoeker vertelt dat hij een nieuw argument in gaat, zonder dat er een streep of een kop voor nodig is.</p></div>
+<div class="stapel"><div class="blok"><span class="grond wit"></span><span class="nr">02</span><div class="mid"><b>Geruststrook</b><p>Vier items naast elkaar: proberen, garantie, verzending, levertijd. Winkelbreed, op elk product hetzelfde.</p><div class="bron">custom.store_usp</div></div><div class="rt"><em class="kern">kern</em><em class="todo">nog te tekenen</em><span class="gr">wit</span></div></div><div class="blok"><span class="grond donker"></span><span class="nr">03</span><div class="mid"><b>UGC-video&rsquo;s</b><p>Band van verticale video&rsquo;s met de koopstrook eronder. Meteen na de geruststrook, want een vijfde van het verkeer komt uit een app.</p><div class="bron">custom.ugc_videos &middot; nieuw</div></div><div class="rt"><em class="uit">uitbreiding</em><em class="af">getekend</em><span class="gr">donker</span></div></div><div class="blok"><span class="grond zand"></span><span class="nr">04</span><div class="mid"><b>Veilig trimmen waar het telt</b><p>Herkadering eerst, mechanisme daarna. E&eacute;n kop, twee zinnen, de foto met drie bijschriften.</p><div class="bron">custom.image_with_text</div></div><div class="rt"><em class="kern">kern</em><em class="af">getekend</em><span class="gr">zand</span></div></div><div class="blok"><span class="grond wit"></span><span class="nr">05</span><div class="mid"><b>Toepassing per zone</b><p>Rooster van zones met beeld per zone. Neemt het oude blok &laquo;zie precies waar je trimt&raquo; in zich op.</p><div class="bron">custom.use_case_title &middot; image_with_text</div></div><div class="rt"><em class="uit">uitbreiding</em><em class="todo">nog te tekenen</em><span class="gr">wit</span></div></div><div class="blok"><span class="grond donker"></span><span class="nr">06</span><div class="mid"><b>Het aanbodblok</b><p>Drie kaarten: instap, uitgelicht, beste waarde. Besparing op elke kaart, cadeau op de middelste.</p><div class="bron">custom.upgrade_products</div></div><div class="rt"><em class="kern">kern</em><em class="af">getekend</em><span class="gr">donker</span></div></div><div class="blok"><span class="grond zand"></span><span class="nr">07</span><div class="mid"><b>Vergelijk de modellen</b><p>Tabel, wij gemarkeerd, kolom per model. De jaarkosten van mesjes worden hier een rij in plaats van een eigen blok.</p><div class="bron">custom.compare_table &middot; compare_products &middot; yearly_cost</div></div><div class="rt"><em class="uit">uitbreiding</em><em class="todo">nog te tekenen</em><span class="gr">zand</span></div></div><div class="blok"><span class="grond wit"></span><span class="nr">08</span><div class="mid"><b>Maak het compleet</b><p>Vijf accessoires naast elkaar. De aanvulling, niet de ladder.</p><div class="bron">custom.cart_upsell</div></div><div class="rt"><em class="uit">uitbreiding</em><em class="af">getekend</em><span class="gr">wit</span></div></div><div class="blok"><span class="grond zand"></span><span class="nr">09</span><div class="mid"><b>Beoordelingen</b><p>De Trustpilot-muur met de sterrenverdeling. Op plek negen, want het korte bewijs staat al in het koopvak en in blok 03.</p><div class="bron">Trustpilot-widget</div></div><div class="rt"><em class="kern">kern</em><em class="af">getekend</em><span class="gr">zand</span></div></div><div class="blok"><span class="grond wit"></span><span class="nr">10</span><div class="mid"><b>Veelgestelde vragen</b><p>Uitklappers, bezwaar-eerst gesorteerd. Het laatste blok; daarna alleen nog de voettekst en de plakkende koopbalk.</p><div class="bron">custom.faq</div></div><div class="rt"><em class="kern">kern</em><em class="todo">nog te tekenen</em><span class="gr">wit</span></div></div></div>
+<div class="note" style="margin-top:26px"><h4>Twee regels die de volgorde overeind houden</h4><p><strong>Kernblokken zijn verplicht, uitbreidingen verbergen zich.</strong> Een kernblok zonder inhoud is een gat in het betoog en moet dus gevuld. Een uitbreiding die leeg is, rendert niet &mdash; en de blokken eronder schuiven gewoon op. Voor een vervangmes van &euro;14,95 valt zo de halve pagina weg zonder dat er iets kapotgaat.</p><p><strong>De grond wisselt om beurten.</strong> Zand, wit, donker &mdash; nooit twee dezelfde achter elkaar behalve waar twee donkere blokken bewust aan elkaar plakken (er staan er nu nergens twee dezelfde achter elkaar). Dat ritme is het enige dat een bezoeker vertelt dat hij een nieuw argument in gaat, zonder dat er een streep of een kop voor nodig is.</p></div>
 
 <div class="held">
   <span class="eyebrow">De heldentoets &middot; 24 augustus 2026</span>
   <h3>Wie staat er centraal,<b>jij of wij?</b></h3>
-  <p class="lede2">Donald Millers uitgangspunt is dat de klant de held is en het merk de gids. Hieronder staat per blok wie er centraal staat. <strong>Twaalf blokken gaan over jou, zes over ons.</strong> Dat is op zichzelf geen slechte verhouding &mdash; maar kijk waar de zes staan.</p>
-  <div class="held-net"><span class="held-chip jij" title="Koopblok"><b>01</b><span>jij</span></span><span class="held-chip jij" title="Geruststrook"><b>02</b><span>jij</span></span><span class="held-chip jij" title="UGC-band"><b>03</b><span>jij</span></span><span class="held-chip jij" title="Mechanisme"><b>04</b><span>jij</span></span><span class="held-chip jij" title="Beoordelingen"><b>05</b><span>jij</span></span><span class="held-chip jij" title="Aanbodblok"><b>06</b><span>jij</span></span><span class="held-chip wij" title="De film"><b>07</b><span>wij</span></span><span class="held-chip jij" title="Zones"><b>08</b><span>jij</span></span><span class="held-chip wij" title="Zie waar je trimt"><b>09</b><span>wij</span></span><span class="held-chip jij" title="Vergelijken"><b>10</b><span>jij</span></span><span class="held-chip jij" title="Jaarkosten"><b>11</b><span>jij</span></span><span class="held-chip wij" title="In de doos"><b>12</b><span>wij</span></span><span class="held-chip wij" title="Waarom Wellshave"><b>13</b><span>wij</span></span><span class="held-chip wij" title="Specificaties"><b>14</b><span>wij</span></span><span class="held-chip jij" title="Verzending"><b>15</b><span>jij</span></span><span class="held-chip jij" title="FAQ"><b>16</b><span>jij</span></span><span class="held-chip wij" title="Maak compleet"><b>17</b><span>wij</span></span><span class="held-chip jij" title="Afsluiter"><b>18</b><span>jij</span></span></div>
+  <p class="lede2">Donald Millers uitgangspunt is dat de klant de held is en het merk de gids. Hieronder staat per blok wie er centraal staat. Van de achttien blokken gingen er zes over ons; van de tien die overblijven is dat er nog <strong>&eacute;&eacute;n</strong>. Dat is geen toeval: de blokken die zijn weggevouwen waren bijna allemaal de blokken over onszelf.</p>
+  <div class="held-net"><span class="held-chip jij" title="Koopblok"><b>01</b><span>jij</span></span><span class="held-chip jij" title="Geruststrook"><b>02</b><span>jij</span></span><span class="held-chip jij" title="UGC-video’s"><b>03</b><span>jij</span></span><span class="held-chip jij" title="Veilig trimmen"><b>04</b><span>jij</span></span><span class="held-chip jij" title="Zones"><b>05</b><span>jij</span></span><span class="held-chip jij" title="Aanbodblok"><b>06</b><span>jij</span></span><span class="held-chip jij" title="Vergelijken"><b>07</b><span>jij</span></span><span class="held-chip wij" title="Maak compleet"><b>08</b><span>wij</span></span><span class="held-chip jij" title="Beoordelingen"><b>09</b><span>jij</span></span><span class="held-chip jij" title="FAQ"><b>10</b><span>jij</span></span></div>
   <div class="held-uit"><span><i class="j"></i>gaat over de klant</span><span><i class="w"></i>gaat over ons</span></div>
 
   <div class="note warn">
@@ -3655,34 +3735,36 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
   </div>
 
   <div class="note win">
+    <h4>Van achttien naar tien, en waar de acht gebleven zijn</h4>
+    <p>Er is niets geschrapt wat een bezwaar wegnam. Vier blokken zijn <strong>accordeons in het koopvak</strong> geworden: omschrijving en specificaties, wat er in de doos zit, verzending en retour, garantie. Ze staan nu bovenaan in plaats van op plek twaalf tot vijftien, maar dichtgeklapt &mdash; wie ze nodig heeft vindt ze meteen, wie ze niet nodig heeft scrolt er niet doorheen. Dat is precies wat vijf van de zes concurrentiepagina&rsquo;s doen.</p>
+    <p>De rest: <em>zie waar je trimt</em> gaat op in de zones (05), de <em>jaarkosten van mesjes</em> worden een rij in de vergelijkingstabel (07), <em>Waarom Wellshave</em> vervalt, en de <em>afsluiter</em> wordt de plakkende koopbalk &mdash; die staat er de hele pagina al.</p>
+  </div>
+
+  <div class="note win">
     <h4>Wat er in blok 04 is gebeurd</h4>
-    <p>Van <strong>189 woorden naar 35</strong>. Niet door te schrappen in het argument, maar door te ontdekken dat twee van de vijf onderdelen ergens anders al stonden: de Trustpilot-kaart deed het werk van blok 05 nog eens over (met dezelfde review van Yven), en de garantiestrook deed dat van blok 02. Weg. Ook de kolom met 01-02-03 en de resultaatbalk eruit.</p>
+    <p>Van <strong>189 woorden naar 35</strong>. Niet door te schrappen in het argument, maar door te ontdekken dat twee van de vijf onderdelen ergens anders al stonden: de Trustpilot-kaart deed het werk van het beoordelingenblok nog eens over (met dezelfde review van Yven), en de garantiestrook dat van blok 02. Weg. Ook de kolom met 01-02-03 en de resultaatbalk eruit.</p>
     <p>Wat overblijft is de foto met drie bijschriften, &eacute;&eacute;n kop en twee zinnen. En de kop is omgedraaid: hij begon met <em>&laquo;De techniek achter Groom Guard PRO&raquo;</em> en begint nu met <strong>&laquo;Het lag nooit aan jou&raquo;</strong>. Dat is het verschil tussen de gids die zijn diploma laat zien en de gids die eerst zegt dat hij je begrijpt.</p>
   </div>
 
   <div class="note slecht">
-    <h4>Blok 13 heet letterlijk &laquo;Waarom Wellshave&raquo;</h4>
-    <p>In Millers opzet is dat de duidelijkste fout die je kunt maken: het merk dat zichzelf tot held bombardeert. Het blok is nog niet getekend, dus dit is het goedkoopste moment om er iets aan te doen. Twee opties: schrappen &mdash; de vier beloftes erin staan grotendeels al in blok 02 &mdash; of omdopen naar wat de klant eraan h&eacute;&eacute;ft, bijvoorbeeld &laquo;Wat er gebeurt als het niet bevalt&raquo;.</p>
-    <p>De andere vijf &laquo;wij&raquo;-blokken (07, 09, 12, 14, 17) staan bijna allemaal achteraan, en dat is verdedigbaar: wie zo ver komt, wil de details. Blok 13 staat op plek dertien tussen twee klantblokken in en breekt de lijn.</p>
-  </div>
-
-  <div class="note slecht">
     <h4>Nergens staat wat het kost om niets te doen</h4>
-    <p>Miller heeft een <em>failure</em>-kant: wat gaat er mis als je niet handelt. Onze achttien blokken hebben die niet. Blok 11 komt het dichtst in de buurt, maar gaat over geld, niet over sneetjes. De kennisbank zegt hetzelfde vanuit een andere hoek: verlies voelt ongeveer twee keer zo zwaar als winst.</p>
-    <p>Dat hoeft geen negentiende blok te worden &mdash; dat zou de fout zijn die je net aanwees. E&eacute;n zin volstaat, en de logische plek is de lead van blok 04, waar de bezoeker net heeft gelezen dat het nooit aan hem lag.</p>
+    <p>Miller heeft een <em>failure</em>-kant: wat gaat er mis als je niet handelt. Onze tien blokken hebben die niet. De jaarkostenrij in blok 07 komt het dichtst in de buurt, maar gaat over geld, niet over sneetjes. De kennisbank zegt hetzelfde vanuit een andere hoek: verlies voelt ongeveer twee keer zo zwaar als winst.</p>
+    <p>Dat mag geen elfde blok worden &mdash; dat zou de fout zijn die je net aanwees. E&eacute;n zin volstaat, en de logische plek is de lead van blok 04, waar de bezoeker net heeft gelezen dat het nooit aan hem lag.</p>
   </div>
 
   <div class="note warn">
     <h4>Het resultaat staat nergens in beeld</h4>
-    <p>Dit is de scherpste bevinding uit de kennisbank zelf. Marks beeldcarrousel zet <strong>voor/na op plek twee</strong>, met de opmerking dat niets zo goed verkoopt. Wij hebben het mechanisme (blok 04), het bewijs (03 en 05) en het aanbod (06) &mdash; maar de bezoeker ziet nergens hoe het er&aacute;na uitziet.</p>
-    <p>Voorwaarde: dat moet een echte foto zijn. Een gegenereerd voor/na is een verzonnen resultaat, en dat is precies de grens die de merklaag trekt tussen illustreren en bewijs fabriceren.</p>
+    <p>Dit is de scherpste bevinding uit de kennisbank zelf. Marks beeldcarrousel zet <strong>voor/na op plek twee</strong>, met de opmerking dat niets zo goed verkoopt. Wij hebben het mechanisme (04), het bewijs (03 en 09) en het aanbod (06) &mdash; maar de bezoeker ziet nergens hoe het er&aacute;na uitziet.</p>
+    <p>De goedkoopste plek is de gallerij in blok 01, niet een nieuw blok. Voorwaarde: het moet een echte foto zijn. Een gegenereerd voor/na is een verzonnen resultaat, en dat is precies de grens die de merklaag trekt tussen illustreren en bewijs fabriceren.</p>
   </div>
 
   <div class="note">
-    <h4>En de vraag die je zelf stelde: zijn achttien blokken niet te veel</h4>
-    <p>Bij 27,52% scrolldiepte is het antwoord waarschijnlijk ja. Tien van de achttien zijn nog niet getekend, en dat is het moment om per blok te vragen: welk bezwaar haalt dit weg? Kan ik dat nergens beantwoorden, dan hoort het blok er niet.</p>
-    <p>Mijn eigen verdenking, en het is niet meer dan dat: <strong>09 (zie waar je trimt) en 12 (in de doos) kunnen op in 14</strong>, en <strong>13 kan weg</strong>. Dan staan er vijftien. Dat is geen ontwerpbeslissing die ik in mijn eentje moet nemen, want het raakt de vier regels waar dit sjabloon op staat.</p>
+    <h4>Tien is geen willekeurig getal</h4>
+    <p>De zes concurrentiepagina&rsquo;s die we naast elkaar hebben gelegd tellen 10, 8, 8, 6, 8 en 10 blokken onder de vouw. Gemiddeld 8,3, en <strong>geen enkele komt boven de tien</strong>. Wij zaten op zeventien. Bij een scrolldiepte van 27,52% was dat niet vol te houden.</p>
+    <p>Wat buiten de tien valt en nog wel getekend is: <strong>de film in 16:9</strong>. Die is af, maar hij past er niet bij in zonder dat er iets anders uit moet. Dat is jouw keuze, niet de mijne &mdash; de eerlijke afweging is de film tegen de zones (05), want dat zijn de twee blokken die hetzelfde doen: laten zien hoe het apparaat gebruikt wordt.</p>
   </div>
+</div>
+
 </div>
 
 </div>
@@ -3695,7 +3777,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
   <h2>E&eacute;n structuur,<br>dertig producten</h2>
   <p class="lede">Niet per product ontwerpen. E&eacute;n skelet dat voor elk product hetzelfde is &mdash; boven &eacute;n onder de vouw &mdash; waar alleen de inhoud per product verschilt. Dit is dat skelet, de regels die het overeind houden, en de volgorde waarin het gebouwd wordt.</p>
   <div class="chips">
-    <span class="chip">18 blokken</span>
+    <span class="chip">10 blokken</span>
     <span class="chip">30 producten · 93% van de omzet</span>
     <span class="chip">10 sjablonen nu → 1</span>
     <span class="chip">21 bestaande metafields</span>
@@ -3729,7 +3811,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
   <div class="cls">
     <div class="cbox k">
       <h4>Apparaat</h4>
-      <div class="cnt">alle 18 blokken</div>
+      <div class="cnt">alle 10 blokken</div>
       <p>Alles met een motor en een mes. Hier draait het volledige betoog: mechanisme, vergelijking, jaarkosten, specificaties.</p>
       <ul><li>Groom Guard &amp; PRO</li><li>Flex Guard 3-in-1</li><li>Gentleman Shaver</li><li>Men Shaper-lijn</li><li>Tondeuses, neustrimmers</li></ul>
     </div>
@@ -3756,14 +3838,16 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
 
 <section id="plan-3">
   <div class="shead"><span class="snum">03</span><h2 class="duo">Het skelet, blok voor blok,<span class="b">met de bron per blok.</span></h2></div>
-  <p class="sintro">Zeventien blokken. Wat vastligt is de vorm en de plek; wat verschilt is de inhoud in de rechterkolom. «Kern» betekent verplicht vullen, «uitbreiding» betekent: leeg is weg, maar de rest verschuift niet.</p>
+  <p class="sintro">Tien blokken, met vier accordeons in blok 01. Geen van de zes concurrentiepagina&rsquo;s die we naast elkaar legden komt boven de tien; wij zaten op zeventien. Wat vastligt is de vorm en de plek; wat verschilt is de inhoud in de rechterkolom. «Kern» betekent verplicht vullen, «uitbreiding» betekent: leeg is weg, maar de rest verschuift niet.</p>
 
   <div class="tw">
     <table>
       <thead><tr><th>&nbsp;</th><th>Blok</th><th>Wat vastligt</th><th>Wat per product verschilt</th><th>Bron</th><th>Klasse</th><th>Grond</th></tr></thead>
       <tbody>
         <tr class="fold"><td colspan="7">Boven de vouw</td></tr>
-        <tr><td class="i">01</td><td><b>Koopblok</b><br>gallerij + tien slots</td><td>De tien slots, hun volgorde, de knop, de risicostrook. Vijf uitgeklapte thumbnails.</td><td>Citaat, titel, belofte, prijs, USP's, beeld</td><td><code>custom.buybox_quote</code><br><code>custom.hero_promise</code><br><code>custom.product_usp</code><br><code>custom.risk_strip</code></td><td><span class="pill kern">kern</span></td><td class="g zand">zand</td></tr><tr><td class="i">02</td><td><b>Geruststrook</b></td><td>Vier items naast elkaar, rond icoonvlak, vette regel plus onderregel</td><td>Niets &mdash; winkelbreed en identiek</td><td><code>custom.store_usp</code></td><td><span class="pill kern">kern</span></td><td class="g wit">wit</td></tr><tr><td class="i">03</td><td><b>UGC-video's</b></td><td>Band van verticale video&rsquo;s, horizontaal te vegen</td><td>Andere mensen, meteen &mdash; in het formaat waar Meta-verkeer net vandaan komt</td><td><code>custom.ugc_videos</code></td><td><span class="pill uit">uitbreiding</span></td><td class="g wit">donker</td></tr><tr><td class="i">04</td><td><b>Waarom dit werkt</b><br>mechanisme</td><td>Herkadering eerst, techniek daarna. Beeld links, betoog rechts.</td><td>Het mechanisme van dit product</td><td><code>custom.image_with_text</code></td><td><span class="pill kern">kern</span></td><td class="g donker">donker</td></tr><tr><td class="i">05</td><td><b>Bewijs</b></td><td>Muur van reviews, geen carrousel. Score en aantal live gebonden. Zonder foto's — die heeft Trustpilot niet.</td><td>Niets — winkelbreed</td><td>Trustpilot-widget</td><td><span class="pill kern">kern</span></td><td class="g wit">wit</td></tr><tr><td class="i">06</td><td><b>Het aanbodblok</b><br>drie kaarten</td><td>Drie kaarten, nooit meer, nooit als lijst. Instap / uitgelicht / beste waarde. Besparing op elke kaart.</td><td>Welke drie producten de ladder vormen</td><td><code>custom.upgrade_products</code><br>live prijzen</td><td><span class="pill kern">kern</span></td><td class="g donker">donker</td></tr><tr><td class="i">07</td><td>De film</td><td>E&eacute;n liggende video, volle breedte, drie tijdmarkeringen</td><td>Vijftig seconden vraag je pas als iemand al bijna om is</td><td><code>custom.product_film</code></td><td>uitbreiding</td><td class="g zand">zand</td></tr><tr><td class="i">08</td><td><b>Toepassing per zone</b></td><td>Rooster van zones met beeld per zone</td><td>Welke zones dit product aankan</td><td><code>custom.use_case_title</code><br><code>custom.image_with_text</code></td><td><span class="pill uit">uitbreiding</span></td><td class="g zand">zand</td></tr><tr><td class="i">09</td><td><b>Zie waar je trimt</b></td><td>E&eacute;n beeld, &eacute;&eacute;n claim, volle breedte</td><td>De functie die dit product onderscheidt</td><td><code>custom.image_with_text</code></td><td><span class="pill uit">uitbreiding</span></td><td class="g zand">zand</td></tr><tr><td class="i">10</td><td><b>Vergelijk de modellen</b></td><td>Tabel, wij gemarkeerd, kolom per model</td><td>Welke modellen vergeleken worden</td><td><code>custom.compare_table</code><br><code>custom.compare_products</code></td><td><span class="pill uit">uitbreiding</span></td><td class="g wit">wit</td></tr><tr><td class="i">11</td><td><b>Wat kost het je per jaar</b></td><td>Jouw mesjes tegen die van de concurrent, per jaar</td><td>Het verbruiksartikel bij dit product</td><td><code>custom.yearly_cost</code> <span class="pill nieuw">nieuw</span></td><td><span class="pill uit">uitbreiding</span></td><td class="g donker">donker</td></tr><tr><td class="i">12</td><td><b>Wat zit er in de doos</b></td><td>Uitgestald op &eacute;&eacute;n vlak, met bijschrift per onderdeel</td><td>De inhoud</td><td><code>custom.included_box</code><br><code>custom.included_box_image</code></td><td><span class="pill kern">kern</span></td><td class="g zand">zand</td></tr><tr><td class="i">13</td><td><b>Waarom Wellshave</b></td><td>Vier beloftes plus het bestelaantal met bronlabel</td><td>Niets &mdash; winkelbreed</td><td>sectie-instelling</td><td><span class="pill kern">kern</span></td><td class="g wit">wit</td></tr><tr><td class="i">14</td><td><b>Omschrijving en specificaties</b><br>&eacute;&eacute;n blad</td><td>Betoog links op de leesmaat, tabel rechts in een wit vlak. Eén leadzin, drie &laquo;waarom&raquo;-koppen, afsluitregel. Elke belofte links heeft een regel rechts.</td><td>De tekst en de specificaties</td><td><code>product.descriptionHtml</code><br><code>custom.specification</code></td><td><span class="pill kern">kern</span></td><td class="g zand">zand</td></tr><tr><td class="i">15</td><td><b>Verzending &amp; retour</b></td><td>Uitklappers, drie stuks</td><td>Niets &mdash; winkelbreed</td><td><code>custom.shipping_information</code></td><td><span class="pill kern">kern</span></td><td class="g wit">wit</td></tr><tr><td class="i">16</td><td><b>Veelgestelde vragen</b></td><td>Uitklappers, bezwaar-eerst gesorteerd</td><td>De vragen</td><td><code>custom.faq</code></td><td><span class="pill kern">kern</span></td><td class="g zand">zand</td></tr><tr><td class="i">17</td><td><b>Maak het compleet</b><br>accessoires</td><td>Vijf compacte kaarten naast elkaar, foto, naam, prijs, &laquo;+ toevoegen&raquo;. De aanvulling, niet de ladder.</td><td>Welke accessoires erbij horen</td><td><code>custom.cart_upsell</code></td><td><span class="pill uit">uitbreiding</span></td><td class="g donker">donker</td></tr><tr><td class="i">18</td><td><b>Afsluiter</b></td><td>Mini-koopblok: kop, prijs, knop, bewijsregel, betaalrij</td><td>Erft alles uit blok 01</td><td>&mdash;</td><td><span class="pill kern">kern</span></td><td class="g donker">donker</td></tr>
+        <tr><td class="i">01</td><td><b>Koopblok</b><br>gallerij, koopvak, vier accordeons</td><td>De slots, hun volgorde, de knop, de risicostrook. Onderin vier dichtgeklapte accordeons: omschrijving &amp; specificaties, in de doos, verzending &amp; retour, garantie.</td><td>Citaat, titel, belofte, prijs, USP&rsquo;s, beeld, specificaties, doosinhoud</td><td><code>custom.buybox_quote</code><br><code>custom.hero_promise</code><br><code>custom.product_usp</code><br><code>custom.specification</code><br><code>custom.included_box</code><br><code>custom.shipping_information</code></td><td><span class="pill kern">kern</span></td><td class="g zand">zand</td></tr>
+        <tr class="fold"><td colspan="7">Onder de vouw</td></tr>
+        <tr><td class="i">02</td><td><b>Geruststrook</b></td><td>Vier items naast elkaar, rond icoonvlak, vette regel plus onderregel</td><td>Niets &mdash; winkelbreed en identiek</td><td><code>custom.store_usp</code></td><td><span class="pill kern">kern</span></td><td class="g wit">wit</td></tr><tr><td class="i">03</td><td><b>UGC-video&rsquo;s</b></td><td>Band van verticale video&rsquo;s, horizontaal te vegen, koopstrook eronder</td><td>Welke video&rsquo;s bij dit product horen</td><td><code>custom.ugc_videos</code> <span class="pill nieuw">nieuw</span></td><td><span class="pill uit">uitbreiding</span></td><td class="g donker">donker</td></tr><tr><td class="i">04</td><td><b>Veilig trimmen waar het telt</b><br>mechanisme</td><td>Herkadering eerst, mechanisme daarna. E&eacute;n kop, twee zinnen, &eacute;&eacute;n foto met drie bijschriften.</td><td>De foto en de drie bijschriften</td><td><code>custom.image_with_text</code></td><td><span class="pill kern">kern</span></td><td class="g zand">zand</td></tr><tr><td class="i">05</td><td><b>Toepassing per zone</b></td><td>Rooster van zones met beeld per zone. Neemt &laquo;zie waar je trimt&raquo; in zich op.</td><td>Welke zones dit product aankan</td><td><code>custom.use_case_title</code><br><code>custom.image_with_text</code></td><td><span class="pill uit">uitbreiding</span></td><td class="g wit">wit</td></tr><tr><td class="i">06</td><td><b>Het aanbodblok</b><br>drie kaarten</td><td>Drie kaarten, nooit meer, nooit als lijst. Instap / uitgelicht / beste waarde. Besparing op elke kaart.</td><td>Welke drie producten de ladder vormen</td><td><code>custom.upgrade_products</code><br>live prijzen</td><td><span class="pill kern">kern</span></td><td class="g donker">donker</td></tr><tr><td class="i">07</td><td><b>Vergelijk de modellen</b></td><td>Tabel, wij gemarkeerd, kolom per model. De jaarkosten van mesjes zijn hier een rij.</td><td>Welke modellen vergeleken worden</td><td><code>custom.compare_table</code><br><code>custom.compare_products</code><br><code>custom.yearly_cost</code> <span class="pill nieuw">nieuw</span></td><td><span class="pill uit">uitbreiding</span></td><td class="g zand">zand</td></tr><tr><td class="i">08</td><td><b>Maak het compleet</b><br>accessoires</td><td>Vijf compacte kaarten naast elkaar: foto, naam, prijs, &laquo;+ toevoegen&raquo;. De aanvulling, niet de ladder.</td><td>Welke accessoires erbij horen</td><td><code>custom.cart_upsell</code></td><td><span class="pill uit">uitbreiding</span></td><td class="g wit">wit</td></tr><tr><td class="i">09</td><td><b>Beoordelingen</b></td><td>Muur van reviews, geen carrousel. Score en aantal live gebonden. Zonder foto&rsquo;s &mdash; die heeft Trustpilot niet.</td><td>Niets &mdash; winkelbreed</td><td>Trustpilot-widget</td><td><span class="pill kern">kern</span></td><td class="g zand">zand</td></tr><tr><td class="i">10</td><td><b>Veelgestelde vragen</b></td><td>Uitklappers, bezwaar-eerst gesorteerd. Het laatste blok; daaronder alleen de voettekst en de plakkende koopbalk.</td><td>De vragen</td><td><code>custom.faq</code></td><td><span class="pill kern">kern</span></td><td class="g wit">wit</td></tr>
       </tbody>
     </table>
   </div>
@@ -3776,9 +3860,9 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
   </div>
 
   <div class="note warn">
-    <h4>Blok 05 krijgt er een verdieping bij</h4>
+    <h4>Blok 04 krijgt er een verdieping bij</h4>
     <p>Uit het advertentieonderzoek: de best schalende creatives van Balzac (152.219 bereik, actief) en Balzy (94.223) openen allebei met een <strong>categorie-herkadering</strong> &mdash; «stop met scheren, begin met trimmen» &mdash; en niet met techniek. Op hun eigen sites doet niemand dat.</p>
-    <p>Blok 05 begint daarom met die beweging en pas daarna met de keramische kop. Herkadering eerst, mechanisme tweede. Dat is het gat in deze markt en het staat nu leeg.</p>
+    <p>Blok 04 begint daarom met die beweging en pas daarna met de keramische kop. Herkadering eerst, mechanisme tweede. Dat is het gat in deze markt en het staat nu leeg.</p>
   </div>
 </section>
 
@@ -3793,11 +3877,11 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
         <tr><td><code>custom.buybox_quote</code><br><code>custom.buybox_quote_author</code></td><td>single_line_text</td><td>Slot 1 van het koopblok</td><td><span class="pill nieuw">aanmaken</span></td></tr>
         <tr><td><code>custom.hero_promise</code></td><td>single_line_text</td><td>Slot 3, vervangt de ondertitel boven de vouw</td><td><span class="pill nieuw">aanmaken</span></td></tr>
         <tr><td><code>custom.risk_strip</code></td><td>list.single_line_text</td><td>Slot 8, onder de knop</td><td><span class="pill nieuw">aanmaken</span></td></tr>
-        <tr><td><code>custom.yearly_cost</code></td><td>metaobject_reference</td><td>Blok 09, de jaarkosten</td><td><span class="pill nieuw">aanmaken</span></td></tr>
+        <tr><td><code>custom.yearly_cost</code></td><td>metaobject_reference</td><td>Blok 07, de jaarkostenrij in de vergelijkingstabel</td><td><span class="pill nieuw">aanmaken</span></td></tr>
         <tr><td>&mdash;</td><td>&mdash;</td><td>Slot 10, de betaalrij &mdash; komt uit <code>shop.enabled_payment_types</code>, geen metafield nodig</td><td><span class="pill uit">bestaat al</span></td></tr>
         <tr><td><code>custom.product_offer</code></td><td>metaobject_reference</td><td>Slot 7, de cadeaubalk &mdash; wijst naar de bestaande definitie <code>limited_offer</code></td><td><span class="pill nieuw">aanmaken</span></td></tr>
         <tr><td><code>custom.product_usp</code></td><td>list.single_line_text</td><td>Slot 6 &mdash; bestaat, maar moet herschreven</td><td>herschrijven</td></tr>
-        <tr><td><code>compare_table</code> · <code>included_box</code> · <code>image_with_text</code> · <code>ugc_video_list</code> · <code>specification</code> · <code>faq</code> · <code>store_usp</code> · <code>upgrade_products</code> · <code>cart_upsell</code> · <code>use_case_title</code></td><td>diverse</td><td>Blok 02 t/m 15</td><td>staan gevuld</td></tr>
+        <tr><td><code>compare_table</code> · <code>included_box</code> · <code>image_with_text</code> · <code>ugc_video_list</code> · <code>specification</code> · <code>faq</code> · <code>store_usp</code> · <code>upgrade_products</code> · <code>cart_upsell</code> · <code>use_case_title</code></td><td>diverse</td><td>Blok 01 t/m 10</td><td>staan gevuld</td></tr>
       </tbody>
     </table>
   </div>
@@ -3828,7 +3912,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
       <div class="lab">Fase 2<br>sjabloon</div>
       <div class="body">
         <b>Het skelet bouwen, op &eacute;&eacute;n product</b>
-        <p>Bouw de achttien blokken als Liquid-secties op de Groom Guard PRO, in het testthema. Volg de conventies uit de homepage-tak: <code>ws-</code>-prefix, padding via <code>indent-settings</code>, mobiel op 749px, alle teksten als sectie-instelling.</p>
+        <p>Bouw de tien blokken als Liquid-secties op de Groom Guard PRO, in het testthema. Volg de conventies uit de homepage-tak: <code>ws-</code>-prefix, padding via <code>indent-settings</code>, mobiel op 749px, alle teksten als sectie-instelling.</p>
         <ul>
           <li>Vijf nieuwe metafields aanmaken en op de PRO vullen</li>
           <li>Blok 01 staat er al als ontwerp &mdash; die eerst</li>
@@ -3873,9 +3957,9 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
 
   <div class="note warn">
     <h4>Drie dingen waar ik geen data voor heb</h4>
-    <p><strong>Scrolldiepte.</strong> De volgorde in deel 03 rust op de concurrentievergelijking, de PDP-anatomie uit de skill en je eigen VoC-dossier &mdash; niet op hoe ver jouw bezoekers werkelijk scrollen. Dat cijfer zit in Clarity en is vanuit deze sessie niet te bereiken. Het zou de volgorde bevestigen of bijstellen, niet omgooien.</p>
+    <p><strong>Scrolldiepte &mdash; inmiddels w&eacute;l bekend.</strong> Dit stond hier eerst als ontbrekend cijfer. Clarity geeft het nu: <strong>27,52%</strong> gemiddelde scrolldiepte op de productpagina&rsquo;s. Dat heeft de volgorde niet omgegooid maar wel ingekort &mdash; van zeventien blokken naar tien, met vier ervan als accordeon in het koopvak. Zie deel 01, de meting.</p>
     <p><strong>Het klantcitaat in slot 1.</strong> Voor de Groom Guard staat er een echte in blok 01 (Yven, vijf sterren op Trustpilot, 8 juli 2026). Voor de rest van het assortiment moet dit per product langs: van de honderd recentste Nederlandse Trustpilot-reviews gaan er vijf over het product zelf, de rest over levering en service. Waar geen productreview bestaat, blijft slot 1 leeg.</p>
-    <p><strong>Correctie: die &euro;52,85 klopt w&eacute;l.</strong> Ik schreef dat het bedrag nergens op uitkwam. Fout: de Shave Package Ultimate staat in Shopify op &euro;89,95 met <code>compare_at_price</code> &euro;142,80, en dat verschil is exact &euro;52,85. Ik had alleen de losse artikelprijzen opgeteld en niet de doorgestreepte prijs van het pakket zelf opgehaald. De bundelkaart in blok 03 gebruikt nu gewoon <code>compare_at_price</code>, net als de andere twee kaarten.</p>
+    <p><strong>Correctie: die &euro;52,85 klopt w&eacute;l.</strong> Ik schreef dat het bedrag nergens op uitkwam. Fout: de Shave Package Ultimate staat in Shopify op &euro;89,95 met <code>compare_at_price</code> &euro;142,80, en dat verschil is exact &euro;52,85. Ik had alleen de losse artikelprijzen opgeteld en niet de doorgestreepte prijs van het pakket zelf opgehaald. De bundelkaart in blok 06 gebruikt nu gewoon <code>compare_at_price</code>, net als de andere twee kaarten.</p>
   </div>
 
   <div class="note">
@@ -3978,6 +4062,25 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
       <div class="w-cta2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect class="vgl-a" x="2.6" y="9.4" width="7.2" height="11.4" rx="1.6"/><rect x="14.2" y="3.2" width="7.2" height="17.6" rx="1.6"/><path d="M12 3.2v17.6" stroke-dasharray="2.6 2.6" opacity=".5"/></svg>Vergelijk de modellen</div>
 
       <div class="w-tel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M2.8 19.6c.9-3 3.2-4.8 6.2-4.8s5.3 1.8 6.2 4.8"/><path d="M16.4 5.2a3.2 3.2 0 0 1 0 5.6M18.2 19.6c-.3-1.3-.8-2.4-1.5-3.3"/></svg><span>Al door <b>200.000+</b> mannen gekozen</span></div>
+
+      <div class="w-acc">
+      <details><summary>Omschrijving &amp; specificaties<i></i></summary><div class="in">
+        <p>Bodygroomer met SkinSafe&trade; keramische kop voor lichaam en gezicht. Trimmen en glad afwerken met &eacute;&eacute;n apparaat.</p>
+        <dl class="sp"><dt>Kop</dt><dd>SkinSafe&trade; keramisch, afneembaar</dd>
+        <dt>Waterdicht</dt><dd>IPX7, geschikt onder de douche</dd>
+        <dt>Accu</dt><dd>90 minuten, USB-C, 2 uur laden</dd>
+        <dt>Opzetkammen</dt><dd>3, 4 en 6 mm</dd></dl></div></details>
+      <details><summary>Wat zit er in de doos<i></i></summary><div class="in">
+        <ul><li>Groom Guard&trade; PRO</li><li>Losse foil-kop voor glad afwerken</li>
+        <li>Drie opzetkammen</li><li>Oplaadstandaard en USB-C-kabel</li>
+        <li>Reisetui en schoonmaakborsteltje</li></ul></div></details>
+      <details><summary>Verzending &amp; retour<i></i></summary><div class="in">
+        <p>Voor 23:59 besteld, morgen in huis. Gratis verzending binnen Nederland en Belgi&euml;.</p>
+        <p>Retourneren kan 100 dagen lang, ook als de doos open is. Het retourlabel zit in de bevestigingsmail.</p></div></details>
+      <details><summary>Garantie en proberen<i></i></summary><div class="in">
+        <p><b>100 dagen thuis proberen.</b> Niet goed? Geld terug, zonder uitleg.</p>
+        <p><b>2 jaar garantie</b> op het apparaat. Gaat er binnen die tijd iets stuk, dan sturen we een nieuwe.</p></div></details>
+      </div>
     </div>
   </div>
 
@@ -4046,6 +4149,25 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
           </div>
           <div class="m-cta2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect class="vgl-a" x="2.6" y="9.4" width="7.2" height="11.4" rx="1.6"/><rect x="14.2" y="3.2" width="7.2" height="17.6" rx="1.6"/><path d="M12 3.2v17.6" stroke-dasharray="2.6 2.6" opacity=".5"/></svg>Vergelijk de modellen</div>
           <div class="m-tel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M2.8 19.6c.9-3 3.2-4.8 6.2-4.8s5.3 1.8 6.2 4.8"/><path d="M16.4 5.2a3.2 3.2 0 0 1 0 5.6M18.2 19.6c-.3-1.3-.8-2.4-1.5-3.3"/></svg><span>Al door <b>200.000+</b> mannen gekozen</span></div>
+
+          <div class="m-acc">
+          <details><summary>Omschrijving &amp; specificaties<i></i></summary><div class="in">
+            <p>Bodygroomer met SkinSafe&trade; keramische kop voor lichaam en gezicht. Trimmen en glad afwerken met &eacute;&eacute;n apparaat.</p>
+            <dl class="sp"><dt>Kop</dt><dd>SkinSafe&trade; keramisch, afneembaar</dd>
+            <dt>Waterdicht</dt><dd>IPX7, geschikt onder de douche</dd>
+            <dt>Accu</dt><dd>90 minuten, USB-C, 2 uur laden</dd>
+            <dt>Opzetkammen</dt><dd>3, 4 en 6 mm</dd></dl></div></details>
+      <details><summary>Wat zit er in de doos<i></i></summary><div class="in">
+            <ul><li>Groom Guard&trade; PRO</li><li>Losse foil-kop voor glad afwerken</li>
+            <li>Drie opzetkammen</li><li>Oplaadstandaard en USB-C-kabel</li>
+            <li>Reisetui en schoonmaakborsteltje</li></ul></div></details>
+      <details><summary>Verzending &amp; retour<i></i></summary><div class="in">
+            <p>Voor 23:59 besteld, morgen in huis. Gratis verzending binnen Nederland en Belgi&euml;.</p>
+            <p>Retourneren kan 100 dagen lang, ook als de doos open is. Het retourlabel zit in de bevestigingsmail.</p></div></details>
+      <details><summary>Garantie en proberen<i></i></summary><div class="in">
+            <p><b>100 dagen thuis proberen.</b> Niet goed? Geld terug, zonder uitleg.</p>
+            <p><b>2 jaar garantie</b> op het apparaat. Gaat er binnen die tijd iets stuk, dan sturen we een nieuwe.</p></div></details>
+          </div>
         </div>
       </div>
 
