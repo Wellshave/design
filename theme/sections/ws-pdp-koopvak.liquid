@@ -18,14 +18,33 @@
   assign mf = product.metafields.custom
 
   assign belofte = mf.hero_promise.value | default: mf.subtitle.value
+
+  comment
+    Het citaat komt per product uit custom.buybox_quote. De sectie-instelling
+    is alleen een terugval; staat er voor dit product geen echte productreview,
+    laat beide dan leeg en de kaart valt weg.
+  endcomment
   assign citaat = mf.buybox_quote.value | default: s.citaat
   assign citaat_wie = mf.buybox_quote_author.value | default: s.citaat_wie
 
-  assign campagne = ''
-  if mf.limited_offer.value != blank
-    assign campagne = mf.limited_offer.value.product_title
+  comment
+    Het aanbod komt uit custom.limited_offer, hetzelfde metaobject dat de oude
+    sectie gebruikte. Per product te wijzen naar een andere actie.
+  endcomment
+  assign aanbod = mf.limited_offer.value
+
+  comment
+    Het aantal reviews staat per product in custom.compare_info.reviews_label.
+  endcomment
+  assign tp_aantal = mf.compare_info.value.reviews_label | default: s.tp_score
+
+  comment
+    De vergelijkingsknop heeft alleen zin als er iets te vergelijken valt.
+  endcomment
+  assign kan_vergelijken = false
+  if mf.compare_table != blank or mf.compare_products != blank
+    assign kan_vergelijken = true
   endif
-  assign campagne = campagne | default: s.campagne
 
   assign korting = 0
   if v.compare_at_price > v.price
@@ -103,9 +122,14 @@
           <path d="M99 14 C81 34 72 62 76 100" stroke="url(#ws-pdp-gd-{{ section.id }})" stroke-width=".3" fill="none"/>
         </svg>
 
-        {%- if campagne != blank or korting > 0 -%}
+        {%- comment -%}
+          De pil: links de productnaam, rechts de korting. De campagne staat in
+          de aanbodbalk lager in het vak, niet hier ook nog eens.
+        {%- endcomment -%}
+        {%- assign pil = s.pil_label | default: product.title -%}
+        {%- if pil != blank or korting > 0 -%}
           <span class="ws-pil">
-            {%- if campagne != blank -%}<b class="ws-a">{{ campagne }}</b>{%- endif -%}
+            {%- if pil != blank -%}<b class="ws-a">{{ pil }}</b>{%- endif -%}
             {%- if korting > 0 -%}<b class="ws-z">{{ s.besparing_label | replace: '[korting]', korting }}</b>{%- endif -%}
           </span>
         {%- endif -%}
@@ -116,7 +140,7 @@
               {%- for i in (1..5) -%}<i><svg><use href="#ws-pdp-ster-{{ section.id }}"/></svg></i>{%- endfor -%}
             </span>
             {%- if s.tp_label != blank -%}<span class="ws-lb">{{ s.tp_label }}</span>{%- endif -%}
-            {%- if s.tp_score != blank -%}<span class="ws-sc">&middot; {{ s.tp_score }}</span>{%- endif -%}
+            {%- if tp_aantal != blank -%}<span class="ws-sc">&middot; {{ tp_aantal }}</span>{%- endif -%}
           </div>
         {%- endif -%}
 
@@ -196,12 +220,34 @@
           </ul>
         {%- endif -%}
 
-        {%- if s.gift_titel != blank -%}
+        {%- comment -%}
+          De aanbodbalk. Eerst het metaobject waar custom.limited_offer naar wijst,
+          anders de sectie-instelling. Is beide leeg, dan komt de balk er niet.
+        {%- endcomment -%}
+        {%- liquid
+          assign gift_titel = ''
+          assign gift_regel = ''
+          if aanbod != blank
+            assign gift_titel = aanbod.offer_title | default: aanbod.product_title
+            assign gift_regel = aanbod.popup_subtitle | default: aanbod.popup_title
+          endif
+          if gift_titel == blank
+            assign gift_titel = s.gift_titel
+            assign gift_regel = s.gift_regel
+          endif
+        -%}
+        {%- if gift_titel != blank -%}
           <div class="ws-gift">
-            <span class="ws-ic"><svg><use href="#ws-pdp-gift-{{ section.id }}"/></svg></span>
+            <span class="ws-ic">
+              {%- if aanbod.image != blank -%}
+                {{ aanbod.image | image_url: width: 120 | image_tag: alt: '', loading: 'lazy' }}
+              {%- else -%}
+                <svg><use href="#ws-pdp-gift-{{ section.id }}"/></svg>
+              {%- endif -%}
+            </span>
             <span>
-              <b>{{ s.gift_titel }}</b>
-              {%- if s.gift_regel != blank -%}<span>{{ s.gift_regel }}</span>{%- endif -%}
+              <b>{{ gift_titel }}</b>
+              {%- if gift_regel != blank -%}<span>{{ gift_regel }}</span>{%- endif -%}
             </span>
           </div>
         {%- endif -%}
@@ -244,8 +290,8 @@
           </div>
         {%- endif -%}
 
-        {%- if s.vergelijk_label != blank -%}
-          <a class="ws-cta2" href="{{ s.vergelijk_link | default: '#compare_table' }}">
+        {%- if s.vergelijk_label != blank and kan_vergelijken -%}
+          <a class="ws-cta2" href="{{ s.vergelijk_anker }}" data-ws-spring>
             <svg><use href="#ws-pdp-vgl-{{ section.id }}"/></svg>{{ s.vergelijk_label }}
           </a>
         {%- endif -%}
@@ -327,6 +373,16 @@
         markeer(i);
       });
 
+      var vgl = wortel.querySelector('[data-ws-spring]');
+      if (vgl) {
+        vgl.addEventListener('click', function (e) {
+          var doel = document.querySelector(vgl.getAttribute('href'));
+          if (!doel) return;
+          e.preventDefault();
+          doel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      }
+
       var wacht;
       baan.addEventListener('scroll', function () {
         clearTimeout(wacht);
@@ -351,21 +407,22 @@
     { "type": "header", "content": "Podium" },
     { "type": "image_picker", "id": "merk", "label": "Monogram op de achtergrond" },
     { "type": "text", "id": "tag", "label": "Label linksboven", "default": "Meest gekozen" },
-    { "type": "header", "content": "Campagne" },
-    { "type": "text", "id": "campagne", "label": "Campagnelabel (terugval als custom.limited_offer leeg is)", "default": "Summer Sale" },
+    { "type": "header", "content": "De pil en de korting" },
+    { "type": "text", "id": "pil_label", "label": "Linkerhelft van de pil", "info": "Leeg laten betekent: de producttitel." },
     { "type": "text", "id": "besparing_label", "label": "Kortingslabel — [korting] wordt het percentage", "default": "Bespaar [korting]%" },
     { "type": "text", "id": "besparing_regel", "label": "Regel bij het bespaarde bedrag", "default": "Je bespaart" },
     { "type": "header", "content": "Trustpilot" },
     { "type": "checkbox", "id": "tp_tonen", "label": "Beoordeling tonen", "default": true },
     { "type": "text", "id": "tp_label", "label": "Oordeel", "default": "Uitstekend" },
-    { "type": "text", "id": "tp_score", "label": "Score en aantal", "default": "4,4 · 968 reviews" },
+    { "type": "text", "id": "tp_score", "label": "Aantal reviews — terugval als custom.compare_info.reviews_label leeg is", "default": "968 reviews" },
     { "type": "text", "id": "tp_bron", "label": "Bron bij het citaat", "default": "Trustpilot" },
     { "type": "text", "id": "koper_label", "label": "Label geverifieerde koper", "default": "Geverifieerde koper" },
     { "type": "header", "content": "Klantcitaat" },
-    { "type": "paragraph", "content": "Wordt overschreven door custom.buybox_quote zodra dat veld bestaat. Laat leeg als er voor dit product geen echte productreview is." },
+    { "type": "paragraph", "content": "Komt per product uit custom.buybox_quote en custom.buybox_quote_author. Hieronder alleen de terugval; laat beide leeg als er voor dit product geen echte productreview is, dan valt de kaart weg." },
     { "type": "textarea", "id": "citaat", "label": "Citaat" },
     { "type": "text", "id": "citaat_wie", "label": "Naam en datum" },
     { "type": "header", "content": "Cadeau" },
+    { "type": "paragraph", "content": "Komt per product uit custom.limited_offer: de titel uit offer_title, de onderregel uit popup_subtitle en het icoon uit image. Hieronder de terugval." },
     { "type": "text", "id": "gift_titel", "label": "Cadeauregel" },
     { "type": "text", "id": "gift_regel", "label": "Onderregel", "default": "Wordt vanzelf meegeleverd" },
     { "type": "header", "content": "Knop en levering" },
@@ -376,7 +433,7 @@
     { "type": "text", "id": "veilig_label", "label": "Label bij de betaalmerken", "default": "Veilig afrekenen" },
     { "type": "header", "content": "Vergelijken en teller" },
     { "type": "text", "id": "vergelijk_label", "label": "Knop vergelijken", "default": "Vergelijk de modellen" },
-    { "type": "url", "id": "vergelijk_link", "label": "Link (leeg = #compare_table)" },
+    { "type": "text", "id": "vergelijk_anker", "label": "Anker van de vergelijkingssectie", "default": "#shopify-section-compare_table", "info": "De knop verschijnt alleen als het product custom.compare_table of custom.compare_products heeft." },
     { "type": "text", "id": "tel_voor", "label": "Teller — tekst ervoor", "default": "Al door" },
     { "type": "text", "id": "tel_waarde", "label": "Teller — getal", "default": "200.000+" },
     { "type": "text", "id": "tel_na", "label": "Teller — tekst erna", "default": "mannen gekozen" },
@@ -399,6 +456,9 @@
 {% endschema %}
 
 {% stylesheet %}
+  /* rijke tekst uit offer_title moet zich in de vetregel voegen */
+  .ws-pdp .ws-gift b > *{margin:0;font:inherit;color:inherit;display:inline}
+  .ws-pdp .ws-gift .ws-ic img{width:100%;height:100%;object-fit:contain;border-radius:50%}
   .ws-pdp .ws-apps{margin-top:13px}
   .ws-pdp .ws-apps:empty{display:none}
   .ws-pdp .ws-apps > div:empty{display:none}
