@@ -43,21 +43,26 @@ navigatie samen in de eerste schermhoogte staan en het raster één scroll verde
 **Houd de pagina kort.** Elke sectie die niet kiest, uitlegt of bewijst, gaat eruit. Zes blokken
 is ruim genoeg; wat detail is, hoort achter een uitklap in plaats van in een eigen sectie.
 
-1. **Kop met modellenreeks en keuzehulp** &mdash; donker en compact. Links: eyebrow met de
-   collectie en het aantal modellen, een korte tweeslags kop, één regel lede, een bewijskaart
-   (score met het aantal beoordelingen én één echt citaat van een geverifieerde koper), de
-   modellen naast elkaar met hun rol eronder — basis, pro, all-in-one — en de geruststellers
-   met icoon. Rechts een lichte kaart met twee of drie genummerde vragen en het matchpaneel
-   eronder: foto, naam, één zin, drie redenen, prijs, knop en voorraadregel. Bouw de keuzehulp
-   zo dat elk apparaat precies één combinatie wint; wint een apparaat niets, dan staat het er
-   voor de vorm bij en hoort het uit de collectie. Alles in het matchpaneel wisselt mee met de
-   keuze, ook het lintje: geef elk apparaat een lintje dat waar is (meest gekozen, laagste
+1. **Kop met keuzehulp** &mdash; donker en compact. Links: eyebrow met de collectie en het aantal
+   modellen, een korte tweeslags kop, één regel lede, een foto van het apparaat in gebruik, een
+   bewijskaart (score met het aantal beoordelingen én één echt citaat van een geverifieerde koper)
+   en de geruststellers met icoon. Rechts een lichte kaart met twee of drie genummerde vragen en
+   het matchpaneel eronder: foto, naam, één zin, drie redenen, prijs, knop en voorraadregel. Bouw
+   de keuzehulp zo dat elk apparaat precies één combinatie wint; wint een apparaat niets, dan staat
+   het er voor de vorm bij en hoort het uit de collectie. Alles in het matchpaneel wisselt mee met
+   de keuze, ook het lintje: geef elk apparaat een lintje dat waar is (meest gekozen, laagste
    prijs, nieuw) in plaats van overal hetzelfde.
 
-   De modellenreeks vraagt om **vrijgemaakte productfoto's**. De setfoto's staan op een lichte
-   achtergrond; die is te verwijderen door de alpha af te leiden uit het verschil met de
-   achtergrondkleur (drempel rond 6, zachte overgang over ~26 niveaus, halve pixel blur op het
-   masker). De ingebakken slagschaduw snijd je onderaan weg, anders licht hij op tegen donker.
+   **De foto staat als plaat in de kolom, niet als volle achtergrondband.** Een band over de hele
+   breedte is ongeveer 5:1; van een 16:9-foto blijft daarin een strook over waarin geen apparaat
+   meer te herkennen is, hoe je de uitsnede ook verschuift. In een kolom van ruwweg 450&nbsp;px past
+   de hele scene wél. Wil je toch een achtergrond over de volle breedte, dan moet de foto daar
+   speciaal voor geschoten of gegenereerd zijn.
+
+   **Zet geen apparaten op een rij als productsilhouetten.** Het oogt als een catalogusblad, het
+   valt op mobiel uit elkaar, en het raster eronder toont dezelfde apparaten al mét naam en prijs.
+   Eén foto van het apparaat in gebruik doet meer dan vier vrijstaande silhouetten naast elkaar.
+
 2. **Zonebalk** &mdash; plakkend, direct onder de kop. Kruimelpad, de zones met hun aantal, en één
    regel die zegt wat je bekijkt. Dit vervangt de kale titel met chips.
 3. **Het raster** &mdash; wit, meteen erna. Alles wat bij de zone hoort: apparaten, bundels, en de
