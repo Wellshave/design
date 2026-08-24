@@ -77,6 +77,33 @@ Twee dingen die daarbij opvallen:
   en is opnieuw opvragen het juiste antwoord &mdash; niet opnieuw uploaden. Alleen
   een checksum die met g&eacute;&eacute;n enkele versie overeenkomt wijst op beschadiging.
 
+## Als een upload niets doet
+
+De URL-route schrijft w&eacute;l, maar slikt validatiefouten in: `themeFilesUpsert`
+geeft dan `upsertedThemeFiles: []` met een lege `userErrors`, en het bestand in
+het thema blijft onveranderd. Precies hetzelfde antwoord als bij een geslaagde
+schrijfactie, dus daar valt niets aan te zien.
+
+**Schrijft een upload niet, doe hem dan &eacute;&eacute;n keer over met `type: TEXT`.** Die
+route valideert en geeft de fout w&eacute;l terug. Zo kwam bijvoorbeeld boven water:
+
+> `FILE_VALIDATION_ERROR` &mdash; Invalid schema: setting with id="tp_score" label is
+> too long (max 70 characters)
+
+Een `label` in het sectieschema mag maximaal **70 tekens** zijn; die van ons was
+er 71. Voor `info` en de inhoud van een `paragraph` geldt die grens niet, dus
+lange uitleg hoort daar en niet in het label.
+
+Twee dingen die daar nog omheen zitten:
+
+* **Een sjabloon bewaart alleen instellingen die het schema kent.** Wordt de
+  sectie geweigerd en het sjabloon niet, dan verdwijnen precies de instellingen
+  die bij de nieuwe sectie horen &mdash; stilletjes. Sectie eerst laten landen,
+  daarna het sjabloon opnieuw sturen.
+* **Zet in een `{% stylesheet %}`-blok nooit een procentteken direct tegen een
+  sluitende accolade.** Liquid leest die twee tekens als het einde van een tag.
+  Dus `border-radius:50% }` met een spatie.
+
 ## Nog open
 
 * **`custom.buybox_quote` en `custom.buybox_quote_author` bestaan nog niet.**
