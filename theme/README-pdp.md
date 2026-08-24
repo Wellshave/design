@@ -53,6 +53,30 @@ aan de producten zelf en niets aan het live thema.
 | `custom.limited_offer` → `product_title` | |
 | `custom.shipping_information` | |
 
+## Bestanden het thema in krijgen
+
+Niet via de tekst van het bestand in een API-aanroep. Grote bestanden raken
+onderweg beschadigd of worden geweigerd met `FILE_VALIDATION_ERROR`. De route
+die wel werkt laat de bytes rechtstreeks van schijf naar Shopify gaan:
+
+1. `stagedUploadsCreate` (`resource: FILE`) geeft een doel-URL met parameters
+2. `curl -F 'file=@<pad>'` met die parameters &rarr; HTTP 201
+3. `themeFilesUpsert` met `body: { type: URL, value: <resourceUrl> }`
+
+Daarna controleren op `checksumMd5`, niet alleen op `size`: een vervanging van
+gelijke lengte valt anders niet op.
+
+Twee dingen die daarbij opvallen:
+
+* **Volgorde telt.** Shopify controleert sectieverwijzingen bij het schrijven.
+  Een sjabloon dat naar `ws-pdp-koopvak` wijst wordt geweigerd zolang het
+  sectiebestand er nog niet staat. Dus: sectie eerst, sjabloon daarna.
+* **Lezen loopt achter op schrijven.** Een afwijkende checksum vlak na een
+  upsert betekent niet meteen dat de upload mislukt is. Komt de checksum
+  overeen met een v&oacute;&oacute;rgaande versie van het bestand, dan is het leesvertraging
+  en is opnieuw opvragen het juiste antwoord &mdash; niet opnieuw uploaden. Alleen
+  een checksum die met g&eacute;&eacute;n enkele versie overeenkomt wijst op beschadiging.
+
 ## Nog open
 
 * **`custom.buybox_quote` en `custom.buybox_quote_author` bestaan nog niet.**
