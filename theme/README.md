@@ -198,6 +198,68 @@ klant**, product, **datum** en **bron**. Laat je de bron leeg, dan verdwijnt de
 bronvermelding — zo kan een review die niet van Trustpilot komt daar ook niet
 het logo van dragen.
 
+## De quiz
+
+De quiz staat op een **eigen pagina**, niet op de homepage. Drie bestanden plus
+één pagina in Shopify:
+
+| Wat | Waar |
+| --- | --- |
+| De sectie | `sections/ws-quiz.liquid` |
+| De opmaak | `assets/ws-quiz.css` |
+| Het paginasjabloon | `templates/page.ws-quiz.json` |
+| De pagina | Shopify → Pagina's → "Vind jouw apparaat", handle `quiz`, sjabloon `ws-quiz` |
+
+**Drie vragen, één uitkomst.** Voor wie → welke zone → wat wil je ermee. De
+uitkomst is één apparaat met prijs, van-prijs, besparing, voorraad en een
+koopknop, allemaal live uit Shopify. Bewust één en geen shortlist: de audit wees
+uit dat het lek vóór de winkelwagen zit (3,1% add-to-cart), en een shortlist geeft
+de keuze terug aan de bezoeker.
+
+**Eén bloktype: `route`.** Elk blok is één volledige route door de quiz. De
+zonevraag bouwt zichzelf op uit de zones die in de blokken staan, op volgorde van
+eerste voorkomen; de eerste route van een zone levert de foto en de onderregel
+voor de zonekaart. Heeft een zone maar één route — zoals Schaamstreek — dan slaat
+de quiz vraag 3 over. Zones worden op de **letterlijke tekst** gematcht, dus een
+typefout in het zoneveld maakt er stilletjes een nieuwe zone van.
+
+**De cadeauroute** slaat de zonevragen helemaal over en komt uit op de Shave
+Package 3.0. Reden: wie voor een ander koopt weet zelden welke plek hij aanpakt,
+en dat is de enige bundel die echt verkoopt (92 stuks, €5.006 over 180 dagen).
+
+Alle uitkomstkaarten staan van meet af aan in de HTML en worden door JavaScript
+getoond of verborgen. Zo zijn de prijzen door Liquid gerenderd en klopt de pagina
+ook als er onderweg iets misgaat.
+
+**De teksten komen uit de eigen productomschrijvingen.** Elk punt onder een
+aanbeveling is terug te vinden op de productpagina van dat apparaat. Twee
+kaarten hebben maar twee punten in plaats van drie — de Groom Guard en de Blade
+Guard Gold — omdat hun omschrijving niet meer feiten bevat. Er is niets
+bijverzonnen om de rij vol te maken.
+
+**De knop op de homepage.** Blok 12 wijst nu naar de quiz zonder dat er iets in
+`index.json` hoeft te staan: `cta2_link` valt terug op `/pages/quiz`. Zet je er
+wel een link in, dan wint die. De knop in de hero ("Vind jouw tool") is bewust
+níét omgezet — die kan net zo goed naar de zonekiezer wijzen.
+
+### Drie fouten die hier gemaakt en rechtgezet zijn
+
+Ze staan hier omdat het alle drie vallen zijn die zich in dit thema herhalen:
+
+1. **`{% form %}` met een filter in het argument.** `id: 'ws-qz-form-' | append:
+   block.id` laat Liquid `block.id` als *formuliertype* lezen — de pagina toonde
+   `Invalid form type "l1"` en de koopknop verdween. Het id moet eerst met
+   `assign` opgebouwd worden.
+2. **Een eigen regel die specifieker is dan bedoeld.** `.ws-qz__kop>*` (0,1,1)
+   wint van `.ws-qz__merk` (0,1,0) en zette het monogram terug op
+   `position:relative`, waardoor het 230px in de flow innam. Dat gat was op het
+   oog een marge-probleem en was het niet.
+3. **`[hidden]` verliest van een klasse met `display`.** `.ws-qz__terug{display:
+   inline-flex}` overrulet de browserregel `[hidden]{display:none}`, dus de
+   terugknop stond op stap 1 gewoon in beeld terwijl het attribuut wél goed
+   gezet was. Elk element dat via `hidden` geschakeld wordt heeft een eigen
+   `[hidden]{display:none}` nodig.
+
 ## Beelden
 
 Alle beelden uit `audits/assets` staan als bestand in Shopify onder de naam

@@ -1,0 +1,494 @@
+{% comment %}
+  Wellshave — de quiz. Staat op een eigen pagina, niet op de homepage.
+  Drie vragen, één uitkomst: voor wie → welke zone → wat wil je ermee.
+
+  Eén bloktype: "route". Elk blok is één volledige route door de quiz en
+  draagt zijn eigen aanbeveling. De zonevraag bouwt zichzelf op uit de
+  zones die in de blokken staan — de eerste route van een zone levert de
+  foto en de onderregel voor de zonekaart.
+
+  Prijs, van-prijs, besparing, voorraad en de koopknop komen uit het
+  gekozen product. Er staat niets in dit blok dat niet uit Shopify of uit
+  de eigen productteksten komt.
+
+  Alle uitkomstkaarten staan van meet af aan in de HTML en worden door
+  JavaScript getoond of verborgen. Dat is bewust: zo zijn de prijzen door
+  Liquid gerenderd en klopt de pagina ook als er onderweg iets misgaat.
+{% endcomment %}
+
+{{ 'ws-quiz.css' | asset_url | stylesheet_tag }}
+
+{% render 'indent-settings', section: section %}
+
+{%- comment -%} De unieke zones, op volgorde van eerste voorkomen. {%- endcomment -%}
+{%- assign zonesleutel = '|' -%}
+{%- for block in section.blocks -%}
+  {%- assign zoek = '|' | append: block.settings.zone | append: '|' -%}
+  {%- unless zonesleutel contains zoek -%}
+    {%- assign zonesleutel = zonesleutel | append: block.settings.zone | append: '|' -%}
+  {%- endunless -%}
+{%- endfor -%}
+{%- assign zones = zonesleutel | remove_first: '|' | split: '|' -%}
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="ws-qz-terug" viewBox="0 0 24 24"><path d="M20 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-qz-arw" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-qz-vink" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-qz-persoon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4.8 20c0-3.6 3.2-5.8 7.2-5.8s7.2 2.2 7.2 5.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="ws-qz-cadeau" viewBox="0 0 24 24"><path d="M3.6 11.4h16.8V20H3.6zM2.6 7.6h18.8v3.8H2.6zM12 7.6V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 7.6S10.8 4 8.6 4a2 2 0 100 3.6M12 7.6S13.2 4 15.4 4a2 2 0 110 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="ws-qz-opnieuw" viewBox="0 0 24 24"><path d="M20 12a8 8 0 11-2.6-5.9M20 4v4.4h-4.4" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<div class="ws-qz" data-ws-quiz><div class="ws-qz__in">
+
+  <header class="ws-qz__kop">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="ws-qz__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+    {%- if section.settings.kop != blank -%}
+      <h1 class="ws-qz__h1">{{ section.settings.kop }}</h1>
+    {%- endif -%}
+    {%- if section.settings.sub != blank -%}
+      <p class="ws-qz__sub">{{ section.settings.sub }}</p>
+    {%- endif -%}
+    {%- if section.settings.merk != blank -%}
+      {{ section.settings.merk | image_url: width: 600 | image_tag: class: 'ws-qz__merk', alt: '', loading: 'lazy' }}
+    {%- endif -%}
+  </header>
+
+  <div class="ws-qz__balk" data-qz-balk>
+    <button class="ws-qz__terug" type="button" data-qz-terug hidden>
+      <svg><use href="#ws-qz-terug"/></svg>{{ section.settings.terug }}
+    </button>
+    <ol class="ws-qz__stappen">
+      <li data-qz-stip="1"><i>1</i><span>{{ section.settings.stap_1 }}</span></li>
+      <li data-qz-stip="2"><i>2</i><span>{{ section.settings.stap_2 }}</span></li>
+      <li data-qz-stip="3"><i>3</i><span>{{ section.settings.stap_3 }}</span></li>
+    </ol>
+  </div>
+
+  {%- comment -%} ─── Vraag 1: voor wie ─── {%- endcomment -%}
+  <section class="ws-qz__vak" data-qz-vak="wie">
+    <p class="ws-qz__vraag">{{ section.settings.v1_kop }}</p>
+    {%- if section.settings.v1_sub != blank -%}
+      <p class="ws-qz__vraagsub">{{ section.settings.v1_sub }}</p>
+    {%- endif -%}
+    <div class="ws-qz__twee">
+      <button class="ws-qz__kaart ws-qz__kaart--wie" type="button" data-qz-wie="zelf">
+        <span class="ws-qz__ring"><svg><use href="#ws-qz-persoon"/></svg></span>
+        <b>{{ section.settings.v1_zelf }}</b>
+        <span>{{ section.settings.v1_zelf_wat }}</span>
+      </button>
+      <button class="ws-qz__kaart ws-qz__kaart--wie" type="button" data-qz-wie="cadeau">
+        <span class="ws-qz__ring"><svg><use href="#ws-qz-cadeau"/></svg></span>
+        <b>{{ section.settings.v1_cadeau }}</b>
+        <span>{{ section.settings.v1_cadeau_wat }}</span>
+      </button>
+    </div>
+  </section>
+
+  {%- comment -%} ─── Vraag 2: welke zone ─── {%- endcomment -%}
+  <section class="ws-qz__vak" data-qz-vak="zone" hidden>
+    <p class="ws-qz__vraag">{{ section.settings.v2_kop }}</p>
+    {%- if section.settings.v2_sub != blank -%}
+      <p class="ws-qz__vraagsub">{{ section.settings.v2_sub }}</p>
+    {%- endif -%}
+    <div class="ws-qz__zones">
+      {%- for z in zones -%}
+        {%- assign gevonden = false -%}
+        {%- for block in section.blocks -%}
+          {%- if block.settings.zone == z and gevonden == false -%}
+            {%- assign eerste = block -%}
+            {%- assign gevonden = true -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- assign aantal = 0 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.settings.zone == z -%}{%- assign aantal = aantal | plus: 1 -%}{%- endif -%}
+        {%- endfor -%}
+        <button class="ws-qz__zone" type="button" data-qz-zone="{{ z | escape }}" data-qz-routes="{{ aantal }}">
+          <span class="ws-qz__zonebeeld">
+            {%- if eerste.settings.zone_foto != blank -%}
+              {{ eerste.settings.zone_foto | image_url: width: 560 | image_tag: alt: '', loading: 'lazy' }}
+            {%- endif -%}
+          </span>
+          <span class="ws-qz__zonetekst">
+            <b>{{ z }}</b>
+            {%- if eerste.settings.zone_wat != blank -%}
+              <span>{{ eerste.settings.zone_wat }}</span>
+            {%- endif -%}
+          </span>
+          <svg class="ws-qz__zonepijl"><use href="#ws-qz-arw"/></svg>
+        </button>
+      {%- endfor -%}
+    </div>
+  </section>
+
+  {%- comment -%} ─── Vraag 3: wat wil je ermee ─── {%- endcomment -%}
+  <section class="ws-qz__vak" data-qz-vak="keuze" hidden>
+    <p class="ws-qz__vraag" data-qz-v3kop>{{ section.settings.v3_kop }}</p>
+    {%- if section.settings.v3_sub != blank -%}
+      <p class="ws-qz__vraagsub">{{ section.settings.v3_sub }}</p>
+    {%- endif -%}
+    {%- for z in zones -%}
+      <div class="ws-qz__keuzes" data-qz-keuzes="{{ z | escape }}" hidden>
+        {%- for block in section.blocks -%}
+          {%- if block.settings.zone == z -%}
+            <button class="ws-qz__kaart" type="button" data-qz-route="{{ block.id }}" {{ block.shopify_attributes }}>
+              <b>{{ block.settings.keuze }}</b>
+              {%- if block.settings.keuze_wat != blank -%}
+                <span>{{ block.settings.keuze_wat }}</span>
+              {%- endif -%}
+              <svg class="ws-qz__kaartpijl"><use href="#ws-qz-arw"/></svg>
+            </button>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endfor -%}
+  </section>
+
+  {%- comment -%} ─── De uitkomst ─── {%- endcomment -%}
+  <section class="ws-qz__vak ws-qz__vak--uit" data-qz-vak="uit" hidden>
+
+    {%- for block in section.blocks -%}
+      {%- assign p = block.settings.product -%}
+      {%- assign v = p.selected_or_first_available_variant -%}
+      <article class="ws-qz__uitkomst" data-qz-uit="{{ block.id }}" hidden>
+        <p class="ws-qz__uitlabel"><svg><use href="#ws-qz-vink"/></svg>{{ section.settings.uit_label }}</p>
+        <div class="ws-qz__uitbody">
+
+          <div class="ws-qz__uitbeeld">
+            {%- if block.settings.foto != blank -%}
+              {{ block.settings.foto | image_url: width: 900 | image_tag: alt: '', loading: 'lazy' }}
+            {%- elsif p.featured_image -%}
+              {{ p.featured_image | image_url: width: 900 | image_tag: loading: 'lazy' }}
+            {%- endif -%}
+            {%- if block.settings.pil != blank -%}
+              <span class="ws-qz__pil">{{ block.settings.pil }}</span>
+            {%- endif -%}
+          </div>
+
+          <div class="ws-qz__uitkaart">
+            <p class="ws-qz__uitzone">{{ block.settings.zone }} · {{ block.settings.keuze }}</p>
+            <h2 class="ws-qz__uitnaam">{{ block.settings.naam | default: p.title }}</h2>
+            {%- if block.settings.waarom != blank -%}
+              <p class="ws-qz__waarom">{{ block.settings.waarom }}</p>
+            {%- endif -%}
+
+            {%- if block.settings.punt_1 != blank or block.settings.punt_2 != blank or block.settings.punt_3 != blank -%}
+              <ul class="ws-qz__punten">
+                {%- if block.settings.punt_1 != blank -%}<li><svg><use href="#ws-qz-vink"/></svg>{{ block.settings.punt_1 }}</li>{%- endif -%}
+                {%- if block.settings.punt_2 != blank -%}<li><svg><use href="#ws-qz-vink"/></svg>{{ block.settings.punt_2 }}</li>{%- endif -%}
+                {%- if block.settings.punt_3 != blank -%}<li><svg><use href="#ws-qz-vink"/></svg>{{ block.settings.punt_3 }}</li>{%- endif -%}
+              </ul>
+            {%- endif -%}
+
+            {%- if p != blank -%}
+              <p class="ws-qz__prijs">
+                <span class="ws-qz__nu">{{ v.price | money }}</span>
+                {%- if v.compare_at_price > v.price -%}
+                  <span class="ws-qz__was">{{ v.compare_at_price | money }}</span>
+                  <span class="ws-qz__korting">{{ section.settings.bespaar }} {{ v.compare_at_price | minus: v.price | money }}</span>
+                {%- endif -%}
+              </p>
+              <p class="ws-qz__voorraad"><span class="ws-qz__stip"></span>
+                {%- if v.available -%}{{ section.settings.voorraad_wel }}{%- else -%}{{ section.settings.voorraad_niet }}{%- endif -%}</p>
+              {%- comment -%} Het id eerst opbouwen: een filter in het argument
+                zelf laat Liquid block.id als formuliertype lezen. {%- endcomment -%}
+              {%- assign formulier_id = 'ws-qz-form-' | append: block.id -%}
+              {%- form 'product', p, id: formulier_id -%}
+                <input type="hidden" name="id" value="{{ v.id }}">
+                <button class="ws-qz__knop" type="submit" {% unless v.available %}disabled{% endunless %}>
+                  {{ section.settings.knop }}<span><svg><use href="#ws-qz-arw"/></svg></span>
+                </button>
+              {%- endform -%}
+              <p class="ws-qz__meer"><a href="{{ p.url }}">{{ section.settings.meer }}</a></p>
+            {%- endif -%}
+          </div>
+        </div>
+
+        {%- comment -%} De andere routes binnen dezelfde zone, als alternatief. {%- endcomment -%}
+        {%- assign anders = 0 -%}
+        {%- for zus in section.blocks -%}
+          {%- if zus.settings.zone == block.settings.zone and zus.id != block.id -%}
+            {%- assign anders = anders | plus: 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if anders > 0 -%}
+          <div class="ws-qz__anders">
+            <p>{{ section.settings.anders_kop }}</p>
+            <div>
+              {%- for zus in section.blocks -%}
+                {%- if zus.settings.zone == block.settings.zone and zus.id != block.id -%}
+                  <button class="ws-qz__chip" type="button" data-qz-route="{{ zus.id }}">
+                    {{ zus.settings.keuze }} — {{ zus.settings.naam | default: zus.settings.product.title }}
+                  </button>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endif -%}
+      </article>
+    {%- endfor -%}
+
+    {%- comment -%} De cadeauroute: één vaste bundel, geen zonevragen. {%- endcomment -%}
+    {%- assign cp = section.settings.cadeau_product -%}
+    {%- assign cv = cp.selected_or_first_available_variant -%}
+    <article class="ws-qz__uitkomst" data-qz-uit="cadeau" hidden>
+      <p class="ws-qz__uitlabel"><svg><use href="#ws-qz-vink"/></svg>{{ section.settings.cadeau_label }}</p>
+      <div class="ws-qz__uitbody">
+        <div class="ws-qz__uitbeeld">
+          {%- if section.settings.cadeau_foto != blank -%}
+            {{ section.settings.cadeau_foto | image_url: width: 900 | image_tag: alt: '', loading: 'lazy' }}
+          {%- elsif cp.featured_image -%}
+            {{ cp.featured_image | image_url: width: 900 | image_tag: loading: 'lazy' }}
+          {%- endif -%}
+          {%- if section.settings.cadeau_pil != blank -%}
+            <span class="ws-qz__pil">{{ section.settings.cadeau_pil }}</span>
+          {%- endif -%}
+        </div>
+        <div class="ws-qz__uitkaart">
+          <p class="ws-qz__uitzone">{{ section.settings.cadeau_zone }}</p>
+          <h2 class="ws-qz__uitnaam">{{ section.settings.cadeau_naam | default: cp.title }}</h2>
+          {%- if section.settings.cadeau_waarom != blank -%}
+            <p class="ws-qz__waarom">{{ section.settings.cadeau_waarom }}</p>
+          {%- endif -%}
+          {%- if section.settings.cadeau_punt_1 != blank or section.settings.cadeau_punt_2 != blank or section.settings.cadeau_punt_3 != blank -%}
+            <ul class="ws-qz__punten">
+              {%- if section.settings.cadeau_punt_1 != blank -%}<li><svg><use href="#ws-qz-vink"/></svg>{{ section.settings.cadeau_punt_1 }}</li>{%- endif -%}
+              {%- if section.settings.cadeau_punt_2 != blank -%}<li><svg><use href="#ws-qz-vink"/></svg>{{ section.settings.cadeau_punt_2 }}</li>{%- endif -%}
+              {%- if section.settings.cadeau_punt_3 != blank -%}<li><svg><use href="#ws-qz-vink"/></svg>{{ section.settings.cadeau_punt_3 }}</li>{%- endif -%}
+            </ul>
+          {%- endif -%}
+          {%- if cp != blank -%}
+            <p class="ws-qz__prijs">
+              <span class="ws-qz__nu">{{ cv.price | money }}</span>
+              {%- if cv.compare_at_price > cv.price -%}
+                <span class="ws-qz__was">{{ cv.compare_at_price | money }}</span>
+                <span class="ws-qz__korting">{{ section.settings.bespaar }} {{ cv.compare_at_price | minus: cv.price | money }}</span>
+              {%- endif -%}
+            </p>
+            <p class="ws-qz__voorraad"><span class="ws-qz__stip"></span>
+              {%- if cv.available -%}{{ section.settings.voorraad_wel }}{%- else -%}{{ section.settings.voorraad_niet }}{%- endif -%}</p>
+            {%- form 'product', cp, id: 'ws-qz-form-cadeau' -%}
+              <input type="hidden" name="id" value="{{ cv.id }}">
+              <button class="ws-qz__knop" type="submit" {% unless cv.available %}disabled{% endunless %}>
+                {{ section.settings.knop }}<span><svg><use href="#ws-qz-arw"/></svg></span>
+              </button>
+            {%- endform -%}
+            <p class="ws-qz__meer"><a href="{{ cp.url }}">{{ section.settings.meer }}</a></p>
+          {%- endif -%}
+        </div>
+      </div>
+      {%- if section.settings.cadeau_anders != blank -%}
+        <div class="ws-qz__anders">
+          <p>{{ section.settings.cadeau_anders }}</p>
+          <div><button class="ws-qz__chip" type="button" data-qz-opnieuw>{{ section.settings.cadeau_anders_knop }}</button></div>
+        </div>
+      {%- endif -%}
+    </article>
+
+    <div class="ws-qz__voet">
+      <button class="ws-qz__opnieuw" type="button" data-qz-opnieuw>
+        <svg><use href="#ws-qz-opnieuw"/></svg>{{ section.settings.opnieuw }}
+      </button>
+      {%- if section.settings.zeker_1 != blank or section.settings.zeker_2 != blank or section.settings.zeker_3 != blank -%}
+        <p class="ws-qz__zeker">
+          {%- if section.settings.zeker_1 != blank -%}<span>{{ section.settings.zeker_1 }}</span>{%- endif -%}
+          {%- if section.settings.zeker_2 != blank -%}<span>{{ section.settings.zeker_2 }}</span>{%- endif -%}
+          {%- if section.settings.zeker_3 != blank -%}<span>{{ section.settings.zeker_3 }}</span>{%- endif -%}
+        </p>
+      {%- endif -%}
+    </div>
+  </section>
+
+</div></div>
+
+<script>
+  (function () {
+    document.querySelectorAll('[data-ws-quiz]').forEach(function (wortel) {
+      if (wortel.dataset.wsKlaar) return;
+      wortel.dataset.wsKlaar = '1';
+
+      var vakken = {};
+      wortel.querySelectorAll('[data-qz-vak]').forEach(function (v) { vakken[v.dataset.qzVak] = v; });
+      var stippen = wortel.querySelectorAll('[data-qz-stip]');
+      var terug = wortel.querySelector('[data-qz-terug]');
+      var v3kop = wortel.querySelector('[data-qz-v3kop]');
+      var v3sjabloon = v3kop ? v3kop.textContent : '';
+      var pad = [];
+
+      function toon(naam) {
+        Object.keys(vakken).forEach(function (k) { vakken[k].hidden = k !== naam; });
+        var nr = naam === 'wie' ? 1 : naam === 'zone' ? 2 : 3;
+        stippen.forEach(function (s) {
+          var eigen = parseInt(s.dataset.qzStip, 10);
+          s.classList.toggle('is-aan', eigen === nr && naam !== 'uit');
+          s.classList.toggle('is-klaar', eigen < nr || naam === 'uit');
+        });
+        if (terug) terug.hidden = pad.length === 0;
+        // Bij een nieuwe stap springt de blik naar de vraag, niet naar de paginatop.
+        var doel = vakken[naam];
+        if (doel && pad.length) {
+          var y = doel.getBoundingClientRect().top + window.pageYOffset - 90;
+          window.scrollTo({ top: y < 0 ? 0 : y, behavior: 'smooth' });
+        }
+      }
+
+      function toonUitkomst(sleutel) {
+        wortel.querySelectorAll('[data-qz-uit]').forEach(function (u) {
+          u.hidden = u.dataset.qzUit !== sleutel;
+        });
+        toon('uit');
+      }
+
+      wortel.querySelectorAll('[data-qz-wie]').forEach(function (knop) {
+        knop.addEventListener('click', function () {
+          if (knop.dataset.qzWie === 'cadeau') {
+            pad.push('wie');
+            toonUitkomst('cadeau');
+          } else {
+            pad.push('wie');
+            toon('zone');
+          }
+        });
+      });
+
+      wortel.querySelectorAll('[data-qz-zone]').forEach(function (knop) {
+        knop.addEventListener('click', function () {
+          var zone = knop.dataset.qzZone;
+          var groepen = wortel.querySelectorAll('[data-qz-keuzes]');
+          var mijn = null;
+          groepen.forEach(function (g) {
+            var raak = g.dataset.qzKeuzes === zone;
+            g.hidden = !raak;
+            if (raak) mijn = g;
+          });
+          pad.push('zone');
+          // Eén route in deze zone? Dan is er niets te kiezen en slaan we vraag 3 over.
+          var routes = mijn ? mijn.querySelectorAll('[data-qz-route]') : [];
+          if (routes.length === 1) {
+            toonUitkomst(routes[0].dataset.qzRoute);
+            return;
+          }
+          if (v3kop && v3sjabloon.indexOf('{zone}') !== -1) {
+            v3kop.textContent = v3sjabloon.replace('{zone}', zone.toLowerCase());
+          }
+          toon('keuze');
+        });
+      });
+
+      wortel.querySelectorAll('[data-qz-route]').forEach(function (knop) {
+        knop.addEventListener('click', function () {
+          // Vanuit een alternatief-chip staan we al op de uitkomst; dan geen stap erbij.
+          if (!vakken.uit.hidden) {
+            toonUitkomst(knop.dataset.qzRoute);
+            return;
+          }
+          pad.push('keuze');
+          toonUitkomst(knop.dataset.qzRoute);
+        });
+      });
+
+      wortel.querySelectorAll('[data-qz-opnieuw]').forEach(function (knop) {
+        knop.addEventListener('click', function () {
+          pad = [];
+          toon('wie');
+        });
+      });
+
+      if (terug) {
+        terug.addEventListener('click', function () {
+          var vorige = pad.pop();
+          toon(vorige || 'wie');
+        });
+      }
+
+      toon('wie');
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "WS · Quiz",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Bovenregel", "default": "Drie vragen" },
+    { "type": "inline_richtext", "id": "kop", "label": "Kop (vet = brons)", "default": "Welk apparaat past bij <b>wat jij wilt doen?</b>" },
+    { "type": "textarea", "id": "sub", "label": "Subkop", "default": "Beantwoord drie vragen en je krijgt één apparaat te zien — met prijs, voorraad en waarom juist die." },
+    { "type": "image_picker", "id": "merk", "label": "Monogram" },
+    { "type": "header", "content": "De balk bovenaan" },
+    { "type": "text", "id": "terug", "label": "Terugknop", "default": "Terug" },
+    { "type": "text", "id": "stap_1", "label": "Stap 1", "default": "Voor wie" },
+    { "type": "text", "id": "stap_2", "label": "Stap 2", "default": "Waar" },
+    { "type": "text", "id": "stap_3", "label": "Stap 3", "default": "Wat" },
+    { "type": "header", "content": "Vraag 1 — voor wie" },
+    { "type": "text", "id": "v1_kop", "label": "Vraag", "default": "Voor wie zoek je iets?" },
+    { "type": "text", "id": "v1_sub", "label": "Onderregel", "default": "Dat bepaalt of we naar één plek kijken of naar een set die meer dekt." },
+    { "type": "text", "id": "v1_zelf", "label": "Antwoord 1", "default": "Voor mezelf" },
+    { "type": "text", "id": "v1_zelf_wat", "label": "Onderregel 1", "default": "Ik weet waar ik aan de slag wil." },
+    { "type": "text", "id": "v1_cadeau", "label": "Antwoord 2", "default": "Als cadeau" },
+    { "type": "text", "id": "v1_cadeau_wat", "label": "Onderregel 2", "default": "Ik weet niet precies wat hij gebruikt." },
+    { "type": "header", "content": "Vraag 2 — welke zone" },
+    { "type": "text", "id": "v2_kop", "label": "Vraag", "default": "Waar wil je aan de slag?" },
+    { "type": "text", "id": "v2_sub", "label": "Onderregel", "default": "Elke plek vraagt om een andere kop, messtand en vorm." },
+    { "type": "header", "content": "Vraag 3 — wat wil je ermee" },
+    { "type": "text", "id": "v3_kop", "label": "Vraag", "info": "{zone} wordt vervangen door de gekozen zone.", "default": "Wat wil je met {zone} doen?" },
+    { "type": "text", "id": "v3_sub", "label": "Onderregel", "default": "Kort houden en glad scheren vragen om een ander apparaat." },
+    { "type": "header", "content": "De uitkomst" },
+    { "type": "text", "id": "uit_label", "label": "Label boven de kaart", "default": "Dit past bij jouw antwoorden" },
+    { "type": "text", "id": "bespaar", "label": "Woord voor de besparing", "default": "Je bespaart" },
+    { "type": "text", "id": "voorraad_wel", "label": "Tekst bij voorraad", "default": "Op voorraad · morgen in huis" },
+    { "type": "text", "id": "voorraad_niet", "label": "Tekst zonder voorraad", "default": "Tijdelijk uitverkocht" },
+    { "type": "text", "id": "knop", "label": "Koopknop", "default": "In de winkelwagen" },
+    { "type": "text", "id": "meer", "label": "Link naar de productpagina", "default": "Bekijk alle specificaties" },
+    { "type": "text", "id": "anders_kop", "label": "Kop boven de alternatieven", "default": "Wilde je toch iets anders in deze zone?" },
+    { "type": "text", "id": "opnieuw", "label": "Opnieuwknop", "default": "Begin opnieuw" },
+    { "type": "text", "id": "zeker_1", "label": "Zekerheid 1", "default": "100 dagen proberen" },
+    { "type": "text", "id": "zeker_2", "label": "Zekerheid 2", "default": "2 jaar garantie" },
+    { "type": "text", "id": "zeker_3", "label": "Zekerheid 3", "default": "Morgen in huis" },
+    { "type": "header", "content": "De cadeauroute" },
+    { "type": "product", "id": "cadeau_product", "label": "Product", "info": "Prijs, voorraad en de koopknop komen hieruit." },
+    { "type": "text", "id": "cadeau_label", "label": "Label boven de kaart", "default": "Het veiligste cadeau" },
+    { "type": "text", "id": "cadeau_zone", "label": "Bovenregel in de kaart", "default": "Cadeau · dekt meerdere zones" },
+    { "type": "inline_richtext", "id": "cadeau_naam", "label": "Naam (vet = goud)", "info": "Leeg = de producttitel." },
+    { "type": "image_picker", "id": "cadeau_foto", "label": "Foto", "info": "Leeg = de hoofdafbeelding van het product." },
+    { "type": "text", "id": "cadeau_pil", "label": "Pil op de foto", "default": "Bestverkochte set" },
+    { "type": "textarea", "id": "cadeau_waarom", "label": "Waarom deze", "default": "Wie voor een ander koopt, weet zelden welke plek hij aanpakt. Deze set dekt trimmen, detailwerk en glad afwerken in één doos, dus je hoeft het niet te raden." },
+    { "type": "text", "id": "cadeau_punt_1", "label": "Punt 1" },
+    { "type": "text", "id": "cadeau_punt_2", "label": "Punt 2" },
+    { "type": "text", "id": "cadeau_punt_3", "label": "Punt 3" },
+    { "type": "text", "id": "cadeau_anders", "label": "Regel onderaan", "default": "Weet je toch precies wat hij gebruikt?" },
+    { "type": "text", "id": "cadeau_anders_knop", "label": "Knop onderaan", "default": "Doe de quiz alsnog per zone" },
+    { "type": "header", "content": "Indent settings" },
+    { "type": "range", "id": "desk_indent_top", "label": "Indent top (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "desk_indent_bottom", "label": "Indent bottom (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_top", "label": "Indent top (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_bottom", "label": "Indent bottom (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "blocks": [
+    {
+      "type": "route",
+      "name": "Route",
+      "settings": [
+        { "type": "text", "id": "zone", "label": "Zone", "info": "Routes met dezelfde zone komen onder één zoneknop te staan. Let op de schrijfwijze — die moet letterlijk gelijk zijn." },
+        { "type": "image_picker", "id": "zone_foto", "label": "Foto op de zoneknop", "info": "Alleen die van de eerste route van een zone wordt gebruikt." },
+        { "type": "text", "id": "zone_wat", "label": "Onderregel op de zoneknop", "info": "Alleen die van de eerste route van een zone wordt gebruikt." },
+        { "type": "text", "id": "keuze", "label": "Antwoord bij vraag 3" },
+        { "type": "text", "id": "keuze_wat", "label": "Onderregel bij het antwoord" },
+        { "type": "product", "id": "product", "label": "De aanbeveling", "info": "Naam, prijs, van-prijs, voorraad en de koopknop komen hieruit." },
+        { "type": "inline_richtext", "id": "naam", "label": "Naam (vet = goud)", "info": "Leeg = de producttitel." },
+        { "type": "image_picker", "id": "foto", "label": "Foto", "info": "Leeg = de hoofdafbeelding van het product." },
+        { "type": "text", "id": "pil", "label": "Pil op de foto" },
+        { "type": "textarea", "id": "waarom", "label": "Waarom deze" },
+        { "type": "text", "id": "punt_1", "label": "Punt 1" },
+        { "type": "text", "id": "punt_2", "label": "Punt 2" },
+        { "type": "text", "id": "punt_3", "label": "Punt 3" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "WS · Quiz" } ]
+}
+{% endschema %}

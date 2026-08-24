@@ -1,0 +1,234 @@
+/* ═══ Wellshave — de quiz ═══
+   Eigen pagina, geen homepageblok. Zelfde palet als de homepage:
+   zand als ondergrond, #111 voor tekst, #BC813E als accent.
+   Mobiel is een echte media query op 749px — het breekpunt van het thema. */
+
+.ws-qz{font-family:"Montserrat",sans-serif;color:#111;padding:56px 44px 64px;
+  background:linear-gradient(160deg,#FFFDFA 0%,#FBF6EE 46%,#F6EEE0 100%)}
+.ws-qz *{box-sizing:border-box}
+.ws-qz p{max-width:none;margin:0}
+.ws-qz__in{max-width:1040px;margin:0 auto;display:flex;flex-direction:column;gap:26px;
+  min-width:0;position:relative}
+
+/* ── kop ── */
+.ws-qz__kop{position:relative;text-align:center;padding-bottom:2px}
+.ws-qz__kop>*{position:relative;z-index:1}
+/* Deze regel moet ná .ws-qz__kop>* staan én even specifiek zijn, anders
+   duwt die de position:absolute eruit en neemt het monogram ruimte in. */
+.ws-qz__kop>.ws-qz__merk{position:absolute;display:block;left:50%;top:-26%;width:230px;
+  height:auto;opacity:.06;transform:translateX(-50%);pointer-events:none;z-index:0}
+.ws-qz__eyebrow{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:#BC813E;margin-bottom:12px}
+.ws-qz__h1{font-size:44px;font-weight:700;letter-spacing:-.03em;line-height:106%;
+  margin:0 0 12px;color:#111;text-transform:none}
+.ws-qz__h1 b,.ws-qz__h1 strong{color:#BC813E;font-weight:700}
+.ws-qz__sub{font-size:17px;line-height:160%;color:rgba(17,17,17,.64);
+  max-width:44em;margin:0 auto}
+
+/* ── de balk met stappen ── */
+.ws-qz__balk{display:flex;align-items:center;gap:18px;justify-content:center;
+  position:relative;min-height:38px}
+.ws-qz__terug{position:absolute;left:0;top:50%;transform:translateY(-50%);
+  display:inline-flex;align-items:center;gap:7px;background:none;border:0;cursor:pointer;
+  font:inherit;font-size:13px;font-weight:600;color:rgba(17,17,17,.6);padding:8px 4px}
+.ws-qz__terug[hidden]{display:none}
+.ws-qz__terug svg{width:16px;height:16px}
+.ws-qz__terug:hover{color:#111}
+.ws-qz__stappen{display:flex;align-items:center;gap:10px;list-style:none;margin:0;padding:0}
+.ws-qz__stappen li{display:flex;align-items:center;gap:8px;color:rgba(17,17,17,.4)}
+.ws-qz__stappen li+li::before{content:"";width:24px;height:1px;background:rgba(17,17,17,.16);
+  display:block;margin-right:2px}
+.ws-qz__stappen i{width:24px;height:24px;flex:none;border-radius:50%;font-style:normal;
+  font-size:11.5px;font-weight:700;display:grid;place-items:center;
+  background:rgba(17,17,17,.07);color:rgba(17,17,17,.45)}
+.ws-qz__stappen span{font-size:11.5px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase}
+.ws-qz__stappen .is-aan{color:#111}
+.ws-qz__stappen .is-aan i{background:#BC813E;color:#fff}
+.ws-qz__stappen .is-klaar i{background:rgba(188,129,62,.2);color:#8A5A22}
+
+/* ── een vraagvak ── */
+.ws-qz__vak{display:flex;flex-direction:column;gap:16px}
+.ws-qz__vak[hidden]{display:none}
+.ws-qz__vraag{font-size:26px;font-weight:700;letter-spacing:-.02em;line-height:120%;
+  text-align:center}
+.ws-qz__vraagsub{font-size:14.5px;line-height:160%;color:rgba(17,17,17,.58);
+  text-align:center;margin-top:-8px !important}
+
+/* ── antwoordkaarten ── */
+.ws-qz__twee{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.ws-qz__kaart{position:relative;display:flex;flex-direction:column;align-items:flex-start;
+  gap:5px;text-align:left;cursor:pointer;font:inherit;background:#fff;
+  border:1px solid rgba(17,17,17,.1);border-radius:16px;padding:22px 46px 22px 22px;
+  transition:border-color .18s,box-shadow .18s,transform .18s}
+.ws-qz__kaart b{font-size:17px;font-weight:700;letter-spacing:-.01em}
+.ws-qz__kaart>span{font-size:13.5px;line-height:155%;color:rgba(17,17,17,.6)}
+.ws-qz__kaart:hover{border-color:rgba(188,129,62,.55);transform:translateY(-2px);
+  box-shadow:0 18px 34px -24px rgba(17,17,17,.5)}
+.ws-qz__kaart:focus-visible{outline:2px solid #BC813E;outline-offset:3px}
+.ws-qz__kaartpijl{position:absolute;right:18px;top:50%;transform:translateY(-50%);
+  width:18px;height:18px;color:rgba(17,17,17,.25);transition:color .18s,transform .18s}
+.ws-qz__kaart:hover .ws-qz__kaartpijl{color:#BC813E;transform:translateY(-50%) translateX(3px)}
+.ws-qz__kaart--wie{align-items:center;text-align:center;padding:26px 20px;gap:9px}
+.ws-qz__ring{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;
+  background:rgba(188,129,62,.1);color:#BC813E;margin-bottom:3px}
+.ws-qz__ring svg{width:24px;height:24px}
+
+/* ── de zoneknoppen ── */
+.ws-qz__zones{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.ws-qz__zone{position:relative;display:flex;flex-direction:column;gap:0;cursor:pointer;
+  font:inherit;text-align:left;background:#fff;border:1px solid rgba(17,17,17,.1);
+  border-radius:16px;overflow:hidden;padding:0;
+  transition:border-color .18s,box-shadow .18s,transform .18s}
+.ws-qz__zone:hover{border-color:rgba(188,129,62,.55);transform:translateY(-2px);
+  box-shadow:0 18px 34px -24px rgba(17,17,17,.5)}
+.ws-qz__zone:focus-visible{outline:2px solid #BC813E;outline-offset:3px}
+.ws-qz__zonebeeld{display:block;aspect-ratio:4/3;background:#F2EADE;overflow:hidden}
+.ws-qz__zonebeeld img{width:100%;height:100%;object-fit:cover;display:block}
+.ws-qz__zonetekst{display:flex;flex-direction:column;gap:3px;padding:14px 40px 16px 16px}
+.ws-qz__zonetekst b{font-size:15.5px;font-weight:700;letter-spacing:-.01em}
+.ws-qz__zonetekst span{font-size:12.5px;line-height:150%;color:rgba(17,17,17,.58)}
+.ws-qz__zonepijl{position:absolute;right:15px;bottom:19px;width:17px;height:17px;
+  color:rgba(17,17,17,.25);transition:color .18s,transform .18s}
+.ws-qz__zone:hover .ws-qz__zonepijl{color:#BC813E;transform:translateX(3px)}
+
+/* ── de keuzes bij vraag 3 ── */
+.ws-qz__keuzes{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.ws-qz__keuzes[hidden]{display:none}
+
+/* ── de uitkomst ── */
+.ws-qz__vak--uit{gap:14px}
+.ws-qz__uitkomst[hidden]{display:none}
+.ws-qz__uitlabel{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;
+  font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#8A5A22;
+  background:rgba(188,129,62,.12);border-radius:100px;padding:8px 15px;margin:0 auto 14px !important}
+.ws-qz__uitlabel svg{width:15px;height:15px}
+.ws-qz__uitbody{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1fr);
+  gap:0;background:#fff;border:1px solid rgba(17,17,17,.09);border-radius:20px;
+  overflow:hidden;box-shadow:0 34px 60px -46px rgba(17,17,17,.55)}
+.ws-qz__uitbeeld{position:relative;background:linear-gradient(155deg,#FBF4E9 0%,#F1E4D0 100%);
+  display:grid;place-items:center;padding:26px;min-height:280px}
+.ws-qz__uitbeeld img{width:100%;height:100%;max-height:340px;object-fit:contain;display:block}
+.ws-qz__pil{position:absolute;left:18px;top:18px;font-size:11px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:#38220A;background:rgba(255,255,255,.86);
+  border-radius:100px;padding:7px 13px}
+.ws-qz__uitkaart{padding:30px 30px 32px;display:flex;flex-direction:column;
+  align-items:flex-start;gap:0}
+.ws-qz__uitzone{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:#BC813E;margin-bottom:9px !important}
+.ws-qz__uitnaam{font-size:29px;font-weight:700;letter-spacing:-.025em;line-height:112%;
+  margin:0 0 10px;text-transform:none}
+.ws-qz__uitnaam b,.ws-qz__uitnaam strong{color:#BC813E;font-weight:700}
+.ws-qz__waarom{font-size:14.5px;line-height:165%;color:rgba(17,17,17,.66);
+  margin-bottom:16px !important}
+.ws-qz__punten{list-style:none;margin:0 0 18px;padding:0;display:flex;
+  flex-direction:column;gap:8px;width:100%}
+.ws-qz__punten li{display:flex;align-items:flex-start;gap:9px;font-size:13.5px;
+  line-height:150%;color:rgba(17,17,17,.78)}
+.ws-qz__punten svg{width:15px;height:15px;flex:none;color:#BC813E;margin-top:2px}
+.ws-qz__prijs{display:flex;align-items:baseline;flex-wrap:wrap;gap:10px;
+  margin-bottom:8px !important}
+.ws-qz__nu{font-size:30px;font-weight:700;letter-spacing:-.03em}
+.ws-qz__was{font-size:16px;color:rgba(17,17,17,.4);text-decoration:line-through}
+.ws-qz__korting{font-size:12px;font-weight:700;color:#1F7A4D;background:rgba(31,122,77,.1);
+  border-radius:100px;padding:5px 11px}
+.ws-qz__voorraad{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;
+  color:rgba(17,17,17,.68);margin-bottom:16px !important}
+.ws-qz__stip{width:8px;height:8px;border-radius:50%;background:#1F7A4D;flex:none}
+.ws-qz__uitkaart form{width:100%;margin:0}
+.ws-qz__knop{width:100%;display:flex;align-items:center;justify-content:center;gap:12px;
+  cursor:pointer;font:inherit;font-size:15px;font-weight:700;letter-spacing:.01em;
+  color:#fff;background:linear-gradient(100deg,#C98F45 0%,#A9702C 100%);border:0;
+  border-radius:100px;padding:17px 26px;
+  box-shadow:0 16px 30px -16px rgba(169,112,44,.85);transition:transform .18s,box-shadow .18s}
+.ws-qz__knop:hover{transform:translateY(-2px);box-shadow:0 20px 36px -16px rgba(169,112,44,.9)}
+.ws-qz__knop[disabled]{background:rgba(17,17,17,.14);color:rgba(17,17,17,.45);
+  box-shadow:none;cursor:not-allowed;transform:none}
+.ws-qz__knop span{display:grid;place-items:center;width:22px;height:22px}
+.ws-qz__knop svg{width:17px;height:17px}
+.ws-qz__meer{margin-top:12px !important;font-size:13px;text-align:center;width:100%}
+.ws-qz__meer a{color:rgba(17,17,17,.6);text-underline-offset:3px}
+.ws-qz__meer a:hover{color:#111}
+
+/* ── alternatieven binnen dezelfde zone ── */
+.ws-qz__anders{margin-top:16px;text-align:center}
+.ws-qz__anders p{font-size:13px;color:rgba(17,17,17,.55);margin-bottom:10px !important}
+.ws-qz__anders div{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.ws-qz__chip{cursor:pointer;font:inherit;font-size:12.5px;font-weight:600;color:rgba(17,17,17,.72);
+  background:rgba(255,255,255,.8);border:1px solid rgba(17,17,17,.12);border-radius:100px;
+  padding:9px 16px;transition:border-color .18s,color .18s}
+.ws-qz__chip:hover{border-color:rgba(188,129,62,.6);color:#111}
+
+/* ── voet ── */
+.ws-qz__voet{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  flex-wrap:wrap;padding-top:20px;margin-top:6px;border-top:1px solid rgba(17,17,17,.09)}
+.ws-qz__opnieuw{display:inline-flex;align-items:center;gap:8px;cursor:pointer;font:inherit;
+  font-size:13px;font-weight:600;color:rgba(17,17,17,.6);background:none;border:0;padding:6px 0}
+.ws-qz__opnieuw svg{width:16px;height:16px}
+.ws-qz__opnieuw:hover{color:#111}
+.ws-qz__zeker{display:flex;flex-wrap:wrap;gap:8px 20px}
+.ws-qz__zeker span{position:relative;font-size:12.5px;font-weight:600;
+  color:rgba(17,17,17,.6);padding-left:15px}
+.ws-qz__zeker span::before{content:"";position:absolute;left:0;top:50%;
+  transform:translateY(-50%);width:6px;height:6px;border-radius:50%;background:#BC813E}
+
+/* ═══ mobiel ═══ */
+@media (max-width:749px){
+  .ws-qz{padding:34px 16px 44px}
+  .ws-qz__in{gap:20px}
+  .ws-qz__h1{font-size:27px}
+  .ws-qz__sub{font-size:14.5px}
+  .ws-qz__kop>.ws-qz__merk{width:150px;top:-14%}
+
+  /* De terugknop kan niet meer absoluut: dan valt hij over de stippen heen. */
+  .ws-qz__balk{flex-direction:column;gap:12px;align-items:stretch}
+  .ws-qz__terug{position:static;transform:none;align-self:flex-start}
+  .ws-qz__stappen{justify-content:center;gap:6px}
+  .ws-qz__stappen span{display:none}
+  .ws-qz__stappen li+li::before{width:18px}
+
+  .ws-qz__vraag{font-size:20px}
+  .ws-qz__vraagsub{font-size:13px}
+
+  /* Wat naast elkaar kan, staat naast elkaar. */
+  .ws-qz__twee{gap:9px}
+  .ws-qz__kaart--wie{padding:18px 11px;gap:6px}
+  .ws-qz__ring{width:42px;height:42px}
+  .ws-qz__ring svg{width:20px;height:20px}
+  .ws-qz__kaart--wie b{font-size:14.5px}
+  .ws-qz__kaart--wie>span{font-size:12px}
+
+  .ws-qz__zones{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  .ws-qz__zonebeeld{aspect-ratio:1/1}
+  .ws-qz__zonetekst{padding:11px 11px 13px}
+  .ws-qz__zonetekst b{font-size:13.5px}
+  .ws-qz__zonetekst span{font-size:11.5px}
+  .ws-qz__zonepijl{display:none}
+
+  .ws-qz__keuzes{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  .ws-qz__kaart{padding:16px 12px 17px;border-radius:14px}
+  .ws-qz__kaart b{font-size:14px}
+  .ws-qz__kaart>span{font-size:12px}
+  .ws-qz__kaartpijl{display:none}
+
+  /* Beeld en koopkaart passen op 390px niet naast elkaar zonder dat de prijs
+     in de knel komt. Het beeld wordt daarom een lage band bovenop. */
+  .ws-qz__uitbody{grid-template-columns:minmax(0,1fr);border-radius:16px}
+  .ws-qz__uitbeeld{min-height:0;padding:16px;aspect-ratio:16/10}
+  .ws-qz__uitbeeld img{max-height:none}
+  .ws-qz__pil{left:12px;top:12px;font-size:10px;padding:6px 11px}
+  .ws-qz__uitkaart{padding:20px 16px 24px}
+  .ws-qz__uitnaam{font-size:22px}
+  .ws-qz__waarom{font-size:13.5px;margin-bottom:14px !important}
+  .ws-qz__punten li{font-size:12.5px}
+  .ws-qz__nu{font-size:25px}
+  .ws-qz__uitlabel{font-size:10.5px;padding:7px 13px}
+
+  .ws-qz__voet{flex-direction:column;align-items:flex-start;gap:12px}
+  .ws-qz__zeker{gap:6px 16px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .ws-qz__kaart,.ws-qz__zone,.ws-qz__knop{transition:none}
+  .ws-qz__kaart:hover,.ws-qz__zone:hover,.ws-qz__knop:hover{transform:none}
+}

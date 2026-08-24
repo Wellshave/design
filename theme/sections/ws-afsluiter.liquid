@@ -43,7 +43,7 @@
           </a>
         {%- endif -%}
         {%- if section.settings.cta2_label != blank -%}
-          <a class="ws-af__cta ws-af__cta--rand" href="{{ section.settings.cta2_link | default: '#' }}">
+          <a class="ws-af__cta ws-af__cta--rand" href="{{ section.settings.cta2_link | default: '/pages/quiz' }}">
             <svg><use href="#ws-af-quiz"/></svg>
             {{- section.settings.cta2_label -}}
           </a>
@@ -120,7 +120,7 @@
     { "type": "text", "id": "cta1_label", "label": "Hoofdknop", "default": "Bekijk alle apparaten" },
     { "type": "url", "id": "cta1_link", "label": "Link hoofdknop" },
     { "type": "text", "id": "cta2_label", "label": "Tweede knop", "default": "Start de quiz" },
-    { "type": "url", "id": "cta2_link", "label": "Link tweede knop", "info": "Wijst naar de quizpagina zodra die bestaat." },
+    { "type": "url", "id": "cta2_link", "label": "Link tweede knop", "info": "Leeg = /pages/quiz, de quizpagina." },
     { "type": "header", "content": "Reden om vandaag te beslissen" },
     { "type": "inline_richtext", "id": "reden", "label": "Regel", "default": "Vandaag beslissen kost je niets: <b>je hebt honderd dagen om van gedachten te veranderen.</b>" },
     { "type": "header", "content": "Achtergrond" },
