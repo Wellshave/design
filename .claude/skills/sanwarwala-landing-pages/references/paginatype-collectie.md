@@ -220,3 +220,38 @@ verschilt is inhoud, en dat hoort in een `dict` te staan — niet in de opmaak.
   vaak méér uit dan het mechanisme, want het beantwoordt de vraag waarmee de bezoeker binnenkomt.
 - **Houd lintjes op kaarten kort.** Meer dan ongeveer twintig tekens wordt afgekapt in de tegel;
   het aantal bestellingen hoort dan in het matchpaneel of in de audit, niet op de kaart.
+
+## De overkoepelende collectiepagina
+
+`/collections/all` is hetzelfde sjabloon met een andere taak. Een zonepagina helpt kiezen tussen
+apparaten die op elkaar lijken; de overkoepelende pagina moet de bezoeker in één scherm naar de
+juiste zone brengen. Dat verandert vier dingen, en verder niets — wijk niet verder af, want het
+is dezelfde collectie en dezelfde kaart.
+
+- **Een zonekiezer in plaats van een productkeuzehulp.** De vraag is hier niet "welke van deze
+  vier" maar "waar wil ik beginnen". Twee vragen — de zone, en of het één apparaat of een set
+  moet zijn — leiden naar één uitkomst per zone per vorm. Kies als uitkomst het best verkopende
+  apparaat van die zone en de ruimste set, niet het duurste.
+- **Het raster sorteert op zone, niet op categorie.** Eén groep per zone met een eigen kop en een
+  link naar de zonepagina, daarna de sets en de onderdelen. Eén rij van vijftig kaarten leest als
+  een magazijn; vier zones met een uitgang lezen als een winkel.
+- **Geen vergelijker.** Vergelijken hoort binnen één zone, tussen apparaten die hetzelfde werk
+  doen. Een hoofdscheerder naast een neustrimmer leggen helpt niemand. Laat dan ook de
+  vergelijkvinkjes en de knop in de filterbalk weg — een knop die niets doet is erger dan een
+  knop die er niet is.
+- **De foto is een band van vier.** Eén beeld dekt vier zones niet. Zet vier eigen foto's naast
+  elkaar als verticale sneden in dezelfde 16:8-plaat, één per zone, met een smalle tussenruimte.
+  Dat toont de hele collectie zonder dat er iets gegenereerd hoeft te worden.
+
+**Lees de collectie uit, niet de tags.** De collectie is wat de bezoeker ziet, en die bevat
+doorgaans meer dan de winkel verkoopt: gearchiveerde producten, concepten, testkopieën en
+uitverkochte onderdelen tellen mee in elk getal dat je erop baseert. Vraag daarom per product
+`status`, `totalInventory` en `tags` op, plus `sortOrder` van de collectie zelf — een handmatige
+sortering over tientallen producten betekent bijna altijd dat het best verkopende artikel ergens
+onderaan staat. Tel daarna twee keer: wat er in de collectie zit, en wat je er werkelijk van kunt
+kopen. Het verschil tussen die twee getallen is de kop van de audit.
+
+**Let op sets die op één onderdeel wachten.** Staat een apparaat op negatieve voorraad, controleer
+dan welke bundels het in de doos hebben; die staan dan meestal ook stil. Eén uitverkocht apparaat
+dat vier verkoopbare kaarten meeneemt, is een bevinding die niemand ziet zolang je per product
+kijkt.
