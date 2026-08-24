@@ -526,6 +526,79 @@ strong{font-weight:700}
   .m3-strk .m3-v:first-child{border-top:0;padding-top:0}
 }
 
+/* ---------- blok 05: de Trustpilot-muur ---------- */
+.tpm{--t-groen:#00B67A;--t-inkt:#191919;margin:26px 0 0}
+.tp-hd{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:34px;align-items:end;margin-bottom:22px}
+.tp-ey{display:block;font-size:10.5px;font-weight:800;letter-spacing:.19em;text-transform:uppercase;color:var(--bronze)}
+.tpm h3{margin:12px 0 0;font-size:clamp(28px,3.6vw,40px);font-weight:800;letter-spacing:-.035em;
+  line-height:1.05;color:var(--ink)}
+.tpm h3 b{display:block;font-weight:800;
+  background-image:linear-gradient(100deg,#B0742A 0%,#8C5A1A 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:#B0742A}
+.tp-lead{margin:14px 0 0;max-width:33em;font-size:15px;line-height:1.55;color:var(--ink-60)}
+
+/* het scorekaartje */
+.tp-score{background:var(--paper);border:1px solid var(--ink-10);border-radius:var(--r-m);
+  padding:18px 22px;text-align:center;min-width:0}
+.tp-logo{display:flex;align-items:center;justify-content:center;gap:7px;margin-bottom:12px}
+.tp-logo svg{width:19px;height:19px;fill:var(--t-groen)}
+.tp-logo b{font-size:15px;font-weight:800;letter-spacing:-.03em;color:var(--t-inkt)}
+.tp-str{display:flex;gap:2.5px;justify-content:center}
+.tp-str span{width:23px;height:23px;background:var(--t-groen);display:flex;align-items:center;justify-content:center}
+.tp-str span.h{background:linear-gradient(90deg,var(--t-groen) 40%,#DCDCE6 40%)}
+.tp-str svg{width:15px;height:15px;fill:#fff}
+.tp-cij{margin-top:11px;font-size:26px;font-weight:800;letter-spacing:-.04em;line-height:1}
+.tp-cij em{font-style:normal;font-size:14px;font-weight:600;color:var(--ink-40)}
+.tp-aantal{margin:5px 0 0;font-size:12.5px;color:var(--ink-60)}
+
+/* de verdeling */
+.tp-verd{background:var(--paper);border:1px solid var(--ink-10);border-radius:var(--r-m);
+  padding:20px 24px 18px;margin-bottom:14px}
+.tp-verd > b{display:block;font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--bronze);margin-bottom:14px}
+.tp-rij{display:grid;grid-template-columns:52px minmax(0,1fr) 96px;gap:14px;align-items:center;padding:5px 0}
+.tp-rij .lab{font-size:12.5px;font-weight:700;color:var(--ink-80);white-space:nowrap}
+.tp-rij .bar{height:11px;border-radius:100px;background:var(--sand-deep);overflow:hidden}
+.tp-rij .bar i{display:block;height:100%;border-radius:100px;background:var(--t-groen)}
+.tp-rij.laag .bar i{background:#C7C7CF}
+.tp-rij .n{text-align:right;font-size:12.5px;font-variant-numeric:tabular-nums;color:var(--ink-60);white-space:nowrap}
+.tp-rij .n b{font-weight:700;color:var(--ink)}
+
+/* de muur */
+.tp-muur{columns:3;column-gap:14px}
+.tp-k{break-inside:avoid;-webkit-column-break-inside:avoid;page-break-inside:avoid;
+  background:var(--paper);border:1px solid var(--ink-10);border-radius:var(--r-m);
+  padding:19px 21px;margin:0 0 14px}
+.tp-k .kop{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:11px}
+.tp-k .kop .tp-str span{width:18px;height:18px}.tp-k .kop .tp-str svg{width:12px;height:12px}
+.tp-k .dat{font-size:11.5px;color:var(--ink-40);white-space:nowrap}
+.tp-k h4{margin:0;font-size:15px;font-weight:700;letter-spacing:-.015em;line-height:1.3;color:var(--ink)}
+.tp-k p{margin:8px 0 0;font-size:14px;line-height:1.55;color:var(--ink-80)}
+.tp-k .wie{display:flex;align-items:center;gap:8px;margin-top:13px;padding-top:12px;
+  border-top:1px solid var(--ink-10);font-size:12.5px;color:var(--ink-60);flex-wrap:wrap}
+.tp-k .wie b{font-weight:700;color:var(--ink)}
+.tp-k .ver{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;
+  color:var(--t-groen);white-space:nowrap}
+.tp-k .ver svg{width:13px;height:13px}
+.tp-k.kritisch{border-left:3px solid var(--bronze)}
+
+.tp-voet{display:flex;align-items:baseline;justify-content:space-between;gap:18px;flex-wrap:wrap;
+  margin-top:6px;font-size:13px;color:var(--ink-60)}
+.tp-voet a{font-weight:700;color:var(--ink);text-decoration:none;
+  border-bottom:1.5px solid var(--bronze);padding-bottom:2px;white-space:nowrap}
+
+@media (max-width:1000px){
+  .tp-hd{grid-template-columns:1fr;gap:18px;align-items:start}
+  .tp-score{max-width:280px}
+  .tp-muur{columns:2}
+}
+@media (max-width:700px){
+  .tp-muur{columns:1}
+  .tp-verd{padding:16px 17px 14px}
+  .tp-rij{grid-template-columns:46px minmax(0,1fr) 74px;gap:10px}
+  .tp-rij .n{font-size:11.5px}
+}
+
 /* ---------- blok 06: de ladder ---------- */
 .lad{--l-zwart:#0B0B0A;--l-kaart:#141312;--l-gold3:#E9BE72;--l-gold4:#DDA548;
   --l-w72:rgba(255,255,255,.72);--l-w52:rgba(255,255,255,.52);--l-w38:rgba(255,255,255,.38);
@@ -952,6 +1025,121 @@ strong{font-weight:700}
     <h4>Wat er n&iacute;et per product wordt ingevuld</h4>
     <p>De strook onderaan komt uit de winkelbrede velden, niet uit het product: de eerste drie zijn de USP&rsquo;s van de productlijn en de vierde is de garantie. De Trustpilot-kaart is deels winkelbreed (score en aantal, live uit de widget-API) en deels per product (het citaat &mdash; hetzelfde veld dat blok 01 al gebruikt). Waar geen productcitaat bestaat valt de kaart weg en schuift de kop over de volle breedte.</p>
     <p>Negen velden dus, allemaal kort. Voor een accessoire zonder eigen mechanisme laat je ze leeg en verdwijnt het blok. Kernblok voor apparaten, uitbreiding voor de rest.</p>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">BLOK 05</span><h2 class="duo">De reviewmuur,<span class="b">inclusief de sterren die je liever niet laat zien.</span></h2></div>
+  <p class="sintro">Na het mechanisme. Ik heb de reviews live opgehaald uit de Trustpilot-widget op je eigen business unit (<code>63c511d4e1339e2200c204a1</code>) en alles hieronder komt daaruit: de score, het aantal, de verdeling en negen echte reviews, woordelijk. <strong>Let op de nummering:</strong> door het invoegen van de UGC-band is dit blok van 04 naar 05 geschoven.</p>
+
+  <div class="tpm">
+    <div class="tp-hd">
+      <div>
+        <span class="tp-ey">Wat 968 mensen ervan vinden</span>
+        <h3>Niet ons woord.<b>Dat van hen &mdash; alle 968.</b></h3>
+        <p class="tp-lead">De score, de verdeling en de reviews komen rechtstreeks uit Trustpilot en veranderen mee. Wij kiezen ze niet en kunnen ze niet verwijderen.</p>
+      </div>
+      <div class="tp-score">
+        <div class="tp-logo"><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg><b>Trustpilot</b></div>
+        <div class="tp-str"><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span class="h"><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span></div>
+        <p class="tp-cij">4,4<em> / 5</em></p>
+        <p class="tp-aantal">968 beoordelingen</p>
+      </div>
+    </div>
+
+    <div class="tp-verd">
+      <b>Zo liggen de 968</b>
+        <div class="tp-rij"><span class="lab">5 sterren</span><span class="bar"><i style="width:71.8%"></i></span><span class="n"><b>695</b> &middot; 71,8%</span></div>
+        <div class="tp-rij"><span class="lab">4 sterren</span><span class="bar"><i style="width:16.8%"></i></span><span class="n"><b>163</b> &middot; 16,8%</span></div>
+        <div class="tp-rij laag"><span class="lab">3 sterren</span><span class="bar"><i style="width:3.1%"></i></span><span class="n"><b>30</b> &middot; 3,1%</span></div>
+        <div class="tp-rij laag"><span class="lab">2 sterren</span><span class="bar"><i style="width:2.7%"></i></span><span class="n"><b>26</b> &middot; 2,7%</span></div>
+        <div class="tp-rij laag"><span class="lab">1 ster</span><span class="bar"><i style="width:5.6%"></i></span><span class="n"><b>54</b> &middot; 5,6%</span></div>
+    </div>
+
+    <div class="tp-muur">
+      <article class="tp-k">
+        <div class="kop"><div class="tp-str"><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span></div><span class="dat">21 augustus 2026</span></div>
+        <h4>Super fijne tondeuse</h4>
+        <p>Super fijne tondeuse! Hij is makkelijk op te laden, ligt prettig in de hand en de batterij gaat echt lang mee. Werkt goed, is gebruiksvriendelijk en doet precies wat je ervan verwacht. Zeker een aanrader!</p>
+        <div class="wie"><b>Yara</b></div>
+      </article>
+      <article class="tp-k kritisch">
+        <div class="kop"><div class="tp-str"><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span style="background:#DCDCE6"><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span></div><span class="dat">20 augustus 2026</span></div>
+        <h4>Goed apparaat, slechte handleiding</h4>
+        <p>Goed apparaat. Drie kanttekeningen: 1. In manual staat olie bij leveromvang. Op doosje staat dat niet. 2. Aan/uitknop moet je 3 seconden ingedrukt houden om apparaat aan of uit te zetten. Staat niet in manual. Bijna had ik het apparaat als defect teruggestuurd&hellip;</p>
+        <div class="wie"><b>Eelco Schuring</b></div>
+      </article>
+      <article class="tp-k">
+        <div class="kop"><div class="tp-str"><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span></div><span class="dat">17 augustus 2026</span></div>
+        <h4>Super ding</h4>
+        <p>Super goed apparaat</p>
+        <div class="wie"><b>De Hooge Jm</b><span class="ver"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.4"/><path d="m8.2 12.2 2.6 2.6 5-5.2"/></svg> Geverifieerd</span></div>
+      </article>
+      <article class="tp-k">
+        <div class="kop"><div class="tp-str"><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span></div><span class="dat">12 augustus 2026</span></div>
+        <h4>heb in januari 2026 scheerapparaat 4 in 1 elite gekocht</h4>
+        <p>&hellip; geweldig apparaat voldoet aan alle wensen, zeker aan te bevelen en een zeer goede service!</p>
+        <div class="wie"><b>John Deguelle</b></div>
+      </article>
+      <article class="tp-k">
+        <div class="kop"><div class="tp-str"><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span></div><span class="dat">16 augustus 2026</span></div>
+        <h4>The sentinel pro</h4>
+        <p>Mooi van gezicht en uiterlijk. Werk super glad en reinigen doet hij zelf</p>
+        <div class="wie"><b>Leon</b></div>
+      </article>
+      <article class="tp-k">
+        <div class="kop"><div class="tp-str"><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span></div><span class="dat">11 augustus 2026</span></div>
+        <h4>kosteloos nieuwe oplader gekregen</h4>
+        <p>Ik was de oplader van mijn scheerapparaat kwijt. Omdat dit binnen de garantietijd van het apparaat viel, kreeg ik kosteloos een nieuwe oplader opgestuurd. Zelfs geen verzendkosten hoeven te betalen. Joel, bedankt!</p>
+        <div class="wie"><b>Tim Mathot</b></div>
+      </article>
+      <article class="tp-k">
+        <div class="kop"><div class="tp-str"><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span></div><span class="dat">10 augustus 2026</span></div>
+        <h4>Goed.</h4>
+        <p>Snelle levering, alles klopt wat er staat en het werkt uitstekend.</p>
+        <div class="wie"><b>Kevin</b><span class="ver"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.4"/><path d="m8.2 12.2 2.6 2.6 5-5.2"/></svg> Geverifieerd</span></div>
+      </article>
+      <article class="tp-k">
+        <div class="kop"><div class="tp-str"><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span></div><span class="dat">24 augustus 2026</span></div>
+        <h4>Super fijne Scheer aparaat</h4>
+        <p>Super fijne Scheer aparaat! Handig in gebruik! Helaas was hij na 1 jaar niet meer werkend maar na contact met whellshave. Kregen we gratis een nieuwe toegestuurd! Echt een topsurvice</p>
+        <div class="wie"><b>Nadih Neleman</b></div>
+      </article>
+      <article class="tp-k">
+        <div class="kop"><div class="tp-str"><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg></span></div><span class="dat">18 augustus 2026</span></div>
+        <h4>Een fijn apparaat voor een gunstige prijs</h4>
+        <p>Een fijn apparaat voor een gunstige prijs</p>
+        <div class="wie"><b>Gijs Holland</b></div>
+      </article>
+    </div>
+
+    <p class="tp-voet"><span>Live uit Trustpilot &middot; opgehaald 24 augustus 2026 &middot; ongewijzigd overgenomen, inclusief typefouten</span><a href="#">Alle 968 op Trustpilot &rarr;</a></p>
+  </div>
+
+  <div class="note win">
+    <h4>Waarom de verdeling erbij staat, en niet alleen de vier komma vier</h4>
+    <p>Vierenvijftig mensen gaven &eacute;&eacute;n ster. Dat is 5,6%, en de meeste winkels laten dat niet zien. Toch is die balk het sterkste onderdeel van dit blok: <strong>een score zonder verdeling is een bewering, een score m&eacute;t verdeling is een cijfer</strong>. Wie ziet dat je de eensterren niet wegstopt, gelooft de vijfsterren eerder.</p>
+    <p>Het werkt ook de andere kant op. 4,4 is geen 4,9, en dat roept bij een oplettende bezoeker de vraag op wat er dan misgaat. Die vraag beantwoorden is beter dan hem laten hangen &mdash; en het antwoord staat in de kaart van Eelco: het apparaat is goed, de handleiding niet. Daar kun je iets aan doen.</p>
+  </div>
+
+  <div class="note slecht">
+    <h4>Het echte probleem van dit blok: je reviews gaan niet over dit product</h4>
+    <p>Ik heb de twintig recentste doorgenomen en op onderwerp ingedeeld. <strong>Vijf gaan alleen over levering of service. Negen over allebei. Zes over het product zelf</strong> &mdash; en van die zes gaat er geen enkele over de Groom Guard. Ze gaan over de tondeuse, de 4-in-1 Elite, de Sentinel Pro en de neustrimmer.</p>
+    <p>Zet je hier een live feed van de recentste reviews neer, dan staat er op de Groom Guard-pagina straks &laquo;super snel geleverd&raquo; en &laquo;de neustrimmer werkt helemaal niet&raquo;. Het eerste is geen productbewijs, het tweede is bewijs t&eacute;gen een ander product van jou. In beide gevallen betaalt de Groom Guard de rekening.</p>
+    <p><strong>Er zijn twee eerlijke uitwegen.</strong> De eerste: houd het blok winkelbreed en zeg dat er ook bij &mdash; &laquo;wat mensen van Wellshave vinden&raquo;, niet &laquo;wat mensen van dit product vinden&raquo;. De kop hierboven doet dat. De tweede: kies per product een handvol reviews die er w&eacute;l over gaan, en zet erbij dat het een selectie is. Dat mag, zolang je het zegt. Wat niet mag is selecteren en doen alsof het de feed is.</p>
+  </div>
+
+  <div class="note warn">
+    <h4>Drie dingen die ik onderweg tegenkwam</h4>
+    <p><strong>Het aantal is opgelopen.</strong> Op 23 augustus stonden er 966 reviews, vandaag 968. Overal waar dat getal nu hardgecodeerd staat &mdash; in blok 03, in de koopstrook &mdash; moet het uit de widget komen, niet uit een veld. Anders staat er over een maand een getal dat niemand meer bijhoudt.</p>
+    <p><strong>Zeven van de twintig zijn &laquo;geverifieerd&raquo;.</strong> Trustpilot markeert een review als geverifieerd wanneer hij via een uitnodiging na een echte bestelling is geschreven. Dat is een sterker signaal dan de ster zelf, en het staat gratis in de data. Ik heb het per kaart getoond waar het geldt.</p>
+    <p><strong>Reviews staan er woordelijk in, met typefouten.</strong> &laquo;Scheer aparaat&raquo;, &laquo;topsurvice&raquo;, &laquo;whellshave&raquo;. Niet gecorrigeerd, en dat is bewust: een gladgestreken review leest als reclame. Bovendien mag je andermans tekst niet aanpassen en er zijn naam onder laten staan.</p>
+  </div>
+
+  <div class="note">
+    <h4>Wat dit blok per product kost</h4>
+    <p>Niets, als je de winkelbrede variant neemt. Score, aantal, verdeling en reviews komen alle vier uit &eacute;&eacute;n aanroep op de widget met je business unit-id. Geen metafield, geen invulwerk, en het loopt vanzelf mee.</p>
+    <p>Kies je voor de selectie per product, dan is het &eacute;&eacute;n veld: <code>custom.trustpilot_reviews</code>, een lijst met review-URL&rsquo;s. Het werk zit in het uitzoeken, niet in het invullen &mdash; en het loont alleen voor de vier of vijf producten waar genoeg over geschreven is.</p>
   </div>
 </section>
 
