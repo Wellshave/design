@@ -1,0 +1,48 @@
+{
+  "sections": {
+    "koopvak": {
+      "type": "ws-pdp-koopvak",
+      "settings": {
+        "tag": "Meest gekozen",
+        "campagne": "Summer Sale",
+        "besparing_label": "Bespaar [korting]%",
+        "besparing_regel": "Je bespaart",
+        "tp_tonen": true,
+        "tp_label": "Uitstekend",
+        "tp_score": "4,4 · 968 reviews",
+        "tp_bron": "Trustpilot",
+        "koper_label": "Geverifieerde koper",
+        "citaat": "Erg fijne trimmer die z'n werk goed doet (…) zeker een aanrader dus als je zonder pijn en gedoe je lichaamshaar wil verwijderen!",
+        "citaat_wie": "Yven · 8 juli 2026",
+        "gift_titel": "Gratis Groom Guard™ Blade t.w.v. 14,95",
+        "gift_regel": "Wordt vanzelf meegeleverd",
+        "knop_label": "In winkelwagen",
+        "knop_uitverkocht": "Uitverkocht",
+        "voorraad_kop": "Op voorraad",
+        "voorraad_regel": "vandaag vóór 23:59 besteld, morgen in huis",
+        "veilig_label": "Veilig afrekenen",
+        "vergelijk_label": "Vergelijk de modellen",
+        "tel_voor": "Al door",
+        "tel_waarde": "200.000+",
+        "tel_na": "mannen gekozen",
+        "acc1_titel": "Omschrijving & specificaties",
+        "acc2_titel": "Wat zit er in de doos",
+        "acc3_titel": "Verzending & retour",
+        "acc3_tekst": "<p>Vandaag vóór 23:59 besteld is morgen in huis. Gratis verzending binnen Nederland en België. Niet goed? Binnen 100 dagen terug, wij betalen de retour.</p>",
+        "acc4_titel": "Garantie en proberen",
+        "acc4_tekst": "<p>Twee jaar garantie op elk apparaat. Honderd dagen proberen: bevalt het niet, dan krijg je je geld terug — ook als je hem gebruikt hebt.</p>",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 0
+      }
+    },
+    "ugc": { "type": "ugc-videos", "settings": {} },
+    "zones": { "type": "use-case", "settings": {} },
+    "aanbod": { "type": "featured-products", "settings": {} },
+    "vergelijk": { "type": "compare-table", "settings": {} },
+    "reviews": { "type": "trustpilot-reviews", "settings": {} },
+    "vragen": { "type": "faq", "settings": {} }
+  },
+  "order": ["koopvak", "ugc", "zones", "aanbod", "vergelijk", "reviews", "vragen"]
+}
