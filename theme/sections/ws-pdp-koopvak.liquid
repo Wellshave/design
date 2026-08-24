@@ -232,6 +232,15 @@
           <span class="ws-vl"><svg><use href="#ws-pdp-slot-{{ section.id }}"/></svg>{{ s.veilig_label }}</span>
         </div>
 
+        {%- comment -%} appblokken: Klarna, upsell-apps. Sleepbaar in de editor. {%- endcomment -%}
+        {%- if section.blocks.size > 0 -%}
+          <div class="ws-apps">
+            {%- for block in section.blocks -%}
+              <div {{ block.shopify_attributes }}>{% render block %}</div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
         {%- if s.vergelijk_label != blank -%}
           <a class="ws-cta2" href="{{ s.vergelijk_link | default: '#compare_table' }}">
             <svg><use href="#ws-pdp-vgl-{{ section.id }}"/></svg>{{ s.vergelijk_label }}
@@ -381,6 +390,20 @@
     { "type": "range", "id": "mob_indent_top", "label": "Indent top (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
     { "type": "range", "id": "mob_indent_bottom", "label": "Indent bottom (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 }
   ],
+  "blocks": [{ "type": "@app" }],
   "presets": [{ "name": "WS · PDP koopvak" }]
 }
 {% endschema %}
+
+{% stylesheet %}
+  .ws-pdp .ws-apps{margin-top:13px}
+  .ws-pdp .ws-apps:empty{display:none}
+  .ws-pdp .ws-apps > div:empty{display:none}
+  @media screen and (max-width:749px){
+    .ws-pdp .ws-bb > .ws-apps{order:12}
+    .ws-pdp .ws-bb > .ws-rev{order:13}
+    .ws-pdp .ws-bb > .ws-cta2{order:14}
+    .ws-pdp .ws-bb > .ws-tel{order:15}
+    .ws-pdp .ws-bb > .ws-acc{order:16}
+  }
+{% endstylesheet %}
