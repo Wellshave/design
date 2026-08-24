@@ -112,8 +112,11 @@ is ruim genoeg; wat detail is, hoort achter een uitklap in plaats van in een eig
    doorsnede krijgt `role="img"` met dezelfde beschrijving als alt, zodat hij niet als lege plek
    in een schermlezer valt.
 5. **Bewijs uit deze zone** &mdash; licht en kort. Drie beoordelingen, gekozen op het bezwaar dat ze
-   wegnemen, met per citaat het product erbij. Herhaal hier niet de scores die al op de kaarten
-   staan: twee keer hetzelfde cijfer maakt de pagina langer zonder dat het iets toevoegt.
+   wegnemen. **Hang elk citaat aan het apparaat waar het over gaat:** foto, een link naar die
+   productpagina, de score van dát apparaat en het feit dat de schrijver een geverifieerde koper is.
+   Een los citaat van een gebruikersnaam staat op de laagste trede van de geloofwaardigheidsladder;
+   met de bron erbij klimt het twee treden, zonder dat er iets verzonnen wordt. Een aparte rij met
+   scores erboven kan dan weg &mdash; die cijfers staan al op de kaarten in het raster.
 6. **Slotband** &mdash; donker. De garanties als smalle strook, vijf vragen over déze apparaten, en
    daaronder de andere zones voor wie hier verkeerd zit.
 
