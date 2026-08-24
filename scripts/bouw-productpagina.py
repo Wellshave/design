@@ -10,63 +10,17 @@ Zonder dat wint de laatste stylesheet en breken de eerste twee delen.
 
 """
 import re
-
-def split_rules(css):
-    """Loop op topniveau door de CSS en geef (soort, kop, body) terug."""
-    out=[]; i=0; n=len(css)
-    while i<n:
-        # commentaar overslaan
-        if css.startswith('/*',i):
-            j=css.find('*/',i+2); i=(j+2) if j>=0 else n; continue
-        if css[i] in ' \t\r\n': i+=1; continue
-        j=i; depth=0
-        while j<n and css[j]!='{': j+=1
-        if j>=n: break
-        kop=css[i:j].strip()
-        k=j; depth=0
-        while k<n:
-            if css.startswith('/*',k):
-                e=css.find('*/',k+2); k=(e+2) if e>=0 else n; continue
-            if css[k]=='{': depth+=1
-            elif css[k]=='}':
-                depth-=1
-                if depth==0: break
-            k+=1
-        lichaam=css[j+1:k]
-        out.append((kop,lichaam))
-        i=k+1
-    return out
-
-def prefix_sel(sel, scope):
-    sel=sel.strip()
-    if not sel: return sel
-    if sel==':root': return scope
-    if sel=='*': return scope+' *'
-    if sel=='body' or sel=='html' or sel=='html,body': return scope
-    if sel.startswith('body '): return scope+' '+sel[5:]
-    if sel.startswith('body'): return scope+sel[4:]
-    return scope+' '+sel
-
-def scope_css(css, scope):
-    uit=[]
-    for kop,lichaam in split_rules(css):
-        if kop.startswith('@'):
-            naam=kop.split()[0].lower()
-            if naam in ('@keyframes','@-webkit-keyframes','@font-face','@page'):
-                uit.append(kop+'{'+lichaam+'}')
-            else:  # @media, @supports
-                uit.append(kop+'{'+scope_css(lichaam,scope)+'}')
-        else:
-            sels=[prefix_sel(s,scope) for s in kop.split(',')]
-            uit.append(','.join(sels)+'{'+lichaam+'}')
-    return '\n'.join(uit)
+import sys, os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from cssscope import split_rules, prefix_sel, scope_css
 
 # -*- coding: utf-8 -*-
 import sys, io, re, html
 
 
 
-DELEN=[('meting','rapporten/meting.html',                                    u'De meting',     u'Wat Clarity en Shopify zeggen over waar het verkeer blijft steken.'),
+DELEN=[('schermen','rapporten/schermen.html',                                  u'Beide schermen', u'Elk getekend blok twee keer: desktop op 1440 px en mobiel op 390 px.'),
+       ('meting','rapporten/meting.html',                                    u'De meting',     u'Wat Clarity en Shopify zeggen over waar het verkeer blijft steken.'),
        ('volgorde','rapporten/volgorde.html',                                u'De volgorde',   u'Alle zeventien blokken op een rij, met grond, klasse en wat er al getekend is.'),
        ('plan',  'rapporten/pdp-plan.html',                                  u'Het plan',      u'De kaart: vier regels, drie producttypes, zeventien blokken.'),
        ('boven', 'rapporten/blokken/01-above-the-fold-v2-donker.html',       u'Boven de vouw', u'Het koopvak, de seizoensdeal, het sociale bewijs, de beweging.'),
@@ -217,7 +171,8 @@ SCRIPT_NAV = u"""
 })();
 """
 
-doc = (u'<title>De nieuwe productpagina</title>\n'
+doc = (u'<meta charset="utf-8">\n'
+ u'<title>De nieuwe productpagina</title>\n'
  u'<link rel="preconnect" href="https://fonts.googleapis.com">\n'
  u'<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
  u'<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap">\n'
