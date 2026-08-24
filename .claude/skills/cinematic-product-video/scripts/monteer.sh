@@ -5,9 +5,12 @@
 #
 #   monteer.sh --uit film.mp4 [--ass annotaties.ass] [--fonts MAP] shot1.mp4 shot2.mp4:2.3 ...
 #
-# Achter een shot mag ":seconden" staan om hem vanaf het begin af te kappen.
-# Dat is de manier om een shot te redden waarvan alleen de staart misgaat —
-# zie references/seedance-prompts.md over kantelende tekst.
+# Achter een shot mag een snede staan:
+#   shot.mp4:2.3      houdt de eerste 2,3 seconden  — redt een shot waarvan de staart misgaat,
+#                     zoals een woordmerk dat halverwege omklapt
+#   shot.mp4:1.8-5.0  houdt 1,8 tot 5,0 seconden    — kapt de kop af, voor een shot waarin het
+#                     aanspringen van een display of lampje te laat valt
+# Zie references/seedance-prompts.md voor beide gevallen.
 set -euo pipefail
 
 HIER="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -35,12 +38,16 @@ INVOER=(); FILTER=""; LABELS=""
 i=0
 for s in "${SHOTS[@]}"; do
   bestand="${s%%:*}"
-  duur=""
-  [ "$bestand" != "$s" ] && duur="${s##*:}"
+  snede=""
+  [ "$bestand" != "$s" ] && snede="${s#*:}"
   [ -f "$bestand" ] || { echo "Shot bestaat niet: $bestand" >&2; exit 1; }
   INVOER+=(-i "$bestand")
-  if [ -n "$duur" ]; then
-    FILTER+="[${i}:v]trim=0:${duur},setpts=PTS-STARTPTS[v${i}];"
+  if [ -n "$snede" ]; then
+    case "$snede" in
+      *-*) start="${snede%%-*}"; eind="${snede##*-}" ;;
+      *)   start=0;              eind="$snede"       ;;
+    esac
+    FILTER+="[${i}:v]trim=${start}:${eind},setpts=PTS-STARTPTS[v${i}];"
     LABELS+="[v${i}]"
   else
     LABELS+="[${i}:v]"
