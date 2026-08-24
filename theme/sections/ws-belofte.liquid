@@ -96,11 +96,15 @@
       teksten die iemand moet bijhouden. De eigen kaarten blijven als blok
       bestaan, dus terugschakelen kan door dit veld leeg te maken. {%- endcomment -%}
     <div>
-      {%- comment -%} geen aantal achter de kop: de widget noemt het zelf, en dan
-        wel het echte. Twee tellingen naast elkaar waarvan er één veroudert is
-        precies wat we met deze widget wilden voorkomen. {%- endcomment -%}
+      {%- comment -%} geen aantal achter de kop: de widget noemt zelf het echte
+        getal. Wel een regel die zegt waar het vandaan komt, want de kop stond
+        er anders kaal bij. {%- endcomment -%}
       {%- if section.settings.rev_kop != blank -%}
-        <p class="ws-pf__revcount ws-pf__revcount--live"><b>{{ section.settings.rev_kop }}</b></p>
+        <p class="ws-pf__revcount ws-pf__revcount--live"><b>{{ section.settings.rev_kop }}</b>
+          {%- if section.settings.rev_live_sub != blank -%}
+            <span>{{ section.settings.rev_live_sub }}</span>
+          {%- endif -%}
+        </p>
       {%- endif -%}
       <div class="ws-pf__tpband" data-ws-tp>{{ section.settings.rev_widget }}</div>
     </div>
@@ -259,7 +263,8 @@
     { "type": "image_picker", "id": "foto", "label": "Foto naast de kaart" },
     { "type": "header", "content": "Reviewband" },
     { "type": "text", "id": "rev_kop", "label": "Kop", "default": "Wat klanten schrijven" },
-    { "type": "text", "id": "rev_totaal", "label": "Totaal", "default": "950+ beoordelingen" },
+    { "type": "text", "id": "rev_totaal", "label": "Totaal", "info": "Alleen zichtbaar bij onze eigen kaarten; de widget noemt het aantal zelf.", "default": "950+ beoordelingen" },
+    { "type": "text", "id": "rev_live_sub", "label": "Regel achter de kop bij de widget", "info": "Alleen zichtbaar als er een widgetcode staat. Bewust zonder aantal: dat noemt de widget zelf, en dan het echte.", "default": "Live van Trustpilot" },
     { "type": "html", "id": "rev_widget", "label": "Widgetcode voor de band", "info": "Plak hier de Review Carousel van Trustpilot. De band vervangt dan de reviewkaarten hieronder; die blijven bewaard. Leeg = onze eigen kaarten." },
     { "type": "header", "content": "Bundel in de schijnwerpers" },
     { "type": "product", "id": "product", "label": "Product", "info": "Prijs, van-prijs, voordeel en voorraad komen hieruit." },
