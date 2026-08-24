@@ -111,13 +111,13 @@ is ruim genoeg; wat detail is, hoort achter een uitklap in plaats van in een eig
    `<figure>` staan met een bijschrift dat het mechanisme in één zin herhaalt. Een getekende
    doorsnede krijgt `role="img"` met dezelfde beschrijving als alt, zodat hij niet als lege plek
    in een schermlezer valt.
-5. **Bewijs uit deze zone** &mdash; donker. De score per apparaat, en drie beoordelingen gekozen op
-   het bezwaar dat ze wegnemen.
-6. **Compleet maken** &mdash; donker. De bundel die al bestaat, plus de losse messen en koppen.
-7. **Slotband** &mdash; donker. De garanties als smalle strook, vijf vragen over déze apparaten, en
+5. **Bewijs uit deze zone** &mdash; licht en kort. Drie beoordelingen, gekozen op het bezwaar dat ze
+   wegnemen, met per citaat het product erbij. Herhaal hier niet de scores die al op de kaarten
+   staan: twee keer hetzelfde cijfer maakt de pagina langer zonder dat het iets toevoegt.
+6. **Slotband** &mdash; donker. De garanties als smalle strook, vijf vragen over déze apparaten, en
    daaronder de andere zones voor wie hier verkeerd zit.
 
-Blok 1, 2, 3 en 7 zijn verplicht. De keuzehulp in blok 1 en het mechanisme in blok 4 zijn dat
+Blok 1, 2, 3 en 6 zijn verplicht. De keuzehulp in blok 1 en het mechanisme in blok 4 zijn dat
 zodra de producten in een collectie op elkaar lijken. Verwijder wat een zone niet heeft in plaats
 van het te vullen.
 
@@ -160,5 +160,11 @@ is precies de pagina die je aan het vervangen bent.
   de praktijk uit elkaar; zoek ze alle drie op voordat je publiceert.
 - **Testproducten en kopieën horen niet in een collectie.** Ze zijn onzichtbaar in de winkel maar
   tellen wel mee in het aantal.
+- **Een collectiepagina hoeft geen aanbod te pushen.** Er is er al één: het raster. Wil je toch een
+  aanbod tonen, neem dan de duurste complete set &mdash; die zet de rest van de prijzen in
+  verhouding &mdash; en houd het bij één smalle strook onder het raster: foto, naam, wat erin zit,
+  prijs met vanprijs, en een link. Geen gouden plaat, geen kortingsbadge, geen aparte sectie. Een
+  volwaardig aanbodblok hoort op een landingspagina, niet hier; het maakt de scroll langer op de
+  plek waar de bezoeker juist aan het kiezen is.
 - **Knoppen die rechtstreeks in de winkelwagen leggen, alleen bij onderdelen.** Bij een apparaat
   valt er nog te kiezen; daar is de productpagina de volgende stap, geen omweg.
