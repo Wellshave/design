@@ -171,6 +171,13 @@ iframe op een ander domein, dus zijn pijltjes zijn voor onze JavaScript
 onbereikbaar. Wie een band wil die vanzelf beweegt, moet de **Slider**-TrustBox
 pakken; die doet het van huis uit.
 
+**Dat is ook wat er nu staat.** In het veld voor de band zit sinds 24-08-2026 de
+Slider (`data-template-id="54ad5defc6454f065c28af8b"`) op 240px, gefilterd op
+vier en vijf sterren en op Nederlandstalige reviews. Hij schuift vanzelf door.
+Wie de code vervangt: alleen de hoogte hoeft mee te bewegen met wat de widget
+werkelijk vult — de carrousel op 265px liet zo'n 145px leeg, want zijn inhoud is
+maar ongeveer 170px hoog.
+
 **Let op bij het controleren.** `scripts.trustpilot.com` is vanuit deze
 werkomgeving niet bereikbaar (502 op de proxy), en dat is precies de loader die
 de widgetbootstrap injecteert. De widgets zijn hier dus niet te renderen: het
