@@ -57,16 +57,25 @@ Twee regels plus een lijntje, linksonder, op 1920×1080:
 
 | Element | Stijl | Grootte | Tracking | Kleur | Positie |
 |---|---|---|---|---|---|
-| Lijntje | rechthoek 56×2 | — | — | goud | x 130, y 838 |
-| Label | SemiBold, kapitaal | 26 | 4.5 | goud | x 130, y 862 |
-| Regel | Medium, zinshoofdletter | 56 | 1.2 | wit | x 130, y 900 |
+| Lijntje | rechthoek 84×3 | — | — | goud | x 130, y 779 |
+| Label | SemiBold, kapitaal | 39 | 6.75 | goud | x 130, y 815 |
+| Regel | Medium, zinshoofdletter | 84 | 1.8 | wit | x 130, y 872 |
 
-Eindkaart rechts in de vrije ruimte: SemiBold 64 wit op y 470, daaronder SemiBold-klein 30 goud
-met ruime tracking op y 562.
+Eindkaart rechts in de vrije ruimte: SemiBold 96 wit op y 385, tweede regel op y 495, daaronder
+Medium 45 goud met ruime tracking op y 633.
+
+Dit is anderhalf keer de maat waarmee de Flex Guard-film werd opgeleverd, en die was te klein.
+Deze films draaien op productpagina's en in advertentiefeeds, waar de kijker het beeld op een
+telefoon ziet en de regel in vier seconden moet lezen. Ga je terug naar de kleine maat, doe dat
+dan met een reden.
+
+**Laat de tracking meegroeien.** Vergroot je alleen de puntgrootte, dan wordt de tekst dicht en
+klonterig: de spatiëring is per teken en schaalt niet vanzelf mee. Vermenigvuldig `Spacing` met
+dezelfde factor als `Fontsize`.
 
 Geen kader, geen balk achter de tekst — dat leest goedkoop. `\shad2` volstaat op donker beeld.
 Valt een annotatie toch over een verlicht vlak, verplaats hem dan naar linksboven (lijntje 140,
-label 164, regel 202) in plaats van er een balk onder te leggen.
+label 176, regel 233) in plaats van er een balk onder te leggen.
 
 Is ook linksboven verlicht — bij een macro die het hele kader vult, gebeurt dat — wijk dan uit
 naar rechtsboven op `x 1060` met dezelfde y-waarden als linksboven. De langste regel blijft dan
@@ -91,6 +100,30 @@ Onder de 45 op een schaal van 255 leest witte tekst met `\shad2` moeiteloos; bov
 meer. Het materiaalshot mat 24 aan het begin en 112 halverwege — precies het geval dat je op één
 frame mist.
 
+Meet het vlak dat de tekst **werkelijk** beslaat, niet het standaardvakje. Op deze grootte is de
+langste regel ruim 1500 pixels breed en het blok ruim 200 hoog; een hoek die smal gemeten donker
+lijkt, kan aan de rechterkant vollopen.
+
+### Reken de regelbreedte uit voordat je positioneert
+
+Tekst groeit naar rechts vanaf `\pos`, dus vergroten kan een regel het kader uit duwen zonder
+dat libass klaagt — hij loopt gewoon door. Meet vooraf met hetzelfde fontbestand:
+
+```python
+from PIL import ImageFont
+def breedte(tekst, pad, px, spacing):
+    return ImageFont.truetype(pad, px).getlength(tekst) + spacing * max(0, len(tekst) - 1)
+```
+
+Twee dingen kwamen daar in de Gentleman Shaver-film uit, en beide kosten niets zolang je ze vóór
+het renderen vindt:
+
+- Een annotatie die naar rechtsboven was verplaatst, moest terug naar links opschuiven omdat de
+  vergrote regel vanaf x 1060 buiten beeld liep. Kies het startpunt dus ná het meten, niet ervoor.
+- De eindkaart paste niet meer op één regel: bij 96px was de merknaam 1286 pixels breed en liep
+  hij dwars over het product. Zet de titel dan over twee regels in plaats van hem te verkleinen —
+  meet waar het product ophoudt en begin de kaart daarachter.
+
 **Timing per shot:** verschijnen 0,65 s na de cut, verdwijnen 0,40 s ervoor, met `\fad(300,300)`.
 Label en regel komen 0,08 s na elkaar binnen, zodat het oog van boven naar beneden meeleest.
 
@@ -101,6 +134,13 @@ Elke annotatie is één goud label plus één witte regel.
 - **Label:** de feature, in kapitalen, twee tot vier woorden. `SKIN SAFE-TECHNOLOGIE`, `3-IN-1`
 - **Regel:** wat het voor de kijker betekent, één korte zin zonder punt. Vijf woorden leest in
   vier seconden, twaalf niet.
+
+Sinds de tekst op anderhalve maat staat is er een tweede plafond bijgekomen: **ongeveer 35
+tekens**. Daarboven loopt de regel vanaf x 130 het kader uit. Dat is geen theoretische grens —
+de regel "Trimmen, scheren, neushaar verwijderen" uit de Flex Guard-film paste op de oude maat
+en past nu niet meer; in het sjabloon staat hij daarom ingekort. Grotere letters betekenen
+kortere copy, en dat is winst: een regel die niet past, was toch al te lang om in vier seconden
+te lezen.
 
 Het label noemt wat het ís, de regel wat het dóét. Twee keer hetzelfde zeggen is een gemiste
 annotatie.
