@@ -36,13 +36,9 @@
         "mob_indent_top": 0,
         "mob_indent_bottom": 0
       }
-    },
-    "ugc": { "type": "ugc-videos", "settings": {} },
-    "zones": { "type": "use-case", "settings": {} },
-    "aanbod": { "type": "featured-products", "settings": {} },
-    "vergelijk": { "type": "compare-table", "settings": {} },
-    "reviews": { "type": "trustpilot-reviews", "settings": {} },
-    "vragen": { "type": "faq", "settings": {} }
+    }
   },
-  "order": ["koopvak", "ugc", "zones", "aanbod", "vergelijk", "reviews", "vragen"]
+  "order": [
+    "koopvak"
+  ]
 }
