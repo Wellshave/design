@@ -465,26 +465,31 @@
 
 
       {%- comment -%}
-        De vergelijkingspop-up, opgezet als een keuzehulp in plaats van een
-        lijst met kenmerken.
+        De vergelijkingspop-up als keuzehulp.
 
-        Alle punten die op meer dan een model staan tellen niet mee in de
-        kolommen; die komen een keer onderaan te staan. Wat overblijft is per
-        kolom het verschil dat de keuze maakt. Titels worden tussen tekens
-        gezet voordat ze geteld worden, anders zou 'Skin-Safe mes' ook meetellen
-        binnen 'Skin-Safe mes + Foil Shaver' en verdwijnt juist het verschil.
+        Alles komt uit de winkel: custom.compare_products voor de kolommen en
+        per product custom.compare_info voor beeld, rol, reviewlabel, de vier
+        punten en 'beste voor'. De tabel eronder wordt opgebouwd uit alle
+        punten van alle kolommen samen, ontdubbeld, met een vinkje waar de
+        kolom hem heeft.
 
-        Alles is metafielddreven: custom.compare_products voor de kolommen en
-        per product custom.compare_info voor beeld, ondertitel, reviewlabel en
-        de vier punten.
+        Titels worden tussen tekens gezet voor het vergelijken, anders telt
+        'Skin-Safe mes' ook mee binnen 'Skin-Safe mes + Foil Shaver'. Achteraan
+        een sluitteken, omdat Liquid lege stukken aan het eind van een split
+        weggooit en het laatste punt anders een keer te weinig telt.
       {%- endcomment -%}
       {%- if vergelijk_lijst != blank -%}
         {%- liquid
           assign eigen = mf.compare_info.value
           assign alle_punten = ''
+          assign laagste = 0
+          assign uitgelicht_prijs = 0
         -%}
         {%- for cp in vergelijk_lijst -%}
           {%- assign ci = cp.metafields.custom.compare_info.value -%}
+          {%- assign cvp = cp.selected_or_first_available_variant.price -%}
+          {%- if laagste == 0 or cvp < laagste -%}{%- assign laagste = cvp -%}{%- endif -%}
+          {%- if ci.is_popuplar -%}{%- assign uitgelicht_prijs = cvp -%}{%- endif -%}
             {%- if ci.advantage_1_title != blank -%}
               {%- assign alle_punten = alle_punten | append: '‹' | append: ci.advantage_1_title | append: '›' -%}
             {%- endif -%}
@@ -498,61 +503,82 @@
               {%- assign alle_punten = alle_punten | append: '‹' | append: ci.advantage_4_title | append: '›' -%}
             {%- endif -%}
         {%- endfor -%}
-        {%- comment -%}
-          Sluitteken erachter. Liquid gooit lege stukken aan het eind van een
-          split weg, dus zonder dit telt het laatste punt in de reeks als een
-          keer minder en zou het ten onrechte als verschil worden getoond.
-        {%- endcomment -%}
         {%- assign alle_punten = alle_punten | append: '‹einde›' -%}
+        {%- assign meerprijs = uitgelicht_prijs | minus: laagste -%}
 
         <div class="ws-pop" id="ws-vgl-{{ section.id }}" hidden>
           <div class="ws-pop-waas" data-ws-sluit></div>
           <div class="ws-pop-vak" role="dialog" aria-modal="true"
                aria-label="{{ s.pop_titel | default: eigen.popup_main_title | escape }}">
             <button type="button" class="ws-pop-x" data-ws-sluit aria-label="Sluiten">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
             </button>
 
-            {%- comment -%} de vraag van de klant, niet ons aanbod {%- endcomment -%}
             <div class="ws-pop-top">
               {%- if s.pop_eyebrow != blank -%}<span class="ws-pop-ey">{{ s.pop_eyebrow }}</span>{%- endif -%}
               <p class="ws-pop-kop">{{ s.pop_titel | default: eigen.popup_main_title | default: product.title }}</p>
               {%- if s.pop_lead != blank -%}<p class="ws-pop-lead">{{ s.pop_lead }}</p>{%- endif -%}
+              {%- if s.tp_tonen and s.pop_reviewregel != blank -%}
+                <div class="ws-pop-tp">
+                  <span class="ws-st">
+                    {%- for i in (1..5) -%}<i><svg><use href="#ws-pdp-ster-{{ section.id }}"/></svg></i>{%- endfor -%}
+                  </span>
+                  <span class="sc">{{ s.pop_reviewregel }}</span>
+                  <span class="mk"><svg><use href="#ws-pdp-ster-{{ section.id }}"/></svg>{{ s.tp_bron }}</span>
+                </div>
+              {%- endif -%}
             </div>
 
+            {%- if s.pop_winst != blank and meerprijs > 0 -%}
+              {%- capture bedrag %}{% render 'price-formated', price: meerprijs %}{% endcapture -%}
+              <p class="ws-pop-winst">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2l1.9 4.6 4.6 1.9-4.6 1.9L12 16.2l-1.9-4.6L5.5 9.7l4.6-1.9z"/><path d="M18.6 15.4l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg>
+                <span>{{ s.pop_winst | replace: '[bedrag]', bedrag | strip }}</span>
+              </p>
+            {%- endif -%}
+
             <div class="ws-pop-kaarten">
-              {%- assign gedeeld = '' -%}
               {%- for cp in vergelijk_lijst -%}
                 {%- assign ci = cp.metafields.custom.compare_info.value -%}
                 {%- assign cv = cp.selected_or_first_available_variant -%}
-                {%- assign uniek_aantal = 0 -%}
-              {%- if ci.advantage_1_title != blank -%}
-                {%- assign sleutel = '‹' | append: ci.advantage_1_title | append: '›' -%}
-                {%- assign hoevaak = alle_punten | split: sleutel | size | minus: 1 -%}
-                {%- if hoevaak < 2 -%}{%- assign uniek_aantal = uniek_aantal | plus: 1 -%}{%- endif -%}
+                {%- assign uniek_titel = '' -%}
+                {%- assign uniek_onder = '' -%}
+            {%- if ci.advantage_1_title != blank and uniek_titel == blank -%}
+              {%- assign sleutel = '‹' | append: ci.advantage_1_title | append: '›' -%}
+              {%- assign hoevaak = alle_punten | split: sleutel | size | minus: 1 -%}
+              {%- if hoevaak < 2 -%}
+                {%- assign uniek_titel = ci.advantage_1_title -%}
+                {%- assign uniek_onder = ci.advantage_1_subtitle -%}
               {%- endif -%}
-              {%- if ci.advantage_2_title != blank -%}
-                {%- assign sleutel = '‹' | append: ci.advantage_2_title | append: '›' -%}
-                {%- assign hoevaak = alle_punten | split: sleutel | size | minus: 1 -%}
-                {%- if hoevaak < 2 -%}{%- assign uniek_aantal = uniek_aantal | plus: 1 -%}{%- endif -%}
+            {%- endif -%}
+            {%- if ci.advantage_2_title != blank and uniek_titel == blank -%}
+              {%- assign sleutel = '‹' | append: ci.advantage_2_title | append: '›' -%}
+              {%- assign hoevaak = alle_punten | split: sleutel | size | minus: 1 -%}
+              {%- if hoevaak < 2 -%}
+                {%- assign uniek_titel = ci.advantage_2_title -%}
+                {%- assign uniek_onder = ci.advantage_2_subtitle -%}
               {%- endif -%}
-              {%- if ci.advantage_3_title != blank -%}
-                {%- assign sleutel = '‹' | append: ci.advantage_3_title | append: '›' -%}
-                {%- assign hoevaak = alle_punten | split: sleutel | size | minus: 1 -%}
-                {%- if hoevaak < 2 -%}{%- assign uniek_aantal = uniek_aantal | plus: 1 -%}{%- endif -%}
+            {%- endif -%}
+            {%- if ci.advantage_3_title != blank and uniek_titel == blank -%}
+              {%- assign sleutel = '‹' | append: ci.advantage_3_title | append: '›' -%}
+              {%- assign hoevaak = alle_punten | split: sleutel | size | minus: 1 -%}
+              {%- if hoevaak < 2 -%}
+                {%- assign uniek_titel = ci.advantage_3_title -%}
+                {%- assign uniek_onder = ci.advantage_3_subtitle -%}
               {%- endif -%}
-              {%- if ci.advantage_4_title != blank -%}
-                {%- assign sleutel = '‹' | append: ci.advantage_4_title | append: '›' -%}
-                {%- assign hoevaak = alle_punten | split: sleutel | size | minus: 1 -%}
-                {%- if hoevaak < 2 -%}{%- assign uniek_aantal = uniek_aantal | plus: 1 -%}{%- endif -%}
+            {%- endif -%}
+            {%- if ci.advantage_4_title != blank and uniek_titel == blank -%}
+              {%- assign sleutel = '‹' | append: ci.advantage_4_title | append: '›' -%}
+              {%- assign hoevaak = alle_punten | split: sleutel | size | minus: 1 -%}
+              {%- if hoevaak < 2 -%}
+                {%- assign uniek_titel = ci.advantage_4_title -%}
+                {%- assign uniek_onder = ci.advantage_4_subtitle -%}
               {%- endif -%}
-                {%- assign toon_alles = false -%}
-                {%- if uniek_aantal == 0 -%}{%- assign toon_alles = true -%}{%- endif -%}
+            {%- endif -%}
                 <div class="ws-pop-kaart{% if ci.is_popuplar %} ws-uit{% endif %}">
                   {%- if ci.is_popuplar and s.pop_uitgelicht != blank -%}
                     <span class="ws-pop-vlag">{{ s.pop_uitgelicht }}</span>
                   {%- endif -%}
-
                   <div class="ws-pop-beeld">
                     {%- if ci.popup_image != blank -%}
                       {{ ci.popup_image | image_url: width: 600 | image_tag: alt: '', loading: 'lazy' }}
@@ -560,126 +586,127 @@
                       {{ cp.featured_image | image_url: width: 600 | image_tag: alt: '', loading: 'lazy' }}
                     {%- endif -%}
                   </div>
-
-                  <p class="ws-pop-naam">{{ ci.popup_title | default: ci.toggle_title | default: cp.title }}</p>
-                  {%- if ci.toggle_subtitle != blank -%}
-                    <p class="ws-pop-voor">{{ ci.toggle_subtitle }}</p>
-                  {%- endif -%}
-
-                  {%- if ci.reviews_label != blank -%}
-                    <p class="ws-pop-rev">
-                      <span class="ws-st">
-                        {%- for i in (1..5) -%}<i><svg><use href="#ws-pdp-ster-{{ section.id }}"/></svg></i>{%- endfor -%}
-                      </span>
-                      <span>{{ ci.reviews_label }}</span>
-                    </p>
-                  {%- endif -%}
-
-                  <ul class="ws-pop-vds">
-              {%- if ci.advantage_1_title != blank -%}
-                {%- assign sleutel = '‹' | append: ci.advantage_1_title | append: '›' -%}
-                {%- assign hoevaak = alle_punten | split: sleutel | size | minus: 1 -%}
-                {%- if hoevaak < 2 or toon_alles -%}
-                  <li>
-                    <span class="ws-pop-vink"><svg><use href="#ws-pdp-vink-{{ section.id }}"/></svg></span>
-                    <span><b>{{ ci.advantage_1_title }}</b>{% if ci.advantage_1_subtitle != blank %}<span>{{ ci.advantage_1_subtitle }}</span>{% endif %}</span>
-                  </li>
-                {%- else -%}
-                  {%- assign gedeeld = gedeeld | append: '‹' | append: ci.advantage_1_title | append: '›' -%}
-                {%- endif -%}
-              {%- endif -%}
-              {%- if ci.advantage_2_title != blank -%}
-                {%- assign sleutel = '‹' | append: ci.advantage_2_title | append: '›' -%}
-                {%- assign hoevaak = alle_punten | split: sleutel | size | minus: 1 -%}
-                {%- if hoevaak < 2 or toon_alles -%}
-                  <li>
-                    <span class="ws-pop-vink"><svg><use href="#ws-pdp-vink-{{ section.id }}"/></svg></span>
-                    <span><b>{{ ci.advantage_2_title }}</b>{% if ci.advantage_2_subtitle != blank %}<span>{{ ci.advantage_2_subtitle }}</span>{% endif %}</span>
-                  </li>
-                {%- else -%}
-                  {%- assign gedeeld = gedeeld | append: '‹' | append: ci.advantage_2_title | append: '›' -%}
-                {%- endif -%}
-              {%- endif -%}
-              {%- if ci.advantage_3_title != blank -%}
-                {%- assign sleutel = '‹' | append: ci.advantage_3_title | append: '›' -%}
-                {%- assign hoevaak = alle_punten | split: sleutel | size | minus: 1 -%}
-                {%- if hoevaak < 2 or toon_alles -%}
-                  <li>
-                    <span class="ws-pop-vink"><svg><use href="#ws-pdp-vink-{{ section.id }}"/></svg></span>
-                    <span><b>{{ ci.advantage_3_title }}</b>{% if ci.advantage_3_subtitle != blank %}<span>{{ ci.advantage_3_subtitle }}</span>{% endif %}</span>
-                  </li>
-                {%- else -%}
-                  {%- assign gedeeld = gedeeld | append: '‹' | append: ci.advantage_3_title | append: '›' -%}
-                {%- endif -%}
-              {%- endif -%}
-              {%- if ci.advantage_4_title != blank -%}
-                {%- assign sleutel = '‹' | append: ci.advantage_4_title | append: '›' -%}
-                {%- assign hoevaak = alle_punten | split: sleutel | size | minus: 1 -%}
-                {%- if hoevaak < 2 or toon_alles -%}
-                  <li>
-                    <span class="ws-pop-vink"><svg><use href="#ws-pdp-vink-{{ section.id }}"/></svg></span>
-                    <span><b>{{ ci.advantage_4_title }}</b>{% if ci.advantage_4_subtitle != blank %}<span>{{ ci.advantage_4_subtitle }}</span>{% endif %}</span>
-                  </li>
-                {%- else -%}
-                  {%- assign gedeeld = gedeeld | append: '‹' | append: ci.advantage_4_title | append: '›' -%}
-                {%- endif -%}
-              {%- endif -%}
-                  </ul>
-
-                  <div class="ws-pop-onder">
-                    {%- if cv.compare_at_price > cv.price -%}
-                      <p class="ws-pop-prijs">
-                        <b>{% render 'price-formated', price: cv.price %}</b>
-                        <s>{% render 'price-formated', price: cv.compare_at_price %}</s>
-                      </p>
-                    {%- else -%}
-                      <p class="ws-pop-prijs"><b>{% render 'price-formated', price: cv.price %}</b></p>
+                  <div class="ws-pop-tekst">
+                    {%- if ci.toggle_subtitle != blank -%}
+                      <span class="ws-pop-rol">{{ ci.toggle_subtitle }}</span>
                     {%- endif -%}
-                    <form action="{{ routes.cart_add_url }}" method="post" class="ws-pop-vorm">
-                      <input type="hidden" name="id" value="{{ cv.id }}">
-                      <input type="hidden" name="quantity" value="1">
-                      <button type="submit" class="ws-pop-knop"{% unless cv.available %} disabled{% endunless %}>
-                        {%- if cv.available -%}{{ s.pop_knop }}{%- else -%}{{ s.knop_uitverkocht }}{%- endif -%}
-                      </button>
-                    </form>
+                    <p class="ws-pop-naam">{{ ci.popup_title | default: ci.toggle_title | default: cp.title }}</p>
+                    {%- if uniek_onder != blank -%}<p class="ws-pop-een">{{ uniek_onder }}</p>{%- endif -%}
+                    <p class="ws-pop-prijs">
+                      <b>{% render 'price-formated', price: cv.price %}</b>
+                      {%- if cv.compare_at_price > cv.price -%}
+                        <s>{% render 'price-formated', price: cv.compare_at_price %}</s>
+                      {%- endif -%}
+                    </p>
+                    {%- if ci.best_for != blank -%}
+                      <span class="ws-pop-best">{{ s.pop_bestevoor }} {{ ci.best_for }}</span>
+                    {%- endif -%}
                   </div>
+                  <form action="{{ routes.cart_add_url }}" method="post" class="ws-pop-vorm">
+                    <input type="hidden" name="id" value="{{ cv.id }}">
+                    <input type="hidden" name="quantity" value="1">
+                    <button type="submit" class="ws-pop-knop"{% unless cv.available %} disabled{% endunless %}>
+                      {%- if cv.available -%}
+                        {{ s.pop_knop }} {{ ci.toggle_title | default: cp.title }} &mdash; {% render 'price-formated', price: cv.price %}
+                      {%- else -%}
+                        {{ s.knop_uitverkocht }}
+                      {%- endif -%}
+                    </button>
+                  </form>
                 </div>
               {%- endfor -%}
             </div>
 
-            {%- comment -%} wat op allebei staat, een keer en stil {%- endcomment -%}
-            {%- if gedeeld != blank -%}
-              {%- assign gedeelde_punten = gedeeld | split: '‹' -%}
-              <div class="ws-pop-samen">
-                {%- if s.pop_samen_kop != blank -%}<span>{{ s.pop_samen_kop }}</span>{%- endif -%}
-                <ul>
-                  {%- assign gezien = '' -%}
-                  {%- for punt in gedeelde_punten -%}
-                    {%- assign naam = punt | split: '›' | first | strip -%}
-                    {%- if naam != blank -%}
-                      {%- assign merk = '‹' | append: naam | append: '›' -%}
-                      {%- unless gezien contains merk -%}
-                        {%- assign gezien = gezien | append: merk -%}
-                        <li>{{ naam }}</li>
-                      {%- endunless -%}
-                    {%- endif -%}
-                  {%- endfor -%}
-                </ul>
+            {%- comment -%} de tabel: alle punten van alle kolommen, ontdubbeld {%- endcomment -%}
+            {%- assign rijen = '' -%}
+            {%- for cp in vergelijk_lijst -%}
+              {%- assign ci = cp.metafields.custom.compare_info.value -%}
+              {%- if ci.advantage_1_title != blank -%}
+                {%- assign merk = '‹' | append: ci.advantage_1_title | append: '›' -%}
+                {%- unless rijen contains merk -%}
+                  {%- assign rijen = rijen | append: merk -%}
+                {%- endunless -%}
+              {%- endif -%}
+              {%- if ci.advantage_2_title != blank -%}
+                {%- assign merk = '‹' | append: ci.advantage_2_title | append: '›' -%}
+                {%- unless rijen contains merk -%}
+                  {%- assign rijen = rijen | append: merk -%}
+                {%- endunless -%}
+              {%- endif -%}
+              {%- if ci.advantage_3_title != blank -%}
+                {%- assign merk = '‹' | append: ci.advantage_3_title | append: '›' -%}
+                {%- unless rijen contains merk -%}
+                  {%- assign rijen = rijen | append: merk -%}
+                {%- endunless -%}
+              {%- endif -%}
+              {%- if ci.advantage_4_title != blank -%}
+                {%- assign merk = '‹' | append: ci.advantage_4_title | append: '›' -%}
+                {%- unless rijen contains merk -%}
+                  {%- assign rijen = rijen | append: merk -%}
+                {%- endunless -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {%- assign rijlijst = rijen | split: '‹' -%}
+            {%- if rijlijst.size > 0 -%}
+              <div class="ws-pop-tab">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>&nbsp;</th>
+                      {%- for cp in vergelijk_lijst -%}
+                        {%- assign ci = cp.metafields.custom.compare_info.value -%}
+                        <th>{{ ci.toggle_title | default: cp.title }}</th>
+                      {%- endfor -%}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {%- for stuk in rijlijst -%}
+                      {%- assign rijnaam = stuk | split: '›' | first | strip -%}
+                      {%- if rijnaam != blank -%}
+                        {%- assign merk2 = '‹' | append: rijnaam | append: '›' -%}
+                        {%- assign vaak = alle_punten | split: merk2 | size | minus: 1 -%}
+                        <tr{% if vaak < 2 %} class="ws-beslist"{% endif %}>
+                          <th scope="row">{{ rijnaam }}</th>
+                          {%- for cp in vergelijk_lijst -%}
+                            {%- assign ci = cp.metafields.custom.compare_info.value -%}
+                            {%- assign heeft = false -%}
+                  {%- if ci.advantage_1_title == rijnaam -%}{%- assign heeft = true -%}{%- endif -%}
+                  {%- if ci.advantage_2_title == rijnaam -%}{%- assign heeft = true -%}{%- endif -%}
+                  {%- if ci.advantage_3_title == rijnaam -%}{%- assign heeft = true -%}{%- endif -%}
+                  {%- if ci.advantage_4_title == rijnaam -%}{%- assign heeft = true -%}{%- endif -%}
+                            {%- if heeft -%}
+                              <td class="ws-ja">
+                                {%- if vaak < 2 and s.pop_inbegrepen != blank -%}
+                                  <span class="ws-pop-erbij"><svg><use href="#ws-pdp-vink-{{ section.id }}"/></svg>{{ s.pop_inbegrepen }}</span>
+                                {%- else -%}
+                                  <svg><use href="#ws-pdp-vink-{{ section.id }}"/></svg>
+                                {%- endif -%}
+                              </td>
+                            {%- else -%}
+                              <td class="ws-nee">&mdash;</td>
+                            {%- endif -%}
+                          {%- endfor -%}
+                        </tr>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </tbody>
+                </table>
               </div>
             {%- endif -%}
 
-            {%- comment -%} het risico weghalen, en een zachte tweede uitgang {%- endcomment -%}
-            <div class="ws-pop-voet">
-              {%- if s.pop_risico != blank -%}
-                <p class="ws-pop-risico">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.6l7.2 2.8v6.1c0 4.4-3 8.4-7.2 9.9-4.2-1.5-7.2-5.5-7.2-9.9V5.4z"/><path d="M8.7 12.1l2.3 2.3 4.3-4.6"/></svg>
-                  <span>{{ s.pop_risico }}</span>
-                </p>
-              {%- endif -%}
-              {%- if s.pop_meer != blank and mf.compare_table != blank -%}
-                <button type="button" class="ws-pop-meer" data-ws-meer>{{ s.pop_meer }}</button>
-              {%- endif -%}
-            </div>
+            {%- assign beloftes = mf.store_usp.value -%}
+            {%- if beloftes != blank -%}
+              <div class="ws-pop-voet">
+                {%- for belofte in beloftes -%}
+                  <div>
+                    {%- if belofte.icon != blank -%}
+                      {{ belofte.icon | image_url: width: 60 | image_tag: alt: '', loading: 'lazy' }}
+                    {%- endif -%}
+                    <span>{{ belofte.label }}</span>
+                  </div>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
           </div>
         </div>
       {%- endif -%}
@@ -724,15 +751,16 @@
     { "type": "header", "content": "Vergelijken en teller" },
     { "type": "text", "id": "vergelijk_label", "label": "Knop vergelijken", "default": "Vergelijk de modellen" },
     { "type": "header", "content": "De vergelijkingspop-up" },
-    { "type": "paragraph", "content": "De kolommen komen uit custom.compare_products, en per product uit custom.compare_info. Punten die op meer dan een model staan verplaatsen zichzelf naar de regel onderaan, zodat in de kolommen alleen het verschil overblijft." },
-    { "type": "text", "id": "pop_eyebrow", "label": "Bovenregel", "default": "De keuze" },
+    { "type": "paragraph", "content": "De kolommen komen uit custom.compare_products, en per product uit custom.compare_info: beeld, rol, reviewlabel, de vier punten en het veld Beste voor. De tabel eronder bouwt zichzelf uit alle punten van alle kolommen samen. De voetbalk komt uit custom.store_usp." },
+    { "type": "text", "id": "pop_eyebrow", "label": "Bovenregel", "default": "Vergelijk de modellen" },
     { "type": "text", "id": "pop_titel", "label": "Kop", "default": "Welke past bij jou?" },
-    { "type": "textarea", "id": "pop_lead", "label": "Vraag die de keuze beslist", "default": "\u00c9\u00e9n vraag beslist het: wil je alleen veilig trimmen, of daarna ook helemaal glad afwerken?" },
+    { "type": "textarea", "id": "pop_lead", "label": "Zin die het verschil samenvat", "default": "Dezelfde basis. Het verschil zit in de afwerking." },
+    { "type": "text", "id": "pop_reviewregel", "label": "Reviewregel", "default": "4,4/5 uit 968 reviews" },
+    { "type": "textarea", "id": "pop_winst", "label": "Winstbalk", "info": "[bedrag] wordt het prijsverschil met het uitgelichte model.", "default": "Voor [bedrag] extra krijg je bij de PRO de foil-kop voor glad afwerken." },
     { "type": "text", "id": "pop_uitgelicht", "label": "Label op de uitgelichte kolom", "default": "Meest gekozen" },
-    { "type": "text", "id": "pop_samen_kop", "label": "Kop boven de gedeelde punten", "default": "Allebei" },
-    { "type": "text", "id": "pop_knop", "label": "Knoptekst in de pop-up", "default": "Kies deze" },
-    { "type": "text", "id": "pop_risico", "label": "Geruststelling onderaan", "default": "100 dagen proberen. Niet goed? Geld terug." },
-    { "type": "text", "id": "pop_meer", "label": "Tweede uitgang", "default": "Bekijk de volledige vergelijking" },
+    { "type": "text", "id": "pop_bestevoor", "label": "Aanhef bij Beste voor", "default": "Beste voor:" },
+    { "type": "text", "id": "pop_knop", "label": "Knoptekst in de pop-up", "default": "Kies" },
+    { "type": "text", "id": "pop_inbegrepen", "label": "Label bij de beslissende rij", "default": "Inbegrepen" },
     { "type": "text", "id": "vergelijk_anker", "label": "Sleutel van de vergelijkingssectie", "default": "compare_table", "info": "De sleutel uit het sjabloon, niet de volledige id \u2014 die zet Shopify zelf samen. De knop verschijnt alleen als het product custom.compare_table of custom.compare_products heeft." },
     { "type": "text", "id": "tel_voor", "label": "Teller — tekst ervoor", "default": "Al door" },
     { "type": "text", "id": "tel_waarde", "label": "Teller — getal", "default": "200.000+" },
@@ -773,98 +801,126 @@
   .ws-pop[hidden]{display:none}
   .ws-pop *,.ws-pop *::before,.ws-pop *::after{box-sizing:border-box}
   .ws-pop-waas{position:absolute;inset:0;background:rgba(11,11,10,.62)}
-  .ws-pop-vak{position:relative;background:#FBF8F3;border-radius:22px;padding:30px 28px 24px;
-    width:min(700px,100%);max-height:calc(100vh - 40px);overflow-y:auto;
+  .ws-pop-vak{--p-room:#FBF8F3;--p-room2:#F5F1EA;--p-zwart:#0B0B0A;--p-goud:#E9BE72;--p-goud2:#DDA548;
+    --p-brons:#BC813E;--p-groen:#00B67A;--p-lijn:rgba(17,17,17,.11);
+    --p-ink:#111;--p-ink80:rgba(17,17,17,.8);--p-ink60:rgba(17,17,17,.6);--p-ink40:rgba(17,17,17,.4);
+    position:relative;background:var(--p-room);border-radius:24px;padding:34px 30px 0;
+    width:min(1080px,100%);max-height:calc(100vh - 40px);overflow-y:auto;
     font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
-    box-shadow:0 30px 90px -30px rgba(11,11,10,.7);
+    box-shadow:0 40px 90px -34px rgba(11,11,10,.7);
     transform:translateY(12px);transition:transform .18s ease}
   .ws-pop.ws-open .ws-pop-vak{transform:none}
-  .ws-pop-x{position:absolute;right:14px;top:14px;width:34px;height:34px;border:0;background:none;
-    color:rgba(17,17,17,.5);cursor:pointer;padding:0;display:flex;align-items:center;justify-content:center}
-  .ws-pop-x:hover{color:#111}
-  .ws-pop-x svg{width:19px;height:19px}
+  .ws-pop-x{position:absolute;right:22px;top:22px;width:38px;height:38px;border-radius:50%;
+    border:1px solid var(--p-lijn);background:#fff;display:flex;align-items:center;justify-content:center;
+    color:var(--p-ink60);cursor:pointer;padding:0;z-index:2}
+  .ws-pop-x:hover{color:var(--p-ink)}
+  .ws-pop-x svg{width:15px;height:15px}
 
-  .ws-pop-top{text-align:center;max-width:34em;margin:0 auto 22px}
-  .ws-pop-ey{display:block;font-size:10px;font-weight:800;letter-spacing:.19em;text-transform:uppercase;
-    color:#BC813E;margin-bottom:9px}
-  .ws-pop-kop{margin:0;font-size:clamp(20px,2.6vw,26px);font-weight:800;letter-spacing:-.03em;
-    line-height:1.12;color:#111}
-  .ws-pop-lead{margin:9px 0 0;font-size:13.5px;line-height:1.5;color:rgba(17,17,17,.62)}
-
-  .ws-pop-kaarten{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:stretch}
-  .ws-pop-kaart{position:relative;border-radius:18px;padding:20px 17px 17px;background:#fff;
-    border:1px solid rgba(17,17,17,.09);display:flex;flex-direction:column}
-  .ws-pop-kaart.ws-uit{background:#0B0B0A;border-color:transparent;
-    box-shadow:0 18px 40px -20px rgba(11,11,10,.7)}
-  .ws-pop-vlag{position:absolute;left:50%;top:-10px;transform:translateX(-50%);white-space:nowrap;
-    font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#3A2405;
-    background:linear-gradient(100deg,#EDC684,#DDA548);border-radius:100px;padding:5px 12px}
-  .ws-pop-beeld{aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
-  .ws-pop-beeld img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
-  .ws-pop-naam{margin:0;font-size:16px;font-weight:800;letter-spacing:-.02em;color:#111}
-  .ws-pop-kaart.ws-uit .ws-pop-naam{color:#fff}
-  .ws-pop-voor{margin:4px 0 0;font-size:12.5px;line-height:1.35;color:rgba(17,17,17,.58)}
-  .ws-pop-kaart.ws-uit .ws-pop-voor{color:#EBC77E}
-  .ws-pop-rev{display:flex;align-items:center;gap:7px;margin:11px 0 0;font-size:11px;font-weight:600;
-    color:rgba(17,17,17,.5)}
-  .ws-pop-kaart.ws-uit .ws-pop-rev{color:rgba(255,255,255,.52)}
-  .ws-pop-rev .ws-st{display:flex;gap:1.5px}
-  .ws-pop-rev .ws-st i{width:12px;height:12px;background:#00B67A;border-radius:2px;display:flex;
+  .ws-pop-top{text-align:center;max-width:36em;margin:0 auto}
+  .ws-pop-ey{display:block;font-size:11px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--p-brons)}
+  .ws-pop-kop{margin:12px 0 0;font-size:clamp(24px,3.2vw,38px);font-weight:800;letter-spacing:-.035em;
+    line-height:1.06;color:var(--p-ink)}
+  .ws-pop-lead{margin:11px 0 0;font-size:16px;line-height:1.45;color:var(--p-ink60)}
+  .ws-pop-tp{display:flex;align-items:center;justify-content:center;gap:11px;margin:16px 0 0;flex-wrap:wrap}
+  .ws-pop-tp .ws-st{display:flex;gap:2.5px}
+  .ws-pop-tp .ws-st i{width:23px;height:23px;background:var(--p-groen);border-radius:2px;display:flex;
     align-items:center;justify-content:center}
-  .ws-pop-rev .ws-st svg{width:8px;height:8px;fill:#fff}
+  .ws-pop-tp .ws-st svg{width:15px;height:15px;fill:#fff}
+  .ws-pop-tp .sc{font-size:14.5px;font-weight:700;color:var(--p-ink80)}
+  .ws-pop-tp .mk{display:flex;align-items:center;gap:5px;font-size:14.5px;font-weight:800;color:var(--p-ink)}
+  .ws-pop-tp .mk svg{width:15px;height:15px;fill:var(--p-groen)}
 
-  .ws-pop-vds{list-style:none;margin:15px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
-  .ws-pop-vds li{display:grid;grid-template-columns:18px minmax(0,1fr);gap:10px;align-items:start}
-  .ws-pop-vink{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;
-    justify-content:center;background:rgba(188,129,62,.13);color:#8C5A1A;margin-top:1px}
-  .ws-pop-kaart.ws-uit .ws-pop-vink{background:rgba(233,190,114,.16);color:#E9BE72}
-  .ws-pop-vink svg{width:9px;height:9px}
-  .ws-pop-vds b{display:block;font-size:13px;font-weight:800;color:#111;line-height:1.3}
-  .ws-pop-kaart.ws-uit .ws-pop-vds b{color:#fff}
-  .ws-pop-vds b + span{display:block;font-size:11.5px;color:rgba(17,17,17,.55);line-height:1.35;margin-top:2px}
-  .ws-pop-kaart.ws-uit .ws-pop-vds b + span{color:rgba(255,255,255,.5)}
+  .ws-pop-winst{display:flex;align-items:center;justify-content:center;gap:11px;margin:22px 0 0;
+    padding:15px 20px;border-radius:14px;border:1px solid rgba(233,190,114,.55);
+    background:linear-gradient(180deg,rgba(233,190,114,.16),rgba(233,190,114,.07));
+    font-size:15px;font-weight:600;color:#5A3B10;text-align:center}
+  .ws-pop-winst svg{width:19px;height:19px;flex:none;color:var(--p-goud2)}
+  .ws-pop-winst b{font-weight:800}
 
-  .ws-pop-onder{margin-top:auto;padding-top:16px}
-  .ws-pop-prijs{margin:0 0 10px;display:flex;align-items:baseline;gap:8px}
-  .ws-pop-prijs b{font-size:22px;font-weight:900;letter-spacing:-.03em;color:#111}
+  .ws-pop-kaarten{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:20px 0 0}
+  .ws-pop-kaart{position:relative;border-radius:20px;border:1px solid var(--p-lijn);background:#fff;
+    padding:20px;display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1fr);gap:14px;
+    align-items:center;row-gap:18px}
+  .ws-pop-kaart.ws-uit{background:var(--p-zwart);border:2px solid var(--p-goud2);
+    box-shadow:0 24px 56px -26px rgba(11,11,10,.75)}
+  .ws-pop-vlag{position:absolute;right:18px;top:18px;font-size:10px;font-weight:800;letter-spacing:.13em;
+    text-transform:uppercase;color:#3A2405;border-radius:100px;padding:7px 14px;
+    background:linear-gradient(100deg,#EDC684,#DDA548)}
+  .ws-pop-beeld{grid-row:1;display:flex;align-items:center;justify-content:center}
+  .ws-pop-beeld img{width:100%;height:auto;display:block;mix-blend-mode:multiply}
+  .ws-pop-kaart.ws-uit .ws-pop-beeld img{mix-blend-mode:normal}
+  .ws-pop-tekst{grid-row:1;min-width:0}
+  .ws-pop-kaart.ws-uit .ws-pop-tekst{padding-top:26px}
+  .ws-pop-rol{display:block;font-size:11px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;
+    color:var(--p-brons)}
+  .ws-pop-kaart.ws-uit .ws-pop-rol{color:var(--p-goud)}
+  .ws-pop-naam{margin:9px 0 0;font-size:clamp(19px,2.3vw,27px);font-weight:800;letter-spacing:-.03em;
+    line-height:1.08;color:var(--p-ink)}
+  .ws-pop-kaart.ws-uit .ws-pop-naam{color:#fff}
+  .ws-pop-een{margin:7px 0 0;font-size:14px;line-height:1.35;color:var(--p-ink60)}
+  .ws-pop-kaart.ws-uit .ws-pop-een{color:rgba(255,255,255,.62)}
+  .ws-pop-prijs{display:flex;align-items:baseline;gap:11px;margin:14px 0 0;flex-wrap:wrap}
+  .ws-pop-prijs b{font-size:clamp(23px,2.8vw,32px);font-weight:900;letter-spacing:-.035em;color:var(--p-ink)}
   .ws-pop-kaart.ws-uit .ws-pop-prijs b{color:#fff}
-  .ws-pop-prijs s{font-size:13px;font-weight:600;color:rgba(17,17,17,.35)}
-  .ws-pop-kaart.ws-uit .ws-pop-prijs s{color:rgba(255,255,255,.35)}
-  .ws-pop-knop{width:100%;border-radius:11px;padding:14px 12px;font-family:inherit;font-size:12px;
-    font-weight:800;letter-spacing:.09em;text-transform:uppercase;cursor:pointer;
-    border:1px solid #111;background:#fff;color:#111}
-  .ws-pop-knop:hover{background:#111;color:#fff}
+  .ws-pop-prijs s{font-size:16px;font-weight:600;color:var(--p-ink40)}
+  .ws-pop-kaart.ws-uit .ws-pop-prijs s{color:rgba(255,255,255,.38)}
+  .ws-pop-best{display:inline-block;margin:14px 0 0;padding:8px 14px;border-radius:9px;
+    border:1px solid var(--p-lijn);font-size:12.5px;font-weight:600;color:var(--p-ink60)}
+  .ws-pop-kaart.ws-uit .ws-pop-best{border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.66)}
+  .ws-pop-vorm{grid-column:1 / -1;grid-row:2;margin:0}
+  .ws-pop-knop{width:100%;display:flex;align-items:center;justify-content:center;border-radius:12px;
+    padding:19px;font-family:inherit;font-size:13px;font-weight:800;letter-spacing:.08em;
+    text-transform:uppercase;cursor:pointer;border:1.5px solid var(--p-ink);color:var(--p-ink);background:#fff}
+  .ws-pop-knop:hover{background:var(--p-ink);color:#fff}
   .ws-pop-kaart.ws-uit .ws-pop-knop{border:0;color:#26170A;
     background:linear-gradient(100deg,#F5DEAA,#EBC382 46%,#DDA548)}
   .ws-pop-knop[disabled]{opacity:.45;cursor:not-allowed}
 
-  .ws-pop-samen{margin:16px 0 0;padding:14px 16px;border-radius:13px;background:rgba(17,17,17,.04)}
-  .ws-pop-samen > span{display:block;font-size:9.5px;font-weight:800;letter-spacing:.15em;
-    text-transform:uppercase;color:rgba(17,17,17,.42);margin-bottom:8px}
-  .ws-pop-samen ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:7px 16px}
-  .ws-pop-samen li{position:relative;padding-left:15px;font-size:12px;font-weight:600;color:rgba(17,17,17,.62)}
-  .ws-pop-samen li::before{content:'';position:absolute;left:0;top:6px;width:7px;height:7px;
-    border-radius:50%;background:rgba(188,129,62,.45)}
+  .ws-pop-tab{margin:22px 0 0;border:1px solid var(--p-lijn);border-radius:14px;overflow:hidden}
+  .ws-pop-tab table{width:100%;border-collapse:collapse;font-size:14px}
+  .ws-pop-tab th,.ws-pop-tab td{padding:13px 18px;text-align:center;border-bottom:1px solid var(--p-lijn)}
+  .ws-pop-tab tr:last-child th,.ws-pop-tab tr:last-child td{border-bottom:0}
+  .ws-pop-tab thead th{background:var(--p-room2);font-size:11.5px;font-weight:800;letter-spacing:.13em;
+    text-transform:uppercase;color:var(--p-ink60)}
+  .ws-pop-tab tbody th{text-align:left;font-weight:600;color:var(--p-ink80)}
+  .ws-pop-tab .ws-ja svg{width:17px;height:17px;color:var(--p-brons)}
+  .ws-pop-tab .ws-nee{color:var(--p-ink40)}
+  .ws-pop-erbij{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:800;
+    letter-spacing:.11em;text-transform:uppercase;color:var(--p-brons)}
+  .ws-pop-tab tr.ws-beslist td:last-child{background:rgba(233,190,114,.1)}
 
-  .ws-pop-voet{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
-    margin-top:16px;padding-top:15px;border-top:1px solid rgba(17,17,17,.09)}
-  .ws-pop-risico{display:flex;align-items:center;gap:9px;margin:0;font-size:12px;font-weight:600;
-    color:rgba(17,17,17,.6)}
-  .ws-pop-risico svg{width:16px;height:16px;flex:none;color:#BC813E}
-  .ws-pop-meer{border:0;background:none;padding:0;cursor:pointer;font-family:inherit;font-size:12px;
-    font-weight:700;color:#8C5A1A;text-decoration:underline;text-underline-offset:3px}
+  .ws-pop-voet{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);margin:22px -30px 0;
+    padding:20px 30px;background:var(--p-room2);border-top:1px solid var(--p-lijn)}
+  .ws-pop-voet > div{display:flex;align-items:center;justify-content:center;gap:11px;padding:0 10px}
+  .ws-pop-voet > div + div{border-left:1px solid var(--p-lijn)}
+  .ws-pop-voet img{width:24px;height:24px;flex:none;object-fit:contain}
+  .ws-pop-voet span{font-size:13.5px;font-weight:700;color:var(--p-ink80)}
 
-  @media screen and (max-width:749px){
+  @media screen and (max-width:900px){
     .ws-pop{padding:10px}
-    .ws-pop-vak{padding:26px 14px 18px;border-radius:18px}
-    .ws-pop-kaarten{gap:9px}
-    .ws-pop-kaart{padding:16px 11px 12px;border-radius:14px}
-    .ws-pop-naam{font-size:14px}
-    .ws-pop-voor{font-size:11.5px}
-    .ws-pop-vds b{font-size:12px}
-    .ws-pop-prijs b{font-size:19px}
-    .ws-pop-knop{font-size:10.5px;letter-spacing:.06em;padding:13px 8px}
-    .ws-pop-voet{justify-content:center;text-align:center}
+    .ws-pop-vak{padding:26px 16px 0;border-radius:18px}
+    .ws-pop-x{right:12px;top:12px;width:32px;height:32px}
+    .ws-pop-kaarten{grid-template-columns:1fr;gap:12px}
+    .ws-pop-winst{font-size:13.5px;padding:13px 15px;text-align:left}
+    .ws-pop-lead{font-size:14px}
+    .ws-pop-tab table{font-size:12.5px}
+    .ws-pop-tab th,.ws-pop-tab td{padding:11px 12px}
+    .ws-pop-voet{grid-auto-flow:row;grid-auto-columns:auto;grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px 0;margin:18px -16px 0;padding:16px}
+    .ws-pop-voet > div{justify-content:flex-start;padding:0 12px}
+    .ws-pop-voet > div + div{border-left:0}
+    .ws-pop-voet span{font-size:12px}
+  }
+  @media screen and (max-width:700px){
+    .ws-pop-kaart{grid-template-columns:1fr;row-gap:12px;padding:16px}
+    .ws-pop-vlag{position:static;justify-self:end;margin:0 0 2px}
+    .ws-pop-beeld{grid-row:auto}
+    .ws-pop-beeld img{max-width:190px;margin:0 auto}
+    .ws-pop-tekst{grid-row:auto}
+    .ws-pop-kaart.ws-uit .ws-pop-tekst{padding-top:0}
+    .ws-pop-vorm{grid-row:auto;grid-column:auto}
+    .ws-pop-knop{font-size:11.5px;letter-spacing:.05em;padding:16px 8px}
   }
   @media (prefers-reduced-motion:reduce){
     .ws-pop,.ws-pop-vak{transition:none}
