@@ -309,9 +309,9 @@ ZONE = dict(
   ('Waar begin je',
    'De uitleg semantisch: &eacute;&eacute;n <code>&lt;section&gt;</code>, een <code>h2</code> met de vraag, '
    'twee <code>h3</code>&rsquo;s, echte alinea&rsquo;s, een <code>&lt;ol&gt;</code> voor de tips en '
-   'beschrijvende links naar de vier zonecollecties. De tekening is een kaart van de vier zones op '
-   '&eacute;&eacute;n figuur &mdash; dat is precies wat deze pagina moet uitleggen en wat geen enkele '
-   'zonepagina kan tonen.'),
+   'beschrijvende links naar de vier zonecollecties. <b>Zonder tekening:</b> hier stond een getekende '
+   'figuur met de vier zones erop, maar een met de hand getekend lichaam haalt de merklat niet &mdash; '
+   'en de vier zones staan bovenaan al als vier echte foto&rsquo;s. De tekst krijgt nu de volle breedte.'),
   ('Wat kopers schrijven',
    'Drie beoordelingen uit drie verschillende zones, elk aan het apparaat waar hij over gaat, met foto, '
    'link en de score van d&aacute;t apparaat. Op de overkoepelende pagina is de spreiding het punt: '
@@ -485,9 +485,8 @@ ZONE = dict(
   slotalinea='Wat slijt is de kop, niet het apparaat. Alle messen, scheerkoppen en opzetkoppen staan los '
              'in het raster hierboven en in de <a href="' + C + 'accesoires">accessoirecollectie</a>. '
              'Merk je dat een kop trekt of minder pakt, dan hoef je geen nieuw apparaat te kopen.',
-  svg=SVG_ZONES,
-  bijschrift='Vier zones, vier soorten gereedschap: het hoofd, de kaaklijn, het detailwerk in het midden '
-             'van het gezicht, en alles van borst tot heup.',
+  svg='',
+  bijschrift='',
   h3tips='Drie dingen die in elke zone gelden',
   tips=[
    ('Begin bij de langste stand', 'Je kunt altijd korter, nooit langer. Wie met de kortste kam begint, '

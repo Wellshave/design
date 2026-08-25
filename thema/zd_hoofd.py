@@ -200,10 +200,10 @@ ZONE = dict(
    'De uitleg die anders als SEO-tekst onderaan verdwijnt, hier semantisch: '
    '&eacute;&eacute;n <code>&lt;section&gt;</code>, een <code>h2</code> met de vraag, twee '
    '<code>h3</code>&rsquo;s, echte alinea&rsquo;s, een <code>&lt;ol&gt;</code> voor de tips en '
-   'beschrijvende links naar de vier productpagina&rsquo;s. De doorsnede legt uit wat de fade-hendel doet, '
-   'want dat is precies het verschil tussen een tondeuse en een tondeuse. '
-   '<b>Zonder getallen die ik niet kan nakijken:</b> de hendel staat als &ldquo;kort&rdquo; en '
-   '&ldquo;langer&rdquo;, niet in millimeters.'),
+   'beschrijvende links naar de vier productpagina&rsquo;s. <b>Zonder tekening:</b> hier stond een '
+   'getekende kaart van het hoofd, maar een met de hand getekend gezicht haalt de merklat niet. '
+   'De tekst doet het werk nu zelf en krijgt de volle breedte; een doorsnede komt er alleen terug als '
+   'er een mechanisme uit te leggen valt.'),
   ('Wat kopers schrijven',
    'Drie beoordelingen, elk aan het apparaat waar hij over gaat, met foto, link en de score van d&aacute;t '
    'apparaat. Ik heb alleen regels gekozen die inhoudelijk over d&iacute;t apparaat gaan, omdat Loox bij '
@@ -341,9 +341,8 @@ ZONE = dict(
              '<a href="' + P + 'wellshave-scheerkop-7d-vervanging">7D-scheerkop is los verkrijgbaar</a>, '
              'net als de <a href="' + W + '/collections/accesoires">koffers en tassen</a>. Merk je dat de '
              'kop trekt of minder pakt, dan hoef je geen nieuw apparaat te kopen.',
-  svg=SVG_FADE,
-  bijschrift='Drie stukken, drie apparaten: de tondeuse bepaalt de lengte bovenop, de fade-hendel maakt '
-             'de overgang op de zijkant, en de detailtrimmer zet de rand langs nek en oren.',
+  svg='',
+  bijschrift='',
   h3tips='Hoe scheer of knip je je eigen hoofd?',
   tips=[
    ('Werk in banen, niet in rondjes', 'Leg de kop plat neer en trek rustige, overlappende banen van '

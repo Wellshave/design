@@ -13,7 +13,11 @@
 
 <div class="wsc">
 <section class="sectie zand" id="over-deze-categorie" aria-labelledby="{{ kop_id }}"><div class="rail">
-  <div class="cat">
+  {%- assign heeft_beeld = false -%}
+  {%- if section.settings.tekening != blank or section.settings.beeld != blank -%}
+    {%- assign heeft_beeld = true -%}
+  {%- endif -%}
+  <div class="cat{% unless heeft_beeld %} solo{% endunless %}">
     <div class="cat-tekst">
       {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
       <h2 class="duo" id="{{ kop_id }}">{{ section.settings.h2_1 }} <span class="b">{{ section.settings.h2_2 }}</span></h2>
@@ -40,7 +44,7 @@
       {{ section.settings.slotalinea }}
     </div>
 
-    {%- if section.settings.tekening != blank or section.settings.beeld != blank -%}
+    {%- if heeft_beeld -%}
       <figure class="mech-plaat">
         {%- if section.settings.tekening != blank -%}
           {{ section.settings.tekening }}
@@ -87,7 +91,7 @@
     { "type": "text", "id": "h3_lijst", "label": "Kop boven de vergelijking", "default": "De apparaten in deze zone naast elkaar" },
     { "type": "richtext", "id": "slotalinea", "label": "Slotalinea", "info": "Bijvoorbeeld over losse messen en koppen, met een echte link." },
     { "type": "header", "content": "Tekening" },
-    { "type": "html", "id": "tekening", "label": "Inline SVG", "info": "Geef de tekening role=\"img\" met een aria-label, en herhaal het mechanisme in het bijschrift. Laat leeg om een afbeelding te gebruiken." },
+    { "type": "html", "id": "tekening", "label": "Inline SVG", "info": "Alleen voor een mechanisme — een doorsnede, een kop, een blad. Nooit een getekend mens: een met de hand getekend lichaam of gezicht haalt de merklat niet. Laat leeg als er geen mechanisme uit te leggen valt; de tekst wordt dan één brede kolom." },
     { "type": "image_picker", "id": "beeld", "label": "Of een afbeelding" },
     { "type": "textarea", "id": "bijschrift", "label": "Bijschrift", "info": "Eén zin die het mechanisme herhaalt." },
     { "type": "header", "content": "Gebruikstips" },

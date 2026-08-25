@@ -218,6 +218,14 @@ verschilt is inhoud, en dat hoort in een `dict` te staan — niet in de opmaak.
   mechanische doorsnede werkt alleen als het mechanisme in twee vormen te vatten is. Lukt dat
   niet, kies dan een kaart in plaats van een doorsnede: welk apparaat doet welk stuk. Dat legt
   vaak méér uit dan het mechanisme, want het beantwoordt de vraag waarmee de bezoeker binnenkomt.
+- **Teken een mechanisme, nooit een mens.** Een doorsnede van een scheerkop, een blad of een
+  trimmerkam houdt de merklat: het is een object, de lijnen kloppen of ze kloppen niet, en de
+  lezer ziet meteen waar hij naar kijkt. Een met de hand getekend lichaam of gezicht haalt die
+  lat niet — anatomie leest als slordig zodra ze niet perfect is, en dat straalt af op de rest
+  van de pagina, juist op een pagina die het van geloofwaardigheid moet hebben. Valt er geen
+  mechanisme uit te leggen, laat het beeld dan wég: de uitleg wordt één brede kolom en dat leest
+  prima. Zet er geen AI-gegenereerde foto van een persoon voor in de plaats; dat ondergraaft
+  hetzelfde argument nog een stap verder. De zones staan bovenaan al als echte foto's.
 - **Houd lintjes op kaarten kort.** Meer dan ongeveer twintig tekens wordt afgekapt in de tegel;
   het aantal bestellingen hoort dan in het matchpaneel of in de audit, niet op de kaart.
 

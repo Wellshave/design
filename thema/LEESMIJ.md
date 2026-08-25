@@ -57,6 +57,22 @@ naar `ws-collectie.js`, dat er ook het raster mee aanstuurt: de kaart met
 niets, dan staat het er voor de vorm bij — dat is een bevinding over de
 collectie, geen reden om een vraag te verzinnen.
 
+## De tekening in blok 3
+
+De uitlegsectie heeft een `tekening`-veld voor een SVG. Dat veld is **alleen voor
+een mechanisme** — een doorsnede van een scheerkop, een blad, een trimmerkam.
+Lichaam, gezicht en hoofd hadden zo'n tekening ook, en die zijn eruit: een met de
+hand getekende mens leest als slordig zodra de anatomie niet perfect is, en dat
+straalt af op een pagina die het juist van geloofwaardigheid moet hebben. Er is
+niets voor in de plaats gekomen — ook geen AI-foto van een persoon, want die
+ondergraaft hetzelfde argument een stap verder; de zones staan bovenaan al als
+echte foto's.
+
+Laat het veld leeg als er geen mechanisme uit te leggen valt. De sectie krijgt dan
+`.cat.solo` en de tekst wordt één brede kolom van zo'n 70 tekens per regel. Zo
+staan `collection.overzicht.json` en `collection.zone-hoofd.json` er nu bij;
+gezicht, neus en lichaam houden hun doorsnede.
+
 ## Zone ordent, type benoemt
 
 De winkel is opgebouwd rond producttypes, het ontwerp rond zones. Die twee vechten

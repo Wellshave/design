@@ -613,3 +613,7 @@
 /* een pagina zonder keuzehulp: de kop is dan één kolom */
 .wsc .kop-grid.solo{grid-template-columns:minmax(0,1fr);max-width:860px}
 .wsc .kop-grid.solo .kop-foto{aspect-ratio:16/7}
+
+/* geen tekening: de uitleg wordt één brede kolom */
+.wsc .cat.solo{grid-template-columns:minmax(0,1fr);gap:0}
+.wsc .cat.solo .cat-tekst p{max-width:70ch}

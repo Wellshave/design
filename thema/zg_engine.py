@@ -243,16 +243,19 @@ def b3(z):
     lijst = ''.join('<li><a href="%s">%s</a><span>%s</span></li>' % (u, n, t) for n, u, t in c['lijst'])
     tips = ''.join('<li class="stapkort"><b>%s</b><span>%s</span></li>' % (k, v) for k, v in c['tips'])
     alinea = ''.join('<p>%s</p>' % p for p in c['alineas'])
+    plaat = ''
+    if c.get('svg'):
+        plaat = ('<figure class="mech-plaat">%s<figcaption>%s</figcaption></figure>'
+                 % (c['svg'], c['bijschrift']))
     return ('<template data-tpl="b3"><div class="w">'
             '<section class="sectie zand" id="over-deze-categorie" aria-labelledby="cat-kop"><div class="rail">'
-            '<div class="cat"><div class="cat-tekst"><p class="eyebrow">Over deze categorie</p>'
+            '<div class="cat%s"><div class="cat-tekst"><p class="eyebrow">Over deze categorie</p>'
             '<h2 class="duo" id="cat-kop">%s <span class="b">%s</span></h2>%s'
-            '<h3>%s</h3><ul class="cat-lijst">%s</ul><p>%s</p></div>'
-            '<figure class="mech-plaat">%s<figcaption>%s</figcaption></figure></div>'
+            '<h3>%s</h3><ul class="cat-lijst">%s</ul><p>%s</p></div>%s</div>'
             '<h3 class="cat-h3-breed">%s</h3><ol class="stappenrij">%s</ol>'
             '</div></section></div></template>'
-            ) % (c['h2a'], c['h2b'], alinea, c['h3lijst'], lijst, c['slotalinea'],
-                 c['svg'], c['bijschrift'], c['h3tips'], tips)
+            ) % ('' if plaat else ' solo', c['h2a'], c['h2b'], alinea, c['h3lijst'], lijst,
+                 c['slotalinea'], plaat, c['h3tips'], tips)
 
 
 def b4(z):
