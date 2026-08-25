@@ -361,11 +361,17 @@
 
   <script>
     (function () {
+      // Wachten tot de opmaak er staat. Dit script staat in de HTML vóór de
+      // pop-up verderop, dus meteen uitvoeren geeft null op die elementen.
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', start);
+      } else {
+        start();
+      }
+
+      function start() {
       var wortel = document.getElementById('shopify-section-{{ section.id }}');
       if (!wortel) return;
-      // Eerst de vergelijkingsknop. Die hing hieronder, achter de controle op
-      // de gallerij, en werd dus overgeslagen zodra een product te weinig
-      // foto's heeft om een miniatuurstrook te krijgen.
       // De vergelijkingsknop. In een JSON-sjabloon maakt Shopify van een sectie
       // geen id shopify-section-<sleutel>, maar shopify-section-template--123__<sleutel>.
       // Daarom zoeken we op het achtervoegsel en niet op een vaste naam.
@@ -443,6 +449,7 @@
           markeer(Math.round(baan.scrollLeft / (breedte + 16)));
         }, 90);
       });
+      }
     })();
   </script>
 
