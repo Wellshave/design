@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Over ons | Wellshave</title>
+<meta name="description" content="Wellshave begint niet bij het apparaat, maar bij de man ervoor: zijn probleem, zijn oplossing, en wat hij wil bereiken.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<!--
+  OVER ONS &mdash; Wellshave
+  Gebouwd op de merklaag: .claude/skills/sanwarwala-landing-pages/references/wellshave-merklaag.md
+  Alles is gescoopt onder .gg-lp zodat de pagina binnen het Shopify-thema kan draaien
+  zonder de themaheader en -footer te raken (merklaag deel 16).
+  Meldbalk en navigatie zitten hier bewust NIET in: het thema levert die al.
+-->
+
+<style>
+:root{
+  /* inkt */
+  --ink:#111111;
+  --ink-80:rgba(17,17,17,.8);
+  --ink-60:rgba(17,17,17,.6);
+  --ink-40:rgba(17,17,17,.4);
+  --ink-10:rgba(17,17,17,.10);
+
+  /* grond */
+  --paper:#FFFFFF;
+  --sand:#F5F1EA;
+  --sand-deep:#EDE6DA;
+  --carbon:#191816;
+
+  /* accent */
+  --bronze:#BC813E;
+  --gold:#F5D18A;
+  --alert:#E61C1C;
+
+  /* betekenis-tinten */
+  --tint-rose:#F4E3DE;
+  --tint-amber:#F7EBD3;
+  --tint-sage:#E5EBE1;
+
+  /* gradienten */
+  --grad-gold:linear-gradient(158deg,#F8DFAB 0%,#E5BC77 42%,#C8913F 100%);
+  --grad-dark:linear-gradient(168deg,#242220 0%,#171614 58%,#0E0D0C 100%);
+  --grad-sand:linear-gradient(180deg,#FBF8F3 0%,#F1EBE0 100%);
+  --grad-gold-tekst:linear-gradient(100deg,#B0742A 0%,#8C5A1A 100%);
+
+  /* vorm */
+  --r-s:12px;
+  --r-m:18px;
+  --r-l:26px;
+
+  --rail:1140px;
+  --read:660px;
+}
+
+/* ---------- basis, volledig gescoopt (merklaag deel 16) ---------- */
+html{scroll-behavior:smooth}
+.gg-lp *{box-sizing:border-box;margin:0;padding:0}
+.gg-lp{
+  background:var(--paper);color:var(--ink);
+  font-family:'Montserrat',system-ui,-apple-system,sans-serif;
+  font-size:16px;line-height:1.65;font-weight:400;
+  -webkit-font-smoothing:antialiased;
+}
+.gg-lp img{max-width:100%;height:auto;display:block}
+.gg-lp a{color:inherit}
+.gg-lp :focus-visible{outline:3px solid var(--bronze);outline-offset:3px}
+
+.gg-lp .wrap{max-width:var(--rail);margin:0 auto;padding:0 24px}
+.gg-lp .read{max-width:var(--read);margin:0 auto;padding:0 24px}
+
+/* ---------- handtekening: de tweeslags kop ---------- */
+.gg-lp .duo{
+  font-weight:900;letter-spacing:-.025em;line-height:1.02;
+  font-size:clamp(31px,4.6vw,54px);text-wrap:balance;
+}
+.gg-lp .duo .b{display:block;color:#B0742A}
+.gg-lp .duo.on-dark{color:#fff}
+.gg-lp .duo.on-dark .b{color:var(--gold)}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  .gg-lp .duo .b{background-image:var(--grad-gold-tekst);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:transparent}
+  .gg-lp .duo.on-dark .b{background-image:var(--grad-gold)}
+}
+.gg-lp .kicker{
+  display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--ink-40);margin-bottom:14px;
+}
+.gg-lp .kicker.on-dark{color:rgba(255,255,255,.45)}
+.gg-lp .lead{margin-top:16px;font-size:16.5px;line-height:1.7;color:var(--ink-80);max-width:52ch}
+.gg-lp .lead.on-dark{color:rgba(255,255,255,.7)}
+
+/* ---------- hero ---------- */
+.gg-lp .hero{background:var(--grad-sand);padding:52px 0 0}
+.gg-lp .hero-in{max-width:var(--rail);margin:0 auto;padding:0 24px;
+  display:grid;grid-template-columns:1.02fr .98fr;gap:44px;align-items:center}
+.gg-lp .hero-copy{padding-bottom:56px}
+.gg-lp .hero-lede{margin-top:20px;font-size:16.5px;line-height:1.7;color:var(--ink-80);max-width:44ch}
+.gg-lp .hero-acts{display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px;margin-top:26px}
+.gg-lp .knop{display:inline-flex;align-items:center;gap:9px;background:var(--ink);color:#fff;
+  text-decoration:none;border-radius:100px;padding:16px 30px;font-size:14.5px;font-weight:800;
+  transition:background .18s ease,transform .18s ease}
+.gg-lp .knop:hover{background:var(--bronze);transform:translateY(-1px)}
+.gg-lp .knop.goud{background:var(--grad-gold);color:#1A1408}
+.gg-lp .knop.goud:hover{filter:brightness(1.04)}
+.gg-lp .knop-tekst{font-size:13.5px;font-weight:700;color:var(--ink-60);text-decoration:none;
+  border-bottom:1px solid var(--ink-10)}
+.gg-lp .hero-assure{list-style:none;display:flex;flex-wrap:wrap;gap:7px 18px;margin-top:18px}
+.gg-lp .hero-assure li{font-size:12.5px;font-weight:600;color:var(--ink-60);position:relative;padding-left:16px}
+.gg-lp .hero-assure li::before{content:"";position:absolute;left:0;top:7px;width:8px;height:8px;
+  border-radius:50%;background:var(--bronze)}
+.gg-lp .hero-badge{display:inline-flex;align-items:center;gap:9px;margin-top:22px;background:var(--paper);
+  border:1px solid var(--ink-10);border-radius:100px;padding:9px 17px;font-size:12.5px;font-weight:600}
+.gg-lp .hero-badge b{color:var(--bronze);font-weight:800}
+.gg-lp .hero-art{align-self:end;padding-bottom:34px}
+.gg-lp .hero-art .plaat{background:var(--grad-dark);border-radius:var(--r-l);padding:16px;
+  box-shadow:0 26px 60px rgba(17,17,17,.24)}
+.gg-lp .hero-art img{width:100%;border-radius:var(--r-m)}
+
+/* ---------- geruststrook ---------- */
+.gg-lp .strook{background:var(--paper);border-top:1px solid var(--ink-10);border-bottom:1px solid var(--ink-10)}
+.gg-lp .strook-in{max-width:var(--rail);margin:0 auto;padding:0 24px;
+  display:grid;grid-template-columns:repeat(4,1fr)}
+.gg-lp .strook-item{display:flex;align-items:center;gap:12px;padding:20px 18px}
+.gg-lp .strook-item + .strook-item{border-left:1px solid var(--ink-10)}
+.gg-lp .strook-ico{width:34px;height:34px;border-radius:50%;background:var(--sand);flex-shrink:0;
+  display:grid;place-items:center;color:var(--bronze)}
+.gg-lp .strook-ico svg{width:17px;height:17px}
+.gg-lp .strook-tx b{display:block;font-size:13px;font-weight:800;line-height:1.3}
+.gg-lp .strook-tx span{display:block;font-size:11.5px;color:var(--ink-60);margin-top:2px}
+
+/* ---------- artikel ---------- */
+.gg-lp .article{padding:66px 0 0;background:var(--paper)}
+.gg-lp .article h2{font-weight:900;letter-spacing:-.022em;line-height:1.06;
+  font-size:clamp(25px,3.6vw,38px);margin:52px 0 18px;text-wrap:balance}
+.gg-lp .article p{font-size:16.5px;line-height:1.78;color:var(--ink-80);margin-bottom:20px}
+.gg-lp .article p b,.gg-lp .article p strong{color:var(--ink);font-weight:700}
+/* let op: .gg-lp .article p is (0,2,1) en wint van een losse klasse.
+   Deze twee moeten daarom even zwaar of zwaarder zijn, anders vallen ze terug
+   naar de lopende-tekstmaat. Zelfde valkuil zit in het startbestand. */
+.gg-lp .article p.lede-para{font-size:18.5px;line-height:1.7;color:var(--ink);font-weight:500}
+.gg-lp .callout{border-left:3px solid var(--bronze);background:var(--sand);
+  border-radius:0 var(--r-s) var(--r-s) 0;padding:22px 24px;margin:30px 0}
+.gg-lp .callout .kicker{color:var(--bronze);margin-bottom:8px}
+.gg-lp .callout p{margin:0;font-size:16px;color:var(--ink)}
+.gg-lp .quote,.gg-lp .article p.quote{font-size:clamp(20px,2.9vw,27px);font-weight:800;line-height:1.2;
+  letter-spacing:-.02em;color:var(--ink);padding:30px 0;margin:38px 0;
+  border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+
+/* ---------- drie tintkaarten ---------- */
+.gg-lp .tintblok{padding:8px 0 4px;background:var(--paper)}
+.gg-lp .tintkop{max-width:var(--rail);margin:0 auto 26px;padding:0 24px;
+  display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:end}
+.gg-lp .kaarten3{max-width:var(--rail);margin:0 auto 8px;padding:0 24px;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.gg-lp .tk{border-radius:var(--r-m);padding:24px 22px 20px;display:flex;flex-direction:column;gap:12px}
+.gg-lp .tk.rose{background:var(--tint-rose)}
+.gg-lp .tk.amber{background:var(--tint-amber)}
+.gg-lp .tk.sage{background:var(--tint-sage)}
+.gg-lp .tk-ico{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.72);
+  display:grid;place-items:center;color:var(--ink)}
+.gg-lp .tk-ico svg{width:18px;height:18px}
+.gg-lp .tk h3{font-size:17px;font-weight:800;letter-spacing:-.01em;line-height:1.25}
+.gg-lp .tk p{font-size:14px;line-height:1.6;color:var(--ink-80)}
+.gg-lp .tk-voet{margin-top:auto;padding-top:14px;border-top:1px solid rgba(17,17,17,.1);
+  font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-40)}
+
+/* ---------- donker missieblok ---------- */
+.gg-lp .mech{background:var(--grad-dark);color:#fff;padding:76px 0;margin:70px 0}
+.gg-lp .mech-in{max-width:var(--rail);margin:0 auto;padding:0 24px;
+  display:grid;grid-template-columns:.92fr 1.08fr;gap:48px;align-items:center}
+.gg-lp .checks{list-style:none;margin-top:26px;display:flex;flex-direction:column;gap:12px}
+.gg-lp .checks li{display:flex;gap:12px;align-items:flex-start;font-size:14.5px;line-height:1.55;
+  color:rgba(255,255,255,.82)}
+.gg-lp .checks .v{width:22px;height:22px;border-radius:50%;background:var(--grad-gold);flex-shrink:0;
+  display:grid;place-items:center;color:#1A1408;font-size:12px;font-weight:900;margin-top:1px}
+/* variant: het kruisje voor wat we juist niet beloven */
+.gg-lp .checks.kruis{margin-top:16px}
+.gg-lp .checks.kruis .v{background:rgba(255,255,255,.1);color:rgba(255,255,255,.65);font-weight:700}
+.gg-lp .mech-kaart{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--r-l);padding:26px}
+.gg-lp .mech-kaart .kicker{margin-bottom:2px}
+.gg-lp .mech-scheiding{height:1px;background:rgba(255,255,255,.1);margin:24px 0 20px}
+
+/* ---------- vier kenmerkkaarten ---------- */
+.gg-lp .kenmerken{background:var(--sand);padding:74px 0}
+.gg-lp .kenmerk-kop{max-width:760px;margin:0 auto 34px;padding:0 24px;text-align:center}
+.gg-lp .kaarten4{max-width:var(--rail);margin:0 auto;padding:0 24px;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.gg-lp .kk{border-radius:var(--r-m);padding:24px 20px;display:flex;flex-direction:column;gap:12px;
+  min-height:196px}
+.gg-lp .kk-ico{width:34px;height:34px;border-radius:9px;display:grid;place-items:center}
+.gg-lp .kk-ico svg{width:17px;height:17px}
+.gg-lp .kk h3{font-size:16px;font-weight:800;line-height:1.25;letter-spacing:-.01em}
+.gg-lp .kk p{font-size:13.5px;line-height:1.55;margin-top:auto}
+.gg-lp .kk.wit{background:var(--paper);color:var(--ink)}
+.gg-lp .kk.wit .kk-ico{background:var(--sand);color:var(--bronze)}
+.gg-lp .kk.wit p{color:var(--ink-60)}
+.gg-lp .kk.zwart{background:var(--carbon);color:#fff}
+.gg-lp .kk.zwart .kk-ico{background:rgba(255,255,255,.1);color:var(--gold)}
+.gg-lp .kk.zwart p{color:rgba(255,255,255,.62)}
+.gg-lp .kk.goud{background:var(--grad-gold);color:#1A1408}
+.gg-lp .kk.goud .kk-ico{background:rgba(255,255,255,.5);color:#6B4A16}
+.gg-lp .kk.goud p{color:rgba(26,20,8,.72)}
+.gg-lp .kk.creme{background:var(--sand-deep);color:var(--ink)}
+.gg-lp .kk.creme .kk-ico{background:rgba(255,255,255,.7);color:var(--bronze)}
+.gg-lp .kk.creme p{color:var(--ink-60)}
+
+/* ---------- beeldband ---------- */
+.gg-lp .band{max-width:var(--rail);margin:70px auto;padding:0 24px}
+.gg-lp .band-in{position:relative;border-radius:var(--r-l);overflow:hidden}
+.gg-lp .band-in img{width:100%;height:clamp(300px,48vh,520px);object-fit:cover;object-position:58% 46%}
+.gg-lp .band-copy{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;
+  gap:6px;padding:32px 30px;color:#fff;
+  background:linear-gradient(90deg,rgba(15,14,13,.74) 0%,rgba(15,14,13,.34) 44%,rgba(15,14,13,0) 74%)}
+.gg-lp .band-line{max-width:19ch;font-size:clamp(22px,3.2vw,34px);font-weight:800;line-height:1.12;
+  letter-spacing:-.022em;text-wrap:balance}
+
+/* ---------- werkwijze: genummerde items ---------- */
+.gg-lp .werkwijze{background:var(--paper);padding:74px 0 6px}
+.gg-lp .werk-kop{max-width:var(--rail);margin:0 auto 46px;padding:0 24px}
+.gg-lp .lijst{max-width:var(--rail);margin:0 auto;padding:0 24px;
+  display:flex;flex-direction:column;gap:52px}
+.gg-lp .item{display:grid;grid-template-columns:1fr 1fr;gap:38px;align-items:center}
+.gg-lp .item:nth-child(even) .item-beeld{order:-1}
+.gg-lp .item-nr{display:block;font-size:clamp(44px,6vw,72px);font-weight:900;line-height:.9;
+  letter-spacing:-.04em;color:#B0742A;margin-bottom:10px}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  .gg-lp .item-nr{background-image:var(--grad-gold-tekst);-webkit-background-clip:text;
+    background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+}
+.gg-lp .item-kop{font-size:clamp(21px,2.9vw,30px);font-weight:900;letter-spacing:-.022em;
+  line-height:1.12;margin-bottom:12px;text-wrap:balance}
+.gg-lp .item p{font-size:16px;line-height:1.7;color:var(--ink-80)}
+.gg-lp .item-beeld img{width:100%;border-radius:var(--r-m)}
+/* foto's met een ingebakken witte achtergrond hebben een plaat nodig,
+   anders zweven ze los op wit (merklaag deel 13) */
+.gg-lp .beeld-plaat{background:var(--sand);border-radius:var(--r-m);padding:20px}
+.gg-lp .beeld-plaat img{border-radius:var(--r-s)}
+.gg-lp .item-voet{display:inline-block;margin-top:14px;font-size:12px;font-weight:800;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--ink-40)}
+
+/* stemkaart: de klant zelf aan het woord, in HTML in plaats van als foto */
+.gg-lp .stemkaart{background:var(--sand);border-radius:var(--r-m);padding:22px;
+  display:flex;flex-direction:column;gap:14px}
+.gg-lp .stem{background:var(--paper);border:1px solid var(--ink-10);border-radius:var(--r-s);
+  padding:16px 18px}
+.gg-lp .stem p{font-size:14px;line-height:1.6;color:var(--ink-80);margin:0}
+.gg-lp .stem footer{margin-top:9px;font-size:11.5px;font-weight:700;color:var(--ink-40)}
+.gg-lp .stemkaart .stem-voet{font-size:10.5px;font-weight:800;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink-40);text-align:center}
+
+/* ---------- proof ---------- */
+.gg-lp .proof{padding:74px 0;text-align:center;background:var(--sand)}
+.gg-lp .proof .sub{color:var(--ink-60);margin:12px auto 32px;font-size:15px;max-width:60ch}
+.gg-lp .tp-summary{display:flex;align-items:center;justify-content:center;gap:22px;flex-wrap:wrap;margin:0 0 28px}
+.gg-lp .tp-score{display:flex;align-items:center;gap:12px}
+.gg-lp .tp-num{font-size:30px;font-weight:900;letter-spacing:-.02em}
+.gg-lp .tp-stars{display:flex;gap:3px}
+.gg-lp .tp-star{width:26px;height:26px;background:#00B67A;position:relative;display:inline-block}
+.gg-lp .tp-star::after{content:"";position:absolute;inset:0;background:var(--sand);
+  clip-path:polygon(50% 12%,61% 39%,90% 39%,67% 57%,76% 85%,50% 68%,24% 85%,33% 57%,10% 39%,39% 39%)}
+.gg-lp .tp-star.is-half{background:linear-gradient(90deg,#00B67A 50%,#DCDCE6 50%)}
+.gg-lp .tp-count{font-size:13px;color:var(--ink-60);font-weight:600}
+.gg-lp .reviews{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;text-align:left;
+  padding:6px 24px 18px;margin:0 auto;max-width:var(--rail);
+  -webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.gg-lp .rev{flex:0 0 clamp(268px,31%,340px);scroll-snap-align:start;background:var(--paper);
+  border:1px solid var(--ink-10);border-radius:var(--r-m);padding:20px;display:flex;flex-direction:column}
+.gg-lp .rev-bezwaar{align-self:flex-start;font-size:10px;font-weight:800;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--bronze);border:1px solid rgba(188,129,62,.35);
+  border-radius:100px;padding:4px 11px;margin-bottom:14px}
+.gg-lp .rev-stars{display:flex;align-items:center;gap:3px;margin-bottom:12px}
+.gg-lp .rev-stars .tp-star{width:19px;height:19px}
+.gg-lp .rev-stars .tp-star::after{background:var(--paper)}
+.gg-lp .rev-title{font-size:15px;font-weight:700;margin-bottom:7px;line-height:1.35}
+.gg-lp .rev-body{font-size:14px;line-height:1.6;color:var(--ink-80);margin-bottom:14px}
+.gg-lp .rev-naam{margin-top:auto;padding-top:12px;border-top:1px solid var(--ink-10);
+  font-size:12px;font-weight:700;color:var(--ink-60)}
+.gg-lp .rev-naam span{display:block;font-weight:600;color:var(--ink-40);margin-top:2px}
+.gg-lp .bronregel{max-width:var(--rail);margin:8px auto 0;padding:0 24px;
+  font-size:11.5px;color:var(--ink-40)}
+
+/* ---------- faq ---------- */
+.gg-lp .faq{max-width:820px;margin:0 auto;padding:60px 24px 74px}
+.gg-lp .faq h2{margin-bottom:26px}
+.gg-lp .faq details{border-bottom:1px solid var(--ink-10)}
+.gg-lp .faq summary{cursor:pointer;list-style:none;padding:20px 34px 20px 0;position:relative;
+  font-size:16px;font-weight:700;line-height:1.4}
+.gg-lp .faq summary::-webkit-details-marker{display:none}
+.gg-lp .faq summary::after{content:"+";position:absolute;right:6px;top:18px;font-size:22px;
+  font-weight:400;color:var(--bronze);transition:transform .2s ease}
+.gg-lp .faq details[open] summary::after{transform:rotate(45deg)}
+.gg-lp .faq details p{padding:0 0 22px;font-size:15px;line-height:1.7;color:var(--ink-80)}
+
+/* ---------- afsluiter ---------- */
+.gg-lp .closer{background:var(--grad-dark);color:#fff;padding:80px 0}
+.gg-lp .closer-in{max-width:var(--rail);margin:0 auto;padding:0 24px;
+  display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+.gg-lp .assure{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:22px;font-size:11px;
+  font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+
+/* ---------- voet ---------- */
+.gg-lp .paginavoet{max-width:var(--rail);margin:0 auto;padding:34px 24px 46px;text-align:center;
+  font-size:11.5px;line-height:1.7;color:var(--ink-40)}
+.gg-lp .paginavoet .logo{display:block;margin-bottom:8px;color:var(--ink);
+  font-weight:800;letter-spacing:.24em;font-size:13.5px;text-transform:uppercase}
+
+/* ---------- onthulling ---------- */
+.gg-lp .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.gg-lp .reveal.in{opacity:1;transform:none}
+
+/* ---------- responsief ---------- */
+@media(max-width:980px){
+  .gg-lp .hero-in{grid-template-columns:1fr;gap:6px;padding-top:26px}
+  .gg-lp .hero-copy{padding-bottom:6px}
+  .gg-lp .hero-art{padding-bottom:30px}
+  .gg-lp .mech-in,.gg-lp .closer-in,.gg-lp .tintkop{grid-template-columns:1fr;gap:30px}
+  .gg-lp .kaarten4{grid-template-columns:repeat(2,1fr)}
+  .gg-lp .strook-in{grid-template-columns:repeat(2,1fr)}
+  .gg-lp .strook-item:nth-child(3){border-left:0}
+  .gg-lp .strook-item:nth-child(n+3){border-top:1px solid var(--ink-10)}
+}
+@media(max-width:760px){
+  .gg-lp .kaarten3{grid-template-columns:1fr}
+  .gg-lp .rev{flex:0 0 82%}
+  .gg-lp .article h2{margin:40px 0 16px}
+  .gg-lp .mech,.gg-lp .band{margin:48px 0}
+  .gg-lp .band{margin-left:auto;margin-right:auto}
+  .gg-lp .item{grid-template-columns:1fr;gap:20px}
+  .gg-lp .item:nth-child(even) .item-beeld{order:0}
+  .gg-lp .lijst{gap:44px}
+}
+@media(max-width:520px){
+  .gg-lp .strook-in{grid-template-columns:1fr}
+  .gg-lp .strook-item{border-left:0!important}
+  .gg-lp .strook-item + .strook-item{border-top:1px solid var(--ink-10)}
+  .gg-lp .kaarten4{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .gg-lp .reveal{opacity:1;transform:none;transition:none}
+  .gg-lp .knop,.gg-lp .kk,.gg-lp .rev{transition:none}
+}
+</style>
+</head>
+<body>
+
+<div class="gg-lp">
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-in">
+    <div class="hero-copy">
+      <span class="kicker">Over Wellshave</span>
+      <h1 class="duo">Wij beginnen nooit bij het apparaat.<span class="b">Wij beginnen bij jou.</span></h1>
+      <p class="hero-lede">Elk product dat we maken komt voort uit &eacute;&eacute;n vraag: wat gaat er mis op het moment dat jij voor de spiegel staat? Pas als daar een scherp antwoord op ligt, tekenen we iets.</p>
+      <div class="hero-acts">
+        <a class="knop goud" href="https://wellshave.com/collections/all">Bekijk het assortiment</a>
+        <a class="knop-tekst" href="#werkwijze">Zo werken wij</a>
+      </div>
+      <ul class="hero-assure">
+        <li>100 dagen proef</li>
+        <li>2 jaar garantie</li>
+        <li>Gratis verzending vanaf &euro;30</li>
+      </ul>
+      <span class="hero-badge"><b>4,5</b> uit 700+ Trustpilot-reviews</span>
+    </div>
+    <div class="hero-art">
+      <div class="plaat">
+        <img src="https://wellshave.com/cdn/shop/files/Putgroomguardintoiletrybag.png?v=1&amp;width=1100"
+             alt="Een man legt een Wellshave-trimmer in de zwarte Wellshave-toilettas op een houten kaptafel."
+             width="1084" height="1084" fetchpriority="high">
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ GERUSTSTROOK ============ -->
+<div class="strook">
+  <div class="strook-in">
+    <div class="strook-item">
+      <span class="strook-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M17 20v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="3.5"/><path d="M19 8v6M22 11h-6"/></svg></span>
+      <span class="strook-tx"><b>180.000+</b><span>mannen upgradeden hun routine</span></span>
+    </div>
+    <div class="strook-item">
+      <span class="strook-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
+      <span class="strook-tx"><b>100 dagen proef</b><span>thuis proberen, anders geld terug</span></span>
+    </div>
+    <div class="strook-item">
+      <span class="strook-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h11v9H2zM13 11h4.5l3.5 3.5V17h-8z"/><circle cx="6" cy="18.5" r="1.8"/><circle cx="17" cy="18.5" r="1.8"/></svg></span>
+      <span class="strook-tx"><b>Voor 23:59 besteld</b><span>morgen in huis binnen Nederland</span></span>
+    </div>
+    <div class="strook-item">
+      <span class="strook-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg></span>
+      <span class="strook-tx"><b>Verzonden uit Helmond</b><span>Nederland, met PostNL, DHL of DPD</span></span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ARTIKEL: wie is Wellshave ============ -->
+<article class="article">
+  <div class="read">
+    <span class="kicker">Wie is Wellshave</span>
+    <p class="lede-para">De meeste mannen die bij ons terechtkomen, willen helemaal geen nieuw apparaat. Ze komen omdat het de vorige keer misging.</p>
+    <p>Een rode plek in de liesstreek die je de rest van de dag voelt. Een sneetje op precies de plek waar je er niets aan kunt doen. Een trimmer die vastloopt in dikker haar, of een mesje dat na drie beurten al begint te trekken. De uitkomst is bijna altijd dezelfde: je stelt het uit, en daarna doe je het in haast &mdash; wat het niet beter maakt.</p>
+
+    <h2>Wat wij daaruit opmaakten</h2>
+    <p>Het ligt zelden aan de man en bijna altijd aan het gereedschap. De meeste apparaten in dit schap zijn ontworpen voor een kaak: een vlak, stevig stuk huid dat tegendruk geeft. Ze worden vervolgens verkocht voor lichaamszones die zacht zijn, meebewegen en nergens tegendruk geven. Dat verschil is niet jouw techniekfout. Dat is een ontwerpfout.</p>
+    <div class="callout">
+      <span class="kicker">De kern</span>
+      <p>Een keramisch blad is harder dan standaard staal, slijt langzamer en geeft minder wrijving op de huid. Daarom kan hetzelfde apparaat dagelijks langs gevoelige zones zonder te gaan trekken. Wij noemen dat SkinSafe, maar de naam doet het werk niet &mdash; het materiaal doet het werk.</p>
+    </div>
+    <p>Wellshave maakt geen scheerapparaten omdat scheerapparaten een aardige categorie zijn. We maken ze omdat we &eacute;&eacute;n specifiek moment willen repareren: dat van jou, onder de douche, met weinig tijd en op een plek waar een fout de hele dag blijft hangen.</p>
+    <p class="quote">Het apparaat is niet het product. Wat jij ermee bereikt, is het product.</p>
+  </div>
+</article>
+
+<!-- ============ DRIE VRAGEN: probleem, oplossing, doel ============ -->
+<section class="tintblok reveal">
+  <div class="tintkop">
+    <h2 class="duo">Techniek is niet het vertrekpunt.<span class="b">Hij is dat wel.</span></h2>
+    <p class="lead">Voordat er &eacute;&eacute;n schets bestaat, beantwoorden we deze drie vragen over de man die het straks in zijn hand houdt. Blijft er een onbeantwoord, dan gaat het product niet in productie.</p>
+  </div>
+  <div class="kaarten3">
+    <div class="tk rose">
+      <span class="tk-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.2v.1"/></svg></span>
+      <h3>Wat is zijn probleem?</h3>
+      <p>Niet &quot;hij wil trimmen&quot;, maar: hij wil geen irritatie in de liesstreek, hij heeft er &apos;s ochtends zeven minuten voor, en hij wil er daarna niet meer aan denken.</p>
+      <span class="tk-voet">Vraag 1</span>
+    </div>
+    <div class="tk amber">
+      <span class="tk-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h13l5 5-5 5H3z"/><path d="M8 12h6"/></svg></span>
+      <h3>Wat is zijn oplossing?</h3>
+      <p>Wat heeft hij al geprobeerd, en waarom hield het geen stand? Wegwerpmesjes, de tondeuse van zijn hoofd, een apparaat dat voor zijn baard is gemaakt. Daar zit het antwoord in.</p>
+      <span class="tk-voet">Vraag 2</span>
+    </div>
+    <div class="tk sage">
+      <span class="tk-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".6" fill="currentColor"/></svg></span>
+      <h3>Wat wil hij bereiken?</h3>
+      <p>Meestal niet kaal, maar kort en gelijk &mdash; 3 tot 5 millimeter. Verzorgd zijn zonder dat het een project wordt, en zonder dat iemand ziet dat je er moeite voor deed.</p>
+      <span class="tk-voet">Vraag 3</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MISSIE ============ -->
+<section class="mech reveal" id="missie">
+  <div class="mech-in">
+    <div>
+      <span class="kicker on-dark">Onze missie</span>
+      <h2 class="duo on-dark">Verzorging hoort geen<span class="b">gedoe te zijn.</span></h2>
+      <p class="lead on-dark">Wij willen dat je je routine kunt doen zonder erover na te denken en zonder de dag erna spijt te hebben. Niet spannender dan dat, en niet minder.</p>
+      <ul class="checks">
+        <li><span class="v">&#10003;</span><span>Veilig op de plekken waar het werkelijk misgaat: liesstreek, oksels, hals.</span></li>
+        <li><span class="v">&#10003;</span><span>Kort en gelijk in plaats van kaal &mdash; 3 tot 5 millimeter is waar de meeste mannen willen uitkomen.</span></li>
+        <li><span class="v">&#10003;</span><span>Eerlijk over wat het daarna kost. Wat een vervangmesje kost, staat gewoon op de pagina.</span></li>
+        <li><span class="v">&#10003;</span><span>Premium in de hand, toegankelijk in prijs. Zonder dat je voor de doos betaalt.</span></li>
+      </ul>
+    </div>
+    <div class="mech-kaart">
+      <span class="kicker on-dark">Wat wij niet beloven</span>
+      <ul class="checks kruis">
+        <li><span class="v">&times;</span><span>Kaal als glas. De meeste mannen willen dat niet, en wij doen niet alsof.</span></li>
+        <li><span class="v">&times;</span><span>Dat het bij iedereen identiek uitpakt. Huid en haargroei verschillen.</span></li>
+        <li><span class="v">&times;</span><span>Dat een apparaat je huid verandert. Het verandert alleen hoe je hem behandelt.</span></li>
+      </ul>
+      <div class="mech-scheiding"></div>
+      <span class="kicker on-dark">Wat wij wel beloven</span>
+      <ul class="checks">
+        <li><span class="v">&#10003;</span><span>100 dagen om het thuis uit te proberen. Bevalt het niet, dan krijg je je geld terug.</span></li>
+        <li><span class="v">&#10003;</span><span>2 jaar garantie op elk apparaat.</span></li>
+        <li><span class="v">&#10003;</span><span>Een mens aan de klantenservice die het oplost in plaats van doorverwijst.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BEELDBAND ============ &eacute;&eacute;n per pagina -->
+<div class="band reveal">
+  <div class="band-in">
+    <img src="https://wellshave.com/cdn/shop/files/Horizontail_essential_bundel.png?v=1&amp;width=1600"
+         alt="Wellshave-trimmer in zijn laadstation naast de hardcase en toilettas op een donkere badkamerrand."
+         width="1536" height="1024" loading="lazy">
+    <div class="band-copy">
+      <p class="band-line">Gemaakt voor de badkamer, niet voor de vitrine.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ONS DOEL: vier kenmerkkaarten ============ -->
+<section class="kenmerken reveal">
+  <div class="kenmerk-kop">
+    <span class="kicker">Ons doel</span>
+    <h2 class="duo">Wij willen niet het grootste merk zijn.<span class="b">Wel het merk dat je aanraadt.</span></h2>
+  </div>
+  <div class="kaarten4">
+    <div class="kk wit">
+      <span class="kk-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c3.2 3 5 5.6 5 8.2A5 5 0 0 1 7 11.2C7 8.6 8.8 6 12 3z"/></svg></span>
+      <h3>Ontworpen voor dagelijks gebruik</h3>
+      <p>Stil, betrouwbaar en waterdicht volgens IPX7. Onder de douche te gebruiken en gewoon af te spoelen onder de kraan.</p>
+    </div>
+    <div class="kk zwart">
+      <span class="kk-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h10M4 17h6"/><path d="M17.5 14.5l2 2 3.5-3.8"/></svg></span>
+      <h3>Getest tot het niet meer misgaat</h3>
+      <p>Elk apparaat wordt getest en bijgesteld op precisie en levensduur voordat het de collectie in mag.</p>
+    </div>
+    <div class="kk goud">
+      <span class="kk-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.6 6.1.8-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6L3.3 9.4l6.1-.8z"/></svg></span>
+      <h3>Premium, maar toegankelijk</h3>
+      <p>Hoogwaardige materialen en een luxe afwerking, zonder de prijs die daar in dit schap meestal bij hoort.</p>
+    </div>
+    <div class="kk creme">
+      <span class="kk-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 3.5V8h-4.5"/></svg></span>
+      <h3>100 dagen om ons ongelijk te bewijzen</h3>
+      <p>Thuis proberen op je eigen huid. Doet het niet wat wij beloven, dan gaat het retour en krijg je je geld terug.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WERKWIJZE ============ -->
+<section class="werkwijze" id="werkwijze">
+  <div class="werk-kop reveal">
+    <span class="kicker">Zo werken wij</span>
+    <h2 class="duo">Van zijn probleem<span class="b">naar zijn resultaat.</span></h2>
+  </div>
+  <div class="lijst">
+
+    <div class="item reveal">
+      <div>
+        <span class="item-nr">01</span>
+        <h3 class="item-kop">Eerst luisteren, dan pas tekenen</h3>
+        <p>Elke review, elke mail aan de klantenservice en elke retour komt op &eacute;&eacute;n stapel. Daar staat wat er werkelijk misgaat &mdash; niet wat wij dachten dat er misging. Een klacht die drie keer terugkomt is geen klacht meer, dat is een opdracht.</p>
+        <span class="item-voet">Stap 1 &middot; Zijn probleem</span>
+      </div>
+      <div class="item-beeld">
+        <div class="stemkaart">
+          <blockquote class="stem">
+            <p>&quot;Doet wat hij moet doen. Ook bij de edele delen kun je zonder wondjes gaan trimmen. Ligt ook goed in de hand. Zeker goeie prijs kwaliteit.&quot;</p>
+            <footer>Maarten A. &middot; Groom Guard&trade;</footer>
+          </blockquote>
+          <blockquote class="stem">
+            <p>&quot;Geweldig pakket, had ik eerder moeten kopen. Scheren gaat moeiteloos en zonder wondjes, zelfs de schaamstreek wordt super glad met de speciale scheerkop.&quot;</p>
+            <footer>Rik T. &middot; Shave Package Ultimate&trade;</footer>
+          </blockquote>
+          <span class="stem-voet">Klantreviews op wellshave.com</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="item reveal">
+      <div>
+        <span class="item-nr">02</span>
+        <h3 class="item-kop">Het mechanisme moet het verschil maken</h3>
+        <p>Een belofte telt pas als er iets fysieks onder ligt. Keramische bladen zijn harder dan staal, slijten langzamer en geven minder wrijving &mdash; daarom kan hetzelfde apparaat langs zones waar een gewoon mesje gaat trekken. Werkt het mechanisme niet, dan helpt betere marketing ook niet.</p>
+        <span class="item-voet">Stap 2 &middot; Zijn oplossing</span>
+      </div>
+      <div class="item-beeld beeld-plaat">
+        <img src="https://wellshave.com/cdn/shop/files/Cut_through_hair.png?v=1&amp;width=1100"
+             alt="Doorsnede van een trimmerkop die door een bundel haren gaat, met het blad in beeld."
+             width="1600" height="1200" loading="lazy">
+      </div>
+    </div>
+
+    <div class="item reveal">
+      <div>
+        <span class="item-nr">03</span>
+        <h3 class="item-kop">Af is het pas als je er niet meer aan denkt</h3>
+        <p>Het doel is niet een geslaagde scheerbeurt. Het doel is een routine die geen aandacht meer vraagt: erin, klaar, door met je dag. Dat is ook waar we op meten &mdash; niet aan hoeveel we verkochten, maar aan hoe vaak iemand terugkomt en hoe weinig er retour gaat.</p>
+        <span class="item-voet">Stap 3 &middot; Wat hij wil bereiken</span>
+      </div>
+      <div class="item-beeld">
+        <img src="https://wellshave.com/cdn/shop/files/freepik_portrait-lifestyle-shot-o_2812538722.png?v=1&amp;width=1100"
+             alt="Man met een handdoek na het douchen, naast een Wellshave-trimmer in het laadstation en de hardcase."
+             width="928" height="929" loading="lazy">
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ BEWIJS ============ elke review pakt &eacute;&eacute;n bezwaar -->
+<section class="proof reveal" id="reviews">
+  <div class="wrap">
+    <h2 class="duo">Wij kunnen veel zeggen.<span class="b">Zij zeiden het eerst.</span></h2>
+    <p class="sub">Deze drie kozen we niet op enthousiasme, maar op het bezwaar dat ze wegnemen.</p>
+    <div class="tp-summary">
+      <div class="tp-score">
+        <span class="tp-num">4,5</span>
+        <span class="tp-stars" aria-label="4,5 van de 5 sterren">
+          <i class="tp-star"></i><i class="tp-star"></i><i class="tp-star"></i><i class="tp-star"></i><i class="tp-star is-half"></i>
+        </span>
+      </div>
+      <span class="tp-count">gemiddeld uit 700+ reviews</span>
+    </div>
+  </div>
+
+  <div class="reviews">
+    <article class="rev">
+      <span class="rev-bezwaar">Bezwaar &middot; onbekend merk</span>
+      <div class="rev-stars" aria-label="5 van de 5 sterren"><i class="tp-star"></i><i class="tp-star"></i><i class="tp-star"></i><i class="tp-star"></i><i class="tp-star"></i></div>
+      <h3 class="rev-title">Durfde het aan, en het viel mee</h3>
+      <p class="rev-body">&quot;Merk was nieuw voor mij, maar door de veelzijdigheid en reviews toch besteld. Snel geleverd en netjes verpakt. Scheerresultaat boven verwachting en de hulpstukken werken perfect.&quot;</p>
+      <p class="rev-naam">Britt J.<span>Gentleman Shaver Elite&trade;</span></p>
+    </article>
+
+    <article class="rev">
+      <span class="rev-bezwaar">Bezwaar &middot; gevoelige zones</span>
+      <div class="rev-stars" aria-label="5 van de 5 sterren"><i class="tp-star"></i><i class="tp-star"></i><i class="tp-star"></i><i class="tp-star"></i><i class="tp-star"></i></div>
+      <h3 class="rev-title">Geen wondjes meer</h3>
+      <p class="rev-body">&quot;Super blij met de bodygroomer. Een prachtig model die ook goed zijn werk doet! Door de keramische bladen geen wondjes bij de schaamstreek. Scheermesjes? Prullenbak in!&quot;</p>
+      <p class="rev-naam">Barend P.<span>Groom Guard PRO&trade;</span></p>
+    </article>
+
+    <article class="rev">
+      <span class="rev-bezwaar">Bezwaar &middot; en daarna dan?</span>
+      <div class="rev-stars" aria-label="5 van de 5 sterren"><i class="tp-star"></i><i class="tp-star"></i><i class="tp-star"></i><i class="tp-star"></i><i class="tp-star"></i></div>
+      <h3 class="rev-title">Onderdeel kwijt, kosteloos nageleverd</h3>
+      <p class="rev-body">&quot;Hele fijne en stille trimmer met accudisplay, dus nooit meer een lege batterij. Direct op de huid te gebruiken zonder sneetjes. Neustrim opzetstuk kwijtgeraakt en kosteloos nageleverd door de klantenservice.&quot;</p>
+      <p class="rev-naam">Aiden M.<span>Shave Package 3.0&trade;</span></p>
+    </article>
+  </div>
+
+  <p class="bronregel">Reviews en cijfers zoals gepubliceerd op wellshave.com. De score van 4,5 en het aantal reviews gaan over Wellshave als geheel, niet over &eacute;&eacute;n product.</p>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faq">
+  <span class="kicker">Veelgestelde vragen</span>
+  <h2 class="duo">Wat mensen ons<span class="b">het vaakst vragen.</span></h2>
+
+  <details>
+    <summary>Wat verkoopt Wellshave precies?</summary>
+    <p>Elektrische scheerapparaten, baardtrimmers, bodygroomers, neustrimmers en groomingaccessoires voor mannen, verdeeld over vijf productlijnen plus bundels. Het assortiment is gericht op de Nederlandse en Belgische markt.</p>
+  </details>
+  <details>
+    <summary>Waar komen mijn bestellingen vandaan?</summary>
+    <p>Uit Helmond, Nederland. We verzenden met PostNL, DHL of DPD en je krijgt track &amp; trace per e-mail zodra je bestelling is verwerkt. Bestel je voor 23:59, dan ligt het pakket binnen Nederland de volgende dag bij je thuis. Boven de &euro;30 is de verzending gratis.</p>
+  </details>
+  <details>
+    <summary>Wat is SkinSafe, in gewone woorden?</summary>
+    <p>Het is de keramische mestechnologie die we op onze trimmer- en scheerlijnen toepassen. Keramische messen zijn harder dan standaard staal, ze slijten minder snel en ze geven minder wrijving op de huid. Dat maakt ze geschikt voor dagelijks gebruik en voor gevoelige zones zoals de schaamstreek, oksels en hals. De naam is een merknaam; het harde materiaal doet het werk.</p>
+  </details>
+  <details>
+    <summary>Hoe werkt de proefperiode van 100 dagen?</summary>
+    <p>Je gebruikt het apparaat gewoon 100 dagen. Bevalt het niet, dan stuur je het via ons retourportaal terug en krijg je het volledige bedrag terug. Je hoeft het niet ongebruikt te laten &mdash; uitproberen is juist het punt.</p>
+  </details>
+  <details>
+    <summary>Zijn de apparaten waterdicht?</summary>
+    <p>De meeste Wellshave-apparaten hebben een IPX7-certificering. Ze zijn veilig te gebruiken onder de douche en eenvoudig af te spoelen onder de kraan. Controleer de productpagina voor de specificatie van het model dat je op het oog hebt.</p>
+  </details>
+  <details>
+    <summary>Waarom hebben jullie geen &quot;kaal als glas&quot;-belofte?</summary>
+    <p>Omdat de meeste mannen dat niet willen. Wat we in reviews en mails terugzien is een voorkeur voor kort en gelijk &mdash; ergens tussen de 3 en 5 millimeter &mdash; zonder irritatie erna. Daar ontwerpen we op. Wil je wel volledig glad, dan kan dat met onze foil shavers, maar we doen niet alsof dat is wat iedereen zoekt.</p>
+  </details>
+</section>
+
+<!-- ============ AFSLUITER ============ -->
+<section class="closer">
+  <div class="closer-in">
+    <div>
+      <span class="kicker on-dark">Begin bij jezelf</span>
+      <h2 class="duo on-dark">Jij weet het beste<span class="b">waar het misgaat.</span></h2>
+    </div>
+    <div>
+      <p class="lead on-dark">Zoek het apparaat dat past bij jouw routine en jouw huid. Doet het niet wat wij hier beweren, dan stuur je het binnen 100 dagen terug.</p>
+      <div class="hero-acts"><a class="knop goud" href="https://wellshave.com/collections/all">Bekijk het assortiment</a></div>
+      <div class="assure"><span>100 dagen proef</span><span>2 jaar garantie</span><span>Gratis verzending vanaf &euro;30</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="paginavoet">
+  <span class="logo">Wellshave</span>
+  Wellshave &middot; Helmond, Nederland &middot; wellshave.com
+</div>
+
+</div><!-- /.gg-lp -->
+
+<script>
+(function(){
+  var el = document.querySelectorAll('.gg-lp .reveal');
+  if(!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches){
+    Array.prototype.forEach.call(el, function(n){ n.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(rijen){
+    rijen.forEach(function(r){ if(r.isIntersecting){ r.target.classList.add('in'); io.unobserve(r.target); } });
+  }, {rootMargin:'0px 0px -12% 0px'});
+  Array.prototype.forEach.call(el, function(n){ io.observe(n); });
+})();
+</script>
+</body>
+</html>
