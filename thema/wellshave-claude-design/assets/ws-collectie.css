@@ -609,3 +609,7 @@
 @container (max-width:760px){.wsc .pk-score{max-width:none}}
 /* het formulier om direct in de winkelwagen te leggen mag de rij niet breken */
 .wsc .wsk-form{display:contents}
+
+/* een pagina zonder keuzehulp: de kop is dan één kolom */
+.wsc .kop-grid.solo{grid-template-columns:minmax(0,1fr);max-width:860px}
+.wsc .kop-grid.solo .kop-foto{aspect-ratio:16/7}

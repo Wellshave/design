@@ -28,7 +28,11 @@
   {%- assign n_app = 0 -%}{%- assign n_bundel = 0 -%}{%- assign n_mes = 0 -%}
   {%- for block in section.blocks -%}
     {%- if block.type == 'groep' -%}
-      {%- assign aantal = block.settings.producten | size -%}
+      {%- if block.settings.uit_collectie and collection -%}
+        {%- assign aantal = collection.all_products_count -%}
+      {%- else -%}
+        {%- assign aantal = block.settings.producten | size -%}
+      {%- endif -%}
       {%- case block.settings.cat -%}
         {%- when 'bundel' -%}{%- assign n_bundel = n_bundel | plus: aantal -%}
         {%- when 'mes' -%}{%- assign n_mes = n_mes | plus: aantal -%}
@@ -78,8 +82,14 @@
       </div>
       {%- if block.settings.noot != blank -%}<p class="groep-noot">{{ block.settings.noot }}</p>{%- endif -%}
 
+      {%- if block.settings.uit_collectie and collection -%}
+        {%- assign lijst = collection.products -%}
+      {%- else -%}
+        {%- assign lijst = block.settings.producten -%}
+      {%- endif -%}
+
       <div class="kaarten">
-        {%- for p in block.settings.producten -%}
+        {%- for p in lijst -%}
           {%- assign v = p.selected_or_first_available_variant -%}
 
           {%- comment -%} lintje op handle, uit het veld van deze groep {%- endcomment -%}
@@ -283,7 +293,8 @@
             { "value": "bundel", "label": "Sets en bundels" },
             { "value": "mes", "label": "Messen, koppen en opbergen" }
           ], "default": "app" },
-        { "type": "product_list", "id": "producten", "label": "Producten", "limit": 24, "info": "De volgorde hier is de volgorde op de pagina." },
+        { "type": "checkbox", "id": "uit_collectie", "label": "Gebruik de producten van deze collectie", "info": "Voor een pagina die één collectie toont. De lijst hieronder wordt dan genegeerd. Toont de eerste 50 producten.", "default": false },
+        { "type": "product_list", "id": "producten", "label": "Producten", "limit": 24, "info": "De volgorde hier is de volgorde op de pagina. Wordt genegeerd als je hierboven de collectie gebruikt." },
         { "type": "textarea", "id": "noot", "label": "Noot onder de kop", "info": "Voor uitleg die de bezoeker nodig heeft om de kaarten te lezen — bijvoorbeeld dat verwante modellen één beoordelingenstroom delen." },
         { "type": "text", "id": "kicker", "label": "Kicker op de kaarten", "info": "Alleen bij onderdelen. Bijvoorbeeld Mes of Scheerkop." },
         { "type": "text", "id": "labels", "label": "Lintjes", "info": "Eén per regel: product-handle = Lintje. Bijvoorbeeld neustrimmer-4in1-ultra = Best verkocht" },

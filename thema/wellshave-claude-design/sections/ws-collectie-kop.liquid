@@ -23,7 +23,11 @@
   {%- if section.settings.monogram_letter != blank -%}
     <span class="kop-merk" aria-hidden="true">{{ section.settings.monogram_letter }}</span>
   {%- endif -%}
-  <div class="rail kop-grid">
+  {%- assign heeft_hulp = false -%}
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'vraag' or block.type == 'match' -%}{%- assign heeft_hulp = true -%}{%- endif -%}
+  {%- endfor -%}
+  <div class="rail kop-grid{% unless heeft_hulp %} solo{% endunless %}">
 
     <div class="kop-copy">
       {%- if section.settings.eyebrow != blank -%}
@@ -81,6 +85,7 @@
       </div>
     </div>
 
+    {%- if heeft_hulp -%}
     <div class="kiescard">
       <div class="kaartkop">
         <p class="eyebrow">{{ section.settings.kaartkop }}</p>
@@ -157,6 +162,7 @@
         {%- endif -%}
       {%- endfor -%}
     </div>
+    {%- endif -%}
 
   </div>
 </section>
