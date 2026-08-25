@@ -141,6 +141,42 @@ overkoepelende pagina in plaats van naar één zone, en zegt dat ook.
    bestond al. De handle staat wel in de lijst: publiceer je de collectie, dan
    verschijnt de tegel vanzelf.
 
+## De vergelijker en het sorteren
+
+Twee knoppen in de filterbalk deden niets. Verschillende oorzaken.
+
+**Vergelijken.** De CSS (`.vgl-uit`, `.vgl`) en de JS (`vgltel`, `toonVergelijking`)
+waren wél overgezet uit het ontwerp, maar de markup van het paneel niet. De knop werd
+dus keurig actief bij twee vinkjes en er gebeurde vervolgens niets, want er was niets
+om te openen. Het paneel staat nu onderaan de rastersectie en wordt gevuld uit dezelfde
+productgegevens als de kaarten: foto, titel, sterren en aantal uit Loox, prijs,
+`custom.included_box` als aantal onderdelen, tot drie regels uit `custom.product_usp`,
+en de leverbaarheid. Niets ervan staat vast in het sjabloon.
+
+Alleen apparaten komen erin — dat zijn ook de enige kaarten met een vinkje. Maximaal
+drie tegelijk; bij drie gaan de overige vinkjes op slot.
+
+**Sorteren.** "Meest relevant" was een `<button>` zonder opties en zonder handler; kale
+opmaak. Het is nu een echte `<select>` met de knopopmaak eroverheen — zo blijft het
+uiterlijk gelijk, maar krijgt de bezoeker op mobiel de systeemkiezer en werkt hij met
+het toetsenbord. Vier keuzes: meest relevant, prijs op, prijs af, best beoordeeld.
+
+Er wordt **per groep** gesorteerd, niet over de hele pagina. Een groep is een keuze van
+de redactie ("Scheren tot glad", "Trimmen, lengte en lijnen") en die volgorde wil je
+niet door elkaar husselen. De oorspronkelijke volgorde wordt bij het laden op elke
+kaart vastgelegd in `data-volgorde`, zodat "Meest relevant" er exact naar terugkeert —
+en zodat kaarten met dezelfde prijs hun redactionele volgorde houden. Producten zonder
+beoordeling komen achteraan bij "best beoordeeld": geen beoordeling is geen slechte
+beoordeling.
+
+De categoriefilters (Alles / Apparaten / Bundels / Onderdelen) werkten al; nagelopen en
+in orde, inclusief de telling.
+
+Getest in een browser op de echte pagina: elf vinkjes, knop uit bij nul en één, aan bij
+twee, overige acht op slot bij drie, paneel opent met precies de drie gekozen apparaten
+en sluit weer. Sorteren: 3995-4995-4995-8995 oplopend, omgekeerd aflopend, 4,7-4,7-4,6-0
+op beoordeling, en exact terug naar de redactionele volgorde.
+
 ## De lintjes op de kaarten
 
 Er stond op sommige kaarten een lint als `NIEUW ·MET STATIONWELLSHAVE-SCHEERAPPARAAT-ELITE`,

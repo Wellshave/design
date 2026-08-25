@@ -158,6 +158,46 @@
       });
     });
 
+    // Sorteren. De oorspronkelijke volgorde is de redactionele volgorde uit het
+    // sjabloon; die leggen we één keer vast zodat "Meest relevant" er altijd naar
+    // terug kan. Er wordt per groep gesorteerd, want een groep is een keuze van de
+    // redactie en die willen we niet door elkaar husselen.
+    document.querySelectorAll('.wsc .kaarten').forEach(function (raster) {
+      [].slice.call(raster.children).forEach(function (k, i) {
+        if (!k.dataset.volgorde) k.dataset.volgorde = i;
+      });
+    });
+
+    function sorteer(sleutel) {
+      document.querySelectorAll('.wsc .kaarten').forEach(function (raster) {
+        var kaarten = [].slice.call(raster.children);
+        kaarten.sort(function (a, b) {
+          var av, bv;
+          if (sleutel === 'prijs-op' || sleutel === 'prijs-af') {
+            av = parseInt(a.dataset.prijs || '0', 10);
+            bv = parseInt(b.dataset.prijs || '0', 10);
+            if (av !== bv) return sleutel === 'prijs-op' ? av - bv : bv - av;
+          } else if (sleutel === 'score') {
+            av = parseFloat(a.dataset.score || '0');
+            bv = parseFloat(b.dataset.score || '0');
+            // zonder beoordeling achteraan: een leeg vakje is geen slechte score
+            if (av !== bv) return bv - av;
+          }
+          return parseInt(a.dataset.volgorde, 10) - parseInt(b.dataset.volgorde, 10);
+        });
+        kaarten.forEach(function (k) { raster.appendChild(k); });
+      });
+    }
+
+    document.querySelectorAll('.wsc [data-sorteer]').forEach(function (kiezer) {
+      kiezer.addEventListener('change', function () {
+        sorteer(kiezer.value);
+        var t = kiezer.closest('.fb-sorteer');
+        t = t && t.querySelector('.fb-sorteer-tekst');
+        if (t) t.textContent = kiezer.options[kiezer.selectedIndex].textContent;
+      });
+    });
+
     document.querySelectorAll('.wsc .fb-wis').forEach(function (b) {
       b.addEventListener('click', function () {
         document.querySelectorAll('.wsc .wsk').forEach(function (k) {

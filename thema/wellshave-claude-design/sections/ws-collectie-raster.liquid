@@ -55,7 +55,21 @@
           <button type="button" class="fb-knop vgl-open" disabled><svg viewBox="0 0 24 24"><use href="#wsr-weeg"/></svg>Vergelijk<span class="vgl-tel"></span></button>
         {%- endif -%}
         {%- if section.settings.sorteer_label != blank -%}
-          <button type="button" class="fb-knop">{{ section.settings.sorteer_label }}<svg viewBox="0 0 24 24"><use href="#wsr-chevron"/></svg></button>
+          {%- comment -%}
+            De knop is een echte keuzelijst, met de eigen opmaak eroverheen: zo houdt
+            hij het uiterlijk van de andere knoppen maar krijgt de bezoeker op mobiel
+            de vertrouwde systeemkiezer, en werkt hij met het toetsenbord.
+          {%- endcomment -%}
+          <label class="fb-knop fb-sorteer">
+            <span class="fb-sorteer-tekst" aria-hidden="true">{{ section.settings.sorteer_label }}</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsr-chevron"/></svg>
+            <select data-sorteer aria-label="Sorteer de producten">
+              <option value="relevant">{{ section.settings.sorteer_label }}</option>
+              <option value="prijs-op">{{ section.settings.sorteer_prijs_op | default: 'Prijs: laag naar hoog' }}</option>
+              <option value="prijs-af">{{ section.settings.sorteer_prijs_af | default: 'Prijs: hoog naar laag' }}</option>
+              <option value="score">{{ section.settings.sorteer_score | default: 'Best beoordeeld' }}</option>
+            </select>
+          </label>
         {%- endif -%}
       </div>
     </div>
@@ -113,7 +127,8 @@
           {%- assign doos = p.metafields.custom.included_box.value | size -%}
           {%- assign usps = p.metafields.custom.product_usp.value -%}
 
-          <article class="wsk{% unless p.available %} op{% endunless %}" data-id="{{ p.handle }}">
+          <article class="wsk{% unless p.available %} op{% endunless %}" data-id="{{ p.handle }}"
+            data-prijs="{{ v.price }}" data-score="{{ score | default: 0 }}">
             <div class="wsk-shot">
               <span class="wsk-mark"></span>
               {{ p.featured_image | image_url: width: 600 | image_tag: class: 'wsk-pack', alt: p.title, loading: 'lazy' }}
@@ -233,6 +248,93 @@
         <a class="tekstlink" href="{{ ap.url }}">{{ section.settings.aanbod_knop | default: 'Bekijk de set' }}</a>
       </div>
     </aside>
+  {%- endif -%}
+
+  {%- comment -%}
+    Het vergelijkpaneel. De CSS en de JS hiervoor stonden er al, alleen deze markup
+    ontbrak — daardoor werd de knop wel actief bij twee vinkjes maar gebeurde er niets.
+    Alleen apparaten komen erin: dat zijn ook de enige kaarten met een vinkje.
+    Alles wat hier staat komt uit het product zelf, net als op de kaart.
+  {%- endcomment -%}
+  {%- if section.settings.vergelijken -%}
+    {%- assign heeft_app = false -%}
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'groep' -%}
+        {%- assign c = block.settings.cat | default: 'app' -%}
+        {%- if c == 'app' -%}{%- assign heeft_app = true -%}{%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- if heeft_app -%}
+      <div class="vgl-uit">
+        <button type="button" class="vgl-sluit">
+          <svg viewBox="0 0 24 24" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          <span>{{ section.settings.vgl_sluit | default: 'Sluit de vergelijking' }}</span>
+        </button>
+        <div class="vergelijk">
+          {%- for block in section.blocks -%}
+            {%- if block.type != 'groep' -%}{%- continue -%}{%- endif -%}
+            {%- assign c = block.settings.cat | default: 'app' -%}
+            {%- if c != 'app' -%}{%- continue -%}{%- endif -%}
+            {%- if block.settings.uit_collectie and collection -%}
+              {%- assign vlijst = collection.products -%}
+            {%- else -%}
+              {%- assign vlijst = block.settings.producten -%}
+            {%- endif -%}
+            {%- for p in vlijst -%}
+              {%- assign v = p.selected_or_first_available_variant -%}
+              {%- assign vscore = p.metafields.loox.avg_rating.value -%}
+              {%- assign vtellen = p.metafields.loox.num_reviews.value -%}
+              {%- assign vdoos = p.metafields.custom.included_box.value | size -%}
+              {%- assign vusps = p.metafields.custom.product_usp.value -%}
+              <article class="vgl" data-id="{{ p.handle }}">
+                <div class="vgl-beeld">
+                  {{ p.featured_image | image_url: width: 400 | image_tag: alt: p.title, loading: 'lazy' }}
+                </div>
+                <div class="vgl-body">
+                  <h3>{{ p.title }}</h3>
+                  {%- if vscore and vtellen and vtellen > 0 -%}
+                    {%- assign vheel = vscore | floor -%}
+                    {%- assign vrest = vscore | minus: vheel -%}
+                    {%- assign vhalf = vheel | plus: 1 -%}
+                    <span class="wsk-score">
+                      <span class="sterren5">
+                        {%- for i in (1..5) -%}
+                          {%- if i <= vheel -%}<i></i>
+                          {%- elsif vrest >= 0.25 and i == vhalf -%}<i class="half"></i>
+                          {%- else -%}<i class="leeg"></i>{%- endif -%}
+                        {%- endfor -%}
+                      </span>
+                      <b>{{ vscore | round: 1 | replace: '.', ',' }}</b> ({{ vtellen }})
+                    </span>
+                  {%- else -%}
+                    <span class="wsk-score leeg">{{ section.settings.geen_score | default: 'Nog geen beoordelingen' }}</span>
+                  {%- endif -%}
+                  <p class="vgl-prijs"><b>{{ v.price | money }}</b>
+                    {%- if v.compare_at_price > v.price %} <s>{{ v.compare_at_price | money }}</s>{% endif -%}
+                  </p>
+                  <dl>
+                    {%- if vdoos > 0 -%}
+                      <dt>In de doos</dt><dd>{{ vdoos }} onderde{% if vdoos == 1 %}el{% else %}len{% endif %}</dd>
+                    {%- endif -%}
+                    {%- if vusps -%}
+                      {%- for u in vusps limit: 3 -%}
+                        <dt>Waarvoor</dt><dd>{{ u }}</dd>
+                      {%- endfor -%}
+                    {%- endif -%}
+                    <dt>Levering</dt>
+                    <dd{% unless p.available %} class="nee"{% endunless %}>
+                      {%- if p.available -%}{{ section.settings.blik_voet | default: 'Op voorraad' }}
+                      {%- else -%}{{ section.settings.uitverkocht_voet | default: 'Tijdelijk niet leverbaar' }}{%- endif -%}
+                    </dd>
+                  </dl>
+                  <a class="tekstlink" href="{{ p.url }}">Bekijk {{ p.title }}</a>
+                </div>
+              </article>
+            {%- endfor -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
   {%- endif -%}
 
   <div class="rasterslot">
