@@ -1,0 +1,42 @@
+{%- comment -%}
+  Eén tegel in het megamenu.
+    col     — de collectie
+    labels  — regels "handle=Naam" die de tegeltekst overschrijven
+    mobiel  — true binnen de mobiele lade
+
+  De tegeltekst is los te zetten van de collectietitel, zodat het menu
+  "Lichaam & schaamstreek" kan zeggen waar de collectie "Bodygroomers" heet.
+  Zo hoeft er niets aan de collectie zelf te veranderen.
+{%- endcomment -%}
+{%- assign etiket = col.title -%}
+{%- if labels != blank -%}
+  {%- assign regels = labels | newline_to_br | split: '<br />' -%}
+  {%- for regel in regels -%}
+    {%- assign paar = regel | strip | split: '=' -%}
+    {%- if paar.size > 1 -%}
+      {%- assign sleutel = paar[0] | strip -%}
+      {%- if sleutel == col.handle -%}
+        {%- assign etiket = paar[1] | strip -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+{%- if mobiel -%}
+  {%- assign voorvoegsel = 'header__mobile-megamenu' -%}
+{%- else -%}
+  {%- assign voorvoegsel = 'header__megamenu' -%}
+{%- endif -%}
+<li>
+  <a href="{{ col.url }}" class="{{ voorvoegsel }}-collection body-lg">
+    <div class="{{ voorvoegsel }}-collection-media">
+      {%- if col.metafields.custom.megamenu_image != blank -%}
+        {{ col.metafields.custom.megamenu_image | image_url: width: 300 | image_tag }}
+      {%- elsif col.image != blank -%}
+        {{ col.image | image_url: width: 300 | image_tag }}
+      {%- else -%}
+        {{ 'collection-apparel-1' | placeholder_svg_tag }}
+      {%- endif -%}
+    </div>
+    <span>{{ etiket }}</span>
+  </a>
+</li>

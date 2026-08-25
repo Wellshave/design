@@ -105,9 +105,13 @@ overkoepelende pagina in plaats van naar één zone, en zegt dat ook.
    shop-image in Shopify. Hoofd en Neus gebruiken `ws-ugc-hoofd.webp` en
    `ws-use-neustrimmer.jpg`, die er al waren. Het monogram (`ws-mark.png`) staat
    overal goed.
-2. **Templates koppelen aan collecties.** In de theme-editor stel je per
-   collectie het template in. Dat is een instelling op de collectie zélf en werkt
-   door in álle thema's, dus die zet je pas om als het ontwerp live mag:
+2. ~~Templates koppelen aan collecties.~~ **Gedaan.** Alle negen collecties hebben
+   hun template-suffix. Dat is een instelling op de collectie zélf en werkt dus door
+   in álle thema's — maar het live thema heeft alleen `collection.json`, en Shopify
+   valt terug op dat standaardtemplate als de variant er niet is. Nagemeten op
+   `zone-hoofd`, `bodygroomers` en `all`: de winkel toont nog precies dezelfde
+   pagina's als eerst. Op het moment dat je `wellshave/claude-design` publiceert,
+   schakelen alle negen tegelijk om.
 
    | Collectie | Template |
    |---|---|
@@ -118,15 +122,64 @@ overkoepelende pagina in plaats van naar één zone, en zegt dat ook.
    | `all` | `overzicht` |
    | `baardtrimmers` · `scheerapparaten` · `tondeuses` · `safetyrazors-scheren-scheermes` | `type-…` |
 
-3. **Het menu.** "Shop Alles" gaat van negen productcategorieën naar vier zones,
-   plus Bundels, Accessoires en Ladyshaves. Doe dat **pas na publiceren**: het menu
-   is één menu voor alle thema's, dus zolang het live thema het oude
-   collectietemplate gebruikt, wijzen die links naar pagina's zonder dit ontwerp.
+3. ~~Het menu.~~ **Gedaan, en het bleek geen menu te zijn.** De header gebruikt geen
+   Shopify-menu maar een eigen `collection_list` in `sections/header-group.json`.
+   Dat bestand hoort bij het thema, dus de wijziging raakt het live thema niet — de
+   waarschuwing hierboven over "één menu voor alle thema's" gold hier niet.
 
 4. **Eén product dat een bezoeker wél ziet staan.** `vervanging-neustrimmer-opzetstuk`
    is actief met voorraad 0 en staat dus met een koopknop in `/collections/all`.
    Op concept zetten of bijbestellen — dat is een keuze over het assortiment, geen
    ontwerpkeuze.
+
+5. **Twee zonecollecties hebben geen collectiefoto.** `zone-gezicht` en `zone-hoofd`
+   zijn nieuw en hebben nog geen afbeelding, dus in het megamenu staan daar twee
+   grijze plaatsvervangers. Eén afbeelding per collectie in de admin lost dat op.
+   Ik heb er bewust niets ingezet: het hoort bij dezelfde keuze als de twee
+   ontbrekende kopfoto's hierboven, en een verkeerde foto is er hier één te veel.
+
+6. **Ladyshaves staat niet in de winkel.** `/collections/ladyshave` stuurt door naar
+   de homepage, dus de collectie is niet gepubliceerd op het Online Store-kanaal.
+   Daarom valt die tegel uit het megamenu weg — óók in het live thema, dus dit
+   bestond al. De handle staat wel in de lijst: publiceer je de collectie, dan
+   verschijnt de tegel vanzelf.
+
+## Het megamenu: zone boven, type eronder
+
+De SHOP-knop opende een platte rij van tien collecties. Die is nu in twee groepen
+gesplitst, met dezelfde regel als de pagina's: **zone ordent, type benoemt.**
+
+```
+Kies je zone      Lichaam & schaamstreek · Gezicht & baard · Hoofd · Neus & oren
+Of zoek op type   Scheerapparaten · Baardtrimmers · Tondeuses · Safety Razors ·
+                  Ladyshaves · Accesoires · Bundels · Alle producten
+```
+
+Daar zijn drie bestanden voor:
+
+- `sections/header.liquid` — de tegellijst is opgesplitst op `megamenu_zones`, het
+  aantal tegels in de eerste groep. Staat dat op 0, dan krijg je exact de oude,
+  ongegroepeerde rij terug; het blijft dus bruikbaar voor elk ander menu-item.
+- `snippets/ws-megamenu-tegel.liquid` — één tegel, voor desktop en mobiel, zodat de
+  opmaak niet vier keer in het bestand staat.
+- `assets/ws-megamenu.css` — alleen de koppen en de groepafstand. Los van
+  `header.css` gehouden, zodat het basisthema onaangeroerd blijft.
+
+Met `megamenu_labels` zet je een andere naam op een tegel: één regel per collectie,
+`handle=Naam`. Zo staat er **Lichaam & schaamstreek** boven een collectie die
+`Bodygroomers` heet, zonder dat de collectie zelf hernoemd hoeft te worden — die
+titel staat ook in de winkel, in zoekresultaten en in Google.
+
+`thema/origineel/header.liquid` is de versie van vóór deze wijziging (MD5
+`21cd95adcd673171001927eae1b517a5`), voor als je terug wilt.
+
+## Bekijken zonder te publiceren
+
+Open eerst deze link, daarna werkt elke collectiepagina in dezelfde browser:
+
+```
+https://wellshave.com/?preview_theme_id=204178161996
+```
 
 ## Wat géén werk bleek te zijn
 

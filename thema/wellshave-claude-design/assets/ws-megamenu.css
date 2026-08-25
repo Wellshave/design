@@ -1,0 +1,46 @@
+/* Wellshave — megamenu in twee groepen: eerst de zone, dan het type.
+   Hoort bij sections/header.liquid en snippets/ws-megamenu-tegel.liquid.
+   Staat los van header.css zodat het basisthema ongemoeid blijft. */
+
+.header__megamenu-groups {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.header__megamenu-kop,
+.header__mobile-megamenu-kop {
+  margin: 0 0 12px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 120%;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--black-40);
+}
+
+.header__megamenu-kop {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header__megamenu-kop::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: currentColor;
+  opacity: 0.25;
+}
+
+.header__mobile-megamenu-kop:not(:first-of-type) {
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 989px) {
+  .header__megamenu-groups {
+    gap: 20px;
+  }
+}
