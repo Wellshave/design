@@ -104,6 +104,24 @@ Twee dingen die daar nog omheen zitten:
   sluitende accolade.** Liquid leest die twee tekens als het einde van een tag.
   Dus `border-radius:50% }` met een spatie.
 
+## Wat er aan de winkel zelf is veranderd
+
+Dit staat los van het thema: het is productdata en geldt dus voor elk thema,
+ook het live thema.
+
+| Wat | Waarom |
+|---|---|
+| `custom.buybox_quote` en `custom.buybox_quote_author` | Nieuwe velddefinities. Het klantcitaat in het koopvak stond anders op elk product hetzelfde. Gevuld op de Groom Guard PRO. |
+| `best_for` op de definitie `compare_info` | De regel "Beste voor: ..." in de pop-up had geen veld. Gevuld voor de Groom Guard en de PRO. |
+| Vierde `store_usp`: Morgen in huis | De voetbalk van de pop-up toont wat er in `custom.store_usp` staat, en dat waren er drie. Nieuw metaobject met een icoon in dezelfde stijl als de andere drie (20 bij 20, streek `#BC813E`), toegevoegd aan de lijst op de Groom Guard en de PRO. |
+
+Let op bij die laatste. `custom.store_usp` wordt ook gelezen door het
+`store_usp`-blok van `main-product` in het live thema. Op wellshave.com staat er
+op die twee producten nu dus een vierde item in de geruststrook. Terugdraaien is
+het metafield weer op de oorspronkelijke drie zetten: `1859112894796`
+(100 dagen proef), `1859112763724` (2 jaar garantie), `1859112698188`
+(gratis verzending).
+
 ## Nog open
 
 * **`custom.buybox_quote` en `custom.buybox_quote_author` bestaan nog niet.**
