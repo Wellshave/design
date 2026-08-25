@@ -120,6 +120,7 @@ ook het live thema.
 | `custom.buybox_quote` en `custom.buybox_quote_author` | Nieuwe velddefinities. Het klantcitaat in het koopvak stond anders op elk product hetzelfde. Gevuld op de Groom Guard PRO. |
 | `best_for` op de definitie `compare_info` | De regel "Beste voor: ..." in de pop-up had geen veld. Gevuld voor de Groom Guard en de PRO. |
 | `popup_lead` en `popup_winst` op de definitie `compare_info` | De kop, de lead en de winstbalk van de pop-up stonden in sectie-instellingen en waren dus winkelbreed: een neustrimmer kreeg de Groom Guard-tekst te zien. Nu per product. Gevuld voor de Groom Guard-familie en de vier neustrimmers. |
+| `popup_decision` op de definitie `compare_info` | De beslisregel onder de tabel. Per product &eacute;&eacute;n korte vraag; het antwoord is de naam van dat product. Gevuld voor de Groom Guards en de vier neustrimmers. Leeg bij alle producten betekent: geen beslisregel. |
 | Vierde `store_usp`: Morgen in huis | De voetbalk van de pop-up toont wat er in `custom.store_usp` staat, en dat waren er drie. Nieuw metaobject met een icoon in dezelfde stijl als de andere drie (20 bij 20, streek `#BC813E`), toegevoegd aan de lijst op de Groom Guard en de PRO. |
 
 Let op bij die laatste. `custom.store_usp` wordt ook gelezen door het
@@ -137,8 +138,8 @@ het metafield weer op de oorspronkelijke drie zetten: `1859112894796`
   over een product; waar er geen is, hoort het citaat leeg te blijven &mdash; dan valt
   de kaart weg.
 * **De pop-upteksten staan nog niet op elke productfamilie.** `popup_main_title`,
-  `popup_lead`, `popup_winst` en `best_for` in `compare_info` zijn gevuld voor de
-  Groom Guards en de neustrimmers. De families `flex-*`, `shave-package-*`,
+  `popup_lead`, `popup_winst`, `best_for` en `popup_decision` in `compare_info`
+  zijn gevuld voor de Groom Guards en de neustrimmers. De families `flex-*`, `shave-package-*`,
   `tondeuse-*` en `head-shaver-*` hebben nog de Engelse `popup_main_title`
   ("Compare ...") en geen lead of winstbalk.
 * **De prijsopmaak van de winkel heeft geen €-teken** (`moneyFormat` staat op

@@ -737,6 +737,57 @@
               </table>
             </div>
 
+            {%- comment -%}
+              De beslisregel. Per product een korte vraag uit compare_info; het
+              antwoord is de naam van dat product. Heeft geen enkel product de
+              vraag ingevuld, dan valt het hele blok weg.
+            {%- endcomment -%}
+            {%- assign heeft_beslis = false -%}
+            {%- for cp in vergelijk_lijst -%}
+              {%- if cp.metafields.custom.compare_info.value.popup_decision != blank -%}
+                {%- assign heeft_beslis = true -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {%- if heeft_beslis -%}
+              <div class="ws-pop-beslis">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2l1.9 4.6 4.6 1.9-4.6 1.9L12 16.2l-1.9-4.6L5.5 9.7l4.6-1.9z"/><path d="M18.6 15.4l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg>
+                <div>
+                  {%- for cp in vergelijk_lijst -%}
+                    {%- assign ci = cp.metafields.custom.compare_info.value -%}
+                    {%- if ci.popup_decision != blank -%}
+                      <p>{{ ci.popup_decision }}
+                        <b>{{ s.pop_knop }} {{ ci.toggle_title | default: cp.title }}.</b></p>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+              </div>
+            {%- endif -%}
+
+            {%- comment -%}
+              Dezelfde knoppen nog een keer, nu als balk die op de telefoon aan de
+              onderkant blijft plakken. Op het brede scherm staat deze balk uit en
+              zit de knop in de kaart; op de telefoon andersom. Twee formulieren
+              dus, maar er is er altijd maar een zichtbaar.
+            {%- endcomment -%}
+            <div class="ws-pop-balk">
+              {%- for cp in vergelijk_lijst -%}
+                {%- assign ci = cp.metafields.custom.compare_info.value -%}
+                {%- assign cv = cp.selected_or_first_available_variant -%}
+                <form action="{{ routes.cart_add_url }}" method="post"
+                      class="ws-pop-vorm2{% if ci.is_popuplar %} ws-uit{% endif %}">
+                  <input type="hidden" name="id" value="{{ cv.id }}">
+                  <input type="hidden" name="quantity" value="1">
+                  <button type="submit" class="ws-pop-knop"{% unless cv.available %} disabled{% endunless %}>
+                    {%- if cv.available -%}
+                      {{ s.pop_knop }} {{ ci.toggle_title | default: cp.title }} &mdash; {% render 'price-formated', price: cv.price %}
+                    {%- else -%}
+                      {{ s.knop_uitverkocht }}
+                    {%- endif -%}
+                  </button>
+                </form>
+              {%- endfor -%}
+            </div>
+
             {%- assign beloftes = mf.store_usp.value -%}
             {%- if beloftes != blank -%}
               <div class="ws-pop-voet">
@@ -933,6 +984,17 @@
     letter-spacing:.11em;text-transform:uppercase;color:var(--p-brons)}
   .ws-pop-tab tr.ws-beslist td:last-child{background:rgba(233,190,114,.1)}
 
+  .ws-pop-beslis{display:flex;align-items:center;gap:13px;margin:18px 0 0;padding:15px 20px;
+    border-radius:14px;border:1px solid rgba(233,190,114,.55);
+    background:linear-gradient(180deg,rgba(233,190,114,.16),rgba(233,190,114,.07))}
+  .ws-pop-beslis svg{width:19px;height:19px;flex:none;color:var(--p-goud2)}
+  .ws-pop-beslis p{margin:0;font-size:15px;line-height:1.5;font-weight:600;color:#5A3B10}
+  .ws-pop-beslis p + p{margin-top:3px}
+  .ws-pop-beslis b{font-weight:800;color:var(--p-brons)}
+
+  /* de plakbalk is alleen op de telefoon in gebruik */
+  .ws-pop-balk{display:none}
+
   .ws-pop-voet{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);margin:22px -30px 0;
     padding:20px 30px;background:var(--p-room2);border-top:1px solid var(--p-lijn)}
   .ws-pop-voet > div{display:flex;align-items:center;justify-content:center;gap:11px;padding:0 10px}
@@ -963,13 +1025,55 @@
     .ws-pop-tab tbody th{font-size:12px;padding-right:6px}
     .ws-pop-tab td{padding:11px 6px}
     .ws-pop-voet{align-items:center}
-    .ws-pop-kaart{grid-template-columns:1fr;row-gap:12px;padding:16px}
-    .ws-pop-vlag{position:static;justify-self:end;margin:0 0 2px}
+
+    /* Onder elkaar is het geen vergelijking meer: je ziet nooit twee modellen
+       tegelijk. Naast elkaar dus, met alleen naam, rol en prijs in de kaart.
+       De knoppen gaan naar de balk onderin, die blijft plakken. */
+    .ws-pop-kaarten{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:16px 0 0}
+    .ws-pop-kaart{grid-template-columns:1fr;grid-template-rows:auto 1fr;row-gap:0;
+      padding:14px 10px 16px;border-radius:16px}
+    .ws-pop-vlag{right:7px;top:7px;font-size:8px;letter-spacing:.08em;padding:5px 8px}
     .ws-pop-beeld{grid-row:auto}
-    .ws-pop-beeld img{max-width:190px;margin:0 auto}
-    .ws-pop-tekst{grid-row:auto}
+    /* een staande productfoto zou de kaart anders twee keer zo hoog maken */
+    .ws-pop-beeld img{max-width:100%;width:auto;height:auto;max-height:150px;object-fit:contain;
+      margin:0 auto}
+    .ws-pop-tekst{grid-row:auto;width:100%;display:flex;flex-direction:column;align-items:center;
+      text-align:center}
+    /* zonder foto zou de vlag op de naam vallen */
+    .ws-pop-beeld:empty{min-height:34px}
     .ws-pop-kaart.ws-uit .ws-pop-tekst{padding-top:0}
-    .ws-pop-vorm{grid-row:auto;grid-column:auto}
+    .ws-pop-naam{order:1;margin:6px 0 0;font-size:16px;letter-spacing:-.02em}
+    .ws-pop-rol{order:2;margin:5px 0 0;font-size:11px;letter-spacing:0;text-transform:none;
+      font-weight:600;line-height:1.25}
+    .ws-pop-een{display:none}
+    .ws-pop-best{display:none}
+    /* de prijzen op dezelfde hoogte, ook als de ene naam twee regels wordt */
+    .ws-pop-prijs{order:3;justify-content:center;margin:auto 0 0;padding-top:10px;gap:7px}
+    .ws-pop-prijs b{font-size:20px}
+    .ws-pop-prijs s{font-size:13px}
+
+    /* anders valt Trustpilot op een eigen regel onder de sterren */
+    .ws-pop-tp{gap:8px;margin-top:13px}
+    .ws-pop-tp .ws-st{gap:2px}
+    .ws-pop-tp .ws-st i{width:17px;height:17px}
+    .ws-pop-tp .ws-st svg{width:11px;height:11px}
+    .ws-pop-tp .sc,.ws-pop-tp .mk{font-size:12.5px}
+    .ws-pop-tp .mk{gap:4px}
+    .ws-pop-tp .mk svg{width:12px;height:12px}
+
+    .ws-pop-beslis{padding:13px 14px;gap:10px;align-items:flex-start;margin-top:16px}
+    .ws-pop-beslis svg{margin-top:2px}
+    .ws-pop-beslis p{font-size:13px;line-height:1.45}
+
+    .ws-pop-vorm{display:none}
+    .ws-pop-balk{display:grid;gap:9px;position:sticky;bottom:0;z-index:3;
+      margin:16px -16px 0;padding:14px 16px calc(14px + env(safe-area-inset-bottom));
+      background:var(--p-room);border-top:1px solid var(--p-lijn);
+      box-shadow:0 -14px 26px -18px rgba(11,11,10,.5)}
+    .ws-pop-vorm2{margin:0}
+    .ws-pop-vorm2.ws-uit{order:-1}
+    .ws-pop-vorm2.ws-uit .ws-pop-knop{border:0;color:#26170A;
+      background:linear-gradient(100deg,#F5DEAA,#EBC382 46%,#DDA548)}
     .ws-pop-knop{font-size:11.5px;letter-spacing:.05em;padding:16px 8px}
   }
   @media (prefers-reduced-motion:reduce){
