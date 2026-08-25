@@ -316,9 +316,9 @@ p{margin:0}
 
     <div class="qz-kop">
       <p class="qz-eyebrow">Vier vragen</p>
-      <h2 class="qz-h2">Welk apparaat past bij <b>wat jij wilt doen?</b></h2>
-      <p class="qz-sub">Vier vragen over wat je wilt bereiken en waar je nu op vastloopt. Je krijgt één
-        apparaat te zien — met prijs, voorraad en waarom juist die.</p>
+      <h2 class="qz-h2">Vertel wat jij wilt aanpakken. <b>Wij wijzen het apparaat aan.</b></h2>
+      <p class="qz-sub">Vier vragen en je ziet één apparaat — met prijs, voorraad en waarom juist die
+        bij jou past.</p>
     </div>
 
     <div class="qz-balk">
@@ -335,7 +335,7 @@ p{margin:0}
 
     <section class="qz-vak" data-vak="wie">
       <p class="qz-vraag">Voor wie zoek je iets?</p>
-      <p class="qz-vraagsub">Dat bepaalt of we naar één plek kijken of naar een set die meer dekt.</p>
+      <p class="qz-vraagsub">Dat bepaalt of we naar één plek kijken, of naar een set die meer dekt.</p>
       <div class="qz-twee">
         <button class="kaart kaart--wie" type="button" data-wie="zelf">
           <span class="ring"><svg><use href="#i-persoon"/></svg></span>
@@ -350,12 +350,12 @@ p{margin:0}
 
     <section class="qz-vak" data-vak="zone" hidden>
       <p class="qz-vraag">Waar wil je aan de slag?</p>
-      <p class="qz-vraagsub">Elke plek vraagt om een andere kop, messtand en vorm.</p>
+      <p class="qz-vraagsub">Je hals vraagt iets anders dan je schaamstreek.</p>
       <div class="qz-zones" id="zones"></div>
     </section>
 
     <section class="qz-vak" data-vak="keuze" hidden>
-      <p class="qz-vraag" id="v3kop">Hoe wil je dat {zone} eruitziet als je klaar bent?</p>
+      <p class="qz-vraag" id="v3kop">Hoe moet je {zone} eruitzien als je klaar bent?</p>
       <p class="qz-vraagsub">Kort houden en glad afwerken vragen om een ander apparaat.</p>
       <div id="keuzes"></div>
     </section>
@@ -417,7 +417,7 @@ const ROUTES = [
   { id:'s1', zone:'Schaamstreek',
     doel:'Kort en zonder risico', doelWat:'De veiligste manier om bij te houden.',
     naam:'Flex Guard™ <b>3-in-1</b>', mono:'FG',
-    waarom:'De Skin Safe-technologie voorkomt irritatie en sneetjes, ook bij een gevoelige huid. De motor levert constante kracht zonder hapering, dus hij blijft niet halverwege steken.',
+    waarom:'Je houdt er geen irritatie of sneetjes aan over, ook met een gevoelige huid. En hij hapert niet halverwege, dus je bent in één keer klaar.',
     punten:['Skin Safe tegen irritatie en sneetjes','Constante kracht zonder hapering','Nat of droog te gebruiken, met LED-licht'],
     nu:'54,95', was:'85,65', bespaar:'30,70',
     antw:{
@@ -439,7 +439,7 @@ const ROUTES = [
   { id:'g1', zone:'Gezicht & baard',
     doel:'Baard in model, op lengte', doelWat:'Vormgeven en kort houden.',
     naam:'Men Shaper Supreme™ <b>6-in-1</b>', mono:'MS', pil:'Nieuwste model',
-    waarom:'Gemaakt voor het stylen en onderhouden van baard, snor en lichaamshaar. Het LCD-display laat zien hoeveel draadloze tijd er nog in zit, dus hij valt niet halverwege stil.',
+    waarom:'Voor je baard, je snor en je lichaamshaar. Op het display zie je hoeveel tijd je nog hebt, dus hij valt niet halverwege je baard stil.',
     punten:['8000 RPM motor','IPX7 waterdicht — ook onder de douche','Skin-safe technologie tegen irritatie'],
     nu:'39,95', was:'71,35', bespaar:'31,40',
     antw:{
@@ -473,7 +473,7 @@ const ROUTES = [
   { id:'h1', zone:'Hoofd',
     doel:'Kaal tot op de huid', doelWat:'Scheren, niet knippen.',
     naam:'Head Shaver <b>Deluxe</b>', mono:'HS',
-    waarom:'De scheerkop heeft zeven messen en gaat over elk oppervlak waar haar groeit. Er zitten vijf opzetstukken bij, voor hoofd, baard, neus en oren.',
+    waarom:'Zeven messen die over elk oppervlak gaan waar haar groeit, met vijf opzetstukken voor je hoofd, baard, neus en oren.',
     punten:['Scheerkop met 7 scheermessen','5 opzetstukken in de set','Twee borstels voor de huid'],
     nu:'54,95', was:'64,95', bespaar:'10,00',
     antw:{
@@ -516,7 +516,7 @@ const ROUTES = [
     } }
 ];
 
-/* ── vraag 4, per zone. Alleen knelpunten die in deze zone echt spelen. ── */
+/* ── vraag 4, per plek. Alleen knelpunten die daar echt spelen. ── */
 const KNELPUNTEN = {
   'Lichaam':        [['sneetjes','Sneetjes en rode bultjes'],['ingegroeid','Ingegroeide haren'],['trekken','Hij blijft haken en trekken']],
   'Schaamstreek':   [['sneetjes','Sneetjes en rode bultjes'],['ingegroeid','Ingegroeide haren'],['trekken','Hij blijft haken en trekken']],
@@ -527,7 +527,7 @@ const KNELPUNTEN = {
 const GEEN = ['geen','Nergens — ik begin net'];
 
 const CADEAU = {
-  id:'cadeau', label:'Het veiligste cadeau', zone:'Cadeau · dekt meerdere zones',
+  id:'cadeau', label:'Het veiligste cadeau', zone:'Cadeau · dekt meerdere plekken',
   naam:'Shave Package <b>3.0</b>', mono:'SP', pil:'Bestverkochte set',
   waarom:'Wie voor een ander koopt, weet zelden welke plek hij aanpakt. In deze set zitten een bodygroomer, een neustrimmer en een scheeropzetstuk met een oplaadstation — samen dekken ze trimmen, detailwerk en glad afwerken.',
   punten:['Bodygroomer met extra scheerblad','Neustrimmer met detail-trim opzetstuk','Scheeropzetstuk en oplaadstation'],
@@ -541,7 +541,7 @@ ROUTES.forEach(r => {
   z.routes.push(r);
 });
 const ZONE_ICOON = { 'Lichaam':'z-lichaam','Schaamstreek':'z-schaam','Gezicht & baard':'z-gezicht','Hoofd':'z-hoofd','Neus & oren':'z-neus' };
-const ZONE_WAT = { 'Lichaam':'Borst, rug, buik en benen.','Schaamstreek':'De gevoeligste zone.','Gezicht & baard':'Baard, snor en randen.','Hoofd':'Van kaal tot kort geknipt.','Neus & oren':'Detailwerk waar je slecht bij kunt.' };
+const ZONE_WAT = { 'Lichaam':'Je borst, rug, buik en benen.','Schaamstreek':'Je gevoeligste plek.','Gezicht & baard':'Je baard, snor en randen.','Hoofd':'Van kaal tot kort geknipt.','Neus & oren':'Het detailwerk waar je zelf slecht bij kunt.' };
 
 const $ = s => document.querySelector(s);
 const vakken = {};
@@ -608,11 +608,11 @@ function toonUitkomst(r) {
   if (!r) { $('#uitkomsten').innerHTML = ''; return; }
   const zus = ROUTES.filter(x => x.zone === r.zone && x.id !== r.id);
   const anders = zus.length ? `
-    <div class="anders"><p>Wilde je toch iets anders in deze zone?</p>
+    <div class="anders"><p>Wilde je toch iets anders op deze plek?</p>
       <div>${zus.map(x => `<button class="chip" type="button" data-route="${x.id}">${x.doel} — ${kaal(x.naam)}</button>`).join('')}</div>
     </div>` : (r.id === 'cadeau' ? `
     <div class="anders"><p>Weet je toch precies wat hij gebruikt?</p>
-      <div><button class="chip" type="button" data-opnieuw>Doe de quiz alsnog per zone</button></div>
+      <div><button class="chip" type="button" data-opnieuw>Doe de quiz alsnog per plek</button></div>
     </div>` : '');
 
   $('#uitkomsten').innerHTML = `
