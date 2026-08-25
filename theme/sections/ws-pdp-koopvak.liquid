@@ -536,18 +536,29 @@
         {%- assign alle_punten = alle_punten | append: '‹einde›' -%}
         {%- assign meerprijs = uitgelicht_prijs | minus: laagste -%}
 
+        {%- comment -%}
+          De drie regels boven in de pop-up horen bij het product, niet bij de
+          winkel. Ze komen dus uit compare_info van dit product; de instelling in
+          de sectie is alleen de terugval als het veld nog leeg is.
+        {%- endcomment -%}
+        {%- liquid
+          assign pop_kop = eigen.popup_main_title | default: s.pop_titel | default: product.title
+          assign pop_lead = eigen.popup_lead | default: s.pop_lead
+          assign pop_winst = eigen.popup_winst | default: s.pop_winst
+        -%}
+
         <div class="ws-pop" id="ws-vgl-{{ section.id }}" hidden>
           <div class="ws-pop-waas" data-ws-sluit></div>
           <div class="ws-pop-vak" role="dialog" aria-modal="true"
-               aria-label="{{ s.pop_titel | default: eigen.popup_main_title | escape }}">
+               aria-label="{{ pop_kop | escape }}">
             <button type="button" class="ws-pop-x" data-ws-sluit aria-label="Sluiten">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
             </button>
 
             <div class="ws-pop-top">
               {%- if s.pop_eyebrow != blank -%}<span class="ws-pop-ey">{{ s.pop_eyebrow }}</span>{%- endif -%}
-              <p class="ws-pop-kop">{{ s.pop_titel | default: eigen.popup_main_title | default: product.title }}</p>
-              {%- if s.pop_lead != blank -%}<p class="ws-pop-lead">{{ s.pop_lead }}</p>{%- endif -%}
+              <p class="ws-pop-kop">{{ pop_kop }}</p>
+              {%- if pop_lead != blank -%}<p class="ws-pop-lead">{{ pop_lead }}</p>{%- endif -%}
               {%- if s.tp_tonen and s.pop_reviewregel != blank -%}
                 <div class="ws-pop-tp">
                   <span class="ws-st">
@@ -559,11 +570,11 @@
               {%- endif -%}
             </div>
 
-            {%- if s.pop_winst != blank and meerprijs > 0 -%}
+            {%- if pop_winst != blank and meerprijs > 0 -%}
               {%- capture bedrag %}{% render 'price-formated', price: meerprijs %}{% endcapture -%}
               <p class="ws-pop-winst">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2l1.9 4.6 4.6 1.9-4.6 1.9L12 16.2l-1.9-4.6L5.5 9.7l4.6-1.9z"/><path d="M18.6 15.4l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg>
-                <span>{{ s.pop_winst | replace: '[bedrag]', bedrag | strip }}</span>
+                <span>{{ pop_winst | replace: '[bedrag]', bedrag | strip }}</span>
               </p>
             {%- endif -%}
 
@@ -785,10 +796,10 @@
     { "type": "header", "content": "De vergelijkingspop-up" },
     { "type": "paragraph", "content": "De kolommen komen uit custom.compare_products, en per product uit custom.compare_info: beeld, rol, reviewlabel, de vier punten en het veld Beste voor. De tabel eronder bouwt zichzelf uit alle punten van alle kolommen samen. De voetbalk komt uit custom.store_usp." },
     { "type": "text", "id": "pop_eyebrow", "label": "Bovenregel", "default": "Vergelijk de modellen" },
-    { "type": "text", "id": "pop_titel", "label": "Kop", "default": "Welke past bij jou?" },
-    { "type": "textarea", "id": "pop_lead", "label": "Zin die het verschil samenvat", "default": "Dezelfde basis. Het verschil zit in de afwerking." },
+    { "type": "text", "id": "pop_titel", "label": "Kop \u2014 terugval", "info": "Wordt alleen gebruikt als het product geen popup_main_title heeft in compare_info.", "default": "Welke past bij jou?" },
+    { "type": "textarea", "id": "pop_lead", "label": "Lead \u2014 terugval", "info": "Wordt alleen gebruikt als het product geen popup_lead heeft in compare_info." },
     { "type": "text", "id": "pop_reviewregel", "label": "Reviewregel", "default": "4,4/5 uit 968 reviews" },
-    { "type": "textarea", "id": "pop_winst", "label": "Winstbalk", "info": "[bedrag] wordt het prijsverschil met het uitgelichte model.", "default": "Voor [bedrag] extra krijg je bij de PRO de foil-kop voor glad afwerken." },
+    { "type": "textarea", "id": "pop_winst", "label": "Winstbalk \u2014 terugval", "info": "Terugval voor popup_winst in compare_info. [bedrag] wordt het prijsverschil met het uitgelichte model." },
     { "type": "text", "id": "pop_uitgelicht", "label": "Label op de uitgelichte kolom", "default": "Meest gekozen" },
     { "type": "text", "id": "pop_bestevoor", "label": "Aanhef bij Beste voor", "default": "Beste voor:" },
     { "type": "text", "id": "pop_knop", "label": "Knoptekst in de pop-up", "default": "Kies" },
