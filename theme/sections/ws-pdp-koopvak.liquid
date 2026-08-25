@@ -365,12 +365,21 @@
       // Eerst de vergelijkingsknop. Die hing hieronder, achter de controle op
       // de gallerij, en werd dus overgeslagen zodra een product te weinig
       // foto's heeft om een miniatuurstrook te krijgen.
+      // De vergelijkingsknop. In een JSON-sjabloon maakt Shopify van een sectie
+      // geen id shopify-section-<sleutel>, maar shopify-section-template--123__<sleutel>.
+      // Daarom zoeken we op het achtervoegsel en niet op een vaste naam.
+      function zoekSectie(sleutel) {
+        if (!sleutel) return null;
+        sleutel = sleutel.replace(/^#/, '').replace(/^shopify-section-/, '');
+        return document.getElementById('shopify-section-' + sleutel)
+          || document.querySelector('[id^="shopify-section-"][id$="__' + sleutel + '"]')
+          || document.getElementById(sleutel);
+      }
+
       var vgl = wortel.querySelector('[data-ws-spring]');
       if (vgl) {
         vgl.addEventListener('click', function (e) {
-          var anker = vgl.getAttribute('href') || '';
-          if (anker.charAt(0) !== '#') return;
-          var doel = document.querySelector(anker);
+          var doel = zoekSectie(vgl.getAttribute('href'));
           if (!doel) return;
           e.preventDefault();
           doel.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -448,7 +457,7 @@
     { "type": "text", "id": "veilig_label", "label": "Label bij de betaalmerken", "default": "Veilig afrekenen" },
     { "type": "header", "content": "Vergelijken en teller" },
     { "type": "text", "id": "vergelijk_label", "label": "Knop vergelijken", "default": "Vergelijk de modellen" },
-    { "type": "text", "id": "vergelijk_anker", "label": "Anker van de vergelijkingssectie", "default": "#shopify-section-compare_table", "info": "De knop verschijnt alleen als het product custom.compare_table of custom.compare_products heeft." },
+    { "type": "text", "id": "vergelijk_anker", "label": "Sleutel van de vergelijkingssectie", "default": "compare_table", "info": "De sleutel uit het sjabloon, niet de volledige id \u2014 die zet Shopify zelf samen. De knop verschijnt alleen als het product custom.compare_table of custom.compare_products heeft." },
     { "type": "text", "id": "tel_voor", "label": "Teller — tekst ervoor", "default": "Al door" },
     { "type": "text", "id": "tel_waarde", "label": "Teller — getal", "default": "200.000+" },
     { "type": "text", "id": "tel_na", "label": "Teller — tekst erna", "default": "mannen gekozen" },
@@ -471,8 +480,12 @@
 {% endschema %}
 
 {% stylesheet %}
-  /* rijke tekst uit offer_title moet zich in de vetregel voegen */
-  .ws-pdp .ws-gift b > *{margin:0;font:inherit;color:inherit;display:inline}
+  /* metafield_tag verpakt rijke tekst in een div met daarin een h2, dus de
+     opmaak moet op alle nakomelingen slaan en niet alleen op het kind. */
+  .ws-pdp .ws-gift b{font-weight:600}
+  .ws-pdp .ws-gift b *{margin:0;padding:0;display:inline;font-family:inherit;
+    font-size:inherit;line-height:inherit;letter-spacing:inherit;color:inherit}
+  .ws-pdp .ws-gift b strong,.ws-pdp .ws-gift b b,.ws-pdp .ws-gift b em{font-weight:800;font-style:normal}
   /* let op: laat geen procentteken direct tegen een sluitende accolade staan.
      Liquid leest die twee tekens als het einde van een tag en slikt dan de
      rest van het bestand. Vandaar de spatie ervoor. */
