@@ -223,20 +223,22 @@
         {%- comment -%}
           De aanbodbalk. Eerst het metaobject waar custom.limited_offer naar wijst,
           anders de sectie-instelling. Is beide leeg, dan komt de balk er niet.
+
+          offer_title is een rijketekstveld. Dat moet met metafield_tag gerenderd
+          worden; wie het eerst aan een variabele toewijst en daarna uitprint,
+          krijgt de ruwe JSON van het veld op het scherm.
         {%- endcomment -%}
         {%- liquid
-          assign gift_titel = ''
-          assign gift_regel = ''
-          if aanbod != blank
-            assign gift_titel = aanbod.offer_title | default: aanbod.product_title
-            assign gift_regel = aanbod.popup_subtitle | default: aanbod.popup_title
+          assign toon_aanbod = false
+          if aanbod.offer_title != blank or aanbod.product_title != blank or s.gift_titel != blank
+            assign toon_aanbod = true
           endif
-          if gift_titel == blank
-            assign gift_titel = s.gift_titel
+          assign gift_regel = aanbod.popup_subtitle | default: aanbod.popup_title
+          if aanbod == blank
             assign gift_regel = s.gift_regel
           endif
         -%}
-        {%- if gift_titel != blank -%}
+        {%- if toon_aanbod -%}
           <div class="ws-gift">
             <span class="ws-ic">
               {%- if aanbod.image != blank -%}
@@ -246,7 +248,15 @@
               {%- endif -%}
             </span>
             <span>
-              <b>{{ gift_titel }}</b>
+              <b>
+                {%- if aanbod.offer_title != blank -%}
+                  {{ aanbod.offer_title | metafield_tag }}
+                {%- elsif aanbod.product_title != blank -%}
+                  {{ aanbod.product_title }}
+                {%- else -%}
+                  {{ s.gift_titel }}
+                {%- endif -%}
+              </b>
               {%- if gift_regel != blank -%}<span>{{ gift_regel }}</span>{%- endif -%}
             </span>
           </div>
@@ -352,6 +362,21 @@
     (function () {
       var wortel = document.getElementById('shopify-section-{{ section.id }}');
       if (!wortel) return;
+      // Eerst de vergelijkingsknop. Die hing hieronder, achter de controle op
+      // de gallerij, en werd dus overgeslagen zodra een product te weinig
+      // foto's heeft om een miniatuurstrook te krijgen.
+      var vgl = wortel.querySelector('[data-ws-spring]');
+      if (vgl) {
+        vgl.addEventListener('click', function (e) {
+          var anker = vgl.getAttribute('href') || '';
+          if (anker.charAt(0) !== '#') return;
+          var doel = document.querySelector(anker);
+          if (!doel) return;
+          e.preventDefault();
+          doel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      }
+
       var baan = wortel.querySelector('#ws-baan-{{ section.id }}');
       var strook = wortel.querySelector('#ws-th-{{ section.id }}');
       if (!baan || !strook) return;
@@ -372,16 +397,6 @@
         baan.scrollTo({ left: dia.offsetLeft - baan.offsetLeft, behavior: 'smooth' });
         markeer(i);
       });
-
-      var vgl = wortel.querySelector('[data-ws-spring]');
-      if (vgl) {
-        vgl.addEventListener('click', function (e) {
-          var doel = document.querySelector(vgl.getAttribute('href'));
-          if (!doel) return;
-          e.preventDefault();
-          doel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-      }
 
       var wacht;
       baan.addEventListener('scroll', function () {
