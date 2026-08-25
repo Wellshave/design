@@ -79,7 +79,7 @@
         {%- if s.tag != blank -%}<span class="ws-tg">{{ s.tag }}</span>{%- endif -%}
 
         <ul class="ws-baan" id="ws-baan-{{ section.id }}">
-          {%- for media in product.media limit: 8 -%}
+          {%- for media in product.media limit: 10 -%}
             <li>
               {%- if forloop.first -%}
                 {{ media.preview_image | image_url: width: 1200 | image_tag: class: 'ws-held', loading: 'eager', fetchpriority: 'high', sizes: '(max-width: 749px) 92vw, 46vw', widths: '400,600,900,1200' }}
@@ -93,8 +93,14 @@
         </ul>
 
         {%- if product.media.size > 1 -%}
+          <button type="button" class="ws-pijl ws-vorige" data-ws-dia-vorige aria-label="Vorige foto">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+          </button>
+          <button type="button" class="ws-pijl ws-volgende" data-ws-dia-volgende aria-label="Volgende foto">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+          </button>
           <div class="ws-th" id="ws-th-{{ section.id }}">
-            {%- for media in product.media limit: 5 -%}
+            {%- for media in product.media limit: 10 -%}
               <figure{% if forloop.first %} class="ws-on"{% endif %}>
                 <button type="button" class="ws-vk" data-ws-dia="{{ forloop.index0 }}"
                         aria-label="{{ media.alt | default: product.title | escape }}">
@@ -441,22 +447,37 @@
         }
       }
 
-      strook.addEventListener('click', function (e) {
-        var knop = e.target.closest('[data-ws-dia]');
-        if (!knop) return;
-        var i = parseInt(knop.getAttribute('data-ws-dia'), 10);
+      function huidige() {
+        var breedte = baan.children[0] ? baan.children[0].offsetWidth : 1;
+        return Math.round(baan.scrollLeft / (breedte + gat()));
+      }
+      function gat() { return window.innerWidth < 750 ? 12 : 16; }
+      function naarDia(i) {
         var dia = baan.children[i];
         if (!dia) return;
         baan.scrollTo({ left: dia.offsetLeft - baan.offsetLeft, behavior: 'smooth' });
         markeer(i);
+      }
+      var vorige = wortel.querySelector('[data-ws-dia-vorige]');
+      var volgende = wortel.querySelector('[data-ws-dia-volgende]');
+      if (vorige) vorige.addEventListener('click', function () {
+        naarDia(Math.max(0, huidige() - 1));
+      });
+      if (volgende) volgende.addEventListener('click', function () {
+        naarDia(Math.min(baan.children.length - 1, huidige() + 1));
+      });
+
+      strook.addEventListener('click', function (e) {
+        var knop = e.target.closest('[data-ws-dia]');
+        if (!knop) return;
+        naarDia(parseInt(knop.getAttribute('data-ws-dia'), 10));
       });
 
       var wacht;
       baan.addEventListener('scroll', function () {
         clearTimeout(wacht);
         wacht = setTimeout(function () {
-          var breedte = baan.children[0] ? baan.children[0].offsetWidth : 1;
-          markeer(Math.round(baan.scrollLeft / (breedte + 16)));
+          markeer(huidige());
         }, 90);
       });
       }

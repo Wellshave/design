@@ -50,12 +50,26 @@
 .ws-pdp .ws-stip{position:absolute;display:block;width:6px;height:6px;border-radius:50%;background:#C79A52}
 
 /* ---- miniaturen ---- */
-.ws-pdp .ws-th{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px;margin-top:18px;position:relative;z-index:4;flex:none}
-.ws-pdp .ws-th figure{margin:0}
+/* De strook schuift horizontaal, zodat ook de zesde en verder bereikbaar zijn.
+   De miniaturen tonen de hele foto: object-fit:cover met een zoom was op de
+   mockupbeelden afgestemd en snijdt echte productfoto's doormidden. */
+.ws-pdp .ws-th{display:flex;gap:9px;margin-top:18px;position:relative;z-index:4;flex:none;
+  overflow-x:auto;scrollbar-width:none;scroll-snap-type:x proximity;padding-bottom:2px}
+.ws-pdp .ws-th::-webkit-scrollbar{display:none}
+.ws-pdp .ws-th figure{margin:0;flex:0 0 calc((100% - 36px) / 5);min-width:76px;scroll-snap-align:start}
 .ws-pdp .ws-th .ws-vk{aspect-ratio:1/1;border-radius:11px;overflow:hidden;border:1px solid rgba(17,17,17,.09);
   background:#fff;display:block}
-.ws-pdp .ws-th .ws-vk img{width:100%;height:100%;object-fit:cover;object-position:center 88%;display:block;
-  transform:scale(1.62);transform-origin:center 92%}
+.ws-pdp .ws-th .ws-vk img{width:100%;height:100%;object-fit:contain;display:block;padding:6px}
+
+/* bladerpijlen op het podium, want met een muis valt een schuifbaan niet te vegen */
+.ws-pdp .ws-pijl{position:absolute;top:calc(50% - 34px);transform:translateY(-50%);z-index:5;
+  width:38px;height:38px;border-radius:50%;border:1px solid rgba(17,17,17,.1);background:rgba(255,255,255,.92);
+  color:#111;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;
+  box-shadow:0 6px 18px -8px rgba(17,17,17,.4)}
+.ws-pdp .ws-pijl:hover{background:#fff}
+.ws-pdp .ws-pijl svg{width:17px;height:17px}
+.ws-pdp .ws-vorige{left:14px}
+.ws-pdp .ws-volgende{right:14px}
 .ws-pdp .ws-th figure.ws-on .ws-vk{border:2px solid var(--ws-gold4)}
 .ws-pdp .ws-th figcaption{margin-top:6px;font-size:9.5px;font-weight:600;color:var(--ws-ink60);
   text-align:center;line-height:1.2;overflow-wrap:anywhere}
@@ -170,6 +184,10 @@
 }
 @media (max-width:560px){
   .ws-pdp .ws-th{gap:6px}
+  .ws-pdp .ws-th figure{flex:0 0 calc((100% - 24px) / 5)}
+  .ws-pdp .ws-pijl{width:32px;height:32px}
+  .ws-pdp .ws-vorige{left:8px}
+  .ws-pdp .ws-volgende{right:8px}
   .ws-pdp .ws-th figcaption{font-size:8.5px;margin-top:5px}
   .ws-pdp .ws-cta{font-size:12px;letter-spacing:.05em;padding:17px 10px}
   .ws-pdp .ws-cta2{font-size:10.5px;letter-spacing:.07em;gap:9px;padding:15px 10px}
