@@ -53,7 +53,7 @@ TRIMMEN = [
       vgl=[('Waarvoor gemaakt', 'Baard, lijnen, neushaar en lichaam met &eacute;&eacute;n set.'),
            ('Wat hij extra kan', 'Als enige een micro shaver voor de gladde afwerking.'),
            ('Wat hij niet doet', 'Scheert je gezicht niet zo glad als een echt scheerapparaat.')]),
- dict(id='msiced', img='msiced', naam='Men Shaper Iced&trade; 5-in-1', tag='Laagste prijs van het paar',
+ dict(id='msiced', img='msiced', naam='Men Shaper Iced&trade; 5-in-1', tag='Zelfde set, goedkoper',
       wat='Vijf opzetstukken, elf onderdelen, in de Iced-afwerking.',
       score=4.6, aantal=768, chips=['5 opzetstukken', '11 in de doos'], prijs=33.95, van=57.15,
       url=P + 'wellshave-5-in-1-baardtrimmer-man-shaper-iced',

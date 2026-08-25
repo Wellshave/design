@@ -91,7 +91,7 @@ TYPES = {
    groepkop='Baardtrimmers', groepsub='Vijf apparaten om je baard op lengte te houden.',
    noot='<b>De Iced en de Gold zijn dezelfde set.</b> Elf onderdelen, vijf opzetstukken, alleen de '
         'afwerking verschilt — en de Gold kost €3,00 meer.',
-   labels='wellshave-5-in-1-baardtrimmer-man-shaper-iced = Laagste prijs van het paar\n'
+   labels='wellshave-5-in-1-baardtrimmer-man-shaper-iced = Zelfde set, goedkoper\n'
           'wellshave-5-in-1-baardtrimmer-men-shaper = Zelfde set, in goud\n'
           '6-in-1-baardtrimmer-supreme = Meest compleet\nthe-dial-master = Nieuw',
    linklabel='Bekijk de hele zone Gezicht & baard', linkurl=C + 'zone-gezicht',

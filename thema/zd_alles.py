@@ -58,7 +58,7 @@ GEZICHT = [
      score=4.6, aantal=219, chips=['6 opzetstukken', '12 in de doos'], prijs=39.95, van=71.35,
      url=P + '6-in-1-baardtrimmer-supreme',
      redenen=['T-Blade, precisietrimmer en micro shaver', 'Neus- en oorhaaropzetstuk', 'Verstelbaar 1&ndash;9 mm']),
- app(id='msiced', img='msiced', naam='Men Shaper Iced&trade; 5-in-1', tag='Laagste prijs van het paar',
+ app(id='msiced', img='msiced', naam='Men Shaper Iced&trade; 5-in-1', tag='Zelfde set, goedkoper',
      wat='Vijf opzetstukken, elf onderdelen, in de Iced-afwerking.',
      score=4.6, aantal=768, chips=['5 opzetstukken', '11 in de doos'], prijs=33.95, van=57.15,
      url=P + 'wellshave-5-in-1-baardtrimmer-man-shaper-iced',

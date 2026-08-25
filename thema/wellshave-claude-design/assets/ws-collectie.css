@@ -617,3 +617,22 @@
 /* geen tekening: de uitleg wordt één brede kolom */
 .wsc .cat.solo{grid-template-columns:minmax(0,1fr);gap:0}
 .wsc .cat.solo .cat-tekst p{max-width:70ch}
+/* Het lint en de vergelijk-knop stonden allebei op de bovenrand van de foto. Op een
+   kaart van rond de 160px — en dat is hij op mobiel én in het vierkolomsraster —
+   passen ze daar niet samen: het lint schoof onder de knop door tot buiten de kaart.
+   Ruimte reserveren lost dat niet op, dan wordt elk lint afgekapt. Daarom staat de
+   vergelijk-knop nu op de onderrand, links van het oog, en houdt het lint de hele
+   bovenrand voor zich. Te lang wordt alsnog afgekapt in plaats van doorgeschoten. */
+.wsc .wsk-tag{max-width:calc(100% - 24px);overflow:hidden;text-overflow:ellipsis}
+.wsc .wsk-vgl{top:auto;bottom:12px;right:auto;left:12px}
+@container (max-width:700px){
+  .wsc .wsk-tag{max-width:calc(100% - 16px)}
+  .wsc .wsk-vgl{top:auto;right:auto;bottom:8px;left:8px}
+}
+
+/* Het raster sprong van twee kolommen ineens naar vier, dus tussen 700 en 1040px was
+   een kaart maar zo'n 150px breed — smaller dan op een telefoon, en te smal voor het
+   lint. Drie kolommen als tussenstap. */
+@container (min-width:701px) and (max-width:1040px){
+  .wsc .kaarten{grid-template-columns:repeat(3,minmax(0,1fr))}
+}

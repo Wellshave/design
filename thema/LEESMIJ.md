@@ -141,6 +141,41 @@ overkoepelende pagina in plaats van naar één zone, en zegt dat ook.
    bestond al. De handle staat wel in de lijst: publiceer je de collectie, dan
    verschijnt de tegel vanzelf.
 
+## De lintjes op de kaarten
+
+Er stond op sommige kaarten een lint als `NIEUW ·MET STATIONWELLSHAVE-SCHEERAPPARAAT-ELITE`,
+half onder de vergelijk-knop door. Dat waren twee losse fouten die elkaar versterkten.
+
+**De data.** Het veld `labels` was in het schema als `"type": "text"` gedeclareerd —
+een enkelregelig veld — terwijl de inhoud één regel per product is. Shopify gooit de
+regeleindes dan weg, dus `…station\nwellshave-scheerapparaat-elite = …` werd één lange
+regel en de splitsing op `=` leverde het lint van de één plús de handle van de volgende.
+Het veld is nu `textarea`. Alle andere meerregelige velden (`opties`, `tabel`) waren al
+goed; ik heb ze allemaal nagelopen.
+
+Daarbij accepteert de parser nu alleen een regel met **precies één** `=`. Raken de
+regeleindes ooit opnieuw kwijt, dan valt het lint gewoon weg in plaats van dat er een
+handle in verschijnt.
+
+**De opmaak.** Het lint stond linksboven op de foto en de vergelijk-knop rechtsboven.
+Op een kaart van rond de 160px — mobiel én in het vierkolomsraster — passen die niet
+samen: het lint is er zo'n 120px en de knop 71px. Ruimte reserveren helpt niet, dan
+wordt élk lint afgekapt. De vergelijk-knop staat nu op de onderrand, links van het oog,
+en het lint heeft de hele bovenrand. Wat dan nóg te lang is, krijgt een beletselteken
+in plaats van door te schieten.
+
+Onderweg bleek het raster van twee kolommen ineens naar vier te springen, waardoor een
+kaart tussen 700 en 1040px maar 153px breed was — smaller dan op een telefoon. Daar
+zitten nu drie kolommen tussen.
+
+**Houd een lint onder de twintig tekens.** Er was er één die eroverheen ging,
+`Laagste prijs van het paar`; die is `Zelfde set, goedkoper` geworden, wat het lint van
+de Gold (`Zelfde set, in goud`) spiegelt. In het matchpaneel is ruimte zat, daar mag de
+lange versie blijven staan.
+
+Nagemeten in een browser over negen pagina's en vijf breedtes (390, 600, 768, 1024,
+1440): 485 lintjes, nul botsingen, nul die buiten de kaart vallen, nul afgekapt.
+
 ## Het megamenu: zone boven, type eronder
 
 De SHOP-knop opende een platte rij van tien collecties. Die is nu in twee groepen
