@@ -25,6 +25,7 @@ BLOKKEN = [
  ('05', u'Het aanbodblok',      2, 'lad',       'lad',   u'donker · kern',      True),
  ('07', u'Maak het compleet',   2, 'erbij',     'erbij', u'wit · uitbreiding', True),
  ('08', u'De reviewmuur',       2, 'tpm',       'tpm',   u'zand · kern',         True),
+ ('07b', u'Vergelijkingspop-up', 2, 'vglpop', 'vglpop', u'hoort bij het koopvak', False),
  (u'—', u'De film — buiten de negen', 2, 'film', 'film', u'af, maar niet ingedeeld', True),
  (u'—', u'Accordeon: omschrijving en specificaties', 2, 'blad', 'blad', u'zit in blok 01',   True),
  (u'—', u'Betaalmethoden', 2, 'betaal',    'betaal', u'onderdeel van blok 01 en 18', True),
