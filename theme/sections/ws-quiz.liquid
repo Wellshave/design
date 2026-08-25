@@ -288,6 +288,11 @@
               {%- assign formulier_id = 'ws-qz-form-' | append: block.id -%}
               {%- form 'product', p, id: formulier_id -%}
                 <input type="hidden" name="id" value="{{ v.id }}">
+                {%- comment -%} Dit thema heeft geen winkelwagenpagina: /cart stuurt
+                  door naar de homepage. Zonder return_to komt de koper daar dus
+                  uit in plaats van bij zijn bestelling. Nu gaat hij in één klik
+                  naar de kassa, met wat er al in zijn mandje zat. {%- endcomment -%}
+                <input type="hidden" name="return_to" value="/checkout">
                 <button class="ws-qz__knop" type="submit" {% unless v.available %}disabled{% endunless %}>
                   {{ section.settings.knop }}<span><svg><use href="#ws-qz-arw"/></svg></span>
                 </button>
@@ -362,6 +367,7 @@
               {%- if cv.available -%}{{ section.settings.voorraad_wel }}{%- else -%}{{ section.settings.voorraad_niet }}{%- endif -%}</p>
             {%- form 'product', cp, id: 'ws-qz-form-cadeau' -%}
               <input type="hidden" name="id" value="{{ cv.id }}">
+              <input type="hidden" name="return_to" value="/checkout">
               <button class="ws-qz__knop" type="submit" {% unless cv.available %}disabled{% endunless %}>
                 {{ section.settings.knop }}<span><svg><use href="#ws-qz-arw"/></svg></span>
               </button>
@@ -576,7 +582,7 @@
     { "type": "text", "id": "bespaar", "label": "Woord voor de besparing", "default": "Je bespaart" },
     { "type": "text", "id": "voorraad_wel", "label": "Tekst bij voorraad", "default": "Op voorraad · morgen in huis" },
     { "type": "text", "id": "voorraad_niet", "label": "Tekst zonder voorraad", "default": "Tijdelijk uitverkocht" },
-    { "type": "text", "id": "knop", "label": "Koopknop", "default": "In de winkelwagen" },
+    { "type": "text", "id": "knop", "label": "Koopknop", "info": "De knop gaat rechtstreeks naar de kassa.", "default": "Direct afrekenen" },
     { "type": "text", "id": "meer", "label": "Link naar de productpagina", "default": "Bekijk alle specificaties" },
     { "type": "text", "id": "anders_kop", "label": "Kop boven de alternatieven", "default": "Wilde je toch iets anders in deze zone?" },
     { "type": "text", "id": "opnieuw", "label": "Opnieuwknop", "default": "Begin opnieuw" },
