@@ -469,14 +469,15 @@
 
         Alles komt uit de winkel: custom.compare_products voor de kolommen en
         per product custom.compare_info voor beeld, rol, reviewlabel, de vier
-        punten en 'beste voor'. De tabel eronder wordt opgebouwd uit alle
-        punten van alle kolommen samen, ontdubbeld, met een vinkje waar de
-        kolom hem heeft.
+        punten en 'beste voor'. De tabel eronder bouwt zichzelf op uit alle
+        punten van alle kolommen samen, ontdubbeld.
 
-        Titels worden tussen tekens gezet voor het vergelijken, anders telt
-        'Skin-Safe mes' ook mee binnen 'Skin-Safe mes + Foil Shaver'. Achteraan
-        een sluitteken, omdat Liquid lege stukken aan het eind van een split
-        weggooit en het laatste punt anders een keer te weinig telt.
+        Twee dingen die het vergelijken overeind houden. Titels gaan door strip,
+        zodat een spatie te veel in het ene veld niet leidt tot twee losse rijen
+        waar er een hoort te staan. En ze worden tussen tekens gezet voor het
+        tellen, anders telt 'Skin-Safe mes' ook mee binnen 'Skin-Safe mes + Foil
+        Shaver'. Achteraan een sluitteken, omdat Liquid lege stukken aan het eind
+        van een split weggooit.
       {%- endcomment -%}
       {%- if vergelijk_lijst != blank -%}
         {%- liquid
@@ -484,24 +485,32 @@
           assign alle_punten = ''
           assign laagste = 0
           assign uitgelicht_prijs = 0
+          assign uitgelicht_sleutels = ''
         -%}
         {%- for cp in vergelijk_lijst -%}
           {%- assign ci = cp.metafields.custom.compare_info.value -%}
           {%- assign cvp = cp.selected_or_first_available_variant.price -%}
           {%- if laagste == 0 or cvp < laagste -%}{%- assign laagste = cvp -%}{%- endif -%}
           {%- if ci.is_popuplar -%}{%- assign uitgelicht_prijs = cvp -%}{%- endif -%}
+          {%- assign kolom_sleutels = '' -%}
             {%- if ci.advantage_1_title != blank -%}
-              {%- assign alle_punten = alle_punten | append: '‹' | append: ci.advantage_1_title | append: '›' -%}
+              {%- assign t = ci.advantage_1_title | strip -%}
+              {%- assign kolom_sleutels = kolom_sleutels | append: '‹' | append: t | append: '›' -%}
             {%- endif -%}
             {%- if ci.advantage_2_title != blank -%}
-              {%- assign alle_punten = alle_punten | append: '‹' | append: ci.advantage_2_title | append: '›' -%}
+              {%- assign t = ci.advantage_2_title | strip -%}
+              {%- assign kolom_sleutels = kolom_sleutels | append: '‹' | append: t | append: '›' -%}
             {%- endif -%}
             {%- if ci.advantage_3_title != blank -%}
-              {%- assign alle_punten = alle_punten | append: '‹' | append: ci.advantage_3_title | append: '›' -%}
+              {%- assign t = ci.advantage_3_title | strip -%}
+              {%- assign kolom_sleutels = kolom_sleutels | append: '‹' | append: t | append: '›' -%}
             {%- endif -%}
             {%- if ci.advantage_4_title != blank -%}
-              {%- assign alle_punten = alle_punten | append: '‹' | append: ci.advantage_4_title | append: '›' -%}
+              {%- assign t = ci.advantage_4_title | strip -%}
+              {%- assign kolom_sleutels = kolom_sleutels | append: '‹' | append: t | append: '›' -%}
             {%- endif -%}
+          {%- assign alle_punten = alle_punten | append: kolom_sleutels -%}
+          {%- if ci.is_popuplar -%}{%- assign uitgelicht_sleutels = kolom_sleutels -%}{%- endif -%}
         {%- endfor -%}
         {%- assign alle_punten = alle_punten | append: '‹einde›' -%}
         {%- assign meerprijs = uitgelicht_prijs | minus: laagste -%}
@@ -544,34 +553,38 @@
                 {%- assign uniek_titel = '' -%}
                 {%- assign uniek_onder = '' -%}
             {%- if ci.advantage_1_title != blank and uniek_titel == blank -%}
-              {%- assign sleutel = '‹' | append: ci.advantage_1_title | append: '›' -%}
+              {%- assign t = ci.advantage_1_title | strip -%}
+              {%- assign sleutel = '‹' | append: t | append: '›' -%}
               {%- assign hoevaak = alle_punten | split: sleutel | size | minus: 1 -%}
               {%- if hoevaak < 2 -%}
-                {%- assign uniek_titel = ci.advantage_1_title -%}
+                {%- assign uniek_titel = t -%}
                 {%- assign uniek_onder = ci.advantage_1_subtitle -%}
               {%- endif -%}
             {%- endif -%}
             {%- if ci.advantage_2_title != blank and uniek_titel == blank -%}
-              {%- assign sleutel = '‹' | append: ci.advantage_2_title | append: '›' -%}
+              {%- assign t = ci.advantage_2_title | strip -%}
+              {%- assign sleutel = '‹' | append: t | append: '›' -%}
               {%- assign hoevaak = alle_punten | split: sleutel | size | minus: 1 -%}
               {%- if hoevaak < 2 -%}
-                {%- assign uniek_titel = ci.advantage_2_title -%}
+                {%- assign uniek_titel = t -%}
                 {%- assign uniek_onder = ci.advantage_2_subtitle -%}
               {%- endif -%}
             {%- endif -%}
             {%- if ci.advantage_3_title != blank and uniek_titel == blank -%}
-              {%- assign sleutel = '‹' | append: ci.advantage_3_title | append: '›' -%}
+              {%- assign t = ci.advantage_3_title | strip -%}
+              {%- assign sleutel = '‹' | append: t | append: '›' -%}
               {%- assign hoevaak = alle_punten | split: sleutel | size | minus: 1 -%}
               {%- if hoevaak < 2 -%}
-                {%- assign uniek_titel = ci.advantage_3_title -%}
+                {%- assign uniek_titel = t -%}
                 {%- assign uniek_onder = ci.advantage_3_subtitle -%}
               {%- endif -%}
             {%- endif -%}
             {%- if ci.advantage_4_title != blank and uniek_titel == blank -%}
-              {%- assign sleutel = '‹' | append: ci.advantage_4_title | append: '›' -%}
+              {%- assign t = ci.advantage_4_title | strip -%}
+              {%- assign sleutel = '‹' | append: t | append: '›' -%}
               {%- assign hoevaak = alle_punten | split: sleutel | size | minus: 1 -%}
               {%- if hoevaak < 2 -%}
-                {%- assign uniek_titel = ci.advantage_4_title -%}
+                {%- assign uniek_titel = t -%}
                 {%- assign uniek_onder = ci.advantage_4_subtitle -%}
               {%- endif -%}
             {%- endif -%}
@@ -618,99 +631,79 @@
             </div>
 
             {%- comment -%} de tabel: alle punten van alle kolommen, ontdubbeld {%- endcomment -%}
-            {%- assign rijen = '' -%}
-            {%- for cp in vergelijk_lijst -%}
-              {%- assign ci = cp.metafields.custom.compare_info.value -%}
-              {%- if ci.advantage_1_title != blank -%}
-                {%- assign merk = '‹' | append: ci.advantage_1_title | append: '›' -%}
-                {%- unless rijen contains merk -%}
-                  {%- assign rijen = rijen | append: merk -%}
-                {%- endunless -%}
-              {%- endif -%}
-              {%- if ci.advantage_2_title != blank -%}
-                {%- assign merk = '‹' | append: ci.advantage_2_title | append: '›' -%}
-                {%- unless rijen contains merk -%}
-                  {%- assign rijen = rijen | append: merk -%}
-                {%- endunless -%}
-              {%- endif -%}
-              {%- if ci.advantage_3_title != blank -%}
-                {%- assign merk = '‹' | append: ci.advantage_3_title | append: '›' -%}
-                {%- unless rijen contains merk -%}
-                  {%- assign rijen = rijen | append: merk -%}
-                {%- endunless -%}
-              {%- endif -%}
-              {%- if ci.advantage_4_title != blank -%}
-                {%- assign merk = '‹' | append: ci.advantage_4_title | append: '›' -%}
-                {%- unless rijen contains merk -%}
-                  {%- assign rijen = rijen | append: merk -%}
-                {%- endunless -%}
-              {%- endif -%}
-            {%- endfor -%}
-            {%- assign rijlijst = rijen | split: '‹' -%}
-            {%- if rijlijst.size > 0 -%}
-              <div class="ws-pop-tab">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>&nbsp;</th>
-                      {%- for cp in vergelijk_lijst -%}
-                        {%- assign ci = cp.metafields.custom.compare_info.value -%}
-                        <th>{{ ci.toggle_title | default: cp.title }}</th>
-                      {%- endfor -%}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {%- for stuk in rijlijst -%}
-                      {%- assign rijnaam = stuk | split: '›' | first | strip -%}
-                      {%- if rijnaam != blank -%}
-                        {%- assign merk2 = '‹' | append: rijnaam | append: '›' -%}
-                        {%- assign vaak = alle_punten | split: merk2 | size | minus: 1 -%}
-                        {%- comment -%}
-                          Een rij die maar bij een model voorkomt is het verschil.
-                          Maar alleen als dat het uitgelichte model is, is het een
-                          upgrade; staat hij bij het instapmodel, dan is het gewoon
-                          een vinkje. Anders leest de basisuitvoering alsof zij iets
-                          extra's heeft.
-                        {%- endcomment -%}
-                        {%- assign rij_upgrade = false -%}
-                        {%- if vaak < 2 -%}
-                          {%- for cp in vergelijk_lijst -%}
-                            {%- assign ci = cp.metafields.custom.compare_info.value -%}
-                            {%- if ci.is_popuplar -%}
-                              {%- if ci.advantage_1_title == rijnaam or ci.advantage_2_title == rijnaam or ci.advantage_3_title == rijnaam or ci.advantage_4_title == rijnaam -%}
-                                {%- assign rij_upgrade = true -%}
-                              {%- endif -%}
-                            {%- endif -%}
-                          {%- endfor -%}
-                        {%- endif -%}
-                        <tr{% if rij_upgrade %} class="ws-beslist"{% endif %}>
-                          <th scope="row">{{ rijnaam }}</th>
-                          {%- for cp in vergelijk_lijst -%}
-                            {%- assign ci = cp.metafields.custom.compare_info.value -%}
-                            {%- assign heeft = false -%}
-                  {%- if ci.advantage_1_title == rijnaam -%}{%- assign heeft = true -%}{%- endif -%}
-                  {%- if ci.advantage_2_title == rijnaam -%}{%- assign heeft = true -%}{%- endif -%}
-                  {%- if ci.advantage_3_title == rijnaam -%}{%- assign heeft = true -%}{%- endif -%}
-                  {%- if ci.advantage_4_title == rijnaam -%}{%- assign heeft = true -%}{%- endif -%}
-                            {%- if heeft -%}
-                              <td class="ws-ja">
-                                {%- if rij_upgrade and ci.is_popuplar and s.pop_inbegrepen != blank -%}
-                                  <span class="ws-pop-erbij"><svg><use href="#ws-pdp-vink-{{ section.id }}"/></svg>{{ s.pop_inbegrepen }}</span>
-                                {%- else -%}
-                                  <svg><use href="#ws-pdp-vink-{{ section.id }}"/></svg>
-                                {%- endif -%}
-                              </td>
-                            {%- else -%}
-                              <td class="ws-nee">&mdash;</td>
-                            {%- endif -%}
-                          {%- endfor -%}
-                        </tr>
-                      {%- endif -%}
+            {%- assign rijlijst = alle_punten | split: '‹' -%}
+            {%- assign gezien = '' -%}
+            <div class="ws-pop-tab">
+              <table>
+                <thead>
+                  <tr>
+                    <th>&nbsp;</th>
+                    {%- for cp in vergelijk_lijst -%}
+                      {%- assign ci = cp.metafields.custom.compare_info.value -%}
+                      <th>{{ ci.toggle_title | default: cp.title }}</th>
                     {%- endfor -%}
-                  </tbody>
-                </table>
-              </div>
-            {%- endif -%}
+                  </tr>
+                </thead>
+                <tbody>
+                  {%- for stuk in rijlijst -%}
+                    {%- assign rijnaam = stuk | split: '›' | first | strip -%}
+                    {%- assign merk2 = '‹' | append: rijnaam | append: '›' -%}
+                    {%- assign nieuwe_rij = false -%}
+                    {%- if rijnaam != blank and rijnaam != 'einde' -%}
+                      {%- unless gezien contains merk2 -%}{%- assign nieuwe_rij = true -%}{%- endunless -%}
+                    {%- endif -%}
+                    {%- if nieuwe_rij -%}
+                      {%- assign gezien = gezien | append: merk2 -%}
+                      {%- assign vaak = alle_punten | split: merk2 | size | minus: 1 -%}
+                      {%- comment -%}
+                        Een rij die maar bij een model voorkomt is het verschil. Alleen
+                        als dat het uitgelichte model is, is het een upgrade; staat hij
+                        bij het instapmodel, dan is het gewoon een vinkje. Anders leest
+                        de basisuitvoering alsof zij iets extra's heeft.
+                      {%- endcomment -%}
+                      {%- assign rij_upgrade = false -%}
+                      {%- if vaak < 2 and uitgelicht_sleutels contains merk2 -%}
+                        {%- assign rij_upgrade = true -%}
+                      {%- endif -%}
+                      <tr{% if rij_upgrade %} class="ws-beslist"{% endif %}>
+                        <th scope="row">{{ rijnaam }}</th>
+                        {%- for cp in vergelijk_lijst -%}
+                          {%- assign ci = cp.metafields.custom.compare_info.value -%}
+                          {%- assign kolom_sleutels = '' -%}
+                          {%- if ci.advantage_1_title != blank -%}
+                            {%- assign t = ci.advantage_1_title | strip -%}
+                            {%- assign kolom_sleutels = kolom_sleutels | append: '‹' | append: t | append: '›' -%}
+                          {%- endif -%}
+                          {%- if ci.advantage_2_title != blank -%}
+                            {%- assign t = ci.advantage_2_title | strip -%}
+                            {%- assign kolom_sleutels = kolom_sleutels | append: '‹' | append: t | append: '›' -%}
+                          {%- endif -%}
+                          {%- if ci.advantage_3_title != blank -%}
+                            {%- assign t = ci.advantage_3_title | strip -%}
+                            {%- assign kolom_sleutels = kolom_sleutels | append: '‹' | append: t | append: '›' -%}
+                          {%- endif -%}
+                          {%- if ci.advantage_4_title != blank -%}
+                            {%- assign t = ci.advantage_4_title | strip -%}
+                            {%- assign kolom_sleutels = kolom_sleutels | append: '‹' | append: t | append: '›' -%}
+                          {%- endif -%}
+                          {%- if kolom_sleutels contains merk2 -%}
+                            <td class="ws-ja">
+                              {%- if rij_upgrade and ci.is_popuplar and s.pop_inbegrepen != blank -%}
+                                <span class="ws-pop-erbij"><svg><use href="#ws-pdp-vink-{{ section.id }}"/></svg>{{ s.pop_inbegrepen }}</span>
+                              {%- else -%}
+                                <svg><use href="#ws-pdp-vink-{{ section.id }}"/></svg>
+                              {%- endif -%}
+                            </td>
+                          {%- else -%}
+                            <td class="ws-nee">&mdash;</td>
+                          {%- endif -%}
+                        {%- endfor -%}
+                      </tr>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </tbody>
+              </table>
+            </div>
 
             {%- assign beloftes = mf.store_usp.value -%}
             {%- if beloftes != blank -%}
