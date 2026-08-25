@@ -7,6 +7,10 @@
   De tegeltekst is los te zetten van de collectietitel, zodat het menu
   "Lichaam & schaamstreek" kan zeggen waar de collectie "Bodygroomers" heet.
   Zo hoeft er niets aan de collectie zelf te veranderen.
+
+  Voor het beeld gaat custom.zone_icon voor custom.megamenu_image. Zo krijgt een
+  zone een gouden lijnicoon terwijl een type zijn productfoto houdt, zonder dat
+  het live thema — dat alleen megamenu_image kent — iets anders te zien krijgt.
 {%- endcomment -%}
 {%- assign etiket = col.title -%}
 {%- if labels != blank -%}
@@ -28,8 +32,10 @@
 {%- endif -%}
 <li>
   <a href="{{ col.url }}" class="{{ voorvoegsel }}-collection body-lg">
-    <div class="{{ voorvoegsel }}-collection-media">
-      {%- if col.metafields.custom.megamenu_image != blank -%}
+    <div class="{{ voorvoegsel }}-collection-media{% if col.metafields.custom.zone_icon != blank %} is-icoon{% endif %}">
+      {%- if col.metafields.custom.zone_icon != blank -%}
+        {{ col.metafields.custom.zone_icon | image_url: width: 300 | image_tag }}
+      {%- elsif col.metafields.custom.megamenu_image != blank -%}
         {{ col.metafields.custom.megamenu_image | image_url: width: 300 | image_tag }}
       {%- elsif col.image != blank -%}
         {{ col.image | image_url: width: 300 | image_tag }}

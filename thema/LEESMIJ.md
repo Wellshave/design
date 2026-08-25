@@ -132,11 +132,8 @@ overkoepelende pagina in plaats van naar één zone, en zegt dat ook.
    Op concept zetten of bijbestellen — dat is een keuze over het assortiment, geen
    ontwerpkeuze.
 
-5. **Twee zonecollecties hebben geen collectiefoto.** `zone-gezicht` en `zone-hoofd`
-   zijn nieuw en hebben nog geen afbeelding, dus in het megamenu staan daar twee
-   grijze plaatsvervangers. Eén afbeelding per collectie in de admin lost dat op.
-   Ik heb er bewust niets ingezet: het hoort bij dezelfde keuze als de twee
-   ontbrekende kopfoto's hierboven, en een verkeerde foto is er hier één te veel.
+5. ~~Twee zonecollecties hebben geen collectiefoto.~~ **Opgelost, en anders dan
+   gedacht.** Zie het hoofdstuk over de zone-iconen hieronder.
 
 6. **Ladyshaves staat niet in de winkel.** `/collections/ladyshave` stuurt door naar
    de homepage, dus de collectie is niet gepubliceerd op het Online Store-kanaal.
@@ -172,6 +169,41 @@ titel staat ook in de winkel, in zoekresultaten en in Google.
 
 `thema/origineel/header.liquid` is de versie van vóór deze wijziging (MD5
 `21cd95adcd673171001927eae1b517a5`), voor als je terug wilt.
+
+## De zone-iconen
+
+De vier zonetegels in het megamenu zijn géén productfoto's maar gouden
+lijniconen: een romp, een gezicht met baard, een kaal hoofd, een neus met oor.
+Dat is niet alleen een gat vullen — het maakt het verschil tussen de twee groepen
+pas zichtbaar. Een rij productfoto's boven een rij productfoto's leest als één
+lange lijst; een icoon zegt "dit is een plek op je lichaam", een foto zegt "dit is
+een apparaat". Bijkomend voordeel: Hoofd en Tondeuses toonden anders bijna
+hetzelfde apparaat.
+
+Gemaakt met Higgsfield (nano-banana), als één beeld met alle vier de iconen naast
+elkaar — zo is de lijndikte over de set gelijk. De bronbeelden staan in
+`thema/beeld/bron-iconenset-*.png`. De uiteindelijke set komt uit twee runs: de
+romp uit de tweede (de eerste tekende twee losse armen), de andere drie uit de
+eerste (de tweede gaf ze ogen en baardarcering, te druk op tegelformaat). De romp
+is daarna drie keer verdikt zodat de mediane lijnbreedte op alle vier gelijk is —
+8 pixels op een tegel van 278×220.
+
+**Dit is een icoon, geen tekening van een mens.** Dat onderscheid is de reden dat
+dit wél mag en de getekende lichaamskaart uit blok 3 niet: een pictogram is een
+symbool en wordt ook zo gelezen, een illustratie doet zich voor als een afbeelding
+van iemand. Blijf aan die kant van de streep als je de set ooit uitbreidt.
+
+### Waarom een eigen metafield
+
+De iconen zitten in `custom.zone_icon`, niet in `custom.megamenu_image`.
+`bodygroomers` en `neustrimmers` staan namelijk óók in het megamenu van het live
+thema; had ik hun `megamenu_image` overschreven, dan waren de gouden iconen
+meteen live verschenen. `ws-megamenu-tegel.liquid` kiest `zone_icon` eerst en valt
+anders terug op `megamenu_image`, en het live thema kent `zone_icon` niet. Zo zien
+de twee thema's iets anders zonder dat er iets gekopieerd hoeft te worden.
+
+Een tegel met een icoon krijgt `.is-icoon`: `object-fit: contain` in plaats van
+`cover`, zodat het lijnwerk niet wordt afgesneden.
 
 ## Bekijken zonder te publiceren
 

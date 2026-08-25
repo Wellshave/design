@@ -44,3 +44,10 @@
     gap: 20px;
   }
 }
+
+/* een zone-icoon is lijnwerk, geen productfoto: niet bijsnijden en wat lucht eromheen */
+.header__megamenu-collection-media.is-icoon img,
+.header__mobile-megamenu-collection-media.is-icoon img {
+  object-fit: contain;
+  padding: 6px 0;
+}
