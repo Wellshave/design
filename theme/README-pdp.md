@@ -147,7 +147,9 @@ ook het live thema.
 | Head shavers op doosinhoud, plus twee nieuwe invoeren | De Head Shaver Deluxe had oordelen als rijen (&laquo;Snel en comfortabel scheren&raquo;, &laquo;Ergonomisch design&raquo;) en een Engelse `popup_main_title`. Nu vier rijen uit `included_box`: 7D scheerapparaat, scheerkop, haartrimmer-/neus-/oorhaaropzetstuk, gezichtsmassager en reinigingsborstel. De extra&rsquo;s zijn de trap: extra scheerkop &rarr; toilettas &rarr; travelbag. `skull-deal-2-0` (3172045226316) en `skull-deal-3-0` (3172045521228) zijn **nieuw aangemaakt**; die twee pagina&rsquo;s hadden geen `compare_info`, dus daar deed de vergelijkingsknop niets. **Zichtbaar op de live site.** Terugdraaien is `custom.compare_info` daar weer leegmaken. |
 | Skull Deal 1.0 heette in de pop-up nog anders | `product_title`, `toggle_title` en `popup_title` van `head-shaver-deluxe-extra-scheerkop` stonden op &laquo;Head Shaver Deluxe + Extra Scheerkop&raquo;, de naam van v&oacute;&oacute;r de hernoeming van het product. De tabelkop en de knoppen lezen die velden. Nu Skull Deal 1.0. De handle van het metaobject blijft de oude. |
 | `compare_products` van de head shavers | Elke pagina staat nu naast de Skull Deal 3.0, de duurste (69,95). De 3.0 zelf staat naast de 2.0, want naast zichzelf kan niet &mdash; dezelfde uitzondering als bij de neustrimmer Ultra. |
-| Tondeuses op doosinhoud | Elegant en Deluxe hebben **identieke** `included_box`: tondeuse, 6 opzetkammen, kapperscape, kam, oplaadkabel. Er zit dus niets extra&rsquo;s bij en het verschil is alleen de motor. Vier gedeelde rijen plus de 2838 brushless motor; `best_for` en `popup_decision` waren leeg en zijn gevuld. In nl, en, de en fr. |
+| Tondeuses op doosinhoud | Elegant en Deluxe hebben **identieke** `included_box`: tondeuse, 6 opzetkammen, kapperscape, kam, oplaadkabel. Er zit dus niets extra&rsquo;s bij en het verschil is alleen de motor. Vier rijen per model; `best_for` en `popup_decision` waren leeg en zijn gevuld. In nl, en, de en fr. |
+| De tondeuses vergelijken niet meer met elkaar, maar met hun set | Elegant en Deluxe naast elkaar geeft vijf rijen met &eacute;&eacute;n verschil &mdash; correct, maar geen upgrade. `compare_products` zet nu de **Tondeuse Elegant naast het Barber Pack 3.0** (124,95) en de **Tondeuse Deluxe naast de Barber Bro 3.0** (109,95). Welke set bij welke tondeuse hoort komt uit `included_box`: de Packs bevatten `2062480015692` (Tondeuse Elegant), de Bro&rsquo;s `2062996799820` (Tondeuse Deluxe). Zeven rijen, drie verschillen. |
+| Zes nieuwe `compare_info`-invoeren voor de Barber-lijnen | `barber-pack-1-0` (3172061249868), `-2-0` (3172061282636), `-3-0` (3172061315404), `barber-bro-1-0` (3172061446476), `-2-0` (3172061479244), `-3-0` (3172061512012). Alle zes hadden niets, dus daar deed de vergelijkingsknop niets. Trap per lijn: detailtrimmer &rarr; + shaver &rarr; + neustrimmer. Elke pagina naast de 3.0 van zijn eigen lijn, de 3.0 naast de 2.0. **Zichtbaar op de live site.** Terugdraaien is `custom.compare_info` daar weer leegmaken. |
 | Vierde `store_usp`: Morgen in huis | De voetbalk van de pop-up toont wat er in `custom.store_usp` staat, en dat waren er drie. Nieuw metaobject met een icoon in dezelfde stijl als de andere drie (20 bij 20, streek `#BC813E`), toegevoegd aan de lijst op de Groom Guard en de PRO. |
 
 Let op bij die laatste. `custom.store_usp` wordt ook gelezen door het
@@ -212,12 +214,22 @@ weer aan te zetten. Wat de Selleasy-kaart deed, hoort in blok 07
   `Scheerkoop 7D` (2062199554380) en bij de Skull Deals `2x Scheerkoop 7D`
   (3067926511948); de Tondeuse Deluxe heeft een item `Tonduese`
   (2062996799820). Die namen staan in de dropdown &laquo;wat zit er in de doos&raquo;
-  op de productpagina, ook in het live thema. Niet aangeraakt: het is live
+  op de productpagina, ook in het live thema, en `Tonduese` zit ook in de doos
+  van elke Barber Bro. Niet aangeraakt: het is live
   klantcopy buiten de opdracht. Verbeteren betekent ook de en / de / fr
   opnieuw registreren.
-* **De Wellshave Tondeuse Pro&trade; (86,95) heeft geen `compare_info`, geen
-  `included_box` en geen `specification`.** De vergelijkingsknop doet daar niets
-  en er valt geen tabel voor te bouwen zolang die velden leeg zijn.
+* **De Barber Packs kosten meer dan de Barber Bro&rsquo;s en hebben toch de
+  goedkopere tondeuse.** Volgens `included_box` zit in de Packs de Elegant
+  (59,95) en in de Bro&rsquo;s de Deluxe (69,95), terwijl de Packs op elke trede
+  10 tot 15 euro duurder zijn. Het enige andere verschil is een
+  schoonmaakborstel bij Pack 1.0 en 2.0. Of de tondeuses staan omgewisseld op
+  de bundels, of de prijzen staan verkeerd om. De vergelijking volgt de
+  doosinhoud, dus dit is de moeite van het nakijken waard.
+* **De omschrijving van het Barber Pack 3.0 belooft een head shaver** die niet
+  in `included_box` staat. De tabel volgt de doos.
+* **De Barber Bundel 2.0 (164,95) valt buiten beide trappen**: die bevat de
+  Gentleman Shaver plus de Elegant en de Sharpline. Andere combinatie, geen
+  trede in een reeks, dus nog geen vergelijking.
 * **De prijsopmaak van de winkel heeft geen €-teken** (`moneyFormat` staat op
   `{{amount_with_comma_separator}}`). De sectie volgt de winkel, dus er staat
   `59,95`. Wordt de instelling aangepast, dan komt het teken er overal bij.
