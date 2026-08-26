@@ -119,22 +119,31 @@
   </div>
 
   {%- if section.blocks.size > 0 -%}
+    {%- comment -%} De zekerheden staan op desktop naast elkaar en lopen op
+      mobiel als een band voorbij. Daarvoor staat de reeks er tweemaal in:
+      een band die precies de helft opschuift sluit dan naadloos aan. De
+      tweede reeks is aria-hidden, zodat een schermlezer de drie zinnen
+      één keer voorleest, en hij staat op desktop uit. {%- endcomment -%}
     <div class="ws-hero__strook">
-      {%- for block in section.blocks -%}
-        <div {{ block.shopify_attributes }}>
-          <span class="ws-hero__zegel">
-            {%- if block.settings.icoon == 'tekst' -%}
-              {{ block.settings.cijfer }}
-            {%- else -%}
-              <svg><use href="#ws-h-{{ block.settings.icoon }}"/></svg>
-            {%- endif -%}
-          </span>
-          <span class="ws-hero__tekst">
-            <b>{{ block.settings.titel }}</b>
-            {%- if block.settings.tekst != blank -%}<em>{{ block.settings.tekst }}</em>{%- endif -%}
-          </span>
-        </div>
-      {%- endfor -%}
+      <div class="ws-hero__band">
+        {%- for beurt in (1..2) -%}
+          {%- for block in section.blocks -%}
+            <div {% if beurt == 1 %}{{ block.shopify_attributes }}{% else %}aria-hidden="true"{% endif %}>
+              <span class="ws-hero__zegel">
+                {%- if block.settings.icoon == 'tekst' -%}
+                  {{ block.settings.cijfer }}
+                {%- else -%}
+                  <svg><use href="#ws-h-{{ block.settings.icoon }}"/></svg>
+                {%- endif -%}
+              </span>
+              <span class="ws-hero__tekst">
+                <b>{{ block.settings.titel }}</b>
+                {%- if block.settings.tekst != blank -%}<em>{{ block.settings.tekst }}</em>{%- endif -%}
+              </span>
+            </div>
+          {%- endfor -%}
+        {%- endfor -%}
+      </div>
     </div>
   {%- endif -%}
 </div>

@@ -88,12 +88,15 @@
 .ws-hero__telling em{display:block;font-style:normal;font-size:10.5px;font-weight:600;
   letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.62);margin-top:3px}
 
-/* de garantiestrook onderaan de hero */
-.ws-hero__strook{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
-  background:#0B0B0A;border-top:1px solid rgba(245,209,138,.16);padding:26px 40px}
-.ws-hero__strook > div{display:flex;align-items:center;justify-content:center;gap:18px;
+/* de garantiestrook onderaan de hero.
+   Op desktop drie kolommen naast elkaar; de tweede reeks uit de markup
+   staat daar uit. */
+.ws-hero__strook{background:#0B0B0A;border-top:1px solid rgba(245,209,138,.16);padding:26px 40px}
+.ws-hero__band{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.ws-hero__band > div{display:flex;align-items:center;justify-content:center;gap:18px;
   padding:0 26px;min-width:0}
-.ws-hero__strook > div + div{border-left:1px solid rgba(255,255,255,.1)}
+.ws-hero__band > div + div{border-left:1px solid rgba(255,255,255,.1)}
+.ws-hero__band > div[aria-hidden]{display:none}
 .ws-hero__zegel{width:46px;height:46px;flex:none;border-radius:50%;
   border:1px solid rgba(245,209,138,.4);display:flex;align-items:center;justify-content:center;
   color:#F5D18A;font-size:13.5px;font-weight:700;letter-spacing:.02em;line-height:1}
@@ -139,15 +142,41 @@
   .ws-hero__telling{left:16px;top:18px;bottom:auto;padding:10px 14px;gap:10px}
   .ws-hero__telling b{font-size:15px}
   .ws-hero__telling em{font-size:9px}
-  .ws-hero__strook{grid-template-columns:1fr;padding:6px 18px 22px;gap:0}
-  .ws-hero__strook > div{padding:15px 0;gap:14px;justify-content:flex-start}
-  .ws-hero__strook > div + div{border-left:0;border-top:1px solid rgba(255,255,255,.1)}
-  .ws-hero__zegel{width:38px;height:38px}
-  .ws-hero__zegel svg{width:19px;height:19px}
-  .ws-hero__tekst b{font-size:11.5px}
-  .ws-hero__tekst em{font-size:12.5px}
+  /* op mobiel passen drie zekerheden met tekst niet naast elkaar in 390px,
+     dus lopen ze als één band voorbij. De band schuift precies de helft op
+     en de reeks staat er tweemaal in, dus de overgang is niet te zien. */
+  .ws-hero__strook{padding:14px 0 16px;overflow:hidden;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 26px,#000 calc(100% - 26px),transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 26px,#000 calc(100% - 26px),transparent)}
+  .ws-hero__band{display:flex;width:max-content;animation:ws-hero-band 26s linear infinite}
+  /* elk vak krijgt een scheidingslijn, ook het eerste: op het punt waar de
+     band rondloopt zou die anders ontbreken */
+  .ws-hero__band > div,.ws-hero__band > div[aria-hidden]{display:flex;flex:0 0 auto;
+    padding:4px 22px;gap:13px;justify-content:flex-start;
+    border-left:1px solid rgba(255,255,255,.12)}
+  /* raak je de band aan, dan staat hij stil zolang je hem vasthoudt */
+  .ws-hero__strook:hover .ws-hero__band,
+  .ws-hero__strook:focus-within .ws-hero__band,
+  .ws-hero__strook:active .ws-hero__band{animation-play-state:paused}
+  @keyframes ws-hero-band{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .ws-hero__zegel{width:36px;height:36px}
+  .ws-hero__zegel svg{width:18px;height:18px}
+  .ws-hero__tekst b{font-size:11px;letter-spacing:.12em;white-space:nowrap}
+  .ws-hero__tekst em{font-size:12px;white-space:nowrap}
   .ws-hero__tp{font-size:12px;gap:8px}
   .ws-hero__sterren i{width:19px;height:19px}
   .ws-hero__sterren svg{width:13px;height:13px}
   .ws-hero__tpscore,.ws-hero__tpmerk{font-size:12.5px}
+}
+
+/* Vraagt het systeem om minder beweging, dan staat de band stil en veeg je
+   er zelf doorheen. De tweede reeks gaat dan uit: die is er alleen om de
+   beweging naadloos te laten rondlopen. */
+@media (prefers-reduced-motion:reduce){
+  .ws-hero__band{animation:none}
+}
+@media (prefers-reduced-motion:reduce) and (max-width:749px){
+  .ws-hero__strook{overflow-x:auto;scrollbar-width:none}
+  .ws-hero__strook::-webkit-scrollbar{display:none}
+  .ws-hero__band > div[aria-hidden]{display:none}
 }
