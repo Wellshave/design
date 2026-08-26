@@ -505,21 +505,27 @@
           assign eigen = mf.compare_info.value
           assign alle_punten = ''
           assign laagste = 0
-          assign uitgelicht_prijs = 0
+          assign hoogste = 0
           assign uitgelicht_sleutels = ''
         -%}
         {%- for cp in vergelijk_lijst -%}
           {%- assign ci = cp.metafields.custom.compare_info.value -%}
           {%- assign cvp = cp.selected_or_first_available_variant.price -%}
           {%- if laagste == 0 or cvp < laagste -%}{%- assign laagste = cvp -%}{%- endif -%}
-          {%- if ci.is_popuplar -%}{%- assign uitgelicht_prijs = cvp -%}{%- endif -%}
+          {%- if cvp > hoogste -%}{%- assign hoogste = cvp -%}{%- endif -%}
           {%- capture kolom_sleutels %}{% render 'ws-vergelijk-sleutels', p: cp %}{% endcapture -%}
           {%- assign kolom_sleutels = kolom_sleutels | strip -%}
           {%- assign alle_punten = alle_punten | append: kolom_sleutels -%}
           {%- if ci.is_popuplar -%}{%- assign uitgelicht_sleutels = kolom_sleutels -%}{%- endif -%}
         {%- endfor -%}
         {%- assign alle_punten = alle_punten | append: '‹einde›' -%}
-        {%- assign meerprijs = uitgelicht_prijs | minus: laagste -%}
+        {%- comment -%}
+          De winstbalk gaat over de stap omhoog, dus over het gat tussen de
+          goedkoopste en de duurste kolom. Eerder werd gerekend vanaf het
+          uitgelichte model, en dat gaat mis zodra het uitgelichte model zelf de
+          goedkoopste is: dan is het verschil nul en valt de balk stil weg.
+        {%- endcomment -%}
+        {%- assign meerprijs = hoogste | minus: laagste -%}
 
         {%- comment -%}
           De drie regels boven in de pop-up horen bij het product, niet bij de

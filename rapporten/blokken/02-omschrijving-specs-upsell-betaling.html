@@ -1060,7 +1060,7 @@ strong{font-weight:700}
 </section>
 
 <section>
-  <div class="shead"><span class="snum">VOORSTEL</span><h2 class="duo">E&eacute;n woordenlijst,<span class="b">anders vergelijkt de tabel niets.</span></h2></div>
+  <div class="shead"><span class="snum">DE NEUSTRIMMERS</span><h2 class="duo">E&eacute;n woordenlijst,<span class="b">anders vergelijkt de tabel niets.</span></h2></div>
   <p class="sintro">De vergelijkingstabel ontdubbelt op letterlijk gelijke tekst. Bij de Groom Guards werkt dat, want die delen hun formuleringen. Bij de neustrimmers niet: daar schrijft elk model zijn eigen marketingregel, en dan krijgt elke rij maar bij &eacute;&eacute;n kolom een vinkje.</p>
 
   <p class="vsth">Wat er nu in <code>compare_info</code> staat</p>
@@ -1089,7 +1089,7 @@ strong{font-weight:700}
     <p>Uit <code>custom.specification</code>, dat bij alle vier ingevuld is: <strong>behuizing, messen, SkinGuard, accu, laadtijd, gebruiksduur, IPX5 en USB-opladen zijn identiek.</strong> Het enige verschil is het aantal opzetstukken &mdash; 1, 2, 3 en 4 &mdash; en welke dat zijn. Dat is de hele vergelijking. Een tabel die dat laat zien is korter &eacute;n eerlijker dan wat er nu staat.</p>
   </div>
 
-  <p class="vsth">Het voorstel &mdash; vaste namen, door alle vier gebruikt</p>
+  <p class="vsth">De woordenlijst &mdash; staat er sinds vandaag in</p>
   <div class="vstwrap">
   <table class="vst">
     <thead><tr><th>Titel</th><th>Onderregel</th><th class="mid">Basic</th><th class="mid">Premium</th><th class="mid">Advance</th><th class="mid">Ultimate</th></tr></thead>
@@ -1127,11 +1127,19 @@ strong{font-weight:700}
     <strong>Advance tegenover Ultimate:</strong> vijf rijen. Het verschil: alleen de bodygroomer.</p>
   </div>
 
-  <div class="note warn">
-    <h4>Drie dingen die jij moet beslissen</h4>
-    <p><strong>1. Oorhaar.</strong> De oude tekst belooft &laquo;neus, oren en wenkbrauwen&raquo;, de specificatie noemt oren nergens. Als het wenkbrauwopzetstuk ook voor oorhaar is, wordt de onderregel &laquo;Voor wenkbrauwen en oorhaar&raquo; en verandert <code>best_for</code> mee. Zo niet, dan moet die belofte weg.</p>
-    <p><strong>2. De winstbalk verdwijnt op twee pagina&rsquo;s.</strong> <code>is_popuplar</code> staat op de Advance. In de pop-up Advance-tegenover-Ultimate is het uitgelichte model dus het go&eacute;dkoopste, en dan is het prijsverschil nul en valt de balk weg. Dat is te repareren door het verschil te rekenen tussen de duurste en de goedkoopste kolom in plaats van tussen het uitgelichte model en de goedkoopste. Voor de Groom Guards verandert er dan niets; voor de Advance- en Ultimate-pagina komt de balk terug.</p>
-    <p><strong>3. Er staat een tweede neustrimmerlijn in de winkel.</strong> Essential&trade; (19,95), 2in1 Elite&trade; (23,95), 3in1 Platinum&trade; (29,95) en 4in1 Ultra&trade; (32,95) &mdash; allemaal actief, met andere specificaties (SafeShave&trade;-mesjes, 7000 RPM, LED-batterij-indicator, cadeauverpakking) en <strong>zonder</strong> <code>compare_info</code>. Bij die vier doet de vergelijkingsknop dus niets. Is dat de nieuwe lijn, dan moet dit voorstel daarop en niet op Basic&ndash;Ultimate.</p>
+  <div class="note win">
+    <h4>Wat er is doorgevoerd</h4>
+    <p><strong>De woordenlijst staat in de winkel.</strong> Alle vier de modellen gebruiken nu dezelfde namen, in het Nederlands, Engels, Duits en Frans. De Premium, de Advance en de Ultimate hebben <code>includes_previous</code> aan, dus ze erven de gedeelde regels van een goedkopere kolom.</p>
+    <p><strong>Oorhaar staat er nu bij.</strong> Het wenkbrauwopzetstuk heet in de tabel &laquo;Wenkbrauwtrimmer-opzetstuk&raquo; met eronder &laquo;Voor wenkbrauwen en lange oorharen&raquo;. De <code>best_for</code> van de Premium noemt neus, oren en wenkbrauwen.</p>
+    <p><strong>De winstbalk rekent anders.</strong> Het bedrag was het verschil tussen het uitgelichte model en de goedkoopste kolom. Staat het uitgelichte model zelf onderaan &mdash; zoals de Advance in de pop-up tegenover de Ultimate &mdash; dan was dat nul en viel de balk weg. Nu is het het verschil tussen de duurste en de goedkoopste kolom. Voor de Groom Guards verandert er niets; op de Advance- en Ultimate-pagina komt de balk terug.</p>
+  </div>
+
+  <div class="note">
+    <h4>De tweede lijn heeft nu ook een vergelijking</h4>
+    <p>Essential&trade; (19,95), 2in1 Elite&trade; (23,95), 3in1 Platinum&trade; (29,95) en 4in1 Ultra&trade; (32,95) hadden geen <code>compare_info</code>, dus daar deed de vergelijkingsknop niets. Ze hebben er nu elk een, met dezelfde opzet: gedeelde namen, per model wat het toevoegt.</p>
+    <p><strong>Elke pagina zet zichzelf naast de Ultra.</strong> Dat is jouw idee uit punt 1, en hier is het de enige zinnige indeling: volgens de specificaties is de Ultra de enige die echt iets anders doet &mdash; baard, lichaam en scheren. De Ultra zelf staat naast de Platinum.</p>
+    <p><strong>En daar zit meteen het probleem.</strong> Essential, Elite en Platinum noemen in hun specificatie <em>dezelfde drie zones</em>: neus, oren en wenkbrauwen. Toch heten ze 1-, 2- en 3-in-1. Wat het tweede en het derde opzetstuk d&aacute;n zijn, staat nergens. Zolang dat zo is kunnen die drie onderling niet vergeleken worden &mdash; de tabel zou drie identieke kolommen tonen. Noem je die opzetstukken, dan zijn het twee extra rijen en klopt ook die vergelijking.</p>
+    <p>Twee kleinere dingen uit dezelfde specificaties: de <strong>Elite heeft een 8000 RPM-motor</strong> tegenover 7000 bij de andere drie, terwijl de Platinum d&uacute;&uacute;rder is. En de <strong>luxe cadeauverpakking</strong> staat bij drie modellen w&eacute;l en bij de Ultra niet. Allebei laten we voorlopig uit de tabel, omdat niet duidelijk is of het een verschil is of een omissie.</p>
   </div>
 </section>
 

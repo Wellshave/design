@@ -122,6 +122,8 @@ ook het live thema.
 | `popup_lead` en `popup_winst` op de definitie `compare_info` | De kop, de lead en de winstbalk van de pop-up stonden in sectie-instellingen en waren dus winkelbreed: een neustrimmer kreeg de Groom Guard-tekst te zien. Nu per product. Gevuld voor de Groom Guard-familie en de vier neustrimmers. |
 | Vertalingen en / de / fr | De winkel heeft vier gepubliceerde talen; nl is de hoofdtaal. De sectie drukt af wat de winkel teruggeeft voor de taal waarin je kijkt, dus op `/en` staat de Engelse vertaling. `popup_lead`, `popup_winst`, `best_for` en `popup_decision` waren nieuw en hadden nog geen vertaling &mdash; de Engelse pagina was daardoor half Nederlands. Vertaald voor de Groom Guards en de vier neustrimmers, plus het label van `morgen-in-huis`. |
 | Engelse kop van de PRO stond op een ander product | `popup_main_title` in het Engels was &laquo;Compare Wellshave Flex Guard PRO&raquo; op een Groom Guard-pagina. Nu &laquo;Which Groom Guard suits you?&raquo; in en / de / fr, gelijk aan het Nederlands. Ook `product_title`, `toggle_title` en `popup_title` stonden daar nog op &laquo;Pro&raquo;. |
+| Neustrimmers Basic&ndash;Ultimate herschreven | De vier voordeeltitels per model waren losse marketingregels, dus de tabel ontdubbelde nergens. Nu een gedeelde woordenlijst van zeven rijen, `includes_previous` aan bij Premium, Advance en Ultimate, en `toggle_subtitle`, `best_for`, `popup_decision`, `popup_lead` en `popup_winst` opnieuw geschreven. In nl, en, de en fr. |
+| Vier nieuwe `compare_info`-invoeren | `neustrimmer-essential`, `-elite`, `-platinum` en `-ultra` bestonden niet, dus daar deed de vergelijkingsknop niets. Aangemaakt met dezelfde opzet en gekoppeld via `custom.compare_info`; `custom.compare_products` zet elke pagina naast de 4in1 Ultra, en de Ultra naast de Platinum. **Dit is zichtbaar op de live site**: die vier productpagina&rsquo;s hadden geen vergelijkblok en hebben dat nu wel. Terugdraaien is beide metafields daar weer leegmaken. |
 | `includes_previous` op de definitie `compare_info` | Nieuw vinkje: &laquo;bevat alles van de goedkopere modellen&raquo;. Zonder dat vinkje betekende &laquo;niet vermeld&raquo; in de tabel hetzelfde als &laquo;niet aanwezig&raquo;, en stond er bij de PRO een streepje op Skin-Safe mes. Aangezet op `groom-guard-pro`. |
 | `Pro` &rarr; `PRO` op `groom-guard-pro` | `product_title` en `toggle_title` van dat metaobject schreven `Groom Guard&trade; Pro`, terwijl `popup_title` en de producttitel zelf `PRO` schrijven. De tabelkop en de knoppen in de pop-up lezen `toggle_title`, dus daar stond &laquo;Pro&raquo;. Nu overal PRO. |
 | `popup_decision` op de definitie `compare_info` | De beslisregel onder de tabel. Per product &eacute;&eacute;n korte vraag; het antwoord is de naam van dat product. Gevuld voor de Groom Guards en de vier neustrimmers. Leeg bij alle producten betekent: geen beslisregel. |
@@ -141,14 +143,16 @@ het metafield weer op de oorspronkelijke drie zetten: `1859112894796`
   hetzelfde. Van de honderd recentste Nederlandse Trustpilot-reviews gaan er vijf
   over een product; waar er geen is, hoort het citaat leeg te blijven &mdash; dan valt
   de kaart weg.
-* **De voordeeltitels van de neustrimmers zijn geen gedeelde woordenlijst.**
-  De vier modellen schrijven ieder hun eigen marketingregel &mdash; &laquo;Compact
-  design&raquo;, &laquo;Meer precisie&raquo;, &laquo;Meer grooming controle&raquo;,
-  &laquo;Maximale veelzijdigheid&raquo;. De tabel ontdubbelt op letterlijk gelijke
-  tekst, dus dat worden dertien rijen die elk maar bij &eacute;&eacute;n model een vinkje
-  krijgen. `includes_previous` repareert dat niet en mag daar dus ook niet aan:
-  dan zou de Ultimate een vinkje krijgen bij &laquo;Single neustrimmer&raquo;. Dit
-  vraagt om herschreven titels, niet om andere logica.
+* **Essential, Elite en Platinum zijn in de tabel niet van elkaar te
+  onderscheiden.** Hun specificaties noemen alle drie dezelfde zones &mdash; neus,
+  oren en wenkbrauwen &mdash; terwijl ze 1-, 2- en 3-in-1 heten. Wat het tweede en
+  het derde opzetstuk d&aacute;n zijn, staat nergens. Daarom staat elk van die drie in
+  de pop-up naast de Ultra en niet naast elkaar. Worden die opzetstukken
+  benoemd, dan zijn het twee extra rijen en kan het wel.
+* **Twee dingen uit de specificaties die we bewust niet in de tabel zetten.**
+  De Elite heeft een 8000 RPM-motor tegenover 7000 bij de andere drie, terwijl
+  de Platinum duurder is. En de luxe cadeauverpakking staat bij drie modellen
+  w&eacute;l en bij de Ultra niet. Onduidelijk of dat verschillen zijn of omissies.
 * **De pop-upteksten staan nog niet op elke productfamilie.** `popup_main_title`,
   `popup_lead`, `popup_winst`, `best_for` en `popup_decision` in `compare_info`
   zijn gevuld voor de Groom Guards en de neustrimmers, in alle vier de talen. De
