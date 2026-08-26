@@ -14,7 +14,7 @@
 <div class="wsc">
 <section class="sectie zand" id="over-deze-categorie" aria-labelledby="{{ kop_id }}"><div class="rail">
   {%- assign heeft_beeld = false -%}
-  {%- if section.settings.tekening != blank or section.settings.beeld != blank -%}
+  {%- if section.settings.beeld != blank -%}
     {%- assign heeft_beeld = true -%}
   {%- endif -%}
   <div class="cat{% unless heeft_beeld %} solo{% endunless %}">
@@ -46,11 +46,7 @@
 
     {%- if heeft_beeld -%}
       <figure class="mech-plaat">
-        {%- if section.settings.tekening != blank -%}
-          {{ section.settings.tekening }}
-        {%- else -%}
-          {{ section.settings.beeld | image_url: width: 900 | image_tag: alt: section.settings.bijschrift }}
-        {%- endif -%}
+        {{ section.settings.beeld | image_url: width: 900 | image_tag: alt: section.settings.bijschrift }}
         {%- if section.settings.bijschrift != blank -%}
           <figcaption>{{ section.settings.bijschrift }}</figcaption>
         {%- endif -%}
@@ -90,10 +86,9 @@
     { "type": "richtext", "id": "inleiding", "label": "Inleiding", "info": "Twee of drie alinea's: wat de categorie is, waarin ze verschilt van de buurcategorie, en waarom het werkt op déze plek." },
     { "type": "text", "id": "h3_lijst", "label": "Kop boven de vergelijking", "default": "De apparaten in deze zone naast elkaar" },
     { "type": "richtext", "id": "slotalinea", "label": "Slotalinea", "info": "Bijvoorbeeld over losse messen en koppen, met een echte link." },
-    { "type": "header", "content": "Tekening" },
-    { "type": "html", "id": "tekening", "label": "Inline SVG", "info": "Alleen voor een mechanisme — een doorsnede, een kop, een blad. Nooit een getekend mens: een met de hand getekend lichaam of gezicht haalt de merklat niet. Laat leeg als er geen mechanisme uit te leggen valt; de tekst wordt dan één brede kolom." },
-    { "type": "image_picker", "id": "beeld", "label": "Of een afbeelding" },
-    { "type": "textarea", "id": "bijschrift", "label": "Bijschrift", "info": "Eén zin die het mechanisme herhaalt." },
+    { "type": "header", "content": "Beeld" },
+    { "type": "image_picker", "id": "beeld", "label": "Afbeelding", "info": "Alleen een echte foto. Getekende doorsnedes zijn hier weggehaald: een met de hand gezette lijntekening leest als een schets naast de productfoto's erboven. Laat leeg als er geen foto is — de uitleg wordt dan één brede kolom en dat is de normale vorm, niet een noodgreep." },
+    { "type": "textarea", "id": "bijschrift", "label": "Bijschrift", "info": "Eén zin bij de foto. Zeg hier niets wat de alinea's al zeggen." },
     { "type": "header", "content": "Gebruikstips" },
     { "type": "text", "id": "h3_tips", "label": "Kop boven de tips", "default": "Hoe gebruik je hem?" },
     { "type": "header", "content": "Indent settings" },

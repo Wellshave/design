@@ -97,21 +97,36 @@ prijs, en dan valt de knop op volle breedte samen met zijn eigen pijl — die is
 absoluut gepositioneerd op `right:8px`. Dat zag je terug als een pijl bovenop
 het woord "MATCH".
 
-## De tekening in blok 3
+## Blok 3 heeft geen tekening — en kan er ook geen meer krijgen
 
-De uitlegsectie heeft een `tekening`-veld voor een SVG. Dat veld is **alleen voor
-een mechanisme** — een doorsnede van een scheerkop, een blad, een trimmerkam.
-Lichaam, gezicht en hoofd hadden zo'n tekening ook, en die zijn eruit: een met de
-hand getekende mens leest als slordig zodra de anatomie niet perfect is, en dat
-straalt af op een pagina die het juist van geloofwaardigheid moet hebben. Er is
-niets voor in de plaats gekomen — ook geen AI-foto van een persoon, want die
-ondergraaft hetzelfde argument een stap verder; de zones staan bovenaan al als
-echte foto's.
+Dit is twee keer misgegaan en staat hier zodat het geen derde keer gebeurt.
 
-Laat het veld leeg als er geen mechanisme uit te leggen valt. De sectie krijgt dan
-`.cat.solo` en de tekst wordt één brede kolom van zo'n 70 tekens per regel. Zo
-staan `collection.overzicht.json` en `collection.zone-hoofd.json` er nu bij;
-gezicht, neus en lichaam houden hun doorsnede.
+Eerst stonden er getekende lichamen en gezichten in blok 3. Die zijn eruit gehaald:
+een met de hand getekende mens leest als slordig zodra de anatomie niet perfect is.
+De regel werd daarop *"wel een mechanisme, geen mens"*, en gezicht, neus en lichaam
+kregen een SVG-doorsnede van een scheerkop, een neuskap en een trimmerkam. Ook die
+zijn eruit, met hetzelfde oordeel: **een met de hand gezette lijntekening leest als
+een schets naast de studiofoto's van hetzelfde product in het raster erboven.**
+
+Het `tekening`-veld is daarom **weg uit het schema** van `ws-collectie-uitleg`. Er is
+alleen nog `beeld` (een échte foto) met een `bijschrift`. Wil je iets uitleggen, doe
+het in de tekst.
+
+Dat kostte niets aan inhoud. Bij alle drie de pagina's bleek het bijschrift onder de
+tekening woordelijk terug te komen in de lopende tekst — bij bodygroomers stond er
+"de kam maakt contact met de huid en leidt het haar naar het mes" onder de tekening
+en "de afgeronde kam rust op de huid en leidt de haren naar het bewegende mes" in de
+alinea erboven. Tekening en bijschrift zijn allebei geschrapt.
+
+Zonder beeld krijgt de sectie `.cat.solo`: één kolom, zo'n 70 tekens per regel, met
+de vergelijkingstabel en de tips daaronder over de volle breedte. Dat is geen
+noodgreep — `/collections/all` en de hoofdpagina stonden er altijd al zo bij, en de
+drie zonepagina's zien er nu hetzelfde uit. Alle vijf de pagina's met blok 3 zijn nu
+`solo`; nagemeten op de negen pagina's: nul tekeningen, nul `figure`-elementen.
+
+De iconen in de interface blijven wél: de vinkjes, chevrons en de pictogrammen op de
+filterknoppen komen uit een sprite en zijn symbolen, geen illustraties. Hetzelfde
+geldt voor de gegenereerde zone-iconen in het megamenu.
 
 ## Zone ordent, type benoemt
 

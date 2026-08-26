@@ -214,18 +214,24 @@ verschilt is inhoud, en dat hoort in een `dict` te staan — niet in de opmaak.
   die inhoudelijk over dát apparaat gaan, en schrijf in de bronregel wat er aan de hand is: dat is
   geloofwaardiger dan acht keer hetzelfde cijfer op acht kaarten — precies het gebrek waar de
   redesign mee begon.
-- **Een tekening die niet in één blik leesbaar is, moet een ander onderwerp krijgen.** Een
-  mechanische doorsnede werkt alleen als het mechanisme in twee vormen te vatten is. Lukt dat
-  niet, kies dan een kaart in plaats van een doorsnede: welk apparaat doet welk stuk. Dat legt
-  vaak méér uit dan het mechanisme, want het beantwoordt de vraag waarmee de bezoeker binnenkomt.
-- **Teken een mechanisme, nooit een mens.** Een doorsnede van een scheerkop, een blad of een
-  trimmerkam houdt de merklat: het is een object, de lijnen kloppen of ze kloppen niet, en de
-  lezer ziet meteen waar hij naar kijkt. Een met de hand getekend lichaam of gezicht haalt die
-  lat niet — anatomie leest als slordig zodra ze niet perfect is, en dat straalt af op de rest
-  van de pagina, juist op een pagina die het van geloofwaardigheid moet hebben. Valt er geen
-  mechanisme uit te leggen, laat het beeld dan wég: de uitleg wordt één brede kolom en dat leest
-  prima. Zet er geen AI-gegenereerde foto van een persoon voor in de plaats; dat ondergraaft
-  hetzelfde argument nog een stap verder. De zones staan bovenaan al als echte foto's.
+- **Teken niets.** Geen mens, en ook geen mechanisme. Dit is twee keer misgegaan: eerst met
+  getekende lichamen en gezichten, daarna — nadat de regel was aangescherpt tot "wel een
+  mechanisme, geen mens" — met met de hand gezette SVG-doorsneden van een scheerkop, een
+  trimmerkam en een neuskap. Ook die zijn eruit gehaald, met hetzelfde oordeel: *dit ziet er
+  gewoon echt niet uit.* Een met de hand geschreven lijntekening leest als een schets naast
+  studiofoto's van hetzelfde product, en op een pagina die het van geloofwaardigheid moet
+  hebben straalt dat af op de rest.
+
+  Wat wél mag: pictogrammen in de interface (een vinkje, een chevron, een cadeautje op een
+  filterknop) en gegenereerde icoontjes in de huisstijl, zoals de zone-iconen in het megamenu.
+  Dat zijn symbolen, geen illustraties.
+
+  Valt er iets uit te leggen, leg het uit **in de tekst**. Bij alle drie de pagina's bleek het
+  bijschrift onder de tekening al woordelijk in de lopende tekst te staan — de tekening voegde
+  dus niets toe wat de alinea niet al zei. Zonder beeld wordt het blok één brede kolom
+  (`.cat.solo`), precies zoals de overzichtspagina er altijd al uitzag, en dat leest prima. Zet
+  er ook geen AI-gegenereerde foto voor in de plaats. De echte productfoto's staan al in het
+  raster erboven.
 - **Houd lintjes op kaarten kort.** Meer dan ongeveer twintig tekens wordt afgekapt in de tegel;
   het aantal bestellingen hoort dan in het matchpaneel of in de audit, niet op de kaart.
 
