@@ -839,6 +839,75 @@ Bij `zone=hoofd` splitst de derde vraag niets: de zes hoofdproducten hangen aan
 `klus` en `vorm`. De vraag wordt daar wel gesteld maar verandert het advies
 niet. Dat kan later scherper met een apart product voor "ook elders".
 
+## De bundelpagina
+
+`/collections/bundels` heeft nu een eigen sjabloon in dezelfde vorm als de
+zonepagina's: `templates/collection.bundels.json`, gebouwd uit dezelfde vier
+secties (kop met keuzehulp, raster, uitleg, slot). Er is geen nieuwe sectie voor
+nodig geweest — het raster kende bundels al: bij `cat: bundel` toont de kaart
+"N onderdelen in de doos" live uit `custom.included_box`, plus prijs,
+doorgestreepte vanprijs en de besparing als aparte pil.
+
+De collectie stond op het standaardsjabloon; `templateSuffix` staat nu op
+`bundels`, net zoals `zone-gezicht` en `overzicht` dat al deden. Dat veld is
+winkelbreed, dus vóór en na die wijziging is de live pagina opgehaald: dezelfde
+negen secties, dezelfde 557.156 bytes. Live valt terug op zijn eigen sjabloon
+omdat dit bestand daar niet bestaat.
+
+### De ruggengraat: de routine, niet de zone
+
+De veertien sets vallen in drie families plus één die niet leverbaar is:
+
+| groep | sets | waar het om draait |
+|---|---|---|
+| Lichaam & schaamstreek | 5 | bodygroomer, verschil zit in afwerking, neustrimmer en tas |
+| Haar, fades & baard | 3 | tondeuse, per trede een apparaat erbij |
+| Het hoofd kaal | 3 | zelfde 7D-set, per trede een tas erbij |
+| Barber Bro-lijn | 3 | zelfde opbouw als de Barber Packs, andere tondeuse |
+
+De keuzehulp stelt vier vragen — waarvoor, alleen trimmen of ook glad, moet er
+iets bij, en hoe berg je hem op — goed voor 54 combinaties en 11 uitkomsten.
+Alle vier splitsen ruim: 13, 5, 5 en 3 situaties.
+
+**"Hoe berg je hem op?" is geen vulvraag.** Binnen de Skull-lijn is het apparaat
+in alle drie de sets hetzelfde; wat je per trede bij koopt is de toilettas en de
+travelbag. Die vraag is daar het enige echte onderscheid, en hij werkt ook bij
+de lichaamslijn (de Essential Flex heeft als enige een harde koffer).
+
+### Drie bevindingen uit de data
+
+**Barber Bro 1.0, 2.0 en 3.0 zijn niet te koop.** Voorraad −6, `inventoryPolicy`
+DENY, `availableForSale` false. Ze staan wel gewoon in de collectie. De
+keuzehulp komt er daarom nooit op uit; in het raster staan ze in een eigen groep
+met een noot, en de kaart toont zichzelf als "Tijdelijk uitverkocht" met een
+grijze knop. Dat is een voorraadkwestie, geen ontwerpkwestie — de winkel hoort
+dit op te lossen.
+
+**Barber Pack 3.0 en Barber Bro 3.0 hebben exact dezelfde doosinhoud** — elf
+onderdelen, dezelfde elf — maar de Pack kost €124,95 en de Bro €109,95. Ook 1.0
+en 2.0 verschillen alleen in een schoonmaakborstel, met €10 tot €15 prijsverschil.
+Dat hoort een variant op één productpagina te zijn, geen twee lijnen.
+
+**De collectietekst klopt niet meer.** Hij gaat over "Shave Bundels" voor de
+schaamstreek, noemt alleen de 2.0 en de 3.0 terwijl er veertien sets zijn, en
+linkt naar `wellshave.nl` in plaats van `.com`. Hij bevat bovendien de zin dat
+het "bijna onmogelijk" is jezelf open te halen — precies de absolute belofte die
+de merkregels verbieden. Die tekst staat in de collectie zelf, niet in het thema,
+en is dus live zichtbaar; ik heb hem niet aangeraakt omdat dat live zou wijzigen.
+De nieuwe pagina gebruikt hem niet.
+
+### Wat er nog niet op staat
+
+Het bewijsblok (drie beoordelingen bij het product waar ze over gaan) ontbreekt.
+Op de zonepagina's staan daar echte citaten van geverifieerde kopers; voor de
+bundels heb ik die nog niet verzameld, en een citaat verzinnen is uitgesloten.
+De pagina is compleet zonder — blok 1, 2, 3 en 6 zijn de verplichte — maar dit
+is het eerste wat er nog bij hoort.
+
+Gemeten: alle 54 combinaties komen op de verwachte set uit, de stapper telt
+4 van 4, alle veertien kaarten renderen met hun eigen aantal onderdelen, en de
+drie uitverkochte sets tonen de grijze variant.
+
 ## Bekijken zonder te publiceren
 
 Open eerst deze link, daarna werkt elke collectiepagina in dezelfde browser:

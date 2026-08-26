@@ -1,0 +1,615 @@
+{
+  "sections": {
+    "kop": {
+      "type": "ws-collectie-kop",
+      "blocks": {
+        "vraag_1": {
+          "type": "vraag",
+          "settings": {
+            "groep": "waar",
+            "vraag": "Waar is de set voor?",
+            "opties": "lichaam|Lichaam & schaamstreek|lichaam en schaamstreek\nhaar|Haar, fades & baard|haar en baard\nhoofd|Het hoofd kaal|het hoofd kaal"
+          }
+        },
+        "vraag_2": {
+          "type": "vraag",
+          "settings": {
+            "groep": "glad",
+            "vraag": "Alleen trimmen, of ook glad afwerken?",
+            "opties": "trim|Alleen trimmen|alleen trimmen\nglad|Ook glad afwerken|ook glad afwerken"
+          }
+        },
+        "vraag_3": {
+          "type": "vraag",
+          "settings": {
+            "groep": "extra",
+            "vraag": "Moet er nog iets bij?",
+            "opties": "niets|Nee, dit is genoeg|niets extra\nneus|Een losse neustrimmer|losse neustrimmer\nlijnen|Een detailtrimmer|detailtrimmer"
+          }
+        },
+        "vraag_4": {
+          "type": "vraag",
+          "settings": {
+            "groep": "mee",
+            "vraag": "Hoe berg je hem op?",
+            "opties": "niets|Geen tas nodig|geen tas\ntas|Een tas erbij|met tas\nkoffer|Tas én harde koffer|tas en koffer"
+          }
+        },
+        "match_1": {
+          "type": "match",
+          "settings": {
+            "id": "bodynose",
+            "product": "wellshave-shave-package-2-0",
+            "naam": "Body & Nose Bundel",
+            "badge": "Instap van de lijn",
+            "zin": "Bodygroomer met oplaadstation en vier opzetkammen, plus een losse neustrimmer.",
+            "reden_1": "Zeven onderdelen in de doos",
+            "reden_2": "Opzetkammen 1,5 tot 4,5 mm",
+            "reden_3": "Losse neustrimmer erbij"
+          }
+        },
+        "match_2": {
+          "type": "match",
+          "settings": {
+            "id": "flexbundel",
+            "product": "body-beard-kit",
+            "naam": "Flex-line Bundel",
+            "badge": "Grootste voordeel",
+            "zin": "Negen onderdelen voor gezicht, baard en lichaam, inclusief de Sharpline-detailtrimmer.",
+            "reden_1": "Flex Guard met foilkop",
+            "reden_2": "Sharpline-detailtrimmer erbij",
+            "reden_3": "Negen onderdelen in de doos"
+          }
+        },
+        "match_3": {
+          "type": "match",
+          "settings": {
+            "id": "essflex",
+            "product": "essential-flex-bundel",
+            "naam": "Essential Flex Bundel",
+            "badge": "Tas én harde koffer",
+            "zin": "Trimmer met foilkop en SkinSafe-mes, met een toilettas en een harde koffer erbij.",
+            "reden_1": "Acht onderdelen in de doos",
+            "reden_2": "Foilkop voor de gladde afwerking",
+            "reden_3": "Toilettas én hard case"
+          }
+        },
+        "match_4": {
+          "type": "match",
+          "settings": {
+            "id": "spult",
+            "product": "shave-package-ultimate",
+            "naam": "Shave Package Ultimate™",
+            "badge": "Acht onderdelen",
+            "zin": "Lichaam, neus en detailwerk in één doos — samen goedkoper dan los.",
+            "reden_1": "Acht onderdelen in de doos",
+            "reden_2": "Bodygroomer én neustrimmer",
+            "reden_3": "De ruimste set in de collectie"
+          }
+        },
+        "match_5": {
+          "type": "match",
+          "settings": {
+            "id": "sp30",
+            "product": "wellshave-shave-package-3-0",
+            "naam": "Shave Package 3.0",
+            "badge": "Negen onderdelen",
+            "zin": "De neustrimmer met alle vier de opzetstukken, plus de verzorging eromheen.",
+            "reden_1": "Negen onderdelen in de doos",
+            "reden_2": "Alle vier de neusopzetstukken",
+            "reden_3": "Voordeliger dan los samengesteld"
+          }
+        },
+        "match_6": {
+          "type": "match",
+          "settings": {
+            "id": "bpack3",
+            "product": "barber-pack-3-0",
+            "naam": "Barber Pack 3.0",
+            "badge": "Meest compleet",
+            "zin": "Tondeuse, detailtrimmer, foil shaver en neustrimmer — alles voor haar, baard en fades.",
+            "reden_1": "Elf onderdelen in de doos",
+            "reden_2": "Foil shaver voor de afwerking",
+            "reden_3": "Ook een neustrimmer erbij"
+          }
+        },
+        "match_7": {
+          "type": "match",
+          "settings": {
+            "id": "bpack2",
+            "product": "barber-pack-2-0",
+            "naam": "Barber Pack 2.0",
+            "badge": "Tien onderdelen",
+            "zin": "Tondeuse, detailtrimmer en foil shaver: de lengte, de lijn en de gladde afwerking.",
+            "reden_1": "Tondeuse voor fades, haar en baard",
+            "reden_2": "Foil shaver voor de gladde afwerking",
+            "reden_3": "Tien onderdelen in de doos"
+          }
+        },
+        "match_8": {
+          "type": "match",
+          "settings": {
+            "id": "bpack1",
+            "product": "barber-pack-1-0",
+            "naam": "Barber Pack 1.0",
+            "badge": "Instap van de Barber-lijn",
+            "zin": "Tondeuse en detailtrimmer met twee sets opzetkammen, een kapperscape en een borstel.",
+            "reden_1": "Acht onderdelen in de doos",
+            "reden_2": "Opzetkammen 1,5 tot 13 mm",
+            "reden_3": "Kapperscape en schoonmaakborstel"
+          }
+        },
+        "match_9": {
+          "type": "match",
+          "settings": {
+            "id": "skull3",
+            "product": "skull-deal-3-0",
+            "naam": "Skull Deal 3.0",
+            "badge": "Acht onderdelen",
+            "zin": "Dezelfde scheerkop, plus een extra magnetische kop, een tas en een hard case.",
+            "reden_1": "Extra magnetische scheerkop",
+            "reden_2": "Tas én harde koffer",
+            "reden_3": "Acht onderdelen in de doos"
+          }
+        },
+        "match_10": {
+          "type": "match",
+          "settings": {
+            "id": "skull2",
+            "product": "skull-deal-2-0",
+            "naam": "Skull Deal 2.0",
+            "badge": "Met toilettas",
+            "zin": "Dezelfde set als de 1.0, met een toilettas erbij.",
+            "reden_1": "Zeven onderdelen in de doos",
+            "reden_2": "Tweede 7D-scheerkop erbij",
+            "reden_3": "Toilettas voor onderweg"
+          }
+        },
+        "match_11": {
+          "type": "match",
+          "settings": {
+            "id": "skull1",
+            "product": "skull-shaver-deluxe-extra-magnetische-scheerkop",
+            "naam": "Skull Deal 1.0",
+            "badge": "Instap van de Skull-lijn",
+            "zin": "Het 7D-scheerapparaat met een tweede scheerkop, een haartrimmer en een gezichtsmassager.",
+            "reden_1": "Zes onderdelen in de doos",
+            "reden_2": "Tweede 7D-scheerkop erbij",
+            "reden_3": "Haartrimmer 3,5 en 7 mm"
+          }
+        },
+        "zone_1": {
+          "type": "zone",
+          "settings": {
+            "naam": "Alle zones",
+            "aantal": "27",
+            "url": "https://wellshave.com/collections/all",
+            "huidig": false,
+            "icoon": "shopify://shop_images/ws-zone-icoon-alles.png"
+          }
+        },
+        "zone_2": {
+          "type": "zone",
+          "settings": {
+            "naam": "Lichaam & schaamstreek",
+            "aantal": "4",
+            "url": "https://wellshave.com/collections/bodygroomers",
+            "huidig": false,
+            "icoon": "shopify://shop_images/ws-zone-icoon-lichaam.png"
+          }
+        },
+        "zone_3": {
+          "type": "zone",
+          "settings": {
+            "naam": "Gezicht & baard",
+            "aantal": "11",
+            "url": "https://wellshave.com/collections/zone-gezicht",
+            "huidig": false,
+            "icoon": "shopify://shop_images/ws-zone-icoon-gezicht.png"
+          }
+        },
+        "zone_4": {
+          "type": "zone",
+          "settings": {
+            "naam": "Hoofd",
+            "aantal": "4",
+            "url": "",
+            "huidig": true,
+            "icoon": "shopify://shop_images/ws-zone-icoon-hoofd.png"
+          }
+        },
+        "zone_5": {
+          "type": "zone",
+          "settings": {
+            "naam": "Neus & oren",
+            "aantal": "8",
+            "url": "https://wellshave.com/collections/neustrimmers",
+            "huidig": false,
+            "icoon": "shopify://shop_images/ws-zone-icoon-neus.png"
+          }
+        }
+      },
+      "block_order": [
+        "vraag_1",
+        "vraag_2",
+        "vraag_3",
+        "vraag_4",
+        "match_1",
+        "match_2",
+        "match_3",
+        "match_4",
+        "match_5",
+        "match_6",
+        "match_7",
+        "match_8",
+        "match_9",
+        "match_10",
+        "match_11",
+        "zone_1",
+        "zone_2",
+        "zone_3",
+        "zone_4",
+        "zone_5"
+      ],
+      "settings": {
+        "eyebrow": "Bundels · 14 sets",
+        "kop_1": "Alles in één doos.",
+        "kop_2": "Minder dan los.",
+        "lede": "Veertien sets, elk rond één routine gebouwd: het lichaam, het haar of het hoofd. Op elke kaart staat hoeveel onderdelen erin zitten en wat dezelfde spullen los zouden kosten.",
+        "foto": "shopify://shop_images/ws-bundel-pack.webp",
+        "foto_alt": "Shave Package 3.0 met bodygroomer, detailtrimmer, opzetstukken en oplaadstation",
+        "kaartkop": "Jouw set in vier keuzes",
+        "kaartsub": "4 keuzes · direct de juiste set",
+        "kaartvraag": "Waar ga je hem voor gebruiken?",
+        "tabel": "waar=lichaam, glad=trim > bodynose\nwaar=lichaam, extra=lijnen > flexbundel\nwaar=lichaam, mee=koffer > essflex\nwaar=lichaam, extra=neus, mee=tas > spult\nwaar=lichaam, extra=neus > sp30\nwaar=lichaam > flexbundel\nwaar=haar, extra=neus > bpack3\nwaar=haar, glad=glad > bpack2\nwaar=haar > bpack1\nwaar=hoofd, mee=koffer > skull3\nwaar=hoofd, mee=tas > skull2\n > skull1",
+        "standaard": "skull1",
+        "kruimel": "Bundels",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 0
+      }
+    },
+    "raster": {
+      "type": "ws-collectie-raster",
+      "blocks": {
+        "groep_1": {
+          "type": "groep",
+          "settings": {
+            "kop": "Lichaam & schaamstreek",
+            "sub": "Vijf sets rond een bodygroomer. Ze verschillen in de afwerking, de neustrimmer en wat er meegaat op reis.",
+            "cat": "bundel",
+            "producten": [
+              "wellshave-shave-package-2-0",
+              "wellshave-shave-package-3-0",
+              "shave-package-ultimate",
+              "essential-flex-bundel",
+              "body-beard-kit"
+            ],
+            "noot": "",
+            "kicker": "",
+            "labels": "body-beard-kit = Meeste onderdelen\nwellshave-shave-package-2-0 = Instap van de lijn",
+            "link_label": "",
+            "link_url": ""
+          }
+        },
+        "groep_2": {
+          "type": "groep",
+          "settings": {
+            "kop": "Haar, fades & baard",
+            "sub": "Drie kapperssets rond een tondeuse, oplopend van kammen en detailtrimmer tot een shaver en een neustrimmer.",
+            "cat": "bundel",
+            "producten": [
+              "barber-pack-1-0",
+              "barber-pack-2-0",
+              "barber-pack-3-0"
+            ],
+            "noot": "",
+            "kicker": "",
+            "labels": "barber-pack-3-0 = Meeste onderdelen",
+            "link_label": "",
+            "link_url": ""
+          }
+        },
+        "groep_3": {
+          "type": "groep",
+          "settings": {
+            "kop": "Het hoofd kaal",
+            "sub": "Drie treden van dezelfde 7D-set. Het verschil zit in wat er meegaat, niet in het apparaat.",
+            "cat": "bundel",
+            "producten": [
+              "skull-shaver-deluxe-extra-magnetische-scheerkop",
+              "skull-deal-2-0",
+              "skull-deal-3-0"
+            ],
+            "noot": "",
+            "kicker": "",
+            "labels": "skull-deal-3-0 = Tas en travelbag",
+            "link_label": "",
+            "link_url": ""
+          }
+        },
+        "groep_4": {
+          "type": "groep",
+          "settings": {
+            "kop": "Barber Bro-lijn",
+            "sub": "Dezelfde opbouw als de Barber Packs, met een andere tondeuse.",
+            "cat": "bundel",
+            "producten": [
+              "barber-bro-1-0",
+              "barber-bro-2-0",
+              "barber-bro-3-0"
+            ],
+            "noot": "Deze drie zijn op dit moment niet leverbaar. Ze staan hier zodat je ze kunt vergelijken met de Barber Packs hierboven, die wel op voorraad zijn.",
+            "kicker": "",
+            "labels": "",
+            "link_label": "",
+            "link_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "groep_1",
+        "groep_2",
+        "groep_3",
+        "groep_4"
+      ],
+      "settings": {
+        "filter_alles": "Alles",
+        "filter_app": "Apparaten",
+        "filter_bundel": "Sets",
+        "filter_mes": "Onderdelen",
+        "vergelijken": true,
+        "sorteer_label": "Meest relevant",
+        "monogram": "shopify://shop_images/ws-mark.png",
+        "geen_score": "Nieuw · nog geen beoordelingen",
+        "uitverkocht_label": "Tijdelijk uitverkocht",
+        "uitverkocht_voet": "Tijdelijk niet leverbaar",
+        "blik_voet": "100 dagen proberen · 2 jaar garantie",
+        "mes_voet": "Vandaag besteld, morgen in huis",
+        "aanbod_product": "body-beard-kit",
+        "aanbod_eyebrow": "De ruimste set van de lijn",
+        "aanbod_zin": "Negen onderdelen voor gezicht, baard en lichaam, met de Sharpline-detailtrimmer erbij.",
+        "aanbod_knop": "Bekijk de set",
+        "slot_tekst": "sets · elke set 100 dagen te proberen",
+        "slot_link_label": "Bekijk alle producten",
+        "slot_link": "shopify://collections/all",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 0,
+        "toon_label": "Toon mij",
+        "resultaat_label": "resultaten",
+        "bundel_lint": "Meeste waarde",
+        "sorteer_prijs_op": "Prijs: laag naar hoog",
+        "sorteer_prijs_af": "Prijs: hoog naar laag",
+        "sorteer_score": "Best beoordeeld"
+      }
+    },
+    "uitleg": {
+      "type": "ws-collectie-uitleg",
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "product": "wellshave-shave-package-2-0",
+            "naam": "Body & Nose Bundel",
+            "url": "",
+            "tekst": "De instap: trimmen met opzetkammen, plus een losse neustrimmer."
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "product": "body-beard-kit",
+            "naam": "Flex-line Bundel",
+            "url": "",
+            "tekst": "De ruimste van de lichaamslijn, met een Sharpline-detailtrimmer voor de lijnen."
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "product": "barber-pack-3-0",
+            "naam": "Barber Pack 3.0",
+            "url": "",
+            "tekst": "De volledigste kapperset: tondeuse, detailtrimmer, shaver én neustrimmer."
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "product": "skull-deal-3-0",
+            "naam": "Skull Deal 3.0",
+            "url": "",
+            "tekst": "Het 7D-scheerapparaat met een tweede kop, een toilettas en een travelbag."
+          }
+        },
+        "tip_1": {
+          "type": "tip",
+          "settings": {
+            "kop": "Kijk eerst naar de doosinhoud, niet naar het nummer",
+            "tekst": "Een 3.0 is niet altijd een grotere set dan een 2.0 uit een andere lijn. Het aantal onderdelen staat op elke kaart, en dat is de vergelijking die telt."
+          }
+        },
+        "tip_2": {
+          "type": "tip",
+          "settings": {
+            "kop": "Een tas is een echt verschil, geen opsmuk",
+            "tekst": "Binnen de Skull-lijn is het apparaat in alle drie de sets hetzelfde. Wat je erbij koopt is de toilettas en de travelbag; kijk of je die nodig hebt voordat je een trede hoger gaat."
+          }
+        },
+        "tip_3": {
+          "type": "tip",
+          "settings": {
+            "kop": "Mesjes en scheerkoppen koop je later los bij",
+            "tekst": "De koppen slijten sneller dan het apparaat. Ze zijn los verkrijgbaar, dus een set hoeft geen voorraad reserveonderdelen te bevatten."
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4",
+        "tip_1",
+        "tip_2",
+        "tip_3"
+      ],
+      "settings": {
+        "eyebrow": "Over de bundels",
+        "h2_1": "Wanneer is een set",
+        "h2_2": "verstandiger dan los kopen?",
+        "inleiding": "<p>Een set is hier geen willekeurige stapel. Elke bundel is gebouwd rond één apparaat en bevat de opzetstukken die je daar in de praktijk bij nodig hebt: de kammen voor de lengte, een tweede kop voor de afwerking, en bij de ruimere sets een losse neustrimmer of detailtrimmer. Wat erin zit staat per set op de kaart.</p><p>De sets vallen in drie families. De <b>lichaamslijn</b> draait om een bodygroomer met een keramisch mes achter een kam. De <b>Barber-lijn</b> draait om een tondeuse met twee sets opzetkammen, voor haar en fades. De <b>Skull-lijn</b> draait om een scheerapparaat met roterende koppen, voor wie zijn hoofd kaal houdt. Binnen elke familie loopt het aantal onderdelen op; het apparaat zelf blijft vaak hetzelfde.</p>",
+        "h3_lijst": "Vier sets die de drie families laten zien",
+        "h3_tips": "Waar je op let bij het kiezen",
+        "slotalinea": "<p>Twijfel je tussen een set en het losse apparaat, kijk dan naar de vanprijs op de kaart: die is de som van dezelfde onderdelen los. Wil je liever met één apparaat beginnen, dan staan die per plek bij elkaar in <a href=\"https://wellshave.com/collections/bodygroomers\">lichaam en schaamstreek</a>, <a href=\"https://wellshave.com/collections/zone-gezicht\">gezicht en baard</a>, <a href=\"https://wellshave.com/collections/zone-hoofd\">hoofd</a> en <a href=\"https://wellshave.com/collections/neustrimmers\">neus en oren</a>.</p>",
+        "bijschrift": "",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 0
+      }
+    },
+    "slot": {
+      "type": "ws-collectie-slot",
+      "blocks": {
+        "zeker_1": {
+          "type": "zekerheid",
+          "settings": {
+            "icoon": "retour",
+            "kop": "100 dagen thuis proberen",
+            "tekst": "Niet goed? Je krijgt je geld terug."
+          }
+        },
+        "zeker_2": {
+          "type": "zekerheid",
+          "settings": {
+            "icoon": "schild",
+            "kop": "2 jaar garantie",
+            "tekst": "Op elk apparaat in de set."
+          }
+        },
+        "zeker_3": {
+          "type": "zekerheid",
+          "settings": {
+            "icoon": "truck",
+            "kop": "Gratis verzending vanaf €30",
+            "tekst": "Naar België gratis vanaf €49,95."
+          }
+        },
+        "zeker_4": {
+          "type": "zekerheid",
+          "settings": {
+            "icoon": "klok",
+            "kop": "Morgen in huis",
+            "tekst": "Besteld voor 23:59."
+          }
+        },
+        "vraag_1": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Is een set echt goedkoper dan de onderdelen los?",
+            "antwoord": "<p>Op elke kaart staat een vanprijs. Dat is de prijs van dezelfde onderdelen los bij elkaar opgeteld. Het verschil tussen die twee is wat de set scheelt; het staat er als bedrag bij zodat je het niet hoeft uit te rekenen.</p>"
+          }
+        },
+        "vraag_2": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Wat is het verschil tussen een 1.0, 2.0 en 3.0?",
+            "antwoord": "<p>Binnen één lijn is dat het aantal onderdelen. Bij de Skull-lijn is het apparaat in alle drie de sets hetzelfde en komt er per trede een tas bij. Bij de Barber-lijn komt er per trede een apparaat bij: eerst een shaver, dan een neustrimmer. Vergelijk daarom het aantal onderdelen op de kaart, niet het nummer.</p>"
+          }
+        },
+        "vraag_3": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Kan ik onderdelen later los bijkopen?",
+            "antwoord": "<p>Ja. Mesjes, scheerkoppen en opzetstukken zijn los verkrijgbaar bij <a href=\"https://wellshave.com/collections/accesoires\">mesjes en accessoires</a>. Een set hoeft dus geen reserveonderdelen te bevatten.</p>"
+          }
+        },
+        "vraag_4": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Waarom kan ik de Barber Bro-sets niet bestellen?",
+            "antwoord": "<p>Die drie zijn op dit moment niet leverbaar. Ze staan er nog wel bij, zodat je ze kunt vergelijken met de Barber Packs, die dezelfde opbouw hebben en wel op voorraad zijn.</p>"
+          }
+        },
+        "vraag_5": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Geldt de proefperiode ook op een set?",
+            "antwoord": "<p>Ja, 100 dagen op de hele set. Je stuurt hem compleet terug; er hoeft niets ongeopend te blijven.</p>"
+          }
+        },
+        "zone_1": {
+          "type": "zone",
+          "settings": {
+            "naam": "Lichaam & schaamstreek",
+            "tekst": "Trimmen zonder wondjes.",
+            "slot": "4 apparaten →",
+            "url": "https://wellshave.com/collections/bodygroomers"
+          }
+        },
+        "zone_2": {
+          "type": "zone",
+          "settings": {
+            "naam": "Gezicht & baard",
+            "tekst": "Scheren, trimmen en randen zetten.",
+            "slot": "11 apparaten →",
+            "url": "https://wellshave.com/collections/zone-gezicht"
+          }
+        },
+        "zone_3": {
+          "type": "zone",
+          "settings": {
+            "naam": "Neus & oren",
+            "tekst": "Detailwerk zonder trekken.",
+            "slot": "8 apparaten →",
+            "url": "https://wellshave.com/collections/neustrimmers"
+          }
+        },
+        "zone_4": {
+          "type": "zone",
+          "settings": {
+            "naam": "Alles bij elkaar",
+            "tekst": "De hele collectie, per zone gesorteerd.",
+            "slot": "Bekijk alles →",
+            "url": "https://wellshave.com/collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "zeker_1",
+        "zeker_2",
+        "zeker_3",
+        "zeker_4",
+        "vraag_1",
+        "vraag_2",
+        "vraag_3",
+        "vraag_4",
+        "vraag_5",
+        "zone_1",
+        "zone_2",
+        "zone_3",
+        "zone_4"
+      ],
+      "settings": {
+        "eyebrow": "Vragen over de sets",
+        "h2_1": "Alles wat je",
+        "h2_2": "wilt weten.",
+        "mail_regel": "<p>Staat je vraag er niet bij? Mail <b>contact@wellshave.com</b> — je krijgt antwoord van iemand uit het team, binnen één werkdag.</p>",
+        "zones_eyebrow": "Liever één apparaat?",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "kop",
+    "raster",
+    "uitleg",
+    "slot"
+  ]
+}
