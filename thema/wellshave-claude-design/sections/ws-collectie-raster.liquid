@@ -168,7 +168,16 @@
             data-prijs="{{ v.price }}" data-score="{{ score | default: 0 }}">
             <div class="wsk-shot">
               <span class="wsk-mark"></span>
-              {{ p.featured_image | image_url: width: 600 | image_tag: class: 'wsk-pack', alt: p.title, loading: 'lazy' }}
+              {%- comment -%}
+                De foto linkt naar hetzelfde product als de naam eronder. Hij staat
+                buiten de tabvolgorde en is verborgen voor schermlezers, anders krijg
+                je twee identieke stops achter elkaar; de naam draagt de linktekst.
+                Het vergelijkvinkje en de snelknop liggen op z-index 3 en blijven dus
+                boven deze link liggen.
+              {%- endcomment -%}
+              <a class="wsk-fotolink" href="{{ p.url }}" tabindex="-1" aria-hidden="true">
+                {{ p.featured_image | image_url: width: 600 | image_tag: class: 'wsk-pack', alt: '', loading: 'lazy' }}
+              </a>
               {%- if p.available == false -%}
                 <span class="wsk-tag op">{{ section.settings.uitverkocht_label | default: 'Tijdelijk uitverkocht' }}</span>
               {%- elsif label != blank -%}
@@ -199,7 +208,7 @@
               {%- if cat == 'mes' and block.settings.kicker != blank -%}
                 <span class="wsk-kicker">{{ block.settings.kicker }}</span>
               {%- endif -%}
-              <span class="wsk-naam">{{ p.title }}</span>
+              <a class="wsk-naam" href="{{ p.url }}">{{ p.title }}</a>
               {%- if p.metafields.custom.subtitle.value != blank -%}
                 <span class="wsk-wat">{{ p.metafields.custom.subtitle.value }}</span>
               {%- endif -%}
