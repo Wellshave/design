@@ -56,16 +56,15 @@
 .ws-bn__hbedrag{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
 .ws-bn__hnu{font-size:40px;font-weight:700;letter-spacing:-.03em;color:#fff;line-height:1}
 .ws-bn__hwas{font-size:19px;font-weight:500;color:rgba(255,255,255,.42);text-decoration:line-through}
-.ws-bn__hbespaar{display:inline-flex;align-items:center;background:#BC813E;color:#141312;
-  border-radius:6px;padding:8px 13px;font-size:11.5px;font-weight:800;letter-spacing:.09em;
-  text-transform:uppercase}
+.ws-bn__hbespaar{display:inline-flex;align-items:center;padding:9px 15px;font-size:11.5px;
+  font-weight:800;letter-spacing:.09em;text-transform:uppercase}
 .ws-bn__hvoorraad{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;
   color:rgba(255,255,255,.72)}
 .ws-bn__hcta{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;
-  margin-top:6px;background:linear-gradient(135deg,#F5D18A 0%,#D8AC5D 52%,#BC813E 100%);
-  color:#141312;border-radius:100px;padding:18px 22px;font-size:12.5px;font-weight:800;
-  letter-spacing:.12em;text-transform:uppercase;text-align:center}
-.ws-bn__hcta svg{width:16px;height:16px;flex:none}
+  margin-top:6px;padding:18px 22px;font-size:12.5px;font-weight:800;letter-spacing:.12em;
+  text-transform:uppercase;text-align:center;box-shadow:0 16px 34px -18px rgba(188,129,62,.95)}
+.ws-bn__hcta svg{width:16px;height:16px;flex:none;transition:transform .3s ease}
+.ws-bn__hoofd:hover .ws-bn__hcta svg{transform:translateX(4px)}
 .ws-bn__hslot{display:block;font-size:11.5px;line-height:150%;color:rgba(255,255,255,.45)}
 
 /* ── regel tussen de hoofdkaart en het rooster ── */
@@ -106,18 +105,45 @@
 .ws-bn__prijs{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
 .ws-bn__nu{font-size:23px;font-weight:700;letter-spacing:-.02em;color:#111}
 .ws-bn__was{font-size:13px;font-weight:500;color:rgba(17,17,17,.4);text-decoration:line-through}
-.ws-bn__korting{display:inline-flex;background:rgba(188,129,62,.14);color:#8F6428;border-radius:5px;
-  padding:5px 9px;font-size:10.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase}
+.ws-bn__korting{display:inline-flex;padding:6px 11px;font-size:10.5px;font-weight:800;
+  letter-spacing:.07em;text-transform:uppercase}
 .ws-bn__voorraad{display:flex;align-items:center;gap:7px;font-size:11.5px;font-weight:600;
   color:rgba(17,17,17,.6)}
 .ws-bn__stip{width:7px;height:7px;border-radius:50%;background:#2F9E5B;flex:none}
 .ws-bn__stip--uit{background:#B4453C}
 
 .ws-bn__cta{grid-area:cta;display:flex;align-items:center;justify-content:center;gap:10px;
-  border:1px solid rgba(188,129,62,.4);border-radius:100px;padding:13px 16px;font-size:11px;
-  font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#8F6428;text-align:center}
-.ws-bn__cta svg{width:15px;height:15px;flex:none}
-.ws-bn__kaart.is-uit .ws-bn__cta{background:#191816;border-color:#191816;color:#F5D18A}
+  padding:14px 16px;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  text-align:center;box-shadow:0 12px 26px -18px rgba(188,129,62,.9)}
+.ws-bn__cta svg{width:15px;height:15px;flex:none;transition:transform .3s ease}
+.ws-bn__kaart:hover .ws-bn__cta svg{transform:translateX(4px)}
+/* de uitgelichte kaart draait het om: donkere knop, gouden letters */
+.ws-bn__kaart.is-uit .ws-bn__cta{background:#191816;border-color:#191816;color:#F5D18A;
+  box-shadow:0 14px 30px -18px rgba(17,17,17,.9)}
+.ws-bn__kaart.is-uit .ws-bn__cta::after{display:none}
+
+/* ── de gouden merkknop ──
+   Knoppen en besparingslabels dragen hetzelfde verloop, dezelfde
+   afronding en dezelfde gloed. Het label is daarmee geen grijs blokje
+   meer maar hoort zichtbaar bij de knop eronder. De glans loopt één keer
+   over het vlak zodra je de kaart aanwijst; staat het systeem op minder
+   beweging, dan blijft hij stil. */
+.ws-bn__hcta,.ws-bn__cta,.ws-bn__hbespaar,.ws-bn__korting{position:relative;overflow:hidden;
+  isolation:isolate;border:1px solid rgba(255,255,255,.22);border-radius:100px;color:#141312;
+  background:linear-gradient(135deg,#F7DCA2 0%,#E4C079 46%,#C8944B 100%)}
+.ws-bn__hbespaar,.ws-bn__korting{border-radius:9px;border-color:rgba(255,255,255,.3)}
+/* de gloed langs de bovenrand geeft het vlak diepte in plaats van één platte kleur */
+.ws-bn__hcta::before,.ws-bn__cta::before,.ws-bn__hbespaar::before,.ws-bn__korting::before{
+  content:"";position:absolute;left:0;right:0;top:0;height:45%;pointer-events:none;z-index:-1;
+  background:linear-gradient(180deg,rgba(255,255,255,.42),rgba(255,255,255,0))}
+.ws-bn__hcta::after,.ws-bn__cta::after,.ws-bn__hbespaar::after,.ws-bn__korting::after{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:-1;transform:translateX(-130%);
+  background:linear-gradient(100deg,rgba(255,255,255,0) 36%,rgba(255,255,255,.62) 50%,
+    rgba(255,255,255,0) 64%)}
+.ws-bn__hoofd:hover .ws-bn__hcta::after,.ws-bn__hoofd:hover .ws-bn__hbespaar::after,
+.ws-bn__kaart:hover .ws-bn__cta::after,.ws-bn__kaart:hover .ws-bn__korting::after{
+  animation:ws-bn-glans 1.05s ease forwards}
+@keyframes ws-bn-glans{to{transform:translateX(130%)}}
 
 /* ── onderaan ── */
 .ws-bn__link{margin:30px 0 0;text-align:center}
@@ -161,7 +187,7 @@
   .ws-bn__hbedrag{align-items:baseline;gap:9px}
   .ws-bn__hnu{font-size:30px}
   .ws-bn__hwas{font-size:16px}
-  .ws-bn__hbespaar{padding:6px 10px;font-size:10.5px}
+  .ws-bn__hbespaar{padding:7px 12px;font-size:10.5px}
   .ws-bn__hvoorraad,.ws-bn__hcta,.ws-bn__hslot{width:100%}
   .ws-bn__hcta{padding:16px 14px;font-size:11.5px;letter-spacing:.09em;margin-top:2px}
   .ws-bn__hslot{font-size:10.5px}
@@ -179,9 +205,9 @@
   .ws-bn__prijs{gap:7px}
   .ws-bn__nu{font-size:19px}
   .ws-bn__was{font-size:11.5px}
-  .ws-bn__korting{padding:4px 7px;font-size:9.5px}
+  .ws-bn__korting{padding:5px 9px;font-size:9.5px}
   .ws-bn__voorraad{font-size:10.5px}
-  .ws-bn__cta{padding:11px 8px;font-size:10px;letter-spacing:.07em;gap:7px}
+  .ws-bn__cta{padding:12px 8px;font-size:10px;letter-spacing:.07em;gap:7px}
   .ws-bn__cta svg{width:13px;height:13px}
   .ws-bn__link a{font-size:12.5px}
   .ws-bn__slot{font-size:11.5px;text-align:left}
@@ -193,6 +219,8 @@
 }
 
 @media (prefers-reduced-motion:reduce){
-  .ws-bn__kaart,.ws-bn__hoofd{transition:none}
+  .ws-bn__kaart,.ws-bn__hoofd,.ws-bn__cta svg,.ws-bn__hcta svg{transition:none}
   .ws-bn__kaart:hover{transform:none}
+  .ws-bn__hoofd:hover .ws-bn__hcta::after,.ws-bn__hoofd:hover .ws-bn__hbespaar::after,
+  .ws-bn__kaart:hover .ws-bn__cta::after,.ws-bn__kaart:hover .ws-bn__korting::after{animation:none}
 }
