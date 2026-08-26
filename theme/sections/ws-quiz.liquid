@@ -197,7 +197,6 @@
       <article class="ws-qz__uitkomst" data-qz-uit="{{ block.id }}" hidden>
         <p class="ws-qz__uitlabel"><svg><use href="#ws-qz-vink"/></svg>{{ section.settings.uit_label }}</p>
         <div class="ws-qz__uitbody">
-
           <div class="ws-qz__uitbeeld">
             {%- if block.settings.foto != blank -%}
               {{ block.settings.foto | image_url: width: 900 | image_tag: alt: '', loading: 'lazy' }}
@@ -275,10 +274,10 @@
 
             {%- if p != blank -%}
               <p class="ws-qz__prijs">
-                <span class="ws-qz__nu">{{ v.price | money }}</span>
+                <span class="ws-qz__nu">{% render 'ws-euro', bedrag: v.price %}</span>
                 {%- if v.compare_at_price > v.price -%}
-                  <span class="ws-qz__was">{{ v.compare_at_price | money }}</span>
-                  <span class="ws-qz__korting">{{ section.settings.bespaar }} {{ v.compare_at_price | minus: v.price | money }}</span>
+                  <span class="ws-qz__was">{% render 'ws-euro', bedrag: v.compare_at_price %}</span>
+                  <span class="ws-qz__korting">{{ section.settings.bespaar }} {% assign ws_bedrag = v.compare_at_price | minus: v.price %}{% render 'ws-euro', bedrag: ws_bedrag %}</span>
                 {%- endif -%}
               </p>
               <p class="ws-qz__voorraad"><span class="ws-qz__stip"></span>
@@ -357,10 +356,10 @@
           {%- endif -%}
           {%- if cp != blank -%}
             <p class="ws-qz__prijs">
-              <span class="ws-qz__nu">{{ cv.price | money }}</span>
+              <span class="ws-qz__nu">{% render 'ws-euro', bedrag: cv.price %}</span>
               {%- if cv.compare_at_price > cv.price -%}
-                <span class="ws-qz__was">{{ cv.compare_at_price | money }}</span>
-                <span class="ws-qz__korting">{{ section.settings.bespaar }} {{ cv.compare_at_price | minus: cv.price | money }}</span>
+                <span class="ws-qz__was">{% render 'ws-euro', bedrag: cv.compare_at_price %}</span>
+                <span class="ws-qz__korting">{{ section.settings.bespaar }} {% assign ws_bedrag = cv.compare_at_price | minus: cv.price %}{% render 'ws-euro', bedrag: ws_bedrag %}</span>
               {%- endif -%}
             </p>
             <p class="ws-qz__voorraad"><span class="ws-qz__stip"></span>

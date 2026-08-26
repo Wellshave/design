@@ -163,7 +163,7 @@
         {%- endif -%}
         {%- if v.compare_at_price > v.price -%}
           <span class="ws-spot__deal"><b>{{ section.settings.deal_label }}</b>
-            <span>{{ v.compare_at_price | minus: v.price | money }}</span></span>
+            <span>{% assign ws_bedrag = v.compare_at_price | minus: v.price %}{% render 'ws-euro', bedrag: ws_bedrag %}</span></span>
         {%- endif -%}
       </div>
       <div class="ws-spot__body">
@@ -188,11 +188,11 @@
           {%- endfor -%}
         </ul>
         <div class="ws-spot__prijs">
-          <span class="ws-spot__nu"><b>Nu</b><span>{{ v.price | money }}</span></span>
+          <span class="ws-spot__nu"><b>Nu</b><span>{% render 'ws-euro', bedrag: v.price %}</span></span>
           {%- if v.compare_at_price > v.price -%}
             <span class="ws-spot__cmp">
-              <span class="ws-spot__was">{{ v.compare_at_price | money }}</span>
-              <span class="ws-spot__save">Je bespaart {{ v.compare_at_price | minus: v.price | money }}</span>
+              <span class="ws-spot__was">{% render 'ws-euro', bedrag: v.compare_at_price %}</span>
+              <span class="ws-spot__save">Je bespaart {% assign ws_bedrag = v.compare_at_price | minus: v.price %}{% render 'ws-euro', bedrag: ws_bedrag %}</span>
             </span>
           {%- endif -%}
         </div>

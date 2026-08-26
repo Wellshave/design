@@ -65,10 +65,10 @@
             <span class="ws-bs__wat">{{ block.settings.wat }}</span>
           {%- endif -%}
           <span class="ws-bs__prijs">
-            <span class="ws-bs__nu">{{ v.price | money }}</span>
+            <span class="ws-bs__nu">{% render 'ws-euro', bedrag: v.price %}</span>
             {%- if v.compare_at_price > v.price -%}
-              <span class="ws-bs__was">{{ v.compare_at_price | money }}</span>
-              <span class="ws-bs__save">Bespaar {{ v.compare_at_price | minus: v.price | money }}</span>
+              <span class="ws-bs__was">{% render 'ws-euro', bedrag: v.compare_at_price %}</span>
+              <span class="ws-bs__save">Bespaar {% assign ws_bedrag = v.compare_at_price | minus: v.price %}{% render 'ws-euro', bedrag: ws_bedrag %}</span>
             {%- endif -%}
           </span>
           <span class="ws-bs__go">{{ section.settings.kaart_cta }}<i><svg><use href="#ws-bs-arw"/></svg></i></span>

@@ -87,17 +87,17 @@
       {%- if p != blank -%}
         <p class="ws-kb__prijslabel">{{ section.settings.prijslabel }}</p>
         <p class="ws-kb__prijs">
-          <span class="ws-kb__nu">{{ v.price | money }}</span>
+          <span class="ws-kb__nu">{% render 'ws-euro', bedrag: v.price %}</span>
           {%- if v.compare_at_price > v.price -%}
-            <span class="ws-kb__was">{{ v.compare_at_price | money }}</span>
-            <span class="ws-kb__korting">Je bespaart {{ v.compare_at_price | minus: v.price | money }}</span>
+            <span class="ws-kb__was">{% render 'ws-euro', bedrag: v.compare_at_price %}</span>
+            <span class="ws-kb__korting">Je bespaart {% assign ws_bedrag = v.compare_at_price | minus: v.price %}{% render 'ws-euro', bedrag: ws_bedrag %}</span>
           {%- endif -%}
         </p>
         {%- if v.compare_at_price > v.price -%}
           <div class="ws-kb__verschil">
-            <div><b>{{ section.settings.verschil_links }}</b><span>{{ v.compare_at_price | money }}</span></div>
+            <div><b>{{ section.settings.verschil_links }}</b><span>{% render 'ws-euro', bedrag: v.compare_at_price %}</span></div>
             <svg><use href="#ws-kb-arw"/></svg>
-            <div><b>{{ section.settings.verschil_rechts }}</b><span>{{ v.price | money }}</span></div>
+            <div><b>{{ section.settings.verschil_rechts }}</b><span>{% render 'ws-euro', bedrag: v.price %}</span></div>
           </div>
         {%- endif -%}
         <p class="ws-kb__voorraad"><span class="ws-kb__stip"></span>

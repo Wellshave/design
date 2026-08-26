@@ -6,5 +6,5 @@
 {%- endcomment -%}
 {%- if collectie != blank -%}
   {%- assign vanaf = collectie.products | map: 'price_min' | sort | first -%}
-  {%- if vanaf -%}{{ vanaf | money }}{%- endif -%}
+  {%- if vanaf -%}{% render 'ws-euro', bedrag: vanaf %}{%- endif -%}
 {%- endif -%}

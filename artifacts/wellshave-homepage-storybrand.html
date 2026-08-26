@@ -3675,6 +3675,16 @@ footer p{margin:0;max-width:72ch}
           te liggen, en op mobiel lagen beide pijlen boven op de kaarten. Ze staan nu <b>naast de
           teller onder de baan</b>, binnen de leesbreedte. Verder is er aan dat blok niets veranderd.</p>
       </div>
+      <div class="wijz-kaart"><h3>Het euroteken terug in de prijzen</h3>
+        <p>De prijzen stonden er als <b>124,95</b> in plaats van <b>&euro;124,95</b>. Dat komt niet
+          uit een blok maar uit de <b>valutanotatie van de winkel</b>
+          (<code>{{amount_with_comma_separator}}</code>, zonder symbool): het geldt voor élke pagina,
+          élk thema, de kassa en de mails, en het is niet via de API te wijzigen. Dat blijft dus één
+          knop in Shopify onder Instellingen &rarr; Algemeen &rarr; Valutanotatie. Zolang die niet om
+          is, zetten onze eigen blokken het teken er zelf voor: een snippet dat het bedrag met rust
+          laat zodra de notatie wél een teken bevat, <b>dus nooit twee tekens</b>. Alle prijzen op de
+          homepage en de quizpagina tonen nu &euro;.</p>
+      </div>
       <div class="wijz-kaart"><h3>Wat er niet is veranderd</h3><p>Geen CSS, geen structuur, geen foto, geen prijs, geen script. Wie dit artefact naast het huidige ontwerp legt, ziet dezelfde pagina met andere woorden. <b>De stap naar het thema is daarmee een tekstwijziging</b>, niet een verbouwing.</p></div>
     </div>
   </section>

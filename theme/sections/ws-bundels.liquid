@@ -73,13 +73,13 @@
       <span class="ws-bn__hkassa">
         {%- if hp != blank -%}
           <span class="ws-bn__hbedrag">
-            <span class="ws-bn__hnu">{{ hv.price | money }}</span>
+            <span class="ws-bn__hnu">{% render 'ws-euro', bedrag: hv.price %}</span>
             {%- if hv.compare_at_price > hv.price -%}
-              <span class="ws-bn__hwas">{{ hv.compare_at_price | money }}</span>
+              <span class="ws-bn__hwas">{% render 'ws-euro', bedrag: hv.compare_at_price %}</span>
             {%- endif -%}
           </span>
           {%- if hv.compare_at_price > hv.price -%}
-            <span class="ws-bn__hbespaar"><svg><use href="#ws-bn-tag"/></svg>{{ section.settings.bespaar }} {{ hv.compare_at_price | minus: hv.price | money }}</span>
+            <span class="ws-bn__hbespaar"><svg><use href="#ws-bn-tag"/></svg>{{ section.settings.bespaar }} {% assign ws_bedrag = hv.compare_at_price | minus: hv.price %}{% render 'ws-euro', bedrag: ws_bedrag %}</span>
           {%- endif -%}
           <span class="ws-bn__hvoorraad">
             {%- if hv.available -%}
@@ -127,13 +127,13 @@
             <span class="ws-bn__rek"></span>
             {%- if p != blank -%}
               <span class="ws-bn__prijs">
-                <span class="ws-bn__nu">{{ v.price | money }}</span>
+                <span class="ws-bn__nu">{% render 'ws-euro', bedrag: v.price %}</span>
                 {%- if v.compare_at_price > v.price -%}
-                  <span class="ws-bn__was">{{ v.compare_at_price | money }}</span>
+                  <span class="ws-bn__was">{% render 'ws-euro', bedrag: v.compare_at_price %}</span>
                 {%- endif -%}
               </span>
               {%- if v.compare_at_price > v.price -%}
-                <span class="ws-bn__korting"><svg><use href="#ws-bn-tag"/></svg>{{ section.settings.bespaar_kort }} {{ v.compare_at_price | minus: v.price | money }}</span>
+                <span class="ws-bn__korting"><svg><use href="#ws-bn-tag"/></svg>{{ section.settings.bespaar_kort }} {% assign ws_bedrag = v.compare_at_price | minus: v.price %}{% render 'ws-euro', bedrag: ws_bedrag %}</span>
               {%- endif -%}
               <span class="ws-bn__voorraad">
                 {%- if v.available -%}

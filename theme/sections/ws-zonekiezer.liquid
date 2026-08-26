@@ -133,7 +133,7 @@
             </ul>
           </div>
           {%- if p != blank -%}
-            <p class="ws-zf__prijs"><b>{{ v.price | money }}</b></p>
+            <p class="ws-zf__prijs"><b>{% render 'ws-euro', bedrag: v.price %}</b></p>
             <a class="ws-zf__cta" href="{{ p.url }}">{{ block.settings.cta | default: p.title }}<span><svg><use href="#ws-zf-arw"/></svg></span></a>
           {%- endif -%}
           {%- if col != blank -%}
