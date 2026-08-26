@@ -20,6 +20,8 @@
   <symbol id="ws-zf-nose" viewBox="0 0 24 24"><path d="M12.6 3.4v5.4l2.8 5.1c.5 1-.1 2.1-1.2 2.1h-1.1c0 1.8-1.3 3.2-3.1 3.2-1.7 0-3-1.2-3.2-2.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.6 8.4c1.5 0 2.7 1.2 2.7 2.7 0 2-1.2 2.4-1.2 4.1 0 1.4.4 2 .4 3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
   <symbol id="ws-zf-arw" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="ws-zf-chk" viewBox="0 0 24 24"><path d="M4 12.5l5.2 5.2L20 6.9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-zf-kalender" viewBox="0 0 24 24"><rect x="3.4" y="5.4" width="17.2" height="15.2" rx="2.6" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3.4 10.4h17.2M8.2 3.2v4.2M15.8 3.2v4.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+  <symbol id="ws-zf-schild" viewBox="0 0 24 24"><path d="M12 2.9l7.4 2.9v5.9c0 4.4-3 8.3-7.4 9.4-4.4-1.1-7.4-5-7.4-9.4V5.8L12 2.9z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M8.8 12.1l2.3 2.3 4.2-4.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="ws-zf-veeg" viewBox="0 0 24 24"><path d="M4 12h16M15 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </svg>
 
@@ -145,10 +147,13 @@
     </div>
   </div>
 
+  {%- comment -%} De rondjes droegen eerst de cijfers 100 en 2, terwijl die
+    ook al in de tekst ernaast stonden. Nu dragen ze een icoon en zegt de
+    tekst het getal één keer. {%- endcomment -%}
   <div class="ws-zf__strip">
     <div><span class="ws-zf__zegel"><svg><use href="#ws-zf-chk"/></svg></span><span>{{ section.settings.strip_1 }}</span></div>
-    <div><span class="ws-zf__zegel">100</span><span>{{ section.settings.strip_2 }}</span></div>
-    <div><span class="ws-zf__zegel">2</span><span>{{ section.settings.strip_3 }}</span></div>
+    <div><span class="ws-zf__zegel"><svg><use href="#ws-zf-kalender"/></svg></span><span>{{ section.settings.strip_2 }}</span></div>
+    <div><span class="ws-zf__zegel"><svg><use href="#ws-zf-schild"/></svg></span><span>{{ section.settings.strip_3 }}</span></div>
   </div>
 
 </div></div>

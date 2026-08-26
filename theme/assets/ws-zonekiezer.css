@@ -112,10 +112,10 @@
 .ws-zf__strip > div{display:flex;align-items:center;justify-content:center;gap:14px;font-size:14px;
   color:rgba(17,17,17,.66);padding:2px 14px}
 .ws-zf__strip > div + div{border-left:1px solid rgba(17,17,17,.1)}
-.ws-zf__strip b{font-weight:600;color:#111}
+.ws-zf__strip b,.ws-zf__strip strong{font-weight:700;color:#111}
 .ws-zf__zegel{width:38px;height:38px;flex:none;border-radius:50%;
   border:1px solid rgba(188,129,62,.4);display:flex;align-items:center;justify-content:center;
-  color:#BC813E;font-size:11px;font-weight:700;letter-spacing:.02em}
+  color:#BC813E}
 .ws-zf__zegel svg{width:19px;height:19px}
 
 /* de veegbare zonerail staat alleen op mobiel */
@@ -218,9 +218,14 @@
   .ws-zf__cta span{width:32px;height:32px}
   .ws-zf__cta span svg{width:16px;height:16px}
   .ws-zf__alle{justify-self:center;font-size:12.5px;text-align:center;line-height:145%}
-  .ws-zf__strip{padding:14px 4px}
-  .ws-zf__strip > div{flex-direction:column;gap:8px;text-align:center;font-size:10.5px;
-    font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:2px 4px;
-    color:rgba(17,17,17,.72)}
-  .ws-zf__strip b{display:block}
+  /* align-items:stretch laat de drie vakken even hoog worden, zodat de
+     rondjes op één lijn staan en de scheidingslijnen doorlopen. Kapitalen
+     maakten de regels drie lagen hoog; kleine letters passen in twee. */
+  .ws-zf__strip{padding:14px 2px;align-items:stretch}
+  .ws-zf__strip > div{flex-direction:column;justify-content:flex-start;gap:9px;text-align:center;
+    font-size:11.5px;line-height:142%;font-weight:500;letter-spacing:0;text-transform:none;
+    padding:2px 6px;color:rgba(17,17,17,.62)}
+  .ws-zf__strip b,.ws-zf__strip strong{display:block}
+  .ws-zf__zegel{width:32px;height:32px}
+  .ws-zf__zegel svg{width:17px;height:17px}
 }

@@ -833,10 +833,9 @@ footer p{margin:0;max-width:72ch}
 .zf-strip > div{display:flex;align-items:center;justify-content:center;gap:14px;
   font-size:14px;color:rgba(17,17,17,.66);padding:2px 14px}
 .zf-strip > div + div{border-left:1px solid rgba(17,17,17,.1)}
-.zf-strip b{font-weight:600;color:#111}
+.zf-strip b,.zf-strip strong{font-weight:700;color:#111}
 .zf-zegel{width:38px;height:38px;flex:none;border-radius:50%;border:1px solid rgba(188,129,62,.4);
-  display:flex;align-items:center;justify-content:center;color:#BC813E;
-  font-size:11px;font-weight:700;letter-spacing:.02em}
+  display:flex;align-items:center;justify-content:center;color:#BC813E}
 .zf-zegel svg{width:19px;height:19px}
 
 /* ── mobiel ── */
@@ -938,10 +937,16 @@ footer p{margin:0;max-width:72ch}
 .zf-m .zf-cta span{width:32px;height:32px}
 .zf-m .zf-cta span svg{width:16px;height:16px}
 .zf-m .zf-alle{justify-self:center;font-size:12.5px;text-align:center;line-height:145%}
-.zf-m .zf-strip{padding:14px 4px}
-.zf-m .zf-strip > div{flex-direction:column;gap:8px;text-align:center;font-size:10.5px;
-  font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:2px 4px;color:rgba(17,17,17,.72)}
-.zf-m .zf-strip b{display:block}
+/* align-items:stretch laat de drie vakken even hoog worden, zodat de rondjes
+   op één lijn staan en de scheidingslijnen doorlopen. Kapitalen maakten de
+   regels drie lagen hoog; kleine letters passen in twee. */
+.zf-m .zf-strip{padding:14px 2px;align-items:stretch}
+.zf-m .zf-strip > div{flex-direction:column;justify-content:flex-start;gap:9px;text-align:center;
+  font-size:11.5px;line-height:142%;font-weight:500;letter-spacing:0;text-transform:none;
+  padding:2px 6px;color:rgba(17,17,17,.62)}
+.zf-m .zf-strip b,.zf-m .zf-strip strong{display:block}
+.zf-m .zf-zegel{width:32px;height:32px}
+.zf-m .zf-zegel svg{width:17px;height:17px}
 
 @media (prefers-reduced-motion: reduce){
   .zf-paneel{animation:none}
@@ -1672,7 +1677,7 @@ footer p{margin:0;max-width:72ch}
 <symbol id="mensen" viewBox="0 0 24 24"><circle cx="9.2" cy="8.4" r="3.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M2.9 19.4c.5-3.2 3.2-5.2 6.3-5.2s5.8 2 6.3 5.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M15.8 5.4a3.4 3.4 0 0 1 0 6.6M17.4 14.6c2.1.5 3.5 2.2 3.8 4.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 <symbol id="shield" viewBox="0 0 24 24"><path d="M12 2.6l7.2 2.8v6.1c0 4.4-3 8.4-7.2 9.9-4.2-1.5-7.2-5.5-7.2-9.9V5.4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.7 12.1l2.3 2.3 4.3-4.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 <symbol id="arw" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-<symbol id="chk" viewBox="0 0 24 24"><path d="M4 12.5l5.2 5.2L20 6.9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="zf-kalender" viewBox="0 0 24 24"><rect x="3.4" y="5.4" width="17.2" height="15.2" rx="2.6" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3.4 10.4h17.2M8.2 3.2v4.2M15.8 3.2v4.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol><symbol id="zf-schild" viewBox="0 0 24 24"><path d="M12 2.9l7.4 2.9v5.9c0 4.4-3 8.3-7.4 9.4-4.4-1.1-7.4-5-7.4-9.4V5.8L12 2.9z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M8.8 12.1l2.3 2.3 4.2-4.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="chk" viewBox="0 0 24 24"><path d="M4 12.5l5.2 5.2L20 6.9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 <symbol id="guarantee" viewBox="0 0 24 24"><circle cx="12" cy="9.6" r="6.4" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8.3 15.1L7 21.6l5-2.4 5 2.4-1.3-6.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
 <symbol id="chkc" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10.1" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M7.7 12.3l2.9 2.9 5.7-6.1" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 <symbol id="people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M2.8 19.4c0-3.2 2.8-5.2 6.2-5.2s6.2 2 6.2 5.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M16.4 5.2a3.3 3.3 0 0 1 0 6.4M17.6 14.6c2.3.5 3.9 2.2 3.9 4.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
@@ -2731,8 +2736,8 @@ footer p{margin:0;max-width:72ch}
 
         <div class="zf-strip">
           <div><span class="zf-zegel"><svg><use href="#chk"/></svg></span><span><b>Bot mes?</b> Je koopt de kop los</span></div>
-          <div><span class="zf-zegel">100</span><span><b>100 dagen</b> om te beslissen</span></div>
-          <div><span class="zf-zegel">2</span><span><b>2 jaar</b> garantie op jouw apparaat</span></div>
+          <div><span class="zf-zegel"><svg><use href="#zf-kalender"/></svg></span><span><b>100 dagen</b> om te beslissen</span></div>
+          <div><span class="zf-zegel"><svg><use href="#zf-schild"/></svg></span><span><b>2 jaar</b> garantie op jouw apparaat</span></div>
         </div>
 
       </div></section></div></div>
@@ -2874,8 +2879,8 @@ footer p{margin:0;max-width:72ch}
 
         <div class="zf-strip">
           <div><span class="zf-zegel"><svg><use href="#chk"/></svg></span><span>Kop los te koop</span></div>
-          <div><span class="zf-zegel">100</span><span>100 dagen bedenktijd</span></div>
-          <div><span class="zf-zegel">2</span><span>2 jaar garantie</span></div>
+          <div><span class="zf-zegel"><svg><use href="#zf-kalender"/></svg></span><span>100 dagen bedenktijd</span></div>
+          <div><span class="zf-zegel"><svg><use href="#zf-schild"/></svg></span><span>2 jaar garantie</span></div>
         </div>
 
       </div></section></div></div>
