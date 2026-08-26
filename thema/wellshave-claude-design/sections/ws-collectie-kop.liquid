@@ -24,20 +24,7 @@
   <symbol id="wsc-truck" viewBox="0 0 24 24"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/><circle cx="7" cy="18" r="1.6" fill="none" stroke="currentColor" stroke-width="2.1"/><circle cx="17" cy="18" r="1.6" fill="none" stroke="currentColor" stroke-width="2.1"/></symbol>
 </svg>
 
-<section class="kop{% if section.settings.achtergrond != blank %} met-achter{% endif %}"{% if section.settings.achtergrond != blank %} style="--achter-donker:{{ section.settings.achter_donker | default: 72 }}%"{% endif %}>
-  {%- comment -%}
-    De achtergrond is een foto per categorie in plaats van een vlakke donkere kleur.
-    Hij staat als <img> in het document (niet als CSS-background) zodat Shopify er een
-    srcset bij levert; de sluier eroverheen is een aparte laag, zodat de tekst
-    leesbaar blijft ongeacht hoe licht de foto is.
-  {%- endcomment -%}
-  {%- if section.settings.achtergrond != blank -%}
-    <div class="kop-achter" aria-hidden="true">
-      {{ section.settings.achtergrond | image_url: width: 2400 | image_tag:
-         alt: '', loading: 'eager', fetchpriority: 'high', sizes: '100vw' }}
-      <span class="kop-sluier"></span>
-    </div>
-  {%- endif -%}
+<section class="kop">
   {%- assign heeft_hulp = false -%}
   {%- for block in section.blocks -%}
     {%- if block.type == 'vraag' or block.type == 'match' -%}{%- assign heeft_hulp = true -%}{%- endif -%}
@@ -318,8 +305,6 @@
     { "type": "textarea", "id": "lede", "label": "Inleiding", "info": "Eén tot twee zinnen." },
     { "type": "image_picker", "id": "foto", "label": "Foto van het apparaat in gebruik", "info": "Staat als plaat in de kolom, verhouding 16:8. Geen volle achtergrondband." },
     { "type": "text", "id": "foto_alt", "label": "Alttekst bij de foto" },
-    { "type": "image_picker", "id": "achtergrond", "label": "Achtergrondfoto van de kop", "info": "Een rustige omgevingsfoto die bij de categorie past. Er komt een donkere sluier overheen, dus de foto werkt als textuur en niet als plaatje. Laat leeg voor de vlakke donkere kop." },
-    { "type": "range", "id": "achter_donker", "label": "Hoe donker de sluier", "min": 40, "max": 92, "step": 2, "unit": "%", "default": 72 },
     { "type": "header", "content": "Bewijskaart" },
     { "type": "text", "id": "score", "label": "Score", "info": "Bijvoorbeeld 4,8/5. Laat leeg om de kaart te verbergen.", "default": "4,8/5" },
     { "type": "range", "id": "sterren", "label": "Volle sterren", "min": 0, "max": 5, "step": 1, "default": 4 },
