@@ -1,0 +1,225 @@
+{% comment %}
+  Wellshave — de bundelpagina.
+
+  Deze sectie hoort op templates/collection.bundels.json en toont álle sets
+  uit de collectie, niet een handmatige selectie: een bezoeker die op
+  "Bundels" klikt wil de hele lijst zien. Naam, prijs, van-prijs, besparing
+  en voorraad komen live uit Shopify, en de drie getallen in de kop worden
+  hier uitgerekend — er staat dus nooit een cijfer in een tekstveld dat kan
+  gaan afwijken.
+
+  De kaarten dragen de klassen van het setsblok op de homepage, zodat de
+  vormgeving op één plek staat. Daarom laadt deze sectie ook ws-bundels.css.
+
+  Sets zonder voorraad staan onderaan: ze mogen zichtbaar blijven, maar ze
+  horen niet vóór de sets die je vandaag kunt bestellen.
+{% endcomment %}
+
+{{ 'ws-bundels.css' | asset_url | stylesheet_tag }}
+{{ 'ws-bundelrek.css' | asset_url | stylesheet_tag }}
+
+{% render 'indent-settings', section: section %}
+
+{%- assign col = section.settings.collectie | default: collection -%}
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="ws-br-arw" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-br-vink" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-br-tag" viewBox="0 0 24 24"><path d="M11.6 3.2H4.9a1.7 1.7 0 00-1.7 1.7v6.7c0 .45.18.88.5 1.2l7.5 7.5a1.7 1.7 0 002.4 0l6.7-6.7a1.7 1.7 0 000-2.4l-7.5-7.5a1.7 1.7 0 00-1.2-.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="8" cy="8" r="1.5" fill="currentColor"/></symbol>
+</svg>
+
+{%- comment -%} De drie getallen in de kop. Eén doorloop over de collectie:
+  hoeveel sets, wat is het grootste voordeel, en wat kost de goedkoopste.
+  Alleen bestelbare sets tellen mee voor de vanaf-prijs — anders belooft de
+  kop een prijs die je vandaag niet kunt afrekenen. {%- endcomment -%}
+{%- assign aantal = 0 -%}
+{%- assign hoogste = 0 -%}
+{%- assign laagste = 0 -%}
+{%- for p in col.products -%}
+  {%- assign v = p.selected_or_first_available_variant -%}
+  {%- assign aantal = aantal | plus: 1 -%}
+  {%- if v.compare_at_price > v.price -%}
+    {%- assign verschil = v.compare_at_price | minus: v.price -%}
+    {%- if verschil > hoogste -%}{%- assign hoogste = verschil -%}{%- endif -%}
+  {%- endif -%}
+  {%- if v.available -%}
+    {%- if laagste == 0 or v.price < laagste -%}{%- assign laagste = v.price -%}{%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
+
+<div class="ws-bn ws-br" data-ws-bundelrek>
+
+  <div class="ws-br__kop">
+    <div class="ws-br__kopin">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="ws-br__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      {%- if section.settings.kop != blank -%}
+        <h1 class="ws-br__h1">{{ section.settings.kop }}</h1>
+      {%- endif -%}
+      {%- if section.settings.sub != blank -%}
+        <p class="ws-br__sub">{{ section.settings.sub }}</p>
+      {%- endif -%}
+      <div class="ws-br__cijfers">
+        <div><b>{{ aantal }}</b><span>{{ section.settings.label_sets }}</span></div>
+        {%- if hoogste > 0 -%}
+          <div><b>{% render 'ws-euro', bedrag: hoogste %}</b><span>{{ section.settings.label_voordeel }}</span></div>
+        {%- endif -%}
+        {%- if laagste > 0 -%}
+          <div><b>{% render 'ws-euro', bedrag: laagste %}</b><span>{{ section.settings.label_vanaf }}</span></div>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.zeker_1 != blank or section.settings.zeker_2 != blank or section.settings.zeker_3 != blank -%}
+        <p class="ws-br__zeker">
+          {%- if section.settings.zeker_1 != blank -%}<span><svg><use href="#ws-br-vink"/></svg>{{ section.settings.zeker_1 }}</span>{%- endif -%}
+          {%- if section.settings.zeker_2 != blank -%}<span><svg><use href="#ws-br-vink"/></svg>{{ section.settings.zeker_2 }}</span>{%- endif -%}
+          {%- if section.settings.zeker_3 != blank -%}<span><svg><use href="#ws-br-vink"/></svg>{{ section.settings.zeker_3 }}</span>{%- endif -%}
+        </p>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <div class="ws-bn__in">
+
+    {%- comment -%} De sorteerknoppen werken in de browser: de kaarten staan
+      er allemaal al, JavaScript zet alleen hun volgorde om. Zonder
+      JavaScript blijft de serverzijde-volgorde staan en werkt de pagina
+      gewoon. {%- endcomment -%}
+    <div class="ws-br__balk">
+      <p class="ws-br__telling"><b>{{ aantal }}</b> {{ section.settings.telling }}</p>
+      <div class="ws-br__sorteer" role="group" aria-label="{{ section.settings.sorteer_label | escape }}">
+        <span>{{ section.settings.sorteer_label }}</span>
+        <button type="button" data-sorteer="voordeel" aria-pressed="true">{{ section.settings.sorteer_voordeel }}</button>
+        <button type="button" data-sorteer="laag" aria-pressed="false">{{ section.settings.sorteer_laag }}</button>
+        <button type="button" data-sorteer="hoog" aria-pressed="false">{{ section.settings.sorteer_hoog }}</button>
+      </div>
+    </div>
+
+    <div class="ws-bn__rooster ws-br__rooster" data-rek>
+      {%- for beurt in (1..2) -%}
+        {%- for p in col.products -%}
+          {%- assign v = p.selected_or_first_available_variant -%}
+          {%- comment -%} beurt 1 zijn de bestelbare sets, beurt 2 de rest {%- endcomment -%}
+          {%- if beurt == 1 and v.available == false -%}{%- continue -%}{%- endif -%}
+          {%- if beurt == 2 and v.available -%}{%- continue -%}{%- endif -%}
+          {%- assign verschil = 0 -%}
+          {%- if v.compare_at_price > v.price -%}
+            {%- assign verschil = v.compare_at_price | minus: v.price -%}
+          {%- endif -%}
+          <a class="ws-bn__kaart{% unless v.available %} ws-br__kaart--uit{% endunless %}" href="{{ p.url }}"
+            data-prijs="{{ v.price }}" data-voordeel="{{ verschil }}" data-voorraad="{% if v.available %}1{% else %}0{% endif %}">
+            <span class="ws-bn__beeld">
+              {%- if p.featured_image -%}
+                {{ p.featured_image | image_url: width: 500 | image_tag: loading: 'lazy' }}
+              {%- endif -%}
+            </span>
+            <span class="ws-bn__body">
+              <span class="ws-bn__naam">{{ p.title }}</span>
+              <span class="ws-bn__rek"></span>
+              <span class="ws-bn__prijs">
+                <span class="ws-bn__nu">{% render 'ws-euro', bedrag: v.price %}</span>
+                {%- if verschil > 0 -%}
+                  <span class="ws-bn__was">{% render 'ws-euro', bedrag: v.compare_at_price %}</span>
+                {%- endif -%}
+              </span>
+              {%- if verschil > 0 -%}
+                <span class="ws-bn__korting"><svg><use href="#ws-br-tag"/></svg>{{ section.settings.bespaar_kort }} {% render 'ws-euro', bedrag: verschil %}</span>
+              {%- endif -%}
+              <span class="ws-bn__voorraad">
+                {%- if v.available -%}
+                  <span class="ws-bn__stip"></span>{{ section.settings.voorraad_wel }}
+                {%- else -%}
+                  <span class="ws-bn__stip ws-bn__stip--uit"></span>{{ section.settings.voorraad_niet }}
+                {%- endif -%}
+              </span>
+            </span>
+            <span class="ws-bn__cta">{{ section.settings.kaart_cta }}<svg><use href="#ws-br-arw"/></svg></span>
+          </a>
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.slot != blank -%}
+      <p class="ws-bn__slot"><svg><use href="#ws-br-vink"/></svg>{{ section.settings.slot }}</p>
+    {%- endif -%}
+    {%- if section.settings.link_label != blank -%}
+      <p class="ws-bn__link">
+        <a href="{{ section.settings.link | default: '/collections/all' }}">{{ section.settings.link_label }}<svg><use href="#ws-br-arw"/></svg></a>
+      </p>
+    {%- endif -%}
+
+  </div>
+</div>
+
+<script>
+  (function () {
+    document.querySelectorAll('[data-ws-bundelrek]').forEach(function (sec) {
+      if (sec.dataset.wsKlaar) return;
+      sec.dataset.wsKlaar = '1';
+      var rek = sec.querySelector('[data-rek]');
+      var knoppen = sec.querySelectorAll('[data-sorteer]');
+      if (!rek || !knoppen.length) return;
+      var kaarten = [].slice.call(rek.children);
+
+      function zet(soort) {
+        var lijst = kaarten.slice().sort(function (a, b) {
+          // uitverkochte sets blijven altijd achteraan, wat je ook sorteert
+          var va = +a.dataset.voorraad, vb = +b.dataset.voorraad;
+          if (va !== vb) return vb - va;
+          if (soort === 'laag') return a.dataset.prijs - b.dataset.prijs;
+          if (soort === 'hoog') return b.dataset.prijs - a.dataset.prijs;
+          return b.dataset.voordeel - a.dataset.voordeel;
+        });
+        lijst.forEach(function (k, i) { k.style.order = i; });
+        knoppen.forEach(function (k) {
+          k.setAttribute('aria-pressed', k.dataset.sorteer === soort ? 'true' : 'false');
+        });
+      }
+      knoppen.forEach(function (k) {
+        k.addEventListener('click', function () { zet(k.dataset.sorteer); });
+      });
+      zet('voordeel');
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "WS · Bundelrek",
+  "tag": "section",
+  "settings": [
+    { "type": "collection", "id": "collectie", "label": "Collectie", "info": "Leeg = de collectie van de pagina zelf." },
+    { "type": "text", "id": "eyebrow", "label": "Bovenregel", "default": "Alle sets op één rij" },
+    { "type": "inline_richtext", "id": "kop", "label": "Kop (vet = goud)", "default": "Eén doos. <b>Alles wat je nodig hebt.</b>" },
+    { "type": "textarea", "id": "sub", "label": "Subkop", "default": "Je koopt de apparaten samen goedkoper dan los, je mist geen onderdeel, en je hebt honderd dagen om te beslissen of het bij je past." },
+    { "type": "header", "content": "De drie getallen" },
+    { "type": "text", "id": "label_sets", "label": "Label bij het aantal", "default": "sets om uit te kiezen" },
+    { "type": "text", "id": "label_voordeel", "label": "Label bij het voordeel", "default": "voordeel op de grootste set" },
+    { "type": "text", "id": "label_vanaf", "label": "Label bij de vanaf-prijs", "default": "de goedkoopste set" },
+    { "type": "text", "id": "zeker_1", "label": "Zekerheid 1", "default": "100 dagen proberen" },
+    { "type": "text", "id": "zeker_2", "label": "Zekerheid 2", "default": "2 jaar garantie" },
+    { "type": "text", "id": "zeker_3", "label": "Zekerheid 3", "default": "Morgen in huis" },
+    { "type": "header", "content": "Boven het rooster" },
+    { "type": "text", "id": "telling", "label": "Tekst achter het aantal", "default": "sets" },
+    { "type": "text", "id": "sorteer_label", "label": "Label bij de sortering", "default": "Sorteer op" },
+    { "type": "text", "id": "sorteer_voordeel", "label": "Knop 1", "default": "Meeste voordeel" },
+    { "type": "text", "id": "sorteer_laag", "label": "Knop 2", "default": "Prijs laag → hoog" },
+    { "type": "text", "id": "sorteer_hoog", "label": "Knop 3", "default": "Prijs hoog → laag" },
+    { "type": "header", "content": "Op elke kaart" },
+    { "type": "text", "id": "kaart_cta", "label": "Knoptekst", "default": "Bekijk de set" },
+    { "type": "text", "id": "bespaar_kort", "label": "Woord voor de besparing", "default": "Bespaar" },
+    { "type": "text", "id": "voorraad_wel", "label": "Tekst bij voorraad", "default": "Op voorraad" },
+    { "type": "text", "id": "voorraad_niet", "label": "Tekst zonder voorraad", "default": "Tijdelijk uitverkocht" },
+    { "type": "header", "content": "Onderaan" },
+    { "type": "text", "id": "slot", "label": "Slotregel", "default": "Niet de juiste set? Je hebt 100 dagen om van gedachten te veranderen." },
+    { "type": "text", "id": "link_label", "label": "Linktekst", "default": "Liever één apparaat? Bekijk het hele assortiment" },
+    { "type": "url", "id": "link", "label": "Link" },
+    { "type": "header", "content": "Indent settings" },
+    { "type": "range", "id": "desk_indent_top", "label": "Indent top (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "desk_indent_bottom", "label": "Indent bottom (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_top", "label": "Indent top (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_bottom", "label": "Indent bottom (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "presets": [ { "name": "WS · Bundelrek" } ]
+}
+{% endschema %}
