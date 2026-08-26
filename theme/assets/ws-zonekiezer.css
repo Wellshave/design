@@ -120,8 +120,9 @@
 
 /* de veegbare zonerail staat alleen op mobiel */
 .ws-zf__rail{display:none}
-.ws-zf__pijl{display:none}
 .ws-zf__actief{display:none}
+/* de losse pijlregel is nergens meer nodig: de foto staat nu boven de kaart */
+.ws-zf__pijl{display:none}
 
 /* ── mobiel ── */
 @media (max-width:749px){
@@ -137,8 +138,8 @@
   .ws-zf__hint em{font-size:14px;font-weight:500;letter-spacing:0;text-transform:none;
     color:rgba(17,17,17,.72)}
 
-  /* één veegbare rij in plaats van vijf regels, zodat de kaart er direct
-     onder past en je de wissel ziet gebeuren */
+  /* één veegbare rij in plaats van vijf regels, zodat de foto en de kaart
+     er samen onder passen */
   .ws-zf__rail{display:block;position:relative;margin:0 -16px}
   .ws-zf__chips{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x proximity;
     padding:2px 16px 4px;scrollbar-width:none;-webkit-overflow-scrolling:touch;
@@ -172,15 +173,14 @@
   .ws-zf__chip.is-aan{background:#F5D18A;border-color:#F5D18A;color:#111}
   .ws-zf__chip.is-aan i{display:flex}
 
+  /* De foto staat op de telefoon bóven de kaart. Tik je een zone aan, dan
+     wisselt de kaart direct onder je vinger; stond de kaart erboven, dan
+     gebeurde de wissel buiten beeld en leek er niets te veranderen.
+     De losse pijlregel ertussen is daardoor overbodig en staat uit. */
   .ws-zf__body{display:flex;flex-direction:column;gap:0}
-  .ws-zf__kaart{order:1;padding:22px 20px;margin-top:2px}
-  .ws-zf__pijl{order:2;display:flex;align-items:center;justify-content:center;gap:11px;
-    margin:16px 0 12px;position:relative;z-index:4}
-  .ws-zf__pijl em{font-style:normal;font-size:12.5px;color:rgba(17,17,17,.5)}
-  .ws-zf__pijl span{width:34px;height:34px;border-radius:50%;background:#F5D18A;color:#111;
-    display:flex;align-items:center;justify-content:center}
-  .ws-zf__pijl svg{width:16px;height:16px}
-  .ws-zf__fig{order:3;border-radius:16px}
+  .ws-zf__fig{order:1;border-radius:16px 16px 0 0}
+  .ws-zf__kaart{order:2;padding:16px 16px 18px;margin-top:0;gap:0;
+    border-top:0;border-radius:0 0 16px 16px;background:rgba(255,255,255,.92)}
   .ws-zf__foto{object-position:50% 0}
   .ws-zf__label{display:none}
   .ws-zf__lijnen{display:none}
@@ -192,19 +192,32 @@
     color:#111;border-radius:100px;padding:9px 16px;font-size:11.5px;font-weight:700;
     letter-spacing:.1em;text-transform:uppercase}
   .ws-zf__fighint{left:16px;bottom:16px;font-size:12px}
-  .ws-zf__naam{font-size:26px}
-  .ws-zf__claim{font-size:14.5px}
-  .ws-zf__mid{grid-template-columns:1fr;gap:14px}
-  .ws-zf__shot > img{max-width:210px}
-  .ws-zf__feiten{flex-direction:row;gap:0}
-  .ws-zf__feiten li{flex-direction:column;text-align:center;gap:8px;flex:1;min-width:0;
-    font-size:12.5px;line-height:135%;padding:0 6px}
-  .ws-zf__feiten li + li{border-left:1px solid rgba(17,17,17,.1)}
-  .ws-zf__well{width:34px;height:34px}
-  .ws-zf__well svg{width:17px;height:17px}
-  .ws-zf__prijs{justify-content:center}
-  .ws-zf__cta{justify-content:center;padding:9px 9px 9px 18px;font-size:12px;letter-spacing:.07em}
-  .ws-zf__alle{font-size:13px}
+  .ws-zf__kop{gap:12px}
+  .ws-zf__naam{font-size:23px}
+  .ws-zf__claim{font-size:14px}
+  /* wat naast elkaar kan, staat naast elkaar: het product links, de drie
+     feiten rechts. Scheelt een half scherm aan hoogte. */
+  .ws-zf__mid{grid-template-columns:118px minmax(0,1fr);gap:14px;margin:2px 0}
+  .ws-zf__shot{flex-direction:column;gap:8px;padding:0}
+  .ws-zf__shot > img{max-width:100%}
+  .ws-zf__badge{position:static;font-size:9.5px;letter-spacing:.06em;padding:6px 10px;
+    white-space:normal;text-align:center;line-height:130%}
+  .ws-zf__feiten{flex-direction:column;gap:11px}
+  .ws-zf__feiten li{gap:10px;font-size:12.5px;line-height:138%}
+  .ws-zf__well{width:30px;height:30px}
+  .ws-zf__well svg{width:15px;height:15px}
+  /* prijs links, knop rechts — zonder extra omhulsel: het paneel wordt een
+     raster waarin alles de volle breedte pakt, behalve die twee. */
+  .ws-zf__paneel{display:grid;grid-template-columns:auto minmax(0,1fr);align-content:start;gap:11px 12px}
+  .ws-zf__paneel > *{grid-column:1/-1}
+  .ws-zf__prijs{grid-column:1;align-self:center}
+  .ws-zf__cta{grid-column:2;align-self:center}
+  .ws-zf__prijs b{font-size:23px}
+  .ws-zf__cta{min-width:0;justify-content:space-between;padding:6px 6px 6px 15px;
+    font-size:10.5px;letter-spacing:.05em;line-height:125%}
+  .ws-zf__cta span{width:32px;height:32px}
+  .ws-zf__cta span svg{width:16px;height:16px}
+  .ws-zf__alle{justify-self:center;font-size:12.5px;text-align:center;line-height:145%}
   .ws-zf__strip{padding:14px 4px}
   .ws-zf__strip > div{flex-direction:column;gap:8px;text-align:center;font-size:10.5px;
     font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:2px 4px;
