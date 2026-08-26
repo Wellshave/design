@@ -260,6 +260,18 @@
             assign gift_regel = s.gift_regel
           endif
         -%}
+        {%- comment -%}
+          Eerst weten dat het er is en wanneer het komt, dan pas het aanbod, dan
+          de knop. Levering is een voorwaarde, een aanbod is een verleiding: de
+          voorwaarde hoort er eerst te staan.
+        {%- endcomment -%}
+        {%- if v.available and s.voorraad_regel != blank -%}
+          <div class="ws-vrd">
+            <i></i>
+            <span><b>{{ s.voorraad_kop }}</b> &middot; {{ mf.shipping_information.value | default: s.voorraad_regel }}</span>
+          </div>
+        {%- endif -%}
+
         {%- if toon_aanbod -%}
           <div class="ws-gift">
             <span class="ws-ic">
@@ -299,13 +311,6 @@
             </button>
             <p class="ws-melding" product-notification></p>
           {%- endform -%}
-
-          {%- if v.available and s.voorraad_regel != blank -%}
-            <div class="ws-vrd">
-              <i></i>
-              <span><b>{{ s.voorraad_kop }}</b> &middot; {{ mf.shipping_information.value | default: s.voorraad_regel }}</span>
-            </div>
-          {%- endif -%}
         </div>
 
         <div class="ws-pay">
