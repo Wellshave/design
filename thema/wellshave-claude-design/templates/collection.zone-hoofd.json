@@ -8,33 +8,34 @@
           "settings": {
             "groep": "klus",
             "vraag": "Wat is de klus?",
-            "opties": "kaal|Kaal scheren|kaal scheren\nkort|Kort knippen|kort knippen\nrand|Randen & lijnen|randen en lijnen",
-            "start": "kaal"
+            "opties": "kaal|Kaal scheren|kaal scheren\nkort|Kort knippen|kort knippen\nrand|Randen & lijnen|randen en lijnen"
           }
         },
         "vraag_2": {
           "type": "vraag",
           "settings": {
-            "groep": "set",
+            "groep": "vorm",
             "vraag": "Eén apparaat, of een complete set?",
-            "opties": "los|Eén apparaat|één apparaat\nset|Complete set|complete set",
-            "start": "los"
+            "opties": "los|Eén apparaat|één apparaat\nset|Complete set|complete set"
+          }
+        },
+        "vraag_3": {
+          "type": "vraag",
+          "settings": {
+            "groep": "baard",
+            "vraag": "Doe je je baard met hetzelfde apparaat?",
+            "opties": "nee|Alleen mijn hoofd|alleen het hoofd\nja|Ook mijn baard|ook de baard"
+          }
+        },
+        "vraag_4": {
+          "type": "vraag",
+          "settings": {
+            "groep": "reis",
+            "vraag": "Neem je hem mee op reis?",
+            "opties": "nee|Blijft thuis|blijft thuis\nja|Gaat mee|gaat mee"
           }
         },
         "match_1": {
-          "type": "match",
-          "settings": {
-            "id": "hs",
-            "product": "wellshave-5-in-1-scheerapparaat-mannen-deluxe",
-            "naam": "Head Shaver Deluxe",
-            "badge": "Meest gekozen",
-            "zin": "Zeven roterende koppen die de bolling van je schedel volgen, ook aan de achterkant.",
-            "reden_1": "7D-kop volgt de contouren",
-            "reden_2": "SkinSafe tegen wondjes",
-            "reden_3": "7.000 rpm-motor"
-          }
-        },
-        "match_2": {
           "type": "match",
           "settings": {
             "id": "skull3",
@@ -47,20 +48,20 @@
             "reden_3": "Acht onderdelen in de doos"
           }
         },
-        "match_3": {
+        "match_2": {
           "type": "match",
           "settings": {
-            "id": "ele",
-            "product": "wellshave-tondeuse-elegant",
-            "naam": "Tondeuse Elegant™",
-            "badge": "Kapperskwaliteit",
-            "zin": "Fades en contouren met een hendel die tussen twee opzetkammen in valt.",
-            "reden_1": "Verstelbare fade-hendel",
-            "reden_2": "Knipt zonder trekken of haperen",
-            "reden_3": "Metalen behuizing"
+            "id": "hs",
+            "product": "wellshave-5-in-1-scheerapparaat-mannen-deluxe",
+            "naam": "Head Shaver Deluxe",
+            "badge": "Best beoordeeld",
+            "zin": "Zeven roterende koppen die de bolling van je schedel volgen, ook aan de achterkant.",
+            "reden_1": "7D-kop volgt de contouren",
+            "reden_2": "4,8 uit 351 beoordelingen",
+            "reden_3": "7.000 rpm-motor"
           }
         },
-        "match_4": {
+        "match_3": {
           "type": "match",
           "settings": {
             "id": "bpack3",
@@ -70,7 +71,20 @@
             "zin": "Tondeuse, detailtrimmer, foil shaver en neustrimmer — alles voor haar, baard en fades.",
             "reden_1": "Elf onderdelen in de doos",
             "reden_2": "Foil shaver voor de afwerking",
-            "reden_3": "Ook een neustrimmer voor neus & oorhaar"
+            "reden_3": "Ook een neustrimmer erbij"
+          }
+        },
+        "match_4": {
+          "type": "match",
+          "settings": {
+            "id": "bpack2",
+            "product": "barber-pack-2-0",
+            "naam": "Barber Pack 2.0",
+            "badge": "Tien onderdelen",
+            "zin": "Tondeuse, detailtrimmer en foil shaver: de lengte, de lijn en de gladde afwerking.",
+            "reden_1": "Tondeuse voor fades, haar en baard",
+            "reden_2": "Foil shaver voor de gladde afwerking",
+            "reden_3": "Tien onderdelen in de doos"
           }
         },
         "match_5": {
@@ -89,14 +103,24 @@
         "match_6": {
           "type": "match",
           "settings": {
-            "id": "bpack2",
-            "product": "barber-pack-2-0",
-            "naam": "Barber Pack 2.0",
-            "badge": "Tien onderdelen",
-            "zin": "Tondeuse, detailtrimmer en foil shaver: de lengte, de lijn en de gladde afwerking.",
-            "reden_1": "Tondeuse voor fades, haar en baard",
-            "reden_2": "Foil shaver voor de gladde afwerking",
-            "reden_3": "Tien onderdelen in de doos"
+            "id": "ele",
+            "product": "wellshave-tondeuse-elegant",
+            "naam": "Tondeuse Elegant™",
+            "badge": "Kapperskwaliteit",
+            "zin": "Fades en contouren met een hendel die tussen twee opzetkammen in valt.",
+            "reden_1": "Verstelbare fade-hendel",
+            "reden_2": "Knipt zonder trekken of haperen",
+            "reden_3": "Metalen behuizing"
+          }
+        },
+        "zone_alles": {
+          "type": "zone",
+          "settings": {
+            "naam": "Alle zones",
+            "aantal": "27",
+            "url": "https://wellshave.com/collections/all",
+            "huidig": false,
+            "icoon": "shopify://shop_images/ws-zone-icoon-alles.png"
           }
         },
         "zone_1": {
@@ -138,21 +162,13 @@
             "huidig": false,
             "icoon": "shopify://shop_images/ws-zone-icoon-neus.png"
           }
-        },
-        "zone_alles": {
-          "type": "zone",
-          "settings": {
-            "naam": "Alle zones",
-            "aantal": "27",
-            "url": "https://wellshave.com/collections/all",
-            "huidig": false,
-            "icoon": "shopify://shop_images/ws-zone-icoon-alles.png"
-          }
         }
       },
       "block_order": [
         "vraag_1",
         "vraag_2",
+        "vraag_3",
+        "vraag_4",
         "match_1",
         "match_2",
         "match_3",
@@ -173,10 +189,10 @@
         "foto": "shopify://shop_images/ws-ugc-hoofd.webp",
         "foto_alt": "Man scheert zijn hoofd met de Head Shaver Deluxe",
         "kaartkop": "Jouw hoofdapparaat in 20 seconden",
-        "kaartsub": "2 keuzes · direct een match",
+        "kaartsub": "4 keuzes · direct een match",
         "kaartvraag": "Wat ga je precies doen?",
-        "tabel": "klus=kaal, set=los > hs\nklus=kaal, set=set > skull3\nklus=kort, set=los > ele\nklus=kort, set=set > bpack3\nklus=rand, set=los > sharp\nklus=rand, set=set > bpack2",
-        "standaard": "hs",
+        "tabel": "klus=kaal, vorm=set > skull3\nklus=kaal, reis=ja > skull3\nklus=kaal > hs\nvorm=set, baard=ja > bpack3\nvorm=set > bpack2\nklus=rand > sharp\n > ele",
+        "standaard": "ele",
         "kruimel": "Hoofd",
         "desk_indent_top": 0,
         "desk_indent_bottom": 0,

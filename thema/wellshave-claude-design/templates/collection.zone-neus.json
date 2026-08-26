@@ -6,74 +6,62 @@
         "vraag_1": {
           "type": "vraag",
           "settings": {
-            "groep": "doel",
-            "vraag": "Wat wil je bijwerken?",
-            "opties": "neus|Alleen neus & oren|neus & oren\nwenk|Ook wenkbrauwen|ook wenkbrauwen\nscheer|Ook kort scheren|ook kort scheren\nbody|Ook baard of lichaam|ook baard of lichaam",
-            "start": "neus"
+            "groep": "wenk",
+            "vraag": "Ook wenkbrauwen bijwerken?",
+            "opties": "nee|Niet nodig|geen wenkbrauwen\nja|Ja, graag|ook wenkbrauwen"
           }
         },
         "vraag_2": {
           "type": "vraag",
           "settings": {
+            "groep": "kort",
+            "vraag": "Ook kort haar op kleine vlakken scheren?",
+            "opties": "nee|Niet nodig|geen shaver\nja|Ja, graag|ook een shaver"
+          }
+        },
+        "vraag_3": {
+          "type": "vraag",
+          "settings": {
+            "groep": "body",
+            "vraag": "Ook ergens anders bijwerken?",
+            "opties": "nee|Alleen dit|alleen neus en oren\nbaard|Ook de baardlijn|ook de baardlijn\nlichaam|Ook lichaamshaar|ook lichaamshaar"
+          }
+        },
+        "vraag_4": {
+          "type": "vraag",
+          "settings": {
             "groep": "lijn",
             "vraag": "Wat weegt zwaarder?",
-            "opties": "nieuw|De nieuwste lijn|nieuwste lijn\nprijs|De scherpste prijs|scherpste prijs",
-            "start": "nieuw"
+            "opties": "nieuw|De nieuwste lijn|nieuwste lijn\nprijs|De scherpste prijs|scherpste prijs"
           }
         },
         "match_1": {
           "type": "match",
           "settings": {
-            "id": "ess",
-            "product": "neustrimmer-essential",
-            "naam": "Neustrimmer Essential™",
-            "badge": "Instap, nieuwe lijn",
-            "zin": "Eén opzetstuk, één knop: neus- en oorhaar en verder niets.",
-            "reden_1": "Neus- en oorhaar zonder trekken",
-            "reden_2": "Drie onderdelen in de doos",
-            "reden_3": "USB-C oplaadbaar"
+            "id": "ultimate",
+            "product": "wellshave-4-in-1-neustrimmer-ultimate",
+            "naam": "Neustrimmer Ultimate™ 4-in-1",
+            "badge": "Grootste voordeel",
+            "zin": "De bovenste trede van de vertrouwde lijn, met een bodygroomer-opzetstuk erbij.",
+            "reden_1": "Vier opzetstukken, zes onderdelen",
+            "reden_2": "Ook lichaamshaar met hetzelfde apparaat",
+            "reden_3": "SkinGuard tegen wondjes en irritatie"
           }
         },
         "match_2": {
           "type": "match",
           "settings": {
-            "id": "basic",
-            "product": "wellshave-neustrimmer-basic",
-            "naam": "Neustrimmer Basic™",
-            "badge": "Laagste prijs in de collectie",
-            "zin": "Hetzelfde werk uit de vertrouwde lijn, voor drie euro minder.",
-            "reden_1": "Neus- en oorhaar zonder trekken",
-            "reden_2": "Drie onderdelen in de doos",
-            "reden_3": "Eén druk op de knop"
+            "id": "ultra",
+            "product": "neustrimmer-4in1-ultra",
+            "naam": "Neustrimmer 4in1 Ultra™",
+            "badge": "Best verkocht van de collectie",
+            "zin": "Het meest bestelde apparaat van de afgelopen dertig dagen, met vier opzetstukken.",
+            "reden_1": "57× besteld in 30 dagen",
+            "reden_2": "Neus, oren, wenkbrauwen en baardlijn",
+            "reden_3": "SkinGuard tegen wondjes"
           }
         },
         "match_3": {
-          "type": "match",
-          "settings": {
-            "id": "elite",
-            "product": "neustrimmer-2in1-elite",
-            "naam": "Neustrimmer 2in1 Elite™",
-            "badge": "Nieuwe lijn",
-            "zin": "Met het detailopzetstuk erbij, voor wenkbrauwen en strakke lijntjes.",
-            "reden_1": "Neus- en oorhaar zonder trekken",
-            "reden_2": "Detailtrimmer voor wenkbrauwen",
-            "reden_3": "Vier onderdelen in de doos"
-          }
-        },
-        "match_4": {
-          "type": "match",
-          "settings": {
-            "id": "prem",
-            "product": "wellshave-2-in-1-neustrimmer-premium",
-            "naam": "Neustrimmer Premium™ 2-in-1",
-            "badge": "Zelfde trede, lagere prijs",
-            "zin": "Dezelfde twee opzetstukken uit de vertrouwde lijn.",
-            "reden_1": "Neus- en oorhaar zonder trekken",
-            "reden_2": "Detailtrimmer voor wenkbrauwen",
-            "reden_3": "Vier onderdelen in de doos"
-          }
-        },
-        "match_5": {
           "type": "match",
           "settings": {
             "id": "plat",
@@ -86,7 +74,7 @@
             "reden_3": "Shaver-opzetstuk voor kort haar"
           }
         },
-        "match_6": {
+        "match_4": {
           "type": "match",
           "settings": {
             "id": "adv",
@@ -99,30 +87,66 @@
             "reden_3": "Shaver-opzetstuk voor kort haar"
           }
         },
+        "match_5": {
+          "type": "match",
+          "settings": {
+            "id": "elite",
+            "product": "neustrimmer-2in1-elite",
+            "naam": "Neustrimmer 2in1 Elite™",
+            "badge": "Nieuwe lijn",
+            "zin": "Met het detailopzetstuk erbij, voor wenkbrauwen en strakke lijntjes.",
+            "reden_1": "Neus- en oorhaar zonder trekken",
+            "reden_2": "Detailtrimmer voor wenkbrauwen",
+            "reden_3": "Vier onderdelen in de doos"
+          }
+        },
+        "match_6": {
+          "type": "match",
+          "settings": {
+            "id": "prem",
+            "product": "wellshave-2-in-1-neustrimmer-premium",
+            "naam": "Neustrimmer Premium™ 2-in-1",
+            "badge": "Zelfde trede, lagere prijs",
+            "zin": "Dezelfde twee opzetstukken uit de vertrouwde lijn.",
+            "reden_1": "Neus- en oorhaar zonder trekken",
+            "reden_2": "Detailtrimmer voor wenkbrauwen",
+            "reden_3": "Vier onderdelen in de doos"
+          }
+        },
         "match_7": {
           "type": "match",
           "settings": {
-            "id": "ultra",
-            "product": "neustrimmer-4in1-ultra",
-            "naam": "Neustrimmer 4in1 Ultra™",
-            "badge": "57× besteld in 30 dagen",
-            "zin": "De bovenste trede van de nieuwe lijn, met een baardtrimmer-opzetstuk erbij.",
-            "reden_1": "Vier opzetstukken, zes onderdelen",
-            "reden_2": "Ook je baardlijn met hetzelfde apparaat",
-            "reden_3": "SkinGuard tegen wondjes en irritatie"
+            "id": "ess",
+            "product": "neustrimmer-essential",
+            "naam": "Neustrimmer Essential™",
+            "badge": "Instap, nieuwe lijn",
+            "zin": "Eén opzetstuk, één knop: neus- en oorhaar en verder niets.",
+            "reden_1": "Neus- en oorhaar zonder trekken",
+            "reden_2": "Drie onderdelen in de doos",
+            "reden_3": "USB-C oplaadbaar"
           }
         },
         "match_8": {
           "type": "match",
           "settings": {
-            "id": "ultimate",
-            "product": "wellshave-4-in-1-neustrimmer-ultimate",
-            "naam": "Neustrimmer Ultimate™ 4-in-1",
-            "badge": "Grootste voordeel",
-            "zin": "De bovenste trede van de vertrouwde lijn, met een bodygroomer-opzetstuk erbij.",
-            "reden_1": "Vier opzetstukken, zes onderdelen",
-            "reden_2": "Ook lichaamshaar met hetzelfde apparaat",
-            "reden_3": "SkinGuard tegen wondjes en irritatie"
+            "id": "basic",
+            "product": "wellshave-neustrimmer-basic",
+            "naam": "Neustrimmer Basic™",
+            "badge": "Laagste prijs in de collectie",
+            "zin": "Hetzelfde werk uit de vertrouwde lijn, voor drie euro minder.",
+            "reden_1": "Neus- en oorhaar zonder trekken",
+            "reden_2": "Drie onderdelen in de doos",
+            "reden_3": "Eén druk op de knop"
+          }
+        },
+        "zone_alles": {
+          "type": "zone",
+          "settings": {
+            "naam": "Alle zones",
+            "aantal": "27",
+            "url": "https://wellshave.com/collections/all",
+            "huidig": false,
+            "icoon": "shopify://shop_images/ws-zone-icoon-alles.png"
           }
         },
         "zone_1": {
@@ -164,21 +188,13 @@
             "huidig": true,
             "icoon": "shopify://shop_images/ws-zone-icoon-neus.png"
           }
-        },
-        "zone_alles": {
-          "type": "zone",
-          "settings": {
-            "naam": "Alle zones",
-            "aantal": "27",
-            "url": "https://wellshave.com/collections/all",
-            "huidig": false,
-            "icoon": "shopify://shop_images/ws-zone-icoon-alles.png"
-          }
         }
       },
       "block_order": [
         "vraag_1",
         "vraag_2",
+        "vraag_3",
+        "vraag_4",
         "match_1",
         "match_2",
         "match_3",
@@ -201,10 +217,10 @@
         "foto": "shopify://shop_images/ws-use-neustrimmer.jpg",
         "foto_alt": "Man werkt zijn neushaar bij met een Wellshave-neustrimmer",
         "kaartkop": "Jouw neustrimmer in 20 seconden",
-        "kaartsub": "2 keuzes · acht mogelijke uitkomsten",
+        "kaartsub": "4 keuzes · direct een match",
         "kaartvraag": "Hoe ver wil je gaan?",
-        "tabel": "doel=neus, lijn=nieuw > ess\ndoel=neus, lijn=prijs > basic\ndoel=wenk, lijn=nieuw > elite\ndoel=wenk, lijn=prijs > prem\ndoel=scheer, lijn=nieuw > plat\ndoel=scheer, lijn=prijs > adv\ndoel=body, lijn=nieuw > ultra\ndoel=body, lijn=prijs > ultimate",
-        "standaard": "ess",
+        "tabel": "body=lichaam > ultimate\nbody=baard > ultra\nkort=ja, lijn=nieuw > plat\nkort=ja > adv\nwenk=ja, lijn=nieuw > elite\nwenk=ja > prem\nlijn=nieuw > ess\n > basic",
+        "standaard": "basic",
         "kruimel": "Neus & oren",
         "desk_indent_top": 0,
         "desk_indent_bottom": 0,

@@ -8,8 +8,7 @@
           "settings": {
             "groep": "glad",
             "vraag": "Hoe wil je afwerken?",
-            "opties": "nee|Alleen trimmen|alleen trimmen\nja|Ook volledig glad|glad afwerken",
-            "start": "ja"
+            "opties": "trim|Alleen trimmen|alleen trimmen\nglad|Ook volledig glad|glad afwerken"
           }
         },
         "vraag_2": {
@@ -17,34 +16,49 @@
           "settings": {
             "groep": "neus",
             "vraag": "Ook neushaar met hetzelfde apparaat?",
-            "opties": "nee|Niet nodig|geen extra detail\nja|Ja, graag|ook neushaar",
-            "start": "nee"
+            "opties": "nee|Niet nodig|geen neushaar\nja|Ja, graag|ook neushaar"
+          }
+        },
+        "vraag_3": {
+          "type": "vraag",
+          "settings": {
+            "groep": "nat",
+            "vraag": "Gebruik je hem onder de douche?",
+            "opties": "nee|Droog|droog\nja|Ja, ook nat|ook nat"
+          }
+        },
+        "vraag_4": {
+          "type": "vraag",
+          "settings": {
+            "groep": "vorm",
+            "vraag": "Eén apparaat, of een complete set?",
+            "opties": "los|Eén apparaat|één apparaat\nset|Complete set|complete set"
           }
         },
         "match_1": {
           "type": "match",
           "settings": {
-            "id": "pro",
-            "product": "groom-guard-pro",
-            "naam": "Groom Guard™ PRO",
-            "badge": "Meest gekozen",
-            "zin": "Voor lichaam én schaamstreek, met foil-kop voor een gladde afwerking.",
-            "reden_1": "SkinSafe™ keramische kop",
-            "reden_2": "Waterdicht — IPX7",
-            "reden_3": "Trimmen én glad afwerken"
+            "id": "spult",
+            "product": "shave-package-ultimate",
+            "naam": "Shave Package Ultimate™",
+            "badge": "Acht onderdelen",
+            "zin": "Lichaam, neus en detailwerk in één doos — samen goedkoper dan los.",
+            "reden_1": "Acht onderdelen in de doos",
+            "reden_2": "Bodygroomer én neustrimmer",
+            "reden_3": "De ruimste set in de collectie"
           }
         },
         "match_2": {
           "type": "match",
           "settings": {
-            "id": "gg",
-            "product": "wellshave-bodygroomer-groom-guard",
-            "naam": "Groom Guard™",
-            "badge": "37× besteld in 30 dagen",
-            "zin": "De basis voor lichaam en schaamstreek, met licht op de plek waar je kijkt.",
-            "reden_1": "SkinSafe™ keramische kop",
-            "reden_2": "LED-licht waar je kijkt",
-            "reden_3": "Opzetkammen voor de lengte"
+            "id": "flexbundel",
+            "product": "body-beard-kit",
+            "naam": "Flex-line Bundel",
+            "badge": "Grootste voordeel",
+            "zin": "Negen onderdelen voor gezicht, baard en lichaam, inclusief de Sharpline-detailtrimmer.",
+            "reden_1": "Flex Guard met foilkop",
+            "reden_2": "Sharpline-detailtrimmer erbij",
+            "reden_3": "Negen onderdelen in de doos"
           }
         },
         "match_3": {
@@ -63,6 +77,19 @@
         "match_4": {
           "type": "match",
           "settings": {
+            "id": "pro",
+            "product": "groom-guard-pro",
+            "naam": "Groom Guard™ PRO",
+            "badge": "Meest gekozen",
+            "zin": "Voor lichaam én schaamstreek, met foil-kop voor een gladde afwerking.",
+            "reden_1": "SkinSafe™ keramische kop",
+            "reden_2": "Waterdicht — IPX7",
+            "reden_3": "Trimmen én glad afwerken"
+          }
+        },
+        "match_5": {
+          "type": "match",
+          "settings": {
             "id": "dual",
             "product": "wellshave-2-in-1-bodygroomer-mannen",
             "naam": "Dual Groomer™ 2-in-1",
@@ -71,6 +98,29 @@
             "reden_1": "SkinSafe™ mes",
             "reden_2": "Neusopzetstuk meegeleverd",
             "reden_3": "Twee snelheden"
+          }
+        },
+        "match_6": {
+          "type": "match",
+          "settings": {
+            "id": "gg",
+            "product": "wellshave-bodygroomer-groom-guard",
+            "naam": "Groom Guard™",
+            "badge": "37× besteld in 30 dagen",
+            "zin": "De meest verkochte bodygroomer: keramische kop achter een kam, met licht waar je kijkt.",
+            "reden_1": "SkinSafe™ keramische kop",
+            "reden_2": "LED-licht waar je kijkt",
+            "reden_3": "4,9 uit 192 beoordelingen"
+          }
+        },
+        "zone_alles": {
+          "type": "zone",
+          "settings": {
+            "naam": "Alle zones",
+            "aantal": "27",
+            "url": "https://wellshave.com/collections/all",
+            "huidig": false,
+            "icoon": "shopify://shop_images/ws-zone-icoon-alles.png"
           }
         },
         "zone_1": {
@@ -112,25 +162,19 @@
             "huidig": false,
             "icoon": "shopify://shop_images/ws-zone-icoon-neus.png"
           }
-        },
-        "zone_alles": {
-          "type": "zone",
-          "settings": {
-            "naam": "Alle zones",
-            "aantal": "27",
-            "url": "https://wellshave.com/collections/all",
-            "huidig": false,
-            "icoon": "shopify://shop_images/ws-zone-icoon-alles.png"
-          }
         }
       },
       "block_order": [
         "vraag_1",
         "vraag_2",
+        "vraag_3",
+        "vraag_4",
         "match_1",
         "match_2",
         "match_3",
         "match_4",
+        "match_5",
+        "match_6",
         "zone_alles",
         "zone_1",
         "zone_2",
@@ -145,10 +189,10 @@
         "foto": "shopify://shop_images/ws-ugc-borst.webp",
         "foto_alt": "Groom Guard in gebruik op het lichaam",
         "kaartkop": "Jouw bodygroomer in 20 seconden",
-        "kaartsub": "2 keuzes · direct een match",
+        "kaartsub": "4 keuzes · direct een match",
         "kaartvraag": "Wat past bij jouw routine?",
-        "tabel": "glad=ja, neus=ja > flex\nglad=ja, neus=nee > pro\nglad=nee, neus=ja > dual\nglad=nee, neus=nee > gg",
-        "standaard": "pro",
+        "tabel": "vorm=set, neus=ja > spult\nvorm=set > flexbundel\nglad=glad, neus=ja > flex\nglad=glad > pro\nneus=ja, nat=ja > flex\nneus=ja > dual\nnat=ja > pro\n > gg",
+        "standaard": "gg",
         "kruimel": "Lichaam & schaamstreek",
         "desk_indent_top": 0,
         "desk_indent_bottom": 0,

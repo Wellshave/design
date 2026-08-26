@@ -779,6 +779,60 @@ dus niet mee met het aantal vragen, want een beantwoorde vraag klapt dicht tot
 Met 26 panelen in de opmaak laden de matchfoto's nu lui (`loading: lazy`); ze
 staan verborgen tot er een match is.
 
+## Vier vragen op de zonepagina's
+
+Dezelfde stap voor de vier zones. Elke vierde vraag staat op een verschil dat
+letterlijk in de bestaande producttekst staat, zodat er geen claim bij komt.
+
+| zone | vragen | combinaties | panelen |
+|---|---|---|---|
+| Lichaam | afwerken · neushaar · onder de douche · los of set | 16 | 6 |
+| Gezicht & baard | klus · los of set · neushaar · ook glad afwerken | 32 | 9 |
+| Hoofd | klus · los of set · ook de baard · mee op reis | 24 | 6 |
+| Neus & oren | wenkbrauwen · shaver · ook elders · nieuwste lijn of prijs | 24 | 8 |
+
+Waar de nieuwe vragen op staan:
+
+- **onder de douche** — de Groom Guard PRO en de Flex Guard zijn IPX7
+  waterdicht, de Groom Guard en de Dual Groomer niet.
+- **ook glad afwerken** — de Supreme 6-in-1 heeft een micro shaver "die de
+  5-in-1 niet heeft"; dat staat al in zijn eigen tekst.
+- **mee op reis** — de Skull Deal 3.0 heeft "tas én harde koffer".
+- **ook elders** (neus) — de Ultra noemt de baardlijn, de Ultimate het
+  bodygroomer-opzetstuk. Dat was tot nu toe het enige echte verschil tussen die
+  twee, en het werd niet uitgevraagd.
+
+Bij neus is de oude vraag "wat wil je bijwerken?" uit elkaar getrokken in drie
+losse vragen (wenkbrauwen, shaver, ook elders). Daardoor loopt de bezoeker de
+ladder van opzetstukken nu stap voor stap af in plaats van 'm in een keer te
+moeten overzien.
+
+### Hoe diep elke vraag werkelijk snijdt
+
+Niet elke vraag splitst overal — het assortiment biedt niet voor elke zone vier
+onderscheidende assen. Geteld over alle combinaties, het aantal situaties waarin
+die vraag het advies verandert:
+
+| zone | vraag 1 | vraag 2 | vraag 3 | vraag 4 |
+|---|---|---|---|---|
+| Lichaam | 2 | 3 | 2 | 4 |
+| Gezicht | 5 | 4 | 3 | **1** |
+| Hoofd | 4 | 5 | **1** | **1** |
+| Neus | 2 | 4 | 6 | 3 |
+
+Geen enkele vraag is loos, maar op de hoofdpagina doen "ook de baard" en "mee op
+reis" elk maar een splitsing, en op de gezichtpagina geldt dat voor "ook glad
+afwerken". Dat wordt vanzelf beter zodra er een product bijkomt dat op die as
+verschilt; het alternatief was een vraag stellen die niets doet.
+
+Gecontroleerd met een script (geen combinatie zonder uitkomst, geen regel naar
+een ontbrekend paneel, geen onbereikbaar paneel) en daarna in de browser: alle
+96 combinaties over de vier pagina's komen op het product uit dat de tabel
+voorschrijft, en de stapper telt overal 4 van 4.
+
+Op 390 px blijft de kaart tijdens het invullen tussen 379 en 528 px — net als op
+de overzichtspagina groeit hij niet mee met het aantal vragen.
+
 ### Waar `breed` niets doet
 
 Bij `zone=hoofd` splitst de derde vraag niets: de zes hoofdproducten hangen aan

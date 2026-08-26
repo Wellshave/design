@@ -8,8 +8,7 @@
           "settings": {
             "groep": "klus",
             "vraag": "Wat is de klus?",
-            "opties": "scheren|Glad scheren|glad scheren\nbaard|Baard op lengte|baard op lengte\nlijnen|Lijnen & stoppels|lijnen en stoppels\nmes|Klassiek met een mesje|klassiek mesje",
-            "start": "scheren"
+            "opties": "scheren|Glad scheren|glad scheren\nbaard|Baard op lengte|baard op lengte\nlijnen|Lijnen & stoppels|lijnen en stoppels\nmes|Klassiek met een mesje|klassiek mesje"
           }
         },
         "vraag_2": {
@@ -17,8 +16,7 @@
           "settings": {
             "groep": "set",
             "vraag": "Alleen het apparaat, of een set?",
-            "opties": "los|Alleen het apparaat|alleen het apparaat\nset|Set met opzetstukken|set met opzetstukken",
-            "start": "los"
+            "opties": "los|Alleen het apparaat|alleen het apparaat\nset|Set met opzetstukken|set met opzetstukken"
           }
         },
         "vraag_3": {
@@ -26,60 +24,67 @@
           "settings": {
             "groep": "neus",
             "vraag": "Ook neus- en oorhaar erbij?",
-            "opties": "geen|Niet nodig|geen neushaar\nneus|Ja, graag|ook neushaar",
-            "start": "geen"
+            "opties": "geen|Niet nodig|geen neushaar\nneus|Ja, graag|ook neushaar"
+          }
+        },
+        "vraag_4": {
+          "type": "vraag",
+          "settings": {
+            "groep": "glad",
+            "vraag": "Wil je ook glad kunnen afwerken?",
+            "opties": "nee|Niet nodig|geen gladde afwerking\nja|Ja, graag|ook glad afwerken"
           }
         },
         "match_1": {
           "type": "match",
           "settings": {
-            "id": "baron",
-            "product": "wellshave-blade-baron",
-            "naam": "4 Foil Blade Baron™",
-            "badge": "Compact",
-            "zin": "Foilkop voor korte stoppels, waterdicht, drie onderdelen in de doos.",
-            "reden_1": "Meerdere bladen grijpen meer haar tegelijk",
-            "reden_2": "Nat en droog te gebruiken",
-            "reden_3": "Past in elke toilettas"
+            "id": "bgold",
+            "product": "wellshave-safety-razor-gold",
+            "naam": "Blade Guard Gold",
+            "badge": "Geen accu nodig",
+            "zin": "Een klassiek scheermes met wisselbare mesjes — ook in het zwart, voor dezelfde prijs.",
+            "reden_1": "Geen batterij, geen oplader",
+            "reden_2": "Mesjes los verkrijgbaar",
+            "reden_3": "Drie onderdelen in de doos"
           }
         },
         "match_2": {
           "type": "match",
           "settings": {
-            "id": "gentleman",
-            "product": "wellshave-scheerapparaat-elite",
-            "naam": "The Gentleman Shaver™",
-            "badge": "26× besteld in 30 dagen",
-            "zin": "Roterend scheren, met een neus- en oorhaaropzetstuk en een baardtrimmer in dezelfde doos.",
-            "reden_1": "Neus- en oorhaaropzetstuk meegeleverd",
-            "reden_2": "Baardtrimmer en kammen 3-6-9 mm",
-            "reden_3": "LCD-display en oplaadstandaard"
+            "id": "edge",
+            "product": "wellshave-edge-blade",
+            "naam": "Edge Blade",
+            "badge": "Voor de lijnen",
+            "zin": "4D-flexkop die meekantelt over kaak en hals, met kammen van 1 tot 5 mm.",
+            "reden_1": "Kammen van 1, 2, 3 en 5 mm",
+            "reden_2": "Flexkop volgt kaaklijn en hals",
+            "reden_3": "Volledig waterdicht, ook voor het lichaam"
           }
         },
         "match_3": {
           "type": "match",
           "settings": {
-            "id": "sentinel",
-            "product": "the-sentinel-pro",
-            "naam": "The Sentinel PRO",
-            "badge": "Nieuw in de lijn",
-            "zin": "Zet hem terug in het station en hij reinigt en laadt zichzelf.",
-            "reden_1": "Reinigingsstation met reinigingsvloeistof",
-            "reden_2": "Zes onderdelen in de doos",
-            "reden_3": "Comfortabel scheren zonder irritatie"
+            "id": "supreme",
+            "product": "6-in-1-baardtrimmer-supreme",
+            "naam": "Men Shaper Supreme™ 6-in-1",
+            "badge": "Meest compleet",
+            "zin": "Zes opzetstukken en twaalf onderdelen, met een micro shaver voor de gladde afwerking.",
+            "reden_1": "Micro shaver die de 5-in-1 niet heeft",
+            "reden_2": "Neus- en oorhaaropzetstuk meegeleverd",
+            "reden_3": "T-Blade, precisietrimmer en bodygroomer"
           }
         },
         "match_4": {
           "type": "match",
           "settings": {
-            "id": "elegant",
-            "product": "wellshave-4-in-1-scheerapparaat",
-            "naam": "Scheerapparaat Elegant™ 4-in-1",
-            "badge": "Meeste voor je geld",
-            "zin": "Vier koppen: scheren, neushaar, bakkebaarden en de baardtrimmer.",
-            "reden_1": "Neus- en oorhaaropzetstuk meegeleverd",
-            "reden_2": "Sidetrimmer voor de bakkebaarden",
-            "reden_3": "Zes onderdelen in de doos"
+            "id": "msiced",
+            "product": "wellshave-5-in-1-baardtrimmer-man-shaper-iced",
+            "naam": "Men Shaper Iced™ 5-in-1",
+            "badge": "Laagste prijs van het paar",
+            "zin": "Vijf opzetstukken en elf onderdelen — dezelfde set als de Gold, voor €3,00 minder.",
+            "reden_1": "T-Blade en precisietrimmer voor de lijnen",
+            "reden_2": "Verstelbaar opzetstuk 1–9 mm",
+            "reden_3": "Opbergstandaard en travelbag erbij"
           }
         },
         "match_5": {
@@ -98,53 +103,63 @@
         "match_6": {
           "type": "match",
           "settings": {
-            "id": "msiced",
-            "product": "wellshave-5-in-1-baardtrimmer-man-shaper-iced",
-            "naam": "Men Shaper Iced™ 5-in-1",
-            "badge": "Laagste prijs van het paar",
-            "zin": "Vijf opzetstukken en elf onderdelen — dezelfde set als de Gold, voor €3,00 minder.",
-            "reden_1": "T-Blade en precisietrimmer voor de lijnen",
-            "reden_2": "Verstelbaar opzetstuk 1–9 mm",
-            "reden_3": "Opbergstandaard en travelbag erbij"
+            "id": "elegant",
+            "product": "wellshave-4-in-1-scheerapparaat",
+            "naam": "Scheerapparaat Elegant™ 4-in-1",
+            "badge": "Meeste voor je geld",
+            "zin": "Vier koppen: scheren, neushaar, bakkebaarden en de baardtrimmer.",
+            "reden_1": "Neus- en oorhaaropzetstuk meegeleverd",
+            "reden_2": "Sidetrimmer voor de bakkebaarden",
+            "reden_3": "Zes onderdelen in de doos"
           }
         },
         "match_7": {
           "type": "match",
           "settings": {
-            "id": "supreme",
-            "product": "6-in-1-baardtrimmer-supreme",
-            "naam": "Men Shaper Supreme™ 6-in-1",
-            "badge": "Meest compleet",
-            "zin": "Zes opzetstukken en twaalf onderdelen, met een micro shaver voor de gladde afwerking.",
-            "reden_1": "Micro shaver die de 5-in-1 niet heeft",
-            "reden_2": "Neus- en oorhaaropzetstuk meegeleverd",
-            "reden_3": "T-Blade, precisietrimmer en bodygroomer"
+            "id": "sentinel",
+            "product": "the-sentinel-pro",
+            "naam": "The Sentinel PRO",
+            "badge": "Nieuw in de lijn",
+            "zin": "Zet hem terug in het station en hij reinigt en laadt zichzelf.",
+            "reden_1": "Reinigingsstation met reinigingsvloeistof",
+            "reden_2": "Zes onderdelen in de doos",
+            "reden_3": "Comfortabel scheren zonder irritatie"
           }
         },
         "match_8": {
           "type": "match",
           "settings": {
-            "id": "edge",
-            "product": "wellshave-edge-blade",
-            "naam": "Edge Blade",
-            "badge": "Voor de lijnen",
-            "zin": "4D-flexkop die meekantelt over kaak en hals, met kammen van 1 tot 5 mm.",
-            "reden_1": "Kammen van 1, 2, 3 en 5 mm",
-            "reden_2": "Flexkop volgt kaaklijn en hals",
-            "reden_3": "Volledig waterdicht, ook voor het lichaam"
+            "id": "gentleman",
+            "product": "wellshave-scheerapparaat-elite",
+            "naam": "The Gentleman Shaver™",
+            "badge": "26× besteld in 30 dagen",
+            "zin": "Roterend scheren, met een neus- en oorhaaropzetstuk en een baardtrimmer in dezelfde doos.",
+            "reden_1": "Neus- en oorhaaropzetstuk meegeleverd",
+            "reden_2": "Baardtrimmer en kammen 3-6-9 mm",
+            "reden_3": "LCD-display en oplaadstandaard"
           }
         },
         "match_9": {
           "type": "match",
           "settings": {
-            "id": "bgold",
-            "product": "wellshave-safety-razor-gold",
-            "naam": "Blade Guard Gold",
-            "badge": "Geen accu nodig",
-            "zin": "Een klassiek scheermes met wisselbare mesjes — ook in het zwart, voor dezelfde prijs.",
-            "reden_1": "Geen batterij, geen oplader",
-            "reden_2": "Mesjes los verkrijgbaar",
-            "reden_3": "Drie onderdelen in de doos"
+            "id": "baron",
+            "product": "wellshave-blade-baron",
+            "naam": "4 Foil Blade Baron™",
+            "badge": "Compact",
+            "zin": "Foilkop voor korte stoppels, waterdicht, drie onderdelen in de doos.",
+            "reden_1": "Meerdere bladen grijpen meer haar tegelijk",
+            "reden_2": "Nat en droog te gebruiken",
+            "reden_3": "Past in elke toilettas"
+          }
+        },
+        "zone_alles": {
+          "type": "zone",
+          "settings": {
+            "naam": "Alle zones",
+            "aantal": "27",
+            "url": "https://wellshave.com/collections/all",
+            "huidig": false,
+            "icoon": "shopify://shop_images/ws-zone-icoon-alles.png"
           }
         },
         "zone_1": {
@@ -186,22 +201,13 @@
             "huidig": false,
             "icoon": "shopify://shop_images/ws-zone-icoon-neus.png"
           }
-        },
-        "zone_alles": {
-          "type": "zone",
-          "settings": {
-            "naam": "Alle zones",
-            "aantal": "27",
-            "url": "https://wellshave.com/collections/all",
-            "huidig": false,
-            "icoon": "shopify://shop_images/ws-zone-icoon-alles.png"
-          }
         }
       },
       "block_order": [
         "vraag_1",
         "vraag_2",
         "vraag_3",
+        "vraag_4",
         "match_1",
         "match_2",
         "match_3",
@@ -225,9 +231,9 @@
         "foto": "shopify://shop_images/gg-sfeer-geprobeerd.jpg",
         "foto_alt": "Een klassiek scheermes, een baardtrimmer en een schaar naast elkaar op een warme ondergrond",
         "kaartkop": "Jouw gezichtsapparaat in 30 seconden",
-        "kaartsub": "3 keuzes · direct een match",
+        "kaartsub": "4 keuzes · direct een match",
         "kaartvraag": "Wat doe je het vaakst?",
-        "tabel": "klus=mes > bgold\nklus=lijnen > edge\nklus=scheren, set=los, neus=geen > baron\nklus=scheren, set=los, neus=neus > gentleman\nklus=scheren, set=set, neus=geen > sentinel\nklus=scheren, set=set, neus=neus > elegant\nklus=baard, set=los > dial\nklus=baard, set=set, neus=geen > msiced\nklus=baard, set=set, neus=neus > supreme",
+        "tabel": "klus=mes > bgold\nklus=lijnen > edge\nklus=baard, set=set, glad=ja > supreme\nklus=baard, set=set, neus=neus > supreme\nklus=baard, set=set > msiced\nklus=baard > dial\nklus=scheren, set=set, neus=neus > elegant\nklus=scheren, set=set > sentinel\nklus=scheren, neus=neus > gentleman\nklus=scheren > baron",
         "standaard": "baron",
         "kruimel": "Gezicht & baard",
         "desk_indent_top": 0,
