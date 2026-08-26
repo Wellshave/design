@@ -766,17 +766,20 @@
   /* De knoppen staan op de telefoon naast elkaar en schuiven opzij, niet in twee
      rijen onder elkaar: dat scheelt de bezoeker verticale scroll voordat hij de
      producten ziet. Het lintje steekt boven de knop uit, dus de strip heeft ruimte
-     aan de bovenkant nodig — een scroller snijdt anders af wat erboven uitsteekt. */
+     aan de bovenkant nodig — een scroller snijdt anders af wat erboven uitsteekt.
+     `overflow-x:auto` snijdt namelijk ook verticaal af. De ruimte hierboven moet
+     dus minstens zo hoog zijn als het lintje; meet het na als je het lintje
+     aanpast. */
   .wsc .filters{
     flex-wrap:nowrap;overflow-x:auto;gap:8px;width:auto;
-    margin:0 -14px;padding:14px 14px 2px;
+    margin:0 -14px;padding:20px 14px 2px;
     scroll-snap-type:x proximity;scrollbar-width:none;-webkit-overflow-scrolling:touch}
   .wsc .filters::-webkit-scrollbar{display:none}
   .wsc .filter{flex:none;justify-content:flex-start;padding:10px 12px;font-size:12.5px;gap:8px;
     scroll-snap-align:start;white-space:nowrap}
   .wsc .filter svg{width:17px;height:17px}
   .wsc .filter i{min-width:23px;height:23px;font-size:11px}
-  .wsc .filter-lint{font-size:8.5px;padding:4px 9px 6px}
+  .wsc .filter-lint{font-size:8.5px;line-height:1.15;padding:3px 9px 5px}
   .wsc .fb-streep{display:none}
   .wsc .fb-rechts{width:100%;margin-left:0;gap:10px;flex-wrap:wrap}
   .wsc .fb-acties{flex:1;gap:8px}

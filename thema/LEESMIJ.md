@@ -212,7 +212,13 @@ staan naast elkaar en schuiven opzij. Beide alleen met opmaak — de markup is o
 breedte dezelfde, dus er is niets dat uit de pas kan gaan lopen.
 
 Twee dingen om te weten als je hieraan sleutelt. Een scroller snijdt af wat erboven
-uitsteekt, dus de knoppenstrip heeft `padding-top` nodig voor het lintje op Bundels. En een
+uitsteekt, dus de knoppenstrip heeft `padding-top` nodig voor het lintje op Bundels — en die
+ruimte moet **minstens zo hoog zijn als het lintje zelf**. Dat ging de eerste keer mis: het
+lintje was 23,6px en de strip reserveerde er 14, dus werd de bovenkant van *Meeste waarde*
+weggesneden. `overflow-x:auto` snijdt namelijk ook verticaal af; `overflow-y:visible` helpt
+niet, de browser maakt daar `auto` van. Het lintje is nu strakker gezet (`line-height:1.15`,
+17,8px hoog) en de strip reserveert 20px. Meet het na als je aan een van beide komt — de
+test hiervoor staat verderop. En een
 zonetegel zonder icoon heeft geen cirkel om het badge boven te hangen; die valt terug op
 `position:static` (`:not(:has(.zkaart-ico))`), zodat het aantal nooit op de naam belandt.
 De tegel *Alle zones* op de overzichtspagina had geen icoon en liep daarop stuk; die heeft
