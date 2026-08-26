@@ -3,6 +3,9 @@
 
 .ws-bn{font-family:"Montserrat",sans-serif;background:#F7F3EC;color:#111}
 .ws-bn *{box-sizing:border-box}
+/* de p-reset staat op .ws-bn p en is dus specifieker dan een losse
+   klasse: elke <p> die wél een marge hoort te hebben, staat hieronder
+   met .ws-bn ervoor. */
 .ws-bn p{margin:0;max-width:none}
 .ws-bn__in{max-width:1300px;margin:0 auto;padding:0 40px}
 
@@ -11,7 +14,7 @@
 .ws-bn__h2{font-size:42px;line-height:112%;font-weight:700;letter-spacing:-.03em;margin:0;
   color:#111;text-transform:none}
 .ws-bn__h2 b,.ws-bn__h2 strong{display:block;font-weight:700;color:#BC813E}
-.ws-bn__sub{margin-top:12px;font-size:14.5px;line-height:156%;color:rgba(17,17,17,.6);max-width:62ch}
+.ws-bn .ws-bn__sub{margin-top:12px;font-size:14.5px;line-height:156%;color:rgba(17,17,17,.6);max-width:62ch}
 
 /* ── de hoofdkaart ──
    Drie kolommen: de vitrine met het product, de tekst, en de kassa met
@@ -68,7 +71,9 @@
 .ws-bn__hslot{display:block;font-size:11.5px;line-height:150%;color:rgba(255,255,255,.45)}
 
 /* ── regel tussen de hoofdkaart en het rooster ── */
-.ws-bn__tussen{margin:30px 0 16px;text-align:center;font-size:17px;font-weight:700;
+/* ruime lucht boven deze regel: hij scheidt de uitgelichte set van het
+   rooster, en zonder die ruimte plakt hij tegen de hoofdkaart aan */
+.ws-bn .ws-bn__tussen{margin:48px 0 18px;text-align:center;font-size:17px;font-weight:700;
   letter-spacing:-.01em;color:#111}
 
 /* ── het rooster ──
@@ -158,12 +163,12 @@
   background:linear-gradient(135deg,rgba(245,209,138,.2) 0%,rgba(245,209,138,.07) 100%)}
 
 /* ── onderaan ── */
-.ws-bn__link{margin:30px 0 0;text-align:center}
+.ws-bn .ws-bn__link{margin:30px 0 0;text-align:center}
 .ws-bn__link a{display:inline-flex;align-items:center;gap:10px;font-size:13.5px;font-weight:700;
   color:#111;text-decoration:none;border-bottom:1px solid rgba(17,17,17,.35);padding-bottom:3px}
 .ws-bn__link a:hover{color:#BC813E;border-color:#BC813E}
 .ws-bn__link svg{width:15px;height:15px}
-.ws-bn__slot{margin:14px 0 0;display:flex;align-items:center;justify-content:center;gap:10px;
+.ws-bn .ws-bn__slot{margin:14px 0 0;display:flex;align-items:center;justify-content:center;gap:10px;
   font-size:12.5px;line-height:150%;color:rgba(17,17,17,.55);text-align:center}
 .ws-bn__slot svg{width:17px;height:17px;flex:none;padding:3px;border-radius:50%;
   border:1px solid rgba(188,129,62,.45);color:#BC813E}
@@ -181,7 +186,7 @@
 @media (max-width:749px){
   .ws-bn__in{padding:0 18px}
   .ws-bn__h2{font-size:28px}
-  .ws-bn__sub{font-size:13px;margin-top:10px}
+  .ws-bn .ws-bn__sub{font-size:13px;margin-top:10px}
   .ws-bn__kop{margin-bottom:18px}
 
   .ws-bn__hoofd{grid-template-columns:minmax(0,1fr);gap:16px;padding:14px;border-radius:16px}
@@ -204,7 +209,7 @@
   .ws-bn__hcta{padding:16px 14px;font-size:11.5px;letter-spacing:.09em;margin-top:2px}
   .ws-bn__hslot{font-size:10.5px}
 
-  .ws-bn__tussen{margin:24px 0 12px;font-size:15px}
+  .ws-bn .ws-bn__tussen{margin:36px 0 14px;font-size:15px}
   .ws-bn__rooster{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
   /* op 390px is een kaart nog geen 170px breed: beeld en tekst passen daar
      niet meer naast elkaar, dus het beeld gaat erboven */
@@ -223,7 +228,7 @@
   .ws-bn__cta{padding:12px 8px;font-size:10px;letter-spacing:.07em;gap:7px}
   .ws-bn__cta svg{width:13px;height:13px}
   .ws-bn__link a{font-size:12.5px}
-  .ws-bn__slot{font-size:11.5px;text-align:left}
+  .ws-bn .ws-bn__slot{font-size:11.5px;text-align:left}
 }
 
 /* onder de 360px is twee kaarten naast elkaar niet meer leesbaar */
