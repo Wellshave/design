@@ -84,7 +84,7 @@
 .ws-bs__foot svg{width:16px;height:16px;color:#BC813E;flex:none}
 .ws-bs__foot a{color:#111;text-underline-offset:3px}
 
-/* mobiel — twee kaarten naast elkaar; vier onder elkaar maakt het blok
+/* mobiel — één schuivende rij; vier kaarten in twee rijen maakten het blok
    te lang voor iets dat onder de vouw staat */
 @media (max-width:749px){
   .ws-bs{padding:34px 18px}
@@ -94,7 +94,12 @@
   .ws-bs__note{font-size:14px;margin-top:10px;max-width:none}
   .ws-bs__count{text-align:left}
   .ws-bs__count b{font-size:26px}
-  .ws-bs__grid{grid-template-columns:1fr 1fr;gap:11px}
+  /* zelfde schuifrij als bij de sets: één rij die van rand tot rand loopt,
+     met de volgende kaart zichtbaar aangesneden */
+  .ws-bs__grid{display:flex;gap:11px;overflow-x:auto;scroll-snap-type:x mandatory;
+    margin:0 -18px;padding:2px 18px 4px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .ws-bs__grid::-webkit-scrollbar{display:none}
+  .ws-bs__kaart{flex:0 0 63%;scroll-snap-align:start}
   .ws-bs__tag{top:8px;left:8px;font-size:8px;padding:5px 9px;letter-spacing:.1em}
   .ws-bs__body{padding:14px 13px 15px;gap:5px}
   .ws-bs__naam{font-size:14.5px}

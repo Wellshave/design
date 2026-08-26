@@ -563,7 +563,21 @@ footer p{margin:0;max-width:72ch}
 .bs-m .bs-note{font-size:14px;margin-top:10px;max-width:none}
 .bs-m .bs-count{text-align:left}
 .bs-m .bs-count b{font-size:26px}
-.bs-m .bs-grid{grid-template-columns:1fr 1fr;gap:11px}
+/* de vier kaarten schuiven horizontaal in plaats van in twee rijen onder
+   elkaar: dat scheelt een halve schermhoogte én de kaarten worden breder,
+   dus leesbaarder. De rij loopt van rand tot rand zodat de volgende kaart
+   zichtbaar aangesneden wordt — dat is de uitnodiging om te vegen. */
+.bs-m .bs-grid{display:flex;gap:11px;overflow-x:auto;scroll-snap-type:x mandatory;
+  margin:0 -18px;padding:2px 18px 4px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.bs-m .bs-grid::-webkit-scrollbar{display:none}
+.bs-m .bs-card{flex:0 0 63%;scroll-snap-align:start}
+.ws-baan{display:none}
+.bs-m .ws-baan{display:block;position:relative;width:118px;height:3px;margin:14px auto 0;
+  border-radius:3px;background:rgba(17,17,17,.1);overflow:hidden}
+/* in het thema zet een klein script deze balk mee met de scrollpositie;
+   hier staat hij op de beginstand */
+.bs-m .ws-baan i{position:absolute;top:0;bottom:0;left:2%;width:41%;border-radius:3px;
+  background:#BC813E}
 .bs-m .bs-tag{top:8px;left:8px;font-size:8px;padding:5px 9px;letter-spacing:.1em}
 .bs-m .bs-body{padding:14px 13px 15px;gap:5px}
 .bs-m .bs-name{font-size:14.5px}
@@ -2146,6 +2160,7 @@ footer p{margin:0;max-width:72ch}
               </span>
             </span>
         </div>
+        <div class="ws-baan" aria-hidden="true"><i></i></div>
 
         <p class="bs-foot"><svg><use href="#chk"/></svg>Je probeert elk apparaat honderd dagen. <a href="#">Bekijk het hele assortiment</a></p>
 
@@ -2238,6 +2253,7 @@ footer p{margin:0;max-width:72ch}
               </span>
             </span>
         </div>
+        <div class="ws-baan" aria-hidden="true"><i></i></div>
 
         <p class="bs-foot"><svg><use href="#chk"/></svg>Je probeert elk apparaat honderd dagen. <a href="#">Bekijk het hele assortiment</a></p>
 

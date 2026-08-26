@@ -179,7 +179,7 @@
 
 /* ── mobiel ──
    De hoofdkaart stapelt; binnen de blokken blijft alles wat naast elkaar
-   kan ook naast elkaar staan. Het rooster gaat naar twee kaarten per rij. */
+   kan ook naast elkaar staan. Het rooster wordt één schuivende rij. */
 @media (max-width:1099px){
   /* twee kolommen: beeld naast tekst, met de prijs en de knop eronder over
      de volle breedte. Het beeld blijft vierkant, dus groot. */
@@ -218,8 +218,15 @@
   .ws-bn__hslot{font-size:10.5px}
 
   .ws-bn .ws-bn__tussen{margin:36px 0 14px;font-size:15px}
-  .ws-bn__rooster{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-  .ws-bn__kaart{gap:10px;padding:10px;border-radius:13px}
+  /* de sets schuiven horizontaal in plaats van in twee rijen onder elkaar:
+     dat scheelt een halve schermhoogte én de kaarten worden breder, dus
+     leesbaarder. De rij loopt van rand tot rand zodat de volgende kaart
+     zichtbaar aangesneden wordt — dat is de uitnodiging om te vegen. */
+  .ws-bn__rooster{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;
+    margin:0 -18px;padding:2px 18px 4px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .ws-bn__rooster::-webkit-scrollbar{display:none}
+  .ws-bn__kaart{flex:0 0 63%;scroll-snap-align:start;gap:10px;padding:10px;border-radius:13px}
+  .ws-bn__kaart:hover{transform:none}
   .ws-bn__beeld img{padding:7px}
   .ws-bn__body{gap:5px}
   .ws-bn__label{font-size:9px;letter-spacing:.12em}
@@ -237,9 +244,9 @@
   .ws-bn .ws-bn__slot{font-size:11.5px;text-align:left}
 }
 
-/* onder de 360px is twee kaarten naast elkaar niet meer leesbaar */
+/* op een smal toestel mag de kaart een groter deel van het scherm pakken */
 @media (max-width:359px){
-  .ws-bn__rooster{grid-template-columns:minmax(0,1fr)}
+  .ws-bn__kaart{flex-basis:74%}
 }
 
 @media (prefers-reduced-motion:reduce){

@@ -1,0 +1,49 @@
+{%- comment -%}
+  De voortgangsbalk onder een rij die op de telefoon horizontaal schuift.
+  Gebruik: zet data-ws-baan op de rij en render dit er direct onder — het
+  script koppelt de balk aan de rij die er vlak boven staat.
+{%- endcomment -%}
+{{ 'ws-baan.css' | asset_url | stylesheet_tag }}
+<div class="ws-baan" aria-hidden="true"><i></i></div>
+<script>
+  (function () {
+    if (window.wsBaanKlaar) return;
+    window.wsBaanKlaar = 1;
+
+    function meet(rij, staaf, baan) {
+      var speling = rij.scrollWidth - rij.clientWidth;
+      // past de rij toch in één keer, dan is een balk alleen maar ruis
+      if (speling <= 2) { baan.hidden = true; return; }
+      baan.hidden = false;
+      var deel = rij.clientWidth / rij.scrollWidth;
+      staaf.style.width = (deel * 100) + '%';
+      staaf.style.left = ((rij.scrollLeft / speling) * (100 - deel * 100)) + '%';
+    }
+
+    function start() {
+      document.querySelectorAll('[data-ws-baan]').forEach(function (rij) {
+        if (rij.dataset.wsBaanAan) return;
+        // doorlopen langs de buren: het stylesheet-tag hierboven staat als
+        // element tussen de rij en de balk in
+        var baan = rij.nextElementSibling;
+        while (baan && !baan.classList.contains('ws-baan')) baan = baan.nextElementSibling;
+        if (!baan) return;
+        rij.dataset.wsBaanAan = '1';
+        var staaf = baan.firstElementChild;
+        var doe = function () { meet(rij, staaf, baan); };
+        rij.addEventListener('scroll', doe, { passive: true });
+        if (window.ResizeObserver) new ResizeObserver(doe).observe(rij);
+        doe();
+      });
+    }
+
+    // eerst meteen, voor wat er al staat, en daarna nog een keer als de hele
+    // pagina er is: het script staat in de sectie, dus bij de eerste ronde
+    // bestaan de rijen van de secties eronder nog niet
+    start();
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', start);
+    }
+    document.addEventListener('shopify:section:load', start);
+  })();
+</script>

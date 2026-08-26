@@ -104,7 +104,7 @@
       <p class="ws-bn__tussen">{{ section.settings.tussen }}</p>
     {%- endif -%}
 
-    <div class="ws-bn__rooster">
+    <div class="ws-bn__rooster" data-ws-baan>
       {%- for block in sets -%}
         {%- assign p = block.settings.product -%}
         {%- assign v = p.selected_or_first_available_variant -%}
@@ -148,6 +148,7 @@
         </a>
       {%- endfor -%}
     </div>
+    {% render 'ws-baan' %}
   {%- endif -%}
 
   {%- if section.settings.link_label != blank -%}

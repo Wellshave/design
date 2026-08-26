@@ -32,7 +32,7 @@
     {%- endif -%}
   </div>
 
-  <div class="ws-bs__grid">
+  <div class="ws-bs__grid" data-ws-baan>
     {%- for block in section.blocks -%}
       {%- assign p = block.settings.product -%}
       {%- assign v = p.selected_or_first_available_variant -%}
@@ -76,6 +76,7 @@
       </a>
     {%- endfor -%}
   </div>
+  {% render 'ws-baan' %}
 
   {%- if section.settings.foot != blank -%}
     <p class="ws-bs__foot"><svg><use href="#ws-bs-chk"/></svg>
