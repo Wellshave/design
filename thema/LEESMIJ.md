@@ -128,6 +128,46 @@ De iconen in de interface blijven wél: de vinkjes, chevrons en de pictogrammen 
 filterknoppen komen uit een sprite en zijn symbolen, geen illustraties. Hetzelfde
 geldt voor de gegenereerde zone-iconen in het megamenu.
 
+## De blauwe geverifieerd-badge
+
+Naast het citaat in de kop stond een blauw rondje met een vinkje erin. Dat is niet
+de badge die mensen kennen. Het is nu de echte vorm: een rozet met acht lobben in
+`#1D9BF0` met een wit vinkje, als sprite-symbool `wsc-badge`.
+
+De rozet is **uitgerekend, niet getekend**: `r(t) = 10,5 + 0,95·cos(8t)`, op 32 punten
+bemonsterd en via Catmull-Rom als bezierkromme uitgeschreven. Daardoor zijn alle acht
+lobben exact gelijk — met de hand zetten levert altijd één scheve lob op. Wil je de
+badge aanpassen, pas dan de formule aan en genereer het pad opnieuw; ga niet in het
+pad zelf zitten schuiven.
+
+De kleur en het vinkje zitten in het symbool, dus `.pk-badge` in de CSS zet alleen
+nog de maat (19px). Er is geen achtergrondcirkel meer.
+
+## De herofoto per categorie
+
+Elke collectiepagina heeft in de kop een liggende fotoband van ongeveer 2:1 (457×228
+op het brede scherm, 354×199 op de telefoon), `object-fit:cover` met
+`object-position:50% 40%`. De foto komt uit de instelling `foto` op
+`ws-collectie-kop`.
+
+Zes van de negen sjablonen hadden er geen. Vier zijn nu gevuld uit de eigen
+beeldbank — de lifestyle-shoot van september staat als
+`Wellshavesept25lifestyle_lowres-*` in de bestanden:
+
+| sjabloon | foto | waarom die |
+|---|---|---|
+| `zone-gezicht` | `gg-sfeer-geprobeerd.jpg` | mesje, baardtrimmer en schaar naast elkaar: precies de drie families in die zone |
+| `overzicht` | `…lowres-2-34.jpg` | de tas en de zakjes in de badkamernissen — de hele collectie, geen los product |
+| `type-baardtrimmers` | `…lowres-2-38.jpg` | een trimmer wordt uit de tas gepakt |
+| `type-scheerapparaten` | `…lowres-2-43.jpg` | een scheerapparaat met roterende kop wordt uit de tas gepakt |
+
+**`type-tondeuses` en `type-safetyrazors` staan bewust leeg.** De beeldbank heeft van
+die twee alleen uitgeknipte studiofoto's op wit. Nagemeten in de echte band: een
+2:1-uitsnede daarvan wordt een fel wit blok met een stuk apparaat erin, en dat is
+precies de klacht waarmee dit begon — een foto die niet bij de categorie past. Een
+losse flatlay van een tondeuse en van een safety razor op dezelfde warme ondergrond
+als `gg-sfeer-geprobeerd` vult beide in één keer.
+
 ## Zone ordent, type benoemt
 
 De winkel is opgebouwd rond producttypes, het ontwerp rond zones. Die twee vechten
