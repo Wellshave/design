@@ -10,11 +10,28 @@ PR #2 (`claude/homepage-analysis-redesign-u38dwu`).
 | De sectie | `sections/ws-overons.liquid` |
 | De opmaak | `assets/ws-overons.css` |
 | Het paginasjabloon | `templates/page.ws-overons.json` |
-| Voorbeeld om naar te kijken | `over-ons.preview.html` |
-| De bouwer daarvan | `preview.mjs` |
+| De markup, één bron | `blokken.mjs` |
+| Voorbeeld om naar te kijken | `over-ons.preview.html` (`preview.mjs`) |
+| Ontwerpbeeld | `over-ons.artifact.html` (`artifact.mjs`) |
+| De merkfotografie | `beeld/` |
 
 De pagina komt in Shopify onder Pagina's → "Over ons", handle `over-ons`,
 sjabloon `ws-overons`. Nu leidt `/pages/over-ons` nog om naar de homepage.
+
+## De beelden
+
+In `beeld/` staan de bestanden die het voorbeeld en het ontwerpbeeld inbedden.
+Het zijn dezelfde bestanden als op de homepage-tak in `audits/assets`:
+
+| Bestand | Waar |
+| --- | --- |
+| `hero-portrait.jpg` | de hero |
+| `hero-logo.png` | het monogram, drie keer: hero, kader, paneel |
+| `team-1.webp` … `team-3.webp` | de teamrij in blok 4 |
+
+Het monogram staat op donkere grond met `filter:brightness(0) invert(1)` en op
+lichte grond zonder filter — één bestand, twee behandelingen, net als in
+`ws-garantie.css` op de homepage.
 
 ## Vijf blokken
 
@@ -54,11 +71,13 @@ homepage-tak. Verbouw je de sectie, verbouw dan dit bestand mee.
 
 ## Wat er nog moet gebeuren
 
-* **Beelden.** De herofoto in het voorbeeld wijst naar een bestaand
-  CDN-bestand van wellshave.com. In het thema is het een `image_picker`; zet
-  daar eigen merkfotografie in. Hetzelfde geldt voor het monogram en de drie
-  teamfoto's — die staan als `ws-team-1` tot `ws-team-3` al in Shopify Files
-  vanuit de homepage.
+* **De bestandsnamen in Shopify Files controleren.** De sectie pakt eerst de
+  `image_picker`; staat die leeg, dan valt hij terug op `ws-hero-portrait.jpg`,
+  `ws-hero-logo.png` en `ws-team-1.webp` tot `-3`. Dat zijn de namen die de
+  homepage-README noemt (`ws-…`), maar ze zijn hier niet nagekeken tegen de
+  echte winkel. Klopt er een niet, dan blijft dat beeld weg — de rest van het
+  blok blijft staan. Pas dan de bestandsnaam aan in de instelling ernaast, of
+  kies het beeld gewoon in de editor.
 * **De cijfers.** 180.000+ bestellingen sinds 2021 en de 100 dagen, 2 jaar en
   €30 komen uit de homepage-instellingen; ze staan hier als tekstveld, dus ze
   lopen niet vanzelf mee als de winkel verandert.
