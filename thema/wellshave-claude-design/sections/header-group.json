@@ -137,7 +137,9 @@
             "banner2_title": "Alles in één keer compleet.",
             "banner2_subtitle": "Minder dan wanneer je alles los koopt.",
             "banner2_btn_label": "Bekijk de bundels",
-            "banner2_btn_link": "shopify://collections/bundels"
+            "banner2_btn_link": "shopify://collections/bundels",
+            "mob_icoon": "raster",
+            "mob_sub": "Vind jouw apparaat"
           }
         },
         "menu_item_2": {
@@ -150,7 +152,10 @@
             "banner_title": "",
             "banner_subtitle": "",
             "banner_btn_label": "",
-            "banner_btn_link": ""
+            "banner_btn_link": "",
+            "mob_icoon": "label",
+            "mob_sub": "Tot 40%",
+            "mob_sub_goud": true
           }
         },
         "menu_item_yeM3Jb": {
@@ -170,14 +175,18 @@
         "menu_item_3": {
           "type": "menu_item",
           "settings": {
-            "label": "BUNDLES",
+            "label": "BUNDELS",
             "link": "shopify://collections/bundels",
             "enable_megamenu": false,
             "enable_banner": false,
             "banner_title": "",
             "banner_subtitle": "",
             "banner_btn_label": "",
-            "banner_btn_link": ""
+            "banner_btn_link": "",
+            "mob_icoon": "cadeau",
+            "mob_sub": "Alles direct compleet",
+            "mob_licht": true,
+            "mob_badge": "Meeste waarde"
           }
         },
         "menu_item_4": {
@@ -190,7 +199,8 @@
             "banner_title": "",
             "banner_subtitle": "",
             "banner_btn_label": "",
-            "banner_btn_link": ""
+            "banner_btn_link": "",
+            "mob_icoon": "mensen"
           }
         },
         "menu_item_5": {
@@ -203,7 +213,8 @@
             "banner_title": "",
             "banner_subtitle": "",
             "banner_btn_label": "",
-            "banner_btn_link": ""
+            "banner_btn_link": "",
+            "mob_icoon": "vraag"
           }
         },
         "menu_item_yqaXFW": {
@@ -223,11 +234,11 @@
       },
       "block_order": [
         "menu_item_1",
-        "menu_item_2",
-        "menu_item_yeM3Jb",
         "menu_item_3",
+        "menu_item_2",
         "menu_item_4",
         "menu_item_5",
+        "menu_item_yeM3Jb",
         "menu_item_yqaXFW"
       ],
       "settings": {
@@ -235,7 +246,15 @@
         "enable_country_switcher": true,
         "enable_language_selector": true,
         "enable_search": true,
-        "enable_social": true
+        "enable_social": true,
+        "mob_actie_tekst": "Summer Sale · tot 40% korting",
+        "mob_actie_link": "shopify://collections/summer-sale-deals",
+        "mob_hulp_kop": "Niet zeker welke tool bij je past?",
+        "mob_hulp_sub": "Twee vragen, en je ziet wat bij je past.",
+        "mob_hulp_label": "Start de keuzehulp",
+        "mob_hulp_link": "shopify://collections/all",
+        "mob_belofte": "100 dagen proberen",
+        "mob_merk": "shopify://shop_images/ws-mark.png"
       }
     }
   },

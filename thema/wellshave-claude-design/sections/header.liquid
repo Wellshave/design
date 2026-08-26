@@ -223,21 +223,68 @@
 
   <div id="DrawerMobileMenu" class="header__mobile">
     <div class="header__mobile-inner">
-      <ul class="header__mobile-menu">
+      <div class="wsl-kop">
+        {%- comment -%}
+          Niet het gewone logo: dat is donker en bedoeld voor een lichte balk,
+          dus op zwart valt het weg. Hier het gouden merkteken plus het
+          woordmerk als tekst, zodat het altijd leesbaar is.
+        {%- endcomment -%}
+        <a href="{{ routes.root_url }}" class="wsl-logo" aria-label="{{ shop.name }}">
+          {%- if section.settings.mob_merk != blank -%}
+            {{ section.settings.mob_merk | image_url: width: 160 | image_tag: class: 'wsl-merk', alt: '' }}
+          {%- endif -%}
+          <span class="wsl-woordmerk">{{ shop.name }}</span>
+        </a>
+        <div class="wsl-kop-rechts">
+          <button type="button" class="wsl-sluit" data-action="menu-close" aria-label="{{ 'accessibility.close' | t | default: 'Sluiten' }}">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-kruis"/></svg>
+          </button>
+          <a href="{{ routes.cart_url }}" class="wsl-mand">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-tas"/></svg>
+            <span class="wsl-mand-tel">({{ cart.item_count }})</span>
+          </a>
+        </div>
+      </div>
+
+      {%- if section.settings.mob_actie_tekst != blank -%}
+        <a href="{{ section.settings.mob_actie_link | default: '/collections/all' }}" class="wsl-actie">
+          <svg class="wsl-actie-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-zon"/></svg>
+          <span class="wsl-actie-tekst">{{ section.settings.mob_actie_tekst }}</span>
+          <svg class="wsl-actie-pijl" viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-pijl"/></svg>
+        </a>
+      {%- endif -%}
+
+      <ul class="header__mobile-menu wsl-lijst">
         {%- for block in section.blocks -%}
           {% if block.settings.label != blank %}
             <li>
               {%- if block.settings.enable_megamenu -%}
-                <p class="header__mobile-item" data-action="megamenu-open">
-                  <span>{{ block.settings.label }}</span>
-                  {{- 'icon-caret-right.svg' | inline_asset_content -}}
+                <p class="header__mobile-item wsl-rij{% if block.settings.mob_licht %} is-licht{% endif %}" data-action="megamenu-open">
+                  {% render 'ws-lade-rij', blok: block %}
                 </p>
                 <div class="header__mobile-megamenu">
-                  <div class="header__mobile-back" data-action="megamenu-close">
-                    {{- 'icon-caret-left.svg' | inline_asset_content -}}
-                    {{- 'header.menu_back' | t -}}
+                  <div class="wsl-subkop">
+                    <button type="button" class="wsl-terug" data-action="megamenu-close">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-chevron-l"/></svg>
+                      {{- 'header.menu_back' | t -}}
+                    </button>
+                    <span class="wsl-subkop-naam">{{ block.settings.label }}</span>
+                    <button type="button" class="wsl-sluit" data-action="menu-close" aria-label="{{ 'accessibility.close' | t | default: 'Sluiten' }}">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-kruis"/></svg>
+                    </button>
                   </div>
                   <div class="wsmm-mob">
+                    {%- if block.settings.enable_banner -%}
+                      {% render 'ws-megamenu-promo',
+                        beeld: block.settings.banner_image,
+                        kicker: block.settings.banner_kicker,
+                        titel: block.settings.banner_title,
+                        tekst: '',
+                        label: block.settings.banner_btn_label,
+                        link: block.settings.banner_btn_link,
+                        groot: false
+                      %}
+                    {%- endif -%}
                     {%- if block.settings.megamenu_kop_1 != blank -%}
                       <p class="wsmm-kop">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-doel"/></svg>
@@ -293,16 +340,42 @@
                         {%- endif -%}
                       {%- endfor -%}
                     {%- endif -%}
+                    {%- if section.settings.mob_hulp_kop != blank -%}
+                      {% render 'ws-lade-hulp',
+                        kop: section.settings.mob_hulp_kop,
+                        sub: section.settings.mob_hulp_sub,
+                        label: section.settings.mob_hulp_label,
+                        link: section.settings.mob_hulp_link,
+                        compact: true
+                      %}
+                    {%- endif -%}
+                    {%- if section.settings.mob_belofte != blank -%}
+                      <p class="wsl-belofte">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-schild"/></svg>
+                        {{ section.settings.mob_belofte }}
+                      </p>
+                    {%- endif -%}
                   </div>
                 </div>
               {%- else -%}
-                <a href="{{ block.settings.link }}" class="header__mobile-item">
-                  <span>{{ block.settings.label }}</span>
+                <a href="{{ block.settings.link }}" class="header__mobile-item wsl-rij{% if block.settings.mob_licht %} is-licht{% endif %}">
+                  {% render 'ws-lade-rij', blok: block %}
                 </a>
               {%- endif -%}
             </li>
           {% endif %}
         {%- endfor -%}
+        {%- if section.settings.mob_hulp_kop != blank -%}
+          <li class="wsl-los">
+            {% render 'ws-lade-hulp',
+              kop: section.settings.mob_hulp_kop,
+              sub: section.settings.mob_hulp_sub,
+              label: section.settings.mob_hulp_label,
+              link: section.settings.mob_hulp_link,
+              compact: false
+            %}
+          </li>
+        {%- endif -%}
       </ul>
 
       <div class="header__mobile-bottom">
@@ -363,6 +436,13 @@
             {% render 'social' %}
           </div>
         {%- endif -%}
+
+        {%- if section.settings.mob_belofte != blank -%}
+          <p class="wsl-belofte">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-schild"/></svg>
+            {{ section.settings.mob_belofte }}
+          </p>
+        {%- endif -%}
       </div>
     </div>
 
@@ -412,7 +492,9 @@
   {
     "name": "Header",
     "enabled_on": {
-      "groups": ["header"]
+      "groups": [
+        "header"
+      ]
     },
     "limit": 1,
     "settings": [
@@ -444,6 +526,53 @@
         "id": "enable_social",
         "label": "Enable social (mobile menu)",
         "default": true
+      },
+      {
+        "type": "header",
+        "content": "Mobiele lade"
+      },
+      {
+        "type": "image_picker",
+        "id": "mob_merk",
+        "label": "Merkteken in de ladekop",
+        "info": "Het gouden S-teken. Het gewone logo is donker en valt weg op de zwarte balk; het woordmerk komt er als tekst naast."
+      },
+      {
+        "type": "text",
+        "id": "mob_actie_tekst",
+        "label": "Actiebalk bovenin",
+        "info": "Leeg laten om de gouden balk te verbergen."
+      },
+      {
+        "type": "url",
+        "id": "mob_actie_link",
+        "label": "Waar de actiebalk heen gaat"
+      },
+      {
+        "type": "text",
+        "id": "mob_hulp_kop",
+        "label": "Keuzehulp — kop"
+      },
+      {
+        "type": "text",
+        "id": "mob_hulp_sub",
+        "label": "Keuzehulp — regel eronder",
+        "info": "Noem hier geen aantal vragen of aantal seconden dat niet klopt. De keuzehulp op /collections/all stelt er twee."
+      },
+      {
+        "type": "text",
+        "id": "mob_hulp_label",
+        "label": "Keuzehulp — link"
+      },
+      {
+        "type": "url",
+        "id": "mob_hulp_link",
+        "label": "Keuzehulp — waarheen"
+      },
+      {
+        "type": "text",
+        "id": "mob_belofte",
+        "label": "Regel onderaan de lade"
       }
     ],
     "blocks": [
@@ -461,6 +590,77 @@
             "type": "url",
             "id": "link",
             "label": "Link"
+          },
+          {
+            "type": "header",
+            "content": "In de mobiele lade"
+          },
+          {
+            "type": "select",
+            "id": "mob_icoon",
+            "label": "Pictogram",
+            "default": "geen",
+            "options": [
+              {
+                "value": "geen",
+                "label": "Geen"
+              },
+              {
+                "value": "raster",
+                "label": "Raster (shop)"
+              },
+              {
+                "value": "cadeau",
+                "label": "Cadeau (bundels)"
+              },
+              {
+                "value": "label",
+                "label": "Prijskaartje (sale)"
+              },
+              {
+                "value": "mensen",
+                "label": "Twee personen (over ons)"
+              },
+              {
+                "value": "vraag",
+                "label": "Vraagteken (faq)"
+              },
+              {
+                "value": "doel",
+                "label": "Doel (zones)"
+              },
+              {
+                "value": "doos",
+                "label": "Doos (accessoires)"
+              },
+              {
+                "value": "schild",
+                "label": "Schild (garantie)"
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "id": "mob_sub",
+            "label": "Regel onder de naam"
+          },
+          {
+            "type": "checkbox",
+            "id": "mob_sub_goud",
+            "label": "Die regel in goud",
+            "default": false
+          },
+          {
+            "type": "checkbox",
+            "id": "mob_licht",
+            "label": "Rij oplichten",
+            "default": false,
+            "info": "Zandkleurige achtergrond, voor de rij die eruit mag springen."
+          },
+          {
+            "type": "text",
+            "id": "mob_badge",
+            "label": "Gouden label op de rij"
           },
           {
             "type": "header",
@@ -482,7 +682,7 @@
             "type": "textarea",
             "id": "mm_zone_labels",
             "label": "Tekst op een zonetegel",
-            "info": "E\u00e9n per regel: handle=Naam|Ondertitel. Bijvoorbeeld bodygroomers=Lichaam & schaamstreek|Bodygroomers voor de gevoelige huid. Dit verandert alleen het menu, niet de collectie zelf."
+            "info": "Eén per regel: handle=Naam|Ondertitel. Bijvoorbeeld bodygroomers=Lichaam & schaamstreek|Bodygroomers voor de gevoelige huid. Dit verandert alleen het menu, niet de collectie zelf."
           },
           {
             "type": "text",
@@ -511,7 +711,7 @@
             "type": "textarea",
             "id": "mm_type_labels",
             "label": "Tekst op een typeregel",
-            "info": "E\u00e9n per regel: handle=Naam|Ondertitel. De ondertitel wordt alleen op de uitgelichte kaart getoond."
+            "info": "Eén per regel: handle=Naam|Ondertitel. De ondertitel wordt alleen op de uitgelichte kaart getoond."
           },
           {
             "type": "text",

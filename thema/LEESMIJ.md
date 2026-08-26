@@ -668,6 +668,66 @@ ondertitel, zeven typeregels, de bundelkaart en de link, niets afgekapt.
   wanneer je alles los koopt" staat op alle vijftien bundels als
   compare-at-prijs.
 
+## De mobiele lade
+
+Naar het tweede ontwerp is niet alleen het SHOP-submenu vervangen, maar de hele
+lade. Twee niveaus:
+
+**Hoofdmenu** — zwarte kop met het merkteken, een sluitknop en het mandje; een
+gouden actiebalk; vijf menuregels met een gouden pictogram, een ondertitel en
+een chevron, waarvan BUNDELS zandkleurig oplicht met het label *Meeste waarde*;
+de donkere keuzehulpkaart; de Trustpilot-widget met de taal- en accountregel; en
+onderaan *100 dagen proberen*.
+
+**SHOP-submenu** — zwarte kop `‹ MENU | SHOP | ✕`; de promokaart; de zones; de
+link *Bekijk alle zones*; de types; de bundelkaart; een compacte keuzehulpkaart.
+
+Bestanden: `snippets/ws-lade-rij.liquid` (één menuregel) en
+`snippets/ws-lade-hulp.liquid` (de keuzehulpkaart), plus het `wsl-`-deel van
+`assets/ws-megamenu.css`. De lade zelf blijft van `header.css`; met
+`:has(.wsl-kop)` wordt hij fullscreen en verdwijnt de losse ronde sluitknop,
+zodat een lade zonder deze opbouw zijn oude maten houdt.
+
+### Instellingen
+
+Per menu-item: `mob_icoon` (keuze uit de sprite), `mob_sub`, `mob_sub_goud`,
+`mob_licht` en `mob_badge`. Op sectieniveau: `mob_merk`, `mob_actie_tekst` en
+`mob_actie_link`, de vier `mob_hulp_*`-velden en `mob_belofte`.
+
+### Drie dingen die niet konden zoals getekend
+
+**"Vijf vragen. Direct persoonlijk advies. · 60 sec" is niet waar.** De
+keuzehulp staat bovenaan de collectiepagina's en stelt twee vragen op
+`/collections/all` en twee tot drie op de zonepagina's; een aparte quizpagina
+bestaat niet. Er staat nu *"Twee vragen, en je ziet wat bij je past."* met de
+knop *Start de keuzehulp*, zonder tijdsclaim. Komt er ooit een echte quiz, dan
+is de tekst een instelling.
+
+**"Uitstekend · 4,6 · 650+ reviews" is niet overgenomen als tekst.** Dat zijn
+cijfers die verlopen. De Trustpilot-widget die er al stond blijft staan en toont
+de actuele score.
+
+**Het ingestelde logo is donker.** `redesign_header_logo.webp` heeft een
+gemiddelde helderheid van 63/255 en valt weg op de zwarte kop. De kop toont nu
+`ws-mark.png` (het gouden S-teken) plus het woordmerk als tekst. Een lichte
+logovariant kan later in `mob_merk`.
+
+### Twee kolommen alleen waar ze passen
+
+Het ontwerp zet zones en types in twee kolommen. Gemeten met het themalettertype
+is "schaamstreek" 83 px en "Scheerapparaten" 96 px breed, terwijl een halve
+tegel op een 360 px scherm 68 respectievelijk 73 px overlaat — dan breekt het
+woord middenin. Zones gaan daarom naar twee kolommen vanaf 400 px, types vanaf
+420 px; daaronder één kolom. Een oneven laatste tegel neemt de volle breedte.
+
+Gecontroleerd op 430, 390, 375 en 360 px: 52 van 52 controles goed (aantallen,
+niets buiten de rand, geen botsende onderdelen, geen afgekapte tekst, geen
+horizontale overloop) en op alle vier de maten breekt geen enkel woord middenin.
+
+De koppen heten op beide niveaus *Shop op zone* en *Shop op type*; het mobiele
+ontwerp zei *Kies je zone*. Ze komen uit dezelfde instelling als op desktop, dus
+één naam per kop — een tweede veld leek meer beheerwerk dan het waard is.
+
 ## Bekijken zonder te publiceren
 
 Open eerst deze link, daarna werkt elke collectiepagina in dezelfde browser:
