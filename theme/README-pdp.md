@@ -7,9 +7,14 @@ Dit bestand gaat over de productpagina.
 
 | | |
 |---|---|
-| Live thema | `wellshave-redesign/live` — **niet aankomen**, schrijven is aan de API-kant geblokkeerd |
-| Testthema | `wellshave/claude-design` (id 204178161996) |
-| Voorbeeld | https://wellshave.com/products/groom-guard-pro?view=ws-pdp&preview_theme_id=204178161996 |
+| **Live thema** | `wellshave/claude-design` (id **204178161996**) — sinds 26 augustus gepubliceerd. Dit wás het testthema; **niet meer rechtstreeks in schrijven** |
+| **Werkthema** | `wellshave/claude-design-werk` (id **204412977484**) — kopie van het live thema, gemaakt 26 augustus 17:23. **Hierin gaan alle nieuwe aanpassingen** |
+| Voorbeeld | https://wellshave.com/products/groom-guard-pro?preview_theme_id=204412977484 |
+| Oud | `wellshave-redesign/live` (200936096076) is niet meer gepubliceerd |
+
+De kopie is op het moment van maken gelijk aan het live thema: sectie, stylesheet,
+snippet en beide productsjablonen hebben daar dezelfde checksums. Wie hier verder
+werkt, schrijft dus naar **204412977484** en publiceert die pas als het af is.
 
 `?view=ws-pdp` rendert `templates/product.ws-pdp.json` zonder dat er een
 `templateSuffix` op een product gezet hoeft te worden. Er verandert dus niets
