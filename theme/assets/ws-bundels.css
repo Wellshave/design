@@ -19,7 +19,7 @@
 /* ── de hoofdkaart ──
    Drie kolommen: de vitrine met het product, de tekst, en de kassa met
    prijs en knop. Het hele vlak is één link. */
-.ws-bn__hoofd{display:grid;grid-template-columns:minmax(300px,1.02fr) minmax(270px,1fr) minmax(230px,.78fr);
+.ws-bn__hoofd{display:grid;grid-template-columns:minmax(320px,1.15fr) minmax(260px,1fr) minmax(230px,.76fr);
   gap:30px;align-items:center;background:#141312;border:1px solid rgba(245,209,138,.22);
   border-radius:20px;padding:22px;text-decoration:none;color:#fff;position:relative;overflow:hidden;
   transition:border-color .3s ease,box-shadow .3s ease}
@@ -27,9 +27,12 @@
   box-shadow:0 30px 70px -40px rgba(17,17,17,.75)}
 
 /* de vitrine: een verlicht plateau, zodat een productfoto met een lichte
-   achtergrond niet als een wit blok in het donkere vlak hangt */
+   achtergrond niet als een wit blok in het donkere vlak hangt. Vierkant,
+   want de setfoto's zijn vierkant: in een liggend vlak wordt de foto
+   kleiner dan die op de kaarten eronder, en juist hier moet het beeld het
+   werk doen. */
 .ws-bn__vitrine{display:block;position:relative;border-radius:14px;overflow:hidden;
-  aspect-ratio:4/3;background:radial-gradient(120% 90% at 50% 42%,#FFFFFF 0%,#F4EFE6 52%,#E6DCCB 100%)}
+  aspect-ratio:1/1;background:radial-gradient(120% 90% at 50% 42%,#FFFFFF 0%,#F4EFE6 52%,#E6DCCB 100%)}
 .ws-bn__vitrine::after{content:"";position:absolute;left:12%;right:12%;bottom:9%;height:14px;
   border-radius:50%;background:radial-gradient(closest-side,rgba(188,129,62,.55),rgba(188,129,62,0));
   pointer-events:none}
@@ -79,25 +82,26 @@
 /* ── het rooster ──
    auto-fit, zodat drie kaarten de rij vullen en vier of vijf er ook in
    passen: het aantal sets mag in de thema-editor veranderen. */
-.ws-bn__rooster{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:14px}
+.ws-bn__rooster{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
 
-.ws-bn__kaart{display:grid;grid-template-columns:104px minmax(0,1fr);
-  grid-template-areas:"beeld body" "cta cta";grid-template-rows:1fr auto;gap:14px;
-  align-items:stretch;
+/* een echte productkaart: het beeld staat bovenaan over de volle breedte,
+   niet als postzegel naast de tekst. Daar staat of valt het blok mee. */
+.ws-bn__kaart{display:flex;flex-direction:column;gap:13px;
   background:#FFFDF9;border:1px solid rgba(17,17,17,.09);border-radius:16px;padding:14px;
   text-decoration:none;color:#111;transition:border-color .3s ease,box-shadow .3s ease,transform .3s ease}
 .ws-bn__kaart:hover{color:#111;text-decoration:none;transform:translateY(-3px);
   border-color:rgba(188,129,62,.45);box-shadow:0 24px 48px -32px rgba(17,17,17,.5)}
 .ws-bn__kaart.is-uit{border-color:rgba(188,129,62,.55);box-shadow:0 18px 44px -30px rgba(188,129,62,.7)}
 
-.ws-bn__beeld{grid-area:beeld;position:relative;display:block;aspect-ratio:1/1;height:auto;
-  align-self:start;border-radius:11px;
-  overflow:hidden;background:#F2EDE4}
+.ws-bn__beeld{position:relative;display:block;width:100%;aspect-ratio:1/1;flex:none;
+  border-radius:12px;overflow:hidden;
+  background:radial-gradient(120% 95% at 50% 40%,#FFFFFF 0%,#F6F1E8 55%,#EDE5D6 100%)}
+/* contain, want de hele set moet in beeld staan: bij cover valt er altijd
+   een apparaat buiten de kaart */
 .ws-bn__beeld img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;
-  padding:6px}
+  padding:10px}
 
-.ws-bn__body{grid-area:body;display:flex;flex-direction:column;align-items:flex-start;gap:6px;
-  min-height:104px}
+.ws-bn__body{display:flex;flex:1;flex-direction:column;align-items:flex-start;gap:6px}
 .ws-bn__label{display:block;font-size:9.5px;font-weight:700;letter-spacing:.15em;
   text-transform:uppercase;color:#8F6428}
 .ws-bn__naam{display:block;font-size:17px;line-height:118%;font-weight:700;letter-spacing:-.02em;
@@ -117,7 +121,7 @@
 .ws-bn__stip{width:7px;height:7px;border-radius:50%;background:#2F9E5B;flex:none}
 .ws-bn__stip--uit{background:#B4453C}
 
-.ws-bn__cta{grid-area:cta;display:flex;align-items:center;justify-content:center;gap:10px;
+.ws-bn__cta{display:flex;align-items:center;justify-content:center;gap:10px;
   padding:14px 16px;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
   text-align:center;box-shadow:0 12px 26px -18px rgba(188,129,62,.9)}
 .ws-bn__cta svg{width:15px;height:15px;flex:none;transition:transform .3s ease}
@@ -177,8 +181,11 @@
    De hoofdkaart stapelt; binnen de blokken blijft alles wat naast elkaar
    kan ook naast elkaar staan. Het rooster gaat naar twee kaarten per rij. */
 @media (max-width:1099px){
-  .ws-bn__hoofd{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px}
-  .ws-bn__vitrine{grid-column:1/-1;aspect-ratio:16/8}
+  /* twee kolommen: beeld naast tekst, met de prijs en de knop eronder over
+     de volle breedte. Het beeld blijft vierkant, dus groot. */
+  .ws-bn__hoofd{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px 26px;align-items:start}
+  .ws-bn__hkassa{grid-column:1/-1}
+  .ws-bn__hcta{max-width:440px}
   .ws-bn__hnaam{font-size:28px}
   .ws-bn__hnu{font-size:34px}
 }
@@ -190,8 +197,9 @@
   .ws-bn__kop{margin-bottom:18px}
 
   .ws-bn__hoofd{grid-template-columns:minmax(0,1fr);gap:16px;padding:14px;border-radius:16px}
-  .ws-bn__vitrine{aspect-ratio:16/10}
+  .ws-bn__vitrine{aspect-ratio:4/3}
   .ws-bn__vitrine img{padding:10px}
+  .ws-bn__hcta{max-width:none}
   .ws-bn__hbody{gap:9px}
   .ws-bn__hpil{padding:6px 12px;font-size:9.5px}
   .ws-bn__hnaam{font-size:26px}
@@ -211,11 +219,9 @@
 
   .ws-bn .ws-bn__tussen{margin:36px 0 14px;font-size:15px}
   .ws-bn__rooster{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-  /* op 390px is een kaart nog geen 170px breed: beeld en tekst passen daar
-     niet meer naast elkaar, dus het beeld gaat erboven */
-  .ws-bn__kaart{grid-template-columns:minmax(0,1fr);grid-template-areas:"beeld" "body" "cta";
-    gap:10px;padding:10px;border-radius:13px}
-  .ws-bn__body{min-height:0;gap:5px}
+  .ws-bn__kaart{gap:10px;padding:10px;border-radius:13px}
+  .ws-bn__beeld img{padding:7px}
+  .ws-bn__body{gap:5px}
   .ws-bn__label{font-size:9px;letter-spacing:.12em}
   .ws-bn__naam{font-size:14.5px}
   .ws-bn__tekst{font-size:11.5px}
