@@ -1,4 +1,8 @@
-.wsc{container-type:inline-size;--ink:#111111;--ink-80:rgba(17,17,17,.8);--ink-60:rgba(17,17,17,.6);
+/* De tokens gelden ook voor .wsc-laag: de vergelijkpopup en de keuzebalk staan
+   BUITEN .wsc, want `container-type` maakt een element het containing block voor
+   position:fixed — een vaste laag binnen .wsc krijgt daardoor een vak van 0x0.
+   Alleen .wsc is een container; .wsc-laag is dat bewust niet. */
+.wsc,.wsc-laag{--ink:#111111;--ink-80:rgba(17,17,17,.8);--ink-60:rgba(17,17,17,.6);
   --ink-40:rgba(17,17,17,.4);--ink-10:rgba(17,17,17,.10);
   --paper:#FFFFFF;--sand:#F5F1EA;--sand-deep:#EDE6DA;--carbon:#191816;
   --bronze:#BC813E;--goud:#F5D18A;--alert:#E61C1C;
@@ -8,8 +12,12 @@
   --r-s:12px;--r-m:18px;--r-l:26px;--rail:1140px;
   font-family:"Montserrat",sans-serif;color:var(--ink);background:var(--paper);
   display:block;font-size:15px;line-height:1.6}
-.wsc *{box-sizing:border-box;margin:0;padding:0}
-.wsc img{max-width:100%;height:auto;display:block}
+.wsc{container-type:inline-size}
+/* .wsc-laag is bewust géén container en genereert zelf geen vak: de popup en de balk
+   erin zijn position:fixed en moeten het scherm als houvast hebben, niet de sectie. */
+.wsc-laag{display:contents}
+.wsc *,.wsc-laag *{box-sizing:border-box;margin:0;padding:0}
+.wsc img,.wsc-laag img{max-width:100%;height:auto;display:block}
 .wsc ul{list-style:none}
 .wsc a{color:inherit;text-decoration:none}
 .wsc button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
@@ -139,31 +147,9 @@
 .wsc .keuze{border:1px solid var(--ink-10);border-radius:100px;padding:10px 18px;font-size:13px;
   font-weight:700;background:var(--paper);transition:.16s ease}
 .wsc .keuze[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
-.wsc .vergelijk{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:26px}
-.wsc .vgl{background:var(--paper);border-radius:var(--r-m);overflow:hidden;position:relative;
-  box-shadow:0 14px 34px rgba(17,17,17,.09);display:flex;flex-direction:column;
-  border:2px solid transparent;transition:border-color .2s ease,transform .2s ease}
-.wsc .vgl.match{border-color:var(--bronze);transform:translateY(-4px)}
-.wsc .vgl.match .vgl-lint{opacity:1}
-.wsc .vgl-beeld{background:#F6F6F6;aspect-ratio:1/1;display:grid;place-items:center}
-.wsc .vgl-beeld img{width:100%}
-.wsc .vgl-body{padding:16px 18px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
-.wsc .vgl-body h3{font-size:15.5px;font-weight:800;letter-spacing:-.01em}
-.wsc .vgl-prijs{display:flex;align-items:baseline;gap:8px}
-.wsc .vgl-prijs b{font-size:19px;font-weight:900}
-.wsc .vgl-prijs s{font-size:12.5px;color:var(--ink-40)}
-.wsc .vgl dl{display:flex;flex-direction:column;gap:9px;margin-top:2px}
-.wsc .vgl dt{font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--ink-40)}
-.wsc .vgl dd{font-size:12.5px;line-height:1.5;color:var(--ink-80)}
-.wsc .vgl dd.nee{color:var(--ink-60)}
 .wsc .score{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--ink-60)}
 .wsc .score .sterren svg{width:11px;height:11px;fill:#BC813E}
 .wsc .score.leeg{color:var(--ink-40);font-weight:600}
-@container (max-width:700px){
-  .wsc .vergelijk{grid-template-columns:1fr;gap:14px}
-  .wsc .vgl.match{transform:none}
-}
 .wsc .lint.zand{background:var(--sand-deep);color:var(--ink)}
 .wsc .kaart-actie .snel{flex:none;width:44px;border:1px solid var(--ink-10);border-radius:100px;
   display:grid;place-items:center}
@@ -432,7 +418,6 @@
 }
 .wsc .uitklap .vknop{padding:18px 0}
 .wsc .uitklap .vantwoord{max-width:none;padding-bottom:24px}
-.wsc .uitklap .vergelijk{margin-top:0}
 
 /* ── blok 3 · over de categorie ── */
 .wsc .cat{display:grid;grid-template-columns:1fr .84fr;gap:52px;align-items:start}
@@ -708,29 +693,102 @@
   .wsc .wsk-mark,.wsc .wsk-pack,.wsc .wsk,.wsc .wsk-oog{transition:none}
 }
 
-/* vergelijkbalk en uitklap */
-.wsc .vgl-balk{display:flex;align-items:center;justify-content:space-between;gap:20px;
-  background:var(--paper);border:1px solid rgba(17,17,17,.08);border-radius:12px;
-  padding:16px 20px;margin-top:20px}
-.wsc .vgl-balk .vb-tekst{display:flex;gap:14px;align-items:center}
-.wsc .vgl-balk .vb-ico{width:36px;height:36px;border-radius:100px;background:#F5F1EA;flex:none;
-  display:grid;place-items:center}
-.wsc .vgl-balk .vb-ico svg{width:18px;height:18px;stroke:var(--bronze);fill:none;stroke-width:1.9}
-.wsc .vgl-balk b{display:block;font-size:13.5px;font-weight:600}
-.wsc .vgl-balk span{font-size:12.5px;color:var(--ink-60)}
-.wsc .vgl-knop{flex:none;border:1px solid rgba(188,129,62,.55);color:#8F6428;border-radius:10px;
-  padding:12px 18px;font-size:11.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
-  transition:background .3s ease,opacity .3s ease}
-.wsc .vgl-knop:hover{background:#F7F1E6}
-.wsc .vgl-knop[disabled]{opacity:.45;cursor:default}
-.wsc .vgl-uit{display:none;margin-top:16px;background:var(--paper);border:1px solid rgba(17,17,17,.08);
-  border-radius:12px;padding:22px}
-.wsc .vgl-uit.open{display:block}
-.wsc .vgl-uit .vergelijk{margin-top:0;display:flex;gap:16px;flex-wrap:wrap}
-.wsc .vgl-uit .vgl{flex:1 1 0;min-width:210px;max-width:none}
-.wsc .vgl-sluit{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--ink-60);
-  margin-bottom:14px}
-.wsc .vgl-sluit svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.2}
+/* ── de vergelijking: een venster over de pagina, plus een balk onder in beeld ──
+   Beide staan in .wsc-laag, buiten .wsc. Zie de opmerking bovenaan dit bestand:
+   binnen een container met `container-type` is position:fixed onbruikbaar. */
+
+.wsc-laag .vgl-uit{position:fixed;inset:0;z-index:120;display:grid;place-items:center;padding:24px}
+.wsc-laag .vgl-uit[hidden]{display:none}
+/* let op: dit thema heeft een globale regel `div:empty{display:none}`. De waas is een
+   lege div, dus die moet zijn display hier expliciet terugzetten — anders is hij er
+   wel, maar onzichtbaar en niet aanklikbaar. Geldt voor elke lege div die je toevoegt. */
+.wsc-laag .vgl-waas{display:block;position:absolute;inset:0;background:rgba(12,11,10,.62);
+  backdrop-filter:blur(3px);animation:vgl-in .18s ease}
+.wsc-laag .vgl-venster{position:relative;background:var(--sand);border-radius:var(--r-l);
+  width:min(1180px,100%);max-height:min(88vh,900px);display:flex;flex-direction:column;
+  overflow:hidden;box-shadow:0 30px 90px rgba(12,11,10,.4);animation:vgl-op .22s ease}
+@keyframes vgl-in{from{opacity:0}to{opacity:1}}
+@keyframes vgl-op{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){
+  .wsc-laag .vgl-waas,.wsc-laag .vgl-venster{animation:none}
+}
+.wsc-laag .vgl-kop{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:20px 24px;border-bottom:1px solid var(--ink-10);flex:none}
+.wsc-laag .vgl-kop h2{font-size:18px;font-weight:900;letter-spacing:-.02em}
+.wsc-laag .vgl-sluit{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;
+  color:var(--ink-60);background:var(--paper);border:1px solid var(--ink-10);flex:none;
+  transition:background .16s ease,color .16s ease}
+.wsc-laag .vgl-sluit:hover{background:var(--carbon);color:#fff;border-color:var(--carbon)}
+.wsc-laag .vgl-sluit svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2.2}
+/* alleen dit deel scrolt, zodat de kop en de sluitknop altijd bereikbaar blijven */
+/* Op het brede scherm staan er hoogstens drie kaarten van 300px: 3x300 + 2x16 = 932,
+   ruim binnen de 1132px die het venster binnen zijn marge overhoudt. Daarom mag hier
+   `center` staan zonder dat de eerste kaart ooit buiten het scrollvak valt. Op de
+   telefoon schuift de rij wél, en staat hij daarom links uitgelijnd. */
+.wsc-laag .vergelijk{display:flex;gap:16px;flex-wrap:nowrap;overflow:auto;justify-content:center;
+  padding:22px 24px 26px;margin:0;-webkit-overflow-scrolling:touch}
+.wsc-laag .vgl{background:var(--paper);border-radius:var(--r-m);overflow:hidden;position:relative;
+  box-shadow:0 14px 34px rgba(17,17,17,.09);display:flex;flex-direction:column;
+  flex:1 1 0;min-width:216px;max-width:300px;border:2px solid transparent}
+.wsc-laag .vgl.uit{display:none}
+.wsc-laag .vgl-beeld{background:#F6F6F6;aspect-ratio:5/4;display:grid;place-items:center;padding:8px}
+.wsc-laag .vgl-beeld img{width:auto;max-width:100%;max-height:100%;object-fit:contain}
+.wsc-laag .vgl-body{padding:16px 18px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.wsc-laag .vgl-body h3{font-size:15.5px;font-weight:800;letter-spacing:-.01em;line-height:1.25}
+.wsc-laag .vgl-prijs{display:flex;align-items:baseline;gap:8px}
+.wsc-laag .vgl-prijs b{font-size:19px;font-weight:900}
+.wsc-laag .vgl-prijs s{font-size:12.5px;color:var(--ink-40)}
+.wsc-laag .vgl dl{display:flex;flex-direction:column;gap:4px;margin-top:2px}
+.wsc-laag .vgl dt{font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-40);margin-top:7px}
+.wsc-laag .vgl dt:first-child{margin-top:0}
+.wsc-laag .vgl dd{font-size:12.5px;line-height:1.5;color:var(--ink-80)}
+.wsc-laag .vgl dd.nee{color:var(--ink-60)}
+.wsc-laag .vgl .tekstlink{margin-top:auto;padding-top:10px;font-size:13px;font-weight:600;
+  text-decoration:underline;text-underline-offset:3px}
+.wsc-laag .vgl .wsk-score{display:inline-flex;align-items:center;gap:6px;font-size:12px;
+  font-weight:700;color:var(--ink-60)}
+
+/* de keuzebalk onder in beeld */
+.wsc-laag .vgl-balk{position:fixed;left:50%;transform:translateX(-50%);
+  bottom:max(18px,env(safe-area-inset-bottom));z-index:110;
+  width:min(620px,calc(100% - 32px));display:flex;align-items:center;justify-content:space-between;
+  gap:18px;background:var(--carbon);color:#fff;border-radius:100px;padding:12px 12px 12px 22px;
+  box-shadow:0 16px 44px rgba(12,11,10,.34);animation:vgl-omhoog .22s ease}
+.wsc-laag .vgl-balk[hidden]{display:none}
+@keyframes vgl-omhoog{from{opacity:0;transform:translate(-50%,16px)}to{opacity:1;transform:translate(-50%,0)}}
+@media (prefers-reduced-motion:reduce){ .wsc-laag .vgl-balk{animation:none} }
+.wsc-laag .vgl-balk-tel{font-size:13px;color:rgba(255,255,255,.72);white-space:nowrap}
+.wsc-laag .vgl-balk-tel b{color:#fff;font-weight:800}
+.wsc-laag .vgl-balk-tel .kort{display:none}
+.wsc-laag .vgl-balk-knoppen{display:flex;align-items:center;gap:6px;flex:none}
+.wsc-laag .vgl-balk-wis{font-size:12.5px;font-weight:600;color:rgba(255,255,255,.6);
+  padding:10px 12px;border-radius:100px;transition:color .16s ease}
+.wsc-laag .vgl-balk-wis:hover{color:#fff}
+.wsc-laag .vgl-balk .knop{display:inline-flex;align-items:center;gap:9px;background:var(--grad-goud);
+  color:var(--carbon);border-radius:100px;padding:12px 20px;font-size:12px;font-weight:800;
+  letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;
+  transition:transform .16s ease}
+.wsc-laag .vgl-balk .knop:hover{transform:translateY(-1px)}
+.wsc-laag .vgl-balk .knop svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.1}
+
+@media (max-width:700px){
+  .wsc-laag .vgl-uit{padding:0;place-items:end stretch}
+  .wsc-laag .vgl-venster{width:100%;max-height:92vh;border-radius:var(--r-l) var(--r-l) 0 0}
+  .wsc-laag .vgl-kop{padding:16px 16px 14px}
+  .wsc-laag .vgl-kop h2{font-size:16px}
+  .wsc-laag .vergelijk{padding:16px;gap:12px;justify-content:flex-start}
+  .wsc-laag .vgl{min-width:78%;max-width:none}
+  .wsc-laag .vgl-balk{padding:10px 10px 10px 18px;gap:10px}
+  .wsc-laag .vgl-balk-tel{font-size:12px}
+  .wsc-laag .vgl-balk-tel .lang{display:none}
+  .wsc-laag .vgl-balk-tel .kort{display:inline}
+  .wsc-laag .vgl-balk-wis{padding:9px 8px}
+  .wsc-laag .vgl-balk .knop{padding:11px 16px;font-size:11.5px}
+}
+/* zolang de balk in beeld staat, mag de pagina er niet achter verdwijnen */
+body.vgl-balk-aan{padding-bottom:86px}
+body.vgl-open{overflow:hidden}
 
 /* smalle aanbodstrook — geen kaart, geen badges, één regel */
 .wsc .aanbod{display:grid;grid-template-columns:82px 1fr auto;gap:22px;align-items:center;
@@ -816,10 +874,6 @@
   .wsc .wsk-prijs b{font-size:16px}
   .wsc .wsk-cta{padding:11px 8px;font-size:10px;letter-spacing:.05em}
   .wsc .wsk-chips i{font-size:9.5px;padding:3px 8px}
-  .wsc .vgl-balk{flex-direction:column;align-items:flex-start;gap:14px;padding:14px}
-  .wsc .vgl-knop{width:100%}
-  .wsc .vgl-uit{padding:16px 14px}
-  .wsc .vgl-uit .vergelijk{flex-direction:column}
 }
 .wsc .sterren5 i.leeg{opacity:.17}
 .wsc .sterrenrij i.leeg{background:rgba(255,255,255,.2)}
@@ -874,7 +928,3 @@
   cursor:pointer;font:inherit;border:0;padding:0;-webkit-appearance:none;appearance:none}
 .wsc .fb-sorteer:focus-within{border-color:rgba(188,129,62,.6);outline:2px solid rgba(188,129,62,.25);
   outline-offset:2px}
-
-/* In het vergelijkpaneel staat dezelfde sterrenrij als op de kaart. */
-.wsc .vgl .wsk-score{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:var(--ink-60)}
-.wsc .vgl .tekstlink{margin-top:auto;padding-top:6px}

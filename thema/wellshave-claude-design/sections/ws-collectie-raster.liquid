@@ -308,93 +308,6 @@
     </aside>
   {%- endif -%}
 
-  {%- comment -%}
-    Het vergelijkpaneel. De CSS en de JS hiervoor stonden er al, alleen deze markup
-    ontbrak — daardoor werd de knop wel actief bij twee vinkjes maar gebeurde er niets.
-    Alleen apparaten komen erin: dat zijn ook de enige kaarten met een vinkje.
-    Alles wat hier staat komt uit het product zelf, net als op de kaart.
-  {%- endcomment -%}
-  {%- if section.settings.vergelijken -%}
-    {%- assign heeft_app = false -%}
-    {%- for block in section.blocks -%}
-      {%- if block.type == 'groep' -%}
-        {%- assign c = block.settings.cat | default: 'app' -%}
-        {%- if c == 'app' -%}{%- assign heeft_app = true -%}{%- endif -%}
-      {%- endif -%}
-    {%- endfor -%}
-    {%- if heeft_app -%}
-      <div class="vgl-uit">
-        <button type="button" class="vgl-sluit">
-          <svg viewBox="0 0 24 24" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
-          <span>{{ section.settings.vgl_sluit | default: 'Sluit de vergelijking' }}</span>
-        </button>
-        <div class="vergelijk">
-          {%- for block in section.blocks -%}
-            {%- if block.type != 'groep' -%}{%- continue -%}{%- endif -%}
-            {%- assign c = block.settings.cat | default: 'app' -%}
-            {%- if c != 'app' -%}{%- continue -%}{%- endif -%}
-            {%- if block.settings.uit_collectie and collection -%}
-              {%- assign vlijst = collection.products -%}
-            {%- else -%}
-              {%- assign vlijst = block.settings.producten -%}
-            {%- endif -%}
-            {%- for p in vlijst -%}
-              {%- assign v = p.selected_or_first_available_variant -%}
-              {%- assign vscore = p.metafields.loox.avg_rating.value -%}
-              {%- assign vtellen = p.metafields.loox.num_reviews.value -%}
-              {%- assign vdoos = p.metafields.custom.included_box.value | size -%}
-              {%- assign vusps = p.metafields.custom.product_usp.value -%}
-              <article class="vgl" data-id="{{ p.handle }}">
-                <div class="vgl-beeld">
-                  {{ p.featured_image | image_url: width: 400 | image_tag: alt: p.title, loading: 'lazy' }}
-                </div>
-                <div class="vgl-body">
-                  <h3>{{ p.title }}</h3>
-                  {%- if vscore and vtellen and vtellen > 0 -%}
-                    {%- assign vheel = vscore | floor -%}
-                    {%- assign vrest = vscore | minus: vheel -%}
-                    {%- assign vhalf = vheel | plus: 1 -%}
-                    <span class="wsk-score">
-                      <span class="sterren5">
-                        {%- for i in (1..5) -%}
-                          {%- if i <= vheel -%}<i></i>
-                          {%- elsif vrest >= 0.25 and i == vhalf -%}<i class="half"></i>
-                          {%- else -%}<i class="leeg"></i>{%- endif -%}
-                        {%- endfor -%}
-                      </span>
-                      <b>{{ vscore | round: 1 | replace: '.', ',' }}</b> ({{ vtellen }})
-                    </span>
-                  {%- else -%}
-                    <span class="wsk-score leeg">{{ section.settings.geen_score | default: 'Nog geen beoordelingen' }}</span>
-                  {%- endif -%}
-                  <p class="vgl-prijs"><b>{{ v.price | money }}</b>
-                    {%- if v.compare_at_price > v.price %} <s>{{ v.compare_at_price | money }}</s>{% endif -%}
-                  </p>
-                  <dl>
-                    {%- if vdoos > 0 -%}
-                      <dt>In de doos</dt><dd>{{ vdoos }} onderde{% if vdoos == 1 %}el{% else %}len{% endif %}</dd>
-                    {%- endif -%}
-                    {%- if vusps -%}
-                      {%- for u in vusps limit: 3 -%}
-                        <dt>Waarvoor</dt><dd>{{ u }}</dd>
-                      {%- endfor -%}
-                    {%- endif -%}
-                    <dt>Levering</dt>
-                    <dd{% unless p.available %} class="nee"{% endunless %}>
-                      {%- if p.available -%}{{ section.settings.blik_voet | default: 'Op voorraad' }}
-                      {%- else -%}{{ section.settings.uitverkocht_voet | default: 'Tijdelijk niet leverbaar' }}{%- endif -%}
-                    </dd>
-                  </dl>
-                  <a class="tekstlink" href="{{ p.url }}">Bekijk {{ p.title }}</a>
-                </div>
-              </article>
-            {%- endfor -%}
-          {%- endfor -%}
-        </div>
-      </div>
-    {%- endif -%}
-  {%- endif -%}
-
   <div class="rasterslot">
     <span><b class="telling">{{ n_totaal }} artikelen</b> {{ section.settings.slot_tekst }}</span>
     {%- if section.settings.slot_link_label != blank -%}
@@ -403,6 +316,128 @@
   </div>
 
 </div></section>
+</div>
+
+{%- comment -%}
+  De vergelijkpopup en de keuzebalk staan buiten .wsc. Dat moet: .wsc heeft
+  `container-type:inline-size` en dat maakt het element het containing block
+  voor position:fixed — een vaste laag erbinnen krijgt een vak van 0x0.
+  .wsc-laag erft wel de tokens maar is zelf geen container (display:contents).
+{%- endcomment -%}
+<div class="wsc-laag">
+  {%- comment -%}
+  Het vergelijkpaneel. De CSS en de JS hiervoor stonden er al, alleen deze markup
+  ontbrak — daardoor werd de knop wel actief bij twee vinkjes maar gebeurde er niets.
+  Alleen apparaten komen erin: dat zijn ook de enige kaarten met een vinkje.
+  Alles wat hier staat komt uit het product zelf, net als op de kaart.
+  {%- endcomment -%}
+  {%- if section.settings.vergelijken -%}
+  {%- assign heeft_app = false -%}
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'groep' -%}
+      {%- assign c = block.settings.cat | default: 'app' -%}
+      {%- if c == 'app' -%}{%- assign heeft_app = true -%}{%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- if heeft_app -%}
+    <div class="vgl-uit" role="dialog" aria-modal="true" aria-labelledby="vgl-kop-{{ section.id }}" hidden>
+      <div class="vgl-waas" data-vgl-sluit></div>
+      <div class="vgl-venster">
+        <header class="vgl-kop">
+          <h2 id="vgl-kop-{{ section.id }}">{{ section.settings.vgl_kop | default: 'Naast elkaar' }}</h2>
+          <button type="button" class="vgl-sluit" data-vgl-sluit
+                  aria-label="{{ section.settings.vgl_sluit | default: 'Sluit de vergelijking' }}">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          </button>
+        </header>
+        <div class="vergelijk">
+        {%- for block in section.blocks -%}
+          {%- if block.type != 'groep' -%}{%- continue -%}{%- endif -%}
+          {%- assign c = block.settings.cat | default: 'app' -%}
+          {%- if c != 'app' -%}{%- continue -%}{%- endif -%}
+          {%- if block.settings.uit_collectie and collection -%}
+            {%- assign vlijst = collection.products -%}
+          {%- else -%}
+            {%- assign vlijst = block.settings.producten -%}
+          {%- endif -%}
+          {%- for p in vlijst -%}
+            {%- assign v = p.selected_or_first_available_variant -%}
+            {%- assign vscore = p.metafields.loox.avg_rating.value -%}
+            {%- assign vtellen = p.metafields.loox.num_reviews.value -%}
+            {%- assign vdoos = p.metafields.custom.included_box.value | size -%}
+            {%- assign vusps = p.metafields.custom.product_usp.value -%}
+            <article class="vgl" data-id="{{ p.handle }}">
+              <div class="vgl-beeld">
+                {{ p.featured_image | image_url: width: 400 | image_tag: alt: p.title, loading: 'lazy' }}
+              </div>
+              <div class="vgl-body">
+                <h3>{{ p.title }}</h3>
+                {%- if vscore and vtellen and vtellen > 0 -%}
+                  {%- assign vheel = vscore | floor -%}
+                  {%- assign vrest = vscore | minus: vheel -%}
+                  {%- assign vhalf = vheel | plus: 1 -%}
+                  <span class="wsk-score">
+                    <span class="sterren5">
+                      {%- for i in (1..5) -%}
+                        {%- if i <= vheel -%}<i></i>
+                        {%- elsif vrest >= 0.25 and i == vhalf -%}<i class="half"></i>
+                        {%- else -%}<i class="leeg"></i>{%- endif -%}
+                      {%- endfor -%}
+                    </span>
+                    <b>{{ vscore | round: 1 | replace: '.', ',' }}</b> ({{ vtellen }})
+                  </span>
+                {%- else -%}
+                  <span class="wsk-score leeg">{{ section.settings.geen_score | default: 'Nog geen beoordelingen' }}</span>
+                {%- endif -%}
+                <p class="vgl-prijs"><b>{{ v.price | money }}</b>
+                  {%- if v.compare_at_price > v.price %} <s>{{ v.compare_at_price | money }}</s>{% endif -%}
+                </p>
+                <dl>
+                  {%- if vdoos > 0 -%}
+                    <dt>In de doos</dt><dd>{{ vdoos }} onderde{% if vdoos == 1 %}el{% else %}len{% endif %}</dd>
+                  {%- endif -%}
+                  {%- comment -%}
+                    Eén kop met drie regels eronder. De kop stond eerst in de lus,
+                    waardoor "Waarvoor" drie keer boven elkaar verscheen.
+                  {%- endcomment -%}
+                  {%- if vusps -%}
+                    <dt>{{ section.settings.vgl_usp_kop | default: 'Waarvoor' }}</dt>
+                    {%- for u in vusps limit: 3 -%}<dd>{{ u }}</dd>{%- endfor -%}
+                  {%- endif -%}
+                  <dt>Levering</dt>
+                  <dd{% unless p.available %} class="nee"{% endunless %}>
+                    {%- if p.available -%}{{ section.settings.blik_voet | default: 'Op voorraad' }}
+                    {%- else -%}{{ section.settings.uitverkocht_voet | default: 'Tijdelijk niet leverbaar' }}{%- endif -%}
+                  </dd>
+                </dl>
+                <a class="tekstlink" href="{{ p.url }}">Bekijk {{ p.title }}</a>
+              </div>
+            </article>
+          {%- endfor -%}
+        {%- endfor -%}
+        </div>
+      </div>
+    </div>
+
+    {%- comment -%}
+      De keuzebalk: verschijnt onder in beeld zodra er twee vinkjes staan, zodat je
+      niet terug hoeft te scrollen naar de knop in de filterbalk.
+    {%- endcomment -%}
+    <div class="vgl-balk" hidden>
+      <p class="vgl-balk-tel"><b>0</b>
+        <span class="lang">{{ section.settings.vgl_balk_tekst | default: 'geselecteerd om te vergelijken' }}</span>
+        <span class="kort">{{ section.settings.vgl_balk_kort | default: 'gekozen' }}</span>
+      </p>
+      <div class="vgl-balk-knoppen">
+        <button type="button" class="vgl-balk-wis">{{ section.settings.vgl_balk_wis | default: 'Wis' }}</button>
+        <button type="button" class="knop vgl-open">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsr-weeg"/></svg>
+          {{ section.settings.vgl_balk_knop | default: 'Vergelijk' }}<span class="vgl-tel"></span>
+        </button>
+      </div>
+    </div>
+  {%- endif -%}
+{%- endif -%}
 </div>
 
 {% schema %}
@@ -429,6 +464,13 @@
     { "type": "text", "id": "sorteer_prijs_af", "label": "Sorteren: prijs aflopend", "default": "Prijs: hoog naar laag" },
     { "type": "text", "id": "sorteer_score", "label": "Sorteren: op beoordeling", "default": "Best beoordeeld" },
     { "type": "checkbox", "id": "vergelijken", "label": "Vergelijker aanzetten", "info": "Vergelijken hoort binnen één zone. Op een overkoepelende pagina uitzetten: een hoofdscheerder naast een neustrimmer leggen helpt niemand.", "default": true },
+    { "type": "text", "id": "vgl_kop", "label": "Kop van het vergelijkvenster", "default": "Naast elkaar" },
+    { "type": "text", "id": "vgl_sluit", "label": "Sluitknop (voorleestekst)", "default": "Sluit de vergelijking" },
+    { "type": "text", "id": "vgl_usp_kop", "label": "Kop boven de eigenschappen", "default": "Waarvoor" },
+    { "type": "text", "id": "vgl_balk_tekst", "label": "Balk: tekst na het aantal", "default": "geselecteerd om te vergelijken" },
+    { "type": "text", "id": "vgl_balk_kort", "label": "Balk: korte tekst (telefoon)", "info": "De lange tekst breekt op een smal scherm over twee regels; deze komt daarvoor in de plaats.", "default": "gekozen" },
+    { "type": "text", "id": "vgl_balk_wis", "label": "Balk: wisknop", "default": "Wis" },
+    { "type": "text", "id": "vgl_balk_knop", "label": "Balk: vergelijkknop", "default": "Vergelijk" },
     { "type": "text", "id": "sorteer_label", "label": "Sorteerknop", "default": "Meest relevant" },
     { "type": "text", "id": "wis_label", "label": "Wisknop", "default": "Wis keuzes" },
     { "type": "image_picker", "id": "monogram", "label": "Monogram achter de packshot", "info": "Verschijnt bij hover en blijft staan op de kaart die de keuzehulp aanwijst. Werkt alleen achter een vrijstaande packshot." },

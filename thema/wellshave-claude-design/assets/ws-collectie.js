@@ -159,26 +159,66 @@
     if (f) f.textContent = n;
   }
 
+  function gekozen() {
+    return [].slice.call(document.querySelectorAll('.wsc .wsk-vgl input:checked'));
+  }
+
   function vgltel() {
-    var aan = [].slice.call(document.querySelectorAll('.wsc .wsk-vgl input:checked'));
+    var aan = gekozen();
     document.querySelectorAll('.wsc .wsk-vgl input').forEach(function (i) {
       i.disabled = !i.checked && aan.length >= 3;
     });
-    document.querySelectorAll('.wsc .fb-knop.vgl-open, .wsc .vgl-knop').forEach(function (b) {
+    document.querySelectorAll('.wsc .fb-knop.vgl-open').forEach(function (b) {
       b.disabled = aan.length < 2;
     });
-    var t = document.querySelector('.wsc .vgl-tel');
-    if (t) t.textContent = aan.length ? '(' + aan.length + ')' : '';
+    document.querySelectorAll('.vgl-tel').forEach(function (t) {
+      t.textContent = aan.length ? ' (' + aan.length + ')' : '';
+    });
+
+    // De balk onder in beeld: hij verschijnt zodra er iets is aangevinkt, zodat de
+    // bezoeker niet terug hoeft te scrollen naar de knop in de filterbalk.
+    var balk = document.querySelector('.wsc-laag .vgl-balk');
+    if (balk) {
+      balk.hidden = aan.length === 0;
+      document.body.classList.toggle('vgl-balk-aan', aan.length > 0);
+      var b = balk.querySelector('.vgl-balk-tel b');
+      if (b) b.textContent = aan.length;
+      var k = balk.querySelector('.vgl-open');
+      if (k) k.disabled = aan.length < 2;
+    }
   }
 
+  function wisKeuze() {
+    document.querySelectorAll('.wsc .wsk-vgl input:checked').forEach(function (i) { i.checked = false; });
+    vgltel();
+  }
+
+  var vgl_vorige = null;   // waar de focus vandaan kwam, zodat hij daar weer belandt
+
   function toonVergelijking() {
-    var aan = [].slice.call(document.querySelectorAll('.wsc .wsk-vgl input:checked'))
-      .map(function (i) { return i.closest('.wsk').dataset.id; });
-    document.querySelectorAll('.wsc .vgl').forEach(function (v) {
-      v.classList.toggle('uit', aan.length > 0 && aan.indexOf(v.dataset.id) < 0);
+    var aan = gekozen().map(function (i) { return i.closest('.wsk').dataset.id; });
+    if (aan.length < 2) return;
+    document.querySelectorAll('.wsc-laag .vgl').forEach(function (v) {
+      v.classList.toggle('uit', aan.indexOf(v.dataset.id) < 0);
     });
-    var u = document.querySelector('.wsc .vgl-uit');
-    if (u) { u.classList.add('open'); u.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
+    var u = document.querySelector('.wsc-laag .vgl-uit');
+    if (!u) return;
+    vgl_vorige = document.activeElement;
+    u.hidden = false;
+    document.body.classList.add('vgl-open');
+    var sl = u.querySelector('.vgl-sluit');
+    if (sl) sl.focus();
+    var rij = u.querySelector('.vergelijk');
+    if (rij) rij.scrollLeft = 0;
+  }
+
+  function sluitVergelijking() {
+    var u = document.querySelector('.wsc-laag .vgl-uit');
+    if (!u || u.hidden) return;
+    u.hidden = true;
+    document.body.classList.remove('vgl-open');
+    if (vgl_vorige && vgl_vorige.focus) vgl_vorige.focus();
+    vgl_vorige = null;
   }
 
   function zetMatch(id, regel) {
@@ -288,14 +328,22 @@
     document.querySelectorAll('.wsc .wsk-vgl input').forEach(function (i) {
       i.addEventListener('change', vgltel);
     });
-    document.querySelectorAll('.wsc .vgl-open, .wsc .vgl-knop').forEach(function (b) {
+    document.querySelectorAll('.vgl-open').forEach(function (b) {
       b.addEventListener('click', toonVergelijking);
     });
-    document.querySelectorAll('.wsc .vgl-sluit').forEach(function (b) {
-      b.addEventListener('click', function () {
-        var u = document.querySelector('.wsc .vgl-uit'); if (u) u.classList.remove('open');
-      });
+    // het kruisje en de waas sluiten allebei; escape ook
+    document.querySelectorAll('[data-vgl-sluit]').forEach(function (b) {
+      b.addEventListener('click', sluitVergelijking);
     });
+    document.querySelectorAll('.vgl-balk-wis').forEach(function (b) {
+      b.addEventListener('click', wisKeuze);
+    });
+    if (!document.body.dataset.vglEsc) {
+      document.body.dataset.vglEsc = '1';
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') sluitVergelijking();
+      });
+    }
 
     // Sorteren. De oorspronkelijke volgorde is de redactionele volgorde uit het
     // sjabloon; die leggen we één keer vast zodat "Meest relevant" er altijd naar

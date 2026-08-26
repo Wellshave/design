@@ -366,6 +366,43 @@ en de leverbaarheid. Niets ervan staat vast in het sjabloon.
 Alleen apparaten komen erin — dat zijn ook de enige kaarten met een vinkje. Maximaal
 drie tegelijk; bij drie gaan de overige vinkjes op slot.
 
+### Een venster en een balk, geen paneel onderaan
+
+Het paneel stond onder aan de rastersectie. Wie twee vinkjes zette werd dus naar
+beneden gestuurd, en om te vergelijken moest hij eerst weer omhoog naar de knop in de
+filterbalk. Dat is nu anders:
+
+- **De keuzebalk** komt onder in beeld zodra er één vinkje staat, met het aantal, een
+  *Wis* en de knop *Vergelijk* (uit tot er twee staan). Je hoeft nergens meer heen.
+- **De vergelijking** opent als een venster over de pagina, met een waas erachter.
+  Sluiten kan met het kruisje, met Escape en door naast het venster te klikken; de
+  focus keert terug naar de knop waarmee je het opende en de pagina eronder scrollt
+  niet mee. De keuze blijft na het sluiten staan.
+
+Op de telefoon is het venster een blad dat van onderen komt en schuiven de kaarten
+opzij; op het brede scherm staan ze gecentreerd naast elkaar.
+
+**Twee valkuilen die hier tijd kostten — lees dit voordat je iets toevoegt.**
+
+1. **`position:fixed` werkt niet binnen `.wsc`.** Die heeft `container-type:inline-size`
+   en dat maakt het element het containing block voor vast gepositioneerde kinderen: een
+   vaste laag erbinnen krijgt een vak van **0×0**. De popup en de balk staan daarom in
+   een aparte `<div class="wsc-laag">` ná het sluiten van `.wsc`. Die laag erft de
+   tokens (het tokenblok geldt voor `.wsc, .wsc-laag`) maar is zelf `display:contents`,
+   dus hij is geen container en genereert geen vak.
+2. **Dit thema heeft een globale regel `div:empty{display:none}`.** De waas achter het
+   venster is een lege `<div>` en was daardoor onzichtbaar én niet aanklikbaar, zonder
+   dat er iets in de eigen CSS stond. `.vgl-waas` zet zijn `display` nu expliciet terug.
+   Geldt voor elke lege div die je hier toevoegt.
+
+Verder stond de kop **Waarvoor** binnen de lus over de drie eigenschappen, waardoor hij
+drie keer boven elkaar verscheen. Nu één kop met drie regels eronder.
+
+De oude CSS voor het paneel (`.wsc .vergelijk`, `.wsc .vgl…`) en voor een balk die nooit
+markup heeft gehad (`.wsc .vgl-balk` met `.vb-ico`, `.vgl-knop`) is weggehaald. Twee
+definities van `.vgl` naast elkaar laten staan is precies hoe de botsing met `.zk`
+eerder ontstond.
+
 **Sorteren.** "Meest relevant" was een `<button>` zonder opties en zonder handler; kale
 opmaak. Het is nu een echte `<select>` met de knopopmaak eroverheen — zo blijft het
 uiterlijk gelijk, maar krijgt de bezoeker op mobiel de systeemkiezer en werkt hij met
