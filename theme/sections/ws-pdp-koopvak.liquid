@@ -717,17 +717,18 @@
                           {%- capture kolom_sleutels %}{% render 'ws-vergelijk-sleutels', p: cp %}{% endcapture -%}
                           {%- assign kolom_sleutels = kolom_sleutels | strip -%}
                           {%- comment -%}
-                            Niet vermeld is niet hetzelfde als niet aanwezig. Bij een
-                            upgrade zit doorgaans alles van het goedkopere model erin,
-                            maar dat staat zelden nog een keer in de eigen velden. Zegt
-                            dit product includes_previous, dan erft het elk punt van een
-                            goedkopere kolom in deze vergelijking. Staat de schakelaar
-                            uit, dan blijft alleen wat er letterlijk staat.
+                            Niet vermeld is niet hetzelfde als niet aanwezig. Een duurder
+                            model bevat alles van een goedkoper model in dezelfde
+                            vergelijking &mdash; anders is het geen upgrade. Dat is hier dus de
+                            regel en niet de uitzondering: een kolom erft elk punt van een
+                            goedkopere kolom, tenzij dit product uitdrukkelijk zegt dat het
+                            geen gewone upgrade is. Dat laatste is er voor rijen die een
+                            gemeten waarde zijn, zoals 6500 RPM: die erf je niet.
                           {%- endcomment -%}
                           {%- assign heeft_punt = false -%}
                           {%- if kolom_sleutels contains merk2 -%}
                             {%- assign heeft_punt = true -%}
-                          {%- elsif ci.includes_previous -%}
+                          {%- elsif ci.not_an_upgrade != true -%}
                             {%- assign eigen_prijs = cp.selected_or_first_available_variant.price -%}
                             {%- for lager in vergelijk_lijst -%}
                               {%- if lager.selected_or_first_available_variant.price < eigen_prijs -%}
