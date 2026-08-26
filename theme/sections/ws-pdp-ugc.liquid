@@ -44,23 +44,66 @@
 
   {%- if aantal > 0 -%}
     {%- assign uid = section.id -%}
+
+    {%- comment -%}
+      De drie gezichten boven de kop. Staan er geen foto's ingesteld, dan
+      pakt hij de posters van de eerste drie video's: dat zijn de klanten
+      zelf, dus er hoeft niets geupload te worden.
+    {%- endcomment -%}
+    {%- capture posters -%}
+      {%- assign teller_p = 0 -%}
+      {%- for item in lijst -%}
+        {%- if rijk -%}{%- assign vp = item.video.value -%}{%- else -%}{%- assign vp = item -%}{%- endif -%}
+        {%- if vp != blank and teller_p < 3 -%}
+          {%- assign teller_p = teller_p | plus: 1 -%}
+          {%- if teller_p > 1 %},{% endif %}{{ vp.preview_image | image_url: width: 120, height: 120, crop: 'center' }}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+    {%- assign poster_lijst = posters | strip | split: ',' -%}
+
+    {%- liquid
+      if s.foto1 != blank
+        assign gz1 = s.foto1 | image_url: width: 120, height: 120, crop: 'center'
+      else
+        assign gz1 = poster_lijst[0] | strip
+      endif
+      if s.foto2 != blank
+        assign gz2 = s.foto2 | image_url: width: 120, height: 120, crop: 'center'
+      else
+        assign gz2 = poster_lijst[1] | strip
+      endif
+      if s.foto3 != blank
+        assign gz3 = s.foto3 | image_url: width: 120, height: 120, crop: 'center'
+      else
+        assign gz3 = poster_lijst[2] | strip
+      endif
+    -%}
     <section class="ws-ugc" data-ws-ugc
              style="--ws-ugc-top:{{ s.marge_top }}px;--ws-ugc-bot:{{ s.marge_bot }}px">
       <div class="ws-ugc-rail">
 
         <div class="ws-ugc-hd">
           <div>
-            {%- if s.eyebrow != blank -%}
-              <span class="ws-ugc-ey">{{ s.eyebrow | replace: '[product]', product.title }}</span>
+            {%- comment -%}
+              Boven de kop: drie ronde gezichten met een blauw vinkje, en
+              daarnaast het aantal. Meer niet — de tegels doen de rest.
+            {%- endcomment -%}
+            {%- if gz1 != blank or s.vertrouwd != blank -%}
+              <p class="ws-ugc-vt">
+                {%- if gz1 != blank -%}
+                  <span class="ws-ugc-gz">
+                    <i><img src="{{ gz1 }}" alt="" loading="lazy" width="30" height="30"></i>
+                    {%- if gz2 != blank -%}<i><img src="{{ gz2 }}" alt="" loading="lazy" width="30" height="30"></i>{%- endif -%}
+                    {%- if gz3 != blank -%}<i><img src="{{ gz3 }}" alt="" loading="lazy" width="30" height="30"></i>{%- endif -%}
+                    <em aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.6 4.6 4.6L19 7.4"/></svg></em>
+                  </span>
+                {%- endif -%}
+                {%- if s.vertrouwd != blank -%}<span class="ws-ugc-vtt">{{ s.vertrouwd }}</span>{%- endif -%}
+              </p>
             {%- endif -%}
             {%- if s.kop != blank -%}
               <h2>{{ s.kop }}{% if s.kop2 != blank %}<b>{{ s.kop2 }}</b>{% endif %}</h2>
-            {%- endif -%}
-            {%- if s.lead != blank -%}
-              <p class="ws-ugc-lead">{{ s.lead | replace: '[product]', product.title }}</p>
-            {%- endif -%}
-            {%- if s.tel_regel != blank -%}
-              <p class="ws-ugc-tel">{{ s.tel_regel | replace: '[aantal]', aantal }}</p>
             {%- endif -%}
           </div>
           {%- if s.alle_label != blank and s.alle_url != blank -%}
@@ -292,11 +335,12 @@
   "class": "ws-pdp-ugc-sectie",
   "settings": [
     { "type": "header", "content": "De kop" },
-    { "type": "text", "id": "eyebrow", "label": "Bovenregel", "info": "[product] wordt de producttitel", "default": "[product] in het echt" },
+    { "type": "text", "id": "vertrouwd", "label": "Vertrouwdregel", "info": "Staat boven de kop, naast de drie gezichten. Leeg = geen regel.", "default": "Vertrouwd door 200.000+" },
+    { "type": "image_picker", "id": "foto1", "label": "Gezicht 1", "info": "Leeg = de poster van de eerste video." },
+    { "type": "image_picker", "id": "foto2", "label": "Gezicht 2", "info": "Leeg = de poster van de tweede video." },
+    { "type": "image_picker", "id": "foto3", "label": "Gezicht 3", "info": "Leeg = de poster van de derde video." },
     { "type": "text", "id": "kop", "label": "Kop — eerste regel", "default": "Geen studio." },
     { "type": "text", "id": "kop2", "label": "Kop — tweede regel (in goud)", "default": "Gewoon hun badkamer." },
-    { "type": "textarea", "id": "lead", "label": "Lead", "info": "[product] wordt de producttitel", "default": "Klanten laten zien hoe de [product] thuis werkt." },
-    { "type": "text", "id": "tel_regel", "label": "Telregel", "info": "[aantal] wordt het aantal video's", "default": "[aantal] klantvideo's" },
     { "type": "text", "id": "alle_label", "label": "Link rechtsboven" },
     { "type": "url", "id": "alle_url", "label": "Link rechtsboven — bestemming" },
     { "type": "image_picker", "id": "merk", "label": "Watermerk in de doos", "info": "Wordt als vlak van 5% wit getekend. Laat leeg voor geen watermerk." },

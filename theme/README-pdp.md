@@ -130,6 +130,18 @@ een bestand van 23 bytes zonder schema, dat gewoon landde. Het antwoord van
 `themeFilesUpsert` zegt dus niets; **haal de `checksumMd5` op** en vergelijk met
 `md5sum` op het bestand hier. Alleen dat bewijst of de upload gelukt is.
 
+### Een sjabloon en zijn sectie gaan niet in dezelfde upload
+
+Shopify toetst de opgeslagen instellingen in een `templates/*.json` aan het
+schema van de sectie, en gooit wat het niet kent er stil uit. Zet je de sectie
+m&eacute;t een nieuwe instelling en het sjabloon d&aacute;t die instelling gebruikt in
+&eacute;&eacute;n `themeFilesUpsert`, dan wordt het sjabloon nog tegen het oude schema
+getoetst en verdwijnt de waarde. Geen foutmelding, alleen een checksum die niet
+klopt.
+
+Betrapt bij `vertrouwd` in de UGC-band: het sjabloon landde zonder die regel.
+**Upload eerst de sectie, verifieer de checksum, en pas daarna het sjabloon.**
+
 ### Rijke tekst print je niet uit, die render je
 
 Een `rich_text_field` dat je rechtstreeks uitprint geeft de ruwe JSON van het
@@ -273,6 +285,23 @@ tegelijk horen is het snelste wat een bezoeker wegjaagt.
 
 De teller en de voortgangsbalk volgen de **scrollpositie**, niet een eigen
 index. Vegen met de vinger telt dan net zo goed mee als de pijlen.
+
+### De kop is drie gezichten en &eacute;&eacute;n regel
+
+Boven de kop staan drie ronde foto's die elkaar overlappen, met een blauw
+vinkje rechtsboven, en daarnaast `Vertrouwd door 200.000+`. Meer niet. De
+bovenregel, de lead en de telregel zijn eruit: de tegels eronder vertellen het
+verhaal al, en drie tekstregels boven een videoband is drie te veel.
+
+De drie foto's komen uit `foto1`, `foto2` en `foto3`. **Staan die leeg, dan
+pakt de sectie de posters van de eerste drie video's** &mdash; dat werkt zonder dat
+iemand iets hoeft te uploaden, maar een poster is een willekeurig eerste beeld
+en dat is vaker een hand of een apparaat dan een gezicht. Drie echte portretjes
+in die drie velden maken het verschil.
+
+Het vinkje is `--u-blauw` (`#3B7DF0`) met een rand in de cr&egrave;mekleur van de
+sectie, zodat het los van de foto's staat. Het is decoratie, dus het staat op
+`aria-hidden`: het zegt niets wat de regel ernaast niet al zegt.
 
 **Geen sterren per product.** Het ontwerp had er vier en een half plus &laquo;4,4&raquo;
 bij de koopstrook staan. Die score bestaat niet per product &mdash; na het weghalen
