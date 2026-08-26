@@ -290,6 +290,32 @@ Op de knop Bundels kan een lintje staan (`bundel_lint`, standaard "Meeste waarde
 boven de rand uitsteekt. Op mobiel heeft de knoppenrij daarom extra ruimte tussen de
 rijen, anders botst het lintje tegen de knop erboven.
 
+### "Alle zones" hoort in de rij
+
+De zonekiezer had vier tegels: de vier zones. Sta je op een zonepagina en wil je gewoon
+álles zien, dan was daar in de rij niets voor. De routes die er wél waren, zaten buiten
+beeld: *SHOP* in de header en *Bekijk de hele collectie* helemaal onderaan het raster —
+allebei niet waar je op dat moment aan het klikken bent.
+
+Er staat nu op **elke** pagina een vijfde tegel **Alle zones** (27), vooraan, met het
+2×2-icoon. Op `/collections/all` is dat de huidige staat (geen link), elders een link
+naar `/collections/all`. Vooraan en op elke pagina in dezelfde volgorde, zodat de tegels
+niet verspringen terwijl je tussen zones heen en weer klikt.
+
+Vijf tegels passen niet zomaar in het raster van vier. De kolommen lopen nu mee met het
+aantal tegels via `:has(.zkaart:nth-child(5))`, met twee dingen om te onthouden:
+
+- **De `:has()`-regel moet binnen een breedteband staan.** Hij is specifieker dan
+  `.wsc .zonekiezer` in de containerquery's eronder en overrulede anders óók de
+  tabletkolommen en de telefoonscroller. Dat ging hier eerst mis.
+- **Tussen 981 en 1180px is vijf naast elkaar te smal.** "schaamstreek" is met 84px het
+  langste woord in de rij; bij vijf kolommen houdt de naamkolom daar minder dan dat over
+  en breekt het woord middenin. In die band staan er daarom drie op een rij (3 + 2).
+
+De ladder is dus: ≥1181px vijf naast elkaar · 981–1180px drie · ≤980px twee ·
+≤700px de horizontale strip met ronde iconen. Nagemeten op negen breedtes maal vier
+pagina's: nergens breekt een naam nog midden in een woord.
+
 ### Op de telefoon schuift het opzij in plaats van omlaag
 
 Vier zonetegels onder elkaar plus vier filterknoppen in twee rijen kostte bijna een half

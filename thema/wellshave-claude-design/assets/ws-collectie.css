@@ -68,6 +68,29 @@
    Vier tegels in plaats van vier pillen: icoon, scheidingslijntje, naam, aantal in
    een rondje en een pijl. De zone waar je op staat is zwart met een gouden voet. */
 .wsc .zonekiezer{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;padding:16px 0 4px}
+/* Met de tegel "Alle zones" erbij zijn het er vijf; zonder dit valt die vijfde alleen op
+   een tweede rij. Let op: dit moet BINNEN de brede breakpoint staan. Een `:has()`-selector
+   is specifieker dan `.wsc .zonekiezer` in de containerquery's eronder, en zou anders ook
+   de tabletkolommen en de telefoonscroller overrulen. */
+@container (min-width:1181px){
+  .wsc .zonekiezer:has(.zkaart:nth-child(5)){grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+  .wsc .zonekiezer:has(.zkaart:nth-child(5)) .zkaart{padding:13px 12px;gap:9px}
+  .wsc .zonekiezer:has(.zkaart:nth-child(5)) .zkaart-ico{width:44px;height:40px;padding-right:8px}
+  /* "schaamstreek" is het langste woord in de rij en moet op één regel passen; bij
+     12,5px is dat 84px en houdt de naamkolom er 88. Meet na als je hier iets wijzigt. */
+  .wsc .zonekiezer:has(.zkaart:nth-child(5)) .zkaart-naam{font-size:12.5px}
+  .wsc .zonekiezer:has(.zkaart:nth-child(5)) .zkaart-tel{width:26px;height:26px;font-size:11.5px}
+  /* de pijl is versiering; met vijf tegels is die ruimte nodig voor de naam, anders
+     breekt "Lichaam & schaamstreek" over drie regels */
+  .wsc .zonekiezer:has(.zkaart:nth-child(5)) .zkaart-pijl{display:none}
+}
+
+/* Tussen die twee breedtes is vijf naast elkaar te smal: "schaamstreek" past dan niet
+   op één regel en breekt middenin. Drie op een rij (dus 3 + 2) houdt de namen heel en
+   is compacter dan de twee kolommen van de tabletweergave. */
+@container (min-width:981px) and (max-width:1180px){
+  .wsc .zonekiezer:has(.zkaart:nth-child(5)){grid-template-columns:repeat(3,minmax(0,1fr))}
+}
 .wsc .zkaart{position:relative;display:flex;align-items:center;gap:14px;text-align:left;
   border:1px solid var(--ink-10);border-radius:14px;padding:14px 16px;background:var(--paper);
   font-weight:700;color:var(--ink);text-decoration:none;min-width:0;

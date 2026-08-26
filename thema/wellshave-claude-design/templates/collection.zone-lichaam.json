@@ -112,6 +112,16 @@
             "huidig": false,
             "icoon": "shopify://shop_images/ws-zone-icoon-neus.png"
           }
+        },
+        "zone_alles": {
+          "type": "zone",
+          "settings": {
+            "naam": "Alle zones",
+            "aantal": "27",
+            "url": "https://wellshave.com/collections/all",
+            "huidig": false,
+            "icoon": "shopify://shop_images/ws-zone-icoon-alles.png"
+          }
         }
       },
       "block_order": [
@@ -121,6 +131,7 @@
         "match_2",
         "match_3",
         "match_4",
+        "zone_alles",
         "zone_1",
         "zone_2",
         "zone_3",
