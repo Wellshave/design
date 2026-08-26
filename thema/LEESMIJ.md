@@ -579,6 +579,95 @@ de twee thema's iets anders zonder dat er iets gekopieerd hoeft te worden.
 Een tegel met een icoon krijgt `.is-icoon`: `object-fit: contain` in plaats van
 `cover`, zodat het lijnwerk niet wordt afgesneden.
 
+## Het megamenu onder SHOP
+
+Het menu is opnieuw opgebouwd naar het ontwerp: drie kolommen naast elkaar in
+plaats van twee rijen tegels.
+
+| kolom | wat erin staat |
+|---|---|
+| **Shop op zone** | vier grote tegels met een ondertitel; daaronder de link *Bekijk alle zones* |
+| **Shop op type** | zeven compacte regels met een pictogram; daaronder, achter een streep, de uitgelichte kaart *Bundels* met het label *Meeste waarde* |
+| **Promo's** | twee donkere kaarten: de Summer Sale met foto en gouden knop, en Bundels als tekstkaart |
+
+Bestanden: `sections/header.liquid` (opmaak en schema),
+`assets/ws-megamenu.css` (alle stijl), `snippets/ws-megamenu-tegel.liquid`
+(één regel, in drie soorten), `snippets/ws-megamenu-promo.liquid` (één
+promokaart) en `snippets/ws-megamenu-sprite.liquid` (de pictogrammen).
+`header.css` van het basisthema is niet aangeraakt: alles binnen `.wsmm` staat
+in ons eigen bestand, alleen het paneel zelf (positie, achtergrond, openklappen)
+komt nog van het thema.
+
+### Instellingen
+
+De twee kolommen hebben elk hun eigen collectielijst (`mm_zones`, `mm_types`),
+zodat dezelfde collectie in beide kolommen mag staan met een andere naam —
+`bodygroomers` heet links *Lichaam & schaamstreek* en rechts *Bodygroomers*.
+Daarom ook twee labelvelden. De regels hebben de vorm
+`handle=Naam|Ondertitel`; de ondertitel is optioneel.
+
+`mm_zone_licht` is de handle van de tegel die de zand-gouden achtergrond krijgt
+(nu `bodygroomers`). `mm_type_licht` is de handle die uit de typelijst wordt
+gehaald en onderaan als kaart verschijnt (nu `bundels`), met
+`mm_type_licht_badge` als gouden label.
+
+### Pictogrammen
+
+Zones houden hun gouden lijnicoon uit `custom.zone_icon`. Types krijgen een
+pictogram uit de sprite; de koppeling handle → pictogram staat in
+`ws-megamenu-tegel.liquid`. Productfoto's zijn hier niet bruikbaar: op 34 px in
+een rondje worden `redesign_header_collection_*.png` onleesbaar.
+
+Bij het hertekenen bleek 24×24 met streek 2,1 te zwaar voor 18 px: *Tondeuses*
+en *Neustrimmers* werden een vlek. De regel die wél werkt: streek 1,9, vormen
+die het raster vullen, en minstens vier rastereenheden tussen twee lijnen.
+*Bodygroomers* en *Baardtrimmers* zijn uit elkaar te houden op silhouet — breed
+en gedrongen tegenover smal en lang — niet op detail; detail overleeft 18 px
+niet.
+
+### Twee dingen die tijd kostten
+
+**Shopify gooit onbekende instellingen weg.** `header.liquid` en
+`header-group.json` in één `themeFilesUpsert` zetten werkt niet: de JSON wordt
+gekeurd tegen het schema dat op dat moment nog in het thema staat, en alles wat
+daar niet in voorkomt verdwijnt zonder foutmelding. `mm_zones`, `mm_types` en de
+tweede banner waren zo meteen weg, terwijl `megamenu_kop_1` — die al bestond —
+wel bleef. Eerst het `.liquid` erin zetten, daarna pas de `.json`.
+
+**Een lege `<div>` als scheidingslijn wordt niet getekend.** Het thema heeft een
+globale regel `div:empty{display:none}`. Die is specifieker (0,1,1) dan een losse
+klasse (0,1,0), dus `display:block` erbij zetten helpt niet — hij wint ongeacht
+de volgorde. De streep boven de bundelkaart is daarom een `::before` op de kaart
+zelf.
+
+### Maten
+
+Onder 1200 px blijven de drie kolommen staan; alleen de promokolom wordt smaller
+(258 px). De kaarten eronder schuiven maakte het paneel ~220 px hoger, en dan
+moest het op een 800 px hoog scherm scrollen. Het paneel houdt nu op elke maat
+tussen 992 en 1600 px dezelfde hoogte van ±550 px en past zonder scrollen; het
+basispaneel kreeg daarvoor 40 px lucht in plaats van 56.
+
+Gemeten over acht schermmaten (1600×900 tot 992×700), veertien controles per
+maat: aantallen, lege links, overlappende regels, afgekapte tekst, iets buiten
+het paneel, de scheidingslijn, scrollen en horizontale overloop — 112 van 112
+goed. De mobiele lade is op 390 en 360 px gecontroleerd: vier zonetegels met
+ondertitel, zeven typeregels, de bundelkaart en de link, niets afgekapt.
+
+### Wat afwijkt van het ontwerp
+
+- Het ontwerp noemt een rij *Mesjes & koppen*. Die collectie bestaat niet;
+  `accesoires` (16 producten: mesjes, scheerkoppen, opzetstukken, tassen) dekt
+  precies dat, en heet in het menu *Mesjes & accessoires*.
+- `ladyshave` staat niet meer in het menu. Die collectie is niet gepubliceerd op
+  het Online Store-kanaal, dus de tegel bleef altijd leeg — ook in het live thema.
+- *Alle zones* is geen tegel meer maar de link *Bekijk alle zones* onder de
+  zonekolom, zoals in het ontwerp.
+- "Tot 40% korting" is nagerekend: de grootste korting in `summer-sale-deals` is
+  de Essential Flex Bundel, €79,95 tegen €133,25 — precies 40,0%. "Minder dan
+  wanneer je alles los koopt" staat op alle vijftien bundels als
+  compare-at-prijs.
+
 ## Bekijken zonder te publiceren
 
 Open eerst deze link, daarna werkt elke collectiepagina in dezelfde browser:

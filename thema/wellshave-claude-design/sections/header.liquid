@@ -1,5 +1,6 @@
 {{ 'header.css' | asset_url | stylesheet_tag }}
 {{ 'ws-megamenu.css' | asset_url | stylesheet_tag }}
+{% render 'ws-megamenu-sprite' %}
 
 <header class="header">
   <div class="header__inner">
@@ -26,72 +27,94 @@
               {%- if block.settings.enable_megamenu -%}
                 <div class="header__megamenu">
                   <div class="page-width">
-                      <div class="header__megamenu-content">
-                        {%- assign eerste_groep = block.settings.megamenu_zones | default: 0 -%}
-                        <div class="header__megamenu-groups">
-                          {%- if eerste_groep > 0 -%}
-                            <div class="header__megamenu-group">
-                              {%- if block.settings.megamenu_kop_1 != blank -%}
-                                <p class="header__megamenu-kop">{{ block.settings.megamenu_kop_1 }}</p>
-                              {%- endif -%}
-                              <ul class="header__megamenu-collection-list" role="list">
-                                {%- for megamenu_collection in block.settings.megamenu_collections -%}
-                                  {%- if forloop.index <= eerste_groep -%}
-                                    {% render 'ws-megamenu-tegel', col: megamenu_collection, labels: block.settings.megamenu_labels, mobiel: false %}
-                                  {%- endif -%}
-                                {%- endfor -%}
-                              </ul>
-                            </div>
-                            <div class="header__megamenu-group">
-                              {%- if block.settings.megamenu_kop_2 != blank -%}
-                                <p class="header__megamenu-kop">{{ block.settings.megamenu_kop_2 }}</p>
-                              {%- endif -%}
-                              <ul class="header__megamenu-collection-list" role="list">
-                                {%- for megamenu_collection in block.settings.megamenu_collections -%}
-                                  {%- if forloop.index > eerste_groep -%}
-                                    {% render 'ws-megamenu-tegel', col: megamenu_collection, labels: block.settings.megamenu_labels, mobiel: false %}
-                                  {%- endif -%}
-                                {%- endfor -%}
-                              </ul>
-                            </div>
-                          {%- else -%}
-                            <ul class="header__megamenu-collection-list" role="list">
-                              {%- for megamenu_collection in block.settings.megamenu_collections -%}
-                                {% render 'ws-megamenu-tegel', col: megamenu_collection, labels: block.settings.megamenu_labels, mobiel: false %}
-                              {%- endfor -%}
-                            </ul>
-                          {%- endif -%}
-                        </div>
-                        {%- if block.settings.enable_banner -%}
-                          <div class="header__megamenu-banner">
-                            <div class="header__megamenu-banner-media">
-                              {%- if block.settings.banner_image != blank -%}
-                                {{ block.settings.banner_image | image_url: width: 600 | image_tag }}
-                              {%- else -%}
-                                {{ 'hero-apparel-1' | placeholder_svg_tag }}
-                              {%- endif -%}
-                            </div>
-                            <div class="header__megamenu-banner-content">
-                              {%- if block.settings.banner_title != blank -%}
-                                <p class="header__megamenu-banner-title body-lg">
-                                  {{- block.settings.banner_title -}}
-                                </p>
-                              {%- endif -%}
-                              {%- if block.settings.banner_subtitle != blank -%}
-                                <p class="header__megamenu-banner-subtitle body-md">
-                                  {{- block.settings.banner_subtitle -}}
-                                </p>
-                              {%- endif -%}
-                              {%- if block.settings.banner_btn_label != blank -%}
-                                <a href="{{ block.settings.banner_btn_link }}" class="header__megamenu-banner-button button button--light button--small">
-                                  <span>{{- block.settings.banner_btn_label -}}</span>
-                                  {{ 'icon-arrow-right.svg' | inline_asset_content }}
-                                </a>
-                              {%- endif -%}
-                            </div>
-                          </div>
+                    <div class="wsmm">
+                      <div class="wsmm-kol wsmm-kol--zone">
+                        {%- if block.settings.megamenu_kop_1 != blank -%}
+                          <p class="wsmm-kop">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-doel"/></svg>
+                            {{ block.settings.megamenu_kop_1 }}
+                          </p>
+                        {%- endif -%}
+                        <ul class="wsmm-lijst" role="list">
+                          {%- for zone in block.settings.mm_zones -%}
+                            {% render 'ws-megamenu-tegel',
+                              col: zone,
+                              soort: 'zone',
+                              labels: block.settings.mm_zone_labels,
+                              licht: block.settings.mm_zone_licht,
+                              mobiel: false
+                            %}
+                          {%- endfor -%}
+                        </ul>
+                        {%- if block.settings.mm_alles_label != blank -%}
+                          <a href="{{ block.settings.mm_alles_link | default: '/collections/all' }}" class="wsmm-alles">
+                            {{ block.settings.mm_alles_label }}
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-pijl"/></svg>
+                          </a>
                         {%- endif -%}
                       </div>
+
+                      <div class="wsmm-kol wsmm-kol--type">
+                        {%- if block.settings.megamenu_kop_2 != blank -%}
+                          <p class="wsmm-kop">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-raster"/></svg>
+                            {{ block.settings.megamenu_kop_2 }}
+                          </p>
+                        {%- endif -%}
+                        <ul class="wsmm-lijst" role="list">
+                          {%- for type in block.settings.mm_types -%}
+                            {%- unless block.settings.mm_type_licht != blank and block.settings.mm_type_licht == type.handle -%}
+                              {% render 'ws-megamenu-tegel',
+                                col: type,
+                                soort: 'type',
+                                labels: block.settings.mm_type_labels,
+                                mobiel: false
+                              %}
+                            {%- endunless -%}
+                          {%- endfor -%}
+                        </ul>
+                        {%- if block.settings.mm_type_licht != blank -%}
+                          {%- for type in block.settings.mm_types -%}
+                            {%- if block.settings.mm_type_licht == type.handle -%}
+                              {% render 'ws-megamenu-tegel',
+                                col: type,
+                                soort: 'uit',
+                                labels: block.settings.mm_type_labels,
+                                badge: block.settings.mm_type_licht_badge,
+                                mobiel: false
+                              %}
+                            {%- endif -%}
+                          {%- endfor -%}
+                        {%- endif -%}
+                      </div>
+
+                      {%- if block.settings.enable_banner or block.settings.enable_banner_2 -%}
+                        <div class="wsmm-kol wsmm-kol--promo">
+                          {%- if block.settings.enable_banner -%}
+                            {% render 'ws-megamenu-promo',
+                              beeld: block.settings.banner_image,
+                              kicker: block.settings.banner_kicker,
+                              titel: block.settings.banner_title,
+                              tekst: block.settings.banner_subtitle,
+                              label: block.settings.banner_btn_label,
+                              link: block.settings.banner_btn_link,
+                              groot: true
+                            %}
+                          {%- endif -%}
+                          {%- if block.settings.enable_banner_2 -%}
+                            {% render 'ws-megamenu-promo',
+                              beeld: block.settings.banner2_image,
+                              kicker: block.settings.banner2_kicker,
+                              titel: block.settings.banner2_title,
+                              tekst: block.settings.banner2_subtitle,
+                              label: block.settings.banner2_btn_label,
+                              link: block.settings.banner2_btn_link,
+                              groot: false
+                            %}
+                          {%- endif -%}
+                        </div>
+                      {%- endif -%}
+                    </div>
                   </div>
                 </div>
               {%- endif -%}
@@ -214,35 +237,63 @@
                     {{- 'icon-caret-left.svg' | inline_asset_content -}}
                     {{- 'header.menu_back' | t -}}
                   </div>
-                  {%- assign eerste_groep = block.settings.megamenu_zones | default: 0 -%}
-                  {%- if eerste_groep > 0 -%}
+                  <div class="wsmm-mob">
                     {%- if block.settings.megamenu_kop_1 != blank -%}
-                      <p class="header__mobile-megamenu-kop">{{ block.settings.megamenu_kop_1 }}</p>
+                      <p class="wsmm-kop">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-doel"/></svg>
+                        {{ block.settings.megamenu_kop_1 }}
+                      </p>
                     {%- endif -%}
-                    <ul class="header__mobile-megamenu-collection-list" role="list">
-                      {%- for megamenu_collection in block.settings.megamenu_collections -%}
-                        {%- if forloop.index <= eerste_groep -%}
-                          {% render 'ws-megamenu-tegel', col: megamenu_collection, labels: block.settings.megamenu_labels, mobiel: true %}
-                        {%- endif -%}
+                    <ul class="wsmm-lijst" role="list">
+                      {%- for zone in block.settings.mm_zones -%}
+                        {% render 'ws-megamenu-tegel',
+                          col: zone,
+                          soort: 'zone',
+                          labels: block.settings.mm_zone_labels,
+                          licht: block.settings.mm_zone_licht,
+                          mobiel: true
+                        %}
                       {%- endfor -%}
                     </ul>
+                    {%- if block.settings.mm_alles_label != blank -%}
+                      <a href="{{ block.settings.mm_alles_link | default: '/collections/all' }}" class="wsmm-alles">
+                        {{ block.settings.mm_alles_label }}
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-pijl"/></svg>
+                      </a>
+                    {%- endif -%}
+
                     {%- if block.settings.megamenu_kop_2 != blank -%}
-                      <p class="header__mobile-megamenu-kop">{{ block.settings.megamenu_kop_2 }}</p>
+                      <p class="wsmm-kop">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-raster"/></svg>
+                        {{ block.settings.megamenu_kop_2 }}
+                      </p>
                     {%- endif -%}
-                    <ul class="header__mobile-megamenu-collection-list" role="list">
-                      {%- for megamenu_collection in block.settings.megamenu_collections -%}
-                        {%- if forloop.index > eerste_groep -%}
-                          {% render 'ws-megamenu-tegel', col: megamenu_collection, labels: block.settings.megamenu_labels, mobiel: true %}
+                    <ul class="wsmm-lijst" role="list">
+                      {%- for type in block.settings.mm_types -%}
+                        {%- unless block.settings.mm_type_licht != blank and block.settings.mm_type_licht == type.handle -%}
+                          {% render 'ws-megamenu-tegel',
+                            col: type,
+                            soort: 'type',
+                            labels: block.settings.mm_type_labels,
+                            mobiel: true
+                          %}
+                        {%- endunless -%}
+                      {%- endfor -%}
+                    </ul>
+                    {%- if block.settings.mm_type_licht != blank -%}
+                      {%- for type in block.settings.mm_types -%}
+                        {%- if block.settings.mm_type_licht == type.handle -%}
+                          {% render 'ws-megamenu-tegel',
+                            col: type,
+                            soort: 'uit',
+                            labels: block.settings.mm_type_labels,
+                            badge: block.settings.mm_type_licht_badge,
+                            mobiel: true
+                          %}
                         {%- endif -%}
                       {%- endfor -%}
-                    </ul>
-                  {%- else -%}
-                    <ul class="header__mobile-megamenu-collection-list" role="list">
-                      {%- for megamenu_collection in block.settings.megamenu_collections -%}
-                        {% render 'ws-megamenu-tegel', col: megamenu_collection, labels: block.settings.megamenu_labels, mobiel: true %}
-                      {%- endfor -%}
-                    </ul>
-                  {%- endif -%}
+                    {%- endif -%}
+                  </div>
                 </div>
               {%- else -%}
                 <a href="{{ block.settings.link }}" class="header__mobile-item">
@@ -423,36 +474,72 @@
           },
           {
             "type": "collection_list",
-            "id": "megamenu_collections",
-            "label": "Collections",
+            "id": "mm_zones",
+            "label": "Zones (linkerkolom)",
+            "info": "Grote tegels met een ondertitel. Meestal vier."
           },
           {
-            "type": "number",
-            "id": "megamenu_zones",
-            "label": "Aantal in de eerste groep",
-            "info": "Splitst de tegels in twee groepen met een kop erboven. Zet op 0 voor \u00e9\u00e9n rij zonder koppen."
+            "type": "textarea",
+            "id": "mm_zone_labels",
+            "label": "Tekst op een zonetegel",
+            "info": "E\u00e9n per regel: handle=Naam|Ondertitel. Bijvoorbeeld bodygroomers=Lichaam & schaamstreek|Bodygroomers voor de gevoelige huid. Dit verandert alleen het menu, niet de collectie zelf."
+          },
+          {
+            "type": "text",
+            "id": "mm_zone_licht",
+            "label": "Handle van de opgelichte zone",
+            "info": "Die tegel krijgt de zand-gouden achtergrond. Leeg laten mag."
+          },
+          {
+            "type": "text",
+            "id": "mm_alles_label",
+            "label": "Link onder de zones",
+            "default": "Bekijk alle zones"
+          },
+          {
+            "type": "url",
+            "id": "mm_alles_link",
+            "label": "Waar die link heen gaat"
+          },
+          {
+            "type": "collection_list",
+            "id": "mm_types",
+            "label": "Types (middenkolom)",
+            "info": "Compacte regels met een pictogram. Dezelfde collectie mag ook in de zones staan; hij krijgt dan hier zijn eigen naam."
+          },
+          {
+            "type": "textarea",
+            "id": "mm_type_labels",
+            "label": "Tekst op een typeregel",
+            "info": "E\u00e9n per regel: handle=Naam|Ondertitel. De ondertitel wordt alleen op de uitgelichte kaart getoond."
+          },
+          {
+            "type": "text",
+            "id": "mm_type_licht",
+            "label": "Handle van het uitgelichte type",
+            "info": "Dat type wordt uit de lijst gehaald en onderaan als kaart getoond. Leeg laten mag."
+          },
+          {
+            "type": "text",
+            "id": "mm_type_licht_badge",
+            "label": "Label op die kaart",
+            "default": "Meeste waarde"
           },
           {
             "type": "text",
             "id": "megamenu_kop_1",
-            "label": "Kop boven de eerste groep",
-            "default": "Kies je zone"
+            "label": "Kop boven de zones",
+            "default": "Shop op zone"
           },
           {
             "type": "text",
             "id": "megamenu_kop_2",
-            "label": "Kop boven de tweede groep",
-            "default": "Of zoek op type"
-          },
-          {
-            "type": "textarea",
-            "id": "megamenu_labels",
-            "label": "Andere naam op een tegel",
-            "info": "E\u00e9n per regel: handle=Naam. Bijvoorbeeld bodygroomers=Lichaam & schaamstreek. Dit verandert alleen het menu, niet de collectie zelf."
+            "label": "Kop boven de types",
+            "default": "Shop op type"
           },
           {
             "type": "header",
-            "content": "Megamenu banner"
+            "content": "Megamenu promo boven"
           },
           {
             "type": "checkbox",
@@ -466,25 +553,66 @@
           },
           {
             "type": "text",
+            "id": "banner_kicker",
+            "label": "Bovenlabel"
+          },
+          {
+            "type": "text",
             "id": "banner_title",
-            "label": "Banner title",
-            "default": "Featured Product"
+            "label": "Banner title"
           },
           {
             "type": "text",
             "id": "banner_subtitle",
-            "label": "Banner subtitle",
-            "default": "Lorem ipsum dolor sit amet"
+            "label": "Banner subtitle"
           },
           {
             "type": "text",
             "id": "banner_btn_label",
-            "label": "Banner button label",
-            "default": "Button",
+            "label": "Banner button label"
           },
           {
             "type": "url",
             "id": "banner_btn_link",
+            "label": "Banner button link"
+          },
+          {
+            "type": "header",
+            "content": "Megamenu promo onder"
+          },
+          {
+            "type": "checkbox",
+            "id": "enable_banner_2",
+            "label": "Enable tweede banner"
+          },
+          {
+            "type": "image_picker",
+            "id": "banner2_image",
+            "label": "Banner image"
+          },
+          {
+            "type": "text",
+            "id": "banner2_kicker",
+            "label": "Bovenlabel"
+          },
+          {
+            "type": "text",
+            "id": "banner2_title",
+            "label": "Banner title"
+          },
+          {
+            "type": "text",
+            "id": "banner2_subtitle",
+            "label": "Banner subtitle"
+          },
+          {
+            "type": "text",
+            "id": "banner2_btn_label",
+            "label": "Banner button label"
+          },
+          {
+            "type": "url",
+            "id": "banner2_btn_link",
             "label": "Banner button link"
           }
         ]

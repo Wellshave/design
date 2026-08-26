@@ -1,18 +1,28 @@
 {%- comment -%}
-  Eén tegel in het megamenu.
+  Eén regel in het megamenu.
+
     col     — de collectie
-    labels  — regels "handle=Naam" die de tegeltekst overschrijven
+    soort   — 'zone' (grote tegel met ondertitel), 'type' (compacte regel)
+              of 'uit' (de uitgelichte kaart onder de typelijst)
+    labels  — regels "handle=Naam|Ondertitel" die de tekst overschrijven
+    licht   — handle die de zonetegel oplicht (alleen bij soort 'zone')
+    badge   — tekst van het gouden label (alleen bij soort 'uit')
     mobiel  — true binnen de mobiele lade
 
-  De tegeltekst is los te zetten van de collectietitel, zodat het menu
-  "Lichaam & schaamstreek" kan zeggen waar de collectie "Bodygroomers" heet.
-  Zo hoeft er niets aan de collectie zelf te veranderen.
+  De menutekst staat los van de collectietitel, zodat het menu
+  "Lichaam & schaamstreek" kan zeggen waar de collectie "Bodygroomers" heet,
+  en zodat dezelfde collectie in beide kolommen een eigen naam kan hebben.
+  Daarom heeft elke kolom zijn eigen labelveld; niets verandert aan de
+  collectie zelf.
 
-  Voor het beeld gaat custom.zone_icon voor custom.megamenu_image. Zo krijgt een
-  zone een gouden lijnicoon terwijl een type zijn productfoto houdt, zonder dat
-  het live thema — dat alleen megamenu_image kent — iets anders te zien krijgt.
+  Het beeld: een zone toont custom.zone_icon (het gouden lijnicoon), een type
+  toont een pictogram uit de sprite in header.liquid. Productfoto's zijn op
+  32 px onleesbaar, dus die gebruiken we hier niet. De koppeling handle →
+  pictogram staat hieronder; een onbekende handle krijgt het doosje.
 {%- endcomment -%}
-{%- assign etiket = col.title -%}
+
+{%- assign naam = col.title -%}
+{%- assign sub = '' -%}
 {%- if labels != blank -%}
   {%- assign regels = labels | newline_to_br | split: '<br />' -%}
   {%- for regel in regels -%}
@@ -20,29 +30,73 @@
     {%- if paar.size > 1 -%}
       {%- assign sleutel = paar[0] | strip -%}
       {%- if sleutel == col.handle -%}
-        {%- assign etiket = paar[1] | strip -%}
+        {%- assign delen = paar[1] | split: '|' -%}
+        {%- assign naam = delen[0] | strip -%}
+        {%- if delen.size > 1 -%}
+          {%- assign sub = delen[1] | strip -%}
+        {%- endif -%}
       {%- endif -%}
     {%- endif -%}
   {%- endfor -%}
 {%- endif -%}
-{%- if mobiel -%}
-  {%- assign voorvoegsel = 'header__mobile-megamenu' -%}
-{%- else -%}
-  {%- assign voorvoegsel = 'header__megamenu' -%}
-{%- endif -%}
-<li>
-  <a href="{{ col.url }}" class="{{ voorvoegsel }}-collection body-lg">
-    <div class="{{ voorvoegsel }}-collection-media{% if col.metafields.custom.zone_icon != blank %} is-icoon{% endif %}">
-      {%- if col.metafields.custom.zone_icon != blank -%}
-        {{ col.metafields.custom.zone_icon | image_url: width: 300 | image_tag }}
-      {%- elsif col.metafields.custom.megamenu_image != blank -%}
-        {{ col.metafields.custom.megamenu_image | image_url: width: 300 | image_tag }}
-      {%- elsif col.image != blank -%}
-        {{ col.image | image_url: width: 300 | image_tag }}
-      {%- else -%}
-        {{ 'collection-apparel-1' | placeholder_svg_tag }}
-      {%- endif -%}
-    </div>
-    <span>{{ etiket }}</span>
+
+{%- case col.handle -%}
+  {%- when 'bodygroomers' -%}{%- assign pictogram = 'wsm-trimmer' -%}
+  {%- when 'scheerapparaten' -%}{%- assign pictogram = 'wsm-scheer' -%}
+  {%- when 'baardtrimmers' -%}{%- assign pictogram = 'wsm-baard' -%}
+  {%- when 'tondeuses' -%}{%- assign pictogram = 'wsm-tondeuse' -%}
+  {%- when 'neustrimmers' -%}{%- assign pictogram = 'wsm-neus' -%}
+  {%- when 'safetyrazors-scheren-scheermes' -%}{%- assign pictogram = 'wsm-mes' -%}
+  {%- when 'ladyshave' -%}{%- assign pictogram = 'wsm-scheer' -%}
+  {%- when 'accesoires' -%}{%- assign pictogram = 'wsm-doos' -%}
+  {%- when 'bundels' -%}{%- assign pictogram = 'wsm-cadeau' -%}
+  {%- else -%}{%- assign pictogram = 'wsm-doos' -%}
+{%- endcase -%}
+
+{%- if soort == 'zone' -%}
+  <li>
+    <a
+      href="{{ col.url }}"
+      class="wsmm-zone{% if licht != blank and licht == col.handle %} is-licht{% endif %}"
+    >
+      <span class="wsmm-zone-ico">
+        {%- if col.metafields.custom.zone_icon != blank -%}
+          {{ col.metafields.custom.zone_icon | image_url: width: 132 | image_tag: loading: 'lazy', alt: '' }}
+        {%- else -%}
+          <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><use href="#{{ pictogram }}"/></svg>
+        {%- endif -%}
+      </span>
+      <span class="wsmm-zone-tekst">
+        <span class="wsmm-naam">{{ naam }}</span>
+        {%- if sub != blank -%}<span class="wsmm-sub">{{ sub }}</span>{%- endif -%}
+      </span>
+      <svg class="wsmm-pijl" viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-chevron"/></svg>
+    </a>
+  </li>
+
+{%- elsif soort == 'uit' -%}
+  <a href="{{ col.url }}" class="wsmm-uit">
+    <span class="wsmm-uit-ico">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#{{ pictogram }}"/></svg>
+    </span>
+    <span class="wsmm-zone-tekst">
+      <span class="wsmm-uit-kop">
+        <span class="wsmm-naam">{{ naam }}</span>
+        {%- if badge != blank -%}<span class="wsmm-badge">{{ badge }}</span>{%- endif -%}
+      </span>
+      {%- if sub != blank -%}<span class="wsmm-sub">{{ sub }}</span>{%- endif -%}
+    </span>
+    <svg class="wsmm-pijl" viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-chevron"/></svg>
   </a>
-</li>
+
+{%- else -%}
+  <li>
+    <a href="{{ col.url }}" class="wsmm-type">
+      <span class="wsmm-type-ico">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#{{ pictogram }}"/></svg>
+      </span>
+      <span class="wsmm-naam">{{ naam }}</span>
+      <svg class="wsmm-pijl" viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-chevron"/></svg>
+    </a>
+  </li>
+{%- endif -%}
