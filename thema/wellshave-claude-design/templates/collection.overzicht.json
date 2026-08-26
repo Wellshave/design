@@ -8,30 +8,44 @@
           "settings": {
             "groep": "zone",
             "vraag": "Waar wil je aan de slag?",
-            "opties": "lichaam|Lichaam|lichaam\ngezicht|Gezicht & baard|gezicht en baard\nhoofd|Hoofd|hoofd\nneus|Neus & oren|neus en oren",
-            "start": "lichaam"
+            "opties": "lichaam|Lichaam & schaamstreek|lichaam\ngezicht|Gezicht & baard|gezicht en baard\nhoofd|Hoofd|hoofd\nneus|Neus & oren|neus en oren"
           }
         },
         "vraag_2": {
           "type": "vraag",
           "settings": {
+            "groep": "klus",
+            "vraag": "Wat moet het apparaat vooral doen?",
+            "opties": "glad|Glad scheren|glad scheren\nkort|Kort houden|kort houden\ndetail|Precies bijwerken|precies bijwerken"
+          }
+        },
+        "vraag_3": {
+          "type": "vraag",
+          "settings": {
+            "groep": "breed",
+            "vraag": "Gebruik je hem ook ergens anders?",
+            "opties": "nee|Alleen hier|alleen hier\nja|Ook op andere plekken|ook elders"
+          }
+        },
+        "vraag_4": {
+          "type": "vraag",
+          "settings": {
             "groep": "vorm",
-            "vraag": "Wat zoek je?",
-            "opties": "los|Eén apparaat|één apparaat\nset|Een complete set|complete set",
-            "start": "los"
+            "vraag": "Eén apparaat, of een complete set?",
+            "opties": "los|Eén apparaat|één apparaat\nset|Complete set|complete set"
           }
         },
         "match_1": {
           "type": "match",
           "settings": {
-            "id": "gg",
-            "product": "wellshave-bodygroomer-groom-guard",
-            "naam": "Groom Guard™",
-            "badge": "37× besteld in 30 dagen",
-            "zin": "De meest verkochte bodygroomer: keramische kop achter een kam, met licht waar je kijkt.",
-            "reden_1": "SkinSafe™ keramische kop",
-            "reden_2": "LED-licht waar je kijkt",
-            "reden_3": "4,9 uit 192 beoordelingen"
+            "id": "flexbundel",
+            "product": "body-beard-kit",
+            "naam": "Flex-line Bundel",
+            "badge": "Grootste voordeel",
+            "zin": "Negen onderdelen voor gezicht, baard en lichaam, inclusief de Sharpline-detailtrimmer.",
+            "reden_1": "Flex Guard met foilkop",
+            "reden_2": "Sharpline-detailtrimmer erbij",
+            "reden_3": "Negen onderdelen in de doos"
           }
         },
         "match_2": {
@@ -50,6 +64,84 @@
         "match_3": {
           "type": "match",
           "settings": {
+            "id": "flex",
+            "product": "wellshave-flex-guard™",
+            "naam": "Flex Guard™ 3-in-1",
+            "badge": "Meest veelzijdig",
+            "zin": "Trimmen, neushaar en glad afwerken met één apparaat — ook in de koffer.",
+            "reden_1": "Drie opzetstukken in één",
+            "reden_2": "7.000 toeren, LED-display",
+            "reden_3": "Waterdicht — IPX7"
+          }
+        },
+        "match_4": {
+          "type": "match",
+          "settings": {
+            "id": "pro",
+            "product": "groom-guard-pro",
+            "naam": "Groom Guard™ PRO",
+            "badge": "Meest gekozen",
+            "zin": "Voor lichaam én schaamstreek, met foil-kop voor een gladde afwerking.",
+            "reden_1": "SkinSafe™ keramische kop",
+            "reden_2": "Waterdicht — IPX7",
+            "reden_3": "Trimmen én glad afwerken"
+          }
+        },
+        "match_5": {
+          "type": "match",
+          "settings": {
+            "id": "dual",
+            "product": "wellshave-2-in-1-bodygroomer-mannen",
+            "naam": "Dual Groomer™ 2-in-1",
+            "badge": "Laagste prijs",
+            "zin": "Lichaam en neushaar in één apparaat, in twee snelheden.",
+            "reden_1": "SkinSafe™ mes",
+            "reden_2": "Neusopzetstuk meegeleverd",
+            "reden_3": "Twee snelheden"
+          }
+        },
+        "match_6": {
+          "type": "match",
+          "settings": {
+            "id": "gg",
+            "product": "wellshave-bodygroomer-groom-guard",
+            "naam": "Groom Guard™",
+            "badge": "37× besteld in 30 dagen",
+            "zin": "De meest verkochte bodygroomer: keramische kop achter een kam, met licht waar je kijkt.",
+            "reden_1": "SkinSafe™ keramische kop",
+            "reden_2": "LED-licht waar je kijkt",
+            "reden_3": "4,9 uit 192 beoordelingen"
+          }
+        },
+        "match_7": {
+          "type": "match",
+          "settings": {
+            "id": "elegant",
+            "product": "wellshave-4-in-1-scheerapparaat",
+            "naam": "Scheerapparaat Elegant™ 4-in-1",
+            "badge": "Meeste voor je geld",
+            "zin": "Vier koppen: scheren, neushaar, bakkebaarden en de baardtrimmer.",
+            "reden_1": "Neus- en oorhaaropzetstuk meegeleverd",
+            "reden_2": "Sidetrimmer voor de bakkebaarden",
+            "reden_3": "Zes onderdelen in de doos"
+          }
+        },
+        "match_8": {
+          "type": "match",
+          "settings": {
+            "id": "sentinel",
+            "product": "the-sentinel-pro",
+            "naam": "The Sentinel PRO",
+            "badge": "Nieuw in de lijn",
+            "zin": "Zet hem terug in het station en hij reinigt en laadt zichzelf.",
+            "reden_1": "Reinigingsstation met reinigingsvloeistof",
+            "reden_2": "Zes onderdelen in de doos",
+            "reden_3": "Comfortabel scheren zonder irritatie"
+          }
+        },
+        "match_9": {
+          "type": "match",
+          "settings": {
             "id": "gentleman",
             "product": "wellshave-scheerapparaat-elite",
             "naam": "The Gentleman Shaver™",
@@ -60,20 +152,85 @@
             "reden_3": "LCD-display en oplaadstandaard"
           }
         },
-        "match_4": {
+        "match_10": {
           "type": "match",
           "settings": {
-            "id": "flexbundel",
-            "product": "body-beard-kit",
-            "naam": "Flex-line Bundel",
-            "badge": "Grootste voordeel",
-            "zin": "Negen onderdelen voor gezicht, baard en lichaam, inclusief de Sharpline-detailtrimmer.",
-            "reden_1": "Flex Guard met foilkop",
-            "reden_2": "Sharpline-detailtrimmer erbij",
-            "reden_3": "Negen onderdelen in de doos"
+            "id": "baron",
+            "product": "wellshave-blade-baron",
+            "naam": "4 Foil Blade Baron™",
+            "badge": "Compact",
+            "zin": "Foilkop voor korte stoppels, waterdicht, drie onderdelen in de doos.",
+            "reden_1": "Meerdere bladen grijpen meer haar tegelijk",
+            "reden_2": "Nat en droog te gebruiken",
+            "reden_3": "Past in elke toilettas"
           }
         },
-        "match_5": {
+        "match_11": {
+          "type": "match",
+          "settings": {
+            "id": "supreme",
+            "product": "6-in-1-baardtrimmer-supreme",
+            "naam": "Men Shaper Supreme™ 6-in-1",
+            "badge": "Meest compleet",
+            "zin": "Zes opzetstukken en twaalf onderdelen, met een micro shaver voor de gladde afwerking.",
+            "reden_1": "Micro shaver die de 5-in-1 niet heeft",
+            "reden_2": "Neus- en oorhaaropzetstuk meegeleverd",
+            "reden_3": "T-Blade, precisietrimmer en bodygroomer"
+          }
+        },
+        "match_12": {
+          "type": "match",
+          "settings": {
+            "id": "edge",
+            "product": "wellshave-edge-blade",
+            "naam": "Edge Blade",
+            "badge": "Voor de lijnen",
+            "zin": "4D-flexkop die meekantelt over kaak en hals, met kammen van 1 tot 5 mm.",
+            "reden_1": "Kammen van 1, 2, 3 en 5 mm",
+            "reden_2": "Flexkop volgt kaaklijn en hals",
+            "reden_3": "Volledig waterdicht, ook voor het lichaam"
+          }
+        },
+        "match_13": {
+          "type": "match",
+          "settings": {
+            "id": "msiced",
+            "product": "wellshave-5-in-1-baardtrimmer-man-shaper-iced",
+            "naam": "Men Shaper Iced™ 5-in-1",
+            "badge": "Laagste prijs van het paar",
+            "zin": "Vijf opzetstukken en elf onderdelen — dezelfde set als de Gold, voor €3,00 minder.",
+            "reden_1": "T-Blade en precisietrimmer voor de lijnen",
+            "reden_2": "Verstelbaar opzetstuk 1–9 mm",
+            "reden_3": "Opbergstandaard en travelbag erbij"
+          }
+        },
+        "match_14": {
+          "type": "match",
+          "settings": {
+            "id": "dial",
+            "product": "the-dial-master",
+            "naam": "The Dial Master",
+            "badge": "Nieuw in de lijn",
+            "zin": "Twintig lengtestanden op één draaiknop — je wisselt geen kammen meer.",
+            "reden_1": "20 nauwkeurige lengtestanden",
+            "reden_2": "Verstelbare draaiknop",
+            "reden_3": "IPX7 waterdicht, LED-display"
+          }
+        },
+        "match_15": {
+          "type": "match",
+          "settings": {
+            "id": "skull3",
+            "product": "skull-deal-3-0",
+            "naam": "Skull Deal 3.0",
+            "badge": "Acht onderdelen",
+            "zin": "Dezelfde scheerkop, plus een extra magnetische kop, een tas en een hard case.",
+            "reden_1": "Extra magnetische scheerkop",
+            "reden_2": "Tas én harde koffer",
+            "reden_3": "Acht onderdelen in de doos"
+          }
+        },
+        "match_16": {
           "type": "match",
           "settings": {
             "id": "hs",
@@ -86,7 +243,33 @@
             "reden_3": "7.000 rpm-motor"
           }
         },
-        "match_6": {
+        "match_17": {
+          "type": "match",
+          "settings": {
+            "id": "bpack2",
+            "product": "barber-pack-2-0",
+            "naam": "Barber Pack 2.0",
+            "badge": "Tien onderdelen",
+            "zin": "Tondeuse, detailtrimmer en foil shaver: de lengte, de lijn en de gladde afwerking.",
+            "reden_1": "Tondeuse voor fades, haar en baard",
+            "reden_2": "Foil shaver voor de gladde afwerking",
+            "reden_3": "Tien onderdelen in de doos"
+          }
+        },
+        "match_18": {
+          "type": "match",
+          "settings": {
+            "id": "sharp",
+            "product": "detailtrimmer-sharpline™",
+            "naam": "Detailtrimmer Sharpline™",
+            "badge": "Voor de lijnen",
+            "zin": "Het smalle mes komt bij de nek, de slapen en de baardlijn waar een tondeuse te breed is.",
+            "reden_1": "Strakke lijnen in enkele bewegingen",
+            "reden_2": "Snijdt door dik en stug haar",
+            "reden_3": "Drie opzetstukken voor kort tot langer"
+          }
+        },
+        "match_19": {
           "type": "match",
           "settings": {
             "id": "bpack3",
@@ -99,7 +282,33 @@
             "reden_3": "Ook een neustrimmer erbij"
           }
         },
-        "match_7": {
+        "match_20": {
+          "type": "match",
+          "settings": {
+            "id": "ele",
+            "product": "wellshave-tondeuse-elegant",
+            "naam": "Tondeuse Elegant™",
+            "badge": "Kapperskwaliteit",
+            "zin": "Fades en contouren met een hendel die tussen twee opzetkammen in valt.",
+            "reden_1": "Verstelbare fade-hendel",
+            "reden_2": "Knipt zonder trekken of haperen",
+            "reden_3": "Metalen behuizing"
+          }
+        },
+        "match_21": {
+          "type": "match",
+          "settings": {
+            "id": "sp30",
+            "product": "wellshave-shave-package-3-0",
+            "naam": "Shave Package 3.0",
+            "badge": "Negen onderdelen",
+            "zin": "De neustrimmer met alle vier de opzetstukken, plus de verzorging eromheen.",
+            "reden_1": "Negen onderdelen in de doos",
+            "reden_2": "Alle vier de neusopzetstukken",
+            "reden_3": "Voordeliger dan los samengesteld"
+          }
+        },
+        "match_22": {
           "type": "match",
           "settings": {
             "id": "ultra",
@@ -112,17 +321,56 @@
             "reden_3": "SkinGuard tegen wondjes"
           }
         },
-        "match_8": {
+        "match_23": {
           "type": "match",
           "settings": {
-            "id": "sp30",
-            "product": "wellshave-shave-package-3-0",
-            "naam": "Shave Package 3.0",
-            "badge": "Negen onderdelen",
-            "zin": "De neustrimmer met alle vier de opzetstukken, plus de verzorging eromheen.",
-            "reden_1": "Negen onderdelen in de doos",
-            "reden_2": "Alle vier de neusopzetstukken",
-            "reden_3": "Voordeliger dan los samengesteld"
+            "id": "ultimate",
+            "product": "wellshave-4-in-1-neustrimmer-ultimate",
+            "naam": "Neustrimmer Ultimate™ 4-in-1",
+            "badge": "Grootste voordeel",
+            "zin": "De bovenste trede van de vertrouwde lijn, met een bodygroomer-opzetstuk erbij.",
+            "reden_1": "Vier opzetstukken, zes onderdelen",
+            "reden_2": "Ook lichaamshaar met hetzelfde apparaat",
+            "reden_3": "SkinGuard tegen wondjes en irritatie"
+          }
+        },
+        "match_24": {
+          "type": "match",
+          "settings": {
+            "id": "plat",
+            "product": "neustrimmer-3in1-platinum",
+            "naam": "Neustrimmer 3in1 Platinum™",
+            "badge": "Nieuwe lijn",
+            "zin": "Plus het shaver-opzetstuk, voor kort haar op kleine vlakken.",
+            "reden_1": "Neus- en oorhaar zonder trekken",
+            "reden_2": "Detailtrimmer voor wenkbrauwen",
+            "reden_3": "Shaver-opzetstuk voor kort haar"
+          }
+        },
+        "match_25": {
+          "type": "match",
+          "settings": {
+            "id": "elite",
+            "product": "neustrimmer-2in1-elite",
+            "naam": "Neustrimmer 2in1 Elite™",
+            "badge": "Nieuwe lijn",
+            "zin": "Met het detailopzetstuk erbij, voor wenkbrauwen en strakke lijntjes.",
+            "reden_1": "Neus- en oorhaar zonder trekken",
+            "reden_2": "Detailtrimmer voor wenkbrauwen",
+            "reden_3": "Vier onderdelen in de doos"
+          }
+        },
+        "match_26": {
+          "type": "match",
+          "settings": {
+            "id": "ess",
+            "product": "neustrimmer-essential",
+            "naam": "Neustrimmer Essential™",
+            "badge": "Instap, nieuwe lijn",
+            "zin": "Eén opzetstuk, één knop: neus- en oorhaar en verder niets.",
+            "reden_1": "Neus- en oorhaar zonder trekken",
+            "reden_2": "Drie onderdelen in de doos",
+            "reden_3": "USB-C oplaadbaar"
           }
         },
         "zone_1": {
@@ -179,6 +427,8 @@
       "block_order": [
         "vraag_1",
         "vraag_2",
+        "vraag_3",
+        "vraag_4",
         "match_1",
         "match_2",
         "match_3",
@@ -187,6 +437,24 @@
         "match_6",
         "match_7",
         "match_8",
+        "match_9",
+        "match_10",
+        "match_11",
+        "match_12",
+        "match_13",
+        "match_14",
+        "match_15",
+        "match_16",
+        "match_17",
+        "match_18",
+        "match_19",
+        "match_20",
+        "match_21",
+        "match_22",
+        "match_23",
+        "match_24",
+        "match_25",
+        "match_26",
         "zone_1",
         "zone_2",
         "zone_3",
@@ -200,19 +468,10 @@
         "lede": "Vier zones, ieder met eigen gereedschap: trimmen zonder wondjes, scheren of op lengte houden, het hoofd, en het detailwerk. Zeg waar je wilt beginnen en je staat meteen op de goede plek.",
         "foto": "shopify://shop_images/Wellshavesept25lifestyle_lowres-2-34.jpg",
         "foto_alt": "De Wellshave-toilettas en twee opbergzakjes in de nissen van een badkamer",
-        "score": "4,6/5",
-        "sterren": 4,
-        "halve_ster": true,
-        "score_bron": "Groom Guard™ PRO (442)",
-        "quote": "Was een beetje bunzig om mijn zak te scheren, maar met deze groomer is dat appeltje eitje. Geen wondjes en een glad resultaat. En dat voor de eerste keer.",
-        "quote_bron": "Makketakker · geverifieerde koper · Groom Guard™ PRO",
-        "gerust_1": "100 dagen proberen",
-        "gerust_2": "2 jaar garantie",
-        "gerust_3": "Morgen in huis",
         "kaartkop": "Waar wil je beginnen?",
-        "kaartsub": "2 keuzes · direct de goede zone",
+        "kaartsub": "4 keuzes · van de hele collectie naar één advies",
         "kaartvraag": "Zeg waar, dan zoeken wij het uit.",
-        "tabel": "zone=lichaam, vorm=los > gg\nzone=lichaam, vorm=set > spult\nzone=gezicht, vorm=los > gentleman\nzone=gezicht, vorm=set > flexbundel\nzone=hoofd, vorm=los > hs\nzone=hoofd, vorm=set > bpack3\nzone=neus, vorm=los > ultra\nzone=neus, vorm=set > sp30",
+        "tabel": "zone=lichaam, vorm=set, breed=ja > flexbundel\nzone=lichaam, vorm=set > spult\nzone=lichaam, breed=ja > flex\nzone=lichaam, klus=glad > pro\nzone=lichaam, klus=detail > dual\nzone=lichaam > gg\nzone=gezicht, klus=glad, vorm=set, breed=ja > elegant\nzone=gezicht, klus=glad, vorm=set > sentinel\nzone=gezicht, klus=glad, breed=ja > gentleman\nzone=gezicht, klus=glad > baron\nzone=gezicht, klus=detail, vorm=set > supreme\nzone=gezicht, klus=detail > edge\nzone=gezicht, vorm=set > msiced\nzone=gezicht > dial\nzone=hoofd, klus=glad, vorm=set > skull3\nzone=hoofd, klus=glad > hs\nzone=hoofd, klus=detail, vorm=set > bpack2\nzone=hoofd, klus=detail > sharp\nzone=hoofd, vorm=set > bpack3\nzone=hoofd > ele\nzone=neus, vorm=set > sp30\nzone=neus, breed=ja, klus=glad > ultra\nzone=neus, breed=ja > ultimate\nzone=neus, klus=glad > plat\nzone=neus, klus=detail > elite\nzone=neus > ess",
         "standaard": "gg",
         "kruimel": "Alle zones",
         "desk_indent_top": 0,

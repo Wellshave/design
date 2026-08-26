@@ -114,7 +114,6 @@
 .wsc .zkaart.nu .zkaart-tel{background:var(--grad-goud);border-color:transparent;color:var(--carbon)}
 .wsc .zkaart.nu .zkaart-pijl{color:rgba(255,255,255,.55)}
 
-
 @container (max-width:980px){
   .wsc .zonekiezer{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
   .wsc .zkaart{padding:12px 13px;gap:11px}
@@ -224,24 +223,8 @@
 .wsc .lead.kort{font-size:14.5px;max-width:38ch}
 
 /* bewijskaart */
-.wsc .proefkaart{display:flex;align-items:stretch;gap:0;border:1px solid rgba(255,255,255,.13);
-  border-radius:var(--r-m);background:rgba(255,255,255,.045);overflow:hidden;width:100%}
-.wsc .pk-score{padding:12px 16px;border-right:1px solid rgba(255,255,255,.13);flex:none}
-.wsc .sterrenrij{display:flex;gap:2px;margin-bottom:6px}
-.wsc .sterrenrij i{width:19px;height:19px;background:#00B67A;border-radius:2px;display:grid;
-  place-items:center;font-style:normal}
-.wsc .sterrenrij i.half{background:linear-gradient(90deg,#00B67A 50%,rgba(255,255,255,.2) 50%)}
-.wsc .sterrenrij i span{width:12px;height:12px;background:#fff;
-  -webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2l2.9 6.3 6.9.8-5.1 4.6 1.4 6.8L12 17.1 5.9 20.5l1.4-6.8L2.2 9.1l6.9-.8z'/></svg>") center/contain no-repeat;
-  mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2l2.9 6.3 6.9.8-5.1 4.6 1.4 6.8L12 17.1 5.9 20.5l1.4-6.8L2.2 9.1l6.9-.8z'/></svg>") center/contain no-repeat}
-.wsc .pk-score b{font-size:14px;font-weight:800;color:#fff;white-space:nowrap}
-.wsc .pk-score b em{font-style:normal;font-weight:600;color:rgba(255,255,255,.55);font-size:12px}
-.wsc .pk-quote{padding:12px 16px;display:flex;gap:11px;align-items:flex-start;min-width:0}
 /* De badge is de vorm zelf, geen vinkje in een blauwe cirkel: kleur en vinkje
    zitten in het symbool, dus hier alleen de maat. */
-.wsc .pk-badge{width:19px;height:19px;flex:none;margin-top:2px;display:block}
-.wsc .pk-quote p{font-size:13px;line-height:1.45;color:#fff}
-.wsc .pk-quote span{display:block;font-size:11px;color:rgba(255,255,255,.5);margin-top:4px}
 
 /* foto in de kopkolom — de hele scene past hier, een volle band knipt hem tot een strook */
 .wsc .kop-foto{position:relative;width:100%;aspect-ratio:16/8;border-radius:var(--r-m);
@@ -253,10 +236,6 @@
   background:linear-gradient(180deg,rgba(16,15,14,.22) 0%,rgba(16,15,14,0) 34%,rgba(16,15,14,.42) 100%)}
 
 /* geruststellers met icoon */
-.wsc .gerustrij{display:flex;gap:26px;flex-wrap:wrap;padding-top:8px;margin-top:auto}
-.wsc .gerustrij div{display:flex;align-items:center;gap:9px;font-size:12.5px;font-weight:600;
-  color:rgba(255,255,255,.72)}
-.wsc .gerustrij svg{width:18px;height:18px;stroke:var(--goud);fill:none;stroke-width:2.1;flex:none}
 
 /* keuzekaart */
 .wsc .kiescard{position:relative;z-index:1;background:#FCFAF6;color:var(--ink);border-radius:var(--r-l);padding:24px 26px 24px;
@@ -370,13 +349,8 @@
   .wsc .kop-copy > .lead{order:3}
   .wsc .kop-foto{order:4;aspect-ratio:16/9;margin:2px 0}
   .wsc .kop-foto img{object-position:50% 42%}
-  .wsc .kop-copy > .proefkaart{order:5}
-  .wsc .kiescard{order:6;padding:18px 16px}
-  .wsc .kop-copy > .gerustrij{order:7;justify-content:space-between;gap:12px;padding-top:2px}
-  .wsc .gerustrij div{font-size:11px}
-  .wsc .proefkaart{flex-direction:column}
-  .wsc .pk-score{border-right:0;border-bottom:1px solid rgba(255,255,255,.13)}
-  .wsc .kaartkop{flex-direction:column;gap:4px}
+    .wsc .kiescard{order:6;padding:18px 16px}
+          .wsc .kaartkop{flex-direction:column;gap:4px}
   .wsc .kaartkop span{white-space:normal}
   .wsc .kiescard h2{font-size:21px}
   .wsc .stappen-lijst::before{display:none}
@@ -855,8 +829,6 @@ body.vgl-open{overflow:hidden}
   .wsc .wsk-chips i{font-size:9.5px;padding:3px 8px}
 }
 .wsc .sterren5 i.leeg{opacity:.17}
-.wsc .sterrenrij i.leeg{background:rgba(255,255,255,.2)}
-.wsc .sterrenrij i.leeg span{background:#191816}
 .wsc .wsk.op .wsk-pack{filter:grayscale(.55);opacity:.68}
 .wsc .wsk.op .wsk-cta{opacity:.55;pointer-events:none}
 .wsc .wsk-tag.op{background:rgba(17,17,17,.72);color:#fff}
@@ -865,10 +837,7 @@ body.vgl-open{overflow:hidden}
 .wsc .groep-noot{font-size:12.5px;line-height:1.6;color:var(--ink-60);max-width:74ch;
   margin:-12px 0 20px;padding-left:13px;border-left:2px solid var(--bronze)}
 .wsc .groep-noot b{color:var(--ink);font-weight:700}
-.wsc .pk-score{flex:0 1 auto;max-width:50%}
-.wsc .pk-score b{white-space:normal}
-.wsc .pk-score b em{display:block;margin-top:3px}
-@container (max-width:760px){.wsc .pk-score{max-width:none}}
+@container (max-width:760px){}
 /* het formulier om direct in de winkelwagen te leggen mag de rij niet breken */
 .wsc .wsk-form{display:contents}
 

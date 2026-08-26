@@ -15,13 +15,9 @@
   <symbol id="wsc-vink" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <!-- de blauwe geverifieerd-badge: de rozet is uitgerekend met r(t)=10,5+0,95*cos(8t)
        en als bezier uitgeschreven, zodat alle acht lobben gelijk zijn -->
-  <symbol id="wsc-badge" viewBox="0 0 24 24"><path d="M23.38 12.00C23.26 12.68 22.36 13.36 21.94 13.98C21.53 14.59 21.04 15.01 20.89 15.68C20.74 16.36 21.17 17.31 21.03 18.04C20.89 18.76 20.61 19.65 20.05 20.05C19.48 20.44 18.36 20.29 17.63 20.43C16.90 20.57 16.27 20.52 15.68 20.89C15.10 21.26 14.73 22.24 14.12 22.65C13.51 23.07 12.68 23.50 12.00 23.38C11.32 23.26 10.64 22.36 10.02 21.94C9.41 21.53 8.99 21.04 8.32 20.89C7.64 20.74 6.69 21.17 5.96 21.03C5.24 20.89 4.35 20.61 3.95 20.05C3.56 19.48 3.71 18.36 3.57 17.63C3.43 16.90 3.48 16.27 3.11 15.68C2.74 15.10 1.76 14.73 1.35 14.12C0.93 13.51 0.50 12.68 0.62 12.00C0.74 11.32 1.64 10.64 2.06 10.02C2.47 9.41 2.96 8.99 3.11 8.32C3.26 7.64 2.83 6.69 2.97 5.96C3.11 5.24 3.39 4.35 3.95 3.95C4.52 3.56 5.64 3.71 6.37 3.57C7.10 3.43 7.73 3.48 8.32 3.11C8.90 2.74 9.27 1.76 9.88 1.35C10.49 0.93 11.32 0.50 12.00 0.62C12.68 0.74 13.36 1.64 13.98 2.06C14.59 2.47 15.01 2.96 15.68 3.11C16.36 3.26 17.31 2.83 18.04 2.97C18.76 3.11 19.65 3.39 20.05 3.95C20.44 4.52 20.29 5.64 20.43 6.37C20.57 7.10 20.52 7.73 20.89 8.32C21.26 8.90 22.24 9.27 22.65 9.88C23.07 10.49 23.50 11.32 23.38 12.00Z" fill="#1D9BF0"/><path d="M7.6 12.2 10.6 15.1 16.4 8.7" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="wsc-potlood" viewBox="0 0 24 24"><path d="M4 20h4L19.5 8.5a2.1 2.1 0 0 0-3-3L5 17v3zM14.5 6.5l3 3" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="wsc-chevron-r" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="wsc-pijl" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-  <symbol id="wsc-retour" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.4-5.7M20 4v4h-4" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-  <symbol id="wsc-schild" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-  <symbol id="wsc-truck" viewBox="0 0 24 24"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/><circle cx="7" cy="18" r="1.6" fill="none" stroke="currentColor" stroke-width="2.1"/><circle cx="17" cy="18" r="1.6" fill="none" stroke="currentColor" stroke-width="2.1"/></symbol>
 </svg>
 
 <section class="kop">
@@ -46,45 +42,6 @@
         </figure>
       {%- endif -%}
 
-      {%- if section.settings.score != blank or section.settings.quote != blank -%}
-        <div class="proefkaart">
-          {%- if section.settings.score != blank -%}
-            <div class="pk-score">
-              {%- assign heel = section.settings.sterren | at_most: 5 -%}
-              {%- assign halve_index = heel | plus: 1 -%}
-              <div class="sterrenrij" aria-hidden="true">
-                {%- for i in (1..5) -%}
-                  {%- if i <= heel -%}<i><span></span></i>
-                  {%- elsif section.settings.halve_ster and i == halve_index -%}<i class="half"><span></span></i>
-                  {%- else -%}<i class="leeg"><span></span></i>{%- endif -%}
-                {%- endfor -%}
-              </div>
-              <b>{{ section.settings.score }}<em>{{ section.settings.score_bron }}</em></b>
-            </div>
-          {%- endif -%}
-          {%- if section.settings.quote != blank -%}
-            <div class="pk-quote">
-              <svg class="pk-badge" viewBox="0 0 24 24" role="img" aria-label="Geverifieerde koper"><use href="#wsc-badge"/></svg>
-              <div>
-                <p>&ldquo;{{ section.settings.quote }}&rdquo;</p>
-                <span>{{ section.settings.quote_bron }}</span>
-              </div>
-            </div>
-          {%- endif -%}
-        </div>
-      {%- endif -%}
-
-      <div class="gerustrij">
-        {%- if section.settings.gerust_1 != blank -%}
-          <div><svg viewBox="0 0 24 24"><use href="#wsc-retour"/></svg>{{ section.settings.gerust_1 }}</div>
-        {%- endif -%}
-        {%- if section.settings.gerust_2 != blank -%}
-          <div><svg viewBox="0 0 24 24"><use href="#wsc-schild"/></svg>{{ section.settings.gerust_2 }}</div>
-        {%- endif -%}
-        {%- if section.settings.gerust_3 != blank -%}
-          <div><svg viewBox="0 0 24 24"><use href="#wsc-truck"/></svg>{{ section.settings.gerust_3 }}</div>
-        {%- endif -%}
-      </div>
     </div>
 
     {%- if heeft_hulp -%}
@@ -170,9 +127,9 @@
             </div>
             <div class="mp-body">
               {%- if block.settings.foto != blank -%}
-                {{ block.settings.foto | image_url: width: 500 | image_tag: alt: p.title }}
+                {{ block.settings.foto | image_url: width: 500 | image_tag: alt: p.title, loading: 'lazy' }}
               {%- elsif p.featured_image -%}
-                {{ p.featured_image | image_url: width: 500 | image_tag: alt: p.title }}
+                {{ p.featured_image | image_url: width: 500 | image_tag: alt: p.title, loading: 'lazy' }}
               {%- endif -%}
               <div class="mp-info">
                 <h3>{{ block.settings.naam | default: p.title }}</h3>
@@ -291,95 +248,346 @@
 </div>
 
 {% schema %}
-{
-  "name": "WS · Collectie kop",
-  "tag": "section",
-  "class": "ws-collectie-kop",
-  "disabled_on": { "groups": ["header", "footer"] },
-  "settings": [
-    { "type": "header", "content": "Linkerkolom" },
-    { "type": "text", "id": "eyebrow", "label": "Bovenregel", "default": "Zone · 4 apparaten" },
-    { "type": "text", "id": "kop_1", "label": "Kop, eerste regel", "default": "Glad, kort of strak." },
-    { "type": "text", "id": "kop_2", "label": "Kop, tweede regel (goud)", "default": "Drie klussen, drie apparaten." },
-    { "type": "textarea", "id": "lede", "label": "Inleiding", "info": "Eén tot twee zinnen." },
-    { "type": "image_picker", "id": "foto", "label": "Foto van het apparaat in gebruik", "info": "Staat als plaat in de kolom, verhouding 16:8. Geen volle achtergrondband." },
-    { "type": "text", "id": "foto_alt", "label": "Alttekst bij de foto" },
-    { "type": "header", "content": "Bewijskaart" },
-    { "type": "text", "id": "score", "label": "Score", "info": "Bijvoorbeeld 4,8/5. Laat leeg om de kaart te verbergen.", "default": "4,8/5" },
-    { "type": "range", "id": "sterren", "label": "Volle sterren", "min": 0, "max": 5, "step": 1, "default": 4 },
-    { "type": "checkbox", "id": "halve_ster", "label": "Halve ster erachter", "default": true },
-    { "type": "text", "id": "score_bron", "label": "Waar de score over gaat", "info": "Benoem het altijd. Tel scores van verwante producten niet bij elkaar op: Loox deelt beoordelingen tussen gegroepeerde producten." },
-    { "type": "textarea", "id": "quote", "label": "Citaat", "info": "Letterlijk uit een echte beoordeling. Verzin er nooit een." },
-    { "type": "text", "id": "quote_bron", "label": "Bron bij het citaat", "default": "Naam · geverifieerde koper · Product" },
-    { "type": "header", "content": "Geruststellers" },
-    { "type": "text", "id": "gerust_1", "label": "Eerste", "default": "100 dagen proberen" },
-    { "type": "text", "id": "gerust_2", "label": "Tweede", "default": "2 jaar garantie" },
-    { "type": "text", "id": "gerust_3", "label": "Derde", "default": "Morgen in huis" },
-    { "type": "header", "content": "Keuzehulp" },
-    { "type": "text", "id": "kaartkop", "label": "Bovenregel", "default": "Jouw apparaat in 30 seconden" },
-    { "type": "text", "id": "kaartsub", "label": "Regel rechtsboven", "default": "2 keuzes · direct een match" },
-    { "type": "text", "id": "kaartvraag", "label": "Vraag boven de stappen", "default": "Wat ga je precies doen?" },
-    { "type": "text", "id": "kaartlead", "label": "Regel onder de vraag", "info": "Optioneel. Eén korte zin die zegt wat de bezoeker kan verwachten." },
-    { "type": "text", "id": "stap_tekst", "label": "Woord achter de teller", "default": "voltooid" },
-    { "type": "text", "id": "af_kop", "label": "Kop als alles beantwoord is", "default": "Jouw match staat klaar." },
-    { "type": "text", "id": "af_sub", "label": "Regel als alles beantwoord is", "default": "Pas een keuze aan of bekijk direct je advies." },
-    { "type": "text", "id": "opnieuw", "label": "Link om opnieuw te beginnen", "default": "Opnieuw beginnen" },
-    { "type": "text", "id": "wijzig_label", "label": "Voorleestekst van het potlood", "default": "Wijzig dit antwoord" },
-    { "type": "textarea", "id": "tabel", "label": "Beslistabel", "info": "Eén regel per uitkomst, van specifiek naar algemeen. Vorm: klus=kaal, set=los > head-shaver. De eerste regel die past wint. Zorg dat elk matchpaneel precies één combinatie wint." },
-    { "type": "text", "id": "standaard", "label": "Standaarduitkomst", "info": "Het id van het matchpaneel dat toont als geen regel past." },
-    { "type": "text", "id": "match_label", "label": "Label boven het paneel", "default": "Jouw match" },
-    { "type": "text", "id": "waarom_label", "label": "Kopje boven de redenen", "default": "Waarom deze match" },
-    { "type": "text", "id": "match_cta", "label": "Knoptekst", "default": "Bekijk jouw match" },
-    { "type": "text", "id": "voorraad_wel", "label": "Voorraadregel · op voorraad", "default": "Op voorraad · morgen in huis" },
-    { "type": "text", "id": "voorraad_niet", "label": "Voorraadregel · uitverkocht", "default": "Tijdelijk uitverkocht" },
-    { "type": "header", "content": "Zonebalk" },
-    { "type": "text", "id": "kruimel", "label": "Naam van deze zone", "default": "Hoofd" },
-    { "type": "header", "content": "Indent settings" },
-    { "type": "range", "id": "desk_indent_top", "label": "Indent top (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
-    { "type": "range", "id": "desk_indent_bottom", "label": "Indent bottom (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
-    { "type": "range", "id": "mob_indent_top", "label": "Indent top (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
-    { "type": "range", "id": "mob_indent_bottom", "label": "Indent bottom (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 }
-  ],
-  "blocks": [
-    {
-      "type": "vraag",
-      "name": "Vraag",
-      "limit": 4,
-      "settings": [
-        { "type": "text", "id": "groep", "label": "Sleutel", "info": "Kort en zonder spaties, bijvoorbeeld klus. Gebruik deze sleutel ook in de beslistabel." },
-        { "type": "text", "id": "vraag", "label": "Vraag", "default": "Wat is de klus?" },
-        { "type": "textarea", "id": "opties", "label": "Antwoorden", "info": "Eén per regel: waarde|Knoptekst|woord voor de filterregel. Het derde deel mag weg." },
-        { "type": "text", "id": "start", "label": "Beginwaarde", "info": "Wordt niet meer vooraf aangevinkt: de keuzehulp begint leeg en loopt stap voor stap. Blijft staan als aantekening bij welk antwoord het vaakst gekozen wordt." }
+  {
+    "name": "WS · Collectie kop",
+    "tag": "section",
+    "class": "ws-collectie-kop",
+    "disabled_on": {
+      "groups": [
+        "header",
+        "footer"
       ]
     },
-    {
-      "type": "match",
-      "name": "Matchpaneel",
-      "settings": [
-        { "type": "text", "id": "id", "label": "Id", "info": "Verwijst naar de rechterkant van de beslistabel én naar de kaart in het raster." },
-        { "type": "product", "id": "product", "label": "Product", "info": "Prijs, vanprijs, voorraad en link komen hieruit." },
-        { "type": "text", "id": "naam", "label": "Naam", "info": "Leeg = de producttitel." },
-        { "type": "image_picker", "id": "foto", "label": "Foto", "info": "Leeg = de hoofdafbeelding. Gebruik een vrijstaande packshot." },
-        { "type": "text", "id": "badge", "label": "Lintje", "info": "Iets dat waar is: meest gekozen, laagste prijs, nieuw." },
-        { "type": "textarea", "id": "zin", "label": "Eén zin" },
-        { "type": "text", "id": "reden_1", "label": "Reden 1" },
-        { "type": "text", "id": "reden_2", "label": "Reden 2" },
-        { "type": "text", "id": "reden_3", "label": "Reden 3" }
-      ]
-    },
-    {
-      "type": "zone",
-      "name": "Zone in de balk",
-      "limit": 6,
-      "settings": [
-        { "type": "text", "id": "naam", "label": "Naam" },
-        { "type": "text", "id": "aantal", "label": "Aantal" },
-        { "type": "url", "id": "url", "label": "Link naar de zone" },
-        { "type": "image_picker", "id": "icoon", "label": "Icoon van de zone", "info": "Het gouden lijnicoon van deze zone, bijvoorbeeld ws-zone-icoon-lichaam.png. Laat leeg en de tegel toont alleen de naam." },
-        { "type": "checkbox", "id": "huidig", "label": "Dit is de zone die je nu bekijkt", "default": false }
-      ]
-    }
-  ],
-  "presets": [{ "name": "WS · Collectie kop" }]
-}
+    "settings": [
+      {
+        "type": "header",
+        "content": "Linkerkolom"
+      },
+      {
+        "type": "text",
+        "id": "eyebrow",
+        "label": "Bovenregel",
+        "default": "Zone · 4 apparaten"
+      },
+      {
+        "type": "text",
+        "id": "kop_1",
+        "label": "Kop, eerste regel",
+        "default": "Glad, kort of strak."
+      },
+      {
+        "type": "text",
+        "id": "kop_2",
+        "label": "Kop, tweede regel (goud)",
+        "default": "Drie klussen, drie apparaten."
+      },
+      {
+        "type": "textarea",
+        "id": "lede",
+        "label": "Inleiding",
+        "info": "Eén tot twee zinnen."
+      },
+      {
+        "type": "image_picker",
+        "id": "foto",
+        "label": "Foto van het apparaat in gebruik",
+        "info": "Staat als plaat in de kolom, verhouding 16:8. Geen volle achtergrondband."
+      },
+      {
+        "type": "text",
+        "id": "foto_alt",
+        "label": "Alttekst bij de foto"
+      },
+      {
+        "type": "header",
+        "content": "Bewijskaart"
+      },
+      {
+        "type": "header",
+        "content": "Geruststellers"
+      },
+      {
+        "type": "header",
+        "content": "Keuzehulp"
+      },
+      {
+        "type": "text",
+        "id": "kaartkop",
+        "label": "Bovenregel",
+        "default": "Jouw apparaat in 30 seconden"
+      },
+      {
+        "type": "text",
+        "id": "kaartsub",
+        "label": "Regel rechtsboven",
+        "default": "2 keuzes · direct een match"
+      },
+      {
+        "type": "text",
+        "id": "kaartvraag",
+        "label": "Vraag boven de stappen",
+        "default": "Wat ga je precies doen?"
+      },
+      {
+        "type": "text",
+        "id": "kaartlead",
+        "label": "Regel onder de vraag",
+        "info": "Optioneel. Eén korte zin die zegt wat de bezoeker kan verwachten."
+      },
+      {
+        "type": "text",
+        "id": "stap_tekst",
+        "label": "Woord achter de teller",
+        "default": "voltooid"
+      },
+      {
+        "type": "text",
+        "id": "af_kop",
+        "label": "Kop als alles beantwoord is",
+        "default": "Jouw match staat klaar."
+      },
+      {
+        "type": "text",
+        "id": "af_sub",
+        "label": "Regel als alles beantwoord is",
+        "default": "Pas een keuze aan of bekijk direct je advies."
+      },
+      {
+        "type": "text",
+        "id": "opnieuw",
+        "label": "Link om opnieuw te beginnen",
+        "default": "Opnieuw beginnen"
+      },
+      {
+        "type": "text",
+        "id": "wijzig_label",
+        "label": "Voorleestekst van het potlood",
+        "default": "Wijzig dit antwoord"
+      },
+      {
+        "type": "textarea",
+        "id": "tabel",
+        "label": "Beslistabel",
+        "info": "Eén regel per uitkomst, van specifiek naar algemeen. Vorm: klus=kaal, set=los > head-shaver. De eerste regel die past wint. Zorg dat elk matchpaneel precies één combinatie wint."
+      },
+      {
+        "type": "text",
+        "id": "standaard",
+        "label": "Standaarduitkomst",
+        "info": "Het id van het matchpaneel dat toont als geen regel past."
+      },
+      {
+        "type": "text",
+        "id": "match_label",
+        "label": "Label boven het paneel",
+        "default": "Jouw match"
+      },
+      {
+        "type": "text",
+        "id": "waarom_label",
+        "label": "Kopje boven de redenen",
+        "default": "Waarom deze match"
+      },
+      {
+        "type": "text",
+        "id": "match_cta",
+        "label": "Knoptekst",
+        "default": "Bekijk jouw match"
+      },
+      {
+        "type": "text",
+        "id": "voorraad_wel",
+        "label": "Voorraadregel · op voorraad",
+        "default": "Op voorraad · morgen in huis"
+      },
+      {
+        "type": "text",
+        "id": "voorraad_niet",
+        "label": "Voorraadregel · uitverkocht",
+        "default": "Tijdelijk uitverkocht"
+      },
+      {
+        "type": "header",
+        "content": "Zonebalk"
+      },
+      {
+        "type": "text",
+        "id": "kruimel",
+        "label": "Naam van deze zone",
+        "default": "Hoofd"
+      },
+      {
+        "type": "header",
+        "content": "Indent settings"
+      },
+      {
+        "type": "range",
+        "id": "desk_indent_top",
+        "label": "Indent top (desktop)",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "desk_indent_bottom",
+        "label": "Indent bottom (desktop)",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "mob_indent_top",
+        "label": "Indent top (mobile)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "mob_indent_bottom",
+        "label": "Indent bottom (mobile)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "default": 0
+      }
+    ],
+    "blocks": [
+      {
+        "type": "vraag",
+        "name": "Vraag",
+        "limit": 4,
+        "settings": [
+          {
+            "type": "text",
+            "id": "groep",
+            "label": "Sleutel",
+            "info": "Kort en zonder spaties, bijvoorbeeld klus. Gebruik deze sleutel ook in de beslistabel."
+          },
+          {
+            "type": "text",
+            "id": "vraag",
+            "label": "Vraag",
+            "default": "Wat is de klus?"
+          },
+          {
+            "type": "textarea",
+            "id": "opties",
+            "label": "Antwoorden",
+            "info": "Eén per regel: waarde|Knoptekst|woord voor de filterregel. Het derde deel mag weg."
+          },
+          {
+            "type": "text",
+            "id": "start",
+            "label": "Beginwaarde",
+            "info": "Wordt niet meer vooraf aangevinkt: de keuzehulp begint leeg en loopt stap voor stap. Blijft staan als aantekening bij welk antwoord het vaakst gekozen wordt."
+          }
+        ]
+      },
+      {
+        "type": "match",
+        "name": "Matchpaneel",
+        "settings": [
+          {
+            "type": "text",
+            "id": "id",
+            "label": "Id",
+            "info": "Verwijst naar de rechterkant van de beslistabel én naar de kaart in het raster."
+          },
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Product",
+            "info": "Prijs, vanprijs, voorraad en link komen hieruit."
+          },
+          {
+            "type": "text",
+            "id": "naam",
+            "label": "Naam",
+            "info": "Leeg = de producttitel."
+          },
+          {
+            "type": "image_picker",
+            "id": "foto",
+            "label": "Foto",
+            "info": "Leeg = de hoofdafbeelding. Gebruik een vrijstaande packshot."
+          },
+          {
+            "type": "text",
+            "id": "badge",
+            "label": "Lintje",
+            "info": "Iets dat waar is: meest gekozen, laagste prijs, nieuw."
+          },
+          {
+            "type": "textarea",
+            "id": "zin",
+            "label": "Eén zin"
+          },
+          {
+            "type": "text",
+            "id": "reden_1",
+            "label": "Reden 1"
+          },
+          {
+            "type": "text",
+            "id": "reden_2",
+            "label": "Reden 2"
+          },
+          {
+            "type": "text",
+            "id": "reden_3",
+            "label": "Reden 3"
+          }
+        ]
+      },
+      {
+        "type": "zone",
+        "name": "Zone in de balk",
+        "limit": 6,
+        "settings": [
+          {
+            "type": "text",
+            "id": "naam",
+            "label": "Naam"
+          },
+          {
+            "type": "text",
+            "id": "aantal",
+            "label": "Aantal"
+          },
+          {
+            "type": "url",
+            "id": "url",
+            "label": "Link naar de zone"
+          },
+          {
+            "type": "image_picker",
+            "id": "icoon",
+            "label": "Icoon van de zone",
+            "info": "Het gouden lijnicoon van deze zone, bijvoorbeeld ws-zone-icoon-lichaam.png. Laat leeg en de tegel toont alleen de naam."
+          },
+          {
+            "type": "checkbox",
+            "id": "huidig",
+            "label": "Dit is de zone die je nu bekijkt",
+            "default": false
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "WS · Collectie kop"
+      }
+    ]
+  }
 {% endschema %}

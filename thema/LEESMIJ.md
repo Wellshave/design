@@ -728,6 +728,63 @@ De koppen heten op beide niveaus *Shop op zone* en *Shop op type*; het mobiele
 ontwerp zei *Kies je zone*. Ze komen uit dezelfde instelling als op desktop, dus
 één naam per kop — een tweede veld leek meer beheerwerk dan het waard is.
 
+## De review en de belofteregel zijn weg
+
+Onder de herotekst stonden een proefkaart (Trustpilot-score plus een citaat met
+de blauwe geverifieerde badge) en een regel met *100 dagen proberen · 2 jaar
+garantie · Morgen in huis*. Die zijn verwijderd — op de telefoon stonden ze
+tussen de kop en de keuzehulp in, precies waar de bezoeker verder wil.
+
+Verwijderd op alle schermen, niet alleen mobiel: opmaak, CSS, de vier sprites
+die er alleen voor waren (`wsc-badge`, `wsc-retour`, `wsc-schild`, `wsc-truck`),
+negen instellingen en dezelfde negen sleutels uit alle negen templates. De
+blauwe geverifieerde badge verdwijnt daarmee ook; die zat alleen op dat citaat.
+De garantiebelofte staat nog wel onderaan de mobiele lade en in de slotsectie.
+
+## Vier vragen op /collections/all
+
+De keuzehulp op de overzichtspagina stelde twee vragen (zone en los/set) en had
+acht uitkomsten. Voor een collectie van deze omvang is dat te grof. Nu vier:
+
+| # | sleutel | vraag | opties |
+|---|---|---|---|
+| 1 | `zone`  | Waar wil je aan de slag? | lichaam · gezicht & baard · hoofd · neus & oren |
+| 2 | `klus`  | Wat moet het apparaat vooral doen? | glad scheren · kort houden · precies bijwerken |
+| 3 | `breed` | Gebruik je hem ook ergens anders? | alleen hier · ook elders |
+| 4 | `vorm`  | Eén apparaat, of een complete set? | één apparaat · complete set |
+
+Dat zijn 4 × 3 × 2 × 2 = 48 combinaties, gedekt door 26 beslisregels en
+26 matchpanelen.
+
+**De teksten zijn niet nieuw geschreven.** Elk matchpaneel draagt een naam, een
+badge, een zin en drie redenen — waaronder getallen als "4,9 uit 192
+beoordelingen". Die zijn letterlijk overgenomen uit de matchpanelen die al op de
+zonepagina's stonden; er is geen enkele nieuwe claim bijgekomen. Drie panelen
+van de zonepagina's vielen af omdat geen enkele combinatie erop uitkomt
+(`bgold`, `basic`, `prem`, `adv`); die blijven op hun eigen zonepagina staan.
+
+De opzet is met een script gecontroleerd: geen combinatie zonder uitkomst, geen
+regel die naar een ontbrekend paneel wijst, geen paneel dat onbereikbaar is.
+Daarna in de browser 28 combinaties doorgeklikt — alle 28 komen op het
+verwachte product uit, en de stapper telt 4 van 4.
+
+### Het wordt niet langer bovenaan
+
+De zorg bij vier vragen is dat de kaart de pagina overneemt. Gemeten op 390 px:
+491 px bij aanvang, en tijdens het invullen 487, 484 en 528 px. De kaart groeit
+dus niet mee met het aantal vragen, want een beantwoorde vraag klapt dicht tot
+één regel met het antwoord en een potlood. Pas na de laatste vraag wordt hij
+1041 px, en dat is het advies zelf.
+
+Met 26 panelen in de opmaak laden de matchfoto's nu lui (`loading: lazy`); ze
+staan verborgen tot er een match is.
+
+### Waar `breed` niets doet
+
+Bij `zone=hoofd` splitst de derde vraag niets: de zes hoofdproducten hangen aan
+`klus` en `vorm`. De vraag wordt daar wel gesteld maar verandert het advies
+niet. Dat kan later scherper met een apart product voor "ook elders".
+
 ## Bekijken zonder te publiceren
 
 Open eerst deze link, daarna werkt elke collectiepagina in dezelfde browser:
