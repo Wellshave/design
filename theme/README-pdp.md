@@ -185,6 +185,10 @@ ook het live thema.
 | Tondeuses op doosinhoud | Elegant en Deluxe hebben **identieke** `included_box`: tondeuse, 6 opzetkammen, kapperscape, kam, oplaadkabel. Er zit dus niets extra&rsquo;s bij en het verschil is alleen de motor. Vier rijen per model; `best_for` en `popup_decision` waren leeg en zijn gevuld. In nl, en, de en fr. |
 | De tondeuses vergelijken niet meer met elkaar, maar met hun set | Elegant en Deluxe naast elkaar geeft vijf rijen met &eacute;&eacute;n verschil &mdash; correct, maar geen upgrade. `compare_products` zet nu de **Tondeuse Elegant naast het Barber Pack 3.0** (124,95) en de **Tondeuse Deluxe naast de Barber Bro 3.0** (109,95). Welke set bij welke tondeuse hoort komt uit `included_box`: de Packs bevatten `2062480015692` (Tondeuse Elegant), de Bro&rsquo;s `2062996799820` (Tondeuse Deluxe). Zeven rijen, drie verschillen. |
 | Zes nieuwe `compare_info`-invoeren voor de Barber-lijnen | `barber-pack-1-0` (3172061249868), `-2-0` (3172061282636), `-3-0` (3172061315404), `barber-bro-1-0` (3172061446476), `-2-0` (3172061479244), `-3-0` (3172061512012). Alle zes hadden niets, dus daar deed de vergelijkingsknop niets. Trap per lijn: detailtrimmer &rarr; + shaver &rarr; + neustrimmer. Elke pagina naast de 3.0 van zijn eigen lijn, de 3.0 naast de 2.0. **Zichtbaar op de live site.** Terugdraaien is `custom.compare_info` daar weer leegmaken. |
+| Vier losse apparaten naast hun bundel | Uit `included_box` is per voorwerp een `product_title` te lezen, en daarmee is uit te rekenen welke bundel welk apparaat bevat. Dat gaf vier paren die nog ontbraken: **The Gentleman Shaver** (49,95) &rarr; Barber Bundel 2.0 (164,95), **Detailtrimmer Sharpline** (49,95) &rarr; Barber Pack 3.0, **4 Foil Blade Baron** (49,95) &rarr; Barber Pack 3.0, en de **Flex-line Bundel** (89,95) &rarr; Flex Guard. Nieuwe invoeren: `detailtrimmer-sharpline` (3172189569356), `blade-baron` (3172189602124), `gentleman-shaver` (3172189700428), `barber-bundel-2-0` (3172189733196). **Zichtbaar op de live site.** |
+| Flex-familie op doosinhoud | `flex-guard`, `essential-flex-bundel` en `flex-line-bundel` hadden losse verkoopargumenten als rijen. Nu voorwerpen uit `included_box`, met &eacute;&eacute;n woordenlijst. De Flex Guard blijft naast de Essential Flex Bundel staan, zoals afgesproken. |
+| `compare_products` van de Flex-line Bundel | Daar stonden de Flex Guard en de **Essential** Flex Bundel &mdash; de Flex-line kwam in zijn eigen pop-up niet voor. Nu Flex Guard + Flex-line. Niet naast de Essential: die twee zijn geen trap (de Essential heeft twee tassen en geen detailtrimmer, de Flex-line andersom), dus de erfregel zou de Flex-line tassen toeschrijven die er niet in zitten. |
+| Onderregels van de Flex-familie | `toggle_subtitle` van de Flex Guard en de Essential Flex Bundel stond op &laquo;Veilig lichaam trimmen&raquo;, Groom Guard-copy bij een 3-in-1 die ook scheert. Nu &laquo;Trimmen, scheren en neushaar&raquo; en &laquo;Flex Guard + toilettas en hard case&raquo;. `reviews_label` van de Essential stond op 800+ terwijl alle andere 650+ zeggen; gelijkgetrokken. De Flex-line heette in `compare_info` &laquo;Flex Line Bundel&raquo;, het product heet &laquo;Flex-line Bundel&raquo;. |
 | Vierde `store_usp`: Morgen in huis | De voetbalk van de pop-up toont wat er in `custom.store_usp` staat, en dat waren er drie. Nieuw metaobject met een icoon in dezelfde stijl als de andere drie (20 bij 20, streek `#BC813E`), toegevoegd aan de lijst op de Groom Guard en de PRO. |
 
 Let op bij die laatste. `custom.store_usp` wordt ook gelezen door het
@@ -265,6 +269,12 @@ weer aan te zetten. Wat de Selleasy-kaart deed, hoort in blok 07
 * **De Barber Bundel 2.0 (164,95) valt buiten beide trappen**: die bevat de
   Gentleman Shaver plus de Elegant en de Sharpline. Andere combinatie, geen
   trede in een reeks, dus nog geen vergelijking.
+* **Zeven apparaten zitten in geen enkele bundel** en hebben dus niets om
+  naast te zetten: The Sentinel PRO, The Dial Master, Edge Blade, Dual Groomer,
+  Scheerapparaat Elegant 4-in-1 en de drie Men Shapers.
+* **De neustrimmers blijven binnen hun eigen reeks.** De Neustrimmer Basic
+  (16,95) zit w&eacute;l in de Shave Package Ultimate (89,95), maar dat is meer dan
+  vijf keer de prijs; dat is geen upgrade meer.
 * **De prijsopmaak van de winkel heeft geen €-teken** (`moneyFormat` staat op
   `{{amount_with_comma_separator}}`). De sectie volgt de winkel, dus er staat
   `59,95`. Wordt de instelling aangepast, dan komt het teken er overal bij.
