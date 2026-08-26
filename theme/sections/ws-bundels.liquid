@@ -1,0 +1,139 @@
+{% comment %}
+  Wellshave — de sets, direct onder de hero.
+
+  Eén bloktype: "bundel". Elk blok is één set. Naam, prijs, van-prijs,
+  besparing, voorraad en de link komen uit het gekozen product; in de
+  thema-editor zet je alleen de foto, de pil en de drie regels erbij.
+
+  Er staat bewust geen enkele claim over verkoopaantallen in de sectie.
+  Die zou voor de duurdere sets niet kloppen, en een pil die "bestverkocht"
+  zegt terwijl dat niet zo is, kost meer dan hij oplevert.
+{% endcomment %}
+
+{{ 'ws-bundels.css' | asset_url | stylesheet_tag }}
+
+{% render 'indent-settings', section: section %}
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="ws-bn-vink" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-bn-arw" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<div class="ws-bn"><div class="ws-bn__in">
+
+  <div class="ws-bn__kop">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="ws-bn__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+    {%- if section.settings.kop != blank -%}
+      <h2 class="ws-bn__h2">{{ section.settings.kop }}</h2>
+    {%- endif -%}
+    {%- if section.settings.sub != blank -%}
+      <p class="ws-bn__sub">{{ section.settings.sub }}</p>
+    {%- endif -%}
+  </div>
+
+  <div class="ws-bn__rooster">
+    {%- for block in section.blocks -%}
+      {%- assign p = block.settings.product -%}
+      {%- assign v = p.selected_or_first_available_variant -%}
+      <a class="ws-bn__kaart" href="{{ p.url | default: '#' }}" {{ block.shopify_attributes }}>
+        <span class="ws-bn__beeld">
+          {%- if block.settings.foto != blank -%}
+            {{ block.settings.foto | image_url: width: 700 | image_tag: alt: '', loading: 'lazy' }}
+          {%- elsif p.featured_image -%}
+            {{ p.featured_image | image_url: width: 700 | image_tag: loading: 'lazy' }}
+          {%- endif -%}
+          {%- if block.settings.pil != blank -%}
+            <span class="ws-bn__pil">{{ block.settings.pil }}</span>
+          {%- endif -%}
+        </span>
+        <span class="ws-bn__body">
+          <span class="ws-bn__naam">{{ block.settings.naam | default: p.title }}</span>
+          {%- if block.settings.punt_1 != blank or block.settings.punt_2 != blank or block.settings.punt_3 != blank -%}
+            <span class="ws-bn__punten">
+              {%- if block.settings.punt_1 != blank -%}<span class="ws-bn__punt"><svg><use href="#ws-bn-vink"/></svg>{{ block.settings.punt_1 }}</span>{%- endif -%}
+              {%- if block.settings.punt_2 != blank -%}<span class="ws-bn__punt"><svg><use href="#ws-bn-vink"/></svg>{{ block.settings.punt_2 }}</span>{%- endif -%}
+              {%- if block.settings.punt_3 != blank -%}<span class="ws-bn__punt"><svg><use href="#ws-bn-vink"/></svg>{{ block.settings.punt_3 }}</span>{%- endif -%}
+            </span>
+          {%- endif -%}
+          <span class="ws-bn__rek"></span>
+          {%- if p != blank -%}
+            <span class="ws-bn__prijs">
+              <span class="ws-bn__nu">{{ v.price | money }}</span>
+              {%- if v.compare_at_price > v.price -%}
+                <span class="ws-bn__was">{{ v.compare_at_price | money }}</span>
+                <span class="ws-bn__korting">{{ section.settings.bespaar }} {{ v.compare_at_price | minus: v.price | money }}</span>
+              {%- endif -%}
+            </span>
+            <span class="ws-bn__voorraad">
+              {%- if v.available -%}
+                <span class="ws-bn__stip"></span>{{ section.settings.voorraad_wel }}
+              {%- else -%}
+                <span class="ws-bn__stip ws-bn__stip--uit"></span>{{ section.settings.voorraad_niet }}
+              {%- endif -%}
+            </span>
+          {%- endif -%}
+          <span class="ws-bn__cta">{{ section.settings.kaart_cta }}<svg><use href="#ws-bn-arw"/></svg></span>
+        </span>
+      </a>
+    {%- endfor -%}
+  </div>
+
+  {%- if section.settings.zeker_1 != blank or section.settings.zeker_2 != blank or section.settings.zeker_3 != blank or section.settings.link_label != blank -%}
+    <p class="ws-bn__voet">
+      {%- if section.settings.zeker_1 != blank -%}<span>{{ section.settings.zeker_1 }}</span>{%- endif -%}
+      {%- if section.settings.zeker_2 != blank -%}<span>{{ section.settings.zeker_2 }}</span>{%- endif -%}
+      {%- if section.settings.zeker_3 != blank -%}<span>{{ section.settings.zeker_3 }}</span>{%- endif -%}
+      {%- if section.settings.link_label != blank -%}
+        <a href="{{ section.settings.link | default: '#' }}">{{ section.settings.link_label }}</a>
+      {%- endif -%}
+    </p>
+  {%- endif -%}
+
+</div></div>
+
+{% schema %}
+{
+  "name": "WS · Sets",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Bovenregel", "default": "Alles in één doos" },
+    { "type": "inline_richtext", "id": "kop", "label": "Kop (vet = brons)", "default": "Liever in één keer klaar? <b>Kies je set.</b>" },
+    { "type": "textarea", "id": "sub", "label": "Subkop", "default": "Vier sets, van compleet tot compact. Je betaalt minder dan wanneer je de apparaten los koopt, en je hebt honderd dagen om te beslissen." },
+    { "type": "header", "content": "Op elke kaart" },
+    { "type": "text", "id": "kaart_cta", "label": "Knoptekst", "default": "Bekijk de set" },
+    { "type": "text", "id": "bespaar", "label": "Woord voor de besparing", "default": "Je bespaart" },
+    { "type": "text", "id": "voorraad_wel", "label": "Tekst bij voorraad", "default": "Op voorraad" },
+    { "type": "text", "id": "voorraad_niet", "label": "Tekst zonder voorraad", "default": "Tijdelijk uitverkocht" },
+    { "type": "header", "content": "Slotregel" },
+    { "type": "text", "id": "zeker_1", "label": "Zekerheid 1", "default": "100 dagen proberen" },
+    { "type": "text", "id": "zeker_2", "label": "Zekerheid 2", "default": "2 jaar garantie" },
+    { "type": "text", "id": "zeker_3", "label": "Zekerheid 3", "default": "Morgen in huis" },
+    { "type": "text", "id": "link_label", "label": "Linktekst rechts" },
+    { "type": "url", "id": "link", "label": "Link rechts" },
+    { "type": "header", "content": "Indent settings" },
+    { "type": "range", "id": "desk_indent_top", "label": "Indent top (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "desk_indent_bottom", "label": "Indent bottom (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_top", "label": "Indent top (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_bottom", "label": "Indent bottom (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "blocks": [
+    {
+      "type": "bundel",
+      "name": "Set",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product", "info": "Prijs, van-prijs, besparing, voorraad en de link komen hieruit." },
+        { "type": "inline_richtext", "id": "naam", "label": "Naam (vet = goud)", "info": "Leeg = de producttitel." },
+        { "type": "image_picker", "id": "foto", "label": "Foto", "info": "Leeg = de hoofdafbeelding van het product." },
+        { "type": "text", "id": "pil", "label": "Pil op de foto", "info": "Alleen gebruiken voor iets dat aantoonbaar klopt." },
+        { "type": "text", "id": "punt_1", "label": "Wat er in zit — regel 1" },
+        { "type": "text", "id": "punt_2", "label": "Regel 2" },
+        { "type": "text", "id": "punt_3", "label": "Regel 3" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "WS · Sets" } ]
+}
+{% endschema %}

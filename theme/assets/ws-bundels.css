@@ -1,0 +1,104 @@
+/* ═══ Wellshave — blok 0, de sets ═══
+   Staat direct onder de hero. Zelfde palet als de rest van de homepage:
+   zand als ondergrond, #111 voor tekst, #BC813E als accent.
+   Mobiel is een echte media query op 749px — het breekpunt van het thema. */
+
+.ws-bn{font-family:"Montserrat",sans-serif;color:#111;padding:56px 44px 58px;
+  background:linear-gradient(168deg,#FFFDFA 0%,#FAF4EB 58%,#F5ECDD 100%)}
+.ws-bn *{box-sizing:border-box}
+.ws-bn p{max-width:none;margin:0}
+.ws-bn__in{max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:26px}
+
+/* ── kop ── */
+.ws-bn__kop{display:flex;flex-direction:column;gap:11px;max-width:60ch}
+.ws-bn__eyebrow{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:#BC813E}
+.ws-bn__h2{margin:0;font-size:36px;font-weight:700;letter-spacing:-.03em;line-height:110%;
+  text-transform:none}
+.ws-bn__h2 b,.ws-bn__h2 strong{color:#BC813E;font-weight:700}
+.ws-bn__sub{font-size:15.5px;line-height:162%;color:rgba(17,17,17,.62)}
+
+/* ── de kaarten ──
+   Let op de expliciete color: zonder die regel erft de kaart de systeemkleur
+   en verdwijnt de tekst zodra de bezoeker zijn apparaat op donker heeft staan. */
+.ws-bn__rooster{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.ws-bn__kaart{position:relative;display:flex;flex-direction:column;text-decoration:none;
+  background:#fff;color:#111;border:1px solid rgba(17,17,17,.09);border-radius:18px;
+  overflow:hidden;transition:border-color .18s,box-shadow .18s,transform .18s}
+.ws-bn__kaart:hover{border-color:rgba(188,129,62,.55);transform:translateY(-3px);
+  box-shadow:0 24px 44px -28px rgba(17,17,17,.55)}
+.ws-bn__kaart:focus-visible{outline:2px solid #BC813E;outline-offset:3px}
+
+.ws-bn__beeld{position:relative;display:block;aspect-ratio:4/3;overflow:hidden;
+  background:linear-gradient(155deg,#FBF4E9 0%,#F1E4D0 100%)}
+.ws-bn__beeld img{width:100%;height:100%;object-fit:cover;display:block}
+.ws-bn__pil{position:absolute;left:12px;top:12px;font-size:10.5px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:#38220A;
+  background:rgba(255,255,255,.9);border-radius:100px;padding:6px 12px}
+
+.ws-bn__body{display:flex;flex-direction:column;gap:0;padding:18px 18px 20px;flex:1}
+.ws-bn__naam{font-size:18px;font-weight:700;letter-spacing:-.015em;line-height:120%;
+  margin-bottom:10px}
+.ws-bn__naam b,.ws-bn__naam strong{color:#BC813E;font-weight:700}
+.ws-bn__punten{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.ws-bn__punt{display:flex;align-items:flex-start;gap:8px;font-size:12.5px;line-height:150%;
+  color:rgba(17,17,17,.7)}
+.ws-bn__punt svg{width:13px;height:13px;flex:none;color:#BC813E;margin-top:3px}
+/* De lege ruimte komt hier te liggen, zodat de prijs bij elke kaart op
+   dezelfde hoogte staat, ook als de ene set meer regels heeft dan de andere. */
+.ws-bn__rek{flex:1}
+.ws-bn__prijs{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:6px}
+.ws-bn__nu{font-size:23px;font-weight:700;letter-spacing:-.03em}
+.ws-bn__was{font-size:13.5px;color:rgba(17,17,17,.4);text-decoration:line-through}
+.ws-bn__korting{font-size:11px;font-weight:700;color:#1F7A4D;background:rgba(31,122,77,.1);
+  border-radius:100px;padding:4px 9px}
+.ws-bn__voorraad{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:600;
+  color:rgba(17,17,17,.6);margin-bottom:14px}
+.ws-bn__stip{width:7px;height:7px;border-radius:50%;background:#1F7A4D;flex:none}
+.ws-bn__stip--uit{background:rgba(17,17,17,.3)}
+.ws-bn__cta{display:flex;align-items:center;justify-content:center;gap:9px;
+  font-size:13.5px;font-weight:700;color:#38220A;background:rgba(188,129,62,.13);
+  border-radius:100px;padding:12px 18px;transition:background .18s,color .18s}
+.ws-bn__kaart:hover .ws-bn__cta{background:#BC813E;color:#fff}
+.ws-bn__cta svg{width:15px;height:15px;transition:transform .18s}
+.ws-bn__kaart:hover .ws-bn__cta svg{transform:translateX(3px)}
+
+/* ── slotregel ── */
+.ws-bn__voet{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;
+  padding-top:18px;border-top:1px solid rgba(17,17,17,.09)}
+.ws-bn__voet span{position:relative;font-size:12.5px;font-weight:600;
+  color:rgba(17,17,17,.62);padding-left:15px}
+.ws-bn__voet span::before{content:"";position:absolute;left:0;top:50%;
+  transform:translateY(-50%);width:6px;height:6px;border-radius:50%;background:#BC813E}
+.ws-bn__voet a{margin-left:auto;font-size:13px;font-weight:600;color:#8A5A22;
+  text-underline-offset:3px}
+
+/* ═══ mobiel ═══ */
+@media (max-width:749px){
+  .ws-bn{padding:34px 16px 40px}
+  .ws-bn__in{gap:20px}
+  .ws-bn__h2{font-size:25px}
+  .ws-bn__sub{font-size:14px}
+
+  /* Wat naast elkaar kan, staat naast elkaar: twee kaarten per rij. */
+  .ws-bn__rooster{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  .ws-bn__kaart{border-radius:14px}
+  .ws-bn__body{padding:12px 12px 14px}
+  .ws-bn__naam{font-size:14.5px;margin-bottom:7px}
+  .ws-bn__punt{font-size:11.5px;gap:6px}
+  .ws-bn__punten{gap:4px;margin-bottom:10px}
+  .ws-bn__nu{font-size:19px}
+  .ws-bn__was{font-size:12px}
+  .ws-bn__korting{font-size:10px;padding:3px 7px}
+  .ws-bn__voorraad{font-size:11px;margin-bottom:10px}
+  .ws-bn__cta{font-size:12.5px;padding:10px 12px;gap:6px}
+  .ws-bn__pil{left:8px;top:8px;font-size:9.5px;padding:5px 9px}
+  .ws-bn__voet{gap:6px 16px}
+  .ws-bn__voet a{margin-left:0;width:100%}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .ws-bn__kaart{transition:none}
+  .ws-bn__kaart:hover{transform:none}
+  .ws-bn__kaart:hover .ws-bn__cta svg{transform:none}
+}

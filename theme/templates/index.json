@@ -1160,10 +1160,84 @@
         "mob_indent_top": 44,
         "mob_indent_bottom": 0
       }
+    },
+    "ws_bundels": {
+      "type": "ws-bundels",
+      "blocks": {
+        "b1": {
+          "type": "bundel",
+          "settings": {
+            "product": "barber-bundel-2-0",
+            "naam": "Barber Bundel <strong>2.0</strong>",
+            "pil": "",
+            "punt_1": "",
+            "punt_2": "",
+            "punt_3": ""
+          }
+        },
+        "b2": {
+          "type": "bundel",
+          "settings": {
+            "product": "barber-pack-3-0",
+            "naam": "Barber Pack <strong>3.0</strong>",
+            "pil": "",
+            "punt_1": "Tondeuse, foil shaver en head shaver",
+            "punt_2": "Precisietrimmer voor je contouren",
+            "punt_3": "Neustrimmer voor het detailwerk"
+          }
+        },
+        "b3": {
+          "type": "bundel",
+          "settings": {
+            "product": "shave-package-ultimate",
+            "naam": "Shave Package <strong>Ultimate™</strong>",
+            "pil": "",
+            "punt_1": "Groom Guard PRO met foil shaver",
+            "punt_2": "Neustrimmer Advance 3-in-1",
+            "punt_3": "Luxe toilettas, reistas en extra mes"
+          }
+        },
+        "b4": {
+          "type": "bundel",
+          "settings": {
+            "product": "skull-deal-3-0",
+            "naam": "Skull Deal <strong>3.0</strong>",
+            "pil": "Nieuw",
+            "punt_1": "Flexibele 7D-scheerkop",
+            "punt_2": "Extra scheerkop en opzetstukken",
+            "punt_3": "Luxe travelbag"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ],
+      "settings": {
+        "eyebrow": "Alles in één doos",
+        "kop": "Liever in één keer klaar? <b>Kies je set.</b>",
+        "sub": "Vier sets, van compleet tot compact. Je betaalt minder dan wanneer je de apparaten los koopt, en je hebt honderd dagen om te beslissen.",
+        "kaart_cta": "Bekijk de set",
+        "bespaar": "Je bespaart",
+        "voorraad_wel": "Op voorraad",
+        "voorraad_niet": "Tijdelijk uitverkocht",
+        "zeker_1": "100 dagen proberen",
+        "zeker_2": "2 jaar garantie",
+        "zeker_3": "Morgen in huis",
+        "link_label": "Bekijk alle sets",
+        "link": "shopify://collections/bundels",
+        "desk_indent_top": 56,
+        "desk_indent_bottom": 48,
+        "mob_indent_top": 34,
+        "mob_indent_bottom": 30
+      }
     }
   },
   "order": [
     "ws_hero",
+    "ws_bundels",
     "ws_bestsellers",
     "ws_belofte",
     "ws_tijdlijn",
