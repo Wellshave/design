@@ -120,6 +120,7 @@ ook het live thema.
 | `custom.buybox_quote` en `custom.buybox_quote_author` | Nieuwe velddefinities. Het klantcitaat in het koopvak stond anders op elk product hetzelfde. Gevuld op de Groom Guard PRO. |
 | `best_for` op de definitie `compare_info` | De regel "Beste voor: ..." in de pop-up had geen veld. Gevuld voor de Groom Guard en de PRO. |
 | `popup_lead` en `popup_winst` op de definitie `compare_info` | De kop, de lead en de winstbalk van de pop-up stonden in sectie-instellingen en waren dus winkelbreed: een neustrimmer kreeg de Groom Guard-tekst te zien. Nu per product. Gevuld voor de Groom Guard-familie en de vier neustrimmers. |
+| `includes_previous` op de definitie `compare_info` | Nieuw vinkje: &laquo;bevat alles van de goedkopere modellen&raquo;. Zonder dat vinkje betekende &laquo;niet vermeld&raquo; in de tabel hetzelfde als &laquo;niet aanwezig&raquo;, en stond er bij de PRO een streepje op Skin-Safe mes. Aangezet op `groom-guard-pro`. |
 | `Pro` &rarr; `PRO` op `groom-guard-pro` | `product_title` en `toggle_title` van dat metaobject schreven `Groom Guard&trade; Pro`, terwijl `popup_title` en de producttitel zelf `PRO` schrijven. De tabelkop en de knoppen in de pop-up lezen `toggle_title`, dus daar stond &laquo;Pro&raquo;. Nu overal PRO. |
 | `popup_decision` op de definitie `compare_info` | De beslisregel onder de tabel. Per product &eacute;&eacute;n korte vraag; het antwoord is de naam van dat product. Gevuld voor de Groom Guards en de vier neustrimmers. Leeg bij alle producten betekent: geen beslisregel. |
 | Vierde `store_usp`: Morgen in huis | De voetbalk van de pop-up toont wat er in `custom.store_usp` staat, en dat waren er drie. Nieuw metaobject met een icoon in dezelfde stijl als de andere drie (20 bij 20, streek `#BC813E`), toegevoegd aan de lijst op de Groom Guard en de PRO. |
@@ -138,6 +139,14 @@ het metafield weer op de oorspronkelijke drie zetten: `1859112894796`
   hetzelfde. Van de honderd recentste Nederlandse Trustpilot-reviews gaan er vijf
   over een product; waar er geen is, hoort het citaat leeg te blijven &mdash; dan valt
   de kaart weg.
+* **De voordeeltitels van de neustrimmers zijn geen gedeelde woordenlijst.**
+  De vier modellen schrijven ieder hun eigen marketingregel &mdash; &laquo;Compact
+  design&raquo;, &laquo;Meer precisie&raquo;, &laquo;Meer grooming controle&raquo;,
+  &laquo;Maximale veelzijdigheid&raquo;. De tabel ontdubbelt op letterlijk gelijke
+  tekst, dus dat worden dertien rijen die elk maar bij &eacute;&eacute;n model een vinkje
+  krijgen. `includes_previous` repareert dat niet en mag daar dus ook niet aan:
+  dan zou de Ultimate een vinkje krijgen bij &laquo;Single neustrimmer&raquo;. Dit
+  vraagt om herschreven titels, niet om andere logica.
 * **De pop-upteksten staan nog niet op elke productfamilie.** `popup_main_title`,
   `popup_lead`, `popup_winst`, `best_for` en `popup_decision` in `compare_info`
   zijn gevuld voor de Groom Guards en de neustrimmers. De families `flex-*`, `shave-package-*`,

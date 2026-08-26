@@ -513,23 +513,8 @@
           {%- assign cvp = cp.selected_or_first_available_variant.price -%}
           {%- if laagste == 0 or cvp < laagste -%}{%- assign laagste = cvp -%}{%- endif -%}
           {%- if ci.is_popuplar -%}{%- assign uitgelicht_prijs = cvp -%}{%- endif -%}
-          {%- assign kolom_sleutels = '' -%}
-            {%- if ci.advantage_1_title != blank -%}
-              {%- assign t = ci.advantage_1_title | strip -%}
-              {%- assign kolom_sleutels = kolom_sleutels | append: '‹' | append: t | append: '›' -%}
-            {%- endif -%}
-            {%- if ci.advantage_2_title != blank -%}
-              {%- assign t = ci.advantage_2_title | strip -%}
-              {%- assign kolom_sleutels = kolom_sleutels | append: '‹' | append: t | append: '›' -%}
-            {%- endif -%}
-            {%- if ci.advantage_3_title != blank -%}
-              {%- assign t = ci.advantage_3_title | strip -%}
-              {%- assign kolom_sleutels = kolom_sleutels | append: '‹' | append: t | append: '›' -%}
-            {%- endif -%}
-            {%- if ci.advantage_4_title != blank -%}
-              {%- assign t = ci.advantage_4_title | strip -%}
-              {%- assign kolom_sleutels = kolom_sleutels | append: '‹' | append: t | append: '›' -%}
-            {%- endif -%}
+          {%- capture kolom_sleutels %}{% render 'ws-vergelijk-sleutels', p: cp %}{% endcapture -%}
+          {%- assign kolom_sleutels = kolom_sleutels | strip -%}
           {%- assign alle_punten = alle_punten | append: kolom_sleutels -%}
           {%- if ci.is_popuplar -%}{%- assign uitgelicht_sleutels = kolom_sleutels -%}{%- endif -%}
         {%- endfor -%}
@@ -701,24 +686,31 @@
                         <th scope="row">{{ rijnaam }}</th>
                         {%- for cp in vergelijk_lijst -%}
                           {%- assign ci = cp.metafields.custom.compare_info.value -%}
-                          {%- assign kolom_sleutels = '' -%}
-                          {%- if ci.advantage_1_title != blank -%}
-                            {%- assign t = ci.advantage_1_title | strip -%}
-                            {%- assign kolom_sleutels = kolom_sleutels | append: '‹' | append: t | append: '›' -%}
-                          {%- endif -%}
-                          {%- if ci.advantage_2_title != blank -%}
-                            {%- assign t = ci.advantage_2_title | strip -%}
-                            {%- assign kolom_sleutels = kolom_sleutels | append: '‹' | append: t | append: '›' -%}
-                          {%- endif -%}
-                          {%- if ci.advantage_3_title != blank -%}
-                            {%- assign t = ci.advantage_3_title | strip -%}
-                            {%- assign kolom_sleutels = kolom_sleutels | append: '‹' | append: t | append: '›' -%}
-                          {%- endif -%}
-                          {%- if ci.advantage_4_title != blank -%}
-                            {%- assign t = ci.advantage_4_title | strip -%}
-                            {%- assign kolom_sleutels = kolom_sleutels | append: '‹' | append: t | append: '›' -%}
-                          {%- endif -%}
+                          {%- capture kolom_sleutels %}{% render 'ws-vergelijk-sleutels', p: cp %}{% endcapture -%}
+                          {%- assign kolom_sleutels = kolom_sleutels | strip -%}
+                          {%- comment -%}
+                            Niet vermeld is niet hetzelfde als niet aanwezig. Bij een
+                            upgrade zit doorgaans alles van het goedkopere model erin,
+                            maar dat staat zelden nog een keer in de eigen velden. Zegt
+                            dit product includes_previous, dan erft het elk punt van een
+                            goedkopere kolom in deze vergelijking. Staat de schakelaar
+                            uit, dan blijft alleen wat er letterlijk staat.
+                          {%- endcomment -%}
+                          {%- assign heeft_punt = false -%}
                           {%- if kolom_sleutels contains merk2 -%}
+                            {%- assign heeft_punt = true -%}
+                          {%- elsif ci.includes_previous -%}
+                            {%- assign eigen_prijs = cp.selected_or_first_available_variant.price -%}
+                            {%- for lager in vergelijk_lijst -%}
+                              {%- if lager.selected_or_first_available_variant.price < eigen_prijs -%}
+                                {%- capture lager_sleutels %}{% render 'ws-vergelijk-sleutels', p: lager %}{% endcapture -%}
+                                {%- if lager_sleutels contains merk2 -%}
+                                  {%- assign heeft_punt = true -%}
+                                {%- endif -%}
+                              {%- endif -%}
+                            {%- endfor -%}
+                          {%- endif -%}
+                          {%- if heeft_punt -%}
                             <td class="ws-ja">
                               {%- if rij_upgrade and ci.is_popuplar and s.pop_inbegrepen != blank -%}
                                 <span class="ws-pop-erbij"><svg><use href="#ws-pdp-vink-{{ section.id }}"/></svg>{{ s.pop_inbegrepen }}</span>
