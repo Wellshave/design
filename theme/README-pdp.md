@@ -119,6 +119,41 @@ Twee dingen die daar nog omheen zitten:
   sluitende accolade.** Liquid leest die twee tekens als het einde van een tag.
   Dus `border-radius:50% }` met een spatie.
 
+## Een nieuw metaobject staat op draft en is dan onzichtbaar
+
+`metaobjectCreate` zet de `publishable`-capability standaard op **DRAFT**, en de
+storefront geeft voor een draft-metaobject niets terug: `product.metafields
+.custom.compare_info.value` is dan leeg. De metafield *verwijst* wel correct &mdash;
+`reference` in de Admin API geeft gewoon het metaobject terug &mdash; dus aan de
+API-kant lijkt alles goed.
+
+Wat je in de pop-up ziet als het misgaat: de kaart en de knop tonen nog wel de
+juiste naam en prijs, want die vallen terug op `cp.title` en de variantprijs.
+Maar de vier voordeelrijen van die kolom ontbreken in de tabel, er staat geen
+onderregel op de kaart, geen &laquo;Beste voor&raquo;, en de beslisregel mist zijn
+tweede zin. Een tabel die alleen de rijen van het goedkoopste model laat zien,
+allemaal met twee vinkjes, is dus geen ontdubbelingsfout maar dit.
+
+Aanmaken hoort dus zo:
+
+```graphql
+metaobjectCreate(metaobject: {
+  type: "compare_info",
+  handle: "...",
+  capabilities: { publishable: { status: ACTIVE } },
+  fields: [...]
+})
+```
+
+Controleren kan met:
+
+```graphql
+{ metaobjects(type:"compare_info", first:60){
+    nodes{ handle capabilities{ publishable{ status } } } } }
+```
+
+Alle 29 `compare_info`-invoeren staan nu op ACTIVE.
+
 ## Wat er aan de winkel zelf is veranderd
 
 Dit staat los van het thema: het is productdata en geldt dus voor elk thema,
@@ -134,7 +169,7 @@ ook het live thema.
 | `custom.shipping_information` herschreven | Er stond &laquo;Voor 23:59 besteld = morgen in huis&raquo;; dat gelijkteken is een notitie, geen zin. Nu &laquo;vandaag v&oacute;&oacute;r 23:59 besteld, morgen in huis&raquo;, op alle 41 actieve producten die het veld hebben. **Zichtbaar op de live site**, want het live thema leest hetzelfde veld. De Flex Guard 3-in-1 en de Essential Flex Bundel noemen 23:00 en hebben hun eigen tijd gehouden. |
 | `custom.hero_promise` en `custom.hero_lead` | Nieuwe velddefinities voor de twee regels onder de productnaam: de gouden belofte en de grijze zin eronder. Gevuld op de Groom Guard en de PRO. Bestonden nog niet, dus geen enkel thema leest ze &mdash; dit is niet zichtbaar op de live site. |
 | Neustrimmers Basic&ndash;Ultimate herschreven | De vier voordeeltitels per model waren losse marketingregels, dus de tabel ontdubbelde nergens. Nu een gedeelde woordenlijst van zeven rijen, `includes_previous` aan bij Premium, Advance en Ultimate, en `toggle_subtitle`, `best_for`, `popup_decision`, `popup_lead` en `popup_winst` opnieuw geschreven. In nl, en, de en fr. |
-| Vier nieuwe `compare_info`-invoeren | `neustrimmer-essential`, `-elite`, `-platinum` en `-ultra` bestonden niet, dus daar deed de vergelijkingsknop niets. Aangemaakt met dezelfde opzet en gekoppeld via `custom.compare_info`; `custom.compare_products` zet elke pagina naast de 4in1 Ultra, en de Ultra naast de Platinum. **Dit is zichtbaar op de live site**: die vier productpagina&rsquo;s hadden geen vergelijkblok en hebben dat nu wel. Terugdraaien is beide metafields daar weer leegmaken. |
+| Vier nieuwe `compare_info`-invoeren | `neustrimmer-essential`, `-elite`, `-platinum` en `-ultra` bestonden niet, dus daar deed de vergelijkingsknop niets. Aangemaakt met dezelfde opzet en gekoppeld via `custom.compare_info`; `custom.compare_products` zet elke pagina naast de 4in1 Ultra, en de Ultra naast de Platinum. Ze stonden na het aanmaken op **draft** en renderden daardoor niet; sinds vandaag staan ze op ACTIVE. **Nu zichtbaar op de live site**: die vier productpagina&rsquo;s hadden geen vergelijkblok en hebben dat nu wel. Terugdraaien is beide metafields daar weer leegmaken. |
 | Tondeuse Elegant en Deluxe herschreven | De rijen waren gemeten waarden die de eigen specificatie tegenspraken: 6500 en 7000 RPM staan nergens in de productdata, en beide tondeuses hebben volgens `specification` 240 minuten gebruikstijd, niet 2 en 3 uur. Nu vier gedeelde rijen uit de specificatie plus de 2838 brushless motor als het enige verschil. `not_an_upgrade` kon daardoor weer uit. |
 | `SkinSafe&trade;` als enige schrijfwijze | Het mes heette op zes plekken `Skin-Safe mes`, `SkinSafe mes` of `Skin Safe mes`. Nu overal `SkinSafe&trade;-mes`: in `compare_info` van de Groom Guard, de PRO, de Flex Guard, de Essential Flex Bundel en beide Shave Packages, in het `included_in_the_box`-item en in `product_usp` van de Body &amp; Nose Bundel. In alle vier de talen. De neustrimmers houden `SkinGuard`, dat is een andere naam uit hun eigen specificatie. |
 | Flex-familie opgeschoond | `USB C opladen` op de Flex Guard was `USB-C opladen` op de Essential Flex Bundel. E&eacute;n streepje verschil, dus twee losse rijen, dus een streepje bij de Flex Guard op iets dat hij gewoon heeft. Gelijkgetrokken. `Decorative base` staat nu in het Nederlands. `popup_main_title` zei bij alle drie &laquo;Compare Wellshave Flex ...&raquo; als Nederlandse waarde; nu &laquo;Welke Flex past bij jou?&raquo;. En de Engelse vertaling van `SkinSafe mes` was **`SkinSafe month`** &mdash; een machine had &laquo;mes&raquo; voor een maand aangezien. |
