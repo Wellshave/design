@@ -898,6 +898,40 @@ stylesheet, en die staat daar vier keer in — een `addStyleTag` uit een testscr
 verliest het dan van de laatste kopie. Zulke wijzigingen horen in het CSS-bestand
 zelf en dan opnieuw ophalen, niet geïnjecteerd.
 
+### Een spoor onder de schuifstrip
+
+Op de telefoon is de zonebalk een rij ronde iconen die je opzij schuift. Met zes
+tegels valt de laatste (Bundels) buiten beeld, en niets liet zien dat er nog wat
+naast stond. Er staat nu een dun spoor onder de strip met een gouden duim die
+meeloopt: `zk-spoor` in de opmaak, `zonespoor()` in `ws-collectie.js`.
+
+De duim krijgt zijn breedte uit de verhouding zichtbaar/totaal (minimaal 14%,
+anders wordt hij een stip) en zijn positie uit `scrollLeft`. Valt er niets te
+scrollen, dan verbergt de functie het spoor — een volle balk die niet beweegt is
+ruis. Het luistert `passive` en herrekent via een `ResizeObserver`.
+
+Twee dingen kwamen daarbij boven:
+
+**De tegel was te smal.** 74 px, terwijl "schaamstreek" er meer nodig heeft; het
+vangnet `overflow-wrap:anywhere` brak het woord dus middenin af — hetzelfde
+gebrek als op desktop, alleen op mobiel. Nu 86 px, en het woord blijft heel.
+
+**De strip stond bij het laden al 18 px ingescrold.** `scroll-snap-align:start`
+snapt naar de rand van de eerste tegel en scrolt de eigen `padding-left` weg,
+waardoor die tegel tegen de schermrand plakte. `scroll-padding-inline:18px` lost
+het op. De filterbalk boven het raster had exact dezelfde fout met 14 px; die is
+meteen meegenomen.
+
+Gemeten op 390, 360 en 430 px, op de bundelpagina (zes tegels) en een zonepagina
+(vijf): 42 van 42 controles goed — spoor alleen zichtbaar als er te scrollen
+valt, duim begint links, eindigt rechts, beweegt mee, en nergens nog een
+mid-woord breuk.
+
+**Let op bij het narekenen:** de storefront cachet de gerenderde pagina. Na een
+upload gaf `bouw.py` nog de vorige opmaak terug, waardoor het leek alsof de
+markup niet was aangekomen terwijl de checksum in het thema al klopte. `bouw.py`
+hangt er nu een tijdstempel aan.
+
 ### Drie bevindingen uit de data
 
 **Barber Bro 1.0, 2.0 en 3.0 zijn niet te koop.** Voorraad −6, `inventoryPolicy`

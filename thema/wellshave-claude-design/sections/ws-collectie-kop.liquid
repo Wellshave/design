@@ -199,6 +199,12 @@
         {%- endif -%}
       {%- endfor -%}
     </div>
+    {%- comment -%}
+      Op de telefoon is de zonebalk een schuifstrip. Zonder spoor is niet te zien
+      dat er nog tegels naast staan; de duim loopt mee met de scrollpositie en
+      wordt door ws-collectie.js verborgen als alles al in beeld staat.
+    {%- endcomment -%}
+    <div class="zk-spoor" aria-hidden="true" hidden><span class="zk-duim"></span></div>
   </div></section>
 {%- endif -%}
 

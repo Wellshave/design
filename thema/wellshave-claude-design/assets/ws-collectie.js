@@ -201,6 +201,35 @@
   }
 
   /* ── bedrading ── */
+  /* De zonebalk is op de telefoon een schuifstrip. Het spoor eronder laat zien
+     dat er nog tegels naast staan en hoe ver je bent. Staat alles al in beeld,
+     dan gaat het spoor weg — een volle balk die niet beweegt is ruis. */
+  function zonespoor() {
+    var strip = document.querySelector('.wsc .zonekiezer');
+    var spoor = document.querySelector('.wsc .zk-spoor');
+    if (!strip || !spoor) return;
+    var duim = spoor.querySelector('.zk-duim');
+
+    function teken() {
+      var over = strip.scrollWidth - strip.clientWidth;
+      if (over <= 2) { spoor.hidden = true; return; }
+      spoor.hidden = false;
+      var deel = strip.clientWidth / strip.scrollWidth;      /* hoeveel er in beeld staat */
+      var breed = Math.max(deel * 100, 14);                  /* onder de 14% wordt de duim een stip */
+      duim.style.width = breed + '%';
+      var ruimte = 100 - breed;                              /* wat de duim nog kan afleggen */
+      duim.style.transform = 'translateX(' + (strip.scrollLeft / over) * ruimte * (100 / breed) + '%)';
+    }
+
+    if (strip.dataset.spoor !== 'aan') {
+      strip.dataset.spoor = 'aan';
+      strip.addEventListener('scroll', teken, { passive: true });
+      if (window.ResizeObserver) new ResizeObserver(teken).observe(strip);
+      else window.addEventListener('resize', teken);
+    }
+    teken();
+  }
+
   function wire() {
     document.querySelectorAll('.wsc .zones').forEach(function (rij) {
       rij.querySelectorAll('.zone').forEach(function (b) {
@@ -340,6 +369,8 @@
         if (t) t.textContent = kiezer.options[kiezer.selectedIndex].textContent;
       });
     });
+
+    zonespoor();
 
     if (document.querySelector('.wsc [data-groep="cat"]')) tel();
     if (document.querySelector('.wsc .wsk-vgl')) vgltel();

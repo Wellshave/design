@@ -142,10 +142,14 @@
   .wsc .zonekiezer{
     display:flex;flex-wrap:nowrap;overflow-x:auto;gap:16px;
     padding:14px 18px 8px;margin:0 -18px;
-    scroll-snap-type:x proximity;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+    /* Zonder scroll-padding snapt de strip naar de rand van de eerste tegel en
+       scrolt hij zijn eigen lucht weg: de tegel plakt dan tegen het scherm en
+       de strip staat bij het laden al 18 px ingescrold. */
+    scroll-snap-type:x proximity;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+    scroll-padding-inline:18px}
   .wsc .zonekiezer::-webkit-scrollbar{display:none}
   .wsc .zkaart{
-    flex:none;width:74px;flex-direction:column;align-items:center;gap:8px;
+    flex:none;width:86px;flex-direction:column;align-items:center;gap:8px;
     border:0;background:none;padding:0;box-shadow:none;scroll-snap-align:start}
   .wsc .zkaart:hover{border:0;box-shadow:none}
   .wsc .zkaart-ico{
@@ -170,6 +174,25 @@
   .wsc .zkaart.nu .zkaart-ico img{filter:brightness(0) invert(1)}
   .wsc .zkaart.nu .zkaart-naam{color:var(--ink)}
 }
+/* Het spoor onder de zonebalk. Alleen daar waar de balk een schuifstrip is;
+   op bredere schermen staat alles al naast elkaar en heeft het geen functie.
+   De duim krijgt zijn breedte en positie van ws-collectie.js. */
+.wsc .zk-spoor{display:none}
+
+@container (max-width:700px){
+  .wsc .zk-spoor{
+    display:block;position:relative;height:3px;border-radius:100px;
+    background:var(--ink-10);margin:2px 0 0;overflow:hidden}
+  .wsc .zk-spoor[hidden]{display:none}
+  .wsc .zk-duim{
+    position:absolute;top:0;bottom:0;left:0;width:40%;border-radius:100px;
+    background:var(--grad-goud);transition:transform .12s linear}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .wsc .zk-duim{transition:none}
+}
+
 .wsc .keuzes{display:flex;gap:8px;flex-wrap:wrap}
 .wsc .keuze{border:1px solid var(--ink-10);border-radius:100px;padding:10px 18px;font-size:13px;
   font-weight:700;background:var(--paper);transition:.16s ease}
@@ -813,7 +836,7 @@ body.vgl-open{overflow:hidden}
   .wsc .filters{
     flex-wrap:nowrap;overflow-x:auto;gap:8px;width:auto;
     margin:0 -14px;padding:20px 14px 2px;
-    scroll-snap-type:x proximity;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+    scroll-snap-type:x proximity;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-padding-inline:14px}
   .wsc .filters::-webkit-scrollbar{display:none}
   .wsc .filter{flex:none;justify-content:flex-start;padding:10px 12px;font-size:12.5px;gap:8px;
     scroll-snap-align:start;white-space:nowrap}
