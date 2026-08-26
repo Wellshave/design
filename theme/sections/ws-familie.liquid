@@ -118,12 +118,18 @@
         {%- endif -%}
       {%- endfor -%}
     </div>
-    <button class="ws-fam__pijl ws-fam__pijl--links" type="button" aria-label="Vorige"><svg><use href="#ws-fam-pijl-l"/></svg></button>
-    <button class="ws-fam__pijl ws-fam__pijl--rechts" type="button" aria-label="Volgende"><svg><use href="#ws-fam-pijl-r"/></svg></button>
   </div>
 
+  {%- comment -%} De pijlen staan bewust onder de baan en niet erin: de baan
+    loopt van rand tot rand, dus daar kwamen ze op de uiterste schermranden
+    terecht — rechts achter de pop-upknop van de winkel, en op mobiel boven
+    op de kaarten. Naast de teller zijn ze altijd bereikbaar. {%- endcomment -%}
   <div class="ws-fam__teller">
-    <p class="ws-fam__cijfers"></p>
+    <div class="ws-fam__stuur">
+      <button class="ws-fam__pijl ws-fam__pijl--links" type="button" aria-label="Vorige"><svg><use href="#ws-fam-pijl-l"/></svg></button>
+      <p class="ws-fam__cijfers"></p>
+      <button class="ws-fam__pijl ws-fam__pijl--rechts" type="button" aria-label="Volgende"><svg><use href="#ws-fam-pijl-r"/></svg></button>
+    </div>
     <span class="ws-fam__balk"><i></i></span>
   </div>
 

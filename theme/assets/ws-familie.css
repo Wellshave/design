@@ -115,15 +115,17 @@
 .ws-fam__leegtekst{font-size:12px;line-height:150%;color:rgba(17,17,17,.55)}
 
 /* pijlen, teller en balk */
-.ws-fam__pijl{position:absolute;z-index:4;top:50%;transform:translateY(-50%);width:50px;height:50px;
+.ws-fam__pijl{flex:none;width:46px;height:46px;
   border-radius:50%;background:#fff;border:1px solid rgba(17,17,17,.1);cursor:pointer;padding:0;
   box-shadow:0 10px 26px -14px rgba(17,17,17,.5);display:flex;align-items:center;
   justify-content:center;color:#BC813E}
 .ws-fam__pijl svg{width:18px;height:18px}
-.ws-fam__pijl--links{left:26px}
-.ws-fam__pijl--rechts{right:26px}
 .ws-fam__teller{display:flex;flex-direction:column;align-items:center;gap:10px;margin:4px 0 0}
-.ws-fam__cijfers{font-size:13px;font-weight:600;letter-spacing:.1em;color:rgba(17,17,17,.45)}
+/* de twee pijlen flankeren de teller. Zo staan ze midden onder de baan,
+   binnen de leesbreedte, in plaats van op de schermranden. */
+.ws-fam__stuur{display:flex;align-items:center;gap:20px}
+/* vaste breedte, anders verspringen de pijlen bij 9 -> 10 */
+.ws-fam__cijfers{min-width:74px;text-align:center;font-size:13px;font-weight:600;letter-spacing:.1em;color:rgba(17,17,17,.45)}
 .ws-fam__cijfers b{color:#111;font-weight:700}
 .ws-fam__balk{width:250px;height:3px;border-radius:100px;background:rgba(17,17,17,.1);
   position:relative;overflow:hidden}
@@ -170,9 +172,8 @@
   .ws-fam__spoor{gap:14px}
   .ws-fam__kaart{width:200px}
   .ws-fam__kaart.is-aan{transform:scale(1.06)}
-  .ws-fam__pijl{width:40px;height:40px}
-  .ws-fam__pijl--links{left:10px}
-  .ws-fam__pijl--rechts{right:10px}
+  .ws-fam__pijl{width:42px;height:42px}
+  .ws-fam__stuur{gap:14px}
   /* op 390px is een kaart 200px breed: het lint bedekt dan het halve beeld en
      buiten de kaart wordt het afgeknipt. Daar valt hij weg — de gouden rand,
      de uitvergroting en de afspeelknop zeggen al welke kaart aan de beurt is. */
