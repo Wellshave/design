@@ -141,6 +141,9 @@ ook het live thema.
 | `not_an_upgrade` op de definitie `compare_info` | Een duurder model erft in de vergelijkingstabel nu automatisch alles van een goedkopere kolom &mdash; anders is het geen upgrade. Dit vinkje is de uitzondering, voor rijen die een gemeten waarde zijn. Aangezet op `tondeuse-deluxe`. Verving `includes_previous`, dat de omgekeerde standaard had en dus op elk nieuw product opnieuw aangezet moest worden. |
 | `Pro` &rarr; `PRO` op `groom-guard-pro` | `product_title` en `toggle_title` van dat metaobject schreven `Groom Guard&trade; Pro`, terwijl `popup_title` en de producttitel zelf `PRO` schrijven. De tabelkop en de knoppen in de pop-up lezen `toggle_title`, dus daar stond &laquo;Pro&raquo;. Nu overal PRO. |
 | `popup_decision` op de definitie `compare_info` | De beslisregel onder de tabel. Per product &eacute;&eacute;n korte vraag; het antwoord is de naam van dat product. Gevuld voor de Groom Guards en de vier neustrimmers. Leeg bij alle producten betekent: geen beslisregel. |
+| Bundels herschreven op doosinhoud | De vijf Groom Guard-pagina&rsquo;s (Groom Guard, PRO, Body &amp; Nose Bundel, Shave Package 3.0 en Ultimate) vulden hun vier voordeelvelden met unique selling points, die per product anders geformuleerd waren. Nu is elke rij een voorwerp uit `custom.included_box` van dat product: bodygroomer, SkinSafe&trade;-mes, oplaadstation, opzetkammen, Foil Shaver-opzetstuk, neustrimmer, detailtrimmer- en shaveropzetstuk, opbergtas. Acht namen, letterlijk gelijk, dus de tabel ontdubbelt. Plus `toggle_subtitle`, `best_for`, `popup_main_title`, `popup_lead`, `popup_winst` en `popup_decision`, in nl, en, de en fr. |
+| `compare_products` van de PRO en de Body &amp; Nose Bundel | De PRO stond naast zichzelf en de Body &amp; Nose naast zichzelf. Nu allebei naast de Shave Package Ultimate, de duurste. De Groom Guard blijft naast de PRO, de 3.0 en de Ultimate blijven naast elkaar. |
+| `Travelbag` en `Toilettas` heten allebei `Opbergtas` | De Shave Package 3.0 heeft in `included_box` een Travelbag, de Ultimate een Toilettas &mdash; twee metaobjecten met twee namen. Als losse rijen zou de Ultimate onder de erfregel een vinkje krijgen bij allebei, dus twee tassen. Beide rijen heten nu `Opbergtas`. **Alleen in `compare_info`**; de metaobjecten in `included_box` houden hun eigen naam en foto. |
 | Vierde `store_usp`: Morgen in huis | De voetbalk van de pop-up toont wat er in `custom.store_usp` staat, en dat waren er drie. Nieuw metaobject met een icoon in dezelfde stijl als de andere drie (20 bij 20, streek `#BC813E`), toegevoegd aan de lijst op de Groom Guard en de PRO. |
 
 Let op bij die laatste. `custom.store_usp` wordt ook gelezen door het
@@ -192,6 +195,15 @@ weer aan te zetten. Wat de Selleasy-kaart deed, hoort in blok 07
   zijn gevuld voor de Groom Guards en de neustrimmers, in alle vier de talen. De
   families `flex-*`, `shave-package-*`, `tondeuse-*` en `head-shaver-*` hebben nog
   de Engelse `popup_main_title` ("Compare ...") en geen lead of winstbalk.
+* **De sprong van de Shave Package 3.0 naar de Ultimate is &eacute;&eacute;n opzetstuk.**
+  64,95 tegenover 89,95, en volgens `included_box` koop je daarvoor het Foil
+  Shaver-opzetstuk, dat los 14,95 kost. De tabel toont dat eerlijk: vijf rijen,
+  &eacute;&eacute;n verschil. Zit er meer in de Ultimate dan er nu in `included_box` staat,
+  dan hoort dat erbij.
+* **De `included_box` van de Ultimate noemt geen oplaadstation en geen
+  oplaadkabel**, terwijl de 3.0 die w&eacute;l noemt en het apparaat hetzelfde is.
+  In de tabel komt dat goed omdat de duurdere kolom erft, maar het veld zelf
+  klopt niet.
 * **De prijsopmaak van de winkel heeft geen €-teken** (`moneyFormat` staat op
   `{{amount_with_comma_separator}}`). De sectie volgt de winkel, dus er staat
   `59,95`. Wordt de instelling aangepast, dan komt het teken er overal bij.

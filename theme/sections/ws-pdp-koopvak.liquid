@@ -530,15 +530,26 @@
           assign hoogste = 0
           assign uitgelicht_sleutels = ''
         -%}
+        {%- comment -%}
+          Welke kolom uitgelicht wordt, is de duurste in deze vergelijking. Dat
+          moet uit de prijs komen en niet uit een vinkje per product: is_popuplar
+          hoort bij het product, terwijl uitgelicht-zijn bij het paar hoort. Zodra
+          een product in de ene pop-up het instapmodel is en in de andere de
+          upgrade -- de PRO staat naast de Groom Guard en naast het Ultimate-pakket
+          -- kan een vinkje per product dat niet meer uitdrukken, en krijg je twee
+          gouden kaarten of nul.
+        {%- endcomment -%}
         {%- for cp in vergelijk_lijst -%}
-          {%- assign ci = cp.metafields.custom.compare_info.value -%}
           {%- assign cvp = cp.selected_or_first_available_variant.price -%}
-          {%- if laagste == 0 or cvp < laagste -%}{%- assign laagste = cvp -%}{%- endif -%}
-          {%- if cvp > hoogste -%}{%- assign hoogste = cvp -%}{%- endif -%}
           {%- capture kolom_sleutels %}{% render 'ws-vergelijk-sleutels', p: cp %}{% endcapture -%}
           {%- assign kolom_sleutels = kolom_sleutels | strip -%}
           {%- assign alle_punten = alle_punten | append: kolom_sleutels -%}
-          {%- if ci.is_popuplar -%}{%- assign uitgelicht_sleutels = kolom_sleutels -%}{%- endif -%}
+          {%- if laagste == 0 or cvp < laagste -%}{%- assign laagste = cvp -%}{%- endif -%}
+          {%- if cvp > hoogste -%}
+            {%- assign hoogste = cvp -%}
+            {%- assign uitgelicht_id = cp.id -%}
+            {%- assign uitgelicht_sleutels = kolom_sleutels -%}
+          {%- endif -%}
         {%- endfor -%}
         {%- assign alle_punten = alle_punten | append: '‹einde›' -%}
         {%- comment -%}
@@ -633,8 +644,8 @@
                 {%- assign uniek_onder = ci.advantage_4_subtitle -%}
               {%- endif -%}
             {%- endif -%}
-                <div class="ws-pop-kaart{% if ci.is_popuplar %} ws-uit{% endif %}">
-                  {%- if ci.is_popuplar and s.pop_uitgelicht != blank -%}
+                <div class="ws-pop-kaart{% if cp.id == uitgelicht_id %} ws-uit{% endif %}">
+                  {%- if cp.id == uitgelicht_id and s.pop_uitgelicht != blank -%}
                     <span class="ws-pop-vlag">{{ s.pop_uitgelicht }}</span>
                   {%- endif -%}
                   <div class="ws-pop-beeld">
@@ -741,7 +752,7 @@
                           {%- endif -%}
                           {%- if heeft_punt -%}
                             <td class="ws-ja">
-                              {%- if rij_upgrade and ci.is_popuplar and s.pop_inbegrepen != blank -%}
+                              {%- if rij_upgrade and cp.id == uitgelicht_id and s.pop_inbegrepen != blank -%}
                                 <span class="ws-pop-erbij"><svg><use href="#ws-pdp-vink-{{ section.id }}"/></svg>{{ s.pop_inbegrepen }}</span>
                               {%- else -%}
                                 <svg><use href="#ws-pdp-vink-{{ section.id }}"/></svg>
@@ -795,7 +806,7 @@
                 {%- assign ci = cp.metafields.custom.compare_info.value -%}
                 {%- assign cv = cp.selected_or_first_available_variant -%}
                 <form action="{{ routes.cart_add_url }}" method="post"
-                      class="ws-pop-vorm2{% if ci.is_popuplar %} ws-uit{% endif %}">
+                      class="ws-pop-vorm2{% if cp.id == uitgelicht_id %} ws-uit{% endif %}">
                   <input type="hidden" name="id" value="{{ cv.id }}">
                   <input type="hidden" name="quantity" value="1">
                   <button type="submit" class="ws-pop-knop"{% unless cv.available %} disabled{% endunless %}>
