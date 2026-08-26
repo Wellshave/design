@@ -153,9 +153,14 @@
   background:linear-gradient(100deg,#F5DEAA,#EBC382 46%,#DDA548);color:#26170A;border:0;border-radius:11px;
   padding:19px;font-family:inherit;font-size:14px;font-weight:800;letter-spacing:.1em;
   text-transform:uppercase;text-align:center;white-space:nowrap}
+/* Dit is een <button>. Zonder eigen achtergrond en lettertype pakt hij die
+   van de browser: een grijs vlak in een systeemletter. Alle andere knoppen
+   hier zetten allebei al; deze deed dat niet. */
 .ws-pdp .ws-cta2{display:flex;align-items:center;justify-content:center;gap:11px;width:100%;margin-top:11px;
-  border:1px solid var(--ws-lijn2);border-radius:11px;padding:16px;color:#fff;
+  border:1px solid var(--ws-lijn2);border-radius:11px;padding:16px;color:#fff;background:transparent;
+  font-family:inherit;cursor:pointer;
   font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.ws-pdp .ws-cta2:hover{background:rgba(255,255,255,.06)}
 .ws-pdp .ws-cta2 svg{width:17px;height:17px;flex:none;color:var(--ws-gold3)}
 .ws-pdp .ws-cta2 svg .vgl-a{opacity:.55}
 
@@ -290,12 +295,10 @@
   .ws-pdp .ws-pay .ws-vl{margin-top:0;flex-basis:auto}
   .ws-pdp .ws-pay .ws-pr::before{content:'\00b7';margin-right:9px;color:var(--ws-w38)}
 
-  /* de vergelijkingsknop is hier een tekstlink, geen tweede knop naast de
-     koopknop. Twee knoppen onder elkaar vechten om dezelfde aandacht. */
-  .ws-pdp .ws-cta2{border:0;background:none;padding:12px 0 2px;margin-top:6px;gap:7px;
-    color:var(--ws-gold3);font-size:13px;font-weight:700;letter-spacing:0;text-transform:none}
-  .ws-pdp .ws-cta2 svg{display:none}
-  .ws-pdp .ws-cta2::after{content:'\203a';font-size:19px;line-height:1;margin-top:-2px}
+  /* de vergelijkingsknop houdt hier dezelfde behandeling als op het brede
+     scherm: een omlijnde knop met het icoon. Als tekstlink was hij te
+     makkelijk over het hoofd te zien, en de pop-up is juist de keuzehulp. */
+  .ws-pdp .ws-cta2{margin-top:13px}
 
   .ws-pdp .ws-stg{padding:16px 16px 14px;border-radius:16px}
   .ws-pdp .ws-tg{top:16px;left:16px;border-radius:100px;padding:10px 18px;font-size:11px}

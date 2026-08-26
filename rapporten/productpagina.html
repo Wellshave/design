@@ -2194,9 +2194,11 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
 #deel-boven .p6 .m-vrd i{width:7px;height:7px;border-radius:50%;background:#22C55E;flex:none;margin-top:4px;
   box-shadow:0 0 0 3px rgba(34,197,94,.18)}
 #deel-boven .p6 .m-vrd b{color:#fff;font-weight:700}
-#deel-boven .p6 .m-vgl{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:9px;
-  padding:9px 0 2px;color:var(--v-gold3);font-size:11px;font-weight:700}
-#deel-boven .p6 .m-vgl::after{content:'\203a';font-size:16px;line-height:1;margin-top:-2px}
+#deel-boven .p6 .m-cta2{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:11px;
+  border:1px solid var(--v-lijn2);border-radius:10px;padding:13px;color:#fff;
+  font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
+#deel-boven .p6 .m-cta2 svg{width:14px;height:14px;flex:none;color:var(--v-gold3)}
+#deel-boven .p6 .m-cta2 svg .vgl-a{opacity:.55}
 #deel-boven .p6 .m-tel{display:flex;align-items:center;justify-content:center;gap:7px;margin-top:11px;
   font-size:10.5px;color:var(--v-w52)}
 #deel-boven .p6 .m-tel svg{width:13px;height:13px;color:var(--v-gold3)}
@@ -4420,7 +4422,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
         <div class="m-cta">In winkelwagen &mdash; 59,95</div>
         <div class="m-pay"><span class="w-vl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4.2" y="10.4" width="15.6" height="10.4" rx="2.2"/><path d="M8 10.4V7.6a4 4 0 0 1 8 0v2.8"/></svg>Veilig afrekenen</span><span class="m-pr">100 dagen proberen</span></div>
 
-        <div class="m-vgl">Vergelijk de modellen</div>
+        <div class="m-cta2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.4" y="8.6" width="6.2" height="12" rx="1.4" class="vgl-a"/><rect x="14.4" y="3.4" width="6.2" height="17.2" rx="1.4"/></svg>Vergelijk de modellen</div>
 
         <div class="m-onder">
           <div class="m-rev">
@@ -4661,7 +4663,8 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
     <h4>Wat er aan de telefoon veranderd is, en waarom</h4>
     <p><strong>Er stond iets stuk.</strong> Het koopvak is op de telefoon een flexkolom waarin elk onderdeel een <code>order</code> krijgt. De prijs en de appblokken hadden er geen, en dan valt een element terug op nul en komt het v&oacute;&oacute;r alles met order 1. De prijs en de Klarna-melding stonden dus b&oacute;ven de productnaam. Elk direct kind heeft nu een eigen order.</p>
     <p><strong>De volgorde volgt nu de beslissing:</strong> gouden balk met naam en korting, Trustpilot, naam, de gouden belofte, de grijze zin die uitlegt hoe het werkt, dan prijs met het bespaarde bedrag op dezelfde regel, dan de beloftes tussen twee haarlijnen, dan de voorraadregel, dan pas de knop.</p>
-    <p><strong>Vier dingen die anders zijn dan hierboven getekend.</strong> Het rode kortingsplaatje in de prijsregel valt weg &mdash; dat percentage staat al in de gouden balk. Het bespaarde bedrag staat naast de prijs in plaats van eronder. De voorraadregel staat b&oacute;ven de knop en heeft geen kader meer: eerst weten dat het kan, dan pas de knop. En de vergelijkingsknop is een tekstlink geworden, want twee knoppen onder elkaar vechten om dezelfde aandacht.</p>
+    <p><strong>Drie dingen die anders zijn dan eerder getekend.</strong> Het rode kortingsplaatje in de prijsregel valt weg &mdash; dat percentage staat al in de gouden balk. Het bespaarde bedrag staat naast de prijs in plaats van eronder. En de voorraadregel staat b&oacute;ven de knop en heeft geen kader meer: eerst weten dat het kan, dan pas de knop.</p>
+    <p><strong>De vergelijkingsknop houdt dezelfde behandeling als op het brede scherm.</strong> Ik had er eerst een tekstlink van gemaakt, omdat twee knoppen onder elkaar om dezelfde aandacht vechten. Maar dat maakte hem te makkelijk om over te slaan, en juist die pop-up is de keuzehulp. Hij is nu weer een omlijnde knop met het icoon &mdash; duidelijk een knop, maar zonder goud, dus hij neemt het niet op tegen &laquo;in winkelwagen&raquo;.</p>
     <p><strong>Onder de knop staan geen betaallogo&rsquo;s meer</strong>, alleen &laquo;Veilig afrekenen&raquo; en &laquo;100 dagen proberen&raquo;. De logo&rsquo;s staan lager op de pagina in hun eigen blok; hier zijn ze ruis naast de twee zinnen die tellen.</p>
     <p><strong>En de voorraadregel is herschreven.</strong> Er stond &laquo;Voor 23:59 besteld = morgen in huis&raquo;. Dat gelijkteken is een notitie, geen zin. Het is nu &laquo;vandaag v&oacute;&oacute;r 23:59 besteld, morgen in huis&raquo;, op alle 41 actieve producten die dat veld hebben. Daarbij bleek dat twee producten &mdash; de Flex Guard&trade; 3-in-1 en de Essential Flex Bundel &mdash; een afwijkende sluitingstijd noemen: <strong>23:00</strong>. Die hebben hun eigen tijd gehouden.</p>
     <p><strong>De knop begint precies op de vouw.</strong> Nagemeten in het schermbeeld hierboven: de vouw van een iPhone valt op 769 px, de knop loopt van 760 tot 807. Je ziet hem dus beginnen &mdash; dat is een goede aanwijzing dat er meer is &mdash; maar je moet een klein stukje scrollen om hem te raken. Wil je hem helemaal boven de vouw, dan is er &eacute;&eacute;n knop om aan te draaien: de cadeaubalk is met marge 54 px hoog. Onder de koopknop in plaats van erboven, en de knop past. Dat kost wel de cadeaubelofte op het moment dat de prijs in beeld komt.</p>
