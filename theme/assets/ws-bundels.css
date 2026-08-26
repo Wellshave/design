@@ -21,7 +21,9 @@
 /* ── de kaarten ──
    Let op de expliciete color: zonder die regel erft de kaart de systeemkleur
    en verdwijnt de tekst zodra de bezoeker zijn apparaat op donker heeft staan. */
-.ws-bn__rooster{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+/* auto-fit, zodat drie kaarten de rij vullen en vier er ook in passen —
+   het aantal sets mag in de thema-editor veranderen zonder gat in de rij. */
+.ws-bn__rooster{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
 .ws-bn__kaart{position:relative;display:flex;flex-direction:column;text-decoration:none;
   background:#fff;color:#111;border:1px solid rgba(17,17,17,.09);border-radius:18px;
   overflow:hidden;transition:border-color .18s,box-shadow .18s,transform .18s}
