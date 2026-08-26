@@ -292,6 +292,29 @@ rijen, anders botst het lintje tegen de knop erboven.
 
 ### "Alle zones" hoort in de rij
 
+Hetzelfde geldt voor het megamenu onder **SHOP**. Daar stond *Alle producten* wél, maar
+onderaan de tweede groep *Of zoek op type* — terwijl "alles" geen type is. Die tegel staat
+nu vooraan in de eerste groep *Kies je zone* en heet daar ook **Alle zones**, zodat het
+menu en de zonekiezer op de pagina precies hetzelfde zeggen:
+
+| groep | tegels |
+|---|---|
+| Kies je zone | Alle zones · Lichaam & schaamstreek · Gezicht & baard · Hoofd · Neus & oren |
+| Of zoek op type | Scheerapparaten · Baardtrimmers · Tondeuses · Safety Razors · Accesoires · Bundels |
+
+Drie dingen die daarvoor moesten gebeuren, in `header-group.json` (een bestand per thema,
+dus live blijft ongemoeid):
+
+- `all` vooraan in `megamenu_collections`;
+- `megamenu_zones` van 4 naar 5 — dat getal bepaalt waar de eerste groep ophoudt;
+- `megamenu_labels` van `all=Alle producten` naar `all=Alle zones`.
+
+En één in de winkel zelf: de collectie `all` had geen `custom.zone_icon` en viel dus terug
+op `custom.megamenu_image`, een productfoto. Tussen vier gouden lijniconen was dat de
+vreemde eend. Hij heeft nu hetzelfde 2×2-icoon als de tegel op de pagina's. Dat metafield
+kent alleen dit thema — het live thema leest `megamenu_image` — dus daar verandert niets;
+nagemeten op de live pagina: geen "Alle zones", geen van beide groepskoppen.
+
 De zonekiezer had vier tegels: de vier zones. Sta je op een zonepagina en wil je gewoon
 álles zien, dan was daar in de rij niets voor. De routes die er wél waren, zaten buiten
 beeld: *SHOP* in de header en *Bekijk de hele collectie* helemaal onderaan het raster —
