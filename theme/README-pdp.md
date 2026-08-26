@@ -16,6 +16,41 @@ De kopie is op het moment van maken gelijk aan het live thema: sectie, styleshee
 snippet en beide productsjablonen hebben daar dezelfde checksums. Wie hier verder
 werkt, schrijft dus naar **204412977484** en publiceert die pas als het af is.
 
+## Het standaardsjabloon draagt alles, niet een apart sjabloon
+
+`templates/product.json` is de plek. Daar staat het koopvak als `main` en de
+UGC-band als `ugc`, en elk product in de winkel komt daar uit. Het aparte
+`templates/product.ws-pdp.json` blijft alleen als schoon voorbeeld bestaan
+(`?view=ws-pdp`): koopvak en UGC-band zonder de oude secties eromheen. Er hangt
+geen product aan.
+
+**Waarom dat voor élk product geldt, ook met een eigen sjabloonachtervoegsel.**
+Negenentwintig producten dragen nog een `templateSuffix` uit het oude thema:
+`improved-template` (zestien stuks), `wellshave-groom-guard`,
+`wellshave-shave-package-3`, `dual-groomer`, `men-shaper-gold`, drie
+`safetyrazor-*`, vier `gp-template-*` en `free-gift`. Geen van die sjablonen
+bestaat in dit thema — het thema heeft alleen `product.json` en
+`product.ws-pdp.json`. Shopify valt dan terug op het standaardsjabloon.
+
+Nagemeten op de storefront, niet aangenomen: de Groom Guard&trade;
+(`templateSuffix: wellshave-groom-guard`) rendert in het werkthema de secties
+`main`, `logos`, `ugc`, `trustpilot_reviews`, `product_media_with_text`,
+`compare_table`, `whats_included`, `featured` en `faq` — precies de inhoud van
+`product.json`. **Er hoeft dus niets aan de producten zelf te veranderen.** Was
+het andersom, dan zouden de suffixen leeggehaald moeten worden, en dat is
+productdata: dat raakt het live thema meteen mee.
+
+### Twee oude secties staan uit
+
+* **`ugc-videos`** &mdash; de oude UGC-carrousel. Vervangen door `ws-pdp-ugc`;
+  twee carrousels onder elkaar is geen keuze.
+* **`ss_payment_icons_Qi6V9R`** &mdash; de app-sectie die zichzelf met JavaScript
+  achter de koopknop plakte. Het koopvak rendert de betaalmethoden zelf met
+  `{% raw %}{% render 'payments' %}{% endraw %}`, server-side en zonder sprong.
+
+Ze staan op `disabled`, niet verwijderd: aanzetten in de theme-editor kan
+altijd nog.
+
 `?view=ws-pdp` rendert `templates/product.ws-pdp.json` zonder dat er een
 `templateSuffix` op een product gezet hoeft te worden. Er verandert dus niets
 aan de producten zelf en niets aan het live thema.

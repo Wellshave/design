@@ -1740,6 +1740,34 @@ strong{font-weight:700}
   </div>
 </section>
 
+<section>
+  <div class="shead"><span class="snum">HET SJABLOON</span><h2 class="duo">Het standaardsjabloon draagt alles,<span class="b">en dat is voor elk product genoeg.</span></h2></div>
+  <p class="sintro">Het koopvak en de UGC-band stonden ook in een apart voorbeeldsjabloon, <code>product.ws-pdp.json</code>, dat je met <code>?view=ws-pdp</code> kon bekijken. Dat is nu een voorbeeld en niets meer: <strong>alles draait op <code>templates/product.json</code></strong>, het sjabloon waar elk product uit komt.</p>
+
+  <div class="note warn">
+    <h4>Negenentwintig producten dragen nog een sjabloonachtervoegsel &mdash; en dat maakt niet uit</h4>
+    <p>Uit het oude thema staat op 29 producten nog een <code>templateSuffix</code>: <code>improved-template</code> (zestien stuks), <code>wellshave-groom-guard</code>, <code>wellshave-shave-package-3</code>, <code>dual-groomer</code>, <code>men-shaper-gold</code>, drie <code>safetyrazor-*</code>, vier <code>gp-template-*</code> en <code>free-gift</code>. Daar zitten de Groom Guard, de Shave Package 3.0, de Tondeuse Deluxe en Elegant, de Head Shaver Deluxe, de Gentleman Shaver en alle Blade Guards bij &mdash; niet de kleine jongens.</p>
+    <p><strong>Geen van die sjablonen bestaat in dit thema.</strong> Het thema heeft alleen <code>product.json</code> en <code>product.ws-pdp.json</code>. Shopify valt dan terug op het standaardsjabloon, en dat is precies wat je wilt.</p>
+    <p>Nagemeten in plaats van aangenomen: de Groom Guard&trade; met <code>templateSuffix: wellshave-groom-guard</code> rendert in het werkthema de secties <code>main</code>, <code>logos</code>, <code>ugc</code>, <code>trustpilot_reviews</code>, <code>product_media_with_text</code>, <code>compare_table</code>, <code>whats_included</code>, <code>featured</code> en <code>faq</code>. Dat is de inhoud van <code>product.json</code>, regel voor regel. Het koopvak staat erop, de veertien UGC-video&rsquo;s staan erop, en de sterrenregel zegt 970+.</p>
+    <p>Het alternatief was de suffixen leeghalen op 29 producten. Dat is g&eacute;&eacute;n themawijziging maar productdata: het werkt meteen door in het live thema, voor iedereen die nu op de site staat. Dat hoeft dus niet, en dat is maar goed ook.</p>
+  </div>
+
+  <p class="vsth">Twee oude secties uit</p>
+  <p>Om plaats te maken staan er twee secties op <code>disabled</code>. Niet verwijderd &mdash; aanzetten kan altijd nog in de theme-editor.</p>
+
+  <div class="vstwrap">
+  <table class="vst">
+    <thead><tr><th>Sectie</th><th>Waarom uit</th></tr></thead>
+    <tbody>
+      <tr><th><code>ugc-videos</code></th><td>De oude UGC-carrousel. Vervangen door <code>ws-pdp-ugc</code>; twee carrousels onder elkaar is geen keuze maar een fout.</td></tr>
+      <tr><th><code>ss_payment_icons</code></th><td>De app-sectie die zichzelf met JavaScript achter de koopknop plakte. Het koopvak rendert de betaalmethoden zelf via <code>payments</code>, server-side en zonder sprong. Zie het hoofdstuk hierboven.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p><code>product-ugc</code> stond al uit. Wat er nu onder het koopvak staat: de logobalk, de UGC-band, de Trustpilot-sectie, het beeld-met-tekstblok, de vergelijkingstabel, &laquo;wat zit erbij&raquo;, de uitgelichte producten en de vragenlijst. De laatste vijf zijn nog de oude secties &mdash; dat zijn de blokken die nog gebouwd moeten worden.</p>
+</section>
+
 <div class="foot">
   <strong>Herkomst.</strong> Omschrijvingen, <code>custom.specification</code>, <code>custom.upgrade</code>, <code>custom.upgrade_products</code>, <code>custom.upgrade_details</code> en <code>custom.cart_upsell</code>: Shopify Admin API, 23 augustus 2026, uitgelezen op de Groom Guard&trade; PRO en de Groom Guard&trade;. Prijzen en doorgestreepte prijzen van de vijf accessoires: dezelfde bron, dezelfde dag. Foto&rsquo;s: de uitgelichte afbeelding van elk artikel uit je eigen CDN. Betaalmethoden en de werking van <code>ss_payment_icons</code>: uitgelezen uit de live productpagina op wellshave.com. Wallets: <code>shop.paymentSettings.supportedDigitalWallets</code>.<br>
   <strong>Nog open.</strong> De specificaties zijn hierboven met de hand tot label en waarde gemaakt om te laten zien hoe het eruitziet. Zolang <code>custom.specification</code> &eacute;&eacute;n tekstblok blijft, is dat geen sjabloon maar handwerk &mdash; de reparatie staat in de constatering bij de accordeon hierboven.
