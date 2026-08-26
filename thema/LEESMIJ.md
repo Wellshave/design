@@ -143,6 +143,49 @@ pad zelf zitten schuiven.
 De kleur en het vinkje zitten in het symbool, dus `.pk-badge` in de CSS zet alleen
 nog de maat (19px). Er is geen achtergrondcirkel meer.
 
+## De achtergrond van de kop
+
+De kop was een vlakke donkere gradient met een monogram-**S** van 330px erin. Die is
+weg. In plaats daarvan staat er een **achtergrondfoto per categorie**, met een sluier
+eroverheen zodat hij als textuur werkt en niet als plaatje.
+
+Hoe het in elkaar zit:
+
+- `achtergrond` (image_picker) en `achter_donker` (range, 40–92%) zijn instellingen op
+  `ws-collectie-kop`. Staat `achtergrond` leeg, dan valt de kop terug op de vlakke
+  donkere kleur — zonder monogram.
+- De foto is een **`<img>`**, geen CSS-`background`, zodat Shopify er een `srcset` bij
+  levert. Eroverheen ligt `.kop-sluier`: een schuine gradient die links het donkerst is
+  (daar staan de kop en de lead) en rechts iets lichter, plus een tweede gradient die
+  boven- en onderrand verdonkert.
+- `--achter-donker` komt als inline custom property mee uit de instelling, dus je kunt
+  per pagina bijstellen zonder de CSS aan te raken.
+- De foto krijgt `grayscale(.25)`; volledig kleurloos wordt kil, een kwart haalt de
+  ergste kleurvlekken eruit.
+
+**Nagemeten, niet geschat.** 100 tekstvakken over negen pagina's × twee breedtes, met
+de contrastverhouding tegen de lichtste 5% van de achtergrond onder elk vak — niet
+tegen het gemiddelde, want daar verstopt een lichte plek zich in. Laagste uitkomst
+9,1:1, tegen 4,5:1 als eis. Er is dus ruimte om `achter_donker` te verlagen als een
+foto te veel wegvalt.
+
+| pagina | achtergrond | sluier |
+|---|---|---|
+| `overzicht` | `ws-bundel-dark.jpg` | 80% |
+| `zone-gezicht` | `gg-sfeer-standaard.jpg` | 80% |
+| `zone-lichaam` | `…lowres-2-35.jpg` | 80% |
+| `zone-hoofd` | `…lowres-2-46.jpg` | 82% |
+| `zone-neus` | `…lowres-2-27.jpg` | 80% |
+| `type-baardtrimmers` | `…lowres-2-34.jpg` | 84% |
+| `type-scheerapparaten` | `…lowres-2-45.jpg` | 80% |
+| `type-tondeuses` | `…lowres-2-36.jpg` | 80% |
+| `type-safetyrazors` | `gg-sfeer-geprobeerd.jpg` | 80% |
+
+Wat níét werkt als achtergrond, getoetst en afgevallen: foto's met veel blote huid
+(`ws-hero-portrait`, `ws-ugc-hoofd`, `gg-sfeer-douche`). Onder de sluier worden dat
+grote vlekkerige vlakken. Omgevingsfoto's — badkamer, wastafel, de tas — houden hun
+vorm en lezen als textuur.
+
 ## De herofoto per categorie
 
 Elke collectiepagina heeft in de kop een liggende fotoband van ongeveer 2:1 (457×228

@@ -210,8 +210,23 @@
 /* ── blok 1 · kop met modellenreeks en keuzehulp ── */
 .wsc .kop{background:var(--grad-dark);color:#fff;padding:40px 0 34px;position:relative;overflow:hidden}
 .wsc .kop .rail{max-width:1240px}
-.wsc .kop-merk{position:absolute;top:-52px;right:26%;font-size:330px;font-weight:900;line-height:1;
-  color:rgba(255,255,255,.055);letter-spacing:-.06em;pointer-events:none;user-select:none}
+
+/* De achtergrondfoto van de kop. De foto zelf is een <img> op volle bak; de sluier
+   erover is een aparte laag met twee taken: hem donker genoeg maken dat witte tekst
+   erop leesbaar blijft, en links extra donker maken omdat daar de kop en de lead
+   staan. `--achter-donker` komt uit de sectie-instelling. */
+.wsc .kop-achter{position:absolute;inset:0;z-index:0;pointer-events:none}
+.wsc .kop-achter img{width:100%;height:100%;object-fit:cover;object-position:50% 45%;
+  display:block;filter:grayscale(.25)}
+.wsc .kop-sluier{position:absolute;inset:0;
+  background:
+    linear-gradient(100deg,
+      rgba(12,11,10,calc(var(--achter-donker,72%) + 16%)) 0%,
+      rgba(12,11,10,var(--achter-donker,72%)) 46%,
+      rgba(12,11,10,calc(var(--achter-donker,72%) - 12%)) 100%),
+    linear-gradient(180deg, rgba(12,11,10,.34) 0%, rgba(12,11,10,0) 34%, rgba(12,11,10,.5) 100%)}
+/* de vlakke kleur blijft eronder staan als de foto nog laadt of niet bestaat */
+.wsc .kop.met-achter{background:var(--carbon)}
 .wsc .kop-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:46px;align-items:start;
   position:relative;z-index:1}
 .wsc .kop-copy{display:flex;flex-direction:column;gap:18px;align-items:flex-start;
@@ -359,7 +374,6 @@
 
 @container (max-width:700px){
   .wsc .kop{padding:24px 0 24px}
-  .wsc .kop-merk{display:none}
   .wsc .kop-grid{display:flex;flex-direction:column;gap:18px;min-height:0}
   .wsc .kop-copy{display:contents}
   .wsc .kop-copy > .eyebrow{order:1}
