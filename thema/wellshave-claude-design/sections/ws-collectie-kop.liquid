@@ -13,6 +13,7 @@
 <div class="wsc">
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
   <symbol id="wsc-vink" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="wsc-chevron-r" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="wsc-pijl" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="wsc-retour" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.4-5.7M20 4v4h-4" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="wsc-schild" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
@@ -174,24 +175,35 @@
     {%- if section.settings.kruimel != blank -%}
       <p class="kruimel"><a href="{{ routes.root_url }}">Home</a> <span>/</span> <b>{{ section.settings.kruimel }}</b></p>
     {%- endif -%}
-    <div class="zones">
+    <div class="zonekiezer">
       {%- for block in section.blocks -%}
         {%- if block.type == 'zone' -%}
-          {%- if block.settings.url != blank and block.settings.huidig != true -%}
-            <a class="zone" href="{{ block.settings.url }}" data-zone="{{ block.settings.naam | escape }}"
-               data-app="{{ block.settings.aantal }}" {{ block.shopify_attributes }}>{{ block.settings.naam }}
-               <span>{{ block.settings.aantal }}</span></a>
+          {%- assign is_nu = block.settings.huidig -%}
+          {%- if block.settings.url != blank and is_nu != true -%}
+            {%- assign tag = 'a' -%}
           {%- else -%}
-            <button type="button" class="zone" {% if block.settings.huidig %}aria-current="true"{% endif %}
-               data-zone="{{ block.settings.naam | escape }}" data-app="{{ block.settings.aantal }}"
-               {{ block.shopify_attributes }}>{{ block.settings.naam }} <span>{{ block.settings.aantal }}</span></button>
+            {%- assign tag = 'button' -%}
           {%- endif -%}
+          <{{ tag }} class="zkaart{% if is_nu %} nu{% endif %}"
+            {%- if tag == 'a' %} href="{{ block.settings.url }}"{% else %} type="button"{% endif -%}
+            {% if is_nu %} aria-current="true"{% endif %}
+            data-zone="{{ block.settings.naam | escape }}" data-app="{{ block.settings.aantal }}"
+            {{ block.shopify_attributes }}>
+            {%- if block.settings.icoon != blank -%}
+              <span class="zkaart-ico">{{ block.settings.icoon | image_url: width: 200 | image_tag: alt: '' }}</span>
+            {%- endif -%}
+            <span class="zkaart-naam">{{ block.settings.naam }}</span>
+            <span class="zkaart-tel">{{ block.settings.aantal }}</span>
+            <svg class="zkaart-pijl" viewBox="0 0 24 24" aria-hidden="true"><use href="#wsc-chevron-r"/></svg>
+          </{{ tag }}>
         {%- endif -%}
       {%- endfor -%}
     </div>
     {%- if section.settings.zonemelding != blank -%}
-      <p class="zonemelding">Je bekijkt <b class="zn">{{ section.settings.kruimel }}</b> &mdash;
-        <b class="za">{{ section.settings.zone_aantal }}</b> {{ section.settings.zonemelding }}</p>
+      <p class="zonemelding">
+        <span class="zm-vink"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsc-vink"/></svg></span>
+        <span>Je bekijkt <b class="zn">{{ section.settings.kruimel }}</b> &mdash;
+          <b class="za">{{ section.settings.zone_aantal }}</b> {{ section.settings.zonemelding }}</span></p>
     {%- endif -%}
   </div></section>
 {%- endif -%}
@@ -323,6 +335,7 @@
         { "type": "text", "id": "naam", "label": "Naam" },
         { "type": "text", "id": "aantal", "label": "Aantal" },
         { "type": "url", "id": "url", "label": "Link naar de zone" },
+        { "type": "image_picker", "id": "icoon", "label": "Icoon van de zone", "info": "Het gouden lijnicoon van deze zone, bijvoorbeeld ws-zone-icoon-lichaam.png. Laat leeg en de tegel toont alleen de naam." },
         { "type": "checkbox", "id": "huidig", "label": "Dit is de zone die je nu bekijkt", "default": false }
       ]
     }

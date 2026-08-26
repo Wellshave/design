@@ -55,23 +55,49 @@
   box-shadow:0 10px 24px rgba(17,17,17,.05)}
 .wsc .kruimel{font-size:11.5px;color:var(--ink-40);padding:14px 0 0;font-weight:600}
 .wsc .kruimel b{color:var(--ink-60);font-weight:600}
-.wsc .zones{display:flex;gap:10px;padding:14px 0;overflow-x:auto;scrollbar-width:none}
-.wsc .zones::-webkit-scrollbar{display:none}
-.wsc .zone{flex:none;display:flex;align-items:center;gap:10px;border:1px solid var(--ink-10);
-  border-radius:100px;padding:11px 18px;font-size:13.5px;font-weight:700;background:var(--paper);
-  transition:border-color .16s ease,background .16s ease}
-.wsc .zone span{font-size:11.5px;font-weight:700;color:var(--ink-40)}
-.wsc .zone:hover{border-color:rgba(188,129,62,.5)}
-.wsc .zone[aria-current="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
-.wsc .zone[aria-current="true"] span{color:rgba(255,255,255,.5)}
-.wsc .filters{display:flex;gap:8px;flex-wrap:wrap}
-.wsc .filter{border:1px solid var(--ink-10);border-radius:100px;padding:8px 15px;font-size:12.5px;
-  font-weight:700;color:var(--ink-60)}
-.wsc .filter[aria-pressed="true"]{background:var(--sand-deep);border-color:transparent;color:var(--ink)}
-.wsc .zonemelding{font-size:12.5px;color:var(--ink-60);padding:0 0 16px}
+/* ── de zonekiezer ──
+   Vier tegels in plaats van vier pillen: icoon, scheidingslijntje, naam, aantal in
+   een rondje en een pijl. De zone waar je op staat is zwart met een gouden voet. */
+.wsc .zonekiezer{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;padding:16px 0 4px}
+.wsc .zkaart{position:relative;display:flex;align-items:center;gap:14px;text-align:left;
+  border:1px solid var(--ink-10);border-radius:14px;padding:14px 16px;background:var(--paper);
+  font-weight:700;color:var(--ink);text-decoration:none;min-width:0;
+  transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease}
+.wsc .zkaart:hover{border-color:rgba(188,129,62,.55);box-shadow:0 10px 24px rgba(17,17,17,.07)}
+.wsc .zkaart-ico{flex:none;width:52px;height:44px;display:grid;place-items:center;
+  border-right:1px solid var(--ink-10);padding-right:14px}
+.wsc .zkaart-ico img{width:100%;height:100%;object-fit:contain}
+.wsc .zkaart-naam{flex:1;min-width:0;font-size:14.5px;line-height:1.25;letter-spacing:-.01em}
+.wsc .zkaart-tel{flex:none;width:32px;height:32px;border-radius:100px;display:grid;place-items:center;
+  border:1.5px solid var(--bronze);color:var(--bronze);font-size:13px;font-weight:800}
+.wsc .zkaart-pijl{flex:none;width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2.2;
+  color:var(--ink-40)}
+.wsc .zkaart.nu{background:var(--carbon);border-color:var(--carbon);color:#fff;
+  box-shadow:0 12px 26px rgba(17,17,17,.22)}
+.wsc .zkaart.nu::after{content:"";position:absolute;left:10px;right:10px;bottom:-4px;height:4px;
+  border-radius:0 0 8px 8px;background:var(--grad-goud)}
+.wsc .zkaart.nu .zkaart-ico{border-right-color:rgba(255,255,255,.18)}
+.wsc .zkaart.nu .zkaart-ico img{filter:brightness(0) invert(1)}
+.wsc .zkaart.nu .zkaart-tel{background:var(--grad-goud);border-color:transparent;color:var(--carbon)}
+.wsc .zkaart.nu .zkaart-pijl{color:rgba(255,255,255,.55)}
+
+.wsc .zonemelding{display:flex;align-items:center;gap:11px;font-size:13px;color:var(--ink-60);
+  padding:16px 0 18px}
 .wsc .zonemelding b{color:var(--ink)}
-@container (max-width:700px){
-  .wsc .zones{padding:12px 0;margin:0 -18px;padding-left:18px;padding-right:18px}
+.wsc .zm-vink{flex:none;width:26px;height:26px;border-radius:100px;display:grid;place-items:center;
+  background:var(--grad-goud);color:var(--carbon)}
+.wsc .zm-vink svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.6}
+
+@container (max-width:980px){
+  .wsc .zonekiezer{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+}
+@container (max-width:560px){
+  .wsc .zonekiezer{grid-template-columns:1fr;gap:8px;padding:12px 0 2px}
+  .wsc .zkaart{padding:11px 13px;gap:11px}
+  .wsc .zkaart-ico{width:42px;height:36px;padding-right:11px}
+  .wsc .zkaart-naam{font-size:13.5px}
+  .wsc .zkaart-tel{width:28px;height:28px;font-size:12px}
+  .wsc .zonemelding{align-items:flex-start;padding:12px 0 14px;font-size:12.5px}
 }
 .wsc .keuzes{display:flex;gap:8px;flex-wrap:wrap}
 .wsc .keuze{border:1px solid var(--ink-10);border-radius:100px;padding:10px 18px;font-size:13px;
@@ -365,27 +391,79 @@
    Kaart, hover en monogram zijn overgenomen uit assets/ws-bestsellers.css
    in het thema wellshave/homepage-test. Waarden ongewijzigd gelaten. */
 
-.wsc .filterbalk{background:var(--paper);border:1px solid rgba(17,17,17,.08);border-radius:14px;
-  padding:14px 16px;display:flex;flex-direction:column;gap:11px;margin-bottom:34px}
-.wsc .fb-rij{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
-.wsc .fb-acties{display:flex;gap:10px;flex:none}
-.wsc .fb-knop{display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(17,17,17,.14);
-  border-radius:10px;padding:11px 16px;font-size:13px;font-weight:600;background:var(--paper);
+/* ── de filterbalk ──
+   Eén paneel met twee rijen: bovenin waar je naar kijkt, onderin wat je gekozen hebt.
+   De knoppen dragen hun eigen icoon en hun aantal; de actieve is zwart. Op de knop
+   Bundels kan een lintje staan, dat boven de rand uitsteekt. */
+.wsc .filterbalk{background:var(--paper);border:1px solid rgba(188,129,62,.22);border-radius:18px;
+  padding:20px 18px;display:flex;flex-direction:column;gap:0;margin-bottom:34px;
+  box-shadow:0 14px 34px rgba(17,17,17,.05)}
+.wsc .fb-rij{display:flex;align-items:center;gap:13px;flex-wrap:wrap}
+.wsc .fb-onder{margin-top:18px;padding-top:18px;border-top:1px solid var(--ink-10)}
+.wsc .fb-label{display:inline-flex;align-items:center;gap:9px;flex:none;font-size:11.5px;
+  font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+.wsc .fb-label svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2.1;
+  color:var(--ink-60)}
+.wsc .fb-streep{flex:none;width:1px;align-self:stretch;min-height:34px;background:var(--ink-10)}
+
+.wsc .filters{display:flex;gap:8px;flex-wrap:wrap;min-width:0}
+.wsc .filter{position:relative;display:inline-flex;align-items:center;gap:8px;
+  border:1px solid var(--ink-10);border-radius:12px;padding:11px 13px;font-size:13px;
+  font-weight:700;color:var(--ink);background:var(--paper);
+  transition:border-color .18s ease,background .18s ease,color .18s ease,box-shadow .18s ease}
+.wsc .filter svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.1;flex:none}
+.wsc .filter i{flex:none;min-width:23px;height:23px;padding:0 6px;border-radius:100px;
+  display:grid;place-items:center;font-style:normal;font-size:12px;font-weight:800;
+  background:var(--sand-deep);color:var(--ink-60)}
+.wsc .filter:hover{border-color:rgba(188,129,62,.55)}
+.wsc .filter[aria-pressed="true"]{background:var(--carbon);border-color:var(--carbon);color:#fff;
+  box-shadow:0 10px 22px rgba(17,17,17,.2)}
+.wsc .filter[aria-pressed="true"] i{background:rgba(255,255,255,.16);color:#fff}
+
+/* het lintje boven de knop */
+.wsc .filter.gemerkt{background:linear-gradient(180deg,#FDF7EC 0%,#F7EAD2 100%);
+  border-color:rgba(188,129,62,.55)}
+.wsc .filter.gemerkt i{background:var(--carbon);color:#fff}
+.wsc .filter-lint{position:absolute;left:50%;bottom:calc(100% - 1px);transform:translateX(-50%);
+  background:var(--grad-goud);color:var(--carbon);font-size:9.5px;font-weight:800;
+  letter-spacing:.12em;text-transform:uppercase;padding:5px 12px 7px;border-radius:8px 8px 0 0;
+  white-space:nowrap;pointer-events:none}
+.wsc .filter.gemerkt[aria-pressed="true"]{background:var(--carbon);border-color:var(--carbon);color:#fff}
+.wsc .filter.gemerkt[aria-pressed="true"] i{background:var(--grad-goud);color:var(--carbon)}
+
+.wsc .fb-uitslag{flex:none;font-size:13px;color:var(--ink-60);white-space:nowrap}
+.wsc .fb-uitslag b{color:var(--ink);font-weight:800}
+.wsc .fb-rechts{display:flex;align-items:center;gap:13px;flex:none;margin-left:auto}
+.wsc .fb-acties{display:flex;gap:8px;flex:none}
+.wsc .fb-knop{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--ink-10);
+  border-radius:12px;padding:11px 13px;font-size:12.5px;font-weight:700;background:var(--paper);
   transition:border-color .3s ease,background .3s ease,opacity .3s ease}
-.wsc .fb-knop svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.wsc .fb-knop svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2.1;flex:none}
+.wsc .fb-knop .fb-chevron{width:15px;height:15px;color:var(--ink-40)}
 .wsc .fb-knop:hover{border-color:rgba(188,129,62,.5)}
 .wsc .fb-knop[disabled]{opacity:.42;cursor:default}
-.wsc .fb-knop[disabled]:hover{border-color:rgba(17,17,17,.14)}
-.wsc .fb-keuzes{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:12.5px;
-  color:var(--ink-60);border-top:1px solid rgba(17,17,17,.07);padding-top:11px}
-.wsc .fb-keuzes b{color:var(--ink);font-weight:600}
-.wsc .fb-wis{font-size:12.5px;color:var(--ink-60);text-decoration:underline;text-underline-offset:3px}
-.wsc .fb-wis:hover{color:var(--bronze)}
-.wsc .filterbalk .filter{border-radius:10px;padding:10px 15px;font-size:13px;font-weight:600;
-  border:1px solid rgba(17,17,17,.14);color:var(--ink)}
-.wsc .filterbalk .filter span{color:var(--ink-40);margin-left:5px;font-weight:600}
-.wsc .filterbalk .filter[aria-pressed="true"]{background:#EDE7DB;border-color:transparent}
-.wsc .filterbalk .filter[aria-pressed="true"] span{color:#8F6428}
+.wsc .fb-knop[disabled]:hover{border-color:var(--ink-10)}
+
+/* de gemaakte keuzes, als losse chips die je één voor één weg kunt klikken */
+.wsc .fb-chips{display:flex;align-items:center;gap:9px;flex-wrap:wrap;min-width:0}
+.wsc .fb-chip{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--ink-10);
+  border-radius:10px;padding:9px 10px 9px 14px;font-size:13px;font-weight:600;color:var(--ink);
+  background:var(--paper)}
+.wsc .fb-chip-uit{display:grid;place-items:center;width:20px;height:20px;border-radius:6px;
+  color:var(--ink-40);transition:background .16s ease,color .16s ease}
+.wsc .fb-chip-uit svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.4}
+.wsc .fb-chip-uit:hover{background:var(--sand-deep);color:var(--ink)}
+.wsc .fb-chips-leeg{font-size:12.5px;color:var(--ink-40)}
+.wsc .fb-wis{font-size:13px;font-weight:600;color:var(--ink-60);text-decoration:underline;
+  text-underline-offset:3px;text-decoration-color:rgba(188,129,62,.6)}
+.wsc .fb-wis:hover{color:var(--ink)}
+.wsc .fb-tip{display:inline-flex;align-items:center;gap:10px;font-size:12.5px;color:var(--ink-60);
+  margin-left:auto;text-align:left}
+.wsc .fb-tip svg{width:19px;height:19px;stroke:var(--bronze);fill:none;stroke-width:1.9;flex:none}
+.wsc .fb-onder.zonder-keuzes > .fb-label,
+.wsc .fb-onder.zonder-keuzes > .fb-chips,
+.wsc .fb-onder.zonder-keuzes > .fb-wis,
+.wsc .fb-onder.zonder-keuzes > .fb-streep-tip{display:none}
 
 .wsc .groep{margin-bottom:44px}
 .wsc .groep.uit{display:none}
@@ -569,12 +647,23 @@
   .wsc .bwr-tekst{grid-column:1 / -1}
   .wsc .bwr-bron{grid-column:2;grid-row:1;justify-content:center}
   .wsc .bwr-bron a{margin-top:4px}
-  .wsc .filterbalk{padding:12px;gap:9px;margin-bottom:24px}
-  .wsc .fb-rij{gap:10px}
-  .wsc .filterbalk .filters{gap:6px}
-  .wsc .filterbalk .filter{padding:8px 12px;font-size:12px}
-  .wsc .fb-acties{width:100%;gap:8px}
+  .wsc .filterbalk{padding:16px 14px;margin-bottom:24px;border-radius:14px}
+  .wsc .fb-rij{gap:11px}
+  .wsc .fb-onder{margin-top:14px;padding-top:14px;flex-direction:column;align-items:flex-start}
+  /* het lintje steekt boven de knop uit; in twee kolommen heeft de rij daar
+     verticaal ruimte voor nodig, anders botst het tegen de knop erboven */
+  .wsc .filters{gap:22px 8px;width:100%}
+  .wsc .filter{flex:1 1 calc(50% - 4px);justify-content:flex-start;padding:10px 12px;font-size:12.5px;gap:8px}
+  .wsc .filter svg{width:17px;height:17px}
+  .wsc .filter i{min-width:23px;height:23px;font-size:11px;margin-left:auto}
+  .wsc .filter-lint{font-size:8.5px;padding:4px 9px 6px}
+  .wsc .fb-streep{display:none}
+  .wsc .fb-rechts{width:100%;margin-left:0;gap:10px;flex-wrap:wrap}
+  .wsc .fb-acties{flex:1;gap:8px}
   .wsc .fb-knop{flex:1;justify-content:center;padding:10px 12px;font-size:12px}
+  .wsc .fb-sorteer{min-width:0}
+  .wsc .fb-sorteer-tekst{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .wsc .fb-tip{margin-left:0;padding-top:4px}
   .wsc .groep{margin-bottom:32px}
   .wsc .groep-kop h2{font-size:19px}
   .wsc .kaarten{grid-template-columns:1fr 1fr;gap:11px}

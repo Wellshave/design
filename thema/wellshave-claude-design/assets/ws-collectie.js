@@ -33,9 +33,54 @@
 
     var woorden = [];
     for (var g in nu) { if (CFG.woord[g] && CFG.woord[g][nu[g]]) woorden.push(CFG.woord[g][nu[g]]); }
+    chips(nu);
     document.dispatchEvent(new CustomEvent('ws:keuze', {
       detail: { id: id, regel: woorden.join(' · ') }
     }));
+  }
+
+  // Eén chip per beantwoorde vraag, met een kruisje dat alleen díe vraag wist.
+  // De tekst komt uit dezelfde woordenlijst als de regel eronder, met een hoofdletter.
+  function chips(nu) {
+    var bak = document.querySelector('.wsc .fb-chips');
+    if (!bak) return;
+    var wis = document.querySelector('.wsc .fb-wis');
+    bak.textContent = '';
+    var aantal = 0;
+    for (var g in nu) {
+      var w = CFG.woord[g] && CFG.woord[g][nu[g]];
+      if (!w) continue;
+      aantal++;
+      var chip = document.createElement('span');
+      chip.className = 'fb-chip';
+      var t = document.createElement('span');
+      t.textContent = w.charAt(0).toUpperCase() + w.slice(1);
+      var k = document.createElement('button');
+      k.type = 'button';
+      k.className = 'fb-chip-uit';
+      k.setAttribute('aria-label', 'Wis de keuze ' + t.textContent);
+      k.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsr-kruis"/></svg>';
+      k.dataset.groep = g;
+      k.addEventListener('click', function () { wisGroep(this.dataset.groep); });
+      chip.appendChild(t); chip.appendChild(k);
+      bak.appendChild(chip);
+    }
+    if (!aantal) {
+      var leeg = document.createElement('span');
+      leeg.className = 'fb-chips-leeg';
+      leeg.textContent = bak.dataset.leeg || '';
+      bak.appendChild(leeg);
+    }
+    if (wis) wis.hidden = aantal === 0;
+  }
+
+  // Een vraag wissen betekent: geen enkel antwoord meer ingedrukt. De beslistabel
+  // valt dan terug op een regel met een sterretje, of op de standaardmatch.
+  function wisGroep(groep) {
+    var rij = document.querySelector('.wsc .keuzes[data-groep="' + groep + '"]');
+    if (!rij) return;
+    rij.querySelectorAll('.keuze').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+    kies();
   }
 
   /* ── het raster ── */
@@ -49,6 +94,8 @@
     });
     var t = document.querySelector('.wsc .telling');
     if (t) t.textContent = n + ' artikel' + (n === 1 ? '' : 'en');
+    var f = document.querySelector('.wsc .fb-telling');
+    if (f) f.textContent = n;
   }
 
   function vgltel() {
@@ -200,15 +247,21 @@
 
     document.querySelectorAll('.wsc .fb-wis').forEach(function (b) {
       b.addEventListener('click', function () {
-        document.querySelectorAll('.wsc .wsk').forEach(function (k) {
-          k.classList.remove('match');
-          var t = k.querySelector('.matchtag'); if (t) t.style.display = 'none';
-          var e = k.querySelector('.wsk-tag:not(.matchtag)'); if (e) e.style.display = '';
+        document.querySelectorAll('.wsc .keuzes .keuze').forEach(function (x) {
+          x.setAttribute('aria-pressed', 'false');
         });
-        var r = document.querySelector('.wsc .keuzeregel');
-        if (r) r.textContent = 'geen voorkeur ingesteld';
+        kies();
       });
     });
+
+    // Op een typepagina staat geen keuzehulp; dan heeft de regel "Jouw keuzes"
+    // niets te melden en verdwijnt hij, tenzij er nog een tip in staat.
+    if (!document.querySelector('.wsc .keuzes')) {
+      document.querySelectorAll('.wsc .fb-onder').forEach(function (r) {
+        r.classList.add('zonder-keuzes');
+        if (!r.querySelector('.fb-tip')) r.hidden = true;
+      });
+    }
 
     if (document.querySelector('.wsc [data-groep="cat"]')) tel();
     if (document.querySelector('.wsc .wsk-vgl')) vgltel();

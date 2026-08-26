@@ -141,6 +141,51 @@ overkoepelende pagina in plaats van naar één zone, en zegt dat ook.
    bestond al. De handle staat wel in de lijst: publiceer je de collectie, dan
    verschijnt de tegel vanzelf.
 
+## De kop van de pagina: zonekiezer en filterpaneel
+
+De bovenkant is opnieuw ontworpen naar een schets van Dustin. Twee blokken veranderden.
+
+**De zonekiezer** (blok 1) was een rij pillen, en is nu vier tegels: het gouden lijnicoon
+van de zone, een scheidingslijntje, de naam, het aantal in een rondje en een pijl. De zone
+waar je op staat is zwart met een gouden voet en een gevuld rondje. Daaronder staat de
+bevestigingsregel met een vinkje in een gouden schijfje. Het zone-blok heeft daarvoor een
+`icoon`-veld gekregen; in alle negen templates staan de vier iconen ingevuld.
+
+**Het filterpaneel** (blok 2) heeft twee regels. Boven: het label *Toon mij*, de vier
+categorieknoppen — elk met een eigen icoon en zijn aantal in een badge — het aantal
+resultaten, de vergelijkknop en de sorteerlijst. Onder: *Jouw keuzes* met de gemaakte
+keuzes als losse chips, *Wis alles*, en rechts een tip.
+
+Op de knop Bundels kan een lintje staan (`bundel_lint`, standaard "Meeste waarde") dat
+boven de rand uitsteekt. Op mobiel heeft de knoppenrij daarom extra ruimte tussen de
+rijen, anders botst het lintje tegen de knop erboven.
+
+### De chips zijn nieuw gedrag, niet alleen opmaak
+
+Eerst stond er één regel met alle keuzes achter elkaar en een knop *Wis keuzes* die alleen
+de matchmarkering weghaalde. Nu is er één chip per beantwoorde vraag, en het kruisje op een
+chip wist **alleen die vraag**: de knoppen van die vraag gaan uit, de beslistabel valt terug
+op een regel met een sterretje of op de standaardmatch. *Wis alles* doet dat voor alle
+vragen tegelijk. Staat er geen keuzehulp op de pagina — dat is zo op de typepagina's — dan
+verdwijnt de hele onderste regel, tenzij er nog een tip in staat.
+
+### De iconen
+
+De vier grote zone-iconen zijn de gegenereerde gouden lijniconen. De acht kleine
+UI-iconen — raster, trimmer, cadeau, mes, regelaars, fonkeling, kruisje, chevron — zijn
+met de hand als SVG in de sprite gezet, in dezelfde lijntaal als de bestaande (24×24,
+`stroke-width` 2.1, ronde uiteinden). Dat is bewust geen generatie: ze moeten
+`currentColor` erven — wit op de zwarte knop, donker op de rest — en scherp zijn op 16px.
+Een bitmap kan geen van beide.
+
+### Een naambotsing om te onthouden
+
+De slotsectie gebruikte `.zk` al voor zijn zonekaarten. Mijn eerste versie van de
+zonekiezer gebruikte diezelfde naam; die kaarten staan in een donkere sectie met
+`flex-direction:column`, en dat lekte in de nieuwe tegels voor elke eigenschap die ik niet
+zelf zette. De zonekiezer heet daarom `.zkaart`. Controleer bij een nieuwe klasse of hij
+elders in dit bestand al bestaat.
+
 ## De vergelijker en het sorteren
 
 Twee knoppen in de filterbalk deden niets. Verschillende oorzaken.
