@@ -40,9 +40,11 @@
   assign aanbod = mf.limited_offer.value
 
   comment
-    Het aantal reviews staat per product in custom.compare_info.reviews_label.
+    Het aantal reviews is winkelbreed, dus de sectie-instelling wint.
+    Zo hoef je bij een nieuwe stand maar op een plek te tellen.
+    custom.compare_info.reviews_label blijft de terugval per product.
   endcomment
-  assign tp_aantal = mf.compare_info.value.reviews_label | default: s.tp_score
+  assign tp_aantal = s.tp_score | default: mf.compare_info.value.reviews_label
 
   comment
     De vergelijkingsknop heeft alleen zin als er iets te vergelijken valt.
@@ -908,8 +910,8 @@
     { "type": "header", "content": "Trustpilot" },
     { "type": "checkbox", "id": "tp_tonen", "label": "Beoordeling tonen", "default": true },
     { "type": "text", "id": "tp_label", "label": "Oordeel", "default": "Uitstekend" },
-    { "type": "text", "id": "tp_cijfer", "label": "Cijfer", "info": "De winkelbrede Trustpilot-score. Nu 4,4 bij 968 reviews.", "default": "4,4" },
-    { "type": "text", "id": "tp_score", "label": "Aantal reviews", "info": "Terugval als custom.compare_info.reviews_label leeg is.", "default": "968 reviews" },
+    { "type": "text", "id": "tp_cijfer", "label": "Cijfer", "info": "De winkelbrede Trustpilot-score. Op 26-08-2026: 4,4 bij 975 reviews.", "default": "4,4" },
+    { "type": "text", "id": "tp_score", "label": "Aantal reviews", "info": "Wint van custom.compare_info.reviews_label. Rond af naar beneden op een tiental, dan klopt het langer.", "default": "970+ reviews" },
     { "type": "text", "id": "tp_bron", "label": "Bron bij het citaat", "default": "Trustpilot" },
     { "type": "text", "id": "koper_label", "label": "Label geverifieerde koper", "default": "Geverifieerde koper" },
     { "type": "text", "id": "proberen_label", "label": "Tweede regel onder de knop", "info": "Staat naast Veilig afrekenen. Leeg laten laat hem weg.", "default": "100 dagen proberen" },
@@ -934,7 +936,7 @@
     { "type": "text", "id": "pop_eyebrow", "label": "Bovenregel", "default": "Vergelijk de modellen" },
     { "type": "text", "id": "pop_titel", "label": "Kop \u2014 terugval", "info": "Wordt alleen gebruikt als het product geen popup_main_title heeft in compare_info.", "default": "Welke past bij jou?" },
     { "type": "textarea", "id": "pop_lead", "label": "Lead \u2014 terugval", "info": "Wordt alleen gebruikt als het product geen popup_lead heeft in compare_info." },
-    { "type": "text", "id": "pop_reviewregel", "label": "Reviewregel", "default": "4,4/5 uit 968 reviews" },
+    { "type": "text", "id": "pop_reviewregel", "label": "Reviewregel", "default": "4,4/5 uit 970+ reviews" },
     { "type": "textarea", "id": "pop_winst", "label": "Winstbalk \u2014 terugval", "info": "Terugval voor popup_winst in compare_info. [bedrag] wordt het prijsverschil met het uitgelichte model." },
     { "type": "text", "id": "pop_uitgelicht", "label": "Label op de uitgelichte kolom", "default": "Meest gekozen" },
     { "type": "text", "id": "pop_bestevoor", "label": "Aanhef bij Beste voor", "default": "Beste voor:" },

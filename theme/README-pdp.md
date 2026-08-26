@@ -242,7 +242,28 @@ index. Vegen met de vinger telt dan net zo goed mee als de pijlen.
 **Geen sterren per product.** Het ontwerp had er vier en een half plus &laquo;4,4&raquo;
 bij de koopstrook staan. Die score bestaat niet per product &mdash; na het weghalen
 van Loox is er alleen nog een winkelbrede Trustpilot-score. De strook toont nu
-`4,4 uit 968 Trustpilot-reviews` als winkelbrede regel, instelbaar in de sectie.
+`4,4 uit 970+ Trustpilot-reviews` als winkelbrede regel, instelbaar in de sectie.
+
+### Het reviewaantal staat op &eacute;&eacute;n plek, met een plus
+
+Trustpilot stond op 23 augustus op 966 reviews, op 24 augustus op 968 en op
+26 augustus op 975. Een exact getal in een tekstveld is dus de week erna al
+fout. Daarom staat er `970+ reviews`: vandaag waar, en waar het blijft, want
+het aantal loopt maar &eacute;&eacute;n kant op. Rond bij het bijwerken altijd naar beneden
+af op een tiental.
+
+De sectie las het aantal eerst uit `custom.compare_info.reviews_label` en pas
+daarna uit de instelling. Dat betekende 33 metaobjecten met elk drie
+vertalingen bijwerken voor &eacute;&eacute;n winkelbreed getal. Sinds nu wint de
+sectie-instelling `tp_score` en is `reviews_label` alleen nog de terugval als
+die leeg is. De regel in de vergelijkingspop-up staat los in `pop_reviewregel`
+en moet met de hand mee.
+
+Echt meebewegen kan Liquid niet: het rendert op de server en kan Trustpilot
+onderweg niet bellen. Wil je dat wel, dan is de nette route een shop-metafield
+dat een nachtelijke taak vult uit
+`https://widget.trustpilot.com/trustbox-data/5419b6a8b0d04a076446a9ad?businessUnitId=63c511d4e1339e2200c204a1&locale=nl-NL`,
+en dat de sectie leest in plaats van de instelling. Dat is nog niet gebouwd.
 
 ## Wat er aan de winkel zelf is veranderd
 
