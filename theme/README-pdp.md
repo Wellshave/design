@@ -138,6 +138,21 @@ het metafield weer op de oorspronkelijke drie zetten: `1859112894796`
 (100 dagen proef), `1859112763724` (2 jaar garantie), `1859112698188`
 (gratis verzending).
 
+## De appblokken in het koopvak
+
+In `templates/product.json` staan drie appblokken in de sectie. Ze staan alle
+drie op `"disabled": true`, dus ze renderen niet:
+
+| Blok | App | Wat het deed |
+|---|---|---|
+| `section_store_block_product_addons_3AFn8F` | Section Store | Toiletry bag en travelbag als aanvinkbare extra's. Stond al uit. |
+| `selleasy_lb_upsell_addon_block_GeTTn7` | Selleasy | &laquo;Vaak samen gekocht&raquo; met de Blade en de Trio Pack. Uitgezet op verzoek: het was een witte kaart midden in het donkere koopvak. |
+| `klarna_on_site_messaging_app_block_kMpXVH` | Klarna | Achteraf betalen bij de prijs. Stond al uit. |
+
+Ze blijven in het sjabloon staan, dus in de thema-editor zijn ze met &eacute;&eacute;n klik
+weer aan te zetten. Wat de Selleasy-kaart deed, hoort in blok 07
+&mdash; &laquo;maak het compleet&raquo; &mdash; en dan in de opmaak van de pagina zelf.
+
 ## Nog open
 
 * **`custom.buybox_quote` is alleen op de Groom Guard PRO gevuld.** Op de andere
