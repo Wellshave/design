@@ -852,7 +852,7 @@ footer p{margin:0;max-width:72ch}
 .zf-m .zf-hint em{font-size:14px;font-weight:500;letter-spacing:0;text-transform:none;
   color:rgba(17,17,17,.72)}
 /* de zonekiezer op mobiel: één veegbare rij in plaats van vijf regels, zodat
-   de kaart er direct onder past en je de wissel ziet gebeuren */
+   de foto en de kaart er samen onder passen */
 .zf-rail{position:relative;margin:0 -16px}
 .zf-chips{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x proximity;
   padding:2px 16px 4px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
@@ -888,11 +888,14 @@ footer p{margin:0;max-width:72ch}
 .zf-chip.aan{background:#F5D18A;border-color:#F5D18A;color:#111}
 .zf-chip.aan i{display:flex}
 .zf-chip.aan i svg{color:#F5D18A}
+/* De foto staat op de telefoon bóven de kaart. Tik je een zone aan, dan
+   wisselt de kaart direct onder je vinger; stond de kaart erboven, dan
+   gebeurde de wissel buiten beeld en leek er niets te veranderen.
+   De losse pijlregel ertussen is daardoor overbodig en staat uit. */
 .zf-m .zf-body{display:flex;flex-direction:column;gap:0}
-.zf-m .zf-kaart{order:1}
-.zf-m .zf-pijl{order:2}
-.zf-m .zf-fig{order:3}
-.zf-m .zf-fig{border-radius:16px}
+.zf-m .zf-fig{order:1}
+.zf-m .zf-kaart{order:2}
+.zf-m .zf-fig{border-radius:16px 16px 0 0}
 .zf-m .zf-vlak{aspect-ratio:1/1}
 .zf-m .zf-foto{object-position:50% 0}
 .zf-m .zf-label{display:none}
@@ -905,26 +908,36 @@ footer p{margin:0;max-width:72ch}
   border-radius:100px;padding:9px 16px;font-size:11.5px;font-weight:700;letter-spacing:.1em;
   text-transform:uppercase}
 .zf-m .zf-fighint{left:16px;bottom:16px;font-size:12px}
-.zf-pijl{display:flex;align-items:center;justify-content:center;gap:11px;
-  margin:16px 0 12px;position:relative;z-index:4}
-.zf-pijl em{font-style:normal;font-size:12.5px;color:rgba(17,17,17,.5)}
-.zf-pijl span{width:34px;height:34px;border-radius:50%;background:#F5D18A;color:#111;
-  display:flex;align-items:center;justify-content:center}
-.zf-pijl svg{width:16px;height:16px}
-.zf-m .zf-kaart{padding:22px 20px;margin-top:2px}
-.zf-m .zf-naam{font-size:26px}
-.zf-m .zf-claim{font-size:14.5px}
-.zf-m .zf-mid{grid-template-columns:1fr;gap:14px}
-.zf-m .zf-shot > img{max-width:210px}
-.zf-m .zf-feiten{flex-direction:row;gap:0}
-.zf-m .zf-feiten li{flex-direction:column;text-align:center;gap:8px;flex:1;min-width:0;
-  font-size:12.5px;line-height:135%;padding:0 6px}
-.zf-m .zf-feiten li + li{border-left:1px solid rgba(17,17,17,.1)}
-.zf-m .zf-well{width:34px;height:34px}
-.zf-m .zf-well svg{width:17px;height:17px}
-.zf-m .zf-prijs{justify-content:center}
-.zf-m .zf-cta{justify-content:center;padding:9px 9px 9px 18px;font-size:12px;letter-spacing:.07em}
-.zf-m .zf-alle{font-size:13px}
+.zf-pijl{display:none}
+.zf-m .zf-kaart{padding:16px 16px 18px;margin-top:0;border-top:0;
+  border-radius:0 0 16px 16px;background:rgba(255,255,255,.92)}
+.zf-m .zf-kop{gap:12px}
+.zf-m .zf-naam{font-size:23px}
+.zf-m .zf-claim{font-size:14px}
+/* wat naast elkaar kan, staat naast elkaar: het product links, de drie
+   feiten rechts. Scheelt een half scherm aan hoogte. */
+.zf-m .zf-mid{grid-template-columns:118px minmax(0,1fr);gap:14px;margin:2px 0}
+.zf-m .zf-shot{flex-direction:column;gap:8px;padding:0}
+.zf-m .zf-shot > img{max-width:100%}
+.zf-m .zf-badge{position:static;font-size:9.5px;letter-spacing:.06em;padding:6px 10px;
+  white-space:normal;text-align:center;line-height:130%}
+.zf-m .zf-feiten{flex-direction:column;gap:11px}
+.zf-m .zf-feiten li{gap:10px;font-size:12.5px;line-height:138%}
+.zf-m .zf-well{width:30px;height:30px}
+.zf-m .zf-well svg{width:15px;height:15px}
+/* prijs links, knop rechts — zonder extra omhulsel: het paneel wordt een
+   raster waarin alles de volle breedte pakt, behalve die twee. */
+.zf-m .zf-paneel{display:grid;grid-template-columns:auto minmax(0,1fr);
+  align-content:start;gap:11px 12px}
+.zf-m .zf-paneel > *{grid-column:1/-1}
+.zf-m .zf-prijs{grid-column:1;align-self:center}
+.zf-m .zf-cta{grid-column:2;align-self:center}
+.zf-m .zf-prijs b{font-size:23px}
+.zf-m .zf-cta{min-width:0;justify-content:space-between;padding:6px 6px 6px 15px;
+  font-size:10.5px;letter-spacing:.05em;line-height:125%}
+.zf-m .zf-cta span{width:32px;height:32px}
+.zf-m .zf-cta span svg{width:16px;height:16px}
+.zf-m .zf-alle{justify-self:center;font-size:12.5px;text-align:center;line-height:145%}
 .zf-m .zf-strip{padding:14px 4px}
 .zf-m .zf-strip > div{flex-direction:column;gap:8px;text-align:center;font-size:10.5px;
   font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:2px 4px;color:rgba(17,17,17,.72)}
