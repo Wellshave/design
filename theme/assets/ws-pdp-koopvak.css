@@ -110,6 +110,9 @@
 .ws-pdp .ws-rev .ws-wie{display:block;margin-top:7px;font-size:11.5px;color:var(--ws-w52)}
 .ws-pdp .ws-rev .ws-wie b{color:#fff;font-weight:700}
 
+.ws-pdp .ws-lead{margin:9px 0 0;font-size:14.5px;line-height:1.45;color:var(--ws-w52)}
+.ws-pdp .ws-tp .ws-cf{font-size:12.5px;font-weight:700;color:#fff}
+.ws-pdp .ws-pay .ws-pr{font-size:11.5px;font-weight:600;color:var(--ws-w72)}
 .ws-pdp .ws-prijs{display:flex;align-items:baseline;gap:13px;flex-wrap:wrap;margin-top:16px}
 .ws-pdp .ws-prijs .ws-nu{font-size:38px;font-weight:900;letter-spacing:-.035em;color:#fff;line-height:1}
 .ws-pdp .ws-prijs .ws-was{font-size:17px;color:var(--ws-w38);text-decoration:line-through;font-weight:600}
@@ -220,27 +223,82 @@
   .ws-pdp .ws-acc summary i::after{transition:none}}
 
 
-/* ---- de telefoon: de koopknop vóór de reviewkaart ---- */
+/* ---- de telefoon ----
+   Ontwerp: het koopvak als één donkere kaart, van boven naar beneden precies
+   de volgorde waarin je de beslissing neemt. Elk direct kind krijgt hier een
+   eigen order. Dat moet: zonder order valt een element terug op nul en komt
+   het vóór alles met order 1. Zo stonden de prijs en de appblokken tot nu toe
+   boven de productnaam.                                                     */
 @media screen and (max-width:749px){
   .ws-pdp .ws-pdp-grid{padding:12px;gap:12px}
   .ws-pdp .ws-bb{display:flex;flex-direction:column;padding:20px 18px 18px;border-radius:18px}
   .ws-pdp .ws-bb > .ws-strepen{order:0}
-  .ws-pdp .ws-bb > .ws-pil{order:1;align-self:flex-start}
+  .ws-pdp .ws-bb > .ws-pil{order:1}
   .ws-pdp .ws-bb > .ws-tp{order:2}
-  .ws-pdp .ws-bb > .ws-h1{order:3;font-size:27px}
-  .ws-pdp .ws-bb > .ws-sub{order:4;font-size:19px}
-  .ws-pdp .ws-bb > .ws-prijs{order:5}
-  .ws-pdp .ws-bb > .ws-besp{order:6;align-self:flex-start}
+  .ws-pdp .ws-bb > .ws-h1{order:3}
+  .ws-pdp .ws-bb > .ws-sub{order:4}
+  .ws-pdp .ws-bb > .ws-lead{order:5}
+  .ws-pdp .ws-bb > [id^="ProductPrice-"]{order:6}
   .ws-pdp .ws-bb > .ws-opties{order:7}
   .ws-pdp .ws-bb > .ws-usp{order:8}
   .ws-pdp .ws-bb > .ws-gift{order:9}
   .ws-pdp .ws-bb > .ws-vorm{order:10}
-  .ws-pdp .ws-bb > .ws-pay{order:11}
-  .ws-pdp .ws-bb > .ws-rev{order:12;margin-top:16px;padding-top:16px;border-top:1px solid var(--ws-lijn)}
+  .ws-pdp .ws-bb > .ws-apps{order:11}
+  .ws-pdp .ws-bb > .ws-pay{order:12}
   .ws-pdp .ws-bb > .ws-cta2{order:13}
-  .ws-pdp .ws-bb > .ws-tel{order:14}
-  .ws-pdp .ws-bb > .ws-acc{order:15}
+  .ws-pdp .ws-bb > .ws-rev{order:14;margin-top:16px;padding-top:16px;border-top:1px solid var(--ws-lijn)}
+  .ws-pdp .ws-bb > .ws-tel{order:15}
+  .ws-pdp .ws-bb > .ws-acc{order:16}
+
+  /* de gouden balk over de volle breedte: naam links, korting rechts */
+  .ws-pdp .ws-pil{display:flex;align-self:stretch;justify-content:space-between;align-items:center;
+    padding:4px;gap:8px}
+  .ws-pdp .ws-pil b{font-size:13px;letter-spacing:.04em}
+  .ws-pdp .ws-pil .ws-a{padding:6px 6px 6px 12px;min-width:0;overflow:hidden;text-overflow:ellipsis}
+  .ws-pdp .ws-pil .ws-z{padding:9px 14px;flex:none}
+
+  .ws-pdp .ws-tp{gap:7px}
+  .ws-pdp .ws-tp .ws-sc{margin-left:6px}
+  .ws-pdp .ws-bb > .ws-h1{font-size:31px}
+  .ws-pdp .ws-bb > .ws-sub{font-size:20px}
+
+  /* prijs, oude prijs en het bespaarde bedrag op één regel. Het rode
+     kortingsplaatje valt weg: dat percentage staat al in de gouden balk. */
+  .ws-pdp .ws-bb > [id^="ProductPrice-"]{display:flex;flex-wrap:wrap;align-items:center;
+    gap:10px 12px;margin-top:16px}
+  .ws-pdp .ws-prijs{margin-top:0;gap:10px}
+  .ws-pdp .ws-prijs .ws-nu{font-size:34px}
+  .ws-pdp .ws-prijs .ws-off{display:none}
+  .ws-pdp .ws-besp{margin-top:0}
+
+  /* de beloftes tussen twee haarlijnen, drie stuks; meer past niet zonder
+     dat de knop van het scherm valt */
+  .ws-pdp .ws-usp{margin-top:18px;padding:17px 0;gap:14px;
+    border-top:1px solid rgba(255,255,255,.13);border-bottom:1px solid rgba(255,255,255,.13)}
+  .ws-pdp .ws-usp li:nth-child(n+4){display:none}
+
+  /* de voorraadregel hoort bóven de knop: eerst weten dat het kan, dan pas de
+     knop. Zonder kader, want het is een mededeling en geen aanbod. */
+  .ws-pdp .ws-vorm{display:flex;flex-direction:column;margin-top:16px}
+  .ws-pdp .ws-vrd{order:-1;margin:0 0 13px;border:0;background:none;padding:0;font-size:12.5px}
+  .ws-pdp .ws-cta{margin-top:0;font-size:13px;letter-spacing:.08em;padding:20px 10px}
+
+  /* onder de knop alleen tekst. De betaallogo's staan lager op de pagina in
+     hun eigen blok; hier zijn ze ruis naast de twee zinnen die tellen. */
+  .ws-pdp .ws-pay{justify-content:center;gap:6px 10px;margin-top:14px}
+  .ws-pdp .ws-pay .ws-mk,.ws-pdp .ws-pay .ws-sep{display:none}
+  .ws-pdp .ws-pay .ws-vl{margin-top:0;flex-basis:auto}
+  .ws-pdp .ws-pay .ws-pr::before{content:'\00b7';margin-right:9px;color:var(--ws-w38)}
+
+  /* de vergelijkingsknop is hier een tekstlink, geen tweede knop naast de
+     koopknop. Twee knoppen onder elkaar vechten om dezelfde aandacht. */
+  .ws-pdp .ws-cta2{border:0;background:none;padding:12px 0 2px;margin-top:6px;gap:7px;
+    color:var(--ws-gold3);font-size:13px;font-weight:700;letter-spacing:0;text-transform:none}
+  .ws-pdp .ws-cta2 svg{display:none}
+  .ws-pdp .ws-cta2::after{content:'\203a';font-size:19px;line-height:1;margin-top:-2px}
+
   .ws-pdp .ws-stg{padding:16px 16px 14px;border-radius:16px}
+  .ws-pdp .ws-tg{top:16px;left:16px;border-radius:100px;padding:10px 18px;font-size:11px}
 }
 
 /* ---- podium als schuifbaan; één dia per keer ---- */

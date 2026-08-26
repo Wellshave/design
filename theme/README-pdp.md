@@ -122,6 +122,7 @@ ook het live thema.
 | `popup_lead` en `popup_winst` op de definitie `compare_info` | De kop, de lead en de winstbalk van de pop-up stonden in sectie-instellingen en waren dus winkelbreed: een neustrimmer kreeg de Groom Guard-tekst te zien. Nu per product. Gevuld voor de Groom Guard-familie en de vier neustrimmers. |
 | Vertalingen en / de / fr | De winkel heeft vier gepubliceerde talen; nl is de hoofdtaal. De sectie drukt af wat de winkel teruggeeft voor de taal waarin je kijkt, dus op `/en` staat de Engelse vertaling. `popup_lead`, `popup_winst`, `best_for` en `popup_decision` waren nieuw en hadden nog geen vertaling &mdash; de Engelse pagina was daardoor half Nederlands. Vertaald voor de Groom Guards en de vier neustrimmers, plus het label van `morgen-in-huis`. |
 | Engelse kop van de PRO stond op een ander product | `popup_main_title` in het Engels was &laquo;Compare Wellshave Flex Guard PRO&raquo; op een Groom Guard-pagina. Nu &laquo;Which Groom Guard suits you?&raquo; in en / de / fr, gelijk aan het Nederlands. Ook `product_title`, `toggle_title` en `popup_title` stonden daar nog op &laquo;Pro&raquo;. |
+| `custom.hero_promise` en `custom.hero_lead` | Nieuwe velddefinities voor de twee regels onder de productnaam: de gouden belofte en de grijze zin eronder. Gevuld op de Groom Guard en de PRO. Bestonden nog niet, dus geen enkel thema leest ze &mdash; dit is niet zichtbaar op de live site. |
 | Neustrimmers Basic&ndash;Ultimate herschreven | De vier voordeeltitels per model waren losse marketingregels, dus de tabel ontdubbelde nergens. Nu een gedeelde woordenlijst van zeven rijen, `includes_previous` aan bij Premium, Advance en Ultimate, en `toggle_subtitle`, `best_for`, `popup_decision`, `popup_lead` en `popup_winst` opnieuw geschreven. In nl, en, de en fr. |
 | Vier nieuwe `compare_info`-invoeren | `neustrimmer-essential`, `-elite`, `-platinum` en `-ultra` bestonden niet, dus daar deed de vergelijkingsknop niets. Aangemaakt met dezelfde opzet en gekoppeld via `custom.compare_info`; `custom.compare_products` zet elke pagina naast de 4in1 Ultra, en de Ultra naast de Platinum. **Dit is zichtbaar op de live site**: die vier productpagina&rsquo;s hadden geen vergelijkblok en hebben dat nu wel. Terugdraaien is beide metafields daar weer leegmaken. |
 | `includes_previous` op de definitie `compare_info` | Nieuw vinkje: &laquo;bevat alles van de goedkopere modellen&raquo;. Zonder dat vinkje betekende &laquo;niet vermeld&raquo; in de tabel hetzelfde als &laquo;niet aanwezig&raquo;, en stond er bij de PRO een streepje op Skin-Safe mes. Aangezet op `groom-guard-pro`. |
@@ -143,6 +144,11 @@ het metafield weer op de oorspronkelijke drie zetten: `1859112894796`
   hetzelfde. Van de honderd recentste Nederlandse Trustpilot-reviews gaan er vijf
   over een product; waar er geen is, hoort het citaat leeg te blijven &mdash; dan valt
   de kaart weg.
+* **Productmetafields worden in deze winkel niet vertaald.** `subtitle`,
+  `product_usp`, `hero_promise`, `hero_lead` en `shipping_information` staan
+  in elke taal in het Nederlands; alleen titel, omschrijving en de
+  metaobjectvelden hebben vertalingen. Dat is bestaand gedrag, geen nieuw
+  gat, maar het valt op zodra de rest w&eacute;l vertaald is.
 * **Essential, Elite en Platinum zijn in de tabel niet van elkaar te
   onderscheiden.** Hun specificaties noemen alle drie dezelfde zones &mdash; neus,
   oren en wenkbrauwen &mdash; terwijl ze 1-, 2- en 3-in-1 heten. Wat het tweede en

@@ -17,7 +17,13 @@
   assign s = section.settings
   assign mf = product.metafields.custom
 
+  comment
+    De gouden regel en de grijze regel eronder zijn twee velden. Staat
+    hero_promise leeg, dan pakt de gouden regel subtitle en blijft de grijze
+    regel weg; dan staat er nooit twee keer hetzelfde.
+  endcomment
   assign belofte = mf.hero_promise.value | default: mf.subtitle.value
+  assign lead = mf.hero_lead.value
 
   comment
     Het citaat komt per product uit custom.buybox_quote. De sectie-instelling
@@ -76,7 +82,14 @@
           <img class="ws-ghost" src="{{ s.merk | image_url: width: 700 }}" alt="" loading="lazy" width="700" height="700">
         {%- endif -%}
 
-        {%- if s.tag != blank -%}<span class="ws-tg">{{ s.tag }}</span>{%- endif -%}
+        {%- comment -%}
+          Het label hoort bij het product, niet bij de winkel. Het verschijnt
+          alleen als dit model in compare_info als meest gekozen staat; anders
+          zou het op elke productpagina staan en betekent het niets meer.
+        {%- endcomment -%}
+        {%- if s.tag != blank and mf.compare_info.value.is_popuplar -%}
+          <span class="ws-tg">{{ s.tag }}</span>
+        {%- endif -%}
 
         <ul class="ws-baan" id="ws-baan-{{ section.id }}">
           {%- for media in product.media limit: 10 -%}
@@ -147,12 +160,14 @@
               {%- for i in (1..5) -%}<i><svg><use href="#ws-pdp-ster-{{ section.id }}"/></svg></i>{%- endfor -%}
             </span>
             {%- if s.tp_label != blank -%}<span class="ws-lb">{{ s.tp_label }}</span>{%- endif -%}
-            {%- if tp_aantal != blank -%}<span class="ws-sc">&middot; {{ tp_aantal }}</span>{%- endif -%}
+            {%- if s.tp_cijfer != blank -%}<span class="ws-cf">&middot; {{ s.tp_cijfer }}</span>{%- endif -%}
+            {%- if tp_aantal != blank -%}<span class="ws-sc">{{ tp_aantal }}</span>{%- endif -%}
           </div>
         {%- endif -%}
 
         <div class="ws-h1">{{ product.title }}</div>
         {%- if belofte != blank -%}<div class="ws-sub">{{ belofte }}</div>{%- endif -%}
+        {%- if lead != blank -%}<p class="ws-lead">{{ lead }}</p>{%- endif -%}
 
         {%- if citaat != blank -%}
           <div class="ws-rev">
@@ -296,6 +311,7 @@
         <div class="ws-pay">
           {% render 'payments' %}
           <span class="ws-vl"><svg><use href="#ws-pdp-slot-{{ section.id }}"/></svg>{{ s.veilig_label }}</span>
+          {%- if s.proberen_label != blank -%}<span class="ws-pr">{{ s.proberen_label }}</span>{%- endif -%}
         </div>
 
         {%- comment -%} appblokken: Klarna, upsell-apps. Sleepbaar in de editor. {%- endcomment -%}
@@ -823,9 +839,11 @@
     { "type": "header", "content": "Trustpilot" },
     { "type": "checkbox", "id": "tp_tonen", "label": "Beoordeling tonen", "default": true },
     { "type": "text", "id": "tp_label", "label": "Oordeel", "default": "Uitstekend" },
+    { "type": "text", "id": "tp_cijfer", "label": "Cijfer", "info": "De winkelbrede Trustpilot-score. Nu 4,4 bij 968 reviews.", "default": "4,4" },
     { "type": "text", "id": "tp_score", "label": "Aantal reviews", "info": "Terugval als custom.compare_info.reviews_label leeg is.", "default": "968 reviews" },
     { "type": "text", "id": "tp_bron", "label": "Bron bij het citaat", "default": "Trustpilot" },
     { "type": "text", "id": "koper_label", "label": "Label geverifieerde koper", "default": "Geverifieerde koper" },
+    { "type": "text", "id": "proberen_label", "label": "Tweede regel onder de knop", "info": "Staat naast Veilig afrekenen. Leeg laten laat hem weg.", "default": "100 dagen proberen" },
     { "type": "header", "content": "Klantcitaat" },
     { "type": "paragraph", "content": "Komt per product uit custom.buybox_quote en custom.buybox_quote_author. Hieronder alleen de terugval; laat beide leeg als er voor dit product geen echte productreview is, dan valt de kaart weg." },
     { "type": "textarea", "id": "citaat", "label": "Citaat" },
