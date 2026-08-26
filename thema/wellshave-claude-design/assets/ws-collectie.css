@@ -67,7 +67,8 @@
 .wsc .zkaart-ico{flex:none;width:52px;height:44px;display:grid;place-items:center;
   border-right:1px solid var(--ink-10);padding-right:14px}
 .wsc .zkaart-ico img{width:100%;height:100%;object-fit:contain}
-.wsc .zkaart-naam{flex:1;min-width:0;font-size:14.5px;line-height:1.25;letter-spacing:-.01em}
+.wsc .zkaart-naam{flex:1;min-width:0;font-size:14.5px;line-height:1.25;letter-spacing:-.01em;
+  overflow-wrap:anywhere}
 .wsc .zkaart-tel{flex:none;width:32px;height:32px;border-radius:100px;display:grid;place-items:center;
   border:1.5px solid var(--bronze);color:var(--bronze);font-size:13px;font-weight:800}
 .wsc .zkaart-pijl{flex:none;width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2.2;
@@ -90,13 +91,48 @@
 
 @container (max-width:980px){
   .wsc .zonekiezer{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-}
-@container (max-width:560px){
-  .wsc .zonekiezer{grid-template-columns:1fr;gap:8px;padding:12px 0 2px}
-  .wsc .zkaart{padding:11px 13px;gap:11px}
-  .wsc .zkaart-ico{width:42px;height:36px;padding-right:11px}
+  .wsc .zkaart{padding:12px 13px;gap:11px}
+  .wsc .zkaart-ico{width:44px;height:38px;padding-right:11px}
   .wsc .zkaart-naam{font-size:13.5px}
   .wsc .zkaart-tel{width:28px;height:28px;font-size:12px}
+  .wsc .zkaart-pijl{width:15px;height:15px}
+}
+
+/* Op de telefoon worden de tegels een rij ronde iconen met de naam eronder, die je
+   opzij schuift. Vier tegels onder elkaar kostte een half scherm scrollen voordat de
+   producten in beeld kwamen; zo staat de hele keuze in één blik boven de vouw. De
+   opmaak doet dat zelf — de markup is dezelfde als op desktop. */
+@container (max-width:700px){
+  .wsc .zonekiezer{
+    display:flex;flex-wrap:nowrap;overflow-x:auto;gap:16px;
+    padding:14px 18px 8px;margin:0 -18px;
+    scroll-snap-type:x proximity;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .wsc .zonekiezer::-webkit-scrollbar{display:none}
+  .wsc .zkaart{
+    flex:none;width:74px;flex-direction:column;align-items:center;gap:8px;
+    border:0;background:none;padding:0;box-shadow:none;scroll-snap-align:start}
+  .wsc .zkaart:hover{border:0;box-shadow:none}
+  .wsc .zkaart-ico{
+    width:66px;height:66px;border:1px solid var(--ink-10);border-right-width:1px;
+    border-radius:100px;padding:13px;background:var(--paper);
+    transition:border-color .18s ease,background .18s ease}
+  .wsc .zkaart-naam{
+    flex:none;font-size:11px;line-height:1.25;text-align:center;font-weight:700;
+    letter-spacing:-.005em;color:var(--ink-60)}
+  .wsc .zkaart-tel{
+    position:absolute;top:-3px;right:0;width:22px;height:22px;font-size:11px;
+    background:var(--paper)}
+  /* Een zonetegel zonder icoon heeft geen rondje om het aantal boven te hangen;
+     dan zet het badge zich weer gewoon in de rij, in plaats van op de naam. */
+  .wsc .zkaart:not(:has(.zkaart-ico)) .zkaart-tel{position:static;margin-top:2px}
+  .wsc .zkaart-pijl{display:none}
+  .wsc .zkaart.nu{background:none;box-shadow:none}
+  .wsc .zkaart.nu::after{display:none}
+  .wsc .zkaart.nu .zkaart-ico{
+    background:var(--carbon);border-color:var(--carbon);
+    box-shadow:0 0 0 2px var(--paper),0 0 0 4px var(--bronze)}
+  .wsc .zkaart.nu .zkaart-ico img{filter:brightness(0) invert(1)}
+  .wsc .zkaart.nu .zkaart-naam{color:var(--ink)}
   .wsc .zonemelding{align-items:flex-start;padding:12px 0 14px;font-size:12.5px}
 }
 .wsc .keuzes{display:flex;gap:8px;flex-wrap:wrap}
@@ -650,12 +686,19 @@
   .wsc .filterbalk{padding:16px 14px;margin-bottom:24px;border-radius:14px}
   .wsc .fb-rij{gap:11px}
   .wsc .fb-onder{margin-top:14px;padding-top:14px;flex-direction:column;align-items:flex-start}
-  /* het lintje steekt boven de knop uit; in twee kolommen heeft de rij daar
-     verticaal ruimte voor nodig, anders botst het tegen de knop erboven */
-  .wsc .filters{gap:22px 8px;width:100%}
-  .wsc .filter{flex:1 1 calc(50% - 4px);justify-content:flex-start;padding:10px 12px;font-size:12.5px;gap:8px}
+  /* De knoppen staan op de telefoon naast elkaar en schuiven opzij, niet in twee
+     rijen onder elkaar: dat scheelt de bezoeker verticale scroll voordat hij de
+     producten ziet. Het lintje steekt boven de knop uit, dus de strip heeft ruimte
+     aan de bovenkant nodig — een scroller snijdt anders af wat erboven uitsteekt. */
+  .wsc .filters{
+    flex-wrap:nowrap;overflow-x:auto;gap:8px;width:auto;
+    margin:0 -14px;padding:14px 14px 2px;
+    scroll-snap-type:x proximity;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .wsc .filters::-webkit-scrollbar{display:none}
+  .wsc .filter{flex:none;justify-content:flex-start;padding:10px 12px;font-size:12.5px;gap:8px;
+    scroll-snap-align:start;white-space:nowrap}
   .wsc .filter svg{width:17px;height:17px}
-  .wsc .filter i{min-width:23px;height:23px;font-size:11px;margin-left:auto}
+  .wsc .filter i{min-width:23px;height:23px;font-size:11px}
   .wsc .filter-lint{font-size:8.5px;padding:4px 9px 6px}
   .wsc .fb-streep{display:none}
   .wsc .fb-rechts{width:100%;margin-left:0;gap:10px;flex-wrap:wrap}

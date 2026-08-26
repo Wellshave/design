@@ -160,6 +160,27 @@ Op de knop Bundels kan een lintje staan (`bundel_lint`, standaard "Meeste waarde
 boven de rand uitsteekt. Op mobiel heeft de knoppenrij daarom extra ruimte tussen de
 rijen, anders botst het lintje tegen de knop erboven.
 
+### Op de telefoon schuift het opzij in plaats van omlaag
+
+Vier zonetegels onder elkaar plus vier filterknoppen in twee rijen kostte bijna een half
+scherm voordat de eerste productkaart in beeld kwam. Op de telefoon zijn het daarom twee
+horizontale strips.
+
+De zones worden een rij ronde iconen met de naam eronder en het aantal als badge op de
+cirkel; de zone waar je staat is een donkere cirkel met een gouden ring. De filterknoppen
+staan naast elkaar en schuiven opzij. Beide alleen met opmaak — de markup is op elke
+breedte dezelfde, dus er is niets dat uit de pas kan gaan lopen.
+
+Twee dingen om te weten als je hieraan sleutelt. Een scroller snijdt af wat erboven
+uitsteekt, dus de knoppenstrip heeft `padding-top` nodig voor het lintje op Bundels. En een
+zonetegel zonder icoon heeft geen cirkel om het badge boven te hangen; die valt terug op
+`position:static` (`:not(:has(.zkaart-ico))`), zodat het aantal nooit op de naam belandt.
+De tegel *Alle zones* op de overzichtspagina had geen icoon en liep daarop stuk; die heeft
+er nu een van zichzelf — de vier zone-iconen in een 2×2, `ws-zone-icoon-alles.png`.
+
+Los daarvan: een lange zonenaam liep in het tegelformaat buiten zijn vak en kwam onder het
+rondje. `overflow-wrap:anywhere` op de naam houdt hem binnen.
+
 ### De chips zijn nieuw gedrag, niet alleen opmaak
 
 Eerst stond er één regel met alle keuzes achter elkaar en een knop *Wis keuzes* die alleen
