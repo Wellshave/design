@@ -144,6 +144,10 @@ ook het live thema.
 | Bundels herschreven op doosinhoud | De vijf Groom Guard-pagina&rsquo;s (Groom Guard, PRO, Body &amp; Nose Bundel, Shave Package 3.0 en Ultimate) vulden hun vier voordeelvelden met unique selling points, die per product anders geformuleerd waren. Nu is elke rij een voorwerp uit `custom.included_box` van dat product: bodygroomer, SkinSafe&trade;-mes, oplaadstation, opzetkammen, Foil Shaver-opzetstuk, neustrimmer, detailtrimmer- en shaveropzetstuk, opbergtas. Acht namen, letterlijk gelijk, dus de tabel ontdubbelt. Plus `toggle_subtitle`, `best_for`, `popup_main_title`, `popup_lead`, `popup_winst` en `popup_decision`, in nl, en, de en fr. |
 | `compare_products` van de PRO en de Body &amp; Nose Bundel | De PRO stond naast zichzelf en de Body &amp; Nose naast zichzelf. Nu allebei naast de Shave Package Ultimate, de duurste. De Groom Guard blijft naast de PRO, de 3.0 en de Ultimate blijven naast elkaar. |
 | `Travelbag` en `Toilettas` heten allebei `Opbergtas` | De Shave Package 3.0 heeft in `included_box` een Travelbag, de Ultimate een Toilettas &mdash; twee metaobjecten met twee namen. Als losse rijen zou de Ultimate onder de erfregel een vinkje krijgen bij allebei, dus twee tassen. Beide rijen heten nu `Opbergtas`. **Alleen in `compare_info`**; de metaobjecten in `included_box` houden hun eigen naam en foto. |
+| Head shavers op doosinhoud, plus twee nieuwe invoeren | De Head Shaver Deluxe had oordelen als rijen (&laquo;Snel en comfortabel scheren&raquo;, &laquo;Ergonomisch design&raquo;) en een Engelse `popup_main_title`. Nu vier rijen uit `included_box`: 7D scheerapparaat, scheerkop, haartrimmer-/neus-/oorhaaropzetstuk, gezichtsmassager en reinigingsborstel. De extra&rsquo;s zijn de trap: extra scheerkop &rarr; toilettas &rarr; travelbag. `skull-deal-2-0` (3172045226316) en `skull-deal-3-0` (3172045521228) zijn **nieuw aangemaakt**; die twee pagina&rsquo;s hadden geen `compare_info`, dus daar deed de vergelijkingsknop niets. **Zichtbaar op de live site.** Terugdraaien is `custom.compare_info` daar weer leegmaken. |
+| Skull Deal 1.0 heette in de pop-up nog anders | `product_title`, `toggle_title` en `popup_title` van `head-shaver-deluxe-extra-scheerkop` stonden op &laquo;Head Shaver Deluxe + Extra Scheerkop&raquo;, de naam van v&oacute;&oacute;r de hernoeming van het product. De tabelkop en de knoppen lezen die velden. Nu Skull Deal 1.0. De handle van het metaobject blijft de oude. |
+| `compare_products` van de head shavers | Elke pagina staat nu naast de Skull Deal 3.0, de duurste (69,95). De 3.0 zelf staat naast de 2.0, want naast zichzelf kan niet &mdash; dezelfde uitzondering als bij de neustrimmer Ultra. |
+| Tondeuses op doosinhoud | Elegant en Deluxe hebben **identieke** `included_box`: tondeuse, 6 opzetkammen, kapperscape, kam, oplaadkabel. Er zit dus niets extra&rsquo;s bij en het verschil is alleen de motor. Vier gedeelde rijen plus de 2838 brushless motor; `best_for` en `popup_decision` waren leeg en zijn gevuld. In nl, en, de en fr. |
 | Vierde `store_usp`: Morgen in huis | De voetbalk van de pop-up toont wat er in `custom.store_usp` staat, en dat waren er drie. Nieuw metaobject met een icoon in dezelfde stijl als de andere drie (20 bij 20, streek `#BC813E`), toegevoegd aan de lijst op de Groom Guard en de PRO. |
 
 Let op bij die laatste. `custom.store_usp` wordt ook gelezen door het
@@ -204,6 +208,16 @@ weer aan te zetten. Wat de Selleasy-kaart deed, hoort in blok 07
   oplaadkabel**, terwijl de 3.0 die w&eacute;l noemt en het apparaat hetzelfde is.
   In de tabel komt dat goed omdat de duurdere kolom erft, maar het veld zelf
   klopt niet.
+* **Twee typefouten staan live in `included_box`.** De scheerkop heet
+  `Scheerkoop 7D` (2062199554380) en bij de Skull Deals `2x Scheerkoop 7D`
+  (3067926511948); de Tondeuse Deluxe heeft een item `Tonduese`
+  (2062996799820). Die namen staan in de dropdown &laquo;wat zit er in de doos&raquo;
+  op de productpagina, ook in het live thema. Niet aangeraakt: het is live
+  klantcopy buiten de opdracht. Verbeteren betekent ook de en / de / fr
+  opnieuw registreren.
+* **De Wellshave Tondeuse Pro&trade; (86,95) heeft geen `compare_info`, geen
+  `included_box` en geen `specification`.** De vergelijkingsknop doet daar niets
+  en er valt geen tabel voor te bouwen zolang die velden leeg zijn.
 * **De prijsopmaak van de winkel heeft geen €-teken** (`moneyFormat` staat op
   `{{amount_with_comma_separator}}`). De sectie volgt de winkel, dus er staat
   `59,95`. Wordt de instelling aangepast, dan komt het teken er overal bij.
