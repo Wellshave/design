@@ -46,8 +46,31 @@
 .ws-ov__teller b{display:block;font-size:19px;font-weight:700;letter-spacing:-.01em;color:#fff}
 .ws-ov__teller em{display:block;font-style:normal;font-size:10.5px;font-weight:600;
   letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.62);margin-top:3px}
+/* De knop staat al in de hero. Zeven van de acht vergeleken merken zetten hun
+   eerste CTA boven de vouw; bij ons stond hij pas onderaan de pagina. */
+.ws-ov__heroknop{display:flex;flex-wrap:wrap;align-items:center;gap:18px}
 
-/* ── 2. het verhaal ── licht en open: beeld links, een ondertekend stuk rechts.
+/* ── 2. wat er voor jou verandert ── donkere band die aan de hero vastzit.
+   Overgenomen van Achaté en Moov, die allebei direct onder de hero drie
+   genummerde uitkomsten zetten. Bij hen zijn het verzonnen percentages; hier
+   staat onder elk cijfer een bron die je kunt nawijzen. ── */
+.ws-ov__band{background:#0B0B0A;color:#fff;padding:0 44px 62px;position:relative;overflow:hidden}
+.ws-ov__bandin{max-width:1240px;margin:0 auto;position:relative;z-index:1;
+  border-top:1px solid rgba(245,209,138,.22);padding-top:44px}
+.ws-ov__bandkop{display:flex;flex-direction:column;align-items:flex-start;gap:13px;
+  margin-bottom:34px;max-width:60ch}
+.ws-ov__drieuit{display:grid;grid-template-columns:repeat(var(--ws-kol,3),minmax(0,1fr));gap:22px}
+.ws-ov__uit{display:flex;flex-direction:column;gap:11px;min-width:0;padding:24px 24px 26px;
+  border:1px solid rgba(255,255,255,.11);border-radius:14px;background:rgba(255,255,255,.022)}
+.ws-ov__anker{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.ws-ov__anker b{font-size:44px;line-height:1;font-weight:700;letter-spacing:-.04em;color:#F5D18A;
+  font-variant-numeric:tabular-nums}
+.ws-ov__anker em{font-style:normal;font-size:10.5px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:rgba(255,255,255,.5);line-height:150%}
+.ws-ov__uith{font-size:17px;line-height:126%;font-weight:600;letter-spacing:-.02em;color:#fff}
+.ws-ov__uitt{font-size:13.5px;line-height:162%;color:rgba(255,255,255,.58)}
+
+/* ── 3. het verhaal ── licht en open: beeld links, een ondertekend stuk rechts.
    Bewust geen kader eromheen, zodat het naast het omkaderde vragenblok
    hieronder als een ander soort blok leest en niet als twee dezelfde. ── */
 .ws-ov__verhaal{background:#F7F2E9;padding:64px 44px 30px}
@@ -86,7 +109,33 @@
 .ws-ov__hand em{display:block;font-style:normal;font-size:13px;color:rgba(17,17,17,.55);
   margin-top:4px}
 
-/* ── 3. de drie vragen ── licht, in een gouden kader ── */
+/* ── 4. de reis ── donkere tijdlijn. Cloudpillo zet zijn "Onze reis" direct na
+   het oprichtersverhaal, met een foto per fase; hier is het een horizontale
+   lijn met knopen, en de jaartallen komen uit de aanmaakdatums van de
+   producten in de winkel zelf. ── */
+.ws-ov__reis{background:#0B0B0A;color:#fff;padding:70px 44px 74px;position:relative;overflow:hidden}
+.ws-ov__reis::before{content:"";position:absolute;left:50%;top:-30%;width:120%;height:120%;
+  transform:translateX(-50%);pointer-events:none;
+  background:radial-gradient(50% 38% at 50% 40%,rgba(245,209,138,.09) 0%,rgba(11,11,10,0) 70%)}
+.ws-ov__reisin{max-width:1240px;margin:0 auto;position:relative;z-index:1}
+.ws-ov__reiskop{text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px;
+  margin-bottom:52px}
+.ws-ov__fasen{display:grid;grid-template-columns:repeat(var(--ws-kol,4),minmax(0,1fr));gap:24px;
+  position:relative}
+/* de lijn loopt door alle knopen heen, achter de kolommen langs */
+.ws-ov__fase::before{content:"";position:absolute;left:6px;right:-24px;top:6px;height:1px;
+  background:rgba(245,209,138,.34);pointer-events:none}
+.ws-ov__fase:last-child::before{display:none}
+.ws-ov__fase{display:flex;flex-direction:column;gap:12px;min-width:0;position:relative;
+  padding-top:30px}
+.ws-ov__knoop{position:absolute;left:0;top:0;width:13px;height:13px;border-radius:50%;
+  background:#0B0B0A;border:2px solid #F5D18A;box-shadow:0 0 0 5px rgba(245,209,138,.12)}
+.ws-ov__jaar{font-size:26px;font-weight:700;letter-spacing:-.03em;line-height:1;color:#F5D18A;
+  font-variant-numeric:tabular-nums}
+.ws-ov__faseh{font-size:15px;line-height:128%;font-weight:600;letter-spacing:-.018em;color:#fff}
+.ws-ov__faset{font-size:13.5px;line-height:162%;color:rgba(255,255,255,.56)}
+
+/* ── 5. de drie vragen ── licht, in een gouden kader ── */
 .ws-ov__vragen{background:#F7F2E9;padding:44px 34px}
 .ws-ov__rand{position:relative;border:1px solid rgba(188,129,62,.32);border-radius:20px;
   background:linear-gradient(165deg,#FBF7F0 0%,#F6EFE3 55%,#F2E8D8 100%);
@@ -120,7 +169,7 @@
 .ws-ov__vraagslot span{min-width:0}
 .ws-ov__vraagslot b,.ws-ov__vraagslot strong{color:rgba(17,17,17,.8);font-weight:600}
 
-/* ── 4. de werkwijze ── donker met een gouden gloed, genummerd ── */
+/* ── 6. de werkwijze ── donker met een gouden gloed, genummerd ── */
 .ws-ov__werk{background:#0B0B0A;color:#fff;padding:70px 44px;position:relative;overflow:hidden}
 .ws-ov__werk::before{content:"";position:absolute;left:50%;top:-40%;width:120%;height:120%;
   transform:translateX(-50%);pointer-events:none;
@@ -153,7 +202,37 @@
 .ws-ov__stem b{display:block;font-weight:600;font-size:11px;letter-spacing:.13em;
   text-transform:uppercase;color:rgba(245,209,138,.8);margin-top:7px}
 
-/* ── 5. wat wij wel en niet beloven ── donker paneel op licht ── */
+/* ── 7. wat klanten zeggen ── licht. Vijf van de acht vergeleken merken geven
+   reviews een eigen sectie; bij ons stond er één citaat verstopt in stap 01.
+   De cijfers in de balk zijn per product, want een gemiddelde over de hele
+   winkel kun je nergens aanwijzen. ── */
+.ws-ov__stemmen{background:#F7F2E9;padding:64px 34px 30px}
+.ws-ov__stemmenin{max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:32px}
+.ws-ov__driestem{display:grid;grid-template-columns:repeat(var(--ws-kol,3),minmax(0,1fr));gap:18px}
+.ws-ov__kaart{background:linear-gradient(165deg,#FBF7F0 0%,#F6EFE3 55%,#F2E8D8 100%);
+  border:1px solid rgba(188,129,62,.3);border-radius:16px;padding:28px 26px 24px;
+  display:flex;flex-direction:column;gap:14px;min-width:0}
+.ws-ov__sterren{display:flex;gap:3px;color:#BC813E}
+.ws-ov__sterren svg{width:15px;height:15px;fill:currentColor}
+.ws-ov__kaartt{font-size:15px;line-height:164%;color:rgba(17,17,17,.78);flex:1}
+.ws-ov__kaartb{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;padding-top:14px;
+  border-top:1px solid rgba(188,129,62,.22)}
+.ws-ov__kaartb b{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:#111}
+.ws-ov__kaartb em{font-style:normal;font-size:12px;color:rgba(17,17,17,.5)}
+/* de balk met de scores per product */
+.ws-ov__scores{display:grid;grid-template-columns:repeat(var(--ws-kol,3),minmax(0,1fr));
+  gap:18px;border-top:1px solid rgba(188,129,62,.26);padding-top:26px}
+.ws-ov__score{display:flex;align-items:center;gap:14px;min-width:0}
+.ws-ov__score b{font-size:30px;font-weight:700;letter-spacing:-.035em;line-height:1;color:#BC813E;
+  flex:none;font-variant-numeric:tabular-nums}
+.ws-ov__score span{min-width:0}
+.ws-ov__score i{display:block;font-style:normal;font-size:13px;font-weight:600;color:#111;
+  line-height:135%}
+.ws-ov__score em{display:block;font-style:normal;font-size:11.5px;color:rgba(17,17,17,.5);
+  margin-top:3px}
+
+/* ── 8. wat wij wel en niet beloven ── donker paneel op licht ── */
 .ws-ov__belofte{background:#F7F2E9;padding:0 34px 44px}
 .ws-ov__duo{max-width:1240px;margin:0 auto;display:grid;
   grid-template-columns:repeat(var(--ws-kol,2),minmax(0,1fr));gap:20px;align-items:stretch}
@@ -181,6 +260,14 @@
 .ws-ov__paneel--licht .ws-ov__vink{color:#BC813E}
 .ws-ov__kruis{width:21px;height:21px;flex:none;margin-top:1px;color:rgba(255,255,255,.32)}
 .ws-ov__paneel--licht .ws-ov__kruis{color:rgba(17,17,17,.3)}
+/* een echte kritische review onder het niet-beloven-paneel: geen van de acht
+   vergeleken merken laat er één zien, en juist dat maakt hem geloofwaardig */
+.ws-ov__tegen{position:relative;z-index:1;margin-top:auto;padding-top:18px;
+  border-top:1px solid rgba(188,129,62,.22);font-size:13px;line-height:158%;
+  color:rgba(17,17,17,.6)}
+.ws-ov__tegen b{display:block;font-weight:700;font-size:10.5px;letter-spacing:.13em;
+  text-transform:uppercase;color:#BC813E;margin-bottom:8px}
+.ws-ov__tegen em{font-style:italic}
 /* het team onderaan het donkere paneel */
 .ws-ov__team{position:relative;z-index:1;display:flex;align-items:center;gap:16px;margin-top:auto;
   padding-top:20px;border-top:1px solid rgba(255,255,255,.12)}
@@ -198,7 +285,32 @@
   margin-top:4px}
 .ws-ov__paneel--licht .ws-ov__team em{color:rgba(17,17,17,.55)}
 
-/* ── 6. afsluiter ── donker met gloed en twee knoppen ── */
+/* ── 9. de mensen ── donker. Moov, Achaté en Cloudpillo laten allemaal
+   gezichten met namen en functies zien; wij hadden alleen drie naamloze
+   rondjes. Staat er geen foto, dan vult de cirkel zich met de initiaal. ── */
+.ws-ov__mensen{background:#0B0B0A;color:#fff;padding:70px 44px 74px;position:relative;
+  overflow:hidden}
+.ws-ov__mensenin{max-width:1240px;margin:0 auto;position:relative;z-index:1}
+.ws-ov__mensenkop{text-align:center;display:flex;flex-direction:column;align-items:center;
+  gap:12px;margin-bottom:44px}
+.ws-ov__rij{display:grid;grid-template-columns:repeat(var(--ws-kol,6),minmax(0,1fr));gap:20px}
+.ws-ov__mens{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;
+  min-width:0}
+.ws-ov__portret{width:104px;height:104px;border-radius:50%;overflow:hidden;flex:none;
+  background:#1B1917;box-shadow:0 0 0 1px rgba(245,209,138,.42);display:flex;
+  align-items:center;justify-content:center;font-size:32px;font-weight:700;letter-spacing:-.02em;
+  color:rgba(245,209,138,.55)}
+.ws-ov__portret img{width:100%;height:100%;object-fit:cover;display:block}
+.ws-ov__mensn{font-size:15px;font-weight:600;letter-spacing:-.014em;color:#fff;line-height:130%}
+.ws-ov__mensr{font-size:10.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  color:rgba(245,209,138,.8);line-height:150%;margin-top:-6px}
+.ws-ov p.ws-ov__mensslot{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:42px;
+  padding-top:26px;border-top:1px solid rgba(255,255,255,.12);font-size:14px;
+  color:rgba(255,255,255,.6);text-align:center}
+.ws-ov__mensslot svg{width:17px;height:17px;color:#F5D18A;flex:none}
+.ws-ov__mensslot b,.ws-ov__mensslot strong{color:#fff;font-weight:600}
+
+/* ── 10. afsluiter ── donker met gloed en twee knoppen ── */
 .ws-ov__af{position:relative;overflow:hidden;background:#0B0B0A;color:#fff;padding:74px 44px}
 .ws-ov__af::before{content:"";position:absolute;left:50%;top:-46%;width:120%;height:130%;
   transform:translateX(-50%);pointer-events:none;
@@ -216,7 +328,7 @@
 .ws-ov__cta--rand{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.34);
   color:#fff;box-shadow:none}
 .ws-ov__cta--rand:hover{color:#fff}
-.ws-ov__afreden{font-size:13px;color:rgba(255,255,255,.5);margin-top:6px}
+.ws-ov p.ws-ov__afreden{font-size:13px;color:rgba(255,255,255,.5);margin-top:6px}
 .ws-ov__afreden b,.ws-ov__afreden strong{color:rgba(255,255,255,.78);font-weight:600}
 
 /* ── mobiel ──
@@ -238,6 +350,44 @@
   .ws-ov__teller{padding:12px 16px;gap:12px}
   .ws-ov__teller b{font-size:16px}
   .ws-ov__teller em{font-size:9px}
+
+  .ws-ov__heroknop{width:100%;flex-direction:column;align-items:stretch;gap:10px}
+
+  .ws-ov__band{padding:0 18px 34px}
+  .ws-ov__bandin{padding-top:28px}
+  .ws-ov__bandkop{margin-bottom:20px;gap:11px}
+  .ws-ov__drieuit{grid-template-columns:1fr;gap:12px}
+  .ws-ov__uit{padding:20px 18px 22px;gap:9px}
+  .ws-ov__anker b{font-size:36px}
+  .ws-ov__uith{font-size:16px}
+
+  .ws-ov__reis{padding:40px 18px 44px}
+  .ws-ov__reiskop{margin-bottom:26px;gap:10px}
+  .ws-ov__fasen{grid-template-columns:1fr;gap:0}
+  /* mobiel loopt hetzelfde stukje verticaal naar de volgende knoop */
+  .ws-ov__fase::before{left:6px;right:auto;top:12px;bottom:-4px;width:1px;height:auto}
+  .ws-ov__fase{padding:0 0 26px 30px}
+  .ws-ov__fase:last-child{padding-bottom:0}
+  .ws-ov__knoop{top:6px}
+  .ws-ov__jaar{font-size:22px}
+
+  .ws-ov__stemmen{padding:38px 14px 6px}
+  .ws-ov__stemmenin{gap:22px}
+  .ws-ov__driestem{grid-template-columns:1fr;gap:12px}
+  .ws-ov__kaart{padding:22px 20px 20px;border-radius:14px;gap:12px}
+  .ws-ov__kaartt{font-size:14px}
+  .ws-ov__scores{grid-template-columns:1fr;gap:14px;padding-top:20px}
+  .ws-ov__score b{font-size:26px}
+
+  .ws-ov__tegen{font-size:12.5px;padding-top:16px}
+
+  .ws-ov__mensen{padding:40px 18px 44px}
+  .ws-ov__mensenkop{margin-bottom:26px;gap:10px}
+  .ws-ov__rij{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 14px}
+  .ws-ov__portret{width:84px;height:84px;font-size:26px}
+  .ws-ov p.ws-ov__mensslot{margin-top:28px;padding-top:20px;font-size:13px;text-align:left;
+    align-items:flex-start;justify-content:flex-start}
+  .ws-ov__mensslot svg{margin-top:2px}
 
   .ws-ov__verhaal{padding:34px 18px 6px}
   .ws-ov__verhaalin{grid-template-columns:1fr;gap:30px}

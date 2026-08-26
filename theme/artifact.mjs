@@ -46,7 +46,7 @@ const MOBIEL = mobieleCss(css);
 
 // het venster waarin een blok getoond wordt
 const venster = (html, klas, mobiel) =>
-  `<div class="scaler ${klas}"><div class="inner${mobiel ? ' ws-m' : ''}">${html}</div></div>`;
+  `<div class="scaler ${klas}"><div class="inner ws-ov${mobiel ? ' ws-m' : ''}">${html}</div></div>`;
 
 const blokken = BLOKKEN.map(
   (b) => `<section class="blok">
@@ -61,20 +61,72 @@ const blokken = BLOKKEN.map(
 </section>`
 ).join('\n');
 
-const WIJZ = [
-  ['Verkeerd systeem, opnieuw begonnen', 'De eerste versie stond in het landingspagina-systeem uit de merklaag: tweeslags koppen met een tekstverloop, zand, een los HTML-bestand. Dat systeem is voor verkeer <b>ná een advertentie</b>. Een Over ons-pagina hoort bij de winkel, en dus bij de taal van de homepage.'],
-  ['Koppen zonder verloop', 'De merklaag zet de tweede kopregel in een goudverloop op gewicht 900. De homepage doet het anders: gewicht 600 tot 700, en het accent in <b>&lt;b&gt;</b> in een effen kleur — brons op licht, goud op donker. Dat is hier overgenomen.'],
-  ['Donker is #0B0B0A, niet #191816', 'De merklaag gebruikt carbon. De homepage gebruikt een diepere zwarttint met een radiale goudgloed erachter. Dezelfde behandeling zit nu onder blok 4 en blok 6.'],
-  ['Licht is een paneel, geen vlak', 'Waar de merklaag een zandvlak neerzet, zet de homepage een warm verloop in een dun gouden kader. Blok 3 en het rechterpaneel van blok 5 volgen dat.'],
-  ['Eén breekpunt in plaats van drie', 'De merklaag breekt op 980, 760 en 520. Het thema houdt <b>749px</b> aan, de grens die het thema zelf gebruikt. Alle mobiele regels staan nu in die ene query.'],
-  ['Ander beeld dan de homepage', 'De vorige versie leende de herofoto van de homepage: dezelfde man met dezelfde handdoek. Dat leest als een herhaling. De hero staat nu in het <b>eigen magazijn</b>, tussen de rolcontainers met bestellingen — hetzelfde verhaal als de teller ernaast. Blok 2 gebruikt de twee foto\'s uit de installateurstijd. Allemaal eigen materiaal, niets van de CDN geleend.'],
-  ['Een persoonlijk begin, omgedraaid naar jou', 'Blok 2 is nieuw. Het vertelt in tien regels waar Wellshave vandaan komt — Dustin was installateur voordat hij scheerapparaten maakte — maar elke zin landt bij de lezer, niet bij de oprichter. De les uit dat vak (<b>goed gereedschap bepaalt het resultaat, niet de man die het vasthoudt</b>) is precies de belofte die de hero erboven doet, nu met een herkomst erbij.'],
-  ['Het verhaal draagt geen bewijslast', 'Het persoonlijke stuk staat er om te laten zien wáárom wij dit maken, niet om iets te bewijzen. De enige getallen op de pagina staan in de teller en in blok 5, en die komen uit de instellingen van de homepage.'],
-  ['Marge uit de instellingen', 'Het thema zet <b>#shopify-section-ID &gt; *</b> via <b>snippets/indent-settings</b>, en dat is een ID-selector die van elke klasse wint. Boven- en ondermarge gaan daarom via <b>desk_indent_top</b> en de drie andere, niet via de CSS.'],
-  ['Kolommen via --ws-kol', 'Het aantal kolommen staat in een variabele en niet als inline stijl op het element: een inline stijl wint van elke media query, ook van de mobiele. Dat ging op de homepage bij blok 7 en 8 een keer mis.'],
-  ['Twee cijfers rechtgezet', 'De vorige versie hield 700+ beoordelingen aan en noemde geen startjaar. De homepage zegt <b>950+</b> en <b>sinds 2021</b>, allebei in eigen instellingen. De teller noemt nu 180.000+ bestellingen sinds 2021.'],
-  ['Alles is een instelling', 'Elke tekst op deze pagina is een veld in de thema-editor, en de drie vragen en drie stappen zijn blokken. Wie de copy wil bijstellen heeft geen code nodig.'],
+// De acht vergeleken Over ons-pagina's. Een vinkje is: het patroon staat er
+// herkenbaar op. Een streepje: het ontbreekt. Een tilde: het zit erin, maar
+// niet als eigen blok. Manscaped blokkeert het ophalen van zijn pagina; die
+// rij komt uit hun eigen merkverhaal op het blog.
+const MERKEN = [
+  ['Dore &amp; Rose', 'doreandrose.com', ['–', '–', '–', '–', '✓', '–', '–', '–']],
+  ['Cloudpillo', 'cloudpillo.com', ['✓', '✓', '✓', '✓', '–', '✓', '✓', '–']],
+  ['Meroda', 'merodacosmetics.nl', ['✓', '–', '–', '–', '✓', '–', '✓', '–']],
+  ['Hears', 'hears.com', ['✓', '–', '~', '–', '–', '✓', '–', '–']],
+  ['MAE', 'maeofficial.com', ['–', '–', '✓', '~', '✓', '–', '–', '–']],
+  ['Moov', 'moovmore.com', ['✓', '✓', '✓', '~', '✓', '✓', '–', '–']],
+  ['Manscaped', 'manscaped.com', ['✓', '–', '✓', '~', '✓', '–', '–', '–']],
+  ['Achaté', 'achate.com', ['✓', '✓', '✓', '–', '✓', '✓', '✓', '–']],
 ];
+const KOLOMMEN = [
+  ['CTA boven de vouw', 'Een knop naar de winkel vóór je hoeft te scrollen.'],
+  ['Uitkomsten in cijfers', 'Drie genummerde dingen die voor de klant veranderen.'],
+  ['Oprichtersverhaal', 'Een naam, een gezicht, en waarom hij begon.'],
+  ['Tijdlijn', 'De reis van het merk in fasen, met jaartallen.'],
+  ['Drie kernwaarden', 'Waar het merk voor zegt te staan, in drieën.'],
+  ['Team met namen', 'Gezichten met een naam en een rol eronder.'],
+  ['Reviews als eigen blok', 'Klantcitaten in een eigen sectie, niet in de voettekst.'],
+  ['Eerlijk over grenzen', 'Wat het merk uitdrukkelijk níét belooft.'],
+];
+const tel = (i) => MERKEN.filter((m) => m[2][i] === '✓').length;
+
+const vergelijking = `<section class="verg">
+  <div class="blok-h"><h2>De acht pagina&rsquo;s naast elkaar</h2>
+    <span>Wat vaak terugkomt, en wat niemand doet</span></div>
+  <div class="tabelwrap"><table class="tabel">
+    <thead><tr><th scope="col">Merk</th>
+      ${KOLOMMEN.map(([k, u]) => `<th scope="col"><abbr title="${u}">${k}</abbr></th>`).join('')}
+    </tr></thead>
+    <tbody>
+      ${MERKEN.map(
+        ([naam, host, rij]) => `<tr><th scope="row">${naam}<em>${host}</em></th>${rij
+          .map((v) => `<td class="v${v === '✓' ? ' ja' : v === '~' ? ' half' : ''}">${v}</td>`)
+          .join('')}</tr>`
+      ).join('')}
+      <tr class="ons"><th scope="row">Wellshave<em>deze pagina</em></th>
+        ${KOLOMMEN.map(() => '<td class="v ja">✓</td>').join('')}</tr>
+    </tbody>
+    <tfoot><tr><th scope="row">Hoeveel van de acht</th>
+      ${KOLOMMEN.map((_, i) => `<td class="v">${tel(i)}/8</td>`).join('')}</tr></tfoot>
+  </table></div>
+  <p class="verg-bij">De laatste kolom is de enige waar alle acht een streepje
+    hebben. Geen van deze merken schrijft op wat het níét waarmaakt, en geen
+    van ze laat een kritische review zien. Dat is precies het blok dat wij al
+    hadden, dus dat blijft — met er nu een echte review van drie sterren onder.</p>
+</section>`;
+
+const WIJZ = [
+  ['Knop boven de vouw', 'Zes van de acht zetten hun eerste knop naar de winkel in de hero. Bij ons stond hij pas na tien schermen. Er staat er nu één in blok 1, met de honderd dagen ernaast zodat klikken niets kost.'],
+  ['Uitkomsten met een bron eronder', 'Achaté (+7 uur vrije tijd), Moov (+15% adem, −30% stress) en MAE zetten direct onder de hero drie genummerde uitkomsten. Aantrekkelijk, maar bij geen van hen staat waar die percentages vandaan komen. Blok 2 doet de vorm na en zet er de bron bij: <b>4,9 uit 192 beoordelingen</b>, <b>100 dagen</b>, <b>2 jaar</b> — alle drie aanwijsbaar.'],
+  ['Een reis met echte jaartallen', 'Cloudpillo is de enige met een uitgewerkte tijdlijn, en die werkt: je ziet een merk groeien in plaats van erover te lezen. Blok 4 doet hetzelfde, en de jaartallen zijn niet gekozen maar opgezocht — het zijn de aanmaakdatums van de producten in de winkel. 2022 is de Groom Guard™, 2023 zijn de neustrimmers.'],
+  ['Reviews verdienen een eigen blok', 'Cloudpillo, Meroda en Achaté geven klantcitaten een eigen sectie. Bij ons stond er één citaat verstopt in stap 01, en dat citaat was bovendien nergens in de winkel terug te vinden. Blok 7 heeft nu drie échte reviews en de scores per product — inclusief de <b>4,4</b> van de neustrimmer, want een pagina met alleen negens gelooft niemand.'],
+  ['Namen in plaats van rondjes', 'Moov zet zijn team met functie en quote neer, Achaté met een groepsfoto van veertien. Wij hadden drie naamloze avatars in het beloftepaneel. Blok 9 noemt de zes met naam en rol; staat er geen foto, dan vult de cirkel zich met de initiaal in plaats van leeg te blijven.'],
+  ['Wat niemand van de acht doet', 'Geen van deze acht pagina&rsquo;s schrijft op wat het merk níét belooft, en geen laat een kritische review zien. Dat blok hadden wij al, en het is nu scherper: onder <b>&#34;wat wij niet beloven&#34;</b> staat een echte review die zegt dat het niet altijd pijnloos is. Dat kost een half sterretje en levert de rest van de pagina geloofwaardigheid op.'],
+  ['Wat we níét hebben overgenomen', 'Meroda plakt een productgrid en een Instagram-feed op zijn Over ons; dat maakt er een tweede winkelpagina van. En de missiezinnen van Dore &amp; Rose en Hears (&#34;we&rsquo;re on a mission to elevate sleep into a true wellness experience&#34;) zeggen bij nalezen niets. Onze eerste zin blijft <b>&#34;jij bent niet het probleem&#34;</b>.'],
+  ['Een verhaal in de ik-vorm', 'Zes van de acht hebben een oprichtersverhaal; Moov en Achaté ondertekenen het met naam en portret. Blok 3 doet dat ook, en draait elke zin over vroeger om naar de lezer: &#34;ik was installateur&#34; staat er alleen omdat de zin erna is dat verkeerd gereedschap je laat geloven dat jíj degene bent die het niet kan.'],
+  ['Ander beeld dan de homepage', 'De hero leende eerder het portret van de homepage. Twee pagina&rsquo;s achter elkaar hetzelfde beeld leest als een herhaling. De hero staat nu in het eigen magazijn tussen de rolcontainers, en blok 3 gebruikt de twee foto&rsquo;s uit de installateurstijd — alle drie al in de winkel aanwezig.'],
+  ['Taal van de homepage, niet van de landingspagina', 'De eerste versie stond in het landingspagina-systeem uit de merklaag: tweeslags koppen met een tekstverloop, zand, een los HTML-bestand. Dat systeem is voor verkeer <b>ná een advertentie</b>. Donker is nu #0B0B0A met een gouden gloed, licht is een paneel in een dun gouden kader, en het accent zit in <b>&lt;b&gt;</b>.'],
+  ['Eén breekpunt, marge uit de instellingen', 'Mobiel is één echte media query op <b>749px</b>, de grens die het thema zelf aanhoudt. Boven- en ondermarge gaan via <b>desk_indent_top</b> en de drie andere, want <b>snippets/indent-settings</b> gebruikt een ID-selector die van elke klasse wint.'],
+  ['Twee specificiteitsvallen weggehaald', '<b>.ws-ov p{margin:0}</b> weegt zwaarder dan een losse klasse, dus <b>.ws-ov__afreden</b> en <b>.ws-ov__mensslot</b> kregen hun bovenmarge niet. En het vak in dit artefact droeg zelf geen <b>.ws-ov</b>, waardoor het hier net anders stond dan in het thema. Allebei rechtgezet.'],
+  ['Alles is een instelling', '103 velden en zes bloktypes: uitkomst, vraag, fase, stap, klantcitaat en persoon. Wie een review wil verversen of een jaartal wil bijstellen heeft geen code nodig.'],
+];;
 
 const html = `<title>Wellshave Over ons-redesign</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -118,14 +170,34 @@ body{margin:0;background:var(--bg);color:var(--fg);
 /* de sectie zelf, plus de mobiele regels onder .ws-m */
 ${css}
 ${MOBIEL}
-.scaler .ws-ov{font-family:"Montserrat",sans-serif}
-.scaler .ws-ov *{margin:0;padding:0}
-.scaler .ws-ov img{max-width:100%;height:auto;display:block}
-.scaler .ws-ov ul{list-style:none}
+/* Het vak draagt zelf .ws-ov, zodat de sectie hier in precies dezelfde
+   cascade staat als in het thema. Een blanco reset op * zou de padding uit
+   het stijlblad overschrijven, dus die staat er bewust niet. */
+.scaler img{max-width:100%;height:auto;display:block}
 footer{border-top:1px solid var(--rule);padding-top:20px;color:var(--fg-soft);font-size:13px;
   line-height:165%}
 footer b{color:var(--fg);font-weight:600}
 footer p{margin:0 0 18px;max-width:72ch}
+.verg{margin:0 0 46px}
+.tabelwrap{overflow-x:auto;border:1px solid var(--rule);border-radius:10px;background:var(--surface)}
+.tabel{border-collapse:collapse;width:100%;min-width:840px;font-size:13px}
+.tabel th,.tabel td{padding:11px 12px;text-align:left;border-bottom:1px solid var(--rule)}
+.tabel thead th{font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--fg-soft);vertical-align:bottom;line-height:135%}
+.tabel thead abbr{text-decoration:none;border-bottom:1px dotted var(--rule);cursor:help}
+.tabel tbody th{font-weight:600;white-space:nowrap}
+.tabel tbody th em{display:block;font-style:normal;font-size:11px;font-weight:400;
+  color:var(--fg-soft);margin-top:2px}
+.tabel td.v{text-align:center;font-size:15px;color:var(--fg-soft);
+  font-variant-numeric:tabular-nums}
+.tabel td.v.ja{color:var(--gold);font-weight:700}
+.tabel td.v.half{color:var(--fg-soft);opacity:.8}
+.tabel tr.ons th,.tabel tr.ons td{background:rgba(188,129,62,.07)}
+.tabel tr.ons th{color:var(--gold)}
+.tabel tfoot th,.tabel tfoot td{border-bottom:0;font-size:11px;font-weight:600;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--fg-soft)}
+.tabel tfoot td.v{font-size:12px}
+.verg-bij{font-size:13.5px;line-height:165%;color:var(--fg-soft);margin:14px 0 0;max-width:72ch}
 .wijz{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:14px}
 .wijz-kaart{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:18px 20px}
 .wijz-kaart h3{font-size:14px;font-weight:600;letter-spacing:-.005em;margin:0 0 7px;color:var(--gold)}
@@ -138,23 +210,27 @@ footer p{margin:0 0 18px;max-width:72ch}
 
   <header class="lede">
     <p class="kicker">Wellshave &middot; ontwerpbeeld</p>
-    <h1>Over ons, in de taal van de homepage</h1>
-    <p class="sub">Zes blokken, elk op desktop en op mobiel. De pagina is een themasectie
-      (<code>ws-overons</code>) met een eigen stijlblad en een paginasjabloon — geen los
-      HTML-bestand. Elk venster hieronder is een echte weergave op 1440 en op 390 pixels,
+    <h1>Over ons, gemeten langs acht andere</h1>
+    <p class="sub">Acht Over ons-pagina&rsquo;s uit dezelfde hoek van de markt zijn naast elkaar
+      gelegd. De patronen die bij de meeste terugkwamen en die wij misten, zitten er nu in:
+      een <b>knop boven de vouw</b>, <b>drie uitkomsten in cijfers</b>, een <b>tijdlijn</b>,
+      <b>reviews als eigen blok</b> en een <b>team met namen</b>. De tabel hieronder laat zien
+      wie wat doet.</p>
+    <p class="sub">Verschil met die acht: elk cijfer op deze pagina is aanwijsbaar, de reviews
+      zijn letterlijk uit de winkel overgenomen, en er staat één van drie sterren tussen. De
+      pagina is een themasectie (<code>ws-overons</code>) met een eigen stijlblad en een
+      paginasjabloon. Elk venster hieronder is een echte weergave op 1440 en op 390 pixels,
       dus de mobiele kolom laat zien wat de media query op 749px werkelijk doet.</p>
-    <p class="sub">Nieuw sinds de vorige ronde: <b>blok 2</b>, een kort persoonlijk verhaal dat
-      meteen wordt omgedraaid naar de lezer, en <b>ander beeldmateriaal</b> dan de homepage.</p>
   </header>
+
+  ${vergelijking}
 
   ${blokken}
 
   <footer>
-    <p>De eerste versie van deze pagina stond in het <b>landingspagina-systeem</b> uit de
-      merklaag. Dat systeem is gemaakt voor het verkeer ná een advertentie: één pad naar de
-      winkelwagen, geen navigatie, koppen in twee slagen met een tekstverloop. Een Over
-      ons-pagina hoort bij de winkel zelf, en dus bij de taal van de homepage. Hieronder wat er
-      daardoor is veranderd.</p>
+    <p>Tien blokken, waarvan vier nieuw uit de vergelijking hierboven. De rode draad is
+      dezelfde gebleven: <b>de klant is het onderwerp, wij zijn het gereedschap</b>. Wat er per
+      ronde veranderde en waarom, staat hieronder.</p>
     <div class="wijz">
       ${WIJZ.map(([k, t]) => `<div class="wijz-kaart"><h3>${k}</h3><p>${t}</p></div>`).join('')}
     </div>

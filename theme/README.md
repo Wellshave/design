@@ -43,17 +43,27 @@ Het monogram staat op donkere grond met `filter:brightness(0) invert(1)` en op
 lichte grond zonder filter — één bestand, twee behandelingen, net als in
 `ws-garantie.css` op de homepage.
 
-## Zes blokken
+## Tien blokken
 
-1. **Hero** — donker, tekst links, beeld rechts achter een sluier, met de teller.
-2. **Het verhaal** — licht en open: twee foto's uit de installateurstijd links,
-   een ondertekend stuk rechts. Bewust zónder kader, zodat het naast blok 3
+1. **Hero** — donker, tekst links, beeld rechts achter een sluier. Knop, reden­regel
+   en teller eronder.
+2. **Wat er voor jou verandert** — donkere band die aan de hero vastzit: drie
+   uitkomsten, elk met een cijfer én de bron eronder.
+3. **Het verhaal** — licht en open: twee foto's uit de installateurstijd links,
+   een ondertekend stuk rechts. Bewust zónder kader, zodat het naast blok 5
    als een ander soort blok leest.
-3. **De drie vragen** — licht, in een gouden kader: jouw probleem, wat je al
+4. **De reis** — donkere tijdlijn, vijf fasen met jaartallen.
+5. **De drie vragen** — licht, in een gouden kader: jouw probleem, wat je al
    probeerde, waar je uit wilt komen.
-4. **De werkwijze** — donker met gouden gloed, drie genummerde stappen.
-5. **Wel en niet beloven** — twee panelen naast elkaar, donker en licht.
-6. **Afsluiter** — donker met gloed en twee knoppen.
+6. **De werkwijze** — donker met gouden gloed, drie genummerde stappen.
+7. **Wat klanten zeggen** — licht: drie echte reviews en de scores per product.
+8. **Wel en niet beloven** — twee panelen naast elkaar, donker en licht, met
+   één kritische review onder het lichte paneel.
+9. **De mensen** — donker: zes namen en rollen, met een initiaal waar geen foto is.
+10. **Afsluiter** — donker met gloed en twee knoppen.
+
+Zes bloktypes zijn herhaalbaar in de thema-editor: `uitkomst`, `vraag`, `fase`,
+`stap`, `stem` en `mens`. Al het overige is een instelling.
 
 ### Waarom blok 2 in de ik-vorm staat
 
@@ -70,9 +80,65 @@ Het verhaal draagt geen bewijslast. Er staat geen getal in, en het claimt
 niets over het product; dat gebeurt in blok 4 en 5, met de instellingen uit de
 homepage erachter.
 
-De drie vragen en de drie stappen zijn blokken, dus in de thema-editor te
-herordenen of aan te vullen. Alle overige teksten — het verhaal inbegrepen,
-alinea voor alinea — zijn instellingen.
+## Waar de opbouw vandaan komt
+
+Acht Over ons-pagina's uit dezelfde hoek van de markt zijn naast elkaar
+gelegd: Dore & Rose, Cloudpillo, Meroda, Hears, MAE, Moov, Manscaped en
+Achaté. Wat daaruit is overgenomen, en waarom:
+
+| Patroon | Hoeveel van de acht | Wat wij ermee deden |
+| --- | --- | --- |
+| CTA boven de vouw | 6 | Knop in blok 1, met "100 dagen thuis proberen" ernaast |
+| Uitkomsten in cijfers | 3 | Blok 2 — maar mét een bron onder elk cijfer |
+| Oprichtersverhaal | 5 | Blok 3, al aanwezig, ondertekend |
+| Tijdlijn | 1 | Blok 4, jaartallen uit de winkel zelf |
+| Drie kernwaarden | 6 | Blok 5 en 6 deden dit al, concreter |
+| Team met namen | 4 | Blok 9, met initiaal waar geen foto is |
+| Reviews als eigen blok | 3 | Blok 7, echte reviews |
+| **Eerlijk over grenzen** | **0** | Blok 8 — het enige dat niemand van de acht doet |
+
+Twee dingen zijn bewust **niet** overgenomen. Meroda plakt een productgrid en
+een Instagram-feed op zijn Over ons; dat maakt er een tweede winkelpagina van.
+En de missiezinnen van Dore & Rose en Hears ("we're on a mission to elevate
+sleep into a true wellness experience") zeggen bij nalezen niets.
+
+De vergelijking staat als tabel in `over-ons.artifact.html`.
+
+## Waar de cijfers vandaan komen
+
+Niets op deze pagina is geschat. De bronnen, allemaal opvraagbaar:
+
+| Wat | Waar het vandaan komt |
+| --- | --- |
+| 4,9 uit 192 · Groom Guard™ | metafield `loox.avg_rating` / `loox.num_reviews` |
+| 4,9 uit 150 · Shave Package Ultimate™ | idem |
+| 4,4 uit 768 · Neustrimmer Advance™ | idem |
+| 2022 · eerste eigen apparaat | `createdAt` van Groom Guard™, 15-08-2022 |
+| 2023 · de neustrimmers | `createdAt`, 24-03-2023 |
+| 2025 · foil shaver en tassen | `createdAt`, sept/okt 2025 |
+| 74 apparaten | `productsCount` |
+| 180.000+ bestellingen sinds 2021 | instelling `ws-hero.tel_label` op de homepage |
+| 100 dagen · 2 jaar · €30 | winkelvoorwaarden, ook op de homepage |
+
+De drie klantcitaten in blok 7 en het kritische citaat in blok 8 zijn
+letterlijk overgenomen uit `loox.reviews`, met de naam zoals de klant hem
+zelf heeft achtergelaten.
+
+### Eén citaat is vervangen
+
+In stap 01 stond eerder een citaat van "Maarten A." dat nergens in de winkel
+terug te vinden was. Dat is weggehaald en vervangen door een echte review —
+en bewust een kritische, want de stap gaat over luisteren:
+
+> "Jammer dat de oplaadstekker er niet standaard bij zit. Wel de USB. Anders
+> was ie 5 sterren waard." — Hellmondje · Groom Guard™
+
+### En één review van drie sterren staat er expres in
+
+Onder "wat wij niet beloven" staat een echte review die zegt dat het niet
+altijd pijnloos is. Geen van de acht vergeleken merken laat zoiets zien, en
+dat is precies waarom het werkt. Weg te halen met één leeg veld
+(`tegen_tekst`) als dat toch niet gewenst is.
 
 ## Afspraken die uit de homepage zijn overgenomen
 
@@ -85,6 +151,10 @@ alinea voor alinea — zijn instellingen.
 * **Elk element dat zijn eigen achtergrond zet, zet ook zijn eigen `color`.**
 * **Het aantal kolommen gaat via `--ws-kol`**, niet via een inline stijl: een
   inline stijl wint van elke media query.
+* **Marge op een `<p>` heeft een sterkere selector nodig.** `.ws-ov p{margin:0}`
+  weegt (0,1,1) en wint van een losse klasse (0,1,0). `.ws-ov__afreden` en
+  `.ws-ov__mensslot` kregen daardoor hun bovenmarge niet; ze staan nu als
+  `.ws-ov p.ws-ov__…`. Zet je een marge op een `<p>`, doe dat ook.
 * **`|br|` in een tekstinstelling** wordt een regeleinde.
 
 ## Het voorbeeld bijwerken
@@ -126,6 +196,12 @@ niet uit elkaar lopen. Verbouw je `sections/ws-overons.liquid`, verbouw dan
   ook op vrouwen en ladyshave, terwijl de homepage en deze pagina alleen
   mannen aanspreken. Vervangen of naast elkaar laten bestaan is een keuze die
   nog gemaakt moet worden.
-* **Het team met naam.** `over-wellshave` noemt Willem, Yvonne, Aaron, Virgil
-  en Tom. Blok 5 zegt nu alleen "klantenservice en magazijn". Namen erbij maakt
-  het warmer, maar dan moet de rij bijgehouden worden als iemand weggaat.
+* **Teamfoto's.** Blok 9 noemt Dustin, Willem, Yvonne, Aaron, Virgil en Tom
+  met hun rol, maar zonder foto — dan vult de cirkel zich met de initiaal. Zes
+  portretjes maken het blok een stuk warmer. Elk blok heeft er een
+  `image_picker` voor.
+* **De rollen zijn overgenomen van `over-wellshave`** en niet nagekeken. Klopt
+  er een niet meer, of is er iemand bij of weg, dan is dat één blok in de editor.
+* **`team-1.webp` t/m `-3`** worden niet meer gebruikt: de naamloze rij in blok 8
+  is weg nu blok 9 er staat. De instellingen ervoor zijn blijven staan, dus
+  vul je `team_titel` weer in, dan komt de rij terug.
