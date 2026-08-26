@@ -1,11 +1,8 @@
 // Bouwt het ontwerpbeeld: elk blok op desktop en op mobiel naast elkaar, met
 // onderaan een verantwoording. Zelfde opzet als het homepage-artefact.
 //
-// Eén verschil met dat artefact: de blokken staan hier in een iframe in plaats
-// van rechtstreeks in de pagina. De sectie gebruikt een echte media query op
-// 749px, en die kijkt naar de breedte van het venster — niet naar die van zijn
-// vak. Zonder iframe zou de mobiele kolom dus de desktopopmaak tonen. In een
-// iframe van 390px valt de query wél, en zie je wat het thema straks doet.
+// De mobiele kolom staat niet in een iframe: de media query van de sectie wordt
+// hieronder automatisch omgezet naar regels onder .ws-m. Zie mobieleCss().
 //
 //   node theme/artifact.mjs
 import { writeFileSync } from 'node:fs';
@@ -67,10 +64,12 @@ const blokken = BLOKKEN.map(
 const WIJZ = [
   ['Verkeerd systeem, opnieuw begonnen', 'De eerste versie stond in het landingspagina-systeem uit de merklaag: tweeslags koppen met een tekstverloop, zand, een los HTML-bestand. Dat systeem is voor verkeer <b>ná een advertentie</b>. Een Over ons-pagina hoort bij de winkel, en dus bij de taal van de homepage.'],
   ['Koppen zonder verloop', 'De merklaag zet de tweede kopregel in een goudverloop op gewicht 900. De homepage doet het anders: gewicht 600 tot 700, en het accent in <b>&lt;b&gt;</b> in een effen kleur — brons op licht, goud op donker. Dat is hier overgenomen.'],
-  ['Donker is #0B0B0A, niet #191816', 'De merklaag gebruikt carbon. De homepage gebruikt een diepere zwarttint met een radiale goudgloed erachter. Dezelfde behandeling zit nu onder blok 3 en blok 5.'],
-  ['Licht is een paneel, geen vlak', 'Waar de merklaag een zandvlak neerzet, zet de homepage een warm verloop in een dun gouden kader. Blok 2 en het rechterpaneel van blok 4 volgen dat.'],
+  ['Donker is #0B0B0A, niet #191816', 'De merklaag gebruikt carbon. De homepage gebruikt een diepere zwarttint met een radiale goudgloed erachter. Dezelfde behandeling zit nu onder blok 4 en blok 6.'],
+  ['Licht is een paneel, geen vlak', 'Waar de merklaag een zandvlak neerzet, zet de homepage een warm verloop in een dun gouden kader. Blok 3 en het rechterpaneel van blok 5 volgen dat.'],
   ['Eén breekpunt in plaats van drie', 'De merklaag breekt op 980, 760 en 520. Het thema houdt <b>749px</b> aan, de grens die het thema zelf gebruikt. Alle mobiele regels staan nu in die ene query.'],
-  ['Eigen merkfotografie', 'De hero gebruikt <b>hero-portrait.jpg</b> en de teamrij <b>team-1</b> tot <b>team-3</b> — dezelfde bestanden als de homepage, niet een geleend beeld van de CDN.'],
+  ['Ander beeld dan de homepage', 'De vorige versie leende de herofoto van de homepage: dezelfde man met dezelfde handdoek. Dat leest als een herhaling. De hero staat nu in het <b>eigen magazijn</b>, tussen de rolcontainers met bestellingen — hetzelfde verhaal als de teller ernaast. Blok 2 gebruikt de twee foto\'s uit de installateurstijd. Allemaal eigen materiaal, niets van de CDN geleend.'],
+  ['Een persoonlijk begin, omgedraaid naar jou', 'Blok 2 is nieuw. Het vertelt in tien regels waar Wellshave vandaan komt — Dustin was installateur voordat hij scheerapparaten maakte — maar elke zin landt bij de lezer, niet bij de oprichter. De les uit dat vak (<b>goed gereedschap bepaalt het resultaat, niet de man die het vasthoudt</b>) is precies de belofte die de hero erboven doet, nu met een herkomst erbij.'],
+  ['Het verhaal draagt geen bewijslast', 'Het persoonlijke stuk staat er om te laten zien wáárom wij dit maken, niet om iets te bewijzen. De enige getallen op de pagina staan in de teller en in blok 5, en die komen uit de instellingen van de homepage.'],
   ['Marge uit de instellingen', 'Het thema zet <b>#shopify-section-ID &gt; *</b> via <b>snippets/indent-settings</b>, en dat is een ID-selector die van elke klasse wint. Boven- en ondermarge gaan daarom via <b>desk_indent_top</b> en de drie andere, niet via de CSS.'],
   ['Kolommen via --ws-kol', 'Het aantal kolommen staat in een variabele en niet als inline stijl op het element: een inline stijl wint van elke media query, ook van de mobiele. Dat ging op de homepage bij blok 7 en 8 een keer mis.'],
   ['Twee cijfers rechtgezet', 'De vorige versie hield 700+ beoordelingen aan en noemde geen startjaar. De homepage zegt <b>950+</b> en <b>sinds 2021</b>, allebei in eigen instellingen. De teller noemt nu 180.000+ bestellingen sinds 2021.'],
@@ -96,6 +95,7 @@ body{margin:0;background:var(--bg);color:var(--fg);
   color:var(--gold);margin:0 0 9px}
 .lede h1{font-size:clamp(25px,4vw,36px);line-height:118%;letter-spacing:-.022em;font-weight:600;margin:0}
 .lede p.sub{font-size:15.5px;line-height:160%;color:var(--fg-soft);margin:12px 0 0;max-width:64ch}
+.lede p.sub b{color:var(--fg);font-weight:600}
 .lede code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;
   background:var(--surface);border:1px solid var(--rule);border-radius:4px;padding:1px 6px}
 .blok{margin:0 0 44px}
@@ -139,10 +139,12 @@ footer p{margin:0 0 18px;max-width:72ch}
   <header class="lede">
     <p class="kicker">Wellshave &middot; ontwerpbeeld</p>
     <h1>Over ons, in de taal van de homepage</h1>
-    <p class="sub">Vijf blokken, elk op desktop en op mobiel. De pagina is een themasectie
+    <p class="sub">Zes blokken, elk op desktop en op mobiel. De pagina is een themasectie
       (<code>ws-overons</code>) met een eigen stijlblad en een paginasjabloon — geen los
       HTML-bestand. Elk venster hieronder is een echte weergave op 1440 en op 390 pixels,
       dus de mobiele kolom laat zien wat de media query op 749px werkelijk doet.</p>
+    <p class="sub">Nieuw sinds de vorige ronde: <b>blok 2</b>, een kort persoonlijk verhaal dat
+      meteen wordt omgedraaid naar de lezer, en <b>ander beeldmateriaal</b> dan de homepage.</p>
   </header>
 
   ${blokken}

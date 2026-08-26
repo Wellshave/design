@@ -1,4 +1,4 @@
-// De vijf blokken van Over ons als losse stukken markup.
+// De zes blokken van Over ons als losse stukken markup.
 //
 // Eén bron voor preview.mjs en artifact.mjs, zodat die twee niet uit elkaar
 // gaan lopen. De copy komt uit templates/page.ws-overons.json en de opmaak uit
@@ -46,7 +46,7 @@ const punten = (voor, klas, pad) =>
 
 const hero = () => `<header class="ws-ov__hero" style="--ws-ov-hero-h:${s.hero_hoogte}px">
   <div class="ws-ov__media">
-    <img class="ws-ov__foto" src="${beeld('hero-portrait.jpg')}" alt="Man met een handdoek na het douchen, naast een Wellshave-trimmer in het laadstation en de hardcase.">
+    <img class="ws-ov__foto" src="${beeld('founder-magazijn.jpg')}" alt="${s.foto_alt}">
     <div class="ws-ov__scrim"></div>
   </div>
   <img class="ws-ov__merk" src="${beeld('hero-logo.png')}" alt="">
@@ -58,6 +58,31 @@ const hero = () => `<header class="ws-ov__hero" style="--ws-ov-hero-h:${s.hero_h
     ${el(s.tel_getal, (v) => `<p class="ws-ov__teller">${svg(TEL)}<span><b>${v}</b><em>${s.tel_label}</em></span></p>`)}
   </div></div>
 </header>`;
+
+const verhaal = () => `<section class="ws-ov__verhaal"><div class="ws-ov__verhaalin">
+  <figure class="ws-ov__beeld">
+    <div class="ws-ov__beeld--een"><img src="${beeld('verhaal-1.jpg')}" alt="${s.vh_foto1_alt}" loading="lazy"></div>
+    <div class="ws-ov__beeld--twee"><img src="${beeld('verhaal-2.jpg')}" alt="${s.vh_foto2_alt}" loading="lazy"></div>
+    ${el(s.vh_bijschrift, (v) => `<figcaption class="ws-ov__bijschrift">${v}</figcaption>`)}
+  </figure>
+  <div class="ws-ov__verhaalt">
+    ${el(s.vh_eyebrow, (v) => `<p class="ws-ov__eyebrow">${v}</p>`)}
+    ${el(s.vh_kop, (v) => `<h2 class="ws-ov__h2 ws-ov__h2--klein">${br(v)}</h2>`)}
+    ${[1, 2, 3]
+      .map((i) => s[`vh_p${i}`])
+      .filter(Boolean)
+      .map((v) => `<p class="ws-ov__vtekst">${v}</p>`)
+      .join('')}
+    ${el(s.vh_les, (v) => `<blockquote class="ws-ov__les">${v}</blockquote>`)}
+    ${el(
+      s.vh_naam,
+      (v) => `<div class="ws-ov__hand">
+      <i style="background-image:url(${beeld('founder-magazijn.jpg')})"></i>
+      <span><b>${v}</b><em>${s.vh_naam_bij || ''}</em></span>
+    </div>`
+    )}
+  </div>
+</div></section>`;
 
 const vragen = () => `<section class="ws-ov__vragen"><div class="ws-ov__rand">
   <img class="ws-ov__randmerk" src="${beeld('hero-logo.png')}" alt="">
@@ -148,10 +173,11 @@ const afsluiter = () => `<section class="ws-ov__af"><div class="ws-ov__afin">
 
 export const BLOKKEN = [
   { id: 'hero', naam: '1 — Hero', bij: 'Wie het over moet hebben, staat er meteen: jij.', html: hero },
-  { id: 'vragen', naam: '2 — De drie vragen', bij: 'Zijn probleem, wat hij al probeerde, waar hij uit wil komen.', html: vragen },
-  { id: 'werk', naam: '3 — De werkwijze', bij: 'Van zijn probleem naar zijn resultaat, in drie stappen.', html: werk },
-  { id: 'belofte', naam: '4 — Wel en niet beloven', bij: 'Twee panelen: wat we waarmaken, en wat we bewust niet claimen.', html: belofte },
-  { id: 'af', naam: '5 — Afsluiter', bij: 'Terug naar de keuze, met de risiconemers eronder.', html: afsluiter },
+  { id: 'verhaal', naam: '2 — Het verhaal', bij: 'Waar het begon, meteen omgedraaid naar wat het voor jou betekent.', html: verhaal },
+  { id: 'vragen', naam: '3 — De drie vragen', bij: 'Zijn probleem, wat hij al probeerde, waar hij uit wil komen.', html: vragen },
+  { id: 'werk', naam: '4 — De werkwijze', bij: 'Van zijn probleem naar zijn resultaat, in drie stappen.', html: werk },
+  { id: 'belofte', naam: '5 — Wel en niet beloven', bij: 'Twee panelen: wat we waarmaken, en wat we bewust niet claimen.', html: belofte },
+  { id: 'af', naam: '6 — Afsluiter', bij: 'Terug naar de keuze, met de risiconemers eronder.', html: afsluiter },
 ];
 
 // het kale document waar één of alle blokken in gerenderd worden

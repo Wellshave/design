@@ -21,7 +21,7 @@
   min-height:var(--ws-ov-hero-h,520px)}
 .ws-ov__media{position:absolute;inset:0 0 0 58%;overflow:hidden}
 .ws-ov__foto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-  object-position:50% 32%}
+  object-position:50% 47%}
 .ws-ov__scrim{position:absolute;inset:0;pointer-events:none;
   background:linear-gradient(90deg,#0B0B0A 0%,rgba(11,11,10,.92) 12%,rgba(11,11,10,.35) 36%,rgba(11,11,10,0) 64%)}
 .ws-ov__merk{position:absolute;left:30%;top:9%;width:24%;height:auto;opacity:.06;
@@ -47,7 +47,46 @@
 .ws-ov__teller em{display:block;font-style:normal;font-size:10.5px;font-weight:600;
   letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.62);margin-top:3px}
 
-/* ── 2. de drie vragen ── licht, in een gouden kader ── */
+/* ── 2. het verhaal ── licht en open: beeld links, een ondertekend stuk rechts.
+   Bewust geen kader eromheen, zodat het naast het omkaderde vragenblok
+   hieronder als een ander soort blok leest en niet als twee dezelfde. ── */
+.ws-ov__verhaal{background:#F7F2E9;padding:64px 44px 30px}
+.ws-ov__verhaalin{max-width:1240px;margin:0 auto;display:grid;
+  grid-template-columns:minmax(0,.82fr) minmax(0,1fr);gap:58px;align-items:center}
+
+.ws-ov__beeld{position:relative;min-width:0;padding-bottom:38px}
+.ws-ov__beeld{margin:0}
+.ws-ov__beeld--een,.ws-ov__beeld--twee{overflow:hidden;background:#EDE4D6;
+  border:1px solid rgba(188,129,62,.32)}
+.ws-ov__beeld--een{border-radius:18px;aspect-ratio:4/5}
+.ws-ov__beeld--een img{width:100%;height:100%;object-fit:cover;object-position:56% 46%}
+/* de tweede foto steekt over de rand van de eerste, met een crème mat ertussen */
+.ws-ov__beeld--twee{position:absolute;right:-20px;bottom:14px;width:43%;aspect-ratio:1/1;
+  border-radius:14px;border:4px solid #F7F2E9;outline:1px solid rgba(188,129,62,.32);
+  box-shadow:0 26px 50px -28px rgba(11,11,10,.7)}
+.ws-ov__beeld--twee img{width:100%;height:100%;object-fit:cover;object-position:58% 24%}
+.ws-ov__bijschrift{position:absolute;left:2px;bottom:0;max-width:54%;font-size:11px;
+  font-weight:600;letter-spacing:.13em;text-transform:uppercase;line-height:150%;
+  color:rgba(17,17,17,.42)}
+
+.ws-ov__verhaalt{display:flex;flex-direction:column;align-items:flex-start;gap:17px;min-width:0}
+.ws-ov__h2--klein{font-size:34px;line-height:116%}
+.ws-ov__vtekst{font-size:15px;line-height:172%;color:rgba(17,17,17,.66);max-width:56ch}
+/* de les uit het verhaal ─ zelfde streep als het klantcitaat in het donkere blok */
+.ws-ov__les{border-left:2px solid #BC813E;padding:5px 0 5px 20px;margin-top:5px;
+  font-size:21px;line-height:140%;font-weight:600;letter-spacing:-.018em;color:#111;max-width:30ch}
+.ws-ov__hand{display:flex;align-items:center;gap:15px;width:100%;margin-top:9px;padding-top:20px;
+  border-top:1px solid rgba(188,129,62,.24)}
+/* de ronde pasfoto is een uitsnede van de magazijnfoto, vandaar de achtergrond-zoom */
+.ws-ov__hand i{width:50px;height:50px;border-radius:50%;flex:none;background-repeat:no-repeat;
+  background-size:1500%;background-position:49% 33%;background-color:#EDE4D6;
+  box-shadow:0 0 0 1px rgba(188,129,62,.45)}
+.ws-ov__hand b{display:block;font-size:11px;font-weight:700;letter-spacing:.15em;
+  text-transform:uppercase;color:#BC813E}
+.ws-ov__hand em{display:block;font-style:normal;font-size:13px;color:rgba(17,17,17,.55);
+  margin-top:4px}
+
+/* ── 3. de drie vragen ── licht, in een gouden kader ── */
 .ws-ov__vragen{background:#F7F2E9;padding:44px 34px}
 .ws-ov__rand{position:relative;border:1px solid rgba(188,129,62,.32);border-radius:20px;
   background:linear-gradient(165deg,#FBF7F0 0%,#F6EFE3 55%,#F2E8D8 100%);
@@ -81,7 +120,7 @@
 .ws-ov__vraagslot span{min-width:0}
 .ws-ov__vraagslot b,.ws-ov__vraagslot strong{color:rgba(17,17,17,.8);font-weight:600}
 
-/* ── 3. de werkwijze ── donker met een gouden gloed, genummerd ── */
+/* ── 4. de werkwijze ── donker met een gouden gloed, genummerd ── */
 .ws-ov__werk{background:#0B0B0A;color:#fff;padding:70px 44px;position:relative;overflow:hidden}
 .ws-ov__werk::before{content:"";position:absolute;left:50%;top:-40%;width:120%;height:120%;
   transform:translateX(-50%);pointer-events:none;
@@ -114,7 +153,7 @@
 .ws-ov__stem b{display:block;font-weight:600;font-size:11px;letter-spacing:.13em;
   text-transform:uppercase;color:rgba(245,209,138,.8);margin-top:7px}
 
-/* ── 4. wat wij wel en niet beloven ── donker paneel op licht ── */
+/* ── 5. wat wij wel en niet beloven ── donker paneel op licht ── */
 .ws-ov__belofte{background:#F7F2E9;padding:0 34px 44px}
 .ws-ov__duo{max-width:1240px;margin:0 auto;display:grid;
   grid-template-columns:repeat(var(--ws-kol,2),minmax(0,1fr));gap:20px;align-items:stretch}
@@ -159,7 +198,7 @@
   margin-top:4px}
 .ws-ov__paneel--licht .ws-ov__team em{color:rgba(17,17,17,.55)}
 
-/* ── 5. afsluiter ── donker met gloed en twee knoppen ── */
+/* ── 6. afsluiter ── donker met gloed en twee knoppen ── */
 .ws-ov__af{position:relative;overflow:hidden;background:#0B0B0A;color:#fff;padding:74px 44px}
 .ws-ov__af::before{content:"";position:absolute;left:50%;top:-46%;width:120%;height:130%;
   transform:translateX(-50%);pointer-events:none;
@@ -191,7 +230,7 @@
   .ws-ov__streep,.ws-ov__merk{display:none}
   .ws-ov__media{position:relative;inset:auto;width:100%;height:300px;flex:none}
   .ws-ov__scrim{background:linear-gradient(180deg,rgba(11,11,10,.1) 0%,rgba(11,11,10,.35) 52%,rgba(11,11,10,.94) 92%,#0B0B0A 100%)}
-  .ws-ov__foto{object-position:52% 26%}
+  .ws-ov__foto{object-position:50% 44%}
   .ws-ov__heroin{width:100%;padding:0 18px 30px;margin-top:-34px}
   .ws-ov__heroblok{gap:16px;max-width:none}
   .ws-ov__h1{font-size:36px;letter-spacing:-.032em}
@@ -199,6 +238,18 @@
   .ws-ov__teller{padding:12px 16px;gap:12px}
   .ws-ov__teller b{font-size:16px}
   .ws-ov__teller em{font-size:9px}
+
+  .ws-ov__verhaal{padding:34px 18px 6px}
+  .ws-ov__verhaalin{grid-template-columns:1fr;gap:30px}
+  .ws-ov__beeld{max-width:330px;padding-bottom:32px}
+  .ws-ov__beeld--een{border-radius:14px}
+  .ws-ov__beeld--twee{width:46%;right:-12px;bottom:10px;border-width:3px}
+  .ws-ov__bijschrift{font-size:10px;max-width:50%}
+  .ws-ov__verhaalt{gap:15px}
+  .ws-ov__h2--klein{font-size:26px}
+  .ws-ov__vtekst{font-size:14px;line-height:168%}
+  .ws-ov__les{font-size:18px;padding-left:16px;max-width:none}
+  .ws-ov__hand i{width:44px;height:44px}
 
   .ws-ov__vragen{padding:26px 14px}
   .ws-ov__rand{padding:26px 18px 28px;border-radius:16px}
