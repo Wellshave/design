@@ -120,6 +120,8 @@ ook het live thema.
 | `custom.buybox_quote` en `custom.buybox_quote_author` | Nieuwe velddefinities. Het klantcitaat in het koopvak stond anders op elk product hetzelfde. Gevuld op de Groom Guard PRO. |
 | `best_for` op de definitie `compare_info` | De regel "Beste voor: ..." in de pop-up had geen veld. Gevuld voor de Groom Guard en de PRO. |
 | `popup_lead` en `popup_winst` op de definitie `compare_info` | De kop, de lead en de winstbalk van de pop-up stonden in sectie-instellingen en waren dus winkelbreed: een neustrimmer kreeg de Groom Guard-tekst te zien. Nu per product. Gevuld voor de Groom Guard-familie en de vier neustrimmers. |
+| Vertalingen en / de / fr | De winkel heeft vier gepubliceerde talen; nl is de hoofdtaal. De sectie drukt af wat de winkel teruggeeft voor de taal waarin je kijkt, dus op `/en` staat de Engelse vertaling. `popup_lead`, `popup_winst`, `best_for` en `popup_decision` waren nieuw en hadden nog geen vertaling &mdash; de Engelse pagina was daardoor half Nederlands. Vertaald voor de Groom Guards en de vier neustrimmers, plus het label van `morgen-in-huis`. |
+| Engelse kop van de PRO stond op een ander product | `popup_main_title` in het Engels was &laquo;Compare Wellshave Flex Guard PRO&raquo; op een Groom Guard-pagina. Nu &laquo;Which Groom Guard suits you?&raquo; in en / de / fr, gelijk aan het Nederlands. Ook `product_title`, `toggle_title` en `popup_title` stonden daar nog op &laquo;Pro&raquo;. |
 | `includes_previous` op de definitie `compare_info` | Nieuw vinkje: &laquo;bevat alles van de goedkopere modellen&raquo;. Zonder dat vinkje betekende &laquo;niet vermeld&raquo; in de tabel hetzelfde als &laquo;niet aanwezig&raquo;, en stond er bij de PRO een streepje op Skin-Safe mes. Aangezet op `groom-guard-pro`. |
 | `Pro` &rarr; `PRO` op `groom-guard-pro` | `product_title` en `toggle_title` van dat metaobject schreven `Groom Guard&trade; Pro`, terwijl `popup_title` en de producttitel zelf `PRO` schrijven. De tabelkop en de knoppen in de pop-up lezen `toggle_title`, dus daar stond &laquo;Pro&raquo;. Nu overal PRO. |
 | `popup_decision` op de definitie `compare_info` | De beslisregel onder de tabel. Per product &eacute;&eacute;n korte vraag; het antwoord is de naam van dat product. Gevuld voor de Groom Guards en de vier neustrimmers. Leeg bij alle producten betekent: geen beslisregel. |
@@ -139,14 +141,6 @@ het metafield weer op de oorspronkelijke drie zetten: `1859112894796`
   hetzelfde. Van de honderd recentste Nederlandse Trustpilot-reviews gaan er vijf
   over een product; waar er geen is, hoort het citaat leeg te blijven &mdash; dan valt
   de kaart weg.
-* **De winkel heeft vier gepubliceerde talen: nl (hoofdtaal), en, de, fr.**
-  De sectie drukt af wat de winkel teruggeeft voor de taal waarin je kijkt, dus
-  op `/en` zie je de Engelse vertalingen van `compare_info` en `store_usp`.
-  De velden die wij nieuw hebben aangemaakt (`popup_lead`, `popup_winst`,
-  `best_for`, `popup_decision`) hebben nog geen vertaling en vallen terug op het
-  Nederlands, waardoor de Engelse pagina half Nederlands is. Ook staat er in de
-  Engelse vertaling van `popup_main_title` op de Groom Guard PRO
-  &laquo;Compare Wellshave Flex Guard PRO&raquo; &mdash; de verkeerde productnaam.
 * **De voordeeltitels van de neustrimmers zijn geen gedeelde woordenlijst.**
   De vier modellen schrijven ieder hun eigen marketingregel &mdash; &laquo;Compact
   design&raquo;, &laquo;Meer precisie&raquo;, &laquo;Meer grooming controle&raquo;,
@@ -157,9 +151,9 @@ het metafield weer op de oorspronkelijke drie zetten: `1859112894796`
   vraagt om herschreven titels, niet om andere logica.
 * **De pop-upteksten staan nog niet op elke productfamilie.** `popup_main_title`,
   `popup_lead`, `popup_winst`, `best_for` en `popup_decision` in `compare_info`
-  zijn gevuld voor de Groom Guards en de neustrimmers. De families `flex-*`, `shave-package-*`,
-  `tondeuse-*` en `head-shaver-*` hebben nog de Engelse `popup_main_title`
-  ("Compare ...") en geen lead of winstbalk.
+  zijn gevuld voor de Groom Guards en de neustrimmers, in alle vier de talen. De
+  families `flex-*`, `shave-package-*`, `tondeuse-*` en `head-shaver-*` hebben nog
+  de Engelse `popup_main_title` ("Compare ...") en geen lead of winstbalk.
 * **De prijsopmaak van de winkel heeft geen €-teken** (`moneyFormat` staat op
   `{{amount_with_comma_separator}}`). De sectie volgt de winkel, dus er staat
   `59,95`. Wordt de instelling aangepast, dan komt het teken er overal bij.
