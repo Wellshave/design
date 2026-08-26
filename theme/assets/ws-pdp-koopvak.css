@@ -342,15 +342,34 @@
   list-style:none;margin:0;padding:0}
 .ws-pdp .ws-pay .payment__list svg{height:23px;width:auto;display:block;border-radius:4px}
 
-/* ---- de specificatietabel in de accordeon ---- */
-.ws-pdp .ws-acc .ws-sp{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 16px;margin:10px 0 0}
-.ws-pdp .ws-acc .ws-sp dt{font-weight:700;color:rgba(255,255,255,.8)}
-.ws-pdp .ws-acc .ws-sp dd{margin:0}
+/* ---- wat zit er in de doos ----
+   Een rij per artikel: miniatuur, naam, omschrijving. Het beeld doet het
+   koppelwerk -- zonder dat zweeft de omschrijving los naast een naam en moet
+   je zelf uitzoeken wat bij wat hoort. */
+.ws-pdp .ws-acc .ws-doos{list-style:none;margin:8px 0 0;padding:0}
+.ws-pdp .ws-acc .ws-doos li{display:flex;gap:13px;align-items:flex-start;
+  padding:12px 0;border-top:1px solid rgba(255,255,255,.1)}
+.ws-pdp .ws-acc .ws-doos li:first-child{border-top:0;padding-top:2px}
+.ws-pdp .ws-acc .ws-doos-b{flex:none;width:50px;height:50px;border-radius:9px;
+  background:rgba(255,255,255,.055);overflow:hidden}
+.ws-pdp .ws-acc .ws-doos-b img{width:100%;height:100%;object-fit:contain;display:block}
+.ws-pdp .ws-acc .ws-doos-t{min-width:0}
+.ws-pdp .ws-acc .ws-doos-t b{display:block;font-size:12.5px;font-weight:700;
+  color:var(--ws-gold3);margin:1px 0 3px}
 /* metafield_tag verpakt de tekst in een div met paragrafen; die brengen hun
    eigen marges mee en die willen we hier niet. */
-.ws-pdp .ws-acc .ws-sp dd > div{display:contents}
-.ws-pdp .ws-acc .ws-sp dd p{margin:0 0 5px}
-.ws-pdp .ws-acc .ws-sp dd p:last-child{margin-bottom:0}
+.ws-pdp .ws-acc .ws-doos-t > div{display:contents}
+.ws-pdp .ws-acc .ws-doos-t p{margin:0 0 5px}
+.ws-pdp .ws-acc .ws-doos-t p:last-child{margin-bottom:0}
+
+/* ---- de specificaties onder de omschrijving ----
+   In het veld staat elke regel als losse regel binnen een alinea. Zonder
+   pre-line lopen ze aan elkaar tot een muur tekst. */
+.ws-pdp .ws-acc .ws-spec{margin:13px 0 0;padding-top:12px;
+  border-top:1px solid rgba(255,255,255,.1)}
+.ws-pdp .ws-acc .ws-spec h4{margin:0 0 6px;font-size:10px;font-weight:800;
+  letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+.ws-pdp .ws-acc .ws-spec p{margin:0;white-space:pre-line;color:rgba(255,255,255,.72)}
 .ws-pdp .ws-acc .in ul{margin:0;padding-left:18px}
 .ws-pdp .ws-acc .in a{color:var(--ws-gold3)}
 

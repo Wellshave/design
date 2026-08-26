@@ -342,7 +342,19 @@
             <summary>{{ s.acc1_titel }}<i></i></summary>
             <div class="in">
               {%- if product.description != blank -%}{{ product.description }}{%- endif -%}
-              {%- if mf.specification != blank -%}{{ mf.specification }}{%- endif -%}
+              {%- comment -%}
+                specification is een rijketekstveld. Rechtstreeks afdrukken zet de
+                ruwe JSON op het scherm -- {"type":"root","children":[ ... -- dus
+                metafield_tag. De regels in dat veld staan als losse regels in een
+                alinea; pre-line in de stylesheet laat die weer als regels zien in
+                plaats van als een lange doorloop.
+              {%- endcomment -%}
+              {%- if mf.specification != blank -%}
+                <div class="ws-spec">
+                  {%- if s.spec_kop != blank -%}<h4>{{ s.spec_kop }}</h4>{%- endif -%}
+                  {{ mf.specification | metafield_tag }}
+                </div>
+              {%- endif -%}
             </div>
           </details>
 
@@ -357,12 +369,21 @@
                   metafield_tag maakt er opmaak van. De titel gaat door strip,
                   want een paar van die velden eindigen op een spatie.
                 {%- endcomment -%}
-                <dl class="ws-sp">
+                <ul class="ws-doos">
                   {%- for item in doos -%}
-                    <dt>{{ item.title | strip }}</dt>
-                    <dd>{{ item.description | metafield_tag }}</dd>
+                    <li>
+                      <span class="ws-doos-b">
+                        {%- if item.image != blank -%}
+                          {{ item.image | image_url: width: 160 | image_tag: alt: '', loading: 'lazy' }}
+                        {%- endif -%}
+                      </span>
+                      <span class="ws-doos-t">
+                        <b>{{ item.title | strip }}</b>
+                        {{ item.description | metafield_tag }}
+                      </span>
+                    </li>
                   {%- endfor -%}
-                </dl>
+                </ul>
               </div>
             </details>
           {%- endif -%}
@@ -895,6 +916,7 @@
     { "type": "text", "id": "tel_na", "label": "Teller — tekst erna", "default": "mannen gekozen" },
     { "type": "header", "content": "Accordeons" },
     { "type": "text", "id": "acc1_titel", "label": "1 — titel", "default": "Omschrijving & specificaties" },
+    { "type": "text", "id": "spec_kop", "label": "1 — kopje boven de specificaties", "default": "Specificaties" },
     { "type": "text", "id": "acc2_titel", "label": "2 — titel", "default": "Wat zit er in de doos" },
     { "type": "text", "id": "acc3_titel", "label": "3 — titel", "default": "Verzending & retour" },
     { "type": "richtext", "id": "acc3_tekst", "label": "3 — tekst", "default": "<p>Vandaag vóór 23:59 besteld is morgen in huis. Gratis verzending binnen Nederland en België. Niet goed? Binnen 100 dagen terug, wij betalen de retour.</p>" },

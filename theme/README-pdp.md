@@ -119,6 +119,21 @@ Twee dingen die daar nog omheen zitten:
   sluitende accolade.** Liquid leest die twee tekens als het einde van een tag.
   Dus `border-radius:50% }` met een spatie.
 
+## Elk rijketekstveld heeft `metafield_tag` nodig
+
+Drukt de sectie een rijketekstveld rechtstreeks af, dan staat de ruwe JSON op
+het scherm: `{"type":"root","children":[{"type":"paragraph" ...`. Dat is nu
+drie keer gebeurd &mdash; bij `limited_offer.offer_title`, bij
+`included_box.description` en bij `custom.specification`. De regel is dus:
+**elk veld van het type rijke tekst gaat door `| metafield_tag`.**
+
+Controleren kan met een blik op de accordeon: staat er ergens `"type":"root"`
+op de pagina, dan mist er een filter.
+
+`custom.specification` heeft daarbij nog iets eigens: het hele veld is
+&eacute;&eacute;n alinea met harde regeleindes erin. HTML vouwt die dicht tot een
+doorlopende muur tekst, dus de stylesheet zet er `white-space:pre-line` op.
+
 ## Een nieuw metaobject staat op draft en is dan onzichtbaar
 
 `metaobjectCreate` zet de `publishable`-capability standaard op **DRAFT**, en de
@@ -189,6 +204,8 @@ ook het live thema.
 | Flex-familie op doosinhoud | `flex-guard`, `essential-flex-bundel` en `flex-line-bundel` hadden losse verkoopargumenten als rijen. Nu voorwerpen uit `included_box`, met &eacute;&eacute;n woordenlijst. De Flex Guard blijft naast de Essential Flex Bundel staan, zoals afgesproken. |
 | `compare_products` van de Flex-line Bundel | Daar stonden de Flex Guard en de **Essential** Flex Bundel &mdash; de Flex-line kwam in zijn eigen pop-up niet voor. Nu Flex Guard + Flex-line. Niet naast de Essential: die twee zijn geen trap (de Essential heeft twee tassen en geen detailtrimmer, de Flex-line andersom), dus de erfregel zou de Flex-line tassen toeschrijven die er niet in zitten. |
 | Onderregels van de Flex-familie | `toggle_subtitle` van de Flex Guard en de Essential Flex Bundel stond op &laquo;Veilig lichaam trimmen&raquo;, Groom Guard-copy bij een 3-in-1 die ook scheert. Nu &laquo;Trimmen, scheren en neushaar&raquo; en &laquo;Flex Guard + toilettas en hard case&raquo;. `reviews_label` van de Essential stond op 800+ terwijl alle andere 650+ zeggen; gelijkgetrokken. De Flex-line heette in `compare_info` &laquo;Flex Line Bundel&raquo;, het product heet &laquo;Flex-line Bundel&raquo;. |
+| Typefouten in `included_box` verbeterd | `Scheerkoop 7D` &rarr; `Scheerkop 7D`, `2x Scheerkoop 7D` &rarr; `2x Scheerkop 7D`, `Tonduese` &rarr; `Tondeuse`. **Zichtbaar op de live site**, want de doos-dropdown leest deze titels. De Engelse vertaling van `Tonduese` was **`Toning device`** &mdash; een machine had er een toningapparaat van gemaakt. Alle drie opnieuw vertaald in en / de / fr. |
+| `Skin Safe Mes` en `Foil Shaver Head` in de Flex-doos | Het mes heette in `included_box` van de Flex Guard nog `Skin Safe Mes`, met in het Duits **`Hautfreundliche Mes`** en in het Frans **`Peau S&ucirc;re Mes`** &mdash; de merknaam vertaald, het Nederlandse &laquo;mes&raquo; blijven staan. Nu `SkinSafe&trade;-mes` in alle vier de talen, met een omschrijving die niet twee keer &laquo;Skin Safe&raquo; zegt. `Foil Shaver Head` is `Foil Shaver-opzetstuk`; dat item zit ook in de Shave Package Ultimate en de twee Flex-bundels, dus die pagina&rsquo;s veranderen mee. |
 | Vierde `store_usp`: Morgen in huis | De voetbalk van de pop-up toont wat er in `custom.store_usp` staat, en dat waren er drie. Nieuw metaobject met een icoon in dezelfde stijl als de andere drie (20 bij 20, streek `#BC813E`), toegevoegd aan de lijst op de Groom Guard en de PRO. |
 
 Let op bij die laatste. `custom.store_usp` wordt ook gelezen door het
@@ -249,14 +266,11 @@ weer aan te zetten. Wat de Selleasy-kaart deed, hoort in blok 07
   oplaadkabel**, terwijl de 3.0 die w&eacute;l noemt en het apparaat hetzelfde is.
   In de tabel komt dat goed omdat de duurdere kolom erft, maar het veld zelf
   klopt niet.
-* **Twee typefouten staan live in `included_box`.** De scheerkop heet
-  `Scheerkoop 7D` (2062199554380) en bij de Skull Deals `2x Scheerkoop 7D`
-  (3067926511948); de Tondeuse Deluxe heeft een item `Tonduese`
-  (2062996799820). Die namen staan in de dropdown &laquo;wat zit er in de doos&raquo;
-  op de productpagina, ook in het live thema, en `Tonduese` zit ook in de doos
-  van elke Barber Bro. Niet aangeraakt: het is live
-  klantcopy buiten de opdracht. Verbeteren betekent ook de en / de / fr
-  opnieuw registreren.
+* **De omschrijvingen in `included_box` zijn nog verkooppraat.** &laquo;Uitermate
+  geschikt voor het lichaam, intieme zones en dagelijks onderhoud&raquo; beschrijft
+  niet w&aacute;t er in de doos ligt. Een regel per artikel die zegt wat het is en
+  waarvoor je het gebruikt, leest sneller. De namen zijn nu opgeschoond; de
+  omschrijvingen niet.
 * **De Barber Packs kosten meer dan de Barber Bro&rsquo;s en hebben toch de
   goedkopere tondeuse.** Volgens `included_box` zit in de Packs de Elegant
   (59,95) en in de Bro&rsquo;s de Deluxe (69,95), terwijl de Packs op elke trede
