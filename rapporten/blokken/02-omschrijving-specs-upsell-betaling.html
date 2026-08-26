@@ -798,6 +798,29 @@ strong{font-weight:700}
   .vglpop .vp-voet svg{width:20px;height:20px}
   .vglpop .vp-voet span{font-size:11px}
 }
+
+/* ---- voorstel: woordenlijst neustrimmers ---- */
+.vst{width:100%;border-collapse:collapse;font-size:14.5px;margin:20px 0 0;
+  background:var(--paper);border-radius:var(--r-m);overflow:hidden;
+  box-shadow:0 1px 0 var(--ink-10)}
+.vst th,.vst td{padding:12px 15px;text-align:left;border-bottom:1px solid var(--ink-10);
+  vertical-align:top}
+.vst thead th{background:var(--sand-deep);font-size:10.5px;font-weight:800;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink-60);white-space:nowrap}
+.vst tbody th{font-weight:700;color:var(--ink)}
+.vst tbody tr:last-child th,.vst tbody td:last-child{border-bottom:0}
+.vst td.mid,.vst th.mid{text-align:center}
+.vst .ja{color:#2E6B3E;font-weight:800}
+.vst .nee{color:var(--ink-40)}
+.vst .nw{color:#B0742A;font-weight:700}
+.vst code{font-size:12.5px;background:var(--sand);padding:2px 6px;border-radius:6px}
+.vstwrap{overflow-x:auto;margin:20px 0 0}
+.vstwrap .vst{margin:0;min-width:520px}
+.vsth{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--bronze);margin:34px 0 0}
+@media (max-width:700px){
+  .vst th,.vst td{padding:10px 11px;font-size:13px}
+}
 </style>
 <div class="wrap">
 
@@ -1033,6 +1056,82 @@ strong{font-weight:700}
     <h4>Twee getallen die niet klopten in het ontwerp</h4>
     <p>In je ontwerp stond <strong>&laquo;4,6/5 uit 650+ reviews&raquo;</strong>. Dat zijn twee bronnen door elkaar: 4,4 is de winkelbrede Trustpilot-score bij 968 reviews, en &laquo;650+&raquo; is <code>compare_info.reviews_label</code> van dit product. Hierboven staat de winkelbrede combinatie, want die is na te rekenen.</p>
     <p>En het <strong>euroteken</strong>: de prijsopmaak van de winkel staat op <code>{{amount_with_comma_separator}}</code>, dus overal op de site staat <code>44,95</code> zonder teken. Wil je het hier w&eacute;l, dan is dat een winkelinstelling &mdash; en dan verandert hij overal tegelijk.</p>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">VOORSTEL</span><h2 class="duo">E&eacute;n woordenlijst,<span class="b">anders vergelijkt de tabel niets.</span></h2></div>
+  <p class="sintro">De vergelijkingstabel ontdubbelt op letterlijk gelijke tekst. Bij de Groom Guards werkt dat, want die delen hun formuleringen. Bij de neustrimmers niet: daar schrijft elk model zijn eigen marketingregel, en dan krijgt elke rij maar bij &eacute;&eacute;n kolom een vinkje.</p>
+
+  <p class="vsth">Wat er nu in <code>compare_info</code> staat</p>
+  <div class="vstwrap">
+  <table class="vst">
+    <thead><tr><th>&nbsp;</th><th>Basic &mdash; 16,95</th><th>Premium &mdash; 19,95</th><th>Advance &mdash; 24,95</th><th>Ultimate &mdash; 29,95</th></tr></thead>
+    <tbody>
+      <tr><th>voordeel 1</th><td>360&deg; double blade systeem</td><td>360&deg; double blade systeem</td><td>360&deg; double blade systeem</td><td>360&deg; double blade systeem</td></tr>
+      <tr><th>voordeel 2</th><td>Single neustrimmer</td><td>Neustrimmer + detailtrimmer</td><td>3 in 1 systeem</td><td>4 in 1 systeem</td></tr>
+      <tr><th>voordeel 3</th><td>Compact design</td><td>Meer precisie</td><td>Meer grooming controle</td><td>Ultra glad afwerken</td></tr>
+      <tr><th>voordeel 4</th><td>Eenvoudig reinigen</td><td>Eenvoudig reinigen</td><td>Waterdicht design</td><td>Maximale veelzijdigheid</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>Alleen de eerste regel is bij alle vier gelijk. De overige worden dertien losse rijen, elk met &eacute;&eacute;n vinkje &mdash; dat leest alsof elk model bijna niets kan. En &laquo;Compact design&raquo;, &laquo;Meer precisie&raquo;, &laquo;Meer grooming controle&raquo; en &laquo;Maximale veelzijdigheid&raquo; zijn geen eigenschappen die je kunt aan- of uitvinken. Het zijn oordelen.</p>
+
+  <div class="note warn">
+    <h4>Drie plekken waar de marketingregels de specificaties tegenspreken</h4>
+    <p><strong>1. Waterdicht.</strong> &laquo;Waterdicht design&raquo; staat alleen bij de Advance en de Ultimate. In <code>custom.specification</code> staat bij alle vier: <em>IPX5 waterbestendig, geschikt voor nat en droog gebruik</em>. De Basic en de Premium zijn dus even waterbestendig; de tabel zou nu beweren van niet.</p>
+    <p><strong>2. Wat er in de doos zit.</strong> De Ultimate belooft in <code>compare_info</code> een <em>shaver en foil shaver</em>. De specificatie zegt: <em>neustrimmer, wenkbrauwtrimmer, detailtrimmer en bodygroomer</em>. Bij de Premium staat <em>detailtrimmer</em> waar de specificatie <em>wenkbrauwtrimmer</em> zegt. Dat zijn andere opzetstukken.</p>
+    <p><strong>3. Het messysteem.</strong> De voordelen noemen het &laquo;360&deg; double blade systeem&raquo;, de specificatie noemt &laquo;roestvrijstalen precisiemessen met SkinGuard technologie&raquo;. Twee namen voor hetzelfde, en alleen de tweede staat op de productpagina zelf.</p>
+  </div>
+
+  <div class="note win">
+    <h4>Wat de vier modellen echt onderscheidt</h4>
+    <p>Uit <code>custom.specification</code>, dat bij alle vier ingevuld is: <strong>behuizing, messen, SkinGuard, accu, laadtijd, gebruiksduur, IPX5 en USB-opladen zijn identiek.</strong> Het enige verschil is het aantal opzetstukken &mdash; 1, 2, 3 en 4 &mdash; en welke dat zijn. Dat is de hele vergelijking. Een tabel die dat laat zien is korter &eacute;n eerlijker dan wat er nu staat.</p>
+  </div>
+
+  <p class="vsth">Het voorstel &mdash; vaste namen, door alle vier gebruikt</p>
+  <div class="vstwrap">
+  <table class="vst">
+    <thead><tr><th>Titel</th><th>Onderregel</th><th class="mid">Basic</th><th class="mid">Premium</th><th class="mid">Advance</th><th class="mid">Ultimate</th></tr></thead>
+    <tbody>
+      <tr><th>Neustrimmer-opzetstuk</th><td>Voor neushaar, zonder trekken</td><td class="mid ja">&#10003;</td><td class="mid ja">&#10003;</td><td class="mid ja">&#10003;</td><td class="mid ja">&#10003;</td></tr>
+      <tr><th>Wenkbrauwtrimmer-opzetstuk</th><td>Voor wenkbrauwen bijwerken</td><td class="mid nee">&mdash;</td><td class="mid ja">&#10003;</td><td class="mid ja">&#10003;</td><td class="mid ja">&#10003;</td></tr>
+      <tr><th>Detailtrimmer-opzetstuk</th><td>Voor de baardlijn en kleine zones</td><td class="mid nee">&mdash;</td><td class="mid nee">&mdash;</td><td class="mid ja">&#10003;</td><td class="mid ja">&#10003;</td></tr>
+      <tr><th>Bodygroomer-opzetstuk</th><td>Groter scheervlak voor het lichaam</td><td class="mid nee">&mdash;</td><td class="mid nee">&mdash;</td><td class="mid nee">&mdash;</td><td class="mid ja">&#10003;</td></tr>
+      <tr><th>SkinGuard-messen</th><td>Afgeronde messen tegen wondjes en irritatie</td><td class="mid ja">&#10003;</td><td class="mid ja">&#10003;</td><td class="mid ja">&#10003;</td><td class="mid ja">&#10003;</td></tr>
+      <tr><th>IPX5 waterbestendig</th><td>Af te spoelen, nat en droog te gebruiken</td><td class="mid ja">&#10003;</td><td class="mid ja">&#10003;</td><td class="mid ja">&#10003;</td><td class="mid ja">&#10003;</td></tr>
+      <tr><th>USB-oplaadbaar</th><td>180 minuten laden, tot 60 minuten gebruik</td><td class="mid ja">&#10003;</td><td class="mid ja">&#10003;</td><td class="mid ja">&#10003;</td><td class="mid ja">&#10003;</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>Zeven rijen, vier velden per model. Dat past, omdat een model dat <code>includes_previous</code> aan heeft staan alles erft van een goedkopere kolom in dezelfde pop-up. Elk model vult dus zijn eigen opzetstukken in en gebruikt de resterende velden voor de gedeelde regels:</p>
+
+  <div class="vstwrap">
+  <table class="vst">
+    <thead><tr><th>&nbsp;</th><th>voordeel 1</th><th>voordeel 2</th><th>voordeel 3</th><th>voordeel 4</th><th><code>includes_previous</code></th></tr></thead>
+    <tbody>
+      <tr><th>Basic</th><td>Neustrimmer-opzetstuk</td><td>SkinGuard-messen</td><td>IPX5 waterbestendig</td><td>USB-oplaadbaar</td><td class="nee">uit</td></tr>
+      <tr><th>Premium</th><td>Neustrimmer-opzetstuk</td><td class="nw">Wenkbrauwtrimmer-opzetstuk</td><td>SkinGuard-messen</td><td>IPX5 waterbestendig</td><td class="ja">aan</td></tr>
+      <tr><th>Advance</th><td>Neustrimmer-opzetstuk</td><td>Wenkbrauwtrimmer-opzetstuk</td><td class="nw">Detailtrimmer-opzetstuk</td><td>SkinGuard-messen</td><td class="ja">aan</td></tr>
+      <tr><th>Ultimate</th><td>Neustrimmer-opzetstuk</td><td>Wenkbrauwtrimmer-opzetstuk</td><td>Detailtrimmer-opzetstuk</td><td class="nw">Bodygroomer-opzetstuk</td><td class="ja">aan</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="note">
+    <h4>De pop-up vergelijkt er twee, niet vier</h4>
+    <p>In <code>custom.compare_products</code> staan per product precies twee modellen. De Basic zet zichzelf naast de <strong>Advance</strong> &mdash; de Premium wordt overgeslagen. De Premium ook naast de Advance. De Advance en de Ultimate zetten zichzelf naast elkaar. Er zijn dus drie tabellen, en met de woordenlijst hierboven kloppen ze alle drie:</p>
+    <p><strong>Basic tegenover Advance:</strong> zes rijen, waarvan vier bij allebei aan. Het verschil: wenkbrauwtrimmer en detailtrimmer.<br>
+    <strong>Premium tegenover Advance:</strong> vijf rijen. Het verschil: alleen de detailtrimmer.<br>
+    <strong>Advance tegenover Ultimate:</strong> vijf rijen. Het verschil: alleen de bodygroomer.</p>
+  </div>
+
+  <div class="note warn">
+    <h4>Drie dingen die jij moet beslissen</h4>
+    <p><strong>1. Oorhaar.</strong> De oude tekst belooft &laquo;neus, oren en wenkbrauwen&raquo;, de specificatie noemt oren nergens. Als het wenkbrauwopzetstuk ook voor oorhaar is, wordt de onderregel &laquo;Voor wenkbrauwen en oorhaar&raquo; en verandert <code>best_for</code> mee. Zo niet, dan moet die belofte weg.</p>
+    <p><strong>2. De winstbalk verdwijnt op twee pagina&rsquo;s.</strong> <code>is_popuplar</code> staat op de Advance. In de pop-up Advance-tegenover-Ultimate is het uitgelichte model dus het go&eacute;dkoopste, en dan is het prijsverschil nul en valt de balk weg. Dat is te repareren door het verschil te rekenen tussen de duurste en de goedkoopste kolom in plaats van tussen het uitgelichte model en de goedkoopste. Voor de Groom Guards verandert er dan niets; voor de Advance- en Ultimate-pagina komt de balk terug.</p>
+    <p><strong>3. Er staat een tweede neustrimmerlijn in de winkel.</strong> Essential&trade; (19,95), 2in1 Elite&trade; (23,95), 3in1 Platinum&trade; (29,95) en 4in1 Ultra&trade; (32,95) &mdash; allemaal actief, met andere specificaties (SafeShave&trade;-mesjes, 7000 RPM, LED-batterij-indicator, cadeauverpakking) en <strong>zonder</strong> <code>compare_info</code>. Bij die vier doet de vergelijkingsknop dus niets. Is dat de nieuwe lijn, dan moet dit voorstel daarop en niet op Basic&ndash;Ultimate.</p>
   </div>
 </section>
 
