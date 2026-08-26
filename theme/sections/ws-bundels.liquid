@@ -20,6 +20,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
   <symbol id="ws-bn-vink" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="ws-bn-arw" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-bn-tag" viewBox="0 0 24 24"><path d="M11.6 3.2H4.9a1.7 1.7 0 00-1.7 1.7v6.7c0 .45.18.88.5 1.2l7.5 7.5a1.7 1.7 0 002.4 0l6.7-6.7a1.7 1.7 0 000-2.4l-7.5-7.5a1.7 1.7 0 00-1.2-.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="8" cy="8" r="1.5" fill="currentColor"/></symbol>
 </svg>
 
 <div class="ws-bn"><div class="ws-bn__in">
@@ -78,7 +79,7 @@
             {%- endif -%}
           </span>
           {%- if hv.compare_at_price > hv.price -%}
-            <span class="ws-bn__hbespaar">{{ section.settings.bespaar }} {{ hv.compare_at_price | minus: hv.price | money }}</span>
+            <span class="ws-bn__hbespaar"><svg><use href="#ws-bn-tag"/></svg>{{ section.settings.bespaar }} {{ hv.compare_at_price | minus: hv.price | money }}</span>
           {%- endif -%}
           <span class="ws-bn__hvoorraad">
             {%- if hv.available -%}
@@ -132,7 +133,7 @@
                 {%- endif -%}
               </span>
               {%- if v.compare_at_price > v.price -%}
-                <span class="ws-bn__korting">{{ section.settings.bespaar_kort }} {{ v.compare_at_price | minus: v.price | money }}</span>
+                <span class="ws-bn__korting"><svg><use href="#ws-bn-tag"/></svg>{{ section.settings.bespaar_kort }} {{ v.compare_at_price | minus: v.price | money }}</span>
               {%- endif -%}
               <span class="ws-bn__voorraad">
                 {%- if v.available -%}
