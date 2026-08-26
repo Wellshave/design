@@ -82,8 +82,11 @@
   background:linear-gradient(100deg,#F7E2B4,#EFCE93);padding:4px 4px 4px 0}
 .ws-pdp .ws-pil b{font-size:11.5px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;white-space:nowrap}
 .ws-pdp .ws-pil .ws-a{padding:8px 16px 8px 20px;color:#4A2E08}
-.ws-pdp .ws-pil .ws-z{padding:8px 18px;border-radius:100px;color:#3A2405;
-  background:linear-gradient(100deg,#EDC684,#DDA548)}
+/* Het kortingslabel was goud op goud: twee tinten die om voorrang vechten en
+   allebei verliezen. Zwart met wit springt eruit zonder een derde kleur toe
+   te voegen -- het is de kleur van het koopvak eronder. */
+.ws-pdp .ws-pil .ws-z{padding:8px 18px;border-radius:100px;color:#fff;
+  background:var(--ws-zwart)}
 
 .ws-pdp .ws-tp{display:flex;align-items:center;gap:9px;margin-top:15px;flex-wrap:wrap}
 .ws-pdp .ws-tp .ws-st{display:flex;gap:2px}
