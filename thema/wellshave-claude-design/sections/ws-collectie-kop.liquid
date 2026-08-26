@@ -158,7 +158,12 @@
         {%- if block.type == 'match' -%}
           {%- assign p = block.settings.product -%}
           {%- assign v = p.selected_or_first_available_variant -%}
-          <div class="matchpaneel" data-id="{{ block.settings.id | handle }}" {{ block.shopify_attributes }}>
+          {%- comment -%}
+            data-handle is de brug naar het raster: de kaarten daar staan op de
+            producthandle, terwijl de beslistabel met een eigen kort id werkt.
+          {%- endcomment -%}
+          <div class="matchpaneel" data-id="{{ block.settings.id | handle }}"
+               data-handle="{{ p.handle }}" {{ block.shopify_attributes }}>
             <div class="mp-kop">
               <b>{{ section.settings.match_label | default: 'Jouw match' }}</b>
               {%- if block.settings.badge != blank -%}<span class="mp-badge">{{ block.settings.badge }}</span>{%- endif -%}
@@ -237,12 +242,6 @@
         {%- endif -%}
       {%- endfor -%}
     </div>
-    {%- if section.settings.zonemelding != blank -%}
-      <p class="zonemelding">
-        <span class="zm-vink"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsc-vink"/></svg></span>
-        <span>Je bekijkt <b class="zn">{{ section.settings.kruimel }}</b> &mdash;
-          <b class="za">{{ section.settings.zone_aantal }}</b> {{ section.settings.zonemelding }}</span></p>
-    {%- endif -%}
   </div></section>
 {%- endif -%}
 
@@ -335,8 +334,6 @@
     { "type": "text", "id": "voorraad_niet", "label": "Voorraadregel · uitverkocht", "default": "Tijdelijk uitverkocht" },
     { "type": "header", "content": "Zonebalk" },
     { "type": "text", "id": "kruimel", "label": "Naam van deze zone", "default": "Hoofd" },
-    { "type": "text", "id": "zone_aantal", "label": "Aantal apparaten in deze zone", "default": "4" },
-    { "type": "text", "id": "zonemelding", "label": "Regel achter het aantal", "default": "apparaten, plus de sets en de onderdelen die je later vervangt." },
     { "type": "header", "content": "Indent settings" },
     { "type": "range", "id": "desk_indent_top", "label": "Indent top (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
     { "type": "range", "id": "desk_indent_bottom", "label": "Indent bottom (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },

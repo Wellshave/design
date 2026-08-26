@@ -44,7 +44,6 @@
 
     var woorden = [];
     for (var g in nu) { if (CFG.woord[g] && CFG.woord[g][nu[g]]) woorden.push(CFG.woord[g][nu[g]]); }
-    chips(nu);
     document.dispatchEvent(new CustomEvent('ws:keuze', {
       detail: { id: id, regel: woorden.join(' · ') }
     }));
@@ -97,51 +96,6 @@
     rij.classList.remove('klaar');
     rij.classList.add('nu');
     kies();
-  }
-
-    // Eén chip per beantwoorde vraag, met een kruisje dat alleen díe vraag wist.
-  // De tekst komt uit dezelfde woordenlijst als de regel eronder, met een hoofdletter.
-  function chips(nu) {
-    var bak = document.querySelector('.wsc .fb-chips');
-    if (!bak) return;
-    var wis = document.querySelector('.wsc .fb-wis');
-    bak.textContent = '';
-    var aantal = 0;
-    for (var g in nu) {
-      var w = CFG.woord[g] && CFG.woord[g][nu[g]];
-      if (!w) continue;
-      aantal++;
-      var chip = document.createElement('span');
-      chip.className = 'fb-chip';
-      var t = document.createElement('span');
-      t.textContent = w.charAt(0).toUpperCase() + w.slice(1);
-      var k = document.createElement('button');
-      k.type = 'button';
-      k.className = 'fb-chip-uit';
-      k.setAttribute('aria-label', 'Wis de keuze ' + t.textContent);
-      k.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsr-kruis"/></svg>';
-      k.dataset.groep = g;
-      k.addEventListener('click', function () { wisGroep(this.dataset.groep); });
-      chip.appendChild(t); chip.appendChild(k);
-      bak.appendChild(chip);
-    }
-    if (!aantal) {
-      var leeg = document.createElement('span');
-      leeg.className = 'fb-chips-leeg';
-      leeg.textContent = bak.dataset.leeg || '';
-      bak.appendChild(leeg);
-    }
-    if (wis) wis.hidden = aantal === 0;
-  }
-
-  // Een vraag wissen betekent: geen enkel antwoord meer ingedrukt. De beslistabel
-  // valt dan terug op een regel met een sterretje, of op de standaardmatch.
-  function wisGroep(groep) {
-    var rij = document.querySelector('.wsc .keuzes[data-groep="' + groep + '"]');
-    if (!rij) return;
-    rij.querySelectorAll('.keuze').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
-    var vr = rij.closest('.vraagrij');
-    if (vr) heropen(vr); else kies();
   }
 
   /* ── het raster ── */
@@ -221,9 +175,14 @@
     vgl_vorige = null;
   }
 
+  // `id` is het korte id uit de beslistabel ("elite"); de kaarten in het raster staan
+  // op de producthandle ("neustrimmer-2in1-elite"). Het matchpaneel kent allebei, dus
+  // die vertaalt. Zonder deze stap bleef "Beste match" op elke kaart onzichtbaar.
   function zetMatch(id, regel) {
+    var paneel = document.querySelector('.wsc .matchpaneel[data-id="' + id + '"]');
+    var handle = paneel && paneel.dataset.handle;
     document.querySelectorAll('.wsc .wsk').forEach(function (k) {
-      var isMatch = k.dataset.id && k.dataset.id === id;
+      var isMatch = !!handle && k.dataset.id === handle;
       k.classList.toggle('match', isMatch);
       var t = k.querySelector('.wsk-tag.matchtag');
       if (isMatch && !t) {
@@ -250,9 +209,6 @@
           e.preventDefault();
           rij.querySelectorAll('.zone').forEach(function (x) { x.removeAttribute('aria-current'); });
           b.setAttribute('aria-current', 'true');
-          var zn = document.querySelector('.wsc .zn'), za = document.querySelector('.wsc .za');
-          if (zn) zn.textContent = b.dataset.zone || '';
-          if (za) za.textContent = b.dataset.app || '';
         });
       });
     });
@@ -384,29 +340,6 @@
         if (t) t.textContent = kiezer.options[kiezer.selectedIndex].textContent;
       });
     });
-
-    document.querySelectorAll('.wsc .fb-wis').forEach(function (b) {
-      b.addEventListener('click', function () {
-        document.querySelectorAll('.wsc .keuzes .keuze').forEach(function (x) {
-          x.setAttribute('aria-pressed', 'false');
-        });
-        document.querySelectorAll('.wsc .vraagrij').forEach(function (r, i) {
-          r.classList.remove('klaar', 'nu');
-          if (i === 0) r.classList.add('nu');
-          var a = r.querySelector('.vr-antwoord'); if (a) a.textContent = '';
-        });
-        kies();
-      });
-    });
-
-    // Op een typepagina staat geen keuzehulp; dan heeft de regel "Jouw keuzes"
-    // niets te melden en verdwijnt hij, tenzij er nog een tip in staat.
-    if (!document.querySelector('.wsc .keuzes')) {
-      document.querySelectorAll('.wsc .fb-onder').forEach(function (r) {
-        r.classList.add('zonder-keuzes');
-        if (!r.querySelector('.fb-tip')) r.hidden = true;
-      });
-    }
 
     if (document.querySelector('.wsc [data-groep="cat"]')) tel();
     if (document.querySelector('.wsc .wsk-vgl')) vgltel();

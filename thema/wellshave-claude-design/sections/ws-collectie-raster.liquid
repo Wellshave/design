@@ -24,8 +24,6 @@
   <symbol id="wsr-cadeau" viewBox="0 0 24 24"><path d="M3.5 11h17v9.5a1 1 0 0 1-1 1h-15a1 1 0 0 1-1-1zM2.5 7.5h19V11h-19zM12 7.5V21.5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/><path d="M12 7.5S10.6 2.5 8 2.5a2.5 2.5 0 0 0 0 5zM12 7.5s1.4-5 4-5a2.5 2.5 0 0 1 0 5z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/></symbol>
   <symbol id="wsr-mes" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="7" rx="2" fill="none" stroke="currentColor" stroke-width="2.1"/><path d="M6 14v3M10 14v3M14 14v3M18 14v3M7 7V4.5M17 7V4.5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/></symbol>
   <symbol id="wsr-regelaars" viewBox="0 0 24 24"><path d="M3 7h12M19 7h2M3 17h4M11 17h10" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/><circle cx="17" cy="7" r="2.4" fill="none" stroke="currentColor" stroke-width="2.1"/><circle cx="9" cy="17" r="2.4" fill="none" stroke="currentColor" stroke-width="2.1"/></symbol>
-  <symbol id="wsr-fonkel" viewBox="0 0 24 24"><path d="M12 3l1.7 5.1L19 9.8l-5.3 1.7L12 16.6l-1.7-5.1L5 9.8l5.3-1.7zM18.5 15l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
-  <symbol id="wsr-kruis" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
   <symbol id="wsr-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </svg>
 
@@ -116,25 +114,6 @@
       </div>
     </div>
 
-    {%- if section.settings.keuzes_label != blank or section.settings.tip != blank -%}
-    <div class="fb-rij fb-onder">
-      {%- if section.settings.keuzes_label != blank -%}
-        <span class="fb-label">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsr-regelaars"/></svg>{{ section.settings.keuzes_label }}</span>
-      {%- endif -%}
-      {%- comment -%}
-        De chips worden door ws-collectie.js gevuld uit de keuzehulp: één per
-        beantwoorde vraag. De lege staat staat hier, zodat de regel niet leeg oogt
-        zolang de JS nog moet lopen of uitblijft.
-      {%- endcomment -%}
-      <div class="fb-chips" data-leeg="{{ section.settings.geen_keuzes | default: 'Nog geen keuzes gemaakt' | escape }}"></div>
-      <button type="button" class="fb-wis" hidden>{{ section.settings.wis_label | default: 'Wis alles' }}</button>
-      {%- if section.settings.tip != blank -%}
-        <span class="fb-streep fb-streep-tip" aria-hidden="true"></span>
-        <p class="fb-tip"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsr-fonkel"/></svg>{{ section.settings.tip }}</p>
-      {%- endif -%}
-    </div>
-    {%- endif -%}
   </div>
 
   {%- for block in section.blocks -%}
@@ -457,9 +436,6 @@
     { "type": "text", "id": "toon_label", "label": "Label links van de filters", "default": "Toon mij" },
     { "type": "text", "id": "bundel_lint", "label": "Lintje boven de knop Bundels", "info": "Bijvoorbeeld: Meeste waarde. Leeglaten geeft een gewone knop.", "default": "Meeste waarde" },
     { "type": "text", "id": "resultaat_label", "label": "Woord achter het aantal", "default": "resultaten" },
-    { "type": "text", "id": "keuzes_label", "label": "Label voor de gemaakte keuzes", "default": "Jouw keuzes" },
-    { "type": "text", "id": "geen_keuzes", "label": "Tekst als er geen keuze gemaakt is", "default": "Nog geen keuzes gemaakt" },
-    { "type": "text", "id": "tip", "label": "Tip rechts onderin", "info": "Eén korte zin. Leeglaten om hem weg te laten." },
     { "type": "text", "id": "sorteer_prijs_op", "label": "Sorteren: prijs oplopend", "default": "Prijs: laag naar hoog" },
     { "type": "text", "id": "sorteer_prijs_af", "label": "Sorteren: prijs aflopend", "default": "Prijs: hoog naar laag" },
     { "type": "text", "id": "sorteer_score", "label": "Sorteren: op beoordeling", "default": "Best beoordeeld" },
@@ -472,7 +448,6 @@
     { "type": "text", "id": "vgl_balk_wis", "label": "Balk: wisknop", "default": "Wis" },
     { "type": "text", "id": "vgl_balk_knop", "label": "Balk: vergelijkknop", "default": "Vergelijk" },
     { "type": "text", "id": "sorteer_label", "label": "Sorteerknop", "default": "Meest relevant" },
-    { "type": "text", "id": "wis_label", "label": "Wisknop", "default": "Wis keuzes" },
     { "type": "image_picker", "id": "monogram", "label": "Monogram achter de packshot", "info": "Verschijnt bij hover en blijft staan op de kaart die de keuzehulp aanwijst. Werkt alleen achter een vrijstaande packshot." },
     { "type": "header", "content": "Op de kaarten" },
     { "type": "text", "id": "geen_score", "label": "Als er geen beoordelingen zijn", "info": "Nooit een standaardcijfer tonen bij een product zonder beoordelingen.", "default": "Nieuw · nog geen beoordelingen" },

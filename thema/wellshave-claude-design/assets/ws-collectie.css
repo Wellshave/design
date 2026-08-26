@@ -91,12 +91,6 @@
 .wsc .zkaart.nu .zkaart-tel{background:var(--grad-goud);border-color:transparent;color:var(--carbon)}
 .wsc .zkaart.nu .zkaart-pijl{color:rgba(255,255,255,.55)}
 
-.wsc .zonemelding{display:flex;align-items:center;gap:11px;font-size:13px;color:var(--ink-60);
-  padding:16px 0 18px}
-.wsc .zonemelding b{color:var(--ink)}
-.wsc .zm-vink{flex:none;width:26px;height:26px;border-radius:100px;display:grid;place-items:center;
-  background:var(--grad-goud);color:var(--carbon)}
-.wsc .zm-vink svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.6}
 
 @container (max-width:980px){
   .wsc .zonekiezer{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
@@ -142,7 +136,6 @@
     box-shadow:0 0 0 2px var(--paper),0 0 0 4px var(--bronze)}
   .wsc .zkaart.nu .zkaart-ico img{filter:brightness(0) invert(1)}
   .wsc .zkaart.nu .zkaart-naam{color:var(--ink)}
-  .wsc .zonemelding{align-items:flex-start;padding:12px 0 14px;font-size:12.5px}
 }
 .wsc .keuzes{display:flex;gap:8px;flex-wrap:wrap}
 .wsc .keuze{border:1px solid var(--ink-10);border-radius:100px;padding:10px 18px;font-size:13px;
@@ -501,7 +494,6 @@
   padding:20px 18px;display:flex;flex-direction:column;gap:0;margin-bottom:34px;
   box-shadow:0 14px 34px rgba(17,17,17,.05)}
 .wsc .fb-rij{display:flex;align-items:center;gap:13px;flex-wrap:wrap}
-.wsc .fb-onder{margin-top:18px;padding-top:18px;border-top:1px solid var(--ink-10)}
 .wsc .fb-label{display:inline-flex;align-items:center;gap:9px;flex:none;font-size:11.5px;
   font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
 .wsc .fb-label svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2.1;
@@ -545,27 +537,6 @@
 .wsc .fb-knop:hover{border-color:rgba(188,129,62,.5)}
 .wsc .fb-knop[disabled]{opacity:.42;cursor:default}
 .wsc .fb-knop[disabled]:hover{border-color:var(--ink-10)}
-
-/* de gemaakte keuzes, als losse chips die je één voor één weg kunt klikken */
-.wsc .fb-chips{display:flex;align-items:center;gap:9px;flex-wrap:wrap;min-width:0}
-.wsc .fb-chip{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--ink-10);
-  border-radius:10px;padding:9px 10px 9px 14px;font-size:13px;font-weight:600;color:var(--ink);
-  background:var(--paper)}
-.wsc .fb-chip-uit{display:grid;place-items:center;width:20px;height:20px;border-radius:6px;
-  color:var(--ink-40);transition:background .16s ease,color .16s ease}
-.wsc .fb-chip-uit svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.4}
-.wsc .fb-chip-uit:hover{background:var(--sand-deep);color:var(--ink)}
-.wsc .fb-chips-leeg{font-size:12.5px;color:var(--ink-40)}
-.wsc .fb-wis{font-size:13px;font-weight:600;color:var(--ink-60);text-decoration:underline;
-  text-underline-offset:3px;text-decoration-color:rgba(188,129,62,.6)}
-.wsc .fb-wis:hover{color:var(--ink)}
-.wsc .fb-tip{display:inline-flex;align-items:center;gap:10px;font-size:12.5px;color:var(--ink-60);
-  margin-left:auto;text-align:left}
-.wsc .fb-tip svg{width:19px;height:19px;stroke:var(--bronze);fill:none;stroke-width:1.9;flex:none}
-.wsc .fb-onder.zonder-keuzes > .fb-label,
-.wsc .fb-onder.zonder-keuzes > .fb-chips,
-.wsc .fb-onder.zonder-keuzes > .fb-wis,
-.wsc .fb-onder.zonder-keuzes > .fb-streep-tip{display:none}
 
 .wsc .groep{margin-bottom:44px}
 .wsc .groep.uit{display:none}
@@ -824,7 +795,6 @@ body.vgl-open{overflow:hidden}
   .wsc .bwr-bron a{margin-top:4px}
   .wsc .filterbalk{padding:16px 14px;margin-bottom:24px;border-radius:14px}
   .wsc .fb-rij{gap:11px}
-  .wsc .fb-onder{margin-top:14px;padding-top:14px;flex-direction:column;align-items:flex-start}
   /* De knoppen staan op de telefoon naast elkaar en schuiven opzij, niet in twee
      rijen onder elkaar: dat scheelt de bezoeker verticale scroll voordat hij de
      producten ziet. Het lintje steekt boven de knop uit, dus de strip heeft ruimte
@@ -848,7 +818,6 @@ body.vgl-open{overflow:hidden}
   .wsc .fb-knop{flex:1;justify-content:center;padding:10px 12px;font-size:12px}
   .wsc .fb-sorteer{min-width:0}
   .wsc .fb-sorteer-tekst{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .wsc .fb-tip{margin-left:0;padding-top:4px}
   .wsc .groep{margin-bottom:32px}
   .wsc .groep-kop h2{font-size:19px}
   .wsc .kaarten{grid-template-columns:1fr 1fr;gap:11px}

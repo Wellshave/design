@@ -53,6 +53,14 @@ eerste regel die past wint; `*` betekent "maakt niet uit". De tabel gaat als JSO
 naar `ws-collectie.js`, dat er ook het raster mee aanstuurt: de kaart met
 "Beste match" volgt de keuzehulp, en dat werkt over secties heen.
 
+**Het matchpaneel en het raster praten via de producthandle.** De beslistabel werkt met
+korte id's (`elite`), de kaarten in het raster staan op de producthandle
+(`neustrimmer-2in1-elite`). Het paneel draagt allebei: `data-id` en `data-handle`, en
+`zetMatch()` vertaalt van het één naar het ander. Dat ontbrak, waardoor het lintje **Beste
+match** in het raster nooit verscheen — het paneel klopte, de kaart bleef onaangeraakt.
+Kom je hier ooit terug: test niet alleen of het paneel verschijnt, maar ook of er precies
+één kaart `.wsk.match` krijgt.
+
 **Zorg dat elk matchpaneel precies één combinatie wint.** Wint een apparaat
 niets, dan staat het er voor de vorm bij — dat is een bevinding over de
 collectie, geen reden om een vraag te verzinnen.
@@ -309,14 +317,29 @@ er nu een van zichzelf — de vier zone-iconen in een 2×2, `ws-zone-icoon-alles
 Los daarvan: een lange zonenaam liep in het tegelformaat buiten zijn vak en kwam onder het
 rondje. `overflow-wrap:anywhere` op de naam houdt hem binnen.
 
-### De chips zijn nieuw gedrag, niet alleen opmaak
+### De onderste regel van de filterbalk is weg
 
-Eerst stond er één regel met alle keuzes achter elkaar en een knop *Wis keuzes* die alleen
-de matchmarkering weghaalde. Nu is er één chip per beantwoorde vraag, en het kruisje op een
-chip wist **alleen die vraag**: de knoppen van die vraag gaan uit, de beslistabel valt terug
-op een regel met een sterretje of op de standaardmatch. *Wis alles* doet dat voor alle
-vragen tegelijk. Staat er geen keuzehulp op de pagina — dat is zo op de typepagina's — dan
-verdwijnt de hele onderste regel, tenzij er nog een tip in staat.
+Onder de knoppenrij stond een tweede regel: *Jouw keuzes* met een chip per beantwoorde
+vraag, een knop *Wis alles*, en een tip. Die is er in zijn geheel uit — markup, CSS, JS,
+instellingen en de sleutels in de negen sjablonen. **"Het creëert alleen maar meer chaos
+en ruis."**
+
+Er gaat niets aan bediening verloren: een losse vraag terugdraaien doe je met het potlood
+in de keuzehulp zelf, en alles terugzetten met *Opnieuw beginnen*. Die twee stonden er al
+en zitten dichter bij de vraag waar het over gaat.
+
+Met de chips vervielen ook `chips()` en `wisGroep()` in de JS, de sprite-symbolen
+`wsr-fonkel` en `wsr-kruis`, en de terugval die de regel op typepagina's verborg.
+
+### De regel "Je bekijkt … " is ook weg
+
+Onder de zonekiezer stond *Je bekijkt Neus & oren — 8 verdeeld over twee lijnen…*, met een
+gouden vinkje ervoor. Zelfde oordeel, en terecht: de eyebrow zegt al **NEUS & OREN · 8
+MODELLEN** en de kop eronder gaat over niets anders. Twee keer hetzelfde bevestigen leest
+als ruis.
+
+Daarmee vervielen `zonemelding`, `zone_aantal`, `.zm-vink`, en het stukje JS dat `.zn` en
+`.za` bijwerkte als je op een zonetegel klikte.
 
 ### De iconen
 
