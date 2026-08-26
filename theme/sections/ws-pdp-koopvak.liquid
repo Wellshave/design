@@ -351,10 +351,16 @@
             <details>
               <summary>{{ s.acc2_titel }}<i></i></summary>
               <div class="in">
+                {%- comment -%}
+                  description is een rijketekstveld. Wie dat rechtstreeks
+                  uitprint krijgt de ruwe JSON van het veld op het scherm;
+                  metafield_tag maakt er opmaak van. De titel gaat door strip,
+                  want een paar van die velden eindigen op een spatie.
+                {%- endcomment -%}
                 <dl class="ws-sp">
                   {%- for item in doos -%}
-                    <dt>{{ item.title }}</dt>
-                    <dd>{{ item.description }}</dd>
+                    <dt>{{ item.title | strip }}</dt>
+                    <dd>{{ item.description | metafield_tag }}</dd>
                   {%- endfor -%}
                 </dl>
               </div>

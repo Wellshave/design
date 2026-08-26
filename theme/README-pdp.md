@@ -90,6 +90,15 @@ een bestand van 23 bytes zonder schema, dat gewoon landde. Het antwoord van
 `themeFilesUpsert` zegt dus niets; **haal de `checksumMd5` op** en vergelijk met
 `md5sum` op het bestand hier. Alleen dat bewijst of de upload gelukt is.
 
+### Rijke tekst print je niet uit, die render je
+
+Een `rich_text_field` dat je rechtstreeks uitprint geeft de ruwe JSON van het
+veld op het scherm &mdash; `{"type":"root","children":[...]}`. Dat gebeurde bij
+`limited_offer.offer_title` in de aanbodbalk en bij `included_box.description`
+in de uitklapper &laquo;wat zit er in de doos&raquo;. De oplossing is beide keren
+`| metafield_tag`. Let er dan op dat de opmaak van de omhullende `div` en de
+`p` daarbinnen ook geregeld is; die brengen hun eigen marges mee.
+
 **Schrijft een upload niet, doe hem dan &eacute;&eacute;n keer over met `type: TEXT`.** Die
 route valideert en geeft de fout w&eacute;l terug. Zo kwam bijvoorbeeld boven water:
 

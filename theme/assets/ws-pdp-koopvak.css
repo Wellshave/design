@@ -340,6 +340,11 @@
 .ws-pdp .ws-acc .ws-sp{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 16px;margin:10px 0 0}
 .ws-pdp .ws-acc .ws-sp dt{font-weight:700;color:rgba(255,255,255,.8)}
 .ws-pdp .ws-acc .ws-sp dd{margin:0}
+/* metafield_tag verpakt de tekst in een div met paragrafen; die brengen hun
+   eigen marges mee en die willen we hier niet. */
+.ws-pdp .ws-acc .ws-sp dd > div{display:contents}
+.ws-pdp .ws-acc .ws-sp dd p{margin:0 0 5px}
+.ws-pdp .ws-acc .ws-sp dd p:last-child{margin-bottom:0}
 .ws-pdp .ws-acc .in ul{margin:0;padding-left:18px}
 .ws-pdp .ws-acc .in a{color:var(--ws-gold3)}
 
