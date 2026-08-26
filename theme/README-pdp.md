@@ -210,6 +210,40 @@ Controleren kan met:
 
 Alle 29 `compare_info`-invoeren staan nu op ACTIVE.
 
+## Blok 03: de UGC-band
+
+`sections/ws-pdp-ugc.liquid` plus `assets/ws-pdp-ugc.css`. Staat in
+`templates/product.ws-pdp.json` onder het koopvak.
+
+De band leest twee bronnen, in deze volgorde:
+
+1. **`custom.ugc_videos`** &mdash; een lijst metaobjecten van het nieuwe type
+   `ugc_video` (definitie `46105985356`, metafield `520597799244`). Die dragen
+   naast het bestand ook `name`, `line`, `verified` en `featured`.
+2. **`custom.ugc_video_list`** &mdash; de kale lijst videobestanden die er al lag.
+   Geen tekst, dus alleen beeld, duur en speelknop, en de eerste tegel is de
+   brede. Zo werkt de band vandaag al op de Groom Guard (14), de PRO (10), de
+   Head Shaver Deluxe (9) en de drie Men Shapers.
+
+**De poster en de duur komen uit het bestand zelf** en hoeft niemand in te
+typen: `video.preview_image` en `video.duration` (in milliseconden, dus delen
+door duizend). De tegels staan op 9:16; een vierkante of afwijkende video wordt
+bijgesneden met `object-fit:cover`.
+
+De `video` staat op `preload="none"` met de poster erop, dus er wordt niets
+gedownload tot iemand op de speelknop tikt. Dan gaan de sluier, de knop, de duur
+en het tekstvak weg, en komen de eigen bedieningsknoppen van de browser
+tevoorschijn. Speelt er al een video, dan wordt die gepauzeerd: twee video's
+tegelijk horen is het snelste wat een bezoeker wegjaagt.
+
+De teller en de voortgangsbalk volgen de **scrollpositie**, niet een eigen
+index. Vegen met de vinger telt dan net zo goed mee als de pijlen.
+
+**Geen sterren per product.** Het ontwerp had er vier en een half plus &laquo;4,4&raquo;
+bij de koopstrook staan. Die score bestaat niet per product &mdash; na het weghalen
+van Loox is er alleen nog een winkelbrede Trustpilot-score. De strook toont nu
+`4,4 uit 968 Trustpilot-reviews` als winkelbrede regel, instelbaar in de sectie.
+
 ## Wat er aan de winkel zelf is veranderd
 
 Dit staat los van het thema: het is productdata en geldt dus voor elk thema,
@@ -247,6 +281,8 @@ ook het live thema.
 | Onderregels van de Flex-familie | `toggle_subtitle` van de Flex Guard en de Essential Flex Bundel stond op &laquo;Veilig lichaam trimmen&raquo;, Groom Guard-copy bij een 3-in-1 die ook scheert. Nu &laquo;Trimmen, scheren en neushaar&raquo; en &laquo;Flex Guard + toilettas en hard case&raquo;. `reviews_label` van de Essential stond op 800+ terwijl alle andere 650+ zeggen; gelijkgetrokken. De Flex-line heette in `compare_info` &laquo;Flex Line Bundel&raquo;, het product heet &laquo;Flex-line Bundel&raquo;. |
 | Typefouten in `included_box` verbeterd | `Scheerkoop 7D` &rarr; `Scheerkop 7D`, `2x Scheerkoop 7D` &rarr; `2x Scheerkop 7D`, `Tonduese` &rarr; `Tondeuse`. **Zichtbaar op de live site**, want de doos-dropdown leest deze titels. De Engelse vertaling van `Tonduese` was **`Toning device`** &mdash; een machine had er een toningapparaat van gemaakt. Alle drie opnieuw vertaald in en / de / fr. |
 | `Skin Safe Mes` en `Foil Shaver Head` in de Flex-doos | Het mes heette in `included_box` van de Flex Guard nog `Skin Safe Mes`, met in het Duits **`Hautfreundliche Mes`** en in het Frans **`Peau S&ucirc;re Mes`** &mdash; de merknaam vertaald, het Nederlandse &laquo;mes&raquo; blijven staan. Nu `SkinSafe&trade;-mes` in alle vier de talen, met een omschrijving die niet twee keer &laquo;Skin Safe&raquo; zegt. `Foil Shaver Head` is `Foil Shaver-opzetstuk`; dat item zit ook in de Shave Package Ultimate en de twee Flex-bundels, dus die pagina&rsquo;s veranderen mee. |
+| Nieuw metaobjecttype `ugc_video` | Definitie `46105985356`, met `product_title`, `video`, `name`, `line`, `verified` en `featured`. Publiceerbaar, dus **nieuwe invoeren meteen op ACTIVE zetten**. |
+| Nieuw metafield `custom.ugc_videos` | `520597799244`, lijst van `ugc_video`. Leeg laten betekent: de band valt terug op `custom.ugc_video_list`. Geen enkel product heeft dit nu gevuld, dus er verandert nog niets aan wat er te zien is. |
 | Vierde `store_usp`: Morgen in huis | De voetbalk van de pop-up toont wat er in `custom.store_usp` staat, en dat waren er drie. Nieuw metaobject met een icoon in dezelfde stijl als de andere drie (20 bij 20, streek `#BC813E`), toegevoegd aan de lijst op de Groom Guard en de PRO. |
 
 Let op bij die laatste. `custom.store_usp` wordt ook gelezen door het
@@ -330,6 +366,14 @@ weer aan te zetten. Wat de Selleasy-kaart deed, hoort in blok 07
 * **De neustrimmers blijven binnen hun eigen reeks.** De Neustrimmer Basic
   (16,95) zit w&eacute;l in de Shave Package Ultimate (89,95), maar dat is meer dan
   vijf keer de prijs; dat is geen upgrade meer.
+* **De UGC-tegels hebben nog geen naam en geen regel.** De band draait nu op
+  `custom.ugc_video_list`, en daar zit alleen het bestand in. De uitgelichte
+  tegel met een citaat is het sterkste deel van het ontwerp en die kan pas
+  staan als er per video een naam en een regel is. Dat is invulwerk: per video
+  drie velden, en het vinkje &laquo;geverifieerde koper&raquo; alleen aanzetten als die
+  persoon dit product ook echt gekocht heeft.
+* **Het watermerk in de doos is leeg.** De sectie heeft er een instelling voor
+  (`merk`); zonder afbeelding tekent hij niets.
 * **De prijsopmaak van de winkel heeft geen €-teken** (`moneyFormat` staat op
   `{{amount_with_comma_separator}}`). De sectie volgt de winkel, dus er staat
   `59,95`. Wordt de instelling aangepast, dan komt het teken er overal bij.
