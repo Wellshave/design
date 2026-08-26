@@ -139,6 +139,14 @@ het metafield weer op de oorspronkelijke drie zetten: `1859112894796`
   hetzelfde. Van de honderd recentste Nederlandse Trustpilot-reviews gaan er vijf
   over een product; waar er geen is, hoort het citaat leeg te blijven &mdash; dan valt
   de kaart weg.
+* **De winkel heeft vier gepubliceerde talen: nl (hoofdtaal), en, de, fr.**
+  De sectie drukt af wat de winkel teruggeeft voor de taal waarin je kijkt, dus
+  op `/en` zie je de Engelse vertalingen van `compare_info` en `store_usp`.
+  De velden die wij nieuw hebben aangemaakt (`popup_lead`, `popup_winst`,
+  `best_for`, `popup_decision`) hebben nog geen vertaling en vallen terug op het
+  Nederlands, waardoor de Engelse pagina half Nederlands is. Ook staat er in de
+  Engelse vertaling van `popup_main_title` op de Groom Guard PRO
+  &laquo;Compare Wellshave Flex Guard PRO&raquo; &mdash; de verkeerde productnaam.
 * **De voordeeltitels van de neustrimmers zijn geen gedeelde woordenlijst.**
   De vier modellen schrijven ieder hun eigen marketingregel &mdash; &laquo;Compact
   design&raquo;, &laquo;Meer precisie&raquo;, &laquo;Meer grooming controle&raquo;,

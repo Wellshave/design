@@ -928,16 +928,19 @@
   .ws-pop-kaart{position:relative;border-radius:20px;border:1px solid var(--p-lijn);background:#fff;
     padding:20px;display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1fr);gap:14px;
     align-items:center;row-gap:18px}
+  /* De vlag stond los boven de kaart en dook onder een bovenregel van twee
+     regels. Nu een eigen rij bovenaan: dan kan hij niets meer overlappen.
+     Zonder vlag is die rij nul hoog. */
   .ws-pop-kaart.ws-uit{background:var(--p-zwart);border:2px solid var(--p-goud2);
     box-shadow:0 24px 56px -26px rgba(11,11,10,.75)}
-  .ws-pop-vlag{position:absolute;right:18px;top:18px;font-size:10px;font-weight:800;letter-spacing:.13em;
+  .ws-pop-vlag{grid-column:1 / -1;grid-row:1;justify-self:end;align-self:start;
+    font-size:10px;font-weight:800;letter-spacing:.13em;
     text-transform:uppercase;color:#3A2405;border-radius:100px;padding:7px 14px;
     background:linear-gradient(100deg,#EDC684,#DDA548)}
-  .ws-pop-beeld{grid-row:1;display:flex;align-items:center;justify-content:center}
+  .ws-pop-beeld{grid-row:2;display:flex;align-items:center;justify-content:center}
   .ws-pop-beeld img{width:100%;height:auto;display:block;mix-blend-mode:multiply}
   .ws-pop-kaart.ws-uit .ws-pop-beeld img{mix-blend-mode:normal}
-  .ws-pop-tekst{grid-row:1;min-width:0}
-  .ws-pop-kaart.ws-uit .ws-pop-tekst{padding-top:26px}
+  .ws-pop-tekst{grid-row:2;min-width:0}
   .ws-pop-rol{display:block;font-size:11px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;
     color:var(--p-brons)}
   .ws-pop-kaart.ws-uit .ws-pop-rol{color:var(--p-goud)}
@@ -954,7 +957,7 @@
   .ws-pop-best{display:inline-block;margin:14px 0 0;padding:8px 14px;border-radius:9px;
     border:1px solid var(--p-lijn);font-size:12.5px;font-weight:600;color:var(--p-ink60)}
   .ws-pop-kaart.ws-uit .ws-pop-best{border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.66)}
-  .ws-pop-vorm{grid-column:1 / -1;grid-row:2;margin:0}
+  .ws-pop-vorm{grid-column:1 / -1;grid-row:3;margin:0}
   .ws-pop-knop{width:100%;display:flex;align-items:center;justify-content:center;border-radius:12px;
     padding:19px;font-family:inherit;font-size:13px;font-weight:800;letter-spacing:.08em;
     text-transform:uppercase;cursor:pointer;border:1.5px solid var(--p-ink);color:var(--p-ink);background:#fff}
@@ -1024,7 +1027,9 @@
     .ws-pop-kaarten{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:16px 0 0}
     .ws-pop-kaart{grid-template-columns:1fr;grid-template-rows:auto 1fr;row-gap:0;
       padding:14px 10px 16px;border-radius:16px}
-    .ws-pop-vlag{right:7px;top:7px;font-size:8px;letter-spacing:.08em;padding:5px 8px}
+    .ws-pop-kaart.ws-uit .ws-pop-tekst{padding-top:0}
+    .ws-pop-vlag{position:absolute;right:7px;top:7px;font-size:8px;letter-spacing:.08em;
+      padding:5px 8px}
     .ws-pop-beeld{grid-row:auto}
     /* een staande productfoto zou de kaart anders twee keer zo hoog maken */
     .ws-pop-beeld img{max-width:100%;width:auto;height:auto;max-height:150px;object-fit:contain;
