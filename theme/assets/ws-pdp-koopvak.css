@@ -380,13 +380,13 @@
   .ws-pdp .ws-acc .ws-doos em{transition:none}
 }
 
-/* ---- de specificaties onder de omschrijving ----
+/* ---- de specificaties ----
    In het veld staat elke regel als losse regel binnen een alinea. Zonder
-   pre-line lopen ze aan elkaar tot een muur tekst. */
-.ws-pdp .ws-acc .ws-spec{margin:13px 0 0;padding-top:12px;
-  border-top:1px solid rgba(255,255,255,.1)}
-.ws-pdp .ws-acc .ws-spec h4{margin:0 0 6px;font-size:10px;font-weight:800;
-  letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+   pre-line lopen ze aan elkaar tot een doorlopende zin. En veertien regels
+   onder elkaar is nog steeds een kolom van een halve telefoon, dus zet
+   multicol ze in twee kolommen; de regels zijn kort genoeg. */
+.ws-pdp .ws-acc .ws-spec{font-size:12px;line-height:1.5}
+.ws-pdp .ws-acc .ws-spec > div{columns:2;column-gap:20px;orphans:1;widows:1}
 .ws-pdp .ws-acc .ws-spec p{margin:0;white-space:pre-line;color:rgba(255,255,255,.72)}
 .ws-pdp .ws-acc .in ul{margin:0;padding-left:18px}
 .ws-pdp .ws-acc .in a{color:var(--ws-gold3)}

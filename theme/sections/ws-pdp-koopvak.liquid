@@ -338,25 +338,30 @@
 
         {%- comment -%} ---------- de vier accordeons ---------- {%- endcomment -%}
         <div class="ws-acc">
-          <details>
-            <summary>{{ s.acc1_titel }}<i></i></summary>
-            <div class="in">
-              {%- if product.description != blank -%}{{ product.description }}{%- endif -%}
-              {%- comment -%}
-                specification is een rijketekstveld. Rechtstreeks afdrukken zet de
-                ruwe JSON op het scherm -- {"type":"root","children":[ ... -- dus
-                metafield_tag. De regels in dat veld staan als losse regels in een
-                alinea; pre-line in de stylesheet laat die weer als regels zien in
-                plaats van als een lange doorloop.
-              {%- endcomment -%}
-              {%- if mf.specification != blank -%}
-                <div class="ws-spec">
-                  {%- if s.spec_kop != blank -%}<h4>{{ s.spec_kop }}</h4>{%- endif -%}
-                  {{ mf.specification | metafield_tag }}
-                </div>
-              {%- endif -%}
-            </div>
-          </details>
+          {%- comment -%}
+            Omschrijving en specificaties stonden in een accordeon. Samen is dat
+            vijf alinea's plus veertien regels: wie hem opent krijgt een muur.
+            Het zijn nu twee accordeons, zodat je opent wat je wilt lezen.
+          {%- endcomment -%}
+          {%- if product.description != blank -%}
+            <details>
+              <summary>{{ s.acc1_titel }}<i></i></summary>
+              <div class="in">{{ product.description }}</div>
+            </details>
+          {%- endif -%}
+
+          {%- comment -%}
+            specification is een rijketekstveld. Rechtstreeks afdrukken zet de
+            ruwe JSON op het scherm -- {"type":"root","children":[ ... -- dus
+            metafield_tag. De regels staan als losse regels in een alinea; de
+            stylesheet zet er pre-line op en verdeelt ze over twee kolommen.
+          {%- endcomment -%}
+          {%- if mf.specification != blank -%}
+            <details>
+              <summary>{{ s.spec_kop }}<i></i></summary>
+              <div class="in ws-spec">{{ mf.specification | metafield_tag }}</div>
+            </details>
+          {%- endif -%}
 
           {%- assign doos = mf.included_box.value -%}
           {%- if doos != blank -%}
@@ -935,8 +940,8 @@
     { "type": "text", "id": "tel_waarde", "label": "Teller — getal", "default": "200.000+" },
     { "type": "text", "id": "tel_na", "label": "Teller — tekst erna", "default": "mannen gekozen" },
     { "type": "header", "content": "Accordeons" },
-    { "type": "text", "id": "acc1_titel", "label": "1 — titel", "default": "Omschrijving & specificaties" },
-    { "type": "text", "id": "spec_kop", "label": "1 — kopje boven de specificaties", "default": "Specificaties" },
+    { "type": "text", "id": "acc1_titel", "label": "1 — titel", "default": "Omschrijving" },
+    { "type": "text", "id": "spec_kop", "label": "2 — titel (de specificaties)", "default": "Specificaties" },
     { "type": "text", "id": "acc2_titel", "label": "2 — titel", "default": "Wat zit er in de doos" },
     { "type": "text", "id": "acc3_titel", "label": "3 — titel", "default": "Verzending & retour" },
     { "type": "richtext", "id": "acc3_tekst", "label": "3 — tekst", "default": "<p>Vandaag vóór 23:59 besteld is morgen in huis. Gratis verzending binnen Nederland en België. Niet goed? Binnen 100 dagen terug, wij betalen de retour.</p>" },

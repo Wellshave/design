@@ -119,6 +119,28 @@ Twee dingen die daar nog omheen zitten:
   sluitende accolade.** Liquid leest die twee tekens als het einde van een tag.
   Dus `border-radius:50% }` met een spatie.
 
+## Omschrijving en specificaties zijn twee accordeons
+
+Ze stonden samen in &eacute;&eacute;n accordeon: vijf alinea's plus veertien
+specificatieregels. Wie hem opende kreeg een muur van bijna 800 pixels. Nu
+zijn het er twee, met `acc1_titel` en `spec_kop` als titels, en staan de
+specificaties in **twee kolommen** (`columns:2` op de wikkel die
+`metafield_tag` maakt). Dat blok gaat daarmee van ongeveer 470 naar 177
+pixels op 390 px breed.
+
+Twee regels blijven over twee regels lopen omdat ze te lang zijn voor een
+halve kolom; een hangende inspringing kan niet, want met `white-space:
+pre-line` geldt `text-indent` alleen voor de eerste regel van de alinea en
+niet voor elke regel erin. Daarvoor zouden de regels echte `li`-elementen
+moeten worden, en daarvoor moet het veld eerst uit rijke tekst gehaald
+worden.
+
+`acc1_titel` staat in `templates/product.json` en
+`templates/product.ws-pdp.json` opgeslagen, dus daar is de waarde ook
+aangepast: van &laquo;Omschrijving &amp; specificaties&raquo; naar &laquo;Omschrijving&raquo;,
+met `spec_kop` erbij. Een gewijzigde standaardwaarde in het schema doet
+niets zolang het sjabloon de oude waarde bewaart.
+
 ## De doos-lijst is een accordeon in een accordeon
 
 Zes artikelen met elk drie regels omschrijving is op een telefoon een muur
