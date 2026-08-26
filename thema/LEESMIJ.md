@@ -874,6 +874,30 @@ in alle drie de sets hetzelfde; wat je per trede bij koopt is de toilettas en de
 travelbag. Die vraag is daar het enige echte onderscheid, en hij werkt ook bij
 de lichaamslijn (de Essential Flex heeft als enige een harde koffer).
 
+### Bundels is een eigen tegel, geen zone
+
+De balk onder de kop stond op de bundelpagina op **Hoofd** — de zonetegels waren
+overgenomen uit `collection.zone-hoofd.json`, inclusief `huidig: true` en een
+lege url op die tegel. Daardoor was Hoofd daar bovendien niet aanklikbaar.
+
+Nu heeft de bundelpagina een zesde tegel, **Bundels** (14), die de huidige is;
+de vijf zones staan er gewoon naast en zijn allemaal klikbaar. Het icoon is een
+doos met een lint, in dezelfde gouden lijnstijl en met hetzelfde verloop als de
+vier bestaande zone-iconen: `ws-zone-icoon-bundels.png`.
+
+**Zes tegels passen niet naast elkaar.** Gemeten: met zes kolommen blijft er
+54 px over voor de naam, terwijl "schaamstreek" er 83 nodig heeft — en omdat
+`.zkaart-naam` een `overflow-wrap: anywhere` als vangnet heeft, brak dat woord
+middenin af. Vandaar drie kolommen in twee rijen zodra er zes tegels staan; elke
+tegel krijgt dan ruim 400 px en de naam blijft op volle grootte. De balk wordt
+daar 168 px hoog in plaats van 111 px. Op de vier zonepagina's verandert niets:
+die hebben vijf tegels en houden hun rij.
+
+Let op bij het narekenen in het offline testbestand: `bouw.py` inlinet elke
+stylesheet, en die staat daar vier keer in — een `addStyleTag` uit een testscript
+verliest het dan van de laatste kopie. Zulke wijzigingen horen in het CSS-bestand
+zelf en dan opnieuw ophalen, niet geïnjecteerd.
+
 ### Drie bevindingen uit de data
 
 **Barber Bro 1.0, 2.0 en 3.0 zijn niet te koop.** Voorraad −6, `inventoryPolicy`

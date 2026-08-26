@@ -74,6 +74,16 @@
    de tabletkolommen en de telefoonscroller overrulen. */
 @container (min-width:1181px){
   .wsc .zonekiezer:has(.zkaart:nth-child(5)){grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+  /* De bundelpagina heeft er zes: vijf zones plus de bundels zelf. Zes naast
+     elkaar laat maar 54 px over voor de naam, en dan breekt "schaamstreek"
+     (83 px) middenin het woord af. Twee rijen van drie geeft elke tegel ruim
+     400 px, en de balk blijft op volle lettergrootte leesbaar. */
+  .wsc .zonekiezer:has(.zkaart:nth-child(6)){grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+  .wsc .zonekiezer:has(.zkaart:nth-child(6)) .zkaart{padding:13px 14px;gap:11px}
+  .wsc .zonekiezer:has(.zkaart:nth-child(6)) .zkaart-ico{width:44px;height:40px;padding-right:12px}
+  .wsc .zonekiezer:has(.zkaart:nth-child(6)) .zkaart-naam{font-size:13.5px}
+  .wsc .zonekiezer:has(.zkaart:nth-child(6)) .zkaart-tel{width:30px;height:30px;font-size:12.5px}
+  .wsc .zonekiezer:has(.zkaart:nth-child(6)) .zkaart-pijl{display:none}
   .wsc .zonekiezer:has(.zkaart:nth-child(5)) .zkaart{padding:13px 12px;gap:9px}
   .wsc .zonekiezer:has(.zkaart:nth-child(5)) .zkaart-ico{width:44px;height:40px;padding-right:8px}
   /* "schaamstreek" is het langste woord in de rij en moet op één regel passen; bij
@@ -90,6 +100,7 @@
    is compacter dan de twee kolommen van de tabletweergave. */
 @container (min-width:981px) and (max-width:1180px){
   .wsc .zonekiezer:has(.zkaart:nth-child(5)){grid-template-columns:repeat(3,minmax(0,1fr))}
+  .wsc .zonekiezer:has(.zkaart:nth-child(6)){grid-template-columns:repeat(3,minmax(0,1fr))}
 }
 .wsc .zkaart{position:relative;display:flex;align-items:center;gap:14px;text-align:left;
   border:1px solid var(--ink-10);border-radius:14px;padding:14px 16px;background:var(--paper);
