@@ -27,9 +27,20 @@
       if (raak) { id = r.id; break; }
     }
 
+    // De match verschijnt pas als élke vraag beantwoord is. Zolang dat niet zo is,
+    // is er nog geen advies te geven en zou een paneel doen alsof van wel.
+    var rijen2 = document.querySelectorAll('.wsc .vraagrij');
+    var af = 0;
+    rijen2.forEach(function (r) { if (r.classList.contains('klaar')) af++; });
+    var compleet = rijen2.length > 0 && af === rijen2.length;
+
     document.querySelectorAll('.wsc .matchpaneel').forEach(function (p) {
-      p.classList.toggle('aan', p.dataset.id === id);
+      p.classList.toggle('aan', compleet && p.dataset.id === id);
     });
+
+    var kaart = document.querySelector('.wsc .kiescard');
+    if (kaart) kaart.classList.toggle('compleet', compleet);
+    stapper(af, rijen2.length);
 
     var woorden = [];
     for (var g in nu) { if (CFG.woord[g] && CFG.woord[g][nu[g]]) woorden.push(CFG.woord[g][nu[g]]); }
@@ -39,7 +50,56 @@
     }));
   }
 
-  // Eén chip per beantwoorde vraag, met een kruisje dat alleen díe vraag wist.
+  // De teller en de bolletjes bovenaan, plus de kop die omschakelt zodra alles
+  // beantwoord is. Het aantal stappen staat niet vast: het volgt de vraagblokken.
+  function stapper(af, totaal) {
+    // Elk bolletje hoort bij zijn eigen vraag, niet bij een positie in de telling:
+    // heropen je stap 1 terwijl stap 2 al beantwoord is, dan moet bolletje twee
+    // gevuld blijven en bolletje één weer leeg.
+    var bollen = document.querySelectorAll('.wsc .stapper .sb');
+    var rijen = document.querySelectorAll('.wsc .vraagrij');
+    bollen.forEach(function (b, i) {
+      var r = rijen[i];
+      b.classList.toggle('af', !!r && r.classList.contains('klaar'));
+      b.classList.toggle('nu', !!r && r.classList.contains('nu'));
+    });
+    var t = document.querySelector('.wsc .stapper-af');
+    if (t) t.textContent = af;
+
+    var compleet = totaal > 0 && af === totaal;
+    ['.wsc .kiescard-kop', '.wsc .kiescard-sub'].forEach(function (sel) {
+      var e = document.querySelector(sel);
+      if (!e) return;
+      var tekst = compleet ? e.dataset.af : e.dataset.open;
+      e.textContent = tekst || '';
+      e.hidden = !tekst;
+    });
+  }
+
+  // Een vraag beantwoorden klapt hem dicht en opent de eerstvolgende die nog leeg is.
+  function stapVooruit(rij) {
+    rij.classList.remove('nu');
+    rij.classList.add('klaar');
+    var b = rij.querySelector('.keuze[aria-pressed="true"]');
+    var a = rij.querySelector('.vr-antwoord');
+    if (a) a.textContent = b ? b.textContent.trim() : '';
+    var volgende = null;
+    document.querySelectorAll('.wsc .vraagrij').forEach(function (r) {
+      if (!volgende && !r.classList.contains('klaar')) volgende = r;
+    });
+    document.querySelectorAll('.wsc .vraagrij').forEach(function (r) { r.classList.remove('nu'); });
+    if (volgende) volgende.classList.add('nu');
+  }
+
+  // Het potlood zet één vraag weer open zonder de andere antwoorden kwijt te raken.
+  function heropen(rij) {
+    document.querySelectorAll('.wsc .vraagrij').forEach(function (r) { r.classList.remove('nu'); });
+    rij.classList.remove('klaar');
+    rij.classList.add('nu');
+    kies();
+  }
+
+    // Eén chip per beantwoorde vraag, met een kruisje dat alleen díe vraag wist.
   // De tekst komt uit dezelfde woordenlijst als de regel eronder, met een hoofdletter.
   function chips(nu) {
     var bak = document.querySelector('.wsc .fb-chips');
@@ -80,7 +140,8 @@
     var rij = document.querySelector('.wsc .keuzes[data-groep="' + groep + '"]');
     if (!rij) return;
     rij.querySelectorAll('.keuze').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
-    kies();
+    var vr = rij.closest('.vraagrij');
+    if (vr) heropen(vr); else kies();
   }
 
   /* ── het raster ── */
@@ -171,8 +232,39 @@
         b.addEventListener('click', function () {
           rij.querySelectorAll('.keuze').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
           b.setAttribute('aria-pressed', 'true');
+          var vr = rij.closest('.vraagrij');
+          if (vr) stapVooruit(vr);
           kies();
         });
+      });
+    });
+
+    document.querySelectorAll('.wsc .vr-wijzig').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var vr = b.closest('.vraagrij');
+        if (vr) heropen(vr);
+      });
+    });
+    // Een dichtgeklapte rij is zelf ook aanklikbaar; het potlood is de aanwijzing.
+    document.querySelectorAll('.wsc .vraagrij').forEach(function (vr) {
+      vr.addEventListener('click', function (e) {
+        if (!vr.classList.contains('klaar')) return;
+        if (e.target.closest('.keuze') || e.target.closest('.vr-wijzig')) return;
+        heropen(vr);
+      });
+    });
+
+    document.querySelectorAll('.wsc .kies-opnieuw').forEach(function (b) {
+      b.addEventListener('click', function () {
+        document.querySelectorAll('.wsc .vraagrij').forEach(function (r, i) {
+          r.classList.remove('klaar', 'nu');
+          if (i === 0) r.classList.add('nu');
+          r.querySelectorAll('.keuze').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+          var a = r.querySelector('.vr-antwoord'); if (a) a.textContent = '';
+        });
+        kies();
+        var k = document.querySelector('.wsc .kiescard');
+        if (k) k.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       });
     });
 
@@ -249,6 +341,11 @@
       b.addEventListener('click', function () {
         document.querySelectorAll('.wsc .keuzes .keuze').forEach(function (x) {
           x.setAttribute('aria-pressed', 'false');
+        });
+        document.querySelectorAll('.wsc .vraagrij').forEach(function (r, i) {
+          r.classList.remove('klaar', 'nu');
+          if (i === 0) r.classList.add('nu');
+          var a = r.querySelector('.vr-antwoord'); if (a) a.textContent = '';
         });
         kies();
       });

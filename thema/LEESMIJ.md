@@ -57,6 +57,46 @@ naar `ws-collectie.js`, dat er ook het raster mee aanstuurt: de kaart met
 niets, dan staat het er voor de vorm bij — dat is een bevinding over de
 collectie, geen reden om een vraag te verzinnen.
 
+### De vragen lopen als stappen, niet als een lijst
+
+Alle vragen tegelijk laten staan werd op de telefoon een muur. Ze lopen nu als
+stappen: stap 1 staat open, de rest staat gedempt en is niet aanklikbaar. Wie
+antwoordt, ziet die vraag dichtklappen tot één regel — een gouden vinkje, de
+vraag, het antwoord als zwarte pil en een potlood — en de volgende vraag opent.
+Het aantal stappen volgt vanzelf uit het aantal `vraag`-blokken; `zone-gezicht`
+heeft er drie, de rest twee, en vier zou net zo goed werken.
+
+Belangrijke gevolgen om te onthouden:
+
+- **De instelling `start` drukt geen antwoord meer voor.** De wizard begint leeg,
+  anders staat stap 1 al af voordat de klant iets gedaan heeft. `start` blijft in
+  de blokken staan maar doet niets meer.
+- **Het matchpaneel verschijnt pas als álle vragen beantwoord zijn.** Daarvoor
+  zou het advies meeschuiven bij elke klik, wat het advies goedkoop maakt.
+- **De bollen in de stapper horen bij hun eigen rij.** Ze werden eerst gevuld op
+  het aantal beantwoorde vragen; wie dan stap 1 heropende terwijl stap 2 al af
+  was, zag de verkeerde bol vollopen. `stapper()` loopt nu rij voor rij.
+- **De kop wisselt mee** via `data-open` / `data-af` op `.kiescard-kop` en
+  `.kiescard-sub`, en onderaan komt "Opnieuw beginnen" tevoorschijn.
+
+Op de telefoon houdt een dichtgeklapte vraag een eigen regel voor het antwoord:
+de vraagtekst en de pil naast elkaar persen wordt onleesbaar smal. Alles
+eromheen is wel zo krap mogelijk (bol 28px, kleinere pil). Meten op 390px,
+`zone-gezicht`: de kaart is 429px bij het laden en zakt naar 422px terwijl je
+antwoordt — antwoorden maakt het blok dus nooit hoger, tot de match verschijnt.
+
+### Het matchpaneel op de telefoon
+
+Op het brede scherm staat het paneel in drie kolommen (beeld, tekst, prijs +
+knop). Op de telefoon werd dat één lange kolom. Het is nu beeld naast tekst,
+met prijs, voorraad en knop als één blok eronder achter een streepje.
+
+Let op bij `.mp-koop`: de kolommen moeten `auto minmax(0,1fr)` zijn. Met
+`auto auto` plus `justify-content:start` is de rij precies zo breed als de
+prijs, en dan valt de knop op volle breedte samen met zijn eigen pijl — die is
+absoluut gepositioneerd op `right:8px`. Dat zag je terug als een pijl bovenop
+het woord "MATCH".
+
 ## De tekening in blok 3
 
 De uitlegsectie heeft een `tekening`-veld voor een SVG. Dat veld is **alleen voor

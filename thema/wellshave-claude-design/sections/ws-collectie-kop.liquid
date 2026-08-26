@@ -13,6 +13,7 @@
 <div class="wsc">
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
   <symbol id="wsc-vink" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="wsc-potlood" viewBox="0 0 24 24"><path d="M4 20h4L19.5 8.5a2.1 2.1 0 0 0-3-3L5 17v3zM14.5 6.5l3 3" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="wsc-chevron-r" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="wsc-pijl" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="wsc-retour" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.4-5.7M20 4v4h-4" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
@@ -87,29 +88,64 @@
     </div>
 
     {%- if heeft_hulp -%}
-    <div class="kiescard">
+    {%- comment -%}
+      De keuzehulp loopt stap voor stap: één vraag staat open, beantwoorde vragen
+      klappen dicht tot één regel met het antwoord en een potlood, en de match komt
+      pas als alles beantwoord is. Het aantal stappen volgt de zone — de ene pagina
+      heeft er twee, de andere vier — dus de stapper telt de vraagblokken zelf.
+    {%- endcomment -%}
+    {%- assign n_vragen = 0 -%}
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'vraag' -%}{%- assign n_vragen = n_vragen | plus: 1 -%}{%- endif -%}
+    {%- endfor -%}
+
+    <div class="kiescard" data-stappen="{{ n_vragen }}">
       <div class="kaartkop">
         <p class="eyebrow">{{ section.settings.kaartkop }}</p>
         <span>{{ section.settings.kaartsub }}</span>
       </div>
-      {%- if section.settings.kaartvraag != blank -%}<h2>{{ section.settings.kaartvraag }}</h2>{%- endif -%}
+
+      <div class="stapper">
+        <span class="stapper-bollen" aria-hidden="true">
+          {%- for i in (1..n_vragen) -%}
+            <span class="sb"><svg viewBox="0 0 24 24"><use href="#wsc-vink"/></svg></span>
+          {%- endfor -%}
+        </span>
+        <span class="stapper-tekst"><b class="stapper-af">0</b> van {{ n_vragen }}
+          {{ section.settings.stap_tekst | default: 'voltooid' }}</span>
+      </div>
+
+      {%- if section.settings.kaartvraag != blank -%}
+        <h2 class="kiescard-kop"
+            data-open="{{ section.settings.kaartvraag | escape }}"
+            data-af="{{ section.settings.af_kop | default: 'Jouw match staat klaar.' | escape }}">{{ section.settings.kaartvraag }}</h2>
+      {%- endif -%}
+      <p class="kiescard-sub"
+         data-open="{{ section.settings.kaartlead | default: '' | escape }}"
+         data-af="{{ section.settings.af_sub | default: 'Pas een keuze aan of bekijk direct je advies.' | escape }}">{{ section.settings.kaartlead }}</p>
 
       <div class="stappen-lijst">
         {%- assign stap = 0 -%}
         {%- for block in section.blocks -%}
           {%- if block.type == 'vraag' -%}
             {%- assign stap = stap | plus: 1 -%}
-            <div class="vraagrij" {{ block.shopify_attributes }}>
-              <span class="stapbol">{{ stap | prepend: '0' | slice: -2, 2 }}</span>
+            <div class="vraagrij{% if stap == 1 %} nu{% endif %}" data-stap="{{ stap }}" {{ block.shopify_attributes }}>
+              <span class="stapbol">
+                <b>{{ stap | prepend: '0' | slice: -2, 2 }}</b>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsc-vink"/></svg>
+              </span>
               <p>{{ block.settings.vraag }}</p>
+              <span class="vr-antwoord"></span>
+              <button type="button" class="vr-wijzig" aria-label="{{ section.settings.wijzig_label | default: 'Wijzig dit antwoord' }}">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsc-potlood"/></svg>
+              </button>
               <div class="keuzes" data-groep="{{ block.settings.groep | handle }}">
                 {%- assign regels = block.settings.opties | newline_to_br | strip_newlines | split: nl -%}
                 {%- for regel in regels -%}
                   {%- assign d = regel | split: '|' -%}
                   {%- if d.size >= 2 -%}
                     {%- assign waarde = d[0] | strip -%}
-                    <button type="button" class="keuze" data-v="{{ waarde }}"
-                      {% if waarde == block.settings.start %}aria-pressed="true"{% endif %}>{{ d[1] | strip }}</button>
+                    <button type="button" class="keuze" data-v="{{ waarde }}">{{ d[1] | strip }}</button>
                   {%- endif -%}
                 {%- endfor -%}
               </div>
@@ -162,6 +198,8 @@
           </div>
         {%- endif -%}
       {%- endfor -%}
+
+      <button type="button" class="kies-opnieuw">{{ section.settings.opnieuw | default: 'Opnieuw beginnen' }}</button>
     </div>
     {%- endif -%}
 
@@ -283,6 +321,12 @@
     { "type": "text", "id": "kaartkop", "label": "Bovenregel", "default": "Jouw apparaat in 30 seconden" },
     { "type": "text", "id": "kaartsub", "label": "Regel rechtsboven", "default": "2 keuzes · direct een match" },
     { "type": "text", "id": "kaartvraag", "label": "Vraag boven de stappen", "default": "Wat ga je precies doen?" },
+    { "type": "text", "id": "kaartlead", "label": "Regel onder de vraag", "info": "Optioneel. Eén korte zin die zegt wat de bezoeker kan verwachten." },
+    { "type": "text", "id": "stap_tekst", "label": "Woord achter de teller", "default": "voltooid" },
+    { "type": "text", "id": "af_kop", "label": "Kop als alles beantwoord is", "default": "Jouw match staat klaar." },
+    { "type": "text", "id": "af_sub", "label": "Regel als alles beantwoord is", "default": "Pas een keuze aan of bekijk direct je advies." },
+    { "type": "text", "id": "opnieuw", "label": "Link om opnieuw te beginnen", "default": "Opnieuw beginnen" },
+    { "type": "text", "id": "wijzig_label", "label": "Voorleestekst van het potlood", "default": "Wijzig dit antwoord" },
     { "type": "textarea", "id": "tabel", "label": "Beslistabel", "info": "Eén regel per uitkomst, van specifiek naar algemeen. Vorm: klus=kaal, set=los > head-shaver. De eerste regel die past wint. Zorg dat elk matchpaneel precies één combinatie wint." },
     { "type": "text", "id": "standaard", "label": "Standaarduitkomst", "info": "Het id van het matchpaneel dat toont als geen regel past." },
     { "type": "text", "id": "match_label", "label": "Label boven het paneel", "default": "Jouw match" },
@@ -309,7 +353,7 @@
         { "type": "text", "id": "groep", "label": "Sleutel", "info": "Kort en zonder spaties, bijvoorbeeld klus. Gebruik deze sleutel ook in de beslistabel." },
         { "type": "text", "id": "vraag", "label": "Vraag", "default": "Wat is de klus?" },
         { "type": "textarea", "id": "opties", "label": "Antwoorden", "info": "Eén per regel: waarde|Knoptekst|woord voor de filterregel. Het derde deel mag weg." },
-        { "type": "text", "id": "start", "label": "Standaard aangevinkt", "info": "De waarde, niet de knoptekst." }
+        { "type": "text", "id": "start", "label": "Beginwaarde", "info": "Wordt niet meer vooraf aangevinkt: de keuzehulp begint leeg en loopt stap voor stap. Blijft staan als aantekening bij welk antwoord het vaakst gekozen wordt." }
       ]
     },
     {
