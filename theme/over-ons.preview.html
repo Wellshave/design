@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="nl"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Over ons &mdash; Wellshave</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0}
+body{background:#F7F2E9;font-family:"Montserrat",sans-serif}
+img{max-width:100%;height:auto;display:block}
+/* ═══ Wellshave — Over ons ═══
+   Zelfde taal als de homepage: donkere blokken op #0B0B0A met een gouden
+   radiale gloed, lichte blokken op #F7F2E9 in een dun gouden kader, koppen
+   met het accent in <b> en niet in een tweede regel met een verloop.
+   Mobiel is één echte media query op 749px, de grens die het thema aanhoudt.
+   Boven- en ondermarge komen uit de sectie-instellingen, niet uit dit bestand. */
+
+.ws-ov{font-family:"Montserrat",sans-serif;color:#111}
+.ws-ov *{box-sizing:border-box}
+.ws-ov p{margin:0;max-width:none}
+.ws-ov ul{margin:0;padding:0;max-width:none;list-style:none}
+
+/* de eyebrow met de haarlijnen ernaast — het merkteken van elke kop */
+.ws-ov__eyebrow{display:inline-flex;align-items:center;gap:16px;font-size:11px;font-weight:700;
+  letter-spacing:.22em;text-transform:uppercase;color:#BC813E}
+.ws-ov__eyebrow::before,.ws-ov__eyebrow::after{content:"";width:42px;height:1px;
+  background:rgba(188,129,62,.5)}
+
+/* ── 1. hero ── donker, tekst links, beeld rechts achter een sluier ── */
+.ws-ov__hero{position:relative;overflow:hidden;background:#0B0B0A;color:#fff;display:flex;
+  min-height:var(--ws-ov-hero-h,520px)}
+.ws-ov__media{position:absolute;inset:0 0 0 58%;overflow:hidden}
+.ws-ov__foto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  object-position:50% 32%}
+.ws-ov__scrim{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(90deg,#0B0B0A 0%,rgba(11,11,10,.92) 12%,rgba(11,11,10,.35) 36%,rgba(11,11,10,0) 64%)}
+.ws-ov__merk{position:absolute;left:30%;top:9%;width:24%;height:auto;opacity:.06;
+  pointer-events:none;filter:brightness(0) invert(1)}
+/* de schuine gouden streep op de naad tussen tekst en beeld */
+.ws-ov__streep{position:absolute;left:59%;top:7%;bottom:11%;width:2px;pointer-events:none;z-index:1;
+  background:linear-gradient(180deg,rgba(245,209,138,0),rgba(245,209,138,.75) 42%,rgba(245,209,138,0));
+  transform:rotate(9deg);filter:blur(.4px)}
+.ws-ov__heroin{position:relative;z-index:2;display:flex;align-items:center;
+  padding:52px 30px 52px 40px;width:60%}
+.ws-ov__heroblok{width:100%;max-width:620px;display:flex;flex-direction:column;gap:20px;
+  align-items:flex-start}
+.ws-ov__h1{font-size:52px;line-height:106%;font-weight:700;letter-spacing:-.035em;margin:0;
+  color:#fff;text-transform:none}
+.ws-ov__h1 b,.ws-ov__h1 strong,.ws-ov__h1 em{font-style:normal;font-weight:700;color:#F5D18A}
+.ws-ov__lead{font-size:17.5px;line-height:158%;font-weight:400;color:rgba(255,255,255,.72);
+  max-width:44ch}
+.ws-ov__teller{display:inline-flex;align-items:center;gap:14px;background:rgba(11,11,10,.62);
+  border:1px solid rgba(245,209,138,.32);border-radius:14px;padding:14px 20px;
+  backdrop-filter:blur(8px)}
+.ws-ov__teller svg{width:24px;height:24px;color:#F5D18A;flex:none}
+.ws-ov__teller b{display:block;font-size:19px;font-weight:700;letter-spacing:-.01em;color:#fff}
+.ws-ov__teller em{display:block;font-style:normal;font-size:10.5px;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.62);margin-top:3px}
+
+/* ── 2. de drie vragen ── licht, in een gouden kader ── */
+.ws-ov__vragen{background:#F7F2E9;padding:44px 34px}
+.ws-ov__rand{position:relative;border:1px solid rgba(188,129,62,.32);border-radius:20px;
+  background:linear-gradient(165deg,#FBF7F0 0%,#F6EFE3 55%,#F2E8D8 100%);
+  padding:44px 44px 46px;overflow:hidden}
+.ws-ov__randmerk{position:absolute;left:-30px;top:-40px;width:210px;height:auto;opacity:.05;
+  pointer-events:none}
+.ws-ov__randin{position:relative;z-index:1;max-width:1160px;margin:0 auto;display:flex;
+  flex-direction:column;gap:32px;min-width:0}
+.ws-ov__kop{text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px}
+.ws-ov__h2{font-size:40px;line-height:114%;font-weight:600;letter-spacing:-.028em;margin:0;
+  color:#111;text-transform:none}
+.ws-ov__h2 b,.ws-ov__h2 strong{font-weight:600;color:#BC813E}
+.ws-ov__sub{font-size:15px;line-height:158%;color:rgba(17,17,17,.6);max-width:62ch}
+
+.ws-ov__drie{display:grid;grid-template-columns:repeat(var(--ws-kol,3),minmax(0,1fr));gap:18px}
+.ws-ov__vraag{background:rgba(255,255,255,.72);border:1px solid rgba(188,129,62,.22);
+  border-radius:14px;padding:28px 24px 26px;display:flex;flex-direction:column;gap:11px;
+  min-width:0}
+.ws-ov__zegel{width:60px;height:60px;border-radius:50%;flex:none;margin-bottom:4px;
+  border:1px solid rgba(188,129,62,.4);background:rgba(255,255,255,.7);display:flex;
+  align-items:center;justify-content:center;color:#BC813E}
+.ws-ov__zegel svg{width:27px;height:27px}
+.ws-ov__vraagnr{font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:#BC813E;line-height:150%}
+.ws-ov__vraagh{font-size:22px;line-height:120%;font-weight:600;letter-spacing:-.022em;color:#111}
+.ws-ov__vraagt{font-size:13.5px;line-height:158%;color:rgba(17,17,17,.6)}
+.ws-ov__vraagslot{display:flex;align-items:center;justify-content:center;gap:12px;
+  padding-top:24px;border-top:1px solid rgba(188,129,62,.22);font-size:13.5px;
+  color:rgba(17,17,17,.55);text-align:center}
+.ws-ov__vraagslot svg{width:16px;height:16px;color:#BC813E;flex:none}
+.ws-ov__vraagslot span{min-width:0}
+.ws-ov__vraagslot b,.ws-ov__vraagslot strong{color:rgba(17,17,17,.8);font-weight:600}
+
+/* ── 3. de werkwijze ── donker met een gouden gloed, genummerd ── */
+.ws-ov__werk{background:#0B0B0A;color:#fff;padding:70px 44px;position:relative;overflow:hidden}
+.ws-ov__werk::before{content:"";position:absolute;left:50%;top:-40%;width:120%;height:120%;
+  transform:translateX(-50%);pointer-events:none;
+  background:radial-gradient(52% 40% at 50% 34%,rgba(245,209,138,.10) 0%,rgba(11,11,10,0) 70%)}
+.ws-ov__werkin{max-width:1240px;margin:0 auto;position:relative;z-index:1}
+.ws-ov__werkkop{text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px;
+  margin-bottom:46px}
+.ws-ov__h2--dark{font-size:40px;font-weight:700;letter-spacing:-.03em;line-height:116%;margin:0;
+  color:#fff;text-transform:none}
+.ws-ov__h2--dark b,.ws-ov__h2--dark strong{font-weight:700;color:#F5D18A}
+.ws-ov__sub--dark{font-size:15.5px;line-height:160%;color:rgba(255,255,255,.58);max-width:64ch}
+.ws-ov__stappen{display:grid;grid-template-columns:repeat(var(--ws-kol,3),minmax(0,1fr))}
+.ws-ov__stap{display:flex;flex-direction:column;gap:13px;padding:6px 30px 26px;min-width:0;
+  position:relative;cursor:default}
+.ws-ov__stap + .ws-ov__stap{border-left:1px solid rgba(255,255,255,.12)}
+.ws-ov__stap::after{content:"";position:absolute;left:30px;right:30px;bottom:0;height:2px;
+  background:linear-gradient(90deg,#F5D18A,rgba(245,209,138,0));
+  opacity:0;transform:scaleX(0);transform-origin:left;
+  transition:transform .4s ease,opacity .3s ease}
+.ws-ov__stap:hover::after{opacity:1;transform:scaleX(1)}
+.ws-ov__cijfer{font-size:38px;font-weight:700;letter-spacing:-.035em;line-height:1;color:#F5D18A;
+  transition:text-shadow .4s ease}
+.ws-ov__stap:hover .ws-ov__cijfer{text-shadow:0 0 34px rgba(245,209,138,.45)}
+.ws-ov__staplabel{font-size:13px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  color:#fff;line-height:150%}
+.ws-ov__staptekst{font-size:14px;line-height:158%;color:rgba(255,255,255,.58)}
+/* het citaat van een klant onder stap 1 — bewijs dat het luisteren echt is */
+.ws-ov__stem{margin-top:4px;border-left:2px solid rgba(245,209,138,.5);padding:2px 0 2px 14px;
+  font-size:13px;line-height:156%;color:rgba(255,255,255,.66)}
+.ws-ov__stem b{display:block;font-weight:600;font-size:11px;letter-spacing:.13em;
+  text-transform:uppercase;color:rgba(245,209,138,.8);margin-top:7px}
+
+/* ── 4. wat wij wel en niet beloven ── donker paneel op licht ── */
+.ws-ov__belofte{background:#F7F2E9;padding:0 34px 44px}
+.ws-ov__duo{max-width:1240px;margin:0 auto;display:grid;
+  grid-template-columns:repeat(var(--ws-kol,2),minmax(0,1fr));gap:20px;align-items:stretch}
+.ws-ov__paneel{position:relative;background:#141312;color:#fff;border-radius:16px;
+  padding:34px 32px;display:flex;flex-direction:column;gap:18px;overflow:hidden}
+.ws-ov__paneel--licht{background:linear-gradient(165deg,#FBF7F0 0%,#F6EFE3 55%,#F2E8D8 100%);
+  color:#111;border:1px solid rgba(188,129,62,.32)}
+.ws-ov__paneelmerk{position:absolute;right:-46px;bottom:-56px;width:210px;height:auto;opacity:.07;
+  pointer-events:none;filter:brightness(0) invert(1)}
+.ws-ov__paneel--licht .ws-ov__paneelmerk{filter:none;opacity:.05}
+.ws-ov__paneelkop{position:relative;z-index:1;font-size:11px;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:#BC813E}
+.ws-ov__paneel .ws-ov__paneelkop{color:#F5D18A}
+.ws-ov__paneel--licht .ws-ov__paneelkop{color:#BC813E}
+.ws-ov__paneelh{position:relative;z-index:1;font-size:26px;line-height:120%;font-weight:600;
+  letter-spacing:-.024em;margin:0;color:#fff;text-transform:none}
+.ws-ov__paneel--licht .ws-ov__paneelh{color:#111}
+.ws-ov__paneelh b,.ws-ov__paneelh strong{font-weight:600;color:#F5D18A}
+.ws-ov__paneel--licht .ws-ov__paneelh b,.ws-ov__paneel--licht .ws-ov__paneelh strong{color:#BC813E}
+.ws-ov__lijst{position:relative;z-index:1;display:flex;flex-direction:column;gap:13px}
+.ws-ov__lijst li{display:flex;gap:12px;align-items:flex-start;font-size:14px;line-height:156%;
+  color:rgba(255,255,255,.66)}
+.ws-ov__paneel--licht .ws-ov__lijst li{color:rgba(17,17,17,.65)}
+.ws-ov__vink{width:21px;height:21px;flex:none;margin-top:1px;color:#F5D18A}
+.ws-ov__paneel--licht .ws-ov__vink{color:#BC813E}
+.ws-ov__kruis{width:21px;height:21px;flex:none;margin-top:1px;color:rgba(255,255,255,.32)}
+.ws-ov__paneel--licht .ws-ov__kruis{color:rgba(17,17,17,.3)}
+/* het team onderaan het donkere paneel */
+.ws-ov__team{position:relative;z-index:1;display:flex;align-items:center;gap:16px;margin-top:auto;
+  padding-top:20px;border-top:1px solid rgba(255,255,255,.12)}
+.ws-ov__paneel--licht .ws-ov__team{border-top-color:rgba(188,129,62,.22)}
+.ws-ov__koppen{display:flex;flex:none}
+.ws-ov__koppen i{width:44px;height:44px;border-radius:50%;display:block;flex:none;overflow:hidden;
+  border:2px solid #141312;box-shadow:0 0 0 1px rgba(245,209,138,.4);background:#2A2724;
+  margin-left:-13px}
+.ws-ov__koppen i:first-child{margin-left:0}
+.ws-ov__koppen img{width:100%;height:100%;object-fit:cover;display:block}
+.ws-ov__team b{display:block;font-size:11px;font-weight:700;letter-spacing:.15em;
+  text-transform:uppercase;color:#F5D18A}
+.ws-ov__paneel--licht .ws-ov__team b{color:#BC813E}
+.ws-ov__team em{display:block;font-style:normal;font-size:13px;color:rgba(255,255,255,.6);
+  margin-top:4px}
+.ws-ov__paneel--licht .ws-ov__team em{color:rgba(17,17,17,.55)}
+
+/* ── 5. afsluiter ── donker met gloed en twee knoppen ── */
+.ws-ov__af{position:relative;overflow:hidden;background:#0B0B0A;color:#fff;padding:74px 44px}
+.ws-ov__af::before{content:"";position:absolute;left:50%;top:-46%;width:120%;height:130%;
+  transform:translateX(-50%);pointer-events:none;
+  background:radial-gradient(50% 40% at 50% 38%,rgba(245,209,138,.12) 0%,rgba(11,11,10,0) 70%)}
+.ws-ov__afin{position:relative;z-index:1;max-width:860px;margin:0 auto;text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:16px}
+.ws-ov__knoppen{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:10px}
+.ws-ov__cta{display:inline-flex;align-items:center;gap:14px;
+  background:linear-gradient(135deg,#F5D18A 0%,#D8AC5D 52%,#BC813E 100%);
+  color:#111;font-weight:700;font-size:14px;letter-spacing:.13em;text-transform:uppercase;
+  padding:20px 30px;border-radius:100px;text-decoration:none;border:0;
+  box-shadow:0 14px 34px -18px rgba(245,209,138,.9)}
+.ws-ov__cta:hover{color:#111;text-decoration:none}
+.ws-ov__cta svg{width:17px;height:17px}
+.ws-ov__cta--rand{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.34);
+  color:#fff;box-shadow:none}
+.ws-ov__cta--rand:hover{color:#fff}
+.ws-ov__afreden{font-size:13px;color:rgba(255,255,255,.5);margin-top:6px}
+.ws-ov__afreden b,.ws-ov__afreden strong{color:rgba(255,255,255,.78);font-weight:600}
+
+/* ── mobiel ──
+   Het monogram, de streep en de naad tussen tekst en beeld vallen weg; op deze
+   breedte staan ze over de tekst heen. */
+@media (max-width:749px){
+  .ws-ov__eyebrow{font-size:10px;gap:10px}
+  .ws-ov__eyebrow::before,.ws-ov__eyebrow::after{width:28px}
+
+  .ws-ov__hero{flex-direction:column;min-height:0}
+  .ws-ov__streep,.ws-ov__merk{display:none}
+  .ws-ov__media{position:relative;inset:auto;width:100%;height:300px;flex:none}
+  .ws-ov__scrim{background:linear-gradient(180deg,rgba(11,11,10,.1) 0%,rgba(11,11,10,.35) 52%,rgba(11,11,10,.94) 92%,#0B0B0A 100%)}
+  .ws-ov__foto{object-position:52% 26%}
+  .ws-ov__heroin{width:100%;padding:0 18px 30px;margin-top:-34px}
+  .ws-ov__heroblok{gap:16px;max-width:none}
+  .ws-ov__h1{font-size:36px;letter-spacing:-.032em}
+  .ws-ov__lead{font-size:15px;line-height:152%}
+  .ws-ov__teller{padding:12px 16px;gap:12px}
+  .ws-ov__teller b{font-size:16px}
+  .ws-ov__teller em{font-size:9px}
+
+  .ws-ov__vragen{padding:26px 14px}
+  .ws-ov__rand{padding:26px 18px 28px;border-radius:16px}
+  .ws-ov__randin{gap:22px}
+  .ws-ov__kop{gap:11px}
+  .ws-ov__h2{font-size:27px}
+  .ws-ov__sub{font-size:14px}
+  .ws-ov__drie{grid-template-columns:1fr;gap:12px}
+  .ws-ov__vraag{padding:22px 20px}
+  .ws-ov__zegel{width:52px;height:52px}
+  .ws-ov__zegel svg{width:23px;height:23px}
+  .ws-ov__vraagh{font-size:20px}
+  .ws-ov__vraagslot{padding-top:18px;font-size:12.5px;text-align:left;
+    align-items:flex-start;justify-content:flex-start;gap:10px}
+  .ws-ov__vraagslot svg{margin-top:2px}
+
+  .ws-ov__werk{padding:40px 18px 32px}
+  .ws-ov__werkkop{margin-bottom:24px;gap:10px}
+  .ws-ov__h2--dark{font-size:27px}
+  .ws-ov__sub--dark{font-size:14px}
+  .ws-ov__stappen{grid-template-columns:1fr}
+  .ws-ov__stap{padding:20px 0;gap:9px}
+  .ws-ov__stap + .ws-ov__stap{border-left:0;border-top:1px solid rgba(255,255,255,.12)}
+  .ws-ov__stap::after{left:0;right:auto;width:56px;bottom:auto;top:0;opacity:1;transform:scaleX(1);
+    background:linear-gradient(90deg,rgba(245,209,138,.5),rgba(245,209,138,0))}
+  .ws-ov__stap:first-child::after{display:none}
+  .ws-ov__cijfer{font-size:31px}
+  .ws-ov__staplabel{font-size:12px}
+  .ws-ov__staptekst{font-size:13.5px}
+
+  .ws-ov__belofte{padding:0 14px 26px}
+  .ws-ov__duo{grid-template-columns:1fr;gap:12px}
+  .ws-ov__paneel{padding:26px 20px;border-radius:14px}
+  .ws-ov__paneelh{font-size:22px}
+  .ws-ov__koppen i{width:38px;height:38px}
+
+  .ws-ov__af{padding:44px 18px}
+  .ws-ov__knoppen{width:100%;flex-direction:column;gap:10px}
+  .ws-ov__cta{justify-content:center;font-size:13px;padding:18px 22px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .ws-ov__stap::after,.ws-ov__cijfer{transition:none}
+}
+
+</style>
+</head><body>
+
+<div class="ws-ov">
+
+  <header class="ws-ov__hero" style="--ws-ov-hero-h:520px">
+    <div class="ws-ov__media">
+      <img class="ws-ov__foto" src="https://wellshave.com/cdn/shop/files/freepik_portrait-lifestyle-shot-o_2812538722.png?v=1&width=1600" alt="Man met een handdoek na het douchen, naast een Wellshave-trimmer in het laadstation." width="928" height="929">
+      <div class="ws-ov__scrim"></div>
+    </div>
+    <div class="ws-ov__streep"></div>
+    <div class="ws-ov__heroin"><div class="ws-ov__heroblok">
+      <p class="ws-ov__eyebrow">Over Wellshave</p>
+      <h1 class="ws-ov__h1">Jij bent niet het probleem.<br><b>Je gereedschap is dat wel.</b></h1>
+      <p class="ws-ov__lead">Wij beginnen nooit bij het apparaat. We beginnen bij de plek waar het bij jou misgaat, en werken van daaruit terug naar wat er in je hand moet liggen.</p>
+      <p class="ws-ov__teller"><svg viewBox="0 0 24 24"><path d="M17 20v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M19 8v6M22 11h-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.5" cy="7" r="3.5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span><b>180.000+</b><em>bestellingen sinds 2021</em></span></p>
+    </div></div>
+  </header>
+
+  <section class="ws-ov__vragen"><div class="ws-ov__rand"><div class="ws-ov__randin">
+    <div class="ws-ov__kop">
+      <p class="ws-ov__eyebrow">Hoe wij ontwerpen</p>
+      <h2 class="ws-ov__h2">Voordat er iets getekend wordt, <b>stellen we drie vragen over jou.</b></h2>
+      <p class="ws-ov__sub">Niet over de techniek, niet over de markt. Over de man die het apparaat straks in zijn hand houdt. Komt er op een van de drie geen scherp antwoord, dan gaat het product niet in productie.</p>
+    </div>
+    <div class="ws-ov__drie" style="--ws-kol:3">
+      <article class="ws-ov__vraag">
+        <span class="ws-ov__zegel"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 7.6v5.2M12 16.1v.1" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg></span>
+        <p class="ws-ov__vraagnr">Vraag 1</p>
+        <h3 class="ws-ov__vraagh">Wat is jouw probleem?</h3>
+        <p class="ws-ov__vraagt">Niet "hij wil trimmen", maar: geen irritatie in de liesstreek, zeven minuten 's ochtends, en er daarna niet meer aan hoeven denken.</p>
+      </article><article class="ws-ov__vraag">
+        <span class="ws-ov__zegel"><svg viewBox="0 0 24 24"><path d="M3.4 7.2h13l4.2 4.8-4.2 4.8h-13z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8.2 12h6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg></span>
+        <p class="ws-ov__vraagnr">Vraag 2</p>
+        <h3 class="ws-ov__vraagh">Wat heb je al geprobeerd?</h3>
+        <p class="ws-ov__vraagt">Wegwerpmesjes, de tondeuse van je hoofd, een apparaat dat voor je baard gemaakt is. Waarom het geen stand hield, is het halve antwoord.</p>
+      </article><article class="ws-ov__vraag">
+        <span class="ws-ov__zegel"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.4" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="1.1" fill="currentColor"/></svg></span>
+        <p class="ws-ov__vraagnr">Vraag 3</p>
+        <h3 class="ws-ov__vraagh">Waar wil je uitkomen?</h3>
+        <p class="ws-ov__vraagt">Meestal niet kaal, maar kort en gelijk. Verzorgd zijn zonder dat het een project wordt, en zonder dat iemand ziet dat je er moeite voor deed.</p>
+      </article>
+    </div>
+    <p class="ws-ov__vraagslot"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.4" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7.8 12.3l2.9 2.9 5.5-6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Elk apparaat in de winkel is <b>langs deze drie vragen gekomen</b> voordat het gemaakt werd.</span></p>
+  </div></div></section>
+
+  <section class="ws-ov__werk"><div class="ws-ov__werkin">
+    <div class="ws-ov__werkkop">
+      <p class="ws-ov__eyebrow">Van jouw probleem naar jouw resultaat</p>
+      <h2 class="ws-ov__h2--dark">Wat de vorige klant miste, <b>zit in jouw apparaat.</b></h2>
+      <p class="ws-ov__sub--dark">Met z'n zessen bouwen en testen we alles zelf. Elke stap hieronder begon bij een klant die iets terugstuurde, miste of beter wilde.</p>
+    </div>
+    <div class="ws-ov__stappen" style="--ws-kol:3">
+      <div class="ws-ov__stap">
+        <p class="ws-ov__cijfer">01</p>
+        <p class="ws-ov__staplabel">Eerst luisteren, dan pas tekenen</p>
+        <p class="ws-ov__staptekst">Elke review, elke mail aan de klantenservice en elke retour komt op één stapel. Een klacht die drie keer terugkomt is geen klacht meer, dat is een opdracht.</p>
+        <blockquote class="ws-ov__stem">"Doet wat hij moet doen. Ook bij de edele delen kun je zonder wondjes gaan trimmen."<b>Maarten A. · Groom Guard™</b></blockquote>
+      </div><div class="ws-ov__stap">
+        <p class="ws-ov__cijfer">02</p>
+        <p class="ws-ov__staplabel">Het mechanisme moet het verschil maken</p>
+        <p class="ws-ov__staptekst">Keramische bladen zijn harder dan staal, slijten langzamer en geven minder wrijving — daarom kan hetzelfde apparaat langs zones waar een gewoon mesje gaat trekken. Werkt het mechanisme niet, dan helpt betere marketing ook niet.</p>
+        
+      </div><div class="ws-ov__stap">
+        <p class="ws-ov__cijfer">03</p>
+        <p class="ws-ov__staplabel">Af is het pas als je er niet meer aan denkt</p>
+        <p class="ws-ov__staptekst">Het doel is geen geslaagde scheerbeurt, maar een routine die geen aandacht meer vraagt. Daar meten we ook op: niet op hoeveel we verkochten, maar op hoe weinig er retour gaat.</p>
+        
+      </div>
+    </div>
+  </div></section>
+
+  <section class="ws-ov__belofte"><div class="ws-ov__duo" style="--ws-kol:2">
+    <div class="ws-ov__paneel">
+      <p class="ws-ov__paneelkop">Wat wij wel beloven</p>
+      <h3 class="ws-ov__paneelh">Jij hoeft alleen te proberen.<br><b>Het risico ligt bij ons.</b></h3>
+      <ul class="ws-ov__lijst"><li><svg class="ws-ov__vink" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.4" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7.8 12.3l2.9 2.9 5.5-6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span>100 dagen thuis proberen. Bevalt het niet, dan krijg je je geld terug.</span></li><li><svg class="ws-ov__vink" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.4" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7.8 12.3l2.9 2.9 5.5-6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span>2 jaar garantie op elk apparaat.</span></li><li><svg class="ws-ov__vink" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.4" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7.8 12.3l2.9 2.9 5.5-6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Gratis verzending vanaf €30, voor 23:59 besteld is morgen in huis.</span></li><li><svg class="ws-ov__vink" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.4" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7.8 12.3l2.9 2.9 5.5-6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Een mens die je mail leest, geen chatbot.</span></li></ul>
+      <div class="ws-ov__team"><span><b>Klantenservice en magazijn</b><em>Zitten in hetzelfde pand in Helmond.</em></span></div>
+    </div>
+    <div class="ws-ov__paneel ws-ov__paneel--licht">
+      <p class="ws-ov__paneelkop">Wat wij niet beloven</p>
+      <h3 class="ws-ov__paneelh">Liever eerlijk vooraf <b>dan een teleurstelling achteraf.</b></h3>
+      <ul class="ws-ov__lijst"><li><svg class="ws-ov__kruis" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.4" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M9 9l6 6M15 9l-6 6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg><span>Kaal als glas. De meeste mannen willen dat niet, en wij doen niet alsof.</span></li><li><svg class="ws-ov__kruis" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.4" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M9 9l6 6M15 9l-6 6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg><span>Dat het bij iedereen identiek uitpakt. Huid en haargroei verschillen.</span></li><li><svg class="ws-ov__kruis" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.4" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M9 9l6 6M15 9l-6 6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg><span>Dat een apparaat je huid verandert. Het verandert hoe je hem behandelt.</span></li><li><svg class="ws-ov__kruis" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.4" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M9 9l6 6M15 9l-6 6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg><span>Het goedkoopste van het schap. Wel de eerlijkste prijs voor wat je krijgt.</span></li></ul>
+    </div>
+  </div></section>
+
+  <section class="ws-ov__af"><div class="ws-ov__afin">
+    <p class="ws-ov__eyebrow">Begin bij jezelf</p>
+    <h2 class="ws-ov__h2--dark">Jij weet het beste <b>waar het misgaat.</b></h2>
+    <p class="ws-ov__sub--dark">Kies het apparaat voor de plek waar jij iets weg wilt hebben. Doet het niet wat wij hier beweren, dan stuur je het binnen honderd dagen terug.</p>
+    <div class="ws-ov__knoppen">
+      <a class="ws-ov__cta" href="/collections/all">Kies jouw apparaat<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+      <a class="ws-ov__cta ws-ov__cta--rand" href="/pages/quiz">Weet je het niet? Doe de quiz</a>
+    </div>
+    <p class="ws-ov__afreden">100 dagen proberen · 2 jaar garantie · <b>gratis verzending vanaf €30</b></p>
+  </div></section>
+
+</div>
+</body></html>
