@@ -652,14 +652,19 @@ strong{font-weight:700}
 .v6 .w-acc .sp dd,.p6 .m-acc .sp dd{margin:0;color:rgba(255,255,255,.78)}
 .v6 .w-acc ul,.p6 .m-acc ul{margin:0;padding-left:16px}
 .v6 .w-acc li,.p6 .m-acc li{margin:0 0 4px}
-.v6 .w-acc .doos,.p6 .m-acc .doos{list-style:none;margin:8px 0 0;padding:0}
-.v6 .w-acc .doos li,.p6 .m-acc .doos li{display:flex;gap:13px;align-items:flex-start;margin:0;
-  padding:12px 0;border-top:1px solid rgba(255,255,255,.1)}
-.v6 .w-acc .doos li:first-child,.p6 .m-acc .doos li:first-child{border-top:0;padding-top:2px}
-.v6 .w-acc .doos i,.p6 .m-acc .doos i{flex:none;width:50px;height:50px;border-radius:9px;
+.v6 .w-acc .doos,.p6 .m-acc .doos{list-style:none;margin:2px 0 0;padding:0}
+.v6 .w-acc .doos > li,.p6 .m-acc .doos > li{margin:0;border-top:1px solid rgba(255,255,255,.09)}
+.v6 .w-acc .doos > li:first-child,.p6 .m-acc .doos > li:first-child{border-top:0}
+.v6 .w-acc .doos .rij,.p6 .m-acc .doos .rij{display:flex;align-items:center;gap:11px;padding:7px 0}
+.v6 .w-acc .doos i,.p6 .m-acc .doos i{flex:none;width:38px;height:38px;border-radius:8px;
   background:rgba(255,255,255,.055)}
-.v6 .w-acc .doos b,.p6 .m-acc .doos b{display:block;font-size:12.5px;color:#F5D18A;margin:1px 0 3px}
-.v6 .w-acc .doos span,.p6 .m-acc .doos span{display:block;min-width:0}
+.v6 .w-acc .doos b,.p6 .m-acc .doos b{flex:1 1 auto;min-width:0;font-size:12.5px;font-weight:600;
+  color:rgba(255,255,255,.92)}
+.v6 .w-acc .doos u,.p6 .m-acc .doos u{flex:none;width:7px;height:7px;margin-right:3px;
+  text-decoration:none;border-right:1.5px solid rgba(255,255,255,.32);
+  border-bottom:1.5px solid rgba(255,255,255,.32);transform:rotate(45deg)}
+.v6 .w-acc .doos .op u,.p6 .m-acc .doos .op u{transform:rotate(225deg)}
+.v6 .w-acc .doos p,.p6 .m-acc .doos p{margin:0;padding:0 2px 10px 49px;color:rgba(255,255,255,.6)}
 .v6 .w-acc .spec,.p6 .m-acc .spec{margin:13px 0 0;padding-top:12px;
   border-top:1px solid rgba(255,255,255,.1)}
 .v6 .w-acc .spec h4,.p6 .m-acc .spec h4{margin:0 0 6px;font-size:10px;font-weight:800;
@@ -767,10 +772,11 @@ strong{font-weight:700}
 &bull; USB-C opladen</p></div></div></details>
       <details><summary>Wat zit er in de doos<i></i></summary><div class="in">
         <ul class="doos">
-        <li><i></i><span><b>Groom Guard&trade; bodygroomer</b>Het apparaat zelf, met SkinSafe&trade;-kop voor lichaam en gezicht.</span></li>
-        <li><i></i><span><b>Foil Shaver-opzetstuk</b>Zorgt voor een gladde scheerbeurt zonder sneetjes of irritatie.</span></li>
-        <li><i></i><span><b>SkinSafe&trade;-mes</b>Keramische messen met SkinSafe&trade;-technologie, ook bij gevoelige huid.</span></li>
-        <li><i></i><span><b>Oplaadstation + USB-C kabel</b>Draadloos opladen of met de kabel.</span></li>
+        <li><span class="rij"><i></i><b>Groom Guard&trade; bodygroomer</b><u></u></span></li>
+        <li class="op"><span class="rij"><i></i><b>Foil Shaver-opzetstuk</b><u></u></span>
+        <p>Zorgt voor een gladde scheerbeurt zonder sneetjes of irritatie.</p></li>
+        <li><span class="rij"><i></i><b>SkinSafe&trade;-mes</b><u></u></span></li>
+        <li><span class="rij"><i></i><b>Oplaadstation + USB-C kabel</b><u></u></span></li>
         </ul></div></details>
       <details><summary>Verzending &amp; retour<i></i></summary><div class="in">
         <p>Voor 23:59 besteld, morgen in huis. Gratis verzending binnen Nederland en Belgi&euml;.</p>
@@ -861,10 +867,11 @@ strong{font-weight:700}
 &bull; USB-C opladen</p></div></div></details>
       <details><summary>Wat zit er in de doos<i></i></summary><div class="in">
             <ul class="doos">
-        <li><i></i><span><b>Groom Guard&trade; bodygroomer</b>Het apparaat zelf, met SkinSafe&trade;-kop voor lichaam en gezicht.</span></li>
-        <li><i></i><span><b>Foil Shaver-opzetstuk</b>Zorgt voor een gladde scheerbeurt zonder sneetjes of irritatie.</span></li>
-        <li><i></i><span><b>SkinSafe&trade;-mes</b>Keramische messen met SkinSafe&trade;-technologie, ook bij gevoelige huid.</span></li>
-        <li><i></i><span><b>Oplaadstation + USB-C kabel</b>Draadloos opladen of met de kabel.</span></li>
+        <li><span class="rij"><i></i><b>Groom Guard&trade; bodygroomer</b><u></u></span></li>
+        <li class="op"><span class="rij"><i></i><b>Foil Shaver-opzetstuk</b><u></u></span>
+        <p>Zorgt voor een gladde scheerbeurt zonder sneetjes of irritatie.</p></li>
+        <li><span class="rij"><i></i><b>SkinSafe&trade;-mes</b><u></u></span></li>
+        <li><span class="rij"><i></i><b>Oplaadstation + USB-C kabel</b><u></u></span></li>
         </ul></div></details>
       <details><summary>Verzending &amp; retour<i></i></summary><div class="in">
             <p>Voor 23:59 besteld, morgen in huis. Gratis verzending binnen Nederland en Belgi&euml;.</p>

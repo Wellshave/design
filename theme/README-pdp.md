@@ -119,6 +119,20 @@ Twee dingen die daar nog omheen zitten:
   sluitende accolade.** Liquid leest die twee tekens als het einde van een tag.
   Dus `border-radius:50% }` met een spatie.
 
+## De doos-lijst is een accordeon in een accordeon
+
+Zes artikelen met elk drie regels omschrijving is op een telefoon een muur
+tekst. Daarom staat in &laquo;wat zit er in de doos&raquo; alleen de naam met zijn
+foto in beeld en komt de omschrijving pas bij een tik: een `details` per
+artikel, binnen de `details` van de accordeon zelf. Op 390 px scheelt dat
+ruim de helft in hoogte, en er gaat geen tekst verloren.
+
+Let op bij het opmaken: `.ws-acc details`, `.ws-acc summary` en
+`.ws-acc details[open] summary i` erven door naar de binnenste `details`.
+De regels onder `.ws-doos` draaien die opmaak terug. Het pijltje van de
+binnenste rij is daarom een `em` en geen `i` &mdash; anders krijgt hij het
+plusteken van de buitenste accordeon.
+
 ## Elk rijketekstveld heeft `metafield_tag` nodig
 
 Drukt de sectie een rijketekstveld rechtstreeks af, dan staat de ruwe JSON op

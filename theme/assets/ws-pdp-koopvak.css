@@ -343,24 +343,42 @@
 .ws-pdp .ws-pay .payment__list svg{height:23px;width:auto;display:block;border-radius:4px}
 
 /* ---- wat zit er in de doos ----
-   Een rij per artikel: miniatuur, naam, omschrijving. Het beeld doet het
-   koppelwerk -- zonder dat zweeft de omschrijving los naast een naam en moet
-   je zelf uitzoeken wat bij wat hoort. */
-.ws-pdp .ws-acc .ws-doos{list-style:none;margin:8px 0 0;padding:0}
-.ws-pdp .ws-acc .ws-doos li{display:flex;gap:13px;align-items:flex-start;
-  padding:12px 0;border-top:1px solid rgba(255,255,255,.1)}
-.ws-pdp .ws-acc .ws-doos li:first-child{border-top:0;padding-top:2px}
-.ws-pdp .ws-acc .ws-doos-b{flex:none;width:50px;height:50px;border-radius:9px;
+   Een regel per artikel: foto, naam, en de omschrijving pas bij een tik.
+   Zes artikelen met elk drie regels tekst is op een telefoon een muur; zo
+   past de hele doos in een oogopslag en gaat er niets verloren. De regels
+   hieronder draaien de opmaak van de buitenste accordeon terug, want die
+   erft door naar de details hierbinnen. */
+.ws-pdp .ws-acc .ws-doos{list-style:none;margin:2px 0 0;padding:0}
+.ws-pdp .ws-acc .ws-doos > li{border-top:1px solid rgba(255,255,255,.09)}
+.ws-pdp .ws-acc .ws-doos > li:first-child{border-top:0}
+.ws-pdp .ws-acc .ws-doos details{border-bottom:0}
+.ws-pdp .ws-acc .ws-doos summary,
+.ws-pdp .ws-acc .ws-doos .ws-doos-k{display:flex;align-items:center;gap:11px;
+  justify-content:flex-start;margin:0;padding:7px 0;
+  font-size:12.5px;font-weight:600;letter-spacing:0;color:rgba(255,255,255,.92)}
+.ws-pdp .ws-acc .ws-doos .ws-doos-k{cursor:default}
+@media (hover:hover){
+  .ws-pdp .ws-acc .ws-doos summary:hover b{color:#fff}
+  .ws-pdp .ws-acc .ws-doos summary:hover em{border-color:rgba(255,255,255,.6)}
+}
+.ws-pdp .ws-acc .ws-doos-b{flex:none;width:38px;height:38px;border-radius:8px;
   background:rgba(255,255,255,.055);overflow:hidden}
 .ws-pdp .ws-acc .ws-doos-b img{width:100%;height:100%;object-fit:contain;display:block}
-.ws-pdp .ws-acc .ws-doos-t{min-width:0}
-.ws-pdp .ws-acc .ws-doos-t b{display:block;font-size:12.5px;font-weight:700;
-  color:var(--ws-gold3);margin:1px 0 3px}
+.ws-pdp .ws-acc .ws-doos b{flex:1 1 auto;min-width:0;font-weight:600}
+.ws-pdp .ws-acc .ws-doos em{flex:none;width:7px;height:7px;margin-right:3px;
+  border-right:1.5px solid rgba(255,255,255,.32);
+  border-bottom:1.5px solid rgba(255,255,255,.32);
+  transform:rotate(45deg);transform-origin:60% 60%;transition:transform .18s ease}
+.ws-pdp .ws-acc .ws-doos details[open] em{transform:rotate(225deg)}
+.ws-pdp .ws-acc .ws-doos-t{padding:0 2px 10px 49px;color:rgba(255,255,255,.6)}
 /* metafield_tag verpakt de tekst in een div met paragrafen; die brengen hun
    eigen marges mee en die willen we hier niet. */
 .ws-pdp .ws-acc .ws-doos-t > div{display:contents}
 .ws-pdp .ws-acc .ws-doos-t p{margin:0 0 5px}
 .ws-pdp .ws-acc .ws-doos-t p:last-child{margin-bottom:0}
+@media (prefers-reduced-motion:reduce){
+  .ws-pdp .ws-acc .ws-doos em{transition:none}
+}
 
 /* ---- de specificaties onder de omschrijving ----
    In het veld staat elke regel als losse regel binnen een alinea. Zonder

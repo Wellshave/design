@@ -369,18 +369,38 @@
                   metafield_tag maakt er opmaak van. De titel gaat door strip,
                   want een paar van die velden eindigen op een spatie.
                 {%- endcomment -%}
+                {%- comment -%}
+                  Zes artikelen met elk drie regels omschrijving is op een telefoon
+                  een muur. Daarom staat alleen de naam met zijn foto in beeld en
+                  komt de omschrijving pas bij een tik. Zo blijft de hele doos in
+                  een oogopslag te overzien en gaat er geen tekst verloren.
+                {%- endcomment -%}
                 <ul class="ws-doos">
                   {%- for item in doos -%}
                     <li>
-                      <span class="ws-doos-b">
-                        {%- if item.image != blank -%}
-                          {{ item.image | image_url: width: 160 | image_tag: alt: '', loading: 'lazy' }}
-                        {%- endif -%}
-                      </span>
-                      <span class="ws-doos-t">
-                        <b>{{ item.title | strip }}</b>
-                        {{ item.description | metafield_tag }}
-                      </span>
+                      {%- if item.description != blank -%}
+                        <details>
+                          <summary>
+                            <span class="ws-doos-b">
+                              {%- if item.image != blank -%}
+                                {{ item.image | image_url: width: 120 | image_tag: alt: '', loading: 'lazy' }}
+                              {%- endif -%}
+                            </span>
+                            <b>{{ item.title | strip }}</b>
+                            <em></em>
+                          </summary>
+                          <div class="ws-doos-t">{{ item.description | metafield_tag }}</div>
+                        </details>
+                      {%- else -%}
+                        <p class="ws-doos-k">
+                          <span class="ws-doos-b">
+                            {%- if item.image != blank -%}
+                              {{ item.image | image_url: width: 120 | image_tag: alt: '', loading: 'lazy' }}
+                            {%- endif -%}
+                          </span>
+                          <b>{{ item.title | strip }}</b>
+                        </p>
+                      {%- endif -%}
                     </li>
                   {%- endfor -%}
                 </ul>
