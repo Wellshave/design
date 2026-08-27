@@ -495,6 +495,39 @@ stuurt precies &eacute;&eacute;n verzoek naar `/cart/add.js` met variant
 `53414664929612`; &laquo;Nee dank je&raquo; stuurt er &eacute;&eacute;n met `53384928395596`, de PRO
 zelf.
 
+## De lichte variant van het koopvak is een studie, geen wissel
+
+In `rapporten/blokken/01-above-the-fold-v2-donker.html` staat een hoofdstuk
+«LICHT» met hetzelfde koopvak op zand naast het donkere. Dat is een
+kleurstudie. De stylesheet ervoor staat in `rapporten/studies/ws-pdp-koopvak-licht.css`
+en bewust **niet** in `theme/assets/`, zodat hij nooit per ongeluk meegaat in een
+upload; wat in `claude-design-werk` draait is nog steeds
+`assets/ws-pdp-koopvak.css`, donker.
+
+De opnames in dat hoofdstuk zijn geen tekening. Ze komen uit de echte
+productpagina van het werkthema, opgehaald met curl en met de afbeeldingen als
+data-URI ingebakken; daarna is alleen de stylesheet gewisseld en is het
+koopvak in Chromium gefotografeerd. Wat er staat is dus precies wat je zou
+krijgen.
+
+Drie dingen zijn bij het omzetten niet mechanisch:
+
+* **Goud is op licht geen tekstkleur.** `#EBC77E` haalt op `#0B0B0A` een
+  contrast van 11,3 : 1 en op `#FBF8F1` nog 1,64 : 1. Elke gouden *letter*
+  wordt daarom brons `#8A5A1E` (5,59 : 1) — dezelfde kleur die de bovenregels
+  van blok 05 al gebruiken. Goud blijft goud waar het een *vulling* is: de
+  knop, de pil, het zegel.
+* **Het vak verliest zijn vanzelfsprekende rand.** Crème `#FBF8F1` op zand
+  `#EFE7D8` scheelt 1,16 : 1. Het koopvak heeft daarom een bronzen haarlijn
+  (22%) en een zachte schaduw nodig om nog als paneel te lezen.
+* **Niet alles zit óp het vak.** Het plaatje «meest gekozen», de galerijpijlen
+  en de betaallogo's staan op hun eigen grond en houden hun donkere of witte
+  behandeling. Klap je die mee om, dan verdwijnen ze in het beeld.
+
+Het lichte pad lost wél de reden op waarom het blok nu twee gronden heeft: de
+apparaten zijn zwart en zijn op `#0B0B0A` niet te zien. Op zand draagt één
+grond allebei de kanten.
+
 ## Wat er aan de winkel zelf is veranderd
 
 Dit staat los van het thema: het is productdata en geldt dus voor elk thema,
