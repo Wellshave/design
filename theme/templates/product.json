@@ -104,7 +104,7 @@
         "spec_kop": "Specificaties",
         "acc2_titel": "Wat zit er in de doos",
         "acc3_titel": "Verzending & retour",
-        "acc3_tekst": "<p>Vandaag vóór 23:59 besteld is morgen in huis. Gratis verzending binnen Nederland en België. Niet goed? Binnen 100 dagen terug, wij betalen de retour.</p>",
+        "acc3_tekst": "<p>Ma t/m vr vóór 23:59 besteld is morgen in huis. Gratis verzending in Nederland en België vanaf €30; daaronder €4,95. Niet goed? Binnen 100 dagen terug, wij betalen de retour.</p>",
         "acc4_titel": "Garantie en proberen",
         "acc4_tekst": "<p>Twee jaar garantie op elk apparaat. Honderd dagen proberen: bevalt het niet, dan krijg je je geld terug — ook als je hem gebruikt hebt.</p>",
         "tag": "Meest gekozen",
@@ -513,10 +513,20 @@
         "zand_b": "#F0E8D8",
         "telwoorden": "nul,Eén,Twee,Drie,Vier,Vijf,Zes,Zeven,Acht,Negen,Tien"
       }
+    },
+    "belofte": {
+      "type": "ws-pdp-belofte",
+      "settings": {
+        "eyebrow": "Bij elke bestelling",
+        "grond": "#FFFFFF",
+        "marge_top": 22,
+        "marge_bot": 22
+      }
     }
   },
   "order": [
     "main",
+    "belofte",
     "logos",
     "ss_payment_icons_Qi6V9R",
     "ugc",

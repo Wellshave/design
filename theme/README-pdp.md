@@ -722,6 +722,63 @@ Dan doet de galerij niets: het script van het koopvak zoekt zichzelf op via
 De hele `<section id="shopify-section-...">` meenemen, niet alleen het
 custom element.
 
+## Blok 02: de geruststrook
+
+`sections/ws-pdp-belofte.liquid` + `assets/ws-pdp-belofte.css`. Staat in
+`templates/product.json` als sleutel `belofte`, direct onder `main`. Vier
+beloftes van de winkel op één rij: proberen, garantie, verzending, levertijd.
+
+Leest `custom.store_usp` — een lijst metaobjecten met `label`, `sublabel` en
+`icon`. Dat veld staat op het product maar de inhoud is winkelbreed, dus de
+strook ziet er op elk product hetzelfde uit. Is het veld leeg, dan rendert de
+sectie niets.
+
+* **De iconen zijn SVG's van 20 × 20** met de bronzen lijnkleur `#BC813E` er al
+  in gebakken. `image_url` schaalt geen SVG, dus die gaan rechtstreeks via hun
+  `url`; alleen niet-SVG's lopen door `image_url`.
+* **De rij telt zichzelf.** Vier items geeft vier kolommen, drie geeft er drie
+  (`ws-n3`), enzovoort. Zo blijft hij kloppen als de winkel er ooit een
+  weghaalt.
+* **Op de telefoon wordt het twee bij twee.** Vier naast elkaar op 390 px geeft
+  kolommen van 80 pixels en daar past geen enkel label in. Onder 380 px valt de
+  onderregel weg: beter één regel die past dan twee die afbreken.
+* **De bovenregel «Bij elke bestelling» is er met opzet.** Zonder die regel
+  lezen vier iconen op een rij als productkenmerken, en dan concurreren ze met
+  de vier vinkjes die twintig pixels hoger in het koopvak staan.
+
+### `sublabel` is nieuw op het metaobject
+
+De definitie `store_usp` had alleen `label` en `icon`. Er is een veld
+`sublabel` bij gekomen, gevuld voor alle vier, en vertaald naar en/de/fr. Een
+label alleen is een claim; de onderregel haalt de twijfel weg.
+
+### Eén van de vier stond op DRAFT
+
+«Morgen in huis» (`morgen-in-huis`, het nieuwste van de vier) stond op DRAFT en
+werd daarom **niet** door de storefront meegegeven — de strook rende met drie
+items en de vierde ontbrak zonder foutmelding. Precies de val uit het hoofdstuk
+hierboven over `metaobjectCreate`. Nu ACTIVE.
+
+Dit is het waard om te onthouden: een lijst met metaobject-verwijzingen laat
+draft-items stilletjes weg. Klopt het aantal niet, kijk dan eerst naar
+`capabilities.publishable.status` en niet naar je Liquid.
+
+### De verzendbelofte klopte niet
+
+De accordeon zei «Gratis verzending binnen Nederland en België», zonder
+drempel. Het echte verzendprofiel (`deliveryProfiles`) zegt:
+
+* **onder €30:** €4,95 — «Ma-Vr voor 23:59 besteld, morgen in huis»
+* **vanaf €30:** gratis — zelfde voorwaarde
+
+`acc3_tekst` is daarop bijgesteld in alle vier de talen, en de onderregels in
+de strook noemen de drempel en de werkdagen ook.
+
+**Nog open:** de voorraadregel boven de koopknop zegt nog «vandaag vóór 23:59
+besteld, morgen in huis» zonder «ma t/m vr». Die komt uit een metafield op het
+product, op 41 producten, dus dat is een aparte veegbeurt. De klok klopt; de
+dagen niet.
+
 ## Wat er aan de winkel zelf is veranderd
 
 Dit staat los van het thema: het is productdata en geldt dus voor elk thema,

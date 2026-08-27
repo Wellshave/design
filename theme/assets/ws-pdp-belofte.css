@@ -1,0 +1,83 @@
+/* Wellshave — productpagina, blok 02: de geruststrook.
+   Vier beloftes van de winkel, op elk product dezelfde.
+   Elke klasse begint met ws-bel zodat thema-CSS er niet doorheen lekt. */
+.ws-bel{--b-wit:#FFFFFF;--b-brons:#B0742A;--b-goud:#E9BE72;
+  --b-ink:#14120F;--b-ink60:rgba(20,18,15,.62);
+  --b-lijn:rgba(176,116,42,.20);
+  display:block;background:var(--b-grond,#FFFFFF);
+  border-top:1px solid var(--b-lijn);border-bottom:1px solid var(--b-lijn);
+  padding:var(--b-top,22px) 16px var(--b-bot,22px);
+  font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
+.ws-bel *,.ws-bel *::before,.ws-bel *::after{box-sizing:border-box}
+.ws-bel-rail{max-width:1240px;margin:0 auto}
+
+/* De bovenregel zegt dat dit de winkel is en niet dit apparaat. Zonder die
+   regel lezen vier iconen op een rij als productkenmerken, en dan concurreren
+   ze met de vier vinkjes die twintig pixels hoger in het koopvak staan. */
+.ws-bel-ey{display:block;text-align:center;margin:0 0 16px;
+  font-size:10px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--b-brons)}
+
+.ws-bel-rij{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:0;padding:0;list-style:none}
+
+/* De scheiding is een haarlijn die boven en onder niet helemaal doorloopt.
+   Een lijn van rand tot rand maakt er vier hokjes van; deze houdt het
+   één strook met vier plekken erin. */
+.ws-bel-rij li{position:relative;display:flex;align-items:center;justify-content:center;
+  gap:13px;padding:2px 18px;min-width:0}
+.ws-bel-rij li + li::before{content:"";position:absolute;left:0;top:14%;bottom:14%;
+  width:1px;background:var(--b-lijn)}
+
+/* Het icoon staat in een zandvlakje. Dat geeft de rij een ritme dat je in
+   een oogopslag telt, zonder dat er vier gekleurde vlakken staan te roepen. */
+.ws-bel-ic{flex:none;width:38px;height:38px;border-radius:11px;
+  display:grid;place-items:center;
+  background:rgba(233,190,114,.16);border:1px solid rgba(176,116,42,.16)}
+.ws-bel-ic img,.ws-bel-ic svg{display:block;width:19px;height:19px}
+
+.ws-bel-tx{min-width:0}
+.ws-bel-tx b{display:block;font-size:13.5px;font-weight:800;letter-spacing:-.01em;
+  line-height:1.25;color:var(--b-ink)}
+.ws-bel-tx span{display:block;margin-top:3px;font-size:11.5px;line-height:1.3;color:var(--b-ink60)}
+
+/* ---- minder dan vier ---- */
+/* Staan er drie of twee in de winkelinstelling, dan blijft de rij kloppen. */
+.ws-bel-rij.ws-n3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.ws-bel-rij.ws-n2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.ws-bel-rij.ws-n1{grid-template-columns:minmax(0,1fr)}
+
+/* ---- tablet ---- */
+@media (max-width: 1000px) {
+  .ws-bel-rij li{padding:2px 12px;gap:11px}
+  .ws-bel-ic{width:34px;height:34px;border-radius:10px}
+  .ws-bel-ic img,.ws-bel-ic svg{width:17px;height:17px}
+  .ws-bel-tx b{font-size:12.5px}
+  .ws-bel-tx span{font-size:11px}
+}
+
+/* ---- telefoon ---- */
+/* Vier naast elkaar op 390px geeft vier kolommen van 80 pixels, en daar past
+   geen van de labels in. Twee bij twee dus, met de haarlijn als kruis. */
+@media (max-width: 720px) {
+  .ws-bel{padding-left:14px;padding-right:14px}
+  .ws-bel-ey{margin-bottom:13px}
+  .ws-bel-rij,.ws-bel-rij.ws-n3,.ws-bel-rij.ws-n2{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ws-bel-rij li{justify-content:flex-start;padding:11px 10px;gap:10px}
+  .ws-bel-rij li + li::before{display:none}
+  /* de verticale lijn tussen de twee kolommen */
+  .ws-bel-rij li:nth-child(even)::after{content:"";position:absolute;left:0;top:12%;bottom:12%;
+    width:1px;background:var(--b-lijn)}
+  /* de horizontale lijn onder de eerste rij */
+  .ws-bel-rij li:nth-child(n+3)::before{content:"";display:block;position:absolute;
+    left:6px;right:6px;top:0;height:1px;width:auto;background:var(--b-lijn)}
+  .ws-bel-ic{width:32px;height:32px;border-radius:9px}
+  .ws-bel-ic img,.ws-bel-ic svg{width:16px;height:16px}
+  .ws-bel-tx b{font-size:12px}
+  .ws-bel-tx span{font-size:10.5px;margin-top:2px}
+}
+
+/* Op de smalste telefoons past de onderregel er niet meer naast; dan is het
+   label alleen genoeg. Beter één regel die past dan twee die afbreken. */
+@media (max-width: 380px) {
+  .ws-bel-tx span{display:none}
+  .ws-bel-rij li{padding:12px 8px}
+}

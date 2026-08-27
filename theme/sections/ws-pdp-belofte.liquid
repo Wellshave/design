@@ -1,0 +1,97 @@
+{%- comment -%}
+  Wellshave — productpagina, blok 02: de geruststrook.
+
+  Vier beloftes van de winkel, op elk product dezelfde: proberen, garantie,
+  verzending, levertijd. Ze komen uit custom.store_usp, een lijst metaobjecten
+  met label, sublabel en icon. Dat veld staat op het product maar de inhoud is
+  winkelbreed, dus deze strook ziet er overal gelijk uit.
+
+  Staat het veld leeg, dan rendert de sectie niets. Blok 02 is een kernblok,
+  dus dat hoort niet te gebeuren -- maar een lege strook met vier gaten is
+  erger dan geen strook.
+{%- endcomment -%}
+
+{{ 'ws-pdp-belofte.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign s = section.settings
+  assign lijst = product.metafields.custom.store_usp.value
+-%}
+
+{%- if lijst != blank -%}
+  {%- comment -%}
+    Eerst tellen wat er echt een label heeft. Een metaobject zonder label zou
+    anders een leeg vak in de rij opleveren.
+  {%- endcomment -%}
+  {%- assign aantal = 0 -%}
+  {%- for item in lijst -%}
+    {%- if item.label.value != blank -%}{%- assign aantal = aantal | plus: 1 -%}{%- endif -%}
+  {%- endfor -%}
+
+  {%- if aantal > 0 -%}
+    {%- comment -%}
+      De rij krijgt evenveel kolommen als er items zijn, tot vier. Zo blijft
+      hij kloppen als de winkel er ooit een weghaalt.
+    {%- endcomment -%}
+    {%- if aantal >= 4 -%}
+      {%- assign kolomklasse = '' -%}
+    {%- else -%}
+      {%- assign kolomklasse = ' ws-n' | append: aantal -%}
+    {%- endif -%}
+
+    <section class="ws-bel"
+             style="--b-top:{{ s.marge_top }}px;--b-bot:{{ s.marge_bot }}px
+                    {%- if s.grond != blank %};--b-grond:{{ s.grond }}{% endif -%}">
+      <div class="ws-bel-rail">
+        {%- if s.eyebrow != blank -%}
+          <span class="ws-bel-ey">{{ s.eyebrow }}</span>
+        {%- endif -%}
+
+        <ul class="ws-bel-rij{{ kolomklasse }}">
+          {%- for item in lijst limit: 4 -%}
+            {%- if item.label.value == blank -%}{%- continue -%}{%- endif -%}
+            <li>
+              {%- if item.icon.value != blank -%}
+                <span class="ws-bel-ic">
+                  {%- comment -%}
+                    De iconen zijn SVG-bestanden van 20 bij 20 met de bronzen
+                    lijnkleur er al in. image_url schaalt geen SVG, dus die
+                    gaat rechtstreeks via zijn url.
+                  {%- endcomment -%}
+                  {%- if item.icon.value.url contains '.svg' -%}
+                    <img src="{{ item.icon.value.url }}" alt="" width="20" height="20" loading="lazy">
+                  {%- else -%}
+                    <img src="{{ item.icon.value | image_url: width: 60 }}" alt="" width="20" height="20" loading="lazy">
+                  {%- endif -%}
+                </span>
+              {%- endif -%}
+              <span class="ws-bel-tx">
+                <b>{{ item.label.value }}</b>
+                {%- if item.sublabel.value != blank -%}<span>{{ item.sublabel.value }}</span>{%- endif -%}
+              </span>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    </section>
+  {%- endif -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Wellshave PDP — Belofte",
+  "tag": "section",
+  "class": "ws-pdp-belofte-sectie",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "paragraph", "content": "De vier beloftes komen uit custom.store_usp: label, onderregel en icoon per stuk. Die inhoud is winkelbreed, dus je past hem één keer aan en hij verandert op elk product." },
+    { "type": "text", "id": "eyebrow", "label": "Bovenregel", "info": "Zegt dat dit over de winkel gaat en niet over dit apparaat. Leeg = geen bovenregel.", "default": "Bij elke bestelling" },
+    { "type": "color", "id": "grond", "label": "Achtergrond", "default": "#FFFFFF" },
+
+    { "type": "header", "content": "Ruimte" },
+    { "type": "range", "id": "marge_top", "label": "Ruimte boven", "min": 0, "max": 64, "step": 2, "unit": "px", "default": 22 },
+    { "type": "range", "id": "marge_bot", "label": "Ruimte onder", "min": 0, "max": 64, "step": 2, "unit": "px", "default": 22 }
+  ],
+  "presets": [{ "name": "Wellshave PDP — Belofte" }]
+}
+{% endschema %}
