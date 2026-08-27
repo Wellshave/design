@@ -329,6 +329,45 @@ dat een nachtelijke taak vult uit
 `https://widget.trustpilot.com/trustbox-data/5419b6a8b0d04a076446a9ad?businessUnitId=63c511d4e1339e2200c204a1&locale=nl-NL`,
 en dat de sectie leest in plaats van de instelling. Dat is nog niet gebouwd.
 
+## Blok 05: in de praktijk
+
+`sections/ws-pdp-praktijk.liquid` plus `assets/ws-pdp-praktijk.css`. Vervangt
+`product-media-with-text`, die in beide sjablonen op `disabled` staat.
+
+Leest `custom.image_with_text`: een lijst metaobjecten met `title`,
+`description` (rijke tekst), `image` **of** `video`, en het nieuwe veld
+`label`. Vier genummerde kaarten met beeld om en om links en rechts.
+
+**De alinea en de lijst uit &eacute;&eacute;n veld.** De rijke tekst bevat een alinea plus
+een `<ul>` met drie punten. De alinea wordt de uitleg, de lijstpunten worden
+de vinkjes &mdash; dat is CSS (`li::before` met een ingebakken SVG), geen tweede
+veld en geen parseerwerk.
+
+**Het label is nieuw.** Veld `label` op de definitie `image_with_text`
+(`34553495884`), &eacute;&eacute;n woord naast het volgnummer. Leeg laten mag: dan staat
+er alleen `01`. Op de Groom Guard&trade; PRO staan er vier ingevuld, met en/de/fr
+erbij.
+
+**`media_position` wordt niet meer gelezen.** Dat veld stond als ingetypte
+tekst (&laquo;Left&raquo;/&laquo;Right&raquo;) op elk metaobject &mdash; handwerk dat per product fout kan
+staan. De kaarten wisselen nu automatisch om en om; de sectie-instelling
+`beeld_links` bepaalt alleen waar de eerste begint.
+
+**De video's laden niets vooraf.** `preload="none"` met de eigen poster erop
+en een speelknop eroverheen; de oude sectie liet vier video's tegelijk
+automatisch afspelen. Bij het afspelen pauzeert een eventuele andere video.
+
+De kop telt zichzelf: `[aantal]` in de instelling wordt het aantal kaarten als
+woord (&laquo;Vier momenten&raquo;), zodat een product met drie kaarten geen vier belooft.
+
+### Een sectienaam is maximaal 25 tekens
+
+`"name": "Wellshave PDP — In de praktijk"` is er dertig, en dan weigert
+Shopify het bestand **zonder foutmelding**: `themeFilesUpsert` geeft een lege
+`userErrors` terug en de sectie staat er gewoon niet. De checksum vergelijken
+is het enige wat het aan het licht brengt. Nu heet hij
+`Wellshave PDP — Praktijk` (24). Dezelfde grens geldt voor de presetnaam.
+
 ## Wat er aan de winkel zelf is veranderd
 
 Dit staat los van het thema: het is productdata en geldt dus voor elk thema,

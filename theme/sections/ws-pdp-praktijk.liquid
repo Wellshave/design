@@ -1,0 +1,186 @@
+{%- comment -%}
+  Wellshave — productpagina, blok 05: in de praktijk.
+  Vervangt de oude sectie product-media-with-text.
+
+  Leest custom.image_with_text: een lijst metaobjecten met title, description
+  (rijke tekst), image óf video, en label. Het veld media_position wordt niet
+  meer gelezen — de kaarten wisselen automatisch van kant, zodat het nooit
+  meer per product met de hand goed gezet hoeft te worden.
+
+  De video's staan op preload="none" met hun eigen poster erop. Er wordt dus
+  niets gedownload tot iemand op de knop tikt. De oude sectie liet vier
+  video's tegelijk automatisch afspelen.
+{%- endcomment -%}
+
+{{ 'ws-pdp-praktijk.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign s = section.settings
+  assign lijst = product.metafields.custom.image_with_text.value
+-%}
+
+{%- if lijst != blank -%}
+  {%- comment -%}
+    Eerst tellen hoeveel er echt beeld hebben. Een metaobject zonder foto en
+    zonder video zou anders een halve kaart opleveren.
+  {%- endcomment -%}
+  {%- assign aantal = 0 -%}
+  {%- for item in lijst -%}
+    {%- if item.image.value != blank or item.video.value != blank -%}
+      {%- assign aantal = aantal | plus: 1 -%}
+    {%- endif -%}
+  {%- endfor -%}
+
+  {%- if aantal > 0 -%}
+    {%- liquid
+      assign uid = section.id
+      assign woorden = 'nul,Eén,Twee,Drie,Vier,Vijf,Zes,Zeven,Acht,Negen,Tien' | split: ','
+      if aantal <= 10
+        assign telwoord = woorden[aantal]
+      else
+        assign telwoord = aantal
+      endif
+      assign kop = s.kop | replace: '[aantal]', telwoord | replace: '[product]', product.title
+    -%}
+
+    <section class="ws-prk" data-ws-prk
+             style="--p-top:{{ s.marge_top }}px;--p-bot:{{ s.marge_bot }}px">
+      <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+        <symbol id="ws-prk-play-{{ uid }}" viewBox="0 0 24 24"><path d="M8 5.4v13.2L19 12z" fill="currentColor"/></symbol>
+      </svg>
+
+      <div class="ws-prk-rail">
+        {%- if s.eyebrow != blank or kop != blank -%}
+          <header class="ws-prk-hd">
+            {%- if s.eyebrow != blank -%}
+              <span class="ws-prk-ey">{{ s.eyebrow }}</span>
+            {%- endif -%}
+            {%- if kop != blank -%}<h2>{{ kop }}</h2>{%- endif -%}
+          </header>
+        {%- endif -%}
+
+        {%- assign teller = 0 -%}
+        {%- for item in lijst -%}
+          {%- liquid
+            assign beeld = item.image.value
+            assign film = item.video.value
+          -%}
+          {%- if beeld == blank and film == blank -%}{%- continue -%}{%- endif -%}
+          {%- assign teller = teller | plus: 1 -%}
+
+          {%- comment -%}
+            Even kaarten krijgen het beeld aan de andere kant. Begint bij
+            links, tenzij de instelling anders zegt.
+          {%- endcomment -%}
+          {%- assign rest = teller | modulo: 2 -%}
+          {%- if s.beeld_links -%}
+            {%- if rest == 0 -%}{%- assign omgekeerd = true -%}{%- else -%}{%- assign omgekeerd = false -%}{%- endif -%}
+          {%- else -%}
+            {%- if rest == 0 -%}{%- assign omgekeerd = false -%}{%- else -%}{%- assign omgekeerd = true -%}{%- endif -%}
+          {%- endif -%}
+
+          {%- capture nummer -%}{% if teller < 10 %}0{% endif %}{{ teller }}{%- endcapture -%}
+
+          <article class="ws-prk-kaart{% if omgekeerd %} ws-om{% endif %}">
+            <div class="ws-prk-md">
+              {%- if film != blank -%}
+                <video class="ws-prk-v" playsinline preload="none" muted
+                       poster="{{ film.preview_image | image_url: width: 1100 }}"
+                       {% if item.title.value != blank %}aria-label="{{ item.title.value | escape }}"{% endif %}>
+                  {%- for bron in film.sources -%}
+                    {%- if bron.format == 'mp4' -%}
+                      <source src="{{ bron.url }}" type="{{ bron.mime_type }}">
+                    {%- endif -%}
+                  {%- endfor -%}
+                </video>
+                {%- if s.video_label != blank -%}
+                  <button type="button" class="ws-prk-play" data-ws-speel>
+                    <i><svg><use href="#ws-prk-play-{{ uid }}"/></svg></i>{{ s.video_label }}
+                  </button>
+                {%- endif -%}
+              {%- else -%}
+                {{ beeld | image_url: width: 1100 | image_tag: alt: item.title.value, loading: 'lazy', class: 'ws-prk-f' }}
+              {%- endif -%}
+            </div>
+
+            <div class="ws-prk-tx">
+              <span class="ws-prk-nr" aria-hidden="true">{{ nummer }}</span>
+
+              <p class="ws-prk-kick">
+                <b>{{ nummer }}</b>
+                {%- if item.label.value != blank -%}<em>&middot;</em>{{ item.label.value }}{%- endif -%}
+              </p>
+
+              {%- if item.title.value != blank -%}<h3>{{ item.title.value }}</h3>{%- endif -%}
+
+              {%- comment -%}
+                Rijke tekst rendert een alinea plus een lijst. De alinea is de
+                uitleg, de lijstpunten worden de vinkjes — dat scheelt een
+                tweede veld en het staat er al.
+              {%- endcomment -%}
+              {%- if item.description.value != blank -%}
+                <div class="ws-prk-body">{{ item.description | metafield_tag }}</div>
+              {%- endif -%}
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+    </section>
+
+    <script>
+      (function () {
+        var wortel = document.currentScript.previousElementSibling;
+        if (!wortel || !wortel.hasAttribute('data-ws-prk')) { return; }
+
+        var films = Array.prototype.slice.call(wortel.querySelectorAll('.ws-prk-v'));
+
+        wortel.addEventListener('click', function (e) {
+          var knop = e.target.closest('[data-ws-speel]');
+          if (!knop) { return; }
+
+          var doos = knop.parentNode;
+          var film = doos.querySelector('.ws-prk-v');
+          if (!film) { return; }
+
+          // Twee video's tegelijk horen is het snelste wat iemand wegjaagt.
+          films.forEach(function (andere) {
+            if (andere !== film && !andere.paused) {
+              andere.pause();
+              andere.removeAttribute('controls');
+              andere.parentNode.classList.remove('ws-speelt');
+            }
+          });
+
+          doos.classList.add('ws-speelt');
+          film.muted = false;
+          film.setAttribute('controls', 'controls');
+          var belofte = film.play();
+          if (belofte && belofte.catch) { belofte.catch(function () {}); }
+        });
+      })();
+    </script>
+  {%- endif -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Wellshave PDP — Praktijk",
+  "tag": "section",
+  "class": "ws-pdp-praktijk-sectie",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "header", "content": "De kop" },
+    { "type": "text", "id": "eyebrow", "label": "Bovenregel", "info": "Staat in een randje boven de kop. Leeg = geen randje.", "default": "In de praktijk" },
+    { "type": "text", "id": "kop", "label": "Kop", "info": "[aantal] wordt het aantal kaarten als woord, [product] de producttitel.", "default": "[aantal] momenten. Eén moeiteloze routine." },
+
+    { "type": "header", "content": "De kaarten" },
+    { "type": "checkbox", "id": "beeld_links", "label": "Eerste kaart: beeld links", "info": "Daarna wisselt het vanzelf om en om.", "default": true },
+    { "type": "text", "id": "video_label", "label": "Label op de speelknop", "info": "Leeg = geen knop, dan blijft de poster staan.", "default": "Video" },
+
+    { "type": "header", "content": "Ruimte" },
+    { "type": "range", "id": "marge_top", "label": "Ruimte boven", "min": 0, "max": 96, "step": 4, "unit": "px", "default": 40 },
+    { "type": "range", "id": "marge_bot", "label": "Ruimte onder", "min": 0, "max": 96, "step": 4, "unit": "px", "default": 40 }
+  ],
+  "presets": [{ "name": "Wellshave PDP — Praktijk" }]
+}
+{% endschema %}

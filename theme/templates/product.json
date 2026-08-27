@@ -313,7 +313,8 @@
         "desk_indent_bottom": 80,
         "mob_indent_top": 40,
         "mob_indent_bottom": 40
-      }
+      },
+      "disabled": true
     },
     "compare_table": {
       "type": "compare-table",
@@ -486,6 +487,17 @@
         "marge_top": 28,
         "marge_bot": 28
       }
+    },
+    "praktijk": {
+      "type": "ws-pdp-praktijk",
+      "settings": {
+        "eyebrow": "In de praktijk",
+        "kop": "[aantal] momenten. Eén moeiteloze routine.",
+        "beeld_links": true,
+        "video_label": "Video",
+        "marge_top": 40,
+        "marge_bot": 40
+      }
     }
   },
   "order": [
@@ -497,6 +509,7 @@
     "ugc-videos",
     "trustpilot_reviews",
     "use_case",
+    "praktijk",
     "product_media_with_text",
     "compare_table",
     "whats_included",
