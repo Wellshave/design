@@ -206,9 +206,9 @@
 
         <div id="ProductPrice-{{ section.id }}">
           <div class="ws-prijs">
-            <span class="ws-nu">{% render 'price-formated', price: v.price %}</span>
+            <span class="ws-nu">{% if s.munt != blank %}<span class="ws-munt">{{ s.munt }}</span>{% endif %}{% render 'price-formated', price: v.price %}</span>
             {%- if v.compare_at_price > v.price -%}
-              <span class="ws-was">{% render 'price-formated', price: v.compare_at_price %}</span>
+              <span class="ws-was">{% if s.munt != blank %}<span class="ws-munt">{{ s.munt }}</span>{% endif %}{% render 'price-formated', price: v.compare_at_price %}</span>
               <span class="ws-off">&minus;{{ korting }}%</span>
             {%- endif -%}
           </div>
@@ -216,7 +216,7 @@
             {%- assign bedrag = v.compare_at_price | minus: v.price -%}
             <span class="ws-besp">
               <svg><use href="#ws-pdp-tag-{{ section.id }}"/></svg>
-              <span>{{ s.besparing_regel }} {% render 'price-formated', price: bedrag %}</span>
+              <span>{{ s.besparing_regel }} {% if s.munt != blank %}<span class="ws-munt">{{ s.munt }}</span>{% endif %}{% render 'price-formated', price: bedrag %}</span>
             </span>
           {%- endif -%}
         </div>
@@ -323,7 +323,7 @@
             <button id="ProductSubmit-{{ section.id }}" type="submit" class="ws-cta"
                     {% unless v.available %}disabled{% endunless %}>
               {%- if v.available -%}
-                {{ s.knop_label }} &mdash; {% render 'price-formated', price: v.price %}
+                {{ s.knop_label }} &mdash; {% if s.munt != blank %}{{ s.munt }}&nbsp;{% endif %}{% render 'price-formated', price: v.price %}
               {%- else -%}
                 {{ s.knop_uitverkocht }}
               {%- endif -%}
@@ -1087,6 +1087,7 @@
     { "type": "text", "id": "pil_label", "label": "Linkerhelft van de pil", "info": "Leeg laten betekent: de producttitel." },
     { "type": "text", "id": "besparing_label", "label": "Kortingslabel — [korting] wordt het percentage", "default": "Bespaar [korting]%" },
     { "type": "text", "id": "besparing_regel", "label": "Regel bij het bespaarde bedrag", "default": "Je bespaart" },
+    { "type": "text", "id": "munt", "label": "Valutateken voor de prijs", "info": "De winkel zet zelf geen teken voor de prijs (moneyFormat is amount_with_comma_separator). Dit zet het alleen in dit blok. Leeg = geen teken.", "default": "€" },
     { "type": "header", "content": "Trustpilot" },
     { "type": "checkbox", "id": "tp_tonen", "label": "Beoordeling tonen", "default": true },
     { "type": "text", "id": "tp_label", "label": "Oordeel", "default": "Uitstekend" },

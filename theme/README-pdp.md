@@ -556,6 +556,50 @@ daartussen):
 * **Het lichte vak haalt hem overal**, mede doordat het rood een stap donkerder
   ging naar `#C8281F`.
 
+### Vier bijstellingen na de eerste blik
+
+* **De pil is half zo groot.** Van 321 × 36 px naar 245 × 22 px — in oppervlak
+  precies de helft. Hij was een kop geworden terwijl het een merkteken is.
+* **De prijs ademt.** `letter-spacing` van `-.035em` naar `-.012em`; op 38 px
+  drukte dat de komma tegen de cijfers aan.
+* **Er staat een euroteken voor de prijs.** Nieuwe instelling `munt`
+  (standaard `€`), gebruikt op vier plekken: `.ws-nu`, `.ws-was`, `.ws-besp` en
+  de koopknop. De winkel zet zelf geen teken — `moneyFormat` staat op
+  `{{amount_with_comma_separator}}`, dus `| money` geeft kaal `59,95`. Wil je
+  het teken winkelbreed, dan is dat de instelling in Shopify zelf; die raakt
+  ook de kassa en de bonnen, dus dat is een aparte beslissing.
+* **«Vergelijk de modellen» is een knop geworden.** Eigen bronzen vulling,
+  rand van 1,5 px, een randje eronder dat hem optilt, en een pijl die meeschuift.
+  In brons, niet in goud: hij mag opvallen maar niet de strijd aangaan met
+  «in winkelwagen».
+
+## De aanbodbalk sprak Engels: stale vertalingen, geen bug in het blok
+
+**Nederlands is de brontaal van de winkel** (`shopLocales`: nl primair, en/de/fr
+gepubliceerd). Het metaobject `limited_offer` → `voorjaar-sale` heeft dus
+Nederlandse broninhoud, en op de Nederlandse pagina stond gewoon «Summer Sale:
+profiteer tot 40% korting». De vertalingen naar en/de/fr dateerden nog van de
+vóórgaande campagne en zeiden alle drie *Spring Sale*. Wie op `/en`, `/de` of
+`/fr` uitkwam — waar een browser met een andere taalvoorkeur vanzelf terechtkomt
+— las het oude aanbod.
+
+Alle vijf de velden (`product_title`, `offer_title`, `popup_title`,
+`popup_subtitle`, `popup_description`) zijn met `translationsRegister` opnieuw
+gezet in de drie talen en nagekeken op de winkel zelf.
+
+Twee dingen om te onthouden:
+
+* **Vertalingen horen bij de winkel, niet bij een thema.** Deze correctie geldt
+  dus ook meteen voor de live winkel. Dat is hier de bedoeling — er stond
+  verkeerde campagnetekst — maar het is wél een uitzondering op «alles blijft
+  in het werkthema».
+* **Het Nederlandse `popup_title` zegt nog «Tijdelijke Vaderdag Sale»** terwijl
+  de rest Summer Sale zegt. Dat is broninhoud, geen vertaling, dus onaangeroerd
+  gelaten. De drie vertalingen staan wel op Summer Sale.
+
+Het tweede metaobject (`groom-guard`, de gratis Skin-Safe Blade) is nagekeken en
+loopt wél gelijk met zijn bron.
+
 ### De grond onder het koopvak is dieper dan die van blok 05
 
 Het koopvak staat op `#EFE7D8`, blok 05 op `#F7F3EB`. Dat verschil is er met
