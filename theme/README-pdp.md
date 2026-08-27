@@ -685,6 +685,43 @@ En de Engelse vertaling van de verzendregel op de producten zegt nog «Order by
 11:59 PM = delivered tomorrow» — met het gelijkteken dat in het Nederlands al
 weg is. Dat is een aparte veegbeurt over de productmetafields.
 
+## Het plaatje «meest gekozen» staat alleen nog op de eerste foto
+
+De eerste foto is een pakshot: alleen het apparaat op een egale grond. Vanaf de
+tweede zijn het listingbeelden met tekst erin gebrand — en daar lag de zwarte
+pil linksboven precies overheen.
+
+Twee dingen zijn veranderd:
+
+* **Hij verdwijnt zodra je doorbladert.** Het script hangt aan de scroll van
+  `.ws-baan` (met een `requestAnimationFrame`-rem, en `passive: true`) en zet
+  `ws-weg` op `.ws-tg` zodra `scrollLeft > 8`. `naarDia()` doet het meteen,
+  zonder op het scrollen te wachten, dus bij een klik op een pijl of miniatuur
+  is hij al weg voordat de foto aankomt. Ga je terug naar de eerste, dan komt
+  hij terug. Fade van 0,22s, uitgezet bij `prefers-reduced-motion`.
+* **Hij is melkglas geworden.** Was een dicht zwart vlak van 180 × 36 px, nu
+  een doorschijnende chip van 119 × 24: `rgba(255,255,255,.78)` met
+  `backdrop-filter: blur(9px)`, een bronzen haarlijn en inkt als tekst. Dat
+  werkt op een lichte pakshot én op een donkere foto, want het is wit met
+  donkere letters — geen van beide verdwijnt in de achtergrond.
+
+Nagemeten in een echte browser op de opgehaalde voorvertoning: bij het laden
+zichtbaar (opacity 1), na één keer «volgende» weg (opacity 0), na een klik op
+miniatuur 4 weg, terug op de eerste weer zichtbaar, en ook bij handmatig
+scrollen weg.
+
+Let bij dat naspelen op `scroll-snap-type: x mandatory` op `.ws-baan`: zet je
+`scrollLeft` op minder dan een halve dia, dan trekt de snap hem terug naar nul
+en lijkt er niets te gebeuren. Schuif voorbij het midden.
+
+### Een proefbestand moet de sectiewikkel meenemen
+
+`scripts` in de scratchpad bouwden eerst een proef van alleen `<main-product>`.
+Dan doet de galerij niets: het script van het koopvak zoekt zichzelf op via
+`document.getElementById('shopify-section-<id>')` en stopt als die er niet is.
+De hele `<section id="shopify-section-...">` meenemen, niet alleen het
+custom element.
+
 ## Wat er aan de winkel zelf is veranderd
 
 Dit staat los van het thema: het is productdata en geldt dus voor elk thema,

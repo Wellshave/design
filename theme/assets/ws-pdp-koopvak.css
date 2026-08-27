@@ -31,8 +31,21 @@
 .ws-pdp .ws-stg .ws-ghost{position:absolute;right:1%;top:50%;transform:translateY(-50%);z-index:1;
   width:58%;height:auto;aspect-ratio:1/1;object-fit:contain;pointer-events:none;user-select:none;
   opacity:.09}
-.ws-pdp .ws-tg{position:absolute;top:20px;left:20px;z-index:4;background:#111;color:#fff;font-size:10px;
-  font-weight:800;letter-spacing:.13em;text-transform:uppercase;padding:9px 16px;border-radius:100px}
+/* Het plaatje ligt op de foto, en vanaf de tweede foto is dat een
+   listingbeeld met eigen tekst erin. Een zwarte pil dekt die tekst af.
+   Vandaar twee dingen: melkglas in plaats van een dicht vlak, en hij
+   verdwijnt zodra je doorbladert -- zie ws-weg. Op de eerste foto, de
+   pakshot zonder tekst, staat hij nog gewoon. */
+.ws-pdp .ws-tg{position:absolute;top:18px;left:18px;z-index:4;
+  background:rgba(255,255,255,.78);-webkit-backdrop-filter:saturate(1.4) blur(9px);
+  backdrop-filter:saturate(1.4) blur(9px);
+  border:1px solid rgba(176,116,42,.28);
+  box-shadow:0 2px 10px -4px rgba(20,18,15,.22);
+  color:var(--ws-ink);font-size:9px;
+  font-weight:800;letter-spacing:.13em;text-transform:uppercase;padding:6px 12px;border-radius:100px;
+  transition:opacity .22s ease,transform .22s ease}
+.ws-pdp .ws-tg.ws-weg{opacity:0;transform:translateY(-5px);pointer-events:none}
+@media (prefers-reduced-motion:reduce){.ws-pdp .ws-tg{transition:none}}
 /* height:auto moet erbij. Het height-attribuut dat image_tag meegeeft is een
    presentatiehint; zolang de CSS geen height zet, wint 2080px van de foto en
    doet aspect-ratio niets. */
@@ -341,7 +354,7 @@
   .ws-pdp .ws-cta2{margin-top:13px}
 
   .ws-pdp .ws-stg{padding:16px 16px 14px;border-radius:16px}
-  .ws-pdp .ws-tg{top:16px;left:16px;border-radius:100px;padding:10px 18px;font-size:11px}
+  .ws-pdp .ws-tg{top:14px;left:14px;border-radius:100px;padding:7px 13px;font-size:9.5px}
 }
 
 /* ---- podium als schuifbaan; één dia per keer ---- */

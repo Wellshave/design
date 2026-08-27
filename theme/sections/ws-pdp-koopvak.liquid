@@ -589,6 +589,25 @@
       var strook = wortel.querySelector('#ws-th-{{ section.id }}');
       if (!baan || !strook) return;
 
+      // Het plaatje "meest gekozen" hoort bij de eerste foto, de pakshot. Vanaf
+      // de tweede is het een listingbeeld met eigen tekst, en daar zou het
+      // overheen liggen. Dus: weg zodra je begint te bladeren, terug zodra je
+      // weer op de eerste staat.
+      var kenmerk = wortel.querySelector('.ws-tg');
+      var wachtKenmerk = false;
+      function toetsKenmerk() {
+        if (!kenmerk) { return; }
+        kenmerk.classList.toggle('ws-weg', baan.scrollLeft > 8);
+      }
+      if (kenmerk) {
+        baan.addEventListener('scroll', function () {
+          if (wachtKenmerk) { return; }
+          wachtKenmerk = true;
+          requestAnimationFrame(function () { wachtKenmerk = false; toetsKenmerk(); });
+        }, { passive: true });
+        toetsKenmerk();
+      }
+
       function markeer(i) {
         var vakken = strook.querySelectorAll('figure');
         for (var n = 0; n < vakken.length; n++) {
@@ -606,6 +625,7 @@
         if (!dia) return;
         baan.scrollTo({ left: dia.offsetLeft - baan.offsetLeft, behavior: 'smooth' });
         markeer(i);
+        if (kenmerk) { kenmerk.classList.toggle('ws-weg', i !== 0); }
       }
       var vorige = wortel.querySelector('[data-ws-dia-vorige]');
       var volgende = wortel.querySelector('[data-ws-dia-volgende]');
