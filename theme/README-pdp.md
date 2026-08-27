@@ -872,6 +872,106 @@ maar structuur: de kleurwissel op de tweede regel is precies waar de zin kantelt
 keer hetzelfde bedrag anders geschreven op één pagina. De sectie heeft nu
 dezelfde instelling `munt` als het koopvak.
 
+## De cadeaus staan nu in het koopvak
+
+Boven een bepaald bedrag legt de winkel er een cadeau bij. Dat gebeurde tot nu
+toe pas in de winkelwagen: je zag het als je al besloten had. Nu staat het in
+het koopvak, onder de koopknop, zodat het meeweegt in het besluit zelf.
+
+### Het loopt via de thema-instellingen, niet via de kortingen
+
+Dit is het punt waar ik er eerst naast zat, dus het staat hier expliciet. Er is
+**geen Shopify-korting** in het spel en er hoeft er ook geen te komen. Het
+mechanisme zit in de thema-instellingen:
+
+| Instelling | Waarde nu |
+| --- | --- |
+| `enable_gift_rewards` | aan |
+| `gift_1_threshold` / `gift_1_product` / `gift_1_label` | 65 / `gift-the-washbag` / «Gratis Washbag» |
+| `gift_2_threshold` / `gift_2_product` / `gift_2_label` | 90 / `gift-neustrimmer-ultra` / «Gratis Neustrimmer» |
+
+`syncGifts()` in `base.js` haalt `/cart.js` op, telt de `original_line_price`
+van alle regels **zonder** `properties._gift_tier` bij elkaar, en zet het
+cadeauproduct in of uit de wagen zodra die som de drempel passeert. De twee
+cadeauproducten staan op **UNLISTED** en kosten **€ 0,00**. Er valt dus niets
+af te trekken; het artikel is al gratis. Vandaar geen korting.
+
+Dat het cadeau als artikel bestaat is precies waarom het blok in het koopvak
+mag staan: de pagina belooft niets wat de winkelwagen niet zelf uitvoert.
+
+### Waarom de sectie de instellingen leest en niet zijn eigen tekst
+
+De regels in `.ws-cad` komen rechtstreeks uit `settings.gift_1_*` en
+`settings.gift_2_*` — dezelfde bron waar `syncGifts()` uit put. Was het een
+eigen sectie-instelling geweest, dan had de pagina «gratis bij € 90» kunnen
+beloven terwijl de winkelwagen op € 100 stond. Nu kán dat niet uit elkaar
+lopen: één bron, twee lezers.
+
+De sectie voegt er alleen presentatie aan toe: `cad_kop` («Gratis bij deze
+bestelling»), `cad_waarde` («t.w.v.») en `cad_chip` («Gratis»). Die drie staan
+in `templates/product.json` en zijn dus vertaalbaar — zie het hoofdstuk over
+de andere talen voor waarom dat moet.
+
+### Twee drempels, niet één
+
+De vraag was «bij producten boven de 90 euro», maar zo staat het niet in de
+winkel. Het zijn er twee: **€ 65** voor de Washbag en **€ 90** voor de
+Neustrimmer. Tussen 65 en 90 krijg je er dus één. Het blok toont daarom per
+product alleen de cadeaus die dat product op eigen kracht haalt, en verdwijnt
+helemaal als het er geen haalt.
+
+Nagelopen op vier prijspunten:
+
+| Prijs | Wat het blok toont |
+| --- | --- |
+| 114,95 | beide |
+| 89,95 | alleen de Washbag |
+| 64,95 | niets |
+| 59,95 | niets |
+
+**Er zit een cluster op 89,95** — Shave Package Ultimate, Flex-line Bundel,
+The Sentinel PRO, Barber Bro 1.0 — dat vijf cent onder de tweede drempel valt.
+Die krijgen de Washbag en niet de Neustrimmer. Dat is geen fout in het blok,
+maar het is wel het soort grens waar je een keer bewust naar wilt kijken.
+
+### De waarde moest ergens vandaan komen
+
+Een cadeauregel zonder bedrag zegt weinig; «t.w.v. € 32,95» maakt het concreet.
+Maar het artikel kost € 0,00, dus die € 32,95 stond nergens. In plaats van het
+bedrag in de sectie te typen — waar het meteen zou verouderen — staat het nu
+als `compareAtPrice` op de cadeauvarianten zelf: **€ 19,95** op de Washbag,
+**€ 32,95** op de Neustrimmer 4in1 Ultra. Het blok toont die regel alleen als
+er een `compare_at_price` is. Verandert de waarde, dan verandert de pagina mee.
+
+### De naam van het cadeau was in elke taal Nederlands
+
+`gift_1_label` en `gift_2_label` zijn thema-instellingen, en die zijn
+vertaalbaar via een eigen bron: `ONLINE_STORE_THEME_SETTINGS_CATEGORY`, met de
+sleutels `general.gift_1_label` en `general.gift_2_label` onder de categorie
+**Cart drawer**. Let op de vorm van de id — die heeft naast `theme_id` ook een
+`first_setting_id` nodig:
+
+```
+gid://shopify/OnlineStoreThemeSettingsCategory/Cart+drawer?theme_id=204412977484&first_setting_id=enable_free_shipping
+```
+
+De productnamen zelf (`The Washbag™`, `Neustrimmer 4in1 Ultra™`) blijven in
+elke taal staan; alleen «Gratis» is vertaald. Frans zet het achteraan, dus daar
+is het «Washbag offerte» en «Neustrimmer offert». Omdat het thema-instellingen
+zijn, valt de winkelwagen in dezelfde correctie mee.
+
+### Waar het blok stilvalt
+
+De Neustrimmer 4in1 Ultra heeft **19 stuks op voorraad** met
+`inventoryPolicy: DENY`. Op nul is de variant niet meer beschikbaar, en dan
+slaat het blok die regel over — netjes, zonder foutmelding, maar ook zonder
+signaal. De Washbag staat op 167. Wie de tweede drempel wil laten staan, moet
+die voorraad in de gaten houden.
+
+Verder slaat het blok een regel over als het cadeau het product zélf is (een
+cadeauproduct opent nooit zijn eigen cadeaublok), en rendert het niets als er
+na dat filteren niets overblijft.
+
 ## Wat er aan de winkel zelf is veranderd
 
 Dit staat los van het thema: het is productdata en geldt dus voor elk thema,
@@ -1006,7 +1106,13 @@ weer aan te zetten. Wat de Selleasy-kaart deed, hoort in blok 07
 * **De prijsopmaak van de winkel heeft geen €-teken** (`moneyFormat` staat op
   `{{amount_with_comma_separator}}`). De sectie volgt de winkel, dus er staat
   `59,95`. Wordt de instelling aangepast, dan komt het teken er overal bij.
-* **Blok 02 (de geruststrook) en blok 07 (maak het compleet) hebben nog geen
-  sectie.** In het voorbeeldsjabloon staan ze daarom niet.
+* **Blok 07 (maak het compleet) heeft nog geen sectie.** In het
+  voorbeeldsjabloon staat het daarom niet. Blok 02 staat er inmiddels wel.
+* **De Neustrimmer 4in1 Ultra heeft nog 19 stuks** met `inventoryPolicy: DENY`.
+  Op nul verdwijnt de tweede cadeauregel zonder waarschuwing van de
+  productpagina.
+* **Vier producten staan op 89,95** &mdash; Shave Package Ultimate, Flex-line
+  Bundel, The Sentinel PRO, Barber Bro 1.0 &mdash; en vallen daarmee vijf cent
+  onder de tweede cadeaudrempel.
 * De secties onder de vouw staan in `product.ws-pdp.json` met lege instellingen,
   dus met hun eigen standaardwaarden. Ze zijn nog niet ingericht.

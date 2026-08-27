@@ -315,6 +315,64 @@
           </div>
         {%- endif -%}
 
+        {%- comment -%}
+          De cadeaus uit de winkelwageninstellingen.
+
+          De winkelwagen telt de regels op (zonder de cadeaus zelf) en voegt het
+          cadeau toe zodra de drempel gehaald is. Hier laten we vooruit zien wat
+          dit ene product al ontgrendelt, met exact dezelfde instellingen --
+          settings.gift_1_* en gift_2_* -- zodat de pagina en de winkelwagen
+          nooit uit elkaar kunnen lopen.
+
+          De drempels staan in hele euro's, de prijs in centen; vandaar keer 100.
+          Een cadeau dat op is tonen we niet: dan zou de pagina iets beloven wat
+          de winkelwagen niet meer kan toevoegen.
+        {%- endcomment -%}
+        {%- if settings.enable_gift_rewards and s.cad_tonen -%}
+          {%- assign cad_n = 0 -%}
+          {%- capture cad_rijen -%}
+            {%- for i in (1..2) -%}
+              {%- if i == 1 -%}
+                {%- assign cad = settings.gift_1_product -%}
+                {%- assign cad_drempel = settings.gift_1_threshold -%}
+                {%- assign cad_label = settings.gift_1_label -%}
+              {%- else -%}
+                {%- assign cad = settings.gift_2_product -%}
+                {%- assign cad_drempel = settings.gift_2_threshold -%}
+                {%- assign cad_label = settings.gift_2_label -%}
+              {%- endif -%}
+              {%- if cad == blank or cad_drempel == blank -%}{%- continue -%}{%- endif -%}
+              {%- assign cad_var = cad.selected_or_first_available_variant -%}
+              {%- unless cad_var.available -%}{%- continue -%}{%- endunless -%}
+              {%- assign grens = cad_drempel | times: 100 -%}
+              {%- if v.price < grens -%}{%- continue -%}{%- endif -%}
+              {%- if cad.handle == product.handle -%}{%- continue -%}{%- endif -%}
+              {%- assign cad_n = cad_n | plus: 1 -%}
+              <li>
+                <span class="ws-cad-bd">
+                  {%- if cad.featured_image != blank -%}
+                    {{ cad.featured_image | image_url: width: 140 | image_tag: alt: '', loading: 'lazy' }}
+                  {%- endif -%}
+                </span>
+                <span class="ws-cad-tx">
+                  <b>{{ cad_label | default: cad.title }}</b>
+                  {%- if cad_var.compare_at_price > 0 -%}
+                    <span>{{ s.cad_waarde }} {% if s.munt != blank %}{{ s.munt }}{% endif %}{% render 'price-formated', price: cad_var.compare_at_price %}</span>
+                  {%- endif -%}
+                </span>
+                <span class="ws-cad-nul">{{ s.cad_chip }}</span>
+              </li>
+            {%- endfor -%}
+          {%- endcapture -%}
+
+          {%- if cad_n > 0 -%}
+            <div class="ws-cad">
+              {%- if s.cad_kop != blank -%}<span class="ws-cad-ey">{{ s.cad_kop }}</span>{%- endif -%}
+              <ul>{{ cad_rijen }}</ul>
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+
         <div class="ws-vorm">
           {%- assign form_id = 'ProductForm-' | append: section.id -%}
           {%- form 'product', product, id: form_id, class: 'ws-vorm-form', novalidate: 'novalidate' -%}
@@ -1126,6 +1184,12 @@
     { "type": "paragraph", "content": "Komt per product uit custom.limited_offer: de titel uit offer_title, de onderregel uit popup_subtitle en het icoon uit image. Hieronder de terugval." },
     { "type": "text", "id": "gift_titel", "label": "Cadeauregel" },
     { "type": "text", "id": "gift_regel", "label": "Onderregel", "default": "Wordt vanzelf meegeleverd" },
+    { "type": "header", "content": "Cadeaus uit de winkelwagen" },
+    { "type": "paragraph", "content": "Leest de drempels en producten uit Winkelinstellingen > Gift rewards, dezelfde als de winkelwagen gebruikt. Toont alleen wat dit ene product al ontgrendelt, en alleen als het cadeau op voorraad is." },
+    { "type": "checkbox", "id": "cad_tonen", "label": "Cadeaus tonen", "default": true },
+    { "type": "text", "id": "cad_kop", "label": "Bovenregel", "default": "Gratis bij deze bestelling" },
+    { "type": "text", "id": "cad_waarde", "label": "Woord voor de waarde", "default": "t.w.v." },
+    { "type": "text", "id": "cad_chip", "label": "Plaatje op de rij", "default": "Gratis" },
     { "type": "header", "content": "Knop en levering" },
     { "type": "text", "id": "knop_label", "label": "Knoptekst", "default": "In winkelwagen" },
     { "type": "text", "id": "knop_uitverkocht", "label": "Knoptekst uitverkocht", "default": "Uitverkocht" },
