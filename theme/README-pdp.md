@@ -353,9 +353,24 @@ tekst (&laquo;Left&raquo;/&laquo;Right&raquo;) op elk metaobject &mdash; handwer
 staan. De kaarten wisselen nu automatisch om en om; de sectie-instelling
 `beeld_links` bepaalt alleen waar de eerste begint.
 
-**De video's laden niets vooraf.** `preload="none"` met de eigen poster erop
-en een speelknop eroverheen; de oude sectie liet vier video's tegelijk
-automatisch afspelen. Bij het afspelen pauzeert een eventuele andere video.
+**De video's spelen vanzelf, maar pas in beeld.** Een `IntersectionObserver`
+op 40% zichtbaarheid zet `preload` op `auto` en start het afspelen; scrollt de
+kaart eruit, dan pauzeert hij. Daarv&oacute;&oacute;r staat de video op `preload="none"`
+met alleen zijn poster, dus er komt geen byte binnen voor een kaart die
+niemand ziet. De oude sectie had `autoplay` als attribuut en haalde alle vier
+de bestanden op bij het laden van de pagina.
+
+Het zwarte plaatje linksonder is een **etiket, geen knop** (`aria-hidden`).
+Lukt automatisch afspelen niet &mdash; beweging uitgezet, geen
+`IntersectionObserver`, of de browser weigert met `NotAllowedError` &mdash; dan
+maakt het script van het beeldvlak alsnog een echte knop, met `role="button"`,
+`tabindex` en een naam.
+
+E&eacute;n valkuil zit erin verwerkt: `play()` geeft een belofte die met
+**`AbortError`** breekt als je `pause()` aanroept voordat het afspelen begonnen
+is. Dat gebeurt bij snel doorscrollen. Die fout mag dus niet als weigering
+gelden, anders krijgt elke kaart waar je langs scrolt een speelknop over het
+beeld. Alleen een andere fout dan `AbortError` schakelt de knop in.
 
 De kop telt zichzelf: `[aantal]` in de instelling wordt het aantal kaarten als
 woord (&laquo;Vier momenten&raquo;), zodat een product met drie kaarten geen vier belooft.

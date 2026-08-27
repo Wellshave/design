@@ -7,9 +7,11 @@
   meer gelezen — de kaarten wisselen automatisch van kant, zodat het nooit
   meer per product met de hand goed gezet hoeft te worden.
 
-  De video's staan op preload="none" met hun eigen poster erop. Er wordt dus
-  niets gedownload tot iemand op de knop tikt. De oude sectie liet vier
-  video's tegelijk automatisch afspelen.
+  De video's spelen vanzelf af zodra ze in beeld komen, en pauzeren zodra ze
+  eruit zijn. Ze staan op preload="none" tot dat moment, dus de oude fout
+  komt niet terug: vier video's die tegelijk laden terwijl niemand ze ziet.
+  Lukt automatisch afspelen niet — beweging uitgezet, of de browser weigert
+  het — dan wordt het etiket alsnog een echte speelknop.
 {%- endcomment -%}
 
 {{ 'ws-pdp-praktijk.css' | asset_url | stylesheet_tag }}
@@ -86,7 +88,7 @@
           <article class="ws-prk-kaart{% if omgekeerd %} ws-om{% endif %}">
             <div class="ws-prk-md">
               {%- if film != blank -%}
-                <video class="ws-prk-v" playsinline preload="none" muted
+                <video class="ws-prk-v" playsinline muted loop preload="none"
                        poster="{{ film.preview_image | image_url: width: 1100 }}"
                        {% if item.title.value != blank %}aria-label="{{ item.title.value | escape }}"{% endif %}>
                   {%- for bron in film.sources -%}
@@ -95,10 +97,14 @@
                     {%- endif -%}
                   {%- endfor -%}
                 </video>
+                {%- comment -%}
+                  Een etiket, geen knop: de video speelt vanzelf. Alleen als
+                  dat niet lukt maakt het script er een echte knop van.
+                {%- endcomment -%}
                 {%- if s.video_label != blank -%}
-                  <button type="button" class="ws-prk-play" data-ws-speel>
+                  <span class="ws-prk-etiket" aria-hidden="true">
                     <i><svg><use href="#ws-prk-play-{{ uid }}"/></svg></i>{{ s.video_label }}
-                  </button>
+                  </span>
                 {%- endif -%}
               {%- else -%}
                 {{ beeld | image_url: width: 1100 | image_tag: alt: item.title.value, loading: 'lazy', class: 'ws-prk-f' }}
@@ -135,30 +141,87 @@
         if (!wortel || !wortel.hasAttribute('data-ws-prk')) { return; }
 
         var films = Array.prototype.slice.call(wortel.querySelectorAll('.ws-prk-v'));
+        if (!films.length) { return; }
 
-        wortel.addEventListener('click', function (e) {
-          var knop = e.target.closest('[data-ws-speel]');
-          if (!knop) { return; }
+        var stil = false;
+        try { stil = matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
 
-          var doos = knop.parentNode;
-          var film = doos.querySelector('.ws-prk-v');
-          if (!film) { return; }
+        function speel(film) {
+          if (!film.paused) { return; }
+          if (film.preload === 'none') { film.preload = 'auto'; }
+          film.muted = true;
+          var belofte = film.play();
+          if (belofte && belofte.catch) {
+            belofte.catch(function (fout) {
+              // Scrollt de kaart weer uit beeld voordat het afspelen begonnen
+              // is, dan breekt de browser de belofte af met AbortError. Dat is
+              // geen weigering; alleen een echte weigering krijgt een knop.
+              if (fout && fout.name === 'AbortError') { return; }
+              metDeHand(film);
+            });
+          }
+        }
 
-          // Twee video's tegelijk horen is het snelste wat iemand wegjaagt.
-          films.forEach(function (andere) {
-            if (andere !== film && !andere.paused) {
-              andere.pause();
-              andere.removeAttribute('controls');
-              andere.parentNode.classList.remove('ws-speelt');
+        // Lukt afspelen niet, dan wordt het beeldvlak alsnog een knop. Beter
+        // een knop die werkt dan een poster die niets doet.
+        function metDeHand(film) {
+          var doos = film.parentNode;
+          if (doos.classList.contains('ws-handmatig')) { return; }
+          doos.classList.add('ws-handmatig');
+          doos.setAttribute('role', 'button');
+          doos.setAttribute('tabindex', '0');
+          var naam = film.getAttribute('aria-label');
+          doos.setAttribute('aria-label', naam ? 'Speel af: ' + naam : 'Speel de video af');
+
+          function start(e) {
+            if (e.type === 'keydown' && e.key !== 'Enter' && e.key !== ' ') { return; }
+            e.preventDefault();
+            doos.classList.remove('ws-handmatig');
+            doos.removeAttribute('role');
+            doos.removeAttribute('tabindex');
+            doos.removeAttribute('aria-label');
+            doos.removeEventListener('click', start);
+            doos.removeEventListener('keydown', start);
+            if (film.preload === 'none') { film.preload = 'auto'; }
+            film.muted = true;
+            var b = film.play();
+            if (b && b.catch) { b.catch(function () {}); }
+          }
+          doos.addEventListener('click', start);
+          doos.addEventListener('keydown', start);
+        }
+
+        function herstel(film) {
+          var doos = film.parentNode;
+          doos.classList.remove('ws-handmatig');
+          doos.removeAttribute('role');
+          doos.removeAttribute('tabindex');
+          doos.removeAttribute('aria-label');
+        }
+
+        if (stil || !('IntersectionObserver' in window)) {
+          films.forEach(metDeHand);
+          return;
+        }
+
+        // Pas laden en afspelen als de kaart echt in beeld staat, en weer
+        // pauzeren zodra hij eruit is. Dat scheelt data en accu.
+        var kijker = new IntersectionObserver(function (regels) {
+          regels.forEach(function (regel) {
+            var film = regel.target;
+            if (regel.isIntersecting) {
+              speel(film);
+            } else if (!film.paused) {
+              film.pause();
+            } else if (film.parentNode.classList.contains('ws-handmatig')) {
+              // Buiten beeld heeft een knop geen zin; bij terugkomst
+              // proberen we het gewoon opnieuw.
+              herstel(film);
             }
           });
+        }, { threshold: 0.4 });
 
-          doos.classList.add('ws-speelt');
-          film.muted = false;
-          film.setAttribute('controls', 'controls');
-          var belofte = film.play();
-          if (belofte && belofte.catch) { belofte.catch(function () {}); }
-        });
+        films.forEach(function (film) { kijker.observe(film); });
       })();
     </script>
   {%- endif -%}
@@ -177,7 +240,7 @@
 
     { "type": "header", "content": "De kaarten" },
     { "type": "checkbox", "id": "beeld_links", "label": "Eerste kaart: beeld links", "info": "Daarna wisselt het vanzelf om en om.", "default": true },
-    { "type": "text", "id": "video_label", "label": "Label op de speelknop", "info": "Leeg = geen knop, dan blijft de poster staan.", "default": "Video" },
+    { "type": "text", "id": "video_label", "label": "Etiket op de video", "info": "Alleen een merkteken; de video speelt vanzelf. Leeg = geen etiket.", "default": "Video" },
     { "type": "color", "id": "zand_a", "label": "Zand — oneven kaarten", "default": "#FBF8F1" },
     { "type": "color", "id": "zand_b", "label": "Zand — even kaarten", "default": "#F0E8D8" },
 
