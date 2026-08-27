@@ -24,6 +24,12 @@ body{margin:0;background:var(--bg);color:var(--fg);
 .blok-h h2{font-size:17px;font-weight:600;letter-spacing:-.01em;margin:0}
 .blok-h span{font-size:10.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
   color:var(--fg-soft)}
+/* blokken die van de homepage af zijn: het ontwerp blijft hier staan als
+   naslag, maar het label moet zeggen dat ze er niet meer op staan */
+.blok-h span.uit{color:#A8433A;border:1px solid rgba(168,67,58,.4);border-radius:3px;
+  padding:3px 8px;letter-spacing:.1em}
+.blok--uit .views{opacity:.55;filter:saturate(.55)}
+.blok--uit .views:hover{opacity:1;filter:none}
 .views{display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:26px;align-items:start}
 @media (max-width:940px){.views{grid-template-columns:minmax(0,1fr)}
   .views .mobcol{max-width:390px}}
@@ -2241,7 +2247,7 @@ footer p{margin:0;max-width:72ch}
   </section>
 
   <section class="blok">
-    <div class="blok-h"><h2>Blok 2 — Autoriteit en bewijs</h2><span>Copy herschreven — nog niets live</span></div>
+    <div class="blok-h"><h2>Blok 2 — Autoriteit en bewijs</h2><span class="uit">Ingekort &mdash; bundelspot en sfeerfoto eruit</span></div>
     <p class="sb7"><em>Regel 3 · 6</em><span>Dit is het gidsblok: eerst begrip, dan gezag. De naam van onze klantenservice is eruit — <b>de gids is een rol, geen persoon</b>, en op de homepage hoort geen medewerker in beeld. Het bundelvignet draagt geen &ldquo;Meest gekozen&rdquo; meer: die bundel verkocht in 180 dagen niets.</span></p>
     <div class="views">
       <div>
@@ -3246,8 +3252,8 @@ footer p{margin:0;max-width:72ch}
     </div>
   </section>
 
-  <section class="blok">
-    <div class="blok-h"><h2>Blok 6 — Het koopblok van de bundel</h2><span>Copy herschreven — nog niets live</span></div>
+  <section class="blok blok--uit">
+    <div class="blok-h"><h2>Blok 6 — Het koopblok van de bundel</h2><span class="uit">Van de homepage af &mdash; hoort op de bundelpagina</span></div>
     <p class="sb7"><em>Regel 5</em><span>De directe oproep. &ldquo;Pak de complete set&rdquo; werd <b>Bestel de set</b>, want dat is wat er gebeurt. De teller stond op 92 bestellingen; de werkelijke telling over zes maanden is er 88, en dat staat er nu.</span></p>
     <div class="views">
       <div>
