@@ -34,8 +34,24 @@ zelf ophalen, doe dat dan en laat de vraag weg; verzin nooit een antwoord.
    zonder dat erbij te zetten is misleidend. Heb je geen cijfer, meld het als gat.
 4. **Bestemming.** Welke URL, en draait de pagina binnen het thema of als kale pagina? De handle
    ligt daarna vast, want advertenties wijzen erheen.
-5. **Type.** Advertorial of listicle. Meestal leid je dit zelf af uit de creative en de
-   awareness; leg je afleiding voor en laat hem bevestigen in plaats van hem te vragen te kiezen.
+5. **Type, en daarmee het hele ontwerp.** Vraag bij **elke** landingspagina expliciet wat
+   voor soort pagina het moet worden, ook als je denkt het al te weten uit de creative. Dit is
+   geen formaliteit: het type bepaalt de ruggengraat, het startbestand, welke secties bestaan
+   en zelfs het lettertype. Een verkeerde aanname kost je niet een sectie maar de hele pagina,
+   en dat is precies wat er misging toen deze vraag niet gesteld werd.
+
+   Leg de keuze voor met in één regel wat elk type doet:
+
+   - **Advertorial** &mdash; je legt één mechanisme uit omdat de lezer zijn probleem verkeerd
+     diagnosticeert. Een doorlopend betoog, de volgorde ligt vast.
+   - **Listicle** &mdash; losse genummerde punten over één apparaat tegenover het alternatief.
+     De punten zijn omwisselbaar.
+   - **Merkverhaal** &mdash; een redactioneel artikel over het merk of de oprichter. Geen
+     apparaat dat de pagina draagt, en bewust niet in de huisletter.
+
+   Heb je een sterk vermoeden uit de creative, noem dat dan als voorstel met je redenering
+   erbij. Maar laat het bevestigen voordat je één regel copy of CSS schrijft. Deel 2 werkt de
+   toetsen uit die je bij dat voorstel gebruikt.
 
 Blijft er iets onbeantwoord, benoem dan expliciet welke aanname je maakt en bouw door. Niet
 stilvallen, maar ook niet stilzwijgend invullen.
