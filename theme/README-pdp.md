@@ -495,38 +495,72 @@ stuurt precies &eacute;&eacute;n verzoek naar `/cart/add.js` met variant
 `53414664929612`; &laquo;Nee dank je&raquo; stuurt er &eacute;&eacute;n met `53384928395596`, de PRO
 zelf.
 
-## De lichte variant van het koopvak is een studie, geen wissel
+## Het koopvak staat op zand, niet meer op zwart
 
-In `rapporten/blokken/01-above-the-fold-v2-donker.html` staat een hoofdstuk
-«LICHT» met hetzelfde koopvak op zand naast het donkere. Dat is een
-kleurstudie. De stylesheet ervoor staat in `rapporten/studies/ws-pdp-koopvak-licht.css`
-en bewust **niet** in `theme/assets/`, zodat hij nooit per ongeluk meegaat in een
-upload; wat in `claude-design-werk` draait is nog steeds
-`assets/ws-pdp-koopvak.css`, donker.
+Sinds 27 augustus draait `assets/ws-pdp-koopvak.css` in
+`wellshave/claude-design-werk` in de lichte variant. Alleen de stylesheet is
+gewisseld: geen regel Liquid, geen instelling, geen sjabloon. Het donkere
+koopvak is dus één bestand terugzetten — de vorige versie staat in de
+geschiedenis van de tak, en `rapporten/blokken/01-above-the-fold-v2-donker.html`
+laat beide naast elkaar zien in het hoofdstuk «LICHT».
 
-De opnames in dat hoofdstuk zijn geen tekening. Ze komen uit de echte
-productpagina van het werkthema, opgehaald met curl en met de afbeeldingen als
-data-URI ingebakken; daarna is alleen de stylesheet gewisseld en is het
-koopvak in Chromium gefotografeerd. Wat er staat is dus precies wat je zou
-krijgen.
+De **live winkel staat er los van**: `wellshave/claude-design` is niet
+aangeraakt.
 
-Drie dingen zijn bij het omzetten niet mechanisch:
+Waarom licht: de apparaten zijn zwart en waren op `#0B0B0A` niet te zien. Dat
+is de reden dat het blok twee gronden had — lichte fotokant, donkere koopkant.
+Op zand draagt één grond allebei de kanten.
+
+Drie dingen waren bij het omzetten niet mechanisch:
 
 * **Goud is op licht geen tekstkleur.** `#EBC77E` haalt op `#0B0B0A` een
   contrast van 11,3 : 1 en op `#FBF8F1` nog 1,64 : 1. Elke gouden *letter*
-  wordt daarom brons `#8A5A1E` (5,59 : 1) — dezelfde kleur die de bovenregels
+  werd daarom brons `#8A5A1E` (5,59 : 1) — dezelfde kleur die de bovenregels
   van blok 05 al gebruiken. Goud blijft goud waar het een *vulling* is: de
   knop, de pil, het zegel.
 * **Het vak verliest zijn vanzelfsprekende rand.** Crème `#FBF8F1` op zand
   `#EFE7D8` scheelt 1,16 : 1. Het koopvak heeft daarom een bronzen haarlijn
-  (22%) en een zachte schaduw nodig om nog als paneel te lezen.
+  (22%) en een zachte schaduw gekregen.
 * **Niet alles zit óp het vak.** Het plaatje «meest gekozen», de galerijpijlen
   en de betaallogo's staan op hun eigen grond en houden hun donkere of witte
   behandeling. Klap je die mee om, dan verdwijnen ze in het beeld.
 
-Het lichte pad lost wél de reden op waarom het blok nu twee gronden heeft: de
-apparaten zijn zwart en zijn op `#0B0B0A` niet te zien. Op zand draagt één
-grond allebei de kanten.
+### Wat wél wit moet blijven
+
+Bij het omzetten van `color:#fff` naar inkt gingen drie dingen mee die dat niet
+hadden gemogen, omdat ze hun eigen gekleurde ondergrond hebben:
+
+* de ster in het **groene Trustpilot-vierkant** (`.ws-tp .ws-st svg`);
+* dezelfde ster in de **reviewkaart** (`.ws-rev .ws-kop .ws-lk .ws-st svg`);
+* het **«−30%» op het rode plaatje** (`.ws-prijs .ws-off`).
+
+Alle drie staan weer op `#fff`. De vuistregel: kijk niet naar de kleur die
+verandert maar naar de grond eronder. Alleen wat op het koopvak zelf staat
+klapt om.
+
+### De tinten ertussen zijn dieper gezet
+
+Wit dat vervaagt op zwart en inkt die vervaagt op zand doen dat niet even snel.
+Dezelfde percentages gaven op licht een tint die te bleek was, dus de twee
+onderste treden zijn dieper gezet: `--ws-w52` van `.52` naar `.64`, `--ws-w38`
+van `.38` naar `.60`. Ze liggen daardoor dichter bij elkaar dan op zwart — op
+licht is er tussen inkt en onzichtbaar nu eenmaal minder ruimte.
+
+Nagemeten met een script dat elk stuk tekst in het koopvak door de browser
+laat uitrekenen (werkelijke kleur, werkelijke grond eronder, contrast
+daartussen):
+
+* **Het donkere vak haalde de norm op drie plekken niet.** De doorgestreepte
+  van-prijs en «zolang de voorraad strekt» op 3,52 : 1, en het witte «−30%» op
+  `#E5342A` op 4,32 : 1.
+* **Het lichte vak haalt hem overal**, mede doordat het rood een stap donkerder
+  ging naar `#C8281F`.
+
+### De grond onder het koopvak is dieper dan die van blok 05
+
+Het koopvak staat op `#EFE7D8`, blok 05 op `#F7F3EB`. Dat verschil is er met
+opzet: boven de vouw ligt er een paneel op de grond dat moet kunnen zweven, en
+daaronder niet. Wil je het gelijktrekken, dan is `--ws-cream` de enige knop.
 
 ## Wat er aan de winkel zelf is veranderd
 

@@ -1,12 +1,17 @@
 /* Wellshave — productpagina, blok 01: het koopvak boven de vouw.
-   Bron: rapporten/blokken/01-above-the-fold-v2-donker.html (.v6)
+   Bron: rapporten/blokken/01-above-the-fold-v2-donker.html (.v6), lichte variant
    Elke klasse begint met ws- zodat thema-CSS er niet doorheen lekt. */
-.ws-pdp{--ws-cream:#F7F3EB;--ws-cream2:#FBF8F3;--ws-zwart:#0B0B0A;--ws-kaart:#121110;
+.ws-pdp{--ws-cream:#EFE7D8;--ws-cream2:#FBF8F3;--ws-zwart:#FBF8F1;--ws-kaart:#F3EADA;
   --ws-gold1:#F7E2B4;--ws-gold2:#EFCE93;--ws-gold3:#E9BE72;--ws-gold4:#DDA548;
-  --ws-tekstgoud:#EBC77E;--ws-groen:#00B67A;--ws-blauw:#2E7CF6;--ws-rood:#E5342A;
-  --ws-lijn:rgba(255,255,255,.11);--ws-lijn2:rgba(255,255,255,.2);
-  --ws-w72:rgba(255,255,255,.72);--ws-w52:rgba(255,255,255,.52);--ws-w38:rgba(255,255,255,.38);
-  --ws-ink:#111;--ws-ink80:rgba(17,17,17,.8);--ws-ink60:rgba(17,17,17,.6);
+  --ws-tekstgoud:#8A5A1E;--ws-groen:#00A06C;--ws-blauw:#2E7CF6;--ws-rood:#C8281F;
+  --ws-lijn:rgba(20,18,15,.11);--ws-lijn2:rgba(20,18,15,.2);
+  /* Wit op zwart en inkt op zand vervagen niet even snel: dezelfde
+     percentages geven op licht een tint die te bleek is. De twee onderste
+     treden gaan daarom dieper, tot alles 4,5:1 haalt. Ze liggen daardoor
+     wel dichter bij elkaar dan op zwart -- op licht is er tussen inkt en
+     onzichtbaar nu eenmaal minder ruimte. */
+  --ws-w72:rgba(20,18,15,.72);--ws-w52:rgba(20,18,15,.64);--ws-w38:rgba(20,18,15,.60);
+  --ws-ink:#14120F;--ws-ink80:rgba(17,17,17,.8);--ws-ink60:rgba(17,17,17,.6);
   display:block;background:var(--ws-cream);
   font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
 .ws-pdp *,.ws-pdp *::before,.ws-pdp *::after{box-sizing:border-box}
@@ -21,7 +26,7 @@
 .ws-pdp .ws-stg{position:relative;display:flex;flex-direction:column;background:var(--ws-cream2);
   border:1px solid rgba(17,17,17,.07);border-radius:20px;padding:22px 22px 18px;overflow:hidden;min-width:0}
 .ws-pdp .ws-stg .ws-glans{position:absolute;left:50%;top:44%;width:78%;height:52%;transform:translate(-50%,-50%);
-  background:radial-gradient(ellipse at center,rgba(233,190,114,.30),rgba(233,190,114,0) 68%);pointer-events:none}
+  background:radial-gradient(ellipse at center,rgba(221,165,72,.16),rgba(221,165,72,0) 70%);pointer-events:none}
 /* het merkteken: de afbeelding uit de sectie-instelling "merk", stil op de achtergrond */
 .ws-pdp .ws-stg .ws-ghost{position:absolute;right:1%;top:50%;transform:translateY(-50%);z-index:1;
   width:58%;height:auto;aspect-ratio:1/1;object-fit:contain;pointer-events:none;user-select:none;
@@ -75,8 +80,10 @@
   text-align:center;line-height:1.2;overflow-wrap:anywhere}
 
 /* ---- koopvak ---- */
-.ws-pdp .ws-bb{background:var(--ws-zwart);border-radius:20px;padding:26px 26px 22px;position:relative;overflow:hidden;min-width:0}
-.ws-pdp .ws-bb .ws-strepen{position:absolute;right:-10%;top:-6%;width:66%;height:78%;pointer-events:none;opacity:.5}
+.ws-pdp .ws-bb{background:var(--ws-zwart);border:1px solid rgba(176,116,42,.22);
+  box-shadow:0 1px 2px rgba(20,18,15,.04),0 18px 40px -28px rgba(20,18,15,.28);border-radius:20px;padding:26px 26px 22px;position:relative;overflow:hidden;min-width:0}
+.ws-pdp .ws-bb .ws-strepen{position:absolute;right:-10%;top:-6%;width:66%;height:78%;pointer-events:none;
+  opacity:.22;color:#C79A4F}
 .ws-pdp .ws-bb > *:not(.ws-strepen){position:relative;z-index:1}
 .ws-pdp .ws-pil{display:inline-flex;align-items:center;border-radius:100px;overflow:hidden;
   background:linear-gradient(100deg,#F7E2B4,#EFCE93);padding:4px 4px 4px 0}
@@ -85,7 +92,7 @@
 /* Het kortingslabel was goud op goud: twee tinten die om voorrang vechten en
    allebei verliezen. Zwart met wit springt eruit zonder een derde kleur toe
    te voegen -- het is de kleur van het koopvak eronder. */
-.ws-pdp .ws-pil .ws-z{padding:8px 18px;border-radius:100px;color:#fff;
+.ws-pdp .ws-pil .ws-z{padding:8px 18px;border-radius:100px;color:var(--ws-ink);
   background:var(--ws-zwart)}
 
 .ws-pdp .ws-tp{display:flex;align-items:center;gap:9px;margin-top:15px;flex-wrap:wrap}
@@ -93,48 +100,50 @@
 .ws-pdp .ws-tp .ws-st i{width:17px;height:17px;background:var(--ws-groen);border-radius:2px;display:flex;
   align-items:center;justify-content:center}
 .ws-pdp .ws-tp .ws-st svg{width:11px;height:11px;fill:#fff}
-.ws-pdp .ws-tp .ws-lb{font-size:12.5px;font-weight:700;color:#fff}
+.ws-pdp .ws-tp .ws-lb{font-size:12.5px;font-weight:700;color:var(--ws-ink)}
 .ws-pdp .ws-tp .ws-sc{font-size:12.5px;color:var(--ws-w52);font-weight:600}
 
-.ws-pdp .ws-h1{font-size:33px;font-weight:800;letter-spacing:-.03em;color:#fff;margin-top:11px;line-height:1.05}
+.ws-pdp .ws-h1{font-size:33px;font-weight:800;letter-spacing:-.03em;color:var(--ws-ink);margin-top:11px;line-height:1.05}
 .ws-pdp .ws-sub{font-size:23px;font-weight:800;letter-spacing:-.025em;line-height:1.16;margin-top:9px;color:var(--ws-tekstgoud)}
 
-.ws-pdp .ws-rev{margin-top:15px;border:1px solid var(--ws-lijn);border-radius:13px;background:rgba(255,255,255,.035);padding:14px 16px}
+.ws-pdp .ws-rev{margin-top:15px;border:1px solid var(--ws-lijn);border-radius:13px;background:rgba(20,18,15,.035);padding:14px 16px}
 .ws-pdp .ws-rev .ws-kop{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .ws-pdp .ws-rev .ws-kop .ws-lk{display:flex;align-items:center;gap:8px}
 .ws-pdp .ws-rev .ws-kop .ws-lk .ws-st{display:flex;gap:1.5px}
 .ws-pdp .ws-rev .ws-kop .ws-lk .ws-st i{width:14px;height:14px;background:var(--ws-groen);border-radius:2px;
   display:flex;align-items:center;justify-content:center}
 .ws-pdp .ws-rev .ws-kop .ws-lk .ws-st svg{width:9px;height:9px;fill:#fff}
-.ws-pdp .ws-rev .ws-kop .ws-lk b{font-size:12px;font-weight:700;color:#fff}
+.ws-pdp .ws-rev .ws-kop .ws-lk b{font-size:12px;font-weight:700;color:var(--ws-ink)}
 .ws-pdp .ws-rev .ws-kop .ws-alle{font-size:11.5px;font-weight:700;color:var(--ws-w72);text-decoration:none;
-  border-bottom:1px solid rgba(255,255,255,.28);padding-bottom:2px;white-space:nowrap;transition:color .16s ease,border-color .16s ease}
-.ws-pdp .ws-rev .ws-kop .ws-alle:hover{color:#fff;border-bottom-color:#fff}
-.ws-pdp .ws-rev q{display:block;margin-top:10px;font-style:italic;font-size:13.5px;line-height:1.45;color:#fff;quotes:none}
+  border-bottom:1px solid rgba(20,18,15,.28);padding-bottom:2px;white-space:nowrap;transition:color .16s ease,border-color .16s ease}
+.ws-pdp .ws-rev .ws-kop .ws-alle:hover{color:var(--ws-ink);border-bottom-color:var(--ws-ink)}
+.ws-pdp .ws-rev q{display:block;margin-top:10px;font-style:italic;font-size:13.5px;line-height:1.45;color:var(--ws-ink);quotes:none}
 .ws-pdp .ws-rev .ws-voet{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:9px}
 .ws-pdp .ws-rev .ws-wie{font-size:11.5px;color:var(--ws-w52)}
-.ws-pdp .ws-rev .ws-wie b{color:#fff;font-weight:700}
+.ws-pdp .ws-rev .ws-wie b{color:var(--ws-ink);font-weight:700}
 .ws-pdp .ws-rev .ws-ok{display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;color:var(--ws-w72)}
 .ws-pdp .ws-rev .ws-ok svg{width:14px;height:14px;flex:none}
 
 .ws-pdp .ws-lead{margin:9px 0 0;font-size:14.5px;line-height:1.45;color:var(--ws-w52)}
-.ws-pdp .ws-tp .ws-cf{font-size:12.5px;font-weight:700;color:#fff}
+.ws-pdp .ws-tp .ws-cf{font-size:12.5px;font-weight:700;color:var(--ws-ink)}
 .ws-pdp .ws-pay .ws-pr{font-size:11.5px;font-weight:600;color:var(--ws-w72)}
 .ws-pdp .ws-prijs{display:flex;align-items:baseline;gap:13px;flex-wrap:wrap;margin-top:16px}
-.ws-pdp .ws-prijs .ws-nu{font-size:38px;font-weight:900;letter-spacing:-.035em;color:#fff;line-height:1}
+.ws-pdp .ws-prijs .ws-nu{font-size:38px;font-weight:900;letter-spacing:-.035em;color:var(--ws-ink);line-height:1}
 .ws-pdp .ws-prijs .ws-was{font-size:17px;color:var(--ws-w38);text-decoration:line-through;font-weight:600}
 .ws-pdp .ws-prijs .ws-off{background:var(--ws-rood);color:#fff;font-size:12px;font-weight:800;padding:5px 10px;border-radius:7px}
 .ws-pdp .ws-besp{display:inline-flex;align-items:center;gap:8px;margin-top:11px;padding:7px 14px;
   border:1px solid rgba(233,190,114,.5);border-radius:9px;background:rgba(233,190,114,.07)}
-.ws-pdp .ws-besp svg{width:14px;height:14px;color:var(--ws-gold3)}
-.ws-pdp .ws-besp span{font-size:12.5px;font-weight:700;color:var(--ws-gold3)}
+.ws-pdp .ws-besp svg{width:14px;height:14px;color:var(--ws-tekstgoud)}
+.ws-pdp .ws-besp span{font-size:12.5px;font-weight:700;color:var(--ws-tekstgoud)}
+.ws-pdp .ws-gift p,.ws-pdp .ws-vrd,.ws-pdp .ws-tel{color:var(--ws-w72)}
 
 .ws-pdp .ws-usp{list-style:none;margin:17px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
 .ws-pdp .ws-usp li{display:grid;grid-template-columns:21px minmax(0,1fr);gap:12px;align-items:start}
-.ws-pdp .ws-usp .ws-vk{width:21px;height:21px;border-radius:50%;border:1.4px solid rgba(233,190,114,.55);
+.ws-pdp .ws-usp .ws-vk{width:21px;height:21px;border-radius:50%;border:1.4px solid rgba(176,116,42,.42);
+  color:#A76F28;background:rgba(233,190,114,.14);
   display:flex;align-items:center;justify-content:center;margin-top:1px}
 .ws-pdp .ws-usp .ws-vk svg{width:10px;height:10px}
-.ws-pdp .ws-usp b{display:block;font-size:14px;font-weight:700;color:#fff;line-height:1.3}
+.ws-pdp .ws-usp b{display:block;font-size:14px;font-weight:700;color:var(--ws-ink);line-height:1.3}
 .ws-pdp .ws-usp span{display:block;font-size:12.5px;color:var(--ws-w52);line-height:1.35;margin-top:2px}
 
 /* levering: een eigen blokje boven het aanbod. Neutraal omlijnd, want goud is
@@ -142,20 +151,20 @@
    voorwaarde, aanbod, knop -- en hebben elk lucht nodig, anders lezen ze als
    een blok. */
 .ws-pdp .ws-vrd{display:flex;align-items:flex-start;gap:10px;margin-top:18px;font-size:12px;
-  line-height:1.45;color:var(--ws-w52);border:1px solid rgba(255,255,255,.13);border-radius:10px;
-  background:rgba(255,255,255,.04);padding:10px 14px}
+  line-height:1.45;color:var(--ws-w52);border:1px solid rgba(176,116,42,.20);border-radius:10px;
+  background:rgba(221,165,72,.09);padding:10px 14px}
 .ws-pdp .ws-vrd span{min-width:0}
-.ws-pdp .ws-vrd i{width:8px;height:8px;border-radius:50%;background:#22C55E;flex:none;margin-top:5px;
-  box-shadow:0 0 0 3px rgba(34,197,94,.18)}
-.ws-pdp .ws-vrd b{color:#fff;font-weight:700}
+.ws-pdp .ws-vrd i{width:8px;height:8px;border-radius:50%;background:#0E9F6E;flex:none;margin-top:5px;
+  box-shadow:0 0 0 3px rgba(14,159,110,.16)}
+.ws-pdp .ws-vrd b{color:var(--ws-ink);font-weight:700}
 
 /* het cadeau — blijft, dit is het extra aanbod per product */
 .ws-pdp .ws-gift{display:flex;align-items:center;gap:12px;margin-top:14px;padding:11px 16px 11px 12px;
   border:1px solid rgba(233,190,114,.5);border-radius:13px;background:rgba(233,190,114,.07)}
 .ws-pdp .ws-gift .ws-ic{width:29px;height:29px;flex:none;border-radius:50%;background:rgba(233,190,114,.14);
-  display:flex;align-items:center;justify-content:center;color:var(--ws-gold3)}
+  display:flex;align-items:center;justify-content:center;color:var(--ws-tekstgoud)}
 .ws-pdp .ws-gift .ws-ic svg{width:15px;height:15px}
-.ws-pdp .ws-gift b{display:block;font-size:13px;font-weight:800;color:var(--ws-gold3);line-height:1.3}
+.ws-pdp .ws-gift b{display:block;font-size:13px;font-weight:800;color:var(--ws-tekstgoud);line-height:1.3}
 .ws-pdp .ws-gift span{display:block;font-size:11px;font-weight:600;color:var(--ws-w38);line-height:1.35;margin-top:2px}
 
 .ws-pdp .ws-cta{display:flex;align-items:center;justify-content:center;width:100%;margin-top:0;
@@ -166,11 +175,11 @@
    van de browser: een grijs vlak in een systeemletter. Alle andere knoppen
    hier zetten allebei al; deze deed dat niet. */
 .ws-pdp .ws-cta2{display:flex;align-items:center;justify-content:center;gap:11px;width:100%;margin-top:11px;
-  border:1px solid var(--ws-lijn2);border-radius:11px;padding:16px;color:#fff;background:transparent;
+  border:1px solid var(--ws-lijn2);border-radius:11px;padding:16px;color:var(--ws-ink);background:transparent;
   font-family:inherit;cursor:pointer;
   font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
-.ws-pdp .ws-cta2:hover{background:rgba(255,255,255,.06)}
-.ws-pdp .ws-cta2 svg{width:17px;height:17px;flex:none;color:var(--ws-gold3)}
+.ws-pdp .ws-cta2:hover{background:rgba(20,18,15,.06)}
+.ws-pdp .ws-cta2 svg{width:17px;height:17px;flex:none;color:var(--ws-tekstgoud)}
 .ws-pdp .ws-cta2 svg .vgl-a{opacity:.55}
 
 /* betaalmethoden onder de knop */
@@ -185,8 +194,8 @@
 
 .ws-pdp .ws-tel{display:flex;align-items:center;justify-content:center;gap:9px;margin-top:15px;
   font-size:12.5px;color:var(--ws-w52)}
-.ws-pdp .ws-tel svg{width:15px;height:15px;color:var(--ws-gold3)}
-.ws-pdp .ws-tel b{color:#fff;font-weight:700}
+.ws-pdp .ws-tel svg{width:15px;height:15px;color:var(--ws-tekstgoud)}
+.ws-pdp .ws-tel b{color:var(--ws-ink);font-weight:700}
 
 
 @media (max-width:1000px){
@@ -212,25 +221,25 @@
 
 
 /* ---- accordeons in het koopvak ---- */
-.ws-pdp .ws-acc{margin-top:14px;border-top:1px solid rgba(255,255,255,.13)}
-.ws-pdp .ws-acc details{border-bottom:1px solid rgba(255,255,255,.13)}
+.ws-pdp .ws-acc{margin-top:14px;border-top:1px solid rgba(20,18,15,.13)}
+.ws-pdp .ws-acc details{border-bottom:1px solid rgba(20,18,15,.13)}
 .ws-pdp .ws-acc summary{list-style:none;cursor:pointer;display:flex;align-items:center;
   justify-content:space-between;gap:12px;padding:13px 0;
-  font-size:13px;font-weight:700;letter-spacing:-.01em;color:#fff}
+  font-size:13px;font-weight:700;letter-spacing:-.01em;color:var(--ws-ink)}
 .ws-pdp .ws-acc summary::-webkit-details-marker{display:none}
 .ws-pdp .ws-acc summary i{position:relative;width:13px;height:13px;flex:none}
 .ws-pdp .ws-acc summary i::before,
-.ws-pdp .ws-acc summary i::after{content:'';position:absolute;background:#F5D18A;
+.ws-pdp .ws-acc summary i::after{content:'';position:absolute;background:var(--ws-tekstgoud);
   left:50%;top:50%;transform:translate(-50%,-50%)}
 .ws-pdp .ws-acc summary i::before{width:13px;height:1.6px}
 .ws-pdp .ws-acc summary i::after{width:1.6px;height:13px;transition:transform .18s ease}
 .ws-pdp .ws-acc details[open] summary i::after{transform:translate(-50%,-50%) scaleY(0)}
-.ws-pdp .ws-acc .in{padding:0 0 15px;font-size:12.5px;line-height:1.55;color:rgba(255,255,255,.62)}
+.ws-pdp .ws-acc .in{padding:0 0 15px;font-size:12.5px;line-height:1.55;color:rgba(20,18,15,.62)}
 .ws-pdp .ws-acc .in p{margin:0 0 8px}
 .ws-pdp .ws-acc .in p:last-child{margin-bottom:0}
 .ws-pdp .ws-acc .sp{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;margin:0}
-.ws-pdp .ws-acc .sp dt{color:rgba(255,255,255,.42);white-space:nowrap}
-.ws-pdp .ws-acc .sp dd{margin:0;color:rgba(255,255,255,.78)}
+.ws-pdp .ws-acc .sp dt{color:rgba(20,18,15,.42);white-space:nowrap}
+.ws-pdp .ws-acc .sp dd{margin:0;color:rgba(20,18,15,.78)}
 .ws-pdp .ws-acc ul{margin:0;padding-left:16px}
 .ws-pdp .ws-acc li{margin:0 0 4px}
 @media (prefers-reduced-motion:reduce){
@@ -289,7 +298,7 @@
   /* de beloftes tussen twee haarlijnen, drie stuks; meer past niet zonder
      dat de knop van het scherm valt */
   .ws-pdp .ws-usp{margin-top:18px;padding:17px 0;gap:14px;
-    border-top:1px solid rgba(255,255,255,.13);border-bottom:1px solid rgba(255,255,255,.13)}
+    border-top:1px solid rgba(20,18,15,.13);border-bottom:1px solid rgba(20,18,15,.13)}
   .ws-pdp .ws-usp li:nth-child(n+4){display:none}
 
   /* De voorraadregel staat nu als eigen blok boven het aanbod, dus de
@@ -332,8 +341,8 @@
   text-transform:uppercase;color:var(--ws-w52)}
 .ws-pdp .ws-optie label{cursor:pointer}
 .ws-pdp .ws-optie label span{display:block;border:1px solid var(--ws-lijn2);border-radius:9px;
-  padding:9px 14px;font-size:12.5px;font-weight:700;color:#fff}
-.ws-pdp .ws-optie input:checked + span{border-color:var(--ws-gold3);color:var(--ws-gold3);
+  padding:9px 14px;font-size:12.5px;font-weight:700;color:var(--ws-ink)}
+.ws-pdp .ws-optie input:checked + span{border-color:var(--ws-tekstgoud);color:var(--ws-tekstgoud);
   background:rgba(233,190,114,.1)}
 .ws-pdp .ws-optie input:disabled + span{opacity:.4;text-decoration:line-through}
 .ws-pdp .visually-hidden{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);
@@ -357,28 +366,28 @@
    hieronder draaien de opmaak van de buitenste accordeon terug, want die
    erft door naar de details hierbinnen. */
 .ws-pdp .ws-acc .ws-doos{list-style:none;margin:2px 0 0;padding:0}
-.ws-pdp .ws-acc .ws-doos > li{border-top:1px solid rgba(255,255,255,.09)}
+.ws-pdp .ws-acc .ws-doos > li{border-top:1px solid rgba(20,18,15,.09)}
 .ws-pdp .ws-acc .ws-doos > li:first-child{border-top:0}
 .ws-pdp .ws-acc .ws-doos details{border-bottom:0}
 .ws-pdp .ws-acc .ws-doos summary,
 .ws-pdp .ws-acc .ws-doos .ws-doos-k{display:flex;align-items:center;gap:11px;
   justify-content:flex-start;margin:0;padding:7px 0;
-  font-size:12.5px;font-weight:600;letter-spacing:0;color:rgba(255,255,255,.92)}
+  font-size:12.5px;font-weight:600;letter-spacing:0;color:rgba(20,18,15,.92)}
 .ws-pdp .ws-acc .ws-doos .ws-doos-k{cursor:default}
 @media (hover:hover){
-  .ws-pdp .ws-acc .ws-doos summary:hover b{color:#fff}
-  .ws-pdp .ws-acc .ws-doos summary:hover em{border-color:rgba(255,255,255,.6)}
+  .ws-pdp .ws-acc .ws-doos summary:hover b{color:var(--ws-ink)}
+  .ws-pdp .ws-acc .ws-doos summary:hover em{border-color:rgba(20,18,15,.6)}
 }
 .ws-pdp .ws-acc .ws-doos-b{flex:none;width:38px;height:38px;border-radius:8px;
-  background:rgba(255,255,255,.055);overflow:hidden}
+  background:rgba(20,18,15,.055);overflow:hidden}
 .ws-pdp .ws-acc .ws-doos-b img{width:100%;height:100%;object-fit:contain;display:block}
 .ws-pdp .ws-acc .ws-doos b{flex:1 1 auto;min-width:0;font-weight:600}
 .ws-pdp .ws-acc .ws-doos em{flex:none;width:7px;height:7px;margin-right:3px;
-  border-right:1.5px solid rgba(255,255,255,.32);
-  border-bottom:1.5px solid rgba(255,255,255,.32);
+  border-right:1.5px solid rgba(20,18,15,.32);
+  border-bottom:1.5px solid rgba(20,18,15,.32);
   transform:rotate(45deg);transform-origin:60% 60%;transition:transform .18s ease}
 .ws-pdp .ws-acc .ws-doos details[open] em{transform:rotate(225deg)}
-.ws-pdp .ws-acc .ws-doos-t{padding:0 2px 10px 49px;color:rgba(255,255,255,.6)}
+.ws-pdp .ws-acc .ws-doos-t{padding:0 2px 10px 49px;color:rgba(20,18,15,.6)}
 /* metafield_tag verpakt de tekst in een div met paragrafen; die brengen hun
    eigen marges mee en die willen we hier niet. */
 .ws-pdp .ws-acc .ws-doos-t > div{display:contents}
@@ -395,9 +404,9 @@
    multicol ze in twee kolommen; de regels zijn kort genoeg. */
 .ws-pdp .ws-acc .ws-spec{font-size:12px;line-height:1.5}
 .ws-pdp .ws-acc .ws-spec > div{columns:2;column-gap:20px;orphans:1;widows:1}
-.ws-pdp .ws-acc .ws-spec p{margin:0;white-space:pre-line;color:rgba(255,255,255,.72)}
+.ws-pdp .ws-acc .ws-spec p{margin:0;white-space:pre-line;color:rgba(20,18,15,.72)}
 .ws-pdp .ws-acc .in ul{margin:0;padding-left:18px}
-.ws-pdp .ws-acc .in a{color:var(--ws-gold3)}
+.ws-pdp .ws-acc .in a{color:var(--ws-tekstgoud)}
 
 @media (prefers-reduced-motion:reduce){
   .ws-pdp *{transition:none!important;scroll-behavior:auto!important}
