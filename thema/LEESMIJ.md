@@ -966,6 +966,67 @@ Gemeten: alle 54 combinaties komen op de verwachte set uit, de stapper telt
 4 van 4, alle veertien kaarten renderen met hun eigen aantal onderdelen, en de
 drie uitverkochte sets tonen de grijze variant.
 
+## SEO: meta title en description opnieuw gezet
+
+Elf collectiepagina's hebben een nieuwe meta title en description gekregen:
+de overzichtspagina, de vier zones, de vier typepagina's, de bundels en de
+accessoires. De bron staat in `seo/teksten.py`, de oude waarden in
+`seo/oude-waarden.json` zodat terugdraaien kan.
+
+**Let op: dit zijn collectievelden, geen themabestanden.** Ze staan meteen live,
+los van welk thema gepubliceerd is.
+
+### De techniek
+
+- De zoekterm waarop de pagina kans maakt staat vooraan in de title, één
+  onderscheidend kenmerk erachter, het merk als laatste.
+- De description is geen samenvatting maar een reden om te klikken: wat er
+  staat, waarin het verschilt, en één feit dat de drempel verlaagt.
+- Geen prijzen — die verouderen. De verzendgrens mag wel, die is stabiel.
+- Elke pagina uniek: elf titels, elf descriptions, geen dubbele.
+
+**Gemeten in pixels, niet in tekens.** Google kapt op breedte af, en Nederlands
+heeft langere woorden dan de vuistregel van 155 tekens aanneemt: een tekst van
+140 tekens bleek al 921 px breed. Gemeten met canvas in 20 px Arial (title) en
+14 px Arial (description), tegen een grens van 580 px en 920 px. Alle elf titels
+kwamen meteen uit op 396–532 px; alle elf descriptions waren te lang en zijn
+ingekort tot 772–883 px. Het script staat in `seo/meet.js`.
+
+### Wat er mis was in de oude teksten
+
+Vier descriptions beloofden **30 dagen proef**, terwijl "100 dagen" negen keer op
+de live homepage staat en "30 dagen" nul keer. Twee beloofden **gratis
+verzending vanaf €50**, terwijl de verzendinstelling van de winkel zegt: onder
+€30 kost verzending €4,95, vanaf €30 gratis — voor alle veertien landen in die
+zone, dus ook België. Verder begon `bodygroomers` met twee spaties, eindigde
+`neustrimmers` op een spatie en `tondeuses` op een regeleinde.
+
+De overzichtspagina en de twee nieuwe zonecollecties (`zone-gezicht`,
+`zone-hoofd`) hadden helemaal geen title en description; die vielen terug op de
+standaardopmaak van het thema.
+
+### Wat er nog openstaat
+
+- **De verzendtekst spreekt zichzelf tegen op de site.** De FAQ op de homepage
+  zegt "binnen Nederland altijd gratis" en "€2,95 voor België"; de slotsectie op
+  de collectiepagina's zegt "Naar België gratis vanaf €49,95". Volgens het
+  verzendprofiel klopt geen van drieën: het is één tarief voor veertien landen,
+  €4,95 onder €30 en gratis daarboven. Die regel in de slotsectie komt uit het
+  bestaande template en is bij het bouwen meegekomen.
+- **De collectiebeschrijvingen (`descriptionHtml`) zijn oud.** Ze linken naar
+  wellshave.nl in plaats van .com, bevatten verouderde verzendbedragen, en bij
+  `baardtrimmers` staat letterlijk "H3: Levering van onze Wellshave bodygroomers"
+  midden in de tekst. Ze worden op de nieuwe pagina's niet meer gerenderd — de
+  redesign gebruikt zijn eigen uitleg-sectie — dus ze doen nu niets, maar ze
+  staan er wel.
+- **`summer-sale-deals` bevat geplakte chatvenster-HTML** in de
+  collectiebeschrijving, inclusief klassenamen als `markdown prose
+  dark:prose-invert`. Ook die wordt niet gerenderd op de nieuwe pagina's.
+- **`winter-sale` heet "Voorjaar Sale"** maar de description gaat over de Winter
+  Sale, en de titel belooft 40% korting terwijl de tekst 25% zegt.
+
+Deze vier vallen buiten wat gevraagd was en zijn niet aangeraakt.
+
 ## Let op: welk thema is nu wat
 
 Sinds 26 augustus is **`wellshave/claude-design` (204178161996) gepubliceerd** en
