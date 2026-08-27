@@ -397,6 +397,70 @@ Shopify het bestand **zonder foutmelding**: `themeFilesUpsert` geeft een lege
 is het enige wat het aan het licht brengt. Nu heet hij
 `Wellshave PDP — Praktijk` (24). Dezelfde grens geldt voor de presetnaam.
 
+## De upgrade-pop-up bij het toevoegen aan de winkelwagen
+
+Klikt iemand op **In winkelwagen** en heeft het product
+`custom.upgrade_products`, dan komt er eerst een pop-up met de duurdere
+varianten. Kiest hij er een, dan gaat *die* in de winkelwagen; kiest hij
+&laquo;nee dank je&raquo;, dan het product zelf. Er wordt niets toegevoegd v&oacute;&oacute;r die
+keuze.
+
+**Openen doet `base.js` zelf.** Het thema had dit altijd al ingebouwd: in
+`MainProduct` staat
+
+```js
+this.productUpgradePopup = this.querySelector('[id^="ProductUpgrade-"]')
+```
+
+en `onFormSubmit(event, skipUpgrade)` opent dat element in plaats van toe te
+voegen zolang `skipUpgrade` niet waar is. Het oude sjabloon rendeerde zo'n
+element; ons koopvak niet, en daarom was de pop-up weg. We renderen hem nu
+weer, met exact die id.
+
+**Sluiten en kiezen doen we zelf, en dat moet ook.** `initClickListeners` in
+`base.js` begint bij *elke* klik op een `data-action` met
+
+```js
+this.productGallery.querySelector('slider-component')
+this.querySelector('[id^="ProductLightbox-"]').querySelector('slider-component')
+```
+
+onvoorwaardelijk, nog v&oacute;&oacute;r de `switch`. Dit koopvak heeft geen galerij en geen
+lightbox met die id's, dus daar loopt iedere klik stuk op
+`Cannot read properties of null`. De sectie luistert daarom zelf op de pop-up,
+roept `stopPropagation()` aan zodat die klik `base.js` niet meer bereikt, en
+gebruikt alleen zijn winkelwagenlogica:
+
+| knop | wat de sectie doet |
+|---|---|
+| `data-action="add-product"` | `hoofd.addToCart({items:[{id: data-variant, quantity:1}], sections:['cart-drawer']})` |
+| `data-action="skip-upgrade"` | `hoofd.onFormSubmit(false, true)` |
+| `data-action="close-popup"` | alleen sluiten |
+
+`hoofd` is `wortel.querySelector('main-product')`, **niet** `wortel` zelf: die
+wijst naar de sectiewikkel `shopify-section-…`, en daar zitten die methodes
+niet op. Dat kostte een ronde.
+
+`base.js` zet bij het openen de paginascroll vast met zijn eigen
+`togglePageScroll()`; die functie staat niet op `window`, dus bij het sluiten
+zet de sectie `document.documentElement.style.overflow` zelf weer leeg.
+
+**Wat er in de kaarten staat komt uit de doos.** Per upgrade tonen we de
+voorwerpen uit `custom.included_box` die *niet* in de doos van dit product
+zitten, met een maximum van vier plus een telregel. Geen apart tekstveld, en
+het klopt vanzelf zodra een doos verandert. De meerprijs is het verschil
+tussen de twee varianten.
+
+Alleen upgrades die **duurder** zijn en **op voorraad** staan komen erin. Is er
+daarna niets over, dan bestaat het element niet en gaat de knop rechtstreeks
+naar de winkelwagen &mdash; geen pop-up om niets.
+
+**Nagemeten** met de echte `base.js` in een browser: bij het indienen opent de
+pop-up en gaat er nog niets naar de winkelwagen; &laquo;Kies deze&raquo; op de Ultimate
+stuurt precies &eacute;&eacute;n verzoek naar `/cart/add.js` met variant
+`53414664929612`; &laquo;Nee dank je&raquo; stuurt er &eacute;&eacute;n met `53384928395596`, de PRO
+zelf.
+
 ## Wat er aan de winkel zelf is veranderd
 
 Dit staat los van het thema: het is productdata en geldt dus voor elk thema,

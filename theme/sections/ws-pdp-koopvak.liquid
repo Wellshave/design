@@ -464,6 +464,63 @@
           || document.getElementById(sleutel);
       }
 
+      {%- comment -%}
+        De upgrade-pop-up. Openen doet base.js zelf: die vindt
+        [id^="ProductUpgrade-"] en zet er open op bij het indienen van het
+        formulier. Sluiten en kiezen doen we hier.
+
+        Waarom niet met zijn eigen data-action-afhandeling? Die begint met
+        this.productGallery.querySelector(...) en this.querySelector(
+        '[id^="ProductLightbox-"]').querySelector(...), onvoorwaardelijk, nog
+        voor de switch. Dit koopvak heeft geen galerij en geen lightbox met die
+        id's, dus elke klik zou daar stuklopen. We gebruiken alleen zijn
+        winkelwagenlogica, en die zit op het element zelf.
+
+        base.js heeft bij het openen al de paginascroll vastgezet; wij zetten
+        die bij het sluiten weer los.
+      {%- endcomment -%}
+      var upg = wortel.querySelector('[id^="ProductUpgrade-"]');
+      // onFormSubmit en addToCart zitten op het aangepaste element <main-product>,
+      // niet op de sectiewikkel waar wortel naar wijst.
+      var hoofd = wortel.querySelector('main-product');
+      if (upg && hoofd) {
+        upg.addEventListener('click', function (e) {
+          var el = e.target.closest('[data-action]');
+          if (!el) { return; }
+
+          // base.js luistert op <main-product>; laat die klik daar niet komen.
+          e.preventDefault();
+          e.stopPropagation();
+
+          var actie = el.getAttribute('data-action');
+          upg.classList.remove('open');
+          document.documentElement.style.overflow = '';
+
+          if (actie === 'skip-upgrade' && typeof hoofd.onFormSubmit === 'function') {
+            hoofd.onFormSubmit(false, true);
+            return;
+          }
+
+          if (actie === 'add-product' && typeof hoofd.addToCart === 'function') {
+            var variant = parseInt(el.getAttribute('data-variant'), 10);
+            if (!variant) { return; }
+            var lading = {
+              items: [{ id: variant, quantity: 1 }],
+              sections_url: window.location.pathname
+            };
+            if (document.querySelector('cart-drawer')) { lading.sections = ['cart-drawer']; }
+            hoofd.addToCart(lading);
+          }
+        });
+
+        // Met de toets escape ook dicht, net als de vergelijkingspop-up.
+        document.addEventListener('keydown', function (e) {
+          if (e.key !== 'Escape' || !upg.classList.contains('open')) { return; }
+          upg.classList.remove('open');
+          document.documentElement.style.overflow = '';
+        });
+      }
+
       var pop = document.getElementById('ws-vgl-{{ section.id }}');
       var vgl = wortel.querySelector('[data-ws-vgl]');
 
@@ -890,6 +947,112 @@
         </div>
       {%- endif -%}
 
+
+  {%- comment -%}
+    De upgrade-pop-up, vlak voor het toevoegen aan de winkelwagen.
+
+    Dit hangt volledig aan de bestaande base.js. Die zoekt binnen
+    <main-product> naar [id^="ProductUpgrade-"]; bestaat dat element, dan opent
+    hij het bij het indienen van het formulier in plaats van meteen toe te
+    voegen. Verder luistert hij op drie waarden van data-action:
+
+      add-product   voegt data-variant toe en opent de winkelwagenlade
+      skip-upgrade  voegt alsnog dit product toe, zoals zonder pop-up
+      close-popup   sluit alleen
+
+    Let op: base.js leest data-action van het aangeklikte element zelf, niet van
+    een ouder. Alles binnen zo'n knop staat daarom op pointer-events:none.
+
+    Staat custom.upgrade_products leeg, dan bestaat dit element niet en gaat de
+    knop rechtstreeks naar de winkelwagen. Geen pop-up om niets.
+  {%- endcomment -%}
+  {%- assign upgrades = mf.upgrade_products.value -%}
+  {%- if upgrades != blank and s.upg_tonen -%}
+    {%- comment -%}
+      Alleen upgrades die duurder zijn dan dit product en op voorraad staan.
+      Een goedkopere of uitverkochte optie is geen upgrade.
+    {%- endcomment -%}
+    {%- assign upg_aantal = 0 -%}
+    {%- for up in upgrades -%}
+      {%- assign uv = up.selected_or_first_available_variant -%}
+      {%- if uv.available and uv.price > v.price -%}{%- assign upg_aantal = upg_aantal | plus: 1 -%}{%- endif -%}
+    {%- endfor -%}
+
+    {%- if upg_aantal > 0 -%}
+      {%- comment -%}
+        Wat er extra bij zit rekenen we uit de doos, niet uit een tekstveld:
+        elk voorwerp in de doos van de upgrade dat niet in deze doos zit.
+      {%- endcomment -%}
+      {%- capture eigen_doos -%}{%- for d in mf.included_box.value -%}&lsaquo;{{ d.title | strip | downcase }}&rsaquo;{%- endfor -%}{%- endcapture -%}
+
+      <div class="ws-upg" id="ProductUpgrade-{{ section.id }}" data-popup>
+        <div class="ws-upg-waas" data-action="close-popup"></div>
+        <div class="ws-upg-vak" role="dialog" aria-modal="true" aria-label="{{ s.upg_kop | escape }}">
+          <button type="button" class="ws-upg-x" data-action="close-popup" aria-label="Sluiten">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          </button>
+
+          <div class="ws-upg-top">
+            {%- if s.upg_ey != blank -%}<span class="ws-upg-ey">{{ s.upg_ey }}</span>{%- endif -%}
+            {%- if s.upg_kop != blank -%}<p class="ws-upg-kop">{{ s.upg_kop | replace: '[product]', product.title }}</p>{%- endif -%}
+            {%- if s.upg_lead != blank -%}<p class="ws-upg-lead">{{ s.upg_lead | replace: '[product]', product.title }}</p>{%- endif -%}
+          </div>
+
+          <ul class="ws-upg-lijst">
+            {%- for up in upgrades -%}
+              {%- assign uv = up.selected_or_first_available_variant -%}
+              {%- if uv.available == false or uv.price <= v.price -%}{%- continue -%}{%- endif -%}
+              {%- assign meer = uv.price | minus: v.price -%}
+
+              <li class="ws-upg-kaart">
+                <div class="ws-upg-beeld">
+                  {%- if up.featured_image != blank -%}
+                    {{ up.featured_image | image_url: width: 320 | image_tag: alt: '', loading: 'lazy' }}
+                  {%- endif -%}
+                </div>
+
+                <div class="ws-upg-tekst">
+                  <p class="ws-upg-naam">{{ up.title }}</p>
+
+                  {%- assign extra = 0 -%}
+                  {%- assign doos = up.metafields.custom.included_box.value -%}
+                  {%- if doos != blank -%}
+                    <ul class="ws-upg-extra">
+                      {%- for d in doos -%}
+                        {%- assign sleutel = d.title | strip | downcase | prepend: '&lsaquo;' | append: '&rsaquo;' -%}
+                        {%- unless eigen_doos contains sleutel -%}
+                          {%- assign extra = extra | plus: 1 -%}
+                          {%- if extra < 5 -%}<li>{{ d.title | strip }}</li>{%- endif -%}
+                        {%- endunless -%}
+                      {%- endfor -%}
+                    </ul>
+                    {%- if extra > 4 -%}
+                      {%- assign rest = extra | minus: 4 -%}
+                      <p class="ws-upg-meer">
+                        {%- if rest == 1 -%}{{ s.upg_enmeer1 }}{%- else -%}{{ s.upg_enmeer | replace: '[aantal]', rest }}{%- endif -%}
+                      </p>
+                    {%- endif -%}
+                  {%- endif -%}
+                </div>
+
+                <div class="ws-upg-koop">
+                  <p class="ws-upg-prijs">{% render 'price-formated', price: uv.price %}</p>
+                  <p class="ws-upg-meerprijs">+ {% render 'price-formated', price: meer %}</p>
+                  <button type="button" class="ws-upg-knop"
+                          data-action="add-product" data-variant="{{ uv.id }}">{{ s.upg_knop }}</button>
+                </div>
+              </li>
+            {%- endfor -%}
+          </ul>
+
+          <button type="button" class="ws-upg-nee" data-action="skip-upgrade">
+            {{ s.upg_nee | replace: '[product]', product.title }}
+          </button>
+        </div>
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+
   <script type="application/json" data-variants-data>{{ product.variants | json }}</script>
 </main-product>
 
@@ -942,6 +1105,16 @@
     { "type": "text", "id": "pop_bestevoor", "label": "Aanhef bij Beste voor", "default": "Beste voor:" },
     { "type": "text", "id": "pop_knop", "label": "Knoptekst in de pop-up", "default": "Kies" },
     { "type": "text", "id": "pop_inbegrepen", "label": "Label bij de beslissende rij", "default": "Inbegrepen" },
+    { "type": "header", "content": "Upgrade-pop-up" },
+    { "type": "paragraph", "content": "Verschijnt bij het toevoegen aan de winkelwagen, gevoed uit custom.upgrade_products. Alleen duurdere producten die op voorraad staan komen erin; staat het veld leeg, dan is er geen pop-up." },
+    { "type": "checkbox", "id": "upg_tonen", "label": "Upgrade-pop-up aan", "default": true },
+    { "type": "text", "id": "upg_ey", "label": "Bovenregel", "default": "Nog even dit" },
+    { "type": "text", "id": "upg_kop", "label": "Kop", "info": "[product] wordt de producttitel.", "default": "Voor een paar euro meer heb je de hele set" },
+    { "type": "text", "id": "upg_lead", "label": "Onderregel", "info": "[product] wordt de producttitel.", "default": "De [product] zit er in beide gevallen gewoon bij." },
+    { "type": "text", "id": "upg_knop", "label": "Knop op de kaart", "default": "Kies deze" },
+    { "type": "text", "id": "upg_enmeer", "label": "Regel bij meer dan vier extra\u0027s", "info": "[aantal] wordt het aantal dat niet in de lijst past.", "default": "en nog [aantal] andere onderdelen" },
+    { "type": "text", "id": "upg_enmeer1", "label": "Diezelfde regel bij precies \u00e9\u00e9n", "default": "en nog \u00e9\u00e9n onderdeel" },
+    { "type": "text", "id": "upg_nee", "label": "Doorgaan zonder upgrade", "info": "[product] wordt de producttitel.", "default": "Nee dank je, ga verder met de [product]" },
     { "type": "text", "id": "vergelijk_anker", "label": "Sleutel van de vergelijkingssectie", "default": "compare_table", "info": "De sleutel uit het sjabloon, niet de volledige id \u2014 die zet Shopify zelf samen. De knop verschijnt alleen als het product custom.compare_table of custom.compare_products heeft." },
     { "type": "text", "id": "tel_voor", "label": "Teller — tekst ervoor", "default": "Al door" },
     { "type": "text", "id": "tel_waarde", "label": "Teller — getal", "default": "200.000+" },
@@ -1182,4 +1355,70 @@
     .ws-pdp .ws-bb > .ws-tel{order:15}
     .ws-pdp .ws-bb > .ws-acc{order:16}
   }
+
+  /* ---- de upgrade-pop-up bij het toevoegen aan de winkelwagen ----
+     base.js zet alleen de klasse open erop; verder niets. Dus is dat
+     precies de schakelaar. */
+  .ws-upg{position:fixed;inset:0;z-index:10000;display:none;align-items:center;justify-content:center;
+    padding:18px;font-family:'Montserrat',-apple-system,BlinkMacSystemFont,Arial,sans-serif}
+  .ws-upg.open{display:flex}
+  .ws-upg [data-action] > *{pointer-events:none}
+  .ws-upg-waas{position:absolute;inset:0;background:rgba(11,11,10,.62);
+    -webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+  .ws-upg-vak{position:relative;z-index:1;width:100%;max-width:560px;max-height:92vh;overflow-y:auto;
+    background:#FBF8F3;border-radius:20px;padding:30px 28px 22px;
+    box-shadow:0 30px 90px rgba(11,11,10,.4)}
+  .ws-upg-x{position:absolute;top:14px;right:14px;width:34px;height:34px;display:grid;place-items:center;
+    border:0;border-radius:50%;background:rgba(17,17,17,.06);color:#14120F;cursor:pointer;padding:0}
+  .ws-upg-x svg{width:16px;height:16px}
+  .ws-upg-x:hover{background:rgba(17,17,17,.11)}
+
+  .ws-upg-top{text-align:center;padding:0 22px}
+  .ws-upg-ey{display:block;font-size:10.5px;font-weight:800;letter-spacing:.19em;
+    text-transform:uppercase;color:#B0742A}
+  .ws-upg-kop{margin:9px 0 0;font-size:22px;font-weight:800;letter-spacing:-.028em;
+    line-height:1.2;color:#14120F}
+  .ws-upg-lead{margin:8px 0 0;font-size:13.5px;line-height:1.5;color:rgba(20,18,15,.6)}
+
+  .ws-upg-lijst{list-style:none;margin:22px 0 0;padding:0}
+  .ws-upg-kaart{display:grid;grid-template-columns:76px minmax(0,1fr) auto;gap:16px;align-items:center;
+    padding:14px;margin-top:10px;background:#fff;border:1px solid rgba(176,116,42,.2);border-radius:14px}
+  .ws-upg-kaart:first-child{margin-top:0}
+  .ws-upg-beeld{width:76px;height:76px;border-radius:10px;overflow:hidden;background:rgba(17,17,17,.05)}
+  .ws-upg-beeld img{width:100%;height:100%;object-fit:cover;display:block}
+  .ws-upg-naam{margin:0;font-size:15px;font-weight:800;letter-spacing:-.02em;color:#14120F}
+  .ws-upg-extra{list-style:none;margin:7px 0 0;padding:0}
+  .ws-upg-extra li{position:relative;padding-left:19px;margin-top:4px;
+    font-size:12.5px;line-height:1.35;color:rgba(20,18,15,.72)}
+  .ws-upg-extra li::before{content:"";position:absolute;left:0;top:2px;width:13px;height:13px;
+    background:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23B0742A' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12.6 4.6 4.6L19 7.4'/%3E%3C/svg%3E") no-repeat center/contain}
+  .ws-upg-meer{margin:5px 0 0;font-size:12px;color:rgba(20,18,15,.45)}
+
+  .ws-upg-koop{text-align:right}
+  .ws-upg-prijs{margin:0;font-size:15px;font-weight:800;color:#14120F;white-space:nowrap}
+  .ws-upg-meerprijs{margin:1px 0 0;font-size:12px;font-weight:700;color:#B0742A;white-space:nowrap}
+  .ws-upg-knop{margin-top:9px;border:0;border-radius:10px;padding:10px 15px;cursor:pointer;
+    background:linear-gradient(100deg,#E9BE72 0%,#DDA548 100%);color:#14120F;
+    font:inherit;font-size:12.5px;font-weight:800;letter-spacing:.01em;white-space:nowrap}
+  .ws-upg-knop:hover{filter:brightness(1.05)}
+
+  .ws-upg-nee{display:block;width:100%;margin:18px 0 0;padding:12px;border:0;background:none;cursor:pointer;
+    font:inherit;font-size:13px;font-weight:700;color:rgba(20,18,15,.5);text-decoration:underline;
+    text-underline-offset:3px}
+  .ws-upg-nee:hover{color:#14120F}
+
+  @media (max-width: 640px) {
+    .ws-upg{padding:12px;align-items:flex-end}
+    .ws-upg-vak{max-height:88vh;padding:26px 16px 16px;border-radius:18px}
+    .ws-upg-top{padding:0 16px}
+    .ws-upg-kop{font-size:19px}
+    .ws-upg-kaart{grid-template-columns:60px minmax(0,1fr);gap:12px;padding:12px}
+    .ws-upg-beeld{width:60px;height:60px}
+    .ws-upg-koop{grid-column:1 / -1;display:grid;grid-template-columns:auto minmax(0,1fr);
+      align-items:center;gap:10px;text-align:left;padding-top:10px;
+      border-top:1px solid rgba(176,116,42,.16)}
+    .ws-upg-meerprijs{grid-row:2;grid-column:1;margin:0}
+    .ws-upg-knop{grid-row:1 / span 2;grid-column:2;margin:0;padding:12px;width:100% }
+  }
+
 {% endstylesheet %}
