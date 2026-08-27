@@ -1,6 +1,6 @@
 /* Wellshave — productpagina, blok 05: in de praktijk.
    Elke klasse begint met ws-prk zodat thema-CSS er niet doorheen lekt. */
-.ws-prk{--p-cream:#F7F3EB;--p-kaart:#FBF8F1;--p-brons:#B0742A;--p-gold:#E9BE72;
+.ws-prk{--p-cream:#F7F3EB;--p-brons:#B0742A;--p-gold:#E9BE72;
   --p-ink:#14120F;--p-ink60:rgba(20,18,15,.6);--p-ink45:rgba(20,18,15,.45);
   --p-lijn:rgba(176,116,42,.18);
   display:block;background:var(--p-cream);
@@ -14,13 +14,18 @@
 .ws-prk-hd{text-align:center;margin:0 0 26px}
 .ws-prk-ey{display:inline-block;padding:9px 20px;border:1px solid var(--p-lijn);border-radius:999px;
   font-size:10.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--p-brons)}
+.ws-prk-hd > h2:first-child{margin-top:0}
 .ws-prk h2{margin:18px 0 0;font-size:clamp(23px,3.1vw,31px);font-weight:800;letter-spacing:-.028em;
   line-height:1.18;color:var(--p-ink)}
 
 /* ---- de kaart ---- */
+/* De strook naast het beeld wisselt om en om van zandtint. Twee kaarten
+   op rij in dezelfde kleur laten het blok als één vlak lezen; zo is elke
+   kaart een eigen stap. */
 .ws-prk-kaart{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-  background:var(--p-kaart);border:1px solid var(--p-lijn);border-radius:16px;
+  background:var(--p-zand-a,#FBF8F1);border:1px solid var(--p-lijn);border-radius:16px;
   overflow:hidden;margin-top:18px}
+.ws-prk-kaart:nth-of-type(even){background:var(--p-zand-b,#F0E8D8)}
 .ws-prk-kaart:first-of-type{margin-top:0}
 .ws-prk-kaart.ws-om .ws-prk-md{order:2}
 

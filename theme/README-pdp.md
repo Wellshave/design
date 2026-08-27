@@ -359,6 +359,15 @@ automatisch afspelen. Bij het afspelen pauzeert een eventuele andere video.
 
 De kop telt zichzelf: `[aantal]` in de instelling wordt het aantal kaarten als
 woord (&laquo;Vier momenten&raquo;), zodat een product met drie kaarten geen vier belooft.
+De bovenregel staat leeg in beide sjablonen; het veld blijft bestaan, dus
+invullen zet het randje terug.
+
+**De strook naast het beeld wisselt om en om van zandtint**: oneven kaarten
+`#FBF8F1`, even kaarten `#F0E8D8`, allebei instelbaar als kleur in de sectie
+(`zand_a` en `zand_b`). Dat is `:nth-of-type(even)` op de kaart &mdash; het beeld
+dekt zijn eigen helft af, dus de kleur van de kaart is precies de strook
+ernaast. Vier kaarten in dezelfde tint lezen als één vlak; zo is elke kaart
+een eigen stap.
 
 ### Een sectienaam is maximaal 25 tekens
 

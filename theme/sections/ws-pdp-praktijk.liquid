@@ -44,7 +44,9 @@
     -%}
 
     <section class="ws-prk" data-ws-prk
-             style="--p-top:{{ s.marge_top }}px;--p-bot:{{ s.marge_bot }}px">
+             style="--p-top:{{ s.marge_top }}px;--p-bot:{{ s.marge_bot }}px
+                    {%- if s.zand_a != blank %};--p-zand-a:{{ s.zand_a }}{% endif -%}
+                    {%- if s.zand_b != blank %};--p-zand-b:{{ s.zand_b }}{% endif -%}">
       <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
         <symbol id="ws-prk-play-{{ uid }}" viewBox="0 0 24 24"><path d="M8 5.4v13.2L19 12z" fill="currentColor"/></symbol>
       </svg>
@@ -176,6 +178,8 @@
     { "type": "header", "content": "De kaarten" },
     { "type": "checkbox", "id": "beeld_links", "label": "Eerste kaart: beeld links", "info": "Daarna wisselt het vanzelf om en om.", "default": true },
     { "type": "text", "id": "video_label", "label": "Label op de speelknop", "info": "Leeg = geen knop, dan blijft de poster staan.", "default": "Video" },
+    { "type": "color", "id": "zand_a", "label": "Zand — oneven kaarten", "default": "#FBF8F1" },
+    { "type": "color", "id": "zand_b", "label": "Zand — even kaarten", "default": "#F0E8D8" },
 
     { "type": "header", "content": "Ruimte" },
     { "type": "range", "id": "marge_top", "label": "Ruimte boven", "min": 0, "max": 96, "step": 4, "unit": "px", "default": 40 },
