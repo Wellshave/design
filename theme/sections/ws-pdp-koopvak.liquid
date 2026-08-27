@@ -330,7 +330,8 @@
         {%- endcomment -%}
         {%- if settings.enable_gift_rewards and s.cad_tonen -%}
           {%- assign cad_n = 0 -%}
-          {%- capture cad_rijen -%}
+          {%- assign cad_som = 0 -%}
+          {%- capture cad_kaarten -%}
             {%- for i in (1..2) -%}
               {%- if i == 1 -%}
                 {%- assign cad = settings.gift_1_product -%}
@@ -348,27 +349,77 @@
               {%- if v.price < grens -%}{%- continue -%}{%- endif -%}
               {%- if cad.handle == product.handle -%}{%- continue -%}{%- endif -%}
               {%- assign cad_n = cad_n | plus: 1 -%}
-              <li>
+              {%- if cad_var.compare_at_price > 0 -%}
+                {%- assign cad_som = cad_som | plus: cad_var.compare_at_price -%}
+              {%- endif -%}
+              <li class="ws-cad-k">
                 <span class="ws-cad-bd">
                   {%- if cad.featured_image != blank -%}
-                    {{ cad.featured_image | image_url: width: 140 | image_tag: alt: '', loading: 'lazy' }}
+                    {{ cad.featured_image | image_url: width: 260 | image_tag: alt: '', loading: 'lazy' }}
                   {%- endif -%}
                 </span>
-                <span class="ws-cad-tx">
-                  <b>{{ cad_label | default: cad.title }}</b>
+                <b class="ws-cad-nm">{{ cad_label | default: cad.title }}</b>
+                <span class="ws-cad-pr">
                   {%- if cad_var.compare_at_price > 0 -%}
-                    <span>{{ s.cad_waarde }} {% if s.munt != blank %}{{ s.munt }}{% endif %}{% render 'price-formated', price: cad_var.compare_at_price %}</span>
+                    <s>{% if s.munt != blank %}{{ s.munt }}{% endif %}{% render 'price-formated', price: cad_var.compare_at_price %}</s>
                   {%- endif -%}
+                  <em class="ws-cad-nul">{{ s.cad_chip }}</em>
                 </span>
-                <span class="ws-cad-nul">{{ s.cad_chip }}</span>
               </li>
             {%- endfor -%}
           {%- endcapture -%}
 
           {%- if cad_n > 0 -%}
-            <div class="ws-cad">
-              {%- if s.cad_kop != blank -%}<span class="ws-cad-ey">{{ s.cad_kop }}</span>{%- endif -%}
-              <ul>{{ cad_rijen }}</ul>
+            {%- comment -%}
+              Verzending telt mee in het totaal, net als in de winkelwagen: elk
+              product dat een cadeau ontgrendelt zit ruim boven de gratis-
+              verzendgrens, dus die regel is hier altijd waar.
+            {%- endcomment -%}
+            {%- if s.cad_verzend_tonen and s.cad_verzend_cent > 0 -%}
+              {%- assign cad_som = cad_som | plus: s.cad_verzend_cent -%}
+            {%- endif -%}
+
+            <div class="ws-cad{% if cad_n == 1 %} ws-cad-alleen{% endif %}">
+              <div class="ws-cad-kop">
+                <span class="ws-cad-ic" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3.6 11.6h16.8v8.8H3.6z"/><path d="M2.4 7.6h19.2v4H2.4z"/><path d="M12 7.6v12.8"/>
+                    <path d="M12 7.6S10.6 3.2 8.2 3.2a2.2 2.2 0 0 0 0 4.4zM12 7.6s1.4-4.4 3.8-4.4a2.2 2.2 0 0 1 0 4.4z"/>
+                  </svg>
+                </span>
+                <span class="ws-cad-tx">
+                  {%- if cad_som > 0 -%}
+                    <b>{% if s.munt != blank %}<span class="ws-cad-munt">{{ s.munt }}</span>{% endif %}{% render 'price-formated', price: cad_som %} {{ s.cad_kop_na }}</b>
+                  {%- else -%}
+                    <b>{{ s.cad_kop_na }}</b>
+                  {%- endif -%}
+                  {%- if s.cad_sub_voor != blank -%}
+                    <span>{{ s.cad_sub_voor }} {{ product.title }}</span>
+                  {%- endif -%}
+                </span>
+              </div>
+
+              <ul class="ws-cad-lijst">{{ cad_kaarten }}</ul>
+
+              {%- if s.cad_verzend_tonen and s.cad_verzend_cent > 0 -%}
+                <div class="ws-cad-vz">
+                  <span class="ws-cad-vz-ic" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M1.9 6.4h12.2v9.6H1.9zM14.1 9.9h3.9l3.1 3.1v2.9h-7z"/>
+                      <circle cx="6.6" cy="18" r="2"/><circle cx="17.4" cy="18" r="2"/>
+                    </svg>
+                  </span>
+                  <b>{{ s.cad_verzend_label }}</b>
+                  <span class="ws-cad-pr">
+                    <s>{% if s.munt != blank %}{{ s.munt }}{% endif %}{% render 'price-formated', price: s.cad_verzend_cent %}</s>
+                    <em class="ws-cad-nul">{{ s.cad_chip }}</em>
+                  </span>
+                </div>
+              {%- endif -%}
+
+              {%- if s.cad_voet != blank -%}
+                <span class="ws-cad-voet">{{ s.cad_voet }}</span>
+              {%- endif -%}
             </div>
           {%- endif -%}
         {%- endif -%}
@@ -1187,9 +1238,13 @@
     { "type": "header", "content": "Cadeaus uit de winkelwagen" },
     { "type": "paragraph", "content": "Leest de drempels en producten uit Winkelinstellingen > Gift rewards, dezelfde als de winkelwagen gebruikt. Toont alleen wat dit ene product al ontgrendelt, en alleen als het cadeau op voorraad is." },
     { "type": "checkbox", "id": "cad_tonen", "label": "Cadeaus tonen", "default": true },
-    { "type": "text", "id": "cad_kop", "label": "Bovenregel", "default": "Gratis bij deze bestelling" },
-    { "type": "text", "id": "cad_waarde", "label": "Woord voor de waarde", "default": "t.w.v." },
-    { "type": "text", "id": "cad_chip", "label": "Plaatje op de rij", "default": "Gratis" },
+    { "type": "text", "id": "cad_kop_na", "label": "Kop na het bedrag", "info": "Het opgetelde bedrag komt ervoor te staan.", "default": "aan extra's cadeau" },
+    { "type": "text", "id": "cad_sub_voor", "label": "Onderregel voor de productnaam", "default": "Gratis bij je" },
+    { "type": "text", "id": "cad_chip", "label": "Plaatje bij de prijs", "default": "Gratis" },
+    { "type": "checkbox", "id": "cad_verzend_tonen", "label": "Verzending als regel meetellen", "default": true },
+    { "type": "text", "id": "cad_verzend_label", "label": "Naam van de verzendregel", "default": "Gratis verzending" },
+    { "type": "number", "id": "cad_verzend_cent", "label": "Verzendkosten in centen", "info": "495 = \u20ac 4,95. Op 0 verdwijnt de regel.", "default": 495 },
+    { "type": "text", "id": "cad_voet", "label": "Regel onderaan", "default": "Automatisch inbegrepen. Geen code of selectie nodig." },
     { "type": "header", "content": "Knop en levering" },
     { "type": "text", "id": "knop_label", "label": "Knoptekst", "default": "In winkelwagen" },
     { "type": "text", "id": "knop_uitverkocht", "label": "Knoptekst uitverkocht", "default": "Uitverkocht" },

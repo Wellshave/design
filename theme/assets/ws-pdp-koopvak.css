@@ -218,38 +218,103 @@
 .ws-pdp .ws-cta2 svg .vgl-a{opacity:.55}
 
 /* ---- de cadeaus uit de winkelwagen ---- */
-/* Dit is geen aanbod maar een gevolg: je krijgt het omdat je dit product koopt.
-   Vandaar een lijst met bewijs -- foto, naam, waarde -- en niet nog een kaart
-   die om aandacht vraagt naast de aanbodkaart erboven. */
-.ws-pdp .ws-cad{margin-top:14px;padding:14px 16px 12px;
-  border:1px solid rgba(20,18,15,.10);border-radius:14px;background:#fff}
-.ws-pdp .ws-cad-ey{display:block;margin-bottom:10px;
-  font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--ws-tekstgoud)}
-.ws-pdp .ws-cad ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
-.ws-pdp .ws-cad li{display:grid;grid-template-columns:42px minmax(0,1fr) auto;gap:12px;align-items:center}
+/* Dit blok concurreert bewust niet met het goud. Goud is de korting, inkt is
+   vergelijken, en groen is wat je er gratis bij krijgt -- drie kleuren, drie
+   betekenissen. Het veld is groen zodat de lijst niet in het wit van het
+   koopvak verdwijnt; de knop eronder blijft daardoor het enige gouden vlak.
 
-.ws-pdp .ws-cad-bd{width:42px;height:42px;border-radius:9px;overflow:hidden;
-  background:#F4F2EE;border:1px solid rgba(20,18,15,.07)}
-.ws-pdp .ws-cad-bd img{width:100%;height:100%;object-fit:cover;display:block}
+   De kop draagt het opgetelde bedrag. Dat is het enige getal dat iemand
+   onthoudt, en het is de reden dat de doorgestreepte prijzen eronder werken:
+   zonder som lezen ze als losse kleine bedragen. */
+.ws-pdp .ws-cad{margin-top:14px;padding:14px 14px 12px;border-radius:16px;
+  border:1px solid rgba(14,122,85,.18);
+  background:linear-gradient(180deg,rgba(14,122,85,.085),rgba(14,122,85,.045))}
 
-.ws-pdp .ws-cad-tx{min-width:0}
-.ws-pdp .ws-cad-tx b{display:block;font-size:13.5px;font-weight:600;letter-spacing:-.01em;
+.ws-pdp .ws-cad-kop{display:grid;grid-template-columns:34px minmax(0,1fr);gap:11px;
+  align-items:center;margin-bottom:12px}
+.ws-pdp .ws-cad-ic{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+  background:#fff;border:1px solid rgba(14,122,85,.20);color:#0E7A55}
+.ws-pdp .ws-cad-ic svg{width:17px;height:17px}
+.ws-pdp .ws-cad-kop .ws-cad-tx{min-width:0}
+.ws-pdp .ws-cad-kop b{display:block;font-size:16.5px;font-weight:600;letter-spacing:-.02em;
+  line-height:1.2;color:var(--ws-ink)}
+/* alleen de onderregel, niet elke span in de kop -- het euroteken zit in de
+   <b> erboven en kreeg anders deze maat mee */
+.ws-pdp .ws-cad-kop .ws-cad-tx > span{display:block;margin-top:2px;font-size:12px;
+  line-height:1.3;color:var(--ws-w52)}
+/* hetzelfde luchtje achter het teken als bij de grote prijs boven de vouw */
+.ws-pdp .ws-cad-kop .ws-cad-munt{display:inline;margin-right:.09em;
+  font-size:inherit;font-weight:inherit;color:inherit}
+
+/* Twee kaarten naast elkaar; bij een cadeau valt de tweede kolom weg en gaat
+   die ene kaart liggen in plaats van staan, anders is hij een halve rij breed
+   en ziet het eruit alsof er iets ontbreekt. */
+.ws-pdp .ws-cad-lijst{list-style:none;margin:0;padding:0;
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.ws-pdp .ws-cad-k{display:flex;flex-direction:column;align-items:flex-start;gap:8px;
+  padding:11px 11px 10px;border-radius:12px;background:#fff;
+  border:1px solid rgba(20,18,15,.07);box-shadow:0 1px 0 rgba(20,18,15,.03)}
+
+/* wit, want de productfoto's hebben zelf een witte achtergrond; een zandvlak
+   eromheen leest als een rand die er niet hoort te zitten */
+.ws-pdp .ws-cad-bd{width:100%;height:76px;border-radius:9px;overflow:hidden;background:#fff}
+.ws-pdp .ws-cad-bd img{width:100%;height:100%;object-fit:contain;display:block}
+
+.ws-pdp .ws-cad-nm{display:block;font-size:12.5px;font-weight:600;letter-spacing:-.01em;
   line-height:1.25;color:var(--ws-ink)}
-.ws-pdp .ws-cad-tx span{display:block;margin-top:2px;font-size:11.5px;color:var(--ws-w52)}
+.ws-pdp .ws-cad-pr{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-top:auto}
+.ws-pdp .ws-cad-pr s{font-size:12px;color:var(--ws-w38);text-decoration:line-through}
 
-/* Het enige gekleurde ding in de rij, en het kleinste: het woord dat telt. */
-.ws-pdp .ws-cad-nul{flex:none;font-size:10.5px;font-weight:800;letter-spacing:.11em;
-  text-transform:uppercase;color:#0E7A55;
-  background:rgba(14,122,85,.10);border:1px solid rgba(14,122,85,.22);
-  border-radius:100px;padding:5px 10px;white-space:nowrap}
+/* Het woord dat telt: massief, zodat het van een meter afstand leesbaar is.
+   Een omlijnd chipje verdween in de kaart eromheen. */
+.ws-pdp .ws-cad-nul{flex:none;font-style:normal;font-size:11px;font-weight:800;
+  letter-spacing:.04em;color:#fff;background:#0E7A55;
+  border-radius:100px;padding:4px 9px;white-space:nowrap}
+
+/* Verzending is geen cadeauproduct maar telt wel mee in het bedrag boven,
+   dus staat hij in hetzelfde blok en op dezelfde manier geschreven. */
+.ws-pdp .ws-cad-vz{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:9px;
+  align-items:center;margin-top:9px;padding:10px 12px;border-radius:11px;background:#fff;
+  border:1px solid rgba(20,18,15,.07)}
+.ws-pdp .ws-cad-vz-ic{width:22px;height:22px;display:grid;place-items:center;color:#0E7A55}
+.ws-pdp .ws-cad-vz-ic svg{width:18px;height:18px}
+.ws-pdp .ws-cad-vz b{font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--ws-ink)}
+
+.ws-pdp .ws-cad-voet{display:block;margin-top:9px;font-size:11px;line-height:1.35;
+  color:var(--ws-w38)}
+
+/* een cadeau: de kaart gaat liggen */
+.ws-pdp .ws-cad-alleen .ws-cad-lijst{grid-template-columns:minmax(0,1fr)}
+.ws-pdp .ws-cad-alleen .ws-cad-k{flex-direction:row;align-items:center;gap:11px;
+  padding:9px 11px 9px 9px}
+.ws-pdp .ws-cad-alleen .ws-cad-bd{width:56px;height:56px;flex:none;border:1px solid rgba(20,18,15,.06)}
+.ws-pdp .ws-cad-alleen .ws-cad-nm{flex:1 1 auto;min-width:0}
+.ws-pdp .ws-cad-alleen .ws-cad-pr{margin-top:0;flex:none}
 
 @media screen and (max-width:749px){
   .ws-pdp .ws-bb > .ws-cad{order:11}
-  .ws-pdp .ws-cad{padding:12px 13px 11px}
-  .ws-pdp .ws-cad li{grid-template-columns:38px minmax(0,1fr) auto;gap:10px}
-  .ws-pdp .ws-cad-bd{width:38px;height:38px}
-  .ws-pdp .ws-cad-tx b{font-size:12.5px}
-  .ws-pdp .ws-cad-nul{font-size:9.5px;padding:4px 8px;letter-spacing:.08em}
+  .ws-pdp .ws-cad{padding:12px 12px 11px;border-radius:14px}
+  .ws-pdp .ws-cad-kop{grid-template-columns:30px minmax(0,1fr);gap:10px;margin-bottom:10px}
+  .ws-pdp .ws-cad-ic{width:30px;height:30px}
+  .ws-pdp .ws-cad-ic svg{width:15px;height:15px}
+  .ws-pdp .ws-cad-kop b{font-size:15px}
+  .ws-pdp .ws-cad-kop .ws-cad-tx > span{font-size:11.5px}
+  .ws-pdp .ws-cad-lijst{gap:8px}
+  .ws-pdp .ws-cad-k{padding:9px 9px 9px;gap:7px}
+  .ws-pdp .ws-cad-bd{height:66px}
+  .ws-pdp .ws-cad-nm{font-size:11.5px}
+  .ws-pdp .ws-cad-pr s{font-size:11px}
+  .ws-pdp .ws-cad-nul{font-size:10px;padding:4px 8px}
+  .ws-pdp .ws-cad-vz{padding:9px 10px;gap:8px}
+  .ws-pdp .ws-cad-vz b{font-size:12px}
+  .ws-pdp .ws-cad-alleen .ws-cad-bd{width:50px;height:50px}
+}
+
+/* Op de smalste telefoons past "Gratis" niet meer naast de doorgestreepte
+   prijs; dan gaat de prijsregel op een eigen regel staan. */
+@media screen and (max-width:360px){
+  .ws-pdp .ws-cad-bd{height:58px}
+  .ws-pdp .ws-cad-nm{font-size:11px}
 }
 
 /* betaalmethoden onder de knop */

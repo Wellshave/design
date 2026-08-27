@@ -934,6 +934,51 @@ The Sentinel PRO, Barber Bro 1.0 — dat vijf cent onder de tweede drempel valt.
 Die krijgen de Washbag en niet de Neustrimmer. Dat is geen fout in het blok,
 maar het is wel het soort grens waar je een keer bewust naar wilt kijken.
 
+### Tweede ronde: het viel niet op
+
+De eerste versie was een witte lijst op een witte grond met een omlijnd groen
+chipje. Netjes, en precies daarom onzichtbaar. Naar aanleiding van drie
+referenties van andere winkels is het blok opnieuw opgezet. Wat daarvan is
+overgenomen, en waarom:
+
+| Wat | Waarom |
+| --- | --- |
+| **Een som in de kop** | «€ 57,85 aan extra's cadeau». Eén getal onthoud je; twee losse bedragen van twintig en dertig euro lezen als kleingeld. |
+| **Doorstrepen in plaats van «t.w.v.»** | De doorgestreepte prijs met «Gratis» ernaast leest als honderd procent korting. Het woord «t.w.v.» maakte er een productkenmerk van. |
+| **Een massief chipje** | Wit op vol groen. Het omlijnde chipje verdween in de kaart eromheen. |
+| **Verzending als vierde regel** | Telt mee in de som en staat in hetzelfde blok. Elk product dat een cadeau ontgrendelt zit ruim boven de € 30-grens, dus die regel is altijd waar. Daarmee gaat € 52,90 naar € 57,85. |
+| **Een regel onderaan** | «Automatisch inbegrepen. Geen code of selectie nodig.» Anders is de eerstvolgende vraag of je nog iets moet aanvinken. |
+
+**Groen en niet goud.** Goud is in dit koopvak al twee keer bezet: de
+aanbodbalk is een goud véld, de koopknop een gouden knóp. Een derde gouden
+vlak ertussen maakt alle drie minder waard. Groen was al de kleur van «gratis»
+in dit ontwerp, dus dat is nu het hele veld. Goud is de korting, groen is wat
+je erbij krijgt, inkt is vergelijken.
+
+**Twee kaarten naast elkaar, of één die ligt.** Bij twee cadeaus staan de
+kaarten naast elkaar met de foto erboven. Bij één cadeau — de band tussen
+€ 65 en € 90 — zou die ene kaart een halve rij breed zijn en lijken alsof er
+iets ontbreekt. Dan krijgt het blok de klasse `ws-cad-alleen` en gaat de kaart
+liggen, in hetzelfde ritme als de verzendregel eronder.
+
+**Wat het kost.** Het blok groeide van 145 px naar 289 px op de telefoon; de
+koopknop van het Barber Pack 2.0 schoof van 1295 px naar 1439 px. Die knop
+stond al ruim onder de vouw — de galerij vult daar het eerste scherm — maar er
+komt 144 px scrollen bij. Wil je dat terug, dan is de cadeaulijst op de
+telefoon *onder* de knop zetten de enige plek die niets anders verschuift.
+
+**Een botsing in mijn eigen CSS.** Het euroteken in de kop kwam kleiner uit dan
+de rest van de regel: de regel voor de onderregel (`.ws-cad-kop span`) pakte
+ook het teken dat in de `<b>` erboven zit. Opgelost door de onderregel op een
+direct kind te richten (`.ws-cad-kop .ws-cad-tx > span`) en het teken zijn maat
+te laten erven. Gevonden door de berekende `font-size` op te vragen, niet door
+naar de schermafdruk te turen.
+
+**Nieuwe instellingen:** `cad_kop_na`, `cad_sub_voor`, `cad_chip`,
+`cad_verzend_tonen`, `cad_verzend_label`, `cad_verzend_cent` (495 = € 4,95),
+`cad_voet`. `cad_kop` en `cad_waarde` zijn vervallen. Alle tekstvelden staan in
+`templates/product.json` en zijn in en/de/fr geregistreerd.
+
 ### De waarde moest ergens vandaan komen
 
 Een cadeauregel zonder bedrag zegt weinig; «t.w.v. € 32,95» maakt het concreet.
