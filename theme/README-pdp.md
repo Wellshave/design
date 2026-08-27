@@ -848,6 +848,30 @@ rendert de kop van de aanbodkaart als een gewone `h2`, drie keer te groot.
 Dat lijkt op een kapot blok terwijl er niets mis is. `compiled_assets` hoort
 in de lijst.
 
+## Blok 03 mee naar neutraal
+
+De band stond al op een crèmegrond; wat donker was, was de **doos** eromheen
+(`.ws-ugc-doos`, `#0B0B0A`). Die is wit geworden met een haarlijn en een zachte
+schaduw, net als het koopvak.
+
+**Wat wit blijft, blijft wit.** De tokens `--u-w72/52/38` zijn níét omgeklapt:
+die horen bij tekst die op vídeo ligt — de naam, het citaat, de duur, het
+vinkje «geverifieerde koper». Daar is de ondergrond een filmbeeld en dus altijd
+donker. Voor de chroom van de doos zijn er nieuwe tokens bij gekomen:
+`--u-b72/52/38` in inkt. Dezelfde regel als bij het plaatje op de foto in blok
+01: kijk naar de grond eronder, niet naar de kleur die verandert.
+
+De gouden speelknoppen op de tegels blijven goud — die moeten op elk filmframe
+zichtbaar zijn — en de koopknop houdt het goudverloop.
+
+De tweede kopregel («Gewoon hun badkamer.») blijft brons. Dat is geen decoratie
+maar structuur: de kleurwissel op de tweede regel is precies waar de zin kantelt.
+
+**Het euroteken ontbrak.** De koopstrook in de band gebruikte
+`price-formated` zonder teken, terwijl boven de vouw wél `€ 59,95` staat. Twee
+keer hetzelfde bedrag anders geschreven op één pagina. De sectie heeft nu
+dezelfde instelling `munt` als het koopvak.
+
 ## Wat er aan de winkel zelf is veranderd
 
 Dit staat los van het thema: het is productdata en geldt dus voor elk thema,

@@ -223,7 +223,7 @@
                 {%- if s.koop_regel != blank -%}<p>{{ s.koop_regel }}</p>{%- endif -%}
               </div>
               <div class="ws-ugc-prijs">
-                <b>{% render 'price-formated', price: cv.price %}</b>
+                <b>{% if s.munt != blank %}<span class="ws-ugc-munt">{{ s.munt }}</span>{% endif %}{% render 'price-formated', price: cv.price %}</b>
                 {%- if cv.available and s.voorraad_label != blank -%}
                   <span class="ws-ugc-vrd"><i></i>{{ s.voorraad_label }}</span>
                 {%- endif -%}
@@ -354,6 +354,7 @@
     { "type": "header", "content": "De koopstrook" },
     { "type": "checkbox", "id": "koop_tonen", "label": "Koopstrook tonen", "default": true },
     { "type": "text", "id": "koop_regel", "label": "Regel onder de naam", "default": "Het apparaat uit deze video's" },
+    { "type": "text", "id": "munt", "label": "Valutateken voor de prijs", "info": "Zelfde als in het koopvak. Leeg = geen teken.", "default": "€" },
     { "type": "text", "id": "tp_regel", "label": "Beoordelingsregel", "info": "Winkelbreed, want per product is er geen score.", "default": "4,4 uit 970+ Trustpilot-reviews" },
     { "type": "text", "id": "voorraad_label", "label": "Voorraadregel", "default": "Op voorraad" },
     { "type": "text", "id": "knop_label", "label": "Knop", "default": "In winkelwagen" },
