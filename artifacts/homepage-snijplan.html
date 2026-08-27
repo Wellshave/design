@@ -1,0 +1,421 @@
+<title>Van 16 naar 13 schermen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Montserrat:wght@400;500;600;700&display=swap">
+
+<style>
+  /* Instrument koel, data warm: het papier is neutraal grijs zodat het
+     brons van Wellshave alleen in de meetbalken zit en daar iets betekent. */
+  :root{
+    --paper:#F3F3F1; --card:#FFFFFF; --ink:#18191B; --muted:#6B6F73;
+    --line:#E0E0DC; --lijn-zacht:#EAEAE7;
+    --blijft:#4C5F58; --krimpt:#A9762F; --weg:#A8433A; --ref:#8A8F94;
+    --blijft-vlak:#E5EAE8; --krimpt-vlak:#F1E6D3; --weg-vlak:#F2DFDD;
+    --schaduw:0 1px 2px rgba(24,25,27,.05), 0 8px 24px -18px rgba(24,25,27,.28);
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --paper:#121315; --card:#1A1C1F; --ink:#ECEBE8; --muted:#9BA0A5;
+      --line:#2B2E32; --lijn-zacht:#232629;
+      --blijft:#7FA096; --krimpt:#D7A455; --weg:#D2706A; --ref:#7E858B;
+      --blijft-vlak:#22302C; --krimpt-vlak:#332818; --weg-vlak:#33211F;
+      --schaduw:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -18px rgba(0,0,0,.7);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#121315; --card:#1A1C1F; --ink:#ECEBE8; --muted:#9BA0A5;
+    --line:#2B2E32; --lijn-zacht:#232629;
+    --blijft:#7FA096; --krimpt:#D7A455; --weg:#D2706A; --ref:#7E858B;
+    --blijft-vlak:#22302C; --krimpt-vlak:#332818; --weg-vlak:#33211F;
+    --schaduw:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -18px rgba(0,0,0,.7);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:"Montserrat",-apple-system,BlinkMacSystemFont,sans-serif;
+    font-size:15px; line-height:1.6; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px; margin:0 auto; padding:56px 24px 96px}
+  @media (max-width:640px){ .wrap{padding:36px 16px 64px} }
+
+  h1,h2,h3{font-family:"Newsreader",Georgia,serif; font-weight:500; margin:0; text-wrap:balance}
+  h1{font-size:clamp(32px,5.2vw,50px); line-height:1.1; letter-spacing:-.02em}
+  h2{font-size:clamp(21px,2.6vw,27px); line-height:1.2; letter-spacing:-.012em}
+  h3{font-size:18px; line-height:1.28}
+  p{margin:0}
+  b,strong{font-weight:600}
+
+  .eyebrow{
+    font-size:10.5px; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--muted);
+  }
+  .lead{font-size:17px; line-height:1.62; color:var(--muted); max-width:62ch}
+  .num{font-variant-numeric:tabular-nums}
+
+  section{margin-top:56px}
+  .kop{display:flex; flex-direction:column; gap:10px; margin-bottom:22px}
+
+  /* ── correctie bovenaan: dit hoort niet weggemoffeld ── */
+  .correctie{
+    margin-top:28px; border:1px solid var(--line); border-left:3px solid var(--weg);
+    background:var(--card); border-radius:4px; padding:18px 20px;
+    display:flex; flex-direction:column; gap:8px; box-shadow:var(--schaduw);
+  }
+  .correctie .eyebrow{color:var(--weg)}
+  .correctie p{font-size:14.5px; line-height:1.6; color:var(--muted); max-width:74ch}
+  .correctie b{color:var(--ink)}
+
+  /* ── cijferrij ── */
+  .cijfers{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:1px;
+    background:var(--line); border:1px solid var(--line); border-radius:4px; overflow:hidden;
+    margin-top:34px;
+  }
+  .cijfer{background:var(--card); padding:18px 20px; display:flex; flex-direction:column; gap:5px}
+  .cijfer .w{font-size:31px; font-weight:600; letter-spacing:-.03em; line-height:1;
+    font-variant-numeric:tabular-nums}
+  .cijfer .l{font-size:12px; color:var(--muted); line-height:1.4}
+  .cijfer--nu .w{color:var(--ink)}
+  .cijfer--na .w{color:var(--blijft)}
+  .cijfer--ref .w{color:var(--ref)}
+
+  /* ── de kaart: drie kolommen op schaal ── */
+  .kaart-uit{overflow-x:auto; padding-bottom:8px}
+  .kaart{
+    display:grid; grid-template-columns:38px repeat(3,minmax(150px,1fr));
+    gap:0 14px; align-items:start; min-width:560px;
+  }
+  .kaart-kop{
+    display:flex; flex-direction:column; gap:2px; padding-bottom:10px;
+    border-bottom:1px solid var(--line); margin-bottom:10px;
+  }
+  .kaart-kop .t{font-size:12.5px; font-weight:700; letter-spacing:.04em}
+  .kaart-kop .s{font-size:11.5px; color:var(--muted); font-variant-numeric:tabular-nums}
+
+  /* de liniaal: één streep per scherm van 844px */
+  .liniaal{position:relative; border-right:1px solid var(--line)}
+  .liniaal .streep{
+    position:absolute; right:0; width:100%; border-top:1px solid var(--lijn-zacht);
+    font-size:9.5px; color:var(--muted); text-align:right; padding-right:6px;
+    font-variant-numeric:tabular-nums; line-height:1;
+  }
+  .liniaal .streep.vet{border-top-color:var(--line); color:var(--ink); font-weight:600}
+
+  .stapel{display:flex; flex-direction:column; gap:0}
+  .blok{
+    --h:40px; height:var(--h); flex:none; min-height:0; border-radius:2px;
+    box-shadow:inset 0 -1px 0 var(--paper);
+    padding:5px 8px; overflow:hidden; display:flex; flex-direction:column; justify-content:center;
+    font-size:10.5px; line-height:1.25;
+  }
+  .blok .n{font-weight:600; letter-spacing:.01em; white-space:nowrap;
+    overflow:hidden; text-overflow:ellipsis}
+  .blok .p{font-size:9.5px; opacity:.72; font-variant-numeric:tabular-nums}
+  .blok--blijft{background:var(--blijft-vlak); color:var(--blijft)}
+  .blok--krimpt{background:var(--krimpt-vlak); color:var(--krimpt)}
+  .blok--weg{background:var(--weg-vlak); color:var(--weg)}
+  .blok--ref{background:var(--card); color:var(--ref); border:1px solid var(--line)}
+  .blok--rand{background:transparent; color:var(--muted); border:1px dashed var(--line)}
+  .blok--leeg{background:transparent; border:0; padding:0}
+  .blok--dun{padding:0}  /* te laag voor padding: die zou de hoogte oprekken */
+  .blok--kort{padding:2px 8px; font-size:9px}  /* korte balk: kleinere letter, anders valt de tekst eraf */
+  .blok--kort .n{line-height:1.2}
+  .blok--kort .p{line-height:1.2}
+
+  .legenda{display:flex; flex-wrap:wrap; gap:8px 20px; margin-top:20px; font-size:12px; color:var(--muted)}
+  .legenda span{display:inline-flex; align-items:center; gap:7px}
+  .vlek{width:11px; height:11px; border-radius:2px; flex:none}
+
+  /* ── ingrepen ── */
+  .ingrepen{display:flex; flex-direction:column; gap:1px; background:var(--line);
+    border:1px solid var(--line); border-radius:4px; overflow:hidden}
+  .ingreep{background:var(--card); padding:22px 22px 20px;
+    display:grid; grid-template-columns:1fr auto; gap:6px 24px; align-items:start}
+  .ingreep h3{grid-column:1; font-family:"Newsreader",Georgia,serif}
+  .ingreep .winst{
+    grid-column:2; grid-row:1 / span 3; text-align:right; font-weight:600;
+    font-size:22px; letter-spacing:-.02em; color:var(--weg); font-variant-numeric:tabular-nums;
+    white-space:nowrap;
+  }
+  .ingreep .winst em{display:block; font-style:normal; font-size:11px; font-weight:500;
+    color:var(--muted); letter-spacing:0; margin-top:2px}
+  .ingreep .waarom{grid-column:1; font-size:14.5px; color:var(--muted); line-height:1.6; max-width:62ch}
+  .ingreep .hefboom{
+    grid-column:1; margin-top:8px; font-size:11.5px; color:var(--muted);
+    display:flex; flex-wrap:wrap; gap:6px 10px; align-items:baseline;
+  }
+  code{
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:11.5px;
+    background:var(--paper); border:1px solid var(--line); border-radius:3px;
+    padding:2px 6px; color:var(--ink); white-space:nowrap;
+  }
+
+  /* ── lijstjes ── */
+  .lijst{display:flex; flex-direction:column; gap:1px; background:var(--line);
+    border:1px solid var(--line); border-radius:4px; overflow:hidden}
+  .regel{background:var(--card); padding:15px 20px; display:grid;
+    grid-template-columns:auto 1fr auto; gap:4px 16px; align-items:baseline}
+  .regel .t{font-weight:600; font-size:14px}
+  .regel .u{font-size:13.5px; color:var(--muted); line-height:1.55}
+  .regel .m{font-size:12px; color:var(--muted); font-variant-numeric:tabular-nums; white-space:nowrap}
+  .stip{width:7px; height:7px; border-radius:50%; flex:none; align-self:center}
+
+  .slot{margin-top:56px; padding-top:22px; border-top:1px solid var(--line);
+    font-size:13px; color:var(--muted); max-width:70ch; line-height:1.65}
+
+  @media (max-width:640px){
+    .ingreep{grid-template-columns:1fr}
+    .ingreep .winst{grid-column:1; grid-row:auto; text-align:left; margin-top:6px}
+    .regel{grid-template-columns:auto 1fr}
+    .regel .m{grid-column:2; margin-top:2px}
+  }
+</style>
+
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Wellshave · homepage · mobiel 390&nbsp;px</p>
+    <h1 style="margin-top:12px">Van 16,3 naar 12,9 schermen</h1>
+    <p class="lead" style="margin-top:16px">
+      Drie ingrepen, alle drie een instelling in de thema-editor en dus in één klik terug te
+      draaien. Geen enkel blok wordt verwijderd — wat eruit gaat, gaat uit.
+    </p>
+
+    <div class="correctie">
+      <p class="eyebrow">Eerst een correctie op wat ik gisteren zei</p>
+      <p>
+        Ik meldde <b>18,8 schermen</b> en noemde de afsluiter met <b>2.899&nbsp;px</b> het grootste
+        blok van de pagina. Allebei fout. De afsluiter zet zijn CSS in een
+        <code>{% stylesheet %}</code>-tag, en die bundel laadde niet in mijn meting — het blok werd
+        dus ongestyled gemeten. In werkelijkheid is de afsluiter <b>837&nbsp;px</b> en de hele
+        pagina <b>13.769&nbsp;px = 16,3 schermen</b>. Alle andere blokken laden hun CSS uit een los
+        bestand en waren wél goed gemeten. Achaté blijft daarmee <b>2,0×</b> korter in plaats van 2,3×.
+      </p>
+    </div>
+
+    <div class="cijfers">
+      <div class="cijfer cijfer--nu"><span class="w">16,3</span><span class="l">schermen nu<br>13.769&nbsp;px</span></div>
+      <div class="cijfer cijfer--na"><span class="w">12,9</span><span class="l">na de snit<br>10.897&nbsp;px</span></div>
+      <div class="cijfer"><span class="w" style="color:var(--weg)">−2.872</span><span class="l">pixels eraf<br>−21%</span></div>
+      <div class="cijfer cijfer--ref"><span class="w">8,0</span><span class="l">Achaté ter vergelijking<br>6.756&nbsp;px</span></div>
+    </div>
+  </header>
+
+  <section>
+    <div class="kop">
+      <p class="eyebrow">Op schaal getekend · 1 streep = 1 scherm van 844&nbsp;px</p>
+      <h2>Waar de lengte zit</h2>
+    </div>
+
+    <div class="kaart-uit">
+      <div class="kaart">
+        <div></div>
+        <div class="kaart-kop"><span class="t">Nu</span><span class="s">13.769 px · 16,3 schermen</span></div>
+        <div class="kaart-kop"><span class="t">Na de snit</span><span class="s">10.897 px · 12,9 schermen</span></div>
+        <div class="kaart-kop"><span class="t">Achaté</span><span class="s">6.756 px · 8,0 schermen</span></div>
+
+        <!-- liniaal: 844 px per streep, 46 px per scherm op papier -->
+        <div class="liniaal" style="height:750px">
+          <div class="streep vet" style="top:0px">0</div>
+          <div class="streep" style="top:46px">1</div>
+          <div class="streep" style="top:92px">2</div>
+          <div class="streep" style="top:138px">3</div>
+          <div class="streep vet" style="top:184px">4</div>
+          <div class="streep" style="top:230px">5</div>
+          <div class="streep" style="top:276px">6</div>
+          <div class="streep" style="top:322px">7</div>
+          <div class="streep vet" style="top:368px">8</div>
+          <div class="streep" style="top:414px">9</div>
+          <div class="streep" style="top:460px">10</div>
+          <div class="streep" style="top:506px">11</div>
+          <div class="streep vet" style="top:552px">12</div>
+          <div class="streep" style="top:598px">13</div>
+          <div class="streep" style="top:644px">14</div>
+          <div class="streep" style="top:690px">15</div>
+          <div class="streep vet" style="top:736px">16</div>
+        </div>
+
+        <!-- NU -->
+        <div class="stapel">
+          <div class="blok blok--rand blok--dun" style="--h:7px"></div>
+          <div class="blok blok--blijft" style="--h:49px"><span class="n">Hero</span><span class="p">892</span></div>
+          <div class="blok blok--blijft" style="--h:83px"><span class="n">Sets</span><span class="p">1.521</span></div>
+          <div class="blok blok--blijft" style="--h:42px"><span class="n">Bestsellers</span><span class="p">771</span></div>
+          <div class="blok blok--krimpt" style="--h:116px"><span class="n">Belofte</span><span class="p">2.122</span></div>
+          <div class="blok blok--blijft" style="--h:43px"><span class="n">Tijdlijn</span><span class="p">791</span></div>
+          <div class="blok blok--blijft" style="--h:66px"><span class="n">Zonekiezer</span><span class="p">1.218</span></div>
+          <div class="blok blok--weg" style="--h:86px"><span class="n">Koopblok</span><span class="p">1.580</span></div>
+          <div class="blok blok--blijft" style="--h:54px"><span class="n">Familie</span><span class="p">996</span></div>
+          <div class="blok blok--blijft" style="--h:79px"><span class="n">Garantie &amp; FAQ</span><span class="p">1.457</span></div>
+          <div class="blok blok--blijft" style="--h:46px"><span class="n">Afsluiter</span><span class="p">837</span></div>
+          <div class="blok blok--rand" style="--h:79px"><span class="n">Footer</span><span class="p">1.449</span></div>
+        </div>
+
+        <!-- NA -->
+        <div class="stapel">
+          <div class="blok blok--rand blok--dun" style="--h:7px"></div>
+          <div class="blok blok--blijft" style="--h:49px"><span class="n">Hero</span><span class="p">892</span></div>
+          <div class="blok blok--blijft" style="--h:83px"><span class="n">Sets</span><span class="p">1.521</span></div>
+          <div class="blok blok--blijft" style="--h:42px"><span class="n">Bestsellers</span><span class="p">771</span></div>
+          <div class="blok blok--krimpt" style="--h:45px"><span class="n">Belofte</span><span class="p">830</span></div>
+          <div class="blok blok--blijft" style="--h:43px"><span class="n">Tijdlijn</span><span class="p">791</span></div>
+          <div class="blok blok--blijft" style="--h:66px"><span class="n">Zonekiezer</span><span class="p">1.218</span></div>
+          <div class="blok blok--blijft" style="--h:54px"><span class="n">Familie</span><span class="p">996</span></div>
+          <div class="blok blok--blijft" style="--h:79px"><span class="n">Garantie &amp; FAQ</span><span class="p">1.457</span></div>
+          <div class="blok blok--blijft" style="--h:46px"><span class="n">Afsluiter</span><span class="p">837</span></div>
+          <div class="blok blok--rand" style="--h:79px"><span class="n">Footer</span><span class="p">1.449</span></div>
+        </div>
+
+        <!-- ACHATÉ -->
+        <div class="stapel">
+          <div class="blok blok--rand blok--dun" style="--h:3px"></div>
+          <div class="blok blok--ref" style="--h:43px"><span class="n">Hero</span><span class="p">796</span></div>
+          <div class="blok blok--ref blok--kort" style="--h:15px"><span class="n">Collecties</span></div>
+          <div class="blok blok--ref blok--kort" style="--h:31px"><span class="n">Uitgelicht</span><span class="p">566</span></div>
+          <div class="blok blok--ref" style="--h:40px"><span class="n">Voordelen</span><span class="p">740</span></div>
+          <div class="blok blok--ref blok--kort" style="--h:32px"><span class="n">UGC</span><span class="p">589</span></div>
+          <div class="blok blok--ref" style="--h:36px"><span class="n">Reviews</span><span class="p">665</span></div>
+          <div class="blok blok--ref" style="--h:55px"><span class="n">Collectiekaarten</span><span class="p">1.014</span></div>
+          <div class="blok blok--ref" style="--h:60px"><span class="n">FAQ</span><span class="p">1.101</span></div>
+          <div class="blok blok--rand" style="--h:50px"><span class="n">Footer</span><span class="p">909</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="legenda">
+      <span><i class="vlek" style="background:var(--blijft-vlak); border:1px solid var(--blijft)"></i>blijft ongewijzigd</span>
+      <span><i class="vlek" style="background:var(--krimpt-vlak); border:1px solid var(--krimpt)"></i>krimpt</span>
+      <span><i class="vlek" style="background:var(--weg-vlak); border:1px solid var(--weg)"></i>gaat uit</span>
+      <span><i class="vlek" style="border:1px dashed var(--line)"></i>buiten deze snijbeurt</span>
+    </div>
+  </section>
+
+  <section>
+    <div class="kop">
+      <p class="eyebrow">Drie ingrepen</p>
+      <h2>Wat er uit gaat, en waarom</h2>
+    </div>
+
+    <div class="ingrepen">
+
+      <article class="ingreep">
+        <h3>Het koopblok gaat van de homepage af</h3>
+        <p class="winst">−1.580<em>px</em></p>
+        <p class="waarom">
+          Dit is het derde bundelaanbod op één pagina: de sets staan al bovenaan met vijf kaarten,
+          en de belofte draagt er nog een. Het blok zelf is goed — de opengewerkte foto met vijf
+          hotspots legt uit wát er in een set zit. Alleen doet het dat op de verkeerde plek.
+          Het hoort op de bundelpagina die we gebouwd hebben, of op de productpagina van de
+          Shave Package 3.0.
+        </p>
+        <p class="hefboom"><code>ws_koopblok</code> → <code>"disabled": true</code>
+          <span>· de sectie blijft met alle instellingen in het thema staan</span></p>
+      </article>
+
+      <article class="ingreep">
+        <h3>De Essential Flex Bundel uit het beloftenblok</h3>
+        <p class="winst">−906<em>px</em></p>
+        <p class="waarom">
+          Dit is dezelfde bundel die je eerder uit het settenblok liet halen omdat hij twee keer op
+          de homepage stond. Hij staat er nog steeds — hier, onderaan het beloftenblok, als vierde
+          bundelknop. Het blok gaat over risico wegnemen; een aanbod hoort daar niet in.
+          Wat overblijft is de kop, de 100-dagenkaart en de Trustpilot-slider: één argument,
+          één bewijs.
+        </p>
+        <p class="hefboom"><code>ws_belofte</code> → <code>product</code> leegmaken
+          <span>· alle spot-teksten blijven bewaard</span></p>
+      </article>
+
+      <article class="ingreep">
+        <h3>De sfeerfoto uit het beloftenblok</h3>
+        <p class="winst">−354<em>px</em></p>
+        <p class="waarom">
+          Een foto van een neustrimmer in gebruik, direct onder de 100-dagenkaart. Hij voegt geen
+          argument toe dat er niet al staat en kost een derde scherm precies op het moment dat de
+          lezer de belofte net gelezen heeft.
+        </p>
+        <p class="hefboom"><code>ws_belofte</code> → <code>foto</code> leegmaken</p>
+      </article>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="kop">
+      <p class="eyebrow">Overwogen en niet gedaan</p>
+      <h2>Wat blijft staan</h2>
+    </div>
+    <div class="lijst">
+      <div class="regel">
+        <i class="stip" style="background:var(--blijft)"></i>
+        <p class="u"><b class="t">De bewijsrij in de afsluiter.</b> Hier wilde ik snijden, tot bleek dat
+          hij maar 126&nbsp;px kost. Drie regels bewijs op het moment van beslissen is dat waard.</p>
+        <span class="m">−126 px</span>
+      </div>
+      <div class="regel">
+        <i class="stip" style="background:var(--blijft)"></i>
+        <p class="u"><b class="t">Garantie &amp; FAQ (1.457&nbsp;px).</b> Negen vragen die de aankoop
+          blokkeren als ze onbeantwoord blijven. Achaté besteedt er zelf 1.101&nbsp;px aan.</p>
+        <span class="m">blijft</span>
+      </div>
+      <div class="regel">
+        <i class="stip" style="background:var(--blijft)"></i>
+        <p class="u"><b class="t">De tijdlijn (791&nbsp;px).</b> Het enige blok dat uitlegt wáárom het
+          apparaat goed is. Het goedkoopste argument op de pagina.</p>
+        <span class="m">blijft</span>
+      </div>
+      <div class="regel">
+        <i class="stip" style="background:var(--krimpt)"></i>
+        <p class="u"><b class="t">De familie (996&nbsp;px).</b> Eén instelling van uit. Doe je dat ook,
+          dan kom je op <b>11,7 schermen</b>. Ik laat hem staan: echte, zelf gefilmde video's met
+          toestemming zijn duur om te maken en Achaté houdt zijn UGC-blok ook.</p>
+        <span class="m">jouw keuze</span>
+      </div>
+      <div class="regel">
+        <i class="stip" style="background:var(--ref)"></i>
+        <p class="u"><b class="t">De footer (1.449&nbsp;px).</b> Ruim 10% van de pagina, maar hij staat
+          onder élke pagina van de winkel. Een aparte beslissing, niet deze.</p>
+        <span class="m">buiten scope</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="kop">
+      <p class="eyebrow">Eerlijk over wat dit niet oplost</p>
+      <h2>Korter is nog niet minder herhaling</h2>
+    </div>
+    <div class="lijst">
+      <div class="regel">
+        <i class="stip" style="background:var(--weg)"></i>
+        <p class="u"><b class="t">De 100-dagenbelofte staat in 6 van de 10 blokken.</b> Na deze snit
+          in 6 van de 9. De pagina wordt korter, niet minder repetitief — daar is een tweede ronde
+          voor nodig waarin we per blok bepalen wie de belofte mág doen.</p>
+        <span class="m">volgende ronde</span>
+      </div>
+      <div class="regel">
+        <i class="stip" style="background:var(--weg)"></i>
+        <p class="u"><b class="t">De kop van de afsluiter is letterlijk de subregel van de hero.</b>
+          Dat is copy, geen lengte. Eén regel herschrijven lost het op.</p>
+        <span class="m">volgende ronde</span>
+      </div>
+      <div class="regel">
+        <i class="stip" style="background:var(--muted)"></i>
+        <p class="u"><b class="t">De tweede knop in de afsluiter wijst nergens heen.</b>
+          <code>cta2_link</code> is leeg, dus &ldquo;Laat de quiz kiezen&rdquo; valt terug op
+          <code>/pages/quiz</code>. Werkt, maar staat er per ongeluk.</p>
+        <span class="m">losse fix</span>
+      </div>
+    </div>
+  </section>
+
+  <p class="slot">
+    Alle getallen zijn gemeten in Chromium op 390&nbsp;px met de echte pagina van het werkthema
+    <code>claude-design-werk</code>, niet geschat. De &ldquo;na&rdquo;-kolom is gemeten door de drie
+    ingrepen in de browser te simuleren, dus voordat er iets aan het thema veranderd is.
+    Eén voorbehoud: de Trustpilot-slider in het beloftenblok laadt niet in een lokale meting.
+    Op een echte telefoon is dat blok, en dus de hele pagina, ongeveer 240&nbsp;px hoger dan hier staat.
+  </p>
+
+</div>
