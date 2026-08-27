@@ -94,27 +94,39 @@ Volg deel 16. Publiceren is niet af zonder de controle achteraf.
 bepaalt welke secties er zijn en in welke volgorde. Alles in dit bestand geldt voor allebei;
 alleen de opbouw verschilt.
 
-| | Advertorial | Listicle |
-|---|---|---|
-| Ruggengraat | Een doorlopend argument | Losse punten, meestal genummerd |
-| Past bij | Unaware en problem-aware | Solution-aware en product-aware |
-| Kies als | De lezer zijn probleem verkeerd diagnosticeert | De lezer het probleem kent en wil weten waarom jij beter bent |
-| Uitwerking | `references/paginatype-advertorial.md` | `references/paginatype-listicle.md` |
-| Startbestand | `startbestand-advertorial.html` | `startbestand-listicle.html` |
+| | Advertorial | Listicle | Merkverhaal |
+|---|---|---|---|
+| Ruggengraat | Een doorlopend argument | Losse punten, meestal genummerd | Een verhaal over het merk of de oprichter |
+| Past bij | Unaware en problem-aware | Solution-aware en product-aware | Koud publiek dat het merk niet kent |
+| Kies als | De lezer zijn probleem verkeerd diagnosticeert | De lezer het probleem kent en wil weten waarom jij beter bent | Er geen apparaat is dat de pagina draagt |
+| Verkoopt | E&eacute;n product via het mechanisme | E&eacute;n product tegenover het alternatief | Het merk; de bezoeker kiest daarna zelf |
+| Uitwerking | `references/paginatype-advertorial.md` | `references/paginatype-listicle.md` | `references/paginatype-merkverhaal.md` |
+| Startbestand | `startbestand-advertorial.html` | `startbestand-listicle.html` | `startbestand-merkverhaal.html` |
 
-**De toets: kun je de punten omwisselen zonder dat het betoog omvalt?** Kan dat, dan is het een
+**Toets 1: gaat de creative over een apparaat of over het merk?** Gaat hij over de oprichter,
+de herkomst of het merk zelf, en is er geen apparaat dat de pagina draagt, dan is het een
+merkverhaal. Stel die vraag eerst, want de andere twee typen gaan er allebei van uit dat er
+&eacute;&eacute;n product te verkopen valt.
+
+**Toets 2: kun je de punten omwisselen zonder dat het betoog omvalt?** Kan dat, dan is het een
 listicle. Kan dat niet, dan is het een advertorial en moet je hem ook zo bouwen.
 
 De creative geeft meestal de doorslag. Stelt hij een vraag of demonstreert hij een mechanisme,
 dan komt er nieuwsgierig verkeer dat nog gediagnosticeerd moet worden: advertorial. Claimt hij
-een voordeel of toont hij een aanbod, dan weet de lezer al wat hij wil: listicle.
+een voordeel of toont hij een aanbod, dan weet de lezer al wat hij wil: listicle. Vertelt hij
+over de man of het merk erachter, dan is het een merkverhaal.
 
 **Lees daarna het bijbehorende typebestand.** Daar staat de sectievolgorde, wat exclusief bij
 dat type hoort, en hoe je de copy ervoor opzet. Hero, geruststrook, beeldband, aanbodblok,
-bewijs, FAQ en afsluiter zijn in beide gevallen identiek.
+bewijs, FAQ en afsluiter zijn bij advertorial en listicle identiek.
 
-Bouw je een nieuw component voor een van de twee, zet het dan in de gedeelde CSS zodat het
-andere type het ook kan gebruiken.
+**Het merkverhaal is de uitzondering, en dat is bewust.** Het gebruikt een serif in plaats van
+Montserrat en heeft geen aanbodblok, omdat het juist niet als de eigen winkel mag ogen. Deel 4
+geldt daar dus niet; alle andere delen wel. De redenering staat in het typebestand zelf, en je
+past die afwijking alleen in dat type toe.
+
+Bouw je een nieuw component voor een van de typen, zet het dan in de gedeelde CSS zodat de
+andere het ook kunnen gebruiken.
 
 ---
 

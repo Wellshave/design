@@ -41,8 +41,10 @@ those five exists because building without it went wrong.
 **The order of use.** `references/wellshave-merklaag.md` is the shared design system and opens
 with the workflow — follow it from step 1. Its part 2 makes you choose the page type *before*
 any design happens, because the type decides the spine and the spine decides which sections
-exist. The test: can the points be reordered without the argument collapsing? If yes it is a
-listicle, if no it is an advertorial.
+exist. Two tests, in this order. First: is the creative about a device, or about the brand and
+the founder? If there is no single device carrying the page, it is a brand story. Then: can the
+points be reordered without the argument collapsing? If yes it is a listicle, if no it is an
+advertorial.
 
 Then read the matching page-type file, which carries the section order, what is exclusive to
 that type, and how to set up its copy:
@@ -51,6 +53,13 @@ that type, and how to set up its copy:
 |---|---|---|---|
 | Advertorial | Unaware, problem-aware; reader has mis-diagnosed the problem | `references/paginatype-advertorial.md` | `references/startbestand-advertorial.html` |
 | Listicle | Solution-aware, product-aware; reader wants to know why you beat the lookalike | `references/paginatype-listicle.md` | `references/startbestand-listicle.html` |
+| Brand story | Cold traffic that does not know the brand; no single device carries the page | `references/paginatype-merkverhaal.md` | `references/startbestand-merkverhaal.html` |
+
+The brand story is the recorded form of the long-form Ogilvy advertorial: the first two thirds
+sell nothing, the product only appears near the end, and the page closes to the collection
+rather than to one cart. It is the one type that deliberately breaks part 4 of the brand layer
+by setting a serif instead of Montserrat, because it must not look like the shop's own pages.
+That exception is argued in its own type file and applies nowhere else.
 
 Both skeletons carry the identical token block and component CSS, with placeholder content in
 square brackets. **Start from the matching skeleton, never from a blank page.** Replace what is
