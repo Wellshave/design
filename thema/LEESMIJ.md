@@ -1186,3 +1186,95 @@ de meta description. Nul afwijkingen.
 - De homepage-FAQ zegt nog "binnen Nederland altijd gratis" en "€2,95 voor België",
   allebei onjuist volgens het leveringsprofiel hierboven, en noemt Oostenrijk, dat
   niet in de zone zit.
+
+## Ronde: de drie openstaande punten (27-08)
+
+### 1. Collectie-omschrijvingen
+
+Eerst iets rechtgezet dat ik in de vorige ronde te stellig had gemeld: die
+`wellshave.nl`-links **stonden nergens op de site**. De `descriptionHtml` van een
+collectie wordt door dit thema op geen enkele collectiepagina gerenderd — nagekeken
+op `bestsellers`, `winter-sale`, `bundels` en `ladyshave`, en de body-tekst komt in
+geen van die pagina's in de HTML voor. Het was dus admin-data, geen live
+SEO-probleem. Wat wél live stond zijn de meta descriptions, en daar zaten de echte
+fouten in.
+
+Opgeruimd, omdat foute verzendteksten vroeg of laat ergens worden overgenomen:
+
+- **Zeven collecties** (bodygroomers, baardtrimmers, tondeuses, neustrimmers,
+  safety razors, scheerapparaten, bundels) hebben een nieuwe omschrijving gekregen,
+  gebaseerd op de `custom.specification`-metafields van de producten die erin liggen.
+- De verzendalinea klopte in geen enkele: "gratis binnen Nederland zonder minimum",
+  "€2,95 voor België", "€12,95 voor de rest van de EU" en "voor 20:00 besteld" —
+  allemaal onjuist. Overal vervangen door het echte tarief.
+- Alle links wijzen nu naar **wellshave.com**.
+- Uit `baardtrimmers` is de copy-paste-fout weg ("H3: Levering van onze Wellshave
+  bodygroomers" middenin een alinea over baardtrimmers).
+- Uit `bundels` is *"dankzij de slimme SafetyTech is het bijna onmogelijk om jezelf
+  open te halen"* geschrapt — dat is precies de belofte die we niet doen. Het stuk
+  over de 2.0 en de 3.0 klopte ook niet meer; er liggen nu drie lijnen in.
+- Uit `ladyshave` is *"zonder snijwonden of wondjes"* weg, om dezelfde reden.
+- `summer-sale-deals` stond helemaal vol geplakte chatvenster-HTML; de tekst is
+  behouden, de rommel eromheen weg.
+- `winter-sale` en `bestsellers` zeiden nog "gratis verzending vanaf €50".
+
+### Meta descriptions (dit stond wél live)
+
+| Collectie | Was | Is |
+| --- | --- | --- |
+| bestsellers | Gratis verzending vanaf €50 | vanaf €30 |
+| winter-sale | Winter Sale, bespaar tot 25%, vanaf €50 | Voorjaar Sale, tot 40%, vanaf €30 |
+| ladyshave | Gratis verzending in Nederland! | Gratis verzending vanaf €30 |
+
+De 25% tegenover de 40% in de paginatitel heb ik niet gegokt maar gemeten: over de
+23 producten in die collectie is de hoogste korting **44%** (Men Shaper Supreme) en
+staan er drie boven de 40. "Tot 40%" klopt dus; de 25% was het buitenbeentje. In
+`summer-sale-deals` is de hoogste 42% (Gentleman Shaver).
+
+### 2. Producten met geplakte HTML
+
+Het waren er drie, niet één:
+
+- **The Dial Master** — een compleet ChatGPT-gespreksvenster om één alinea heen.
+- **Head Shaver™ 7D Scheerkop** — hetzelfde, inclusief een `<form>`-element.
+- **Men Shaper Gold™ 5-in-1** — een bol.com-productblok (`js_slot-description`,
+  `data-bltgg`) om twee alinea's heen.
+
+De tekst zelf is in alle drie ongemoeid gelaten; alleen de omhullende rommel is weg.
+Bij de Men Shaper Gold én Iced stond bovendien `&amp;amp;`, waardoor er letterlijk
+"baard &amp; neus" op de pagina kwam te staan. Ook gecorrigeerd.
+
+### 3. Homepage-FAQ
+
+Zit in `templates/index.json`, sectie `ws_garantie`. Vier plekken:
+
+| Blok | Was | Is |
+| --- | --- | --- |
+| `q2` | "voor 23:59 … Duitsland en **Oostenrijk** één tot twee werkdagen" | ma t/m vr vóór 23:59; weekend gaat maandag op de post; Oostenrijk eruit |
+| `q3` | "Boven €49,95 gratis, daaronder €2,95. Binnen Nederland altijd gratis." | "vanaf €30 gratis, daaronder €4,95 — België zit in dezelfde zone" |
+| `g3` | "In heel Nederland / Naar België gratis vanaf €49,95" | "Vanaf €30 / Daaronder €4,95. Ook naar België." |
+| `g4` | "Besteld voor 23:59" | "Ma t/m vr besteld voor 23:59" |
+
+Oostenrijk stond in het antwoord maar zit **niet** in de verzendzone — we bezorgen
+er niet. De genoemde transittijden per land staan nergens in het leveringsprofiel,
+dus die zijn eruit; er staat nu dat het langer duurt en per land verschilt.
+`g3` en `g4` staan op `disabled` en renderen dus niet, maar de tekst klopt nu wel
+als iemand ze aanzet.
+
+**Let op:** deze wijziging staat in het werkthema. De homepage die bezoekers nu zien
+komt uit het gepubliceerde thema, dus de FAQ verandert pas als
+`wellshave/claude-design-werk` live gaat. De wijzigingen aan de collecties en
+producten hierboven zijn winkeldata en zijn **direct live**.
+
+### Nog open
+
+- Kleinere plakresten in productomschrijvingen: `<meta charset="utf-8">` middenin
+  alinea's, `<!---->`, `data-mce-fragment`, `data-start`/`data-end` en een lege
+  `<h1>` bij het Flex Guard-vervangmes. Onzichtbaar voor de bezoeker, maar rommel.
+- Absolute beloftes in productteksten die we op de collectiepagina's juist vermijden:
+  "leggen je huid **nooit** bloot" (Groom Guard PRO), "**voorkomt** irritatie &
+  sneetjes" (Flex Guard), "**zonder** sneetjes, roodheid of gedoe" (Flex Guard Blade).
+- De hero en de afsluiter op de homepage zeggen nog "Besteld voor 23:59" zonder
+  "ma t/m vr". Niet onjuist, wel losser dan de rest.
+- Het antwoord "gemiddeld gaat een kop zes tot twaalf maanden mee" in de
+  homepage-FAQ is een getal dat ik nergens kan nakijken.
