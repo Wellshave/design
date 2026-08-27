@@ -397,6 +397,40 @@ Shopify het bestand **zonder foutmelding**: `themeFilesUpsert` geeft een lege
 is het enige wat het aan het licht brengt. Nu heet hij
 `Wellshave PDP — Praktijk` (24). Dezelfde grens geldt voor de presetnaam.
 
+## De reviewkaart in het koopvak
+
+Rechtsboven staat nu **Alle reviews &rarr;** naar het Trustpilot-profiel; het
+vinkje &laquo;Geverifieerde koper&raquo; is naar de voetregel verhuisd, naast de naam.
+Die plek rechtsboven is meer waard als uitgang dan als keurmerk, en het
+vinkje hoort inhoudelijk bij de persoon.
+
+Twee instellingen: `rev_alle_label` en `rev_alle_url`. Het profiel is
+**`https://nl.trustpilot.com/review/wellshave.nl`** &mdash; op `.nl`, niet op
+`.com`. Dat staat zo in `links.profileUrl` van de widget zelf.
+
+### Een `url`-instelling mag geen `default`
+
+De sectie werd stil geweigerd zolang er
+`{ "type": "url", ..., "default": "https://..." }` in het schema stond:
+`themeFilesUpsert` gaf een lege `userErrors` en de checksum bleef op de oude
+staan. Shopify staat geen standaardwaarde toe op `url`. De waarde staat nu in
+beide sjablonen in plaats van in het schema.
+
+### Het citaat was geen fout maar een knipsel
+
+In `custom.buybox_quote` van de Groom Guard&trade; PRO stond
+&laquo;Erg fijne trimmer die z'n werk goed doet **(&hellip;)** zeker een
+aanrader&hellip;&raquo;. Dat leest als een weggelaten bezwaar. De echte review van
+Yven (8 juli 2026, vijf sterren) is heel: er was een tussenzin uitgeknipt.
+Nu staat het citaat woordelijk, alleen de spaties binnen de haakjes zijn
+rechtgezet.
+
+**Er is geen tweede review over de Groom Guard.** De widget geeft maximaal
+ongeveer 108 van de 975 reviews terug &mdash; alle sjablonen en pagina's samen
+leveren dezelfde poel op. Daarin gaan er precies twee over het lichaam, en
+Yven is de enige die echt over dit apparaat gaat. Productreviews per artikel
+zitten in Loox, en die zijn niet via een open eindpunt op te halen.
+
 ## De upgrade-pop-up bij het toevoegen aan de winkelwagen
 
 Klikt iemand op **In winkelwagen** en heeft het product

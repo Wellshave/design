@@ -173,6 +173,12 @@
 
         {%- if citaat != blank -%}
           <div class="ws-rev">
+            {%- comment -%}
+              Rechtsboven de weg naar alle reviews, onderin de naam met het
+              vinkje ernaast. Eerst stond het vinkje rechtsboven; die plek is
+              meer waard als uitgang dan als keurmerk, en het vinkje hoort
+              toch bij de persoon.
+            {%- endcomment -%}
             <div class="ws-kop">
               <span class="ws-lk">
                 <span class="ws-st">
@@ -180,10 +186,21 @@
                 </span>
                 <b>{{ s.tp_bron }}</b>
               </span>
-              <span class="ws-ok"><svg><use href="#ws-pdp-ok-{{ section.id }}"/></svg>{{ s.koper_label }}</span>
+              {%- if s.rev_alle_label != blank and s.rev_alle_url != blank -%}
+                <a class="ws-alle" href="{{ s.rev_alle_url }}" target="_blank" rel="noopener nofollow">
+                  {{ s.rev_alle_label }} <span aria-hidden="true">&rarr;</span>
+                </a>
+              {%- endif -%}
             </div>
             <q>{{ citaat }}</q>
-            {%- if citaat_wie != blank -%}<span class="ws-wie"><b>{{ citaat_wie }}</b></span>{%- endif -%}
+            {%- if citaat_wie != blank or s.koper_label != blank -%}
+              <div class="ws-voet">
+                {%- if citaat_wie != blank -%}<span class="ws-wie"><b>{{ citaat_wie }}</b></span>{%- endif -%}
+                {%- if s.koper_label != blank -%}
+                  <span class="ws-ok"><svg><use href="#ws-pdp-ok-{{ section.id }}"/></svg>{{ s.koper_label }}</span>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
           </div>
         {%- endif -%}
 
@@ -1076,6 +1093,8 @@
     { "type": "text", "id": "tp_cijfer", "label": "Cijfer", "info": "De winkelbrede Trustpilot-score. Op 26-08-2026: 4,4 bij 975 reviews.", "default": "4,4" },
     { "type": "text", "id": "tp_score", "label": "Aantal reviews", "info": "Wint van custom.compare_info.reviews_label. Rond af naar beneden op een tiental, dan klopt het langer.", "default": "970+ reviews" },
     { "type": "text", "id": "tp_bron", "label": "Bron bij het citaat", "default": "Trustpilot" },
+    { "type": "text", "id": "rev_alle_label", "label": "Link naar alle reviews", "info": "Leeg = geen link.", "default": "Alle reviews" },
+    { "type": "url", "id": "rev_alle_url", "label": "Waar die link heen gaat", "info": "Het Trustpilot-profiel is https://nl.trustpilot.com/review/wellshave.nl" },
     { "type": "text", "id": "koper_label", "label": "Label geverifieerde koper", "default": "Geverifieerde koper" },
     { "type": "text", "id": "proberen_label", "label": "Tweede regel onder de knop", "info": "Staat naast Veilig afrekenen. Leeg laten laat hem weg.", "default": "100 dagen proberen" },
     { "type": "header", "content": "Klantcitaat" },
