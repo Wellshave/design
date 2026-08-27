@@ -966,12 +966,48 @@ Gemeten: alle 54 combinaties komen op de verwachte set uit, de stapper telt
 4 van 4, alle veertien kaarten renderen met hun eigen aantal onderdelen, en de
 drie uitverkochte sets tonen de grijze variant.
 
+## Let op: welk thema is nu wat
+
+Sinds 26 augustus is **`wellshave/claude-design` (204178161996) gepubliceerd** en
+dus de live winkel; `wellshave-redesign/live` staat op unpublished. Schrijven
+naar een live thema wordt geweigerd, en dat hoort ook zo.
+
+Het werk gaat daarom in **`wellshave/claude-design-werk` (204412977484)**, een
+duplicaat van live. Daar staat de tooling nu op ingesteld: `tool/zet.py` upsert
+naar dat id en `bouw.py` haalt de pagina op met `?preview_theme_id=204412977484`.
+Publiceren doet de winkel zelf.
+
+## De kaart klikt nu op drie plekken
+
+De productkaart in het raster had alleen de knop als link. De packshot en de
+naam linken nu ook naar dezelfde productpagina.
+
+De foto zit in een eigen `<a class="wsk-fotolink">` met `tabindex="-1"` en
+`aria-hidden="true"`, en de `<img>` daarin heeft een lege `alt`. Zonder dat
+krijgen toetsenbord en schermlezer twee identieke stops achter elkaar; de naam
+draagt de linktekst. Het vergelijkvinkje en de snelbekijk-knop staan op
+z-index 3 en liggen dus boven de fotolink — die blijven gewoon werken.
+
+**Eén valkuil in de css:** de regel stond als `.wsk-shot > img.wsk-pack`. Door de
+link is de `<img>` geen direct kind meer, dus met die directe-kindselector viel
+de hele beeldopmaak weg, inclusief de hover-schaal. Nu `.wsk-shot img.wsk-pack`.
+
+Gemeten op de bundelpagina en een zonepagina, op 1280 en 390 px: 21 statische
+controles (drie links naar dezelfde pagina, lege alt, buiten de tabvolgorde,
+link dekt het beeldvlak, knoppen liggen erboven) en 10 klikcontroles — klik op
+de foto en op de titel gaan naar het product, het vergelijkvinkje wisselt zonder
+te navigeren, en de snelbekijk-knop navigeert niet.
+
+Bij die klikproef gaf mijn eigen test eerst vals alarm: `p.mouse.click` scrolt
+niet mee, dus de klik landde buiten de viewport en er gebeurde niets.
+`scrollIntoViewIfNeeded` ervoor lost dat op — de pagina was in orde.
+
 ## Bekijken zonder te publiceren
 
 Open eerst deze link, daarna werkt elke collectiepagina in dezelfde browser:
 
 ```
-https://wellshave.com/?preview_theme_id=204178161996
+https://wellshave.com/?preview_theme_id=204412977484
 ```
 
 ## Wat géén werk bleek te zijn
