@@ -1,7 +1,7 @@
 /* Wellshave — productpagina, blok 01: het koopvak boven de vouw.
-   Bron: rapporten/blokken/01-above-the-fold-v2-donker.html (.v6), lichte variant
+   Bron: rapporten/blokken/01-above-the-fold-v2-donker.html (.v6), neutrale variant
    Elke klasse begint met ws- zodat thema-CSS er niet doorheen lekt. */
-.ws-pdp{--ws-cream:#EFE7D8;--ws-cream2:#FBF8F3;--ws-zwart:#FBF8F1;--ws-kaart:#F3EADA;
+.ws-pdp{--ws-cream:#F4F2EE;--ws-cream2:#FFFFFF;--ws-zwart:#FFFFFF;--ws-kaart:#F6F4F0;
   --ws-gold1:#F7E2B4;--ws-gold2:#EFCE93;--ws-gold3:#E9BE72;--ws-gold4:#DDA548;
   --ws-tekstgoud:#8A5A1E;--ws-groen:#00A06C;--ws-blauw:#2E7CF6;--ws-rood:#C8281F;
   --ws-lijn:rgba(20,18,15,.11);--ws-lijn2:rgba(20,18,15,.2);
@@ -26,7 +26,7 @@
 .ws-pdp .ws-stg{position:relative;display:flex;flex-direction:column;background:var(--ws-cream2);
   border:1px solid rgba(17,17,17,.07);border-radius:20px;padding:22px 22px 18px;overflow:hidden;min-width:0}
 .ws-pdp .ws-stg .ws-glans{position:absolute;left:50%;top:44%;width:78%;height:52%;transform:translate(-50%,-50%);
-  background:radial-gradient(ellipse at center,rgba(221,165,72,.16),rgba(221,165,72,0) 70%);pointer-events:none}
+  background:radial-gradient(ellipse at center,rgba(20,18,15,.045),rgba(20,18,15,0) 70%);pointer-events:none}
 /* het merkteken: de afbeelding uit de sectie-instelling "merk", stil op de achtergrond */
 .ws-pdp .ws-stg .ws-ghost{position:absolute;right:1%;top:50%;transform:translateY(-50%);z-index:1;
   width:58%;height:auto;aspect-ratio:1/1;object-fit:contain;pointer-events:none;user-select:none;
@@ -93,10 +93,10 @@
   text-align:center;line-height:1.2;overflow-wrap:anywhere}
 
 /* ---- koopvak ---- */
-.ws-pdp .ws-bb{background:var(--ws-zwart);border:1px solid rgba(176,116,42,.22);
+.ws-pdp .ws-bb{background:var(--ws-zwart);border:1px solid rgba(20,18,15,.10);
   box-shadow:0 1px 2px rgba(20,18,15,.04),0 18px 40px -28px rgba(20,18,15,.28);border-radius:20px;padding:26px 26px 22px;position:relative;overflow:hidden;min-width:0}
 .ws-pdp .ws-bb .ws-strepen{position:absolute;right:-10%;top:-6%;width:66%;height:78%;pointer-events:none;
-  opacity:.22;color:#C79A4F}
+  opacity:.16;color:#B9B3A8}
 .ws-pdp .ws-bb > *:not(.ws-strepen){position:relative;z-index:1}
 /* De pil is een merkteken, geen kop: hij hoort op te vallen zonder de
    productnaam eronder te verdringen. Vandaar ongeveer de helft van de
@@ -119,8 +119,8 @@
 .ws-pdp .ws-tp .ws-lb{font-size:12.5px;font-weight:700;color:var(--ws-ink)}
 .ws-pdp .ws-tp .ws-sc{font-size:12.5px;color:var(--ws-w52);font-weight:600}
 
-.ws-pdp .ws-h1{font-size:33px;font-weight:800;letter-spacing:-.03em;color:var(--ws-ink);margin-top:11px;line-height:1.05}
-.ws-pdp .ws-sub{font-size:23px;font-weight:800;letter-spacing:-.025em;line-height:1.16;margin-top:9px;color:var(--ws-tekstgoud)}
+.ws-pdp .ws-h1{font-size:33px;font-weight:600;letter-spacing:-.025em;color:var(--ws-ink);margin-top:11px;line-height:1.06}
+.ws-pdp .ws-sub{font-size:23px;font-weight:600;letter-spacing:-.02em;line-height:1.22;margin-top:9px;color:var(--ws-ink)}
 
 .ws-pdp .ws-rev{margin-top:15px;border:1px solid var(--ws-lijn);border-radius:13px;background:rgba(20,18,15,.035);padding:14px 16px}
 .ws-pdp .ws-rev .ws-kop{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
@@ -146,21 +146,21 @@
 .ws-pdp .ws-prijs{display:flex;align-items:baseline;gap:13px;flex-wrap:wrap;margin-top:16px}
 /* -.035em drukte de komma tegen de cijfers aan. Op 38px scheelt elke stap
    ruim een pixel per tekenpaar, dus dit is een zichtbaar verschil. */
-.ws-pdp .ws-prijs .ws-nu{font-size:38px;font-weight:900;letter-spacing:-.012em;color:var(--ws-ink);line-height:1}
-.ws-pdp .ws-prijs .ws-nu .ws-munt{margin-right:.09em;font-weight:800}
+.ws-pdp .ws-prijs .ws-nu{font-size:38px;font-weight:500;letter-spacing:-.01em;color:var(--ws-ink);line-height:1}
+.ws-pdp .ws-prijs .ws-nu .ws-munt{margin-right:.09em;font-weight:500}
 .ws-pdp .ws-was .ws-munt,.ws-pdp .ws-besp .ws-munt{margin-right:.18em}
-.ws-pdp .ws-prijs .ws-was{font-size:17px;color:var(--ws-w38);text-decoration:line-through;font-weight:600}
+.ws-pdp .ws-prijs .ws-was{font-size:17px;color:var(--ws-w38);text-decoration:line-through;font-weight:500}
 .ws-pdp .ws-prijs .ws-off{background:var(--ws-rood);color:#fff;font-size:12px;font-weight:800;padding:5px 10px;border-radius:7px}
 .ws-pdp .ws-besp{display:inline-flex;align-items:center;gap:8px;margin-top:11px;padding:7px 14px;
-  border:1px solid rgba(233,190,114,.5);border-radius:9px;background:rgba(233,190,114,.07)}
+  border:1px solid rgba(233,190,114,.5);border-radius:9px;background:transparent}
 .ws-pdp .ws-besp svg{width:14px;height:14px;color:var(--ws-tekstgoud)}
 .ws-pdp .ws-besp span{font-size:12.5px;font-weight:700;color:var(--ws-tekstgoud)}
 .ws-pdp .ws-gift p,.ws-pdp .ws-vrd,.ws-pdp .ws-tel{color:var(--ws-w72)}
 
 .ws-pdp .ws-usp{list-style:none;margin:17px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
 .ws-pdp .ws-usp li{display:grid;grid-template-columns:21px minmax(0,1fr);gap:12px;align-items:start}
-.ws-pdp .ws-usp .ws-vk{width:21px;height:21px;border-radius:50%;border:1.4px solid rgba(176,116,42,.42);
-  color:#A76F28;background:rgba(233,190,114,.14);
+.ws-pdp .ws-usp .ws-vk{width:21px;height:21px;border-radius:50%;border:1.4px solid rgba(20,18,15,.16);
+  color:#A76F28;background:transparent;
   display:flex;align-items:center;justify-content:center;margin-top:1px}
 .ws-pdp .ws-usp .ws-vk svg{width:10px;height:10px}
 .ws-pdp .ws-usp b{display:block;font-size:14px;font-weight:700;color:var(--ws-ink);line-height:1.3}
@@ -171,17 +171,19 @@
    voorwaarde, aanbod, knop -- en hebben elk lucht nodig, anders lezen ze als
    een blok. */
 .ws-pdp .ws-vrd{display:flex;align-items:flex-start;gap:10px;margin-top:18px;font-size:12px;
-  line-height:1.45;color:var(--ws-w52);border:1px solid rgba(176,116,42,.20);border-radius:10px;
-  background:rgba(221,165,72,.09);padding:10px 14px}
+  line-height:1.45;color:var(--ws-w52);border:1px solid rgba(20,18,15,.10);border-radius:10px;
+  background:transparent;padding:10px 14px}
 .ws-pdp .ws-vrd span{min-width:0}
 .ws-pdp .ws-vrd i{width:8px;height:8px;border-radius:50%;background:#0E9F6E;flex:none;margin-top:5px;
   box-shadow:0 0 0 3px rgba(14,159,110,.16)}
 .ws-pdp .ws-vrd b{color:var(--ws-ink);font-weight:700}
 
 /* het cadeau — blijft, dit is het extra aanbod per product */
-.ws-pdp .ws-gift{display:flex;align-items:center;gap:12px;margin-top:14px;padding:11px 16px 11px 12px;
-  border:1px solid rgba(233,190,114,.5);border-radius:13px;background:rgba(233,190,114,.07)}
-.ws-pdp .ws-gift .ws-ic{width:29px;height:29px;flex:none;border-radius:50%;background:rgba(233,190,114,.14);
+.ws-pdp .ws-gift{display:flex;align-items:center;gap:12px;margin-top:14px;padding:13px 16px 13px 12px;
+  border:1px solid rgba(221,165,72,.55);border-radius:13px;
+  background:linear-gradient(180deg,rgba(233,190,114,.20),rgba(233,190,114,.10));
+  box-shadow:0 1px 0 rgba(176,116,42,.10)}
+.ws-pdp .ws-gift .ws-ic{width:32px;height:32px;flex:none;border-radius:50%;background:transparent;
   display:flex;align-items:center;justify-content:center;color:var(--ws-tekstgoud)}
 .ws-pdp .ws-gift .ws-ic svg{width:15px;height:15px}
 .ws-pdp .ws-gift b{display:block;font-size:13px;font-weight:800;color:var(--ws-tekstgoud);line-height:1.3}
@@ -199,20 +201,20 @@
    zodat hij als knop leest -- maar in brons, niet in goud, want hij mag het
    niet opnemen tegen "in winkelwagen". */
 .ws-pdp .ws-cta2{display:flex;align-items:center;justify-content:center;gap:11px;width:100%;margin-top:11px;
-  border:1.5px solid rgba(176,116,42,.62);border-radius:11px;padding:17px 16px;color:var(--ws-tekstgoud);
-  background:rgba(221,165,72,.22);box-shadow:0 2px 0 rgba(176,116,42,.24);
+  border:1.5px solid #14120F;border-radius:11px;padding:16px;color:#fff;
+  background:#14120F;box-shadow:0 2px 0 rgba(20,18,15,.18);
   font-family:inherit;cursor:pointer;
   font-size:12.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
   transition:background-color .16s ease,border-color .16s ease}
 .ws-pdp .ws-cta2::after{content:'\2192';font-size:15px;line-height:1;margin-left:-4px;
   transition:transform .16s ease}
-.ws-pdp .ws-cta2:hover{background:rgba(221,165,72,.34);border-color:rgba(176,116,42,.85)}
+.ws-pdp .ws-cta2:hover{background:#2A2622;border-color:#2A2622}
 .ws-pdp .ws-cta2:active{transform:translateY(2px);box-shadow:none}
 .ws-pdp .ws-cta2:hover::after{transform:translateX(3px)}
 .ws-pdp .ws-cta2:focus-visible{outline:2px solid var(--ws-tekstgoud);outline-offset:2px}
 @media (prefers-reduced-motion:reduce){.ws-pdp .ws-cta2,.ws-pdp .ws-cta2::after{transition:none}
   .ws-pdp .ws-cta2:active{transform:none}}
-.ws-pdp .ws-cta2 svg{width:17px;height:17px;flex:none;color:var(--ws-tekstgoud)}
+.ws-pdp .ws-cta2 svg{width:17px;height:17px;flex:none;color:currentColor}
 .ws-pdp .ws-cta2 svg .vgl-a{opacity:.55}
 
 /* betaalmethoden onder de knop */
@@ -376,7 +378,7 @@
 .ws-pdp .ws-optie label span{display:block;border:1px solid var(--ws-lijn2);border-radius:9px;
   padding:9px 14px;font-size:12.5px;font-weight:700;color:var(--ws-ink)}
 .ws-pdp .ws-optie input:checked + span{border-color:var(--ws-tekstgoud);color:var(--ws-tekstgoud);
-  background:rgba(233,190,114,.1)}
+  background:rgba(20,18,15,.05)}
 .ws-pdp .ws-optie input:disabled + span{opacity:.4;text-decoration:line-through}
 .ws-pdp .visually-hidden{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);
   clip-path:inset(50%);white-space:nowrap}

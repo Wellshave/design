@@ -779,6 +779,75 @@ besteld, morgen in huis» zonder «ma t/m vr». Die komt uit een metafield op he
 product, op 41 producten, dus dat is een aparte veegbeurt. De klok klopt; de
 dagen niet.
 
+## Van zand naar neutraal: kleur mag weer iets betekenen
+
+De grond was de merkkleur. Daardoor betekende de merkkleur niets meer: er
+stonden **elf goudwasjes in het koopvak alleen** — de gloed op het podium, de
+bespaarchip, de vinkrondjes, de voorraadregel, de cadeaukaart, de
+vergelijkknop, de aangevinkte variantknop — plus de zandgrond eronder. Als
+alles een beetje goud is, betekent de gouden koopknop niets.
+
+De grond is nu bijna kleurloos en de panelen zijn wit:
+
+| rol | zand | neutraal |
+|---|---|---|
+| paginagrond | `#EFE7D8` | `#F4F2EE` |
+| podium | `#FBF8F3` | `#FFFFFF` |
+| koopvak | `#FBF8F1` | `#FFFFFF` |
+| kaarten erin | `#F3EADA` | `#F6F4F0` |
+| kaarten blok 05 | `#FBF8F1` / `#F0E8D8` | `#FFFFFF` / `#F8F6F2` |
+
+### Drie dingen mogen schreeuwen, elk met een ander middel
+
+Dit is de kern. Drie accenten die alle drie goud zijn vechten om dezelfde
+aandacht; drie accenten met een ander mechanisme vormen een volgorde.
+
+* **De aanbodkaart** is een warm gouden *vlak*
+  (`linear-gradient(180deg, rgba(233,190,114,.20), .10)` met een gouden rand).
+  Een veld leest anders dan een knop, dus het valt op zonder dat je erop wilt
+  drukken.
+* **De koopknop** houdt het goudverloop en is de enige verzadigde *knop*.
+* **«Vergelijk de modellen»** is inkt geworden (`#14120F`, wit erop). Even
+  hard, maar kleurloos — dus goud blijft van het kopen en het aanbod alleen.
+
+Brons overleeft alleen nog als détailkleur: de plus in de accordeon, de
+vinkrondjes, de bespaarchip, de iconen in blok 02.
+
+### De ondertitel is inkt geworden
+
+`.ws-sub` stond in brons. Op een neutrale grond is dat een derde accent dat
+niets doet; de regel is nu gewoon inkt.
+
+## Lichtere letters: 600 voor de koppen, 500 voor de prijs
+
+`.ws-h1` en `.ws-sub` gingen van **800 naar 600**, `.ws-prijs .ws-nu` van
+**900 naar 500**, en `.ws-was` van 600 naar 500 (anders was de van-prijs even
+zwaar geworden als de prijs). De koppen van blok 05 volgden naar 600.
+
+Het omslagpunt zit tussen 600 en 500, niet tussen 800 en 600: op een klein
+plaatje lijken 800 en 600 sterk op elkaar. Onder de 500 wordt een productnaam
+een bijschrift.
+
+Ik had 600 voor de prijs geadviseerd — cijfers hebben iets meer stam nodig dan
+letters om op afstand af te lezen — maar de keuze is 500 geworden. Op 38px
+draagt het formaat het bedrag ruim, en het leest nu als een rustig feit in
+plaats van als een uitroep.
+
+**Nagemeten op de langste productnamen** bij het nieuwe gewicht, breed en op
+390 px: nergens loopt de kop over zijn vak heen. Alleen «The Gentlemen
+Shaver™ Scheerkop» breekt op een breed scherm over twee regels; op de telefoon
+doen de meeste namen dat, en dat deden ze in 800 ook.
+
+### Let op bij het naspelen: een proefbestand mist de sectie-stylesheets
+
+De `{% stylesheet %}`-blokken uit een sectie komen niet in
+`assets/<naam>.css` terecht maar in `cdn/shop/t/79/compiled_assets/styles.css`.
+Haalt je proefscript alleen de `ws-pdp-*`-bladen op, dan mist onder andere de
+normalisatie `.ws-pdp .ws-gift b *{display:inline;font-size:inherit}` — en dan
+rendert de kop van de aanbodkaart als een gewone `h2`, drie keer te groot.
+Dat lijkt op een kapot blok terwijl er niets mis is. `compiled_assets` hoort
+in de lijst.
+
 ## Wat er aan de winkel zelf is veranderd
 
 Dit staat los van het thema: het is productdata en geldt dus voor elk thema,
