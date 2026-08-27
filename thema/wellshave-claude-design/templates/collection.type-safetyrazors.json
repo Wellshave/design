@@ -158,7 +158,7 @@
           "settings": {
             "icoon": "truck",
             "kop": "Gratis verzending vanaf €30",
-            "tekst": "Naar België gratis vanaf €49,95."
+            "tekst": "Daaronder €4,95. Ook naar België."
           }
         },
         "zeker_4": {
@@ -166,7 +166,7 @@
           "settings": {
             "icoon": "klok",
             "kop": "Morgen in huis",
-            "tekst": "Besteld voor 23:59."
+            "tekst": "Ma t/m vr besteld voor 23:59."
           }
         },
         "zone_1": {
@@ -204,6 +204,34 @@
             "slot": "8 apparaten →",
             "url": "https://wellshave.com/collections/neustrimmers"
           }
+        },
+        "vraag_1": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Waarom een safety razor en geen systeemmesje?",
+            "antwoord": "<p>Een safety razor snijdt met <b>één dubbelzijdig mesje</b> in plaats van met een rij mesjes achter elkaar. Bij een cassette tilt het eerste mesje het haar op en snijden de volgende het onder de huid door; dat is waar ingegroeide haren en irritatie vandaan komen. Eén mesje dat er in één keer overheen gaat <b>helpt die kans te verkleinen</b>.</p>"
+          }
+        },
+        "vraag_2": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Passen er standaard mesjes in?",
+            "antwoord": "<p>Ja. Hij is geschikt voor <b>gewone double edge-scheermesjes</b>, van welk merk dan ook — je zit niet vast aan één cassette. Bij de <b>Blade Guard</b> zitten twintig Japanse double edge-mesjes in de doos, en navullingen liggen los in deze categorie.</p>"
+          }
+        },
+        "vraag_3": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Hoe scheer ik ermee zonder mezelf te snijden?",
+            "antwoord": "<p>Door niet te duwen. Het <b>gewicht van de metalen greep</b> doet het werk; jij stuurt alleen. Houd het mes in een flauwe hoek tegen je huid — ongeveer dertig graden — en werk in <b>korte halen met de haarrichting mee</b>, op een natte, ingezeepte huid. De gesloten kam laat maar een klein stukje mes vrij, wat de kans op sneetjes verkleint. Ga de eerste keren rustig; tegen de haarrichting in kun je later een keer proberen.</p>"
+          }
+        },
+        "vraag_4": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Hoe vaak moet ik het mesje wisselen?",
+            "antwoord": "<p>Een mesje is een <b>verbruiksdeel</b>, geen onderdeel dat meegaat met de houder. Merk je dat het trekt, of moet je twee keer over dezelfde plek, dan is het op. Hoe snel dat gaat verschilt per baard, dus ga op het gevoel af en niet op een aantal beurten. <b>Navullingen liggen in deze categorie</b>; de houder zelf is van roestvrij staal en gaat gewoon door.</p>"
+          }
         }
       },
       "block_order": [
@@ -211,16 +239,20 @@
         "zeker_2",
         "zeker_3",
         "zeker_4",
+        "vraag_1",
+        "vraag_2",
+        "vraag_3",
+        "vraag_4",
         "zone_1",
         "zone_2",
         "zone_3",
         "zone_4"
       ],
       "settings": {
-        "eyebrow": "",
-        "h2_1": "",
-        "h2_2": "",
-        "mail_regel": "",
+        "eyebrow": "Vragen over safety razors",
+        "h2_1": "Alles wat je",
+        "h2_2": "wilt weten.",
+        "mail_regel": "<p>Staat je vraag er niet bij? Mail <b>contact@wellshave.com</b> — je krijgt antwoord van iemand uit het team, binnen één werkdag.</p>",
         "zones_eyebrow": "Of ga naar de zone",
         "desk_indent_top": 0,
         "desk_indent_bottom": 0,

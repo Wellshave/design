@@ -88,6 +88,43 @@
 </div></section>
 </div>
 
+{%- comment -%}
+  FAQ-markup bij de vragen die hierboven al zichtbaar op de pagina staan —
+  structured data mag nooit iets beschrijven wat de bezoeker niet ziet.
+
+  Eerlijk over wat dit oplevert: sinds 2023 toont Google de uitklapbare
+  FAQ-resultaten alleen nog voor overheids- en gezondheidssites, dus een
+  webshop krijgt die niet. Het blijft wel geldige markup die helpt bij het
+  begrijpen van de pagina en die in AI-antwoorden wordt gebruikt. Het kost
+  niets en het staat er correct; verwacht er alleen geen sterretjes van.
+{%- endcomment -%}
+{%- capture faq_items -%}
+  {%- assign faq_n = 0 -%}
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'vraag' and block.settings.vraag != blank and block.settings.antwoord != blank -%}
+      {%- assign faq_n = faq_n | plus: 1 -%}
+      {%- unless faq_n == 1 -%},{%- endunless -%}
+      {
+        "@type": "Question",
+        "name": {{ block.settings.vraag | strip_html | json }},
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": {{ block.settings.antwoord | strip_html | strip | json }}
+        }
+      }
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- if faq_items != blank -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [{{ faq_items }}]
+  }
+  </script>
+{%- endif -%}
+
 {% schema %}
 {
   "name": "WS · Collectie slot",

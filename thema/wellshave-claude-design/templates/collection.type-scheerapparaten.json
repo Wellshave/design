@@ -158,7 +158,7 @@
           "settings": {
             "icoon": "truck",
             "kop": "Gratis verzending vanaf €30",
-            "tekst": "Naar België gratis vanaf €49,95."
+            "tekst": "Daaronder €4,95. Ook naar België."
           }
         },
         "zeker_4": {
@@ -166,7 +166,7 @@
           "settings": {
             "icoon": "klok",
             "kop": "Morgen in huis",
-            "tekst": "Besteld voor 23:59."
+            "tekst": "Ma t/m vr besteld voor 23:59."
           }
         },
         "zone_1": {
@@ -204,6 +204,34 @@
             "slot": "8 apparaten →",
             "url": "https://wellshave.com/collections/neustrimmers"
           }
+        },
+        "vraag_1": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Roterend of foil — wat is het verschil?",
+            "antwoord": "<p>Bij een <b>roterend</b> apparaat draaien ronde koppen die met de contouren van je kaak en kin meebewegen; dat zijn de Sentinel PRO, de Gentleman Shaver en de Elegant. Bij een <b>foilapparaat</b> trillen rechte scheerbladen onder een folie — dat is de <b>4 Foil Blade Baron</b>, met meerdere scheerbladen naast elkaar. Roterend gaat makkelijker over rondingen en door wat langere stoppels; foil werkt in rechte halen en is prettig als je elke dag kort scheert.</p>"
+          }
+        },
+        "vraag_2": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Welk apparaat is voor mijn hoofd en welk voor mijn gezicht?",
+            "antwoord": "<p>De <b>Head Shaver Deluxe</b> is voor je hoofd: zeven kantelende koppen die de bolling volgen, zodat je de hoek niet hoeft te zoeken. De andere apparaten hebben een kop die op een gezicht is gemaakt. Zoek je alles voor je hoofd bij elkaar, kijk dan in de zone <a href=\"https://wellshave.com/collections/zone-hoofd\">Hoofd</a>.</p>"
+          }
+        },
+        "vraag_3": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Wat doet het Cleaning Station van de Sentinel PRO?",
+            "antwoord": "<p>Je zet het apparaat er na het scheren in en het station <b>reinigt en laadt hem op</b>. Dat scheelt je het uitkloppen en uitspoelen. Verder heeft de Sentinel PRO een roterend 3D-systeem, is hij IPX7 waterdicht en zitten er een <b>precisietrimmer en een neustrimmer</b> bij.</p>"
+          }
+        },
+        "vraag_4": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Wanneer moet de scheerkop vervangen worden?",
+            "antwoord": "<p>Merk je dat hij trekt, of moet je twee keer over dezelfde plek, dan is het mes bot — niet het apparaat. Daarom liggen de <b>scheerkoppen los in deze categorie</b>: een 7D-kop voor de Head Shaver Deluxe en een kop voor de Gentleman Shaver. Een bot mes hoeft je dus geen nieuw apparaat te kosten.</p>"
+          }
         }
       },
       "block_order": [
@@ -211,16 +239,20 @@
         "zeker_2",
         "zeker_3",
         "zeker_4",
+        "vraag_1",
+        "vraag_2",
+        "vraag_3",
+        "vraag_4",
         "zone_1",
         "zone_2",
         "zone_3",
         "zone_4"
       ],
       "settings": {
-        "eyebrow": "",
-        "h2_1": "",
-        "h2_2": "",
-        "mail_regel": "",
+        "eyebrow": "Vragen over scheerapparaten",
+        "h2_1": "Alles wat je",
+        "h2_2": "wilt weten.",
+        "mail_regel": "<p>Staat je vraag er niet bij? Mail <b>contact@wellshave.com</b> — je krijgt antwoord van iemand uit het team, binnen één werkdag.</p>",
         "zones_eyebrow": "Kies de zone die bij je vraag past",
         "desk_indent_top": 0,
         "desk_indent_bottom": 0,

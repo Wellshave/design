@@ -428,6 +428,95 @@
 {%- endif -%}
 </div>
 
+{%- comment -%}
+  Structured data voor het raster. De pagina had al BreadcrumbList en
+  Organization uit het basisthema, maar de producten zelf stonden er niet in —
+  Google zag een lap tekst in plaats van een lijst met prijzen en voorraad.
+
+  Alles komt live uit het product: prijs, valuta, voorraad en de beoordeling.
+  Een score wordt alleen meegegeven als er echt beoordelingen zijn; verzonnen
+  of afgeronde cijfers in de markup zijn precies waar Google handmatige acties
+  voor uitdeelt. Dezelfde regel als op de kaart zelf.
+{%- endcomment -%}
+{%- capture rd_items -%}
+  {%- assign rd_n = 0 -%}
+  {%- assign rd_gezien = '' -%}
+  {%- for block in section.blocks -%}
+    {%- if block.type != 'groep' -%}{%- continue -%}{%- endif -%}
+    {%- if block.settings.uit_collectie -%}
+      {%- assign rd_lijst = collection.products -%}
+    {%- else -%}
+      {%- assign rd_lijst = block.settings.producten -%}
+    {%- endif -%}
+    {%- for p in rd_lijst -%}
+      {%- if p == blank or p.title == blank -%}{%- continue -%}{%- endif -%}
+      {%- comment -%} Een product kan in twee groepen staan; twee keer dezelfde regel in de lijst is een fout. {%- endcomment -%}
+      {%- capture rd_sleutel -%}|{{ p.handle }}|{%- endcapture -%}
+      {%- if rd_gezien contains rd_sleutel -%}{%- continue -%}{%- endif -%}
+      {%- assign rd_gezien = rd_gezien | append: rd_sleutel -%}
+      {%- assign v = p.selected_or_first_available_variant -%}
+      {%- assign rd_n = rd_n | plus: 1 -%}
+      {%- unless rd_n == 1 -%},{%- endunless -%}
+      {
+        "@type": "ListItem",
+        "position": {{ rd_n }},
+        "item": {
+          "@type": "Product",
+          "name": {{ p.title | json }},
+          "url": {{ p.url | prepend: shop.url | json }}
+          {%- if p.featured_image -%},
+          "image": {{ p.featured_image | image_url: width: 800 | prepend: 'https:' | json }}
+          {%- endif -%}
+          {%- if p.metafields.custom.subtitle.value != blank -%},
+          "description": {{ p.metafields.custom.subtitle.value | json }}
+          {%- endif -%},
+          "offers": {
+            "@type": "Offer",
+            "price": {{ v.price | divided_by: 100.0 | json }},
+            "priceCurrency": {{ cart.currency.iso_code | json }},
+            "availability": "https://schema.org/{% if p.available %}InStock{% else %}OutOfStock{% endif %}",
+            "url": {{ p.url | prepend: shop.url | json }}
+          }
+          {%- assign rd_score = p.metafields.reviews.rating.value.rating -%}
+          {%- assign rd_tel = p.metafields.reviews.rating_count.value -%}
+          {%- if rd_score and rd_tel and rd_tel > 0 -%},
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": {{ rd_score | json }},
+            "reviewCount": {{ rd_tel | json }}
+          }
+          {%- endif -%}
+        }
+      }
+    {%- endfor -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- if rd_items != blank -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": {{ collection.title | default: page_title | json }},
+    "url": {{ canonical_url | json }},
+    {%- comment -%}
+      Bewust de SEO-omschrijving en niet collection.description: die laatste is de
+      oude collectietekst uit de admin, die nog naar het verkeerde domein verwijst
+      en op deze sjablonen nergens meer wordt getoond. Wat in de markup staat hoort
+      hetzelfde te zijn als wat Google in het zoekresultaat leest.
+    {%- endcomment -%}
+    {%- assign rd_oms = collection.metafields.global.description_tag -%}
+    {%- if rd_oms != blank -%}
+    "description": {{ rd_oms | strip_html | json }},
+    {%- endif -%}
+    "mainEntity": {
+      "@type": "ItemList",
+      "numberOfItems": {{ rd_n }},
+      "itemListElement": [{{ rd_items }}]
+    }
+  }
+  </script>
+{%- endif -%}
+
 {% schema %}
 {
   "name": "WS · Collectie raster",

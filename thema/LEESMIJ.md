@@ -1094,3 +1094,95 @@ gedacht:
 `maak_templates.py` zet zo'n config om in een zonetemplate en `maak_typepaginas.py`
 maakt de vier typepagina's. Pas de tekst
 dus liever daar aan en genereer opnieuw, dan blijven ontwerp en thema gelijk.
+
+## Ronde: verzendkosten en gestructureerde data (27-08)
+
+### Verzendkosten nagekeken in Shopify
+
+Er is één leveringsprofiel ("General profile") met één zone, **Domestic**, met
+veertien landen erin: NL, BE, FR, DE, GR, IE, IT, NO, PT, ES, SE, GB, AD en CH.
+Eén tarief: **€4,95 onder de €30, gratis vanaf €30**, met de regel
+"Ma-Vr voor 23:59 besteld". Er is géén rest-of-world-zone.
+
+Twee regels op alle tien de collectiesjablonen stonden daar niet mee in lijn en
+zijn aangepast:
+
+| Was | Is |
+| --- | --- |
+| `Naar België gratis vanaf €49,95.` | `Daaronder €4,95. Ook naar België.` |
+| `Besteld voor 23:59.` | `Ma t/m vr besteld voor 23:59.` |
+
+De eerste was gewoon onjuist — België valt in dezelfde zone als Nederland en kent
+dus dezelfde €30-grens. De tweede suggereerde dat het ook in het weekend geldt.
+
+### Gestructureerde data
+
+De pagina's hadden al `BreadcrumbList` en `Organization` uit het basisthema, plus
+canonical, negen OG-tags, drie Twitter-tags en zeven hreflangs. Wat ontbrak was het
+aanbod zelf: Google zag een lap tekst en geen lijst met prijzen en voorraad.
+
+Toegevoegd in `sections/ws-collectie-raster.liquid`:
+
+- `CollectionPage` met daarin een `ItemList` van alle producten in het raster.
+  Per product `name`, `url`, `image`, `offers` (prijs, valuta, voorraad) en
+  `aggregateRating` — dat laatste **alleen als er echt beoordelingen zijn**.
+  Een afgerond standaardcijfer in de markup is precies waar Google handmatige
+  acties voor uitdeelt.
+- Een product kan in twee groepen staan (apparaten én sets). Er zit daarom een
+  dedup op handle in de lus, anders staat dezelfde regel twee keer in de lijst.
+- De `description` komt uit `collection.metafields.global.description_tag`, niet
+  uit `collection.description`. Die laatste is de oude admin-tekst die nog naar
+  het verkeerde domein verwijst en op deze sjablonen nergens meer wordt getoond.
+  Wat in de markup staat hoort hetzelfde te zijn als wat in het zoekresultaat komt.
+
+Toegevoegd in `sections/ws-collectie-slot.liquid`:
+
+- `FAQPage`, opgebouwd uit de `vraag`-blokken die op de pagina staan. Google heeft
+  FAQ-rich-results in 2023 beperkt tot overheids- en gezondheidssites, dus dit
+  levert geen sterretjes meer op; het is er voor de antwoordmachines die de markup
+  wél lezen. De blokken zijn de bron, dus markup en zichtbare tekst kunnen niet
+  uit elkaar lopen.
+
+### Vier vragen op de typepagina's
+
+De vier typepagina's (`baardtrimmers`, `scheerapparaten`, `tondeuses`,
+`safetyrazors`) hadden **helemaal geen** vragenblok — terwijl dat juist de pagina's
+zijn waar iemand met koopintentie binnenkomt. Elk heeft er nu vier gekregen, in
+dezelfde toon als de zonepagina's, met per pagina een eigen invalshoek:
+
+- **baardtrimmers** — welke van de vijf; Iced versus Gold; wat de Supreme extra
+  doet; wat IPX5 en IPX7 betekenen voor de kraan en de douche.
+- **scheerapparaten** — roterend versus foil; hoofd versus gezicht; wat het
+  Cleaning Station doet; wanneer de scheerkop op is.
+- **tondeuses** — Deluxe versus Elegant (brushless motor); hoeveel lengtes;
+  waarom er een detailtrimmer bij ligt; accuduur en wat er in de doos zit.
+- **safety razors** — waarom geen systeemmesje; passen standaard mesjes; hoe je
+  scheert zonder sneetjes; wanneer het mesje op is.
+
+Elk antwoord staat op wat er in Shopify bij het product staat — de
+`custom.specification`- en `custom.product_usp`-metafields. Twee zinnen zijn er in
+de controle weer uit gehaald: een prijsvergelijking met cassettes van een ander
+merk (niet na te kijken) en "vier bladen naast elkaar" bij de Blade Baron, omdat de
+productnaam "4 Foil" zegt en de specificatie "double foil" — dan noem ik geen aantal.
+
+Er staan geen prijzen in deze antwoorden. Die verouderen in de markup, en ze staan
+al op de kaart ernaast.
+
+### Wat gecontroleerd is
+
+Alle tien de pagina's opgehaald uit het werkthema: elk JSON-LD-blok parst,
+`numberOfItems` klopt met de lengte van de lijst, de posities lopen door van 1,
+geen dubbele producten, elk item heeft `offers`, alle product-URL's en
+afbeeldings-URL's geven 200, en de JSON-LD-`description` is per pagina identiek aan
+de meta description. Nul afwijkingen.
+
+### Nog open (buiten deze ronde)
+
+- De oude `descriptionHtml` van de collecties staat nog in de admin en verwijst
+  naar **wellshave.nl**. Hij wordt op deze sjablonen niet meer getoond en zit sinds
+  deze ronde ook niet meer in de markup, maar hij staat er nog wel.
+- `The Dial Master` heeft een productomschrijving waar een chatvenster in geplakt
+  is — dezelfde fout als eerder bij `summer-sale-deals`.
+- De homepage-FAQ zegt nog "binnen Nederland altijd gratis" en "€2,95 voor België",
+  allebei onjuist volgens het leveringsprofiel hierboven, en noemt Oostenrijk, dat
+  niet in de zone zit.

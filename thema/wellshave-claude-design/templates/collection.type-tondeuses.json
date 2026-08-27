@@ -158,7 +158,7 @@
           "settings": {
             "icoon": "truck",
             "kop": "Gratis verzending vanaf €30",
-            "tekst": "Naar België gratis vanaf €49,95."
+            "tekst": "Daaronder €4,95. Ook naar België."
           }
         },
         "zeker_4": {
@@ -166,7 +166,7 @@
           "settings": {
             "icoon": "klok",
             "kop": "Morgen in huis",
-            "tekst": "Besteld voor 23:59."
+            "tekst": "Ma t/m vr besteld voor 23:59."
           }
         },
         "zone_1": {
@@ -204,6 +204,34 @@
             "slot": "8 apparaten →",
             "url": "https://wellshave.com/collections/neustrimmers"
           }
+        },
+        "vraag_1": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Deluxe of Elegant — wat is het verschil?",
+            "antwoord": "<p>Aan de buitenkant en in gebruik niets: allebei een <b>volledig metalen behuizing</b>, dezelfde zes opzetkammen, dezelfde fade-hendel, dezelfde accu en een kapperscape erbij. Het verschil zit in de motor. De <b>Deluxe heeft een brushless motor</b>; die houdt zijn toeren beter vast als je door dik haar gaat en slijt minder bij lang gebruik. De Elegant heeft een gewone krachtige motor.</p>"
+          }
+        },
+        "vraag_2": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Hoeveel lengtes haal ik eruit?",
+            "antwoord": "<p>Er zitten <b>zes opzetkammen</b> bij: 1,5 — 3 — 4,5 — 6 — 10 en 13 mm. Daartussen zit de <b>fade-hendel</b>, die het bovenmes een stukje over het ondermes schuift. Daarmee knip je ook de lengtes tússen twee kammen in, en dat is precies wat je nodig hebt om een overgang vloeiend te maken.</p>"
+          }
+        },
+        "vraag_3": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Waarom ligt er een detailtrimmer bij de tondeuses?",
+            "antwoord": "<p>Omdat een tondeuse de massa doet en de <b>Detailtrimmer Sharpline</b> de lijn. Hij heeft een <b>zero-cut</b>-instelling waarmee je vrijwel op de huid trimt, een metalen behuizing en drie opzetstukken. Voor de rand van je baard, je nek en je bakkebaarden pak je die; voor de lengte op je hoofd de tondeuse.</p>"
+          }
+        },
+        "vraag_4": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Hoe lang doet de accu, en wat zit erbij?",
+            "antwoord": "<p>De Deluxe en de Elegant laden in <b>180 minuten</b> en gaan daarna tot <b>240 minuten</b> mee — je hoeft dus niet halverwege een knipbeurt aan de lader. Bij allebei zit een <b>kapperscape</b> in de doos, zodat het haar niet in je nek en over de vloer belandt.</p>"
+          }
         }
       },
       "block_order": [
@@ -211,16 +239,20 @@
         "zeker_2",
         "zeker_3",
         "zeker_4",
+        "vraag_1",
+        "vraag_2",
+        "vraag_3",
+        "vraag_4",
         "zone_1",
         "zone_2",
         "zone_3",
         "zone_4"
       ],
       "settings": {
-        "eyebrow": "",
-        "h2_1": "",
-        "h2_2": "",
-        "mail_regel": "",
+        "eyebrow": "Vragen over tondeuses",
+        "h2_1": "Alles wat je",
+        "h2_2": "wilt weten.",
+        "mail_regel": "<p>Staat je vraag er niet bij? Mail <b>contact@wellshave.com</b> — je krijgt antwoord van iemand uit het team, binnen één werkdag.</p>",
         "zones_eyebrow": "Of ga naar de zone",
         "desk_indent_top": 0,
         "desk_indent_bottom": 0,
