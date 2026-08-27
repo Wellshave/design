@@ -1,0 +1,382 @@
+<title>De afsluiter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
+
+<style>
+
+
+
+:root{
+  /* exact de tokens uit :root van je live theme */
+  --graphite:#191816;
+  --grey:#8E8E8E;
+  --white-100:#FFFFFF;
+  --white-80:rgba(255,255,255,.8);
+  --white-40:rgba(255,255,255,.4);
+  --black-100:#111111;
+  --black-60:rgba(17,17,17,.6);
+  --black-40:rgba(17,17,17,.4);
+  --black-10:rgba(17,17,17,.1);
+  --gold-light-100:#F5D18A;
+  --gold-dark-100:#BC813E;
+  --error-color:#C14A3A;
+  --success-color:#1E7F63;
+
+  /* documentchroom, uit dezelfde tokens */
+  --bg:#FBFAF9; --surface:#FFFFFF; --surface-2:#F2F0ED;
+  --fg:var(--black-100); --fg-soft:var(--black-60); --rule:var(--black-10);
+  --accent:#8F6428;
+  --ok:var(--success-color); --ok-bg:#E6F0EC;
+  --crit:#A3271B; --crit-bg:#F6EAE7;
+  --shadow:0 1px 2px rgba(17,17,17,.05), 0 12px 30px -20px rgba(17,17,17,.35);
+  --frame:#E2DFDA;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141413; --surface:#1C1B1A; --surface-2:#252423;
+    --fg:#EEECE9; --fg-soft:rgba(238,236,233,.62); --rule:rgba(238,236,233,.13);
+    --accent:#D9A557; --ok:#7FBF9F; --ok-bg:#182420; --crit:#E38477; --crit-bg:#2A1C19;
+    --shadow:0 1px 2px rgba(0,0,0,.45), 0 12px 30px -20px rgba(0,0,0,.9);
+    --frame:#312F2C;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141413; --surface:#1C1B1A; --surface-2:#252423;
+  --fg:#EEECE9; --fg-soft:rgba(238,236,233,.62); --rule:rgba(238,236,233,.13);
+  --accent:#D9A557; --ok:#7FBF9F; --ok-bg:#182420; --crit:#E38477; --crit-bg:#2A1C19;
+  --shadow:0 1px 2px rgba(0,0,0,.45), 0 12px 30px -20px rgba(0,0,0,.9);
+  --frame:#312F2C;
+}
+
+*{box-sizing:border-box}
+img{max-width:100%;height:auto;display:block}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font-family:"Montserrat",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:16px;line-height:150%;font-weight:400;-webkit-font-smoothing:antialiased}
+.wrap{max-width:940px;margin:0 auto;padding:0 24px 96px}
+@media(max-width:600px){.wrap{padding:0 16px 64px}}
+
+.masthead{padding:60px 0 28px;border-bottom:1px solid var(--rule)}
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);margin:0 0 18px}
+h1{font-weight:600;font-size:clamp(32px,5.6vw,50px);line-height:115%;letter-spacing:-.015em;
+  margin:0 0 16px;text-wrap:balance}
+.dek{font-size:17px;color:var(--fg-soft);margin:0;max-width:64ch;line-height:160%;text-wrap:pretty}
+.byline{font-size:12.5px;color:var(--fg-soft);margin-top:20px}
+
+h2{font-weight:600;font-size:clamp(22px,3.4vw,30px);line-height:120%;letter-spacing:-.01em;
+  margin:56px 0 8px;text-wrap:balance}
+h2 + .sub{color:var(--fg-soft);margin:0 0 22px;font-size:15px;max-width:66ch;line-height:160%}
+h3{font-size:17px;font-weight:600;margin:26px 0 8px}
+p{margin:0 0 14px;max-width:68ch;line-height:160%}
+ul{margin:0 0 14px;padding-left:20px;max-width:68ch}
+li{margin-bottom:7px}
+strong{font-weight:600}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
+  background:var(--surface-2);padding:1px 5px;border-radius:3px}
+
+/* ── podium ── */
+.devicecap{font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--fg-soft);margin:0 0 8px}
+.scaler{width:100%;overflow:hidden;border:1px solid var(--frame);border-radius:4px;
+  background:#EDE7DB;box-shadow:var(--shadow)}
+.scaler > .inner{transform-origin:top left}
+.desk-scaler{min-height:400px}
+.desk-scaler > .inner{width:1440px}
+.phonecol{max-width:390px;margin:0 auto}
+.phone-scaler{border-radius:14px;min-height:400px}
+.phone-scaler > .inner{width:390px}
+.stage{display:grid;gap:30px;margin:0 0 10px}
+
+/* ══ MOCKUP — vaste merkkleuren in beide thema's ══ */
+.af{position:relative;font-family:"Montserrat",sans-serif;background:#0B0B0A;color:#fff;
+  padding:66px 40px 0;overflow:hidden}
+.af *{box-sizing:border-box}
+.af p{margin:0;max-width:none}
+
+/* het monogram groot en zacht achter de tekst, plus een gouden gloed */
+.af-merk{position:absolute;right:-90px;top:-70px;width:420px;opacity:.05;pointer-events:none;
+  filter:brightness(0) invert(1)}
+.af-merk img{width:100%;height:auto;display:block}
+.af-gloed{position:absolute;left:50%;top:-180px;width:760px;height:420px;pointer-events:none;
+  transform:translateX(-50%);
+  background:radial-gradient(closest-side,rgba(245,209,138,.16),transparent 72%)}
+
+.af-in{position:relative;z-index:1;max-width:1180px;margin:0 auto;
+  display:flex;flex-direction:column;align-items:center;gap:22px;text-align:center;min-width:0}
+.af-eyebrow{display:inline-flex;align-items:center;gap:15px;
+  font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#BC813E}
+.af-eyebrow::before,.af-eyebrow::after{content:"";width:40px;height:1px;
+  background:rgba(188,129,62,.55)}
+.af-h2{font-size:46px;line-height:112%;font-weight:700;letter-spacing:-.034em;margin:0;
+  max-width:17ch}
+.af-h2 b{font-weight:700;color:#F5D18A}
+.af .af-sub{font-size:16px;line-height:158%;color:rgba(255,255,255,.62);max-width:56ch}
+
+/* de knoppen */
+.af-knoppen{display:flex;flex-wrap:wrap;gap:13px;justify-content:center;margin-top:4px}
+.af-cta{display:inline-flex;align-items:center;gap:13px;
+  background:linear-gradient(135deg,#F5D18A 0%,#D8AC5D 52%,#BC813E 100%);color:#111;
+  font-weight:700;font-size:13.5px;letter-spacing:.12em;text-transform:uppercase;
+  padding:19px 30px;border-radius:100px;text-decoration:none;
+  box-shadow:0 16px 38px -20px rgba(245,209,138,.9)}
+.af-cta svg{width:17px;height:17px}
+.af-cta2{background:transparent;border:1px solid rgba(255,255,255,.3);color:#fff;box-shadow:none}
+
+/* de reden om vandaag te beslissen */
+.af-reden{display:inline-flex;align-items:center;gap:12px;margin-top:2px;
+  border:1px solid rgba(245,209,138,.3);background:rgba(245,209,138,.06);
+  border-radius:100px;padding:12px 22px;font-size:13.5px;color:rgba(255,255,255,.78)}
+.af-reden svg{width:17px;height:17px;color:#F5D18A;flex:none}
+.af-reden b{color:#fff;font-weight:600}
+
+/* de bewijsregel */
+.af-bewijs{display:flex;align-items:stretch;justify-content:center;gap:0;margin-top:16px;
+  border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);
+  width:100%}
+.af-cel{flex:1;padding:22px 26px;display:flex;flex-direction:column;align-items:center;gap:6px;
+  min-width:0}
+.af-cel + .af-cel{border-left:1px solid rgba(255,255,255,.12)}
+.af-groot{font-size:22px;font-weight:700;letter-spacing:-.02em;color:#fff;line-height:1.2;
+  display:flex;align-items:center;gap:9px}
+.af-groot svg{width:19px;height:19px;color:#F5D18A;flex:none}
+.af-klein{font-size:11.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(255,255,255,.5);line-height:150%}
+.af-sterren{display:flex;gap:3px}
+.af-sterren i{width:19px;height:19px;background:#00B67A;display:grid;place-items:center;
+  position:relative}
+.af-sterren i.half{background:#3C3A36}
+.af-sterren i.half::before{content:"";position:absolute;inset:0;width:50%;background:#00B67A}
+.af-sterren svg{width:12px;height:12px;fill:#fff;color:#fff;position:relative}
+
+/* de nieuwsbriefregel onderaan */
+.af-nieuws{width:100%;margin-top:0;padding:24px 0 30px;
+  display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap}
+.af-nieuwstekst{text-align:left;min-width:0}
+.af-nieuwstekst b{display:block;font-size:14.5px;font-weight:600;color:#fff;line-height:1.35}
+.af-nieuwstekst em{display:block;font-style:normal;font-size:12.5px;
+  color:rgba(255,255,255,.5);margin-top:3px}
+.af-veld{display:flex;align-items:center;gap:9px;background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.16);border-radius:100px;padding:7px 7px 7px 20px;
+  min-width:0}
+.af-veld span{flex:1;min-width:0;font-size:13.5px;color:rgba(255,255,255,.4);
+  white-space:nowrap;text-align:left;padding-right:16px}
+.af-veld a{flex:none;background:#fff;color:#111;font-size:12px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;padding:13px 20px;border-radius:100px;
+  text-decoration:none}
+
+/* ── mobiel ── */
+.af-m{padding:44px 18px 0}
+.af-m .af-merk{width:280px;right:-70px;top:-50px}
+.af-m .af-gloed{width:460px;height:300px;top:-140px}
+.af-m .af-in{gap:18px}
+.af-m .af-eyebrow{font-size:10px;gap:10px}
+.af-m .af-eyebrow::before,.af-m .af-eyebrow::after{width:26px}
+.af-m .af-h2{font-size:31px;max-width:none}
+.af-m .af-sub{font-size:14px}
+.af-m .af-knoppen{width:100%;flex-direction:column;gap:10px}
+.af-m .af-cta{justify-content:center;font-size:12.5px;padding:17px 22px}
+.af-m .af-reden{font-size:12.5px;padding:11px 16px;text-align:left}
+/* de bewijsregel blijft naast elkaar staan: drie cellen onder elkaar is
+   300 pixels op de laatste schermhoogte van de pagina */
+.af-m .af-bewijs{margin-top:12px}
+.af-m .af-cel{padding:16px 8px;gap:5px}
+.af-m .af-groot{font-size:15.5px;gap:6px}
+.af-m .af-groot svg{width:15px;height:15px}
+.af-m .af-klein{font-size:8.5px;letter-spacing:.1em}
+.af-m .af-sterren i{width:13px;height:13px}
+.af-m .af-sterren svg{width:8px;height:8px}
+.af-m .af-nieuws{flex-direction:column;align-items:stretch;gap:12px;padding:20px 0 26px}
+.af-m .af-nieuwstekst{text-align:center}
+.af-m .af-veld{padding:6px 6px 6px 16px}
+.af-m .af-veld span{font-size:12.5px;padding-right:8px;overflow:hidden;text-overflow:ellipsis}
+.af-m .af-veld a{padding:12px 15px;font-size:11px}
+
+/* ── annotaties ── */
+.progress-cap{font-size:11.5px;color:var(--fg-soft);margin:10px 0 0}
+footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--rule);
+  color:var(--fg-soft);font-size:13px}
+footer p{max-width:none}
+:focus-visible{outline:2px solid var(--gold-dark-100);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}
+  .revtrack{width:auto;overflow-x:auto}}
+</style>
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="pijl-r" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="ster" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01z"/></symbol>
+<symbol id="klok" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 7.2V12l3.2 2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="doos" viewBox="0 0 24 24"><path d="M3.4 7.6L12 3.4l8.6 4.2v8.8L12 20.6l-8.6-4.2z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M3.4 7.6L12 11.8l8.6-4.2M12 11.8v8.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+<symbol id="quiz" viewBox="0 0 24 24"><path d="M4 6.4h8.6M4 12h8.6M4 17.6h5.4" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M15.4 16.3l2 2 3.6-4.2" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="tp" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01z"/></symbol>
+</defs></svg><div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow">Homepage-redesign · blok 12 van 12 · versie 1</p>
+  <h1>De afsluiter</h1>
+  <p class="dek">Het laatste blok voor de footer: één kop, één knop, het bewijs eronder en één eerlijke reden om vandaag te beslissen.</p>
+  <p class="byline">Ontwerp — nog niets live. Akkoord → dan pas Shopify.</p>
+  <div class="progress" aria-hidden="true">
+    <i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i></i><i class="done"></i><i class="done"></i>
+  </div>
+  <p class="progress-cap">Alle blokken ontworpen · blok 10 vervallen op jouw verzoek</p>
+</header>
+
+<div class="callout fix">
+  <h3 style="margin-top:0">Wat dit blok doet</h3>
+  <p><b>Het vangt de bezoeker op die de hele pagina heeft gelezen en nog niet geklikt heeft.</b> Op dit moment staat er onder je FAQ een strook met "Zie onze 950+ reviews op Trustpilot" en daaronder de nieuwsbriefbalk. Dat is geen afsluiting; dat is nog twee dingen naast elkaar zonder dat er één iets vraagt.</p>
+  <p><b>De kop herhaalt de belofte van blok 7, niet die van de hero.</b> Wie hier is, weet inmiddels wat je verkoopt. "Eén apparaat voor de plek waar jij iets weg wilt hebben" is de zin die de hele pagina samenvat, en hij zegt waar het blok voor staat: de keuze. Wie hem al gemaakt heeft, klikt door naar de apparaten; wie hem nog niet gemaakt heeft, laat de quiz hem maken.</p>
+  <p style="margin-bottom:0"><b>Donker, als sluitstuk.</b> Blok 11 is licht, de footer is licht. Een donker vlak ertussen sluit de pagina af zoals de hero hem opende, met hetzelfde monogram groot en zacht op de achtergrond.</p>
+</div>
+
+<div class="callout crit">
+  <h3 style="margin-top:0">De reden om vandaag te beslissen — en waarom er geen afteller staat</h3>
+  <p><b>De opdracht bij dit blok was: geef een reden om vandaag te beslissen.</b> De verleiding is dan een afteller, een "nog 3 op voorraad" of een tijdelijke kortingscode. Die staan er niet, om dezelfde reden als in blok 6: het is er niet, dus staat het er niet. Een afteller die elke dag opnieuw begint, ziet iedereen één keer door — en dan is de rest van de pagina ook verdacht.</p>
+  <p style="margin-bottom:0"><b>Wat er wél staat is het omgekeerde van schaarste:</b> "Vandaag beslissen kost je niets: je hebt honderd dagen om van gedachten te veranderen." Dat is de sterkste zin die je op dit moment kúnt zeggen, want hij haalt het risico weg in plaats van er druk bij te zetten. En hij is waar — mits het retourbeleid wordt bijgewerkt, want daar staat nu nog 14 dagen. <b>Dit blok en blok 11 vallen of staan met diezelfde aanpassing.</b></p>
+</div>
+
+<h2>Het ontwerp</h2>
+<p class="sub">Op mobiel blijft de bewijsregel naast elkaar staan; alleen de knoppen gaan onder elkaar.</p>
+
+<div class="stage">
+  <div>
+    <p class="devicecap">Desktop — 1440px</p>
+    <div class="scaler desk-scaler"><div class="inner">
+      <section class="af">
+        <div class="af-merk"><img src="__MARK__" alt=""></div>
+        <div class="af-gloed"></div>
+        <div class="af-in">
+          <p class="af-eyebrow">Klaar om te kiezen</p>
+          <h2 class="af-h2">Eén apparaat voor de plek <b>waar jij iets weg wilt hebben.</b></h2>
+          <p class="af-sub">Kies zelf het apparaat, of laat de quiz het in een paar vragen voor je doen — voor jezelf of voor iemand anders.</p>
+          <div class="af-knoppen">
+            <a class="af-cta" href="#">Bekijk alle apparaten<svg><use href="#pijl-r"/></svg></a>
+            <a class="af-cta af-cta2" href="#"><svg><use href="#quiz"/></svg>Start de quiz</a>
+          </div>
+          <p class="af-reden"><svg><use href="#klok"/></svg><span>Vandaag beslissen kost je niets: <b>je hebt honderd dagen om van gedachten te veranderen.</b></span></p>
+          <div class="af-bewijs">
+            <div class="af-cel">
+              <span class="af-sterren"><i><svg><use href="#ster"/></svg></i><i><svg><use href="#ster"/></svg></i><i><svg><use href="#ster"/></svg></i><i><svg><use href="#ster"/></svg></i><i class="half"><svg><use href="#ster"/></svg></i></span>
+              <p class="af-klein">4,5 uit 950+ beoordelingen</p>
+            </div>
+            <div class="af-cel">
+              <p class="af-groot"><svg><use href="#doos"/></svg>200.000+</p>
+              <p class="af-klein">Bestellingen sinds 2021</p>
+            </div>
+            <div class="af-cel">
+              <p class="af-groot"><svg><use href="#klok"/></svg>Voor 23:59</p>
+              <p class="af-klein">Besteld, morgen in huis</p>
+            </div>
+          </div>
+          <div class="af-nieuws">
+            <span class="af-nieuwstekst"><b>Nog niet zover?</b><em>10% korting op je eerste bestelling, plus tips die je kunt gebruiken.</em></span>
+            <span class="af-veld"><span>jouw@e-mail.nl</span><a href="#">Aanmelden</a></span>
+          </div>
+        </div>
+      </section>
+    </div></div>
+  </div>
+  <div class="phonecol">
+    <p class="devicecap">Mobiel — 390px · 73% van je verkeer</p>
+    <div class="scaler phone-scaler"><div class="inner">
+      <section class="af af-m">
+        <div class="af-merk"><img src="__MARK__" alt=""></div>
+        <div class="af-gloed"></div>
+        <div class="af-in">
+          <p class="af-eyebrow">Klaar om te kiezen</p>
+          <h2 class="af-h2">Eén apparaat voor de plek <b>waar jij iets weg wilt hebben.</b></h2>
+          <p class="af-sub">Kies zelf het apparaat, of laat de quiz het in een paar vragen voor je doen — voor jezelf of voor iemand anders.</p>
+          <div class="af-knoppen">
+            <a class="af-cta" href="#">Bekijk alle apparaten<svg><use href="#pijl-r"/></svg></a>
+            <a class="af-cta af-cta2" href="#"><svg><use href="#quiz"/></svg>Start de quiz</a>
+          </div>
+          <p class="af-reden"><svg><use href="#klok"/></svg><span>Vandaag beslissen kost je niets: <b>je hebt honderd dagen om van gedachten te veranderen.</b></span></p>
+          <div class="af-bewijs">
+            <div class="af-cel">
+              <span class="af-sterren"><i><svg><use href="#ster"/></svg></i><i><svg><use href="#ster"/></svg></i><i><svg><use href="#ster"/></svg></i><i><svg><use href="#ster"/></svg></i><i class="half"><svg><use href="#ster"/></svg></i></span>
+              <p class="af-klein">4,5 uit 950+ beoordelingen</p>
+            </div>
+            <div class="af-cel">
+              <p class="af-groot"><svg><use href="#doos"/></svg>200.000+</p>
+              <p class="af-klein">Bestellingen sinds 2021</p>
+            </div>
+            <div class="af-cel">
+              <p class="af-groot"><svg><use href="#klok"/></svg>Voor 23:59</p>
+              <p class="af-klein">Besteld, morgen in huis</p>
+            </div>
+          </div>
+          <div class="af-nieuws">
+            <span class="af-nieuwstekst"><b>Nog niet zover?</b><em>10% korting op je eerste bestelling, plus tips die je kunt gebruiken.</em></span>
+            <span class="af-veld"><span>jouw@e-mail.nl</span><a href="#">Aanmelden</a></span>
+          </div>
+        </div>
+      </section>
+    </div></div>
+  </div>
+</div>
+
+<h2>Waar elk onderdeel vandaan komt</h2>
+<div class="tablewrap">
+<table>
+  <thead><tr><th>Onderdeel</th><th>Herkomst</th></tr></thead>
+  <tbody>
+    <tr><td><b>4,5 uit 950+ beoordelingen</b></td><td>Je eigen Trustpilot-vermelding, dezelfde cijfers als in blok 1 en 2. De halve ster is meegetekend in plaats van naar boven afgerond</td></tr>
+    <tr><td><b>200.000+ bestellingen sinds 2021</b></td><td>bol.com (198.738 bestellingen, 01 jan 2021 t/m 21 aug 2026) plus de eigen Shopify-webshop (7.027) plus Amazon; samen ruim 205.000, dus 200.000+ is een ondergrens. Hetzelfde getal als in blok 1 — en om dezelfde reden geen "10.000+ mannen": dat aantal komt uit klantprofielen, en een profiel is geen koper</td></tr>
+    <tr><td><b>Voor 23:59 besteld, morgen in huis</b></td><td>Je eigen FAQ. Geldt voor Nederland en België; de nuance staat in blok 11, hier alleen de kern</td></tr>
+    <tr><td><b>Honderd dagen</b></td><td>Je eigen homepage en FAQ. <b>Staat nog niet in je Shopify-retourbeleid</b> — daar staat 14 dagen</td></tr>
+    <tr><td><b>10% korting op je eerste bestelling</b></td><td>De nieuwsbriefbalk die nu al onder je FAQ staat, woordelijk overgenomen</td></tr>
+    <tr><td><b>"Bekijk alle apparaten"</b></td><td>Wijst naar <code>/collections/all</code>, de enige collectie die vandaag alles bevat. Komt er ooit een collectie zonder onderdelen en bundels, dan is dat een betere bestemming</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="callout ask">
+  <h3 style="margin-top:0">Wat ik van jou nodig heb</h3>
+  <ul style="margin-bottom:0">
+    <li><b>Stapelt die 10% op de Summer Sale?</b> In je aankondigingsbalk staat "Summer Deals tot 40%". Als de nieuwsbriefcode daar niet bovenop mag, moet dat erbij staan — anders meldt iemand zich aan, probeert de code en haakt af op het moment dat hij bijna afrekende.</li>
+    <li><b>Blijft de nieuwsbrief in dit blok, of eronder?</b> Ik heb hem eronder gehangen als aparte regel, zodat de knop de hoofdrol houdt. Wil je hem als eigen sectie behouden, dan haal ik hem hier weg — dan eindigt de pagina op de knop.</li>
+    <li><b>Het adres van de quizpagina.</b> Die pagina wordt later gebouwd; tot dan staat de knop op <code>#</code>. Dat is prima in het ontwerp, maar het is wel de laatste stap voor livegang: een knop die nergens heen gaat mag niet mee de winkel in.</li>
+    <li><b>De 100 dagen in het beleid.</b> Derde keer dat ik het noem, en het is de laatste: dit blok zet die belofte als sluitzin neer.</li>
+  </ul>
+</div>
+
+<h2>Bouwnotities voor straks</h2>
+<ul>
+  <li><b>De quiz wordt de hoofdknop zodra de quizpagina bestaat.</b> Nu is "Bekijk alle apparaten" goud en de quiz de omlijnde knop, en dat blijft zo tot de pagina er is. Daarna draaien ze om, want wie hier nog leest heeft de hele pagina gezien en nóg niet gekozen — dat is precies de bezoeker die de quiz nodig heeft, en "alle apparaten" biedt hem alleen maar méér keuze aan. <b>Eén voorwaarde:</b> de quiz moet eindigen op één apparaat met een koopknop erbij, niet op een lijstje of een collectie. Eindigt hij op een lijstje, dan is de keuze alleen verplaatst en blijft "Bekijk alle apparaten" de betere hoofdknop. Het is één regel werk en op elk moment terug te draaien — na een paar weken kun je het meten: quizstarts tegenover klikken naar de collectie.</li>
+  <li><b>De quizknop wijst naar een aparte pagina</b>, niet naar een blok op de homepage. Dat is het verschil met de knop die er eerst stond: die stuurde de bezoeker terug omhoog naar de zonekiezer, dit stuurt hem door naar een vraag die hij kan beantwoorden. Het eindpunt van de quiz is één apparaat met een koopknop — anders heb je de keuze alleen maar verplaatst.</li>
+  <li><b>Dit blok vervangt de logostrook</b> ("Zie onze 950+ reviews op Trustpilot") die nu onder de FAQ staat: die zegt hetzelfde als de bewijsregel hier, maar zonder knop erbij.</li>
+  <li><b>De sterren zijn getekend, niet de Trustpilot-widget.</b> Die widget laadt traag en verschijnt pas na de rest van de pagina — precies op de plek waar iemand op het punt staat te klikken. De echte widget hoort in blok 2, waar hij tijd heeft om te laden.</li>
+  <li><b>De cijfers zijn tekstvelden</b>, net als in blok 1. Ze veranderen zelden, maar als ze veranderen moeten ze op beide plekken tegelijk mee — anders zegt je hero iets anders dan je afsluiter.</li>
+  <li><b>Op mobiel blijft de bewijsregel horizontaal.</b> Drie cellen onder elkaar is ruim 300 pixels op de laatste schermhoogte van de pagina, en dan valt de nieuwsbrief onder de vouw.</li>
+  <li><b>Het e-mailveld is één invoerveld plus knop</b>, geen formulier met naam erbij. Elk extra veld kost aanmeldingen, en je hebt de naam niet nodig voor een kortingscode.</li>
+</ul>
+
+<h2>Daarmee is de reeks rond</h2>
+<p>Alle twaalf blokken zijn ontworpen: blok 1 tot en met 9, plus 11 en 12, met blok 8 (het zonerooster) klaar voor de plek lager op de pagina. Blok 10 — de vergelijkingstabel — is op jouw verzoek vervallen. De doorlopende preview toont ze in volgorde, desktop en mobiel naast elkaar.</p>
+<p><b>Wat er nu ligt is ontwerp, geen theme.</b> Voor de bouw staan er nog beslissingen open die in de blokdocumenten zelf genoteerd zijn — de belangrijkste: de honderd dagen in je retourbeleid, één naam kiezen tussen SkinSafe en SafeShave, en de namen bij de klantvideo's in blok 9.</p>
+
+<footer>
+  <p>Reviewcijfer en aantal beoordelingen van je eigen Trustpilot-vermelding; het aantal bestellingen en de levertijden uit Shopify en je eigen FAQ, opgehaald op 20 augustus 2026. De nieuwsbrieftekst staat woordelijk op je huidige homepage. Ontwerp — nog niets live.</p>
+</footer>
+
+</div>
+
+<script>
+function fit(){
+  document.querySelectorAll('.scaler').forEach(s=>{
+    const inner=s.firstElementChild;
+    const w=parseFloat(getComputedStyle(inner).width);
+    const scale=s.clientWidth/w;
+    inner.style.transform='scale('+scale+')';
+    s.style.height=Math.ceil(inner.offsetHeight*scale)+'px';
+  });
+}
+document.fonts&&document.fonts.ready.then(fit);
+window.addEventListener('resize',fit);
+new ResizeObserver(fit).observe(document.body);
+window.addEventListener('load',fit); fit();
+</script>
+
+

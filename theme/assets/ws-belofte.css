@@ -1,0 +1,206 @@
+/* ═══ Wellshave — blok 2, zonder risico ═══
+   Bron: audits/blok-02-pijnpunt.template.html. Mobiel is een media query
+   in plaats van de klasse .pf-m. */
+
+.ws-pf{font-family:"Montserrat",sans-serif;background:#EDE7DB;color:#111;padding:56px 40px}
+.ws-pf *{box-sizing:border-box}
+.ws-pf p{margin:0;max-width:none}
+.ws-pf__in{max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:28px;min-width:0}
+
+/* band A — kop */
+.ws-pf__top{display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
+.ws-pf__eyebrow{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:#BC813E;margin:0 0 12px}
+.ws-pf__h2{font-size:34px;line-height:120%;font-weight:500;letter-spacing:-.015em;margin:0;
+  max-width:17ch;color:#111;text-transform:none}
+.ws-pf__h2 b,.ws-pf__h2 strong{font-weight:700}
+.ws-pf__note{font-size:15px;line-height:150%;color:rgba(17,17,17,.6);margin:10px 0 0;max-width:46ch}
+
+.ws-pf__tp{flex:none;text-align:right}
+.ws-pf__sterren{display:flex;gap:3px;justify-content:flex-end;margin:0 0 8px}
+.ws-pf__sterren i{width:24px;height:24px;background:#00B67A;display:grid;place-items:center;
+  position:relative}
+.ws-pf__sterren i.is-half{background:#DCDCE6}
+.ws-pf__sterren i.is-half::before{content:"";position:absolute;inset:0;width:50%;background:#00B67A}
+.ws-pf__sterren svg{width:16px;height:16px;fill:#fff;position:relative}
+.ws-pf__tptxt{font-size:13px;font-weight:500;color:rgba(17,17,17,.65);margin:0;white-space:nowrap}
+.ws-pf__tptxt b{color:#111;font-weight:700}
+.ws-pf__tpmerk{display:inline-flex;align-items:center;gap:4px;font-weight:700;
+  letter-spacing:-.03em;color:#111}
+.ws-pf__tpmerk svg{width:14px;height:14px;fill:#00B67A}
+
+/* band B — garantie + één foto */
+.ws-pf__mid{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:20px;align-items:stretch}
+.ws-gk{position:relative;background:#191816;color:#fff;border-radius:12px;
+  padding:36px 40px;display:flex;gap:34px;align-items:center;overflow:hidden}
+.ws-gk::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,#BC813E 0%,#F5D18A 50%,#BC813E 100%)}
+.ws-gk__mark{position:absolute;right:-40px;bottom:-46px;width:230px;opacity:.06;pointer-events:none}
+.ws-gk__mark img{width:100%;height:auto;display:block}
+.ws-gk__zegel{flex:none;width:152px;height:152px;border-radius:100px;
+  background:linear-gradient(135deg,#F5D18A 0%,#BC813E 55%,#F5D18A 100%);display:grid;place-items:center}
+.ws-gk__zegelin{width:134px;height:134px;border-radius:100px;background:#191816;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}
+.ws-gk__zegelin img{width:24px;height:auto;display:block;margin-bottom:2px}
+.ws-gk__zegelin b{font-size:40px;line-height:1;font-weight:700;letter-spacing:-.03em;color:#F5D18A}
+.ws-gk__zegelin span{font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,.7)}
+.ws-gk__body{position:relative;display:flex;flex-direction:column;gap:14px;min-width:0;
+  overflow-wrap:anywhere}
+.ws-gk__h{font-size:26px;line-height:130%;font-weight:600;letter-spacing:-.015em;margin:0;color:#fff}
+.ws-gk__h b,.ws-gk__h strong,.ws-gk__h em{font-style:normal;font-weight:600;color:#F5D18A}
+.ws-gk__p{font-size:15px;line-height:155%;color:rgba(255,255,255,.72);margin:0;max-width:44ch}
+.ws-gk__lijst{display:flex;flex-wrap:wrap;gap:9px 26px;margin:2px 0 0;padding:0;list-style:none}
+.ws-gk__lijst li{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:500;margin:0}
+.ws-gk__lijst svg{width:16px;height:16px;flex:none;color:#F5D18A}
+.ws-gk__team{margin:0;padding-top:18px;border-top:1px solid rgba(255,255,255,.15);
+  font-size:13.5px;line-height:155%;color:rgba(255,255,255,.72)}
+.ws-gk__team b,.ws-gk__team strong{color:#fff;font-weight:600}
+.ws-pf__shot{border-radius:12px;overflow:hidden;background:#111;aspect-ratio:1/1;align-self:start}
+.ws-pf__shot img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* band C — reviewmarquee */
+.ws-pf__revcount{display:flex;align-items:baseline;gap:10px;margin:0 0 14px}
+.ws-pf__revcount b{font-size:19px;font-weight:600}
+.ws-pf__revcount span{font-size:13.5px;color:rgba(17,17,17,.6)}
+.ws-pf__revwrap{position:relative;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.ws-pf__revtrack{display:flex;gap:16px;width:max-content;animation:ws-pf-slide 46s linear infinite}
+.ws-pf__revwrap:hover .ws-pf__revtrack{animation-play-state:paused}
+@keyframes ws-pf-slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.ws-pf__revtrack{animation:none}}
+.ws-rev{width:318px;flex:none;background:#fff;border-radius:12px;padding:22px;
+  display:flex;flex-direction:column;gap:11px}
+.ws-rev__sterren{display:flex;gap:2px}
+.ws-rev__sterren svg{width:14px;height:14px;fill:#BC813E}
+/* een ster die niet meetelt blijft staan maar valt weg in de achtergrond: zo
+   zie je in één oogopslag dat het er vier van de vijf zijn */
+.ws-rev__sterren svg.is-uit{fill:rgba(17,17,17,.16)}
+.ws-rev__q{font-size:14.5px;line-height:155%;font-weight:500;margin:0;color:#111}
+.ws-rev__by{margin:auto 0 0;padding-top:14px;border-top:1px solid rgba(17,17,17,.1);
+  display:flex;align-items:center;gap:10px;font-size:12px;color:rgba(17,17,17,.55)}
+.ws-rev__av{width:30px;height:30px;border-radius:100px;background:#EDE7DB;color:#BC813E;
+  display:grid;place-items:center;font-size:12px;font-weight:700;flex:none;overflow:hidden}
+.ws-rev__av img{width:100%;height:100%;object-fit:cover;display:block}
+.ws-rev__by b{color:#111;font-weight:600;display:block}
+.ws-rev__src{margin-left:auto;display:inline-flex;align-items:center;gap:4px;font-weight:700;
+  letter-spacing:-.03em;color:#111;font-size:11px}
+.ws-rev__src svg{width:12px;height:12px;fill:#00B67A}
+
+/* de Trustpilot-widgets. Hun eigen vormgeving staat in onze sectie, dus we
+   geven ze alleen ruimte en houden ze binnen de kolom — verder niets, want aan
+   de binnenkant van een TrustBox valt niets te sturen. */
+.ws-pf__tp--live{flex:none;min-width:280px;max-width:340px}
+/* De carrousel is van binnen niet te sturen, dus de rust moet van de marge
+   komen: een royale witte kaart eromheen in plaats van een strak randje.
+   Samen met een hogere data-style-height in de widgetcode zelf geeft dat de
+   reviews de lucht die ze in het ontwerp ook hadden. */
+.ws-pf__tpband{min-width:0;background:#fff;border-radius:14px;padding:24px 22px}
+.ws-pf__tpband iframe{max-width:100%}
+.ws-pf__revcount--live{margin-bottom:18px}
+
+/* band D — bundel in de schijnwerpers */
+.ws-spot{position:relative;border-radius:16px;overflow:hidden;background:#0A0A0A;
+  display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,1fr)}
+.ws-spot__img{position:relative;min-width:0;min-height:430px;background:#0A0A0A}
+.ws-spot__img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+/* de foto dooft naar het paneel toe uit, zodat er geen harde naad in het midden staat */
+.ws-spot__img::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(90deg,rgba(10,10,10,0) 52%,rgba(10,10,10,.9) 100%)}
+.ws-spot__deal{position:absolute;z-index:2;left:24px;bottom:24px;text-align:center;
+  background:rgba(10,10,10,.7);border:1px solid rgba(245,209,138,.45);border-radius:12px;
+  padding:11px 20px}
+.ws-spot__deal b{display:block;font-size:9.5px;font-weight:700;letter-spacing:.15em;
+  text-transform:uppercase;color:#F5D18A;margin-bottom:3px}
+.ws-spot__deal span{display:block;font-size:21px;font-weight:700;color:#fff;
+  letter-spacing:-.02em;line-height:1.1}
+.ws-spot__body{position:relative;z-index:2;min-width:0;margin:18px 18px 18px 0;background:#101010;
+  border:1px solid rgba(245,209,138,.15);border-radius:14px;padding:26px 30px;
+  display:flex;flex-direction:column;justify-content:center;gap:14px}
+.ws-spot__badge{align-self:flex-start;display:inline-flex;align-items:center;gap:9px;
+  background:linear-gradient(120deg,#F7DCA4,#C99A4E);color:#141414;font-size:10.5px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;padding:7px 16px 7px 8px;border-radius:100px}
+.ws-spot__badge i{width:18px;height:18px;border-radius:100px;background:#141414;flex:none;
+  display:flex;align-items:center;justify-content:center}
+.ws-spot__badge svg{width:10px;height:10px;fill:#F5D18A}
+.ws-spot__eyebrow{font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:#C99A4E;margin:0}
+.ws-spot__h{font-size:43px;line-height:104%;font-weight:700;letter-spacing:-.032em;margin:0;
+  color:#fff;overflow-wrap:anywhere;text-transform:none}
+.ws-spot__h b,.ws-spot__h strong{display:block;font-weight:700;
+  background:linear-gradient(100deg,#F7DCA4 10%,#C99A4E 90%);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.ws-spot__p{font-size:14px;line-height:150%;color:rgba(255,255,255,.62);margin:0}
+.ws-spot__rule{height:1px;background:rgba(255,255,255,.1)}
+.ws-spot__lijst{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;
+  gap:12px 18px}
+.ws-spot__lijst li{display:flex;align-items:center;gap:11px;font-size:13.5px;font-weight:500;
+  color:rgba(255,255,255,.92);min-width:0}
+.ws-spot__lijst svg{width:19px;height:19px;flex:none;color:#C99A4E}
+.ws-spot__prijs{display:flex;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.ws-spot__nu{display:flex;flex-direction:column;gap:3px;min-width:0}
+.ws-spot__nu b{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:#C99A4E}
+.ws-spot__nu span{font-size:40px;font-weight:700;letter-spacing:-.035em;line-height:1;color:#fff}
+.ws-spot__cmp{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding-bottom:3px}
+.ws-spot__was{font-size:15px;color:rgba(255,255,255,.38);text-decoration:line-through}
+.ws-spot__save{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  color:#F5D18A;border:1px solid rgba(245,209,138,.45);padding:8px 14px;border-radius:100px;
+  white-space:nowrap}
+.ws-spot__stock{font-size:12.5px;font-weight:500;color:rgba(255,255,255,.72);margin:0;
+  display:flex;align-items:center;gap:9px}
+.ws-spot__stock i{width:7px;height:7px;border-radius:100px;background:#C99A4E;display:block;
+  flex:none;box-shadow:0 0 0 3px rgba(201,154,78,.18)}
+.ws-spot__cta{flex:none;background:linear-gradient(100deg,#F7DCA4,#C99A4E);color:#141414;
+  font-weight:700;font-size:14.5px;line-height:1;letter-spacing:.07em;text-transform:uppercase;
+  padding:20px 24px;border-radius:100px;text-decoration:none;
+  display:flex;align-items:center;justify-content:center;gap:11px}
+.ws-spot__cta:hover{color:#141414;text-decoration:none}
+.ws-spot__cta svg{width:17px;height:17px;flex:none}
+.ws-spot__fud{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+  gap:8px 11px;margin:0;font-size:9.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  color:rgba(255,255,255,.55)}
+.ws-spot__fud span{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.ws-spot__fud svg{width:14px;height:14px;flex:none;color:rgba(245,209,138,.72)}
+.ws-spot__fud i{width:3px;height:3px;border-radius:100px;background:rgba(255,255,255,.26);flex:none}
+
+/* ── mobiel ── */
+@media (max-width:749px){
+  .ws-pf{padding:34px 18px}
+  .ws-pf__in{gap:18px}
+  .ws-pf__top{flex-direction:column;align-items:flex-start;gap:18px}
+  .ws-pf__h2{font-size:24px;max-width:none}
+  .ws-pf__note{font-size:14px;line-height:145%}
+  .ws-pf__tp{text-align:left}
+  .ws-pf__sterren{justify-content:flex-start}
+  .ws-pf__mid{grid-template-columns:1fr;gap:14px}
+  .ws-gk{padding:24px 22px;gap:20px;flex-direction:column;align-items:flex-start}
+  .ws-gk__zegel{width:124px;height:124px}
+  .ws-gk__zegelin{width:108px;height:108px}
+  .ws-gk__zegelin b{font-size:32px}
+  .ws-gk__h{font-size:21px}
+  .ws-gk__mark{right:-30px;bottom:-34px;width:170px}
+  .ws-gk__p{font-size:14px;line-height:150%}
+  .ws-pf__revcount{flex-direction:column;align-items:flex-start;gap:2px}
+  .ws-pf__tp--live{max-width:none;min-width:0;width:100%}
+  .ws-pf__tpband{padding:16px 12px;border-radius:12px}
+  .ws-pf__revcount--live{margin-bottom:12px}
+  .ws-rev{width:266px;padding:18px}
+  .ws-pf__revtrack{animation-duration:34s}
+  .ws-spot{grid-template-columns:1fr}
+  .ws-spot__img{min-height:0;aspect-ratio:4/3}
+  .ws-spot__img::after{background:linear-gradient(180deg,rgba(10,10,10,0) 58%,rgba(10,10,10,.92) 100%)}
+  .ws-spot__deal{left:14px;bottom:14px;padding:9px 15px}
+  .ws-spot__deal span{font-size:18px}
+  .ws-spot__body{margin:0 12px 12px;padding:20px 18px 22px;gap:12px}
+  .ws-spot__h{font-size:31px}
+  .ws-spot__p{font-size:13.5px}
+  .ws-spot__lijst{grid-template-columns:1fr;gap:10px}
+  .ws-spot__nu span{font-size:34px}
+  .ws-spot__cta{font-size:13px;padding:18px;letter-spacing:.05em}
+  /* op 390px past de trustregel niet op één regel; een raster van twee laat hem
+     uitgelijnd afbreken in plaats van rafelig */
+  .ws-spot__fud{display:grid;grid-template-columns:1fr 1fr;gap:10px 8px;font-size:9.5px}
+  .ws-spot__fud i{display:none}
+}

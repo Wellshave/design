@@ -1,0 +1,854 @@
+<title>Wellshave Autoriteit &amp; Proof</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
+
+<style>
+:root{
+  /* exact de tokens uit :root van je live theme */
+  --graphite:#191816;
+  --grey:#8E8E8E;
+  --white-100:#FFFFFF;
+  --white-80:rgba(255,255,255,.8);
+  --white-40:rgba(255,255,255,.4);
+  --black-100:#111111;
+  --black-60:rgba(17,17,17,.6);
+  --black-40:rgba(17,17,17,.4);
+  --black-10:rgba(17,17,17,.1);
+  --gold-light-100:#F5D18A;
+  --gold-dark-100:#BC813E;
+  --error-color:#C14A3A;
+  --success-color:#1E7F63;
+
+  /* documentchroom, uit dezelfde tokens */
+  --bg:#FBFAF9; --surface:#FFFFFF; --surface-2:#F2F0ED;
+  --fg:var(--black-100); --fg-soft:var(--black-60); --rule:var(--black-10);
+  --accent:#8F6428;
+  --ok:var(--success-color); --ok-bg:#E6F0EC;
+  --crit:#A3271B; --crit-bg:#F6EAE7;
+  --shadow:0 1px 2px rgba(17,17,17,.05), 0 12px 30px -20px rgba(17,17,17,.35);
+  --frame:#E2DFDA;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141413; --surface:#1C1B1A; --surface-2:#252423;
+    --fg:#EEECE9; --fg-soft:rgba(238,236,233,.62); --rule:rgba(238,236,233,.13);
+    --accent:#D9A557; --ok:#7FBF9F; --ok-bg:#182420; --crit:#E38477; --crit-bg:#2A1C19;
+    --shadow:0 1px 2px rgba(0,0,0,.45), 0 12px 30px -20px rgba(0,0,0,.9);
+    --frame:#312F2C;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141413; --surface:#1C1B1A; --surface-2:#252423;
+  --fg:#EEECE9; --fg-soft:rgba(238,236,233,.62); --rule:rgba(238,236,233,.13);
+  --accent:#D9A557; --ok:#7FBF9F; --ok-bg:#182420; --crit:#E38477; --crit-bg:#2A1C19;
+  --shadow:0 1px 2px rgba(0,0,0,.45), 0 12px 30px -20px rgba(0,0,0,.9);
+  --frame:#312F2C;
+}
+
+*{box-sizing:border-box}
+img{max-width:100%;height:auto;display:block}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font-family:"Montserrat",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:16px;line-height:150%;font-weight:400;-webkit-font-smoothing:antialiased}
+.wrap{max-width:940px;margin:0 auto;padding:0 24px 96px}
+@media(max-width:600px){.wrap{padding:0 16px 64px}}
+
+.masthead{padding:60px 0 28px;border-bottom:1px solid var(--rule)}
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);margin:0 0 18px}
+h1{font-weight:600;font-size:clamp(32px,5.6vw,50px);line-height:115%;letter-spacing:-.015em;
+  margin:0 0 16px;text-wrap:balance}
+.dek{font-size:17px;color:var(--fg-soft);margin:0;max-width:64ch;line-height:160%;text-wrap:pretty}
+.byline{font-size:12.5px;color:var(--fg-soft);margin-top:20px}
+
+h2{font-weight:600;font-size:clamp(22px,3.4vw,30px);line-height:120%;letter-spacing:-.01em;
+  margin:56px 0 8px;text-wrap:balance}
+h2 + .sub{color:var(--fg-soft);margin:0 0 22px;font-size:15px;max-width:66ch;line-height:160%}
+h3{font-size:17px;font-weight:600;margin:26px 0 8px}
+p{margin:0 0 14px;max-width:68ch;line-height:160%}
+ul{margin:0 0 14px;padding-left:20px;max-width:68ch}
+li{margin-bottom:7px}
+strong{font-weight:600}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
+  background:var(--surface-2);padding:1px 5px;border-radius:3px}
+
+/* ── podium ── */
+.devicecap{font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--fg-soft);margin:0 0 8px}
+.scaler{width:100%;overflow:hidden;border:1px solid var(--frame);border-radius:4px;
+  background:#EDE7DB;box-shadow:var(--shadow)}
+.scaler > .inner{transform-origin:top left}
+.desk-scaler{min-height:400px}
+.desk-scaler > .inner{width:1440px}
+.phonecol{max-width:390px;margin:0 auto}
+.phone-scaler{border-radius:14px;min-height:400px}
+.phone-scaler > .inner{width:390px}
+.stage{display:grid;gap:30px;margin:0 0 10px}
+
+/* ══ MOCKUP — vaste merkkleuren in beide thema's ══ */
+.pf{font-family:"Montserrat",sans-serif;background:#EDE7DB;color:#111111;
+  padding:56px 40px}
+.pf-in{max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:28px;min-width:0}
+
+/* band A — kop */
+.pf-top{display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
+.pf-eyebrow{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:#BC813E;margin:0 0 12px}
+/* de prozastijl van dit document mag de mockup niet raken: p{max-width:68ch}
+   kneep elke alinea in het blok af, waardoor de trustregel omviel */
+.pf p{max-width:none}
+.pf .pf-note{max-width:46ch}
+.pf .gcard-p{max-width:44ch}
+.pf-h2{font-size:34px;line-height:120%;font-weight:500;letter-spacing:-.015em;margin:0;max-width:17ch}
+.pf-h2 b{font-weight:700}
+.pf-note{font-size:15px;line-height:150%;color:rgba(17,17,17,.6);margin:10px 0 0;max-width:46ch}
+
+.tp-mini{flex:none;text-align:right}
+.tp-stars{display:flex;gap:3px;justify-content:flex-end;margin:0 0 8px}
+.tp-stars i{width:24px;height:24px;background:#00B67A;display:grid;place-items:center;position:relative}
+.tp-stars i.half{background:#DCDCE6}
+.tp-stars i.half::before{content:"";position:absolute;inset:0;width:50%;background:#00B67A}
+.tp-stars svg{width:16px;height:16px;fill:#fff;position:relative}
+.tp-txt{font-size:13px;font-weight:500;color:rgba(17,17,17,.65);margin:0;white-space:nowrap}
+.tp-txt b{color:#111;font-weight:700}
+.tp-brand{display:inline-flex;align-items:center;gap:4px;font-weight:700;letter-spacing:-.03em;color:#111}
+.tp-brand svg{width:14px;height:14px;fill:#00B67A}
+
+/* band B — garantie + één foto */
+.pf-mid{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:20px;align-items:stretch}
+.gcard{position:relative;background:#191816;color:#fff;border-radius:12px;
+  padding:36px 40px;display:flex;gap:34px;align-items:center;overflow:hidden}
+.gcard::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,#BC813E 0%,#F5D18A 50%,#BC813E 100%)}
+.gcard-mark{position:absolute;right:-40px;bottom:-46px;width:230px;opacity:.06;pointer-events:none}
+.gcard-mark img{width:100%;height:auto;display:block}
+
+.seal{flex:none;width:152px;height:152px;border-radius:100px;
+  background:linear-gradient(135deg,#F5D18A 0%,#BC813E 55%,#F5D18A 100%);
+  display:grid;place-items:center}
+.seal-in{width:134px;height:134px;border-radius:100px;background:#191816;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}
+.seal-in img{width:24px;height:auto;display:block;margin-bottom:2px}
+.seal-in b{font-size:40px;line-height:1;font-weight:700;letter-spacing:-.03em;color:#F5D18A}
+.seal-in span{font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,.7)}
+
+.gcard-body{position:relative;display:flex;flex-direction:column;gap:14px;min-width:0;overflow-wrap:anywhere}
+.gcard-h{font-size:26px;line-height:130%;font-weight:600;letter-spacing:-.015em;margin:0}
+.gcard-h em{font-style:normal;color:#F5D18A}
+.gcard-p{font-size:15px;line-height:155%;color:rgba(255,255,255,.72);margin:0;max-width:44ch}
+.gcard-list{display:flex;flex-wrap:wrap;gap:9px 26px;margin:2px 0 0;padding:0;list-style:none}
+.gcard-list li{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:500;margin:0}
+.gcard-list svg{width:16px;height:16px;flex:none;color:#F5D18A}
+.gcard-team{margin:0;padding-top:18px;border-top:1px solid rgba(255,255,255,.15);
+  font-size:13.5px;line-height:155%;color:rgba(255,255,255,.72)}
+.gcard-team b{color:#fff;font-weight:600}
+
+.shot{border-radius:12px;overflow:hidden;background:#111;aspect-ratio:1/1;align-self:start}
+.shot img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* band C — drie reviews */
+.pf-revs{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.rev{background:#fff;border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:12px}
+.rev-stars{display:flex;gap:2px}
+.rev-stars svg{width:14px;height:14px;fill:#BC813E}
+.rev-q{font-size:15px;line-height:155%;font-weight:500;margin:0;color:#111}
+.rev-by{margin:auto 0 0;padding-top:16px;border-top:1px solid rgba(17,17,17,.1);
+  display:flex;align-items:center;gap:10px;font-size:12.5px;color:rgba(17,17,17,.55)}
+.rev-av{width:32px;height:32px;border-radius:100px;background:#EDE7DB;color:#BC813E;
+  display:grid;place-items:center;font-size:12px;font-weight:700;flex:none}
+.rev-by b{color:#111;font-weight:600;display:block}
+.rev-src{margin-left:auto;display:inline-flex;align-items:center;gap:4px;
+  font-weight:700;letter-spacing:-.03em;color:#111;font-size:11.5px}
+.rev-src svg{width:12px;height:12px;fill:#00B67A}
+
+/* band C2 — reviewmarquee */
+.revwrap{position:relative;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.revtrack{display:flex;gap:16px;width:max-content;animation:slide 46s linear infinite}
+.revwrap:hover .revtrack{animation-play-state:paused}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.rev{width:318px;flex:none;background:#fff;border-radius:12px;padding:22px;
+  display:flex;flex-direction:column;gap:11px}
+.rev-stars{display:flex;gap:2px}
+.rev-stars svg{width:14px;height:14px;fill:#BC813E}
+.rev-q{font-size:14.5px;line-height:155%;font-weight:500;margin:0;color:#111}
+.rev-by{margin:auto 0 0;padding-top:14px;border-top:1px solid rgba(17,17,17,.1);
+  display:flex;align-items:center;gap:10px;font-size:12px;color:rgba(17,17,17,.55)}
+.rev-av{width:30px;height:30px;border-radius:100px;background:#EDE7DB;color:#BC813E;
+  display:grid;place-items:center;font-size:12px;font-weight:700;flex:none}
+.rev-by b{color:#111;font-weight:600;display:block}
+.rev-src{margin-left:auto;display:inline-flex;align-items:center;gap:4px;
+  font-weight:700;letter-spacing:-.03em;color:#111;font-size:11px}
+.rev-src svg{width:12px;height:12px;fill:#00B67A}
+.revcount{display:flex;align-items:baseline;gap:10px;margin:0 0 14px}
+.revcount b{font-size:19px;font-weight:600}
+.revcount span{font-size:13.5px;color:rgba(17,17,17,.6)}
+
+/* band D — bundel in de schijnwerpers */
+.spot{position:relative;border-radius:16px;overflow:hidden;background:#0A0A0A;
+  display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,1fr)}
+.spot-img{position:relative;min-width:0;min-height:430px;background:#0A0A0A}
+.spot-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+/* de foto dooft naar het paneel toe uit, zodat er geen harde naad in het midden staat */
+.spot-img:after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(90deg,rgba(10,10,10,0) 52%,rgba(10,10,10,.9) 100%)}
+.spot-deal{position:absolute;z-index:2;left:24px;bottom:24px;text-align:center;
+  background:rgba(10,10,10,.7);border:1px solid rgba(245,209,138,.45);
+  border-radius:12px;padding:11px 20px}
+.spot-deal b{display:block;font-size:9.5px;font-weight:700;letter-spacing:.15em;
+  text-transform:uppercase;color:#F5D18A;margin-bottom:3px}
+.spot-deal span{display:block;font-size:21px;font-weight:700;color:#fff;
+  letter-spacing:-.02em;line-height:1.1}
+
+.spot-body{position:relative;z-index:2;min-width:0;margin:18px 18px 18px 0;
+  background:#101010;border:1px solid rgba(245,209,138,.15);border-radius:14px;
+  padding:26px 30px;display:flex;flex-direction:column;justify-content:center;gap:14px}
+.spot-badge{align-self:flex-start;display:inline-flex;align-items:center;gap:9px;
+  background:linear-gradient(120deg,#F7DCA4,#C99A4E);color:#141414;
+  font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  padding:7px 16px 7px 8px;border-radius:100px}
+.spot-badge i{width:18px;height:18px;border-radius:100px;background:#141414;flex:none;
+  display:flex;align-items:center;justify-content:center}
+.spot-badge svg{width:10px;height:10px;fill:#F5D18A}
+.spot-eyebrow{font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:#C99A4E;margin:0}
+.spot-h{font-size:43px;line-height:104%;font-weight:700;letter-spacing:-.032em;margin:0;
+  color:#fff;overflow-wrap:anywhere}
+.spot-h b{display:block;font-weight:700;
+  background:linear-gradient(100deg,#F7DCA4 10%,#C99A4E 90%);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.spot-p{font-size:14px;line-height:150%;color:rgba(255,255,255,.62);margin:0}
+.spot-rule{height:1px;background:rgba(255,255,255,.1)}
+.spot-list{list-style:none;margin:0;padding:0;
+  display:grid;grid-template-columns:1fr 1fr;gap:12px 18px}
+.spot-list li{display:flex;align-items:center;gap:11px;font-size:13.5px;font-weight:500;
+  color:rgba(255,255,255,.92);min-width:0}
+.spot-list svg{width:19px;height:19px;flex:none;color:#C99A4E}
+.spot-price{display:flex;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.spot-now{display:flex;flex-direction:column;gap:3px;min-width:0}
+.spot-now b{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:#C99A4E}
+.spot-now span{font-size:40px;font-weight:700;letter-spacing:-.035em;line-height:1;color:#fff}
+.spot-cmp{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding-bottom:3px}
+.spot-was{font-size:15px;color:rgba(255,255,255,.38);text-decoration:line-through}
+.spot-save{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  color:#F5D18A;border:1px solid rgba(245,209,138,.45);
+  padding:8px 14px;border-radius:100px;white-space:nowrap}
+.spot-stock{font-size:12.5px;font-weight:500;color:rgba(255,255,255,.72);margin:0;
+  display:flex;align-items:center;gap:9px}
+.spot-stock i{width:7px;height:7px;border-radius:100px;background:#C99A4E;display:block;flex:none;
+  box-shadow:0 0 0 3px rgba(201,154,78,.18)}
+.spot-cta{flex:none;background:linear-gradient(100deg,#F7DCA4,#C99A4E);color:#141414;
+  font-weight:700;font-size:14.5px;line-height:1;letter-spacing:.07em;text-transform:uppercase;
+  padding:20px 24px;border-radius:100px;
+  display:flex;align-items:center;justify-content:center;gap:11px}
+.spot-cta svg{width:17px;height:17px;flex:none}
+.spot-fud{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 11px;margin:0;
+  font-size:9.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  color:rgba(255,255,255,.55)}
+.spot-fud span{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.spot-fud svg{width:14px;height:14px;flex:none;color:rgba(245,209,138,.72)}
+.spot-fud i{width:3px;height:3px;border-radius:100px;background:rgba(255,255,255,.26);flex:none}
+
+/* mobiel */
+.pf-m{padding:34px 18px}
+.pf-m .pf-in{gap:18px}
+.pf-m .pf-top{flex-direction:column;align-items:flex-start;gap:18px}
+.pf-m .pf-h2{font-size:24px;max-width:none}
+.pf-m .pf-note{font-size:14px;line-height:145%}
+.pf-m .tp-mini{text-align:left}
+.pf-m .tp-stars{justify-content:flex-start}
+.pf-m .pf-mid{grid-template-columns:1fr;gap:14px}
+.pf-m .gcard{padding:24px 22px;gap:20px;flex-direction:column;align-items:flex-start}
+.pf-m .seal{width:124px;height:124px}
+.pf-m .seal-in{width:108px;height:108px}
+.pf-m .seal-in b{font-size:32px}
+.pf-m .gcard-h{font-size:21px}
+.pf-m .gcard-mark{right:-30px;bottom:-34px;width:170px}
+.pf-m .gcard-p{font-size:14px;line-height:150%}
+.pf-m .revcount{flex-direction:column;align-items:flex-start;gap:2px}
+.pf-m .rev{width:266px;padding:18px}
+.pf-m .revtrack{animation-duration:34s}
+.pf-m .spot{grid-template-columns:1fr}
+.pf-m .spot-img{min-height:0;aspect-ratio:4/3}
+.pf-m .spot-img:after{background:linear-gradient(180deg,rgba(10,10,10,0) 58%,rgba(10,10,10,.92) 100%)}
+.pf-m .spot-deal{left:14px;bottom:14px;padding:9px 15px}
+.pf-m .spot-deal span{font-size:18px}
+.pf-m .spot-body{margin:0 12px 12px;padding:20px 18px 22px;gap:12px}
+.pf-m .spot-h{font-size:31px}
+.pf-m .spot-p{font-size:13.5px}
+.pf-m .spot-list{grid-template-columns:1fr;gap:10px}
+.pf-m .spot-now span{font-size:34px}
+.pf-m .spot-cta{font-size:13px;padding:18px 18px;letter-spacing:.05em}
+/* op 390px past de trustregel niet op één regel; een raster van twee laat hem
+   uitgelijnd afbreken in plaats van rafelig */
+.pf-m .spot-fud{display:grid;grid-template-columns:1fr 1fr;gap:10px 8px;font-size:9.5px}
+.pf-m .spot-fud i{display:none}
+
+/* ── annotaties ── */
+.anno{background:var(--surface);border:1px solid var(--rule);border-left:2px solid var(--gold-dark-100);
+  border-radius:3px;padding:18px 22px;margin:0 0 13px;box-shadow:var(--shadow)}
+.anno > :last-child{margin-bottom:0}
+.anno h3{margin:0 0 7px;font-size:16.5px}
+.anno p{font-size:15px;margin-bottom:0;color:var(--fg-soft);max-width:68ch}
+.anno p b{color:var(--fg);font-weight:600}
+.anno p + p{margin-top:9px}
+.tablewrap{overflow-x:auto;margin:20px 0;border:1px solid var(--rule);border-radius:3px}
+table{border-collapse:collapse;width:100%;min-width:560px;background:var(--surface);font-size:14.5px}
+th,td{text-align:left;padding:12px 15px;border-bottom:1px solid var(--rule);vertical-align:top;line-height:150%}
+th{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--fg-soft);background:var(--surface-2)}
+tr:last-child td{border-bottom:0}
+td b{font-weight:600;color:var(--fg)}
+.callout{background:var(--surface-2);border-radius:3px;padding:20px 24px;margin:24px 0}
+.callout > :last-child{margin-bottom:0}
+.callout ul,.callout p{max-width:none}
+.ask{border-left:2px solid var(--crit);background:var(--crit-bg)}
+.fix{border-left:2px solid var(--ok);background:var(--ok-bg)}
+.progress{display:flex;flex-wrap:wrap;gap:5px;margin:18px 0 0}
+.progress i{width:26px;height:4px;background:var(--rule);display:block}
+.progress i.done{background:var(--gold-dark-100)}
+.progress-cap{font-size:11.5px;color:var(--fg-soft);margin:10px 0 0}
+footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--rule);
+  color:var(--fg-soft);font-size:13px}
+footer p{max-width:none}
+:focus-visible{outline:2px solid var(--gold-dark-100);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}
+  .revtrack{width:auto;overflow-x:auto}}
+</style>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01z"/></symbol>
+<symbol id="chk" viewBox="0 0 24 24"><path d="M4 12.5l5.2 5.2L20 6.9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="shield" viewBox="0 0 24 24"><path d="M12 2.6l7.2 2.8v6.1c0 4.4-3 8.4-7.2 9.9-4.2-1.5-7.2-5.5-7.2-9.9V5.4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M8.7 12.1l2.3 2.3 4.3-4.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="guarantee" viewBox="0 0 24 24"><circle cx="12" cy="9.6" r="6.4" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8.3 15.1L7 21.6l5-2.4 5 2.4-1.3-6.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+<symbol id="truck" viewBox="0 0 24 24"><path d="M1.9 6.2h12.2v9.4H1.9zM14.1 9.7h3.9l3.1 3.1v2.8h-7z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="6.6" cy="18" r="1.9" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="17.3" cy="18" r="1.9" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+<symbol id="chkc" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10.1" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M7.7 12.3l2.9 2.9 5.7-6.1" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="arw" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
+
+<div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow">Homepage-redesign · blok 2 van 12 · versie 8</p>
+  <h1>Autoriteit en bewijs</h1>
+  <p class="dek">Je redesign van het bundelblok is gebouwd: donker, goud, en het beeld draagt nu de helft van het blok. Twee dingen in je ontwerp botsen met wat er in Shopify staat — die heb ik aangepast en hieronder apart gezet.</p>
+  <p class="byline">Ontwerp — nog niets live. Akkoord → dan pas Shopify.</p>
+  <div class="progress" aria-hidden="true">
+    <i class="done"></i><i class="done"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+  </div>
+  <p class="progress-cap">Blok 2 in ontwerp · 10 blokken volgen</p>
+</header>
+
+<div class="callout fix">
+  <h3 style="margin-top:0">Je ontwerp is gebouwd</h3>
+  <p>Het blok is nu wat je tekende: <b>een donker paneel in plaats van een witte kaart</b>. Dat is meer dan een kleurkeuze — tegen de beige sectie eromheen springt het eruit als het enige donkere vlak op de pagina, en het oog gaat er vanzelf heen. Precies wat je wilt voor het blok dat de duurste order moet binnenhalen.</p>
+  <p><b>Het beeld doet nu mee in plaats van dat het ernaast staat.</b> De vorige versie had een packshot op wit, netjes ingepast met lucht eromheen. Dat kon niet donker. Ik heb je eigen sfeerfoto uit de Shopify-media gebruikt: de Flex Guard op de oplaadstandaard, met hardcase, toilettas en de opzetstukken in een donkere badkamer. Die loopt nu tot de rand door en dooft naar rechts uit in het paneel, zodat er geen naad in het midden zit.</p>
+  <p>Verder overgenomen uit je ontwerp: de gouden verlooptitel met <em>Essential</em> in wit, de vinkjes in twee kolommen in plaats van een lijstje van vier, het <strong>NU</strong>-label boven de prijs, de besparing als omlijnde pil naast de doorgestreepte adviesprijs, en de bundelvoordeel-chip op de foto. De knop zegt nu <strong>"Pak de complete bundel"</strong> in plaats van "In winkelwagen" — dat is jouw regel en hij is beter, want hij benoemt wat je krijgt in plaats van wat je doet.</p>
+  <p style="margin-bottom:0"><b>Eén ding heb ik anders opgelost dan jij het tekende:</b> de trustregel onderaan past op 390px niet op één regel. Op desktop staat hij zoals bij jou, gespreid met puntjes ertussen. Op mobiel breekt hij netjes af in twee kolommen zonder puntjes, in plaats van rafelig om te vallen.</p>
+</div>
+
+<div class="callout fix">
+  <h3 style="margin-top:0">Vanaf nu meet ik het, in plaats van het in te schatten</h3>
+  <p style="margin-bottom:0">Ik heb ontdekt dat ik dit blok lokaal kan renderen en opmeten. Er loopt nu een controle overheen die elk element vergelijkt met zijn container en meldt wat eruit steekt, plus een vergelijking van elke beeldverhouding tegen het bronbestand. Deze versie komt er schoon doorheen: geen overloop, en elke foto staat op zijn eigen verhouding of op <code>cover</code>, wat bijsnijdt maar nooit vervormt.</p>
+  <p style="margin-bottom:0"><b>Bij deze ronde ving het meteen iets dat ik zelf niet had gezien.</b> De trustregel viel om naar twee regels terwijl er ruimte zat. Oorzaak: de opmaak van dit document zelf — een regel <code>p{max-width:68ch}</code> die bedoeld is voor de leesbaarheid van deze toelichting — lekte de mockup in en kneep élke alinea in het blok af. Dat gold ook voor de vorige versies; het viel alleen niet op. De mockup is nu afgeschermd van de documentstijl.</p>
+</div>
+
+<div class="callout ask">
+  <h3 style="margin-top:0">Eén kanttekening bij de carrousel, en dan bouwen we hem</h3>
+  <p>Je intentie klopt: meer reviews tonen verhoogt de geloofwaardigheid. Maar een klikbare carrousel is er de verkeerde verpakking voor — <strong>1 tot 2% van de bezoekers klikt door naar dia twee</strong>. In de praktijk laat je dan negen van de tien reviews aan niemand zien, terwijl je juist volume wilde tonen.</p>
+  <p style="margin-bottom:0"><strong>Wat ik ervan gemaakt heb:</strong> een doorlopende band die vanzelf beweegt. Je krijgt de beweging en het volume van een carrousel, maar niemand hoeft iets aan te klikken om de tiende review te zien — hij komt gewoon langs. Beweeg je de muis erover, dan stopt hij zodat je kunt lezen. Zet iemand bewegingsreductie aan in zijn systeem, dan wordt het een gewone scrollbare rij. Wil je toch pijltjes erbij, dan bouw ik dat er alsnog in.</p>
+</div>
+
+<div class="callout ask">
+  <h3 style="margin-top:0">Je hebt er nog geen tien</h3>
+  <p>Op je hele site staan <strong>acht unieke reviewteksten</strong>, allemaal in dezelfde sectie. Meer heb ik nergens kunnen vinden — je productpagina's laden ze via een app die de tekst niet in de pagina zet. De band in het ontwerp herhaalt die acht, want zo werkt een doorlopende band nu eenmaal.</p>
+  <p><strong>Voor de echte bouw heb je er 12 tot 15 nodig</strong>, en die zijn er: je hebt 950+ beoordelingen op Trustpilot staan. Exporteer ze uit je Trustpilot Business-account en kies er bewust uit — niet de aardigste, maar die elk een ander bezwaar wegnemen.</p>
+  <p style="margin-bottom:0"><strong>Let daarbij op wie er aan het woord is.</strong> Van de acht die je nu toont zijn er drie ondertekend met een vrouwennaam, waaronder een review over een hoofdscheerapparaat. Op een merk voor mannen ondermijnt dat de geloofwaardigheid stilletjes — precies het tegenovergestelde van wat je met deze band wilt bereiken.</p>
+</div>
+
+<div class="callout ask">
+  <h3 style="margin-top:0">Twee dingen in je ontwerp botsen met Shopify</h3>
+  <p><b>Je schreef "5 producten", maar de bundel bevat er vier.</b> In Shopify staat onder <em>Wat zit erin</em>: 3-in-1 Flex Guard, toilettas, Travel Hard Case en een extra Skin Safe mes. Je eigen vinkjeslijst noemt diezelfde vier. Ik heb er <strong>"4 producten. één complete routine"</strong> van gemaakt, want een getal dat de klant in de lijst eronder kan natellen mag niet hoger zijn dan de lijst zelf. Klopt de bundelinhoud in Shopify niet meer en zit er echt een vijfde product in, dan draai ik het meteen terug — dan is het Shopify dat bijgewerkt moet worden.</p>
+  <p><b>Je schreef "Flex Bundle", het product heet "Essential Flex Bundel".</b> Ik heb de Nederlandse schrijfwijze aangehouden. Klinkt als een muggenzifterij, maar iemand die op de homepage op de knop klikt en op een productpagina met een net iets andere naam landt, twijfelt een halve seconde — en dat is precies de plek waar je ze niet wilt laten twijfelen. Wil je overal "Bundle", dan is dat prima, maar dan moet de productnaam in Shopify mee.</p>
+  <p style="margin-bottom:0"><b>En dan de foto zelf.</b> Daarop staan een oplaadstandaard en een neustrimmer-opzetstuk. Geen van beide staat in de bundelomschrijving. Dat geldt ook voor de foto in jouw ontwerp. Als het beeld meer toont dan er in de doos zit, koopt iemand iets anders dan hij denkt — en dat komt terug als retour. Zit de standaard er wél bij, dan hoort hij in de vinkjeslijst (en zijn het er vijf, en had je gelijk). Zit hij er niet bij, dan hebben we een foto nodig zonder standaard.</p>
+</div>
+
+<div class="callout fix">
+  <h3 style="margin-top:0">De cijfers zijn nagelopen</h3>
+  <p style="margin-bottom:0"><strong>Alles wat je in het ontwerp zette klopt met Shopify:</strong> €79,95 tegenover een adviesprijs van €133,25, een besparing van €53,30, en 26 stuks op voorraad. Die voorraadstand moet in de bouw wel live meelopen — een vast getal dat niet klopt is erger dan geen getal.</p>
+</div>
+
+<h2>Het ontwerp</h2>
+<p class="sub">Vier banden onder elkaar. Elke band heeft één taak, dus er is maar één leesrichting: van boven naar beneden.</p>
+
+<div class="stage">
+  <div>
+    <p class="devicecap">Desktop — 1440px</p>
+    <div class="scaler desk-scaler"><div class="inner">
+      <section class="pf"><div class="pf-in">
+
+        <div class="pf-top">
+          <div>
+            <p class="pf-eyebrow">Zonder risico</p>
+            <h2 class="pf-h2">Het enige wat jij hoeft te doen, is hem <b>uitproberen</b>.</h2>
+            <p class="pf-note">De rest hebben wij dichtgetimmerd: honderd dagen bedenktijd, twee jaar garantie, en een klantenservice die je gewoon te pakken krijgt.</p>
+          </div>
+          <div class="tp-mini">
+            <div class="tp-stars">
+              <i><svg><use href="#star"/></svg></i><i><svg><use href="#star"/></svg></i>
+              <i><svg><use href="#star"/></svg></i><i><svg><use href="#star"/></svg></i>
+              <i class="half"><svg><use href="#star"/></svg></i>
+            </div>
+            <p class="tp-txt"><b>4,5</b> uit 950+ beoordelingen op <span class="tp-brand"><svg><use href="#star"/></svg>Trustpilot</span></p>
+          </div>
+        </div>
+
+        <div class="pf-mid">
+          <div class="gcard">
+            <span class="gcard-mark"><img src="__MARK__" alt=""></span>
+            <span class="seal"><span class="seal-in">
+              <img src="__MARK__" alt="">
+              <b>100</b><span>dagen</span>
+            </span></span>
+            <div class="gcard-body">
+              <h3 class="gcard-h">Koop hem, gebruik hem 100 dagen.<br><em>Bevalt het niet? Geld terug.</em></h3>
+              <p class="gcard-p">Geen proefperiode van twee weken waarin je nog niets weet. Honderd dagen in je eigen badkamer, zo vaak als je wilt.</p>
+              <ul class="gcard-list">
+                <li><svg><use href="#chkc"/></svg>Geld terug</li>
+                <li><svg><use href="#chkc"/></svg>2 jaar garantie</li>
+                <li><svg><use href="#chkc"/></svg>Gratis verzending vanaf €30</li>
+              </ul>
+              <p class="gcard-team">Stuur je hem terug, dan komt je mail bij <b>Yvonne</b> terecht — niet bij een chatbot. Klantenservice en magazijn zitten in hetzelfde pand in Helmond.</p>
+            </div>
+          </div>
+          <div class="shot"><img src="__USE__" alt="Man gebruikt de Wellshave neustrimmer"></div>
+        </div>
+
+        <div>
+            <p class="revcount"><b>Wat klanten schrijven</b><span>8 van de 950+ beoordelingen</span></p>
+            <div class="revwrap"><div class="revtrack">
+              <article class="rev">
+                <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+                <p class="rev-q">"Doet wat hij moet doen. Ook bij de edele delen kun je zonder wondjes gaan trimmen. Ligt ook goed in de hand. Zeker goeie prijs kwaliteit."</p>
+                <p class="rev-by"><span class="rev-av">M</span><span><b>Maarten A.</b>Groom Guard</span>
+                  <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+              </article>
+              <article class="rev">
+                <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+                <p class="rev-q">"Door de keramische bladen geen wondjes bij de schaamstreek. Scheermesjes? Prullenbak in!"</p>
+                <p class="rev-by"><span class="rev-av">B</span><span><b>Barend P.</b>Groom Guard PRO</span>
+                  <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+              </article>
+              <article class="rev">
+                <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+                <p class="rev-q">"Hele fijne en stille trimmer met accudisplay, dus nooit meer een lege batterij. Direct op de huid te gebruiken zonder sneetjes."</p>
+                <p class="rev-by"><span class="rev-av">A</span><span><b>Aiden M.</b>Shave Package 3.0</span>
+                  <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+              </article>
+              <article class="rev">
+                <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+                <p class="rev-q">"Geweldig pakket, had ik eerder moeten kopen. Scheren gaat moeiteloos en zonder wondjes, zelfs de schaamstreek wordt super glad."</p>
+                <p class="rev-by"><span class="rev-av">R</span><span><b>Rik T.</b>Shave Package Ultimate</span>
+                  <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+              </article>
+              <article class="rev">
+                <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+                <p class="rev-q">"Merk was nieuw voor mij, maar door de veelzijdigheid en reviews toch besteld. Snel geleverd en netjes verpakt. Scheerresultaat boven verwachting."</p>
+                <p class="rev-by"><span class="rev-av">B</span><span><b>Britt J.</b>Gentleman Shaver Elite</span>
+                  <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+              </article>
+              <article class="rev">
+                <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+                <p class="rev-q">"Prettig apparaat, klein en ligt goed in de hand. Ik gebruik hem om mijn hoofd kaal te scheren, doet wat het belooft."</p>
+                <p class="rev-by"><span class="rev-av">E</span><span><b>Emma B.</b>Head Shaver Deluxe</span>
+                  <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+              </article>
+              <article class="rev">
+                <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+                <p class="rev-q">"Fijn apparaat, werkt naar behoren. Als je de mesjes goed plat over de huid laat gaan kun je met een gerust hart scheren."</p>
+                <p class="rev-by"><span class="rev-av">L</span><span><b>Lisa Z.</b>Flex Guard</span>
+                  <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+              </article>
+              <article class="rev">
+                <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+                <p class="rev-q">"Neustrim-opzetstuk kwijtgeraakt en kosteloos nageleverd door de klantenservice."</p>
+                <p class="rev-by"><span class="rev-av">A</span><span><b>Aiden M.</b>Shave Package 3.0</span>
+                  <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+              </article>
+              <article class="rev">
+                <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+                <p class="rev-q">"Doet wat hij moet doen. Ook bij de edele delen kun je zonder wondjes gaan trimmen. Ligt ook goed in de hand. Zeker goeie prijs kwaliteit."</p>
+                <p class="rev-by"><span class="rev-av">M</span><span><b>Maarten A.</b>Groom Guard</span>
+                  <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+              </article>
+              <article class="rev">
+                <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+                <p class="rev-q">"Door de keramische bladen geen wondjes bij de schaamstreek. Scheermesjes? Prullenbak in!"</p>
+                <p class="rev-by"><span class="rev-av">B</span><span><b>Barend P.</b>Groom Guard PRO</span>
+                  <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+              </article>
+              <article class="rev">
+                <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+                <p class="rev-q">"Hele fijne en stille trimmer met accudisplay, dus nooit meer een lege batterij. Direct op de huid te gebruiken zonder sneetjes."</p>
+                <p class="rev-by"><span class="rev-av">A</span><span><b>Aiden M.</b>Shave Package 3.0</span>
+                  <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+              </article>
+              <article class="rev">
+                <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+                <p class="rev-q">"Geweldig pakket, had ik eerder moeten kopen. Scheren gaat moeiteloos en zonder wondjes, zelfs de schaamstreek wordt super glad."</p>
+                <p class="rev-by"><span class="rev-av">R</span><span><b>Rik T.</b>Shave Package Ultimate</span>
+                  <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+              </article>
+              <article class="rev">
+                <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+                <p class="rev-q">"Merk was nieuw voor mij, maar door de veelzijdigheid en reviews toch besteld. Snel geleverd en netjes verpakt. Scheerresultaat boven verwachting."</p>
+                <p class="rev-by"><span class="rev-av">B</span><span><b>Britt J.</b>Gentleman Shaver Elite</span>
+                  <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+              </article>
+              <article class="rev">
+                <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+                <p class="rev-q">"Prettig apparaat, klein en ligt goed in de hand. Ik gebruik hem om mijn hoofd kaal te scheren, doet wat het belooft."</p>
+                <p class="rev-by"><span class="rev-av">E</span><span><b>Emma B.</b>Head Shaver Deluxe</span>
+                  <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+              </article>
+              <article class="rev">
+                <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+                <p class="rev-q">"Fijn apparaat, werkt naar behoren. Als je de mesjes goed plat over de huid laat gaan kun je met een gerust hart scheren."</p>
+                <p class="rev-by"><span class="rev-av">L</span><span><b>Lisa Z.</b>Flex Guard</span>
+                  <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+              </article>
+              <article class="rev">
+                <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+                <p class="rev-q">"Neustrim-opzetstuk kwijtgeraakt en kosteloos nageleverd door de klantenservice."</p>
+                <p class="rev-by"><span class="rev-av">A</span><span><b>Aiden M.</b>Shave Package 3.0</span>
+                  <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+              </article>
+            </div></div>
+          </div>
+
+          <div class="spot">
+            <div class="spot-img">
+              <img src="__BUNDLEBIG__" alt="Essential Flex Bundel: Flex Guard op de oplaadstandaard, toilettas, hardcase en opzetstukken">
+              <span class="spot-deal"><b>Bundelvoordeel</b><span>€53,30</span></span>
+            </div>
+            <div class="spot-body">
+              <span class="spot-badge"><i><svg><use href="#star"/></svg></i>Meest gekozen</span>
+              <p class="spot-eyebrow">4 producten. één complete routine.</p>
+              <h3 class="spot-h">Essential<b>Flex Bundel</b></h3>
+              <p class="spot-p">Trimmen, scheren en detailwerk — thuis én onderweg.</p>
+              <div class="spot-rule"></div>
+              <ul class="spot-list">
+                <li><svg><use href="#chkc"/></svg>3-in-1 Flex Guard</li>
+                <li><svg><use href="#chkc"/></svg>Travel Hard Case</li>
+                <li><svg><use href="#chkc"/></svg>Luxe toilettas</li>
+                <li><svg><use href="#chkc"/></svg>Extra Skin Safe mes</li>
+              </ul>
+              <div class="spot-price">
+                <span class="spot-now"><b>Nu</b><span>€79,95</span></span>
+                <span class="spot-cmp">
+                  <span class="spot-was">€133,25</span>
+                  <span class="spot-save">Je bespaart €53,30</span>
+                </span>
+              </div>
+              <p class="spot-stock"><i></i>Nog 26 op voorraad</p>
+              <span class="spot-cta">Pak de complete bundel <svg><use href="#arw"/></svg></span>
+              <div class="spot-rule"></div>
+              <p class="spot-fud">
+                <span><svg><use href="#shield"/></svg>100 dagen proberen</span><i></i>
+                <span><svg><use href="#guarantee"/></svg>2 jaar garantie</span><i></i>
+                <span><svg><use href="#truck"/></svg>Morgen in huis</span>
+              </p>
+            </div>
+          </div>
+
+      </div></section>
+    </div></div>
+  </div>
+
+  <div class="phonecol">
+    <p class="devicecap">Mobiel — 390px · gestapeld</p>
+    <div class="scaler phone-scaler"><div class="inner">
+      <section class="pf pf-m"><div class="pf-in">
+
+        <div class="pf-top">
+          <div>
+            <p class="pf-eyebrow">Zonder risico</p>
+            <h2 class="pf-h2">Het enige wat jij hoeft te doen, is hem <b>uitproberen</b>.</h2>
+            <p class="pf-note">De rest hebben wij dichtgetimmerd: honderd dagen bedenktijd, twee jaar garantie, en een klantenservice die je gewoon te pakken krijgt.</p>
+          </div>
+          <div class="tp-mini">
+            <div class="tp-stars">
+              <i><svg><use href="#star"/></svg></i><i><svg><use href="#star"/></svg></i>
+              <i><svg><use href="#star"/></svg></i><i><svg><use href="#star"/></svg></i>
+              <i class="half"><svg><use href="#star"/></svg></i>
+            </div>
+            <p class="tp-txt"><b>4,5</b> uit 950+ beoordelingen op <span class="tp-brand"><svg><use href="#star"/></svg>Trustpilot</span></p>
+          </div>
+        </div>
+
+        <div class="pf-mid">
+          <div class="gcard">
+            <span class="gcard-mark"><img src="__MARK__" alt=""></span>
+            <span class="seal"><span class="seal-in">
+              <img src="__MARK__" alt="">
+              <b>100</b><span>dagen</span>
+            </span></span>
+            <div class="gcard-body">
+              <h3 class="gcard-h">Koop hem, gebruik hem 100 dagen.<br><em>Bevalt het niet? Geld terug.</em></h3>
+              <p class="gcard-p">Geen proefperiode van twee weken waarin je nog niets weet. Honderd dagen in je eigen badkamer, zo vaak als je wilt.</p>
+              <ul class="gcard-list">
+                <li><svg><use href="#chkc"/></svg>Geld terug</li>
+                <li><svg><use href="#chkc"/></svg>2 jaar garantie</li>
+                <li><svg><use href="#chkc"/></svg>Gratis verzending vanaf €30</li>
+              </ul>
+              <p class="gcard-team">Stuur je hem terug, dan komt je mail bij <b>Yvonne</b> terecht — niet bij een chatbot. Klantenservice en magazijn zitten in hetzelfde pand in Helmond.</p>
+            </div>
+          </div>
+          <div class="shot"><img src="__USE__" alt="Man gebruikt de Wellshave neustrimmer"></div>
+        </div>
+
+        <div>
+            <p class="revcount"><b>Wat klanten schrijven</b><span>8 van de 950+ beoordelingen</span></p>
+            <div class="revwrap"><div class="revtrack">
+              <article class="rev">
+                <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+                <p class="rev-q">"Doet wat hij moet doen. Ook bij de edele delen kun je zonder wondjes gaan trimmen. Ligt ook goed in de hand. Zeker goeie prijs kwaliteit."</p>
+                <p class="rev-by"><span class="rev-av">M</span><span><b>Maarten A.</b>Groom Guard</span>
+                  <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+              </article>
+              <article class="rev">
+                <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+                <p class="rev-q">"Door de keramische bladen geen wondjes bij de schaamstreek. Scheermesjes? Prullenbak in!"</p>
+                <p class="rev-by"><span class="rev-av">B</span><span><b>Barend P.</b>Groom Guard PRO</span>
+                  <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+              </article>
+              <article class="rev">
+                <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+                <p class="rev-q">"Hele fijne en stille trimmer met accudisplay, dus nooit meer een lege batterij. Direct op de huid te gebruiken zonder sneetjes."</p>
+                <p class="rev-by"><span class="rev-av">A</span><span><b>Aiden M.</b>Shave Package 3.0</span>
+                  <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+              </article>
+              <article class="rev">
+                <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+                <p class="rev-q">"Geweldig pakket, had ik eerder moeten kopen. Scheren gaat moeiteloos en zonder wondjes, zelfs de schaamstreek wordt super glad."</p>
+                <p class="rev-by"><span class="rev-av">R</span><span><b>Rik T.</b>Shave Package Ultimate</span>
+                  <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+              </article>
+              <article class="rev">
+                <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+                <p class="rev-q">"Merk was nieuw voor mij, maar door de veelzijdigheid en reviews toch besteld. Snel geleverd en netjes verpakt. Scheerresultaat boven verwachting."</p>
+                <p class="rev-by"><span class="rev-av">B</span><span><b>Britt J.</b>Gentleman Shaver Elite</span>
+                  <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+              </article>
+              <article class="rev">
+                <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+                <p class="rev-q">"Prettig apparaat, klein en ligt goed in de hand. Ik gebruik hem om mijn hoofd kaal te scheren, doet wat het belooft."</p>
+                <p class="rev-by"><span class="rev-av">E</span><span><b>Emma B.</b>Head Shaver Deluxe</span>
+                  <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+              </article>
+              <article class="rev">
+                <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+                <p class="rev-q">"Fijn apparaat, werkt naar behoren. Als je de mesjes goed plat over de huid laat gaan kun je met een gerust hart scheren."</p>
+                <p class="rev-by"><span class="rev-av">L</span><span><b>Lisa Z.</b>Flex Guard</span>
+                  <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+              </article>
+              <article class="rev">
+                <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+                <p class="rev-q">"Neustrim-opzetstuk kwijtgeraakt en kosteloos nageleverd door de klantenservice."</p>
+                <p class="rev-by"><span class="rev-av">A</span><span><b>Aiden M.</b>Shave Package 3.0</span>
+                  <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+              </article>
+              <article class="rev">
+                <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+                <p class="rev-q">"Doet wat hij moet doen. Ook bij de edele delen kun je zonder wondjes gaan trimmen. Ligt ook goed in de hand. Zeker goeie prijs kwaliteit."</p>
+                <p class="rev-by"><span class="rev-av">M</span><span><b>Maarten A.</b>Groom Guard</span>
+                  <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+              </article>
+              <article class="rev">
+                <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+                <p class="rev-q">"Door de keramische bladen geen wondjes bij de schaamstreek. Scheermesjes? Prullenbak in!"</p>
+                <p class="rev-by"><span class="rev-av">B</span><span><b>Barend P.</b>Groom Guard PRO</span>
+                  <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+              </article>
+              <article class="rev">
+                <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+                <p class="rev-q">"Hele fijne en stille trimmer met accudisplay, dus nooit meer een lege batterij. Direct op de huid te gebruiken zonder sneetjes."</p>
+                <p class="rev-by"><span class="rev-av">A</span><span><b>Aiden M.</b>Shave Package 3.0</span>
+                  <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+              </article>
+              <article class="rev">
+                <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+                <p class="rev-q">"Geweldig pakket, had ik eerder moeten kopen. Scheren gaat moeiteloos en zonder wondjes, zelfs de schaamstreek wordt super glad."</p>
+                <p class="rev-by"><span class="rev-av">R</span><span><b>Rik T.</b>Shave Package Ultimate</span>
+                  <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+              </article>
+              <article class="rev">
+                <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+                <p class="rev-q">"Merk was nieuw voor mij, maar door de veelzijdigheid en reviews toch besteld. Snel geleverd en netjes verpakt. Scheerresultaat boven verwachting."</p>
+                <p class="rev-by"><span class="rev-av">B</span><span><b>Britt J.</b>Gentleman Shaver Elite</span>
+                  <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+              </article>
+              <article class="rev">
+                <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+                <p class="rev-q">"Prettig apparaat, klein en ligt goed in de hand. Ik gebruik hem om mijn hoofd kaal te scheren, doet wat het belooft."</p>
+                <p class="rev-by"><span class="rev-av">E</span><span><b>Emma B.</b>Head Shaver Deluxe</span>
+                  <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+              </article>
+              <article class="rev">
+                <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+                <p class="rev-q">"Fijn apparaat, werkt naar behoren. Als je de mesjes goed plat over de huid laat gaan kun je met een gerust hart scheren."</p>
+                <p class="rev-by"><span class="rev-av">L</span><span><b>Lisa Z.</b>Flex Guard</span>
+                  <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+              </article>
+              <article class="rev">
+                <div class="rev-stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></div>
+                <p class="rev-q">"Neustrim-opzetstuk kwijtgeraakt en kosteloos nageleverd door de klantenservice."</p>
+                <p class="rev-by"><span class="rev-av">A</span><span><b>Aiden M.</b>Shave Package 3.0</span>
+                  <span class="rev-src"><svg><use href="#star"/></svg>Trustpilot</span></p>
+              </article>
+            </div></div>
+          </div>
+
+          <div class="spot">
+            <div class="spot-img">
+              <img src="__BUNDLEBIG__" alt="Essential Flex Bundel: Flex Guard op de oplaadstandaard, toilettas, hardcase en opzetstukken">
+              <span class="spot-deal"><b>Bundelvoordeel</b><span>€53,30</span></span>
+            </div>
+            <div class="spot-body">
+              <span class="spot-badge"><i><svg><use href="#star"/></svg></i>Meest gekozen</span>
+              <p class="spot-eyebrow">4 producten. één complete routine.</p>
+              <h3 class="spot-h">Essential<b>Flex Bundel</b></h3>
+              <p class="spot-p">Trimmen, scheren en detailwerk — thuis én onderweg.</p>
+              <div class="spot-rule"></div>
+              <ul class="spot-list">
+                <li><svg><use href="#chkc"/></svg>3-in-1 Flex Guard</li>
+                <li><svg><use href="#chkc"/></svg>Travel Hard Case</li>
+                <li><svg><use href="#chkc"/></svg>Luxe toilettas</li>
+                <li><svg><use href="#chkc"/></svg>Extra Skin Safe mes</li>
+              </ul>
+              <div class="spot-price">
+                <span class="spot-now"><b>Nu</b><span>€79,95</span></span>
+                <span class="spot-cmp">
+                  <span class="spot-was">€133,25</span>
+                  <span class="spot-save">Je bespaart €53,30</span>
+                </span>
+              </div>
+              <p class="spot-stock"><i></i>Nog 26 op voorraad</p>
+              <span class="spot-cta">Pak de complete bundel <svg><use href="#arw"/></svg></span>
+              <div class="spot-rule"></div>
+              <p class="spot-fud">
+                <span><svg><use href="#shield"/></svg>100 dagen proberen</span><i></i>
+                <span><svg><use href="#guarantee"/></svg>2 jaar garantie</span><i></i>
+                <span><svg><use href="#truck"/></svg>Morgen in huis</span>
+              </p>
+            </div>
+          </div>
+
+      </div></section>
+    </div></div>
+  </div>
+</div>
+
+<h2>De vier banden</h2>
+<div class="tablewrap">
+<table>
+  <thead><tr><th>Band</th><th>Taak</th><th>Waarom hier</th></tr></thead>
+  <tbody>
+    <tr><td><b>1 — Kop</b></td><td>De belofte, plus de score klein rechts</td><td>Eén zin waar het over gaat. De score staat er wel, maar hoeft de vergelijking niet te winnen</td></tr>
+    <tr><td><b>2 — Garantie en foto</b></td><td>Het zwaartepunt: 100 dagen, groot, met de garanties en het team eronder</td><td>Dit is het enige waar je van de vier merken het beste aanbod hebt</td></tr>
+    <tr><td><b>3 — Drie reviews</b></td><td>Bewijs, elk met een ander bezwaar</td><td>Gelijke kaarten, want het zijn gelijkwaardige stemmen. Hier hoort geen hiërarchie</td></tr>
+    <tr><td><b>4 — Bundelregel</b></td><td>De zachte verkoop</td><td>Eén regel, geen tegel. Wie overtuigd is kan door, wie dat niet is scrollt eroverheen</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="anno">
+  <h3>De band toont volume, ook als je niet leest</h3>
+  <p>Het effect van veel reviews werkt grotendeels zonder dat iemand ze leest: de beweging en het aantal kaarten vertellen al dat er veel mensen zijn geweest. <b>Daarom moet het langskomen en niet weggeklikt zitten.</b> De randen lopen zacht weg met een masker, zodat het zichtbaar dóórloopt in plaats van bij de zijkant te stoppen — dat is wat "er zijn er nog veel meer" communiceert.</p>
+</div>
+
+<div class="anno">
+  <h3>Het koopblok staat achteraan, niet vooraan</h3>
+  <p>Kop, garantie, reviews, en dán pas de prijs. Wie bij het koopblok aankomt heeft de garantie en acht klantstemmen al gezien; het aanbod hoeft dan niet meer te overtuigen, alleen nog gemakkelijk te maken. <b>Andersom werkt niet:</b> een prijs bovenaan een sectie die vertrouwen moet opbouwen, verandert het blok in een advertentie.</p>
+</div>
+
+<div class="anno">
+  <h3>Waarom vier banden en geen mozaïek</h3>
+  <p>Een mozaïek werkt alleen als het ritme klopt. Bij zeven tegels van verschillende maten moet je oog steeds opnieuw beslissen waar het heen gaat, en dat is precies wat jij ervoer. <b>Banden hebben één richting.</b> Je leest de kop, dan het grote getal, dan de reviews, dan de bundel. De variatie zit nu in de hoogte van de banden en in het contrast tussen de donkere kaart en de lichte reviews — niet in zeven verschillende tegelmaten.</p>
+</div>
+
+<div class="anno">
+  <h3>Het zegel is het brandpunt</h3>
+  <p>De sectie heeft één blikvanger, en dat is nu een vorm in plaats van alleen een getal. Het zegel is 152px in de gouden verloopring, met het monogram erboven — daarmee is het herkenbaar van jou, ook zonder dat er "Wellshave" bij staat. <b>Eén brandpunt per band is genoeg</b>; de rest van de kaart is bewust rustig gehouden.</p>
+</div>
+
+<div class="anno">
+  <h3>Waarom "Yvonne" sterker is dan "wij"</h3>
+  <p>"Wij pakken je bestelling zelf in" is een uitspraak over jullie werkwijze. Die overtuigt niet, want elke webshop kan hem doen en niemand kan hem controleren. <b>Een naam is wel controleerbaar</b> — en hij beantwoordt precies de vraag die bij een retour opkomt: wie krijg ik straks aan de lijn?</p>
+  <p>De regel koppelt het team bovendien aan de garantie in plaats van aan de logistiek. Dat is waar hij hoort: honderd dagen bedenktijd is alleen iets waard als er ook echt iemand is die je retour afhandelt.</p>
+  <p><b>Twee dingen om te bevestigen:</b> doet Yvonne nog de klantenservice, en wil je een voornaam op je homepage? Zo niet, dan wordt het "dan komt je mail bij ons klantenserviceteam in Helmond terecht" — zwakker, maar nog altijd concreter dan de vorige regel.</p>
+</div>
+
+<div class="anno">
+  <h3>Het teamverhaal blijft ondergeschikt</h3>
+  <p>Uit de concurrentie-analyse bleek dat Balzy dit al beter doet: elf man, oprichter bij naam, en dat detail dat DHL om 00:30 de rolcontainers ophaalt. Een eigen tegel maakt het geen sterker verhaal. Het staat nu als voetregel onder de garantie, waar het hoort: <b>bewijs dat de belofte gedekt wordt door mensen die je kunt aanspreken.</b></p>
+  <p>Wil je hier écht winnen, dan moet het concreter dan Balzy: namen, gezichten, en één specifiek detail dat niemand kan verzinnen. Dat is beschikbaar — je hebt zes mensen met naam en functie op je over-pagina staan.</p>
+</div>
+
+<div class="anno">
+  <h3>Elke beeldhouder heeft nu een vaste verhouding</h3>
+  <p>De foto zit in <code>aspect-ratio:1/1</code>, de bundelafbeelding in <code>3/2</code>, allebei gelijk aan de verhouding van het bestand zelf. Met <code>object-fit:cover</code> erbovenop kan een beeld alleen nog bijgesneden worden, nooit vervormd. <b>Dat is een structurele oplossing</b>, geen correctie per foto — vervang je later het bestand, dan gaat het nog steeds goed.</p>
+</div>
+
+<div class="callout ask">
+  <h3 style="margin-top:0">Wat ik van jou nodig heb</h3>
+  <ul style="margin-bottom:0">
+    <li><strong>Zit de oplaadstandaard in de bundel, ja of nee?</strong> Dat bepaalt of het er vier of vijf producten zijn, en of deze foto kan blijven staan. Zie de kanttekening hierboven.</li>
+    <li><strong>Blijft het "Bundel" of wordt het overal "Bundle"?</strong> Eén van de twee — nu staat het op de homepage anders dan op de productpagina.</li>
+    <li><strong>Een echte foto voor de garantieband.</strong> Dat is nog steeds een still uit een klantvideo van 750 pixels. Voor een blok dat vertrouwen moet wekken is dat aan de krappe kant. Het bundelblok heeft nu wél een goede foto.</li>
+    <li><strong>Klopt "zes mensen in Helmond"?</strong> Afgeleid van je over-pagina en je FAQ.</li>
+    <li><strong>Mag ik reviewfoto's gaan verzamelen?</strong> Nog steeds de goedkoopste grote winst in het hele plan.</li>
+  </ul>
+</div>
+
+<h2>Bouwnotities voor straks</h2>
+<ul>
+  <li>Achtergrond <code>#EDE7DB</code> en hoekradius 12px komen uit je eigen <code>reviews.css</code> en <code>ugc-videos.css</code>.</li>
+  <li>Elke beeldhouder krijgt een <code>aspect-ratio</code> en het beeld <code>object-fit:cover</code>. Nooit een <code>height</code>-attribuut in de HTML combineren met <code>width:100%</code> in CSS zonder <code>height:auto</code>.</li>
+  <li>Vier banden als losse blokken in één sectie, zodat je band 4 kunt uitzetten zonder de rest aan te raken.</li>
+  <li>Stapelvolgorde op 390px: kop → score → garantiekaart → foto → drie reviews → bundelregel.</li>
+  <li>Reviews betrekken uit je reviewapp of Trustpilot-export, niet opnieuw intypen. Minimaal 12, bewust gekozen op het bezwaar dat ze wegnemen.</li>
+  <li>De band dupliceert zijn eigen inhoud één keer en schuift 50% op; dat geeft een naadloze lus. Voeg je reviews toe, dan hoeft alleen de duur van de animatie mee te groeien.</li>
+  <li>Voorraadstand live uit Shopify halen, of weglaten. Onder ongeveer 30 stuks tonen, daarboven verbergen.</li>
+  <li>Beelden <code>loading="lazy"</code>; dit blok staat onder de vouw.</li>
+  <li>De sectie nooit op een vaste hoogte zetten. Vier banden onder elkaar met <code>gap</code>; de sectie groeit dan mee met de langste reviewtekst in plaats van hem af te snijden.</li>
+  <li>Na de bouw de verhoudingen meten: <code>naturalWidth/naturalHeight</code> tegen <code>getBoundingClientRect()</code>. Niet op het oog beoordelen — een vervorming van 25% zag ik zelf ook over het hoofd.</li>
+</ul>
+
+<h2>Daarna</h2>
+<p><strong>Blok 3 — het assortiment.</strong> En daar komt de vondst uit de concurrentie-analyse binnen: sorteren op lichaamszone in plaats van op apparaattype, zoals Brothers in Style doet. Iemand weet welk lichaamsdeel hij wil aanpakken, niet welke productcategorie daarbij hoort.</p>
+
+<footer>
+  <p>Achtergrondkleur, hoekradius en type-schaal uit <code>reviews.css</code>, <code>ugc-videos.css</code> en <code>base.css</code> van je live theme. Reviewteksten letterlijk van je homepage. Team en herkomst van <code>wellshave.com/pages/over-wellshave</code> en je FAQ. Beeld uit je eigen UGC-sectie en Shopify-bestanden, opnieuw uitgesneden op de oorspronkelijke verhouding. De mockup houdt de merkkleuren vast in zowel licht als donker thema; dat is de site, niet deze pagina.</p>
+</footer>
+
+</div>
+
+<script>
+function fit(){
+  document.querySelectorAll('.scaler').forEach(s=>{
+    const inner=s.firstElementChild;
+    const w=parseFloat(getComputedStyle(inner).width);
+    const scale=s.clientWidth/w;
+    inner.style.transform='scale('+scale+')';
+    s.style.height=Math.ceil(inner.offsetHeight*scale)+'px';
+  });
+}
+document.fonts&&document.fonts.ready.then(fit);
+window.addEventListener('resize',fit);
+new ResizeObserver(fit).observe(document.body);
+window.addEventListener('load',fit); fit();
+</script>

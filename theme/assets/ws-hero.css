@@ -1,0 +1,182 @@
+/* ═══ Wellshave — blok 1, de hero ═══
+   Bron: audits/blok-01-hero.template.html. De balk en de navigatie uit de
+   mockup zitten hier niet in; die levert de header van het thema.
+   Mobiel is hier een echte media query in plaats van de klasse .ws-m. */
+
+.ws-hero-blok{font-family:"Montserrat",sans-serif;background:#0B0B0A;color:#fff;
+  display:flex;flex-direction:column}
+.ws-hero-blok *{box-sizing:border-box}
+.ws-hero-blok p{margin:0;max-width:none}
+
+.ws-hero{position:relative;overflow:hidden;background:#0B0B0A;display:flex;
+  min-height:var(--ws-hero-h,600px)}
+.ws-hero__media{position:absolute;inset:0 0 0 56%;overflow:hidden}
+.ws-hero__foto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  object-position:50% 34%}
+.ws-hero__scrim{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(90deg,#0B0B0A 0%,rgba(11,11,10,.92) 12%,rgba(11,11,10,.35) 34%,rgba(11,11,10,0) 62%)}
+.ws-hero__merk{position:absolute;left:30%;top:8%;width:26%;height:auto;opacity:.06;
+  pointer-events:none;filter:brightness(0) invert(1)}
+.ws-hero__bogen{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+.ws-hero__bogen path{fill:none;stroke-linecap:round}
+.ws-hero__streep{position:absolute;left:57%;top:6%;bottom:10%;width:2px;pointer-events:none;z-index:1;
+  background:linear-gradient(180deg,rgba(245,209,138,0),rgba(245,209,138,.75) 42%,rgba(245,209,138,0));
+  transform:rotate(9deg);filter:blur(.4px)}
+
+.ws-hero__inner{position:relative;z-index:2;display:flex;align-items:center;
+  padding:24px 30px 24px 40px;width:58%}
+.ws-hero__blocks{width:100%;max-width:600px;display:flex;flex-direction:column;
+  gap:19px;align-items:flex-start}
+/* de zomerbadge — vol goud met donkere letters, niet gouden letters op een
+   doorzichtig vlak. Hij ligt op een foto waarvan de helderheid per beeld
+   verschilt, en dan is een gevuld vlak het verschil tussen lezen en gokken.
+   De korting zit in een eigen donkere chip zodat het percentage het eerste is
+   wat je ziet, en niet de laatste woorden van een lange regel. */
+.ws-hero__badge{position:relative;display:inline-flex;align-items:center;gap:11px;
+  padding:7px 8px 7px 15px;border-radius:100px;overflow:hidden;
+  background:linear-gradient(100deg,#FFE7B0 0%,#F8C55E 44%,#E29A31 100%);
+  box-shadow:0 12px 32px -12px rgba(242,182,74,.85),inset 0 0 0 1px rgba(255,255,255,.3)}
+.ws-hero__zon{width:19px;height:19px;flex:none;color:#8A4E12}
+.ws-hero__badgetekst{font-size:12.5px;font-weight:800;letter-spacing:.15em;
+  text-transform:uppercase;color:#38220A;white-space:nowrap}
+.ws-hero__badgeactie{font-size:12.5px;font-weight:800;letter-spacing:.08em;
+  text-transform:uppercase;color:#FFDC94;background:#241703;border-radius:100px;
+  padding:8px 15px;white-space:nowrap}
+/* een trage glans die er eens per zeven seconden overheen loopt: genoeg om het
+   oog te trekken, te traag om te gaan storen. De baan staat stil als het
+   systeem om minder beweging vraagt. */
+.ws-hero__badge::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:42%;
+  pointer-events:none;transform:skewX(-18deg);
+  background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.55),rgba(255,255,255,0));
+  animation:ws-hero-glans 7s ease-in-out infinite}
+@keyframes ws-hero-glans{0%,74%{left:-60%}100%{left:118%}}
+@media (prefers-reduced-motion:reduce){.ws-hero__badge::after{display:none}}
+.ws-hero__h1{font-size:58px;line-height:104%;font-weight:700;letter-spacing:-.035em;margin:0;
+  color:#fff;text-transform:none}
+.ws-hero__h1 b,.ws-hero__h1 strong,.ws-hero__h1 em{font-style:normal;font-weight:700;color:#F5D18A}
+.ws-hero__sub{font-size:18px;line-height:158%;font-weight:400;color:rgba(255,255,255,.72);
+  margin:0;max-width:34em}
+
+.ws-hero__knoppen{display:flex;flex-wrap:wrap;gap:14px;align-items:stretch}
+.ws-hero__cta{display:inline-flex;align-items:center;gap:14px;
+  background:linear-gradient(135deg,#F5D18A 0%,#D8AC5D 52%,#BC813E 100%);
+  color:#111;font-weight:700;font-size:14px;letter-spacing:.13em;text-transform:uppercase;
+  padding:20px 30px;border-radius:100px;text-decoration:none;border:0;
+  box-shadow:0 14px 34px -18px rgba(245,209,138,.9)}
+.ws-hero__cta:hover{color:#111;text-decoration:none}
+.ws-hero__cta svg{width:17px;height:17px}
+.ws-hero__cta2{display:inline-flex;align-items:center;justify-content:center;
+  border:1px solid rgba(255,255,255,.34);color:#fff;font-weight:700;font-size:14px;
+  letter-spacing:.13em;text-transform:uppercase;padding:20px 30px;border-radius:100px;
+  text-decoration:none;background:rgba(255,255,255,.03)}
+.ws-hero__cta2:hover{color:#fff;text-decoration:none}
+
+/* het label bij het apparaat en het aantal bestellingen */
+.ws-hero__wijzer{position:absolute;left:69%;top:64%;z-index:2;padding-left:52px}
+.ws-hero__wijzer::before{content:"";position:absolute;left:0;top:50%;width:42px;height:1px;
+  background:linear-gradient(90deg,rgba(245,209,138,0),#F5D18A)}
+.ws-hero__wijzer b{display:block;font-size:13px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:#fff}
+.ws-hero__wijzer em{display:block;font-style:normal;font-size:12px;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;color:#F5D18A;margin-top:5px}
+.ws-hero__telling{position:absolute;left:57.5%;bottom:30px;z-index:2;display:flex;
+  align-items:center;gap:14px;background:rgba(11,11,10,.62);
+  border:1px solid rgba(245,209,138,.32);border-radius:14px;padding:14px 20px;
+  backdrop-filter:blur(8px)}
+.ws-hero__telling svg{width:24px;height:24px;color:#F5D18A;flex:none}
+.ws-hero__telling b{display:block;font-size:19px;font-weight:700;letter-spacing:-.01em;color:#fff}
+.ws-hero__telling em{display:block;font-style:normal;font-size:10.5px;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.62);margin-top:3px}
+
+/* de garantiestrook onderaan de hero.
+   Op desktop drie kolommen naast elkaar; de tweede reeks uit de markup
+   staat daar uit. */
+.ws-hero__strook{background:#0B0B0A;border-top:1px solid rgba(245,209,138,.16);padding:26px 40px}
+.ws-hero__band{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.ws-hero__band > div{display:flex;align-items:center;justify-content:center;gap:18px;
+  padding:0 26px;min-width:0}
+.ws-hero__band > div + div{border-left:1px solid rgba(255,255,255,.1)}
+.ws-hero__band > div[aria-hidden]{display:none}
+.ws-hero__zegel{width:46px;height:46px;flex:none;border-radius:50%;
+  border:1px solid rgba(245,209,138,.4);display:flex;align-items:center;justify-content:center;
+  color:#F5D18A;font-size:13.5px;font-weight:700;letter-spacing:.02em;line-height:1}
+.ws-hero__zegel svg{width:23px;height:23px}
+.ws-hero__tekst{display:flex;flex-direction:column;gap:5px;min-width:0}
+.ws-hero__tekst b{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:#F5D18A;line-height:130%}
+.ws-hero__tekst em{font-style:normal;font-size:13.5px;color:rgba(255,255,255,.6);line-height:140%}
+
+/* Trustpilot */
+.ws-hero__tp{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:14px;
+  color:rgba(255,255,255,.68)}
+.ws-hero__sterren{display:flex;gap:3px}
+.ws-hero__sterren i{width:25px;height:25px;background:#00B67A;display:grid;place-items:center;
+  position:relative}
+.ws-hero__sterren i.is-half{background:#DCDCE6}
+.ws-hero__sterren i.is-half::before{content:"";position:absolute;inset:0;width:50%;background:#00B67A}
+.ws-hero__sterren svg{width:16px;height:16px;fill:#fff;position:relative}
+.ws-hero__tpscore{font-weight:600;color:#fff;font-size:15px}
+.ws-hero__tpmerk{display:inline-flex;align-items:center;gap:6px;font-weight:700;color:#fff;
+  font-size:15px}
+.ws-hero__tpmerk svg{width:18px;height:18px;fill:#00B67A}
+
+/* ── mobiel ──
+   De boog, de streep, het monogram en het label bij het apparaat vallen weg:
+   op deze breedte staan ze over de foto en over de tekst heen. */
+@media (max-width:749px){
+  .ws-hero{flex-direction:column;min-height:0}
+  .ws-hero__wijzer,.ws-hero__bogen,.ws-hero__streep,.ws-hero__merk{display:none}
+  .ws-hero__media{position:relative;inset:auto;width:100%;height:330px;flex:none}
+  .ws-hero__scrim{background:linear-gradient(180deg,rgba(11,11,10,.1) 0%,rgba(11,11,10,.35) 52%,rgba(11,11,10,.94) 92%,#0B0B0A 100%)}
+  .ws-hero__foto{object-position:52% 26%}
+  .ws-hero__inner{width:100%;padding:0 18px 26px;margin-top:-34px}
+  .ws-hero__blocks{gap:16px;max-width:none}
+  .ws-hero__badge{gap:8px;padding:6px 6px 6px 13px}
+  .ws-hero__zon{width:16px;height:16px}
+  .ws-hero__badgetekst{font-size:10.5px;letter-spacing:.12em}
+  .ws-hero__badgeactie{font-size:10.5px;padding:7px 12px;letter-spacing:.06em}
+  .ws-hero__h1{font-size:40px;letter-spacing:-.032em}
+  .ws-hero__sub{font-size:15px;line-height:152%}
+  .ws-hero__knoppen{width:100%;flex-direction:column;gap:10px}
+  .ws-hero__cta,.ws-hero__cta2{justify-content:center;font-size:13px;padding:18px 22px}
+  .ws-hero__telling{left:16px;top:18px;bottom:auto;padding:10px 14px;gap:10px}
+  .ws-hero__telling b{font-size:15px}
+  .ws-hero__telling em{font-size:9px}
+  /* op mobiel passen drie zekerheden met tekst niet naast elkaar in 390px,
+     dus lopen ze als één band voorbij. De band schuift precies de helft op
+     en de reeks staat er tweemaal in, dus de overgang is niet te zien. */
+  .ws-hero__strook{padding:14px 0 16px;overflow:hidden;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 26px,#000 calc(100% - 26px),transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 26px,#000 calc(100% - 26px),transparent)}
+  .ws-hero__band{display:flex;width:max-content;animation:ws-hero-band 26s linear infinite}
+  /* elk vak krijgt een scheidingslijn, ook het eerste: op het punt waar de
+     band rondloopt zou die anders ontbreken */
+  .ws-hero__band > div,.ws-hero__band > div[aria-hidden]{display:flex;flex:0 0 auto;
+    padding:4px 22px;gap:13px;justify-content:flex-start;
+    border-left:1px solid rgba(255,255,255,.12)}
+  /* raak je de band aan, dan staat hij stil zolang je hem vasthoudt */
+  .ws-hero__strook:hover .ws-hero__band,
+  .ws-hero__strook:focus-within .ws-hero__band,
+  .ws-hero__strook:active .ws-hero__band{animation-play-state:paused}
+  @keyframes ws-hero-band{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .ws-hero__zegel{width:36px;height:36px}
+  .ws-hero__zegel svg{width:18px;height:18px}
+  .ws-hero__tekst b{font-size:11px;letter-spacing:.12em;white-space:nowrap}
+  .ws-hero__tekst em{font-size:12px;white-space:nowrap}
+  .ws-hero__tp{font-size:12px;gap:8px}
+  .ws-hero__sterren i{width:19px;height:19px}
+  .ws-hero__sterren svg{width:13px;height:13px}
+  .ws-hero__tpscore,.ws-hero__tpmerk{font-size:12.5px}
+}
+
+/* Vraagt het systeem om minder beweging, dan staat de band stil en veeg je
+   er zelf doorheen. De tweede reeks gaat dan uit: die is er alleen om de
+   beweging naadloos te laten rondlopen. */
+@media (prefers-reduced-motion:reduce){
+  .ws-hero__band{animation:none}
+}
+@media (prefers-reduced-motion:reduce) and (max-width:749px){
+  .ws-hero__strook{overflow-x:auto;scrollbar-width:none}
+  .ws-hero__strook::-webkit-scrollbar{display:none}
+  .ws-hero__band > div[aria-hidden]{display:none}
+}

@@ -1,0 +1,257 @@
+/* ═══ Wellshave — de sets, direct onder de hero ═══
+   Eén brede hoofdkaart met daaronder een rooster met de overige sets. */
+
+.ws-bn{font-family:"Montserrat",sans-serif;background:#F7F3EC;color:#111}
+.ws-bn *{box-sizing:border-box}
+/* de p-reset staat op .ws-bn p en is dus specifieker dan een losse
+   klasse: elke <p> die wél een marge hoort te hebben, staat hieronder
+   met .ws-bn ervoor. */
+.ws-bn p{margin:0;max-width:none}
+.ws-bn__in{max-width:1300px;margin:0 auto;padding:0 40px}
+
+/* ── kop ── */
+.ws-bn__kop{margin:0 0 24px}
+.ws-bn__h2{font-size:42px;line-height:112%;font-weight:700;letter-spacing:-.03em;margin:0;
+  color:#111;text-transform:none}
+.ws-bn__h2 b,.ws-bn__h2 strong{display:block;font-weight:700;color:#BC813E}
+.ws-bn .ws-bn__sub{margin-top:12px;font-size:14.5px;line-height:156%;color:rgba(17,17,17,.6);max-width:62ch}
+
+/* ── de hoofdkaart ──
+   Drie kolommen: de vitrine met het product, de tekst, en de kassa met
+   prijs en knop. Het hele vlak is één link. */
+.ws-bn__hoofd{display:grid;grid-template-columns:minmax(320px,1.15fr) minmax(260px,1fr) minmax(230px,.76fr);
+  gap:30px;align-items:center;background:#141312;border:1px solid rgba(245,209,138,.22);
+  border-radius:20px;padding:22px;text-decoration:none;color:#fff;position:relative;overflow:hidden;
+  transition:border-color .3s ease,box-shadow .3s ease}
+.ws-bn__hoofd:hover{color:#fff;text-decoration:none;border-color:rgba(245,209,138,.45);
+  box-shadow:0 30px 70px -40px rgba(17,17,17,.75)}
+
+/* de vitrine: een verlicht plateau, zodat een productfoto met een lichte
+   achtergrond niet als een wit blok in het donkere vlak hangt. Vierkant,
+   want de setfoto's zijn vierkant: in een liggend vlak wordt de foto
+   kleiner dan die op de kaarten eronder, en juist hier moet het beeld het
+   werk doen. */
+.ws-bn__vitrine{display:block;position:relative;border-radius:14px;overflow:hidden;
+  aspect-ratio:1/1;background:radial-gradient(120% 90% at 50% 42%,#FFFFFF 0%,#F4EFE6 52%,#E6DCCB 100%)}
+.ws-bn__vitrine::after{content:"";position:absolute;left:12%;right:12%;bottom:9%;height:14px;
+  border-radius:50%;background:radial-gradient(closest-side,rgba(188,129,62,.55),rgba(188,129,62,0));
+  pointer-events:none}
+.ws-bn__vitrine img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;
+  display:block;padding:14px}
+
+/* ── tekst van de hoofdkaart ── */
+.ws-bn__hbody{display:flex;flex-direction:column;align-items:flex-start;gap:11px}
+.ws-bn__hpil{display:inline-flex;align-items:center;border:1px solid rgba(245,209,138,.5);
+  border-radius:100px;padding:8px 16px;font-size:10.5px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:#F5D18A}
+.ws-bn__hkicker{display:block;font-size:11.5px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:#BC813E}
+.ws-bn__hnaam{display:block;font-size:34px;line-height:110%;font-weight:700;letter-spacing:-.03em;
+  color:#fff}
+.ws-bn__hnaam b,.ws-bn__hnaam strong{font-weight:700;color:#F5D18A}
+.ws-bn__htekst{display:block;font-size:14.5px;line-height:154%;color:rgba(255,255,255,.66);
+  max-width:40ch}
+.ws-bn__hpunten{display:flex;flex-direction:column;gap:9px;margin-top:3px}
+.ws-bn__hpunt{display:flex;align-items:center;gap:10px;font-size:14px;line-height:140%;
+  color:rgba(255,255,255,.9)}
+.ws-bn__hpunt svg{width:19px;height:19px;flex:none;padding:3px;border-radius:50%;
+  border:1px solid rgba(245,209,138,.45);color:#F5D18A}
+
+/* ── prijs en knop van de hoofdkaart ── */
+.ws-bn__hkassa{display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+.ws-bn__hbedrag{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.ws-bn__hnu{font-size:40px;font-weight:700;letter-spacing:-.03em;color:#fff;line-height:1}
+.ws-bn__hwas{font-size:19px;font-weight:500;color:rgba(255,255,255,.42);text-decoration:line-through}
+.ws-bn__hbespaar{display:inline-flex;align-items:center;gap:7px;padding:8px 13px;font-size:11.5px;
+  font-weight:800;letter-spacing:.09em;text-transform:uppercase}
+.ws-bn__hvoorraad{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;
+  color:rgba(255,255,255,.72)}
+.ws-bn__hcta{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;
+  margin-top:6px;padding:18px 22px;font-size:12.5px;font-weight:800;letter-spacing:.12em;
+  text-transform:uppercase;text-align:center;box-shadow:0 16px 34px -18px rgba(188,129,62,.95)}
+.ws-bn__hcta svg{width:16px;height:16px;flex:none;transition:transform .3s ease}
+.ws-bn__hoofd:hover .ws-bn__hcta svg{transform:translateX(4px)}
+.ws-bn__hslot{display:block;font-size:11.5px;line-height:150%;color:rgba(255,255,255,.45)}
+
+/* ── regel tussen de hoofdkaart en het rooster ── */
+/* ruime lucht boven deze regel: hij scheidt de uitgelichte set van het
+   rooster, en zonder die ruimte plakt hij tegen de hoofdkaart aan */
+.ws-bn .ws-bn__tussen{margin:48px 0 18px;text-align:center;font-size:17px;font-weight:700;
+  letter-spacing:-.01em;color:#111}
+
+/* ── het rooster ──
+   auto-fit, zodat drie kaarten de rij vullen en vier of vijf er ook in
+   passen: het aantal sets mag in de thema-editor veranderen. */
+.ws-bn__rooster{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+
+/* een echte productkaart: het beeld staat bovenaan over de volle breedte,
+   niet als postzegel naast de tekst. Daar staat of valt het blok mee. */
+.ws-bn__kaart{display:flex;flex-direction:column;gap:13px;
+  background:#FFFDF9;border:1px solid rgba(17,17,17,.09);border-radius:16px;padding:14px;
+  text-decoration:none;color:#111;transition:border-color .3s ease,box-shadow .3s ease,transform .3s ease}
+.ws-bn__kaart:hover{color:#111;text-decoration:none;transform:translateY(-3px);
+  border-color:rgba(188,129,62,.45);box-shadow:0 24px 48px -32px rgba(17,17,17,.5)}
+.ws-bn__kaart.is-uit{border-color:rgba(188,129,62,.55);box-shadow:0 18px 44px -30px rgba(188,129,62,.7)}
+
+.ws-bn__beeld{position:relative;display:block;width:100%;aspect-ratio:1/1;flex:none;
+  border-radius:12px;overflow:hidden;
+  background:radial-gradient(120% 95% at 50% 40%,#FFFFFF 0%,#F6F1E8 55%,#EDE5D6 100%)}
+/* contain, want de hele set moet in beeld staan: bij cover valt er altijd
+   een apparaat buiten de kaart */
+.ws-bn__beeld img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;
+  padding:10px}
+
+.ws-bn__body{display:flex;flex:1;flex-direction:column;align-items:flex-start;gap:6px}
+.ws-bn__label{display:block;font-size:9.5px;font-weight:700;letter-spacing:.15em;
+  text-transform:uppercase;color:#8F6428}
+.ws-bn__naam{display:block;font-size:17px;line-height:118%;font-weight:700;letter-spacing:-.02em;
+  color:#111}
+.ws-bn__naam b,.ws-bn__naam strong{font-weight:700;color:#BC813E}
+.ws-bn__tekst{display:block;font-size:12.5px;line-height:145%;color:rgba(17,17,17,.58)}
+/* duwt prijs, voorraad en knop naar de onderkant, zodat ze in elke kaart
+   op dezelfde hoogte staan ook als de ene zin langer is dan de andere */
+.ws-bn__rek{display:block;flex:1;min-height:6px}
+.ws-bn__prijs{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+.ws-bn__nu{font-size:23px;font-weight:700;letter-spacing:-.02em;color:#111}
+.ws-bn__was{font-size:13px;font-weight:500;color:rgba(17,17,17,.4);text-decoration:line-through}
+.ws-bn__korting{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;font-size:10.5px;
+  font-weight:800;letter-spacing:.07em;text-transform:uppercase}
+.ws-bn__voorraad{display:flex;align-items:center;gap:7px;font-size:11.5px;font-weight:600;
+  color:rgba(17,17,17,.6)}
+.ws-bn__stip{width:7px;height:7px;border-radius:50%;background:#2F9E5B;flex:none}
+.ws-bn__stip--uit{background:#B4453C}
+
+.ws-bn__cta{display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:14px 16px;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  text-align:center;box-shadow:0 12px 26px -18px rgba(188,129,62,.9)}
+.ws-bn__cta svg{width:15px;height:15px;flex:none;transition:transform .3s ease}
+.ws-bn__kaart:hover .ws-bn__cta svg{transform:translateX(4px)}
+/* de uitgelichte kaart draait het om: donkere knop, gouden letters */
+.ws-bn__kaart.is-uit .ws-bn__cta{background:#191816;border-color:#191816;color:#F5D18A;
+  box-shadow:0 14px 30px -18px rgba(17,17,17,.9)}
+.ws-bn__kaart.is-uit .ws-bn__cta::after{display:none}
+
+/* ── de gouden merkknop ──
+   Alleen wat je kunt aanklikken krijgt de volle gouden vulling: de knop
+   op de hoofdkaart en de knop op een kaart. De glans loopt één keer over
+   het vlak zodra je de kaart aanwijst; staat het systeem op minder
+   beweging, dan blijft hij stil. */
+.ws-bn__hcta,.ws-bn__cta{position:relative;overflow:hidden;
+  isolation:isolate;border:1px solid rgba(255,255,255,.22);border-radius:100px;color:#141312;
+  background:linear-gradient(135deg,#F7DCA2 0%,#E4C079 46%,#C8944B 100%)}
+/* de gloed langs de bovenrand geeft het vlak diepte in plaats van één platte kleur */
+.ws-bn__hcta::before,.ws-bn__cta::before{
+  content:"";position:absolute;left:0;right:0;top:0;height:45%;pointer-events:none;z-index:-1;
+  background:linear-gradient(180deg,rgba(255,255,255,.42),rgba(255,255,255,0))}
+.ws-bn__hcta::after,.ws-bn__cta::after,.ws-bn__hbespaar::after,.ws-bn__korting::after{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:-1;transform:translateX(-130%);
+  background:linear-gradient(100deg,rgba(255,255,255,0) 36%,rgba(255,255,255,.62) 50%,
+    rgba(255,255,255,0) 64%)}
+.ws-bn__hoofd:hover .ws-bn__hcta::after,.ws-bn__hoofd:hover .ws-bn__hbespaar::after,
+.ws-bn__kaart:hover .ws-bn__cta::after,.ws-bn__kaart:hover .ws-bn__korting::after{
+  animation:ws-bn-glans 1.05s ease forwards}
+@keyframes ws-bn-glans{to{transform:translateX(130%)}}
+
+/* ── het prijskaartje ──
+   Bewust géén knop: de gouden vulling is voorbehouden aan wat je kunt
+   aanklikken. Het label is een kaartje met een gouden rand, een gouden
+   letter en een labelicoontje ervoor — dezelfde merkkleur, andere vorm,
+   zodat niemand erop probeert te drukken. De glans loopt er wel overheen,
+   dus stil staat het niet. */
+.ws-bn__hbespaar,.ws-bn__korting{position:relative;overflow:hidden;isolation:isolate;
+  border-radius:5px;border:1px solid rgba(188,129,62,.5);color:#8F6428;
+  background:linear-gradient(135deg,rgba(245,209,138,.38) 0%,rgba(188,129,62,.16) 100%)}
+.ws-bn__hbespaar svg,.ws-bn__korting svg{width:12px;height:12px;flex:none}
+/* op het donkere vlak van de hoofdkaart draait de rand mee naar licht goud */
+.ws-bn__hbespaar{border-color:rgba(245,209,138,.55);color:#F5D18A;
+  background:linear-gradient(135deg,rgba(245,209,138,.2) 0%,rgba(245,209,138,.07) 100%)}
+
+/* ── onderaan ── */
+.ws-bn .ws-bn__link{margin:30px 0 0;text-align:center}
+.ws-bn__link a{display:inline-flex;align-items:center;gap:10px;font-size:13.5px;font-weight:700;
+  color:#111;text-decoration:none;border-bottom:1px solid rgba(17,17,17,.35);padding-bottom:3px}
+.ws-bn__link a:hover{color:#BC813E;border-color:#BC813E}
+.ws-bn__link svg{width:15px;height:15px}
+.ws-bn .ws-bn__slot{margin:14px 0 0;display:flex;align-items:center;justify-content:center;gap:10px;
+  font-size:12.5px;line-height:150%;color:rgba(17,17,17,.55);text-align:center}
+.ws-bn__slot svg{width:17px;height:17px;flex:none;padding:3px;border-radius:50%;
+  border:1px solid rgba(188,129,62,.45);color:#BC813E}
+
+/* ── mobiel ──
+   De hoofdkaart stapelt; binnen de blokken blijft alles wat naast elkaar
+   kan ook naast elkaar staan. Het rooster wordt één schuivende rij. */
+@media (max-width:1099px){
+  /* twee kolommen: beeld naast tekst, met de prijs en de knop eronder over
+     de volle breedte. Het beeld blijft vierkant, dus groot. */
+  .ws-bn__hoofd{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px 26px;align-items:start}
+  .ws-bn__hkassa{grid-column:1/-1}
+  .ws-bn__hcta{max-width:440px}
+  .ws-bn__hnaam{font-size:28px}
+  .ws-bn__hnu{font-size:34px}
+}
+
+@media (max-width:749px){
+  .ws-bn__in{padding:0 18px}
+  .ws-bn__h2{font-size:28px}
+  .ws-bn .ws-bn__sub{font-size:13px;margin-top:10px}
+  .ws-bn__kop{margin-bottom:18px}
+
+  .ws-bn__hoofd{grid-template-columns:minmax(0,1fr);gap:16px;padding:14px;border-radius:16px}
+  .ws-bn__vitrine{aspect-ratio:4/3}
+  .ws-bn__vitrine img{padding:10px}
+  .ws-bn__hcta{max-width:none}
+  .ws-bn__hbody{gap:9px}
+  .ws-bn__hpil{padding:6px 12px;font-size:9.5px}
+  .ws-bn__hnaam{font-size:26px}
+  .ws-bn__htekst{font-size:13px}
+  .ws-bn__hpunt{font-size:13px;gap:9px}
+  /* prijs, van-prijs en de besparing passen op één regel naast elkaar;
+     de voorraadregel, de knop en de slotregel gaan er onder over de volle
+     breedte heen */
+  .ws-bn__hkassa{flex-direction:row;flex-wrap:wrap;align-items:center;gap:9px 12px}
+  .ws-bn__hbedrag{align-items:baseline;gap:9px}
+  .ws-bn__hnu{font-size:30px}
+  .ws-bn__hwas{font-size:16px}
+  .ws-bn__hbespaar{padding:6px 10px;font-size:10.5px;gap:6px}
+  .ws-bn__hvoorraad,.ws-bn__hcta,.ws-bn__hslot{width:100%}
+  .ws-bn__hcta{padding:16px 14px;font-size:11.5px;letter-spacing:.09em;margin-top:2px}
+  .ws-bn__hslot{font-size:10.5px}
+
+  .ws-bn .ws-bn__tussen{margin:36px 0 14px;font-size:15px}
+  /* de sets schuiven horizontaal in plaats van in twee rijen onder elkaar:
+     dat scheelt een halve schermhoogte én de kaarten worden breder, dus
+     leesbaarder. De rij loopt van rand tot rand zodat de volgende kaart
+     zichtbaar aangesneden wordt — dat is de uitnodiging om te vegen. */
+  .ws-bn__rooster{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;
+    margin:0 -18px;padding:2px 18px 4px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .ws-bn__rooster::-webkit-scrollbar{display:none}
+  .ws-bn__kaart{flex:0 0 63%;scroll-snap-align:start;gap:10px;padding:10px;border-radius:13px}
+  .ws-bn__kaart:hover{transform:none}
+  .ws-bn__beeld img{padding:7px}
+  .ws-bn__body{gap:5px}
+  .ws-bn__label{font-size:9px;letter-spacing:.12em}
+  .ws-bn__naam{font-size:14.5px}
+  .ws-bn__tekst{font-size:11.5px}
+  .ws-bn__prijs{gap:7px}
+  .ws-bn__nu{font-size:19px}
+  .ws-bn__was{font-size:11.5px}
+  .ws-bn__korting{padding:5px 8px;font-size:9.5px;gap:5px}
+  .ws-bn__korting svg{width:11px;height:11px}
+  .ws-bn__voorraad{font-size:10.5px}
+  .ws-bn__cta{padding:12px 8px;font-size:10px;letter-spacing:.07em;gap:7px}
+  .ws-bn__cta svg{width:13px;height:13px}
+  .ws-bn__link a{font-size:12.5px}
+  .ws-bn .ws-bn__slot{font-size:11.5px;text-align:left}
+}
+
+/* op een smal toestel mag de kaart een groter deel van het scherm pakken */
+@media (max-width:359px){
+  .ws-bn__kaart{flex-basis:74%}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .ws-bn__kaart,.ws-bn__hoofd,.ws-bn__cta svg,.ws-bn__hcta svg{transition:none}
+  .ws-bn__kaart:hover{transform:none}
+  .ws-bn__hoofd:hover .ws-bn__hcta::after,.ws-bn__hoofd:hover .ws-bn__hbespaar::after,
+  .ws-bn__kaart:hover .ws-bn__cta::after,.ws-bn__kaart:hover .ws-bn__korting::after{animation:none}
+}

@@ -1,0 +1,82 @@
+/* ═══ Wellshave — blok 7, waar we voor staan ═══
+   Bron: audits/blok-07-proposities.template.html
+   Bewust zonder cijfers of prijzen: die veranderen, deze beloftes niet. */
+
+.ws-vp{font-family:"Montserrat",sans-serif;background:#0B0B0A;color:#fff;padding:70px 44px;
+  position:relative;overflow:hidden}
+.ws-vp::before{content:"";position:absolute;left:50%;top:-40%;width:120%;height:120%;
+  transform:translateX(-50%);pointer-events:none;
+  background:radial-gradient(52% 40% at 50% 34%,rgba(245,209,138,.10) 0%,rgba(11,11,10,0) 70%)}
+.ws-vp *{box-sizing:border-box}
+.ws-vp p{margin:0;max-width:none}
+.ws-vp ul{margin:0;padding:0;max-width:none;list-style:none}
+.ws-vp__in{max-width:1240px;margin:0 auto;position:relative;z-index:1}
+
+.ws-vp__kop{text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px;
+  margin-bottom:46px}
+.ws-vp__eyebrow{display:flex;align-items:center;gap:16px;font-size:11px;font-weight:700;
+  letter-spacing:.24em;text-transform:uppercase;color:#BC813E}
+.ws-vp__eyebrow::before,.ws-vp__eyebrow::after{content:"";width:70px;height:1px;
+  background:linear-gradient(90deg,rgba(188,129,62,0),rgba(188,129,62,.75))}
+.ws-vp__eyebrow::after{background:linear-gradient(90deg,rgba(188,129,62,.75),rgba(188,129,62,0))}
+.ws-vp__h2{font-size:40px;font-weight:700;letter-spacing:-.03em;line-height:116%;margin:0;
+  color:#fff;text-transform:none}
+.ws-vp__h2 b,.ws-vp__h2 strong,.ws-vp__h2 em{font-style:normal;font-weight:700;color:#F5D18A}
+.ws-vp__sub{font-size:15.5px;line-height:160%;color:rgba(255,255,255,.58);max-width:64ch}
+
+/* het aantal kolommen komt uit --ws-kol, die de sectie meegeeft. Zo kan de
+   media query hieronder hem gewoon overschrijven; met een inline stijl op het
+   element lukte dat niet en bleef mobiel op vier kolommen staan. */
+.ws-vp__rij{display:grid;grid-template-columns:repeat(var(--ws-kol,4),minmax(0,1fr))}
+.ws-vp__kaart{display:flex;flex-direction:column;gap:13px;padding:6px 30px 26px;min-width:0;
+  position:relative;cursor:default}
+.ws-vp__kaart + .ws-vp__kaart{border-left:1px solid rgba(255,255,255,.12)}
+.ws-vp__kaart::after{content:"";position:absolute;left:30px;right:30px;bottom:0;height:2px;
+  background:linear-gradient(90deg,#F5D18A,rgba(245,209,138,0));
+  opacity:0;transform:scaleX(0);transform-origin:left;
+  transition:transform .4s ease,opacity .3s ease}
+.ws-vp__kaart:hover::after{opacity:1;transform:scaleX(1)}
+.ws-vp__cijfer{font-size:38px;font-weight:700;letter-spacing:-.035em;line-height:1;color:#F5D18A;
+  transition:text-shadow .4s ease}
+.ws-vp__kaart:hover .ws-vp__cijfer{text-shadow:0 0 34px rgba(245,209,138,.45)}
+.ws-vp__cijfer small{font-size:17px;font-weight:600;letter-spacing:0;color:rgba(245,209,138,.7);
+  margin-left:7px}
+.ws-vp__label{font-size:13px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  color:#fff;line-height:150%}
+.ws-vp__tekst{font-size:14px;line-height:158%;color:rgba(255,255,255,.58)}
+
+.ws-vp__slot{margin-top:44px;padding-top:26px;border-top:1px solid rgba(255,255,255,.12);
+  display:flex;align-items:center;justify-content:center;gap:12px;font-size:13.5px;
+  color:rgba(255,255,255,.5);text-align:center}
+.ws-vp__slot svg{width:16px;height:16px;color:#BC813E;flex:none}
+/* de tekst zit in een eigen span: zonder die span behandelt flex elke
+   tekstnoot als eigen item en valt de regel op mobiel in twee kolommen */
+.ws-vp__slot span{min-width:0}
+.ws-vp__slot b,.ws-vp__slot strong{color:rgba(255,255,255,.8);font-weight:600}
+
+/* ── mobiel ── */
+@media (max-width:749px){
+  .ws-vp{padding:40px 18px 32px}
+  .ws-vp__kop{margin-bottom:24px;gap:10px}
+  .ws-vp__eyebrow{font-size:10px;gap:10px}
+  .ws-vp__eyebrow::before,.ws-vp__eyebrow::after{width:32px}
+  .ws-vp__h2{font-size:27px}
+  .ws-vp__sub{font-size:14px}
+  .ws-vp__rij{grid-template-columns:1fr}
+  .ws-vp__kaart{padding:20px 0;gap:9px}
+  .ws-vp__kaart + .ws-vp__kaart{border-left:0;border-top:1px solid rgba(255,255,255,.12)}
+  .ws-vp__kaart::after{left:0;right:auto;width:56px;bottom:auto;top:0;opacity:1;transform:scaleX(1);
+    background:linear-gradient(90deg,rgba(245,209,138,.5),rgba(245,209,138,0))}
+  .ws-vp__kaart:first-child::after{display:none}
+  .ws-vp__cijfer{font-size:31px}
+  .ws-vp__cijfer small{font-size:15px}
+  .ws-vp__label{font-size:12px}
+  .ws-vp__tekst{font-size:13.5px}
+  .ws-vp__slot{margin-top:24px;padding-top:20px;font-size:12.5px;text-align:left;
+    align-items:flex-start;justify-content:flex-start;gap:10px}
+  .ws-vp__slot svg{margin-top:2px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .ws-vp__kaart::after,.ws-vp__cijfer{transition:none}
+}

@@ -1,0 +1,225 @@
+{% comment %}
+  Wellshave — de sets, direct onder de hero.
+
+  Twee bloktypes. "hoofd" is de brede kaart bovenaan; daar staat één set
+  groot in beeld. "bundel" is een kaart in het rooster eronder. Naam,
+  prijs, van-prijs, besparing, voorraad en de link komen altijd uit het
+  gekozen product — in de thema-editor zet je alleen de tekst erbij.
+
+  Er staat bewust geen enkele claim over verkoopaantallen in de sectie.
+  Die zou voor de duurdere sets niet kloppen, en een pil die "bestverkocht"
+  zegt terwijl dat niet zo is, kost meer dan hij oplevert. De pil op de
+  hoofdkaart en het label op een kaart zijn vrije tekst: zet er alleen iets
+  in wat je kunt aanwijzen.
+{% endcomment %}
+
+{{ 'ws-bundels.css' | asset_url | stylesheet_tag }}
+
+{% render 'indent-settings', section: section %}
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="ws-bn-vink" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-bn-arw" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-bn-tag" viewBox="0 0 24 24"><path d="M11.6 3.2H4.9a1.7 1.7 0 00-1.7 1.7v6.7c0 .45.18.88.5 1.2l7.5 7.5a1.7 1.7 0 002.4 0l6.7-6.7a1.7 1.7 0 000-2.4l-7.5-7.5a1.7 1.7 0 00-1.2-.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="8" cy="8" r="1.5" fill="currentColor"/></symbol>
+</svg>
+
+<div class="ws-bn"><div class="ws-bn__in">
+
+  <div class="ws-bn__kop">
+    {%- if section.settings.kop != blank -%}
+      <h2 class="ws-bn__h2">{{ section.settings.kop }}</h2>
+    {%- endif -%}
+    {%- if section.settings.sub != blank -%}
+      <p class="ws-bn__sub">{{ section.settings.sub }}</p>
+    {%- endif -%}
+  </div>
+
+  {%- comment -%} De hoofdkaart. Er is er hoogstens één; staat hij er niet,
+    dan begint de sectie meteen bij het rooster. {%- endcomment -%}
+  {%- assign hoofd = section.blocks | where: 'type', 'hoofd' | first -%}
+  {%- if hoofd -%}
+    {%- assign hp = hoofd.settings.product -%}
+    {%- assign hv = hp.selected_or_first_available_variant -%}
+    <a class="ws-bn__hoofd" href="{{ hp.url | default: '#' }}" {{ hoofd.shopify_attributes }}>
+
+      <span class="ws-bn__vitrine">
+        {%- if hoofd.settings.foto != blank -%}
+          {{ hoofd.settings.foto | image_url: width: 1100 | image_tag: alt: '', loading: 'lazy' }}
+        {%- elsif hp.featured_image -%}
+          {{ hp.featured_image | image_url: width: 1100 | image_tag: loading: 'lazy' }}
+        {%- endif -%}
+      </span>
+
+      <span class="ws-bn__hbody">
+        {%- if hoofd.settings.pil != blank -%}
+          <span class="ws-bn__hpil">{{ hoofd.settings.pil }}</span>
+        {%- endif -%}
+        {%- if hoofd.settings.kicker != blank -%}
+          <span class="ws-bn__hkicker">{{ hoofd.settings.kicker }}</span>
+        {%- endif -%}
+        <span class="ws-bn__hnaam">{{ hoofd.settings.naam | default: hp.title }}</span>
+        {%- if hoofd.settings.tekst != blank -%}
+          <span class="ws-bn__htekst">{{ hoofd.settings.tekst }}</span>
+        {%- endif -%}
+        {%- if hoofd.settings.punt_1 != blank or hoofd.settings.punt_2 != blank or hoofd.settings.punt_3 != blank -%}
+          <span class="ws-bn__hpunten">
+            {%- if hoofd.settings.punt_1 != blank -%}<span class="ws-bn__hpunt"><svg><use href="#ws-bn-vink"/></svg>{{ hoofd.settings.punt_1 }}</span>{%- endif -%}
+            {%- if hoofd.settings.punt_2 != blank -%}<span class="ws-bn__hpunt"><svg><use href="#ws-bn-vink"/></svg>{{ hoofd.settings.punt_2 }}</span>{%- endif -%}
+            {%- if hoofd.settings.punt_3 != blank -%}<span class="ws-bn__hpunt"><svg><use href="#ws-bn-vink"/></svg>{{ hoofd.settings.punt_3 }}</span>{%- endif -%}
+          </span>
+        {%- endif -%}
+      </span>
+
+      <span class="ws-bn__hkassa">
+        {%- if hp != blank -%}
+          <span class="ws-bn__hbedrag">
+            <span class="ws-bn__hnu">{% render 'ws-euro', bedrag: hv.price %}</span>
+            {%- if hv.compare_at_price > hv.price -%}
+              <span class="ws-bn__hwas">{% render 'ws-euro', bedrag: hv.compare_at_price %}</span>
+            {%- endif -%}
+          </span>
+          {%- if hv.compare_at_price > hv.price -%}
+            <span class="ws-bn__hbespaar"><svg><use href="#ws-bn-tag"/></svg>{{ section.settings.bespaar }} {% assign ws_bedrag = hv.compare_at_price | minus: hv.price %}{% render 'ws-euro', bedrag: ws_bedrag %}</span>
+          {%- endif -%}
+          <span class="ws-bn__hvoorraad">
+            {%- if hv.available -%}
+              <span class="ws-bn__stip"></span>{{ section.settings.voorraad_wel }}
+            {%- else -%}
+              <span class="ws-bn__stip ws-bn__stip--uit"></span>{{ section.settings.voorraad_niet }}
+            {%- endif -%}
+          </span>
+        {%- endif -%}
+        <span class="ws-bn__hcta">{{ section.settings.hoofd_cta }}<svg><use href="#ws-bn-arw"/></svg></span>
+        {%- if section.settings.hoofd_slot != blank -%}
+          <span class="ws-bn__hslot">{{ section.settings.hoofd_slot }}</span>
+        {%- endif -%}
+      </span>
+
+    </a>
+  {%- endif -%}
+
+  {%- assign sets = section.blocks | where: 'type', 'bundel' -%}
+  {%- if sets.size > 0 -%}
+    {%- if section.settings.tussen != blank -%}
+      <p class="ws-bn__tussen">{{ section.settings.tussen }}</p>
+    {%- endif -%}
+
+    <div class="ws-bn__rooster" data-ws-baan>
+      {%- for block in sets -%}
+        {%- assign p = block.settings.product -%}
+        {%- assign v = p.selected_or_first_available_variant -%}
+        <a class="ws-bn__kaart{% if block.settings.uitgelicht %} is-uit{% endif %}" href="{{ p.url | default: '#' }}" {{ block.shopify_attributes }}>
+          <span class="ws-bn__beeld">
+            {%- if block.settings.foto != blank -%}
+              {{ block.settings.foto | image_url: width: 500 | image_tag: alt: '', loading: 'lazy' }}
+            {%- elsif p.featured_image -%}
+              {{ p.featured_image | image_url: width: 500 | image_tag: loading: 'lazy' }}
+            {%- endif -%}
+          </span>
+          <span class="ws-bn__body">
+            {%- if block.settings.label != blank -%}
+              <span class="ws-bn__label">{{ block.settings.label }}</span>
+            {%- endif -%}
+            <span class="ws-bn__naam">{{ block.settings.naam | default: p.title }}</span>
+            {%- if block.settings.tekst != blank -%}
+              <span class="ws-bn__tekst">{{ block.settings.tekst }}</span>
+            {%- endif -%}
+            <span class="ws-bn__rek"></span>
+            {%- if p != blank -%}
+              <span class="ws-bn__prijs">
+                <span class="ws-bn__nu">{% render 'ws-euro', bedrag: v.price %}</span>
+                {%- if v.compare_at_price > v.price -%}
+                  <span class="ws-bn__was">{% render 'ws-euro', bedrag: v.compare_at_price %}</span>
+                {%- endif -%}
+              </span>
+              {%- if v.compare_at_price > v.price -%}
+                <span class="ws-bn__korting"><svg><use href="#ws-bn-tag"/></svg>{{ section.settings.bespaar_kort }} {% assign ws_bedrag = v.compare_at_price | minus: v.price %}{% render 'ws-euro', bedrag: ws_bedrag %}</span>
+              {%- endif -%}
+              <span class="ws-bn__voorraad">
+                {%- if v.available -%}
+                  <span class="ws-bn__stip"></span>{{ section.settings.voorraad_wel }}
+                {%- else -%}
+                  <span class="ws-bn__stip ws-bn__stip--uit"></span>{{ section.settings.voorraad_niet }}
+                {%- endif -%}
+              </span>
+            {%- endif -%}
+          </span>
+          <span class="ws-bn__cta">{{ section.settings.kaart_cta }}<svg><use href="#ws-bn-arw"/></svg></span>
+        </a>
+      {%- endfor -%}
+    </div>
+    {% render 'ws-baan' %}
+  {%- endif -%}
+
+  {%- if section.settings.link_label != blank -%}
+    <p class="ws-bn__link">
+      <a href="{{ section.settings.link | default: '#' }}">{{ section.settings.link_label }}<svg><use href="#ws-bn-arw"/></svg></a>
+    </p>
+  {%- endif -%}
+  {%- if section.settings.slot != blank -%}
+    <p class="ws-bn__slot"><svg><use href="#ws-bn-vink"/></svg>{{ section.settings.slot }}</p>
+  {%- endif -%}
+
+</div></div>
+
+{% schema %}
+{
+  "name": "WS · Sets",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "inline_richtext", "id": "kop", "label": "Kop (vet = brons, eigen regel)", "default": "Alles wat je nodig hebt. <b>Voordeliger in één set.</b>" },
+    { "type": "textarea", "id": "sub", "label": "Subkop", "default": "Geen losse aankopen of vergeten onderdelen. Kies de complete routine die bij jou past." },
+    { "type": "header", "content": "De hoofdkaart" },
+    { "type": "text", "id": "hoofd_cta", "label": "Knoptekst", "default": "Bekijk de complete set" },
+    { "type": "text", "id": "hoofd_slot", "label": "Regel onder de knop", "default": "Eén bestelling · direct compleet · 100 dagen proberen" },
+    { "type": "text", "id": "tussen", "label": "Regel boven het rooster", "default": "Of kies de set voor jouw routine" },
+    { "type": "header", "content": "Op elke kaart" },
+    { "type": "text", "id": "kaart_cta", "label": "Knoptekst", "default": "Bekijk de set" },
+    { "type": "text", "id": "bespaar", "label": "Woord voor de besparing (hoofdkaart)", "default": "Je bespaart" },
+    { "type": "text", "id": "bespaar_kort", "label": "Woord voor de besparing (kaarten)", "default": "Bespaar" },
+    { "type": "text", "id": "voorraad_wel", "label": "Tekst bij voorraad", "default": "Op voorraad" },
+    { "type": "text", "id": "voorraad_niet", "label": "Tekst zonder voorraad", "default": "Tijdelijk uitverkocht" },
+    { "type": "header", "content": "Onderaan" },
+    { "type": "text", "id": "link_label", "label": "Linktekst", "default": "Bekijk alle bundels en sets" },
+    { "type": "url", "id": "link", "label": "Link" },
+    { "type": "text", "id": "slot", "label": "Slotregel", "default": "Niet de juiste set? Je hebt 100 dagen om van gedachten te veranderen." },
+    { "type": "header", "content": "Indent settings" },
+    { "type": "range", "id": "desk_indent_top", "label": "Indent top (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "desk_indent_bottom", "label": "Indent bottom (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_top", "label": "Indent top (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_bottom", "label": "Indent bottom (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "blocks": [
+    {
+      "type": "hoofd",
+      "name": "Hoofdkaart",
+      "limit": 1,
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product", "info": "Prijs, van-prijs, besparing, voorraad en de link komen hieruit." },
+        { "type": "inline_richtext", "id": "naam", "label": "Naam (vet = goud)", "info": "Leeg = de producttitel." },
+        { "type": "image_picker", "id": "foto", "label": "Foto", "info": "Leeg = de hoofdafbeelding van het product." },
+        { "type": "text", "id": "pil", "label": "Pil", "info": "Alleen gebruiken voor iets dat aantoonbaar klopt." },
+        { "type": "text", "id": "kicker", "label": "Regel boven de naam" },
+        { "type": "textarea", "id": "tekst", "label": "Zin onder de naam" },
+        { "type": "text", "id": "punt_1", "label": "Wat er in zit — regel 1" },
+        { "type": "text", "id": "punt_2", "label": "Regel 2" },
+        { "type": "text", "id": "punt_3", "label": "Regel 3" }
+      ]
+    },
+    {
+      "type": "bundel",
+      "name": "Set",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product", "info": "Prijs, van-prijs, besparing, voorraad en de link komen hieruit." },
+        { "type": "inline_richtext", "id": "naam", "label": "Naam (vet = goud)", "info": "Leeg = de producttitel." },
+        { "type": "image_picker", "id": "foto", "label": "Foto", "info": "Leeg = de hoofdafbeelding van het product." },
+        { "type": "text", "id": "label", "label": "Label boven de naam", "info": "Bijvoorbeeld: Voor hoofd." },
+        { "type": "textarea", "id": "tekst", "label": "Zin onder de naam" },
+        { "type": "checkbox", "id": "uitgelicht", "label": "Extra nadruk geven", "info": "Gouden rand en een donkere knop. Gebruik dit bij hoogstens één kaart.", "default": false }
+      ]
+    }
+  ],
+  "presets": [ { "name": "WS · Sets" } ]
+}
+{% endschema %}

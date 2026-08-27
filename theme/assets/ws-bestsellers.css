@@ -1,0 +1,118 @@
+/* ═══ Wellshave — blok 3, de bestsellers ═══
+   Bron: audits/blok-03-bestsellers.template.html */
+
+.ws-bs{font-family:"Montserrat",sans-serif;background:#F5F1EA;color:#111;padding:56px 40px}
+.ws-bs *{box-sizing:border-box}
+.ws-bs p{max-width:none;margin:0}
+.ws-bs__in{max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:26px;min-width:0}
+
+.ws-bs__top{display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
+.ws-bs__eyebrow{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(17,17,17,.4)}
+.ws-bs__h2{font-size:34px;line-height:120%;font-weight:600;letter-spacing:-.02em;margin:10px 0 0;
+  max-width:22ch;text-wrap:balance;color:#111;text-transform:none}
+.ws-bs__h2 b,.ws-bs__h2 strong{display:block;font-weight:600;color:#BC813E}
+.ws-bs__note{font-size:15px;line-height:150%;color:rgba(17,17,17,.6);margin-top:12px;max-width:44ch}
+.ws-bs__count{flex:none;text-align:right;font-size:12.5px;color:rgba(17,17,17,.5);line-height:150%}
+.ws-bs__count b{display:block;font-size:30px;font-weight:600;color:#111;letter-spacing:-.03em;
+  line-height:1;margin-bottom:5px}
+
+.ws-bs__grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.ws-bs__kaart{position:relative;background:#fff;border-radius:12px;overflow:hidden;min-width:0;
+  border:1px solid rgba(17,17,17,.08);display:flex;flex-direction:column;text-decoration:none;
+  color:#111;transition:border-color .45s ease,box-shadow .45s ease,background-color .45s ease}
+.ws-bs__kaart:hover{color:#111;text-decoration:none}
+.ws-bs__shot{position:relative;aspect-ratio:1/1;background:#F5F1EA;min-width:0;overflow:hidden}
+.ws-bs__shot > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+/* het monogram ligt áchter de packshot en komt op hover naar voren */
+.ws-bs__mark{position:absolute;z-index:0;left:50%;top:50%;width:96%;
+  transform:translate(-50%,-50%) scale(1.14);opacity:0;
+  transition:opacity .62s cubic-bezier(.22,.61,.36,1),transform .62s cubic-bezier(.22,.61,.36,1)}
+.ws-bs__mark img{position:static;width:100%;height:auto;object-fit:contain}
+.ws-bs__shot > img.ws-bs__pack{position:absolute;z-index:1;
+  transition:transform .62s cubic-bezier(.22,.61,.36,1)}
+.ws-bs__tag{position:absolute;z-index:2;top:12px;left:12px;background:#111;color:#fff;
+  font-size:9.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  padding:6px 12px;border-radius:100px;white-space:nowrap}
+.ws-bs__body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:6px;flex:1;min-width:0}
+.ws-bs__zone{font-size:9.5px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:rgba(17,17,17,.38)}
+.ws-bs__naam{font-size:17px;font-weight:600;letter-spacing:-.015em;margin:0;color:#111;
+  text-transform:none}
+.ws-bs__wat{font-size:13px;line-height:148%;color:rgba(17,17,17,.6);flex:1}
+/* onderscheiding van een derde partij, als zegel op de foto zelf. Onder de
+   tekst kostte het een regel die er op 390px niet was. */
+.ws-bs__zegel{position:absolute;z-index:3;top:12px;right:12px;
+  display:flex;flex-direction:column;align-items:flex-start;gap:4px;
+  background:rgba(255,255,255,.94);border:1px solid rgba(17,17,17,.08);
+  border-radius:7px;padding:6px 7px;box-shadow:0 2px 9px -4px rgba(17,17,17,.28);
+  max-width:calc(100% - 24px);min-width:0}
+.ws-bs__zegel img{position:static;width:78px;height:auto;object-fit:contain;display:block;
+  border-radius:2px}
+.ws-bs__zegel span{font-size:9px;font-weight:700;color:#111;line-height:1.25;
+  letter-spacing:.005em;white-space:nowrap}
+.ws-bs__prijs{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;margin-top:6px}
+.ws-bs__nu{font-size:20px;font-weight:700;letter-spacing:-.025em}
+.ws-bs__was{font-size:13px;color:rgba(17,17,17,.38);text-decoration:line-through}
+.ws-bs__save{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+  color:#8F6428;background:#EDE7DB;padding:5px 9px;border-radius:100px;white-space:nowrap}
+.ws-bs__go{margin-top:12px;display:flex;align-items:center;justify-content:space-between;gap:10px;
+  border-top:1px solid rgba(17,17,17,.1);padding-top:13px;font-size:13px;font-weight:600}
+.ws-bs__go i{width:29px;height:29px;border-radius:100px;border:1px solid rgba(17,17,17,.15);
+  display:flex;align-items:center;justify-content:center;flex:none;color:#BC813E;
+  transition:background-color .35s ease,border-color .35s ease,color .35s ease}
+.ws-bs__go svg{width:14px;height:14px}
+@media (hover:hover) and (pointer:fine){
+  .ws-bs__kaart:hover{border-color:rgba(188,129,62,.45);background:#FCFAF6;
+    box-shadow:0 10px 30px -14px rgba(17,17,17,.22)}
+  .ws-bs__kaart:hover .ws-bs__mark{opacity:.22;transform:translate(-50%,-50%) scale(1)}
+  .ws-bs__kaart:hover .ws-bs__pack{transform:scale(1.035)}
+  .ws-bs__kaart:hover .ws-bs__go i{background:#BC813E;border-color:#BC813E;color:#fff}
+}
+/* Op een apparaat zonder muis komt het monogram nergens vandaan, dus staat het
+   er gewoon: zacht op de achtergrond achter de packshot. Dit hangt aan het
+   ontbreken van hover en niet aan de schermbreedte, zodat een tablet met
+   aanraakscherm hem ook krijgt. Met muis blijft het een detail dat pas bij
+   hover tevoorschijn komt. */
+@media (hover:none),(pointer:coarse){
+  .ws-bs__mark{opacity:.1;transform:translate(-50%,-50%) scale(1)}
+}
+@media (prefers-reduced-motion:reduce){
+  .ws-bs__mark,.ws-bs__pack,.ws-bs__kaart,.ws-bs__go i{transition:none}
+}
+.ws-bs__foot{display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(17,17,17,.6)}
+.ws-bs__foot svg{width:16px;height:16px;color:#BC813E;flex:none}
+.ws-bs__foot a{color:#111;text-underline-offset:3px}
+
+/* mobiel — één schuivende rij; vier kaarten in twee rijen maakten het blok
+   te lang voor iets dat onder de vouw staat */
+@media (max-width:749px){
+  .ws-bs{padding:34px 18px}
+  .ws-bs__in{gap:18px}
+  .ws-bs__top{flex-direction:column;align-items:flex-start;gap:12px}
+  .ws-bs__h2{font-size:24px;max-width:none;margin-top:9px}
+  .ws-bs__note{font-size:14px;margin-top:10px;max-width:none}
+  .ws-bs__count{text-align:left}
+  .ws-bs__count b{font-size:26px}
+  /* zelfde schuifrij als bij de sets: één rij die van rand tot rand loopt,
+     met de volgende kaart zichtbaar aangesneden */
+  .ws-bs__grid{display:flex;gap:11px;overflow-x:auto;scroll-snap-type:x mandatory;
+    margin:0 -18px;padding:2px 18px 4px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .ws-bs__grid::-webkit-scrollbar{display:none}
+  .ws-bs__kaart{flex:0 0 63%;scroll-snap-align:start}
+  .ws-bs__tag{top:8px;left:8px;font-size:8px;padding:5px 9px;letter-spacing:.1em}
+  .ws-bs__body{padding:14px 13px 15px;gap:5px}
+  .ws-bs__naam{font-size:14.5px}
+  .ws-bs__wat{font-size:11.5px;line-height:142%}
+  .ws-bs__zegel{top:8px;right:8px;padding:5px 6px;gap:3px;border-radius:6px}
+  .ws-bs__zegel img{width:62px}
+  .ws-bs__zegel span{font-size:7.5px}
+  .ws-bs__prijs{gap:6px;margin-top:5px}
+  .ws-bs__nu{font-size:17px}
+  .ws-bs__was{font-size:11.5px}
+  .ws-bs__save{font-size:9.5px;padding:4px 7px}
+  .ws-bs__go{margin-top:9px;padding-top:10px;font-size:11.5px}
+  .ws-bs__go i{width:24px;height:24px}
+  .ws-bs__go svg{width:12px;height:12px}
+  .ws-bs__foot{font-size:12px;align-items:flex-start;line-height:150%}
+}
