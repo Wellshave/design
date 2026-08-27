@@ -343,6 +343,11 @@ een `<ul>` met drie punten. De alinea wordt de uitleg, de lijstpunten worden
 de vinkjes &mdash; dat is CSS (`li::before` met een ingebakken SVG), geen tweede
 veld en geen parseerwerk.
 
+**Het watermerknummer lijnt uit op de tekst, niet op de rand.** `right` staat
+gelijk aan de rechterpadding van het tekstvlak (34 px, op de telefoon 20 px)
+en het staat 26 px van de bovenkant. Stond het dichter op de rand, dan leek
+het eraf te vallen in plaats van erachter te liggen.
+
 **Het label is nieuw.** Veld `label` op de definitie `image_with_text`
 (`34553495884`), &eacute;&eacute;n woord naast het volgnummer. Leeg laten mag: dan staat
 er alleen `01`. Op de Groom Guard&trade; PRO staan er vier ingevuld, met en/de/fr

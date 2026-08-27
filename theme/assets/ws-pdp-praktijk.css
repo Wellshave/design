@@ -58,9 +58,11 @@
 .ws-prk-tx{position:relative;overflow:hidden;padding:34px 34px 34px 30px;
   display:flex;flex-direction:column;justify-content:center}
 
-.ws-prk-nr{position:absolute;top:-12px;right:14px;z-index:0;pointer-events:none;
-  font-size:118px;font-weight:800;letter-spacing:-.05em;line-height:1;
-  color:rgba(176,116,42,.09)}
+/* Het watermerk lijnt rechts uit op dezelfde marge als de tekst eronder,
+   niet op de rand van de kaart. Anders lijkt het eraf te vallen. */
+.ws-prk-nr{position:absolute;top:26px;right:34px;z-index:0;pointer-events:none;
+  font-size:96px;font-weight:800;letter-spacing:-.05em;line-height:.8;
+  color:rgba(176,116,42,.085)}
 
 .ws-prk-kick{position:relative;z-index:1;margin:0;
   font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--p-brons)}
@@ -94,7 +96,7 @@
   .ws-prk-kaart.ws-om .ws-prk-md{order:0}
   .ws-prk-md{min-height:0;aspect-ratio:4/3}
   .ws-prk-tx{padding:24px 20px 26px}
-  .ws-prk-nr{font-size:86px;top:-8px;right:8px}
+  .ws-prk-nr{font-size:70px;top:20px;right:20px}
   .ws-prk-tx h3{font-size:20px;max-width:none}
   .ws-prk-body p{font-size:13.5px}
   .ws-prk-etiket{left:12px;bottom:12px;padding:8px 13px 8px 9px;font-size:10px}
