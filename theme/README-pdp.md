@@ -606,6 +606,85 @@ Het koopvak staat op `#EFE7D8`, blok 05 op `#F7F3EB`. Dat verschil is er met
 opzet: boven de vouw ligt er een paneel op de grond dat moet kunnen zweven, en
 daaronder niet. Wil je het gelijktrekken, dan is `--ws-cream` de enige knop.
 
+## De andere talen: alleen wat in het sjabloon staat is te vertalen
+
+Op `/en`, `/de` en `/fr` stond de chroom van onze blokken nog in het Nederlands
+— «Op voorraad», «In winkelwagen», «Vergelijk de modellen», «Al door 200.000+
+mannen gekozen», de accordeontitels. De productinhoud (metafields) was al wel
+vertaald; onze sectie-instellingen niet.
+
+**De regel die je moet onthouden:** Shopify maakt van een sectie-instelling
+alleen een vertaalbaar veld als de waarde in `templates/product.json` staat.
+Een `default` in het sectieschema komt *niet* in de vertaaleditor terecht — die
+wordt bij het renderen ingevuld en is dan onzichtbaar voor het vertaalsysteem.
+
+Tien instellingen van het koopvak stonden alleen als schemastandaard
+(`tp_cijfer`, `proberen_label`, `munt` en alle zeven `upg_*`). Die zijn nu
+expliciet in het sjabloon gezet. Zichtbaar veranderde er niets — de opgeslagen
+waarde is dezelfde als de standaard — maar ze zijn nu wél te vertalen én staan
+in de tak.
+
+De vertaalbron is `ONLINE_STORE_THEME_JSON_TEMPLATE`, en die is **per thema**:
+
+```
+gid://shopify/OnlineStoreThemeJsonTemplate/product?theme_id=204412977484
+```
+
+`translatableResources(resourceType: ONLINE_STORE_THEME_JSON_TEMPLATE)` geeft
+alleen het live thema terug. Wil je het werkthema, vraag de bron dan
+rechtstreeks op met `translatableResource(resourceId: ...)` en de `theme_id` in
+de query-string. Verder: de sleutel bevat een instantie-achtervoegsel
+(`...main.knop_label:1t994ydlfadu5`) en de `digest` is een apart veld — die twee
+niet verwarren.
+
+57 sleutels × 3 talen geregistreerd voor `main`, `praktijk` en `ugc`.
+
+### Telwoorden stonden vastgetimmerd in het Nederlands
+
+`ws-pdp-praktijk.liquid` had `'nul,Eén,Twee,Drie,Vier,...'` in de Liquid staan,
+dus op de Engelse pagina stond «**Vier** moments. One effortless routine.» Die
+lijst is nu de instelling `telwoorden`, staat in het sjabloon, en is per taal
+vertaald. Nu: «Four moments.», «Vier Momente.», «Quatre moments.»
+
+### Wat een taalwissel niet mag raken
+
+Bij het vertalen van cijfers en scheidingstekens:
+
+* `tp_cijfer` «4,4» wordt in het Engels «4.4», in het Duits en Frans blijft de
+  komma staan.
+* `tel_waarde` «200.000+» wordt «200,000+» (en) en «200 000+» (fr).
+* `rev_alle_url` wijst per taal naar het juiste Trustpilot-domein:
+  `nl.` / `www.` / `de.` / `fr.trustpilot.com/review/wellshave.nl`.
+* De volgorde van `tel_voor` + `tel_waarde` + `tel_na` verschilt per taal. In
+  het Duits staat het werkwoord achteraan («Bereits von 200.000+ Männern
+  **gewählt**»), in het Engels niet («Already chosen by 200,000+ men»). Dat is
+  op te lossen doordat alle drie de delen apart vertaalbaar zijn.
+
+### Twee metafields stonden nog in het Nederlands
+
+`hero_promise` en `hero_lead` zijn maar op twee producten gezet — de Groom
+Guard en de Groom Guard PRO — en hadden geen vertalingen. Vier metafields,
+in drie talen gezet.
+
+### Wat met opzet Nederlands blijft
+
+Het klantcitaat in de reviewkaart (`buybox_quote` en `buybox_quote_author`) is
+een échte Trustpilot-review van een Nederlandse klant. Die vertalen zou woorden
+in iemands mond leggen. Wil je op de Engelse pagina een Engelstalige review,
+dan is dat een andere review kiezen, geen vertaling. Datzelfde geldt voor de
+datum «8 juli 2026».
+
+### Nog open, buiten de productpagina
+
+Op `/en` staan nog twee Nederlandse regels uit een ander blok (klasse `wsl-`,
+dus de landingspagina-secties): «100 dagen proberen» en «Vier vragen, en je
+ziet wat bij je past.» Die zitten in een sectiegroep, een eigen vertaalbron
+(`ONLINE_STORE_THEME_SECTION_GROUP`), en vallen buiten dit blok.
+
+En de Engelse vertaling van de verzendregel op de producten zegt nog «Order by
+11:59 PM = delivered tomorrow» — met het gelijkteken dat in het Nederlands al
+weg is. Dat is een aparte veegbeurt over de productmetafields.
+
 ## Wat er aan de winkel zelf is veranderd
 
 Dit staat los van het thema: het is productdata en geldt dus voor elk thema,

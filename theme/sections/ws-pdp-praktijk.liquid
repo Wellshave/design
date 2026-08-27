@@ -36,7 +36,13 @@
   {%- if aantal > 0 -%}
     {%- liquid
       assign uid = section.id
-      assign woorden = 'nul,Eén,Twee,Drie,Vier,Vijf,Zes,Zeven,Acht,Negen,Tien' | split: ','
+      comment
+        De telwoorden stonden hier in het Nederlands vastgetimmerd, dus op de
+        Engelse pagina stond "Vier moments". Ze komen nu uit een instelling,
+        zodat ze net als de rest per taal vertaald kunnen worden.
+      endcomment
+      assign woordenlijst = s.telwoorden | default: 'nul,Eén,Twee,Drie,Vier,Vijf,Zes,Zeven,Acht,Negen,Tien'
+      assign woorden = woordenlijst | split: ','
       if aantal <= 10
         assign telwoord = woorden[aantal]
       else
@@ -237,6 +243,7 @@
     { "type": "header", "content": "De kop" },
     { "type": "text", "id": "eyebrow", "label": "Bovenregel", "info": "Staat in een randje boven de kop. Leeg = geen randje.", "default": "In de praktijk" },
     { "type": "text", "id": "kop", "label": "Kop", "info": "[aantal] wordt het aantal kaarten als woord, [product] de producttitel.", "default": "[aantal] momenten. Eén moeiteloze routine." },
+    { "type": "text", "id": "telwoorden", "label": "Telwoorden voor [aantal]", "info": "Nul tot en met tien, door komma's gescheiden. Staat er niets, dan komt het getal er als cijfer te staan.", "default": "nul,Eén,Twee,Drie,Vier,Vijf,Zes,Zeven,Acht,Negen,Tien" },
 
     { "type": "header", "content": "De kaarten" },
     { "type": "checkbox", "id": "beeld_links", "label": "Eerste kaart: beeld links", "info": "Daarna wisselt het vanzelf om en om.", "default": true },
