@@ -5647,8 +5647,16 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
   <div class="note">
     <h4>Drie dingen die ik anders heb gedaan dan de tekening</h4>
     <p><strong>&laquo;Cadeau bij deze set&raquo; is &laquo;Cadeau bij deze bestelling&raquo; geworden.</strong> E&eacute;n sjabloon bedient achtenvijftig producten en de meeste zijn geen set maar &eacute;&eacute;n apparaat. De onderregel noemt het product toch al bij naam, dus de bovenregel hoeft dat niet.</p>
-    <p><strong>De namen staan niet in de winkelinstellingen maar in de sectie.</strong> De tekening zegt &laquo;Luxe washbag&raquo;; het winkellabel zegt &laquo;Gratis Washbag&raquo;, en dat zou naast een plaatje met &laquo;Gratis&raquo; hetzelfde woord twee keer zetten. De sectie heeft nu een eigen naamveld per cadeau dat terugvalt op het winkellabel en daarna op de producttitel. <strong>De drempel en het product blijven wél uit de winkelinstellingen komen</strong> &mdash; daar zit het risico dat de pagina iets belooft wat de winkelwagen niet doet; bij een naam zit dat risico niet.</p>
+    <p><strong>De namen zijn omgezet in de winkelinstellingen zelf.</strong> De tekening zegt &laquo;Luxe washbag&raquo;; het winkellabel zei &laquo;Gratis Washbag&raquo;, en dat zet naast een plaatje met &laquo;Gratis&raquo; hetzelfde woord twee keer. Eerst stond de nette naam in een sectie-instelling, maar dat zijn twee bronnen die hetzelfde zeggen &mdash; en die kunnen alleen maar gaan verschillen. Nu staat het in <code>settings_data.json</code>, dus <strong>de winkelwagen zegt het ook</strong>, waar &laquo;Gratis Washbag&raquo; naast een regel van &euro;&nbsp;0,00 net zo dubbelop was.</p>
     <p><strong>Het aantal kolommen volgt het aantal cadeaus.</strong> Tussen &euro;&nbsp;65 en &euro;&nbsp;90 zijn het er twee in plaats van drie; dan wordt het een rij van twee en niet een rij van drie met een gat.</p>
+  </div>
+
+<div class="note">
+    <h4>Een bestand overschrijven dat je niet mag slopen</h4>
+    <p><code>settings_data.json</code> bevat naast de cadeau-instellingen ook elke app-embed van de winkel &mdash; Klaviyo, Clarity, Triple Whale, Loox, TikTok, PageFly, Hotjar, UpPromote. De API vervangt het hele bestand, dus &eacute;&eacute;n verkeerd cijfer in een app-UUID zet stilletjes een pixel uit.</p>
+    <p><strong>De checksum hielp hier niet.</strong> Het thema meldt voor dit bestand 3550 bytes terwijl de inhoud die je terugkrijgt er 4620 is, en geen enkele opmaakvariant van diezelfde data komt op die checksum uit &mdash; Shopify slaat het anders genormaliseerd op. Bij <code>.liquid</code>, <code>.css</code> en de sjablonen klopt de checksum w&eacute;l; daar blijft het de goede controle.</p>
+    <p><strong>Dus was de controle een diff.</strong> Inhoud ophalen v&oacute;&oacute;r de upload, bewaren, erna opnieuw ophalen en vergelijken. Uitkomst: precies twee gewijzigde regels, alle app-embeds ongemoeid. Dat zegt ook w&aacute;t er veranderd is, wat een checksum niet doet.</p>
+    <p><strong>En de inhoud is niet overgetikt.</strong> Een GraphQL-antwoord dat te groot is voor het venster wordt naar schijf geschreven; door de query bewust groot te maken komt de bestandsinhoud daar terecht en haal je hem er byte-exact uit. Ik had hem eerst met de hand nagetypt &mdash; die bleek toevallig perfect, maar dat is geen methode.</p>
   </div>
 
   <div class="note warn">

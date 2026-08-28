@@ -1099,16 +1099,44 @@ goud een lijn.
 | Tekening | Wat er staat | Waarom |
 | --- | --- | --- |
 | «Cadeau bij deze set» | «Cadeau bij deze bestelling» | Eén sjabloon, 58 producten; de meeste zijn geen set. De onderregel noemt het product toch al bij naam. |
-| «Luxe washbag» | idem, maar uit een sectie-instelling | Het winkellabel is «Gratis Washbag» en dat zet naast een plaatje met «Gratis» hetzelfde woord twee keer. |
+| «Luxe washbag» | idem | Het winkellabel was «Gratis Washbag» en dat zet naast een plaatje met «Gratis» hetzelfde woord twee keer. Het label is omgezet in Winkelinstellingen. |
 | Altijd drie kolommen | zoveel kolommen als er cadeaus zijn | Tussen € 65 en € 90 zijn het er twee; drie kolommen zou een gat geven. |
 
-**De naam mag afwijken, de drempel niet.** `cad_naam_1` en `cad_naam_2` zijn
-nieuwe sectie-instellingen die terugvallen op `settings.gift_N_label` en
-daarna op de producttitel. Drempel en product blijven uit de
-winkelinstellingen komen: daar zit het risico dat de pagina iets belooft wat
-de winkelwagen niet uitvoert. Bij een naam zit dat risico niet. Nadeel: de
-winkelwagen zegt nog steeds «Gratis Washbag». Wil je dat gelijktrekken, dan
-moet het label in Winkelinstellingen om — dat raakt dan ook de winkelwagen.
+**De naam komt weer uit één bron.** Eerst stond de weergavenaam in een
+sectie-instelling (`cad_naam_1` / `cad_naam_2`) omdat het winkellabel «Gratis
+Washbag» was. Daarna is dat label zelf omgezet naar «Luxe washbag» en
+«Neustrimmer Ultra», dus de sectie-instellingen staan nu leeg en het
+koopvak leest weer rechtstreeks `settings.gift_N_label`. De velden blijven in
+het schema als noodgreep: leeg = winkellabel, en anders de producttitel. Twee
+bronnen die hetzelfde zeggen kunnen alleen maar gaan verschillen.
+
+Omdat het een thema-instelling is, verandert de winkelwagen mee — daar stond
+«Gratis Washbag» naast een regel van € 0,00, wat net zo goed dubbelop was.
+
+### settings_data.json overschrijven zonder het te slopen
+
+Dat bestand bevat naast de cadeau-instellingen ook elke app-embed van de
+winkel (Klaviyo, Clarity, Triple Whale, Loox, TikTok, PageFly, Hotjar,
+UpPromote…). `themeFilesUpsert` vervangt het hele bestand, dus een tikfout in
+één app-UUID zet stilletjes een pixel uit.
+
+Drie dingen die hierbij tegenvielen:
+
+* **De `checksumMd5` die het thema meldt hoort niet bij de inhoud die de API
+  teruggeeft.** Voor dit bestand meldt het thema 3550 bytes terwijl `body.content`
+  4620 bytes is; geen enkele opmaakvariant van diezelfde data komt op die
+  checksum uit. Shopify slaat het kennelijk anders genormaliseerd op. Voor
+  `.liquid`, `.css` en `.json`-sjablonen klopt de checksum wél — daar blijft
+  het de goede controle.
+* **Dus is de controle hier een diff, geen checksum.** Inhoud ophalen vóór de
+  upload, bewaren, na de upload opnieuw ophalen en diffen. Verwacht: precies
+  twee gewijzigde regels. Dat is een sterkere controle dan een checksum, want
+  het zegt ook wát er veranderd is.
+* **De inhoud haal je op zonder over te tikken.** Een GraphQL-antwoord dat te
+  groot is voor het venster wordt naar een bestand geschreven; door de query
+  bewust groot te maken (het bestand plus een grote `translatableResource`)
+  komt `body.content` op schijf te staan en haal je hem er met `jq -r` byte-exact
+  uit. Overtikken uit een transcript is hier geen optie.
 
 ### Twee dingen die ik moest meten
 
