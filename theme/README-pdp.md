@@ -1162,6 +1162,28 @@ en de voetregel zeiden hetzelfde. De voetregel is ingekort tot «Geen code of
 selectie nodig.» en op de telefoon, waar het stempel toch op een eigen regel
 viel en vijftig pixels kostte, staat alleen de voetregel.
 
+### Twee verlopen
+
+Het vlak loopt diagonaal van iets lichter marine (`#1E3A69`) linksboven naar
+dieper (`#101F3A`) rechtsonder. Dat licht valt waar het plaatje en de
+bovenregel staan en dooft waar de crèmekaart begint, dus die kaart komt naar
+voren zonder extra rand.
+
+De rand is een goudglans in plaats van één tint — goud is nooit één kleur, en
+de koopknop eronder heeft datzelfde verloop al. Een `border` kan geen verloop
+dragen, dus het zijn twee lagen in één `background`: de eerste `padding-box`,
+de tweede `border-box`, met `border-color:transparent`.
+
+**Let op de valkuil.** De `background`-verkorting zet `background-color` op
+transparant. Dat kost het vangnet voor een browser zonder verloop, en het
+maakt het blok onmeetbaar: een contrastmeter die de achtergrondkleur van de
+ouders optelt leest dan de crèmegrond van de pagina in plaats van marine, en
+meldt dat alles goed is. Daarom staat `background-color:var(--cad-marine)`
+er expliciet achteraan.
+
+**Reken bij een verloop op de lichtste stop**, niet op het gemiddelde. Op
+`#1E3A69`: wit 11,3:1, goud 5,7:1, de voetregel 7,3:1.
+
 ### Het lettertype: drie lagen diep
 
 | Laag | Wat er aan de hand was |

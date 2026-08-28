@@ -227,16 +227,35 @@
    was 383px op de desktop en nam meer aandacht dan de koopknop eronder. Het
    meeste won ik door de doorgestreepte prijs en het plaatje op één regel te
    zetten in plaats van onder elkaar; er hoefde niets weg. */
-.ws-pdp .ws-cad{--cad-marine:#14294B;--cad-marine2:#1B3560;--cad-goud:#D9B45C;
-  --cad-goud2:#EFCE93;--cad-room:#F7F3EC;
+.ws-pdp .ws-cad{--cad-marine:#14294B;--cad-marine2:#1E3A69;--cad-marine3:#101F3A;
+  --cad-goud:#D9B45C;--cad-goud2:#EFCE93;--cad-goud3:#B8912F;--cad-room:#F7F3EC;
   margin-top:13px;padding:11px 11px 10px;border-radius:14px;
   border:1.5px solid var(--cad-goud);background:var(--cad-marine);
   box-shadow:0 8px 20px -16px rgba(20,41,75,.5)}
+
+/* Verloop, twee keer, allebei ingehouden.
+
+   Het vlak loopt diagonaal van iets lichter marine linksboven naar dieper
+   rechtsonder. Dat licht valt precies waar het plaatje en de bovenregel
+   staan en dooft waar de crèmekaart begint, dus de kaart komt naar voren
+   zonder dat er een rand omheen hoeft.
+
+   De rand krijgt een goudglans in plaats van één vlakke tint: goud is nooit
+   één kleur, en de koopknop eronder heeft datzelfde verloop al. Twee lagen
+   in één background -- de eerste tot aan de padding, de tweede tot aan de
+   rand -- want een border kan zelf geen verloop dragen. */
+.ws-pdp .ws-cad{
+  background:linear-gradient(158deg,var(--cad-marine2) 0%,var(--cad-marine) 46%,var(--cad-marine3) 100%) padding-box,
+             linear-gradient(150deg,var(--cad-goud2) 0%,var(--cad-goud) 38%,var(--cad-goud3) 72%,var(--cad-goud2) 100%) border-box;
+  border-color:transparent;background-color:var(--cad-marine)}
 
 /* ---- de bovenrij: plaatje links, stempel rechts ---- */
 .ws-pdp .ws-cad-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:7px}
 .ws-pdp .ws-cad-ic{flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;
   background:var(--cad-room);border:1.5px solid var(--cad-goud);color:var(--cad-marine)}
+.ws-pdp .ws-cad-ic{background:linear-gradient(var(--cad-room),var(--cad-room)) padding-box,
+  linear-gradient(150deg,var(--cad-goud2),var(--cad-goud) 45%,var(--cad-goud3)) border-box;
+  border-color:transparent}
 .ws-pdp .ws-cad-ic svg{width:13px;height:13px}
 .ws-pdp .ws-cad-ey{font-size:9.5px;font-weight:800;letter-spacing:.10em;text-transform:uppercase;
   color:var(--cad-goud)}
