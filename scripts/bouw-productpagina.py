@@ -184,6 +184,8 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
 # ---------------------------------------------------------------------------
 NIEUW_OP = u'28 augustus'
 WIJZIGINGEN = [
+ (u'28 augustus', 'boven', u'MARINE',
+  u'Het aangeleverde ontwerp nagebouwd: marine met goud, live in het werkthema.'),
  (u'28 augustus', 'boven', u'DRIE VARIANTEN',
   u'Drie ontwerpen voor het cadeauveld naast elkaar, elk in zijn echte buurt.'),
  (u'27 augustus', 'boven', u'CADEAUS',

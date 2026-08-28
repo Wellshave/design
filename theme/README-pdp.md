@@ -1081,6 +1081,56 @@ Ze blijven in het sjabloon staan, dus in de thema-editor zijn ze met &eacute;&ea
 weer aan te zetten. Wat de Selleasy-kaart deed, hoort in blok 07
 &mdash; &laquo;maak het compleet&raquo; &mdash; en dan in de opmaak van de pagina zelf.
 
+## Vierde versie: marine met goud
+
+Het ontwerp is aangeleverd, niet door mij bedacht. Marineblauw vlak met een
+gouden rand, een crèmekaart met de cadeaus erin, gouden haarlijnen ertussen,
+een omlijnd stempel «Automatisch toegevoegd», en een vinkje onder de rij.
+
+**Waarom het naast het goud werkt.** Het contrast met de crèmegrond zit in de
+*waarde* en niet in de tint: donker tegen licht. Daardoor vecht het niet met
+de gouden koopknop, want die twee claimen niet dezelfde plek in je oog. En
+juist omdat het vlak zelf geen kleur opeist, mag goud er wél in terugkomen —
+als rand, bovenregel, stempel en vinkje. Op de knop is goud een vlak; hier is
+goud een lijn.
+
+**Drie afwijkingen van de tekening**, elk met een reden:
+
+| Tekening | Wat er staat | Waarom |
+| --- | --- | --- |
+| «Cadeau bij deze set» | «Cadeau bij deze bestelling» | Eén sjabloon, 58 producten; de meeste zijn geen set. De onderregel noemt het product toch al bij naam. |
+| «Luxe washbag» | idem, maar uit een sectie-instelling | Het winkellabel is «Gratis Washbag» en dat zet naast een plaatje met «Gratis» hetzelfde woord twee keer. |
+| Altijd drie kolommen | zoveel kolommen als er cadeaus zijn | Tussen € 65 en € 90 zijn het er twee; drie kolommen zou een gat geven. |
+
+**De naam mag afwijken, de drempel niet.** `cad_naam_1` en `cad_naam_2` zijn
+nieuwe sectie-instellingen die terugvallen op `settings.gift_N_label` en
+daarna op de producttitel. Drempel en product blijven uit de
+winkelinstellingen komen: daar zit het risico dat de pagina iets belooft wat
+de winkelwagen niet uitvoert. Bij een naam zit dat risico niet. Nadeel: de
+winkelwagen zegt nog steeds «Gratis Washbag». Wil je dat gelijktrekken, dan
+moet het label in Winkelinstellingen om — dat raakt dan ook de winkelwagen.
+
+### Twee dingen die ik moest meten
+
+**De foto's liepen over de namen heen.** `max-height:100%` lost op een
+grid-item niet betrouwbaar op: de foto bleef 140 px hoog in een vak van 88.
+Vaste hoogte in pixels erin en het klopte. Gevonden door de doos en de foto op
+te meten in de browser, niet door naar de schermafdruk te turen.
+
+**De doorgestreepte prijzen zakten door de contrasteis.** Marine op 55%
+dekking op de crèmekaart haalde 3,42:1. Uitgerekend vanaf welke dekking het
+4,5 haalt — 65% — en op 68% gezet.
+
+**Wat het kost.** Op de telefoon 482 px, tegen 289 in de vorige versie en 79
+in de kortste variant. De koopknop staat nu op 1633 px. Dat is de duurste
+versie tot nu toe, en dat is de keuze van dit ontwerp: de cadeaus zijn hier
+geen regel maar een etalage.
+
+**Nieuwe instellingen:** `cad_ey`, `cad_auto`, `cad_naam_1`, `cad_naam_2`.
+`cad_sub_voor` en `cad_voet` hebben nieuwe tekst. Alles staat in
+`templates/product.json` en is in en/de/fr geregistreerd.
+
+
 ## Het rapport: waar staat wat er nieuw is
 
 Het dossier is veertig hoofdstukken lang. Zonder hulp moet je zoeken waar er
