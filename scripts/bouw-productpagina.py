@@ -184,6 +184,10 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
 # ---------------------------------------------------------------------------
 NIEUW_OP = u'28 augustus'
 WIJZIGINGEN = [
+ (u'28 augustus', 'boven', u'GEWICHT',
+  u'23 van de 41 gewichten stonden op vet \u2014 een schaal die de pagina laat spreken.'),
+ (u'28 augustus', 'boven', u'BESPAARKNOP',
+  u'Het bespaarbedrag naast de knop, en uit de knop zelf gehaald.'),
  (u'28 augustus', 'boven', u'KASSA',
   u'De vergelijk-pop-up stuurde je naar de homepage; nu naar de kassa, m\u00e9t je cadeau.'),
  (u'28 augustus', 'boven', u'KOOPBALK',

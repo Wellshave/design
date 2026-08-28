@@ -1650,6 +1650,79 @@ reden, dan verdwijnt de balk mee. In dit thema is dat slot alleen voor lagen in
 gebruik, dus dat is een prijs die ik nu accepteer.
 
 
+## Het bespaarbedrag naast de knop
+
+Naar het voorbeeld waarin prijs, doorgehaalde prijs, bespaarbedrag en knop
+naast elkaar staan. De chip staat nu in de knopregel en niet meer achter de
+prijs.
+
+**Verplaatst, niet verdubbeld.** De opdracht was &laquo;ook een besparing erlangs&raquo;,
+maar dan zou hetzelfde bedrag twee keer boven de vouw staan &mdash; precies waar we
+een paar ronden geleden vanaf wilden. In het voorbeeld st&aacute;&aacute;t het maar &eacute;&eacute;n keer;
+daar vallen prijs en knop op dezelfde regel, bij ons niet. Terugzetten is
+&eacute;&eacute;n regel als het toch op beide plekken moet.
+
+Tegelijk is het bedrag uit de knop gehaald. Die zei &laquo;In winkelwagen &mdash;
+&euro;&nbsp;124,95&raquo;, wat het derde bedrag op &eacute;&eacute;n scherm was; in het voorbeeld staat er
+alleen &laquo;Toevoegen&raquo;. Netto blijft het aantal geldsignalen gelijk en staan ze op
+een betere plek.
+
+### Waarom de wikkel een `ProductPrice-`-id draagt
+
+Bij een variantwissel vervangt het thema de `innerHTML` van &aacute;lles wat op
+`[id^="ProductPrice-"]` matcht. Door de chip in
+`ProductPrice-<sectie>-besp` te zetten houdt het thema hem gratis bij; zonder
+dat zou hij na een wissel het bedrag van de vorige variant blijven tonen.
+
+Twee dingen om te weten als je hieraan komt:
+
+* **De wikkel wordt altijd uitgeschreven, ook zonder korting** (dan leeg, en
+  `:empty` verbergt hem). Het thema haakt namelijk af zodra het aantal knopen
+  v&oacute;&oacute;r en n&aacute; de wissel niet gelijk is &mdash; en dan werkt ook de pr&iacute;js niet meer bij.
+* **De meelopende balk leest twee knopen**, het prijsblok en deze chip, want
+  sinds de verplaatsing zit de chip niet meer in het prijsblok.
+
+## Alles stond op vet: de gewichtschaal
+
+23 van de 41 gewichtsregels stonden op 700 of 800, inclusief lopende tekst. De
+checkpoints onder de prijs stonden op 700, de knop op 800, de accordeons op
+700, de beloftes van blok 02 op 800. Als alles schreeuwt is er geen hi&euml;rarchie
+meer, alleen volume &mdash; en dat leest als dropshipping, niet als een merk.
+
+De schaal staat nu bovenaan `ws-pdp-koopvak.css`:
+
+| | |
+| --- | --- |
+| &ge; 23 px koppen | 500 &mdash; de grootte draagt de hi&euml;rarchie al |
+| 17-23 px ondertitels | 400 &mdash; moeten wijken voor de kop erboven |
+| 12-16 px koppen | 500 &mdash; tweede orde: accordeons, kaartnamen |
+| 12-16 px lopende tekst | 400 &mdash; checkpoints, beschrijvingen |
+| &le; 11 px microlabels | 700 &mdash; klein en gespatieerd, daaronder verdwijnen ze |
+| knoppen | 600 &mdash; kapitaal met spatiering draagt al |
+| getallen | 500 &mdash; prijs, aantallen, bedragen |
+
+Twee vloeren: onder 11&nbsp;px nooit lichter dan 500, en wit op bewegend beeld (de
+UGC-tegels) blijft 600-700, want daar is licht niet leesbaar. **Boven 700 staat
+nu niets meer.**
+
+52 regels aangepast over alle vier de stylesheets. Blok 03 en 05 zijn
+meegegaan hoewel de opmerking over de vouw ging: als blok 01 en 02 naar 500
+zakken en de rest op 800 blijft staan, valt de pagina in twee helften uiteen.
+
+### Wat er bewust bleef
+
+De prijs blijft 500 &mdash; die mag dicht, dat was expliciet. En de doorgehaalde
+prijs ging naar 400 omdat hij bijzaak is naast het bedrag dat je betaalt.
+
+### Dit raakt het contrast niet
+
+Gewicht zit niet in de WCAG-som: de kleuren zijn niet veranderd, dus alle eerder
+gemeten verhoudingen staan nog. E&eacute;n grens is er wel &mdash; tekst van 18,66&nbsp;px
+&eacute;n vet valt onder de soepelere eis van 3:1. In dit blok zit niets in die band
+dat op die uitzondering leunde: alles tussen 18 en 24&nbsp;px is volle inkt op
+16:1. De dofste tekst zit op 12,5&nbsp;px en die is nooit vet geweest.
+
+
 ## Nog open
 
 * **`custom.buybox_quote` is alleen op de Groom Guard PRO gevuld.** Op de andere

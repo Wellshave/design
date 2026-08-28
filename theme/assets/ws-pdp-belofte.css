@@ -15,7 +15,7 @@
    regel lezen vier iconen op een rij als productkenmerken, en dan concurreren
    ze met de vier vinkjes die twintig pixels hoger in het koopvak staan. */
 .ws-bel-ey{display:block;text-align:center;margin:0 0 16px;
-  font-size:10px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--b-brons)}
+  font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--b-brons)}
 
 .ws-bel-rij{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:0;padding:0;list-style:none}
 
@@ -35,7 +35,7 @@
 .ws-bel-ic img,.ws-bel-ic svg{display:block;width:19px;height:19px}
 
 .ws-bel-tx{min-width:0}
-.ws-bel-tx b{display:block;font-size:13.5px;font-weight:800;letter-spacing:-.01em;
+.ws-bel-tx b{display:block;font-size:13.5px;font-weight:500;letter-spacing:-.01em;
   line-height:1.25;color:var(--b-ink)}
 .ws-bel-tx span{display:block;margin-top:3px;font-size:11.5px;line-height:1.3;color:var(--b-ink60)}
 

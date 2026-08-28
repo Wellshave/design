@@ -2016,6 +2016,50 @@ strong{font-weight:700}
 </section>
 
 <section>
+  <div class="shead"><span class="snum">GEWICHT</span><h2 class="duo">Alles stond op vet,<span class="b">en dan schreeuwt alles even hard.</span></h2></div>
+  <p class="sintro"><strong>23 van de 41</strong> gewichtsregels stonden op 700 of 800 &mdash; inclusief lopende tekst. De checkpoints onder de prijs op 700, de knop op 800, de accordeons op 700, de beloftes van blok 02 op 800. Als alles schreeuwt is er geen hi&euml;rarchie meer, alleen volume. Dat leest als dropshipping, niet als een merk.</p>
+
+  <div class="note win">
+    <h4>De schaal</h4>
+    <table>
+      <tr><th>rol</th><th>gewicht</th><th>waarom</th></tr>
+      <tr><td>&ge; 23 px koppen</td><td>500</td><td>de grootte draagt de hi&euml;rarchie al</td></tr>
+      <tr><td>17&ndash;23 px ondertitels</td><td>400</td><td>moeten wijken voor de kop erboven</td></tr>
+      <tr><td>12&ndash;16 px koppen</td><td>500</td><td>tweede orde: accordeons, kaartnamen</td></tr>
+      <tr><td>12&ndash;16 px lopende tekst</td><td>400</td><td>checkpoints, beschrijvingen</td></tr>
+      <tr><td>&le; 11 px microlabels</td><td>700</td><td>klein en gespatieerd; daaronder verdwijnen ze</td></tr>
+      <tr><td>knoppen</td><td>600</td><td>kapitaal met spatiering draagt al</td></tr>
+      <tr><td>getallen</td><td>500</td><td>prijs, aantallen, bedragen</td></tr>
+    </table>
+    <p>Twee vloeren: onder 11&nbsp;px nooit lichter dan 500, en wit op bewegend beeld (de UGC-tegels) blijft 600&ndash;700, want daar is licht niet leesbaar. <strong>Boven 700 staat nu niets meer.</strong></p>
+    <p>52 regels over alle vier de stylesheets. Blok 03 en 05 gingen mee hoewel de opmerking over de vouw ging: als blok 01 en 02 naar 500 zakken en de rest op 800 blijft, valt de pagina in twee helften uiteen.</p>
+  </div>
+
+  <div class="note win">
+    <h4>Dit raakt het contrast niet</h4>
+    <p>Gewicht zit niet in de WCAG-som &mdash; de kleuren zijn niet veranderd, dus alle eerder gemeten verhoudingen staan nog. E&eacute;n grens is er wel: tekst van 18,66&nbsp;px <em>&eacute;n</em> vet valt onder de soepelere eis van 3:1. Er zit hier niets in die band dat op die uitzondering leunde &mdash; alles tussen 18 en 24&nbsp;px is volle inkt op 16:1, en de dofste tekst zit op 12,5&nbsp;px en is nooit vet geweest.</p>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">BESPAARKNOP</span><h2 class="duo">Het bedrag naast de knop,<span class="b">niet er nog eens bij.</span></h2></div>
+  <p class="sintro">Naar het voorbeeld waarin prijs, doorgehaalde prijs, bespaarbedrag en knop naast elkaar staan. De chip staat nu in de knopregel.</p>
+
+  <div class="note warn">
+    <h4>Verplaatst, niet verdubbeld</h4>
+    <p>De opdracht was &laquo;<em>ook</em> een besparing erlangs&raquo;, maar dan zou hetzelfde bedrag twee keer boven de vouw staan &mdash; precies waar we een paar ronden geleden vanaf wilden. In het voorbeeld st&aacute;&aacute;t het maar &eacute;&eacute;n keer: daar vallen prijs en knop op dezelfde regel, bij ons niet. Terugzetten is &eacute;&eacute;n regel als het toch op beide plekken moet.</p>
+    <p>Tegelijk is het bedrag uit de knop gehaald. Die zei &laquo;In winkelwagen &mdash; &euro;&nbsp;124,95&raquo;, het derde bedrag op &eacute;&eacute;n scherm; in het voorbeeld staat er alleen &laquo;Toevoegen&raquo;. Netto blijft het aantal geldsignalen gelijk en staan ze op een betere plek.</p>
+  </div>
+
+  <div class="note win">
+    <h4>Waarom de wikkel een <code>ProductPrice-</code>id draagt</h4>
+    <p>Bij een variantwissel vervangt het thema de <code>innerHTML</code> van &aacute;lles wat op <code>[id^="ProductPrice-"]</code> matcht. Door de chip daar&aacute;&aacute;n te hangen houdt het thema hem gratis bij; zonder dat zou hij na een wissel het bedrag van de vorige variant blijven tonen.</p>
+    <p>De wikkel wordt daarom <strong>altijd</strong> uitgeschreven, ook zonder korting (dan leeg). Het thema haakt namelijk af zodra het aantal knopen v&oacute;&oacute;r en n&aacute; de wissel niet gelijk is &mdash; en dan werkt ook de pr&iacute;js niet meer bij.</p>
+    <p>Op de telefoon past de chip er niet naast: de knop zou onder de 190&nbsp;px zakken, te smal voor een primaire actie met een duim. Daar krijgt hij zijn eigen regel over de volle breedte.</p>
+  </div>
+</section>
+
+<section>
   <div class="shead"><span class="snum">KASSA</span><h2 class="duo">Kiezen in de pop-up bracht je<span class="b">op de homepage.</span></h2></div>
   <p class="sintro">Op &laquo;Kies Barber Pack 3.0&raquo; drukken deed twee dingen: het product ging in de winkelwagen, en je stond op de homepage. Dat was geen keuze maar een gat &mdash; de formulieren postten naar <code>/cart/add</code> zonder doel, en dan zet Shopify je op de root.</p>
 
