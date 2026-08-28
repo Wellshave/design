@@ -585,14 +585,34 @@
 .wsc .wsk{position:relative;background:#fff;border-radius:12px;overflow:hidden;min-width:0;
   border:1px solid rgba(17,17,17,.08);display:flex;flex-direction:column;
   transition:border-color .45s ease,box-shadow .45s ease,background-color .45s ease}
+/* isolation: houd het mengen van de packshot binnen dit vlak, zodat de foto
+   alleen met de achtergrond van de tegel mengt en niet met de kaart eronder. */
 .wsc .wsk-shot{position:relative;aspect-ratio:1/1;background:#F4F3F1;min-width:0;overflow:hidden;
-  transition:background .5s ease}
+  isolation:isolate;transition:background .5s ease}
 /* bundels dragen het verloop altijd; apparaten en messen krijgen het bij hover */
 .wsc .groep[data-cat="bundel"] .wsk-shot{background:linear-gradient(155deg,#FDFAF4 0%,#F5EAD7 54%,#EFE0C6 100%)}
 .wsc .groep[data-cat="bundel"] .wsk-mark{opacity:.14;transform:translate(-50%,-50%) scale(1)}
+/* De packshots hebben hun achtergrond in het bestand zitten: zeventien van de
+   achttien zijn niet transparant, en JPEG kan dat ook niet. Op de gewone tegel viel
+   dat nauwelijks op, maar op een bundelkaart en bij hover — waar het vlak een crème
+   verloop krijgt — stond er een wit blok in de kaart, tot 40 stappen naast de
+   achtergrondkleur.
+
+   `multiply` laat wit wegvallen tegen de achtergrond: wit x achtergrond = de
+   achtergrond zelf. De foto's zijn alleen niet zuiver wit maar 235 tot 247, dus
+   `brightness` tilt dat eerst naar 255. Gemeten over achttien packshots: x1.085 laat
+   ze allemaal wegvallen tegen de tegel — onzichtbaar —
+   terwijl hoger optillen alleen maar meer glans uit het product zelf wegknijpt.
+   Bijkomend: het monogram achter de packshot schijnt er nu doorheen. */
 .wsc .wsk-shot img.wsk-pack{position:absolute;inset:0;z-index:1;width:100%;height:100%;
-  object-fit:contain;padding:8%;transition:transform .62s cubic-bezier(.22,.61,.36,1)}
-.wsc .wsk-fotolink{position:absolute;inset:0;z-index:1;display:block}
+  object-fit:contain;padding:8%;mix-blend-mode:multiply;filter:brightness(1.085);
+  transition:transform .62s cubic-bezier(.22,.61,.36,1)}
+/* Geen z-index: de packshot zit binnen deze link, en een positioned element met
+   een z-index maakt een eigen laag. De foto had dan geen achtergrond meer om
+   tegen te mengen, waardoor mix-blend-mode hierboven niets deed. Zonder z-index
+   staat de link nog steeds boven het monogram — hij komt er in de opmaak na —
+   en het lintje en de knoppen liggen er met z-index 2 overheen. */
+.wsc .wsk-fotolink{position:absolute;inset:0;display:block}
 .wsc .wsk-mark{position:absolute;z-index:0;left:50%;top:50%;width:104%;
   transform:translate(-50%,-50%) scale(1.14);opacity:0;
   transition:opacity .62s cubic-bezier(.22,.61,.36,1),transform .62s cubic-bezier(.22,.61,.36,1)}
@@ -740,8 +760,10 @@
   box-shadow:0 14px 34px rgba(17,17,17,.09);display:flex;flex-direction:column;
   flex:1 1 0;min-width:216px;max-width:300px;border:2px solid transparent}
 .wsc-laag .vgl.uit{display:none}
-.wsc-laag .vgl-beeld{background:#F6F6F6;aspect-ratio:5/4;display:grid;place-items:center;padding:8px}
-.wsc-laag .vgl-beeld img{width:auto;max-width:100%;max-height:100%;object-fit:contain}
+.wsc-laag .vgl-beeld{background:#F6F6F6;aspect-ratio:5/4;display:grid;place-items:center;padding:8px;
+  isolation:isolate}
+.wsc-laag .vgl-beeld img{width:auto;max-width:100%;max-height:100%;object-fit:contain;
+  mix-blend-mode:multiply;filter:brightness(1.085)}
 .wsc-laag .vgl-body{padding:16px 18px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
 .wsc-laag .vgl-body h3{font-size:15.5px;font-weight:800;letter-spacing:-.01em;line-height:1.25}
 .wsc-laag .vgl-prijs{display:flex;align-items:baseline;gap:8px}

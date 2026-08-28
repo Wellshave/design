@@ -1446,3 +1446,74 @@ heeft nog steeds precies één beoordelingsregel en één USP-lijst. Nul afwijki
   `config/settings_schema.json` op te hogen.
 - De thema-instelling `card_reviews` staat op **4.5**, `reviews_label` ook, terwijl
   de productpagina en de nieuwe kaart **4,4** tonen. Dat moet één getal worden.
+
+## Ronde: lintjes terug naar wat ze horen te zijn, en het witte fotovlak weg (28-08)
+
+### De lintjes
+
+Er stonden **95 lintjes** over de sjablonen, 31 verschillende teksten, op vrijwel
+elke kaart een. Daarmee zegt een lintje niets meer. Erger: er stonden getallen in
+die met de hand waren ingetypt — "26× deze maand", "37× deze maand" — en die
+verouderen zonder dat iemand het merkt. Ook "Laagste prijs", "Duurste set" en
+"Meeste voor je geld" waren commentaar van de winkel, geen kenmerk van het product.
+
+Nieuwe regel, per pagina hooguit twee:
+
+- **Best verkocht** — het product met de meeste bestellingen over 90 dagen
+- **Nieuw** — het jongste product, alleen als het korter dan acht weken bestaat en
+  niet al de bestseller is
+
+Op de sale-pagina's staat geen lintje: daar is het kortingslabel de boodschap.
+Resultaat: **15 lintjes in plaats van 95**.
+
+De cijfers komen uit ShopifyQL (28-08-2026, 90 dagen), niet uit een inschatting.
+Drie meeliftende producten zijn uitgesloten, anders krijg je onzin: **The Washbag
+stond bovenaan met 361 bestellingen omdat hij het gratis cadeau is boven de €65**,
+en Travelbag en de vervangmessen liften mee met het apparaat waar ze bij horen.
+Alleen apparaten en sets tellen mee. Zonder die uitsluiting kreeg de zone Hoofd een
+lintje op een reistas.
+
+Wie het wil verversen: `/tmp/hdr/tool/lintjes.py` in de sessie bevat de tabel en de
+regel; de bestellingen opnieuw ophalen en het script draaien is genoeg. Wil je per
+groep een lintje in plaats van per pagina, dan is dat één regel in dat script.
+
+### Het witte vlak achter de packshot
+
+Gemeten over achttien packshots: **zeventien hebben hun achtergrond in het bestand
+zitten** en zijn niet transparant — bij JPEG kan dat ook niet. Alleen de Tondeuse
+Pro is een echte transparante PNG. De achtergronden lopen van 235 tot 255, en bij
+verschillende foto's is het geen effen wit maar een verloop.
+
+Transparant maken kan CSS dus niet. Wegmengen wel: `mix-blend-mode: multiply` laat
+wit wegvallen tegen de achtergrond, want wit × achtergrond = de achtergrond. Omdat
+de foto's geen zuiver wit zijn tilt `filter: brightness(1.085)` ze eerst naar 255.
+
+Waarom het opviel: op de gewone tegel (`#F4F3F1`) week het fotovlak maar 2 tot 14
+af, maar **op een bundelkaart en bij hover — waar de tegel een crème verloop krijgt
+— liep dat op tot 40**. Dat is het witte blok op de screenshot.
+
+Gemeten na de wijziging, over vijf pagina's: het fotovlak wijkt nu **0 tot 5** af
+van de tegel, oftewel onzichtbaar. De prijs is wat glans in de allerlichtste delen
+van het product; bij het slechtste geval (Tondeuse Deluxe) raakt 7% van de
+productpixels vast op wit, en dat waren al bijna-witte hooglichten.
+
+Bijkomend: het monogram achter de packshot schijnt er nu doorheen, zoals bedoeld.
+
+### Een valkuil die twee uur had kunnen kosten
+
+De blend deed eerst **niets**, terwijl de computed style netjes `multiply` gaf. De
+oorzaak: de packshot zit sinds een eerdere ronde **binnen de fotolink**, en die link
+had `z-index: 1`. Een positioned element met een z-index maakt een eigen laag, en
+dan is er geen achtergrond meer om tegen te mengen. `z-index` eraf en het werkt; de
+link staat nog steeds boven het monogram omdat hij er in de opmaak na komt, en het
+lintje en de knoppen liggen er met `z-index: 2` overheen.
+
+`isolation: isolate` op de tegel is blijven staan en is niet de boosdoener — dat is
+apart nagemeten met een kaal testbestand.
+
+### Wat gecontroleerd is
+
+Veertien collectiepagina's: 15 lintjes in totaal, nooit meer dan twee per pagina,
+nul op de sale-pagina's. Het fotovlak nagemeten op vijf pagina's met een ring net
+binnen de foto tegen de rand van de tegel: overal 0 tot 5. De fotolink nog steeds
+klikbaar op elke kaart, met de juiste product-URL.
