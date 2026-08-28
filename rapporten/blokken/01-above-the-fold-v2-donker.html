@@ -2043,6 +2043,14 @@ strong{font-weight:700}
     <p>Om dezelfde reden wordt de prijs niet opnieuw uitgeschreven maar overgenomen uit het prijsblok, met een waarnemer erop. Anders werkt een variantwissel maar de helft van het scherm bij en staat er onderin een bedrag dat niet meer klopt.</p>
   </div>
 
+  <div class="note warn">
+    <h4>&laquo;De pop-up dekt hem wel af&raquo; hield geen stand</h4>
+    <p>Dat schreef ik eerst, en het klopte alleen op kleur. Door de sluier van de vergelijk-pop-up (<code>rgba(11,11,10,.62)</code>) wordt de zandkleurige balk <code>#63615E</code> tegen een omgeving van <code>#605D59</code> &mdash; een verschil van <strong>1,06</strong>. Zelfs de gouden knop komt niet verder dan 1,21. Onzichtbaar, zou je zeggen.</p>
+    <p><strong>Maar op de telefoon staat de eigen knoppenbalk van de pop-up ook onderaan</strong>, en die overlapte de onze met <strong>36&nbsp;px</strong>. In beeld zag je de gouden knop achter de afgeronde hoek van de pop-up vandaan piepen: twee koopbalken op elkaar, en de verkeerde onderop.</p>
+    <p><strong>De winkelwagenlade was erger.</strong> Die staat op <code>z-index: 6</code> en deze balk op <code>90</code>, dus we tekenden er dwars overheen &mdash; inclusief zijn eigen afrekenknop. Geen schoonheidsfoutje maar een knop bedekken op het moment dat hij telt.</p>
+    <p><strong>Het signaal is nu tweeledig.</strong> Een waarnemer op elke bekende laag, &eacute;n een op <code>documentElement</code>: elke laag in dit thema zet de pagina op slot via <code>overflow: hidden</code>, en dat element bestaat altijd. Een waarnemer op de lade zelf mist het namelijk als die later in de DOM komt &mdash; precies wat er in mijn eerste toets gebeurde.</p>
+  </div>
+
   <div class="note win">
     <h4>Hij verschijnt pas als de koopknop v&oacute;&oacute;rbij is</h4>
     <p>Niet zodra die uit beeld is. Op de telefoon staat de knop ver onder de vouw, dus met die regel zou de balk meteen bij het laden verschijnen en het scherm opeten voordat de bezoeker iets gezien heeft &mdash; precies wat er niet moest gebeuren.</p>

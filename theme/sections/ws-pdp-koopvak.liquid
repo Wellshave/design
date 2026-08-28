@@ -822,9 +822,53 @@
           }
         }
 
+        // De balk wijkt voor elke laag die het scherm overneemt. Dat is niet
+        // alleen netjes maar nodig: de vergelijk-pop-up heeft weliswaar een
+        // sluier van 62%, maar op de telefoon staat zijn eigen knoppenbalk
+        // onderaan en overlapte die de onze met 36 px -- de gouden knop piepte
+        // achter de hoek van de pop-up vandaan. De winkelwagenlade is erger:
+        // die staat op z-index 6 en deze balk op 90, dus die tekenden we er
+        // dwars overheen, inclusief zijn eigen afrekenknop.
+        var lagen = [['.ws-pop', 'ws-open'], ['.ws-upg', 'open'],
+                     ['cart-drawer', 'open'], ['.header__search', 'open']];
+
+        function laagOpen() {
+          // Elke laag in dit thema die het scherm overneemt zet de pagina op
+          // slot via documentElement.style.overflow. Dat is het enige signaal
+          // dat niet afhangt van de vraag of het element al in de DOM stond
+          // toen dit script bond -- de winkelwagenlade wordt door een andere
+          // sectie geplaatst, en die kan later komen.
+          if (document.documentElement.style.overflow === 'hidden') return true;
+          for (var i = 0; i < lagen.length; i++) {
+            var e = document.querySelector(lagen[i][0]);
+            if (e && e.classList.contains(lagen[i][1])) return true;
+          }
+          return false;
+        }
+
+        function wijk() {
+          var weg = laagOpen();
+          balk.classList.toggle('ws-wijk', weg);
+          balk.setAttribute('aria-hidden', (weg || !zichtbaar) ? 'true' : 'false');
+        }
+
+        if (window.MutationObserver) {
+          for (var i = 0; i < lagen.length; i++) {
+            var laag = document.querySelector(lagen[i][0]);
+            if (laag) new MutationObserver(wijk)
+              .observe(laag, { attributes: true, attributeFilter: ['class', 'hidden'] });
+          }
+          // Het slot op de pagina apart in de gaten houden: dit element bestaat
+          // altijd, dus deze waarnemer mist ook een laag die later verschijnt.
+          new MutationObserver(wijk)
+            .observe(document.documentElement, { attributes: true, attributeFilter: ['style'] });
+        }
+        wijk();
+
         function meten() {
           var r = echt.getBoundingClientRect();
           toon(r.bottom < 0);
+          wijk();
         }
         meten();
 

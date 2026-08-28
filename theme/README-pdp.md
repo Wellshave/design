@@ -1612,10 +1612,42 @@ te eten.
 `position: fixed` breekt op een voorouder met `transform`, `filter`,
 `perspective` of `contain`. De keten is `body &gt; main#MainContent &gt; section`; geen
 van de thema-stylesheets zet daar zoiets op, dus de balk pint netjes aan het
-scherm. En er is geen andere vaste balk onderaan waar hij mee zou botsen: de
-enige `position: fixed` in het thema zijn de zoekbalk en de twee pop-ups, en dat
-zijn schermvullende lagen met een hogere z-index, die de balk dus gewoon
-afdekken.
+scherm. En er is geen andere v&aacute;ste balk onderaan waar hij tegenaan botst.
+
+### Maar &laquo;de pop-up dekt hem wel af&raquo; hield geen stand
+
+Dat schreef ik hier eerst, en het klopte alleen op kleur. De sluier van de
+vergelijk-pop-up is `rgba(11,11,10,.62)`; daar doorheen wordt de zandkleurige
+balk `#63615E` tegen een omgeving van `#605D59`, een verschil van 1,06. Zelfs de
+gouden knop komt niet verder dan 1,21. Onzichtbaar, zou je zeggen.
+
+Maar op de telefoon staat de eigen knoppenbalk van de pop-up
+(`.ws-pop-balk`, `position: sticky; bottom: 0`) &oacute;&oacute;k onderaan, en die overlapte
+de onze met **36&nbsp;px**. In beeld zag je de gouden knop achter de afgeronde hoek
+van de pop-up vandaan piepen. Twee koopbalken op elkaar, en de verkeerde
+onderop.
+
+De winkelwagenlade was erger. Die staat op `z-index: 6` en deze balk op `90`,
+dus we tekenden er dwars overheen &mdash; inclusief zijn eigen afrekenknop. Dat is
+geen schoonheidsfoutje maar een knop die je bedekt op het moment dat hij telt.
+
+### Hoe de balk nu wijkt
+
+Hij krijgt `ws-wijk` zodra een laag het scherm overneemt, en de zichtbare staat
+is daarom `.ws-in:not(.ws-wijk)` en niet een regel die het van zijn volgorde in
+het bestand moet hebben.
+
+Het signaal is tweeledig. Er hangt een waarnemer op de klasse van elke bekende
+laag (`.ws-pop`, `.ws-upg`, `cart-drawer`, `.header__search`), &eacute;n op
+`document.documentElement`. Dat tweede is het belangrijkste: **elke** laag in dit
+thema zet de pagina op slot via `documentElement.style.overflow = 'hidden'`, en
+dat element bestaat altijd. Een waarnemer op de lade zelf mist het namelijk als
+die lade door een andere sectie later in de DOM komt &mdash; dat is precies wat er in
+mijn eerste toets gebeurde, en het is geen gekunsteld geval.
+
+De keerzijde: zet iets anders ooit `overflow: hidden` op `<html>` om een andere
+reden, dan verdwijnt de balk mee. In dit thema is dat slot alleen voor lagen in
+gebruik, dus dat is een prijs die ik nu accepteer.
 
 
 ## Nog open
