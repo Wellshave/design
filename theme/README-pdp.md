@@ -1686,6 +1686,36 @@ en n&aacute; de wissel niet gelijk is, en dan werkt ook de pr&iacute;js niet mee
 
 Om dezelfde reden leest de meelopende balk weer &eacute;&eacute;n knoop in plaats van twee.
 
+### Het label zelf: kleiner, gevuld, zonder icoon
+
+Het was een omlijning met een prijskaartje-icoontje en gouden letters. Nu een
+gevuld pilletje van 129&times;22&nbsp;px, 11&nbsp;px op 600, zonder icoon. Het tag-symbool
+in de SVG-sprite is meeverwijderd &mdash; die chip was de enige gebruiker.
+
+De vulling is `--ws-tekstgoud` (`#8A5A1E`): dezelfde brons die hier eerst de
+l&eacute;tters had, nu als vlak. Geen nieuwe kleur dus, dezelfde omgekeerd.
+
+**Waarom niet het lichte goud van de knop.** Dat leek het voor de hand liggende
+merkantwoord, maar het meet slecht:
+
+| vulling | letters | op het koopvak | naast de knop |
+| --- | --- | --- | --- |
+| `#8A5A1E` brons | 5,33 (cr&egrave;me) | **5,10** | **3,39** |
+| `#E9BE72` licht goud | 9,98 (inkt) | 1,50 | **1,00** |
+| `#008859` groen | 4,50 (wit) | 3,89 | 2,59 |
+| `#C8281F` rood | 5,56 (wit) | 4,81 | 3,19 |
+
+In de meelopende balk staan de chip en de gouden knop n&aacute;&aacute;st elkaar. Licht goud
+komt daar op 1,00 uit &mdash; de chip zou letterlijk in de knop verdwijnen. Groen en
+rood halen het wel, maar groen is hier een vreemde eend en rood is de
+foutkleur van dit blok; allebei lezen ze bovendien als uitverkoop, niet als
+merk.
+
+E&eacute;n ding om te weten als je hem verder aanpast: **geef de tekst een eigen
+`line-height`.** Zonder erfde hij die van het koopvak en werd het pilletje
+32&nbsp;px hoog in plaats van 22 &mdash; dat is bijna de helft erbij, op een label dat
+juist kleiner moest.
+
 ### Wat niet is teruggedraaid
 
 Het bedrag is uit de knop gebleven. Die zei &laquo;In winkelwagen &mdash; &euro;&nbsp;124,95&raquo;,

@@ -67,7 +67,6 @@
     <symbol id="ws-pdp-ster-{{ section.id }}" viewBox="0 0 24 24"><path d="M12 2.6l2.9 6.2 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.9l1.2-6.6L2.5 9.7l6.6-.9z"/></symbol>
     <symbol id="ws-pdp-vink-{{ section.id }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 12.4l4.2 4.2 8.8-9.2"/></symbol>
     <symbol id="ws-pdp-ok-{{ section.id }}" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2E7CF6"/><path d="M7.6 12.3l3 3 5.8-6.2" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-    <symbol id="ws-pdp-tag-{{ section.id }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 12.9l-7.7 7.7a1.9 1.9 0 0 1-2.7 0l-7-7A1.9 1.9 0 0 1 2.6 12V4.4a1.8 1.8 0 0 1 1.8-1.8H12c.5 0 1 .2 1.3.6l7.3 7.3a1.9 1.9 0 0 1 0 2.4z"/><circle cx="7.6" cy="7.6" r="1.3"/></symbol>
     <symbol id="ws-pdp-gift-{{ section.id }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.6 11.6h16.8v8.8H3.6z"/><path d="M2.4 7.6h19.2v4H2.4zM12 7.6v12.8"/><path d="M12 7.6S10.7 3.2 8.4 3.2a2.2 2.2 0 0 0 0 4.4zM12 7.6s1.3-4.4 3.6-4.4a2.2 2.2 0 0 1 0 4.4z"/></symbol>
     <symbol id="ws-pdp-slot-{{ section.id }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4.2" y="10.4" width="15.6" height="10.4" rx="2.2"/><path d="M8 10.4V7.6a4 4 0 0 1 8 0v2.8"/></symbol>
     <symbol id="ws-pdp-mensen-{{ section.id }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9.2" cy="8.4" r="3.4"/><path d="M2.9 19.4c.5-3.2 3.2-5.2 6.3-5.2s5.8 2 6.3 5.2"/><path d="M15.8 5.4a3.4 3.4 0 0 1 0 6.6M17.4 14.6c2.1.5 3.5 2.2 3.8 4.4"/></symbol>
@@ -236,7 +235,6 @@
               {%- assign bedrag = v.compare_at_price | minus: v.price -%}
               <span class="ws-was">{% if s.munt != blank %}<span class="ws-munt">{{ s.munt }}</span>{% endif %}{% render 'price-formated', price: v.compare_at_price %}</span>
               <span class="ws-besp">
-                <svg><use href="#ws-pdp-tag-{{ section.id }}"/></svg>
                 <span>{{ s.besparing_regel }} {% if s.munt != blank %}<span class="ws-munt">{{ s.munt }}</span>{% endif %}{% render 'price-formated', price: bedrag %}</span>
               </span>
             {%- endif -%}

@@ -186,11 +186,19 @@
    achter de prijs, op de plek van het weggehaalde percentage. Een euro is
    concreter dan een procent, en zo staat het er nog maar een keer. Het label
    breekt als geheel af naar de volgende regel; nooit middenin de zin. */
-.ws-pdp .ws-besp{display:inline-flex;align-items:center;gap:7px;padding:5px 11px;
+/* Het bespaarlabel: gevuld, klein, zonder icoon.
+   De vulling is --ws-tekstgoud -- dezelfde brons die hier eerst de letters
+   had, nu als vlak. Dat is geen nieuwe kleur maar dezelfde, omgekeerd.
+
+   Waarom niet het lichte goud van de knop: dat komt op 1,50 tegen het
+   koopvak en op 1,00 tegen de knop zelf, en in de meelopende balk staan die
+   twee naast elkaar -- daar zou de chip volledig in de knop verdwijnen.
+   Deze brons staat op 5,10 tegen het koopvak en 3,39 tegen de knop, met
+   creme letters op 5,33. */
+.ws-pdp .ws-besp{display:inline-flex;align-items:center;padding:4px 9px;
   white-space:nowrap;align-self:center;
-  border:1px solid rgba(233,190,114,.5);border-radius:9px;background:transparent}
-.ws-pdp .ws-besp svg{width:13px;height:13px;color:var(--ws-tekstgoud);flex:none}
-.ws-pdp .ws-besp span{font-size:12px;font-weight:600;color:var(--ws-tekstgoud);white-space:nowrap}
+  border:0;border-radius:8px;background:var(--ws-tekstgoud)}
+.ws-pdp .ws-besp span{font-size:11px;font-weight:600;line-height:1.25;color:#F7F3EC;white-space:nowrap}
 .ws-pdp .ws-gift p,.ws-pdp .ws-vrd,.ws-pdp .ws-tel{color:var(--ws-w72)}
 
 .ws-pdp .ws-usp{list-style:none;margin:17px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
@@ -500,8 +508,6 @@
     gap:10px 12px;margin-top:16px}
   .ws-pdp .ws-prijs{margin-top:0;gap:10px}
   .ws-pdp .ws-prijs .ws-nu{font-size:34px}
-  .ws-pdp .ws-besp{padding:5px 10px}
-  .ws-pdp .ws-besp span{font-size:11.5px}
 
   /* de beloftes tussen twee haarlijnen, drie stuks; meer past niet zonder
      dat de knop van het scherm valt */
@@ -668,8 +674,8 @@
 .ws-pdp .ws-sticky-pr .ws-prijs{margin:0;gap:9px;flex-wrap:nowrap;align-items:baseline}
 .ws-pdp .ws-sticky-pr .ws-nu{font-size:19px}
 .ws-pdp .ws-sticky-pr .ws-was{font-size:13px}
-.ws-pdp .ws-sticky-pr .ws-besp{padding:3px 8px;font-size:11px;border-radius:7px}
-.ws-pdp .ws-sticky-pr .ws-besp svg{width:11px;height:11px}
+.ws-pdp .ws-sticky-pr .ws-besp{padding:3px 8px;border-radius:7px}
+.ws-pdp .ws-sticky-pr .ws-besp span{font-size:10.5px}
 
 .ws-pdp .ws-sticky-knop{flex:none;border:0;cursor:pointer;border-radius:11px;
   padding:12px 22px;font-family:inherit;font-size:13px;font-weight:600;
