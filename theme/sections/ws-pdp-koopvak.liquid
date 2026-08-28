@@ -235,6 +235,10 @@
             {%- if v.compare_at_price > v.price -%}
               {%- assign bedrag = v.compare_at_price | minus: v.price -%}
               <span class="ws-was">{% if s.munt != blank %}<span class="ws-munt">{{ s.munt }}</span>{% endif %}{% render 'price-formated', price: v.compare_at_price %}</span>
+              <span class="ws-besp">
+                <svg><use href="#ws-pdp-tag-{{ section.id }}"/></svg>
+                <span>{{ s.besparing_regel }} {% if s.munt != blank %}<span class="ws-munt">{{ s.munt }}</span>{% endif %}{% render 'price-formated', price: bedrag %}</span>
+              </span>
             {%- endif -%}
           </div>
         </div>
@@ -461,27 +465,6 @@
           {%- form 'product', product, id: form_id, class: 'ws-vorm-form', novalidate: 'novalidate' -%}
             <input type="hidden" name="id" value="{{ v.id }}">
             <input type="hidden" name="quantity" value="1">
-            {%- comment -%}
-              Het bespaarbedrag staat naast de knop en niet meer achter de prijs.
-              Twee keer hetzelfde getal boven de vouw was precies waar we vanaf
-              wilden; naast de knop doet het zijn werk op het moment dat het telt.
-
-              De wikkel draagt een id dat met ProductPrice- begint. Dat is geen
-              sierlijkheid: het thema vervangt bij een variantwissel de innerHTML
-              van alles wat op [id^="ProductPrice-"] matcht, dus zo houdt het
-              thema deze chip gratis bij. Hij wordt altijd uitgeschreven, ook
-              zonder korting, want het thema haakt af zodra het aantal knopen
-              voor en na de wissel niet gelijk is.
-            {%- endcomment -%}
-            <span class="ws-cta-besp" id="ProductPrice-{{ section.id }}-besp">
-              {%- if v.compare_at_price > v.price -%}
-                {%- assign bedrag = v.compare_at_price | minus: v.price -%}
-                <span class="ws-besp">
-                  <svg><use href="#ws-pdp-tag-{{ section.id }}"/></svg>
-                  <span>{{ s.besparing_regel }} {% if s.munt != blank %}<span class="ws-munt">{{ s.munt }}</span>{% endif %}{% render 'price-formated', price: bedrag %}</span>
-                </span>
-              {%- endif -%}
-            </span>
             <button id="ProductSubmit-{{ section.id }}" type="submit" class="ws-cta"
                     {% unless v.available %}disabled{% endunless %}>
               {%- if v.available -%}
@@ -791,22 +774,18 @@
         var knop  = balk.querySelector('[data-ws-sticky-koop]');
         var vak   = balk.querySelector('[data-ws-sticky-prijs]');
         var bron  = document.getElementById('ProductPrice-{{ section.id }}');
-        var bronB = document.getElementById('ProductPrice-{{ section.id }}-besp');
 
         // De prijs niet nog een keer uitschrijven maar overnemen, en blijven
         // volgen. Anders werkt een variantwissel maar de helft van het scherm
         // bij en staat er onderin een bedrag dat niet meer klopt. Het
-        // bespaarbedrag staat sinds kort naast de knop en dus in een eigen
-        // knoop; die moet hier apart bij, anders valt hij uit de balk.
+        // bespaarbedrag zit weer in de prijsregel en komt dus vanzelf mee.
         function neemPrijsOver() {
-          if (!vak) return;
-          vak.innerHTML = (bron ? bron.innerHTML : '') + (bronB ? bronB.innerHTML : '');
+          if (bron && vak) vak.innerHTML = bron.innerHTML;
         }
         neemPrijsOver();
-        if (window.MutationObserver) {
-          var kijker = new MutationObserver(neemPrijsOver);
-          if (bron)  kijker.observe(bron,  { childList: true, subtree: true, characterData: true });
-          if (bronB) kijker.observe(bronB, { childList: true, subtree: true, characterData: true });
+        if (bron && window.MutationObserver) {
+          new MutationObserver(neemPrijsOver)
+            .observe(bron, { childList: true, subtree: true, characterData: true });
         }
 
         // De knop is een doorgeefluik naar de echte knop; dus ook zijn

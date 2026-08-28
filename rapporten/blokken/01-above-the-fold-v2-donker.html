@@ -2042,20 +2042,14 @@ strong{font-weight:700}
 </section>
 
 <section>
-  <div class="shead"><span class="snum">BESPAARKNOP</span><h2 class="duo">Het bedrag naast de knop,<span class="b">niet er nog eens bij.</span></h2></div>
-  <p class="sintro">Naar het voorbeeld waarin prijs, doorgehaalde prijs, bespaarbedrag en knop naast elkaar staan. De chip staat nu in de knopregel.</p>
-
-  <div class="note warn">
-    <h4>Verplaatst, niet verdubbeld</h4>
-    <p>De opdracht was &laquo;<em>ook</em> een besparing erlangs&raquo;, maar dan zou hetzelfde bedrag twee keer boven de vouw staan &mdash; precies waar we een paar ronden geleden vanaf wilden. In het voorbeeld st&aacute;&aacute;t het maar &eacute;&eacute;n keer: daar vallen prijs en knop op dezelfde regel, bij ons niet. Terugzetten is &eacute;&eacute;n regel als het toch op beide plekken moet.</p>
-    <p>Tegelijk is het bedrag uit de knop gehaald. Die zei &laquo;In winkelwagen &mdash; &euro;&nbsp;124,95&raquo;, het derde bedrag op &eacute;&eacute;n scherm; in het voorbeeld staat er alleen &laquo;Toevoegen&raquo;. Netto blijft het aantal geldsignalen gelijk en staan ze op een betere plek.</p>
-  </div>
+  <div class="shead"><span class="snum">BESPAARKNOP</span><h2 class="duo">Naast de knop geprobeerd,<span class="b">terug achter de prijs.</span></h2></div>
+  <p class="sintro">Even verplaatst naar de knopregel, naar het voorbeeld waarin prijs, doorgehaalde prijs, bespaarbedrag en knop op &eacute;&eacute;n regel staan. Teruggedraaid: hij hoort achter de doorgehaalde prijs.</p>
 
   <div class="note win">
-    <h4>Waarom de wikkel een <code>ProductPrice-</code>id draagt</h4>
-    <p>Bij een variantwissel vervangt het thema de <code>innerHTML</code> van &aacute;lles wat op <code>[id^="ProductPrice-"]</code> matcht. Door de chip daar&aacute;&aacute;n te hangen houdt het thema hem gratis bij; zonder dat zou hij na een wissel het bedrag van de vorige variant blijven tonen.</p>
-    <p>De wikkel wordt daarom <strong>altijd</strong> uitgeschreven, ook zonder korting (dan leeg). Het thema haakt namelijk af zodra het aantal knopen v&oacute;&oacute;r en n&aacute; de wissel niet gelijk is &mdash; en dan werkt ook de pr&iacute;js niet meer bij.</p>
-    <p>Op de telefoon past de chip er niet naast: de knop zou onder de 190&nbsp;px zakken, te smal voor een primaire actie met een duim. Daar krijgt hij zijn eigen regel over de volle breedte.</p>
+    <h4>Wat de omweg opleverde</h4>
+    <p>Eén stukje kennis dat blijft gelden: <strong>het thema vervangt bij een variantwissel de <code>innerHTML</code> van &aacute;lles wat op <code>[id^="ProductPrice-"]</code> matcht.</strong> Zolang de chip in het prijsblok zit houdt het thema hem vanzelf bij.</p>
+    <p>Wil je hem ooit ergens anders neerzetten, dan moet die plek een eigen <code>ProductPrice-</code>id krijgen &eacute;n altijd worden uitgeschreven, ook zonder korting &mdash; het thema haakt af zodra het aantal knopen v&oacute;&oacute;r en n&aacute; de wissel niet gelijk is, en dan werkt ook de pr&iacute;js niet meer bij.</p>
+    <p><strong>Niet teruggedraaid:</strong> het bedrag is uit de knop gebleven. Die zei &laquo;In winkelwagen &mdash; &euro;&nbsp;124,95&raquo;, het derde bedrag op &eacute;&eacute;n scherm.</p>
   </div>
 </section>
 

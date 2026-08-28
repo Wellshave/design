@@ -1650,37 +1650,26 @@ reden, dan verdwijnt de balk mee. In dit thema is dat slot alleen voor lagen in
 gebruik, dus dat is een prijs die ik nu accepteer.
 
 
-## Het bespaarbedrag naast de knop
+## Het bespaarbedrag: heen en weer, en weer terug
 
-Naar het voorbeeld waarin prijs, doorgehaalde prijs, bespaarbedrag en knop
-naast elkaar staan. De chip staat nu in de knopregel en niet meer achter de
-prijs.
+Even naast de knop gezet, naar het voorbeeld waarin prijs, doorgehaalde prijs,
+bespaarbedrag en knop op &eacute;&eacute;n regel staan. **Teruggedraaid**: hij hoort achter de
+doorgehaalde prijs, en daar staat hij nu weer.
 
-**Verplaatst, niet verdubbeld.** De opdracht was &laquo;ook een besparing erlangs&raquo;,
-maar dan zou hetzelfde bedrag twee keer boven de vouw staan &mdash; precies waar we
-een paar ronden geleden vanaf wilden. In het voorbeeld st&aacute;&aacute;t het maar &eacute;&eacute;n keer;
-daar vallen prijs en knop op dezelfde regel, bij ons niet. Terugzetten is
-&eacute;&eacute;n regel als het toch op beide plekken moet.
+Wat die omweg heeft opgeleverd is een stukje kennis dat blijft gelden: **het
+thema vervangt bij een variantwissel de `innerHTML` van &aacute;lles wat op
+`[id^="ProductPrice-"]` matcht.** Zolang de chip in het prijsblok zit, houdt het
+thema hem dus vanzelf bij. Wil je hem ooit ergens anders neerzetten, dan moet
+die plek een eigen `ProductPrice-`id krijgen &eacute;n altijd worden uitgeschreven,
+ook zonder korting &mdash; het thema haakt namelijk af zodra het aantal knopen v&oacute;&oacute;r
+en n&aacute; de wissel niet gelijk is, en dan werkt ook de pr&iacute;js niet meer bij.
 
-Tegelijk is het bedrag uit de knop gehaald. Die zei &laquo;In winkelwagen &mdash;
-&euro;&nbsp;124,95&raquo;, wat het derde bedrag op &eacute;&eacute;n scherm was; in het voorbeeld staat er
-alleen &laquo;Toevoegen&raquo;. Netto blijft het aantal geldsignalen gelijk en staan ze op
-een betere plek.
+Om dezelfde reden leest de meelopende balk weer &eacute;&eacute;n knoop in plaats van twee.
 
-### Waarom de wikkel een `ProductPrice-`-id draagt
+### Wat niet is teruggedraaid
 
-Bij een variantwissel vervangt het thema de `innerHTML` van &aacute;lles wat op
-`[id^="ProductPrice-"]` matcht. Door de chip in
-`ProductPrice-<sectie>-besp` te zetten houdt het thema hem gratis bij; zonder
-dat zou hij na een wissel het bedrag van de vorige variant blijven tonen.
-
-Twee dingen om te weten als je hieraan komt:
-
-* **De wikkel wordt altijd uitgeschreven, ook zonder korting** (dan leeg, en
-  `:empty` verbergt hem). Het thema haakt namelijk af zodra het aantal knopen
-  v&oacute;&oacute;r en n&aacute; de wissel niet gelijk is &mdash; en dan werkt ook de pr&iacute;js niet meer bij.
-* **De meelopende balk leest twee knopen**, het prijsblok en deze chip, want
-  sinds de verplaatsing zit de chip niet meer in het prijsblok.
+Het bedrag is uit de knop gebleven. Die zei &laquo;In winkelwagen &mdash; &euro;&nbsp;124,95&raquo;,
+het derde bedrag op &eacute;&eacute;n scherm. Terugzetten is een regel als het toch moet.
 
 ## Alles stond op vet: de gewichtschaal
 

@@ -664,9 +664,7 @@
 
 /* De prijs is een kopie van .ws-prijs, dus hij draagt dezelfde klassen. Alleen
    de maten gaan hier omlaag; de kleuren en het label blijven van het koopvak. */
-/* De prijs en de chip komen als twee losse knopen binnen, dus zet deze
-   houder ze zelf naast elkaar. */
-.ws-pdp .ws-sticky-pr{flex:none;display:flex;align-items:center;gap:11px}
+.ws-pdp .ws-sticky-pr{flex:none}
 .ws-pdp .ws-sticky-pr .ws-prijs{margin:0;gap:9px;flex-wrap:nowrap;align-items:baseline}
 .ws-pdp .ws-sticky-pr .ws-nu{font-size:19px}
 .ws-pdp .ws-sticky-pr .ws-was{font-size:13px}
@@ -706,27 +704,3 @@
 /* ---- laadstaat op de keuzeknoppen in de vergelijk-pop-up ---- */
 .ws-pop .ws-pop-knop.ws-bezig{opacity:.72;cursor:progress}
 
-/* ---- de knopregel: bespaarbedrag naast de knop ----
-   Naar het voorbeeld waarin prijs, bespaarbedrag en knop naast elkaar staan.
-   De chip blijft een omlijning en de knop een vlak: naast elkaar moeten ze
-   niet om dezelfde aandacht vechten, en het verschil in vulling doet dat werk
-   beter dan een verschil in kleur.
-
-   flex-wrap doet de telefoon: past de chip er niet naast, dan zakt hij op zijn
-   eigen regel in plaats van de knop plat te drukken. */
-.ws-pdp .ws-vorm-form{display:flex;flex-wrap:wrap;align-items:stretch;gap:10px}
-.ws-pdp .ws-vorm-form .ws-cta{flex:1 1 210px;width:auto}
-.ws-pdp .ws-cta-besp{flex:0 0 auto;display:flex;align-items:stretch}
-.ws-pdp .ws-cta-besp:empty{display:none}
-.ws-pdp .ws-cta-besp .ws-besp{align-self:stretch;padding:5px 14px;border-radius:11px;
-  border-color:rgba(188,129,62,.42);background:rgba(233,190,114,.10)}
-.ws-pdp .ws-melding{flex:1 0 100%}
-
-@media screen and (max-width:749px){
-  /* Op 390 px past chip en knop samen net niet: de knop zou onder de 190 px
-     zakken en dat is te smal voor een primaire actie met een duimafdruk. De
-     chip krijgt daarom zijn eigen regel en gaat over de volle breedte, zodat
-     hij niet als een losse snipper naast de knop hangt. */
-  .ws-pdp .ws-cta-besp{flex:1 0 100%}
-  .ws-pdp .ws-cta-besp .ws-besp{width:100%;justify-content:center;padding:9px 12px}
-}
