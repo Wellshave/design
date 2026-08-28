@@ -1528,6 +1528,96 @@ niets. Doffe inkt op zand heeft die marge niet &mdash; tussen inkt en onzichtbaa
 op licht nu eenmaal minder ruimte. Hetzelfde effect, andere prijs.
 
 
+## De vergelijk-pop-up stuurde je naar de homepage
+
+Op &laquo;Kies Barber Pack 3.0&raquo; drukken deed twee dingen: het product ging in de
+winkelwagen, en je stond op de homepage. Dat laatste is geen keuze geweest maar
+een gat: de formulieren postten naar `/cart/add` z&oacute;nder doel, en dan zet Shopify
+je op de root.
+
+Er zitten nu twee lagen op.
+
+**Het vangnet.** Beide formulieren dragen
+`return_to={{ routes.cart_url | replace: '/cart', '/checkout' }}`. Dat levert
+`/checkout` in het Nederlands en `/en/checkout`, `/de/checkout`,
+`/fr/checkout` in de andere talen &mdash; de taalprefix komt mee, dat is nagemeten op
+alle vier.
+
+**De echte weg.** Een handler onderschept de verzending en doet het via de
+cart-drawer. Dat m&oacute;&eacute;t, en daar zit het hele punt: `syncGifts()` leest de
+winkelwagen, voegt per ronde &eacute;&eacute;n cadeau toe en roept zichzelf daarna opnieuw
+aan. Meteen na het toevoegen wegnavigeren slaat dat over, en dan komt de klant
+z&oacute;nder cadeau in de kassa aan. Bij de Barber Pack 3.0 is dat **&euro;52,90** die
+stilletjes verdwijnt.
+
+`syncGifts` zet `syncingGifts` synchroon op `true` v&oacute;&oacute;rdat hij gaat ophalen, en
+pas op `false` als een ronde niets meer te doen vindt. Wachten tot dat vlaggetje
+zakt is dus het signaal dat de cadeaus staan. Er zit een uiterste termijn van
+vijf seconden op, zodat een hangende aanroep de klant niet vasthoudt; loopt het
+mis, dan gaat hij alsn&oacute;g naar de kassa &mdash; het product zit dan in elk geval in de
+winkelwagen, en een dode knop is erger.
+
+Nagespeeld met een nagemaakte cart-drawer die twee cadeaurondes doet. De
+volgorde klopt: toevoegen &rarr; cadeau 1 &rarr; cadeau 2 &rarr; cadeaus klaar &rarr; pas d&aacute;n
+naar `/en/checkout`.
+
+### Wat hier niet getoetst is
+
+Een echte bestelling, van klik tot kassa met een levende winkelwagen. Daarvoor
+is een sessie op de winkel zelf nodig en die heb ik hier niet. Wat w&eacute;l is
+nagegaan: de opmaak op de pagina, de taalprefix in alle vier de talen, dat de
+handler bindt, en de volgorde met een nagemaakte drawer.
+
+## De meelopende koopbalk
+
+Van de drie referenties was de derde de favoriet &mdash; naam, ondertitel, prijs met
+doorhaling, bespaarlabel, compact &mdash; maar hij viel te weinig op. Wat daar
+ontbrak was een knop die je ziet: er stond een rond icoontje. Dus: die indeling,
+met de gouden knop van de pagina zelf erin.
+
+### De knop is geen tweede formulier
+
+Hij klikt de echte koopknop aan. Daarmee erft hij alles wat daaraan hangt: de
+AJAX-toevoeging, het synchroniseren van de cadeaus, de upgrade-pop-up, de
+uitverkocht-staat. Een tweede formulier zou dat allemaal moeten nadoen en
+vroeg of laat uit de pas gaan lopen.
+
+Om dezelfde reden wordt de prijs niet opnieuw uitgeschreven maar overgenomen uit
+`#ProductPrice-<sectie>`, met een `MutationObserver` erop. Anders werkt een
+variantwissel maar de helft van het scherm bij en staat er onderin een bedrag
+dat niet meer klopt. De uitverkocht-staat van de knop gaat op dezelfde manier
+mee.
+
+### Hij verschijnt pas als de koopknop voorbij is
+
+Niet zodra die uit beeld is. Op de telefoon staat de knop ver onder de vouw, dus
+met die regel zou de balk meteen bij het laden verschijnen en het scherm
+opeten voordat de bezoeker iets gezien heeft &mdash; precies wat er niet moest
+gebeuren. De maatstaf is `rect.bottom < 0`: de knop is v&oacute;&oacute;rbij, niet alleen weg.
+
+### Op 390 px gaan drie dingen eruit
+
+De miniatuur, de naam en het bespaarlabel. Dat is geen bezuiniging maar een
+keuze: met alles erin bleef er voor de naam ongeveer 30&nbsp;px over en stond er
+&laquo;Barber ...&raquo;, wat slechter is dan niets. Wie deze balk ziet staat op de pagina
+van dat product; de naam is het minst nodige van de vier. Prijs en knop krijgen
+de ruimte.
+
+De balk is daarmee **56&nbsp;px** hoog op de telefoon en 59 op de desktop, plus de
+veilige zone onderaan. Dat is het hele punt: hoger en hij begint het scherm op
+te eten.
+
+### Twee dingen die eerst gecontroleerd zijn
+
+`position: fixed` breekt op een voorouder met `transform`, `filter`,
+`perspective` of `contain`. De keten is `body &gt; main#MainContent &gt; section`; geen
+van de thema-stylesheets zet daar zoiets op, dus de balk pint netjes aan het
+scherm. En er is geen andere vaste balk onderaan waar hij mee zou botsen: de
+enige `position: fixed` in het thema zijn de zoekbalk en de twee pop-ups, en dat
+zijn schermvullende lagen met een hogere z-index, die de balk dus gewoon
+afdekken.
+
+
 ## Nog open
 
 * **`custom.buybox_quote` is alleen op de Groom Guard PRO gevuld.** Op de andere

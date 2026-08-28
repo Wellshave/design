@@ -601,6 +601,41 @@
     </div>
   </div>
 
+  {%- comment -%}
+    ---------- de meelopende koopbalk ----------
+    De knop hier is met opzet geen tweede formulier: hij klikt de echte knop
+    aan. Zo erft hij alles wat daaraan hangt -- de AJAX-toevoeging, het
+    synchroniseren van de cadeaus, de upgrade-pop-up, de uitverkocht-staat --
+    en kan er niets uit elkaar gaan lopen.
+
+    De prijs wordt hieronder uit .ws-prijs gekopieerd en blijft dat volgen.
+    Een tweede keer uitschrijven zou betekenen dat een variantwissel maar de
+    helft van het scherm bijwerkt.
+  {%- endcomment -%}
+  {%- if s.sticky_tonen -%}
+    <div class="ws-sticky" data-ws-sticky hidden aria-hidden="true">
+      <div class="ws-sticky-rail">
+        {%- if product.featured_image -%}
+          <span class="ws-sticky-th">
+            <img src="{{ product.featured_image | image_url: width: 120 }}"
+                 alt="" width="120" height="120" loading="lazy" decoding="async">
+          </span>
+        {%- endif -%}
+        <span class="ws-sticky-tx">
+          <b class="ws-sticky-nm">{{ product.title }}</b>
+          {%- if belofte != blank -%}
+            <span class="ws-sticky-sub">{{ belofte }}</span>
+          {%- endif -%}
+        </span>
+        <span class="ws-sticky-pr" data-ws-sticky-prijs></span>
+        <button type="button" class="ws-sticky-knop" data-ws-sticky-koop
+                {% unless v.available %}disabled{% endunless %}>
+          {%- if v.available -%}{{ s.sticky_knop }}{%- else -%}{{ s.knop_uitverkocht }}{%- endif -%}
+        </button>
+      </div>
+    </div>
+  {%- endif -%}
+
 
   <script>
     (function () {
@@ -727,6 +762,134 @@
         });
         document.addEventListener('keydown', function (e) {
           if (e.key === 'Escape' && !pop.hidden) sluitPop();
+        });
+      }
+
+      // ---- De meelopende koopbalk ----
+      (function () {
+        var balk = wortel.querySelector('[data-ws-sticky]');
+        var echt = document.getElementById('ProductSubmit-{{ section.id }}');
+        if (!balk || !echt) return;
+
+        var knop  = balk.querySelector('[data-ws-sticky-koop]');
+        var vak   = balk.querySelector('[data-ws-sticky-prijs]');
+        var bron  = document.getElementById('ProductPrice-{{ section.id }}');
+
+        // De prijs niet nog een keer uitschrijven maar overnemen, en blijven
+        // volgen. Anders werkt een variantwissel maar de helft van het scherm
+        // bij en staat er onderin een bedrag dat niet meer klopt.
+        function neemPrijsOver() {
+          if (bron && vak) vak.innerHTML = bron.innerHTML;
+        }
+        neemPrijsOver();
+        if (bron && window.MutationObserver) {
+          new MutationObserver(neemPrijsOver)
+            .observe(bron, { childList: true, subtree: true, characterData: true });
+        }
+
+        // De knop is een doorgeefluik naar de echte knop; dus ook zijn
+        // uitverkocht-staat overnemen, en blijven overnemen.
+        function neemStaatOver() {
+          if (knop) knop.disabled = echt.disabled;
+        }
+        neemStaatOver();
+        if (window.MutationObserver) {
+          new MutationObserver(neemStaatOver)
+            .observe(echt, { attributes: true, attributeFilter: ['disabled'] });
+        }
+
+        if (knop) knop.addEventListener('click', function () {
+          // Alles wat aan de echte knop hangt -- de AJAX-toevoeging, de
+          // cadeaus, de upgrade-pop-up -- gebeurt vanzelf mee.
+          echt.click();
+        });
+
+        // Pas tonen als de koopknop voorbij is. Niet zodra hij uit beeld is:
+        // op de telefoon staat de knop ver onder de vouw, dus dan zou de balk
+        // meteen bij het laden verschijnen en het scherm opeten voordat de
+        // bezoeker uberhaupt iets gezien heeft.
+        var zichtbaar = false;
+        function toon(aan) {
+          if (aan === zichtbaar) return;
+          zichtbaar = aan;
+          if (aan) {
+            balk.hidden = false;
+            balk.setAttribute('aria-hidden', 'false');
+            requestAnimationFrame(function () { balk.classList.add('ws-in'); });
+          } else {
+            balk.classList.remove('ws-in');
+            balk.setAttribute('aria-hidden', 'true');
+          }
+        }
+
+        function meten() {
+          var r = echt.getBoundingClientRect();
+          toon(r.bottom < 0);
+        }
+        meten();
+
+        if (window.IntersectionObserver) {
+          new IntersectionObserver(meten, { threshold: 0 }).observe(echt);
+        }
+        var tik;
+        window.addEventListener('scroll', function () {
+          if (tik) return;
+          tik = requestAnimationFrame(function () { tik = 0; meten(); });
+        }, { passive: true });
+        window.addEventListener('resize', meten);
+      })();
+
+      // ---- Direct naar de kassa vanuit de vergelijk-pop-up ----
+      // Zonder JS post het formulier naar /cart/add met return_to=/checkout.
+      // Met JS gaat het via de cart-drawer, en dat moet: syncGifts leest de
+      // winkelwagen, voegt per ronde EEN cadeau toe en roept zichzelf daarna
+      // opnieuw aan. Meteen na het toevoegen wegnavigeren slaat dat over en de
+      // klant komt zonder cadeau in de kassa aan -- bij de Barber Pack 3.0 is
+      // dat 52,90 die stilletjes verdwijnt.
+      var kassaBezig = false;
+      document.addEventListener('submit', function (e) {
+        var vorm = e.target.closest('[data-ws-kassa]');
+        if (!vorm) return;
+        var lade = document.querySelector('cart-drawer');
+        var idVeld = vorm.querySelector('input[name="id"]');
+        // Geen lade of geen id: laat het formulier gewoon zijn werk doen,
+        // dan vangt return_to het op.
+        if (!lade || !lade.addItemToCart || !idVeld) return;
+        e.preventDefault();
+        if (kassaBezig) return;
+        kassaBezig = true;
+
+        var knop = vorm.querySelector('button[type="submit"]');
+        if (knop) { knop.disabled = true; knop.classList.add('ws-bezig'); }
+
+        var kassa = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root
+                     ? window.Shopify.routes.root : '/') + 'checkout';
+
+        function ga() { window.location.href = kassa; }
+
+        Promise.resolve(lade.addItemToCart(idVeld.value))
+          .then(function () { return cadeausAf(lade, 5000); })
+          .then(ga)
+          .catch(function (fout) {
+            console.error('Kassa-sprong mislukt:', fout);
+            // Liever alsnog naar de kassa dan de klant met een dode knop laten
+            // staan; het product zit dan in elk geval in de winkelwagen.
+            ga();
+          });
+      });
+
+      // syncGifts zet syncingGifts synchroon op true voordat hij gaat ophalen,
+      // en pas op false als een ronde niets meer te doen vindt. Wachten tot dat
+      // vlaggetje zakt is dus het signaal dat de cadeaus staan. De uiterste
+      // termijn is er zodat een hangende aanroep de klant niet vasthoudt.
+      function cadeausAf(lade, uiterlijk) {
+        return new Promise(function (klaar) {
+          var eind = Date.now() + uiterlijk;
+          (function kijk() {
+            if (!lade.syncingGifts && !lade.pendingSync) return klaar();
+            if (Date.now() > eind) return klaar();
+            setTimeout(kijk, 100);
+          })();
         });
       }
 
@@ -963,9 +1126,16 @@
                       <span class="ws-pop-best">{{ s.pop_bestevoor }} {{ ci.best_for }}</span>
                     {%- endif -%}
                   </div>
-                  <form action="{{ routes.cart_add_url }}" method="post" class="ws-pop-vorm">
+                  {%- comment -%}
+                    return_to is de vangnetroute: zonder JS postte dit formulier
+                    naar /cart/add zonder doel, en dan zet Shopify de bezoeker op
+                    de homepage. Met JS onderscheppen we hem hieronder, want de
+                    cadeaus moeten eerst gesynchroniseerd zijn.
+                  {%- endcomment -%}
+                  <form action="{{ routes.cart_add_url }}" method="post" class="ws-pop-vorm" data-ws-kassa>
                     <input type="hidden" name="id" value="{{ cv.id }}">
                     <input type="hidden" name="quantity" value="1">
+                    <input type="hidden" name="return_to" value="{{ routes.cart_url | replace: '/cart', '/checkout' }}">
                     <button type="submit" class="ws-pop-knop"{% unless cv.available %} disabled{% endunless %}>
                       {%- if cv.available -%}
                         {{ s.pop_knop }} {{ ci.toggle_title | default: cp.title }} &mdash; {% render 'price-formated', price: cv.price %}
@@ -1097,10 +1267,11 @@
               {%- for cp in vergelijk_lijst -%}
                 {%- assign ci = cp.metafields.custom.compare_info.value -%}
                 {%- assign cv = cp.selected_or_first_available_variant -%}
-                <form action="{{ routes.cart_add_url }}" method="post"
+                <form action="{{ routes.cart_add_url }}" method="post" data-ws-kassa
                       class="ws-pop-vorm2{% if cp.id == uitgelicht_id %} ws-uit{% endif %}">
                   <input type="hidden" name="id" value="{{ cv.id }}">
                   <input type="hidden" name="quantity" value="1">
+                  <input type="hidden" name="return_to" value="{{ routes.cart_url | replace: '/cart', '/checkout' }}">
                   <button type="submit" class="ws-pop-knop"{% unless cv.available %} disabled{% endunless %}>
                     {%- if cv.available -%}
                       {{ s.pop_knop }} {{ ci.toggle_title | default: cp.title }} &mdash; {% render 'price-formated', price: cv.price %}
@@ -1288,6 +1459,9 @@
     { "type": "header", "content": "Knop en levering" },
     { "type": "text", "id": "knop_label", "label": "Knoptekst", "default": "In winkelwagen" },
     { "type": "text", "id": "knop_uitverkocht", "label": "Knoptekst uitverkocht", "default": "Uitverkocht" },
+    { "type": "header", "content": "Meelopende koopbalk" },
+    { "type": "checkbox", "id": "sticky_tonen", "label": "Balk onderaan tonen", "default": true, "info": "Verschijnt pas als de koopknop voorbij is gescrold, niet meteen." },
+    { "type": "text", "id": "sticky_knop", "label": "Knoptekst in de balk", "default": "In winkelwagen", "info": "De prijs staat er al naast, dus hier hoeft geen bedrag bij." },
     { "type": "text", "id": "voorraad_kop", "label": "Voorraadkop", "default": "Op voorraad" },
     { "type": "text", "id": "voorraad_regel", "label": "Leverregel (terugval)", "default": "vandaag vóór 23:59 besteld, morgen in huis" },
     { "type": "text", "id": "veilig_label", "label": "Label bij de betaalmerken", "default": "Veilig afrekenen" },

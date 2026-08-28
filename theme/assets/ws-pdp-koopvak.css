@@ -600,3 +600,80 @@
 /* ---- knop-reset voor de miniaturen ---- */
 .ws-pdp .ws-th button.ws-vk{padding:0;background:none;cursor:pointer;display:block;width:100%}
 .ws-pdp .ws-th button.ws-vk:focus-visible{outline:2px solid var(--ws-gold4);outline-offset:2px}
+
+/* ---- de meelopende koopbalk ----
+   Referentie 3 was de favoriet: naam, ondertitel, prijs met doorhaling en het
+   bespaarlabel, compact. Wat daar ontbrak was een knop die je ziet -- daar
+   stond een rond icoontje. Dus: die indeling, met de gouden knop van de
+   pagina zelf erin. Geen tweede stijl, gewoon dezelfde CTA op knopformaat.
+
+   De hoogte is het hele punt op de telefoon. Alles bij elkaar is dit 58 px
+   plus de veilige zone; hoger en hij begint het scherm op te eten, en dat is
+   precies wat er niet moest gebeuren. */
+.ws-pdp .ws-sticky{position:fixed;left:0;right:0;bottom:0;z-index:90;
+  background:var(--ws-zwart);
+  border-top:1px solid rgba(188,129,62,.34);
+  box-shadow:0 -10px 30px -22px rgba(20,18,15,.5);
+  padding:9px 16px calc(9px + env(safe-area-inset-bottom,0px));
+  transform:translateY(102%);transition:transform .22s ease;
+  font-family:'MontserratEG','Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
+.ws-pdp .ws-sticky[hidden]{display:none}
+.ws-pdp .ws-sticky.ws-in{transform:none}
+@media (prefers-reduced-motion:reduce){
+  .ws-pdp .ws-sticky{transition:none}
+}
+.ws-pdp .ws-sticky-rail{max-width:1240px;margin:0 auto;
+  display:flex;align-items:center;gap:14px;min-width:0}
+
+.ws-pdp .ws-sticky-th{flex:none;width:40px;height:40px;border-radius:9px;overflow:hidden;
+  background:var(--ws-kaart);border:1px solid var(--ws-lijn)}
+.ws-pdp .ws-sticky-th img{width:100%;height:100%;object-fit:contain;display:block;
+  mix-blend-mode:multiply}
+
+.ws-pdp .ws-sticky-tx{min-width:0;display:flex;flex-direction:column;gap:1px;flex:1 1 auto}
+.ws-pdp .ws-sticky-nm{font-size:14px;font-weight:600;letter-spacing:-.015em;color:var(--ws-ink);
+  line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ws-pdp .ws-sticky-sub{font-size:11.5px;font-weight:500;color:var(--ws-w52);line-height:1.25;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* De prijs is een kopie van .ws-prijs, dus hij draagt dezelfde klassen. Alleen
+   de maten gaan hier omlaag; de kleuren en het label blijven van het koopvak. */
+.ws-pdp .ws-sticky-pr{flex:none}
+.ws-pdp .ws-sticky-pr .ws-prijs{margin:0;gap:9px;flex-wrap:nowrap;align-items:baseline}
+.ws-pdp .ws-sticky-pr .ws-nu{font-size:19px}
+.ws-pdp .ws-sticky-pr .ws-was{font-size:13px}
+.ws-pdp .ws-sticky-pr .ws-besp{padding:3px 8px;font-size:11px;border-radius:7px}
+.ws-pdp .ws-sticky-pr .ws-besp svg{width:11px;height:11px}
+
+.ws-pdp .ws-sticky-knop{flex:none;border:0;cursor:pointer;border-radius:11px;
+  padding:12px 22px;font-family:inherit;font-size:13px;font-weight:800;
+  letter-spacing:.06em;text-transform:uppercase;color:#26170A;
+  background:linear-gradient(100deg,var(--ws-gold1),var(--ws-gold3) 55%,var(--ws-gold4));
+  box-shadow:0 2px 10px -4px rgba(176,116,42,.6)}
+@media (hover:hover){
+  .ws-pdp .ws-sticky-knop:hover{filter:brightness(1.04)}
+}
+.ws-pdp .ws-sticky-knop:focus-visible{outline:2px solid var(--ws-ink);outline-offset:2px}
+.ws-pdp .ws-sticky-knop[disabled]{opacity:.45;cursor:not-allowed;
+  background:var(--ws-kaart);color:var(--ws-w52);box-shadow:none;
+  border:1px solid var(--ws-lijn)}
+
+@media screen and (max-width:749px){
+  /* Op 390 px gaan de miniatuur, de naam en het bespaarlabel eruit. Dat is
+     geen bezuiniging maar een keuze: met alles erin bleef er voor de naam
+     ongeveer 30 px over en stond er "Barber ...", wat slechter is dan niets.
+     Wie deze balk ziet staat op de pagina van dat product -- de naam is het
+     minst nodige van de vier. Prijs en knop krijgen de ruimte. */
+  .ws-pdp .ws-sticky{padding:8px 14px calc(8px + env(safe-area-inset-bottom,0px))}
+  .ws-pdp .ws-sticky-rail{gap:12px}
+  .ws-pdp .ws-sticky-th,
+  .ws-pdp .ws-sticky-tx,
+  .ws-pdp .ws-sticky-pr .ws-besp{display:none}
+  .ws-pdp .ws-sticky-pr{flex:1 1 auto;min-width:0}
+  .ws-pdp .ws-sticky-pr .ws-nu{font-size:19px}
+  .ws-pdp .ws-sticky-pr .ws-was{font-size:13px}
+  .ws-pdp .ws-sticky-knop{padding:12px 18px;font-size:12px;letter-spacing:.05em}
+}
+
+/* ---- laadstaat op de keuzeknoppen in de vergelijk-pop-up ---- */
+.ws-pop .ws-pop-knop.ws-bezig{opacity:.72;cursor:progress}

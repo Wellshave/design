@@ -184,6 +184,10 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
 # ---------------------------------------------------------------------------
 NIEUW_OP = u'28 augustus'
 WIJZIGINGEN = [
+ (u'28 augustus', 'boven', u'KASSA',
+  u'De vergelijk-pop-up stuurde je naar de homepage; nu naar de kassa, m\u00e9t je cadeau.'),
+ (u'28 augustus', 'boven', u'KOOPBALK',
+  u'Een meelopende koopknop die pas verschijnt als de echte voorbij is.'),
  (u'28 augustus', 'boven', u'STREPEN',
   u'De gouden bogen terug \u2014 en wat ze op zand aan contrast kostten.'),
  (u'28 augustus', 'boven', u'OFF-WHITE',

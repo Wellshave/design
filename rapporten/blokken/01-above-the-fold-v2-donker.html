@@ -2016,6 +2016,42 @@ strong{font-weight:700}
 </section>
 
 <section>
+  <div class="shead"><span class="snum">KASSA</span><h2 class="duo">Kiezen in de pop-up bracht je<span class="b">op de homepage.</span></h2></div>
+  <p class="sintro">Op &laquo;Kies Barber Pack 3.0&raquo; drukken deed twee dingen: het product ging in de winkelwagen, en je stond op de homepage. Dat was geen keuze maar een gat &mdash; de formulieren postten naar <code>/cart/add</code> zonder doel, en dan zet Shopify je op de root.</p>
+
+  <div class="note win">
+    <h4>Twee lagen erop</h4>
+    <p><strong>Het vangnet.</strong> Beide formulieren dragen nu een <code>return_to</code> naar de kassa, met de taalprefix erin: <code>/checkout</code>, <code>/en/checkout</code>, <code>/de/checkout</code>, <code>/fr/checkout</code>. Nagemeten op alle vier.</p>
+    <p><strong>De echte weg.</strong> Een handler onderschept de verzending en doet het via de cart-drawer. En dat m&oacute;&eacute;t, want daar zit het hele punt.</p>
+  </div>
+
+  <div class="note warn">
+    <h4>Waarom een simpele doorverwijzing niet genoeg was</h4>
+    <p>De cadeaus lopen via JavaScript: <code>syncGifts()</code> leest de winkelwagen, voegt per ronde <em>&eacute;&eacute;n</em> cadeau toe en roept zichzelf daarna opnieuw aan. Meteen na het toevoegen wegnavigeren slaat dat over, en dan komt de klant <strong>zonder cadeau</strong> in de kassa aan. Bij de Barber Pack 3.0 is dat <strong>&euro;&nbsp;52,90</strong> die stilletjes verdwijnt.</p>
+    <p>De handler wacht daarom tot het vlaggetje <code>syncingGifts</code> weer zakt &mdash; dat is het signaal dat de cadeaus staan. Met een uiterste termijn van vijf seconden, zodat een hangende aanroep de klant niet vasthoudt; loopt het mis, dan gaat hij alsn&oacute;g naar de kassa, want een dode knop is erger dan een omweg.</p>
+    <p><strong>Wat hier niet getoetst is:</strong> een echte bestelling van klik tot kassa met een levende winkelwagen. Daarvoor is een sessie op de winkel zelf nodig. W&eacute;l nagegaan: de opmaak, de taalprefix in vier talen, dat de handler bindt, en de volgorde met een nagemaakte drawer &mdash; toevoegen, cadeau 1, cadeau 2, klaar, en pas d&aacute;n de sprong.</p>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">KOOPBALK</span><h2 class="duo">Een knop die meeloopt,<span class="b">zonder het scherm op te eten.</span></h2></div>
+  <p class="sintro">Van de drie referenties was de derde de favoriet &mdash; naam, prijs met doorhaling, bespaarlabel, compact &mdash; maar hij viel te weinig op. Wat daar ontbrak was een knop die je ziet: er stond een rond icoontje. Dus die indeling, met de gouden knop van de pagina zelf erin.</p>
+
+  <div class="note win">
+    <h4>De knop is geen tweede formulier</h4>
+    <p>Hij klikt de echte koopknop aan. Daarmee erft hij alles wat daaraan hangt: de AJAX-toevoeging, het synchroniseren van de cadeaus, de upgrade-pop-up, de uitverkocht-staat. Een tweede formulier zou dat allemaal moeten nadoen en vroeg of laat uit de pas gaan lopen.</p>
+    <p>Om dezelfde reden wordt de prijs niet opnieuw uitgeschreven maar overgenomen uit het prijsblok, met een waarnemer erop. Anders werkt een variantwissel maar de helft van het scherm bij en staat er onderin een bedrag dat niet meer klopt.</p>
+  </div>
+
+  <div class="note win">
+    <h4>Hij verschijnt pas als de koopknop v&oacute;&oacute;rbij is</h4>
+    <p>Niet zodra die uit beeld is. Op de telefoon staat de knop ver onder de vouw, dus met die regel zou de balk meteen bij het laden verschijnen en het scherm opeten voordat de bezoeker iets gezien heeft &mdash; precies wat er niet moest gebeuren.</p>
+    <p><strong>Op 390&nbsp;px gaan de miniatuur, de naam en het bespaarlabel eruit.</strong> Geen bezuiniging maar een keuze: met alles erin bleef er voor de naam ongeveer 30&nbsp;px over en stond er &laquo;Barber ...&raquo;, wat slechter is dan niets. Wie deze balk ziet staat op de pagina van dat product. Prijs en knop krijgen de ruimte.</p>
+    <p>De balk is daarmee <strong>56&nbsp;px</strong> hoog op de telefoon en 59 op de desktop, plus de veilige zone onderaan.</p>
+  </div>
+</section>
+
+<section>
   <div class="shead"><span class="snum">STREPEN</span><h2 class="duo">De gouden bogen waren er nog,<span class="b">alleen niet meer te zien.</span></h2></div>
   <p class="sintro">Op zwart waren ze een gloed van 16&#37; licht goud. Op zand is datzelfde recept een contrast van <strong>1,03</strong> &mdash; niets. Ze staan er nu weer, en het bleek meer te kosten dan een kleurtje.</p>
 
