@@ -44,6 +44,48 @@ body{margin:0;background:#F5F1EA;color:#111;
 .kol li a span{font-size:9px;font-weight:800;letter-spacing:.13em;color:rgba(17,17,17,.38);
   text-transform:uppercase;line-height:1}
 
+/* ---- wat er nieuw is ---- */
+/* Veertig hoofdstukken zijn er te veel om te onthouden waar iets bij kwam.
+   Dit paneel staat boven de inhoudsopgave en linkt rechtstreeks naar de
+   plek zelf; de gouden stip markeert wat van de laatste ronde is. */
+.wijz{max-width:1140px;margin:0 auto;padding:38px 24px 0}
+.wijz-doos{background:#111;color:#fff;border-radius:18px;padding:22px 24px 10px}
+.wijz-kop{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  margin-bottom:4px}
+.wijz-ey{font-size:10.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#F5D18A}
+.wijz-kop > p{margin:0;font-size:12.5px;color:rgba(255,255,255,.55)}
+.wijz-lijst{list-style:none;margin:0;padding:0}
+.wijz-lijst li{border-top:1px solid rgba(255,255,255,.12)}
+.wijz-lijst a{display:grid;grid-template-columns:96px minmax(0,1fr);gap:16px;align-items:baseline;
+  padding:13px 0;text-decoration:none;color:#fff;transition:color .18s ease}
+.wijz-lijst a:hover,.wijz-lijst a:focus-visible{color:#F5D18A}
+.wijz-dat{font-size:11px;font-weight:700;letter-spacing:.03em;color:rgba(255,255,255,.5);
+  white-space:nowrap;display:flex;align-items:center;gap:7px}
+.wijz-dat i{width:6px;height:6px;border-radius:50%;background:transparent;flex:none}
+.wijz-lijst li.vers .wijz-dat i{background:#F5D18A}
+.wijz-lijst li.vers .wijz-dat{color:#F5D18A}
+.wijz-tx b{display:block;font-size:14.5px;font-weight:700;letter-spacing:-.015em;line-height:1.3}
+.wijz-tx span{display:block;margin-top:3px;font-size:13px;line-height:1.45;color:rgba(255,255,255,.62)}
+
+/* de vlag op het hoofdstuk zelf, zodat je weet dat je goed geland bent */
+.nieuwvlag{flex:none;font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  color:#3A2708;background:#F5D18A;border-radius:100px;padding:4px 9px;white-space:nowrap;
+  position:relative;top:-1px}
+/* en in de inhoudsopgave */
+.kol li a em{font-style:normal;font-size:8.5px;font-weight:800;letter-spacing:.12em;
+  text-transform:uppercase;color:#8A5A1E;background:rgba(245,209,138,.42);
+  border-radius:100px;padding:2px 7px;margin-left:7px}
+
+/* de knop in de meelopende balk */
+.balk a.naarnieuw{background:#F5D18A;color:#3A2708;font-weight:800}
+.balk a.naarnieuw:hover,.balk a.naarnieuw:focus-visible{background:#E9BE72;color:#3A2708}
+
+@media (max-width:700px){
+  .wijz{padding:26px 20px 0}
+  .wijz-doos{padding:18px 18px 8px;border-radius:16px}
+  .wijz-lijst a{grid-template-columns:minmax(0,1fr);gap:4px}
+}
+
 /* ---- meelopende balk ---- */
 .balk{position:sticky;top:0;z-index:40;background:rgba(245,241,234,.92);
   -webkit-backdrop-filter:saturate(1.6) blur(12px);backdrop-filter:saturate(1.6) blur(12px);
@@ -3436,8 +3478,9 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
 #deel-onder .ws-prk-body p{font-size:13.5px}
 #deel-onder .ws-prk-etiket{left:12px;bottom:12px;padding:8px 13px 8px 9px;font-size:10px}}</style>
 <header class="dossier"><svg class="bogen" viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="dg" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="#F5D18A" stop-opacity="0"/><stop offset="45%" stop-color="#F5D18A" stop-opacity=".5"/><stop offset="100%" stop-color="#BC813E" stop-opacity="0"/></linearGradient></defs><path d="M-40 280 C 300 220 700 140 1240 20" stroke="url(#dg)" stroke-width="1.4" fill="none"/><path d="M-40 320 C 340 270 760 190 1240 70" stroke="url(#dg)" stroke-width="1" fill="none"/><path d="M180 340 C 460 280 820 220 1240 130" stroke="url(#dg)" stroke-width=".7" fill="none"/></svg><div class="rail"><span class="eyebrow">Wellshave &middot; herontwerp productpagina &middot; 23 augustus 2026</span><h1>Eén sjabloon in plaats van tien,<b>voor achtenvijftig producten.</b></h1><p>Je 58 actieve producten draaien vandaag op tien verschillende sjablonen. Dit is het ene dat ze vervangt: het plan met de zeventien blokken, het koopvak boven de vouw, en het productblad met de aanvulling en de betaalrij eronder. Wat nog niet is uitgetekend staat in het plan beschreven maar hier nog niet in beeld.</p></div></header>
-<nav class="balk" aria-label="Delen"><div class="rail"><span class="lg">WELL<i>SHAVE</i></span><a href="#deel-schermen" data-deel="schermen">Beide schermen</a><a href="#deel-meting" data-deel="meting">De meting</a><a href="#deel-volgorde" data-deel="volgorde">De volgorde</a><a href="#deel-plan" data-deel="plan">Het plan</a><a href="#deel-boven" data-deel="boven">Boven de vouw</a><a href="#deel-onder" data-deel="onder">Onder de vouw</a></div></nav>
-<div class="inhoud"><h2>Inhoud</h2><div class="kolommen"><div class="kol"><a href="#deel-schermen">Beide schermen</a><p>Elk getekend blok twee keer: desktop op 1440 px en mobiel op 390 px.</p><ol></ol></div><div class="kol"><a href="#deel-meting">De meting</a><p>Wat Clarity en Shopify zeggen over waar het verkeer blijft steken.</p><ol><li><a href="#meting-1"><span>METING 01</span>Van honderd bezoekers kopen er anderhalf, en zesennegentig raken de knop niet aan.</a></li><li><a href="#meting-2"><span>METING 02</span>Zevenentwintig procent scrolldiepte, en dat is het hele budget.</a></li><li><a href="#meting-3"><span>METING 03</span>Zeventig procent is mobiel, en mobiel converteert beter dan desktop.</a></li><li><a href="#meting-4"><span>METING 04</span>Drie technische lekken, en de eerste kennen we al een dag.</a></li><li><a href="#meting-5"><span>METING 05</span>Wat ik hierna wil zien, en waarom precies dat.</a></li></ol></div><div class="kol"><a href="#deel-volgorde">De volgorde</a><p>Alle zeventien blokken op een rij, met grond, klasse en wat er al getekend is.</p><ol></ol></div><div class="kol"><a href="#deel-plan">Het plan</a><p>De kaart: vier regels, drie producttypes, zeventien blokken.</p><ol><li><a href="#plan-1"><span>01</span>Het contract, in vier regels.</a></li><li><a href="#plan-2"><span>02</span>Drie producttypes, één skelet.</a></li><li><a href="#plan-3"><span>03</span>Het skelet, blok voor blok, met de bron per blok.</a></li><li><a href="#plan-4"><span>04</span>Wat je aanmaakt, en wat er al staat.</a></li><li><a href="#plan-5"><span>05</span>De bouwvolgorde, in vier fasen.</a></li><li><a href="#plan-6"><span>06</span>Wat dit plan niet oplost, en waar het op rust.</a></li></ol></div><div class="kol"><a href="#deel-boven">Boven de vouw</a><p>Het koopvak, de seizoensdeal, het sociale bewijs, de beweging.</p><ol><li><a href="#boven-1"><span>DESKTOP</span>Het voorstel, nagebouwd, met het cadeau erin.</a></li><li><a href="#boven-2"><span>MOBIEL</span>78,5% van je verkeer, en alles wat telt erboven.</a></li><li><a href="#boven-3"><span>SEIZOENSDEAL</span>Vier plekken voor een aanbieding, elk met een andere taak.</a></li><li><a href="#boven-4"><span>COMPONENTEN</span>Wat er één op één overkomt, uit je eigen thema.</a></li><li><a href="#boven-5"><span>SOCIAAL BEWIJS</span>Trustpilot in plaats van Loox, en wat dat kost.</a></li><li><a href="#boven-6"><span>BEWEGING</span>Twee soorten opvallen, allebei ingehouden.</a></li><li><a href="#boven-7"><span>LICHT</span>Hetzelfde koopvak op zand, met goud dat vlak blijft in plaats van tekst.</a></li><li><a href="#boven-8"><span>TALEN</span>Een instelling die niet in het sjabloon staat, bestaat niet voor de vertaaleditor.</a></li><li><a href="#boven-9"><span>HET PLAATJE</span>Een label op de foto is prima, tot de foto zelf iets te zeggen heeft.</a></li><li><a href="#boven-10"><span>BLOK 02</span>Vier beloftes van de winkel, op elk product dezelfde.</a></li><li><a href="#boven-11"><span>CADEAUS</span>Een som die je onthoudt, en drie streepjes eronder.</a></li><li><a href="#boven-12"><span>DRIE VARIANTEN</span>Drie manieren om hetzelfde te zeggen, met drie verschillende stemvolumes.</a></li></ol></div><div class="kol"><a href="#deel-onder">Onder de vouw</a><p>Het productblad, de aanvulling, de betaalrij.</p><ol><li><a href="#onder-1"><span>BLOK 03</span>Twaalf mensen op een rij, en de koopknop er meteen onder.</a></li><li><a href="#onder-2"><span>BLOK 05</span>Drie kaarten, drie echte producten, en drie besparingen die kloppen.</a></li><li><a href="#onder-3"><span>BLOK 07</span>Maak het compleet, zonder de pagina te verlaten.</a></li><li><a href="#onder-4"><span>BLOK 07</span>De keuzehulp, niet de kenmerkenlijst.</a></li><li><a href="#onder-5"><span>DE NEUSTRIMMERS</span>Eén woordenlijst, anders vergelijkt de tabel niets.</a></li><li><a href="#onder-6"><span>DE BUNDELS</span>Een upgrade bevat alles wat er onder zit. Anders is het geen upgrade.</a></li><li><a href="#onder-7"><span>TONDEUSES EN HEAD SHAVERS</span>De upgrade is de set, niet het model ernaast.</a></li><li><a href="#onder-8"><span>DE LAATSTE VIER</span>Elk los apparaat naast de bundel waar het in zit.</a></li><li><a href="#onder-9"><span>BLOK 08</span>De reviewmuur, inclusief de sterren die je liever niet laat zien.</a></li><li><a href="#onder-10"><span>BUITEN DE NEGEN</span>De film, op de plek waar hij wint, en niet op de plek waar hij mooi staat.</a></li><li><a href="#onder-11"><span>ACCORDEON</span>De omschrijving en de specificaties, in één blad.</a></li><li><a href="#onder-12"><span>BETAALMETHODEN</span>Twee plekken, allebei stil, en geen van beide een app.</a></li><li><a href="#onder-13"><span>WAT IK AANTROF</span>Vier up-sellvelden op één product, en ze spreken elkaar tegen.</a></li><li><a href="#onder-14"><span>HET REVIEWAANTAL</span>Eén getal, één plek, en een plus erachter.</a></li><li><a href="#onder-15"><span>HET SJABLOON</span>Het standaardsjabloon draagt alles, en dat is voor elk product genoeg.</a></li><li><a href="#onder-16"><span>DE KOP VAN DE BAND</span>Drie gezichten en één regel, want de tegels doen de rest.</a></li><li><a href="#onder-17"><span>BLOK 05</span>Vier momenten, en niet vier keer hetzelfde blok.</a></li></ol></div></div></div>
+<nav class="balk" aria-label="Delen"><div class="rail"><span class="lg">WELL<i>SHAVE</i></span><a href="#deel-schermen" data-deel="schermen">Beide schermen</a><a href="#deel-meting" data-deel="meting">De meting</a><a href="#deel-volgorde" data-deel="volgorde">De volgorde</a><a href="#deel-plan" data-deel="plan">Het plan</a><a href="#deel-boven" data-deel="boven">Boven de vouw</a><a href="#deel-onder" data-deel="onder">Onder de vouw</a><a class="naarnieuw" href="#boven-12">Nieuw &rarr;</a></div></nav>
+<div class="wijz"><div class="wijz-doos"><div class="wijz-kop"><span class="wijz-ey">Laatst gewijzigd</span><p>Veertig hoofdstukken. Dit zijn de zes waar het laatst aan gewerkt is.</p></div><ol class="wijz-lijst"><li class="vers"><a href="#boven-12"><span class="wijz-dat"><i></i>28 augustus</span><span class="wijz-tx"><b>Drie varianten</b><span>Drie ontwerpen voor het cadeauveld naast elkaar, elk in zijn echte buurt.</span></span></a></li><li><a href="#boven-11"><span class="wijz-dat"><i></i>27 augustus</span><span class="wijz-tx"><b>Cadeaus</b><span>Het cadeaublok: eerst gebouwd, daarna herbouwd rond de som en de doorstreping.</span></span></a></li><li><a href="#boven-10"><span class="wijz-dat"><i></i>27 augustus</span><span class="wijz-tx"><b>Blok 02</b><span>De geruststrook onder het koopvak: vier beloftes van de winkel.</span></span></a></li><li><a href="#boven-9"><span class="wijz-dat"><i></i>27 augustus</span><span class="wijz-tx"><b>Het plaatje</b><span>Het label &laquo;meest gekozen&raquo; blokkeert de listingfoto niet meer.</span></span></a></li><li><a href="#boven-8"><span class="wijz-dat"><i></i>27 augustus</span><span class="wijz-tx"><b>Talen</b><span>Waarom een instelling die niet in het sjabloon staat onvertaalbaar is.</span></span></a></li><li><a href="#boven-7"><span class="wijz-dat"><i></i>27 augustus</span><span class="wijz-tx"><b>Licht</b><span>Het koopvak van zwart naar zand, en daarna naar neutraal.</span></span></a></li></ol></div></div>
+<div class="inhoud"><h2>Inhoud</h2><div class="kolommen"><div class="kol"><a href="#deel-schermen">Beide schermen</a><p>Elk getekend blok twee keer: desktop op 1440 px en mobiel op 390 px.</p><ol></ol></div><div class="kol"><a href="#deel-meting">De meting</a><p>Wat Clarity en Shopify zeggen over waar het verkeer blijft steken.</p><ol><li><a href="#meting-1"><span>METING 01</span>Van honderd bezoekers kopen er anderhalf, en zesennegentig raken de knop niet aan.</a></li><li><a href="#meting-2"><span>METING 02</span>Zevenentwintig procent scrolldiepte, en dat is het hele budget.</a></li><li><a href="#meting-3"><span>METING 03</span>Zeventig procent is mobiel, en mobiel converteert beter dan desktop.</a></li><li><a href="#meting-4"><span>METING 04</span>Drie technische lekken, en de eerste kennen we al een dag.</a></li><li><a href="#meting-5"><span>METING 05</span>Wat ik hierna wil zien, en waarom precies dat.</a></li></ol></div><div class="kol"><a href="#deel-volgorde">De volgorde</a><p>Alle zeventien blokken op een rij, met grond, klasse en wat er al getekend is.</p><ol></ol></div><div class="kol"><a href="#deel-plan">Het plan</a><p>De kaart: vier regels, drie producttypes, zeventien blokken.</p><ol><li><a href="#plan-1"><span>01</span>Het contract, in vier regels.</a></li><li><a href="#plan-2"><span>02</span>Drie producttypes, één skelet.</a></li><li><a href="#plan-3"><span>03</span>Het skelet, blok voor blok, met de bron per blok.</a></li><li><a href="#plan-4"><span>04</span>Wat je aanmaakt, en wat er al staat.</a></li><li><a href="#plan-5"><span>05</span>De bouwvolgorde, in vier fasen.</a></li><li><a href="#plan-6"><span>06</span>Wat dit plan niet oplost, en waar het op rust.</a></li></ol></div><div class="kol"><a href="#deel-boven">Boven de vouw</a><p>Het koopvak, de seizoensdeal, het sociale bewijs, de beweging.</p><ol><li><a href="#boven-1"><span>DESKTOP</span>Het voorstel, nagebouwd, met het cadeau erin.</a></li><li><a href="#boven-2"><span>MOBIEL</span>78,5% van je verkeer, en alles wat telt erboven.</a></li><li><a href="#boven-3"><span>SEIZOENSDEAL</span>Vier plekken voor een aanbieding, elk met een andere taak.</a></li><li><a href="#boven-4"><span>COMPONENTEN</span>Wat er één op één overkomt, uit je eigen thema.</a></li><li><a href="#boven-5"><span>SOCIAAL BEWIJS</span>Trustpilot in plaats van Loox, en wat dat kost.</a></li><li><a href="#boven-6"><span>BEWEGING</span>Twee soorten opvallen, allebei ingehouden.</a></li><li><a href="#boven-7"><span>LICHT</span>Hetzelfde koopvak op zand, met goud dat vlak blijft in plaats van tekst.</a></li><li><a href="#boven-8"><span>TALEN</span>Een instelling die niet in het sjabloon staat, bestaat niet voor de vertaaleditor.</a></li><li><a href="#boven-9"><span>HET PLAATJE</span>Een label op de foto is prima, tot de foto zelf iets te zeggen heeft.</a></li><li><a href="#boven-10"><span>BLOK 02</span>Vier beloftes van de winkel, op elk product dezelfde.</a></li><li><a href="#boven-11"><span>CADEAUS</span>Een som die je onthoudt, en drie streepjes eronder.</a></li><li><a href="#boven-12"><span>DRIE VARIANTEN</span>Drie manieren om hetzelfde te zeggen, met drie verschillende stemvolumes.<em>nieuw</em></a></li></ol></div><div class="kol"><a href="#deel-onder">Onder de vouw</a><p>Het productblad, de aanvulling, de betaalrij.</p><ol><li><a href="#onder-1"><span>BLOK 03</span>Twaalf mensen op een rij, en de koopknop er meteen onder.</a></li><li><a href="#onder-2"><span>BLOK 05</span>Drie kaarten, drie echte producten, en drie besparingen die kloppen.</a></li><li><a href="#onder-3"><span>BLOK 07</span>Maak het compleet, zonder de pagina te verlaten.</a></li><li><a href="#onder-4"><span>BLOK 07</span>De keuzehulp, niet de kenmerkenlijst.</a></li><li><a href="#onder-5"><span>DE NEUSTRIMMERS</span>Eén woordenlijst, anders vergelijkt de tabel niets.</a></li><li><a href="#onder-6"><span>DE BUNDELS</span>Een upgrade bevat alles wat er onder zit. Anders is het geen upgrade.</a></li><li><a href="#onder-7"><span>TONDEUSES EN HEAD SHAVERS</span>De upgrade is de set, niet het model ernaast.</a></li><li><a href="#onder-8"><span>DE LAATSTE VIER</span>Elk los apparaat naast de bundel waar het in zit.</a></li><li><a href="#onder-9"><span>BLOK 08</span>De reviewmuur, inclusief de sterren die je liever niet laat zien.</a></li><li><a href="#onder-10"><span>BUITEN DE NEGEN</span>De film, op de plek waar hij wint, en niet op de plek waar hij mooi staat.</a></li><li><a href="#onder-11"><span>ACCORDEON</span>De omschrijving en de specificaties, in één blad.</a></li><li><a href="#onder-12"><span>BETAALMETHODEN</span>Twee plekken, allebei stil, en geen van beide een app.</a></li><li><a href="#onder-13"><span>WAT IK AANTROF</span>Vier up-sellvelden op één product, en ze spreken elkaar tegen.</a></li><li><a href="#onder-14"><span>HET REVIEWAANTAL</span>Eén getal, één plek, en een plus erachter.</a></li><li><a href="#onder-15"><span>HET SJABLOON</span>Het standaardsjabloon draagt alles, en dat is voor elk product genoeg.</a></li><li><a href="#onder-16"><span>DE KOP VAN DE BAND</span>Drie gezichten en één regel, want de tegels doen de rest.</a></li><li><a href="#onder-17"><span>BLOK 05</span>Vier momenten, en niet vier keer hetzelfde blok.</a></li></ol></div></div></div>
 <div id="deel-schermen" class="deel">
 <div class="shell">
   <div class="lede">
@@ -5515,7 +5558,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
 </section>
 
 <section id="boven-12">
-  <div class="shead"><span class="snum">DRIE VARIANTEN</span><h2 class="duo">Drie manieren om hetzelfde te zeggen,<span class="b">met drie verschillende stemvolumes.</span></h2></div>
+  <div class="shead"><span class="snum">DRIE VARIANTEN</span><span class="nieuwvlag">Nieuw</span><h2 class="duo">Drie manieren om hetzelfde te zeggen,<span class="b">met drie verschillende stemvolumes.</span></h2></div>
   <p class="sintro">Elke variant staat hier in zijn echte buurt: de aanbodbalk erboven, de koopknop eronder. Zonder die twee zegt een kleur niets &mdash; een groen vlak op wit is altijd mooi, de vraag is wat het doet met het goud twintig pixels lager. Alle drie tonen dezelfde inhoud en hetzelfde bedrag, zodat het verschil alleen in het ontwerp zit. Er staat nog niets van live; het werkthema draait de huidige versie.</p>
 
   <div class="vr">
@@ -6723,5 +6766,33 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
     if (wacht) return; wacht = true;
     window.requestAnimationFrame(function(){ meten(); wacht = false; });
   }, {passive:true});
+})();
+
+(function(){
+  // Een anker in dit dossier landde structureel te hoog. De plaatjes zijn
+  // ingebakken base64 en decoderen door nadat de sprong al berekend is, dus
+  // de opmaak boven het doel groeit onder je handen. Bij het nieuwste
+  // hoofdstuk scheelde dat vierduizend pixels.
+  //
+  // Daarom: springen doen we zelf, hard in plaats van glijdend -- over
+  // vijftigduizend pixels is glijden toch geen dienst -- en daarna
+  // corrigeren we twee keer na, als de opmaak is uitgegroeid.
+  var MARGE = 76;
+  function naar(el){
+    var y = el.getBoundingClientRect().top + window.pageYOffset - MARGE;
+    window.scrollTo({ top: y < 0 ? 0 : y, behavior: 'instant' });
+  }
+  document.addEventListener('click', function(e){
+    var a = e.target && e.target.closest ? e.target.closest('a[href^="#"]') : null;
+    if (!a) return;
+    var id = a.getAttribute('href').slice(1);
+    if (!id) return;
+    var el = document.getElementById(id);
+    if (!el) return;
+    e.preventDefault();
+    naar(el);
+    setTimeout(function(){ naar(el); }, 250);
+    setTimeout(function(){ naar(el); history.replaceState(null, '', '#' + id); }, 900);
+  });
 })();
 </script>

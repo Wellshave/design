@@ -1081,6 +1081,44 @@ Ze blijven in het sjabloon staan, dus in de thema-editor zijn ze met &eacute;&ea
 weer aan te zetten. Wat de Selleasy-kaart deed, hoort in blok 07
 &mdash; &laquo;maak het compleet&raquo; &mdash; en dan in de opmaak van de pagina zelf.
 
+## Het rapport: waar staat wat er nieuw is
+
+Het dossier is veertig hoofdstukken lang. Zonder hulp moet je zoeken waar er
+iets bij is gekomen, en dat is precies wat er gebeurde. Er zitten nu vier
+dingen in, allemaal uit één lijst gevoed:
+
+**De lijst zelf** staat in `scripts/bouw-productpagina.py` onder
+`WIJZIGINGEN`, nieuwste bovenaan, met `NIEUW_OP` als de datum die de vlag
+krijgt. Elke regel is `(datum, deel, snum-label, omschrijving)`.
+
+**Gesleuteld op het label, niet op het nummer.** De sectie-ids (`boven-12`)
+worden bij het bouwen op volgorde uitgedeeld, dus ze schuiven zodra er ergens
+in het midden een hoofdstuk bij komt. Het snum-label («CADEAUS», «BLOK 02»)
+blijft staan. Twee labels komen in twee delen voor — `BLOK 05` en `BLOK 07` —
+vandaar dat het deel er ook bij moet. Staat een label er verkeerd in, dan valt
+de bouw om met een melding; dat is beter dan een dode link in het rapport.
+
+Daaruit komen: het paneel **Laatst gewijzigd** boven de inhoudsopgave, een
+**vlag** in de kop van elk vers hoofdstuk, een **merkje** in de
+inhoudsopgave, en de gouden knop **Nieuw →** in de meelopende balk. Die knop
+is goud en niet zwart, want zwart is in die balk al bezet door de sectie waar
+je staat.
+
+### Ankers landden structureel te hoog
+
+Bij het testen van die knop bleek iets dat er al langer zat: een sprong naar
+een anker kwam **vierduizend pixels** te hoog uit. De plaatjes in dit dossier
+zijn ingebakken base64 en decoderen door nádat de browser de eindpositie al
+berekend heeft, dus de opmaak boven het doel groeit onder je handen. Bij korte
+sprongen valt dat niet op, bij een sprong van vijftigduizend pixels wel.
+
+De sprong gebeurt nu in JavaScript, hard in plaats van glijdend — over die
+afstand is glijden toch geen dienst — met twee nacorrecties op 250 en 900 ms.
+Nagemeten op drie doelen verspreid door het document: alle drie landen op
+76 px, precies onder de balk. Dit repareert ook elke link in de
+inhoudsopgave, niet alleen de nieuwe knop.
+
+
 ## Nog open
 
 * **`custom.buybox_quote` is alleen op de Groom Guard PRO gevuld.** Op de andere

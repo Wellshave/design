@@ -104,6 +104,48 @@ body{margin:0;background:#F5F1EA;color:#111;
 .kol li a span{font-size:9px;font-weight:800;letter-spacing:.13em;color:rgba(17,17,17,.38);
   text-transform:uppercase;line-height:1}
 
+/* ---- wat er nieuw is ---- */
+/* Veertig hoofdstukken zijn er te veel om te onthouden waar iets bij kwam.
+   Dit paneel staat boven de inhoudsopgave en linkt rechtstreeks naar de
+   plek zelf; de gouden stip markeert wat van de laatste ronde is. */
+.wijz{max-width:1140px;margin:0 auto;padding:38px 24px 0}
+.wijz-doos{background:#111;color:#fff;border-radius:18px;padding:22px 24px 10px}
+.wijz-kop{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  margin-bottom:4px}
+.wijz-ey{font-size:10.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#F5D18A}
+.wijz-kop > p{margin:0;font-size:12.5px;color:rgba(255,255,255,.55)}
+.wijz-lijst{list-style:none;margin:0;padding:0}
+.wijz-lijst li{border-top:1px solid rgba(255,255,255,.12)}
+.wijz-lijst a{display:grid;grid-template-columns:96px minmax(0,1fr);gap:16px;align-items:baseline;
+  padding:13px 0;text-decoration:none;color:#fff;transition:color .18s ease}
+.wijz-lijst a:hover,.wijz-lijst a:focus-visible{color:#F5D18A}
+.wijz-dat{font-size:11px;font-weight:700;letter-spacing:.03em;color:rgba(255,255,255,.5);
+  white-space:nowrap;display:flex;align-items:center;gap:7px}
+.wijz-dat i{width:6px;height:6px;border-radius:50%;background:transparent;flex:none}
+.wijz-lijst li.vers .wijz-dat i{background:#F5D18A}
+.wijz-lijst li.vers .wijz-dat{color:#F5D18A}
+.wijz-tx b{display:block;font-size:14.5px;font-weight:700;letter-spacing:-.015em;line-height:1.3}
+.wijz-tx span{display:block;margin-top:3px;font-size:13px;line-height:1.45;color:rgba(255,255,255,.62)}
+
+/* de vlag op het hoofdstuk zelf, zodat je weet dat je goed geland bent */
+.nieuwvlag{flex:none;font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  color:#3A2708;background:#F5D18A;border-radius:100px;padding:4px 9px;white-space:nowrap;
+  position:relative;top:-1px}
+/* en in de inhoudsopgave */
+.kol li a em{font-style:normal;font-size:8.5px;font-weight:800;letter-spacing:.12em;
+  text-transform:uppercase;color:#8A5A1E;background:rgba(245,209,138,.42);
+  border-radius:100px;padding:2px 7px;margin-left:7px}
+
+/* de knop in de meelopende balk */
+.balk a.naarnieuw{background:#F5D18A;color:#3A2708;font-weight:800}
+.balk a.naarnieuw:hover,.balk a.naarnieuw:focus-visible{background:#E9BE72;color:#3A2708}
+
+@media (max-width:700px){
+  .wijz{padding:26px 20px 0}
+  .wijz-doos{padding:18px 18px 8px;border-radius:16px}
+  .wijz-lijst a{grid-template-columns:minmax(0,1fr);gap:4px}
+}
+
 /* ---- meelopende balk ---- */
 .balk{position:sticky;top:0;z-index:40;background:rgba(245,241,234,.92);
   -webkit-backdrop-filter:saturate(1.6) blur(12px);backdrop-filter:saturate(1.6) blur(12px);
@@ -129,9 +171,71 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
 @media (max-width:700px){.dossier{padding:46px 20px 40px}.inhoud{padding:32px 20px 4px}}
 """
 
+# ---------------------------------------------------------------------------
+# Wat er in de laatste sessies is veranderd.
+#
+# Het dossier is inmiddels veertig hoofdstukken lang; zonder deze lijst moet
+# je zoeken waar er iets bij is gekomen. Gesleuteld op (deel, snum-label) en
+# niet op het sectienummer, want dat nummer schuift zodra er ergens in het
+# midden een hoofdstuk bij komt. Staat een label hier verkeerd, dan valt de
+# bouw om -- beter dan een dode link in het rapport.
+#
+# Nieuwste bovenaan. Alles met de datum van NIEUW_OP krijgt een vlag.
+# ---------------------------------------------------------------------------
+NIEUW_OP = u'28 augustus'
+WIJZIGINGEN = [
+ (u'28 augustus', 'boven', u'DRIE VARIANTEN',
+  u'Drie ontwerpen voor het cadeauveld naast elkaar, elk in zijn echte buurt.'),
+ (u'27 augustus', 'boven', u'CADEAUS',
+  u'Het cadeaublok: eerst gebouwd, daarna herbouwd rond de som en de doorstreping.'),
+ (u'27 augustus', 'boven', u'BLOK 02',
+  u'De geruststrook onder het koopvak: vier beloftes van de winkel.'),
+ (u'27 augustus', 'boven', u'HET PLAATJE',
+  u'Het label &laquo;meest gekozen&raquo; blokkeert de listingfoto niet meer.'),
+ (u'27 augustus', 'boven', u'TALEN',
+  u'Waarom een instelling die niet in het sjabloon staat onvertaalbaar is.'),
+ (u'27 augustus', 'boven', u'LICHT',
+  u'Het koopvak van zwart naar zand, en daarna naar neutraal.'),
+]
+
+def zoek_ids(toc):
+    """Zet (deel, label) om in het sectie-id dat de bouw net heeft uitgedeeld."""
+    kaart = {}
+    for sleutel, _, _, kinderen in toc:
+        for i, sn, _ in kinderen:
+            kaart[(sleutel, sn)] = i
+    uit = []
+    for datum, deel, label, om in WIJZIGINGEN:
+        if (deel, label) not in kaart:
+            raise SystemExit('WIJZIGINGEN: geen sectie "%s" in deel %s' % (label, deel))
+        uit.append((datum, kaart[(deel, label)], label, om))
+    return uit
+
+wijz = zoek_ids(toc)
+nieuw_ids = set(i for d,i,_,_ in wijz if d == NIEUW_OP)
+springnaar = wijz[0][1] if wijz else None
+
+# de vlag in de kop van elk vers hoofdstuk
+for n, blok in enumerate(body_uit):
+    for i in nieuw_ids:
+        blok = re.sub(r'(<section id="%s">\s*<div class="shead">\s*<span class="snum">.*?</span>)' % i,
+                      r'\1<span class="nieuwvlag">Nieuw</span>', blok, count=1, flags=re.S)
+    body_uit[n] = blok
+
+regels = u''
+for datum, i, label, om in wijz:
+    regels += (u'<li%s><a href="#%s"><span class="wijz-dat"><i></i>%s</span>'
+               u'<span class="wijz-tx"><b>%s</b><span>%s</span></span></a></li>'
+               % (u' class="vers"' if datum == NIEUW_OP else u'', i, datum, html.escape(label.capitalize()), om))
+WIJZBLOK = (u'<div class="wijz"><div class="wijz-doos"><div class="wijz-kop">'
+            u'<span class="wijz-ey">Laatst gewijzigd</span>'
+            u'<p>Veertig hoofdstukken. Dit zijn de zes waar het laatst aan gewerkt is.</p>'
+            u'</div><ol class="wijz-lijst">' + regels + u'</ol></div></div>\n')
+
 kolommen=u''
 for sleutel,naam,onder,kinderen in toc:
-    li=u''.join(u'<li><a href="#%s"><span>%s</span>%s</a></li>'%(i,html.escape(sn),html.escape(t))
+    li=u''.join(u'<li><a href="#%s"><span>%s</span>%s%s</a></li>'
+                %(i,html.escape(sn),html.escape(t),u'<em>nieuw</em>' if i in nieuw_ids else u'')
                 for i,sn,t in kinderen)
     kolommen+=(u'<div class="kol"><a href="#deel-%s">%s</a><p>%s</p><ol>%s</ol></div>'
                %(sleutel,html.escape(naam),html.escape(onder),li))
@@ -146,6 +250,8 @@ BOGEN=(u'<svg class="bogen" viewBox="0 0 1200 300" preserveAspectRatio="none" ar
  u'<path d="M180 340 C 460 280 820 220 1240 130" stroke="url(#dg)" stroke-width=".7" fill="none"/></svg>')
 
 NAVLINKS=u''.join(u'<a href="#deel-%s" data-deel="%s">%s</a>'%(k,k,html.escape(n)) for k,n,_,_ in toc)
+if springnaar:
+    NAVLINKS += u'<a class="naarnieuw" href="#%s">Nieuw &rarr;</a>' % springnaar
 
 SCRIPT_NAV = u"""
 (function(){
@@ -171,6 +277,36 @@ SCRIPT_NAV = u"""
 })();
 """
 
+SCRIPT_SPRING = u"""
+(function(){
+  // Een anker in dit dossier landde structureel te hoog. De plaatjes zijn
+  // ingebakken base64 en decoderen door nadat de sprong al berekend is, dus
+  // de opmaak boven het doel groeit onder je handen. Bij het nieuwste
+  // hoofdstuk scheelde dat vierduizend pixels.
+  //
+  // Daarom: springen doen we zelf, hard in plaats van glijdend -- over
+  // vijftigduizend pixels is glijden toch geen dienst -- en daarna
+  // corrigeren we twee keer na, als de opmaak is uitgegroeid.
+  var MARGE = 76;
+  function naar(el){
+    var y = el.getBoundingClientRect().top + window.pageYOffset - MARGE;
+    window.scrollTo({ top: y < 0 ? 0 : y, behavior: 'instant' });
+  }
+  document.addEventListener('click', function(e){
+    var a = e.target && e.target.closest ? e.target.closest('a[href^="#"]') : null;
+    if (!a) return;
+    var id = a.getAttribute('href').slice(1);
+    if (!id) return;
+    var el = document.getElementById(id);
+    if (!el) return;
+    e.preventDefault();
+    naar(el);
+    setTimeout(function(){ naar(el); }, 250);
+    setTimeout(function(){ naar(el); history.replaceState(null, '', '#' + id); }, 900);
+  });
+})();
+"""
+
 doc = (u'<meta charset="utf-8">\n'
  u'<title>De nieuwe productpagina</title>\n'
  u'<link rel="preconnect" href="https://fonts.googleapis.com">\n'
@@ -183,8 +319,9 @@ doc = (u'<meta charset="utf-8">\n'
  u'<p>Je 58 actieve producten draaien vandaag op tien verschillende sjablonen. Dit is het ene dat ze vervangt: het plan met de zeventien blokken, het koopvak boven de vouw, en het productblad met de aanvulling en de betaalrij eronder. Wat nog niet is uitgetekend staat in het plan beschreven maar hier nog niet in beeld.</p>'
  u'</div></header>\n'
  u'<nav class="balk" aria-label="Delen"><div class="rail"><span class="lg">WELL<i>SHAVE</i></span>'+NAVLINKS+u'</div></nav>\n'
+ + WIJZBLOK +
  u'<div class="inhoud"><h2>Inhoud</h2><div class="kolommen">'+kolommen+u'</div></div>\n'
- + u'\n'.join(body_uit) + u'\n<script>'+u'\n'.join(scripts)+SCRIPT_NAV+u'</script>\n')
+ + u'\n'.join(body_uit) + u'\n<script>'+u'\n'.join(scripts)+SCRIPT_NAV+SCRIPT_SPRING+u'</script>\n')
 
 io.open('rapporten/productpagina.html','w',encoding='utf-8').write(doc)
 print('geschreven', len(doc), 'bytes;', sum(len(k[3]) for k in toc), 'secties in de inhoudsopgave')
