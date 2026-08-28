@@ -758,6 +758,41 @@ Publiceren is niet af zonder controle. Lees de opgeslagen inhoud terug via de AP
 erin stopte: secties, beelden, knoppen, kaarten. Beide fouten hierboven zijn zo gevonden, en
 geen van tweeen was zichtbaar in de bewerker.
 
+### Wat de themalaag met je pagina doet
+
+Gemeten op het paginasjabloon van dit thema, bij het publiceren van het dossier-artikel. De
+pagina-inhoud landt in `<div class="richtext__content rte">`, en die laag brengt regels mee:
+
+| Themaregel | Wat het met je pagina doet | Verweer |
+|---|---|---|
+| `<h2 class="richtext__title">` boven de inhoud | De paginatitel staat er nog een keer, gecentreerd in de winkelletter | `.richtext__title{display:none}` in je eigen stylesheet |
+| `.rte img{border-radius:12px}` | Alle beelden krijgen ronde hoeken, ook waar je die niet wilt | `.gg-art img{border-radius:0}` |
+| `.rte table{table-layout:fixed}` | Kolombreedtes kloppen niet meer | `.gg-art table{table-layout:auto}` |
+| `.rte ul{list-style:disc}` | Bullets in je eigen lijsten | Zet `list-style:none` op je eigen `ul` en `li` |
+| `.rte>*{margin:0 0 1em}` | Extra marge onder je wikkellaag | `.rte>.gg-art{margin:0}` |
+
+Je eigen stylesheet wordt in de body geladen en komt dus n&aacute; de themastijlen: bij gelijke
+specificiteit win je. Controleer het niet op gevoel maar reproduceer de cascade lokaal: haal
+`base.css` en `richtext.css` van het thema op, zet je eigen stylesheet erachter en render je
+inhoud in dezelfde `.richtext__content.rte`-wikkel.
+
+### De uploadroute, stap voor stap
+
+1. `stagedUploadsCreate` met `resource: FILE` en `mimeType: text/css` geeft een uploadadres met
+   parameters.
+2. Die parameters als losse `-F` velden POSTen met `curl`, plus `-F "file=@bestand.css"`.
+   Antwoord 201 betekent gelukt.
+3. `fileCreate` met de `resourceUrl` als `originalSource`. De file staat dan op `UPLOADED`;
+   vraag daarna de node op tot `fileStatus` `READY` is en je de CDN-URL hebt.
+4. Pagina aanmaken met `pageCreate` (of bijwerken met `pageUpdate`), met in de body eerst de
+   `<link>` naar je stylesheet en daarna de markup.
+5. Teruglezen: haal de gepubliceerde URL op en tel secties, beelden, knoppen en kaarten.
+
+Twee dingen die tijd kosten als je ze niet weet: een veld dat niet bestaat in je selectieset
+laat de hele mutatie afketsen v&oacute;&oacute;r hij iets doet (valideer eerst met
+`validate_graphql_codeblocks`), en een gewijzigde stylesheet gaat als **nieuw bestand** met een
+opgehoogde naam, waarna je de `<link>` in de pagina meestuurt.
+
 ### Wat de themaroute kost
 
 De themaheader bevat navigatielinks, en dat zijn uitgangen op een pagina die om een actie draait.
