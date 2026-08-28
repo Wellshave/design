@@ -831,6 +831,96 @@ strong{font-weight:700}
 @media (max-width: 900px){
   .vr-rij{grid-template-columns:minmax(0,1fr);gap:24px}
 }
+
+/* ===== de kortingszone: nu tegenover voorstel ===== */
+.kz{--kz-cream:#F4F2EE;--kz-ink:#14120F;--kz-w60:rgba(20,18,15,.62);
+  --kz-goud2:#EFCE93;--kz-goud3:#E9BE72;--kz-goud4:#DDA548;--kz-brons:#8A5A1E;
+  --kz-rood:#C8281F;--kz-marine:#14294B;--kz-marinegoud:#D9B45C;--kz-room:#F7F3EC;
+  margin:26px 0 0}
+.kz *,.kz *::before,.kz *::after{box-sizing:border-box}
+.kz-rij{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.kz-lab{display:block;margin-bottom:9px;font-size:10px;font-weight:800;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--kz-brons)}
+.kz-lab.nu{color:var(--kz-rood)}
+.kz-vak{background:var(--kz-cream);border:1px solid var(--ink-10);border-radius:16px;padding:13px}
+
+/* de teller: elk geldsignaal krijgt een nummer, zodat je ze kunt tellen
+   in plaats van erover te discussieren */
+.kz-tel{position:relative}
+.kz-tel::before{content:attr(data-n);position:absolute;left:-7px;top:-7px;z-index:3;
+  width:17px;height:17px;border-radius:50%;display:grid;place-items:center;
+  font-size:9.5px;font-weight:800;color:#fff;background:var(--kz-rood);
+  box-shadow:0 0 0 2px var(--kz-cream)}
+.kz-tel.ok::before{background:#0E7A55}
+
+.kz-pil{display:inline-flex;align-items:center;border-radius:100px;
+  background:linear-gradient(100deg,var(--kz-goud2),var(--kz-goud3) 50%,var(--kz-goud4));
+  padding:2.5px 2.5px 2.5px 0;margin-bottom:9px}
+.kz-pil b{font-size:9.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#3A2708}
+.kz-pil .a{padding:3px 10px 3px 13px}
+.kz-pil .z{padding:3px 11px;background:#fff;border-radius:100px}
+.kz-h1{font-size:20px;font-weight:600;letter-spacing:-.025em;line-height:1.08;color:var(--kz-ink);margin:0}
+.kz-sub{margin:3px 0 10px;font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--kz-ink)}
+.kz-prijs{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+.kz-nu{font-size:27px;font-weight:500;letter-spacing:-.01em;color:var(--kz-ink);line-height:1}
+.kz-was{font-size:13px;color:rgba(20,18,15,.60);text-decoration:line-through}
+.kz-off{font-size:11px;font-weight:800;color:#fff;background:var(--kz-rood);
+  border-radius:7px;padding:4px 8px}
+.kz-besp{display:inline-flex;align-items:center;gap:7px;margin-top:9px;padding:7px 11px;
+  border:1px solid rgba(221,165,72,.55);border-radius:9px;font-size:11.5px;font-weight:700;
+  color:var(--kz-brons);background:rgba(233,190,114,.10)}
+.kz-sale{display:flex;align-items:center;gap:9px;margin-top:10px;padding:8px 10px;border-radius:10px;
+  border:1px solid rgba(221,165,72,.55);
+  background:linear-gradient(180deg,rgba(233,190,114,.20),rgba(233,190,114,.10))}
+.kz-sale i{width:19px;height:19px;border-radius:50%;flex:none;
+  background:linear-gradient(140deg,var(--kz-goud3),var(--kz-goud4))}
+.kz-sale span{font-size:11px;line-height:1.3;color:var(--kz-ink)}
+
+/* het cadeaublok, sterk verkleind maar herkenbaar */
+.kz-cad{margin-top:10px;padding:9px 9px 8px;border-radius:11px;border:1.5px solid var(--kz-marinegoud);
+  background:linear-gradient(158deg,#1E3A69,var(--kz-marine) 46%,#101F3A);color:#fff}
+.kz-cad b{display:block;font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:-.01em;
+  line-height:1.1}
+.kz-cad > span{display:block;margin-top:2px;font-size:10px;color:rgba(255,255,255,.80)}
+.kz-cad ul{list-style:none;margin:7px 0 0;padding:6px 8px;border-radius:8px;background:var(--kz-room);
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.kz-cad li{font-size:9px;font-weight:700;color:var(--kz-marine);text-align:center;line-height:1.25}
+.kz-cad li s{display:block;font-weight:400;color:rgba(20,41,75,.68);font-size:8.5px}
+.kz-cta{margin-top:10px;display:flex;align-items:center;justify-content:center;padding:12px 10px;
+  border-radius:10px;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+  color:#3A2708;background:linear-gradient(100deg,var(--kz-goud2),var(--kz-goud3) 46%,var(--kz-goud4))}
+.kz-uit{margin:11px 0 0;font-size:13px;line-height:1.5;color:var(--ink-60)}
+.kz-uit b{color:var(--ink);font-weight:700}
+.kz-score{margin-top:7px;font-size:11px;color:var(--ink-60)}
+.kz-score u{text-decoration:none;font-weight:800;color:var(--kz-rood)}
+.kz-score.ok u{color:#0E7A55}
+
+/* ---- de spreiding ---- */
+.kz-kaart{margin:26px 0 0;background:#fff;border:1px solid var(--ink-10);border-radius:var(--r-m);
+  padding:20px 22px 16px}
+.kz-kaart h4{margin:0 0 3px;font-size:15px;font-weight:700;letter-spacing:-.015em;color:var(--ink)}
+.kz-kaart p.k{margin:0 0 12px;font-size:13px;line-height:1.5;color:var(--ink-60)}
+.kz-svg{display:block;width:100%;height:auto;overflow:visible}
+.kz-tick{font-size:10px;fill:rgba(17,17,17,.55);text-anchor:middle}
+.kz-ref{font-size:10.5px;fill:rgba(17,17,17,.62);font-weight:600}
+.kz-ref-g{fill:var(--kz-brons);font-weight:700}
+.kz-mark{font-size:11.5px;fill:var(--ink);font-weight:700}
+.kz-pt circle:last-child{cursor:default}
+.kz-hint{position:fixed;z-index:60;pointer-events:none;opacity:0;transition:opacity .12s ease;
+  background:#111;color:#fff;border-radius:8px;padding:7px 10px;font-size:11.5px;line-height:1.35;
+  box-shadow:0 8px 22px -12px rgba(0,0,0,.6);max-width:230px}
+.kz-hint b{display:block;font-weight:700}
+.kz-hint span{color:rgba(255,255,255,.7)}
+.kz-tab{margin-top:14px;border-top:1px solid var(--ink-10);padding-top:10px}
+.kz-tab summary{cursor:pointer;font-size:12.5px;font-weight:700;color:var(--bronze)}
+.kz-tab-rol{max-height:320px;overflow:auto;margin-top:10px}
+.kz-tab table{width:100%;border-collapse:collapse;font-size:12px}
+.kz-tab th,.kz-tab td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--ink-10)}
+.kz-tab td:not(:first-child),.kz-tab th:not(:first-child){text-align:right;font-variant-numeric:tabular-nums}
+.kz-tab thead th{position:sticky;top:0;background:#fff;font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-60)}
+
+@media (max-width:900px){.kz-rij{grid-template-columns:minmax(0,1fr);gap:22px}}
 </style>
 <div class="wrap">
 
@@ -1744,6 +1834,71 @@ strong{font-weight:700}
   </div>
 </section>
 
+<section>
+  <div class="shead"><span class="snum">KORTINGEN</span><h2 class="duo">Vijf keer geld op &eacute;&eacute;n scherm,<span class="b">en het sterkste getal staat onderaan.</span></h2></div>
+  <p class="sintro">Hetzelfde koopvak, drie keer. Links wat er nu staat. In het midden hetzelfde product opgeschoond. Rechts een product met een h&oacute;ge korting, want &eacute;&eacute;n sjabloon moet allebei aankunnen &mdash; en die twee vragen precies het tegenovergestelde. De genummerde bolletjes tellen de geldsignalen; ze zijn niet onderdeel van het ontwerp.</p>
+
+  <div class="kz">
+    <div class="kz-rij">
+    <div><span class="kz-lab nu">Nu &middot; Barber Pack 3.0</span><div class="kz-vak"><span class="kz-pil kz-tel" data-n="1"><b class="a">Barber Pack 3.0</b><b class="z">Bespaar 7%</b></span>
+<p class="kz-h1">Barber Pack 3.0</p>
+<p class="kz-sub">De All-in barber set</p>
+<div class="kz-prijs"><span class="kz-nu">&euro;124,95</span><span class="kz-was">&euro;134,95</span>
+  <span class="kz-off kz-tel" data-n="2">&minus;7%</span></div>
+<span class="kz-besp kz-tel" data-n="3">Je bespaart &euro;10,00</span>
+<div class="kz-sale kz-tel" data-n="4"><i></i><span><b>Summer Sale</b>: profiteer tot <b>40% korting</b> op je bestelling.</span></div>
+<div class="kz-cad kz-tel" data-n="5"><b>&euro;&nbsp;57,85 aan extra&rsquo;s cadeau</b><span>Gratis bij de Barber Pack 3.0</span><ul><li>Luxe washbag<s>&euro;19,95</s></li><li>Neustrimmer Ultra<s>&euro;32,95</s></li><li>Verzending<s>&euro;4,95</s></li></ul></div>
+<div class="kz-cta">In winkelwagen &mdash; &euro;&nbsp;124,95</div></div><p class="kz-uit"><b>Drie labels zeggen hetzelfde.</b> De gouden pil, de rode badge en het spaarkader dragen alle drie hetzelfde getal: 7%, oftewel tien euro. De Summer Sale-balk belooft daarn&aacute;ast tot 40% &mdash; vijf keer zoveel als je hier krijgt. En het cadeaublok, met afstand het grootste bedrag op dit scherm, staat onderaan.</p><p class="kz-score "><u>5 geldsignalen, waarvan 1 die de andere ondermijnt</u></p></div>
+    <div><span class="kz-lab ">Voorstel &middot; lage korting</span><div class="kz-vak"><span class="kz-pil"><b class="a">Barber Pack 3.0</b><b class="z">Meest gekozen</b></span>
+<p class="kz-h1">Barber Pack 3.0</p>
+<p class="kz-sub">De All-in barber set</p>
+<div class="kz-prijs"><span class="kz-nu">&euro;124,95</span>
+  <span class="kz-was kz-tel ok" data-n="1">&euro;134,95</span></div>
+<div class="kz-cad kz-tel ok" data-n="2"><b>&euro;&nbsp;57,85 aan extra&rsquo;s cadeau</b><span>Gratis bij de Barber Pack 3.0</span><ul><li>Luxe washbag<s>&euro;19,95</s></li><li>Neustrimmer Ultra<s>&euro;32,95</s></li><li>Verzending<s>&euro;4,95</s></li></ul></div>
+<div class="kz-cta">In winkelwagen &mdash; &euro;&nbsp;124,95</div></div><p class="kz-uit"><b>De korting doet een stap terug.</b> De doorgestreepte van-prijs blijft &mdash; die verwacht iedereen &mdash; maar zonder badge en zonder kader. De pil zegt wat dit &iacute;s in plaats van het getal te herhalen. De Summer Sale-balk valt weg omdat hij hier een beter aanbod adverteert dat je op dit product niet krijgt. Wat overblijft is &euro;&nbsp;57,85 aan cadeaus, en dat is het echte argument.</p><p class="kz-score ok"><u>2 geldsignalen, allebei waar en allebei in jouw voordeel</u></p></div>
+    <div><span class="kz-lab ">Voorstel &middot; hoge korting</span><div class="kz-vak"><span class="kz-pil"><b class="a">Men Shaper Gold&trade;</b><b class="z">Bestseller</b></span>
+<p class="kz-h1">Men Shaper Gold&trade; 5-in-1</p>
+<p class="kz-sub">Trimmen, scheren en stylen</p>
+<div class="kz-prijs"><span class="kz-nu">&euro;36,95</span>
+  <span class="kz-was kz-tel ok" data-n="1">&euro;79,92</span>
+  <span class="kz-off kz-tel ok" data-n="2">&minus;54%</span></div>
+<div class="kz-sale"><i></i><span><b>Summer Sale</b>: profiteer tot <b>40% korting</b> op je bestelling.</span></div>
+<div class="kz-cta">In winkelwagen &mdash; &euro;&nbsp;36,95</div></div><p class="kz-uit"><b>Hier mag de korting juist voorop.</b> 54% is het sterkste dat dit product te bieden heeft, dus de badge blijft en de Summer Sale-balk klopt: 40% is hier geen loze belofte maar een onderschatting. Geen cadeaublok, want &euro;&nbsp;36,95 haalt de drempel niet. <b>Dezelfde regel, tegengestelde uitkomst</b> &mdash; dat is waarom dit een drempel moet zijn en geen knopje per product.</p><p class="kz-score ok"><u>2 geldsignalen, allebei waar</u></p></div>
+    </div>
+  </div>
+
+  <div class="kz kz-kaart">
+    <h4>Waarom de balk bij dit product liegt</h4>
+    <p class="k">Elk bolletje is &eacute;&eacute;n product met een van-prijs. De Barber Pack 3.0 ligt niet ergens onderin &mdash; hij is de <strong>laagste van alle drie&euml;nvijftig</strong>. De gouden lijn is wat de balk erboven belooft.</p>
+    <svg viewBox="0 0 760 190" class="kz-svg" role="img" data-punten='[{"x": 129.1, "y": 146, "n": "Barber Pack 3.0", "d": "7% korting", "p": "€ 124.95 van € 134.95"}, {"x": 131.4, "y": 146, "n": "Blade Guard Black", "d": "8% korting", "p": "€ 19.95 van € 21.58"}, {"x": 131.4, "y": 136, "n": "Blade Guard Gold", "d": "8% korting", "p": "€ 19.95 van € 21.58"}, {"x": 136.0, "y": 126, "n": "Barber Pack 2.0", "d": "8% korting", "p": "€ 114.95 van € 124.95"}, {"x": 139.4, "y": 116, "n": "Barber Bro 3.0", "d": "8% korting", "p": "€ 109.95 van € 119.95"}, {"x": 148.7, "y": 146, "n": "Barber Pack 1.0", "d": "9% korting", "p": "€ 99.95 van € 109.95"}, {"x": 148.7, "y": 136, "n": "Barber Bro 2.0", "d": "9% korting", "p": "€ 99.95 van € 109.95"}, {"x": 148.7, "y": 126, "n": "Neustrimmer 3in1 Platinum™", "d": "9% korting", "p": "€ 29.95 van € 32.95"}, {"x": 159.0, "y": 146, "n": "Barber Bro 1.0", "d": "10% korting", "p": "€ 89.95 van € 99.95"}, {"x": 168.2, "y": 146, "n": "Neustrimmer 4in1 Ultra™", "d": "11% korting", "p": "€ 32.95 van € 36.95"}, {"x": 187.8, "y": 146, "n": "Skull Deal 3.0", "d": "12% korting", "p": "€ 69.95 van € 79.95"}, {"x": 198.1, "y": 146, "n": "Skull Deal 2.0", "d": "13% korting", "p": "€ 64.95 van € 74.96"}, {"x": 208.5, "y": 146, "n": "Skull Deal 1.0", "d": "14% korting", "p": "€ 59.95 van € 69.95"}, {"x": 221.1, "y": 146, "n": "Head Shaver Deluxe", "d": "15% korting", "p": "€ 54.95 van € 64.95"}, {"x": 236.0, "y": 146, "n": "Neustrimmer Essential™", "d": "17% korting", "p": "€ 19.95 van € 23.95"}, {"x": 253.3, "y": 146, "n": "The Sentinel PRO", "d": "18% korting", "p": "€ 89.95 van € 109.95"}, {"x": 254.4, "y": 136, "n": "Travelbag", "d": "18% korting", "p": "€ 8.95 van € 10.95"}, {"x": 274.0, "y": 146, "n": "Neustrimmer 2in1 Elite™", "d": "20% korting", "p": "€ 23.95 van € 29.95"}, {"x": 389.0, "y": 146, "n": "The Gentlemen Shaver™ Scheerkop", "d": "30% korting", "p": "€ 19.95 van € 28.50"}, {"x": 389.0, "y": 136, "n": "The Washbag™", "d": "30% korting", "p": "€ 19.95 van € 28.50"}, {"x": 389.0, "y": 126, "n": "Body &amp; Nose Bundel", "d": "30% korting", "p": "€ 59.95 van € 85.65"}, {"x": 389.0, "y": 116, "n": "Groom Guard™ PRO", "d": "30% korting", "p": "€ 59.95 van € 85.65"}, {"x": 389.0, "y": 106, "n": "Tondeuse Deluxe™", "d": "30% korting", "p": "€ 69.95 van € 99.95"}, {"x": 397.0, "y": 146, "n": "Foil shaver Groom Guard", "d": "31% korting", "p": "€ 14.95 van € 21.58"}, {"x": 410.8, "y": 146, "n": "The Hard Case", "d": "32% korting", "p": "€ 14.95 van € 21.95"}, {"x": 412.0, "y": 136, "n": "4 Foil Blade Baron™", "d": "32% korting", "p": "€ 49.95 van € 73.50"}, {"x": 428.1, "y": 146, "n": "Vervanging Neustrimmer opzetstuk", "d": "33% korting", "p": "€ 9.95 van € 14.95"}, {"x": 446.5, "y": 146, "n": "Shave Package 3.0", "d": "35% korting", "p": "€ 64.95 van € 99.95"}, {"x": 451.1, "y": 136, "n": "Tondeuse Elegant™", "d": "35% korting", "p": "€ 59.95 van € 92.79"}, {"x": 455.7, "y": 146, "n": "Flex Guard™ 3-in-1", "d": "36% korting", "p": "€ 54.95 van € 85.65"}, {"x": 462.6, "y": 136, "n": "The Dial Master", "d": "36% korting", "p": "€ 34.95 van € 54.95"}, {"x": 469.5, "y": 146, "n": "Groom Guard™", "d": "37% korting", "p": "€ 44.95 van € 71.35"}, {"x": 469.5, "y": 136, "n": "Shave Package Ultimate™", "d": "37% korting", "p": "€ 89.95 van € 142.80"}, {"x": 483.3, "y": 146, "n": "Edge Blade", "d": "38% korting", "p": "€ 33.95 van € 54.95"}, {"x": 504.0, "y": 146, "n": "Essential Flex Bundel", "d": "40% korting", "p": "€ 79.95 van € 133.25"}, {"x": 505.1, "y": 136, "n": "Neustrimmer Ultimate™ 4-in-1", "d": "40% korting", "p": "€ 29.95 van € 50.00"}, {"x": 510.9, "y": 146, "n": "Men Shaper Iced™ 5-in-1", "d": "41% korting", "p": "€ 33.95 van € 57.15"}, {"x": 523.6, "y": 146, "n": "The Gentleman Shaver™", "d": "42% korting", "p": "€ 49.95 van € 85.65"}, {"x": 523.6, "y": 136, "n": "Detailtrimmer Sharpline™", "d": "42% korting", "p": "€ 49.95 van € 85.65"}, {"x": 533.9, "y": 146, "n": "Flex-line Bundel", "d": "43% korting", "p": "€ 89.95 van € 156.60"}, {"x": 541.9, "y": 136, "n": "Neustrimmer Basic™", "d": "43% korting", "p": "€ 16.95 van € 29.92"}, {"x": 550.0, "y": 146, "n": "Men Shaper Supreme™ 6-in-1", "d": "44% korting", "p": "€ 39.95 van € 71.35"}, {"x": 550.0, "y": 136, "n": "Neustrimmer Premium™ 2-in-1", "d": "44% korting", "p": "€ 19.95 van € 35.65"}, {"x": 555.8, "y": 126, "n": "Flex Guard™ Blade Trio (3x)", "d": "44% korting", "p": "€ 24.95 van € 44.95"}, {"x": 555.8, "y": 116, "n": "Groom Guard™ Blade Trio (3x)", "d": "44% korting", "p": "€ 24.95 van € 44.95"}, {"x": 599.4, "y": 146, "n": "Neustrimmer Advance™ 3-in-1", "d": "48% korting", "p": "€ 24.95 van € 48.25"}, {"x": 619.0, "y": 146, "n": "Scheerapparaat Elegant™ 4-in-1", "d": "50% korting", "p": "€ 39.95 van € 79.92"}, {"x": 619.0, "y": 136, "n": "Dual Groomer™ 2-in-1", "d": "50% korting", "p": "€ 39.95 van € 79.92"}, {"x": 619.0, "y": 126, "n": "Groom Guard™ Blade", "d": "50% korting", "p": "€ 14.95 van € 29.92"}, {"x": 619.0, "y": 116, "n": "Head Shaver™ 7D Scheerkop", "d": "50% korting", "p": "€ 14.95 van € 29.92"}, {"x": 619.0, "y": 106, "n": "Flex Guard™ Blade", "d": "50% korting", "p": "€ 14.95 van € 29.92"}, {"x": 662.7, "y": 146, "n": "Men Shaper Gold™ 5-in-1", "d": "54% korting", "p": "€ 36.95 van € 79.92"}, {"x": 696.1, "y": 146, "n": "CleanUp Bar", "d": "57% korting", "p": "€ 12.95 van € 29.92"}]'
+     aria-label="Spreidingsdiagram van de korting op 53 Wellshave-producten. Barber Pack 3.0 staat op 7 procent, het laagste van alle producten. De mediaan ligt op 33 procent en negentien producten zitten op 40 procent of hoger.">
+  <line x1="44" y1="156" x2="734" y2="156" stroke="rgba(17,17,17,.28)" stroke-width="1"/>
+  <g><line x1="44.0" y1="156" x2="44.0" y2="161" stroke="rgba(17,17,17,.28)" stroke-width="1"/><text x="44.0" y="174" class="kz-tick">0%</text></g><g><line x1="159.0" y1="156" x2="159.0" y2="161" stroke="rgba(17,17,17,.28)" stroke-width="1"/><text x="159.0" y="174" class="kz-tick">10%</text></g><g><line x1="274.0" y1="156" x2="274.0" y2="161" stroke="rgba(17,17,17,.28)" stroke-width="1"/><text x="274.0" y="174" class="kz-tick">20%</text></g><g><line x1="389.0" y1="156" x2="389.0" y2="161" stroke="rgba(17,17,17,.28)" stroke-width="1"/><text x="389.0" y="174" class="kz-tick">30%</text></g><g><line x1="504.0" y1="156" x2="504.0" y2="161" stroke="rgba(17,17,17,.28)" stroke-width="1"/><text x="504.0" y="174" class="kz-tick">40%</text></g><g><line x1="619.0" y1="156" x2="619.0" y2="161" stroke="rgba(17,17,17,.28)" stroke-width="1"/><text x="619.0" y="174" class="kz-tick">50%</text></g><g><line x1="734.0" y1="156" x2="734.0" y2="161" stroke="rgba(17,17,17,.28)" stroke-width="1"/><text x="734.0" y="174" class="kz-tick">60%</text></g>
+  <line x1="423.5" y1="18" x2="423.5" y2="156" stroke="rgba(17,17,17,.22)" stroke-width="1"/>
+  <text x="429.5" y="30" class="kz-ref">mediaan 33%</text>
+  <line x1="504.0" y1="18" x2="504.0" y2="156" stroke="#BC813E" stroke-width="2"/>
+  <text x="511.0" y="48" class="kz-ref kz-ref-g">&laquo;tot 40% korting&raquo;</text>
+  <circle class="kz-dot kz-dot-uit" cx="129.1" cy="146" r="5.5" fill="#C8281F" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="131.4" cy="146" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="131.4" cy="136" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="136.0" cy="126" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="139.4" cy="116" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="148.7" cy="146" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="148.7" cy="136" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="148.7" cy="126" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="159.0" cy="146" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="168.2" cy="146" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="187.8" cy="146" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="198.1" cy="146" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="208.5" cy="146" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="221.1" cy="146" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="236.0" cy="146" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="253.3" cy="146" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="254.4" cy="136" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="274.0" cy="146" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="389.0" cy="146" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="389.0" cy="136" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="389.0" cy="126" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="389.0" cy="116" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="389.0" cy="106" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="397.0" cy="146" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="410.8" cy="146" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="412.0" cy="136" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="428.1" cy="146" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="446.5" cy="146" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="451.1" cy="136" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="455.7" cy="146" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="462.6" cy="136" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="469.5" cy="146" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="469.5" cy="136" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="483.3" cy="146" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="504.0" cy="146" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="505.1" cy="136" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="510.9" cy="146" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="523.6" cy="146" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="523.6" cy="136" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="533.9" cy="146" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="541.9" cy="136" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="550.0" cy="146" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="550.0" cy="136" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="555.8" cy="126" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="555.8" cy="116" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="599.4" cy="146" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="619.0" cy="146" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="619.0" cy="136" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="619.0" cy="126" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="619.0" cy="116" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="619.0" cy="106" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="662.7" cy="146" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/><circle class="kz-dot" cx="696.1" cy="146" r="4.5" fill="rgba(17,17,17,.30)" stroke="#fff" stroke-width="2"/>
+  <circle class="kz-halo" r="10" fill="none" stroke="#C8281F" stroke-width="2" opacity="0"/>
+  <g><circle cx="50" cy="26" r="4.5" fill="#C8281F" stroke="#fff" stroke-width="2"/><text x="62" y="30" class="kz-mark">Barber Pack 3.0 &mdash; 7%, de laagste van 53</text></g>
+  <rect class="kz-vang" x="44" y="10" width="690" height="146" fill="transparent"/>
+</svg>
+<details class="kz-tab"><summary>Alle 53 producten als tabel</summary><div class="kz-tab-rol"><table><thead><tr><th>Product</th><th>Nu</th><th>Van</th><th>Korting</th><th>Bedrag</th></tr></thead><tbody><tr><td>Barber Pack 3.0</td><td>&euro;&nbsp;124.95</td><td>&euro;&nbsp;134.95</td><td>7%</td><td>&euro;&nbsp;10.00</td></tr><tr><td>Blade Guard Black</td><td>&euro;&nbsp;19.95</td><td>&euro;&nbsp;21.58</td><td>8%</td><td>&euro;&nbsp;1.63</td></tr><tr><td>Blade Guard Gold</td><td>&euro;&nbsp;19.95</td><td>&euro;&nbsp;21.58</td><td>8%</td><td>&euro;&nbsp;1.63</td></tr><tr><td>Barber Pack 2.0</td><td>&euro;&nbsp;114.95</td><td>&euro;&nbsp;124.95</td><td>8%</td><td>&euro;&nbsp;10.00</td></tr><tr><td>Barber Bro 3.0</td><td>&euro;&nbsp;109.95</td><td>&euro;&nbsp;119.95</td><td>8%</td><td>&euro;&nbsp;10.00</td></tr><tr><td>Barber Pack 1.0</td><td>&euro;&nbsp;99.95</td><td>&euro;&nbsp;109.95</td><td>9%</td><td>&euro;&nbsp;10.00</td></tr><tr><td>Barber Bro 2.0</td><td>&euro;&nbsp;99.95</td><td>&euro;&nbsp;109.95</td><td>9%</td><td>&euro;&nbsp;10.00</td></tr><tr><td>Neustrimmer 3in1 Platinum™</td><td>&euro;&nbsp;29.95</td><td>&euro;&nbsp;32.95</td><td>9%</td><td>&euro;&nbsp;3.00</td></tr><tr><td>Barber Bro 1.0</td><td>&euro;&nbsp;89.95</td><td>&euro;&nbsp;99.95</td><td>10%</td><td>&euro;&nbsp;10.00</td></tr><tr><td>Neustrimmer 4in1 Ultra™</td><td>&euro;&nbsp;32.95</td><td>&euro;&nbsp;36.95</td><td>11%</td><td>&euro;&nbsp;4.00</td></tr><tr><td>Skull Deal 3.0</td><td>&euro;&nbsp;69.95</td><td>&euro;&nbsp;79.95</td><td>12%</td><td>&euro;&nbsp;10.00</td></tr><tr><td>Skull Deal 2.0</td><td>&euro;&nbsp;64.95</td><td>&euro;&nbsp;74.96</td><td>13%</td><td>&euro;&nbsp;10.01</td></tr><tr><td>Skull Deal 1.0</td><td>&euro;&nbsp;59.95</td><td>&euro;&nbsp;69.95</td><td>14%</td><td>&euro;&nbsp;10.00</td></tr><tr><td>Head Shaver Deluxe</td><td>&euro;&nbsp;54.95</td><td>&euro;&nbsp;64.95</td><td>15%</td><td>&euro;&nbsp;10.00</td></tr><tr><td>Neustrimmer Essential™</td><td>&euro;&nbsp;19.95</td><td>&euro;&nbsp;23.95</td><td>17%</td><td>&euro;&nbsp;4.00</td></tr><tr><td>The Sentinel PRO</td><td>&euro;&nbsp;89.95</td><td>&euro;&nbsp;109.95</td><td>18%</td><td>&euro;&nbsp;20.00</td></tr><tr><td>Travelbag</td><td>&euro;&nbsp;8.95</td><td>&euro;&nbsp;10.95</td><td>18%</td><td>&euro;&nbsp;2.00</td></tr><tr><td>Neustrimmer 2in1 Elite™</td><td>&euro;&nbsp;23.95</td><td>&euro;&nbsp;29.95</td><td>20%</td><td>&euro;&nbsp;6.00</td></tr><tr><td>The Gentlemen Shaver™ Scheerkop</td><td>&euro;&nbsp;19.95</td><td>&euro;&nbsp;28.50</td><td>30%</td><td>&euro;&nbsp;8.55</td></tr><tr><td>The Washbag™</td><td>&euro;&nbsp;19.95</td><td>&euro;&nbsp;28.50</td><td>30%</td><td>&euro;&nbsp;8.55</td></tr><tr><td>Body & Nose Bundel</td><td>&euro;&nbsp;59.95</td><td>&euro;&nbsp;85.65</td><td>30%</td><td>&euro;&nbsp;25.70</td></tr><tr><td>Groom Guard™ PRO</td><td>&euro;&nbsp;59.95</td><td>&euro;&nbsp;85.65</td><td>30%</td><td>&euro;&nbsp;25.70</td></tr><tr><td>Tondeuse Deluxe™</td><td>&euro;&nbsp;69.95</td><td>&euro;&nbsp;99.95</td><td>30%</td><td>&euro;&nbsp;30.00</td></tr><tr><td>Foil shaver Groom Guard</td><td>&euro;&nbsp;14.95</td><td>&euro;&nbsp;21.58</td><td>31%</td><td>&euro;&nbsp;6.63</td></tr><tr><td>The Hard Case</td><td>&euro;&nbsp;14.95</td><td>&euro;&nbsp;21.95</td><td>32%</td><td>&euro;&nbsp;7.00</td></tr><tr><td>4 Foil Blade Baron™</td><td>&euro;&nbsp;49.95</td><td>&euro;&nbsp;73.50</td><td>32%</td><td>&euro;&nbsp;23.55</td></tr><tr><td>Vervanging Neustrimmer opzetstuk</td><td>&euro;&nbsp;9.95</td><td>&euro;&nbsp;14.95</td><td>33%</td><td>&euro;&nbsp;5.00</td></tr><tr><td>Shave Package 3.0</td><td>&euro;&nbsp;64.95</td><td>&euro;&nbsp;99.95</td><td>35%</td><td>&euro;&nbsp;35.00</td></tr><tr><td>Tondeuse Elegant™</td><td>&euro;&nbsp;59.95</td><td>&euro;&nbsp;92.79</td><td>35%</td><td>&euro;&nbsp;32.84</td></tr><tr><td>Flex Guard™ 3-in-1</td><td>&euro;&nbsp;54.95</td><td>&euro;&nbsp;85.65</td><td>36%</td><td>&euro;&nbsp;30.70</td></tr><tr><td>The Dial Master</td><td>&euro;&nbsp;34.95</td><td>&euro;&nbsp;54.95</td><td>36%</td><td>&euro;&nbsp;20.00</td></tr><tr><td>Groom Guard™</td><td>&euro;&nbsp;44.95</td><td>&euro;&nbsp;71.35</td><td>37%</td><td>&euro;&nbsp;26.40</td></tr><tr><td>Shave Package Ultimate™</td><td>&euro;&nbsp;89.95</td><td>&euro;&nbsp;142.80</td><td>37%</td><td>&euro;&nbsp;52.85</td></tr><tr><td>Edge Blade</td><td>&euro;&nbsp;33.95</td><td>&euro;&nbsp;54.95</td><td>38%</td><td>&euro;&nbsp;21.00</td></tr><tr><td>Essential Flex Bundel</td><td>&euro;&nbsp;79.95</td><td>&euro;&nbsp;133.25</td><td>40%</td><td>&euro;&nbsp;53.30</td></tr><tr><td>Neustrimmer Ultimate™ 4-in-1</td><td>&euro;&nbsp;29.95</td><td>&euro;&nbsp;50.00</td><td>40%</td><td>&euro;&nbsp;20.05</td></tr><tr><td>Men Shaper Iced™ 5-in-1</td><td>&euro;&nbsp;33.95</td><td>&euro;&nbsp;57.15</td><td>41%</td><td>&euro;&nbsp;23.20</td></tr><tr><td>The Gentleman Shaver™</td><td>&euro;&nbsp;49.95</td><td>&euro;&nbsp;85.65</td><td>42%</td><td>&euro;&nbsp;35.70</td></tr><tr><td>Detailtrimmer Sharpline™</td><td>&euro;&nbsp;49.95</td><td>&euro;&nbsp;85.65</td><td>42%</td><td>&euro;&nbsp;35.70</td></tr><tr><td>Flex-line Bundel</td><td>&euro;&nbsp;89.95</td><td>&euro;&nbsp;156.60</td><td>43%</td><td>&euro;&nbsp;66.65</td></tr><tr><td>Neustrimmer Basic™</td><td>&euro;&nbsp;16.95</td><td>&euro;&nbsp;29.92</td><td>43%</td><td>&euro;&nbsp;12.97</td></tr><tr><td>Men Shaper Supreme™ 6-in-1</td><td>&euro;&nbsp;39.95</td><td>&euro;&nbsp;71.35</td><td>44%</td><td>&euro;&nbsp;31.40</td></tr><tr><td>Neustrimmer Premium™ 2-in-1</td><td>&euro;&nbsp;19.95</td><td>&euro;&nbsp;35.65</td><td>44%</td><td>&euro;&nbsp;15.70</td></tr><tr><td>Flex Guard™ Blade Trio (3x)</td><td>&euro;&nbsp;24.95</td><td>&euro;&nbsp;44.95</td><td>44%</td><td>&euro;&nbsp;20.00</td></tr><tr><td>Groom Guard™ Blade Trio (3x)</td><td>&euro;&nbsp;24.95</td><td>&euro;&nbsp;44.95</td><td>44%</td><td>&euro;&nbsp;20.00</td></tr><tr><td>Neustrimmer Advance™ 3-in-1</td><td>&euro;&nbsp;24.95</td><td>&euro;&nbsp;48.25</td><td>48%</td><td>&euro;&nbsp;23.30</td></tr><tr><td>Scheerapparaat Elegant™ 4-in-1</td><td>&euro;&nbsp;39.95</td><td>&euro;&nbsp;79.92</td><td>50%</td><td>&euro;&nbsp;39.97</td></tr><tr><td>Dual Groomer™ 2-in-1</td><td>&euro;&nbsp;39.95</td><td>&euro;&nbsp;79.92</td><td>50%</td><td>&euro;&nbsp;39.97</td></tr><tr><td>Groom Guard™ Blade</td><td>&euro;&nbsp;14.95</td><td>&euro;&nbsp;29.92</td><td>50%</td><td>&euro;&nbsp;14.97</td></tr><tr><td>Head Shaver™ 7D Scheerkop</td><td>&euro;&nbsp;14.95</td><td>&euro;&nbsp;29.92</td><td>50%</td><td>&euro;&nbsp;14.97</td></tr><tr><td>Flex Guard™ Blade</td><td>&euro;&nbsp;14.95</td><td>&euro;&nbsp;29.92</td><td>50%</td><td>&euro;&nbsp;14.97</td></tr><tr><td>Men Shaper Gold™ 5-in-1</td><td>&euro;&nbsp;36.95</td><td>&euro;&nbsp;79.92</td><td>54%</td><td>&euro;&nbsp;42.97</td></tr><tr><td>CleanUp Bar</td><td>&euro;&nbsp;12.95</td><td>&euro;&nbsp;29.92</td><td>57%</td><td>&euro;&nbsp;16.97</td></tr></tbody></table></div></details>
+  </div>
+
+  <div class="note warn">
+    <h4>De vaste tien euro is de eigenlijke oorzaak</h4>
+    <p>Alle Barber Packs, Barber Bro&rsquo;s en Skull Deals krijgen <strong>precies &euro;&nbsp;10,00 korting</strong>, ongeacht wat ze kosten. Hoe duurder het pakket, hoe magerder het percentage: Barber Bro 1.0 haalt nog 10%, de Pack 3.0 zakt naar 7%. De losse apparaten hebben w&eacute;l echte percentages, van 30 tot 57.</p>
+    <p>Dat is geen paginaprobleem maar een prijsprobleem; de pagina maakt het alleen zichtbaar. <strong>Je duurste producten zien er nu uit als je slechtste deal.</strong> Zeventien van de drie&euml;nvijftig staan onder de 20%, en daar zitten vrijwel al je pakketten bij.</p>
+  </div>
+
+  <div class="note">
+    <h4>Wat de drempel moet doen</h4>
+    <p>E&eacute;n instelling &mdash; noem het de kortingsdrempel &mdash; bepaalt per product welke van de twee kolommen hierboven je krijgt. Onder de drempel treedt de korting terug en neemt het cadeaublok het over; erboven mag de korting voorop. Bij 25% valt de scheiding ongeveer tussen de pakketten en de losse apparaten, maar dat getal is van jou; het staat in het thema en je kunt het draaien zonder dat er code aan te pas komt.</p>
+    <p><strong>Twee dingen vallen niet onder die drempel</strong> en zou ik hoe dan ook doen: de rode badge weg (die zegt exact wat de doorgestreepte prijs al zegt) en het percentage uit de gouden pil (die hoort te zeggen w&aacute;t dit is). Dat is opschonen zonder risico, op elk product.</p>
+  </div>
+</section>
+
 <div class="foot">
   <strong>Herkomst.</strong> Componentwaarden overgenomen uit <code>audits/blok-01-hero.template.html</code> en <code>theme/sections/</code> op de tak <code>claude/homepage-analysis-redesign-u38dwu</code>. Prijs &euro;59,95 en van-prijs &euro;85,65: Shopify Admin API. 4,6 en 442 reviews: <code>loox.avg_rating</code> en <code>loox.num_reviews</code> op dit product. 200.000+ bestellingen sinds 2021: bevestigd op de homepage-tak. Productbeeld: je eigen Shopify-CDN.<br><br>
   <strong>Waarom gesplitst.</strong> Je apparaten zijn zwart; op <code>#0B0B0A</code> zijn ze niet te zien. De hero op de homepage heeft dat probleem niet omdat die een fotografisch beeld met een model gebruikt. Door de grond te splitsen krijgt het beeld de lichte kant die het nodig heeft, en houdt het aanbod het donker dat de prijs en de gouden knop dragen &mdash; zonder dat er een kleur bij verzonnen wordt.
@@ -1789,5 +1944,36 @@ strong{font-weight:700}
       });
     }, 60);
   });
+})();
+</script>
+
+<script>
+(function(){
+  var svg = document.querySelector('.kz-svg'); if(!svg) return;
+  var punten, halo = svg.querySelector('.kz-halo'), vang = svg.querySelector('.kz-vang');
+  try { punten = JSON.parse(svg.getAttribute('data-punten')); } catch(e){ return; }
+  var hint = document.createElement('div');
+  hint.className = 'kz-hint'; document.body.appendChild(hint);
+  function weg(){ hint.style.opacity = 0; halo.setAttribute('opacity', 0); }
+  vang.addEventListener('mousemove', function(e){
+    // 53 punten met een trefvlak van 24px overlappen elkaar, dus zoeken we
+    // het dichtstbijzijnde punt in svg-coordinaten in plaats van te mikken
+    var vak = svg.getBoundingClientRect();
+    var sx = (e.clientX - vak.left) / vak.width * 760;
+    var sy = (e.clientY - vak.top) / vak.height * 190;
+    var beste = null, best = 1e9;
+    for (var i = 0; i < punten.length; i++){
+      var q = punten[i], dx = q.x - sx, dy = q.y - sy, afst = dx*dx + dy*dy;
+      if (afst < best){ best = afst; beste = q; }
+    }
+    if (!beste || best > 400){ weg(); return; }
+    halo.setAttribute('cx', beste.x); halo.setAttribute('cy', beste.y);
+    halo.setAttribute('opacity', 1);
+    hint.innerHTML = '<b>' + beste.n + '</b><span>' + beste.d + ' \u00b7 ' + beste.p + '</span>';
+    hint.style.opacity = 1;
+    hint.style.left = Math.min(window.innerWidth - 250, e.clientX + 14) + 'px';
+    hint.style.top  = Math.max(8, e.clientY - 52) + 'px';
+  });
+  svg.addEventListener('mouseleave', weg);
 })();
 </script>

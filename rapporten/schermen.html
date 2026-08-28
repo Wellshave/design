@@ -761,6 +761,85 @@ footer.sch p{margin:0 0 10px;max-width:72ch}
   border:1px solid rgba(255,255,255,.10);font-size:11.5px;font-weight:600}
 .br1 .vr-c-vz s{font-weight:400;color:rgba(255,255,255,.64)}
 @container (max-width: 900px){.br1 .vr-rij{grid-template-columns:minmax(0,1fr);gap:24px}}
+.br1 .kz{--kz-cream:#F4F2EE;--kz-ink:#14120F;--kz-w60:rgba(20,18,15,.62);
+  --kz-goud2:#EFCE93;--kz-goud3:#E9BE72;--kz-goud4:#DDA548;--kz-brons:#8A5A1E;
+  --kz-rood:#C8281F;--kz-marine:#14294B;--kz-marinegoud:#D9B45C;--kz-room:#F7F3EC;
+  margin:26px 0 0}
+.br1 .kz *,.br1 .kz *::before,.br1 .kz *::after{box-sizing:border-box}
+.br1 .kz-rij{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.br1 .kz-lab{display:block;margin-bottom:9px;font-size:10px;font-weight:800;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--kz-brons)}
+.br1 .kz-lab.nu{color:var(--kz-rood)}
+.br1 .kz-vak{background:var(--kz-cream);border:1px solid var(--ink-10);border-radius:16px;padding:13px}
+.br1 .kz-tel{position:relative}
+.br1 .kz-tel::before{content:attr(data-n);position:absolute;left:-7px;top:-7px;z-index:3;
+  width:17px;height:17px;border-radius:50%;display:grid;place-items:center;
+  font-size:9.5px;font-weight:800;color:#fff;background:var(--kz-rood);
+  box-shadow:0 0 0 2px var(--kz-cream)}
+.br1 .kz-tel.ok::before{background:#0E7A55}
+.br1 .kz-pil{display:inline-flex;align-items:center;border-radius:100px;
+  background:linear-gradient(100deg,var(--kz-goud2),var(--kz-goud3) 50%,var(--kz-goud4));
+  padding:2.5px 2.5px 2.5px 0;margin-bottom:9px}
+.br1 .kz-pil b{font-size:9.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#3A2708}
+.br1 .kz-pil .a{padding:3px 10px 3px 13px}
+.br1 .kz-pil .z{padding:3px 11px;background:#fff;border-radius:100px}
+.br1 .kz-h1{font-size:20px;font-weight:600;letter-spacing:-.025em;line-height:1.08;color:var(--kz-ink);margin:0}
+.br1 .kz-sub{margin:3px 0 10px;font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--kz-ink)}
+.br1 .kz-prijs{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+.br1 .kz-nu{font-size:27px;font-weight:500;letter-spacing:-.01em;color:var(--kz-ink);line-height:1}
+.br1 .kz-was{font-size:13px;color:rgba(20,18,15,.60);text-decoration:line-through}
+.br1 .kz-off{font-size:11px;font-weight:800;color:#fff;background:var(--kz-rood);
+  border-radius:7px;padding:4px 8px}
+.br1 .kz-besp{display:inline-flex;align-items:center;gap:7px;margin-top:9px;padding:7px 11px;
+  border:1px solid rgba(221,165,72,.55);border-radius:9px;font-size:11.5px;font-weight:700;
+  color:var(--kz-brons);background:rgba(233,190,114,.10)}
+.br1 .kz-sale{display:flex;align-items:center;gap:9px;margin-top:10px;padding:8px 10px;border-radius:10px;
+  border:1px solid rgba(221,165,72,.55);
+  background:linear-gradient(180deg,rgba(233,190,114,.20),rgba(233,190,114,.10))}
+.br1 .kz-sale i{width:19px;height:19px;border-radius:50%;flex:none;
+  background:linear-gradient(140deg,var(--kz-goud3),var(--kz-goud4))}
+.br1 .kz-sale span{font-size:11px;line-height:1.3;color:var(--kz-ink)}
+.br1 .kz-cad{margin-top:10px;padding:9px 9px 8px;border-radius:11px;border:1.5px solid var(--kz-marinegoud);
+  background:linear-gradient(158deg,#1E3A69,var(--kz-marine) 46%,#101F3A);color:#fff}
+.br1 .kz-cad b{display:block;font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:-.01em;
+  line-height:1.1}
+.br1 .kz-cad > span{display:block;margin-top:2px;font-size:10px;color:rgba(255,255,255,.80)}
+.br1 .kz-cad ul{list-style:none;margin:7px 0 0;padding:6px 8px;border-radius:8px;background:var(--kz-room);
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.br1 .kz-cad li{font-size:9px;font-weight:700;color:var(--kz-marine);text-align:center;line-height:1.25}
+.br1 .kz-cad li s{display:block;font-weight:400;color:rgba(20,41,75,.68);font-size:8.5px}
+.br1 .kz-cta{margin-top:10px;display:flex;align-items:center;justify-content:center;padding:12px 10px;
+  border-radius:10px;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+  color:#3A2708;background:linear-gradient(100deg,var(--kz-goud2),var(--kz-goud3) 46%,var(--kz-goud4))}
+.br1 .kz-uit{margin:11px 0 0;font-size:13px;line-height:1.5;color:var(--ink-60)}
+.br1 .kz-uit b{color:var(--ink);font-weight:700}
+.br1 .kz-score{margin-top:7px;font-size:11px;color:var(--ink-60)}
+.br1 .kz-score u{text-decoration:none;font-weight:800;color:var(--kz-rood)}
+.br1 .kz-score.ok u{color:#0E7A55}
+.br1 .kz-kaart{margin:26px 0 0;background:#fff;border:1px solid var(--ink-10);border-radius:var(--r-m);
+  padding:20px 22px 16px}
+.br1 .kz-kaart h4{margin:0 0 3px;font-size:15px;font-weight:700;letter-spacing:-.015em;color:var(--ink)}
+.br1 .kz-kaart p.k{margin:0 0 12px;font-size:13px;line-height:1.5;color:var(--ink-60)}
+.br1 .kz-svg{display:block;width:100%;height:auto;overflow:visible}
+.br1 .kz-tick{font-size:10px;fill:rgba(17,17,17,.55);text-anchor:middle}
+.br1 .kz-ref{font-size:10.5px;fill:rgba(17,17,17,.62);font-weight:600}
+.br1 .kz-ref-g{fill:var(--kz-brons);font-weight:700}
+.br1 .kz-mark{font-size:11.5px;fill:var(--ink);font-weight:700}
+.br1 .kz-pt circle:last-child{cursor:default}
+.br1 .kz-hint{position:fixed;z-index:60;pointer-events:none;opacity:0;transition:opacity .12s ease;
+  background:#111;color:#fff;border-radius:8px;padding:7px 10px;font-size:11.5px;line-height:1.35;
+  box-shadow:0 8px 22px -12px rgba(0,0,0,.6);max-width:230px}
+.br1 .kz-hint b{display:block;font-weight:700}
+.br1 .kz-hint span{color:rgba(255,255,255,.7)}
+.br1 .kz-tab{margin-top:14px;border-top:1px solid var(--ink-10);padding-top:10px}
+.br1 .kz-tab summary{cursor:pointer;font-size:12.5px;font-weight:700;color:var(--bronze)}
+.br1 .kz-tab-rol{max-height:320px;overflow:auto;margin-top:10px}
+.br1 .kz-tab table{width:100%;border-collapse:collapse;font-size:12px}
+.br1 .kz-tab th,.br1 .kz-tab td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--ink-10)}
+.br1 .kz-tab td:not(:first-child),.br1 .kz-tab th:not(:first-child){text-align:right;font-variant-numeric:tabular-nums}
+.br1 .kz-tab thead th{position:sticky;top:0;background:#fff;font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-60)}
+@container (max-width:900px){.br1 .kz-rij{grid-template-columns:minmax(0,1fr);gap:22px}}
 .br2{
   --ink:#111111;--ink-80:rgba(17,17,17,.8);--ink-60:rgba(17,17,17,.6);
   --ink-40:rgba(17,17,17,.4);--ink-10:rgba(17,17,17,.10);

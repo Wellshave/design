@@ -1213,6 +1213,73 @@ zelf.
 `templates/product.json` en is in en/de/fr geregistreerd.
 
 
+## De kortingszone boven de vouw
+
+Op de Barber Pack 3.0 stonden **vijf losse geldsignalen** boven de vouw: de
+gouden pil «Bespaar 7%», de rode «−7%» badge, het kader «Je bespaart €10,00»,
+de Summer Sale-balk «tot 40% korting» en het cadeaublok. Drie daarvan dragen
+hetzelfde getal.
+
+**Het probleem is niet de drukte maar de tegenspraak.** Van de 53 producten
+met een van-prijs is de Barber Pack 3.0 de **laagste van allemaal** (7,4%).
+De mediaan ligt op 33%, negentien producten zitten op 40% of hoger. Op je
+duurste product zegt de pagina dus «tot 40% korting» en toont vervolgens 7%.
+
+| | |
+| --- | --- |
+| Producten met een van-prijs | 53 |
+| Mediaan | 33% |
+| Op of boven 40% | 19 |
+| Onder 20% | 17 — vrijwel al je pakketten |
+| Barber Pack 3.0 | 7,4%, plek 1 van 53 |
+
+**De oorzaak zit in de prijsstelling, niet in de pagina.** Alle Barber Packs,
+Barber Bro's en Skull Deals krijgen precies € 10,00 korting, ongeacht de
+prijs. Hoe duurder het pakket, hoe magerder het percentage: Bro 1.0 haalt 10%,
+Pack 3.0 zakt naar 7%. De losse apparaten hebben echte percentages van 30 tot
+57. De pagina maakt dat alleen zichtbaar.
+
+**En het sterkste getal staat onderaan.** Op dit product staat € 57,85 aan
+cadeaus — bijna zes keer de € 10 korting — onder vier labels die over die
+tien euro gaan.
+
+### Het voorstel: een drempel, geen knopje per product
+
+Eén sjabloon bedient 58 producten, en een product met 7% en een product met
+54% vragen het tegenovergestelde. Daarom een kortingsdrempel:
+
+* **Onder de drempel** treedt de korting terug: alleen de doorgestreepte
+  van-prijs, geen badge, geen spaarkader, geen Summer Sale-balk (die adverteert
+  daar een beter aanbod dat je op dit product niet krijgt). Het cadeaublok doet
+  het werk.
+* **Boven de drempel** mag de korting voorop: badge blijft, de balk klopt.
+
+Bij 25% valt de scheiding ongeveer tussen de pakketten en de losse apparaten.
+Dat getal hoort een thema-instelling te zijn.
+
+**Twee dingen vallen buiten de drempel** en kunnen op elk product: de rode
+badge weg (die zegt exact wat de doorgestreepte prijs al zegt) en het
+percentage uit de gouden pil (die hoort te zeggen wát dit is).
+
+### Over de grafiek in het rapport
+
+Een beeswarm van 53 punten, met de Barber Pack 3.0 in rood en de 40%-claim als
+gouden lijn. Drie dingen die het bruikbaar maken:
+
+* **Het palet is doorgerekend, niet geschat.** Rood tegen goud haalt ΔE 10,1
+  onder deuteranopie en 16,9 bij normaal zicht; beide boven de eis.
+* **Losse trefvlakken werkten niet.** Bij 53 punten overlappen trefvlakken van
+  24 px elkaar en wordt de helft onbereikbaar — de test liep vast op precies
+  dat. Er ligt nu één vanglaag die het dichtstbijzijnde punt zoekt.
+* **Het label botste.** «Barber Pack 3.0 — 7%» stond naast de stip en liep
+  dwars door de bolletjes bij 8 tot 18 procent. Het staat nu linksboven als
+  merkje. Gevonden door ernaar te kijken; de validator controleert kleur, geen
+  meetkunde.
+
+Onder de grafiek staat de volledige tabel met alle 53 producten, zodat geen
+enkel getal alleen via een tooltip bereikbaar is.
+
+
 ## Het rapport: waar staat wat er nieuw is
 
 Het dossier is veertig hoofdstukken lang. Zonder hulp moet je zoeken waar er

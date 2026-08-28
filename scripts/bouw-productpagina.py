@@ -184,6 +184,8 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
 # ---------------------------------------------------------------------------
 NIEUW_OP = u'28 augustus'
 WIJZIGINGEN = [
+ (u'28 augustus', 'boven', u'KORTINGEN',
+  u'Vijf geldsignalen boven de vouw, teruggebracht naar twee \u2014 met de spreiding erbij.'),
  (u'28 augustus', 'boven', u'MARINE',
   u'Marine met goud, op halve maat, met verloop, en eindelijk het juiste lettertype.'),
  (u'28 augustus', 'boven', u'DRIE VARIANTEN',
