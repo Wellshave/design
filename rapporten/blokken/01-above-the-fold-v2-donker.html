@@ -2016,13 +2016,43 @@ strong{font-weight:700}
 </section>
 
 <section>
+  <div class="shead"><span class="snum">STREPEN</span><h2 class="duo">De gouden bogen waren er nog,<span class="b">alleen niet meer te zien.</span></h2></div>
+  <p class="sintro">Op zwart waren ze een gloed van 16&#37; licht goud. Op zand is datzelfde recept een contrast van <strong>1,03</strong> &mdash; niets. Ze staan er nu weer, en het bleek meer te kosten dan een kleurtje.</p>
+
+  <div class="note win">
+    <h4>Drie dingen moesten om</h4>
+    <p><strong>Dieper goud.</strong> <code>#BC813E</code> op <code>.34</code> geeft <strong>1,40</strong> tegen het koopvak en <strong>1,37</strong> tegen de paginagrond. Vrijwel gelijk, en dat is precies de winst: dezelfde lijn leest hetzelfde of hij nu over het paneel of over de grond loopt. Hoger dan dit en hij gaat met de tekst concurreren &mdash; dit moet textuur zijn, geen inhoud.</p>
+    <p><strong>Een haarlijn die een haarlijn blijft.</strong> Met <code>preserveAspectRatio="none"</code> rekt de streekdikte mee met de doos; over de volle hoogte werd de lijn onderin een balk. <code>vector-effect="non-scaling-stroke"</code> houdt hem 1,2&nbsp;px, wat de doos ook doet.</p>
+    <p><strong>S-bochten, geen enkele boog.</strong> Een gewone C-curve staat na die rek onderin loodrecht en leest dan als een tabelrand. De terugslag houdt hem een sweep. Ik heb er drie geprobeerd: te ver naar links werd het een diagonale streep dwars door de tekst.</p>
+  </div>
+
+  <div class="note warn">
+    <h4>Wat het kostte: goud op goud op goud</h4>
+    <p>Een boog achter tekst verandert de grond &ouml;nder die tekst. Ik heb elk pad afgelopen in schermco&ouml;rdinaten en getoetst welke tekstkaders het raakt &mdash; met de dichte accordeons eruit, want die ziet niemand. Van alles wat de bogen raken zakten er <strong>twee</strong> door de eis, allebei op de Summer Sale-kaart:</p>
+    <table>
+      <tr><th>tekst</th><th>zonder boog</th><th>met boog</th></tr>
+      <tr><td>de gouden kop <code>#8A5A1E</code>, 13&nbsp;px</td><td>4,85</td><td><strong>3,65</strong></td></tr>
+      <tr><td>&laquo;Zolang de voorraad strekt&raquo;, 11&nbsp;px</td><td>4,57</td><td><strong>4,11</strong></td></tr>
+    </table>
+    <p>Die kaart had een <em>doorschijnende</em> gouden achtergrond, dus de boog scheen erdoorheen. Zachtere bogen repareren dat niet: zelfs op <code>.18</code> haalt die 11&nbsp;px-regel het niet, want hij had zelf maar 0,07 marge. En een vaste kleur als de gouden kop trek je met dekking sowieso niet recht.</p>
+    <p><strong>De oplossing zat dus niet in de bogen maar in de stapeling.</strong> Dezelfde twee tinten staan nu al tegen <code>#F2EEE7</code> uitgerekend (<code>#F0E4D0</code> &rarr; <code>#F1E9DB</code>) en zijn d&aacute;&aacute;rmee dekkend. Het ziet er identiek uit, maar de boog loopt er nu &aacute;chterlangs. De onderregel ging bovendien van <code>.60</code> naar <code>.64</code>: 4,57 op 11&nbsp;px is te krap om te laten staan. Slechtste geval op de hele pagina nu: <strong>4,65</strong>.</p>
+  </div>
+
+  <div class="note win">
+    <h4>Twee dingen die goed zijn om te weten</h4>
+    <p><strong>Waar de boog afbreekt, is dat de bedoeling.</strong> Bij het cadeaublok en de Summer Sale-kaart houdt de lijn op en loopt eronder verder. Die panelen zijn dekkend en de boog ligt erachter &mdash; pr&eacute;cies dat maakt het diepte in plaats van decoratie.</p>
+    <p><strong>Op de telefoon staan ze opzij.</strong> Op 390&nbsp;px is de doos smal en hoog, dus dezelfde bocht staat er bijna loodrecht en snijdt dwars door de USP-regels. Daar lopen ze nu langs de regeleinden. Ook dat is gemeten en niet geschat: bij mijn eerste poging viel het zichtbare deel terug op 110&nbsp;px en waren de bogen w&eacute;&eacute;r weg.</p>
+  </div>
+</section>
+
+<section>
   <div class="shead"><span class="snum">KOOPVAK</span><h2 class="duo">Het bedrag achter de prijs,<span class="b">en de pil zegt wat dit is.</span></h2></div>
   <p class="sintro">Van de vijf geldsignalen boven de vouw zijn er twee weg, zonder dat er informatie verdween. Dit staat live in het werkthema.</p>
 
   <div class="note win">
     <h4>Wat er is veranderd</h4>
     <p><strong>De rode &laquo;&minus;7%&raquo; badge is vervangen door het bedrag.</strong> Op precies dezelfde plek achter de prijs staat nu <em>Je bespaart &euro;&nbsp;10,00</em>. Een euro is concreter dan een procent, en het losse kader dat er eerst onder stond is daarmee vervallen &mdash; hetzelfde getal stond er twee keer.</p>
-    <p><strong>De gouden pil zegt niet meer wat je bespaart maar wat dit is:</strong> &laquo;Meest gekozen&raquo;. Dat is een vrij tekstveld, dus per product kan er ook &laquo;Bestseller&raquo; of iets anders staan. Vertaald in en, de en fr.</p>
+    <p><strong>De gouden pil zegt niet meer wat je bespaart maar wat dit is:</strong> &laquo;Bestseller&raquo;. Dat werd eerst &laquo;Meest gekozen&raquo;, tot bleek dat het label linksboven op de foto dat al zei. Dat is een vrij tekstveld, dus per product kan er ook &laquo;Bestseller&raquo; of iets anders staan. Vertaald in en, de en fr.</p>
     <p><strong>Op de telefoon zakt het label onder de prijs</strong> in plaats van ernaast, en het breekt als geheel af &mdash; nooit middenin de zin. Het percentage stond daar overigens al verborgen; die badge zag je alleen op de desktop.</p>
     <p>De aanbodbalk en het cadeaublok zijn ongemoeid gebleven, zoals afgesproken. Netto: <strong>van vijf naar drie</strong> geldsignalen, en de drie die overblijven zeggen elk iets anders.</p>
   </div>

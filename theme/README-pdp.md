@@ -1460,6 +1460,74 @@ alternatief is de prijs een derde kleiner maken, en dat is een slechtere ruil.
 hoogte. Staat er nu wel in; elke mobiele meting hierna klopt.
 
 
+## De gouden bogen terug: gratis op zwart, niet gratis op zand
+
+De bogen in het koopvak waren er nog, maar onzichtbaar. Het verloop liep over
+`#F5D18A` op `opacity:.16`: een piek van ongeveer 11% licht goud. Op zwart was
+dat een gloed, op zand is het contrast **1,03** en zie je niets.
+
+Drie dingen moesten om:
+
+1. **Dieper goud.** `#BC813E` op `.34` komt uit op **1,40** tegen het koopvak en
+   **1,37** tegen de paginagrond. Vrijwel gelijk, en dat is de winst: dezelfde
+   lijn leest hetzelfde waar hij ook overheen loopt. Hoger dan dit en het gaat
+   met de tekst concurreren; dit is textuur, geen inhoud.
+2. **`vector-effect="non-scaling-stroke"`.** Met `preserveAspectRatio="none"`
+   rekt de streekdikte mee met de doos. Over de volle hoogte werd de lijn
+   onderin een balk in plaats van een haarlijn.
+3. **S-bochten in plaats van enkele bogen.** Een gewone C-curve staat na de rek
+   over de volle hoogte onderin loodrecht en leest dan als een tabelrand. De
+   terugslag houdt hem een sweep.
+
+### Op de telefoon moesten ze opzij
+
+Op 390&nbsp;px is de doos smal en hoog, dus dezelfde bocht staat er bijna
+loodrecht en snijdt dwars door de USP-regels. Daar staan ze nu smaller en verder
+naar rechts (`right:-8%;width:56%`), zodat ze langs de regeleinden lopen in
+plaats van erdoor. Ik heb dat gemeten en niet geschat: bij `right:-26%` viel het
+zichtbare deel terug op 110&nbsp;px en waren de bogen wéér weg, precies het
+probleem dat ik aan het oplossen was.
+
+### Wat het kostte: goud op goud op goud
+
+Een boog achter tekst verandert de grond onder die tekst. Ik heb elke tekst in
+het koopvak geometrisch getoetst &mdash; elk pad afgelopen in schermco&ouml;rdinaten en
+gekeken welke tekstkaders het raakt, met de dichte accordeons eruit &mdash; en er
+zakten er twee door de eis, allebei op de Summer Sale-kaart:
+
+| tekst | zonder boog | met boog |
+| --- | --- | --- |
+| de gouden kop `#8A5A1E`, 13&nbsp;px | 4,85 | **3,65** |
+| &laquo;Zolang de voorraad strekt&raquo;, 11&nbsp;px | 4,57 | **4,11** |
+
+Die kaart had een d&oacute;&oacute;rschijnende gouden achtergrond, dus de boog scheen erdoor:
+goud op goud op goud. Zachtere bogen repareren dat niet &mdash; zelfs op `.18` haalt
+die 11&nbsp;px-regel het niet, want hij had zelf maar 0,07 marge. En de gouden kop
+is een vaste kleur; daar helpt geen dekking aan.
+
+De oplossing zit dus niet in de bogen maar in de stapeling. Dezelfde twee
+tinten staan nu al tegen `#F2EEE7` uitgerekend (`#F0E4D0` &rarr; `#F1E9DB`) en zijn
+d&aacute;&aacute;rmee dekkend. Het ziet er identiek uit, maar de boog loopt er nu
+&aacute;chterlangs. Elke tekst op die kaart heeft zijn eigen contrast terug, en de
+onderregel ging van `.60` naar `.64` omdat 4,57 op 11&nbsp;px te krap is om te laten
+staan.
+
+Na de reparatie is het slechtste geval op de hele pagina **4,65** (`.64` inkt op
+12,5&nbsp;px, met een boog erachter).
+
+### Waarom de boog bij een paneel afbreekt
+
+Bij het cadeaublok en de Summer Sale-kaart houdt de lijn op en loopt eronder
+verder. Dat is geen fout: die panelen zijn dekkend en de boog ligt erachter.
+Precies dat maakt het diepte in plaats van decoratie.
+
+### Waarom dit op zwart geen probleem was
+
+Witte tekst op zwart heeft enorme marge; een flauwe gouden lijn erachter kost
+niets. Doffe inkt op zand heeft die marge niet &mdash; tussen inkt en onzichtbaar zit
+op licht nu eenmaal minder ruimte. Hetzelfde effect, andere prijs.
+
+
 ## Nog open
 
 * **`custom.buybox_quote` is alleen op de Groom Guard PRO gevuld.** Op de andere

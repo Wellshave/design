@@ -184,6 +184,8 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
 # ---------------------------------------------------------------------------
 NIEUW_OP = u'28 augustus'
 WIJZIGINGEN = [
+ (u'28 augustus', 'boven', u'STREPEN',
+  u'De gouden bogen terug \u2014 en wat ze op zand aan contrast kostten.'),
  (u'28 augustus', 'boven', u'OFF-WHITE',
   u'Variant B is gekozen en staat live \u2014 met wat het zand aan contrast kostte.'),
  (u'28 augustus', 'boven', u'KOOPVAK',
