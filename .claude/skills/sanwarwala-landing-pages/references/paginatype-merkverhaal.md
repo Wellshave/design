@@ -55,9 +55,10 @@ hero (gecentreerd, kop met cursief accent) -> heldenbeeld 16:9 met bijschrift ->
 Eigen aan dit type, hoort niet in een advertorial of listicle:
 
 - **De persstrook.** Pillen met de titels die eerder over het merk schreven, direct onder het
-  heldenbeeld. Dit is het enige type waar dat vroeg mag: het artikel leunt op geloofwaardigheid
-  van buiten voordat het zelf iets beweert. Alleen echte vermeldingen, en alleen als je ze kunt
-  aanwijzen.
+  heldenbeeld: het artikel leunt op geloofwaardigheid van buiten voordat het zelf iets beweert.
+  De strook hoort bij het redactionele register en niet bij dit type alleen; de
+  eerlijkheidsregels eromheen staan in `references/redactioneel-register.md` en zijn strenger
+  dan je denkt.
 - **De cijferstrook.** Drie kaarten met de harde getallen van het merk, ná de punten en vóór het
   assortiment. Hij vat het verhaal samen in bewijs, precies op het moment dat de lezer zich
   afvraagt of het waar is.
@@ -91,6 +92,10 @@ het contrast tussen de twee helften, niet in de opmaak.
 
 ## De uitzondering op deel 4 van de merklaag
 
+Deze afwijking geldt inmiddels voor het hele redactionele register, waar dit type altijd in
+staat. De uitwerking staat in `references/redactioneel-register.md`; de redenering hieronder is
+de reden dat het register bestaat.
+
 **Dit type gebruikt geen Montserrat.** Het zet een serif voor koppen en een schreefloze voor
 lopende tekst, op de gepubliceerde pagina Fraunces en DM Sans.
 
@@ -100,7 +105,8 @@ reclame in jouw huisstijl. Zet je hier Montserrat neer met de gouden tweeslagsko
 hij de winkel binnen een seconde en valt precies het voordeel weg waarvoor je dit type koos.
 
 De merkkleuren blijven wél gelden: het goud, het zand, het diepe donker. Alleen de letter wijkt
-af. Voer die afwijking consequent door over de hele pagina, en gebruik hem alleen in dit type.
+af. Voer die afwijking consequent door over de hele pagina, en alleen binnen het redactionele
+register.
 
 ## Copy-regels
 

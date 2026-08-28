@@ -44,6 +44,14 @@ Propose the one the creative points at, with your reasoning, but have it confirm
 single line of copy or CSS. The type decides the spine, the skeleton, which sections exist and
 even the typeface, so getting it wrong costs the whole page rather than one section.
 
+**Ask for the register in the same breath.** Advertorials and listicles are built in one of two
+registers, and to the reader that difference is larger than the difference between the types.
+The *shop register* looks like the brand's own store; the *editorial register* looks like an
+article — masthead with the word Advertorial, serif headline, press strip, sponsor line above
+the fold, the offer only at the end. An informative ad answered by a shop-looking page breaks
+its own promise on arrival. `references/redactioneel-register.md` carries the fourteen parts,
+the honesty rules that come with borrowing a newspaper's form, and what is still untested.
+
 **This skill governs Wellshave landing pages, not `ogilvy-advertorial`.** That standalone skill
 is where the long-form advertorial method comes from, and it is recorded here as the brand-story
 type, adapted to this brand's tokens, proof rules and publishing route. Used directly it
@@ -70,9 +78,10 @@ that type, and how to set up its copy:
 
 The brand story is the recorded form of the long-form Ogilvy advertorial: the first two thirds
 sell nothing, the product only appears near the end, and the page closes to the collection
-rather than to one cart. It is the one type that deliberately breaks part 4 of the brand layer
-by setting a serif instead of Montserrat, because it must not look like the shop's own pages.
-That exception is argued in its own type file and applies nowhere else.
+rather than to one cart. It always runs in the editorial register, which deliberately breaks
+part 4 of the brand layer by setting a serif instead of Montserrat, because such a page must not
+look like the shop's own. That exception is argued in the brand-story file, holds for every page
+in that register, and holds nowhere else.
 
 Both skeletons carry the identical token block and component CSS, with placeholder content in
 square brackets. **Start from the matching skeleton, never from a blank page.** Replace what is

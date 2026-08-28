@@ -53,6 +53,15 @@ zelf ophalen, doe dat dan en laat de vraag weg; verzin nooit een antwoord.
    erbij. Maar laat het bevestigen voordat je één regel copy of CSS schrijft. Deel 2 werkt de
    toetsen uit die je bij dat voorstel gebruikt.
 
+   **Vraag er in dezelfde adem het register bij**, want dat bepaalt hoe de pagina eruitziet:
+
+   - **Winkelregister** &mdash; het oogt als de eigen winkel: huisletter, gouden koppen,
+     geruststroken, aanbod midden op de pagina.
+   - **Redactioneel register** &mdash; het oogt als een artikel: serifkop, krantenbalk met het
+     woord Advertorial, persstrook, sponsorvermelding boven de vouw, aanbod pas onderaan.
+
+   Bij een merkverhaal is die vraag al beantwoord; dat type staat altijd redactioneel.
+
 Blijft er iets onbeantwoord, benoem dan expliciet welke aanname je maakt en bouw door. Niet
 stilvallen, maar ook niet stilzwijgend invullen.
 
@@ -136,10 +145,29 @@ over de man of het merk erachter, dan is het een merkverhaal.
 dat type hoort, en hoe je de copy ervoor opzet. Hero, geruststrook, beeldband, aanbodblok,
 bewijs, FAQ en afsluiter zijn bij advertorial en listicle identiek.
 
-**Het merkverhaal is de uitzondering, en dat is bewust.** Het gebruikt een serif in plaats van
-Montserrat en heeft geen aanbodblok, omdat het juist niet als de eigen winkel mag ogen. Deel 4
-geldt daar dus niet; alle andere delen wel. De redenering staat in het typebestand zelf, en je
-past die afwijking alleen in dat type toe.
+### Daarna: in welk register
+
+Het type is niet de hele vraag. Een advertorial en een listicle kunnen in twee registers staan,
+en dat verschil is voor de lezer groter dan het verschil tussen de typen onderling.
+
+- **Winkelregister** &mdash; Montserrat, de gouden tweeslagskop, geruststroken, het aanbodblok
+  midden op de pagina. De pagina oogt als jouw winkel.
+- **Redactioneel register** &mdash; serif met cursief accent, krantenbalk met het woord
+  Advertorial, smalle kolom, persstrook, sponsorvermelding boven de vouw, het aanbod pas
+  onderaan. De pagina oogt als een artikel.
+
+**Toets 3: belooft de creative informatie of een aanbod?** Een uitleg, een inzicht, een
+interview of een verhaal vraagt om het redactionele register. Een prijs, een korting of een
+productdemonstratie vraagt om het winkelregister. Een informatieve advertentie gevolgd door een
+winkelpagina breekt de belofte binnen een seconde, en dat is precies waar de klik op stukloopt.
+
+Het redactionele register wijkt bewust af van deel 4: het gebruikt een serif in plaats van
+Montserrat, omdat de pagina juist niet als de eigen winkel mag ogen. Dat is de enige afwijking;
+kleuren, bewijsregels en publiceerroute gelden onverkort. De inrichting, de eerlijkheidsregels
+die daarbij horen en de reden achter de afwijking staan in `references/redactioneel-register.md`.
+
+**Het merkverhaal staat altijd in het redactionele register**, en heeft daarnaast geen
+aanbodblok omdat er geen hoofdproduct is.
 
 Bouw je een nieuw component voor een van de typen, zet het dan in de gedeelde CSS zodat de
 andere het ook kunnen gebruiken.
