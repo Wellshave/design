@@ -360,13 +360,13 @@
                     {{ cad.featured_image | image_url: width: 320 | image_tag: alt: '', loading: 'lazy' }}
                   {%- endif -%}
                 </span>
-                <span class="ws-cad-tx">
-                  <b class="ws-cad-nm">{{ cad_naam | default: cad_label | default: cad.title }}</b>
+                <b class="ws-cad-nm">{{ cad_naam | default: cad_label | default: cad.title }}</b>
+                <span class="ws-cad-pr">
                   {%- if cad_var.compare_at_price > 0 -%}
                     <s>{% if s.munt != blank %}{{ s.munt }}{% endif %}{% render 'price-formated', price: cad_var.compare_at_price %}</s>
                   {%- endif -%}
+                  <em class="ws-cad-nul">{{ s.cad_chip }}</em>
                 </span>
-                <em class="ws-cad-nul">{{ s.cad_chip }}</em>
               </li>
             {%- endfor -%}
           {%- endcapture -%}
@@ -390,11 +390,11 @@
                       <circle cx="11.2" cy="26.4" r="3.4"/><circle cx="34.6" cy="26.4" r="3.4"/>
                     </svg>
                   </span>
-                  <span class="ws-cad-tx">
-                    <b class="ws-cad-nm">{{ s.cad_verzend_label }}</b>
+                  <b class="ws-cad-nm">{{ s.cad_verzend_label }}</b>
+                  <span class="ws-cad-pr">
                     <s>{% if s.munt != blank %}{{ s.munt }}{% endif %}{% render 'price-formated', price: s.cad_verzend_cent %}</s>
+                    <em class="ws-cad-nul">{{ s.cad_chip }}</em>
                   </span>
-                  <em class="ws-cad-nul">{{ s.cad_chip }}</em>
                 </li>
               {%- endcapture -%}
             {%- endif -%}

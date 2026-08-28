@@ -1149,10 +1149,42 @@ te meten in de browser, niet door naar de schermafdruk te turen.
 dekking op de crèmekaart haalde 3,42:1. Uitgerekend vanaf welke dekking het
 4,5 haalt — 65% — en op 68% gezet.
 
-**Wat het kost.** Op de telefoon 482 px, tegen 289 in de vorige versie en 79
-in de kortste variant. De koopknop staat nu op 1633 px. Dat is de duurste
-versie tot nu toe, en dat is de keuze van dit ontwerp: de cadeaus zijn hier
-geen regel maar een etalage.
+### Te groot, en het lettertype klopte niet
+
+De eerste uitvoering was 383 px op de desktop en 482 op de telefoon — meer
+aandacht dan de koopknop eronder. Nu: **217 en 241**, dus op de telefoon
+precies de helft, en korter dan de 289 van de groene versie ervoor.
+
+Het meeste won ik zonder iets weg te laten: de doorgestreepte prijs en het
+plaatje «gratis» stonden onder elkaar en staan nu naast elkaar. Twee dingen
+mochten wél weg omdat ze dubbel waren — het stempel «automatisch toegevoegd»
+en de voetregel zeiden hetzelfde. De voetregel is ingekort tot «Geen code of
+selectie nodig.» en op de telefoon, waar het stempel toch op een eigen regel
+viel en vijftig pixels kostte, staat alleen de voetregel.
+
+### Het lettertype: drie lagen diep
+
+| Laag | Wat er aan de hand was |
+| --- | --- |
+| Mijn CSS | Vroeg om «Montserrat». Die naam bestaat op de pagina, maar de winkel laadt daarvan **alleen gewicht 400**. Elke 600/700/800 werd dus een door de browser opgeblazen 400, en op plekken viel hij terug op Arial. |
+| Het thema | Heeft wél een goede: `MontserratEG`, variabel 100–900, in de thema-assets en netjes als `@font-face` gedeclareerd. |
+| `base.css` | Zet `--font-family` daarna op «Montserrat», waardoor die goede font wel geladen maar nooit gebruikt wordt. Volgen van de variabele werkt dus niet. |
+
+Alle vier mijn stylesheets — koopvak, geruststrook, aanbodblok en UGC-band —
+zetten nu `'MontserratEG'` vooraan. Nagemeten in de browser: `MontserratEG
+100–900` is geladen en in gebruik. Daarna moesten mijn letterafstanden terug,
+want die waren afgestemd op de Arial-terugval.
+
+**Dit raakt de hele winkel.** Elke andere pagina draait nog op Montserrat 400
+met nep-vetjes. Eén regel in `base.css` trekt dat overal recht, maar dat raakt
+elke sjabloon en hoort dus niet bij dit blok.
+
+**Waarom ik het niet eerder zag.** Mijn proefbestanden namen alleen de
+gekoppelde stylesheets mee, niet de inline `<style>` in de head — en juist
+daar staan de `@font-face`-regels en de `:root`-variabelen. Elk proefbestand
+rende dus in Arial, en daarin ziet een nep-vet er precies zo uit als een
+echte. `proef2.py` haalt die blokken nu wél op, inclusief de fontbestanden
+zelf.
 
 **Nieuwe instellingen:** `cad_ey`, `cad_auto`, `cad_naam_1`, `cad_naam_2`.
 `cad_sub_voor` en `cad_voet` hebben nieuwe tekst. Alles staat in

@@ -13,7 +13,7 @@
   --ws-w72:rgba(20,18,15,.72);--ws-w52:rgba(20,18,15,.64);--ws-w38:rgba(20,18,15,.60);
   --ws-ink:#14120F;--ws-ink80:rgba(17,17,17,.8);--ws-ink60:rgba(17,17,17,.6);
   display:block;background:var(--ws-cream);
-  font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
+  font-family:'MontserratEG','Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
 .ws-pdp *,.ws-pdp *::before,.ws-pdp *::after{box-sizing:border-box}
 .ws-pdp img{max-width:100%}
 .ws-pdp .ws-rail{max-width:1240px;margin:0 auto}
@@ -221,100 +221,109 @@
 /* Marine met goud. Het contrast met de crèmegrond zit in de wáárde en niet
    in de tint, dus dit vlak schreeuwt zonder met het goud van de koopknop te
    vechten -- en juist daardoor mag het goud hier terugkomen als rand, als
-   bovenregel en als plaatje. Op de knop is goud een vlak; hier is het lijn. */
+   bovenregel en als plaatje. Op de knop is goud een vlak; hier is het lijn.
+
+   Alle maten zijn ongeveer gehalveerd ten opzichte van de eerste versie: die
+   was 383px op de desktop en nam meer aandacht dan de koopknop eronder. Het
+   meeste won ik door de doorgestreepte prijs en het plaatje op één regel te
+   zetten in plaats van onder elkaar; er hoefde niets weg. */
 .ws-pdp .ws-cad{--cad-marine:#14294B;--cad-marine2:#1B3560;--cad-goud:#D9B45C;
   --cad-goud2:#EFCE93;--cad-room:#F7F3EC;
-  margin-top:14px;padding:16px 16px 14px;border-radius:18px;
+  margin-top:13px;padding:11px 11px 10px;border-radius:14px;
   border:1.5px solid var(--cad-goud);background:var(--cad-marine);
-  box-shadow:0 10px 26px -18px rgba(20,41,75,.55)}
+  box-shadow:0 8px 20px -16px rgba(20,41,75,.5)}
 
 /* ---- de bovenrij: plaatje links, stempel rechts ---- */
-.ws-pdp .ws-cad-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
-.ws-pdp .ws-cad-ic{flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;
+.ws-pdp .ws-cad-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:7px}
+.ws-pdp .ws-cad-ic{flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;
   background:var(--cad-room);border:1.5px solid var(--cad-goud);color:var(--cad-marine)}
-.ws-pdp .ws-cad-ic svg{width:22px;height:22px}
-.ws-pdp .ws-cad-ey{font-size:11px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;
+.ws-pdp .ws-cad-ic svg{width:13px;height:13px}
+.ws-pdp .ws-cad-ey{font-size:9.5px;font-weight:800;letter-spacing:.10em;text-transform:uppercase;
   color:var(--cad-goud)}
-/* het stempel schuift naar rechts; op smal valt hij onder de bovenregel */
-.ws-pdp .ws-cad-auto{margin-left:auto;font-size:10px;font-weight:700;letter-spacing:.1em;
+.ws-pdp .ws-cad-auto{margin-left:auto;font-size:8.5px;font-weight:700;letter-spacing:.07em;
   text-transform:uppercase;color:var(--cad-goud);border:1px solid rgba(217,180,92,.6);
-  border-radius:100px;padding:6px 13px;white-space:nowrap}
+  border-radius:100px;padding:4px 9px;white-space:nowrap}
+/* Op de telefoon past dit stempel niet naast de bovenregel; het viel op een
+   eigen regel en kostte vijftig pixels. Het zegt bovendien hetzelfde als de
+   regel onderaan, dus daar mag het weg in plaats van dubbel te staan. */
+@media screen and (max-width:749px){.ws-pdp .ws-cad-auto{display:none}}
 
 /* ---- de kop ---- */
-.ws-pdp .ws-cad-kop{margin-bottom:13px}
-.ws-pdp .ws-cad-kop b{display:block;font-size:27px;font-weight:800;letter-spacing:-.02em;
-  line-height:1.06;text-transform:uppercase;color:#fff;text-wrap:balance}
+.ws-pdp .ws-cad-kop{margin-bottom:8px}
+.ws-pdp .ws-cad-kop b{display:block;font-size:16px;font-weight:800;letter-spacing:-.015em;
+  line-height:1.1;text-transform:uppercase;color:#fff;text-wrap:balance}
 .ws-pdp .ws-cad-kop .ws-cad-munt{display:inline;margin-right:.05em;
   font-size:inherit;font-weight:inherit;color:inherit}
-.ws-pdp .ws-cad-kop > span{display:block;margin-top:6px;font-size:13px;line-height:1.35;
+.ws-pdp .ws-cad-kop > span{display:block;margin-top:3px;font-size:11px;line-height:1.3;
   color:rgba(255,255,255,.80)}
 
 /* ---- de crèmekaart met de cadeaus ---- */
 /* Eén kaart met gouden haarlijnen ertussen, geen losse kaartjes: zo blijft
    het één cadeau dat uit drie dingen bestaat en niet drie losse aanbiedingen. */
-.ws-pdp .ws-cad-lijst{list-style:none;margin:0;padding:0;border-radius:13px;
+.ws-pdp .ws-cad-lijst{list-style:none;margin:0;padding:0;border-radius:10px;
   background:var(--cad-room);overflow:hidden;
   display:grid;grid-template-columns:repeat(var(--cad-n,3),minmax(0,1fr))}
 .ws-pdp .ws-cad-k{position:relative;display:flex;flex-direction:column;align-items:center;
-  text-align:center;gap:9px;padding:15px 12px 14px;min-width:0}
-.ws-pdp .ws-cad-k + .ws-cad-k::before{content:"";position:absolute;left:0;top:12%;bottom:12%;
+  text-align:center;gap:4px;padding:7px 8px;min-width:0}
+.ws-pdp .ws-cad-k + .ws-cad-k::before{content:"";position:absolute;left:0;top:14%;bottom:14%;
   width:1px;background:rgba(217,180,92,.55)}
 
-.ws-pdp .ws-cad-bd{width:100%;height:88px;display:grid;place-items:center;color:var(--cad-marine)}
-.ws-pdp .ws-cad-bd img{display:block;width:100%;height:88px;object-fit:contain}
-.ws-pdp .ws-cad-vz .ws-cad-bd svg{width:62px;height:auto}
+.ws-pdp .ws-cad-bd{width:100%;height:36px;display:grid;place-items:center;color:var(--cad-marine)}
+.ws-pdp .ws-cad-bd img{display:block;width:100%;height:36px;object-fit:contain}
+.ws-pdp .ws-cad-vz .ws-cad-bd svg{width:30px;height:auto}
 
-.ws-pdp .ws-cad-tx{min-width:0;display:flex;flex-direction:column;align-items:center;gap:4px}
-.ws-pdp .ws-cad-nm{font-size:14px;font-weight:700;letter-spacing:-.01em;line-height:1.25;
+.ws-pdp .ws-cad-nm{font-size:11.5px;font-weight:700;letter-spacing:-.005em;line-height:1.2;
   color:var(--cad-marine)}
-.ws-pdp .ws-cad-tx s{font-size:13px;color:rgba(20,41,75,.68);text-decoration:line-through}
+/* prijs en plaatje naast elkaar; onder elkaar kostte dat twintig pixels per kaart */
+.ws-pdp .ws-cad-pr{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap}
+.ws-pdp .ws-cad-pr s{font-size:10.5px;color:rgba(20,41,75,.68);text-decoration:line-through}
 
-/* massief marine, want op crème verdwijnt een omlijnd chipje */
-.ws-pdp .ws-cad-nul{margin-top:2px;font-style:normal;font-size:11.5px;font-weight:800;
-  letter-spacing:.07em;text-transform:uppercase;color:#fff;background:var(--cad-marine);
-  border-radius:100px;padding:7px 16px;white-space:nowrap}
+.ws-pdp .ws-cad-nul{flex:none;font-style:normal;font-size:9px;font-weight:800;
+  letter-spacing:.04em;text-transform:uppercase;color:#fff;background:var(--cad-marine);
+  border-radius:100px;padding:4px 8px;white-space:nowrap}
 
 /* ---- de geruststelling onderaan ---- */
-.ws-pdp .ws-cad-voet{display:flex;align-items:center;gap:10px;margin:12px 0 0;
-  font-size:12.5px;line-height:1.35;color:rgba(255,255,255,.78)}
+.ws-pdp .ws-cad-voet{display:flex;align-items:center;gap:7px;margin:7px 0 0;
+  font-size:10.5px;line-height:1.3;color:rgba(255,255,255,.78)}
 .ws-pdp .ws-cad-voet > span{flex:none;display:grid;place-items:center;color:var(--cad-goud)}
-.ws-pdp .ws-cad-voet svg{width:21px;height:21px}
+.ws-pdp .ws-cad-voet svg{width:14px;height:14px}
 
 /* ---- telefoon ---- */
 /* Drie kolommen van 110 pixels laten geen productnaam heel, dus daar wordt
    het een lijst: foto links, naam en prijs in het midden, plaatje rechts. */
 @media screen and (max-width:749px){
   .ws-pdp .ws-bb > .ws-cad{order:11}
-  .ws-pdp .ws-cad{padding:14px 13px 13px;border-radius:16px}
-  .ws-pdp .ws-cad-top{margin-bottom:10px;gap:10px}
-  .ws-pdp .ws-cad-ic{width:40px;height:40px}
-  .ws-pdp .ws-cad-ic svg{width:20px;height:20px}
-  /* het stempel staat naast het plaatje, de bovenregel gaat eronder */
-  .ws-pdp .ws-cad-ey{order:3;flex-basis:100%;margin-top:2px}
-  .ws-pdp .ws-cad-auto{font-size:9.5px;padding:5px 11px}
-  .ws-pdp .ws-cad-kop b{font-size:25px}
-  .ws-pdp .ws-cad-kop > span{font-size:12.5px}
+  .ws-pdp .ws-cad{padding:10px 10px 9px;border-radius:13px}
+  .ws-pdp .ws-cad-top{margin-bottom:7px;gap:8px}
+  .ws-pdp .ws-cad-ic{width:25px;height:25px}
+  .ws-pdp .ws-cad-ic svg{width:13px;height:13px}
+  .ws-pdp .ws-cad-ey{font-size:9px;letter-spacing:.09em}
+  .ws-pdp .ws-cad-auto{font-size:7.5px;padding:3px 7px;letter-spacing:.07em}
+  .ws-pdp .ws-cad-kop{margin-bottom:8px}
+  .ws-pdp .ws-cad-kop b{font-size:15px}
+  .ws-pdp .ws-cad-kop > span{font-size:10.5px}
 
   .ws-pdp .ws-cad-lijst{grid-template-columns:minmax(0,1fr)}
   .ws-pdp .ws-cad-k{flex-direction:row;align-items:center;text-align:left;
-    gap:12px;padding:11px 12px}
-  .ws-pdp .ws-cad-k + .ws-cad-k::before{left:12px;right:12px;top:0;bottom:auto;
+    gap:9px;padding:6px 9px}
+  .ws-pdp .ws-cad-k + .ws-cad-k::before{left:9px;right:9px;top:0;bottom:auto;
     width:auto;height:1px}
-  .ws-pdp .ws-cad-bd{width:62px;height:56px;flex:none}
-  .ws-pdp .ws-cad-bd img{height:56px}
-  .ws-pdp .ws-cad-vz .ws-cad-bd svg{width:52px}
-  .ws-pdp .ws-cad-tx{flex:1 1 auto;align-items:flex-start;gap:2px}
-  .ws-pdp .ws-cad-nm{font-size:13.5px}
-  .ws-pdp .ws-cad-tx s{font-size:12.5px}
-  .ws-pdp .ws-cad-nul{margin-top:0;flex:none;font-size:11px;padding:7px 14px}
-  .ws-pdp .ws-cad-voet{font-size:12px;gap:9px}
+  .ws-pdp .ws-cad-bd{width:34px;height:30px;flex:none}
+  .ws-pdp .ws-cad-bd img{height:30px}
+  .ws-pdp .ws-cad-vz .ws-cad-bd svg{width:28px}
+  .ws-pdp .ws-cad-nm{flex:1 1 auto;min-width:0;text-align:left}
+  .ws-pdp .ws-cad-pr{flex:none}
+  .ws-pdp .ws-cad-nm{font-size:11.5px}
+  .ws-pdp .ws-cad-pr s{font-size:10.5px}
+  .ws-pdp .ws-cad-nul{flex:none;font-size:9px;padding:4px 8px}
+  .ws-pdp .ws-cad-voet{font-size:10px;gap:7px;margin-top:7px}
+  .ws-pdp .ws-cad-voet svg{width:14px;height:14px}
 }
 
 @media screen and (max-width:360px){
-  .ws-pdp .ws-cad-kop b{font-size:22px}
-  .ws-pdp .ws-cad-bd{width:54px;height:50px}
-  .ws-pdp .ws-cad-bd img{height:50px}
-  .ws-pdp .ws-cad-nul{font-size:10.5px;padding:6px 11px}
+  .ws-pdp .ws-cad-kop b{font-size:15px}
+  .ws-pdp .ws-cad-bd{width:34px;height:30px}
+  .ws-pdp .ws-cad-bd img{height:30px}
 }
 
 /* betaalmethoden onder de knop */
