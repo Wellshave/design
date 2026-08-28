@@ -184,6 +184,8 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
 # ---------------------------------------------------------------------------
 NIEUW_OP = u'28 augustus'
 WIJZIGINGEN = [
+ (u'28 augustus', 'boven', u'OFF-WHITE',
+  u'Driekwart van het eerste scherm is spierwit \u2014 twee richtingen om dat warm te maken.'),
  (u'28 augustus', 'boven', u'KORTINGEN',
   u'Vijf geldsignalen boven de vouw, teruggebracht naar twee \u2014 met de spreiding erbij.'),
  (u'28 augustus', 'boven', u'MARINE',

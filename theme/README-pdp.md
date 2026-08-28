@@ -1280,6 +1280,50 @@ Onder de grafiek staat de volledige tabel met alle 53 producten, zodat geen
 enkel getal alleen via een tooltip bereikbaar is.
 
 
+## Boven de vouw is driekwart spierwit
+
+Gemeten op 1440×900: het galerijpodium beslaat **34,8%** van het eerste scherm
+en het koopvak **39,5%**, allebei op `#FFFFFF`. Samen **74,3%** puur wit. Het
+zand dat er al is (`--ws-cream: #F4F2EE`) zie je alleen in de goot ertussen.
+
+**De verhouding staat omgekeerd.** De grote vlakken zijn wit en de kleine
+binnenkaarten zijn zand (`--ws-kaart: #F6F4F0`). Daardoor heeft niets een rand
+en zweeft alles in dezelfde helderheid.
+
+| Token | Nu | A · zacht papier | B · zand |
+| --- | --- | --- | --- |
+| `--ws-cream` (grond) | `#F4F2EE` | `#F4F2EE` | `#EAE4D9` |
+| `--ws-cream2` (podium) | `#FFFFFF` | `#FAF8F4` | `#F2EEE7` |
+| `--ws-zwart` (koopvak) | `#FFFFFF` | `#FAF8F4` | `#F2EEE7` |
+| `--ws-kaart` (binnenkaart) | `#F6F4F0` | `#FFFFFF` | `#FFFFFF` |
+
+Allebei draaien ze de verhouding om: het grote vlak wordt warm, het kleine
+licht op. A laat de grond staan en raakt dus blok 02 en blok 05 niet; B zet het
+door naar echt zand en vraagt dat blok 02 meegaat, want dat staat nu op wit.
+
+### De foto's zijn hier geen bezwaar, en dat is niet vanzelfsprekend
+
+De eerste vraag bij een gekleurd podium is of er een witte rechthoek om het
+product komt. De fotoachtergronden zijn **niet gelijk** — bemonsterd:
+`#f0f0f0`, `#f2f2f0`, `#f4f4f3`, `#f6f6f6`, en de Neustrimmer 4in1 op puur
+`#ffffff`. Op het huidige witte podium zie je dus al een flauwe rand bij de
+meeste foto's.
+
+**Maar de galerij staat op `mix-blend-mode: multiply`** (regel 53 in
+`ws-pdp-koopvak.css`), en dat maakt wit doorzichtig. Nagespeeld op alle vier de
+kandidaat-gronden: het product zakt naadloos in elke tint en de zwarte
+apparaten blijven zwart. Het podium mag dus gekleurd worden zonder dat de
+fotografie opnieuw moet.
+
+Keerzijde: multiply werkt twee kanten op. Hoe dieper het podium, hoe meer de
+foto meekleurt. Daarom houdt B het podium op `#F2EEE7` en zakt alleen de grond
+naar `#EAE4D9`.
+
+Contrast van alle tekst in beide varianten nagemeten tegen zijn eigen grond;
+alles haalt 4,5:1. Op zand is de marge krapper dan op wit, dus wie hier aan de
+tinten draait moet opnieuw langs de meter.
+
+
 ## Het rapport: waar staat wat er nieuw is
 
 Het dossier is veertig hoofdstukken lang. Zonder hulp moet je zoeken waar er
