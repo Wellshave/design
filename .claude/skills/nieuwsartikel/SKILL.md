@@ -87,7 +87,9 @@ Wat elk onderdeel doet, en waar het misgaat als je het weglaat:
 - **Intro met initiaal**, twee alinea's, geen productnaam.
 - **Genoemd-in-strook.** Titels die eerder over het merk schreven, tussen twee lijnen. Alleen
   echte vermeldingen; zie de eerlijkheidsregels.
-- **Genummerde punten** met een serif-kop en 100 tot 160 woorden. Vijf tot acht punten.
+- **Genummerde punten** met een serif-kop en **50 tot 90 woorden**. Vijf tot acht punten. Alleen
+  het punt dat het mechanisme draagt mag naar 100 &agrave; 120; de rest korter dan je wilt. De kop
+  doet het eerste werk, de tekst bewijst hem, en alles daarna kost lezers.
 - **Klein kader** met een praktische vraag ("Hoe vaak vervangen?"), niet met een verkoopzin.
 - **Twee verantwoordingsbakken:** waar het stuk op gebaseerd is, en wat er tegenvalt. Deze twee
   dragen de geloofwaardigheid van het hele stuk. De tweede bak noemt echte nadelen.
@@ -128,6 +130,11 @@ Verkopen mag hier, maar altijd aangekondigd:
 
 - **Twee lezersaanbiedingen** in de tekst, als een strook tussen twee lijnen, met het label
   erboven en &eacute;&eacute;n knop. Nooit meer dan twee, en nooit voor het derde punt.
+- **De knop in zo'n strook springt naar het aanbodpaneel op dezelfde pagina** (`href="#aanbod"`),
+  nooit rechtstreeks naar de winkelwagen. Halverwege een artikel wil de lezer het aanbod
+  b&eacute;kijken, niet in een afrekenscherm belanden; dat laatste is een uitgang in plaats van
+  een stap. Alleen de kaarten in het paneel dragen een `/cart/`-link. Geef de sectie
+  `id="aanbod"` en zet `scroll-behavior:smooth` op de wikkellaag.
 - **Het aanbodpaneel onderaan** staat op een zandvlak en heeft een eigen kop, zodat zichtbaar
   is dat het artikel ophoudt en het aanbod begint.
 - **Twee pakketten**, niet drie. De ladder van drie hoort bij de andere tak.
@@ -163,6 +170,9 @@ zonder dat je iets onwaars schrijft.
 - **Feiten in plaats van bijvoeglijke naamwoorden.** "184.000 bestellingen" doet werk,
   "enorm populair" doet niets.
 - **E&eacute;n idee per punt.** Wil een punt twee dingen zeggen, dan zijn het er twee.
+- **Schrijf het punt eerst uit en haal er daarna een derde af.** Wat overblijft is bijna altijd
+  scherper: de inleidende zin, de herhaling aan het eind en het bijvoeglijk naamwoord kunnen
+  weg zonder dat er iets sneuvelt.
 - **Nederlands zonder verkooptaal** in de artikeltekst: geen uitroeptekens, geen "ontdek",
   geen "revolutionair". In de aanbiedingsstrook mag verkooptaal wel, daar hoort het.
 - **De oprichter is een vakman, geen held.**
