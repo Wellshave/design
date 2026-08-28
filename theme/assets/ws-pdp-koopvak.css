@@ -150,11 +150,15 @@
 .ws-pdp .ws-prijs .ws-nu .ws-munt{margin-right:.09em;font-weight:500}
 .ws-pdp .ws-was .ws-munt,.ws-pdp .ws-besp .ws-munt{margin-right:.18em}
 .ws-pdp .ws-prijs .ws-was{font-size:17px;color:var(--ws-w38);text-decoration:line-through;font-weight:500}
-.ws-pdp .ws-prijs .ws-off{background:var(--ws-rood);color:#fff;font-size:12px;font-weight:800;padding:5px 10px;border-radius:7px}
-.ws-pdp .ws-besp{display:inline-flex;align-items:center;gap:8px;margin-top:11px;padding:7px 14px;
+/* Het bespaarde bedrag stond in een eigen kader onder de prijs en staat nu
+   achter de prijs, op de plek van het weggehaalde percentage. Een euro is
+   concreter dan een procent, en zo staat het er nog maar een keer. Het label
+   breekt als geheel af naar de volgende regel; nooit middenin de zin. */
+.ws-pdp .ws-besp{display:inline-flex;align-items:center;gap:7px;padding:5px 11px;
+  white-space:nowrap;align-self:center;
   border:1px solid rgba(233,190,114,.5);border-radius:9px;background:transparent}
-.ws-pdp .ws-besp svg{width:14px;height:14px;color:var(--ws-tekstgoud)}
-.ws-pdp .ws-besp span{font-size:12.5px;font-weight:700;color:var(--ws-tekstgoud)}
+.ws-pdp .ws-besp svg{width:13px;height:13px;color:var(--ws-tekstgoud);flex:none}
+.ws-pdp .ws-besp span{font-size:12px;font-weight:700;color:var(--ws-tekstgoud);white-space:nowrap}
 .ws-pdp .ws-gift p,.ws-pdp .ws-vrd,.ws-pdp .ws-tel{color:var(--ws-w72)}
 
 .ws-pdp .ws-usp{list-style:none;margin:17px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
@@ -455,8 +459,8 @@
     gap:10px 12px;margin-top:16px}
   .ws-pdp .ws-prijs{margin-top:0;gap:10px}
   .ws-pdp .ws-prijs .ws-nu{font-size:34px}
-  .ws-pdp .ws-prijs .ws-off{display:none}
-  .ws-pdp .ws-besp{margin-top:0}
+  .ws-pdp .ws-besp{padding:5px 10px}
+  .ws-pdp .ws-besp span{font-size:11.5px}
 
   /* de beloftes tussen twee haarlijnen, drie stuks; meer past niet zonder
      dat de knop van het scherm valt */

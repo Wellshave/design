@@ -1280,6 +1280,30 @@ Onder de grafiek staat de volledige tabel met alle 53 producten, zodat geen
 enkel getal alleen via een tooltip bereikbaar is.
 
 
+## Van vijf geldsignalen naar drie
+
+Doorgevoerd in het werkthema:
+
+* **De rode `−X%` badge is vervangen door het bedrag.** Op dezelfde plek achter
+  de prijs staat nu «Je bespaart € 10,00». Een euro is concreter dan een
+  procent, en het losse kader dat er eerst ónder stond is vervallen — hetzelfde
+  getal stond er twee keer.
+* **De gouden pil zegt wat dit is, niet wat je bespaart.** Nieuwe instelling
+  `pil_z`, standaard «Meest gekozen», vrij tekstveld, vertaald in en/de/fr. De
+  oude `besparing_label` is vervallen.
+
+De aanbodbalk en het cadeaublok bleven ongemoeid.
+
+**Op de telefoon** zakt het label onder de prijs in plaats van ernaast, en het
+breekt als geheel af (`white-space:nowrap`) — nooit middenin de zin. Het
+percentage stond daar trouwens al op `display:none`; die badge zag je alleen
+op de desktop.
+
+**Vals alarm bij het nameten:** `.ws-bb` meldt `scrollWidth > clientWidth`.
+Dat is de decoratieve gouden streep (`.ws-strepen`, `right:-10%`) die door
+`overflow:hidden` wordt geknipt. Bestond al, geen overloop.
+
+
 ## Boven de vouw is driekwart spierwit
 
 Gemeten op 1440×900: het galerijpodium beslaat **34,8%** van het eerste scherm

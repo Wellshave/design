@@ -145,14 +145,17 @@
         </svg>
 
         {%- comment -%}
-          De pil: links de productnaam, rechts de korting. De campagne staat in
-          de aanbodbalk lager in het vak, niet hier ook nog eens.
+          De pil: links de productnaam, rechts wat dit product is. Het
+          bespaarde bedrag stond hier eerst ook, maar dat getal staat al
+          achter de prijs en in de aanbodbalk stond de campagne ook al --
+          drie plekken voor hetzelfde bedrag. De rechterhelft zegt nu wat
+          je met dit product koopt en niet wat het kost.
         {%- endcomment -%}
         {%- assign pil = s.pil_label | default: product.title -%}
-        {%- if pil != blank or korting > 0 -%}
+        {%- if pil != blank or s.pil_z != blank -%}
           <span class="ws-pil">
             {%- if pil != blank -%}<b class="ws-a">{{ pil }}</b>{%- endif -%}
-            {%- if korting > 0 -%}<b class="ws-z">{{ s.besparing_label | replace: '[korting]', korting }}</b>{%- endif -%}
+            {%- if s.pil_z != blank -%}<b class="ws-z">{{ s.pil_z }}</b>{%- endif -%}
           </span>
         {%- endif -%}
 
@@ -205,20 +208,24 @@
         {%- endif -%}
 
         <div id="ProductPrice-{{ section.id }}">
+          {%- comment -%}
+            Het bespaarde bedrag staat achter de prijs, waar eerst het
+            percentage stond. Een euro is concreter dan een procent, en op
+            deze plek hoeft het maar een keer: het losse kader eronder is
+            vervallen. Zowel op de telefoon als op de desktop dezelfde plek;
+            het percentage stond op de telefoon toch al verborgen.
+          {%- endcomment -%}
           <div class="ws-prijs">
             <span class="ws-nu">{% if s.munt != blank %}<span class="ws-munt">{{ s.munt }}</span>{% endif %}{% render 'price-formated', price: v.price %}</span>
             {%- if v.compare_at_price > v.price -%}
+              {%- assign bedrag = v.compare_at_price | minus: v.price -%}
               <span class="ws-was">{% if s.munt != blank %}<span class="ws-munt">{{ s.munt }}</span>{% endif %}{% render 'price-formated', price: v.compare_at_price %}</span>
-              <span class="ws-off">&minus;{{ korting }}%</span>
+              <span class="ws-besp">
+                <svg><use href="#ws-pdp-tag-{{ section.id }}"/></svg>
+                <span>{{ s.besparing_regel }} {% if s.munt != blank %}<span class="ws-munt">{{ s.munt }}</span>{% endif %}{% render 'price-formated', price: bedrag %}</span>
+              </span>
             {%- endif -%}
           </div>
-          {%- if v.compare_at_price > v.price -%}
-            {%- assign bedrag = v.compare_at_price | minus: v.price -%}
-            <span class="ws-besp">
-              <svg><use href="#ws-pdp-tag-{{ section.id }}"/></svg>
-              <span>{{ s.besparing_regel }} {% if s.munt != blank %}<span class="ws-munt">{{ s.munt }}</span>{% endif %}{% render 'price-formated', price: bedrag %}</span>
-            </span>
-          {%- endif -%}
         </div>
 
         {%- unless product.has_only_default_variant -%}
@@ -1228,7 +1235,7 @@
     { "type": "text", "id": "tag", "label": "Label linksboven", "default": "Meest gekozen" },
     { "type": "header", "content": "De pil en de korting" },
     { "type": "text", "id": "pil_label", "label": "Linkerhelft van de pil", "info": "Leeg laten betekent: de producttitel." },
-    { "type": "text", "id": "besparing_label", "label": "Kortingslabel — [korting] wordt het percentage", "default": "Bespaar [korting]%" },
+    { "type": "text", "id": "pil_z", "label": "Rechterhelft van de pil", "info": "Zegt wat dit product is, niet wat je bespaart. Leeg = alleen de naam.", "default": "Meest gekozen" },
     { "type": "text", "id": "besparing_regel", "label": "Regel bij het bespaarde bedrag", "default": "Je bespaart" },
     { "type": "text", "id": "munt", "label": "Valutateken voor de prijs", "info": "De winkel zet zelf geen teken voor de prijs (moneyFormat is amount_with_comma_separator). Dit zet het alleen in dit blok. Leeg = geen teken.", "default": "€" },
     { "type": "header", "content": "Trustpilot" },
