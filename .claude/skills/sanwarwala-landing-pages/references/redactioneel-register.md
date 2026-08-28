@@ -4,6 +4,11 @@ Lees dit nadat deel 2 van `wellshave-merklaag.md` je hierheen heeft gestuurd, sa
 typebestand. Het register vervangt het paginatype niet, het komt erbij: het type bepaalt de
 ruggengraat, het register bepaalt hoe die ruggengraat eruitziet en aanvoelt.
 
+**Dit register is nog steeds een gedesignde landingspagina.** Wil je een echte
+nieuwsartikeladvertentie, met de masthead van Wellshave Dossier, rubrieken, een zijkolom en
+lezersaanbiedingen, dan is dat een andere tak met een eigen skill: `nieuwsartikel`. Het
+merkverhaal en de redactionele listicle horen h&iacute;er.
+
 Startbestand: `references/startbestand-redactioneel.html` &mdash; het skelet van dit register met
 honderd blokhaken, opgezet voor een listicle of advertorial. Het merkverhaal heeft een eigen
 startbestand omdat het geen aanbodblok en geen genummerde punten kent.

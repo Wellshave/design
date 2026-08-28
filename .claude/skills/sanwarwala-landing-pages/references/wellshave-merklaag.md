@@ -53,7 +53,16 @@ zelf ophalen, doe dat dan en laat de vraag weg; verzin nooit een antwoord.
    erbij. Maar laat het bevestigen voordat je één regel copy of CSS schrijft. Deel 2 werkt de
    toetsen uit die je bij dat voorstel gebruikt.
 
-   **Vraag er in dezelfde adem het register bij**, want dat bepaalt hoe de pagina eruitziet:
+   **Vraag eerst welke tak.** Er zijn er twee, en ze delen bijna geen bouwstenen:
+
+   - **Gedesignde landingspagina** &mdash; dit bestand, de huisstijl, met hero, geruststrook en
+     aanbodblok. Skill: `design-advertorial`.
+   - **Nieuwsartikel** &mdash; een aflevering van Wellshave Dossier, met masthead, rubrieken,
+     zijkolom en het aanbod pas onderaan. Skill: `nieuwsartikel`; die heeft een eigen
+     startbestand en eigen regels, en dan stop je hier.
+
+   **Vraag daarna het register**, binnen de gedesignde tak, want dat bepaalt hoe de pagina
+   eruitziet:
 
    - **Winkelregister** &mdash; het oogt als de eigen winkel: huisletter, gouden koppen,
      geruststroken, aanbod midden op de pagina.

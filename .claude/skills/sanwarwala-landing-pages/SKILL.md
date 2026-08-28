@@ -44,6 +44,13 @@ Propose the one the creative points at, with your reasoning, but have it confirm
 single line of copy or CSS. The type decides the spine, the skeleton, which sections exist and
 even the typeface, so getting it wrong costs the whole page rather than one section.
 
+**Two branches sit above the page type.** A Wellshave page is either a *designed landing page*
+in the shop's own style (skill: `design-advertorial`, which routes into this file) or a
+*nieuwsartikel*: an issue of Wellshave Dossier with masthead, section bar, sidebar and the offer
+only at the end (skill: `nieuwsartikel`, which carries its own starter file and rules). Ask which
+branch before anything else; they share almost no building blocks, so converting afterwards costs
+the whole page. Everything below applies to the designed branch.
+
 **Ask for the register in the same breath.** Advertorials and listicles are built in one of two
 registers, and to the reader that difference is larger than the difference between the types.
 The *shop register* looks like the brand's own store; the *editorial register* looks like an

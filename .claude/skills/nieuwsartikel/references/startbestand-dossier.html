@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[kop] | Wellshave Dossier</title>
+<meta name="description" content="[samenvatting in een zin]">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+.gg-art *{box-sizing:border-box;margin:0;padding:0}
+.gg-art{--pap:#FBF9F5;--wit:#FFFFFF;--ink:#141210;--tekst:#3A3733;--grijs:#7A7469;--lijn:#E3DFD7;--lijn2:#CFC9BD;--goud:#A87C33;--goud-l:#C9A04F;--zand:#F3EFE7;--tp:#00B67A;--kol:1080px;
+ background:var(--pap);color:var(--tekst);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}
+.gg-art img{max-width:100%;height:auto;display:block}
+.gg-art a{color:inherit;text-decoration:none}
+.gg-art :focus-visible{outline:2px solid var(--goud);outline-offset:3px}
+.gg-art .in{max-width:var(--kol);margin:0 auto;padding:0 26px}
+
+/* kop van de uitgave */
+.gg-art .datumbalk{border-bottom:1px solid var(--lijn);font-size:12px;color:var(--grijs)}
+.gg-art .datumbalk .in{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-top:9px;padding-bottom:9px}
+.gg-art .dbl{display:flex;gap:10px;align-items:center}
+.gg-art .dbr{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.gg-art .titelkop{padding:22px 0 14px;text-align:center}
+.gg-art .titelkop .naam{font-family:'Source Serif 4',Georgia,serif;font-size:clamp(30px,4.6vw,46px);letter-spacing:.5px;color:var(--ink);font-weight:600;line-height:1}
+.gg-art .titelkop .naam span{color:var(--goud)}
+.gg-art .rubrieken{border-top:1px solid var(--lijn);border-bottom:2px solid var(--ink)}
+.gg-art .rubrieken .in{display:flex;gap:26px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px;font-size:11.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--tekst);font-weight:600}
+
+/* artikelkop */
+.gg-art .artkop{padding-top:26px}
+.gg-art .kicker{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--goud);font-weight:700;margin-bottom:12px}
+.gg-art .artkop h1{font-family:'Source Serif 4',Georgia,serif;font-size:clamp(26px,3.6vw,38px);line-height:1.22;color:var(--ink);font-weight:600;max-width:780px}
+.gg-art .standfirst{margin-top:14px;max-width:660px;font-size:16px;line-height:1.65;color:var(--tekst)}
+.gg-art .kopmeta{margin-top:20px;padding:16px 0;border-top:1px solid var(--lijn);border-bottom:1px solid var(--lijn);display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+.gg-art .auteur{display:flex;align-items:center;gap:12px}
+.gg-art .auteur img{width:44px;height:44px;border-radius:50%;object-fit:cover;background:var(--zand)}
+.gg-art .auteur b{display:block;font-size:14px;color:var(--ink)}
+.gg-art .auteur span{font-size:12.5px;color:var(--grijs)}
+.gg-art .tijden{font-size:12.5px;color:var(--grijs);text-align:right;line-height:1.6}
+.gg-art .deelrij{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--lijn);font-size:12.5px;color:var(--grijs)}
+.gg-art .deelrij a{width:30px;height:30px;border:1px solid var(--lijn2);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:var(--tekst)}
+.gg-art .deelrij a:hover{background:var(--zand)}
+.gg-art .deelrij svg{width:14px;height:14px;fill:currentColor}
+
+/* raster met zijkolom */
+.gg-art .raster{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:38px;padding-top:26px;padding-bottom:10px}
+.gg-art .art{min-width:0}
+.gg-art .zij{min-width:0}
+.gg-art .art figure{margin:0 0 22px}
+.gg-art .art figure img{width:100%}
+.gg-art .art figcaption{font-size:12.5px;color:var(--grijs);margin-top:8px;padding-top:7px;border-top:1px solid var(--lijn)}
+.gg-art .lead{font-size:16.5px;line-height:1.75;margin-bottom:18px}
+.gg-art .lead::first-letter{font-family:'Source Serif 4',Georgia,serif;font-size:62px;line-height:.82;float:left;padding:6px 12px 0 0;color:var(--ink);font-weight:600}
+.gg-art .art p{margin-bottom:18px}
+
+.gg-art .genoemd{margin:26px 0;border-top:1px solid var(--lijn);border-bottom:1px solid var(--lijn);padding:14px 0;text-align:center}
+.gg-art .genoemd .lbl{font-size:10.5px;letter-spacing:2.4px;text-transform:uppercase;color:var(--grijs);margin-bottom:10px}
+.gg-art .genoemd .rij{display:flex;flex-wrap:wrap;gap:12px 34px;justify-content:center;font-family:'Source Serif 4',Georgia,serif;font-size:15px;letter-spacing:1.6px;text-transform:uppercase;color:var(--ink)}
+
+.gg-art h2.sectie{font-family:'Source Serif 4',Georgia,serif;font-size:24px;line-height:1.3;color:var(--ink);font-weight:600;margin:30px 0 6px}
+.gg-art .sectie-sub{font-size:14px;color:var(--grijs);margin-bottom:20px}
+
+.gg-art .punt{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-top:1px solid var(--lijn)}
+.gg-art .punt .nr{font-family:'Source Serif 4',Georgia,serif;font-size:26px;color:var(--goud);line-height:1.1;font-weight:600}
+.gg-art .punt h3{font-family:'Source Serif 4',Georgia,serif;font-size:19px;line-height:1.3;color:var(--ink);font-weight:600;margin-bottom:7px}
+.gg-art .punt p{font-size:14.5px;line-height:1.72;margin:0}
+.gg-art .punt p+p{margin-top:10px}
+.gg-art .puntbeeld{margin:16px 0 6px}
+.gg-art .puntbeeld img{width:100%}
+.gg-art .puntbeeld figcaption{font-size:12px;color:var(--grijs);margin-top:7px}
+
+.gg-art .kadertje{background:var(--zand);border:1px solid var(--lijn);padding:15px 17px;margin:18px 0}
+.gg-art .kadertje .lbl{font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--goud);font-weight:700;margin-bottom:7px}
+.gg-art .kadertje p{font-size:13.5px;line-height:1.65;margin:0}
+
+.gg-art .banner{margin:26px 0;border-top:1px solid var(--lijn2);border-bottom:1px solid var(--lijn2);padding:14px 0;text-align:center}
+.gg-art .banner .lbl{font-size:10.5px;letter-spacing:2.4px;text-transform:uppercase;color:var(--grijs);margin-bottom:9px}
+.gg-art .banner .knop{display:inline-block;background:var(--goud);color:#fff;font-size:13px;font-weight:600;padding:9px 20px;border-radius:2px}
+.gg-art .banner .knop:hover{background:#8C6420}
+
+.gg-art .twee{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0}
+.gg-art .bak{background:var(--wit);border:1px solid var(--lijn);padding:17px 19px}
+.gg-art .bak .lbl{font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--grijs);font-weight:700;margin-bottom:9px}
+.gg-art .bak p{font-size:13.5px;line-height:1.68;margin-bottom:9px}
+.gg-art .bak ul{list-style:none;font-size:13.5px;line-height:1.6}
+.gg-art .bak li{padding-left:14px;position:relative;margin-bottom:8px}
+.gg-art .bak li::before{content:"";position:absolute;left:0;top:9px;width:5px;height:5px;background:var(--goud);border-radius:50%}
+
+.gg-art table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:12px}
+.gg-art th{text-align:left;font-size:10.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--grijs);font-weight:700;padding:0 10px 9px;border-bottom:1px solid var(--lijn2)}
+.gg-art td{padding:11px 10px;border-bottom:1px solid var(--lijn);vertical-align:top;line-height:1.5}
+.gg-art td:first-child{color:var(--ink);font-weight:600}
+.gg-art .tabelwrap{overflow-x:auto}
+.gg-art .tabelwrap table{min-width:500px}
+
+/* zijkolom */
+.gg-art .zij{align-self:start;position:sticky;top:14px}
+.gg-art .zbox{background:var(--wit);border:1px solid var(--lijn);padding:16px 17px;margin-bottom:16px}
+.gg-art .zbox .zkop{font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--grijs);font-weight:700;padding-bottom:9px;border-bottom:1px solid var(--lijn);margin-bottom:12px}
+.gg-art .zbox h4{font-size:13px;color:var(--ink);margin-bottom:4px}
+.gg-art .zbox p{font-size:13px;line-height:1.6;color:var(--tekst);margin-bottom:12px}
+.gg-art .zbox p:last-child{margin-bottom:0}
+.gg-art .cijfer{display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--lijn)}
+.gg-art .cijfer:last-child{border-bottom:none;padding-bottom:0}
+.gg-art .cijfer .bol{width:32px;height:32px;border-radius:50%;background:var(--zand);border:1px solid var(--lijn);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.gg-art .cijfer .bol svg{width:15px;height:15px;fill:var(--goud)}
+.gg-art .cijfer b{display:block;font-family:'Source Serif 4',Georgia,serif;font-size:18px;color:var(--ink)}
+.gg-art .cijfer span{font-size:12px;color:var(--grijs);line-height:1.45;display:block}
+.gg-art .zlink{display:block;font-size:13.5px;line-height:1.5;color:var(--ink);padding:10px 0;border-bottom:1px solid var(--lijn)}
+.gg-art .zlink:last-child{border-bottom:none;padding-bottom:0}
+.gg-art .zlink:hover{color:var(--goud)}
+
+/* aanbod */
+.gg-art .aanbod{background:var(--zand);border-top:1px solid var(--lijn2);margin-top:34px;padding:34px 0 30px}
+.gg-art .aanbod .in{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:34px;align-items:start}
+.gg-art .aanbod .in>*{min-width:0}
+.gg-art .aanbod h2{font-family:'Source Serif 4',Georgia,serif;font-size:24px;color:var(--ink);font-weight:600}
+.gg-art .aanbod .sub{font-size:14px;color:var(--grijs);margin:5px 0 18px}
+.gg-art .kaarten{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.gg-art .kaart{background:var(--wit);border:1px solid var(--lijn);padding:14px;display:flex;flex-direction:column}
+.gg-art .kaart img.pf{width:100%;aspect-ratio:1;object-fit:cover;background:var(--zand);margin-bottom:12px}
+.gg-art .kaart h3{font-family:'Source Serif 4',Georgia,serif;font-size:17px;color:var(--ink);font-weight:600}
+.gg-art .kaart .prijs{display:flex;align-items:baseline;gap:8px;margin:5px 0 10px}
+.gg-art .kaart .nu{font-family:'Source Serif 4',Georgia,serif;font-size:20px;color:var(--ink);font-weight:600}
+.gg-art .kaart .oud{font-size:13px;color:var(--grijs);text-decoration:line-through}
+.gg-art .kaart ul{list-style:none;font-size:13px;line-height:1.55;margin-bottom:14px}
+.gg-art .kaart li{padding-left:14px;position:relative;margin-bottom:6px;color:var(--tekst)}
+.gg-art .kaart li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;background:var(--goud);border-radius:50%}
+.gg-art .kaart .knop{display:block;text-align:center;background:var(--goud);color:#fff;font-size:13.5px;font-weight:600;padding:11px;border-radius:2px;margin-top:auto}
+.gg-art .kaart .knop:hover{background:#8C6420}
+.gg-art .waarom{background:var(--wit);border:1px solid var(--lijn);padding:18px}
+.gg-art .waarom h3{font-family:'Source Serif 4',Georgia,serif;font-size:17px;color:var(--ink);font-weight:600;margin-bottom:12px;line-height:1.3}
+.gg-art .wrij{display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--lijn)}
+.gg-art .wrij .bol{width:28px;height:28px;border-radius:50%;background:var(--zand);border:1px solid var(--lijn);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.gg-art .wrij .bol svg{width:13px;height:13px;fill:var(--goud)}
+.gg-art .wrij b{display:block;font-size:13px;color:var(--ink)}
+.gg-art .wrij span{font-size:12px;color:var(--grijs);line-height:1.45}
+.gg-art .tpbalk{display:flex;align-items:center;gap:9px;margin-top:14px;font-size:12.5px;color:var(--grijs)}
+.gg-art .tptegels{display:inline-flex;gap:2px}
+.gg-art .tptegels i{width:18px;height:18px;background:var(--tp);display:inline-flex;align-items:center;justify-content:center;color:#fff;font-style:normal;font-size:11px}
+.gg-art .tptegels i.half{background:linear-gradient(90deg,var(--tp) 50%,#dce7e2 50%)}
+
+/* reacties */
+.gg-art .reacties{padding:28px 0 6px}
+.gg-art .reacties h2{font-family:'Source Serif 4',Georgia,serif;font-size:20px;color:var(--ink);font-weight:600;margin-bottom:14px}
+.gg-art .rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.gg-art .rkaart{background:var(--wit);border:1px solid var(--lijn);padding:15px 16px}
+.gg-art .rkop{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px;font-size:13px}
+.gg-art .rkop b{color:var(--ink)}
+.gg-art .rkop .ver{color:var(--tp);font-size:12px;font-weight:600}
+.gg-art .rkaart p{font-size:13.5px;line-height:1.62;margin-bottom:9px}
+.gg-art .rkaart .over{font-size:12px;color:var(--grijs)}
+.gg-art .allelink{display:inline-block;margin-top:16px;font-size:13.5px;color:var(--ink);border-bottom:1px solid var(--lijn2);padding-bottom:2px}
+
+.gg-art .voetnoot{border-top:1px solid var(--lijn);margin-top:26px;padding:18px 0 40px;text-align:center}
+.gg-art .voetnoot p{font-size:12px;line-height:1.7;color:var(--grijs);max-width:720px;margin:0 auto}
+
+@media(max-width:980px){
+ .gg-art .raster{grid-template-columns:1fr;gap:26px}
+ .gg-art .zij{position:static}
+ .gg-art .aanbod .in{grid-template-columns:1fr}
+ .gg-art .rgrid{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+ .gg-art .in{padding:0 18px}
+ .gg-art .twee{grid-template-columns:1fr}
+ .gg-art .kaarten{grid-template-columns:1fr}
+ .gg-art .kopmeta{flex-direction:column;align-items:flex-start}
+ .gg-art .tijden{text-align:left}
+ .gg-art .dbr{display:none}
+}
+
+</style>
+</head>
+<body>
+<div class="gg-art">
+
+<div class="datumbalk"><div class="in">
+<span class="dbl">[dag] [datum]</span>
+<span class="dbr"><a href="[url]">Over Wellshave</a><a href="[url]">Klantenservice</a><a href="[url]">Alle producten</a></span>
+</div></div>
+
+<div class="titelkop"><div class="naam">WELLSHAVE <span>DOSSIER</span></div></div>
+
+<nav class="rubrieken"><div class="in">
+<span>[rubriek 1]</span><span>[rubriek 2]</span><span>[rubriek 3]</span><span>[rubriek 4]</span>
+</div></nav>
+
+<div class="in artkop">
+<div class="kicker">Advertorial &middot; in samenwerking met Wellshave</div>
+<h1>[kop: het onderwerp, niet het merk]</h1>
+<p class="standfirst">[twee tot drie zinnen die de belofte uit de advertentie beantwoorden, eventueel met een citaat]</p>
+
+<div class="kopmeta">
+<div class="auteur">
+<img src="[cdn-url portret van de ge&iuml;nterviewde, 200x200]" alt="[naam].">
+<span><b>Redactie Wellshave Dossier</b><span>In gesprek met [naam en functie]</span></span>
+</div>
+<div class="tijden">Gepubliceerd: [echte datum]<br>Leestijd: [n] minuten</div>
+</div>
+
+<div class="deelrij">
+<span>Delen</span>
+<a href="https://www.facebook.com/sharer/sharer.php?u=[url van deze pagina]" target="_blank" rel="noopener" aria-label="Delen op Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5H16.7V3.6c-.3 0-1.3-.1-2.45-.1-2.4 0-4.05 1.5-4.05 4.2v2.2H7.5V13h2.7v8h3.3z"/></svg></a>
+<a href="https://wa.me/?text=[url van deze pagina]" target="_blank" rel="noopener" aria-label="Delen via WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.35A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3.1.8.83-3-.2-.3A8 8 0 1 1 12 20zm4.4-5.9c-.25-.12-1.45-.7-1.67-.78-.22-.08-.38-.12-.55.12s-.63.78-.77.94-.28.18-.53.06a6.5 6.5 0 0 1-1.9-1.18 7.2 7.2 0 0 1-1.33-1.65c-.14-.24 0-.37.1-.49l.37-.43a1.7 1.7 0 0 0 .25-.41.45.45 0 0 0 0-.43c0-.12-.55-1.33-.76-1.82s-.4-.42-.55-.42h-.47a.9.9 0 0 0-.65.3 2.72 2.72 0 0 0-.85 2 4.73 4.73 0 0 0 1 2.5 10.8 10.8 0 0 0 4.13 3.65 13.9 13.9 0 0 0 1.38.51 3.3 3.3 0 0 0 1.52.1 2.5 2.5 0 0 0 1.63-1.15 2 2 0 0 0 .14-1.15c-.06-.1-.22-.16-.47-.28z"/></svg></a>
+<a href="mailto:?subject=[kop, url-veilig]&amp;body=[url van deze pagina]" aria-label="Delen via e-mail"><svg viewBox="0 0 24 24"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm9 7.2L4.5 7.1V17h15V7.1L12 12.2zM12 10.6l7.1-4.6H4.9l7.1 4.6z"/></svg></a>
+</div>
+</div>
+
+<div class="in raster">
+
+<article class="art">
+
+<figure>
+<img src="[cdn-url heldenbeeld, liggend]" alt="[wat je ziet].">
+<figcaption>[bijschrift dat een feit toevoegt] &nbsp;|&nbsp; Foto: Wellshave</figcaption>
+</figure>
+
+<p class="lead">[openingsalinea: begin bij een mens of een moment, geen productnaam]</p>
+
+<p>[tweede alinea: wat de lezer hierna krijgt]</p>
+
+<div class="genoemd">
+<div class="lbl">Genoemd in</div>
+<div class="rij"><span>[titel 1]</span><span>[titel 2]</span><span>[titel 3]</span><span>[titel 4]</span></div>
+</div>
+
+<h2 class="sectie">[sectiekop, bijvoorbeeld: zeven inzichten uit 184.000 bestellingen]</h2>
+<p class="sectie-sub">[&eacute;&eacute;n regel over waar de punten vandaan komen]</p>
+
+<div class="punt">
+<div class="nr">1</div>
+<div>
+<h3>[kern van het eerste punt]</h3>
+<p>[100 tot 160 woorden, e&eacute;n idee]</p>
+</div>
+</div>
+
+<div class="punt">
+<div class="nr">2</div>
+<div>
+<h3>[kern van het tweede punt]</h3>
+<p>[100 tot 160 woorden]</p>
+</div>
+</div>
+
+<div class="punt">
+<div class="nr">3</div>
+<div>
+<h3>[het punt dat de belofte van de advertentie draagt]</h3>
+<p>[100 tot 160 woorden]</p>
+</div>
+</div>
+
+<figure class="puntbeeld">
+<img src="[cdn-url beeld tussen de punten]" alt="[wat je ziet].">
+<figcaption>[bijschrift] &nbsp;|&nbsp; Foto: Wellshave</figcaption>
+</figure>
+
+<div class="kadertje">
+<div class="lbl">[praktische vraag, geen verkoopzin]</div>
+<p>[het antwoord in twee tot drie zinnen]</p>
+</div>
+
+<div class="punt">
+<div class="nr">4</div>
+<div>
+<h3>[kern van het vierde punt]</h3>
+<p>[100 tot 160 woorden]</p>
+</div>
+</div>
+
+<div class="banner">
+<div class="lbl">Lezersaanbieding &middot; [het aanbod in gewone woorden, met een prijs die klopt]</div>
+<a class="knop" href="https://wellshave.com/cart/[variant-id]:1">Bekijk de actie</a>
+</div>
+
+<div class="punt">
+<div class="nr">5</div>
+<div>
+<h3>[kern van het vijfde punt]</h3>
+<p>[100 tot 160 woorden]</p>
+</div>
+</div>
+
+<div class="twee">
+<div class="bak">
+<div class="lbl">Waar dit stuk op gebaseerd is</div>
+<p>[de bronnen: gesprek, klantvragen, aantal beoordelingen, retourredenen]</p>
+<p>[wat het niet is: geen wetenschappelijk onderzoek, en welk deel algemeen bekende kennis is]</p>
+</div>
+<div class="bak">
+<div class="lbl">Wat er tegenvalt</div>
+<ul>
+<li>[echt nadeel 1]</li>
+<li>[echt nadeel 2]</li>
+<li>[echte kostenpost]</li>
+<li>[voor wie dit product niet nodig is]</li>
+</ul>
+</div>
+</div>
+
+<h2 class="sectie">[vergelijking: dit tegenover dat]</h2>
+<p class="sectie-sub">[waar de vergelijking op gebaseerd is, inclusief dat het alternatief ergens wint]</p>
+<div class="tabelwrap">
+<table>
+<thead><tr><th>Aspect</th><th>[alternatief]</th><th>[onze methode]</th></tr></thead>
+<tbody>
+<tr><td>[aspect 1]</td><td>[hoe het alternatief het doet]</td><td>[hoe wij het doen]</td></tr>
+<tr><td>[aspect 2, waar het alternatief wint]</td><td>[het voordeel van het alternatief]</td><td>[ons eerlijke antwoord]</td></tr>
+<tr><td>[aspect 3]</td><td>[...]</td><td>[...]</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="banner">
+<div class="lbl">[tweede strook: een voorwaarde in plaats van een prijs, bijvoorbeeld 100 dagen proberen]</div>
+<a class="knop" href="[url collectie of productpagina]">Bekijk de apparaten</a>
+</div>
+
+</article>
+
+<aside class="zij">
+
+<div class="zbox">
+<div class="zkop">In het kort</div>
+<h4>Wat vind je in dit artikel?</h4>
+<p>[&eacute;&eacute;n zin]</p>
+<h4>Voor wie?</h4>
+<p>[&eacute;&eacute;n zin]</p>
+<h4>Hoofdboodschap</h4>
+<p>[&eacute;&eacute;n zin]</p>
+</div>
+
+<div class="zbox">
+<div class="zkop">Feiten &amp; cijfers</div>
+<div class="cijfer">
+<span class="bol"><svg viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8zm-9 3L5.5 7.4 12 3.8l6.5 3.6L12 11zm-7 1.3l6 3.3v6.1l-6-3.3v-6.1zm8 9.4v-6.1l6-3.3v6.1l-6 3.3z"/></svg></span>
+<span><b>[getal]</b><span>[waar het getal over gaat, met periode]</span></span>
+</div>
+<div class="cijfer">
+<span class="bol"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.2 6.6.8-4.9 4.6 1.3 6.7L12 17l-5.9 3.3 1.3-6.7L2.5 9l6.6-.8L12 2z"/></svg></span>
+<span><b>[score]</b><span>[waar de score over gaat]</span></span>
+</div>
+<div class="cijfer">
+<span class="bol"><svg viewBox="0 0 24 24"><path d="M4 3h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4V5a2 2 0 0 1 2-2z"/></svg></span>
+<span><b>[aantal]</b><span>[op welk platform]</span></span>
+</div>
+</div>
+
+
+<div class="zbox">
+<div class="zkop">Verdiep je verder</div>
+<a class="zlink" href="[url]">[titel van een pagina die echt bestaat]</a>
+<a class="zlink" href="[url]">[titel]</a>
+<a class="zlink" href="[url]">[titel]</a>
+</div>
+
+</aside>
+
+</div>
+
+<section class="aanbod"><div class="in">
+
+<div>
+<h2>Van artikel naar aanbod</h2>
+<p class="sub">[&eacute;&eacute;n regel die de overgang aankondigt]</p>
+<div class="kaarten">
+
+<div class="kaart">
+<img class="pf" src="[cdn-url productbeeld]" alt="[apparaat].">
+<h3>[naam pakket 1]</h3>
+<div class="prijs"><span class="nu">&euro;[prijs]</span><span class="oud">&euro;[was]</span></div>
+<ul>
+<li>[reden 1]</li>
+<li>[reden 2]</li>
+<li>[reden 3]</li>
+</ul>
+<a class="knop" href="https://wellshave.com/cart/[variant-id]:1">Kies dit pakket</a>
+</div>
+
+<div class="kaart">
+<img class="pf" src="[cdn-url bundelbeeld dat klopt met de inhoud]" alt="[bundel].">
+<h3>[naam pakket 2]</h3>
+<div class="prijs"><span class="nu">&euro;[prijs]</span><span class="oud">&euro;[was]</span></div>
+<ul>
+<li>Alles uit het eerste pakket</li>
+<li>[extra]</li>
+<li>[cadeau, met de normale waarde]</li>
+</ul>
+<a class="knop" href="https://wellshave.com/cart/[variant-id]:1,[variant-id]:1,[cadeau-variant-id]:1">Kies dit pakket</a>
+</div>
+
+</div>
+</div>
+
+<div class="waarom">
+<h3>Waarom duizenden mannen voor Wellshave kiezen</h3>
+<div class="wrij"><span class="bol"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10h-2a8 8 0 1 1-8-8V2zm1 5h-2v6l5 3 1-1.7-4-2.3V7z"/></svg></span><span><b>100 dagen proberen</b><span>Niet tevreden, dan krijg je je geld terug</span></span></div>
+<div class="wrij"><span class="bol"><svg viewBox="0 0 24 24"><path d="M3 6h11v9H3V6zm12 3h3.5l2.5 3v3h-6V9zM6 20a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm11 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg></span><span><b>Gratis verzending vanaf 30 euro</b><span>Voor 23:59 besteld, morgen in huis</span></span></div>
+<div class="wrij"><span class="bol"><svg viewBox="0 0 24 24"><path d="M12 2l8 3v6c0 5-3.4 9.2-8 11-4.6-1.8-8-6-8-11V5l8-3zm0 5a2 2 0 0 0-2 2v1H9v5h6v-5h-1V9a2 2 0 0 0-2-2z"/></svg></span><span><b>2 jaar garantie</b><span>Op elk apparaat uit het assortiment</span></span></div>
+<div class="wrij"><span class="bol"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.2 6.6.8-4.9 4.6 1.3 6.7L12 17l-5.9 3.3 1.3-6.7L2.5 9l6.6-.8L12 2z"/></svg></span><span><b>[score] uit 5 op Trustpilot</b><span>[waar de score over gaat, met aantal beoordelingen]</span></span></div>
+<div class="tpbalk"><span class="tptegels"><i>&#9733;</i><i>&#9733;</i><i>&#9733;</i><i>&#9733;</i><i class="half">&#9733;</i></span><span>[score] uit 5 op Trustpilot</span></div>
+</div>
+
+</div></section>
+
+<section class="in reacties">
+<h2>Wat kopers ervan zeggen</h2>
+<div class="rgrid">
+
+<div class="rkaart">
+<div class="rkop"><b>[naam]</b><span class="ver">Geverifieerde koper</span></div>
+<p>[echte review, letterlijk overgenomen]</p>
+<div class="over">Over de [apparaat]</div>
+</div>
+
+<div class="rkaart">
+<div class="rkop"><b>[naam]</b><span class="ver">Geverifieerde koper</span></div>
+<p>[echte review]</p>
+<div class="over">Over de [apparaat]</div>
+</div>
+
+<div class="rkaart">
+<div class="rkop"><b>[naam]</b><span class="ver">Geverifieerde koper</span></div>
+<p>[echte review]</p>
+<div class="over">Over de [apparaat]</div>
+</div>
+
+</div>
+<a class="allelink" href="[reviewlink]" target="_blank" rel="noopener">Bekijk alle beoordelingen ([aantal])</a>
+</section>
+
+<div class="in voetnoot">
+<p>Dit is een gesponsorde bijdrage. Wellshave Dossier is een uitgave van Wellshave&reg;; de inhoud is door het merk zelf samengesteld en betaald. [Waar de genoemde aantallen over gaan: bestellingen zijn geen personen.] [Waar de reviewscore over gaat: assortiment of apparaat.] [De titels die eerder over het merk schreven, met de zin dat dit geen aanbeveling van dit artikel is.] Genoemde prijzen en voorwaarden gelden op het moment van publiceren.</p>
+</div>
+
+</div>
+
+</body>
+</html>
