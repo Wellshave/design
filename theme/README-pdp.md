@@ -1386,6 +1386,80 @@ Nagemeten op drie doelen verspreid door het document: alle drie landen op
 inhoudsopgave, niet alleen de nieuwe knop.
 
 
+## Variant B staat live: het zand doorgetrokken
+
+Van de drie varianten uit het rapport is **B** gekozen. Dat betekende vier
+bestanden en niet twee, want een grond veranderen raakt alles wat erop ligt.
+
+| bestand | wat er veranderde |
+| --- | --- |
+| `assets/ws-pdp-koopvak.css` | `--ws-cream` naar `#EAE4D9`, `--ws-cream2` en `--ws-zwart` naar `#F2EEE7`, de lijnen naar `.14`/`.22`, de reviewkaart naar `--ws-kaart` |
+| `assets/ws-pdp-belofte.css` | de icoontegel van `#F4F2EE` naar wit, de rand van `.07` naar `.09` |
+| `assets/ws-pdp-ugc.css` | alleen het groen, zie hieronder |
+| `templates/product.json` | `belofte.grond` naar `#EAE4D9`, `pil_z` naar &laquo;Bestseller&raquo; |
+
+`--ws-zwart` heet nog steeds naar de donkere versie, maar is nu gewoon de kleur
+van het koopvak. Hernoemen zou elke regel in het bestand raken; de naam is de
+prijs die de geschiedenis vraagt.
+
+### Blok 02 krijgt dezelfde grond, met opzet
+
+De geruststrook staat direct onder het koopvak. Als die een andere tint zand
+krijgt, ontstaat er een naad op een plek waar de bezoeker geen grens verwacht:
+hij leest de twee als &eacute;&eacute;n band. Daarom `#EAE4D9`, precies de grond van de
+vouw erboven, en tilt de icoontegel zichzelf op met wit in plaats van met een
+inktwas. Een was van `rgba(20,18,15,.035)` **zakt** op zand; op zwart tilde
+diezelfde was juist op. Hetzelfde recept, omgekeerd resultaat.
+
+### De reviewkaart moest omgekeerd worden
+
+Om die reden ook: de kaart had een inktwas als achtergrond. Op de donkere
+versie lichtte die op, op zand zakt hij weg en gaat de kaart eruitzien als een
+gat. Nu staat er `--ws-kaart` (wit) in, en tilt hij.
+
+### Het groen zakte door de eis heen
+
+De tekstkleuren waren al eerder dieper gezet en halen op zand allemaal 4,5:1 &mdash;
+de dofste trede (`.60` inkt) komt uit op 4,66 in het koopvak en 4,51 op de
+paginagrond. Dat was het risico dat ik vooraf had opgeschreven en het viel mee.
+
+Wat er w&eacute;l doorheen zakte was `--ws-groen`, de vierkante tegel achter de
+sterren. Dat is geen tekst, dus de eis is 3:1 en niet 4,5:1 &mdash; maar op wit
+haalde `#00A06C` nog 3,36 en op zand nog maar **2,66**. Verlaagd naar
+`#008859`: 3,56 op de krapste grond, met genoeg ruimte om ook stand te houden
+als het zand ooit een tint dieper gaat.
+
+Dat groen zit ook in blok 03 (`--u-groen`, het vinkje in de UGC-band). Daar was
+het niet stuk, want die band staat op `#F4F2EE` en wit. Toch meeveranderd: twee
+blokken onder elkaar met twee verschillende groenen is slordig, en de UGC-band
+gaat er alleen op vooruit (3,36 naar 4,50).
+
+### Twee labels zeiden hetzelfde
+
+Toen `pil_z` op &laquo;Meest gekozen&raquo; ging, stond die claim ineens twee keer in
+dezelfde vouw: linksboven op de foto (`tag`, die stond er al) en in de gouden
+pil ernaast. Twee instellingen, geen van beide fout, samen een dubbeling.
+
+De pil staat nu op &laquo;Bestseller&raquo; &mdash; het tweede woord uit de opdracht &mdash; en het
+fotolabel blijft wat het was. De `info` bij `pil_z` waarschuwt nu voor de
+botsing, zodat de volgende die dit veld invult het weet. Vertalingen opnieuw
+geregistreerd: en/de `Bestseller`, fr `Meilleure vente`.
+
+### Op de telefoon past het bespaarlabel niet naast de prijs
+
+Op desktop staat &laquo;Je bespaart &euro;&nbsp;10,00&raquo; naast de prijs, zoals gevraagd. Op
+390&nbsp;px is er 358&nbsp;px ruimte en vraagt de rij er ongeveer 430: de prijs op
+38&nbsp;px is alleen al zo'n 175. Het label valt daarom op de regel direct
+eronder. Dat is de bedoeling van de `flex-wrap` en niet een fout &mdash; het
+alternatief is de prijs een derde kleiner maken, en dat is een slechtere ruil.
+
+### Het proefbestand miste een viewport-meta
+
+`scratchpad/proef2.py` schreef geen `<meta name="viewport">`. Een proef op
+390&nbsp;px rekende daardoor met een bureaubladbreedte en meldde ooit 2121&nbsp;px
+hoogte. Staat er nu wel in; elke mobiele meting hierna klopt.
+
+
 ## Nog open
 
 * **`custom.buybox_quote` is alleen op de Groom Guard PRO gevuld.** Op de andere

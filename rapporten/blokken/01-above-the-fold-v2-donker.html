@@ -934,6 +934,8 @@ strong{font-weight:700}
   margin-bottom:9px}
 .of-lab{font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--of-brons)}
 .of-lab.nu{color:var(--of-rood)}
+.of-lab.live{color:var(--of-groen-ok,#00704A)}
+.of-live{display:inline-block;padding:3px 9px;border-radius:100px;background:#008859;color:#fff;font-size:9.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
 .of-tok{font-size:11px;color:var(--ink-60);font-variant-numeric:tabular-nums}
 .of-tok b{color:var(--ink);font-weight:700}
 
@@ -2101,7 +2103,7 @@ strong{font-weight:700}
       <div>Wat zit er in de doos<span>+</span></div></div>
   </div>
 </div><div class="of-staal"><div style="background:#F4F2EE"><b>grond</b><span>#F4F2EE</span></div><div style="background:#FAF8F4"><b>podium</b><span>#FAF8F4</span></div><div style="background:#FAF8F4"><b>koopvak</b><span>#FAF8F4</span></div><div style="background:#FFFFFF"><b>kaart</b><span>#FFFFFF</span></div></div><p class="of-uit"><b>Podium en koopvak worden off-white, de binnenkaarten wit.</b> De omkering van nu: het grote vlak wordt warm, het kleine licht op. De grond blijft <code>#F4F2EE</code>, dus blok 02 en blok 05 hoeven niet mee. E&eacute;n stap, laag risico &mdash; en het nachtblauw krijgt eindelijk een warme grond onder zich in plaats van wit tegen wit.</p></div>
-  <div class="of-blok"><div class="of-kop"><span class="of-lab ">Variant B &middot; Zand</span><span class="of-tok">4 tokens om</span></div><div class="of-scherm" style="--of-grond:#EAE4D9;--of-podium:#F2EEE7;--of-vak:#F2EEE7;--of-kaart:#FFFFFF;--of-lijn:rgba(20,18,15,.14);--of-ink:#14120F;--of-w60:rgba(20,18,15,.60);--of-brons:#8A5A1E;--of-groen:#00A06C;--of-pilz:#FFFFFF;--of-cta2bg:#14120F;--of-cta2tx:#FFFFFF;--of-cta2rand:transparent">
+  <div class="of-blok"><div class="of-kop"><span class="of-lab live">Variant B &middot; Zand</span><span class="of-tok"><b class="of-live">gekozen &middot; staat live</b></span></div><div class="of-scherm" style="--of-grond:#EAE4D9;--of-podium:#F2EEE7;--of-vak:#F2EEE7;--of-kaart:#FFFFFF;--of-lijn:rgba(20,18,15,.14);--of-ink:#14120F;--of-w60:rgba(20,18,15,.60);--of-brons:#8A5A1E;--of-groen:#008859;--of-pilz:#FFFFFF;--of-cta2bg:#14120F;--of-cta2tx:#FFFFFF;--of-cta2rand:transparent">
   <div class="of-stg">
     <div class="of-foto"></div>
     <div class="of-th"><i></i><i></i><i></i><i></i><i></i></div>
@@ -2180,10 +2182,12 @@ strong{font-weight:700}
   </div>
 
   <div class="note warn">
-    <h4>Wat je bij B moet meewegen</h4>
+    <h4>Wat B kostte om waar te maken</h4>
     <p><strong>De rest van de pagina moet mee.</strong> Blok 02 (de geruststrook) staat nu op wit en blok 05 op <code>#F4F2EE</code>. Zet je het koopvak op <code>#F2EEE7</code>, dan valt blok 02 er als een wit gat tussen. Bij A speelt dat niet, want daar blijft de grond ongewijzigd.</p>
     <p><strong>Multiply werkt twee kanten op.</strong> Hoe dieper het podium, hoe meer de foto meekleurt &mdash; op <code>#EAE4D9</code> krijgt het hele product een warme waas. Daarom houdt B het podium op <code>#F2EEE7</code> en zakt alleen de gr&oacute;nd naar <code>#EAE4D9</code>. Dat verschil is met opzet.</p>
     <p><strong>Contrast blijft de eis.</strong> Alle tekst in beide varianten is nagemeten tegen zijn eigen grond; de dofste treden (<code>.60</code> inkt) zitten op zand krapper dan op wit, dus als je hier iets aan de tinten draait, moet dat opnieuw langs de meter.</p>
+    <p><strong>En dat is precies waar het misging.</strong> De tekst hield stand: de dofste trede haalt <strong>4,66</strong> in het koopvak en <strong>4,51</strong> op de paginagrond. Maar het groen achter de sterren is geen tekst, en dus keek ik er bijna overheen — daar geldt 3:1. Op wit haalde <code>#00A06C</code> nog 3,36, op zand nog maar <strong>2,66</strong>. Verlaagd naar <code>#008859</code> (3,56 op de krapste grond). Het scherm hierboven laat die tint zien, niet de oude.</p>
+    <p><strong>En twee labels gingen hetzelfde zeggen.</strong> Zodra de pil op &laquo;Meest gekozen&raquo; stond, botste hij met het label dat al linksboven op de foto stond. De pil zegt nu <strong>Bestseller</strong>.</p>
   </div>
 </section>
 

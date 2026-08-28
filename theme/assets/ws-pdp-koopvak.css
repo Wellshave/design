@@ -1,10 +1,14 @@
 /* Wellshave — productpagina, blok 01: het koopvak boven de vouw.
    Bron: rapporten/blokken/01-above-the-fold-v2-donker.html (.v6), neutrale variant
    Elke klasse begint met ws- zodat thema-CSS er niet doorheen lekt. */
-.ws-pdp{--ws-cream:#F4F2EE;--ws-cream2:#FFFFFF;--ws-zwart:#FFFFFF;--ws-kaart:#F6F4F0;
+.ws-pdp{--ws-cream:#EAE4D9;--ws-cream2:#F2EEE7;--ws-zwart:#F2EEE7;--ws-kaart:#FFFFFF;
   --ws-gold1:#F7E2B4;--ws-gold2:#EFCE93;--ws-gold3:#E9BE72;--ws-gold4:#DDA548;
-  --ws-tekstgoud:#8A5A1E;--ws-groen:#00A06C;--ws-blauw:#2E7CF6;--ws-rood:#C8281F;
-  --ws-lijn:rgba(20,18,15,.11);--ws-lijn2:rgba(20,18,15,.2);
+  /* Het groen is de tegel achter de sterren, geen tekst, dus de eis is 3:1.
+     Op wit haalde #00A06C dat nog (3,36); op zand zakt hij naar 2,66. Deze
+     tint staat op 3,56 tegen de krapste grond en houdt dus ook stand als het
+     zand ooit een tint dieper gaat. */
+  --ws-tekstgoud:#8A5A1E;--ws-groen:#008859;--ws-blauw:#2E7CF6;--ws-rood:#C8281F;
+  --ws-lijn:rgba(20,18,15,.14);--ws-lijn2:rgba(20,18,15,.22);
   /* Wit op zwart en inkt op zand vervagen niet even snel: dezelfde
      percentages geven op licht een tint die te bleek is. De twee onderste
      treden gaan daarom dieper, tot alles 4,5:1 haalt. Ze liggen daardoor
@@ -122,7 +126,7 @@
 .ws-pdp .ws-h1{font-size:33px;font-weight:600;letter-spacing:-.025em;color:var(--ws-ink);margin-top:11px;line-height:1.06}
 .ws-pdp .ws-sub{font-size:23px;font-weight:600;letter-spacing:-.02em;line-height:1.22;margin-top:9px;color:var(--ws-ink)}
 
-.ws-pdp .ws-rev{margin-top:15px;border:1px solid var(--ws-lijn);border-radius:13px;background:rgba(20,18,15,.035);padding:14px 16px}
+.ws-pdp .ws-rev{margin-top:15px;border:1px solid var(--ws-lijn);border-radius:13px;background:var(--ws-kaart);padding:14px 16px}
 .ws-pdp .ws-rev .ws-kop{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .ws-pdp .ws-rev .ws-kop .ws-lk{display:flex;align-items:center;gap:8px}
 .ws-pdp .ws-rev .ws-kop .ws-lk .ws-st{display:flex;gap:1.5px}

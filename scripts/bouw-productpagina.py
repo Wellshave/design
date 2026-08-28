@@ -184,10 +184,10 @@ a:focus-visible,button:focus-visible{outline:2px solid #BC813E;outline-offset:3p
 # ---------------------------------------------------------------------------
 NIEUW_OP = u'28 augustus'
 WIJZIGINGEN = [
+ (u'28 augustus', 'boven', u'OFF-WHITE',
+  u'Variant B is gekozen en staat live \u2014 met wat het zand aan contrast kostte.'),
  (u'28 augustus', 'boven', u'KOOPVAK',
   u'Het bespaarde bedrag staat achter de prijs; de pil zegt wat dit is.'),
- (u'28 augustus', 'boven', u'OFF-WHITE',
-  u'Driekwart van het eerste scherm is spierwit \u2014 drie richtingen, met het cadeaublok erin.'),
  (u'28 augustus', 'boven', u'KORTINGEN',
   u'Vijf geldsignalen boven de vouw, teruggebracht naar twee \u2014 met de spreiding erbij.'),
  (u'28 augustus', 'boven', u'MARINE',
