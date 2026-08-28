@@ -5,16 +5,36 @@ Dit bestand gaat over de productpagina.
 
 ## Waar het staat
 
+De rollen zijn op 28 augustus verschoven: het werkthema is gepubliceerd en is nu
+de winkel. Wie dat niet weet, schrijft per ongeluk op de storefront.
+
 | | |
 |---|---|
-| **Live thema** | `wellshave/claude-design` (id **204178161996**) — sinds 26 augustus gepubliceerd. Dit wás het testthema; **niet meer rechtstreeks in schrijven** |
-| **Werkthema** | `wellshave/claude-design-werk` (id **204412977484**) — kopie van het live thema, gemaakt 26 augustus 17:23. **Hierin gaan alle nieuwe aanpassingen** |
-| Voorbeeld | https://wellshave.com/products/groom-guard-pro?preview_theme_id=204412977484 |
+| **Live thema** | `wellshave/claude-design v2 (LIVE)` (id **204412977484**) &mdash; rol MAIN sinds 28 augustus ca. 13:35. Dit w&aacute;s het werkthema. **Niet meer in schrijven** |
+| **Werkthema** | `wellshave/claude-design v3 (IN PROGRESS)` (id **204575310156**) &mdash; kopie van het live thema, gemaakt 28 augustus 15:22. **Hierin gaan alle nieuwe aanpassingen** |
+| Voorbeeld | https://wellshave.com/products/barber-pack-3-0?preview_theme_id=204575310156 |
+| Vorige | `wellshave/claude-design v1` (204178161996) staat klaar als terugval |
 | Oud | `wellshave-redesign/live` (200936096076) is niet meer gepubliceerd |
 
-De kopie is op het moment van maken gelijk aan het live thema: sectie, stylesheet,
-snippet en beide productsjablonen hebben daar dezelfde checksums. Wie hier verder
-werkt, schrijft dus naar **204412977484** en publiceert die pas als het af is.
+De kopie is op het moment van maken gelijk aan het live thema: sectie, stylesheet
+en productsjabloon hebben daar dezelfde checksums. Wie hier verder werkt,
+schrijft dus naar **204575310156** en laat die pas publiceren als het af is.
+
+### De MCP blokkeert schrijven naar het live thema
+
+Dat is geen storing maar een vangnet: `themeFilesUpsert` wordt geweigerd zodra de
+doel-id de rol MAIN heeft. De weigering is schoon &mdash; er komt geen halve staat op
+de winkel. Loop je ertegenaan, dan is het antwoord niet forceren maar dupliceren:
+
+```graphql
+mutation { themeDuplicate(id: "gid://shopify/OnlineStoreTheme/<live>",
+                          name: "wellshave/claude-design v4 (IN PROGRESS)") {
+  newTheme { id name role } userErrors { field message } } }
+```
+
+De kopie komt binnen als UNPUBLISHED en is **even leeg**: `files` geeft een lege
+lijst terug zolang Shopify nog kopieert. Wacht tot de checksums van het live
+thema erin staan v&oacute;&oacute;rdat je iets upsert, anders schrijf je in een half thema.
 
 ## Het standaardsjabloon draagt alles, niet een apart sjabloon
 
