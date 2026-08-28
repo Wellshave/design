@@ -644,12 +644,27 @@
   border:1px solid rgba(17,17,17,.12);border-radius:100px;padding:4px 10px}
 .wsc .wsk-onderdelen{display:flex;align-items:center;gap:7px;font-size:11.5px;color:var(--ink-60)}
 .wsc .wsk-onderdelen svg{width:14px;height:14px;stroke:var(--bronze);fill:none;stroke-width:1.9}
-.wsc .wsk-prijs{display:flex;align-items:baseline;gap:8px;margin-top:4px}
+/* Beoordelingsregel: op elke kaart dezelfde winkelscore. */
+.wsc .wsk-tp{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--ink-60);line-height:1}
+.wsc .wsk-tp b{color:var(--ink);font-weight:700;font-size:12.5px}
+.wsc .wsk-tp svg{width:13px;height:13px;color:#00B67A;fill:currentColor;flex:none;margin-left:2px}
+.wsc .wsk-tp i{font-style:normal;color:var(--ink);font-weight:600}
+
+/* Prijs en kortingslabel op één regel; het label wijkt naar beneden als het niet past. */
+.wsc .wsk-prijsrij{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:2px}
+.wsc .wsk-prijs{display:flex;align-items:baseline;gap:7px}
 .wsc .wsk-prijs b{font-size:19px;font-weight:700;letter-spacing:-.025em}
 .wsc .wsk-prijs s{font-size:12.5px;color:var(--ink-40)}
-.wsc .wsk-save{align-self:flex-start;font-size:10.5px;font-weight:700;letter-spacing:.04em;
-  color:#8F6428;background:#EDE7DB;padding:5px 9px;border-radius:100px}
-.wsc .wsk-cta{margin-top:9px;display:flex;align-items:center;justify-content:center;gap:9px;
+.wsc .wsk-korting{font-size:11px;font-weight:700;letter-spacing:.02em;white-space:nowrap;
+  color:#6F4A16;background:var(--goud);padding:4px 9px;border-radius:100px}
+
+/* Twee tot drie eigenschappen, met een dunne-lijn pictogram ervoor. */
+.wsc .wsk-usp{list-style:none;margin:5px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
+.wsc .wsk-usp li{display:flex;align-items:center;gap:8px;font-size:12px;line-height:1.35;color:var(--ink-60);min-width:0}
+.wsc .wsk-usp svg{width:15px;height:15px;flex:none;stroke:var(--bronze);fill:none;stroke-width:1.9;
+  stroke-linecap:round;stroke-linejoin:round}
+.wsc .wsk-usp li > span{min-width:0;overflow-wrap:break-word}
+.wsc .wsk-cta{margin-top:auto;padding-top:11px;display:flex;align-items:center;justify-content:center;gap:9px;
   background:#111;color:#fff;border-radius:9px;padding:12px 14px;font-size:11.5px;font-weight:700;
   letter-spacing:.07em;text-transform:uppercase;transition:background .3s ease}
 .wsc .wsk-cta svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.2}
@@ -863,6 +878,13 @@ body.vgl-open{overflow:hidden}
   .wsc .wsk-tag.tweede{right:8px;left:auto;top:30px}
   .wsc .wsk-vgl{top:7px;right:7px;font-size:9px;padding:4px 8px 4px 6px}
   .wsc .wsk-prijs b{font-size:16px}
+  .wsc .wsk-tp{font-size:11px;gap:4px}
+  .wsc .wsk-tp b{font-size:11.5px}
+  .wsc .wsk-tp svg{width:12px;height:12px}
+  .wsc .wsk-korting{font-size:10px;padding:3px 7px}
+  .wsc .wsk-usp{gap:5px;margin-top:4px}
+  .wsc .wsk-usp li{font-size:11px;gap:7px}
+  .wsc .wsk-usp svg{width:13px;height:13px}
   .wsc .wsk-cta{padding:11px 8px;font-size:10px;letter-spacing:.05em}
   .wsc .wsk-chips i{font-size:9.5px;padding:3px 8px}
 }

@@ -28,8 +28,14 @@
   <div class="rail kop-grid{% unless heeft_hulp %} solo{% endunless %}">
 
     <div class="kop-copy">
-      {%- if section.settings.eyebrow != blank -%}
-        <p class="eyebrow on-dark">{{ section.settings.eyebrow }}</p>
+      {%- comment -%}
+        Leeg gelaten betekent: neem de naam van de collectie. Zo kan één sjabloon
+        meerdere collecties bedienen — de Summer Sale en de Voorjaar Sale delen
+        dezelfde opbouw maar houden hun eigen naam op de pagina.
+      {%- endcomment -%}
+      {%- assign kop_eyebrow = section.settings.eyebrow | default: collection.title -%}
+      {%- if kop_eyebrow != blank -%}
+        <p class="eyebrow on-dark">{{ kop_eyebrow }}</p>
       {%- endif -%}
       <h1 class="duo on-dark klein">{{ section.settings.kop_1 }}<span class="b">{{ section.settings.kop_2 }}</span></h1>
       {%- if section.settings.lede != blank -%}
@@ -172,8 +178,9 @@
 {%- for block in section.blocks -%}{%- if block.type == 'zone' -%}{%- assign heeft_zones = true -%}{%- endif -%}{%- endfor -%}
 {%- if heeft_zones -%}
   <section class="zonebalk"><div class="rail">
-    {%- if section.settings.kruimel != blank -%}
-      <p class="kruimel"><a href="{{ routes.root_url }}">Home</a> <span>/</span> <b>{{ section.settings.kruimel }}</b></p>
+    {%- assign kop_kruimel = section.settings.kruimel | default: collection.title -%}
+    {%- if kop_kruimel != blank -%}
+      <p class="kruimel"><a href="{{ routes.root_url }}">Home</a> <span>/</span> <b>{{ kop_kruimel }}</b></p>
     {%- endif -%}
     <div class="zonekiezer">
       {%- for block in section.blocks -%}

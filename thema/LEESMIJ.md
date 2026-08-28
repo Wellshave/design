@@ -1278,3 +1278,100 @@ producten hierboven zijn winkeldata en zijn **direct live**.
   "ma t/m vr". Niet onjuist, wel losser dan de rest.
 - Het antwoord "gemiddeld gaat een kop zes tot twaalf maanden mee" in de
   homepage-FAQ is een getal dat ik nergens kan nakijken.
+
+## Ronde: nieuwe productkaart en een eigen sale-sjabloon (28-08)
+
+### Waar het werk nu staat
+
+`wellshave/claude-design v2` is gepubliceerd en dus geblokkeerd voor schrijven.
+Het werk gaat sinds deze ronde naar **`wellshave/claude-design v3 (IN PROGRESS)`
+(204575310156)**.
+
+In v3 waren in de theme-editor drie dingen gewijzigd die ik niet mocht
+overschrijven: de foto in `ws_belofte` was weggehaald, het spotlight-product
+leeggemaakt, en `ws_koopblok`, `ws_proposities` en `ws_zonerooster` uitgezet.
+`templates/index.json` is daarom **samengevoegd**: v3 als basis, met alleen mijn
+vier verzendcorrecties eroverheen. Nooit blind overschrijven hier.
+
+### De kaart
+
+Onder de foto staat nu, in deze volgorde:
+
+1. **Eén beoordelingsregel, op elke kaart dezelfde** — `4,4 out of 5 ★ Trustpilot`.
+2. De **titel**.
+3. De **prijs**, met de vanprijs doorgestreept en een **kortingslabel** in het goud.
+4. **Twee tot drie USP's** met een dunne-lijn pictogram.
+
+Het cijfer per product met het aantal erachter is weg. Dat zette twee kaarten
+naast elkaar in een wedstrijd die niets zegt: een product met twaalf beoordelingen
+verliest het dan van een product met driehonderd, terwijl beide even goed zijn.
+Score en bron staan in de sectie-instellingen, zodat ze meebewegen als Trustpilot
+verandert. Het percentage rekent de winkel zelf uit uit de vanprijs — er staat dus
+nooit een percentage dat niet klopt met de prijs ernaast.
+
+### Waar de USP's vandaan komen
+
+**Niet** uit `custom.product_usp`. Daar staat in acht gevallen precies de belofte
+die we niet doen: "Geen sneetjes, ook in je gevoelige zones", "voorkomt wondjes en
+huidirritatie", "zonder snijwondjes of irritatie". Die regels op elke kaart zetten
+zou de merkregel op de grootste schaal tot nu toe breken.
+
+De lijst in `snippets/ws-collectie-usp.liquid` komt daarom uit
+`custom.specification`: wat het apparaat aantoonbaar heeft, in twee tot vier
+woorden — "IPX7 waterdicht", "6 kammen 1,5–13 mm", "Brushless motor", "Zero-cut".
+53 producten staan er met de hand in. Klopt er iets niet, dan overschrijf je het
+per groep met het veld **USP's** in de sectie-instellingen:
+`product-handle = icoon|Tekst;icoon|Tekst`. Iconen: druppel, motor, accu, kam,
+licht, station, tas, doos, mes, trimmer, regelaars.
+
+Staat een product niet in de lijst en is er geen eigen regel, dan tonen we het
+aantal onderdelen in de doos — en anders niets. Liever een lege plek dan een
+verzonnen eigenschap.
+
+### Gevolg voor de gestructureerde data
+
+`aggregateRating` is **uit de collectie-markup gehaald**. De kaart toont nu op elk
+product dezelfde winkelscore; markup die per product een ander getal claimt dan er
+op de pagina staat is precies waar Google handmatige acties voor uitdeelt. Het
+cijfer per product hoort op de productpagina, waar het ook zichtbaar is.
+`CollectionPage`, `ItemList`, `FAQPage`, `BreadcrumbList` en `Organization` staan
+er onveranderd op.
+
+### Het sale-sjabloon
+
+De sale-collecties draaiden nog op het standaardsjabloon — de oude opmaak.
+Er is nu één `templates/collection.sale.json`, toegewezen aan **summer-sale-deals**,
+**winter-sale** en **deals-bundels**.
+
+Het raster staat op `uit_collectie: true`. **Voeg je in Shopify een product aan de
+sale-collectie toe, dan staat het op de pagina** — er hoeft niets in het thema bij.
+Dat is precies waarom er één sjabloon is en geen drie.
+
+Omdat één sjabloon drie collecties bedient, vallen de bovenregel en het kruimelpad
+in `ws-collectie-kop.liquid` nu terug op `collection.title` als het veld leeg is.
+Zo houdt de Summer Sale zijn eigen naam en de Voorjaar Sale de zijne, met dezelfde
+opbouw eronder. De vier vragen op de pagina gaan over de actie zelf: hoelang hij
+loopt, of de garantie hetzelfde blijft, waar de korting staat en of je een
+afgeprijsd apparaat mag terugsturen.
+
+`deals-bundels` had helemaal geen meta title en description; die zijn er nu.
+
+### Wat gecontroleerd is
+
+Dertien collectiepagina's opgehaald uit v3, samen **236 kaarten**: elke kaart heeft
+precies één beoordelingsregel en één USP-lijst, overal hetzelfde cijfer, geen
+restant van de oude opmaak, en op alle drie de sale-pagina's parsen de vier
+JSON-LD-blokken met kloppende aantallen en zonder `aggregateRating`. Gemeten op
+1440 px en 390 px: niets loopt buiten de kaart, de knop lijnt onderaan uit ook als
+de ene kaart twee en de andere drie USP's heeft. Nul afwijkingen.
+
+### Nog open
+
+- De site noemt twee verschillende Trustpilot-scores: de balk bovenaan de homepage
+  zegt **4,5**, de afsluiter zegt **4,4**. Op de kaart staat nu 4,4, zoals gevraagd.
+  Eén van de twee klopt niet.
+- "out of 5" is Engels op een Nederlandse pagina. Het staat in één instelling, dus
+  "van de 5" is één wijziging als je dat liever hebt.
+- De PixelPro TikTok-app geeft een Liquid-fout in de paginabron
+  (`turbo-tiktok` regel 31). Die staat ook op het gepubliceerde thema, dus hij komt
+  niet uit dit werk, maar hij hoort er niet.

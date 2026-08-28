@@ -24,6 +24,14 @@
   <symbol id="wsr-cadeau" viewBox="0 0 24 24"><path d="M3.5 11h17v9.5a1 1 0 0 1-1 1h-15a1 1 0 0 1-1-1zM2.5 7.5h19V11h-19zM12 7.5V21.5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/><path d="M12 7.5S10.6 2.5 8 2.5a2.5 2.5 0 0 0 0 5zM12 7.5s1.4-5 4-5a2.5 2.5 0 0 1 0 5z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/></symbol>
   <symbol id="wsr-mes" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="7" rx="2" fill="none" stroke="currentColor" stroke-width="2.1"/><path d="M6 14v3M10 14v3M14 14v3M18 14v3M7 7V4.5M17 7V4.5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/></symbol>
   <symbol id="wsr-regelaars" viewBox="0 0 24 24"><path d="M3 7h12M19 7h2M3 17h4M11 17h10" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/><circle cx="17" cy="7" r="2.4" fill="none" stroke="currentColor" stroke-width="2.1"/><circle cx="9" cy="17" r="2.4" fill="none" stroke="currentColor" stroke-width="2.1"/></symbol>
+  <symbol id="wsr-druppel" viewBox="0 0 24 24"><path d="M12 3.2c3.4 4 6 7 6 10.1a6 6 0 0 1-12 0c0-3.1 2.6-6.1 6-10.1z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/></symbol>
+  <symbol id="wsr-motor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2.1"/><path d="M12 12l4.2-3.4M12 7.4v.01" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/></symbol>
+  <symbol id="wsr-accu" viewBox="0 0 24 24"><rect x="3" y="7" width="15" height="10" rx="2.2" fill="none" stroke="currentColor" stroke-width="2.1"/><path d="M21 10.5v3M6.5 10.5v3M10 10.5v3" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/></symbol>
+  <symbol id="wsr-kam" viewBox="0 0 24 24"><path d="M4 15h16M6 15V7M10 15V5M14 15V7M18 15V5M4 19h16" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/></symbol>
+  <symbol id="wsr-licht" viewBox="0 0 24 24"><path d="M9.5 17.5h5M10 20.5h4M12 3a5.5 5.5 0 0 1 3.2 10c-.5.4-.7.9-.7 1.5h-5c0-.6-.2-1.1-.7-1.5A5.5 5.5 0 0 1 12 3z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="wsr-station" viewBox="0 0 24 24"><path d="M9 3h6v9H9zM4.5 16h15v4.5h-15zM12 12v4" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="wsr-tas" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2.4" fill="none" stroke="currentColor" stroke-width="2.1"/><path d="M8.5 8V6.2A2.2 2.2 0 0 1 10.7 4h2.6a2.2 2.2 0 0 1 2.2 2.2V8M3 13.5h18" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/></symbol>
+  <symbol id="wsr-ster" viewBox="0 0 24 24"><path d="M12 2.6l2.9 6.3 6.6.7-4.9 4.5 1.4 6.6L12 17.4 6 20.7l1.4-6.6L2.5 9.6l6.6-.7z" fill="currentColor"/></symbol>
   <symbol id="wsr-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </svg>
 
@@ -208,44 +216,36 @@
               {%- if cat == 'mes' and block.settings.kicker != blank -%}
                 <span class="wsk-kicker">{{ block.settings.kicker }}</span>
               {%- endif -%}
-              <a class="wsk-naam" href="{{ p.url }}">{{ p.title }}</a>
-              {%- if p.metafields.custom.subtitle.value != blank -%}
-                <span class="wsk-wat">{{ p.metafields.custom.subtitle.value }}</span>
-              {%- endif -%}
 
-              {%- if cat == 'app' -%}
-                {%- if score and tellen and tellen > 0 -%}
-                  {%- assign heel = score | floor -%}
-                  {%- assign rest = score | minus: heel -%}
-                  {%- assign halve_index = heel | plus: 1 -%}
-                  <span class="wsk-score">
-                    <span class="sterren5">
-                      {%- for i in (1..5) -%}
-                        {%- if i <= heel -%}<i></i>
-                        {%- elsif rest >= 0.25 and i == halve_index -%}<i class="half"></i>
-                        {%- else -%}<i class="leeg"></i>{%- endif -%}
-                      {%- endfor -%}
-                    </span>
-                    <b>{{ score | round: 1 | replace: '.', ',' }}</b> ({{ tellen }})
-                  </span>
-                {%- else -%}
-                  <span class="wsk-score leeg">{{ section.settings.geen_score | default: 'Nieuw · nog geen beoordelingen' }}</span>
-                {%- endif -%}
-                {%- if doos > 0 -%}
-                  <span class="wsk-chips"><i>{{ doos }} in de doos</i></span>
-                {%- endif -%}
-              {%- endif -%}
-
-              {%- if cat == 'bundel' and doos > 0 -%}
-                <span class="wsk-onderdelen"><svg viewBox="0 0 24 24"><use href="#wsr-doos"/></svg><span>{{ doos }} onderdelen in de doos</span></span>
-              {%- endif -%}
-
-              <span class="wsk-prijs"><b>{{ v.price | money }}</b>
-                {%- if v.compare_at_price > v.price -%} <s>{{ v.compare_at_price | money }}</s>{%- endif -%}
+              {%- comment -%}
+                Eén beoordelingsregel, op elke kaart dezelfde: de winkelscore op
+                Trustpilot. Per product een eigen cijfer met een aantal erachter
+                zette twee kaarten naast elkaar in een wedstrijd die niets zegt —
+                een product met 12 beoordelingen verliest het dan van een product
+                met 300, terwijl beide even goed zijn.
+              {%- endcomment -%}
+              <span class="wsk-tp">
+                <b>{{ section.settings.tp_score | default: '4,4' }}</b>
+                <span>{{ section.settings.tp_uit | default: 'out of 5' }}</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsr-ster"/></svg>
+                <i>{{ section.settings.tp_merk | default: 'Trustpilot' }}</i>
               </span>
-              {%- if v.compare_at_price > v.price -%}
-                <span class="wsk-save">Bespaar {{ v.compare_at_price | minus: v.price | money }}</span>
-              {%- endif -%}
+
+              <a class="wsk-naam" href="{{ p.url }}">{{ p.title }}</a>
+
+              <span class="wsk-prijsrij">
+                <span class="wsk-prijs"><b>{{ v.price | money }}</b>
+                  {%- if v.compare_at_price > v.price -%} <s>{{ v.compare_at_price | money }}</s>{%- endif -%}
+                </span>
+                {%- if v.compare_at_price > v.price -%}
+                  {%- assign af = v.compare_at_price | minus: v.price | times: 100.0 | divided_by: v.compare_at_price | round -%}
+                  {%- if af > 0 -%}
+                    <span class="wsk-korting">{{ af }}%&nbsp;{{ section.settings.korting_woord | default: 'Korting' }}</span>
+                  {%- endif -%}
+                {%- endif -%}
+              </span>
+
+              {%- render 'ws-collectie-usp', p: p, doos: doos, max: 3, eigen: block.settings.usps -%}
 
               {%- if cat == 'mes' -%}
                 <span class="wsk-rij">
@@ -477,15 +477,13 @@
             "availability": "https://schema.org/{% if p.available %}InStock{% else %}OutOfStock{% endif %}",
             "url": {{ p.url | prepend: shop.url | json }}
           }
-          {%- assign rd_score = p.metafields.reviews.rating.value.rating -%}
-          {%- assign rd_tel = p.metafields.reviews.rating_count.value -%}
-          {%- if rd_score and rd_tel and rd_tel > 0 -%},
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": {{ rd_score | json }},
-            "reviewCount": {{ rd_tel | json }}
-          }
-          {%- endif -%}
+          {%- comment -%}
+            Geen aggregateRating meer. De kaart toont sinds deze ronde op elk
+            product dezelfde winkelscore van Trustpilot, en geen los cijfer per
+            product. Markup die een ander getal claimt dan er op de pagina staat
+            is precies waar Google handmatige acties voor uitdeelt. Het cijfer
+            per product hoort thuis op de productpagina, waar het ook zichtbaar is.
+          {%- endcomment -%}
         }
       }
     {%- endfor -%}
@@ -547,8 +545,14 @@
     { "type": "text", "id": "vgl_balk_knop", "label": "Balk: vergelijkknop", "default": "Vergelijk" },
     { "type": "text", "id": "sorteer_label", "label": "Sorteerknop", "default": "Meest relevant" },
     { "type": "image_picker", "id": "monogram", "label": "Monogram achter de packshot", "info": "Verschijnt bij hover en blijft staan op de kaart die de keuzehulp aanwijst. Werkt alleen achter een vrijstaande packshot." },
+    { "type": "header", "content": "Beoordeling op de kaart" },
+    { "type": "paragraph", "content": "Op elke kaart dezelfde winkelscore, niet per product een eigen cijfer. Pas dit alleen aan als de score op Trustpilot verandert — het cijfer hoort te kloppen met wat daar staat." },
+    { "type": "text", "id": "tp_score", "label": "Score", "default": "4,4" },
+    { "type": "text", "id": "tp_uit", "label": "Tekst achter de score", "info": "Bijvoorbeeld: out of 5, of van de 5.", "default": "out of 5" },
+    { "type": "text", "id": "tp_merk", "label": "Naam van de bron", "default": "Trustpilot" },
     { "type": "header", "content": "Op de kaarten" },
     { "type": "text", "id": "geen_score", "label": "Als er geen beoordelingen zijn", "info": "Nooit een standaardcijfer tonen bij een product zonder beoordelingen.", "default": "Nieuw · nog geen beoordelingen" },
+    { "type": "text", "id": "korting_woord", "label": "Woord achter het kortingspercentage", "info": "Het percentage rekent de winkel zelf uit, uit de vanprijs.", "default": "Korting" },
     { "type": "text", "id": "uitverkocht_label", "label": "Lintje bij uitverkocht", "default": "Tijdelijk uitverkocht" },
     { "type": "text", "id": "uitverkocht_voet", "label": "Regel bij uitverkocht", "default": "Tijdelijk niet leverbaar" },
     { "type": "text", "id": "blik_voet", "label": "Regel onder Snel bekijken", "default": "100 dagen proberen · 2 jaar garantie" },
@@ -587,6 +591,7 @@
         { "type": "textarea", "id": "noot", "label": "Noot onder de kop", "info": "Voor uitleg die de bezoeker nodig heeft om de kaarten te lezen — bijvoorbeeld dat verwante modellen één beoordelingenstroom delen." },
         { "type": "text", "id": "kicker", "label": "Kicker op de kaarten", "info": "Alleen bij onderdelen. Bijvoorbeeld Mes of Scheerkop." },
         { "type": "textarea", "id": "labels", "label": "Lintjes", "info": "Eén per regel: product-handle = Lintje. Bijvoorbeeld neustrimmer-4in1-ultra = Best verkocht. Houd het lintje kort — ongeveer twintig tekens; langer wordt afgekapt naast de vergelijk-knop." },
+        { "type": "textarea", "id": "usps", "label": "USP's onder de prijs", "info": "Alleen nodig als de standaardlijst niet klopt. Eén per regel: product-handle = icoon|Tekst;icoon|Tekst. Iconen: druppel, motor, accu, kam, licht, station, tas, doos, mes, trimmer, regelaars. Maximaal drie per kaart, twee tot vier woorden per stuk." },
         { "type": "text", "id": "link_label", "label": "Linktekst rechts van de kop" },
         { "type": "url", "id": "link_url", "label": "Link rechts van de kop" }
       ]
