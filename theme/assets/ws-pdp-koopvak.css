@@ -1,0 +1,706 @@
+/* ============================================================
+   DE GEWICHTSCHAAL VAN DE PRODUCTPAGINA
+
+   Alles stond op 700 of 800: 23 van de 41 regels, inclusief lopende
+   tekst. Dat is de dropship-tell -- als alles schreeuwt is er geen
+   hierarchie meer, alleen volume. De regel is nu:
+
+     >= 23 px  koppen        500   de grootte draagt de hierarchie al
+     17-23 px  ondertitels   400   moeten wijken voor de kop erboven
+     12-16 px  koppen        500   tweede orde: accordeons, kaartnamen
+     12-16 px  lopende tekst 400   checkpoints, beschrijvingen
+     <= 11 px  microlabels   700   klein en gespatieerd; onder 700
+                                   verdwijnen ze, op 800 schreeuwen ze
+               knoppen       600   kapitaal met spatiering draagt al
+               getallen      500   prijs, aantallen, bedragen
+
+   Twee vloeren: onder 11 px nooit lichter dan 500, en wit op bewegend
+   beeld (de UGC-tegels) blijft 600-700 -- daar is licht niet leesbaar.
+
+   Boven 700 staat nu niets meer. Zoek je een uitzondering, dan is de
+   vraag eerst of het element wel is wat je denkt dat het is.
+   ============================================================ */
+
+/* Wellshave — productpagina, blok 01: het koopvak boven de vouw.
+   Bron: rapporten/blokken/01-above-the-fold-v2-donker.html (.v6), neutrale variant
+   Elke klasse begint met ws- zodat thema-CSS er niet doorheen lekt. */
+.ws-pdp{--ws-cream:#EAE4D9;--ws-cream2:#F2EEE7;--ws-zwart:#F2EEE7;--ws-kaart:#FFFFFF;
+  --ws-gold1:#F7E2B4;--ws-gold2:#EFCE93;--ws-gold3:#E9BE72;--ws-gold4:#DDA548;
+  /* Het groen is de tegel achter de sterren, geen tekst, dus de eis is 3:1.
+     Op wit haalde #00A06C dat nog (3,36); op zand zakt hij naar 2,66. Deze
+     tint staat op 3,56 tegen de krapste grond en houdt dus ook stand als het
+     zand ooit een tint dieper gaat. */
+  --ws-tekstgoud:#8A5A1E;--ws-groen:#008859;--ws-blauw:#2E7CF6;--ws-rood:#C8281F;
+  --ws-lijn:rgba(20,18,15,.14);--ws-lijn2:rgba(20,18,15,.22);
+  /* Wit op zwart en inkt op zand vervagen niet even snel: dezelfde
+     percentages geven op licht een tint die te bleek is. De twee onderste
+     treden gaan daarom dieper, tot alles 4,5:1 haalt. Ze liggen daardoor
+     wel dichter bij elkaar dan op zwart -- op licht is er tussen inkt en
+     onzichtbaar nu eenmaal minder ruimte. */
+  --ws-w72:rgba(20,18,15,.72);--ws-w52:rgba(20,18,15,.64);--ws-w38:rgba(20,18,15,.60);
+  --ws-ink:#14120F;--ws-ink80:rgba(17,17,17,.8);--ws-ink60:rgba(17,17,17,.6);
+  display:block;background:var(--ws-cream);
+  font-family:'MontserratEG','Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
+.ws-pdp *,.ws-pdp *::before,.ws-pdp *::after{box-sizing:border-box}
+.ws-pdp img{max-width:100%}
+.ws-pdp .ws-rail{max-width:1240px;margin:0 auto}
+
+/* ---- de twee kolommen ---- */
+.ws-pdp .ws-pdp-grid{display:grid;grid-template-columns:1.06fr 1fr;gap:16px;padding:16px;
+  align-items:start;background:var(--ws-cream)}
+
+/* ---- podium ---- */
+.ws-pdp .ws-stg{position:relative;display:flex;flex-direction:column;background:var(--ws-cream2);
+  border:1px solid rgba(17,17,17,.07);border-radius:20px;padding:22px 22px 18px;overflow:hidden;min-width:0}
+.ws-pdp .ws-stg .ws-glans{position:absolute;left:50%;top:44%;width:78%;height:52%;transform:translate(-50%,-50%);
+  background:radial-gradient(ellipse at center,rgba(20,18,15,.045),rgba(20,18,15,0) 70%);pointer-events:none}
+/* het merkteken: de afbeelding uit de sectie-instelling "merk", stil op de achtergrond */
+.ws-pdp .ws-stg .ws-ghost{position:absolute;right:1%;top:50%;transform:translateY(-50%);z-index:1;
+  width:58%;height:auto;aspect-ratio:1/1;object-fit:contain;pointer-events:none;user-select:none;
+  opacity:.09}
+/* Het plaatje ligt op de foto, en vanaf de tweede foto is dat een
+   listingbeeld met eigen tekst erin. Een zwarte pil dekt die tekst af.
+   Vandaar twee dingen: melkglas in plaats van een dicht vlak, en hij
+   verdwijnt zodra je doorbladert -- zie ws-weg. Op de eerste foto, de
+   pakshot zonder tekst, staat hij nog gewoon. */
+.ws-pdp .ws-tg{position:absolute;top:18px;left:18px;z-index:4;
+  background:rgba(255,255,255,.78);-webkit-backdrop-filter:saturate(1.4) blur(9px);
+  backdrop-filter:saturate(1.4) blur(9px);
+  border:1px solid rgba(176,116,42,.28);
+  box-shadow:0 2px 10px -4px rgba(20,18,15,.22);
+  color:var(--ws-ink);font-size:9px;
+  font-weight:700;letter-spacing:.13em;text-transform:uppercase;padding:6px 12px;border-radius:100px;
+  transition:opacity .22s ease,transform .22s ease}
+.ws-pdp .ws-tg.ws-weg{opacity:0;transform:translateY(-5px);pointer-events:none}
+@media (prefers-reduced-motion:reduce){.ws-pdp .ws-tg{transition:none}}
+/* height:auto moet erbij. Het height-attribuut dat image_tag meegeeft is een
+   presentatiehint; zolang de CSS geen height zet, wint 2080px van de foto en
+   doet aspect-ratio niets. */
+.ws-pdp .ws-held{position:relative;z-index:2;display:block;width:100%;height:auto;flex:none;
+  aspect-ratio:1/1;object-fit:contain;mix-blend-mode:multiply}
+
+/* ---- bijschriften met een haaklijn ---- */
+.ws-pdp .ws-haak{position:absolute;display:block;border-color:#C79A52;border-style:solid;border-width:0}
+.ws-pdp .ws-stip{position:absolute;display:block;width:6px;height:6px;border-radius:50%;background:#C79A52}
+.ws-pdp .ws-bij{position:absolute;z-index:5;font-size:12px;line-height:1.32;font-weight:500;color:var(--ws-ink80);max-width:112px}
+.ws-pdp .ws-bij.ws-l{left:22px;top:114px}
+.ws-pdp .ws-bij.ws-l .ws-haak{left:calc(100% + 10px);bottom:9px;width:84px;height:98px;
+  border-bottom-width:1px;border-right-width:1px;border-bottom-right-radius:13px}
+.ws-pdp .ws-bij.ws-l .ws-stip{left:calc(100% + 90px);bottom:104px}
+.ws-pdp .ws-bij.ws-r{right:22px;top:286px;text-align:left}
+.ws-pdp .ws-bij.ws-r .ws-haak{right:calc(100% + 8px);top:10px;width:46px;height:30px;
+  border-top-width:1px;border-left-width:1px;border-top-left-radius:13px}
+.ws-pdp .ws-bij.ws-r .ws-stip{right:calc(100% + 52px);top:34px}
+.ws-pdp .ws-haak{position:absolute;display:block;border-color:#C79A52;border-style:solid;border-width:0}
+.ws-pdp .ws-stip{position:absolute;display:block;width:6px;height:6px;border-radius:50%;background:#C79A52}
+
+/* ---- miniaturen ---- */
+/* De strook schuift horizontaal, zodat ook de zesde en verder bereikbaar zijn.
+   De miniaturen tonen de hele foto: object-fit:cover met een zoom was op de
+   mockupbeelden afgestemd en snijdt echte productfoto's doormidden. */
+.ws-pdp .ws-th{display:flex;gap:9px;margin-top:18px;position:relative;z-index:4;flex:none;
+  overflow-x:auto;scrollbar-width:none;scroll-snap-type:x proximity;padding-bottom:2px}
+.ws-pdp .ws-th::-webkit-scrollbar{display:none}
+.ws-pdp .ws-th figure{margin:0;flex:0 0 calc((100% - 36px) / 5);min-width:76px;scroll-snap-align:start}
+.ws-pdp .ws-th .ws-vk{aspect-ratio:1/1;border-radius:11px;overflow:hidden;border:1px solid rgba(17,17,17,.09);
+  background:#fff;display:block}
+.ws-pdp .ws-th .ws-vk img{width:100%;height:100%;object-fit:contain;display:block;padding:6px}
+
+/* bladerpijlen op het podium, want met een muis valt een schuifbaan niet te vegen */
+.ws-pdp .ws-pijl{position:absolute;top:calc(50% - 34px);transform:translateY(-50%);z-index:5;
+  width:38px;height:38px;border-radius:50%;border:1px solid rgba(17,17,17,.1);background:rgba(255,255,255,.92);
+  color:#111;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;
+  box-shadow:0 6px 18px -8px rgba(17,17,17,.4)}
+.ws-pdp .ws-pijl:hover{background:#fff}
+.ws-pdp .ws-pijl svg{width:17px;height:17px}
+.ws-pdp .ws-vorige{left:14px}
+.ws-pdp .ws-volgende{right:14px}
+.ws-pdp .ws-th figure.ws-on .ws-vk{border:2px solid var(--ws-gold4)}
+.ws-pdp .ws-th figcaption{margin-top:6px;font-size:9.5px;font-weight:500;color:var(--ws-ink60);
+  text-align:center;line-height:1.2;overflow-wrap:anywhere}
+
+/* ---- koopvak ---- */
+.ws-pdp .ws-bb{background:var(--ws-zwart);border:1px solid rgba(20,18,15,.10);
+  box-shadow:0 1px 2px rgba(20,18,15,.04),0 18px 40px -28px rgba(20,18,15,.28);border-radius:20px;padding:26px 26px 22px;position:relative;overflow:hidden;min-width:0}
+/* De gouden bogen. Op zwart waren ze een gloed van 16% licht goud; op zand
+   is dat contrast 1,03 en zie je niets. Dieper goud (#BC813E) op .34 komt
+   uit op 1,40 tegen het koopvak en 1,37 tegen de paginagrond -- vrijwel
+   gelijk, dus dezelfde lijn leest hetzelfde waar hij ook overheen loopt.
+   Dat is textuur, geen inhoud: hoger en het gaat met de tekst concurreren. */
+.ws-pdp .ws-bb .ws-strepen{position:absolute;right:-14%;top:-10%;width:82%;height:124%;
+  pointer-events:none;opacity:.34}
+.ws-pdp .ws-bb > *:not(.ws-strepen){position:relative;z-index:1}
+/* De pil is een merkteken, geen kop: hij hoort op te vallen zonder de
+   productnaam eronder te verdringen. Vandaar ongeveer de helft van de
+   hoogte die hij eerst had. */
+.ws-pdp .ws-pil{display:inline-flex;align-items:center;border-radius:100px;overflow:hidden;
+  background:linear-gradient(100deg,#F7E2B4,#EFCE93);padding:2.5px 2.5px 2.5px 0}
+.ws-pdp .ws-pil b{font-size:9.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;white-space:nowrap}
+.ws-pdp .ws-pil .ws-a{padding:3px 10px 3px 13px;color:#4A2E08}
+/* Het kortingslabel was goud op goud: twee tinten die om voorrang vechten en
+   allebei verliezen. Zwart met wit springt eruit zonder een derde kleur toe
+   te voegen -- het is de kleur van het koopvak eronder. */
+.ws-pdp .ws-pil .ws-z{padding:3px 11px;border-radius:100px;color:var(--ws-ink);
+  background:var(--ws-zwart)}
+
+.ws-pdp .ws-tp{display:flex;align-items:center;gap:9px;margin-top:15px;flex-wrap:wrap}
+.ws-pdp .ws-tp .ws-st{display:flex;gap:2px}
+.ws-pdp .ws-tp .ws-st i{width:17px;height:17px;background:var(--ws-groen);border-radius:2px;display:flex;
+  align-items:center;justify-content:center}
+.ws-pdp .ws-tp .ws-st svg{width:11px;height:11px;fill:#fff}
+.ws-pdp .ws-tp .ws-lb{font-size:12.5px;font-weight:500;color:var(--ws-ink)}
+.ws-pdp .ws-tp .ws-sc{font-size:12.5px;color:var(--ws-w52);font-weight:400}
+
+.ws-pdp .ws-h1{font-size:33px;font-weight:500;letter-spacing:-.025em;color:var(--ws-ink);margin-top:11px;line-height:1.06}
+.ws-pdp .ws-sub{font-size:23px;font-weight:400;letter-spacing:-.02em;line-height:1.22;margin-top:9px;color:var(--ws-ink)}
+
+.ws-pdp .ws-rev{margin-top:15px;border:1px solid var(--ws-lijn);border-radius:13px;background:var(--ws-kaart);padding:14px 16px}
+.ws-pdp .ws-rev .ws-kop{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.ws-pdp .ws-rev .ws-kop .ws-lk{display:flex;align-items:center;gap:8px}
+.ws-pdp .ws-rev .ws-kop .ws-lk .ws-st{display:flex;gap:1.5px}
+.ws-pdp .ws-rev .ws-kop .ws-lk .ws-st i{width:14px;height:14px;background:var(--ws-groen);border-radius:2px;
+  display:flex;align-items:center;justify-content:center}
+.ws-pdp .ws-rev .ws-kop .ws-lk .ws-st svg{width:9px;height:9px;fill:#fff}
+.ws-pdp .ws-rev .ws-kop .ws-lk b{font-size:12px;font-weight:600;color:var(--ws-ink)}
+.ws-pdp .ws-rev .ws-kop .ws-alle{font-size:11.5px;font-weight:600;color:var(--ws-w72);text-decoration:none;
+  border-bottom:1px solid rgba(20,18,15,.28);padding-bottom:2px;white-space:nowrap;transition:color .16s ease,border-color .16s ease}
+.ws-pdp .ws-rev .ws-kop .ws-alle:hover{color:var(--ws-ink);border-bottom-color:var(--ws-ink)}
+.ws-pdp .ws-rev q{display:block;margin-top:10px;font-style:italic;font-size:13.5px;line-height:1.45;color:var(--ws-ink);quotes:none}
+.ws-pdp .ws-rev .ws-voet{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:9px}
+.ws-pdp .ws-rev .ws-wie{font-size:11.5px;color:var(--ws-w52)}
+.ws-pdp .ws-rev .ws-wie b{color:var(--ws-ink);font-weight:600}
+.ws-pdp .ws-rev .ws-ok{display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:500;color:var(--ws-w72)}
+.ws-pdp .ws-rev .ws-ok svg{width:14px;height:14px;flex:none}
+
+.ws-pdp .ws-lead{margin:9px 0 0;font-size:14.5px;line-height:1.45;color:var(--ws-w52)}
+.ws-pdp .ws-tp .ws-cf{font-size:12.5px;font-weight:500;color:var(--ws-ink)}
+.ws-pdp .ws-pay .ws-pr{font-size:11.5px;font-weight:500;color:var(--ws-w72)}
+.ws-pdp .ws-prijs{display:flex;align-items:baseline;gap:13px;flex-wrap:wrap;margin-top:16px}
+/* -.035em drukte de komma tegen de cijfers aan. Op 38px scheelt elke stap
+   ruim een pixel per tekenpaar, dus dit is een zichtbaar verschil. */
+.ws-pdp .ws-prijs .ws-nu{font-size:38px;font-weight:500;letter-spacing:-.01em;color:var(--ws-ink);line-height:1}
+.ws-pdp .ws-prijs .ws-nu .ws-munt{margin-right:.09em;font-weight:500}
+.ws-pdp .ws-was .ws-munt,.ws-pdp .ws-besp .ws-munt{margin-right:.18em}
+.ws-pdp .ws-prijs .ws-was{font-size:17px;color:var(--ws-w38);text-decoration:line-through;font-weight:400}
+/* Het bespaarde bedrag stond in een eigen kader onder de prijs en staat nu
+   achter de prijs, op de plek van het weggehaalde percentage. Een euro is
+   concreter dan een procent, en zo staat het er nog maar een keer. Het label
+   breekt als geheel af naar de volgende regel; nooit middenin de zin. */
+.ws-pdp .ws-besp{display:inline-flex;align-items:center;gap:7px;padding:5px 11px;
+  white-space:nowrap;align-self:center;
+  border:1px solid rgba(233,190,114,.5);border-radius:9px;background:transparent}
+.ws-pdp .ws-besp svg{width:13px;height:13px;color:var(--ws-tekstgoud);flex:none}
+.ws-pdp .ws-besp span{font-size:12px;font-weight:600;color:var(--ws-tekstgoud);white-space:nowrap}
+.ws-pdp .ws-gift p,.ws-pdp .ws-vrd,.ws-pdp .ws-tel{color:var(--ws-w72)}
+
+.ws-pdp .ws-usp{list-style:none;margin:17px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
+.ws-pdp .ws-usp li{display:grid;grid-template-columns:21px minmax(0,1fr);gap:12px;align-items:start}
+.ws-pdp .ws-usp .ws-vk{width:21px;height:21px;border-radius:50%;border:1.4px solid rgba(20,18,15,.16);
+  color:#A76F28;background:transparent;
+  display:flex;align-items:center;justify-content:center;margin-top:1px}
+.ws-pdp .ws-usp .ws-vk svg{width:10px;height:10px}
+.ws-pdp .ws-usp b{display:block;font-size:14px;font-weight:400;color:var(--ws-ink);line-height:1.3}
+.ws-pdp .ws-usp span{display:block;font-size:12.5px;color:var(--ws-w52);line-height:1.35;margin-top:2px}
+
+/* levering: een eigen blokje boven het aanbod. Neutraal omlijnd, want goud is
+   van het aanbod en dit is een geruststelling. De drie staan onder elkaar --
+   voorwaarde, aanbod, knop -- en hebben elk lucht nodig, anders lezen ze als
+   een blok. */
+.ws-pdp .ws-vrd{display:flex;align-items:flex-start;gap:10px;margin-top:18px;font-size:12px;
+  line-height:1.45;color:var(--ws-w52);border:1px solid rgba(20,18,15,.10);border-radius:10px;
+  background:transparent;padding:10px 14px}
+.ws-pdp .ws-vrd span{min-width:0}
+.ws-pdp .ws-vrd i{width:8px;height:8px;border-radius:50%;background:#0E9F6E;flex:none;margin-top:5px;
+  box-shadow:0 0 0 3px rgba(14,159,110,.16)}
+.ws-pdp .ws-vrd b{color:var(--ws-ink);font-weight:600}
+
+/* het cadeau — blijft, dit is het extra aanbod per product */
+/* Deze kaart was doorschijnend goud. Dat gaf niets tot de bogen erachter
+   kwamen: goud op goud op goud, en de gouden kop zakte van 4,85 naar 3,65.
+   Dezelfde twee tinten, nu al tegen #F2EEE7 uitgerekend en dus dekkend. Het
+   ziet er identiek uit, maar de bogen lopen er nu achterlangs in plaats van
+   doorheen, en elke tekst hier houdt zijn eigen contrast. */
+.ws-pdp .ws-gift{display:flex;align-items:center;gap:12px;margin-top:14px;padding:13px 16px 13px 12px;
+  border:1px solid rgba(221,165,72,.55);border-radius:13px;
+  background:linear-gradient(180deg,#F0E4D0,#F1E9DB);
+  box-shadow:0 1px 0 rgba(176,116,42,.10)}
+.ws-pdp .ws-gift .ws-ic{width:32px;height:32px;flex:none;border-radius:50%;background:transparent;
+  display:flex;align-items:center;justify-content:center;color:var(--ws-tekstgoud)}
+.ws-pdp .ws-gift .ws-ic svg{width:15px;height:15px}
+.ws-pdp .ws-gift b{display:block;font-size:13px;font-weight:600;color:var(--ws-tekstgoud);line-height:1.3}
+.ws-pdp .ws-gift span{display:block;font-size:11px;font-weight:500;color:var(--ws-w52);line-height:1.35;margin-top:2px}
+
+.ws-pdp .ws-cta{display:flex;align-items:center;justify-content:center;width:100%;margin-top:0;
+  background:linear-gradient(100deg,#F5DEAA,#EBC382 46%,#DDA548);color:#26170A;border:0;border-radius:11px;
+  padding:19px;font-family:inherit;font-size:14px;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;text-align:center;white-space:nowrap}
+/* Dit is een <button>. Zonder eigen achtergrond en lettertype pakt hij die
+   van de browser: een grijs vlak in een systeemletter. Alle andere knoppen
+   hier zetten allebei al; deze deed dat niet. */
+/* Deze knop was een omlijnd vlak dat je makkelijk aanziet voor een kader.
+   Hij heeft nu een eigen vulling, een bronzen rand en een pijl die meebeweegt,
+   zodat hij als knop leest -- maar in brons, niet in goud, want hij mag het
+   niet opnemen tegen "in winkelwagen". */
+.ws-pdp .ws-cta2{display:flex;align-items:center;justify-content:center;gap:11px;width:100%;margin-top:11px;
+  border:1.5px solid #14120F;border-radius:11px;padding:16px;color:#fff;
+  background:#14120F;box-shadow:0 2px 0 rgba(20,18,15,.18);
+  font-family:inherit;cursor:pointer;
+  font-size:12.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  transition:background-color .16s ease,border-color .16s ease}
+.ws-pdp .ws-cta2::after{content:'\2192';font-size:15px;line-height:1;margin-left:-4px;
+  transition:transform .16s ease}
+.ws-pdp .ws-cta2:hover{background:#2A2622;border-color:#2A2622}
+.ws-pdp .ws-cta2:active{transform:translateY(2px);box-shadow:none}
+.ws-pdp .ws-cta2:hover::after{transform:translateX(3px)}
+.ws-pdp .ws-cta2:focus-visible{outline:2px solid var(--ws-tekstgoud);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.ws-pdp .ws-cta2,.ws-pdp .ws-cta2::after{transition:none}
+  .ws-pdp .ws-cta2:active{transform:none}}
+.ws-pdp .ws-cta2 svg{width:17px;height:17px;flex:none;color:currentColor}
+.ws-pdp .ws-cta2 svg .vgl-a{opacity:.55}
+
+/* ---- de cadeaus uit de winkelwagen ---- */
+/* Marine met goud. Het contrast met de crèmegrond zit in de wáárde en niet
+   in de tint, dus dit vlak schreeuwt zonder met het goud van de koopknop te
+   vechten -- en juist daardoor mag het goud hier terugkomen als rand, als
+   bovenregel en als plaatje. Op de knop is goud een vlak; hier is het lijn.
+
+   Alle maten zijn ongeveer gehalveerd ten opzichte van de eerste versie: die
+   was 383px op de desktop en nam meer aandacht dan de koopknop eronder. Het
+   meeste won ik door de doorgestreepte prijs en het plaatje op één regel te
+   zetten in plaats van onder elkaar; er hoefde niets weg. */
+.ws-pdp .ws-cad{--cad-marine:#14294B;--cad-marine2:#1E3A69;--cad-marine3:#101F3A;
+  --cad-goud:#D9B45C;--cad-goud2:#EFCE93;--cad-goud3:#B8912F;--cad-room:#F7F3EC;
+  margin-top:13px;padding:11px 11px 10px;border-radius:14px;
+  border:1.5px solid var(--cad-goud);background:var(--cad-marine);
+  box-shadow:0 8px 20px -16px rgba(20,41,75,.5)}
+
+/* Verloop, twee keer, allebei ingehouden.
+
+   Het vlak loopt diagonaal van iets lichter marine linksboven naar dieper
+   rechtsonder. Dat licht valt precies waar het plaatje en de bovenregel
+   staan en dooft waar de crèmekaart begint, dus de kaart komt naar voren
+   zonder dat er een rand omheen hoeft.
+
+   De rand krijgt een goudglans in plaats van één vlakke tint: goud is nooit
+   één kleur, en de koopknop eronder heeft datzelfde verloop al. Twee lagen
+   in één background -- de eerste tot aan de padding, de tweede tot aan de
+   rand -- want een border kan zelf geen verloop dragen. */
+.ws-pdp .ws-cad{
+  background:linear-gradient(158deg,var(--cad-marine2) 0%,var(--cad-marine) 46%,var(--cad-marine3) 100%) padding-box,
+             linear-gradient(150deg,var(--cad-goud2) 0%,var(--cad-goud) 38%,var(--cad-goud3) 72%,var(--cad-goud2) 100%) border-box;
+  border-color:transparent;background-color:var(--cad-marine)}
+
+/* ---- de bovenrij: plaatje links, stempel rechts ---- */
+.ws-pdp .ws-cad-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:7px}
+.ws-pdp .ws-cad-ic{flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;
+  background:var(--cad-room);border:1.5px solid var(--cad-goud);color:var(--cad-marine)}
+.ws-pdp .ws-cad-ic{background:linear-gradient(var(--cad-room),var(--cad-room)) padding-box,
+  linear-gradient(150deg,var(--cad-goud2),var(--cad-goud) 45%,var(--cad-goud3)) border-box;
+  border-color:transparent}
+.ws-pdp .ws-cad-ic svg{width:13px;height:13px}
+.ws-pdp .ws-cad-ey{font-size:9.5px;font-weight:700;letter-spacing:.10em;text-transform:uppercase;
+  color:var(--cad-goud)}
+.ws-pdp .ws-cad-auto{margin-left:auto;font-size:8.5px;font-weight:700;letter-spacing:.07em;
+  text-transform:uppercase;color:var(--cad-goud);border:1px solid rgba(217,180,92,.6);
+  border-radius:100px;padding:4px 9px;white-space:nowrap}
+/* Op de telefoon past dit stempel niet naast de bovenregel; het viel op een
+   eigen regel en kostte vijftig pixels. Het zegt bovendien hetzelfde als de
+   regel onderaan, dus daar mag het weg in plaats van dubbel te staan. */
+@media screen and (max-width:749px){.ws-pdp .ws-cad-auto{display:none}}
+
+/* ---- de kop ---- */
+.ws-pdp .ws-cad-kop{margin-bottom:8px}
+.ws-pdp .ws-cad-kop b{display:block;font-size:16px;font-weight:600;letter-spacing:-.015em;
+  line-height:1.1;text-transform:uppercase;color:#fff;text-wrap:balance}
+.ws-pdp .ws-cad-kop .ws-cad-munt{display:inline;margin-right:.05em;
+  font-size:inherit;font-weight:inherit;color:inherit}
+.ws-pdp .ws-cad-kop > span{display:block;margin-top:3px;font-size:11px;line-height:1.3;
+  color:rgba(255,255,255,.80)}
+
+/* ---- de crèmekaart met de cadeaus ---- */
+/* Eén kaart met gouden haarlijnen ertussen, geen losse kaartjes: zo blijft
+   het één cadeau dat uit drie dingen bestaat en niet drie losse aanbiedingen. */
+.ws-pdp .ws-cad-lijst{list-style:none;margin:0;padding:0;border-radius:10px;
+  background:var(--cad-room);overflow:hidden;
+  display:grid;grid-template-columns:repeat(var(--cad-n,3),minmax(0,1fr))}
+.ws-pdp .ws-cad-k{position:relative;display:flex;flex-direction:column;align-items:center;
+  text-align:center;gap:4px;padding:7px 8px;min-width:0}
+.ws-pdp .ws-cad-k + .ws-cad-k::before{content:"";position:absolute;left:0;top:14%;bottom:14%;
+  width:1px;background:rgba(217,180,92,.55)}
+
+.ws-pdp .ws-cad-bd{width:100%;height:36px;display:grid;place-items:center;color:var(--cad-marine)}
+.ws-pdp .ws-cad-bd img{display:block;width:100%;height:36px;object-fit:contain}
+.ws-pdp .ws-cad-vz .ws-cad-bd svg{width:30px;height:auto}
+
+.ws-pdp .ws-cad-nm{font-size:11.5px;font-weight:500;letter-spacing:-.005em;line-height:1.2;
+  color:var(--cad-marine)}
+/* prijs en plaatje naast elkaar; onder elkaar kostte dat twintig pixels per kaart */
+.ws-pdp .ws-cad-pr{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap}
+.ws-pdp .ws-cad-pr s{font-size:10.5px;color:rgba(20,41,75,.68);text-decoration:line-through}
+
+.ws-pdp .ws-cad-nul{flex:none;font-style:normal;font-size:9px;font-weight:700;
+  letter-spacing:.04em;text-transform:uppercase;color:#fff;background:var(--cad-marine);
+  border-radius:100px;padding:4px 8px;white-space:nowrap}
+
+/* ---- de geruststelling onderaan ---- */
+.ws-pdp .ws-cad-voet{display:flex;align-items:center;gap:7px;margin:7px 0 0;
+  font-size:10.5px;line-height:1.3;color:rgba(255,255,255,.78)}
+.ws-pdp .ws-cad-voet > span{flex:none;display:grid;place-items:center;color:var(--cad-goud)}
+.ws-pdp .ws-cad-voet svg{width:14px;height:14px}
+
+/* ---- telefoon ---- */
+/* Drie kolommen van 110 pixels laten geen productnaam heel, dus daar wordt
+   het een lijst: foto links, naam en prijs in het midden, plaatje rechts. */
+@media screen and (max-width:749px){
+  .ws-pdp .ws-bb > .ws-cad{order:11}
+  .ws-pdp .ws-cad{padding:10px 10px 9px;border-radius:13px}
+  .ws-pdp .ws-cad-top{margin-bottom:7px;gap:8px}
+  .ws-pdp .ws-cad-ic{width:25px;height:25px}
+  .ws-pdp .ws-cad-ic svg{width:13px;height:13px}
+  .ws-pdp .ws-cad-ey{font-size:9px;letter-spacing:.09em}
+  .ws-pdp .ws-cad-auto{font-size:7.5px;padding:3px 7px;letter-spacing:.07em}
+  .ws-pdp .ws-cad-kop{margin-bottom:8px}
+  .ws-pdp .ws-cad-kop b{font-size:15px}
+  .ws-pdp .ws-cad-kop > span{font-size:10.5px}
+
+  .ws-pdp .ws-cad-lijst{grid-template-columns:minmax(0,1fr)}
+  .ws-pdp .ws-cad-k{flex-direction:row;align-items:center;text-align:left;
+    gap:9px;padding:6px 9px}
+  .ws-pdp .ws-cad-k + .ws-cad-k::before{left:9px;right:9px;top:0;bottom:auto;
+    width:auto;height:1px}
+  .ws-pdp .ws-cad-bd{width:34px;height:30px;flex:none}
+  .ws-pdp .ws-cad-bd img{height:30px}
+  .ws-pdp .ws-cad-vz .ws-cad-bd svg{width:28px}
+  .ws-pdp .ws-cad-nm{flex:1 1 auto;min-width:0;text-align:left}
+  .ws-pdp .ws-cad-pr{flex:none}
+  .ws-pdp .ws-cad-nm{font-size:11.5px}
+  .ws-pdp .ws-cad-pr s{font-size:10.5px}
+  .ws-pdp .ws-cad-nul{flex:none;font-size:9px;padding:4px 8px}
+  .ws-pdp .ws-cad-voet{font-size:10px;gap:7px;margin-top:7px}
+  .ws-pdp .ws-cad-voet svg{width:14px;height:14px}
+}
+
+@media screen and (max-width:360px){
+  .ws-pdp .ws-cad-kop b{font-size:15px}
+  .ws-pdp .ws-cad-bd{width:34px;height:30px}
+  .ws-pdp .ws-cad-bd img{height:30px}
+}
+
+/* betaalmethoden onder de knop */
+.ws-pdp .ws-pay{display:flex;align-items:center;gap:11px;flex-wrap:wrap;margin-top:13px}
+.ws-pdp .ws-pay .ws-mk{height:23px;display:flex;align-items:center;justify-content:center;padding:0 7px;
+  background:#fff;border-radius:4px;min-width:37px}
+.ws-pdp .ws-pay .ws-mk.ws-ideal{background:#fff}
+.ws-pdp .ws-pay .ws-mk svg{display:block}
+.ws-pdp .ws-pay .ws-sep{width:1px;height:15px;background:var(--ws-lijn2)}
+.ws-pdp .ws-pay .ws-vl{display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:500;color:var(--ws-w72)}
+.ws-pdp .ws-pay .ws-vl svg{width:12px;height:12px}
+
+.ws-pdp .ws-tel{display:flex;align-items:center;justify-content:center;gap:9px;margin-top:15px;
+  font-size:12.5px;color:var(--ws-w52)}
+.ws-pdp .ws-tel svg{width:15px;height:15px;color:var(--ws-tekstgoud)}
+.ws-pdp .ws-tel b{color:var(--ws-ink);font-weight:600}
+
+
+@media (max-width:1000px){
+  .ws-pdp .ws-pdp-grid{grid-template-columns:1fr}
+  .ws-pdp .ws-bij{display:none}
+}
+@media (max-width:880px){
+  .ws-pdp .ws-stg .ws-ghost{right:-2%;width:66%;opacity:.07}
+  .ws-pdp .ws-pay{justify-content:center;gap:8px 10px}
+  .ws-pdp .ws-pay .ws-sep{display:none}
+  .ws-pdp .ws-pay .ws-vl{flex-basis:100%;justify-content:center;margin-top:2px}
+}
+@media (max-width:560px){
+  .ws-pdp .ws-th{gap:6px}
+  .ws-pdp .ws-th figure{flex:0 0 calc((100% - 24px) / 5)}
+  .ws-pdp .ws-pijl{width:32px;height:32px}
+  .ws-pdp .ws-vorige{left:8px}
+  .ws-pdp .ws-volgende{right:8px}
+  .ws-pdp .ws-th figcaption{font-size:8.5px;margin-top:5px}
+  .ws-pdp .ws-cta{font-size:12px;letter-spacing:.05em;padding:17px 10px}
+  .ws-pdp .ws-cta2{font-size:10.5px;letter-spacing:.07em;gap:9px;padding:15px 10px}
+}
+
+
+/* ---- accordeons in het koopvak ---- */
+.ws-pdp .ws-acc{margin-top:14px;border-top:1px solid rgba(20,18,15,.13)}
+.ws-pdp .ws-acc details{border-bottom:1px solid rgba(20,18,15,.13)}
+.ws-pdp .ws-acc summary{list-style:none;cursor:pointer;display:flex;align-items:center;
+  justify-content:space-between;gap:12px;padding:13px 0;
+  font-size:13px;font-weight:500;letter-spacing:-.01em;color:var(--ws-ink)}
+.ws-pdp .ws-acc summary::-webkit-details-marker{display:none}
+.ws-pdp .ws-acc summary i{position:relative;width:13px;height:13px;flex:none}
+.ws-pdp .ws-acc summary i::before,
+.ws-pdp .ws-acc summary i::after{content:'';position:absolute;background:var(--ws-tekstgoud);
+  left:50%;top:50%;transform:translate(-50%,-50%)}
+.ws-pdp .ws-acc summary i::before{width:13px;height:1.6px}
+.ws-pdp .ws-acc summary i::after{width:1.6px;height:13px;transition:transform .18s ease}
+.ws-pdp .ws-acc details[open] summary i::after{transform:translate(-50%,-50%) scaleY(0)}
+.ws-pdp .ws-acc .in{padding:0 0 15px;font-size:12.5px;line-height:1.55;color:rgba(20,18,15,.62)}
+.ws-pdp .ws-acc .in p{margin:0 0 8px}
+.ws-pdp .ws-acc .in p:last-child{margin-bottom:0}
+.ws-pdp .ws-acc .sp{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;margin:0}
+.ws-pdp .ws-acc .sp dt{color:rgba(20,18,15,.42);white-space:nowrap}
+.ws-pdp .ws-acc .sp dd{margin:0;color:rgba(20,18,15,.78)}
+.ws-pdp .ws-acc ul{margin:0;padding-left:16px}
+.ws-pdp .ws-acc li{margin:0 0 4px}
+@media (prefers-reduced-motion:reduce){
+  .ws-pdp .ws-acc summary i::after{transition:none}}
+
+
+/* ---- de telefoon ----
+   Ontwerp: het koopvak als één donkere kaart, van boven naar beneden precies
+   de volgorde waarin je de beslissing neemt. Elk direct kind krijgt hier een
+   eigen order. Dat moet: zonder order valt een element terug op nul en komt
+   het vóór alles met order 1. Zo stonden de prijs en de appblokken tot nu toe
+   boven de productnaam.                                                     */
+@media screen and (max-width:749px){
+  .ws-pdp .ws-pdp-grid{padding:12px;gap:12px}
+  .ws-pdp .ws-bb{display:flex;flex-direction:column;padding:20px 18px 18px;border-radius:18px}
+  .ws-pdp .ws-bb > .ws-strepen{order:0}
+  /* Op 390 px is de doos smal en hoog: dezelfde bocht staat daar bijna
+     loodrecht en snijdt dwars door de USP-regels. Smaller en verder naar
+     rechts, zodat hij langs de regeleinden loopt in plaats van erdoor. */
+  .ws-pdp .ws-bb .ws-strepen{right:-8%;top:-6%;width:56%;height:112%;opacity:.30}
+  .ws-pdp .ws-bb > .ws-pil{order:1}
+  .ws-pdp .ws-bb > .ws-tp{order:2}
+  .ws-pdp .ws-bb > .ws-h1{order:3}
+  .ws-pdp .ws-bb > .ws-sub{order:4}
+  .ws-pdp .ws-bb > .ws-lead{order:5}
+  .ws-pdp .ws-bb > [id^="ProductPrice-"]{order:6}
+  .ws-pdp .ws-bb > .ws-opties{order:7}
+  .ws-pdp .ws-bb > .ws-usp{order:8}
+  .ws-pdp .ws-bb > .ws-vrd{order:9}
+  .ws-pdp .ws-bb > .ws-gift{order:10}
+  .ws-pdp .ws-bb > .ws-vorm{order:12}
+  .ws-pdp .ws-bb > .ws-apps{order:13}
+  .ws-pdp .ws-bb > .ws-pay{order:14}
+  .ws-pdp .ws-bb > .ws-cta2{order:15}
+  .ws-pdp .ws-bb > .ws-rev{order:16;margin-top:16px;padding-top:16px;border-top:1px solid var(--ws-lijn)}
+  .ws-pdp .ws-bb > .ws-tel{order:17}
+  .ws-pdp .ws-bb > .ws-acc{order:18}
+
+  /* de gouden balk over de volle breedte: naam links, korting rechts */
+  .ws-pdp .ws-pil{display:flex;align-self:stretch;justify-content:space-between;align-items:center;
+    padding:4px;gap:8px}
+  .ws-pdp .ws-pil b{font-size:10.5px;letter-spacing:.04em}
+  .ws-pdp .ws-pil .ws-a{padding:4px 5px 4px 11px;min-width:0;overflow:hidden;text-overflow:ellipsis}
+  .ws-pdp .ws-pil .ws-z{padding:5px 11px;flex:none}
+
+  .ws-pdp .ws-tp{gap:7px}
+  .ws-pdp .ws-tp .ws-sc{margin-left:6px}
+  .ws-pdp .ws-bb > .ws-h1{font-size:31px}
+  .ws-pdp .ws-bb > .ws-sub{font-size:20px}
+
+  /* prijs, oude prijs en het bespaarde bedrag op één regel. Het rode
+     kortingsplaatje valt weg: dat percentage staat al in de gouden balk. */
+  .ws-pdp .ws-bb > [id^="ProductPrice-"]{display:flex;flex-wrap:wrap;align-items:center;
+    gap:10px 12px;margin-top:16px}
+  .ws-pdp .ws-prijs{margin-top:0;gap:10px}
+  .ws-pdp .ws-prijs .ws-nu{font-size:34px}
+  .ws-pdp .ws-besp{padding:5px 10px}
+  .ws-pdp .ws-besp span{font-size:11.5px}
+
+  /* de beloftes tussen twee haarlijnen, drie stuks; meer past niet zonder
+     dat de knop van het scherm valt */
+  .ws-pdp .ws-usp{margin-top:18px;padding:17px 0;gap:14px;
+    border-top:1px solid rgba(20,18,15,.13);border-bottom:1px solid rgba(20,18,15,.13)}
+  .ws-pdp .ws-usp li:nth-child(n+4){display:none}
+
+  /* De voorraadregel staat nu als eigen blok boven het aanbod, dus de
+     omkeertruc binnen het formulier is niet meer nodig. Zonder kader, want het
+     is een mededeling en geen aanbod. */
+  .ws-pdp .ws-vorm{display:flex;flex-direction:column;margin-top:18px}
+  .ws-pdp .ws-vrd{margin:18px 0 0;border:0;background:none;padding:0;font-size:12.5px}
+  .ws-pdp .ws-cta{margin-top:0;font-size:13px;letter-spacing:.08em;padding:20px 10px}
+
+  /* onder de knop alleen tekst. De betaallogo's staan lager op de pagina in
+     hun eigen blok; hier zijn ze ruis naast de twee zinnen die tellen. */
+  .ws-pdp .ws-pay{justify-content:center;gap:6px 10px;margin-top:14px}
+  .ws-pdp .ws-pay .ws-mk,.ws-pdp .ws-pay .ws-sep{display:none}
+  .ws-pdp .ws-pay .ws-vl{margin-top:0;flex-basis:auto}
+  .ws-pdp .ws-pay .ws-pr::before{content:'\00b7';margin-right:9px;color:var(--ws-w38)}
+
+  /* de vergelijkingsknop houdt hier dezelfde behandeling als op het brede
+     scherm: een omlijnde knop met het icoon. Als tekstlink was hij te
+     makkelijk over het hoofd te zien, en de pop-up is juist de keuzehulp. */
+  .ws-pdp .ws-cta2{margin-top:13px}
+
+  .ws-pdp .ws-stg{padding:16px 16px 14px;border-radius:16px}
+  .ws-pdp .ws-tg{top:14px;left:14px;border-radius:100px;padding:7px 13px;font-size:9.5px}
+}
+
+/* ---- podium als schuifbaan; één dia per keer ---- */
+.ws-pdp .ws-baan{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:16px;
+  scrollbar-width:none;margin:0;padding:0;list-style:none}
+.ws-pdp .ws-baan::-webkit-scrollbar{display:none}
+/* min-width:0 is hier niet optioneel: een flexitem krijgt standaard
+   min-width:auto, en dan duwt de eigen breedte van de foto (2080 px)
+   de dia open in plaats van dat hij zich naar de kolom voegt. */
+.ws-pdp .ws-baan > li{flex:0 0 100%;min-width:0;scroll-snap-align:start;margin:0}
+@media screen and (max-width:749px){.ws-pdp .ws-baan{gap:12px}}
+
+/* ---- keuzeknoppen voor varianten ---- */
+.ws-pdp .ws-opties{margin-top:16px;display:flex;flex-direction:column;gap:10px}
+.ws-pdp .ws-optie{display:flex;flex-wrap:wrap;gap:8px;margin:0}
+.ws-pdp .ws-optie > b{flex-basis:100%;font-size:11px;font-weight:700;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--ws-w52)}
+.ws-pdp .ws-optie label{cursor:pointer}
+.ws-pdp .ws-optie label span{display:block;border:1px solid var(--ws-lijn2);border-radius:9px;
+  padding:9px 14px;font-size:12.5px;font-weight:500;color:var(--ws-ink)}
+.ws-pdp .ws-optie input:checked + span{border-color:var(--ws-tekstgoud);color:var(--ws-tekstgoud);
+  background:rgba(20,18,15,.05)}
+.ws-pdp .ws-optie input:disabled + span{opacity:.4;text-decoration:line-through}
+.ws-pdp .visually-hidden{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);
+  clip-path:inset(50%);white-space:nowrap}
+
+/* ---- het formulier ---- */
+.ws-pdp .ws-vorm{margin:18px 0 0}
+.ws-pdp .ws-cta[disabled]{opacity:.5;cursor:not-allowed}
+.ws-pdp .ws-melding{margin:9px 0 0;font-size:12px;color:var(--ws-rood)}
+.ws-pdp .ws-melding:empty{display:none}
+
+/* ---- betaalmerken uit de winkelinstellingen ---- */
+.ws-pdp .ws-pay .payment__list{display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  list-style:none;margin:0;padding:0}
+.ws-pdp .ws-pay .payment__list svg{height:23px;width:auto;display:block;border-radius:4px}
+
+/* ---- wat zit er in de doos ----
+   Een regel per artikel: foto, naam, en de omschrijving pas bij een tik.
+   Zes artikelen met elk drie regels tekst is op een telefoon een muur; zo
+   past de hele doos in een oogopslag en gaat er niets verloren. De regels
+   hieronder draaien de opmaak van de buitenste accordeon terug, want die
+   erft door naar de details hierbinnen. */
+.ws-pdp .ws-acc .ws-doos{list-style:none;margin:2px 0 0;padding:0}
+.ws-pdp .ws-acc .ws-doos > li{border-top:1px solid rgba(20,18,15,.09)}
+.ws-pdp .ws-acc .ws-doos > li:first-child{border-top:0}
+.ws-pdp .ws-acc .ws-doos details{border-bottom:0}
+.ws-pdp .ws-acc .ws-doos summary,
+.ws-pdp .ws-acc .ws-doos .ws-doos-k{display:flex;align-items:center;gap:11px;
+  justify-content:flex-start;margin:0;padding:7px 0;
+  font-size:12.5px;font-weight:600;letter-spacing:0;color:rgba(20,18,15,.92)}
+.ws-pdp .ws-acc .ws-doos .ws-doos-k{cursor:default}
+@media (hover:hover){
+  .ws-pdp .ws-acc .ws-doos summary:hover b{color:var(--ws-ink)}
+  .ws-pdp .ws-acc .ws-doos summary:hover em{border-color:rgba(20,18,15,.6)}
+}
+.ws-pdp .ws-acc .ws-doos-b{flex:none;width:38px;height:38px;border-radius:8px;
+  background:rgba(20,18,15,.055);overflow:hidden}
+.ws-pdp .ws-acc .ws-doos-b img{width:100%;height:100%;object-fit:contain;display:block}
+.ws-pdp .ws-acc .ws-doos b{flex:1 1 auto;min-width:0;font-weight:600}
+.ws-pdp .ws-acc .ws-doos em{flex:none;width:7px;height:7px;margin-right:3px;
+  border-right:1.5px solid rgba(20,18,15,.32);
+  border-bottom:1.5px solid rgba(20,18,15,.32);
+  transform:rotate(45deg);transform-origin:60% 60%;transition:transform .18s ease}
+.ws-pdp .ws-acc .ws-doos details[open] em{transform:rotate(225deg)}
+.ws-pdp .ws-acc .ws-doos-t{padding:0 2px 10px 49px;color:rgba(20,18,15,.6)}
+/* metafield_tag verpakt de tekst in een div met paragrafen; die brengen hun
+   eigen marges mee en die willen we hier niet. */
+.ws-pdp .ws-acc .ws-doos-t > div{display:contents}
+.ws-pdp .ws-acc .ws-doos-t p{margin:0 0 5px}
+.ws-pdp .ws-acc .ws-doos-t p:last-child{margin-bottom:0}
+@media (prefers-reduced-motion:reduce){
+  .ws-pdp .ws-acc .ws-doos em{transition:none}
+}
+
+/* ---- de specificaties ----
+   In het veld staat elke regel als losse regel binnen een alinea. Zonder
+   pre-line lopen ze aan elkaar tot een doorlopende zin. En veertien regels
+   onder elkaar is nog steeds een kolom van een halve telefoon, dus zet
+   multicol ze in twee kolommen; de regels zijn kort genoeg. */
+.ws-pdp .ws-acc .ws-spec{font-size:12px;line-height:1.5}
+.ws-pdp .ws-acc .ws-spec > div{columns:2;column-gap:20px;orphans:1;widows:1}
+.ws-pdp .ws-acc .ws-spec p{margin:0;white-space:pre-line;color:rgba(20,18,15,.72)}
+.ws-pdp .ws-acc .in ul{margin:0;padding-left:18px}
+.ws-pdp .ws-acc .in a{color:var(--ws-tekstgoud)}
+
+@media (prefers-reduced-motion:reduce){
+  .ws-pdp *{transition:none!important;scroll-behavior:auto!important}
+}
+
+/* ---- knop-reset voor de miniaturen ---- */
+.ws-pdp .ws-th button.ws-vk{padding:0;background:none;cursor:pointer;display:block;width:100%}
+.ws-pdp .ws-th button.ws-vk:focus-visible{outline:2px solid var(--ws-gold4);outline-offset:2px}
+
+/* ---- de meelopende koopbalk ----
+   Referentie 3 was de favoriet: naam, ondertitel, prijs met doorhaling en het
+   bespaarlabel, compact. Wat daar ontbrak was een knop die je ziet -- daar
+   stond een rond icoontje. Dus: die indeling, met de gouden knop van de
+   pagina zelf erin. Geen tweede stijl, gewoon dezelfde CTA op knopformaat.
+
+   De hoogte is het hele punt op de telefoon. Alles bij elkaar is dit 58 px
+   plus de veilige zone; hoger en hij begint het scherm op te eten, en dat is
+   precies wat er niet moest gebeuren. */
+.ws-pdp .ws-sticky{position:fixed;left:0;right:0;bottom:0;z-index:90;
+  background:var(--ws-zwart);
+  border-top:1px solid rgba(188,129,62,.34);
+  box-shadow:0 -10px 30px -22px rgba(20,18,15,.5);
+  padding:9px 16px calc(9px + env(safe-area-inset-bottom,0px));
+  transform:translateY(102%);transition:transform .22s ease;
+  font-family:'MontserratEG','Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
+.ws-pdp .ws-sticky[hidden]{display:none}
+/* .ws-wijk wint bewust via :not() en niet via volgorde: een regel die het
+   alleen van zijn plek in het bestand moet hebben, sneuvelt bij de eerste
+   herschikking. */
+.ws-pdp .ws-sticky.ws-in:not(.ws-wijk){transform:none}
+@media (prefers-reduced-motion:reduce){
+  .ws-pdp .ws-sticky{transition:none}
+}
+.ws-pdp .ws-sticky-rail{max-width:1240px;margin:0 auto;
+  display:flex;align-items:center;gap:14px;min-width:0}
+
+.ws-pdp .ws-sticky-th{flex:none;width:40px;height:40px;border-radius:9px;overflow:hidden;
+  background:var(--ws-kaart);border:1px solid var(--ws-lijn)}
+.ws-pdp .ws-sticky-th img{width:100%;height:100%;object-fit:contain;display:block;
+  mix-blend-mode:multiply}
+
+.ws-pdp .ws-sticky-tx{min-width:0;display:flex;flex-direction:column;gap:1px;flex:1 1 auto}
+.ws-pdp .ws-sticky-nm{font-size:14px;font-weight:500;letter-spacing:-.015em;color:var(--ws-ink);
+  line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ws-pdp .ws-sticky-sub{font-size:11.5px;font-weight:500;color:var(--ws-w52);line-height:1.25;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* De prijs is een kopie van .ws-prijs, dus hij draagt dezelfde klassen. Alleen
+   de maten gaan hier omlaag; de kleuren en het label blijven van het koopvak. */
+.ws-pdp .ws-sticky-pr{flex:none}
+.ws-pdp .ws-sticky-pr .ws-prijs{margin:0;gap:9px;flex-wrap:nowrap;align-items:baseline}
+.ws-pdp .ws-sticky-pr .ws-nu{font-size:19px}
+.ws-pdp .ws-sticky-pr .ws-was{font-size:13px}
+.ws-pdp .ws-sticky-pr .ws-besp{padding:3px 8px;font-size:11px;border-radius:7px}
+.ws-pdp .ws-sticky-pr .ws-besp svg{width:11px;height:11px}
+
+.ws-pdp .ws-sticky-knop{flex:none;border:0;cursor:pointer;border-radius:11px;
+  padding:12px 22px;font-family:inherit;font-size:13px;font-weight:600;
+  letter-spacing:.06em;text-transform:uppercase;color:#26170A;
+  background:linear-gradient(100deg,var(--ws-gold1),var(--ws-gold3) 55%,var(--ws-gold4));
+  box-shadow:0 2px 10px -4px rgba(176,116,42,.6)}
+@media (hover:hover){
+  .ws-pdp .ws-sticky-knop:hover{filter:brightness(1.04)}
+}
+.ws-pdp .ws-sticky-knop:focus-visible{outline:2px solid var(--ws-ink);outline-offset:2px}
+.ws-pdp .ws-sticky-knop[disabled]{opacity:.45;cursor:not-allowed;
+  background:var(--ws-kaart);color:var(--ws-w52);box-shadow:none;
+  border:1px solid var(--ws-lijn)}
+
+@media screen and (max-width:749px){
+  /* Op 390 px gaan de miniatuur, de naam en het bespaarlabel eruit. Dat is
+     geen bezuiniging maar een keuze: met alles erin bleef er voor de naam
+     ongeveer 30 px over en stond er "Barber ...", wat slechter is dan niets.
+     Wie deze balk ziet staat op de pagina van dat product -- de naam is het
+     minst nodige van de vier. Prijs en knop krijgen de ruimte. */
+  .ws-pdp .ws-sticky{padding:8px 14px calc(8px + env(safe-area-inset-bottom,0px))}
+  .ws-pdp .ws-sticky-rail{gap:12px}
+  .ws-pdp .ws-sticky-th,
+  .ws-pdp .ws-sticky-tx,
+  .ws-pdp .ws-sticky-pr .ws-besp{display:none}
+  .ws-pdp .ws-sticky-pr{flex:1 1 auto;min-width:0}
+  .ws-pdp .ws-sticky-pr .ws-nu{font-size:19px}
+  .ws-pdp .ws-sticky-pr .ws-was{font-size:13px}
+  .ws-pdp .ws-sticky-knop{padding:12px 18px;font-size:12px;letter-spacing:.05em}
+}
+
+/* ---- laadstaat op de keuzeknoppen in de vergelijk-pop-up ---- */
+.ws-pop .ws-pop-knop.ws-bezig{opacity:.72;cursor:progress}
+

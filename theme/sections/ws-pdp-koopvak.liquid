@@ -1,0 +1,1842 @@
+{% comment %}
+  Wellshave — productpagina, blok 01: alles boven de vouw.
+  Ontwerp: rapporten/blokken/01-above-the-fold-v2-donker.html
+  Volgorde en onderbouwing: rapporten/volgorde.html, rapporten/pdp-plan.html
+
+  De wortel is <main-product> zodat de bestaande base.js het formulier,
+  de variantwissel en de winkelwagenlade oppakt. De id-voorvoegsels
+  ProductForm-, ProductSubmit-, ProductOptions-, ProductPrice- en
+  ProductGallery- zijn daarvoor verplicht — niet hernoemen.
+{% endcomment %}
+
+{{ 'ws-pdp-koopvak.css' | asset_url | stylesheet_tag }}
+{% render 'indent-settings', section: section %}
+
+{%- liquid
+  assign v = product.selected_or_first_available_variant
+  assign s = section.settings
+  assign mf = product.metafields.custom
+
+  comment
+    De gouden regel en de grijze regel eronder zijn twee velden. Staat
+    hero_promise leeg, dan pakt de gouden regel subtitle en blijft de grijze
+    regel weg; dan staat er nooit twee keer hetzelfde.
+  endcomment
+  assign belofte = mf.hero_promise.value | default: mf.subtitle.value
+  assign lead = mf.hero_lead.value
+
+  comment
+    Het citaat komt per product uit custom.buybox_quote. De sectie-instelling
+    is alleen een terugval; staat er voor dit product geen echte productreview,
+    laat beide dan leeg en de kaart valt weg.
+  endcomment
+  assign citaat = mf.buybox_quote.value | default: s.citaat
+  assign citaat_wie = mf.buybox_quote_author.value | default: s.citaat_wie
+
+  comment
+    Het aanbod komt uit custom.limited_offer, hetzelfde metaobject dat de oude
+    sectie gebruikte. Per product te wijzen naar een andere actie.
+  endcomment
+  assign aanbod = mf.limited_offer.value
+
+  comment
+    Het aantal reviews is winkelbreed, dus de sectie-instelling wint.
+    Zo hoef je bij een nieuwe stand maar op een plek te tellen.
+    custom.compare_info.reviews_label blijft de terugval per product.
+  endcomment
+  assign tp_aantal = s.tp_score | default: mf.compare_info.value.reviews_label
+
+  comment
+    De vergelijkingsknop heeft alleen zin als er iets te vergelijken valt.
+  endcomment
+  assign vergelijk_lijst = mf.compare_products.value
+  assign kan_vergelijken = false
+  if mf.compare_table != blank or vergelijk_lijst != blank
+    assign kan_vergelijken = true
+  endif
+
+  assign korting = 0
+  if v.compare_at_price > v.price
+    assign verschil = v.compare_at_price | minus: v.price
+    assign korting = verschil | times: 100.0 | divided_by: v.compare_at_price | round
+  endif
+-%}
+
+<main-product class="ws-pdp" data-section="{{ section.id }}" data-template="{{ template.name }}">
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+    <symbol id="ws-pdp-ster-{{ section.id }}" viewBox="0 0 24 24"><path d="M12 2.6l2.9 6.2 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.9l1.2-6.6L2.5 9.7l6.6-.9z"/></symbol>
+    <symbol id="ws-pdp-vink-{{ section.id }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 12.4l4.2 4.2 8.8-9.2"/></symbol>
+    <symbol id="ws-pdp-ok-{{ section.id }}" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2E7CF6"/><path d="M7.6 12.3l3 3 5.8-6.2" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="ws-pdp-tag-{{ section.id }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 12.9l-7.7 7.7a1.9 1.9 0 0 1-2.7 0l-7-7A1.9 1.9 0 0 1 2.6 12V4.4a1.8 1.8 0 0 1 1.8-1.8H12c.5 0 1 .2 1.3.6l7.3 7.3a1.9 1.9 0 0 1 0 2.4z"/><circle cx="7.6" cy="7.6" r="1.3"/></symbol>
+    <symbol id="ws-pdp-gift-{{ section.id }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.6 11.6h16.8v8.8H3.6z"/><path d="M2.4 7.6h19.2v4H2.4zM12 7.6v12.8"/><path d="M12 7.6S10.7 3.2 8.4 3.2a2.2 2.2 0 0 0 0 4.4zM12 7.6s1.3-4.4 3.6-4.4a2.2 2.2 0 0 1 0 4.4z"/></symbol>
+    <symbol id="ws-pdp-slot-{{ section.id }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4.2" y="10.4" width="15.6" height="10.4" rx="2.2"/><path d="M8 10.4V7.6a4 4 0 0 1 8 0v2.8"/></symbol>
+    <symbol id="ws-pdp-mensen-{{ section.id }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9.2" cy="8.4" r="3.4"/><path d="M2.9 19.4c.5-3.2 3.2-5.2 6.3-5.2s5.8 2 6.3 5.2"/><path d="M15.8 5.4a3.4 3.4 0 0 1 0 6.6M17.4 14.6c2.1.5 3.5 2.2 3.8 4.4"/></symbol>
+    <symbol id="ws-pdp-vgl-{{ section.id }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.4" y="8.6" width="6.2" height="12" rx="1.4" class="vgl-a"/><rect x="14.4" y="3.4" width="6.2" height="17.2" rx="1.4"/></symbol>
+  </svg>
+
+  <div class="ws-rail">
+    <div class="ws-pdp-grid">
+
+      {%- comment -%} ---------- links: het podium ---------- {%- endcomment -%}
+      <div class="ws-stg">
+        <span class="ws-glans"></span>
+        {%- if s.merk != blank -%}
+          <img class="ws-ghost" src="{{ s.merk | image_url: width: 700 }}" alt="" loading="lazy" width="700" height="700">
+        {%- endif -%}
+
+        {%- comment -%}
+          Het label hoort bij het product, niet bij de winkel. Het verschijnt
+          alleen als dit model in compare_info als meest gekozen staat; anders
+          zou het op elke productpagina staan en betekent het niets meer.
+        {%- endcomment -%}
+        {%- if s.tag != blank and mf.compare_info.value.is_popuplar -%}
+          <span class="ws-tg">{{ s.tag }}</span>
+        {%- endif -%}
+
+        <ul class="ws-baan" id="ws-baan-{{ section.id }}">
+          {%- for media in product.media limit: 10 -%}
+            <li>
+              {%- if forloop.first -%}
+                {{ media.preview_image | image_url: width: 1200 | image_tag: class: 'ws-held', loading: 'eager', fetchpriority: 'high', sizes: '(max-width: 749px) 92vw, 46vw', widths: '400,600,900,1200' }}
+              {%- else -%}
+                {{ media.preview_image | image_url: width: 1200 | image_tag: class: 'ws-held', loading: 'lazy', sizes: '(max-width: 749px) 92vw, 46vw', widths: '400,600,900,1200' }}
+              {%- endif -%}
+            </li>
+          {%- else -%}
+            <li>{{ 'product-1' | placeholder_svg_tag: 'ws-held' }}</li>
+          {%- endfor -%}
+        </ul>
+
+        {%- if product.media.size > 1 -%}
+          <button type="button" class="ws-pijl ws-vorige" data-ws-dia-vorige aria-label="Vorige foto">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+          </button>
+          <button type="button" class="ws-pijl ws-volgende" data-ws-dia-volgende aria-label="Volgende foto">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+          </button>
+          <div class="ws-th" id="ws-th-{{ section.id }}">
+            {%- for media in product.media limit: 10 -%}
+              <figure{% if forloop.first %} class="ws-on"{% endif %}>
+                <button type="button" class="ws-vk" data-ws-dia="{{ forloop.index0 }}"
+                        aria-label="{{ media.alt | default: product.title | escape }}">
+                  <img src="{{ media.preview_image | image_url: width: 300 }}" alt="{{ media.alt | escape }}"
+                       loading="lazy" width="300" height="300">
+                </button>
+                {%- comment -%} media.alt valt terug op de producttitel; dan is het bijschrift ruis {%- endcomment -%}
+                {%- if media.alt != blank and media.alt != product.title -%}
+                  <figcaption>{{ media.alt }}</figcaption>
+                {%- endif -%}
+              </figure>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} ---------- rechts: het koopvak ---------- {%- endcomment -%}
+      <div class="ws-bb">
+        <svg class="ws-strepen" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          {%- comment -%}
+            Twee dingen houden deze bogen overeind op zand. Het verloop loopt
+            over #BC813E in plaats van over het lichte #F5D18A: dat laatste is
+            op een lichte grond vrijwel niet van de grond te onderscheiden.
+            En `non-scaling-stroke` houdt de lijn een haarlijn; zonder dat rekt
+            `preserveAspectRatio="none"` de streekdikte mee met de doos en
+            wordt hij onderin een balk.
+          {%- endcomment -%}
+          <defs><linearGradient id="ws-pdp-gd-{{ section.id }}" x1="0" y1="0" x2=".35" y2="1">
+            <stop offset="0" stop-color="#BC813E" stop-opacity="0"/>
+            <stop offset=".38" stop-color="#BC813E" stop-opacity="1"/>
+            <stop offset=".72" stop-color="#8A5A1E" stop-opacity=".8"/>
+            <stop offset="1" stop-color="#BC813E" stop-opacity="0"/>
+          </linearGradient></defs>
+          {%- comment -%}
+            S-bochten, geen enkele boog: een gewone C-curve staat na de rek
+            over de volle hoogte onderin loodrecht en leest dan als een
+            tabelrand. De terugslag houdt hem een sweep.
+          {%- endcomment -%}
+          <path d="M92 -6 C66 18 50 44 56 76 S 76 98 82 110" stroke="url(#ws-pdp-gd-{{ section.id }})" stroke-width="1.2" fill="none" vector-effect="non-scaling-stroke"/>
+          <path d="M100 2 C74 26 58 52 64 82 S 84 104 90 112" stroke="url(#ws-pdp-gd-{{ section.id }})" stroke-width="0.8" fill="none" vector-effect="non-scaling-stroke"/>
+          <path d="M84 -8 C60 14 44 40 50 74 S 68 96 74 108" stroke="url(#ws-pdp-gd-{{ section.id }})" stroke-width="0.55" fill="none" vector-effect="non-scaling-stroke"/>
+        </svg>
+
+        {%- comment -%}
+          De pil: links de productnaam, rechts wat dit product is. Het
+          bespaarde bedrag stond hier eerst ook, maar dat getal staat al
+          achter de prijs en in de aanbodbalk stond de campagne ook al --
+          drie plekken voor hetzelfde bedrag. De rechterhelft zegt nu wat
+          je met dit product koopt en niet wat het kost.
+        {%- endcomment -%}
+        {%- assign pil = s.pil_label | default: product.title -%}
+        {%- if pil != blank or s.pil_z != blank -%}
+          <span class="ws-pil">
+            {%- if pil != blank -%}<b class="ws-a">{{ pil }}</b>{%- endif -%}
+            {%- if s.pil_z != blank -%}<b class="ws-z">{{ s.pil_z }}</b>{%- endif -%}
+          </span>
+        {%- endif -%}
+
+        {%- if s.tp_tonen -%}
+          <div class="ws-tp">
+            <span class="ws-st">
+              {%- for i in (1..5) -%}<i><svg><use href="#ws-pdp-ster-{{ section.id }}"/></svg></i>{%- endfor -%}
+            </span>
+            {%- if s.tp_label != blank -%}<span class="ws-lb">{{ s.tp_label }}</span>{%- endif -%}
+            {%- if s.tp_cijfer != blank -%}<span class="ws-cf">&middot; {{ s.tp_cijfer }}</span>{%- endif -%}
+            {%- if tp_aantal != blank -%}<span class="ws-sc">{{ tp_aantal }}</span>{%- endif -%}
+          </div>
+        {%- endif -%}
+
+        <div class="ws-h1">{{ product.title }}</div>
+        {%- if belofte != blank -%}<div class="ws-sub">{{ belofte }}</div>{%- endif -%}
+        {%- if lead != blank -%}<p class="ws-lead">{{ lead }}</p>{%- endif -%}
+
+        {%- if citaat != blank -%}
+          <div class="ws-rev">
+            {%- comment -%}
+              Rechtsboven de weg naar alle reviews, onderin de naam met het
+              vinkje ernaast. Eerst stond het vinkje rechtsboven; die plek is
+              meer waard als uitgang dan als keurmerk, en het vinkje hoort
+              toch bij de persoon.
+            {%- endcomment -%}
+            <div class="ws-kop">
+              <span class="ws-lk">
+                <span class="ws-st">
+                  {%- for i in (1..5) -%}<i><svg><use href="#ws-pdp-ster-{{ section.id }}"/></svg></i>{%- endfor -%}
+                </span>
+                <b>{{ s.tp_bron }}</b>
+              </span>
+              {%- if s.rev_alle_label != blank and s.rev_alle_url != blank -%}
+                <a class="ws-alle" href="{{ s.rev_alle_url }}" target="_blank" rel="noopener nofollow">
+                  {{ s.rev_alle_label }} <span aria-hidden="true">&rarr;</span>
+                </a>
+              {%- endif -%}
+            </div>
+            <q>{{ citaat }}</q>
+            {%- if citaat_wie != blank or s.koper_label != blank -%}
+              <div class="ws-voet">
+                {%- if citaat_wie != blank -%}<span class="ws-wie"><b>{{ citaat_wie }}</b></span>{%- endif -%}
+                {%- if s.koper_label != blank -%}
+                  <span class="ws-ok"><svg><use href="#ws-pdp-ok-{{ section.id }}"/></svg>{{ s.koper_label }}</span>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        <div id="ProductPrice-{{ section.id }}">
+          {%- comment -%}
+            Het bespaarde bedrag staat achter de prijs, waar eerst het
+            percentage stond. Een euro is concreter dan een procent, en op
+            deze plek hoeft het maar een keer: het losse kader eronder is
+            vervallen. Zowel op de telefoon als op de desktop dezelfde plek;
+            het percentage stond op de telefoon toch al verborgen.
+          {%- endcomment -%}
+          <div class="ws-prijs">
+            <span class="ws-nu">{% if s.munt != blank %}<span class="ws-munt">{{ s.munt }}</span>{% endif %}{% render 'price-formated', price: v.price %}</span>
+            {%- if v.compare_at_price > v.price -%}
+              {%- assign bedrag = v.compare_at_price | minus: v.price -%}
+              <span class="ws-was">{% if s.munt != blank %}<span class="ws-munt">{{ s.munt }}</span>{% endif %}{% render 'price-formated', price: v.compare_at_price %}</span>
+              <span class="ws-besp">
+                <svg><use href="#ws-pdp-tag-{{ section.id }}"/></svg>
+                <span>{{ s.besparing_regel }} {% if s.munt != blank %}<span class="ws-munt">{{ s.munt }}</span>{% endif %}{% render 'price-formated', price: bedrag %}</span>
+              </span>
+            {%- endif -%}
+          </div>
+        </div>
+
+        {%- unless product.has_only_default_variant -%}
+          <div id="ProductOptions-{{ section.id }}" class="ws-opties">
+            {%- for option in product.options_with_values -%}
+              <form class="ws-optie" data-option="{{ forloop.index }}">
+                <b>{{ option.name }}</b>
+                {%- for value in option.values -%}
+                  <label for="{{ section.id }}-{{ option.name | handleize }}-{{ value | handleize }}">
+                    <input type="radio" class="visually-hidden"
+                           name="{{ option.name }}" value="{{ value }}"
+                           id="{{ section.id }}-{{ option.name | handleize }}-{{ value | handleize }}"
+                           {% if option.selected_value == value %}checked{% endif %}>
+                    <span>{{ value }}</span>
+                  </label>
+                {%- endfor -%}
+              </form>
+            {%- endfor -%}
+          </div>
+        {%- endunless -%}
+
+        {%- assign usps = mf.product_usp.value -%}
+        {%- if usps != blank -%}
+          <ul class="ws-usp">
+            {%- for regel in usps limit: 4 -%}
+              {%- liquid
+                assign r = regel | replace: '－', '—' | replace: ' - ', ' — '
+                assign delen = r | split: '—'
+                assign kop = delen[0] | strip
+                assign rest = ''
+                if delen.size > 1
+                  assign rest = r | remove_first: delen[0] | remove_first: '—' | strip
+                endif
+              -%}
+              <li>
+                <span class="ws-vk"><svg><use href="#ws-pdp-vink-{{ section.id }}"/></svg></span>
+                <span><b>{{ kop }}</b>{% if rest != blank %}<span>{{ rest }}</span>{% endif %}</span>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- comment -%}
+          De aanbodbalk. Eerst het metaobject waar custom.limited_offer naar wijst,
+          anders de sectie-instelling. Is beide leeg, dan komt de balk er niet.
+
+          offer_title is een rijketekstveld. Dat moet met metafield_tag gerenderd
+          worden; wie het eerst aan een variabele toewijst en daarna uitprint,
+          krijgt de ruwe JSON van het veld op het scherm.
+        {%- endcomment -%}
+        {%- liquid
+          assign toon_aanbod = false
+          if aanbod.offer_title != blank or aanbod.product_title != blank or s.gift_titel != blank
+            assign toon_aanbod = true
+          endif
+          assign gift_regel = aanbod.popup_subtitle | default: aanbod.popup_title
+          if aanbod == blank
+            assign gift_regel = s.gift_regel
+          endif
+        -%}
+        {%- comment -%}
+          Eerst weten dat het er is en wanneer het komt, dan pas het aanbod, dan
+          de knop. Levering is een voorwaarde, een aanbod is een verleiding: de
+          voorwaarde hoort er eerst te staan.
+        {%- endcomment -%}
+        {%- if v.available and s.voorraad_regel != blank -%}
+          <div class="ws-vrd">
+            <i></i>
+            <span><b>{{ s.voorraad_kop }}</b> &middot; {{ mf.shipping_information.value | default: s.voorraad_regel }}</span>
+          </div>
+        {%- endif -%}
+
+        {%- if toon_aanbod -%}
+          <div class="ws-gift">
+            <span class="ws-ic">
+              {%- if aanbod.image != blank -%}
+                {{ aanbod.image | image_url: width: 120 | image_tag: alt: '', loading: 'lazy' }}
+              {%- else -%}
+                <svg><use href="#ws-pdp-gift-{{ section.id }}"/></svg>
+              {%- endif -%}
+            </span>
+            <span>
+              <b>
+                {%- if aanbod.offer_title != blank -%}
+                  {{ aanbod.offer_title | metafield_tag }}
+                {%- elsif aanbod.product_title != blank -%}
+                  {{ aanbod.product_title }}
+                {%- else -%}
+                  {{ s.gift_titel }}
+                {%- endif -%}
+              </b>
+              {%- if gift_regel != blank -%}<span>{{ gift_regel }}</span>{%- endif -%}
+            </span>
+          </div>
+        {%- endif -%}
+
+        {%- comment -%}
+          De cadeaus uit de winkelwageninstellingen.
+
+          De winkelwagen telt de regels op (zonder de cadeaus zelf) en voegt het
+          cadeau toe zodra de drempel gehaald is. Hier laten we vooruit zien wat
+          dit ene product al ontgrendelt, met exact dezelfde instellingen --
+          settings.gift_1_* en gift_2_* -- zodat de pagina en de winkelwagen
+          nooit uit elkaar kunnen lopen.
+
+          De drempels staan in hele euro's, de prijs in centen; vandaar keer 100.
+          Een cadeau dat op is tonen we niet: dan zou de pagina iets beloven wat
+          de winkelwagen niet meer kan toevoegen.
+        {%- endcomment -%}
+        {%- if settings.enable_gift_rewards and s.cad_tonen -%}
+          {%- assign cad_n = 0 -%}
+          {%- assign cad_som = 0 -%}
+          {%- capture cad_kaarten -%}
+            {%- for i in (1..2) -%}
+              {%- if i == 1 -%}
+                {%- assign cad = settings.gift_1_product -%}
+                {%- assign cad_drempel = settings.gift_1_threshold -%}
+                {%- assign cad_label = settings.gift_1_label -%}
+                {%- assign cad_naam = s.cad_naam_1 -%}
+              {%- else -%}
+                {%- assign cad = settings.gift_2_product -%}
+                {%- assign cad_drempel = settings.gift_2_threshold -%}
+                {%- assign cad_label = settings.gift_2_label -%}
+                {%- assign cad_naam = s.cad_naam_2 -%}
+              {%- endif -%}
+              {%- if cad == blank or cad_drempel == blank -%}{%- continue -%}{%- endif -%}
+              {%- assign cad_var = cad.selected_or_first_available_variant -%}
+              {%- unless cad_var.available -%}{%- continue -%}{%- endunless -%}
+              {%- assign grens = cad_drempel | times: 100 -%}
+              {%- if v.price < grens -%}{%- continue -%}{%- endif -%}
+              {%- if cad.handle == product.handle -%}{%- continue -%}{%- endif -%}
+              {%- assign cad_n = cad_n | plus: 1 -%}
+              {%- if cad_var.compare_at_price > 0 -%}
+                {%- assign cad_som = cad_som | plus: cad_var.compare_at_price -%}
+              {%- endif -%}
+              <li class="ws-cad-k">
+                <span class="ws-cad-bd">
+                  {%- if cad.featured_image != blank -%}
+                    {{ cad.featured_image | image_url: width: 320 | image_tag: alt: '', loading: 'lazy' }}
+                  {%- endif -%}
+                </span>
+                <b class="ws-cad-nm">{{ cad_naam | default: cad_label | default: cad.title }}</b>
+                <span class="ws-cad-pr">
+                  {%- if cad_var.compare_at_price > 0 -%}
+                    <s>{% if s.munt != blank %}{{ s.munt }}{% endif %}{% render 'price-formated', price: cad_var.compare_at_price %}</s>
+                  {%- endif -%}
+                  <em class="ws-cad-nul">{{ s.cad_chip }}</em>
+                </span>
+              </li>
+            {%- endfor -%}
+          {%- endcapture -%}
+
+          {%- if cad_n > 0 -%}
+            {%- comment -%}
+              Verzending is geen cadeauproduct maar staat als derde kaart in
+              dezelfde rij: elk product dat een cadeau ontgrendelt zit ruim
+              boven de gratis-verzendgrens, dus die regel is altijd waar.
+              Het icoon komt in de plaats van de productfoto.
+            {%- endcomment -%}
+            {%- assign cad_tot = cad_n -%}
+            {%- if s.cad_verzend_tonen and s.cad_verzend_cent > 0 -%}
+              {%- assign cad_som = cad_som | plus: s.cad_verzend_cent -%}
+              {%- assign cad_tot = cad_tot | plus: 1 -%}
+              {%- capture cad_kaarten -%}{{ cad_kaarten }}
+                <li class="ws-cad-k ws-cad-vz">
+                  <span class="ws-cad-bd" aria-hidden="true">
+                    <svg viewBox="0 0 48 32" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M2 4.6h26.4v18.2H2zM28.4 11.4h7.8l6.2 6.2v5.2H28.4z"/>
+                      <circle cx="11.2" cy="26.4" r="3.4"/><circle cx="34.6" cy="26.4" r="3.4"/>
+                    </svg>
+                  </span>
+                  <b class="ws-cad-nm">{{ s.cad_verzend_label }}</b>
+                  <span class="ws-cad-pr">
+                    <s>{% if s.munt != blank %}{{ s.munt }}{% endif %}{% render 'price-formated', price: s.cad_verzend_cent %}</s>
+                    <em class="ws-cad-nul">{{ s.cad_chip }}</em>
+                  </span>
+                </li>
+              {%- endcapture -%}
+            {%- endif -%}
+
+            <div class="ws-cad" style="--cad-n:{{ cad_tot }}">
+              <div class="ws-cad-top">
+                <span class="ws-cad-ic" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3.6 11.6h16.8v8.8H3.6z"/><path d="M2.4 7.6h19.2v4H2.4z"/><path d="M12 7.6v12.8"/>
+                    <path d="M12 7.6S10.6 3.2 8.2 3.2a2.2 2.2 0 0 0 0 4.4zM12 7.6s1.4-4.4 3.8-4.4a2.2 2.2 0 0 1 0 4.4z"/>
+                  </svg>
+                </span>
+                {%- if s.cad_ey != blank -%}<span class="ws-cad-ey">{{ s.cad_ey }}</span>{%- endif -%}
+                {%- if s.cad_auto != blank -%}<span class="ws-cad-auto">{{ s.cad_auto }}</span>{%- endif -%}
+              </div>
+
+              <div class="ws-cad-kop">
+                {%- if cad_som > 0 -%}
+                  <b>{% if s.munt != blank %}<span class="ws-cad-munt">{{ s.munt }}</span>{% endif %}{% render 'price-formated', price: cad_som %} {{ s.cad_kop_na }}</b>
+                {%- else -%}
+                  <b>{{ s.cad_kop_na }}</b>
+                {%- endif -%}
+                {%- if s.cad_sub_voor != blank -%}
+                  <span>{{ s.cad_sub_voor }} {{ product.title }}</span>
+                {%- endif -%}
+              </div>
+
+              <ul class="ws-cad-lijst">{{ cad_kaarten }}</ul>
+
+              {%- if s.cad_voet != blank -%}
+                <p class="ws-cad-voet">
+                  <span aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="9.4"/><path d="M7.8 12.4l2.9 2.9 5.5-6"/>
+                    </svg>
+                  </span>
+                  {{ s.cad_voet }}
+                </p>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+
+        <div class="ws-vorm">
+          {%- assign form_id = 'ProductForm-' | append: section.id -%}
+          {%- form 'product', product, id: form_id, class: 'ws-vorm-form', novalidate: 'novalidate' -%}
+            <input type="hidden" name="id" value="{{ v.id }}">
+            <input type="hidden" name="quantity" value="1">
+            <button id="ProductSubmit-{{ section.id }}" type="submit" class="ws-cta"
+                    {% unless v.available %}disabled{% endunless %}>
+              {%- if v.available -%}
+                {{ s.knop_label }}
+              {%- else -%}
+                {{ s.knop_uitverkocht }}
+              {%- endif -%}
+            </button>
+            <p class="ws-melding" product-notification></p>
+          {%- endform -%}
+        </div>
+
+        <div class="ws-pay">
+          {% render 'payments' %}
+          <span class="ws-vl"><svg><use href="#ws-pdp-slot-{{ section.id }}"/></svg>{{ s.veilig_label }}</span>
+          {%- if s.proberen_label != blank -%}<span class="ws-pr">{{ s.proberen_label }}</span>{%- endif -%}
+        </div>
+
+        {%- comment -%} appblokken: Klarna, upsell-apps. Sleepbaar in de editor. {%- endcomment -%}
+        {%- if section.blocks.size > 0 -%}
+          <div class="ws-apps">
+            {%- for block in section.blocks -%}
+              <div {{ block.shopify_attributes }}>{% render block %}</div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        {%- if s.vergelijk_label != blank and kan_vergelijken -%}
+          <button type="button" class="ws-cta2" data-ws-vgl data-ws-anker="{{ s.vergelijk_anker }}">
+            <svg><use href="#ws-pdp-vgl-{{ section.id }}"/></svg>{{ s.vergelijk_label }}
+          </button>
+        {%- endif -%}
+
+        {%- if s.tel_waarde != blank -%}
+          <p class="ws-tel">
+            <svg><use href="#ws-pdp-mensen-{{ section.id }}"/></svg>
+            <span>{{ s.tel_voor }} <b>{{ s.tel_waarde }}</b> {{ s.tel_na }}</span>
+          </p>
+        {%- endif -%}
+
+        {%- comment -%} ---------- de vier accordeons ---------- {%- endcomment -%}
+        <div class="ws-acc">
+          {%- comment -%}
+            Omschrijving en specificaties stonden in een accordeon. Samen is dat
+            vijf alinea's plus veertien regels: wie hem opent krijgt een muur.
+            Het zijn nu twee accordeons, zodat je opent wat je wilt lezen.
+          {%- endcomment -%}
+          {%- if product.description != blank -%}
+            <details>
+              <summary>{{ s.acc1_titel }}<i></i></summary>
+              <div class="in">{{ product.description }}</div>
+            </details>
+          {%- endif -%}
+
+          {%- comment -%}
+            specification is een rijketekstveld. Rechtstreeks afdrukken zet de
+            ruwe JSON op het scherm -- {"type":"root","children":[ ... -- dus
+            metafield_tag. De regels staan als losse regels in een alinea; de
+            stylesheet zet er pre-line op en verdeelt ze over twee kolommen.
+          {%- endcomment -%}
+          {%- if mf.specification != blank -%}
+            <details>
+              <summary>{{ s.spec_kop }}<i></i></summary>
+              <div class="in ws-spec">{{ mf.specification | metafield_tag }}</div>
+            </details>
+          {%- endif -%}
+
+          {%- assign doos = mf.included_box.value -%}
+          {%- if doos != blank -%}
+            <details>
+              <summary>{{ s.acc2_titel }}<i></i></summary>
+              <div class="in">
+                {%- comment -%}
+                  description is een rijketekstveld. Wie dat rechtstreeks
+                  uitprint krijgt de ruwe JSON van het veld op het scherm;
+                  metafield_tag maakt er opmaak van. De titel gaat door strip,
+                  want een paar van die velden eindigen op een spatie.
+                {%- endcomment -%}
+                {%- comment -%}
+                  Zes artikelen met elk drie regels omschrijving is op een telefoon
+                  een muur. Daarom staat alleen de naam met zijn foto in beeld en
+                  komt de omschrijving pas bij een tik. Zo blijft de hele doos in
+                  een oogopslag te overzien en gaat er geen tekst verloren.
+                {%- endcomment -%}
+                <ul class="ws-doos">
+                  {%- for item in doos -%}
+                    <li>
+                      {%- if item.description != blank -%}
+                        <details>
+                          <summary>
+                            <span class="ws-doos-b">
+                              {%- if item.image != blank -%}
+                                {{ item.image | image_url: width: 120 | image_tag: alt: '', loading: 'lazy' }}
+                              {%- endif -%}
+                            </span>
+                            <b>{{ item.title | strip }}</b>
+                            <em></em>
+                          </summary>
+                          <div class="ws-doos-t">{{ item.description | metafield_tag }}</div>
+                        </details>
+                      {%- else -%}
+                        <p class="ws-doos-k">
+                          <span class="ws-doos-b">
+                            {%- if item.image != blank -%}
+                              {{ item.image | image_url: width: 120 | image_tag: alt: '', loading: 'lazy' }}
+                            {%- endif -%}
+                          </span>
+                          <b>{{ item.title | strip }}</b>
+                        </p>
+                      {%- endif -%}
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+            </details>
+          {%- endif -%}
+
+          {%- if s.acc3_tekst != blank -%}
+            <details>
+              <summary>{{ s.acc3_titel }}<i></i></summary>
+              <div class="in">{{ s.acc3_tekst }}</div>
+            </details>
+          {%- endif -%}
+
+          {%- if s.acc4_tekst != blank -%}
+            <details>
+              <summary>{{ s.acc4_titel }}<i></i></summary>
+              <div class="in">{{ s.acc4_tekst }}</div>
+            </details>
+          {%- endif -%}
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  {%- comment -%}
+    ---------- de meelopende koopbalk ----------
+    De knop hier is met opzet geen tweede formulier: hij klikt de echte knop
+    aan. Zo erft hij alles wat daaraan hangt -- de AJAX-toevoeging, het
+    synchroniseren van de cadeaus, de upgrade-pop-up, de uitverkocht-staat --
+    en kan er niets uit elkaar gaan lopen.
+
+    De prijs wordt hieronder uit .ws-prijs gekopieerd en blijft dat volgen.
+    Een tweede keer uitschrijven zou betekenen dat een variantwissel maar de
+    helft van het scherm bijwerkt.
+  {%- endcomment -%}
+  {%- if s.sticky_tonen -%}
+    <div class="ws-sticky" data-ws-sticky hidden aria-hidden="true">
+      <div class="ws-sticky-rail">
+        {%- if product.featured_image -%}
+          <span class="ws-sticky-th">
+            <img src="{{ product.featured_image | image_url: width: 120 }}"
+                 alt="" width="120" height="120" loading="lazy" decoding="async">
+          </span>
+        {%- endif -%}
+        <span class="ws-sticky-tx">
+          <b class="ws-sticky-nm">{{ product.title }}</b>
+          {%- if belofte != blank -%}
+            <span class="ws-sticky-sub">{{ belofte }}</span>
+          {%- endif -%}
+        </span>
+        <span class="ws-sticky-pr" data-ws-sticky-prijs></span>
+        <button type="button" class="ws-sticky-knop" data-ws-sticky-koop
+                {% unless v.available %}disabled{% endunless %}>
+          {%- if v.available -%}{{ s.sticky_knop }}{%- else -%}{{ s.knop_uitverkocht }}{%- endif -%}
+        </button>
+      </div>
+    </div>
+  {%- endif -%}
+
+
+  <script>
+    (function () {
+      // Wachten tot de opmaak er staat. Dit script staat in de HTML vóór de
+      // pop-up verderop, dus meteen uitvoeren geeft null op die elementen.
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', start);
+      } else {
+        start();
+      }
+
+      function start() {
+      var wortel = document.getElementById('shopify-section-{{ section.id }}');
+      if (!wortel) return;
+      // De vergelijkingsknop. In een JSON-sjabloon maakt Shopify van een sectie
+      // geen id shopify-section-<sleutel>, maar shopify-section-template--123__<sleutel>.
+      // Daarom zoeken we op het achtervoegsel en niet op een vaste naam.
+      function zoekSectie(sleutel) {
+        if (!sleutel) return null;
+        sleutel = sleutel.replace(/^#/, '').replace(/^shopify-section-/, '');
+        return document.getElementById('shopify-section-' + sleutel)
+          || document.querySelector('[id^="shopify-section-"][id$="__' + sleutel + '"]')
+          || document.getElementById(sleutel);
+      }
+
+      {%- comment -%}
+        De upgrade-pop-up. Openen doet base.js zelf: die vindt
+        [id^="ProductUpgrade-"] en zet er open op bij het indienen van het
+        formulier. Sluiten en kiezen doen we hier.
+
+        Waarom niet met zijn eigen data-action-afhandeling? Die begint met
+        this.productGallery.querySelector(...) en this.querySelector(
+        '[id^="ProductLightbox-"]').querySelector(...), onvoorwaardelijk, nog
+        voor de switch. Dit koopvak heeft geen galerij en geen lightbox met die
+        id's, dus elke klik zou daar stuklopen. We gebruiken alleen zijn
+        winkelwagenlogica, en die zit op het element zelf.
+
+        base.js heeft bij het openen al de paginascroll vastgezet; wij zetten
+        die bij het sluiten weer los.
+      {%- endcomment -%}
+      var upg = wortel.querySelector('[id^="ProductUpgrade-"]');
+      // onFormSubmit en addToCart zitten op het aangepaste element <main-product>,
+      // niet op de sectiewikkel waar wortel naar wijst.
+      var hoofd = wortel.querySelector('main-product');
+      if (upg && hoofd) {
+        upg.addEventListener('click', function (e) {
+          var el = e.target.closest('[data-action]');
+          if (!el) { return; }
+
+          // base.js luistert op <main-product>; laat die klik daar niet komen.
+          e.preventDefault();
+          e.stopPropagation();
+
+          var actie = el.getAttribute('data-action');
+          upg.classList.remove('open');
+          document.documentElement.style.overflow = '';
+
+          if (actie === 'skip-upgrade' && typeof hoofd.onFormSubmit === 'function') {
+            hoofd.onFormSubmit(false, true);
+            return;
+          }
+
+          if (actie === 'add-product' && typeof hoofd.addToCart === 'function') {
+            var variant = parseInt(el.getAttribute('data-variant'), 10);
+            if (!variant) { return; }
+            var lading = {
+              items: [{ id: variant, quantity: 1 }],
+              sections_url: window.location.pathname
+            };
+            if (document.querySelector('cart-drawer')) { lading.sections = ['cart-drawer']; }
+            hoofd.addToCart(lading);
+          }
+        });
+
+        // Met de toets escape ook dicht, net als de vergelijkingspop-up.
+        document.addEventListener('keydown', function (e) {
+          if (e.key !== 'Escape' || !upg.classList.contains('open')) { return; }
+          upg.classList.remove('open');
+          document.documentElement.style.overflow = '';
+        });
+      }
+
+      var pop = document.getElementById('ws-vgl-{{ section.id }}');
+      var vgl = wortel.querySelector('[data-ws-vgl]');
+
+      function openPop() {
+        pop.hidden = false;
+        // in de volgende beeldopbouw, anders slaat de overgang over
+        requestAnimationFrame(function () { pop.classList.add('ws-open'); });
+        document.documentElement.style.overflow = 'hidden';
+        var x = pop.querySelector('.ws-pop-x');
+        if (x) x.focus();
+      }
+
+      function sluitPop() {
+        pop.classList.remove('ws-open');
+        document.documentElement.style.overflow = '';
+        window.setTimeout(function () { pop.hidden = true; }, 180);
+        if (vgl) vgl.focus();
+      }
+
+      if (vgl) {
+        vgl.addEventListener('click', function () {
+          // Is er een pop-up, dan die. Anders naar de vergelijkingssectie.
+          if (pop) { openPop(); return; }
+          var doel = zoekSectie(vgl.getAttribute('data-ws-anker'));
+          if (doel) doel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      }
+
+      if (pop) {
+        pop.addEventListener('click', function (e) {
+          if (e.target.closest('[data-ws-sluit]')) sluitPop();
+          // de zachte tweede uitgang: sluiten en naar de volledige tabel
+          if (e.target.closest('[data-ws-meer]')) {
+            var tabel = zoekSectie(vgl ? vgl.getAttribute('data-ws-anker') : '');
+            sluitPop();
+            if (tabel) {
+              window.setTimeout(function () {
+                tabel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }, 200);
+            }
+          }
+        });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && !pop.hidden) sluitPop();
+        });
+      }
+
+      // ---- De meelopende koopbalk ----
+      (function () {
+        var balk = wortel.querySelector('[data-ws-sticky]');
+        var echt = document.getElementById('ProductSubmit-{{ section.id }}');
+        if (!balk || !echt) return;
+
+        var knop  = balk.querySelector('[data-ws-sticky-koop]');
+        var vak   = balk.querySelector('[data-ws-sticky-prijs]');
+        var bron  = document.getElementById('ProductPrice-{{ section.id }}');
+
+        // De prijs niet nog een keer uitschrijven maar overnemen, en blijven
+        // volgen. Anders werkt een variantwissel maar de helft van het scherm
+        // bij en staat er onderin een bedrag dat niet meer klopt. Het
+        // bespaarbedrag zit weer in de prijsregel en komt dus vanzelf mee.
+        function neemPrijsOver() {
+          if (bron && vak) vak.innerHTML = bron.innerHTML;
+        }
+        neemPrijsOver();
+        if (bron && window.MutationObserver) {
+          new MutationObserver(neemPrijsOver)
+            .observe(bron, { childList: true, subtree: true, characterData: true });
+        }
+
+        // De knop is een doorgeefluik naar de echte knop; dus ook zijn
+        // uitverkocht-staat overnemen, en blijven overnemen.
+        function neemStaatOver() {
+          if (knop) knop.disabled = echt.disabled;
+        }
+        neemStaatOver();
+        if (window.MutationObserver) {
+          new MutationObserver(neemStaatOver)
+            .observe(echt, { attributes: true, attributeFilter: ['disabled'] });
+        }
+
+        if (knop) knop.addEventListener('click', function () {
+          // Alles wat aan de echte knop hangt -- de AJAX-toevoeging, de
+          // cadeaus, de upgrade-pop-up -- gebeurt vanzelf mee.
+          echt.click();
+        });
+
+        // Pas tonen als de koopknop voorbij is. Niet zodra hij uit beeld is:
+        // op de telefoon staat de knop ver onder de vouw, dus dan zou de balk
+        // meteen bij het laden verschijnen en het scherm opeten voordat de
+        // bezoeker uberhaupt iets gezien heeft.
+        var zichtbaar = false;
+        function toon(aan) {
+          if (aan === zichtbaar) return;
+          zichtbaar = aan;
+          if (aan) {
+            balk.hidden = false;
+            balk.setAttribute('aria-hidden', 'false');
+            requestAnimationFrame(function () { balk.classList.add('ws-in'); });
+          } else {
+            balk.classList.remove('ws-in');
+            balk.setAttribute('aria-hidden', 'true');
+          }
+        }
+
+        // De balk wijkt voor elke laag die het scherm overneemt. Dat is niet
+        // alleen netjes maar nodig: de vergelijk-pop-up heeft weliswaar een
+        // sluier van 62%, maar op de telefoon staat zijn eigen knoppenbalk
+        // onderaan en overlapte die de onze met 36 px -- de gouden knop piepte
+        // achter de hoek van de pop-up vandaan. De winkelwagenlade is erger:
+        // die staat op z-index 6 en deze balk op 90, dus die tekenden we er
+        // dwars overheen, inclusief zijn eigen afrekenknop.
+        var lagen = [['.ws-pop', 'ws-open'], ['.ws-upg', 'open'],
+                     ['cart-drawer', 'open'], ['.header__search', 'open']];
+
+        function laagOpen() {
+          // Elke laag in dit thema die het scherm overneemt zet de pagina op
+          // slot via documentElement.style.overflow. Dat is het enige signaal
+          // dat niet afhangt van de vraag of het element al in de DOM stond
+          // toen dit script bond -- de winkelwagenlade wordt door een andere
+          // sectie geplaatst, en die kan later komen.
+          if (document.documentElement.style.overflow === 'hidden') return true;
+          for (var i = 0; i < lagen.length; i++) {
+            var e = document.querySelector(lagen[i][0]);
+            if (e && e.classList.contains(lagen[i][1])) return true;
+          }
+          return false;
+        }
+
+        function wijk() {
+          var weg = laagOpen();
+          balk.classList.toggle('ws-wijk', weg);
+          balk.setAttribute('aria-hidden', (weg || !zichtbaar) ? 'true' : 'false');
+        }
+
+        if (window.MutationObserver) {
+          for (var i = 0; i < lagen.length; i++) {
+            var laag = document.querySelector(lagen[i][0]);
+            if (laag) new MutationObserver(wijk)
+              .observe(laag, { attributes: true, attributeFilter: ['class', 'hidden'] });
+          }
+          // Het slot op de pagina apart in de gaten houden: dit element bestaat
+          // altijd, dus deze waarnemer mist ook een laag die later verschijnt.
+          new MutationObserver(wijk)
+            .observe(document.documentElement, { attributes: true, attributeFilter: ['style'] });
+        }
+        wijk();
+
+        function meten() {
+          var r = echt.getBoundingClientRect();
+          toon(r.bottom < 0);
+          wijk();
+        }
+        meten();
+
+        if (window.IntersectionObserver) {
+          new IntersectionObserver(meten, { threshold: 0 }).observe(echt);
+        }
+        var tik;
+        window.addEventListener('scroll', function () {
+          if (tik) return;
+          tik = requestAnimationFrame(function () { tik = 0; meten(); });
+        }, { passive: true });
+        window.addEventListener('resize', meten);
+      })();
+
+      // ---- Direct naar de kassa vanuit de vergelijk-pop-up ----
+      // Zonder JS post het formulier naar /cart/add met return_to=/checkout.
+      // Met JS gaat het via de cart-drawer, en dat moet: syncGifts leest de
+      // winkelwagen, voegt per ronde EEN cadeau toe en roept zichzelf daarna
+      // opnieuw aan. Meteen na het toevoegen wegnavigeren slaat dat over en de
+      // klant komt zonder cadeau in de kassa aan -- bij de Barber Pack 3.0 is
+      // dat 52,90 die stilletjes verdwijnt.
+      var kassaBezig = false;
+      document.addEventListener('submit', function (e) {
+        var vorm = e.target.closest('[data-ws-kassa]');
+        if (!vorm) return;
+        var lade = document.querySelector('cart-drawer');
+        var idVeld = vorm.querySelector('input[name="id"]');
+        // Geen lade of geen id: laat het formulier gewoon zijn werk doen,
+        // dan vangt return_to het op.
+        if (!lade || !lade.addItemToCart || !idVeld) return;
+        e.preventDefault();
+        if (kassaBezig) return;
+        kassaBezig = true;
+
+        var knop = vorm.querySelector('button[type="submit"]');
+        if (knop) { knop.disabled = true; knop.classList.add('ws-bezig'); }
+
+        var kassa = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root
+                     ? window.Shopify.routes.root : '/') + 'checkout';
+
+        function ga() { window.location.href = kassa; }
+
+        Promise.resolve(lade.addItemToCart(idVeld.value))
+          .then(function () { return cadeausAf(lade, 5000); })
+          .then(ga)
+          .catch(function (fout) {
+            console.error('Kassa-sprong mislukt:', fout);
+            // Liever alsnog naar de kassa dan de klant met een dode knop laten
+            // staan; het product zit dan in elk geval in de winkelwagen.
+            ga();
+          });
+      });
+
+      // syncGifts zet syncingGifts synchroon op true voordat hij gaat ophalen,
+      // en pas op false als een ronde niets meer te doen vindt. Wachten tot dat
+      // vlaggetje zakt is dus het signaal dat de cadeaus staan. De uiterste
+      // termijn is er zodat een hangende aanroep de klant niet vasthoudt.
+      function cadeausAf(lade, uiterlijk) {
+        return new Promise(function (klaar) {
+          var eind = Date.now() + uiterlijk;
+          (function kijk() {
+            if (!lade.syncingGifts && !lade.pendingSync) return klaar();
+            if (Date.now() > eind) return klaar();
+            setTimeout(kijk, 100);
+          })();
+        });
+      }
+
+      var baan = wortel.querySelector('#ws-baan-{{ section.id }}');
+      var strook = wortel.querySelector('#ws-th-{{ section.id }}');
+      if (!baan || !strook) return;
+
+      // Het plaatje "meest gekozen" hoort bij de eerste foto, de pakshot. Vanaf
+      // de tweede is het een listingbeeld met eigen tekst, en daar zou het
+      // overheen liggen. Dus: weg zodra je begint te bladeren, terug zodra je
+      // weer op de eerste staat.
+      var kenmerk = wortel.querySelector('.ws-tg');
+      var wachtKenmerk = false;
+      function toetsKenmerk() {
+        if (!kenmerk) { return; }
+        kenmerk.classList.toggle('ws-weg', baan.scrollLeft > 8);
+      }
+      if (kenmerk) {
+        baan.addEventListener('scroll', function () {
+          if (wachtKenmerk) { return; }
+          wachtKenmerk = true;
+          requestAnimationFrame(function () { wachtKenmerk = false; toetsKenmerk(); });
+        }, { passive: true });
+        toetsKenmerk();
+      }
+
+      function markeer(i) {
+        var vakken = strook.querySelectorAll('figure');
+        for (var n = 0; n < vakken.length; n++) {
+          vakken[n].classList.toggle('ws-on', n === i);
+        }
+      }
+
+      function huidige() {
+        var breedte = baan.children[0] ? baan.children[0].offsetWidth : 1;
+        return Math.round(baan.scrollLeft / (breedte + gat()));
+      }
+      function gat() { return window.innerWidth < 750 ? 12 : 16; }
+      function naarDia(i) {
+        var dia = baan.children[i];
+        if (!dia) return;
+        baan.scrollTo({ left: dia.offsetLeft - baan.offsetLeft, behavior: 'smooth' });
+        markeer(i);
+        if (kenmerk) { kenmerk.classList.toggle('ws-weg', i !== 0); }
+      }
+      var vorige = wortel.querySelector('[data-ws-dia-vorige]');
+      var volgende = wortel.querySelector('[data-ws-dia-volgende]');
+      if (vorige) vorige.addEventListener('click', function () {
+        naarDia(Math.max(0, huidige() - 1));
+      });
+      if (volgende) volgende.addEventListener('click', function () {
+        naarDia(Math.min(baan.children.length - 1, huidige() + 1));
+      });
+
+      strook.addEventListener('click', function (e) {
+        var knop = e.target.closest('[data-ws-dia]');
+        if (!knop) return;
+        naarDia(parseInt(knop.getAttribute('data-ws-dia'), 10));
+      });
+
+      var wacht;
+      baan.addEventListener('scroll', function () {
+        clearTimeout(wacht);
+        wacht = setTimeout(function () {
+          markeer(huidige());
+        }, 90);
+      });
+      }
+    })();
+  </script>
+
+
+      {%- comment -%}
+        De vergelijkingspop-up als keuzehulp.
+
+        Alles komt uit de winkel: custom.compare_products voor de kolommen en
+        per product custom.compare_info voor beeld, rol, reviewlabel, de vier
+        punten en 'beste voor'. De tabel eronder bouwt zichzelf op uit alle
+        punten van alle kolommen samen, ontdubbeld.
+
+        Twee dingen die het vergelijken overeind houden. Titels gaan door strip,
+        zodat een spatie te veel in het ene veld niet leidt tot twee losse rijen
+        waar er een hoort te staan. En ze worden tussen tekens gezet voor het
+        tellen, anders telt 'Skin-Safe mes' ook mee binnen 'Skin-Safe mes + Foil
+        Shaver'. Achteraan een sluitteken, omdat Liquid lege stukken aan het eind
+        van een split weggooit.
+      {%- endcomment -%}
+      {%- if vergelijk_lijst != blank -%}
+        {%- liquid
+          assign eigen = mf.compare_info.value
+          assign alle_punten = ''
+          assign laagste = 0
+          assign hoogste = 0
+          assign uitgelicht_sleutels = ''
+        -%}
+        {%- comment -%}
+          Welke kolom uitgelicht wordt, is de duurste in deze vergelijking. Dat
+          moet uit de prijs komen en niet uit een vinkje per product: is_popuplar
+          hoort bij het product, terwijl uitgelicht-zijn bij het paar hoort. Zodra
+          een product in de ene pop-up het instapmodel is en in de andere de
+          upgrade -- de PRO staat naast de Groom Guard en naast het Ultimate-pakket
+          -- kan een vinkje per product dat niet meer uitdrukken, en krijg je twee
+          gouden kaarten of nul.
+        {%- endcomment -%}
+        {%- for cp in vergelijk_lijst -%}
+          {%- assign cvp = cp.selected_or_first_available_variant.price -%}
+          {%- capture kolom_sleutels %}{% render 'ws-vergelijk-sleutels', p: cp %}{% endcapture -%}
+          {%- assign kolom_sleutels = kolom_sleutels | strip -%}
+          {%- assign alle_punten = alle_punten | append: kolom_sleutels -%}
+          {%- if laagste == 0 or cvp < laagste -%}{%- assign laagste = cvp -%}{%- endif -%}
+          {%- if cvp > hoogste -%}
+            {%- assign hoogste = cvp -%}
+            {%- assign uitgelicht_id = cp.id -%}
+            {%- assign uitgelicht_sleutels = kolom_sleutels -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- assign alle_punten = alle_punten | append: '‹einde›' -%}
+        {%- comment -%}
+          De winstbalk gaat over de stap omhoog, dus over het gat tussen de
+          goedkoopste en de duurste kolom. Eerder werd gerekend vanaf het
+          uitgelichte model, en dat gaat mis zodra het uitgelichte model zelf de
+          goedkoopste is: dan is het verschil nul en valt de balk stil weg.
+        {%- endcomment -%}
+        {%- assign meerprijs = hoogste | minus: laagste -%}
+
+        {%- comment -%}
+          De drie regels boven in de pop-up horen bij het product, niet bij de
+          winkel. Ze komen dus uit compare_info van dit product; de instelling in
+          de sectie is alleen de terugval als het veld nog leeg is.
+        {%- endcomment -%}
+        {%- liquid
+          assign pop_kop = eigen.popup_main_title | default: s.pop_titel | default: product.title
+          assign pop_lead = eigen.popup_lead | default: s.pop_lead
+          assign pop_winst = eigen.popup_winst | default: s.pop_winst
+        -%}
+
+        <div class="ws-pop" id="ws-vgl-{{ section.id }}" hidden>
+          <div class="ws-pop-waas" data-ws-sluit></div>
+          <div class="ws-pop-vak" role="dialog" aria-modal="true"
+               aria-label="{{ pop_kop | escape }}">
+            <button type="button" class="ws-pop-x" data-ws-sluit aria-label="Sluiten">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+            </button>
+
+            <div class="ws-pop-top">
+              {%- if s.pop_eyebrow != blank -%}<span class="ws-pop-ey">{{ s.pop_eyebrow }}</span>{%- endif -%}
+              <p class="ws-pop-kop">{{ pop_kop }}</p>
+              {%- if pop_lead != blank -%}<p class="ws-pop-lead">{{ pop_lead }}</p>{%- endif -%}
+              {%- if s.tp_tonen and s.pop_reviewregel != blank -%}
+                <div class="ws-pop-tp">
+                  <span class="ws-st">
+                    {%- for i in (1..5) -%}<i><svg><use href="#ws-pdp-ster-{{ section.id }}"/></svg></i>{%- endfor -%}
+                  </span>
+                  <span class="sc">{{ s.pop_reviewregel }}</span>
+                  <span class="mk"><svg><use href="#ws-pdp-ster-{{ section.id }}"/></svg>{{ s.tp_bron }}</span>
+                </div>
+              {%- endif -%}
+            </div>
+
+            {%- if pop_winst != blank and meerprijs > 0 -%}
+              {%- capture bedrag %}{% render 'price-formated', price: meerprijs %}{% endcapture -%}
+              <p class="ws-pop-winst">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2l1.9 4.6 4.6 1.9-4.6 1.9L12 16.2l-1.9-4.6L5.5 9.7l4.6-1.9z"/><path d="M18.6 15.4l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg>
+                <span>{{ pop_winst | replace: '[bedrag]', bedrag | strip }}</span>
+              </p>
+            {%- endif -%}
+
+            <div class="ws-pop-kaarten">
+              {%- for cp in vergelijk_lijst -%}
+                {%- assign ci = cp.metafields.custom.compare_info.value -%}
+                {%- assign cv = cp.selected_or_first_available_variant -%}
+                {%- assign uniek_titel = '' -%}
+                {%- assign uniek_onder = '' -%}
+            {%- if ci.advantage_1_title != blank and uniek_titel == blank -%}
+              {%- assign t = ci.advantage_1_title | strip -%}
+              {%- assign sleutel = '‹' | append: t | append: '›' -%}
+              {%- assign hoevaak = alle_punten | split: sleutel | size | minus: 1 -%}
+              {%- if hoevaak < 2 -%}
+                {%- assign uniek_titel = t -%}
+                {%- assign uniek_onder = ci.advantage_1_subtitle -%}
+              {%- endif -%}
+            {%- endif -%}
+            {%- if ci.advantage_2_title != blank and uniek_titel == blank -%}
+              {%- assign t = ci.advantage_2_title | strip -%}
+              {%- assign sleutel = '‹' | append: t | append: '›' -%}
+              {%- assign hoevaak = alle_punten | split: sleutel | size | minus: 1 -%}
+              {%- if hoevaak < 2 -%}
+                {%- assign uniek_titel = t -%}
+                {%- assign uniek_onder = ci.advantage_2_subtitle -%}
+              {%- endif -%}
+            {%- endif -%}
+            {%- if ci.advantage_3_title != blank and uniek_titel == blank -%}
+              {%- assign t = ci.advantage_3_title | strip -%}
+              {%- assign sleutel = '‹' | append: t | append: '›' -%}
+              {%- assign hoevaak = alle_punten | split: sleutel | size | minus: 1 -%}
+              {%- if hoevaak < 2 -%}
+                {%- assign uniek_titel = t -%}
+                {%- assign uniek_onder = ci.advantage_3_subtitle -%}
+              {%- endif -%}
+            {%- endif -%}
+            {%- if ci.advantage_4_title != blank and uniek_titel == blank -%}
+              {%- assign t = ci.advantage_4_title | strip -%}
+              {%- assign sleutel = '‹' | append: t | append: '›' -%}
+              {%- assign hoevaak = alle_punten | split: sleutel | size | minus: 1 -%}
+              {%- if hoevaak < 2 -%}
+                {%- assign uniek_titel = t -%}
+                {%- assign uniek_onder = ci.advantage_4_subtitle -%}
+              {%- endif -%}
+            {%- endif -%}
+                <div class="ws-pop-kaart{% if cp.id == uitgelicht_id %} ws-uit{% endif %}">
+                  {%- if cp.id == uitgelicht_id and s.pop_uitgelicht != blank -%}
+                    <span class="ws-pop-vlag">{{ s.pop_uitgelicht }}</span>
+                  {%- endif -%}
+                  <div class="ws-pop-beeld">
+                    {%- if ci.popup_image != blank -%}
+                      {{ ci.popup_image | image_url: width: 600 | image_tag: alt: '', loading: 'lazy' }}
+                    {%- elsif cp.featured_image != blank -%}
+                      {{ cp.featured_image | image_url: width: 600 | image_tag: alt: '', loading: 'lazy' }}
+                    {%- endif -%}
+                  </div>
+                  <div class="ws-pop-tekst">
+                    {%- if ci.toggle_subtitle != blank -%}
+                      <span class="ws-pop-rol">{{ ci.toggle_subtitle }}</span>
+                    {%- endif -%}
+                    <p class="ws-pop-naam">{{ ci.popup_title | default: ci.toggle_title | default: cp.title }}</p>
+                    {%- if uniek_onder != blank -%}<p class="ws-pop-een">{{ uniek_onder }}</p>{%- endif -%}
+                    <p class="ws-pop-prijs">
+                      <b>{% render 'price-formated', price: cv.price %}</b>
+                      {%- if cv.compare_at_price > cv.price -%}
+                        <s>{% render 'price-formated', price: cv.compare_at_price %}</s>
+                      {%- endif -%}
+                    </p>
+                    {%- if ci.best_for != blank -%}
+                      <span class="ws-pop-best">{{ s.pop_bestevoor }} {{ ci.best_for }}</span>
+                    {%- endif -%}
+                  </div>
+                  {%- comment -%}
+                    return_to is de vangnetroute: zonder JS postte dit formulier
+                    naar /cart/add zonder doel, en dan zet Shopify de bezoeker op
+                    de homepage. Met JS onderscheppen we hem hieronder, want de
+                    cadeaus moeten eerst gesynchroniseerd zijn.
+                  {%- endcomment -%}
+                  <form action="{{ routes.cart_add_url }}" method="post" class="ws-pop-vorm" data-ws-kassa>
+                    <input type="hidden" name="id" value="{{ cv.id }}">
+                    <input type="hidden" name="quantity" value="1">
+                    <input type="hidden" name="return_to" value="{{ routes.cart_url | replace: '/cart', '/checkout' }}">
+                    <button type="submit" class="ws-pop-knop"{% unless cv.available %} disabled{% endunless %}>
+                      {%- if cv.available -%}
+                        {{ s.pop_knop }} {{ ci.toggle_title | default: cp.title }} &mdash; {% render 'price-formated', price: cv.price %}
+                      {%- else -%}
+                        {{ s.knop_uitverkocht }}
+                      {%- endif -%}
+                    </button>
+                  </form>
+                </div>
+              {%- endfor -%}
+            </div>
+
+            {%- comment -%} de tabel: alle punten van alle kolommen, ontdubbeld {%- endcomment -%}
+            {%- assign rijlijst = alle_punten | split: '‹' -%}
+            {%- assign gezien = '' -%}
+            <div class="ws-pop-tab">
+              <table>
+                <thead>
+                  <tr>
+                    <th>&nbsp;</th>
+                    {%- for cp in vergelijk_lijst -%}
+                      {%- assign ci = cp.metafields.custom.compare_info.value -%}
+                      <th>{{ ci.toggle_title | default: cp.title }}</th>
+                    {%- endfor -%}
+                  </tr>
+                </thead>
+                <tbody>
+                  {%- for stuk in rijlijst -%}
+                    {%- assign rijnaam = stuk | split: '›' | first | strip -%}
+                    {%- assign merk2 = '‹' | append: rijnaam | append: '›' -%}
+                    {%- assign nieuwe_rij = false -%}
+                    {%- if rijnaam != blank and rijnaam != 'einde' -%}
+                      {%- unless gezien contains merk2 -%}{%- assign nieuwe_rij = true -%}{%- endunless -%}
+                    {%- endif -%}
+                    {%- if nieuwe_rij -%}
+                      {%- assign gezien = gezien | append: merk2 -%}
+                      {%- assign vaak = alle_punten | split: merk2 | size | minus: 1 -%}
+                      {%- comment -%}
+                        Een rij die maar bij een model voorkomt is het verschil. Alleen
+                        als dat het uitgelichte model is, is het een upgrade; staat hij
+                        bij het instapmodel, dan is het gewoon een vinkje. Anders leest
+                        de basisuitvoering alsof zij iets extra's heeft.
+                      {%- endcomment -%}
+                      {%- assign rij_upgrade = false -%}
+                      {%- if vaak < 2 and uitgelicht_sleutels contains merk2 -%}
+                        {%- assign rij_upgrade = true -%}
+                      {%- endif -%}
+                      <tr{% if rij_upgrade %} class="ws-beslist"{% endif %}>
+                        <th scope="row">{{ rijnaam }}</th>
+                        {%- for cp in vergelijk_lijst -%}
+                          {%- assign ci = cp.metafields.custom.compare_info.value -%}
+                          {%- capture kolom_sleutels %}{% render 'ws-vergelijk-sleutels', p: cp %}{% endcapture -%}
+                          {%- assign kolom_sleutels = kolom_sleutels | strip -%}
+                          {%- comment -%}
+                            Niet vermeld is niet hetzelfde als niet aanwezig. Een duurder
+                            model bevat alles van een goedkoper model in dezelfde
+                            vergelijking &mdash; anders is het geen upgrade. Dat is hier dus de
+                            regel en niet de uitzondering: een kolom erft elk punt van een
+                            goedkopere kolom, tenzij dit product uitdrukkelijk zegt dat het
+                            geen gewone upgrade is. Dat laatste is er voor rijen die een
+                            gemeten waarde zijn, zoals 6500 RPM: die erf je niet.
+                          {%- endcomment -%}
+                          {%- assign heeft_punt = false -%}
+                          {%- if kolom_sleutels contains merk2 -%}
+                            {%- assign heeft_punt = true -%}
+                          {%- elsif ci.not_an_upgrade != true -%}
+                            {%- assign eigen_prijs = cp.selected_or_first_available_variant.price -%}
+                            {%- for lager in vergelijk_lijst -%}
+                              {%- if lager.selected_or_first_available_variant.price < eigen_prijs -%}
+                                {%- capture lager_sleutels %}{% render 'ws-vergelijk-sleutels', p: lager %}{% endcapture -%}
+                                {%- if lager_sleutels contains merk2 -%}
+                                  {%- assign heeft_punt = true -%}
+                                {%- endif -%}
+                              {%- endif -%}
+                            {%- endfor -%}
+                          {%- endif -%}
+                          {%- if heeft_punt -%}
+                            <td class="ws-ja">
+                              {%- if rij_upgrade and cp.id == uitgelicht_id and s.pop_inbegrepen != blank -%}
+                                <span class="ws-pop-erbij"><svg><use href="#ws-pdp-vink-{{ section.id }}"/></svg>{{ s.pop_inbegrepen }}</span>
+                              {%- else -%}
+                                <svg><use href="#ws-pdp-vink-{{ section.id }}"/></svg>
+                              {%- endif -%}
+                            </td>
+                          {%- else -%}
+                            <td class="ws-nee">&mdash;</td>
+                          {%- endif -%}
+                        {%- endfor -%}
+                      </tr>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </tbody>
+              </table>
+            </div>
+
+            {%- comment -%}
+              De beslisregel. Per product een korte vraag uit compare_info; het
+              antwoord is de naam van dat product. Heeft geen enkel product de
+              vraag ingevuld, dan valt het hele blok weg.
+            {%- endcomment -%}
+            {%- assign heeft_beslis = false -%}
+            {%- for cp in vergelijk_lijst -%}
+              {%- if cp.metafields.custom.compare_info.value.popup_decision != blank -%}
+                {%- assign heeft_beslis = true -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {%- if heeft_beslis -%}
+              <div class="ws-pop-beslis">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2l1.9 4.6 4.6 1.9-4.6 1.9L12 16.2l-1.9-4.6L5.5 9.7l4.6-1.9z"/><path d="M18.6 15.4l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg>
+                <div>
+                  {%- for cp in vergelijk_lijst -%}
+                    {%- assign ci = cp.metafields.custom.compare_info.value -%}
+                    {%- if ci.popup_decision != blank -%}
+                      <p>{{ ci.popup_decision }}
+                        <b>{{ s.pop_knop }} {{ ci.toggle_title | default: cp.title }}.</b></p>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+              </div>
+            {%- endif -%}
+
+            {%- comment -%}
+              Dezelfde knoppen nog een keer, nu als balk die op de telefoon aan de
+              onderkant blijft plakken. Op het brede scherm staat deze balk uit en
+              zit de knop in de kaart; op de telefoon andersom. Twee formulieren
+              dus, maar er is er altijd maar een zichtbaar.
+            {%- endcomment -%}
+            <div class="ws-pop-balk">
+              {%- for cp in vergelijk_lijst -%}
+                {%- assign ci = cp.metafields.custom.compare_info.value -%}
+                {%- assign cv = cp.selected_or_first_available_variant -%}
+                <form action="{{ routes.cart_add_url }}" method="post" data-ws-kassa
+                      class="ws-pop-vorm2{% if cp.id == uitgelicht_id %} ws-uit{% endif %}">
+                  <input type="hidden" name="id" value="{{ cv.id }}">
+                  <input type="hidden" name="quantity" value="1">
+                  <input type="hidden" name="return_to" value="{{ routes.cart_url | replace: '/cart', '/checkout' }}">
+                  <button type="submit" class="ws-pop-knop"{% unless cv.available %} disabled{% endunless %}>
+                    {%- if cv.available -%}
+                      {{ s.pop_knop }} {{ ci.toggle_title | default: cp.title }} &mdash; {% render 'price-formated', price: cv.price %}
+                    {%- else -%}
+                      {{ s.knop_uitverkocht }}
+                    {%- endif -%}
+                  </button>
+                </form>
+              {%- endfor -%}
+            </div>
+
+            {%- assign beloftes = mf.store_usp.value -%}
+            {%- if beloftes != blank -%}
+              <div class="ws-pop-voet">
+                {%- for belofte in beloftes -%}
+                  <div>
+                    {%- if belofte.icon != blank -%}
+                      {{ belofte.icon | image_url: width: 60 | image_tag: alt: '', loading: 'lazy' }}
+                    {%- endif -%}
+                    <span>{{ belofte.label }}</span>
+                  </div>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+
+  {%- comment -%}
+    De upgrade-pop-up, vlak voor het toevoegen aan de winkelwagen.
+
+    Dit hangt volledig aan de bestaande base.js. Die zoekt binnen
+    <main-product> naar [id^="ProductUpgrade-"]; bestaat dat element, dan opent
+    hij het bij het indienen van het formulier in plaats van meteen toe te
+    voegen. Verder luistert hij op drie waarden van data-action:
+
+      add-product   voegt data-variant toe en opent de winkelwagenlade
+      skip-upgrade  voegt alsnog dit product toe, zoals zonder pop-up
+      close-popup   sluit alleen
+
+    Let op: base.js leest data-action van het aangeklikte element zelf, niet van
+    een ouder. Alles binnen zo'n knop staat daarom op pointer-events:none.
+
+    Staat custom.upgrade_products leeg, dan bestaat dit element niet en gaat de
+    knop rechtstreeks naar de winkelwagen. Geen pop-up om niets.
+  {%- endcomment -%}
+  {%- assign upgrades = mf.upgrade_products.value -%}
+  {%- if upgrades != blank and s.upg_tonen -%}
+    {%- comment -%}
+      Alleen upgrades die duurder zijn dan dit product en op voorraad staan.
+      Een goedkopere of uitverkochte optie is geen upgrade.
+    {%- endcomment -%}
+    {%- assign upg_aantal = 0 -%}
+    {%- for up in upgrades -%}
+      {%- assign uv = up.selected_or_first_available_variant -%}
+      {%- if uv.available and uv.price > v.price -%}{%- assign upg_aantal = upg_aantal | plus: 1 -%}{%- endif -%}
+    {%- endfor -%}
+
+    {%- if upg_aantal > 0 -%}
+      {%- comment -%}
+        Wat er extra bij zit rekenen we uit de doos, niet uit een tekstveld:
+        elk voorwerp in de doos van de upgrade dat niet in deze doos zit.
+      {%- endcomment -%}
+      {%- capture eigen_doos -%}{%- for d in mf.included_box.value -%}&lsaquo;{{ d.title | strip | downcase }}&rsaquo;{%- endfor -%}{%- endcapture -%}
+
+      <div class="ws-upg" id="ProductUpgrade-{{ section.id }}" data-popup>
+        <div class="ws-upg-waas" data-action="close-popup"></div>
+        <div class="ws-upg-vak" role="dialog" aria-modal="true" aria-label="{{ s.upg_kop | escape }}">
+          <button type="button" class="ws-upg-x" data-action="close-popup" aria-label="Sluiten">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          </button>
+
+          <div class="ws-upg-top">
+            {%- if s.upg_ey != blank -%}<span class="ws-upg-ey">{{ s.upg_ey }}</span>{%- endif -%}
+            {%- if s.upg_kop != blank -%}<p class="ws-upg-kop">{{ s.upg_kop | replace: '[product]', product.title }}</p>{%- endif -%}
+            {%- if s.upg_lead != blank -%}<p class="ws-upg-lead">{{ s.upg_lead | replace: '[product]', product.title }}</p>{%- endif -%}
+          </div>
+
+          <ul class="ws-upg-lijst">
+            {%- for up in upgrades -%}
+              {%- assign uv = up.selected_or_first_available_variant -%}
+              {%- if uv.available == false or uv.price <= v.price -%}{%- continue -%}{%- endif -%}
+              {%- assign meer = uv.price | minus: v.price -%}
+
+              <li class="ws-upg-kaart">
+                <div class="ws-upg-beeld">
+                  {%- if up.featured_image != blank -%}
+                    {{ up.featured_image | image_url: width: 320 | image_tag: alt: '', loading: 'lazy' }}
+                  {%- endif -%}
+                </div>
+
+                <div class="ws-upg-tekst">
+                  <p class="ws-upg-naam">{{ up.title }}</p>
+
+                  {%- assign extra = 0 -%}
+                  {%- assign doos = up.metafields.custom.included_box.value -%}
+                  {%- if doos != blank -%}
+                    <ul class="ws-upg-extra">
+                      {%- for d in doos -%}
+                        {%- assign sleutel = d.title | strip | downcase | prepend: '&lsaquo;' | append: '&rsaquo;' -%}
+                        {%- unless eigen_doos contains sleutel -%}
+                          {%- assign extra = extra | plus: 1 -%}
+                          {%- if extra < 5 -%}<li>{{ d.title | strip }}</li>{%- endif -%}
+                        {%- endunless -%}
+                      {%- endfor -%}
+                    </ul>
+                    {%- if extra > 4 -%}
+                      {%- assign rest = extra | minus: 4 -%}
+                      <p class="ws-upg-meer">
+                        {%- if rest == 1 -%}{{ s.upg_enmeer1 }}{%- else -%}{{ s.upg_enmeer | replace: '[aantal]', rest }}{%- endif -%}
+                      </p>
+                    {%- endif -%}
+                  {%- endif -%}
+                </div>
+
+                <div class="ws-upg-koop">
+                  <p class="ws-upg-prijs">{% render 'price-formated', price: uv.price %}</p>
+                  <p class="ws-upg-meerprijs">+ {% render 'price-formated', price: meer %}</p>
+                  <button type="button" class="ws-upg-knop"
+                          data-action="add-product" data-variant="{{ uv.id }}">{{ s.upg_knop }}</button>
+                </div>
+              </li>
+            {%- endfor -%}
+          </ul>
+
+          <button type="button" class="ws-upg-nee" data-action="skip-upgrade">
+            {{ s.upg_nee | replace: '[product]', product.title }}
+          </button>
+        </div>
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+
+  <script type="application/json" data-variants-data>{{ product.variants | json }}</script>
+</main-product>
+
+{% schema %}
+{
+  "name": "WS · PDP koopvak",
+  "tag": "section",
+  "class": "ws-pdp-sectie",
+  "settings": [
+    { "type": "paragraph", "content": "Titel, prijs, USP's, specificaties en doosinhoud komen uit het product. Alles hieronder is winkelbreed of een terugval." },
+    { "type": "header", "content": "Podium" },
+    { "type": "image_picker", "id": "merk", "label": "Monogram op de achtergrond" },
+    { "type": "text", "id": "tag", "label": "Label linksboven", "default": "Meest gekozen" },
+    { "type": "header", "content": "De pil en de korting" },
+    { "type": "text", "id": "pil_label", "label": "Linkerhelft van de pil", "info": "Leeg laten betekent: de producttitel." },
+    { "type": "text", "id": "pil_z", "label": "Rechterhelft van de pil", "info": "Zegt wat dit product is, niet wat je bespaart. Houd hem anders dan het label linksboven, anders staat dezelfde claim twee keer in beeld. Leeg = alleen de naam.", "default": "Bestseller" },
+    { "type": "text", "id": "besparing_regel", "label": "Regel bij het bespaarde bedrag", "default": "Je bespaart" },
+    { "type": "text", "id": "munt", "label": "Valutateken voor de prijs", "info": "De winkel zet zelf geen teken voor de prijs (moneyFormat is amount_with_comma_separator). Dit zet het alleen in dit blok. Leeg = geen teken.", "default": "€" },
+    { "type": "header", "content": "Trustpilot" },
+    { "type": "checkbox", "id": "tp_tonen", "label": "Beoordeling tonen", "default": true },
+    { "type": "text", "id": "tp_label", "label": "Oordeel", "default": "Uitstekend" },
+    { "type": "text", "id": "tp_cijfer", "label": "Cijfer", "info": "De winkelbrede Trustpilot-score. Op 26-08-2026: 4,4 bij 975 reviews.", "default": "4,4" },
+    { "type": "text", "id": "tp_score", "label": "Aantal reviews", "info": "Wint van custom.compare_info.reviews_label. Rond af naar beneden op een tiental, dan klopt het langer.", "default": "970+ reviews" },
+    { "type": "text", "id": "tp_bron", "label": "Bron bij het citaat", "default": "Trustpilot" },
+    { "type": "text", "id": "rev_alle_label", "label": "Link naar alle reviews", "info": "Leeg = geen link.", "default": "Alle reviews" },
+    { "type": "url", "id": "rev_alle_url", "label": "Waar die link heen gaat", "info": "Het Trustpilot-profiel is https://nl.trustpilot.com/review/wellshave.nl" },
+    { "type": "text", "id": "koper_label", "label": "Label geverifieerde koper", "default": "Geverifieerde koper" },
+    { "type": "text", "id": "proberen_label", "label": "Tweede regel onder de knop", "info": "Staat naast Veilig afrekenen. Leeg laten laat hem weg.", "default": "100 dagen proberen" },
+    { "type": "header", "content": "Klantcitaat" },
+    { "type": "paragraph", "content": "Komt per product uit custom.buybox_quote en custom.buybox_quote_author. Hieronder alleen de terugval; laat beide leeg als er voor dit product geen echte productreview is, dan valt de kaart weg." },
+    { "type": "textarea", "id": "citaat", "label": "Citaat" },
+    { "type": "text", "id": "citaat_wie", "label": "Naam en datum" },
+    { "type": "header", "content": "Cadeau" },
+    { "type": "paragraph", "content": "Komt per product uit custom.limited_offer: de titel uit offer_title, de onderregel uit popup_subtitle en het icoon uit image. Hieronder de terugval." },
+    { "type": "text", "id": "gift_titel", "label": "Cadeauregel" },
+    { "type": "text", "id": "gift_regel", "label": "Onderregel", "default": "Wordt vanzelf meegeleverd" },
+    { "type": "header", "content": "Cadeaus uit de winkelwagen" },
+    { "type": "paragraph", "content": "Leest de drempels en producten uit Winkelinstellingen > Gift rewards, dezelfde als de winkelwagen gebruikt. Toont alleen wat dit ene product al ontgrendelt, en alleen als het cadeau op voorraad is." },
+    { "type": "checkbox", "id": "cad_tonen", "label": "Cadeaus tonen", "default": true },
+    { "type": "text", "id": "cad_ey", "label": "Bovenregel", "info": "Staat boven het bedrag. Geldt voor alle producten, dus niet \u00abbij deze set\u00bb.", "default": "Cadeau bij deze bestelling" },
+    { "type": "text", "id": "cad_auto", "label": "Plaatje rechtsboven", "info": "Leeg = geen plaatje.", "default": "Automatisch toegevoegd" },
+    { "type": "text", "id": "cad_kop_na", "label": "Kop na het bedrag", "info": "Het opgetelde bedrag komt ervoor te staan.", "default": "aan extra's cadeau" },
+    { "type": "text", "id": "cad_sub_voor", "label": "Onderregel voor de productnaam", "default": "Gratis bij de" },
+    { "type": "text", "id": "cad_chip", "label": "Plaatje bij de prijs", "default": "Gratis" },
+    { "type": "text", "id": "cad_naam_1", "label": "Naam van cadeau 1", "info": "Leeg = het label uit Winkelinstellingen." },
+    { "type": "text", "id": "cad_naam_2", "label": "Naam van cadeau 2", "info": "Leeg = het label uit Winkelinstellingen." },
+    { "type": "checkbox", "id": "cad_verzend_tonen", "label": "Verzending als regel meetellen", "default": true },
+    { "type": "text", "id": "cad_verzend_label", "label": "Naam van de verzendregel", "default": "Gratis verzending" },
+    { "type": "number", "id": "cad_verzend_cent", "label": "Verzendkosten in centen", "info": "495 = \u20ac 4,95. Op 0 verdwijnt de regel.", "default": 495 },
+    { "type": "text", "id": "cad_voet", "label": "Regel onderaan", "default": "Geen code of selectie nodig \u2014 wij voegen alles automatisch toe." },
+    { "type": "header", "content": "Knop en levering" },
+    { "type": "text", "id": "knop_label", "label": "Knoptekst", "default": "In winkelwagen" },
+    { "type": "text", "id": "knop_uitverkocht", "label": "Knoptekst uitverkocht", "default": "Uitverkocht" },
+    { "type": "header", "content": "Meelopende koopbalk" },
+    { "type": "checkbox", "id": "sticky_tonen", "label": "Balk onderaan tonen", "default": true, "info": "Verschijnt pas als de koopknop voorbij is gescrold, niet meteen." },
+    { "type": "text", "id": "sticky_knop", "label": "Knoptekst in de balk", "default": "In winkelwagen", "info": "De prijs staat er al naast, dus hier hoeft geen bedrag bij." },
+    { "type": "text", "id": "voorraad_kop", "label": "Voorraadkop", "default": "Op voorraad" },
+    { "type": "text", "id": "voorraad_regel", "label": "Leverregel (terugval)", "default": "vandaag vóór 23:59 besteld, morgen in huis" },
+    { "type": "text", "id": "veilig_label", "label": "Label bij de betaalmerken", "default": "Veilig afrekenen" },
+    { "type": "header", "content": "Vergelijken en teller" },
+    { "type": "text", "id": "vergelijk_label", "label": "Knop vergelijken", "default": "Vergelijk de modellen" },
+    { "type": "header", "content": "De vergelijkingspop-up" },
+    { "type": "paragraph", "content": "De kolommen komen uit custom.compare_products, en per product uit custom.compare_info: beeld, rol, reviewlabel, de vier punten en het veld Beste voor. De tabel eronder bouwt zichzelf uit alle punten van alle kolommen samen. De voetbalk komt uit custom.store_usp." },
+    { "type": "text", "id": "pop_eyebrow", "label": "Bovenregel", "default": "Vergelijk de modellen" },
+    { "type": "text", "id": "pop_titel", "label": "Kop \u2014 terugval", "info": "Wordt alleen gebruikt als het product geen popup_main_title heeft in compare_info.", "default": "Welke past bij jou?" },
+    { "type": "textarea", "id": "pop_lead", "label": "Lead \u2014 terugval", "info": "Wordt alleen gebruikt als het product geen popup_lead heeft in compare_info." },
+    { "type": "text", "id": "pop_reviewregel", "label": "Reviewregel", "default": "4,4/5 uit 970+ reviews" },
+    { "type": "textarea", "id": "pop_winst", "label": "Winstbalk \u2014 terugval", "info": "Terugval voor popup_winst in compare_info. [bedrag] wordt het prijsverschil met het uitgelichte model." },
+    { "type": "text", "id": "pop_uitgelicht", "label": "Label op de uitgelichte kolom", "default": "Meest gekozen" },
+    { "type": "text", "id": "pop_bestevoor", "label": "Aanhef bij Beste voor", "default": "Beste voor:" },
+    { "type": "text", "id": "pop_knop", "label": "Knoptekst in de pop-up", "default": "Kies" },
+    { "type": "text", "id": "pop_inbegrepen", "label": "Label bij de beslissende rij", "default": "Inbegrepen" },
+    { "type": "header", "content": "Upgrade-pop-up" },
+    { "type": "paragraph", "content": "Verschijnt bij het toevoegen aan de winkelwagen, gevoed uit custom.upgrade_products. Alleen duurdere producten die op voorraad staan komen erin; staat het veld leeg, dan is er geen pop-up." },
+    { "type": "checkbox", "id": "upg_tonen", "label": "Upgrade-pop-up aan", "default": true },
+    { "type": "text", "id": "upg_ey", "label": "Bovenregel", "default": "Nog even dit" },
+    { "type": "text", "id": "upg_kop", "label": "Kop", "info": "[product] wordt de producttitel.", "default": "Voor een paar euro meer heb je de hele set" },
+    { "type": "text", "id": "upg_lead", "label": "Onderregel", "info": "[product] wordt de producttitel.", "default": "De [product] zit er in beide gevallen gewoon bij." },
+    { "type": "text", "id": "upg_knop", "label": "Knop op de kaart", "default": "Kies deze" },
+    { "type": "text", "id": "upg_enmeer", "label": "Regel bij meer dan vier extra\u0027s", "info": "[aantal] wordt het aantal dat niet in de lijst past.", "default": "en nog [aantal] andere onderdelen" },
+    { "type": "text", "id": "upg_enmeer1", "label": "Diezelfde regel bij precies \u00e9\u00e9n", "default": "en nog \u00e9\u00e9n onderdeel" },
+    { "type": "text", "id": "upg_nee", "label": "Doorgaan zonder upgrade", "info": "[product] wordt de producttitel.", "default": "Nee dank je, ga verder met de [product]" },
+    { "type": "text", "id": "vergelijk_anker", "label": "Sleutel van de vergelijkingssectie", "default": "compare_table", "info": "De sleutel uit het sjabloon, niet de volledige id \u2014 die zet Shopify zelf samen. De knop verschijnt alleen als het product custom.compare_table of custom.compare_products heeft." },
+    { "type": "text", "id": "tel_voor", "label": "Teller — tekst ervoor", "default": "Al door" },
+    { "type": "text", "id": "tel_waarde", "label": "Teller — getal", "default": "200.000+" },
+    { "type": "text", "id": "tel_na", "label": "Teller — tekst erna", "default": "mannen gekozen" },
+    { "type": "header", "content": "Accordeons" },
+    { "type": "text", "id": "acc1_titel", "label": "1 — titel", "default": "Omschrijving" },
+    { "type": "text", "id": "spec_kop", "label": "2 — titel (de specificaties)", "default": "Specificaties" },
+    { "type": "text", "id": "acc2_titel", "label": "2 — titel", "default": "Wat zit er in de doos" },
+    { "type": "text", "id": "acc3_titel", "label": "3 — titel", "default": "Verzending & retour" },
+    { "type": "richtext", "id": "acc3_tekst", "label": "3 — tekst", "default": "<p>Vandaag vóór 23:59 besteld is morgen in huis. Gratis verzending binnen Nederland en België. Niet goed? Binnen 100 dagen terug, wij betalen de retour.</p>" },
+    { "type": "text", "id": "acc4_titel", "label": "4 — titel", "default": "Garantie en proberen" },
+    { "type": "richtext", "id": "acc4_tekst", "label": "4 — tekst", "default": "<p>Twee jaar garantie op elk apparaat. Honderd dagen proberen: bevalt het niet, dan krijg je je geld terug — ook als je hem gebruikt hebt.</p>" },
+    { "type": "header", "content": "Indent settings" },
+    { "type": "range", "id": "desk_indent_top", "label": "Indent top (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "desk_indent_bottom", "label": "Indent bottom (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_top", "label": "Indent top (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_bottom", "label": "Indent bottom (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "blocks": [{ "type": "@app" }],
+  "presets": [{ "name": "WS · PDP koopvak" }]
+}
+{% endschema %}
+
+{% stylesheet %}
+  /* metafield_tag verpakt rijke tekst in een div met daarin een h2, dus de
+     opmaak moet op alle nakomelingen slaan en niet alleen op het kind. */
+  .ws-pdp .ws-gift b{font-weight:600}
+  .ws-pdp .ws-gift b *{margin:0;padding:0;display:inline;font-family:inherit;
+    font-size:inherit;line-height:inherit;letter-spacing:inherit;color:inherit}
+  .ws-pdp .ws-gift b strong,.ws-pdp .ws-gift b b,.ws-pdp .ws-gift b em{font-weight:800;font-style:normal}
+  /* let op: laat geen procentteken direct tegen een sluitende accolade staan.
+     Liquid leest die twee tekens als het einde van een tag en slikt dan de
+     rest van het bestand. Vandaar de spatie ervoor. */
+  .ws-pdp .ws-gift .ws-ic img{width:100%;height:100%;object-fit:contain;border-radius:50% }
+  /* ---- de vergelijkingspop-up ---- */
+  .ws-pop{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;
+    padding:20px;opacity:0;transition:opacity .18s ease}
+  .ws-pop.ws-open{opacity:1}
+  .ws-pop[hidden]{display:none}
+  .ws-pop *,.ws-pop *::before,.ws-pop *::after{box-sizing:border-box}
+  .ws-pop-waas{position:absolute;inset:0;background:rgba(11,11,10,.62)}
+  .ws-pop-vak{--p-room:#FBF8F3;--p-room2:#F5F1EA;--p-zwart:#0B0B0A;--p-goud:#E9BE72;--p-goud2:#DDA548;
+    --p-brons:#BC813E;--p-groen:#00B67A;--p-lijn:rgba(17,17,17,.11);
+    --p-ink:#111;--p-ink80:rgba(17,17,17,.8);--p-ink60:rgba(17,17,17,.6);--p-ink40:rgba(17,17,17,.4);
+    position:relative;background:var(--p-room);border-radius:24px;padding:34px 30px 0;
+    width:min(1080px,100%);max-height:calc(100vh - 40px);overflow-y:auto;
+    font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
+    box-shadow:0 40px 90px -34px rgba(11,11,10,.7);
+    transform:translateY(12px);transition:transform .18s ease}
+  .ws-pop.ws-open .ws-pop-vak{transform:none}
+  .ws-pop-x{position:absolute;right:22px;top:22px;width:38px;height:38px;border-radius:50%;
+    border:1px solid var(--p-lijn);background:#fff;display:flex;align-items:center;justify-content:center;
+    color:var(--p-ink60);cursor:pointer;padding:0;z-index:2}
+  .ws-pop-x:hover{color:var(--p-ink)}
+  .ws-pop-x svg{width:15px;height:15px}
+
+  .ws-pop-top{text-align:center;max-width:36em;margin:0 auto}
+  .ws-pop-ey{display:block;font-size:11px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--p-brons)}
+  .ws-pop-kop{margin:12px 0 0;font-size:clamp(24px,3.2vw,38px);font-weight:800;letter-spacing:-.035em;
+    line-height:1.06;color:var(--p-ink)}
+  .ws-pop-lead{margin:11px 0 0;font-size:16px;line-height:1.45;color:var(--p-ink60)}
+  .ws-pop-tp{display:flex;align-items:center;justify-content:center;gap:11px;margin:16px 0 0;flex-wrap:wrap}
+  .ws-pop-tp .ws-st{display:flex;gap:2.5px}
+  .ws-pop-tp .ws-st i{width:23px;height:23px;background:var(--p-groen);border-radius:2px;display:flex;
+    align-items:center;justify-content:center}
+  .ws-pop-tp .ws-st svg{width:15px;height:15px;fill:#fff}
+  .ws-pop-tp .sc{font-size:14.5px;font-weight:700;color:var(--p-ink80)}
+  .ws-pop-tp .mk{display:flex;align-items:center;gap:5px;font-size:14.5px;font-weight:800;color:var(--p-ink)}
+  .ws-pop-tp .mk svg{width:15px;height:15px;fill:var(--p-groen)}
+
+  .ws-pop-winst{display:flex;align-items:center;justify-content:center;gap:11px;margin:22px 0 0;
+    padding:15px 20px;border-radius:14px;border:1px solid rgba(233,190,114,.55);
+    background:linear-gradient(180deg,rgba(233,190,114,.16),rgba(233,190,114,.07));
+    font-size:15px;font-weight:600;color:#5A3B10;text-align:center}
+  .ws-pop-winst svg{width:19px;height:19px;flex:none;color:var(--p-goud2)}
+  .ws-pop-winst b{font-weight:800}
+
+  .ws-pop-kaarten{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:20px 0 0}
+  .ws-pop-kaart{position:relative;border-radius:20px;border:1px solid var(--p-lijn);background:#fff;
+    padding:20px;display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1fr);gap:14px;
+    align-items:center;row-gap:18px}
+  /* De vlag stond los boven de kaart en dook onder een bovenregel van twee
+     regels. Nu een eigen rij bovenaan: dan kan hij niets meer overlappen.
+     Zonder vlag is die rij nul hoog. */
+  .ws-pop-kaart.ws-uit{background:var(--p-zwart);border:2px solid var(--p-goud2);
+    box-shadow:0 24px 56px -26px rgba(11,11,10,.75)}
+  .ws-pop-vlag{grid-column:1 / -1;grid-row:1;justify-self:end;align-self:start;
+    font-size:10px;font-weight:800;letter-spacing:.13em;
+    text-transform:uppercase;color:#3A2405;border-radius:100px;padding:7px 14px;
+    background:linear-gradient(100deg,#EDC684,#DDA548)}
+  .ws-pop-beeld{grid-row:2;display:flex;align-items:center;justify-content:center}
+  .ws-pop-beeld img{width:100%;height:auto;display:block;mix-blend-mode:multiply}
+  .ws-pop-kaart.ws-uit .ws-pop-beeld img{mix-blend-mode:normal}
+  .ws-pop-tekst{grid-row:2;min-width:0}
+  .ws-pop-rol{display:block;font-size:11px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;
+    color:var(--p-brons)}
+  .ws-pop-kaart.ws-uit .ws-pop-rol{color:var(--p-goud)}
+  .ws-pop-naam{margin:9px 0 0;font-size:clamp(19px,2.3vw,27px);font-weight:800;letter-spacing:-.03em;
+    line-height:1.08;color:var(--p-ink)}
+  .ws-pop-kaart.ws-uit .ws-pop-naam{color:#fff}
+  .ws-pop-een{margin:7px 0 0;font-size:14px;line-height:1.35;color:var(--p-ink60)}
+  .ws-pop-kaart.ws-uit .ws-pop-een{color:rgba(255,255,255,.62)}
+  .ws-pop-prijs{display:flex;align-items:baseline;gap:11px;margin:14px 0 0;flex-wrap:wrap}
+  .ws-pop-prijs b{font-size:clamp(23px,2.8vw,32px);font-weight:900;letter-spacing:-.035em;color:var(--p-ink)}
+  .ws-pop-kaart.ws-uit .ws-pop-prijs b{color:#fff}
+  .ws-pop-prijs s{font-size:16px;font-weight:600;color:var(--p-ink40)}
+  .ws-pop-kaart.ws-uit .ws-pop-prijs s{color:rgba(255,255,255,.38)}
+  .ws-pop-best{display:inline-block;margin:14px 0 0;padding:8px 14px;border-radius:9px;
+    border:1px solid var(--p-lijn);font-size:12.5px;font-weight:600;color:var(--p-ink60)}
+  .ws-pop-kaart.ws-uit .ws-pop-best{border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.66)}
+  .ws-pop-vorm{grid-column:1 / -1;grid-row:3;margin:0}
+  .ws-pop-knop{width:100%;display:flex;align-items:center;justify-content:center;border-radius:12px;
+    padding:19px;font-family:inherit;font-size:13px;font-weight:800;letter-spacing:.08em;
+    text-transform:uppercase;cursor:pointer;border:1.5px solid var(--p-ink);color:var(--p-ink);background:#fff}
+  .ws-pop-knop:hover{background:var(--p-ink);color:#fff}
+  .ws-pop-kaart.ws-uit .ws-pop-knop{border:0;color:#26170A;
+    background:linear-gradient(100deg,#F5DEAA,#EBC382 46%,#DDA548)}
+  .ws-pop-knop[disabled]{opacity:.45;cursor:not-allowed}
+
+  .ws-pop-tab{margin:22px 0 0;border:1px solid var(--p-lijn);border-radius:14px;overflow:hidden}
+  .ws-pop-tab table{width:100%;border-collapse:collapse;font-size:14px}
+  .ws-pop-tab th,.ws-pop-tab td{padding:13px 18px;text-align:center;border-bottom:1px solid var(--p-lijn)}
+  .ws-pop-tab tr:last-child th,.ws-pop-tab tr:last-child td{border-bottom:0}
+  .ws-pop-tab thead th{background:var(--p-room2);font-size:11.5px;font-weight:800;letter-spacing:.13em;
+    text-transform:uppercase;color:var(--p-ink60)}
+  .ws-pop-tab tbody th{text-align:left;font-weight:600;color:var(--p-ink80)}
+  .ws-pop-tab .ws-ja svg{width:17px;height:17px;color:var(--p-brons)}
+  .ws-pop-tab .ws-nee{color:var(--p-ink40)}
+  .ws-pop-erbij{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:800;
+    letter-spacing:.11em;text-transform:uppercase;color:var(--p-brons)}
+  .ws-pop-tab tr.ws-beslist td:last-child{background:rgba(233,190,114,.1)}
+
+  .ws-pop-beslis{display:flex;align-items:center;gap:13px;margin:18px 0 0;padding:15px 20px;
+    border-radius:14px;border:1px solid rgba(233,190,114,.55);
+    background:linear-gradient(180deg,rgba(233,190,114,.16),rgba(233,190,114,.07))}
+  .ws-pop-beslis svg{width:19px;height:19px;flex:none;color:var(--p-goud2)}
+  .ws-pop-beslis p{margin:0;font-size:15px;line-height:1.5;font-weight:600;color:#5A3B10}
+  .ws-pop-beslis p + p{margin-top:3px}
+  .ws-pop-beslis b{font-weight:800;color:var(--p-brons)}
+
+  /* de plakbalk is alleen op de telefoon in gebruik */
+  .ws-pop-balk{display:none}
+
+  .ws-pop-voet{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);margin:22px -30px 0;
+    padding:20px 30px;background:var(--p-room2);border-top:1px solid var(--p-lijn)}
+  .ws-pop-voet > div{display:flex;align-items:center;justify-content:center;gap:11px;padding:0 10px}
+  .ws-pop-voet > div + div{border-left:1px solid var(--p-lijn)}
+  .ws-pop-voet img{width:24px;height:24px;flex:none;object-fit:contain}
+  .ws-pop-voet span{font-size:13.5px;font-weight:700;color:var(--p-ink80)}
+
+  @media screen and (max-width:900px){
+    .ws-pop{padding:10px}
+    .ws-pop-vak{padding:26px 16px 0;border-radius:18px}
+    .ws-pop-x{right:12px;top:12px;width:32px;height:32px}
+    .ws-pop-kaarten{grid-template-columns:1fr;gap:12px}
+    .ws-pop-winst{font-size:13.5px;padding:13px 15px;text-align:left}
+    .ws-pop-lead{font-size:14px}
+    .ws-pop-tab table{font-size:12.5px}
+    .ws-pop-tab th,.ws-pop-tab td{padding:11px 12px}
+    .ws-pop-voet{grid-auto-flow:row;grid-auto-columns:auto;grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px 0;margin:18px -16px 0;padding:16px}
+    .ws-pop-voet > div{justify-content:flex-start;padding:0 12px}
+    .ws-pop-voet > div + div{border-left:0}
+    .ws-pop-voet span{font-size:12px}
+  }
+  @media screen and (max-width:700px){
+    /* het label past niet naast een vinkje in een derde van 390 px */
+    .ws-pop-erbij{flex-direction:column;gap:3px;font-size:8.5px;letter-spacing:.06em;line-height:1.1;
+      text-align:center}
+    .ws-pop-tab thead th{letter-spacing:.06em;font-size:10px;padding:10px 6px}
+    .ws-pop-tab tbody th{font-size:12px;padding-right:6px}
+    .ws-pop-tab td{padding:11px 6px}
+    .ws-pop-voet{align-items:center}
+
+    /* Onder elkaar is het geen vergelijking meer: je ziet nooit twee modellen
+       tegelijk. Naast elkaar dus, met alleen naam, rol en prijs in de kaart.
+       De knoppen gaan naar de balk onderin, die blijft plakken. */
+    .ws-pop-kaarten{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:16px 0 0}
+    .ws-pop-kaart{grid-template-columns:1fr;grid-template-rows:auto 1fr;row-gap:0;
+      padding:14px 10px 16px;border-radius:16px}
+    .ws-pop-kaart.ws-uit .ws-pop-tekst{padding-top:0}
+    .ws-pop-vlag{position:absolute;right:7px;top:7px;font-size:8px;letter-spacing:.08em;
+      padding:5px 8px}
+    .ws-pop-beeld{grid-row:auto}
+    /* een staande productfoto zou de kaart anders twee keer zo hoog maken */
+    .ws-pop-beeld img{max-width:100%;width:auto;height:auto;max-height:150px;object-fit:contain;
+      margin:0 auto}
+    .ws-pop-tekst{grid-row:auto;width:100%;display:flex;flex-direction:column;align-items:center;
+      text-align:center}
+    /* zonder foto zou de vlag op de naam vallen */
+    .ws-pop-beeld:empty{min-height:34px}
+    .ws-pop-kaart.ws-uit .ws-pop-tekst{padding-top:0}
+    .ws-pop-naam{order:1;margin:6px 0 0;font-size:16px;letter-spacing:-.02em}
+    .ws-pop-rol{order:2;margin:5px 0 0;font-size:11px;letter-spacing:0;text-transform:none;
+      font-weight:600;line-height:1.25}
+    .ws-pop-een{display:none}
+    .ws-pop-best{display:none}
+    /* de prijzen op dezelfde hoogte, ook als de ene naam twee regels wordt */
+    .ws-pop-prijs{order:3;justify-content:center;margin:auto 0 0;padding-top:10px;gap:7px}
+    .ws-pop-prijs b{font-size:20px}
+    .ws-pop-prijs s{font-size:13px}
+
+    /* anders valt Trustpilot op een eigen regel onder de sterren */
+    .ws-pop-tp{gap:8px;margin-top:13px}
+    .ws-pop-tp .ws-st{gap:2px}
+    .ws-pop-tp .ws-st i{width:17px;height:17px}
+    .ws-pop-tp .ws-st svg{width:11px;height:11px}
+    .ws-pop-tp .sc,.ws-pop-tp .mk{font-size:12.5px}
+    .ws-pop-tp .mk{gap:4px}
+    .ws-pop-tp .mk svg{width:12px;height:12px}
+
+    .ws-pop-beslis{padding:13px 14px;gap:10px;align-items:flex-start;margin-top:16px}
+    .ws-pop-beslis svg{margin-top:2px}
+    .ws-pop-beslis p{font-size:13px;line-height:1.45}
+
+    .ws-pop-vorm{display:none}
+    .ws-pop-balk{display:grid;gap:9px;position:sticky;bottom:0;z-index:3;
+      margin:16px -16px 0;padding:14px 16px calc(14px + env(safe-area-inset-bottom));
+      background:var(--p-room);border-top:1px solid var(--p-lijn);
+      box-shadow:0 -14px 26px -18px rgba(11,11,10,.5)}
+    .ws-pop-vorm2{margin:0}
+    .ws-pop-vorm2.ws-uit{order:-1}
+    .ws-pop-vorm2.ws-uit .ws-pop-knop{border:0;color:#26170A;
+      background:linear-gradient(100deg,#F5DEAA,#EBC382 46%,#DDA548)}
+    .ws-pop-knop{font-size:11.5px;letter-spacing:.05em;padding:16px 8px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .ws-pop,.ws-pop-vak{transition:none}
+  }
+  .ws-pdp .ws-apps{margin-top:13px}
+  .ws-pdp .ws-apps:empty{display:none}
+  .ws-pdp .ws-apps > div:empty{display:none}
+  @media screen and (max-width:749px){
+    .ws-pdp .ws-bb > .ws-apps{order:12}
+    .ws-pdp .ws-bb > .ws-rev{order:13}
+    .ws-pdp .ws-bb > .ws-cta2{order:14}
+    .ws-pdp .ws-bb > .ws-tel{order:15}
+    .ws-pdp .ws-bb > .ws-acc{order:16}
+  }
+
+  /* ---- de upgrade-pop-up bij het toevoegen aan de winkelwagen ----
+     base.js zet alleen de klasse open erop; verder niets. Dus is dat
+     precies de schakelaar. */
+  .ws-upg{position:fixed;inset:0;z-index:10000;display:none;align-items:center;justify-content:center;
+    padding:18px;font-family:'Montserrat',-apple-system,BlinkMacSystemFont,Arial,sans-serif}
+  .ws-upg.open{display:flex}
+  .ws-upg [data-action] > *{pointer-events:none}
+  .ws-upg-waas{position:absolute;inset:0;background:rgba(11,11,10,.62);
+    -webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+  .ws-upg-vak{position:relative;z-index:1;width:100%;max-width:560px;max-height:92vh;overflow-y:auto;
+    background:#FBF8F3;border-radius:20px;padding:30px 28px 22px;
+    box-shadow:0 30px 90px rgba(11,11,10,.4)}
+  .ws-upg-x{position:absolute;top:14px;right:14px;width:34px;height:34px;display:grid;place-items:center;
+    border:0;border-radius:50%;background:rgba(17,17,17,.06);color:#14120F;cursor:pointer;padding:0}
+  .ws-upg-x svg{width:16px;height:16px}
+  .ws-upg-x:hover{background:rgba(17,17,17,.11)}
+
+  .ws-upg-top{text-align:center;padding:0 22px}
+  .ws-upg-ey{display:block;font-size:10.5px;font-weight:800;letter-spacing:.19em;
+    text-transform:uppercase;color:#B0742A}
+  .ws-upg-kop{margin:9px 0 0;font-size:22px;font-weight:800;letter-spacing:-.028em;
+    line-height:1.2;color:#14120F}
+  .ws-upg-lead{margin:8px 0 0;font-size:13.5px;line-height:1.5;color:rgba(20,18,15,.6)}
+
+  .ws-upg-lijst{list-style:none;margin:22px 0 0;padding:0}
+  .ws-upg-kaart{display:grid;grid-template-columns:76px minmax(0,1fr) auto;gap:16px;align-items:center;
+    padding:14px;margin-top:10px;background:#fff;border:1px solid rgba(176,116,42,.2);border-radius:14px}
+  .ws-upg-kaart:first-child{margin-top:0}
+  .ws-upg-beeld{width:76px;height:76px;border-radius:10px;overflow:hidden;background:rgba(17,17,17,.05)}
+  .ws-upg-beeld img{width:100%;height:100%;object-fit:cover;display:block}
+  .ws-upg-naam{margin:0;font-size:15px;font-weight:800;letter-spacing:-.02em;color:#14120F}
+  .ws-upg-extra{list-style:none;margin:7px 0 0;padding:0}
+  .ws-upg-extra li{position:relative;padding-left:19px;margin-top:4px;
+    font-size:12.5px;line-height:1.35;color:rgba(20,18,15,.72)}
+  .ws-upg-extra li::before{content:"";position:absolute;left:0;top:2px;width:13px;height:13px;
+    background:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23B0742A' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12.6 4.6 4.6L19 7.4'/%3E%3C/svg%3E") no-repeat center/contain}
+  .ws-upg-meer{margin:5px 0 0;font-size:12px;color:rgba(20,18,15,.45)}
+
+  .ws-upg-koop{text-align:right}
+  .ws-upg-prijs{margin:0;font-size:15px;font-weight:800;color:#14120F;white-space:nowrap}
+  .ws-upg-meerprijs{margin:1px 0 0;font-size:12px;font-weight:700;color:#B0742A;white-space:nowrap}
+  .ws-upg-knop{margin-top:9px;border:0;border-radius:10px;padding:10px 15px;cursor:pointer;
+    background:linear-gradient(100deg,#E9BE72 0%,#DDA548 100%);color:#14120F;
+    font:inherit;font-size:12.5px;font-weight:800;letter-spacing:.01em;white-space:nowrap}
+  .ws-upg-knop:hover{filter:brightness(1.05)}
+
+  .ws-upg-nee{display:block;width:100%;margin:18px 0 0;padding:12px;border:0;background:none;cursor:pointer;
+    font:inherit;font-size:13px;font-weight:700;color:rgba(20,18,15,.5);text-decoration:underline;
+    text-underline-offset:3px}
+  .ws-upg-nee:hover{color:#14120F}
+
+  @media (max-width: 640px) {
+    .ws-upg{padding:12px;align-items:flex-end}
+    .ws-upg-vak{max-height:88vh;padding:26px 16px 16px;border-radius:18px}
+    .ws-upg-top{padding:0 16px}
+    .ws-upg-kop{font-size:19px}
+    .ws-upg-kaart{grid-template-columns:60px minmax(0,1fr);gap:12px;padding:12px}
+    .ws-upg-beeld{width:60px;height:60px}
+    .ws-upg-koop{grid-column:1 / -1;display:grid;grid-template-columns:auto minmax(0,1fr);
+      align-items:center;gap:10px;text-align:left;padding-top:10px;
+      border-top:1px solid rgba(176,116,42,.16)}
+    .ws-upg-meerprijs{grid-row:2;grid-column:1;margin:0}
+    .ws-upg-knop{grid-row:1 / span 2;grid-column:2;margin:0;padding:12px;width:100% }
+  }
+
+{% endstylesheet %}
