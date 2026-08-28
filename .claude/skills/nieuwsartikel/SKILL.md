@@ -111,6 +111,16 @@ Wat elk onderdeel doet, en waar het misgaat als je het weglaat:
   landingspagina; dat is wat het een uitgave laat lijken.
 - **Geen** goudverloop, geen schaduwen, geen ronde hoeken op kaarten, geen plakkende koopbalk,
   geen aftelklok, geen animatie bij het scrollen. Kaders hebben rechte hoeken en een hairline.
+- **Beeld zonder ingebrande verkooptekst.** Het assortiment op de Shopify-CDN bestaat voor een
+  groot deel uit winkelcreatives met koppen in het beeld ("IPX6 Waterdicht", "Glad Resultaat",
+  "Al meer dan 125.000+ tevreden klanten") en uit infographics met callouts. Die horen hier
+  niet: een foto met een reclamekop erin verraadt de vorm in &eacute;&eacute;n oogopslag, en de
+  cijfers erop spreken je eigen tekst soms tegen. Gebruik documentaire foto's en schone
+  studiobeelden, en controleer elk beeld door het te openen voordat je het plaatst.
+- **Het bijschrift beschrijft wat er echt te zien is.** Een bijschrift dat iets anders beweert
+  dan het beeld toont, is een fout van dezelfde soort als een verkeerd cijfer.
+- **Beeld naast de tekst**, ongeveer 46% breed, om en om links en rechts, met het bijschrift
+  eronder. Vol-de-breedte beelden horen bij het heldenbeeld, niet bij de punten.
 
 ## 5. Verkopen binnen de vorm
 
