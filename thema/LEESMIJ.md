@@ -1375,3 +1375,74 @@ de ene kaart twee en de andere drie USP's heeft. Nul afwijkingen.
 - De PixelPro TikTok-app geeft een Liquid-fout in de paginabron
   (`turbo-tiktok` regel 31). Die staat ook op het gepubliceerde thema, dus hij komt
   niet uit dit werk, maar hij hoort er niet.
+
+## Ronde: de pagina in de volle breedte (28-08)
+
+### Wat er mis was, gemeten
+
+De collectiepagina stond op een leeslijn van **1140px** terwijl de rest van het
+thema op **1400px** staat. Het productraster was dus smaller dan het menu erboven.
+Gemeten op de sale-pagina, vóór de wijziging:
+
+| Scherm | Leeslijn | Leeg links + rechts | Kolommen |
+| --- | --- | --- | --- |
+| 1440 px | 1140 px | 21% | 4 × 252 px |
+| 1600 px | 1140 px | 29% | 4 × 252 px |
+| 1920 px | 1140 px | 41% | 4 × 252 px |
+
+De kaart bleef 252px breed, hoe breed het scherm ook was. Alle extra ruimte ging
+naar de marges.
+
+### Wat er is gedaan
+
+`page_width` bleek een gewone thema-instelling te zijn (`config/settings_data.json`,
+bereik 1000–1600) die nog op de standaardwaarde 1400 stond. Die staat nu op **1600**,
+het maximum dat het thema toestaat. Daardoor schuiven **header, footer, megamenu en
+alle secties samen op** — geen enkele pagina raakt uit de pas. Wil je het smaller,
+dan is dat één schuifje onder Thema-instellingen → Layout.
+
+De collectie volgt met `--rail: 1600px`, en de kop had een eigen, afwijkende maat
+van 1240px die nu gelijk is getrokken.
+
+Na de wijziging:
+
+| Scherm | Leeslijn | Leeg | Kolommen |
+| --- | --- | --- | --- |
+| 1440 px | 1440 px | 0% | 5 × 256 px |
+| 1600 px | 1600 px | 0% | 5 × 288 px |
+| 1920 px | 1600 px | 17% | 5 × 288 px |
+
+### Waarom een vijfde kolom en geen bredere kaarten
+
+Vier kolommen op een lijn van 1600 geeft kaarten van 366px. Dat is een kaart die
+vooral leger wordt: dezelfde packshot, dezelfde drie USP-regels, meer wit eromheen.
+Vanaf 1400px container gaat het daarom naar **vijf kolommen**, waarmee de kaart in
+de beproefde 256–288px blijft en de extra ruimte naar producten gaat in plaats van
+naar marge.
+
+### Twee dingen die meeliftten
+
+- De **zonebalk** werd ruimer: de tegels gingen van 116 naar 180px en
+  "Lichaam & schaamstreek" past nu op één regel in plaats van twee. Het
+  woordafbrekingsprobleem uit een eerdere ronde is daarmee vanzelf weg.
+- De **kop zonder keuzehulp** (`.kop-grid.solo`) stond vast op 860px, afgestemd op
+  de oude lijn van 1140. Op 1600 stond die als een smal blok links in een brede
+  band. Nu 1180px; de lede blijft op leesbreedte door `.lead.kort`, dus alleen de
+  kop en de foto worden ruimer. Dit raakt zeven pagina's: de vier typepagina's en
+  de drie sale-pagina's.
+
+### Wat gecontroleerd is
+
+Homepage, productpagina en collectiepagina opgehaald uit v3 op 1440 en 1920 px:
+**nergens een horizontale scrollbalk**, en niets valt buiten beeld behalve het
+dichtgeklapte zoekpaneel — dat staat op het gepubliceerde thema precies zo, dus dat
+komt niet uit deze wijziging. Tien collectiepagina's opnieuw nagelopen: elke kaart
+heeft nog steeds precies één beoordelingsregel en één USP-lijst. Nul afwijkingen.
+
+### Nog open
+
+- Boven 1600px blijft er marge staan, want 1600 is het maximum van de
+  thema-instelling. Verder vullen kan alleen door dat maximum in
+  `config/settings_schema.json` op te hogen.
+- De thema-instelling `card_reviews` staat op **4.5**, `reviews_label` ook, terwijl
+  de productpagina en de nieuwe kaart **4,4** tonen. Dat moet één getal worden.

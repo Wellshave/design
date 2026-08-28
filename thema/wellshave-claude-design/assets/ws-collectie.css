@@ -10,7 +10,7 @@
   --grad-dark:linear-gradient(168deg,#242220 0%,#171614 58%,#0E0D0C 100%);
   --grad-kop:linear-gradient(158deg,#000000 0%,#0C0B0A 38%,#211F1D 100%);
   --grad-goud-tekst:linear-gradient(100deg,#B0742A 0%,#8C5A1A 100%);
-  --r-s:12px;--r-m:18px;--r-l:26px;--rail:1140px;
+  --r-s:12px;--r-m:18px;--r-l:26px;--rail:1600px;
   font-family:"Montserrat",sans-serif;color:var(--ink);background:var(--paper);
   display:block;font-size:15px;line-height:1.6}
 .wsc{container-type:inline-size}
@@ -248,7 +248,7 @@
    allebei geprobeerd en allebei afgekeurd — zie LEESMIJ. `--grad-dark` blijft wat het
    was, want dat wordt ook door `.donker` in andere blokken gebruikt. */
 .wsc .kop{background:var(--grad-kop);color:#fff;padding:40px 0 34px;position:relative;overflow:hidden}
-.wsc .kop .rail{max-width:1240px}
+.wsc .kop .rail{max-width:var(--rail)}
 .wsc .kop-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:46px;align-items:start;
   position:relative;z-index:1}
 .wsc .kop-copy{display:flex;flex-direction:column;gap:18px;align-items:flex-start;
@@ -579,6 +579,7 @@
   color:var(--bronze)}
 .wsc .groep-link svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2.2}
 .wsc .kaarten{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+@container (min-width:1400px){.wsc .kaarten{grid-template-columns:repeat(5,minmax(0,1fr));gap:20px}}
 
 /* de kaart — overgenomen uit ws-bestsellers.css */
 .wsc .wsk{position:relative;background:#fff;border-radius:12px;overflow:hidden;min-width:0;
@@ -902,7 +903,11 @@ body.vgl-open{overflow:hidden}
 .wsc .wsk-form{display:contents}
 
 /* een pagina zonder keuzehulp: de kop is dan één kolom */
-.wsc .kop-grid.solo{grid-template-columns:minmax(0,1fr);max-width:860px}
+/* Zonder keuzehulp is de kop één kolom. De 860px hieronder was afgestemd op een
+   leeslijn van 1140; op 1600 stond die kolom als een smal blok links in een brede
+   band. Hij loopt nu mee met de rest van de pagina — de lede blijft op leesbreedte
+   door .lead.kort, dus alleen de kop en de foto worden ruimer. */
+.wsc .kop-grid.solo{grid-template-columns:minmax(0,1fr);max-width:min(1180px,100%)}
 .wsc .kop-grid.solo .kop-foto{aspect-ratio:16/7}
 
 /* geen tekening: de uitleg wordt één brede kolom */
