@@ -190,8 +190,14 @@ De regels uit deel 16 van
 - Lees na publicatie via de API terug wat is opgeslagen en tel secties, beelden en knoppen.
 
 Controleer voor oplevering op 1440, 1024 en 390 breed: geen horizontale overloop, alle beelden
-geladen, tags in balans, geen JavaScript-fouten, en elke knop en zijkolomlink naar een bestaande
-bestemming.
+geladen, tags in balans en geen JavaScript-fouten.
+
+**Loop daarna elke link af met een statuscode**, niet op gevoel. Een dossier-artikel heeft er
+snel vijftien: de balk bovenaan, de deelknoppen, de zijkolom, de twee stroken, de kaarten en de
+reviewlink. Een omleiding herschrijf je naar de eindbestemming. Waar het misging: de
+Trustpilot-link stond op `wellshave.com` in plaats van `wellshave.nl` en gaf een 404, en
+`/pages/over-ons` bestaat niet meer. Deel 15b van de merklaag noemt de juiste adressen en de
+endpoint waarmee je score en aantal beoordelingen live ophaalt.
 
 ## 9. Wat deze tak nog mist
 

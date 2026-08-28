@@ -681,6 +681,34 @@ X erbij" verwarrend en kun je het beter als upgrade framen.
 
 ---
 
+## 15b. Waar het bewijs vandaan komt, en hoe je het controleert
+
+Elke link en elk cijfer op een pagina is te controleren, en dat kost minder tijd dan het
+herstellen van een fout achteraf.
+
+**Trustpilot.** Het profiel staat op `https://nl.trustpilot.com/review/wellshave.nl`. De
+variant op `.com` bestaat niet en geeft een 404; die is al een keer op een pagina beland.
+Score en aantal beoordelingen haal je live op met de businessunit-id uit de widget in het
+thema:
+
+```
+https://widget.trustpilot.com/trustbox-data/5419b6ffb0d04a076446a9af?businessUnitId=63c511d4e1339e2200c204a1&locale=nl-NL
+```
+
+Die geeft `stars` (het aantal sterren dat Trustpilot toont), `trustScore` (net iets lager) en
+`numberOfReviews.total`. Schrijf "ruim 950" in plaats van een exact getal: het loopt op, en een
+ondergrens blijft waar.
+
+**Interne links.** Controleer elke URL v&oacute;&oacute;r oplevering met een statuscode, niet op
+gevoel. Twee valkuilen die zijn voorgekomen: `/pages/over-ons` bestaat niet meer en leidt naar
+de homepage (de echte pagina is `/pages/over-wellshave`), en `/pages/contact` stuurt door naar
+`/pages/neem-contact-op`. Zet altijd de eindbestemming in de link, geen omleiding.
+
+**Winkelwagenlinks.** Open de permalink en controleer met `cart.js` dat elk artikel, inclusief
+het cadeau, er ook echt in zit.
+
+---
+
 ## 16. Publiceren binnen een Shopify-thema
 
 Een landingspagina hoort op het eigen domein: dat houdt attributie en analytics schoon. In de
