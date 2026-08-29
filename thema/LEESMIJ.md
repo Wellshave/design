@@ -1517,3 +1517,36 @@ Veertien collectiepagina's: 15 lintjes in totaal, nooit meer dan twee per pagina
 nul op de sale-pagina's. Het fotovlak nagemeten op vijf pagina's met een ring net
 binnen de foto tegen de rand van de tegel: overal 0 tot 5. De fotolink nog steeds
 klikbaar op elke kaart, met de juiste product-URL.
+
+### Naschrift: het monogram schijnt door het product
+
+Nee, die gouden gloed over het product was niet de bedoeling — hij is een
+**neveneffect van de transparantie-ingreep hierboven**. Zolang de packshot zijn
+eigen witte achtergrond had, dekte die het monogram af binnen het fotovlak; het
+merkteken was alleen zichtbaar in de marge eromheen. Sinds de foto wordt weggemengd
+schijnt alles wat eronder ligt er doorheen, en liep de gouden S dwars over het
+apparaat.
+
+Gemeten in de hover-stand: **43% van de productpixels verschoof, tot 34 stappen.**
+
+Twee dingen geprobeerd die níét werkten:
+
+- Het monogram er juist bóvenop leggen, ook met multiply. Idee: donker × licht
+  blijft donker, dus het zou het zwarte apparaat ongemoeid laten. In de praktijk is
+  het product niet egaal zwart — de standaard en de hooglichten zijn middengrijs, en
+  die kleuren wél mee. Gemeten werd het zelfs iets slechter (max 35 tegen 34).
+- De dekking verlagen. Dat schaalt de gloed mee omlaag maar haalt hem niet weg.
+
+Wat wél werkt: het monogram **in het midden uithollen** met een radiale masker.
+Het apparaat staat gecentreerd, dus precies daar hoeft het merkteken niet te staan:
+
+```css
+mask-image: radial-gradient(closest-side, transparent 0 65%, #000 92%)
+```
+
+Na de uitsparing: op het product **max 21, gemiddeld 0,7, nog 2,3% van de pixels
+boven de drempel** — tegen 34 / 7,2 / 42,8% ervoor. Op de tegel blijft het
+merkteken staan (max 51), dus de hover houdt zijn merktextuur in de hoeken.
+
+Wie het monogram helemaal weg wil: de instelling "Monogram achter de packshot" in
+de sectie leegmaken is genoeg.

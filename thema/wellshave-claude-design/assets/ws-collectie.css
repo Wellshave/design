@@ -613,8 +613,16 @@
    staat de link nog steeds boven het monogram — hij komt er in de opmaak na —
    en het lintje en de knoppen liggen er met z-index 2 overheen. */
 .wsc .wsk-fotolink{position:absolute;inset:0;display:block}
+/* Het monogram is uitgehold in het midden. Zolang de packshot zijn eigen witte
+   achtergrond had, dekte die het monogram af binnen het fotovlak; sinds de foto
+   wordt weggemengd schijnt alles wat eronder ligt er doorheen, en liep de gouden
+   S dwars over het product. Gemeten: 43% van de productpixels verschoof, tot 34
+   stappen. Met deze uitsparing is dat 3% en gemiddeld onder de 1 — het merkteken
+   blijft staan waar het hoort, in de hoeken van de tegel. */
 .wsc .wsk-mark{position:absolute;z-index:0;left:50%;top:50%;width:104%;
-  transform:translate(-50%,-50%) scale(1.14);opacity:0;
+  transform:translate(-50%,-50%) scale(1.14);opacity:0;pointer-events:none;
+  -webkit-mask-image:radial-gradient(closest-side,transparent 0 65%,#000 92%);
+  mask-image:radial-gradient(closest-side,transparent 0 65%,#000 92%);
   transition:opacity .62s cubic-bezier(.22,.61,.36,1),transform .62s cubic-bezier(.22,.61,.36,1)}
 .wsc .wsk-mark img{position:static;width:100%;height:auto;object-fit:contain}
 .wsc .wsk-tag{position:absolute;z-index:2;top:12px;left:12px;background:#111;color:#fff;
