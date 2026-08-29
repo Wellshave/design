@@ -1455,9 +1455,10 @@
                 </div>
 
                 <div class="ws-upg-koop">
-                  <p class="ws-upg-prijs">{% render 'price-formated', price: uv.price %}</p>
+                  <p class="ws-upg-prijs">{{ s.munt }}{% render 'price-formated', price: uv.price %}</p>
                   {%- if bespaar > 0 and s.upg_besp != blank -%}
-                    <p class="ws-upg-besp">{{ s.upg_besp }} {% render 'price-formated', price: bespaar %}</p>
+                    {%- capture bespaarbedrag -%}{{ s.munt }}{% render 'price-formated', price: bespaar %}{%- endcapture -%}
+                    <p class="ws-upg-besp">{{ s.upg_besp | replace: '[bedrag]', bespaarbedrag }}</p>
                   {%- endif -%}
                   <button type="button" class="ws-upg-knop"
                           data-action="add-product" data-variant="{{ uv.id }}">{{ s.upg_knop }}</button>
@@ -1553,7 +1554,7 @@
     { "type": "text", "id": "upg_kop", "label": "Kop", "info": "[product] wordt de producttitel.", "default": "Samen goedkoper dan los kopen" },
     { "type": "text", "id": "upg_lead", "label": "Onderregel", "info": "[product] wordt de producttitel.", "default": "De [product] zit er in beide gevallen gewoon bij." },
     { "type": "text", "id": "upg_knop", "label": "Knop op de kaart", "default": "Kies deze" },
-    { "type": "text", "id": "upg_besp", "label": "Bespaarregel op de kaart", "info": "Verschijnt alleen als custom.upgrade_extras is ingevuld; het bedrag komt erachter.", "default": "Je bespaart" },
+    { "type": "text", "id": "upg_besp", "label": "Bespaarregel op de kaart", "info": "[bedrag] wordt het verschil met los kopen. De regel verschijnt alleen als custom.upgrade_extras is ingevuld.", "default": "[bedrag] goedkoper dan los" },
     { "type": "text", "id": "upg_enmeer", "label": "Regel bij meer dan vier extra\u0027s", "info": "[aantal] wordt het aantal dat niet in de lijst past.", "default": "en nog [aantal] andere onderdelen" },
     { "type": "text", "id": "upg_enmeer1", "label": "Diezelfde regel bij precies \u00e9\u00e9n", "default": "en nog \u00e9\u00e9n onderdeel" },
     { "type": "text", "id": "upg_nee", "label": "Doorgaan zonder upgrade", "info": "[product] wordt de producttitel.", "default": "Nee dank je, ga verder met de [product]" },
@@ -1838,7 +1839,7 @@
 
   .ws-upg-koop{text-align:right}
   .ws-upg-prijs{margin:0;font-size:15px;font-weight:800;color:#14120F;white-space:nowrap}
-  .ws-upg-besp{margin:3px 0 0;font-size:11px;font-weight:700;line-height:1.3;color:#8A5A1E;white-space:nowrap}
+  .ws-upg-besp{margin:3px 0 0;font-size:11px;font-weight:700;line-height:1.3;color:#8A5A1E}
   .ws-upg-knop{margin-top:9px;border:0;border-radius:10px;padding:10px 15px;cursor:pointer;
     background:linear-gradient(100deg,#E9BE72 0%,#DDA548 100%);color:#14120F;
     font:inherit;font-size:12.5px;font-weight:800;letter-spacing:.01em;white-space:nowrap}
