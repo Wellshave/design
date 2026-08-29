@@ -1,0 +1,340 @@
+/* ═══ Wellshave · Over ons ═══
+   Zelfde taal als de homepage: donkere blokken op #0B0B0A met een gouden
+   radiale gloed, lichte blokken op #F7F2E9 in een dun gouden kader, koppen
+   met het accent in <b> en niet in een tweede regel met een verloop.
+   Mobiel is één echte media query op 749px, de grens die het thema aanhoudt.
+   Boven- en ondermarge komen uit de sectie-instellingen, niet uit dit bestand.
+
+   Zeven blokken. Er stonden er tien; de resultaatband, de tijdlijn en de
+   werkwijze zijn eruit omdat de pagina te lang werd om te lezen. */
+
+.ws-ov{font-family:"Montserrat",sans-serif;color:#111}
+.ws-ov *{box-sizing:border-box}
+.ws-ov p{margin:0;max-width:none}
+.ws-ov ul{margin:0;padding:0;max-width:none;list-style:none}
+/* Let op: `.ws-ov p` weegt (0,1,1) en wint van een losse klasse (0,1,0).
+   Zet je een marge op een <p>, schrijf dan `.ws-ov p.ws-ov__…`. */
+
+/* de eyebrow met de haarlijnen ernaast, het merkteken van elke kop */
+.ws-ov__eyebrow{display:inline-flex;align-items:center;gap:16px;font-size:11px;font-weight:700;
+  letter-spacing:.22em;text-transform:uppercase;color:#BC813E}
+.ws-ov__eyebrow::before,.ws-ov__eyebrow::after{content:"";width:42px;height:1px;
+  background:rgba(188,129,62,.5)}
+
+/* ── 1. hero ── halve foto, halve tekst, verder niets ──
+   Geen sluier, geen watermerk, geen schuine streep, geen knop en geen teller:
+   dit is de eerste indruk van een Over ons-pagina, geen aanbieding. */
+.ws-ov__hero{display:grid;grid-template-columns:1fr 1fr;background:#0B0B0A;color:#fff;
+  min-height:var(--ws-ov-hero-h,540px);overflow:hidden}
+.ws-ov__media{position:relative;order:2;min-height:0;background:#141312}
+.ws-ov__foto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  object-position:50% 47%}
+.ws-ov__heroin{order:1;display:flex;align-items:center;padding:56px 48px 56px 44px}
+.ws-ov__heroblok{width:100%;max-width:540px;display:flex;flex-direction:column;gap:22px;
+  align-items:flex-start}
+.ws-ov__h1{font-size:46px;line-height:110%;font-weight:700;letter-spacing:-.034em;margin:0;
+  color:#fff;text-transform:none}
+.ws-ov__h1 b,.ws-ov__h1 strong,.ws-ov__h1 em{font-style:normal;font-weight:700;color:#F5D18A}
+/* missie en visie staan als twee gelabelde regels, niet verstopt in een lead */
+.ws-ov__paar{display:flex;flex-direction:column;gap:18px;width:100%;padding-top:4px;
+  border-top:1px solid rgba(245,209,138,.22)}
+.ws-ov__paar > div{display:flex;flex-direction:column;gap:7px}
+.ws-ov__paarlabel{font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:#F5D18A}
+.ws-ov__paartekst{font-size:16px;line-height:158%;color:rgba(255,255,255,.74);max-width:46ch}
+
+/* ── 2. het verhaal ── licht en open: beeld links, een ondertekend stuk rechts.
+   Bewust geen kader eromheen, zodat het naast het omkaderde vragenblok
+   hieronder als een ander soort blok leest en niet als twee dezelfde. ── */
+.ws-ov__verhaal{background:#F7F2E9;padding:64px 44px 30px}
+.ws-ov__verhaalin{max-width:1240px;margin:0 auto;display:grid;
+  grid-template-columns:minmax(0,.82fr) minmax(0,1fr);gap:58px;align-items:center}
+
+.ws-ov__beeld{position:relative;min-width:0;padding-bottom:38px;margin:0}
+.ws-ov__beeld--een,.ws-ov__beeld--twee{overflow:hidden;background:#EDE4D6;
+  border:1px solid rgba(188,129,62,.32)}
+.ws-ov__beeld--een{border-radius:18px;aspect-ratio:4/5}
+.ws-ov__beeld--een img{width:100%;height:100%;object-fit:cover;object-position:56% 46%}
+/* de tweede foto steekt over de rand van de eerste, met een crème mat ertussen */
+.ws-ov__beeld--twee{position:absolute;right:-20px;bottom:14px;width:43%;aspect-ratio:1/1;
+  border-radius:14px;border:4px solid #F7F2E9;outline:1px solid rgba(188,129,62,.32);
+  box-shadow:0 26px 50px -28px rgba(11,11,10,.7)}
+.ws-ov__beeld--twee img{width:100%;height:100%;object-fit:cover;object-position:58% 24%}
+.ws-ov__bijschrift{position:absolute;left:2px;bottom:0;max-width:54%;font-size:11px;
+  font-weight:600;letter-spacing:.13em;text-transform:uppercase;line-height:150%;
+  color:rgba(17,17,17,.42)}
+
+.ws-ov__verhaalt{display:flex;flex-direction:column;align-items:flex-start;gap:17px;min-width:0}
+.ws-ov__h2--klein{font-size:34px;line-height:116%}
+.ws-ov__vtekst{font-size:15px;line-height:172%;color:rgba(17,17,17,.66);max-width:56ch}
+/* de les uit het verhaal ─ zelfde streep als het citaat in het reviewblok */
+.ws-ov__les{border-left:2px solid #BC813E;padding:5px 0 5px 20px;margin-top:5px;
+  font-size:21px;line-height:140%;font-weight:600;letter-spacing:-.018em;color:#111;max-width:30ch}
+.ws-ov__hand{display:flex;align-items:center;gap:15px;width:100%;margin-top:9px;padding-top:20px;
+  border-top:1px solid rgba(188,129,62,.24)}
+/* de ronde pasfoto is een uitsnede van de magazijnfoto, vandaar de achtergrond-zoom */
+.ws-ov__hand i{width:50px;height:50px;border-radius:50%;flex:none;background-repeat:no-repeat;
+  background-size:1500%;background-position:49% 33%;background-color:#EDE4D6;
+  box-shadow:0 0 0 1px rgba(188,129,62,.45)}
+.ws-ov__hand b{display:block;font-size:11px;font-weight:700;letter-spacing:.15em;
+  text-transform:uppercase;color:#BC813E}
+.ws-ov__hand em{display:block;font-style:normal;font-size:13px;color:rgba(17,17,17,.55);
+  margin-top:4px}
+
+/* ── 3. de drie vragen ── licht, in een gouden kader ── */
+.ws-ov__vragen{background:#F7F2E9;padding:44px 34px}
+.ws-ov__rand{position:relative;border:1px solid rgba(188,129,62,.32);border-radius:20px;
+  background:linear-gradient(165deg,#FBF7F0 0%,#F6EFE3 55%,#F2E8D8 100%);
+  padding:44px 44px 46px;overflow:hidden}
+.ws-ov__randmerk{position:absolute;left:-30px;top:-40px;width:210px;height:auto;opacity:.05;
+  pointer-events:none}
+.ws-ov__randin{position:relative;z-index:1;max-width:1160px;margin:0 auto;display:flex;
+  flex-direction:column;gap:32px;min-width:0}
+.ws-ov__kop{text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px}
+.ws-ov__h2{font-size:40px;line-height:114%;font-weight:600;letter-spacing:-.028em;margin:0;
+  color:#111;text-transform:none}
+.ws-ov__h2 b,.ws-ov__h2 strong{font-weight:600;color:#BC813E}
+.ws-ov__sub{font-size:15px;line-height:158%;color:rgba(17,17,17,.6);max-width:62ch}
+
+.ws-ov__drie{display:grid;grid-template-columns:repeat(var(--ws-kol,3),minmax(0,1fr));gap:18px}
+.ws-ov__vraag{background:rgba(255,255,255,.72);border:1px solid rgba(188,129,62,.22);
+  border-radius:14px;padding:28px 24px 26px;display:flex;flex-direction:column;gap:11px;
+  min-width:0}
+.ws-ov__zegel{width:60px;height:60px;border-radius:50%;flex:none;margin-bottom:4px;
+  border:1px solid rgba(188,129,62,.4);background:rgba(255,255,255,.7);display:flex;
+  align-items:center;justify-content:center;color:#BC813E}
+.ws-ov__zegel svg{width:27px;height:27px}
+.ws-ov__vraagnr{font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:#BC813E;line-height:150%}
+.ws-ov__vraagh{font-size:22px;line-height:120%;font-weight:600;letter-spacing:-.022em;color:#111}
+.ws-ov__vraagt{font-size:13.5px;line-height:158%;color:rgba(17,17,17,.6)}
+.ws-ov__vraagslot{display:flex;align-items:center;justify-content:center;gap:12px;
+  padding-top:24px;border-top:1px solid rgba(188,129,62,.22);font-size:13.5px;
+  color:rgba(17,17,17,.55);text-align:center}
+.ws-ov__vraagslot svg{width:16px;height:16px;color:#BC813E;flex:none}
+.ws-ov__vraagslot span{min-width:0}
+.ws-ov__vraagslot b,.ws-ov__vraagslot strong{color:rgba(17,17,17,.8);font-weight:600}
+
+/* ── 4. Trustpilot ── een carrousel, want zes reviews onder elkaar is weer
+   een scherm scrollen. Het spoor schuift met scroll-snap; de knoppen sturen
+   het aan. Zonder JavaScript blijft het gewoon een veegbaar spoor. ── */
+.ws-ov__tp{background:#F7F2E9;padding:56px 34px 44px}
+.ws-ov__tpin{max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:26px}
+.ws-ov__tpkop{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;
+  flex-wrap:wrap}
+.ws-ov__tpkoptekst{display:flex;flex-direction:column;align-items:flex-start;gap:13px;min-width:0}
+/* de score in de kop, met de groene ster van Trustpilot zodat hij herkenbaar is */
+.ws-ov__tpscore{display:flex;align-items:center;gap:13px;flex:none;
+  border:1px solid rgba(188,129,62,.3);border-radius:14px;padding:13px 18px;
+  background:linear-gradient(165deg,#FBF7F0 0%,#F4EBDD 100%)}
+.ws-ov__tpscore svg{width:19px;height:19px;fill:#00B67A;flex:none}
+.ws-ov__tpscore b{font-size:22px;font-weight:700;letter-spacing:-.03em;color:#111;
+  font-variant-numeric:tabular-nums}
+.ws-ov__tpscore span{display:block;font-size:12px;color:rgba(17,17,17,.58);line-height:145%}
+.ws-ov__tpscore a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+
+.ws-ov__spoor{display:grid;grid-auto-flow:column;
+  grid-auto-columns:calc((100% - 36px) / 3);gap:18px;
+  overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;
+  scrollbar-width:none;-ms-overflow-style:none;padding:2px}
+.ws-ov__spoor::-webkit-scrollbar{display:none}
+.ws-ov__tpk{scroll-snap-align:start;min-width:0;
+  background:linear-gradient(165deg,#FBF7F0 0%,#F6EFE3 55%,#F2E8D8 100%);
+  border:1px solid rgba(188,129,62,.3);border-radius:16px;padding:26px 24px 22px;
+  display:flex;flex-direction:column;gap:13px}
+.ws-ov__sterren{display:flex;gap:3px;color:#BC813E}
+.ws-ov__sterren svg{width:15px;height:15px;fill:currentColor}
+.ws-ov__tpt{font-size:15px;line-height:132%;font-weight:600;letter-spacing:-.018em;color:#111}
+.ws-ov__tpc{font-size:14px;line-height:164%;color:rgba(17,17,17,.68);flex:1}
+.ws-ov__tpb{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;padding-top:13px;
+  border-top:1px solid rgba(188,129,62,.22)}
+.ws-ov__tpb b{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:#111}
+.ws-ov__tpb em{font-style:normal;font-size:12px;color:rgba(17,17,17,.5)}
+
+.ws-ov__tpnav{display:flex;align-items:center;gap:14px}
+.ws-ov__pijl{width:42px;height:42px;border-radius:50%;flex:none;cursor:pointer;
+  border:1px solid rgba(188,129,62,.4);background:rgba(255,255,255,.6);color:#BC813E;
+  display:flex;align-items:center;justify-content:center;padding:0;
+  transition:background .2s ease,border-color .2s ease}
+.ws-ov__pijl:hover:not(:disabled){background:#BC813E;border-color:#BC813E;color:#fff}
+.ws-ov__pijl:disabled{opacity:.34;cursor:default}
+.ws-ov__pijl svg{width:17px;height:17px}
+.ws-ov__stip{display:flex;gap:7px}
+.ws-ov__stip button{width:7px;height:7px;padding:0;border:0;border-radius:50%;cursor:pointer;
+  background:rgba(188,129,62,.3);transition:background .2s ease,width .2s ease}
+.ws-ov__stip button[aria-current="true"]{background:#BC813E;width:20px;border-radius:4px}
+
+/* ── 5. wat wij wel en niet beloven ── donker paneel op licht ── */
+.ws-ov__belofte{background:#F7F2E9;padding:0 34px 44px}
+.ws-ov__duo{max-width:1240px;margin:0 auto;display:grid;
+  grid-template-columns:repeat(var(--ws-kol,2),minmax(0,1fr));gap:20px;align-items:stretch}
+.ws-ov__paneel{position:relative;background:#141312;color:#fff;border-radius:16px;
+  padding:34px 32px;display:flex;flex-direction:column;gap:18px;overflow:hidden}
+.ws-ov__paneel--licht{background:linear-gradient(165deg,#FBF7F0 0%,#F6EFE3 55%,#F2E8D8 100%);
+  color:#111;border:1px solid rgba(188,129,62,.32)}
+.ws-ov__paneelmerk{position:absolute;right:-46px;bottom:-56px;width:210px;height:auto;opacity:.07;
+  pointer-events:none;filter:brightness(0) invert(1)}
+.ws-ov__paneel--licht .ws-ov__paneelmerk{filter:none;opacity:.05}
+.ws-ov__paneelkop{position:relative;z-index:1;font-size:11px;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:#BC813E}
+.ws-ov__paneel .ws-ov__paneelkop{color:#F5D18A}
+.ws-ov__paneel--licht .ws-ov__paneelkop{color:#BC813E}
+.ws-ov__paneelh{position:relative;z-index:1;font-size:26px;line-height:120%;font-weight:600;
+  letter-spacing:-.024em;margin:0;color:#fff;text-transform:none}
+.ws-ov__paneel--licht .ws-ov__paneelh{color:#111}
+.ws-ov__paneelh b,.ws-ov__paneelh strong{font-weight:600;color:#F5D18A}
+.ws-ov__paneel--licht .ws-ov__paneelh b,.ws-ov__paneel--licht .ws-ov__paneelh strong{color:#BC813E}
+.ws-ov__lijst{position:relative;z-index:1;display:flex;flex-direction:column;gap:13px}
+.ws-ov__lijst li{display:flex;gap:12px;align-items:flex-start;font-size:14px;line-height:156%;
+  color:rgba(255,255,255,.66)}
+.ws-ov__paneel--licht .ws-ov__lijst li{color:rgba(17,17,17,.65)}
+.ws-ov__vink{width:21px;height:21px;flex:none;margin-top:1px;color:#F5D18A}
+.ws-ov__paneel--licht .ws-ov__vink{color:#BC813E}
+.ws-ov__kruis{width:21px;height:21px;flex:none;margin-top:1px;color:rgba(255,255,255,.32)}
+.ws-ov__paneel--licht .ws-ov__kruis{color:rgba(17,17,17,.3)}
+/* een echte kritische review onder het niet-beloven-paneel: geen van de acht
+   vergeleken merken laat er één zien, en juist dat maakt hem geloofwaardig */
+.ws-ov__tegen{position:relative;z-index:1;margin-top:auto;padding-top:18px;
+  border-top:1px solid rgba(188,129,62,.22);font-size:13px;line-height:158%;
+  color:rgba(17,17,17,.6)}
+.ws-ov__tegen b{display:block;font-weight:700;font-size:10.5px;letter-spacing:.13em;
+  text-transform:uppercase;color:#BC813E;margin-bottom:8px}
+.ws-ov__tegen em{font-style:italic}
+
+/* ── 6. het team ── één foto, met de namen erin.
+   De gezichten staan in de bovenste tweederde, dus het verloop en de tekst
+   pakken alleen de onderste helft. ── */
+.ws-ov__tm{background:#F7F2E9;padding:0 34px 44px}
+.ws-ov__tmin{max-width:1240px;margin:0 auto}
+.ws-ov__tmfoto{position:relative;margin:0;border-radius:18px;overflow:hidden;background:#0B0B0A;
+  border:1px solid rgba(188,129,62,.32)}
+/* De foto wordt niet bijgesneden: alle zes staan er helemaal op. */
+.ws-ov__tmfoto > img{display:block;width:100%;height:auto}
+/* Het tekstvlak schuift met een negatieve marge over de onderste rand van de
+   foto heen, zodat het er ín staat. Het pakt alleen de onderste ~13%, en daar
+   staan geen gezichten meer, want de voorste twee eindigen op driekwart. */
+.ws-ov__tmover{position:relative;margin-top:-128px;color:#fff;padding:128px 40px 32px;
+  display:flex;flex-direction:column;gap:15px;
+  background:linear-gradient(180deg,rgba(11,11,10,0) 0%,rgba(11,11,10,.5) 34%,
+    rgba(11,11,10,.88) 58%,#0B0B0A 74%)}
+.ws-ov__tmover .ws-ov__eyebrow{color:#F5D18A}
+.ws-ov__tmover .ws-ov__eyebrow::before,.ws-ov__tmover .ws-ov__eyebrow::after{
+  background:rgba(245,209,138,.5)}
+.ws-ov__tmh{font-size:29px;line-height:118%;font-weight:700;letter-spacing:-.028em;margin:0;
+  color:#fff;text-transform:none;max-width:34ch}
+.ws-ov__tmh b,.ws-ov__tmh strong{font-weight:700;color:#F5D18A}
+.ws-ov__namen{display:flex;flex-wrap:wrap;gap:9px 10px;margin-top:3px}
+.ws-ov__namen span{display:inline-flex;align-items:baseline;gap:8px;
+  border:1px solid rgba(245,209,138,.3);border-radius:100px;padding:8px 15px;
+  background:rgba(11,11,10,.45);backdrop-filter:blur(6px)}
+.ws-ov__namen b{font-size:13px;font-weight:600;letter-spacing:-.01em;color:#fff}
+.ws-ov__namen em{font-style:normal;font-size:10.5px;font-weight:600;letter-spacing:.11em;
+  text-transform:uppercase;color:rgba(245,209,138,.85)}
+
+/* ── 7. afsluiter ── donker met gloed en twee knoppen ── */
+.ws-ov__af{position:relative;overflow:hidden;background:#0B0B0A;color:#fff;padding:74px 44px}
+.ws-ov__af::before{content:"";position:absolute;left:50%;top:-46%;width:120%;height:130%;
+  transform:translateX(-50%);pointer-events:none;
+  background:radial-gradient(50% 40% at 50% 38%,rgba(245,209,138,.12) 0%,rgba(11,11,10,0) 70%)}
+.ws-ov__afin{position:relative;z-index:1;max-width:860px;margin:0 auto;text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:16px}
+.ws-ov__h2--dark{font-size:40px;font-weight:700;letter-spacing:-.03em;line-height:116%;margin:0;
+  color:#fff;text-transform:none}
+.ws-ov__h2--dark b,.ws-ov__h2--dark strong{font-weight:700;color:#F5D18A}
+.ws-ov__sub--dark{font-size:15.5px;line-height:160%;color:rgba(255,255,255,.58);max-width:64ch}
+.ws-ov__knoppen{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:10px}
+.ws-ov__cta{display:inline-flex;align-items:center;gap:14px;
+  background:linear-gradient(135deg,#F5D18A 0%,#D8AC5D 52%,#BC813E 100%);
+  color:#111;font-weight:700;font-size:14px;letter-spacing:.13em;text-transform:uppercase;
+  padding:20px 30px;border-radius:100px;text-decoration:none;border:0;
+  box-shadow:0 14px 34px -18px rgba(245,209,138,.9)}
+.ws-ov__cta:hover{color:#111;text-decoration:none}
+.ws-ov__cta svg{width:17px;height:17px}
+.ws-ov__cta--rand{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.34);
+  color:#fff;box-shadow:none}
+.ws-ov__cta--rand:hover{color:#fff}
+.ws-ov p.ws-ov__afreden{font-size:13px;color:rgba(255,255,255,.5);margin-top:6px}
+.ws-ov__afreden b,.ws-ov__afreden strong{color:rgba(255,255,255,.78);font-weight:600}
+
+/* ── mobiel ── één echte media query, op de grens die het thema aanhoudt ── */
+@media (max-width:749px){
+  .ws-ov__eyebrow{font-size:10px;gap:10px}
+  .ws-ov__eyebrow::before,.ws-ov__eyebrow::after{width:28px}
+
+  .ws-ov__hero{grid-template-columns:1fr;min-height:0}
+  .ws-ov__media{order:1;height:300px}
+  .ws-ov__foto{object-position:50% 44%}
+  .ws-ov__heroin{order:2;padding:30px 18px 34px}
+  .ws-ov__heroblok{gap:20px;max-width:none}
+  .ws-ov__h1{font-size:33px;letter-spacing:-.03em}
+  .ws-ov__paar{gap:16px}
+  .ws-ov__paartekst{font-size:14.5px;line-height:154%}
+
+  .ws-ov__verhaal{padding:34px 18px 6px}
+  .ws-ov__verhaalin{grid-template-columns:1fr;gap:30px}
+  .ws-ov__beeld{max-width:330px;padding-bottom:32px}
+  .ws-ov__beeld--een{border-radius:14px}
+  .ws-ov__beeld--twee{width:46%;right:-12px;bottom:10px;border-width:3px}
+  .ws-ov__bijschrift{font-size:10px;max-width:50%}
+  .ws-ov__verhaalt{gap:15px}
+  .ws-ov__h2--klein{font-size:26px}
+  .ws-ov__vtekst{font-size:14px;line-height:168%}
+  .ws-ov__les{font-size:18px;padding-left:16px;max-width:none}
+  .ws-ov__hand i{width:44px;height:44px}
+
+  .ws-ov__vragen{padding:26px 14px}
+  .ws-ov__rand{padding:26px 18px 28px;border-radius:16px}
+  .ws-ov__randin{gap:22px}
+  .ws-ov__kop{gap:11px}
+  .ws-ov__h2{font-size:27px}
+  .ws-ov__sub{font-size:14px}
+  .ws-ov__drie{grid-template-columns:1fr;gap:12px}
+  .ws-ov__vraag{padding:22px 20px}
+  .ws-ov__zegel{width:52px;height:52px}
+  .ws-ov__zegel svg{width:23px;height:23px}
+  .ws-ov__vraagh{font-size:20px}
+  .ws-ov__vraagslot{padding-top:18px;font-size:12.5px;text-align:left;
+    align-items:flex-start;justify-content:flex-start;gap:10px}
+  .ws-ov__vraagslot svg{margin-top:2px}
+
+  .ws-ov__tp{padding:34px 14px 26px}
+  .ws-ov__tpin{gap:20px}
+  .ws-ov__tpkop{gap:16px}
+  .ws-ov__tpscore{padding:11px 15px;gap:11px}
+  .ws-ov__tpscore b{font-size:19px}
+  .ws-ov__spoor{grid-auto-columns:86%;gap:12px}
+  .ws-ov__tpk{padding:22px 20px 18px;border-radius:14px}
+  .ws-ov__tpc{font-size:13.5px}
+  .ws-ov__pijl{width:38px;height:38px}
+
+  .ws-ov__belofte{padding:0 14px 26px}
+  .ws-ov__duo{grid-template-columns:1fr;gap:12px}
+  .ws-ov__paneel{padding:26px 20px;border-radius:14px}
+  .ws-ov__paneelh{font-size:22px}
+  .ws-ov__tegen{font-size:12.5px;padding-top:16px}
+
+  /* mobiel past de tekst niet meer over de foto: beeld boven, tekst eronder */
+  .ws-ov__tm{padding:0 14px 26px}
+  .ws-ov__tmfoto{border-radius:14px}
+  /* mobiel wordt er wél bijgesneden: zes mensen over 360px is anders te klein */
+  .ws-ov__tmfoto > img{aspect-ratio:5/4;object-fit:cover;object-position:50% 32%}
+  .ws-ov__tmover{margin-top:-70px;padding:70px 20px 24px;gap:13px;
+    background:linear-gradient(180deg,rgba(11,11,10,0) 0%,rgba(11,11,10,.72) 42%,#0B0B0A 78%)}
+  .ws-ov__tmh{font-size:22px;max-width:none}
+  .ws-ov__namen{gap:8px}
+  .ws-ov__namen span{padding:7px 12px;gap:7px}
+  .ws-ov__namen b{font-size:12px}
+  .ws-ov__namen em{font-size:9.5px}
+
+  .ws-ov__af{padding:44px 18px}
+  .ws-ov__h2--dark{font-size:27px}
+  .ws-ov__sub--dark{font-size:14px}
+  .ws-ov__knoppen{width:100%;flex-direction:column;gap:10px}
+  .ws-ov__cta{justify-content:center;font-size:13px;padding:18px 22px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .ws-ov__spoor{scroll-behavior:auto}
+  .ws-ov__pijl,.ws-ov__stip button{transition:none}
+}
