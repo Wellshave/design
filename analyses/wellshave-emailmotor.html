@@ -1,0 +1,807 @@
+<title>Wellshave E-mailmotor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+:root {
+  --ground:      #F2F4F6;
+  --surface:     #FFFFFF;
+  --surface-2:   #E8ECEF;
+  --ink:         #14181C;
+  --ink-2:       #3D4750;
+  --ink-3:       #6B7885;
+  --rule:        #D2D9DE;
+  --rule-firm:   #A8B4BD;
+  --accent:      #2F5D75;
+  --accent-soft: #E2EDF2;
+  --crit:        #A63B31;
+  --crit-soft:   #F6E3E0;
+  --warn:        #8A6212;
+  --warn-soft:   #F6EDD9;
+  --good:        #2C6B49;
+  --good-soft:   #DFEEE5;
+
+  --f-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --f-body:    "Source Serif 4", Georgia, "Times New Roman", serif;
+  --f-mono:    "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground:      #101417;
+    --surface:     #171C21;
+    --surface-2:   #1F262C;
+    --ink:         #E9EEF2;
+    --ink-2:       #B4C0C9;
+    --ink-3:       #7F8D98;
+    --rule:        #2A333A;
+    --rule-firm:   #44515B;
+    --accent:      #7FB6CF;
+    --accent-soft: #1B2C36;
+    --crit:        #E08D82;
+    --crit-soft:   #33201D;
+    --warn:        #D9B460;
+    --warn-soft:   #2E2716;
+    --good:        #7FC29B;
+    --good-soft:   #172B21;
+  }
+}
+
+:root[data-theme="dark"] {
+  --ground:      #101417;
+  --surface:     #171C21;
+  --surface-2:   #1F262C;
+  --ink:         #E9EEF2;
+  --ink-2:       #B4C0C9;
+  --ink-3:       #7F8D98;
+  --rule:        #2A333A;
+  --rule-firm:   #44515B;
+  --accent:      #7FB6CF;
+  --accent-soft: #1B2C36;
+  --crit:        #E08D82;
+  --crit-soft:   #33201D;
+  --warn:        #D9B460;
+  --warn-soft:   #2E2716;
+  --good:        #7FC29B;
+  --good-soft:   #172B21;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 17px;
+  line-height: 1.62;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 28px 96px;
+}
+
+.col {
+  max-width: 660px;
+}
+
+/* ---------- masthead ---------- */
+
+.mast {
+  padding: 72px 0 34px;
+  border-bottom: 2px solid var(--ink);
+}
+
+.eyebrow {
+  font-family: var(--f-mono);
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 20px;
+}
+
+h1 {
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: clamp(38px, 6.2vw, 66px);
+  line-height: 1.02;
+  letter-spacing: -0.028em;
+  text-wrap: balance;
+  margin: 0 0 22px;
+}
+
+.standfirst {
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--ink-2);
+  max-width: 620px;
+  margin: 0 0 30px;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 30px;
+  font-family: var(--f-mono);
+  font-size: 12px;
+  color: var(--ink-3);
+}
+
+.meta b {
+  color: var(--ink-2);
+  font-weight: 500;
+}
+
+/* ---------- sections ---------- */
+
+section { padding-top: 62px; }
+
+h2 {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: clamp(25px, 3.2vw, 33px);
+  line-height: 1.14;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  margin: 0 0 8px;
+}
+
+h3 {
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 19px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin: 0 0 8px;
+}
+
+.deck {
+  color: var(--ink-3);
+  font-size: 16px;
+  max-width: 620px;
+  margin: 0 0 28px;
+}
+
+p { margin: 0 0 17px; }
+
+.col p:last-child { margin-bottom: 0; }
+
+a { color: var(--accent); }
+
+code, .m {
+  font-family: var(--f-mono);
+  font-size: 0.86em;
+  font-variant-numeric: tabular-nums;
+}
+
+code {
+  background: var(--surface-2);
+  padding: 1px 5px;
+  border-radius: 3px;
+  color: var(--ink-2);
+}
+
+/* ---------- headline figures ---------- */
+
+.figures {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  margin-top: 40px;
+}
+
+.fig {
+  background: var(--surface);
+  padding: 26px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fig-n {
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: 44px;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  font-variant-numeric: tabular-nums;
+}
+
+.fig-n.is-crit { color: var(--crit); }
+.fig-n.is-warn { color: var(--warn); }
+
+.fig-l {
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: -0.005em;
+}
+
+.fig-s {
+  font-size: 14px;
+  line-height: 1.42;
+  color: var(--ink-3);
+}
+
+/* ---------- findings ---------- */
+
+.findings {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.finding {
+  display: grid;
+  grid-template-columns: 58px 1fr;
+  gap: 0 22px;
+  padding: 26px 0 28px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.rank {
+  font-family: var(--f-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  padding-top: 4px;
+  font-variant-numeric: tabular-nums;
+}
+
+.finding h3 { margin-bottom: 10px; }
+
+.finding p {
+  max-width: 640px;
+  font-size: 16.5px;
+}
+
+.finding p:last-child { margin-bottom: 0; }
+
+.evidence {
+  margin: 14px 0 0;
+  padding: 12px 16px;
+  background: var(--surface);
+  border-left: 3px solid var(--rule-firm);
+  font-family: var(--f-mono);
+  font-size: 12.5px;
+  line-height: 1.72;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+  overflow-x: auto;
+}
+
+.evidence.is-crit { border-left-color: var(--crit); }
+.evidence.is-warn { border-left-color: var(--warn); }
+
+/* ---------- tables ---------- */
+
+.tw {
+  overflow-x: auto;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  margin-top: 8px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 720px;
+  font-variant-numeric: tabular-nums;
+}
+
+th {
+  font-family: var(--f-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  text-align: right;
+  padding: 13px 14px;
+  border-bottom: 1px solid var(--rule-firm);
+  white-space: nowrap;
+}
+
+th:first-child, td:first-child { text-align: left; }
+
+td {
+  font-family: var(--f-mono);
+  font-size: 13px;
+  text-align: right;
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+td:first-child {
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--ink);
+  white-space: normal;
+  min-width: 210px;
+}
+
+tbody tr:last-child td { border-bottom: none; }
+
+tr.is-dead td:first-child  { box-shadow: inset 3px 0 0 var(--crit); }
+tr.is-weak td:first-child  { box-shadow: inset 3px 0 0 var(--warn); }
+tr.is-strong td:first-child{ box-shadow: inset 3px 0 0 var(--good); }
+
+tfoot td {
+  border-top: 1px solid var(--rule-firm);
+  border-bottom: none;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  margin-top: 14px;
+  font-family: var(--f-mono);
+  font-size: 11.5px;
+  color: var(--ink-3);
+}
+
+.legend span { display: flex; align-items: center; gap: 7px; }
+
+.dot {
+  width: 9px;
+  height: 3px;
+  border-radius: 1px;
+  display: inline-block;
+}
+
+.dot.d-crit  { background: var(--crit); }
+.dot.d-warn  { background: var(--warn); }
+.dot.d-good  { background: var(--good); }
+
+/* ---------- blockers ---------- */
+
+.blockers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 8px;
+}
+
+.blocker {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--crit);
+  padding: 22px 22px 24px;
+}
+
+.blocker p {
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: var(--ink-2);
+  margin: 0;
+}
+
+.blocker .tag {
+  font-family: var(--f-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--crit);
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* ---------- build plan ---------- */
+
+.phase {
+  display: grid;
+  grid-template-columns: 128px 1fr;
+  gap: 0 26px;
+  padding: 30px 0;
+  border-top: 1px solid var(--rule);
+}
+
+.phase:last-of-type { border-bottom: 1px solid var(--rule); }
+
+.phase-when {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  color: var(--ink-3);
+  line-height: 1.6;
+  padding-top: 4px;
+}
+
+.phase-when b {
+  display: block;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  margin-bottom: 3px;
+}
+
+.phase h3 { margin-bottom: 14px; }
+
+.steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  max-width: 640px;
+}
+
+.steps li {
+  font-size: 16px;
+  line-height: 1.5;
+  padding-left: 20px;
+  position: relative;
+  color: var(--ink-2);
+}
+
+.steps li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 8px;
+  height: 2px;
+  background: var(--rule-firm);
+}
+
+.steps li b {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* ---------- close ---------- */
+
+.close {
+  margin-top: 62px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--accent);
+  padding: 30px 30px 32px;
+}
+
+.close h2 { font-size: 25px; margin-bottom: 14px; }
+
+.close p {
+  max-width: 620px;
+  color: var(--ink-2);
+  font-size: 16.5px;
+}
+
+.close p:last-child { margin-bottom: 0; }
+
+.footnote {
+  margin-top: 46px;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule);
+  font-family: var(--f-mono);
+  font-size: 11.5px;
+  line-height: 1.75;
+  color: var(--ink-3);
+  max-width: 720px;
+}
+
+@media (max-width: 620px) {
+  .finding { grid-template-columns: 1fr; gap: 6px; }
+  .rank { padding-top: 0; }
+  .phase { grid-template-columns: 1fr; gap: 12px; }
+  .page { padding: 0 18px 72px; }
+}
+</style>
+
+<div class="page">
+
+  <header class="mast">
+    <p class="eyebrow">Klaviyo · account RJzCYQ · Wellshave BV</p>
+    <h1>Waar de e-mailmotor stilstaat</h1>
+    <p class="standfirst">Negen procent van de omzet komt uit e-mail, en driekwart daarvan uit één flow. De rest van het systeem draait wel, maar levert bijna niets op.</p>
+    <div class="meta">
+      <span><b>Periode</b> sep 2025 – 29 aug 2026</span>
+      <span><b>Conversiemetric</b> Placed Order (Shopify)</span>
+      <span><b>Valuta</b> EUR</span>
+      <span><b>Bron</b> Klaviyo Reporting API</span>
+    </div>
+  </header>
+
+  <section>
+    <h2>De stand van zaken</h2>
+    <p class="deck">Over twaalf maanden deed de winkel <span class="m">€337.241</span> aan omzet over <span class="m">5.183</span> orders. E-mail schreef daarvan <span class="m">€30.437</span> op zijn naam.</p>
+
+    <div class="figures">
+      <div class="fig">
+        <div class="fig-n is-crit">9,0%</div>
+        <div class="fig-l">van de omzet uit e-mail</div>
+        <div class="fig-s">€25.904 uit flows, €4.533 uit campagnes. Voor een DTC-merk met een eigen klantenbestand is 20–30% de normale bandbreedte.</div>
+      </div>
+      <div class="fig">
+        <div class="fig-n is-warn">74%</div>
+        <div class="fig-l">van de flow-omzet uit één flow</div>
+        <div class="fig-s">De Welcome Flow deed €6.212 van de €8.449 in de laatste 90 dagen. Alle andere twaalf flows samen: €2.237.</div>
+      </div>
+      <div class="fig">
+        <div class="fig-n is-crit">78</div>
+        <div class="fig-l">dagen zonder campagne</div>
+        <div class="fig-s">De laatste campagne ging op 12 juni 2026 de deur uit. In januari en februari zat er ook al een gat van twee maanden.</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Wat er misgaat</h2>
+    <p class="deck">Op volgorde van wat het kost. De cijfers hieronder gaan over de laatste 90 dagen, tenzij anders vermeld.</p>
+
+    <ol class="findings">
+
+      <li class="finding">
+        <div class="rank">01</div>
+        <div>
+          <h3>De Cross-Sell Flow heeft nog geen euro opgeleverd</h3>
+          <p>Sinds hij op 30 juli live ging zijn er 844 mails uit gegaan. Nul orders. De mails worden gewoon geopend — 39,5% — maar bijna niemand klikt door, en wie doorklikt koopt niet.</p>
+          <p>Dat is niet vreemd als je de inhoud bekijkt: drie mails met algemene teksten (<em>"Wil jij je set compleet maken?"</em>, <em>"Heb jij extra tools nodig?"</em>) die voor iedereen hetzelfde zijn, ongeacht wat er net gekocht is. Iemand die een neustrimmer van €19,95 kocht krijgt dezelfde mail als iemand die een Barber Pack van €124,95 nam.</p>
+          <div class="evidence is-crit">flow SMJaaQ · 844 verzonden · 331 opens · 19 kliks · 0 orders · €0,00<br>klikratio 2,27% · klik-na-opening 5,74%</div>
+        </div>
+      </li>
+
+      <li class="finding">
+        <div class="rank">02</div>
+        <div>
+          <h3>Post-Purchase en Cross-Sell vechten met elkaar om dezelfde koper</h3>
+          <p>Allebei worden ze getriggerd op hetzelfde event: <code>Placed Order</code>. Post-Purchase mailt op dag 0, 1, 3 en 5. Cross-Sell op dag 0,5, 2,5 en 4,5. Wie één ding koopt krijgt dus <b>zeven mails in vijf dagen</b>, afwisselend uit twee flows die niets van elkaar weten.</p>
+          <p>Erger nog: de derde Post-Purchase-mail heet <em>"Verbeter de prestaties met de juiste add-ons!"</em> — dat ís de cross-sell. De twee flows doen hetzelfde werk, op elkaars tenen.</p>
+          <p>Samen zijn ze goed voor 6.576 verzendingen — bijna een derde van al het flow-volume — en €408 omzet. Dat is 4,8% van de flow-omzet uit 31% van de verzendingen.</p>
+          <div class="evidence is-crit">WaDcaV Post-Purchase · 5.732 verzonden · 11 orders · €407,60 · €0,07 per ontvanger<br>SMJaaQ Cross-Sell&nbsp;&nbsp;&nbsp; · &nbsp;&nbsp;844 verzonden · &nbsp;0 orders · &nbsp;&nbsp;&nbsp;&nbsp;€0,00 · €0,00 per ontvanger</div>
+        </div>
+      </li>
+
+      <li class="finding">
+        <div class="rank">03</div>
+        <div>
+          <h3>De Post-Purchase Flow eindigt in een split die nergens heen gaat</h3>
+          <p>Na de vierde mail (<em>"Een bedankje speciaal voor jou"</em>, met kortingscode) staat er een vertakking die controleert of iemand <code>THANKYOU10</code> heeft gebruikt. Beide takken hebben geen vervolgstap — in de definitie staat bij allebei <code>links: null</code>.</p>
+          <p>Iemand krijgt dus een kortingscode en daarna nooit meer een herinnering. Geen "je code verloopt", geen alternatief voor wie hem niet gebruikte. Dat is precies het moment waarop een tweede aankoop nog te winnen is.</p>
+          <div class="evidence is-warn">actie 113425057 · multi-branch-split · branch fd62df → links: null · branch 8e6d19 (else) → links: null</div>
+        </div>
+      </li>
+
+      <li class="finding">
+        <div class="rank">04</div>
+        <div>
+          <h3>Er is geen productcatalogus in Klaviyo</h3>
+          <p>De catalogus is leeg: nul producten, nul categorieën. Dat betekent geen dynamische productblokken, geen "aanbevolen voor jou", geen Back-in-Stock, geen Price Drop. Elke productafbeelding in elke mail moet met de hand worden ingeplakt en handmatig worden bijgewerkt.</p>
+          <p>Voor de cross-sell-flows die je wil bouwen is dit de eerste blokkade. Zonder catalogus kun je niet automatisch tonen wat er bij het gekochte product past — en dan blijf je op algemene teksten hangen, precies waar de huidige Cross-Sell Flow op stukloopt.</p>
+          <div class="evidence is-crit">GET /catalog-items → data: [] &nbsp;·&nbsp; GET /catalog-categories → data: []</div>
+        </div>
+      </li>
+
+      <li class="finding">
+        <div class="rank">05</div>
+        <div>
+          <h3>De Winback Flow is in feite dood</h3>
+          <p>2.893 mails in 90 dagen, 3 orders, €174. De klikratio is 0,62% — van de mensen die de mail openen klikt anderhalf procent. Ter vergelijking: bij de Browse Abandon Flow is dat 12,4%.</p>
+          <p>Het volume is er wel. Er gaan meer winback-mails uit dan checkout-, cart-, browse- en site-abandon-mails bij elkaar. Alleen levert het niets op.</p>
+          <div class="evidence is-crit">flow Uf4xgk · 2.893 verzonden · 1.197 opens · 18 kliks · 3 orders · €173,72 · €0,06 per ontvanger</div>
+        </div>
+      </li>
+
+      <li class="finding">
+        <div class="rank">06</div>
+        <div>
+          <h3>Het volume zit op de verkeerde flows</h3>
+          <p>De flows die per ontvanger het meest opleveren krijgen het minste verkeer. Cart Abandon doet €1,17 per ontvanger maar bereikt 380 mensen. Browse Abandon doet €0,97 en bereikt er 523. Post-Purchase doet €0,07 en bereikt er 5.732.</p>
+          <p>Deels is dat logisch — er zijn nu eenmaal meer kopers dan achtergelaten winkelwagens. Maar er staan ook twee cart-abandon-flows naast elkaar (één live op de Klaviyo-metric, één in draft op de Shopify-metric) en Site Abandon en Browse Abandon doen grotendeels hetzelfde werk. Het triggerverkeer wordt over dubbele flows verdeeld in plaats van geconcentreerd.</p>
+          <div class="evidence is-warn">UFT3KP Cart Abandon [Klaviyo] &nbsp;live&nbsp; · €1,17 p/o<br>WkDpts Cart Abandon [Shopify] draft · €0,39 p/o<br>UquUD4 Browse Abandon &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;live&nbsp; · €0,97 p/o<br>W6hgm9 Site Abandon &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;live&nbsp; · €0,24 p/o</div>
+        </div>
+      </li>
+
+      <li class="finding">
+        <div class="rank">07</div>
+        <div>
+          <h3>De campagnes worden geopend maar niet aangeklikt</h3>
+          <p>Over 53 campagnes en 203.458 verzendingen: openratio's van 25–50%, maar klikratio's die bijna allemaal onder de 1,3% liggen en vaak onder de 0,6%. De campagne van 17 december haalde 43% open en 0,15% klik.</p>
+          <p>De mails komen dus aan en worden bekeken. Wat er in staat zet mensen niet in beweging. Twaalf maanden campagne leverde €4.533 op — twee cent per verzonden mail.</p>
+          <p>Wat daarbij opvalt: de meeste campagnes gaan naar vier tot dertien overlappende segmenten tegelijk, zonder uitsluitingen. Dezelfde mensen zitten in meerdere segmenten en de mail wordt op iedereen tegelijk losgelaten in plaats van op wie er nu warm voor is.</p>
+          <div class="evidence is-warn">53 campagnes · 203.458 ontvangers · €4.533 · €0,022 per ontvanger<br>mediane klikratio ≈ 0,6% · laatste campagne 12 juni 2026</div>
+        </div>
+      </li>
+
+      <li class="finding">
+        <div class="rank">08</div>
+        <div>
+          <h3>Twee "Placed Order"-metrics loggen dezelfde bestellingen</h3>
+          <p>Er is een <code>Placed Order</code> van de Shopify-integratie en een <code>Placed Order</code> via de API. Over twaalf maanden registreren ze 5.183 en 5.141 orders, €337.241 en €336.343. Het zijn dezelfde bestellingen, twee keer geteld in twee metrics.</p>
+          <p>Dat is nu vooral een rapportagerisico: welke metric je in een rapport of flow-trigger kiest verandert je cijfers. Maar het wordt een echt probleem zodra flows en segmenten door elkaar op de ene of de andere gaan draaien.</p>
+          <div class="evidence is-warn">UPDRVs Placed Order (Shopify) · 5.183 orders · €337.241<br>QRbVej Placed Order (API)&nbsp;&nbsp;&nbsp;&nbsp; · 5.141 orders · €336.343</div>
+        </div>
+      </li>
+
+      <li class="finding">
+        <div class="rank">09</div>
+        <div>
+          <h3>De VIP-flow bereikt acht mensen, en SMS wordt niet gebruikt</h3>
+          <p>De VIP Flow stuurde in 90 dagen acht mails. De lijst waar hij op triggert wordt niet gevuld — er zit geen segmentregel achter die klanten er automatisch in zet.</p>
+          <p>Daarnaast is er een lijst "SMS Subscribers" die nog op 30 juni is bijgewerkt, maar er is geen enkele SMS verstuurd. Alle 224.000 verzendingen van het afgelopen jaar waren e-mail. Voor korte, tijdgebonden momenten — cart abandon, verzenddeadline, herbestelling — is dat kanaal onbenut.</p>
+          <div class="evidence">UExN3M VIP Flow · 8 verzonden · 1 order · €19,90<br>alle flows en campagnes: send_channel = email</div>
+        </div>
+      </li>
+
+    </ol>
+  </section>
+
+  <section>
+    <h2>Flow-inventaris</h2>
+    <p class="deck">Alle actieve flows over de laatste 90 dagen, gesorteerd op omzet. "p/o" is omzet per ontvanger — de eerlijkste maat om flows van verschillende omvang te vergelijken.</p>
+
+    <div class="tw">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Flow</th>
+            <th scope="col">Status</th>
+            <th scope="col">Verzonden</th>
+            <th scope="col">Open</th>
+            <th scope="col">Klik</th>
+            <th scope="col">Orders</th>
+            <th scope="col">Omzet</th>
+            <th scope="col">p/o</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="is-strong"><td>Welcome</td><td>live</td><td>7.258</td><td>37,5%</td><td>3,92%</td><td>113</td><td>€6.212</td><td>€0,87</td></tr>
+          <tr class="is-strong"><td>Browse Abandon</td><td>live</td><td>523</td><td>43,7%</td><td>5,42%</td><td>9</td><td>€500</td><td>€0,97</td></tr>
+          <tr class="is-strong"><td>Checkout Abandon</td><td>live</td><td>936</td><td>37,7%</td><td>5,29%</td><td>8</td><td>€464</td><td>€0,50</td></tr>
+          <tr class="is-strong"><td>Cart Abandon [Klaviyo]</td><td>live</td><td>380</td><td>39,3%</td><td>3,18%</td><td>4</td><td>€440</td><td>€1,17</td></tr>
+          <tr class="is-weak"><td>Post Purchase</td><td>live</td><td>5.732</td><td>49,5%</td><td>4,64%</td><td>11</td><td>€408</td><td>€0,07</td></tr>
+          <tr class="is-weak"><td>Winback</td><td>live</td><td>2.893</td><td>41,5%</td><td>0,62%</td><td>3</td><td>€174</td><td>€0,06</td></tr>
+          <tr class="is-weak"><td>Site Abandon</td><td>live</td><td>577</td><td>39,4%</td><td>3,71%</td><td>2</td><td>€135</td><td>€0,24</td></tr>
+          <tr class="is-weak"><td>Cart Abandon [Shopify]</td><td>draft</td><td>247</td><td>36,2%</td><td>6,91%</td><td>2</td><td>€96</td><td>€0,39</td></tr>
+          <tr class="is-weak"><td>VIP</td><td>live</td><td>8</td><td>75,0%</td><td>12,5%</td><td>1</td><td>€20</td><td>€2,49</td></tr>
+          <tr class="is-dead"><td>Cross-Sell</td><td>live</td><td>844</td><td>39,5%</td><td>2,27%</td><td>0</td><td>€0</td><td>€0,00</td></tr>
+          <tr class="is-dead"><td>Review Request</td><td>live</td><td>1.442</td><td>38,7%</td><td>1,54%</td><td>0</td><td>€0</td><td>€0,00</td></tr>
+          <tr class="is-dead"><td>Sunset</td><td>live</td><td>217</td><td>51,0%</td><td>0,97%</td><td>0</td><td>€0</td><td>€0,00</td></tr>
+          <tr class="is-dead"><td>Garantie geactiveerd</td><td>live</td><td>126</td><td>74,4%</td><td>3,20%</td><td>0</td><td>€0</td><td>€0,00</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><td>Totaal</td><td></td><td>21.183</td><td>—</td><td>—</td><td>153</td><td>€8.449</td><td>€0,40</td></tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <div class="legend">
+      <span><i class="dot d-good"></i> verdient zijn plek</span>
+      <span><i class="dot d-warn"></i> draait, levert vrijwel niets op</span>
+      <span><i class="dot d-crit"></i> nul omzet</span>
+    </div>
+
+    <div class="col" style="margin-top: 30px;">
+      <p>Twee dingen vallen op als je hier langer naar kijkt. De Review Request en Sunset Flow horen geen omzet te maken — die doen hun werk elders, dus die nul is prima. De Garantie-mail heeft met 74,4% de hoogste openratio van het hele account; die aandacht wordt op dit moment nergens voor gebruikt.</p>
+      <p>En binnen de Welcome Flow zit de omzet vrijwel volledig in één mail. Die ene doet €4.768 van de €6.212 met een conversie van 4,97% en €2,73 per ontvanger. De zes mails erna doen samen €1.444 over 5.479 verzendingen — €0,26 per ontvanger. De opening werkt; de staart niet.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Drie dingen die eerst opgelost moeten</h2>
+    <p class="deck">Dit zijn geen verbeteringen maar randvoorwaarden. Zolang deze staan, is elke nieuwe flow die je bouwt bij voorbaat beperkt.</p>
+
+    <div class="blockers">
+      <div class="blocker">
+        <span class="tag">Blokkade 1</span>
+        <h3>De catalogus moet gesynchroniseerd</h3>
+        <p>Zonder producten in Klaviyo geen dynamische aanbevelingen, geen Back-in-Stock, geen Price Drop. Voor cross-sell op basis van wat iemand kocht is dit onmisbaar. Dit is een instelling in de Shopify-koppeling, geen bouwwerk.</p>
+      </div>
+      <div class="blocker">
+        <span class="tag">Blokkade 2</span>
+        <h3>Eén Placed Order-metric kiezen</h3>
+        <p>Twee metrics die dezelfde orders loggen maken elk rapport aanvechtbaar. Kies de Shopify-metric als bron van waarheid, zet alle flow-triggers en segmenten daarop om, en zet de API-verdubbeling stop.</p>
+      </div>
+      <div class="blocker">
+        <span class="tag">Blokkade 3</span>
+        <h3>Flows kunnen niet via de API gebouwd</h3>
+        <p>Klaviyo's API kan flows lezen maar niet aanmaken of wijzigen. De flows hieronder moeten in de Klaviyo-interface gebouwd worden. Wat ik wél kan aanleveren: complete specificaties, en de e-mailtemplates zelf — die kan ik via de API in het account zetten.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Het bouwplan</h2>
+    <p class="deck">Drie fases, in deze volgorde omdat elke fase op de vorige leunt. De cross-sell-matrix in fase 2 kan pas werken als de catalogus uit fase 1 staat.</p>
+
+    <div class="phase">
+      <div class="phase-when"><b>FASE 1</b>Opruimen en repareren. Levert direct omzet op zonder nieuw bouwwerk.</div>
+      <div>
+        <h3>Stoppen met tegen jezelf werken</h3>
+        <ul class="steps">
+          <li><b>Zet de Cross-Sell Flow uit</b> en voeg hem samen met Post-Purchase tot één reis. Zeven mails in vijf dagen uit twee flows is de reden dat beide onderpresteren.</li>
+          <li><b>Maak de doodlopende split af</b> aan het eind van Post-Purchase: een herinnering op dag 9 voor wie de code niet gebruikte, een ander aanbod voor wie hem wel gebruikte.</li>
+          <li><b>Kies één cart-abandon-flow.</b> De Klaviyo-metric-versie presteert het best (€1,17 per ontvanger) — archiveer de Shopify-variant en leid al het verkeer daarheen.</li>
+          <li><b>Voeg Site Abandon en Browse Abandon samen.</b> Browse doet vier keer zoveel per ontvanger; gebruik die opzet en laat Site Abandon vervallen.</li>
+          <li><b>Archiveer de vijftien slapende flows</b> — de <code>VK |</code>-reeks, de BFCM-kopieën, alles met <code>[Keep In Draft]</code>, plus <code>test</code> en <code>Do's and Don'ts</code>. Ze vertroebelen elk rapport.</li>
+          <li><b>Herstart de campagnekalender.</b> Twee per week, gericht op wie in de laatste 30/60/90 dagen actief was, in plaats van op acht overlappende segmenten tegelijk.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-when"><b>FASE 2</b>Het nieuwe werk. Hier zit de grootste onbenutte omzet.</div>
+      <div>
+        <h3>Vier flows die er nog niet zijn</h3>
+        <ul class="steps">
+          <li><b>Owner Journey</b> — één reis na aankoop, vertakt op wat er gekocht is. Dag 2 gebruikstips, dag 7 de eerste cross-sell op categorie, dag 14 de tweede, dag 30 review plus doorverwijzing. Vervangt Post-Purchase én Cross-Sell.</li>
+          <li><b>Herbestelling</b> — deze bestaat helemaal niet, en jullie verkopen verbruiksartikelen. Blade Guard Blades (€9,95), Flex Guard Blade Trio (€24,95), Gentleman Shaver Scheerkop (€19,95), Neustrimmer-opzetstuk (€9,95). Trigger op de aankoop van het bijbehorende apparaat, mail op dag 60 en dag 120.</li>
+          <li><b>Bundel-upgrade</b> — wie één los apparaat kocht krijgt na 21 dagen het pakket waar het in zit: van losse trimmer naar Barber Bro (€89,95–109,95), van Groom Guard naar Shave Package (€64,95–89,95), van Head Shaver naar Skull Deal (€59,95–69,95).</li>
+          <li><b>Garantie-moment benutten</b> — de bevestigingsmail bij een geactiveerde garantie haalt 74,4% open. Hang daar een tweede mail achter met het bijpassende accessoire. Dat de garantie-upsells van €2,95 en €5,95 al honderden keren zijn verkocht, laat zien dat dit publiek aankopen erbij accepteert.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-when"><b>FASE 3</b>Uitbouwen, zodra fase 1 en 2 hun cijfers hebben laten zien.</div>
+      <div>
+        <h3>Kanaal en segment verbreden</h3>
+        <ul class="steps">
+          <li><b>Winback opnieuw opzetten</b> met een oplopende aanbodladder in plaats van de huidige opzet die 0,62% klik haalt.</li>
+          <li><b>De VIP-lijst automatisch vullen</b> op twee of meer orders, of meer dan €100 aan levenswaarde. Nu bereikt die flow acht mensen.</li>
+          <li><b>SMS aanzetten</b> voor de korte momenten: cart abandon, verzenddeadline, herbestelling. De abonneelijst ligt er al.</li>
+          <li><b>De staart van de Welcome Flow herschrijven.</b> Mail één doet €2,73 per ontvanger, de zes daarna €0,26. Daar zit ruimte zonder dat er iets nieuws gebouwd hoeft te worden.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>De cross-sell-matrix</h2>
+    <p class="deck">Concreet, op jullie eigen assortiment. Dit is wat er in de Owner Journey per tak getoond moet worden — nu nog met de hand, en zodra de catalogus staat dynamisch.</p>
+
+    <div class="tw">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Gekocht</th>
+            <th scope="col">Verbruik — dag 60</th>
+            <th scope="col">Aanvulling — dag 7</th>
+            <th scope="col">Upgrade — dag 21</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Neustrimmer (€19,95–32,95)</td><td>Vervangopzetstuk €9,95</td><td>The Washbag €19,95</td><td>4-in-1 Ultra €32,95</td></tr>
+          <tr><td>Groom Guard / bodygroomer</td><td>Flex Guard Blade Trio €24,95</td><td>CleanUp Bar €12,95</td><td>Shave Package €64,95–89,95</td></tr>
+          <tr><td>Gentleman Shaver / Sentinel</td><td>Scheerkop €19,95</td><td>CleanUp Bar €12,95</td><td>Skull Deal €59,95–69,95</td></tr>
+          <tr><td>Blade Guard safety razor</td><td>Blade Guard Blades €9,95</td><td>The Washbag €19,95</td><td>Edge Blade €33,95</td></tr>
+          <tr><td>Tondeuse (€49,95–86,95)</td><td>—</td><td>CleanUp Bar €12,95</td><td>Barber Pack €99,95–124,95</td></tr>
+          <tr><td>Baardtrimmer / Dial Master</td><td>—</td><td>Neustrimmer Essential €19,95</td><td>Barber Bro €89,95–109,95</td></tr>
+          <tr><td>Bundel (Barber / Skull / Shave)</td><td>Bijpassende mesjes</td><td>The Washbag €19,95</td><td>— (al bovenaan)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col" style="margin-top: 30px;">
+      <p>De logica erachter: verbruik is de makkelijkste tweede aankoop omdat er geen nieuwe beslissing voor nodig is, aanvulling is laagdrempelig genoeg om impulsief te kopen, en de upgrade is de enige waarvoor je echt moet overtuigen — dus die krijgt de meeste ruimte en de langste wachttijd.</p>
+      <p>Met een gemiddelde orderwaarde van €65 en ruim 5.100 orders per jaar hoeft dit niet spectaculair te presteren om het verschil te maken. Als de Owner Journey op €0,50 per ontvanger komt — nog altijd onder de Welcome Flow en onder Checkout Abandon — praat je over een andere orde van grootte dan de €0,07 van nu.</p>
+    </div>
+  </section>
+
+  <div class="close">
+    <h2>Waar ik op wacht</h2>
+    <p>De analyse staat. Wat ik nog niet gedaan heb is iets veranderen in het account — geen flows aangepast, niets gearchiveerd, niets uitgezet. Dat leek me niet iets om ongevraagd te doen in een live account waar orders doorheen lopen.</p>
+    <p>Zeg maar waar je wil beginnen. Fase 1 is grotendeels opruimwerk dat je zelf in een uur in de interface doet. Voor fase 2 kan ik de complete flow-specificaties uitschrijven — triggers, filters, wachttijden, onderwerpsregels, per mail — en de bijbehorende templates via de API in het account klaarzetten, zodat het bouwen zelf nog een kwestie van doorklikken is.</p>
+  </div>
+
+  <p class="footnote">
+    Alle cijfers uit de Klaviyo Reporting API, opgehaald op 29 augustus 2026 tegen conversiemetric <span class="m">Placed Order (Shopify, UPDRVs)</span>. Flow- en campagnecijfers volgen verzenddatum; omzetcijfers per maand volgen eventdatum en zijn daardoor niet één-op-één met de flowrapporten te vergelijken. De maand augustus 2026 loopt tot en met de 28e. Productprijzen en assortiment uit de Shopify Admin API. Het aantal verkochte garantie-uitbreidingen is afgeleid uit de voorraadteller en is een indicatie, geen exacte telling.
+  </p>
+
+</div>
