@@ -6,7 +6,7 @@
 //
 //   node theme/artifact.mjs
 import { writeFileSync } from 'node:fs';
-import { BLOKKEN, css, s } from './blokken.mjs';
+import { BLOKKEN, css, s, script } from './blokken.mjs';
 
 const dir = new URL('.', import.meta.url).pathname;
 // ── de mobiele kolom ──
@@ -101,32 +101,39 @@ const vergelijking = `<section class="verg">
           .join('')}</tr>`
       ).join('')}
       <tr class="ons"><th scope="row">Wellshave<em>deze pagina</em></th>
-        ${KOLOMMEN.map(() => '<td class="v ja">✓</td>').join('')}</tr>
+        ${['–', '–', '✓', '–', '✓', '✓', '✓', '✓']
+          .map((v) => `<td class="v${v === '✓' ? ' ja' : ''}">${v}</td>`)
+          .join('')}</tr>
     </tbody>
     <tfoot><tr><th scope="row">Hoeveel van de acht</th>
       ${KOLOMMEN.map((_, i) => `<td class="v">${tel(i)}/8</td>`).join('')}</tr></tfoot>
   </table></div>
   <p class="verg-bij">De laatste kolom is de enige waar alle acht een streepje
-    hebben. Geen van deze merken schrijft op wat het níét waarmaakt, en geen
-    van ze laat een kritische review zien. Dat is precies het blok dat wij al
-    hadden, dus dat blijft — met er nu een echte review van drie sterren onder.</p>
+    hebben. Geen van deze merken schrijft op wat het níét waarmaakt, en geen laat
+    een kritische review zien. Dat blok hadden wij al, en dat blijft.</p>
+  <p class="verg-bij">Vier patronen zijn er na één ronde weer <b>uit</b>: de knop
+    in de hero, de drie uitkomsten in cijfers, de tijdlijn en de werkwijze. Ze
+    stonden er, ze werkten los van elkaar, maar samen maakten ze er een pagina
+    van tien blokken van — en een Over ons-pagina die je moet uitzitten leest
+    niemand. Dat een patroon bij zes van de acht voorkomt is een argument, geen
+    verplichting. Wat overblijft zijn <b>zeven blokken</b> en ongeveer de helft
+    van de tekst.</p>
 </section>`;
 
 const WIJZ = [
-  ['Knop boven de vouw', 'Zes van de acht zetten hun eerste knop naar de winkel in de hero. Bij ons stond hij pas na tien schermen. Er staat er nu één in blok 1, met de honderd dagen ernaast zodat klikken niets kost.'],
-  ['Uitkomsten met een bron eronder', 'Achaté (+7 uur vrije tijd), Moov (+15% adem, −30% stress) en MAE zetten direct onder de hero drie genummerde uitkomsten. Aantrekkelijk, maar bij geen van hen staat waar die percentages vandaan komen. Blok 2 doet de vorm na en zet er de bron bij: <b>4,9 uit 192 beoordelingen</b>, <b>100 dagen</b>, <b>2 jaar</b> — alle drie aanwijsbaar.'],
-  ['Een reis met echte jaartallen', 'Cloudpillo is de enige met een uitgewerkte tijdlijn, en die werkt: je ziet een merk groeien in plaats van erover te lezen. Blok 4 doet hetzelfde, en de jaartallen zijn niet gekozen maar opgezocht — het zijn de aanmaakdatums van de producten in de winkel. 2022 is de Groom Guard™, 2023 zijn de neustrimmers.'],
-  ['Reviews verdienen een eigen blok', 'Cloudpillo, Meroda en Achaté geven klantcitaten een eigen sectie. Bij ons stond er één citaat verstopt in stap 01, en dat citaat was bovendien nergens in de winkel terug te vinden. Blok 7 heeft nu drie échte reviews en de scores per product — inclusief de <b>4,4</b> van de neustrimmer, want een pagina met alleen negens gelooft niemand.'],
-  ['Namen in plaats van rondjes', 'Moov zet zijn team met functie en quote neer, Achaté met een groepsfoto van veertien. Wij hadden drie naamloze avatars in het beloftepaneel. Blok 9 noemt de zes met naam en rol; staat er geen foto, dan vult de cirkel zich met de initiaal in plaats van leeg te blijven.'],
-  ['Wat niemand van de acht doet', 'Geen van deze acht pagina&rsquo;s schrijft op wat het merk níét belooft, en geen laat een kritische review zien. Dat blok hadden wij al, en het is nu scherper: onder <b>&#34;wat wij niet beloven&#34;</b> staat een echte review die zegt dat het niet altijd pijnloos is. Dat kost een half sterretje en levert de rest van de pagina geloofwaardigheid op.'],
-  ['Wat we níét hebben overgenomen', 'Meroda plakt een productgrid en een Instagram-feed op zijn Over ons; dat maakt er een tweede winkelpagina van. En de missiezinnen van Dore &amp; Rose en Hears (&#34;we&rsquo;re on a mission to elevate sleep into a true wellness experience&#34;) zeggen bij nalezen niets. Onze eerste zin blijft <b>&#34;jij bent niet het probleem&#34;</b>.'],
-  ['Een verhaal in de ik-vorm', 'Zes van de acht hebben een oprichtersverhaal; Moov en Achaté ondertekenen het met naam en portret. Blok 3 doet dat ook, en draait elke zin over vroeger om naar de lezer: &#34;ik was installateur&#34; staat er alleen omdat de zin erna is dat verkeerd gereedschap je laat geloven dat jíj degene bent die het niet kan.'],
-  ['Ander beeld dan de homepage', 'De hero leende eerder het portret van de homepage. Twee pagina&rsquo;s achter elkaar hetzelfde beeld leest als een herhaling. De hero staat nu in het eigen magazijn tussen de rolcontainers, en blok 3 gebruikt de twee foto&rsquo;s uit de installateurstijd — alle drie al in de winkel aanwezig.'],
-  ['Taal van de homepage, niet van de landingspagina', 'De eerste versie stond in het landingspagina-systeem uit de merklaag: tweeslags koppen met een tekstverloop, zand, een los HTML-bestand. Dat systeem is voor verkeer <b>ná een advertentie</b>. Donker is nu #0B0B0A met een gouden gloed, licht is een paneel in een dun gouden kader, en het accent zit in <b>&lt;b&gt;</b>.'],
-  ['Eén breekpunt, marge uit de instellingen', 'Mobiel is één echte media query op <b>749px</b>, de grens die het thema zelf aanhoudt. Boven- en ondermarge gaan via <b>desk_indent_top</b> en de drie andere, want <b>snippets/indent-settings</b> gebruikt een ID-selector die van elke klasse wint.'],
-  ['Twee specificiteitsvallen weggehaald', '<b>.ws-ov p{margin:0}</b> weegt zwaarder dan een losse klasse, dus <b>.ws-ov__afreden</b> en <b>.ws-ov__mensslot</b> kregen hun bovenmarge niet. En het vak in dit artefact droeg zelf geen <b>.ws-ov</b>, waardoor het hier net anders stond dan in het thema. Allebei rechtgezet.'],
-  ['Alles is een instelling', '103 velden en zes bloktypes: uitkomst, vraag, fase, stap, klantcitaat en persoon. Wie een review wil verversen of een jaartal wil bijstellen heeft geen code nodig.'],
-];;
+  ['Van tien blokken naar zeven', 'De vorige ronde voegde vier blokken toe uit de vergelijking hierboven. Los van elkaar waren ze te verdedigen; bij elkaar werd het een pagina die je moest uitzitten. Eruit: de resultaatband, de tijdlijn, de werkwijze en de scorebalk met drie productcijfers. De pagina is nu ongeveer <b>40% korter</b>.'],
+  ['De hero is halve foto, halve tekst', 'Er stond een sluier overheen, een watermerk erachter, een schuine gouden streep op de naad, een knop en een teller met 180.000+ bestellingen. Dat is een aanbieding, geen kennismaking. Nu: <b>1&#8239;:&#8239;1</b>, foto rechts, tekst links, en verder niets.'],
+  ['De kop gaat nu over Wellshave', 'De hero zei <b>&#34;jij bent niet het probleem, je gereedschap is dat wel&#34;</b>. Dat is een productbelofte; hij hoort op de homepage en niet op een Over ons. Er staat nu wie we zijn, met de <b>missie</b> en de <b>visie</b> als twee gelabelde regels eronder in plaats van weggestopt in een lead.'],
+  ['Trustpilot in plaats van eigen reviews', 'Het reviewblok haalde zijn citaten uit de winkel zelf. Nu komen ze van <b>nl.trustpilot.com/review/wellshave.nl</b>: zes beoordelingen, letterlijk overgenomen, met de echte TrustScore <b>4,4 uit 985</b> ernaast. Trustpilot is onafhankelijk; een review op je eigen productpagina is dat niet.'],
+  ['Een carrousel, geen zesde scherm', 'Zes reviews onder elkaar is weer een scherm scrollen. Het spoor gebruikt <b>scroll-snap</b>: op desktop drie kaarten per stap, mobiel één. Werkt het JavaScript niet, dan blijft het gewoon veegbaar en gaat er niets stuk. De stippen en de pijlen kijken allebei naar <b>scrollLeft</b>, dus vegen en klikken lopen niet uit de pas.'],
+  ['Eén teamfoto in plaats van zes rondjes', 'Er stonden zes losse cirkels met een initiaal erin. Nu is het de echte teamfoto, met de namen erín. De tekst schuift met een negatieve marge over de onderste <b>18%</b> van de foto — daar staan geen gezichten meer, want de voorste twee eindigen op driekwart. Niets van de foto wordt weggesneden.'],
+  ['De namen staan er niet bij de gezichten', 'Dat was de eerste opzet: een label per gezicht. De losse portretten in de winkel (<b>team_dustin.png</b> en de andere vijf) maken vier van de zes met zekerheid herkenbaar, maar twee niet. Een collega onder de verkeerde naam publiceren is erger dan geen label, dus staan de namen als een rij eronder — in de foto, maar niet aan een gezicht vast.'],
+  ['Wat is blijven staan', 'Het verhaal in de ik-vorm, de drie vragen, en het blok met wat we wel en niet beloven. Die drie zijn goedgekeurd zoals ze waren; alleen de alinea&rsquo;s van het verhaal en de subkop bij de vragen zijn een regel korter.'],
+  ['Nog steeds geen getal zonder bron', '<b>4,4</b> en <b>985</b> komen van de Trustpilot-pagina zelf. De zes reviews zijn woord voor woord overgenomen, met de naam en de datum die de schrijver er zelf bij zette. De kritische review onder <b>&#34;wat wij niet beloven&#34;</b> is er ook een van Trustpilot, van vier sterren.'],
+  ['Taal van de homepage', 'Donker is #0B0B0A met een gouden gloed, licht is een paneel in een dun gouden kader, het accent zit in <b>&lt;b&gt;</b>, mobiel is één echte media query op <b>749px</b>, en boven- en ondermarge komen uit <b>desk_indent_top</b> en de drie andere — want <b>snippets/indent-settings</b> gebruikt een ID-selector die van elke klasse wint.'],
+  ['Het beeld is lichter geworden', 'De drie foto&rsquo;s zijn opnieuw gecodeerd op de breedte die ze werkelijk krijgen. De teamfoto ging van <b>7,4&#8239;MB</b> naar <b>173&#8239;KB</b>, en de map met beeld van 1&#8239;MB naar 728&#8239;KB — inclusief een foto die er eerst niet in zat.'],
+  ['Alles is een instelling', '78 velden en drie bloktypes: vraag, Trustpilot-beoordeling en persoon. Een review verversen is een blok bijwerken, geen code.'],
+];
 
 const html = `<title>Wellshave Over ons-redesign</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -210,17 +217,16 @@ footer p{margin:0 0 18px;max-width:72ch}
 
   <header class="lede">
     <p class="kicker">Wellshave &middot; ontwerpbeeld</p>
-    <h1>Over ons, gemeten langs acht andere</h1>
-    <p class="sub">Acht Over ons-pagina&rsquo;s uit dezelfde hoek van de markt zijn naast elkaar
-      gelegd. De patronen die bij de meeste terugkwamen en die wij misten, zitten er nu in:
-      een <b>knop boven de vouw</b>, <b>drie uitkomsten in cijfers</b>, een <b>tijdlijn</b>,
-      <b>reviews als eigen blok</b> en een <b>team met namen</b>. De tabel hieronder laat zien
-      wie wat doet.</p>
-    <p class="sub">Verschil met die acht: elk cijfer op deze pagina is aanwijsbaar, de reviews
-      zijn letterlijk uit de winkel overgenomen, en er staat één van drie sterren tussen. De
-      pagina is een themasectie (<code>ws-overons</code>) met een eigen stijlblad en een
-      paginasjabloon. Elk venster hieronder is een echte weergave op 1440 en op 390 pixels,
-      dus de mobiele kolom laat zien wat de media query op 749px werkelijk doet.</p>
+    <h1>Over ons, teruggebracht tot zeven blokken</h1>
+    <p class="sub">De vorige versie had er tien. Vier zijn eruit omdat de pagina te
+      lang werd om te lezen: de resultaatband, de tijdlijn, de werkwijze en de scorebalk.
+      De hero is teruggebracht tot <b>halve foto, halve tekst</b> met de missie en de
+      visie eronder, het reviewblok is nu een <b>Trustpilot-carrousel</b>, en het team is
+      <b>één foto met de namen erin</b>.</p>
+    <p class="sub">Elk venster hieronder is een echte weergave op 1440 en op 390 pixels,
+      dus de mobiele kolom laat zien wat de media query op 749px werkelijk doet. De
+      carrousel werkt in beide kolommen. De tabel eronder is de vergelijking uit de vorige
+      ronde, met onze rij bijgewerkt naar wat er nu echt staat.</p>
   </header>
 
   ${vergelijking}
@@ -237,6 +243,10 @@ footer p{margin:0 0 18px;max-width:72ch}
   </footer>
 
 </div>
+
+<script>
+${script}
+</script>
 
 <script>
 // Schaal elk venster naar de breedte van zijn kolom. Een blok van 1440px past

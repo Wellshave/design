@@ -4,13 +4,15 @@
   #F7F2E9 in een gouden kader, accent in <b> in plaats van een tweede kopregel.
   Opmaak: assets/ws-overons.css. Sjabloon: templates/page.ws-overons.json.
 
-  Drie dingen die uit blok 12 van de homepage zijn overgenomen:
+  Zeven blokken: hero · verhaal · drie vragen · Trustpilot · wel en niet
+  beloven · team · afsluiter.
+
+  Afspraken die uit de homepage komen:
   * boven- en ondermarge via de sectie-instellingen, niet via de CSS;
   * mobiel is een echte media query op 749px, geen .ws-m-klasse;
-  * elke klasse begint met ws- zodat thema-CSS er niet doorheen lekt.
-
-  Het aantal kolommen gaat via --ws-kol en niet via een inline stijl: een
-  inline stijl wint van elke media query, ook van de mobiele.
+  * elke klasse begint met ws- zodat thema-CSS er niet doorheen lekt;
+  * het aantal kolommen gaat via --ws-kol en niet via een inline stijl: een
+    inline stijl wint van elke media query, ook van de mobiele.
 {% endcomment %}
 
 {{ 'ws-overons.css' | asset_url | stylesheet_tag }}
@@ -20,7 +22,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
   <symbol id="ws-ov-chk" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.4" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7.8 12.3l2.9 2.9 5.5-6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="ws-ov-krs" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.4" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M9 9l6 6M15 9l-6 6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></symbol>
-  <symbol id="ws-ov-tel" viewBox="0 0 24 24"><path d="M17 20v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M19 8v6M22 11h-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.5" cy="7" r="3.5" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
   <symbol id="ws-ov-ster" viewBox="0 0 24 24"><path d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.4l-5.8 3.1 1.1-6.5L2.6 9.4l6.5-.9z"/></symbol>
   <symbol id="ws-ov-v1" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 7.6v5.2M12 16.1v.1" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></symbol>
   <symbol id="ws-ov-v2" viewBox="0 0 24 24"><path d="M3.4 7.2h13l4.2 4.8-4.2 4.8h-13z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8.2 12h6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></symbol>
@@ -36,13 +37,13 @@
 
 <div class="ws-ov">
 
-  {%- comment -%} ── 1. hero ── {%- endcomment -%}
+  {%- comment -%} ── 1. hero ── halve foto, halve tekst ── {%- endcomment -%}
   <header class="ws-ov__hero" {% if section.settings.hero_hoogte > 0 %}style="--ws-ov-hero-h:{{ section.settings.hero_hoogte }}px"{% endif %}>
     <div class="ws-ov__media">
       {%- comment -%}
-        De picker wint; staat hij leeg, dan pakken we het bestand dat vanuit de
-        homepage al in Shopify Files staat. Bestaat dat ook niet, dan geeft
-        file_url een lege string en blijft alleen de donkere grond over.
+        De picker wint; staat hij leeg, dan pakken we het bestand uit Shopify
+        Files. Bestaat dat ook niet, dan geeft file_url een lege string en
+        blijft alleen de donkere grond over.
       {%- endcomment -%}
       {%- if section.settings.foto != blank -%}
         {{ section.settings.foto | image_url: width: 1600 | image_tag: class: 'ws-ov__foto', alt: section.settings.foto_alt, loading: 'eager' }}
@@ -52,10 +53,7 @@
           <img class="ws-ov__foto" src="{{ terugval }}" alt="{{ section.settings.foto_alt | escape }}" loading="eager">
         {%- endif -%}
       {%- endif -%}
-      <div class="ws-ov__scrim"></div>
     </div>
-    {%- if merk_url != blank -%}<img class="ws-ov__merk" src="{{ merk_url }}" alt="">{%- endif -%}
-    <div class="ws-ov__streep"></div>
 
     <div class="ws-ov__heroin"><div class="ws-ov__heroblok">
       {%- if section.settings.hero_eyebrow != blank -%}
@@ -64,67 +62,26 @@
       {%- if section.settings.hero_kop != blank -%}
         <h1 class="ws-ov__h1">{{ section.settings.hero_kop | replace: '|br|', '<br>' }}</h1>
       {%- endif -%}
-      {%- if section.settings.hero_lead != blank -%}
-        <p class="ws-ov__lead">{{ section.settings.hero_lead }}</p>
-      {%- endif -%}
-      {%- if section.settings.hero_cta_label != blank -%}
-        <div class="ws-ov__heroknop">
-          <a class="ws-ov__cta" href="{{ section.settings.hero_cta_link | default: '/collections/all' }}">
-            {{ section.settings.hero_cta_label }}
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
-          </a>
-          {%- if section.settings.hero_cta_bij != blank -%}
-            <span class="ws-ov__afreden">{{ section.settings.hero_cta_bij }}</span>
+      {%- if section.settings.missie != blank or section.settings.visie != blank -%}
+        <div class="ws-ov__paar">
+          {%- if section.settings.missie != blank -%}
+            <div>
+              <p class="ws-ov__paarlabel">{{ section.settings.missie_label | default: 'Onze missie' }}</p>
+              <p class="ws-ov__paartekst">{{ section.settings.missie }}</p>
+            </div>
+          {%- endif -%}
+          {%- if section.settings.visie != blank -%}
+            <div>
+              <p class="ws-ov__paarlabel">{{ section.settings.visie_label | default: 'Onze visie' }}</p>
+              <p class="ws-ov__paartekst">{{ section.settings.visie }}</p>
+            </div>
           {%- endif -%}
         </div>
-      {%- endif -%}
-      {%- if section.settings.tel_getal != blank -%}
-        <p class="ws-ov__teller">
-          <svg><use href="#ws-ov-tel"/></svg>
-          <span><b>{{ section.settings.tel_getal }}</b><em>{{ section.settings.tel_label }}</em></span>
-        </p>
       {%- endif -%}
     </div></div>
   </header>
 
-  {%- comment -%} ── 2. wat er voor jou verandert ── {%- endcomment -%}
-  {%- assign uitkomsten = section.blocks | where: 'type', 'uitkomst' -%}
-  {%- if uitkomsten.size > 0 -%}
-    <section class="ws-ov__band"><div class="ws-ov__bandin">
-      <div class="ws-ov__bandkop">
-        {%- if section.settings.bd_eyebrow != blank -%}
-          <p class="ws-ov__eyebrow">{{ section.settings.bd_eyebrow }}</p>
-        {%- endif -%}
-        {%- if section.settings.bd_kop != blank -%}
-          <h2 class="ws-ov__h2--dark">{{ section.settings.bd_kop | replace: '|br|', '<br>' }}</h2>
-        {%- endif -%}
-        {%- if section.settings.bd_sub != blank -%}
-          <p class="ws-ov__sub--dark">{{ section.settings.bd_sub }}</p>
-        {%- endif -%}
-      </div>
-      <div class="ws-ov__drieuit" style="--ws-kol:{{ uitkomsten.size | at_most: 3 | at_least: 1 }}">
-        {%- for block in uitkomsten -%}
-          <article class="ws-ov__uit" {{ block.shopify_attributes }}>
-            {%- if block.settings.getal != blank -%}
-              <p class="ws-ov__anker"><b>{{ block.settings.getal }}</b><em>{{ block.settings.bron }}</em></p>
-            {%- endif -%}
-            {%- if block.settings.kop != blank -%}
-              <h3 class="ws-ov__uith">{{ block.settings.kop }}</h3>
-            {%- endif -%}
-            {%- if block.settings.tekst != blank -%}
-              <p class="ws-ov__uitt">{{ block.settings.tekst }}</p>
-            {%- endif -%}
-          </article>
-        {%- endfor -%}
-      </div>
-    </div></section>
-  {%- endif -%}
-
-  {%- comment -%} ── 3. het verhaal ── {%- endcomment -%}
-  {%- comment -%}
-    Twee foto's met dezelfde terugval als de hero: de picker wint, anders het
-    bestand uit Shopify Files, en staat dat er ook niet, dan valt de figure weg.
-  {%- endcomment -%}
+  {%- comment -%} ── 2. het verhaal ── {%- endcomment -%}
   {%- assign vh1 = '' -%}
   {%- if section.settings.vh_foto1 != blank -%}
     {%- assign vh1 = section.settings.vh_foto1 | image_url: width: 1200 -%}
@@ -185,41 +142,7 @@
 
   </div></section>
 
-  {%- comment -%} ── 4. de reis ── {%- endcomment -%}
-  {%- assign fasen = section.blocks | where: 'type', 'fase' -%}
-  {%- if fasen.size > 0 -%}
-    <section class="ws-ov__reis"><div class="ws-ov__reisin">
-      <div class="ws-ov__reiskop">
-        {%- if section.settings.rs_eyebrow != blank -%}
-          <p class="ws-ov__eyebrow">{{ section.settings.rs_eyebrow }}</p>
-        {%- endif -%}
-        {%- if section.settings.rs_kop != blank -%}
-          <h2 class="ws-ov__h2--dark">{{ section.settings.rs_kop | replace: '|br|', '<br>' }}</h2>
-        {%- endif -%}
-        {%- if section.settings.rs_sub != blank -%}
-          <p class="ws-ov__sub--dark">{{ section.settings.rs_sub }}</p>
-        {%- endif -%}
-      </div>
-      <div class="ws-ov__fasen" style="--ws-kol:{{ fasen.size | at_most: 5 | at_least: 1 }}">
-        {%- for block in fasen -%}
-          <div class="ws-ov__fase" {{ block.shopify_attributes }}>
-            <span class="ws-ov__knoop"></span>
-            {%- if block.settings.jaar != blank -%}
-              <p class="ws-ov__jaar">{{ block.settings.jaar }}</p>
-            {%- endif -%}
-            {%- if block.settings.kop != blank -%}
-              <h3 class="ws-ov__faseh">{{ block.settings.kop }}</h3>
-            {%- endif -%}
-            {%- if block.settings.tekst != blank -%}
-              <p class="ws-ov__faset">{{ block.settings.tekst }}</p>
-            {%- endif -%}
-          </div>
-        {%- endfor -%}
-      </div>
-    </div></section>
-  {%- endif -%}
-
-  {%- comment -%} ── 5. de drie vragen ── {%- endcomment -%}
+  {%- comment -%} ── 3. de drie vragen ── {%- endcomment -%}
   <section class="ws-ov__vragen"><div class="ws-ov__rand">
     {%- if merk_url != blank -%}<img class="ws-ov__randmerk" src="{{ merk_url }}" alt="">{%- endif -%}
     <div class="ws-ov__randin">
@@ -263,99 +186,75 @@
     </div>
   </div></section>
 
-  {%- comment -%} ── 6. de werkwijze ── {%- endcomment -%}
-  <section class="ws-ov__werk"><div class="ws-ov__werkin">
+  {%- comment -%} ── 4. Trustpilot ── {%- endcomment -%}
+  {%- assign reviews = section.blocks | where: 'type', 'review' -%}
+  {%- if reviews.size > 0 -%}
+    <section class="ws-ov__tp"><div class="ws-ov__tpin">
 
-    <div class="ws-ov__werkkop">
-      {%- if section.settings.wk_eyebrow != blank -%}
-        <p class="ws-ov__eyebrow">{{ section.settings.wk_eyebrow }}</p>
-      {%- endif -%}
-      {%- if section.settings.wk_kop != blank -%}
-        <h2 class="ws-ov__h2--dark">{{ section.settings.wk_kop | replace: '|br|', '<br>' }}</h2>
-      {%- endif -%}
-      {%- if section.settings.wk_sub != blank -%}
-        <p class="ws-ov__sub--dark">{{ section.settings.wk_sub }}</p>
-      {%- endif -%}
-    </div>
-
-    {%- assign stappen = section.blocks | where: 'type', 'stap' -%}
-    {%- if stappen.size > 0 -%}
-      <div class="ws-ov__stappen" style="--ws-kol:{{ stappen.size | at_most: 3 | at_least: 1 }}">
-        {%- for block in stappen -%}
-          <div class="ws-ov__stap" {{ block.shopify_attributes }}>
-            <p class="ws-ov__cijfer">{{ block.settings.cijfer }}</p>
-            {%- if block.settings.label != blank -%}
-              <p class="ws-ov__staplabel">{{ block.settings.label }}</p>
-            {%- endif -%}
-            {%- if block.settings.tekst != blank -%}
-              <p class="ws-ov__staptekst">{{ block.settings.tekst }}</p>
-            {%- endif -%}
-            {%- if block.settings.citaat != blank -%}
-              <blockquote class="ws-ov__stem">{{ block.settings.citaat }}
-                {%- if block.settings.citaat_bron != blank -%}<b>{{ block.settings.citaat_bron }}</b>{%- endif -%}
-              </blockquote>
-            {%- endif -%}
-          </div>
-        {%- endfor -%}
-      </div>
-    {%- endif -%}
-
-  </div></section>
-
-  {%- comment -%} ── 7. wat klanten zeggen ── {%- endcomment -%}
-  {%- assign stemmen = section.blocks | where: 'type', 'stem' -%}
-  {%- if stemmen.size > 0 -%}
-    <section class="ws-ov__stemmen"><div class="ws-ov__stemmenin">
-      <div class="ws-ov__kop">
-        {%- if section.settings.st_eyebrow != blank -%}
-          <p class="ws-ov__eyebrow">{{ section.settings.st_eyebrow }}</p>
-        {%- endif -%}
-        {%- if section.settings.st_kop != blank -%}
-          <h2 class="ws-ov__h2">{{ section.settings.st_kop | replace: '|br|', '<br>' }}</h2>
-        {%- endif -%}
-        {%- if section.settings.st_sub != blank -%}
-          <p class="ws-ov__sub">{{ section.settings.st_sub }}</p>
+      <div class="ws-ov__tpkop">
+        <div class="ws-ov__tpkoptekst">
+          {%- if section.settings.tp_eyebrow != blank -%}
+            <p class="ws-ov__eyebrow">{{ section.settings.tp_eyebrow }}</p>
+          {%- endif -%}
+          {%- if section.settings.tp_kop != blank -%}
+            <h2 class="ws-ov__h2 ws-ov__h2--klein">{{ section.settings.tp_kop | replace: '|br|', '<br>' }}</h2>
+          {%- endif -%}
+        </div>
+        {%- if section.settings.tp_score != blank -%}
+          <p class="ws-ov__tpscore">
+            <svg><use href="#ws-ov-ster"/></svg>
+            <span><b>{{ section.settings.tp_score }}</b></span>
+            <span>{{ section.settings.tp_aantal }}<br>
+              {%- if section.settings.tp_link != blank -%}
+                <a href="{{ section.settings.tp_link }}" rel="noopener nofollow" target="_blank">op Trustpilot</a>
+              {%- else -%}op Trustpilot{%- endif -%}
+            </span>
+          </p>
         {%- endif -%}
       </div>
-      <div class="ws-ov__driestem" style="--ws-kol:{{ stemmen.size | at_most: 3 | at_least: 1 }}">
-        {%- for block in stemmen -%}
-          <figure class="ws-ov__kaart" {{ block.shopify_attributes }}>
-            {%- assign sterren = block.settings.sterren | default: 5 -%}
+
+      {%- comment -%}
+        Het spoor is een scroll-snap-rij. Zonder JavaScript blijft het gewoon
+        veegbaar; de knoppen hieronder sturen het alleen aan.
+      {%- endcomment -%}
+      <div class="ws-ov__spoor" tabindex="0" role="group" aria-label="{{ section.settings.tp_eyebrow | default: 'Beoordelingen' | escape }}">
+        {%- for block in reviews -%}
+          {%- assign sterren = block.settings.sterren | default: 5 -%}
+          <article class="ws-ov__tpk" {{ block.shopify_attributes }}>
             <span class="ws-ov__sterren" role="img" aria-label="{{ sterren }} van de 5 sterren">
               {%- for i in (1..sterren) -%}<svg><use href="#ws-ov-ster"/></svg>{%- endfor -%}
             </span>
+            {%- if block.settings.titel != blank -%}
+              <p class="ws-ov__tpt">{{ block.settings.titel }}</p>
+            {%- endif -%}
             {%- if block.settings.tekst != blank -%}
-              <blockquote class="ws-ov__kaartt">{{ block.settings.tekst }}</blockquote>
+              <blockquote class="ws-ov__tpc">{{ block.settings.tekst }}</blockquote>
             {%- endif -%}
             {%- if block.settings.naam != blank -%}
-              <figcaption class="ws-ov__kaartb"><b>{{ block.settings.naam }}</b><em>{{ block.settings.bron }}</em></figcaption>
+              <p class="ws-ov__tpb"><b>{{ block.settings.naam }}</b><em>{{ block.settings.datum }}</em></p>
             {%- endif -%}
-          </figure>
+          </article>
         {%- endfor -%}
       </div>
-      {%- if section.settings.sc_1_cijfer != blank -%}
-        <div class="ws-ov__scores" style="--ws-kol:3">
-          {%- for i in (1..3) -%}
-            {%- assign c = 'sc_' | append: i | append: '_cijfer' -%}
-            {%- assign n = 'sc_' | append: i | append: '_naam' -%}
-            {%- assign a = 'sc_' | append: i | append: '_aantal' -%}
-            {%- if section.settings[c] != blank -%}
-              <p class="ws-ov__score">
-                <b>{{ section.settings[c] }}</b>
-                <span><i>{{ section.settings[n] }}</i><em>{{ section.settings[a] }}</em></span>
-              </p>
-            {%- endif -%}
-          {%- endfor -%}
-        </div>
-      {%- endif -%}
+
+      <div class="ws-ov__tpnav" data-ws-ov-nav>
+        <button class="ws-ov__pijl" type="button" data-ws-ov="terug" aria-label="Vorige beoordelingen">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12H5M11 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="ws-ov__pijl" type="button" data-ws-ov="verder" aria-label="Volgende beoordelingen">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+        </button>
+        <span class="ws-ov__stip" data-ws-ov="stippen"></span>
+      </div>
+
     </div></section>
   {%- endif -%}
 
-  {%- comment -%} ── 8. wat wij wel en niet beloven ── {%- endcomment -%}
+  {%- comment -%} ── 5. wat wij wel en niet beloven ── {%- endcomment -%}
   <section class="ws-ov__belofte"><div class="ws-ov__duo" style="--ws-kol:2">
 
     <div class="ws-ov__paneel">
-    {%- if merk_url != blank -%}<img class="ws-ov__paneelmerk" src="{{ merk_url }}" alt="">{%- endif -%}
+      {%- if merk_url != blank -%}<img class="ws-ov__paneelmerk" src="{{ merk_url }}" alt="">{%- endif -%}
       {%- if section.settings.wel_eyebrow != blank -%}
         <p class="ws-ov__paneelkop">{{ section.settings.wel_eyebrow }}</p>
       {%- endif -%}
@@ -371,26 +270,6 @@
           {%- endif -%}
         {%- endfor -%}
       </ul>
-      {%- if section.settings.team_titel != blank -%}
-        <div class="ws-ov__team">
-          {%- comment -%} de rij vult zich uit Shopify Files als er geen picker staat {%- endcomment -%}
-          {%- if true -%}
-            <span class="ws-ov__koppen">
-              {%- for i in (1..3) -%}
-                {%- assign sleutel = 'team_' | append: i -%}
-                {%- assign kop = section.settings[sleutel] -%}
-                {%- if kop != blank -%}
-                  <i>{{ kop | image_url: width: 120 | image_tag: alt: '' }}</i>
-                {%- else -%}
-                  {%- assign bestand = 'ws-team-' | append: i | append: '.webp' | file_url -%}
-                  {%- if bestand != blank -%}<i><img src="{{ bestand }}" alt=""></i>{%- endif -%}
-                {%- endif -%}
-              {%- endfor -%}
-            </span>
-          {%- endif -%}
-          <span><b>{{ section.settings.team_titel }}</b><em>{{ section.settings.team_tekst }}</em></span>
-        </div>
-      {%- endif -%}
     </div>
 
     <div class="ws-ov__paneel ws-ov__paneel--licht">
@@ -420,52 +299,38 @@
 
   </div></section>
 
-  {%- comment -%} ── 9. de mensen ── {%- endcomment -%}
+  {%- comment -%} ── 6. het team ── één foto, met de namen erin ── {%- endcomment -%}
   {%- assign mensen = section.blocks | where: 'type', 'mens' -%}
-  {%- if mensen.size > 0 -%}
-    <section class="ws-ov__mensen"><div class="ws-ov__mensenin">
-      <div class="ws-ov__mensenkop">
-        {%- if section.settings.mn_eyebrow != blank -%}
-          <p class="ws-ov__eyebrow">{{ section.settings.mn_eyebrow }}</p>
-        {%- endif -%}
-        {%- if section.settings.mn_kop != blank -%}
-          <h2 class="ws-ov__h2--dark">{{ section.settings.mn_kop | replace: '|br|', '<br>' }}</h2>
-        {%- endif -%}
-        {%- if section.settings.mn_sub != blank -%}
-          <p class="ws-ov__sub--dark">{{ section.settings.mn_sub }}</p>
-        {%- endif -%}
-      </div>
-      <div class="ws-ov__rij" style="--ws-kol:{{ mensen.size | at_most: 6 | at_least: 1 }}">
-        {%- for block in mensen -%}
-          <div class="ws-ov__mens" {{ block.shopify_attributes }}>
-            {%- comment -%}
-              Geen foto? Dan vult de cirkel zich met de eerste letter van de
-              naam. Een leeg rondje leest als een ontbrekend beeld; een
-              initiaal leest als een keuze.
-            {%- endcomment -%}
-            <span class="ws-ov__portret">
-              {%- if block.settings.foto != blank -%}
-                {{ block.settings.foto | image_url: width: 260 | image_tag: alt: block.settings.naam }}
-              {%- else -%}
-                {{ block.settings.naam | strip | slice: 0, 1 | upcase }}
-              {%- endif -%}
-            </span>
-            {%- if block.settings.naam != blank -%}
-              <p class="ws-ov__mensn">{{ block.settings.naam }}</p>
-            {%- endif -%}
-            {%- if block.settings.rol != blank -%}
-              <p class="ws-ov__mensr">{{ block.settings.rol }}</p>
-            {%- endif -%}
-          </div>
-        {%- endfor -%}
-      </div>
-      {%- if section.settings.mn_slot != blank -%}
-        <p class="ws-ov__mensslot"><svg><use href="#ws-ov-chk"/></svg><span>{{ section.settings.mn_slot }}</span></p>
-      {%- endif -%}
+  {%- assign teamfoto = '' -%}
+  {%- if section.settings.tm_foto != blank -%}
+    {%- assign teamfoto = section.settings.tm_foto | image_url: width: 1800 -%}
+  {%- else -%}
+    {%- assign teamfoto = section.settings.tm_bestand | default: 'ws-teamfoto.jpg' | file_url -%}
+  {%- endif -%}
+  {%- if teamfoto != blank -%}
+    <section class="ws-ov__tm"><div class="ws-ov__tmin">
+      <figure class="ws-ov__tmfoto">
+        <img src="{{ teamfoto }}" alt="{{ section.settings.tm_alt | escape }}" loading="lazy">
+        <figcaption class="ws-ov__tmover">
+          {%- if section.settings.tm_eyebrow != blank -%}
+            <p class="ws-ov__eyebrow">{{ section.settings.tm_eyebrow }}</p>
+          {%- endif -%}
+          {%- if section.settings.tm_kop != blank -%}
+            <h2 class="ws-ov__tmh">{{ section.settings.tm_kop | replace: '|br|', '<br>' }}</h2>
+          {%- endif -%}
+          {%- if mensen.size > 0 -%}
+            <p class="ws-ov__namen">
+              {%- for block in mensen -%}
+                <span {{ block.shopify_attributes }}><b>{{ block.settings.naam }}</b><em>{{ block.settings.rol }}</em></span>
+              {%- endfor -%}
+            </p>
+          {%- endif -%}
+        </figcaption>
+      </figure>
     </div></section>
   {%- endif -%}
 
-  {%- comment -%} ── 10. afsluiter ── {%- endcomment -%}
+  {%- comment -%} ── 7. afsluiter ── {%- endcomment -%}
   <section class="ws-ov__af"><div class="ws-ov__afin">
     {%- if section.settings.af_eyebrow != blank -%}
       <p class="ws-ov__eyebrow">{{ section.settings.af_eyebrow }}</p>
@@ -494,798 +359,192 @@
 
 </div>
 
+<script>
+  /* De carrousel. Alles gaat via scrollLeft, zodat vegen, de knoppen en de
+     stippen naar dezelfde stand kijken. Werkt de JS niet, dan blijft het spoor
+     gewoon veegbaar — de knoppen doen dan niets, maar er gaat niets stuk. */
+  (function () {
+    function start(nav) {
+      var spoor = nav.parentElement.querySelector('.ws-ov__spoor');
+      if (!spoor) return;
+      var stippen = nav.querySelector('[data-ws-ov="stippen"]');
+      var terug = nav.querySelector('[data-ws-ov="terug"]');
+      var verder = nav.querySelector('[data-ws-ov="verder"]');
+
+      function stap() {
+        var k = spoor.firstElementChild;
+        return k ? k.offsetWidth + 18 : spoor.clientWidth;
+      }
+      function paginas() {
+        return Math.max(1, Math.ceil(spoor.scrollWidth / spoor.clientWidth - 0.02));
+      }
+      function nu() {
+        return Math.round(spoor.scrollLeft / spoor.clientWidth);
+      }
+      function teken() {
+        var n = paginas(), i = nu();
+        if (stippen.children.length !== n) {
+          stippen.textContent = '';
+          for (var p = 0; p < n; p++) {
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.setAttribute('aria-label', 'Ga naar beoordeling ' + (p + 1) + ' van ' + n);
+            b.addEventListener('click', ga(p));
+            stippen.appendChild(b);
+          }
+        }
+        for (var q = 0; q < n; q++) {
+          stippen.children[q].setAttribute('aria-current', q === i ? 'true' : 'false');
+        }
+        terug.disabled = spoor.scrollLeft < 4;
+        verder.disabled = spoor.scrollLeft > spoor.scrollWidth - spoor.clientWidth - 4;
+        nav.hidden = n < 2;
+      }
+      function ga(p) {
+        return function () { spoor.scrollLeft = p * spoor.clientWidth; };
+      }
+      terug.addEventListener('click', function () { spoor.scrollLeft -= stap(); });
+      verder.addEventListener('click', function () { spoor.scrollLeft += stap(); });
+      spoor.addEventListener('scroll', function () {
+        clearTimeout(spoor._t);
+        spoor._t = setTimeout(teken, 90);
+      });
+      addEventListener('resize', teken);
+      teken();
+    }
+    document.querySelectorAll('[data-ws-ov-nav]').forEach(start);
+  })();
+</script>
+
 {% schema %}
 {
   "name": "WS · Over ons",
   "tag": "section",
-  "max_blocks": 40,
-  "disabled_on": {
-    "groups": [
-      "header",
-      "footer"
-    ]
-  },
+  "max_blocks": 24,
+  "disabled_on": { "groups": ["header", "footer"] },
   "settings": [
-    {
-      "type": "header",
-      "content": "1 · Hero"
-    },
-    {
-      "type": "text",
-      "id": "hero_eyebrow",
-      "label": "Bovenregel",
-      "default": "Over Wellshave"
-    },
-    {
-      "type": "inline_richtext",
-      "id": "hero_kop",
-      "label": "Kop (vet = goud, |br| = regeleinde)",
-      "default": "Jij bent niet het probleem.|br|<b>Je gereedschap is dat wel.</b>"
-    },
-    {
-      "type": "textarea",
-      "id": "hero_lead",
-      "label": "Lead",
-      "default": "Wij beginnen nooit bij het apparaat. We beginnen bij de plek waar het bij jou misgaat, en werken van daaruit terug naar wat er in je hand moet liggen."
-    },
-    {
-      "type": "image_picker",
-      "id": "foto",
-      "label": "Herofoto"
-    },
-    {
-      "type": "text",
-      "id": "foto_alt",
-      "label": "Alt-tekst bij de herofoto",
-      "default": "Dustin in het magazijn, tussen de rolcontainers met bestellingen die klaarstaan voor verzending."
-    },
-    {
-      "type": "text",
-      "id": "foto_bestand",
-      "label": "Of: bestandsnaam in Shopify Files",
-      "default": "ws-founder-magazijn.jpg"
-    },
-    {
-      "type": "image_picker",
-      "id": "merk",
-      "label": "Monogram (watermerk)"
-    },
-    {
-      "type": "text",
-      "id": "merk_bestand",
-      "label": "Of: bestandsnaam in Shopify Files",
-      "default": "ws-hero-logo.png"
-    },
-    {
-      "type": "range",
-      "id": "hero_hoogte",
-      "label": "Minimale hoogte hero (desktop)",
-      "min": 0,
-      "max": 760,
-      "step": 20,
-      "unit": "px",
-      "default": 520
-    },
-    {
-      "type": "text",
-      "id": "hero_cta_label",
-      "label": "Knop — tekst",
-      "default": "Kies jouw apparaat"
-    },
-    {
-      "type": "url",
-      "id": "hero_cta_link",
-      "label": "Knop — link (leeg = /collections/all)"
-    },
-    {
-      "type": "text",
-      "id": "hero_cta_bij",
-      "label": "Regel naast de knop",
-      "default": "100 dagen thuis proberen"
-    },
-    {
-      "type": "text",
-      "id": "tel_getal",
-      "label": "Teller — getal",
-      "default": "180.000+"
-    },
-    {
-      "type": "text",
-      "id": "tel_label",
-      "label": "Teller — label",
-      "default": "bestellingen sinds 2021"
-    },
-    {
-      "type": "header",
-      "content": "2 · Wat er voor jou verandert"
-    },
-    {
-      "type": "text",
-      "id": "bd_eyebrow",
-      "label": "Bovenregel",
-      "default": "Wat het jou oplevert"
-    },
-    {
-      "type": "inline_richtext",
-      "id": "bd_kop",
-      "label": "Kop (vet = goud)",
-      "default": "Wat verandert er <b>als je het probeert?</b>"
-    },
-    {
-      "type": "textarea",
-      "id": "bd_sub",
-      "label": "Subkop",
-      "default": "Onder elk cijfer hieronder staat waar het vandaan komt. Geen percentage dat we niet kunnen nawijzen."
-    },
-    {
-      "type": "header",
-      "content": "3 · Het verhaal"
-    },
-    {
-      "type": "text",
-      "id": "vh_eyebrow",
-      "label": "Bovenregel",
-      "default": "Waar dit begon"
-    },
-    {
-      "type": "inline_richtext",
-      "id": "vh_kop",
-      "label": "Kop (vet = brons, |br| = regeleinde)",
-      "default": "Voordat dit een scheermerk was, <b>lag ik onder iemands badkamervloer.</b>"
-    },
-    {
-      "type": "textarea",
-      "id": "vh_p1",
-      "label": "Alinea 1",
-      "default": "Ik ben geen productontwerper. Ik was installateur. Jarenlang leidingen buigen in kruipruimtes en op mijn knieën liggen op badkamervloeren. Wat ik daar leerde ging niet over scheren — maar het gaat wel over jou."
-    },
-    {
-      "type": "textarea",
-      "id": "vh_p2",
-      "label": "Alinea 2",
-      "default": "Op de bouw zie je elke dag hetzelfde. Twee mannen, dezelfde klus. De één staat te vloeken en beschadigt de wand, de ander is in tien minuten klaar. Dat verschil zit bijna nooit in de man. Het zit in wat hij vasthoudt. Verkeerd gereedschap laat je geloven dat jij degene bent die het niet kan."
-    },
-    {
-      "type": "textarea",
-      "id": "vh_p3",
-      "label": "Alinea 3",
-      "default": "Toen ik zelf steeds wondjes en rode plekken overhield aan het trimmen, dacht ik precies dat. Tot ik doorhad dat er simpelweg geen apparaat bestond dat voor die plek gemaakt was. Daar is Wellshave uit ontstaan. En daarom staat op deze pagina zo weinig over ons, en zo veel over jou."
-    },
-    {
-      "type": "textarea",
-      "id": "vh_les",
-      "label": "De les (grote regel)",
-      "default": "Goed gereedschap bepaalt het resultaat. Niet de man die het vasthoudt."
-    },
-    {
-      "type": "text",
-      "id": "vh_naam",
-      "label": "Ondertekening — naam",
-      "default": "Dustin · oprichter van Wellshave"
-    },
-    {
-      "type": "text",
-      "id": "vh_naam_bij",
-      "label": "Ondertekening — regel eronder",
-      "default": "Shave well, feel well."
-    },
-    {
-      "type": "image_picker",
-      "id": "vh_pasfoto",
-      "label": "Ronde pasfoto (leeg = uitsnede van de herofoto)"
-    },
-    {
-      "type": "image_picker",
-      "id": "vh_foto1",
-      "label": "Foto 1 (groot, staand)"
-    },
-    {
-      "type": "text",
-      "id": "vh_foto1_alt",
-      "label": "Alt-tekst bij foto 1",
-      "default": "Dustin als installateur, bezig met het inmeten van koperen leidingwerk tegen een houten wand."
-    },
-    {
-      "type": "text",
-      "id": "vh_foto1_bestand",
-      "label": "Of: bestandsnaam in Shopify Files",
-      "default": "ws-verhaal-1.jpg"
-    },
-    {
-      "type": "image_picker",
-      "id": "vh_foto2",
-      "label": "Foto 2 (klein, over de rand)"
-    },
-    {
-      "type": "text",
-      "id": "vh_foto2_alt",
-      "label": "Alt-tekst bij foto 2",
-      "default": "Vloerverwarming leggen in een woning in aanbouw."
-    },
-    {
-      "type": "text",
-      "id": "vh_foto2_bestand",
-      "label": "Of: bestandsnaam in Shopify Files",
-      "default": "ws-verhaal-2.jpg"
-    },
-    {
-      "type": "text",
-      "id": "vh_bijschrift",
-      "label": "Bijschrift bij de foto's",
-      "default": "Dustin, voordat Wellshave bestond."
-    },
-    {
-      "type": "header",
-      "content": "4 · De reis"
-    },
-    {
-      "type": "text",
-      "id": "rs_eyebrow",
-      "label": "Bovenregel",
-      "default": "Van daar naar hier"
-    },
-    {
-      "type": "inline_richtext",
-      "id": "rs_kop",
-      "label": "Kop (vet = goud)",
-      "default": "Vijf jaar, en <b>steeds dezelfde vraag.</b>"
-    },
-    {
-      "type": "textarea",
-      "id": "rs_sub",
-      "label": "Subkop",
-      "default": "Elk apparaat hieronder kwam er omdat iemand ons vertelde wat er nog miste."
-    },
-    {
-      "type": "header",
-      "content": "5 · De drie vragen"
-    },
-    {
-      "type": "text",
-      "id": "vr_eyebrow",
-      "label": "Bovenregel",
-      "default": "Hoe wij ontwerpen"
-    },
-    {
-      "type": "inline_richtext",
-      "id": "vr_kop",
-      "label": "Kop (vet = brons)",
-      "default": "Voordat er iets getekend wordt, <b>stellen we drie vragen over jou.</b>"
-    },
-    {
-      "type": "textarea",
-      "id": "vr_sub",
-      "label": "Subkop",
-      "default": "Niet over de techniek, niet over de markt. Over de man die het apparaat straks in zijn hand houdt. Komt er op een van de drie geen scherp antwoord, dan gaat het product niet in productie."
-    },
-    {
-      "type": "inline_richtext",
-      "id": "vr_slot",
-      "label": "Slotregel",
-      "default": "Elk apparaat in de winkel is <b>langs deze drie vragen gekomen</b> voordat het gemaakt werd."
-    },
-    {
-      "type": "header",
-      "content": "6 · De werkwijze"
-    },
-    {
-      "type": "text",
-      "id": "wk_eyebrow",
-      "label": "Bovenregel",
-      "default": "Van jouw probleem naar jouw resultaat"
-    },
-    {
-      "type": "inline_richtext",
-      "id": "wk_kop",
-      "label": "Kop (vet = goud)",
-      "default": "Wat de vorige klant miste, <b>zit in jouw apparaat.</b>"
-    },
-    {
-      "type": "textarea",
-      "id": "wk_sub",
-      "label": "Subkop",
-      "default": "Met z'n zessen bouwen en testen we alles zelf. Elke stap hieronder begon bij een klant die iets terugstuurde, miste of beter wilde."
-    },
-    {
-      "type": "header",
-      "content": "7 · Wat klanten zeggen"
-    },
-    {
-      "type": "text",
-      "id": "st_eyebrow",
-      "label": "Bovenregel",
-      "default": "Niet onze woorden"
-    },
-    {
-      "type": "inline_richtext",
-      "id": "st_kop",
-      "label": "Kop (vet = brons)",
-      "default": "Wij kunnen veel beweren. <b>Zij hebben het gebruikt.</b>"
-    },
-    {
-      "type": "textarea",
-      "id": "st_sub",
-      "label": "Subkop",
-      "default": "Drie beoordelingen uit de winkel, ongewijzigd overgenomen. De cijfers eronder staan per product, want een gemiddelde over alles kun je nergens aanwijzen."
-    },
-    {
-      "type": "text",
-      "id": "sc_1_cijfer",
-      "label": "Score 1 — cijfer",
-      "default": "4,9"
-    },
-    {
-      "type": "text",
-      "id": "sc_1_naam",
-      "label": "Score 1 — product",
-      "default": "Groom Guard™"
-    },
-    {
-      "type": "text",
-      "id": "sc_1_aantal",
-      "label": "Score 1 — aantal",
-      "default": "192 beoordelingen"
-    },
-    {
-      "type": "text",
-      "id": "sc_2_cijfer",
-      "label": "Score 2 — cijfer",
-      "default": "4,9"
-    },
-    {
-      "type": "text",
-      "id": "sc_2_naam",
-      "label": "Score 2 — product",
-      "default": "Shave Package Ultimate™"
-    },
-    {
-      "type": "text",
-      "id": "sc_2_aantal",
-      "label": "Score 2 — aantal",
-      "default": "150 beoordelingen"
-    },
-    {
-      "type": "text",
-      "id": "sc_3_cijfer",
-      "label": "Score 3 — cijfer",
-      "default": "4,4"
-    },
-    {
-      "type": "text",
-      "id": "sc_3_naam",
-      "label": "Score 3 — product",
-      "default": "Neustrimmer Advance™ 3-in-1"
-    },
-    {
-      "type": "text",
-      "id": "sc_3_aantal",
-      "label": "Score 3 — aantal",
-      "default": "768 beoordelingen"
-    },
-    {
-      "type": "header",
-      "content": "8 · Wat wij wel beloven"
-    },
-    {
-      "type": "text",
-      "id": "wel_eyebrow",
-      "label": "Bovenregel",
-      "default": "Wat wij wel beloven"
-    },
-    {
-      "type": "inline_richtext",
-      "id": "wel_kop",
-      "label": "Kop (vet = goud)",
-      "default": "Jij hoeft alleen te proberen.|br|<b>Het risico ligt bij ons.</b>"
-    },
-    {
-      "type": "text",
-      "id": "wel_punt_1",
-      "label": "Punt 1",
-      "default": "100 dagen thuis proberen. Bevalt het niet, dan krijg je je geld terug."
-    },
-    {
-      "type": "text",
-      "id": "wel_punt_2",
-      "label": "Punt 2",
-      "default": "2 jaar garantie op elk apparaat."
-    },
-    {
-      "type": "text",
-      "id": "wel_punt_3",
-      "label": "Punt 3",
-      "default": "Gratis verzending vanaf €30, voor 23:59 besteld is morgen in huis."
-    },
-    {
-      "type": "text",
-      "id": "wel_punt_4",
-      "label": "Punt 4",
-      "default": "Een mens die je mail leest, geen chatbot."
-    },
-    {
-      "type": "text",
-      "id": "team_titel",
-      "label": "Team — titel",
-      "default": "Klantenservice en magazijn"
-    },
-    {
-      "type": "text",
-      "id": "team_tekst",
-      "label": "Team — tekst",
-      "default": "Zitten in hetzelfde pand in Helmond."
-    },
-    {
-      "type": "image_picker",
-      "id": "team_1",
-      "label": "Teamfoto 1"
-    },
-    {
-      "type": "image_picker",
-      "id": "team_2",
-      "label": "Teamfoto 2"
-    },
-    {
-      "type": "image_picker",
-      "id": "team_3",
-      "label": "Teamfoto 3"
-    },
-    {
-      "type": "header",
-      "content": "8 · Wat wij niet beloven"
-    },
-    {
-      "type": "text",
-      "id": "niet_eyebrow",
-      "label": "Bovenregel",
-      "default": "Wat wij niet beloven"
-    },
-    {
-      "type": "inline_richtext",
-      "id": "niet_kop",
-      "label": "Kop (vet = brons)",
-      "default": "Liever eerlijk vooraf <b>dan een teleurstelling achteraf.</b>"
-    },
-    {
-      "type": "text",
-      "id": "niet_punt_1",
-      "label": "Punt 1",
-      "default": "Kaal als glas. De meeste mannen willen dat niet, en wij doen niet alsof."
-    },
-    {
-      "type": "text",
-      "id": "niet_punt_2",
-      "label": "Punt 2",
-      "default": "Dat het bij iedereen identiek uitpakt. Huid en haargroei verschillen."
-    },
-    {
-      "type": "text",
-      "id": "niet_punt_3",
-      "label": "Punt 3",
-      "default": "Dat een apparaat je huid verandert. Het verandert hoe je hem behandelt."
-    },
-    {
-      "type": "text",
-      "id": "niet_punt_4",
-      "label": "Punt 4",
-      "default": "Het goedkoopste van het schap. Wel de eerlijkste prijs voor wat je krijgt."
-    },
-    {
-      "type": "text",
-      "id": "tegen_label",
-      "label": "Tegencitaat — label",
-      "default": "Zo klinkt dat in een review"
-    },
-    {
-      "type": "textarea",
-      "id": "tegen_tekst",
-      "label": "Tegencitaat — tekst",
-      "default": "“Best toch voorzichtig hanteren in de gevoelige zones. Niet altijd pijnloos.”"
-    },
-    {
-      "type": "text",
-      "id": "tegen_bron",
-      "label": "Tegencitaat — bron",
-      "default": "BertBelgium · Groom Guard™"
-    },
-    {
-      "type": "header",
-      "content": "9 · De mensen"
-    },
-    {
-      "type": "text",
-      "id": "mn_eyebrow",
-      "label": "Bovenregel",
-      "default": "Wie je aan de lijn krijgt"
-    },
-    {
-      "type": "inline_richtext",
-      "id": "mn_kop",
-      "label": "Kop (vet = goud)",
-      "default": "De mail die je stuurt, <b>komt bij een van hen terecht.</b>"
-    },
-    {
-      "type": "textarea",
-      "id": "mn_sub",
-      "label": "Subkop",
-      "default": "Met z'n zessen. Klantenservice, magazijn en ontwerp zitten in hetzelfde pand, dus wat jij terugstuurt komt letterlijk op de tafel waar het volgende apparaat wordt bedacht."
-    },
-    {
-      "type": "inline_richtext",
-      "id": "mn_slot",
-      "label": "Slotregel",
-      "default": "Geen chatbot, geen ticketnummer — <b>een mens die je mail leest.</b>"
-    },
-    {
-      "type": "header",
-      "content": "10 · Afsluiter"
-    },
-    {
-      "type": "text",
-      "id": "af_eyebrow",
-      "label": "Bovenregel",
-      "default": "Begin bij jezelf"
-    },
-    {
-      "type": "inline_richtext",
-      "id": "af_kop",
-      "label": "Kop (vet = goud)",
-      "default": "Jij weet het beste <b>waar het misgaat.</b>"
-    },
-    {
-      "type": "textarea",
-      "id": "af_sub",
-      "label": "Subkop",
-      "default": "Kies het apparaat voor de plek waar jij iets weg wilt hebben. Doet het niet wat wij hier beweren, dan stuur je het binnen honderd dagen terug."
-    },
-    {
-      "type": "text",
-      "id": "cta1_label",
-      "label": "Knop 1 — tekst",
-      "default": "Kies jouw apparaat"
-    },
-    {
-      "type": "url",
-      "id": "cta1_link",
-      "label": "Knop 1 — link"
-    },
-    {
-      "type": "text",
-      "id": "cta2_label",
-      "label": "Knop 2 — tekst",
-      "default": "Weet je het niet? Doe de quiz"
-    },
-    {
-      "type": "url",
-      "id": "cta2_link",
-      "label": "Knop 2 — link (leeg = /pages/quiz)"
-    },
-    {
-      "type": "inline_richtext",
-      "id": "af_reden",
-      "label": "Redenregel",
-      "default": "100 dagen proberen · 2 jaar garantie · <b>gratis verzending vanaf €30</b>"
-    },
-    {
-      "type": "header",
-      "content": "Indent settings"
-    },
-    {
-      "type": "range",
-      "id": "desk_indent_top",
-      "label": "Indent top (desktop)",
-      "min": 0,
-      "max": 200,
-      "step": 2,
-      "unit": "px",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "desk_indent_bottom",
-      "label": "Indent bottom (desktop)",
-      "min": 0,
-      "max": 200,
-      "step": 2,
-      "unit": "px",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "mob_indent_top",
-      "label": "Indent top (mobile)",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "mob_indent_bottom",
-      "label": "Indent bottom (mobile)",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "default": 0
-    }
+    { "type": "header", "content": "1 · Hero" },
+    { "type": "text", "id": "hero_eyebrow", "label": "Bovenregel", "default": "Over Wellshave" },
+    { "type": "inline_richtext", "id": "hero_kop", "label": "Kop (vet = goud, |br| = regeleinde)", "default": "Wellshave is zes mensen <b>en één overtuiging.</b>" },
+    { "type": "text", "id": "missie_label", "label": "Label 1", "default": "Onze missie" },
+    { "type": "textarea", "id": "missie", "label": "Missie", "default": "Gereedschap maken voor de plekken waar een gewoon scheerapparaat tekortschiet — en waar mannen liever niet over praten." },
+    { "type": "text", "id": "visie_label", "label": "Label 2", "default": "Onze visie" },
+    { "type": "textarea", "id": "visie", "label": "Visie", "default": "Dat jezelf verzorgen net zo gewoon wordt als je tanden poetsen. Geen project, geen zoekwerk, geen wondjes." },
+    { "type": "image_picker", "id": "foto", "label": "Herofoto" },
+    { "type": "text", "id": "foto_alt", "label": "Alt-tekst bij de herofoto", "default": "Dustin in het magazijn, tussen de rolcontainers met bestellingen die klaarstaan voor verzending." },
+    { "type": "text", "id": "foto_bestand", "label": "Of: bestandsnaam in Shopify Files", "default": "ws-founder-magazijn.jpg" },
+    { "type": "image_picker", "id": "merk", "label": "Monogram (watermerk)" },
+    { "type": "text", "id": "merk_bestand", "label": "Of: bestandsnaam in Shopify Files", "default": "ws-hero-logo.png" },
+    { "type": "range", "id": "hero_hoogte", "label": "Minimale hoogte hero (desktop)", "min": 0, "max": 760, "step": 20, "unit": "px", "default": 540 },
+
+    { "type": "header", "content": "2 · Het verhaal" },
+    { "type": "text", "id": "vh_eyebrow", "label": "Bovenregel", "default": "Waar dit begon" },
+    { "type": "inline_richtext", "id": "vh_kop", "label": "Kop (vet = brons, |br| = regeleinde)", "default": "Voordat dit een scheermerk was, <b>lag ik onder iemands badkamervloer.</b>" },
+    { "type": "textarea", "id": "vh_p1", "label": "Alinea 1", "default": "Ik ben geen productontwerper. Ik was installateur. Jarenlang leidingen buigen in kruipruimtes en op mijn knieën liggen op badkamervloeren. Wat ik daar leerde ging niet over scheren — maar het gaat wel over jou." },
+    { "type": "textarea", "id": "vh_p2", "label": "Alinea 2", "default": "Op de bouw zie je elke dag hetzelfde. Twee mannen, dezelfde klus. De één staat te vloeken en beschadigt de wand, de ander is in tien minuten klaar. Dat verschil zit bijna nooit in de man. Het zit in wat hij vasthoudt." },
+    { "type": "textarea", "id": "vh_p3", "label": "Alinea 3", "default": "Toen ik zelf steeds wondjes overhield aan het trimmen, dacht ik dat het aan mij lag. Tot ik doorhad dat er simpelweg geen apparaat bestond dat voor die plek gemaakt was. Daar is Wellshave uit ontstaan." },
+    { "type": "textarea", "id": "vh_les", "label": "De les (grote regel)", "default": "Goed gereedschap bepaalt het resultaat. Niet de man die het vasthoudt." },
+    { "type": "text", "id": "vh_naam", "label": "Ondertekening — naam", "default": "Dustin · oprichter van Wellshave" },
+    { "type": "text", "id": "vh_naam_bij", "label": "Ondertekening — regel eronder", "default": "Shave well, feel well." },
+    { "type": "image_picker", "id": "vh_pasfoto", "label": "Ronde pasfoto (leeg = uitsnede van de herofoto)" },
+    { "type": "image_picker", "id": "vh_foto1", "label": "Foto 1 (groot, staand)" },
+    { "type": "text", "id": "vh_foto1_alt", "label": "Alt-tekst bij foto 1", "default": "Dustin als installateur, bezig met het inmeten van koperen leidingwerk tegen een houten wand." },
+    { "type": "text", "id": "vh_foto1_bestand", "label": "Of: bestandsnaam in Shopify Files", "default": "ws-verhaal-1.jpg" },
+    { "type": "image_picker", "id": "vh_foto2", "label": "Foto 2 (klein, over de rand)" },
+    { "type": "text", "id": "vh_foto2_alt", "label": "Alt-tekst bij foto 2", "default": "Vloerverwarming leggen in een woning in aanbouw." },
+    { "type": "text", "id": "vh_foto2_bestand", "label": "Of: bestandsnaam in Shopify Files", "default": "ws-verhaal-2.jpg" },
+    { "type": "text", "id": "vh_bijschrift", "label": "Bijschrift bij de foto's", "default": "Dustin, voordat Wellshave bestond." },
+
+    { "type": "header", "content": "3 · De drie vragen" },
+    { "type": "text", "id": "vr_eyebrow", "label": "Bovenregel", "default": "Hoe wij ontwerpen" },
+    { "type": "inline_richtext", "id": "vr_kop", "label": "Kop (vet = brons)", "default": "Voordat er iets getekend wordt, <b>stellen we drie vragen over jou.</b>" },
+    { "type": "textarea", "id": "vr_sub", "label": "Subkop", "default": "Niet over de techniek, niet over de markt. Over de man die het apparaat straks in zijn hand houdt." },
+    { "type": "inline_richtext", "id": "vr_slot", "label": "Slotregel", "default": "Elk apparaat in de winkel is <b>langs deze drie vragen gekomen</b> voordat het gemaakt werd." },
+
+    { "type": "header", "content": "4 · Trustpilot" },
+    { "type": "text", "id": "tp_eyebrow", "label": "Bovenregel", "default": "Wat klanten schrijven" },
+    { "type": "inline_richtext", "id": "tp_kop", "label": "Kop (vet = brons)", "default": "Wij kunnen veel beweren. <b>Zij hebben het gebruikt.</b>" },
+    { "type": "text", "id": "tp_score", "label": "TrustScore", "default": "4,4" },
+    { "type": "text", "id": "tp_aantal", "label": "Aantal beoordelingen", "default": "985 beoordelingen" },
+    { "type": "url", "id": "tp_link", "label": "Link naar het Trustpilot-profiel" },
+
+    { "type": "header", "content": "5 · Wat wij wel beloven" },
+    { "type": "text", "id": "wel_eyebrow", "label": "Bovenregel", "default": "Wat wij wel beloven" },
+    { "type": "inline_richtext", "id": "wel_kop", "label": "Kop (vet = goud)", "default": "Jij hoeft alleen te proberen.|br|<b>Het risico ligt bij ons.</b>" },
+    { "type": "text", "id": "wel_punt_1", "label": "Punt 1", "default": "100 dagen thuis proberen. Bevalt het niet, dan krijg je je geld terug." },
+    { "type": "text", "id": "wel_punt_2", "label": "Punt 2", "default": "2 jaar garantie op elk apparaat." },
+    { "type": "text", "id": "wel_punt_3", "label": "Punt 3", "default": "Gratis verzending vanaf €30, voor 23:59 besteld is morgen in huis." },
+    { "type": "text", "id": "wel_punt_4", "label": "Punt 4", "default": "Losse onderdelen te bestellen, zodat één kapot kopje geen nieuw apparaat betekent." },
+
+    { "type": "header", "content": "5 · Wat wij niet beloven" },
+    { "type": "text", "id": "niet_eyebrow", "label": "Bovenregel", "default": "Wat wij niet beloven" },
+    { "type": "inline_richtext", "id": "niet_kop", "label": "Kop (vet = brons)", "default": "Liever eerlijk vooraf <b>dan een teleurstelling achteraf.</b>" },
+    { "type": "text", "id": "niet_punt_1", "label": "Punt 1", "default": "Kaal als glas. De meeste mannen willen dat niet, en wij doen niet alsof." },
+    { "type": "text", "id": "niet_punt_2", "label": "Punt 2", "default": "Dat het bij iedereen identiek uitpakt. Huid en haargroei verschillen." },
+    { "type": "text", "id": "niet_punt_3", "label": "Punt 3", "default": "Dat een apparaat je huid verandert. Het verandert hoe je hem behandelt." },
+    { "type": "text", "id": "niet_punt_4", "label": "Punt 4", "default": "Het goedkoopste van het schap. Wel de eerlijkste prijs voor wat je krijgt." },
+    { "type": "text", "id": "tegen_label", "label": "Tegencitaat — label", "default": "Zo klinkt dat in een review" },
+    { "type": "textarea", "id": "tegen_tekst", "label": "Tegencitaat — tekst", "default": "“Mooi toestel, werkt prima. Enkel de scheerkop blijft volledig intact waardoor een reiniging niet optimaal kan gebeuren.”" },
+    { "type": "text", "id": "tegen_bron", "label": "Tegencitaat — bron", "default": "4 sterren op Trustpilot, 10 augustus" },
+
+    { "type": "header", "content": "6 · Het team" },
+    { "type": "text", "id": "tm_eyebrow", "label": "Bovenregel", "default": "Wie je aan de lijn krijgt" },
+    { "type": "inline_richtext", "id": "tm_kop", "label": "Kop (vet = goud, |br| = regeleinde)", "default": "De mail die je stuurt, <b>komt bij een van hen terecht.</b>" },
+    { "type": "image_picker", "id": "tm_foto", "label": "Teamfoto" },
+    { "type": "text", "id": "tm_alt", "label": "Alt-tekst bij de teamfoto", "default": "Het team van Wellshave in het magazijn, voor de gestapelde dozen." },
+    { "type": "text", "id": "tm_bestand", "label": "Of: bestandsnaam in Shopify Files", "default": "ws-teamfoto.jpg" },
+
+    { "type": "header", "content": "7 · Afsluiter" },
+    { "type": "text", "id": "af_eyebrow", "label": "Bovenregel", "default": "Begin bij jezelf" },
+    { "type": "inline_richtext", "id": "af_kop", "label": "Kop (vet = goud)", "default": "Jij weet het beste <b>waar het misgaat.</b>" },
+    { "type": "textarea", "id": "af_sub", "label": "Subkop", "default": "Kies het apparaat voor de plek waar jij iets weg wilt hebben. Doet het niet wat wij hier beweren, dan stuur je het binnen honderd dagen terug." },
+    { "type": "text", "id": "cta1_label", "label": "Knop 1 — tekst", "default": "Kies jouw apparaat" },
+    { "type": "url", "id": "cta1_link", "label": "Knop 1 — link" },
+    { "type": "text", "id": "cta2_label", "label": "Knop 2 — tekst", "default": "Weet je het niet? Doe de quiz" },
+    { "type": "url", "id": "cta2_link", "label": "Knop 2 — link (leeg = /pages/quiz)" },
+    { "type": "inline_richtext", "id": "af_reden", "label": "Redenregel", "default": "100 dagen proberen · 2 jaar garantie · <b>gratis verzending vanaf €30</b>" },
+
+    { "type": "header", "content": "Indent settings" },
+    { "type": "range", "id": "desk_indent_top", "label": "Indent top (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "desk_indent_bottom", "label": "Indent bottom (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_top", "label": "Indent top (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_bottom", "label": "Indent bottom (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 }
   ],
   "blocks": [
-    {
-      "type": "uitkomst",
-      "name": "Uitkomst",
-      "settings": [
-        {
-          "type": "text",
-          "id": "getal",
-          "label": "Cijfer"
-        },
-        {
-          "type": "text",
-          "id": "bron",
-          "label": "Waar het cijfer vandaan komt"
-        },
-        {
-          "type": "text",
-          "id": "kop",
-          "label": "Kop"
-        },
-        {
-          "type": "textarea",
-          "id": "tekst",
-          "label": "Tekst"
-        }
-      ]
-    },
     {
       "type": "vraag",
       "name": "Vraag",
       "settings": [
-        {
-          "type": "select",
-          "id": "icoon",
-          "label": "Icoon",
-          "options": [
-            {
-              "value": "v1",
-              "label": "Uitroepteken — het probleem"
-            },
-            {
-              "value": "v2",
-              "label": "Pijl — de oplossing"
-            },
-            {
-              "value": "v3",
-              "label": "Roos — het doel"
-            }
-          ],
-          "default": "v1"
-        },
-        {
-          "type": "text",
-          "id": "nr",
-          "label": "Nummer"
-        },
-        {
-          "type": "text",
-          "id": "kop",
-          "label": "Vraag"
-        },
-        {
-          "type": "textarea",
-          "id": "tekst",
-          "label": "Tekst"
-        }
+        { "type": "select", "id": "icoon", "label": "Icoon", "options": [
+          { "value": "v1", "label": "Uitroepteken — het probleem" },
+          { "value": "v2", "label": "Pijl — de oplossing" },
+          { "value": "v3", "label": "Roos — het doel" }
+        ], "default": "v1" },
+        { "type": "text", "id": "nr", "label": "Nummer" },
+        { "type": "text", "id": "kop", "label": "Vraag" },
+        { "type": "textarea", "id": "tekst", "label": "Tekst" }
       ]
     },
     {
-      "type": "stap",
-      "name": "Stap",
+      "type": "review",
+      "name": "Trustpilot-beoordeling",
       "settings": [
-        {
-          "type": "text",
-          "id": "cijfer",
-          "label": "Cijfer"
-        },
-        {
-          "type": "text",
-          "id": "label",
-          "label": "Label"
-        },
-        {
-          "type": "textarea",
-          "id": "tekst",
-          "label": "Tekst"
-        },
-        {
-          "type": "textarea",
-          "id": "citaat",
-          "label": "Citaat van een klant (optioneel)"
-        },
-        {
-          "type": "text",
-          "id": "citaat_bron",
-          "label": "Citaat — bron"
-        }
-      ]
-    },
-    {
-      "type": "fase",
-      "name": "Fase in de reis",
-      "settings": [
-        {
-          "type": "text",
-          "id": "jaar",
-          "label": "Jaar"
-        },
-        {
-          "type": "text",
-          "id": "kop",
-          "label": "Kop"
-        },
-        {
-          "type": "textarea",
-          "id": "tekst",
-          "label": "Tekst"
-        }
-      ]
-    },
-    {
-      "type": "stem",
-      "name": "Klantcitaat",
-      "settings": [
-        {
-          "type": "range",
-          "id": "sterren",
-          "label": "Sterren",
-          "min": 1,
-          "max": 5,
-          "step": 1,
-          "default": 5
-        },
-        {
-          "type": "textarea",
-          "id": "tekst",
-          "label": "Citaat"
-        },
-        {
-          "type": "text",
-          "id": "naam",
-          "label": "Naam"
-        },
-        {
-          "type": "text",
-          "id": "bron",
-          "label": "Product"
-        }
+        { "type": "range", "id": "sterren", "label": "Sterren", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "text", "id": "titel", "label": "Titel" },
+        { "type": "textarea", "id": "tekst", "label": "Tekst" },
+        { "type": "text", "id": "naam", "label": "Naam" },
+        { "type": "text", "id": "datum", "label": "Datum" }
       ]
     },
     {
       "type": "mens",
       "name": "Persoon",
       "settings": [
-        {
-          "type": "text",
-          "id": "naam",
-          "label": "Naam"
-        },
-        {
-          "type": "text",
-          "id": "rol",
-          "label": "Rol"
-        },
-        {
-          "type": "image_picker",
-          "id": "foto",
-          "label": "Foto (leeg = initiaal)"
-        }
+        { "type": "text", "id": "naam", "label": "Naam" },
+        { "type": "text", "id": "rol", "label": "Rol" }
       ]
     }
   ],
-  "presets": [
-    {
-      "name": "WS · Over ons"
-    }
-  ]
+  "presets": [ { "name": "WS · Over ons" } ]
 }
 {% endschema %}
