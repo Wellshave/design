@@ -1363,6 +1363,7 @@
     knop rechtstreeks naar de winkelwagen. Geen pop-up om niets.
   {%- endcomment -%}
   {%- assign upgrades = mf.upgrade_products.value -%}
+  {%- assign extras_kaart = mf.upgrade_extras.value -%}
   {%- if upgrades != blank and s.upg_tonen -%}
     {%- comment -%}
       Alleen upgrades die duurder zijn dan dit product en op voorraad staan.
@@ -1398,7 +1399,29 @@
             {%- for up in upgrades -%}
               {%- assign uv = up.selected_or_first_available_variant -%}
               {%- if uv.available == false or uv.price <= v.price -%}{%- continue -%}{%- endif -%}
-              {%- assign meer = uv.price | minus: v.price -%}
+
+              {%- comment -%}
+                Wat de klant bespaart als hij de extra's los zou kopen.
+                custom.upgrade_extras koppelt per upgrade-product de handles van
+                de onderdelen die er bovenop komen en die wij ook los verkopen.
+                Geen koppeling, geen regel: dan blijft alleen de prijs staan.
+              {%- endcomment -%}
+              {%- assign bespaar = 0 -%}
+              {%- assign losprijs = 0 -%}
+              {%- if extras_kaart != blank -%}
+                {%- assign upsleutel = up.id | append: '' -%}
+                {%- assign losdelen = extras_kaart[upsleutel] -%}
+                {%- if losdelen != blank -%}
+                  {%- assign losprijs = v.price -%}
+                  {%- for losh in losdelen -%}
+                    {%- assign losp = all_products[losh] -%}
+                    {%- if losp != blank -%}
+                      {%- assign losprijs = losprijs | plus: losp.price -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                  {%- assign bespaar = losprijs | minus: uv.price -%}
+                {%- endif -%}
+              {%- endif -%}
 
               <li class="ws-upg-kaart">
                 <div class="ws-upg-beeld">
@@ -1433,7 +1456,9 @@
 
                 <div class="ws-upg-koop">
                   <p class="ws-upg-prijs">{% render 'price-formated', price: uv.price %}</p>
-                  <p class="ws-upg-meerprijs">+ {% render 'price-formated', price: meer %}</p>
+                  {%- if bespaar > 0 and s.upg_besp != blank -%}
+                    <p class="ws-upg-besp">{{ s.upg_besp }} {% render 'price-formated', price: bespaar %}</p>
+                  {%- endif -%}
                   <button type="button" class="ws-upg-knop"
                           data-action="add-product" data-variant="{{ uv.id }}">{{ s.upg_knop }}</button>
                 </div>
@@ -1525,9 +1550,10 @@
     { "type": "paragraph", "content": "Verschijnt bij het toevoegen aan de winkelwagen, gevoed uit custom.upgrade_products. Alleen duurdere producten die op voorraad staan komen erin; staat het veld leeg, dan is er geen pop-up." },
     { "type": "checkbox", "id": "upg_tonen", "label": "Upgrade-pop-up aan", "default": true },
     { "type": "text", "id": "upg_ey", "label": "Bovenregel", "default": "Nog even dit" },
-    { "type": "text", "id": "upg_kop", "label": "Kop", "info": "[product] wordt de producttitel.", "default": "Voor een paar euro meer heb je de hele set" },
+    { "type": "text", "id": "upg_kop", "label": "Kop", "info": "[product] wordt de producttitel.", "default": "Samen goedkoper dan los kopen" },
     { "type": "text", "id": "upg_lead", "label": "Onderregel", "info": "[product] wordt de producttitel.", "default": "De [product] zit er in beide gevallen gewoon bij." },
     { "type": "text", "id": "upg_knop", "label": "Knop op de kaart", "default": "Kies deze" },
+    { "type": "text", "id": "upg_besp", "label": "Bespaarregel op de kaart", "info": "Verschijnt alleen als custom.upgrade_extras is ingevuld; het bedrag komt erachter.", "default": "Je bespaart" },
     { "type": "text", "id": "upg_enmeer", "label": "Regel bij meer dan vier extra\u0027s", "info": "[aantal] wordt het aantal dat niet in de lijst past.", "default": "en nog [aantal] andere onderdelen" },
     { "type": "text", "id": "upg_enmeer1", "label": "Diezelfde regel bij precies \u00e9\u00e9n", "default": "en nog \u00e9\u00e9n onderdeel" },
     { "type": "text", "id": "upg_nee", "label": "Doorgaan zonder upgrade", "info": "[product] wordt de producttitel.", "default": "Nee dank je, ga verder met de [product]" },
@@ -1812,7 +1838,7 @@
 
   .ws-upg-koop{text-align:right}
   .ws-upg-prijs{margin:0;font-size:15px;font-weight:800;color:#14120F;white-space:nowrap}
-  .ws-upg-meerprijs{margin:1px 0 0;font-size:12px;font-weight:700;color:#B0742A;white-space:nowrap}
+  .ws-upg-besp{margin:3px 0 0;font-size:11px;font-weight:700;line-height:1.3;color:#8A5A1E;white-space:nowrap}
   .ws-upg-knop{margin-top:9px;border:0;border-radius:10px;padding:10px 15px;cursor:pointer;
     background:linear-gradient(100deg,#E9BE72 0%,#DDA548 100%);color:#14120F;
     font:inherit;font-size:12.5px;font-weight:800;letter-spacing:.01em;white-space:nowrap}
@@ -1833,7 +1859,7 @@
     .ws-upg-koop{grid-column:1 / -1;display:grid;grid-template-columns:auto minmax(0,1fr);
       align-items:center;gap:10px;text-align:left;padding-top:10px;
       border-top:1px solid rgba(176,116,42,.16)}
-    .ws-upg-meerprijs{grid-row:2;grid-column:1;margin:0}
+    .ws-upg-besp{grid-row:2;grid-column:1;margin:0;align-self:start}
     .ws-upg-knop{grid-row:1 / span 2;grid-column:2;margin:0;padding:12px;width:100% }
   }
 
