@@ -2,7 +2,7 @@
 //
 // Eén bron voor preview.mjs en artifact.mjs, zodat die twee niet uit elkaar
 // gaan lopen. De copy komt uit templates/page.ws-overons.json en de opmaak uit
-// assets/ws-overons.css, allebei ongewijzigd — alleen de markup staat hier een
+// assets/ws-overons.css, allebei ongewijzigd. Alleen de markup staat hier een
 // tweede keer, want een Liquid-renderer hebben we niet. Verbouw je
 // sections/ws-overons.liquid, verbouw dan dit bestand mee.
 import { readFileSync } from 'node:fs';
@@ -159,7 +159,7 @@ const belofte = () => `<section class="ws-ov__belofte"><div class="ws-ov__duo" s
     <ul class="ws-ov__lijst">${punten('niet', 'ws-ov__kruis', KRS)}</ul>
     ${el(
       s.tegen_tekst,
-      (v) => `<blockquote class="ws-ov__tegen">${el(s.tegen_label, (x) => `<b>${x}</b>`)}<em>${v}</em>${s.tegen_bron ? ` — ${s.tegen_bron}` : ''}</blockquote>`
+      (v) => `<blockquote class="ws-ov__tegen">${el(s.tegen_label, (x) => `<b>${x}</b>`)}<em>${v}</em>${s.tegen_bron ? ` · ${s.tegen_bron}` : ''}</blockquote>`
     )}
   </div>
 </div></section>`;
@@ -191,13 +191,13 @@ const afsluiter = () => `<section class="ws-ov__af"><div class="ws-ov__afin">
 </div></section>`;
 
 export const BLOKKEN = [
-  { id: 'hero', naam: '1 — Hero', bij: 'Half foto, half tekst. Missie en visie, verder niets.', html: hero },
-  { id: 'verhaal', naam: '2 — Het verhaal', bij: 'Waar het begon, meteen omgedraaid naar wat het voor jou betekent.', html: verhaal },
-  { id: 'vragen', naam: '3 — De drie vragen', bij: 'Zijn probleem, wat hij al probeerde, waar hij uit wil komen.', html: vragen },
-  { id: 'tp', naam: '4 — Trustpilot', bij: 'Zes echte beoordelingen in een carrousel, met de TrustScore.', html: trustpilot },
-  { id: 'belofte', naam: '5 — Wel en niet beloven', bij: 'Wat we waarmaken, wat we niet claimen, en één kritische review.', html: belofte },
-  { id: 'team', naam: '6 — Het team', bij: 'Eén foto van alle zes, met de namen erin.', html: team },
-  { id: 'af', naam: '7 — Afsluiter', bij: 'Terug naar de keuze, met de risiconemers eronder.', html: afsluiter },
+  { id: 'hero', naam: '1 · Hero', bij: 'Half foto, half tekst. Missie en visie, verder niets.', html: hero },
+  { id: 'verhaal', naam: '2 · Het verhaal', bij: 'Waar het begon, meteen omgedraaid naar wat het voor jou betekent.', html: verhaal },
+  { id: 'vragen', naam: '3 · De drie vragen', bij: 'Zijn probleem, wat hij al probeerde, waar hij uit wil komen.', html: vragen },
+  { id: 'tp', naam: '4 · Trustpilot', bij: 'Zes echte beoordelingen in een carrousel, met de TrustScore.', html: trustpilot },
+  { id: 'belofte', naam: '5 · Wel en niet beloven', bij: 'Wat we waarmaken, wat we niet claimen, en één kritische review.', html: belofte },
+  { id: 'team', naam: '6 · Het team', bij: 'Eén foto van alle zes, met de namen erin.', html: team },
+  { id: 'af', naam: '7 · Afsluiter', bij: 'Terug naar de keuze, met de risiconemers eronder.', html: afsluiter },
 ];
 
 // de carrousel, letterlijk hetzelfde script als in de sectie

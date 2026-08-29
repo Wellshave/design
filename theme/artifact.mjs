@@ -11,7 +11,7 @@ import { BLOKKEN, css, s, script } from './blokken.mjs';
 const dir = new URL('.', import.meta.url).pathname;
 // ── de mobiele kolom ──
 // De sectie gebruikt één echte media query op 749px, en die kijkt naar de
-// breedte van het vénster — niet naar die van zijn vak. Naast elkaar op één
+// breedte van het vénster, niet naar die van zijn vak. Naast elkaar op één
 // pagina zou de mobiele kolom dus gewoon de desktopopmaak tonen.
 //
 // Daarom wordt die query hier automatisch omgezet naar regels onder .ws-m.
@@ -66,14 +66,14 @@ const blokken = BLOKKEN.map(
 // niet als eigen blok. Manscaped blokkeert het ophalen van zijn pagina; die
 // rij komt uit hun eigen merkverhaal op het blog.
 const MERKEN = [
-  ['Dore &amp; Rose', 'doreandrose.com', ['–', '–', '–', '–', '✓', '–', '–', '–']],
-  ['Cloudpillo', 'cloudpillo.com', ['✓', '✓', '✓', '✓', '–', '✓', '✓', '–']],
-  ['Meroda', 'merodacosmetics.nl', ['✓', '–', '–', '–', '✓', '–', '✓', '–']],
-  ['Hears', 'hears.com', ['✓', '–', '~', '–', '–', '✓', '–', '–']],
-  ['MAE', 'maeofficial.com', ['–', '–', '✓', '~', '✓', '–', '–', '–']],
-  ['Moov', 'moovmore.com', ['✓', '✓', '✓', '~', '✓', '✓', '–', '–']],
-  ['Manscaped', 'manscaped.com', ['✓', '–', '✓', '~', '✓', '–', '–', '–']],
-  ['Achaté', 'achate.com', ['✓', '✓', '✓', '–', '✓', '✓', '✓', '–']],
+  ['Dore &amp; Rose', 'doreandrose.com', ['·', '·', '·', '·', '✓', '·', '·', '·']],
+  ['Cloudpillo', 'cloudpillo.com', ['✓', '✓', '✓', '✓', '·', '✓', '✓', '·']],
+  ['Meroda', 'merodacosmetics.nl', ['✓', '·', '·', '·', '✓', '·', '✓', '·']],
+  ['Hears', 'hears.com', ['✓', '·', '~', '·', '·', '✓', '·', '·']],
+  ['MAE', 'maeofficial.com', ['·', '·', '✓', '~', '✓', '·', '·', '·']],
+  ['Moov', 'moovmore.com', ['✓', '✓', '✓', '~', '✓', '✓', '·', '·']],
+  ['Manscaped', 'manscaped.com', ['✓', '·', '✓', '~', '✓', '·', '·', '·']],
+  ['Achaté', 'achate.com', ['✓', '✓', '✓', '·', '✓', '✓', '✓', '·']],
 ];
 const KOLOMMEN = [
   ['CTA boven de vouw', 'Een knop naar de winkel vóór je hoeft te scrollen.'],
@@ -101,20 +101,20 @@ const vergelijking = `<section class="verg">
           .join('')}</tr>`
       ).join('')}
       <tr class="ons"><th scope="row">Wellshave<em>deze pagina</em></th>
-        ${['–', '–', '✓', '–', '✓', '✓', '✓', '✓']
+        ${['·', '·', '✓', '·', '✓', '✓', '✓', '✓']
           .map((v) => `<td class="v${v === '✓' ? ' ja' : ''}">${v}</td>`)
           .join('')}</tr>
     </tbody>
     <tfoot><tr><th scope="row">Hoeveel van de acht</th>
       ${KOLOMMEN.map((_, i) => `<td class="v">${tel(i)}/8</td>`).join('')}</tr></tfoot>
   </table></div>
-  <p class="verg-bij">De laatste kolom is de enige waar alle acht een streepje
+  <p class="verg-bij">De laatste kolom is de enige waar alle acht een stip
     hebben. Geen van deze merken schrijft op wat het níét waarmaakt, en geen laat
     een kritische review zien. Dat blok hadden wij al, en dat blijft.</p>
   <p class="verg-bij">Vier patronen zijn er na één ronde weer <b>uit</b>: de knop
     in de hero, de drie uitkomsten in cijfers, de tijdlijn en de werkwijze. Ze
     stonden er, ze werkten los van elkaar, maar samen maakten ze er een pagina
-    van tien blokken van — en een Over ons-pagina die je moet uitzitten leest
+    van tien blokken van, en een Over ons-pagina die je moet uitzitten leest
     niemand. Dat een patroon bij zes van de acht voorkomt is een argument, geen
     verplichting. Wat overblijft zijn <b>zeven blokken</b> en ongeveer de helft
     van de tekst.</p>
@@ -123,15 +123,15 @@ const vergelijking = `<section class="verg">
 const WIJZ = [
   ['Van tien blokken naar zeven', 'De vorige ronde voegde vier blokken toe uit de vergelijking hierboven. Los van elkaar waren ze te verdedigen; bij elkaar werd het een pagina die je moest uitzitten. Eruit: de resultaatband, de tijdlijn, de werkwijze en de scorebalk met drie productcijfers. De pagina is nu ongeveer <b>40% korter</b>.'],
   ['De hero is halve foto, halve tekst', 'Er stond een sluier overheen, een watermerk erachter, een schuine gouden streep op de naad, een knop en een teller met 180.000+ bestellingen. Dat is een aanbieding, geen kennismaking. Nu: <b>1&#8239;:&#8239;1</b>, foto rechts, tekst links, en verder niets.'],
-  ['De kop gaat nu over Wellshave', 'De hero zei <b>&#34;jij bent niet het probleem, je gereedschap is dat wel&#34;</b>. Dat is een productbelofte; hij hoort op de homepage en niet op een Over ons. Er staat nu wie we zijn, met de <b>missie</b> en de <b>visie</b> als twee gelabelde regels eronder in plaats van weggestopt in een lead.'],
+  ['De kop gaat nu over Wellshave', 'De hero deed een <b>productbelofte over het scheren zelf</b>. Die hoort op de homepage en niet op een Over ons. Er staat nu wie we zijn, met de <b>missie</b> en de <b>visie</b> als twee gelabelde regels eronder in plaats van weggestopt in een lead.'],
   ['Trustpilot in plaats van eigen reviews', 'Het reviewblok haalde zijn citaten uit de winkel zelf. Nu komen ze van <b>nl.trustpilot.com/review/wellshave.nl</b>: zes beoordelingen, letterlijk overgenomen, met de echte TrustScore <b>4,4 uit 985</b> ernaast. Trustpilot is onafhankelijk; een review op je eigen productpagina is dat niet.'],
   ['Een carrousel, geen zesde scherm', 'Zes reviews onder elkaar is weer een scherm scrollen. Het spoor gebruikt <b>scroll-snap</b>: op desktop drie kaarten per stap, mobiel één. Werkt het JavaScript niet, dan blijft het gewoon veegbaar en gaat er niets stuk. De stippen en de pijlen kijken allebei naar <b>scrollLeft</b>, dus vegen en klikken lopen niet uit de pas.'],
-  ['Eén teamfoto in plaats van zes rondjes', 'Er stonden zes losse cirkels met een initiaal erin. Nu is het de echte teamfoto, met de namen erín. De tekst schuift met een negatieve marge over de onderste <b>18%</b> van de foto — daar staan geen gezichten meer, want de voorste twee eindigen op driekwart. Niets van de foto wordt weggesneden.'],
-  ['De namen staan er niet bij de gezichten', 'Dat was de eerste opzet: een label per gezicht. De losse portretten in de winkel (<b>team_dustin.png</b> en de andere vijf) maken vier van de zes met zekerheid herkenbaar, maar twee niet. Een collega onder de verkeerde naam publiceren is erger dan geen label, dus staan de namen als een rij eronder — in de foto, maar niet aan een gezicht vast.'],
+  ['Eén teamfoto in plaats van zes rondjes', 'Er stonden zes losse cirkels met een initiaal erin. Nu is het de echte teamfoto, met de namen erín. De tekst schuift met een negatieve marge over de onderste <b>18%</b> van de foto. Daar staan geen gezichten meer, want de voorste twee eindigen op driekwart. Niets van de foto wordt weggesneden.'],
+  ['De namen staan er niet bij de gezichten', 'Dat was de eerste opzet: een label per gezicht. De losse portretten in de winkel (<b>team_dustin.png</b> en de andere vijf) maken vier van de zes met zekerheid herkenbaar, maar twee niet. Een collega onder de verkeerde naam publiceren is erger dan geen label, dus staan de namen als een rij eronder: in de foto, maar niet aan een gezicht vast.'],
   ['Wat is blijven staan', 'Het verhaal in de ik-vorm, de drie vragen, en het blok met wat we wel en niet beloven. Die drie zijn goedgekeurd zoals ze waren; alleen de alinea&rsquo;s van het verhaal en de subkop bij de vragen zijn een regel korter.'],
   ['Nog steeds geen getal zonder bron', '<b>4,4</b> en <b>985</b> komen van de Trustpilot-pagina zelf. De zes reviews zijn woord voor woord overgenomen, met de naam en de datum die de schrijver er zelf bij zette. De kritische review onder <b>&#34;wat wij niet beloven&#34;</b> is er ook een van Trustpilot, van vier sterren.'],
-  ['Taal van de homepage', 'Donker is #0B0B0A met een gouden gloed, licht is een paneel in een dun gouden kader, het accent zit in <b>&lt;b&gt;</b>, mobiel is één echte media query op <b>749px</b>, en boven- en ondermarge komen uit <b>desk_indent_top</b> en de drie andere — want <b>snippets/indent-settings</b> gebruikt een ID-selector die van elke klasse wint.'],
-  ['Het beeld is lichter geworden', 'De drie foto&rsquo;s zijn opnieuw gecodeerd op de breedte die ze werkelijk krijgen. De teamfoto ging van <b>7,4&#8239;MB</b> naar <b>173&#8239;KB</b>, en de map met beeld van 1&#8239;MB naar 728&#8239;KB — inclusief een foto die er eerst niet in zat.'],
+  ['Taal van de homepage', 'Donker is #0B0B0A met een gouden gloed, licht is een paneel in een dun gouden kader, het accent zit in <b>&lt;b&gt;</b>, mobiel is één echte media query op <b>749px</b>, en boven- en ondermarge komen uit <b>desk_indent_top</b> en de drie andere, want <b>snippets/indent-settings</b> gebruikt een ID-selector die van elke klasse wint.'],
+  ['Het beeld is lichter geworden', 'De drie foto&rsquo;s zijn opnieuw gecodeerd op de breedte die ze werkelijk krijgen. De teamfoto ging van <b>7,4&#8239;MB</b> naar <b>173&#8239;KB</b>, en de map met beeld van 1&#8239;MB naar 728&#8239;KB, inclusief een foto die er eerst niet in zat.'],
   ['Alles is een instelling', '78 velden en drie bloktypes: vraag, Trustpilot-beoordeling en persoon. Een review verversen is een blok bijwerken, geen code.'],
 ];
 
@@ -235,7 +235,7 @@ footer p{margin:0 0 18px;max-width:72ch}
 
   <footer>
     <p>Tien blokken, waarvan vier nieuw uit de vergelijking hierboven. De rode draad is
-      dezelfde gebleven: <b>de klant is het onderwerp, wij zijn het gereedschap</b>. Wat er per
+      dezelfde gebleven: <b>de klant is het onderwerp, wij leveren de grooming tools</b>. Wat er per
       ronde veranderde en waarom, staat hieronder.</p>
     <div class="wijz">
       ${WIJZ.map(([k, t]) => `<div class="wijz-kaart"><h3>${k}</h3><p>${t}</p></div>`).join('')}

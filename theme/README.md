@@ -1,4 +1,4 @@
-# Wellshave — Over ons in het thema
+# Wellshave · Over ons in het thema
 
 De Over ons-pagina, gebouwd in dezelfde taal als de homepage-secties uit
 PR #2 (`claude/homepage-analysis-redesign-u38dwu`).
@@ -21,18 +21,18 @@ Over ons-pagina die er vandaag staat heeft handle **`over-wellshave`**.
 
 ## Zeven blokken
 
-1. **Hero** — halve foto, halve tekst. Wie we zijn, met de missie en de visie
+1. **Hero**, halve foto, halve tekst. Wie we zijn, met de missie en de visie
    als twee gelabelde regels. Geen knop, geen teller, geen watermerk.
-2. **Het verhaal** — licht en open: twee foto's uit de installateurstijd links,
+2. **Het verhaal**, licht en open: twee foto's uit de installateurstijd links,
    een ondertekend stuk rechts. Bewust zónder kader, zodat het naast blok 3
    als een ander soort blok leest.
-3. **De drie vragen** — licht, in een gouden kader: jouw probleem, wat je al
+3. **De drie vragen**, licht in een gouden kader: jouw probleem, wat je al
    probeerde, waar je uit wilt komen.
-4. **Trustpilot** — een carrousel met zes beoordelingen en de TrustScore.
-5. **Wel en niet beloven** — twee panelen naast elkaar, donker en licht, met
+4. **Trustpilot**, een carrousel met zes beoordelingen en de TrustScore.
+5. **Wel en niet beloven**, twee panelen naast elkaar, donker en licht, met
    één kritische review onder het lichte paneel.
-6. **Het team** — één foto van alle zes, met de namen erin.
-7. **Afsluiter** — donker met gloed en twee knoppen.
+6. **Het team**, één foto van alle zes, met de namen erin.
+7. **Afsluiter**, donker met gloed en twee knoppen.
 
 Drie bloktypes zijn herhaalbaar in de thema-editor: `vraag`,
 `review` en `mens`. Al het overige is een instelling.
@@ -47,7 +47,7 @@ ons-pagina die je moet uitzitten leest niemand. Ze zijn er allemaal weer uit,
 plus de knop in de hero.
 
 **Dat een patroon bij zes van de acht vergeleken merken voorkomt, is een
-argument — geen verplichting.**
+argument, geen verplichting.**
 
 ### Waarom blok 2 in de ik-vorm staat
 
@@ -55,8 +55,8 @@ De rest van de pagina zegt *wij*. Blok 2 zegt *ik*, en is ondertekend. Een
 persoonlijk verhaal in de wij-vorm klinkt als een bedrijfsprofiel, en dat is
 precies wat de huidige Over ons-pagina in de winkel doet. De regel voor dit
 blok is dat elke zin over vroeger eindigt bij de lezer. "Ik was installateur"
-is er alleen omdat de zin erna is: *verkeerd gereedschap laat je geloven dat
-jij degene bent die het niet kan.*
+is er alleen omdat de alinea uitkomt op: *dat verschil zit bijna nooit in de
+man, het zit in wat hij vasthoudt.*
 
 ### Hoe de carrousel werkt
 
@@ -69,7 +69,7 @@ Twee dingen om te weten als je eraan sleutelt:
 
 * De stapgrootte gebruikt **`offsetWidth`**, niet `getBoundingClientRect()`.
   Dat laatste wordt beïnvloed door een `transform: scale()`, en het
-  ontwerpbeeld schaalt elk vak — dan klopt de sprong niet meer.
+  ontwerpbeeld schaalt elk vak, en dan klopt de sprong niet meer.
 * Het spoor wordt gezocht via `nav.parentElement`, niet via een id. Zo botsen
   twee carrousels niet als de sectie twee keer op één pagina staat.
 
@@ -77,8 +77,8 @@ Twee dingen om te weten als je eraan sleutelt:
 
 De eerste opzet was een label per gezicht. In Shopify Files staan losse
 portretten met de naam in de bestandsnaam (`team_dustin.png` en de vijf
-andere), en daarmee zijn vier van de zes met zekerheid te herkennen — maar
-twee niet. Een collega onder de verkeerde naam publiceren is erger dan geen
+andere), en daarmee zijn vier van de zes met zekerheid te herkennen. Twee
+niet. Een collega onder de verkeerde naam publiceren is erger dan geen
 label. De namen staan daarom als een rij ín de foto, maar niet aan een gezicht
 vast. Wie weet wie wie is, kan er alsnog labels van maken.
 
@@ -92,13 +92,13 @@ vast. Wie weet wie wie is, kan er alsnog labels van maken.
 | `teamfoto.jpg` | blok 6 | Shopify Files |
 | `hero-logo.png` | het monogram, twee keer: kader en paneel | homepage-tak |
 
-De hero gebruikt **niet** het portret van de homepage — dan lees je op twee
+De hero gebruikt **niet** het portret van de homepage. Dan lees je op twee
 pagina's achter elkaar hetzelfde beeld.
 
 Alle vier de foto's zijn opnieuw gecodeerd op de breedte die ze werkelijk
 krijgen, want ze worden in het voorbeeld en het ontwerpbeeld als data-URI
 ingebed. De teamfoto ging van 7,4 MB naar 173 KB. Vervang je er een, doe dat
-dan ook (`sharp` of iets vergelijkbaars, breedte 1000–1600, kwaliteit 80).
+dan ook (`sharp` of iets vergelijkbaars, breedte 1000 tot 1600, kwaliteit 80).
 
 ## Waar de cijfers vandaan komen
 
@@ -112,7 +112,7 @@ Niets op deze pagina is geschat.
 | 100 dagen · 2 jaar · €30 | winkelvoorwaarden, ook op de homepage |
 
 **De TrustScore loopt.** 4,4 uit 985 is de stand van 29 augustus. Het is een
-tekstveld, dus hij loopt niet mee — af en toe bijwerken, samen met de reviews.
+tekstveld, dus hij loopt niet mee. Af en toe bijwerken, samen met de reviews.
 
 ## Waar de opbouw vandaan komt
 
@@ -129,7 +129,7 @@ Achaté.
 | Drie kernwaarden | 6 | blok 3 doet dit concreter |
 | Team met namen | 4 | blok 6 |
 | Reviews als eigen blok | 3 | blok 4, nu van Trustpilot |
-| **Eerlijk over grenzen** | **0** | blok 5 — het enige dat niemand doet |
+| **Eerlijk over grenzen** | **0** | blok 5, het enige dat niemand doet |
 
 Twee dingen zijn bewust **niet** overgenomen. Meroda plakt een productgrid en
 een Instagram-feed op zijn Over ons; dat maakt er een tweede winkelpagina van.
@@ -162,7 +162,7 @@ node theme/artifact.mjs    # over-ons.artifact.html
 ```
 
 De copy komt uit `templates/page.ws-overons.json` en de opmaak uit
-`assets/ws-overons.css`, allebei ongewijzigd — alleen de markup staat in
+`assets/ws-overons.css`, allebei ongewijzigd. Alleen de markup staat in
 `blokken.mjs` een tweede keer, want een Liquid-renderer hebben we hier niet.
 Dat ene bestand voedt zowel het voorbeeld als het ontwerpbeeld, zodat die twee
 niet uit elkaar lopen. Het carrousel-script wordt er letterlijk uit de sectie
@@ -191,5 +191,5 @@ geknipt, dus dat kan niet uit de pas gaan lopen. Verbouw je
   terwijl de homepage en deze pagina alleen mannen aanspreken.
 * **Eén getal spreekt zichzelf tegen.** De homepage zegt 180.000+ bestellingen
   en 950+ beoordelingen; de twee artikelen in de winkel zeggen 184.000+ en
-  800+ Trustpilot. Op deze pagina staat nu geen van beide — de teller is uit de
-  hero verdwenen — maar op de homepage staat het nog wel.
+  800+ Trustpilot. Op deze pagina staat nu geen van beide, want de teller is
+  uit de hero verdwenen, maar op de homepage staat het nog wel.

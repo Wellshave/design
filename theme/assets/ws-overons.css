@@ -1,4 +1,4 @@
-/* ═══ Wellshave — Over ons ═══
+/* ═══ Wellshave · Over ons ═══
    Zelfde taal als de homepage: donkere blokken op #0B0B0A met een gouden
    radiale gloed, lichte blokken op #F7F2E9 in een dun gouden kader, koppen
    met het accent in <b> en niet in een tweede regel met een verloop.
@@ -15,7 +15,7 @@
 /* Let op: `.ws-ov p` weegt (0,1,1) en wint van een losse klasse (0,1,0).
    Zet je een marge op een <p>, schrijf dan `.ws-ov p.ws-ov__…`. */
 
-/* de eyebrow met de haarlijnen ernaast — het merkteken van elke kop */
+/* de eyebrow met de haarlijnen ernaast, het merkteken van elke kop */
 .ws-ov__eyebrow{display:inline-flex;align-items:center;gap:16px;font-size:11px;font-weight:700;
   letter-spacing:.22em;text-transform:uppercase;color:#BC813E}
 .ws-ov__eyebrow::before,.ws-ov__eyebrow::after{content:"";width:42px;height:1px;
@@ -213,7 +213,7 @@
 .ws-ov__tmfoto > img{display:block;width:100%;height:auto}
 /* Het tekstvlak schuift met een negatieve marge over de onderste rand van de
    foto heen, zodat het er ín staat. Het pakt alleen de onderste ~13%, en daar
-   staan geen gezichten meer — de voorste twee eindigen op driekwart. */
+   staan geen gezichten meer, want de voorste twee eindigen op driekwart. */
 .ws-ov__tmover{position:relative;margin-top:-128px;color:#fff;padding:128px 40px 32px;
   display:flex;flex-direction:column;gap:15px;
   background:linear-gradient(180deg,rgba(11,11,10,0) 0%,rgba(11,11,10,.5) 34%,

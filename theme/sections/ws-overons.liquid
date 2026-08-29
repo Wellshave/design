@@ -1,5 +1,5 @@
 {% comment %}
-  Wellshave — Over ons.
+  Wellshave, Over ons.
   Zelfde ontwerptaal als de homepage: donker #0B0B0A met gouden gloed, licht
   #F7F2E9 in een gouden kader, accent in <b> in plaats van een tweede kopregel.
   Opmaak: assets/ws-overons.css. Sjabloon: templates/page.ws-overons.json.
@@ -292,7 +292,7 @@
         <blockquote class="ws-ov__tegen">
           {%- if section.settings.tegen_label != blank -%}<b>{{ section.settings.tegen_label }}</b>{%- endif -%}
           <em>{{ section.settings.tegen_tekst }}</em>
-          {%- if section.settings.tegen_bron != blank -%} — {{ section.settings.tegen_bron }}{%- endif -%}
+          {%- if section.settings.tegen_bron != blank -%} · {{ section.settings.tegen_bron }}{%- endif -%}
         </blockquote>
       {%- endif -%}
     </div>
@@ -362,7 +362,7 @@
 <script>
   /* De carrousel. Alles gaat via scrollLeft, zodat vegen, de knoppen en de
      stippen naar dezelfde stand kijken. Werkt de JS niet, dan blijft het spoor
-     gewoon veegbaar — de knoppen doen dan niets, maar er gaat niets stuk. */
+     gewoon veegbaar. De knoppen doen dan niets, maar er gaat niets stuk. */
   (function () {
     function start(nav) {
       var spoor = nav.parentElement.querySelector('.ws-ov__spoor');
@@ -427,7 +427,7 @@
     { "type": "text", "id": "hero_eyebrow", "label": "Bovenregel", "default": "Over Wellshave" },
     { "type": "inline_richtext", "id": "hero_kop", "label": "Kop (vet = goud, |br| = regeleinde)", "default": "Wellshave is zes mensen <b>en één overtuiging.</b>" },
     { "type": "text", "id": "missie_label", "label": "Label 1", "default": "Onze missie" },
-    { "type": "textarea", "id": "missie", "label": "Missie", "default": "Gereedschap maken voor de plekken waar een gewoon scheerapparaat tekortschiet — en waar mannen liever niet over praten." },
+    { "type": "textarea", "id": "missie", "label": "Missie", "default": "Grooming tools maken voor de plekken waar een gewoon scheerapparaat tekortschiet, en waar mannen liever niet over praten." },
     { "type": "text", "id": "visie_label", "label": "Label 2", "default": "Onze visie" },
     { "type": "textarea", "id": "visie", "label": "Visie", "default": "Dat jezelf verzorgen net zo gewoon wordt als je tanden poetsen. Geen project, geen zoekwerk, geen wondjes." },
     { "type": "image_picker", "id": "foto", "label": "Herofoto" },
@@ -440,12 +440,12 @@
     { "type": "header", "content": "2 · Het verhaal" },
     { "type": "text", "id": "vh_eyebrow", "label": "Bovenregel", "default": "Waar dit begon" },
     { "type": "inline_richtext", "id": "vh_kop", "label": "Kop (vet = brons, |br| = regeleinde)", "default": "Voordat dit een scheermerk was, <b>lag ik onder iemands badkamervloer.</b>" },
-    { "type": "textarea", "id": "vh_p1", "label": "Alinea 1", "default": "Ik ben geen productontwerper. Ik was installateur. Jarenlang leidingen buigen in kruipruimtes en op mijn knieën liggen op badkamervloeren. Wat ik daar leerde ging niet over scheren — maar het gaat wel over jou." },
+    { "type": "textarea", "id": "vh_p1", "label": "Alinea 1", "default": "Ik ben geen productontwerper. Ik was installateur. Jarenlang leidingen buigen in kruipruimtes en op mijn knieën liggen op badkamervloeren. Wat ik daar leerde ging niet over scheren. Het gaat wel over jou." },
     { "type": "textarea", "id": "vh_p2", "label": "Alinea 2", "default": "Op de bouw zie je elke dag hetzelfde. Twee mannen, dezelfde klus. De één staat te vloeken en beschadigt de wand, de ander is in tien minuten klaar. Dat verschil zit bijna nooit in de man. Het zit in wat hij vasthoudt." },
     { "type": "textarea", "id": "vh_p3", "label": "Alinea 3", "default": "Toen ik zelf steeds wondjes overhield aan het trimmen, dacht ik dat het aan mij lag. Tot ik doorhad dat er simpelweg geen apparaat bestond dat voor die plek gemaakt was. Daar is Wellshave uit ontstaan." },
-    { "type": "textarea", "id": "vh_les", "label": "De les (grote regel)", "default": "Goed gereedschap bepaalt het resultaat. Niet de man die het vasthoudt." },
-    { "type": "text", "id": "vh_naam", "label": "Ondertekening — naam", "default": "Dustin · oprichter van Wellshave" },
-    { "type": "text", "id": "vh_naam_bij", "label": "Ondertekening — regel eronder", "default": "Shave well, feel well." },
+    { "type": "textarea", "id": "vh_les", "label": "De les (grote regel)", "default": "Je grooming tools bepalen het resultaat. Niet de man die ze vasthoudt." },
+    { "type": "text", "id": "vh_naam", "label": "Ondertekening, naam", "default": "Dustin · oprichter van Wellshave" },
+    { "type": "text", "id": "vh_naam_bij", "label": "Ondertekening, regel eronder", "default": "Shave well, feel well." },
     { "type": "image_picker", "id": "vh_pasfoto", "label": "Ronde pasfoto (leeg = uitsnede van de herofoto)" },
     { "type": "image_picker", "id": "vh_foto1", "label": "Foto 1 (groot, staand)" },
     { "type": "text", "id": "vh_foto1_alt", "label": "Alt-tekst bij foto 1", "default": "Dustin als installateur, bezig met het inmeten van koperen leidingwerk tegen een houten wand." },
@@ -483,9 +483,9 @@
     { "type": "text", "id": "niet_punt_2", "label": "Punt 2", "default": "Dat het bij iedereen identiek uitpakt. Huid en haargroei verschillen." },
     { "type": "text", "id": "niet_punt_3", "label": "Punt 3", "default": "Dat een apparaat je huid verandert. Het verandert hoe je hem behandelt." },
     { "type": "text", "id": "niet_punt_4", "label": "Punt 4", "default": "Het goedkoopste van het schap. Wel de eerlijkste prijs voor wat je krijgt." },
-    { "type": "text", "id": "tegen_label", "label": "Tegencitaat — label", "default": "Zo klinkt dat in een review" },
-    { "type": "textarea", "id": "tegen_tekst", "label": "Tegencitaat — tekst", "default": "“Mooi toestel, werkt prima. Enkel de scheerkop blijft volledig intact waardoor een reiniging niet optimaal kan gebeuren.”" },
-    { "type": "text", "id": "tegen_bron", "label": "Tegencitaat — bron", "default": "4 sterren op Trustpilot, 10 augustus" },
+    { "type": "text", "id": "tegen_label", "label": "Tegencitaat, label", "default": "Zo klinkt dat in een review" },
+    { "type": "textarea", "id": "tegen_tekst", "label": "Tegencitaat, tekst", "default": "“Mooi toestel, werkt prima. Enkel de scheerkop blijft volledig intact waardoor een reiniging niet optimaal kan gebeuren.”" },
+    { "type": "text", "id": "tegen_bron", "label": "Tegencitaat, bron", "default": "4 sterren op Trustpilot, 10 augustus" },
 
     { "type": "header", "content": "6 · Het team" },
     { "type": "text", "id": "tm_eyebrow", "label": "Bovenregel", "default": "Wie je aan de lijn krijgt" },
@@ -498,10 +498,10 @@
     { "type": "text", "id": "af_eyebrow", "label": "Bovenregel", "default": "Begin bij jezelf" },
     { "type": "inline_richtext", "id": "af_kop", "label": "Kop (vet = goud)", "default": "Jij weet het beste <b>waar het misgaat.</b>" },
     { "type": "textarea", "id": "af_sub", "label": "Subkop", "default": "Kies het apparaat voor de plek waar jij iets weg wilt hebben. Doet het niet wat wij hier beweren, dan stuur je het binnen honderd dagen terug." },
-    { "type": "text", "id": "cta1_label", "label": "Knop 1 — tekst", "default": "Kies jouw apparaat" },
-    { "type": "url", "id": "cta1_link", "label": "Knop 1 — link" },
-    { "type": "text", "id": "cta2_label", "label": "Knop 2 — tekst", "default": "Weet je het niet? Doe de quiz" },
-    { "type": "url", "id": "cta2_link", "label": "Knop 2 — link (leeg = /pages/quiz)" },
+    { "type": "text", "id": "cta1_label", "label": "Knop 1, tekst", "default": "Kies jouw apparaat" },
+    { "type": "url", "id": "cta1_link", "label": "Knop 1, link" },
+    { "type": "text", "id": "cta2_label", "label": "Knop 2, tekst", "default": "Weet je het niet? Doe de quiz" },
+    { "type": "url", "id": "cta2_link", "label": "Knop 2, link (leeg = /pages/quiz)" },
     { "type": "inline_richtext", "id": "af_reden", "label": "Redenregel", "default": "100 dagen proberen · 2 jaar garantie · <b>gratis verzending vanaf €30</b>" },
 
     { "type": "header", "content": "Indent settings" },
@@ -516,9 +516,9 @@
       "name": "Vraag",
       "settings": [
         { "type": "select", "id": "icoon", "label": "Icoon", "options": [
-          { "value": "v1", "label": "Uitroepteken — het probleem" },
-          { "value": "v2", "label": "Pijl — de oplossing" },
-          { "value": "v3", "label": "Roos — het doel" }
+          { "value": "v1", "label": "Uitroepteken (het probleem)" },
+          { "value": "v2", "label": "Pijl (de oplossing)" },
+          { "value": "v3", "label": "Roos (het doel)" }
         ], "default": "v1" },
         { "type": "text", "id": "nr", "label": "Nummer" },
         { "type": "text", "id": "kop", "label": "Vraag" },
