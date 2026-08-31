@@ -21,6 +21,8 @@
   --warn-soft:   #F6EDD9;
   --good:        #2C6B49;
   --good-soft:   #DFEEE5;
+  --s1:          #1C6FA0;
+  --s2:          #A85A24;
 
   --f-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
   --f-body:    "Source Serif 4", Georgia, "Times New Roman", serif;
@@ -45,6 +47,8 @@
     --warn-soft:   #2E2716;
     --good:        #7FC29B;
     --good-soft:   #172B21;
+    --s1:          #4593C4;
+    --s2:          #CA8044;
   }
 }
 
@@ -65,6 +69,8 @@
   --warn-soft:   #2E2716;
   --good:        #7FC29B;
   --good-soft:   #172B21;
+  --s1:          #4593C4;
+  --s2:          #CA8044;
 }
 
 * { box-sizing: border-box; }
@@ -496,6 +502,121 @@ tfoot td {
   max-width: 720px;
 }
 
+/* ---------- charts ---------- */
+
+.figure {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  padding: 20px 20px 16px;
+  margin-top: 22px;
+}
+
+.fig-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 18px;
+  margin-bottom: 4px;
+}
+
+.fig-title {
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: -0.005em;
+}
+
+.fig-sub {
+  font-size: 14px;
+  color: var(--ink-3);
+}
+
+.key {
+  display: flex;
+  gap: 16px;
+  margin: 10px 0 4px;
+  font-family: var(--f-mono);
+  font-size: 11.5px;
+  color: var(--ink-2);
+}
+
+.key span { display: flex; align-items: center; gap: 6px; }
+
+.swatch {
+  width: 11px;
+  height: 11px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.swatch.k1 { background: var(--s1); }
+.swatch.k2 { background: var(--s2); }
+
+.chart-wrap { position: relative; overflow-x: auto; }
+
+.chart {
+  width: 100%;
+  min-width: 520px;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+.chart .grid { stroke: var(--rule); stroke-width: 1; }
+.chart .base { stroke: var(--rule-firm); stroke-width: 1; }
+
+.chart .ax {
+  font-family: var(--f-mono);
+  font-size: 10.5px;
+  fill: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.chart .ax.dim { font-size: 9.5px; letter-spacing: 0.08em; }
+.chart .s1 { fill: var(--s1); }
+.chart .s2 { fill: var(--s2); }
+
+.chart .line {
+  fill: none;
+  stroke: var(--s1);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.chart .dot {
+  fill: var(--s1);
+  stroke: var(--surface);
+  stroke-width: 2;
+}
+
+.chart .hit { fill: transparent; cursor: crosshair; }
+.chart .hit:hover { fill: var(--ink); fill-opacity: 0.045; }
+
+.tip {
+  position: absolute;
+  pointer-events: none;
+  background: var(--ink);
+  color: var(--ground);
+  font-family: var(--f-mono);
+  font-size: 11.5px;
+  line-height: 1.6;
+  padding: 8px 11px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.1s;
+  z-index: 5;
+  font-variant-numeric: tabular-nums;
+}
+
+.tip b { font-weight: 600; display: block; margin-bottom: 3px; }
+.tip.on { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .tip { transition: none; }
+}
+
 @media (max-width: 620px) {
   .finding { grid-template-columns: 1fr; gap: 6px; }
   .rank { padding-top: 0; }
@@ -693,6 +814,228 @@ tfoot td {
     </div>
   </section>
 
+
+  <section>
+    <h2>De trend: meer verzenden, minder verdienen</h2>
+    <p class="deck">Twaalf maanden maand voor maand. De momentopname hierboven verbergt de belangrijkste beweging in dit account — het volume groeit hard, de opbrengst per verzending zakt weg.</p>
+
+    <div class="figure">
+      <div class="fig-head">
+        <span class="fig-title">Flow-verzendingen per maand</span>
+        <span class="fig-sub">augustus is de drukste maand ooit, en bijna de helft ervan is één flow</span>
+      </div>
+      <div class="key">
+        <span><i class="swatch k1"></i> Welcome Flow</span>
+        <span><i class="swatch k2"></i> Overige flows</span>
+      </div>
+      <div class="chart-wrap">
+<svg viewBox="0 0 720 250" role="img" aria-label="Verzendingen per maand, gesplitst naar Welcome Flow en overige flows" class="chart">
+<line class="grid" x1="46" x2="712" y1="206.0" y2="206.0"/>
+<text class="ax" x="38" y="209.5" text-anchor="end">0</text>
+<line class="grid" x1="46" x2="712" y1="158.0" y2="158.0"/>
+<text class="ax" x="38" y="161.5" text-anchor="end">2k</text>
+<line class="grid" x1="46" x2="712" y1="110.0" y2="110.0"/>
+<text class="ax" x="38" y="113.5" text-anchor="end">5k</text>
+<line class="grid" x1="46" x2="712" y1="62.0" y2="62.0"/>
+<text class="ax" x="38" y="65.5" text-anchor="end">7k</text>
+<line class="grid" x1="46" x2="712" y1="14.0" y2="14.0"/>
+<text class="ax" x="38" y="17.5" text-anchor="end">10k</text>
+<rect class="s2" x="55.8" y="147.0" width="36" height="59.0"/>
+<rect class="hit" x="46.8" y="14" width="54" height="192" data-m="sep '25" data-a="Welcome 0" data-b="Overige flows 3,071" data-c="Totaal 3,071"/>
+<text class="ax" x="73.8" y="224" text-anchor="middle">sep</text>
+<rect class="s2" x="111.2" y="101.9" width="36" height="104.1"/>
+<rect class="hit" x="102.2" y="14" width="54" height="192" data-m="okt '25" data-a="Welcome 0" data-b="Overige flows 5,423" data-c="Totaal 5,423"/>
+<text class="ax" x="129.2" y="224" text-anchor="middle">okt</text>
+<rect class="s2" x="166.8" y="139.3" width="36" height="66.7"/>
+<rect class="hit" x="157.8" y="14" width="54" height="192" data-m="nov '25" data-a="Welcome 0" data-b="Overige flows 3,474" data-c="Totaal 3,474"/>
+<text class="ax" x="184.8" y="224" text-anchor="middle">nov</text>
+<rect class="s2" x="222.2" y="148.4" width="36" height="57.6"/>
+<path class="s1" d="M222.2,146.4 L222.2,131.8 Q222.2,127.8 226.2,127.8 L254.2,127.8 Q258.2,127.8 258.2,131.8 L258.2,146.4 Z"/>
+<rect class="hit" x="213.2" y="14" width="54" height="192" data-m="dec '25" data-a="Welcome 1,075" data-b="Overige flows 3,000" data-c="Totaal 4,075"/>
+<text class="ax" x="240.2" y="224" text-anchor="middle">dec</text>
+<rect class="s2" x="277.8" y="99.9" width="36" height="106.1"/>
+<path class="s1" d="M277.8,97.9 L277.8,65.4 Q277.8,61.4 281.8,61.4 L309.8,61.4 Q313.8,61.4 313.8,65.4 L313.8,97.9 Z"/>
+<rect class="hit" x="268.8" y="14" width="54" height="192" data-m="jan '26" data-a="Welcome 2,006" data-b="Overige flows 5,526" data-c="Totaal 7,532"/>
+<text class="ax" x="295.8" y="224" text-anchor="middle">jan</text>
+<rect class="s2" x="333.2" y="133.9" width="36" height="72.1"/>
+<path class="s1" d="M333.2,131.9 L333.2,118.6 Q333.2,114.6 337.2,114.6 L365.2,114.6 Q369.2,114.6 369.2,118.6 L369.2,131.9 Z"/>
+<rect class="hit" x="324.2" y="14" width="54" height="192" data-m="feb '26" data-a="Welcome 1,003" data-b="Overige flows 3,755" data-c="Totaal 4,758"/>
+<text class="ax" x="351.2" y="224" text-anchor="middle">feb</text>
+<rect class="s2" x="388.8" y="119.6" width="36" height="86.4"/>
+<path class="s1" d="M388.8,117.6 L388.8,101.2 Q388.8,97.2 392.8,97.2 L420.8,97.2 Q424.8,97.2 424.8,101.2 L424.8,117.6 Z"/>
+<rect class="hit" x="379.8" y="14" width="54" height="192" data-m="mrt '26" data-a="Welcome 1,170" data-b="Overige flows 4,498" data-c="Totaal 5,668"/>
+<text class="ax" x="406.8" y="224" text-anchor="middle">mrt</text>
+<rect class="s2" x="444.2" y="92.3" width="36" height="113.7"/>
+<path class="s1" d="M444.2,90.3 L444.2,85.2 Q444.2,81.2 448.2,81.2 L476.2,81.2 Q480.2,81.2 480.2,85.2 L480.2,90.3 Z"/>
+<rect class="hit" x="435.2" y="14" width="54" height="192" data-m="apr '26" data-a="Welcome 579" data-b="Overige flows 5,921" data-c="Totaal 6,500"/>
+<text class="ax" x="462.2" y="224" text-anchor="middle">apr</text>
+<rect class="s2" x="499.8" y="92.5" width="36" height="113.5"/>
+<path class="s1" d="M499.8,90.5 L499.8,89.9 Q499.8,89.3 500.4,89.3 L535.1,89.3 Q535.8,89.3 535.8,89.9 L535.8,90.5 Z"/>
+<rect class="hit" x="490.8" y="14" width="54" height="192" data-m="mei '26" data-a="Welcome 168" data-b="Overige flows 5,910" data-c="Totaal 6,078"/>
+<text class="ax" x="517.8" y="224" text-anchor="middle">mei</text>
+<rect class="s2" x="555.2" y="106.9" width="36" height="99.1"/>
+<path class="s1" d="M555.2,104.9 L555.2,104.2 Q555.2,103.4 556.0,103.4 L590.5,103.4 Q591.2,103.4 591.2,104.2 L591.2,104.9 Z"/>
+<rect class="hit" x="546.2" y="14" width="54" height="192" data-m="jun '26" data-a="Welcome 182" data-b="Overige flows 5,160" data-c="Totaal 5,342"/>
+<text class="ax" x="573.2" y="224" text-anchor="middle">jun</text>
+<rect class="s2" x="610.8" y="139.0" width="36" height="67.0"/>
+<path class="s1" d="M610.8,137.0 L610.8,86.1 Q610.8,82.1 614.8,82.1 L642.8,82.1 Q646.8,82.1 646.8,86.1 L646.8,137.0 Z"/>
+<rect class="hit" x="601.8" y="14" width="54" height="192" data-m="jul '26" data-a="Welcome 2,963" data-b="Overige flows 3,489" data-c="Totaal 6,452"/>
+<text class="ax" x="628.8" y="224" text-anchor="middle">jul</text>
+<rect class="s2" x="666.2" y="103.2" width="36" height="102.8"/>
+<path class="s1" d="M666.2,101.2 L666.2,24.5 Q666.2,20.5 670.2,20.5 L698.2,20.5 Q702.2,20.5 702.2,24.5 L702.2,101.2 Z"/>
+<rect class="hit" x="657.2" y="14" width="54" height="192" data-m="aug '26" data-a="Welcome 4,306" data-b="Overige flows 5,355" data-c="Totaal 9,661"/>
+<text class="ax" x="684.2" y="224" text-anchor="middle">aug</text>
+<line class="base" x1="46" x2="712" y1="206" y2="206"/>
+<text class="ax dim" x="73.8" y="238" text-anchor="middle">2025</text>
+<text class="ax dim" x="295.8" y="238" text-anchor="middle">2026</text>
+</svg>
+      </div>
+    </div>
+
+    <div class="figure">
+      <div class="fig-head">
+        <span class="fig-title">Toegerekende omzet per verzending</span>
+        <span class="fig-sub">van €0,93 in november naar €0,47 in augustus</span>
+      </div>
+      <div class="chart-wrap">
+<svg viewBox="0 0 720 210" role="img" aria-label="Toegerekende omzet per verzending per maand" class="chart">
+<line class="grid" x1="46" x2="712" y1="168.0" y2="168.0"/>
+<text class="ax" x="38" y="171.5" text-anchor="end">€0,00</text>
+<line class="grid" x1="46" x2="712" y1="129.5" y2="129.5"/>
+<text class="ax" x="38" y="133.0" text-anchor="end">€0,25</text>
+<line class="grid" x1="46" x2="712" y1="91.0" y2="91.0"/>
+<text class="ax" x="38" y="94.5" text-anchor="end">€0,50</text>
+<line class="grid" x1="46" x2="712" y1="52.5" y2="52.5"/>
+<text class="ax" x="38" y="56.0" text-anchor="end">€0,75</text>
+<line class="grid" x1="46" x2="712" y1="14.0" y2="14.0"/>
+<text class="ax" x="38" y="17.5" text-anchor="end">€1,00</text>
+<polyline class="line" points="73.8,139.7 129.2,87.2 184.8,24.6 240.2,65.9 295.8,85.4 351.2,105.7 406.8,99.0 462.2,128.8 517.8,134.9 573.2,137.3 628.8,98.0 684.2,96.3"/>
+<circle class="dot" cx="73.8" cy="139.7" r="4.5"/>
+<rect class="hit" x="46.8" y="14" width="54" height="154" data-m="sep '25" data-a="EUR 0.18 per verzending" data-b="3,071 verzendingen" data-c="EUR 564 omzet"/>
+<text class="ax" x="73.8" y="186" text-anchor="middle">sep</text>
+<circle class="dot" cx="129.2" cy="87.2" r="4.5"/>
+<rect class="hit" x="102.2" y="14" width="54" height="154" data-m="okt '25" data-a="EUR 0.52 per verzending" data-b="5,423 verzendingen" data-c="EUR 2,846 omzet"/>
+<text class="ax" x="129.2" y="186" text-anchor="middle">okt</text>
+<circle class="dot" cx="184.8" cy="24.6" r="4.5"/>
+<rect class="hit" x="157.8" y="14" width="54" height="154" data-m="nov '25" data-a="EUR 0.93 per verzending" data-b="3,474 verzendingen" data-c="EUR 3,234 omzet"/>
+<text class="ax" x="184.8" y="186" text-anchor="middle">nov</text>
+<circle class="dot" cx="240.2" cy="65.9" r="4.5"/>
+<rect class="hit" x="213.2" y="14" width="54" height="154" data-m="dec '25" data-a="EUR 0.66 per verzending" data-b="4,075 verzendingen" data-c="EUR 2,702 omzet"/>
+<text class="ax" x="240.2" y="186" text-anchor="middle">dec</text>
+<circle class="dot" cx="295.8" cy="85.4" r="4.5"/>
+<rect class="hit" x="268.8" y="14" width="54" height="154" data-m="jan '26" data-a="EUR 0.54 per verzending" data-b="7,532 verzendingen" data-c="EUR 4,040 omzet"/>
+<text class="ax" x="295.8" y="186" text-anchor="middle">jan</text>
+<circle class="dot" cx="351.2" cy="105.7" r="4.5"/>
+<rect class="hit" x="324.2" y="14" width="54" height="154" data-m="feb '26" data-a="EUR 0.40 per verzending" data-b="4,758 verzendingen" data-c="EUR 1,925 omzet"/>
+<text class="ax" x="351.2" y="186" text-anchor="middle">feb</text>
+<circle class="dot" cx="406.8" cy="99.0" r="4.5"/>
+<rect class="hit" x="379.8" y="14" width="54" height="154" data-m="mrt '26" data-a="EUR 0.45 per verzending" data-b="5,668 verzendingen" data-c="EUR 2,541 omzet"/>
+<text class="ax" x="406.8" y="186" text-anchor="middle">mrt</text>
+<circle class="dot" cx="462.2" cy="128.8" r="4.5"/>
+<rect class="hit" x="435.2" y="14" width="54" height="154" data-m="apr '26" data-a="EUR 0.25 per verzending" data-b="6,500 verzendingen" data-c="EUR 1,653 omzet"/>
+<text class="ax" x="462.2" y="186" text-anchor="middle">apr</text>
+<circle class="dot" cx="517.8" cy="134.9" r="4.5"/>
+<rect class="hit" x="490.8" y="14" width="54" height="154" data-m="mei '26" data-a="EUR 0.21 per verzending" data-b="6,078 verzendingen" data-c="EUR 1,305 omzet"/>
+<text class="ax" x="517.8" y="186" text-anchor="middle">mei</text>
+<circle class="dot" cx="573.2" cy="137.3" r="4.5"/>
+<rect class="hit" x="546.2" y="14" width="54" height="154" data-m="jun '26" data-a="EUR 0.20 per verzending" data-b="5,342 verzendingen" data-c="EUR 1,064 omzet"/>
+<text class="ax" x="573.2" y="186" text-anchor="middle">jun</text>
+<circle class="dot" cx="628.8" cy="98.0" r="4.5"/>
+<rect class="hit" x="601.8" y="14" width="54" height="154" data-m="jul '26" data-a="EUR 0.45 per verzending" data-b="6,452 verzendingen" data-c="EUR 2,932 omzet"/>
+<text class="ax" x="628.8" y="186" text-anchor="middle">jul</text>
+<circle class="dot" cx="684.2" cy="96.3" r="4.5"/>
+<rect class="hit" x="657.2" y="14" width="54" height="154" data-m="aug '26" data-a="EUR 0.47 per verzending" data-b="9,661 verzendingen" data-c="EUR 4,499 omzet"/>
+<text class="ax" x="684.2" y="186" text-anchor="middle">aug</text>
+<line class="base" x1="46" x2="712" y1="168" y2="168"/>
+</svg>
+      </div>
+    </div>
+
+    <div class="col" style="margin-top: 34px;">
+      <p>Zet je de twee grafieken naast elkaar, dan staat er iets ongemakkelijks. In november 2025 leverde elke verzonden flow-mail <span class="m">€0,93</span> op. In augustus 2026 is dat <span class="m">€0,47</span> — bij bijna drie keer zoveel verzendingen. De omzet in absolute zin is nauwelijks gegroeid; de hoeveelheid mail wel.</p>
+    </div>
+
+    <div class="tw" style="margin-top: 26px;">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Halfjaar</th>
+            <th scope="col">Verzonden</th>
+            <th scope="col">Open</th>
+            <th scope="col">Klik</th>
+            <th scope="col">Orders</th>
+            <th scope="col">CVR</th>
+            <th scope="col">Omzet</th>
+            <th scope="col">p/o</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>sep 2025 – feb 2026</td><td>28.333</td><td>22,0%</td><td>4,10%</td><td>281</td><td>0,99%</td><td>€15.311</td><td>€0,54</td></tr>
+          <tr class="is-weak"><td>mrt 2026 – aug 2026</td><td>39.701</td><td>22,2%</td><td>2,92%</td><td>259</td><td>0,65%</td><td>€13.994</td><td>€0,35</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><td>Verschil</td><td>+40%</td><td>gelijk</td><td>−29%</td><td>−8%</td><td>−34%</td><td>−9%</td><td>−35%</td></tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <div class="col" style="margin-top: 30px;">
+      <p>Het openpercentage blijft gelijk — de mail komt nog steeds aan en wordt nog steeds bekeken. Wat wegzakt is alles daarna: de klikratio met bijna een derde, de conversie met ruim een derde. Dat is geen bezorgprobleem maar een relevantieprobleem.</p>
+    </div>
+
+    <h3 style="margin-top: 40px;">Vier bewegingen die eronder liggen</h3>
+
+    <ol class="findings" style="margin-top: 18px;">
+
+      <li class="finding">
+        <div class="rank">01</div>
+        <div>
+          <h3>De Welcome Flow is in juli opengezet en halveerde in waarde</h3>
+          <p>Van december tot juni gingen er 6.183 welkomstmails uit, goed voor 206 orders en <span class="m">€11.063</span>. In juli en augustus samen gingen er 7.269 uit — meer dan in de zeven maanden ervoor — met 102 orders en <span class="m">€5.602</span>.</p>
+          <p>De gemiddelde orderwaarde bleef daarbij vrijwel gelijk (€54 tegen €55). Het is dus niet zo dat mensen kleinere bestellingen plaatsen; er converteert simpelweg een veel kleiner deel. Er komt sinds juli een nieuwe, veel koudere instroom binnen, en de flow behandelt die precies hetzelfde als de warme instroom van daarvoor.</p>
+          <div class="evidence is-warn">dec–jun · 6.183 verzonden · CVR 3,33% · €1,79 per ontvanger<br>jul–aug · 7.269 verzonden · CVR 1,40% · €0,77 per ontvanger</div>
+        </div>
+      </li>
+
+      <li class="finding">
+        <div class="rank">02</div>
+        <div>
+          <h3>De Post Purchase Flow heeft in negen maanden nooit gewerkt</h3>
+          <p>20.028 verzendingen sinds december, 23 orders, <span class="m">€984</span>. Geen enkele maand komt boven €0,14 per ontvanger uit, en de meeste blijven onder de €0,07. Dit is geen dip die je uitzit — de flow heeft nooit een maand gehad waarin hij geld opleverde.</p>
+          <p>Het is wel de op één na grootste flow van het account. Een derde van al het flow-volume gaat naar een reeks die structureel niets terugbrengt.</p>
+          <div class="evidence is-crit">dec 0,03 · jan 0,02 · feb 0,06 · mrt 0,10 · apr 0,03 · mei 0,03 · jun 0,07 · jul 0,00 · aug 0,14 &nbsp;(EUR per ontvanger)</div>
+        </div>
+      </li>
+
+      <li class="finding">
+        <div class="rank">03</div>
+        <div>
+          <h3>Winback is sinds maart opgeschaald zonder dat er iets uitkwam</h3>
+          <p>De flow begon in maart met 670 verzendingen en zit in augustus op 1.611. In totaal 6.621 mails, 4 orders, <span class="m">€209</span>. De klikratio kwam in geen enkele maand boven <span class="m">1,06%</span> — terwijl de rest van het account rond de 3% zit.</p>
+          <p>Meer volume op een boodschap die niet aanslaat maakt het probleem groter, niet kleiner. Dit is bovendien de flow die het meest richting slapende adressen stuurt, dus ook de flow die je bezorgbaarheid het hardst raakt.</p>
+          <div class="evidence is-crit">mrt 670 · apr 1.882 · mei 1.081 · jun 719 · jul 658 · aug 1.611 verzendingen → 4 orders totaal</div>
+        </div>
+      </li>
+
+      <li class="finding">
+        <div class="rank">04</div>
+        <div>
+          <h3>Wat wél beter wordt, krijgt juist minder verkeer</h3>
+          <p>Checkout Abandon is het lichtpunt: de klikratio klom van 2,16% in december naar 5,49% in juli en 8,11% in augustus, en de opbrengst per ontvanger van €0,15 naar €0,88. Maar het volume liep in diezelfde periode terug van 671 naar 222 per maand — een daling van tweederde.</p>
+          <p>Browse Abandon laat hetzelfde zien: €0,35 per ontvanger in december, €0,93 in juli. Alleen springt het volume alle kanten op — 445 in juli, 17 in augustus. Dat wijst op een trigger die niet stabiel vuurt, niet op minder websitebezoek.</p>
+          <p>Ondertussen zijn in juli en augustus drie nieuwe flows aangezet (Cross-Sell, Site Abandon, Cart Abandon [Klaviyo]) die samen 1.879 mails stuurden voor <span class="m">€575</span>, waarvan de Cross-Sell Flow er 886 stuurde voor niets.</p>
+          <div class="evidence">Checkout Abandon klik% · dec 2,16 → mrt 2,80 → jul 5,49 → aug 8,11<br>Checkout Abandon volume · dec 324 → jan 671 → mei 439 → aug 222</div>
+        </div>
+      </li>
+
+    </ol>
+
+    <div class="col" style="margin-top: 34px;">
+      <h3>Eén ding dat de moeite waard is om nu te weten</h3>
+      <p>De BFCM-flows van vorig jaar staan allemaal in draft. Ze draaiden zes weken, stuurden 2.000 mails en brachten <span class="m">€2.334</span> op — <span class="m">€1,17</span> per ontvanger. Dat is beter dan elke flow die nu live staat, de Welcome Flow inbegrepen. Met Black Friday over een kleine drie maanden is dat het meest concrete startpunt dat er ligt.</p>
+    </div>
+  </section>
+
   <section>
     <h2>Drie dingen die eerst opgelost moeten</h2>
     <p class="deck">Dit zijn geen verbeteringen maar randvoorwaarden. Zolang deze staan, is elke nieuwe flow die je bouwt bij voorbaat beperkt.</p>
@@ -803,5 +1146,33 @@ tfoot td {
   <p class="footnote">
     Alle cijfers uit de Klaviyo Reporting API, opgehaald op 29 augustus 2026 tegen conversiemetric <span class="m">Placed Order (Shopify, UPDRVs)</span>. Flow- en campagnecijfers volgen verzenddatum; omzetcijfers per maand volgen eventdatum en zijn daardoor niet één-op-één met de flowrapporten te vergelijken. De maand augustus 2026 loopt tot en met de 28e. Productprijzen en assortiment uit de Shopify Admin API. Het aantal verkochte garantie-uitbreidingen is afgeleid uit de voorraadteller en is een indicatie, geen exacte telling.
   </p>
+
+
+<script>
+(function () {
+  document.querySelectorAll('.chart-wrap').forEach(function (wrap) {
+    var tip = document.createElement('div');
+    tip.className = 'tip';
+    wrap.appendChild(tip);
+    wrap.querySelectorAll('.hit').forEach(function (hit) {
+      function show(ev) {
+        tip.innerHTML = '<b>' + hit.dataset.m + '</b>' + hit.dataset.a +
+          '<br>' + hit.dataset.b + '<br>' + hit.dataset.c;
+        tip.classList.add('on');
+        var r = wrap.getBoundingClientRect();
+        var px = (ev.clientX !== undefined ? ev.clientX : r.left + r.width / 2) - r.left;
+        var tw = tip.offsetWidth;
+        tip.style.left = Math.max(4, Math.min(px - tw / 2, wrap.clientWidth - tw - 4)) + 'px';
+        tip.style.top = '8px';
+      }
+      hit.addEventListener('mousemove', show);
+      hit.addEventListener('focus', show);
+      hit.addEventListener('mouseleave', function () { tip.classList.remove('on'); });
+      hit.addEventListener('blur', function () { tip.classList.remove('on'); });
+      hit.setAttribute('tabindex', '0');
+    });
+  });
+})();
+</script>
 
 </div>
