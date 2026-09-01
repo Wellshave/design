@@ -679,20 +679,39 @@
       // niet op de sectiewikkel waar wortel naar wijst.
       var hoofd = wortel.querySelector('main-product');
       if (upg && hoofd) {
+        function sluit() {
+          upg.classList.remove('open');
+          document.documentElement.style.overflow = '';
+        }
+
+        function legNeer() {
+          if (typeof hoofd.onFormSubmit !== 'function') { return; }
+          hoofd.onFormSubmit(false, true);
+        }
+
         upg.addEventListener('click', function (e) {
           var el = e.target.closest('[data-action]');
           if (!el) { return; }
+          // sluit() haalt open eraf, dus een tweede sluitactie binnen dezelfde
+          // opening komt hier niet langs en legt het product niet nog een keer neer.
+          if (!upg.classList.contains('open')) { return; }
 
           // base.js luistert op <main-product>; laat die klik daar niet komen.
           e.preventDefault();
           e.stopPropagation();
 
           var actie = el.getAttribute('data-action');
-          upg.classList.remove('open');
-          document.documentElement.style.overflow = '';
+          sluit();
 
-          if (actie === 'skip-upgrade' && typeof hoofd.onFormSubmit === 'function') {
-            hoofd.onFormSubmit(false, true);
+          {%- comment -%}
+            Wegklikken is geen annuleren. De klant heeft op In winkelwagen
+            gedrukt en kreeg deze pop-up in plaats van zijn product; sluit hij
+            hem, dan hoort het product er alsnog in te gaan. Dat geldt voor het
+            kruisje en het waas net zo goed als voor Nee dank je, anders raakt
+            iemand zijn product kwijt door de plek waar hij toevallig klikt.
+          {%- endcomment -%}
+          if (actie === 'skip-upgrade' || actie === 'close-popup') {
+            legNeer();
             return;
           }
 
@@ -708,11 +727,12 @@
           }
         });
 
-        // Met de toets escape ook dicht, net als de vergelijkingspop-up.
+        // Met de toets escape ook dicht, net als de vergelijkingspop-up, en
+        // met dezelfde uitkomst: het product gaat mee.
         document.addEventListener('keydown', function (e) {
           if (e.key !== 'Escape' || !upg.classList.contains('open')) { return; }
-          upg.classList.remove('open');
-          document.documentElement.style.overflow = '';
+          sluit();
+          legNeer();
         });
       }
 
@@ -1354,7 +1374,8 @@
 
       add-product   voegt data-variant toe en opent de winkelwagenlade
       skip-upgrade  voegt alsnog dit product toe, zoals zonder pop-up
-      close-popup   sluit alleen
+      close-popup   idem: het kruisje en het waas zijn ook wegklikken, en de
+                    klant had al op In winkelwagen gedrukt
 
     Let op: base.js leest data-action van het aangeklikte element zelf, niet van
     een ouder. Alles binnen zo'n knop staat daarom op pointer-events:none.
@@ -1385,7 +1406,10 @@
       <div class="ws-upg" id="ProductUpgrade-{{ section.id }}" data-popup>
         <div class="ws-upg-waas" data-action="close-popup"></div>
         <div class="ws-upg-vak" role="dialog" aria-modal="true" aria-label="{{ s.upg_kop | escape }}">
-          <button type="button" class="ws-upg-x" data-action="close-popup" aria-label="Sluiten">
+          {%- comment -%} Het kruisje legt het product alsnog neer, dus de voorleesnaam
+               zegt dat ook, in plaats van alleen Sluiten. {%- endcomment -%}
+          <button type="button" class="ws-upg-x" data-action="close-popup"
+                  aria-label="{{ s.upg_nee | replace: '[product]', product.title | escape }}">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
           </button>
 
