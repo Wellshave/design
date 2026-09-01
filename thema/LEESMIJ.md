@@ -1550,3 +1550,71 @@ merkteken staan (max 51), dus de hover houdt zijn merktextuur in de hoeken.
 
 Wie het monogram helemaal weg wil: de instelling "Monogram achter de packshot" in
 de sectie leegmaken is genoeg.
+
+---
+
+## De Duitse vertaling
+
+Er staan vier talen gepubliceerd — Nederlands (hoofdtaal), Duits, Engels en Frans —
+maar van de 2854 vertaalbare sleutels in de winkel waren er 260 Duits. Klikte je
+Duitsland aan, dan kreeg je een Nederlandse collectiepagina met een Duits
+menulint erboven.
+
+**Alle elf collectiesjablonen staan nu in het Duits** op het live thema
+(`wellshave/claude-design v3`, 204575310156), plus de megamenu erboven. Nagelopen
+op de winkel zelf: `/de/collections/zone-hoofd` en de rest komen in het Duits
+binnen.
+
+### Twee plekken waar ik niet letterlijk vertaal
+
+**Levertijd.** "Morgen in huis" is in het Duits *"Schnell verschickt"* geworden en
+"Vandaag besteld, morgen in huis" *"Mo–Fr vor 23:59 bestellt, geht am selben Tag
+raus"*. Levering de volgende dag geldt volgens het leveringsprofiel alleen voor
+Nederland en België. Een belofte die voor een Duitse klant niet klopt zetten we er
+niet op.
+
+**"Ook naar België."** Dat zegt een Duitse bezoeker niets. Het tarief is voor alle
+veertien landen in de zone gelijk, dus daar staat nu *"In allen Lieferländern
+gleich."*
+
+### De beoordelingen
+
+De citaten zijn door Nederlandse kopers geschreven. Ze staan nu in het Duits —
+anders staat er Nederlands op een Duitse pagina — en de bronregel eronder zégt dat
+het vertaalde beoordelingen zijn: *"Die Bewertungen sind auf Niederländisch
+verfasst und hier übersetzt."* De namen van de kopers zijn onveranderd.
+
+### Wat nog Nederlands is, en waarom dat niet met een vertaling op te lossen was
+
+Een deel van de interface stond alleen als `default` in het schema van de sectie:
+"Jouw match", "Bekijk jouw match", "Waarom deze match", "Vergelijk", "out of 5",
+"Tijdelijk uitverkocht" in de keuzehulp. **Van een default maakt Shopify geen
+vertaalbare sleutel** — er valt dus niets te vertalen zolang de waarde niet in het
+sjabloon staat. Geteld op de Duitse pagina's: 133× "out of 5", 58× "Jouw match",
+58× "Waarom deze match", 23× "Vergelijk", en zo verder.
+
+De oplossing is die zestien teksten expliciet in de elf collectiesjablonen te
+zetten. Aan het Nederlands verandert er niets — de waarde is dezelfde als de
+default — maar er ontstaat wel een sleutel die je kunt vertalen. Dat staat in deze
+commit en het staat byte-gelijk in `wellshave/claude-design v4`.
+
+**Het kon niet op het live thema.** Sinds v3 gepubliceerd is, weigert de API
+`themeFilesUpsert` op het hoofdthema. De verandering wordt dus pas zichtbaar
+wanneer v4 live gaat.
+
+### Let op bij het publiceren van v4
+
+Vertalingen hangen aan het thema-ID. De Duitse teksten die nu op v3 staan gaan
+**niet** vanzelf mee naar v4: publiceer je v4 zonder ze over te zetten, dan staan de
+collectiepagina's weer in het Nederlands. De sleutels zijn identiek — dezelfde
+tekst geeft dezelfde sleutel — dus overzetten is een kwestie van dezelfde set
+opnieuw registreren tegen `?theme_id=204845515084`.
+
+### Hoe het gemaakt is
+
+Het woordenboek staat in `/tmp/hdr/vertaal-de.json` (692 teksten), opgebouwd in
+`tool/de-batch1.py` tot en met `de-batch9.py`. Registreren gaat met
+`translationsRegister`; elke vertaling heeft een `translatableContentDigest` nodig,
+en dat blijkt gewoon de **SHA-256 van de brontekst** te zijn — gecontroleerd op
+alle 192 sleutels van zone-hoofd, nul afwijkingen. Je hoeft de digests dus niet op
+te halen, je kunt ze uitrekenen.
