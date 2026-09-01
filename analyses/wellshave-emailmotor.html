@@ -1060,11 +1060,40 @@ tfoot td {
   </section>
 
   <section>
-    <h2>Het bouwplan</h2>
-    <p class="deck">Drie fases, in deze volgorde omdat elke fase op de vorige leunt. De cross-sell-matrix in fase 2 kan pas werken als de catalogus uit fase 1 staat.</p>
+    <h2>Wat er nu moet gebeuren</h2>
+    <p class="deck">De volgorde is veranderd door de trendanalyse. Nieuwe flows bouwen op een instroom die half zo goed converteert als in het voorjaar is werk weggooien — eerst de lekken dicht, dan de instroomkwaliteit, dan pas bouwen.</p>
 
     <div class="phase">
-      <div class="phase-when"><b>FASE 1</b>Opruimen en repareren. Levert direct omzet op zonder nieuw bouwwerk.</div>
+      <div class="phase-when"><b>NU</b>Deze week. Geen bouwwerk, alleen instellingen en één template.</div>
+      <div>
+        <h3>De kortingslekken dichten</h3>
+        <ul class="steps">
+          <li><b>Zet een einddatum en een gebruikslimiet op <code>SHAVE10SFH</code>.</b> Alia belooft dat de code na 48 uur verloopt. In Shopify staat <code>endsAt: null</code>, <code>usageLimit: null</code> en <code>appliesOncePerCustomer: false</code>. Hij is 512 keer ingewisseld en werkt nog steeds, voor iedereen die hem doorkrijgt.</li>
+          <li><b>Hetzelfde voor <code>Welcome5</code></b> — 803 inwisselingen, even onbeperkt, en al even lang in omloop.</li>
+          <li><b>Kies: unieke codes of eerlijke tekst.</b> <span class="m">Coupon Assigned</span> staat het hele jaar op nul, dus er wordt geen enkele persoonlijke code uitgedeeld. Zolang dat zo is, is <em>"De laatste 24 uren gaan in!"</em> in welkomstmail 4 een belofte die de code zelf tegenspreekt. Zet unieke codes aan, of haal de tijdsdruk uit de tekst.</li>
+          <li><b>Repareer template <code>W4rcpd</code>.</b> Een Engelse afmeldvoet onder een Nederlandse mail, typefouten in de alt-teksten (<em>"verlalt"</em>, <em>"Bekjik"</em>), <code>wellshave.com</code> en <code>wellshave.nl</code> door elkaar, en een dode link naar <code>/collections/black-friday-deals</code>. De mail bestaat bovendien volledig uit afbeeldingen: wie beeld uit heeft staan ziet niets.</li>
+        </ul>
+        <div class="evidence is-crit">SHAVE10SFH · endsAt null · usageLimit null · appliesOncePerCustomer false · 512× ingewisseld<br>Welcome5&nbsp;&nbsp;&nbsp;&nbsp; · endsAt null · usageLimit null · 803× ingewisseld · Coupon Assigned 0 (12 mnd)</div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-when"><b>DEZE MAAND</b>De instroomkwaliteit. Hier zit de halvering.</div>
+      <div>
+        <h3>Alia-inschrijvers anders behandelen dan geïnteresseerden</h3>
+        <ul class="steps">
+          <li><b>Splits de Welcome Flow in twee takken.</b> Wie via Alia binnenkomt komt voor een beloning — die tak moet kort en transactioneel zijn: code, voorwaarden, één reden om terug te komen. Wie zich uit interesse inschrijft krijgt de bestaande reis. Nu krijgen ze allebei dezelfde zeven mails, en de cijfers laten zien dat dat voor de eerste groep niet werkt.</li>
+          <li><b>Besluit over de Klaviyo-formulieren.</b> Hoofdformulier <code>Yrs3gQ</code> liep van 293 inschrijvingen in maart naar nul in juni en staat er sindsdien dood bij. Repareer het of zet het uit — een formulier dat op nul staat maakt elke bronanalyse troebel.</li>
+          <li><b>Zet een sunset-regel op non-engagement.</b> De afmeldingen in mail 1 zijn bijna verdubbeld naar 3,21%. Dat is geen welkomstprobleem meer maar een leveringsprobleem: het raakt straks ook de campagnes en de flows die het wél goed doen.</li>
+          <li><b>Meet de twee takken apart</b> voordat je iets anders verandert. Zonder scheiding is elke verbetering die je hierna doorvoert niet toe te rekenen.</li>
+        </ul>
+        <div class="evidence is-crit">welkomstmail 1 (WUEjt7) · jan–mrt → jul–aug<br>conversie 9,89% → 4,42% · omzet per ontvanger €5,21 → €2,38 · klik 12,35% → 8,31%<br>afmelding 1,72% → 3,21% · orderwaarde €52,66 → €54,01 · bounce 2,08% → 1,64%</div>
+        <p style="font-size: 15.5px; color: var(--ink-3); margin: 14px 0 0; max-width: 640px;">De dalende bounce is het bewijs dat dit geen bots of typefouten zijn. Het zijn echte adressen van echte mensen die alleen de beloning kwamen halen.</p>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-when"><b>HIERNA</b>Opruimen. Levert omzet op zonder nieuw bouwwerk.</div>
       <div>
         <h3>Stoppen met tegen jezelf werken</h3>
         <ul class="steps">
@@ -1072,35 +1101,33 @@ tfoot td {
           <li><b>Maak de doodlopende split af</b> aan het eind van Post-Purchase: een herinnering op dag 9 voor wie de code niet gebruikte, een ander aanbod voor wie hem wel gebruikte.</li>
           <li><b>Kies één cart-abandon-flow.</b> De Klaviyo-metric-versie presteert het best (€1,17 per ontvanger) — archiveer de Shopify-variant en leid al het verkeer daarheen.</li>
           <li><b>Voeg Site Abandon en Browse Abandon samen.</b> Browse doet vier keer zoveel per ontvanger; gebruik die opzet en laat Site Abandon vervallen.</li>
-          <li><b>Archiveer de vijftien slapende flows</b> — de <code>VK |</code>-reeks, de BFCM-kopieën, alles met <code>[Keep In Draft]</code>, plus <code>test</code> en <code>Do's and Don'ts</code>. Ze vertroebelen elk rapport.</li>
+          <li><b>Archiveer de vijftien slapende flows</b> — de <code>VK |</code>-reeks, de BFCM-kopieën, alles met <code>[Keep In Draft]</code>, plus <code>test</code> en <code>Do's and Don'ts</code>.</li>
           <li><b>Herstart de campagnekalender.</b> Twee per week, gericht op wie in de laatste 30/60/90 dagen actief was, in plaats van op acht overlappende segmenten tegelijk.</li>
         </ul>
       </div>
     </div>
 
     <div class="phase">
-      <div class="phase-when"><b>FASE 2</b>Het nieuwe werk. Hier zit de grootste onbenutte omzet.</div>
+      <div class="phase-when"><b>DAARNA</b>Het nieuwe werk, zodra de instroom weer klopt.</div>
       <div>
         <h3>Vier flows die er nog niet zijn</h3>
         <ul class="steps">
           <li><b>Owner Journey</b> — één reis na aankoop, vertakt op wat er gekocht is. Dag 2 gebruikstips, dag 7 de eerste cross-sell op categorie, dag 14 de tweede, dag 30 review plus doorverwijzing. Vervangt Post-Purchase én Cross-Sell.</li>
           <li><b>Herbestelling</b> — deze bestaat helemaal niet, en jullie verkopen verbruiksartikelen. Blade Guard Blades (€9,95), Flex Guard Blade Trio (€24,95), Gentleman Shaver Scheerkop (€19,95), Neustrimmer-opzetstuk (€9,95). Trigger op de aankoop van het bijbehorende apparaat, mail op dag 60 en dag 120.</li>
           <li><b>Bundel-upgrade</b> — wie één los apparaat kocht krijgt na 21 dagen het pakket waar het in zit: van losse trimmer naar Barber Bro (€89,95–109,95), van Groom Guard naar Shave Package (€64,95–89,95), van Head Shaver naar Skull Deal (€59,95–69,95).</li>
-          <li><b>Garantie-moment benutten</b> — de bevestigingsmail bij een geactiveerde garantie haalt 74,4% open. Hang daar een tweede mail achter met het bijpassende accessoire. Dat de garantie-upsells van €2,95 en €5,95 al honderden keren zijn verkocht, laat zien dat dit publiek aankopen erbij accepteert.</li>
+          <li><b>Garantie-moment benutten</b> — de bevestigingsmail bij een geactiveerde garantie haalt 74,4% open. Hang daar een tweede mail achter met het bijpassende accessoire.</li>
         </ul>
+        <p style="font-size: 15.5px; color: var(--ink-3); margin: 16px 0 0; max-width: 640px;">En als die staan: Winback opnieuw opzetten met een oplopende aanbodladder, de VIP-lijst automatisch vullen op twee orders of €100 levenswaarde, SMS aanzetten voor cart abandon en herbestelling, en de staart van de Welcome Flow herschrijven — mail 1 doet €2,73 per ontvanger, de zes daarna samen €0,26.</p>
       </div>
     </div>
 
     <div class="phase">
-      <div class="phase-when"><b>FASE 3</b>Uitbouwen, zodra fase 1 en 2 hun cijfers hebben laten zien.</div>
+      <div class="phase-when"><b>BUITEN E-MAIL</b>Het grootste getal in dit rapport, en niet van ons.</div>
       <div>
-        <h3>Kanaal en segment verbreden</h3>
-        <ul class="steps">
-          <li><b>Winback opnieuw opzetten</b> met een oplopende aanbodladder in plaats van de huidige opzet die 0,62% klik haalt.</li>
-          <li><b>De VIP-lijst automatisch vullen</b> op twee of meer orders, of meer dan €100 aan levenswaarde. Nu bereikt die flow acht mensen.</li>
-          <li><b>SMS aanzetten</b> voor de korte momenten: cart abandon, verzenddeadline, herbestelling. De abonneelijst ligt er al.</li>
-          <li><b>De staart van de Welcome Flow herschrijven.</b> Mail één doet €2,73 per ontvanger, de zes daarna €0,26. Daar zit ruimte zonder dat er iets nieuws gebouwd hoeft te worden.</li>
-        </ul>
+        <h3>De winkel is in juli gehalveerd</h3>
+        <p style="font-size: 16px; line-height: 1.6; color: var(--ink-2); margin: 0 0 13px; max-width: 640px;">Het dalende flow-volume is grotendeels een gevolg, geen oorzaak. Er komen simpelweg half zoveel mensen tot aan de kassa als in juni. Elke flow die op een winkelgebeurtenis triggert — Checkout Abandon voorop — krijgt daardoor minder verkeer, hoe goed hij ook staat afgesteld.</p>
+        <p style="font-size: 16px; line-height: 1.6; color: var(--ink-2); margin: 0 0 13px; max-width: 640px;">E-mail is goed voor ongeveer 9% van de omzet. Zelfs een verdubbeling van de flow-omzet compenseert deze val niet. Dit hoort thuis bij verkeer, advertenties en de winkel zelf — maar het staat hier omdat je het moet weten voordat je de e-mailcijfers van de komende maanden beoordeelt.</p>
+        <div class="evidence is-crit">Checkout Started&nbsp; jun 902 · jul 394 · aug 467<br>bestellingen&nbsp;&nbsp;&nbsp;&nbsp; jun 737 · jul 299 · aug 329<br>winkelomzet&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; jun €40.253 · jul €15.391 · aug €18.801</div>
       </div>
     </div>
   </section>
@@ -1140,7 +1167,7 @@ tfoot td {
   <div class="close">
     <h2>Waar ik op wacht</h2>
     <p>De analyse staat. Wat ik nog niet gedaan heb is iets veranderen in het account — geen flows aangepast, niets gearchiveerd, niets uitgezet. Dat leek me niet iets om ongevraagd te doen in een live account waar orders doorheen lopen.</p>
-    <p>Zeg maar waar je wil beginnen. Fase 1 is grotendeels opruimwerk dat je zelf in een uur in de interface doet. Voor fase 2 kan ik de complete flow-specificaties uitschrijven — triggers, filters, wachttijden, onderwerpsregels, per mail — en de bijbehorende templates via de API in het account klaarzetten, zodat het bouwen zelf nog een kwestie van doorklikken is.</p>
+    <p>Zeg maar waar je wil beginnen. Het blok onder <b>NU</b> zijn vier instellingen die je zelf in een halfuur doet — drie in Shopify, één in een template. Voor de splitsing van de Welcome Flow en het nieuwe werk daarna kan ik de complete specificaties uitschrijven — triggers, filters, wachttijden, onderwerpsregels, per mail — en de bijbehorende templates via de API in het account klaarzetten, zodat het bouwen zelf nog een kwestie van doorklikken is. Flows zelf aanmaken kan de API niet; templates en campagnes wel.</p>
   </div>
 
   <p class="footnote">
