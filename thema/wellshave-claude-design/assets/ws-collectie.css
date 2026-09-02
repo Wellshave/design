@@ -139,7 +139,7 @@
 @container (max-width:700px){
   .wsc .zonekiezer{
     display:flex;flex-wrap:nowrap;overflow-x:auto;gap:16px;
-    padding:14px 18px 12px;margin:0 -18px;
+    padding:12px 18px 10px;margin:0 -18px;
     /* Zonder scroll-padding snapt de strip naar de rand van de eerste tegel en
        scrolt hij zijn eigen lucht weg: de tegel plakt dan tegen het scherm en
        de strip staat bij het laden al 18 px ingescrold. */
@@ -151,7 +151,7 @@
     border:0;background:none;padding:0;box-shadow:none;scroll-snap-align:start}
   .wsc .zkaart:hover{border:0;box-shadow:none}
   .wsc .zkaart-ico{
-    width:66px;height:66px;border:1px solid var(--ink-10);border-right-width:1px;
+    width:60px;height:60px;border:1px solid var(--ink-10);border-right-width:1px;
     border-radius:100px;padding:13px;background:var(--paper);
     transition:border-color .18s ease,background .18s ease}
   .wsc .zkaart-naam{
@@ -248,11 +248,15 @@
    erboven en de keuzehulp eronder; zie LEESMIJ voor de hele meting.
    `--grad-kop` blijft wat het was: hij is de achtergrond van een hero zonder foto en
    `--grad-dark` wordt ook door `.donker` in andere blokken gebruikt. */
-.wsc .kop{background:var(--grad-kop);color:#fff;padding:14px 0 20px;position:relative;overflow:hidden}
+.wsc .kop{background:var(--grad-kop);color:#fff;padding:14px 0 12px;position:relative;overflow:hidden}
 .wsc .kop .rail{max-width:var(--rail)}
+/* de sectie zet zelf padding-top in een style-attribuut; dit haalt het terug */
+.wsc #raster{padding-top:18px}
 
+/* Breder in plaats van hoger: op 1440 is dit 317 px, en daarmee staat de bovenrand
+   van de eerste kaart op 823 px — binnen een venster van 900. Gemeten op het thema. */
 .wsc .hero{position:relative;border-radius:var(--r-l);overflow:hidden;isolation:isolate;
-  min-height:clamp(300px,25cqw,392px);display:flex;align-items:flex-end;
+  min-height:clamp(280px,22cqw,340px);display:flex;align-items:flex-end;
   border:1px solid rgba(255,255,255,.09);box-shadow:0 22px 44px rgba(0,0,0,.42)}
 .wsc .hero-foto{position:absolute;inset:0;z-index:0}
 .wsc .hero-foto img{width:100%;height:100%;object-fit:cover;object-position:50% 40%;
@@ -263,7 +267,7 @@
 .wsc .hero-foto::after{content:"";position:absolute;inset:0;
   background:
     linear-gradient(180deg,rgba(14,13,12,.30) 0%,rgba(14,13,12,.10) 26%,rgba(14,13,12,.68) 74%,rgba(14,13,12,.90) 100%),
-    linear-gradient(90deg,rgba(14,13,12,.62) 0%,rgba(14,13,12,.22) 46%,rgba(14,13,12,0) 74%)}
+    linear-gradient(90deg,rgba(14,13,12,.80) 0%,rgba(14,13,12,.34) 38%,rgba(14,13,12,0) 66%)}
 .wsc .kop.kaal .hero{border-color:rgba(255,255,255,.12);box-shadow:none;
   background:linear-gradient(140deg,rgba(255,255,255,.05) 0%,rgba(255,255,255,0) 58%);
   min-height:clamp(210px,17cqw,272px)}
@@ -401,10 +405,15 @@
 .wsc .mp-voorraad::before{content:"";width:6px;height:6px;border-radius:50%;background:#2E9E5B}
 
 @container (max-width:700px){
-  .wsc .kop{padding:10px 0 14px}
-  /* 320 px hero, gemeten in de mock-up: hoog genoeg voor drie regels tekst over het
-     beeld, laag genoeg om de filterbalk binnen het eerste scherm te houden. */
-  .wsc .hero{min-height:320px;border-radius:var(--r-m)}
+  .wsc .kop{padding:8px 0 10px}
+  /* Nagemeten op het thema zelf, 390x844: met 320 px hero begon de eerste kaart op
+     841 px — precies op de onderrand van het scherm, dus je zag er niets van. Met
+     288 px, een krappere zonebalk en minder lucht boven het raster staat de bovenrand
+     van de kaart binnen beeld. Hoger dan dit kan de hero niet zonder dat weer op te
+     eten; meet het na als je aan een van die vier draait. */
+  .wsc .hero{min-height:288px;border-radius:var(--r-m)}
+  /* de zwarte band boven het raster mag zo dun mogelijk zijn */
+  .wsc #raster{padding-top:14px}
   .wsc .kop.kaal .hero{min-height:186px}
   .wsc .hero-foto img{object-position:50% 42%}
   .wsc .hero-tekst{padding:20px 18px 20px;gap:10px;max-width:none}
@@ -550,7 +559,7 @@
    De knoppen dragen hun eigen icoon en hun aantal; de actieve is zwart. Op de knop
    Bundels kan een lintje staan, dat boven de rand uitsteekt. */
 .wsc .filterbalk{background:var(--paper);border:1px solid rgba(188,129,62,.22);border-radius:18px;
-  padding:20px 18px;display:flex;flex-direction:column;gap:0;margin-bottom:34px;
+  padding:20px 18px;display:flex;flex-direction:column;gap:0;margin-bottom:26px;
   box-shadow:0 14px 34px rgba(17,17,17,.05)}
 .wsc .fb-rij{display:flex;align-items:center;gap:13px;flex-wrap:wrap}
 .wsc .fb-label{display:inline-flex;align-items:center;gap:9px;flex:none;font-size:11.5px;
@@ -600,7 +609,7 @@
 .wsc .groep{margin-bottom:44px}
 .wsc .groep.uit{display:none}
 .wsc .groep-kop{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;
-  margin-bottom:18px;flex-wrap:wrap}
+  margin-bottom:14px;flex-wrap:wrap}
 .wsc .groep-kop h2{font-size:23px;font-weight:600;letter-spacing:-.02em;line-height:1.15}
 .wsc .groep-kop p{font-size:13.5px;color:var(--ink-60);margin-top:5px}
 .wsc .groep-link{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;
@@ -902,7 +911,7 @@ body.vgl-open{overflow:hidden}
   .wsc .bwr-tekst{grid-column:1 / -1}
   .wsc .bwr-bron{grid-column:2;grid-row:1;justify-content:center}
   .wsc .bwr-bron a{margin-top:4px}
-  .wsc .filterbalk{padding:8px 12px 12px;margin-bottom:18px;border-radius:14px}
+  .wsc .filterbalk{padding:8px 12px 12px;margin-bottom:14px;border-radius:14px}
   .wsc .fb-rij{gap:11px}
   /* De knoppen staan op de telefoon naast elkaar en schuiven opzij, niet in twee
      rijen onder elkaar: dat scheelt de bezoeker verticale scroll voordat hij de
@@ -929,14 +938,17 @@ body.vgl-open{overflow:hidden}
   .wsc .fb-rij{flex-wrap:nowrap}
   .wsc .fb-label,.wsc .fb-uitslag{display:none}
   .wsc .fb-rechts{width:auto;margin-left:auto;gap:8px;flex-wrap:nowrap;flex:none;
-    align-self:flex-end;padding-bottom:2px}
+    align-self:flex-end;padding:0 0 2px 10px;border-left:1px solid var(--ink-10)}
   .wsc .fb-acties{flex:none;gap:8px}
   .wsc .fb-knop{flex:none;justify-content:center;padding:9px 11px;font-size:12px}
   /* Vergelijken kan pas vanaf twee aangevinkte kaarten. Tot die tijd is het een
      dode knop die breedte kost die de chips nodig hebben. */
   .wsc .fb-knop.vgl-open[disabled]{display:none}
-  .wsc .fb-sorteer{min-width:0}
-  .wsc .fb-sorteer-tekst{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:8ch}
+  /* "Meest relevant" past niet naast de chips en werd "Meest ...". Op de telefoon
+     blijven het icoon en de chevron over; de keuzelijst eronder houdt zijn eigen
+     aria-label, dus voorlezen verandert niet. */
+  .wsc .fb-sorteer{min-width:0;padding:9px 10px}
+  .wsc .fb-sorteer .fb-sorteer-tekst{display:none}
   .wsc .groep{margin-bottom:32px}
   .wsc .groep-kop{margin-bottom:12px;gap:12px}
   .wsc .groep-kop h2{font-size:19px}
