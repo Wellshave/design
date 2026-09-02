@@ -28,7 +28,6 @@
       {%- if section.settings.foto != blank -%}
         {{ section.settings.foto | image_url: width: 1400 | image_tag: class: 'ws-hero__foto', sizes: '50vw', widths: '600,900,1200,1400' }}
       {%- endif -%}
-      <div class="ws-hero__scrim"></div>
     </div>
 
     {%- if section.settings.merk != blank -%}

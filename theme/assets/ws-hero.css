@@ -13,7 +13,10 @@
 .ws-hero__media{position:absolute;inset:0 0 0 56%;overflow:hidden}
 .ws-hero__foto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   object-position:50% 34%}
-.ws-hero__scrim{position:absolute;inset:0;pointer-events:none;
+/* de verloopsluier ligt op een pseudo-element en niet op een lege <div>:
+   een leeg element wordt door themacss verderop verborgen, en dan is er
+   geen sluier meer om de letters leesbaar te houden. */
+.ws-hero__media::after{content:"";position:absolute;inset:0;pointer-events:none;
   background:linear-gradient(90deg,#0B0B0A 0%,rgba(11,11,10,.92) 12%,rgba(11,11,10,.35) 34%,rgba(11,11,10,0) 62%)}
 .ws-hero__merk{position:absolute;left:30%;top:8%;width:26%;height:auto;opacity:.06;
   pointer-events:none;filter:brightness(0) invert(1)}
@@ -124,49 +127,71 @@
    De boog, de streep, het monogram en het label bij het apparaat vallen weg:
    op deze breedte staan ze over de foto en over de tekst heen. */
 @media (max-width:749px){
+  /* Op de telefoon is de foto het hele vlak en ligt alles erover: kop, zin,
+     beoordeling en knop. Stond de tekst eronder geplakt, dan werd de hero
+     bijna negenhonderd pixels hoog en verloor de foto zijn kracht. */
   .ws-hero{flex-direction:column;min-height:0}
-  .ws-hero__wijzer,.ws-hero__bogen,.ws-hero__streep,.ws-hero__merk{display:none}
-  .ws-hero__media{position:relative;inset:auto;width:100%;height:330px;flex:none}
-  .ws-hero__scrim{background:linear-gradient(180deg,rgba(11,11,10,.1) 0%,rgba(11,11,10,.35) 52%,rgba(11,11,10,.94) 92%,#0B0B0A 100%)}
-  .ws-hero__foto{object-position:52% 26%}
-  .ws-hero__inner{width:100%;padding:0 18px 26px;margin-top:-34px}
-  .ws-hero__blocks{gap:16px;max-width:none}
-  .ws-hero__badge{gap:8px;padding:6px 6px 6px 13px}
-  .ws-hero__zon{width:16px;height:16px}
-  .ws-hero__badgetekst{font-size:10.5px;letter-spacing:.12em}
-  .ws-hero__badgeactie{font-size:10.5px;padding:7px 12px;letter-spacing:.06em}
-  .ws-hero__h1{font-size:40px;letter-spacing:-.032em}
-  .ws-hero__sub{font-size:15px;line-height:152%}
-  .ws-hero__knoppen{width:100%;flex-direction:column;gap:10px}
-  .ws-hero__cta,.ws-hero__cta2{justify-content:center;font-size:13px;padding:18px 22px}
-  .ws-hero__telling{left:16px;top:18px;bottom:auto;padding:10px 14px;gap:10px}
-  .ws-hero__telling b{font-size:15px}
-  .ws-hero__telling em{font-size:9px}
+  .ws-hero__wijzer,.ws-hero__bogen,.ws-hero__streep,.ws-hero__merk,
+  .ws-hero__telling{display:none}
+  .ws-hero__media{position:absolute;inset:0;width:100%;height:100%;flex:none}
+  .ws-hero__foto{object-position:50% 50%}
+  /* de onderste helft loopt dicht: daar staan witte letters op een lichte
+     huid, en zonder dat verschil is de kop niet te lezen */
+  .ws-hero__media::after{background:linear-gradient(180deg,
+    rgba(11,11,10,.46) 0%,rgba(11,11,10,.04) 14%,rgba(11,11,10,.12) 30%,
+    rgba(11,11,10,.42) 42%,rgba(11,11,10,.80) 58%,rgba(11,11,10,.95) 74%,#0B0B0A 100%)}
+  .ws-hero__inner{position:relative;z-index:2;width:100%;min-height:600px;
+    display:flex;align-items:flex-end;padding:80px 18px 22px;margin-top:0}
+  .ws-hero__blocks{gap:13px;max-width:none}
+
+  /* de actiebadge zweeft linksboven op de foto in plaats van bovenop de
+     tekststapel: daar is toch niets te zien, en het scheelt een regel */
+  .ws-hero__badge{position:absolute;left:16px;top:16px;z-index:3;
+    gap:7px;padding:4px 4px 4px 11px}
+  .ws-hero__zon{width:14px;height:14px}
+  .ws-hero__badgetekst{font-size:9.5px;letter-spacing:.11em}
+  .ws-hero__badgeactie{font-size:9.5px;padding:5px 10px;letter-spacing:.05em}
+
+  .ws-hero__h1{font-size:35px;letter-spacing:-.032em;
+    text-shadow:0 2px 20px rgba(11,11,10,.6)}
+  .ws-hero__sub{font-size:14.5px;line-height:150%;color:rgba(255,255,255,.84);
+    max-width:30em;text-shadow:0 1px 14px rgba(11,11,10,.7)}
+  /* de beoordeling op één regel; wikkelt hij toch, dan valt het aantal weg */
+  .ws-hero__tp{font-size:11px;gap:6px;flex-wrap:nowrap;white-space:nowrap}
+  .ws-hero__sterren i{width:17px;height:17px}
+  .ws-hero__sterren svg{width:11px;height:11px}
+  .ws-hero__tpscore,.ws-hero__tpmerk{font-size:11.5px}
+
+  /* één knop die het werk doet; de quiz staat eronder als regel, niet als
+     tweede vlak dat evenveel gewicht opeist */
+  .ws-hero__knoppen{width:100%;flex-direction:column;gap:11px;align-items:stretch}
+  .ws-hero__cta{justify-content:center;font-size:12.5px;padding:17px 22px}
+  .ws-hero__cta2{border:0;padding:0;background:none;font-size:12.5px;
+    font-weight:600;letter-spacing:.02em;text-transform:none;
+    color:rgba(255,255,255,.78);text-decoration:underline;
+    text-underline-offset:4px;text-decoration-color:rgba(255,255,255,.32)}
+
   /* op mobiel passen drie zekerheden met tekst niet naast elkaar in 390px,
      dus lopen ze als één band voorbij. De band schuift precies de helft op
      en de reeks staat er tweemaal in, dus de overgang is niet te zien. */
-  .ws-hero__strook{padding:14px 0 16px;overflow:hidden;
+  .ws-hero__strook{padding:11px 0 12px;overflow:hidden;
     -webkit-mask-image:linear-gradient(90deg,transparent,#000 26px,#000 calc(100% - 26px),transparent);
     mask-image:linear-gradient(90deg,transparent,#000 26px,#000 calc(100% - 26px),transparent)}
   .ws-hero__band{display:flex;width:max-content;animation:ws-hero-band 26s linear infinite}
   /* elk vak krijgt een scheidingslijn, ook het eerste: op het punt waar de
      band rondloopt zou die anders ontbreken */
   .ws-hero__band > div,.ws-hero__band > div[aria-hidden]{display:flex;flex:0 0 auto;
-    padding:4px 22px;gap:13px;justify-content:flex-start;
+    padding:2px 20px;gap:11px;justify-content:flex-start;
     border-left:1px solid rgba(255,255,255,.12)}
   /* raak je de band aan, dan staat hij stil zolang je hem vasthoudt */
   .ws-hero__strook:hover .ws-hero__band,
   .ws-hero__strook:focus-within .ws-hero__band,
   .ws-hero__strook:active .ws-hero__band{animation-play-state:paused}
   @keyframes ws-hero-band{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-  .ws-hero__zegel{width:36px;height:36px}
-  .ws-hero__zegel svg{width:18px;height:18px}
-  .ws-hero__tekst b{font-size:11px;letter-spacing:.12em;white-space:nowrap}
-  .ws-hero__tekst em{font-size:12px;white-space:nowrap}
-  .ws-hero__tp{font-size:12px;gap:8px}
-  .ws-hero__sterren i{width:19px;height:19px}
-  .ws-hero__sterren svg{width:13px;height:13px}
-  .ws-hero__tpscore,.ws-hero__tpmerk{font-size:12.5px}
+  .ws-hero__zegel{width:30px;height:30px}
+  .ws-hero__zegel svg{width:15px;height:15px}
+  .ws-hero__tekst b{font-size:10px;letter-spacing:.12em;white-space:nowrap}
+  .ws-hero__tekst em{font-size:11px;white-space:nowrap}
 }
 
 /* Vraagt het systeem om minder beweging, dan staat de band stil en veeg je
