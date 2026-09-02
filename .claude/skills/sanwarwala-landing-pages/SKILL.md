@@ -38,12 +38,43 @@ destination URL, and the page type. Ask them in one batch and do not start build
 are answered. Anything you can look up yourself, look up — but never invent an answer. Each of
 those five exists because building without it went wrong.
 
+**Question five is never skipped.** On every landing page, ask outright what kind of page it
+should be — advertorial, listicle or brand story — and lay out in one line what each one does.
+Propose the one the creative points at, with your reasoning, but have it confirmed before a
+single line of copy or CSS. The type decides the spine, the skeleton, which sections exist and
+even the typeface, so getting it wrong costs the whole page rather than one section.
+
+**Two branches sit above the page type.** A Wellshave page is either a *designed landing page*
+in the shop's own style (skill: `design-advertorial`, which routes into this file) or a
+*nieuwsartikel*: an issue of Wellshave Dossier with masthead, section bar, sidebar and the offer
+only at the end (skill: `nieuwsartikel`, which carries its own starter file and rules). Ask which
+branch before anything else; they share almost no building blocks, so converting afterwards costs
+the whole page. Everything below applies to the designed branch.
+
+**Ask for the register in the same breath.** Advertorials and listicles are built in one of two
+registers, and to the reader that difference is larger than the difference between the types.
+The *shop register* looks like the brand's own store; the *editorial register* looks like an
+article — masthead with the word Advertorial, serif headline, press strip, sponsor line above
+the fold, the offer only at the end. An informative ad answered by a shop-looking page breaks
+its own promise on arrival. `references/redactioneel-register.md` carries the fourteen parts,
+the honesty rules that come with borrowing a newspaper's form, and what is still untested.
+
+**This skill governs Wellshave landing pages, not `ogilvy-advertorial`.** That standalone skill
+is where the long-form advertorial method comes from, and it is recorded here as the brand-story
+type, adapted to this brand's tokens, proof rules and publishing route. Used directly it
+contradicts the brand layer on typography, on delivery (it wants one self-contained file with
+inlined images; part 16 forbids base64) and on numbering. Treat it as a source for the method
+and for non-Wellshave brands, the way `nick-theriot` is scoped away from Wellshave creative.
+
 **The order of use.** `references/wellshave-merklaag.md` is the shared design system and opens
 with the workflow — follow it from step 1. Its part 2 makes you choose the page type *before*
 any design happens, because the type decides the spine and the spine decides which sections
-exist. The test: can the points be reordered without the argument collapsing? If yes it is a
-listicle, if no it is an advertorial. A page that belongs to the shop itself — the whole
-collection or one collection — is neither: read `references/paginatype-collectie.md`.
+exist. Three tests, in this order. First: does the page belong to the shop itself — the whole
+collection or one collection — rather than to a creative? Then it is a collection page and the
+two tests below do not apply. Second: is the creative about a device, or about the brand and
+the founder? If there is no single device carrying the page, it is a brand story. Third: can the
+points be reordered without the argument collapsing? If yes it is a listicle, if no it is an
+advertorial.
 
 Then read the matching page-type file, which carries the section order, what is exclusive to
 that type, and how to set up its copy:
@@ -52,7 +83,15 @@ that type, and how to set up its copy:
 |---|---|---|---|
 | Advertorial | Unaware, problem-aware; reader has mis-diagnosed the problem | `references/paginatype-advertorial.md` | `references/startbestand-advertorial.html` |
 | Listicle | Solution-aware, product-aware; reader wants to know why you beat the lookalike | `references/paginatype-listicle.md` | `references/startbestand-listicle.html` |
-| Collection page | Shop navigation and Google, not one ad; the reader asks "which of these" | `references/paginatype-collectie.md` | the component CSS in either skeleton |
+| Brand story | Cold traffic that does not know the brand; no single device carries the page | `references/paginatype-merkverhaal.md` | `references/startbestand-merkverhaal.html` |
+| Collection page | Shop navigation and Google, not one ad; the reader asks "which of these" | `references/paginatype-collectie.md` | the component CSS in any skeleton |
+
+The brand story is the recorded form of the long-form Ogilvy advertorial: the first two thirds
+sell nothing, the product only appears near the end, and the page closes to the collection
+rather than to one cart. It always runs in the editorial register, which deliberately breaks
+part 4 of the brand layer by setting a serif instead of Montserrat, because such a page must not
+look like the shop's own. That exception is argued in the brand-story file, holds for every page
+in that register, and holds nowhere else.
 
 Both skeletons carry the identical token block and component CSS, with placeholder content in
 square brackets. **Start from the matching skeleton, never from a blank page.** Replace what is

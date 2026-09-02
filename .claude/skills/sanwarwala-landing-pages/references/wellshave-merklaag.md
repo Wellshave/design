@@ -34,10 +34,46 @@ zelf ophalen, doe dat dan en laat de vraag weg; verzin nooit een antwoord.
    zonder dat erbij te zetten is misleidend. Heb je geen cijfer, meld het als gat.
 4. **Bestemming.** Welke URL, en draait de pagina binnen het thema of als kale pagina? De handle
    ligt daarna vast, want advertenties wijzen erheen.
-5. **Type.** Advertorial, listicle of collectiepagina. Meestal leid je dit zelf af uit de
-   creative en de awareness; leg je afleiding voor en laat hem bevestigen in plaats van hem te
-   vragen te kiezen. Gaat het om een pagina van de winkel zelf, dan vervallen vraag 1 en 2 en
-   komt er één voor in de plaats: welke zone, en welke producten horen daarbij.
+5. **Type, en daarmee het hele ontwerp.** Vraag bij **elke** landingspagina expliciet wat
+   voor soort pagina het moet worden, ook als je denkt het al te weten uit de creative. Dit is
+   geen formaliteit: het type bepaalt de ruggengraat, het startbestand, welke secties bestaan
+   en zelfs het lettertype. Een verkeerde aanname kost je niet een sectie maar de hele pagina,
+   en dat is precies wat er misging toen deze vraag niet gesteld werd.
+
+   Leg de keuze voor met in één regel wat elk type doet:
+
+   - **Advertorial** &mdash; je legt één mechanisme uit omdat de lezer zijn probleem verkeerd
+     diagnosticeert. Een doorlopend betoog, de volgorde ligt vast.
+   - **Listicle** &mdash; losse genummerde punten over één apparaat tegenover het alternatief.
+     De punten zijn omwisselbaar.
+   - **Merkverhaal** &mdash; een redactioneel artikel over het merk of de oprichter. Geen
+     apparaat dat de pagina draagt, en bewust niet in de huisletter.
+   - **Collectiepagina** &mdash; een pagina van de winkel zelf, de hele collectie of één zone
+     ervan. Het verkeer komt uit de navigatie en uit Google, niet uit één creative. Dan
+     vervallen vraag 1 en 2 hierboven en komt er één voor in de plaats: welke zone, en welke
+     producten horen daarbij. De takken en registers hieronder gelden er niet voor.
+
+   Heb je een sterk vermoeden uit de creative, noem dat dan als voorstel met je redenering
+   erbij. Maar laat het bevestigen voordat je één regel copy of CSS schrijft. Deel 2 werkt de
+   toetsen uit die je bij dat voorstel gebruikt.
+
+   **Vraag eerst welke tak.** Er zijn er twee, en ze delen bijna geen bouwstenen:
+
+   - **Gedesignde landingspagina** &mdash; dit bestand, de huisstijl, met hero, geruststrook en
+     aanbodblok. Skill: `design-advertorial`.
+   - **Nieuwsartikel** &mdash; een aflevering van Wellshave Dossier, met masthead, rubrieken,
+     zijkolom en het aanbod pas onderaan. Skill: `nieuwsartikel`; die heeft een eigen
+     startbestand en eigen regels, en dan stop je hier.
+
+   **Vraag daarna het register**, binnen de gedesignde tak, want dat bepaalt hoe de pagina
+   eruitziet:
+
+   - **Winkelregister** &mdash; het oogt als de eigen winkel: huisletter, gouden koppen,
+     geruststroken, aanbod midden op de pagina.
+   - **Redactioneel register** &mdash; het oogt als een artikel: serifkop, krantenbalk met het
+     woord Advertorial, persstrook, sponsorvermelding boven de vouw, aanbod pas onderaan.
+
+   Bij een merkverhaal is die vraag al beantwoord; dat type staat altijd redactioneel.
 
 Blijft er iets onbeantwoord, benoem dan expliciet welke aanname je maakt en bouw door. Niet
 stilvallen, maar ook niet stilzwijgend invullen.
@@ -95,31 +131,68 @@ Volg deel 16. Publiceren is niet af zonder de controle achteraf.
 ## 2. Welk paginatype
 
 **Kies het type voordat je iets ontwerpt.** Het type bepaalt de ruggengraat, en de ruggengraat
-bepaalt welke secties er zijn en in welke volgorde. Alles in dit bestand geldt voor alle drie;
-alleen de opbouw verschilt. De eerste twee zijn advertentiepagina's; de derde hoort bij de
-winkel zelf en houdt zijn navigatie juist wel.
+bepaalt welke secties er zijn en in welke volgorde. Alles in dit bestand geldt voor alle vier;
+alleen de opbouw verschilt. De eerste drie zijn advertentiepagina's; de collectiepagina hoort
+bij de winkel zelf en houdt zijn navigatie juist wel.
 
-| | Advertorial | Listicle | Collectiepagina |
-|---|---|---|---|
-| Ruggengraat | Een doorlopend argument | Losse punten, meestal genummerd | De plek op het lichaam |
-| Past bij | Unaware en problem-aware | Solution-aware en product-aware | Wie in de winkel rondkijkt of via Google binnenkomt |
-| Kies als | De lezer zijn probleem verkeerd diagnosticeert | De lezer het probleem kent en wil weten waarom jij beter bent | De vraag is welke van deze apparaten hij moet hebben |
-| Uitwerking | `references/paginatype-advertorial.md` | `references/paginatype-listicle.md` | `references/paginatype-collectie.md` |
-| Startbestand | `startbestand-advertorial.html` | `startbestand-listicle.html` | de component-CSS uit een van beide |
+| | Advertorial | Listicle | Merkverhaal | Collectiepagina |
+|---|---|---|---|---|
+| Ruggengraat | Een doorlopend argument | Losse punten, meestal genummerd | Een verhaal over het merk of de oprichter | De plek op het lichaam |
+| Past bij | Unaware en problem-aware | Solution-aware en product-aware | Koud publiek dat het merk niet kent | Wie in de winkel rondkijkt of via Google binnenkomt |
+| Kies als | De lezer zijn probleem verkeerd diagnosticeert | De lezer het probleem kent en wil weten waarom jij beter bent | Er geen apparaat is dat de pagina draagt | De vraag is welke van deze apparaten hij moet hebben |
+| Verkoopt | E&eacute;n product via het mechanisme | E&eacute;n product tegenover het alternatief | Het merk; de bezoeker kiest daarna zelf | Niets in het bijzonder; het raster doet het werk |
+| Uitwerking | `references/paginatype-advertorial.md` | `references/paginatype-listicle.md` | `references/paginatype-merkverhaal.md` | `references/paginatype-collectie.md` |
+| Startbestand | `startbestand-advertorial.html` | `startbestand-listicle.html` | `startbestand-merkverhaal.html` | de component-CSS uit een van de andere |
 
-**De toets: kun je de punten omwisselen zonder dat het betoog omvalt?** Kan dat, dan is het een
+**Toets 0: is dit een pagina van de winkel zelf?** De hele collectie of &eacute;&eacute;n zone
+ervan, met verkeer uit de navigatie en uit Google in plaats van uit &eacute;&eacute;n creative.
+Dan is het een collectiepagina en gelden de drie toetsen hieronder niet; lees
+`references/paginatype-collectie.md`.
+
+**Toets 1: gaat de creative over een apparaat of over het merk?** Gaat hij over de oprichter,
+de herkomst of het merk zelf, en is er geen apparaat dat de pagina draagt, dan is het een
+merkverhaal. Stel die vraag eerst, want de andere twee typen gaan er allebei van uit dat er
+&eacute;&eacute;n product te verkopen valt.
+
+**Toets 2: kun je de punten omwisselen zonder dat het betoog omvalt?** Kan dat, dan is het een
 listicle. Kan dat niet, dan is het een advertorial en moet je hem ook zo bouwen.
 
 De creative geeft meestal de doorslag. Stelt hij een vraag of demonstreert hij een mechanisme,
 dan komt er nieuwsgierig verkeer dat nog gediagnosticeerd moet worden: advertorial. Claimt hij
-een voordeel of toont hij een aanbod, dan weet de lezer al wat hij wil: listicle.
+een voordeel of toont hij een aanbod, dan weet de lezer al wat hij wil: listicle. Vertelt hij
+over de man of het merk erachter, dan is het een merkverhaal.
 
 **Lees daarna het bijbehorende typebestand.** Daar staat de sectievolgorde, wat exclusief bij
 dat type hoort, en hoe je de copy ervoor opzet. Hero, geruststrook, beeldband, aanbodblok,
-bewijs, FAQ en afsluiter zijn in alle gevallen identiek.
+bewijs, FAQ en afsluiter zijn bij advertorial en listicle identiek.
 
-Bouw je een nieuw component voor een van de drie, zet het dan in de gedeelde CSS zodat de andere
-typen het ook kunnen gebruiken.
+### Daarna: in welk register
+
+Het type is niet de hele vraag. Een advertorial en een listicle kunnen in twee registers staan,
+en dat verschil is voor de lezer groter dan het verschil tussen de typen onderling.
+
+- **Winkelregister** &mdash; Montserrat, de gouden tweeslagskop, geruststroken, het aanbodblok
+  midden op de pagina. De pagina oogt als jouw winkel.
+- **Redactioneel register** &mdash; serif met cursief accent, krantenbalk met het woord
+  Advertorial, smalle kolom, persstrook, sponsorvermelding boven de vouw, het aanbod pas
+  onderaan. De pagina oogt als een artikel.
+
+**Toets 3: belooft de creative informatie of een aanbod?** Een uitleg, een inzicht, een
+interview of een verhaal vraagt om het redactionele register. Een prijs, een korting of een
+productdemonstratie vraagt om het winkelregister. Een informatieve advertentie gevolgd door een
+winkelpagina breekt de belofte binnen een seconde, en dat is precies waar de klik op stukloopt.
+
+Het redactionele register wijkt bewust af van deel 4: het gebruikt een serif in plaats van
+Montserrat, omdat de pagina juist niet als de eigen winkel mag ogen. Dat is de enige afwijking;
+kleuren, bewijsregels en publiceerroute gelden onverkort. De inrichting, de eerlijkheidsregels
+die daarbij horen en de reden achter de afwijking staan in `references/redactioneel-register.md`.
+
+**Het merkverhaal staat altijd in het redactionele register**, en heeft daarnaast geen
+aanbodblok omdat er geen hoofdproduct is. **De collectiepagina staat in geen van beide
+registers**: hij draait binnen het thema, houdt de navigatie en volgt de winkel zelf.
+
+Bouw je een nieuw component voor een van de typen, zet het dan in de gedeelde CSS zodat de
+andere het ook kunnen gebruiken.
 
 ---
 
@@ -621,6 +694,34 @@ X erbij" verwarrend en kun je het beter als upgrade framen.
 
 ---
 
+## 15b. Waar het bewijs vandaan komt, en hoe je het controleert
+
+Elke link en elk cijfer op een pagina is te controleren, en dat kost minder tijd dan het
+herstellen van een fout achteraf.
+
+**Trustpilot.** Het profiel staat op `https://nl.trustpilot.com/review/wellshave.nl`. De
+variant op `.com` bestaat niet en geeft een 404; die is al een keer op een pagina beland.
+Score en aantal beoordelingen haal je live op met de businessunit-id uit de widget in het
+thema:
+
+```
+https://widget.trustpilot.com/trustbox-data/5419b6ffb0d04a076446a9af?businessUnitId=63c511d4e1339e2200c204a1&locale=nl-NL
+```
+
+Die geeft `stars` (het aantal sterren dat Trustpilot toont), `trustScore` (net iets lager) en
+`numberOfReviews.total`. Schrijf "ruim 950" in plaats van een exact getal: het loopt op, en een
+ondergrens blijft waar.
+
+**Interne links.** Controleer elke URL v&oacute;&oacute;r oplevering met een statuscode, niet op
+gevoel. Twee valkuilen die zijn voorgekomen: `/pages/over-ons` bestaat niet meer en leidt naar
+de homepage (de echte pagina is `/pages/over-wellshave`), en `/pages/contact` stuurt door naar
+`/pages/neem-contact-op`. Zet altijd de eindbestemming in de link, geen omleiding.
+
+**Winkelwagenlinks.** Open de permalink en controleer met `cart.js` dat elk artikel, inclusief
+het cadeau, er ook echt in zit.
+
+---
+
 ## 16. Publiceren binnen een Shopify-thema
 
 Een landingspagina hoort op het eigen domein: dat houdt attributie en analytics schoon. In de
@@ -669,6 +770,41 @@ als onzin uit terwijl entiteiten heel blijven. Zet elk teken buiten het basisalf
 Publiceren is niet af zonder controle. Lees de opgeslagen inhoud terug via de API en tel wat je
 erin stopte: secties, beelden, knoppen, kaarten. Beide fouten hierboven zijn zo gevonden, en
 geen van tweeen was zichtbaar in de bewerker.
+
+### Wat de themalaag met je pagina doet
+
+Gemeten op het paginasjabloon van dit thema, bij het publiceren van het dossier-artikel. De
+pagina-inhoud landt in `<div class="richtext__content rte">`, en die laag brengt regels mee:
+
+| Themaregel | Wat het met je pagina doet | Verweer |
+|---|---|---|
+| `<h2 class="richtext__title">` boven de inhoud | De paginatitel staat er nog een keer, gecentreerd in de winkelletter | `.richtext__title{display:none}` in je eigen stylesheet |
+| `.rte img{border-radius:12px}` | Alle beelden krijgen ronde hoeken, ook waar je die niet wilt | `.gg-art img{border-radius:0}` |
+| `.rte table{table-layout:fixed}` | Kolombreedtes kloppen niet meer | `.gg-art table{table-layout:auto}` |
+| `.rte ul{list-style:disc}` | Bullets in je eigen lijsten | Zet `list-style:none` op je eigen `ul` en `li` |
+| `.rte>*{margin:0 0 1em}` | Extra marge onder je wikkellaag | `.rte>.gg-art{margin:0}` |
+
+Je eigen stylesheet wordt in de body geladen en komt dus n&aacute; de themastijlen: bij gelijke
+specificiteit win je. Controleer het niet op gevoel maar reproduceer de cascade lokaal: haal
+`base.css` en `richtext.css` van het thema op, zet je eigen stylesheet erachter en render je
+inhoud in dezelfde `.richtext__content.rte`-wikkel.
+
+### De uploadroute, stap voor stap
+
+1. `stagedUploadsCreate` met `resource: FILE` en `mimeType: text/css` geeft een uploadadres met
+   parameters.
+2. Die parameters als losse `-F` velden POSTen met `curl`, plus `-F "file=@bestand.css"`.
+   Antwoord 201 betekent gelukt.
+3. `fileCreate` met de `resourceUrl` als `originalSource`. De file staat dan op `UPLOADED`;
+   vraag daarna de node op tot `fileStatus` `READY` is en je de CDN-URL hebt.
+4. Pagina aanmaken met `pageCreate` (of bijwerken met `pageUpdate`), met in de body eerst de
+   `<link>` naar je stylesheet en daarna de markup.
+5. Teruglezen: haal de gepubliceerde URL op en tel secties, beelden, knoppen en kaarten.
+
+Twee dingen die tijd kosten als je ze niet weet: een veld dat niet bestaat in je selectieset
+laat de hele mutatie afketsen v&oacute;&oacute;r hij iets doet (valideer eerst met
+`validate_graphql_codeblocks`), en een gewijzigde stylesheet gaat als **nieuw bestand** met een
+opgehoogde naam, waarna je de `<link>` in de pagina meestuurt.
 
 ### Wat de themaroute kost
 
