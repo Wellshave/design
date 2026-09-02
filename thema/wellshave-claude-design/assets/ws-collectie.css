@@ -76,8 +76,12 @@
      elkaar laat maar 54 px over voor de naam, en dan breekt "schaamstreek"
      (83 px) middenin het woord af. Twee rijen van drie geeft elke tegel ruim
      400 px, en de balk blijft op volle lettergrootte leesbaar. */
-  .wsc .zonekiezer:has(.zkaart:nth-child(6)){grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-  .wsc .zonekiezer:has(.zkaart:nth-child(6)) .zkaart{padding:13px 14px;gap:11px}
+  /* Twee rijen kosten 80 px meer dan één, en de balk staat nu bovenaan: op de
+     bundelpagina zakte de eerste kaart daardoor tot 912 px in een venster van 900.
+     De rijen blijven, maar krapper — dat scheelt 16 px en laat de namen heel. */
+  .wsc .zonekiezer:has(.zkaart:nth-child(6)){grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;
+    padding:14px 0 14px}
+  .wsc .zonekiezer:has(.zkaart:nth-child(6)) .zkaart{padding:11px 14px;gap:11px}
   .wsc .zonekiezer:has(.zkaart:nth-child(6)) .zkaart-ico{width:44px;height:40px;padding-right:12px}
   .wsc .zonekiezer:has(.zkaart:nth-child(6)) .zkaart-naam{font-size:13.5px}
   .wsc .zonekiezer:has(.zkaart:nth-child(6)) .zkaart-tel{width:30px;height:30px;font-size:12.5px}
@@ -978,7 +982,7 @@ body.vgl-open{overflow:hidden}
 .wsc .wsk-mark{aspect-ratio:1;background:var(--wsc-mark,none) center/contain no-repeat}
 .wsc a.groep-link{text-decoration:none}
 .wsc .groep-noot{font-size:12.5px;line-height:1.6;color:var(--ink-60);max-width:74ch;
-  margin:-12px 0 20px;padding-left:13px;border-left:2px solid var(--bronze)}
+  margin:-14px 0 14px;padding-left:13px;border-left:2px solid var(--bronze)}
 .wsc .groep-noot b{color:var(--ink);font-weight:700}
 @container (max-width:760px){}
 /* het formulier om direct in de winkelwagen te leggen mag de rij niet breken */

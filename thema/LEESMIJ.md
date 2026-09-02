@@ -1618,3 +1618,90 @@ Het woordenboek staat in `/tmp/hdr/vertaal-de.json` (692 teksten), opgebouwd in
 en dat blijkt gewoon de **SHA-256 van de brontekst** te zijn — gecontroleerd op
 alle 192 sleutels van zone-hoofd, nul afwijkingen. Je hoeft de digests dus niet op
 te halen, je kunt ze uitrekenen.
+
+## Ronde: de kop boven de kaarten (02-09)
+
+Aanleiding: op `/collections/all` moest je op een telefoon twee volle schermen
+scrollen voordat je één apparaat zag. Gemeten op de live pagina in een venster van
+390 × 844, van boven naar beneden: aankondigingsbalk 78, header 65, eyebrow met kop
+en inleiding 249, sfeerfoto 199, keuzehulp 491, kruimelpad 32, zonekiezer 124,
+filterbalk 183, groepskop 115 — de eerste productkaart begon op **1679 px**, ofwel
+1,99 schermen. Op een laptop van 1440 × 900 was dat 1137 px.
+
+### Wat er is veranderd
+
+**De zonekiezer staat boven de hero.** Daar doet hij het werk van het kruimelpad
+erbij — de tegel waar je op staat is zwart met een gouden voet, dus "waar ben ik"
+staat er al. Het kruimelpad is daarom weg: de markup, de instelling `kruimel` en de
+elf waarden in de sjablonen.
+
+**De tekst ligt in de foto.** `.kop-grid` / `.kop-copy` / `.kop-foto` zijn vervangen
+door één `.hero` met de foto als achtergrond, twee scrims eroverheen en de tekst
+linksonder. Eén scrim loopt van onder naar boven (daar staat de kop), één vanaf links
+(op brede schermen pakt de tekst maar de halve breedte). Zonder foto krijgt de sectie
+de klasse `kaal`: dan blijft `--grad-kop` over en wordt de hero lager. Dat geldt nu
+voor sale, safetyrazors en tondeuses.
+
+**De inleiding is één regel.** De lange versie stond verderop al in *Over deze
+categorie*; boven de vouw hoeft alleen te staan wat je hier vindt. De `info` bij de
+instelling zegt dat nu ook.
+
+**De keuzehulp staat onder de eerste productgroep.** Hij is met 491 px het grootste
+blok van de pagina en hoorde niet als eerste in beeld te staan. Hij zit nog steeds in
+de sectie `ws-collectie-kop` — de vraag- en matchblokken horen daar — maar staat in
+de HTML in een `<div class="hulpzone" id="ws-keuzehulp" hidden>` en wordt door
+`ws-collectie.js` (`verhuisHulp()`) achter de eerste `.groep` gezet, waarna `hidden`
+eraf gaat en de klasse `in-raster` erop. Zonder JavaScript blijft hij verborgen. Dat
+is geen verlies: de hulp werkt sowieso alleen met JavaScript, en verborgen is beter
+dan een dode kaart boven de producten. In de hero staat een regel die hem opent —
+instelling `hulp_link`, per pagina anders ingevuld; leeg laten haalt alleen de regel
+weg, niet de kaart. De klik scrolt zacht en zet de cursor op de eerste open vraag.
+
+**De filterbalk is op de telefoon één rij.** Hij was er drie: chips, dan de telling,
+dan de knoppen. Het label *Toon mij* en de telling *53 resultaten* zijn op de telefoon
+weg — elke chip draagt zijn eigen aantal al — en `.fb-rij` mag niet meer omvallen. De
+knop **Vergelijk** verschijnt pas zodra er twee kaarten aangevinkt zijn; daarvoor is
+het een dode knop die breedte kost. Van *Meest relevant* blijven het icoon en de
+chevron over met een scheidingslijn ervoor: de tekst werd afgekapt tot "Meest ...".
+De `<select>` eronder houdt zijn eigen `aria-label`, dus voorlezen verandert niet.
+
+### Wat het oplevert, nagemeten in het thema zelf
+
+Niet in de mock-up gemeten maar in het voorbeeld van v4, met dezelfde vensters. Waar
+de eerste productkaart begint:
+
+| pagina | telefoon 390 × 844 | laptop 1440 × 900 |
+|---|---|---|
+| alle producten | 1679 → **789** | 1137 → **832** |
+| zone Hoofd | → **757** | → **832** |
+| bundels | → **775** | → **904** |
+| scheerapparaten | → **837** | → **892** |
+
+De eerste opzet kwam op 841 px uit — precies op de onderrand van een scherm van 844,
+dus je zag er niets van. Daarom zijn hero (320 → 288 px op de telefoon, 25cqw → 22cqw
+daarboven), de lucht tussen kop en raster, de icoontjes in de zonekiezer (66 → 60 px)
+en de marges rond filterbalk en groepskop krapper gezet. Draai je aan een van die
+vier, meet dan opnieuw.
+
+Twee pagina's blijven achter en dat is te verklaren:
+
+- **scheerapparaten** heeft een `groep-noot` van 80 px tussen de groepskop en de
+  kaarten. Dat is redactie, geen opmaak; die laat ik staan.
+- **bundels** heeft zes zonetegels in plaats van vijf. Die staan bewust in twee rijen
+  van drie — zes naast elkaar laat 54 px over voor de naam en dan breekt
+  "schaamstreek" middenin. Twee rijen kosten 80 px; de tegels zijn wel krapper gezet.
+
+### Wat ik niet heb gedaan
+
+Op de voorbeeldpagina staat een beoordelingsbalk in de hero. Die heb ik weggelaten:
+de themainstellingen `card_reviews` / `reviews_label` zeggen **4.5**, de kaarten en de
+productpagina zeggen **4,4**. Zolang dat niet één getal is, zet ik het er niet ook nog
+een derde keer neer.
+
+### Let op bij het publiceren
+
+De veertien bestanden staan in **v4 (204845515084)**, niet in het hoofdthema — v3 is
+inmiddels MAIN en de API weigert daarop te schrijven. De Duitse vertalingen hangen aan
+het thema-id: publiceer je v4 zonder ze eerst opnieuw te registreren tegen
+`?theme_id=204845515084`, dan vallen de collectiepagina's op `/de` terug naar het
+Nederlands.
