@@ -230,7 +230,44 @@
     teken();
   }
 
+  /* De keuzehulp staat in de bron boven het raster, want hij hoort bij de sectie
+     ws-collectie-kop en die staat nu eenmaal eerst. Op de pagina hoort hij ónder de
+     eerste productgroep: vier vragen zijn 491 px, en zolang dat blok boven de kaarten
+     staat begint het eerste product op de telefoon pas op 1679 px. Hij staat verborgen
+     in de HTML en komt hier tevoorschijn — zonder JavaScript werkt de hulp toch niet,
+     dus dan is verborgen beter dan een dode kaart boven de producten.
+     Staat er geen raster, dan blijft hij waar hij staat en houdt hij zijn eigen marge. */
+  function verhuisHulp() {
+    var hulp = document.getElementById('ws-keuzehulp');
+    if (!hulp) return;
+    var groep = document.querySelector('.wsc .groep');
+    if (groep && groep.nextElementSibling !== hulp) {
+      groep.parentNode.insertBefore(hulp, groep.nextSibling);
+    }
+    hulp.classList.toggle('in-raster', !!groep);
+    hulp.hidden = false;
+  }
+
+  // De regel in de hero brengt je naar de kaart en zet de cursor op de eerste vraag,
+  // zodat je met het toetsenbord verder kunt zonder terug te zoeken.
+  function naarHulp(e) {
+    var hulp = document.getElementById('ws-keuzehulp');
+    if (!hulp || hulp.hidden) return;
+    e.preventDefault();
+    var zacht = !window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    hulp.scrollIntoView({ behavior: zacht ? 'smooth' : 'auto', block: 'start' });
+    var eerste = hulp.querySelector('.vraagrij.nu .keuze') || hulp.querySelector('.keuze');
+    if (eerste) window.setTimeout(function () { eerste.focus({ preventScroll: true }); }, zacht ? 420 : 0);
+  }
+
   function wire() {
+    verhuisHulp();
+    document.querySelectorAll('.wsc .hero-hulp').forEach(function (a) {
+      if (a.dataset.gekoppeld === 'ja') return;
+      a.dataset.gekoppeld = 'ja';
+      a.addEventListener('click', naarHulp);
+    });
+
     document.querySelectorAll('.wsc .zones').forEach(function (rij) {
       rij.querySelectorAll('.zone').forEach(function (b) {
         b.addEventListener('click', function (e) {

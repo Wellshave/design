@@ -62,12 +62,10 @@
 /* ── blok 2 · zonebalk ── */
 .wsc .zonebalk{background:var(--paper);border-bottom:1px solid var(--ink-10);
   box-shadow:0 10px 24px rgba(17,17,17,.05)}
-.wsc .kruimel{font-size:11.5px;color:var(--ink-40);padding:14px 0 0;font-weight:600}
-.wsc .kruimel b{color:var(--ink-60);font-weight:600}
 /* ── de zonekiezer ──
    Vier tegels in plaats van vier pillen: icoon, scheidingslijntje, naam, aantal in
    een rondje en een pijl. De zone waar je op staat is zwart met een gouden voet. */
-.wsc .zonekiezer{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;padding:16px 0 4px}
+.wsc .zonekiezer{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;padding:18px 0 18px}
 /* Met de tegel "Alle zones" erbij zijn het er vijf; zonder dit valt die vijfde alleen op
    een tweede rij. Let op: dit moet BINNEN de brede breakpoint staan. Een `:has()`-selector
    is specifieker dan `.wsc .zonekiezer` in de containerquery's eronder, en zou anders ook
@@ -141,7 +139,7 @@
 @container (max-width:700px){
   .wsc .zonekiezer{
     display:flex;flex-wrap:nowrap;overflow-x:auto;gap:16px;
-    padding:14px 18px 8px;margin:0 -18px;
+    padding:14px 18px 12px;margin:0 -18px;
     /* Zonder scroll-padding snapt de strip naar de rand van de eerste tegel en
        scrolt hij zijn eigen lucht weg: de tegel plakt dan tegen het scherm en
        de strip staat bij het laden al 18 px ingescrold. */
@@ -243,37 +241,65 @@
 @container (max-width:700px){
   .wsc .zonekaarten{grid-template-columns:1fr 1fr;gap:10px}
 }
-/* ── blok 1 · kop met modellenreeks en keuzehulp ── */
-/* De kop is zwart met een gradient naar iets lichter. Geen foto en geen monogram:
-   allebei geprobeerd en allebei afgekeurd — zie LEESMIJ. `--grad-dark` blijft wat het
-   was, want dat wordt ook door `.donker` in andere blokken gebruikt. */
-.wsc .kop{background:var(--grad-kop);color:#fff;padding:40px 0 34px;position:relative;overflow:hidden}
+/* ── blok 1 · de hero ── */
+/* De tekst lag naast de foto: eerst 249 px kop en inleiding, daaronder 199 px beeld,
+   en pas daarna kwam de rest. Op een telefoon stond het eerste product daardoor op
+   1679 px — twee schermen scrollen. De tekst ligt nu ín de foto, de zonekiezer staat
+   erboven en de keuzehulp eronder; zie LEESMIJ voor de hele meting.
+   `--grad-kop` blijft wat het was: hij is de achtergrond van een hero zonder foto en
+   `--grad-dark` wordt ook door `.donker` in andere blokken gebruikt. */
+.wsc .kop{background:var(--grad-kop);color:#fff;padding:14px 0 20px;position:relative;overflow:hidden}
 .wsc .kop .rail{max-width:var(--rail)}
-.wsc .kop-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:46px;align-items:start;
-  position:relative;z-index:1}
-.wsc .kop-copy{display:flex;flex-direction:column;gap:18px;align-items:flex-start;
-  position:relative;z-index:1;padding-bottom:6px}
+
+.wsc .hero{position:relative;border-radius:var(--r-l);overflow:hidden;isolation:isolate;
+  min-height:clamp(300px,25cqw,392px);display:flex;align-items:flex-end;
+  border:1px solid rgba(255,255,255,.09);box-shadow:0 22px 44px rgba(0,0,0,.42)}
+.wsc .hero-foto{position:absolute;inset:0;z-index:0}
+.wsc .hero-foto img{width:100%;height:100%;object-fit:cover;object-position:50% 40%;
+  filter:saturate(.96) contrast(1.03)}
+/* Twee scrims over elkaar: één van onder naar boven zodat de kop staat waar het beeld
+   het rustigst is, en één vanaf links voor de brede weergave, waar de tekst maar de
+   halve breedte pakt en de rechterkant open blijft. */
+.wsc .hero-foto::after{content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(180deg,rgba(14,13,12,.30) 0%,rgba(14,13,12,.10) 26%,rgba(14,13,12,.68) 74%,rgba(14,13,12,.90) 100%),
+    linear-gradient(90deg,rgba(14,13,12,.62) 0%,rgba(14,13,12,.22) 46%,rgba(14,13,12,0) 74%)}
+.wsc .kop.kaal .hero{border-color:rgba(255,255,255,.12);box-shadow:none;
+  background:linear-gradient(140deg,rgba(255,255,255,.05) 0%,rgba(255,255,255,0) 58%);
+  min-height:clamp(210px,17cqw,272px)}
+
+.wsc .hero-tekst{position:relative;z-index:1;display:flex;flex-direction:column;
+  align-items:flex-start;gap:13px;padding:32px 34px 30px;max-width:min(640px,86%)}
 .wsc .duo.klein{font-size:clamp(26px,2.55cqw,40px)}
-.wsc .lead.kort{font-size:14.5px;max-width:38ch}
+.wsc .lead.kort{font-size:14.5px;max-width:40ch}
+.wsc .hero .lead.on-dark{color:rgba(255,255,255,.82)}
+
+/* De regel naar de keuzehulp. Hij staat in de hero omdat de kaart zelf naar beneden
+   is verhuisd; zonder deze regel zou een bezoeker die hulp zoekt hem missen. */
+.wsc .hero-hulp{display:inline-flex;align-items:center;gap:10px;font-size:13.5px;
+  font-weight:700;color:var(--goud);border-bottom:1px solid rgba(245,209,138,.34);
+  padding-bottom:3px;transition:border-color .18s ease,color .18s ease}
+.wsc .hero-hulp:hover{color:#fff;border-bottom-color:rgba(255,255,255,.7)}
+.wsc .hero-hulp i{width:22px;height:22px;border-radius:50%;flex:none;font-style:normal;
+  background:rgba(245,209,138,.16);display:grid;place-items:center}
+.wsc .hero-hulp svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.4}
 
 /* bewijskaart */
 /* De badge is de vorm zelf, geen vinkje in een blauwe cirkel: kleur en vinkje
    zitten in het symbool, dus hier alleen de maat. */
 
-/* foto in de kopkolom — de hele scene past hier, een volle band knipt hem tot een strook */
-.wsc .kop-foto{position:relative;width:100%;aspect-ratio:16/8;border-radius:var(--r-m);
-  overflow:hidden;border:1px solid rgba(255,255,255,.09);
-  box-shadow:0 22px 44px rgba(0,0,0,.42)}
-.wsc .kop-foto img{width:100%;height:100%;object-fit:cover;object-position:50% 40%;
-  filter:saturate(.96) contrast(1.03)}
-.wsc .kop-foto::after{content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(16,15,14,.22) 0%,rgba(16,15,14,0) 34%,rgba(16,15,14,.42) 100%)}
-
 /* geruststellers met icoon */
 
 /* keuzekaart */
+/* Hij hing eerst naast de kop, in het zwart: vandaar de zware slagschaduw. Nu staat
+   hij tussen de productgroepen op zand, en daar is diezelfde schaduw een vlek. Een
+   lijn met een lichte schaduw houdt hem los van de kaarten eromheen. */
+.wsc .hulpzone{max-width:var(--rail);margin:0 auto;padding:26px 40px 0}
+.wsc .hulpzone[hidden]{display:none}
+.wsc .hulpzone.in-raster{max-width:none;margin:0 0 44px;padding:0}
 .wsc .kiescard{position:relative;z-index:1;background:#FCFAF6;color:var(--ink);border-radius:var(--r-l);padding:24px 26px 24px;
-  box-shadow:0 26px 60px rgba(0,0,0,.38);display:flex;flex-direction:column;gap:16px}
+  border:1px solid rgba(188,129,62,.22);box-shadow:0 14px 34px rgba(17,17,17,.06);
+  display:flex;flex-direction:column;gap:16px}
 .wsc .kaartkop{display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap}
 .wsc .kaartkop .eyebrow{color:var(--bronze)}
 .wsc .kaartkop span{font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
@@ -375,15 +401,17 @@
 .wsc .mp-voorraad::before{content:"";width:6px;height:6px;border-radius:50%;background:#2E9E5B}
 
 @container (max-width:700px){
-  .wsc .kop{padding:24px 0 24px}
-  .wsc .kop-grid{display:flex;flex-direction:column;gap:18px;min-height:0}
-  .wsc .kop-copy{display:contents}
-  .wsc .kop-copy > .eyebrow{order:1}
-  .wsc .kop-copy > .duo{order:2}
-  .wsc .kop-copy > .lead{order:3}
-  .wsc .kop-foto{order:4;aspect-ratio:16/9;margin:2px 0}
-  .wsc .kop-foto img{object-position:50% 42%}
-    .wsc .kiescard{order:6;padding:18px 16px}
+  .wsc .kop{padding:10px 0 14px}
+  /* 320 px hero, gemeten in de mock-up: hoog genoeg voor drie regels tekst over het
+     beeld, laag genoeg om de filterbalk binnen het eerste scherm te houden. */
+  .wsc .hero{min-height:320px;border-radius:var(--r-m)}
+  .wsc .kop.kaal .hero{min-height:186px}
+  .wsc .hero-foto img{object-position:50% 42%}
+  .wsc .hero-tekst{padding:20px 18px 20px;gap:10px;max-width:none}
+  .wsc .lead.kort{font-size:13.5px}
+  .wsc .hero-hulp{font-size:13px;gap:8px}
+  .wsc .hulpzone{padding:20px 16px 0}
+  .wsc .kiescard{padding:18px 16px}
           .wsc .kaartkop{flex-direction:column;gap:4px}
   .wsc .kaartkop span{white-space:normal}
   .wsc .kiescard h2{font-size:21px}
@@ -874,7 +902,7 @@ body.vgl-open{overflow:hidden}
   .wsc .bwr-tekst{grid-column:1 / -1}
   .wsc .bwr-bron{grid-column:2;grid-row:1;justify-content:center}
   .wsc .bwr-bron a{margin-top:4px}
-  .wsc .filterbalk{padding:16px 14px;margin-bottom:24px;border-radius:14px}
+  .wsc .filterbalk{padding:8px 12px 12px;margin-bottom:18px;border-radius:14px}
   .wsc .fb-rij{gap:11px}
   /* De knoppen staan op de telefoon naast elkaar en schuiven opzij, niet in twee
      rijen onder elkaar: dat scheelt de bezoeker verticale scroll voordat hij de
@@ -884,8 +912,8 @@ body.vgl-open{overflow:hidden}
      dus minstens zo hoog zijn als het lintje; meet het na als je het lintje
      aanpast. */
   .wsc .filters{
-    flex-wrap:nowrap;overflow-x:auto;gap:8px;width:auto;
-    margin:0 -14px;padding:20px 14px 2px;
+    flex-wrap:nowrap;overflow-x:auto;gap:8px;width:auto;min-width:0;flex:1;
+    margin:0 -12px;padding:18px 12px 2px;
     scroll-snap-type:x proximity;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-padding-inline:14px}
   .wsc .filters::-webkit-scrollbar{display:none}
   .wsc .filter{flex:none;justify-content:flex-start;padding:10px 12px;font-size:12.5px;gap:8px;
@@ -894,13 +922,25 @@ body.vgl-open{overflow:hidden}
   .wsc .filter i{min-width:23px;height:23px;font-size:11px}
   .wsc .filter-lint{font-size:8.5px;line-height:1.15;padding:3px 9px 5px}
   .wsc .fb-streep{display:none}
-  .wsc .fb-rechts{width:100%;margin-left:0;gap:10px;flex-wrap:wrap}
-  .wsc .fb-acties{flex:1;gap:8px}
-  .wsc .fb-knop{flex:1;justify-content:center;padding:10px 12px;font-size:12px}
+  /* De balk stond op de telefoon op drie regels — chips, dan de telling, dan de
+     knoppen — samen 183 px voordat de eerste kaart begon. Nu blijft het één regel:
+     het label en de telling gaan weg (elke chip draagt zijn eigen aantal al) en de
+     rij mag niet meer omvallen. */
+  .wsc .fb-rij{flex-wrap:nowrap}
+  .wsc .fb-label,.wsc .fb-uitslag{display:none}
+  .wsc .fb-rechts{width:auto;margin-left:auto;gap:8px;flex-wrap:nowrap;flex:none;
+    align-self:flex-end;padding-bottom:2px}
+  .wsc .fb-acties{flex:none;gap:8px}
+  .wsc .fb-knop{flex:none;justify-content:center;padding:9px 11px;font-size:12px}
+  /* Vergelijken kan pas vanaf twee aangevinkte kaarten. Tot die tijd is het een
+     dode knop die breedte kost die de chips nodig hebben. */
+  .wsc .fb-knop.vgl-open[disabled]{display:none}
   .wsc .fb-sorteer{min-width:0}
-  .wsc .fb-sorteer-tekst{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .wsc .fb-sorteer-tekst{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:8ch}
   .wsc .groep{margin-bottom:32px}
+  .wsc .groep-kop{margin-bottom:12px;gap:12px}
   .wsc .groep-kop h2{font-size:19px}
+  .wsc .groep-kop p{font-size:12.5px;line-height:1.5;margin-top:3px}
   .wsc .kaarten{grid-template-columns:1fr 1fr;gap:11px}
   .wsc .wsk-body{padding:13px 12px 14px;gap:6px}
   .wsc .wsk-naam{font-size:14px}
@@ -931,14 +971,6 @@ body.vgl-open{overflow:hidden}
 @container (max-width:760px){}
 /* het formulier om direct in de winkelwagen te leggen mag de rij niet breken */
 .wsc .wsk-form{display:contents}
-
-/* een pagina zonder keuzehulp: de kop is dan één kolom */
-/* Zonder keuzehulp is de kop één kolom. De 860px hieronder was afgestemd op een
-   leeslijn van 1140; op 1600 stond die kolom als een smal blok links in een brede
-   band. Hij loopt nu mee met de rest van de pagina — de lede blijft op leesbreedte
-   door .lead.kort, dus alleen de kop en de foto worden ruimer. */
-.wsc .kop-grid.solo{grid-template-columns:minmax(0,1fr);max-width:min(1180px,100%)}
-.wsc .kop-grid.solo .kop-foto{aspect-ratio:16/7}
 
 /* geen tekening: de uitleg wordt één brede kolom */
 .wsc .cat.solo{grid-template-columns:minmax(0,1fr);gap:0}

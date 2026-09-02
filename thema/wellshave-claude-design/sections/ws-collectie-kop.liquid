@@ -20,43 +20,98 @@
   <symbol id="wsc-pijl" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </svg>
 
-<section class="kop">
-  {%- assign heeft_hulp = false -%}
-  {%- for block in section.blocks -%}
-    {%- if block.type == 'vraag' or block.type == 'match' -%}{%- assign heeft_hulp = true -%}{%- endif -%}
-  {%- endfor -%}
-  <div class="rail kop-grid{% unless heeft_hulp %} solo{% endunless %}">
+{%- assign heeft_hulp = false -%}
+{%- for block in section.blocks -%}
+  {%- if block.type == 'vraag' or block.type == 'match' -%}{%- assign heeft_hulp = true -%}{%- endif -%}
+{%- endfor -%}
 
-    <div class="kop-copy">
-      {%- comment -%}
-        Leeg gelaten betekent: neem de naam van de collectie. Zo kan één sjabloon
-        meerdere collecties bedienen — de Summer Sale en de Voorjaar Sale delen
-        dezelfde opbouw maar houden hun eigen naam op de pagina.
-      {%- endcomment -%}
-      {%- assign kop_eyebrow = section.settings.eyebrow | default: collection.title -%}
-      {%- if kop_eyebrow != blank -%}
-        <p class="eyebrow on-dark">{{ kop_eyebrow }}</p>
-      {%- endif -%}
-      <h1 class="duo on-dark klein">{{ section.settings.kop_1 }}<span class="b">{{ section.settings.kop_2 }}</span></h1>
-      {%- if section.settings.lede != blank -%}
-        <p class="lead on-dark kort">{{ section.settings.lede }}</p>
-      {%- endif -%}
+{%- assign heeft_zones = false -%}
+{%- for block in section.blocks -%}{%- if block.type == 'zone' -%}{%- assign heeft_zones = true -%}{%- endif -%}{%- endfor -%}
+{%- if heeft_zones -%}
+  <section class="zonebalk"><div class="rail">
+    <div class="zonekiezer">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'zone' -%}
+          {%- assign is_nu = block.settings.huidig -%}
+          {%- if block.settings.url != blank and is_nu != true -%}
+            {%- assign tag = 'a' -%}
+          {%- else -%}
+            {%- assign tag = 'button' -%}
+          {%- endif -%}
+          <{{ tag }} class="zkaart{% if is_nu %} nu{% endif %}"
+            {%- if tag == 'a' %} href="{{ block.settings.url }}"{% else %} type="button"{% endif -%}
+            {% if is_nu %} aria-current="true"{% endif %}
+            data-zone="{{ block.settings.naam | escape }}" data-app="{{ block.settings.aantal }}"
+            {{ block.shopify_attributes }}>
+            {%- if block.settings.icoon != blank -%}
+              <span class="zkaart-ico">{{ block.settings.icoon | image_url: width: 200 | image_tag: alt: '' }}</span>
+            {%- endif -%}
+            <span class="zkaart-naam">{{ block.settings.naam }}</span>
+            <span class="zkaart-tel">{{ block.settings.aantal }}</span>
+            <svg class="zkaart-pijl" viewBox="0 0 24 24" aria-hidden="true"><use href="#wsc-chevron-r"/></svg>
+          </{{ tag }}>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    {%- comment -%}
+      Op de telefoon is de zonebalk een schuifstrip. Zonder spoor is niet te zien
+      dat er nog tegels naast staan; de duim loopt mee met de scrollpositie en
+      wordt door ws-collectie.js verborgen als alles al in beeld staat.
+    {%- endcomment -%}
+    <div class="zk-spoor" aria-hidden="true" hidden><span class="zk-duim"></span></div>
+  </div></section>
+{%- endif -%}
 
+<section class="kop{% if section.settings.foto == blank %} kaal{% endif %}">
+  <div class="rail">
+    {%- comment -%}
+      De tekst ligt in de foto, niet ernaast: naast elkaar kostte de kop 249 px aan
+      tekst plus 199 px aan beeld voordat de eerste kaart begon. Zonder foto blijft
+      de zwarte gradient over en zakt de hero terug naar tekst op een vlak.
+    {%- endcomment -%}
+    <div class="hero">
       {%- if section.settings.foto != blank -%}
-        <figure class="kop-foto">
-          {{ section.settings.foto | image_url: width: 1400 | image_tag: alt: section.settings.foto_alt, loading: 'eager' }}
+        <figure class="hero-foto">
+          {{ section.settings.foto | image_url: width: 1600 | image_tag: alt: section.settings.foto_alt, loading: 'eager', fetchpriority: 'high', sizes: '100vw', widths: '600, 900, 1200, 1600' }}
         </figure>
       {%- endif -%}
-
+      <div class="hero-tekst">
+        {%- comment -%}
+          Leeg gelaten betekent: neem de naam van de collectie. Zo kan één sjabloon
+          meerdere collecties bedienen — de Summer Sale en de Voorjaar Sale delen
+          dezelfde opbouw maar houden hun eigen naam op de pagina.
+        {%- endcomment -%}
+        {%- assign kop_eyebrow = section.settings.eyebrow | default: collection.title -%}
+        {%- if kop_eyebrow != blank -%}
+          <p class="eyebrow on-dark">{{ kop_eyebrow }}</p>
+        {%- endif -%}
+        <h1 class="duo on-dark klein">{{ section.settings.kop_1 }}<span class="b">{{ section.settings.kop_2 }}</span></h1>
+        {%- if section.settings.lede != blank -%}
+          <p class="lead on-dark kort">{{ section.settings.lede }}</p>
+        {%- endif -%}
+        {%- if heeft_hulp and section.settings.hulp_link != blank -%}
+          <a class="hero-hulp" href="#ws-keuzehulp">{{ section.settings.hulp_link }}
+            <i><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsc-pijl"/></svg></i></a>
+        {%- endif -%}
+      </div>
     </div>
+  </div>
+</section>
 
-    {%- if heeft_hulp -%}
-    {%- comment -%}
-      De keuzehulp loopt stap voor stap: één vraag staat open, beantwoorde vragen
-      klappen dicht tot één regel met het antwoord en een potlood, en de match komt
-      pas als alles beantwoord is. Het aantal stappen volgt de zone — de ene pagina
-      heeft er twee, de andere vier — dus de stapper telt de vraagblokken zelf.
-    {%- endcomment -%}
+{%- if heeft_hulp -%}
+  {%- comment -%}
+    De keuzehulp loopt stap voor stap: één vraag staat open, beantwoorde vragen
+    klappen dicht tot één regel met het antwoord en een potlood, en de match komt
+    pas als alles beantwoord is. Het aantal stappen volgt de zone — de ene pagina
+    heeft er twee, de andere vier — dus de stapper telt de vraagblokken zelf.
+
+    Hij staat hier in de bron, maar hoort onder de eerste productgroep te staan:
+    vier vragen zijn 491 px en dat is het grootste blok van de pagina. Het
+    verplaatsen doet ws-collectie.js. De hulp werkt toch alleen met JavaScript,
+    dus zonder script blijft hij verborgen in plaats van dood boven de kaarten
+    te staan; in de hero staat dan nog steeds de regel die ernaartoe wijst.
+  {%- endcomment -%}
+  <div class="hulpzone" id="ws-keuzehulp" hidden>
     {%- assign n_vragen = 0 -%}
     {%- for block in section.blocks -%}
       {%- if block.type == 'vraag' -%}{%- assign n_vragen = n_vragen | plus: 1 -%}{%- endif -%}
@@ -169,50 +224,7 @@
 
       <button type="button" class="kies-opnieuw">{{ section.settings.opnieuw | default: 'Opnieuw beginnen' }}</button>
     </div>
-    {%- endif -%}
-
   </div>
-</section>
-
-{%- assign heeft_zones = false -%}
-{%- for block in section.blocks -%}{%- if block.type == 'zone' -%}{%- assign heeft_zones = true -%}{%- endif -%}{%- endfor -%}
-{%- if heeft_zones -%}
-  <section class="zonebalk"><div class="rail">
-    {%- assign kop_kruimel = section.settings.kruimel | default: collection.title -%}
-    {%- if kop_kruimel != blank -%}
-      <p class="kruimel"><a href="{{ routes.root_url }}">Home</a> <span>/</span> <b>{{ kop_kruimel }}</b></p>
-    {%- endif -%}
-    <div class="zonekiezer">
-      {%- for block in section.blocks -%}
-        {%- if block.type == 'zone' -%}
-          {%- assign is_nu = block.settings.huidig -%}
-          {%- if block.settings.url != blank and is_nu != true -%}
-            {%- assign tag = 'a' -%}
-          {%- else -%}
-            {%- assign tag = 'button' -%}
-          {%- endif -%}
-          <{{ tag }} class="zkaart{% if is_nu %} nu{% endif %}"
-            {%- if tag == 'a' %} href="{{ block.settings.url }}"{% else %} type="button"{% endif -%}
-            {% if is_nu %} aria-current="true"{% endif %}
-            data-zone="{{ block.settings.naam | escape }}" data-app="{{ block.settings.aantal }}"
-            {{ block.shopify_attributes }}>
-            {%- if block.settings.icoon != blank -%}
-              <span class="zkaart-ico">{{ block.settings.icoon | image_url: width: 200 | image_tag: alt: '' }}</span>
-            {%- endif -%}
-            <span class="zkaart-naam">{{ block.settings.naam }}</span>
-            <span class="zkaart-tel">{{ block.settings.aantal }}</span>
-            <svg class="zkaart-pijl" viewBox="0 0 24 24" aria-hidden="true"><use href="#wsc-chevron-r"/></svg>
-          </{{ tag }}>
-        {%- endif -%}
-      {%- endfor -%}
-    </div>
-    {%- comment -%}
-      Op de telefoon is de zonebalk een schuifstrip. Zonder spoor is niet te zien
-      dat er nog tegels naast staan; de duim loopt mee met de scrollpositie en
-      wordt door ws-collectie.js verborgen als alles al in beeld staat.
-    {%- endcomment -%}
-    <div class="zk-spoor" aria-hidden="true" hidden><span class="zk-duim"></span></div>
-  </div></section>
 {%- endif -%}
 
 {%- capture keuze_json -%}
@@ -298,13 +310,20 @@
         "type": "textarea",
         "id": "lede",
         "label": "Inleiding",
-        "info": "Eén tot twee zinnen."
+        "info": "Eén regel. Hij ligt over de foto, dus meer dan een zin of twintig woorden past er niet."
+      },
+      {
+        "type": "text",
+        "id": "hulp_link",
+        "label": "Regel die naar de keuzehulp wijst",
+        "info": "Staat onder de inleiding in de hero. Leeg laten haalt de regel weg; de keuzehulp zelf blijft onder de eerste productgroep staan.",
+        "default": "Weet je niet waar te beginnen?"
       },
       {
         "type": "image_picker",
         "id": "foto",
         "label": "Foto van het apparaat in gebruik",
-        "info": "Staat als plaat in de kolom, verhouding 16:8. Geen volle achtergrondband."
+        "info": "Vult de hele hero; de tekst ligt eroverheen. Kies een beeld met een rustige onderrand, daar staat de kop. Leeg laten geeft een zwarte hero zonder foto."
       },
       {
         "type": "text",
@@ -421,13 +440,8 @@
       },
       {
         "type": "header",
-        "content": "Zonebalk"
-      },
-      {
-        "type": "text",
-        "id": "kruimel",
-        "label": "Naam van deze zone",
-        "default": "Hoofd"
+        "content": "Zonebalk",
+        "info": "De zonekiezer staat boven de hero. Hij vervangt het kruimelpad: de tegels zeggen zelf al waar je bent."
       },
       {
         "type": "header",
