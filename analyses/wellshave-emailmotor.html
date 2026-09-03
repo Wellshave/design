@@ -686,6 +686,9 @@ tfoot td {
           <p>Erger nog: de derde Post-Purchase-mail heet <em>"Verbeter de prestaties met de juiste add-ons!"</em> — dat ís de cross-sell. De twee flows doen hetzelfde werk, op elkaars tenen.</p>
           <p>Samen zijn ze goed voor 6.576 verzendingen — bijna een derde van al het flow-volume — en €408 omzet. Dat is 4,8% van de flow-omzet uit 31% van de verzendingen.</p>
           <div class="evidence is-crit">WaDcaV Post-Purchase · 5.732 verzonden · 11 orders · €407,60 · €0,07 per ontvanger<br>SMJaaQ Cross-Sell&nbsp;&nbsp;&nbsp; · &nbsp;&nbsp;844 verzonden · &nbsp;0 orders · &nbsp;&nbsp;&nbsp;&nbsp;€0,00 · €0,00 per ontvanger</div>
+          <p style="margin-top: 17px;">Op 3 september mailde een klant hierover. Hij kocht op 25 augustus één pakket van €89,95 en kreeg dit:</p>
+          <div class="evidence is-crit">25 aug 17:26&nbsp; bestelling &euro;89,95<br>25 aug 17:28&nbsp; Post Purchase #1&nbsp; "Bedankt voor je bestelling! &#129586;"<br>26 aug 05:27&nbsp; Cross-Sell #1&nbsp;&nbsp;&nbsp;&nbsp; "Wil jij je set compleet maken?&#128521;"<br>26 aug 17:29&nbsp; Post Purchase #2&nbsp; "Alles wat je moet weten voor een strakkere trim!"<br>28 aug 05:28&nbsp; Cross-Sell #2&nbsp;&nbsp;&nbsp;&nbsp; "125.000 mannen gingen je voor...."<br>28 aug 17:30&nbsp; Post Purchase #3&nbsp; "Verbeter de prestaties met de juiste add-ons!"<br>30 aug 05:29&nbsp; Cross-Sell #3&nbsp;&nbsp;&nbsp;&nbsp; "&hellip; extra tools nodig?"<br>30 aug 17:31&nbsp; Post Purchase #4&nbsp; "Een bedankje speciaal voor jou &#127881;"</div>
+          <p>Zeven marketingmails in vijf dagen, plus de Shopify-transactiemails en twee Trustpilot-uitnodigingen. Zijn eigen telling: dertien. Zijn reactie: <em>"Wie doet bij jullie de marketing? Kan iemand hem/haar op de rem trappen?"</em> Hij is inmiddels afgemeld.</p>
         </div>
       </li>
 
@@ -1064,7 +1067,18 @@ tfoot td {
     <p class="deck">De volgorde is veranderd door de trendanalyse. Nieuwe flows bouwen op een instroom die half zo goed converteert als in het voorjaar is werk weggooien — eerst de lekken dicht, dan de instroomkwaliteit, dan pas bouwen.</p>
 
     <div class="phase">
-      <div class="phase-when"><b>NU</b>Deze week. Geen bouwwerk, alleen instellingen en één template.</div>
+      <div class="phase-when"><b>NU</b>Deze week. Zevenendertig vinkjes, geen bouwwerk.</div>
+      <div>
+        <h3>Zet Smart Sending aan, overal</h3>
+        <p style="font-size: 16px; line-height: 1.6; color: var(--ink-2); margin: 0 0 13px; max-width: 640px;">Smart Sending is de rem die voorkomt dat iemand binnen een venster meerdere mails krijgt. Ik heb alle dertien live flows nagelopen: van de <b>37 marketingberichten staat er geen enkele met Smart Sending aan</b>, en geen van alle heeft een <code>additional_filters</code>. Er is dus letterlijk niets dat overlap tegenhoudt.</p>
+        <p style="font-size: 16px; line-height: 1.6; color: var(--ink-2); margin: 0 0 13px; max-width: 640px;">Wat dat in de praktijk doet: wie iets koopt zit in Post Purchase (4 mails) én Cross-Sell (3 mails), allebei op <code>Placed Order</code>, om en om — zeven mails in vijf dagen. Erger is de kant ervoor: Checkout Abandon (5), Cart Abandon (5), Site Abandon (4) en Browse Abandon (2) draaien alle vier tegelijk op overlappende signalen. Wie rondkijkt, iets in de mand legt en niet afrekent kan in theorie in alle vier tegelijk zitten. Zestien mails, uit vier flows die niet van elkaar weten dat ze bestaan.</p>
+        <div class="evidence is-crit">13 live flows · 37 marketingberichten · smart_sending_enabled false op 37 van 37<br>additional_filters null op 37 van 37 · alleen "Garantie geactiveerd" staat correct als transactional</div>
+        <p style="font-size: 15.5px; color: var(--ink-3); margin: 14px 0 0; max-width: 640px;">Dit is één vinkje per bericht in de Klaviyo-interface. Zevenendertig vinkjes, ongeveer twintig minuten, en het is de goedkoopste ingreep in dit hele rapport.</p>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-when"><b>NU</b>Zelfde week, in Shopify.</div>
       <div>
         <h3>De kortingslekken dichten</h3>
         <ul class="steps">
@@ -1167,7 +1181,7 @@ tfoot td {
   <div class="close">
     <h2>Waar ik op wacht</h2>
     <p>De analyse staat. Wat ik nog niet gedaan heb is iets veranderen in het account — geen flows aangepast, niets gearchiveerd, niets uitgezet. Dat leek me niet iets om ongevraagd te doen in een live account waar orders doorheen lopen.</p>
-    <p>Zeg maar waar je wil beginnen. Het blok onder <b>NU</b> zijn vier instellingen die je zelf in een halfuur doet — drie in Shopify, één in een template. Voor de splitsing van de Welcome Flow en het nieuwe werk daarna kan ik de complete specificaties uitschrijven — triggers, filters, wachttijden, onderwerpsregels, per mail — en de bijbehorende templates via de API in het account klaarzetten, zodat het bouwen zelf nog een kwestie van doorklikken is. Flows zelf aanmaken kan de API niet; templates en campagnes wel.</p>
+    <p>Zeg maar waar je wil beginnen. De twee blokken onder <b>NU</b> zijn instellingen die je zelf in een uur doet: 37 vinkjes in Klaviyo, drie in Shopify en één template. Voor de splitsing van de Welcome Flow en het nieuwe werk daarna kan ik de complete specificaties uitschrijven — triggers, filters, wachttijden, onderwerpsregels, per mail — en de bijbehorende templates via de API in het account klaarzetten, zodat het bouwen zelf nog een kwestie van doorklikken is. Flows zelf aanmaken kan de API niet; templates en campagnes wel.</p>
   </div>
 
   <p class="footnote">
