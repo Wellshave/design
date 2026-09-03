@@ -177,17 +177,19 @@ footer p{margin:0;max-width:72ch}
 .ws-sub{font-size:18px;line-height:158%;font-weight:400;color:rgba(255,255,255,.72);margin:0;
   max-width:34em}
 
-.ws-knoppen{display:flex;flex-wrap:wrap;gap:14px;align-items:stretch}
+/* Eén knop die het werk doet, met de quiz eronder als regel; zachte hoeken
+   in plaats van een pil. */
+.ws-knoppen{display:flex;flex-direction:column;align-items:flex-start;gap:14px}
 .ws-cta{display:inline-flex;align-items:center;gap:14px;
   background:linear-gradient(135deg,#F5D18A 0%,#D8AC5D 52%,#BC813E 100%);
   color:#111111;font-weight:700;font-size:14px;letter-spacing:.13em;text-transform:uppercase;
-  padding:20px 30px;border-radius:100px;text-decoration:none;
+  padding:20px 30px;border-radius:14px;text-decoration:none;
   box-shadow:0 14px 34px -18px rgba(245,209,138,.9)}
 .ws-cta svg{width:17px;height:17px}
-.ws-cta2{display:inline-flex;align-items:center;justify-content:center;
-  border:1px solid rgba(255,255,255,.34);color:#fff;font-weight:700;font-size:14px;
-  letter-spacing:.13em;text-transform:uppercase;padding:20px 30px;border-radius:100px;
-  text-decoration:none;background:rgba(255,255,255,.03)}
+.ws-cta2{display:inline-flex;align-items:center;border:0;padding:0;background:none;
+  font-size:13.5px;font-weight:600;letter-spacing:.02em;text-transform:none;
+  color:rgba(255,255,255,.8);text-decoration:underline;text-underline-offset:4px;
+  text-decoration-color:rgba(255,255,255,.34)}
 
 /* het label bij het apparaat en het aantal bestellingen */
 .ws-wijzer{position:absolute;left:69%;top:64%;z-index:2;padding-left:52px}
@@ -266,11 +268,9 @@ footer p{margin:0;max-width:72ch}
 .ws-m .h-tp-stars i{width:17px;height:17px}
 .ws-m .h-tp-stars svg{width:11px;height:11px}
 .ws-m .tp-score,.ws-m .h-tp-brand{font-size:11.5px}
-.ws-m .ws-knoppen{width:100%;flex-direction:column;gap:11px;align-items:stretch}
+.ws-m .ws-knoppen{width:100%;gap:11px;align-items:stretch}
 .ws-m .ws-cta{justify-content:center;font-size:12.5px;padding:17px 22px}
-.ws-m .ws-cta2{border:0;padding:0;background:none;font-size:12.5px;font-weight:600;
-  letter-spacing:.02em;text-transform:none;color:rgba(255,255,255,.78);
-  text-decoration:underline;text-underline-offset:4px;text-decoration-color:rgba(255,255,255,.32)}
+.ws-m .ws-cta2{justify-content:center;font-size:12.5px}
 .ws-m .ws-telling{display:none}
 /* de drie zekerheden passen niet naast elkaar in 390px en lopen als band voorbij */
 .ws-m .ws-strook{padding:11px 0 12px;overflow:hidden;
@@ -1946,7 +1946,7 @@ footer p{margin:0;max-width:72ch}
 
   <section class="blok">
     <div class="blok-h"><h2>Blok 1 — Hero</h2><span>Herbouwd — nog niets live</span></div>
-    <p class="sb7"><em>Regel 1 · 2 · 5</em><span>De kop noemt in één zin de held en de gids: <b>jij wilt verzorgd de deur uit, wij regelen de rest</b>. De ondertitel eronder is het plan in één stap: kies je plek. De belofte van honderd dagen stond daar ook nog bij, maar die staat al in de balk eronder en in vijf andere blokken — één keer is genoeg. Op de telefoon ligt alles nu <b>over de foto</b> in plaats van eronder geplakt: de hero ging van 892 naar 781 px en de foto van 330 naar 720 px hoog. De tweede knop werd een regel onder de hoofdknop, zodat de quiz niet even zwaar weegt als kopen.</span></p>
+    <p class="sb7"><em>Regel 1 · 2 · 5</em><span>De kop noemt in één zin de held en de gids: <b>jij wilt verzorgd de deur uit, wij regelen de rest</b>. De ondertitel eronder is het plan in één stap: kies je plek. De belofte van honderd dagen stond daar ook nog bij, maar die staat al in de balk eronder en in vijf andere blokken — één keer is genoeg. Op de telefoon ligt alles nu <b>over de foto</b> in plaats van eronder geplakt: de hero ging van 892 naar 781 px en de foto van 330 naar 720 px hoog. De tweede knop werd op beide formaten een onderstreepte regel onder de hoofdknop, zodat de quiz niet even zwaar weegt als kopen — en de hoofdknop kreeg zachte hoeken in plaats van een volle pil.</span></p>
     <div class="views">
       <div>
         <p class="devicecap">Desktop — 1440px</p>

@@ -60,19 +60,24 @@
 .ws-hero__sub{font-size:18px;line-height:158%;font-weight:400;color:rgba(255,255,255,.72);
   margin:0;max-width:34em}
 
-.ws-hero__knoppen{display:flex;flex-wrap:wrap;gap:14px;align-items:stretch}
+/* Eén knop die het werk doet, met de quiz eronder als regel. Twee vlakken
+   naast elkaar wogen even zwaar, terwijl kopen en twijfelen dat niet zijn.
+   De hoeken zijn zacht in plaats van rond: een pil naast een pil naast een
+   pil maakte het geheel zoet. */
+.ws-hero__knoppen{display:flex;flex-direction:column;align-items:flex-start;gap:14px}
 .ws-hero__cta{display:inline-flex;align-items:center;gap:14px;
   background:linear-gradient(135deg,#F5D18A 0%,#D8AC5D 52%,#BC813E 100%);
   color:#111;font-weight:700;font-size:14px;letter-spacing:.13em;text-transform:uppercase;
-  padding:20px 30px;border-radius:100px;text-decoration:none;border:0;
+  padding:20px 30px;border-radius:14px;text-decoration:none;border:0;
   box-shadow:0 14px 34px -18px rgba(245,209,138,.9)}
 .ws-hero__cta:hover{color:#111;text-decoration:none}
 .ws-hero__cta svg{width:17px;height:17px}
-.ws-hero__cta2{display:inline-flex;align-items:center;justify-content:center;
-  border:1px solid rgba(255,255,255,.34);color:#fff;font-weight:700;font-size:14px;
-  letter-spacing:.13em;text-transform:uppercase;padding:20px 30px;border-radius:100px;
-  text-decoration:none;background:rgba(255,255,255,.03)}
-.ws-hero__cta2:hover{color:#fff;text-decoration:none}
+.ws-hero__cta2{display:inline-flex;align-items:center;border:0;padding:0;background:none;
+  font-size:13.5px;font-weight:600;letter-spacing:.02em;text-transform:none;
+  color:rgba(255,255,255,.8);text-decoration:underline;text-underline-offset:4px;
+  text-decoration-color:rgba(255,255,255,.34)}
+.ws-hero__cta2:hover{color:#fff;text-decoration:underline;
+  text-decoration-color:rgba(255,255,255,.7)}
 
 /* het label bij het apparaat en het aantal bestellingen */
 .ws-hero__wijzer{position:absolute;left:69%;top:64%;z-index:2;padding-left:52px}
@@ -164,14 +169,10 @@
   .ws-hero__sterren svg{width:11px;height:11px}
   .ws-hero__tpscore,.ws-hero__tpmerk{font-size:11.5px}
 
-  /* één knop die het werk doet; de quiz staat eronder als regel, niet als
-     tweede vlak dat evenveel gewicht opeist */
-  .ws-hero__knoppen{width:100%;flex-direction:column;gap:11px;align-items:stretch}
+  /* de knop over de volle breedte, de quizregel eronder gecentreerd */
+  .ws-hero__knoppen{width:100%;gap:11px;align-items:stretch}
   .ws-hero__cta{justify-content:center;font-size:12.5px;padding:17px 22px}
-  .ws-hero__cta2{border:0;padding:0;background:none;font-size:12.5px;
-    font-weight:600;letter-spacing:.02em;text-transform:none;
-    color:rgba(255,255,255,.78);text-decoration:underline;
-    text-underline-offset:4px;text-decoration-color:rgba(255,255,255,.32)}
+  .ws-hero__cta2{justify-content:center;font-size:12.5px}
 
   /* op mobiel passen drie zekerheden met tekst niet naast elkaar in 390px,
      dus lopen ze als één band voorbij. De band schuift precies de helft op
