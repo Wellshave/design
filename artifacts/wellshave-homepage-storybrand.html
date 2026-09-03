@@ -440,9 +440,6 @@ footer p{margin:0;max-width:72ch}
 .spot-now span{font-size:40px;font-weight:700;letter-spacing:-.035em;line-height:1;color:#fff}
 .spot-cmp{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding-bottom:3px}
 .spot-was{font-size:15px;color:rgba(255,255,255,.38);text-decoration:line-through}
-.spot-save{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
-  color:#F5D18A;border:1px solid rgba(245,209,138,.45);
-  padding:8px 14px;border-radius:100px;white-space:nowrap}
 .spot-stock{font-size:12.5px;font-weight:500;color:rgba(255,255,255,.72);margin:0;
   display:flex;align-items:center;gap:9px}
 .spot-stock i{width:7px;height:7px;border-radius:100px;background:#C99A4E;display:block;flex:none;
@@ -545,8 +542,6 @@ footer p{margin:0;max-width:72ch}
 .bs-price{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;margin-top:6px}
 .bs-now{font-size:20px;font-weight:700;letter-spacing:-.025em}
 .bs-was{font-size:13px;color:rgba(17,17,17,.38);text-decoration:line-through}
-.bs-save{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
-  color:#8F6428;background:#EDE7DB;padding:5px 9px;border-radius:100px;white-space:nowrap}
 .bs-go{margin-top:12px;display:flex;align-items:center;justify-content:space-between;gap:10px;
   border-top:1px solid rgba(17,17,17,.1);padding-top:13px;
   font-size:13px;font-weight:600}
@@ -608,7 +603,6 @@ footer p{margin:0;max-width:72ch}
 .bs-m .bs-price{gap:6px;margin-top:5px}
 .bs-m .bs-now{font-size:17px}
 .bs-m .bs-was{font-size:11.5px}
-.bs-m .bs-save{font-size:9.5px;padding:4px 7px}
 .bs-m .bs-go{margin-top:9px;padding-top:10px;font-size:11.5px}
 .bs-m .bs-go i{width:24px;height:24px}
 .bs-m .bs-go svg{width:12px;height:12px}
@@ -1085,8 +1079,7 @@ footer p{margin:0;max-width:72ch}
 .kb-prijs{display:flex;align-items:center;flex-wrap:wrap;gap:14px;margin-top:-8px}
 .kb-nu{font-size:46px;font-weight:700;letter-spacing:-.035em;color:#fff;line-height:1}
 .kb-was{font-size:17px;color:rgba(255,255,255,.4);text-decoration:line-through}
-.kb-korting{margin-left:auto;font-size:12px;font-weight:700;letter-spacing:.1em;
-  text-transform:uppercase;color:#111;background:#F5D18A;border-radius:100px;padding:9px 16px}
+.kb-korting{margin-left:auto}
 .kb-verschil{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
   border:1px solid rgba(255,255,255,.14);border-radius:12px;overflow:hidden}
 .kb-verschil > div{padding:11px 16px;text-align:center;min-width:0}
@@ -1144,7 +1137,7 @@ footer p{margin:0;max-width:72ch}
 .kb-m .kb-rooster b{font-size:10.5px}
 .kb-m .kb-rooster span{font-size:11px}
 .kb-m .kb-nu{font-size:38px}
-.kb-m .kb-korting{font-size:11px;padding:8px 13px;margin-left:0}
+.kb-m .kb-korting{margin-left:0}
 .kb-m .kb-verschil > div{padding:10px 10px}
 .kb-m .kb-verschil span{font-size:14px}
 .kb-m .kb-knop{justify-content:center;font-size:12.5px;padding:8px 8px 8px 18px}
@@ -1733,12 +1726,27 @@ footer p{margin:0;max-width:72ch}
   color:rgba(255,255,255,.9)}
 .bn-hpunt svg{width:19px;height:19px;flex:none;padding:3px;border-radius:50%;
   border:1px solid rgba(245,209,138,.45);color:#F5D18A}
+/* ══ het bespaarlabel ══
+   Eén vorm door de hele winkel: een pil met een gouden rand, een gouden
+   letter en een labelicoontje. Geen gouden vulling — die is voorbehouden
+   aan wat je kunt aanklikken. In het thema staat dit in ws-spaar.css. */
+.spaar{display:inline-flex;align-items:center;gap:7px;padding:6px 13px;border-radius:100px;
+  border:1px solid rgba(188,129,62,.5);color:#8F6428;
+  background:linear-gradient(135deg,rgba(245,209,138,.38) 0%,rgba(188,129,62,.16) 100%);
+  font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  line-height:1;white-space:nowrap}
+.spaar svg{width:12px;height:12px;flex:none}
+.spaar--donker{border-color:rgba(245,209,138,.55);color:#F5D18A;
+  background:linear-gradient(135deg,rgba(245,209,138,.2) 0%,rgba(245,209,138,.07) 100%)}
+.ws-m .spaar,.bn-m .spaar,.bs-m .spaar,.pf-m .spaar,.kb-m .spaar,.qz-m .spaar{
+  padding:5px 10px;font-size:9.5px;gap:6px}
+.ws-m .spaar svg,.bn-m .spaar svg,.bs-m .spaar svg,.pf-m .spaar svg,
+.kb-m .spaar svg,.qz-m .spaar svg{width:11px;height:11px}
+
 .bn-hkassa{display:flex;flex-direction:column;align-items:flex-start;gap:10px}
 .bn-hbedrag{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
 .bn-hnu{font-size:40px;font-weight:700;letter-spacing:-.03em;color:#fff;line-height:1}
 .bn-hwas{font-size:19px;font-weight:500;color:rgba(255,255,255,.42);text-decoration:line-through}
-.bn-hbespaar{display:inline-flex;align-items:center;gap:7px;padding:8px 13px;font-size:11.5px;
-  font-weight:800;letter-spacing:.09em;text-transform:uppercase}
 .bn-hvoorraad{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;
   color:rgba(255,255,255,.72)}
 .bn-hcta{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;margin-top:6px;
@@ -1767,8 +1775,6 @@ footer p{margin:0;max-width:72ch}
 .bn-prijs{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
 .bn-nu{font-size:23px;font-weight:700;letter-spacing:-.02em;color:#111}
 .bn-was{font-size:13px;font-weight:500;color:rgba(17,17,17,.4);text-decoration:line-through}
-.bn-korting{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;font-size:10.5px;
-  font-weight:800;letter-spacing:.07em;text-transform:uppercase}
 .bn-voorraad{display:flex;align-items:center;gap:7px;font-size:11.5px;font-weight:600;
   color:rgba(17,17,17,.6)}
 .bn-stip{width:7px;height:7px;border-radius:50%;background:#2F9E5B;flex:none}
@@ -1785,12 +1791,9 @@ footer p{margin:0;max-width:72ch}
   background:linear-gradient(135deg,#F7DCA2 0%,#E4C079 46%,#C8944B 100%)}
 .bn-hcta::before,.bn-cta::before{content:"";position:absolute;left:0;right:0;top:0;height:45%;
   z-index:-1;background:linear-gradient(180deg,rgba(255,255,255,.42),rgba(255,255,255,0))}
-/* het prijskaartje is bewust geen knop: zelfde merkkleur, andere vorm */
-.bn-hbespaar,.bn-korting{position:relative;border-radius:5px;border:1px solid rgba(188,129,62,.5);
-  color:#8F6428;background:linear-gradient(135deg,rgba(245,209,138,.38) 0%,rgba(188,129,62,.16) 100%)}
-.bn-hbespaar svg,.bn-korting svg{width:12px;height:12px;flex:none}
-.bn-hbespaar{border-color:rgba(245,209,138,.55);color:#F5D18A;
-  background:linear-gradient(135deg,rgba(245,209,138,.2) 0%,rgba(245,209,138,.07) 100%)}
+/* het bespaarlabel staat als .spaar bovenaan: overal dezelfde vorm.
+   Hier alleen wat dit blok eraan toevoegt. */
+.bn-hbespaar,.bn-korting{position:relative}
 .bn .bn-link{margin:30px 0 0;text-align:center}
 .bn-link a{display:inline-flex;align-items:center;gap:10px;font-size:13.5px;font-weight:700;
   color:#111;text-decoration:none;border-bottom:1px solid rgba(17,17,17,.35);padding-bottom:3px}
@@ -1815,7 +1818,6 @@ footer p{margin:0;max-width:72ch}
 .bn-m .bn-hbedrag{gap:9px}
 .bn-m .bn-hnu{font-size:30px}
 .bn-m .bn-hwas{font-size:16px}
-.bn-m .bn-hbespaar{padding:6px 10px;font-size:10.5px;gap:6px}
 .bn-m .bn-hvoorraad,.bn-m .bn-hcta,.bn-m .bn-hslot{width:100%}
 .bn-m .bn-hcta{padding:16px 14px;font-size:11.5px;letter-spacing:.09em;margin-top:2px}
 .bn-m .bn-hslot{font-size:10.5px}
@@ -1836,8 +1838,6 @@ footer p{margin:0;max-width:72ch}
 .bn-m .bn-prijs{gap:7px}
 .bn-m .bn-nu{font-size:19px}
 .bn-m .bn-was{font-size:11.5px}
-.bn-m .bn-korting{padding:5px 8px;font-size:9.5px;gap:5px}
-.bn-m .bn-korting svg{width:11px;height:11px}
 .bn-m .bn-voorraad{font-size:10.5px}
 .bn-m .bn-cta{padding:12px 8px;font-size:10px;letter-spacing:.07em;gap:7px}
 .bn-m .bn-cta svg{width:13px;height:13px}
@@ -2106,7 +2106,7 @@ footer p{margin:0;max-width:72ch}
           </span>
           <span class="bn-hkassa">
             <span class="bn-hbedrag"><span class="bn-hnu">&euro;124,95</span><span class="bn-hwas">&euro;134,95</span></span>
-            <span class="bn-hbespaar"><svg><use href="#bn-tag"/></svg>Je bespaart &euro;10,00</span>
+            <span class="spaar spaar--donker bn-hbespaar"><svg><use href="#bn-tag"/></svg>Je bespaart &euro;10,00</span>
             <span class="bn-hvoorraad"><span class="bn-stip"></span>Op voorraad</span>
             <span class="bn-hcta">Bekijk de complete set<svg><use href="#arw"/></svg></span>
           </span>
@@ -2123,7 +2123,7 @@ footer p{margin:0;max-width:72ch}
               <span class="bn-tekst">Tondeuse, foil shaver en neustrimmer.</span>
               <span class="bn-rek"></span>
               <span class="bn-prijs"><span class="bn-nu">&euro;109,95</span><span class="bn-was">&euro;119,95</span></span>
-              <span class="bn-korting"><svg><use href="#bn-tag"/></svg>Bespaar &euro;10,00</span>
+              <span class="spaar bn-korting"><svg><use href="#bn-tag"/></svg>Bespaar &euro;10,00</span>
               <span class="bn-voorraad"><span class="bn-stip"></span>Op voorraad</span>
             </span>
             <span class="bn-cta">Bekijk de set<svg><use href="#arw"/></svg></span>
@@ -2136,7 +2136,7 @@ footer p{margin:0;max-width:72ch}
               <span class="bn-tekst">Groom Guard PRO, neustrimmer en tassen.</span>
               <span class="bn-rek"></span>
               <span class="bn-prijs"><span class="bn-nu">&euro;89,95</span><span class="bn-was">&euro;142,80</span></span>
-              <span class="bn-korting"><svg><use href="#bn-tag"/></svg>Bespaar &euro;52,85</span>
+              <span class="spaar bn-korting"><svg><use href="#bn-tag"/></svg>Bespaar &euro;52,85</span>
               <span class="bn-voorraad"><span class="bn-stip"></span>Op voorraad</span>
             </span>
             <span class="bn-cta">Bekijk de set<svg><use href="#arw"/></svg></span>
@@ -2149,7 +2149,7 @@ footer p{margin:0;max-width:72ch}
               <span class="bn-tekst">Detailtrimmer Sharpline en 3-in-1 Flex Guard.</span>
               <span class="bn-rek"></span>
               <span class="bn-prijs"><span class="bn-nu">&euro;89,95</span><span class="bn-was">&euro;156,60</span></span>
-              <span class="bn-korting"><svg><use href="#bn-tag"/></svg>Bespaar &euro;66,65</span>
+              <span class="spaar bn-korting"><svg><use href="#bn-tag"/></svg>Bespaar &euro;66,65</span>
               <span class="bn-voorraad"><span class="bn-stip"></span>Op voorraad</span>
             </span>
             <span class="bn-cta">Bekijk de set<svg><use href="#arw"/></svg></span>
@@ -2162,7 +2162,7 @@ footer p{margin:0;max-width:72ch}
               <span class="bn-tekst">Flexibele scheerkop met travelbag.</span>
               <span class="bn-rek"></span>
               <span class="bn-prijs"><span class="bn-nu">&euro;69,95</span><span class="bn-was">&euro;79,95</span></span>
-              <span class="bn-korting"><svg><use href="#bn-tag"/></svg>Bespaar &euro;10,00</span>
+              <span class="spaar bn-korting"><svg><use href="#bn-tag"/></svg>Bespaar &euro;10,00</span>
               <span class="bn-voorraad"><span class="bn-stip"></span>Op voorraad</span>
             </span>
             <span class="bn-cta">Bekijk de set<svg><use href="#arw"/></svg></span>
@@ -2196,7 +2196,7 @@ footer p{margin:0;max-width:72ch}
           </span>
           <span class="bn-hkassa">
             <span class="bn-hbedrag"><span class="bn-hnu">&euro;124,95</span><span class="bn-hwas">&euro;134,95</span></span>
-            <span class="bn-hbespaar"><svg><use href="#bn-tag"/></svg>Je bespaart &euro;10,00</span>
+            <span class="spaar spaar--donker bn-hbespaar"><svg><use href="#bn-tag"/></svg>Je bespaart &euro;10,00</span>
             <span class="bn-hvoorraad"><span class="bn-stip"></span>Op voorraad</span>
             <span class="bn-hcta">Bekijk de complete set<svg><use href="#arw"/></svg></span>
           </span>
@@ -2213,7 +2213,7 @@ footer p{margin:0;max-width:72ch}
               <span class="bn-tekst">Tondeuse, foil shaver en neustrimmer.</span>
               <span class="bn-rek"></span>
               <span class="bn-prijs"><span class="bn-nu">&euro;109,95</span><span class="bn-was">&euro;119,95</span></span>
-              <span class="bn-korting"><svg><use href="#bn-tag"/></svg>Bespaar &euro;10,00</span>
+              <span class="spaar bn-korting"><svg><use href="#bn-tag"/></svg>Bespaar &euro;10,00</span>
               <span class="bn-voorraad"><span class="bn-stip"></span>Op voorraad</span>
             </span>
             <span class="bn-cta">Bekijk de set<svg><use href="#arw"/></svg></span>
@@ -2226,7 +2226,7 @@ footer p{margin:0;max-width:72ch}
               <span class="bn-tekst">Groom Guard PRO, neustrimmer en tassen.</span>
               <span class="bn-rek"></span>
               <span class="bn-prijs"><span class="bn-nu">&euro;89,95</span><span class="bn-was">&euro;142,80</span></span>
-              <span class="bn-korting"><svg><use href="#bn-tag"/></svg>Bespaar &euro;52,85</span>
+              <span class="spaar bn-korting"><svg><use href="#bn-tag"/></svg>Bespaar &euro;52,85</span>
               <span class="bn-voorraad"><span class="bn-stip"></span>Op voorraad</span>
             </span>
             <span class="bn-cta">Bekijk de set<svg><use href="#arw"/></svg></span>
@@ -2239,7 +2239,7 @@ footer p{margin:0;max-width:72ch}
               <span class="bn-tekst">Detailtrimmer Sharpline en 3-in-1 Flex Guard.</span>
               <span class="bn-rek"></span>
               <span class="bn-prijs"><span class="bn-nu">&euro;89,95</span><span class="bn-was">&euro;156,60</span></span>
-              <span class="bn-korting"><svg><use href="#bn-tag"/></svg>Bespaar &euro;66,65</span>
+              <span class="spaar bn-korting"><svg><use href="#bn-tag"/></svg>Bespaar &euro;66,65</span>
               <span class="bn-voorraad"><span class="bn-stip"></span>Op voorraad</span>
             </span>
             <span class="bn-cta">Bekijk de set<svg><use href="#arw"/></svg></span>
@@ -2252,7 +2252,7 @@ footer p{margin:0;max-width:72ch}
               <span class="bn-tekst">Flexibele scheerkop met travelbag.</span>
               <span class="bn-rek"></span>
               <span class="bn-prijs"><span class="bn-nu">&euro;69,95</span><span class="bn-was">&euro;79,95</span></span>
-              <span class="bn-korting"><svg><use href="#bn-tag"/></svg>Bespaar &euro;10,00</span>
+              <span class="spaar bn-korting"><svg><use href="#bn-tag"/></svg>Bespaar &euro;10,00</span>
               <span class="bn-voorraad"><span class="bn-stip"></span>Op voorraad</span>
             </span>
             <span class="bn-cta">Bekijk de set<svg><use href="#arw"/></svg></span>
@@ -2337,7 +2337,7 @@ footer p{margin:0;max-width:72ch}
                 <span class="spot-now"><b>Nu</b><span>€79,95</span></span>
                 <span class="spot-cmp">
                   <span class="spot-was">€133,25</span>
-                  <span class="spot-save">Je bespaart €53,30</span>
+                  <span class="spaar spaar--donker spot-save"><svg><use href="#bn-tag"/></svg>Je bespaart €53,30</span>
                 </span>
               </div>
               <p class="spot-stock"><i></i>Nog 26 op voorraad</p>
@@ -2419,7 +2419,7 @@ footer p{margin:0;max-width:72ch}
                 <span class="spot-now"><b>Nu</b><span>€79,95</span></span>
                 <span class="spot-cmp">
                   <span class="spot-was">€133,25</span>
-                  <span class="spot-save">Je bespaart €53,30</span>
+                  <span class="spaar spaar--donker spot-save"><svg><use href="#bn-tag"/></svg>Je bespaart €53,30</span>
                 </span>
               </div>
               <p class="spot-stock"><i></i>Nog 26 op voorraad</p>
@@ -2469,7 +2469,7 @@ footer p{margin:0;max-width:72ch}
                 <span class="bs-price">
                   <span class="bs-now">€59,95</span>
                   <span class="bs-was">€85,65</span>
-                  <span class="bs-save">Bespaar €25,70</span>
+                  <span class="spaar bs-save"><svg><use href="#bn-tag"/></svg>Bespaar €25,70</span>
                 </span>
                 <span class="bs-go">Bekijk <i><svg><use href="#arw"/></svg></i></span>
               </span>
@@ -2506,7 +2506,7 @@ footer p{margin:0;max-width:72ch}
                 <span class="bs-price">
                   <span class="bs-now">€49,95</span>
                   <span class="bs-was">€85,65</span>
-                  <span class="bs-save">Bespaar €35,70</span>
+                  <span class="spaar bs-save"><svg><use href="#bn-tag"/></svg>Bespaar €35,70</span>
                 </span>
                 <span class="bs-go">Bekijk <i><svg><use href="#arw"/></svg></i></span>
               </span>
@@ -2523,7 +2523,7 @@ footer p{margin:0;max-width:72ch}
                 <span class="bs-price">
                   <span class="bs-now">€59,95</span>
                   <span class="bs-was">€92,79</span>
-                  <span class="bs-save">Bespaar €32,84</span>
+                  <span class="spaar bs-save"><svg><use href="#bn-tag"/></svg>Bespaar €32,84</span>
                 </span>
                 <span class="bs-go">Bekijk <i><svg><use href="#arw"/></svg></i></span>
               </span>
@@ -2562,7 +2562,7 @@ footer p{margin:0;max-width:72ch}
                 <span class="bs-price">
                   <span class="bs-now">€59,95</span>
                   <span class="bs-was">€85,65</span>
-                  <span class="bs-save">Bespaar €25,70</span>
+                  <span class="spaar bs-save"><svg><use href="#bn-tag"/></svg>Bespaar €25,70</span>
                 </span>
                 <span class="bs-go">Bekijk <i><svg><use href="#arw"/></svg></i></span>
               </span>
@@ -2599,7 +2599,7 @@ footer p{margin:0;max-width:72ch}
                 <span class="bs-price">
                   <span class="bs-now">€49,95</span>
                   <span class="bs-was">€85,65</span>
-                  <span class="bs-save">Bespaar €35,70</span>
+                  <span class="spaar bs-save"><svg><use href="#bn-tag"/></svg>Bespaar €35,70</span>
                 </span>
                 <span class="bs-go">Bekijk <i><svg><use href="#arw"/></svg></i></span>
               </span>
@@ -2616,7 +2616,7 @@ footer p{margin:0;max-width:72ch}
                 <span class="bs-price">
                   <span class="bs-now">€59,95</span>
                   <span class="bs-was">€92,79</span>
-                  <span class="bs-save">Bespaar €32,84</span>
+                  <span class="spaar bs-save"><svg><use href="#bn-tag"/></svg>Bespaar €32,84</span>
                 </span>
                 <span class="bs-go">Bekijk <i><svg><use href="#arw"/></svg></i></span>
               </span>
@@ -3320,7 +3320,7 @@ footer p{margin:0;max-width:72ch}
               <li data-deel="station"><i>04</i><span><b>Oplaadstation</b><span>alles op één plek, altijd vol</span></span></li>
             </ul>
             <p class="kb-prijslabel">Bundelprijs</p>
-            <p class="kb-prijs"><span class="kb-nu">€64,95</span><span class="kb-was">€99,95</span><span class="kb-korting">Je bespaart €35</span></p>
+            <p class="kb-prijs"><span class="kb-nu">€64,95</span><span class="kb-was">€99,95</span><span class="spaar spaar--donker kb-korting"><svg><use href="#bn-tag"/></svg>Je bespaart €35</span></p>
             <div class="kb-verschil"><div><b>Normaal</b><span>€99,95</span></div><svg><use href="#arw"/></svg><div><b>Als bundel</b><span>€64,95</span></div></div>
             <p class="kb-voorraad"><span class="kb-stip"></span>Op voorraad · morgen in huis</p>
             <a class="kb-knop" href="#">Bestel de set<span><svg><use href="#arw"/></svg></span></a>
@@ -3374,7 +3374,7 @@ footer p{margin:0;max-width:72ch}
               <li data-deel="station"><i>04</i><span><b>Oplaadstation</b><span>alles op één plek, altijd vol</span></span></li>
             </ul>
             <p class="kb-prijslabel">Bundelprijs</p>
-            <p class="kb-prijs"><span class="kb-nu">€64,95</span><span class="kb-was">€99,95</span><span class="kb-korting">Je bespaart €35</span></p>
+            <p class="kb-prijs"><span class="kb-nu">€64,95</span><span class="kb-was">€99,95</span><span class="spaar spaar--donker kb-korting"><svg><use href="#bn-tag"/></svg>Je bespaart €35</span></p>
             <div class="kb-verschil"><div><b>Normaal</b><span>€99,95</span></div><svg><use href="#arw"/></svg><div><b>Als bundel</b><span>€64,95</span></div></div>
             <p class="kb-voorraad"><span class="kb-stip"></span>Op voorraad · morgen in huis</p>
             <a class="kb-knop" href="#">Bestel de set<span><svg><use href="#arw"/></svg></span></a>

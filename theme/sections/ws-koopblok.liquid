@@ -90,7 +90,7 @@
           <span class="ws-kb__nu">{% render 'ws-euro', bedrag: v.price %}</span>
           {%- if v.compare_at_price > v.price -%}
             <span class="ws-kb__was">{% render 'ws-euro', bedrag: v.compare_at_price %}</span>
-            <span class="ws-kb__korting">Je bespaart {% assign ws_bedrag = v.compare_at_price | minus: v.price %}{% render 'ws-euro', bedrag: ws_bedrag %}</span>
+            {% assign ws_bedrag = v.compare_at_price | minus: v.price %}{% render 'ws-spaar', woord: 'Je bespaart', bedrag: ws_bedrag, donker: true, extra: 'ws-kb__korting' %}
           {%- endif -%}
         </p>
         {%- if v.compare_at_price > v.price -%}

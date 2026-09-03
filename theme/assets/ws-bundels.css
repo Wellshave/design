@@ -62,8 +62,6 @@
 .ws-bn__hbedrag{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
 .ws-bn__hnu{font-size:40px;font-weight:700;letter-spacing:-.03em;color:#fff;line-height:1}
 .ws-bn__hwas{font-size:19px;font-weight:500;color:rgba(255,255,255,.42);text-decoration:line-through}
-.ws-bn__hbespaar{display:inline-flex;align-items:center;gap:7px;padding:8px 13px;font-size:11.5px;
-  font-weight:800;letter-spacing:.09em;text-transform:uppercase}
 .ws-bn__hvoorraad{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;
   color:rgba(255,255,255,.72)}
 .ws-bn__hcta{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;
@@ -114,8 +112,6 @@
 .ws-bn__prijs{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
 .ws-bn__nu{font-size:23px;font-weight:700;letter-spacing:-.02em;color:#111}
 .ws-bn__was{font-size:13px;font-weight:500;color:rgba(17,17,17,.4);text-decoration:line-through}
-.ws-bn__korting{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;font-size:10.5px;
-  font-weight:800;letter-spacing:.07em;text-transform:uppercase}
 .ws-bn__voorraad{display:flex;align-items:center;gap:7px;font-size:11.5px;font-weight:600;
   color:rgba(17,17,17,.6)}
 .ws-bn__stip{width:7px;height:7px;border-radius:50%;background:#2F9E5B;flex:none}
@@ -152,19 +148,11 @@
   animation:ws-bn-glans 1.05s ease forwards}
 @keyframes ws-bn-glans{to{transform:translateX(130%)}}
 
-/* ── het prijskaartje ──
-   Bewust géén knop: de gouden vulling is voorbehouden aan wat je kunt
-   aanklikken. Het label is een kaartje met een gouden rand, een gouden
-   letter en een labelicoontje ervoor — dezelfde merkkleur, andere vorm,
-   zodat niemand erop probeert te drukken. De glans loopt er wel overheen,
-   dus stil staat het niet. */
-.ws-bn__hbespaar,.ws-bn__korting{position:relative;overflow:hidden;isolation:isolate;
-  border-radius:5px;border:1px solid rgba(188,129,62,.5);color:#8F6428;
-  background:linear-gradient(135deg,rgba(245,209,138,.38) 0%,rgba(188,129,62,.16) 100%)}
-.ws-bn__hbespaar svg,.ws-bn__korting svg{width:12px;height:12px;flex:none}
-/* op het donkere vlak van de hoofdkaart draait de rand mee naar licht goud */
-.ws-bn__hbespaar{border-color:rgba(245,209,138,.55);color:#F5D18A;
-  background:linear-gradient(135deg,rgba(245,209,138,.2) 0%,rgba(245,209,138,.07) 100%)}
+/* ── het bespaarlabel ──
+   Vorm en kleur staan in ws-spaar.css, want dat label is overal in de
+   winkel hetzelfde. Hier staat alleen wat dit blok eraan toevoegt: de
+   glans die er bij hover overheen loopt, en de laag waarin die past. */
+.ws-bn__hbespaar,.ws-bn__korting{position:relative;overflow:hidden;isolation:isolate}
 
 /* ── onderaan ── */
 .ws-bn .ws-bn__link{margin:30px 0 0;text-align:center}
@@ -212,7 +200,6 @@
   .ws-bn__hbedrag{align-items:baseline;gap:9px}
   .ws-bn__hnu{font-size:30px}
   .ws-bn__hwas{font-size:16px}
-  .ws-bn__hbespaar{padding:6px 10px;font-size:10.5px;gap:6px}
   .ws-bn__hvoorraad,.ws-bn__hcta,.ws-bn__hslot{width:100%}
   .ws-bn__hcta{padding:16px 14px;font-size:11.5px;letter-spacing:.09em;margin-top:2px}
   .ws-bn__hslot{font-size:10.5px}
@@ -235,8 +222,6 @@
   .ws-bn__prijs{gap:7px}
   .ws-bn__nu{font-size:19px}
   .ws-bn__was{font-size:11.5px}
-  .ws-bn__korting{padding:5px 8px;font-size:9.5px;gap:5px}
-  .ws-bn__korting svg{width:11px;height:11px}
   .ws-bn__voorraad{font-size:10.5px}
   .ws-bn__cta{padding:12px 8px;font-size:10px;letter-spacing:.07em;gap:7px}
   .ws-bn__cta svg{width:13px;height:13px}

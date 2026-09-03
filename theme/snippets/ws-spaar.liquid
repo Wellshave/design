@@ -1,0 +1,16 @@
+{%- comment -%}
+  Het bespaarlabel: "Bespaar €12,34" in een gouden pil met een labelicoontje
+  ervoor. Overal in de winkel dezelfde vorm, zodat je hem herkent zonder te
+  lezen.
+
+  Gebruik: {% render 'ws-spaar', woord: 'Bespaar', bedrag: verschil %}
+    woord   het woord ervoor; leeg laten kan, dan staat er alleen het bedrag
+    bedrag  het verschil in centen (compare_at_price min price)
+    donker  true op een zwart vlak
+    extra   extra klasse voor het blok zelf (marge, een glans bij hover)
+
+  Het icoontje staat hier als pad in plaats van als <use>: dan hangt het
+  label niet af van een symbool dat toevallig in die sectie gedefinieerd is.
+{%- endcomment -%}
+{{ 'ws-spaar.css' | asset_url | stylesheet_tag }}
+<span class="ws-spaar{% if donker %} ws-spaar--donker{% endif %}{% if extra != blank %} {{ extra }}{% endif %}"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M11.6 3.2H4.9a1.7 1.7 0 00-1.7 1.7v6.7c0 .45.18.88.5 1.2l7.5 7.5a1.7 1.7 0 002.4 0l6.7-6.7a1.7 1.7 0 000-2.4l-7.5-7.5a1.7 1.7 0 00-1.2-.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="8" cy="8" r="1.5" fill="currentColor"/></svg>{% if woord != blank %}{{ woord }} {% endif %}{% render 'ws-euro', bedrag: bedrag %}</span>

@@ -1,0 +1,22 @@
+/* ═══ Wellshave — het bespaarlabel ═══
+   Eén vorm voor de hele winkel: een pil met een gouden rand, een gouden
+   letter en een labelicoontje ervoor. Bewust géén gouden vulling — die is
+   voorbehouden aan wat je kunt aanklikken, zodat niemand op het label
+   probeert te drukken.
+
+   Twee huiden, verder identiek: licht voor de witte kaarten, donker voor
+   de zwarte vlakken. Alles wat een blok er zelf omheen wil (marge, een
+   glans bij hover) staat in de css van dat blok, niet hier. */
+.ws-spaar{display:inline-flex;align-items:center;gap:7px;padding:6px 13px;
+  border-radius:100px;border:1px solid rgba(188,129,62,.5);color:#8F6428;
+  background:linear-gradient(135deg,rgba(245,209,138,.38) 0%,rgba(188,129,62,.16) 100%);
+  font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  line-height:1;white-space:nowrap}
+.ws-spaar svg{width:12px;height:12px;flex:none}
+.ws-spaar--donker{border-color:rgba(245,209,138,.55);color:#F5D18A;
+  background:linear-gradient(135deg,rgba(245,209,138,.2) 0%,rgba(245,209,138,.07) 100%)}
+
+@media (max-width:749px){
+  .ws-spaar{padding:5px 10px;font-size:9.5px;gap:6px}
+  .ws-spaar svg{width:11px;height:11px}
+}
