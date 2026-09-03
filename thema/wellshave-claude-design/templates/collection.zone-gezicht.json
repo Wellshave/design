@@ -1,0 +1,753 @@
+{
+  "sections": {
+    "kop": {
+      "type": "ws-collectie-kop",
+      "blocks": {
+        "vraag_1": {
+          "type": "vraag",
+          "settings": {
+            "groep": "klus",
+            "vraag": "Wat is de klus?",
+            "opties": "scheren|Glad scheren|glad scheren\nbaard|Baard op lengte|baard op lengte\nlijnen|Lijnen & stoppels|lijnen en stoppels\nmes|Klassiek met een mesje|klassiek mesje"
+          }
+        },
+        "vraag_2": {
+          "type": "vraag",
+          "settings": {
+            "groep": "set",
+            "vraag": "Alleen het apparaat, of een set?",
+            "opties": "los|Alleen het apparaat|alleen het apparaat\nset|Set met opzetstukken|set met opzetstukken"
+          }
+        },
+        "vraag_3": {
+          "type": "vraag",
+          "settings": {
+            "groep": "neus",
+            "vraag": "Ook neus- en oorhaar erbij?",
+            "opties": "geen|Niet nodig|geen neushaar\nneus|Ja, graag|ook neushaar"
+          }
+        },
+        "vraag_4": {
+          "type": "vraag",
+          "settings": {
+            "groep": "glad",
+            "vraag": "Wil je ook glad kunnen afwerken?",
+            "opties": "nee|Niet nodig|geen gladde afwerking\nja|Ja, graag|ook glad afwerken"
+          }
+        },
+        "match_1": {
+          "type": "match",
+          "settings": {
+            "id": "bgold",
+            "product": "wellshave-safety-razor-gold",
+            "naam": "Blade Guard Gold",
+            "badge": "Geen accu nodig",
+            "zin": "Een klassiek scheermes met wisselbare mesjes — ook in het zwart, voor dezelfde prijs.",
+            "reden_1": "Geen batterij, geen oplader",
+            "reden_2": "Mesjes los verkrijgbaar",
+            "reden_3": "Drie onderdelen in de doos"
+          }
+        },
+        "match_2": {
+          "type": "match",
+          "settings": {
+            "id": "edge",
+            "product": "wellshave-edge-blade",
+            "naam": "Edge Blade",
+            "badge": "Voor de lijnen",
+            "zin": "4D-flexkop die meekantelt over kaak en hals, met kammen van 1 tot 5 mm.",
+            "reden_1": "Kammen van 1, 2, 3 en 5 mm",
+            "reden_2": "Flexkop volgt kaaklijn en hals",
+            "reden_3": "Volledig waterdicht, ook voor het lichaam"
+          }
+        },
+        "match_3": {
+          "type": "match",
+          "settings": {
+            "id": "supreme",
+            "product": "6-in-1-baardtrimmer-supreme",
+            "naam": "Men Shaper Supreme™ 6-in-1",
+            "badge": "Meest compleet",
+            "zin": "Zes opzetstukken en twaalf onderdelen, met een micro shaver voor de gladde afwerking.",
+            "reden_1": "Micro shaver die de 5-in-1 niet heeft",
+            "reden_2": "Neus- en oorhaaropzetstuk meegeleverd",
+            "reden_3": "T-Blade, precisietrimmer en bodygroomer"
+          }
+        },
+        "match_4": {
+          "type": "match",
+          "settings": {
+            "id": "msiced",
+            "product": "wellshave-5-in-1-baardtrimmer-man-shaper-iced",
+            "naam": "Men Shaper Iced™ 5-in-1",
+            "badge": "Laagste prijs van het paar",
+            "zin": "Vijf opzetstukken en elf onderdelen — dezelfde set als de Gold, voor €3,00 minder.",
+            "reden_1": "T-Blade en precisietrimmer voor de lijnen",
+            "reden_2": "Verstelbaar opzetstuk 1–9 mm",
+            "reden_3": "Opbergstandaard en travelbag erbij"
+          }
+        },
+        "match_5": {
+          "type": "match",
+          "settings": {
+            "id": "dial",
+            "product": "the-dial-master",
+            "naam": "The Dial Master",
+            "badge": "Nieuw in de lijn",
+            "zin": "Twintig lengtestanden op één draaiknop — je wisselt geen kammen meer.",
+            "reden_1": "20 nauwkeurige lengtestanden",
+            "reden_2": "Verstelbare draaiknop",
+            "reden_3": "IPX7 waterdicht, LED-display"
+          }
+        },
+        "match_6": {
+          "type": "match",
+          "settings": {
+            "id": "elegant",
+            "product": "wellshave-4-in-1-scheerapparaat",
+            "naam": "Scheerapparaat Elegant™ 4-in-1",
+            "badge": "Meeste voor je geld",
+            "zin": "Vier koppen: scheren, neushaar, bakkebaarden en de baardtrimmer.",
+            "reden_1": "Neus- en oorhaaropzetstuk meegeleverd",
+            "reden_2": "Sidetrimmer voor de bakkebaarden",
+            "reden_3": "Zes onderdelen in de doos"
+          }
+        },
+        "match_7": {
+          "type": "match",
+          "settings": {
+            "id": "sentinel",
+            "product": "the-sentinel-pro",
+            "naam": "The Sentinel PRO",
+            "badge": "Nieuw in de lijn",
+            "zin": "Zet hem terug in het station en hij reinigt en laadt zichzelf.",
+            "reden_1": "Reinigingsstation met reinigingsvloeistof",
+            "reden_2": "Zes onderdelen in de doos",
+            "reden_3": "Comfortabel scheren zonder irritatie"
+          }
+        },
+        "match_8": {
+          "type": "match",
+          "settings": {
+            "id": "gentleman",
+            "product": "wellshave-scheerapparaat-elite",
+            "naam": "The Gentleman Shaver™",
+            "badge": "26× besteld in 30 dagen",
+            "zin": "Roterend scheren, met een neus- en oorhaaropzetstuk en een baardtrimmer in dezelfde doos.",
+            "reden_1": "Neus- en oorhaaropzetstuk meegeleverd",
+            "reden_2": "Baardtrimmer en kammen 3-6-9 mm",
+            "reden_3": "LCD-display en oplaadstandaard"
+          }
+        },
+        "match_9": {
+          "type": "match",
+          "settings": {
+            "id": "baron",
+            "product": "wellshave-blade-baron",
+            "naam": "4 Foil Blade Baron™",
+            "badge": "Compact",
+            "zin": "Foilkop voor korte stoppels, waterdicht, drie onderdelen in de doos.",
+            "reden_1": "Meerdere bladen grijpen meer haar tegelijk",
+            "reden_2": "Nat en droog te gebruiken",
+            "reden_3": "Past in elke toilettas"
+          }
+        },
+        "zone_alles": {
+          "type": "zone",
+          "settings": {
+            "naam": "Alle zones",
+            "aantal": "27",
+            "url": "https://wellshave.com/collections/all",
+            "huidig": false,
+            "icoon": "shopify://shop_images/ws-zone-icoon-alles.png"
+          }
+        },
+        "zone_1": {
+          "type": "zone",
+          "settings": {
+            "naam": "Lichaam & schaamstreek",
+            "aantal": "4",
+            "url": "https://wellshave.com/collections/bodygroomers",
+            "huidig": false,
+            "icoon": "shopify://shop_images/ws-zone-icoon-lichaam.png"
+          }
+        },
+        "zone_2": {
+          "type": "zone",
+          "settings": {
+            "naam": "Gezicht & baard",
+            "aantal": "11",
+            "url": "",
+            "huidig": true,
+            "icoon": "shopify://shop_images/ws-zone-icoon-gezicht.png"
+          }
+        },
+        "zone_3": {
+          "type": "zone",
+          "settings": {
+            "naam": "Hoofd",
+            "aantal": "4",
+            "url": "https://wellshave.com/collections/zone-hoofd",
+            "huidig": false,
+            "icoon": "shopify://shop_images/ws-zone-icoon-hoofd.png"
+          }
+        },
+        "zone_4": {
+          "type": "zone",
+          "settings": {
+            "naam": "Neus & oren",
+            "aantal": "8",
+            "url": "https://wellshave.com/collections/neustrimmers",
+            "huidig": false,
+            "icoon": "shopify://shop_images/ws-zone-icoon-neus.png"
+          }
+        }
+      },
+      "block_order": [
+        "vraag_1",
+        "vraag_2",
+        "vraag_3",
+        "vraag_4",
+        "match_1",
+        "match_2",
+        "match_3",
+        "match_4",
+        "match_5",
+        "match_6",
+        "match_7",
+        "match_8",
+        "match_9",
+        "zone_alles",
+        "zone_1",
+        "zone_2",
+        "zone_3",
+        "zone_4"
+      ],
+      "settings": {
+        "eyebrow": "Gezicht & baard · 11 apparaten",
+        "kop_1": "Glad, stoppels of vol.",
+        "kop_2": "Jouw gezicht, jouw lengte.",
+        "lede": "Scheren tot glad, trimmen op lengte, of klassiek met een mesje.",
+        "hulp_link": "Niet zeker welke bij jou past?",
+        "foto": "shopify://shop_images/gg-sfeer-geprobeerd.jpg",
+        "foto_alt": "Een klassiek scheermes, een baardtrimmer en een schaar naast elkaar op een warme ondergrond",
+        "kaartkop": "Jouw gezichtsapparaat in 30 seconden",
+        "kaartsub": "4 keuzes · direct een match",
+        "kaartvraag": "Wat doe je het vaakst?",
+        "tabel": "klus=mes > bgold\nklus=lijnen > edge\nklus=baard, set=set, glad=ja > supreme\nklus=baard, set=set, neus=neus > supreme\nklus=baard, set=set > msiced\nklus=baard > dial\nklus=scheren, set=set, neus=neus > elegant\nklus=scheren, set=set > sentinel\nklus=scheren, neus=neus > gentleman\nklus=scheren > baron",
+        "standaard": "baron",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 0,
+        "af_kop": "Jouw match staat klaar.",
+        "af_sub": "Pas een keuze aan of bekijk direct je advies.",
+        "opnieuw": "Opnieuw beginnen",
+        "wijzig_label": "Wijzig dit antwoord",
+        "match_label": "Jouw match",
+        "waarom_label": "Waarom deze match",
+        "match_cta": "Bekijk jouw match",
+        "voorraad_wel": "Op voorraad · morgen in huis",
+        "voorraad_niet": "Tijdelijk uitverkocht"
+      }
+    },
+    "raster": {
+      "type": "ws-collectie-raster",
+      "blocks": {
+        "groep_1": {
+          "type": "groep",
+          "settings": {
+            "kop": "Scheren tot glad",
+            "sub": "Vier scheerapparaten: drie roterend, één met een foilkop.",
+            "cat": "app",
+            "producten": [
+              "the-sentinel-pro",
+              "wellshave-scheerapparaat-elite",
+              "wellshave-blade-baron",
+              "wellshave-4-in-1-scheerapparaat"
+            ],
+            "noot": "",
+            "kicker": "",
+            "labels": "wellshave-scheerapparaat-elite = Best verkocht\nthe-sentinel-pro = Nieuw",
+            "link_label": "",
+            "link_url": ""
+          }
+        },
+        "groep_2": {
+          "type": "groep",
+          "settings": {
+            "kop": "Trimmen, lengte en lijnen",
+            "sub": "Vijf apparaten voor wie lengte wil houden of randen wil zetten.",
+            "cat": "app",
+            "producten": [
+              "6-in-1-baardtrimmer-supreme",
+              "wellshave-5-in-1-baardtrimmer-man-shaper-iced",
+              "wellshave-5-in-1-baardtrimmer-men-shaper",
+              "the-dial-master",
+              "wellshave-edge-blade"
+            ],
+            "noot": "<b>De Iced en de Gold zijn dezelfde set.</b> Elf onderdelen, vijf opzetstukken, alleen de afwerking verschilt — en de Gold kost €3,00 meer. Wil je goud, dan is dat de reden; wil je het apparaat, neem dan de Iced.",
+            "kicker": "",
+            "labels": "",
+            "link_label": "",
+            "link_url": ""
+          }
+        },
+        "groep_3": {
+          "type": "groep",
+          "settings": {
+            "kop": "Klassiek met een mesje",
+            "sub": "Twee scheermessen zonder accu, voor wie het liever met de hand doet.",
+            "cat": "app",
+            "producten": [
+              "wellshave-safety-razor-gold",
+              "wellshave-safety-razor-black"
+            ],
+            "noot": "Ook hier: <b>Gold en Black zijn hetzelfde mes</b> met dezelfde drie onderdelen, voor exact dezelfde prijs. Kies op kleur.",
+            "kicker": "",
+            "labels": "",
+            "link_label": "",
+            "link_url": ""
+          }
+        },
+        "groep_4": {
+          "type": "groep",
+          "settings": {
+            "kop": "Of pak het in één keer compleet",
+            "sub": "Voordeliger samengesteld dan de losse onderdelen.",
+            "cat": "bundel",
+            "producten": [
+              "body-beard-kit",
+              "essential-flex-bundel",
+              "wellshave-shave-package-3-0"
+            ],
+            "noot": "",
+            "kicker": "",
+            "labels": "",
+            "link_label": "",
+            "link_url": ""
+          }
+        },
+        "groep_5": {
+          "type": "groep",
+          "settings": {
+            "kop": "Blijf scherp",
+            "sub": "Vervang alleen wat slijt — niet het hele apparaat.",
+            "cat": "mes",
+            "producten": [
+              "elite-scheerkop",
+              "wellshave-safety-razor-blades",
+              "toiletry-bag",
+              "wellshave-hard-case"
+            ],
+            "noot": "",
+            "kicker": "Onderdeel",
+            "labels": "",
+            "link_label": "",
+            "link_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "groep_1",
+        "groep_2",
+        "groep_3",
+        "groep_4",
+        "groep_5"
+      ],
+      "settings": {
+        "filter_alles": "Alles",
+        "filter_app": "Apparaten",
+        "filter_bundel": "Bundels",
+        "filter_mes": "Onderdelen",
+        "vergelijken": true,
+        "sorteer_label": "Meest relevant",
+        "monogram": "shopify://shop_images/ws-mark.png",
+        "geen_score": "Nieuw · nog geen beoordelingen",
+        "uitverkocht_label": "Tijdelijk uitverkocht",
+        "uitverkocht_voet": "Tijdelijk niet leverbaar",
+        "blik_voet": "100 dagen proberen · 2 jaar garantie",
+        "mes_voet": "Vandaag besteld, morgen in huis",
+        "aanbod_product": "body-beard-kit",
+        "aanbod_eyebrow": "Grootste voordeel in deze zone",
+        "aanbod_zin": "Negen onderdelen voor gezicht, baard en lichaam, inclusief de Sharpline-detailtrimmer.",
+        "aanbod_knop": "Bekijk de bundel",
+        "slot_tekst": "in deze zone · elk apparaat 100 dagen te proberen",
+        "slot_link_label": "Bekijk de hele collectie",
+        "slot_link": "shopify://collections/all",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 0,
+        "toon_label": "Toon mij",
+        "resultaat_label": "resultaten",
+        "bundel_lint": "Meeste waarde",
+        "sorteer_prijs_op": "Prijs: laag naar hoog",
+        "sorteer_prijs_af": "Prijs: hoog naar laag",
+        "sorteer_score": "Best beoordeeld",
+        "tp_uit": "out of 5",
+        "vgl_kop": "Naast elkaar",
+        "vgl_sluit": "Sluit de vergelijking",
+        "vgl_usp_kop": "Waarvoor",
+        "vgl_balk_tekst": "geselecteerd om te vergelijken",
+        "vgl_balk_kort": "gekozen",
+        "vgl_balk_knop": "Vergelijk"
+      }
+    },
+    "uitleg": {
+      "type": "ws-collectie-uitleg",
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "product": "the-sentinel-pro",
+            "naam": "The Sentinel PRO",
+            "url": "",
+            "tekst": "Roterend, met een station dat de kop reinigt en het apparaat oplaadt."
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "product": "wellshave-scheerapparaat-elite",
+            "naam": "The Gentleman Shaver™",
+            "url": "",
+            "tekst": "Roterend, met neus- en oorhaaropzetstuk, baardtrimmer en oplaadstandaard."
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "product": "wellshave-4-in-1-scheerapparaat",
+            "naam": "Scheerapparaat Elegant™ 4-in-1",
+            "url": "",
+            "tekst": "Roterend, met neustrimmer, sidetrimmer en baardtrimmer erbij."
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "product": "wellshave-blade-baron",
+            "naam": "4 Foil Blade Baron™",
+            "url": "",
+            "tekst": "De foilkop van de vier: kort, snel en compact genoeg voor onderweg."
+          }
+        },
+        "item_5": {
+          "type": "item",
+          "settings": {
+            "product": "6-in-1-baardtrimmer-supreme",
+            "naam": "Men Shaper Supreme™ 6-in-1",
+            "url": "",
+            "tekst": "De ruimste trimmerkit: zes opzetstukken en twaalf onderdelen."
+          }
+        },
+        "item_6": {
+          "type": "item",
+          "settings": {
+            "product": "wellshave-5-in-1-baardtrimmer-man-shaper-iced",
+            "naam": "Men Shaper Iced™ 5-in-1",
+            "url": "",
+            "tekst": "Vijf opzetstukken en elf onderdelen, in de Iced-afwerking."
+          }
+        },
+        "item_7": {
+          "type": "item",
+          "settings": {
+            "product": "wellshave-5-in-1-baardtrimmer-men-shaper",
+            "naam": "Men Shaper Gold™ 5-in-1",
+            "url": "",
+            "tekst": "Dezelfde set als de Iced, in goud, voor €3,00 meer."
+          }
+        },
+        "item_8": {
+          "type": "item",
+          "settings": {
+            "product": "the-dial-master",
+            "naam": "The Dial Master",
+            "url": "",
+            "tekst": "Twintig lengtestanden op één draaiknop, zonder kammen te wisselen."
+          }
+        },
+        "item_9": {
+          "type": "item",
+          "settings": {
+            "product": "wellshave-edge-blade",
+            "naam": "Edge Blade",
+            "url": "",
+            "tekst": "Flexkop voor korte stoppels en scherpe randen, met kammen van 1 tot 5 mm."
+          }
+        },
+        "item_10": {
+          "type": "item",
+          "settings": {
+            "product": "wellshave-safety-razor-gold",
+            "naam": "Blade Guard Gold",
+            "url": "",
+            "tekst": "Klassiek scheermes met wisselbare mesjes, zonder accu."
+          }
+        },
+        "item_11": {
+          "type": "item",
+          "settings": {
+            "product": "wellshave-safety-razor-black",
+            "naam": "Blade Guard Black",
+            "url": "",
+            "tekst": "Hetzelfde mes in het zwart, voor dezelfde prijs."
+          }
+        },
+        "tip_1": {
+          "type": "tip",
+          "settings": {
+            "kop": "Geef jezelf twee weken",
+            "tekst": "Stap je over van een mes, dan voelt elektrisch scheren de eerste dagen anders en soms minder glad. Je huid en je routine hebben tijd nodig; in de beoordelingen komt dat telkens terug."
+          }
+        },
+        "tip_2": {
+          "type": "tip",
+          "settings": {
+            "kop": "Beweeg tegen de groeirichting in",
+            "tekst": "Bij een roterende kop maak je rustige, kleine rondjes; bij een foilkop rechte halen. Harder drukken maakt het resultaat niet gladder, wel roder."
+          }
+        },
+        "tip_3": {
+          "type": "tip",
+          "settings": {
+            "kop": "Maak de kop na elke beurt schoon",
+            "tekst": "Haar en huidschilfers tussen de messen zijn de eerste reden dat een apparaat gaat trekken. Spoelen of uitborstelen is genoeg; het station doet het zelf."
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4",
+        "item_5",
+        "item_6",
+        "item_7",
+        "item_8",
+        "item_9",
+        "item_10",
+        "item_11",
+        "tip_1",
+        "tip_2",
+        "tip_3"
+      ],
+      "settings": {
+        "eyebrow": "Over deze categorie",
+        "h2_1": "Roterend of foil,",
+        "h2_2": "scheren of trimmen?",
+        "inleiding": "<p>De grootste zone van de collectie begint met een vraag die geen enkele productpagina stelt: wil je het háár weg, of wil je het op een lengte houden? Een scheerapparaat brengt je huid terug naar glad en kent geen lengtes. Een trimmer laat juist lengte staan en heeft daar kammen of een draaiknop voor. Een apparaat dat allebei zegt te doen, doet meestal één van de twee goed en het andere er een beetje bij.</p><p>Kies je voor scheren, dan volgt de tweede vraag: <b>roterend of foil</b>. Een roterende kop heeft drie ronde messen die onafhankelijk kantelen; ze volgen de bolling van je kaak, kin en hals en werken goed als je baardgroei alle kanten op staat. Een foilkop heeft rechte messen die onder een geperforeerd vlak heen en weer gaan; dat werkt het snelst op een vlak stuk huid met korte stoppels. Geen van beide is beter — ze passen bij een ander gezicht en een ander ritme.</p><p>Ga je trimmen, dan zit het verschil niet in de motor maar in de doos. Een 5-in-1-kit heeft vijf opzetstukken en elf onderdelen; de 6-in-1 heeft er een micro shaver bij. Wil je juist één ding heel precies kunnen herhalen, dan is een draaiknop met vaste standen praktischer dan een la vol kammen.</p>",
+        "h3_lijst": "De elf apparaten, per soort",
+        "slotalinea": "<p>Wat slijt is de kop, niet het apparaat. De <a href=\"https://wellshave.com/products/elite-scheerkop\">scheerkop van de Gentleman Shaver</a> en de <a href=\"https://wellshave.com/products/wellshave-safety-razor-blades\">mesjes van de Blade Guard</a> zijn los te bestellen, net als de <a href=\"https://wellshave.com/collections/accesoires\">tassen en koffers</a>. Merk je dat een kop trekt of minder pakt, dan hoef je geen nieuw apparaat te kopen.</p>",
+        "bijschrift": "",
+        "h3_tips": "Hoe haal je er het meeste uit?",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 0
+      }
+    },
+    "bewijs": {
+      "type": "ws-collectie-bewijs",
+      "blocks": {
+        "citaat_1": {
+          "type": "citaat",
+          "settings": {
+            "product": "wellshave-scheerapparaat-elite",
+            "url": "",
+            "tag": "Over de overstap van mes naar apparaat",
+            "tekst": "Moet nog wennen denk ik na 50 jaar met mes scheren. Gaat niet vlugger wat veel mensen zeggen. Wel net zo glad het eindresultaat.",
+            "naam": "John N.",
+            "product_naam": "The Gentleman Shaver™",
+            "toon_score": true,
+            "bijschrift": ""
+          }
+        },
+        "citaat_2": {
+          "type": "citaat",
+          "settings": {
+            "product": "wellshave-blade-baron",
+            "url": "",
+            "tag": "Over meenemen",
+            "tekst": "Ik ben er erg tevreden over. Doet wat het hoort te doen, namelijk glad scheren. Fijn met usb-c. Compact vorm gegeven dus ook makkelijk mee te nemen. Ligt prettig in de hand.",
+            "naam": "reviewvanSjors",
+            "product_naam": "4 Foil Blade Baron™",
+            "toon_score": true,
+            "bijschrift": ""
+          }
+        },
+        "citaat_3": {
+          "type": "citaat",
+          "settings": {
+            "product": "wellshave-5-in-1-baardtrimmer-man-shaper-iced",
+            "url": "",
+            "tag": "Over hoe lang hij meegaat",
+            "tekst": "Produkt doet wat het moet doen. Gebruik het al meer dan een jaar en geen problemen mee. Batterij gaat zeer lang mee en verschillende opzetkammen mogelijk.",
+            "naam": "Krstof001",
+            "product_naam": "Men Shaper Iced™ 5-in-1",
+            "toon_score": true,
+            "bijschrift": ""
+          }
+        }
+      },
+      "block_order": [
+        "citaat_1",
+        "citaat_2",
+        "citaat_3"
+      ],
+      "settings": {
+        "eyebrow": "Uit de beoordelingen",
+        "kop": "Drie dingen die je wilt weten voordat je op elektrisch overstapt.",
+        "bron": "<p>Elke regel is een echte beoordeling bij het apparaat dat ernaast staat, geschreven door een geverifieerde koper. <b>Let op bij het lezen:</b> Loox toont bij verwante modellen soms dezelfde beoordelingenstroom met de productnaam vervangen, dus ik heb alleen regels gekozen die inhoudelijk over dít apparaat gaan.</p>",
+        "koper_label": "geverifieerde koper",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 0
+      }
+    },
+    "slot": {
+      "type": "ws-collectie-slot",
+      "blocks": {
+        "zeker_1": {
+          "type": "zekerheid",
+          "settings": {
+            "icoon": "retour",
+            "kop": "100 dagen thuis proberen",
+            "tekst": "Niet goed? Je krijgt je geld terug."
+          }
+        },
+        "zeker_2": {
+          "type": "zekerheid",
+          "settings": {
+            "icoon": "schild",
+            "kop": "2 jaar garantie",
+            "tekst": "Op elk apparaat in deze zone."
+          }
+        },
+        "zeker_3": {
+          "type": "zekerheid",
+          "settings": {
+            "icoon": "truck",
+            "kop": "Gratis verzending vanaf €30",
+            "tekst": "Daaronder €4,95. Ook naar België."
+          }
+        },
+        "zeker_4": {
+          "type": "zekerheid",
+          "settings": {
+            "icoon": "klok",
+            "kop": "Morgen in huis",
+            "tekst": "Ma t/m vr besteld voor 23:59."
+          }
+        },
+        "vraag_1": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Roterend of foil — wat past bij mij?",
+            "antwoord": "<p>Een <b>roterende</b> kop heeft drie ronde messen die apart kantelen en de bolling van kaak, kin en hals volgen; die werkt goed als je baardgroei alle kanten op staat. Een <b>foilkop</b> heeft rechte messen onder een geperforeerd vlak en is het snelst op vlakke huid met korte stoppels. Drie van de vier scheerapparaten hier zijn roterend; de 4 Foil Blade Baron is de foil.</p>"
+          }
+        },
+        "vraag_2": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Wat is het verschil tussen de Men Shaper Gold en de Iced?",
+            "antwoord": "<p>De afwerking, en verder niets. Beide hebben dezelfde vijf opzetstukken en dezelfde elf onderdelen in de doos: T-Blade, standaardtrimmer, neus- en oorhaaropzetstuk, precisietrimmer, bodygroomer, een verstelbaar opzetstuk van 1 tot 9 mm, opzetkammen, kabel, opbergstandaard en travelbag. <b>De Gold kost €3,00 meer.</b> Hetzelfde geldt voor de Blade Guard Gold en Black, die zelfs even duur zijn.</p>"
+          }
+        },
+        "vraag_3": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Kan ik er ook mijn neushaar mee doen?",
+            "antwoord": "<p>Bij vijf van de elf zit een neus- en oorhaaropzetstuk in de doos: de Gentleman Shaver, de Scheerapparaat Elegant 4-in-1 en alle drie de Men Shapers. Bij de Baron, de Sentinel PRO, de Dial Master, de Edge Blade en de Blade Guards niet. De keuzehulp bovenaan heeft daar een aparte vraag voor.</p>"
+          }
+        },
+        "vraag_4": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Hoe vaak moet ik de scheerkop vervangen?",
+            "antwoord": "<p>Merk je dat hij trekt of minder pakt, dan is het zover. De <b>scheerkop van de Gentleman Shaver ligt apart op voorraad vanaf €19,95</b> en de <b>mesjes van de Blade Guard vanaf €9,95</b>. Een bot mes kost je dus geen nieuw apparaat.</p>"
+          }
+        },
+        "vraag_5": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Wat als het me toch niet bevalt?",
+            "antwoord": "<p>Je hebt 100 dagen om het thuis te proberen, zonder reden op te geven. Je meldt de retour aan en hebt daarna veertien dagen om te versturen; <b>de verzendkosten van de retour zijn voor jou</b>, het aankoopbedrag krijg je binnen veertien dagen terug.</p>"
+          }
+        },
+        "zone_1": {
+          "type": "zone",
+          "settings": {
+            "naam": "Lichaam & schaamstreek",
+            "tekst": "Trimmen zonder wondjes.",
+            "slot": "4 apparaten →",
+            "url": "https://wellshave.com/collections/bodygroomers"
+          }
+        },
+        "zone_2": {
+          "type": "zone",
+          "settings": {
+            "naam": "Hoofd",
+            "tekst": "Tondeuses en hoofdscheerders.",
+            "slot": "4 apparaten →",
+            "url": "https://wellshave.com/collections/zone-hoofd"
+          }
+        },
+        "zone_3": {
+          "type": "zone",
+          "settings": {
+            "naam": "Neus & oren",
+            "tekst": "Detailwerk zonder trekken.",
+            "slot": "8 apparaten →",
+            "url": "https://wellshave.com/collections/neustrimmers"
+          }
+        },
+        "zone_4": {
+          "type": "zone",
+          "settings": {
+            "naam": "Alles bij elkaar",
+            "tekst": "De hele collectie, per zone gesorteerd.",
+            "slot": "Bekijk alles →",
+            "url": "https://wellshave.com/collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "zeker_1",
+        "zeker_2",
+        "zeker_3",
+        "zeker_4",
+        "vraag_1",
+        "vraag_2",
+        "vraag_3",
+        "vraag_4",
+        "vraag_5",
+        "zone_1",
+        "zone_2",
+        "zone_3",
+        "zone_4"
+      ],
+      "settings": {
+        "eyebrow": "Vragen over deze elf",
+        "h2_1": "Alles wat je",
+        "h2_2": "wilt weten.",
+        "mail_regel": "<p>Staat je vraag er niet bij? Mail <b>contact@wellshave.com</b> — je krijgt antwoord van iemand uit het team, binnen één werkdag.</p>",
+        "zones_eyebrow": "Andere plek in gedachten?",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "kop",
+    "raster",
+    "uitleg",
+    "bewijs",
+    "slot"
+  ]
+}

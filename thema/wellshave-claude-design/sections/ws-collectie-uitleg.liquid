@@ -1,0 +1,123 @@
+{% comment %}
+  Wellshave — collectiepagina, blok 3: over deze categorie.
+  Dit is ook het SEO-blok, en dat stelt eisen aan de vorm: één section, een h2 met
+  de vraag die de bezoeker stelt, h3's boven de vergelijking en de tips, echte
+  alinea's, een echte ol voor de stappen en beschrijvende links naar de
+  productpagina's. Alles staat gewoon in de HTML — niet achter een uitklap, niet
+  in een afbeelding, niet door JavaScript ingeladen.
+{% endcomment %}
+
+{{ 'ws-collectie.css' | asset_url | stylesheet_tag }}
+
+{%- assign kop_id = 'wsc-cat-' | append: section.id -%}
+
+<div class="wsc">
+<section class="sectie zand" id="over-deze-categorie" aria-labelledby="{{ kop_id }}"><div class="rail">
+  {%- assign heeft_beeld = false -%}
+  {%- if section.settings.beeld != blank -%}
+    {%- assign heeft_beeld = true -%}
+  {%- endif -%}
+  <div class="cat{% unless heeft_beeld %} solo{% endunless %}">
+    <div class="cat-tekst">
+      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h2 class="duo" id="{{ kop_id }}">{{ section.settings.h2_1 }} <span class="b">{{ section.settings.h2_2 }}</span></h2>
+      {{ section.settings.inleiding }}
+
+      {%- assign heeft_lijst = false -%}
+      {%- for block in section.blocks -%}{%- if block.type == 'item' -%}{%- assign heeft_lijst = true -%}{%- endif -%}{%- endfor -%}
+      {%- if heeft_lijst -%}
+        {%- if section.settings.h3_lijst != blank -%}<h3>{{ section.settings.h3_lijst }}</h3>{%- endif -%}
+        <ul class="cat-lijst">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'item' -%}
+              {%- assign p = block.settings.product -%}
+              {%- assign url = block.settings.url | default: p.url -%}
+              <li {{ block.shopify_attributes }}>
+                <a href="{{ url | default: '#' }}">{{ block.settings.naam | default: p.title }}</a>
+                <span>{{ block.settings.tekst }}</span>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+
+      {{ section.settings.slotalinea }}
+    </div>
+
+    {%- if heeft_beeld -%}
+      <figure class="mech-plaat">
+        {{ section.settings.beeld | image_url: width: 900 | image_tag: alt: section.settings.bijschrift }}
+        {%- if section.settings.bijschrift != blank -%}
+          <figcaption>{{ section.settings.bijschrift }}</figcaption>
+        {%- endif -%}
+      </figure>
+    {%- endif -%}
+  </div>
+
+  {%- assign heeft_tips = false -%}
+  {%- for block in section.blocks -%}{%- if block.type == 'tip' -%}{%- assign heeft_tips = true -%}{%- endif -%}{%- endfor -%}
+  {%- if heeft_tips -%}
+    {%- if section.settings.h3_tips != blank -%}<h3 class="cat-h3-breed">{{ section.settings.h3_tips }}</h3>{%- endif -%}
+    <ol class="stappenrij">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'tip' -%}
+          <li class="stapkort" {{ block.shopify_attributes }}>
+            <b>{{ block.settings.kop }}</b>
+            <span>{{ block.settings.tekst }}</span>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ol>
+  {%- endif -%}
+</div></section>
+</div>
+
+{% schema %}
+{
+  "name": "WS · Collectie uitleg",
+  "tag": "section",
+  "class": "ws-collectie-uitleg",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "paragraph", "content": "Het SEO-blok. Schrijf geen absolute beloftes (\"helpt de kans op sneetjes te verkleinen\", niet \"geen sneetjes\"), zet geen prijzen in de tekst en verzin geen testresultaten of percentages." },
+    { "type": "text", "id": "eyebrow", "label": "Bovenregel", "default": "Over deze categorie" },
+    { "type": "text", "id": "h2_1", "label": "Kop, eerste deel", "default": "Welke past bij" },
+    { "type": "text", "id": "h2_2", "label": "Kop, tweede deel (goud)", "default": "jouw routine?" },
+    { "type": "richtext", "id": "inleiding", "label": "Inleiding", "info": "Twee of drie alinea's: wat de categorie is, waarin ze verschilt van de buurcategorie, en waarom het werkt op déze plek." },
+    { "type": "text", "id": "h3_lijst", "label": "Kop boven de vergelijking", "default": "De apparaten in deze zone naast elkaar" },
+    { "type": "richtext", "id": "slotalinea", "label": "Slotalinea", "info": "Bijvoorbeeld over losse messen en koppen, met een echte link." },
+    { "type": "header", "content": "Beeld" },
+    { "type": "image_picker", "id": "beeld", "label": "Afbeelding", "info": "Alleen een echte foto. Getekende doorsnedes zijn hier weggehaald: een met de hand gezette lijntekening leest als een schets naast de productfoto's erboven. Laat leeg als er geen foto is — de uitleg wordt dan één brede kolom en dat is de normale vorm, niet een noodgreep." },
+    { "type": "textarea", "id": "bijschrift", "label": "Bijschrift", "info": "Eén zin bij de foto. Zeg hier niets wat de alinea's al zeggen." },
+    { "type": "header", "content": "Gebruikstips" },
+    { "type": "text", "id": "h3_tips", "label": "Kop boven de tips", "default": "Hoe gebruik je hem?" },
+    { "type": "header", "content": "Indent settings" },
+    { "type": "range", "id": "desk_indent_top", "label": "Indent top (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "desk_indent_bottom", "label": "Indent bottom (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_top", "label": "Indent top (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_bottom", "label": "Indent bottom (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "In de vergelijking",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product", "info": "De link komt hieruit. Verzin nooit een URL." },
+        { "type": "text", "id": "naam", "label": "Linktekst", "info": "Leeg = de producttitel. Nooit \"klik hier\"." },
+        { "type": "url", "id": "url", "label": "Of een eigen link", "info": "Bijvoorbeeld naar een collectie." },
+        { "type": "textarea", "id": "tekst", "label": "Eén regel uitleg" }
+      ]
+    },
+    {
+      "type": "tip",
+      "name": "Gebruikstip",
+      "limit": 4,
+      "settings": [
+        { "type": "text", "id": "kop", "label": "Kop" },
+        { "type": "textarea", "id": "tekst", "label": "Tekst" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "WS · Collectie uitleg" }]
+}
+{% endschema %}

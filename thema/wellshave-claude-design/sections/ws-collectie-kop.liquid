@@ -1,0 +1,620 @@
+{% comment %}
+  Wellshave — collectiepagina, blok 1: kop, keuzehulp en zonebalk.
+  Ontwerp: de vijf collectiepagina-artifacts (alles, lichaam, gezicht, hoofd, neus).
+  Prijs, vanprijs, voorraad en link in het matchpaneel komen uit het gekozen product.
+  De beslistabel gaat als JSON naar ws-collectie.js, dat blok 2 laat meebewegen.
+{% endcomment %}
+
+{{ 'ws-collectie.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'ws-collectie.js' | asset_url }}" defer></script>
+
+{%- assign nl = '<br />' -%}
+
+<div class="wsc">
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="wsc-vink" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <!-- de blauwe geverifieerd-badge: de rozet is uitgerekend met r(t)=10,5+0,95*cos(8t)
+       en als bezier uitgeschreven, zodat alle acht lobben gelijk zijn -->
+  <symbol id="wsc-potlood" viewBox="0 0 24 24"><path d="M4 20h4L19.5 8.5a2.1 2.1 0 0 0-3-3L5 17v3zM14.5 6.5l3 3" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="wsc-chevron-r" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="wsc-pijl" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+{%- assign heeft_hulp = false -%}
+{%- for block in section.blocks -%}
+  {%- if block.type == 'vraag' or block.type == 'match' -%}{%- assign heeft_hulp = true -%}{%- endif -%}
+{%- endfor -%}
+
+{%- assign heeft_zones = false -%}
+{%- for block in section.blocks -%}{%- if block.type == 'zone' -%}{%- assign heeft_zones = true -%}{%- endif -%}{%- endfor -%}
+{%- if heeft_zones -%}
+  <section class="zonebalk"><div class="rail">
+    <div class="zonekiezer">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'zone' -%}
+          {%- assign is_nu = block.settings.huidig -%}
+          {%- if block.settings.url != blank and is_nu != true -%}
+            {%- assign tag = 'a' -%}
+          {%- else -%}
+            {%- assign tag = 'button' -%}
+          {%- endif -%}
+          <{{ tag }} class="zkaart{% if is_nu %} nu{% endif %}"
+            {%- if tag == 'a' %} href="{{ block.settings.url }}"{% else %} type="button"{% endif -%}
+            {% if is_nu %} aria-current="true"{% endif %}
+            data-zone="{{ block.settings.naam | escape }}" data-app="{{ block.settings.aantal }}"
+            {{ block.shopify_attributes }}>
+            {%- if block.settings.icoon != blank -%}
+              <span class="zkaart-ico">{{ block.settings.icoon | image_url: width: 200 | image_tag: alt: '' }}</span>
+            {%- endif -%}
+            <span class="zkaart-naam">{{ block.settings.naam }}</span>
+            <span class="zkaart-tel">{{ block.settings.aantal }}</span>
+            <svg class="zkaart-pijl" viewBox="0 0 24 24" aria-hidden="true"><use href="#wsc-chevron-r"/></svg>
+          </{{ tag }}>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    {%- comment -%}
+      Op de telefoon is de zonebalk een schuifstrip. Zonder spoor is niet te zien
+      dat er nog tegels naast staan; de duim loopt mee met de scrollpositie en
+      wordt door ws-collectie.js verborgen als alles al in beeld staat.
+    {%- endcomment -%}
+    <div class="zk-spoor" aria-hidden="true" hidden><span class="zk-duim"></span></div>
+  </div></section>
+{%- endif -%}
+
+<section class="kop{% if section.settings.foto == blank %} kaal{% endif %}">
+  <div class="rail">
+    {%- comment -%}
+      De tekst ligt in de foto, niet ernaast: naast elkaar kostte de kop 249 px aan
+      tekst plus 199 px aan beeld voordat de eerste kaart begon. Zonder foto blijft
+      de zwarte gradient over en zakt de hero terug naar tekst op een vlak.
+    {%- endcomment -%}
+    <div class="hero">
+      {%- if section.settings.foto != blank -%}
+        <figure class="hero-foto">
+          {{ section.settings.foto | image_url: width: 1600 | image_tag: alt: section.settings.foto_alt, loading: 'eager', fetchpriority: 'high', sizes: '100vw', widths: '600, 900, 1200, 1600' }}
+        </figure>
+      {%- endif -%}
+      <div class="hero-tekst">
+        {%- comment -%}
+          Leeg gelaten betekent: neem de naam van de collectie. Zo kan één sjabloon
+          meerdere collecties bedienen — de Summer Sale en de Voorjaar Sale delen
+          dezelfde opbouw maar houden hun eigen naam op de pagina.
+        {%- endcomment -%}
+        {%- assign kop_eyebrow = section.settings.eyebrow | default: collection.title -%}
+        {%- if kop_eyebrow != blank -%}
+          <p class="eyebrow on-dark">{{ kop_eyebrow }}</p>
+        {%- endif -%}
+        <h1 class="duo on-dark klein">{{ section.settings.kop_1 }}<span class="b">{{ section.settings.kop_2 }}</span></h1>
+        {%- if section.settings.lede != blank -%}
+          <p class="lead on-dark kort">{{ section.settings.lede }}</p>
+        {%- endif -%}
+        {%- if heeft_hulp and section.settings.hulp_link != blank -%}
+          <a class="hero-hulp" href="#ws-keuzehulp">{{ section.settings.hulp_link }}
+            <i><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsc-pijl"/></svg></i></a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{%- if heeft_hulp -%}
+  {%- comment -%}
+    De keuzehulp loopt stap voor stap: één vraag staat open, beantwoorde vragen
+    klappen dicht tot één regel met het antwoord en een potlood, en de match komt
+    pas als alles beantwoord is. Het aantal stappen volgt de zone — de ene pagina
+    heeft er twee, de andere vier — dus de stapper telt de vraagblokken zelf.
+
+    Hij staat hier in de bron, maar hoort onder de eerste productgroep te staan:
+    vier vragen zijn 491 px en dat is het grootste blok van de pagina. Het
+    verplaatsen doet ws-collectie.js. De hulp werkt toch alleen met JavaScript,
+    dus zonder script blijft hij verborgen in plaats van dood boven de kaarten
+    te staan; in de hero staat dan nog steeds de regel die ernaartoe wijst.
+  {%- endcomment -%}
+  <div class="hulpzone" id="ws-keuzehulp" hidden>
+    {%- assign n_vragen = 0 -%}
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'vraag' -%}{%- assign n_vragen = n_vragen | plus: 1 -%}{%- endif -%}
+    {%- endfor -%}
+
+    <div class="kiescard" data-stappen="{{ n_vragen }}">
+      <div class="kaartkop">
+        <p class="eyebrow">{{ section.settings.kaartkop }}</p>
+        <span>{{ section.settings.kaartsub }}</span>
+      </div>
+
+      <div class="stapper">
+        <span class="stapper-bollen" aria-hidden="true">
+          {%- for i in (1..n_vragen) -%}
+            <span class="sb"><svg viewBox="0 0 24 24"><use href="#wsc-vink"/></svg></span>
+          {%- endfor -%}
+        </span>
+        <span class="stapper-tekst"><b class="stapper-af">0</b> van {{ n_vragen }}
+          {{ section.settings.stap_tekst | default: 'voltooid' }}</span>
+      </div>
+
+      {%- if section.settings.kaartvraag != blank -%}
+        <h2 class="kiescard-kop"
+            data-open="{{ section.settings.kaartvraag | escape }}"
+            data-af="{{ section.settings.af_kop | default: 'Jouw match staat klaar.' | escape }}">{{ section.settings.kaartvraag }}</h2>
+      {%- endif -%}
+      <p class="kiescard-sub"
+         data-open="{{ section.settings.kaartlead | default: '' | escape }}"
+         data-af="{{ section.settings.af_sub | default: 'Pas een keuze aan of bekijk direct je advies.' | escape }}">{{ section.settings.kaartlead }}</p>
+
+      <div class="stappen-lijst">
+        {%- assign stap = 0 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'vraag' -%}
+            {%- assign stap = stap | plus: 1 -%}
+            <div class="vraagrij{% if stap == 1 %} nu{% endif %}" data-stap="{{ stap }}" {{ block.shopify_attributes }}>
+              <span class="stapbol">
+                <b>{{ stap | prepend: '0' | slice: -2, 2 }}</b>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsc-vink"/></svg>
+              </span>
+              <p>{{ block.settings.vraag }}</p>
+              <span class="vr-antwoord"></span>
+              <button type="button" class="vr-wijzig" aria-label="{{ section.settings.wijzig_label | default: 'Wijzig dit antwoord' }}">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsc-potlood"/></svg>
+              </button>
+              <div class="keuzes" data-groep="{{ block.settings.groep | handle }}">
+                {%- assign regels = block.settings.opties | newline_to_br | strip_newlines | split: nl -%}
+                {%- for regel in regels -%}
+                  {%- assign d = regel | split: '|' -%}
+                  {%- if d.size >= 2 -%}
+                    {%- assign waarde = d[0] | strip -%}
+                    <button type="button" class="keuze" data-v="{{ waarde }}">{{ d[1] | strip }}</button>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'match' -%}
+          {%- assign p = block.settings.product -%}
+          {%- assign v = p.selected_or_first_available_variant -%}
+          {%- comment -%}
+            data-handle is de brug naar het raster: de kaarten daar staan op de
+            producthandle, terwijl de beslistabel met een eigen kort id werkt.
+          {%- endcomment -%}
+          <div class="matchpaneel" data-id="{{ block.settings.id | handle }}"
+               data-handle="{{ p.handle }}" {{ block.shopify_attributes }}>
+            <div class="mp-kop">
+              <b>{{ section.settings.match_label | default: 'Jouw match' }}</b>
+              {%- if block.settings.badge != blank -%}<span class="mp-badge">{{ block.settings.badge }}</span>{%- endif -%}
+            </div>
+            <div class="mp-body">
+              {%- if block.settings.foto != blank -%}
+                {{ block.settings.foto | image_url: width: 500 | image_tag: alt: p.title, loading: 'lazy' }}
+              {%- elsif p.featured_image -%}
+                {{ p.featured_image | image_url: width: 500 | image_tag: alt: p.title, loading: 'lazy' }}
+              {%- endif -%}
+              <div class="mp-info">
+                <h3>{{ block.settings.naam | default: p.title }}</h3>
+                <p>{{ block.settings.zin }}</p>
+                <p class="mp-waarom">{{ section.settings.waarom_label | default: 'Waarom deze match' }}</p>
+                <div class="mp-chips">
+                  {%- for n in (1..3) -%}
+                    {%- assign sleutel = 'reden_' | append: n -%}
+                    {%- assign reden = block.settings[sleutel] -%}
+                    {%- if reden != blank -%}
+                      <span><svg viewBox="0 0 24 24"><use href="#wsc-vink"/></svg>{{ reden }}</span>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+              </div>
+              <div class="mp-koop">
+                <span class="mp-prijs">{{ v.price | money }}
+                  {%- if v.compare_at_price > v.price -%}<s>{{ v.compare_at_price | money }}</s>{%- endif -%}
+                </span>
+                <a class="mp-knop" href="{{ p.url | default: '#' }}">{{ section.settings.match_cta | default: 'Bekijk jouw match' }}
+                  <i><svg viewBox="0 0 24 24"><use href="#wsc-pijl"/></svg></i></a>
+                <span class="mp-voorraad">
+                  {%- if p.available -%}{{ section.settings.voorraad_wel | default: 'Op voorraad · morgen in huis' }}
+                  {%- else -%}{{ section.settings.voorraad_niet | default: 'Tijdelijk uitverkocht' }}{%- endif -%}
+                </span>
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+
+      <button type="button" class="kies-opnieuw">{{ section.settings.opnieuw | default: 'Opnieuw beginnen' }}</button>
+    </div>
+  </div>
+{%- endif -%}
+
+{%- capture keuze_json -%}
+{%- assign rijen_uit = '' -%}
+{%- assign tabelregels = section.settings.tabel | newline_to_br | strip_newlines | split: nl -%}
+{%- for regel in tabelregels -%}
+  {%- assign delen = regel | split: '>' -%}
+  {%- if delen.size == 2 -%}
+    {%- assign paren_uit = '' -%}
+    {%- assign paren = delen[0] | split: ',' -%}
+    {%- for paar in paren -%}
+      {%- assign kv = paar | split: '=' -%}
+      {%- if kv.size == 2 -%}
+        {%- capture stuk -%}"{{ kv[0] | strip }}":"{{ kv[1] | strip }}"{%- endcapture -%}
+        {%- assign paren_uit = paren_uit | append: stuk | append: '|~|' -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- assign paren_json = paren_uit | split: '|~|' | join: ',' -%}
+    {%- capture rij -%}{"w":{ {{- paren_json -}} },"id":"{{ delen[1] | strip | handle }}"}{%- endcapture -%}
+    {%- assign rijen_uit = rijen_uit | append: rij | append: '|~|' -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign tabel_json = rijen_uit | split: '|~|' | join: ',' -%}
+
+{%- assign groepen_uit = '' -%}
+{%- for block in section.blocks -%}
+  {%- if block.type == 'vraag' -%}
+    {%- assign woorden_uit = '' -%}
+    {%- assign regels = block.settings.opties | newline_to_br | strip_newlines | split: nl -%}
+    {%- for regel in regels -%}
+      {%- assign d = regel | split: '|' -%}
+      {%- if d.size >= 2 -%}
+        {%- if d.size >= 3 -%}{%- assign woord = d[2] | strip -%}
+        {%- else -%}{%- assign woord = d[1] | strip | downcase -%}{%- endif -%}
+        {%- capture stuk -%}"{{ d[0] | strip }}":{{ woord | json }}{%- endcapture -%}
+        {%- assign woorden_uit = woorden_uit | append: stuk | append: '|~|' -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- capture g -%}"{{ block.settings.groep | handle }}":{ {{- woorden_uit | split: '|~|' | join: ',' -}} }{%- endcapture -%}
+    {%- assign groepen_uit = groepen_uit | append: g | append: '|~|' -%}
+  {%- endif -%}
+{%- endfor -%}
+{"tabel":[{{ tabel_json }}],"woord":{ {{- groepen_uit | split: '|~|' | join: ',' -}} },"standaard":"{{ section.settings.standaard | handle }}"}
+{%- endcapture -%}
+<script type="application/json" id="ws-collectie-keuze">{{ keuze_json | strip }}</script>
+</div>
+
+{% schema %}
+  {
+    "name": "WS · Collectie kop",
+    "tag": "section",
+    "class": "ws-collectie-kop",
+    "disabled_on": {
+      "groups": [
+        "header",
+        "footer"
+      ]
+    },
+    "settings": [
+      {
+        "type": "header",
+        "content": "Linkerkolom"
+      },
+      {
+        "type": "text",
+        "id": "eyebrow",
+        "label": "Bovenregel",
+        "default": "Zone · 4 apparaten"
+      },
+      {
+        "type": "text",
+        "id": "kop_1",
+        "label": "Kop, eerste regel",
+        "default": "Glad, kort of strak."
+      },
+      {
+        "type": "text",
+        "id": "kop_2",
+        "label": "Kop, tweede regel (goud)",
+        "default": "Drie klussen, drie apparaten."
+      },
+      {
+        "type": "textarea",
+        "id": "lede",
+        "label": "Inleiding",
+        "info": "Eén regel. Hij ligt over de foto, dus meer dan een zin of twintig woorden past er niet."
+      },
+      {
+        "type": "text",
+        "id": "hulp_link",
+        "label": "Regel die naar de keuzehulp wijst",
+        "info": "Staat onder de inleiding in de hero. Leeg laten haalt de regel weg; de keuzehulp zelf blijft onder de eerste productgroep staan.",
+        "default": "Weet je niet waar te beginnen?"
+      },
+      {
+        "type": "image_picker",
+        "id": "foto",
+        "label": "Foto van het apparaat in gebruik",
+        "info": "Vult de hele hero; de tekst ligt eroverheen. Kies een beeld met een rustige onderrand, daar staat de kop. Leeg laten geeft een zwarte hero zonder foto."
+      },
+      {
+        "type": "text",
+        "id": "foto_alt",
+        "label": "Alttekst bij de foto"
+      },
+      {
+        "type": "header",
+        "content": "Bewijskaart"
+      },
+      {
+        "type": "header",
+        "content": "Geruststellers"
+      },
+      {
+        "type": "header",
+        "content": "Keuzehulp"
+      },
+      {
+        "type": "text",
+        "id": "kaartkop",
+        "label": "Bovenregel",
+        "default": "Jouw apparaat in 30 seconden"
+      },
+      {
+        "type": "text",
+        "id": "kaartsub",
+        "label": "Regel rechtsboven",
+        "default": "2 keuzes · direct een match"
+      },
+      {
+        "type": "text",
+        "id": "kaartvraag",
+        "label": "Vraag boven de stappen",
+        "default": "Wat ga je precies doen?"
+      },
+      {
+        "type": "text",
+        "id": "kaartlead",
+        "label": "Regel onder de vraag",
+        "info": "Optioneel. Eén korte zin die zegt wat de bezoeker kan verwachten."
+      },
+      {
+        "type": "text",
+        "id": "stap_tekst",
+        "label": "Woord achter de teller",
+        "default": "voltooid"
+      },
+      {
+        "type": "text",
+        "id": "af_kop",
+        "label": "Kop als alles beantwoord is",
+        "default": "Jouw match staat klaar."
+      },
+      {
+        "type": "text",
+        "id": "af_sub",
+        "label": "Regel als alles beantwoord is",
+        "default": "Pas een keuze aan of bekijk direct je advies."
+      },
+      {
+        "type": "text",
+        "id": "opnieuw",
+        "label": "Link om opnieuw te beginnen",
+        "default": "Opnieuw beginnen"
+      },
+      {
+        "type": "text",
+        "id": "wijzig_label",
+        "label": "Voorleestekst van het potlood",
+        "default": "Wijzig dit antwoord"
+      },
+      {
+        "type": "textarea",
+        "id": "tabel",
+        "label": "Beslistabel",
+        "info": "Eén regel per uitkomst, van specifiek naar algemeen. Vorm: klus=kaal, set=los > head-shaver. De eerste regel die past wint. Zorg dat elk matchpaneel precies één combinatie wint."
+      },
+      {
+        "type": "text",
+        "id": "standaard",
+        "label": "Standaarduitkomst",
+        "info": "Het id van het matchpaneel dat toont als geen regel past."
+      },
+      {
+        "type": "text",
+        "id": "match_label",
+        "label": "Label boven het paneel",
+        "default": "Jouw match"
+      },
+      {
+        "type": "text",
+        "id": "waarom_label",
+        "label": "Kopje boven de redenen",
+        "default": "Waarom deze match"
+      },
+      {
+        "type": "text",
+        "id": "match_cta",
+        "label": "Knoptekst",
+        "default": "Bekijk jouw match"
+      },
+      {
+        "type": "text",
+        "id": "voorraad_wel",
+        "label": "Voorraadregel · op voorraad",
+        "default": "Op voorraad · morgen in huis"
+      },
+      {
+        "type": "text",
+        "id": "voorraad_niet",
+        "label": "Voorraadregel · uitverkocht",
+        "default": "Tijdelijk uitverkocht"
+      },
+      {
+        "type": "header",
+        "content": "Zonebalk",
+        "info": "De zonekiezer staat boven de hero. Hij vervangt het kruimelpad: de tegels zeggen zelf al waar je bent."
+      },
+      {
+        "type": "header",
+        "content": "Indent settings"
+      },
+      {
+        "type": "range",
+        "id": "desk_indent_top",
+        "label": "Indent top (desktop)",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "desk_indent_bottom",
+        "label": "Indent bottom (desktop)",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "mob_indent_top",
+        "label": "Indent top (mobile)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "mob_indent_bottom",
+        "label": "Indent bottom (mobile)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "default": 0
+      }
+    ],
+    "blocks": [
+      {
+        "type": "vraag",
+        "name": "Vraag",
+        "limit": 4,
+        "settings": [
+          {
+            "type": "text",
+            "id": "groep",
+            "label": "Sleutel",
+            "info": "Kort en zonder spaties, bijvoorbeeld klus. Gebruik deze sleutel ook in de beslistabel."
+          },
+          {
+            "type": "text",
+            "id": "vraag",
+            "label": "Vraag",
+            "default": "Wat is de klus?"
+          },
+          {
+            "type": "textarea",
+            "id": "opties",
+            "label": "Antwoorden",
+            "info": "Eén per regel: waarde|Knoptekst|woord voor de filterregel. Het derde deel mag weg."
+          },
+          {
+            "type": "text",
+            "id": "start",
+            "label": "Beginwaarde",
+            "info": "Wordt niet meer vooraf aangevinkt: de keuzehulp begint leeg en loopt stap voor stap. Blijft staan als aantekening bij welk antwoord het vaakst gekozen wordt."
+          }
+        ]
+      },
+      {
+        "type": "match",
+        "name": "Matchpaneel",
+        "settings": [
+          {
+            "type": "text",
+            "id": "id",
+            "label": "Id",
+            "info": "Verwijst naar de rechterkant van de beslistabel én naar de kaart in het raster."
+          },
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Product",
+            "info": "Prijs, vanprijs, voorraad en link komen hieruit."
+          },
+          {
+            "type": "text",
+            "id": "naam",
+            "label": "Naam",
+            "info": "Leeg = de producttitel."
+          },
+          {
+            "type": "image_picker",
+            "id": "foto",
+            "label": "Foto",
+            "info": "Leeg = de hoofdafbeelding. Gebruik een vrijstaande packshot."
+          },
+          {
+            "type": "text",
+            "id": "badge",
+            "label": "Lintje",
+            "info": "Iets dat waar is: meest gekozen, laagste prijs, nieuw."
+          },
+          {
+            "type": "textarea",
+            "id": "zin",
+            "label": "Eén zin"
+          },
+          {
+            "type": "text",
+            "id": "reden_1",
+            "label": "Reden 1"
+          },
+          {
+            "type": "text",
+            "id": "reden_2",
+            "label": "Reden 2"
+          },
+          {
+            "type": "text",
+            "id": "reden_3",
+            "label": "Reden 3"
+          }
+        ]
+      },
+      {
+        "type": "zone",
+        "name": "Zone in de balk",
+        "limit": 6,
+        "settings": [
+          {
+            "type": "text",
+            "id": "naam",
+            "label": "Naam"
+          },
+          {
+            "type": "text",
+            "id": "aantal",
+            "label": "Aantal"
+          },
+          {
+            "type": "url",
+            "id": "url",
+            "label": "Link naar de zone"
+          },
+          {
+            "type": "image_picker",
+            "id": "icoon",
+            "label": "Icoon van de zone",
+            "info": "Het gouden lijnicoon van deze zone, bijvoorbeeld ws-zone-icoon-lichaam.png. Laat leeg en de tegel toont alleen de naam."
+          },
+          {
+            "type": "checkbox",
+            "id": "huidig",
+            "label": "Dit is de zone die je nu bekijkt",
+            "default": false
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "WS · Collectie kop"
+      }
+    ]
+  }
+{% endschema %}

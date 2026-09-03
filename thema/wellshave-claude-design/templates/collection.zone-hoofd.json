@@ -1,0 +1,604 @@
+{
+  "sections": {
+    "kop": {
+      "type": "ws-collectie-kop",
+      "blocks": {
+        "vraag_1": {
+          "type": "vraag",
+          "settings": {
+            "groep": "klus",
+            "vraag": "Wat is de klus?",
+            "opties": "kaal|Kaal scheren|kaal scheren\nkort|Kort knippen|kort knippen\nrand|Randen & lijnen|randen en lijnen"
+          }
+        },
+        "vraag_2": {
+          "type": "vraag",
+          "settings": {
+            "groep": "vorm",
+            "vraag": "Eén apparaat, of een complete set?",
+            "opties": "los|Eén apparaat|één apparaat\nset|Complete set|complete set"
+          }
+        },
+        "vraag_3": {
+          "type": "vraag",
+          "settings": {
+            "groep": "baard",
+            "vraag": "Doe je je baard met hetzelfde apparaat?",
+            "opties": "nee|Alleen mijn hoofd|alleen het hoofd\nja|Ook mijn baard|ook de baard"
+          }
+        },
+        "vraag_4": {
+          "type": "vraag",
+          "settings": {
+            "groep": "reis",
+            "vraag": "Neem je hem mee op reis?",
+            "opties": "nee|Blijft thuis|blijft thuis\nja|Gaat mee|gaat mee"
+          }
+        },
+        "match_1": {
+          "type": "match",
+          "settings": {
+            "id": "skull3",
+            "product": "skull-deal-3-0",
+            "naam": "Skull Deal 3.0",
+            "badge": "Acht onderdelen",
+            "zin": "Dezelfde scheerkop, plus een extra magnetische kop, een tas en een hard case.",
+            "reden_1": "Extra magnetische scheerkop",
+            "reden_2": "Tas én harde koffer",
+            "reden_3": "Acht onderdelen in de doos"
+          }
+        },
+        "match_2": {
+          "type": "match",
+          "settings": {
+            "id": "hs",
+            "product": "wellshave-5-in-1-scheerapparaat-mannen-deluxe",
+            "naam": "Head Shaver Deluxe",
+            "badge": "Best beoordeeld",
+            "zin": "Zeven roterende koppen die de bolling van je schedel volgen, ook aan de achterkant.",
+            "reden_1": "7D-kop volgt de contouren",
+            "reden_2": "4,8 uit 351 beoordelingen",
+            "reden_3": "7.000 rpm-motor"
+          }
+        },
+        "match_3": {
+          "type": "match",
+          "settings": {
+            "id": "bpack3",
+            "product": "barber-pack-3-0",
+            "naam": "Barber Pack 3.0",
+            "badge": "Meest compleet",
+            "zin": "Tondeuse, detailtrimmer, foil shaver en neustrimmer — alles voor haar, baard en fades.",
+            "reden_1": "Elf onderdelen in de doos",
+            "reden_2": "Foil shaver voor de afwerking",
+            "reden_3": "Ook een neustrimmer erbij"
+          }
+        },
+        "match_4": {
+          "type": "match",
+          "settings": {
+            "id": "bpack2",
+            "product": "barber-pack-2-0",
+            "naam": "Barber Pack 2.0",
+            "badge": "Tien onderdelen",
+            "zin": "Tondeuse, detailtrimmer en foil shaver: de lengte, de lijn en de gladde afwerking.",
+            "reden_1": "Tondeuse voor fades, haar en baard",
+            "reden_2": "Foil shaver voor de gladde afwerking",
+            "reden_3": "Tien onderdelen in de doos"
+          }
+        },
+        "match_5": {
+          "type": "match",
+          "settings": {
+            "id": "sharp",
+            "product": "detailtrimmer-sharpline™",
+            "naam": "Detailtrimmer Sharpline™",
+            "badge": "Voor de lijnen",
+            "zin": "Het smalle mes komt bij de nek, de slapen en de baardlijn waar een tondeuse te breed is.",
+            "reden_1": "Strakke lijnen in enkele bewegingen",
+            "reden_2": "Snijdt door dik en stug haar",
+            "reden_3": "Drie opzetstukken voor kort tot langer"
+          }
+        },
+        "match_6": {
+          "type": "match",
+          "settings": {
+            "id": "ele",
+            "product": "wellshave-tondeuse-elegant",
+            "naam": "Tondeuse Elegant™",
+            "badge": "Kapperskwaliteit",
+            "zin": "Fades en contouren met een hendel die tussen twee opzetkammen in valt.",
+            "reden_1": "Verstelbare fade-hendel",
+            "reden_2": "Knipt zonder trekken of haperen",
+            "reden_3": "Metalen behuizing"
+          }
+        },
+        "zone_alles": {
+          "type": "zone",
+          "settings": {
+            "naam": "Alle zones",
+            "aantal": "27",
+            "url": "https://wellshave.com/collections/all",
+            "huidig": false,
+            "icoon": "shopify://shop_images/ws-zone-icoon-alles.png"
+          }
+        },
+        "zone_1": {
+          "type": "zone",
+          "settings": {
+            "naam": "Lichaam & schaamstreek",
+            "aantal": "4",
+            "url": "https://wellshave.com/collections/bodygroomers",
+            "huidig": false,
+            "icoon": "shopify://shop_images/ws-zone-icoon-lichaam.png"
+          }
+        },
+        "zone_2": {
+          "type": "zone",
+          "settings": {
+            "naam": "Gezicht & baard",
+            "aantal": "11",
+            "url": "https://wellshave.com/collections/zone-gezicht",
+            "huidig": false,
+            "icoon": "shopify://shop_images/ws-zone-icoon-gezicht.png"
+          }
+        },
+        "zone_3": {
+          "type": "zone",
+          "settings": {
+            "naam": "Hoofd",
+            "aantal": "4",
+            "url": "",
+            "huidig": true,
+            "icoon": "shopify://shop_images/ws-zone-icoon-hoofd.png"
+          }
+        },
+        "zone_4": {
+          "type": "zone",
+          "settings": {
+            "naam": "Neus & oren",
+            "aantal": "8",
+            "url": "https://wellshave.com/collections/neustrimmers",
+            "huidig": false,
+            "icoon": "shopify://shop_images/ws-zone-icoon-neus.png"
+          }
+        }
+      },
+      "block_order": [
+        "vraag_1",
+        "vraag_2",
+        "vraag_3",
+        "vraag_4",
+        "match_1",
+        "match_2",
+        "match_3",
+        "match_4",
+        "match_5",
+        "match_6",
+        "zone_alles",
+        "zone_1",
+        "zone_2",
+        "zone_3",
+        "zone_4"
+      ],
+      "settings": {
+        "eyebrow": "Hoofd · 4 apparaten",
+        "kop_1": "Glad, kort of strak.",
+        "kop_2": "Drie klussen, drie apparaten.",
+        "lede": "Scheren, kort houden of de randen strak trekken.",
+        "hulp_link": "Niet zeker welke bij jou past?",
+        "foto": "shopify://shop_images/ws-ugc-hoofd.webp",
+        "foto_alt": "Man scheert zijn hoofd met de Head Shaver Deluxe",
+        "kaartkop": "Jouw hoofdapparaat in 20 seconden",
+        "kaartsub": "4 keuzes · direct een match",
+        "kaartvraag": "Wat ga je precies doen?",
+        "tabel": "klus=kaal, vorm=set > skull3\nklus=kaal, reis=ja > skull3\nklus=kaal > hs\nvorm=set, baard=ja > bpack3\nvorm=set > bpack2\nklus=rand > sharp\n > ele",
+        "standaard": "ele",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 0,
+        "af_kop": "Jouw match staat klaar.",
+        "af_sub": "Pas een keuze aan of bekijk direct je advies.",
+        "opnieuw": "Opnieuw beginnen",
+        "wijzig_label": "Wijzig dit antwoord",
+        "match_label": "Jouw match",
+        "waarom_label": "Waarom deze match",
+        "match_cta": "Bekijk jouw match",
+        "voorraad_wel": "Op voorraad · morgen in huis",
+        "voorraad_niet": "Tijdelijk uitverkocht"
+      }
+    },
+    "raster": {
+      "type": "ws-collectie-raster",
+      "blocks": {
+        "groep_1": {
+          "type": "groep",
+          "settings": {
+            "kop": "Vind jouw hoofdapparaat",
+            "sub": "Vier apparaten, drie verschillende klussen.",
+            "cat": "app",
+            "producten": [
+              "wellshave-5-in-1-scheerapparaat-mannen-deluxe",
+              "wellshave-tondeuse-elegant",
+              "detailtrimmer-sharpline™",
+              "wellshave-tondeuse-mannen-deluxe"
+            ],
+            "noot": "",
+            "kicker": "",
+            "labels": "",
+            "link_label": "",
+            "link_url": ""
+          }
+        },
+        "groep_2": {
+          "type": "groep",
+          "settings": {
+            "kop": "Of pak het in één keer compleet",
+            "sub": "Een hoofdroutine bestaat zelden uit één apparaat.",
+            "cat": "bundel",
+            "producten": [
+              "skull-shaver-deluxe-extra-magnetische-scheerkop",
+              "skull-deal-2-0",
+              "skull-deal-3-0",
+              "barber-pack-1-0",
+              "barber-pack-2-0",
+              "barber-pack-3-0"
+            ],
+            "noot": "",
+            "kicker": "",
+            "labels": "skull-shaver-deluxe-extra-magnetische-scheerkop = Best verkocht\nskull-deal-3-0 = Nieuw",
+            "link_label": "",
+            "link_url": ""
+          }
+        },
+        "groep_3": {
+          "type": "groep",
+          "settings": {
+            "kop": "Blijf scherp",
+            "sub": "Vervang alleen wat slijt — niet het hele apparaat.",
+            "cat": "mes",
+            "producten": [
+              "wellshave-scheerkop-7d-vervanging",
+              "wellshave-hard-case",
+              "travelbag"
+            ],
+            "noot": "",
+            "kicker": "Onderdeel",
+            "labels": "",
+            "link_label": "",
+            "link_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "groep_1",
+        "groep_2",
+        "groep_3"
+      ],
+      "settings": {
+        "filter_alles": "Alles",
+        "filter_app": "Apparaten",
+        "filter_bundel": "Sets",
+        "filter_mes": "Onderdelen",
+        "vergelijken": true,
+        "sorteer_label": "Meest relevant",
+        "monogram": "shopify://shop_images/ws-mark.png",
+        "geen_score": "Nieuw · nog geen beoordelingen",
+        "uitverkocht_label": "Tijdelijk uitverkocht",
+        "uitverkocht_voet": "Tijdelijk niet leverbaar",
+        "blik_voet": "100 dagen proberen · 2 jaar garantie",
+        "mes_voet": "Vandaag besteld, morgen in huis",
+        "aanbod_product": "barber-pack-3-0",
+        "aanbod_eyebrow": "De ruimste set in deze zone",
+        "aanbod_zin": "Elf onderdelen voor haar, baard, fades en de afwerking — samen goedkoper dan los.",
+        "aanbod_knop": "Bekijk de set",
+        "slot_tekst": "in deze zone · elk apparaat 100 dagen te proberen",
+        "slot_link_label": "Bekijk de hele collectie",
+        "slot_link": "shopify://collections/all",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 0,
+        "toon_label": "Toon mij",
+        "resultaat_label": "resultaten",
+        "bundel_lint": "Meeste waarde",
+        "sorteer_prijs_op": "Prijs: laag naar hoog",
+        "sorteer_prijs_af": "Prijs: hoog naar laag",
+        "sorteer_score": "Best beoordeeld",
+        "tp_uit": "out of 5",
+        "vgl_kop": "Naast elkaar",
+        "vgl_sluit": "Sluit de vergelijking",
+        "vgl_usp_kop": "Waarvoor",
+        "vgl_balk_tekst": "geselecteerd om te vergelijken",
+        "vgl_balk_kort": "gekozen",
+        "vgl_balk_knop": "Vergelijk"
+      }
+    },
+    "uitleg": {
+      "type": "ws-collectie-uitleg",
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "product": "wellshave-5-in-1-scheerapparaat-mannen-deluxe",
+            "naam": "Head Shaver Deluxe",
+            "url": "",
+            "tekst": "Zeven roterende koppen voor een volledig glad hoofd, ook aan de achterkant."
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "product": "wellshave-tondeuse-elegant",
+            "naam": "Tondeuse Elegant™",
+            "url": "",
+            "tekst": "Voor wie lengte wil houden: fades en contouren met een verstelbare hendel."
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "product": "detailtrimmer-sharpline™",
+            "naam": "Detailtrimmer Sharpline™",
+            "url": "",
+            "tekst": "Het smalle mes voor de rand: nek, oren, slapen en de baardlijn."
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "product": "wellshave-tondeuse-mannen-deluxe",
+            "naam": "Tondeuse Deluxe™",
+            "url": "",
+            "tekst": "Dezelfde hendel met een brushless motor — op dit moment uitverkocht."
+          }
+        },
+        "tip_1": {
+          "type": "tip",
+          "settings": {
+            "kop": "Werk in banen, niet in rondjes",
+            "tekst": "Leg de kop plat neer en trek rustige, overlappende banen van voor naar achter. Rondjes draaien voelt sneller, maar laat plekken staan."
+          }
+        },
+        "tip_2": {
+          "type": "tip",
+          "settings": {
+            "kop": "Doe de achterkant op gevoel",
+            "tekst": "Je ziet hem toch niet. Ga met je vrije hand mee en voel waar het nog stroef aanvoelt; dat is waar nog haar staat."
+          }
+        },
+        "tip_3": {
+          "type": "tip",
+          "settings": {
+            "kop": "Zet de rand als laatste",
+            "tekst": "Eerst de lengte over het hele hoofd, dan pas de nek- en oorlijn met de detailtrimmer. Andersom moet je de rand twee keer zetten."
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4",
+        "tip_1",
+        "tip_2",
+        "tip_3"
+      ],
+      "settings": {
+        "eyebrow": "Over deze categorie",
+        "h2_1": "Scheren, knippen of bijwerken:",
+        "h2_2": "wat heb je voor je hoofd nodig?",
+        "inleiding": "<p>Je hoofd is geen gezicht. De huid ligt strak over het bot, de vorm is bol in twee richtingen tegelijk en het grootste deel ervan zie je niet terwijl je bezig bent. Een apparaat dat op je kaaklijn prima werkt, hobbelt daardoor over je schedel en laat plekken staan die je pas voelt als je erover wrijft.</p><p>Daarom bestaat deze zone uit drie soorten apparaten. Een <b>hoofdscheerapparaat</b> heeft meerdere roterende koppen die onafhankelijk kantelen, zodat ze de bolling volgen zonder dat jij de hoek hoeft te zoeken. Een <b>tondeuse</b> laat juist lengte staan en heeft een verstelbare hendel waarmee je die lengte fijner regelt dan met de opzetkammen alleen. Een <b>detailtrimmer</b> heeft een smal mes dat bij de nek, de slapen en de baardlijn komt, waar een tondeuse te breed is.</p>",
+        "h3_lijst": "De apparaten in deze zone naast elkaar",
+        "slotalinea": "<p>De scheerkoppen slijten sneller dan de rest van het apparaat. De <a href=\"https://wellshave.com/products/wellshave-scheerkop-7d-vervanging\">7D-scheerkop is los verkrijgbaar</a>, net als de <a href=\"https://wellshave.com/collections/accesoires\">koffers en tassen</a>. Merk je dat de kop trekt of minder pakt, dan hoef je geen nieuw apparaat te kopen.</p>",
+        "bijschrift": "",
+        "h3_tips": "Hoe scheer of knip je je eigen hoofd?",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 0
+      }
+    },
+    "bewijs": {
+      "type": "ws-collectie-bewijs",
+      "blocks": {
+        "citaat_1": {
+          "type": "citaat",
+          "settings": {
+            "product": "wellshave-5-in-1-scheerapparaat-mannen-deluxe",
+            "url": "",
+            "tag": "Over hoe lang het duurt",
+            "tekst": "Vele uitvoeringen gezien, gekozen voor deze. N fijne machine die goed zijn taken verricht. Voorheen stond ik n 20 minuten met n tondeuse te scheren, nu in nog geen 8 min n strak hoofd.",
+            "naam": "Bretb",
+            "product_naam": "Head Shaver Deluxe",
+            "toon_score": true,
+            "bijschrift": ""
+          }
+        },
+        "citaat_2": {
+          "type": "citaat",
+          "settings": {
+            "product": "wellshave-tondeuse-elegant",
+            "url": "",
+            "tag": "Over dik haar",
+            "tekst": "Nog nooit een tondeuse gehad die zo goed werkte als deze. Zeer mooie afwerking van de haren en geen haperingen door dik haar. Zeer tevreden.",
+            "naam": "Roosnmgn",
+            "product_naam": "Tondeuse Elegant™",
+            "toon_score": true,
+            "bijschrift": ""
+          }
+        },
+        "citaat_3": {
+          "type": "citaat",
+          "settings": {
+            "product": "detailtrimmer-sharpline™",
+            "url": "",
+            "tag": "Over de fade",
+            "tekst": "Super makkelijk te gebruiken en de trimmer voelt stevig aan. Het fijne vind ik vooral de verschillende standen wat resulteert in een strakke fade.",
+            "naam": "MikaStas93",
+            "product_naam": "Detailtrimmer Sharpline™",
+            "toon_score": true,
+            "bijschrift": ""
+          }
+        }
+      },
+      "block_order": [
+        "citaat_1",
+        "citaat_2",
+        "citaat_3"
+      ],
+      "settings": {
+        "eyebrow": "Uit de beoordelingen",
+        "kop": "Drie dingen die je je afvraagt voordat je je eigen hoofd doet.",
+        "bron": "<p>Elke regel is een echte beoordeling bij het apparaat dat ernaast staat, geschreven door een geverifieerde koper. <b>Let op bij het lezen:</b> Loox toont bij verwante modellen dezelfde beoordelingenstroom met de productnaam vervangen, dus ik heb alleen regels gekozen die inhoudelijk over dít apparaat gaan.</p>",
+        "koper_label": "geverifieerde koper",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 0
+      }
+    },
+    "slot": {
+      "type": "ws-collectie-slot",
+      "blocks": {
+        "zeker_1": {
+          "type": "zekerheid",
+          "settings": {
+            "icoon": "retour",
+            "kop": "100 dagen thuis proberen",
+            "tekst": "Niet goed? Je krijgt je geld terug."
+          }
+        },
+        "zeker_2": {
+          "type": "zekerheid",
+          "settings": {
+            "icoon": "schild",
+            "kop": "2 jaar garantie",
+            "tekst": "Op elk apparaat in deze zone."
+          }
+        },
+        "zeker_3": {
+          "type": "zekerheid",
+          "settings": {
+            "icoon": "truck",
+            "kop": "Gratis verzending vanaf €30",
+            "tekst": "Daaronder €4,95. Ook naar België."
+          }
+        },
+        "zeker_4": {
+          "type": "zekerheid",
+          "settings": {
+            "icoon": "klok",
+            "kop": "Morgen in huis",
+            "tekst": "Ma t/m vr besteld voor 23:59."
+          }
+        },
+        "vraag_1": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Scheerapparaat of tondeuse — wat moet ik hebben?",
+            "antwoord": "<p>Wil je <b>glad</b>, dan is dat de <b>Head Shaver Deluxe</b>: zeven roterende koppen die de bolling volgen. Wil je <b>lengte houden</b>, dan is dat de <b>Tondeuse Elegant</b> met de fade-hendel. Wil je alleen de <b>rand</b> bijwerken, dan is dat de <b>Detailtrimmer Sharpline</b>. Bovenaan staat een keuzehulp die het in twee vragen voor je doet.</p>"
+          }
+        },
+        "vraag_2": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Kan ik de achterkant zelf doen?",
+            "antwoord": "<p>Dat is precies waarvoor het hoofdscheerapparaat een ronde vorm en zeven kantelende koppen heeft: je hoeft de hoek niet te zoeken. In de beoordelingen komt dat terug — “kan nu zijn hoofd zelf bijhouden, zonder al te veel moeite”. Werk in banen en voel met je vrije hand na waar het nog stroef is.</p>"
+          }
+        },
+        "vraag_3": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Wat doet die fade-hendel precies?",
+            "antwoord": "<p>Hij schuift het bovenmes een klein stukje over het ondermes. Daardoor knipt de tondeuse korter of langer dan de opzetkam die erop zit, en kun je de overgang tussen twee lengtes vloeiend maken. Dat is het verschil tussen een rand en een echte fade.</p>"
+          }
+        },
+        "vraag_4": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Hoe vaak moet ik de scheerkop vervangen?",
+            "antwoord": "<p>Merk je dat hij trekt of minder pakt, dan is het zover. <b>De 7D-scheerkop ligt apart op voorraad vanaf €14,95</b> — hij ging de afgelopen dertig dagen achttien keer over de toonbank, dus een bot mes kost je geen nieuw apparaat.</p>"
+          }
+        },
+        "vraag_5": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Wat als het me toch niet bevalt?",
+            "antwoord": "<p>Je hebt 100 dagen om het thuis te proberen, zonder reden op te geven. Je meldt de retour aan en hebt daarna veertien dagen om te versturen; <b>de verzendkosten van de retour zijn voor jou</b>, het aankoopbedrag krijg je binnen veertien dagen terug.</p>"
+          }
+        },
+        "zone_1": {
+          "type": "zone",
+          "settings": {
+            "naam": "Lichaam & schaamstreek",
+            "tekst": "Trimmen zonder wondjes.",
+            "slot": "4 apparaten →",
+            "url": "https://wellshave.com/collections/bodygroomers"
+          }
+        },
+        "zone_2": {
+          "type": "zone",
+          "settings": {
+            "naam": "Gezicht & baard",
+            "tekst": "Scheren, trimmen en randen zetten.",
+            "slot": "11 apparaten →",
+            "url": "https://wellshave.com/collections/zone-gezicht"
+          }
+        },
+        "zone_3": {
+          "type": "zone",
+          "settings": {
+            "naam": "Neus & oren",
+            "tekst": "Detailwerk zonder trekken.",
+            "slot": "8 apparaten →",
+            "url": "https://wellshave.com/collections/neustrimmers"
+          }
+        },
+        "zone_4": {
+          "type": "zone",
+          "settings": {
+            "naam": "Alles bij elkaar",
+            "tekst": "De hele collectie, per zone gesorteerd.",
+            "slot": "Bekijk alles →",
+            "url": "https://wellshave.com/collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "zeker_1",
+        "zeker_2",
+        "zeker_3",
+        "zeker_4",
+        "vraag_1",
+        "vraag_2",
+        "vraag_3",
+        "vraag_4",
+        "vraag_5",
+        "zone_1",
+        "zone_2",
+        "zone_3",
+        "zone_4"
+      ],
+      "settings": {
+        "eyebrow": "Vragen over deze zone",
+        "h2_1": "Alles wat je",
+        "h2_2": "wilt weten.",
+        "mail_regel": "<p>Staat je vraag er niet bij? Mail <b>contact@wellshave.com</b> — je krijgt antwoord van iemand uit het team, binnen één werkdag.</p>",
+        "zones_eyebrow": "Andere plek in gedachten?",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "kop",
+    "raster",
+    "uitleg",
+    "bewijs",
+    "slot"
+  ]
+}

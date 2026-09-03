@@ -1,0 +1,1021 @@
+/* De tokens gelden ook voor .wsc-laag: de vergelijkpopup en de keuzebalk staan
+   BUITEN .wsc, want `container-type` maakt een element het containing block voor
+   position:fixed — een vaste laag binnen .wsc krijgt daardoor een vak van 0x0.
+   Alleen .wsc is een container; .wsc-laag is dat bewust niet. */
+.wsc,.wsc-laag{--ink:#111111;--ink-80:rgba(17,17,17,.8);--ink-60:rgba(17,17,17,.6);
+  --ink-40:rgba(17,17,17,.4);--ink-10:rgba(17,17,17,.10);
+  --paper:#FFFFFF;--sand:#F5F1EA;--sand-deep:#EDE6DA;--carbon:#191816;
+  --bronze:#BC813E;--goud:#F5D18A;--alert:#E61C1C;
+  --grad-goud:linear-gradient(158deg,#F8DFAB 0%,#E5BC77 42%,#C8913F 100%);
+  --grad-dark:linear-gradient(168deg,#242220 0%,#171614 58%,#0E0D0C 100%);
+  --grad-kop:linear-gradient(158deg,#000000 0%,#0C0B0A 38%,#211F1D 100%);
+  --grad-goud-tekst:linear-gradient(100deg,#B0742A 0%,#8C5A1A 100%);
+  --r-s:12px;--r-m:18px;--r-l:26px;--rail:1600px;
+  font-family:"Montserrat",sans-serif;color:var(--ink);background:var(--paper);
+  display:block;font-size:15px;line-height:1.6}
+.wsc{container-type:inline-size}
+/* .wsc-laag is bewust géén container en genereert zelf geen vak: de popup en de balk
+   erin zijn position:fixed en moeten het scherm als houvast hebben, niet de sectie. */
+.wsc-laag{display:contents}
+.wsc *,.wsc-laag *{box-sizing:border-box;margin:0;padding:0}
+.wsc img,.wsc-laag img{max-width:100%;height:auto;display:block}
+.wsc ul{list-style:none}
+.wsc a{color:inherit;text-decoration:none}
+.wsc button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.wsc .rail{max-width:var(--rail);margin:0 auto;padding:0 40px}
+@container (max-width:700px){.wsc .rail{padding:0 18px}}
+
+/* tweeslags kop */
+.wsc .duo{font-weight:900;letter-spacing:-.025em;line-height:1.03;
+  font-size:clamp(31px,3.4cqw,50px);text-wrap:balance}
+.wsc .duo .b{display:block;color:#B0742A}
+.wsc .duo.on-dark{color:#fff}
+.wsc .duo.on-dark .b{color:var(--goud)}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  .wsc .duo .b{background-image:var(--grad-goud-tekst);-webkit-background-clip:text;
+    background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+  .wsc .duo.on-dark .b{background-image:var(--grad-goud)}}
+@container (max-width:700px){.wsc .duo{font-size:31px}}
+
+.wsc .eyebrow{font-size:10.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink-40)}
+.wsc .eyebrow.on-dark{color:rgba(245,209,138,.72)}
+.wsc .lead{font-size:15.5px;line-height:1.7;color:var(--ink-80);max-width:52ch}
+.wsc .lead.on-dark{color:rgba(255,255,255,.72)}
+.wsc .knop.klein{padding:12px 20px;font-size:13px}
+.wsc .tekstlink{font-size:14px;font-weight:600;color:var(--ink-60);text-decoration:underline;
+  text-underline-offset:4px}
+.wsc .tekstlink.on-dark{color:rgba(255,255,255,.66)}
+.wsc :focus-visible{outline:3px solid var(--bronze);outline-offset:3px}
+.wsc .gerust.on-dark{color:rgba(255,255,255,.62)}
+.wsc .gerust.on-dark li::before{background:var(--goud)}
+
+.wsc .sectie{padding:74px 0}
+@container (max-width:700px){.wsc .sectie{padding:46px 0}}
+.wsc .donker{background:var(--grad-dark);color:#fff}
+.wsc .zand{background:var(--sand)}
+.wsc .wit{background:var(--paper)}
+@container (max-width:700px){
+  .wsc .hero-acties .tekstlink{text-align:center}
+}
+
+/* ── blok 2 · zonebalk ── */
+.wsc .zonebalk{background:var(--paper);border-bottom:1px solid var(--ink-10);
+  box-shadow:0 10px 24px rgba(17,17,17,.05)}
+/* ── de zonekiezer ──
+   Vier tegels in plaats van vier pillen: icoon, scheidingslijntje, naam, aantal in
+   een rondje en een pijl. De zone waar je op staat is zwart met een gouden voet. */
+.wsc .zonekiezer{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;padding:18px 0 18px}
+/* Met de tegel "Alle zones" erbij zijn het er vijf; zonder dit valt die vijfde alleen op
+   een tweede rij. Let op: dit moet BINNEN de brede breakpoint staan. Een `:has()`-selector
+   is specifieker dan `.wsc .zonekiezer` in de containerquery's eronder, en zou anders ook
+   de tabletkolommen en de telefoonscroller overrulen. */
+@container (min-width:1181px){
+  .wsc .zonekiezer:has(.zkaart:nth-child(5)){grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+  /* De bundelpagina heeft er zes: vijf zones plus de bundels zelf. Zes naast
+     elkaar laat maar 54 px over voor de naam, en dan breekt "schaamstreek"
+     (83 px) middenin het woord af. Twee rijen van drie geeft elke tegel ruim
+     400 px, en de balk blijft op volle lettergrootte leesbaar. */
+  /* Twee rijen kosten 80 px meer dan één, en de balk staat nu bovenaan: op de
+     bundelpagina zakte de eerste kaart daardoor tot 912 px in een venster van 900.
+     De rijen blijven, maar krapper — dat scheelt 16 px en laat de namen heel. */
+  .wsc .zonekiezer:has(.zkaart:nth-child(6)){grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;
+    padding:14px 0 14px}
+  .wsc .zonekiezer:has(.zkaart:nth-child(6)) .zkaart{padding:11px 14px;gap:11px}
+  .wsc .zonekiezer:has(.zkaart:nth-child(6)) .zkaart-ico{width:44px;height:40px;padding-right:12px}
+  .wsc .zonekiezer:has(.zkaart:nth-child(6)) .zkaart-naam{font-size:13.5px}
+  .wsc .zonekiezer:has(.zkaart:nth-child(6)) .zkaart-tel{width:30px;height:30px;font-size:12.5px}
+  .wsc .zonekiezer:has(.zkaart:nth-child(6)) .zkaart-pijl{display:none}
+  .wsc .zonekiezer:has(.zkaart:nth-child(5)) .zkaart{padding:13px 12px;gap:9px}
+  .wsc .zonekiezer:has(.zkaart:nth-child(5)) .zkaart-ico{width:44px;height:40px;padding-right:8px}
+  /* "schaamstreek" is het langste woord in de rij en moet op één regel passen; bij
+     12,5px is dat 84px en houdt de naamkolom er 88. Meet na als je hier iets wijzigt. */
+  .wsc .zonekiezer:has(.zkaart:nth-child(5)) .zkaart-naam{font-size:12.5px}
+  .wsc .zonekiezer:has(.zkaart:nth-child(5)) .zkaart-tel{width:26px;height:26px;font-size:11.5px}
+  /* de pijl is versiering; met vijf tegels is die ruimte nodig voor de naam, anders
+     breekt "Lichaam & schaamstreek" over drie regels */
+  .wsc .zonekiezer:has(.zkaart:nth-child(5)) .zkaart-pijl{display:none}
+}
+
+/* Tussen die twee breedtes is vijf naast elkaar te smal: "schaamstreek" past dan niet
+   op één regel en breekt middenin. Drie op een rij (dus 3 + 2) houdt de namen heel en
+   is compacter dan de twee kolommen van de tabletweergave. */
+@container (min-width:981px) and (max-width:1180px){
+  .wsc .zonekiezer:has(.zkaart:nth-child(5)){grid-template-columns:repeat(3,minmax(0,1fr))}
+  .wsc .zonekiezer:has(.zkaart:nth-child(6)){grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+.wsc .zkaart{position:relative;display:flex;align-items:center;gap:14px;text-align:left;
+  border:1px solid var(--ink-10);border-radius:14px;padding:14px 16px;background:var(--paper);
+  font-weight:700;color:var(--ink);text-decoration:none;min-width:0;
+  transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease}
+.wsc .zkaart:hover{border-color:rgba(188,129,62,.55);box-shadow:0 10px 24px rgba(17,17,17,.07)}
+.wsc .zkaart-ico{flex:none;width:52px;height:44px;display:grid;place-items:center;
+  border-right:1px solid var(--ink-10);padding-right:14px}
+.wsc .zkaart-ico img{width:100%;height:100%;object-fit:contain}
+.wsc .zkaart-naam{flex:1;min-width:0;font-size:14.5px;line-height:1.25;letter-spacing:-.01em;
+  overflow-wrap:anywhere}
+.wsc .zkaart-tel{flex:none;width:32px;height:32px;border-radius:100px;display:grid;place-items:center;
+  border:1.5px solid var(--bronze);color:var(--bronze);font-size:13px;font-weight:800}
+.wsc .zkaart-pijl{flex:none;width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2.2;
+  color:var(--ink-40)}
+.wsc .zkaart.nu{background:var(--carbon);border-color:var(--carbon);color:#fff;
+  box-shadow:0 12px 26px rgba(17,17,17,.22)}
+.wsc .zkaart.nu::after{content:"";position:absolute;left:10px;right:10px;bottom:-4px;height:4px;
+  border-radius:0 0 8px 8px;background:var(--grad-goud)}
+.wsc .zkaart.nu .zkaart-ico{border-right-color:rgba(255,255,255,.18)}
+.wsc .zkaart.nu .zkaart-ico img{filter:brightness(0) invert(1)}
+.wsc .zkaart.nu .zkaart-tel{background:var(--grad-goud);border-color:transparent;color:var(--carbon)}
+.wsc .zkaart.nu .zkaart-pijl{color:rgba(255,255,255,.55)}
+
+@container (max-width:980px){
+  .wsc .zonekiezer{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .wsc .zkaart{padding:12px 13px;gap:11px}
+  .wsc .zkaart-ico{width:44px;height:38px;padding-right:11px}
+  .wsc .zkaart-naam{font-size:13.5px}
+  .wsc .zkaart-tel{width:28px;height:28px;font-size:12px}
+  .wsc .zkaart-pijl{width:15px;height:15px}
+}
+
+/* Op de telefoon worden de tegels een rij ronde iconen met de naam eronder, die je
+   opzij schuift. Vier tegels onder elkaar kostte een half scherm scrollen voordat de
+   producten in beeld kwamen; zo staat de hele keuze in één blik boven de vouw. De
+   opmaak doet dat zelf — de markup is dezelfde als op desktop. */
+@container (max-width:700px){
+  .wsc .zonekiezer{
+    display:flex;flex-wrap:nowrap;overflow-x:auto;gap:16px;
+    padding:12px 18px 10px;margin:0 -18px;
+    /* Zonder scroll-padding snapt de strip naar de rand van de eerste tegel en
+       scrolt hij zijn eigen lucht weg: de tegel plakt dan tegen het scherm en
+       de strip staat bij het laden al 18 px ingescrold. */
+    scroll-snap-type:x proximity;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+    scroll-padding-inline:18px}
+  .wsc .zonekiezer::-webkit-scrollbar{display:none}
+  .wsc .zkaart{
+    flex:none;width:86px;flex-direction:column;align-items:center;gap:8px;
+    border:0;background:none;padding:0;box-shadow:none;scroll-snap-align:start}
+  .wsc .zkaart:hover{border:0;box-shadow:none}
+  .wsc .zkaart-ico{
+    width:60px;height:60px;border:1px solid var(--ink-10);border-right-width:1px;
+    border-radius:100px;padding:13px;background:var(--paper);
+    transition:border-color .18s ease,background .18s ease}
+  .wsc .zkaart-naam{
+    flex:none;font-size:11px;line-height:1.25;text-align:center;font-weight:700;
+    letter-spacing:-.005em;color:var(--ink-60)}
+  .wsc .zkaart-tel{
+    position:absolute;top:-3px;right:0;width:22px;height:22px;font-size:11px;
+    background:var(--paper)}
+  /* Een zonetegel zonder icoon heeft geen rondje om het aantal boven te hangen;
+     dan zet het badge zich weer gewoon in de rij, in plaats van op de naam. */
+  .wsc .zkaart:not(:has(.zkaart-ico)) .zkaart-tel{position:static;margin-top:2px}
+  .wsc .zkaart-pijl{display:none}
+  .wsc .zkaart.nu{background:none;box-shadow:none}
+  .wsc .zkaart.nu::after{display:none}
+  .wsc .zkaart.nu .zkaart-ico{
+    background:var(--carbon);border-color:var(--carbon);
+    box-shadow:0 0 0 2px var(--paper),0 0 0 4px var(--bronze)}
+  .wsc .zkaart.nu .zkaart-ico img{filter:brightness(0) invert(1)}
+  .wsc .zkaart.nu .zkaart-naam{color:var(--ink)}
+}
+/* Het spoor onder de zonebalk. Alleen daar waar de balk een schuifstrip is;
+   op bredere schermen staat alles al naast elkaar en heeft het geen functie.
+   De duim krijgt zijn breedte en positie van ws-collectie.js. */
+.wsc .zk-spoor{display:none}
+
+@container (max-width:700px){
+  .wsc .zk-spoor{
+    display:block;position:relative;height:3px;border-radius:100px;
+    background:var(--ink-10);margin:2px 0 0;overflow:hidden}
+  .wsc .zk-spoor[hidden]{display:none}
+  .wsc .zk-duim{
+    position:absolute;top:0;bottom:0;left:0;width:40%;border-radius:100px;
+    background:var(--grad-goud);transition:transform .12s linear}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .wsc .zk-duim{transition:none}
+}
+
+.wsc .keuzes{display:flex;gap:8px;flex-wrap:wrap}
+.wsc .keuze{border:1px solid var(--ink-10);border-radius:100px;padding:10px 18px;font-size:13px;
+  font-weight:700;background:var(--paper);transition:.16s ease}
+.wsc .keuze[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.wsc .score{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--ink-60)}
+.wsc .score .sterren svg{width:11px;height:11px;fill:#BC813E}
+.wsc .score.leeg{color:var(--ink-40);font-weight:600}
+.wsc .lint.zand{background:var(--sand-deep);color:var(--ink)}
+.wsc .kaart-actie .snel{flex:none;width:44px;border:1px solid var(--ink-10);border-radius:100px;
+  display:grid;place-items:center}
+.wsc .kaart-actie .snel svg{width:17px;height:17px;stroke:var(--ink);fill:none;stroke-width:2.1}
+.wsc .kaart-actie .snel:hover{background:var(--sand-deep)}
+.wsc .rasterslot{display:flex;align-items:center;justify-content:space-between;gap:20px;
+  margin-top:28px;padding-top:20px;border-top:1px solid var(--ink-10);font-size:13px;color:var(--ink-60)}
+@container (max-width:700px){
+  .wsc .rasterslot{flex-direction:column;align-items:flex-start;gap:12px}
+}
+.wsc .mech-plaat{background:var(--paper);border-radius:var(--r-l);padding:30px;
+  box-shadow:0 14px 34px rgba(17,17,17,.09)}
+@container (max-width:700px){.wsc .mech-plaat{padding:20px}}
+.wsc .bundel .eyebrow{color:rgba(26,20,8,.55)}
+.wsc .zeker-ico{width:38px;height:38px;border-radius:50%;background:var(--sand);flex:none;display:grid;place-items:center}
+.wsc .zeker-ico svg{width:18px;height:18px;stroke:var(--bronze);fill:none;stroke-width:2.1}
+.wsc .vraaglijst{display:flex;flex-direction:column;border-top:1px solid var(--ink-10)}
+.wsc .vitem{border-bottom:1px solid var(--ink-10)}
+.wsc .vknop{width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;
+  padding:20px 0;font-size:15px;font-weight:800;text-align:left;letter-spacing:-.01em}
+.wsc .vknop svg{width:18px;height:18px;flex:none;stroke:var(--bronze);fill:none;stroke-width:2.2;
+  transition:transform .2s ease}
+.wsc .vitem.open .vknop svg{transform:rotate(45deg)}
+.wsc .vantwoord{display:none;padding:0 0 20px;font-size:13.5px;line-height:1.7;color:var(--ink-80);max-width:62ch}
+.wsc .vitem.open .vantwoord{display:block}
+.wsc .vantwoord b{font-weight:800;color:var(--ink)}
+
+/* ── blok 9 · afsluiter ── */
+.wsc .zonekaarten{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:30px 0 40px}
+.wsc .zk{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);border-radius:var(--r-m);
+  padding:20px;display:flex;flex-direction:column;gap:8px;transition:background .18s ease}
+.wsc .zk:hover{background:rgba(255,255,255,.09)}
+.wsc .zk b{font-size:15px;font-weight:800;color:#fff}
+.wsc .zk span{font-size:12px;color:rgba(255,255,255,.55);line-height:1.5;flex:1}
+.wsc .zk em{font-style:normal;font-size:11.5px;font-weight:700;color:var(--goud)}
+.wsc .seo .vknop{color:#fff}
+.wsc .seo .vknop svg{stroke:var(--goud)}
+.wsc .seo .vantwoord{color:rgba(255,255,255,.66);max-width:78ch}
+.wsc .seo .vantwoord p{margin-bottom:12px}
+.wsc .seo .vitem{border-bottom:0}
+@container (max-width:700px){
+  .wsc .zonekaarten{grid-template-columns:1fr 1fr;gap:10px}
+}
+/* ── blok 1 · de hero ── */
+/* De tekst lag naast de foto: eerst 249 px kop en inleiding, daaronder 199 px beeld,
+   en pas daarna kwam de rest. Op een telefoon stond het eerste product daardoor op
+   1679 px — twee schermen scrollen. De tekst ligt nu ín de foto, de zonekiezer staat
+   erboven en de keuzehulp eronder; zie LEESMIJ voor de hele meting.
+   `--grad-kop` blijft wat het was: hij is de achtergrond van een hero zonder foto en
+   `--grad-dark` wordt ook door `.donker` in andere blokken gebruikt. */
+.wsc .kop{background:var(--grad-kop);color:#fff;padding:14px 0 12px;position:relative;overflow:hidden}
+.wsc .kop .rail{max-width:var(--rail)}
+/* de sectie zet zelf padding-top in een style-attribuut; dit haalt het terug */
+.wsc #raster{padding-top:18px}
+
+/* Breder in plaats van hoger: op 1440 is dit 317 px, en daarmee staat de bovenrand
+   van de eerste kaart op 823 px — binnen een venster van 900. Gemeten op het thema. */
+.wsc .hero{position:relative;border-radius:var(--r-l);overflow:hidden;isolation:isolate;
+  min-height:clamp(280px,22cqw,340px);display:flex;align-items:flex-end;
+  border:1px solid rgba(255,255,255,.09);box-shadow:0 22px 44px rgba(0,0,0,.42)}
+.wsc .hero-foto{position:absolute;inset:0;z-index:0}
+.wsc .hero-foto img{width:100%;height:100%;object-fit:cover;object-position:50% 40%;
+  filter:saturate(.96) contrast(1.03)}
+/* Twee scrims over elkaar: één van onder naar boven zodat de kop staat waar het beeld
+   het rustigst is, en één vanaf links voor de brede weergave, waar de tekst maar de
+   halve breedte pakt en de rechterkant open blijft. */
+.wsc .hero-foto::after{content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(180deg,rgba(14,13,12,.30) 0%,rgba(14,13,12,.10) 26%,rgba(14,13,12,.68) 74%,rgba(14,13,12,.90) 100%),
+    linear-gradient(90deg,rgba(14,13,12,.80) 0%,rgba(14,13,12,.34) 38%,rgba(14,13,12,0) 66%)}
+.wsc .kop.kaal .hero{border-color:rgba(255,255,255,.12);box-shadow:none;
+  background:linear-gradient(140deg,rgba(255,255,255,.05) 0%,rgba(255,255,255,0) 58%);
+  min-height:clamp(210px,17cqw,272px)}
+
+.wsc .hero-tekst{position:relative;z-index:1;display:flex;flex-direction:column;
+  align-items:flex-start;gap:13px;padding:32px 34px 30px;max-width:min(640px,86%)}
+.wsc .duo.klein{font-size:clamp(26px,2.55cqw,40px)}
+.wsc .lead.kort{font-size:14.5px;max-width:40ch}
+.wsc .hero .lead.on-dark{color:rgba(255,255,255,.82)}
+
+/* De regel naar de keuzehulp. Hij staat in de hero omdat de kaart zelf naar beneden
+   is verhuisd; zonder deze regel zou een bezoeker die hulp zoekt hem missen. */
+.wsc .hero-hulp{display:inline-flex;align-items:center;gap:10px;font-size:13.5px;
+  font-weight:700;color:var(--goud);border-bottom:1px solid rgba(245,209,138,.34);
+  padding-bottom:3px;transition:border-color .18s ease,color .18s ease}
+.wsc .hero-hulp:hover{color:#fff;border-bottom-color:rgba(255,255,255,.7)}
+.wsc .hero-hulp i{width:22px;height:22px;border-radius:50%;flex:none;font-style:normal;
+  background:rgba(245,209,138,.16);display:grid;place-items:center}
+.wsc .hero-hulp svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.4}
+
+/* bewijskaart */
+/* De badge is de vorm zelf, geen vinkje in een blauwe cirkel: kleur en vinkje
+   zitten in het symbool, dus hier alleen de maat. */
+
+/* geruststellers met icoon */
+
+/* keuzekaart */
+/* Hij hing eerst naast de kop, in het zwart: vandaar de zware slagschaduw. Nu staat
+   hij tussen de productgroepen op zand, en daar is diezelfde schaduw een vlek. Een
+   lijn met een lichte schaduw houdt hem los van de kaarten eromheen. */
+.wsc .hulpzone{max-width:var(--rail);margin:0 auto;padding:26px 40px 0}
+.wsc .hulpzone[hidden]{display:none}
+.wsc .hulpzone.in-raster{max-width:none;margin:0 0 44px;padding:0}
+.wsc .kiescard{position:relative;z-index:1;background:#FCFAF6;color:var(--ink);border-radius:var(--r-l);padding:24px 26px 24px;
+  border:1px solid rgba(188,129,62,.22);box-shadow:0 14px 34px rgba(17,17,17,.06);
+  display:flex;flex-direction:column;gap:16px}
+.wsc .kaartkop{display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.wsc .kaartkop .eyebrow{color:var(--bronze)}
+.wsc .kaartkop span{font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-40);white-space:nowrap}
+.wsc .kiescard h2{font-size:clamp(21px,1.9cqw,27px);font-weight:900;letter-spacing:-.022em;
+  line-height:1.1;margin-top:-6px}
+/* De stapper: één bolletje per vraag, gevuld zodra hij beantwoord is. */
+.wsc .stapper{display:flex;align-items:center;gap:14px;margin-top:-4px}
+.wsc .stapper-bollen{display:flex;align-items:center;gap:0}
+.wsc .sb{position:relative;width:26px;height:26px;border-radius:50%;flex:none;
+  border:1.5px solid rgba(188,129,62,.4);background:#FCFAF6;display:grid;place-items:center;
+  transition:background .2s ease,border-color .2s ease}
+.wsc .sb + .sb{margin-left:26px}
+.wsc .sb + .sb::before{content:"";position:absolute;right:100%;top:50%;width:26px;height:2px;
+  transform:translateY(-50%);background:var(--ink-10);transition:background .2s ease}
+.wsc .sb svg{width:13px;height:13px;stroke:#fff;fill:none;stroke-width:3;opacity:0;transition:opacity .2s ease}
+.wsc .sb.af{background:var(--grad-goud);border-color:transparent}
+.wsc .sb.af svg{opacity:1;stroke:var(--carbon)}
+.wsc .sb.af + .sb::before,.wsc .sb.af::before{background:var(--bronze)}
+.wsc .sb.nu{border-color:var(--bronze);box-shadow:0 0 0 3px rgba(188,129,62,.15)}
+.wsc .stapper-tekst{font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-40)}
+.wsc .stapper-tekst b{color:var(--ink)}
+.wsc .kiescard-sub{font-size:13px;color:var(--ink-60);margin-top:-10px}
+.wsc .kiescard-sub[hidden]{display:none}
+
+.wsc .stappen-lijst{display:flex;flex-direction:column;gap:12px;position:relative}
+.wsc .stappen-lijst::before{content:"";position:absolute;left:19px;top:22px;bottom:22px;width:1px;
+  background:var(--ink-10)}
+/* De vraag krijgt zijn natuurlijke breedte, de antwoordknoppen de rest. Met
+   `1fr auto` pakten de knoppen hun max-content en brak een vraag van vier
+   woorden over drie regels. */
+.wsc .vraagrij{display:grid;grid-template-columns:40px minmax(0,max-content) minmax(0,1fr);
+  gap:14px;align-items:center;position:relative;z-index:1}
+.wsc .stapbol{width:40px;height:40px;border-radius:50%;border:1px solid rgba(188,129,62,.4);
+  background:#FCFAF6;display:grid;place-items:center;font-size:11.5px;font-weight:800;
+  color:var(--bronze)}
+.wsc .vraagrij > p{font-size:14px;font-weight:700}
+/* Een beantwoorde vraag klapt dicht tot één regel: het antwoord als pil, met een
+   potlood ernaast. Een vraag die nog niet aan de beurt is, staat gedempt. */
+.wsc .vr-antwoord,.wsc .vr-wijzig{display:none}
+.wsc .vraagrij.klaar{grid-template-columns:40px 1fr auto auto;cursor:pointer;
+  border:1px solid var(--ink-10);border-radius:14px;padding:8px 12px 8px 8px;background:#fff}
+.wsc .vraagrij.klaar > .keuzes{display:none}
+.wsc .vraagrij.klaar .vr-antwoord{display:inline-flex;align-items:center;background:var(--carbon);
+  color:#fff;border-radius:100px;padding:8px 16px;font-size:12.5px;font-weight:700;white-space:nowrap}
+.wsc .vraagrij.klaar .vr-wijzig{display:grid;place-items:center;width:30px;height:30px;
+  border-radius:8px;color:var(--ink-40);transition:background .16s ease,color .16s ease}
+.wsc .vraagrij.klaar .vr-wijzig:hover{background:var(--sand-deep);color:var(--ink)}
+.wsc .vraagrij.klaar .vr-wijzig svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.1}
+.wsc .vraagrij.klaar .stapbol{border-color:transparent;background:var(--grad-goud);color:var(--carbon)}
+.wsc .vraagrij.klaar .stapbol b{display:none}
+.wsc .vraagrij.klaar .stapbol svg{display:block}
+.wsc .stapbol svg{display:none;width:15px;height:15px;stroke:var(--carbon);fill:none;stroke-width:2.8}
+.wsc .vraagrij:not(.nu):not(.klaar){opacity:.38;pointer-events:none}
+.wsc .vraagrij:not(.nu):not(.klaar) > .keuzes{display:none}
+.wsc .vraagrij.nu .stapbol{border-color:var(--bronze);box-shadow:0 0 0 3px rgba(188,129,62,.13)}
+
+.wsc .kiescard .keuzes{justify-content:flex-end}
+.wsc .kiescard .keuze{padding:9px 17px;font-size:12.5px;background:#fff}
+.wsc .kiescard .keuze[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+.wsc .kies-opnieuw{display:none;align-self:center;font-size:12.5px;font-weight:600;color:var(--ink-60);
+  text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(188,129,62,.6);
+  padding:2px 4px}
+.wsc .kies-opnieuw:hover{color:var(--ink)}
+.wsc .kiescard.compleet .kies-opnieuw{display:block}
+
+/* matchpaneel */
+.wsc .matchpaneel{display:none;background:var(--sand);border:1px solid rgba(17,17,17,.07);
+  border-radius:var(--r-m);padding:16px 18px 18px}
+.wsc .matchpaneel.aan{display:block}
+.wsc .mp-kop{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.wsc .mp-kop b{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-60)}
+.wsc .mp-badge{background:var(--ink);color:#fff;border-radius:100px;padding:5px 11px;font-size:9.5px;
+  font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.wsc .mp-body{display:grid;grid-template-columns:96px minmax(0,1fr) 208px;gap:18px;align-items:center}
+.wsc .mp-body > img{width:96px;height:118px;object-fit:contain;object-position:center bottom}
+.wsc .mp-info h3{font-size:19px;font-weight:900;letter-spacing:-.02em}
+.wsc .mp-info > p{font-size:12.5px;line-height:1.45;color:var(--ink-60);margin:3px 0 10px;max-width:34ch}
+.wsc .mp-waarom{font-size:9.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-40);margin-bottom:6px}
+.wsc .mp-chips{display:flex;flex-direction:column;gap:5px;align-items:flex-start}
+.wsc .mp-chips span{display:inline-flex;align-items:center;gap:7px;background:#fff;
+  border:1px solid var(--ink-10);border-radius:100px;padding:5px 12px;font-size:11.5px;font-weight:600}
+.wsc .mp-chips svg{width:12px;height:12px;stroke:var(--bronze);fill:none;stroke-width:2.6;flex:none}
+.wsc .mp-koop{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.wsc .mp-prijs{font-size:27px;font-weight:900;letter-spacing:-.025em;line-height:1}
+.wsc .mp-prijs s{display:block;font-size:12.5px;font-weight:600;color:var(--ink-40);margin-top:4px}
+.wsc .mp-knop{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:#fff;
+  border-radius:100px;padding:12px 14px 12px 18px;font-size:11.5px;font-weight:800;letter-spacing:.05em;
+  text-transform:uppercase;text-decoration:none;transition:transform .18s ease}
+.wsc .mp-knop{white-space:nowrap}
+.wsc .mp-knop:hover{transform:translateY(-1px)}
+.wsc .mp-knop i{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.16);display:grid;
+  place-items:center;font-style:normal}
+.wsc .mp-knop svg{width:12px;height:12px;stroke:#fff;fill:none;stroke-width:2.4}
+.wsc .mp-voorraad{display:flex;align-items:center;gap:7px;font-size:11.5px;color:var(--ink-60)}
+.wsc .mp-voorraad::before{content:"";width:6px;height:6px;border-radius:50%;background:#2E9E5B}
+
+@container (max-width:700px){
+  .wsc .kop{padding:8px 0 10px}
+  /* Nagemeten op het thema zelf, 390x844: met 320 px hero begon de eerste kaart op
+     841 px — precies op de onderrand van het scherm, dus je zag er niets van. Met
+     288 px, een krappere zonebalk en minder lucht boven het raster staat de bovenrand
+     van de kaart binnen beeld. Hoger dan dit kan de hero niet zonder dat weer op te
+     eten; meet het na als je aan een van die vier draait. */
+  .wsc .hero{min-height:288px;border-radius:var(--r-m)}
+  /* de zwarte band boven het raster mag zo dun mogelijk zijn */
+  .wsc #raster{padding-top:14px}
+  .wsc .kop.kaal .hero{min-height:186px}
+  .wsc .hero-foto img{object-position:50% 42%}
+  .wsc .hero-tekst{padding:20px 18px 20px;gap:10px;max-width:none}
+  .wsc .lead.kort{font-size:13.5px}
+  .wsc .hero-hulp{font-size:13px;gap:8px}
+  .wsc .hulpzone{padding:20px 16px 0}
+  .wsc .kiescard{padding:18px 16px}
+          .wsc .kaartkop{flex-direction:column;gap:4px}
+  .wsc .kaartkop span{white-space:normal}
+  .wsc .kiescard h2{font-size:21px}
+  .wsc .stappen-lijst::before{display:none}
+  .wsc .vraagrij{grid-template-columns:34px 1fr;gap:10px}
+  .wsc .stapbol{width:34px;height:34px}
+  .wsc .kiescard .keuzes{grid-column:1 / -1;justify-content:flex-start}
+  .wsc .stapper{gap:11px}
+  .wsc .sb{width:23px;height:23px}
+  .wsc .sb + .sb{margin-left:20px}
+  .wsc .sb + .sb::before{width:20px}
+
+  /* Een dichtgeklapte vraag houdt op de telefoon zijn eigen rij voor het antwoord:
+     de vraagtekst en een zwarte pil naast elkaar persen wordt onleesbaar smal.
+     Alles eromheen is wel zo krap mogelijk gehouden: drie dichtgeklapte vragen
+     mogen samen niet het halve scherm opeten. */
+  .wsc .vraagrij.klaar{grid-template-columns:28px 1fr auto;gap:5px 9px;padding:7px 8px 8px 7px}
+  .wsc .vraagrij.klaar .stapbol{width:28px;height:28px}
+  .wsc .vraagrij.klaar .stapbol svg{width:13px;height:13px}
+  .wsc .vraagrij.klaar > p{grid-column:2;font-size:12.5px}
+  .wsc .vraagrij.klaar .vr-antwoord{grid-column:2;justify-self:start;padding:5px 12px;font-size:11.5px}
+  .wsc .vraagrij.klaar .vr-wijzig{grid-column:3;grid-row:1 / span 2;align-self:center;width:26px;height:26px}
+
+  /* Het matchpaneel: beeld naast de tekst, prijs en knop als één blok eronder in
+     plaats van alles onder elkaar. Dat scheelt bijna een half scherm. */
+  .wsc .matchpaneel{padding:14px}
+  .wsc .mp-body{grid-template-columns:88px minmax(0,1fr);gap:14px;align-items:start}
+  .wsc .mp-body > img{width:88px;height:110px}
+  .wsc .mp-info h3{font-size:17px;line-height:1.15}
+  .wsc .mp-info > p{font-size:12px;margin:2px 0 8px}
+  .wsc .mp-chips span{padding:4px 10px;font-size:11px}
+  /* let op: de kolommen moeten meerekken (minmax i.p.v. auto), anders is de rij
+     zo breed als de prijs en valt de volle-breedte knop erbinnen samen met zijn pijl */
+  .wsc .mp-koop{grid-column:1 / -1;display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;
+    align-items:baseline;text-align:left;
+    border-top:1px solid rgba(17,17,17,.08);padding-top:12px;margin-top:2px}
+  .wsc .mp-prijs{grid-column:1;grid-row:1;font-size:26px;display:flex;align-items:baseline;gap:9px}
+  .wsc .mp-prijs s{display:inline;font-size:13px;margin-top:0}
+  .wsc .mp-voorraad{grid-column:1 / -1;grid-row:2}
+  .wsc .mp-knop{grid-column:1 / -1;grid-row:3;width:100%;justify-content:center;margin-top:8px;
+    padding:15px 18px;position:relative}
+  .wsc .mp-knop i{position:absolute;right:8px;top:50%;transform:translateY(-50%)}
+}
+.wsc .uitklap .vknop{padding:18px 0}
+.wsc .uitklap .vantwoord{max-width:none;padding-bottom:24px}
+
+/* ── blok 3 · over de categorie ── */
+.wsc .cat{display:grid;grid-template-columns:1fr .84fr;gap:52px;align-items:start}
+/* de kop van dit blok is kleiner dan een sectiekop: hij staat in een leeskolom */
+.wsc .cat-tekst .duo{font-size:clamp(25px,2.35cqw,35px);line-height:1.12}
+.wsc .cat-tekst{display:flex;flex-direction:column;gap:16px;min-width:0}
+.wsc .cat-tekst p{font-size:14.5px;line-height:1.78;color:var(--ink-80);max-width:66ch}
+.wsc .cat-tekst p b{font-weight:700;color:var(--ink)}
+.wsc .cat-tekst a{color:var(--ink);font-weight:600;text-decoration:none;
+  box-shadow:inset 0 -1px 0 0 rgba(188,129,62,.55);transition:box-shadow .2s ease,color .2s ease}
+.wsc .cat-tekst a:hover{color:#8F6428;box-shadow:inset 0 -2px 0 0 var(--bronze)}
+.wsc .cat-tekst h3,.wsc .cat-h3-breed{font-size:18px;font-weight:800;letter-spacing:-.018em;
+  color:var(--ink);margin-top:10px;padding-top:14px;position:relative}
+.wsc .cat-tekst h3::before,.wsc .cat-h3-breed::before{content:"";position:absolute;top:0;left:0;
+  width:34px;height:2px;background:var(--grad-goud-tekst);border-radius:2px}
+.wsc .cat-h3-breed{margin:38px 0 18px}
+
+/* vier rustige regels in plaats van kaders */
+.wsc .cat-lijst{display:flex;flex-direction:column;margin:-2px 0 2px}
+.wsc .cat-lijst li{display:grid;grid-template-columns:178px 1fr;gap:8px 20px;
+  align-items:baseline;padding:11px 0;border-bottom:1px solid rgba(17,17,17,.08)}
+.wsc .cat-lijst li:first-child{border-top:1px solid rgba(17,17,17,.08)}
+.wsc .cat-lijst a{font-size:14.5px;white-space:nowrap;justify-self:start}
+.wsc .cat-lijst span{font-size:13.5px;line-height:1.6;color:var(--ink-60)}
+
+.wsc .mech-plaat{background:var(--paper);border-radius:var(--r-l);padding:28px 28px 22px;
+  box-shadow:0 14px 34px rgba(17,17,17,.09);position:sticky;top:24px}
+.wsc .mech-plaat figcaption{margin-top:12px;padding-top:12px;border-top:1px solid var(--ink-10);
+  font-size:12px;line-height:1.55;color:var(--ink-60);max-width:46ch}
+
+/* gebruikstips: drie kolommen op desktop, gestapeld op mobiel */
+.wsc .stappenrij{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;list-style:none;
+  counter-reset:stap;border-top:1px solid var(--ink-10);padding-top:24px}
+.wsc .stapkort{min-width:0}
+.wsc .stapkort b{display:flex;align-items:baseline;gap:11px;font-size:14.5px;font-weight:800;
+  margin-bottom:7px;line-height:1.3}
+.wsc .stapkort b::before{counter-increment:stap;content:counter(stap,decimal-leading-zero);
+  font-size:11px;font-weight:800;letter-spacing:.06em;color:var(--bronze);flex:none;
+  padding-top:2px}
+.wsc .stapkort span{font-size:13.5px;line-height:1.68;color:var(--ink-60);display:block;
+  padding-left:26px;max-width:38ch}
+@container (max-width:700px){
+  .wsc .cat{grid-template-columns:1fr;gap:26px}
+  .wsc .cat-tekst p,.wsc .cat-tekst h3{max-width:none}
+  .wsc .cat-lijst li{grid-template-columns:1fr;gap:4px;padding:12px 0}
+  .wsc .cat-lijst a{white-space:normal}
+  .wsc .mech-plaat{padding:18px 18px 16px;position:static}
+  .wsc .cat-h3-breed{margin:28px 0 14px}
+  .wsc .stappenrij{grid-template-columns:1fr;gap:20px;padding-top:20px}
+  .wsc .stapkort span{max-width:none}
+}
+
+/* ── slotband ── */
+.wsc .zekerstrook{display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+  border:1px solid rgba(255,255,255,.14);border-radius:var(--r-m);overflow:hidden;margin-bottom:38px}
+.wsc .zekerstrook > div{padding:17px 18px;border-right:1px solid rgba(255,255,255,.14);min-width:0;
+  display:flex;gap:13px;align-items:center}
+.wsc .zeker-ico{width:38px;height:38px;border-radius:50%;flex:none;display:grid;place-items:center;
+  background:rgba(245,209,138,.11);border:1px solid rgba(245,209,138,.34)}
+.wsc .zeker-ico svg{width:18px;height:18px;stroke:var(--goud);fill:none;stroke-width:1.9}
+.wsc .zeker-tekst{min-width:0}
+.wsc .zekerstrook > div:last-child{border-right:0}
+.wsc .zekerstrook b{display:block;font-size:13px;font-weight:800;color:#fff}
+.wsc .zekerstrook span{font-size:11.5px;color:rgba(255,255,255,.5)}
+.wsc .slotfaq{display:grid;grid-template-columns:.72fr 1.28fr;gap:40px;align-items:start}
+.wsc .slotfaq .vraaglijst{border-top:1px solid rgba(255,255,255,.14)}
+.wsc .slotfaq .vitem{border-bottom:1px solid rgba(255,255,255,.14)}
+.wsc .slotfaq .vknop{color:#fff;font-size:14.5px;padding:16px 0}
+.wsc .slotfaq .vknop svg{stroke:var(--goud)}
+.wsc .slotfaq .vantwoord{color:rgba(255,255,255,.7);font-size:13px;padding-bottom:18px}
+.wsc .slotfaq .vantwoord b{color:#fff}
+@container (max-width:700px){
+  /* schuifstrip: de rand van de volgende kaart blijft zichtbaar, dat nodigt uit tot vegen */
+  .wsc .zekerstrook{display:flex;border:0;border-radius:0;overflow-x:auto;overflow-y:hidden;
+    gap:10px;margin:0 -18px 30px;padding:0 18px 2px;scroll-snap-type:x mandatory;
+    scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .wsc .zekerstrook::-webkit-scrollbar{display:none}
+  .wsc .zekerstrook > div{flex:0 0 72%;scroll-snap-align:start;border:1px solid rgba(255,255,255,.16);
+    border-right:1px solid rgba(255,255,255,.16);border-radius:var(--r-m);
+    background:rgba(255,255,255,.05);padding:15px 16px;flex-direction:column;
+    align-items:flex-start;gap:11px}
+  .wsc .zekerstrook b{font-size:13.5px}
+  .wsc .slotfaq{grid-template-columns:1fr;gap:20px}
+}
+/* ═══ blok 2 · het raster ═══
+   Kaart, hover en monogram zijn overgenomen uit assets/ws-bestsellers.css
+   in het thema wellshave/homepage-test. Waarden ongewijzigd gelaten. */
+
+/* ── de filterbalk ──
+   Eén paneel met twee rijen: bovenin waar je naar kijkt, onderin wat je gekozen hebt.
+   De knoppen dragen hun eigen icoon en hun aantal; de actieve is zwart. Op de knop
+   Bundels kan een lintje staan, dat boven de rand uitsteekt. */
+.wsc .filterbalk{background:var(--paper);border:1px solid rgba(188,129,62,.22);border-radius:18px;
+  padding:20px 18px;display:flex;flex-direction:column;gap:0;margin-bottom:26px;
+  box-shadow:0 14px 34px rgba(17,17,17,.05)}
+.wsc .fb-rij{display:flex;align-items:center;gap:13px;flex-wrap:wrap}
+.wsc .fb-label{display:inline-flex;align-items:center;gap:9px;flex:none;font-size:11.5px;
+  font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+.wsc .fb-label svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2.1;
+  color:var(--ink-60)}
+.wsc .fb-streep{flex:none;width:1px;align-self:stretch;min-height:34px;background:var(--ink-10)}
+
+.wsc .filters{display:flex;gap:8px;flex-wrap:wrap;min-width:0}
+.wsc .filter{position:relative;display:inline-flex;align-items:center;gap:8px;
+  border:1px solid var(--ink-10);border-radius:12px;padding:11px 13px;font-size:13px;
+  font-weight:700;color:var(--ink);background:var(--paper);
+  transition:border-color .18s ease,background .18s ease,color .18s ease,box-shadow .18s ease}
+.wsc .filter svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.1;flex:none}
+.wsc .filter i{flex:none;min-width:23px;height:23px;padding:0 6px;border-radius:100px;
+  display:grid;place-items:center;font-style:normal;font-size:12px;font-weight:800;
+  background:var(--sand-deep);color:var(--ink-60)}
+.wsc .filter:hover{border-color:rgba(188,129,62,.55)}
+.wsc .filter[aria-pressed="true"]{background:var(--carbon);border-color:var(--carbon);color:#fff;
+  box-shadow:0 10px 22px rgba(17,17,17,.2)}
+.wsc .filter[aria-pressed="true"] i{background:rgba(255,255,255,.16);color:#fff}
+
+/* het lintje boven de knop */
+.wsc .filter.gemerkt{background:linear-gradient(180deg,#FDF7EC 0%,#F7EAD2 100%);
+  border-color:rgba(188,129,62,.55)}
+.wsc .filter.gemerkt i{background:var(--carbon);color:#fff}
+.wsc .filter-lint{position:absolute;left:50%;bottom:calc(100% - 1px);transform:translateX(-50%);
+  background:var(--grad-goud);color:var(--carbon);font-size:9.5px;font-weight:800;
+  letter-spacing:.12em;text-transform:uppercase;padding:5px 12px 7px;border-radius:8px 8px 0 0;
+  white-space:nowrap;pointer-events:none}
+.wsc .filter.gemerkt[aria-pressed="true"]{background:var(--carbon);border-color:var(--carbon);color:#fff}
+.wsc .filter.gemerkt[aria-pressed="true"] i{background:var(--grad-goud);color:var(--carbon)}
+
+.wsc .fb-uitslag{flex:none;font-size:13px;color:var(--ink-60);white-space:nowrap}
+.wsc .fb-uitslag b{color:var(--ink);font-weight:800}
+.wsc .fb-rechts{display:flex;align-items:center;gap:13px;flex:none;margin-left:auto}
+.wsc .fb-acties{display:flex;gap:8px;flex:none}
+.wsc .fb-knop{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--ink-10);
+  border-radius:12px;padding:11px 13px;font-size:12.5px;font-weight:700;background:var(--paper);
+  transition:border-color .3s ease,background .3s ease,opacity .3s ease}
+.wsc .fb-knop svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2.1;flex:none}
+.wsc .fb-knop .fb-chevron{width:15px;height:15px;color:var(--ink-40)}
+.wsc .fb-knop:hover{border-color:rgba(188,129,62,.5)}
+.wsc .fb-knop[disabled]{opacity:.42;cursor:default}
+.wsc .fb-knop[disabled]:hover{border-color:var(--ink-10)}
+
+.wsc .groep{margin-bottom:44px}
+.wsc .groep.uit{display:none}
+.wsc .groep-kop{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;
+  margin-bottom:14px;flex-wrap:wrap}
+.wsc .groep-kop h2{font-size:23px;font-weight:600;letter-spacing:-.02em;line-height:1.15}
+.wsc .groep-kop p{font-size:13.5px;color:var(--ink-60);margin-top:5px}
+.wsc .groep-link{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;
+  color:var(--bronze)}
+.wsc .groep-link svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2.2}
+.wsc .kaarten{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+@container (min-width:1400px){.wsc .kaarten{grid-template-columns:repeat(5,minmax(0,1fr));gap:20px}}
+
+/* de kaart — overgenomen uit ws-bestsellers.css */
+.wsc .wsk{position:relative;background:#fff;border-radius:12px;overflow:hidden;min-width:0;
+  border:1px solid rgba(17,17,17,.08);display:flex;flex-direction:column;
+  transition:border-color .45s ease,box-shadow .45s ease,background-color .45s ease}
+/* isolation: houd het mengen van de packshot binnen dit vlak, zodat de foto
+   alleen met de achtergrond van de tegel mengt en niet met de kaart eronder. */
+.wsc .wsk-shot{position:relative;aspect-ratio:1/1;background:#F4F3F1;min-width:0;overflow:hidden;
+  isolation:isolate;transition:background .5s ease}
+/* bundels dragen het verloop altijd; apparaten en messen krijgen het bij hover */
+.wsc .groep[data-cat="bundel"] .wsk-shot{background:linear-gradient(155deg,#FDFAF4 0%,#F5EAD7 54%,#EFE0C6 100%)}
+.wsc .groep[data-cat="bundel"] .wsk-mark{opacity:.14;transform:translate(-50%,-50%) scale(1)}
+/* De packshots hebben hun achtergrond in het bestand zitten: zeventien van de
+   achttien zijn niet transparant, en JPEG kan dat ook niet. Op de gewone tegel viel
+   dat nauwelijks op, maar op een bundelkaart en bij hover — waar het vlak een crème
+   verloop krijgt — stond er een wit blok in de kaart, tot 40 stappen naast de
+   achtergrondkleur.
+
+   `multiply` laat wit wegvallen tegen de achtergrond: wit x achtergrond = de
+   achtergrond zelf. De foto's zijn alleen niet zuiver wit maar 235 tot 247, dus
+   `brightness` tilt dat eerst naar 255. Gemeten over achttien packshots: x1.085 laat
+   ze allemaal wegvallen tegen de tegel — onzichtbaar —
+   terwijl hoger optillen alleen maar meer glans uit het product zelf wegknijpt.
+   Bijkomend: het monogram achter de packshot schijnt er nu doorheen. */
+.wsc .wsk-shot img.wsk-pack{position:absolute;inset:0;z-index:1;width:100%;height:100%;
+  object-fit:contain;padding:8%;mix-blend-mode:multiply;filter:brightness(1.085);
+  transition:transform .62s cubic-bezier(.22,.61,.36,1)}
+/* Geen z-index: de packshot zit binnen deze link, en een positioned element met
+   een z-index maakt een eigen laag. De foto had dan geen achtergrond meer om
+   tegen te mengen, waardoor mix-blend-mode hierboven niets deed. Zonder z-index
+   staat de link nog steeds boven het monogram — hij komt er in de opmaak na —
+   en het lintje en de knoppen liggen er met z-index 2 overheen. */
+.wsc .wsk-fotolink{position:absolute;inset:0;display:block}
+/* Het monogram is uitgehold in het midden. Zolang de packshot zijn eigen witte
+   achtergrond had, dekte die het monogram af binnen het fotovlak; sinds de foto
+   wordt weggemengd schijnt alles wat eronder ligt er doorheen, en liep de gouden
+   S dwars over het product. Gemeten: 43% van de productpixels verschoof, tot 34
+   stappen. Met deze uitsparing is dat 3% en gemiddeld onder de 1 — het merkteken
+   blijft staan waar het hoort, in de hoeken van de tegel. */
+.wsc .wsk-mark{position:absolute;z-index:0;left:50%;top:50%;width:104%;
+  transform:translate(-50%,-50%) scale(1.14);opacity:0;pointer-events:none;
+  -webkit-mask-image:radial-gradient(closest-side,transparent 0 65%,#000 92%);
+  mask-image:radial-gradient(closest-side,transparent 0 65%,#000 92%);
+  transition:opacity .62s cubic-bezier(.22,.61,.36,1),transform .62s cubic-bezier(.22,.61,.36,1)}
+.wsc .wsk-mark img{position:static;width:100%;height:auto;object-fit:contain}
+.wsc .wsk-tag{position:absolute;z-index:2;top:12px;left:12px;background:#111;color:#fff;
+  font-size:9.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  padding:6px 12px;border-radius:100px;white-space:nowrap}
+.wsc .wsk-tag.zacht{background:#EDE7DB;color:#8F6428}
+.wsc .wsk-tag.tweede{left:auto;right:12px;background:#fff;color:var(--ink);
+  border:1px solid rgba(17,17,17,.1)}
+.wsc .wsk .wsk-tag.matchtag{background:#111;color:#fff}
+.wsc .wsk-vgl{position:absolute;z-index:3;top:11px;right:11px;display:inline-flex;align-items:center;
+  gap:7px;font-size:10.5px;font-weight:600;color:var(--ink-60);cursor:pointer;
+  background:rgba(255,255,255,.86);border-radius:100px;padding:5px 10px 5px 7px}
+.wsc .wsk-vgl input{appearance:none;width:13px;height:13px;border:1.5px solid rgba(17,17,17,.3);
+  border-radius:3px;background:#fff;cursor:pointer;flex:none;position:relative}
+.wsc .wsk-vgl input:checked{background:var(--bronze);border-color:var(--bronze)}
+.wsc .wsk-vgl input:checked::after{content:"";position:absolute;left:3.5px;top:.5px;width:3.5px;
+  height:7px;border:solid #fff;border-width:0 1.8px 1.8px 0;transform:rotate(42deg)}
+.wsc .wsk-oog{position:absolute;z-index:3;right:12px;bottom:12px;width:34px;height:34px;
+  border-radius:100px;background:#111;color:#fff;display:grid;place-items:center;
+  opacity:0;transform:translateY(5px);transition:opacity .3s ease,transform .3s ease}
+.wsc .wsk-oog svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.9}
+.wsc .wsk-blik{position:absolute;inset:0;z-index:4;background:rgba(252,250,246,.97);
+  padding:16px 18px;display:none;flex-direction:column;gap:9px;justify-content:center}
+.wsc .wsk.blik .wsk-blik{display:flex}
+.wsc .wsk-blik b{font-size:10px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--ink-40)}
+.wsc .wsk-blik li{display:flex;gap:8px;font-size:12px;line-height:1.4;align-items:flex-start}
+.wsc .wsk-blik li svg{width:12px;height:12px;stroke:var(--bronze);fill:none;stroke-width:2.6;
+  flex:none;margin-top:3px}
+.wsc .wsk-body{padding:16px 16px 18px;display:flex;flex-direction:column;gap:7px;flex:1;min-width:0}
+.wsc .wsk-kicker{font-size:9.5px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--ink-40)}
+.wsc .wsk-naam{font-size:16px;font-weight:600;letter-spacing:-.015em;line-height:1.25;
+  color:inherit;text-decoration:none}
+@media (hover:hover){.wsc .wsk-naam:hover{text-decoration:underline;text-underline-offset:2px}}
+.wsc .wsk-naam:focus-visible{outline:2px solid var(--bronze);outline-offset:3px;border-radius:3px}
+.wsc .wsk-wat{font-size:12.5px;line-height:1.45;color:var(--ink-60);flex:1}
+.wsc .wsk-score{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-60)}
+.wsc .wsk-score b{color:var(--ink);font-weight:600}
+.wsc .wsk-score.leeg{color:var(--ink-40)}
+.wsc .sterren5{display:inline-flex;gap:1.5px}
+.wsc .sterren5 i{width:11px;height:11px;background:var(--bronze);display:inline-block;
+  -webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2l2.9 6.3 6.9.8-5.1 4.6 1.4 6.8L12 17.1 5.9 20.5l1.4-6.8L2.2 9.1l6.9-.8z'/></svg>") center/contain no-repeat;
+  mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2l2.9 6.3 6.9.8-5.1 4.6 1.4 6.8L12 17.1 5.9 20.5l1.4-6.8L2.2 9.1l6.9-.8z'/></svg>") center/contain no-repeat}
+.wsc .sterren5 i.half{opacity:.42}
+.wsc .wsk-chips{display:flex;gap:6px;flex-wrap:wrap}
+.wsc .wsk-chips i{font-style:normal;font-size:10.5px;font-weight:600;color:var(--ink-60);
+  border:1px solid rgba(17,17,17,.12);border-radius:100px;padding:4px 10px}
+.wsc .wsk-onderdelen{display:flex;align-items:center;gap:7px;font-size:11.5px;color:var(--ink-60)}
+.wsc .wsk-onderdelen svg{width:14px;height:14px;stroke:var(--bronze);fill:none;stroke-width:1.9}
+/* Beoordelingsregel: op elke kaart dezelfde winkelscore. */
+.wsc .wsk-tp{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--ink-60);line-height:1}
+.wsc .wsk-tp b{color:var(--ink);font-weight:700;font-size:12.5px}
+.wsc .wsk-tp svg{width:13px;height:13px;color:#00B67A;fill:currentColor;flex:none;margin-left:2px}
+.wsc .wsk-tp i{font-style:normal;color:var(--ink);font-weight:600}
+
+/* Prijs en kortingslabel op één regel; het label wijkt naar beneden als het niet past. */
+.wsc .wsk-prijsrij{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:2px}
+.wsc .wsk-prijs{display:flex;align-items:baseline;gap:7px}
+.wsc .wsk-prijs b{font-size:19px;font-weight:700;letter-spacing:-.025em}
+.wsc .wsk-prijs s{font-size:12.5px;color:var(--ink-40)}
+.wsc .wsk-korting{font-size:11px;font-weight:700;letter-spacing:.02em;white-space:nowrap;
+  color:#6F4A16;background:var(--goud);padding:4px 9px;border-radius:100px}
+
+/* Twee tot drie eigenschappen, met een dunne-lijn pictogram ervoor. */
+.wsc .wsk-usp{list-style:none;margin:5px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
+.wsc .wsk-usp li{display:flex;align-items:center;gap:8px;font-size:12px;line-height:1.35;color:var(--ink-60);min-width:0}
+.wsc .wsk-usp svg{width:15px;height:15px;flex:none;stroke:var(--bronze);fill:none;stroke-width:1.9;
+  stroke-linecap:round;stroke-linejoin:round}
+.wsc .wsk-usp li > span{min-width:0;overflow-wrap:break-word}
+.wsc .wsk-cta{margin-top:auto;padding-top:11px;display:flex;align-items:center;justify-content:center;gap:9px;
+  background:#111;color:#fff;border-radius:9px;padding:12px 14px;font-size:11.5px;font-weight:700;
+  letter-spacing:.07em;text-transform:uppercase;transition:background .3s ease}
+.wsc .wsk-cta svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.2}
+.wsc .wsk-cta:hover{background:#BC813E}
+.wsc .wsk-rij{display:flex;gap:8px;margin-top:9px}
+.wsc .wsk-rij .wsk-cta{margin-top:0;flex:1}
+.wsc .wsk-plus{width:44px;flex:none;border:1px solid rgba(17,17,17,.14);border-radius:9px;
+  display:grid;place-items:center}
+.wsc .wsk-plus svg{width:16px;height:16px;stroke:var(--ink);fill:none;stroke-width:2.1}
+.wsc .wsk-plus:hover{background:#EDE7DB}
+.wsc .wsk-voet{display:flex;align-items:center;gap:7px;font-size:10.5px;color:var(--ink-40);
+  border-top:1px solid rgba(17,17,17,.08);margin-top:12px;padding-top:10px}
+.wsc .wsk-voet svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8;flex:none}
+
+/* de match krijgt het monogram permanent, de rest bij hover */
+.wsc .wsk.match{border-color:rgba(188,129,62,.5);background:#FCFAF6;
+  box-shadow:0 10px 30px -14px rgba(17,17,17,.22)}
+.wsc .wsk.match .wsk-mark{opacity:.34;transform:translate(-50%,-50%) scale(1)}
+.wsc .wsk.match .wsk-shot{background:linear-gradient(155deg,#FDFAF4 0%,#F5EAD7 54%,#EFE0C6 100%)}
+@media (hover:hover) and (pointer:fine){
+  .wsc .wsk:hover{border-color:rgba(188,129,62,.45);background:#FCFAF6;
+    box-shadow:0 10px 30px -14px rgba(17,17,17,.22)}
+  .wsc .wsk:hover .wsk-mark{opacity:.34;transform:translate(-50%,-50%) scale(1)}
+  .wsc .wsk:hover .wsk-shot{background:linear-gradient(155deg,#FDFAF4 0%,#F5EAD7 54%,#EFE0C6 100%)}
+  .wsc .groep[data-cat="bundel"] .wsk:hover .wsk-mark{opacity:.3}
+  .wsc .wsk:hover .wsk-pack{transform:scale(1.035)}
+  .wsc .wsk:hover .wsk-oog{opacity:1;transform:none}
+}
+@media (hover:none),(pointer:coarse){
+  .wsc .wsk-mark{opacity:.14;transform:translate(-50%,-50%) scale(1)}
+  .wsc .wsk-oog{opacity:1;transform:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .wsc .wsk-mark,.wsc .wsk-pack,.wsc .wsk,.wsc .wsk-oog{transition:none}
+}
+
+/* ── de vergelijking: een venster over de pagina, plus een balk onder in beeld ──
+   Beide staan in .wsc-laag, buiten .wsc. Zie de opmerking bovenaan dit bestand:
+   binnen een container met `container-type` is position:fixed onbruikbaar. */
+
+.wsc-laag .vgl-uit{position:fixed;inset:0;z-index:120;display:grid;place-items:center;padding:24px}
+.wsc-laag .vgl-uit[hidden]{display:none}
+/* let op: dit thema heeft een globale regel `div:empty{display:none}`. De waas is een
+   lege div, dus die moet zijn display hier expliciet terugzetten — anders is hij er
+   wel, maar onzichtbaar en niet aanklikbaar. Geldt voor elke lege div die je toevoegt. */
+.wsc-laag .vgl-waas{display:block;position:absolute;inset:0;background:rgba(12,11,10,.62);
+  backdrop-filter:blur(3px);animation:vgl-in .18s ease}
+.wsc-laag .vgl-venster{position:relative;background:var(--sand);border-radius:var(--r-l);
+  width:min(1180px,100%);max-height:min(88vh,900px);display:flex;flex-direction:column;
+  overflow:hidden;box-shadow:0 30px 90px rgba(12,11,10,.4);animation:vgl-op .22s ease}
+@keyframes vgl-in{from{opacity:0}to{opacity:1}}
+@keyframes vgl-op{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){
+  .wsc-laag .vgl-waas,.wsc-laag .vgl-venster{animation:none}
+}
+.wsc-laag .vgl-kop{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:20px 24px;border-bottom:1px solid var(--ink-10);flex:none}
+.wsc-laag .vgl-kop h2{font-size:18px;font-weight:900;letter-spacing:-.02em}
+.wsc-laag .vgl-sluit{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;
+  color:var(--ink-60);background:var(--paper);border:1px solid var(--ink-10);flex:none;
+  transition:background .16s ease,color .16s ease}
+.wsc-laag .vgl-sluit:hover{background:var(--carbon);color:#fff;border-color:var(--carbon)}
+.wsc-laag .vgl-sluit svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2.2}
+/* alleen dit deel scrolt, zodat de kop en de sluitknop altijd bereikbaar blijven */
+/* Op het brede scherm staan er hoogstens drie kaarten van 300px: 3x300 + 2x16 = 932,
+   ruim binnen de 1132px die het venster binnen zijn marge overhoudt. Daarom mag hier
+   `center` staan zonder dat de eerste kaart ooit buiten het scrollvak valt. Op de
+   telefoon schuift de rij wél, en staat hij daarom links uitgelijnd. */
+.wsc-laag .vergelijk{display:flex;gap:16px;flex-wrap:nowrap;overflow:auto;justify-content:center;
+  padding:22px 24px 26px;margin:0;-webkit-overflow-scrolling:touch}
+.wsc-laag .vgl{background:var(--paper);border-radius:var(--r-m);overflow:hidden;position:relative;
+  box-shadow:0 14px 34px rgba(17,17,17,.09);display:flex;flex-direction:column;
+  flex:1 1 0;min-width:216px;max-width:300px;border:2px solid transparent}
+.wsc-laag .vgl.uit{display:none}
+.wsc-laag .vgl-beeld{background:#F6F6F6;aspect-ratio:5/4;display:grid;place-items:center;padding:8px;
+  isolation:isolate}
+.wsc-laag .vgl-beeld img{width:auto;max-width:100%;max-height:100%;object-fit:contain;
+  mix-blend-mode:multiply;filter:brightness(1.085)}
+.wsc-laag .vgl-body{padding:16px 18px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.wsc-laag .vgl-body h3{font-size:15.5px;font-weight:800;letter-spacing:-.01em;line-height:1.25}
+.wsc-laag .vgl-prijs{display:flex;align-items:baseline;gap:8px}
+.wsc-laag .vgl-prijs b{font-size:19px;font-weight:900}
+.wsc-laag .vgl-prijs s{font-size:12.5px;color:var(--ink-40)}
+.wsc-laag .vgl dl{display:flex;flex-direction:column;gap:4px;margin-top:2px}
+.wsc-laag .vgl dt{font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-40);margin-top:7px}
+.wsc-laag .vgl dt:first-child{margin-top:0}
+.wsc-laag .vgl dd{font-size:12.5px;line-height:1.5;color:var(--ink-80)}
+.wsc-laag .vgl dd.nee{color:var(--ink-60)}
+.wsc-laag .vgl .tekstlink{margin-top:auto;padding-top:10px;font-size:13px;font-weight:600;
+  text-decoration:underline;text-underline-offset:3px}
+.wsc-laag .vgl .wsk-score{display:inline-flex;align-items:center;gap:6px;font-size:12px;
+  font-weight:700;color:var(--ink-60)}
+
+/* de keuzebalk onder in beeld */
+.wsc-laag .vgl-balk{position:fixed;left:50%;transform:translateX(-50%);
+  bottom:max(18px,env(safe-area-inset-bottom));z-index:110;
+  width:min(620px,calc(100% - 32px));display:flex;align-items:center;justify-content:space-between;
+  gap:18px;background:var(--carbon);color:#fff;border-radius:100px;padding:12px 12px 12px 22px;
+  box-shadow:0 16px 44px rgba(12,11,10,.34);animation:vgl-omhoog .22s ease}
+.wsc-laag .vgl-balk[hidden]{display:none}
+@keyframes vgl-omhoog{from{opacity:0;transform:translate(-50%,16px)}to{opacity:1;transform:translate(-50%,0)}}
+@media (prefers-reduced-motion:reduce){ .wsc-laag .vgl-balk{animation:none} }
+.wsc-laag .vgl-balk-tel{font-size:13px;color:rgba(255,255,255,.72);white-space:nowrap}
+.wsc-laag .vgl-balk-tel b{color:#fff;font-weight:800}
+.wsc-laag .vgl-balk-tel .kort{display:none}
+.wsc-laag .vgl-balk-knoppen{display:flex;align-items:center;gap:6px;flex:none}
+.wsc-laag .vgl-balk-wis{font-size:12.5px;font-weight:600;color:rgba(255,255,255,.6);
+  padding:10px 12px;border-radius:100px;transition:color .16s ease}
+.wsc-laag .vgl-balk-wis:hover{color:#fff}
+.wsc-laag .vgl-balk .knop{display:inline-flex;align-items:center;gap:9px;background:var(--grad-goud);
+  color:var(--carbon);border-radius:100px;padding:12px 20px;font-size:12px;font-weight:800;
+  letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;
+  transition:transform .16s ease}
+.wsc-laag .vgl-balk .knop:hover{transform:translateY(-1px)}
+.wsc-laag .vgl-balk .knop svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.1}
+
+@media (max-width:700px){
+  .wsc-laag .vgl-uit{padding:0;place-items:end stretch}
+  .wsc-laag .vgl-venster{width:100%;max-height:92vh;border-radius:var(--r-l) var(--r-l) 0 0}
+  .wsc-laag .vgl-kop{padding:16px 16px 14px}
+  .wsc-laag .vgl-kop h2{font-size:16px}
+  .wsc-laag .vergelijk{padding:16px;gap:12px;justify-content:flex-start}
+  .wsc-laag .vgl{min-width:78%;max-width:none}
+  .wsc-laag .vgl-balk{padding:10px 10px 10px 18px;gap:10px}
+  .wsc-laag .vgl-balk-tel{font-size:12px}
+  .wsc-laag .vgl-balk-tel .lang{display:none}
+  .wsc-laag .vgl-balk-tel .kort{display:inline}
+  .wsc-laag .vgl-balk-wis{padding:9px 8px}
+  .wsc-laag .vgl-balk .knop{padding:11px 16px;font-size:11.5px}
+}
+/* zolang de balk in beeld staat, mag de pagina er niet achter verdwijnen */
+body.vgl-balk-aan{padding-bottom:86px}
+body.vgl-open{overflow:hidden}
+
+/* smalle aanbodstrook — geen kaart, geen badges, één regel */
+.wsc .aanbod{display:grid;grid-template-columns:82px 1fr auto;gap:22px;align-items:center;
+  background:linear-gradient(120deg,#FDFAF4 0%,#F7EEE0 100%);
+  border:1px solid rgba(188,129,62,.28);border-radius:var(--r-m);padding:16px 22px;margin-top:8px}
+.wsc .aanbod > img{width:82px;height:82px;object-fit:contain}
+.wsc .aanbod-tekst h3{font-size:17px;font-weight:700;letter-spacing:-.015em;margin:3px 0 4px}
+.wsc .aanbod-tekst p{font-size:13px;line-height:1.5;color:var(--ink-60);max-width:52ch}
+.wsc .aanbod-koop{display:flex;align-items:center;gap:20px;flex:none}
+.wsc .aanbod-prijs{font-size:19px;font-weight:700;letter-spacing:-.02em;white-space:nowrap}
+.wsc .aanbod-prijs s{font-size:13px;font-weight:500;color:var(--ink-40);margin-left:4px}
+
+/* blok 4 — bewijs, verankerd aan het product waar het over gaat */
+.wsc .bewijs-kop{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:end;
+  margin-bottom:24px}
+.wsc .bewijs-h2{font-size:clamp(21px,1.85cqw,27px);font-weight:800;letter-spacing:-.02em;
+  line-height:1.24;margin-top:9px;max-width:22ch}
+.wsc .bewijs-bron{font-size:13px;line-height:1.7;color:var(--ink-60);max-width:52ch}
+.wsc .bewijsrijen{display:flex;flex-direction:column;border-top:1px solid var(--ink-10)}
+.wsc .bwr{display:grid;grid-template-columns:64px minmax(0,56ch) minmax(190px,1fr);gap:30px;align-items:center;
+  padding:20px 0;border-bottom:1px solid var(--ink-10)}
+.wsc .bwr > img{width:64px;height:64px;object-fit:contain;object-position:center}
+.wsc .bwr-tag{font-size:10px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--bronze);margin-bottom:6px}
+.wsc .bwr-tekst p:not(.bwr-tag){font-size:14.5px;line-height:1.65;color:var(--ink-80)}
+.wsc .bwr-bron{display:flex;flex-direction:column;gap:2px;flex:none;border:0;padding:0}
+.wsc .bwr-bron b{font-size:13px;font-weight:700}
+.wsc .bwr-bron > span{font-size:11.5px;color:var(--ink-40)}
+.wsc .bwr-bron a{font-size:12.5px;font-weight:600;color:var(--ink);margin-top:7px;align-self:flex-start;
+  box-shadow:inset 0 -1px 0 0 rgba(188,129,62,.55)}
+.wsc .bwr-bron a:hover{color:#8F6428}
+.wsc .bwr-bron .wsk-score{margin-top:5px;font-size:11.5px}
+.wsc .bwr-vanaf{font-size:11.5px;color:var(--ink-60);margin-top:5px}
+
+@container (max-width:700px){
+  .wsc .aanbod{grid-template-columns:64px 1fr;gap:14px;padding:14px 16px}
+  .wsc .aanbod > img{width:64px;height:64px}
+  .wsc .aanbod-koop{grid-column:1 / -1;justify-content:space-between;
+    border-top:1px solid rgba(188,129,62,.25);padding-top:12px}
+  .wsc .bewijs-kop{grid-template-columns:1fr;gap:12px;margin-bottom:18px}
+  .wsc .bewijs-h2{max-width:none}
+  .wsc .bwr{grid-template-columns:48px 1fr;gap:14px 14px;padding:18px 0}
+  .wsc .bwr > img{width:48px;height:48px}
+  .wsc .bwr-tekst{grid-column:1 / -1}
+  .wsc .bwr-bron{grid-column:2;grid-row:1;justify-content:center}
+  .wsc .bwr-bron a{margin-top:4px}
+  .wsc .filterbalk{padding:8px 12px 12px;margin-bottom:14px;border-radius:14px}
+  .wsc .fb-rij{gap:11px}
+  /* De knoppen staan op de telefoon naast elkaar en schuiven opzij, niet in twee
+     rijen onder elkaar: dat scheelt de bezoeker verticale scroll voordat hij de
+     producten ziet. Het lintje steekt boven de knop uit, dus de strip heeft ruimte
+     aan de bovenkant nodig — een scroller snijdt anders af wat erboven uitsteekt.
+     `overflow-x:auto` snijdt namelijk ook verticaal af. De ruimte hierboven moet
+     dus minstens zo hoog zijn als het lintje; meet het na als je het lintje
+     aanpast. */
+  .wsc .filters{
+    flex-wrap:nowrap;overflow-x:auto;gap:8px;width:auto;min-width:0;flex:1;
+    margin:0 -12px;padding:18px 12px 2px;
+    scroll-snap-type:x proximity;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-padding-inline:14px}
+  .wsc .filters::-webkit-scrollbar{display:none}
+  .wsc .filter{flex:none;justify-content:flex-start;padding:10px 12px;font-size:12.5px;gap:8px;
+    scroll-snap-align:start;white-space:nowrap}
+  .wsc .filter svg{width:17px;height:17px}
+  .wsc .filter i{min-width:23px;height:23px;font-size:11px}
+  .wsc .filter-lint{font-size:8.5px;line-height:1.15;padding:3px 9px 5px}
+  .wsc .fb-streep{display:none}
+  /* De balk stond op de telefoon op drie regels — chips, dan de telling, dan de
+     knoppen — samen 183 px voordat de eerste kaart begon. Nu blijft het één regel:
+     het label en de telling gaan weg (elke chip draagt zijn eigen aantal al) en de
+     rij mag niet meer omvallen. */
+  .wsc .fb-rij{flex-wrap:nowrap}
+  .wsc .fb-label,.wsc .fb-uitslag{display:none}
+  .wsc .fb-rechts{width:auto;margin-left:auto;gap:8px;flex-wrap:nowrap;flex:none;
+    align-self:flex-end;padding:0 0 2px 10px;border-left:1px solid var(--ink-10)}
+  .wsc .fb-acties{flex:none;gap:8px}
+  .wsc .fb-knop{flex:none;justify-content:center;padding:9px 11px;font-size:12px}
+  /* Vergelijken kan pas vanaf twee aangevinkte kaarten. Tot die tijd is het een
+     dode knop die breedte kost die de chips nodig hebben. */
+  .wsc .fb-knop.vgl-open[disabled]{display:none}
+  /* "Meest relevant" past niet naast de chips en werd "Meest ...". Op de telefoon
+     blijven het icoon en de chevron over; de keuzelijst eronder houdt zijn eigen
+     aria-label, dus voorlezen verandert niet. */
+  .wsc .fb-sorteer{min-width:0;padding:9px 10px}
+  .wsc .fb-sorteer .fb-sorteer-tekst{display:none}
+  .wsc .groep{margin-bottom:32px}
+  .wsc .groep-kop{margin-bottom:12px;gap:12px}
+  .wsc .groep-kop h2{font-size:19px}
+  .wsc .groep-kop p{font-size:12.5px;line-height:1.5;margin-top:3px}
+  .wsc .kaarten{grid-template-columns:1fr 1fr;gap:11px}
+  .wsc .wsk-body{padding:13px 12px 14px;gap:6px}
+  .wsc .wsk-naam{font-size:14px}
+  .wsc .wsk-wat{font-size:11.5px}
+  .wsc .wsk-tag{top:8px;left:8px;font-size:8px;padding:5px 9px;letter-spacing:.1em}
+  .wsc .wsk-tag.tweede{right:8px;left:auto;top:30px}
+  .wsc .wsk-vgl{top:7px;right:7px;font-size:9px;padding:4px 8px 4px 6px}
+  .wsc .wsk-prijs b{font-size:16px}
+  .wsc .wsk-tp{font-size:11px;gap:4px}
+  .wsc .wsk-tp b{font-size:11.5px}
+  .wsc .wsk-tp svg{width:12px;height:12px}
+  .wsc .wsk-korting{font-size:10px;padding:3px 7px}
+  .wsc .wsk-usp{gap:5px;margin-top:4px}
+  .wsc .wsk-usp li{font-size:11px;gap:7px}
+  .wsc .wsk-usp svg{width:13px;height:13px}
+  .wsc .wsk-cta{padding:11px 8px;font-size:10px;letter-spacing:.05em}
+  .wsc .wsk-chips i{font-size:9.5px;padding:3px 8px}
+}
+.wsc .sterren5 i.leeg{opacity:.17}
+.wsc .wsk.op .wsk-pack{filter:grayscale(.55);opacity:.68}
+.wsc .wsk.op .wsk-cta{opacity:.55;pointer-events:none}
+.wsc .wsk-tag.op{background:rgba(17,17,17,.72);color:#fff}
+.wsc .wsk-mark{aspect-ratio:1;background:var(--wsc-mark,none) center/contain no-repeat}
+.wsc a.groep-link{text-decoration:none}
+.wsc .groep-noot{font-size:12.5px;line-height:1.6;color:var(--ink-60);max-width:74ch;
+  margin:-14px 0 14px;padding-left:13px;border-left:2px solid var(--bronze)}
+.wsc .groep-noot b{color:var(--ink);font-weight:700}
+@container (max-width:760px){}
+/* het formulier om direct in de winkelwagen te leggen mag de rij niet breken */
+.wsc .wsk-form{display:contents}
+
+/* geen tekening: de uitleg wordt één brede kolom */
+.wsc .cat.solo{grid-template-columns:minmax(0,1fr);gap:0}
+.wsc .cat.solo .cat-tekst p{max-width:70ch}
+/* Het lint en de vergelijk-knop stonden allebei op de bovenrand van de foto. Op een
+   kaart van rond de 160px — en dat is hij op mobiel én in het vierkolomsraster —
+   passen ze daar niet samen: het lint schoof onder de knop door tot buiten de kaart.
+   Ruimte reserveren lost dat niet op, dan wordt elk lint afgekapt. Daarom staat de
+   vergelijk-knop nu op de onderrand, links van het oog, en houdt het lint de hele
+   bovenrand voor zich. Te lang wordt alsnog afgekapt in plaats van doorgeschoten. */
+.wsc .wsk-tag{max-width:calc(100% - 24px);overflow:hidden;text-overflow:ellipsis}
+.wsc .wsk-vgl{top:auto;bottom:12px;right:auto;left:12px}
+@container (max-width:700px){
+  .wsc .wsk-tag{max-width:calc(100% - 16px)}
+  .wsc .wsk-vgl{top:auto;right:auto;bottom:8px;left:8px}
+}
+
+/* Het raster sprong van twee kolommen ineens naar vier, dus tussen 700 en 1040px was
+   een kaart maar zo'n 150px breed — smaller dan op een telefoon, en te smal voor het
+   lint. Drie kolommen als tussenstap. */
+@container (min-width:701px) and (max-width:1040px){
+  .wsc .kaarten{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+
+/* De sorteerknop is een echte keuzelijst met de knopopmaak eroverheen: het uiterlijk
+   van de andere knoppen, maar op mobiel de systeemkiezer en met het toetsenbord te
+   bedienen. De lijst zelf ligt onzichtbaar over de hele knop. */
+.wsc .fb-sorteer{position:relative;cursor:pointer}
+.wsc .fb-sorteer select{position:absolute;inset:0;width:100%;height:100%;opacity:0;
+  cursor:pointer;font:inherit;border:0;padding:0;-webkit-appearance:none;appearance:none}
+.wsc .fb-sorteer:focus-within{border-color:rgba(188,129,62,.6);outline:2px solid rgba(188,129,62,.25);
+  outline-offset:2px}

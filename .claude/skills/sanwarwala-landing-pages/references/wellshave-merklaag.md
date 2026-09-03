@@ -48,6 +48,10 @@ zelf ophalen, doe dat dan en laat de vraag weg; verzin nooit een antwoord.
      De punten zijn omwisselbaar.
    - **Merkverhaal** &mdash; een redactioneel artikel over het merk of de oprichter. Geen
      apparaat dat de pagina draagt, en bewust niet in de huisletter.
+   - **Collectiepagina** &mdash; een pagina van de winkel zelf, de hele collectie of één zone
+     ervan. Het verkeer komt uit de navigatie en uit Google, niet uit één creative. Dan
+     vervallen vraag 1 en 2 hierboven en komt er één voor in de plaats: welke zone, en welke
+     producten horen daarbij. De takken en registers hieronder gelden er niet voor.
 
    Heb je een sterk vermoeden uit de creative, noem dat dan als voorstel met je redenering
    erbij. Maar laat het bevestigen voordat je één regel copy of CSS schrijft. Deel 2 werkt de
@@ -100,6 +104,8 @@ Kies eerst het type (deel 2), pak dan het bijbehorende skelet:
 dragen ze het volledige tokenblok en alle component-CSS, met tijdelijke inhoud tussen
 blokhaken. **Begin daar, niet bij nul.** Elke sectie die
 je niet nodig hebt verwijder je; wat je houdt is dan gegarandeerd consistent met de rest.
+Een collectiepagina heeft geen eigen skelet: neem het tokenblok en de component-CSS uit een van
+beide over en volg de sectievolgorde uit `paginatype-collectie.md`.
 
 Vervang alleen wat tussen blokhaken staat. Raak de CSS niet aan tenzij je iets toevoegt dat er
 echt niet in zit — en zet dat dan ook in deze merklaag.
@@ -125,17 +131,23 @@ Volg deel 16. Publiceren is niet af zonder de controle achteraf.
 ## 2. Welk paginatype
 
 **Kies het type voordat je iets ontwerpt.** Het type bepaalt de ruggengraat, en de ruggengraat
-bepaalt welke secties er zijn en in welke volgorde. Alles in dit bestand geldt voor allebei;
-alleen de opbouw verschilt.
+bepaalt welke secties er zijn en in welke volgorde. Alles in dit bestand geldt voor alle vier;
+alleen de opbouw verschilt. De eerste drie zijn advertentiepagina's; de collectiepagina hoort
+bij de winkel zelf en houdt zijn navigatie juist wel.
 
-| | Advertorial | Listicle | Merkverhaal |
-|---|---|---|---|
-| Ruggengraat | Een doorlopend argument | Losse punten, meestal genummerd | Een verhaal over het merk of de oprichter |
-| Past bij | Unaware en problem-aware | Solution-aware en product-aware | Koud publiek dat het merk niet kent |
-| Kies als | De lezer zijn probleem verkeerd diagnosticeert | De lezer het probleem kent en wil weten waarom jij beter bent | Er geen apparaat is dat de pagina draagt |
-| Verkoopt | E&eacute;n product via het mechanisme | E&eacute;n product tegenover het alternatief | Het merk; de bezoeker kiest daarna zelf |
-| Uitwerking | `references/paginatype-advertorial.md` | `references/paginatype-listicle.md` | `references/paginatype-merkverhaal.md` |
-| Startbestand | `startbestand-advertorial.html` | `startbestand-listicle.html` | `startbestand-merkverhaal.html` |
+| | Advertorial | Listicle | Merkverhaal | Collectiepagina |
+|---|---|---|---|---|
+| Ruggengraat | Een doorlopend argument | Losse punten, meestal genummerd | Een verhaal over het merk of de oprichter | De plek op het lichaam |
+| Past bij | Unaware en problem-aware | Solution-aware en product-aware | Koud publiek dat het merk niet kent | Wie in de winkel rondkijkt of via Google binnenkomt |
+| Kies als | De lezer zijn probleem verkeerd diagnosticeert | De lezer het probleem kent en wil weten waarom jij beter bent | Er geen apparaat is dat de pagina draagt | De vraag is welke van deze apparaten hij moet hebben |
+| Verkoopt | E&eacute;n product via het mechanisme | E&eacute;n product tegenover het alternatief | Het merk; de bezoeker kiest daarna zelf | Niets in het bijzonder; het raster doet het werk |
+| Uitwerking | `references/paginatype-advertorial.md` | `references/paginatype-listicle.md` | `references/paginatype-merkverhaal.md` | `references/paginatype-collectie.md` |
+| Startbestand | `startbestand-advertorial.html` | `startbestand-listicle.html` | `startbestand-merkverhaal.html` | de component-CSS uit een van de andere |
+
+**Toets 0: is dit een pagina van de winkel zelf?** De hele collectie of &eacute;&eacute;n zone
+ervan, met verkeer uit de navigatie en uit Google in plaats van uit &eacute;&eacute;n creative.
+Dan is het een collectiepagina en gelden de drie toetsen hieronder niet; lees
+`references/paginatype-collectie.md`.
 
 **Toets 1: gaat de creative over een apparaat of over het merk?** Gaat hij over de oprichter,
 de herkomst of het merk zelf, en is er geen apparaat dat de pagina draagt, dan is het een
@@ -176,7 +188,8 @@ kleuren, bewijsregels en publiceerroute gelden onverkort. De inrichting, de eerl
 die daarbij horen en de reden achter de afwijking staan in `references/redactioneel-register.md`.
 
 **Het merkverhaal staat altijd in het redactionele register**, en heeft daarnaast geen
-aanbodblok omdat er geen hoofdproduct is.
+aanbodblok omdat er geen hoofdproduct is. **De collectiepagina staat in geen van beide
+registers**: hij draait binnen het thema, houdt de navigatie en volgt de winkel zelf.
 
 Bouw je een nieuw component voor een van de typen, zet het dan in de gedeelde CSS zodat de
 andere het ook kunnen gebruiken.

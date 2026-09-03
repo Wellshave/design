@@ -1,0 +1,602 @@
+{% comment %}
+  Wellshave — collectiepagina, blok 2: het raster.
+  Elke groep krijgt een eigen lijst producten. Naam, prijs, vanprijs, voorraad,
+  score, aantal beoordelingen en het aantal onderdelen in de doos komen live uit
+  het product; niets daarvan staat hier vast. Wat wél redactie is — het lintje op
+  een kaart — staat per groep in één veld, op handle.
+{% endcomment %}
+
+{{ 'ws-collectie.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'ws-collectie.js' | asset_url }}" defer></script>
+
+{%- assign nl = '<br />' -%}
+
+<div class="wsc"{% if section.settings.monogram != blank %} style="--wsc-mark:url({{ section.settings.monogram | image_url: width: 320 }})"{% endif %}>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="wsr-pijl" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="wsr-vink" viewBox="0 0 24 24"><path d="M4 12.5l5.2 5.2L20 6.9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="wsr-oog" viewBox="0 0 24 24"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="2.1"/><circle cx="12" cy="12" r="2.8" fill="none" stroke="currentColor" stroke-width="2.1"/></symbol>
+  <symbol id="wsr-doos" viewBox="0 0 24 24"><path d="M3 8l9-4 9 4v8l-9 4-9-4zM3 8l9 4 9-4M12 12v8" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="wsr-truck" viewBox="0 0 24 24"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/><circle cx="7" cy="18" r="1.6" fill="none" stroke="currentColor" stroke-width="2.1"/><circle cx="17" cy="18" r="1.6" fill="none" stroke="currentColor" stroke-width="2.1"/></symbol>
+  <symbol id="wsr-weeg" viewBox="0 0 24 24"><path d="M12 4v16M7 20h10M5 8h14M5 8l-3 6h6zM19 8l3 6h-6z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="wsr-raster" viewBox="0 0 24 24"><rect x="4" y="4" width="6.5" height="6.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="2.1"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="2.1"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="2.1"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="2.1"/></symbol>
+  <symbol id="wsr-trimmer" viewBox="0 0 24 24"><path d="M9 3h6v3H9zM8.4 6h7.2l-.7 4.2H9.1zM9.6 10.2h4.8V20a2 2 0 0 1-2 2h-.8a2 2 0 0 1-2-2z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/></symbol>
+  <symbol id="wsr-cadeau" viewBox="0 0 24 24"><path d="M3.5 11h17v9.5a1 1 0 0 1-1 1h-15a1 1 0 0 1-1-1zM2.5 7.5h19V11h-19zM12 7.5V21.5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/><path d="M12 7.5S10.6 2.5 8 2.5a2.5 2.5 0 0 0 0 5zM12 7.5s1.4-5 4-5a2.5 2.5 0 0 1 0 5z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/></symbol>
+  <symbol id="wsr-mes" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="7" rx="2" fill="none" stroke="currentColor" stroke-width="2.1"/><path d="M6 14v3M10 14v3M14 14v3M18 14v3M7 7V4.5M17 7V4.5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/></symbol>
+  <symbol id="wsr-regelaars" viewBox="0 0 24 24"><path d="M3 7h12M19 7h2M3 17h4M11 17h10" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/><circle cx="17" cy="7" r="2.4" fill="none" stroke="currentColor" stroke-width="2.1"/><circle cx="9" cy="17" r="2.4" fill="none" stroke="currentColor" stroke-width="2.1"/></symbol>
+  <symbol id="wsr-druppel" viewBox="0 0 24 24"><path d="M12 3.2c3.4 4 6 7 6 10.1a6 6 0 0 1-12 0c0-3.1 2.6-6.1 6-10.1z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/></symbol>
+  <symbol id="wsr-motor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2.1"/><path d="M12 12l4.2-3.4M12 7.4v.01" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/></symbol>
+  <symbol id="wsr-accu" viewBox="0 0 24 24"><rect x="3" y="7" width="15" height="10" rx="2.2" fill="none" stroke="currentColor" stroke-width="2.1"/><path d="M21 10.5v3M6.5 10.5v3M10 10.5v3" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/></symbol>
+  <symbol id="wsr-kam" viewBox="0 0 24 24"><path d="M4 15h16M6 15V7M10 15V5M14 15V7M18 15V5M4 19h16" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/></symbol>
+  <symbol id="wsr-licht" viewBox="0 0 24 24"><path d="M9.5 17.5h5M10 20.5h4M12 3a5.5 5.5 0 0 1 3.2 10c-.5.4-.7.9-.7 1.5h-5c0-.6-.2-1.1-.7-1.5A5.5 5.5 0 0 1 12 3z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="wsr-station" viewBox="0 0 24 24"><path d="M9 3h6v9H9zM4.5 16h15v4.5h-15zM12 12v4" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="wsr-tas" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2.4" fill="none" stroke="currentColor" stroke-width="2.1"/><path d="M8.5 8V6.2A2.2 2.2 0 0 1 10.7 4h2.6a2.2 2.2 0 0 1 2.2 2.2V8M3 13.5h18" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/></symbol>
+  <symbol id="wsr-ster" viewBox="0 0 24 24"><path d="M12 2.6l2.9 6.3 6.6.7-4.9 4.5 1.4 6.6L12 17.4 6 20.7l1.4-6.6L2.5 9.6l6.6-.7z" fill="currentColor"/></symbol>
+  <symbol id="wsr-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<section class="sectie zand" id="raster" style="padding-top:28px"><div class="rail">
+
+  {%- comment -%} tellingen per categorie, uit de blokken zelf {%- endcomment -%}
+  {%- assign n_app = 0 -%}{%- assign n_bundel = 0 -%}{%- assign n_mes = 0 -%}
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'groep' -%}
+      {%- if block.settings.uit_collectie and collection -%}
+        {%- assign aantal = collection.all_products_count -%}
+      {%- else -%}
+        {%- assign aantal = block.settings.producten | size -%}
+      {%- endif -%}
+      {%- case block.settings.cat -%}
+        {%- when 'bundel' -%}{%- assign n_bundel = n_bundel | plus: aantal -%}
+        {%- when 'mes' -%}{%- assign n_mes = n_mes | plus: aantal -%}
+        {%- else -%}{%- assign n_app = n_app | plus: aantal -%}
+      {%- endcase -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- assign n_totaal = n_app | plus: n_bundel | plus: n_mes -%}
+
+  <div class="filterbalk">
+    <div class="fb-rij">
+      {%- if section.settings.toon_label != blank -%}
+        <span class="fb-label">{{ section.settings.toon_label }}</span>
+      {%- endif -%}
+      <div class="filters" data-groep="cat">
+        <button type="button" class="filter" data-cat="alles" aria-pressed="true">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsr-raster"/></svg>
+          <span>{{ section.settings.filter_alles | default: 'Alles' }}</span><i>{{ n_totaal }}</i>
+        </button>
+        {%- if n_app > 0 -%}
+          <button type="button" class="filter" data-cat="app">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsr-trimmer"/></svg>
+            <span>{{ section.settings.filter_app | default: 'Apparaten' }}</span><i>{{ n_app }}</i>
+          </button>
+        {%- endif -%}
+        {%- if n_bundel > 0 -%}
+          <button type="button" class="filter{% if section.settings.bundel_lint != blank %} gemerkt{% endif %}" data-cat="bundel">
+            {%- if section.settings.bundel_lint != blank -%}
+              <span class="filter-lint">{{ section.settings.bundel_lint }}</span>
+            {%- endif -%}
+            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsr-cadeau"/></svg>
+            <span>{{ section.settings.filter_bundel | default: 'Bundels' }}</span><i>{{ n_bundel }}</i>
+          </button>
+        {%- endif -%}
+        {%- if n_mes > 0 -%}
+          <button type="button" class="filter" data-cat="mes">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsr-mes"/></svg>
+            <span>{{ section.settings.filter_mes | default: 'Onderdelen' }}</span><i>{{ n_mes }}</i>
+          </button>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%}
+        Telling en knoppen staan in één groep: past de rij niet op één regel, dan
+        gaan ze samen naar de volgende in plaats van dat de knoppen losraken.
+      {%- endcomment -%}
+      <div class="fb-rechts">
+        <span class="fb-streep" aria-hidden="true"></span>
+        <p class="fb-uitslag"><b class="fb-telling">{{ n_totaal }}</b>&nbsp;{{ section.settings.resultaat_label | default: 'resultaten' }}</p>
+        <div class="fb-acties">
+        {%- if section.settings.vergelijken -%}
+          <button type="button" class="fb-knop vgl-open" disabled>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsr-weeg"/></svg>Vergelijk<span class="vgl-tel"></span></button>
+        {%- endif -%}
+        {%- if section.settings.sorteer_label != blank -%}
+          {%- comment -%}
+            De knop is een echte keuzelijst, met de eigen opmaak eroverheen: zo houdt
+            hij het uiterlijk van de andere knoppen maar krijgt de bezoeker op mobiel
+            de vertrouwde systeemkiezer, en werkt hij met het toetsenbord.
+          {%- endcomment -%}
+          <label class="fb-knop fb-sorteer">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsr-regelaars"/></svg>
+            <span class="fb-sorteer-tekst" aria-hidden="true">{{ section.settings.sorteer_label }}</span>
+            <svg class="fb-chevron" viewBox="0 0 24 24" aria-hidden="true"><use href="#wsr-chevron"/></svg>
+            <select data-sorteer aria-label="Sorteer de producten">
+              <option value="relevant">{{ section.settings.sorteer_label }}</option>
+              <option value="prijs-op">{{ section.settings.sorteer_prijs_op | default: 'Prijs: laag naar hoog' }}</option>
+              <option value="prijs-af">{{ section.settings.sorteer_prijs_af | default: 'Prijs: hoog naar laag' }}</option>
+              <option value="score">{{ section.settings.sorteer_score | default: 'Best beoordeeld' }}</option>
+            </select>
+          </label>
+        {%- endif -%}
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  {%- for block in section.blocks -%}
+    {%- if block.type != 'groep' -%}{%- continue -%}{%- endif -%}
+    {%- assign cat = block.settings.cat | default: 'app' -%}
+    {%- assign labelregels = block.settings.labels | newline_to_br | strip_newlines | split: nl -%}
+
+    <div class="groep" data-cat="{{ cat }}" {{ block.shopify_attributes }}>
+      <div class="groep-kop">
+        <div>
+          <h2>{{ block.settings.kop }}</h2>
+          {%- if block.settings.sub != blank -%}<p>{{ block.settings.sub }}</p>{%- endif -%}
+        </div>
+        {%- if block.settings.link_label != blank and block.settings.link_url != blank -%}
+          <a class="groep-link" href="{{ block.settings.link_url }}">{{ block.settings.link_label }}<svg viewBox="0 0 24 24"><use href="#wsr-pijl"/></svg></a>
+        {%- endif -%}
+      </div>
+      {%- if block.settings.noot != blank -%}<p class="groep-noot">{{ block.settings.noot }}</p>{%- endif -%}
+
+      {%- if block.settings.uit_collectie and collection -%}
+        {%- assign lijst = collection.products -%}
+      {%- else -%}
+        {%- assign lijst = block.settings.producten -%}
+      {%- endif -%}
+
+      <div class="kaarten">
+        {%- for p in lijst -%}
+          {%- assign v = p.selected_or_first_available_variant -%}
+
+          {%- comment -%} lintje op handle, uit het veld van deze groep {%- endcomment -%}
+          {%- assign label = '' -%}
+          {%- for regel in labelregels -%}
+            {%- assign d = regel | split: '=' -%}
+            {%- comment -%}
+              Precies twee helften, niet meer. Raken de regeleindes ooit kwijt — dat
+              gebeurde toen dit veld nog enkelregelig was — dan plakt de ene regel aan
+              de handle van de volgende en levert de splitsing er drie of meer op.
+              Dan liever helemaal geen lintje dan een lintje met een handle erin.
+            {%- endcomment -%}
+            {%- if d.size == 2 -%}
+              {%- assign l_handle = d[0] | strip -%}
+              {%- if l_handle == p.handle -%}{%- assign label = d[1] | strip -%}{%- endif -%}
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- assign score = p.metafields.loox.avg_rating.value -%}
+          {%- assign tellen = p.metafields.loox.num_reviews.value -%}
+          {%- assign doos = p.metafields.custom.included_box.value | size -%}
+          {%- assign usps = p.metafields.custom.product_usp.value -%}
+
+          <article class="wsk{% unless p.available %} op{% endunless %}" data-id="{{ p.handle }}"
+            data-prijs="{{ v.price }}" data-score="{{ score | default: 0 }}">
+            <div class="wsk-shot">
+              <span class="wsk-mark"></span>
+              {%- comment -%}
+                De foto linkt naar hetzelfde product als de naam eronder. Hij staat
+                buiten de tabvolgorde en is verborgen voor schermlezers, anders krijg
+                je twee identieke stops achter elkaar; de naam draagt de linktekst.
+                Het vergelijkvinkje en de snelknop liggen op z-index 3 en blijven dus
+                boven deze link liggen.
+              {%- endcomment -%}
+              <a class="wsk-fotolink" href="{{ p.url }}" tabindex="-1" aria-hidden="true">
+                {{ p.featured_image | image_url: width: 600 | image_tag: class: 'wsk-pack', alt: '', loading: 'lazy' }}
+              </a>
+              {%- if p.available == false -%}
+                <span class="wsk-tag op">{{ section.settings.uitverkocht_label | default: 'Tijdelijk uitverkocht' }}</span>
+              {%- elsif label != blank -%}
+                <span class="wsk-tag{% if cat == 'app' %} zacht{% endif %}">{{ label }}</span>
+              {%- endif -%}
+
+              {%- if cat == 'app' -%}
+                {%- if section.settings.vergelijken -%}
+                  <label class="wsk-vgl"><input type="checkbox" data-naam="{{ p.title | escape }}"><span>Vergelijk</span></label>
+                {%- endif -%}
+                <button type="button" class="wsk-oog" title="Snel bekijken" aria-label="Snel bekijken: {{ p.title | escape }}"><svg viewBox="0 0 24 24"><use href="#wsr-oog"/></svg></button>
+                <span class="wsk-blik"><b>Snel bekijken</b>
+                  <ul>
+                    {%- if usps -%}
+                      {%- for u in usps limit: 3 -%}
+                        <li><svg viewBox="0 0 24 24"><use href="#wsr-vink"/></svg><span>{{ u }}</span></li>
+                      {%- endfor -%}
+                    {%- else -%}
+                      <li><svg viewBox="0 0 24 24"><use href="#wsr-vink"/></svg><span>{{ p.metafields.custom.subtitle.value | default: p.title }}</span></li>
+                    {%- endif -%}
+                  </ul>
+                  <span style="font-size:12px;color:var(--ink-60)">{{ section.settings.blik_voet | default: '100 dagen proberen · 2 jaar garantie' }}</span>
+                </span>
+              {%- endif -%}
+            </div>
+
+            <div class="wsk-body">
+              {%- if cat == 'mes' and block.settings.kicker != blank -%}
+                <span class="wsk-kicker">{{ block.settings.kicker }}</span>
+              {%- endif -%}
+
+              {%- comment -%}
+                Eén beoordelingsregel, op elke kaart dezelfde: de winkelscore op
+                Trustpilot. Per product een eigen cijfer met een aantal erachter
+                zette twee kaarten naast elkaar in een wedstrijd die niets zegt —
+                een product met 12 beoordelingen verliest het dan van een product
+                met 300, terwijl beide even goed zijn.
+              {%- endcomment -%}
+              <span class="wsk-tp">
+                <b>{{ section.settings.tp_score | default: '4,4' }}</b>
+                <span>{{ section.settings.tp_uit | default: 'out of 5' }}</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsr-ster"/></svg>
+                <i>{{ section.settings.tp_merk | default: 'Trustpilot' }}</i>
+              </span>
+
+              <a class="wsk-naam" href="{{ p.url }}">{{ p.title }}</a>
+
+              <span class="wsk-prijsrij">
+                <span class="wsk-prijs"><b>{{ v.price | money }}</b>
+                  {%- if v.compare_at_price > v.price -%} <s>{{ v.compare_at_price | money }}</s>{%- endif -%}
+                </span>
+                {%- if v.compare_at_price > v.price -%}
+                  {%- assign af = v.compare_at_price | minus: v.price | times: 100.0 | divided_by: v.compare_at_price | round -%}
+                  {%- if af > 0 -%}
+                    <span class="wsk-korting">{{ af }}%&nbsp;{{ section.settings.korting_woord | default: 'Korting' }}</span>
+                  {%- endif -%}
+                {%- endif -%}
+              </span>
+
+              {%- render 'ws-collectie-usp', p: p, doos: doos, max: 3, eigen: block.settings.usps -%}
+
+              {%- if cat == 'mes' -%}
+                <span class="wsk-rij">
+                  <a class="wsk-cta" href="{{ p.url }}">Bekijk<svg viewBox="0 0 24 24"><use href="#wsr-pijl"/></svg></a>
+                  {%- form 'product', p, class: 'wsk-form' -%}
+                    <input type="hidden" name="id" value="{{ v.id }}">
+                    <button type="submit" class="wsk-plus" title="Direct in de winkelwagen" aria-label="Voeg {{ p.title | escape }} toe aan de winkelwagen"{% unless p.available %} disabled{% endunless %}>
+                      <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+                    </button>
+                  {%- endform -%}
+                </span>
+                <span class="wsk-voet"><svg viewBox="0 0 24 24"><use href="#wsr-truck"/></svg><span>{{ section.settings.mes_voet | default: 'Vandaag besteld, morgen in huis' }}</span></span>
+              {%- else -%}
+                <a class="wsk-cta" href="{{ p.url }}">
+                  {%- if cat == 'bundel' -%}Bekijk bundel{%- else -%}Bekijk product{%- endif -%}
+                  <svg viewBox="0 0 24 24"><use href="#wsr-pijl"/></svg></a>
+                {%- unless p.available -%}
+                  <span class="wsk-voet"><svg viewBox="0 0 24 24"><use href="#wsr-truck"/></svg><span>{{ section.settings.uitverkocht_voet | default: 'Tijdelijk niet leverbaar' }}</span></span>
+                {%- endunless -%}
+              {%- endif -%}
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endfor -%}
+
+  {%- if section.settings.aanbod_product != blank -%}
+    {%- assign ap = section.settings.aanbod_product -%}
+    {%- assign av = ap.selected_or_first_available_variant -%}
+    <aside class="aanbod">
+      {%- if section.settings.aanbod_foto != blank -%}
+        {{ section.settings.aanbod_foto | image_url: width: 400 | image_tag: alt: ap.title }}
+      {%- else -%}
+        {{ ap.featured_image | image_url: width: 400 | image_tag: alt: ap.title }}
+      {%- endif -%}
+      <div class="aanbod-tekst">
+        <p class="eyebrow">{{ section.settings.aanbod_eyebrow }}</p>
+        <h3>{{ ap.title }}</h3>
+        <p>{{ section.settings.aanbod_zin }}</p>
+      </div>
+      <div class="aanbod-koop">
+        <span class="aanbod-prijs">{{ av.price | money }}
+          {%- if av.compare_at_price > av.price -%} <s>{{ av.compare_at_price | money }}</s>{%- endif -%}
+        </span>
+        <a class="tekstlink" href="{{ ap.url }}">{{ section.settings.aanbod_knop | default: 'Bekijk de set' }}</a>
+      </div>
+    </aside>
+  {%- endif -%}
+
+  <div class="rasterslot">
+    <span><b class="telling">{{ n_totaal }} artikelen</b> {{ section.settings.slot_tekst }}</span>
+    {%- if section.settings.slot_link_label != blank -%}
+      <a class="tekstlink" href="{{ section.settings.slot_link | default: '#' }}">{{ section.settings.slot_link_label }}</a>
+    {%- endif -%}
+  </div>
+
+</div></section>
+</div>
+
+{%- comment -%}
+  De vergelijkpopup en de keuzebalk staan buiten .wsc. Dat moet: .wsc heeft
+  `container-type:inline-size` en dat maakt het element het containing block
+  voor position:fixed — een vaste laag erbinnen krijgt een vak van 0x0.
+  .wsc-laag erft wel de tokens maar is zelf geen container (display:contents).
+{%- endcomment -%}
+<div class="wsc-laag">
+  {%- comment -%}
+  Het vergelijkpaneel. De CSS en de JS hiervoor stonden er al, alleen deze markup
+  ontbrak — daardoor werd de knop wel actief bij twee vinkjes maar gebeurde er niets.
+  Alleen apparaten komen erin: dat zijn ook de enige kaarten met een vinkje.
+  Alles wat hier staat komt uit het product zelf, net als op de kaart.
+  {%- endcomment -%}
+  {%- if section.settings.vergelijken -%}
+  {%- assign heeft_app = false -%}
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'groep' -%}
+      {%- assign c = block.settings.cat | default: 'app' -%}
+      {%- if c == 'app' -%}{%- assign heeft_app = true -%}{%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- if heeft_app -%}
+    <div class="vgl-uit" role="dialog" aria-modal="true" aria-labelledby="vgl-kop-{{ section.id }}" hidden>
+      <div class="vgl-waas" data-vgl-sluit></div>
+      <div class="vgl-venster">
+        <header class="vgl-kop">
+          <h2 id="vgl-kop-{{ section.id }}">{{ section.settings.vgl_kop | default: 'Naast elkaar' }}</h2>
+          <button type="button" class="vgl-sluit" data-vgl-sluit
+                  aria-label="{{ section.settings.vgl_sluit | default: 'Sluit de vergelijking' }}">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          </button>
+        </header>
+        <div class="vergelijk">
+        {%- for block in section.blocks -%}
+          {%- if block.type != 'groep' -%}{%- continue -%}{%- endif -%}
+          {%- assign c = block.settings.cat | default: 'app' -%}
+          {%- if c != 'app' -%}{%- continue -%}{%- endif -%}
+          {%- if block.settings.uit_collectie and collection -%}
+            {%- assign vlijst = collection.products -%}
+          {%- else -%}
+            {%- assign vlijst = block.settings.producten -%}
+          {%- endif -%}
+          {%- for p in vlijst -%}
+            {%- assign v = p.selected_or_first_available_variant -%}
+            {%- assign vscore = p.metafields.loox.avg_rating.value -%}
+            {%- assign vtellen = p.metafields.loox.num_reviews.value -%}
+            {%- assign vdoos = p.metafields.custom.included_box.value | size -%}
+            {%- assign vusps = p.metafields.custom.product_usp.value -%}
+            <article class="vgl" data-id="{{ p.handle }}">
+              <div class="vgl-beeld">
+                {{ p.featured_image | image_url: width: 400 | image_tag: alt: p.title, loading: 'lazy' }}
+              </div>
+              <div class="vgl-body">
+                <h3>{{ p.title }}</h3>
+                {%- if vscore and vtellen and vtellen > 0 -%}
+                  {%- assign vheel = vscore | floor -%}
+                  {%- assign vrest = vscore | minus: vheel -%}
+                  {%- assign vhalf = vheel | plus: 1 -%}
+                  <span class="wsk-score">
+                    <span class="sterren5">
+                      {%- for i in (1..5) -%}
+                        {%- if i <= vheel -%}<i></i>
+                        {%- elsif vrest >= 0.25 and i == vhalf -%}<i class="half"></i>
+                        {%- else -%}<i class="leeg"></i>{%- endif -%}
+                      {%- endfor -%}
+                    </span>
+                    <b>{{ vscore | round: 1 | replace: '.', ',' }}</b> ({{ vtellen }})
+                  </span>
+                {%- else -%}
+                  <span class="wsk-score leeg">{{ section.settings.geen_score | default: 'Nog geen beoordelingen' }}</span>
+                {%- endif -%}
+                <p class="vgl-prijs"><b>{{ v.price | money }}</b>
+                  {%- if v.compare_at_price > v.price %} <s>{{ v.compare_at_price | money }}</s>{% endif -%}
+                </p>
+                <dl>
+                  {%- if vdoos > 0 -%}
+                    <dt>In de doos</dt><dd>{{ vdoos }} onderde{% if vdoos == 1 %}el{% else %}len{% endif %}</dd>
+                  {%- endif -%}
+                  {%- comment -%}
+                    Eén kop met drie regels eronder. De kop stond eerst in de lus,
+                    waardoor "Waarvoor" drie keer boven elkaar verscheen.
+                  {%- endcomment -%}
+                  {%- if vusps -%}
+                    <dt>{{ section.settings.vgl_usp_kop | default: 'Waarvoor' }}</dt>
+                    {%- for u in vusps limit: 3 -%}<dd>{{ u }}</dd>{%- endfor -%}
+                  {%- endif -%}
+                  <dt>Levering</dt>
+                  <dd{% unless p.available %} class="nee"{% endunless %}>
+                    {%- if p.available -%}{{ section.settings.blik_voet | default: 'Op voorraad' }}
+                    {%- else -%}{{ section.settings.uitverkocht_voet | default: 'Tijdelijk niet leverbaar' }}{%- endif -%}
+                  </dd>
+                </dl>
+                <a class="tekstlink" href="{{ p.url }}">Bekijk {{ p.title }}</a>
+              </div>
+            </article>
+          {%- endfor -%}
+        {%- endfor -%}
+        </div>
+      </div>
+    </div>
+
+    {%- comment -%}
+      De keuzebalk: verschijnt onder in beeld zodra er twee vinkjes staan, zodat je
+      niet terug hoeft te scrollen naar de knop in de filterbalk.
+    {%- endcomment -%}
+    <div class="vgl-balk" hidden>
+      <p class="vgl-balk-tel"><b>0</b>
+        <span class="lang">{{ section.settings.vgl_balk_tekst | default: 'geselecteerd om te vergelijken' }}</span>
+        <span class="kort">{{ section.settings.vgl_balk_kort | default: 'gekozen' }}</span>
+      </p>
+      <div class="vgl-balk-knoppen">
+        <button type="button" class="vgl-balk-wis">{{ section.settings.vgl_balk_wis | default: 'Wis' }}</button>
+        <button type="button" class="knop vgl-open">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsr-weeg"/></svg>
+          {{ section.settings.vgl_balk_knop | default: 'Vergelijk' }}<span class="vgl-tel"></span>
+        </button>
+      </div>
+    </div>
+  {%- endif -%}
+{%- endif -%}
+</div>
+
+{%- comment -%}
+  Structured data voor het raster. De pagina had al BreadcrumbList en
+  Organization uit het basisthema, maar de producten zelf stonden er niet in —
+  Google zag een lap tekst in plaats van een lijst met prijzen en voorraad.
+
+  Alles komt live uit het product: prijs, valuta, voorraad en de beoordeling.
+  Een score wordt alleen meegegeven als er echt beoordelingen zijn; verzonnen
+  of afgeronde cijfers in de markup zijn precies waar Google handmatige acties
+  voor uitdeelt. Dezelfde regel als op de kaart zelf.
+{%- endcomment -%}
+{%- capture rd_items -%}
+  {%- assign rd_n = 0 -%}
+  {%- assign rd_gezien = '' -%}
+  {%- for block in section.blocks -%}
+    {%- if block.type != 'groep' -%}{%- continue -%}{%- endif -%}
+    {%- if block.settings.uit_collectie -%}
+      {%- assign rd_lijst = collection.products -%}
+    {%- else -%}
+      {%- assign rd_lijst = block.settings.producten -%}
+    {%- endif -%}
+    {%- for p in rd_lijst -%}
+      {%- if p == blank or p.title == blank -%}{%- continue -%}{%- endif -%}
+      {%- comment -%} Een product kan in twee groepen staan; twee keer dezelfde regel in de lijst is een fout. {%- endcomment -%}
+      {%- capture rd_sleutel -%}|{{ p.handle }}|{%- endcapture -%}
+      {%- if rd_gezien contains rd_sleutel -%}{%- continue -%}{%- endif -%}
+      {%- assign rd_gezien = rd_gezien | append: rd_sleutel -%}
+      {%- assign v = p.selected_or_first_available_variant -%}
+      {%- assign rd_n = rd_n | plus: 1 -%}
+      {%- unless rd_n == 1 -%},{%- endunless -%}
+      {
+        "@type": "ListItem",
+        "position": {{ rd_n }},
+        "item": {
+          "@type": "Product",
+          "name": {{ p.title | json }},
+          "url": {{ p.url | prepend: shop.url | json }}
+          {%- if p.featured_image -%},
+          "image": {{ p.featured_image | image_url: width: 800 | prepend: 'https:' | json }}
+          {%- endif -%}
+          {%- if p.metafields.custom.subtitle.value != blank -%},
+          "description": {{ p.metafields.custom.subtitle.value | json }}
+          {%- endif -%},
+          "offers": {
+            "@type": "Offer",
+            "price": {{ v.price | divided_by: 100.0 | json }},
+            "priceCurrency": {{ cart.currency.iso_code | json }},
+            "availability": "https://schema.org/{% if p.available %}InStock{% else %}OutOfStock{% endif %}",
+            "url": {{ p.url | prepend: shop.url | json }}
+          }
+          {%- comment -%}
+            Geen aggregateRating meer. De kaart toont sinds deze ronde op elk
+            product dezelfde winkelscore van Trustpilot, en geen los cijfer per
+            product. Markup die een ander getal claimt dan er op de pagina staat
+            is precies waar Google handmatige acties voor uitdeelt. Het cijfer
+            per product hoort thuis op de productpagina, waar het ook zichtbaar is.
+          {%- endcomment -%}
+        }
+      }
+    {%- endfor -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- if rd_items != blank -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": {{ collection.title | default: page_title | json }},
+    "url": {{ canonical_url | json }},
+    {%- comment -%}
+      Bewust de SEO-omschrijving en niet collection.description: die laatste is de
+      oude collectietekst uit de admin, die nog naar het verkeerde domein verwijst
+      en op deze sjablonen nergens meer wordt getoond. Wat in de markup staat hoort
+      hetzelfde te zijn als wat Google in het zoekresultaat leest.
+    {%- endcomment -%}
+    {%- assign rd_oms = collection.metafields.global.description_tag -%}
+    {%- if rd_oms != blank -%}
+    "description": {{ rd_oms | strip_html | json }},
+    {%- endif -%}
+    "mainEntity": {
+      "@type": "ItemList",
+      "numberOfItems": {{ rd_n }},
+      "itemListElement": [{{ rd_items }}]
+    }
+  }
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "WS · Collectie raster",
+  "tag": "section",
+  "class": "ws-collectie-raster",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "paragraph", "content": "Elke groep krijgt een eigen lijst producten. Prijs, vanprijs, voorraad, score en het aantal onderdelen komen live uit het product — die staan hier niet vast." },
+    { "type": "header", "content": "Filterbalk" },
+    { "type": "text", "id": "filter_alles", "label": "Label · alles", "default": "Alles" },
+    { "type": "text", "id": "filter_app", "label": "Label · apparaten", "default": "Apparaten" },
+    { "type": "text", "id": "filter_bundel", "label": "Label · sets", "default": "Sets" },
+    { "type": "text", "id": "filter_mes", "label": "Label · onderdelen", "default": "Onderdelen" },
+    { "type": "header", "content": "De filterbalk" },
+    { "type": "text", "id": "toon_label", "label": "Label links van de filters", "default": "Toon mij" },
+    { "type": "text", "id": "bundel_lint", "label": "Lintje boven de knop Bundels", "info": "Bijvoorbeeld: Meeste waarde. Leeglaten geeft een gewone knop.", "default": "Meeste waarde" },
+    { "type": "text", "id": "resultaat_label", "label": "Woord achter het aantal", "default": "resultaten" },
+    { "type": "text", "id": "sorteer_prijs_op", "label": "Sorteren: prijs oplopend", "default": "Prijs: laag naar hoog" },
+    { "type": "text", "id": "sorteer_prijs_af", "label": "Sorteren: prijs aflopend", "default": "Prijs: hoog naar laag" },
+    { "type": "text", "id": "sorteer_score", "label": "Sorteren: op beoordeling", "default": "Best beoordeeld" },
+    { "type": "checkbox", "id": "vergelijken", "label": "Vergelijker aanzetten", "info": "Vergelijken hoort binnen één zone. Op een overkoepelende pagina uitzetten: een hoofdscheerder naast een neustrimmer leggen helpt niemand.", "default": true },
+    { "type": "text", "id": "vgl_kop", "label": "Kop van het vergelijkvenster", "default": "Naast elkaar" },
+    { "type": "text", "id": "vgl_sluit", "label": "Sluitknop (voorleestekst)", "default": "Sluit de vergelijking" },
+    { "type": "text", "id": "vgl_usp_kop", "label": "Kop boven de eigenschappen", "default": "Waarvoor" },
+    { "type": "text", "id": "vgl_balk_tekst", "label": "Balk: tekst na het aantal", "default": "geselecteerd om te vergelijken" },
+    { "type": "text", "id": "vgl_balk_kort", "label": "Balk: korte tekst (telefoon)", "info": "De lange tekst breekt op een smal scherm over twee regels; deze komt daarvoor in de plaats.", "default": "gekozen" },
+    { "type": "text", "id": "vgl_balk_wis", "label": "Balk: wisknop", "default": "Wis" },
+    { "type": "text", "id": "vgl_balk_knop", "label": "Balk: vergelijkknop", "default": "Vergelijk" },
+    { "type": "text", "id": "sorteer_label", "label": "Sorteerknop", "default": "Meest relevant" },
+    { "type": "image_picker", "id": "monogram", "label": "Monogram achter de packshot", "info": "Verschijnt bij hover en blijft staan op de kaart die de keuzehulp aanwijst. Werkt alleen achter een vrijstaande packshot." },
+    { "type": "header", "content": "Beoordeling op de kaart" },
+    { "type": "paragraph", "content": "Op elke kaart dezelfde winkelscore, niet per product een eigen cijfer. Pas dit alleen aan als de score op Trustpilot verandert — het cijfer hoort te kloppen met wat daar staat." },
+    { "type": "text", "id": "tp_score", "label": "Score", "default": "4,4" },
+    { "type": "text", "id": "tp_uit", "label": "Tekst achter de score", "info": "Bijvoorbeeld: out of 5, of van de 5.", "default": "out of 5" },
+    { "type": "text", "id": "tp_merk", "label": "Naam van de bron", "default": "Trustpilot" },
+    { "type": "header", "content": "Op de kaarten" },
+    { "type": "text", "id": "geen_score", "label": "Als er geen beoordelingen zijn", "info": "Nooit een standaardcijfer tonen bij een product zonder beoordelingen.", "default": "Nieuw · nog geen beoordelingen" },
+    { "type": "text", "id": "korting_woord", "label": "Woord achter het kortingspercentage", "info": "Het percentage rekent de winkel zelf uit, uit de vanprijs.", "default": "Korting" },
+    { "type": "text", "id": "uitverkocht_label", "label": "Lintje bij uitverkocht", "default": "Tijdelijk uitverkocht" },
+    { "type": "text", "id": "uitverkocht_voet", "label": "Regel bij uitverkocht", "default": "Tijdelijk niet leverbaar" },
+    { "type": "text", "id": "blik_voet", "label": "Regel onder Snel bekijken", "default": "100 dagen proberen · 2 jaar garantie" },
+    { "type": "text", "id": "mes_voet", "label": "Regel onder een onderdeel", "default": "Vandaag besteld, morgen in huis" },
+    { "type": "header", "content": "Aanbodstrook" },
+    { "type": "paragraph", "content": "Eén smalle strook, of laat hem leeg. Een collectiepagina heeft al een aanbod: het raster." },
+    { "type": "product", "id": "aanbod_product", "label": "Set" },
+    { "type": "image_picker", "id": "aanbod_foto", "label": "Foto", "info": "Leeg = de hoofdafbeelding." },
+    { "type": "text", "id": "aanbod_eyebrow", "label": "Bovenregel", "default": "Alles in één set" },
+    { "type": "textarea", "id": "aanbod_zin", "label": "Eén zin" },
+    { "type": "text", "id": "aanbod_knop", "label": "Linktekst", "default": "Bekijk de set" },
+    { "type": "header", "content": "Slotregel" },
+    { "type": "text", "id": "slot_tekst", "label": "Tekst achter het aantal", "default": "in deze zone · elk apparaat 100 dagen te proberen" },
+    { "type": "text", "id": "slot_link_label", "label": "Linktekst" },
+    { "type": "url", "id": "slot_link", "label": "Link" },
+    { "type": "header", "content": "Indent settings" },
+    { "type": "range", "id": "desk_indent_top", "label": "Indent top (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "desk_indent_bottom", "label": "Indent bottom (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_top", "label": "Indent top (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_bottom", "label": "Indent bottom (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "blocks": [
+    {
+      "type": "groep",
+      "name": "Groep",
+      "settings": [
+        { "type": "text", "id": "kop", "label": "Kop", "default": "Vind jouw apparaat" },
+        { "type": "text", "id": "sub", "label": "Onderregel" },
+        { "type": "select", "id": "cat", "label": "Soort", "options": [
+            { "value": "app", "label": "Apparaten" },
+            { "value": "bundel", "label": "Sets en bundels" },
+            { "value": "mes", "label": "Messen, koppen en opbergen" }
+          ], "default": "app" },
+        { "type": "checkbox", "id": "uit_collectie", "label": "Gebruik de producten van deze collectie", "info": "Voor een pagina die één collectie toont. De lijst hieronder wordt dan genegeerd. Toont de eerste 50 producten.", "default": false },
+        { "type": "product_list", "id": "producten", "label": "Producten", "limit": 24, "info": "De volgorde hier is de volgorde op de pagina. Wordt genegeerd als je hierboven de collectie gebruikt." },
+        { "type": "textarea", "id": "noot", "label": "Noot onder de kop", "info": "Voor uitleg die de bezoeker nodig heeft om de kaarten te lezen — bijvoorbeeld dat verwante modellen één beoordelingenstroom delen." },
+        { "type": "text", "id": "kicker", "label": "Kicker op de kaarten", "info": "Alleen bij onderdelen. Bijvoorbeeld Mes of Scheerkop." },
+        { "type": "textarea", "id": "labels", "label": "Lintjes", "info": "Eén per regel: product-handle = Lintje. Bijvoorbeeld neustrimmer-4in1-ultra = Best verkocht. Houd het lintje kort — ongeveer twintig tekens; langer wordt afgekapt naast de vergelijk-knop." },
+        { "type": "textarea", "id": "usps", "label": "USP's onder de prijs", "info": "Alleen nodig als de standaardlijst niet klopt. Eén per regel: product-handle = icoon|Tekst;icoon|Tekst. Iconen: druppel, motor, accu, kam, licht, station, tas, doos, mes, trimmer, regelaars. Maximaal drie per kaart, twee tot vier woorden per stuk." },
+        { "type": "text", "id": "link_label", "label": "Linktekst rechts van de kop" },
+        { "type": "url", "id": "link_url", "label": "Link rechts van de kop" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "WS · Collectie raster" }]
+}
+{% endschema %}
