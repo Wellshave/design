@@ -10,24 +10,25 @@
 
 .ws-hero{position:relative;overflow:hidden;background:#0B0B0A;display:flex;
   min-height:var(--ws-hero-h,600px)}
-.ws-hero__media{position:absolute;inset:0 0 0 56%;overflow:hidden}
+/* De foto loopt van rand tot rand en alles ligt erover — op de telefoon
+   deed hij dat al. Een zwart vlak naast de foto maakte er twee helften van
+   met een harde naad ertussen. */
+.ws-hero__media{position:absolute;inset:0;overflow:hidden}
 .ws-hero__foto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-  object-position:50% 34%}
+  object-position:50% 16%}
 /* de verloopsluier ligt op een pseudo-element en niet op een lege <div>:
    een leeg element wordt door themacss verderop verborgen, en dan is er
-   geen sluier meer om de letters leesbaar te houden. */
+   geen sluier meer om de letters leesbaar te houden. Hij loopt van links
+   weg, zodat de kop het altijd wint en de rechterhelft van de foto vrij
+   blijft. */
 .ws-hero__media::after{content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(90deg,#0B0B0A 0%,rgba(11,11,10,.92) 12%,rgba(11,11,10,.35) 34%,rgba(11,11,10,0) 62%)}
-.ws-hero__merk{position:absolute;left:30%;top:8%;width:26%;height:auto;opacity:.06;
-  pointer-events:none;filter:brightness(0) invert(1)}
-.ws-hero__bogen{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
-.ws-hero__bogen path{fill:none;stroke-linecap:round}
-.ws-hero__streep{position:absolute;left:57%;top:6%;bottom:10%;width:2px;pointer-events:none;z-index:1;
-  background:linear-gradient(180deg,rgba(245,209,138,0),rgba(245,209,138,.75) 42%,rgba(245,209,138,0));
-  transform:rotate(9deg);filter:blur(.4px)}
+  background:linear-gradient(90deg,rgba(11,11,10,.66) 0%,rgba(11,11,10,.48) 30%,
+    rgba(11,11,10,.18) 58%,rgba(11,11,10,0) 84%),
+  linear-gradient(180deg,rgba(11,11,10,.30) 0%,rgba(11,11,10,0) 26%,
+    rgba(11,11,10,0) 62%,rgba(11,11,10,.5) 100%)}
 
 .ws-hero__inner{position:relative;z-index:2;display:flex;align-items:center;
-  padding:24px 30px 24px 40px;width:58%}
+  padding:24px 30px 24px 40px;width:56%}
 .ws-hero__blocks{width:100%;max-width:600px;display:flex;flex-direction:column;
   gap:19px;align-items:flex-start}
 /* de zomerbadge — vol goud met donkere letters, niet gouden letters op een
@@ -55,10 +56,10 @@
 @keyframes ws-hero-glans{0%,74%{left:-60%}100%{left:118%}}
 @media (prefers-reduced-motion:reduce){.ws-hero__badge::after{display:none}}
 .ws-hero__h1{font-size:58px;line-height:104%;font-weight:700;letter-spacing:-.035em;margin:0;
-  color:#fff;text-transform:none}
+  color:#fff;text-transform:none;text-shadow:0 2px 26px rgba(11,11,10,.7)}
 .ws-hero__h1 b,.ws-hero__h1 strong,.ws-hero__h1 em{font-style:normal;font-weight:700;color:#F5D18A}
-.ws-hero__sub{font-size:18px;line-height:158%;font-weight:400;color:rgba(255,255,255,.72);
-  margin:0;max-width:34em}
+.ws-hero__sub{font-size:18px;line-height:158%;font-weight:400;color:rgba(255,255,255,.87);
+  margin:0;max-width:34em;text-shadow:0 1px 16px rgba(11,11,10,.7)}
 
 /* Eén knop die het werk doet, met de quiz eronder als regel. Twee vlakken
    naast elkaar wogen even zwaar, terwijl kopen en twijfelen dat niet zijn.
@@ -78,23 +79,6 @@
   text-decoration-color:rgba(255,255,255,.34)}
 .ws-hero__cta2:hover{color:#fff;text-decoration:underline;
   text-decoration-color:rgba(255,255,255,.7)}
-
-/* het label bij het apparaat en het aantal bestellingen */
-.ws-hero__wijzer{position:absolute;left:69%;top:64%;z-index:2;padding-left:52px}
-.ws-hero__wijzer::before{content:"";position:absolute;left:0;top:50%;width:42px;height:1px;
-  background:linear-gradient(90deg,rgba(245,209,138,0),#F5D18A)}
-.ws-hero__wijzer b{display:block;font-size:13px;font-weight:700;letter-spacing:.1em;
-  text-transform:uppercase;color:#fff}
-.ws-hero__wijzer em{display:block;font-style:normal;font-size:12px;font-weight:600;
-  letter-spacing:.14em;text-transform:uppercase;color:#F5D18A;margin-top:5px}
-.ws-hero__telling{position:absolute;left:57.5%;bottom:30px;z-index:2;display:flex;
-  align-items:center;gap:14px;background:rgba(11,11,10,.62);
-  border:1px solid rgba(245,209,138,.32);border-radius:14px;padding:14px 20px;
-  backdrop-filter:blur(8px)}
-.ws-hero__telling svg{width:24px;height:24px;color:#F5D18A;flex:none}
-.ws-hero__telling b{display:block;font-size:19px;font-weight:700;letter-spacing:-.01em;color:#fff}
-.ws-hero__telling em{display:block;font-style:normal;font-size:10.5px;font-weight:600;
-  letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.62);margin-top:3px}
 
 /* de garantiestrook onderaan de hero.
    Op desktop drie kolommen naast elkaar; de tweede reeks uit de markup
@@ -128,16 +112,11 @@
   font-size:15px}
 .ws-hero__tpmerk svg{width:18px;height:18px;fill:#00B67A}
 
-/* ── mobiel ──
-   De boog, de streep, het monogram en het label bij het apparaat vallen weg:
-   op deze breedte staan ze over de foto en over de tekst heen. */
+/* ── mobiel ── */
 @media (max-width:749px){
-  /* Op de telefoon is de foto het hele vlak en ligt alles erover: kop, zin,
-     beoordeling en knop. Stond de tekst eronder geplakt, dan werd de hero
-     bijna negenhonderd pixels hoog en verloor de foto zijn kracht. */
+  /* Zelfde idee als op de desktop, maar de sluier loopt van onderen op in
+     plaats van van links: de tekst staat hier onderin. */
   .ws-hero{flex-direction:column;min-height:0}
-  .ws-hero__wijzer,.ws-hero__bogen,.ws-hero__streep,.ws-hero__merk,
-  .ws-hero__telling{display:none}
   .ws-hero__media{position:absolute;inset:0;width:100%;height:100%;flex:none}
   .ws-hero__foto{object-position:50% 50%}
   /* de sluier begint pas op de helft: daarboven blijft de foto zoals hij is,
@@ -162,7 +141,7 @@
   .ws-hero__h1{font-size:35px;letter-spacing:-.032em;
     text-shadow:0 2px 20px rgba(11,11,10,.6)}
   .ws-hero__sub{font-size:14.5px;line-height:150%;color:rgba(255,255,255,.84);
-    max-width:30em;text-shadow:0 1px 14px rgba(11,11,10,.7)}
+    max-width:30em}
   /* de beoordeling op één regel; wikkelt hij toch, dan valt het aantal weg */
   .ws-hero__tp{font-size:11px;gap:6px;flex-wrap:nowrap;white-space:nowrap}
   .ws-hero__sterren i{width:17px;height:17px}
