@@ -23,7 +23,7 @@
 </svg>
 
 <div class="ws-hero-blok">
-  <div class="ws-hero" style="--ws-hero-h: {{ section.settings.hoogte }}px">
+  <div class="ws-hero" style="--ws-hero-h: {{ section.settings.hoogte }}px; --ws-hero-hm: {{ section.settings.hoogte_mobiel | default: 720 }}px">
     <div class="ws-hero__media">
       {%- if section.settings.foto != blank -%}
         {{ section.settings.foto | image_url: width: 1400 | image_tag: class: 'ws-hero__foto', sizes: '50vw', widths: '600,900,1200,1400' }}
@@ -156,6 +156,7 @@
     { "type": "image_picker", "id": "foto", "label": "Hero-foto" },
     { "type": "image_picker", "id": "merk", "label": "Monogram op de achtergrond" },
     { "type": "range", "id": "hoogte", "label": "Hoogte van de hero (desktop)", "min": 420, "max": 860, "step": 10, "unit": "px", "default": 600 },
+    { "type": "range", "id": "hoogte_mobiel", "label": "Hoogte van de foto (mobiel)", "info": "Hoger laat meer van de foto zien; de tekst schuift mee.", "min": 520, "max": 900, "step": 10, "unit": "px", "default": 720 },
     { "type": "header", "content": "Tekst" },
     { "type": "text", "id": "badge", "label": "Badge", "default": "Summer Sale" },
     { "type": "text", "id": "badge_actie", "label": "Badge — de actie", "info": "Komt in een eigen donker vlak achter de badge. Leeg = alleen de badge.", "default": "tot 40% korting" },

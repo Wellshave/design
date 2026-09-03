@@ -206,11 +206,12 @@ footer p{margin:0;max-width:72ch}
   text-transform:uppercase;color:rgba(255,255,255,.62);margin-top:3px}
 
 /* de garantiestrook onderaan de hero */
-.ws-strook{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
-  background:#0B0B0A;border-top:1px solid rgba(245,209,138,.16);padding:26px 40px}
-.ws-strook > div{display:flex;align-items:center;justify-content:center;gap:18px;
+.ws-strook{background:#0B0B0A;border-top:1px solid rgba(245,209,138,.16);padding:26px 40px}
+.ws-band{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.ws-band > div{display:flex;align-items:center;justify-content:center;gap:18px;
   padding:0 26px;min-width:0}
-.ws-strook > div + div{border-left:1px solid rgba(255,255,255,.1)}
+.ws-band > div + div{border-left:1px solid rgba(255,255,255,.1)}
+.ws-band > div[aria-hidden]{display:none}
 .ws-zegel{width:46px;height:46px;flex:none;border-radius:50%;border:1px solid rgba(245,209,138,.4);
   display:flex;align-items:center;justify-content:center;color:#F5D18A;
   font-size:13.5px;font-weight:700;letter-spacing:.02em;line-height:1}
@@ -246,39 +247,49 @@ footer p{margin:0;max-width:72ch}
 .ws-m .ws-burger i{display:block;width:22px;height:1.5px;background:rgba(255,255,255,.85)}
 .ws-m .ws-nav img{height:26px}
 .ws-m .ws-hero{flex-direction:column;min-height:0}
-.ws-m .ws-media{position:relative;inset:auto;width:100%;height:330px;flex:none}
-.ws-m .ws-hero img.ws-foto{object-position:52% 26%}
-.ws-m .ws-scrim{background:linear-gradient(180deg,rgba(11,11,10,.1) 0%,rgba(11,11,10,.35) 52%,rgba(11,11,10,.94) 92%,#0B0B0A 100%)}
-.ws-m .ws-merk{left:auto;right:-8%;top:2%;width:52%}
-.ws-m .ws-streep{left:24%;top:4%;bottom:32%}
-.ws-m .ws-inner{width:100%;padding:0 18px 26px;margin-top:-34px}
-.ws-m .ws-blocks{gap:16px;max-width:none}
-.ws-m .ws-badge{gap:8px;padding:6px 6px 6px 13px}
-  .ws-zon{width:16px;height:16px}
-  .ws-badgetekst{font-size:10.5px;letter-spacing:.12em}
-  .ws-badgeactie{font-size:10.5px;padding:7px 12px;letter-spacing:.06em}
-.ws-m .ws-h1{font-size:40px;letter-spacing:-.032em}
-.ws-m .ws-sub{font-size:15px;line-height:152%}
-.ws-m .ws-knoppen{width:100%;flex-direction:column;gap:10px}
-.ws-m .ws-cta,.ws-m .ws-cta2{justify-content:center;font-size:13px;padding:18px 22px}
-.ws-m .ws-wijzer{left:16px;top:auto;bottom:176px;padding-left:0}
-.ws-m .ws-wijzer::before{display:none}
-.ws-m .ws-telling{left:16px;right:auto;top:18px;bottom:auto;margin-top:0;padding:10px 14px;gap:10px}
-.ws-m .ws-telling b{font-size:15px}
-.ws-m .ws-telling em{font-size:9px}
-.ws-m .ws-strook{grid-template-columns:1fr;padding:6px 18px 22px;gap:0}
-.ws-m .ws-strook > div{padding:15px 0;gap:14px;justify-content:flex-start}
+.ws-m .ws-media{position:absolute;inset:0;width:100%;height:100%;flex:none}
+.ws-m .ws-hero img.ws-foto{object-position:50% 50%}
+/* de sluier begint pas op de helft: daarboven blijft de foto zoals hij is */
+.ws-m .ws-scrim{background:linear-gradient(180deg,rgba(11,11,10,.42) 0%,rgba(11,11,10,.02) 16%,
+  rgba(11,11,10,.04) 40%,rgba(11,11,10,.30) 52%,rgba(11,11,10,.72) 66%,rgba(11,11,10,.93) 80%,#0B0B0A 100%)}
+.ws-m .ws-inner{position:relative;z-index:2;width:100%;min-height:720px;
+  display:flex;align-items:flex-end;padding:110px 18px 22px;margin-top:0}
+.ws-m .ws-blocks{gap:13px;max-width:none}
+.ws-m .ws-badge{position:absolute;left:16px;top:16px;z-index:3;gap:7px;padding:4px 4px 4px 11px}
+  .ws-m .ws-zon{width:14px;height:14px}
+  .ws-m .ws-badgetekst{font-size:9.5px;letter-spacing:.11em}
+  .ws-m .ws-badgeactie{font-size:9.5px;padding:5px 10px;letter-spacing:.05em}
+.ws-m .ws-h1{font-size:35px;letter-spacing:-.032em;text-shadow:0 2px 20px rgba(11,11,10,.6)}
+.ws-m .ws-sub{font-size:14.5px;line-height:150%;color:rgba(255,255,255,.84);max-width:30em;
+  text-shadow:0 1px 14px rgba(11,11,10,.7)}
+.ws-m .tp{font-size:11px;gap:6px;flex-wrap:nowrap;white-space:nowrap}
+.ws-m .h-tp-stars i{width:17px;height:17px}
+.ws-m .h-tp-stars svg{width:11px;height:11px}
+.ws-m .tp-score,.ws-m .h-tp-brand{font-size:11.5px}
+.ws-m .ws-knoppen{width:100%;flex-direction:column;gap:11px;align-items:stretch}
+.ws-m .ws-cta{justify-content:center;font-size:12.5px;padding:17px 22px}
+.ws-m .ws-cta2{border:0;padding:0;background:none;font-size:12.5px;font-weight:600;
+  letter-spacing:.02em;text-transform:none;color:rgba(255,255,255,.78);
+  text-decoration:underline;text-underline-offset:4px;text-decoration-color:rgba(255,255,255,.32)}
+.ws-m .ws-telling{display:none}
+/* de drie zekerheden passen niet naast elkaar in 390px en lopen als band voorbij */
+.ws-m .ws-strook{padding:11px 0 12px;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 26px,#000 calc(100% - 26px),transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 26px,#000 calc(100% - 26px),transparent)}
+.ws-m .ws-band{display:flex;width:max-content;animation:ws-hero-band 26s linear infinite}
+.ws-m .ws-band > div,.ws-m .ws-band > div[aria-hidden]{display:flex;flex:0 0 auto;
+  padding:2px 20px;gap:11px;justify-content:flex-start;border-left:1px solid rgba(255,255,255,.12)}
+@keyframes ws-hero-band{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ws-m .ws-zegel{width:30px;height:30px}
+.ws-m .ws-zegel svg{width:15px;height:15px}
+.ws-m .ws-tekst b{font-size:10px;letter-spacing:.12em;white-space:nowrap}
+.ws-m .ws-tekst em{font-size:11px;white-space:nowrap}
 .ws-m .ws-strook > div + div{border-left:0;border-top:1px solid rgba(255,255,255,.1)}
 .ws-m .ws-zegel{width:38px;height:38px}
 .ws-m .ws-zegel svg{width:19px;height:19px}
-.ws-m .ws-tekst b{font-size:11.5px}
-.ws-m .ws-tekst em{font-size:12.5px}
-.ws-m .tp{font-size:12px;gap:8px}
-.ws-m .h-tp-stars i{width:19px;height:19px}
-.ws-m .h-tp-stars svg{width:13px;height:13px}
-.ws-m .tp-score,.ws-m .h-tp-brand{font-size:12.5px}
 .ws{height:auto;min-height:770px}
-.ws.ws-m{min-height:1210px}
+/* de telefoon sluit om de inhoud: de hero is geen 892px meer maar 786 */
+.ws.ws-m{min-height:0}
 
 /* ── Blok 2 — Autoriteit en bewijs ── */
 /* ══ MOCKUP — vaste merkkleuren in beide thema's ══ */
@@ -1934,8 +1945,8 @@ footer p{margin:0;max-width:72ch}
   </section>
 
   <section class="blok">
-    <div class="blok-h"><h2>Blok 1 — Hero</h2><span>Copy herschreven — nog niets live</span></div>
-    <p class="sb7"><em>Regel 1 · 2 · 5</em><span>De kop noemt in één zin de held en de gids: <b>jij wilt verzorgd de deur uit, wij regelen de rest</b>. De ondertitel eronder is het plan: kies je plek, probeer honderd dagen, geld terug. De tweede knop zegt nu wat hij is — een uitweg voor wie nog niet weet wat hij wil.</span></p>
+    <div class="blok-h"><h2>Blok 1 — Hero</h2><span>Herbouwd — nog niets live</span></div>
+    <p class="sb7"><em>Regel 1 · 2 · 5</em><span>De kop noemt in één zin de held en de gids: <b>jij wilt verzorgd de deur uit, wij regelen de rest</b>. De ondertitel eronder is het plan in één stap: kies je plek. De belofte van honderd dagen stond daar ook nog bij, maar die staat al in de balk eronder en in vijf andere blokken — één keer is genoeg. Op de telefoon ligt alles nu <b>over de foto</b> in plaats van eronder geplakt: de hero ging van 892 naar 781 px en de foto van 330 naar 720 px hoog. De tweede knop werd een regel onder de hoofdknop, zodat de quiz niet even zwaar weegt als kopen.</span></p>
     <div class="views">
       <div>
         <p class="devicecap">Desktop — 1440px</p>
@@ -1970,7 +1981,7 @@ footer p{margin:0;max-width:72ch}
           <div class="ws-inner"><div class="ws-blocks">
             <span class="ws-badge"><svg class="ws-zon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.3" fill="currentColor"/><path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.2 5.2l1.85 1.85M16.95 16.95l1.85 1.85M18.8 5.2l-1.85 1.85M7.05 16.95L5.2 18.8" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg><span class="ws-badgetekst">Summer Sale</span><b class="ws-badgeactie">tot 40% korting</b></span>
             <h2 class="ws-h1">Jij wilt verzorgd<br>de deur uit. Wij<br><em>regelen de rest.</em></h2>
-            <p class="ws-sub">Kies het apparaat voor de plek waar jij iets weg wilt hebben. Je probeert het honderd dagen thuis. Bevalt het niet, dan krijg je je geld terug.</p>
+            <p class="ws-sub">Kies het apparaat voor de plek waar jij iets weg wilt hebben.</p>
             <div class="tp">
               <span class="h-tp-stars">
                 <i><svg><use href="#star"/></svg></i><i><svg><use href="#star"/></svg></i>
@@ -1990,9 +2001,14 @@ footer p{margin:0;max-width:72ch}
           <p class="ws-telling"><svg><use href="#mensen"/></svg><span><b>200.000+</b><em>bestellingen sinds 2021</em></span></p>
         </div>
         <div class="ws-strook">
+          <div class="ws-band">
           <div><span class="ws-zegel"><svg><use href="#shield"/></svg></span><span class="ws-tekst"><b>100 dagen proberen</b><em>Niet goed? Geld terug.</em></span></div>
           <div><span class="ws-zegel">2</span><span class="ws-tekst"><b>2 jaar garantie</b><em>Gaat er iets stuk? Wij lossen het op.</em></span></div>
           <div><span class="ws-zegel"><svg><use href="#truck"/></svg></span><span class="ws-tekst"><b>Morgen in huis</b><em>Besteld voor 23:59, morgen scheren.</em></span></div>
+          <div aria-hidden="true"><span class="ws-zegel"><svg><use href="#shield"/></svg></span><span class="ws-tekst"><b>100 dagen proberen</b><em>Niet goed? Geld terug.</em></span></div>
+          <div aria-hidden="true"><span class="ws-zegel">2</span><span class="ws-tekst"><b>2 jaar garantie</b><em>Gaat er iets stuk? Wij lossen het op.</em></span></div>
+          <div aria-hidden="true"><span class="ws-zegel"><svg><use href="#truck"/></svg></span><span class="ws-tekst"><b>Morgen in huis</b><em>Besteld voor 23:59, morgen scheren.</em></span></div>
+          </div>
         </div>
       </div></div></div>
       </div>
@@ -2029,7 +2045,7 @@ footer p{margin:0;max-width:72ch}
           <div class="ws-inner"><div class="ws-blocks">
             <span class="ws-badge"><svg class="ws-zon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.3" fill="currentColor"/><path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.2 5.2l1.85 1.85M16.95 16.95l1.85 1.85M18.8 5.2l-1.85 1.85M7.05 16.95L5.2 18.8" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg><span class="ws-badgetekst">Summer Sale</span><b class="ws-badgeactie">tot 40% korting</b></span>
             <h2 class="ws-h1">Jij wilt verzorgd<br>de deur uit. Wij<br><em>regelen de rest.</em></h2>
-            <p class="ws-sub">Kies het apparaat voor de plek waar jij iets weg wilt hebben. Je probeert het honderd dagen thuis. Bevalt het niet, dan krijg je je geld terug.</p>
+            <p class="ws-sub">Kies het apparaat voor de plek waar jij iets weg wilt hebben.</p>
             <div class="tp">
               <span class="h-tp-stars">
                 <i><svg><use href="#star"/></svg></i><i><svg><use href="#star"/></svg></i>
@@ -2049,9 +2065,14 @@ footer p{margin:0;max-width:72ch}
           <p class="ws-telling"><svg><use href="#mensen"/></svg><span><b>200.000+</b><em>bestellingen sinds 2021</em></span></p>
         </div>
         <div class="ws-strook">
+          <div class="ws-band">
           <div><span class="ws-zegel"><svg><use href="#shield"/></svg></span><span class="ws-tekst"><b>100 dagen proberen</b><em>Niet goed? Geld terug.</em></span></div>
           <div><span class="ws-zegel">2</span><span class="ws-tekst"><b>2 jaar garantie</b><em>Gaat er iets stuk? Wij lossen het op.</em></span></div>
           <div><span class="ws-zegel"><svg><use href="#truck"/></svg></span><span class="ws-tekst"><b>Morgen in huis</b><em>Besteld voor 23:59, morgen scheren.</em></span></div>
+          <div aria-hidden="true"><span class="ws-zegel"><svg><use href="#shield"/></svg></span><span class="ws-tekst"><b>100 dagen proberen</b><em>Niet goed? Geld terug.</em></span></div>
+          <div aria-hidden="true"><span class="ws-zegel">2</span><span class="ws-tekst"><b>2 jaar garantie</b><em>Gaat er iets stuk? Wij lossen het op.</em></span></div>
+          <div aria-hidden="true"><span class="ws-zegel"><svg><use href="#truck"/></svg></span><span class="ws-tekst"><b>Morgen in huis</b><em>Besteld voor 23:59, morgen scheren.</em></span></div>
+          </div>
         </div>
       </div></div></div>
       </div>
