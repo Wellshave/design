@@ -112,6 +112,9 @@ html{scroll-behavior:smooth}
 .gg-lp .byline .naam{color:var(--ink);font-weight:800}
 .gg-lp .tag{border:1px solid var(--ink-10);border-radius:100px;padding:5px 13px;
   letter-spacing:.08em;text-transform:uppercase;font-size:10.5px}
+.gg-lp .artfig{max-width:var(--read);margin:30px auto 0;padding:0 24px}
+.gg-lp .artfig img{width:100%;border-radius:var(--r-m);box-shadow:0 16px 38px rgba(17,17,17,.14)}
+.gg-lp .artfig figcaption{margin-top:11px;font-size:13px;line-height:1.55;color:var(--ink-60)}
 .gg-lp .callout{border-left:3px solid var(--bronze);background:var(--sand);
   border-radius:0 var(--r-s) var(--r-s) 0;padding:22px 24px;margin:30px 0 0}
 .gg-lp .callout .kicker{color:var(--bronze);margin-bottom:8px}
@@ -216,16 +219,33 @@ html{scroll-behavior:smooth}
 .gg-lp .offer{background:var(--grad-dark);color:#fff;padding:78px 0}
 .gg-lp .offer-kop{max-width:640px;margin:0 auto 34px;padding:0 24px;text-align:center}
 .gg-lp .offer-kop p{margin-top:16px;font-size:16px;line-height:1.75;color:rgba(255,255,255,.72)}
-.gg-lp .plan{max-width:460px;margin:0 auto;position:relative;display:flex;flex-direction:column;
-  border-radius:var(--r-l);background:#141312;border:1px solid rgba(245,209,138,.45);
-  box-shadow:0 22px 54px rgba(0,0,0,.45);overflow:hidden}
+.gg-lp .plannen{max-width:var(--rail);margin:0 auto;padding:0 24px;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+.gg-lp .plan{position:relative;display:flex;flex-direction:column;border-radius:var(--r-l);
+  background:#141312;border:1px solid rgba(255,255,255,.1);overflow:hidden}
+.gg-lp .plan.top{background:var(--grad-gold);border-color:transparent;color:#141008;
+  box-shadow:0 0 0 1px rgba(245,209,138,.5),0 24px 60px rgba(200,145,63,.3)}
+.gg-lp .plan.waarde{border-color:rgba(245,209,138,.45);box-shadow:0 18px 46px rgba(0,0,0,.4)}
+.gg-lp .plan-lint{position:absolute;top:16px;left:50%;transform:translateX(-50%);z-index:3;
+  background:#141312;color:var(--gold);font-size:10.5px;font-weight:800;letter-spacing:.14em;
+  text-transform:uppercase;padding:7px 16px;border-radius:100px;white-space:nowrap}
+.gg-lp .plan-lint.lijn{background:transparent;border:1px solid rgba(245,209,138,.55)}
+.gg-lp .plan-strik{position:absolute;top:0;right:0;width:96px;height:96px;z-index:2;pointer-events:none;
+  background:radial-gradient(circle at 78% 22%,rgba(245,209,138,.55) 0 12%,transparent 13%),
+             linear-gradient(225deg,rgba(245,209,138,.9) 0 34%,transparent 35%)}
 .gg-lp .plan-beeld{background:#FFFFFF;padding:24px 20px 16px;display:grid;place-items:center}
-.gg-lp .plan-beeld img{width:100%;max-width:300px;aspect-ratio:1/1;object-fit:contain}
-.gg-lp .plan-body{display:flex;flex-direction:column;gap:13px;padding:22px 24px 26px;text-align:center}
+.gg-lp .plan-beeld.gloed{background:radial-gradient(ellipse at 50% 55%,rgba(245,209,138,.18) 0%,#050505 64%)}
+.gg-lp .plan-beeld img{width:100%;max-width:270px;aspect-ratio:1/1;object-fit:contain}
+.gg-lp .plan-body{display:flex;flex-direction:column;gap:13px;padding:22px 24px 26px;flex:1;text-align:center}
 .gg-lp .plan-naam{font-size:16px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
 .gg-lp .plan-prijs{display:flex;align-items:baseline;justify-content:center;gap:10px;flex-wrap:wrap}
 .gg-lp .plan-nu{font-size:36px;font-weight:900;letter-spacing:-.03em;line-height:1}
 .gg-lp .plan-was{font-size:13.5px;text-decoration:line-through;color:rgba(255,255,255,.42)}
+.gg-lp .plan.top .plan-was{color:rgba(20,16,8,.5)}
+.gg-lp .plan.top .plan-bespaar{color:#5E4210;border-color:rgba(20,16,8,.3)}
+.gg-lp .plan.top .plan-eyebrow{color:#5E4210;border-top-color:rgba(20,16,8,.22)}
+.gg-lp .plan.top .plan-lijst li{color:rgba(20,16,8,.88)}
+.gg-lp .plan.top .plan-lijst .v{color:#141008}
 .gg-lp .plan-bespaar{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
   color:var(--gold);border:1px solid rgba(245,209,138,.4);border-radius:100px;padding:4px 11px}
 .gg-lp .plan-eyebrow{font-size:10.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
@@ -235,11 +255,55 @@ html{scroll-behavior:smooth}
   color:rgba(255,255,255,.85)}
 .gg-lp .plan-lijst .v{flex-shrink:0;width:19px;height:19px;color:var(--gold);margin-top:2px}
 .gg-lp .plan-lijst .v svg{width:19px;height:19px;display:block}
-.gg-lp .plan-knop{margin-top:6px;display:block;text-align:center;text-decoration:none;
-  border-radius:100px;padding:16px 20px;font-size:13.5px;font-weight:800;letter-spacing:.05em;
-  text-transform:uppercase;background:var(--grad-gold);color:#141008;
-  transition:filter .18s ease,transform .18s ease}
-.gg-lp .plan-knop:hover{filter:brightness(1.05);transform:translateY(-1px)}
+.gg-lp .plan-knop{margin-top:auto;display:block;text-align:center;text-decoration:none;
+  border-radius:100px;padding:15px 20px;font-size:13px;font-weight:800;letter-spacing:.05em;
+  text-transform:uppercase;transition:filter .18s ease,background .18s ease,transform .18s ease}
+.gg-lp .plan-knop:hover{transform:translateY(-1px)}
+.gg-lp .plan-knop.lijn{border:1px solid rgba(245,209,138,.55);color:var(--gold);background:transparent}
+.gg-lp .plan-knop.lijn:hover{background:rgba(245,209,138,.12)}
+.gg-lp .plan-knop.vol-donker{background:#141312;color:#fff}
+.gg-lp .plan-knop.vol-donker:hover{background:#000}
+.gg-lp .plan-knop.vol-goud{background:var(--grad-gold);color:#141008}
+.gg-lp .plan-knop.vol-goud:hover{filter:brightness(1.05)}
+
+/* aanbodstrook: het aanbod onderweg, niet alleen onderaan */
+.gg-lp .strip{max-width:var(--rail);margin:0 auto;padding:0 24px}
+.gg-lp .strip-in{display:flex;align-items:center;gap:20px;border-radius:var(--r-l);
+  padding:18px 22px;flex-wrap:wrap}
+.gg-lp .strip.licht .strip-in{background:var(--paper);border:1px solid var(--ink-10);
+  box-shadow:0 14px 34px rgba(17,17,17,.07)}
+.gg-lp .strip.donker .strip-in{background:var(--grad-dark);color:#fff;
+  box-shadow:0 18px 44px rgba(0,0,0,.28)}
+.gg-lp .strip-beeld{width:66px;height:66px;border-radius:14px;background:var(--sand);
+  display:grid;place-items:center;flex-shrink:0;padding:6px}
+.gg-lp .strip.donker .strip-beeld{background:rgba(255,255,255,.07)}
+.gg-lp .strip-beeld img{width:100%;height:100%;object-fit:contain}
+.gg-lp .strip-tx{flex:1 1 220px;min-width:0}
+.gg-lp .strip-tx b{display:block;font-size:15.5px;font-weight:800;letter-spacing:-.01em;line-height:1.3}
+.gg-lp .strip-tx span{display:block;font-size:13.5px;line-height:1.55;color:var(--ink-60);margin-top:3px}
+.gg-lp .strip.donker .strip-tx span{color:rgba(255,255,255,.65)}
+.gg-lp .strip-prijs{font-size:15px;font-weight:800;white-space:nowrap}
+.gg-lp .strip-prijs s{font-weight:600;color:var(--ink-40);margin-left:7px;font-size:13px}
+.gg-lp .strip.donker .strip-prijs s{color:rgba(255,255,255,.4)}
+.gg-lp .strip .knop{padding:14px 24px;font-size:13.5px}
+
+/* verlangen */
+.gg-lp .verlangen{max-width:var(--rail);margin:70px auto;padding:0 24px;
+  display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+.gg-lp .verlangen img{width:100%;border-radius:var(--r-l);box-shadow:0 20px 48px rgba(17,17,17,.16)}
+.gg-lp .verlangen p{margin-top:16px;font-size:16.5px;line-height:1.78;color:var(--ink-80)}
+
+/* vaste balk onderaan */
+.gg-lp .stickybar{position:fixed;left:0;right:0;bottom:0;z-index:70;background:rgba(20,19,18,.96);
+  backdrop-filter:blur(10px);border-top:1px solid rgba(245,209,138,.25);
+  transition:transform .25s ease,opacity .25s ease}
+.gg-lp .stickybar.weg{transform:translateY(110%);opacity:0;pointer-events:none}
+.gg-lp .stickybar-in{max-width:var(--rail);margin:0 auto;padding:11px 20px;display:flex;
+  align-items:center;justify-content:space-between;gap:14px}
+.gg-lp .stickybar-tx{color:#fff;font-size:13px;font-weight:700;line-height:1.35;min-width:0}
+.gg-lp .stickybar-tx span{display:block;font-size:11.5px;font-weight:600;color:rgba(255,255,255,.55);margin-top:2px}
+.gg-lp .stickybar .knop{padding:12px 22px;font-size:13px;white-space:nowrap}
+.gg-lp{padding-bottom:72px}
 .gg-lp .assure{max-width:var(--rail);margin:30px auto 0;padding:0 24px;display:flex;flex-wrap:wrap;
   justify-content:center;gap:10px 26px;font-size:11px;font-weight:800;letter-spacing:.1em;
   text-transform:uppercase;color:rgba(255,255,255,.5)}
@@ -255,6 +319,9 @@ html{scroll-behavior:smooth}
 
 /* responsief */
 @media(max-width:980px){
+  .gg-lp .plannen{grid-template-columns:1fr;max-width:460px}
+  .gg-lp .plan-lint{left:20px;transform:none}
+  .gg-lp .verlangen{grid-template-columns:1fr;gap:26px}
   .gg-lp .hero-in{grid-template-columns:1fr;gap:34px}
   .gg-lp .hero{padding:40px 0 46px}
   .gg-lp .mech-in,.gg-lp .tintkop{grid-template-columns:1fr;gap:26px}
@@ -269,6 +336,14 @@ html{scroll-behavior:smooth}
   .gg-lp .tinten{padding:52px 0;margin-top:44px}
   .gg-lp .mech{padding:58px 0}
 }
+@media(max-width:640px){
+  .gg-lp .strip-in{gap:14px}
+  .gg-lp .strip-tx{flex-basis:100%;order:2}
+  .gg-lp .strip-beeld{order:1}
+  .gg-lp .strip-prijs{order:3}
+  .gg-lp .strip .knop{order:4;flex:1 1 auto;justify-content:center}
+  .gg-lp .stickybar-tx span{display:none}
+}
 @media(max-width:520px){
   .gg-lp .strook-in{grid-template-columns:1fr}
   .gg-lp .strook-item + .strook-item{border-left:0;border-top:1px solid var(--ink-10)}
@@ -277,7 +352,7 @@ html{scroll-behavior:smooth}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .gg-lp .knop,.gg-lp .plan-knop{transition:none}
+  .gg-lp .knop,.gg-lp .plan-knop,.gg-lp .stickybar{transition:none}
 }
 </style>
 </head>
@@ -352,6 +427,10 @@ html{scroll-behavior:smooth}
       <p>Het lag niet aan jouw techniek. Het lag aan gereedschap dat voor een heel ander stuk huid is gemaakt.</p>
     </div>
   </div>
+  <figure class="artfig">
+    <img src="https://wellshave.com/cdn/shop/files/ws-gg-oude-tools.jpg?v=1788438524&amp;width=1200" alt="Een gebruikt wegwerpmesje en een oude baardtrimmer met losse opzetkam op een donkere badkamerbak." loading="lazy" decoding="async">
+    <figcaption>Het gereedschap waarmee de meeste mannen het &eacute;&eacute;n keer proberen. Allebei gemaakt voor een ander stuk huid dan waar ze belanden.</figcaption>
+  </figure>
 </article>
 
 <section class="tinten">
@@ -380,6 +459,13 @@ html{scroll-behavior:smooth}
     </div>
   </div>
 </section>
+
+<section class="strip licht" style="margin:44px auto 0"><div class="strip-in">
+  <span class="strip-beeld"><img src="https://wellshave.com/cdn/shop/files/without_base0001.png?v=1773328246&amp;width=200" alt="" loading="lazy"></span>
+  <span class="strip-tx"><b>Het gereedschap dat hier w&#233;l voor gemaakt is</b><span>Groom Guard, met de kop die het snijvlak van je huid houdt.</span></span>
+  <span class="strip-prijs">Vanaf &euro;44,95 <s>&euro;71,35</s></span>
+  <a class="knop goud" href="#kopen">Bekijk het aanbod</a>
+</div></section>
 
 <section class="mech" id="mechanisme">
   <div class="mech-in">
@@ -420,6 +506,11 @@ html{scroll-behavior:smooth}
     <p>Je hoeft dat niet op ons woord te geloven. Bevalt het niet, dan stuur je hem binnen honderd dagen terug en betalen wij de retour. Dat is niet toevallig zo ruim: dit is een aankoop waarbij je pas na de eerste keer weet of het klopt.</p>
   </div>
 </article>
+
+<section class="strip donker" style="margin:8px auto 0"><div class="strip-in">
+  <span class="strip-tx"><b>Honderd dagen om te kijken of het klopt</b><span>Bevalt het niet, dan sturen wij het retourlabel en betalen wij de retour. Twee jaar garantie op het apparaat.</span></span>
+  <a class="knop goud" href="#kopen">Kies je pakket</a>
+</div></section>
 
 <section class="kenmerken">
   <div class="kenmerk-kop">
@@ -489,34 +580,96 @@ html{scroll-behavior:smooth}
   </details>
 </section>
 
+<section class="verlangen">
+  <div>
+    <img src="https://wellshave.com/cdn/shop/files/ws-gg-shirt-uit.jpg?v=1788438524&amp;width=1200" alt="Man trekt zijn shirt uit in het ochtendlicht van een slaapkamer." loading="lazy" decoding="async">
+  </div>
+  <div>
+    <span class="kicker">Waar het op uitdraait</span>
+    <h2 class="duo">Je trekt je shirt uit<span class="b">en je denkt er niets bij.</span></h2>
+    <p>Dat is het hele punt. Geen kwartslag wegdraaien in de badkamer, geen handdoek erbij pakken, geen moment waarop je nadenkt of het opvalt. Je trekt het gewoon uit.</p>
+    <p>Vijf minuten, om de twee tot drie weken. Dat is wat ertussen zit.</p>
+  </div>
+</section>
+
 <section class="offer" id="kopen">
   <div class="offer-kop">
     <span class="kicker on-dark">Aanbod van de adverteerder</span>
-    <h2 class="duo on-dark">Honderd dagen om te kijken<span class="b">of het klopt.</span></h2>
-    <p>Twee jaar garantie op het apparaat. Honderd dagen om het te proberen: bevalt het niet, dan sturen wij het retourlabel en betalen wij de retour. Je risico is daarmee de moeite van het inpakken.</p>
+    <h2 class="duo on-dark">Drie manieren om te beginnen,<span class="b">honderd dagen om te kijken.</span></h2>
+    <p>Twee jaar garantie op elk apparaat. Honderd dagen om het te proberen: bevalt het niet, dan sturen wij het retourlabel en betalen wij de retour. Je risico is daarmee de moeite van het inpakken.</p>
   </div>
 
-  <div class="plan">
-    <div class="plan-beeld">
-      <img src="https://wellshave.com/cdn/shop/files/basic-shopify-main-68da7fbb8a1bf423c04d5ff4_07d85db5-dd76-4311-90df-3a4d84863347.png?v=1774006995&amp;width=800"
-           alt="De Groom Guard met vier opzetkammen en het oplaadstation." loading="lazy" decoding="async">
-    </div>
-    <div class="plan-body">
-      <span class="plan-naam">Groom Guard&trade;</span>
-      <div class="plan-prijs">
-        <span class="plan-nu">&euro;44,95</span>
-        <span class="plan-was">&euro;71,35</span>
-        <span class="plan-bespaar">Je bespaart &euro;26,40</span>
+  <div class="plannen">
+
+    <div class="plan">
+      <div class="plan-beeld">
+        <img src="https://wellshave.com/cdn/shop/files/basic-shopify-main-68da7fbb8a1bf423c04d5ff4_07d85db5-dd76-4311-90df-3a4d84863347.png?v=1774006995&amp;width=800" alt="De Groom Guard met vier opzetkammen en het oplaadstation." loading="lazy" decoding="async">
       </div>
-      <span class="plan-eyebrow">Het apparaat uit dit stuk</span>
-      <ul class="plan-lijst">
-        <li><span class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg></span>SkinSafe-kop met keramische mesjes achter een meshouder</li>
-        <li><span class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg></span>LED-lamp in de kop en een display met de acculading</li>
-        <li><span class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg></span>Vier opzetkammen: 1,5 / 2,5 / 3,5 / 4,5 mm</li>
-        <li><span class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg></span>Oplaadstation, IPX7 waterdicht, tot 120 minuten gebruik</li>
-      </ul>
-      <a class="plan-knop" href="https://wellshave.com/cart/40343701946411:1">In de winkelwagen &middot; &euro;44,95</a>
+      <div class="plan-body">
+        <span class="plan-naam">Groom Guard&trade;</span>
+        <div class="plan-prijs">
+          <span class="plan-nu">&euro;44,95</span>
+          <span class="plan-was">&euro;71,35</span>
+          <span class="plan-bespaar">&minus; &euro;26,40</span>
+        </div>
+        <span class="plan-eyebrow">Het apparaat uit dit stuk</span>
+        <ul class="plan-lijst">
+          <li><span class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.5l2.5 2.5L16 9.5"></path></svg></span>SkinSafe-kop met keramische mesjes achter een meshouder</li>
+          <li><span class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.5l2.5 2.5L16 9.5"></path></svg></span>LED-lamp in de kop en een display met de acculading</li>
+          <li><span class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.5l2.5 2.5L16 9.5"></path></svg></span>Vier opzetkammen: 1,5 / 2,5 / 3,5 / 4,5 mm</li>
+          <li><span class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.5l2.5 2.5L16 9.5"></path></svg></span>Oplaadstation, IPX7 waterdicht, tot 120 minuten gebruik</li>
+        </ul>
+        <a class="plan-knop lijn" href="https://wellshave.com/cart/40343701946411:1">In de winkelwagen &middot; &euro;44,95</a>
+      </div>
     </div>
+
+    <div class="plan top">
+      <span class="plan-lint">De upgrade</span>
+      <div class="plan-beeld">
+        <img src="https://wellshave.com/cdn/shop/files/basic-shopify-main-68da7fbc8a1bf423c04d5ff8.png?v=1774006995&amp;width=800" alt="De Groom Guard PRO met foil shaver-kop, vier opzetkammen en het oplaadstation." loading="lazy" decoding="async">
+      </div>
+      <div class="plan-body">
+        <span class="plan-naam">Groom Guard&trade; PRO</span>
+        <div class="plan-prijs">
+          <span class="plan-nu">&euro;59,95</span>
+          <span class="plan-was">&euro;85,65</span>
+          <span class="plan-bespaar">&minus; &euro;25,70</span>
+        </div>
+        <span class="plan-eyebrow">Trimmen &eacute;n strak glad afwerken</span>
+        <ul class="plan-lijst">
+          <li><span class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.5l2.5 2.5L16 9.5"></path></svg></span>Alles uit de Groom Guard</li>
+          <li><span class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.5l2.5 2.5L16 9.5"></path></svg></span>Extra foil shaver-kop die de huid daarna glad afwerkt</li>
+          <li><span class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.5l2.5 2.5L16 9.5"></path></svg></span>Zonder de sneetjes en ingegroeide haren van een gewoon mesje</li>
+          <li><span class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.5l2.5 2.5L16 9.5"></path></svg></span>Opladen via USB-C op dezelfde standaard</li>
+        </ul>
+        <a class="plan-knop vol-donker" href="https://wellshave.com/cart/53384928395596:1">In de winkelwagen &middot; &euro;59,95</a>
+      </div>
+    </div>
+
+    <div class="plan waarde">
+      <span class="plan-strik" aria-hidden="true"></span>
+      <span class="plan-lint lijn">Beste waarde</span>
+      <div class="plan-beeld gloed">
+        <img src="https://wellshave.com/cdn/shop/files/Ultimate_2.png?v=1780768133&amp;width=800" alt="Het Shave Package Ultimate met de Groom Guard PRO, de neustrimmer en de toilettas." loading="lazy" decoding="async">
+      </div>
+      <div class="plan-body">
+        <span class="plan-naam">Shave Package Ultimate&trade;</span>
+        <div class="plan-prijs">
+          <span class="plan-nu">&euro;89,95</span>
+          <span class="plan-was">&euro;142,80</span>
+          <span class="plan-bespaar">&minus; &euro;52,85</span>
+        </div>
+        <span class="plan-eyebrow">Van top tot teen, ook onderweg</span>
+        <ul class="plan-lijst">
+          <li><span class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.5l2.5 2.5L16 9.5"></path></svg></span>Alles uit de Groom Guard PRO</li>
+          <li><span class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.5l2.5 2.5L16 9.5"></path></svg></span>Neustrimmer Advance 3-in-1 voor neus, oren en detailzones</li>
+          <li><span class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.5l2.5 2.5L16 9.5"></path></svg></span>Luxe toilettas en reistas</li>
+          <li><span class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.5l2.5 2.5L16 9.5"></path></svg></span>Een extra SkinSafe-mes erbij</li>
+        </ul>
+        <a class="plan-knop vol-goud" href="https://wellshave.com/cart/53414664929612:1">In de winkelwagen &middot; &euro;89,95</a>
+      </div>
+    </div>
+
   </div>
 
   <div class="assure">
@@ -535,6 +688,24 @@ html{scroll-behavior:smooth}
   <div>Advertorial &middot; Lichaamsverzorging</div>
 </footer>
 
+<div class="stickybar" id="ws-stickybar">
+  <div class="stickybar-in">
+    <span class="stickybar-tx">Vanaf &euro;44,95<span>Groom Guard &middot; 100 dagen proberen</span></span>
+    <a class="knop goud" href="#kopen">Bekijk het aanbod</a>
+  </div>
 </div>
+
+</div>
+
+<script>
+(function(){
+  var balk=document.getElementById('ws-stickybar');
+  var aanbod=document.getElementById('kopen');
+  if(!balk||!aanbod||!('IntersectionObserver' in window))return;
+  new IntersectionObserver(function(e){
+    balk.classList.toggle('weg', e[0].isIntersecting);
+  },{rootMargin:'0px 0px -25% 0px'}).observe(aanbod);
+})();
+</script>
 </body>
 </html>
