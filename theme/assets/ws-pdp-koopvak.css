@@ -274,17 +274,20 @@
 .ws-pdp .ws-kies{margin-top:13px}
 .ws-pdp .ws-kies-lijst{display:grid;grid-template-columns:1fr 1fr;gap:9px;
   list-style:none;margin:0;padding:0}
-.ws-pdp .ws-kies-kaart{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr);
-  gap:11px;align-items:center;min-width:0;
-  padding:11px 12px;border-radius:13px;background:var(--ws-kaart);
+.ws-pdp .ws-kies-kaart{position:relative;min-width:0;border-radius:13px;background:var(--ws-kaart);
   border:1px solid rgba(20,18,15,.13);transition:border-color .18s,box-shadow .18s}
 .ws-pdp .ws-kies-top{order:2}
-.ws-pdp .ws-kies-dit{border-color:var(--ws-ink);border-width:1.5px;padding:10.5px 11.5px}
+.ws-pdp .ws-kies-dit{border-color:var(--ws-ink);border-width:1.5px}
 .ws-pdp .ws-kies-kaart:not(.ws-kies-dit):hover{border-color:rgba(20,18,15,.30);
   box-shadow:0 2px 12px -6px rgba(20,18,15,.28)}
-.ws-pdp .ws-kies-kaart:has(.ws-kies-vlak:focus-visible){outline:2px solid var(--ws-tekstgoud);outline-offset:2px}
-/* de link legt zich over de hele kaart, zodat de tekst geen los klikdoel wordt */
-.ws-pdp .ws-kies-vlak{position:absolute;inset:0;border-radius:13px;z-index:2}
+/* De link draagt de inhoud en ligt er niet als leeg vlak overheen: het thema
+   verbergt lege ankers (a:empty{display:none} in de reset). Zo is de hele
+   kaart één klikdoel en heeft de link meteen een naam. */
+.ws-pdp .ws-kies-in{display:grid;grid-template-columns:auto minmax(0,1fr);gap:11px;
+  align-items:center;min-width:0;padding:11px 12px;border-radius:13px;
+  color:inherit;text-decoration:none}
+.ws-pdp .ws-kies-dit .ws-kies-in{padding:10.5px 11.5px}
+.ws-pdp .ws-kies-in:focus-visible{outline:2px solid var(--ws-tekstgoud);outline-offset:2px}
 .ws-pdp .ws-kies-beeld{width:38px;height:38px;flex:none;border-radius:9px;overflow:hidden;
   background:var(--ws-cream2);display:grid;place-items:center}
 .ws-pdp .ws-kies-beeld img{width:100%;height:100%;object-fit:contain;display:block}
@@ -314,8 +317,8 @@
    elkaar blijven ze wel staan, want dat is het hele idee. */
 @media screen and (max-width:749px){
   .ws-pdp .ws-kies-lijst{gap:8px}
-  .ws-pdp .ws-kies-kaart{grid-template-columns:minmax(0,1fr);gap:0;padding:10px 11px}
-  .ws-pdp .ws-kies-dit{padding:9.5px 10.5px}
+  .ws-pdp .ws-kies-in{grid-template-columns:minmax(0,1fr);gap:0;padding:10px 11px}
+  .ws-pdp .ws-kies-dit .ws-kies-in{padding:9.5px 10.5px}
   .ws-pdp .ws-kies-beeld{display:none}
   .ws-pdp .ws-kies-vlag{font-size:8px;padding:2px 5px;letter-spacing:.06em;margin-bottom:5px}
   .ws-pdp .ws-kies-naam{font-size:13px}
@@ -435,7 +438,7 @@
 /* Drie kolommen van 110 pixels laten geen productnaam heel, dus daar wordt
    het een lijst: foto links, naam en prijs in het midden, plaatje rechts. */
 @media screen and (max-width:749px){
-  .ws-pdp .ws-bb > .ws-cad{order:9}
+  .ws-pdp .ws-bb > .ws-cad{order:10}
   .ws-pdp .ws-cad{padding:10px 10px 9px;border-radius:13px}
   .ws-pdp .ws-cad-top{margin-bottom:7px;gap:8px}
   .ws-pdp .ws-cad-ic{width:25px;height:25px}
@@ -545,22 +548,22 @@
      rechts, zodat hij langs de regeleinden loopt in plaats van erdoor. */
   .ws-pdp .ws-bb .ws-strepen{right:-8%;top:-6%;width:56%;height:112%;opacity:.30}
   .ws-pdp .ws-bb > .ws-pil{order:1}
-  .ws-pdp .ws-bb > .ws-h1{order:2}
-  .ws-pdp .ws-bb > .ws-sub{order:3}
-  .ws-pdp .ws-bb > .ws-lead{order:4}
-  .ws-pdp .ws-bb > [id^="ProductPrice-"]{order:5}
-  .ws-pdp .ws-bb > .ws-opties{order:6}
-  .ws-pdp .ws-bb > .ws-usp{order:7}
-  .ws-pdp .ws-bb > .ws-vrd{order:12}
-  .ws-pdp .ws-bb > .ws-gift{order:8}
-  .ws-pdp .ws-bb > .ws-vorm{order:11}
-  .ws-pdp .ws-bb > .ws-apps{order:14}
-  .ws-pdp .ws-bb > .ws-pay{order:13}
+  .ws-pdp .ws-bb > .ws-tp{order:2}
+  .ws-pdp .ws-bb > .ws-h1{order:3}
+  .ws-pdp .ws-bb > .ws-sub{order:4}
+  .ws-pdp .ws-bb > .ws-lead{order:5}
+  .ws-pdp .ws-bb > [id^="ProductPrice-"]{order:6}
+  .ws-pdp .ws-bb > .ws-opties{order:7}
+  .ws-pdp .ws-bb > .ws-usp{order:8}
+  .ws-pdp .ws-bb > .ws-vrd{order:13}
+  .ws-pdp .ws-bb > .ws-gift{order:9}
+  .ws-pdp .ws-bb > .ws-vorm{order:12}
+  .ws-pdp .ws-bb > .ws-apps{order:15}
+  .ws-pdp .ws-bb > .ws-pay{order:14}
   .ws-pdp .ws-bb > .ws-cta2,
-  .ws-pdp .ws-bb > .ws-kies{order:10}
-  .ws-pdp .ws-bb > .ws-rev{order:15;margin-top:16px;padding-top:16px;border-top:1px solid var(--ws-lijn)}
-  .ws-pdp .ws-bb > .ws-tel{order:16}
-  .ws-pdp .ws-bb > .ws-tp{order:17}
+  .ws-pdp .ws-bb > .ws-kies{order:11}
+  .ws-pdp .ws-bb > .ws-rev{order:16;margin-top:16px;padding-top:16px;border-top:1px solid var(--ws-lijn)}
+  .ws-pdp .ws-bb > .ws-tel{order:17}
   .ws-pdp .ws-bb > .ws-acc{order:18}
 
   /* de gouden balk over de volle breedte: naam links, korting rechts */

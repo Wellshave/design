@@ -174,42 +174,20 @@
         {%- endif -%}
 
 
+        {%- if s.tp_tonen -%}
+          <div class="ws-tp">
+            <span class="ws-st">
+              {%- for i in (1..5) -%}<i><svg><use href="#ws-pdp-ster-{{ section.id }}"/></svg></i>{%- endfor -%}
+            </span>
+            {%- if s.tp_label != blank -%}<span class="ws-lb">{{ s.tp_label }}</span>{%- endif -%}
+            {%- if s.tp_cijfer != blank -%}<span class="ws-cf">&middot; {{ s.tp_cijfer }}</span>{%- endif -%}
+            {%- if tp_aantal != blank -%}<span class="ws-sc">{{ tp_aantal }}</span>{%- endif -%}
+          </div>
+        {%- endif -%}
         <div class="ws-h1">{{ product.title }}</div>
         {%- if belofte != blank -%}<div class="ws-sub">{{ belofte }}</div>{%- endif -%}
         {%- if lead != blank -%}<p class="ws-lead">{{ lead }}</p>{%- endif -%}
 
-        {%- if citaat != blank -%}
-          <div class="ws-rev">
-            {%- comment -%}
-              Rechtsboven de weg naar alle reviews, onderin de naam met het
-              vinkje ernaast. Eerst stond het vinkje rechtsboven; die plek is
-              meer waard als uitgang dan als keurmerk, en het vinkje hoort
-              toch bij de persoon.
-            {%- endcomment -%}
-            <div class="ws-kop">
-              <span class="ws-lk">
-                <span class="ws-st">
-                  {%- for i in (1..5) -%}<i><svg><use href="#ws-pdp-ster-{{ section.id }}"/></svg></i>{%- endfor -%}
-                </span>
-                <b>{{ s.tp_bron }}</b>
-              </span>
-              {%- if s.rev_alle_label != blank and s.rev_alle_url != blank -%}
-                <a class="ws-alle" href="{{ s.rev_alle_url }}" target="_blank" rel="noopener nofollow">
-                  {{ s.rev_alle_label }} <span aria-hidden="true">&rarr;</span>
-                </a>
-              {%- endif -%}
-            </div>
-            <q>{{ citaat }}</q>
-            {%- if citaat_wie != blank or s.koper_label != blank -%}
-              <div class="ws-voet">
-                {%- if citaat_wie != blank -%}<span class="ws-wie"><b>{{ citaat_wie }}</b></span>{%- endif -%}
-                {%- if s.koper_label != blank -%}
-                  <span class="ws-ok"><svg><use href="#ws-pdp-ok-{{ section.id }}"/></svg>{{ s.koper_label }}</span>
-                {%- endif -%}
-              </div>
-            {%- endif -%}
-          </div>
-        {%- endif -%}
 
         <div id="ProductPrice-{{ section.id }}">
           {%- comment -%}
@@ -486,12 +464,15 @@
                   assign kbeeld = ki.popup_image | default: kp.featured_image
                   assign knaam = ki.toggle_title | default: kp.title
                 -%}
-                <li class="ws-kies-kaart{% if kv.price == kies_hoogste %} ws-kies-top{% endif %}{% if dit %} ws-kies-dit{% endif %}">
-                  {%- comment -%}
-                    Het hele vlak is de link, behalve op de kaart waar je al
-                    staat: die is geen link, want er valt niets te openen.
-                  {%- endcomment -%}
-                  {%- unless dit -%}<a class="ws-kies-vlak" href="{{ kp.url }}" aria-label="{{ knaam | escape }}"></a>{%- endunless -%}
+                {%- comment -%}
+                  De link draagt de inhoud en ligt er niet als leeg vlak
+                  overheen. Dat laatste werkte niet: het thema heeft in zijn
+                  reset a:empty{display:none}, dus een leeg klikvlak wordt
+                  verborgen. Onzichtbaar en onklikbaar, zonder foutmelding.
+                  Met de inhoud erin heeft de link meteen ook een naam voor
+                  wie hem voorgelezen krijgt.
+                {%- endcomment -%}
+                {%- capture kies_binnen -%}
                   {%- if kbeeld != blank -%}
                     <span class="ws-kies-beeld">
                       {{ kbeeld | image_url: width: 160 | image_tag: alt: '', loading: 'lazy', width: 80, height: 80 }}
@@ -508,6 +489,13 @@
                       <span class="ws-kies-sub">{{ ki.toggle_subtitle }}</span>
                     {%- endif -%}
                   </span>
+                {%- endcapture -%}
+                <li class="ws-kies-kaart{% if kv.price == kies_hoogste %} ws-kies-top{% endif %}{% if dit %} ws-kies-dit{% endif %}">
+                  {%- if dit -%}
+                    <span class="ws-kies-in">{{ kies_binnen }}</span>
+                  {%- else -%}
+                    <a class="ws-kies-in" href="{{ kp.url }}">{{ kies_binnen }}</a>
+                  {%- endif -%}
                 </li>
               {%- endfor -%}
             </ul>
@@ -566,6 +554,39 @@
         {%- endif -%}
 
 
+        {%- if citaat != blank -%}
+          <div class="ws-rev">
+            {%- comment -%}
+              Rechtsboven de weg naar alle reviews, onderin de naam met het
+              vinkje ernaast. Eerst stond het vinkje rechtsboven; die plek is
+              meer waard als uitgang dan als keurmerk, en het vinkje hoort
+              toch bij de persoon.
+            {%- endcomment -%}
+            <div class="ws-kop">
+              <span class="ws-lk">
+                <span class="ws-st">
+                  {%- for i in (1..5) -%}<i><svg><use href="#ws-pdp-ster-{{ section.id }}"/></svg></i>{%- endfor -%}
+                </span>
+                <b>{{ s.tp_bron }}</b>
+              </span>
+              {%- if s.rev_alle_label != blank and s.rev_alle_url != blank -%}
+                <a class="ws-alle" href="{{ s.rev_alle_url }}" target="_blank" rel="noopener nofollow">
+                  {{ s.rev_alle_label }} <span aria-hidden="true">&rarr;</span>
+                </a>
+              {%- endif -%}
+            </div>
+            <q>{{ citaat }}</q>
+            {%- if citaat_wie != blank or s.koper_label != blank -%}
+              <div class="ws-voet">
+                {%- if citaat_wie != blank -%}<span class="ws-wie"><b>{{ citaat_wie }}</b></span>{%- endif -%}
+                {%- if s.koper_label != blank -%}
+                  <span class="ws-ok"><svg><use href="#ws-pdp-ok-{{ section.id }}"/></svg>{{ s.koper_label }}</span>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
         {%- if s.tel_waarde != blank -%}
           <p class="ws-tel">
             <svg><use href="#ws-pdp-mensen-{{ section.id }}"/></svg>
@@ -573,16 +594,6 @@
           </p>
         {%- endif -%}
 
-        {%- if s.tp_tonen -%}
-          <div class="ws-tp">
-            <span class="ws-st">
-              {%- for i in (1..5) -%}<i><svg><use href="#ws-pdp-ster-{{ section.id }}"/></svg></i>{%- endfor -%}
-            </span>
-            {%- if s.tp_label != blank -%}<span class="ws-lb">{{ s.tp_label }}</span>{%- endif -%}
-            {%- if s.tp_cijfer != blank -%}<span class="ws-cf">&middot; {{ s.tp_cijfer }}</span>{%- endif -%}
-            {%- if tp_aantal != blank -%}<span class="ws-sc">{{ tp_aantal }}</span>{%- endif -%}
-          </div>
-        {%- endif -%}
 
         {%- comment -%} ---------- de vier accordeons ---------- {%- endcomment -%}
         <div class="ws-acc">
