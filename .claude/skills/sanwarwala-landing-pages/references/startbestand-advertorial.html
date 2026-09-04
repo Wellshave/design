@@ -114,9 +114,6 @@ a{color:inherit}
 .hero-assure li{font-size:12.5px;font-weight:600;color:var(--ink-60);position:relative;padding-left:16px}
 .hero-assure li::before{content:"";position:absolute;left:0;top:7px;width:8px;height:8px;
   border-radius:50%;background:var(--bronze)}
-.hero-badge{display:inline-flex;align-items:center;gap:9px;margin-top:22px;background:var(--paper);
-  border:1px solid var(--ink-10);border-radius:100px;padding:9px 17px;font-size:12.5px;font-weight:600}
-.hero-badge b{color:var(--bronze);font-weight:800}
 .hero-art{align-self:end;padding-bottom:34px}
 .hero-art .plaat{background:var(--grad-dark);border-radius:var(--r-l);padding:16px;
   box-shadow:0 26px 60px rgba(17,17,17,.24)}
@@ -374,6 +371,34 @@ a{color:inherit}
 .proof{padding:74px 0;text-align:center;background:var(--paper)}
 .proof > .wrap > h2{margin-bottom:10px}
 .proof .sub{color:var(--ink-60);margin-bottom:32px;font-size:15px}
+/* Trustpilot-merkteken: het woord dat Trustpilot zelf aan de score hangt (starsString
+   uit de widget-data), de score, en de groene ster met het woordmerk. Een kaal cijfer
+   leest als een cijfer; dit leest als een oordeel. Zie merklaag deel 15b. */
+.tp-merk{display:inline-flex;align-items:center;justify-content:center;flex-wrap:wrap;
+  gap:5px 10px;font-size:14px;line-height:1.3;color:var(--ink);text-decoration:none}
+.tp-merk .tp-oordeel{font-weight:800;letter-spacing:-.01em;white-space:nowrap}
+.tp-merk .tp-cijfer{font-weight:500;color:var(--ink-60);white-space:nowrap}
+.tp-merk .tp-cijfer b{font-weight:800;color:var(--ink);font-size:15px}
+.tp-merk .tp-naam{display:inline-flex;align-items:center;gap:5px;font-weight:800;
+  letter-spacing:-.02em;white-space:nowrap}
+.tp-ster{width:16px;height:16px;flex-shrink:0;color:#00B67A}
+.tp-merk.on-dark{color:#fff}
+.tp-merk.on-dark .tp-cijfer{color:rgba(255,255,255,.62)}
+.tp-merk.on-dark .tp-cijfer b{color:#fff}
+a.tp-merk:hover .tp-naam{text-decoration:underline;text-underline-offset:3px}
+
+/* de smalle balk onder de hero */
+.tp-balk{background:var(--paper);border-bottom:1px solid var(--ink-10);text-align:center}
+.tp-balk-in{max-width:var(--rail);margin:0 auto;padding:14px 24px}
+.tp-noot{display:block;max-width:44ch;margin:5px auto 0;font-size:10.5px;font-weight:500;
+  line-height:1.5;color:var(--ink-40)}
+.tp-carrousel .tp-merk{margin-top:16px}
+@media(max-width:520px){
+  .tp-merk{font-size:13px;gap:4px 8px}
+  .tp-merk .tp-cijfer b{font-size:14px}
+  .tp-balk-in{padding:12px 20px}
+}
+
 .tp-summary{display:flex;align-items:center;justify-content:center;gap:22px;flex-wrap:wrap;margin:0 0 28px}
 .tp-score{display:flex;align-items:center;gap:12px}
 .tp-num{font-size:30px;font-weight:900;letter-spacing:-.02em}
@@ -403,8 +428,6 @@ a{color:inherit}
   border:1px solid #00875A;border-radius:3px;padding:1px 6px;white-space:nowrap}
 .rev-title{font-size:15px;font-weight:700;margin-bottom:7px;line-height:1.35}
 .rev-body{font-size:14px;line-height:1.6;color:var(--ink-80)}
-.tp-link{display:inline-block;margin-top:18px;font-size:13.5px;font-weight:700;color:#00B67A;
-  text-decoration:underline;text-underline-offset:3px}
 
 
 .bron-scheiding{width:1px;height:38px;background:var(--ink-10);flex-shrink:0}
@@ -617,7 +640,6 @@ footer .logo{display:block;margin-bottom:8px;color:var(--ink)}
         <li>[Garantie]</li>
         <li>[Verzending]</li>
       </ul>
-      <span class="hero-badge"><b>[score]</b> uit [aantal] reviews op Trustpilot</span>
     </div>
     <div class="hero-art">
       <div class="plaat">
@@ -627,6 +649,14 @@ footer .logo{display:block;margin-bottom:8px;color:var(--ink)}
     </div>
   </div>
 </header>
+
+<!-- Trustpilot-merkteken onder de hero. Het oordeel is het woord dat Trustpilot zelf
+     aan de score hangt: haal het uit starsString van de widget-data, verzin het niet.
+     De noot eronder zegt waar het cijfer over gaat; laat die niet weg. -->
+<div class="tp-balk"><div class="tp-balk-in">
+  <span class="tp-merk"><span class="tp-oordeel">[oordeel van Trustpilot]</span><span class="tp-cijfer"><b>[score]</b> uit 5</span><span class="tp-naam"><svg class="tp-ster" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.6l3.09 6.67 7.31 .95-5.4 5.02 1.4 7.24L12 17.93 5.6 21.48l1.4-7.24-5.4-5.02 7.31-.95z"/></svg>Trustpilot</span></span>
+  <span class="tp-noot">[Aantal] beoordelingen van Wellshave, over het hele assortiment en niet alleen over dit product</span>
+</div></div>
 
 <!-- ============ GERUSTSTROOK ============ vier items, iconen zijn dunne lijntekeningen -->
 <div class="strook">
@@ -869,7 +899,7 @@ footer .logo{display:block;margin-bottom:8px;color:var(--ink)}
             <span class="tp-count">[aantal] beoordelingen</span>
           </div>
         </div>
-        <a class="tp-link" href="https://nl.trustpilot.com/review/wellshave.nl" target="_blank" rel="noopener">Lees de beoordelingen op Trustpilot</a>
+        <a class="tp-merk" href="https://nl.trustpilot.com/review/wellshave.nl" target="_blank" rel="noopener"><span class="tp-oordeel">[oordeel van Trustpilot]</span><span class="tp-cijfer"><b>[score]</b> uit 5</span><span class="tp-naam"><svg class="tp-ster" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.6l3.09 6.67 7.31 .95-5.4 5.02 1.4 7.24L12 17.93 5.6 21.48l1.4-7.24-5.4-5.02 7.31-.95z"/></svg>Trustpilot</span></a>
       </div>
     </div>
     <p class="tp-voet">De carrousel toont beoordelingen van vier en vijf sterren in het Nederlands. De score van [score] gaat over alle beoordelingen van Wellshave, dus ook de lagere.</p>

@@ -6,8 +6,8 @@
 - **Page ID:** `gid://shopify/Page/734955241804`
 - **Handle:** `ze-zegt-er-niets-van-b`
 - **Bron in deze repo:** `groom-guard-ze-zegt-er-niets-van-b.html`
-- **Stylesheet:** `https://cdn.shopify.com/s/files/1/0573/5743/4923/files/ws-gg-variant-b-4.css`
-  (versies 1 tot en met 3 staan er nog, maar worden niet meer gebruikt)
+- **Stylesheet:** `https://cdn.shopify.com/s/files/1/0573/5743/4923/files/ws-gg-variant-b-5.css`
+  (versies 1 tot en met 4 staan er nog, maar worden niet meer gebruikt)
 
 De pagina draait binnen het themasjabloon. Ten opzichte van het bestand in deze
 repo zijn drie dingen anders, en dat is bewust:
@@ -25,6 +25,24 @@ repo zijn drie dingen anders, en dat is bewust:
 Pas het bestand in deze repo aan, bouw daarna de themaversie opnieuw en upload
 de stylesheet **onder een nieuwe naam** (`-2`, `-3`); een bestaande naam
 overschrijven levert cachegedoe op. Werk daarna de `<link>` in de pagina bij.
+
+## Het Trustpilot-merkteken
+
+Onder de hero staat een smalle balk met **Uitstekend &middot; 4,4 uit 5 &middot; groene ster
+Trustpilot**, en daaronder klein waar dat cijfer over gaat. Die vorm verving de regel
+"4,4 uit ruim 1.000 Trustpilot-beoordelingen van Wellshave", die waar was en niets zei.
+
+- **Uitstekend is niet ons woord.** Het komt uit `starsString` van de widget-data, in de
+  locale die je opvraagt. Verandert de score van band, dan verandert dat woord mee: haal
+  het opnieuw op in plaats van het over te typen.
+- **De ster is `#00B67A`,** het groen van Trustpilot. Geen merkgoud eroverheen: het moet
+  er niet van ons uitzien.
+- **De noot eronder blijft staan.** Zonder die regel leest een bedrijfsbrede score als een
+  oordeel over de Groom Guard. In de verantwoording onderaan staat bovendien dat het woord
+  van Trustpilot komt.
+- **Onder de carrousel staat hetzelfde merkteken als link,** maar alleen als terugval: het
+  zit in de widget-div, dus zodra het Trustpilot-script draait vervangt de carrousel het.
+  Dat is de bedoeling; de carrousel heeft zijn eigen merkregel.
 
 ## De Trustpilot-carrousel
 

@@ -697,9 +697,37 @@ thema:
 https://widget.trustpilot.com/trustbox-data/5419b6ffb0d04a076446a9af?businessUnitId=63c511d4e1339e2200c204a1&locale=nl-NL
 ```
 
-Die geeft `stars` (het aantal sterren dat Trustpilot toont), `trustScore` (net iets lager) en
-`numberOfReviews.total`. Schrijf "ruim 950" in plaats van een exact getal: het loopt op, en een
-ondergrens blijft waar.
+Die geeft `stars` (het aantal sterren dat Trustpilot toont), `trustScore` (net iets lager),
+`numberOfReviews.total` en `starsString`: het woord dat Trustpilot zelf aan de score hangt,
+in de taal van de locale. Bij 4,4 is dat **Uitstekend**. Schrijf "ruim 950" in plaats van een
+exact getal: het loopt op, en een ondergrens blijft waar.
+
+### Het Trustpilot-merkteken
+
+Een kaal cijfer leest als een cijfer. `4,4 uit ruim 1.000 beoordelingen` is waar en zegt
+niets; je lezer moet zelf bedenken of dat goed is. Trustpilot heeft dat werk al gedaan en
+er een woord aan gehangen. Zet dat woord vooraan, met de groene ster en het woordmerk
+erachter, en het leest als een oordeel in plaats van als een regel administratie.
+
+```html
+<span class="tp-merk">
+  <span class="tp-oordeel">Uitstekend</span>
+  <span class="tp-cijfer"><b>4,4</b> uit 5</span>
+  <span class="tp-naam">[groene ster]Trustpilot</span>
+</span>
+```
+
+- **Het oordeel komt uit `starsString`, je verzint het niet.** Trustpilot heeft eigen
+  drempels; die verschuiven en het is hun woord over hun cijfer. Haal het op, plak het erin.
+- **De ster is Trustpilot-groen, `#00B67A`,** en de rest van de regel is gewone
+  merktypografie. Geen goud eroverheen: dit onderdeel moet er niet van ons uitzien, want
+  daar zit de waarde in.
+- **Zet er een noot onder waar het cijfer over gaat.** Bedrijfsbreed is geen productcijfer,
+  en zonder die regel leest de score als een oordeel over het apparaat op deze pagina. Klein
+  en licht, zodat het merkteken het beeld houdt.
+- **Twee plekken, niet meer.** Een smalle balk direct onder de hero, en onder de carrousel
+  in het bewijsblok, daar als link naar het profiel. Vaker herhalen maakt het niet
+  geloofwaardiger, alleen luider.
 
 ### De Trustpilot-carrousel
 
