@@ -699,6 +699,56 @@ Die geeft `stars` (het aantal sterren dat Trustpilot toont), `trustScore` (net i
 `numberOfReviews.total`. Schrijf "ruim 950" in plaats van een exact getal: het loopt op, en een
 ondergrens blijft waar.
 
+### De Trustpilot-carrousel
+
+Reviews horen niet met de hand overgetikt op een pagina. Ze verouderen, ze zijn niet te
+controleren en ze kosten je precies de geloofwaardigheid die je ermee wilt kopen. Gebruik
+de live carrousel; hij haalt echte beoordelingen op en loopt vanzelf mee.
+
+```html
+<div class="tp-carrousel">
+  <div class="trustpilot-widget" data-locale="nl-NL"
+       data-template-id="53aa8912dec7e10d38f59f36"
+       data-businessunit-id="63c511d4e1339e2200c204a1"
+       data-style-height="360px" data-style-width="100%"
+       data-token="50740a9d-d5d4-4f3a-ba8c-76687a857f8f"
+       data-stars="4,5" data-review-languages="nl">
+    <!-- terugval: Trustpilot vervangt deze inhoud zodra het script draait -->
+    [statische score + link naar het profiel]
+  </div>
+</div>
+<p class="tp-voet">De carrousel toont beoordelingen van vier en vijf sterren in het
+Nederlands. De score van [score] gaat over alle beoordelingen van Wellshave, dus ook
+de lagere.</p>
+```
+
+Onderaan de pagina, na je eigen scripts:
+
+```html
+<script src="https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
+```
+
+Vier dingen die je niet moet wegoptimaliseren:
+
+- **`data-style-height` in pixels, niet op `100%`.** Bij een percentage moet de container
+  zelf een vaste hoogte hebben; heeft hij die niet, dan klapt de terugval dicht en houd je
+  een leeg gat over. 360px werkt voor de carrousel.
+- **De statische score staat &iacute;n de widget-div als terugval.** Trustpilot vervangt de
+  inhoud van die div zodra het script draait. Wordt het script geblokkeerd, door een
+  adblocker of een strenge CSP, dan staat er nog steeds een score met een link naar het
+  profiel in plaats van niets. Een leeg vak van 360px midden in je bewijsblok is erger dan
+  geen carrousel.
+- **Het filter op vier en vijf sterren benoemen.** Filteren mag en Trustpilot biedt het
+  zelf aan, maar zonder die regel toont de pagina een selectie en claimt hij een
+  gemiddelde. Dat is precies het detail waar een sceptische lezer over struikelt, en het
+  kost je niets om het erbij te zetten.
+- **Het bootstrap-script activeert ook widgets die het thema zelf al in de pagina zet** en
+  die op dat sjabloon niet laadden. Meestal is dat prima, maar kijk na het publiceren
+  even of er niet ergens een tweede blok verschijnt dat je niet had bedacht.
+
+Het aantal beoordelingen schrijf je als ondergrens, want de teller loopt op. Live
+opvragen kan met de businessunit-id hierboven; zie het kopje Trustpilot direct hieronder.
+
 **Interne links.** Controleer elke URL v&oacute;&oacute;r oplevering met een statuscode, niet op
 gevoel. Twee valkuilen die zijn voorgekomen: `/pages/over-ons` bestaat niet meer en leidt naar
 de homepage (de echte pagina is `/pages/over-wellshave`), en `/pages/contact` stuurt door naar

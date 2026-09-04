@@ -408,6 +408,13 @@ a{color:inherit}
 .bron-tx b{color:var(--ink);font-weight:800}
 @media(max-width:640px){.bron-scheiding{display:none}}
 
+/* ---------- trustpilot-carrousel ---------- */
+.tp-carrousel{max-width:var(--rail);margin:0 auto;padding:0 12px;min-height:360px}
+.tp-carrousel .tp-summary{padding-top:28px}
+.tp-voet{max-width:var(--read);margin:18px auto 0;padding:0 24px;font-size:12px;
+  line-height:1.6;color:var(--ink-40);text-align:center}
+.trustpilot-widget iframe{max-width:100%}
+
 /* ---------- faq ---------- */
 .faq{max-width:820px;margin:0 auto;padding:60px 24px 74px}
 .faq h2{margin-bottom:26px}
@@ -609,8 +616,11 @@ footer .logo{display:block;margin-bottom:8px;color:var(--ink)}
   <div class="assure"><span>[Proef]</span><span>[Garantie]</span><span>[Verzending]</span></div>
 </section>
 
-<!-- ============ BEWIJS ============ identiek aan de advertorial -->
-<section class="reveal proof" id="reviews">[reviewblok, zie startbestand-advertorial.html]</section>
+<!-- ============ BEWIJS ============ identiek aan de advertorial: de live
+     Trustpilot-carrousel met de statische score als terugval in de widget-div.
+     Neem het blok over uit startbestand-advertorial.html en vergeet het
+     bootstrap-script onderaan niet. -->
+<section class="reveal proof" id="reviews">[Trustpilot-carrousel, zie startbestand-advertorial.html]</section>
 
 <!-- ============ FAQ ============ -->
 <section class="faq">
@@ -656,5 +666,6 @@ footer .logo{display:block;margin-bottom:8px;color:var(--ink)}
   el.forEach(function(n){ io.observe(n); });
 })();
 </script>
+<script type="text/javascript" src="https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
 </body>
 </html>
