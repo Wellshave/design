@@ -69,21 +69,41 @@
         "klarna_on_site_messaging_app_block_kMpXVH"
       ],
       "settings": {
+        "merk": "shopify://shop_images/ws-mark.png",
+        "tag": "Meest gekozen",
         "pil_label": "",
+        "pil_z": "SUmmer Sale",
         "besparing_regel": "Je bespaart",
+        "munt": "€",
         "tp_tonen": true,
         "tp_label": "Uitstekend",
-        "tp_score": "970+ reviews",
+        "tp_cijfer": "4,4",
+        "tp_score": "1000+ reviews",
         "tp_bron": "Trustpilot",
+        "rev_alle_label": "Alle reviews",
+        "rev_alle_url": "https://nl.trustpilot.com/review/wellshave.nl",
         "koper_label": "Geverifieerde koper",
+        "proberen_label": "100 dagen proberen",
         "citaat": "",
         "citaat_wie": "",
         "gift_titel": "",
         "gift_regel": "Wordt vanzelf meegeleverd",
+        "cad_tonen": true,
+        "cad_ey": "Cadeau bij deze bestelling",
+        "cad_auto": "Automatisch toegevoegd",
+        "cad_kop_na": "aan extra's cadeau",
+        "cad_sub_voor": "Gratis bij de",
+        "cad_chip": "Gratis",
+        "cad_naam_1": "",
+        "cad_naam_2": "",
+        "cad_verzend_tonen": true,
+        "cad_verzend_label": "Gratis verzending",
+        "cad_verzend_cent": 495,
+        "cad_voet": "Geen code of selectie nodig.",
         "knop_label": "In winkelwagen",
+        "knop_uitverkocht": "Uitverkocht",
         "sticky_tonen": true,
         "sticky_knop": "In winkelwagen",
-        "knop_uitverkocht": "Uitverkocht",
         "voorraad_kop": "Op voorraad",
         "voorraad_regel": "vandaag vóór 23:59 besteld, morgen in huis",
         "veilig_label": "Veilig afrekenen",
@@ -97,6 +117,15 @@
         "pop_bestevoor": "Beste voor:",
         "pop_knop": "Kies",
         "pop_inbegrepen": "Inbegrepen",
+        "upg_tonen": true,
+        "upg_ey": "Nog even dit",
+        "upg_kop": "Samen goedkoper dan los kopen",
+        "upg_lead": "De [product] zit er hoe dan ook gewoon bij.",
+        "upg_knop": "Kies deze",
+        "upg_besp": "[bedrag] goedkoper dan los",
+        "upg_enmeer": "en nog [aantal] andere onderdelen",
+        "upg_enmeer1": "en nog één onderdeel",
+        "upg_nee": "Nee dank je, ga verder met de [product]",
         "kies_tonen": true,
         "kies_nu": "Je bekijkt nu",
         "kies_top": "Meest gekozen",
@@ -111,36 +140,19 @@
         "acc3_tekst": "<p>Ma t/m vr vóór 23:59 besteld is morgen in huis. Gratis verzending in Nederland en België vanaf €30; daaronder €4,95. Niet goed? Binnen 100 dagen terug, wij betalen de retour.</p>",
         "acc4_titel": "Garantie en proberen",
         "acc4_tekst": "<p>Twee jaar garantie op elk apparaat. Honderd dagen proberen: bevalt het niet, dan krijg je je geld terug — ook als je hem gebruikt hebt.</p>",
-        "tag": "Meest gekozen",
         "desk_indent_top": 0,
         "desk_indent_bottom": 0,
         "mob_indent_top": 0,
-        "mob_indent_bottom": 0,
-        "rev_alle_label": "Alle reviews",
-        "rev_alle_url": "https://nl.trustpilot.com/review/wellshave.nl",
-        "munt": "€",
-        "tp_cijfer": "4,4",
-        "proberen_label": "100 dagen proberen",
-        "upg_ey": "Nog even dit",
-        "upg_kop": "Samen goedkoper dan los kopen",
-        "upg_lead": "De [product] zit er hoe dan ook gewoon bij.",
-        "upg_knop": "Kies deze",
-        "upg_besp": "[bedrag] goedkoper dan los",
-        "upg_enmeer": "en nog [aantal] andere onderdelen",
-        "upg_enmeer1": "en nog één onderdeel",
-        "upg_nee": "Nee dank je, ga verder met de [product]",
-        "cad_chip": "Gratis",
-        "cad_kop_na": "aan extra's cadeau",
-        "cad_sub_voor": "Gratis bij de",
-        "cad_verzend_tonen": true,
-        "cad_verzend_label": "Gratis verzending",
-        "cad_verzend_cent": 495,
-        "cad_voet": "Geen code of selectie nodig.",
-        "cad_ey": "Cadeau bij deze bestelling",
-        "cad_auto": "Automatisch toegevoegd",
-        "cad_naam_1": "",
-        "cad_naam_2": "",
-        "pil_z": "Bestseller"
+        "mob_indent_bottom": 0
+      }
+    },
+    "belofte": {
+      "type": "ws-pdp-belofte",
+      "settings": {
+        "eyebrow": "Bij elke bestelling",
+        "grond": "#eae4d9",
+        "marge_top": 22,
+        "marge_bot": 22
       }
     },
     "logos": {
@@ -190,7 +202,22 @@
         "desk_indent_top": 60,
         "desk_indent_bottom": 60,
         "mob_indent_top": 24,
-        "mob_indent_bottom": 24
+        "mob_indent_bottom": 24,
+        "grond": "#eae4d9"
+      }
+    },
+    "praktijk": {
+      "type": "ws-pdp-praktijk",
+      "settings": {
+        "eyebrow": "",
+        "kop": "",
+        "telwoorden": "nul,Eén,Twee,Drie,Vier,Vijf,Zes,Zeven,Acht,Negen,Tien",
+        "beeld_links": true,
+        "video_label": "Video",
+        "zand_a": "#ffffff",
+        "zand_b": "#f8f6f2",
+        "marge_top": 40,
+        "marge_bot": 40
       }
     },
     "ss_payment_icons_Qi6V9R": {
@@ -269,6 +296,7 @@
         "item_VUyjY7",
         "item_EK8wX8"
       ],
+      "disabled": true,
       "name": "SS - Payment icons",
       "settings": {
         "payment_position": "below_buy",
@@ -284,8 +312,7 @@
         "mt": 0,
         "mb": 2,
         "bg_color": ""
-      },
-      "disabled": true
+      }
     },
     "product-ugc": {
       "type": "product-ugc",
@@ -301,6 +328,7 @@
     },
     "ugc-videos": {
       "type": "ugc-videos",
+      "disabled": true,
       "settings": {
         "title": "Bekijk Wellshave in actie",
         "get_meta": true,
@@ -308,8 +336,7 @@
         "desk_indent_bottom": 80,
         "mob_indent_top": 40,
         "mob_indent_bottom": 40
-      },
-      "disabled": true
+      }
     },
     "trustpilot_reviews": {
       "type": "trustpilot-reviews",
@@ -335,18 +362,43 @@
         "mob_indent_bottom": 40
       }
     },
+    "ugc": {
+      "type": "ws-pdp-ugc",
+      "settings": {
+        "vertrouwd": "Vertrouwd door 200.000+",
+        "kop": "Geen studio.",
+        "kop2": "Gewoon hun badkamer.",
+        "alle_label": "",
+        "alle_url": "",
+        "koper_label": "Geverifieerde koper",
+        "speel_label": "Speel de video af",
+        "vorige_label": "Vorige video",
+        "volgende_label": "Volgende video",
+        "koop_tonen": true,
+        "koop_regel": "Het apparaat uit deze video’s",
+        "munt": "€",
+        "tp_regel": "4,4 uit 970+ Trustpilot-reviews",
+        "voorraad_label": "Op voorraad",
+        "knop_label": "In winkelwagen",
+        "knop_uitverkocht": "Uitverkocht",
+        "proberen_label": "100 dagen proberen",
+        "marge_top": 28,
+        "marge_bot": 28
+      }
+    },
     "product_media_with_text": {
       "type": "product-media-with-text",
+      "disabled": true,
       "settings": {
         "desk_indent_top": 80,
         "desk_indent_bottom": 80,
         "mob_indent_top": 40,
         "mob_indent_bottom": 40
-      },
-      "disabled": true
+      }
     },
     "compare_table": {
       "type": "compare-table",
+      "disabled": true,
       "settings": {
         "title": "Waarom Wellshave de <em>PERFECTE KEUZE</em> is.",
         "subtitle": "éen tool, geen compromis. Overal.",
@@ -493,66 +545,19 @@
         "loox_reviews_loox_card_carousel_section_FKECQz"
       ],
       "settings": {}
-    },
-    "ugc": {
-      "type": "ws-pdp-ugc",
-      "settings": {
-        "vertrouwd": "Vertrouwd door 200.000+",
-        "kop": "Geen studio.",
-        "kop2": "Gewoon hun badkamer.",
-        "alle_label": "",
-        "alle_url": "",
-        "koper_label": "Geverifieerde koper",
-        "speel_label": "Speel de video af",
-        "vorige_label": "Vorige video",
-        "volgende_label": "Volgende video",
-        "koop_tonen": true,
-        "koop_regel": "Het apparaat uit deze video’s",
-        "tp_regel": "4,4 uit 970+ Trustpilot-reviews",
-        "voorraad_label": "Op voorraad",
-        "knop_label": "In winkelwagen",
-        "knop_uitverkocht": "Uitverkocht",
-        "proberen_label": "100 dagen proberen",
-        "marge_top": 28,
-        "marge_bot": 28,
-        "munt": "€"
-      }
-    },
-    "praktijk": {
-      "type": "ws-pdp-praktijk",
-      "settings": {
-        "eyebrow": "",
-        "kop": "[aantal] momenten. Eén moeiteloze routine.",
-        "beeld_links": true,
-        "video_label": "Video",
-        "marge_top": 40,
-        "marge_bot": 40,
-        "zand_a": "#FFFFFF",
-        "zand_b": "#F8F6F2",
-        "telwoorden": "nul,Eén,Twee,Drie,Vier,Vijf,Zes,Zeven,Acht,Negen,Tien"
-      }
-    },
-    "belofte": {
-      "type": "ws-pdp-belofte",
-      "settings": {
-        "eyebrow": "Bij elke bestelling",
-        "grond": "#EAE4D9",
-        "marge_top": 22,
-        "marge_bot": 22
-      }
     }
   },
   "order": [
     "main",
     "belofte",
     "logos",
+    "praktijk",
     "ss_payment_icons_Qi6V9R",
-    "ugc",
     "product-ugc",
     "ugc-videos",
     "trustpilot_reviews",
     "use_case",
-    "praktijk",
+    "ugc",
     "product_media_with_text",
     "compare_table",
     "whats_included",
