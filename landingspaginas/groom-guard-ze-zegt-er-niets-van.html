@@ -336,6 +336,10 @@ html{scroll-behavior:smooth}
 .gg-lp .assure{max-width:var(--rail);margin:30px auto 0;padding:0 24px;display:flex;flex-wrap:wrap;
   justify-content:center;gap:10px 26px;font-size:11px;font-weight:800;letter-spacing:.1em;
   text-transform:uppercase;color:rgba(255,255,255,.5)}
+/* de maat van het icoon hoort hier, niet alleen in de mobiele regel: zonder maat
+   rekt een svg uit tot zijn eigen standaardformaat en staat de regel scheef */
+.gg-lp .assure span{display:inline-flex;align-items:center;gap:8px;line-height:1.3}
+.gg-lp .assure svg{width:15px;height:15px;flex-shrink:0;color:var(--gold)}
 .gg-lp .offer-note{max-width:640px;margin:20px auto 0;padding:0 24px;text-align:center;
   font-size:12.5px;line-height:1.7;color:rgba(255,255,255,.45)}
 

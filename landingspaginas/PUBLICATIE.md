@@ -6,8 +6,8 @@
 - **Page ID:** `gid://shopify/Page/734955241804`
 - **Handle:** `ze-zegt-er-niets-van-b`
 - **Bron in deze repo:** `groom-guard-ze-zegt-er-niets-van-b.html`
-- **Stylesheet:** `https://cdn.shopify.com/s/files/1/0573/5743/4923/files/ws-gg-variant-b-5.css`
-  (versies 1 tot en met 4 staan er nog, maar worden niet meer gebruikt)
+- **Stylesheet:** `https://cdn.shopify.com/s/files/1/0573/5743/4923/files/ws-gg-variant-b-6.css`
+  (versies 1 tot en met 5 staan er nog, maar worden niet meer gebruikt)
 
 De pagina draait binnen het themasjabloon. Ten opzichte van het bestand in deze
 repo zijn drie dingen anders, en dat is bewust:
@@ -117,6 +117,11 @@ Drie dingen die stuk gaan als je ze aanraakt:
    upload: haal het bestand van de CDN en grep op die twee.
 3. **De pagina-editor van Shopify laat de `<input type="radio">` staan.** Dat is
    nagekeken op de live pagina; ga er niet blind van uit bij een volgende sjabloon.
+4. **Zet de maat van een inline svg buiten de media-query.** Zet je `width` en `height`
+   alleen in de mobiele regel, dan valt een svg op desktop terug op zijn eigen
+   standaardformaat en staat een hele regel scheef. Dat gebeurde hier met de
+   garantieregel. Controle die het vangt: alle `svg` in `.gg-lp` opmeten op 1440, 900
+   en 390 en afkeuren wat boven de 40px uitkomt.
 
 Op 390px is de pagina 12.757 pixels hoog, tegen 15.976 in de eerste versie, zonder
 dat er een woord uit is gegaan.

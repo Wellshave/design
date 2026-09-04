@@ -112,6 +112,9 @@ er werkelijk bij hoort.
 ### 6. Controleer voor het publiceren
 
 - Beeldverhoudingen: `naturalWidth/naturalHeight` tegen de weergegeven maat
+- **Elke inline svg opgemeten op 1440, 900 en 390.** Wat boven de 40px uitkomt heeft geen
+  maat meegekregen en valt terug op zijn eigen standaardformaat. Zet `width` en `height`
+  altijd in de gewone regel, nooit alleen in een media-query.
 - 390px: geen horizontale overloop op de pagina zelf, en de blokken die opzij horen
   st&aacute;&aacute;n opzij. Meet de paginahoogte; alles onder elkaar is geen ontwerp maar een
   weglating. Zie deel 17.
