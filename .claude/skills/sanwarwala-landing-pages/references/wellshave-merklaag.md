@@ -112,7 +112,9 @@ er werkelijk bij hoort.
 ### 6. Controleer voor het publiceren
 
 - Beeldverhoudingen: `naturalWidth/naturalHeight` tegen de weergegeven maat
-- 390px: alle rasters naar een kolom, geen horizontale overloop
+- 390px: geen horizontale overloop op de pagina zelf, en de blokken die opzij horen
+  st&aacute;&aacute;n opzij. Meet de paginahoogte; alles onder elkaar is geen ontwerp maar een
+  weglating. Zie deel 17.
 - Elke knop: gaat hij waarheen de tekst belooft
 - Div-balans: evenveel openende als sluitende tags
 
@@ -695,9 +697,87 @@ thema:
 https://widget.trustpilot.com/trustbox-data/5419b6ffb0d04a076446a9af?businessUnitId=63c511d4e1339e2200c204a1&locale=nl-NL
 ```
 
-Die geeft `stars` (het aantal sterren dat Trustpilot toont), `trustScore` (net iets lager) en
-`numberOfReviews.total`. Schrijf "ruim 950" in plaats van een exact getal: het loopt op, en een
-ondergrens blijft waar.
+Die geeft `stars` (het aantal sterren dat Trustpilot toont), `trustScore` (net iets lager),
+`numberOfReviews.total` en `starsString`: het woord dat Trustpilot zelf aan de score hangt,
+in de taal van de locale. Bij 4,4 is dat **Uitstekend**. Schrijf "ruim 950" in plaats van een
+exact getal: het loopt op, en een ondergrens blijft waar.
+
+### Het Trustpilot-merkteken
+
+Een kaal cijfer leest als een cijfer. `4,4 uit ruim 1.000 beoordelingen` is waar en zegt
+niets; je lezer moet zelf bedenken of dat goed is. Trustpilot heeft dat werk al gedaan en
+er een woord aan gehangen. Zet dat woord vooraan, met de groene ster en het woordmerk
+erachter, en het leest als een oordeel in plaats van als een regel administratie.
+
+```html
+<span class="tp-merk">
+  <span class="tp-oordeel">Uitstekend</span>
+  <span class="tp-cijfer"><b>4,4</b> uit 5</span>
+  <span class="tp-naam">[groene ster]Trustpilot</span>
+</span>
+```
+
+- **Het oordeel komt uit `starsString`, je verzint het niet.** Trustpilot heeft eigen
+  drempels; die verschuiven en het is hun woord over hun cijfer. Haal het op, plak het erin.
+- **De ster is Trustpilot-groen, `#00B67A`,** en de rest van de regel is gewone
+  merktypografie. Geen goud eroverheen: dit onderdeel moet er niet van ons uitzien, want
+  daar zit de waarde in.
+- **Zet er een noot onder waar het cijfer over gaat.** Bedrijfsbreed is geen productcijfer,
+  en zonder die regel leest de score als een oordeel over het apparaat op deze pagina. Klein
+  en licht, zodat het merkteken het beeld houdt.
+- **Twee plekken, niet meer.** Een smalle balk direct onder de hero, en onder de carrousel
+  in het bewijsblok, daar als link naar het profiel. Vaker herhalen maakt het niet
+  geloofwaardiger, alleen luider.
+
+### De Trustpilot-carrousel
+
+Reviews horen niet met de hand overgetikt op een pagina. Ze verouderen, ze zijn niet te
+controleren en ze kosten je precies de geloofwaardigheid die je ermee wilt kopen. Gebruik
+de live carrousel; hij haalt echte beoordelingen op en loopt vanzelf mee.
+
+```html
+<div class="tp-carrousel">
+  <div class="trustpilot-widget" data-locale="nl-NL"
+       data-template-id="53aa8912dec7e10d38f59f36"
+       data-businessunit-id="63c511d4e1339e2200c204a1"
+       data-style-height="360px" data-style-width="100%"
+       data-token="50740a9d-d5d4-4f3a-ba8c-76687a857f8f"
+       data-stars="4,5" data-review-languages="nl">
+    <!-- terugval: Trustpilot vervangt deze inhoud zodra het script draait -->
+    [statische score + link naar het profiel]
+  </div>
+</div>
+<p class="tp-voet">De carrousel toont beoordelingen van vier en vijf sterren in het
+Nederlands. De score van [score] gaat over alle beoordelingen van Wellshave, dus ook
+de lagere.</p>
+```
+
+Onderaan de pagina, na je eigen scripts:
+
+```html
+<script src="https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
+```
+
+Vier dingen die je niet moet wegoptimaliseren:
+
+- **`data-style-height` in pixels, niet op `100%`.** Bij een percentage moet de container
+  zelf een vaste hoogte hebben; heeft hij die niet, dan klapt de terugval dicht en houd je
+  een leeg gat over. 360px werkt voor de carrousel.
+- **De statische score staat &iacute;n de widget-div als terugval.** Trustpilot vervangt de
+  inhoud van die div zodra het script draait. Wordt het script geblokkeerd, door een
+  adblocker of een strenge CSP, dan staat er nog steeds een score met een link naar het
+  profiel in plaats van niets. Een leeg vak van 360px midden in je bewijsblok is erger dan
+  geen carrousel.
+- **Het filter op vier en vijf sterren benoemen.** Filteren mag en Trustpilot biedt het
+  zelf aan, maar zonder die regel toont de pagina een selectie en claimt hij een
+  gemiddelde. Dat is precies het detail waar een sceptische lezer over struikelt, en het
+  kost je niets om het erbij te zetten.
+- **Het bootstrap-script activeert ook widgets die het thema zelf al in de pagina zet** en
+  die op dat sjabloon niet laadden. Meestal is dat prima, maar kijk na het publiceren
+  even of er niet ergens een tweede blok verschijnt dat je niet had bedacht.
+
+Het aantal beoordelingen schrijf je als ondergrens, want de teller loopt op. Live
+opvragen kan met de businessunit-id hierboven; zie het kopje Trustpilot direct hieronder.
 
 **Interne links.** Controleer elke URL v&oacute;&oacute;r oplevering met een statuscode, niet op
 gevoel. Twee valkuilen die zijn voorgekomen: `/pages/over-ons` bestaat niet meer en leidt naar
@@ -814,9 +894,83 @@ img{max-width:100%;height:auto;display:block}
 Meet het na met `naturalWidth/naturalHeight` tegen `getBoundingClientRect()`. Op het oog zie
 je 50% vervorming aan voor "wat dun".
 
-**Mobiel is de maat.** Ontwerp en controleer op **390px**. Rasters vallen terug naar één
-kolom; kaarten in een schuifstrip worden ongeveer 82% breed zodat de rand van de volgende
-zichtbaar blijft — dat is wat mensen laat schuiven.
+**Mobiel is de maat.** Ontwerp en controleer op **390px**.
+
+Alles in een kolom stapelen is de luie oplossing en levert een pagina van vijftienduizend
+pixels op. Een telefoon is smal, niet arm: gebruik de breedte waar dat kan.
+
+| Blok | Op mobiel | Waarom |
+|---|---|---|
+| Geruststrook | doorlopende ticker | vier korte items, niemand leest die regel voor regel |
+| Tintkaarten | tabpaar probleem/oplossing, elk een schuifstrip | het zijn twee antwoorden op een vraag, niet drie losse kaarten |
+| Pakketkaarten | schuifstrip, 86% breed, met snap | zo vergelijk je pakketten, en het scheelt drie schermhoogtes |
+| Kenmerkkaarten | 2 &times; 2 in plaats van 4 onder elkaar | korte teksten, die passen naast elkaar |
+| Garantieregel | 2 &times; 2 tegels met een icoon | vier kapitalen achter elkaar lezen als &eacute;&eacute;n grijze regel |
+| Aanbodstrook | beeld en tekst op een rij, prijs en knop eronder | anders krimpt de tekstkolom tot een letter breed |
+| Lopende tekst, FAQ, mechaniek | blijft een kolom | dit moet je lezen |
+
+De regel erachter: **wat gelezen moet worden blijft staan, wat gescand wordt mag opzij.**
+Zet nooit iets dat de lezer moet lezen in een automaat; hij leest op zijn tempo, niet op
+dat van jou.
+
+Vijf dingen die het bruikbaar houden:
+
+- **Een strip moet er als een strip uitzien.** 82% breed zodat de rand van de volgende kaart
+  in beeld staat, plus een korte veeghint in kapitalen boven de strip. Zonder die twee denkt
+  de helft dat er niets meer komt.
+- **Boven elke strip staat een veegrij, eronder bolletjes.** De veegrij is &eacute;&eacute;n regel:
+  veeghint links, een teller rechts die `1 / 3` zegt. De bolletjes eronder zijn knoppen, dus
+  je kunt er ook op tikken. Een teller doet wat een strip zelf niet kan: zeggen hoeveel er
+  nog komt. Bij &eacute;&eacute;n zichtbare kaart verdwijnen veegrij en bolletjes, anders wijst de
+  bediening naar niets.
+- **Twee kaarten die tegenover elkaar staan worden een tabpaar.** Probleem en oplossing als
+  twee knoppen naast elkaar, met verborgen radio's en `:checked ~` selectors. Dat werkt zonder
+  javascript, en het zet de keuze waar hij hoort: in &eacute;&eacute;n schermhoogte in plaats van drie.
+  De radio's moeten broer blijven van de tabbalk en van de strip, anders bijten de selectors niet.
+- **De ticker verdubbel je in de HTML** en je schuift hem `-50%`. De kopie krijgt
+  `aria-hidden="true"` en staat op desktop op `display:none`, zodat een schermlezer de vier
+  items niet acht keer voorleest.
+- **`prefers-reduced-motion` zet de ticker stil** en verbergt de kopie. Een balk die eindeloos
+  beweegt is precies wat die instelling bedoelt.
+
+Twee valkuilen die je een keer kost:
+
+- **`flex:1 1 0` in een strook die mag afbreken.** De tekstkolom krimpt dan tot een letter
+  breed en de strook wordt vier keer zo hoog. Geef hem een echte basis, `flex:1 1 180px`.
+- **`hidden` verliest van `display:flex`.** Zet `[hidden]{display:none!important}` in de reset,
+  anders blijft bediening staan die je in javascript hebt uitgezet.
+
+```css
+@media(max-width:760px){
+  .strook-in{display:flex;width:max-content;animation:ws-ticker 26s linear infinite}
+  .strook:hover .strook-in{animation-play-state:paused}
+  .kaarten3,.plannen{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;
+    scrollbar-width:none;padding:4px 20px 14px}
+  .kaarten3>*,.plannen>*{scroll-snap-align:center;flex:0 0 82%}
+
+  /* tabpaar: probleem of oplossing, zonder javascript */
+  #tt-probleem:checked ~ .kaarten3 .tk.oplossing{display:none}
+  #tt-oplossing:checked ~ .kaarten3 .tk.probleem{display:none}
+  #tt-oplossing:checked ~ .kaarten3 .tk.oplossing{flex-basis:100%}
+
+  /* veegrij en bolletjes */
+  .veegrij{display:flex;align-items:center;justify-content:space-between;padding:0 20px}
+  .stripdots{display:flex;justify-content:center;gap:7px;padding:12px 20px 0}
+  .stripdots button[aria-current="true"]{width:24px;background:var(--bronze)}
+}
+@keyframes ws-ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){
+  .strook-in{animation:none;width:auto}
+  .strook-item.dubbel{display:none!important}
+}
+```
+
+Meet het resultaat in paginahoogte op 390px, niet op gevoel. Bij de Groom Guard-advertorial
+ging hij van 15.976 naar 12.757 pixels, ruim een vijfde eraf, zonder dat er een woord uit ging.
+
+De markup en het scriptje voor de veegrij, de teller en de bolletjes staan kant en klaar in
+`startbestand-advertorial.html` en `startbestand-listicle.html`. Neem ze daar vandaan in plaats
+van ze opnieuw te bedenken.
 
 **Zoek-en-vervang in CSS is gevaarlijk.** Een patroon als `.reviews{...}` komt ook voor in
 gedeelde regels als `.grid3,.stats,.reviews{...}`. Vervang gericht en controleer daarna of de

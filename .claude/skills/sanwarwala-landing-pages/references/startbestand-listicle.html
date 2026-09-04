@@ -44,6 +44,7 @@
   --read:660px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
 html{scroll-behavior:smooth}
 body{
   background:var(--paper);color:var(--ink);
@@ -113,9 +114,6 @@ a{color:inherit}
 .hero-assure li{font-size:12.5px;font-weight:600;color:var(--ink-60);position:relative;padding-left:16px}
 .hero-assure li::before{content:"";position:absolute;left:0;top:7px;width:8px;height:8px;
   border-radius:50%;background:var(--bronze)}
-.hero-badge{display:inline-flex;align-items:center;gap:9px;margin-top:22px;background:var(--paper);
-  border:1px solid var(--ink-10);border-radius:100px;padding:9px 17px;font-size:12.5px;font-weight:600}
-.hero-badge b{color:var(--bronze);font-weight:800}
 .hero-art{align-self:end;padding-bottom:34px}
 .hero-art .plaat{background:var(--grad-dark);border-radius:var(--r-l);padding:16px;
   box-shadow:0 26px 60px rgba(17,17,17,.24)}
@@ -360,14 +358,45 @@ a{color:inherit}
 @media(max-width:760px){
   .item{grid-template-columns:1fr;gap:20px}
   .item:nth-child(even) .item-beeld{order:0}
-  .vgl{font-size:13px}
+  .vgl{font-size:13px;min-width:520px}
   .vgl th,.vgl td{padding:11px 10px}
+  /* de tabel schuift in zijn eigen bak; anders duwt hij de hele pagina scheef */
+  .vergelijk{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .vergelijk::-webkit-scrollbar{display:none}
 }
 
 /* ---------- proof (ongewijzigd van opzet) ---------- */
 .proof{padding:74px 0;text-align:center;background:var(--paper)}
 .proof > .wrap > h2{margin-bottom:10px}
 .proof .sub{color:var(--ink-60);margin-bottom:32px;font-size:15px}
+/* Trustpilot-merkteken: het woord dat Trustpilot zelf aan de score hangt (starsString
+   uit de widget-data), de score, en de groene ster met het woordmerk. Een kaal cijfer
+   leest als een cijfer; dit leest als een oordeel. Zie merklaag deel 15b. */
+.tp-merk{display:inline-flex;align-items:center;justify-content:center;flex-wrap:wrap;
+  gap:5px 10px;font-size:14px;line-height:1.3;color:var(--ink);text-decoration:none}
+.tp-merk .tp-oordeel{font-weight:800;letter-spacing:-.01em;white-space:nowrap}
+.tp-merk .tp-cijfer{font-weight:500;color:var(--ink-60);white-space:nowrap}
+.tp-merk .tp-cijfer b{font-weight:800;color:var(--ink);font-size:15px}
+.tp-merk .tp-naam{display:inline-flex;align-items:center;gap:5px;font-weight:800;
+  letter-spacing:-.02em;white-space:nowrap}
+.tp-ster{width:16px;height:16px;flex-shrink:0;color:#00B67A}
+.tp-merk.on-dark{color:#fff}
+.tp-merk.on-dark .tp-cijfer{color:rgba(255,255,255,.62)}
+.tp-merk.on-dark .tp-cijfer b{color:#fff}
+a.tp-merk:hover .tp-naam{text-decoration:underline;text-underline-offset:3px}
+
+/* de smalle balk onder de hero */
+.tp-balk{background:var(--paper);border-bottom:1px solid var(--ink-10);text-align:center}
+.tp-balk-in{max-width:var(--rail);margin:0 auto;padding:14px 24px}
+.tp-noot{display:block;max-width:44ch;margin:5px auto 0;font-size:10.5px;font-weight:500;
+  line-height:1.5;color:var(--ink-40)}
+.tp-carrousel .tp-merk{margin-top:16px}
+@media(max-width:520px){
+  .tp-merk{font-size:13px;gap:4px 8px}
+  .tp-merk .tp-cijfer b{font-size:14px}
+  .tp-balk-in{padding:12px 20px}
+}
+
 .tp-summary{display:flex;align-items:center;justify-content:center;gap:22px;flex-wrap:wrap;margin:0 0 28px}
 .tp-score{display:flex;align-items:center;gap:12px}
 .tp-num{font-size:30px;font-weight:900;letter-spacing:-.02em}
@@ -397,8 +426,6 @@ a{color:inherit}
   border:1px solid #00875A;border-radius:3px;padding:1px 6px;white-space:nowrap}
 .rev-title{font-size:15px;font-weight:700;margin-bottom:7px;line-height:1.35}
 .rev-body{font-size:14px;line-height:1.6;color:var(--ink-80)}
-.tp-link{display:inline-block;margin-top:18px;font-size:13.5px;font-weight:700;color:#00B67A;
-  text-decoration:underline;text-underline-offset:3px}
 
 
 .bron-scheiding{width:1px;height:38px;background:var(--ink-10);flex-shrink:0}
@@ -407,6 +434,13 @@ a{color:inherit}
 .bron-tx{font-size:12.5px;color:var(--ink-60);font-weight:600}
 .bron-tx b{color:var(--ink);font-weight:800}
 @media(max-width:640px){.bron-scheiding{display:none}}
+
+/* ---------- trustpilot-carrousel ---------- */
+.tp-carrousel{max-width:var(--rail);margin:0 auto;padding:0 12px;min-height:360px}
+.tp-carrousel .tp-summary{padding-top:28px}
+.tp-voet{max-width:var(--read);margin:18px auto 0;padding:0 24px;font-size:12px;
+  line-height:1.6;color:var(--ink-40);text-align:center}
+.trustpilot-widget iframe{max-width:100%}
 
 /* ---------- faq ---------- */
 .faq{max-width:820px;margin:0 auto;padding:60px 24px 74px}
@@ -463,10 +497,83 @@ footer .logo{display:block;margin-bottom:8px;color:var(--ink)}
   .strook-item + .strook-item{border-top:1px solid var(--ink-10)}
   .kaarten4{grid-template-columns:1fr}
 }
+
+/* ---------- mobiel: de breedte gebruiken in plaats van alles stapelen ----------
+   Wat gelezen moet worden blijft een kolom; wat gescand wordt gaat opzij.
+   Zie merklaag deel 17. De ticker vraagt om een verdubbeling van de vier
+   strook-items in de HTML, met class="dubbel" en aria-hidden="true". */
+.strook-item.dubbel{display:none}
+@media(max-width:760px){
+  .strook{overflow:hidden}
+  .strook-in{display:flex;width:max-content;padding:0;animation:ws-ticker 26s linear infinite}
+  .strook-item{flex:0 0 auto;padding:16px 22px;border-top:0!important}
+  .strook-item.dubbel{display:flex}
+  .strook-item + .strook-item{border-left:1px solid var(--ink-10)!important;border-top:0!important}
+  .strook:hover .strook-in{animation-play-state:paused}
+}
+@keyframes ws-ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* De regel boven een schuifstrip: veeghint links, teller rechts. De bolletjes eronder
+   worden door het scriptje onderaan gevuld; zonder javascript blijft de strip veegbaar.
+   Let op: de genummerde punten van een listicle blijven een kolom. Alleen de
+   aanbodkaarten en de reviewstrook gaan opzij; zie merklaag deel 17. */
+.veegrij{display:none}
+.stripdots{display:none}
+@media(max-width:760px){
+  .veegrij{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 20px;margin:14px 0 0}
+  .veegrij .vh{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:800;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--ink-40)}
+  .veegrij .vh svg{width:15px;height:15px;flex-shrink:0}
+  .stripteller{display:inline-flex;align-items:center;justify-content:center;min-width:52px;
+    padding:5px 11px;border-radius:100px;border:1px solid var(--ink-10);font-size:11.5px;
+    font-weight:800;color:var(--ink-60);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .offer .veegrij .vh{color:rgba(255,255,255,.45)}
+  .offer .stripteller{border-color:rgba(255,255,255,.18);color:rgba(255,255,255,.62)}
+
+  .stripdots{display:flex;justify-content:center;align-items:center;gap:7px;padding:12px 20px 0}
+  .stripdots button{appearance:none;-webkit-appearance:none;border:0;padding:0;cursor:pointer;
+    width:7px;height:7px;border-radius:100px;background:var(--ink-10);
+    transition:width .2s ease,background .2s ease}
+  .stripdots button[aria-current="true"]{width:24px;background:var(--bronze)}
+  .offer .stripdots button{background:rgba(255,255,255,.22)}
+  .offer .stripdots button[aria-current="true"]{background:var(--gold)}
+
+  .kaarten3,.plannen{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;padding:4px 20px 14px;margin:0;max-width:none}
+  .kaarten3::-webkit-scrollbar,.plannen::-webkit-scrollbar{display:none}
+  .kaarten3>*,.plannen>*{scroll-snap-align:center;flex:0 0 82%}
+  .plannen>*{flex-basis:86%}
+
+  /* de garantieregel als raster van tegels met een icoon, niet als woordenrij */
+  .assure{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:0 20px;
+    letter-spacing:.05em;font-size:10.5px}
+  .assure span{display:flex;align-items:center;gap:9px;text-align:left;line-height:1.3;
+    background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+    border-radius:13px;padding:12px}
+  .assure svg{width:15px;height:15px;flex-shrink:0;color:var(--gold)}
+
+  .plan-beeld{padding:16px 16px 8px}
+  .plan-beeld img{max-width:190px}
+  .plan-body{padding:18px 20px 22px;gap:11px}
+  .plan-nu{font-size:31px}
+  .plan-lijst li{font-size:13px;gap:9px}
+  .tk{min-height:100%}
+}
+@media(max-width:520px){
+  .kaarten4{grid-template-columns:1fr 1fr;gap:10px}
+  .kk{min-height:0;padding:18px 15px;gap:9px}
+  .kk h3{font-size:14.5px}
+  .kk p{font-size:12.5px;line-height:1.5}
+  .kk-ico{width:30px;height:30px}
+}
+
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .reveal{opacity:1;transform:none;transition:none}
   .knop,.nav-cta,.plan-knop{transition:none}
+  .strook-in{animation:none;width:auto}
+  .strook-item.dubbel{display:none!important}
+  .stripdots button{transition:none}
 }
 </style>
 </head>
@@ -498,7 +605,6 @@ footer .logo{display:block;margin-bottom:8px;color:var(--ink)}
       <ul class="hero-assure">
         <li>[Proefperiode]</li><li>[Garantie]</li><li>[Verzending]</li>
       </ul>
-      <span class="hero-badge"><b>[score]</b> uit [aantal] reviews op Trustpilot</span>
     </div>
     <div class="hero-art">
       <div class="plaat">
@@ -507,6 +613,14 @@ footer .logo{display:block;margin-bottom:8px;color:var(--ink)}
     </div>
   </div>
 </header>
+
+<!-- Trustpilot-merkteken onder de hero. Het oordeel is het woord dat Trustpilot zelf
+     aan de score hangt: haal het uit starsString van de widget-data, verzin het niet.
+     De noot eronder zegt waar het cijfer over gaat; laat die niet weg. -->
+<div class="tp-balk"><div class="tp-balk-in">
+  <span class="tp-merk"><span class="tp-oordeel">[oordeel van Trustpilot]</span><span class="tp-cijfer"><b>[score]</b> uit 5</span><span class="tp-naam"><svg class="tp-ster" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.6l3.09 6.67 7.31 .95-5.4 5.02 1.4 7.24L12 17.93 5.6 21.48l1.4-7.24-5.4-5.02 7.31-.95z"/></svg>Trustpilot</span></span>
+  <span class="tp-noot">[Aantal] beoordelingen van Wellshave, over het hele assortiment en niet alleen over dit product</span>
+</div></div>
 
 <!-- ============ GERUSTSTROOK ============ identiek aan de advertorial -->
 <div class="strook">
@@ -605,12 +719,18 @@ footer .logo{display:block;margin-bottom:8px;color:var(--ink)}
     <span class="kicker on-dark">[Label]</span>
     <h2 class="duo on-dark">[Eerste regel]<span class="b">[tweede regel.]</span></h2>
   </div>
-  <div class="plannen">[drie plan-kaarten, zie startbestand-advertorial.html]</div>
-  <div class="assure"><span>[Proef]</span><span>[Garantie]</span><span>[Verzending]</span></div>
+  <p class="veegrij" data-rij="aanbod"><span class="vh">[pijlicoon]Veeg opzij</span><span class="stripteller" data-voor="aanbod">1 / 3</span></p>
+  <div class="plannen" data-strip="aanbod">[drie plan-kaarten, zie startbestand-advertorial.html]</div>
+  <div class="stripdots" data-voor="aanbod" aria-label="Pakketten"></div>
+  <!-- Op mobiel wordt dit een raster van tegels; geef elke tegel daarom een icoon. -->
+  <div class="assure"><span>[icoon][Proef]</span><span>[icoon][Garantie]</span><span>[icoon][Verzending]</span><span>[icoon][Levertijd]</span></div>
 </section>
 
-<!-- ============ BEWIJS ============ identiek aan de advertorial -->
-<section class="reveal proof" id="reviews">[reviewblok, zie startbestand-advertorial.html]</section>
+<!-- ============ BEWIJS ============ identiek aan de advertorial: de live
+     Trustpilot-carrousel met de statische score als terugval in de widget-div.
+     Neem het blok over uit startbestand-advertorial.html en vergeet het
+     bootstrap-script onderaan niet. -->
+<section class="reveal proof" id="reviews">[Trustpilot-carrousel, zie startbestand-advertorial.html]</section>
 
 <!-- ============ FAQ ============ -->
 <section class="faq">
@@ -656,5 +776,77 @@ footer .logo{display:block;margin-bottom:8px;color:var(--ink)}
   el.forEach(function(n){ io.observe(n); });
 })();
 </script>
+<script>
+/* Bolletjes en teller onder elke [data-strip]. Zonder javascript blijven de strips
+   gewoon veegbaar; alleen de aanwijzing eronder ontbreekt dan. */
+(function(){
+  var strips = document.querySelectorAll('[data-strip]');
+  if(!strips.length) return;
+
+  Array.prototype.forEach.call(strips, function(strip){
+    var naam   = strip.getAttribute('data-strip');
+    var dots   = document.querySelector('.stripdots[data-voor="'+naam+'"]');
+    var teller = document.querySelector('.stripteller[data-voor="'+naam+'"]');
+    var rij    = document.querySelector('.veegrij[data-rij="'+naam+'"]');
+    var wacht  = false;
+
+    function zichtbaar(){
+      return Array.prototype.filter.call(strip.children, function(k){
+        return getComputedStyle(k).display !== 'none';
+      });
+    }
+    function actief(lijst){
+      var r = strip.getBoundingClientRect(), mid = r.left + r.width/2;
+      var best = 0, kleinst = Infinity;
+      for(var i=0;i<lijst.length;i++){
+        var b = lijst[i].getBoundingClientRect();
+        var afstand = Math.abs((b.left + b.width/2) - mid);
+        if(afstand < kleinst){ kleinst = afstand; best = i; }
+      }
+      return best;
+    }
+    function ga(i){
+      return function(){
+        var lijst = zichtbaar();
+        if(lijst[i]) lijst[i].scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
+      };
+    }
+    function teken(){
+      var lijst = zichtbaar(), aantal = lijst.length, i = actief(lijst);
+      if(dots && dots.childElementCount !== aantal){
+        dots.innerHTML = '';
+        for(var j=0;j<aantal;j++){
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.setAttribute('aria-label', 'Ga naar kaart ' + (j+1));
+          b.addEventListener('click', ga(j));
+          dots.appendChild(b);
+        }
+      }
+      if(dots) for(var k=0;k<dots.children.length;k++){
+        dots.children[k].setAttribute('aria-current', k === i ? 'true' : 'false');
+      }
+      if(teller) teller.textContent = (i+1) + ' / ' + aantal;
+      /* een enkele kaart schuift nergens heen, dan verdwijnt de bediening */
+      if(dots) dots.hidden = aantal < 2;
+      if(rij)  rij.hidden  = aantal < 2;
+    }
+    function later(){
+      if(wacht) return;
+      wacht = true;
+      requestAnimationFrame(function(){ wacht = false; teken(); });
+    }
+
+    strip.addEventListener('scroll', later, {passive:true});
+    window.addEventListener('resize', later);
+    Array.prototype.forEach.call(document.querySelectorAll('.tabradio'), function(r){
+      r.addEventListener('change', function(){ strip.scrollLeft = 0; teken(); });
+    });
+    if(document.fonts && document.fonts.ready) document.fonts.ready.then(teken);
+    teken();
+  });
+})();
+</script>
+<script type="text/javascript" src="https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
 </body>
 </html>
