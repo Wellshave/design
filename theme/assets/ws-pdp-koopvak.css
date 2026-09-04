@@ -506,8 +506,26 @@
      kortingsplaatje valt weg: dat percentage staat al in de gouden balk. */
   .ws-pdp .ws-bb > [id^="ProductPrice-"]{display:flex;flex-wrap:wrap;align-items:center;
     gap:10px 12px;margin-top:16px}
-  .ws-pdp .ws-prijs{margin-top:0;gap:10px}
+  /* prijs, streepprijs en bespaarlabel horen op één regel te blijven. Op
+     390 px vroeg die rij 327 px en kreeg hij er 312, dus viel het label
+     eronder. De drie onderdelen leveren elk een paar pixels in in plaats van
+     dat er één van de regel valt. wrap blijft staan als vangnet: bij een
+     extreem lang bedrag breekt hij liever af dan dat hij afkapt. */
+  .ws-pdp .ws-prijs{margin-top:0;gap:8px}
   .ws-pdp .ws-prijs .ws-nu{font-size:34px}
+  .ws-pdp .ws-prijs .ws-was{font-size:15.5px}
+  .ws-pdp .ws-besp{padding:4px 7px}
+  .ws-pdp .ws-besp span{font-size:10px}
+
+  /* Onder 390 px (iPhone SE en oudere Androids) is 282 px te weinig voor
+     dezelfde drie onderdelen, dus daar gaat er nog een stap af. */
+  @media screen and (max-width:389px){
+    .ws-pdp .ws-prijs{gap:6px}
+    .ws-pdp .ws-prijs .ws-nu{font-size:29px}
+    .ws-pdp .ws-prijs .ws-was{font-size:14px}
+    .ws-pdp .ws-besp{padding:3px 6px}
+    .ws-pdp .ws-besp span{font-size:9.5px}
+  }
 
   /* de beloftes tussen twee haarlijnen, drie stuks; meer past niet zonder
      dat de knop van het scherm valt */
