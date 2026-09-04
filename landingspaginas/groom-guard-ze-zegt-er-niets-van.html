@@ -202,6 +202,10 @@ html{scroll-behavior:smooth}
 .gg-lp .bron-scheiding{width:1px;height:44px;background:var(--ink-10);flex-shrink:0}
 .gg-lp .tp-link{display:inline-block;margin-top:24px;font-size:13.5px;font-weight:700;color:#00875A;
   text-decoration:underline;text-underline-offset:3px}
+.gg-lp .tp-carrousel{max-width:var(--rail);margin:0 auto;padding:0 12px;min-height:360px}
+.gg-lp .tp-carrousel .bronnen{padding-top:28px}
+.gg-lp .tp-carrousel .tp-link{margin-top:14px}
+.gg-lp .tp-voet{max-width:var(--read);margin:18px auto 0;padding:0 24px;font-size:12px;line-height:1.6;color:var(--ink-40);text-align:center}
 @media(max-width:640px){.gg-lp .bron-scheiding{display:none}}
 
 /* faq */
@@ -383,7 +387,7 @@ html{scroll-behavior:smooth}
         <li>2 jaar garantie</li>
         <li>Gratis verzending vanaf &euro;30</li>
       </ul>
-      <span class="hero-badge"><b>4,4</b> uit ruim 950 Trustpilot-beoordelingen van Wellshave</span>
+      <span class="hero-badge"><b>4,4</b> uit ruim 1.000 Trustpilot-beoordelingen van Wellshave</span>
     </div>
     <div class="hero-art">
       <img src="https://wellshave.com/cdn/shop/files/ws-hero-portrait.jpg?v=1787468139&amp;width=1200"
@@ -548,14 +552,19 @@ html{scroll-behavior:smooth}
   <div class="wrap">
     <h2 class="duo">Wat mensen ervan vinden,<span class="b">en waar dat cijfer over gaat.</span></h2>
     <p class="sub">Wellshave staat op Trustpilot met een gemiddelde over het hele assortiment. Dat is dus geen score over alleen de Groom Guard, en zo staat het er ook.</p>
-    <div class="bronnen">
-      <div class="bron"><span class="bron-num">4,4 / 5</span><span class="bron-tx">Gemiddelde beoordeling van Wellshave op Trustpilot</span></div>
-      <span class="bron-scheiding"></span>
-      <div class="bron"><span class="bron-num">950+</span><span class="bron-tx">Beoordelingen, over het hele assortiment</span></div>
-      <span class="bron-scheiding"></span>
-      <div class="bron"><span class="bron-num">100 dagen</span><span class="bron-tx">Proberen, met de retour voor onze rekening</span></div>
+    <div class="tp-carrousel">
+      <div class="trustpilot-widget" data-locale="nl-NL" data-template-id="53aa8912dec7e10d38f59f36" data-businessunit-id="63c511d4e1339e2200c204a1" data-style-height="360px" data-style-width="100%" data-token="50740a9d-d5d4-4f3a-ba8c-76687a857f8f" data-stars="4,5" data-review-languages="nl">
+        <div class="bronnen">
+          <div class="bron"><span class="bron-num">4,4 / 5</span><span class="bron-tx">Gemiddelde beoordeling van Wellshave op Trustpilot</span></div>
+          <span class="bron-scheiding"></span>
+          <div class="bron"><span class="bron-num">1.000+</span><span class="bron-tx">Beoordelingen, over het hele assortiment</span></div>
+          <span class="bron-scheiding"></span>
+          <div class="bron"><span class="bron-num">100 dagen</span><span class="bron-tx">Proberen, met de retour voor onze rekening</span></div>
+        </div>
+        <a class="tp-link" href="https://nl.trustpilot.com/review/wellshave.nl" target="_blank" rel="noopener">Lees de beoordelingen op Trustpilot</a>
+      </div>
     </div>
-    <a class="tp-link" href="https://nl.trustpilot.com/review/wellshave.nl" target="_blank" rel="noopener">Lees de beoordelingen op Trustpilot</a>
+    <p class="tp-voet">De carrousel toont beoordelingen van vier en vijf sterren in het Nederlands. De score van 4,4 gaat over alle beoordelingen van Wellshave, dus ook de lagere.</p>
   </div>
 </section>
 
@@ -687,7 +696,7 @@ html{scroll-behavior:smooth}
 </section>
 
 <div class="legal">
-  Dit is een betaalde bijdrage van Wellshave&reg;, geschreven en uitgegeven door Wellshave zelf, op het eigen domein. Er is geen onafhankelijke redactie, geen testpanel en geen keurmerk bij betrokken. De genoemde 4,4 uit ruim 950 beoordelingen is de Trustpilot-score van Wellshave als bedrijf en gaat over het hele assortiment, niet over de Groom Guard afzonderlijk. De genoemde voorkeurspercentages komen uit een YouGov-enqu&ecirc;te onder 1.212 Amerikanen van 16 jaar en ouder, afgenomen op 26 en 27 april 2021; respondenten konden meer dan &eacute;&eacute;n voorkeur aanvinken. Het is een meting van voorkeur, geen uitspraak over jouw relatie. Productkenmerken en prijzen gelden op het moment van publiceren; de actuele prijs staat altijd in de winkelwagen.
+  Dit is een betaalde bijdrage van Wellshave&reg;, geschreven en uitgegeven door Wellshave zelf, op het eigen domein. Er is geen onafhankelijke redactie, geen testpanel en geen keurmerk bij betrokken. De genoemde 4,4 uit ruim 1.000 beoordelingen is de Trustpilot-score van Wellshave als bedrijf en gaat over het hele assortiment, niet over de Groom Guard afzonderlijk. De genoemde voorkeurspercentages komen uit een YouGov-enqu&ecirc;te onder 1.212 Amerikanen van 16 jaar en ouder, afgenomen op 26 en 27 april 2021; respondenten konden meer dan &eacute;&eacute;n voorkeur aanvinken. Het is een meting van voorkeur, geen uitspraak over jouw relatie. Productkenmerken en prijzen gelden op het moment van publiceren; de actuele prijs staat altijd in de winkelwagen.
 </div>
 
 <footer class="voet">
@@ -714,5 +723,6 @@ html{scroll-behavior:smooth}
   },{rootMargin:'0px 0px -25% 0px'}).observe(aanbod);
 })();
 </script>
+<script type="text/javascript" src="https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
 </body>
 </html>

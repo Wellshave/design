@@ -6,7 +6,8 @@
 - **Page ID:** `gid://shopify/Page/734955241804`
 - **Handle:** `ze-zegt-er-niets-van-b`
 - **Bron in deze repo:** `groom-guard-ze-zegt-er-niets-van-b.html`
-- **Stylesheet:** `https://cdn.shopify.com/s/files/1/0573/5743/4923/files/ws-gg-variant-b.css`
+- **Stylesheet:** `https://cdn.shopify.com/s/files/1/0573/5743/4923/files/ws-gg-variant-b-2.css`
+  (versie 1 heette `ws-gg-variant-b.css` en wordt niet meer gebruikt)
 
 De pagina draait binnen het themasjabloon. Ten opzichte van het bestand in deze
 repo zijn drie dingen anders, en dat is bewust:
@@ -24,6 +25,39 @@ repo zijn drie dingen anders, en dat is bewust:
 Pas het bestand in deze repo aan, bouw daarna de themaversie opnieuw en upload
 de stylesheet **onder een nieuwe naam** (`-2`, `-3`); een bestaande naam
 overschrijven levert cachegedoe op. Werk daarna de `<link>` in de pagina bij.
+
+## De Trustpilot-carrousel
+
+In het bewijsblok staat de Trustpilot-carrousel: template `53aa8912dec7e10d38f59f36`,
+businessunit `63c511d4e1339e2200c204a1`, gefilterd op vier en vijf sterren en
+Nederlandstalige beoordelingen. De widget heeft het bootstrap-script nodig; dat staat
+onderaan de pagina en laadt `async`.
+
+Twee dingen die bewust zo zijn:
+
+- **`data-style-height` staat op `360px`** in plaats van `100%`. Met een percentage
+  moet de container een vaste hoogte hebben, en dan klapt de terugval dicht.
+- **In de widget-div staat de statische score als terugval.** Trustpilot vervangt de
+  inhoud van die div zodra het script draait. Wordt het script geblokkeerd, door een
+  adblocker of een strenge CSP, dan blijft de score met de link naar Trustpilot staan
+  in plaats van een leeg gat.
+
+Onder de carrousel staat wat hij wel en niet toont: vier en vijf sterren, terwijl de
+4,4 over alle beoordelingen gaat. Zonder die regel zou de pagina een selectie tonen en
+een gemiddelde claimen.
+
+Het bootstrap-script activeert ook de kleine sterrenwidget die het thema zelf al in de
+pagina zet en die op dit sjabloon niet laadde. Dat is geen bijwerking om weg te halen,
+maar wel iets om te weten.
+
+### Aantal beoordelingen
+
+Op 4 september 2026 stond de teller op 1.004, score 4,4. De pagina schrijft
+"ruim 1.000": een ondergrens blijft waar terwijl de teller oploopt. Live na te vragen:
+
+```
+https://widget.trustpilot.com/trustbox-data/5419b6ffb0d04a076446a9af?businessUnitId=63c511d4e1339e2200c204a1&locale=nl-NL
+```
 
 ### Teruggelezen na publicatie
 
