@@ -271,7 +271,7 @@
    De volgorde komt uit de prijs, niet uit de dom-volgorde: de duurste kaart
    krijgt order:2 en staat dus rechts, op welke van de twee pagina's je ook
    staat. De kaart waar je op staat is geen link en heeft daarom geen ws-kies-vlak. */
-.ws-pdp .ws-kies{margin-top:13px}
+.ws-pdp .ws-kies{margin-top:22px}
 .ws-pdp .ws-kies-lijst{display:grid;grid-template-columns:1fr 1fr;gap:9px;
   list-style:none;margin:0;padding:0}
 .ws-pdp .ws-kies-kaart{position:relative;min-width:0;border-radius:13px;background:var(--ws-kaart);
@@ -284,17 +284,25 @@
    verbergt lege ankers (a:empty{display:none} in de reset). Zo is de hele
    kaart één klikdoel en heeft de link meteen een naam. */
 .ws-pdp .ws-kies-in{display:grid;grid-template-columns:auto minmax(0,1fr);gap:11px;
-  align-items:center;min-width:0;padding:11px 12px;border-radius:13px;
+  align-items:center;min-width:0;padding:13px 12px 11px;border-radius:13px;
   color:inherit;text-decoration:none}
-.ws-pdp .ws-kies-dit .ws-kies-in{padding:10.5px 11.5px}
+.ws-pdp .ws-kies-dit .ws-kies-in{padding:12.5px 11.5px 10.5px}
 .ws-pdp .ws-kies-in:focus-visible{outline:2px solid var(--ws-tekstgoud);outline-offset:2px}
 .ws-pdp .ws-kies-beeld{width:38px;height:38px;flex:none;border-radius:9px;overflow:hidden;
   background:var(--ws-cream2);display:grid;place-items:center}
 .ws-pdp .ws-kies-beeld img{width:100%;height:100%;object-fit:contain;display:block}
 .ws-pdp .ws-kies-tekst{display:block;min-width:0}
-.ws-pdp .ws-kies-vlag{display:inline-block;margin-bottom:4px;padding:2px 6px;border-radius:5px;
-  font-size:8.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;white-space:nowrap}
-.ws-pdp .ws-kies-vlag-nu{border:1px solid rgba(20,18,15,.22);color:var(--ws-w72)}
+/* Het label hangt op de bovenrand van de kaart in plaats van erin te staan.
+   Binnenin duwde het de naam van de ene kaart omlaag terwijl de kaart ernaast
+   geen label heeft, en dan lopen de twee uit de pas. Nu telt het niet mee in
+   de inhoud: naam en ondertitel beginnen op beide kaarten op dezelfde hoogte,
+   met label of zonder. Rechts, dus vrij van het productbeeld links. */
+.ws-pdp .ws-kies-vlag{position:absolute;top:0;right:9px;transform:translateY(-50%);
+  z-index:1;pointer-events:none;padding:2.5px 7px;border-radius:6px;line-height:1;
+  font-size:8.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  white-space:nowrap}
+.ws-pdp .ws-kies-vlag-nu{background:var(--ws-kaart);border:1px solid rgba(20,18,15,.22);
+  color:var(--ws-w72)}
 .ws-pdp .ws-kies-vlag-top{background:var(--ws-tekstgoud);color:#F7F3EC}
 .ws-pdp .ws-kies-naam{display:block;font-size:14px;font-weight:600;letter-spacing:-.01em;
   color:var(--ws-ink);line-height:1.25;overflow-wrap:anywhere}
@@ -317,10 +325,10 @@
    van. Naast elkaar blijven de kaarten sowieso, want dat is het hele idee. */
 @media screen and (max-width:749px){
   .ws-pdp .ws-kies-lijst{gap:8px}
-  .ws-pdp .ws-kies-in{gap:8px;padding:9px 10px}
-  .ws-pdp .ws-kies-dit .ws-kies-in{padding:8.5px 9.5px}
+  .ws-pdp .ws-kies-in{gap:8px;padding:11px 10px 9px}
+  .ws-pdp .ws-kies-dit .ws-kies-in{padding:10.5px 9.5px 8.5px}
   .ws-pdp .ws-kies-beeld{width:26px;height:26px;border-radius:7px}
-  .ws-pdp .ws-kies-vlag{font-size:8px;padding:2px 5px;letter-spacing:.06em;margin-bottom:5px}
+  .ws-pdp .ws-kies-vlag{right:7px;font-size:8px;padding:2px 6px;letter-spacing:.06em}
   .ws-pdp .ws-kies-naam{font-size:13px}
   .ws-pdp .ws-kies-sub{font-size:10.5px;margin-top:3px}
   .ws-pdp .ws-kies-vgl{margin-top:9px;font-size:11.5px}

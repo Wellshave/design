@@ -472,6 +472,21 @@
                   Met de inhoud erin heeft de link meteen ook een naam voor
                   wie hem voorgelezen krijgt.
                 {%- endcomment -%}
+                {%- comment -%}
+                  Het label hangt aan de rand van de kaart en staat niet in de
+                  inhoud. Anders duwt het label de naam van de ene kaart omlaag
+                  terwijl de kaart ernaast er geen heeft, en lopen de twee
+                  kaarten uit de pas. Buiten de link houden, zodat de
+                  linknaam alleen het model is.
+                {%- endcomment -%}
+                {%- capture kies_vlag -%}
+                  {%- if dit and s.kies_nu != blank -%}
+                    <span class="ws-kies-vlag ws-kies-vlag-nu">{{ s.kies_nu }}</span>
+                  {%- elsif ki.is_popuplar and s.kies_top != blank -%}
+                    <span class="ws-kies-vlag ws-kies-vlag-top">{{ s.kies_top }}</span>
+                  {%- endif -%}
+                {%- endcapture -%}
+                {%- assign kies_vlag = kies_vlag | strip -%}
                 {%- capture kies_binnen -%}
                   {%- if kbeeld != blank -%}
                     <span class="ws-kies-beeld">
@@ -479,11 +494,6 @@
                     </span>
                   {%- endif -%}
                   <span class="ws-kies-tekst">
-                    {%- if dit and s.kies_nu != blank -%}
-                      <span class="ws-kies-vlag ws-kies-vlag-nu">{{ s.kies_nu }}</span>
-                    {%- elsif ki.is_popuplar and s.kies_top != blank -%}
-                      <span class="ws-kies-vlag ws-kies-vlag-top">{{ s.kies_top }}</span>
-                    {%- endif -%}
                     <span class="ws-kies-naam">{{ knaam }}</span>
                     {%- if ki.toggle_subtitle != blank -%}
                       <span class="ws-kies-sub">{{ ki.toggle_subtitle }}</span>
@@ -496,6 +506,7 @@
                   {%- else -%}
                     <a class="ws-kies-in" href="{{ kp.url }}">{{ kies_binnen }}</a>
                   {%- endif -%}
+                  {{ kies_vlag }}
                 </li>
               {%- endfor -%}
             </ul>
