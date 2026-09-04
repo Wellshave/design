@@ -490,8 +490,86 @@
           </div>
         {%- endif -%}
 
-        {%- if s.vergelijk_label != blank and kan_vergelijken -%}
-          <button type="button" class="ws-cta2" data-ws-vgl data-ws-anker="{{ s.vergelijk_anker }}">
+        {%- comment -%}
+          De modelkeuze. Twee kaarten naast elkaar in plaats van een knop die
+          alleen belooft dat er iets te vergelijken valt: je ziet meteen welk
+          model je bekijkt en welk model de meeste mensen kiezen.
+
+          De gegevens staan er al. custom.compare_products bevat precies twee
+          producten, dit product en zijn tegenhanger, en compare_info draagt per
+          product toggle_title, toggle_subtitle en is_popuplar. Die drie velden
+          heten niet voor niets zo; ze werden alleen nergens als toggle gebruikt.
+
+          De volgorde loopt via de prijs en niet via de volgorde in het
+          metafield: de duurste krijgt order:2 en staat dus rechts, ongeacht op
+          welke van de twee pagina's je staat. Zie ws-kies-top in de css.
+        {%- endcomment -%}
+        {%- comment -%}
+          Tellen in een lus en niet met .size: op de waarde van een
+          lijst-metafield geeft .size niets terug, en dan valt het hele blok
+          stil terug op de knop zonder dat er iets misgaat om op te vallen.
+        {%- endcomment -%}
+        {%- liquid
+          assign kies_aantal = 0
+          assign kies_hoogste = 0
+          for kp in vergelijk_lijst
+            assign kies_aantal = kies_aantal | plus: 1
+            assign kvp = kp.selected_or_first_available_variant.price
+            if kvp > kies_hoogste
+              assign kies_hoogste = kvp
+            endif
+          endfor
+        -%}
+        {%- if s.kies_tonen and kies_aantal == 2 -%}
+          <div class="ws-kies">
+            <ul class="ws-kies-lijst">
+              {%- for kp in vergelijk_lijst -%}
+                {%- liquid
+                  assign ki = kp.metafields.custom.compare_info.value
+                  assign kv = kp.selected_or_first_available_variant
+                  assign dit = false
+                  if kp.id == product.id
+                    assign dit = true
+                  endif
+                  assign kbeeld = ki.popup_image | default: kp.featured_image
+                  assign knaam = ki.toggle_title | default: kp.title
+                -%}
+                <li class="ws-kies-kaart{% if kv.price == kies_hoogste %} ws-kies-top{% endif %}{% if dit %} ws-kies-dit{% endif %}">
+                  {%- comment -%}
+                    Het hele vlak is de link, behalve op de kaart waar je al
+                    staat: die is geen link, want er valt niets te openen.
+                  {%- endcomment -%}
+                  {%- unless dit -%}<a class="ws-kies-vlak" href="{{ kp.url }}" aria-label="{{ knaam | escape }}"></a>{%- endunless -%}
+                  {%- if kbeeld != blank -%}
+                    <span class="ws-kies-beeld">
+                      {{ kbeeld | image_url: width: 160 | image_tag: alt: '', loading: 'lazy', width: 80, height: 80 }}
+                    </span>
+                  {%- endif -%}
+                  <span class="ws-kies-tekst">
+                    {%- if dit and s.kies_nu != blank -%}
+                      <span class="ws-kies-vlag ws-kies-vlag-nu">{{ s.kies_nu }}</span>
+                    {%- elsif ki.is_popuplar and s.kies_top != blank -%}
+                      <span class="ws-kies-vlag ws-kies-vlag-top">{{ s.kies_top }}</span>
+                    {%- endif -%}
+                    <span class="ws-kies-naam">{{ knaam }}</span>
+                    {%- if ki.toggle_subtitle != blank -%}
+                      <span class="ws-kies-sub">{{ ki.toggle_subtitle }}</span>
+                    {%- endif -%}
+                  </span>
+                </li>
+              {%- endfor -%}
+            </ul>
+
+            {%- if s.vergelijk_label != blank and kan_vergelijken -%}
+              <button type="button" class="ws-kies-vgl" data-ws-vgl data-ws-anker="{{ s.vergelijk_anker }}">
+                <svg><use href="#ws-pdp-vgl-{{ section.id }}"/></svg>{{ s.vergelijk_label }}
+              </button>
+            {%- endif -%}
+          </div>
+
+        {%- elsif s.vergelijk_label != blank and kan_vergelijken -%}
+          {%- comment -%} terugval: zijn er geen twee modellen, dan blijft de knop {%- endcomment -%}
+          <button type="button" class="ws-cta2" data-ws-vgl data-ws-anker="{{ s.vergelijk_anker }}" data-dbg="tonen={{ s.kies_tonen }};aantal={{ kies_aantal }};leeg={% if vergelijk_lijst == blank %}1{% else %}0{% endif %}">
             <svg><use href="#ws-pdp-vgl-{{ section.id }}"/></svg>{{ s.vergelijk_label }}
           </button>
         {%- endif -%}
@@ -755,14 +833,16 @@
         if (vgl) vgl.focus();
       }
 
-      if (vgl) {
-        vgl.addEventListener('click', function () {
+      // Er kan er meer dan één zijn (de knop in het keuzeblok en de terugval),
+      // dus binden op alle, met vgl als de eerste voor het teruggeven van focus.
+      Array.prototype.forEach.call(wortel.querySelectorAll('[data-ws-vgl]'), function (knop) {
+        knop.addEventListener('click', function () {
           // Is er een pop-up, dan die. Anders naar de vergelijkingssectie.
           if (pop) { openPop(); return; }
-          var doel = zoekSectie(vgl.getAttribute('data-ws-anker'));
+          var doel = zoekSectie(knop.getAttribute('data-ws-anker'));
           if (doel) doel.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
-      }
+      });
 
       if (pop) {
         pop.addEventListener('click', function (e) {
@@ -1582,6 +1662,9 @@
     { "type": "text", "id": "upg_enmeer", "label": "Regel bij meer dan vier extra\u0027s", "info": "[aantal] wordt het aantal dat niet in de lijst past.", "default": "en nog [aantal] andere onderdelen" },
     { "type": "text", "id": "upg_enmeer1", "label": "Diezelfde regel bij precies \u00e9\u00e9n", "default": "en nog \u00e9\u00e9n onderdeel" },
     { "type": "text", "id": "upg_nee", "label": "Doorgaan zonder upgrade", "info": "[product] wordt de producttitel.", "default": "Nee dank je, ga verder met de [product]" },
+    { "type": "checkbox", "id": "kies_tonen", "label": "Modelkeuze tonen in plaats van de knop", "info": "Vereist twee producten in custom.compare_products.", "default": true },
+    { "type": "text", "id": "kies_nu", "label": "Vlag op het model dat je bekijkt", "default": "Je bekijkt nu" },
+    { "type": "text", "id": "kies_top", "label": "Vlag op het meest gekozen model", "info": "Verschijnt alleen als compare_info.is_popuplar aan staat.", "default": "Meest gekozen" },
     { "type": "text", "id": "vergelijk_anker", "label": "Sleutel van de vergelijkingssectie", "default": "compare_table", "info": "De sleutel uit het sjabloon, niet de volledige id \u2014 die zet Shopify zelf samen. De knop verschijnt alleen als het product custom.compare_table of custom.compare_products heeft." },
     { "type": "text", "id": "tel_voor", "label": "Teller — tekst ervoor", "default": "Al door" },
     { "type": "text", "id": "tel_waarde", "label": "Teller — getal", "default": "200.000+" },

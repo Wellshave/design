@@ -267,6 +267,46 @@
    Hij heeft nu een eigen vulling, een bronzen rand en een pijl die meebeweegt,
    zodat hij als knop leest -- maar in brons, niet in goud, want hij mag het
    niet opnemen tegen "in winkelwagen". */
+/* ---- modelkeuze: twee kaarten in plaats van een knop ----
+   De volgorde komt uit de prijs, niet uit de dom-volgorde: de duurste kaart
+   krijgt order:2 en staat dus rechts, op welke van de twee pagina's je ook
+   staat. De kaart waar je op staat is geen link en heeft daarom geen ws-kies-vlak. */
+.ws-pdp .ws-kies{margin-top:13px}
+.ws-pdp .ws-kies-lijst{display:grid;grid-template-columns:1fr 1fr;gap:9px;
+  list-style:none;margin:0;padding:0}
+.ws-pdp .ws-kies-kaart{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr);
+  gap:11px;align-items:center;min-width:0;
+  padding:11px 12px;border-radius:13px;background:var(--ws-kaart);
+  border:1px solid rgba(20,18,15,.13);transition:border-color .18s,box-shadow .18s}
+.ws-pdp .ws-kies-top{order:2}
+.ws-pdp .ws-kies-dit{border-color:var(--ws-ink);border-width:1.5px;padding:10.5px 11.5px}
+.ws-pdp .ws-kies-kaart:not(.ws-kies-dit):hover{border-color:rgba(20,18,15,.30);
+  box-shadow:0 2px 12px -6px rgba(20,18,15,.28)}
+.ws-pdp .ws-kies-kaart:has(.ws-kies-vlak:focus-visible){outline:2px solid var(--ws-tekstgoud);outline-offset:2px}
+/* de link legt zich over de hele kaart, zodat de tekst geen los klikdoel wordt */
+.ws-pdp .ws-kies-vlak{position:absolute;inset:0;border-radius:13px;z-index:2}
+.ws-pdp .ws-kies-beeld{width:38px;height:38px;flex:none;border-radius:9px;overflow:hidden;
+  background:var(--ws-cream2);display:grid;place-items:center}
+.ws-pdp .ws-kies-beeld img{width:100%;height:100%;object-fit:contain;display:block}
+.ws-pdp .ws-kies-tekst{display:block;min-width:0}
+.ws-pdp .ws-kies-vlag{display:inline-block;margin-bottom:4px;padding:2px 6px;border-radius:5px;
+  font-size:8.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;white-space:nowrap}
+.ws-pdp .ws-kies-vlag-nu{border:1px solid rgba(20,18,15,.22);color:var(--ws-w72)}
+.ws-pdp .ws-kies-vlag-top{background:var(--ws-tekstgoud);color:#F7F3EC}
+.ws-pdp .ws-kies-naam{display:block;font-size:14px;font-weight:600;letter-spacing:-.01em;
+  color:var(--ws-ink);line-height:1.25;overflow-wrap:anywhere}
+.ws-pdp .ws-kies-sub{display:block;margin-top:2px;font-size:11.5px;line-height:1.3;color:var(--ws-w72)}
+
+/* de tweede uitgang: de tabel, als tekstregel onder de kaarten */
+.ws-pdp .ws-kies-vgl{display:flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;margin-top:10px;padding:9px 8px;border:0;background:none;cursor:pointer;
+  font-family:inherit;font-size:12px;font-weight:500;color:var(--ws-w72);
+  text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.ws-pdp .ws-kies-vgl:hover{color:var(--ws-ink)}
+.ws-pdp .ws-kies-vgl:focus-visible{outline:2px solid var(--ws-tekstgoud);outline-offset:2px;border-radius:8px}
+.ws-pdp .ws-kies-vgl svg{width:15px;height:15px;flex:none;color:var(--ws-tekstgoud)}
+.ws-pdp .ws-kies-vgl svg .vgl-a{opacity:.55}
+
 .ws-pdp .ws-cta2{display:flex;align-items:center;justify-content:center;gap:11px;width:100%;margin-top:11px;
   border:1.5px solid #14120F;border-radius:11px;padding:16px;color:#fff;
   background:#14120F;box-shadow:0 2px 0 rgba(20,18,15,.18);
@@ -500,7 +540,8 @@
   .ws-pdp .ws-bb > .ws-vorm{order:12}
   .ws-pdp .ws-bb > .ws-apps{order:13}
   .ws-pdp .ws-bb > .ws-pay{order:14}
-  .ws-pdp .ws-bb > .ws-cta2{order:15}
+  .ws-pdp .ws-bb > .ws-cta2,
+  .ws-pdp .ws-bb > .ws-kies{order:15}
   .ws-pdp .ws-bb > .ws-rev{order:16;margin-top:16px;padding-top:16px;border-top:1px solid var(--ws-lijn)}
   .ws-pdp .ws-bb > .ws-tel{order:17}
   .ws-pdp .ws-bb > .ws-acc{order:18}
