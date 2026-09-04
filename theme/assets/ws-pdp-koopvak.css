@@ -435,7 +435,7 @@
 /* Drie kolommen van 110 pixels laten geen productnaam heel, dus daar wordt
    het een lijst: foto links, naam en prijs in het midden, plaatje rechts. */
 @media screen and (max-width:749px){
-  .ws-pdp .ws-bb > .ws-cad{order:11}
+  .ws-pdp .ws-bb > .ws-cad{order:9}
   .ws-pdp .ws-cad{padding:10px 10px 9px;border-radius:13px}
   .ws-pdp .ws-cad-top{margin-bottom:7px;gap:8px}
   .ws-pdp .ws-cad-ic{width:25px;height:25px}
@@ -545,22 +545,22 @@
      rechts, zodat hij langs de regeleinden loopt in plaats van erdoor. */
   .ws-pdp .ws-bb .ws-strepen{right:-8%;top:-6%;width:56%;height:112%;opacity:.30}
   .ws-pdp .ws-bb > .ws-pil{order:1}
-  .ws-pdp .ws-bb > .ws-tp{order:2}
-  .ws-pdp .ws-bb > .ws-h1{order:3}
-  .ws-pdp .ws-bb > .ws-sub{order:4}
-  .ws-pdp .ws-bb > .ws-lead{order:5}
-  .ws-pdp .ws-bb > [id^="ProductPrice-"]{order:6}
-  .ws-pdp .ws-bb > .ws-opties{order:7}
-  .ws-pdp .ws-bb > .ws-usp{order:8}
-  .ws-pdp .ws-bb > .ws-vrd{order:9}
-  .ws-pdp .ws-bb > .ws-gift{order:10}
-  .ws-pdp .ws-bb > .ws-vorm{order:12}
-  .ws-pdp .ws-bb > .ws-apps{order:13}
-  .ws-pdp .ws-bb > .ws-pay{order:14}
+  .ws-pdp .ws-bb > .ws-h1{order:2}
+  .ws-pdp .ws-bb > .ws-sub{order:3}
+  .ws-pdp .ws-bb > .ws-lead{order:4}
+  .ws-pdp .ws-bb > [id^="ProductPrice-"]{order:5}
+  .ws-pdp .ws-bb > .ws-opties{order:6}
+  .ws-pdp .ws-bb > .ws-usp{order:7}
+  .ws-pdp .ws-bb > .ws-vrd{order:12}
+  .ws-pdp .ws-bb > .ws-gift{order:8}
+  .ws-pdp .ws-bb > .ws-vorm{order:11}
+  .ws-pdp .ws-bb > .ws-apps{order:14}
+  .ws-pdp .ws-bb > .ws-pay{order:13}
   .ws-pdp .ws-bb > .ws-cta2,
-  .ws-pdp .ws-bb > .ws-kies{order:15}
-  .ws-pdp .ws-bb > .ws-rev{order:16;margin-top:16px;padding-top:16px;border-top:1px solid var(--ws-lijn)}
-  .ws-pdp .ws-bb > .ws-tel{order:17}
+  .ws-pdp .ws-bb > .ws-kies{order:10}
+  .ws-pdp .ws-bb > .ws-rev{order:15;margin-top:16px;padding-top:16px;border-top:1px solid var(--ws-lijn)}
+  .ws-pdp .ws-bb > .ws-tel{order:16}
+  .ws-pdp .ws-bb > .ws-tp{order:17}
   .ws-pdp .ws-bb > .ws-acc{order:18}
 
   /* de gouden balk over de volle breedte: naam links, korting rechts */

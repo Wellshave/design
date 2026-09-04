@@ -173,16 +173,6 @@
           </span>
         {%- endif -%}
 
-        {%- if s.tp_tonen -%}
-          <div class="ws-tp">
-            <span class="ws-st">
-              {%- for i in (1..5) -%}<i><svg><use href="#ws-pdp-ster-{{ section.id }}"/></svg></i>{%- endfor -%}
-            </span>
-            {%- if s.tp_label != blank -%}<span class="ws-lb">{{ s.tp_label }}</span>{%- endif -%}
-            {%- if s.tp_cijfer != blank -%}<span class="ws-cf">&middot; {{ s.tp_cijfer }}</span>{%- endif -%}
-            {%- if tp_aantal != blank -%}<span class="ws-sc">{{ tp_aantal }}</span>{%- endif -%}
-          </div>
-        {%- endif -%}
 
         <div class="ws-h1">{{ product.title }}</div>
         {%- if belofte != blank -%}<div class="ws-sub">{{ belofte }}</div>{%- endif -%}
@@ -304,12 +294,6 @@
           de knop. Levering is een voorwaarde, een aanbod is een verleiding: de
           voorwaarde hoort er eerst te staan.
         {%- endcomment -%}
-        {%- if v.available and s.voorraad_regel != blank -%}
-          <div class="ws-vrd">
-            <i></i>
-            <span><b>{{ s.voorraad_kop }}</b> &middot; {{ mf.shipping_information.value | default: s.voorraad_regel }}</span>
-          </div>
-        {%- endif -%}
 
         {%- if toon_aanbod -%}
           <div class="ws-gift">
@@ -458,38 +442,6 @@
           {%- endif -%}
         {%- endif -%}
 
-        <div class="ws-vorm">
-          {%- assign form_id = 'ProductForm-' | append: section.id -%}
-          {%- form 'product', product, id: form_id, class: 'ws-vorm-form', novalidate: 'novalidate' -%}
-            <input type="hidden" name="id" value="{{ v.id }}">
-            <input type="hidden" name="quantity" value="1">
-            <button id="ProductSubmit-{{ section.id }}" type="submit" class="ws-cta"
-                    {% unless v.available %}disabled{% endunless %}>
-              {%- if v.available -%}
-                {{ s.knop_label }}
-              {%- else -%}
-                {{ s.knop_uitverkocht }}
-              {%- endif -%}
-            </button>
-            <p class="ws-melding" product-notification></p>
-          {%- endform -%}
-        </div>
-
-        <div class="ws-pay">
-          {% render 'payments' %}
-          <span class="ws-vl"><svg><use href="#ws-pdp-slot-{{ section.id }}"/></svg>{{ s.veilig_label }}</span>
-          {%- if s.proberen_label != blank -%}<span class="ws-pr">{{ s.proberen_label }}</span>{%- endif -%}
-        </div>
-
-        {%- comment -%} appblokken: Klarna, upsell-apps. Sleepbaar in de editor. {%- endcomment -%}
-        {%- if section.blocks.size > 0 -%}
-          <div class="ws-apps">
-            {%- for block in section.blocks -%}
-              <div {{ block.shopify_attributes }}>{% render block %}</div>
-            {%- endfor -%}
-          </div>
-        {%- endif -%}
-
         {%- comment -%}
           De modelkeuze. Twee kaarten naast elkaar in plaats van een knop die
           alleen belooft dat er iets te vergelijken valt: je ziet meteen welk
@@ -574,11 +526,62 @@
           </button>
         {%- endif -%}
 
+        <div class="ws-vorm">
+          {%- assign form_id = 'ProductForm-' | append: section.id -%}
+          {%- form 'product', product, id: form_id, class: 'ws-vorm-form', novalidate: 'novalidate' -%}
+            <input type="hidden" name="id" value="{{ v.id }}">
+            <input type="hidden" name="quantity" value="1">
+            <button id="ProductSubmit-{{ section.id }}" type="submit" class="ws-cta"
+                    {% unless v.available %}disabled{% endunless %}>
+              {%- if v.available -%}
+                {{ s.knop_label }}
+              {%- else -%}
+                {{ s.knop_uitverkocht }}
+              {%- endif -%}
+            </button>
+            <p class="ws-melding" product-notification></p>
+          {%- endform -%}
+        </div>
+
+        {%- if v.available and s.voorraad_regel != blank -%}
+          <div class="ws-vrd">
+            <i></i>
+            <span><b>{{ s.voorraad_kop }}</b> &middot; {{ mf.shipping_information.value | default: s.voorraad_regel }}</span>
+          </div>
+        {%- endif -%}
+
+        <div class="ws-pay">
+          {% render 'payments' %}
+          <span class="ws-vl"><svg><use href="#ws-pdp-slot-{{ section.id }}"/></svg>{{ s.veilig_label }}</span>
+          {%- if s.proberen_label != blank -%}<span class="ws-pr">{{ s.proberen_label }}</span>{%- endif -%}
+        </div>
+
+        {%- comment -%} appblokken: Klarna, upsell-apps. Sleepbaar in de editor. {%- endcomment -%}
+        {%- if section.blocks.size > 0 -%}
+          <div class="ws-apps">
+            {%- for block in section.blocks -%}
+              <div {{ block.shopify_attributes }}>{% render block %}</div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+
         {%- if s.tel_waarde != blank -%}
           <p class="ws-tel">
             <svg><use href="#ws-pdp-mensen-{{ section.id }}"/></svg>
             <span>{{ s.tel_voor }} <b>{{ s.tel_waarde }}</b> {{ s.tel_na }}</span>
           </p>
+        {%- endif -%}
+
+        {%- if s.tp_tonen -%}
+          <div class="ws-tp">
+            <span class="ws-st">
+              {%- for i in (1..5) -%}<i><svg><use href="#ws-pdp-ster-{{ section.id }}"/></svg></i>{%- endfor -%}
+            </span>
+            {%- if s.tp_label != blank -%}<span class="ws-lb">{{ s.tp_label }}</span>{%- endif -%}
+            {%- if s.tp_cijfer != blank -%}<span class="ws-cf">&middot; {{ s.tp_cijfer }}</span>{%- endif -%}
+            {%- if tp_aantal != blank -%}<span class="ws-sc">{{ tp_aantal }}</span>{%- endif -%}
+          </div>
         {%- endif -%}
 
         {%- comment -%} ---------- de vier accordeons ---------- {%- endcomment -%}
@@ -1898,13 +1901,12 @@
   .ws-pdp .ws-apps{margin-top:13px}
   .ws-pdp .ws-apps:empty{display:none}
   .ws-pdp .ws-apps > div:empty{display:none}
-  @media screen and (max-width:749px){
-    .ws-pdp .ws-bb > .ws-apps{order:12}
-    .ws-pdp .ws-bb > .ws-rev{order:13}
-    .ws-pdp .ws-bb > .ws-cta2{order:14}
-    .ws-pdp .ws-bb > .ws-tel{order:15}
-    .ws-pdp .ws-bb > .ws-acc{order:16}
-  }
+  {%- comment -%}
+    De volgorde op een telefoon staat in ws-pdp-koopvak.css en alleen daar.
+    Hier stond een tweede reeks die niet meeliep met de eerste; omdat deze
+    stijl na de stylesheet laadt won hij, en botsten .ws-pay en .ws-cta2 op
+    dezelfde order:14.
+  {%- endcomment -%}
 
   /* ---- de upgrade-pop-up bij het toevoegen aan de winkelwagen ----
      base.js zet alleen de klasse open erop; verder niets. Dus is dat
