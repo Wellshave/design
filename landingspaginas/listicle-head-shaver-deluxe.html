@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>7 redenen waarom mannen stoppen met het mesje op hun hoofd | Wellshave</title>
-<meta name="description" content="Als scheren pijn doet, klopt er iets niet. Kop kaal in onder de drie minuten, zonder dat je jezelf kunt snijden.">
+<meta name="description" content="Als scheren pijn doet, klopt er iets niet. Kop kaal in onder de drie minuten, zonder dat je jezelf kunt snijden. Zeven redenen waarom mannen het mesje laten liggen.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -82,24 +82,6 @@
 .gg-lp .lead{margin-top:16px;font-size:16.5px;line-height:1.7;color:var(--ink-80);max-width:52ch}
 .gg-lp .lead.on-dark{color:rgba(255,255,255,.72)}
 
-/* ---------- beeldplaatshouder ---------- */
-.gg-lp .ph{position:relative;display:flex;flex-direction:column;justify-content:flex-end;
-  gap:6px;padding:16px;border-radius:var(--r-m);aspect-ratio:4/3;
-  background:repeating-linear-gradient(135deg,#EFE8DC 0 12px,#F5F1EA 12px 24px);
-  border:1px dashed rgba(17,17,17,.22);color:var(--ink-60);overflow:hidden}
-.gg-lp .ph.vierkant{aspect-ratio:1/1}
-.gg-lp .ph.breed{aspect-ratio:3/2}
-.gg-lp .ph.staand{aspect-ratio:4/5}
-.gg-lp .ph-code{position:absolute;top:12px;left:12px;background:var(--ink);color:#fff;
-  font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
-  padding:5px 10px;border-radius:100px}
-.gg-lp .ph-tx{font-size:12.5px;line-height:1.5;max-width:34ch}
-.gg-lp .ph-tx b{display:block;color:var(--ink);font-size:13px;font-weight:800;margin-bottom:2px}
-.gg-lp .ph.donker{background:repeating-linear-gradient(135deg,#232120 0 12px,#1A1918 12px 24px);
-  border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.6)}
-.gg-lp .ph.donker .ph-code{background:var(--gold);color:#1A1408}
-.gg-lp .ph.donker .ph-tx b{color:#fff}
-
 /* ---------- hero ---------- */
 .gg-lp .hero{background:var(--grad-sand);padding:46px 0 0}
 .gg-lp .hero-in{max-width:var(--rail);margin:0 auto;padding:0 22px;
@@ -126,7 +108,7 @@
 .gg-lp .hero-art{align-self:end;padding-bottom:34px}
 .gg-lp .hero-art .plaat{background:var(--grad-dark);border-radius:var(--r-l);padding:16px;
   box-shadow:0 26px 60px rgba(17,17,17,.24)}
-.gg-lp .hero-art .ph{border-radius:var(--r-m)}
+.gg-lp .hero-art img{width:100%;border-radius:var(--r-m)}
 
 /* ---------- geruststrook ---------- */
 .gg-lp .strook{background:var(--paper);border-top:1px solid var(--ink-10);border-bottom:1px solid var(--ink-10)}
@@ -176,6 +158,9 @@
 .gg-lp .item-voet{display:inline-block;margin-top:16px;font-size:11px;font-weight:800;
   letter-spacing:.12em;text-transform:uppercase;color:var(--ink-40)}
 
+.gg-lp .item-beeld img{width:100%;border-radius:var(--r-m)}
+.gg-lp .mech-kaart img{width:100%;border-radius:var(--r-m)}
+
 /* ---------- reden 2: het mechanisme, donker ---------- */
 .gg-lp .mech{background:var(--grad-dark);color:#fff;padding:74px 0;margin:56px 0 0}
 .gg-lp .mech-in{max-width:var(--rail);margin:0 auto;padding:0 22px;
@@ -222,8 +207,7 @@
 /* ---------- beeldband ---------- */
 .gg-lp .band{max-width:var(--rail);margin:60px auto;padding:0 22px}
 .gg-lp .band-in{position:relative;border-radius:var(--r-l);overflow:hidden}
-.gg-lp .band-in .ph{aspect-ratio:16/7;border-radius:0;border:0;
-  justify-content:flex-start;align-items:flex-end;text-align:right}
+.gg-lp .band-in img{width:100%;height:clamp(300px,48vh,520px);object-fit:cover;object-position:72% 42%}
 .gg-lp .band-copy{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;
   gap:6px;padding:30px 28px;color:#fff;pointer-events:none;
   background:linear-gradient(90deg,rgba(15,14,13,.78) 0%,rgba(15,14,13,.38) 46%,rgba(15,14,13,0) 76%)}
@@ -300,6 +284,104 @@
 .gg-lp .voet b{display:block;margin-bottom:6px;color:var(--ink);font-weight:800;
   letter-spacing:.24em;text-transform:uppercase;font-size:12px}
 
+/* ---------- Trustpilot, officiele widget uit het thema ---------- */
+.gg-lp .tp-hero{margin-top:20px;max-width:230px}
+.gg-lp .tp-hero .trustpilot-widget{min-height:24px}
+.gg-lp .tp-blok{max-width:var(--rail);margin:0 auto;padding:6px 22px 0}
+.gg-lp .tp-blok .trustpilot-widget{min-height:320px}
+.gg-lp .tp-scheiding{max-width:var(--rail);margin:34px auto 30px;padding:0 22px;
+  display:flex;align-items:center;gap:16px;color:var(--ink-40);
+  font-size:10.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+.gg-lp .tp-scheiding::before,.gg-lp .tp-scheiding::after{content:"";flex:1;height:1px;background:var(--ink-10)}
+
+/* ---------- aanbod: vier kaarten ---------- */
+.gg-lp .offer{background:var(--grad-dark);color:#fff;padding:74px 0 78px;margin-top:56px}
+.gg-lp .offer-kop{max-width:760px;margin:0 auto 38px;padding:0 22px;text-align:center}
+.gg-lp .offer-kop .lead{margin-left:auto;margin-right:auto;text-align:center}
+.gg-lp .plannen{max-width:var(--rail);margin:0 auto;padding:0 22px;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:stretch}
+.gg-lp .plan{position:relative;display:flex;flex-direction:column;border-radius:var(--r-l);
+  background:#141312;border:1px solid rgba(255,255,255,.1);overflow:hidden}
+.gg-lp .plan.top{background:var(--grad-gold);border-color:transparent;color:#141008;
+  box-shadow:0 0 0 1px rgba(245,209,138,.5),0 24px 60px rgba(200,145,63,.3)}
+.gg-lp .plan.waarde{border-color:rgba(245,209,138,.45);box-shadow:0 18px 46px rgba(0,0,0,.4)}
+.gg-lp .plan-lint{position:absolute;top:14px;left:50%;transform:translateX(-50%);z-index:3;
+  background:#141312;color:var(--gold);font-size:10px;font-weight:800;letter-spacing:.14em;
+  text-transform:uppercase;padding:6px 14px;border-radius:100px;white-space:nowrap}
+.gg-lp .plan-lint.lijn{background:transparent;border:1px solid rgba(245,209,138,.55)}
+.gg-lp .plan-strik{position:absolute;top:0;right:0;width:88px;height:88px;z-index:2;pointer-events:none;
+  background:linear-gradient(225deg, rgba(245,209,138,.85) 0 34%, transparent 35%)}
+.gg-lp .plan-beeld{background:#FFFFFF;padding:22px 18px 12px;display:grid;place-items:center}
+.gg-lp .plan-beeld img{width:100%;max-width:280px;aspect-ratio:1/1;object-fit:contain}
+.gg-lp .plan-body{display:flex;flex-direction:column;gap:11px;padding:18px 20px 22px;flex:1;text-align:center}
+.gg-lp .plan-naam{font-size:15px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.gg-lp .plan-prijs{display:flex;align-items:baseline;justify-content:center;gap:9px}
+.gg-lp .plan-nu{font-size:31px;font-weight:900;letter-spacing:-.03em;line-height:1}
+.gg-lp .plan-was{font-size:13px;text-decoration:line-through;color:rgba(255,255,255,.42)}
+.gg-lp .plan.top .plan-was{color:rgba(20,16,8,.5)}
+.gg-lp .plan-bespaar{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--gold)}
+.gg-lp .plan.top .plan-bespaar{color:#5E4210}
+.gg-lp .plan-eyebrow{font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gold);padding-top:11px;border-top:1px solid rgba(255,255,255,.12)}
+.gg-lp .plan.top .plan-eyebrow{color:#5E4210;border-top-color:rgba(20,16,8,.22)}
+.gg-lp .plan-lijst{display:flex;flex-direction:column;gap:9px;text-align:left;margin-top:2px}
+.gg-lp .plan-lijst li{display:flex;gap:9px;align-items:flex-start;font-size:13.5px;line-height:1.45;
+  color:rgba(255,255,255,.84)}
+.gg-lp .plan.top .plan-lijst li{color:rgba(20,16,8,.88)}
+.gg-lp .plan-lijst .v{flex-shrink:0;width:17px;height:17px;color:var(--gold);margin-top:2px}
+.gg-lp .plan.top .plan-lijst .v{color:#141008}
+.gg-lp .plan-lijst .v svg{width:17px;height:17px;display:block}
+.gg-lp .plan-knop{margin-top:auto;display:block;text-align:center;text-decoration:none;
+  border-radius:100px;padding:14px 18px;font-size:13px;font-weight:800;letter-spacing:.04em;
+  text-transform:uppercase;transition:background .18s ease,transform .18s ease,filter .18s ease}
+.gg-lp .plan-knop:hover{transform:translateY(-1px)}
+.gg-lp .plan-knop.lijn{border:1px solid rgba(245,209,138,.55);color:var(--gold);background:transparent}
+.gg-lp .plan-knop.lijn:hover{background:rgba(245,209,138,.12)}
+.gg-lp .plan-knop.vol-donker{background:#141312;color:#fff}
+.gg-lp .plan-knop.vol-donker:hover{background:#000}
+.gg-lp .plan-knop.vol-goud{background:var(--grad-gold);color:#141008}
+.gg-lp .plan-knop.vol-goud:hover{filter:brightness(1.05)}
+.gg-lp .offer .assure{justify-content:center;margin:32px auto 0;padding:0 22px;max-width:var(--rail)}
+.gg-lp .offer-voet{max-width:var(--rail);margin:16px auto 0;padding:0 22px;text-align:center;
+  font-size:12.5px;color:rgba(255,255,255,.5)}
+.gg-lp .offer-voet a{color:var(--gold);text-decoration:underline;text-underline-offset:3px}
+
+/* ---------- meeschuivende balk ---------- */
+.gg-lp-bar{position:fixed;left:0;right:0;bottom:0;z-index:9000;
+  background:rgba(20,19,18,.96);backdrop-filter:blur(14px);
+  border-top:1px solid rgba(245,209,138,.22);
+  transform:translateY(110%);transition:transform .28s ease;
+  padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+  font-family:'Montserrat',system-ui,-apple-system,sans-serif}
+.gg-lp-bar.zichtbaar{transform:translateY(0)}
+.gg-lp-bar-in{max-width:1140px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.gg-lp-bar img{width:46px;height:46px;object-fit:contain;background:#fff;border-radius:10px;
+  flex-shrink:0;padding:3px;display:block}
+.gg-lp-bar .bar-tx{display:flex;flex-direction:column;line-height:1.25;min-width:0;margin-right:auto}
+.gg-lp-bar .bar-naam{font-size:13px;font-weight:800;color:#fff;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
+.gg-lp-bar .bar-prijs{font-size:12px;font-weight:600;color:rgba(255,255,255,.6)}
+.gg-lp-bar .bar-prijs s{color:rgba(255,255,255,.35);margin-left:5px}
+.gg-lp-bar a{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;
+  border-radius:100px;font-weight:800;white-space:nowrap;
+  transition:filter .18s ease,background .18s ease,transform .18s ease}
+.gg-lp-bar a:hover{transform:translateY(-1px)}
+.gg-lp-bar .bar-deals{padding:12px 18px;font-size:12.5px;color:var(--gold);
+  border:1px solid rgba(245,209,138,.5)}
+.gg-lp-bar .bar-deals:hover{background:rgba(245,209,138,.12)}
+.gg-lp-bar .bar-kar{padding:13px 22px;font-size:12.5px;color:#1A1408;
+  background:linear-gradient(158deg,#F8DFAB 0%,#E5BC77 42%,#C8913F 100%)}
+.gg-lp-bar .bar-kar:hover{filter:brightness(1.05)}
+@media(max-width:620px){
+  .gg-lp-bar img,.gg-lp-bar .bar-prijs{display:none}
+  .gg-lp-bar-in{gap:8px}
+  .gg-lp-bar .bar-naam{font-size:12.5px;white-space:normal}
+  .gg-lp-bar .bar-deals{padding:11px 13px;font-size:11.5px}
+  .gg-lp-bar .bar-kar{padding:12px 15px;font-size:11.5px}
+}
+@media(prefers-reduced-motion:reduce){.gg-lp-bar{transition:none}}
+
 /* ---------- onthulling ---------- */
 .gg-lp .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
 .gg-lp .reveal.in{opacity:1;transform:none}
@@ -315,7 +397,7 @@
   .gg-lp .hero-art{order:4;align-self:stretch;padding:22px 0 0}
   .gg-lp .hero-acts{order:5;margin-top:22px}
   .gg-lp .hero-assure{order:6}
-  .gg-lp .hero-badge{order:7;align-self:flex-start}
+  .gg-lp .hero-in .tp-hero{order:7;align-self:flex-start;margin-top:18px}
   .gg-lp .hero-bron{order:8;padding-bottom:44px}
   .gg-lp .mech-in,.gg-lp .risico-in,.gg-lp .closer-in{grid-template-columns:1fr;gap:30px}
   .gg-lp .strook-in{grid-template-columns:repeat(2,1fr)}
@@ -330,12 +412,18 @@
   .gg-lp .vgl{font-size:13px}
   .gg-lp .vgl th,.gg-lp .vgl td{padding:11px 10px}
   .gg-lp .kaarten2{grid-template-columns:1fr}
+  .gg-lp .plannen{grid-template-columns:repeat(2,1fr);gap:14px}
   .gg-lp .band{margin:48px auto}
-  .gg-lp .band-in .ph{aspect-ratio:4/3}
+  .gg-lp .band-in img{height:clamp(280px,44vh,380px);object-position:70% 44%}
   .gg-lp .band-copy{padding:24px 20px;
     background:linear-gradient(180deg,rgba(15,14,13,0) 30%,rgba(15,14,13,.8) 100%)}
 }
 @media(max-width:520px){
+  /* schuifstrip: de rand van de volgende kaart blijft zichtbaar, dat laat mensen schuiven */
+  .gg-lp .plannen{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;
+    padding-bottom:14px;-webkit-overflow-scrolling:touch}
+  .gg-lp .plan{flex:0 0 82%;scroll-snap-align:start}
+  .gg-lp .plan-lint{left:18px;transform:none}
   .gg-lp .strook-in{grid-template-columns:1fr}
   .gg-lp .strook-item{border-left:0 !important}
   .gg-lp .strook-item + .strook-item{border-top:1px solid var(--ink-10)}
@@ -372,15 +460,17 @@
         <li>Ook op de bolle plekken die je niet kunt zien.</li>
         <li>Geen mesje op je huid, dus geen sneetjes.</li>
       </ul>
-      <span class="hero-badge"><b>4,4</b> uit 1.000+ reviews op Trustpilot</span>
+      <!-- Trustpilot micro-widget, dezelfde code als in de themaheader -->
+      <div class="tp-hero">
+        <div class="trustpilot-widget" data-locale="nl-NL" data-template-id="5419b732fbfb950b10de65e5" data-businessunit-id="63c511d4e1339e2200c204a1" data-style-height="24px" data-style-width="100%" data-token="fdcc698c-6c21-433a-8e7e-d0e574f3c069">
+          <a href="https://nl.trustpilot.com/review/wellshave.nl" target="_blank" rel="noopener">4,4 uit 1.000+ reviews op Trustpilot</a>
+        </div>
+      </div>
       <span class="hero-bron">Score over de hele webshop Wellshave, niet over dit ene apparaat.</span>
     </div>
     <div class="hero-art">
       <div class="plaat">
-        <div class="ph vierkant donker">
-          <span class="ph-code">Beeld 01</span>
-          <span class="ph-tx"><b>Hero, het apparaat in de hand</b>Head Shaver Deluxe rechtop of schuin in een hand, donkere achtergrond, vierkant. De 7D-scheerkop moet duidelijk leesbaar zijn.</span>
-        </div>
+        <img src="https://cdn.shopify.com/s/files/1/0573/5743/4923/files/ws-listicle-01-hero-apparaat-in-hand.jpg?v=1788529493" alt="Head Shaver Deluxe in een hand, de zeven scheerkoppen in beeld." width="1200" height="1200" fetchpriority="high">
       </div>
     </div>
   </div>
@@ -436,10 +526,7 @@
       <span class="item-voet">Bron: 170 klantreviews over dit apparaat</span>
     </div>
     <figure class="item-beeld">
-      <div class="ph">
-        <span class="ph-code">Beeld 02</span>
-        <span class="ph-tx"><b>Man scheert zijn hoofd, in beweging</b>Liggend 4:3, badkamer, geen studio. Hand met apparaat op de kruin, halverwege een baan. Geen schuim in beeld.</span>
-      </div>
+      <img src="https://cdn.shopify.com/s/files/1/0573/5743/4923/files/ws-listicle-02-scheren-in-beweging.jpg?v=1788529493" alt="Man haalt de Head Shaver Deluxe in een baan over zijn kruin." width="1200" height="900" loading="lazy" decoding="async">
     </figure>
   </div>
 
@@ -461,10 +548,7 @@
       </ul>
     </div>
     <div class="mech-kaart">
-      <div class="ph breed donker">
-        <span class="ph-code">Beeld 03</span>
-        <span class="ph-tx"><b>Macro van de 7D-scheerkop</b>Van dichtbij, licht van opzij, de zeven ronde koppen duidelijk in beeld. Liefst met de koppen ingedrukt tegen een gebogen vlak zodat je ziet dat ze meebewegen.</span>
-      </div>
+      <img src="https://cdn.shopify.com/s/files/1/0573/5743/4923/files/ws-listicle-03-macro-7d-scheerkop.jpg?v=1788529494" alt="Macro van de 7D-scheerkop: de zeven koppen staan onder verschillende hoeken tegen een bol vlak." width="1400" height="933" loading="lazy" decoding="async">
       <p class="mech-note">Weergave van de 7D-scheerkop zoals die op de scheerkop zelf zit.</p>
     </div>
   </div>
@@ -482,10 +566,7 @@
       <span class="item-voet">Bron: 170 klantreviews over dit apparaat</span>
     </div>
     <figure class="item-beeld">
-      <div class="ph">
-        <span class="ph-code">Beeld 04</span>
-        <span class="ph-tx"><b>Stilleven: wat hij niet meer nodig heeft</b>Liggend 4:3, zandkleurige ondergrond. Oud scheermes, blikje scheerschuim, pleisters. Naast elkaar, rustig licht. Geen bloed, geen huidwonden.</span>
-      </div>
+      <img src="https://cdn.shopify.com/s/files/1/0573/5743/4923/files/ws-listicle-04-stilleven-mesje-schuim-pleisters.jpg?v=1788529493" alt="Stilleven met een oud handscheermes, een blikje scheerschuim en drie pleisters." width="1200" height="900" loading="lazy" decoding="async">
     </figure>
   </div>
 
@@ -499,10 +580,7 @@
       <span class="item-voet">Bron: 170 klantreviews over dit apparaat</span>
     </div>
     <figure class="item-beeld">
-      <div class="ph">
-        <span class="ph-code">Beeld 05</span>
-        <span class="ph-tx"><b>Het apparaat onder de douche</b>Liggend 4:3, waterdruppels op de behuizing, natte tegels op de achtergrond. In de hand of onder de straal. Echte badkamer, geen studio.</span>
-      </div>
+      <img src="https://cdn.shopify.com/s/files/1/0573/5743/4923/files/ws-listicle-05-onder-de-douche.jpg?v=1788529493" alt="De Head Shaver Deluxe wordt onder stromend water in de douche gehouden." width="1200" height="900" loading="lazy" decoding="async">
     </figure>
   </div>
 
@@ -516,10 +594,7 @@
       <span class="item-voet">Bron: 170 klantreviews over dit apparaat</span>
     </div>
     <figure class="item-beeld">
-      <div class="ph">
-        <span class="ph-code">Beeld 06</span>
-        <span class="ph-tx"><b>LCD-indicator en USB-kabel</b>Liggend 4:3, close-up van het scherm met het accupercentage aan, USB-kabel losjes ernaast. Donkere of zandkleurige ondergrond.</span>
-      </div>
+      <img src="https://cdn.shopify.com/s/files/1/0573/5743/4923/files/ws-listicle-06-lcd-en-usb.jpg?v=1788529493" alt="De LCD-batterij-indicator van de Head Shaver Deluxe met een USB-kabel ernaast." width="1200" height="900" loading="lazy" decoding="async">
     </figure>
   </div>
 
@@ -588,16 +663,13 @@
   <div class="item" id="reden-7">
     <div class="item-tekst">
       <span class="item-nr">07</span>
-      <h2 class="item-kop">Nee, niet z&#243; glad als een vers mesje,<span class="b">wel glad voor het oog, en veel sneller.</span></h2>
+      <h2 class="item-kop">Nee, niet z&#243; glad als een vers mesje,<span class="b">wel glad voor het oog, en vijf keer zo snel.</span></h2>
       <p>Dit is het bezwaar dat je wilt horen voor je bestelt. Een vers mesje op een vlak stuk huid haalt de laatste haartjes weg die een apparaat laat staan. Wrijf je met je hand tegen de groeirichting in, dan voel je dat.</p>
-      <p>Wat je ziet in de spiegel is iets anders. Egaal, glad, geen ongeschoren plekken. In ruil daarvoor ben je in onder de drie minuten klaar, zonder schuim, zonder spiegelacrobatiek en zonder pleisters. Voor de meeste mannen is dat de ruil waard. Voor wie de laatste tiende millimeter wil, niet.</p>
+      <p>Wat je ziet in de spiegel is iets anders. Egaal, glad, geen ongeschoren plekken. En je bent vijf keer zo snel klaar: onder de drie minuten, zonder schuim, zonder spiegelacrobatiek en zonder pleisters. Voor de meeste mannen is dat de ruil waard. Voor wie de laatste tiende millimeter wil, niet.</p>
       <span class="item-voet">Het eerlijke antwoord</span>
     </div>
     <figure class="item-beeld">
-      <div class="ph">
-        <span class="ph-code">Beeld 07</span>
-        <span class="ph-tx"><b>Hand over een pas geschoren hoofd</b>Liggend 4:3, van opzij of van achteren. Hand die over de kruin strijkt, daglicht, huid egaal. Geen voor-en-na, geen retouche.</span>
-      </div>
+      <img src="https://cdn.shopify.com/s/files/1/0573/5743/4923/files/ws-listicle-07-resultaat-badkamer.jpg?v=1788529493" alt="Man scheert zijn hoofd met de Head Shaver Deluxe voor de badkamerspiegel." width="1400" height="880" loading="lazy" decoding="async">
     </figure>
   </div>
 
@@ -606,15 +678,104 @@
 <!-- ============ BEELDBAND ============ hooguit een per pagina -->
 <section class="band reveal">
   <div class="band-in">
-    <div class="ph">
-      <span class="ph-code">Beeld 08</span>
-      <span class="ph-tx"><b>Bandbeeld, breed</b>Man met kaal hoofd in de badkamerspiegel, apparaat in de hand, ochtendlicht. Onderwerp rechts in beeld, links ruimte voor tekst.</span>
-    </div>
+    <img src="https://cdn.shopify.com/s/files/1/0573/5743/4923/files/ws-listicle-08-band-spiegel.jpg?v=1788529493" alt="Man met kaalgeschoren hoofd bij de badkamerspiegel in het ochtendlicht." width="1800" height="1013" loading="lazy" decoding="async">
     <div class="band-copy">
       <span class="kicker on-dark">Sneller scheren</span>
       <p class="band-line">Betere ochtenden beginnen met drie minuten minder gedoe.</p>
     </div>
   </div>
+</section>
+
+<!-- ============ AANBOD ============
+     Vier opties: het losse apparaat en de drie Skull Deals.
+     Elke knop is een Shopify-permalink die live is nagelopen: geopend en
+     met cart.js gecontroleerd op artikel, prijs en total_discount 0. -->
+<section class="offer reveal" id="kopen">
+  <div class="offer-kop">
+    <span class="kicker on-dark">Kies je opzet</span>
+    <h2 class="duo on-dark">Hetzelfde apparaat,<span class="b">alleen meer of minder eromheen.</span></h2>
+    <p class="lead on-dark">De Head Shaver Deluxe zit in alle vier de opties. Het verschil zit in de extra scheerkop en de tassen.</p>
+  </div>
+  <div class="plannen">
+  <article class="plan">
+    <div class="plan-beeld">
+      <img src="https://cdn.shopify.com/s/files/1/0573/5743/4923/files/2_Wellshave_Images-14.jpg?v=1775824313&width=900" alt="De Head Shaver Deluxe met de vijf opzetstukken." width="900" height="900" loading="lazy">
+    </div>
+    <div class="plan-body">
+      <h3 class="plan-naam">Head Shaver Deluxe</h3>
+      <div class="plan-prijs"><span class="plan-nu">&#8364;54,95</span><span class="plan-was">&#8364;69,95</span></div>
+      <span class="plan-bespaar">Bespaar &#8364;15,00</span>
+      <span class="plan-eyebrow">Het apparaat, kaal en compleet</span>
+      <ul class="plan-lijst">
+        <li><span class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.3l2.7 2.7L16 9.7"></path></svg></span>Head Shaver Deluxe met 7D-scheerkop</li>
+        <li><span class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.3l2.7 2.7L16 9.7"></path></svg></span>5 opzetstukken voor hoofd, baard, neus en oor</li>
+        <li><span class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.3l2.7 2.7L16 9.7"></path></svg></span>Twee borstels voor de huid</li>
+        <li><span class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.3l2.7 2.7L16 9.7"></path></svg></span>100 dagen op proef, 2 jaar garantie</li>
+      </ul>
+      <a class="plan-knop lijn" href="https://wellshave.com/cart/46457597460812:1">In de winkelwagen</a>
+    </div>
+  </article>
+  <article class="plan">
+    <div class="plan-beeld">
+      <img src="https://cdn.shopify.com/s/files/1/0573/5743/4923/files/ChatGPTImage12aug2026_14_49_11.png?v=1786538962&width=900" alt="Skull Deal 1.0 met een extra 7D-scheerkop." width="900" height="900" loading="lazy">
+    </div>
+    <div class="plan-body">
+      <h3 class="plan-naam">Skull Deal 1.0</h3>
+      <div class="plan-prijs"><span class="plan-nu">&#8364;59,95</span><span class="plan-was">&#8364;69,95</span></div>
+      <span class="plan-bespaar">Bespaar &#8364;10,00</span>
+      <span class="plan-eyebrow">Altijd een verse kop achter de hand</span>
+      <ul class="plan-lijst">
+        <li><span class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.3l2.7 2.7L16 9.7"></path></svg></span>Alles uit de Head Shaver Deluxe</li>
+        <li><span class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.3l2.7 2.7L16 9.7"></path></svg></span>Extra 7D-scheerkop, magnetisch te wisselen</li>
+        <li><span class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.3l2.7 2.7L16 9.7"></path></svg></span>Wissel je kop voor hij bot wordt</li>
+      </ul>
+      <a class="plan-knop lijn" href="https://wellshave.com/cart/56573858021708:1">In de winkelwagen</a>
+    </div>
+  </article>
+  <article class="plan top">
+    <span class="plan-lint">Meest gekozen</span>
+    <div class="plan-beeld">
+      <img src="https://cdn.shopify.com/s/files/1/0573/5743/4923/files/ChatGPT_Image_12_aug_2026_15_07_13.png?v=1786540245&width=900" alt="Skull Deal 2.0 met extra scheerkop en luxe toilettas." width="900" height="900" loading="lazy">
+    </div>
+    <div class="plan-body">
+      <h3 class="plan-naam">Skull Deal 2.0</h3>
+      <div class="plan-prijs"><span class="plan-nu">&#8364;64,95</span><span class="plan-was">&#8364;74,96</span></div>
+      <span class="plan-bespaar">Bespaar &#8364;10,01</span>
+      <span class="plan-eyebrow">Alles bij elkaar in een tas</span>
+      <ul class="plan-lijst">
+        <li><span class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.3l2.7 2.7L16 9.7"></path></svg></span>Alles uit Skull Deal 1.0</li>
+        <li><span class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.3l2.7 2.7L16 9.7"></path></svg></span>Luxe toilettas voor het hele setje</li>
+        <li><span class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.3l2.7 2.7L16 9.7"></path></svg></span>Opzetstukken raken niet meer kwijt</li>
+      </ul>
+      <a class="plan-knop vol-donker" href="https://wellshave.com/cart/58376126103884:1">In de winkelwagen</a>
+    </div>
+  </article>
+  <article class="plan waarde">
+    <span class="plan-lint">Beste waarde</span>
+    <span class="plan-strik" aria-hidden="true"></span>
+    <div class="plan-beeld">
+      <img src="https://cdn.shopify.com/s/files/1/0573/5743/4923/files/ChatGPTImage12aug2026_15_19_48.png?v=1786540798&width=900" alt="Skull Deal 3.0 met extra scheerkop, toilettas en travelbag." width="900" height="900" loading="lazy">
+    </div>
+    <div class="plan-body">
+      <h3 class="plan-naam">Skull Deal 3.0</h3>
+      <div class="plan-prijs"><span class="plan-nu">&#8364;69,95</span><span class="plan-was">&#8364;79,95</span></div>
+      <span class="plan-bespaar">Bespaar &#8364;10,00</span>
+      <span class="plan-eyebrow">Klaar voor thuis en onderweg</span>
+      <ul class="plan-lijst">
+        <li><span class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.3l2.7 2.7L16 9.7"></path></svg></span>Alles uit Skull Deal 2.0</li>
+        <li><span class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.3l2.7 2.7L16 9.7"></path></svg></span>Travelbag erbij, naast de toilettas</li>
+        <li><span class="v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.3l2.7 2.7L16 9.7"></path></svg></span>Beide tassen, verder niets nodig</li>
+      </ul>
+      <a class="plan-knop vol-goud" href="https://wellshave.com/cart/58376288895308:1">In de winkelwagen</a>
+    </div>
+  </article>
+  </div>
+  <ul class="assure">
+    <li>100 dagen op proef</li>
+    <li>2 jaar garantie</li>
+    <li>Vervangbare scheerkop</li>
+  </ul>
+  <p class="offer-voet">Liever eerst alles nalezen? <a href="https://wellshave.com/products/wellshave-5-in-1-scheerapparaat-mannen-deluxe">Naar de productpagina van de Head Shaver Deluxe</a></p>
 </section>
 
 <!-- ============ BEWIJS ============ echte citaten uit de reviews -->
@@ -623,21 +784,13 @@
     <span class="kicker">Wat klanten schrijven</span>
     <h2 class="duo">Niet onze woorden,<span class="b">die van de mannen die hem gebruiken.</span></h2>
   </div>
-  <div class="tp-summary">
-    <span class="tp-num">4,4</span>
-    <span class="tp-stars">
-      <span class="tp-star"></span><span class="tp-star"></span><span class="tp-star"></span><span class="tp-star"></span><span class="tp-star is-half"></span>
-    </span>
-    <span class="tp-count">uit 1.000+ reviews op Trustpilot</span>
-  </div>
-  <p class="tp-scope">Score over de hele webshop Wellshave. De citaten hieronder komen uit reviews over dit apparaat.</p>
+  <p class="tp-scope">Zes citaten uit reviews over dit apparaat, elk bij het bezwaar dat het wegneemt. Daaronder de onbewerkte Trustpilot-stroom over de hele webshop.</p>
 
-  <!-- VUL IN: naam en datum per review, zoals ze in de bron staan.
+  <!-- VUL IN: naam en datum per citaat, zoals ze in de bron staan.
        Nu bewust leeg gelaten in plaats van verzonnen. -->
   <div class="reviews">
     <figure class="rev">
       <span class="rev-thema">Sneetjes</span>
-      <span class="rev-stars"><span class="tp-star"></span><span class="tp-star"></span><span class="tp-star"></span><span class="tp-star"></span><span class="tp-star"></span></span>
       <blockquote class="rev-body">&ldquo;Ik scheer altijd met de Gillette mijn hoofd, altijd een bloedbad.&rdquo;</blockquote>
       <figcaption class="rev-voet">
         <span class="rev-naam">Geverifieerde koper</span>
@@ -646,7 +799,6 @@
     </figure>
     <figure class="rev">
       <span class="rev-thema">Sneetjes</span>
-      <span class="rev-stars"><span class="tp-star"></span><span class="tp-star"></span><span class="tp-star"></span><span class="tp-star"></span><span class="tp-star"></span></span>
       <blockquote class="rev-body">&ldquo;Geen angst meer om mezelf te snijden.&rdquo;</blockquote>
       <figcaption class="rev-voet">
         <span class="rev-naam">Geverifieerde koper</span>
@@ -655,7 +807,6 @@
     </figure>
     <figure class="rev">
       <span class="rev-thema">Overstap</span>
-      <span class="rev-stars"><span class="tp-star"></span><span class="tp-star"></span><span class="tp-star"></span><span class="tp-star"></span><span class="tp-star"></span></span>
       <blockquote class="rev-body">&ldquo;Ik was het nat scheren met mesjes zat.&rdquo;</blockquote>
       <figcaption class="rev-voet">
         <span class="rev-naam">Geverifieerde koper</span>
@@ -664,7 +815,6 @@
     </figure>
     <figure class="rev">
       <span class="rev-thema">Twijfel vooraf</span>
-      <span class="rev-stars"><span class="tp-star"></span><span class="tp-star"></span><span class="tp-star"></span><span class="tp-star"></span><span class="tp-star"></span></span>
       <blockquote class="rev-body">&ldquo;Dagenlang gezocht hoe ik mij het beste kaal kon scheren met een apparaat in plaats van een scheermes.&rdquo;</blockquote>
       <figcaption class="rev-voet">
         <span class="rev-naam">Geverifieerde koper</span>
@@ -673,7 +823,6 @@
     </figure>
     <figure class="rev">
       <span class="rev-thema">Resultaat</span>
-      <span class="rev-stars"><span class="tp-star"></span><span class="tp-star"></span><span class="tp-star"></span><span class="tp-star"></span><span class="tp-star"></span></span>
       <blockquote class="rev-body">&ldquo;Zo glad als een scheermes en geen ongeschoren haren.&rdquo;</blockquote>
       <figcaption class="rev-voet">
         <span class="rev-naam">Geverifieerde koper</span>
@@ -682,7 +831,6 @@
     </figure>
     <figure class="rev">
       <span class="rev-thema">Accu</span>
-      <span class="rev-stars"><span class="tp-star"></span><span class="tp-star"></span><span class="tp-star"></span><span class="tp-star"></span><span class="tp-star"></span></span>
       <blockquote class="rev-body">&ldquo;Scheert mijn hoofd egaal glad, met een batterijlading.&rdquo;</blockquote>
       <figcaption class="rev-voet">
         <span class="rev-naam">Geverifieerde koper</span>
@@ -690,7 +838,17 @@
       </figcaption>
     </figure>
   </div>
-  <a class="tp-link" href="https://nl.trustpilot.com/review/wellshave.nl" rel="nofollow noopener" target="_blank">Lees de reviews op Trustpilot</a>
+
+  <!-- Trustpilot review-carrousel, dezelfde code als de sectie in het thema.
+       Het thema laadt de bootstrap al; het scriptje onderaan laadt hem
+       alleen als hij nog niet aanwezig is. -->
+  <p class="tp-scheiding">Live op Trustpilot</p>
+  <div class="tp-blok">
+    <div class="trustpilot-widget" data-locale="nl-NL" data-template-id="53aa8912dec7e10d38f59f36" data-businessunit-id="63c511d4e1339e2200c204a1" data-style-height="100%" data-style-width="100%" data-token="50740a9d-d5d4-4f3a-ba8c-76687a857f8f" data-stars="4,5" data-review-languages="nl">
+      <a href="https://nl.trustpilot.com/review/wellshave.nl" target="_blank" rel="noopener">Lees de reviews op Trustpilot</a>
+    </div>
+  </div>
+  <p class="tp-scope">Trustpilot-beoordelingen over de webshop Wellshave als geheel, niet over dit ene apparaat.</p>
 </section>
 
 <!-- ============ RISICO-OMKERING ============ -->
@@ -760,14 +918,14 @@
       <h2 class="duo on-dark">Zeven redenen gelezen,<span class="b">nog drie minuten te gaan.</span></h2>
     </div>
     <div>
-      <p class="lead on-dark">Alles staat op de productpagina: wat er in de doos zit, wat hij kost en wanneer hij bij je is.</p>
+      <p class="lead on-dark">De vier opties staan hierboven. Wil je eerst alles nalezen, dan staat dat op de productpagina.</p>
       <div class="hero-acts">
         <a class="knop goud" href="https://wellshave.com/products/wellshave-5-in-1-scheerapparaat-mannen-deluxe">Bekijk de Head Shaver Deluxe</a>
       </div>
       <ul class="assure">
         <li>100 dagen op proef</li>
         <li>2 jaar garantie</li>
-        <li>4,4 op Trustpilot</li>
+        <li>Vervangbare scheerkop</li>
       </ul>
     </div>
   </div>
@@ -782,9 +940,54 @@
   Gesponsorde content &middot; wellshave.com
 </div>
 
+<!-- ============ MEESCHUIVENDE BALK ============
+     Verschijnt zodra de hero uit beeld is en verdwijnt weer bij het
+     aanbodblok, zodat hij de kaarten niet afdekt.
+     Links naar de deals, rechts direct in de winkelwagen. -->
+<div class="gg-lp-bar" id="gg-bar" role="region" aria-label="Head Shaver Deluxe bestellen">
+  <div class="gg-lp-bar-in">
+    <img src="https://cdn.shopify.com/s/files/1/0573/5743/4923/files/2_Wellshave_Images-14.jpg?v=1775824313&width=140" alt="" width="140" height="140" loading="lazy">
+    <span class="bar-tx">
+      <span class="bar-naam">Head Shaver Deluxe</span>
+      <span class="bar-prijs">&euro;54,95 <s>&euro;69,95</s></span>
+    </span>
+    <a class="bar-deals" href="#kopen">Bekijk de deals</a>
+    <a class="bar-kar" href="https://wellshave.com/cart/46457597460812:1">In de winkelwagen</a>
+  </div>
+</div>
+
 </div><!-- /.gg-lp -->
 
 <script>
+/* Trustpilot: het thema laadt de bootstrap al mee. Alleen als dat niet zo is,
+   halen we hem hier alsnog op, zodat de pagina ook los te bekijken valt. */
+(function(){
+  if (window.Trustpilot) { return; }
+  var sc = document.createElement('script');
+  sc.src = 'https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js';
+  sc.async = true;
+  document.head.appendChild(sc);
+})();
+
+/* De meeschuivende balk: zichtbaar tussen de hero en het aanbodblok. */
+(function(){
+  var bar = document.getElementById('gg-bar');
+  var hero = document.querySelector('.gg-lp .hero');
+  var kopen = document.getElementById('kopen');
+  if (!bar || !hero) { return; }
+  var voorbijHero = false, bijAanbod = false;
+  function bij(){ bar.classList.toggle('zichtbaar', voorbijHero && !bijAanbod); }
+  if (!('IntersectionObserver' in window)) { bar.classList.add('zichtbaar'); return; }
+  new IntersectionObserver(function(r){
+    voorbijHero = !r[0].isIntersecting; bij();
+  }, {threshold:0}).observe(hero);
+  if (kopen) {
+    new IntersectionObserver(function(r){
+      bijAanbod = r[0].isIntersecting; bij();
+    }, {threshold:0}).observe(kopen);
+  }
+})();
+
 (function(){
   var el = document.querySelectorAll('.gg-lp .reveal');
   if(!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches){
@@ -800,60 +1003,25 @@
 
 
 <!-- =========================================================================
-     AAN TE LEVEREN BEELD, ACHT STUKS
-     Alle plaatshouders in deze pagina hebben de class .ph en een code
-     "Beeld 01" tot en met "Beeld 08". Vervang elke <div class="ph ...">
-     door een <img> met de CDN-URL van Shopify Files. Nooit base64.
-     Vaste vorm: <img src="..." alt="..." width="..." height="..." loading="lazy">
-     Bij Beeld 01 in plaats van loading="lazy" juist fetchpriority="high".
+     BEELD: alle acht staan op de Shopify-CDN en zitten in de pagina.
 
-     01  HERO, het apparaat in de hand           vierkant 1400x1400
-         Waar: hero, rechts op de donkere plaat, boven de vouw.
-         Wat: Head Shaver Deluxe rechtop of schuin in een hand, donkere
-         achtergrond. De 7D-scheerkop duidelijk leesbaar, monogram goed om.
+     01 hero, apparaat in de hand           gegenereerd, met productreferentie
+     02 scheren in beweging                 gegenereerd, met productreferentie
+     03 macro van de 7D-scheerkop           gegenereerd, met productreferentie
+     04 stilleven mesje, schuim, pleisters  gegenereerd
+     05 onder de douche                     gegenereerd, met productreferentie
+     06 LCD-indicator en USB-kabel          gegenereerd, met productreferentie
+     07 resultaat in de badkamer            ECHTE Wellshave-fotografie, bijgesneden
+     08 bandbeeld bij de spiegel            gegenereerd, met productreferentie
 
-     02  MAN SCHEERT ZIJN HOOFD, IN BEWEGING     liggend 4:3, 1000x750
-         Waar: reden 01, snelheid.
-         Wat: badkamer, geen studio. Hand met apparaat op de kruin,
-         halverwege een baan. Geen scheerschuim in beeld.
+     Beeld 07 staat naast een claim over het resultaat en is daarom bewust
+     niet gegenereerd, maar bijgesneden uit de eigen fotografie van de
+     productpagina. De vier pakketfoto's in het aanbodblok zijn de echte
+     productfoto's uit de Shopify-catalogus.
 
-     03  MACRO VAN DE 7D-SCHEERKOP               liggend 3:2, 1200x800
-         Waar: reden 02, het mechanisme, op de donkere plaat.
-         Wat: van dichtbij, licht van opzij, de zeven ronde koppen in beeld.
-         Liefst ingedrukt tegen een gebogen vlak, zodat zichtbaar is dat
-         de koppen meebewegen. Dit beeld draagt het hele argument.
-
-     04  STILLEVEN, WAT HIJ NIET MEER NODIG HEEFT  liggend 4:3, 1000x750
-         Waar: reden 03, geen sneetjes.
-         Wat: zandkleurige ondergrond, oud handscheermes, blikje schuim,
-         pleisters. Rustig licht. Geen bloed, geen huidwonden, geen merk
-         in beeld.
-
-     05  HET APPARAAT ONDER DE DOUCHE            liggend 4:3, 1000x750
-         Waar: reden 04, waterdicht.
-         Wat: waterdruppels op de behuizing, natte tegels achter. In de hand
-         of onder de straal. Echte badkamer.
-
-     06  LCD-INDICATOR EN USB-KABEL              liggend 4:3, 1000x750
-         Waar: reden 05, accu.
-         Wat: close-up van het schermpje met het accupercentage aan,
-         USB-kabel losjes ernaast, donkere of zandkleurige ondergrond.
-
-     07  HAND OVER EEN PAS GESCHOREN HOOFD       liggend 4:3, 1000x750
-         Waar: reden 07, het eerlijke bezwaar.
-         Wat: van opzij of van achteren, hand die over de kruin strijkt,
-         daglicht, huid egaal. GEEN voor-en-na, geen retouche: dit beeld
-         staat naast een claim en mag dus niet gegenereerd worden.
-
-     08  BANDBEELD, BREED                        liggend 16:7, 1800x790
-         Waar: de beeldband tussen reden 07 en het bewijs.
-         Wat: man met kaal hoofd bij de badkamerspiegel, apparaat in de
-         hand, ochtendlicht. Onderwerp RECHTS in beeld, links ruimte, want
-         daar staat de tekst over de sluier heen.
-
-     NOG NODIG NAAST BEELD:
-     - Naam en datum per review, zes stuks. Nu staat er "Geverifieerde
-       koper" zonder naam, omdat verzinnen geen optie is.
+     NOG NODIG:
+     - Naam en datum per citaat in de reviewsectie, zes stuks. Nu staat er
+       "Geverifieerde koper" zonder naam, omdat verzinnen geen optie is.
      ========================================================================= -->
 
 </body>
