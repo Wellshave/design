@@ -526,6 +526,10 @@
      hun eigen blok; hier zijn ze ruis naast de twee zinnen die tellen. */
   .ws-pdp .ws-pay{justify-content:center;gap:6px 10px;margin-top:14px}
   .ws-pdp .ws-pay .ws-mk,.ws-pdp .ws-pay .ws-sep{display:none}
+  /* elf merken op 390 px: krapper gat, en de merken mogen kleiner worden dan
+     hun eigen 38 px zodat de rij heel blijft */
+  .ws-pdp .ws-pay .payment__list{gap:4px;order:-1}
+  .ws-pdp .ws-pay .payment__list li{max-width:34px}
   .ws-pdp .ws-pay .ws-vl{margin-top:0;flex-basis:auto}
   .ws-pdp .ws-pay .ws-pr::before{content:'\00b7';margin-right:9px;color:var(--ws-w38)}
 
@@ -568,10 +572,17 @@
 .ws-pdp .ws-melding{margin:9px 0 0;font-size:12px;color:var(--ws-rood)}
 .ws-pdp .ws-melding:empty{display:none}
 
-/* ---- betaalmerken uit de winkelinstellingen ---- */
-.ws-pdp .ws-pay .payment__list{display:flex;align-items:center;gap:8px;flex-wrap:wrap;
-  list-style:none;margin:0;padding:0}
-.ws-pdp .ws-pay .payment__list svg{height:23px;width:auto;display:block;border-radius:4px}
+/* ---- betaalmerken uit de winkelinstellingen ----
+   Shopify levert ze allemaal als 38x24 met hun eigen afgeronde kader, dus de
+   rij is vanzelf gelijk zolang je ze niet laat afbreken. Daarom nowrap: de
+   merken krimpen samen mee in plaats van dat er vier op een tweede regel
+   vallen. flex-basis 0 met grow verdeelt de ruimte gelijk, zodat de gaten
+   overal even breed zijn; max-width houdt ze op een breed scherm bij hun
+   eigen maat in plaats van uitgerekt. */
+.ws-pdp .ws-pay .payment__list{display:flex;align-items:center;flex-wrap:nowrap;
+  gap:7px;list-style:none;margin:0;padding:0;width:100%}
+.ws-pdp .ws-pay .payment__list li{flex:1 1 0;min-width:0;max-width:40px;display:flex}
+.ws-pdp .ws-pay .payment__list svg{width:100%;height:auto;display:block;border-radius:4px}
 
 /* ---- wat zit er in de doos ----
    Een regel per artikel: foto, naam, en de omschrijving pas bij een tik.
