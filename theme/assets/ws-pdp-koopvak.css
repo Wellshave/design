@@ -310,16 +310,16 @@
 .ws-pdp .ws-kies-vgl svg{width:15px;height:15px;flex:none;color:var(--ws-tekstgoud)}
 .ws-pdp .ws-kies-vgl svg .vgl-a{opacity:.55}
 
-/* Op een telefoon is elke kaart nog geen 160 px breed. Beeld naast tekst past
-   daar niet: de naam brak in drie regels en de vlag liep buiten de kaart. Het
-   beeld gaat er dus af, want twee zwarte trimmers van 38 px naast elkaar
-   zeggen toch niets; de namen en de onderregels dragen het verschil. Naast
-   elkaar blijven ze wel staan, want dat is het hele idee. */
+/* Op een telefoon is elke kaart nog geen 160 px breed, dus gaat alles een
+   maat kleiner: het beeld van 38 naar 26 px en krappere marges. Het beeld
+   stond hier eerst helemaal uit, en dat was te snel gedacht: bij 26 px past
+   het gewoon naast twee regels naam, en het blok wordt er geen pixel hoger
+   van. Naast elkaar blijven de kaarten sowieso, want dat is het hele idee. */
 @media screen and (max-width:749px){
   .ws-pdp .ws-kies-lijst{gap:8px}
-  .ws-pdp .ws-kies-in{grid-template-columns:minmax(0,1fr);gap:0;padding:10px 11px}
-  .ws-pdp .ws-kies-dit .ws-kies-in{padding:9.5px 10.5px}
-  .ws-pdp .ws-kies-beeld{display:none}
+  .ws-pdp .ws-kies-in{gap:8px;padding:9px 10px}
+  .ws-pdp .ws-kies-dit .ws-kies-in{padding:8.5px 9.5px}
+  .ws-pdp .ws-kies-beeld{width:26px;height:26px;border-radius:7px}
   .ws-pdp .ws-kies-vlag{font-size:8px;padding:2px 5px;letter-spacing:.06em;margin-bottom:5px}
   .ws-pdp .ws-kies-naam{font-size:13px}
   .ws-pdp .ws-kies-sub{font-size:10.5px;margin-top:3px}
