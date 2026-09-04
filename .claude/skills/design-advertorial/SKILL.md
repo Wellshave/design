@@ -89,6 +89,12 @@ voordat je bouwt:
 - **Alles in `<div class="gg-lp">`** en elke selector daarbinnen gescoopt, anders sloopt de
   reset de themaheader en -footer.
 - **Alle niet-ASCII als `&#nnn;`** voor je plakt.
+- **Op mobiel gaat wat gescand wordt opzij.** Geruststrook als doorlopende ticker,
+  tint- en pakketkaarten als schuifstrip met de rand van de volgende in beeld,
+  kenmerkkaarten 2 &times; 2. Lopende tekst, mechaniek en FAQ blijven een kolom, want
+  die moet je lezen. Alles onder elkaar schuiven levert een pagina van vijftienduizend
+  pixels op; meet de hoogte op 390px voordat je oplevert. De regel en de CSS staan in
+  deel 17 van de merklaag, de laag zit al in de startbestanden.
 - **Winkelwagenlinks geverifieerd**, inclusief de cadeauvariant, voordat ze op de pagina staan.
 - **Elk cijfer nagewezen.** Bestellingen zijn geen personen, en bij elke review staat om welk
   apparaat het gaat.

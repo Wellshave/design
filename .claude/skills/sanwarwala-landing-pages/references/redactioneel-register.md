@@ -85,6 +85,19 @@ redactionele pagina meer maar een winkelpagina met een serif.
     de ladder van drie uit deel 15 hoort in het winkelregister.
 14. **Verantwoording** in een klein grijs blok, en pas daarna de voettekst.
 
+## Op mobiel blijft dit register een kolom
+
+Deel 17 van de merklaag zegt dat wat gescand wordt opzij mag. In dit register geldt dat
+maar voor twee blokken, en dat is een keuze en geen vergeten stap: een artikel leest
+verticaal, en een kolom die opeens in strips uiteenvalt leest niet meer als een artikel.
+
+- **Wel opzij:** de aanbodkaarten onderaan en de cijferstrook. Dat zijn kaarten die je
+  vergelijkt, geen tekst die je leest.
+- **Blijft staan:** de lopende tekst, het kader, het citaat, de reacties en de tabel.
+  De tabel stapelt op mobiel naar rijen met labels; hij wordt geen schuifstrip.
+- **Geen ticker.** De krantenbalk hoort stil te staan; bewegend chrome haalt precies het
+  redactionele weg waarvoor je dit register koos.
+
 ## Wat er juist niet in hoort
 
 Geen plakkende koopbalk, geen aftelklok, geen goudverloop op koppen, geen knop boven het

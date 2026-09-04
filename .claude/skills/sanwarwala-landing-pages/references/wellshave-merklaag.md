@@ -112,7 +112,9 @@ er werkelijk bij hoort.
 ### 6. Controleer voor het publiceren
 
 - Beeldverhoudingen: `naturalWidth/naturalHeight` tegen de weergegeven maat
-- 390px: alle rasters naar een kolom, geen horizontale overloop
+- 390px: geen horizontale overloop op de pagina zelf, en de blokken die opzij horen
+  st&aacute;&aacute;n opzij. Meet de paginahoogte; alles onder elkaar is geen ontwerp maar een
+  weglating. Zie deel 17.
 - Elke knop: gaat hij waarheen de tekst belooft
 - Div-balans: evenveel openende als sluitende tags
 
