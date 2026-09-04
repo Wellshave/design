@@ -304,6 +304,9 @@
 .ws-pdp .ws-kies-vlag-nu{background:var(--ws-kaart);border:1px solid rgba(20,18,15,.22);
   color:var(--ws-w72)}
 .ws-pdp .ws-kies-vlag-top{background:var(--ws-tekstgoud);color:#F7F3EC}
+/* Twee teksten in de opmaak, de css kiest er een. Zie de sectie: op een
+   telefoon vult de lange tekst de kaart bijna helemaal. */
+.ws-pdp .ws-kies-vlag .ws-vlag-smal{display:none}
 .ws-pdp .ws-kies-naam{display:block;font-size:14px;font-weight:600;letter-spacing:-.01em;
   color:var(--ws-ink);line-height:1.25;overflow-wrap:anywhere}
 .ws-pdp .ws-kies-sub{display:block;margin-top:2px;font-size:11.5px;line-height:1.3;color:var(--ws-w72)}
@@ -329,6 +332,8 @@
   .ws-pdp .ws-kies-dit .ws-kies-in{padding:10.5px 9.5px 8.5px}
   .ws-pdp .ws-kies-beeld{width:26px;height:26px;border-radius:7px}
   .ws-pdp .ws-kies-vlag{right:7px;font-size:8px;padding:2px 6px;letter-spacing:.06em}
+  .ws-pdp .ws-kies-vlag .ws-vlag-breed{display:none}
+  .ws-pdp .ws-kies-vlag .ws-vlag-smal{display:inline}
   .ws-pdp .ws-kies-naam{font-size:13px}
   .ws-pdp .ws-kies-sub{font-size:10.5px;margin-top:3px}
   .ws-pdp .ws-kies-vgl{margin-top:9px;font-size:11.5px}

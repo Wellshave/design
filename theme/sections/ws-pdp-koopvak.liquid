@@ -483,7 +483,21 @@
                   {%- if dit and s.kies_nu != blank -%}
                     <span class="ws-kies-vlag ws-kies-vlag-nu">{{ s.kies_nu }}</span>
                   {%- elsif ki.is_popuplar and s.kies_top != blank -%}
-                    <span class="ws-kies-vlag ws-kies-vlag-top">{{ s.kies_top }}</span>
+                    {%- comment -%}
+                      Op een telefoon is de kaart nog geen 175 px breed en vult
+                      "Meest gekozen" hem bijna helemaal. Daarom staat er daar
+                      een kortere tekst. Beide staan in de opmaak en de css
+                      kiest er een; met javascript zou de verkeerde eerst even
+                      te zien zijn. Leeg laten = overal dezelfde tekst.
+                    {%- endcomment -%}
+                    <span class="ws-kies-vlag ws-kies-vlag-top">
+                      {%- if s.kies_top_kort != blank -%}
+                        <span class="ws-vlag-breed">{{ s.kies_top }}</span>
+                        <span class="ws-vlag-smal">{{ s.kies_top_kort }}</span>
+                      {%- else -%}
+                        {{ s.kies_top }}
+                      {%- endif -%}
+                    </span>
                   {%- endif -%}
                 {%- endcapture -%}
                 {%- assign kies_vlag = kies_vlag | strip -%}
@@ -1690,6 +1704,7 @@
     { "type": "checkbox", "id": "kies_tonen", "label": "Modelkeuze tonen in plaats van de knop", "info": "Vereist twee producten in custom.compare_products.", "default": true },
     { "type": "text", "id": "kies_nu", "label": "Vlag op het model dat je bekijkt", "default": "Je bekijkt nu" },
     { "type": "text", "id": "kies_top", "label": "Vlag op het meest gekozen model", "info": "Verschijnt alleen als compare_info.is_popuplar aan staat.", "default": "Meest gekozen" },
+    { "type": "text", "id": "kies_top_kort", "label": "Die vlag op de telefoon", "info": "Kortere tekst voor smalle schermen. Leeg laten om overal dezelfde tekst te tonen.", "default": "Best verkocht" },
     { "type": "text", "id": "vergelijk_anker", "label": "Sleutel van de vergelijkingssectie", "default": "compare_table", "info": "De sleutel uit het sjabloon, niet de volledige id \u2014 die zet Shopify zelf samen. De knop verschijnt alleen als het product custom.compare_table of custom.compare_products heeft." },
     { "type": "text", "id": "tel_voor", "label": "Teller — tekst ervoor", "default": "Al door" },
     { "type": "text", "id": "tel_waarde", "label": "Teller — getal", "default": "200.000+" },
