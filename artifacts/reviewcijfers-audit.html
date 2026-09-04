@@ -1,0 +1,407 @@
+<title>Reviewcijfers over de hele site</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Public+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+  :root{
+    --grond:#F1F3F0; --vlak:#FFFFFF; --inkt:#141A16; --zacht:#5D6862;
+    --lijn:#DCE0DA; --rail:#E7EAE4;
+    --accent:#00674A; --fout:#9B3A2C; --goed:#3C6E52;
+    --schaduw:0 1px 2px rgba(20,26,22,.05), 0 12px 30px -24px rgba(20,26,22,.45);
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --grond:#101311; --vlak:#181C19; --inkt:#E9EDE8; --zacht:#939E97;
+      --lijn:#2A2F2B; --rail:#212522;
+      --accent:#5FBF9A; --fout:#DE8073; --goed:#7FC29B;
+      --schaduw:0 1px 2px rgba(0,0,0,.5), 0 12px 30px -24px rgba(0,0,0,.9);
+    }
+  }
+  :root[data-theme="dark"]{
+    --grond:#101311; --vlak:#181C19; --inkt:#E9EDE8; --zacht:#939E97;
+    --lijn:#2A2F2B; --rail:#212522;
+    --accent:#5FBF9A; --fout:#DE8073; --goed:#7FC29B;
+    --schaduw:0 1px 2px rgba(0,0,0,.5), 0 12px 30px -24px rgba(0,0,0,.9);
+  }
+
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--grond); color:var(--inkt);
+    font-family:"Public Sans",-apple-system,BlinkMacSystemFont,sans-serif;
+    font-size:15.5px; line-height:1.6; -webkit-font-smoothing:antialiased}
+  .wrap{max-width:1060px; margin:0 auto; padding:54px 24px 100px;
+    display:flex; flex-direction:column; gap:52px}
+  @media (max-width:640px){ .wrap{padding:30px 15px 60px; gap:38px} }
+
+  h1,h2,h3{font-family:"Bricolage Grotesque",Georgia,serif; margin:0; text-wrap:balance}
+  h1{font-size:clamp(31px,5.2vw,48px); font-weight:700; line-height:1.02; letter-spacing:-.025em}
+  h2{font-size:clamp(20px,2.6vw,26px); font-weight:700; line-height:1.15; letter-spacing:-.018em}
+  h3{font-size:16.5px; font-weight:700; line-height:1.25; letter-spacing:-.006em}
+  p{margin:0; max-width:68ch}
+  .lead{font-size:18.5px; line-height:1.52; color:var(--zacht); max-width:62ch}
+  .ey{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11px; font-weight:500;
+    letter-spacing:.16em; text-transform:uppercase; color:var(--accent)}
+  code,.mono{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.87em}
+  code{background:var(--rail); padding:1.5px 5px; border-radius:4px}
+
+  /* de waarheid */
+  .waar{display:flex; flex-wrap:wrap; gap:0; border:1px solid var(--lijn);
+    border-radius:3px; overflow:hidden; background:var(--vlak); box-shadow:var(--schaduw)}
+  .waar > div{flex:1 1 168px; padding:20px 22px 22px; border-left:1px solid var(--lijn);
+    display:flex; flex-direction:column; gap:5px; min-width:0}
+  .waar > div:first-child{border-left:0}
+  .waar b{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:29px; font-weight:500;
+    letter-spacing:-.035em; line-height:1; color:var(--accent); font-variant-numeric:tabular-nums}
+  .waar span{font-size:13px; line-height:1.4; color:var(--zacht)}
+
+  /* bevindingen */
+  .groep{display:flex; flex-direction:column; gap:14px}
+  .groep > h2{display:flex; align-items:baseline; gap:11px; flex-wrap:wrap}
+  .telling{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:12px; font-weight:500;
+    color:var(--zacht); letter-spacing:.04em}
+
+  .rij{display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);
+    gap:0; border:1px solid var(--lijn); border-radius:3px; overflow:hidden;
+    background:var(--vlak)}
+  @media (max-width:720px){ .rij{grid-template-columns:1fr} }
+  .rij > div{padding:17px 20px 19px; min-width:0; display:flex; flex-direction:column; gap:7px}
+  .rij > div + div{border-left:1px solid var(--lijn); background:var(--rail)}
+  @media (max-width:720px){
+    .rij > div + div{border-left:0; border-top:1px solid var(--lijn)}
+  }
+  .plek{display:flex; align-items:baseline; gap:9px; flex-wrap:wrap}
+  .pad{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:12px; color:var(--zacht);
+    word-break:break-all}
+  .taal{display:inline-flex; gap:4px; flex-wrap:wrap}
+  .taal i{font-family:"IBM Plex Mono",ui-monospace,monospace; font-style:normal; font-size:10px;
+    font-weight:500; letter-spacing:.09em; text-transform:uppercase;
+    border:1px solid var(--lijn); border-radius:3px; padding:2px 6px; color:var(--zacht)}
+  .nu, .straks{font-size:14.5px; line-height:1.45}
+  .nu q, .straks q{quotes:'“' '”'; font-weight:500}
+  .nu{color:var(--fout)}
+  .straks{color:var(--goed)}
+  .waarom{font-size:13.5px; line-height:1.5; color:var(--zacht)}
+  .waar-te{font-size:13px; line-height:1.5; color:var(--zacht)}
+  .waar-te b{color:var(--inkt); font-weight:500}
+
+  .ernstig{border-color:var(--fout)}
+  .merk-ernstig{align-self:flex-start; font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:10px; font-weight:500; letter-spacing:.11em; text-transform:uppercase;
+    color:var(--fout); border:1px solid var(--fout); border-radius:100px; padding:2px 9px}
+
+  /* afspraak */
+  .afspraak{border:1px solid var(--accent); border-radius:3px; overflow:hidden}
+  .afspraak > .kop{padding:20px 24px 8px; display:flex; flex-direction:column; gap:8px;
+    background:var(--vlak)}
+  .afspraak dl{margin:0; padding:16px 24px 22px; background:var(--vlak);
+    display:grid; grid-template-columns:auto 1fr; gap:9px 20px; align-items:baseline}
+  .afspraak dt{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:12px;
+    letter-spacing:.09em; text-transform:uppercase; color:var(--zacht); white-space:nowrap}
+  .afspraak dd{margin:0; font-size:15px}
+  .afspraak dd b{font-family:"IBM Plex Mono",ui-monospace,monospace; font-weight:500;
+    color:var(--accent); font-size:15.5px}
+
+  .niet{display:flex; flex-direction:column; gap:9px; border-left:2px solid var(--lijn);
+    padding-left:18px}
+  .niet ul{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:6px}
+  .niet li{font-size:14.5px; line-height:1.5; color:var(--zacht)}
+  .niet li b{color:var(--inkt); font-weight:500}
+
+  .slot{font-size:13.5px; line-height:1.6; color:var(--zacht);
+    border-top:1px solid var(--lijn); padding-top:22px; max-width:76ch}
+  @media (prefers-reduced-motion:reduce){ *{transition:none!important; animation:none!important} }
+</style>
+
+<div class="wrap">
+
+  <header style="display:flex;flex-direction:column;gap:15px">
+    <p class="ey">Wellshave &middot; v4 &middot; 4 september 2026</p>
+    <h1>Zestien plekken noemen een reviewcijfer.<br>Negen ervan kloppen niet.</h1>
+    <p class="lead">Ik heb de hele winkel op het proefthema v4 doorgelopen &mdash; homepage,
+      alle collecties, het productsjabloon, de losse pagina&rsquo;s, de advertorials, blog en
+      zoekresultaten, in alle vier de talen. Hieronder staat elke plek waar een score of een
+      aantal is ingetypt, en wat er zou moeten staan.</p>
+  </header>
+
+  <section style="display:flex;flex-direction:column;gap:14px">
+    <h2>Wat Trustpilot vandaag zegt</h2>
+    <div class="waar">
+      <div><b>4,4</b><span>de score &mdash; dit is het getal dat je opschrijft</span></div>
+      <div><b>4,5</b><span>alleen de sterrenweergave, afgerond op halve sterren</span></div>
+      <div><b>1.003</b><span>reviews in totaal</span></div>
+      <div><b>Uitstekend</b><span>het label dat Trustpilot zelf toekent</span></div>
+    </div>
+    <p class="waarom">Verdeling: 718&times;&nbsp;5&#9733;, 171&times;&nbsp;4&#9733;,
+      31&times;&nbsp;3&#9733;, 26&times;&nbsp;2&#9733;, 57&times;&nbsp;1&#9733;. Rechtstreeks
+      opgehaald bij <code>widget.trustpilot.com</code> voor
+      <span class="mono">businessUnitId&nbsp;63c511d4e1339e2200c204a1</span>.</p>
+    <p><b>Het verschil tussen 4,4 en 4,5 is de kern van de verwarring.</b> Trustpilot rekent
+      een score van 4,4 en tekent daar 4,5 ster bij, omdat sterren in halven gaan. Op de site
+      staat op sommige plekken 4,5 als &eacute;&eacute;n van beide, en dat leest een klant als
+      een score die je niet hebt.</p>
+  </section>
+
+  <section class="groep">
+    <h2>Op elke pagina van de winkel <span class="telling">2 fouten</span></h2>
+
+    <div class="rij">
+      <div>
+        <div class="plek"><h3>De footer</h3></div>
+        <p class="pad">sections/footer-group.json &middot; <b>reviews_label</b></p>
+        <p class="nu">nu: <q>Zie onze 970+ reviews op</q></p>
+        <p class="straks">moet: <q>Zie onze 1.000+ reviews op</q></p>
+      </div>
+      <div>
+        <p class="waarom">Staat onder <em>elke</em> pagina van de winkel &mdash; dit is de
+          meest gelezen van alle fouten.</p>
+        <p class="taal"><i>NL 970+</i><i>EN 500+</i><i>DE 500+</i><i>FR 500</i></p>
+        <p class="waar-te">De drie vertalingen staan niet in het thema maar in
+          <b>Instellingen &rarr; Talen &rarr; Themainhoud bewerken</b>. Ze moeten alle vier apart.</p>
+      </div>
+    </div>
+
+    <div class="rij">
+      <div>
+        <div class="plek"><h3>De aankondigingsbalk bovenaan</h3></div>
+        <p class="pad">sections/header-group.json &middot; blok <b>review_9cVYxJ</b></p>
+        <p class="nu">nu: <q>Uitstekend <b>4.5 / 5</b></q></p>
+        <p class="straks">moet: <q>Uitstekend <b>4,4 / 5</b></q></p>
+      </div>
+      <div>
+        <p class="waarom">Twee dingen tegelijk: 4,5 is de sterrenwaarde, niet de score. En in
+          het Nederlands hoort er een komma, geen punt.</p>
+        <p class="taal"><i>NL 4.5</i><i>EN 4.5</i><i>DE 4.5</i><i>FR 4,5</i></p>
+        <p class="waar-te">De sterrengrafiek eronder (<span class="mono">stars_count: 4.5</span>)
+          mag w&eacute;l op 4,5 blijven &mdash; die tekent de sterren.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="groep">
+    <h2>Homepage <span class="telling">1 zichtbaar, 2 in de terugval</span></h2>
+
+    <div class="rij">
+      <div>
+        <div class="plek"><h3>Afsluiter, bewijscel links</h3></div>
+        <p class="pad">templates/index.json &middot; ws_afsluiter &middot; cel_1</p>
+        <p class="nu">nu: <q>4,4 uit 950+ beoordelingen</q></p>
+        <p class="straks">moet: <q>4,4 uit 1.000+ beoordelingen</q></p>
+      </div>
+      <div>
+        <p class="waarom">De laatste zekerheid die een bezoeker leest voordat hij op de knop
+          drukt &mdash; en het enige cijfer op de homepage dat nog achterloopt.</p>
+        <p class="waar-te">Staat er in het Duits en Frans ook &mdash; onvertaald, in het
+          Nederlands.</p>
+      </div>
+    </div>
+
+    <div class="rij">
+      <div>
+        <div class="plek"><h3>Zonder risico &mdash; de terugvalteksten</h3></div>
+        <p class="pad">templates/index.json &middot; ws_belofte &middot; <b>tp_tekst</b>, <b>rev_totaal</b></p>
+        <p class="nu">nu: <q>4,5 uit 950+ beoordelingen op</q> en <q>950+ beoordelingen</q></p>
+        <p class="straks">moet: <q>4,4 uit 1.000+ beoordelingen op</q> en <q>1.000+ beoordelingen</q></p>
+      </div>
+      <div>
+        <p class="waarom">Deze zie je normaal niet: de Trustpilot-widget staat ingevuld en die
+          wint. Maar laadt de widget een keer niet, dan valt de sectie hierop terug en staat er
+          alsnog een verkeerd getal.</p>
+      </div>
+    </div>
+
+    <div class="rij">
+      <div>
+        <div class="plek"><h3>De hero</h3></div>
+        <p class="pad">templates/index.json &middot; ws_hero &middot; tp_score, tp_aantal</p>
+        <p class="straks">staat er goed: <q>Uitstekend &middot; 4,4</q> &middot; <q>1000+ reviews</q></p>
+      </div>
+      <div>
+        <p class="waarom">Alleen de schrijfwijze wijkt af van de rest (<span class="mono">1000+</span>
+          in plaats van <span class="mono">1.000+</span>), en de regel staat onvertaald in het
+          Engels, Duits en Frans.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="groep">
+    <h2>Product- en collectiepagina&rsquo;s <span class="telling">4 fouten</span></h2>
+
+    <div class="rij">
+      <div>
+        <div class="plek"><h3>Koopvak, de sterrenregel</h3></div>
+        <p class="pad">templates/product.json &middot; ws-pdp-koopvak &middot; geldt voor <b>alle</b> producten</p>
+        <p class="nu">nu: <q>4,4/5 uit 970+ reviews</q></p>
+        <p class="straks">moet: <q>4,4/5 uit 1.000+ reviews</q></p>
+      </div>
+      <div>
+        <p class="waarom">Op dezelfde pagina staat bovenin al <q>Uitstekend &middot; 4,4 &middot;
+          1.000+ reviews</q>. Twee verschillende aantallen binnen &eacute;&eacute;n scherm &mdash;
+          dat is precies wat een koper laat twijfelen.</p>
+        <p class="taal"><i>NL 970+</i><i>EN 970+</i></p>
+      </div>
+    </div>
+
+    <div class="rij">
+      <div>
+        <div class="plek"><h3>Kop van het koopvak &mdash; Engelse versie</h3></div>
+        <p class="pad">vertaling van templates/product.json</p>
+        <p class="nu">nu: <q>Excellent &middot; 4.4 &middot; 970+ reviews</q></p>
+        <p class="straks">moet: <q>Excellent &middot; 4.4 &middot; 1,000+ reviews</q></p>
+      </div>
+      <div>
+        <p class="waarom">In het Nederlands staat hier al 1.000+; alleen de Engelse vertaling is
+          nooit meegegaan.</p>
+      </div>
+    </div>
+
+    <div class="rij">
+      <div>
+        <div class="plek"><h3>UGC-blok onder de video&rsquo;s</h3></div>
+        <p class="pad">templates/product.json &middot; ws-pdp-ugc</p>
+        <p class="nu">nu (EN): <q>4.4 from 970+ Trustpilot reviews</q></p>
+        <p class="straks">moet: <q>4.4 from 1,000+ Trustpilot reviews</q></p>
+      </div>
+      <div>
+        <p class="waarom">De Nederlandse regel (<q>4,4 uit 1000+ Trustpilot-reviews</q>) klopt al,
+          op de puntjes in het getal na.</p>
+      </div>
+    </div>
+
+    <div class="rij">
+      <div>
+        <div class="plek"><h3>Sectie &ldquo;Trustpilot Reviews&rdquo;</h3></div>
+        <p class="pad">op collection.json &eacute;n product.json &middot; <b>reviews_label</b></p>
+        <p class="nu">nu: <q>Zie onze 800+ reviews op</q> op de collectie &middot;
+          <q>See our 700+ reviews on</q> in het Engels</p>
+        <p class="straks">moet: overal <q>1.000+</q></p>
+      </div>
+      <div>
+        <p class="waarom">Dezelfde sectie staat op twee sjablonen met twee verschillende
+          getallen: 800+ op <span class="mono">/collections/bestsellers</span>, 1000+ op de
+          productpagina. De Engelse vertaling staat op beide op 700+.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="groep">
+    <h2>Advertorials en landingspagina&rsquo;s <span class="telling">4 fouten, waarvan 1 ernstig</span></h2>
+
+    <div class="rij ernstig">
+      <div>
+        <span class="merk-ernstig">Verzonnen cijfer</span>
+        <div class="plek"><h3>Nooit meer scheermesjes</h3></div>
+        <p class="pad">/pages/nooit-meer-scheermesjes &middot; PageFly, eigen HTML-blok</p>
+        <p class="nu">nu: <q>Beoordeeld met <b>4.8 / 5</b> op basis van 800+ reviews op Trustpilot</q></p>
+        <p class="straks">moet: <q>Beoordeeld met 4,4 / 5 op basis van 1.000+ reviews op Trustpilot</q></p>
+      </div>
+      <div>
+        <p class="waarom">4,8 komt nergens vandaan &mdash; niet uit de score, niet uit de
+          sterren. Dit is de enige plek op de site die een cijfer noemt dat Trustpilot niet
+          kent, en het staat er m&eacute;t bronvermelding bij. Ik zou hier als eerste langs gaan.</p>
+      </div>
+    </div>
+
+    <div class="rij">
+      <div>
+        <div class="plek"><h3>Zeven inzichten over scheren</h3></div>
+        <p class="pad">/pages/zeven-inzichten-over-scheren &middot; twee plekken, incl. de voetnoot</p>
+        <p class="nu">nu: <q>4,5 uit 5 op Trustpilot &mdash; over het hele assortiment,
+          ruim 950 beoordelingen</q></p>
+        <p class="straks">moet: <q>4,4 uit 5 op Trustpilot &mdash; over het hele assortiment,
+          ruim 1.000 beoordelingen</q></p>
+      </div>
+      <div>
+        <p class="waarom">Staat er twee keer: in de bewijsrij &eacute;n woordelijk herhaald in de
+          voetnoot onderaan (<q>De score van 4,5 en de ruim 950 beoordelingen&hellip;</q>).
+          Allebei aanpassen, anders spreekt de disclaimer de pagina tegen.</p>
+      </div>
+    </div>
+
+    <div class="rij">
+      <div>
+        <div class="plek"><h3>Groom Guard PRO</h3></div>
+        <p class="pad">/pages/groomguardpro &middot; PageFly</p>
+        <p class="nu">nu: <q>Beoordeeld met 4.5 / 5 op basis van 800+ reviews</q></p>
+        <p class="straks">moet: <q>Beoordeeld met 4,4 / 5 op basis van 1.000+ reviews</q></p>
+      </div>
+      <div>
+        <p class="waarom">Hier ontbreekt bovendien de bron: er staat niet bij dat het om
+          Trustpilot gaat, terwijl het blok wel de Trustpilot-vormgeving nabootst.</p>
+      </div>
+    </div>
+
+    <div class="rij">
+      <div>
+        <div class="plek"><h3>Ultimate Shave Package</h3></div>
+        <p class="pad">/pages/ultimate-shave-package &middot; PageFly</p>
+        <p class="nu">nu: <q>4,5 / 5 van 800+ reviews</q></p>
+        <p class="straks">moet: <q>4,4 / 5 van 1.000+ reviews</q></p>
+      </div>
+      <div>
+        <p class="waarom">Zelfde blok als hierboven, ander getal &mdash; deze pagina&rsquo;s zijn
+          los van elkaar met de hand gebouwd, dus ze lopen ook los uit elkaar.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="groep">
+    <h2>In de code, voor de volgende keer <span class="telling">2 standaardwaarden</span></h2>
+    <div class="rij">
+      <div>
+        <div class="plek"><h3>De standaardteksten in twee secties</h3></div>
+        <p class="pad">sections/footer.liquid &middot; sections/trustpilot-reviews.liquid</p>
+        <p class="nu">nu: <q>Zie onze 500+ reviews op</q> en <q>Zie onze 450+ reviews op</q></p>
+        <p class="straks">moet: <q>Zie onze 1.000+ reviews op</q></p>
+      </div>
+      <div>
+        <p class="waarom">Deze zie je nergens staan, maar ze zijn wel de tekst die verschijnt
+          zodra iemand de sectie ergens opnieuw toevoegt. Zo zijn 450+, 500+, 700+, 800+ en 970+
+          waarschijnlijk ook ontstaan.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="afspraak">
+    <div class="kop">
+      <p class="ey">De afspraak</p>
+      <h2>E&eacute;n schrijfwijze, overal</h2>
+      <p style="font-size:15px">Zodat het volgende mijlpaalgetal niet weer vijf verschillende
+        versies oplevert.</p>
+    </div>
+    <dl>
+      <dt>Score</dt><dd><b>4,4</b> &mdash; met komma in het Nederlands, Duits en Frans; <b>4.4</b> met punt in het Engels. Nooit 4,5 en nooit 4,8.</dd>
+      <dt>Aantal</dt><dd><b>1.000+</b> in het Nederlands, Duits en Frans; <b>1,000+</b> in het Engels. Met scheidingsteken, niet <span class="mono">1000+</span>.</dd>
+      <dt>Label</dt><dd>Uitstekend &middot; Excellent &middot; Ausgezeichnet &middot; Excellent</dd>
+      <dt>Sterren</dt><dd>4,5 ster in de gr&aacute;fiek, maar dat getal komt nooit als tekst op de pagina.</dd>
+      <dt>Bron</dt><dd>Waar er een cijfer staat, staat erbij dat het van Trustpilot komt.</dd>
+    </dl>
+  </section>
+
+  <section class="niet">
+    <h3>Dit is g&eacute;&eacute;n fout &mdash; niet meeverbeteren</h3>
+    <ul>
+      <li><b>De aantallen per product</b> (446, 461, 327, 192, 351) komen uit Loox en gaan over
+        &eacute;&eacute;n apparaat. Die horen niet gelijk te zijn aan het Trustpilot-totaal.</li>
+      <li><b>&ldquo;4,5 uit 5 &middot; 740 beoordelingen&rdquo; op de neustrimmercollectie</b> is
+        een Loox-cijfer over die productlijn, geen Trustpilot-cijfer.</li>
+      <li><b>De <span class="mono">4.5 out of 5</span> in de sterrenplaatjes</b> is een
+        toegankelijkheidslabel bij het sterrenicoon, geen leesbare tekst.</li>
+    </ul>
+    <p class="waarom" style="margin-top:6px">E&eacute;n punt dat hier los van staat maar wel
+      opviel: de site claimt <b>200.000+ bestellingen</b> op de homepage en de productpagina,
+      terwijl de advertorial en de paginatitel van <span class="mono">/pages/zeven-inzichten-over-scheren</span>
+      <b>184.000</b> aanhouden. Twee cijfers voor hetzelfde, en het lage staat in de titel die
+      Google toont.</p>
+  </section>
+
+  <p class="slot">
+    Doorzocht op het proefthema <code>wellshave/claude-design v4 (IN&nbsp;PROGRESS)</code>:
+    28 opgehaalde pagina&rsquo;s &mdash; homepage, negen collecties, vier productpagina&rsquo;s,
+    dertien losse pagina&rsquo;s, blogoverzicht en zoekresultaten &mdash; in het Nederlands,
+    Engels, Duits en Frans, telkens op de zichtbare tekst en niet op de broncode alleen. De
+    getallen van Trustpilot zijn live opgehaald op 4 september 2026 en veranderen mee; een
+    aantal van 1.003 kan volgende week 1.010 zijn, wat niets afdoet aan <q>1.000+</q>. Er is
+    niets gewijzigd: dit is alleen de inventarisatie.
+  </p>
+
+</div>
