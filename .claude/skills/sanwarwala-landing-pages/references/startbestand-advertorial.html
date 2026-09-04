@@ -472,10 +472,49 @@ footer .logo{display:block;margin-bottom:8px;color:var(--ink)}
   .strook-item + .strook-item{border-top:1px solid var(--ink-10)}
   .kaarten4{grid-template-columns:1fr}
 }
+
+/* ---------- mobiel: de breedte gebruiken in plaats van alles stapelen ----------
+   Wat gelezen moet worden blijft een kolom; wat gescand wordt gaat opzij.
+   Zie merklaag deel 17. De ticker vraagt om een verdubbeling van de vier
+   strook-items in de HTML, met class="dubbel" en aria-hidden="true". */
+.strook-item.dubbel{display:none}
+@media(max-width:760px){
+  .strook{overflow:hidden}
+  .strook-in{display:flex;width:max-content;padding:0;animation:ws-ticker 26s linear infinite}
+  .strook-item{flex:0 0 auto;padding:16px 22px;border-top:0!important}
+  .strook-item.dubbel{display:flex}
+  .strook-item + .strook-item{border-left:1px solid var(--ink-10)!important;border-top:0!important}
+  .strook:hover .strook-in{animation-play-state:paused}
+}
+@keyframes ws-ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+.veeghint{display:none}
+@media(max-width:760px){
+  .veeghint{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:800;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--ink-40);margin-top:14px}
+  .veeghint svg{width:15px;height:15px;flex-shrink:0}
+  .offer .veeghint{color:rgba(255,255,255,.45);justify-content:center}
+  .kaarten3,.plannen{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;padding:4px 20px 14px;margin:0;max-width:none}
+  .kaarten3::-webkit-scrollbar,.plannen::-webkit-scrollbar{display:none}
+  .kaarten3>*,.plannen>*{scroll-snap-align:center;flex:0 0 82%}
+  .plannen>*{flex-basis:86%}
+  .tk{min-height:100%}
+}
+@media(max-width:520px){
+  .kaarten4{grid-template-columns:1fr 1fr;gap:10px}
+  .kk{min-height:0;padding:18px 15px;gap:9px}
+  .kk h3{font-size:14.5px}
+  .kk p{font-size:12.5px;line-height:1.5}
+  .kk-ico{width:30px;height:30px}
+}
+
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .reveal{opacity:1;transform:none;transition:none}
   .knop,.nav-cta,.plan-knop{transition:none}
+  .strook-in{animation:none;width:auto}
+  .strook-item.dubbel{display:none!important}
 }
 </style>
 </head>
@@ -530,6 +569,15 @@ footer .logo{display:block;margin-bottom:8px;color:var(--ink)}
       <span class="strook-tx"><b>[Kernfeit]</b><span>[Toelichting]</span></span>
     </div>
     <!-- nog drie identieke blokken -->
+
+    <!-- Voor de ticker op mobiel: dezelfde vier blokken nog een keer, met
+         class="strook-item dubbel" en aria-hidden="true". Op desktop staan ze
+         op display:none; op mobiel maken ze de lus naadloos. Zie merklaag deel 17. -->
+    <div class="strook-item dubbel" aria-hidden="true">
+      <span class="strook-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12h16M8 8l-4 4 4 4"/></svg></span>
+      <span class="strook-tx"><b>[Kernfeit]</b><span>[Toelichting]</span></span>
+    </div>
+    <!-- nog drie identieke dubbele blokken -->
   </div>
 </div>
 

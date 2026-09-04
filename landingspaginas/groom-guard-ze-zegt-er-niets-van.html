@@ -355,9 +355,62 @@ html{scroll-behavior:smooth}
   .gg-lp .kaarten4{grid-template-columns:1fr}
   .gg-lp .band-in img{height:340px}
 }
+
+/* ---------- mobiel: de breedte gebruiken in plaats van alles stapelen ---------- */
+
+/* geruststrook wordt een doorlopende ticker */
+.gg-lp .strook-item.dubbel{display:none}
+@media(max-width:760px){
+  .gg-lp .strook{overflow:hidden}
+  .gg-lp .strook-in{display:flex;width:max-content;padding:0;
+    animation:ws-ticker 26s linear infinite}
+  .gg-lp .strook-item{flex:0 0 auto;padding:16px 22px;border-top:0!important}
+  .gg-lp .strook-item.dubbel{display:flex}
+  .gg-lp .strook-item + .strook-item{border-left:1px solid var(--ink-10)!important;border-top:0!important}
+  .gg-lp .strook:hover .strook-in{animation-play-state:paused}
+}
+@keyframes ws-ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* schuifstrips: tintkaarten en pakketten naast elkaar, met de rand van de volgende in beeld */
+.gg-lp .veeghint{display:none}
+@media(max-width:760px){
+  .gg-lp .veeghint{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:800;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--ink-40);margin-top:14px}
+  .gg-lp .veeghint svg{width:15px;height:15px;flex-shrink:0}
+  .gg-lp .offer .veeghint{color:rgba(255,255,255,.45);justify-content:center}
+
+  .gg-lp .kaarten3,.gg-lp .plannen{display:flex;gap:12px;overflow-x:auto;
+    scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
+    scrollbar-width:none;padding:4px 20px 14px;margin:0;max-width:none}
+  .gg-lp .kaarten3::-webkit-scrollbar,.gg-lp .plannen::-webkit-scrollbar{display:none}
+  .gg-lp .kaarten3>*,.gg-lp .plannen>*{scroll-snap-align:center;flex:0 0 82%}
+  .gg-lp .plannen>*{flex-basis:86%}
+  .gg-lp .tk{min-height:100%}
+}
+
+/* vier kenmerken in twee rijen van twee in plaats van vier onder elkaar */
+@media(max-width:520px){
+  .gg-lp .kaarten4{grid-template-columns:1fr 1fr;gap:10px}
+  .gg-lp .kk{min-height:0;padding:18px 15px;gap:9px}
+  .gg-lp .kk h3{font-size:14.5px}
+  .gg-lp .kk p{font-size:12.5px;line-height:1.5}
+  .gg-lp .kk-ico{width:30px;height:30px}
+}
+
+/* wat lucht eruit, de secties stonden ruim */
+@media(max-width:640px){
+  .gg-lp .tinten,.gg-lp .kenmerken,.gg-lp .proof{padding:46px 0}
+  .gg-lp .mech,.gg-lp .offer{padding:52px 0}
+  .gg-lp .band{margin:42px auto}
+  .gg-lp .faq{padding:44px 20px 50px}
+  .gg-lp .verlangen{margin:52px auto}
+}
+
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .gg-lp .knop,.gg-lp .plan-knop,.gg-lp .stickybar{transition:none}
+  .gg-lp .strook-in{animation:none;width:auto}
+  .gg-lp .strook-item.dubbel{display:none!important}
 }
 </style>
 </head>
@@ -414,6 +467,22 @@ html{scroll-behavior:smooth}
     <span class="strook-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 109-9M3 12l3-3M3 12l3 3M12 8v4l3 2"/></svg></span>
     <span class="strook-tx"><b>100 dagen proberen</b><span>Wij betalen de retour</span></span>
   </div>
+  <div class="strook-item dubbel" aria-hidden="true">
+    <span class="strook-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/></svg></span>
+    <span class="strook-tx"><b>SkinSafe-kop</b><span>Mesjes achter een meshouder</span></span>
+  </div>
+  <div class="strook-item dubbel" aria-hidden="true">
+    <span class="strook-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v2M5 6l1.5 1.5M19 6l-1.5 1.5M9 17h6M10 21h4M9 17a5 5 0 116 0z"/></svg></span>
+    <span class="strook-tx"><b>LED-licht in de kop</b><span>Zicht op de donkere zones</span></span>
+  </div>
+  <div class="strook-item dubbel" aria-hidden="true">
+    <span class="strook-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3s6 6.4 6 10a6 6 0 11-12 0c0-3.6 6-10 6-10z"/></svg></span>
+    <span class="strook-tx"><b>IPX7 waterdicht</b><span>Ook onder de douche</span></span>
+  </div>
+  <div class="strook-item dubbel" aria-hidden="true">
+    <span class="strook-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 109-9M3 12l3-3M3 12l3 3M12 8v4l3 2"/></svg></span>
+    <span class="strook-tx"><b>100 dagen proberen</b><span>Wij betalen de retour</span></span>
+  </div>
 </div></div>
 
 <article class="article">
@@ -444,6 +513,7 @@ html{scroll-behavior:smooth}
   <div class="tintkop">
     <h2 class="duo">Het lag niet aan jou,<span class="b">het lag aan wat je in je hand had.</span></h2>
     <p>Onder de gordel is de huid los en beweegt hij mee. Een mesje en een baardtrimmer gaan er allebei van uit dat je huid stilligt en strak staat. Dat doet hij daar niet, en daar loopt het elke keer op stuk.</p>
+    <p class="veeghint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg>Veeg opzij</p>
   </div>
   <div class="kaarten3">
     <div class="tk rose">
@@ -613,6 +683,7 @@ html{scroll-behavior:smooth}
     <span class="kicker on-dark">Aanbod van de adverteerder</span>
     <h2 class="duo on-dark">Drie manieren om te beginnen,<span class="b">honderd dagen om te kijken.</span></h2>
     <p>Twee jaar garantie op elk apparaat. Honderd dagen om het te proberen: bevalt het niet, dan sturen wij het retourlabel en betalen wij de retour. Je risico is daarmee de moeite van het inpakken.</p>
+    <p class="veeghint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg>Veeg opzij</p>
   </div>
 
   <div class="plannen">

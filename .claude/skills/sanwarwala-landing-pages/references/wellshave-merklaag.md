@@ -864,9 +864,51 @@ img{max-width:100%;height:auto;display:block}
 Meet het na met `naturalWidth/naturalHeight` tegen `getBoundingClientRect()`. Op het oog zie
 je 50% vervorming aan voor "wat dun".
 
-**Mobiel is de maat.** Ontwerp en controleer op **390px**. Rasters vallen terug naar één
-kolom; kaarten in een schuifstrip worden ongeveer 82% breed zodat de rand van de volgende
-zichtbaar blijft — dat is wat mensen laat schuiven.
+**Mobiel is de maat.** Ontwerp en controleer op **390px**.
+
+Alles in een kolom stapelen is de luie oplossing en levert een pagina van vijftienduizend
+pixels op. Een telefoon is smal, niet arm: gebruik de breedte waar dat kan.
+
+| Blok | Op mobiel | Waarom |
+|---|---|---|
+| Geruststrook | doorlopende ticker | vier korte items, niemand leest die regel voor regel |
+| Tintkaarten | schuifstrip, 82% breed | de volgorde draagt een argument, dus geen automaat |
+| Pakketkaarten | schuifstrip, 86% breed, met snap | zo vergelijk je pakketten, en het scheelt drie schermhoogtes |
+| Kenmerkkaarten | 2 &times; 2 in plaats van 4 onder elkaar | korte teksten, die passen naast elkaar |
+| Lopende tekst, FAQ, mechaniek | blijft een kolom | dit moet je lezen |
+
+De regel erachter: **wat gelezen moet worden blijft staan, wat gescand wordt mag opzij.**
+Zet nooit iets dat de lezer moet lezen in een automaat; hij leest op zijn tempo, niet op
+dat van jou.
+
+Drie dingen die het bruikbaar houden:
+
+- **Een strip moet er als een strip uitzien.** 82% breed zodat de rand van de volgende kaart
+  in beeld staat, plus een korte veeghint in kapitalen boven de strip. Zonder die twee denkt
+  de helft dat er niets meer komt.
+- **De ticker verdubbel je in de HTML** en je schuift hem `-50%`. De kopie krijgt
+  `aria-hidden="true"` en staat op desktop op `display:none`, zodat een schermlezer de vier
+  items niet acht keer voorleest.
+- **`prefers-reduced-motion` zet de ticker stil** en verbergt de kopie. Een balk die eindeloos
+  beweegt is precies wat die instelling bedoelt.
+
+```css
+@media(max-width:760px){
+  .strook-in{display:flex;width:max-content;animation:ws-ticker 26s linear infinite}
+  .strook:hover .strook-in{animation-play-state:paused}
+  .kaarten3,.plannen{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;
+    scrollbar-width:none;padding:4px 20px 14px}
+  .kaarten3>*,.plannen>*{scroll-snap-align:center;flex:0 0 82%}
+}
+@keyframes ws-ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){
+  .strook-in{animation:none;width:auto}
+  .strook-item.dubbel{display:none!important}
+}
+```
+
+Meet het resultaat in paginahoogte op 390px, niet op gevoel. Bij de Groom Guard-advertorial
+ging hij van 15.976 naar 12.874 pixels, een vijfde eraf, zonder dat er een woord uit ging.
 
 **Zoek-en-vervang in CSS is gevaarlijk.** Een patroon als `.reviews{...}` komt ook voor in
 gedeelde regels als `.grid3,.stats,.reviews{...}`. Vervang gericht en controleer daarna of de
