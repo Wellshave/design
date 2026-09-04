@@ -569,7 +569,7 @@
 
         {%- elsif s.vergelijk_label != blank and kan_vergelijken -%}
           {%- comment -%} terugval: zijn er geen twee modellen, dan blijft de knop {%- endcomment -%}
-          <button type="button" class="ws-cta2" data-ws-vgl data-ws-anker="{{ s.vergelijk_anker }}" data-dbg="tonen={{ s.kies_tonen }};aantal={{ kies_aantal }};leeg={% if vergelijk_lijst == blank %}1{% else %}0{% endif %}">
+          <button type="button" class="ws-cta2" data-ws-vgl data-ws-anker="{{ s.vergelijk_anker }}">
             <svg><use href="#ws-pdp-vgl-{{ section.id }}"/></svg>{{ s.vergelijk_label }}
           </button>
         {%- endif -%}
