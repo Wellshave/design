@@ -44,6 +44,7 @@
   --read:660px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
 html{scroll-behavior:smooth}
 body{
   background:var(--paper);color:var(--ink);
@@ -360,8 +361,11 @@ a{color:inherit}
 @media(max-width:760px){
   .item{grid-template-columns:1fr;gap:20px}
   .item:nth-child(even) .item-beeld{order:0}
-  .vgl{font-size:13px}
+  .vgl{font-size:13px;min-width:520px}
   .vgl th,.vgl td{padding:11px 10px}
+  /* de tabel schuift in zijn eigen bak; anders duwt hij de hele pagina scheef */
+  .vergelijk{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .vergelijk::-webkit-scrollbar{display:none}
 }
 
 /* ---------- proof (ongewijzigd van opzet) ---------- */
@@ -486,17 +490,50 @@ footer .logo{display:block;margin-bottom:8px;color:var(--ink)}
 }
 @keyframes ws-ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-.veeghint{display:none}
+/* De regel boven een schuifstrip: veeghint links, teller rechts. De bolletjes eronder
+   worden door het scriptje onderaan gevuld; zonder javascript blijft de strip veegbaar.
+   Let op: de genummerde punten van een listicle blijven een kolom. Alleen de
+   aanbodkaarten en de reviewstrook gaan opzij; zie merklaag deel 17. */
+.veegrij{display:none}
+.stripdots{display:none}
 @media(max-width:760px){
-  .veeghint{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:800;
-    letter-spacing:.14em;text-transform:uppercase;color:var(--ink-40);margin-top:14px}
-  .veeghint svg{width:15px;height:15px;flex-shrink:0}
-  .offer .veeghint{color:rgba(255,255,255,.45);justify-content:center}
+  .veegrij{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 20px;margin:14px 0 0}
+  .veegrij .vh{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:800;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--ink-40)}
+  .veegrij .vh svg{width:15px;height:15px;flex-shrink:0}
+  .stripteller{display:inline-flex;align-items:center;justify-content:center;min-width:52px;
+    padding:5px 11px;border-radius:100px;border:1px solid var(--ink-10);font-size:11.5px;
+    font-weight:800;color:var(--ink-60);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .offer .veegrij .vh{color:rgba(255,255,255,.45)}
+  .offer .stripteller{border-color:rgba(255,255,255,.18);color:rgba(255,255,255,.62)}
+
+  .stripdots{display:flex;justify-content:center;align-items:center;gap:7px;padding:12px 20px 0}
+  .stripdots button{appearance:none;-webkit-appearance:none;border:0;padding:0;cursor:pointer;
+    width:7px;height:7px;border-radius:100px;background:var(--ink-10);
+    transition:width .2s ease,background .2s ease}
+  .stripdots button[aria-current="true"]{width:24px;background:var(--bronze)}
+  .offer .stripdots button{background:rgba(255,255,255,.22)}
+  .offer .stripdots button[aria-current="true"]{background:var(--gold)}
+
   .kaarten3,.plannen{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;
     -webkit-overflow-scrolling:touch;scrollbar-width:none;padding:4px 20px 14px;margin:0;max-width:none}
   .kaarten3::-webkit-scrollbar,.plannen::-webkit-scrollbar{display:none}
   .kaarten3>*,.plannen>*{scroll-snap-align:center;flex:0 0 82%}
   .plannen>*{flex-basis:86%}
+
+  /* de garantieregel als raster van tegels met een icoon, niet als woordenrij */
+  .assure{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:0 20px;
+    letter-spacing:.05em;font-size:10.5px}
+  .assure span{display:flex;align-items:center;gap:9px;text-align:left;line-height:1.3;
+    background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+    border-radius:13px;padding:12px}
+  .assure svg{width:15px;height:15px;flex-shrink:0;color:var(--gold)}
+
+  .plan-beeld{padding:16px 16px 8px}
+  .plan-beeld img{max-width:190px}
+  .plan-body{padding:18px 20px 22px;gap:11px}
+  .plan-nu{font-size:31px}
+  .plan-lijst li{font-size:13px;gap:9px}
   .tk{min-height:100%}
 }
 @media(max-width:520px){
@@ -513,6 +550,7 @@ footer .logo{display:block;margin-bottom:8px;color:var(--ink)}
   .knop,.nav-cta,.plan-knop{transition:none}
   .strook-in{animation:none;width:auto}
   .strook-item.dubbel{display:none!important}
+  .stripdots button{transition:none}
 }
 </style>
 </head>
@@ -651,8 +689,11 @@ footer .logo{display:block;margin-bottom:8px;color:var(--ink)}
     <span class="kicker on-dark">[Label]</span>
     <h2 class="duo on-dark">[Eerste regel]<span class="b">[tweede regel.]</span></h2>
   </div>
-  <div class="plannen">[drie plan-kaarten, zie startbestand-advertorial.html]</div>
-  <div class="assure"><span>[Proef]</span><span>[Garantie]</span><span>[Verzending]</span></div>
+  <p class="veegrij" data-rij="aanbod"><span class="vh">[pijlicoon]Veeg opzij</span><span class="stripteller" data-voor="aanbod">1 / 3</span></p>
+  <div class="plannen" data-strip="aanbod">[drie plan-kaarten, zie startbestand-advertorial.html]</div>
+  <div class="stripdots" data-voor="aanbod" aria-label="Pakketten"></div>
+  <!-- Op mobiel wordt dit een raster van tegels; geef elke tegel daarom een icoon. -->
+  <div class="assure"><span>[icoon][Proef]</span><span>[icoon][Garantie]</span><span>[icoon][Verzending]</span><span>[icoon][Levertijd]</span></div>
 </section>
 
 <!-- ============ BEWIJS ============ identiek aan de advertorial: de live
@@ -703,6 +744,77 @@ footer .logo{display:block;margin-bottom:8px;color:var(--ink)}
     rijen.forEach(function(r){ if(r.isIntersecting){ r.target.classList.add('in'); io.unobserve(r.target); } });
   }, {rootMargin:'0px 0px -12% 0px'});
   el.forEach(function(n){ io.observe(n); });
+})();
+</script>
+<script>
+/* Bolletjes en teller onder elke [data-strip]. Zonder javascript blijven de strips
+   gewoon veegbaar; alleen de aanwijzing eronder ontbreekt dan. */
+(function(){
+  var strips = document.querySelectorAll('[data-strip]');
+  if(!strips.length) return;
+
+  Array.prototype.forEach.call(strips, function(strip){
+    var naam   = strip.getAttribute('data-strip');
+    var dots   = document.querySelector('.stripdots[data-voor="'+naam+'"]');
+    var teller = document.querySelector('.stripteller[data-voor="'+naam+'"]');
+    var rij    = document.querySelector('.veegrij[data-rij="'+naam+'"]');
+    var wacht  = false;
+
+    function zichtbaar(){
+      return Array.prototype.filter.call(strip.children, function(k){
+        return getComputedStyle(k).display !== 'none';
+      });
+    }
+    function actief(lijst){
+      var r = strip.getBoundingClientRect(), mid = r.left + r.width/2;
+      var best = 0, kleinst = Infinity;
+      for(var i=0;i<lijst.length;i++){
+        var b = lijst[i].getBoundingClientRect();
+        var afstand = Math.abs((b.left + b.width/2) - mid);
+        if(afstand < kleinst){ kleinst = afstand; best = i; }
+      }
+      return best;
+    }
+    function ga(i){
+      return function(){
+        var lijst = zichtbaar();
+        if(lijst[i]) lijst[i].scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
+      };
+    }
+    function teken(){
+      var lijst = zichtbaar(), aantal = lijst.length, i = actief(lijst);
+      if(dots && dots.childElementCount !== aantal){
+        dots.innerHTML = '';
+        for(var j=0;j<aantal;j++){
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.setAttribute('aria-label', 'Ga naar kaart ' + (j+1));
+          b.addEventListener('click', ga(j));
+          dots.appendChild(b);
+        }
+      }
+      if(dots) for(var k=0;k<dots.children.length;k++){
+        dots.children[k].setAttribute('aria-current', k === i ? 'true' : 'false');
+      }
+      if(teller) teller.textContent = (i+1) + ' / ' + aantal;
+      /* een enkele kaart schuift nergens heen, dan verdwijnt de bediening */
+      if(dots) dots.hidden = aantal < 2;
+      if(rij)  rij.hidden  = aantal < 2;
+    }
+    function later(){
+      if(wacht) return;
+      wacht = true;
+      requestAnimationFrame(function(){ wacht = false; teken(); });
+    }
+
+    strip.addEventListener('scroll', later, {passive:true});
+    window.addEventListener('resize', later);
+    Array.prototype.forEach.call(document.querySelectorAll('.tabradio'), function(r){
+      r.addEventListener('change', function(){ strip.scrollLeft = 0; teken(); });
+    });
+    if(document.fonts && document.fonts.ready) document.fonts.ready.then(teken);
+    teken();
+  });
 })();
 </script>
 <script type="text/javascript" src="https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>

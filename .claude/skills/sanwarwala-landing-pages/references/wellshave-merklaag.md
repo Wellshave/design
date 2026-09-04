@@ -874,25 +874,43 @@ pixels op. Een telefoon is smal, niet arm: gebruik de breedte waar dat kan.
 | Blok | Op mobiel | Waarom |
 |---|---|---|
 | Geruststrook | doorlopende ticker | vier korte items, niemand leest die regel voor regel |
-| Tintkaarten | schuifstrip, 82% breed | de volgorde draagt een argument, dus geen automaat |
+| Tintkaarten | tabpaar probleem/oplossing, elk een schuifstrip | het zijn twee antwoorden op een vraag, niet drie losse kaarten |
 | Pakketkaarten | schuifstrip, 86% breed, met snap | zo vergelijk je pakketten, en het scheelt drie schermhoogtes |
 | Kenmerkkaarten | 2 &times; 2 in plaats van 4 onder elkaar | korte teksten, die passen naast elkaar |
+| Garantieregel | 2 &times; 2 tegels met een icoon | vier kapitalen achter elkaar lezen als &eacute;&eacute;n grijze regel |
+| Aanbodstrook | beeld en tekst op een rij, prijs en knop eronder | anders krimpt de tekstkolom tot een letter breed |
 | Lopende tekst, FAQ, mechaniek | blijft een kolom | dit moet je lezen |
 
 De regel erachter: **wat gelezen moet worden blijft staan, wat gescand wordt mag opzij.**
 Zet nooit iets dat de lezer moet lezen in een automaat; hij leest op zijn tempo, niet op
 dat van jou.
 
-Drie dingen die het bruikbaar houden:
+Vijf dingen die het bruikbaar houden:
 
 - **Een strip moet er als een strip uitzien.** 82% breed zodat de rand van de volgende kaart
   in beeld staat, plus een korte veeghint in kapitalen boven de strip. Zonder die twee denkt
   de helft dat er niets meer komt.
+- **Boven elke strip staat een veegrij, eronder bolletjes.** De veegrij is &eacute;&eacute;n regel:
+  veeghint links, een teller rechts die `1 / 3` zegt. De bolletjes eronder zijn knoppen, dus
+  je kunt er ook op tikken. Een teller doet wat een strip zelf niet kan: zeggen hoeveel er
+  nog komt. Bij &eacute;&eacute;n zichtbare kaart verdwijnen veegrij en bolletjes, anders wijst de
+  bediening naar niets.
+- **Twee kaarten die tegenover elkaar staan worden een tabpaar.** Probleem en oplossing als
+  twee knoppen naast elkaar, met verborgen radio's en `:checked ~` selectors. Dat werkt zonder
+  javascript, en het zet de keuze waar hij hoort: in &eacute;&eacute;n schermhoogte in plaats van drie.
+  De radio's moeten broer blijven van de tabbalk en van de strip, anders bijten de selectors niet.
 - **De ticker verdubbel je in de HTML** en je schuift hem `-50%`. De kopie krijgt
   `aria-hidden="true"` en staat op desktop op `display:none`, zodat een schermlezer de vier
   items niet acht keer voorleest.
 - **`prefers-reduced-motion` zet de ticker stil** en verbergt de kopie. Een balk die eindeloos
   beweegt is precies wat die instelling bedoelt.
+
+Twee valkuilen die je een keer kost:
+
+- **`flex:1 1 0` in een strook die mag afbreken.** De tekstkolom krimpt dan tot een letter
+  breed en de strook wordt vier keer zo hoog. Geef hem een echte basis, `flex:1 1 180px`.
+- **`hidden` verliest van `display:flex`.** Zet `[hidden]{display:none!important}` in de reset,
+  anders blijft bediening staan die je in javascript hebt uitgezet.
 
 ```css
 @media(max-width:760px){
@@ -901,6 +919,16 @@ Drie dingen die het bruikbaar houden:
   .kaarten3,.plannen{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;
     scrollbar-width:none;padding:4px 20px 14px}
   .kaarten3>*,.plannen>*{scroll-snap-align:center;flex:0 0 82%}
+
+  /* tabpaar: probleem of oplossing, zonder javascript */
+  #tt-probleem:checked ~ .kaarten3 .tk.oplossing{display:none}
+  #tt-oplossing:checked ~ .kaarten3 .tk.probleem{display:none}
+  #tt-oplossing:checked ~ .kaarten3 .tk.oplossing{flex-basis:100%}
+
+  /* veegrij en bolletjes */
+  .veegrij{display:flex;align-items:center;justify-content:space-between;padding:0 20px}
+  .stripdots{display:flex;justify-content:center;gap:7px;padding:12px 20px 0}
+  .stripdots button[aria-current="true"]{width:24px;background:var(--bronze)}
 }
 @keyframes ws-ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @media(prefers-reduced-motion:reduce){
@@ -910,7 +938,11 @@ Drie dingen die het bruikbaar houden:
 ```
 
 Meet het resultaat in paginahoogte op 390px, niet op gevoel. Bij de Groom Guard-advertorial
-ging hij van 15.976 naar 12.874 pixels, een vijfde eraf, zonder dat er een woord uit ging.
+ging hij van 15.976 naar 12.757 pixels, ruim een vijfde eraf, zonder dat er een woord uit ging.
+
+De markup en het scriptje voor de veegrij, de teller en de bolletjes staan kant en klaar in
+`startbestand-advertorial.html` en `startbestand-listicle.html`. Neem ze daar vandaan in plaats
+van ze opnieuw te bedenken.
 
 **Zoek-en-vervang in CSS is gevaarlijk.** Een patroon als `.reviews{...}` komt ook voor in
 gedeelde regels als `.grid3,.stats,.reviews{...}`. Vervang gericht en controleer daarna of de

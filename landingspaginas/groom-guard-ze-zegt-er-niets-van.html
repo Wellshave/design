@@ -25,6 +25,7 @@
   font-size:16px;line-height:1.65;font-weight:400;-webkit-font-smoothing:antialiased;
 }
 .gg-lp *{box-sizing:border-box;margin:0;padding:0}
+.gg-lp [hidden]{display:none!important}
 .gg-lp img{max-width:100%;height:auto;display:block}
 .gg-lp a{color:inherit}
 .gg-lp :focus-visible{outline:3px solid var(--bronze);outline-offset:3px}
@@ -341,14 +342,6 @@ html{scroll-behavior:smooth}
   .gg-lp .tinten{padding:52px 0;margin-top:44px}
   .gg-lp .mech{padding:58px 0}
 }
-@media(max-width:640px){
-  .gg-lp .strip-in{gap:14px}
-  .gg-lp .strip-tx{flex-basis:100%;order:2}
-  .gg-lp .strip-beeld{order:1}
-  .gg-lp .strip-prijs{order:3}
-  .gg-lp .strip .knop{order:4;flex:1 1 auto;justify-content:center}
-  .gg-lp .stickybar-tx span{display:none}
-}
 @media(max-width:520px){
   .gg-lp .strook-in{grid-template-columns:1fr}
   .gg-lp .strook-item + .strook-item{border-left:0;border-top:1px solid var(--ink-10)}
@@ -372,13 +365,7 @@ html{scroll-behavior:smooth}
 @keyframes ws-ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* schuifstrips: tintkaarten en pakketten naast elkaar, met de rand van de volgende in beeld */
-.gg-lp .veeghint{display:none}
 @media(max-width:760px){
-  .gg-lp .veeghint{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:800;
-    letter-spacing:.14em;text-transform:uppercase;color:var(--ink-40);margin-top:14px}
-  .gg-lp .veeghint svg{width:15px;height:15px;flex-shrink:0}
-  .gg-lp .offer .veeghint{color:rgba(255,255,255,.45);justify-content:center}
-
   .gg-lp .kaarten3,.gg-lp .plannen{display:flex;gap:12px;overflow-x:auto;
     scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
     scrollbar-width:none;padding:4px 20px 14px;margin:0;max-width:none}
@@ -406,11 +393,101 @@ html{scroll-behavior:smooth}
   .gg-lp .verlangen{margin:52px auto}
 }
 
+
+/* ---------- mobiel: tabs, teller en bolletjes ---------- */
+
+/* probleem en oplossing naast elkaar als twee knoppen, in plaats van drie kaarten onder elkaar */
+.gg-lp .tabradio{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;overflow:hidden}
+.gg-lp .tabbalk{display:none}
+@media(max-width:760px){
+  .gg-lp .tabbalk{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin:18px 20px 0;
+    background:rgba(17,17,17,.06);border-radius:100px;padding:5px}
+  .gg-lp .tabbalk label{display:block;text-align:center;cursor:pointer;border-radius:100px;
+    padding:11px 8px;font-size:13px;font-weight:800;letter-spacing:-.01em;color:var(--ink-60);
+    transition:background .18s ease,color .18s ease}
+  .gg-lp .tabradio:focus-visible ~ .tabbalk{outline:3px solid var(--bronze);outline-offset:3px;border-radius:100px}
+  .gg-lp #tt-probleem:checked ~ .tabbalk label[for="tt-probleem"],
+  .gg-lp #tt-oplossing:checked ~ .tabbalk label[for="tt-oplossing"]{background:var(--carbon);color:#fff}
+  .gg-lp #tt-probleem:checked ~ .kaarten3 .tk.oplossing{display:none}
+  .gg-lp #tt-oplossing:checked ~ .kaarten3 .tk.probleem{display:none}
+  .gg-lp #tt-oplossing:checked ~ .kaarten3 .tk.oplossing{flex-basis:100%}
+}
+
+/* de regel boven een schuifstrip: veeghint links, teller rechts */
+.gg-lp .veegrij{display:none}
+.gg-lp .stripdots{display:none}
+@media(max-width:760px){
+  .gg-lp .veegrij{display:flex;align-items:center;justify-content:space-between;gap:12px;
+    padding:0 20px;margin:14px 0 0}
+  .gg-lp .veegrij .vh{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:800;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--ink-40)}
+  .gg-lp .veegrij .vh svg{width:15px;height:15px;flex-shrink:0}
+  .gg-lp .stripteller{display:inline-flex;align-items:center;justify-content:center;min-width:52px;
+    padding:5px 11px;border-radius:100px;border:1px solid var(--ink-10);font-size:11.5px;
+    font-weight:800;color:var(--ink-60);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .gg-lp .offer .veegrij .vh{color:rgba(255,255,255,.45)}
+  .gg-lp .offer .stripteller{border-color:rgba(255,255,255,.18);color:rgba(255,255,255,.62)}
+
+  .gg-lp .stripdots{display:flex;justify-content:center;align-items:center;gap:7px;padding:12px 20px 0}
+  .gg-lp .stripdots button{appearance:none;-webkit-appearance:none;border:0;padding:0;cursor:pointer;
+    width:7px;height:7px;border-radius:100px;background:var(--ink-10);
+    transition:width .2s ease,background .2s ease}
+  .gg-lp .stripdots button[aria-current="true"]{width:24px;background:var(--bronze)}
+  .gg-lp .offer .stripdots button{background:rgba(255,255,255,.22)}
+  .gg-lp .offer .stripdots button[aria-current="true"]{background:var(--gold)}
+}
+
+/* de aanbodstrook blijft horizontaal: beeld en tekst op een rij, prijs en knop eronder */
+@media(max-width:640px){
+  .gg-lp .strip-in{gap:12px 14px;padding:16px 16px}
+  .gg-lp .strip-beeld{order:1;width:56px;height:56px;border-radius:12px}
+  .gg-lp .strip-tx{order:2;flex:1 1 180px;min-width:0}
+  .gg-lp .strip-tx b{font-size:14.5px}
+  .gg-lp .strip-tx span{font-size:12.5px;margin-top:2px}
+  .gg-lp .strip-prijs{order:3;font-size:14px}
+  .gg-lp .strip .knop{order:4;flex:1 1 auto;justify-content:center;padding:12px 18px;font-size:13px}
+}
+
+/* de garantieregel als raster van vier tegels met een icoon */
+@media(max-width:760px){
+  .gg-lp .assure{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:0 20px;
+    letter-spacing:.05em;font-size:10.5px}
+  .gg-lp .assure span{display:flex;align-items:center;gap:9px;text-align:left;
+    background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+    border-radius:13px;padding:12px 12px;color:rgba(255,255,255,.74);line-height:1.3}
+  .gg-lp .assure svg{width:15px;height:15px;flex-shrink:0;color:var(--gold)}
+}
+
+/* beeld en kaarten korter, zodat de pagina niet doorloopt op ademruimte */
+@media(max-width:760px){
+  .gg-lp .artfig{margin-top:26px}
+  .gg-lp .artfig img{aspect-ratio:16/11;object-fit:cover}
+  .gg-lp .artfig figcaption{margin-top:9px;font-size:12.5px}
+  .gg-lp .plan-beeld{padding:16px 16px 8px}
+  .gg-lp .plan-beeld img{max-width:190px}
+  .gg-lp .plan-body{padding:18px 20px 22px;gap:11px}
+  .gg-lp .plan-nu{font-size:31px}
+  .gg-lp .plan-lijst li{font-size:13px;gap:9px}
+  .gg-lp .mech-kaart{padding:22px 20px 16px}
+}
+@media(max-width:640px){
+  .gg-lp .faq summary{padding:15px 30px 15px 0;font-size:14.5px}
+  .gg-lp .faq summary::after{top:12px}
+  .gg-lp .faq details p{padding-bottom:18px;font-size:14px}
+}
+
+/* vaste balk met productbeeld */
+.gg-lp .stickybar-links{display:flex;align-items:center;gap:11px;min-width:0}
+.gg-lp .stickybar-beeld{width:42px;height:42px;border-radius:11px;flex-shrink:0;padding:4px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);display:grid;place-items:center}
+.gg-lp .stickybar-beeld img{width:100%;height:100%;object-fit:contain}
+
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .gg-lp .knop,.gg-lp .plan-knop,.gg-lp .stickybar{transition:none}
   .gg-lp .strook-in{animation:none;width:auto}
   .gg-lp .strook-item.dubbel{display:none!important}
+  .gg-lp .tabbalk label,.gg-lp .stripdots button{transition:none}
 }
 </style>
 </head>
@@ -513,28 +590,36 @@ html{scroll-behavior:smooth}
   <div class="tintkop">
     <h2 class="duo">Het lag niet aan jou,<span class="b">het lag aan wat je in je hand had.</span></h2>
     <p>Onder de gordel is de huid los en beweegt hij mee. Een mesje en een baardtrimmer gaan er allebei van uit dat je huid stilligt en strak staat. Dat doet hij daar niet, en daar loopt het elke keer op stuk.</p>
-    <p class="veeghint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg>Veeg opzij</p>
   </div>
-  <div class="kaarten3">
-    <div class="tk rose">
+
+  <input class="tabradio" type="radio" name="tt" id="tt-probleem" checked>
+  <input class="tabradio" type="radio" name="tt" id="tt-oplossing">
+  <div class="tabbalk">
+    <label for="tt-probleem">Het probleem</label>
+    <label for="tt-oplossing">De oplossing</label>
+  </div>
+  <p class="veegrij" data-rij="tinten"><span class="vh"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg>Veeg opzij</span><span class="stripteller" data-voor="tinten">1 / 2</span></p>
+  <div class="kaarten3" data-strip="tinten">
+    <div class="tk rose probleem">
       <span class="tk-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M7 7v11a2 2 0 002 2h6a2 2 0 002-2V7M10 4h4"/></svg></span>
       <h3>Het scheermesje uit de douche</h3>
       <p>Een mesje is ontworpen voor een strak, plat vlak: je wang. Daar trek je de huid vanzelf op spanning. Onder de gordel pakt het blad geen haar maar een plooi huid. Wat je overhoudt zijn sneetjes die je nergens kunt afplakken, en haren die krullend terugkomen.</p>
       <span class="tk-voet">Wat je probeerde</span>
     </div>
-    <div class="tk amber">
+    <div class="tk amber probleem">
       <span class="tk-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3v6M12 3v6M16 3v6M5 9h14v3a4 4 0 01-4 4H9a4 4 0 01-4-4zM12 16v5"/></svg></span>
       <h3>De baardtrimmer uit de la</h3>
       <p>Gebouwd voor kort haar op een vaste ondergrond. De bladpunten liggen bloot, want op je kaak levert dat geen probleem op. Je merkt precies &eacute;&eacute;n keer wat diezelfde punten op dunne, bewegende huid doen. Daarna gebruik je hem alleen nog voor je baard.</p>
       <span class="tk-voet">Wat je probeerde</span>
     </div>
-    <div class="tk sage">
+    <div class="tk sage oplossing">
       <span class="tk-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
       <h3>Een kop met een meshouder ervoor</h3>
       <p>Hetzelfde principe als een beschermkap op gereedschap: er zit iets tussen het snijvlak en jou. De houder glijdt over je huid, het keramische mes pakt alleen wat er tussen de tanden door komt. Plus licht, zodat je niet meer op gevoel werkt.</p>
       <span class="tk-voet">Wat wel werkt</span>
     </div>
   </div>
+  <div class="stripdots" data-voor="tinten" aria-label="Kaarten"></div>
 </section>
 
 <section class="strip licht" style="margin:44px auto 0"><div class="strip-in">
@@ -683,10 +768,10 @@ html{scroll-behavior:smooth}
     <span class="kicker on-dark">Aanbod van de adverteerder</span>
     <h2 class="duo on-dark">Drie manieren om te beginnen,<span class="b">honderd dagen om te kijken.</span></h2>
     <p>Twee jaar garantie op elk apparaat. Honderd dagen om het te proberen: bevalt het niet, dan sturen wij het retourlabel en betalen wij de retour. Je risico is daarmee de moeite van het inpakken.</p>
-    <p class="veeghint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg>Veeg opzij</p>
   </div>
+  <p class="veegrij" data-rij="aanbod"><span class="vh"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg>Veeg opzij</span><span class="stripteller" data-voor="aanbod">1 / 3</span></p>
 
-  <div class="plannen">
+  <div class="plannen" data-strip="aanbod">
 
     <div class="plan">
       <div class="plan-beeld">
@@ -758,10 +843,13 @@ html{scroll-behavior:smooth}
     </div>
 
   </div>
+  <div class="stripdots" data-voor="aanbod" aria-label="Pakketten"></div>
 
   <div class="assure">
-    <span>100 dagen proberen</span><span>2 jaar garantie</span>
-    <span>Gratis verzending vanaf &euro;30</span><span>Morgen in huis</span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 109-9M3 12l3-3M3 12l3 3M12 8v4l3 2"/></svg>100 dagen proberen</span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>2 jaar garantie</span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7zM7 19a2 2 0 100-4 2 2 0 000 4zM18 19a2 2 0 100-4 2 2 0 000 4z"/></svg>Gratis verzending</span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 109 9M12 7v5l3.5 2M17 3v5h5"/></svg>Morgen in huis</span>
   </div>
   <p class="offer-note">Ma t/m vr v&oacute;&oacute;r 23:59 besteld is de volgende dag in huis. Gratis verzending in Nederland en Belgi&euml; vanaf &euro;30, daaronder &euro;4,95.</p>
 </section>
@@ -777,7 +865,10 @@ html{scroll-behavior:smooth}
 
 <div class="stickybar" id="ws-stickybar">
   <div class="stickybar-in">
-    <span class="stickybar-tx">Vanaf &euro;44,95<span>Groom Guard &middot; 100 dagen proberen</span></span>
+    <span class="stickybar-links">
+      <span class="stickybar-beeld"><img src="https://wellshave.com/cdn/shop/files/without_base0001.png?v=1773328246&amp;width=200" alt="" loading="lazy" decoding="async"></span>
+      <span class="stickybar-tx">Vanaf &euro;44,95<span>Groom Guard</span></span>
+    </span>
     <a class="knop goud" href="#kopen">Bekijk het aanbod</a>
   </div>
 </div>
@@ -792,6 +883,77 @@ html{scroll-behavior:smooth}
   new IntersectionObserver(function(e){
     balk.classList.toggle('weg', e[0].isIntersecting);
   },{rootMargin:'0px 0px -25% 0px'}).observe(aanbod);
+})();
+</script>
+<script>
+/* Bolletjes en teller onder de schuifstrips. Zonder javascript blijven de strips
+   gewoon veegbaar; alleen de aanwijzing eronder ontbreekt dan. */
+(function(){
+  var strips = document.querySelectorAll('.gg-lp [data-strip]');
+  if(!strips.length) return;
+
+  Array.prototype.forEach.call(strips, function(strip){
+    var naam   = strip.getAttribute('data-strip');
+    var dots   = document.querySelector('.stripdots[data-voor="'+naam+'"]');
+    var teller = document.querySelector('.stripteller[data-voor="'+naam+'"]');
+    var rij    = document.querySelector('.veegrij[data-rij="'+naam+'"]');
+    var wacht  = false;
+
+    function zichtbaar(){
+      return Array.prototype.filter.call(strip.children, function(k){
+        return getComputedStyle(k).display !== 'none';
+      });
+    }
+    function actief(lijst){
+      var r = strip.getBoundingClientRect(), mid = r.left + r.width/2;
+      var best = 0, kleinst = Infinity;
+      for(var i=0;i<lijst.length;i++){
+        var b = lijst[i].getBoundingClientRect();
+        var afstand = Math.abs((b.left + b.width/2) - mid);
+        if(afstand < kleinst){ kleinst = afstand; best = i; }
+      }
+      return best;
+    }
+    function ga(i){
+      return function(){
+        var lijst = zichtbaar();
+        if(lijst[i]) lijst[i].scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
+      };
+    }
+    function teken(){
+      var lijst = zichtbaar(), aantal = lijst.length, i = actief(lijst);
+      if(dots && dots.childElementCount !== aantal){
+        dots.innerHTML = '';
+        for(var j=0;j<aantal;j++){
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.setAttribute('aria-label', 'Ga naar kaart ' + (j+1));
+          b.addEventListener('click', ga(j));
+          dots.appendChild(b);
+        }
+      }
+      if(dots) for(var k=0;k<dots.children.length;k++){
+        dots.children[k].setAttribute('aria-current', k === i ? 'true' : 'false');
+      }
+      if(teller) teller.textContent = (i+1) + ' / ' + aantal;
+      /* een enkele kaart schuift nergens heen, dan verdwijnt de bediening */
+      if(dots) dots.hidden = aantal < 2;
+      if(rij)  rij.hidden  = aantal < 2;
+    }
+    function later(){
+      if(wacht) return;
+      wacht = true;
+      requestAnimationFrame(function(){ wacht = false; teken(); });
+    }
+
+    strip.addEventListener('scroll', later, {passive:true});
+    window.addEventListener('resize', later);
+    Array.prototype.forEach.call(document.querySelectorAll('.gg-lp .tabradio'), function(r){
+      r.addEventListener('change', function(){ strip.scrollLeft = 0; teken(); });
+    });
+    if(document.fonts && document.fonts.ready) document.fonts.ready.then(teken);
+    teken();
+  });
 })();
 </script>
 <script type="text/javascript" src="https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>

@@ -6,8 +6,8 @@
 - **Page ID:** `gid://shopify/Page/734955241804`
 - **Handle:** `ze-zegt-er-niets-van-b`
 - **Bron in deze repo:** `groom-guard-ze-zegt-er-niets-van-b.html`
-- **Stylesheet:** `https://cdn.shopify.com/s/files/1/0573/5743/4923/files/ws-gg-variant-b-2.css`
-  (versie 1 heette `ws-gg-variant-b.css` en wordt niet meer gebruikt)
+- **Stylesheet:** `https://cdn.shopify.com/s/files/1/0573/5743/4923/files/ws-gg-variant-b-4.css`
+  (versies 1 tot en met 3 staan er nog, maar worden niet meer gebruikt)
 
 De pagina draait binnen het themasjabloon. Ten opzichte van het bestand in deze
 repo zijn drie dingen anders, en dat is bewust:
@@ -61,11 +61,47 @@ https://widget.trustpilot.com/trustbox-data/5419b6ffb0d04a076446a9af?businessUni
 
 ### Teruggelezen na publicatie
 
-9 secties, 10 beelden, 3 pakketkaarten, 3 winkelwagenlinks, de vaste balk en
-het script staan er allemaal in. Gerenderd met `base.css` en `richtext.css` van
+9 secties, 10 beelden, 3 pakketkaarten, 3 winkelwagenlinks, de vaste balk, de
+tabbalk, de twee schuifstrips met teller en bolletjes, en beide scripts staan er
+allemaal in. Gerenderd met `base.css` en `richtext.css` van
 het thema ervoor en deze stylesheet erachter: geen horizontale overloop op 1440
 en 390, Montserrat laadt, de dubbele themakop is verborgen en de rail houdt
 1140px.
+
+## Het mobiele ontwerp
+
+Vanaf versie 4 van de stylesheet gaat op mobiel opzij wat gescand wordt. Wat er
+per blok gebeurt en waarom staat in deel 17 van de merklaag; hier alleen wat er
+op deze pagina zit en waar je op moet letten als je hem aanpast.
+
+| Blok | Onder 760px |
+|---|---|
+| Geruststrook | doorlopende ticker, met de vier items verdubbeld in de HTML |
+| Tintkaarten | tabpaar **Het probleem / De oplossing**, elk een schuifstrip |
+| Pakketkaarten | schuifstrip van drie, 86% breed, met snap |
+| Kenmerkkaarten | 2 &times; 2 |
+| Garantieregel | 2 &times; 2 tegels met een icoon |
+| Aanbodstroken | beeld en tekst op een rij, prijs en knop eronder |
+| Vaste balk | productbeeld erbij, prijs en knop |
+
+Boven elke schuifstrip staat een veegrij: veeghint links, teller rechts. Eronder
+staan bolletjes waar je op kunt tikken. Die worden gevuld door een scriptje
+onderaan de pagina; zonder javascript blijven de strips gewoon veegbaar.
+
+Drie dingen die stuk gaan als je ze aanraakt:
+
+1. **De radio's moeten broer blijven van `.tabbalk` en `.kaarten3`.** De tabs
+   werken op `#tt-probleem:checked ~ .kaarten3 .tk.oplossing{display:none}`. Zet je
+   ze in een extra `<div>`, dan bijt die selector niet meer en zie je alle drie de
+   kaarten door elkaar.
+2. **Shopify minificeert de stylesheet bij het uploaden.** Dat gaat goed, ook met
+   de `:checked ~` selectors en `[aria-current="true"]`, maar controleer het na een
+   upload: haal het bestand van de CDN en grep op die twee.
+3. **De pagina-editor van Shopify laat de `<input type="radio">` staan.** Dat is
+   nagekeken op de live pagina; ga er niet blind van uit bij een volgende sjabloon.
+
+Op 390px is de pagina 12.757 pixels hoog, tegen 15.976 in de eerste versie, zonder
+dat er een woord uit is gegaan.
 
 ## Beelden op de eigen CDN
 
