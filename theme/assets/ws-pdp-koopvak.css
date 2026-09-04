@@ -49,9 +49,27 @@
 .ws-pdp .ws-pdp-grid{display:grid;grid-template-columns:1.06fr 1fr;gap:16px;padding:16px;
   align-items:start;background:var(--ws-cream)}
 
+
 /* ---- podium ---- */
 .ws-pdp .ws-stg{position:relative;display:flex;flex-direction:column;background:var(--ws-cream2);
   border:1px solid rgba(17,17,17,.07);border-radius:20px;padding:22px 22px 18px;overflow:hidden;min-width:0}
+/* Het podium blijft staan terwijl het koopvak eronderdoor scrollt, tot de
+   onderkant van het blok. Daarna schuift het gewoon mee weg, want sticky
+   werkt alleen binnen zijn eigen grid.
+
+   Dit kan alleen omdat de grid al align-items:start heeft: zonder dat rekt de
+   kolom mee met de hoogte van de rij en houdt sticky geen ruimte over om in
+   te schuiven. Geen enkele voorouder heeft overflow, wat de andere manier is
+   waarop sticky stil kan uitvallen.
+
+   De afstand tot de bovenkant komt uit --header-height, die de header van het
+   thema zelf op :root zet (de aankondigingsbalk zit daar buiten, dus dit is
+   de hoogte van de vastgezette balk). 84px is de terugval als dat script niet
+   gedraaid heeft. */
+@media screen and (min-width:750px){
+  .ws-pdp .ws-stg{position:sticky;top:calc(var(--header-height, 84px) + 14px);align-self:start}
+}
+
 .ws-pdp .ws-stg .ws-glans{position:absolute;left:50%;top:44%;width:78%;height:52%;transform:translate(-50%,-50%);
   background:radial-gradient(ellipse at center,rgba(20,18,15,.045),rgba(20,18,15,0) 70%);pointer-events:none}
 /* het merkteken: de afbeelding uit de sectie-instelling "merk", stil op de achtergrond */
@@ -409,7 +427,6 @@
 .ws-pdp .ws-tel svg{width:15px;height:15px;color:var(--ws-tekstgoud)}
 .ws-pdp .ws-tel b{color:var(--ws-ink);font-weight:600}
 
-
 @media (max-width:1000px){
   .ws-pdp .ws-pdp-grid{grid-template-columns:1fr}
   .ws-pdp .ws-bij{display:none}
@@ -430,7 +447,6 @@
   .ws-pdp .ws-cta{font-size:12px;letter-spacing:.05em;padding:17px 10px}
   .ws-pdp .ws-cta2{font-size:10.5px;letter-spacing:.07em;gap:9px;padding:15px 10px}
 }
-
 
 /* ---- accordeons in het koopvak ---- */
 .ws-pdp .ws-acc{margin-top:14px;border-top:1px solid rgba(20,18,15,.13)}
@@ -456,7 +472,6 @@
 .ws-pdp .ws-acc li{margin:0 0 4px}
 @media (prefers-reduced-motion:reduce){
   .ws-pdp .ws-acc summary i::after{transition:none}}
-
 
 /* ---- de telefoon ----
    Ontwerp: het koopvak als één donkere kaart, van boven naar beneden precies
