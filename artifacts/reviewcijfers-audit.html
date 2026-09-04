@@ -107,6 +107,23 @@
   .niet li{font-size:14.5px; line-height:1.5; color:var(--zacht)}
   .niet li b{color:var(--inkt); font-weight:500}
 
+  .klaar{border-color:var(--goed)}
+  .klaar > div + div{background:color-mix(in srgb, var(--goed) 8%, var(--vlak))}
+  .merk-klaar{align-self:flex-start; font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:10px; font-weight:500; letter-spacing:.11em; text-transform:uppercase;
+    color:var(--goed); border:1px solid var(--goed); border-radius:100px; padding:2px 9px}
+  .stand{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:0;
+    border:1px solid var(--lijn); border-radius:3px; overflow:hidden; background:var(--vlak)}
+  @media (max-width:720px){ .stand{grid-template-columns:1fr} }
+  .stand > div{padding:19px 22px 21px; border-left:1px solid var(--lijn);
+    display:flex; flex-direction:column; gap:7px}
+  .stand > div:first-child{border-left:0}
+  @media (max-width:720px){ .stand > div{border-left:0; border-top:1px solid var(--lijn)}
+    .stand > div:first-child{border-top:0} }
+  .stand b{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:26px; font-weight:500;
+    letter-spacing:-.03em; line-height:1; font-variant-numeric:tabular-nums}
+  .stand p{font-size:13.5px; line-height:1.45; color:var(--zacht)}
+  .stand h3{font-size:14px}
   .slot{font-size:13.5px; line-height:1.6; color:var(--zacht);
     border-top:1px solid var(--lijn); padding-top:22px; max-width:76ch}
   @media (prefers-reduced-motion:reduce){ *{transition:none!important; animation:none!important} }
@@ -115,12 +132,25 @@
 <div class="wrap">
 
   <header style="display:flex;flex-direction:column;gap:15px">
-    <p class="ey">Wellshave &middot; v4 &middot; 4 september 2026</p>
-    <h1>Zestien plekken noemen een reviewcijfer.<br>Negen ervan kloppen niet.</h1>
-    <p class="lead">Ik heb de hele winkel op het proefthema v4 doorgelopen &mdash; homepage,
-      alle collecties, het productsjabloon, de losse pagina&rsquo;s, de advertorials, blog en
-      zoekresultaten, in alle vier de talen. Hieronder staat elke plek waar een score of een
-      aantal is ingetypt, en wat er zou moeten staan.</p>
+    <p class="ey">Wellshave &middot; v4 &middot; 4 september 2026 &middot; bijgewerkt na doorvoeren</p>
+    <h1>Zeven plekken zijn recht&shy;getrokken.<br>De rest zit buiten het thema.</h1>
+    <p class="lead">Afgesproken schrijfwijze: <b>4,4</b> als score, <b>1000+</b> als aantal,
+      <b>200.000+</b> bestellingen. Alles wat in het thema v4 staat is doorgevoerd en nagemeten.
+      Wat overblijft zit in de vertaallaag en in de advertorialpagina&rsquo;s &mdash; en dat is
+      meer werk dan het leek.</p>
+
+    <div class="stand">
+      <div><b style="color:var(--goed)">7</b><h3>Doorgevoerd op v4</h3>
+        <p>Footer, aankondigingsbalk, homepage, collectiesjabloon, het tweede productsjabloon en
+          twee standaardteksten in de code. Nagemeten op achttien pagina&rsquo;s.</p></div>
+      <div><b style="color:var(--fout)">4</b><h3>Nog te doen in de editor</h3>
+        <p>Vier velden in <span class="mono">templates/product.json</span>. Dat bestand staat vol
+          ingesloten app-iconen; met de hand overschrijven is te riskant.</p></div>
+      <div><b style="color:var(--fout)">12+</b><h3>Buiten het thema</h3>
+        <p>De Engelse, Duitse en Franse vertalingen, en acht advertorialpagina&rsquo;s met
+          <span class="mono">184.000</span> en <span class="mono">4,5/5 uit 800+</span> in de
+          lopende tekst &eacute;n in hun disclaimer.</p></div>
+    </div>
   </header>
 
   <section style="display:flex;flex-direction:column;gap:14px">
@@ -144,12 +174,12 @@
   <section class="groep">
     <h2>Op elke pagina van de winkel <span class="telling">2 fouten</span></h2>
 
-    <div class="rij">
+    <div class="rij klaar">
       <div>
+        <span class="merk-klaar">Doorgevoerd</span>
         <div class="plek"><h3>De footer</h3></div>
         <p class="pad">sections/footer-group.json &middot; <b>reviews_label</b></p>
-        <p class="nu">nu: <q>Zie onze 970+ reviews op</q></p>
-        <p class="straks">moet: <q>Zie onze 1.000+ reviews op</q></p>
+        <p class="straks">nu: <q>Zie onze 1000+ reviews op</q></p>
       </div>
       <div>
         <p class="waarom">Staat onder <em>elke</em> pagina van de winkel &mdash; dit is de
@@ -160,12 +190,12 @@
       </div>
     </div>
 
-    <div class="rij">
+    <div class="rij klaar">
       <div>
+        <span class="merk-klaar">Doorgevoerd</span>
         <div class="plek"><h3>De aankondigingsbalk bovenaan</h3></div>
         <p class="pad">sections/header-group.json &middot; blok <b>review_9cVYxJ</b></p>
-        <p class="nu">nu: <q>Uitstekend <b>4.5 / 5</b></q></p>
-        <p class="straks">moet: <q>Uitstekend <b>4,4 / 5</b></q></p>
+        <p class="straks">nu: <q>Uitstekend <b>4,4 / 5</b> &middot; 1000+ reviews</q></p>
       </div>
       <div>
         <p class="waarom">Twee dingen tegelijk: 4,5 is de sterrenwaarde, niet de score. En in
@@ -180,12 +210,12 @@
   <section class="groep">
     <h2>Homepage <span class="telling">1 zichtbaar, 2 in de terugval</span></h2>
 
-    <div class="rij">
+    <div class="rij klaar">
       <div>
+        <span class="merk-klaar">Doorgevoerd</span>
         <div class="plek"><h3>Afsluiter, bewijscel links</h3></div>
         <p class="pad">templates/index.json &middot; ws_afsluiter &middot; cel_1</p>
-        <p class="nu">nu: <q>4,4 uit 950+ beoordelingen</q></p>
-        <p class="straks">moet: <q>4,4 uit 1.000+ beoordelingen</q></p>
+        <p class="straks">nu: <q>4,4 uit 1000+ beoordelingen</q></p>
       </div>
       <div>
         <p class="waarom">De laatste zekerheid die een bezoeker leest voordat hij op de knop
@@ -195,12 +225,12 @@
       </div>
     </div>
 
-    <div class="rij">
+    <div class="rij klaar">
       <div>
+        <span class="merk-klaar">Doorgevoerd</span>
         <div class="plek"><h3>Zonder risico &mdash; de terugvalteksten</h3></div>
         <p class="pad">templates/index.json &middot; ws_belofte &middot; <b>tp_tekst</b>, <b>rev_totaal</b></p>
-        <p class="nu">nu: <q>4,5 uit 950+ beoordelingen op</q> en <q>950+ beoordelingen</q></p>
-        <p class="straks">moet: <q>4,4 uit 1.000+ beoordelingen op</q> en <q>1.000+ beoordelingen</q></p>
+        <p class="straks">nu: <q>4,4 uit 1000+ beoordelingen op</q> en <q>1000+ beoordelingen</q></p>
       </div>
       <div>
         <p class="waarom">Deze zie je normaal niet: de Trustpilot-widget staat ingevuld en die
@@ -226,18 +256,24 @@
   <section class="groep">
     <h2>Product- en collectiepagina&rsquo;s <span class="telling">4 fouten</span></h2>
 
-    <div class="rij">
+    <div class="rij ernstig">
       <div>
-        <div class="plek"><h3>Koopvak, de sterrenregel</h3></div>
-        <p class="pad">templates/product.json &middot; ws-pdp-koopvak &middot; geldt voor <b>alle</b> producten</p>
-        <p class="nu">nu: <q>4,4/5 uit 970+ reviews</q></p>
-        <p class="straks">moet: <q>4,4/5 uit 1.000+ reviews</q></p>
+        <span class="merk-ernstig">Vier velden, met de hand</span>
+        <div class="plek"><h3>Het productsjabloon</h3></div>
+        <p class="pad">templates/product.json &middot; geldt voor <b>elke</b> productpagina</p>
+        <p class="nu">nu: <q>970+ reviews</q> &middot; <q>4,4/5 uit 970+ reviews</q> &middot;
+          <q>4,4 uit 970+ Trustpilot-reviews</q> &middot; <q>Zie onze 950+ reviews op</q></p>
+        <p class="straks">moet: overal <q>1000+</q></p>
       </div>
       <div>
-        <p class="waarom">Op dezelfde pagina staat bovenin al <q>Uitstekend &middot; 4,4 &middot;
-          1.000+ reviews</q>. Twee verschillende aantallen binnen &eacute;&eacute;n scherm &mdash;
-          dat is precies wat een koper laat twijfelen.</p>
-        <p class="taal"><i>NL 970+</i><i>EN 970+</i></p>
+        <p class="waarom">Dit bestand is 60&nbsp;kB en bestaat voor het grootste deel uit
+          ingesloten SVG-iconen van apps. Het regel voor regel overschrijven om vier korte zinnen
+          te wijzigen levert een re&euml;el risico op dat er iets stuk gaat aan het sjabloon van
+          <em>elke</em> productpagina. Dat is de verkeerde ruil.</p>
+        <p class="waar-te">In de thema-editor van v4: <b>Productpagina &rarr; Koopvak</b> voor de
+          eerste drie (<span class="mono">tp_score</span>, <span class="mono">pop_reviewregel</span>
+          in de vergelijkpop-up, <span class="mono">tp_regel</span> in het UGC-blok) en
+          <b>Trustpilot&nbsp;Reviews</b> voor de vierde. Vier tekstvelden, twee minuten.</p>
       </div>
     </div>
 
@@ -271,9 +307,8 @@
       <div>
         <div class="plek"><h3>Sectie &ldquo;Trustpilot Reviews&rdquo;</h3></div>
         <p class="pad">op collection.json &eacute;n product.json &middot; <b>reviews_label</b></p>
-        <p class="nu">nu: <q>Zie onze 800+ reviews op</q> op de collectie &middot;
-          <q>See our 700+ reviews on</q> in het Engels</p>
-        <p class="straks">moet: overal <q>1.000+</q></p>
+        <p class="straks">nu: <q>Zie onze 1000+ reviews op</q> in het Nederlands</p>
+        <p class="nu">Engels staat nog op <q>See our 700+ reviews on</q></p>
       </div>
       <div>
         <p class="waarom">Dezelfde sectie staat op twee sjablonen met twee verschillende
@@ -284,7 +319,8 @@
   </section>
 
   <section class="groep">
-    <h2>Advertorials en landingspagina&rsquo;s <span class="telling">4 fouten, waarvan 1 ernstig</span></h2>
+    <h2>Advertorials en landingspagina&rsquo;s <span class="telling">acht pagina&rsquo;s &middot; live inhoud, geen thema</span></h2>
+    <p>Deze staan niet in het thema maar in de pagina-inhoud van de winkel. Ze zijn dus <b>meteen live</b> zodra je ze aanraakt &mdash; er is geen conceptversie van. Zeven ervan dragen het verouderde <span class="mono">184.000</span> en de score <span class="mono">4,5/5 uit 800+ reviews</span>, telkens ook woordelijk herhaald in de disclaimer onderaan. E&eacute;n noemt <span class="mono">816 reviews</span>, &eacute;&eacute;n noemt <span class="mono">4,8</span>.</p>
 
     <div class="rij ernstig">
       <div>
@@ -346,12 +382,12 @@
 
   <section class="groep">
     <h2>In de code, voor de volgende keer <span class="telling">2 standaardwaarden</span></h2>
-    <div class="rij">
+    <div class="rij klaar">
       <div>
+        <span class="merk-klaar">Doorgevoerd</span>
         <div class="plek"><h3>De standaardteksten in twee secties</h3></div>
         <p class="pad">sections/footer.liquid &middot; sections/trustpilot-reviews.liquid</p>
-        <p class="nu">nu: <q>Zie onze 500+ reviews op</q> en <q>Zie onze 450+ reviews op</q></p>
-        <p class="straks">moet: <q>Zie onze 1.000+ reviews op</q></p>
+        <p class="straks">nu: allebei <q>Zie onze 1000+ reviews op</q></p>
       </div>
       <div>
         <p class="waarom">Deze zie je nergens staan, maar ze zijn wel de tekst die verschijnt
