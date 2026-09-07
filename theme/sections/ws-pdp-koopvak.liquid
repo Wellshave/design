@@ -191,20 +191,28 @@
 
         <div id="ProductPrice-{{ section.id }}">
           {%- comment -%}
-            Het bespaarde bedrag staat achter de prijs, waar eerst het
-            percentage stond. Een euro is concreter dan een procent, en op
-            deze plek hoeft het maar een keer: het losse kader eronder is
-            vervallen. Zowel op de telefoon als op de desktop dezelfde plek;
-            het percentage stond op de telefoon toch al verborgen.
+            De korting staat achter de prijs, in procenten. Hier stond eerst
+            het bedrag, met als redenering dat een euro concreter is dan een
+            procent. Dat klopt op zichzelf, maar het maakt de korting bij ons
+            juist kleiner: van 109,95 naar 49,95 leest als "je bespaart 60,00"
+            terwijl het 54% is, en de hele markt zet er een percentage neer.
+            Naast elkaar in een advertentie of een vergelijking verliest een
+            bedrag het van een procent.
+
+            Delen in liquid kapt af, dus 54,57% wordt 54%. Dat is de goede
+            kant om te missen: we beloven nooit meer korting dan er is.
           {%- endcomment -%}
           <div class="ws-prijs">
             <span class="ws-nu">{% if s.munt != blank %}<span class="ws-munt">{{ s.munt }}</span>{% endif %}{% render 'price-formated', price: v.price %}</span>
             {%- if v.compare_at_price > v.price -%}
               {%- assign bedrag = v.compare_at_price | minus: v.price -%}
+              {%- assign korting = bedrag | times: 100 | divided_by: v.compare_at_price -%}
               <span class="ws-was">{% if s.munt != blank %}<span class="ws-munt">{{ s.munt }}</span>{% endif %}{% render 'price-formated', price: v.compare_at_price %}</span>
-              <span class="ws-besp">
-                <span>{{ s.besparing_regel }} {% if s.munt != blank %}<span class="ws-munt">{{ s.munt }}</span>{% endif %}{% render 'price-formated', price: bedrag %}</span>
-              </span>
+              {%- if korting > 0 -%}
+                <span class="ws-besp">
+                  <span>{{ s.besparing_regel }} {{ korting }}%</span>
+                </span>
+              {%- endif -%}
             {%- endif -%}
           </div>
         </div>

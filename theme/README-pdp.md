@@ -5,20 +5,25 @@ Dit bestand gaat over de productpagina.
 
 ## Waar het staat
 
-De rollen zijn op 28 augustus verschoven: het werkthema is gepubliceerd en is nu
-de winkel. Wie dat niet weet, schrijft per ongeluk op de storefront.
+Dit schuift door: telkens als het werkthema gepubliceerd wordt, is het de winkel
+en moet er een verse kopie komen. Wie dat niet weet, schrijft per ongeluk op de
+storefront &mdash; of denkt dat de api stuk is terwijl hij juist zijn werk doet.
 
 | | |
 |---|---|
-| **Live thema** | `wellshave/claude-design v2 (LIVE)` (id **204412977484**) &mdash; rol MAIN sinds 28 augustus ca. 13:35. Dit w&aacute;s het werkthema. **Niet meer in schrijven** |
-| **Werkthema** | `wellshave/claude-design v3 (IN PROGRESS)` (id **204575310156**) &mdash; kopie van het live thema, gemaakt 28 augustus 15:22. **Hierin gaan alle nieuwe aanpassingen** |
-| Voorbeeld | https://wellshave.com/products/barber-pack-3-0?preview_theme_id=204575310156 |
-| Vorige | `wellshave/claude-design v1` (204178161996) staat klaar als terugval |
+| **Live thema** | `wellshave/claude-design v4 (Live)` (id **204845515084**) &mdash; rol MAIN sinds 4 september. Dit w&aacute;s het werkthema. **Niet meer in schrijven** |
+| **Werkthema** | `wellshave/claude-design v5 (IN PROGRESS)` (id **205230309708**) &mdash; kopie van het live thema, gemaakt 7 september. **Hierin gaan alle nieuwe aanpassingen** |
+| Voorbeeld | https://wellshave.com/products/groom-guard-pro?preview_theme_id=205230309708 |
+| Vorige | v3 (204575310156), v2 (204412977484) en v1 (204178161996) staan klaar als terugval |
 | Oud | `wellshave-redesign/live` (200936096076) is niet meer gepubliceerd |
 
 De kopie is op het moment van maken gelijk aan het live thema: sectie, stylesheet
 en productsjabloon hebben daar dezelfde checksums. Wie hier verder werkt,
-schrijft dus naar **204575310156** en laat die pas publiceren als het af is.
+schrijft dus naar **205230309708** en laat die pas publiceren als het af is.
+
+`config/settings_data.json` hoort er ook bij. Dat is een themabestand, dus de
+cadeau-instellingen van de winkelwagen zijn op een gepubliceerd thema alleen via
+de theme-editor te veranderen, niet via de api.
 
 ### De MCP blokkeert schrijven naar het live thema
 
