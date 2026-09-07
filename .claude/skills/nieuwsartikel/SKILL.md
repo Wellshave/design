@@ -124,6 +124,15 @@ Wat elk onderdeel doet, en waar het misgaat als je het weglaat:
 - **Beeld naast de tekst**, ongeveer 46% breed, om en om links en rechts, met het bijschrift
   eronder. Vol-de-breedte beelden horen bij het heldenbeeld, niet bij de punten.
 
+## Op mobiel blijft het artikel een kolom
+
+Een dossier-artikel leest verticaal. De regel uit deel 17 van de merklaag, dat wat
+gescand wordt opzij mag, geldt hier alleen voor de lezersaanbiedingen en de feitenblokken
+in de zijkolom: die worden op mobiel schuifstrips met de rand van de volgende in beeld.
+De masthead, de lopende tekst, de kaders en de genoemd-in-strook blijven staan, en er
+loopt niets automatisch. Bewegend chrome haalt het redactionele weg waarvoor je deze
+tak koos.
+
 ## 5. Verkopen binnen de vorm
 
 Verkopen mag hier, maar altijd aangekondigd:
