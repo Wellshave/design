@@ -82,6 +82,12 @@
 .ws-bs__foot svg{width:16px;height:16px;color:#BC813E;flex:none}
 .ws-bs__foot a{color:#111;text-underline-offset:3px}
 
+/* tablet — vier kaarten naast elkaar worden hier ~120px breed, en dan passen
+   prijs, van-prijs en kortingslabel niet meer op één regel. Twee kaarten wel. */
+@media (min-width:750px) and (max-width:1000px){
+  .ws-bs__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
 /* mobiel — één schuivende rij; vier kaarten in twee rijen maakten het blok
    te lang voor iets dat onder de vouw staat */
 @media (max-width:749px){

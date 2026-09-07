@@ -75,11 +75,9 @@
             <span class="ws-bn__hnu">{% render 'ws-euro', bedrag: hv.price %}</span>
             {%- if hv.compare_at_price > hv.price -%}
               <span class="ws-bn__hwas">{% render 'ws-euro', bedrag: hv.compare_at_price %}</span>
+              {% render 'ws-spaar', van: hv.compare_at_price, nu: hv.price, donker: true, extra: 'ws-bn__hbespaar' %}
             {%- endif -%}
           </span>
-          {%- if hv.compare_at_price > hv.price -%}
-            {% assign ws_bedrag = hv.compare_at_price | minus: hv.price %}{% render 'ws-spaar', woord: section.settings.bespaar, bedrag: ws_bedrag, donker: true, extra: 'ws-bn__hbespaar' %}
-          {%- endif -%}
           <span class="ws-bn__hvoorraad">
             {%- if hv.available -%}
               <span class="ws-bn__stip"></span>{{ section.settings.voorraad_wel }}
@@ -129,11 +127,9 @@
                 <span class="ws-bn__nu">{% render 'ws-euro', bedrag: v.price %}</span>
                 {%- if v.compare_at_price > v.price -%}
                   <span class="ws-bn__was">{% render 'ws-euro', bedrag: v.compare_at_price %}</span>
+                  {% render 'ws-spaar', van: v.compare_at_price, nu: v.price, extra: 'ws-bn__korting' %}
                 {%- endif -%}
               </span>
-              {%- if v.compare_at_price > v.price -%}
-                {% assign ws_bedrag = v.compare_at_price | minus: v.price %}{% render 'ws-spaar', woord: section.settings.bespaar_kort, bedrag: ws_bedrag, extra: 'ws-bn__korting' %}
-              {%- endif -%}
               <span class="ws-bn__voorraad">
                 {%- if v.available -%}
                   <span class="ws-bn__stip"></span>{{ section.settings.voorraad_wel }}
@@ -175,8 +171,8 @@
     { "type": "text", "id": "tussen", "label": "Regel boven het rooster", "default": "Of kies de set voor jouw routine" },
     { "type": "header", "content": "Op elke kaart" },
     { "type": "text", "id": "kaart_cta", "label": "Knoptekst", "default": "Bekijk de set" },
-    { "type": "text", "id": "bespaar", "label": "Woord voor de besparing (hoofdkaart)", "default": "Je bespaart" },
-    { "type": "text", "id": "bespaar_kort", "label": "Woord voor de besparing (kaarten)", "default": "Bespaar" },
+    { "type": "text", "id": "bespaar", "label": "Woord voor de besparing (hoofdkaart)", "info": "Wordt niet meer gebruikt: het label toont alleen het kortingspercentage.", "default": "Je bespaart" },
+    { "type": "text", "id": "bespaar_kort", "label": "Woord voor de besparing (kaarten)", "info": "Wordt niet meer gebruikt: het label toont alleen het kortingspercentage.", "default": "Bespaar" },
     { "type": "text", "id": "voorraad_wel", "label": "Tekst bij voorraad", "default": "Op voorraad" },
     { "type": "text", "id": "voorraad_niet", "label": "Tekst zonder voorraad", "default": "Tijdelijk uitverkocht" },
     { "type": "header", "content": "Onderaan" },

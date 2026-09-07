@@ -1,16 +1,32 @@
 {%- comment -%}
-  Het bespaarlabel: "Bespaar €12,34" in een gouden pil met een labelicoontje
-  ervoor. Overal in de winkel dezelfde vorm, zodat je hem herkent zonder te
-  lezen.
+  Het kortingslabel: een gouden pil met het kortingspercentage, bijvoorbeeld
+  "−37%". Overal in de winkel dezelfde vorm, zodat je hem herkent zonder te
+  lezen. Geen icoontje: bij een getal van drie tekens leidt dat alleen maar af.
 
-  Gebruik: {% render 'ws-spaar', woord: 'Bespaar', bedrag: verschil %}
-    woord   het woord ervoor; leeg laten kan, dan staat er alleen het bedrag
-    bedrag  het verschil in centen (compare_at_price min price)
+  Met een percentage (zo staat het op de homepage):
+    {% render 'ws-spaar', van: v.compare_at_price, nu: v.price %}
+  Met een bedrag (zo staat het nog op de product- en collectiepagina's):
+    {% render 'ws-spaar', woord: 'Je bespaart', bedrag: verschil %}
+
+    van/nu  de van-prijs en de prijs in centen. Het percentage wordt hier
+            uitgerekend en naar beneden afgerond, zodat er nooit meer korting
+            staat dan er werkelijk is.
+    bedrag  het verschil in centen; toont een bedrag in plaats van een percentage
+    woord   optioneel woord ervoor. Zonder woord staat er "−37%", met woord
+            "Bespaar 37%" — het minteken en een woord samen leest verkeerd.
     donker  true op een zwart vlak
     extra   extra klasse voor het blok zelf (marge, een glans bij hover)
-
-  Het icoontje staat hier als pad in plaats van als <use>: dan hangt het
-  label niet af van een symbool dat toevallig in die sectie gedefinieerd is.
 {%- endcomment -%}
 {{ 'ws-spaar.css' | asset_url | stylesheet_tag }}
-<span class="ws-spaar{% if donker %} ws-spaar--donker{% endif %}{% if extra != blank %} {{ extra }}{% endif %}"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M11.6 3.2H4.9a1.7 1.7 0 00-1.7 1.7v6.7c0 .45.18.88.5 1.2l7.5 7.5a1.7 1.7 0 002.4 0l6.7-6.7a1.7 1.7 0 000-2.4l-7.5-7.5a1.7 1.7 0 00-1.2-.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="8" cy="8" r="1.5" fill="currentColor"/></svg>{% if woord != blank %}{{ woord }} {% endif %}{% render 'ws-euro', bedrag: bedrag %}</span>
+{%- assign ws_pct = 0 -%}
+{%- if van > 0 and nu < van -%}
+  {%- assign ws_verschil = van | minus: nu -%}
+  {%- assign ws_pct = ws_verschil | times: 100 | divided_by: van -%}
+{%- endif -%}
+<span class="ws-spaar{% if donker %} ws-spaar--donker{% endif %}{% if extra != blank %} {{ extra }}{% endif %}">
+  {%- if ws_pct > 0 -%}
+    {%- if woord != blank -%}{{ woord }} {{ ws_pct }}%{%- else -%}&minus;{{ ws_pct }}%{%- endif -%}
+  {%- else -%}
+    {%- if woord != blank -%}{{ woord }} {% endif -%}{%- render 'ws-euro', bedrag: bedrag -%}
+  {%- endif -%}
+</span>
