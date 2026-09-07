@@ -60,33 +60,40 @@
       {%- if section.settings.toon_label != blank -%}
         <span class="fb-label">{{ section.settings.toon_label }}</span>
       {%- endif -%}
-      <div class="filters" data-groep="cat">
-        <button type="button" class="filter" data-cat="alles" aria-pressed="true">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsr-raster"/></svg>
-          <span>{{ section.settings.filter_alles | default: 'Alles' }}</span><i>{{ n_totaal }}</i>
-        </button>
-        {%- if n_app > 0 -%}
-          <button type="button" class="filter" data-cat="app">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsr-trimmer"/></svg>
-            <span>{{ section.settings.filter_app | default: 'Apparaten' }}</span><i>{{ n_app }}</i>
-          </button>
-        {%- endif -%}
-        {%- if n_bundel > 0 -%}
-          <button type="button" class="filter{% if section.settings.bundel_lint != blank %} gemerkt{% endif %}" data-cat="bundel">
-            {%- if section.settings.bundel_lint != blank -%}
-              <span class="filter-lint">{{ section.settings.bundel_lint }}</span>
-            {%- endif -%}
-            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsr-cadeau"/></svg>
-            <span>{{ section.settings.filter_bundel | default: 'Bundels' }}</span><i>{{ n_bundel }}</i>
-          </button>
-        {%- endif -%}
-        {%- if n_mes > 0 -%}
-          <button type="button" class="filter" data-cat="mes">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsr-mes"/></svg>
-            <span>{{ section.settings.filter_mes | default: 'Onderdelen' }}</span><i>{{ n_mes }}</i>
-          </button>
-        {%- endif -%}
-      </div>
+      {%- comment -%}
+        Eén keuzelijst in plaats van vier knoppen naast elkaar. De knoppen namen op de
+        telefoon een hele regel in beslag en op elke pagina stond er boven de producten
+        twee keer een rij om uit te kiezen: eerst de zone, dan de soort. De zone is de
+        hoofdindeling van de winkel en houdt zijn tegels; de soort is een verfijning en
+        past in een lijst. De aantallen staan nu in de regels van de lijst zelf.
+
+        Net als de sorteerknop: een echte <select> met de knopopmaak eroverheen, zodat
+        de bezoeker op mobiel de systeemkiezer krijgt en hij met het toetsenbord werkt.
+      {%- endcomment -%}
+      <label class="fb-knop fb-kiezer" data-groep="cat">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsr-raster"/></svg>
+        <span class="fb-kiezer-tekst" aria-hidden="true">{{ section.settings.filter_alles | default: 'Alles' }}</span>
+        <i class="fb-kiezer-tel" aria-hidden="true">{{ n_totaal }}</i>
+        <svg class="fb-chevron" viewBox="0 0 24 24" aria-hidden="true"><use href="#wsr-chevron"/></svg>
+        <select data-cat-kiezer aria-label="{{ section.settings.toon_label | default: 'Toon' | strip_html | escape }}">
+          <option value="alles" data-tel="{{ n_totaal }}">{{ section.settings.filter_alles | default: 'Alles' }} ({{ n_totaal }})</option>
+          {%- if n_app > 0 -%}
+            <option value="app" data-tel="{{ n_app }}">{{ section.settings.filter_app | default: 'Apparaten' }} ({{ n_app }})</option>
+          {%- endif -%}
+          {%- if n_bundel > 0 -%}
+            {%- comment -%}
+              Het lintje "meeste waarde" stond op de knop; in een lijst kan dat niet, dus
+              het staat achter de naam. Laat je het lintveld leeg, dan valt het weg.
+            {%- endcomment -%}
+            <option value="bundel" data-tel="{{ n_bundel }}">{{ section.settings.filter_bundel | default: 'Bundels' }} ({{ n_bundel }})
+              {%- if section.settings.bundel_lint != blank %} — {{ section.settings.bundel_lint }}{% endif -%}
+            </option>
+          {%- endif -%}
+          {%- if n_mes > 0 -%}
+            <option value="mes" data-tel="{{ n_mes }}">{{ section.settings.filter_mes | default: 'Onderdelen' }} ({{ n_mes }})</option>
+          {%- endif -%}
+        </select>
+      </label>
 
       {%- comment -%}
         Telling en knoppen staan in één groep: past de rij niet op één regel, dan

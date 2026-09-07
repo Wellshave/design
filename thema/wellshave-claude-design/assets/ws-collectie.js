@@ -100,8 +100,11 @@
 
   /* ── het raster ── */
   function tel() {
+    // De soort is een keuzelijst geworden; de knoppenrij van vroeger wordt nog gelezen
+    // zodat een sjabloon dat hem nog heeft blijft werken.
+    var kiezer = document.querySelector('.wsc [data-cat-kiezer]');
     var actief = document.querySelector('.wsc [data-groep="cat"] .filter[aria-pressed="true"]');
-    var cat = actief ? actief.dataset.cat : 'alles', n = 0;
+    var cat = kiezer ? kiezer.value : (actief ? actief.dataset.cat : 'alles'), n = 0;
     document.querySelectorAll('.wsc .groep').forEach(function (g) {
       var uit = cat !== 'alles' && g.dataset.cat !== cat;
       g.classList.toggle('uit', uit);
@@ -279,6 +282,26 @@
       });
     });
 
+    // De keuzelijst met de soort: de knop eromheen toont de gekozen naam en het aantal.
+    document.querySelectorAll('.wsc [data-cat-kiezer]').forEach(function (kiezer) {
+      if (kiezer.dataset.gekoppeld === 'ja') return;
+      kiezer.dataset.gekoppeld = 'ja';
+      kiezer.addEventListener('change', function () {
+        var op = kiezer.options[kiezer.selectedIndex];
+        var knop = kiezer.closest('.fb-kiezer');
+        if (knop) {
+          // de naam zonder het aantal en zonder het lintje erachter
+          var naam = op.textContent.trim().split('(')[0].trim();
+          var t = knop.querySelector('.fb-kiezer-tekst');
+          var b = knop.querySelector('.fb-kiezer-tel');
+          if (t) t.textContent = naam;
+          if (b) b.textContent = op.dataset.tel || '';
+          knop.classList.toggle('aan', kiezer.value !== 'alles');
+        }
+        tel();
+      });
+    });
+
     document.querySelectorAll('.wsc .filters').forEach(function (rij) {
       rij.querySelectorAll('.filter').forEach(function (b) {
         b.addEventListener('click', function () {
@@ -409,7 +432,7 @@
 
     zonespoor();
 
-    if (document.querySelector('.wsc [data-groep="cat"]')) tel();
+    if (document.querySelector('.wsc [data-groep="cat"]') || document.querySelector('.wsc [data-cat-kiezer]')) tel();
     if (document.querySelector('.wsc .wsk-vgl')) vgltel();
     if (document.querySelector('.wsc .wsk')) {
       document.addEventListener('ws:keuze', function (e) { zetMatch(e.detail.id, e.detail.regel); });

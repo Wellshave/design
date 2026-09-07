@@ -25,6 +25,42 @@
   {%- if block.type == 'vraag' or block.type == 'match' -%}{%- assign heeft_hulp = true -%}{%- endif -%}
 {%- endfor -%}
 
+<section class="kop{% if section.settings.foto == blank %} kaal{% endif %}">
+  <div class="rail">
+    {%- comment -%}
+      De tekst ligt in de foto, niet ernaast: naast elkaar kostte de kop 249 px aan
+      tekst plus 199 px aan beeld voordat de eerste kaart begon. Zonder foto blijft
+      de zwarte gradient over en zakt de hero terug naar tekst op een vlak.
+    {%- endcomment -%}
+    <div class="hero">
+      {%- if section.settings.foto != blank -%}
+        <figure class="hero-foto">
+          {{ section.settings.foto | image_url: width: 1600 | image_tag: alt: section.settings.foto_alt, loading: 'eager', fetchpriority: 'high', sizes: '100vw', widths: '600, 900, 1200, 1600' }}
+        </figure>
+      {%- endif -%}
+      <div class="hero-tekst">
+        {%- comment -%}
+          Leeg gelaten betekent: neem de naam van de collectie. Zo kan één sjabloon
+          meerdere collecties bedienen — de Summer Sale en de Voorjaar Sale delen
+          dezelfde opbouw maar houden hun eigen naam op de pagina.
+        {%- endcomment -%}
+        {%- assign kop_eyebrow = section.settings.eyebrow | default: collection.title -%}
+        {%- if kop_eyebrow != blank -%}
+          <p class="eyebrow on-dark">{{ kop_eyebrow }}</p>
+        {%- endif -%}
+        <h1 class="duo on-dark klein">{{ section.settings.kop_1 }}<span class="b">{{ section.settings.kop_2 }}</span></h1>
+        {%- if section.settings.lede != blank -%}
+          <p class="lead on-dark kort">{{ section.settings.lede }}</p>
+        {%- endif -%}
+        {%- if heeft_hulp and section.settings.hulp_link != blank -%}
+          <a class="hero-hulp" href="#ws-keuzehulp">{{ section.settings.hulp_link }}
+            <i><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsc-pijl"/></svg></i></a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
 {%- assign heeft_zones = false -%}
 {%- for block in section.blocks -%}{%- if block.type == 'zone' -%}{%- assign heeft_zones = true -%}{%- endif -%}{%- endfor -%}
 {%- if heeft_zones -%}
@@ -61,42 +97,6 @@
     <div class="zk-spoor" aria-hidden="true" hidden><span class="zk-duim"></span></div>
   </div></section>
 {%- endif -%}
-
-<section class="kop{% if section.settings.foto == blank %} kaal{% endif %}">
-  <div class="rail">
-    {%- comment -%}
-      De tekst ligt in de foto, niet ernaast: naast elkaar kostte de kop 249 px aan
-      tekst plus 199 px aan beeld voordat de eerste kaart begon. Zonder foto blijft
-      de zwarte gradient over en zakt de hero terug naar tekst op een vlak.
-    {%- endcomment -%}
-    <div class="hero">
-      {%- if section.settings.foto != blank -%}
-        <figure class="hero-foto">
-          {{ section.settings.foto | image_url: width: 1600 | image_tag: alt: section.settings.foto_alt, loading: 'eager', fetchpriority: 'high', sizes: '100vw', widths: '600, 900, 1200, 1600' }}
-        </figure>
-      {%- endif -%}
-      <div class="hero-tekst">
-        {%- comment -%}
-          Leeg gelaten betekent: neem de naam van de collectie. Zo kan één sjabloon
-          meerdere collecties bedienen — de Summer Sale en de Voorjaar Sale delen
-          dezelfde opbouw maar houden hun eigen naam op de pagina.
-        {%- endcomment -%}
-        {%- assign kop_eyebrow = section.settings.eyebrow | default: collection.title -%}
-        {%- if kop_eyebrow != blank -%}
-          <p class="eyebrow on-dark">{{ kop_eyebrow }}</p>
-        {%- endif -%}
-        <h1 class="duo on-dark klein">{{ section.settings.kop_1 }}<span class="b">{{ section.settings.kop_2 }}</span></h1>
-        {%- if section.settings.lede != blank -%}
-          <p class="lead on-dark kort">{{ section.settings.lede }}</p>
-        {%- endif -%}
-        {%- if heeft_hulp and section.settings.hulp_link != blank -%}
-          <a class="hero-hulp" href="#ws-keuzehulp">{{ section.settings.hulp_link }}
-            <i><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsc-pijl"/></svg></i></a>
-        {%- endif -%}
-      </div>
-    </div>
-  </div>
-</section>
 
 {%- if heeft_hulp -%}
   {%- comment -%}

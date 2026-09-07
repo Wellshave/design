@@ -572,6 +572,21 @@
   color:var(--ink-60)}
 .wsc .fb-streep{flex:none;width:1px;align-self:stretch;min-height:34px;background:var(--ink-10)}
 
+/* De soort staat in een keuzelijst, niet meer in vier knoppen naast elkaar. De oude
+   `.filter`-opmaak staat er nog voor sjablonen die de knoppenrij nog gebruiken. */
+.wsc .fb-kiezer{position:relative;cursor:pointer}
+.wsc .fb-kiezer select{position:absolute;inset:0;width:100%;height:100%;opacity:0;
+  cursor:pointer;font:inherit;border:0;padding:0;-webkit-appearance:none;appearance:none}
+.wsc .fb-kiezer:focus-within{border-color:rgba(188,129,62,.6);outline:2px solid rgba(188,129,62,.25);
+  outline-offset:2px}
+.wsc .fb-kiezer-tel{flex:none;min-width:23px;height:23px;padding:0 6px;border-radius:100px;
+  display:grid;place-items:center;font-size:11.5px;font-weight:800;font-style:normal;
+  background:var(--sand-deep);color:var(--ink-60)}
+/* zodra er iets anders dan "Alles" staat, is de knop zwart: dan is er een filter aan */
+.wsc .fb-kiezer.aan{background:var(--carbon);border-color:var(--carbon);color:#fff}
+.wsc .fb-kiezer.aan .fb-kiezer-tel{background:rgba(255,255,255,.16);color:#fff}
+.wsc .fb-kiezer.aan .fb-chevron{color:rgba(255,255,255,.6)}
+
 .wsc .filters{display:flex;gap:8px;flex-wrap:wrap;min-width:0}
 .wsc .filter{position:relative;display:inline-flex;align-items:center;gap:8px;
   border:1px solid var(--ink-10);border-radius:12px;padding:11px 13px;font-size:13px;
@@ -915,44 +930,29 @@ body.vgl-open{overflow:hidden}
   .wsc .bwr-tekst{grid-column:1 / -1}
   .wsc .bwr-bron{grid-column:2;grid-row:1;justify-content:center}
   .wsc .bwr-bron a{margin-top:4px}
-  .wsc .filterbalk{padding:8px 12px 12px;margin-bottom:14px;border-radius:14px}
-  .wsc .fb-rij{gap:11px}
-  /* De knoppen staan op de telefoon naast elkaar en schuiven opzij, niet in twee
-     rijen onder elkaar: dat scheelt de bezoeker verticale scroll voordat hij de
-     producten ziet. Het lintje steekt boven de knop uit, dus de strip heeft ruimte
-     aan de bovenkant nodig — een scroller snijdt anders af wat erboven uitsteekt.
-     `overflow-x:auto` snijdt namelijk ook verticaal af. De ruimte hierboven moet
-     dus minstens zo hoog zijn als het lintje; meet het na als je het lintje
-     aanpast. */
-  .wsc .filters{
-    flex-wrap:nowrap;overflow-x:auto;gap:8px;width:auto;min-width:0;flex:1;
-    margin:0 -12px;padding:18px 12px 2px;
-    scroll-snap-type:x proximity;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-padding-inline:14px}
-  .wsc .filters::-webkit-scrollbar{display:none}
-  .wsc .filter{flex:none;justify-content:flex-start;padding:10px 12px;font-size:12.5px;gap:8px;
-    scroll-snap-align:start;white-space:nowrap}
-  .wsc .filter svg{width:17px;height:17px}
-  .wsc .filter i{min-width:23px;height:23px;font-size:11px}
-  .wsc .filter-lint{font-size:8.5px;line-height:1.15;padding:3px 9px 5px}
-  .wsc .fb-streep{display:none}
-  /* De balk stond op de telefoon op drie regels — chips, dan de telling, dan de
-     knoppen — samen 183 px voordat de eerste kaart begon. Nu blijft het één regel:
-     het label en de telling gaan weg (elke chip draagt zijn eigen aantal al) en de
-     rij mag niet meer omvallen. */
-  .wsc .fb-rij{flex-wrap:nowrap}
-  .wsc .fb-label,.wsc .fb-uitslag{display:none}
+  /* De balk stond op de telefoon op drie regels — vier knoppen, dan de telling, dan
+     het sorteren — samen 183 px voordat de eerste kaart begon. Nu is het één regel:
+     links de soort als keuzelijst, rechts het sorteren. Het label "Toon mij" en de
+     losse telling gaan weg; het aantal staat in de knop zelf. */
+  .wsc .filterbalk{padding:10px 12px;margin-bottom:14px;border-radius:14px}
+  .wsc .fb-rij{gap:10px;flex-wrap:nowrap}
+  .wsc .fb-label,.wsc .fb-uitslag,.wsc .fb-streep{display:none}
+  .wsc .fb-kiezer{flex:none;padding:9px 11px;gap:8px}
+  .wsc .fb-kiezer-tekst{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:11ch}
+  .wsc .filters{flex-wrap:wrap;gap:8px}
   .wsc .fb-rechts{width:auto;margin-left:auto;gap:8px;flex-wrap:nowrap;flex:none;
-    align-self:flex-end;padding:0 0 2px 10px;border-left:1px solid var(--ink-10)}
+    align-self:center;padding-left:10px;border-left:1px solid var(--ink-10)}
   .wsc .fb-acties{flex:none;gap:8px}
   .wsc .fb-knop{flex:none;justify-content:center;padding:9px 11px;font-size:12px}
-  /* Vergelijken kan pas vanaf twee aangevinkte kaarten. Tot die tijd is het een
-     dode knop die breedte kost die de chips nodig hebben. */
+  /* Vergelijken kan pas vanaf twee aangevinkte kaarten. Tot die tijd is het een dode
+     knop die breedte kost. */
   .wsc .fb-knop.vgl-open[disabled]{display:none}
-  /* "Meest relevant" past niet naast de chips en werd "Meest ...". Op de telefoon
-     blijven het icoon en de chevron over; de keuzelijst eronder houdt zijn eigen
-     aria-label, dus voorlezen verandert niet. */
-  .wsc .fb-sorteer{min-width:0;padding:9px 10px}
-  .wsc .fb-sorteer .fb-sorteer-tekst{display:none}
+  .wsc .fb-sorteer{min-width:0}
+  .wsc .fb-sorteer-tekst{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:12ch}
+  /* Staat Vergelijk er wél, dan passen drie knoppen met tekst niet naast elkaar:
+     van het sorteren blijven dan het icoon en de chevron over. De keuzelijst houdt
+     zijn eigen aria-label, dus voorlezen verandert niet. */
+  .wsc .fb-acties:has(.vgl-open:not([disabled])) .fb-sorteer-tekst{display:none}
   .wsc .groep{margin-bottom:32px}
   .wsc .groep-kop{margin-bottom:12px;gap:12px}
   .wsc .groep-kop h2{font-size:19px}
