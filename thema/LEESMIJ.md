@@ -1705,3 +1705,39 @@ inmiddels MAIN en de API weigert daarop te schrijven. De Duitse vertalingen hang
 het thema-id: publiceer je v4 zonder ze eerst opnieuw te registreren tegen
 `?theme_id=204845515084`, dan vallen de collectiepagina's op `/de` terug naar het
 Nederlands.
+
+### Nabrander: zonekiezer onder de hero, soort in een keuzelijst (07-09)
+
+Boven de producten stonden twee dingen om uit te kiezen: eerst de zonetegels, dan
+een rij knoppen voor de soort. Eén te veel. Nu:
+
+1. hero → 2. zonekiezer → 3. filterbalk → 4. producten.
+
+De zonebalk staat dus weer ónder de kop, maar boven de filterbalk in plaats van
+onder de keuzehulp waar hij vandaan kwam. De knoppen *Alles / Apparaten / Sets /
+Onderdelen* zijn één keuzelijst geworden, met dezelfde constructie als de
+sorteerknop: een echte `<select>` met de knopopmaak eroverheen, dus op mobiel de
+systeemkiezer en met het toetsenbord te bedienen. De aantallen staan in de regels
+van de lijst; de knop toont de gekozen naam met het aantal ernaast en wordt zwart
+zodra er iets anders dan *Alles* staat.
+
+Twee dingen om te weten:
+
+- **Het lintje "meeste waarde"** stond boven de knop Bundels. In een keuzelijst kan
+  dat niet, dus het staat nu achter de naam van die regel: *Sets (14) — Meeste
+  waarde*. Leeg je het lintveld, dan valt het weg. Wil je het lintje echt in beeld
+  houden, dan moet die ene knop terug naast de lijst.
+- **De oude knoppenrij blijft in CSS en JavaScript staan.** `tel()` leest eerst de
+  keuzelijst en valt terug op een aangedrukte knop, zodat een sjabloon dat de rij
+  nog heeft blijft werken.
+
+De filterbalk is daardoor 87 → 65 px op de telefoon en 89 → 77 px daarboven, en
+"Meest relevant" past weer voluit — ook op 360 px. Waar de eerste kaart nu begint,
+gemeten op v5: alle producten 767 / 820, zone Hoofd 735 / 820, bundels 753 / 892,
+scheerapparaten 815 / 880, sale 633 / 748 (telefoon 390 × 844, laptop 1440 × 900).
+
+**Het werkthema is nu v5 (205229687116).** v4 is op 7 september gepubliceerd en
+heet nu *wellshave/claude-design v4 (Live)*; de API weigert te schrijven op het
+hoofdthema, dus v5 is een duplicaat van v4 waarop verder gewerkt wordt. De
+waarschuwing over de Duitse vertalingen verhuist mee: die hangen aan het thema-id,
+dus registreer ze opnieuw tegen `?theme_id=205229687116` voordat v5 live gaat.
