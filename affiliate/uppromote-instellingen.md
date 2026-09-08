@@ -30,6 +30,24 @@ Automatische kortingsregel "Korting voor klant" staat actief, voor alle affiliat
 op basis van de affiliate coupon. Klikt iemand op een affiliatelink, dan staat de code
 van die affiliate al in de winkelwagen.
 
+Automatisch coupon genereren staat inmiddels actief, met voorbeeldcoupon
+`Wellshave_10`. Uit de Shopify-discount:
+
+| Eigenschap | Waarde |
+| --- | --- |
+| Korting | 10% |
+| Geldt voor | alle artikelen |
+| Minimumbedrag | geen |
+| Per klant | eenmalig |
+| Combineert met andere kortingen | nee, niet met order-, product- of verzendkorting |
+
+Kosten per affiliatebestelling: 10% klantkorting plus 15% commissie is 25% van de
+productomzet.
+
+Het niet-combineren is het punt om in de gaten te houden. Tijdens een eigen actie kan
+de automatisch toegepaste affiliatecode botsen met de aanbieding. Loop dat na voordat
+er een uitverkoop of Black Friday aankomt.
+
 Let op de afhankelijkheid: die regel werkt alleen als de affiliate ook echt een code
 heeft. Automatisch coupon genereren stond inactief, waardoor nieuwe aanmeldingen zonder
 code binnenkwamen. Bij het aanzetten geldt:
