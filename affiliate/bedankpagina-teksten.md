@@ -13,29 +13,33 @@ wordt geopend. De teksten hieronder zijn erop gericht dat die mail gevonden word
   maakt het zoeken juist moeilijker.
 - `[jullie e-mailadres]`: hetzelfde adres als in de affiliategids.
 
-## De pagina
+## Wat waar hoort
 
-**Kop**
+Let op: dit zijn drie losse velden. Plak niet de hele sectie in het inhoudsveld,
+anders staat de kop er twee keer in en komt de knoptekst als losse zin in de tekst.
+
+### Veld: kop
 
     Bevestig je e-mailadres
 
-**Alinea 1**
+### Veld: inhoud
+
+Alleen deze drie alinea's, met een lege regel ertussen. Binnen een alinea nooit
+handmatig afbreken, de pagina breekt zelf af. Zet het vet uit, alleen de kop is vet.
+
+Alinea 1:
 
     We hebben je een verificatielink gestuurd. Klik erop en je aanmelding is compleet.
 
-**Alinea 2, afzender en onderwerp**
+Alinea 2, afzender en onderwerp:
 
-    De mail komt van [afzendernaam], met als onderwerp "[onderwerpregel]". Zie je hem
-    niet in je inbox, zoek dan op die naam en kijk even in je map met spam, updates
-    of promoties.
+    De mail komt van [afzendernaam], met als onderwerp "[onderwerpregel]". Zie je hem niet in je inbox, zoek dan op die naam en kijk even in je map met spam, updates of promoties.
 
-**Alinea 3, de uitweg**
+Alinea 3, de uitweg:
 
-    Lukt het daarna nog steeds niet? Stuur de mail hieronder opnieuw, of mail ons op
-    [jullie e-mailadres]. Dan zetten we je account handmatig klaar. Je hoeft je niet
-    opnieuw aan te melden.
+    Lukt het daarna nog steeds niet? Stuur de mail hieronder opnieuw, of mail ons op [jullie e-mailadres]. Dan zetten we je account handmatig klaar. Je hoeft je niet opnieuw aan te melden.
 
-**Knop**
+### Veld: knoptekst (tabblad Translation)
 
     Stuur de mail opnieuw
 
