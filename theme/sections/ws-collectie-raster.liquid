@@ -245,7 +245,7 @@
                   {%- if v.compare_at_price > v.price -%} <s>{{ v.compare_at_price | money }}</s>{%- endif -%}
                 </span>
                 {%- if v.compare_at_price > v.price -%}
-                  {% render 'ws-spaar', van: v.compare_at_price, nu: v.price, zonder_css: true %}
+                  {% render 'ws-spaar', van: v.compare_at_price, nu: v.price, achter: section.settings.korting_woord, zonder_css: true %}
                 {%- endif -%}
               </span>
 
@@ -556,7 +556,7 @@
     { "type": "text", "id": "tp_merk", "label": "Naam van de bron", "default": "Trustpilot" },
     { "type": "header", "content": "Op de kaarten" },
     { "type": "text", "id": "geen_score", "label": "Als er geen beoordelingen zijn", "info": "Nooit een standaardcijfer tonen bij een product zonder beoordelingen.", "default": "Nieuw · nog geen beoordelingen" },
-    { "type": "text", "id": "korting_woord", "label": "Woord achter het kortingspercentage", "info": "Wordt niet meer gebruikt: het label toont alleen het percentage, in dezelfde vorm als op de homepage.", "default": "Korting" },
+    { "type": "text", "id": "korting_woord", "label": "Woord achter het kortingspercentage", "info": "Staat achter het percentage: \"37% Korting\". Zelfde vorm als op de homepage.", "default": "Korting" },
     { "type": "text", "id": "uitverkocht_label", "label": "Lintje bij uitverkocht", "default": "Tijdelijk uitverkocht" },
     { "type": "text", "id": "uitverkocht_voet", "label": "Regel bij uitverkocht", "default": "Tijdelijk niet leverbaar" },
     { "type": "text", "id": "blik_voet", "label": "Regel onder Snel bekijken", "default": "100 dagen proberen · 2 jaar garantie" },

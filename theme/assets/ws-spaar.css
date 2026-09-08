@@ -1,20 +1,25 @@
 /* ═══ Wellshave — het kortingslabel ═══
-   Eén vorm voor de hele winkel: een pil met een gouden rand en een gouden
-   letter. Bewust géén gouden vulling — die is voorbehouden aan wat je kunt
-   aanklikken, zodat niemand op het label probeert te drukken. En bewust geen
-   icoontje: het label staat naast de prijs, en daar telt elke pixel breedte.
+   Eén vorm voor de hele winkel: een pil met een gouden waas en een gouden
+   letter, strak om het getal heen. Bewust géén volle gouden vulling — die is
+   voorbehouden aan wat je kunt aanklikken, zodat niemand op het label probeert
+   te drukken. En bewust geen icoontje: het label staat naast de prijs, en daar
+   telt elke pixel breedte.
 
    Twee huiden, verder identiek: licht voor de witte kaarten, donker voor
    de zwarte vlakken. Alles wat een blok er zelf omheen wil (marge, uitlijning
    naast de prijs, een glans bij hover) staat in de css van dat blok, niet hier. */
-.ws-spaar{display:inline-flex;align-items:center;padding:5px 11px;
-  border-radius:100px;border:1px solid rgba(188,129,62,.5);color:#8F6428;
-  background:linear-gradient(135deg,rgba(245,209,138,.38) 0%,rgba(188,129,62,.16) 100%);
-  font-size:11.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+.ws-spaar{display:inline-flex;align-items:center;padding:4px 9px;
+  border-radius:100px;color:#8F6428;
+  background:linear-gradient(135deg,rgba(245,209,138,.42) 0%,rgba(188,129,62,.18) 100%);
+  font-size:11px;font-weight:700;letter-spacing:.02em;
   line-height:1;white-space:nowrap;font-variant-numeric:tabular-nums}
-.ws-spaar--donker{border-color:rgba(245,209,138,.55);color:#F5D18A;
-  background:linear-gradient(135deg,rgba(245,209,138,.2) 0%,rgba(245,209,138,.07) 100%)}
+.ws-spaar--donker{color:#F5D18A;
+  background:linear-gradient(135deg,rgba(245,209,138,.22) 0%,rgba(245,209,138,.09) 100%)}
 
+/* Op een telefoon staan de kaarten met z'n tweeën op een rij en is de prijsregel
+   nog geen 135px breed. "42% Korting" past daar niet meer naast de prijs, "42%"
+   wel — en naast de prijs is waar het label hoort te staan. */
 @media (max-width:749px){
-  .ws-spaar{padding:4px 9px;font-size:10px}
+  .ws-spaar{padding:3px 7px;font-size:10px}
+  .ws-spaar__woord{display:none}
 }
