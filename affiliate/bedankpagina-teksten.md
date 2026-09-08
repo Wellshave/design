@@ -13,7 +13,7 @@ van de verificatiemail is bewust weggelaten in plaats van geraden: zoeken op de
 afzendernaam werkt net zo goed en die staat vast.
 
 De uitweg loopt via de contactpagina, niet via een mailadres. De link is
-`https://wellshave.nl/pages/neem-contact-op` (gecontroleerd, 200). Gebruik die
+`https://wellshave.com/pages/neem-contact-op` (gecontroleerd, 200). Gebruik die
 eindbestemming, want `/pages/contact` is een omleiding.
 
 ## Wat waar hoort
@@ -40,10 +40,10 @@ Alinea 2, afzender en onderwerp:
 
 Alinea 3, de uitweg:
 
-    Lukt het daarna nog steeds niet? Stuur de mail hieronder opnieuw. Blijft het misgaan, laat het ons weten via de contactpagina op wellshave.nl, dan zetten we je account handmatig klaar. Je hoeft je niet opnieuw aan te melden.
+    Lukt het daarna nog steeds niet? Stuur de mail hieronder opnieuw. Blijft het misgaan, laat het ons weten via de contactpagina op wellshave.com, dan zetten we je account handmatig klaar. Je hoeft je niet opnieuw aan te melden.
 
-Maak van "de contactpagina op wellshave.nl" een link naar
-https://wellshave.nl/pages/neem-contact-op
+Maak van "de contactpagina op wellshave.com" een link naar
+https://wellshave.com/pages/neem-contact-op
 
 ### Veld: knoptekst (tabblad Translation)
 
