@@ -75,7 +75,7 @@
             <span class="ws-bn__hnu">{% render 'ws-euro', bedrag: hv.price %}</span>
             {%- if hv.compare_at_price > hv.price -%}
               <span class="ws-bn__hwas">{% render 'ws-euro', bedrag: hv.compare_at_price %}</span>
-              {% render 'ws-spaar', van: hv.compare_at_price, nu: hv.price, donker: true, extra: 'ws-bn__hbespaar' %}
+              {% render 'ws-spaar', van: hv.compare_at_price, nu: hv.price, donker: true, extra: 'ws-bn__hbespaar', zonder_css: true %}
             {%- endif -%}
           </span>
           <span class="ws-bn__hvoorraad">
@@ -127,7 +127,7 @@
                 <span class="ws-bn__nu">{% render 'ws-euro', bedrag: v.price %}</span>
                 {%- if v.compare_at_price > v.price -%}
                   <span class="ws-bn__was">{% render 'ws-euro', bedrag: v.compare_at_price %}</span>
-                  {% render 'ws-spaar', van: v.compare_at_price, nu: v.price, extra: 'ws-bn__korting' %}
+                  {% render 'ws-spaar', van: v.compare_at_price, nu: v.price, extra: 'ws-bn__korting', zonder_css: true %}
                 {%- endif -%}
               </span>
               <span class="ws-bn__voorraad">

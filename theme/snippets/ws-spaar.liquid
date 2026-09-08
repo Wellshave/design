@@ -15,9 +15,12 @@
     woord   optioneel woord ervoor. Zonder woord staat er "−37%", met woord
             "Bespaar 37%" — het minteken en een woord samen leest verkeerd.
     donker  true op een zwart vlak
+    zonder_css  true als het blok ws-spaar.css zelf al inlaadt. Op een
+            collectiepagina staan tientallen labels; zonder dit zou de
+            stylesheet-regel er net zo vaak in staan.
     extra   extra klasse voor het blok zelf (marge, een glans bij hover)
 {%- endcomment -%}
-{{ 'ws-spaar.css' | asset_url | stylesheet_tag }}
+{%- unless zonder_css -%}{{ 'ws-spaar.css' | asset_url | stylesheet_tag }}{%- endunless -%}
 {%- assign ws_pct = 0 -%}
 {%- if van > 0 and nu < van -%}
   {%- assign ws_verschil = van | minus: nu -%}
