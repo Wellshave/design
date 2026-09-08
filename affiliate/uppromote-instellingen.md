@@ -19,6 +19,7 @@ de app doet, is erger dan geen gids.
 | Speciale couponcommissie | uit |
 | Uitgesloten producten of collecties | geen |
 | Zelfverwijzingen uitsluiten | uit, affiliates mogen dus via hun eigen link kopen |
+| Cookieduur | 30 dagen, ingesteld per programma onder Settings > General |
 
 Levenslange commissie staat uit: er is commissie op de doorverwezen bestelling, niet
 op latere aankopen van dezelfde klant.
@@ -98,7 +99,6 @@ eigen cookie. Dat is geen fout, ze meten iets anders.
 
 ## Nog open
 
-- Cookieduur, staat onder Settings > General. Ontbreekt nog in stap 2 van de gids.
 - Goedkeuringstermijn in dagen. De gids beschrijft hem nu zonder getal, wat klopt,
   maar met getal is het concreter.
 - Kortingswaarde van de automatisch gegenereerde coupon. Zodra bekend hoort die in de
