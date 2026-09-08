@@ -97,12 +97,17 @@ geldt voor alle partnerlinks, dus een vaste waarde klopt dan niet meer.
 GA4 en UpPromote gaan niet gelijklopen: GA4 rekent op last-non-direct, UpPromote op zijn
 eigen cookie. Dat is geen fout, ze meten iets anders.
 
+## Beleid, vastgesteld
+
+- Bieden op de merknaam in zoekadvertenties is niet toegestaan.
+- Kortingscode- en cashbacksites mogen alleen na overleg.
+
+Beide staan met een reden in de gids, niet als kale regel.
+
 ## Nog open
 
 - Goedkeuringstermijn in dagen. De gids beschrijft hem nu zonder getal, wat klopt,
   maar met getal is het concreter.
 - Kortingswaarde van de automatisch gegenereerde coupon. Zodra bekend hoort die in de
   gids, want dan weet een affiliate wat hij te bieden heeft.
-- Beleid: bieden op de merknaam in zoekadvertenties, ja of nee.
-- Beleid: kortingscode- en cashbacksites, ja of nee.
 - Beleid: zelfverwijzingen staan aan. Bewust? En zo ja, benoemen in de gids of niet?
