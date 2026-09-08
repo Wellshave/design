@@ -70,14 +70,28 @@ handmatig overgemaakt.
 | Partners mogen aangepaste link bewerken | uit |
 | Bit.ly-verkorting | uit |
 
-UTM-instellingen, af te stemmen op GA4:
+UTM-instellingen. Alle drie de schakelaars aan, ook die voor productlinks en voor
+links met een eigen bron, anders blijft een deel van het verkeer ongetagd.
 
-    utm_source    = affiliate-variabele (naam, ID of couponcode)
-    utm_medium    = affiliate
-    utm_campaign  = standaardprovisie
+| Veld in UpPromote | Waarde |
+| --- | --- |
+| Campagnebron | `{affiliate_name}` |
+| Campagnemedium | `affiliate` |
+| Campagnenaam | `standaardprovisie` |
+| Campagnetermijn | leeg |
+| Campagne-inhoud | `{affiliate_id}` |
 
 `utm_medium` moet exact `affiliate` zijn, kleine letters en enkelvoud, anders valt het
 verkeer buiten de standaard kanaalgroep Affiliates van GA4. Nooit `referral` of `cpc`.
+De voorbeelden die UpPromote onder dat veld toont zijn generiek en sturen de verkeerde
+kant op.
+
+De naam staat in de bron omdat een rapport dan leesbaar is zonder opzoekwerk. Het ID
+staat in campagne-inhoud als exacte sleutel, want affiliatenamen kunnen spaties en
+hoofdletters bevatten en GA4 is hoofdlettergevoelig.
+
+Bij een tweede programma moet de campagnenaam heroverwogen worden: de UTM-instelling
+geldt voor alle partnerlinks, dus een vaste waarde klopt dan niet meer.
 
 GA4 en UpPromote gaan niet gelijklopen: GA4 rekent op last-non-direct, UpPromote op zijn
 eigen cookie. Dat is geen fout, ze meten iets anders.
