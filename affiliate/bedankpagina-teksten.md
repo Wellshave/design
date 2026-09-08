@@ -6,12 +6,15 @@ direct na het invullen van het registratieformulier, terwijl hij nog moet bevest
 Dit is een afhaakmoment: de aanmelding staat er, maar telt pas als de verificatiemail
 wordt geopend. De teksten hieronder zijn erop gericht dat die mail gevonden wordt.
 
-## Nog invullen
+## Geen placeholders
 
-- `[afzendernaam]` en `[onderwerpregel]`: meld je een keer aan met een eigen adres en
-  neem letterlijk over wat er binnenkomt. Nooit gokken, een verkeerde onderwerpregel
-  maakt het zoeken juist moeilijker.
-- `[jullie e-mailadres]`: hetzelfde adres als in de affiliategids.
+De bedankpagina kent geen merge tags, dus alles staat er letterlijk in. De onderwerpregel
+van de verificatiemail is bewust weggelaten in plaats van geraden: zoeken op de
+afzendernaam werkt net zo goed en die staat vast.
+
+De uitweg loopt via de contactpagina, niet via een mailadres. De link is
+`https://wellshave.nl/pages/neem-contact-op` (gecontroleerd, 200). Gebruik die
+eindbestemming, want `/pages/contact` is een omleiding.
 
 ## Wat waar hoort
 
@@ -33,11 +36,14 @@ Alinea 1:
 
 Alinea 2, afzender en onderwerp:
 
-    De mail komt van [afzendernaam], met als onderwerp "[onderwerpregel]". Zie je hem niet in je inbox, zoek dan op die naam en kijk even in je map met spam, updates of promoties.
+    De mail komt van Wellshave. Zie je hem niet in je inbox, zoek dan op onze naam en kijk even in je map met spam, updates of promoties.
 
 Alinea 3, de uitweg:
 
-    Lukt het daarna nog steeds niet? Stuur de mail hieronder opnieuw, of mail ons op [jullie e-mailadres]. Dan zetten we je account handmatig klaar. Je hoeft je niet opnieuw aan te melden.
+    Lukt het daarna nog steeds niet? Stuur de mail hieronder opnieuw. Blijft het misgaan, laat het ons weten via de contactpagina op wellshave.nl, dan zetten we je account handmatig klaar. Je hoeft je niet opnieuw aan te melden.
+
+Maak van "de contactpagina op wellshave.nl" een link naar
+https://wellshave.nl/pages/neem-contact-op
 
 ### Veld: knoptekst (tabblad Translation)
 
@@ -49,6 +55,8 @@ Alinea 3, de uitweg:
   op het moment dat iemand de mail niet kan vinden werkt dat averechts.
 - De losse regel "Kun je de e-mail nog steeds niet vinden?" is opgegaan in de laatste
   alinea. Hij stond er als vraag zonder antwoord, terwijl de knop eronder hem beantwoordt.
+- De afzender wordt genoemd, de onderwerpregel niet. Zoeken op "Wellshave" werkt, en een
+  geraden onderwerpregel zou het zoeken juist moeilijker maken.
 - De knoptekst staat in het Nederlands. "Resend email" was de enige Engelse tekst op een
   verder Nederlandse pagina. Staat hij niet in Inhoud, dan staat hij onder Translation.
 
