@@ -79,8 +79,21 @@ Eén kenmerk, één tweeslagskop, één zin. Niet meer.
 - **Bovenregel** is het kenmerk zelf, in kapitalen: `IPX7 WATERDICHT`, `LED-VERLICHTING`.
   Dat is het feit; de kop hoeft het dan niet te herhalen.
 - **Eerste kopregel stelt vast**, de **tweede levert de opluchting** in goud. De emotie staat
-  achteraan. "Neem hem mee de douche in." / "Spoel hem daarna gewoon af."
+  achteraan. "Mee onder de douche." / "Spoel hem daarna af."
 - **De zin eronder** zegt wat het kenmerk voor de lezer doet, niet wat het is.
+
+**Elke kopregel past op &eacute;&eacute;n regel, of de band klopt niet meer.** Dit is geen
+smaakregel maar een maatregel. Het tekstblok staat in de lege bovenhelft van de foto; groeit
+het, dan zakt het het onderwerp in. Bij de Groom Guard was 54px de bovengrens van de
+kopgrootte en 640px de breedte van het tekstblok, dus paste er ongeveer 27 tekens op een
+regel. Twee kopregels plus een zin van twee regels eindigde op 301px, met het onderwerp vanaf
+380px: ruim genoeg. Vier kopregels eindigde op 411px, dwars door de waterspetters heen.
+
+Meet het, schat het niet: dezelfde zin van 26 tekens paste wel en een van 27 niet, want de
+letterbreedte verschilt. Zet een onzichtbare `span` met `white-space:nowrap` in de
+kopelement-stijl, lees de breedte, en houd alles onder de `max-width` van het tekstblok. Blijkt
+een regel te lang, kort dan de copy in. Verklein de kop niet en verhoog de band niet: de
+banden delen &eacute;&eacute;n ritme, en &eacute;&eacute;n afwijkende band is meteen zichtbaar.
 
 ### De sluier
 
@@ -132,6 +145,17 @@ Dit is wat de sectie bruikbaar maakt. Wijk hier niet van af:
 Volg deel 14 van de merklaag: `gpt_image_2`, `quality:"high"`. **Gebruik de referentiebeelden
 die al in Higgsfield staan**, niet een packshot van de webshop: daar staat het apparaat vaak
 op wit en met minder detail. Kijk eerst in de bibliotheek voordat je iets importeert.
+
+**Vraag om meerdere hoeken van hetzelfde apparaat.** Wat het verschil maakte was niet
+&eacute;&eacute;n mooie referentie maar een setje: het apparaat met en zonder opzetkam, van
+opzij, van voren, en de lader los. Met drie referenties per beeld, telkens een andere hoek,
+kwamen de vorm-eigenaardigheden er wel uit die het model anders gladstrijkt: de taille in de
+body en de V-vorm van de schouder onder de meskop. Met &eacute;&eacute;n referentie kreeg je
+een generieke trimmer die er alleen ongeveer zo uitzag.
+
+Staat zo'n set er nog niet, vraag er dan om in plaats van er omheen te werken. `media_upload_widget`
+zet de uploadknop in het gesprek; de gebruiker krijgt er media-id's voor terug die je
+rechtstreeks als referentie meegeeft.
 
 Vier dingen daar bovenop, elk uit een misser die werkelijk gebeurde:
 
