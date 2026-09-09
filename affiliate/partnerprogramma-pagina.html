@@ -3,9 +3,9 @@
      Draait binnen het themasjabloon; alles is gescoped onder .ws-lp.
      De knoppen wijzen naar REGISTRATIE_URL; vervang die op alle plekken in een keer.
 
-     Onderaan staat een uitgecommentarieerd blok "Onze community". Zet dat aan zodra je
-     content van echte creators hebt. Dat blok is de kern van dit paginatype, en het is
-     het enige dat we niet kunnen namaken met merkfotografie. -->
+     De clips in het communityblok staan in Shopify Files en worden vanaf de Shopify-CDN
+     geserveerd, in de 720p-mp4-variant met de poster als stilstaand beeld. Ze laden pas
+     als iemand op play drukt (preload="none"). -->
 
 <div class="ws-lp">
 <style>
@@ -94,6 +94,19 @@
 .ws-lp .vink span{display:block;font-size:14.5px;line-height:1.6;color:var(--ink-60);margin-top:4px}
 .ws-lp .partner .knop{margin-top:32px}
 .ws-lp .partner-beeld img{width:100%;border-radius:var(--r-l);aspect-ratio:1/1;object-fit:cover}
+
+/* community */
+.ws-lp .community{padding:74px 0 0}
+.ws-lp .community-kop{max-width:var(--rail);margin:0 auto 30px;padding:0 24px;text-align:center}
+.ws-lp .community-kop p{margin:16px auto 0;font-size:16px;line-height:1.7;color:var(--ink-60);max-width:46ch}
+.ws-lp .clips{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;
+  padding:6px 24px 20px;max-width:var(--rail);margin:0 auto;
+  -webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.ws-lp .clip{flex:0 0 clamp(220px,23%,268px);scroll-snap-align:start;
+  aspect-ratio:9/16;width:100%;height:auto;object-fit:cover;
+  border-radius:var(--r-m);background:var(--carbon);
+  box-shadow:0 14px 34px rgba(17,17,17,.12)}
+@media(max-width:760px){ .ws-lp .clip{flex:0 0 68%} }
 
 /* goed om te weten */
 .ws-lp .weten{background:var(--grad-dark);color:#fff;padding:72px 0}
@@ -187,29 +200,41 @@
   </div>
 </section>
 
-<!-- ============ ONZE COMMUNITY ============
-     Aanzetten zodra je vier foto's of clips van echte creators hebt. Vervang de vier
-     bronnen en haal deze commentaarhaken weg. Dit blok is het sterkste op de pagina:
-     bij de drie referentiepagina's is precies dit het bewijs dat mensen overtuigt.
-
+<!-- ============ ONZE COMMUNITY ============ -->
 <section class="community">
-  <div class="wrap">
-    <h2 class="duo" style="text-align:center;margin-bottom:26px">Onze community</h2>
-    <div class="galerij">
-      <img src="BEELD-1" alt="Creator met Wellshave" loading="lazy">
-      <img src="BEELD-2" alt="Creator met Wellshave" loading="lazy">
-      <img src="BEELD-3" alt="Creator met Wellshave" loading="lazy">
-      <img src="BEELD-4" alt="Creator met Wellshave" loading="lazy">
-    </div>
+  <div class="community-kop">
+    <span class="kicker">Onze community</span>
+    <h2 class="duo">Zo ziet het eruit<span class="b">als creators met ons werken.</span></h2>
+    <p>Een greep uit de content die creators met onze apparaten maakten. Scroll opzij voor meer.</p>
+  </div>
+  <div class="clips">
+      <video class="clip" controls preload="none" playsinline poster="https://cdn.shopify.com/s/files/1/0573/5743/4923/files/preview_images/1f08e01204874df9a57342ebfc7b2286.thumbnail.0000000000.jpg?v=1784139853" aria-label="Creator over verzorging, in de badkamer">
+        <source src="https://cdn.shopify.com/videos/c/vp/1f08e01204874df9a57342ebfc7b2286/1f08e01204874df9a57342ebfc7b2286.HD-720p-4.5Mbps-89039082.mp4" type="video/mp4">
+      </video>
+      <video class="clip" controls preload="none" playsinline poster="https://cdn.shopify.com/s/files/1/0573/5743/4923/files/preview_images/9db28f5900aa494d9ff75eed7601f646.thumbnail.0000000000.jpg?v=1784139759" aria-label="Creator vertelt over haar ervaring">
+        <source src="https://cdn.shopify.com/videos/c/vp/9db28f5900aa494d9ff75eed7601f646/9db28f5900aa494d9ff75eed7601f646.HD-720p-4.5Mbps-89039012.mp4" type="video/mp4">
+      </video>
+      <video class="clip" controls preload="none" playsinline poster="https://cdn.shopify.com/s/files/1/0573/5743/4923/files/preview_images/ecfd043d52b74c52a7782b5d73540afa.thumbnail.0000000000.jpg?v=1777473123" aria-label="Creator over verzorgd blijven op vakantie">
+        <source src="https://cdn.shopify.com/videos/c/vp/ecfd043d52b74c52a7782b5d73540afa/ecfd043d52b74c52a7782b5d73540afa.HD-720p-4.5Mbps-83013370.mp4" type="video/mp4">
+      </video>
+      <video class="clip" controls preload="none" playsinline poster="https://cdn.shopify.com/s/files/1/0573/5743/4923/files/preview_images/0ef6ec7cd3184e68b70958d62900b038.thumbnail.0000000000.jpg?v=1777563585" aria-label="Barber aan het werk met een Wellshave-tondeuse">
+        <source src="https://cdn.shopify.com/videos/c/vp/0ef6ec7cd3184e68b70958d62900b038/0ef6ec7cd3184e68b70958d62900b038.HD-720p-4.5Mbps-83111074.mp4" type="video/mp4">
+      </video>
+      <video class="clip" controls preload="none" playsinline poster="https://cdn.shopify.com/s/files/1/0573/5743/4923/files/preview_images/61282ac37b2f4142ab5b4a0c3b9e2d22.thumbnail.0000000000.jpg?v=1777561089" aria-label="Creator toont het apparaat">
+        <source src="https://cdn.shopify.com/videos/c/vp/61282ac37b2f4142ab5b4a0c3b9e2d22/61282ac37b2f4142ab5b4a0c3b9e2d22.HD-720p-4.5Mbps-83107871.mp4" type="video/mp4">
+      </video>
+      <video class="clip" controls preload="none" playsinline poster="https://cdn.shopify.com/s/files/1/0573/5743/4923/files/preview_images/2d5a2da37dce4e4c8b915e2412af26a1.thumbnail.0000000000.jpg?v=1777473924" aria-label="Creator na het trimmen">
+        <source src="https://cdn.shopify.com/videos/c/vp/2d5a2da37dce4e4c8b915e2412af26a1/2d5a2da37dce4e4c8b915e2412af26a1.HD-720p-4.5Mbps-83015596.mp4" type="video/mp4">
+      </video>
+      <video class="clip" controls preload="none" playsinline poster="https://cdn.shopify.com/s/files/1/0573/5743/4923/files/preview_images/3a7869eb32da4465abadbacbc0ff6fae.thumbnail.0000000000.jpg?v=1777474850" aria-label="Creator gebruikt de neustrimmer">
+        <source src="https://cdn.shopify.com/videos/c/vp/3a7869eb32da4465abadbacbc0ff6fae/3a7869eb32da4465abadbacbc0ff6fae.HD-720p-4.5Mbps-83017354.mp4" type="video/mp4">
+      </video>
+      <video class="clip" controls preload="none" playsinline poster="https://cdn.shopify.com/s/files/1/0573/5743/4923/files/preview_images/9863be9f6a8b4119804c79f48fb89b76.thumbnail.0000000000.jpg?v=1777473088" aria-label="Creator over scheren onder de douche">
+        <source src="https://cdn.shopify.com/videos/c/vp/9863be9f6a8b4119804c79f48fb89b76/9863be9f6a8b4119804c79f48fb89b76.HD-720p-2.1Mbps-83013368.mp4" type="video/mp4">
+      </video>
   </div>
 </section>
-<style>
-.ws-lp .community{padding:74px 0 0}
-.ws-lp .galerij{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.ws-lp .galerij img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:var(--r-m)}
-@media(max-width:760px){.ws-lp .galerij{grid-template-columns:repeat(2,1fr)}}
-</style>
-============ EINDE COMMUNITY ============ -->
+
 
 <!-- ============ GOED OM TE WETEN ============ -->
 <section class="weten">
