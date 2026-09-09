@@ -625,23 +625,7 @@
         {%- endif -%}
 
 
-        {%- comment -%}
-          Boven de kaart de sterren van Trustpilot, en die gaan over de winkel:
-          alle duizend reviews samen. Het citaat eronder komt uit onze eigen
-          reviews en draagt daarom zijn eigen naam met bruine sterren. Zo staat
-          het merkteken waar het verdiend is zonder dat het iets beweert over
-          deze ene klant. De regel is één vertaalbare zin, want "uit" en "op
-          Trustpilot" moeten in vier talen kloppen.
-        {%- endcomment -%}
         {%- if citaat != blank -%}
-          {%- if s.tp_tonen and s.rev_tp_regel != blank -%}
-            <div class="ws-revtp">
-              <span class="ws-st">
-                {%- for i in (1..5) -%}<i><svg><use href="#ws-pdp-ster-{{ section.id }}"/></svg></i>{%- endfor -%}
-              </span>
-              <span>{{ s.rev_tp_regel }}</span>
-            </div>
-          {%- endif -%}
           <div class="ws-rev">
             {%- comment -%}
               Rechtsboven de weg naar alle reviews, onderin de naam met het
@@ -1706,7 +1690,6 @@
     { "type": "text", "id": "tp_bron", "label": "Bron bij het citaat (terugval)", "info": "Per product te overschrijven met custom.buybox_quote_source. Alleen bij 'Trustpilot' krijgt de kaart de groene Trustpilot-blokjes; bij elke andere bron bruine sterren.", "default": "Wellshave" },
     { "type": "text", "id": "rev_alle_label", "label": "Link naar alle reviews", "info": "Leeg = geen link.", "default": "Alle reviews" },
     { "type": "url", "id": "rev_alle_url", "label": "Waar die link heen gaat", "info": "Het Trustpilot-profiel is https://nl.trustpilot.com/review/wellshave.nl" },
-    { "type": "text", "id": "rev_tp_regel", "label": "Trustpilot-regel boven het citaat", "info": "Gaat over alle reviews van de winkel, niet over dit citaat. Leeg = geen regel.", "default": "4,4 uit 1000+ reviews op Trustpilot" },
     { "type": "text", "id": "koper_label", "label": "Label geverifieerde koper", "default": "Geverifieerde koper" },
     { "type": "text", "id": "proberen_label", "label": "Tweede regel onder de knop", "info": "Staat naast Veilig afrekenen. Leeg laten laat hem weg.", "default": "100 dagen proberen" },
     { "type": "header", "content": "Klantcitaat" },

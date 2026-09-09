@@ -177,17 +177,6 @@
 .ws-pdp .ws-h1{font-size:33px;font-weight:500;letter-spacing:-.025em;color:var(--ws-ink);margin-top:11px;line-height:1.06}
 .ws-pdp .ws-sub{font-size:23px;font-weight:400;letter-spacing:-.02em;line-height:1.22;margin-top:9px;color:var(--ws-ink)}
 
-/* De Trustpilot-regel hoort bij de winkel, het citaat bij de klant. Ze staan
-   daarom los van elkaar: de regel op de zandgrond, de kaart in zijn eigen wit
-   eronder. Zou de balk op de kaart liggen, dan leest het merkteken alsnog als
-   de bron van dat ene citaat. */
-.ws-pdp .ws-revtp{display:flex;align-items:center;gap:8px;margin-top:15px;flex-wrap:wrap;
-  font-size:12px;color:var(--ws-w52)}
-.ws-pdp .ws-revtp .ws-st{display:flex;gap:2px}
-.ws-pdp .ws-revtp .ws-st i{width:15px;height:15px;background:var(--ws-groen);border-radius:2px;
-  display:flex;align-items:center;justify-content:center}
-.ws-pdp .ws-revtp .ws-st svg{width:10px;height:10px;fill:#fff}
-.ws-pdp .ws-revtp + .ws-rev{margin-top:8px}
 .ws-pdp .ws-rev{margin-top:15px;border:1px solid var(--ws-lijn);border-radius:13px;background:var(--ws-kaart);padding:14px 16px}
 .ws-pdp .ws-rev .ws-kop{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .ws-pdp .ws-rev .ws-kop .ws-lk{display:flex;align-items:center;gap:8px}
@@ -609,12 +598,6 @@
   .ws-pdp .ws-bb > .ws-pay{order:14}
   .ws-pdp .ws-bb > .ws-cta2,
   .ws-pdp .ws-bb > .ws-kies{order:11}
-  /* De mobiele kolom sorteert op order, dus zonder eigen nummer belandt de
-     Trustpilot-regel bovenaan in plaats van boven zijn kaart. Hij krijgt
-     hetzelfde nummer als de kaart; bij gelijke order houdt flex de
-     dom-volgorde aan. De scheidingslijn verhuist mee naar boven. */
-  .ws-pdp .ws-bb > .ws-revtp{order:16;margin-top:16px;padding-top:16px;border-top:1px solid var(--ws-lijn)}
-  .ws-pdp .ws-bb > .ws-revtp + .ws-rev{order:16;margin-top:8px;padding-top:0;border-top:0}
   .ws-pdp .ws-bb > .ws-rev{order:16;margin-top:16px;padding-top:16px;border-top:1px solid var(--ws-lijn)}
   .ws-pdp .ws-bb > .ws-tel{order:17}
   .ws-pdp .ws-bb > .ws-acc{order:18}
