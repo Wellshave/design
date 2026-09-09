@@ -1,0 +1,268 @@
+<!-- Wellshave partnerprogramma, aanmeldpagina voor creators.
+     Plaatsing: Shopify > Pagina's, handle /pages/partnerprogramma, via de HTML-weergave.
+     Draait binnen het themasjabloon; alles is gescoped onder .ws-lp.
+     De knoppen wijzen naar REGISTRATIE_URL; vervang die op alle plekken in een keer.
+
+     De clips in het communityblok staan in Shopify Files en worden vanaf de Shopify-CDN
+     geserveerd, in de 720p-mp4-variant met de poster als stilstaand beeld. Ze laden pas
+     als iemand op play drukt (preload="none"). -->
+
+<div class="ws-lp">
+<style>
+.ws-lp{
+  --ink:#111111; --ink-80:rgba(17,17,17,.8); --ink-60:rgba(17,17,17,.6);
+  --ink-40:rgba(17,17,17,.4); --ink-10:rgba(17,17,17,.10);
+  --paper:#FFFFFF; --sand:#F5F1EA; --sand-deep:#EDE6DA; --carbon:#191816;
+  --bronze:#BC813E; --gold:#F5D18A;
+  --grad-gold:linear-gradient(158deg,#F8DFAB 0%,#E5BC77 42%,#C8913F 100%);
+  --grad-dark:linear-gradient(168deg,#242220 0%,#171614 58%,#0E0D0C 100%);
+  --grad-gold-tekst:linear-gradient(100deg,#B0742A 0%,#8C5A1A 100%);
+  --r-m:18px; --r-l:26px; --rail:1140px;
+  background:var(--paper); color:var(--ink);
+  font-family:'Montserrat',system-ui,-apple-system,sans-serif;
+  font-size:16px; line-height:1.65; font-weight:400; display:block;
+  -webkit-font-smoothing:antialiased;
+}
+.ws-lp *{box-sizing:border-box;margin:0;padding:0}
+.ws-lp img{max-width:100%;height:auto;display:block;border-radius:0}
+.ws-lp a{color:inherit;text-decoration:none}
+.ws-lp ul{list-style:none}
+.ws-lp li{list-style:none}
+.ws-lp :focus-visible{outline:3px solid var(--bronze);outline-offset:3px}
+.richtext__title{display:none}
+.rte > .ws-lp{margin:0}
+
+.ws-lp .wrap{max-width:var(--rail);margin:0 auto;padding:0 24px}
+.ws-lp .duo{font-weight:900;letter-spacing:-.025em;line-height:1.04;
+  font-size:clamp(32px,4.4vw,50px);text-wrap:balance}
+.ws-lp .duo .b{display:block;color:#B0742A}
+.ws-lp .duo.on-dark{color:#fff}
+.ws-lp .duo.on-dark .b{color:var(--gold)}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  .ws-lp .duo .b{background-image:var(--grad-gold-tekst);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:transparent}
+  .ws-lp .duo.on-dark .b{background-image:var(--grad-gold)}
+}
+.ws-lp .kicker{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--ink-40);margin-bottom:14px}
+.ws-lp .kicker.on-dark{color:rgba(255,255,255,.45)}
+
+.ws-lp .knop{display:inline-flex;align-items:center;gap:9px;
+  background:var(--grad-gold);color:#1A1408;
+  border-radius:100px;padding:17px 34px;font-size:15px;font-weight:800;
+  transition:transform .18s ease,filter .18s ease}
+.ws-lp .knop:hover{transform:translateY(-1px);filter:brightness(1.04)}
+
+/* hero */
+.ws-lp .hero{max-width:var(--rail);margin:0 auto;padding:34px 24px 0;
+  display:grid;grid-template-columns:1fr 1.1fr;gap:0;align-items:stretch}
+.ws-lp .hero-copy{background:var(--sand);border-radius:var(--r-l) 0 0 var(--r-l);
+  padding:64px 52px;display:flex;flex-direction:column;justify-content:center}
+.ws-lp .hero-copy p{margin-top:20px;font-size:16.5px;line-height:1.7;color:var(--ink-80);max-width:40ch}
+.ws-lp .hero-copy .knop{margin-top:30px;align-self:flex-start}
+.ws-lp .hero-beeld{border-radius:0 var(--r-l) var(--r-l) 0;overflow:hidden;background:var(--sand)}
+.ws-lp .hero-beeld img{width:100%;height:100%;min-height:440px;object-fit:cover;object-position:60% 40%}
+
+/* vertrouwensregel */
+.ws-lp .vertrouwen{text-align:center;padding:34px 24px 4px;font-size:13.5px;
+  font-weight:600;color:var(--ink-60)}
+.ws-lp .vertrouwen b{color:var(--ink);font-weight:800}
+
+/* drie stappen */
+.ws-lp .stappen{max-width:var(--rail);margin:0 auto;padding:26px 24px 0;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.ws-lp .stap{background:var(--sand);border-radius:var(--r-m);padding:34px 30px;text-align:center}
+.ws-lp .stap-nr{width:34px;height:34px;margin:0 auto 18px;border-radius:50%;
+  background:var(--grad-gold);color:#1A1408;font-size:14px;font-weight:900;
+  display:grid;place-items:center}
+.ws-lp .stap h3{font-size:20px;font-weight:800;letter-spacing:-.015em;margin-bottom:10px}
+.ws-lp .stap p{font-size:14.5px;line-height:1.65;color:var(--ink-60)}
+
+/* partnerblok met vinkjes */
+.ws-lp .partner{background:var(--sand);margin-top:70px;padding:72px 0}
+.ws-lp .partner-in{max-width:var(--rail);margin:0 auto;padding:0 24px;
+  display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.ws-lp .partner h2{font-size:clamp(26px,3.4vw,36px);font-weight:900;
+  letter-spacing:-.022em;line-height:1.1;margin-bottom:26px;text-wrap:balance}
+.ws-lp .vinkjes{display:flex;flex-direction:column;gap:22px}
+.ws-lp .vink{display:flex;gap:16px;align-items:flex-start}
+.ws-lp .vink-ico{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--bronze);
+  color:var(--bronze);flex-shrink:0;display:grid;place-items:center;
+  font-size:12px;font-weight:900;margin-top:2px}
+.ws-lp .vink b{display:block;font-size:16.5px;font-weight:800;line-height:1.35}
+.ws-lp .vink span{display:block;font-size:14.5px;line-height:1.6;color:var(--ink-60);margin-top:4px}
+.ws-lp .partner .knop{margin-top:32px}
+.ws-lp .partner-beeld img{width:100%;border-radius:var(--r-l);aspect-ratio:1/1;object-fit:cover}
+
+/* community */
+.ws-lp .community{padding:74px 0 0}
+.ws-lp .community-kop{max-width:var(--rail);margin:0 auto 30px;padding:0 24px;text-align:center}
+.ws-lp .community-kop p{margin:16px auto 0;font-size:16px;line-height:1.7;color:var(--ink-60);max-width:46ch}
+.ws-lp .clips{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;
+  padding:6px 24px 20px;max-width:var(--rail);margin:0 auto;
+  -webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.ws-lp .clip{flex:0 0 clamp(220px,23%,268px);scroll-snap-align:start;
+  aspect-ratio:9/16;width:100%;height:auto;object-fit:cover;
+  border-radius:var(--r-m);background:var(--carbon);
+  box-shadow:0 14px 34px rgba(17,17,17,.12)}
+@media(max-width:760px){ .ws-lp .clip{flex:0 0 68%} }
+
+/* goed om te weten */
+.ws-lp .weten{background:var(--grad-dark);color:#fff;padding:72px 0}
+.ws-lp .weten-in{max-width:820px;margin:0 auto;padding:0 24px}
+.ws-lp .weten h2{font-size:clamp(24px,3.2vw,32px);font-weight:900;
+  letter-spacing:-.02em;line-height:1.1;margin-bottom:30px;color:#fff}
+.ws-lp .weten .vink-ico{border-color:var(--gold);color:var(--gold)}
+.ws-lp .weten .vink b{color:#fff}
+.ws-lp .weten .vink span{color:rgba(255,255,255,.66)}
+
+/* afsluiter */
+.ws-lp .slot{text-align:center;padding:78px 24px 84px;max-width:680px;margin:0 auto}
+.ws-lp .slot p{margin-top:18px;font-size:16.5px;line-height:1.7;color:var(--ink-80)}
+.ws-lp .slot .knop{margin-top:30px}
+.ws-lp .slot small{display:block;margin-top:16px;font-size:12.5px;color:var(--ink-40);font-weight:600}
+
+@media(max-width:980px){
+  .ws-lp .hero{grid-template-columns:1fr;padding-top:20px}
+  .ws-lp .hero-copy{border-radius:var(--r-l) var(--r-l) 0 0;padding:44px 30px}
+  .ws-lp .hero-beeld{border-radius:0 0 var(--r-l) var(--r-l)}
+  .ws-lp .hero-beeld img{min-height:300px}
+  .ws-lp .stappen{grid-template-columns:1fr}
+  .ws-lp .partner-in{grid-template-columns:1fr;gap:34px}
+  .ws-lp .partner-beeld{order:-1}
+}
+@media(prefers-reduced-motion:reduce){ .ws-lp .knop{transition:none} }
+</style>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-copy">
+    <span class="kicker">Partnerprogramma</span>
+    <h1 class="duo">Word onderdeel van de<span class="b">Wellshave-community.</span></h1>
+    <p>Gebruik je onze apparaten en praat je er toch al over? Deel je link, geef je publiek 10% korting en verdien 15% op elke bestelling. Aanmelden kost twee minuten en je kunt meteen starten.</p>
+    <a class="knop" href="REGISTRATIE_URL">Meld je nu aan</a>
+  </div>
+  <div class="hero-beeld">
+    <img src="https://cdn.shopify.com/s/files/1/0573/5743/4923/files/Wellshavesept25lifestyle_lowres--10.jpg?v=1785941675" alt="Wellshave-apparaat in de hand" loading="eager" width="2121" height="1414">
+  </div>
+</header>
+
+<p class="vertrouwen">Vertrouwd door <b>ruim 1.000 beoordelaars</b> op Trustpilot, gemiddeld <b>4,5</b></p>
+
+<!-- ============ DRIE STAPPEN ============ -->
+<section class="stappen">
+  <div class="stap">
+    <span class="stap-nr">1</span>
+    <h3>Aanmelden</h3>
+    <p>Vul het formulier in, dat kost een paar minuten. Geen wachtlijst en geen beoordeling vooraf.</p>
+  </div>
+  <div class="stap">
+    <span class="stap-nr">2</span>
+    <h3>Ontvang alles om te starten</h3>
+    <p>Je krijgt direct je persoonlijke link, je eigen kortingscode en het beeldmateriaal. Wil je een product om mee te werken, dan vraag je dat aan.</p>
+  </div>
+  <div class="stap">
+    <span class="stap-nr">3</span>
+    <h3>Laat het zien</h3>
+    <p>Deel hoe jij Wellshave gebruikt, op de plek waar jouw publiek al naar je luistert. Via je link krijg je commissie op elke verkoop.</p>
+  </div>
+</section>
+
+<!-- ============ WAT JE KRIJGT ============ -->
+<section class="partner">
+  <div class="partner-in">
+    <div>
+      <h2>Word Wellshave-partner</h2>
+      <div class="vinkjes">
+        <div class="vink">
+          <span class="vink-ico">&#10003;</span>
+          <span><b>Je eigen link en kortingscode</b><span>Je publiek krijgt 10% korting op alles. Klikt iemand op je link, dan staat die code al in de winkelwagen.</span></span>
+        </div>
+        <div class="vink">
+          <span class="vink-ico">&#10003;</span>
+          <span><b>15% commissie, dertig dagen geldig</b><span>Je link blijft dertig dagen aan een bezoeker hangen, dus content die later wordt teruggekeken telt nog steeds voor jou.</span></span>
+        </div>
+        <div class="vink">
+          <span class="vink-ico">&#10003;</span>
+          <span><b>Gratis product om mee te werken</b><span>Vraag het aan zodra je aan de slag wilt. Je kunt niet laten zien wat je niet in handen hebt.</span></span>
+        </div>
+        <div class="vink">
+          <span class="vink-ico">&#10003;</span>
+          <span><b>Zelf uitbetalen vanaf &euro;25</b><span>Je ziet elke bestelling binnenkomen in je dashboard en vraagt je uitbetaling aan wanneer het jou uitkomt.</span></span>
+        </div>
+      </div>
+      <a class="knop" href="REGISTRATIE_URL">Meld je nu aan</a>
+    </div>
+    <div class="partner-beeld">
+      <img src="https://cdn.shopify.com/s/files/1/0573/5743/4923/files/blade-baron-lifestyle-3-69e8f80db0b52fc25617a2a3.webp?v=1776875553" alt="Wellshave-washbag wordt ingepakt" loading="lazy" width="3000" height="3000">
+    </div>
+  </div>
+</section>
+
+<!-- ============ ONZE COMMUNITY ============ -->
+<section class="community">
+  <div class="community-kop">
+    <span class="kicker">Onze community</span>
+    <h2 class="duo">Zo ziet het eruit<span class="b">als creators met ons werken.</span></h2>
+    <p>Een greep uit de content die creators met onze apparaten maakten. Scroll opzij voor meer.</p>
+  </div>
+  <div class="clips">
+      <video class="clip" controls preload="none" playsinline poster="https://cdn.shopify.com/s/files/1/0573/5743/4923/files/preview_images/1f08e01204874df9a57342ebfc7b2286.thumbnail.0000000000.jpg?v=1784139853" aria-label="Creator over verzorging, in de badkamer">
+        <source src="https://cdn.shopify.com/videos/c/vp/1f08e01204874df9a57342ebfc7b2286/1f08e01204874df9a57342ebfc7b2286.HD-720p-4.5Mbps-89039082.mp4" type="video/mp4">
+      </video>
+      <video class="clip" controls preload="none" playsinline poster="https://cdn.shopify.com/s/files/1/0573/5743/4923/files/preview_images/9db28f5900aa494d9ff75eed7601f646.thumbnail.0000000000.jpg?v=1784139759" aria-label="Creator vertelt over haar ervaring">
+        <source src="https://cdn.shopify.com/videos/c/vp/9db28f5900aa494d9ff75eed7601f646/9db28f5900aa494d9ff75eed7601f646.HD-720p-4.5Mbps-89039012.mp4" type="video/mp4">
+      </video>
+      <video class="clip" controls preload="none" playsinline poster="https://cdn.shopify.com/s/files/1/0573/5743/4923/files/preview_images/ecfd043d52b74c52a7782b5d73540afa.thumbnail.0000000000.jpg?v=1777473123" aria-label="Creator over verzorgd blijven op vakantie">
+        <source src="https://cdn.shopify.com/videos/c/vp/ecfd043d52b74c52a7782b5d73540afa/ecfd043d52b74c52a7782b5d73540afa.HD-720p-4.5Mbps-83013370.mp4" type="video/mp4">
+      </video>
+      <video class="clip" controls preload="none" playsinline poster="https://cdn.shopify.com/s/files/1/0573/5743/4923/files/preview_images/0ef6ec7cd3184e68b70958d62900b038.thumbnail.0000000000.jpg?v=1777563585" aria-label="Barber aan het werk met een Wellshave-tondeuse">
+        <source src="https://cdn.shopify.com/videos/c/vp/0ef6ec7cd3184e68b70958d62900b038/0ef6ec7cd3184e68b70958d62900b038.HD-720p-4.5Mbps-83111074.mp4" type="video/mp4">
+      </video>
+      <video class="clip" controls preload="none" playsinline poster="https://cdn.shopify.com/s/files/1/0573/5743/4923/files/preview_images/61282ac37b2f4142ab5b4a0c3b9e2d22.thumbnail.0000000000.jpg?v=1777561089" aria-label="Creator toont het apparaat">
+        <source src="https://cdn.shopify.com/videos/c/vp/61282ac37b2f4142ab5b4a0c3b9e2d22/61282ac37b2f4142ab5b4a0c3b9e2d22.HD-720p-4.5Mbps-83107871.mp4" type="video/mp4">
+      </video>
+      <video class="clip" controls preload="none" playsinline poster="https://cdn.shopify.com/s/files/1/0573/5743/4923/files/preview_images/2d5a2da37dce4e4c8b915e2412af26a1.thumbnail.0000000000.jpg?v=1777473924" aria-label="Creator na het trimmen">
+        <source src="https://cdn.shopify.com/videos/c/vp/2d5a2da37dce4e4c8b915e2412af26a1/2d5a2da37dce4e4c8b915e2412af26a1.HD-720p-4.5Mbps-83015596.mp4" type="video/mp4">
+      </video>
+      <video class="clip" controls preload="none" playsinline poster="https://cdn.shopify.com/s/files/1/0573/5743/4923/files/preview_images/3a7869eb32da4465abadbacbc0ff6fae.thumbnail.0000000000.jpg?v=1777474850" aria-label="Creator gebruikt de neustrimmer">
+        <source src="https://cdn.shopify.com/videos/c/vp/3a7869eb32da4465abadbacbc0ff6fae/3a7869eb32da4465abadbacbc0ff6fae.HD-720p-4.5Mbps-83017354.mp4" type="video/mp4">
+      </video>
+      <video class="clip" controls preload="none" playsinline poster="https://cdn.shopify.com/s/files/1/0573/5743/4923/files/preview_images/9863be9f6a8b4119804c79f48fb89b76.thumbnail.0000000000.jpg?v=1777473088" aria-label="Creator over scheren onder de douche">
+        <source src="https://cdn.shopify.com/videos/c/vp/9863be9f6a8b4119804c79f48fb89b76/9863be9f6a8b4119804c79f48fb89b76.HD-720p-2.1Mbps-83013368.mp4" type="video/mp4">
+      </video>
+  </div>
+</section>
+
+
+<!-- ============ GOED OM TE WETEN ============ -->
+<section class="weten">
+  <div class="weten-in">
+    <h2>Goed om te weten</h2>
+    <div class="vinkjes">
+      <div class="vink">
+        <span class="vink-ico">&#10003;</span>
+        <span><b>Je bent vrij in hoe je het deelt</b><span>Een video, een story, een nieuwsbrief of gewoon je bio. Het hoeft niet gelikt te zijn, het moet van jou zijn. Tag ons wel, dan zien we het en delen we het graag.</span></span>
+      </div>
+      <div class="vink">
+        <span class="vink-ico">&#10003;</span>
+        <span><b>Zeg erbij dat het een samenwerking is</b><span>Dat is in Nederland verplicht en het kost je geen conversie. Mensen weten het toch wel.</span></span>
+      </div>
+      <div class="vink">
+        <span class="vink-ico">&#10003;</span>
+        <span><b>Geen advertenties op onze merknaam</b><span>Wie op Wellshave zoekt had ons toch wel gevonden. Wil je je code op een kortingscodesite plaatsen, vraag het ons dan even.</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AFSLUITER ============ -->
+<section class="slot">
+  <h2 class="duo">Klaar om te beginnen?<span class="b">Het duurt twee minuten.</span></h2>
+  <p>Je vult je gegevens in, je krijgt je link en je code, en je kunt vandaag nog je eerste bericht plaatsen.</p>
+  <a class="knop" href="REGISTRATIE_URL">Meld je nu aan</a>
+  <small>Gratis, geen minimum aantal volgers, en je kunt altijd stoppen.</small>
+</section>
+
+</div>
