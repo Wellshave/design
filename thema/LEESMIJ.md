@@ -1741,3 +1741,43 @@ heet nu *wellshave/claude-design v4 (Live)*; de API weigert te schrijven op het
 hoofdthema, dus v5 is een duplicaat van v4 waarop verder gewerkt wordt. De
 waarschuwing over de Duitse vertalingen verhuist mee: die hangen aan het thema-id,
 dus registreer ze opnieuw tegen `?theme_id=205229687116` voordat v5 live gaat.
+
+### Zone Hoofd: scheren en trimmen uit elkaar, en de Barber Bro's erbij (09-09)
+
+**De Barber Bro-lijn stond niet op de zonepagina.** Het raster van een zonepagina
+komt niet uit een Shopify-collectie; elke handle staat met de hand in het sjabloon.
+`collection.zone-hoofd.json` noemde zes sets en de drie Barber Bro's zaten daar niet
+bij. Reden: toen de pagina werd gebouwd waren die drie niet te koop (voorraad −6,
+`inventoryPolicy` DENY). Dat is inmiddels omgedraaid — de Bro's liggen op voorraad
+(27, 5, 5) en de drie Barber Packs staan op −5 en tonen zichzelf als *Tijdelijk
+uitverkocht*. De pagina toonde dus drie sets die niet te koop zijn en verzweeg drie
+die dat wel zijn. De Bro's staan er nu achter de Packs; de lijnen blijven bij elkaar.
+
+**Scheren en trimmen zijn nu twee groepen.** Ze stonden samen in *Vind jouw
+hoofdapparaat*, terwijl het twee verschillende klussen zijn — de keuzehulp op
+dezelfde pagina vraagt er zelfs naar (kaal / kort / rand). Nu:
+
+| groep | wat erin staat |
+|---|---|
+| Glad scheren | Head Shaver Deluxe |
+| Kort houden en bijwerken | Tondeuse Deluxe, Tondeuse Elegant, Detailtrimmer Sharpline |
+
+Er is één hoofdscheerapparaat in de lijn, dus die eerste groep is één kaart breed.
+Dat is de waarheid, geen fout — maar het betekent wel dat er op een breed scherm
+drie lege kolommen naast staan. Wil je dat niet, dan is de enige echte oplossing een
+tweede hoofdscheerapparaat, of de volgorde omdraaien zodat de rij van drie bovenaan
+staat.
+
+**De keuzehulp verhuist nu naar de eerste groep met minstens drie kaarten**, niet
+meer naar de eerste groep. Zonder die regel landde hij op deze pagina na één kaart en
+stond het grootste blok van de pagina weer bijna bovenaan. Op de andere pagina's
+verandert er niets: daar heeft de eerste groep er al drie of meer.
+
+**Twee stale teksten opgeruimd.** In *Over deze categorie* stond bij de Tondeuse
+Deluxe "op dit moment uitverkocht" — dat klopte omgekeerd (de Elegant is uitverkocht,
+de Deluxe niet). Voorraadstatus hoort niet in redactietekst: de kaart zegt het zelf al
+en blijft wél kloppen. De opsomming staat nu ook in dezelfde volgorde als het raster.
+
+**Nog open:** `wellshave-tondeuse-mannen-pro` (Tondeuse Pro, €86,95, voorraad −22)
+staat in geen enkel sjabloon. Zodra hij weer leverbaar is hoort hij in *Kort houden
+en bijwerken*.

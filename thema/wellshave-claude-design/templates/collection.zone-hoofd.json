@@ -215,14 +215,11 @@
         "groep_1": {
           "type": "groep",
           "settings": {
-            "kop": "Vind jouw hoofdapparaat",
-            "sub": "Vier apparaten, drie verschillende klussen.",
+            "kop": "Glad scheren",
+            "sub": "Het hoofdscheerapparaat: zeven roterende koppen die de bolling van je schedel volgen, ook aan de achterkant.",
             "cat": "app",
             "producten": [
-              "wellshave-5-in-1-scheerapparaat-mannen-deluxe",
-              "wellshave-tondeuse-elegant",
-              "detailtrimmer-sharpline™",
-              "wellshave-tondeuse-mannen-deluxe"
+              "wellshave-5-in-1-scheerapparaat-mannen-deluxe"
             ],
             "noot": "",
             "kicker": "",
@@ -243,7 +240,10 @@
               "skull-deal-3-0",
               "barber-pack-1-0",
               "barber-pack-2-0",
-              "barber-pack-3-0"
+              "barber-pack-3-0",
+              "barber-bro-1-0",
+              "barber-bro-2-0",
+              "barber-bro-3-0"
             ],
             "noot": "",
             "kicker": "",
@@ -269,10 +269,29 @@
             "link_label": "",
             "link_url": ""
           }
+        },
+        "groep_1b": {
+          "type": "groep",
+          "settings": {
+            "kop": "Kort houden en bijwerken",
+            "sub": "Tondeuses voor de lengte, en een smalle detailtrimmer voor de nek, de oren en de randen.",
+            "cat": "app",
+            "producten": [
+              "wellshave-tondeuse-mannen-deluxe",
+              "wellshave-tondeuse-elegant",
+              "detailtrimmer-sharpline™"
+            ],
+            "noot": "",
+            "kicker": "",
+            "labels": "",
+            "link_label": "",
+            "link_url": ""
+          }
         }
       },
       "block_order": [
         "groep_1",
+        "groep_1b",
         "groep_2",
         "groep_3"
       ],
@@ -351,7 +370,7 @@
             "product": "wellshave-tondeuse-mannen-deluxe",
             "naam": "Tondeuse Deluxe™",
             "url": "",
-            "tekst": "Dezelfde hendel met een brushless motor — op dit moment uitverkocht."
+            "tekst": "Dezelfde verstelbare hendel, met een brushless motor."
           }
         },
         "tip_1": {
@@ -378,9 +397,9 @@
       },
       "block_order": [
         "item_1",
+        "item_4",
         "item_2",
         "item_3",
-        "item_4",
         "tip_1",
         "tip_2",
         "tip_3"

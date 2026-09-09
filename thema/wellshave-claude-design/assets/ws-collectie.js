@@ -243,7 +243,16 @@
   function verhuisHulp() {
     var hulp = document.getElementById('ws-keuzehulp');
     if (!hulp) return;
-    var groep = document.querySelector('.wsc .groep');
+    // Achter de eerste groep die genoeg te zien geeft. De zone Hoofd heeft een groep
+    // met één apparaat — er is maar één hoofdscheerapparaat — en daarachter viel de
+    // hulp na één kaart, wat het blok weer boven de producten duwt. Drie kaarten is
+    // de ondergrens; is er geen enkele groep zo groot, dan de eerste.
+    var groepen = document.querySelectorAll('.wsc .groep');
+    var groep = null;
+    for (var i = 0; i < groepen.length; i++) {
+      if (groepen[i].querySelectorAll('.wsk').length >= 3) { groep = groepen[i]; break; }
+    }
+    if (!groep) groep = groepen[0] || null;
     if (groep && groep.nextElementSibling !== hulp) {
       groep.parentNode.insertBefore(hulp, groep.nextSibling);
     }
