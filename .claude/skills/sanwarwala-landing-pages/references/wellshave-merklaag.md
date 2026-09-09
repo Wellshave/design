@@ -459,9 +459,15 @@ zand → wit → donker → zand → donker → wit → donkere afsluiter
 De donkere blokken vallen op de plekken waar het serieus wordt: het mechanisme en het
 aanbod. Zonder die afwisseling loopt alles in elkaar over en voelt de pagina langer dan hij is.
 
-Een **beeldband over de volle breedte** met tekst eroverheen breekt het kolomritme. Gebruik
-er hooguit één per pagina; twee maakt het effect ongedaan. De tekst krijgt een gradiëntsluier
-zodat hij leesbaar blijft, ongeacht de foto eronder.
+Een **beeldband over de volle breedte** met tekst eroverheen breekt het kolomritme. Op een
+landingspagina gebruik je er hooguit één; twee maakt het effect ongedaan. De tekst krijgt een
+gradiëntsluier zodat hij leesbaar blijft, ongeacht de foto eronder.
+
+**Eén uitzondering: de productpagina.** Daar is een stapel van vier tot zes banden juist het
+dragende blok. Dat werkt alleen als de stapel van kant wisselt, van hoogte wisselt en op één
+doorlopende grond staat — dan leest hij als één beweging in plaats van als losse platen. Valt
+één van die drie weg, dan geldt de regel hierboven gewoon weer. Zie
+`wellshave-productpagina.md`.
 
 ---
 
@@ -562,6 +568,12 @@ Volgorde:
    van wat iemand al probeerde, een sfeerbeeld van de gebruikssituatie. Bewijs mag niet: een
    voor-en-na van huid, een resultaat, een gezicht bij een review. Dat is verzonnen bewijs,
    dezelfde categorie als een verzonnen review. Ontbreekt het materiaal, meld dat dan als gat.
+
+**Kijk of er al tekst in de foto zit.** De featurefoto's van dit merk zijn vierkant en dragen
+hun eigen kop in een hoek gebakken — "100% Waterproof", "LED precizie licht". Als tegel in de
+galerij klopt dat; als achtergrond onder je eigen kop staan er twee koppen door elkaar, in
+twee verschillende letters. Controleer dat vóórdat je zo'n foto over de volle breedte
+gebruikt. Een brede uitsnede snijdt het bijschrift er vanzelf af, een staande niet.
 
 **Vormgeving:** afronding `--r-m`, en op donkere secties een plaat van `--grad-dark` met
 binnenmarge eromheen. Let op ingebakken achtergronden — productsetfoto's staan vaak op wit of
