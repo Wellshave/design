@@ -456,6 +456,39 @@ leveren dezelfde poel op. Daarin gaan er precies twee over het lichaam, en
 Yven is de enige die echt over dit apparaat gaat. Productreviews per artikel
 zitten in Loox, en die zijn niet via een open eindpunt op te halen.
 
+### Loox is w&eacute;l de bron, via het metaveld
+
+De reviewteksten staan gewoon in de winkel: `loox.reviews` draagt per product
+de laatste honderd, met naam en tekst. Over alle actieve producten samen zijn
+dat 2.489 teksten op 38 producten. Wel met twee haken:
+
+* **Ze zijn niet allemaal exclusief.** Van de 1.269 unieke teksten staan er
+  782 bij precies &eacute;&eacute;n product en 487 bij twee of meer. De acht
+  neustrimmers delen &eacute;&eacute;n poel &mdash; de Advance heeft nul eigen
+  teksten. Een gedeelde review is niet aan een model toe te schrijven en gaat
+  er dus af.
+* **Bol plakt de listingtitel aan de tekst.** &laquo;Prima groomer | Scheren
+  zonder wondjesGoed formaat&hellip;&raquo;. Knippen op de laatste
+  kleine-letter-naar-hoofdletter-grens in de eerste zestig tekens haalt de
+  titel eraf.
+
+### Naam zonder datum
+
+Loox bewaart geen datum bij de tekst, dus de voetregel is alleen de naam.
+Verzinnen is geen optie en half doen ook niet: de Groom Guard&trade; PRO stond
+als enige op &laquo;Yven &middot; 8 juli 2026&raquo; en is teruggebracht naar
+&laquo;Yven&raquo;. Bijkomend voordeel: een naam hoeft niet vertaald, een
+Nederlandse maandnaam op de Duitse pagina wel.
+
+### De bron staat per product, niet per sectie
+
+`custom.buybox_quote_source` en `custom.buybox_quote_url` overschrijven
+`tp_bron` en `rev_alle_url`. Alleen bij de waarde `Trustpilot` krijgt de kaart
+de groene Trustpilot-blokjes; bij elke andere bron gouden sterren. Dat is geen
+smaakkwestie: die vierkantjes zijn het beeldmerk van Trustpilot, en een review
+van bol.com of uit Loox die daarin staat doet een onjuiste mededeling over
+zijn herkomst.
+
 ## De upgrade-pop-up bij het toevoegen aan de winkelwagen
 
 Klikt iemand op **In winkelwagen** en heeft het product
