@@ -41,7 +41,7 @@ tweede donker blok vlak naast; dan verliest de stapel zijn plek in het ritme.
 
 ## 2. De beeldbanden
 
-Rand-tot-rand beeld met één tweeslagskop eroverheen, vier tot zes keer gestapeld zonder
+Rand-tot-rand beeld met één tweeslagskop eroverheen, vier tot zeven keer gestapeld zonder
 tussenruimte. Dit is de sectie die de productpagina zijn karakter geeft.
 
 ### Dit is een uitzondering, en waarom hij mag
@@ -83,15 +83,20 @@ Eén kenmerk, één tweeslagskop, één zin. Niet meer.
 - **De zin eronder** zegt wat het kenmerk voor de lezer doet, niet wat het is.
 
 **Elke kopregel past op &eacute;&eacute;n regel, of de band klopt niet meer.** Dit is geen
-smaakregel maar een maatregel. Het tekstblok staat in de lege bovenhelft van de foto; groeit
-het, dan zakt het het onderwerp in. Bij de Groom Guard was 54px de bovengrens van de
-kopgrootte en 640px de breedte van het tekstblok, dus paste er ongeveer 27 tekens op een
-regel. Twee kopregels plus een zin van twee regels eindigde op 301px, met het onderwerp vanaf
-380px: ruim genoeg. Vier kopregels eindigde op 411px, dwars door de waterspetters heen.
+smaakregel maar een maatregel. Het tekstblok staat in de lege helft van de foto; groeit het,
+dan zakt het het onderwerp in. Twee kopregels plus een zin van twee regels eindigde bij de
+Groom Guard op 301px, met het onderwerp vanaf 380px: ruim genoeg. Vier kopregels eindigde op
+411px, dwars door de waterspetters heen.
+
+**De ruimte hangt af van de uitlijning, en dat verschil is groot genoeg om je erin te laten
+lopen.** Een gecentreerd tekstblok is 40em breed, een links- of rechtsuitgelijnd 34em. Bij een
+kop van 54px is dat 640px tegen 544px, oftewel ongeveer 27 tekens tegen 22. Drie koppen die op
+een gecentreerde band prima pasten, liepen op een zijkantband alsnog over drie regels. Meet
+per band, met de uitlijning die die band heeft.
 
 Meet het, schat het niet: dezelfde zin van 26 tekens paste wel en een van 27 niet, want de
 letterbreedte verschilt. Zet een onzichtbare `span` met `white-space:nowrap` in de
-kopelement-stijl, lees de breedte, en houd alles onder de `max-width` van het tekstblok. Blijkt
+kopelement-stijl, lees de breedte, en houd alles onder de `max-width` van dat tekstblok. Blijkt
 een regel te lang, kort dan de copy in. Verklein de kop niet en verhoog de band niet: de
 banden delen &eacute;&eacute;n ritme, en &eacute;&eacute;n afwijkende band is meteen zichtbaar.
 
@@ -122,6 +127,56 @@ Het verschil is niet subtiel. Een man die zich in de douche staat te scheren is 
 lifestylefoto; hij vertelt een situatie. Een macro waarin de stalen meskam horizontaal door
 het frame loopt vertelt het product. Op een band met &eacute;&eacute;n kenmerk als kop wint het
 tweede altijd.
+
+### Elke band een eigen wereld
+
+**Productcinema alleen is niet genoeg, en dat was de tweede les.** Vijf banden, allemaal
+hetzelfde zwart, hetzelfde licht, hetzelfde onderwerp op dezelfde afstand: technisch in orde
+en toch vlak. De referentiemerken geven elke band een eigen wereld, en dat is precies waar het
+verschil in zit. Naast elkaar gelegd:
+
+| | Referentie | Vlakke stapel |
+|---|---|---|
+| Ondergrond | wisselt per band | vijf keer hetzelfde zwart |
+| Idee | een rekwisiet of verschijnsel per band | geen, alleen het product uitgelicht |
+| Diepte | echte bokeh, voor- en achtergrond gescheiden | alles even scherp, alles even ver |
+| Camera | macro, wijd, laag, van boven | vijf keer dezelfde ooghoogte |
+| Mensen | een enkele band met een mens erin | geen |
+
+Vier dingen om per band te bepalen, voordat je ook maar een prompt schrijft:
+
+- **De ondergrond wisselt.** Bij de Groom Guard: vier banden op carbon, drie op zand of
+  cr&egrave;me. Geen zwart-wit-zwart-wit; laat het per band uit het onderwerp volgen. Water en
+  laden willen daglicht, messen en LED willen nacht.
+- **Elke band heeft een idee, geen opstelling.** Een gestolde waterboog om het apparaat heen,
+  een lint van goud licht dat door het donker krult, vier kammen op een diagonaal van
+  voorgrond naar achtergrond. Het idee mag abstract zijn; het moet alleen over dit kenmerk
+  gaan.
+- **Vraag om echte scherptediepte.** "Alleen de voorste rij tanden scherp, de rest lost op in
+  bokeh" levert diepte; "macro" alleen niet. Zet ook de camera per band anders: een macro, een
+  wijde, een lage.
+- **De schaal varieert.** Op de ene band vult het onderwerp de hele breedte, op de andere staat
+  het klein in een groot leeg vlak. Dat verschil draagt het ritme van de stapel.
+
+**Twee lifestylebanden tussen de productbanden.** De referentiemerken doen het en het werkt:
+de productbanden leveren het bewijs, de lifestylebanden het gevoel. Zet ze op posities waar de
+stapel anders lang hetzelfde doet, en houd ze veilig voor het contentfilter (zie hieronder):
+een man van borsthoogte opwaarts in een spiegel, of iemand op de rand van een bed, gekleed en
+op afstand. Niet de scheerhandeling zelf.
+
+### Tekstkleur volgt de opname, niet de smaak
+
+Zodra de gronden wisselen, wisselt de tekstkleur mee. Wit op cr&egrave;me is onleesbaar en meer
+sluier is geen oplossing: die vreet precies de helderheid weg waar de lichte band het van moet
+hebben. Dus twee standen in de sectie:
+
+- **Licht** op een carbon of nachtelijke opname: witte kop, tweede regel in het goudverloop.
+- **Donker** op een zand- of cr&egrave;mekleurige opname: kop in inkt, tweede regel in
+  **brons** (`#BC813E`), niet in goud. Het lichte goud van de merklaag verdwijnt op licht; het
+  bronsverloop draagt daar wel.
+
+De sluier draait dan mee: op een lichte band verloopt hij naar cr&egrave;me in plaats van naar
+zwart. Zelfde richting, omgekeerde kleur.
 
 ### De compositie-afspraak
 
@@ -190,20 +245,49 @@ tekst, in plaats van te blijven herformuleren.
 
 ### Wat het kost
 
-Vijf banden op 4k/high is ongeveer 55 credits per ronde. Reken op twee rondes: &eacute;&eacute;n
-set, dan de een of twee die je afkeurt opnieuw met de fout benoemd. Afkeuren is de werkwijze,
-geen tegenvaller.
+Op `gpt_image_2`, 4k, high is het 11 credits per beeld. Een stapel van zeven banden vraagt er
+veertien, want liggend en staand zijn twee opnames: ongeveer 155 credits per volledige ronde.
+Reken op twee rondes: &eacute;&eacute;n set, dan de een of twee die je afkeurt opnieuw met de
+fout benoemd. Afkeuren is de werkwijze, geen tegenvaller.
 
-### De telefoon
+Doe de liggende set eerst en keur die goed voordat je de staande maakt. Anders betaal je de
+staande helft van een richting die je alsnog afkeurt.
 
-Het beeld gaat daar **ongesneden** mee, op 16:9, met de kop eronder op de grond. De
-compositie-afspraak is liggend; snijd je hem staand uit, dan vallen de uiteinden van het
-product eruit. Er is dan ook geen sluier nodig, want de kop staat niet meer op de foto.
+Twee dingen die tijd kosten en niets opleveren: **de referentiebeelden vergeten mee te geven**
+(dan krijg je een generiek apparaat terug en gooi je de hele batch weg), en **meer dan acht
+jobs tegelijk indienen** (de limiet op het ultra-abonnement; de rest komt terug als
+`submission_failed` en die moet je opnieuw wegzetten).
 
-De gecentreerde uitlijning loopt door naar de telefoon: de regel voor de gecentreerde band is
-specifieker dan de linkslijning in het telefoonblok en wint dus. Dat is hier gewenst, want
-gecentreerd onder een gecentreerde opname leest rustig. Wil je het ooit anders, dan moet die
-regel expliciet overschreven worden, niet met een breder selectorpad omzeild.
+### De telefoon vraagt een tweede opname
+
+**Maak per band ook een staande versie op 2:3.** De referentiemerken vullen op de telefoon de
+hele band met een staande foto en leggen de tekst eroverheen, boven of onder. Dat leest een
+stuk sterker dan een strook van 16:9 met een kop eronder, want de foto krijgt de hele hoogte.
+
+Het kost wel een tweede opname per band, en dat is geen keuze: **een liggende 16:9 staand
+uitsnijden werkt niet.** De compositie-afspraak legt het onderwerp horizontaal door het frame;
+snijd je hem staand uit, dan vallen de uiteinden van het product eruit, precies waar het beeld
+voor gemaakt is. Schrijf de staande prompt als dezelfde sc&egrave;ne, verticaal gecomponeerd,
+met de lege helft boven of onder in plaats van links of rechts.
+
+Waar de tekst staat volgt uit waar de opname leeg is, en dat wissel je af over de stapel. Meet
+het per beeld in zesden: bij de Groom Guard hadden de donkere banden hun bovenste drie zesden
+op nul en de lichte banden hun onderste twee zesden vlak, dus tekst boven op de donkere en
+onder op de lichte.
+
+De sectie heeft daarom een aparte beeldkiezer voor de telefoon. Blijft die leeg, dan valt de
+band terug op het oude gedrag: liggend beeld ongesneden, kop eronder op de grond. Zo blijft
+dezelfde sectie werken op een product waarvoor nog geen staande set bestaat.
+
+**E&eacute;n `<picture>`, geen twee beelden.** Twee `<img>`'s met `display:none` erop laat de
+browser allebei ophalen, en dan betaalt de telefoon voor een liggend beeld van 2000px dat ze
+nooit laat zien. Een `<source media="(max-width: 820px)">` op dezelfde grens als de CSS lost
+dat op.
+
+Let op bij het lokaal spiegelen: een spiegelscript dat `srcset` wegstript om alleen de lokale
+`src` te laten tellen, sloopt daarmee stilletjes de `<source>` van de telefoon. Je fotografeert
+dan op 390px het liggende beeld en denkt dat het klopt. Vervang de `srcset` van een `<source>`
+door het lokale bestand in plaats van hem te verwijderen.
 
 ## 4. Bouwen en testen in het thema
 
