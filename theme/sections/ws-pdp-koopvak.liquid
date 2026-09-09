@@ -152,10 +152,16 @@
                   <img src="{{ media.preview_image | image_url: width: 300 }}" alt="{{ media.alt | escape }}"
                        loading="lazy" width="300" height="300">
                 </button>
-                {%- comment -%} media.alt valt terug op de producttitel; dan is het bijschrift ruis {%- endcomment -%}
-                {%- if media.alt != blank and media.alt != product.title -%}
-                  <figcaption>{{ media.alt }}</figcaption>
-                {%- endif -%}
+                {%- comment -%}
+                  Hier stond de alt-tekst als bijschrift. Dat is een verwarring
+                  van twee dingen: alt is de beschrijving voor wie de foto niet
+                  ziet, een bijschrift is tekst voor iedereen. Over 62 producten
+                  en zeshonderd foto's stond er maar twee keer iets in, en beide
+                  keren geen bijschrift maar afval: een Engelse app-omschrijving
+                  op de Shave Package 3.0 en de naam "ShipWill" op de verzekerde
+                  verzending. Wil er ooit een echt bijschrift komen, dan hoort
+                  dat in een eigen veld en niet in alt.
+                {%- endcomment -%}
               </figure>
             {%- endfor -%}
           </div>
