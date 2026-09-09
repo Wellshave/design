@@ -20,7 +20,7 @@ De volgorde die de referentiepagina's in deze categorie aanhouden, en die wij ov
 | 2 | Persstrook | `logo-marquee` | Logoblokken in het sjabloon |
 | 3 | Bundel & bespaar | `ws-bundels` | Blokken met een productverwijzing |
 | 4 | Reviewrij | `trustpilot-reviews` | Trustpilot-widget |
-| 5 | Beeldbanden | `ws-pdp-banden` | Productfoto's, per band een nummer |
+| 5 | Beeldbanden | `ws-pdp-banden` | Eigen bandfotografie, of een productfoto op nummer |
 | 6 | Wat zit er in de doos | `whats-included` | `custom.included_box` |
 | 7 | In de praktijk | `ws-pdp-praktijk` | `custom.image_with_text` |
 | 8 | UGC | `ws-pdp-ugc` | `custom.ugc_video_list` |
@@ -75,38 +75,69 @@ Eén kenmerk, één tweeslagskop, één zin. Niet meer.
 ### De sluier
 
 Een witte kop op een lichte foto is onleesbaar. De sluier volgt de kant waar de tekst staat,
-zodat het beeld aan de andere kant open blijft. Sterkte per band: 75% op een donkere foto,
-85% op een normale, hoger op een lichte. Kijk ernaar, reken het niet uit.
+zodat het beeld aan de andere kant open blijft. Sterkte per band, als richtlijn: 70 tot 80%
+op beeld dat al donker is, 85% en hoger op een lichte foto, en zo laag als 45 tot 55% wanneer
+het beeld zelf de sfeer draagt en je hem niet dood wilt drukken. Kijk ernaar, reken het niet
+uit: de kop moet leesbaar zijn en de foto moet nog iets te zeggen hebben.
+
+**Botst de tekst met het onderwerp, verplaats dan de tekst, niet de sluier.** Bij de
+LED-band liep de onderregel dwars door de lichtbundel. Meer sluier had de bundel gedood, en
+die is nu juist het onderwerp. De oplossing was de band hoger maken en de tekst bovenin
+zetten, zodat kop en bundel elkaar niet meer raken.
 
 ---
 
-## 3. Beeld: controleer eerst of er al tekst in zit
+## 3. Beeld: de banden vragen hun eigen fotografie
 
-**Dit is de val waar deze pagina in liep.** De featurefoto's van Wellshave zijn vierkant en
-dragen hun eigen kop in een hoek gebakken: "Skin-Safe Keramische Bladen", "100% Waterproof",
-"LED precizie licht". Ze zijn gemaakt als tegels voor de galerij, niet als achtergrond.
+**De bestaande featurefoto's zijn hier niet geschikt voor, en dat kost je een ronde als je
+het niet vooraf checkt.** Ze zijn vierkant en dragen hun eigen kop in een hoek gebakken:
+"Skin-Safe Keramische Bladen", "100% Waterproof", "LED precizie licht". Als tegel in de
+galerij klopt dat. Full-bleed onder je eigen kop staan er twee koppen door elkaar, in twee
+verschillende letters, en dat leest als een fout. Zet de productfoto's naast elkaar en kijk
+welke schoon zijn voordat je iets vult.
 
-Zet je zo'n foto full-bleed neer, dan staan er twee koppen door elkaar: die van de foto en
-die van jou, in verschillende letters en verschillende maten. Dat leest als een fout.
+### De compositie-afspraak
 
-Wat dat betekent voor de uitsnede:
+Genereer de banden liever zelf, tegen deze afspraak. Hij is wat de sectie bruikbaar maakt:
 
-| Breedte | Verhouding van de band | Wat er wegvalt |
-|---|---|---|
-| Desktop | Ongeveer 2,3:1 | Boven en onder gaan er ruim af; een bijschrift in een hoek verdwijnt vanzelf |
-| Telefoon | Staand, als je tekst over beeld zet | Alleen de zijkanten; het bijschrift blijft staan |
+- **16:9.** Breed genoeg voor de desktopband (die snijdt boven en onder weg) en smal genoeg
+  om op de telefoon nog een liggende uitsnede te zijn. 21:9 past de desktop perfect maar
+  laat op de telefoon niets heel.
+- **Het apparaat in de ene helft, de andere helft leeg.** Niet "rustig", maar leeg: geen
+  schouder, geen arm, geen prop, geen highlight. Daar komt de kop te staan, en alles wat er
+  wel staat vecht ermee. Dit moet je in de prompt herhalen en als negatief benoemen, anders
+  vult het model de ruimte alsnog.
+- **Wissel de kant af** over de stapel heen, en houd één band met het onderwerp laag in
+  beeld voor de gecentreerde variant.
+- **Alles uit één lichtopstelling.** Vijf beelden die niet als één shoot ogen zijn erger dan
+  vijf middelmatige die dat wel doen. Leg de opstelling, het palet en de lens vast in een
+  vaste aanhef en varieer alleen het onderwerp.
 
-Daarom heeft de sectie een **aparte uitsnedekeuze voor de telefoon**. Staat het bijschrift
-boven in de foto, kies dan Onder; staat het onderin, kies Boven. En daarom zakt de kop op de
-telefoon onder het beeld: met een liggende uitsnede is er te weinig hoogte over om een kop
-overheen te zetten, en een liggende uitsnede is het enige wat het bijschrift wegneemt.
+### De prompt
 
-**Controleer dit vóórdat je de banden vult.** Zet de productfoto's naast elkaar en kijk welke
-schoon zijn. Kost dat te veel banden, meld het als gat en stel brede fotografie zonder
-ingebakken tekst voor — dat is de echte oplossing, niet een slimmere uitsnede.
+Volg deel 14 van de merklaag: `gpt_image_2`, `quality:"high"`, met een schone packshot als
+referentie zodat het apparaat klopt. Twee dingen daar bovenop, die dit werk opleverde:
 
-Komt die fotografie er, dan kan de telefoon terug naar tekst-over-beeld; in
-`assets/ws-pdp-banden.css` staat bij het telefoonblok precies welke drie regels dat zijn.
+- **Benoem het materiaal van onderdelen expliciet.** Het model maakte het mes goud omdat de
+  rest van het beeld warm was. "Geborsteld staal, niet goud, niet brons" in de prompt én in
+  het negatief loste dat op. Een dramatisch beeld met een verkeerd weergegeven onderdeel is
+  netto verlies.
+- **Controleer de merknaam op ware grootte.** Snijd het beeld uit rond het woordmerk en het
+  monogram en kijk of er geen letters verhaspeld zijn. Dat is de meest voorkomende misser in
+  gegenereerd productbeeld en op een band over de volle breedte staat hij groot.
+
+### Wat het kost
+
+Vijf banden op 4k/high is ongeveer 55 credits en twee rondes: één set, dan de een of twee
+die je afkeurt opnieuw met de fout benoemd. Reken op afkeuren; dat is geen tegenvaller maar
+de werkwijze.
+
+### Waarom de kop op de telefoon toch onder het beeld blijft
+
+Ook met deze fotografie. De compositie-afspraak is liggend: apparaat links of rechts, de
+andere helft leeg. Snijd je die staand uit om tekst over beeld te zetten, dan valt of het
+apparaat of de lege helft weg. Dus op de telefoon een liggende uitsnede en de kop eronder,
+met de uitsnedekeuze voor de telefoon naar de kant waar het apparaat staat.
 
 ---
 
@@ -144,6 +175,9 @@ de veilige testroute.
 ## 5. Wat deze laag nog niet weet
 
 - Of de bandenstapel het beter doet dan de huidige pagina. Er is nog niets gemeten.
+- Of gegenereerde bandfotografie het houdt naast echte merkfotografie. Deze set is
+  gegenereerd omdat er niets bruikbaars lag; dat is illustreren, geen bewijs, en dus
+  toegestaan. Komt er ooit een echte shoot, dan wint die.
 - Hoeveel banden optimaal is. Vijf voelt goed, vier waarschijnlijk ook; boven de zes is het
   niet geprobeerd.
 - Hoe de stapel werkt met video in plaats van foto. De sectie kan het, het is niet gebruikt.
