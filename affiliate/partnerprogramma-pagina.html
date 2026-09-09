@@ -1,8 +1,11 @@
-<!-- Wellshave partnerprogramma, landingspagina voor creators.
-     Plaatsing: Shopify > Pagina's > nieuwe pagina, handle /pages/partnerprogramma,
-     inhoud via de HTML-weergave van de editor. Draait binnen het themasjabloon.
-     Alles is gescoped onder .ws-lp zodat de themaheader en -footer heel blijven.
-     De knoppen wijzen naar REGISTRATIE_URL; vervang die op alle plekken in een keer. -->
+<!-- Wellshave partnerprogramma, aanmeldpagina voor creators.
+     Plaatsing: Shopify > Pagina's, handle /pages/partnerprogramma, via de HTML-weergave.
+     Draait binnen het themasjabloon; alles is gescoped onder .ws-lp.
+     De knoppen wijzen naar REGISTRATIE_URL; vervang die op alle plekken in een keer.
+
+     Onderaan staat een uitgecommentarieerd blok "Onze community". Zet dat aan zodra je
+     content van echte creators hebt. Dat blok is de kern van dit paginatype, en het is
+     het enige dat we niet kunnen namaken met merkfotografie. -->
 
 <div class="ws-lp">
 <style>
@@ -13,13 +16,12 @@
   --bronze:#BC813E; --gold:#F5D18A;
   --grad-gold:linear-gradient(158deg,#F8DFAB 0%,#E5BC77 42%,#C8913F 100%);
   --grad-dark:linear-gradient(168deg,#242220 0%,#171614 58%,#0E0D0C 100%);
-  --grad-sand:linear-gradient(180deg,#FBF8F3 0%,#F1EBE0 100%);
   --grad-gold-tekst:linear-gradient(100deg,#B0742A 0%,#8C5A1A 100%);
-  --r-s:12px; --r-m:18px; --r-l:26px; --rail:1140px;
+  --r-m:18px; --r-l:26px; --rail:1140px;
   background:var(--paper); color:var(--ink);
   font-family:'Montserrat',system-ui,-apple-system,sans-serif;
-  font-size:16px; line-height:1.65; font-weight:400;
-  display:block; -webkit-font-smoothing:antialiased;
+  font-size:16px; line-height:1.65; font-weight:400; display:block;
+  -webkit-font-smoothing:antialiased;
 }
 .ws-lp *{box-sizing:border-box;margin:0;padding:0}
 .ws-lp img{max-width:100%;height:auto;display:block;border-radius:0}
@@ -27,16 +29,12 @@
 .ws-lp ul{list-style:none}
 .ws-lp li{list-style:none}
 .ws-lp :focus-visible{outline:3px solid var(--bronze);outline-offset:3px}
-
-/* themalaag onschadelijk maken */
 .richtext__title{display:none}
 .rte > .ws-lp{margin:0}
 
 .ws-lp .wrap{max-width:var(--rail);margin:0 auto;padding:0 24px}
-
-/* tweeslagskop */
-.ws-lp .duo{font-weight:900;letter-spacing:-.025em;line-height:1.02;
-  font-size:clamp(31px,4.6vw,54px);text-wrap:balance}
+.ws-lp .duo{font-weight:900;letter-spacing:-.025em;line-height:1.04;
+  font-size:clamp(32px,4.4vw,50px);text-wrap:balance}
 .ws-lp .duo .b{display:block;color:#B0742A}
 .ws-lp .duo.on-dark{color:#fff}
 .ws-lp .duo.on-dark .b{color:var(--gold)}
@@ -49,390 +47,197 @@
 .ws-lp .kicker{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.2em;
   text-transform:uppercase;color:var(--ink-40);margin-bottom:14px}
 .ws-lp .kicker.on-dark{color:rgba(255,255,255,.45)}
-.ws-lp .lead{margin-top:16px;font-size:16.5px;line-height:1.7;color:var(--ink-80);max-width:52ch}
-.ws-lp .lead.on-dark{color:rgba(255,255,255,.7)}
 
-/* knoppen */
-.ws-lp .knop{display:inline-flex;align-items:center;gap:9px;background:var(--ink);color:#fff;
-  border-radius:100px;padding:16px 30px;font-size:14.5px;font-weight:800;
-  transition:background .18s ease,transform .18s ease}
-.ws-lp .knop:hover{background:var(--bronze);transform:translateY(-1px)}
-.ws-lp .knop.goud{background:var(--grad-gold);color:#1A1408}
-.ws-lp .knop.goud:hover{filter:brightness(1.04)}
-.ws-lp .knop-tekst{font-size:13.5px;font-weight:700;color:var(--ink-60);
-  border-bottom:1px solid var(--ink-10)}
+.ws-lp .knop{display:inline-flex;align-items:center;gap:9px;
+  background:var(--grad-gold);color:#1A1408;
+  border-radius:100px;padding:17px 34px;font-size:15px;font-weight:800;
+  transition:transform .18s ease,filter .18s ease}
+.ws-lp .knop:hover{transform:translateY(-1px);filter:brightness(1.04)}
 
 /* hero */
-.ws-lp .hero{background:var(--grad-sand);padding:52px 0 0}
-.ws-lp .hero-in{max-width:var(--rail);margin:0 auto;padding:0 24px;
-  display:grid;grid-template-columns:1.02fr .98fr;gap:44px;align-items:center}
-.ws-lp .hero-copy{padding-bottom:56px}
-.ws-lp .hero-lede{margin-top:20px;font-size:16.5px;line-height:1.7;color:var(--ink-80);max-width:44ch}
-.ws-lp .hero-acts{display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px;margin-top:26px}
-.ws-lp .hero-fud{margin-top:12px;font-size:12.5px;color:var(--ink-60);font-weight:600}
-.ws-lp .hero-assure{display:flex;flex-wrap:wrap;gap:7px 18px;margin-top:18px}
-.ws-lp .hero-assure li{font-size:12.5px;font-weight:600;color:var(--ink-60);
-  position:relative;padding-left:16px}
-.ws-lp .hero-assure li::before{content:"";position:absolute;left:0;top:7px;width:8px;height:8px;
-  border-radius:50%;background:var(--bronze)}
-.ws-lp .hero-badge{display:inline-flex;align-items:center;gap:9px;margin-top:22px;
-  background:var(--paper);border:1px solid var(--ink-10);border-radius:100px;
-  padding:9px 17px;font-size:12.5px;font-weight:600}
-.ws-lp .hero-badge b{color:var(--bronze);font-weight:800}
-.ws-lp .hero-art{align-self:end;padding-bottom:34px}
-.ws-lp .hero-art .plaat{background:var(--grad-dark);border-radius:var(--r-l);padding:16px;
-  box-shadow:0 26px 60px rgba(17,17,17,.24)}
-.ws-lp .hero-art img{width:100%;border-radius:var(--r-m)}
+.ws-lp .hero{max-width:var(--rail);margin:0 auto;padding:34px 24px 0;
+  display:grid;grid-template-columns:1fr 1.1fr;gap:0;align-items:stretch}
+.ws-lp .hero-copy{background:var(--sand);border-radius:var(--r-l) 0 0 var(--r-l);
+  padding:64px 52px;display:flex;flex-direction:column;justify-content:center}
+.ws-lp .hero-copy p{margin-top:20px;font-size:16.5px;line-height:1.7;color:var(--ink-80);max-width:40ch}
+.ws-lp .hero-copy .knop{margin-top:30px;align-self:flex-start}
+.ws-lp .hero-beeld{border-radius:0 var(--r-l) var(--r-l) 0;overflow:hidden;background:var(--sand)}
+.ws-lp .hero-beeld img{width:100%;height:100%;min-height:440px;object-fit:cover;object-position:60% 40%}
 
-/* geruststrook */
-.ws-lp .strook{background:var(--paper);border-top:1px solid var(--ink-10);
-  border-bottom:1px solid var(--ink-10)}
-.ws-lp .strook-in{max-width:var(--rail);margin:0 auto;padding:0 24px;
-  display:grid;grid-template-columns:repeat(4,1fr)}
-.ws-lp .strook-item{display:flex;align-items:center;gap:12px;padding:20px 18px}
-.ws-lp .strook-item + .strook-item{border-left:1px solid var(--ink-10)}
-.ws-lp .strook-ico{width:34px;height:34px;border-radius:50%;background:var(--sand);flex-shrink:0;
-  display:grid;place-items:center;color:var(--bronze)}
-.ws-lp .strook-ico svg{width:17px;height:17px}
-.ws-lp .strook-tx b{display:block;font-size:13px;font-weight:800;line-height:1.3}
-.ws-lp .strook-tx span{display:block;font-size:11.5px;color:var(--ink-60);margin-top:2px}
+/* vertrouwensregel */
+.ws-lp .vertrouwen{text-align:center;padding:34px 24px 4px;font-size:13.5px;
+  font-weight:600;color:var(--ink-60)}
+.ws-lp .vertrouwen b{color:var(--ink);font-weight:800}
 
-/* proof */
-.ws-lp .proof{padding:66px 0 12px;text-align:center;background:var(--paper)}
-.ws-lp .proof h2{font-weight:900;letter-spacing:-.022em;line-height:1.06;
-  font-size:clamp(25px,3.6vw,38px);margin-bottom:10px;text-wrap:balance}
-.ws-lp .proof .sub{color:var(--ink-60);margin:0 auto;font-size:15px;max-width:56ch}
-.ws-lp .tp-summary{display:flex;align-items:center;justify-content:center;gap:22px;
-  flex-wrap:wrap;margin:28px 0 0}
-.ws-lp .tp-score{display:flex;align-items:center;gap:12px}
-.ws-lp .tp-num{font-size:30px;font-weight:900;letter-spacing:-.02em}
-.ws-lp .tp-stars{display:flex;gap:3px}
-.ws-lp .tp-star{width:26px;height:26px;background:#00B67A;position:relative;display:inline-block}
-.ws-lp .tp-star::after{content:"";position:absolute;inset:0;background:#fff;
-  clip-path:polygon(50% 12%,61% 39%,90% 39%,67% 57%,76% 85%,50% 68%,24% 85%,33% 57%,10% 39%,39% 39%)}
-.ws-lp .tp-star.is-half{background:linear-gradient(90deg,#00B67A 50%,#DCDCE6 50%)}
-.ws-lp .tp-count{font-size:13px;color:var(--ink-60);font-weight:600;text-align:left}
-.ws-lp .bron-scheiding{width:1px;height:38px;background:var(--ink-10);flex-shrink:0}
-.ws-lp .bron{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left}
-.ws-lp .bron-num{font-size:26px;font-weight:900;letter-spacing:-.02em;line-height:1}
-.ws-lp .bron-tx{font-size:12.5px;color:var(--ink-60);font-weight:600}
+/* drie stappen */
+.ws-lp .stappen{max-width:var(--rail);margin:0 auto;padding:26px 24px 0;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.ws-lp .stap{background:var(--sand);border-radius:var(--r-m);padding:34px 30px;text-align:center}
+.ws-lp .stap-nr{width:34px;height:34px;margin:0 auto 18px;border-radius:50%;
+  background:var(--grad-gold);color:#1A1408;font-size:14px;font-weight:900;
+  display:grid;place-items:center}
+.ws-lp .stap h3{font-size:20px;font-weight:800;letter-spacing:-.015em;margin-bottom:10px}
+.ws-lp .stap p{font-size:14.5px;line-height:1.65;color:var(--ink-60)}
 
-/* kenmerkkaarten */
-.ws-lp .kenmerken{background:var(--sand);padding:74px 0;margin-top:66px}
-.ws-lp .kenmerk-kop{max-width:760px;margin:0 auto 34px;padding:0 24px;text-align:center}
-.ws-lp .kenmerk-kop .lead{margin-left:auto;margin-right:auto}
-.ws-lp .kaarten4{max-width:var(--rail);margin:0 auto;padding:0 24px;
-  display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.ws-lp .kk{border-radius:var(--r-m);padding:24px 20px;display:flex;flex-direction:column;
-  gap:12px;min-height:210px}
-.ws-lp .kk-ico{width:34px;height:34px;border-radius:9px;display:grid;place-items:center}
-.ws-lp .kk-ico svg{width:17px;height:17px}
-.ws-lp .kk h3{font-size:16px;font-weight:800;line-height:1.25;letter-spacing:-.01em}
-.ws-lp .kk p{font-size:13.5px;line-height:1.55;margin-top:auto}
-.ws-lp .kk.wit{background:var(--paper);color:var(--ink)}
-.ws-lp .kk.wit .kk-ico{background:var(--sand);color:var(--bronze)}
-.ws-lp .kk.wit p{color:var(--ink-60)}
-.ws-lp .kk.zwart{background:var(--carbon);color:#fff}
-.ws-lp .kk.zwart .kk-ico{background:rgba(255,255,255,.1);color:var(--gold)}
-.ws-lp .kk.zwart p{color:rgba(255,255,255,.62)}
-.ws-lp .kk.goud{background:var(--grad-gold);color:#1A1408}
-.ws-lp .kk.goud .kk-ico{background:rgba(255,255,255,.5);color:#6B4A16}
-.ws-lp .kk.goud p{color:rgba(26,20,8,.72)}
-.ws-lp .kk.creme{background:var(--sand-deep);color:var(--ink)}
-.ws-lp .kk.creme .kk-ico{background:rgba(255,255,255,.7);color:var(--bronze)}
-.ws-lp .kk.creme p{color:var(--ink-60)}
+/* partnerblok met vinkjes */
+.ws-lp .partner{background:var(--sand);margin-top:70px;padding:72px 0}
+.ws-lp .partner-in{max-width:var(--rail);margin:0 auto;padding:0 24px;
+  display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.ws-lp .partner h2{font-size:clamp(26px,3.4vw,36px);font-weight:900;
+  letter-spacing:-.022em;line-height:1.1;margin-bottom:26px;text-wrap:balance}
+.ws-lp .vinkjes{display:flex;flex-direction:column;gap:22px}
+.ws-lp .vink{display:flex;gap:16px;align-items:flex-start}
+.ws-lp .vink-ico{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--bronze);
+  color:var(--bronze);flex-shrink:0;display:grid;place-items:center;
+  font-size:12px;font-weight:900;margin-top:2px}
+.ws-lp .vink b{display:block;font-size:16.5px;font-weight:800;line-height:1.35}
+.ws-lp .vink span{display:block;font-size:14.5px;line-height:1.6;color:var(--ink-60);margin-top:4px}
+.ws-lp .partner .knop{margin-top:32px}
+.ws-lp .partner-beeld img{width:100%;border-radius:var(--r-l);aspect-ratio:1/1;object-fit:cover}
 
-/* donker stappenblok */
-.ws-lp .mech{background:var(--grad-dark);color:#fff;padding:76px 0}
-.ws-lp .mech-in{max-width:var(--rail);margin:0 auto;padding:0 24px;
-  display:grid;grid-template-columns:.94fr 1.06fr;gap:48px;align-items:center}
-.ws-lp .stappen{margin-top:28px;display:flex;flex-direction:column;gap:20px}
-.ws-lp .stap{display:flex;gap:14px;align-items:flex-start}
-.ws-lp .stap-nr{width:26px;height:26px;border-radius:50%;background:var(--grad-gold);
-  flex-shrink:0;display:grid;place-items:center;color:#1A1408;font-size:12.5px;
-  font-weight:900;margin-top:2px}
-.ws-lp .stap b{display:block;font-size:15.5px;font-weight:800;line-height:1.3;color:#fff}
-.ws-lp .stap span{display:block;font-size:14px;line-height:1.55;color:rgba(255,255,255,.68);
-  margin-top:4px}
-.ws-lp .mech-kaart{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.1);
-  border-radius:var(--r-l);padding:26px}
-.ws-lp .mech-kaart img{width:100%;border-radius:var(--r-m)}
-.ws-lp .mech-note{margin-top:16px;font-size:12.5px;color:rgba(255,255,255,.5);text-align:center}
-
-/* callout */
-.ws-lp .callout-wrap{max-width:820px;margin:66px auto 0;padding:0 24px}
-.ws-lp .callout{border-left:3px solid var(--bronze);background:var(--sand);
-  border-radius:0 var(--r-s) var(--r-s) 0;padding:24px 26px}
-.ws-lp .callout .kicker{color:var(--bronze);margin-bottom:8px}
-.ws-lp .callout h3{font-size:19px;font-weight:800;line-height:1.3;margin-bottom:8px}
-.ws-lp .callout p{font-size:15.5px;line-height:1.7;color:var(--ink-80)}
-
-/* faq */
-.ws-lp .faq{max-width:820px;margin:0 auto;padding:60px 24px 74px}
-.ws-lp .faq h2{font-weight:900;letter-spacing:-.022em;line-height:1.06;
-  font-size:clamp(25px,3.6vw,38px);margin-bottom:26px}
-.ws-lp .faq details{border-bottom:1px solid var(--ink-10)}
-.ws-lp .faq summary{cursor:pointer;list-style:none;padding:20px 34px 20px 0;position:relative;
-  font-size:16px;font-weight:700;line-height:1.4}
-.ws-lp .faq summary::-webkit-details-marker{display:none}
-.ws-lp .faq summary::after{content:"+";position:absolute;right:6px;top:18px;font-size:22px;
-  font-weight:400;color:var(--bronze);transition:transform .2s ease}
-.ws-lp .faq details[open] summary::after{transform:rotate(45deg)}
-.ws-lp .faq details p{padding:0 0 22px;font-size:15px;line-height:1.7;color:var(--ink-80)}
+/* goed om te weten */
+.ws-lp .weten{background:var(--grad-dark);color:#fff;padding:72px 0}
+.ws-lp .weten-in{max-width:820px;margin:0 auto;padding:0 24px}
+.ws-lp .weten h2{font-size:clamp(24px,3.2vw,32px);font-weight:900;
+  letter-spacing:-.02em;line-height:1.1;margin-bottom:30px;color:#fff}
+.ws-lp .weten .vink-ico{border-color:var(--gold);color:var(--gold)}
+.ws-lp .weten .vink b{color:#fff}
+.ws-lp .weten .vink span{color:rgba(255,255,255,.66)}
 
 /* afsluiter */
-.ws-lp .closer{background:var(--grad-dark);color:#fff;padding:80px 0}
-.ws-lp .closer-in{max-width:var(--rail);margin:0 auto;padding:0 24px;
-  display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
-.ws-lp .closer .hero-assure li{color:rgba(255,255,255,.6)}
-.ws-lp .closer .hero-assure li::before{background:var(--gold)}
-.ws-lp .closer-fud{margin-top:14px;font-size:12.5px;color:rgba(255,255,255,.5);font-weight:600}
-.ws-lp .closer-card{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.1);
-  border-radius:var(--r-l);padding:30px}
-.ws-lp .closer-card dl{display:grid;grid-template-columns:1fr auto;gap:0}
-.ws-lp .closer-card dt{font-size:14px;color:rgba(255,255,255,.65);padding:13px 0;
-  border-bottom:1px solid rgba(255,255,255,.1)}
-.ws-lp .closer-card dd{font-size:14px;font-weight:800;text-align:right;padding:13px 0;
-  border-bottom:1px solid rgba(255,255,255,.1);color:var(--gold)}
+.ws-lp .slot{text-align:center;padding:78px 24px 84px;max-width:680px;margin:0 auto}
+.ws-lp .slot p{margin-top:18px;font-size:16.5px;line-height:1.7;color:var(--ink-80)}
+.ws-lp .slot .knop{margin-top:30px}
+.ws-lp .slot small{display:block;margin-top:16px;font-size:12.5px;color:var(--ink-40);font-weight:600}
 
 @media(max-width:980px){
-  .ws-lp .hero-in{grid-template-columns:1fr;gap:6px;padding-top:26px}
-  .ws-lp .hero-copy{padding-bottom:6px}
-  .ws-lp .hero-art{padding-bottom:30px}
-  .ws-lp .mech-in,.ws-lp .closer-in{grid-template-columns:1fr;gap:30px}
-  .ws-lp .kaarten4{grid-template-columns:repeat(2,1fr)}
-  .ws-lp .strook-in{grid-template-columns:repeat(2,1fr)}
-  .ws-lp .strook-item:nth-child(3){border-left:0}
-  .ws-lp .strook-item:nth-child(n+3){border-top:1px solid var(--ink-10)}
+  .ws-lp .hero{grid-template-columns:1fr;padding-top:20px}
+  .ws-lp .hero-copy{border-radius:var(--r-l) var(--r-l) 0 0;padding:44px 30px}
+  .ws-lp .hero-beeld{border-radius:0 0 var(--r-l) var(--r-l)}
+  .ws-lp .hero-beeld img{min-height:300px}
+  .ws-lp .stappen{grid-template-columns:1fr}
+  .ws-lp .partner-in{grid-template-columns:1fr;gap:34px}
+  .ws-lp .partner-beeld{order:-1}
 }
-@media(max-width:520px){
-  .ws-lp .strook-in{grid-template-columns:1fr}
-  .ws-lp .strook-item + .strook-item{border-left:0;border-top:1px solid var(--ink-10)}
-  .ws-lp .kaarten4{grid-template-columns:1fr}
-}
-@media(prefers-reduced-motion:reduce){
-  .ws-lp .knop{transition:none}
-}
+@media(prefers-reduced-motion:reduce){ .ws-lp .knop{transition:none} }
 </style>
 
 <!-- ============ HERO ============ -->
 <header class="hero">
-  <div class="hero-in">
-    <div class="hero-copy">
-      <span class="kicker">Wellshave Partnerprogramma</span>
-      <h1 class="duo">Verdien 15% op wat je toch al aanraadt.<span class="b">Aan een merk waar je achter kunt staan.</span></h1>
-      <p class="hero-lede">Deel je link of je code, je publiek krijgt 10% korting, en jij verdient 15% van elke bestelling tot dertig dagen na de klik.</p>
-      <div class="hero-acts">
-        <a class="knop goud" href="REGISTRATIE_URL">Meld je aan als partner</a>
-        <a class="knop-tekst" href="#hoe">Eerst zien hoe het werkt</a>
-      </div>
-      <p class="hero-fud">Gratis, twee minuten werk, en je zit nergens aan vast.</p>
-      <ul class="hero-assure">
-        <li>Direct actief, geen wachtlijst</li>
-        <li>30 dagen cookie</li>
-        <li>Gratis product na goedkeuring</li>
-        <li>Uitbetaling vanaf &euro;25</li>
-      </ul>
-      <span class="hero-badge"><b>4,5</b> uit ruim 1.000 beoordelingen op Trustpilot</span>
-    </div>
-    <div class="hero-art">
-      <div class="plaat">
-        <img src="https://cdn.shopify.com/s/files/1/0573/5743/4923/files/2_Wellshave_Images-26.jpg?v=1775827161" alt="Wellshave 4 Foil Blade Baron scheerapparaat" loading="eager" width="900" height="900">
-      </div>
-    </div>
+  <div class="hero-copy">
+    <span class="kicker">Partnerprogramma</span>
+    <h1 class="duo">Word onderdeel van de<span class="b">Wellshave-community.</span></h1>
+    <p>Gebruik je onze apparaten en praat je er toch al over? Deel je link, geef je publiek 10% korting en verdien 15% op elke bestelling. Aanmelden kost twee minuten en je kunt meteen starten.</p>
+    <a class="knop" href="REGISTRATIE_URL">Meld je nu aan</a>
+  </div>
+  <div class="hero-beeld">
+    <img src="https://cdn.shopify.com/s/files/1/0573/5743/4923/files/Wellshavesept25lifestyle_lowres--10.jpg?v=1785941675" alt="Wellshave-apparaat in de hand" loading="eager" width="2121" height="1414">
   </div>
 </header>
 
-<!-- ============ GERUSTSTROOK ============ -->
-<div class="strook">
-  <div class="strook-in">
-    <div class="strook-item">
-      <span class="strook-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 6.5c0-1.9-2.2-3-5-3s-5 1.1-5 3 2.2 2.6 5 3.2 5 1.3 5 3.3-2.2 3-5 3-5-1.1-5-3"/></svg></span>
-      <span class="strook-tx"><b>15% commissie</b><span>Op elke verkoop via jou</span></span>
-    </div>
-    <div class="strook-item">
-      <span class="strook-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
-      <span class="strook-tx"><b>30 dagen cookie</b><span>Oude content blijft verdienen</span></span>
-    </div>
-    <div class="strook-item">
-      <span class="strook-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16v12H4zM4 8l2-4h12l2 4M12 4v16"/></svg></span>
-      <span class="strook-tx"><b>10% voor je publiek</b><span>Automatisch in de winkelwagen</span></span>
-    </div>
-    <div class="strook-item">
-      <span class="strook-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18v11H3zM3 11h18M7 15h4"/></svg></span>
-      <span class="strook-tx"><b>Zelf uitbetalen</b><span>PayPal, bank of debitcard</span></span>
-    </div>
-  </div>
-</div>
+<p class="vertrouwen">Vertrouwd door <b>ruim 1.000 beoordelaars</b> op Trustpilot, gemiddeld <b>4,5</b></p>
 
-<!-- ============ PROOF ============ -->
-<section class="proof">
-  <div class="wrap">
-    <h2>Je zet je naam ergens onder. Dan wil je weten wat erachter zit.</h2>
-    <p class="sub">Wellshave is een Nederlands merk in scheerapparaten, trimmers en bodygroomers. Je publiek koopt bij een winkel die er ook na de bestelling nog is, en dat is uiteindelijk jouw risico, niet het onze.</p>
-    <div class="tp-summary">
-      <div class="tp-score">
-        <span class="tp-num">4,5</span>
-        <span class="tp-stars">
-          <span class="tp-star"></span><span class="tp-star"></span><span class="tp-star"></span><span class="tp-star"></span><span class="tp-star is-half"></span>
-        </span>
-        <span class="tp-count">uit ruim 1.000 beoordelingen<br>op Trustpilot</span>
-      </div>
-      <span class="bron-scheiding"></span>
-      <div class="bron">
-        <span class="bron-num">30 dagen</span>
-        <span class="bron-tx">bedenktijd voor je publiek</span>
-      </div>
-      <span class="bron-scheiding"></span>
-      <div class="bron">
-        <span class="bron-num">Vanaf voorraad</span>
-        <span class="bron-tx">verzonden vanuit Nederland</span>
-      </div>
-    </div>
+<!-- ============ DRIE STAPPEN ============ -->
+<section class="stappen">
+  <div class="stap">
+    <span class="stap-nr">1</span>
+    <h3>Aanmelden</h3>
+    <p>Vul het formulier in, dat kost een paar minuten. Geen wachtlijst en geen beoordeling vooraf.</p>
+  </div>
+  <div class="stap">
+    <span class="stap-nr">2</span>
+    <h3>Ontvang alles om te starten</h3>
+    <p>Je krijgt direct je persoonlijke link, je eigen kortingscode en het beeldmateriaal. Wil je een product om mee te werken, dan vraag je dat aan.</p>
+  </div>
+  <div class="stap">
+    <span class="stap-nr">3</span>
+    <h3>Laat het zien</h3>
+    <p>Deel hoe jij Wellshave gebruikt, op de plek waar jouw publiek al naar je luistert. Via je link krijg je commissie op elke verkoop.</p>
   </div>
 </section>
 
 <!-- ============ WAT JE KRIJGT ============ -->
-<section class="kenmerken">
-  <div class="kenmerk-kop">
-    <span class="kicker">Wat je krijgt</span>
-    <h2 class="duo">Niet alleen een percentage.<span class="b">Ook het gereedschap erbij.</span></h2>
-    <p class="lead">Een commissie is makkelijk beloofd. Dit is wat er verder klaarstaat zodra je binnen bent.</p>
-  </div>
-  <div class="kaarten4">
-    <div class="kk wit">
-      <span class="kk-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 6.5c0-1.9-2.2-3-5-3s-5 1.1-5 3 2.2 2.6 5 3.2 5 1.3 5 3.3-2.2 3-5 3-5-1.1-5-3"/></svg></span>
-      <h3>15% van elke verkoop</h3>
-      <p>Berekend over de productprijs, dus zonder btw en verzendkosten. Geen staffel en geen plafond: de honderdste bestelling levert evenveel op als de eerste.</p>
+<section class="partner">
+  <div class="partner-in">
+    <div>
+      <h2>Word Wellshave-partner</h2>
+      <div class="vinkjes">
+        <div class="vink">
+          <span class="vink-ico">&#10003;</span>
+          <span><b>Je eigen link en kortingscode</b><span>Je publiek krijgt 10% korting op alles. Klikt iemand op je link, dan staat die code al in de winkelwagen.</span></span>
+        </div>
+        <div class="vink">
+          <span class="vink-ico">&#10003;</span>
+          <span><b>15% commissie, dertig dagen geldig</b><span>Je link blijft dertig dagen aan een bezoeker hangen, dus content die later wordt teruggekeken telt nog steeds voor jou.</span></span>
+        </div>
+        <div class="vink">
+          <span class="vink-ico">&#10003;</span>
+          <span><b>Gratis product om mee te werken</b><span>Vraag het aan zodra je aan de slag wilt. Je kunt niet laten zien wat je niet in handen hebt.</span></span>
+        </div>
+        <div class="vink">
+          <span class="vink-ico">&#10003;</span>
+          <span><b>Zelf uitbetalen vanaf &euro;25</b><span>Je ziet elke bestelling binnenkomen in je dashboard en vraagt je uitbetaling aan wanneer het jou uitkomt.</span></span>
+        </div>
+      </div>
+      <a class="knop" href="REGISTRATIE_URL">Meld je nu aan</a>
     </div>
-    <div class="kk creme">
-      <span class="kk-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
-      <h3>Dertig dagen de tijd</h3>
-      <p>Je link blijft dertig dagen aan een bezoeker hangen. Een video die pas over drie weken wordt teruggekeken telt dus nog steeds voor jou.</p>
-    </div>
-    <div class="kk goud">
-      <span class="kk-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16v12H4zM4 8l2-4h12l2 4M12 4v16"/></svg></span>
-      <h3>Gratis product om mee te werken</h3>
-      <p>Vraag het aan zodra je aan de slag wilt, wij kijken ernaar en sturen het op. Je kunt niet laten zien wat je niet in handen hebt.</p>
-    </div>
-    <div class="kk zwart">
-      <span class="kk-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h18v14H3zM3 18l3 3M21 18l-3 3M8 12l2.5 2.5L16 9"/></svg></span>
-      <h3>Alles om te delen</h3>
-      <p>Je eigen link, je eigen kortingscode, beeldmateriaal, en een dashboard waarin je elke bestelling ziet binnenkomen met je commissie erbij.</p>
+    <div class="partner-beeld">
+      <img src="https://cdn.shopify.com/s/files/1/0573/5743/4923/files/blade-baron-lifestyle-3-69e8f80db0b52fc25617a2a3.webp?v=1776875553" alt="Wellshave-washbag wordt ingepakt" loading="lazy" width="3000" height="3000">
     </div>
   </div>
 </section>
 
-<!-- ============ HOE HET WERKT ============ -->
-<section class="mech" id="hoe">
-  <div class="mech-in">
-    <div>
-      <span class="kicker on-dark">Hoe het werkt</span>
-      <h2 class="duo on-dark">Vier stappen.<span class="b">De eerste kost twee minuten.</span></h2>
-      <div class="stappen">
-        <div class="stap">
-          <span class="stap-nr">1</span>
-          <span><b>Meld je aan en je bent meteen actief</b><span>Geen wachtlijst en geen beoordeling vooraf. Je krijgt direct je link en je code.</span></span>
-        </div>
-        <div class="stap">
-          <span class="stap-nr">2</span>
-          <span><b>Deel je link of je code</b><span>In een video, een story, een nieuwsbrief of je bio. Klikt iemand op je link, dan staat de 10% korting al in zijn winkelwagen.</span></span>
-        </div>
-        <div class="stap">
-          <span class="stap-nr">3</span>
-          <span><b>Je ziet de bestelling binnenkomen</b><span>Elke verkoop verschijnt in je dashboard, met de commissie erbij. Je hoeft niet te wachten op een maandoverzicht.</span></span>
-        </div>
-        <div class="stap">
-          <span class="stap-nr">4</span>
-          <span><b>Vraag je geld aan vanaf &euro;25</b><span>Jij dient het verzoek in, wij keuren het goed en betalen uit via PayPal, bankoverschrijving of debitcard.</span></span>
-        </div>
-      </div>
-    </div>
-    <div>
-      <div class="mech-kaart">
-        <img src="https://cdn.shopify.com/s/files/1/0573/5743/4923/files/trimmer.2_53a9bd01-0290-482a-b078-412400f2d5fb.png?v=1762085548" alt="Wellshave Tondeuse Pro" loading="lazy" width="900" height="900">
-      </div>
-      <p class="mech-note">Het assortiment loopt van scheerapparaten en tondeuses tot bodygroomers en neustrimmers.</p>
+<!-- ============ ONZE COMMUNITY ============
+     Aanzetten zodra je vier foto's of clips van echte creators hebt. Vervang de vier
+     bronnen en haal deze commentaarhaken weg. Dit blok is het sterkste op de pagina:
+     bij de drie referentiepagina's is precies dit het bewijs dat mensen overtuigt.
+
+<section class="community">
+  <div class="wrap">
+    <h2 class="duo" style="text-align:center;margin-bottom:26px">Onze community</h2>
+    <div class="galerij">
+      <img src="BEELD-1" alt="Creator met Wellshave" loading="lazy">
+      <img src="BEELD-2" alt="Creator met Wellshave" loading="lazy">
+      <img src="BEELD-3" alt="Creator met Wellshave" loading="lazy">
+      <img src="BEELD-4" alt="Creator met Wellshave" loading="lazy">
     </div>
   </div>
 </section>
+<style>
+.ws-lp .community{padding:74px 0 0}
+.ws-lp .galerij{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.ws-lp .galerij img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:var(--r-m)}
+@media(max-width:760px){.ws-lp .galerij{grid-template-columns:repeat(2,1fr)}}
+</style>
+============ EINDE COMMUNITY ============ -->
 
-<!-- ============ VOOR WIE ============ -->
-<div class="callout-wrap">
-  <div class="callout">
-    <span class="kicker">Voor wie</span>
-    <h3>Je hoeft geen tienduizend volgers te hebben.</h3>
-    <p>Er is geen ondergrens en er is geen selectie. Barbers, kappers, contentmakers, en mensen die het apparaat gewoon zelf gebruiken en er toch al over praten: iedereen kan meedoen. Wat telt is dat je publiek je gelooft, niet hoe groot het is. Voor het gratis product kijken we wel mee, want dat kennen we bewust toe.</p>
+<!-- ============ GOED OM TE WETEN ============ -->
+<section class="weten">
+  <div class="weten-in">
+    <h2>Goed om te weten</h2>
+    <div class="vinkjes">
+      <div class="vink">
+        <span class="vink-ico">&#10003;</span>
+        <span><b>Je bent vrij in hoe je het deelt</b><span>Een video, een story, een nieuwsbrief of gewoon je bio. Het hoeft niet gelikt te zijn, het moet van jou zijn. Tag ons wel, dan zien we het en delen we het graag.</span></span>
+      </div>
+      <div class="vink">
+        <span class="vink-ico">&#10003;</span>
+        <span><b>Zeg erbij dat het een samenwerking is</b><span>Dat is in Nederland verplicht en het kost je geen conversie. Mensen weten het toch wel.</span></span>
+      </div>
+      <div class="vink">
+        <span class="vink-ico">&#10003;</span>
+        <span><b>Geen advertenties op onze merknaam</b><span>Wie op Wellshave zoekt had ons toch wel gevonden. Wil je je code op een kortingscodesite plaatsen, vraag het ons dan even.</span></span>
+      </div>
+    </div>
   </div>
-</div>
-
-<!-- ============ FAQ ============ -->
-<section class="faq">
-  <h2>Wat je waarschijnlijk nog wilt weten</h2>
-
-  <details>
-    <summary>Kost het iets om mee te doen?</summary>
-    <p>Nee. Aanmelden is gratis, er is geen maandbedrag en je zit nergens aan vast. Doe je een half jaar niets, dan gebeurt er ook niets.</p>
-  </details>
-
-  <details>
-    <summary>Waarover wordt die 15% precies berekend?</summary>
-    <p>Over de productprijs. Btw, verzendkosten en fooi tellen niet mee. We zeggen dit er liever meteen bij dan dat je bij de eerste uitbetaling een ander bedrag ziet dan je had gerekend.</p>
-  </details>
-
-  <details>
-    <summary>Wanneer krijg ik mijn geld?</summary>
-    <p>Een commissie staat eerst als in afwachting in je dashboard en wordt definitief zodra de retourtermijn van de bestelling voorbij is. Vanaf &euro;25 aan goedgekeurde commissie vraag je zelf een uitbetaling aan. Wij beoordelen die en betalen uit via de methode die jij hebt ingesteld.</p>
-  </details>
-
-  <details>
-    <summary>Krijg ik echt gratis product?</summary>
-    <p>Je kunt het aanvragen zodra je aan de slag wilt. We kennen het per geval toe, dus het is geen automatisch recht bij aanmelding. Dat doen we bewust: zo gaat het naar mensen die er ook echt iets mee maken.</p>
-  </details>
-
-  <details>
-    <summary>Mijn volger koopt pas twee weken later. Tel ik dan nog?</summary>
-    <p>Ja. Je link blijft dertig dagen aan die bezoeker hangen. Hij hoeft dus niet meteen te bestellen om voor jou te tellen.</p>
-  </details>
-
-  <details>
-    <summary>Moet ik erbij zetten dat het een samenwerking is?</summary>
-    <p>Ja, en dat is in Nederland ook gewoon verplicht. Een duidelijke vermelding zoals #advertentie of "samenwerking met Wellshave" volstaat, en het kost je geen conversie. Mensen weten het toch wel.</p>
-  </details>
-
-  <details>
-    <summary>Mag ik adverteren op de naam Wellshave?</summary>
-    <p>Nee, geen zoekadvertenties op onze merknaam of varianten daarvan. Wie op onze naam zoekt had ons toch wel gevonden, dus dan betalen we samen voor een klik die er al was. Wil je je code op een kortingscodesite of via cashback plaatsen, vraag het ons dan eerst even.</p>
-  </details>
-
-  <details>
-    <summary>Kan ik ook via mijn eigen link bestellen?</summary>
-    <p>Dat kan. Handig als je zelf iets wilt bijbestellen, maar het is niet waar het programma voor bedoeld is: je verdient pas echt iets zodra anderen via jou kopen.</p>
-  </details>
 </section>
 
 <!-- ============ AFSLUITER ============ -->
-<section class="closer">
-  <div class="closer-in">
-    <div>
-      <span class="kicker on-dark">Aanmelden</span>
-      <h2 class="duo on-dark">Twee minuten werk.<span class="b">Daarna is het aan jou.</span></h2>
-      <p class="lead on-dark">Je vult je gegevens in, je krijgt je link en je code, en je kunt vandaag nog je eerste bericht plaatsen.</p>
-      <div class="hero-acts">
-        <a class="knop goud" href="REGISTRATIE_URL">Meld je aan als partner</a>
-      </div>
-      <p class="closer-fud">Gratis, geen minimumbereik, en je kunt altijd stoppen.</p>
-    </div>
-    <div class="closer-card">
-      <dl>
-        <dt>Commissie op elke verkoop</dt><dd>15%</dd>
-        <dt>Korting voor jouw publiek</dt><dd>10%</dd>
-        <dt>Je link blijft geldig</dt><dd>30 dagen</dd>
-        <dt>Uitbetaling vanaf</dt><dd>&euro;25</dd>
-        <dt>Kosten voor jou</dt><dd>&euro;0</dd>
-      </dl>
-    </div>
-  </div>
+<section class="slot">
+  <h2 class="duo">Klaar om te beginnen?<span class="b">Het duurt twee minuten.</span></h2>
+  <p>Je vult je gegevens in, je krijgt je link en je code, en je kunt vandaag nog je eerste bericht plaatsen.</p>
+  <a class="knop" href="REGISTRATIE_URL">Meld je nu aan</a>
+  <small>Gratis, geen minimum aantal volgers, en je kunt altijd stoppen.</small>
 </section>
 
 </div>
