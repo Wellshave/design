@@ -55,6 +55,15 @@ losse band niet doet:
 
 - **Hij wisselt van kant.** Links, rechts, midden, en weer terug. Een stapel op één kant leest
   vlak en dan komt het ritmeprobleem alsnog terug.
+
+  De gecentreerde band doet hier meer werk dan hij lijkt te doen. Het beeld bepaalt de kant:
+  staat het apparaat rechts, dan moet de kop links. Bij vijf banden liggen daarmee vier
+  kanten vast, en alleen de gecentreerde band kan de vijfde plek opvullen zonder dat er twee
+  dezelfde naast elkaar komen. Kan het beeld daar geen gecentreerde kop dragen -- omdat er
+  precies in het midden iets licht staat -- dan is er geen goede kant meer over en krijg je
+  onvermijdelijk één herhaling. Kies dan de plek waar de twee beelden het meest van elkaar
+  verschillen in helderheid en hoogte; dat maakt de herhaling onzichtbaar. Ga niet de tekst
+  op de verkeerde kant zetten om het schema te redden.
 - **Hij wisselt van hoogte.** Compact, normaal, hoog. Vijf banden van precies dezelfde hoogte
   is een diavoorstelling.
 - **Hij staat op één grond.** Carbon van boven tot onder, geen tussenruimte, geen afronding.
@@ -122,9 +131,22 @@ referentie zodat het apparaat klopt. Twee dingen daar bovenop, die dit werk ople
   rest van het beeld warm was. "Geborsteld staal, niet goud, niet brons" in de prompt én in
   het negatief loste dat op. Een dramatisch beeld met een verkeerd weergegeven onderdeel is
   netto verlies.
+- **Beschrijf de branding, anders komt hij er niet op.** Dit is de misser die het vaakst
+  voorkwam: het model levert een gaaf maar volledig blanco apparaat. Een referentiebeeld is
+  niet genoeg. Schrijf uit wat er van boven naar beneden op de body staat -- monogram, dan
+  het woordmerk, dan de knop, dan het display -- en zet "geen blanco body" in het negatief.
 - **Controleer de merknaam op ware grootte.** Snijd het beeld uit rond het woordmerk en het
-  monogram en kijk of er geen letters verhaspeld zijn. Dat is de meest voorkomende misser in
-  gegenereerd productbeeld en op een band over de volle breedte staat hij groot.
+  monogram en kijk of er geen letters verhaspeld zijn. Dat is de op een na meest voorkomende
+  misser, en op een band over de volle breedte staat hij groot. Doe deze controle op elk
+  beeld apart: in dezelfde serie kunnen drie beelden het monogram wel hebben en twee niet.
+
+### Waar het contentfilter op afketst
+
+Een bodygroomer plus huid plus een donkere scene wordt geweigerd. Twee formuleringen zijn
+hierop stukgelopen, ook met een onderarm als onderwerp. Loop daar niet in vast: haal de huid
+uit het beeld, of houd het bij een hand met het apparaat en laat het licht op een oppervlak
+vallen. Kun je de boodschap niet vertellen zonder huid, kies dan het beeld dat je al hebt en
+verplaats de tekst, in plaats van te blijven herformuleren.
 
 ### Wat het kost
 
