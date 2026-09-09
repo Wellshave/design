@@ -185,6 +185,11 @@
   display:flex;align-items:center;justify-content:center}
 .ws-pdp .ws-rev .ws-kop .ws-lk .ws-st svg{width:9px;height:9px;fill:#fff}
 .ws-pdp .ws-rev .ws-kop .ws-lk b{font-size:12px;font-weight:600;color:var(--ws-ink)}
+/* De groene blokjes zijn het merkteken van Trustpilot. Komt het citaat ergens
+   anders vandaan, dan hoort dat teken er niet bij: dan gewone gouden sterren,
+   zodat de kaart alleen zegt wat waar is. */
+.ws-pdp .ws-rev .ws-kop .ws-lk-eigen .ws-st i{background:none;border-radius:0;width:13px;height:13px}
+.ws-pdp .ws-rev .ws-kop .ws-lk-eigen .ws-st svg{width:13px;height:13px;fill:var(--ws-gold4)}
 .ws-pdp .ws-rev .ws-kop .ws-alle{font-size:11.5px;font-weight:600;color:var(--ws-w72);text-decoration:none;
   border-bottom:1px solid rgba(20,18,15,.28);padding-bottom:2px;white-space:nowrap;transition:color .16s ease,border-color .16s ease}
 .ws-pdp .ws-rev .ws-kop .ws-alle:hover{color:var(--ws-ink);border-bottom-color:var(--ws-ink)}
