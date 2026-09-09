@@ -564,10 +564,17 @@
           {%- endform -%}
         </div>
 
+        {%- comment -%}
+          De leverbelofte staat als groen plakkaat onder de knop, met een
+          kloppende stip ervoor. De kop "Op voorraad" is eruit: de regel is
+          een mededeling van een adem, en het plakkaat en de stip zeggen
+          "dit staat klaar" al zonder woorden. Het blok komt alleen als de
+          variant leverbaar is, dus de stip liegt nooit.
+        {%- endcomment -%}
         {%- if v.available and s.voorraad_regel != blank -%}
           <div class="ws-vrd">
-            <i></i>
-            <span><b>{{ s.voorraad_kop }}</b> &middot; {{ mf.shipping_information.value | default: s.voorraad_regel }}</span>
+            <i aria-hidden="true"></i>
+            <span>{{ mf.shipping_information.value | default: s.voorraad_regel }}</span>
           </div>
         {%- endif -%}
 
@@ -1682,8 +1689,7 @@
     { "type": "header", "content": "Meelopende koopbalk" },
     { "type": "checkbox", "id": "sticky_tonen", "label": "Balk onderaan tonen", "default": true, "info": "Verschijnt pas als de koopknop voorbij is gescrold, niet meteen." },
     { "type": "text", "id": "sticky_knop", "label": "Knoptekst in de balk", "default": "In winkelwagen", "info": "De prijs staat er al naast, dus hier hoeft geen bedrag bij." },
-    { "type": "text", "id": "voorraad_kop", "label": "Voorraadkop", "default": "Op voorraad" },
-    { "type": "text", "id": "voorraad_regel", "label": "Leverregel (terugval)", "default": "vandaag vóór 23:59 besteld, morgen in huis" },
+    { "type": "text", "id": "voorraad_regel", "label": "Leverregel (terugval)", "info": "Wordt overruled door custom.shipping_information op het product zelf.", "default": "Vandaag besteld, morgen in huis" },
     { "type": "text", "id": "veilig_label", "label": "Label bij de betaalmerken", "default": "Veilig afrekenen" },
     { "type": "header", "content": "Vergelijken en teller" },
     { "type": "text", "id": "vergelijk_label", "label": "Knop vergelijken", "default": "Vergelijk de modellen" },

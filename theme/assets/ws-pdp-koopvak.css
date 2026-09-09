@@ -31,6 +31,11 @@
      tint staat op 3,56 tegen de krapste grond en houdt dus ook stand als het
      zand ooit een tint dieper gaat. */
   --ws-tekstgoud:#8A5A1E;--ws-groen:#008859;--ws-blauw:#2E7CF6;--ws-rood:#C8281F;
+  /* De leverbelofte is het enige groene vlak in het koopvak. Warm groen, geen
+     mint: het ligt op zandkleur naast bruingoud, en een koele tint vloekt daar.
+     Tekst op grond komt uit op 6,50:1, de stip op grond op 3,21:1 -- ruim voor
+     tekst van 12,5 px en voor een vlak dat geen tekst is. */
+  --ws-lever-grond:#F0F7E6;--ws-lever-tekst:#3C6212;--ws-lever-bol:#4D9A1F;
   --ws-lijn:rgba(20,18,15,.14);--ws-lijn2:rgba(20,18,15,.22);
   /* Wit op zwart en inkt op zand vervagen niet even snel: dezelfde
      percentages geven op licht een tint die te bleek is. De twee onderste
@@ -217,7 +222,7 @@
   white-space:nowrap;align-self:center;
   border:0;border-radius:8px;background:var(--ws-tekstgoud)}
 .ws-pdp .ws-besp span{font-size:11px;font-weight:600;line-height:1.25;color:#F7F3EC;white-space:nowrap}
-.ws-pdp .ws-gift p,.ws-pdp .ws-vrd,.ws-pdp .ws-tel{color:var(--ws-w72)}
+.ws-pdp .ws-gift p,.ws-pdp .ws-tel{color:var(--ws-w72)}
 
 .ws-pdp .ws-usp{list-style:none;margin:17px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
 .ws-pdp .ws-usp li{display:grid;grid-template-columns:21px minmax(0,1fr);gap:12px;align-items:start}
@@ -232,13 +237,24 @@
    van het aanbod en dit is een geruststelling. De drie staan onder elkaar --
    voorwaarde, aanbod, knop -- en hebben elk lucht nodig, anders lezen ze als
    een blok. */
-.ws-pdp .ws-vrd{display:flex;align-items:flex-start;gap:10px;margin-top:18px;font-size:12px;
-  line-height:1.45;color:var(--ws-w52);border:1px solid rgba(20,18,15,.10);border-radius:10px;
-  background:transparent;padding:10px 14px}
+/* Een plakkaat dat om de tekst heen sluit, niet een kader over de volle
+   breedte: het is een stempel, geen alinea. width:fit-content moet erbij,
+   want op de telefoon is het koopvak een flexkolom en die rekt een kind
+   anders vanzelf op tot de rand. */
+.ws-pdp .ws-vrd{display:flex;align-items:center;gap:9px;width:fit-content;max-width:100%;
+  margin-top:18px;padding:9px 15px 9px 13px;border:0;border-radius:999px;
+  background:var(--ws-lever-grond);color:var(--ws-lever-tekst);
+  font-size:12.5px;font-weight:500;line-height:1.4}
 .ws-pdp .ws-vrd span{min-width:0}
-.ws-pdp .ws-vrd i{width:8px;height:8px;border-radius:50%;background:#0E9F6E;flex:none;margin-top:5px;
-  box-shadow:0 0 0 3px rgba(14,159,110,.16)}
-.ws-pdp .ws-vrd b{color:var(--ws-ink);font-weight:600}
+/* De stip klopt: een tweede schijf eronder groeit en vervaagt. De stip zelf
+   blijft staan, anders springt de regel mee. Wie beweging heeft uitgezet
+   krijgt gewoon een stip -- de mededeling zit in de tekst, niet in de puls. */
+.ws-pdp .ws-vrd i{position:relative;width:9px;height:9px;flex:none;border-radius:50%;
+  background:var(--ws-lever-bol)}
+.ws-pdp .ws-vrd i::after{content:'';position:absolute;inset:0;border-radius:50%;
+  background:var(--ws-lever-bol);animation:ws-klop 2.4s ease-out infinite}
+@keyframes ws-klop{0%{transform:scale(1);opacity:.55}70%,100%{transform:scale(2.7);opacity:0}}
+@media (prefers-reduced-motion:reduce){.ws-pdp .ws-vrd i::after{animation:none}}
 
 /* het cadeau — blijft, dit is het extra aanbod per product */
 /* Deze kaart was doorschijnend goud. Dat gaf niets tot de bogen erachter
@@ -623,10 +639,11 @@
   .ws-pdp .ws-usp li:nth-child(n+4){display:none}
 
   /* De voorraadregel staat nu als eigen blok boven het aanbod, dus de
-     omkeertruc binnen het formulier is niet meer nodig. Zonder kader, want het
-     is een mededeling en geen aanbod. */
+     omkeertruc binnen het formulier is niet meer nodig. Het plakkaat blijft
+     hier wel staan: hier zette deze regel eerst grond en kader uit, en dat
+     wiste sinds het groen werd precies de opmaak die de bedoeling is. */
   .ws-pdp .ws-vorm{display:flex;flex-direction:column;margin-top:18px}
-  .ws-pdp .ws-vrd{margin:18px 0 0;border:0;background:none;padding:0;font-size:12.5px}
+  .ws-pdp .ws-vrd{margin:16px 0 0;align-self:flex-start;font-size:12px;padding:8px 14px 8px 12px}
   .ws-pdp .ws-cta{margin-top:0;font-size:13px;letter-spacing:.08em;padding:20px 10px}
 
   /* onder de knop alleen tekst. De betaallogo's staan lager op de pagina in
