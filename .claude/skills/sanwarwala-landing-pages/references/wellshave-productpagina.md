@@ -50,26 +50,27 @@ tussenruimte. Dit is de sectie die de productpagina zijn karakter geeft.
 want een tweede maakt het effect ongedaan. Op een landingspagina klopt dat, want daar staat
 de band tussen kolommen tekst en breekt hij het ritme.
 
-Op de productpagina is de stapel zélf de sectie. Hij mag omdat hij drie dingen doet die een
-losse band niet doet:
+Op de productpagina is de stapel z&eacute;lf de sectie. Hij mag omdat hij drie dingen doet die
+een losse band niet doet:
 
-- **Hij wisselt van kant.** Links, rechts, midden, en weer terug. Een stapel op één kant leest
-  vlak en dan komt het ritmeprobleem alsnog terug.
+- **Elke band heeft een eigen onderwerp.** Niet vijf sfeerbeelden van hetzelfde apparaat, maar
+  vijf keer het onderdeel waar die band over gaat: het mes, het water, de kammen, het licht,
+  de kabel. Dat maakt de stapel een opsomming in plaats van een herhaling.
+- **De schaal wisselt.** De ene band is een macro waarin het mes het hele frame vult, de
+  volgende een overzicht met het apparaat en vier kammen naast elkaar. Vijf keer dezelfde
+  afstand tot het onderwerp is een diavoorstelling.
+- **Hij staat op &eacute;&eacute;n grond.** Carbon van boven tot onder, geen tussenruimte, geen
+  afronding. Daardoor leest de hele stapel als &eacute;&eacute;n beweging in plaats van als vijf
+  losse platen.
 
-  De gecentreerde band doet hier meer werk dan hij lijkt te doen. Het beeld bepaalt de kant:
-  staat het apparaat rechts, dan moet de kop links. Bij vijf banden liggen daarmee vier
-  kanten vast, en alleen de gecentreerde band kan de vijfde plek opvullen zonder dat er twee
-  dezelfde naast elkaar komen. Kan het beeld daar geen gecentreerde kop dragen -- omdat er
-  precies in het midden iets licht staat -- dan is er geen goede kant meer over en krijg je
-  onvermijdelijk één herhaling. Kies dan de plek waar de twee beelden het meest van elkaar
-  verschillen in helderheid en hoogte; dat maakt de herhaling onzichtbaar. Ga niet de tekst
-  op de verkeerde kant zetten om het schema te redden.
-- **Hij wisselt van hoogte.** Compact, normaal, hoog. Vijf banden van precies dezelfde hoogte
-  is een diavoorstelling.
-- **Hij staat op één grond.** Carbon van boven tot onder, geen tussenruimte, geen afronding.
-  Daardoor leest de hele stapel als één beweging in plaats van als vijf losse platen.
+Haal je &eacute;&eacute;n van die drie weg, dan geldt de oude regel gewoon weer.
 
-Haal je één van die drie weg, dan geldt de oude regel gewoon weer.
+**Over de plek van de kop.** Een eerdere versie liet de kop van kant wisselen, links, rechts,
+midden. Dat was nodig toen de beelden lifestyle waren en het apparaat in de ene helft stond.
+Met productcinema staat het onderwerp horizontaal en centraal, en dan hoort de kop
+gecentreerd bovenin, op elke band gelijk. Dat is geen slordigheid: het is dezelfde keuze die
+de referentiemerken maken, en het maakt van de stapel een specificatiereeks. De afwisseling
+zit dan in het onderwerp en de schaal, niet in de tekstpositie.
 
 ### Copy per band
 
@@ -84,84 +85,101 @@ Eén kenmerk, één tweeslagskop, één zin. Niet meer.
 ### De sluier
 
 Een witte kop op een lichte foto is onleesbaar. De sluier volgt de kant waar de tekst staat,
-zodat het beeld aan de andere kant open blijft. Sterkte per band, als richtlijn: 70 tot 80%
-op beeld dat al donker is, 85% en hoger op een lichte foto, en zo laag als 45 tot 55% wanneer
-het beeld zelf de sfeer draagt en je hem niet dood wilt drukken. Kijk ernaar, reken het niet
-uit: de kop moet leesbaar zijn en de foto moet nog iets te zeggen hebben.
+zodat het beeld aan de andere kant open blijft.
 
-**Botst de tekst met het onderwerp, verplaats dan de tekst, niet de sluier.** Bij de
-LED-band liep de onderregel dwars door de lichtbundel. Meer sluier had de bundel gedood, en
-die is nu juist het onderwerp. De oplossing was de band hoger maken en de tekst bovenin
-zetten, zodat kop en bundel elkaar niet meer raken.
+**Met productcinema heb je hem nauwelijks nodig.** De kop staat op de lege zwarte bovenhelft
+van het beeld zelf, dus 30 procent, de ondergrens van de instelling, is genoeg. Draai je hem
+hoger, dan verlies je precies het contrast waar de opname het van moet hebben. Bij een
+lifestyle-achtergrond ligt dat anders: reken daar op 70 tot 85 procent.
+
+**Botst de tekst met het onderwerp, verplaats dan de tekst, niet de sluier.** Bij de LED-band
+liep de onderregel dwars door de lichtbundel. Meer sluier had de bundel gedood, en die is nu
+juist het onderwerp.
 
 ---
 
-## 3. Beeld: de banden vragen hun eigen fotografie
+## 3. Beeld: productcinema, niet lifestyle
 
-**De bestaande featurefoto's zijn hier niet geschikt voor, en dat kost je een ronde als je
-het niet vooraf checkt.** Ze zijn vierkant en dragen hun eigen kop in een hoek gebakken:
-"Skin-Safe Keramische Bladen", "100% Waterproof", "LED precizie licht". Als tegel in de
-galerij klopt dat. Full-bleed onder je eigen kop staan er twee koppen door elkaar, in twee
-verschillende letters, en dat leest als een fout. Zet de productfoto's naast elkaar en kijk
-welke schoon zijn voordat je iets vult.
+**Dit is de belangrijkste les van dit project, en hij kostte drie rondes.** De banden vragen
+geen sfeerbeeld van iemand in een badkamer. Ze vragen het onderdeel waar de band over gaat,
+liggend en groot in beeld, geschoten als een autoreclame. Dat is wat de referentiemerken in
+deze categorie doen, en het is de reden dat hun pagina's duur ogen.
+
+Het verschil is niet subtiel. Een man die zich in de douche staat te scheren is een
+lifestylefoto; hij vertelt een situatie. Een macro waarin de stalen meskam horizontaal door
+het frame loopt vertelt het product. Op een band met &eacute;&eacute;n kenmerk als kop wint het
+tweede altijd.
 
 ### De compositie-afspraak
 
-Genereer de banden liever zelf, tegen deze afspraak. Hij is wat de sectie bruikbaar maakt:
+Dit is wat de sectie bruikbaar maakt. Wijk hier niet van af:
 
-- **16:9.** Breed genoeg voor de desktopband (die snijdt boven en onder weg) en smal genoeg
-  om op de telefoon nog een liggende uitsnede te zijn. 21:9 past de desktop perfect maar
-  laat op de telefoon niets heel.
-- **Het apparaat in de ene helft, de andere helft leeg.** Niet "rustig", maar leeg: geen
-  schouder, geen arm, geen prop, geen highlight. Daar komt de kop te staan, en alles wat er
-  wel staat vecht ermee. Dit moet je in de prompt herhalen en als negatief benoemen, anders
-  vult het model de ruimte alsnog.
-- **Wissel de kant af** over de stapel heen, en houd één band met het onderwerp laag in
-  beeld voor de gecentreerde variant.
-- **Alles uit één lichtopstelling.** Vijf beelden die niet als één shoot ogen zijn erger dan
-  vijf middelmatige die dat wel doen. Leg de opstelling, het palet en de lens vast in een
-  vaste aanhef en varieer alleen het onderwerp.
+- **16:9.** Breed genoeg voor de desktopband, en op de telefoon toonbaar zonder te snijden.
+- **Het onderwerp ligt horizontaal en vult de breedte**, in de **onderste helft** van het
+  frame.
+- **De bovenste 45 procent is leeg, onbelicht bijna-zwart.** Niets: geen product, geen
+  highlight, geen verloop, geen textuur. Daar komt de kop te staan. Dit moet je in de prompt
+  als eis &eacute;n als negatief zetten, anders vult het model de ruimte alsnog.
+- **Studio, geen ruimte.** Naadloze bijna-zwarte achtergrond, geen badkamer, geen mensen,
+  geen handen. Dat houdt de serie consistent en omzeilt bovendien het contentfilter.
+- **&Eacute;&eacute;n lichtopstelling over de hele set.** Een harde scherende randlichtbron van
+  links die de silhouetten tekent, een zachte invulling van boven, diepe schaduwen, echte
+  zwarten. Mat zwart leest als satijn, nooit als spiegel. Leg dat vast in een vaste aanhef en
+  varieer alleen het onderwerp.
 
 ### De prompt
 
-Volg deel 14 van de merklaag: `gpt_image_2`, `quality:"high"`, met een schone packshot als
-referentie zodat het apparaat klopt. Twee dingen daar bovenop, die dit werk opleverde:
+Volg deel 14 van de merklaag: `gpt_image_2`, `quality:"high"`. **Gebruik de referentiebeelden
+die al in Higgsfield staan**, niet een packshot van de webshop: daar staat het apparaat vaak
+op wit en met minder detail. Kijk eerst in de bibliotheek voordat je iets importeert.
+
+Vier dingen daar bovenop, elk uit een misser die werkelijk gebeurde:
 
 - **Benoem het materiaal van onderdelen expliciet.** Het model maakte het mes goud omdat de
-  rest van het beeld warm was. "Geborsteld staal, niet goud, niet brons" in de prompt én in
-  het negatief loste dat op. Een dramatisch beeld met een verkeerd weergegeven onderdeel is
-  netto verlies.
-- **Beschrijf de branding, anders komt hij er niet op.** Dit is de misser die het vaakst
-  voorkwam: het model levert een gaaf maar volledig blanco apparaat. Een referentiebeeld is
-  niet genoeg. Schrijf uit wat er van boven naar beneden op de body staat -- monogram, dan
-  het woordmerk, dan de knop, dan het display -- en zet "geen blanco body" in het negatief.
-- **Controleer de merknaam op ware grootte.** Snijd het beeld uit rond het woordmerk en het
-  monogram en kijk of er geen letters verhaspeld zijn. Dat is de op een na meest voorkomende
-  misser, en op een band over de volle breedte staat hij groot. Doe deze controle op elk
-  beeld apart: in dezelfde serie kunnen drie beelden het monogram wel hebben en twee niet.
+  rest van het beeld warm was. "Geborsteld staal, niet goud, niet brons", in de prompt &eacute;n
+  in het negatief.
+- **Beschrijf de branding, anders komt hij er niet op.** Het model levert een gaaf maar
+  volledig blanco apparaat. Schrijf uit wat er van boven naar beneden op de body staat, en zet
+  "geen blanco body" in het negatief.
+- **Verbied verzonnen opschriften op accessoires.** Op de opzetkammen zette het model uit
+  zichzelf maatlabels: "3.5mm 1/7", "4.5mm 3/16". Die cijfers klopten niet eens met elkaar en
+  zijn nergens na te wijzen. Verzonnen specificaties op een productfoto zijn hetzelfde als een
+  verzonnen review. Zet "geen cijfers, geen maten, geen letters op de accessoires" als harde
+  eis in het negatief.
+- **Laat het merkteken weg waar het niet rechtop kan staan.** Bij een macro van het mes lag
+  het apparaat op zijn kant en kwam het monogram gekanteld en vervormd in beeld. Een verkeerd
+  weergegeven merkteken is erger dan geen merkteken; de referentiemerken zetten op zo'n
+  detailmacro ook geen logo.
+
+### Controleren voordat je kiest
+
+Per beeld, niet per serie: in dezelfde set kunnen drie beelden het monogram wel goed hebben en
+twee niet. Snijd het beeld uit rond het woordmerk en kijk op ware grootte of er letters
+verhaspeld zijn, en of er ergens tekst staat die je niet gevraagd hebt.
 
 ### Waar het contentfilter op afketst
 
-Een bodygroomer plus huid plus een donkere scene wordt geweigerd. Twee formuleringen zijn
-hierop stukgelopen, ook met een onderarm als onderwerp. Loop daar niet in vast: haal de huid
-uit het beeld, of houd het bij een hand met het apparaat en laat het licht op een oppervlak
-vallen. Kun je de boodschap niet vertellen zonder huid, kies dan het beeld dat je al hebt en
-verplaats de tekst, in plaats van te blijven herformuleren.
+Een bodygroomer plus huid plus een donkere scene wordt geweigerd, ook met een onderarm als
+onderwerp. Met de studio-aanpak speelt dat niet meer, want daar komt geen huid in voor. Loop
+er niet in vast als je toch huid nodig hebt: kies dan het beeld dat je al hebt en verplaats de
+tekst, in plaats van te blijven herformuleren.
 
 ### Wat het kost
 
-Vijf banden op 4k/high is ongeveer 55 credits en twee rondes: één set, dan de een of twee
-die je afkeurt opnieuw met de fout benoemd. Reken op afkeuren; dat is geen tegenvaller maar
-de werkwijze.
+Vijf banden op 4k/high is ongeveer 55 credits per ronde. Reken op twee rondes: &eacute;&eacute;n
+set, dan de een of twee die je afkeurt opnieuw met de fout benoemd. Afkeuren is de werkwijze,
+geen tegenvaller.
 
-### Waarom de kop op de telefoon toch onder het beeld blijft
+### De telefoon
 
-Ook met deze fotografie. De compositie-afspraak is liggend: apparaat links of rechts, de
-andere helft leeg. Snijd je die staand uit om tekst over beeld te zetten, dan valt of het
-apparaat of de lege helft weg. Dus op de telefoon een liggende uitsnede en de kop eronder,
-met de uitsnedekeuze voor de telefoon naar de kant waar het apparaat staat.
+Het beeld gaat daar **ongesneden** mee, op 16:9, met de kop eronder op de grond. De
+compositie-afspraak is liggend; snijd je hem staand uit, dan vallen de uiteinden van het
+product eruit. Er is dan ook geen sluier nodig, want de kop staat niet meer op de foto.
 
----
+De gecentreerde uitlijning loopt door naar de telefoon: de regel voor de gecentreerde band is
+specifieker dan de linkslijning in het telefoonblok en wint dus. Dat is hier gewenst, want
+gecentreerd onder een gecentreerde opname leest rustig. Wil je het ooit anders, dan moet die
+regel expliciet overschreven worden, niet met een breder selectorpad omzeild.
 
 ## 4. Bouwen en testen in het thema
 
