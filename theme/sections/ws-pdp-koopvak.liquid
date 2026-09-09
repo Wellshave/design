@@ -64,9 +64,25 @@
   comment
     De vergelijkingsknop heeft alleen zin als er iets te vergelijken valt.
   endcomment
+  comment
+    Vergelijken kan pas als er iets tegenover staat. Het was genoeg dat er een
+    compare_table of een compare_products stond, en dat is te weinig: tien
+    producten dragen wel een tabel maar geen tweede model, en de Gentleman
+    Shaver heeft alleen zichzelf in de lijst. Die elf toonden een knop die een
+    pop-up opende met één kolom en niets om naast te leggen. Nu telt alleen een
+    ander product dan dit.
+  endcomment
   assign vergelijk_lijst = mf.compare_products.value
+  assign vergelijk_anderen = 0
+  if vergelijk_lijst != blank
+    for vp in vergelijk_lijst
+      unless vp.id == product.id
+        assign vergelijk_anderen = vergelijk_anderen | plus: 1
+      endunless
+    endfor
+  endif
   assign kan_vergelijken = false
-  if mf.compare_table != blank or vergelijk_lijst != blank
+  if vergelijk_anderen > 0
     assign kan_vergelijken = true
   endif
 
@@ -1670,7 +1686,7 @@
     { "type": "checkbox", "id": "tp_tonen", "label": "Beoordeling tonen", "default": true },
     { "type": "text", "id": "tp_label", "label": "Oordeel", "default": "Uitstekend" },
     { "type": "text", "id": "tp_cijfer", "label": "Cijfer", "info": "De winkelbrede Trustpilot-score. Op 26-08-2026: 4,4 bij 975 reviews.", "default": "4,4" },
-    { "type": "text", "id": "tp_score", "label": "Aantal reviews", "info": "Wint van custom.compare_info.reviews_label. Rond af naar beneden op een tiental, dan klopt het langer.", "default": "970+ reviews" },
+    { "type": "text", "id": "tp_score", "label": "Aantal reviews", "info": "Wint van custom.compare_info.reviews_label. Rond af naar beneden op een tiental, dan klopt het langer.", "default": "1000+ reviews" },
     { "type": "text", "id": "tp_bron", "label": "Bron bij het citaat (terugval)", "info": "Per product te overschrijven met custom.buybox_quote_source. Alleen bij 'Trustpilot' krijgt de kaart de groene Trustpilot-blokjes; bij elke andere bron bruine sterren.", "default": "Wellshave" },
     { "type": "text", "id": "rev_alle_label", "label": "Link naar alle reviews", "info": "Leeg = geen link.", "default": "Alle reviews" },
     { "type": "url", "id": "rev_alle_url", "label": "Waar die link heen gaat", "info": "Het Trustpilot-profiel is https://nl.trustpilot.com/review/wellshave.nl" },
@@ -1713,7 +1729,7 @@
     { "type": "text", "id": "pop_eyebrow", "label": "Bovenregel", "default": "Vergelijk de modellen" },
     { "type": "text", "id": "pop_titel", "label": "Kop \u2014 terugval", "info": "Wordt alleen gebruikt als het product geen popup_main_title heeft in compare_info.", "default": "Welke past bij jou?" },
     { "type": "textarea", "id": "pop_lead", "label": "Lead \u2014 terugval", "info": "Wordt alleen gebruikt als het product geen popup_lead heeft in compare_info." },
-    { "type": "text", "id": "pop_reviewregel", "label": "Reviewregel", "default": "4,4/5 uit 970+ reviews" },
+    { "type": "text", "id": "pop_reviewregel", "label": "Reviewregel", "default": "4,4/5 uit 1000+ reviews" },
     { "type": "textarea", "id": "pop_winst", "label": "Winstbalk \u2014 terugval", "info": "Terugval voor popup_winst in compare_info. [bedrag] wordt het prijsverschil met het uitgelichte model." },
     { "type": "text", "id": "pop_uitgelicht", "label": "Label op de uitgelichte kolom", "default": "Meest gekozen" },
     { "type": "text", "id": "pop_bestevoor", "label": "Aanhef bij Beste voor", "default": "Beste voor:" },
