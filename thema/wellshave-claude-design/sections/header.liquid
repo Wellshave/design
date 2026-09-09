@@ -1,0 +1,827 @@
+{{ 'header.css' | asset_url | stylesheet_tag }}
+{{ 'ws-megamenu.css' | asset_url | stylesheet_tag }}
+{% render 'ws-megamenu-sprite' %}
+
+<header class="header">
+  <div class="header__inner">
+    <div class="page-width">
+      <button 
+        type="button" 
+        name="menu-open" 
+        class="header__control header__control--menu" 
+        data-action="menu-open"
+      >
+        {{- 'icon-menu.svg' | inline_asset_content -}}
+      </button>
+  
+      <ul class="header__menu" role="list">
+        {%- for block in section.blocks -%}
+          {% if block.settings.label != blank %}
+            <li>
+              <a href="{{ block.settings.link }}" class="header__item body-md" {{ block.shopify_attributes }}>
+                <span>{{ block.settings.label }}</span>
+                {%- if block.settings.enable_megamenu -%}
+                  {{ 'icon-caret-down.svg' | inline_asset_content }}
+                {%- endif -%}
+              </a>
+              {%- if block.settings.enable_megamenu -%}
+                <div class="header__megamenu">
+                  <div class="page-width">
+                    <div class="wsmm">
+                      <div class="wsmm-kol wsmm-kol--zone">
+                        {%- if block.settings.megamenu_kop_1 != blank -%}
+                          <p class="wsmm-kop">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-doel"/></svg>
+                            {{ block.settings.megamenu_kop_1 }}
+                          </p>
+                        {%- endif -%}
+                        <ul class="wsmm-lijst" role="list">
+                          {%- for zone in block.settings.mm_zones -%}
+                            {% render 'ws-megamenu-tegel',
+                              col: zone,
+                              soort: 'zone',
+                              labels: block.settings.mm_zone_labels,
+                              licht: block.settings.mm_zone_licht,
+                              mobiel: false
+                            %}
+                          {%- endfor -%}
+                        </ul>
+                        {%- if block.settings.mm_alles_label != blank -%}
+                          <a href="{{ block.settings.mm_alles_link | default: '/collections/all' }}" class="wsmm-alles">
+                            {{ block.settings.mm_alles_label }}
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-pijl"/></svg>
+                          </a>
+                        {%- endif -%}
+                      </div>
+
+                      <div class="wsmm-kol wsmm-kol--type">
+                        {%- if block.settings.megamenu_kop_2 != blank -%}
+                          <p class="wsmm-kop">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-raster"/></svg>
+                            {{ block.settings.megamenu_kop_2 }}
+                          </p>
+                        {%- endif -%}
+                        <ul class="wsmm-lijst" role="list">
+                          {%- for type in block.settings.mm_types -%}
+                            {%- unless block.settings.mm_type_licht != blank and block.settings.mm_type_licht == type.handle -%}
+                              {% render 'ws-megamenu-tegel',
+                                col: type,
+                                soort: 'type',
+                                labels: block.settings.mm_type_labels,
+                                mobiel: false
+                              %}
+                            {%- endunless -%}
+                          {%- endfor -%}
+                        </ul>
+                        {%- if block.settings.mm_type_licht != blank -%}
+                          {%- for type in block.settings.mm_types -%}
+                            {%- if block.settings.mm_type_licht == type.handle -%}
+                              {% render 'ws-megamenu-tegel',
+                                col: type,
+                                soort: 'uit',
+                                labels: block.settings.mm_type_labels,
+                                badge: block.settings.mm_type_licht_badge,
+                                mobiel: false
+                              %}
+                            {%- endif -%}
+                          {%- endfor -%}
+                        {%- endif -%}
+                      </div>
+
+                      {%- if block.settings.enable_banner or block.settings.enable_banner_2 -%}
+                        <div class="wsmm-kol wsmm-kol--promo">
+                          {%- if block.settings.enable_banner -%}
+                            {% render 'ws-megamenu-promo',
+                              beeld: block.settings.banner_image,
+                              kicker: block.settings.banner_kicker,
+                              titel: block.settings.banner_title,
+                              tekst: block.settings.banner_subtitle,
+                              label: block.settings.banner_btn_label,
+                              link: block.settings.banner_btn_link,
+                              groot: true
+                            %}
+                          {%- endif -%}
+                          {%- if block.settings.enable_banner_2 -%}
+                            {% render 'ws-megamenu-promo',
+                              beeld: block.settings.banner2_image,
+                              kicker: block.settings.banner2_kicker,
+                              titel: block.settings.banner2_title,
+                              tekst: block.settings.banner2_subtitle,
+                              label: block.settings.banner2_btn_label,
+                              link: block.settings.banner2_btn_link,
+                              groot: false
+                            %}
+                          {%- endif -%}
+                        </div>
+                      {%- endif -%}
+                    </div>
+                  </div>
+                </div>
+              {%- endif -%}
+            </li>
+          {% endif %}
+        {%- endfor -%}
+      </ul>
+
+      <a href="{{ routes.root_url }}" class="header__logo h2">
+        {%- if section.settings.logo != blank -%}
+          {{ section.settings.logo | image_url: width: 350 | image_tag }}
+        {%- else -%}
+          {{ shop.name }}
+        {%- endif -%}
+      </a>
+
+      <div class="header__controls">
+        {%- if section.settings.enable_country_switcher and localization.available_countries.size > 1 -%}
+          <button
+            type="button"
+            name="localization-open"
+            class="header__control header__control--localization"
+            data-localization-open
+          >
+            {{ localization.country | image_url: width: 100 | image_tag  }}
+            {{- localization.country.iso_code }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol -}})
+          </button>
+        {%- endif -%}
+
+        {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
+          <div class="header__language">
+            <button
+              type="button"
+              class="header__control header__control--language"
+              data-language-toggle
+            >
+              <span>{{ localization.language.endonym_name }}</span>
+              {{- 'icon-caret-down.svg' | inline_asset_content -}}
+            </button>
+
+            <div class="header__language-dropdown" data-language-dropdown>
+              {%- form 'localization', id: 'HeaderLanguageForm' -%}
+                {%- for language in localization.available_languages -%}
+                  <button
+                    type="button"
+                    class="header__language-option{% if language == localization.language %} header__language-option--active{% endif %}"
+                    data-language-code="{{ language.iso_code }}"
+                  >
+                    {{ language.endonym_name | capitalize }}
+                  </button>
+                {%- endfor -%}
+                <input type="hidden" name="locale_code" value="{{ localization.language.iso_code }}">
+              {%- endform -%}
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.enable_search -%}          
+          <p class="header__control header__control--search" data-action="search-open">
+            {{- 'icon-search.svg' | inline_asset_content -}}
+          </p>
+        {%- endif -%}
+
+        {%- if shop.customer_accounts_enabled -%}
+          <a href="{{ routes.account_url }}" class="header__control header__control--account">
+            {{- 'icon-user.svg' | inline_asset_content -}}
+          </a>
+        {%- endif -%}
+
+        <p class="header__control header__control--cart" cart-drawer-toggle>
+          {{- 'icon-cart.svg' | inline_asset_content -}}
+          <span cart-item-count>{{ cart.item_count }}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  {%- if section.settings.enable_search -%}
+    <div id="HeaderSearch" class="header__search" data-action="search-close">
+      <div class="header__search-panel">
+        <form action="{{ routes.search_url }}" method="get" role="search">
+          <div class="header__search-field">
+            <label for="HeaderSearchInput" class="header__search-label">{{ 'header.search_placeholder' | t }}</label>
+            <input
+              id="HeaderSearchInput"
+              type="search"
+              name="q"
+              class="header__search-input"
+              placeholder="{{ 'header.search_placeholder' | t }}"
+              autocomplete="off"
+              autocorrect="off"
+              autocapitalize="off"
+              spellcheck="false"
+              aria-label="Search"
+            >
+            <button type="button" class="header__search-clear" data-action="reset-search">{{ 'header.search_clear' | t }}</button>
+            <button type="button" class="header__search-btn-close" data-action="search-close">
+              {{- 'icon-close.svg' | inline_asset_content -}}
+            </button>
+          </div>
+        </form>
+        <div id="HeaderPredictiveResults" class="header__search-results"></div>
+      </div>
+    </div>
+  {%- endif -%}
+
+  <div id="DrawerMobileMenu" class="header__mobile">
+    <div class="header__mobile-inner">
+      <div class="wsl-kop">
+        {%- comment -%}
+          Niet het gewone logo: dat is donker en bedoeld voor een lichte balk,
+          dus op zwart valt het weg. Hier het gouden merkteken plus het
+          woordmerk als tekst, zodat het altijd leesbaar is.
+        {%- endcomment -%}
+        <a href="{{ routes.root_url }}" class="wsl-logo" aria-label="{{ shop.name }}">
+          {%- if section.settings.mob_merk != blank -%}
+            {{ section.settings.mob_merk | image_url: width: 160 | image_tag: class: 'wsl-merk', alt: '' }}
+          {%- endif -%}
+          <span class="wsl-woordmerk">{{ shop.name }}</span>
+        </a>
+        <div class="wsl-kop-rechts">
+          <button type="button" class="wsl-sluit" data-action="menu-close" aria-label="{{ 'accessibility.close' | t | default: 'Sluiten' }}">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-kruis"/></svg>
+          </button>
+          <a href="{{ routes.cart_url }}" class="wsl-mand">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-tas"/></svg>
+            <span class="wsl-mand-tel">({{ cart.item_count }})</span>
+          </a>
+        </div>
+      </div>
+
+      {%- if section.settings.mob_actie_tekst != blank -%}
+        <a href="{{ section.settings.mob_actie_link | default: '/collections/all' }}" class="wsl-actie">
+          <svg class="wsl-actie-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-zon"/></svg>
+          <span class="wsl-actie-tekst">{{ section.settings.mob_actie_tekst }}</span>
+          <svg class="wsl-actie-pijl" viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-pijl"/></svg>
+        </a>
+      {%- endif -%}
+
+      <ul class="header__mobile-menu wsl-lijst">
+        {%- for block in section.blocks -%}
+          {% if block.settings.label != blank %}
+            <li>
+              {%- if block.settings.enable_megamenu -%}
+                <p class="header__mobile-item wsl-rij{% if block.settings.mob_licht %} is-licht{% endif %}" data-action="megamenu-open">
+                  {% render 'ws-lade-rij', blok: block %}
+                </p>
+                <div class="header__mobile-megamenu">
+                  <div class="wsl-subkop">
+                    <button type="button" class="wsl-terug" data-action="megamenu-close">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-chevron-l"/></svg>
+                      {{- 'header.menu_back' | t -}}
+                    </button>
+                    <span class="wsl-subkop-naam">{{ block.settings.label }}</span>
+                    <button type="button" class="wsl-sluit" data-action="menu-close" aria-label="{{ 'accessibility.close' | t | default: 'Sluiten' }}">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-kruis"/></svg>
+                    </button>
+                  </div>
+                  <div class="wsmm-mob">
+                    {%- if block.settings.enable_banner -%}
+                      {% render 'ws-megamenu-promo',
+                        beeld: block.settings.banner_image,
+                        kicker: block.settings.banner_kicker,
+                        titel: block.settings.banner_title,
+                        tekst: '',
+                        label: block.settings.banner_btn_label,
+                        link: block.settings.banner_btn_link,
+                        groot: false
+                      %}
+                    {%- endif -%}
+                    {%- if block.settings.megamenu_kop_1 != blank -%}
+                      <p class="wsmm-kop">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-doel"/></svg>
+                        {{ block.settings.megamenu_kop_1 }}
+                      </p>
+                    {%- endif -%}
+                    <ul class="wsmm-lijst" role="list">
+                      {%- for zone in block.settings.mm_zones -%}
+                        {% render 'ws-megamenu-tegel',
+                          col: zone,
+                          soort: 'zone',
+                          labels: block.settings.mm_zone_labels,
+                          licht: block.settings.mm_zone_licht,
+                          mobiel: true
+                        %}
+                      {%- endfor -%}
+                    </ul>
+                    {%- if block.settings.mm_alles_label != blank -%}
+                      <a href="{{ block.settings.mm_alles_link | default: '/collections/all' }}" class="wsmm-alles">
+                        {{ block.settings.mm_alles_label }}
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-pijl"/></svg>
+                      </a>
+                    {%- endif -%}
+
+                    {%- if block.settings.megamenu_kop_2 != blank -%}
+                      <p class="wsmm-kop">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-raster"/></svg>
+                        {{ block.settings.megamenu_kop_2 }}
+                      </p>
+                    {%- endif -%}
+                    <ul class="wsmm-lijst" role="list">
+                      {%- for type in block.settings.mm_types -%}
+                        {%- unless block.settings.mm_type_licht != blank and block.settings.mm_type_licht == type.handle -%}
+                          {% render 'ws-megamenu-tegel',
+                            col: type,
+                            soort: 'type',
+                            labels: block.settings.mm_type_labels,
+                            mobiel: true
+                          %}
+                        {%- endunless -%}
+                      {%- endfor -%}
+                    </ul>
+                    {%- if block.settings.mm_type_licht != blank -%}
+                      {%- for type in block.settings.mm_types -%}
+                        {%- if block.settings.mm_type_licht == type.handle -%}
+                          {% render 'ws-megamenu-tegel',
+                            col: type,
+                            soort: 'uit',
+                            labels: block.settings.mm_type_labels,
+                            badge: block.settings.mm_type_licht_badge,
+                            mobiel: true
+                          %}
+                        {%- endif -%}
+                      {%- endfor -%}
+                    {%- endif -%}
+                    {%- if section.settings.mob_hulp_kop != blank -%}
+                      {% render 'ws-lade-hulp',
+                        kop: section.settings.mob_hulp_kop,
+                        sub: section.settings.mob_hulp_sub,
+                        label: section.settings.mob_hulp_label,
+                        link: section.settings.mob_hulp_link,
+                        compact: true
+                      %}
+                    {%- endif -%}
+                    {%- if section.settings.mob_belofte != blank -%}
+                      <p class="wsl-belofte">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-schild"/></svg>
+                        {{ section.settings.mob_belofte }}
+                      </p>
+                    {%- endif -%}
+                  </div>
+                </div>
+              {%- else -%}
+                <a href="{{ block.settings.link }}" class="header__mobile-item wsl-rij{% if block.settings.mob_licht %} is-licht{% endif %}">
+                  {% render 'ws-lade-rij', blok: block %}
+                </a>
+              {%- endif -%}
+            </li>
+          {% endif %}
+        {%- endfor -%}
+        {%- if section.settings.mob_hulp_kop != blank -%}
+          <li class="wsl-los">
+            {% render 'ws-lade-hulp',
+              kop: section.settings.mob_hulp_kop,
+              sub: section.settings.mob_hulp_sub,
+              label: section.settings.mob_hulp_label,
+              link: section.settings.mob_hulp_link,
+              compact: false
+            %}
+          </li>
+        {%- endif -%}
+      </ul>
+
+      <div class="header__mobile-bottom">
+        <div class="header__mobile-trust">
+          <div class="trustpilot-widget" data-locale="nl-NL" data-template-id="5419b732fbfb950b10de65e5" data-businessunit-id="63c511d4e1339e2200c204a1" data-style-height="24px" data-style-width="100%" data-token="fdcc698c-6c21-433a-8e7e-d0e574f3c069"></div>
+        </div>
+
+        <div class="header__mobile-controls">
+          {%- if section.settings.enable_country_switcher and localization.available_countries.size > 1 -%}
+            <button
+              type="button"
+              name="localization-open"
+              class="header__mobile-control body-md"
+              data-localization-open
+            >
+              {{ localization.country | image_url: width: 100 | image_tag }}
+              {{- localization.country.iso_code }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol -}})
+            </button>
+          {%- endif -%}
+
+          {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
+            <div class="header__language header__language--mobile">
+              <button
+                type="button"
+                class="header__mobile-control body-md"
+                data-language-toggle
+              >
+                <span>{{ localization.language.endonym_name }}</span>
+                {{- 'icon-caret-down.svg' | inline_asset_content -}}
+              </button>
+
+              <div class="header__language-dropdown" data-language-dropdown>
+                {%- form 'localization', id: 'MobileLanguageForm' -%}
+                  {%- for language in localization.available_languages -%}
+                    <button
+                      type="button"
+                      class="header__language-option{% if language == localization.language %} header__language-option--active{% endif %}"
+                      data-language-code="{{ language.iso_code }}"
+                    >
+                      {{ language.endonym_name | capitalize }}
+                    </button>
+                  {%- endfor -%}
+                  <input type="hidden" name="locale_code" value="{{ localization.language.iso_code }}">
+                {%- endform -%}
+              </div>
+            </div>
+          {%- endif -%}
+
+          {%- if shop.customer_accounts_enabled -%}
+            <a href="{{ routes.account_url }}" class="header__mobile-control body-md">
+              {{ 'header.account_label' | t }}
+            </a>
+          {%- endif -%}
+        </div>
+
+        {%- if section.settings.enable_social -%}
+          <div class="header__mobile-social">
+            {% render 'social' %}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.mob_belofte != blank -%}
+          <p class="wsl-belofte">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-schild"/></svg>
+            {{ section.settings.mob_belofte }}
+          </p>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <button class="header__mobile-close" type="button" name="close-menu" data-action="menu-close">
+      {{ 'icon-close.svg' | inline_asset_content }}
+    </button>
+  </div>
+</header>
+
+<script>
+  (function () {
+    const header = document.querySelector("header");
+    const announcements = document.querySelectorAll(".announcement");
+    const allAnnouncementsHeight = Math.max(Array.from(announcements).reduce((sum, el) => {
+      return sum + el.offsetHeight;
+    }, 0), 1);
+
+    document.documentElement.style.setProperty('--header-height', `${header.getBoundingClientRect().height}px`);
+
+    setTimeout(() => {
+      header.classList.toggle('sticky', window.scrollY >= allAnnouncementsHeight);
+    }, 10)
+  })();
+
+
+</script>
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    {% if section.settings.logo != blank %}
+      "logo": {{ section.settings.logo | image_url: width: 300 | json }},
+    {% endif %}
+    "sameAs": [
+      {{ settings.social_youtube_link | json }},
+      {{ settings.social_facebook_link | json }},
+      {{ settings.social_tiktok_link | json }},
+      {{ settings.social_instagram_link | json }}
+    ],
+    "url": {{ request.origin | append: page.url | json }}
+  }
+</script>
+
+{% schema %}
+  {
+    "name": "Header",
+    "enabled_on": {
+      "groups": [
+        "header"
+      ]
+    },
+    "limit": 1,
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_country_switcher",
+        "label": "Enable country switcher",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_language_selector",
+        "label": "Enable language selector",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_search",
+        "label": "Enable search",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_social",
+        "label": "Enable social (mobile menu)",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Mobiele lade"
+      },
+      {
+        "type": "image_picker",
+        "id": "mob_merk",
+        "label": "Merkteken in de ladekop",
+        "info": "Het gouden S-teken. Het gewone logo is donker en valt weg op de zwarte balk; het woordmerk komt er als tekst naast."
+      },
+      {
+        "type": "text",
+        "id": "mob_actie_tekst",
+        "label": "Actiebalk bovenin",
+        "info": "Leeg laten om de gouden balk te verbergen."
+      },
+      {
+        "type": "url",
+        "id": "mob_actie_link",
+        "label": "Waar de actiebalk heen gaat"
+      },
+      {
+        "type": "text",
+        "id": "mob_hulp_kop",
+        "label": "Keuzehulp — kop"
+      },
+      {
+        "type": "text",
+        "id": "mob_hulp_sub",
+        "label": "Keuzehulp — regel eronder",
+        "info": "Noem hier geen aantal vragen of aantal seconden dat niet klopt. De keuzehulp op /collections/all stelt er twee."
+      },
+      {
+        "type": "text",
+        "id": "mob_hulp_label",
+        "label": "Keuzehulp — link"
+      },
+      {
+        "type": "url",
+        "id": "mob_hulp_link",
+        "label": "Keuzehulp — waarheen"
+      },
+      {
+        "type": "text",
+        "id": "mob_belofte",
+        "label": "Regel onderaan de lade"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "menu_item",
+        "name": "Menu item",
+        "settings": [
+          {
+            "type": "text",
+            "id": "label",
+            "label": "Label",
+            "default": "Home"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "Link"
+          },
+          {
+            "type": "header",
+            "content": "In de mobiele lade"
+          },
+          {
+            "type": "select",
+            "id": "mob_icoon",
+            "label": "Pictogram",
+            "default": "geen",
+            "options": [
+              {
+                "value": "geen",
+                "label": "Geen"
+              },
+              {
+                "value": "raster",
+                "label": "Raster (shop)"
+              },
+              {
+                "value": "cadeau",
+                "label": "Cadeau (bundels)"
+              },
+              {
+                "value": "label",
+                "label": "Prijskaartje (sale)"
+              },
+              {
+                "value": "mensen",
+                "label": "Twee personen (over ons)"
+              },
+              {
+                "value": "vraag",
+                "label": "Vraagteken (faq)"
+              },
+              {
+                "value": "doel",
+                "label": "Doel (zones)"
+              },
+              {
+                "value": "doos",
+                "label": "Doos (accessoires)"
+              },
+              {
+                "value": "schild",
+                "label": "Schild (garantie)"
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "id": "mob_sub",
+            "label": "Regel onder de naam"
+          },
+          {
+            "type": "checkbox",
+            "id": "mob_sub_goud",
+            "label": "Die regel in goud",
+            "default": false
+          },
+          {
+            "type": "checkbox",
+            "id": "mob_licht",
+            "label": "Rij oplichten",
+            "default": false,
+            "info": "Zandkleurige achtergrond, voor de rij die eruit mag springen."
+          },
+          {
+            "type": "text",
+            "id": "mob_badge",
+            "label": "Gouden label op de rij"
+          },
+          {
+            "type": "header",
+            "content": "Megamenu settings"
+          },
+          {
+            "type": "checkbox",
+            "id": "enable_megamenu",
+            "label": "Enable megamenu",
+            "default": true
+          },
+          {
+            "type": "collection_list",
+            "id": "mm_zones",
+            "label": "Zones (linkerkolom)",
+            "info": "Grote tegels met een ondertitel. Meestal vier."
+          },
+          {
+            "type": "textarea",
+            "id": "mm_zone_labels",
+            "label": "Tekst op een zonetegel",
+            "info": "Eén per regel: handle=Naam|Ondertitel. Bijvoorbeeld bodygroomers=Lichaam & schaamstreek|Bodygroomers voor de gevoelige huid. Dit verandert alleen het menu, niet de collectie zelf."
+          },
+          {
+            "type": "text",
+            "id": "mm_zone_licht",
+            "label": "Handle van de opgelichte zone",
+            "info": "Die tegel krijgt de zand-gouden achtergrond. Leeg laten mag."
+          },
+          {
+            "type": "text",
+            "id": "mm_alles_label",
+            "label": "Link onder de zones",
+            "default": "Bekijk alle zones"
+          },
+          {
+            "type": "url",
+            "id": "mm_alles_link",
+            "label": "Waar die link heen gaat"
+          },
+          {
+            "type": "collection_list",
+            "id": "mm_types",
+            "label": "Types (middenkolom)",
+            "info": "Compacte regels met een pictogram. Dezelfde collectie mag ook in de zones staan; hij krijgt dan hier zijn eigen naam."
+          },
+          {
+            "type": "textarea",
+            "id": "mm_type_labels",
+            "label": "Tekst op een typeregel",
+            "info": "Eén per regel: handle=Naam|Ondertitel. De ondertitel wordt alleen op de uitgelichte kaart getoond."
+          },
+          {
+            "type": "text",
+            "id": "mm_type_licht",
+            "label": "Handle van het uitgelichte type",
+            "info": "Dat type wordt uit de lijst gehaald en onderaan als kaart getoond. Leeg laten mag."
+          },
+          {
+            "type": "text",
+            "id": "mm_type_licht_badge",
+            "label": "Label op die kaart",
+            "default": "Meeste waarde"
+          },
+          {
+            "type": "text",
+            "id": "megamenu_kop_1",
+            "label": "Kop boven de zones",
+            "default": "Shop op zone"
+          },
+          {
+            "type": "text",
+            "id": "megamenu_kop_2",
+            "label": "Kop boven de types",
+            "default": "Shop op type"
+          },
+          {
+            "type": "header",
+            "content": "Megamenu promo boven"
+          },
+          {
+            "type": "checkbox",
+            "id": "enable_banner",
+            "label": "Enable banner"
+          },
+          {
+            "type": "image_picker",
+            "id": "banner_image",
+            "label": "Banner image"
+          },
+          {
+            "type": "text",
+            "id": "banner_kicker",
+            "label": "Bovenlabel"
+          },
+          {
+            "type": "text",
+            "id": "banner_title",
+            "label": "Banner title"
+          },
+          {
+            "type": "text",
+            "id": "banner_subtitle",
+            "label": "Banner subtitle"
+          },
+          {
+            "type": "text",
+            "id": "banner_btn_label",
+            "label": "Banner button label"
+          },
+          {
+            "type": "url",
+            "id": "banner_btn_link",
+            "label": "Banner button link"
+          },
+          {
+            "type": "header",
+            "content": "Megamenu promo onder"
+          },
+          {
+            "type": "checkbox",
+            "id": "enable_banner_2",
+            "label": "Enable tweede banner"
+          },
+          {
+            "type": "image_picker",
+            "id": "banner2_image",
+            "label": "Banner image"
+          },
+          {
+            "type": "text",
+            "id": "banner2_kicker",
+            "label": "Bovenlabel"
+          },
+          {
+            "type": "text",
+            "id": "banner2_title",
+            "label": "Banner title"
+          },
+          {
+            "type": "text",
+            "id": "banner2_subtitle",
+            "label": "Banner subtitle"
+          },
+          {
+            "type": "text",
+            "id": "banner2_btn_label",
+            "label": "Banner button label"
+          },
+          {
+            "type": "url",
+            "id": "banner2_btn_link",
+            "label": "Banner button link"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Header"
+      }
+    ]
+  }
+{% endschema %}

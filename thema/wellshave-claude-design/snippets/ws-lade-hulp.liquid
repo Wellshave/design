@@ -1,0 +1,30 @@
+{%- comment -%}
+  De donkere kaart die naar de keuzehulp wijst.
+
+    kop, sub, label, link — uit de sectie-instellingen
+    compact — true in het submenu: één regel hoog, met een ronde pijlknop
+
+  Let op de tekst: de keuzehulp op /collections/all stelt twee vragen, en er
+  is geen aparte quizpagina. Zet er dus geen aantal of tijd in dat niet klopt.
+{%- endcomment -%}
+{%- if kop != blank -%}
+  <a href="{{ link | default: '/collections/all' }}" class="wsl-hulp{% if compact %} is-compact{% endif %}">
+    <span class="wsl-hulp-ico">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-schuif"/></svg>
+    </span>
+    <span class="wsl-hulp-tekst">
+      <span class="wsl-hulp-kop">{{ kop }}</span>
+      {%- if sub != blank -%}<span class="wsl-hulp-sub">{{ sub }}</span>{%- endif -%}
+    </span>
+    {%- if compact -%}
+      <span class="wsl-hulp-knop">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-pijl"/></svg>
+      </span>
+    {%- elsif label != blank -%}
+      <span class="wsl-hulp-link">
+        {{ label }}
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-pijl"/></svg>
+      </span>
+    {%- endif -%}
+  </a>
+{%- endif -%}

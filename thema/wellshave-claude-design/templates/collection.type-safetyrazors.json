@@ -1,0 +1,284 @@
+{
+  "sections": {
+    "kop": {
+      "type": "ws-collectie-kop",
+      "blocks": {
+        "zone_1": {
+          "type": "zone",
+          "settings": {
+            "naam": "Lichaam & schaamstreek",
+            "aantal": "4",
+            "url": "https://wellshave.com/collections/bodygroomers",
+            "huidig": false,
+            "icoon": "shopify://shop_images/ws-zone-icoon-lichaam.png"
+          }
+        },
+        "zone_2": {
+          "type": "zone",
+          "settings": {
+            "naam": "Gezicht & baard",
+            "aantal": "11",
+            "url": "https://wellshave.com/collections/zone-gezicht",
+            "huidig": true,
+            "icoon": "shopify://shop_images/ws-zone-icoon-gezicht.png"
+          }
+        },
+        "zone_3": {
+          "type": "zone",
+          "settings": {
+            "naam": "Hoofd",
+            "aantal": "4",
+            "url": "https://wellshave.com/collections/zone-hoofd",
+            "huidig": false,
+            "icoon": "shopify://shop_images/ws-zone-icoon-hoofd.png"
+          }
+        },
+        "zone_4": {
+          "type": "zone",
+          "settings": {
+            "naam": "Neus & oren",
+            "aantal": "8",
+            "url": "https://wellshave.com/collections/neustrimmers",
+            "huidig": false,
+            "icoon": "shopify://shop_images/ws-zone-icoon-neus.png"
+          }
+        },
+        "zone_alles": {
+          "type": "zone",
+          "settings": {
+            "naam": "Alle zones",
+            "aantal": "27",
+            "url": "https://wellshave.com/collections/all",
+            "huidig": false,
+            "icoon": "shopify://shop_images/ws-zone-icoon-alles.png"
+          }
+        }
+      },
+      "block_order": [
+        "zone_alles",
+        "zone_1",
+        "zone_2",
+        "zone_3",
+        "zone_4"
+      ],
+      "settings": {
+        "eyebrow": "Onderdeel van Gezicht & baard",
+        "kop_1": "Klassiek met een mesje.",
+        "kop_2": "Geen accu nodig.",
+        "lede": "Twee scheermessen die alleen in kleur verschillen, plus de reservemesjes.",
+        "foto": "",
+        "foto_alt": "",
+        "kaartkop": "",
+        "kaartsub": "",
+        "kaartvraag": "",
+        "tabel": "",
+        "standaard": "",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 0,
+        "af_kop": "Jouw match staat klaar.",
+        "af_sub": "Pas een keuze aan of bekijk direct je advies.",
+        "opnieuw": "Opnieuw beginnen",
+        "wijzig_label": "Wijzig dit antwoord",
+        "match_label": "Jouw match",
+        "waarom_label": "Waarom deze match",
+        "match_cta": "Bekijk jouw match",
+        "voorraad_wel": "Op voorraad · morgen in huis",
+        "voorraad_niet": "Tijdelijk uitverkocht"
+      }
+    },
+    "raster": {
+      "type": "ws-collectie-raster",
+      "blocks": {
+        "groep_1": {
+          "type": "groep",
+          "settings": {
+            "kop": "Safety Razors",
+            "sub": "Scheren met een mesje, zonder batterij of oplader.",
+            "cat": "app",
+            "uit_collectie": true,
+            "producten": [],
+            "noot": "<b>Gold en Black zijn hetzelfde mes</b> met dezelfde drie onderdelen, voor exact dezelfde prijs. Kies op kleur.",
+            "kicker": "",
+            "labels": "wellshave-safety-razor-black = Best verkocht",
+            "link_label": "Bekijk de hele zone Gezicht & baard",
+            "link_url": "https://wellshave.com/collections/zone-gezicht"
+          }
+        }
+      },
+      "block_order": [
+        "groep_1"
+      ],
+      "settings": {
+        "filter_alles": "Alles",
+        "filter_app": "Apparaten",
+        "filter_bundel": "Sets",
+        "filter_mes": "Onderdelen",
+        "vergelijken": false,
+        "sorteer_label": "",
+        "monogram": "shopify://shop_images/ws-mark.png",
+        "geen_score": "Nieuw · nog geen beoordelingen",
+        "uitverkocht_label": "Tijdelijk uitverkocht",
+        "uitverkocht_voet": "Tijdelijk niet leverbaar",
+        "blik_voet": "100 dagen proberen · 2 jaar garantie",
+        "mes_voet": "Vandaag besteld, morgen in huis",
+        "aanbod_product": "",
+        "aanbod_eyebrow": "",
+        "aanbod_zin": "",
+        "aanbod_knop": "Bekijk de set",
+        "slot_tekst": "in deze categorie · onderdeel van de zone Gezicht & baard",
+        "slot_link_label": "Bekijk de hele zone Gezicht & baard",
+        "slot_link": "https://wellshave.com/collections/zone-gezicht",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 0,
+        "toon_label": "Toon mij",
+        "resultaat_label": "resultaten",
+        "bundel_lint": "Meeste waarde",
+        "sorteer_prijs_op": "Prijs: laag naar hoog",
+        "sorteer_prijs_af": "Prijs: hoog naar laag",
+        "sorteer_score": "Best beoordeeld",
+        "tp_uit": "out of 5",
+        "vgl_kop": "Naast elkaar",
+        "vgl_sluit": "Sluit de vergelijking",
+        "vgl_usp_kop": "Waarvoor",
+        "vgl_balk_tekst": "geselecteerd om te vergelijken",
+        "vgl_balk_kort": "gekozen",
+        "vgl_balk_knop": "Vergelijk"
+      }
+    },
+    "slot": {
+      "type": "ws-collectie-slot",
+      "blocks": {
+        "zeker_1": {
+          "type": "zekerheid",
+          "settings": {
+            "icoon": "retour",
+            "kop": "100 dagen thuis proberen",
+            "tekst": "Niet goed? Je krijgt je geld terug."
+          }
+        },
+        "zeker_2": {
+          "type": "zekerheid",
+          "settings": {
+            "icoon": "schild",
+            "kop": "2 jaar garantie",
+            "tekst": "Op elk apparaat in de collectie."
+          }
+        },
+        "zeker_3": {
+          "type": "zekerheid",
+          "settings": {
+            "icoon": "truck",
+            "kop": "Gratis verzending vanaf €30",
+            "tekst": "Daaronder €4,95. Ook naar België."
+          }
+        },
+        "zeker_4": {
+          "type": "zekerheid",
+          "settings": {
+            "icoon": "klok",
+            "kop": "Morgen in huis",
+            "tekst": "Ma t/m vr besteld voor 23:59."
+          }
+        },
+        "zone_1": {
+          "type": "zone",
+          "settings": {
+            "naam": "Lichaam & schaamstreek",
+            "tekst": "Trimmen zonder wondjes.",
+            "slot": "4 apparaten →",
+            "url": "https://wellshave.com/collections/bodygroomers"
+          }
+        },
+        "zone_2": {
+          "type": "zone",
+          "settings": {
+            "naam": "Gezicht & baard",
+            "tekst": "Scheren, trimmen en randen zetten.",
+            "slot": "11 apparaten →",
+            "url": "https://wellshave.com/collections/zone-gezicht"
+          }
+        },
+        "zone_3": {
+          "type": "zone",
+          "settings": {
+            "naam": "Hoofd",
+            "tekst": "Tondeuses en hoofdscheerders.",
+            "slot": "4 apparaten →",
+            "url": "https://wellshave.com/collections/zone-hoofd"
+          }
+        },
+        "zone_4": {
+          "type": "zone",
+          "settings": {
+            "naam": "Neus & oren",
+            "tekst": "Detailwerk zonder trekken.",
+            "slot": "8 apparaten →",
+            "url": "https://wellshave.com/collections/neustrimmers"
+          }
+        },
+        "vraag_1": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Waarom een safety razor en geen systeemmesje?",
+            "antwoord": "<p>Een safety razor snijdt met <b>één dubbelzijdig mesje</b> in plaats van met een rij mesjes achter elkaar. Bij een cassette tilt het eerste mesje het haar op en snijden de volgende het onder de huid door; dat is waar ingegroeide haren en irritatie vandaan komen. Eén mesje dat er in één keer overheen gaat <b>helpt die kans te verkleinen</b>.</p>"
+          }
+        },
+        "vraag_2": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Passen er standaard mesjes in?",
+            "antwoord": "<p>Ja. Hij is geschikt voor <b>gewone double edge-scheermesjes</b>, van welk merk dan ook — je zit niet vast aan één cassette. Bij de <b>Blade Guard</b> zitten twintig Japanse double edge-mesjes in de doos, en navullingen liggen los in deze categorie.</p>"
+          }
+        },
+        "vraag_3": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Hoe scheer ik ermee zonder mezelf te snijden?",
+            "antwoord": "<p>Door niet te duwen. Het <b>gewicht van de metalen greep</b> doet het werk; jij stuurt alleen. Houd het mes in een flauwe hoek tegen je huid — ongeveer dertig graden — en werk in <b>korte halen met de haarrichting mee</b>, op een natte, ingezeepte huid. De gesloten kam laat maar een klein stukje mes vrij, wat de kans op sneetjes verkleint. Ga de eerste keren rustig; tegen de haarrichting in kun je later een keer proberen.</p>"
+          }
+        },
+        "vraag_4": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Hoe vaak moet ik het mesje wisselen?",
+            "antwoord": "<p>Een mesje is een <b>verbruiksdeel</b>, geen onderdeel dat meegaat met de houder. Merk je dat het trekt, of moet je twee keer over dezelfde plek, dan is het op. Hoe snel dat gaat verschilt per baard, dus ga op het gevoel af en niet op een aantal beurten. <b>Navullingen liggen in deze categorie</b>; de houder zelf is van roestvrij staal en gaat gewoon door.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "zeker_1",
+        "zeker_2",
+        "zeker_3",
+        "zeker_4",
+        "vraag_1",
+        "vraag_2",
+        "vraag_3",
+        "vraag_4",
+        "zone_1",
+        "zone_2",
+        "zone_3",
+        "zone_4"
+      ],
+      "settings": {
+        "eyebrow": "Vragen over safety razors",
+        "h2_1": "Alles wat je",
+        "h2_2": "wilt weten.",
+        "mail_regel": "<p>Staat je vraag er niet bij? Mail <b>contact@wellshave.com</b> — je krijgt antwoord van iemand uit het team, binnen één werkdag.</p>",
+        "zones_eyebrow": "Of ga naar de zone",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "kop",
+    "raster",
+    "slot"
+  ]
+}

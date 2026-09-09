@@ -1,0 +1,24 @@
+{%- comment -%}
+  De binnenkant van één menuregel in de mobiele lade: pictogram, naam,
+  ondertitel, eventueel een gouden label, en de chevron.
+
+    blok — het menu_item-blok
+
+  Wordt zowel voor een <a> als voor de <p> met het submenu gebruikt, zodat
+  beide er hetzelfde uitzien.
+{%- endcomment -%}
+{%- if blok.settings.mob_icoon != blank and blok.settings.mob_icoon != 'geen' -%}
+  <span class="wsl-ico">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-{{ blok.settings.mob_icoon }}"/></svg>
+  </span>
+{%- endif -%}
+<span class="wsl-tekst">
+  <span class="wsl-naam">{{ blok.settings.label }}</span>
+  {%- if blok.settings.mob_sub != blank -%}
+    <span class="wsl-sub{% if blok.settings.mob_sub_goud %} is-goud{% endif %}">{{ blok.settings.mob_sub }}</span>
+  {%- endif -%}
+</span>
+{%- if blok.settings.mob_badge != blank -%}
+  <span class="wsl-badge">{{ blok.settings.mob_badge }}</span>
+{%- endif -%}
+<svg class="wsl-chevron" viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-chevron"/></svg>

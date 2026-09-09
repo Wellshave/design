@@ -1,0 +1,446 @@
+{{ 'header.css' | asset_url | stylesheet_tag }}
+
+<header class="header">
+  <div class="header__inner">
+    <div class="page-width">
+      <button 
+        type="button" 
+        name="menu-open" 
+        class="header__control header__control--menu" 
+        data-action="menu-open"
+      >
+        {{- 'icon-menu.svg' | inline_asset_content -}}
+      </button>
+  
+      <ul class="header__menu" role="list">
+        {%- for block in section.blocks -%}
+          {% if block.settings.label != blank %}
+            <li>
+              <a href="{{ block.settings.link }}" class="header__item body-md" {{ block.shopify_attributes }}>
+                <span>{{ block.settings.label }}</span>
+                {%- if block.settings.enable_megamenu -%}
+                  {{ 'icon-caret-down.svg' | inline_asset_content }}
+                {%- endif -%}
+              </a>
+              {%- if block.settings.enable_megamenu -%}
+                <div class="header__megamenu">
+                  <div class="page-width">
+                      <div class="header__megamenu-content">
+                        <ul class="header__megamenu-collection-list" role="list">
+                          {%- for megamenu_collection in block.settings.megamenu_collections -%}
+                            <li>
+                              <a href="{{ megamenu_collection.url }}" class="header__megamenu-collection body-lg">
+                                <div class="header__megamenu-collection-media">
+                                  {%- if megamenu_collection.metafields.custom.megamenu_image != blank -%}
+                                    {{ megamenu_collection.metafields.custom.megamenu_image | image_url: width: 300 | image_tag }}
+                                  {%- elsif megamenu_collection.image != blank -%}
+                                    {{ megamenu_collection.image | image_url: width: 300 | image_tag }}
+                                  {%- else -%}
+                                    {{ 'collection-apparel-1' | placeholder_svg_tag }}
+                                  {%- endif -%}
+                                </div>
+                                <span>{{ megamenu_collection.title }}</span>
+                              </a>
+                            </li>
+                          {%- endfor -%}
+                        </ul>
+                        {%- if block.settings.enable_banner -%}
+                          <div class="header__megamenu-banner">
+                            <div class="header__megamenu-banner-media">
+                              {%- if block.settings.banner_image != blank -%}
+                                {{ block.settings.banner_image | image_url: width: 600 | image_tag }}
+                              {%- else -%}
+                                {{ 'hero-apparel-1' | placeholder_svg_tag }}
+                              {%- endif -%}
+                            </div>
+                            <div class="header__megamenu-banner-content">
+                              {%- if block.settings.banner_title != blank -%}
+                                <p class="header__megamenu-banner-title body-lg">
+                                  {{- block.settings.banner_title -}}
+                                </p>
+                              {%- endif -%}
+                              {%- if block.settings.banner_subtitle != blank -%}
+                                <p class="header__megamenu-banner-subtitle body-md">
+                                  {{- block.settings.banner_subtitle -}}
+                                </p>
+                              {%- endif -%}
+                              {%- if block.settings.banner_btn_label != blank -%}
+                                <a href="{{ block.settings.banner_btn_link }}" class="header__megamenu-banner-button button button--light button--small">
+                                  <span>{{- block.settings.banner_btn_label -}}</span>
+                                  {{ 'icon-arrow-right.svg' | inline_asset_content }}
+                                </a>
+                              {%- endif -%}
+                            </div>
+                          </div>
+                        {%- endif -%}
+                      </div>
+                  </div>
+                </div>
+              {%- endif -%}
+            </li>
+          {% endif %}
+        {%- endfor -%}
+      </ul>
+
+      <a href="{{ routes.root_url }}" class="header__logo h2">
+        {%- if section.settings.logo != blank -%}
+          {{ section.settings.logo | image_url: width: 350 | image_tag }}
+        {%- else -%}
+          {{ shop.name }}
+        {%- endif -%}
+      </a>
+
+      <div class="header__controls">
+        {%- if section.settings.enable_country_switcher and localization.available_countries.size > 1 -%}
+          <button
+            type="button"
+            name="localization-open"
+            class="header__control header__control--localization"
+            data-localization-open
+          >
+            {{ localization.country | image_url: width: 100 | image_tag  }}
+            {{- localization.country.iso_code }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol -}})
+          </button>
+        {%- endif -%}
+
+        {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
+          <div class="header__language">
+            <button
+              type="button"
+              class="header__control header__control--language"
+              data-language-toggle
+            >
+              <span>{{ localization.language.endonym_name }}</span>
+              {{- 'icon-caret-down.svg' | inline_asset_content -}}
+            </button>
+
+            <div class="header__language-dropdown" data-language-dropdown>
+              {%- form 'localization', id: 'HeaderLanguageForm' -%}
+                {%- for language in localization.available_languages -%}
+                  <button
+                    type="button"
+                    class="header__language-option{% if language == localization.language %} header__language-option--active{% endif %}"
+                    data-language-code="{{ language.iso_code }}"
+                  >
+                    {{ language.endonym_name | capitalize }}
+                  </button>
+                {%- endfor -%}
+                <input type="hidden" name="locale_code" value="{{ localization.language.iso_code }}">
+              {%- endform -%}
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.enable_search -%}          
+          <p class="header__control header__control--search" data-action="search-open">
+            {{- 'icon-search.svg' | inline_asset_content -}}
+          </p>
+        {%- endif -%}
+
+        {%- if shop.customer_accounts_enabled -%}
+          <a href="{{ routes.account_url }}" class="header__control header__control--account">
+            {{- 'icon-user.svg' | inline_asset_content -}}
+          </a>
+        {%- endif -%}
+
+        <p class="header__control header__control--cart" cart-drawer-toggle>
+          {{- 'icon-cart.svg' | inline_asset_content -}}
+          <span cart-item-count>{{ cart.item_count }}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  {%- if section.settings.enable_search -%}
+    <div id="HeaderSearch" class="header__search" data-action="search-close">
+      <div class="header__search-panel">
+        <form action="{{ routes.search_url }}" method="get" role="search">
+          <div class="header__search-field">
+            <label for="HeaderSearchInput" class="header__search-label">{{ 'header.search_placeholder' | t }}</label>
+            <input
+              id="HeaderSearchInput"
+              type="search"
+              name="q"
+              class="header__search-input"
+              placeholder="{{ 'header.search_placeholder' | t }}"
+              autocomplete="off"
+              autocorrect="off"
+              autocapitalize="off"
+              spellcheck="false"
+              aria-label="Search"
+            >
+            <button type="button" class="header__search-clear" data-action="reset-search">{{ 'header.search_clear' | t }}</button>
+            <button type="button" class="header__search-btn-close" data-action="search-close">
+              {{- 'icon-close.svg' | inline_asset_content -}}
+            </button>
+          </div>
+        </form>
+        <div id="HeaderPredictiveResults" class="header__search-results"></div>
+      </div>
+    </div>
+  {%- endif -%}
+
+  <div id="DrawerMobileMenu" class="header__mobile">
+    <div class="header__mobile-inner">
+      <ul class="header__mobile-menu">
+        {%- for block in section.blocks -%}
+          {% if block.settings.label != blank %}
+            <li>
+              {%- if block.settings.enable_megamenu -%}
+                <p class="header__mobile-item" data-action="megamenu-open">
+                  <span>{{ block.settings.label }}</span>
+                  {{- 'icon-caret-right.svg' | inline_asset_content -}}
+                </p>
+                <div class="header__mobile-megamenu">
+                  <div class="header__mobile-back" data-action="megamenu-close">
+                    {{- 'icon-caret-left.svg' | inline_asset_content -}}
+                    {{- 'header.menu_back' | t -}}
+                  </div>
+                  <ul class="header__mobile-megamenu-collection-list" role="list">
+                    {%- for megamenu_collection in block.settings.megamenu_collections -%}
+                      <li>
+                        <a href="{{ megamenu_collection.url }}" class="header__mobile-megamenu-collection body-lg">
+                          <div class="header__mobile-megamenu-collection-media">
+                            {%- if megamenu_collection.metafields.custom.megamenu_image != blank -%}
+                              {{ megamenu_collection.metafields.custom.megamenu_image | image_url: width: 300 | image_tag }}
+                            {%- elsif megamenu_collection.image != blank -%}
+                              {{ megamenu_collection.image | image_url: width: 300 | image_tag }}
+                            {%- else -%}
+                              {{ 'collection-apparel-1' | placeholder_svg_tag }}
+                            {%- endif -%}
+                          </div>
+                          <span>{{ megamenu_collection.title }}</span>
+                        </a>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                </div>
+              {%- else -%}
+                <a href="{{ block.settings.link }}" class="header__mobile-item">
+                  <span>{{ block.settings.label }}</span>
+                </a>
+              {%- endif -%}
+            </li>
+          {% endif %}
+        {%- endfor -%}
+      </ul>
+
+      <div class="header__mobile-bottom">
+        <div class="header__mobile-trust">
+          <div class="trustpilot-widget" data-locale="nl-NL" data-template-id="5419b732fbfb950b10de65e5" data-businessunit-id="63c511d4e1339e2200c204a1" data-style-height="24px" data-style-width="100%" data-token="fdcc698c-6c21-433a-8e7e-d0e574f3c069"></div>
+        </div>
+
+        <div class="header__mobile-controls">
+          {%- if section.settings.enable_country_switcher and localization.available_countries.size > 1 -%}
+            <button
+              type="button"
+              name="localization-open"
+              class="header__mobile-control body-md"
+              data-localization-open
+            >
+              {{ localization.country | image_url: width: 100 | image_tag }}
+              {{- localization.country.iso_code }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol -}})
+            </button>
+          {%- endif -%}
+
+          {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
+            <div class="header__language header__language--mobile">
+              <button
+                type="button"
+                class="header__mobile-control body-md"
+                data-language-toggle
+              >
+                <span>{{ localization.language.endonym_name }}</span>
+                {{- 'icon-caret-down.svg' | inline_asset_content -}}
+              </button>
+
+              <div class="header__language-dropdown" data-language-dropdown>
+                {%- form 'localization', id: 'MobileLanguageForm' -%}
+                  {%- for language in localization.available_languages -%}
+                    <button
+                      type="button"
+                      class="header__language-option{% if language == localization.language %} header__language-option--active{% endif %}"
+                      data-language-code="{{ language.iso_code }}"
+                    >
+                      {{ language.endonym_name | capitalize }}
+                    </button>
+                  {%- endfor -%}
+                  <input type="hidden" name="locale_code" value="{{ localization.language.iso_code }}">
+                {%- endform -%}
+              </div>
+            </div>
+          {%- endif -%}
+
+          {%- if shop.customer_accounts_enabled -%}
+            <a href="{{ routes.account_url }}" class="header__mobile-control body-md">
+              {{ 'header.account_label' | t }}
+            </a>
+          {%- endif -%}
+        </div>
+
+        {%- if section.settings.enable_social -%}
+          <div class="header__mobile-social">
+            {% render 'social' %}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <button class="header__mobile-close" type="button" name="close-menu" data-action="menu-close">
+      {{ 'icon-close.svg' | inline_asset_content }}
+    </button>
+  </div>
+</header>
+
+<script>
+  (function () {
+    const header = document.querySelector("header");
+    const announcements = document.querySelectorAll(".announcement");
+    const allAnnouncementsHeight = Math.max(Array.from(announcements).reduce((sum, el) => {
+      return sum + el.offsetHeight;
+    }, 0), 1);
+
+    document.documentElement.style.setProperty('--header-height', `${header.getBoundingClientRect().height}px`);
+
+    setTimeout(() => {
+      header.classList.toggle('sticky', window.scrollY >= allAnnouncementsHeight);
+    }, 10)
+  })();
+
+
+</script>
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    {% if section.settings.logo != blank %}
+      "logo": {{ section.settings.logo | image_url: width: 300 | json }},
+    {% endif %}
+    "sameAs": [
+      {{ settings.social_youtube_link | json }},
+      {{ settings.social_facebook_link | json }},
+      {{ settings.social_tiktok_link | json }},
+      {{ settings.social_instagram_link | json }}
+    ],
+    "url": {{ request.origin | append: page.url | json }}
+  }
+</script>
+
+{% schema %}
+  {
+    "name": "Header",
+    "enabled_on": {
+      "groups": ["header"]
+    },
+    "limit": 1,
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_country_switcher",
+        "label": "Enable country switcher",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_language_selector",
+        "label": "Enable language selector",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_search",
+        "label": "Enable search",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_social",
+        "label": "Enable social (mobile menu)",
+        "default": true
+      }
+    ],
+    "blocks": [
+      {
+        "type": "menu_item",
+        "name": "Menu item",
+        "settings": [
+          {
+            "type": "text",
+            "id": "label",
+            "label": "Label",
+            "default": "Home"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "Link"
+          },
+          {
+            "type": "header",
+            "content": "Megamenu settings"
+          },
+          {
+            "type": "checkbox",
+            "id": "enable_megamenu",
+            "label": "Enable megamenu",
+            "default": true
+          },
+          {
+            "type": "collection_list",
+            "id": "megamenu_collections",
+            "label": "Collections",
+          },
+          {
+            "type": "header",
+            "content": "Megamenu banner"
+          },
+          {
+            "type": "checkbox",
+            "id": "enable_banner",
+            "label": "Enable banner"
+          },
+          {
+            "type": "image_picker",
+            "id": "banner_image",
+            "label": "Banner image"
+          },
+          {
+            "type": "text",
+            "id": "banner_title",
+            "label": "Banner title",
+            "default": "Featured Product"
+          },
+          {
+            "type": "text",
+            "id": "banner_subtitle",
+            "label": "Banner subtitle",
+            "default": "Lorem ipsum dolor sit amet"
+          },
+          {
+            "type": "text",
+            "id": "banner_btn_label",
+            "label": "Banner button label",
+            "default": "Button",
+          },
+          {
+            "type": "url",
+            "id": "banner_btn_link",
+            "label": "Banner button link"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Header"
+      }
+    ]
+  }
+{% endschema %}

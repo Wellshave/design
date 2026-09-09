@@ -1,0 +1,37 @@
+{%- comment -%}
+  Eén promokaart in de derde kolom van het megamenu.
+
+    beeld   — image_picker, optioneel; wordt gedimd achter de tekst gelegd
+    kicker  — klein gouden bovenlabel
+    titel   — de kop
+    tekst   — één regel eronder
+    label   — tekst van de knop of link
+    link    — waar hij heen gaat
+    groot   — true voor de bovenste kaart (hoger, gouden knop),
+              false voor de onderste (compact, gouden tekstlink)
+
+  De hele kaart is de link; de knop is opsmuk, geen tweede <a>.
+{%- endcomment -%}
+{%- if titel != blank or label != blank -%}
+  <a
+    href="{{ link | default: '#' }}"
+    class="wsmm-promo {% if groot %}wsmm-promo--groot{% else %}wsmm-promo--klein{% endif %}"
+  >
+    {%- if beeld != blank -%}
+      <span class="wsmm-promo-beeld">
+        {{ beeld | image_url: width: 720 | image_tag: loading: 'lazy', alt: '' }}
+      </span>
+    {%- endif -%}
+    <span class="wsmm-promo-inhoud">
+      {%- if kicker != blank -%}<span class="wsmm-promo-kicker">{{ kicker }}</span>{%- endif -%}
+      {%- if titel != blank -%}<span class="wsmm-promo-titel">{{ titel }}</span>{%- endif -%}
+      {%- if tekst != blank -%}<span class="wsmm-promo-tekst">{{ tekst }}</span>{%- endif -%}
+      {%- if label != blank -%}
+        <span class="{% if groot %}wsmm-promo-knop{% else %}wsmm-promo-link{% endif %}">
+          {{ label }}
+          <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsm-pijl"/></svg>
+        </span>
+      {%- endif -%}
+    </span>
+  </a>
+{%- endif -%}

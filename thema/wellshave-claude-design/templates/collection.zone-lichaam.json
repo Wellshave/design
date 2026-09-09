@@ -1,0 +1,605 @@
+{
+  "sections": {
+    "kop": {
+      "type": "ws-collectie-kop",
+      "blocks": {
+        "vraag_1": {
+          "type": "vraag",
+          "settings": {
+            "groep": "glad",
+            "vraag": "Hoe wil je afwerken?",
+            "opties": "trim|Alleen trimmen|alleen trimmen\nglad|Ook volledig glad|glad afwerken"
+          }
+        },
+        "vraag_2": {
+          "type": "vraag",
+          "settings": {
+            "groep": "neus",
+            "vraag": "Ook neushaar met hetzelfde apparaat?",
+            "opties": "nee|Niet nodig|geen neushaar\nja|Ja, graag|ook neushaar"
+          }
+        },
+        "vraag_3": {
+          "type": "vraag",
+          "settings": {
+            "groep": "nat",
+            "vraag": "Gebruik je hem onder de douche?",
+            "opties": "nee|Droog|droog\nja|Ja, ook nat|ook nat"
+          }
+        },
+        "vraag_4": {
+          "type": "vraag",
+          "settings": {
+            "groep": "vorm",
+            "vraag": "Eén apparaat, of een complete set?",
+            "opties": "los|Eén apparaat|één apparaat\nset|Complete set|complete set"
+          }
+        },
+        "match_1": {
+          "type": "match",
+          "settings": {
+            "id": "spult",
+            "product": "shave-package-ultimate",
+            "naam": "Shave Package Ultimate™",
+            "badge": "Acht onderdelen",
+            "zin": "Lichaam, neus en detailwerk in één doos — samen goedkoper dan los.",
+            "reden_1": "Acht onderdelen in de doos",
+            "reden_2": "Bodygroomer én neustrimmer",
+            "reden_3": "De ruimste set in de collectie"
+          }
+        },
+        "match_2": {
+          "type": "match",
+          "settings": {
+            "id": "flexbundel",
+            "product": "body-beard-kit",
+            "naam": "Flex-line Bundel",
+            "badge": "Grootste voordeel",
+            "zin": "Negen onderdelen voor gezicht, baard en lichaam, inclusief de Sharpline-detailtrimmer.",
+            "reden_1": "Flex Guard met foilkop",
+            "reden_2": "Sharpline-detailtrimmer erbij",
+            "reden_3": "Negen onderdelen in de doos"
+          }
+        },
+        "match_3": {
+          "type": "match",
+          "settings": {
+            "id": "flex",
+            "product": "wellshave-flex-guard™",
+            "naam": "Flex Guard™ 3-in-1",
+            "badge": "Meest veelzijdig",
+            "zin": "Trimmen, neushaar en glad afwerken met één apparaat — ook in de koffer.",
+            "reden_1": "Drie opzetstukken in één",
+            "reden_2": "7.000 toeren, LED-display",
+            "reden_3": "Waterdicht — IPX7"
+          }
+        },
+        "match_4": {
+          "type": "match",
+          "settings": {
+            "id": "pro",
+            "product": "groom-guard-pro",
+            "naam": "Groom Guard™ PRO",
+            "badge": "Meest gekozen",
+            "zin": "Voor lichaam én schaamstreek, met foil-kop voor een gladde afwerking.",
+            "reden_1": "SkinSafe™ keramische kop",
+            "reden_2": "Waterdicht — IPX7",
+            "reden_3": "Trimmen én glad afwerken"
+          }
+        },
+        "match_5": {
+          "type": "match",
+          "settings": {
+            "id": "dual",
+            "product": "wellshave-2-in-1-bodygroomer-mannen",
+            "naam": "Dual Groomer™ 2-in-1",
+            "badge": "Laagste prijs",
+            "zin": "Lichaam en neushaar in één apparaat, in twee snelheden.",
+            "reden_1": "SkinSafe™ mes",
+            "reden_2": "Neusopzetstuk meegeleverd",
+            "reden_3": "Twee snelheden"
+          }
+        },
+        "match_6": {
+          "type": "match",
+          "settings": {
+            "id": "gg",
+            "product": "wellshave-bodygroomer-groom-guard",
+            "naam": "Groom Guard™",
+            "badge": "37× besteld in 30 dagen",
+            "zin": "De meest verkochte bodygroomer: keramische kop achter een kam, met licht waar je kijkt.",
+            "reden_1": "SkinSafe™ keramische kop",
+            "reden_2": "LED-licht waar je kijkt",
+            "reden_3": "4,9 uit 192 beoordelingen"
+          }
+        },
+        "zone_alles": {
+          "type": "zone",
+          "settings": {
+            "naam": "Alle zones",
+            "aantal": "27",
+            "url": "https://wellshave.com/collections/all",
+            "huidig": false,
+            "icoon": "shopify://shop_images/ws-zone-icoon-alles.png"
+          }
+        },
+        "zone_1": {
+          "type": "zone",
+          "settings": {
+            "naam": "Lichaam & schaamstreek",
+            "aantal": "4",
+            "url": "https://wellshave.com/collections/bodygroomers",
+            "huidig": true,
+            "icoon": "shopify://shop_images/ws-zone-icoon-lichaam.png"
+          }
+        },
+        "zone_2": {
+          "type": "zone",
+          "settings": {
+            "naam": "Gezicht & baard",
+            "aantal": "11",
+            "url": "https://wellshave.com/collections/zone-gezicht",
+            "huidig": false,
+            "icoon": "shopify://shop_images/ws-zone-icoon-gezicht.png"
+          }
+        },
+        "zone_3": {
+          "type": "zone",
+          "settings": {
+            "naam": "Hoofd",
+            "aantal": "4",
+            "url": "https://wellshave.com/collections/zone-hoofd",
+            "huidig": false,
+            "icoon": "shopify://shop_images/ws-zone-icoon-hoofd.png"
+          }
+        },
+        "zone_4": {
+          "type": "zone",
+          "settings": {
+            "naam": "Neus & oren",
+            "aantal": "8",
+            "url": "https://wellshave.com/collections/neustrimmers",
+            "huidig": false,
+            "icoon": "shopify://shop_images/ws-zone-icoon-neus.png"
+          }
+        }
+      },
+      "block_order": [
+        "vraag_1",
+        "vraag_2",
+        "vraag_3",
+        "vraag_4",
+        "match_1",
+        "match_2",
+        "match_3",
+        "match_4",
+        "match_5",
+        "match_6",
+        "zone_alles",
+        "zone_1",
+        "zone_2",
+        "zone_3",
+        "zone_4"
+      ],
+      "settings": {
+        "eyebrow": "Lichaam & schaamstreek · 4 apparaten",
+        "kop_1": "Trim waar het spannend wordt.",
+        "kop_2": "Zonder wondjes.",
+        "lede": "Vier waterdichte bodygroomers met een SkinSafe™ keramische kop.",
+        "hulp_link": "Niet zeker welke bij jou past?",
+        "foto": "shopify://shop_images/ws-ugc-borst.webp",
+        "foto_alt": "Groom Guard in gebruik op het lichaam",
+        "kaartkop": "Jouw bodygroomer in 20 seconden",
+        "kaartsub": "4 keuzes · direct een match",
+        "kaartvraag": "Wat past bij jouw routine?",
+        "tabel": "vorm=set, neus=ja > spult\nvorm=set > flexbundel\nglad=glad, neus=ja > flex\nglad=glad > pro\nneus=ja, nat=ja > flex\nneus=ja > dual\nnat=ja > pro\n > gg",
+        "standaard": "gg",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 0,
+        "af_kop": "Jouw match staat klaar.",
+        "af_sub": "Pas een keuze aan of bekijk direct je advies.",
+        "opnieuw": "Opnieuw beginnen",
+        "wijzig_label": "Wijzig dit antwoord",
+        "match_label": "Jouw match",
+        "waarom_label": "Waarom deze match",
+        "match_cta": "Bekijk jouw match",
+        "voorraad_wel": "Op voorraad · morgen in huis",
+        "voorraad_niet": "Tijdelijk uitverkocht"
+      }
+    },
+    "raster": {
+      "type": "ws-collectie-raster",
+      "blocks": {
+        "groep_1": {
+          "type": "groep",
+          "settings": {
+            "kop": "Vind jouw bodygroomer",
+            "sub": "Vier apparaten, ieder voor een andere routine.",
+            "cat": "app",
+            "producten": [
+              "groom-guard-pro",
+              "wellshave-bodygroomer-groom-guard",
+              "wellshave-flex-guard™",
+              "wellshave-2-in-1-bodygroomer-mannen"
+            ],
+            "noot": "",
+            "kicker": "",
+            "labels": "wellshave-bodygroomer-groom-guard = Best verkocht",
+            "link_label": "",
+            "link_url": ""
+          }
+        },
+        "groep_2": {
+          "type": "groep",
+          "settings": {
+            "kop": "Maak je routine compleet",
+            "sub": "Voordeliger samengesteld; geen losse onderdelen zoeken.",
+            "cat": "bundel",
+            "producten": [
+              "shave-package-ultimate",
+              "body-beard-kit",
+              "essential-flex-bundel",
+              "wellshave-shave-package-3-0",
+              "wellshave-shave-package-2-0"
+            ],
+            "noot": "",
+            "kicker": "",
+            "labels": "",
+            "link_label": "",
+            "link_url": ""
+          }
+        },
+        "groep_3": {
+          "type": "groep",
+          "settings": {
+            "kop": "Blijf scherp",
+            "sub": "Vervang alleen wat slijt — niet het hele apparaat.",
+            "cat": "mes",
+            "producten": [
+              "vervanging-bodygroomer-mes",
+              "trio-pack-groom-guard",
+              "flex-guard-blade-vervanging",
+              "trio-pack",
+              "foil-shaver-groom-guard"
+            ],
+            "noot": "",
+            "kicker": "Onderdeel",
+            "labels": "",
+            "link_label": "",
+            "link_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "groep_1",
+        "groep_2",
+        "groep_3"
+      ],
+      "settings": {
+        "filter_alles": "Alles",
+        "filter_app": "Apparaten",
+        "filter_bundel": "Bundels",
+        "filter_mes": "Onderdelen",
+        "vergelijken": true,
+        "sorteer_label": "Meest relevant",
+        "monogram": "shopify://shop_images/ws-mark.png",
+        "geen_score": "Nieuw · nog geen beoordelingen",
+        "uitverkocht_label": "Tijdelijk uitverkocht",
+        "uitverkocht_voet": "Tijdelijk niet leverbaar",
+        "blik_voet": "100 dagen proberen · 2 jaar garantie",
+        "mes_voet": "Vandaag besteld, morgen in huis",
+        "aanbod_product": "shave-package-ultimate",
+        "aanbod_eyebrow": "Alles in één set",
+        "aanbod_zin": "Acht onderdelen voor lichaam, neus en detailwerk — samen goedkoper dan los.",
+        "aanbod_knop": "Bekijk de set",
+        "slot_tekst": "in deze zone · elk apparaat 100 dagen te proberen",
+        "slot_link_label": "Bekijk de hele collectie",
+        "slot_link": "shopify://collections/all",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 0,
+        "toon_label": "Toon mij",
+        "resultaat_label": "resultaten",
+        "bundel_lint": "Meeste waarde",
+        "sorteer_prijs_op": "Prijs: laag naar hoog",
+        "sorteer_prijs_af": "Prijs: hoog naar laag",
+        "sorteer_score": "Best beoordeeld",
+        "tp_uit": "out of 5",
+        "vgl_kop": "Naast elkaar",
+        "vgl_sluit": "Sluit de vergelijking",
+        "vgl_usp_kop": "Waarvoor",
+        "vgl_balk_tekst": "geselecteerd om te vergelijken",
+        "vgl_balk_kort": "gekozen",
+        "vgl_balk_knop": "Vergelijk"
+      }
+    },
+    "uitleg": {
+      "type": "ws-collectie-uitleg",
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "product": "wellshave-bodygroomer-groom-guard",
+            "naam": "Groom Guard™",
+            "url": "",
+            "tekst": "De toegankelijke keuze voor het regelmatig trimmen van lichaam en schaamstreek."
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "product": "groom-guard-pro",
+            "naam": "Groom Guard™ PRO",
+            "url": "",
+            "tekst": "Voegt een foil-kop toe, waarmee je na het trimmen bepaalde plekken gladder afwerkt."
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "product": "wellshave-2-in-1-bodygroomer-mannen",
+            "naam": "Dual Groomer™ 2-in-1",
+            "url": "",
+            "tekst": "Combineert lichaamshaar en neus- en detailhaar in één compact apparaat."
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "product": "wellshave-flex-guard™",
+            "naam": "Flex Guard™ 3-in-1",
+            "url": "",
+            "tekst": "De uitgebreidste keuze, met koppen voor trimmen, glad afwerken en detailwerk."
+          }
+        },
+        "tip_1": {
+          "type": "tip",
+          "settings": {
+            "kop": "Trek losse huid voorzichtig strak",
+            "tekst": "Zo kan de kam gelijkmatiger over het oppervlak bewegen."
+          }
+        },
+        "tip_2": {
+          "type": "tip",
+          "settings": {
+            "kop": "Houd de kop vlak op de huid",
+            "tekst": "Te schuin of te hard drukken zorgt niet voor een gladder resultaat."
+          }
+        },
+        "tip_3": {
+          "type": "tip",
+          "settings": {
+            "kop": "Begin met de haargroei mee",
+            "tekst": "Wil je daarna korter of gladder afwerken, beweeg dan rustig en zonder extra druk tegen de groeirichting in."
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4",
+        "tip_1",
+        "tip_2",
+        "tip_3"
+      ],
+      "settings": {
+        "eyebrow": "Over deze categorie",
+        "h2_1": "Welke bodygroomer past bij",
+        "h2_2": "jouw lichaam en schaamstreek?",
+        "inleiding": "<p>Een bodygroomer is een trimmer die speciaal is gemaakt voor lichaamshaar. Waar een baardtrimmer vooral is ontworpen voor stevige gezichtsharen en een vlakke huid, moet een bodygroomer veilig kunnen bewegen over je borst, oksels, buik, rug en schaamstreek. Op die plekken is de huid zachter, beweeglijker en gevoeliger voor trekken, irritatie en sneetjes.</p><p>De vier Wellshave-bodygroomers gebruiken daarom een <b>SkinSafe™ keramische kop</b>. De afgeronde kam rust op de huid en leidt de haren naar het bewegende mes. Het snijvlak blijft achter de kam, waardoor het niet rechtstreeks over de huid schuurt. Dat helpt de kans op sneetjes en een trekkend gevoel tijdens het trimmen te verkleinen.</p>",
+        "h3_lijst": "De vier bodygroomers vergeleken",
+        "slotalinea": "<p>Alle modellen zijn waterproof en kunnen onder de douche worden gebruikt en afgespoeld. De <a href=\"https://wellshave.com/collections/accesoires\">messen en opzetkoppen</a> zijn los verkrijgbaar. Daardoor hoef je bij een bot of versleten mes niet direct een compleet nieuw apparaat te kopen.</p>",
+        "bijschrift": "",
+        "h3_tips": "Hoe gebruik je een bodygroomer veilig?",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 0
+      }
+    },
+    "bewijs": {
+      "type": "ws-collectie-bewijs",
+      "blocks": {
+        "citaat_1": {
+          "type": "citaat",
+          "settings": {
+            "product": "groom-guard-pro",
+            "url": "",
+            "tag": "Over de eerste keer",
+            "tekst": "Was een beetje bunzig om mijn zak te scheren, maar met deze groomer is dat appeltje eitje. Geen wondjes en een glad resultaat. En dat voor de eerste keer.",
+            "naam": "Makketakker",
+            "product_naam": "Groom Guard™ PRO",
+            "toon_score": true,
+            "bijschrift": ""
+          }
+        },
+        "citaat_2": {
+          "type": "citaat",
+          "settings": {
+            "product": "wellshave-bodygroomer-groom-guard",
+            "url": "",
+            "tag": "Over de gevoelige plek",
+            "tekst": "Scheert pijnloos, ook in gevoelige zones. Mooi design, ligt goed in de hand en maakt weinig geluid. Aanrader.",
+            "naam": "boomereros74",
+            "product_naam": "Groom Guard™",
+            "toon_score": true,
+            "bijschrift": ""
+          }
+        },
+        "citaat_3": {
+          "type": "citaat",
+          "settings": {
+            "product": "vervanging-bodygroomer-mes",
+            "url": "",
+            "tag": "Over wat het over twee jaar kost",
+            "tekst": "Het skinsafe snijmesje heeft zijn beste tijd gehad. Dit onderdeel blijkt los leverbaar bij Wellshave. Een mooie meevaller, want ik rekende al op de aanschaf van een nieuwe bodygroomer.",
+            "naam": "Kick1921",
+            "product_naam": "Groom Guard™ Blade",
+            "toon_score": false,
+            "bijschrift": "los verkrijgbaar"
+          }
+        }
+      },
+      "block_order": [
+        "citaat_1",
+        "citaat_2",
+        "citaat_3"
+      ],
+      "settings": {
+        "eyebrow": "Uit de beoordelingen",
+        "kop": "Drie bezwaren, beantwoord door iemand die hier al doorheen is.",
+        "bron": "<p>Elke regel is een echte beoordeling bij het apparaat dat ernaast staat, geschreven door een geverifieerde koper. De score erachter is die van dát apparaat.</p>",
+        "koper_label": "geverifieerde koper",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 0
+      }
+    },
+    "slot": {
+      "type": "ws-collectie-slot",
+      "blocks": {
+        "zeker_1": {
+          "type": "zekerheid",
+          "settings": {
+            "icoon": "retour",
+            "kop": "100 dagen thuis proberen",
+            "tekst": "Niet goed? Je krijgt je geld terug."
+          }
+        },
+        "zeker_2": {
+          "type": "zekerheid",
+          "settings": {
+            "icoon": "schild",
+            "kop": "2 jaar garantie",
+            "tekst": "Op elk apparaat in deze zone."
+          }
+        },
+        "zeker_3": {
+          "type": "zekerheid",
+          "settings": {
+            "icoon": "truck",
+            "kop": "Gratis verzending vanaf €30",
+            "tekst": "Daaronder €4,95. Ook naar België."
+          }
+        },
+        "zeker_4": {
+          "type": "zekerheid",
+          "settings": {
+            "icoon": "klok",
+            "kop": "Morgen in huis",
+            "tekst": "Ma t/m vr besteld voor 23:59."
+          }
+        },
+        "vraag_1": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Welke van de vier moet ik hebben?",
+            "antwoord": "<p>Wil je alleen trimmen, dan is de <b>Groom Guard</b> genoeg. Wil je daarna glad afwerken, dan neem je de <b>Groom Guard PRO</b> met foil-kop. Wil je je neushaar in hetzelfde apparaat, dan is dat de <b>Dual Groomer</b>, of de <b>Flex Guard</b> als je alle drie de opzetstukken wilt. Bovenaan staat een keuzehulp die het in twee vragen voor je doet.</p>"
+          }
+        },
+        "vraag_2": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Kan ik hem in de schaamstreek gebruiken?",
+            "antwoord": "<p>Daar zijn ze voor gemaakt. Het keramische mes zit achter een kam, zodat het je huid niet raakt. Houd het mes vlak en je huid strak; dat is in de beoordelingen het verschil tussen “appeltje eitje” en voorzichtig aandoen.</p>"
+          }
+        },
+        "vraag_3": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Hoe vaak moet ik het mes vervangen?",
+            "antwoord": "<p>Bij dagelijks gebruik gaat een kop zes tot twaalf maanden mee. Merk je dat hij trekt of minder pakt, dan is het zover. <b>De koppen liggen apart op voorraad vanaf €14,95</b>, dus een bot mes kost je geen nieuw apparaat.</p>"
+          }
+        },
+        "vraag_4": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Wat zit er in de doos?",
+            "antwoord": "<p>Het apparaat, opzetkammen voor de lengte, een reinigingsborstel en een USB-C-kabel. Wat er per model precies bij zit verschilt — dat staat op de productpagina, bij de bundels inclusief het oplaadstation en de extra messen.</p>"
+          }
+        },
+        "vraag_5": {
+          "type": "vraag",
+          "settings": {
+            "vraag": "Wat als het me toch niet bevalt?",
+            "antwoord": "<p>Je hebt 100 dagen om hem thuis te proberen, zonder reden op te geven. Je meldt de retour aan en hebt daarna veertien dagen om te versturen; <b>de verzendkosten van de retour zijn voor jou</b>, het aankoopbedrag krijg je binnen veertien dagen terug.</p>"
+          }
+        },
+        "zone_1": {
+          "type": "zone",
+          "settings": {
+            "naam": "Gezicht & baard",
+            "tekst": "Scheren, trimmen en randen zetten.",
+            "slot": "11 apparaten →",
+            "url": "https://wellshave.com/collections/zone-gezicht"
+          }
+        },
+        "zone_2": {
+          "type": "zone",
+          "settings": {
+            "naam": "Hoofd",
+            "tekst": "Tondeuses en hoofdscheerders.",
+            "slot": "4 apparaten →",
+            "url": "https://wellshave.com/collections/zone-hoofd"
+          }
+        },
+        "zone_3": {
+          "type": "zone",
+          "settings": {
+            "naam": "Neus & oren",
+            "tekst": "Detailwerk zonder trekken.",
+            "slot": "8 apparaten →",
+            "url": "https://wellshave.com/collections/neustrimmers"
+          }
+        },
+        "zone_4": {
+          "type": "zone",
+          "settings": {
+            "naam": "Alles bij elkaar",
+            "tekst": "De hele collectie, per zone gesorteerd.",
+            "slot": "Bekijk alles →",
+            "url": "https://wellshave.com/collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "zeker_1",
+        "zeker_2",
+        "zeker_3",
+        "zeker_4",
+        "vraag_1",
+        "vraag_2",
+        "vraag_3",
+        "vraag_4",
+        "vraag_5",
+        "zone_1",
+        "zone_2",
+        "zone_3",
+        "zone_4"
+      ],
+      "settings": {
+        "eyebrow": "Vragen over deze vier",
+        "h2_1": "Alles wat je",
+        "h2_2": "wilt weten.",
+        "mail_regel": "<p>Staat je vraag er niet bij? Mail <b>contact@wellshave.com</b> — je krijgt antwoord van iemand uit het team, binnen één werkdag.</p>",
+        "zones_eyebrow": "Andere plek in gedachten?",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "kop",
+    "raster",
+    "uitleg",
+    "bewijs",
+    "slot"
+  ]
+}
