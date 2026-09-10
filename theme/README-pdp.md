@@ -480,14 +480,34 @@ als enige op &laquo;Yven &middot; 8 juli 2026&raquo; en is teruggebracht naar
 &laquo;Yven&raquo;. Bijkomend voordeel: een naam hoeft niet vertaald, een
 Nederlandse maandnaam op de Duitse pagina wel.
 
-### De bron staat per product, niet per sectie
+### De kop is het winkelcijfer, niet de afzender
 
-`custom.buybox_quote_source` en `custom.buybox_quote_url` overschrijven
-`tp_bron` en `rev_alle_url`. Alleen bij de waarde `Trustpilot` krijgt de kaart
-de groene Trustpilot-blokjes; bij elke andere bron gouden sterren. Dat is geen
-smaakkwestie: die vierkantjes zijn het beeldmerk van Trustpilot, en een review
-van bol.com of uit Loox die daarin staat doet een onjuiste mededeling over
-zijn herkomst.
+De groene blokjes met **Trustpilot** en **4,4** in de kop van de reviewkaart
+gaan over de winkel, niet over het citaat eronder. Dat onderscheid moet in
+beeld blijven: de teksten komen uit Loox en van bol.com, en zouden die kop de
+afzender zijn, dan zegt de kaart iets over hun herkomst dat niet klopt. Twee
+dingen houden het recht:
+
+* **Het cijfer staat naast het merk.** `Trustpilot 4,4` leest als een
+  beoordeling van de winkel; `Trustpilot` alleen leest als een afzender. Haal
+  je `tp_cijfer` weg, dan verdwijnt precies dat verschil.
+* **Het citaat draagt zijn eigen naam.** De voetregel is de naam plus
+  &laquo;Geverifieerde koper&raquo;, en met `custom.buybox_quote_source` (of de
+  terugval `citaat_bron`) kun je daar per product de herkomst bij zetten. Die
+  regel staat onderaan, niet in de kop.
+
+`custom.buybox_quote_url` overschrijft `rev_alle_url` als **Alle reviews
+&rarr;** ergens anders heen moet.
+
+### Vier hele sterren en een halve
+
+Trustpilot rondt een TrustScore af op halve sterren: een 4,4 laat de widget
+zien als 4,5 ster. Vijf volle blokjes zeggen dus meer dan het cijfer waarmaakt.
+`tp_sterren` staat op `4,5`; het lege deel is `#DCDCE6`, het grijs dat
+Trustpilot zelf voert. Het vlak loopt via `--ws-ster-vlak`, zodat de drie
+plekken waar de sterren staan &mdash; de regel boven de titel, de reviewkaart en
+de upgrade-pop-up &mdash; hun eigen formaat houden. Verandert de score, verzet dan
+`tp_cijfer` **en** `tp_sterren`.
 
 ## De upgrade-pop-up bij het toevoegen aan de winkelwagen
 

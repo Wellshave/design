@@ -31,6 +31,7 @@
      tint staat op 3,56 tegen de krapste grond en houdt dus ook stand als het
      zand ooit een tint dieper gaat. */
   --ws-tekstgoud:#8A5A1E;--ws-groen:#008859;--ws-blauw:#2E7CF6;--ws-rood:#C8281F;
+  --ws-tpgrijs:#DCDCE6;
   /* De leverbelofte is het enige groene vlak in het koopvak. Warm groen, geen
      mint: het ligt op zandkleur naast bruingoud, en een koele tint vloekt daar.
      Tekst op grond komt uit op 6,50:1, de stip op grond op 3,21:1 -- ruim voor
@@ -166,7 +167,7 @@
 
 .ws-pdp .ws-tp{display:flex;align-items:center;gap:9px;margin-top:15px;flex-wrap:wrap}
 .ws-pdp .ws-tp .ws-st{display:flex;gap:2px}
-.ws-pdp .ws-tp .ws-st i{width:17px;height:17px;background:var(--ws-groen);border-radius:2px;display:flex;
+.ws-pdp .ws-tp .ws-st i{width:17px;height:17px;background:var(--ws-ster-vlak,var(--ws-groen));border-radius:2px;display:flex;
   align-items:center;justify-content:center}
 .ws-pdp .ws-tp .ws-st svg{width:11px;height:11px;fill:#fff}
 .ws-pdp .ws-tp .ws-lb{font-size:12.5px;font-weight:500;color:var(--ws-ink)}
@@ -179,17 +180,20 @@
 .ws-pdp .ws-rev .ws-kop{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .ws-pdp .ws-rev .ws-kop .ws-lk{display:flex;align-items:center;gap:8px}
 .ws-pdp .ws-rev .ws-kop .ws-lk .ws-st{display:flex;gap:1.5px}
-.ws-pdp .ws-rev .ws-kop .ws-lk .ws-st i{width:14px;height:14px;background:var(--ws-groen);border-radius:2px;
+.ws-pdp .ws-rev .ws-kop .ws-lk .ws-st i{width:14px;height:14px;background:var(--ws-ster-vlak,var(--ws-groen));border-radius:2px;
   display:flex;align-items:center;justify-content:center}
 .ws-pdp .ws-rev .ws-kop .ws-lk .ws-st svg{width:9px;height:9px;fill:#fff}
 .ws-pdp .ws-rev .ws-kop .ws-lk b{font-size:12px;font-weight:600;color:var(--ws-ink)}
-/* De groene blokjes zijn het merkteken van Trustpilot. Komt het citaat ergens
-   anders vandaan, dan hoort dat teken er niet bij: dan losse sterren in het
-   bruingoud van het merk, zodat de kaart alleen zegt wat waar is.
-   Het lichte goud (#DDA548) haalt op de witte kaart maar 2,43:1 en is voor een
-   vlak van 13 px te bleek; #8A5A1E komt uit op 5,90:1. */
-.ws-pdp .ws-rev .ws-kop .ws-lk-eigen .ws-st i{background:none;border-radius:0;width:13px;height:13px}
-.ws-pdp .ws-rev .ws-kop .ws-lk-eigen .ws-st svg{width:13px;height:13px;fill:var(--ws-tekstgoud)}
+/* Het cijfer maakt van de kop een winkelbeoordeling in plaats van een afzender:
+   de sterren gaan over alle reviews samen, het citaat eronder heeft zijn eigen
+   naam. Zonder dat cijfer leest de kop als de herkomst van het citaat. */
+.ws-pdp .ws-rev .ws-kop .ws-lk .ws-tpcf{font-size:12px;font-weight:500;color:var(--ws-w72);
+  font-variant-numeric:tabular-nums;margin-left:-3px}
+/* Trustpilot rondt een TrustScore af op halve sterren: 4,4 wordt vier hele
+   blokjes en een halve. Het lege deel is het grijs dat Trustpilot zelf voert.
+   Het vlak loopt via --ws-ster-vlak, zodat het formaat per plek blijft staan. */
+.ws-pdp .ws-st i.ws-leeg{--ws-ster-vlak:var(--ws-tpgrijs)}
+.ws-pdp .ws-st i.ws-halve{--ws-ster-vlak:linear-gradient(to right,var(--ws-groen) 0 50%,var(--ws-tpgrijs) 50% 100%)}
 .ws-pdp .ws-rev .ws-kop .ws-alle{font-size:11.5px;font-weight:600;color:var(--ws-w72);text-decoration:none;
   border-bottom:1px solid rgba(20,18,15,.28);padding-bottom:2px;white-space:nowrap;transition:color .16s ease,border-color .16s ease}
 .ws-pdp .ws-rev .ws-kop .ws-alle:hover{color:var(--ws-ink);border-bottom-color:var(--ws-ink)}

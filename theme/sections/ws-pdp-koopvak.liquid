@@ -34,19 +34,44 @@
   assign citaat_wie = mf.buybox_quote_author.value | default: s.citaat_wie
 
   comment
-    De bron hoort bij het citaat, niet bij de sectie. Stond die vast op
-    Trustpilot, dan kreeg een review van bol.com of uit Loox de groene
-    Trustpilot-blokjes en de link naar het Trustpilot-profiel mee -- en
-    daarmee zegt de kaart iets over de herkomst dat niet klopt. Nu volgen
-    het merk, de sterren en de uitgang de opgegeven bron.
+    De sterren in de kop van de reviewkaart zijn het winkelcijfer op
+    Trustpilot, niet de afzender van het citaat. Daarom staat het cijfer
+    ernaast: de sterren gaan over alle reviews samen, het citaat eronder
+    draagt zijn eigen naam en vinkje. Wil je bij een los citaat toch de
+    herkomst noemen, dan kan dat per product met custom.buybox_quote_source;
+    die regel komt onderaan de kaart, bij de naam.
   endcomment
-  assign citaat_bron = mf.buybox_quote_source.value | default: s.tp_bron
+  assign citaat_bron = mf.buybox_quote_source.value | default: s.citaat_bron
   assign citaat_url = mf.buybox_quote_url.value | default: s.rev_alle_url
-  assign bron_sleutel = citaat_bron | downcase | strip
-  assign is_trustpilot = false
-  if bron_sleutel == 'trustpilot'
-    assign is_trustpilot = true
+
+  comment
+    Trustpilot rondt een TrustScore af op halve sterren: 4,4 wordt 4,5 ster.
+    Vijf volle blokjes bij een 4,4 zeggen dus net iets te veel. Een halve
+    ster is precies wat de widget van Trustpilot zelf laat zien.
+  endcomment
+  assign tp_vol = 5
+  assign tp_half = false
+  if s.tp_sterren == '4.5'
+    assign tp_vol = 4
+    assign tp_half = true
+  elsif s.tp_sterren == '4'
+    assign tp_vol = 4
   endif
+  assign tp_halve = tp_vol | plus: 1
+  capture tp_ster_rij
+    for i in (1..5)
+      if i <= tp_vol
+        echo '<i class="ws-vol">'
+      elsif tp_half and i == tp_halve
+        echo '<i class="ws-halve">'
+      else
+        echo '<i class="ws-leeg">'
+      endif
+      echo '<svg><use href="#ws-pdp-ster-'
+      echo section.id
+      echo '"/></svg></i>'
+    endfor
+  endcapture
 
   comment
     Het aanbod komt uit custom.limited_offer, hetzelfde metaobject dat de oude
@@ -213,9 +238,7 @@
 
         {%- if s.tp_tonen -%}
           <div class="ws-tp">
-            <span class="ws-st">
-              {%- for i in (1..5) -%}<i><svg><use href="#ws-pdp-ster-{{ section.id }}"/></svg></i>{%- endfor -%}
-            </span>
+            <span class="ws-st" aria-hidden="true">{{ tp_ster_rij }}</span>
             {%- if s.tp_label != blank -%}<span class="ws-lb">{{ s.tp_label }}</span>{%- endif -%}
             {%- if s.tp_cijfer != blank -%}<span class="ws-cf">&middot; {{ s.tp_cijfer }}</span>{%- endif -%}
             {%- if tp_aantal != blank -%}<span class="ws-sc">{{ tp_aantal }}</span>{%- endif -%}
@@ -640,11 +663,10 @@
               toch bij de persoon.
             {%- endcomment -%}
             <div class="ws-kop">
-              <span class="ws-lk{% unless is_trustpilot %} ws-lk-eigen{% endunless %}">
-                <span class="ws-st">
-                  {%- for i in (1..5) -%}<i><svg><use href="#ws-pdp-ster-{{ section.id }}"/></svg></i>{%- endfor -%}
-                </span>
-                <b>{{ citaat_bron }}</b>
+              <span class="ws-lk">
+                <span class="ws-st" aria-hidden="true">{{ tp_ster_rij }}</span>
+                {%- if s.tp_merk != blank -%}<b>{{ s.tp_merk }}</b>{%- endif -%}
+                {%- if s.tp_cijfer != blank -%}<span class="ws-tpcf">{{ s.tp_cijfer }}</span>{%- endif -%}
               </span>
               {%- if s.rev_alle_label != blank and citaat_url != blank -%}
                 <a class="ws-alle" href="{{ citaat_url }}" target="_blank" rel="noopener nofollow">
@@ -653,9 +675,16 @@
               {%- endif -%}
             </div>
             <q>{{ citaat }}</q>
-            {%- if citaat_wie != blank or s.koper_label != blank -%}
+            {%- if citaat_wie != blank or citaat_bron != blank or s.koper_label != blank -%}
               <div class="ws-voet">
-                {%- if citaat_wie != blank -%}<span class="ws-wie"><b>{{ citaat_wie }}</b></span>{%- endif -%}
+                {%- if citaat_wie != blank or citaat_bron != blank -%}
+                  <span class="ws-wie">
+                    {%- if citaat_wie != blank -%}<b>{{ citaat_wie }}</b>{%- endif -%}
+                    {%- if citaat_bron != blank -%}
+                      {%- if citaat_wie != blank %} &middot; {% endif -%}{{ citaat_bron }}
+                    {%- endif -%}
+                  </span>
+                {%- endif -%}
                 {%- if s.koper_label != blank -%}
                   <span class="ws-ok"><svg><use href="#ws-pdp-ok-{{ section.id }}"/></svg>{{ s.koper_label }}</span>
                 {%- endif -%}
@@ -1274,11 +1303,9 @@
               {%- if pop_lead != blank -%}<p class="ws-pop-lead">{{ pop_lead }}</p>{%- endif -%}
               {%- if s.tp_tonen and s.pop_reviewregel != blank -%}
                 <div class="ws-pop-tp">
-                  <span class="ws-st">
-                    {%- for i in (1..5) -%}<i><svg><use href="#ws-pdp-ster-{{ section.id }}"/></svg></i>{%- endfor -%}
-                  </span>
+                  <span class="ws-st" aria-hidden="true">{{ tp_ster_rij }}</span>
                   <span class="sc">{{ s.pop_reviewregel }}</span>
-                  <span class="mk"><svg><use href="#ws-pdp-ster-{{ section.id }}"/></svg>{{ s.tp_bron }}</span>
+                  <span class="mk"><svg><use href="#ws-pdp-ster-{{ section.id }}"/></svg>{{ s.tp_merk }}</span>
                 </div>
               {%- endif -%}
             </div>
@@ -1693,7 +1720,8 @@
     { "type": "text", "id": "tp_label", "label": "Oordeel", "default": "Uitstekend" },
     { "type": "text", "id": "tp_cijfer", "label": "Cijfer", "info": "De winkelbrede Trustpilot-score. Op 26-08-2026: 4,4 bij 975 reviews.", "default": "4,4" },
     { "type": "text", "id": "tp_score", "label": "Aantal reviews", "info": "Wint van custom.compare_info.reviews_label. Rond af naar beneden op een tiental, dan klopt het langer.", "default": "1000+ reviews" },
-    { "type": "text", "id": "tp_bron", "label": "Bron bij het citaat (terugval)", "info": "Per product te overschrijven met custom.buybox_quote_source. Alleen bij 'Trustpilot' krijgt de kaart de groene Trustpilot-blokjes; bij elke andere bron bruine sterren.", "default": "Wellshave" },
+    { "type": "text", "id": "tp_merk", "label": "Merknaam bij de sterren", "info": "Staat achter de sterren op de reviewkaart en in de upgrade-popup. Hoort bij het winkelcijfer, niet bij het citaat eronder.", "default": "Trustpilot" },
+    { "type": "select", "id": "tp_sterren", "label": "Aantal sterren", "info": "Trustpilot rondt af op halve sterren: een 4,4 laat vier hele en een halve zien. Zet dit gelijk aan het cijfer hierboven.", "options": [ { "value": "4", "label": "4" }, { "value": "4.5", "label": "4,5" }, { "value": "5", "label": "5" } ], "default": "4.5" },
     { "type": "text", "id": "rev_alle_label", "label": "Link naar alle reviews", "info": "Leeg = geen link.", "default": "Alle reviews" },
     { "type": "url", "id": "rev_alle_url", "label": "Waar die link heen gaat", "info": "Het Trustpilot-profiel is https://nl.trustpilot.com/review/wellshave.nl" },
     { "type": "text", "id": "koper_label", "label": "Label geverifieerde koper", "default": "Geverifieerde koper" },
@@ -1701,7 +1729,8 @@
     { "type": "header", "content": "Klantcitaat" },
     { "type": "paragraph", "content": "Komt per product uit custom.buybox_quote en custom.buybox_quote_author. Hieronder alleen de terugval; laat beide leeg als er voor dit product geen echte productreview is, dan valt de kaart weg." },
     { "type": "textarea", "id": "citaat", "label": "Citaat" },
-    { "type": "text", "id": "citaat_wie", "label": "Naam en datum" },
+    { "type": "text", "id": "citaat_wie", "label": "Naam" },
+    { "type": "text", "id": "citaat_bron", "label": "Herkomst van dit citaat", "info": "Komt onderaan de kaart naast de naam te staan, niet in de kop. Per product te overschrijven met custom.buybox_quote_source. Leeg = alleen de naam." },
     { "type": "header", "content": "Cadeau" },
     { "type": "paragraph", "content": "Komt per product uit custom.limited_offer: de titel uit offer_title, de onderregel uit popup_subtitle en het icoon uit image. Hieronder de terugval." },
     { "type": "text", "id": "gift_titel", "label": "Cadeauregel" },
@@ -1820,7 +1849,9 @@
   .ws-pop-lead{margin:11px 0 0;font-size:16px;line-height:1.45;color:var(--p-ink60)}
   .ws-pop-tp{display:flex;align-items:center;justify-content:center;gap:11px;margin:16px 0 0;flex-wrap:wrap}
   .ws-pop-tp .ws-st{display:flex;gap:2.5px}
-  .ws-pop-tp .ws-st i{width:23px;height:23px;background:var(--p-groen);border-radius:2px;display:flex;
+  .ws-pop-tp .ws-st i.ws-leeg{--ws-ster-vlak:#DCDCE6}
+  .ws-pop-tp .ws-st i.ws-halve{--ws-ster-vlak:linear-gradient(to right,var(--p-groen) 0 50%,#DCDCE6 50% 100%)}
+  .ws-pop-tp .ws-st i{width:23px;height:23px;background:var(--ws-ster-vlak,var(--p-groen));border-radius:2px;display:flex;
     align-items:center;justify-content:center}
   .ws-pop-tp .ws-st svg{width:15px;height:15px;fill:#fff}
   .ws-pop-tp .sc{font-size:14.5px;font-weight:700;color:var(--p-ink80)}
