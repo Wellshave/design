@@ -31,6 +31,12 @@ how to switch it off; when to use own photography versus generate an image, and 
 between illustrating and fabricating proof; the three-card offer pattern; and the technical
 rules that keep it from breaking.
 
+**If the page is a product page, not a landing page**, read
+`references/wellshave-productpagina.md` as well. A Wellshave PDP is an alternate Shopify
+template rather than a standalone page, and it has its own section stack, its own full-bleed
+band section, and its own rule about imagery — the brand's feature photos carry their own
+headline baked into the corner, which decides how the bands may be cropped.
+
 **Open with the intake.** The brand layer's workflow starts with five questions (part 1,
 step 0): the creative and its literal promise, the product and its package ladder plus whether
 the cart actually delivers any gift, what proof may be used and what scope it covers, the
