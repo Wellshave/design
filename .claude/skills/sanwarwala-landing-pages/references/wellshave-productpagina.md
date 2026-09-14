@@ -2,8 +2,8 @@
 
 De productpagina, als eigen bouwwerk. `wellshave-merklaag.md` blijft leidend voor tokens,
 letter, knoppen en het tweeslags-kopapparaat; dit bestand beschrijft wat alléén voor de
-productpagina geldt: de sectiestapel, de beeldbanden, en hoe je hem in het thema bouwt en
-test zonder de winkel te raken.
+productpagina geldt: de sectiestapel, de beeldbanden, waar de inhoud per product woont, en
+hoe je hem in het thema bouwt en test zonder de winkel te raken.
 
 **Regel bij het uitbreiden:** hier komt alleen wat bij de vólgende productpagina ook nog
 geldt. Copy over één apparaat, prijzen en bestandsnamen horen bij dat project, niet hier.
@@ -289,15 +289,93 @@ Let op bij het lokaal spiegelen: een spiegelscript dat `srcset` wegstript om all
 dan op 390px het liggende beeld en denkt dat het klopt. Vervang de `srcset` van een `<source>`
 door het lokale bestand in plaats van hem te verwijderen.
 
-## 4. Bouwen en testen in het thema
+## 4. De inhoud woont bij het product, niet in het sjabloon
+
+Een sjabloon per product is de val waar dit werk in liep: zeven banden met twintig
+instellingen elk, allemaal in `templates/product.<naam>.json`. Product twee betekent dan een
+tweede bestand met dezelfde structuur, en vanaf dat moment lopen ze uit elkaar zodra je iets
+aan de opzet verandert.
+
+De banden horen dus bij het product. Dat kan, maar niet met losse metafields per veld.
+Dynamic sources koppelen alleen aan deze instellingstypes:
+
+**wel:** `text`, `richtext`, `image_picker`, `color`, `url`, `video`, `product`,
+`product_list`, `metaobject`, `metaobject_list`
+**niet:** `select`, `range`, `checkbox`
+
+Juist de `select` en de `range` dragen hier de halve vormgeving: uitlijning, tekstkleur,
+sluier, hoogte, focus, verhouding op de telefoon. Met losse metafields blijven die standen
+dus in het sjabloon staan en heb je alsnog een sjabloon per product, plus tientallen
+metafielddefinities ernaast.
+
+### De opzet die wel werkt
+
+Eén metaobjectdefinitie **Beeldband** met alle velden erin, de standen als keuzelijstjes.
+Op het product één metafield `custom.beeldbanden` van het type `list.metaobject_reference`.
+De sectie heeft een `metaobject_list`-instelling en loopt door die lijst heen in plaats van
+door blokken. De standen lees je zelf uit in Liquid, dus de beperking hierboven raakt je niet
+meer.
+
+De sectie kent drie bronnen, in deze volgorde:
+
+1. de `metaobject_list`-instelling van de sectie, in het sjabloon gekoppeld aan het product,
+2. `product.metafields.custom.beeldbanden.value`, zodat het ook werkt zonder die koppeling,
+3. de blokken in de sectie, voor een eenmalige uitzondering.
+
+Daardoor is er nog maar één sjabloon nodig, `product.wellshave.json`, en krijgt elk product
+eigen beelden en eigen koppen. Een product waarvoor nog niets is ingevuld laat de stapel
+gewoon weg; de sectie rendert dan niets in plaats van een zwarte balk.
+
+### Een nieuw product toevoegen
+
+1. Maak per band een Beeldband-item onder Content. Geef het een naam waaraan je het product
+   herkent, want die naam is wat je in de kiezer ziet.
+2. Zet op het product in het veld Beeldbanden de banden in de gewenste volgorde.
+3. Zet het sjabloonachtervoegsel op `wellshave`. Verder niets.
+
+Een band kan op meerdere producten staan. In de praktijk is dat zeldzaam, want het beeld is
+productgebonden; de tekst hergebruiken zonder het beeld is precies de vlakheid waar deze
+pagina vanaf moest.
+
+### Wat hierbij tegenviel
+
+- **Admin-toegang mag je niet meegeven** aan een metaobjectdefinitie die niet van een app is.
+  Laat `access.admin` weg en geef alleen `storefront: PUBLIC_READ` mee.
+- **Een metafielddefinitie komt standaard op `storefront: NONE`.** Zet hem daarna om met
+  `metafieldDefinitionUpdate`; in dezelfde aanmaakcall wordt hij geweigerd.
+- **Een koppeling in een JSON-sjabloon moet op `.value` eindigen.** `{{ product.metafields.
+  custom.beeldbanden }}` wordt geweigerd bij het opslaan, met `.value` erachter niet.
+- **Een bestandsverwijzing komt binnen als mediabestand, niet als beeld.** Eén stap eraf
+  (`if afb.image != blank`) en de rest van de sectie merkt het verschil niet meer.
+- **Zet standaardwaarden op elk veld dat je uitleest.** Een leeg veld in een metaobject geeft
+  geen standaard mee zoals een sectie-instelling dat doet, dus een vergeten `hoogte` levert
+  een band zonder hoogteklasse op.
+
+### De controle die het bewijst
+
+Render dezelfde pagina één keer met de oude blokken en één keer met de metaobjecten, knip de
+bandensectie eruit, haal de editor-attributen weg en vergelijk de twee tekenreeksen. Zijn ze
+identiek, dan is de verhuizing verliesvrij en hoef je niet op het oog te controleren of er
+onderweg een stand is gesneuveld. Bij deze verhuizing: 10.750 tekens aan beide kanten, gelijk.
+
+### Wat nog in het sjabloon zit
+
+De FAQ en de bundels staan nog als blokken in `product.wellshave.json` en dragen daar nog de
+teksten van de Groom Guard. Die twee moeten dezelfde beweging maken, de FAQ met een tweede
+metaobject en de bundels met een `product_list`-metafield, anders krijgt product twee de
+verkeerde vragen te zien. Merkbrede secties (de persstrook, de reviewrij, de geruststrook)
+horen juist wél in het sjabloon te blijven.
+
+## 5. Bouwen en testen in het thema
 
 Een productpagina is geen losse pagina maar een **alternatief sjabloon**. Dat is ook meteen
 de veilige testroute.
 
 1. **Bouw in een ongepubliceerd thema.** De API weigert schrijven naar het live thema, en dat
    is maar goed ook. Neem het werkthema, niet het live thema.
-2. **Maak `templates/product.<naam>.json`.** Laat het bestaande `product.json` met rust; dat
-   draagt elk ander product.
+2. **Gebruik `templates/product.wellshave.json`.** Er is er maar één; de inhoud komt van het
+   product (zie deel 4). Laat het bestaande `product.json` met rust, dat draagt elk ander
+   product.
 3. **Bekijk hem met `?view=<naam>&preview_theme_id=<id>`.** Let op: die parameters zetten een
    cookie. Haal je de pagina met `curl` op, gebruik dan een cookiejar (`-c`/`-b`), anders
    krijg je stilletjes het standaardsjabloon terug — dat ziet er normaal uit en kost je een
@@ -320,7 +398,7 @@ de veilige testroute.
 
 ---
 
-## 5. Wat deze laag nog niet weet
+## 6. Wat deze laag nog niet weet
 
 - Of de bandenstapel het beter doet dan de huidige pagina. Er is nog niets gemeten.
 - Of gegenereerde bandfotografie het houdt naast echte merkfotografie. Deze set is
