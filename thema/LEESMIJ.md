@@ -1781,3 +1781,80 @@ en blijft wél kloppen. De opsomming staat nu ook in dezelfde volgorde als het r
 **Nog open:** `wellshave-tondeuse-mannen-pro` (Tondeuse Pro, €86,95, voorraad −22)
 staat in geen enkel sjabloon. Zodra hij weer leverbaar is hoort hij in *Kort houden
 en bijwerken*.
+
+## Ronde: het tweede cadeau werd gewoon in rekening gebracht (22-09)
+
+Melding: "er gaat iets mis in de cart". In de lade stond de Neustrimmer Ultimate met
+het label *Gratis cadeau* en een prijs van € 29,95 ernaast, terwijl het subtotaal
+€ 104,90 was.
+
+### Wat er misging
+
+De cadeautiers staan in `config/settings_data.json`. Tier 1 wijst naar
+`gift-the-washbag`: een apart cadeauproduct, UNLISTED, **€ 0,00**, voorraad niet
+gevolgd. Zo hoort het. Tier 2 wees naar `wellshave-4-in-1-neustrimmer-ultimate` —
+het **gewone verkoopproduct van € 29,95**.
+
+In de repo staat op diezelfde plek `gift-neustrimmer-ultra` met label *Neustrimmer
+Ultra*. Het is dus in de theme-editor omgezet van Ultra naar Ultimate, en daarbij is
+van de twee bijna gelijknamige producten de verkeerde gekozen. De cadeau-tweeling
+**`gift-neustrimmer-ultimate` bestaat wel degelijk** — UNLISTED, € 0,00,
+vanprijs € 29,95, gepubliceerd op Online Store en Shop, aangemaakt op 7 september.
+Hij is alleen nooit geselecteerd.
+
+Er is ook geen automatische korting die het gat dicht. De comment in
+`snippets/cart-rewards-bar.liquid` zegt *"Free" via automatic discount at go-live*,
+maar alle kortingen die daarop lijken — *Gratis cadeau boven €80*, *+ Gratis 7D
+scheerkop*, *+ Gratis scheerkop Elite*, *Gratis neustrim opzetstuk* — staan op
+EXPIRED. Dat is ook aan de regel zelf te zien: met een korting had de lade `0,00`
+getoond met `29,95` doorgestreept; hij toonde alleen `29,95`.
+
+### Waarom je het niet aan het totaal zag
+
+`snippets/cart-drawer.liquid` trok cadeauregels onvoorwaardelijk van het subtotaal af:
+
+```liquid
+assign display_subtotal = cart.total_price | minus: gift_total
+```
+
+Met een cadeau dat niet gratis is, loog dat het verschil weg:
+
+| | |
+|---|---|
+| Shave Package Ultimate | 89,95 |
+| Groom Guard Blade | 14,95 |
+| Neustrimmer Ultimate — "Gratis cadeau" | 29,95 |
+| The Washbag | 0,00 |
+| **cart.total_price** (wat de checkout rekent) | **134,85** |
+| **lade toonde** | **104,90** |
+
+Een prijs die tussen winkelwagen en afrekenen omhoog springt.
+
+### Wat er is veranderd, in v6
+
+- **Het subtotaal is `cart.total_price`.** De aftrek is weg. Met een cadeauproduct
+  van € 0,00 is dat exact hetzelfde getal; is een cadeau ooit niet gratis, dan staat
+  er het eerlijke bedrag in plaats van een bedrag dat niet klopt.
+- **"Gratis cadeau" verschijnt alleen als de regel werkelijk € 0,00 is.** Kost hij
+  geld, dan klopt de instelling niet en is zwijgen beter dan een onjuiste belofte
+  naast een prijs.
+
+### Wat nog met de hand moet, en waarom
+
+De instelling `gift_2_product` moet naar `gift-neustrimmer-ultimate`. **Dat moet in
+de theme-editor**, niet via de API. Een `themeFilesUpsert` op
+`config/settings_data.json` liet stilzwijgend het app-embed blok
+`pagefly-page-builder` vallen: mijn upload bevatte twaalf blokken, de teruggelezen
+versie elf, en het bestand kromp van 3582 naar 3409 bytes. Die poging is
+teruggedraaid — het beschadigde thema heet nu *zz NIET GEBRUIKEN - mislukte v6* en
+mag weg; v6 is opnieuw van v5 gedupliceerd en heeft de settings ongemoeid.
+
+**Regel voor de toekomst: schrijf `config/settings_data.json` niet via de API op dit
+thema.** App-embed blokken met een niet-numerieke sleutel overleven het niet.
+
+### Nog open
+
+- `cart_benefit_2_label` staat op **"levenslang jaar garantie"** — een halve zin, en
+  hij spreekt de collectiepagina tegen, waar *2 jaar garantie* staat.
+- Het live thema is ook op `reviews_label` uit elkaar gelopen met de repo: daar staat
+  *950+ reviews*, live *1k+ reviews*.
