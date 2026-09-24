@@ -1,0 +1,187 @@
+{% comment %}
+  Wellshave — collectiepagina, blok 5: zekerheden, vragen en de andere zones.
+  De garanties krijgen elk een icoon: vier tekstjes onder elkaar lezen als kleine
+  lettertjes, terwijl dit juist de regels zijn die de aarzeling wegnemen. Op mobiel
+  worden het vier kaarten in een schuifstrip, zodat de rand van de volgende
+  zichtbaar blijft — dat is wat mensen laat vegen.
+{% endcomment %}
+
+{{ 'ws-collectie.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'ws-collectie.js' | asset_url }}" defer></script>
+
+<div class="wsc">
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="wss-retour" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.4-5.7M20 4v4h-4" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="wss-schild" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6zM9.2 12.2l2 2 3.6-3.8" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="wss-truck" viewBox="0 0 24 24"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/><circle cx="7" cy="18" r="1.6" fill="none" stroke="currentColor" stroke-width="2.1"/><circle cx="17" cy="18" r="1.6" fill="none" stroke="currentColor" stroke-width="2.1"/></symbol>
+  <symbol id="wss-klok" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2.1"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="wss-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+</svg>
+
+<section class="sectie donker"><div class="rail">
+
+  {%- assign heeft_zeker = false -%}
+  {%- for block in section.blocks -%}{%- if block.type == 'zekerheid' -%}{%- assign heeft_zeker = true -%}{%- endif -%}{%- endfor -%}
+  {%- if heeft_zeker -%}
+    <div class="zekerstrook">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'zekerheid' -%}
+          <div {{ block.shopify_attributes }}>
+            <span class="zeker-ico"><svg viewBox="0 0 24 24"><use href="#wss-{{ block.settings.icoon }}"/></svg></span>
+            <div class="zeker-tekst"><b>{{ block.settings.kop }}</b><span>{{ block.settings.tekst }}</span></div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+
+  {%- assign heeft_vragen = false -%}
+  {%- for block in section.blocks -%}{%- if block.type == 'vraag' -%}{%- assign heeft_vragen = true -%}{%- endif -%}{%- endfor -%}
+  {%- if heeft_vragen -%}
+    <div class="slotfaq">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}<p class="eyebrow on-dark">{{ section.settings.eyebrow }}</p>{%- endif -%}
+        <h2 class="duo on-dark" style="font-size:clamp(24px,2.3cqw,34px);margin:8px 0 12px">{{ section.settings.h2_1 }}<span class="b">{{ section.settings.h2_2 }}</span></h2>
+        {%- if section.settings.mail_regel != blank -%}
+          <p class="lead on-dark" style="font-size:14px">{{ section.settings.mail_regel }}</p>
+        {%- endif -%}
+      </div>
+      <div class="vraaglijst">
+        {%- assign teller = 0 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'vraag' -%}
+            {%- assign teller = teller | plus: 1 -%}
+            {%- assign paneel = 'wsc-faq-' | append: section.id | append: '-' | append: teller -%}
+            <div class="vitem{% if teller == 1 %} open{% endif %}" {{ block.shopify_attributes }}>
+              <button type="button" class="vknop" aria-expanded="{% if teller == 1 %}true{% else %}false{% endif %}" aria-controls="{{ paneel }}">
+                {{ block.settings.vraag }}<svg viewBox="0 0 24 24"><use href="#wss-plus"/></svg>
+              </button>
+              <div class="vantwoord" id="{{ paneel }}">{{ block.settings.antwoord }}</div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- assign heeft_zones = false -%}
+  {%- for block in section.blocks -%}{%- if block.type == 'zone' -%}{%- assign heeft_zones = true -%}{%- endif -%}{%- endfor -%}
+  {%- if heeft_zones -%}
+    <div style="margin-top:40px;padding-top:30px;border-top:1px solid rgba(255,255,255,.12)">
+      {%- if section.settings.zones_eyebrow != blank -%}
+        <p class="eyebrow on-dark">{{ section.settings.zones_eyebrow }}</p>
+      {%- endif -%}
+      <div class="zonekaarten" style="margin:16px 0 0">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'zone' -%}
+            <a class="zk" href="{{ block.settings.url | default: '#' }}" {{ block.shopify_attributes }}>
+              <b>{{ block.settings.naam }}</b>
+              <span>{{ block.settings.tekst }}</span>
+              <em>{{ block.settings.slot }}</em>
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+</div></section>
+</div>
+
+{%- comment -%}
+  FAQ-markup bij de vragen die hierboven al zichtbaar op de pagina staan —
+  structured data mag nooit iets beschrijven wat de bezoeker niet ziet.
+
+  Eerlijk over wat dit oplevert: sinds 2023 toont Google de uitklapbare
+  FAQ-resultaten alleen nog voor overheids- en gezondheidssites, dus een
+  webshop krijgt die niet. Het blijft wel geldige markup die helpt bij het
+  begrijpen van de pagina en die in AI-antwoorden wordt gebruikt. Het kost
+  niets en het staat er correct; verwacht er alleen geen sterretjes van.
+{%- endcomment -%}
+{%- capture faq_items -%}
+  {%- assign faq_n = 0 -%}
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'vraag' and block.settings.vraag != blank and block.settings.antwoord != blank -%}
+      {%- assign faq_n = faq_n | plus: 1 -%}
+      {%- unless faq_n == 1 -%},{%- endunless -%}
+      {
+        "@type": "Question",
+        "name": {{ block.settings.vraag | strip_html | json }},
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": {{ block.settings.antwoord | strip_html | strip | json }}
+        }
+      }
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- if faq_items != blank -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [{{ faq_items }}]
+  }
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "WS · Collectie slot",
+  "tag": "section",
+  "class": "ws-collectie-slot",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "header", "content": "Vragen" },
+    { "type": "text", "id": "eyebrow", "label": "Bovenregel", "default": "Vragen over deze zone" },
+    { "type": "text", "id": "h2_1", "label": "Kop, eerste regel", "default": "Alles wat je" },
+    { "type": "text", "id": "h2_2", "label": "Kop, tweede regel (goud)", "default": "wilt weten." },
+    { "type": "richtext", "id": "mail_regel", "label": "Regel eronder", "default": "<p>Staat je vraag er niet bij? Mail <b>contact@wellshave.com</b> — je krijgt antwoord van iemand uit het team, binnen één werkdag.</p>" },
+    { "type": "header", "content": "Andere zones" },
+    { "type": "text", "id": "zones_eyebrow", "label": "Bovenregel", "default": "Andere plek in gedachten?" },
+    { "type": "header", "content": "Indent settings" },
+    { "type": "range", "id": "desk_indent_top", "label": "Indent top (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "desk_indent_bottom", "label": "Indent bottom (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_top", "label": "Indent top (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_bottom", "label": "Indent bottom (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "blocks": [
+    {
+      "type": "zekerheid",
+      "name": "Zekerheid",
+      "limit": 4,
+      "settings": [
+        { "type": "select", "id": "icoon", "label": "Icoon", "options": [
+            { "value": "retour", "label": "Retour" },
+            { "value": "schild", "label": "Garantie" },
+            { "value": "truck", "label": "Verzending" },
+            { "value": "klok", "label": "Bezorgtijd" }
+          ], "default": "retour" },
+        { "type": "text", "id": "kop", "label": "Kop" },
+        { "type": "text", "id": "tekst", "label": "Regel eronder" }
+      ]
+    },
+    {
+      "type": "vraag",
+      "name": "Vraag",
+      "limit": 8,
+      "settings": [
+        { "type": "text", "id": "vraag", "label": "Vraag", "info": "Stel de vraag zoals de bezoeker hem stelt." },
+        { "type": "richtext", "id": "antwoord", "label": "Antwoord" }
+      ]
+    },
+    {
+      "type": "zone",
+      "name": "Andere zone",
+      "limit": 5,
+      "settings": [
+        { "type": "text", "id": "naam", "label": "Naam" },
+        { "type": "text", "id": "tekst", "label": "Eén regel" },
+        { "type": "text", "id": "slot", "label": "Onderregel", "default": "4 apparaten →" },
+        { "type": "url", "id": "url", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "WS · Collectie slot" }]
+}
+{% endschema %}

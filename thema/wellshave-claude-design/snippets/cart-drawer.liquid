@@ -1,0 +1,338 @@
+{{ 'cart-drawer.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  assign cart_total = cart.total_price
+
+  assign enable_upsell = settings.enable_upsell
+  assign has_upsell_products = false
+  assign rendered_upsell_products = ''
+
+  for item in cart.items
+    if item.product.metafields.custom.cart_upsell.value != blank
+      for upsell_product in item.product.metafields.custom.cart_upsell.value
+        if upsell_product.available
+          assign has_upsell_products = true  
+          break
+        endif
+      endfor
+    endif
+  endfor
+
+  unless has_upsell_products 
+    assign enable_upsell = false
+  endunless
+
+  assign enable_protection = settings.enable_protection
+
+  for item in cart.items
+    if item.product.id == settings.protection_product.id
+      assign enable_protection = false
+    endif
+  endfor
+
+  # Het subtotaal is wat de klant afrekent, punt. Hier stond een aftrek van de
+  # cadeauregels, in de veronderstelling dat een cadeau altijd gratis is. Wijst een
+  # cadeautier per ongeluk naar het gewone verkoopproduct in plaats van naar zijn
+  # cadeau-tweeling van nul euro, dan is die regel niet gratis en rekende dit het
+  # verschil stilletjes weg: de lade toonde 104,90 terwijl de checkout 134,85 rekende.
+  # Met een cadeauproduct van nul euro geeft cart.total_price exact hetzelfde getal,
+  # en anders het eerlijke getal. Zie LEESMIJ, ronde 22-09.
+  assign display_subtotal = cart.total_price
+%}
+
+<cart-drawer 
+  class="cart-drawer" 
+  data-count="{{ cart.item_count }}"
+  data-action="close"
+  data-drawer-js
+>
+  <div class="cart-drawer__inner">
+    <button type="button" class="cart-drawer__close" data-action="close">
+      {{- 'icon-close.svg' | inline_asset_content -}}
+    </button>
+
+    <div class="cart-drawer__content">
+      <div class="cart-drawer__header">
+        <h2 class="cart-drawer__title h4">
+          <span>{{ 'cart_drawer.title' | t }}</span>
+          <span class="body-large" cart-count>({{ cart.item_count }})</span>
+        </h2>
+  
+        {%- render 'cart-rewards-bar' -%}
+      </div>
+
+      <div js-content-items>
+        {%- if cart.empty? -%}
+          <div class="cart-drawer__empty-block">
+            {{- 'icon-empty-cart.svg' | inline_asset_content -}}
+            <h4 class="h4">{{ 'cart_drawer.empty_title' | t }}</h4>
+            <a href="{{ routes.all_products_collection_url }}" class="button">
+              {{ 'cart_drawer.empty_button_label' | t }}
+            </a>
+          </div>
+        {%- else -%}
+          <div class="cart-drawer__content-inner">
+            <form 
+              action="{{ routes.cart_url }}"
+              id="CartDrawer-Form" 
+              class="cart-drawer__items" 
+              method="post"
+            >
+              {% for item in cart.items %}
+                <div class="cart-drawer__item" data-item="{{ forloop.index }}" data-key="{{ item.key }}" data-variant="{{ item.variant.id }}">
+                  <a href="{{ item.variant.url }}" class="cart-drawer__media">
+                    {%- if item.image != blank -%}
+                      {{- item.image | image_url: width: 200 | image_tag -}}
+                    {%- else -%}
+                      {{ 'product-apparel-1' | placeholder_svg_tag }}
+                    {%- endif -%}
+                  </a>
+    
+                  <div class="cart-drawer__item-content">
+                    <div class="cart-drawer__item-info">
+                      <div class="cart-drawer__headings">
+                        <p class="cart-drawer__item-title body-lg">{{ item.product.title }}</p>
+                        <p class="cart-drawer__price body-lg">
+                          {%- if item.final_line_price != item.original_line_price -%}
+                            <span>
+                              {%- render 'price-formated', price: item.final_line_price -%}  
+                            </span>
+                            <span class="cart-drawer__price--compare">
+                              {%- render 'price-formated', price: item.original_line_price -%}
+                            </span>
+                          {%- else -%}  
+                            <span>
+                              {%- render 'price-formated', price: item.final_line_price -%}  
+                            </span>
+                          {%- endif -%}
+                        </p>
+    
+                        <div class="cart-drawer__options">
+                          {%- if item.product.has_only_default_variant == false and item.product.gift_card? == false -%}
+                            {%- for option in item.options_with_values -%}
+                              <p class="body-sm">{{ option.value }}</p>
+                            {%- endfor -%}
+                          {%- endif -%}
+        
+                          {%- for property in item.properties -%}
+                            {%- assign property_first_char = property.first | slice: 0 -%}
+                            {%- if property.last != blank and property_first_char != '_' -%}
+                              <p class="body-sm">{{ property.last }}</p>
+                            {%- endif -%}
+                          {%- endfor -%}
+                        </div>
+
+                        <p class="cart-drawer__notification body-md" item-notification></p>
+                      </div>
+
+                      <div class="cart-drawer__item-controls">
+                        {%- unless item.properties._gift_tier -%}
+                          <div class="cart-drawer__quantity">
+                            <button
+                              type="button"
+                              class="cart-drawer__quantity-control body-ld"
+                              name="cart-quantity-decrease"
+                              data-action="decrease-quantity"
+                              {% if item.quantity == 1 %}
+                                disabled
+                              {% endif %}
+                            >-</button>
+                            <div class="cart-drawer__quantity-input-wrapper">
+                              <input type="number" name="quantity" value="{{ item.quantity }}" />
+                              <span class="cart-drawer__loading">
+                                {{- 'icon-loading.svg' | inline_asset_content -}}
+                              </span>
+                            </div>
+                            <button
+                              type="button"
+                              class="cart-drawer__quantity-control body-lg"
+                              name="cart-quantity-increase"
+                              data-action="increase-quantity"
+                            >+</button>
+                          </div>
+
+                          <button type="button" class="cart-drawer__remove" data-action="remove-item">
+                            {{ 'cart_drawer.remove_button' | t }}
+                          </button>
+                        {%- else -%}
+                          {%- comment -%}
+                            "Gratis cadeau" alleen zeggen als de regel ook werkelijk nul
+                            euro is. Kost hij geld, dan klopt de instelling niet en is
+                            zwijgen beter dan een onjuiste belofte naast een prijs.
+                          {%- endcomment -%}
+                          {%- if item.final_line_price == 0 -%}
+                            <p class="body-sm">{{ 'cart_drawer.gift_tag' | t }}</p>
+                          {%- endif -%}
+                        {%- endunless -%}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </form>
+    
+            {%- if enable_protection -%}
+              <div class="cart-drawer__protection">
+                <div class="cart-drawer__protection-headings">
+                  <p class="cart-drawer__protection-title body-lg">{{ settings.protection_title }}</p>
+                  <p class="cart-drawer__protection-subtitle body-md">{{ settings.protection_subtitle }}</p>
+                </div>
+
+                <button
+                  type="button"
+                  class="cart-drawer__protection-add button"
+                  data-action="add-product"
+                  data-variant="{{ settings.protection_product.selected_or_first_available_variant.id }}"
+                >
+                  <span>{{ 'cart_drawer.add_button' | t }}</span>
+                  {% render 'price-formated', price: settings.protection_product.price %}
+                </button>
+              </div>
+            {%- endif -%}
+  
+            {%- if enable_upsell -%}
+              <div class="cart-drawer__upsell">
+                <p class="cart-drawer__upsell-title body-lg">{{ settings.upsell_title }}</p>
+                
+                <slider-component>
+                  <ul id="Slider-CartDrawerUpsell" class="cart-drawer__upsell-list">
+                    {%- for item in cart.items -%}
+                      {%- if item.product.metafields.custom.cart_upsell.value != blank -%}
+                        {%- for upsell_product in item.product.metafields.custom.cart_upsell.value -%}
+                          {%- unless rendered_upsell_products contains upsell_product.id -%}
+                            {%- if upsell_product.available -%}
+                              {%- assign rendered_upsell_products = rendered_upsell_products | append: upsell_product.id | append: ',' -%}
+                              {% assign upsell_product_variant = upsell_product.selected_or_first_available_variant %}
+                              <li id="Slide-CartDrawerUpsell" class="cart-drawer__upsell-item">
+                                <div class="cart-drawer__upsell-media">
+                                  {%- if upsell_product.featured_image != blank -%}
+                                    {{ upsell_product.featured_image | image_url: width: 120 | image_tag }}
+                                  {%- else -%}
+                                    {{ 'product-apparel-1' | placeholder_svg_tag }}
+                                  {%- endif -%}
+                                </div>
+                                <div class="cart-drawer__upsell-content">
+                                  <div class="cart-drawer__upsell-headings">
+                                    <p class="cart-drawer__upsell-item-title body-md">{{ upsell_product.title }}</p>
+                                    <p class="cart-drawer__upsell-price body-md">
+                                      <span>
+                                        {%- render 'price-formated', price: upsell_product_variant.price -%}  
+                                      </span>
+                                      {%- if upsell_product_variant.compare_at_price > upsell_product_variant.price -%}
+                                        {%- assign upsell_savings = upsell_product_variant.compare_at_price | minus: upsell_product_variant.price | times: 100.0 | divided_by: upsell_product_variant.compare_at_price | round -%}
+                                        <span class="cart-drawer__upsell-price-compare">
+                                          {%- render 'price-formated', price: upsell_product_variant.compare_at_price -%}
+                                        </span>
+                                        <span class="cart-drawer__upsell-price-savings">
+                                          {{- 'cart_drawer.price_off' | t: value: upsell_savings -}}
+                                        </span>
+                                      {%- endif -%}
+                                    </p>
+                                  </div>
+                                  <button 
+                                    type="button"
+                                    class="cart-drawer__upsell-button button"
+                                    data-action="add-product"
+                                    data-variant="{{ upsell_product_variant.id }}"
+                                  >
+                                    {{ 'icon-plus.svg' | inline_asset_content }}
+                                    <span>{{ 'cart_drawer.add_button' | t }}</span>
+                                  </button>
+                                </div>
+                              </li>
+                            {%- endif -%}
+                          {%- endunless -%}
+                        {%- endfor -%}
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </ul>
+                </slider-component>
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="cart-drawer__bottom">
+      <div class="cart-drawer__bottom-content" js-content-footer>
+        <div class="cart-drawer__bottom-headings">
+          <p class="cart-drawer__subtotal h4">
+            <span>{{ 'cart_drawer.subtotal_title' | t }}</span>
+            <span>{%- render 'price-formated', price: display_subtotal -%}</span>
+          </p>
+        </div>
+  
+        <div class="cart-drawer__submit button" data-action="to-checkout">
+          <span>{{ 'cart_drawer.checkout_button_label' | t }}</span>
+        </div>
+
+        {%- if settings.enable_benefits -%}
+          <div class="cart-drawer__benefits">
+            {%- if settings.cart_benefit_1_label != blank -%}
+              <div class="cart-drawer__benefit">
+                {%- if settings.cart_benefit_1_icon != blank -%}
+                  <div class="cart-drawer__benefit-icon">
+                    {{ settings.cart_benefit_1_icon | image_url: width: 100 | image_tag }}
+                  </div>
+                {%- endif -%}
+                <p class="body-sm">{{ settings.cart_benefit_1_label }}</p>
+              </div>
+            {%- endif -%}
+            {%- if settings.cart_benefit_2_label != blank -%}
+              <div class="cart-drawer__benefit">
+                {%- if settings.cart_benefit_2_icon != blank -%}
+                  <div class="cart-drawer__benefit-icon">
+                    {{ settings.cart_benefit_2_icon | image_url: width: 100 | image_tag }}
+                  </div>
+                {%- endif -%}
+                <p class="body-sm">{{ settings.cart_benefit_2_label }}</p>
+              </div>
+            {%- endif -%}
+            {%- if settings.cart_benefit_3_label != blank -%}
+              <div class="cart-drawer__benefit">
+                {%- if settings.cart_benefit_3_icon != blank -%}
+                  <div class="cart-drawer__benefit-icon">
+                    {{ settings.cart_benefit_3_icon | image_url: width: 100 | image_tag }}
+                  </div>
+                {%- endif -%}
+                <p class="body-sm">{{ settings.cart_benefit_3_label }}</p>
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        <div 
+          class="cart-drawer__trustpilot trustpilot-widget" 
+          data-locale="nl-NL" 
+          data-template-id="5419b732fbfb950b10de65e5" 
+          data-businessunit-id="63c511d4e1339e2200c204a1" 
+          data-style-height="24px" 
+          data-style-width="100%" 
+          data-token="fdcc698c-6c21-433a-8e7e-d0e574f3c069"
+        ></div>
+      </div>
+    </div>
+
+    {%- if settings.enable_cart_featured and settings.cart_featured_products != blank -%}
+      <slider-component class="cart-drawer__featured">
+        {%- if settings.cart_featured_title != blank -%}
+          <h2 class="cart-drawer__featured-title body-lg">{{ settings.cart_featured_title }}</h2>
+        {%- endif -%}
+
+        <ul id="Slider-CartFeatured" class="cart-drawer__featured-list">
+          {%- for featured_product in settings.cart_featured_products limit: 4 -%}
+            <li 
+              id="Slide-CartFeature-{{ forloop.index }}" 
+              class="cart-drawer__featured-item"
+            >
+              {% render 'product-card', product_card: featured_product, card_size: "small" %}
+            </li>
+          {%- endfor -%}
+        </ul>
+
+        <div class="cart-drawer__featured-pagination" slider-pagination></div>
+      </slider-component>
+    {%- endif -%}
+  </div>
+</cart-drawer>

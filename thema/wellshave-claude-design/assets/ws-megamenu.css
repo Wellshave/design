@@ -1,0 +1,1141 @@
+/* Wellshave — megamenu onder SHOP, in drie kolommen:
+     1. shop op zone   — vier tegels met ondertitel + "bekijk alle zones"
+     2. shop op type   — compacte regels + één uitgelichte kaart (bundels)
+     3. promo's        — twee donkere kaarten
+
+   Hoort bij sections/header.liquid en snippets/ws-megamenu-tegel.liquid.
+   Staat los van header.css: de basisstijlen van het thema raken we niet aan.
+   Het paneel zelf (positie, achtergrond, openklappen) blijft van header.css;
+   alles binnen .wsmm is van dit bestand. */
+
+.wsmm,
+.wsmm-mob {
+  --mm-ink: #111111;
+  --mm-grijs: rgba(17, 17, 17, 0.54);
+  --mm-lijn: rgba(17, 17, 17, 0.09);
+  --mm-lijn-sterk: rgba(17, 17, 17, 0.14);
+  --mm-brons: #bc813e;
+  --mm-goud: #f5d18a;
+  --mm-zand: #f7efe0;
+  --mm-carbon: #191816;
+  --mm-grad-goud: linear-gradient(135deg, #f5d18a 0%, #bc813e 100%);
+  font-family: inherit;
+  color: var(--mm-ink);
+}
+
+/* ── raamwerk ─────────────────────────────────────────────── */
+
+/* Het basispaneel houdt 56 px lucht boven en onder. Met de inhoud in drie
+   kolommen is dat te veel: op een 720p-scherm zou het paneel dan net moeten
+   scrollen. 40 px laat het geheel er in één keer op. Alleen voor dit menu;
+   :has zorgt dat een paneel zonder .wsmm zijn eigen maat houdt. */
+.header__megamenu:has(.wsmm) {
+  padding: 40px 0;
+}
+
+
+.wsmm {
+  display: grid;
+  grid-template-columns: minmax(0, 1.06fr) minmax(0, 0.92fr) 336px;
+  gap: 34px;
+  align-items: stretch;
+}
+
+.wsmm-kol {
+  min-width: 0;
+}
+
+.wsmm-kol--type,
+.wsmm-kol--promo {
+  padding-left: 34px;
+  border-left: 1px solid var(--mm-lijn);
+  margin-left: -34px;
+}
+
+.wsmm-kop {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 14px;
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mm-grijs);
+}
+
+.wsmm-kop svg {
+  width: 15px;
+  height: 15px;
+  flex: none;
+  color: var(--mm-brons);
+}
+
+.wsmm-lijst {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+/* ── kolom 1: zones ───────────────────────────────────────── */
+
+.wsmm-zone {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 15px;
+  align-items: center;
+  gap: 13px;
+  padding: 13px;
+  border: 1px solid var(--mm-lijn);
+  border-radius: 14px;
+  background-color: #ffffff;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.18s, box-shadow 0.18s, transform 0.18s;
+}
+
+.wsmm-zone-ico {
+  width: 44px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wsmm-zone-ico img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.wsmm-zone-tekst {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.wsmm-naam {
+  font-size: 14.5px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+}
+
+.wsmm-sub {
+  font-size: 12px;
+  line-height: 1.3;
+  color: var(--mm-grijs);
+}
+
+.wsmm-pijl {
+  width: 15px;
+  height: 15px;
+  flex: none;
+  color: rgba(17, 17, 17, 0.3);
+  transition: color 0.18s, transform 0.18s;
+}
+
+.wsmm-zone.is-licht {
+  background-image: linear-gradient(135deg, #f9f2e5 0%, #f1e2c6 100%);
+  background-color: var(--mm-zand);
+  border-color: rgba(188, 129, 62, 0.34);
+}
+
+.wsmm-zone.is-licht .wsmm-sub {
+  color: rgba(17, 17, 17, 0.62);
+}
+
+.wsmm-zone.is-licht .wsmm-pijl {
+  color: var(--mm-brons);
+}
+
+/* "bekijk alle zones" — geen tegel, want het is geen zone maar de uitweg */
+.wsmm-alles {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 2px 0;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--mm-brons);
+  transition: gap 0.18s;
+}
+
+.wsmm-alles svg {
+  width: 15px;
+  height: 15px;
+  flex: none;
+}
+
+/* ── kolom 2: types ───────────────────────────────────────── */
+
+.wsmm-type {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) 14px;
+  align-items: center;
+  gap: 12px;
+  padding: 5px 9px;
+  border: 1px solid transparent;
+  border-radius: 11px;
+  text-decoration: none;
+  color: inherit;
+  transition: background-color 0.18s, border-color 0.18s;
+}
+
+.wsmm-type .wsmm-naam {
+  font-size: 13.5px;
+  font-weight: 500;
+}
+
+.wsmm-type-ico {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--mm-lijn-sterk);
+  border-radius: 50%;
+  color: var(--mm-ink);
+  transition: border-color 0.18s, color 0.18s;
+}
+
+.wsmm-type-ico svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* de typelijst staat dichter op elkaar dan de zonetegels */
+.wsmm-kol--type .wsmm-lijst {
+  gap: 2px;
+}
+
+.wsmm-type .wsmm-pijl {
+  width: 14px;
+  height: 14px;
+  opacity: 0;
+  transition: opacity 0.18s, color 0.18s;
+}
+
+/* de uitgelichte kaart onderaan de typekolom */
+.wsmm-uit {
+  position: relative;
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr) 15px;
+  align-items: center;
+  gap: 13px;
+  margin-top: 35px;
+  padding: 13px;
+  border: 1px solid rgba(188, 129, 62, 0.34);
+  border-radius: 14px;
+  background-image: linear-gradient(135deg, #f9f2e5 0%, #f1e2c6 100%);
+  background-color: var(--mm-zand);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.18s, box-shadow 0.18s;
+}
+
+.wsmm-uit-ico {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background-color: #ffffff;
+  color: var(--mm-brons);
+}
+
+.wsmm-uit-ico svg {
+  width: 20px;
+  height: 20px;
+}
+
+.wsmm-uit .wsmm-pijl {
+  color: var(--mm-brons);
+}
+
+.wsmm-uit-kop {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.wsmm-badge {
+  padding: 3px 7px;
+  border-radius: 999px;
+  background-image: var(--mm-grad-goud);
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #2a2118;
+  white-space: nowrap;
+}
+
+/* De streep die de kaart van de lijst scheidt hoort bij de kaart zelf.
+   Een leeg <div> werkt hier niet: het thema heeft een globale regel
+   div:empty{display:none}, en die is specifieker (0,1,1) dan een losse
+   klasse (0,1,0), dus hij wint ongeacht de volgorde. */
+.wsmm-uit::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -18px;
+  height: 1px;
+  background-color: var(--mm-lijn);
+}
+
+/* ── kolom 3: promo's ─────────────────────────────────────── */
+
+.wsmm-kol--promo {
+  display: grid;
+  gap: 14px;
+}
+
+.wsmm-promo {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 16px;
+  background-color: var(--mm-carbon);
+  background-image: linear-gradient(158deg, #000000 0%, #0c0b0a 38%, #211f1d 100%);
+  color: #ffffff;
+  text-decoration: none;
+  isolation: isolate;
+}
+
+.wsmm-promo-beeld {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+.wsmm-promo-beeld img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.62;
+}
+
+.wsmm-promo-beeld::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(180deg, rgba(10, 9, 8, 0.18) 0%, rgba(10, 9, 8, 0.86) 70%);
+}
+
+.wsmm-promo-inhoud {
+  position: relative;
+  padding: 18px 18px 17px;
+  display: grid;
+  gap: 6px;
+  align-content: end;
+}
+
+.wsmm-promo--groot .wsmm-promo-inhoud {
+  min-height: 208px;
+}
+
+.wsmm-promo-kicker {
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--mm-goud);
+}
+
+.wsmm-promo-titel {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+}
+
+.wsmm-promo--klein .wsmm-promo-titel {
+  font-size: 17px;
+}
+
+.wsmm-promo-tekst {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.wsmm-promo-knop {
+  justify-self: start;
+  margin-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 15px;
+  border-radius: 999px;
+  background-image: var(--mm-grad-goud);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #201a12;
+  transition: gap 0.18s;
+}
+
+.wsmm-promo-knop svg {
+  width: 14px;
+  height: 14px;
+  flex: none;
+}
+
+.wsmm-promo-link {
+  margin-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--mm-goud);
+  transition: gap 0.18s;
+}
+
+.wsmm-promo-link svg {
+  width: 14px;
+  height: 14px;
+  flex: none;
+}
+
+/* ── aanwijzen ────────────────────────────────────────────── */
+
+@media (hover: hover) {
+  .wsmm-zone:hover {
+    border-color: rgba(188, 129, 62, 0.5);
+    box-shadow: 0 6px 18px rgba(17, 17, 17, 0.07);
+    transform: translateY(-1px);
+  }
+
+  .wsmm-zone:hover .wsmm-pijl,
+  .wsmm-uit:hover .wsmm-pijl {
+    color: var(--mm-brons);
+    transform: translateX(2px);
+  }
+
+  .wsmm-type:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-color: var(--mm-lijn);
+  }
+
+  .wsmm-type:hover .wsmm-type-ico {
+    border-color: rgba(188, 129, 62, 0.55);
+    color: var(--mm-brons);
+  }
+
+  .wsmm-type:hover .wsmm-pijl {
+    opacity: 1;
+    color: var(--mm-brons);
+  }
+
+  .wsmm-uit:hover {
+    border-color: rgba(188, 129, 62, 0.6);
+    box-shadow: 0 6px 18px rgba(17, 17, 17, 0.08);
+  }
+
+  .wsmm-alles:hover,
+  .wsmm-promo-knop:hover,
+  .wsmm-promo-link:hover {
+    gap: 12px;
+  }
+}
+
+.wsmm a:focus-visible,
+.wsmm-mob a:focus-visible {
+  outline: 2px solid var(--mm-brons);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wsmm *,
+  .wsmm-mob * {
+    transition: none !important;
+  }
+
+  .wsmm-zone:hover {
+    transform: none;
+  }
+}
+
+/* ── smallere schermen ────────────────────────────────────── */
+
+/* Tussen 990 en 1200 px blijven de drie kolommen staan, maar wordt de
+   promokolom smaller. Ze eronder schuiven maakte het paneel ~220 px hoger,
+   en dan moest het op een 800 px hoog scherm scrollen. Zo past het overal
+   in één beeld. Onder 990 px toont het thema dit paneel niet; daar geldt
+   de mobiele lade. */
+@media screen and (max-width: 1199px) {
+  .wsmm {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.78fr) 258px;
+    gap: 26px;
+  }
+
+  .wsmm-kol--type,
+  .wsmm-kol--promo {
+    padding-left: 26px;
+    margin-left: -26px;
+  }
+
+  .wsmm-promo--groot .wsmm-promo-inhoud {
+    min-height: 176px;
+  }
+
+  .wsmm-promo-titel {
+    font-size: 19px;
+  }
+
+  .wsmm-promo--klein .wsmm-promo-titel {
+    font-size: 16px;
+  }
+
+  /* De naam en het gouden label horen op één regel. In deze band scheelt
+     dat maar een paar pixels, dus haalt de kaart wat ruimte terug uit het
+     icoon en de tussenruimtes, en wordt het label iets kleiner. */
+  .wsmm-uit {
+    grid-template-columns: 34px minmax(0, 1fr) 14px;
+    gap: 11px;
+    padding: 12px;
+  }
+
+  .wsmm-uit-ico {
+    width: 34px;
+    height: 34px;
+  }
+
+  .wsmm-badge {
+    padding: 3px 6px;
+    font-size: 8.5px;
+    letter-spacing: 0.06em;
+  }
+}
+
+/* ── mobiele lade ─────────────────────────────────────────── */
+
+.wsmm-mob {
+  display: grid;
+  gap: 6px;
+}
+
+.wsmm-mob .wsmm-kop {
+  margin: 14px 0 8px;
+}
+
+.wsmm-mob .wsmm-kop:first-child {
+  margin-top: 4px;
+}
+
+.wsmm-mob .wsmm-lijst {
+  gap: 7px;
+}
+
+.wsmm-mob .wsmm-zone {
+  padding: 10px 12px;
+  border-radius: 13px;
+}
+
+.wsmm-mob .wsmm-alles {
+  margin-top: 12px;
+}
+
+.wsmm-mob .wsmm-type {
+  padding: 6px 8px;
+  border-color: var(--mm-lijn);
+  background-color: #ffffff;
+}
+
+.wsmm-mob .wsmm-type .wsmm-pijl {
+  opacity: 1;
+}
+
+/* ══ De mobiele lade ═══════════════════════════════════════════════
+   Het ontwerp maakt van de lade een volledig scherm met een eigen zwarte
+   kop, in plaats van een paneel dat 120 px onder de bovenkant begint.
+   Alles hieronder hoort bij sections/header.liquid; header.css van het
+   basisthema blijft ongemoeid. De :has-haakjes zorgen dat een lade zónder
+   deze opbouw zijn oude maten houdt. */
+
+.wsl-kop,
+.wsl-actie,
+.wsl-lijst,
+.wsl-subkop,
+.wsl-hulp,
+.wsl-belofte {
+  --mm-ink: #111111;
+  --mm-grijs: rgba(17, 17, 17, 0.54);
+  --mm-lijn: rgba(17, 17, 17, 0.09);
+  --mm-brons: #bc813e;
+  --mm-goud: #f5d18a;
+  --mm-zand: #f7efe0;
+  --mm-grad-goud: linear-gradient(135deg, #f5d18a 0%, #bc813e 100%);
+  color: var(--mm-ink);
+}
+
+.header__mobile-inner:has(.wsl-kop) {
+  height: 100dvh;
+  max-width: none;
+  margin-top: 0;
+  border-radius: 0;
+}
+
+/* de losse ronde sluitknop onder de lade vervalt; er zit er nu een in de kop */
+.header__mobile:has(.wsl-kop) .header__mobile-close {
+  display: none;
+}
+
+/* ── zwarte kop ───────────────────────────────────────────────────── */
+
+.wsl-kop {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 20px;
+  background-color: #0b0a09;
+  color: #ffffff;
+}
+
+.wsl-logo {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  text-decoration: none;
+  color: inherit;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+}
+
+.wsl-logo {
+  gap: 11px;
+}
+
+.wsl-merk {
+  height: 30px;
+  width: auto;
+  flex: none;
+}
+
+.wsl-woordmerk {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #ffffff;
+}
+
+.wsl-kop-rechts {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: none;
+}
+
+.wsl-mand {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.wsl-mand svg {
+  width: 21px;
+  height: 21px;
+}
+
+.wsl-sluit {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 50%;
+  background: none;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.wsl-sluit svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ── gouden actiebalk ─────────────────────────────────────────────── */
+
+.wsl-actie {
+  flex: none;
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr) 20px;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 20px;
+  background-image: var(--mm-grad-goud);
+  text-decoration: none;
+  color: #241c12;
+}
+
+.wsl-actie-ico {
+  width: 24px;
+  height: 24px;
+}
+
+.wsl-actie-tekst {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.wsl-actie-pijl {
+  width: 20px;
+  height: 20px;
+}
+
+/* ── de menuregels ────────────────────────────────────────────────── */
+
+.header__mobile-menu.wsl-lijst {
+  padding: 0;
+  gap: 0;
+}
+
+.wsl-lijst > li {
+  border-bottom: 1px solid var(--mm-lijn);
+}
+
+.wsl-lijst > li:last-child {
+  border-bottom: 0;
+}
+
+.header__mobile-item.wsl-rij {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) auto 20px;
+  align-items: center;
+  gap: 16px;
+  margin: 0;
+  padding: 18px 20px;
+  font-size: inherit;
+  letter-spacing: normal;
+}
+
+.wsl-rij.is-licht {
+  background-color: var(--mm-zand);
+}
+
+.wsl-ico {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  color: var(--mm-brons);
+}
+
+.wsl-ico svg {
+  width: 28px;
+  height: 28px;
+}
+
+.wsl-tekst {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.wsl-naam {
+  font-size: 18.5px;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+}
+
+.wsl-sub {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--mm-grijs);
+}
+
+.wsl-sub.is-goud {
+  color: var(--mm-brons);
+  font-weight: 600;
+}
+
+.wsl-badge {
+  justify-self: end;
+  padding: 5px 9px;
+  border-radius: 999px;
+  background-image: var(--mm-grad-goud);
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #2a2118;
+  white-space: nowrap;
+}
+
+/* Het thema kleurt elke svg in een menuregel grijs
+   (.header__mobile-item svg{color:var(--black-40)}). Die regel is specifieker
+   dan overerving, dus het pictogram moet zijn kleur hier terugpakken. */
+.wsl-rij .wsl-ico svg {
+  color: inherit;
+}
+
+.wsl-rij .wsl-chevron {
+  grid-column: 4;
+  width: 20px;
+  height: 20px;
+  color: rgba(17, 17, 17, 0.42);
+}
+
+/* een regel zonder pictogram houdt dezelfde inspringing als de rest */
+.wsl-rij:not(:has(.wsl-ico)) .wsl-tekst {
+  grid-column: 1 / 3;
+}
+
+.wsl-los {
+  padding: 22px 20px 6px;
+}
+
+/* ── de keuzehulpkaart ────────────────────────────────────────────── */
+
+.wsl-hulp {
+  display: grid;
+  grid-template-columns: 46px minmax(0, 1fr);
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  border-radius: 16px;
+  background-image: linear-gradient(158deg, #000000 0%, #0c0b0a 38%, #211f1d 100%);
+  background-color: #0b0a09;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.wsl-hulp-ico {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  color: var(--mm-goud);
+}
+
+.wsl-hulp-ico svg {
+  width: 34px;
+  height: 34px;
+}
+
+.wsl-hulp-tekst {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+
+.wsl-hulp-kop {
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.wsl-hulp-sub {
+  font-size: 13px;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.wsl-hulp-link {
+  grid-column: 1 / -1;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 4px;
+  font-size: 11.5px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mm-goud);
+}
+
+.wsl-hulp-link svg {
+  width: 16px;
+  height: 16px;
+  flex: none;
+}
+
+.wsl-hulp.is-compact {
+  grid-template-columns: 44px minmax(0, 1fr) 46px;
+  padding: 14px 16px;
+}
+
+.wsl-hulp.is-compact .wsl-hulp-ico {
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(245, 209, 138, 0.45);
+  border-radius: 50%;
+}
+
+.wsl-hulp.is-compact .wsl-hulp-ico svg {
+  width: 24px;
+  height: 24px;
+}
+
+.wsl-hulp.is-compact .wsl-hulp-kop {
+  font-size: 16px;
+}
+
+.wsl-hulp-knop {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background-image: var(--mm-grad-goud);
+  color: #241c12;
+}
+
+.wsl-hulp-knop svg {
+  width: 21px;
+  height: 21px;
+}
+
+/* ── onderrand ────────────────────────────────────────────────────── */
+
+.header__mobile-bottom:has(.wsl-belofte) {
+  gap: 14px;
+  padding: 20px 20px 22px;
+}
+
+.wsl-belofte {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--mm-lijn);
+  width: 100%;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--mm-ink);
+}
+
+.wsl-belofte svg {
+  width: 21px;
+  height: 21px;
+  flex: none;
+  color: var(--mm-brons);
+}
+
+/* ── kop van het submenu ──────────────────────────────────────────── */
+
+.header__mobile-megamenu:has(.wsl-subkop) {
+  padding: 0;
+  gap: 0;
+}
+
+.wsl-subkop {
+  flex: none;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  border-bottom: 1px solid rgba(188, 129, 62, 0.55);
+  background-color: #0b0a09;
+  color: #ffffff;
+}
+
+.wsl-terug {
+  justify-self: start;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.wsl-terug svg {
+  width: 20px;
+  height: 20px;
+  flex: none;
+}
+
+.wsl-subkop-naam {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.wsl-subkop .wsl-sluit {
+  justify-self: end;
+  width: 34px;
+  height: 34px;
+}
+
+.wsl-subkop .wsl-sluit svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ── het submenu zelf: twee kolommen, zoals in het ontwerp ────────── */
+
+.header__mobile-megamenu:has(.wsl-subkop) .wsmm-mob {
+  flex: 1;
+  overflow: auto;
+  padding: 20px;
+  gap: 0;
+}
+
+/* Twee kolommen alleen als de namen er echt in passen. Gemeten met het
+   themalettertype: "schaamstreek" is 83 px breed en "Scheerapparaten" 96 px.
+   Bij 360 px schermbreedte blijft er in een halve tegel 68 px over voor een
+   zone en 73 px voor een type — dan breekt het woord middenin, en dat is
+   lelijker dan een lijst onder elkaar. Vandaar twee aparte grenzen:
+   zones vanaf 400 px, types vanaf 420 px. */
+.wsmm-mob .wsmm-lijst {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+}
+
+@media screen and (min-width: 400px) {
+  .wsmm-mob .wsmm-kol--zone .wsmm-lijst,
+  .wsmm-mob .wsmm-lijst:first-of-type {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 10px;
+  }
+}
+
+@media screen and (min-width: 420px) {
+  .wsmm-mob .wsmm-lijst {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 10px;
+  }
+}
+
+/* een oneven laatste tegel neemt de hele breedte, anders blijft er een gat */
+.wsmm-mob .wsmm-lijst > li:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
+/* op een telefoon is er geen ruimte voor de ondertitel naast het icoon;
+   de naam alleen is genoeg om de zone te herkennen */
+.wsmm-mob .wsmm-zone {
+  grid-template-columns: 34px minmax(0, 1fr) 13px;
+  gap: 9px;
+  padding: 11px 10px;
+}
+
+.wsmm-mob .wsmm-zone .wsmm-sub {
+  display: none;
+}
+
+.wsmm-mob .wsmm-zone-ico {
+  width: 34px;
+  height: 32px;
+}
+
+.wsmm-mob .wsmm-naam {
+  font-size: 13.5px;
+  line-height: 1.2;
+}
+
+@media screen and (min-width: 400px) {
+  .wsmm-mob .wsmm-naam {
+    font-size: 12.5px;
+  }
+}
+
+/* In twee kolommen is de tegel smal en breken namen als "Lichaam &
+   schaamstreek" af. Een grid-item krijgt standaard min-width:auto en kan dan
+   niet krimpen onder zijn langste woord, waardoor de tekst over de chevron
+   heen loopt. Vandaar min-width:0 en afbreken binnen een woord als het moet. */
+.wsmm-mob .wsmm-naam,
+.wsmm-mob .wsmm-zone-tekst,
+.wsmm-mob .wsmm-zone-tekst > * {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.wsmm-mob .wsmm-type {
+  grid-template-columns: 30px minmax(0, 1fr) 12px;
+  gap: 9px;
+  padding: 8px 10px;
+  border-radius: 12px;
+}
+
+.wsmm-mob .wsmm-type-ico {
+  width: 30px;
+  height: 30px;
+  border-color: rgba(188, 129, 62, 0.5);
+  color: var(--mm-brons);
+}
+
+.wsmm-mob .wsmm-type-ico svg {
+  width: 17px;
+  height: 17px;
+}
+
+.wsmm-mob .wsmm-kop {
+  margin: 22px 0 10px;
+}
+
+.wsmm-mob .wsmm-alles {
+  margin: 14px 0 0;
+}
+
+/* de streep boven de bundelkaart hoort in de lade onder de "bekijk alle
+   zones"-link te staan, niet boven de kaart: daar scheidt hij de kolommen */
+.wsmm-mob .wsmm-uit {
+  margin-top: 18px;
+}
+
+.wsmm-mob .wsmm-uit::before {
+  display: none;
+}
+
+.wsmm-mob .wsmm-promo {
+  margin-bottom: 4px;
+}
+
+.wsmm-mob .wsmm-promo--klein .wsmm-promo-inhoud {
+  min-height: 132px;
+}
+
+.wsmm-mob .wsl-hulp {
+  margin-top: 16px;
+}
+
+.wsmm-mob .wsl-belofte {
+  margin-top: 16px;
+}

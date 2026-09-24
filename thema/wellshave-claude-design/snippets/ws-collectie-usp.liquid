@@ -1,0 +1,174 @@
+{%- comment -%}
+  Twee tot drie USP's onder de prijs op de productkaart.
+
+  De bron is bewust NIET het metafield custom.product_usp. Daar staan regels in
+  als "Geen sneetjes, ook in je gevoelige zones" en "voorkomt wondjes en
+  huidirritatie" — precies de belofte die we niet doen. Deze lijst komt uit
+  custom.specification: wat het apparaat aantoonbaar heeft, in twee tot vier
+  woorden, zoals de referentie het ook doet.
+
+  Aanroep:  {% render 'ws-collectie-usp', p: p, doos: doos, max: 3 %}
+  Overschrijven kan per groep met het veld "USP's" in de sectie-instellingen,
+  in dezelfde vorm als de labels:  handle = icoon|Tekst ; icoon|Tekst
+{%- endcomment -%}
+
+{%- assign u = '' -%}
+{%- case p.handle -%}
+
+  {%- comment -%} Lichaam {%- endcomment -%}
+  {%- when 'wellshave-bodygroomer-groom-guard' -%}
+    {%- assign u = 'mes|SkinSafe keramisch mes;druppel|IPX7 waterdicht;licht|LED-licht' -%}
+  {%- when 'groom-guard-pro' -%}
+    {%- assign u = 'mes|Trimmer én foil shaver;druppel|IPX7 waterdicht;motor|6.600 toeren' -%}
+  {%- when 'wellshave-flex-guard™' -%}
+    {%- assign u = 'regelaars|3 opzetstukken;druppel|IPX7 waterdicht;motor|7.000 toeren' -%}
+  {%- when 'wellshave-2-in-1-bodygroomer-mannen' -%}
+    {%- assign u = 'regelaars|Lichaam én neus;druppel|IPX7 waterdicht;motor|2 snelheden' -%}
+
+  {%- comment -%} Gezicht en baard {%- endcomment -%}
+  {%- when 'wellshave-5-in-1-baardtrimmer-men-shaper' or 'wellshave-5-in-1-baardtrimmer-man-shaper-iced' -%}
+    {%- assign u = 'regelaars|5 opzetstukken;kam|Verstelbaar 1–9 mm;druppel|IPX5 waterdicht' -%}
+  {%- when '6-in-1-baardtrimmer-supreme' -%}
+    {%- assign u = 'regelaars|6 opzetstukken;druppel|IPX7 waterdicht;licht|LED-display' -%}
+  {%- when 'the-dial-master' -%}
+    {%- assign u = 'kam|20 standen, 0,5–20 mm;druppel|IPX7 waterdicht;licht|LED-display' -%}
+  {%- when 'wellshave-edge-blade' -%}
+    {%- assign u = 'trimmer|4D-flexkop;regelaars|Gezicht én lichaam;druppel|Waterdicht' -%}
+  {%- when 'detailtrimmer-sharpline™' -%}
+    {%- assign u = 'trimmer|Zero-cut;motor|8.000 toeren;regelaars|3 opzetstukken' -%}
+
+  {%- comment -%} Scheerapparaten {%- endcomment -%}
+  {%- when 'the-sentinel-pro' -%}
+    {%- assign u = 'station|Reinigt en laadt zelf;druppel|IPX7 waterdicht;regelaars|Precisie- en neustrimmer' -%}
+  {%- when 'wellshave-scheerapparaat-elite' -%}
+    {%- assign u = 'trimmer|Roterend 3D-systeem;accu|Tot 120 min gebruik;regelaars|Neus- en sideburntrimmer' -%}
+  {%- when 'wellshave-4-in-1-scheerapparaat' -%}
+    {%- assign u = 'trimmer|Roterend systeem;druppel|IPX6 waterbestendig;regelaars|Neus- en sideburntrimmer' -%}
+  {%- when 'wellshave-blade-baron' -%}
+    {%- assign u = 'mes|Foil scheersysteem;motor|2 standen tot 8.000;doos|Reisformaat met travel lock' -%}
+  {%- when 'wellshave-5-in-1-scheerapparaat-mannen-deluxe' -%}
+    {%- assign u = 'trimmer|7D-scheerkop;motor|7.000 toeren;accu|Tot 90 min gebruik' -%}
+
+  {%- comment -%} Hoofd en tondeuses {%- endcomment -%}
+  {%- when 'wellshave-tondeuse-mannen-deluxe' -%}
+    {%- assign u = 'motor|Brushless motor;kam|6 kammen 1,5–13 mm;regelaars|Fade-hendel' -%}
+  {%- when 'wellshave-tondeuse-elegant' -%}
+    {%- assign u = 'kam|6 kammen 1,5–13 mm;regelaars|Fade-hendel;accu|Tot 240 min gebruik' -%}
+  {%- when 'wellshave-tondeuse-mannen-pro' -%}
+    {%- assign u = 'kam|6 kammen 1,5–13 mm;accu|Tot 240 min gebruik;regelaars|Voor kapper en thuis' -%}
+
+  {%- comment -%} Neus en oren {%- endcomment -%}
+  {%- when 'wellshave-neustrimmer-basic' -%}
+    {%- assign u = 'trimmer|Neus en oren;druppel|IPX5 waterbestendig;doos|Compact' -%}
+  {%- when 'wellshave-2-in-1-neustrimmer-premium' -%}
+    {%- assign u = 'regelaars|2 opzetstukken;trimmer|Neus, oor, wenkbrauw;druppel|IPX5 waterbestendig' -%}
+  {%- when 'wellshave-3-in-1-neustrimmer-advance' -%}
+    {%- assign u = 'regelaars|3 opzetstukken;trimmer|Neus, oor, wenkbrauw;druppel|IPX5 waterbestendig' -%}
+  {%- when 'wellshave-4-in-1-neustrimmer-ultimate' -%}
+    {%- assign u = 'regelaars|4 opzetstukken;trimmer|Ook lichaamshaar;druppel|IPX5 waterbestendig' -%}
+  {%- when 'neustrimmer-essential' -%}
+    {%- assign u = 'motor|7.000 toeren;trimmer|Neus, oor, wenkbrauw;accu|USB Fast Charge' -%}
+  {%- when 'neustrimmer-2in1-elite' -%}
+    {%- assign u = 'regelaars|2-in-1 met wenkbrauw;motor|8.000 toeren;accu|USB Fast Charge' -%}
+  {%- when 'neustrimmer-3in1-platinum' -%}
+    {%- assign u = 'regelaars|3-in-1 met scheerkop;motor|7.000 toeren;accu|USB Fast Charge' -%}
+  {%- when 'neustrimmer-4in1-ultra' -%}
+    {%- assign u = 'regelaars|4-in-1, ook baard;motor|7.000 toeren;accu|USB Fast Charge' -%}
+
+  {%- comment -%} Safety razors {%- endcomment -%}
+  {%- when 'wellshave-safety-razor-black' or 'wellshave-safety-razor-gold' or 'wellshave-safety-razor-matt-grey' or 'wellshave-safety-razor-rose' or 'wellshave-safety-razor-silver' -%}
+    {%- assign u = 'mes|20 Japanse mesjes erbij;trimmer|Volledig roestvrij staal;regelaars|Past op standaard mesjes' -%}
+  {%- when 'wellshave-safety-razor-blades' -%}
+    {%- assign u = 'mes|Double edge-mesjes;doos|Navulling' -%}
+
+  {%- comment -%} Sets {%- endcomment -%}
+  {%- when 'wellshave-shave-package-2-0' -%}
+    {%- assign u = 'doos|Bodygroomer en neustrimmer;mes|SkinSafe trimbladen;druppel|IPX7 waterdicht' -%}
+  {%- when 'wellshave-shave-package-3-0' -%}
+    {%- assign u = 'doos|Groom Guard en neustrimmer;station|Oplaadstation erbij;mes|Extra SkinSafe mes' -%}
+  {%- when 'shave-package-ultimate' -%}
+    {%- assign u = 'doos|Groom Guard PRO en neustrimmer;tas|Toilettas en reistas;mes|Extra SkinSafe mes' -%}
+  {%- when 'essential-flex-bundel' -%}
+    {%- assign u = 'doos|Flex Guard 3-in-1;tas|Toilettas en hard case;mes|Extra SkinSafe mes' -%}
+  {%- when 'body-beard-kit' -%}
+    {%- assign u = 'doos|Sharpline en Flex Guard;trimmer|Lijn én lichaam;regelaars|Foil shaver en neustrimmer' -%}
+  {%- when 'barber-pack-1-0' -%}
+    {%- assign u = 'doos|Tondeuse en scheerapparaat;kam|Opzetkammen erbij' -%}
+  {%- when 'barber-pack-2-0' -%}
+    {%- assign u = 'doos|Tondeuse en foil shaver;kam|Opzetkammen erbij' -%}
+  {%- when 'barber-pack-3-0' -%}
+    {%- assign u = 'doos|5 apparaten in één set;regelaars|Knippen, scheren, detail;kam|Opzetkammen erbij' -%}
+  {%- when 'barber-bro-1-0' -%}
+    {%- assign u = 'doos|Tondeuse en precisietrimmer;regelaars|Fades en contouren' -%}
+  {%- when 'barber-bro-2-0' -%}
+    {%- assign u = 'doos|Tondeuse en foil shaver;regelaars|Fades en glad afwerken' -%}
+  {%- when 'barber-bro-3-0' -%}
+    {%- assign u = 'doos|3 apparaten in één set;regelaars|Knippen, scheren, detail' -%}
+  {%- when 'skull-shaver-deluxe-extra-magnetische-scheerkop' -%}
+    {%- assign u = 'trimmer|7D-scheerkop;mes|Extra scheerkop erbij;motor|7.000 toeren' -%}
+  {%- when 'skull-deal-2-0' -%}
+    {%- assign u = 'trimmer|Flexibele scheerkoppen;mes|Extra scheerkop erbij;tas|Luxe toilettas' -%}
+  {%- when 'skull-deal-3-0' -%}
+    {%- assign u = 'trimmer|7D-scheerkop;mes|Extra scheerkop erbij;tas|Travelbag erbij' -%}
+
+  {%- comment -%} Onderdelen en tassen {%- endcomment -%}
+  {%- when 'vervanging-bodygroomer-mes' -%}
+    {%- assign u = 'mes|Keramisch vervangmes;doos|Voor Groom Guard en PRO' -%}
+  {%- when 'trio-pack-groom-guard' -%}
+    {%- assign u = 'doos|3 vervangmessen;mes|Voor Groom Guard en PRO' -%}
+  {%- when 'trio-pack' -%}
+    {%- assign u = 'doos|3 vervangmessen;mes|Voor de Flex Guard' -%}
+  {%- when 'flex-guard-blade-vervanging' -%}
+    {%- assign u = 'mes|Keramisch vervangmes;doos|Voor de Flex Guard' -%}
+  {%- when 'foil-shaver-groom-guard' -%}
+    {%- assign u = 'mes|Foil shaver opzetstuk;doos|Voor Groom Guard en PRO' -%}
+  {%- when 'wellshave-scheerkop-7d-vervanging' -%}
+    {%- assign u = 'mes|7D-vervangkop;doos|Voor de Head Shaver Deluxe' -%}
+  {%- when 'elite-scheerkop' -%}
+    {%- assign u = 'mes|Vervangkop;doos|Voor de Gentleman Shaver' -%}
+  {%- when 'vervanging-neustrimmer-opzetstuk' -%}
+    {%- assign u = 'mes|Vervangbaar opzetstuk;doos|Voor de neustrimmer' -%}
+  {%- when 'toiletry-bag' or 'toilettas-free' -%}
+    {%- assign u = 'tas|Twee vakken, dubbele rits;doos|Waterafstotend' -%}
+  {%- when 'travelbag' -%}
+    {%- assign u = 'tas|Soft travelbag;doos|Voor onderweg' -%}
+  {%- when 'wellshave-hard-case' -%}
+    {%- assign u = 'tas|Harde reiscase;doos|Beschermt je apparaat' -%}
+  {%- when 'wellshave-baardbar' -%}
+    {%- assign u = 'doos|Vangt baardhaar op;regelaars|Voor de wastafel' -%}
+{%- endcase -%}
+
+{%- comment -%} Een handmatige regel in de sectie wint van de lijst hierboven. {%- endcomment -%}
+{%- if eigen != blank -%}
+  {%- assign regels = eigen | newline_to_br | split: '<br />' -%}
+  {%- for r in regels -%}
+    {%- assign paar = r | strip | split: '=' -%}
+    {%- if paar.size == 2 -%}
+      {%- assign wie = paar[0] | strip -%}
+      {%- if wie == p.handle -%}
+        {%- assign u = paar[1] | strip -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+
+{%- comment -%}
+  Terugval: geen curatie en geen eigen regel. Dan liever niets verzinnen —
+  we tonen het aantal onderdelen als dat bekend is, anders helemaal niets.
+{%- endcomment -%}
+{%- if u == blank and doos > 0 -%}
+  {%- capture u -%}doos|{{ doos }} onderdelen in de doos{%- endcapture -%}
+{%- endif -%}
+
+{%- if u != blank -%}
+  {%- assign lijst = u | split: ';' -%}
+  {%- assign grens = max | default: 3 -%}
+  <ul class="wsk-usp">
+    {%- for item in lijst limit: grens -%}
+      {%- assign d = item | strip | split: '|' -%}
+      {%- if d.size == 2 -%}
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsr-{{ d[0] | strip }}"/></svg><span>{{ d[1] | strip }}</span></li>
+      {%- endif -%}
+    {%- endfor -%}
+  </ul>
+{%- endif -%}

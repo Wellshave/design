@@ -1,0 +1,266 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "Header",
+  "type": "header",
+  "sections": {
+    "announcement": {
+      "type": "announcement",
+      "settings": {
+        "background": "linear-gradient(270deg, rgba(188, 129, 62, 1), rgba(245, 209, 138, 1) 49.04%, rgba(188, 129, 63, 1) 100%)",
+        "color": "#262626",
+        "label": "Summer Deals tot 40%.   － <a href=\"/collections/winter-sale\" title=\"Winter Sale\"><strong>Shop nu →</strong></a>"
+      }
+    },
+    "ss_announcement_bar_slideshow_2_f9WKzJ": {
+      "type": "ss-announcement-bar-slideshow-2",
+      "blocks": {
+        "item_FaRfKt": {
+          "type": "item",
+          "settings": {
+            "icon": "none",
+            "text": "<p><strong> 100 dagen</strong> zorgeloos retourneren </p>"
+          }
+        },
+        "review_9cVYxJ": {
+          "type": "review",
+          "settings": {
+            "text": "<p>Uitstekend <strong>4.5 / 5</strong></p>",
+            "stars_count": 4.5,
+            "stars_size": 15,
+            "stars_size_mobile": 15,
+            "stars_gap": 2,
+            "stars_color": "#ffffff",
+            "stars_bg_color": "#00b67a",
+            "stars_bg_half_color": "#dddddd"
+          }
+        },
+        "item_A6Kra9": {
+          "type": "item",
+          "settings": {
+            "icon": "none",
+            "text": "<p>Vandaag besteld, morgen in huis</p>"
+          }
+        }
+      },
+      "block_order": [
+        "item_FaRfKt",
+        "review_9cVYxJ",
+        "item_A6Kra9"
+      ],
+      "name": "SS - Announcement bar (slideshow) #2",
+      "settings": {
+        "insert_css_class_target": ".header, .pageheader",
+        "autoplay_delay": 3,
+        "content_align": "center",
+        "content_align_mobile": "center",
+        "text_custom": true,
+        "text_font": "montserrat_n4",
+        "text_size": 13,
+        "text_size_mobile": 12,
+        "text_height": 160,
+        "text_case": "none",
+        "icon_size": 18,
+        "icon_size_mobile": 18,
+        "text_color": "#ffffff",
+        "feature_icon_color": "#ffffff",
+        "background_style": "solid",
+        "background_color": "#2a2a2a",
+        "background_gradient": "linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(242, 242, 242, 1) 100%)",
+        "border_color": "#121212",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 12,
+        "padding_bottom": 12,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "width": "page",
+        "content_width": 1200,
+        "section_radius": 0,
+        "border_thickness": 0,
+        "border_bottom": true,
+        "lazy": false
+      }
+    },
+    "header": {
+      "type": "header",
+      "blocks": {
+        "menu_item_1": {
+          "type": "menu_item",
+          "settings": {
+            "label": "SHOP",
+            "link": "shopify://collections/all",
+            "enable_megamenu": true,
+            "enable_banner": true,
+            "banner_image": "shopify://shop_images/redesign_header_banner.webp",
+            "banner_title": "Tot 40% korting",
+            "banner_subtitle": "Voordeel op geselecteerde apparaten en complete sets.",
+            "banner_btn_label": "Shop de sale",
+            "banner_btn_link": "shopify://collections/summer-sale-deals",
+            "megamenu_kop_1": "Shop op zone",
+            "megamenu_kop_2": "Shop op type",
+            "mm_zones": [
+              "bodygroomers",
+              "zone-gezicht",
+              "zone-hoofd",
+              "neustrimmers"
+            ],
+            "mm_zone_labels": "bodygroomers=Lichaam & schaamstreek|Bodygroomers voor de gevoelige huid\nzone-gezicht=Gezicht & baard|Scheren, trimmen en contouren\nzone-hoofd=Hoofd|Glad of kort, in één beweging\nneustrimmers=Neus & oren|Voor het precieze detailwerk",
+            "mm_zone_licht": "bodygroomers",
+            "mm_alles_label": "Bekijk alle zones",
+            "mm_alles_link": "shopify://collections/all",
+            "mm_types": [
+              "bodygroomers",
+              "scheerapparaten",
+              "baardtrimmers",
+              "tondeuses",
+              "neustrimmers",
+              "safetyrazors-scheren-scheermes",
+              "accesoires",
+              "bundels"
+            ],
+            "mm_type_labels": "bodygroomers=Bodygroomers\nscheerapparaten=Scheerapparaten\nbaardtrimmers=Baardtrimmers\ntondeuses=Tondeuses\nneustrimmers=Neustrimmers\nsafetyrazors-scheren-scheermes=Safety Razors\naccesoires=Mesjes & accessoires\nbundels=Bundels|Meer waarde in één complete set",
+            "mm_type_licht": "bundels",
+            "mm_type_licht_badge": "Meeste waarde",
+            "banner_kicker": "Summer Sale",
+            "enable_banner_2": true,
+            "banner2_kicker": "Bundels",
+            "banner2_title": "Alles in één keer compleet.",
+            "banner2_subtitle": "Minder dan wanneer je alles los koopt.",
+            "banner2_btn_label": "Bekijk de bundels",
+            "banner2_btn_link": "shopify://collections/bundels",
+            "mob_icoon": "raster",
+            "mob_sub": "Vind jouw apparaat"
+          }
+        },
+        "menu_item_2": {
+          "type": "menu_item",
+          "settings": {
+            "label": "SALE",
+            "link": "shopify://collections/summer-sale-deals",
+            "enable_megamenu": false,
+            "enable_banner": false,
+            "banner_title": "",
+            "banner_subtitle": "",
+            "banner_btn_label": "",
+            "banner_btn_link": "",
+            "mob_icoon": "label",
+            "mob_sub": "Tot 40%",
+            "mob_sub_goud": true
+          }
+        },
+        "menu_item_yeM3Jb": {
+          "type": "menu_item",
+          "disabled": true,
+          "settings": {
+            "label": "Home",
+            "link": "",
+            "enable_megamenu": true,
+            "enable_banner": false,
+            "banner_title": "Featured Product",
+            "banner_subtitle": "Lorem ipsum dolor sit amet",
+            "banner_btn_label": "Button",
+            "banner_btn_link": ""
+          }
+        },
+        "menu_item_3": {
+          "type": "menu_item",
+          "settings": {
+            "label": "BUNDELS",
+            "link": "shopify://collections/bundels",
+            "enable_megamenu": false,
+            "enable_banner": false,
+            "banner_title": "",
+            "banner_subtitle": "",
+            "banner_btn_label": "",
+            "banner_btn_link": "",
+            "mob_icoon": "cadeau",
+            "mob_sub": "Alles direct compleet",
+            "mob_licht": true,
+            "mob_badge": "Meeste waarde"
+          }
+        },
+        "menu_item_4": {
+          "type": "menu_item",
+          "settings": {
+            "label": "OVER ONS",
+            "link": "shopify://pages/over-wellshave",
+            "enable_megamenu": false,
+            "enable_banner": false,
+            "banner_title": "",
+            "banner_subtitle": "",
+            "banner_btn_label": "",
+            "banner_btn_link": "",
+            "mob_icoon": "mensen"
+          }
+        },
+        "menu_item_5": {
+          "type": "menu_item",
+          "settings": {
+            "label": "FAQ",
+            "link": "shopify://pages/faq",
+            "enable_megamenu": false,
+            "enable_banner": false,
+            "banner_title": "",
+            "banner_subtitle": "",
+            "banner_btn_label": "",
+            "banner_btn_link": "",
+            "mob_icoon": "vraag"
+          }
+        },
+        "menu_item_yqaXFW": {
+          "type": "menu_item",
+          "disabled": true,
+          "settings": {
+            "label": "BLOGS",
+            "link": "shopify://blogs/nieuws",
+            "enable_megamenu": false,
+            "enable_banner": false,
+            "banner_title": "",
+            "banner_subtitle": "",
+            "banner_btn_label": "",
+            "banner_btn_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "menu_item_1",
+        "menu_item_3",
+        "menu_item_2",
+        "menu_item_4",
+        "menu_item_5",
+        "menu_item_yeM3Jb",
+        "menu_item_yqaXFW"
+      ],
+      "settings": {
+        "logo": "shopify://shop_images/redesign_header_logo.webp",
+        "enable_country_switcher": true,
+        "enable_language_selector": true,
+        "enable_search": true,
+        "enable_social": true,
+        "mob_actie_tekst": "Summer Sale · tot 40% korting",
+        "mob_actie_link": "shopify://collections/summer-sale-deals",
+        "mob_hulp_kop": "Niet zeker welke tool bij je past?",
+        "mob_hulp_sub": "Vier vragen, en je ziet wat bij je past.",
+        "mob_hulp_label": "Start de keuzehulp",
+        "mob_hulp_link": "shopify://collections/all",
+        "mob_belofte": "100 dagen proberen",
+        "mob_merk": "shopify://shop_images/ws-mark.png"
+      }
+    }
+  },
+  "order": [
+    "announcement",
+    "ss_announcement_bar_slideshow_2_f9WKzJ",
+    "header"
+  ]
+}

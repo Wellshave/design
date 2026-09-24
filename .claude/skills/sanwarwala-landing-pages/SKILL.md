@@ -69,8 +69,10 @@ and for non-Wellshave brands, the way `nick-theriot` is scoped away from Wellsha
 **The order of use.** `references/wellshave-merklaag.md` is the shared design system and opens
 with the workflow — follow it from step 1. Its part 2 makes you choose the page type *before*
 any design happens, because the type decides the spine and the spine decides which sections
-exist. Two tests, in this order. First: is the creative about a device, or about the brand and
-the founder? If there is no single device carrying the page, it is a brand story. Then: can the
+exist. Three tests, in this order. First: does the page belong to the shop itself — the whole
+collection or one collection — rather than to a creative? Then it is a collection page and the
+two tests below do not apply. Second: is the creative about a device, or about the brand and
+the founder? If there is no single device carrying the page, it is a brand story. Third: can the
 points be reordered without the argument collapsing? If yes it is a listicle, if no it is an
 advertorial.
 
@@ -82,6 +84,7 @@ that type, and how to set up its copy:
 | Advertorial | Unaware, problem-aware; reader has mis-diagnosed the problem | `references/paginatype-advertorial.md` | `references/startbestand-advertorial.html` |
 | Listicle | Solution-aware, product-aware; reader wants to know why you beat the lookalike | `references/paginatype-listicle.md` | `references/startbestand-listicle.html` |
 | Brand story | Cold traffic that does not know the brand; no single device carries the page | `references/paginatype-merkverhaal.md` | `references/startbestand-merkverhaal.html` |
+| Collection page | Shop navigation and Google, not one ad; the reader asks "which of these" | `references/paginatype-collectie.md` | the component CSS in any skeleton |
 
 The brand story is the recorded form of the long-form Ogilvy advertorial: the first two thirds
 sell nothing, the product only appears near the end, and the page closes to the collection
