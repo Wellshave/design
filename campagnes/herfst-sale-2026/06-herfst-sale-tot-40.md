@@ -107,3 +107,71 @@ kortingslabel berekent:
 - **Thema "v6 (IN PROGRESS)".** Gaat die later live, dan moeten deze teksten daar ook in.
 - **Publiceren** kan alleen in Shopify-admin: Online Store → Themes → de kopie → Publish.
   Terugdraaien is hetzelfde, met het oude thema.
+
+---
+
+## 6.5 Stand op 25 september
+
+### Wat er nu in de kopie staat
+
+Themakopie **"Herfst Sale 2026 (kopie van v5 LIVE)"** (niet gepubliceerd), preview:
+`https://wellshave.com/?preview_theme_id=206433747276`
+
+Door een andere sessie gezet, 25 september 14.53 uur:
+
+- De naam Herfst Sale op plek 1, 2, 6, 7 en 8 uit 6.2.
+- CRO-aanpassingen: de bezorgregel "Ma t/m vr voor 23:59 besteld, morgen in huis",
+  reviewregels met Trustpilot of Wellshave erbij, "Vergelijk de opties", 1000+ reviews,
+  en wijzigingen in de code van het koopvak, de productkaart en de winkelwagen.
+
+Daarna door deze sessie gezet:
+
+| Plek | Wat |
+|---|---|
+| Menu | "SALE" heet nu "HERFST SALE" |
+| Bovenbalk | Afteltimer achter "Herfst Sale tot 40%", bijvoorbeeld "Nog 35d 09u 12m", op mobiel zonder minuten |
+| Homepagebanner | Nieuwe herfstfoto, kop "Wij snoeien de prijzen. Jij de rest.", "Het is snoeitijd." en knop "Shop de Herfst Sale" |
+| Megamenu | Herfstfoto in de Herfst Sale-tegel |
+| Badge en mobiele balk | Herfstblad in plaats van zonnetje |
+| Productpagina (standaardsjabloon) | Aanbodblok staat weer aan |
+| Salespagina | Herfstfoto, eyebrow "Herfst Sale · tot 40% korting", kop "Wij snoeien de prijzen. Jij de rest.", einddatum in de onderregel, bij "In de Herfst Sale" en in de vraag "Hoelang loopt deze actie?" |
+
+Foto's, gemaakt met GPT Image 2.5 via Higgsfield en opgeslagen in Shopify Files:
+`herfst-sale-2026-hero.png` (herfstversie van de bestaande homepagefoto) en
+`herfst-sale-2026-banner.png` (scheerapparaat en bodygroomer op marmer met herfstbladeren).
+
+### De timer
+
+- De timer telt af naar de einddatum die al in het campagneplan stond: **vrijdag 30 oktober,
+  23.59 uur**. Dat staat in de bovenbalk onder "Actie stopt op" en is daar aan te passen.
+- De timer rekent niet per bezoeker en begint nooit opnieuw. Na het eindmoment verdwijnt
+  hij.
+- De salespagina zei eerst "Er staat geen einddatum op". Die tekst is aangepast, anders
+  sprak de pagina de timer tegen.
+- **Voorwaarde:** op 30 oktober om 23.59 uur moet de actie ook echt stoppen. Blijven de
+  van-prijzen daarna gewoon staan, dan is het een nepdeadline, en die vallen onder de
+  regels van de ACM.
+
+### Nog niet gedaan: de tekst van het aanbodblok
+
+Het aanbodblok staat aan, maar de tekst komt uit het metaobject `voorjaar-sale` (type
+`limited_offer`). Die tekst gaat direct live op alle productpagina's, ook in het huidige
+thema. Het schrijven werd door de beveiliging van deze sessie tegengehouden. Tot dit is
+gedaan, toont de kopie op productpagina's nog "Summer Sale: profiteer tot 40% korting op
+je bestelling."
+
+In Shopify-admin: Inhoud → Metaobjecten → Limited offer → voorjaar-sale:
+
+| Veld | Nu | Wordt |
+|---|---|---|
+| product_title | Summer Sale 40% | Herfst Sale tot 40% |
+| offer_title | **Summer Sale**: profiteer tot **40% korting** op je bestelling. | **Herfst Sale**: tot **40% korting** op geselecteerde apparaten. |
+| popup_title | Tijdelijke Vaderdag Sale | Herfst Sale |
+| popup_subtitle | Zolang de voorraad strekt | Tot en met 30 oktober, zolang de voorraad strekt |
+
+### Twee kopieën
+
+Er staat ook een kopie **"CRO-fixes 25-09"**. Daarin staan dezelfde CRO-aanpassingen, met
+"Sale" in plaats van "Herfst Sale", plus één extra instelling (`rev_winkelcijfer`) en een
+andere versie van de koopvak-code. Publiceer er één. Wat alleen in de andere kopie staat,
+gaat dan niet live.
