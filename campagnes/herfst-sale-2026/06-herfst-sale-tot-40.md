@@ -152,17 +152,14 @@ Foto's, gemaakt met GPT Image 2.5 via Higgsfield en opgeslagen in Shopify Files:
   van-prijzen daarna gewoon staan, dan is het een nepdeadline, en die vallen onder de
   regels van de ACM.
 
-### Nog niet gedaan: de tekst van het aanbodblok
+### De tekst van het aanbodblok
 
-Het aanbodblok staat aan, maar de tekst komt uit het metaobject `voorjaar-sale` (type
-`limited_offer`). Die tekst gaat direct live op alle productpagina's, ook in het huidige
-thema. Het schrijven werd door de beveiliging van deze sessie tegengehouden. Tot dit is
-gedaan, toont de kopie op productpagina's nog "Summer Sale: profiteer tot 40% korting op
-je bestelling."
+De tekst komt uit het metaobject `voorjaar-sale` (type `limited_offer`). Op 25 september
+is die op verzoek omgezet naar Herfst Sale. Dat geldt direct voor alle productpagina's,
+ook in het huidige live thema, waar de bovenbalk nog "Summer Deals" zegt tot de kopie
+gepubliceerd is.
 
-In Shopify-admin: Inhoud → Metaobjecten → Limited offer → voorjaar-sale:
-
-| Veld | Nu | Wordt |
+| Veld | Was | Is nu |
 |---|---|---|
 | product_title | Summer Sale 40% | Herfst Sale tot 40% |
 | offer_title | **Summer Sale**: profiteer tot **40% korting** op je bestelling. | **Herfst Sale**: tot **40% korting** op geselecteerde apparaten. |
