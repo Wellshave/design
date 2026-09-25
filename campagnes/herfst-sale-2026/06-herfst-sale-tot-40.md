@@ -134,6 +134,7 @@ Daarna door deze sessie gezet:
 | Megamenu | Herfstfoto in de Herfst Sale-tegel |
 | Badge en mobiele balk | Herfstblad in plaats van zonnetje |
 | Productpagina (standaardsjabloon) | Aanbodblok staat weer aan |
+| Productpagina, aanbodbalk | Herfstkleuren: verloop van donkerbruin naar roest, gouden accenten en een blad rechts (zie hieronder) |
 | Salespagina | Herfstfoto, eyebrow "Herfst Sale · tot 40% korting", kop "Wij snoeien de prijzen. Jij de rest.", einddatum in de onderregel, bij "In de Herfst Sale" en in de vraag "Hoelang loopt deze actie?" |
 
 Foto's, gemaakt met GPT Image 2.5 via Higgsfield en opgeslagen in Shopify Files:
@@ -165,6 +166,29 @@ gepubliceerd is.
 | offer_title | **Summer Sale**: profiteer tot **40% korting** op je bestelling. | **Herfst Sale**: tot **40% korting** op geselecteerde apparaten. |
 | popup_title | Tijdelijke Vaderdag Sale | Herfst Sale |
 | popup_subtitle | Zolang de voorraad strekt | Tot en met 30 oktober, zolang de voorraad strekt |
+
+### De aanbodbalk in herfstkleuren
+
+De balk boven "In winkelwagen" was zand met een gouden rand. In de kopie is hij nu:
+
+- **Grond:** een verloop van donkerbruin naar roest, met een dunne gouden rand en een
+  zachte schaduw eronder.
+- **Tekst:** de titel in crème, "Herfst Sale" en "40% korting" in goud, de onderregel in
+  lichte zandkleur.
+- **Icoon:** het ronde 40%-icoon kreeg een gouden ring, anders verdwijnt het donkere
+  icoon in de donkere balk.
+- **Blad:** rechts een blad, iets donkerder dan de grond. Loopt er tekst overheen, zoals op
+  mobiel, dan wordt die alleen beter leesbaar.
+
+Leesbaarheid is getoetst tegen het lichtste stuk van het verloop, omdat de tekst op
+mobiel tot de rand loopt: titel 6,2:1, gouden woorden 4,8:1, onderregel 5,2:1. Alles haalt
+de norm van 4,5:1 voor kleine tekst.
+
+**Terugzetten:** in de thema-editor, productsjabloon, koopvak, onder Cadeau: "Aanbodbalk
+kleur" op Zand. Dat kan per sjabloon, zonder code. Herfst is de standaard in deze kopie.
+
+Code: `assets/ws-pdp-koopvak.css` (blok onderaan, klasse `ws-gift--herfst`) en
+`sections/ws-pdp-koopvak.liquid` (de instelling `aanbod_kleur`).
 
 ### Twee kopieën
 
