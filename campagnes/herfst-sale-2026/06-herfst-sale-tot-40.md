@@ -135,6 +135,8 @@ Daarna door deze sessie gezet:
 | Badge en mobiele balk | Herfstblad in plaats van zonnetje |
 | Productpagina (standaardsjabloon) | Aanbodblok staat weer aan |
 | Productpagina, aanbodbalk | Herfstkleuren: verloop van donkerbruin naar roest, gouden accenten en een blad rechts (zie hieronder) |
+| Menu | Label "Tot 40%" achter HERFST SALE (zie hieronder) |
+| Productkaarten | Kleine badge "Herfst Sale" op de foto van afgeprijsde producten uit de sale-collectie (zie hieronder) |
 | Salespagina | Herfstfoto, eyebrow "Herfst Sale · tot 40% korting", kop "Wij snoeien de prijzen. Jij de rest.", einddatum in de onderregel, bij "In de Herfst Sale" en in de vraag "Hoelang loopt deze actie?" |
 
 Foto's, gemaakt met GPT Image 2.5 via Higgsfield en opgeslagen in Shopify Files:
@@ -189,6 +191,47 @@ kleur" op Zand. Dat kan per sjabloon, zonder code. Herfst is de standaard in dez
 
 Code: `assets/ws-pdp-koopvak.css` (blok onderaan, klasse `ws-gift--herfst`) en
 `sections/ws-pdp-koopvak.liquid` (de instelling `aanbod_kleur`).
+
+### Menulabel en badges op de productkaarten
+
+**Menu.** Achter HERFST SALE staat een klein roestkleurig label "Tot 40%", in dezelfde kleuren
+als de aanbodbalk. Het staat bij het menu-item zelf: Header, menu-item HERFST SALE, "Label
+naast de naam". Leeg maken haalt het weg.
+
+Het menu heeft weinig ruimte. Getest op schermbreedtes van 1000 tot 1440 pixels:
+
+| Breedte | Wat er gebeurt |
+|---|---|
+| 1400 px en breder | Label op volle grootte |
+| 1240 tot 1400 px | Label en tussenruimte iets kleiner, zodat alles op één regel blijft |
+| Smaller dan 1240 px | Label valt weg; daar is het menu zonder label al krap |
+| Mobiel | Niet aangepast: de lade heeft al de gouden actiebalk en "Tot 40%" onder HERFST SALE |
+
+**Productkaarten.** Linksboven op de foto een zachte badge: crème met roestkleurige tekst
+"Herfst Sale" en een blaadje. Staat er al een lint (Nieuw, Bestseller), dan komt de badge
+eronder. De badge staat op de salepagina, de andere collectiepagina's, de bestsellers op de
+homepage, de zoekresultaten en de aanbevelingen in de winkelwagen.
+
+De badge verschijnt alleen als alles klopt:
+
+- het product is op voorraad;
+- de prijs op de kaart is echt afgeprijsd: de van-prijs is hoger dan de prijs;
+- het product zit in de sale-collectie `summer-sale-deals`.
+
+Barber Bro 2.0 krijgt dus geen badge (geen korting). Groom Guard PRO, Dual Groomer, Men Shaper
+Gold en de Neustrimmer Ultimate ook niet: die hebben wel een kortingslabel, maar zitten niet in
+de sale-collectie.
+
+**Aan en uit:** Thema-instellingen, Herfst Sale. Daar staan ook de tekst van de badge en de
+collectie. Maak je het collectieveld leeg, dan krijgt elk afgeprijsd product de badge.
+
+Code: `snippets/ws-herfst-badge.liquid` (nieuw), de opmaak onderaan `assets/ws-spaar.css`, en
+één regel in `sections/ws-collectie-raster.liquid`, `sections/ws-bestsellers.liquid` en
+`snippets/product-card.liquid`. Het menulabel zit in `sections/header.liquid`.
+
+**Opvallend:** buiten de sale-collectie staan producten met meer korting dan 40%, zoals Dual
+Groomer (50%) en Men Shaper Gold (53%). "Herfst Sale tot 40%" klopt voor de sale-collectie,
+maar een bezoeker die rondkijkt ziet elders hogere percentages.
 
 ### Twee kopieën
 
