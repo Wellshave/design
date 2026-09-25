@@ -1,0 +1,466 @@
+<title>Wellshave Zonerooster</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
+
+<style>
+:root{
+  /* exact de tokens uit :root van je live theme */
+  --graphite:#191816;
+  --grey:#8E8E8E;
+  --white-100:#FFFFFF;
+  --white-80:rgba(255,255,255,.8);
+  --white-40:rgba(255,255,255,.4);
+  --black-100:#111111;
+  --black-60:rgba(17,17,17,.6);
+  --black-40:rgba(17,17,17,.4);
+  --black-10:rgba(17,17,17,.1);
+  --gold-light-100:#F5D18A;
+  --gold-dark-100:#BC813E;
+  --error-color:#C14A3A;
+  --success-color:#1E7F63;
+
+  /* documentchroom, uit dezelfde tokens */
+  --bg:#FBFAF9; --surface:#FFFFFF; --surface-2:#F2F0ED;
+  --fg:var(--black-100); --fg-soft:var(--black-60); --rule:var(--black-10);
+  --accent:#8F6428;
+  --ok:var(--success-color); --ok-bg:#E6F0EC;
+  --crit:#A3271B; --crit-bg:#F6EAE7;
+  --shadow:0 1px 2px rgba(17,17,17,.05), 0 12px 30px -20px rgba(17,17,17,.35);
+  --frame:#E2DFDA;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141413; --surface:#1C1B1A; --surface-2:#252423;
+    --fg:#EEECE9; --fg-soft:rgba(238,236,233,.62); --rule:rgba(238,236,233,.13);
+    --accent:#D9A557; --ok:#7FBF9F; --ok-bg:#182420; --crit:#E38477; --crit-bg:#2A1C19;
+    --shadow:0 1px 2px rgba(0,0,0,.45), 0 12px 30px -20px rgba(0,0,0,.9);
+    --frame:#312F2C;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141413; --surface:#1C1B1A; --surface-2:#252423;
+  --fg:#EEECE9; --fg-soft:rgba(238,236,233,.62); --rule:rgba(238,236,233,.13);
+  --accent:#D9A557; --ok:#7FBF9F; --ok-bg:#182420; --crit:#E38477; --crit-bg:#2A1C19;
+  --shadow:0 1px 2px rgba(0,0,0,.45), 0 12px 30px -20px rgba(0,0,0,.9);
+  --frame:#312F2C;
+}
+
+*{box-sizing:border-box}
+img{max-width:100%;height:auto;display:block}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font-family:"Montserrat",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:16px;line-height:150%;font-weight:400;-webkit-font-smoothing:antialiased}
+.wrap{max-width:940px;margin:0 auto;padding:0 24px 96px}
+@media(max-width:600px){.wrap{padding:0 16px 64px}}
+
+.masthead{padding:60px 0 28px;border-bottom:1px solid var(--rule)}
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);margin:0 0 18px}
+h1{font-weight:600;font-size:clamp(32px,5.6vw,50px);line-height:115%;letter-spacing:-.015em;
+  margin:0 0 16px;text-wrap:balance}
+.dek{font-size:17px;color:var(--fg-soft);margin:0;max-width:64ch;line-height:160%;text-wrap:pretty}
+.byline{font-size:12.5px;color:var(--fg-soft);margin-top:20px}
+
+h2{font-weight:600;font-size:clamp(22px,3.4vw,30px);line-height:120%;letter-spacing:-.01em;
+  margin:56px 0 8px;text-wrap:balance}
+h2 + .sub{color:var(--fg-soft);margin:0 0 22px;font-size:15px;max-width:66ch;line-height:160%}
+h3{font-size:17px;font-weight:600;margin:26px 0 8px}
+p{margin:0 0 14px;max-width:68ch;line-height:160%}
+ul{margin:0 0 14px;padding-left:20px;max-width:68ch}
+li{margin-bottom:7px}
+strong{font-weight:600}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
+  background:var(--surface-2);padding:1px 5px;border-radius:3px}
+
+/* ── podium ── */
+.devicecap{font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--fg-soft);margin:0 0 8px}
+.scaler{width:100%;overflow:hidden;border:1px solid var(--frame);border-radius:4px;
+  background:#EDE7DB;box-shadow:var(--shadow)}
+.scaler > .inner{transform-origin:top left}
+.desk-scaler{min-height:400px}
+.desk-scaler > .inner{width:1440px}
+.phonecol{max-width:390px;margin:0 auto}
+.phone-scaler{border-radius:14px;min-height:400px}
+.phone-scaler > .inner{width:390px}
+.stage{display:grid;gap:30px;margin:0 0 10px}
+
+/* ══ MOCKUP — vaste merkkleuren in beide thema's ══ */
+.az{font-family:"Montserrat",sans-serif;background:#F5F1EA;color:#111111;padding:56px 40px}
+.az-in{max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:26px;min-width:0}
+/* de prozastijl van dit document mag de mockup niet raken */
+.az p{max-width:none;margin:0}
+
+.az-top{display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
+.az-eyebrow{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(17,17,17,.4)}
+.az-h2{font-size:34px;line-height:120%;font-weight:600;letter-spacing:-.02em;margin:10px 0 0;
+  max-width:22ch;text-wrap:balance}
+.az-h2 b{display:block;font-weight:600;color:#BC813E}
+.az-note{font-size:15px;line-height:150%;color:rgba(17,17,17,.6);margin-top:12px;max-width:46ch}
+.az-count{flex:none;text-align:right;font-size:12.5px;color:rgba(17,17,17,.5);line-height:150%}
+.az-count b{display:block;font-size:30px;font-weight:600;color:#111;letter-spacing:-.03em;
+  line-height:1;margin-bottom:5px}
+
+.az-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.az-card{position:relative;background:#fff;border-radius:12px;overflow:hidden;min-width:0;
+  border:1px solid rgba(17,17,17,.08);
+  display:flex;flex-direction:column}
+.az-shot{position:relative;aspect-ratio:1/1;background:#F5F1EA;min-width:0}
+.az-shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.az-tag{position:absolute;z-index:2;top:12px;left:12px;background:#111;color:#fff;
+  font-size:9.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  padding:6px 12px;border-radius:100px;white-space:nowrap}
+.az-body{padding:19px 20px 20px;display:flex;flex-direction:column;gap:7px;flex:1;min-width:0}
+.az-zone{font-size:19px;font-weight:600;letter-spacing:-.015em;margin:0}
+.az-what{font-size:13.5px;line-height:150%;color:rgba(17,17,17,.6);flex:1}
+.az-lead{font-size:12px;color:rgba(17,17,17,.45)}
+.az-lead b{color:rgba(17,17,17,.75);font-weight:600}
+.az-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  margin-top:5px;padding-top:14px;border-top:1px solid rgba(17,17,17,.1)}
+.az-from{font-size:13.5px;font-weight:600;min-width:0}
+.az-from span{color:rgba(17,17,17,.45);font-weight:500}
+.az-go{width:31px;height:31px;border-radius:100px;border:1px solid rgba(17,17,17,.15);
+  display:flex;align-items:center;justify-content:center;flex:none;color:#BC813E}
+.az-go svg{width:15px;height:15px}
+.az-foot{display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(17,17,17,.6)}
+.az-foot svg{width:16px;height:16px;color:#BC813E;flex:none}
+
+/* mobiel — de kaarten liggen op hun kant, zodat alle vier zones zichtbaar
+   blijven zonder carrousel en zonder 1500px scrollen */
+.az-m{padding:34px 18px}
+.az-m .az-in{gap:18px}
+.az-m .az-top{flex-direction:column;align-items:flex-start;gap:14px}
+.az-m .az-h2{font-size:24px;max-width:none;margin-top:9px}
+.az-m .az-note{font-size:14px;margin-top:10px;max-width:none}
+.az-m .az-count{text-align:left}
+.az-m .az-count b{font-size:26px}
+.az-m .az-grid{grid-template-columns:1fr;gap:11px}
+.az-m .az-card{flex-direction:row;align-items:stretch}
+.az-m .az-shot{width:112px;flex:none;aspect-ratio:auto}
+.az-m .az-tag{top:8px;left:8px;font-size:8.5px;padding:5px 9px;letter-spacing:.1em}
+.az-m .az-body{padding:15px 15px 15px 14px;gap:5px}
+.az-m .az-zone{font-size:17px}
+.az-m .az-what{font-size:12.5px;line-height:145%}
+.az-m .az-lead{font-size:11px}
+.az-m .az-meta{margin-top:4px;padding-top:11px}
+.az-m .az-from{font-size:12.5px}
+.az-m .az-go{width:27px;height:27px}
+.az-m .az-foot{font-size:12px;align-items:flex-start;line-height:150%}
+
+/* ── annotaties ── */
+.anno{background:var(--surface);border:1px solid var(--rule);border-left:2px solid var(--gold-dark-100);
+  border-radius:3px;padding:18px 22px;margin:0 0 13px;box-shadow:var(--shadow)}
+.anno > :last-child{margin-bottom:0}
+.anno h3{margin:0 0 7px;font-size:16.5px}
+.anno p{font-size:15px;margin-bottom:0;color:var(--fg-soft);max-width:68ch}
+.anno p b{color:var(--fg);font-weight:600}
+.anno p + p{margin-top:9px}
+.tablewrap{overflow-x:auto;margin:20px 0;border:1px solid var(--rule);border-radius:3px}
+table{border-collapse:collapse;width:100%;min-width:560px;background:var(--surface);font-size:14.5px}
+th,td{text-align:left;padding:12px 15px;border-bottom:1px solid var(--rule);vertical-align:top;line-height:150%}
+th{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--fg-soft);background:var(--surface-2)}
+tr:last-child td{border-bottom:0}
+td b{font-weight:600;color:var(--fg)}
+.callout{background:var(--surface-2);border-radius:3px;padding:20px 24px;margin:24px 0}
+.callout > :last-child{margin-bottom:0}
+.callout ul,.callout p{max-width:none}
+.ask{border-left:2px solid var(--crit);background:var(--crit-bg)}
+.fix{border-left:2px solid var(--ok);background:var(--ok-bg)}
+.progress{display:flex;flex-wrap:wrap;gap:5px;margin:18px 0 0}
+.progress i{width:26px;height:4px;background:var(--rule);display:block}
+.progress i.done{background:var(--gold-dark-100)}
+.progress-cap{font-size:11.5px;color:var(--fg-soft);margin:10px 0 0}
+footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--rule);
+  color:var(--fg-soft);font-size:13px}
+footer p{max-width:none}
+:focus-visible{outline:2px solid var(--gold-dark-100);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}
+  .revtrack{width:auto;overflow-x:auto}}
+</style>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01z"/></symbol>
+<symbol id="chk" viewBox="0 0 24 24"><path d="M4 12.5l5.2 5.2L20 6.9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="shield" viewBox="0 0 24 24"><path d="M12 2.6l7.2 2.8v6.1c0 4.4-3 8.4-7.2 9.9-4.2-1.5-7.2-5.5-7.2-9.9V5.4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M8.7 12.1l2.3 2.3 4.3-4.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="guarantee" viewBox="0 0 24 24"><circle cx="12" cy="9.6" r="6.4" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8.3 15.1L7 21.6l5-2.4 5 2.4-1.3-6.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+<symbol id="truck" viewBox="0 0 24 24"><path d="M1.9 6.2h12.2v9.4H1.9zM14.1 9.7h3.9l3.1 3.1v2.8h-7z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="6.6" cy="18" r="1.9" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="17.3" cy="18" r="1.9" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+<symbol id="chkc" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10.1" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M7.7 12.3l2.9 2.9 5.7-6.1" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="arw" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
+<div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow">Homepage-redesign · blok 8 van 12 · versie 1 · verplaatst</p>
+  <h1>Het assortiment, op zone</h1>
+  <p class="dek">Je verkoopt op apparaattype; je klant denkt in lichaamsdelen. Dit blok draait dat om. <b>Het stond eerst op plek 3, maar dat was de verkeerde plek</b> — daar hoort verkopen te gebeuren, niet navigeren. Het komt terug als vangnet lager op de pagina, voor wie zich niet herkent in de vier bestsellers erboven. In het oorspronkelijke plan heette dit "welk apparaat past bij mij".</p>
+  <p class="byline">Ontwerp — nog niets live. Akkoord → dan pas Shopify.</p>
+  <div class="progress" aria-hidden="true">
+    <i class="done"></i><i class="done"></i><i class="done"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+  </div>
+  <p class="progress-cap">Geparkeerd tot blok 8 · staat klaar</p>
+</header>
+
+<div class="callout fix">
+  <h3 style="margin-top:0">Waarom dit blok op zone sorteert en niet op apparaat</h3>
+  <p>Je indeling is nu: bodygroomers, scheerapparaten, neustrimmers, baardtrimmers, tondeuses, safety razors. <b>Dat is de indeling van je magazijn, niet die van je klant.</b> Iemand komt binnen met "mijn rug zit vol haar" of "mijn kaaklijn moet strakker" — niet met "ik zoek een 4-in-1 foil shaver".</p>
+  <p>Brothers in Style doet het al andersom: hun navigatie loopt via Hoofd, Hoofd &amp; Gezicht, Lichaam en Barber Pro Line. Van de drie concurrenten die ik uitlas is dat het scherpste stuk van hun site, en het is het enige punt waarop ze structureel beter zitten dan jij.</p>
+  <p style="margin-bottom:0"><b>Vier zones in plaats van acht categorieën is bovendien gewoon minder werk voor de bezoeker.</b> Een keuze uit vier is te overzien; een keuze uit acht waarvan je de helft niet kent, is er geen. Dat is geen smaakkwestie — bij een testreeks op bundelopties leverde het terugbrengen van vijf keuzes naar drie 53% meer conversie op, doordat mensen überhaupt een keuze maakten.</p>
+</div>
+
+<div class="callout ask">
+  <h3 style="margin-top:0">Je hebt acht neustrimmers, in twee parallelle reeksen</h3>
+  <p>Bij het indelen liep ik hier tegenaan. Je neuszone bevat er acht, en ze komen in paren die hetzelfde beloven:</p>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Reeks A</th><th>Reeks B</th><th>Verkocht in 30 dagen</th></tr></thead>
+    <tbody>
+      <tr><td>Neustrimmer Basic™ — €16,95</td><td>Neustrimmer Essential™ — €19,95</td><td>0 · 12 stuks</td></tr>
+      <tr><td>Neustrimmer Premium™ 2-in-1 — €19,95</td><td>Neustrimmer 2in1 Elite™ — €23,95</td><td>8 · 11 stuks</td></tr>
+      <tr><td>Neustrimmer Advance™ 3-in-1 — €24,95</td><td>Neustrimmer 3in1 Platinum™ — €29,95</td><td>18 · 0 stuks</td></tr>
+      <tr><td>Neustrimmer Ultimate™ 4-in-1 — €29,95</td><td>Neustrimmer 4in1 Ultra™ — €32,95</td><td>7 · 46 stuks</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>Twee complete ladders van 1-, 2-, 3- en 4-in-1, met een prijsverschil van drie tot vijf euro per trede. <b>Ik kan uit de productteksten niet opmaken wat een klant tussen A en B zou moeten kiezen</b>, en de verkoopcijfers wijzen erop dat je klant dat ook niet kan: de vraag verdeelt zich grillig over de paren in plaats van naar één winnaar te lopen.</p>
+  <p style="margin-bottom:0">Voor dit blok maakt het niets uit — de kaart zegt "8 apparaten, vanaf €16,95" en dat klopt. <b>Voor de zonepagina eronder maakt het alles uit</b>, want daar staan ze straks naast elkaar. Zijn het twee generaties waarvan er één uitloopt? Dan hoort reeks A op non-actief. Zijn het echt acht verschillende producten, dan heb ik van jou het verschil nodig om ze uit elkaar te kunnen schrijven.</p>
+</div>
+
+<div class="callout ask">
+  <h3 style="margin-top:0">Vier producten staan op een negatieve voorraad</h3>
+  <p style="margin-bottom:0">Tondeuse Deluxe™, Barber Bro 1.0, Barber Bro 2.0 en Barber Bro 3.0 staan alle vier op <b>−2</b> in Shopify. Dat betekent dat er meer verkocht is dan er lag. Tondeuse Deluxe™ zit met 8 stuks in de afgelopen 30 dagen gewoon in de hoofdzone die ik hierboven bouw, dus dit blok gaat er straks verkeer heen sturen. Even nakijken voordat dit live gaat — een bezoeker die op de best gepresenteerde zone klikt en daar een uitverkocht apparaat vindt, is duurder dan geen klik.</p>
+</div>
+
+<h2>Het ontwerp</h2>
+<p class="sub">Eén rij van vier op desktop. Op mobiel kantelen de kaarten en liggen ze op hun kant, zodat alle vier de zones zichtbaar blijven binnen één scherm — geen carrousel, want daar klikt 1 tot 2% doorheen.</p>
+
+<div class="stage">
+  <div>
+    <p class="devicecap">Desktop — 1440px</p>
+    <div class="scaler desk-scaler"><div class="inner">
+      <section class="az"><div class="az-in">
+
+        <div class="az-top">
+          <div>
+            <p class="az-eyebrow">Het hele assortiment</p>
+            <h2 class="az-h2">Jij weet waar je wilt beginnen. <b>Wij weten waarmee.</b></h2>
+            <p class="az-note">Kies de zone waar je aan de slag wilt. Je krijgt dan alleen te zien wat daarvoor gemaakt is — in plaats van een keuze uit acht productcategorieën.</p>
+          </div>
+          <p class="az-count"><b>28</b>apparaten,<br>verdeeld over 4 zones</p>
+        </div>
+
+        <div class="az-grid">
+            <span class="az-card">
+              <span class="az-shot">
+                <img src="__ZONE_LICHAAM__" alt="Groom Guard PRO bodygroomer met foil-opzetstuk">
+                <span class="az-tag">Bestseller</span>
+              </span>
+              <span class="az-body">
+                <h3 class="az-zone">Lichaam</h3>
+                <p class="az-what">Borst, rug en schaamstreek. Gemaakt voor gevoelige huid en lastige hoeken.</p>
+                <p class="az-lead">Populairst: <b>Groom Guard™ PRO</b></p>
+                <span class="az-meta">
+                  <span class="az-from">vanaf €39,95 <span>· 4 apparaten</span></span>
+                  <span class="az-go"><svg><use href="#arw"/></svg></span>
+                </span>
+              </span>
+            </span>
+            <span class="az-card">
+              <span class="az-shot">
+                <img src="__ZONE_GEZICHT__" alt="The Gentleman Shaver scheerapparaat op de oplaadstandaard">
+              </span>
+              <span class="az-body">
+                <h3 class="az-zone">Gezicht &amp; baard</h3>
+                <p class="az-what">Van een strak afgetekende kaaklijn tot glad geschoren. Of allebei, met één apparaat.</p>
+                <p class="az-lead">Populairst: <b>The Gentleman Shaver™</b></p>
+                <span class="az-meta">
+                  <span class="az-from">vanaf €19,95 <span>· 12 apparaten</span></span>
+                  <span class="az-go"><svg><use href="#arw"/></svg></span>
+                </span>
+              </span>
+            </span>
+            <span class="az-card">
+              <span class="az-shot">
+                <img src="__ZONE_HOOFD__" alt="Tondeuse Elegant met LED-display">
+              </span>
+              <span class="az-body">
+                <h3 class="az-zone">Hoofd</h3>
+                <p class="az-what">Kaal tot op de huid, of een tondeuse die bepaalt hoe kort het wordt.</p>
+                <p class="az-lead">Populairst: <b>Tondeuse Elegant™</b></p>
+                <span class="az-meta">
+                  <span class="az-from">vanaf €54,95 <span>· 4 apparaten</span></span>
+                  <span class="az-go"><svg><use href="#arw"/></svg></span>
+                </span>
+              </span>
+            </span>
+            <span class="az-card">
+              <span class="az-shot">
+                <img src="__ZONE_NEUS__" alt="De Wellshave neustrimmerlijn, drie modellen naast elkaar">
+              </span>
+              <span class="az-body">
+                <h3 class="az-zone">Neus &amp; oren</h3>
+                <p class="az-what">Het detail dat jij niet ziet en de rest van de wereld wel.</p>
+                <p class="az-lead">Populairst: <b>Neustrimmer 4in1 Ultra™</b></p>
+                <span class="az-meta">
+                  <span class="az-from">vanaf €16,95 <span>· 8 apparaten</span></span>
+                  <span class="az-go"><svg><use href="#arw"/></svg></span>
+                </span>
+              </span>
+            </span>
+        </div>
+
+        <p class="az-foot"><svg><use href="#chk"/></svg>Elk apparaat 100 dagen te proberen. Past het niet in je routine, dan gaat het terug.</p>
+
+      </div></section>
+    </div></div>
+  </div>
+  <div class="phonecol">
+    <p class="devicecap">Mobiel — 390px · 73% van je verkeer</p>
+    <div class="scaler phone-scaler"><div class="inner">
+      <section class="az az-m"><div class="az-in">
+
+        <div class="az-top">
+          <div>
+            <p class="az-eyebrow">Het hele assortiment</p>
+            <h2 class="az-h2">Jij weet waar je wilt beginnen. <b>Wij weten waarmee.</b></h2>
+            <p class="az-note">Kies de zone waar je aan de slag wilt. Je krijgt dan alleen te zien wat daarvoor gemaakt is — in plaats van een keuze uit acht productcategorieën.</p>
+          </div>
+          <p class="az-count"><b>28</b>apparaten,<br>verdeeld over 4 zones</p>
+        </div>
+
+        <div class="az-grid">
+            <span class="az-card">
+              <span class="az-shot">
+                <img src="__ZONE_LICHAAM__" alt="Groom Guard PRO bodygroomer met foil-opzetstuk">
+                <span class="az-tag">Bestseller</span>
+              </span>
+              <span class="az-body">
+                <h3 class="az-zone">Lichaam</h3>
+                <p class="az-what">Borst, rug en schaamstreek. Gemaakt voor gevoelige huid en lastige hoeken.</p>
+                <p class="az-lead">Populairst: <b>Groom Guard™ PRO</b></p>
+                <span class="az-meta">
+                  <span class="az-from">vanaf €39,95 <span>· 4 apparaten</span></span>
+                  <span class="az-go"><svg><use href="#arw"/></svg></span>
+                </span>
+              </span>
+            </span>
+            <span class="az-card">
+              <span class="az-shot">
+                <img src="__ZONE_GEZICHT__" alt="The Gentleman Shaver scheerapparaat op de oplaadstandaard">
+              </span>
+              <span class="az-body">
+                <h3 class="az-zone">Gezicht &amp; baard</h3>
+                <p class="az-what">Van een strak afgetekende kaaklijn tot glad geschoren. Of allebei, met één apparaat.</p>
+                <p class="az-lead">Populairst: <b>The Gentleman Shaver™</b></p>
+                <span class="az-meta">
+                  <span class="az-from">vanaf €19,95 <span>· 12 apparaten</span></span>
+                  <span class="az-go"><svg><use href="#arw"/></svg></span>
+                </span>
+              </span>
+            </span>
+            <span class="az-card">
+              <span class="az-shot">
+                <img src="__ZONE_HOOFD__" alt="Tondeuse Elegant met LED-display">
+              </span>
+              <span class="az-body">
+                <h3 class="az-zone">Hoofd</h3>
+                <p class="az-what">Kaal tot op de huid, of een tondeuse die bepaalt hoe kort het wordt.</p>
+                <p class="az-lead">Populairst: <b>Tondeuse Elegant™</b></p>
+                <span class="az-meta">
+                  <span class="az-from">vanaf €54,95 <span>· 4 apparaten</span></span>
+                  <span class="az-go"><svg><use href="#arw"/></svg></span>
+                </span>
+              </span>
+            </span>
+            <span class="az-card">
+              <span class="az-shot">
+                <img src="__ZONE_NEUS__" alt="De Wellshave neustrimmerlijn, drie modellen naast elkaar">
+              </span>
+              <span class="az-body">
+                <h3 class="az-zone">Neus &amp; oren</h3>
+                <p class="az-what">Het detail dat jij niet ziet en de rest van de wereld wel.</p>
+                <p class="az-lead">Populairst: <b>Neustrimmer 4in1 Ultra™</b></p>
+                <span class="az-meta">
+                  <span class="az-from">vanaf €16,95 <span>· 8 apparaten</span></span>
+                  <span class="az-go"><svg><use href="#arw"/></svg></span>
+                </span>
+              </span>
+            </span>
+        </div>
+
+        <p class="az-foot"><svg><use href="#chk"/></svg>Elk apparaat 100 dagen te proberen. Past het niet in je routine, dan gaat het terug.</p>
+
+      </div></section>
+    </div></div>
+  </div>
+</div>
+
+<h2>De vier zones</h2>
+<div class="tablewrap">
+<table>
+  <thead><tr><th>Zone</th><th>Apparaten</th><th>Vanaf</th><th>Grootste verkoper, 30 dagen</th><th>Omzet, 30 dagen</th></tr></thead>
+  <tbody>
+    <tr><td><b>Lichaam</b></td><td>4</td><td>€39,95</td><td>Groom Guard™ PRO — 47 stuks</td><td><b>€3.513</b></td></tr>
+    <tr><td><b>Gezicht &amp; baard</b></td><td>12</td><td>€19,95</td><td>The Gentleman Shaver™ — 23 stuks</td><td>€2.089</td></tr>
+    <tr><td><b>Neus &amp; oren</b></td><td>8</td><td>€16,95</td><td>Neustrimmer 4in1 Ultra™ — 46 stuks</td><td>€1.192</td></tr>
+    <tr><td><b>Hoofd</b></td><td>4</td><td>€54,95</td><td>Tondeuse Elegant™ — 9 stuks</td><td>€841</td></tr>
+  </tbody>
+</table>
+</div>
+<p>De omzetkolom telt alleen de apparaten die in de top 30 van de afgelopen dertig dagen staan; de staart eronder zit er niet in. <b>Lichaam is met afstand je grootste zone</b> en staat daarom vooraan met het bestsellerlabel. Op stuks wint neus &amp; oren met 102 apparaten, maar tegen een derde van de omzet — dat is precies het patroon dat je verwacht bij een instapproduct van €16,95.</p>
+
+<div class="callout fix">
+  <h3 style="margin-top:0">Waarom de kaarten er zo uitzien</h3>
+  <p><b>Elke kaartkop moet los verkopen.</b> Mensen lezen ongeveer een vijfde van wat er staat en scannen de rest, dus de zonenaam plus die ene regel eronder moeten samen genoeg zijn. "Het detail dat jij niet ziet en de rest van de wereld wel" doet meer werk dan "neustrimmers" — het benoemt waaróm iemand er een koopt.</p>
+  <p><b>De prijs staat er als drempel, niet als claim.</b> "vanaf €16,95 · 8 apparaten" vertelt in vier woorden of deze zone binnen bereik ligt en of er iets te kiezen valt. Dat is de informatie waarop iemand besluit of hij klikt.</p>
+  <p><b>Brons blijft schaars.</b> Alleen de tweede kopregel, de pijltjes en het vinkje onderaan zijn brons. Blok 2 eindigt op een donker koopblok met veel goud; als dit blok daar overheen gaat met nóg meer goud, verliest het accent zijn betekenis. Het merksignaal is de zandkleur, niet het goud.</p>
+  <p style="margin-bottom:0"><b>De vier packshots stonden op vier verschillende witwaarden</b> (#EEEEEE tot #F6F6F6). Naast elkaar zag je dat meteen als vier losse plaatjes in plaats van één reeks. Ik heb de achtergronden gelijkgetrokken naar de merkzandkleur met een vulling die vanaf de rand naar binnen loopt, zodat lichtvlekken op de apparaten zelf blijven staan.</p>
+</div>
+
+<h2>Bouwnotities voor straks</h2>
+<ul>
+  <li><b>Vier zones, vier collecties.</b> Deze indeling bestaat nog niet in Shopify. Er moeten vier collecties komen — lichaam, gezicht &amp; baard, hoofd, neus &amp; oren — met de producten uit de tabel hierboven. Dat is de echte bouwstap; het blok zelf is daarna opmaak.</li>
+  <li><b>Het aantal apparaten en de vanaf-prijs uit de collectie halen</b>, niet intypen. Beide veranderen zodra je een product toevoegt of een prijs aanpast, en een blok dat "4 apparaten" zegt terwijl er zes staan ondermijnt precies het vertrouwen dat je hier opbouwt.</li>
+  <li><b>De "populairst"-regel dynamisch maken</b> op basis van verkopen over dertig dagen, of hem weglaten. Een handmatig ingevulde bestseller staat er over een half jaar nog terwijl er iets anders wint.</li>
+  <li><b>Het zonebeeld is een categoriebeeld, geen productfoto.</b> Voor lichaam, gezicht en hoofd is het toevallig ook de bestseller; bij neus toont het de lijn. Bij een herschikking van het assortiment hoeft alleen het beeld mee, niet de tekst.</li>
+  <li><b>Beelden <code>loading="lazy"</code></b>; dit blok staat onder de vouw.</li>
+  <li><b>Kaarten zijn één klikvlak.</b> In de mockup zijn het <code>span</code>-elementen; in de bouw wordt de hele kaart één <code>a</code> naar de collectie, met de zonenaam als toegankelijke naam.</li>
+  <li><b>Nooit een vaste hoogte op de kaarten.</b> De langste zinregel bepaalt de hoogte van de rij; met <code>grid</code> en <code>align-items:stretch</code> groeien ze samen mee in plaats van dat de langste wordt afgesneden.</li>
+</ul>
+
+<div class="callout ask">
+  <h3 style="margin-top:0">Wat ik van jou nodig heb</h3>
+  <ul style="margin-bottom:0">
+    <li><b>Kloppen de vier zones?</b> Ik heb de Detailtrimmer Sharpline™ bij gezicht gezet omdat hij op contouren rond snor, kaaklijn en hals werkt, en Barber Bro 1.0 bij hoofd omdat het een tondeuse is. Zeg het als je die ergens anders wilt.</li>
+    <li><b>Wat is het verschil tussen reeks A en reeks B bij de neustrimmers?</b> Zonder dat kan ik de zonepagina niet schrijven.</li>
+    <li><b>De vier negatieve voorraden.</b> Kloppen die, of loopt er iets mis in de voorraadkoppeling?</li>
+    <li><b>Willen we hier ook de bundels tonen?</b> Ik heb ze bewust weggelaten: blok 2 verkoopt de Essential Flex Bundel al, en zes bundels ertussen maakt de keuze weer even groot als hij was.</li>
+  </ul>
+</div>
+
+<h2>Daarna</h2>
+<p><b>Dit blok wacht op zijn plek.</b> Het is af en gecontroleerd, maar het komt pas terug als de blokken erboven staan. Wat er hieronder over blok 4 stond, geldt onverminderd.</p>
+<p><b>Blok 4 — het mechanisme.</b> Dat blok stond in het oorspronkelijke plan als "SkinSafe", maar dat kan niet: SkinSafe zit alleen in je bodygroomers en de homepage moet over je hele assortiment kloppen. In blok 1 kozen we daarom je bouwproces als merkbreed mechanisme — getest op prestaties, verbeterd op klantfeedback. Blok 4 maakt dat zichtbaar.</p>
+
+<footer>
+  <p>Zones, prijzen, voorraden en productnamen live uit Shopify op 19 augustus 2026; verkoopcijfers uit je Shopify-analytics over de voorgaande dertig dagen. De navigatievondst komt uit <code>concurrentie-analyse.html</code> (Brothers in Style, uitgelezen op 19 augustus 2026). Kleuren, hoekradius en type-schaal uit <code>base.css</code> van je live theme. Productbeelden uit je eigen Shopify-bestanden, op de oorspronkelijke vierkante verhouding en met gelijkgetrokken achtergrond. De mockup houdt de merkkleuren vast in zowel licht als donker thema; dat is de site, niet deze pagina.</p>
+</footer>
+
+</div>
+
+<script>
+function fit(){
+  document.querySelectorAll('.scaler').forEach(s=>{
+    const inner=s.firstElementChild;
+    const w=parseFloat(getComputedStyle(inner).width);
+    const scale=s.clientWidth/w;
+    inner.style.transform='scale('+scale+')';
+    s.style.height=Math.ceil(inner.offsetHeight*scale)+'px';
+  });
+}
+document.fonts&&document.fonts.ready.then(fit);
+window.addEventListener('resize',fit);
+new ResizeObserver(fit).observe(document.body);
+window.addEventListener('load',fit); fit();
+</script>

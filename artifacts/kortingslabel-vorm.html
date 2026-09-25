@@ -1,0 +1,209 @@
+<title>Vorm van het kortingslabel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
+<style>
+  :root{
+    --grond:#FAF7F1;
+    --vlak:#FFFFFF;
+    --inkt:#191512;
+    --zacht:#6E6559;
+    --lijn:#E5DCCC;
+    --goud:#F5D18A;
+    --goud-diep:#8F6428;
+    --goud-rand:rgba(188,129,62,.5);
+    --bruin:#6F4A16;
+    --zwart:#111010;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --grond:#131110; --vlak:#1D1A17; --inkt:#F3EDE3; --zacht:#9C9184;
+      --lijn:#2E2925;
+    }
+  }
+  :root[data-theme="dark"]{
+    --grond:#131110; --vlak:#1D1A17; --inkt:#F3EDE3; --zacht:#9C9184; --lijn:#2E2925;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--grond); color:var(--inkt);
+    font-family:"Newsreader",Georgia,serif; font-size:17px; line-height:1.55;
+    margin:0; padding:44px 24px 72px;
+  }
+  .wrap{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:38px}
+
+  .kop{display:flex;flex-direction:column;gap:12px}
+  .oog{
+    font-family:"Montserrat",system-ui,sans-serif; font-size:11px; font-weight:700;
+    letter-spacing:.16em; text-transform:uppercase; color:var(--goud-diep);
+  }
+  h1{
+    font-family:"Montserrat",system-ui,sans-serif; font-weight:800; font-size:29px;
+    letter-spacing:-.02em; line-height:1.15; margin:0; text-wrap:balance;
+  }
+  .lead{margin:0;max-width:62ch;color:var(--zacht)}
+
+  .ref{
+    background:var(--vlak); border:1px solid var(--lijn); border-radius:14px;
+    padding:22px 24px; display:flex; flex-wrap:wrap; align-items:center; gap:18px 26px;
+  }
+  .ref p{margin:0;color:var(--zacht);font-size:15px;max-width:38ch}
+
+  .lijstkop{
+    font-family:"Montserrat",system-ui,sans-serif; font-size:11px; font-weight:700;
+    letter-spacing:.14em; text-transform:uppercase; color:var(--zacht);
+    padding-bottom:10px; border-bottom:1px solid var(--lijn);
+  }
+  .opties{display:flex;flex-direction:column;gap:0}
+  .optie{
+    display:grid; grid-template-columns:34px 1fr auto; gap:16px 18px;
+    align-items:center; padding:22px 0; border-bottom:1px solid var(--lijn);
+  }
+  .merk{
+    font-family:"Montserrat",system-ui,sans-serif; font-weight:800; font-size:15px;
+    color:var(--goud-diep); align-self:start; padding-top:2px;
+  }
+  .tekst{display:flex;flex-direction:column;gap:5px;min-width:0}
+  .tekst h2{
+    font-family:"Montserrat",system-ui,sans-serif; font-size:15px; font-weight:700;
+    margin:0; letter-spacing:-.005em;
+  }
+  .tekst p{margin:0;color:var(--zacht);font-size:15px;max-width:46ch}
+  .spec{
+    font-family:"Montserrat",system-ui,sans-serif; font-size:11.5px; color:var(--zacht);
+    letter-spacing:.01em; font-variant-numeric:tabular-nums;
+  }
+  .proef{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+  .op-wit,.op-zwart{
+    display:flex; align-items:center; gap:9px; padding:9px 13px; border-radius:9px;
+    font-family:"Montserrat",system-ui,sans-serif; font-variant-numeric:tabular-nums;
+  }
+  .op-wit{background:#fff;border:1px solid var(--lijn)}
+  .op-zwart{background:var(--zwart)}
+  .nu{font-weight:800;font-size:16px;color:#141210}
+  .was{font-weight:500;font-size:13px;color:#9A9187;text-decoration:line-through}
+  .op-zwart .nu{color:#fff}
+  .op-zwart .was{color:#8B8279}
+
+  /* ---- de vier vormen. Kleur is overal gelijk; alleen de vorm verschilt. ---- */
+  .pil{
+    display:inline-flex; align-items:center; line-height:1; white-space:nowrap;
+    font-family:"Montserrat",system-ui,sans-serif; font-weight:700;
+    font-variant-numeric:tabular-nums;
+    color:var(--goud-diep);
+    background:linear-gradient(135deg,rgba(245,209,138,.38) 0%,rgba(188,129,62,.16) 100%);
+  }
+  .donker.pil{
+    color:var(--goud);
+    background:linear-gradient(135deg,rgba(245,209,138,.2) 0%,rgba(245,209,138,.07) 100%);
+  }
+
+  /* A — zoals het er nu staat */
+  .vA{padding:5px 11px;border-radius:100px;border:1px solid var(--goud-rand);
+      font-size:11.5px;letter-spacing:.04em;text-transform:uppercase}
+  .donker.vA{border-color:rgba(245,209,138,.55)}
+
+  /* B — de vorm uit je screenshot: compacter, geen rand */
+  .vB{padding:4px 9px;border-radius:100px;font-size:11px;letter-spacing:.02em}
+
+  /* C — die compacte vorm, maar mét het randje eromheen */
+  .vC{padding:4px 9px;border-radius:100px;border:1px solid var(--goud-rand);
+      font-size:11px;letter-spacing:.02em}
+  .donker.vC{border-color:rgba(245,209,138,.55)}
+
+  /* D — zachte hoek in plaats van een capsule */
+  .vD{padding:4px 9px;border-radius:5px;font-size:11px;letter-spacing:.02em}
+
+  /* de referentie uit het screenshot, exact zoals hij was */
+  .refpil{
+    display:inline-flex;align-items:center;line-height:1;white-space:nowrap;
+    font-family:"Montserrat",system-ui,sans-serif;font-weight:700;font-size:11px;
+    letter-spacing:.02em;color:#6F4A16;background:#F5D18A;
+    padding:4px 9px;border-radius:100px;
+  }
+
+  .voet{color:var(--zacht);font-size:15px;margin:0;max-width:62ch}
+  .voet strong{font-family:"Montserrat",system-ui,sans-serif;font-weight:700;color:var(--inkt);font-size:14px}
+
+  @media (max-width:620px){
+    body{padding:32px 18px 56px}
+    .optie{grid-template-columns:26px 1fr;gap:12px}
+    .proef{grid-column:1 / -1;align-items:flex-start}
+    .spec{grid-column:1 / -1}
+  }
+</style>
+
+<div class="wrap">
+  <header class="kop">
+    <span class="oog">WellShave · V5 · kortingslabel</span>
+    <h1>Welke vorm bedoel je?</h1>
+    <p class="lead">De kleur laat ik precies zoals hij nu is. Hieronder staat alleen de vórm te verschillen: hoeveel lucht er om het getal zit, hoe rond de uiteinden zijn, en of er een randje omheen loopt. Alles op ware grootte, met de echte prijs van de Flex-line Bundel.</p>
+  </header>
+
+  <div class="ref">
+    <span class="refpil">43% Korting</span>
+    <p>Dit is het label uit je screenshot, exact nagebouwd: 4&nbsp;bij&nbsp;9&nbsp;px lucht, volledig ronde uiteinden, geen rand, letters op normale breedte.</p>
+  </div>
+
+  <div>
+    <div class="lijstkop">Vier vormen · zelfde kleur</div>
+    <div class="opties">
+
+      <div class="optie">
+        <span class="merk">A</span>
+        <div class="tekst">
+          <h2>Zoals het er nu staat</h2>
+          <p>Ruimer, kapitalen met extra letterafstand en een randje. Daardoor oogt hij groter en boller dan je screenshot.</p>
+        </div>
+        <div class="proef">
+          <span class="op-wit"><span class="nu">89,95</span><span class="was">156,60</span><span class="pil vA">&minus;42%</span></span>
+          <span class="op-zwart"><span class="nu">89,95</span><span class="was">156,60</span><span class="pil vA donker">&minus;42%</span></span>
+        </div>
+        <span class="spec">5 / 11 px · rond 100 · rand · 11,5 px · kapitaal</span>
+      </div>
+
+      <div class="optie">
+        <span class="merk">B</span>
+        <div class="tekst">
+          <h2>De vorm uit je screenshot</h2>
+          <p>Strakker om het getal heen, geen rand, gewone letterbreedte. Zelfde silhouet als het label dat je stuurde.</p>
+        </div>
+        <div class="proef">
+          <span class="op-wit"><span class="nu">89,95</span><span class="was">156,60</span><span class="pil vB">&minus;42%</span></span>
+          <span class="op-zwart"><span class="nu">89,95</span><span class="was">156,60</span><span class="pil vB donker">&minus;42%</span></span>
+        </div>
+        <span class="spec">4 / 9 px · rond 100 · geen rand · 11 px</span>
+      </div>
+
+      <div class="optie">
+        <span class="merk">C</span>
+        <div class="tekst">
+          <h2>Die vorm, met het randje erbij</h2>
+          <p>Even compact als B, maar de omlijning blijft. Op een lichte kaart houdt het label daardoor een duidelijke rand.</p>
+        </div>
+        <div class="proef">
+          <span class="op-wit"><span class="nu">89,95</span><span class="was">156,60</span><span class="pil vC">&minus;42%</span></span>
+          <span class="op-zwart"><span class="nu">89,95</span><span class="was">156,60</span><span class="pil vC donker">&minus;42%</span></span>
+        </div>
+        <span class="spec">4 / 9 px · rond 100 · rand · 11 px</span>
+      </div>
+
+      <div class="optie">
+        <span class="merk">D</span>
+        <div class="tekst">
+          <h2>Zachte hoek in plaats van capsule</h2>
+          <p>Geen ronde uiteinden maar een licht afgeronde rechthoek, in dezelfde maat als de kaartknoppen.</p>
+        </div>
+        <div class="proef">
+          <span class="op-wit"><span class="nu">89,95</span><span class="was">156,60</span><span class="pil vD">&minus;42%</span></span>
+          <span class="op-zwart"><span class="nu">89,95</span><span class="was">156,60</span><span class="pil vD donker">&minus;42%</span></span>
+        </div>
+        <span class="spec">4 / 9 px · rond 5 · geen rand · 11 px</span>
+      </div>
+
+    </div>
+  </div>
+
+  <p class="voet"><strong>Zeg A, B, C of D</strong> en ik zet hem door naar de homepage, de collectiepagina's en de productkaarten tegelijk — het is één stylesheet, dus alle 82 labels veranderen in één keer mee.</p>
+</div>

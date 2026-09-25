@@ -1,0 +1,141 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "ws_rek": {
+      "type": "ws-bundelrek",
+      "settings": {
+        "eyebrow": "Alle sets op één rij",
+        "kop": "Eén doos. <b>Alles wat je nodig hebt.</b>",
+        "sub": "Je koopt de apparaten samen goedkoper dan los, je mist geen onderdeel, en je hebt honderd dagen om te beslissen of het bij je past.",
+        "label_sets": "sets om uit te kiezen",
+        "label_voordeel": "voordeel op de grootste set",
+        "label_vanaf": "de goedkoopste set",
+        "zeker_1": "100 dagen proberen",
+        "zeker_2": "2 jaar garantie",
+        "zeker_3": "Morgen in huis",
+        "telling": "sets",
+        "sorteer_label": "Sorteer op",
+        "sorteer_voordeel": "Meeste voordeel",
+        "sorteer_laag": "Prijs laag → hoog",
+        "sorteer_hoog": "Prijs hoog → laag",
+        "kaart_cta": "Bekijk de set",
+        "bespaar_kort": "Bespaar",
+        "voorraad_wel": "Op voorraad",
+        "voorraad_niet": "Tijdelijk uitverkocht",
+        "slot": "Niet de juiste set? Je hebt 100 dagen om van gedachten te veranderen.",
+        "link_label": "Liever één apparaat? Bekijk het hele assortiment",
+        "link": "shopify://collections/all",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 64,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 40
+      }
+    },
+    "advantages": {
+      "type": "advantages",
+      "blocks": {
+        "advantage_1": {
+          "type": "advantage",
+          "settings": {
+            "icon": "shopify://shop_images/redesign_advantage_1.svg",
+            "title": "Gratis bezorgd boven €30",
+            "content": "Snelle, betrouwbare levering voor alle bestellingen van meer dan € 30 — rechtstreeks bij je thuis."
+          }
+        },
+        "advantage_2": {
+          "type": "advantage",
+          "settings": {
+            "icon": "shopify://shop_images/redesign_advantage_2.svg",
+            "title": "2 jaar garantie",
+            "content": "Gemaakt om lang mee te gaan. Geniet van gemoedsrust dankzij een volledige garantie van 2 jaar."
+          }
+        },
+        "advantage_3": {
+          "type": "advantage",
+          "settings": {
+            "icon": "shopify://shop_images/redesign_advantage_3.svg",
+            "title": "100 dagen retourneren",
+            "content": "Probeer het thuis, zonder risico. Niet tevreden? Dan krijg je je geld terug."
+          }
+        }
+      },
+      "block_order": [
+        "advantage_1",
+        "advantage_2",
+        "advantage_3"
+      ],
+      "settings": {
+        "background": "#ffffff",
+        "title": "",
+        "subtitle": "",
+        "desk_indent_top": 72,
+        "desk_indent_bottom": 72,
+        "mob_indent_top": 0,
+        "mob_indent_bottom": 40
+      }
+    },
+    "trustpilot_reviews": {
+      "type": "trustpilot-reviews",
+      "settings": {
+        "reviews_label": "Zie onze reviews op",
+        "title": "Wat mannen vóór jou schreven",
+        "subtitle": "Niet onze woorden, maar die van klanten die de set thuis hebben uitgepakt.",
+        "content": "<div class=\"trustpilot-widget\" data-locale=\"nl-NL\" data-template-id=\"53aa8912dec7e10d38f59f36\" data-businessunit-id=\"63c511d4e1339e2200c204a1\" data-style-height=\"100%\" data-style-width=\"100%\" data-token=\"50740a9d-d5d4-4f3a-ba8c-76687a857f8f\" data-stars=\"4,5\" data-review-languages=\"nl\"></div>",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 0,
+        "mob_indent_top": 40,
+        "mob_indent_bottom": 40
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "question_TU3rXb": {
+          "type": "question",
+          "repeater": "{{ collection.metafields.custom.faq.value }}",
+          "settings": {
+            "question": "{{ block.repeater.question.value }}",
+            "answer": "{{ block.repeater.answer | metafield_tag }}"
+          }
+        }
+      },
+      "block_order": [
+        "question_TU3rXb"
+      ],
+      "settings": {
+        "title": "Veelgestelde vragen",
+        "subtitle": "Wat je wilt weten voordat je een set bestelt.",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 80,
+        "mob_indent_top": 40,
+        "mob_indent_bottom": 40
+      }
+    },
+    "collection_richtext": {
+      "type": "collection-richtext",
+      "settings": {
+        "title": "{{ collection.metafields.custom.seo_description.value.title.value }}",
+        "content": "{{ collection.metafields.custom.seo_description.value.content | metafield_tag }}",
+        "desk_indent_top": 0,
+        "desk_indent_bottom": 64,
+        "mob_indent_top": 24,
+        "mob_indent_bottom": 24
+      }
+    }
+  },
+  "order": [
+    "ws_rek",
+    "advantages",
+    "trustpilot_reviews",
+    "faq",
+    "collection_richtext"
+  ]
+}

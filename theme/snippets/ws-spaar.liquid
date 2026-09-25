@@ -1,0 +1,42 @@
+{%- comment -%}
+  Het kortingslabel: een gouden pil met het kortingspercentage en het woord
+  erachter, bijvoorbeeld "37% Korting". Overal in de winkel dezelfde vorm,
+  zodat je hem herkent zonder te lezen. Geen icoontje: naast de prijs telt
+  elke pixel breedte.
+
+  Met een percentage (zo staat het op de homepage, de collectiepagina's
+  en op elke productkaart):
+    {% render 'ws-spaar', van: v.compare_at_price, nu: v.price %}
+  Met een bedrag (zo staat het in de quiz en de spotblokken):
+    {% render 'ws-spaar', woord: 'Je bespaart', bedrag: verschil %}
+
+    van/nu  de van-prijs en de prijs in centen. Het percentage wordt hier
+            uitgerekend en naar beneden afgerond, zodat er nooit meer korting
+            staat dan er werkelijk is.
+    achter  het woord achter het percentage; standaard "Korting". Geef het
+            veld van de sectie mee waar dat bestaat, dan blijft het label
+            vertaalbaar in de andere talen. Op een telefoon valt het woord weg
+            en blijft alleen het percentage staan — anders past het label niet
+            meer naast de prijs op een kaart die met z'n tweeën op een rij staat.
+    bedrag  het verschil in centen; toont een bedrag in plaats van een percentage
+    woord   woord vóór het bedrag, alleen in de bedrag-vorm
+    donker  true op een zwart vlak
+    zonder_css  true als het blok ws-spaar.css zelf al inlaadt. Op een
+            collectiepagina staan tientallen labels; zonder dit zou de
+            stylesheet-regel er net zo vaak in staan.
+    extra   extra klasse voor het blok zelf (marge, een glans bij hover)
+{%- endcomment -%}
+{%- unless zonder_css -%}{{ 'ws-spaar.css' | asset_url | stylesheet_tag }}{%- endunless -%}
+{%- assign ws_pct = 0 -%}
+{%- if van > 0 and nu < van -%}
+  {%- assign ws_verschil = van | minus: nu -%}
+  {%- assign ws_pct = ws_verschil | times: 100 | divided_by: van -%}
+{%- endif -%}
+{%- assign ws_achter = achter | default: 'Korting' -%}
+<span class="ws-spaar{% if donker %} ws-spaar--donker{% endif %}{% if extra != blank %} {{ extra }}{% endif %}">
+  {%- if ws_pct > 0 -%}
+    {{- ws_pct }}%<span class="ws-spaar__woord">&nbsp;{{ ws_achter }}</span>
+  {%- else -%}
+    {%- if woord != blank -%}{{ woord }} {% endif -%}{%- render 'ws-euro', bedrag: bedrag -%}
+  {%- endif -%}
+</span>

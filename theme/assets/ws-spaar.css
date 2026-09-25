@@ -1,0 +1,41 @@
+/* ═══ Wellshave — het kortingslabel ═══
+   Eén vorm voor de hele winkel: een pil met een gouden waas en een gouden
+   letter, strak om het getal heen. Bewust géén volle gouden vulling — die is
+   voorbehouden aan wat je kunt aanklikken, zodat niemand op het label probeert
+   te drukken. En bewust geen icoontje: het label staat naast de prijs, en daar
+   telt elke pixel breedte.
+
+   Twee huiden, verder identiek: licht voor de witte kaarten, donker voor
+   de zwarte vlakken. Alles wat een blok er zelf omheen wil (marge, uitlijning
+   naast de prijs, een glans bij hover) staat in de css van dat blok, niet hier. */
+.ws-spaar{display:inline-flex;align-items:center;padding:4px 9px;
+  border-radius:100px;color:#8F6428;
+  background:linear-gradient(135deg,rgba(245,209,138,.42) 0%,rgba(188,129,62,.18) 100%);
+  font-size:11px;font-weight:700;letter-spacing:.02em;
+  line-height:1;white-space:nowrap;font-variant-numeric:tabular-nums}
+.ws-spaar--donker{color:#F5D18A;
+  background:linear-gradient(135deg,rgba(245,209,138,.22) 0%,rgba(245,209,138,.09) 100%)}
+
+/* Op een telefoon staan de kaarten met z'n tweeën op een rij en is de prijsregel
+   nog geen 135px breed. "27% Korting" naast "79,95" én "109,95" vraagt 161px —
+   dat past niet, en kleiner zetten haalt het ook niet: met alles op de rand van
+   leesbaar bleef er 153px nodig. Wat wél past: de nieuwe prijs krijgt zijn eigen
+   regel, en de van-prijs en het label staan er samen onder. Dan is de breedste
+   regel 128px, staat het label nog steeds naast een prijs, en blijft het woord
+   staan. Deze regels horen bij het label en niet bij de kaarten, daarom staan ze
+   hier: zonder label zou geen van de drie blokken ze nodig hebben. */
+@media (max-width:749px){
+  .ws-spaar{padding:3px 7px;font-size:10px}
+
+  /* collectiepagina — de prijs en de van-prijs zitten daar in één omhulsel,
+     dat moet dus eerst oplossen in de rij zelf. De selectors dragen .wsc mee
+     omdat ws-collectie.css dat ook doet: zonder die klasse verliezen deze
+     regels de cascade van gelijke specificiteit, en gebeurt er niets. */
+  .wsc .wsk-prijsrij{gap:4px 7px;align-items:center}
+  .wsc .wsk-prijsrij .wsk-prijs{display:contents}
+  .wsc .wsk-prijsrij .wsk-prijs b{flex:0 0 100%}
+
+  /* homepage — de sets en de bestsellers */
+  .ws-bn__prijs .ws-bn__nu{flex:0 0 100%}
+  .ws-bs__prijs .ws-bs__nu{flex:0 0 100%}
+}

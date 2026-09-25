@@ -1,0 +1,500 @@
+<title>Ruis op de homepage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+/* ═══ Wellshave — StoryBrand-audit van de homepage ═══
+   De vorm is die van een correctieronde: papier, inkt, en één rode
+   potloodkleur die alleen gebruikt wordt waar er iets mis is. De
+   winkeltekst staat in mono, zodat je altijd ziet wat citaat is en wat
+   commentaar. Bewust een andere typografie dan de winkel zelf — dit is
+   het rapport óver de pagina, niet de pagina. */
+
+:root{
+  --papier:#F2F1ED; --papier-op:#FBFAF8; --rand:rgba(26,26,24,.12);
+  --inkt:#1A1A18; --inkt-75:rgba(26,26,24,.75); --inkt-55:rgba(26,26,24,.55);
+  --inkt-38:rgba(26,26,24,.38);
+  --rood:#B5342B; --rood-zacht:rgba(181,52,43,.09); --rood-rand:rgba(181,52,43,.28);
+  --groen:#3F6B4A; --groen-zacht:rgba(63,107,74,.1);
+  --oker:#8A6A22; --oker-zacht:rgba(138,106,34,.11);
+  --schaduw:0 30px 60px -50px rgba(26,26,24,.7);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --papier:#151614; --papier-op:#1D1E1B; --rand:rgba(242,241,237,.14);
+    --inkt:#EDEBE4; --inkt-75:rgba(237,235,228,.75); --inkt-55:rgba(237,235,228,.55);
+    --inkt-38:rgba(237,235,228,.38);
+    --rood:#E8756A; --rood-zacht:rgba(232,117,106,.12); --rood-rand:rgba(232,117,106,.32);
+    --groen:#8FBF9B; --groen-zacht:rgba(143,191,155,.13);
+    --oker:#D8B45E; --oker-zacht:rgba(216,180,94,.13);
+    --schaduw:0 30px 60px -50px rgba(0,0,0,.9);
+  }
+}
+:root[data-theme="dark"]{
+  --papier:#151614; --papier-op:#1D1E1B; --rand:rgba(242,241,237,.14);
+  --inkt:#EDEBE4; --inkt-75:rgba(237,235,228,.75); --inkt-55:rgba(237,235,228,.55);
+  --inkt-38:rgba(237,235,228,.38);
+  --rood:#E8756A; --rood-zacht:rgba(232,117,106,.12); --rood-rand:rgba(232,117,106,.32);
+  --groen:#8FBF9B; --groen-zacht:rgba(143,191,155,.13);
+  --oker:#D8B45E; --oker-zacht:rgba(216,180,94,.13);
+  --schaduw:0 30px 60px -50px rgba(0,0,0,.9);
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--papier);color:var(--inkt);
+  font-family:"Newsreader",Georgia,"Times New Roman",serif;
+  font-size:17px;line-height:1.62;font-optical-sizing:auto}
+p{margin:0}
+h1,h2,h3{margin:0;font-weight:600;text-wrap:balance;line-height:1.15}
+
+.blad{max-width:900px;margin:0 auto;padding:0 24px 96px;
+  display:flex;flex-direction:column;gap:56px}
+
+/* ── kop ── */
+.kaft{padding:64px 0 0;display:flex;flex-direction:column;gap:18px}
+.merkregel{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;
+  font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--rood)}
+.kaft h1{font-size:clamp(38px,6vw,58px);letter-spacing:-.025em;font-weight:500}
+.kaft h1 em{font-style:italic;color:var(--rood)}
+.inleiding{font-size:19px;line-height:1.65;color:var(--inkt-75);max-width:60ch}
+.bron{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;
+  color:var(--inkt-55);border-top:1px solid var(--rand);padding-top:14px;line-height:1.7}
+.bron a{color:var(--inkt-75);text-underline-offset:3px}
+
+/* ── sectiekop ── */
+.sectie{display:flex;flex-direction:column;gap:22px}
+.sectiekop{display:flex;align-items:baseline;gap:14px;
+  border-bottom:1px solid var(--rand);padding-bottom:11px}
+.sectiekop .nr{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;
+  font-weight:600;color:var(--rood);letter-spacing:.06em}
+.sectiekop h2{font-size:27px;letter-spacing:-.02em}
+.leidend{font-size:18px;color:var(--inkt-75);max-width:62ch}
+
+/* ── de zeven elementen ── */
+.zeven{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:1px;
+  background:var(--rand);border:1px solid var(--rand);border-radius:3px;overflow:hidden}
+.el{background:var(--papier-op);padding:18px 18px 20px;display:flex;
+  flex-direction:column;gap:7px}
+.el .cijfer{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;
+  font-weight:600;color:var(--inkt-38);letter-spacing:.1em}
+.el h3{font-size:19px;letter-spacing:-.01em}
+.el p{font-size:14.5px;line-height:1.55;color:var(--inkt-75)}
+.el .vraag{font-style:italic;color:var(--inkt-55);font-size:14px}
+
+/* ── de dekkingsstrip ── */
+.dekking{display:flex;flex-direction:column;gap:8px}
+.dek-rij{display:grid;grid-template-columns:minmax(0,150px) 1fr;gap:16px;align-items:baseline;
+  padding:10px 0;border-bottom:1px solid var(--rand)}
+.dek-rij:last-child{border-bottom:0}
+.dek-naam{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12.5px;
+  font-weight:600;letter-spacing:.04em}
+.dek-rij p{font-size:15px;color:var(--inkt-75)}
+.staat{display:inline-block;font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  padding:3px 8px;border-radius:3px;margin-right:9px;white-space:nowrap}
+.staat--goed{background:var(--groen-zacht);color:var(--groen)}
+.staat--half{background:var(--oker-zacht);color:var(--oker)}
+.staat--weg{background:var(--rood-zacht);color:var(--rood)}
+
+/* ── de blokken ── */
+.blokken{display:flex;flex-direction:column;gap:30px}
+.blok{display:flex;flex-direction:column;gap:14px}
+.blokkop{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.blokkop .nr{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;
+  font-weight:600;color:var(--inkt-38)}
+.blokkop h3{font-size:22px;letter-spacing:-.015em}
+.blokkop .rol{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--inkt-55);
+  border:1px solid var(--rand);border-radius:3px;padding:3px 8px}
+
+.bevinding{display:grid;grid-template-columns:auto minmax(0,1fr);gap:0 14px;
+  align-items:start;padding:13px 15px;border-radius:3px;
+  border-left:3px solid transparent;background:var(--papier-op)}
+.bevinding + .bevinding{margin-top:8px}
+.bevinding--hard{border-left-color:var(--rood);background:var(--rood-zacht)}
+.bevinding--middel{border-left-color:var(--oker)}
+.bevinding--licht{border-left-color:var(--inkt-38)}
+.bevinding--goed{border-left-color:var(--groen);background:var(--groen-zacht)}
+.merk{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10px;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;padding-top:5px;white-space:nowrap}
+.bevinding--hard .merk{color:var(--rood)}
+.bevinding--middel .merk{color:var(--oker)}
+.bevinding--licht .merk{color:var(--inkt-38)}
+.bevinding--goed .merk{color:var(--groen)}
+.bevinding p{font-size:15.5px;line-height:1.58}
+.bevinding p + p{margin-top:7px}
+.bevinding .sb{font-size:13.5px;color:var(--inkt-55);font-style:italic}
+
+q,.cite{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:13.5px;
+  font-style:normal;background:rgba(128,128,128,.11);border-radius:3px;padding:1px 5px;
+  quotes:"“" "”"}
+
+/* ── de rangorde ── */
+.rang{display:flex;flex-direction:column;gap:1px;background:var(--rand);
+  border:1px solid var(--rand);border-radius:3px;overflow:hidden}
+.rang-rij{background:var(--papier-op);display:grid;
+  grid-template-columns:38px minmax(0,1fr) auto;gap:16px;align-items:center;
+  padding:14px 16px}
+.rang-rij .n{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:15px;
+  font-weight:600;color:var(--rood)}
+.rang-rij strong{font-weight:600;font-size:16.5px;display:block;margin-bottom:2px}
+.rang-rij span{font-size:14.5px;color:var(--inkt-75)}
+.moeite{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--inkt-55);
+  border:1px solid var(--rand);border-radius:3px;padding:4px 9px;white-space:nowrap}
+
+.slot{border-top:1px solid var(--rand);padding-top:22px;font-size:16px;
+  color:var(--inkt-75);max-width:64ch}
+.slot strong{color:var(--inkt);font-weight:600}
+
+@media (max-width:680px){
+  body{font-size:16px}
+  .blad{padding:0 16px 64px;gap:42px}
+  .kaft{padding-top:40px}
+  .inleiding{font-size:17px}
+  .sectiekop{flex-wrap:wrap;gap:6px 12px}
+  .sectiekop h2{font-size:23px}
+  .dek-rij{grid-template-columns:minmax(0,1fr);gap:5px}
+  .bevinding{grid-template-columns:minmax(0,1fr);gap:6px}
+  .merk{padding-top:0}
+  .rang-rij{grid-template-columns:26px minmax(0,1fr);gap:10px}
+  .moeite{grid-column:2;justify-self:start}
+}
+</style>
+
+<div class="blad">
+
+  <header class="kaft">
+    <p class="merkregel">Wellshave · homepage · StoryBrand-audit</p>
+    <h1>Waar de pagina <em>ruis</em> maakt</h1>
+    <p class="inleiding">Elf blokken, gelezen tegen het SB7-raamwerk van Donald Miller. De
+      vraag is niet of de blokken mooi zijn — dat zijn ze — maar of een bezoeker die drie
+      seconden geeft nog weet wat hij moet doen. Twee bevindingen zijn hard: er staat een
+      tegenspraak op de pagina, en er staat zichtbare plaatshoudertekst.</p>
+    <p class="bron">Bronnen: <a href="https://www.shortform.com/blog/donald-miller-building-a-storybrand/">Shortform — Building a StoryBrand</a> ·
+      <a href="https://www.seangarner.co/blog/the-7-elements-of-the-storybrand-framework-explained">De zeven elementen uitgelegd</a> ·
+      <a href="https://blog.sauceagency.com/what-is-the-grunt-test-does-your-website-pass-it">De grunt test</a> ·
+      <a href="https://grokipedia.com/page/StoryBrand_SB7_Framework">SB7 — overzicht</a><br>
+      Paginateksten gelezen uit <span class="cite">templates/index.json</span> en de elf
+      <span class="cite">ws-*.liquid</span>-secties van het testthema, 24-08-2026.</p>
+  </header>
+
+  <section class="sectie">
+    <div class="sectiekop"><span class="nr">I</span><h2>Wat het boek zegt</h2></div>
+    <p class="leidend">Miller leent de structuur van een verhaal: <strong>een held wil iets,
+      loopt tegen een probleem aan, ontmoet een gids die hem een plan geeft en tot actie
+      aanzet — waarmee hij een mislukking vermijdt en tot succes komt.</strong> De kern van
+      het boek is niet die structuur maar de reden erachter: mensen kopen niet het beste
+      product, ze kopen het product dat ze het snelst begrijpen. Elke zin die ze moet laten
+      nadenken kost ze energie, en die energie is beperkt. Vandaar de regel die het hele
+      boek draagt: <em>als je verwarring zaait, verlies je.</em></p>
+
+    <div class="zeven">
+      <div class="el"><span class="cijfer">01</span><h3>Een held</h3>
+        <p class="vraag">Wie is dit verhaal van?</p>
+        <p>De klant is de held, niet het merk. Het merk dat zichzelf tot held maakt, vraagt
+          de klant om toe te kijken bij andermans verhaal.</p></div>
+      <div class="el"><span class="cijfer">02</span><h3>Met een probleem</h3>
+        <p class="vraag">Wat houdt hem tegen?</p>
+        <p>Op drie niveaus: <strong>extern</strong> (het praktische obstakel),
+          <strong>intern</strong> (wat dat met hem doet) en <strong>filosofisch</strong>
+          (waarom het onrechtvaardig is dat het zo moet zijn).</p></div>
+      <div class="el"><span class="cijfer">03</span><h3>Ontmoet een gids</h3>
+        <p class="vraag">Snapt iemand mij, en kan hij het?</p>
+        <p>Een gids toont <strong>empathie</strong> én <strong>autoriteit</strong>. Weinig
+          autoriteit is al genoeg: het is een bewijsregel, geen levensverhaal.</p></div>
+      <div class="el"><span class="cijfer">04</span><h3>Die een plan geeft</h3>
+        <p class="vraag">Wat gaat er nu gebeuren?</p>
+        <p>Drie stappen, meer niet. Het plan haalt het risico uit de klik: hij ziet waar hij
+          aan begint voordat hij begint.</p></div>
+      <div class="el"><span class="cijfer">05</span><h3>En tot actie aanzet</h3>
+        <p class="vraag">Wat wil je dat ik doe?</p>
+        <p>Eén <strong>directe</strong> oproep — kopen — en eventueel één
+          <strong>overbruggende</strong> voor wie nog niet zover is. Overal dezelfde
+          woorden.</p></div>
+      <div class="el"><span class="cijfer">06</span><h3>Zo mislukking vermijdt</h3>
+        <p class="vraag">Wat als ik niets doe?</p>
+        <p>Wat het kost om te blijven waar hij is. Feitelijk, niet dreigend — en meteen
+          gevolgd door de uitweg.</p></div>
+      <div class="el"><span class="cijfer">07</span><h3>En tot succes komt</h3>
+        <p class="vraag">Hoe ziet het eruit als het lukt?</p>
+        <p>Concreet en voorstelbaar. Niet "de beste keuze", maar hoe zijn ochtend eruitziet
+          als het geregeld is.</p></div>
+      <div class="el"><span class="cijfer">—</span><h3>De grunt test</h3>
+        <p class="vraag">De maat voor alles hierboven.</p>
+        <p>Kan iemand die vijf seconden op je pagina is, zonder scrollen, drie dingen
+          zeggen: <strong>wat verkoop je, hoe maakt het mijn leven beter, en wat moet ik
+          doen om het te krijgen?</strong></p></div>
+    </div>
+  </section>
+
+  <section class="sectie">
+    <div class="sectiekop"><span class="nr">II</span><h2>De pagina langs de zeven</h2></div>
+    <p class="leidend">Voordat we per blok kijken: welke elementen staan er eigenlijk op de
+      homepage, en welke niet?</p>
+
+    <div class="dekking">
+      <div class="dek-rij"><span class="dek-naam">Held</span>
+        <p><span class="staat staat--half">half</span>De teksten spreken hem aan met "je",
+          maar het merk stapt in blok 4 en 7 zelf in de hoofdrol.</p></div>
+      <div class="dek-rij"><span class="dek-naam">Probleem</span>
+        <p><span class="staat staat--weg">ontbreekt</span>Nergens op de pagina staat wat er
+          nu misgaat. Geen sneetjes, geen ingegroeide haren, geen la vol half werkende
+          apparaten. De pagina opent met de oplossing.</p></div>
+      <div class="dek-rij"><span class="dek-naam">Gids</span>
+        <p><span class="staat staat--goed">sterk</span>Blok 3 is het beste blok van de
+          pagina: honderd dagen, garantie, en een mens aan de andere kant.</p></div>
+      <div class="dek-rij"><span class="dek-naam">Plan</span>
+        <p><span class="staat staat--weg">ontbreekt</span>Er staat nergens "zo werkt het".
+          De nummers 01–05 in blok 6 lijken een plan maar zijn onderdelen van een doos.</p></div>
+      <div class="dek-rij"><span class="dek-naam">Oproep</span>
+        <p><span class="staat staat--half">half</span>Er wordt volop opgeroepen, maar met
+          <strong>acht verschillende teksten</strong> voor in wezen dezelfde vraag — van
+          <q>Shop de bestsellers</q> tot <q>Pak de complete set</q>.</p></div>
+      <div class="dek-rij"><span class="dek-naam">Mislukking</span>
+        <p><span class="staat staat--weg">ontbreekt</span>Nergens staat wat het kost om
+          niets te doen.</p></div>
+      <div class="dek-rij"><span class="dek-naam">Succes</span>
+        <p><span class="staat staat--half">half</span>Eén keer, en meteen goed:
+          <q>Zonder dat het je ochtend kost</q>. Daarna komt het nooit meer terug.</p></div>
+    </div>
+  </section>
+
+  <section class="sectie">
+    <div class="sectiekop"><span class="nr">III</span><h2>Blok voor blok</h2></div>
+    <p class="leidend">Rood is een fout die vandaag schade doet. Oker is ruis die de
+      aandacht verdeelt. Grijs is een detail. Groen is wat je moet laten staan.</p>
+
+    <div class="blokken">
+
+      <article class="blok">
+        <div class="blokkop"><span class="nr">01</span><h3>Hero</h3><span class="rol">held · succes · oproep</span></div>
+        <div class="bevinding bevinding--middel"><span class="merk">ruis</span><div>
+          <p><strong>Vijf dingen vechten om de eerste blik.</strong> De badge
+            <q>Summer Sale — tot 40% korting</q>, de kop, de Trustpilot-score, het label
+            <q>Groom Guard™ PRO · Meest gekozen</q> en de teller <q>200.000+ bestellingen</q>.
+            Elk voor zich verdedigbaar; samen kost de grunt test moeite die hij niet zou
+            moeten kosten.</p>
+          <p class="sb">Miller: de header is de plek waar je het minst moet zetten, niet het meest.</p>
+        </div></div>
+        <div class="bevinding bevinding--middel"><span class="merk">ruis</span><div>
+          <p><strong>Twee knoppen van gelijk gewicht.</strong> <q>Shop de bestsellers</q>
+            naast <q>Vind jouw tool</q>. SB7 wil één directe oproep en hoogstens één
+            duidelijk ondergeschikte overbrugging. Nu moet de bezoeker eerst kiezen hoe hij
+            wil kiezen.</p></div></div>
+        <div class="bevinding bevinding--middel"><span class="merk">ruis</span><div>
+          <p><strong>De badge gaat over ons, niet over hem.</strong> Korting is het luidste
+            element op de pagina en het zegt niets over zijn probleem. Als de sale moet
+            blijven: maak hem kleiner dan de kop, niet opvallender.</p></div></div>
+        <div class="bevinding bevinding--goed"><span class="merk">laten</span><div>
+          <p><q>Elke dag verzorgd. Zonder dat het je ochtend kost.</q> Dit is een zuivere
+            succesformulering — het beschrijft zijn ochtend, niet ons product. Dit is de
+            beste zin van de pagina.</p></div></div>
+      </article>
+
+      <article class="blok">
+        <div class="blokkop"><span class="nr">02</span><h3>Bestsellers</h3><span class="rol">autoriteit</span></div>
+        <div class="bevinding bevinding--middel"><span class="merk">ruis</span><div>
+          <p><strong>Vier bewijslabels in één blok.</strong> <q>Meest verkocht · afgelopen
+            30 dagen</q>, <q>125 keer verkocht in dertig dagen</q>, <q>Best verkocht</q> op
+            de eerste kaart en <q>Best beoordeeld · 8,5</q> op de tweede. Twee daarvan zeggen
+            hetzelfde met andere woorden.</p></div></div>
+        <div class="bevinding bevinding--licht"><span class="merk">detail</span><div>
+          <p>Het woord <q>zone</q> valt hier voor het eerst, terwijl blok 5 en 8 pas
+            uitleggen wat een zone is. Kleine denkstap, maar wel een.</p></div></div>
+      </article>
+
+      <article class="blok">
+        <div class="blokkop"><span class="nr">03</span><h3>Zonder risico</h3><span class="rol">gids</span></div>
+        <div class="bevinding bevinding--hard"><span class="merk">fout</span><div>
+          <p><strong>Twee producten claimen dezelfde titel.</strong> Hier staat de
+            <q>Essential Flex Bundel</q> met de badge <q>Meest gekozen</q>. In blok 6 staat
+            de <q>Shave Package 3.0</q> met <q>Bestverkochte bundel</q>. Op één pagina, drie
+            blokken uit elkaar.</p>
+          <p>Dat is geen nuance die een bezoeker oplost — het is een tegenspraak, en die
+            raakt precies het ding dat de rest van de pagina probeert op te bouwen:
+            geloofwaardigheid. Kies er één.</p></div></div>
+        <div class="bevinding bevinding--middel"><span class="merk">ruis</span><div>
+          <p><strong>Het blok doet drie dingen.</strong> Garantie, reviews én een bundel met
+            een koopknop. Dat derde is een tweede aanbod midden in een geruststellingsblok,
+            en het is niet hetzelfde aanbod als in blok 6.</p></div></div>
+        <div class="bevinding bevinding--goed"><span class="merk">laten</span><div>
+          <p>Als gidsblok is dit precies goed: empathie (<q>Koop hem, gebruik hem 100
+            dagen</q>), autoriteit (garantie, Trustpilot live) en een mens aan de andere kant
+            (<q>ons eigen team</q>, hetzelfde pand in Helmond). Dit is het hart van de
+            pagina.</p></div></div>
+      </article>
+
+      <article class="blok">
+        <div class="blokkop"><span class="nr">04</span><h3>Tijdlijn — hoe we bouwen</h3><span class="rol">merk als held</span></div>
+        <div class="bevinding bevinding--hard"><span class="merk">fout</span><div>
+          <p><strong>Hier wordt het merk de held.</strong> Zes upgrades, <q>met z'n zessen
+            bouwen, testen en verbeteren we alles zelf</q>, een tijdlijn van 2022 tot 2026.
+            Het is het langste blok van de pagina en het gaat volledig over ons.</p>
+          <p>Voor de bezoeker zit hier één relevante vraag in: <em>is wat ik nu koop de
+            beste versie?</em> Dat antwoord kost één zin. De andere zes upgrades zijn
+            interessant voor jullie en ruis voor hem.</p>
+          <p class="sb">Miller: een beetje autoriteit gaat ver — te veel maakt van de gids
+            een tweede held.</p></div></div>
+        <div class="bevinding bevinding--middel"><span class="merk">ruis</span><div>
+          <p><q>950+ beoordelingen geanalyseerd</q> gebruikt hetzelfde getal als de
+            reviewscore elders, maar voor een andere claim. Dat leest als hetzelfde bewijs
+            en is het niet.</p></div></div>
+      </article>
+
+      <article class="blok">
+        <div class="blokkop"><span class="nr">05</span><h3>Zonekiezer</h3><span class="rol">bijna een plan</span></div>
+        <div class="bevinding bevinding--hard"><span class="merk">fout</span><div>
+          <p><strong>Dit blok en blok 8 stellen dezelfde vraag.</strong> <q>Waar wil je
+            trimmen?</q> hier, <q>Kies de zone waar je aan de slag wilt</q> daar. Met de
+            quiz erbij vraagt de pagina het straks drie keer.</p>
+          <p>Twee wegen naar dezelfde bestemming lijken behulpzaam maar zijn het niet: de
+            bezoeker moet nu ook nog kiezen wélke kiezer hij gebruikt.</p></div></div>
+        <div class="bevinding bevinding--middel"><span class="merk">ruis</span><div>
+          <p><strong>Vijf zones hier, vier in blok 8.</strong> Schaamstreek staat hier wel
+            en daar niet, zonder dat iets dat uitlegt. Wie beide blokken ziet, vraagt zich
+            af welke lijst klopt.</p></div></div>
+        <div class="bevinding bevinding--goed"><span class="merk">laten</span><div>
+          <p>Dit is het enige blok waar de pagina bijna een plan geeft: kies een plek, wij
+            wijzen het apparaat aan. Daar zit de kiem van het plan dat de pagina mist.</p></div></div>
+      </article>
+
+      <article class="blok">
+        <div class="blokkop"><span class="nr">06</span><h3>Koopblok</h3><span class="rol">directe oproep</span></div>
+        <div class="bevinding bevinding--middel"><span class="merk">ruis</span><div>
+          <p><strong>01–05 lezen als stappen, maar zijn onderdelen.</strong> De nummers op
+            de foto suggereren een volgorde die er niet is — je begint niet bij de
+            bodygroomer en eindigt bij de travelbag. Genummerde markeringen horen alleen
+            waar de volgorde iets betekent.</p></div></div>
+        <div class="bevinding bevinding--licht"><span class="merk">detail</span><div>
+          <p><q>Liever los? Bekijk de apparaten</q> staat direct onder de enige echte
+            koopknop van de pagina, en leidt eraf.</p></div></div>
+        <div class="bevinding bevinding--goed"><span class="merk">laten</span><div>
+          <p><q>Geen losse rommel</q> is een van de weinige plekken waar de pagina een pijn
+            benoemt. Precies het soort zin dat er meer mogen zijn.</p></div></div>
+      </article>
+
+      <article class="blok">
+        <div class="blokkop"><span class="nr">07</span><h3>Waar we voor staan</h3><span class="rol">merk als held</span></div>
+        <div class="bevinding bevinding--hard"><span class="merk">fout</span><div>
+          <p><strong>Het tweede "wie wij zijn"-blok, drie blokken na het eerste.</strong>
+            Blok 4 en blok 7 doen hetzelfde werk: uitleggen wat voor bedrijf jullie zijn.
+            Samen zijn ze goed voor een aanzienlijk deel van de pagina, en geen van beide
+            brengt de bezoeker dichter bij een keuze.</p></div></div>
+        <div class="bevinding bevinding--middel"><span class="merk">ruis</span><div>
+          <p><strong>De subkop is een missiestatement van 38 woorden</strong> dat begint met
+            <q>Wellshave bestaat om…</q>. Dat is het merk dat over zichzelf praat, in de
+            langste alinea van de pagina.</p></div></div>
+        <div class="bevinding bevinding--middel"><span class="merk">ruis</span><div>
+          <p>De slotregel stuurt terug: <q>staat hierboven in de tijdlijn</q>. Een bezoeker
+            terugsturen naar iets dat hij net voorbij scrolde, kost hem werk.</p></div></div>
+      </article>
+
+      <article class="blok">
+        <div class="blokkop"><span class="nr">08</span><h3>Assortiment per zone</h3><span class="rol">duplicaat</span></div>
+        <div class="bevinding bevinding--hard"><span class="merk">fout</span><div>
+          <p><strong>Dit is blok 5 nog een keer</strong>, in roostervorm. Dezelfde vraag,
+            dezelfde vier hoofdproducten, dezelfde bestemming.</p>
+          <p>Er is een goed argument om er één te houden: de interactieve figuur is
+            aantrekkelijker, het rooster is duidelijker en toont live aantallen en
+            vanaf-prijzen. Maar niet allebei.</p></div></div>
+        <div class="bevinding bevinding--goed"><span class="merk">laten</span><div>
+          <p>De aantallen en vanaf-prijzen komen rechtstreeks uit de collecties. Niemand
+            hoeft ze bij te werken en ze kunnen dus nooit verouderen.</p></div></div>
+      </article>
+
+      <article class="blok">
+        <div class="blokkop"><span class="nr">09</span><h3>De Wellshave-familie</h3><span class="rol">sociaal bewijs</span></div>
+        <div class="bevinding bevinding--hard"><span class="merk">fout</span><div>
+          <p><strong>Er staat zichtbare plaatshoudertekst op de pagina.</strong> Alle tien
+            de video's dragen het bijschrift <q>Naam · plaats</q> en <q>@instagramtag</q>.
+            De knop <q>Bekijk Instagram</q> heeft geen link.</p>
+          <p>Dit blok belooft echte klanten en laat zien dat er geen zijn ingevuld. Het doet
+            daarmee het tegenovergestelde van wat sociaal bewijs hoort te doen. Dit is de
+            enige bevinding die ik zou oplossen vóór livegang, ongeacht wat je met de rest
+            doet.</p></div></div>
+        <div class="bevinding bevinding--middel"><span class="merk">ruis</span><div>
+          <p><q>200.000+ bestellingen sinds 2021</q> staat hier voor de derde keer, na de
+            hero en vóór de afsluiter.</p></div></div>
+      </article>
+
+      <article class="blok">
+        <div class="blokkop"><span class="nr">10</span><h3>Zekerheden en vragen</h3><span class="rol">de laatste lade</span></div>
+        <div class="bevinding bevinding--middel"><span class="merk">ruis</span><div>
+          <p><strong>De vierde herhaling van dezelfde drie beloftes.</strong> 100 dagen,
+            2 jaar garantie en morgen in huis staan verspreid over de pagina in
+            <strong>negen van de elf</strong> blokken. Herhaling van een oproep helpt; herhaling van
+            dezelfde geruststelling leert het oog om eroverheen te kijken.</p></div></div>
+        <div class="bevinding bevinding--licht"><span class="merk">detail</span><div>
+          <p>Negen vragen is veel voor een homepage. Drie plus een link naar de rest doet
+            hetzelfde werk met minder gewicht.</p></div></div>
+        <div class="bevinding bevinding--goed"><span class="merk">laten</span><div>
+          <p>De plek klopt: dit is wat Miller de onderste lade noemt — alles wat iemand
+            nodig heeft die tóch nog twijfelt, ver genoeg naar beneden om de rest niet in de
+            weg te zitten.</p></div></div>
+      </article>
+
+      <article class="blok">
+        <div class="blokkop"><span class="nr">11</span><h3>Afsluiter</h3><span class="rol">oproep</span></div>
+        <div class="bevinding bevinding--middel"><span class="merk">ruis</span><div>
+          <p>Weer twee knoppen naast elkaar, <q>Bekijk alle apparaten</q> en <q>Start de
+            quiz</q>. Aan het einde van de pagina moet er nog één keuze over zijn, niet
+            twee.</p></div></div>
+        <div class="bevinding bevinding--goed"><span class="merk">laten</span><div>
+          <p><q>Vandaag beslissen kost je niets: je hebt honderd dagen om van gedachten te
+            veranderen.</q> Dit is de juiste laatste zin — het haalt de laatste reden om te
+            wachten weg.</p></div></div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="sectie">
+    <div class="sectiekop"><span class="nr">IV</span><h2>Wat ik zou doen, op volgorde</h2></div>
+    <p class="leidend">Gerangschikt op schade, niet op moeite. De eerste twee zijn fouten;
+      de rest zijn keuzes.</p>
+
+    <div class="rang">
+      <div class="rang-rij"><span class="n">1</span>
+        <div><strong>Haal de plaatshouders uit blok 9</strong>
+          <span>Echte namen, of het blok uit tot ze er zijn. <q>@instagramtag</q> mag een
+            bezoeker nooit zien.</span></div><span class="moeite">klein</span></div>
+      <div class="rang-rij"><span class="n">2</span>
+        <div><strong>Los de bundeltegenspraak op</strong>
+          <span>Eén bundel is "meest gekozen". Nu claimen de Essential Flex Bundel en de
+            Shave Package 3.0 het allebei.</span></div><span class="moeite">klein</span></div>
+      <div class="rang-rij"><span class="n">3</span>
+        <div><strong>Eén knoptekst voor de directe oproep</strong>
+          <span>Nu acht varianten. Kies er één en herhaal die letterlijk, overal.</span></div><span class="moeite">klein</span></div>
+      <div class="rang-rij"><span class="n">4</span>
+        <div><strong>Benoem het probleem, bovenaan</strong>
+          <span>De pagina opent met de oplossing. De quiz bewijst dat jullie de pijn scherp
+            kunnen benoemen — sneetjes, ingegroeide haren, drie apparaten voor één klus.
+            Zet dát boven de vouw.</span></div><span class="moeite">middel</span></div>
+      <div class="rang-rij"><span class="n">5</span>
+        <div><strong>Voeg blok 4 en 7 samen</strong>
+          <span>Twee "wie wij zijn"-blokken worden één kort gidsblok. Dat is de grootste
+            winst in leesbaarheid van de hele pagina.</span></div><span class="moeite">groot</span></div>
+      <div class="rang-rij"><span class="n">6</span>
+        <div><strong>Kies tussen blok 5 en blok 8</strong>
+          <span>Eén zonekiezer. De ander vervalt, of wordt de quiz.</span></div><span class="moeite">middel</span></div>
+      <div class="rang-rij"><span class="n">7</span>
+        <div><strong>Zet er een plan van drie stappen in</strong>
+          <span>Kies je zone — wij wijzen het apparaat aan — honderd dagen proberen. Het
+            staat er half, in blok 5; maak het expliciet.</span></div><span class="moeite">middel</span></div>
+      <div class="rang-rij"><span class="n">8</span>
+        <div><strong>Snoei de herhaling</strong>
+          <span>100 dagen / 2 jaar / morgen in huis staan in negen van de elf blokken. Terug naar twee: de
+            hero en blok 10.</span></div><span class="moeite">klein</span></div>
+    </div>
+
+    <p class="slot"><strong>Wat ik bewust niet voorstel:</strong> de pagina korter maken om
+      het korter maken. De lengte is niet het probleem — de <em>herhaling</em> is het
+      probleem. Als blok 4 en 7 samengaan, één zonekiezer verdwijnt en de drie beloftes nog
+      twee keer staan in plaats van negen, wordt de pagina vanzelf korter én zegt hij méér.
+      En dan is er ruimte voor de twee dingen die er nu helemaal niet staan: waar hij nu
+      tegenaan loopt, en wat het hem kost om het te laten zoals het is.</p>
+  </section>
+
+</div>

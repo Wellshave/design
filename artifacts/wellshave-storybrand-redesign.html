@@ -1,0 +1,840 @@
+<title>Homepage na StoryBrand</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+/* ═══ Wellshave — de homepage na de StoryBrand-rangorde ═══
+   Dit is de pagina zelf, niet een voorstel erover. De blokken staan in de
+   winkelstijl; de balk bovenaan en de notities staan in mono, zodat je
+   altijd ziet wat pagina is en wat gereedschap.
+
+   De blokken meten zich aan hun eigen container, niet aan het venster
+   (@container). Daardoor rendert de mobiele weergave echt als 390px in
+   plaats van als een geschaalde desktop.
+
+   Eén lichte wereld, net als de winkel. Elke knop zet zijn eigen kleur:
+   een <button> erft anders de systeemkleur buttontext, en die wordt wit
+   zodra de lezer zijn thema op donker zet. */
+
+:root{
+  --zand-1:#FFFDFA; --zand-2:#FBF6EE; --zand-3:#F6EEE0;
+  --inkt:#111111; --inkt-72:rgba(17,17,17,.72); --inkt-56:rgba(17,17,17,.56);
+  --inkt-34:rgba(17,17,17,.34); --lijn:rgba(17,17,17,.1);
+  --brons:#BC813E; --brons-diep:#8A5A22; --brons-zacht:rgba(188,129,62,.12);
+  --goud:#F5D18A; --groen:#1F7A4D; --groen-zacht:rgba(31,122,77,.1);
+  --wit:#FFFFFF; --nacht:#0B0B0A;
+  --lab:#1B1C1A; --lab-vlak:#262724; --lab-lijn:rgba(255,255,255,.14);
+  --lab-tekst:rgba(255,255,255,.6); --lab-fel:#F3EFE7; --lab-accent:#D8AC5D;
+  --weg:#C4483D;
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:#E9E6DF;color:var(--inkt);
+  font-family:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:16px;line-height:1.55}
+p{margin:0}
+h1,h2,h3{margin:0;font-weight:700;text-wrap:balance;line-height:1.08;letter-spacing:-.03em}
+img{max-width:100%}
+
+/* ══ de bedieningsbalk ══ */
+.balk{position:sticky;top:0;z-index:40;background:var(--lab);color:var(--lab-fel);
+  border-bottom:1px solid var(--lab-lijn);padding:11px 18px;
+  display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;
+  font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
+.balk .naam{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--lab-accent);margin-right:auto}
+.groep{display:flex;gap:5px;background:var(--lab-vlak);border:1px solid var(--lab-lijn);
+  border-radius:8px;padding:3px}
+.groep button{font:inherit;font-size:11.5px;font-weight:500;cursor:pointer;
+  color:var(--lab-tekst);background:transparent;border:0;border-radius:5px;padding:6px 12px;
+  transition:background .15s,color .15s}
+.groep button:hover{color:var(--lab-fel)}
+.groep button[aria-pressed="true"]{background:var(--lab-accent);color:#1B1C1A;font-weight:600}
+.groep button:focus-visible{outline:2px solid var(--lab-accent);outline-offset:2px}
+.balk .telling{font-size:11px;color:var(--lab-tekst);white-space:nowrap}
+.balk .telling b{color:var(--lab-fel);font-weight:600}
+.balk .telling s{color:var(--weg);opacity:.9}
+
+/* ══ het toneel ══ */
+.toneel{padding:18px;display:flex;justify-content:center}
+.pagina{container-type:inline-size;width:100%;max-width:1180px;
+  background:var(--zand-2);border-radius:16px;overflow:hidden;
+  box-shadow:0 40px 80px -60px rgba(17,17,17,.8)}
+body[data-weergave="mobiel"] .pagina{max-width:390px;border-radius:26px;
+  border:8px solid #1B1C1A}
+
+/* ══ notitie boven een blok ══ */
+.notitie{background:var(--lab);color:var(--lab-tekst);padding:12px 16px;
+  display:flex;flex-wrap:wrap;align-items:flex-start;gap:10px;
+  font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;line-height:1.6}
+.notitie[hidden]{display:none}
+.notitie .stap{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:#1B1C1A;background:var(--lab-accent);border-radius:4px;padding:3px 7px;white-space:nowrap}
+.notitie .stap--nieuw{background:#7FB891}
+.notitie .stap--weg{background:#E8756A}
+.notitie p{flex:1;min-width:200px}
+.notitie b{color:var(--lab-fel);font-weight:600}
+.notitie i{font-style:normal;color:var(--lab-accent)}
+
+/* ══ een blok ══ */
+.blok{padding:64px 52px;display:flex;flex-direction:column;gap:22px;
+  background:linear-gradient(160deg,var(--zand-1) 0%,var(--zand-2) 52%,var(--zand-3) 100%)}
+.blok--nacht{background:var(--nacht);color:var(--wit)}
+.blok--wit{background:var(--wit)}
+.blok--zand{background:var(--zand-3)}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--brons)}
+.blok--nacht .eyebrow{color:var(--goud)}
+.blok h2{font-size:42px}
+.blok h2 b{color:var(--brons);font-weight:700}
+.blok--nacht h2 b{color:var(--goud)}
+.sub{font-size:17px;line-height:1.6;color:var(--inkt-72);max-width:54ch}
+.blok--nacht .sub{color:rgba(255,255,255,.66)}
+.kopgroep{display:flex;flex-direction:column;gap:12px}
+
+/* knoppen */
+.rij{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.cta{display:inline-flex;align-items:center;gap:11px;cursor:pointer;font:inherit;
+  font-size:14.5px;font-weight:700;color:var(--wit);
+  background:linear-gradient(100deg,#C98F45 0%,#A9702C 100%);border:0;border-radius:100px;
+  padding:17px 30px;box-shadow:0 16px 30px -16px rgba(169,112,44,.9);
+  transition:transform .18s,box-shadow .18s}
+.cta:hover{transform:translateY(-2px);box-shadow:0 20px 36px -16px rgba(169,112,44,.95)}
+.cta svg{width:16px;height:16px}
+.stil{font:inherit;font-size:14px;color:var(--inkt-56);background:none;border:0;
+  cursor:pointer;text-decoration:underline;text-underline-offset:4px}
+.stil:hover{color:var(--inkt)}
+.blok--nacht .stil{color:rgba(255,255,255,.58)}
+.blok--nacht .stil:hover{color:var(--wit)}
+.micro{font-size:13px;color:var(--inkt-56);display:flex;flex-wrap:wrap;gap:6px 18px}
+.micro span{position:relative;padding-left:14px}
+.micro span::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);
+  width:5px;height:5px;border-radius:50%;background:var(--brons)}
+.blok--nacht .micro{color:rgba(255,255,255,.55)}
+
+/* ══ 1 · hero ══ */
+.hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.85fr);gap:44px;
+  align-items:center}
+.hero-tekst{display:flex;flex-direction:column;gap:20px;align-items:flex-start}
+.hero h2{font-size:52px;line-height:1.05}
+.badge{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--goud);
+  background:rgba(245,209,138,.13);border:1px solid rgba(245,209,138,.28);
+  border-radius:100px;padding:6px 14px}
+.tp{display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,.68)}
+.sterren{display:flex;gap:2px}
+.sterren i{width:17px;height:17px;background:#00B67A;display:grid;place-items:center;
+  position:relative}
+.sterren i.half{background:#3C3A36}
+.sterren i.half::before{content:"";position:absolute;inset:0;width:50%;background:#00B67A}
+.sterren svg{width:11px;height:11px;fill:#fff;position:relative}
+.hero-beeld{aspect-ratio:4/5;border-radius:18px;position:relative;overflow:hidden;
+  background:linear-gradient(150deg,#232320 0%,#15150F 60%,#2A2116 100%);
+  display:grid;place-items:center}
+.hero-beeld .mark{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;
+  letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.3);text-align:center;
+  line-height:2}
+.hero-beeld .mark b{display:block;font-size:56px;letter-spacing:-.04em;color:var(--goud);
+  opacity:.55;margin-bottom:6px}
+
+/* ══ 2 · probleem ══ */
+.pijnen{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.pijn{background:var(--wit);border:1px solid var(--lijn);border-radius:16px;
+  padding:22px;display:flex;flex-direction:column;gap:9px}
+.pijn .laag{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10px;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--inkt-34)}
+.pijn p{font-size:15.5px;line-height:1.5;font-weight:600}
+.slotpijn{font-size:19px;font-weight:700;color:var(--brons-diep);max-width:46ch}
+
+/* ══ 3 · plan + zonekiezer ══ */
+.stappen{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.stap{background:var(--wit);border:1px solid var(--lijn);border-radius:16px;padding:22px;
+  display:flex;flex-direction:column;gap:7px}
+.stap i{font-style:normal;width:30px;height:30px;border-radius:50%;background:var(--brons);
+  color:var(--wit);display:grid;place-items:center;font-size:14px;font-weight:700;
+  margin-bottom:4px}
+.stap b{font-size:17px}
+.stap span{font-size:14px;color:var(--inkt-56);line-height:1.5}
+
+.kiezer{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1fr);gap:22px;
+  align-items:stretch;margin-top:4px}
+.figuur{position:relative;border-radius:18px;overflow:hidden;min-height:380px;
+  background:linear-gradient(140deg,#1D1D1A 0%,#121210 55%,#241C12 100%)}
+/* Het silhouet loopt van kruin tot heup. Het rekt mee met het vak
+   (preserveAspectRatio="none") en deelt daardoor precies het percentagestelsel
+   van de pins — hoe breed of hoog het vak ook wordt, ze blijven op hun plek. */
+.silhouet{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.silhouet path,.silhouet ellipse{fill:rgba(245,209,138,.05);
+  stroke:rgba(245,209,138,.26);stroke-width:.6;vector-effect:non-scaling-stroke}
+.figuur .hint{position:absolute;left:20px;bottom:18px;font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+.pin{position:absolute;width:30px;height:30px;margin:-15px 0 0 -15px;padding:0;cursor:pointer;
+  border:1px solid rgba(245,209,138,.5);border-radius:50%;background:rgba(245,209,138,.14);
+  color:var(--goud);display:grid;place-items:center;transition:transform .18s,background .18s}
+.pin::after{content:"";width:9px;height:9px;border-radius:50%;background:var(--goud)}
+.pin:hover{transform:scale(1.14);background:rgba(245,209,138,.28)}
+.pin[aria-pressed="true"]{background:var(--goud);border-color:var(--goud);transform:scale(1.14)}
+.pin[aria-pressed="true"]::after{background:#15150F}
+.pin:focus-visible{outline:2px solid var(--goud);outline-offset:3px}
+.zonekaart{background:var(--wit);border:1px solid var(--lijn);border-radius:18px;
+  padding:26px;display:flex;flex-direction:column;gap:12px}
+.zonekaart .match{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--brons)}
+.zonekaart h3{font-size:27px}
+.zonekaart .claim{font-size:15px;line-height:1.55;color:var(--inkt-72)}
+.feiten{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+.feiten li{display:flex;align-items:flex-start;gap:10px;font-size:14px;line-height:1.5;
+  color:var(--inkt-72)}
+.feiten svg{width:15px;height:15px;flex:none;color:var(--brons);margin-top:3px}
+.zonevoet{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin-top:auto;
+  padding-top:14px;border-top:1px solid var(--lijn);
+  font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;color:var(--inkt-56)}
+.zonetabs{display:flex;flex-wrap:wrap;gap:7px}
+.zonetab{font:inherit;font-size:13px;font-weight:600;cursor:pointer;color:var(--inkt-72);
+  background:var(--wit);border:1px solid var(--lijn);border-radius:100px;padding:9px 16px;
+  transition:border-color .15s,color .15s}
+.zonetab:hover{border-color:rgba(188,129,62,.6);color:var(--inkt)}
+.zonetab[aria-pressed="true"]{background:var(--brons);border-color:var(--brons);color:var(--wit)}
+.zonetab:focus-visible{outline:2px solid var(--brons);outline-offset:2px}
+
+/* ══ 4 · bestsellers ══ */
+.kaarten{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.pk{background:var(--zand-1);border:1px solid var(--lijn);border-radius:16px;overflow:hidden;
+  display:flex;flex-direction:column;transition:transform .18s,box-shadow .18s}
+.pk:hover{transform:translateY(-3px);box-shadow:0 22px 40px -28px rgba(17,17,17,.55)}
+.pk-beeld{aspect-ratio:1/1;background:linear-gradient(155deg,#FBF4E9,#EFE0C9);position:relative;
+  display:grid;place-items:center;font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:30px;font-weight:600;color:rgba(188,129,62,.75)}
+.pk-tag{position:absolute;left:12px;top:12px;font-size:9.5px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:#38220A;background:rgba(255,255,255,.92);border-radius:100px;
+  padding:5px 11px}
+.pk-body{padding:16px 16px 18px;display:flex;flex-direction:column;gap:5px;flex:1}
+.pk-zone{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brons)}
+.pk-body b{font-size:15.5px;line-height:1.25}
+.pk-body .wat{font-size:13px;color:var(--inkt-56);line-height:1.45}
+.pk-onder{display:flex;align-items:baseline;justify-content:space-between;gap:10px;
+  margin-top:auto;padding-top:10px}
+.pk-prijs{font-size:17px;font-weight:700;font-variant-numeric:tabular-nums}
+.pk-aantal{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;color:var(--inkt-34)}
+
+/* ══ 5 · gids ══ */
+.gidsgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.78fr);gap:22px}
+.garantie{background:var(--wit);border:1px solid var(--lijn);border-radius:18px;padding:30px;
+  position:relative;display:flex;flex-direction:column;gap:14px}
+.zegel{position:absolute;right:26px;top:-18px;width:74px;height:74px;border-radius:50%;
+  background:var(--brons);color:var(--wit);display:grid;place-items:center;text-align:center;
+  line-height:1.05;box-shadow:0 14px 26px -14px rgba(169,112,44,.9)}
+.zegel b{display:block;font-size:23px;font-weight:800}
+.zegel span{font-size:10px;letter-spacing:.1em;text-transform:uppercase}
+.garantie h3{font-size:26px;max-width:16ch}
+.garantie h3 b{color:var(--brons)}
+.punten{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:9px}
+.punten li{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;
+  background:var(--brons-zacht);color:var(--brons-diep);border-radius:100px;padding:8px 14px}
+.punten svg{width:14px;height:14px}
+.team{font-size:14px;line-height:1.6;color:var(--inkt-72);border-top:1px solid var(--lijn);
+  padding-top:14px}
+.team b{color:var(--inkt)}
+.tpband{background:var(--wit);border:1px solid var(--lijn);border-radius:18px;padding:24px;
+  display:flex;flex-direction:column;gap:14px}
+.tpkop{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.tpkop b{font-size:18px}
+.tpkop span{font-size:12.5px;color:var(--inkt-56)}
+.review{border-top:1px solid var(--lijn);padding-top:13px;display:flex;flex-direction:column;gap:6px}
+.review .sterren i{width:14px;height:14px}
+.review .sterren svg{width:9px;height:9px}
+.review p{font-size:13.5px;line-height:1.5;color:var(--inkt-72)}
+.review .wie{font-size:11.5px;color:var(--inkt-34);font-family:"IBM Plex Mono",ui-monospace,monospace}
+
+/* ══ 6 · koopblok ══ */
+.koop{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.86fr);gap:0;
+  background:var(--wit);border:1px solid var(--lijn);border-radius:18px;overflow:hidden}
+.koop-beeld{background:linear-gradient(155deg,#FBF4E9,#EFE0C9);min-height:340px;
+  display:grid;place-items:center;position:relative;padding:30px}
+.koop-beeld .mark{font-family:"IBM Plex Mono",ui-monospace,monospace;text-align:center;
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,17,17,.3);line-height:2}
+.koop-beeld .mark b{display:block;font-size:48px;letter-spacing:-.04em;color:var(--brons);
+  margin-bottom:6px}
+.koop-kaart{padding:32px;display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.koop-kaart h3{font-size:29px}
+.koop-kaart h3 b{color:var(--brons)}
+.inhoud{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;width:100%}
+.inhoud li{display:flex;align-items:flex-start;gap:10px;font-size:14px;line-height:1.5;
+  color:var(--inkt-72)}
+.inhoud svg{width:15px;height:15px;flex:none;color:var(--brons);margin-top:3px}
+.prijsrij{display:flex;align-items:baseline;flex-wrap:wrap;gap:11px;
+  font-variant-numeric:tabular-nums}
+.nu{font-size:34px;font-weight:800;letter-spacing:-.03em}
+.was{font-size:17px;color:var(--inkt-34);text-decoration:line-through}
+.korting{font-size:12px;font-weight:700;color:var(--groen);background:var(--groen-zacht);
+  border-radius:100px;padding:5px 11px}
+.voorraad{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:600;
+  color:var(--inkt-72)}
+.stip{width:8px;height:8px;border-radius:50%;background:var(--groen)}
+
+/* ══ 7 · gids kort ══ */
+.drie{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.feitkaart{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);
+  border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:8px}
+.feitkaart b{font-size:26px;letter-spacing:-.02em;color:var(--goud)}
+.feitkaart span{font-size:14px;line-height:1.55;color:rgba(255,255,255,.62)}
+.inzet{border-left:3px solid var(--goud);padding:5px 0 5px 17px;max-width:60ch;
+  font-size:16px;line-height:1.6;color:rgba(255,255,255,.74)}
+.blok:not(.blok--nacht) .inzet{border-left-color:var(--brons);color:var(--inkt-72)}
+
+/* ══ 8 · familie ══ */
+.videos{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.video{aspect-ratio:9/16;border-radius:14px;overflow:hidden;position:relative;
+  background:linear-gradient(160deg,#26251F,#14140F);display:grid;place-items:center}
+.video .play{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.9);
+  display:grid;place-items:center;color:#111}
+.video .play svg{width:14px;height:14px;margin-left:2px}
+.video .duur{position:absolute;right:9px;bottom:9px;font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:10px;color:rgba(255,255,255,.7)}
+.pil{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;
+  color:var(--inkt-72);background:var(--wit);border:1px solid var(--lijn);border-radius:100px;
+  padding:8px 15px}
+
+/* ══ 9 · zekerheden + vragen ══ */
+.zekerheden{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.zeker{background:var(--zand-1);border:1px solid var(--lijn);border-radius:14px;padding:20px;
+  display:flex;flex-direction:column;gap:5px}
+.zeker b{font-size:17px}
+.zeker span{font-size:13px;color:var(--inkt-56);line-height:1.45}
+.vragen{display:flex;flex-direction:column;border-top:1px solid var(--lijn)}
+.vraag{border-bottom:1px solid var(--lijn)}
+.vraag>button{width:100%;display:flex;align-items:center;justify-content:space-between;gap:14px;
+  font:inherit;font-size:16px;font-weight:600;text-align:left;cursor:pointer;
+  color:var(--inkt);background:none;border:0;padding:18px 0}
+.vraag>button:focus-visible{outline:2px solid var(--brons);outline-offset:-2px}
+.vraag .teken{width:22px;height:22px;flex:none;color:var(--brons);transition:transform .2s}
+.vraag>button[aria-expanded="true"] .teken{transform:rotate(45deg)}
+.antwoord{font-size:14.5px;line-height:1.65;color:var(--inkt-72);padding:0 0 18px;max-width:70ch}
+.antwoord[hidden]{display:none}
+.antwoord b{color:var(--inkt)}
+
+/* ══ 10 · afsluiter ══ */
+.slotmidden{align-items:center;text-align:center}
+.slotmidden .sub,.slotmidden .inzet{margin-left:auto;margin-right:auto}
+.slotmidden .inzet{text-align:left}
+.nieuws{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px;
+  width:100%;padding-top:22px;margin-top:6px;border-top:1px solid rgba(255,255,255,.12)}
+.nieuws p{font-size:14px;color:rgba(255,255,255,.62)}
+.nieuws .veld{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.17);border-radius:100px;padding:6px 6px 6px 20px}
+.nieuws input{font:inherit;font-size:13.5px;color:var(--wit);background:none;border:0;
+  outline:0;width:180px}
+.nieuws input::placeholder{color:rgba(255,255,255,.4)}
+.nieuws button{font:inherit;font-size:11.5px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:#111;background:var(--wit);border:0;border-radius:100px;
+  padding:12px 18px;cursor:pointer}
+
+/* ══ voetnoot onder het toneel ══ */
+.voetnoot{max-width:1180px;margin:0 auto;padding:6px 18px 60px;
+  font-size:13.5px;line-height:1.7;color:rgba(17,17,17,.55)}
+.voetnoot b{color:var(--inkt);font-weight:600}
+.voetnoot code{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12.5px;
+  background:rgba(17,17,17,.06);border-radius:5px;padding:2px 6px}
+
+/* ══════ de pagina op smal formaat — container, niet venster ══════ */
+@container (max-width:760px){
+  .blok{padding:34px 18px;gap:17px}
+  .blok h2{font-size:27px}
+  .hero{grid-template-columns:minmax(0,1fr);gap:22px}
+  .hero h2{font-size:31px}
+  .hero-tekst{align-items:stretch}
+  .hero .rij{flex-direction:column;align-items:stretch}
+  .cta{justify-content:center}
+  .hero-beeld{aspect-ratio:5/4;order:-1}
+  .sub{font-size:15px}
+  /* wat naast elkaar kan, blijft naast elkaar */
+  .pijnen{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  .pijnen .pijn:last-child{grid-column:span 2}
+  .pijn{padding:15px}
+  .pijn p{font-size:13.5px}
+  .slotpijn{font-size:16px}
+  .stappen{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  .stap{padding:14px 11px;gap:5px}
+  .stap i{width:25px;height:25px;font-size:12px}
+  .stap b{font-size:13.5px}
+  .stap span{font-size:11.5px}
+  .kiezer{grid-template-columns:minmax(0,1fr)}
+  .figuur{min-height:300px}
+  .zonekaart{padding:18px}
+  .zonekaart h3{font-size:21px}
+  .kaarten{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  .pk-body{padding:12px 12px 14px}
+  .pk-body b{font-size:13.5px}
+  .pk-body .wat{font-size:11.5px}
+  .gidsgrid{grid-template-columns:minmax(0,1fr)}
+  .garantie{padding:22px}
+  .zegel{width:60px;height:60px;right:18px;top:-14px}
+  .zegel b{font-size:19px}
+  .koop{grid-template-columns:minmax(0,1fr)}
+  .koop-beeld{min-height:0;aspect-ratio:16/10;padding:18px}
+  .koop-kaart{padding:20px}
+  .koop-kaart h3{font-size:22px}
+  .nu{font-size:27px}
+  .drie{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  .feitkaart{padding:14px 11px}
+  .feitkaart b{font-size:18px}
+  .feitkaart span{font-size:11.5px}
+  .videos{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  .videos .video:nth-child(n+4){display:none}
+  .zekerheden{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  .zeker{padding:14px}
+  .zeker b{font-size:14.5px}
+  .zeker span{font-size:11.5px}
+  .vraag>button{font-size:14.5px;padding:14px 0}
+  .antwoord{font-size:13.5px}
+  .nieuws{flex-direction:column;align-items:stretch}
+  .nieuws .veld{justify-content:space-between}
+  .nieuws input{width:100%}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .cta,.pk,.pin{transition:none}
+  .cta:hover,.pk:hover,.pin:hover{transform:none}
+}
+</style>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="arw" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="chk" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ster" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01z"/></symbol>
+  <symbol id="plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="play" viewBox="0 0 24 24"><path d="M7 4.5l12 7.5-12 7.5z" fill="currentColor"/></symbol>
+</svg>
+
+<div class="balk">
+  <span class="naam">Wellshave · homepage na SB7</span>
+  <span class="telling"><s>11</s> → <b>10</b> blokken</span>
+  <span class="telling"><s>8</s> → <b>1</b> knoptekst</span>
+  <span class="telling"><s>9</s> → <b>2</b> keer de beloftes</span>
+  <span class="telling">copy: <b>voordeel vóór spec</b></span>
+  <div class="groep" role="group" aria-label="Weergave">
+    <button type="button" data-weergave="desktop" aria-pressed="true">Desktop</button>
+    <button type="button" data-weergave="mobiel" aria-pressed="false">Mobiel</button>
+  </div>
+  <div class="groep" role="group" aria-label="Notities">
+    <button type="button" data-notities="aan" aria-pressed="true">Notities aan</button>
+    <button type="button" data-notities="uit" aria-pressed="false">Uit</button>
+  </div>
+</div>
+
+<div class="toneel">
+<div class="pagina">
+
+  <!-- ══════════ 1 · HERO ══════════ -->
+  <div class="notitie"><span class="stap">3 · 4 · 8</span>
+    <p><b>Eén knop.</b> <i>Shop de bestsellers</i> en <i>Vind jouw tool</i> worden
+      <b>Vind jouw apparaat</b>. <b>Het probleem staat nu in de subkop.</b> De wijzer
+      <i>Groom Guard PRO · Meest gekozen</i> en de teller <i>200.000+</i> zijn weg — die
+      concurreerden met de kop. De sale blijft, maar kleiner dan de kop.</p></div>
+  <section class="blok blok--nacht">
+    <div class="hero">
+      <div class="hero-tekst">
+        <span class="badge">Summer Sale · tot 40%</span>
+        <h2>Elke dag verzorgd.<br><b>Zonder dat het je ochtend kost.</b></h2>
+        <p class="sub">Geen sneetjes, geen ingegroeide haren, en geen la vol apparaten die het
+          half doen. Eén apparaat voor de plek waar jij iets weg wilt hebben.</p>
+        <div class="rij">
+          <button class="cta" type="button">Vind jouw apparaat<svg><use href="#arw"/></svg></button>
+          <button class="stil" type="button">Of bekijk alle apparaten</button>
+        </div>
+        <p class="micro"><span>100 dagen proberen</span><span>2 jaar garantie</span><span>Morgen in huis</span></p>
+        <p class="tp"><span class="sterren"><i><svg><use href="#ster"/></svg></i><i><svg><use href="#ster"/></svg></i><i><svg><use href="#ster"/></svg></i><i><svg><use href="#ster"/></svg></i><i class="half"><svg><use href="#ster"/></svg></i></span>
+          Uitstekend · 4,5 op Trustpilot</p>
+      </div>
+      <div class="hero-beeld"><p class="mark"><b>WS</b>hero-portret<br>uit Shopify</p></div>
+    </div>
+  </section>
+
+  <!-- ══════════ 2 · HET PROBLEEM ══════════ -->
+  <div class="notitie"><span class="stap stap--nieuw">4 · nieuw</span>
+    <p><b>Het element dat volledig ontbrak.</b> Alle drie de niveaus die Miller noemt. Elke
+      regel staat al in jullie eigen productteksten of in de knelpunten van de quiz — er is
+      niets bijverzonnen.</p></div>
+  <section class="blok blok--wit">
+    <div class="kopgroep">
+      <p class="eyebrow">Waarom het misgaat</p>
+      <h2>Je hebt niet te weinig apparaten.<br><b>Je hebt er te veel, en geen enkele doet precies wat je wilt.</b></h2>
+    </div>
+    <div class="pijnen">
+      <div class="pijn"><span class="laag">Wat er gebeurt</span>
+        <p>Sneetjes en rode bultjes op precies de plek waar je ze niet wilt. Ingegroeide haren
+          van een gewoon mesje.</p></div>
+      <div class="pijn"><span class="laag">Wat dat kost</span>
+        <p>Een apparaat dat trekt in plaats van snijdt. Een accu die leeg is op het moment
+          dat je hem nodig hebt.</p></div>
+      <div class="pijn"><span class="laag">En elke keer weer</span>
+        <p>Uitzoeken wat je nu eigenlijk moet gebruiken, en dan maar iets pakken dat er half
+          voor bedoeld is.</p></div>
+    </div>
+    <p class="slotpijn">Verzorgd zijn hoort geen project te zijn.</p>
+  </section>
+
+  <!-- ══════════ 3 · PLAN + ZONEKIEZER ══════════ -->
+  <div class="notitie"><span class="stap stap--nieuw">6 · 7</span>
+    <p><b>Blok 5 en blok 8 worden één blok</b>, met het plan van drie stappen erboven. De live
+      aantallen en vanaf-prijzen uit het oude rooster verhuizen mee naar de zonekaart, dus dat
+      bewijs gaat niet verloren. <b>Vijf zones, overal</b> — Schaamstreek verdween eerder
+      zonder uitleg uit het rooster. <b>De drie stappen zijn nu alle drie zíjn handelingen</b>
+      — stap 2 was <i>Wij wijzen hem aan</i>.</p></div>
+  <section class="blok">
+    <div class="kopgroep">
+      <p class="eyebrow">Zo werkt het</p>
+      <h2>Drie stappen. <b>Dan weet je welke.</b></h2>
+    </div>
+    <div class="stappen">
+      <div class="stap"><i>1</i><b>Kies de plek</b>
+        <span>Waar wil je iets weg hebben? Vijf zones, van hoofd tot schaamstreek.</span></div>
+      <div class="stap"><i>2</i><b>Zie welke bij je past</b>
+        <span>Eén apparaat, met de reden erbij. Geen lijst om uit te kiezen.</span></div>
+      <div class="stap"><i>3</i><b>Probeer hem honderd dagen</b>
+        <span>Bevalt het niet, dan krijg je je geld terug. Geen reden nodig.</span></div>
+    </div>
+    <div class="kiezer">
+      <div class="figuur" id="figuur"><svg class="silhouet" viewBox="0 0 75 100" preserveAspectRatio="none" aria-hidden="true"><ellipse cx="39" cy="15" rx="7.4" ry="11.5"/><path d="M35 25v6c-7 2-11 7-12 15l-2 26c-1 10 0 18 2 28h32c2-10 3-18 2-28l-2-26c-1-8-5-13-12-15v-6Z"/></svg><p class="hint">Kies een zone</p></div>
+      <div class="zonekaart" id="zonekaart"></div>
+    </div>
+    <div class="zonetabs" id="zonetabs"></div>
+  </section>
+
+  <!-- ══════════ 4 · BESTSELLERS ══════════ -->
+  <div class="notitie"><span class="stap">audit + cijfers</span>
+    <p><b>De vier kaarten zijn vervangen door de vier die het werkelijk zijn</b>, op de echte
+      volgorde van de laatste dertig dagen. De handmatige teller <i>125 keer verkocht</i> is
+      weg, en er staat nog één bewijslabel in het blok in plaats van vier.</p></div>
+  <section class="blok blok--zand">
+    <div class="kopgroep">
+      <p class="eyebrow">Meest verkocht · afgelopen 30 dagen</p>
+      <h2>Dit kochten mannen deze maand <b>het vaakst.</b></h2>
+    </div>
+    <div class="kaarten">
+      <article class="pk"><div class="pk-beeld">GG<span class="pk-tag">Nummer 1</span></div>
+        <div class="pk-body"><span class="pk-zone">Lichaam</span><b>Groom Guard™ PRO</b>
+          <span class="wat">Kort maken en glad afwerken, zonder te wisselen.</span>
+          <span class="pk-onder"><span class="pk-prijs">59,95</span><span class="pk-aantal">59 verkocht</span></span></div></article>
+      <article class="pk"><div class="pk-beeld">NU</div>
+        <div class="pk-body"><span class="pk-zone">Neus &amp; oren</span><b>Neustrimmer 4in1 Ultra™</b>
+          <span class="wat">Alles wat uitsteekt weg, met één apparaat.</span>
+          <span class="pk-onder"><span class="pk-prijs">32,95</span><span class="pk-aantal">55 verkocht</span></span></div></article>
+      <article class="pk"><div class="pk-beeld">GG</div>
+        <div class="pk-body"><span class="pk-zone">Lichaam</span><b>Groom Guard™</b>
+          <span class="wat">Kort houden zonder sneetjes.</span>
+          <span class="pk-onder"><span class="pk-prijs">44,95</span><span class="pk-aantal">35 verkocht</span></span></div></article>
+      <article class="pk"><div class="pk-beeld">GS</div>
+        <div class="pk-body"><span class="pk-zone">Gezicht &amp; baard</span><b>The Gentleman Shaver™</b>
+          <span class="wat">Scheren, trimmen en je neus — niets extra nodig.</span>
+          <span class="pk-onder"><span class="pk-prijs">49,95</span><span class="pk-aantal">24 verkocht</span></span></div></article>
+    </div>
+  </section>
+
+  <!-- ══════════ 5 · DE GIDS ══════════ -->
+  <div class="notitie"><span class="stap">2</span>
+    <p><b>De tegenspraak is opgelost door het tweede aanbod hier weg te halen.</b> De Essential
+      Flex Bundel met <i>Meest gekozen</i> verdwijnt — nul verkocht in 180 dagen. Wat overblijft
+      is het sterkste blok van de pagina. De herhaalde <i>100 dagen / 2 jaar / morgen</i>-regel
+      onderaan gaat er ook af.</p></div>
+  <section class="blok">
+    <div class="kopgroep">
+      <p class="eyebrow">Zonder risico</p>
+      <h2>Het enige wat jij hoeft te doen, <b>is hem uitproberen.</b></h2>
+    </div>
+    <div class="gidsgrid">
+      <div class="garantie">
+        <div class="zegel"><div><b>100</b><span>dagen</span></div></div>
+        <h3>Koop hem, gebruik hem 100 dagen. <b>Bevalt het niet? Geld terug.</b></h3>
+        <p class="sub">Geen proefperiode van twee weken waarin je nog niets weet. Honderd dagen
+          in je eigen badkamer, zo vaak als je wilt.</p>
+        <ul class="punten">
+          <li><svg><use href="#chk"/></svg>Je geld terug</li>
+          <li><svg><use href="#chk"/></svg>Twee jaar gedekt</li>
+          <li><svg><use href="#chk"/></svg>Gratis bezorgd vanaf €30</li>
+        </ul>
+        <p class="team">Stuur je hem terug, dan komt je mail bij <b>ons eigen team</b> terecht —
+          niet bij een chatbot. Klantenservice en magazijn zitten in hetzelfde pand in Helmond.</p>
+      </div>
+      <div class="tpband">
+        <p class="tpkop"><b>Wat klanten schrijven</b><span>Live van Trustpilot</span></p>
+        <div class="review">
+          <span class="sterren"><i><svg><use href="#ster"/></svg></i><i><svg><use href="#ster"/></svg></i><i><svg><use href="#ster"/></svg></i><i><svg><use href="#ster"/></svg></i><i><svg><use href="#ster"/></svg></i></span>
+          <p>Doet wat hij moet doen. Ook bij de edele delen kun je zonder wondjes gaan trimmen.</p>
+          <p class="wie">uit de live carrousel</p>
+        </div>
+        <div class="review">
+          <span class="sterren"><i><svg><use href="#ster"/></svg></i><i><svg><use href="#ster"/></svg></i><i><svg><use href="#ster"/></svg></i><i><svg><use href="#ster"/></svg></i><i><svg><use href="#ster"/></svg></i></span>
+          <p>Door de keramische bladen geen wondjes bij de schaamstreek.</p>
+          <p class="wie">uit de live carrousel</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ 6 · KOOPBLOK ══════════ -->
+  <div class="notitie"><span class="stap">2 · 3</span>
+    <p><b>Nu de enige bundel op de pagina</b>, dus de tegenspraak kan niet terugkomen. De
+      nummers <i>01–05</i> op de foto zijn weg: het is geen volgorde maar een inhoudsopgave.
+      De handmatige <i>92× besteld</i> wordt het echte cijfer mét datum. <b>De inhoud is geen
+      paklijst meer</b>: elke regel zegt eerst wat je ermee doet, en noemt daarna pas het
+      onderdeel.</p></div>
+  <section class="blok blok--wit">
+    <div class="kopgroep">
+      <p class="eyebrow">De complete routine</p>
+      <h2>Alles wat je nodig hebt.<br><b>Eén station. Geen losse rommel.</b></h2>
+      <p class="sub">Trimmen, detailwerk en glad afwerken — met alles wat daarvoor nodig is op
+        één plek, in plaats van los in een la.</p>
+    </div>
+    <div class="koop">
+      <div class="koop-beeld"><p class="mark"><b>SP</b>packshot Shave Package 3.0<br>uit Shopify</p></div>
+      <div class="koop-kaart">
+        <p class="eyebrow">Alles in één set</p>
+        <h3>Shave Package <b>3.0</b></h3>
+        <ul class="inhoud">
+          <li><svg><use href="#chk"/></svg>Grote vlakken kort maken en daarna glad afwerken — bodygroomer met extra scheerblad</li>
+          <li><svg><use href="#chk"/></svg>Neus, oren en wenkbrauwen bijwerken — neustrimmer met detail-trim opzetstuk</li>
+          <li><svg><use href="#chk"/></svg>Glad afwerken waar de trimmer stopt — scheeropzetstuk</li>
+          <li><svg><use href="#chk"/></svg>Nooit meer zoeken naar de oplader — alles staat op het station</li>
+        </ul>
+        <p class="prijsrij"><span class="nu">64,95</span><span class="was">99,95</span>
+          <span class="korting">Je bespaart 35,00</span></p>
+        <p class="voorraad"><span class="stip"></span>Op voorraad · morgen in huis</p>
+        <button class="cta" type="button">Vind jouw apparaat<svg><use href="#arw"/></svg></button>
+        <button class="stil" type="button">Of leg de Shave Package 3.0 direct in je mandje</button>
+        <p class="pk-aantal">88× besteld tussen februari en augustus 2026</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ 7 · WIE JE VOOR JE HEBT ══════════ -->
+  <div class="notitie"><span class="stap">5</span>
+    <p><b>Blok 4 en blok 7 worden één blok.</b> De tijdlijn van zes upgrades en het
+      missiestatement van 38 woorden verdwijnen; wat overblijft is wat de klant eraan heeft.
+      <b>De grootste winst in leesbaarheid van de hele pagina.</b> De teller 200.000+ landt
+      hier, één keer — en niet meer als kop, maar als bewijs onder <i>Niet de eerste
+      versie</i>. Ook autoriteit hoort over hem te gaan.</p></div>
+  <section class="blok blok--nacht">
+    <div class="kopgroep">
+      <p class="eyebrow">Wie je voor je hebt</p>
+      <h2>Zes mensen, één pand in Helmond.<br><b>En een scheerkop die je los kunt bestellen.</b></h2>
+    </div>
+    <div class="drie">
+      <div class="feitkaart"><b>Niet de eerste versie</b>
+        <span>Wat je vandaag bestelt is aangepast op wat klanten terugstuurden. 200.000+
+          bestellingen sinds 2021, alles in eigen huis bedacht en getest.</span></div>
+      <div class="feitkaart"><b>Een botte kop kost je geen apparaat</b>
+        <span>Wordt een kop bot, dan bestel je alleen die. Ze liggen apart op voorraad.</span></div>
+      <div class="feitkaart"><b>Je betaalt één keer</b>
+        <span>Geen abonnement, geen mesjes die vanzelf komen, geen opzegtermijn.</span></div>
+    </div>
+    <p class="inzet">Wat er uit reviews en retouren komt, gaat de volgende serie in. De Groom
+      Guard kreeg er zo een foil shaver-kop bij, die glad afwerkt waar de trimmer stopt.</p>
+  </section>
+
+  <!-- ══════════ 8 · DE FAMILIE ══════════ -->
+  <div class="notitie"><span class="stap stap--weg">1 · eerst</span>
+    <p><b>De plaatshouders zijn eruit.</b> Geen <i>Naam · plaats</i> en geen <i>@instagramtag</i>
+      meer — die stonden tien keer zichtbaar op de live pagina. De video's staan er zonder
+      bijschrift tot er echte namen zijn.</p></div>
+  <section class="blok blok--zand">
+    <div class="kopgroep">
+      <p class="eyebrow">De Wellshave-familie</p>
+      <h2>Echte mannen. Echte routines. <b>Door henzelf gefilmd.</b></h2>
+      <p class="sub">Geen acteurs en geen ingestudeerde scripts. Elke video is met toestemming
+        gedeeld.</p>
+    </div>
+    <div class="videos">
+      <div class="video"><span class="play"><svg><use href="#play"/></svg></span><span class="duur">0:06</span></div>
+      <div class="video"><span class="play"><svg><use href="#play"/></svg></span><span class="duur">0:10</span></div>
+      <div class="video"><span class="play"><svg><use href="#play"/></svg></span><span class="duur">0:08</span></div>
+      <div class="video"><span class="play"><svg><use href="#play"/></svg></span><span class="duur">0:08</span></div>
+      <div class="video"><span class="play"><svg><use href="#play"/></svg></span><span class="duur">0:08</span></div>
+    </div>
+    <span class="pil"><svg style="width:14px;height:14px;color:var(--brons)"><use href="#chk"/></svg>Door klanten zelf gefilmd</span>
+  </section>
+
+  <!-- ══════════ 9 · ZEKERHEDEN EN VRAGEN ══════════ -->
+  <div class="notitie"><span class="stap">8</span>
+    <p><b>De tweede en laatste plek</b> waar 100 dagen / 2 jaar / morgen in huis staat — het
+      stond in negen van de elf blokken. Negen vragen worden er vier, met een link naar de
+      rest.</p></div>
+  <section class="blok blok--wit">
+    <div class="kopgroep">
+      <p class="eyebrow">Zeker voor je bestelt</p>
+      <h2>Goed geregeld. <b>Voor én na je aankoop.</b></h2>
+    </div>
+    <div class="zekerheden">
+      <div class="zeker"><b>100 dagen</b><span>Thuis proberen. Bevalt het niet, dan krijg je je geld terug.</span></div>
+      <div class="zeker"><b>2 jaar</b><span>Gaat er iets stuk, dan lossen wij het op.</span></div>
+      <div class="zeker"><b>Gratis bezorgd</b><span>In heel Nederland. Naar België vanaf €49,95.</span></div>
+      <div class="zeker"><b>Morgen in huis</b><span>Bestel je voor 23:59, dan ligt hij er morgen.</span></div>
+    </div>
+    <div class="vragen" id="vragen"></div>
+    <button class="stil" type="button">Alle vragen en antwoorden</button>
+  </section>
+
+  <!-- ══════════ 10 · AFSLUITER ══════════ -->
+  <div class="notitie"><span class="stap">3 · audit</span>
+    <p><b>Eén knop, dezelfde als bovenaan.</b> De inzet staat er nu bij — het enige SB7-element
+      dat op de hele pagina ontbrak: wat het kost om niets te doen. De vierde herhaling van
+      <i>4,5 uit 950+</i> is weg; de live band in blok 5 doet dat werk.</p></div>
+  <section class="blok blok--nacht slotmidden">
+    <div class="kopgroep" style="align-items:center">
+      <p class="eyebrow">Klaar om te kiezen</p>
+      <h2>Eén apparaat voor de plek <b>waar jij iets weg wilt hebben.</b></h2>
+    </div>
+    <p class="inzet">Niets kiezen is ook een keuze: dan doe je het volgende half jaar met het
+      apparaat dat je nu hebt. Vandaag beslissen kost je niets — je hebt honderd dagen om van
+      gedachten te veranderen.</p>
+    <div class="rij" style="justify-content:center">
+      <button class="cta" type="button">Vind jouw apparaat<svg><use href="#arw"/></svg></button>
+    </div>
+    <div class="nieuws">
+      <p><b style="color:#fff">Nog niet zover?</b> 10% korting op je eerste bestelling.</p>
+      <span class="veld"><input type="email" placeholder="jouw@e-mail.nl" aria-label="E-mailadres">
+        <button type="button">Aanmelden</button></span>
+    </div>
+  </section>
+
+</div>
+</div>
+
+<p class="voetnoot"><b>Wat hier niet echt is.</b> Productfoto's en de hero-portretfoto ontbreken:
+  deze pagina mag geen beelden van buitenaf laden, dus waar in de winkel de packshot staat,
+  staat hier het merkteken. Prijzen, voorraad en verkoopcijfers zijn opgehaald uit Shopify op
+  24 augustus 2026; in de winkel komen ze live uit de collecties. De Trustpilot-band is een
+  weergave van de echte carrousel. <b>Eén ding om te controleren:</b> de homepage noemt een
+  <code>Travelbag</code> als vijfde onderdeel van de Shave Package 3.0, maar de
+  productomschrijving noemt er vier. Ik heb er vier gezet.</p>
+
+<script>
+  const ZONES = [
+    { naam:'Lichaam', pin:[34,51], match:'Beste match voor lichaam',
+      product:'Groom Guard™ PRO',
+      claim:'Grote vlakken en gevoelige plekken, met dezelfde beweging.',
+      feiten:['Gaat door dik haar zonder te blijven steken — 6.600 toeren',
+        'De mesjes raken je huid niet: ze zitten achter een kam',
+        'Je kunt hem meenemen onder de douche — IPX7 waterdicht'],
+      aantal:4, vanaf:'39,95' },
+    { naam:'Schaamstreek', pin:[38,92], match:'Beste match voor de schaamstreek',
+      product:'Flex Guard™ 3-in-1',
+      claim:'De gevoeligste zone, zonder irritatie of sneetjes.',
+      feiten:['Geen irritatie of sneetjes, ook bij een gevoelige huid — Skin Safe',
+        'Hij hapert niet halverwege — constante kracht',
+        'Je ziet wat je doet, nat of droog — LED-licht'],
+      aantal:4, vanaf:'39,95' },
+    { naam:'Gezicht & baard', pin:[54,25], match:'Beste match voor gezicht & baard',
+      product:'The Gentleman Shaver™',
+      claim:'Baard, snor en randen — in één apparaat.',
+      feiten:['Je hebt er niets naast nodig — trimmer, neustrimmer en baardtrimmer in één',
+        'Je ziet wanneer hij bij moet — LCD-display en lithium-accu',
+        'Je kunt hem gewoon afspoelen — waterdichte behuizing'],
+      aantal:11, vanaf:'19,95' },
+    { naam:'Hoofd', pin:[55,7], match:'Beste match voor hoofd',
+      product:'Tondeuse Elegant™',
+      claim:'Van fade tot strak kort, met controle.',
+      feiten:['Jij houdt in de hand hoe kort het wordt — precisiescherpe messen',
+        'Werkt op elk haartype — krachtig motormechanisme',
+        'Van een fade tot strak kort geknipt'],
+      aantal:4, vanaf:'49,95' },
+    { naam:'Neus & oren', pin:[56,19], match:'Beste match voor neus & oren',
+      product:'Neustrimmer Ultimate™ 4-in-1',
+      claim:'Precies detailwerk, zonder trekken of irriteren.',
+      feiten:['Snijdt in plaats van trekt — 7.000 toeren',
+        'Neus, oren, wenkbrauw en randjes met hetzelfde apparaat',
+        'Je ziet hoeveel er nog in zit, en hij laadt snel bij'],
+      aantal:8, vanaf:'16,95' }
+  ];
+
+  const VRAGEN = [
+    ['Wat als het me toch niet bevalt?',
+     'Je hebt 100 dagen om het apparaat thuis te proberen. Bevalt het niet? Stuur het terug en ontvang het volledige aankoopbedrag. <b>Je hoeft geen reden op te geven.</b>'],
+    ['Wanneer is mijn bestelling binnen?',
+     'Bestel je voor 23:59, dan ligt je pakket de volgende dag in huis in Nederland en België. Duitsland en Oostenrijk duren één tot twee werkdagen, de rest van Europa twee tot drie.'],
+    ['Hoe vaak moet ik het mes vervangen?',
+     'Gemiddeld gaat een kop zes tot twaalf maanden mee, afhankelijk van hoe vaak je hem gebruikt. <b>De koppen liggen apart op voorraad</b>, dus een botte kop kost geen nieuw apparaat.'],
+    ['Hoe bereik ik jullie?',
+     'Per e-mail op contact@wellshave.com, of via het contactformulier. Je krijgt binnen één werkdag antwoord van een van ons.']
+  ];
+
+  const $ = s => document.querySelector(s);
+
+  /* ── de zonekiezer ── */
+  const figuur = $('#figuur'), zonekaart = $('#zonekaart'), zonetabs = $('#zonetabs');
+  let actief = 0;
+
+  ZONES.forEach((z, i) => {
+    const pin = document.createElement('button');
+    pin.className = 'pin'; pin.type = 'button';
+    pin.style.left = z.pin[0] + '%'; pin.style.top = z.pin[1] + '%';
+    pin.setAttribute('aria-label', z.naam);
+    pin.addEventListener('click', () => kies(i));
+    figuur.appendChild(pin);
+
+    const tab = document.createElement('button');
+    tab.className = 'zonetab'; tab.type = 'button'; tab.textContent = z.naam;
+    tab.addEventListener('click', () => kies(i));
+    zonetabs.appendChild(tab);
+  });
+
+  function kies(i) {
+    actief = i;
+    const z = ZONES[i];
+    figuur.querySelectorAll('.pin').forEach((p, n) =>
+      p.setAttribute('aria-pressed', String(n === i)));
+    zonetabs.querySelectorAll('.zonetab').forEach((t, n) =>
+      t.setAttribute('aria-pressed', String(n === i)));
+    zonekaart.innerHTML = `
+      <p class="match">${z.match}</p>
+      <h3>${z.product}</h3>
+      <p class="claim">${z.claim}</p>
+      <ul class="feiten">${z.feiten.map(f =>
+        `<li><svg><use href="#chk"/></svg>${f}</li>`).join('')}</ul>
+      <button class="cta" type="button">Vind jouw apparaat<svg><use href="#arw"/></svg></button>
+      <p class="zonevoet"><span>${z.aantal} apparaten in deze zone</span><span>vanaf ${z.vanaf}</span></p>`;
+  }
+  kies(0);
+
+  /* ── de vragen ── */
+  $('#vragen').innerHTML = VRAGEN.map(([v, a], i) => `
+    <div class="vraag">
+      <button type="button" aria-expanded="${i === 0}" aria-controls="a${i}">
+        ${v}<svg class="teken"><use href="#plus"/></svg>
+      </button>
+      <p class="antwoord" id="a${i}" ${i === 0 ? '' : 'hidden'}>${a}</p>
+    </div>`).join('');
+
+  $('#vragen').addEventListener('click', e => {
+    const knop = e.target.closest('button');
+    if (!knop) return;
+    const open = knop.getAttribute('aria-expanded') === 'true';
+    knop.setAttribute('aria-expanded', String(!open));
+    document.getElementById(knop.getAttribute('aria-controls')).hidden = open;
+  });
+
+  /* ── de bedieningsbalk ── */
+  function zet(sleutel, waarde) {
+    document.body.dataset[sleutel] = waarde;
+    document.querySelectorAll(`[data-${sleutel}]`).forEach(b =>
+      b.setAttribute('aria-pressed', String(b.dataset[sleutel] === waarde)));
+    if (sleutel === 'notities') {
+      document.querySelectorAll('.notitie').forEach(n => n.hidden = waarde === 'uit');
+    }
+    try { localStorage.setItem('ws-' + sleutel, waarde); } catch (e) { /* privémodus */ }
+  }
+  document.querySelectorAll('[data-weergave],[data-notities]').forEach(b => {
+    b.addEventListener('click', () => {
+      const sleutel = b.dataset.weergave ? 'weergave' : 'notities';
+      zet(sleutel, b.dataset[sleutel]);
+    });
+  });
+  let bewaard = { weergave: 'desktop', notities: 'aan' };
+  try {
+    bewaard.weergave = localStorage.getItem('ws-weergave') || 'desktop';
+    bewaard.notities = localStorage.getItem('ws-notities') || 'aan';
+  } catch (e) { /* privémodus of geblokkeerde opslag */ }
+  zet('weergave', bewaard.weergave);
+  zet('notities', bewaard.notities);
+</script>

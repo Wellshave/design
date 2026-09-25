@@ -1,0 +1,430 @@
+<title>Wellshave Homepage Teardown</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,600;6..96,700&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+:root{
+  --paper:#FAF8F5;
+  --surface:#FFFFFF;
+  --surface-2:#F2EEE7;
+  --ink:#16130F;
+  --muted:#6B6259;
+  --brass:#9A6B22;
+  --rule:#E3DCD1;
+  --crit:#A82A1E;
+  --warn:#8C6206;
+  --ok:#2C6349;
+  --crit-bg:#F6E9E7;
+  --warn-bg:#F6EFDF;
+  --ok-bg:#E6F0EA;
+  --shadow:0 1px 2px rgba(22,19,15,.05), 0 8px 24px -16px rgba(22,19,15,.25);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#131211;
+    --surface:#1B1917;
+    --surface-2:#232120;
+    --ink:#ECE7DF;
+    --muted:#9A9188;
+    --brass:#D9A94F;
+    --rule:#2E2B27;
+    --crit:#E88377;
+    --warn:#D8AC4C;
+    --ok:#7FBF9F;
+    --crit-bg:#2A1D1B;
+    --warn-bg:#282116;
+    --ok-bg:#182420;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#131211;
+  --surface:#1B1917;
+  --surface-2:#232120;
+  --ink:#ECE7DF;
+  --muted:#9A9188;
+  --brass:#D9A94F;
+  --rule:#2E2B27;
+  --crit:#E88377;
+  --warn:#D8AC4C;
+  --ok:#7FBF9F;
+  --crit-bg:#2A1D1B;
+  --warn-bg:#282116;
+  --ok-bg:#182420;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Instrument Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:17px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:820px;margin:0 auto;padding:0 24px 96px}
+@media(max-width:600px){body{font-size:16px}.wrap{padding:0 18px 64px}}
+
+/* ---- masthead ---- */
+.masthead{padding:72px 0 36px;border-bottom:1px solid var(--rule)}
+.eyebrow{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--brass);margin:0 0 18px;
+}
+h1{
+  font-family:"Bodoni Moda",Georgia,serif;
+  font-weight:700;font-size:clamp(38px,7vw,60px);line-height:1.03;
+  letter-spacing:-.015em;margin:0 0 18px;text-wrap:balance;
+}
+.dek{font-size:19px;color:var(--muted);margin:0;max-width:62ch;text-wrap:pretty}
+.byline{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;
+  color:var(--muted);margin-top:28px;letter-spacing:.02em;
+}
+
+/* ---- data strip ---- */
+.strip{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--rule);border:1px solid var(--rule);border-radius:3px;
+  margin:36px 0 8px;overflow:hidden;
+}
+@media(max-width:600px){.strip{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--surface);padding:16px 16px 14px}
+.stat b{
+  display:block;font-family:"Bodoni Moda",Georgia,serif;font-weight:600;
+  font-size:30px;line-height:1.1;font-variant-numeric:tabular-nums;letter-spacing:-.01em;
+}
+.stat span{
+  display:block;font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:6px;
+}
+.stat.alarm b{color:var(--crit)}
+.strip-note{font-size:13.5px;color:var(--muted);margin:0 0 8px}
+
+/* ---- structure ---- */
+h2{
+  font-family:"Bodoni Moda",Georgia,serif;font-weight:700;
+  font-size:clamp(26px,4.2vw,34px);line-height:1.14;letter-spacing:-.01em;
+  margin:64px 0 6px;text-wrap:balance;
+}
+h2 + .sub{color:var(--muted);margin:0 0 26px;font-size:16px}
+h3{
+  font-size:18px;font-weight:600;margin:34px 0 10px;letter-spacing:-.005em;
+}
+p{margin:0 0 16px;max-width:68ch}
+ul,ol{margin:0 0 16px;padding-left:22px;max-width:68ch}
+li{margin-bottom:8px}
+strong{font-weight:600}
+em{font-style:italic}
+a{color:var(--brass)}
+code{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.88em;
+  background:var(--surface-2);padding:1px 5px;border-radius:3px;
+}
+hr{border:0;border-top:1px solid var(--rule);margin:56px 0}
+
+/* ---- findings ---- */
+.finding{
+  background:var(--surface);border:1px solid var(--rule);border-left:3px solid var(--rule);
+  border-radius:3px;padding:22px 24px;margin:0 0 18px;box-shadow:var(--shadow);
+}
+.finding.crit{border-left-color:var(--crit)}
+.finding.warn{border-left-color:var(--warn)}
+.finding.ok{border-left-color:var(--ok)}
+.finding > :last-child{margin-bottom:0}
+.fhead{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:12px}
+.fhead h3{margin:0;font-size:19px}
+.pill{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10px;
+  letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:100px;
+  white-space:nowrap;
+}
+.pill.crit{background:var(--crit-bg);color:var(--crit)}
+.pill.warn{background:var(--warn-bg);color:var(--warn)}
+.pill.ok{background:var(--ok-bg);color:var(--ok)}
+.label{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+  display:block;margin:16px 0 5px;
+}
+
+/* ---- quote / site copy ---- */
+.sitecopy{
+  border-left:2px solid var(--rule);padding:2px 0 2px 16px;margin:0 0 14px;
+  color:var(--muted);font-size:15.5px;max-width:64ch;
+}
+.sitecopy b{color:var(--ink);font-weight:600}
+
+/* ---- before/after ---- */
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}
+@media(max-width:640px){.ba{grid-template-columns:1fr}}
+.ba > div{background:var(--surface-2);border-radius:3px;padding:16px 18px}
+.ba .label{margin-top:0}
+.ba p{margin:0;font-size:15.5px}
+.ba .now{color:var(--muted)}
+
+/* ---- table ---- */
+.tablewrap{overflow-x:auto;margin:22px 0 8px;border:1px solid var(--rule);border-radius:3px}
+table{border-collapse:collapse;width:100%;min-width:520px;background:var(--surface);font-size:15px}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500;
+  background:var(--surface-2);
+}
+tr:last-child td{border-bottom:0}
+td.score{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:600}
+td.score.crit{color:var(--crit)} td.score.warn{color:var(--warn)} td.score.ok{color:var(--ok)}
+
+/* ---- ordered priority list ---- */
+ol.prio{list-style:none;padding:0;counter-reset:p;max-width:none}
+ol.prio li{
+  counter-increment:p;display:grid;grid-template-columns:36px 1fr;gap:14px;
+  padding:16px 0;border-bottom:1px solid var(--rule);margin:0;
+}
+ol.prio li::before{
+  content:counter(p,decimal-leading-zero);
+  font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;
+  color:var(--brass);padding-top:3px;font-variant-numeric:tabular-nums;
+}
+ol.prio p{margin:0 0 4px}
+ol.prio .meta{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
+}
+
+/* ---- section list (new page structure) ---- */
+.stack{list-style:none;padding:0;margin:20px 0;max-width:none}
+.stack li{
+  display:grid;grid-template-columns:28px 1fr;gap:14px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--rule);margin:0;
+}
+.stack li::before{
+  content:attr(data-n);font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:11.5px;color:var(--brass);font-variant-numeric:tabular-nums;
+}
+.stack b{display:block;font-weight:600}
+.stack span{color:var(--muted);font-size:15px}
+.stack li.new b::after{
+  content:"NIEUW";font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:9.5px;letter-spacing:.1em;color:var(--brass);
+  border:1px solid var(--brass);border-radius:100px;padding:1px 6px;margin-left:9px;
+  vertical-align:2px;
+}
+
+.callout{
+  background:var(--surface-2);border-radius:3px;padding:20px 22px;margin:24px 0;
+}
+.callout > :last-child{margin-bottom:0}
+
+footer{margin-top:72px;padding-top:24px;border-top:1px solid var(--rule);color:var(--muted);font-size:13.5px}
+:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow">Conversie-audit · wellshave.com</p>
+  <h1>Waarom de homepage niet converteert</h1>
+  <p class="dek">De pagina verkoopt korting in plaats van een reden om te blijven. Hieronder de diagnose op basis van je eigen funneldata, een teardown per sectie, en de complete herschreven structuur.</p>
+  <p class="byline">19 augustus 2026 · lens: Arsh Sanwarwala (ThrillX) + Mark (Brand Builder Academy) · data: Shopify-analytics, laatste 30 dagen</p>
+</header>
+
+<div class="strip">
+  <div class="stat"><b>14.807</b><span>Sessies / 30d</span></div>
+  <div class="stat alarm"><b>3,1%</b><span>Voegt toe aan winkelwagen</span></div>
+  <div class="stat alarm"><b>1,29%</b><span>Conversie</span></div>
+  <div class="stat"><b>73%</b><span>Mobiel</span></div>
+</div>
+<p class="strip-note">466 van de 14.807 sessies legt iets in de winkelwagen. Daarna gaat 79% door naar checkout en rondt 52% af.</p>
+
+<h2>De diagnose in één alinea</h2>
+<p><strong>Je checkout is niet het probleem. Je pagina's zijn het probleem.</strong> Van elke 100 bezoekers leggen er ruim 96 nóóit iets in de winkelwagen. Wie wél toevoegt, koopt relatief netjes door. Het lek zit dus volledig vóór de add-to-cart — in de eerste 5 seconden op de homepage. En daar staat op dit moment één boodschap: <em>SUMMER SALE, tot 40% korting</em>. Geen belofte, geen probleem dat je oplost, geen reden om vandaag te blijven. Je verkoopt de korting in plaats van het resultaat, en korting is het enige argument dat elke concurrent ook heeft.</p>
+
+<div class="callout">
+  <p><strong>Belangrijke context voor je testaanpak.</strong> Met ~14.800 sessies per maand zit je ruim onder de drempel voor klassieke A/B-tests (40-50k bezoekers en 300-400 conversies per maand op één pagina). Je haalt geen significantie binnen redelijke tijd op kleine varianten. Dat betekent: <strong>geen knopkleuren en losse woordjes testen</strong>, maar grote, samenhangende ingrepen doorvoeren — headline + subheadline + proof + CTA in één klap — en over enkele weken meten. Leun zwaar op kwalitatieve data: zet Microsoft Clarity aan (gratis) en kijk naar scroll- en clickmaps voordat je meer bouwt.</p>
+</div>
+
+<h2>Wat er nu boven de vouw staat</h2>
+<p class="sub">100% van je bezoekers ziet dit. 50-60% scrollt nooit verder. Hier hoort 80-90% van je aandacht te zitten.</p>
+
+<div class="sitecopy">
+  <p>Tot 40%<br><b>SUMMER SALE</b><br>Profiteer deze Summer Sale van kortingen tot wel 40%!<br>[ SHOP NU ]</p>
+</div>
+
+<p>Daarboven: twee gestapelde announcement bars en de volledige navigatie. Daaronder: een full-bleed foto van zes zwarte apparaten op een zwarte ondergrond, waarvan de onderste 35% leeg zwart vlak is. Het enige stukje bewijs is een Trustpilot-widget die via JavaScript wordt ingeladen.</p>
+
+<p>Afgezet tegen wat er <em>hoort</em> te staan:</p>
+
+<div class="tablewrap">
+<table>
+  <thead><tr><th>Verplicht element boven de vouw</th><th>Aanwezig</th></tr></thead>
+  <tbody>
+    <tr><td>Headline — de gewenste uitkomst, wat levert het mij op</td><td class="score crit">Nee</td></tr>
+    <tr><td>Subheadline — hóé je dat bereikt (het mechanisme)</td><td class="score crit">Nee</td></tr>
+    <tr><td>Social proof ×2</td><td class="score warn">Half — alleen een JS-widget</td></tr>
+    <tr><td>Eén duidelijke CTA</td><td class="score ok">Ja</td></tr>
+    <tr><td>FUD-reducers direct onder de CTA</td><td class="score crit">Nee — staan pas in de balk erónder</td></tr>
+    <tr><td>Beeld dat het resultaat of het product toont</td><td class="score warn">Half — zwart op zwart, zonder context</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2>De zeven grootste lekken</h2>
+<p class="sub">Op volgorde van wat het je kost, niet op volgorde van de pagina.</p>
+
+<div class="finding crit">
+  <div class="fhead"><h3>1. De hero verkoopt een sale, geen belofte</h3><span class="pill crit">Kritiek</span></div>
+  <p>"SUMMER SALE — profiteer van kortingen tot wel 40%" vertelt een koude bezoeker niet wát je verkoopt, voor wíé het is, of waarom het beter is dan het scheermes in zijn badkamerkastje. Een headline hoort te bestaan uit <strong>eindresultaat + tijdsbestek + emotionele opbrengst</strong>, en moet zo specifiek mogelijk zijn. "Tot 40%" is het enige getal op de pagina dat níéts over het resultaat zegt.</p>
+  <p>Bijkomend probleem in de HTML: de hero-titel is een <code>&lt;h2&gt;</code>. De enige <code>&lt;h1&gt;</code>'s op de pagina zijn twee productnamen halverwege. Voor Google zegt je homepage dus dat hij over "Shave Package Ultimate™" gaat.</p>
+  <span class="label">Fix</span>
+  <p>Vervang de hele hero-tekstblok. Zet de sale terug naar waar hij hoort: een strip of badge, niet je belangrijkste boodschap. Drie richtingen staan verderop uitgeschreven.</p>
+</div>
+
+<div class="finding crit">
+  <div class="fhead"><h3>2. Het hero-beeld communiceert niets</h3><span class="pill crit">Kritiek</span></div>
+  <p>Zes zwarte apparaten op een zwarte spiegelende ondergrond met een zwarte toilettas. Geen mens, geen huid, geen gebruikssituatie, geen schaal. Je hele propositie — <em>veilig trimmen in gevoelige zones zonder wondjes</em> — is in dat beeld onzichtbaar. Het brein verwerkt beeld ~60.000× sneller dan tekst; dit beeld levert daarmee vooral snelle verwarring op. En de onderste 35% is leeg zwart vlak: dode ruimte die je bovenste scherm opeet.</p>
+  <p>Technisch daarbovenop: de hero-afbeelding staat op <code>loading="lazy"</code> met <code>fetchpriority="auto"</code>. Dat is je Largest Contentful Paint. Die wordt nu bewust als laatste geladen — op mobiel, waar 73% van je verkeer zit.</p>
+  <span class="label">Fix</span>
+  <p>Beeld waarin het resultaat en het gebruik zichtbaar zijn: een man, huid, badkamer, apparaat in de hand. Zet <code>loading="eager"</code> en <code>fetchpriority="high"</code> op de hero-afbeelding en <code>lazy</code> op alles daaronder.</p>
+</div>
+
+<div class="finding crit">
+  <div class="fhead"><h3>3. Er is geen pijnpunt-sectie — terwijl je verkeer koud is</h3><span class="pill crit">Kritiek</span></div>
+  <p>50% van je verkeer is "direct" en 19% "social" (Meta-verkeer in in-app browsers landt grotendeels als direct). Dat is koud, onderbrekend verkeer: mensen die niet zochten. Voor dat type verkeer hoort sectie 2 een <strong>pijnpunt</strong> te zijn — een reden om je vandaag serieus te nemen. Bij jou is sectie 2 een lopende balk met bezorgvoorwaarden, gevolgd door een grid met categorienamen. Dat is navigatie, geen argument.</p>
+  <p>Het wrange: het pijnpunt staat al letterlijk in je eigen reviews, in de woorden van je klanten. "Zonder wondjes", "geen wondjes bij de schaamstreek", "zonder sneetjes", "scheermesjes? Prullenbak in!". Dat raakt twee van de acht biologisch bedrade verlangens — vrijheid van pijn, en je aantrekkelijk voelen. Nergens op de homepage wordt dat benoemd.</p>
+  <span class="label">Fix</span>
+  <p>Nieuwe sectie 2, Probleem → Agitatie → Oplossing. Kop in de richting van: <em>"Een scheermesje is ontworpen voor je kaak. Niet voor je liezen."</em> Daaronder: waarom staal + drukken = sneetjes en rode bultjes, en wat keramische SkinSafe-messen anders doen. Bij voorkeur grafisch: een doorsnede van huid + mes, geen stockfoto naast tekst.</p>
+</div>
+
+<div class="finding crit">
+  <div class="fhead"><h3>4. Je social proof staat op de laagste trede van de geloofwaardigheidsladder</h3><span class="pill crit">Kritiek</span></div>
+  <p>De ladder loopt van tekstreview → tekst + foto van het resultaat → + volledige naam en foto → + zichtbare bron → + een verhaal over wat het opleverde → video waarin iemand het zegt. Jouw reviews staan op trede 1: alleen tekst, met voornaam + initiaal. Alleen tekst-plus-beeld levert in de praktijk al 60-80% liften op. Dit is de goedkoopste grote winst op de pagina.</p>
+  <p>Drie extra scheuren in de geloofwaardigheid:</p>
+  <ul>
+    <li><strong>Verkeerde kop.</strong> "Wat klanten over ons zeggen" is precies zo'n kop die niets toevoegt — men ziet zelf wel dat het reviews zijn. Vervang door: <em>"Sluit je aan bij 180.000+ mannen die hun scheermes hebben weggegooid."</em></li>
+    <li><strong>Demografische mismatch.</strong> Reviews over een hoofdscheerapparaat en een bodygroomer zijn ondertekend met "Lisa Z.", "Emma B." en "Britt J." — één daarvan zegt letterlijk "ik gebruik hem om mijn hoofd kaal te scheren". Op een merk voor mannen breekt dat het vertrouwen stilletjes. Gebruik reviews van je doelgroep.</li>
+    <li><strong>Cijfers spreken elkaar tegen.</strong> Op dezelfde pagina staat drie keer "700+ reviews" en drie keer "800+ reviews". En "180.000+ Men upgraded their grooming routine" staat in het Engels op een Nederlandse pagina.</li>
+  </ul>
+  <span class="label">Fix</span>
+  <p>Kies per review bewust wélk bezwaar hij wegneemt. Voeg foto's toe, volledige voornaam + achterletter, en het zichtbare Trustpilot-logo als bron. Zet één cijfer vast en gebruik dat overal.</p>
+</div>
+
+<div class="finding warn">
+  <div class="fhead"><h3>5. Twee volledige productpagina's staan midden in de homepage geplakt</h3><span class="pill warn">Groot</span></div>
+  <p>Zowel het Shave Package Ultimate als de Essential Flex Bundel staat als compléte PDP in de homepage: koopblok, beschrijving, specificatielijst, verzendbeleid, retourbeleid, een galerij van 12 respectievelijk 10 afbeeldingen. Samen goed voor ~250 KB aan inline HTML op een pagina van 733 KB, plus twee concurrerende <code>&lt;h1&gt;</code>'s.</p>
+  <p>Het idéé is goed — een koopmoment op de homepage werkt. De uitvoering is te zwaar: de cognitieve belasting schiet omhoog en alles wat daarna komt (je waardeproposities, je video's, je FAQ) wordt kilometers naar beneden geduwd.</p>
+  <span class="label">Fix</span>
+  <p>Vervang beide door één compact koopblok van je bestverkopende bundel: beeld, titel, 4 bullets, prijs met besparing, ATC-knop, en direct daaronder de FUD-reducers. Specificaties, verzending en de volledige galerij horen op de productpagina.</p>
+</div>
+
+<div class="finding warn">
+  <div class="fhead"><h3>6. De waardepropositie-sectie zegt niets dat een concurrent niet ook kan zeggen</h3><span class="pill warn">Groot</span></div>
+  <div class="ba">
+    <div><span class="label">Nu op de pagina</span><p class="now">"Ontworpen voor dagelijks gebruik" · "Getest op kwaliteit en prestaties" · "Premium, maar toegankelijk"</p></div>
+    <div><span class="label">Wat je bezoeker leest</span><p>Niets. Elk merk in elke categorie kan dit letterlijk overnemen.</p></div>
+  </div>
+  <p>Er zit geen kenmerk in, geen getal, geen mechanisme. Terwijl je die wél hebt: keramische SkinSafe-messen, 6.600 RPM, IPX7 waterdicht, 120 minuten gebruikstijd, 100 dagen proberen, morgen in huis. Trek elk kenmerk door met "zodat…" tot je bij iets menselijks uitkomt, en zet vervolgens de opbrengst vooraan — mensen lezen ~20% van je tekst en scannen de rest, dus elke kop moet in zijn eentje verkopen.</p>
+  <div class="ba">
+    <div><span class="label">Kenmerk</span><p class="now">Keramische messen, harder dan staal</p></div>
+    <div><span class="label">Kop die alleen al verkoopt</span><p>"Trim je liezen zonder één sneetje — de messen raken je huid niet"</p></div>
+  </div>
+</div>
+
+<div class="finding warn">
+  <div class="fhead"><h3>7. De pagina heeft geen afsluiter</h3><span class="pill warn">Groot</span></div>
+  <p>Na de FAQ volgt een nieuwsbriefblok en dan de footer. Wie helemaal naar beneden heeft gescrold is je meest geïnteresseerde bezoeker, met één laatste twijfel — en die krijgt geen aanbod meer. De afsluiter hoort een mini-hero te zijn: herhaalde headline, subheadline, CTA, social proof, en een reden om vandaag te handelen.</p>
+</div>
+
+<h2>Losse fouten die je vandaag kunt wegwerken</h2>
+<p class="sub">Klein werk, maar het zijn precies de dingen die aan een merk knagen dat "premium" claimt.</p>
+<ul>
+  <li>De winkelwagen zegt <strong>"levenslang jaar garantie"</strong> — kapotte zin. De rest van de pagina zegt zes keer "2 jaar garantie".</li>
+  <li><strong>"Accesoires"</strong> staat verkeerd gespeld in de navigatie én in de ondertitel van het bundelblok.</li>
+  <li>Er verschijnt een pop-up over een <strong>"Tijdelijke Vaderdag Sale"</strong>, terwijl de hero "Summer Sale" zegt en het augustus is. Twee acties die elkaar tegenspreken maken beide ongeloofwaardig.</li>
+  <li><strong>Engelse microcopy op een Nederlandse pagina</strong>: "Best Seller", "4.5 out of 5", "Men upgraded their grooming routine", en de volledige nieuwsbrief-disclaimer.</li>
+  <li>Er staat één <code>EMPTY DOM REMOVE PROTECTOR</code> als zichtbare tekst in beide koopblokken — restant van een app.</li>
+  <li>Twee gestapelde announcement bars boven de header eten op mobiel je bovenste scherm op. Kies er één.</li>
+</ul>
+
+<h2>De pagina zoals hij eruit hoort te zien</h2>
+<p class="sub">Zelfde bouwstenen, andere volgorde en andere zwaartepunten. Koud verkeer eerst een reden geven om te blijven, dán pas producten.</p>
+
+<ol class="stack">
+  <li data-n="01" class="new"><b>Hero</b><span>Headline (resultaat), subheadline (mechanisme), 2× proof, één CTA, FUD-reducers eronder, beeld met mens en huid.</span></li>
+  <li data-n="02" class="new"><b>Pijnpunt — Probleem → Agitatie → Oplossing</b><span>"Een scheermesje is ontworpen voor je kaak, niet voor je liezen." Grafisch, geen tekstblok.</span></li>
+  <li data-n="03"><b>Wall of love</b><span>Bestaande reviews, maar mét foto's, volledige namen en zichtbaar Trustpilot-logo. Verticaal stapelen op mobiel — geen carrousel, daar klikt 1-2% doorheen.</span></li>
+  <li data-n="04" class="new"><b>Het mechanisme: SkinSafe</b><span>Waarom keramisch anders werkt dan staal. In een verzadigde markt is dít waar je op concurreert, niet op de belofte zelf.</span></li>
+  <li data-n="05"><b>Bestsellers</b><span>Drie producten, compacte kaarten, besparing zichtbaar per kaart.</span></li>
+  <li data-n="06"><b>Compact koopblok #1-bundel</b><span>Vervangt de twee ingeplakte PDP's. Beeld, 4 bullets, prijs + besparing, ATC, FUD's eronder.</span></li>
+  <li data-n="07"><b>Waardeproposities, herschreven</b><span>4-6 stuks, elk met kenmerk + opbrengst, opbrengst vooraan, getal erin.</span></li>
+  <li data-n="08" class="new"><b>Welk apparaat past bij mij</b><span>Body / gezicht / hoofd / neus → aanbeveling. Neemt de keuzestress weg bij een assortiment van 8 categorieën.</span></li>
+  <li data-n="09"><b>Wellshave in actie (UGC)</b><span>Behouden, maar elke video een scanbare kop geven die samenvat wat erin gezegd wordt — anders drukt niemand op play.</span></li>
+  <li data-n="10" class="new"><b>Wellshave vs. scheermesjes vs. de grote merken</b><span>Vergelijkingstabel. Hoe volwassener de markt, hoe zwaarder deze weegt.</span></li>
+  <li data-n="11"><b>Garantie + FAQ</b><span>Bestaande FAQ is goed en inhoudelijk sterk. Laat staan, iets inkorten.</span></li>
+  <li data-n="12" class="new"><b>Afsluiter</b><span>Mini-hero: headline, CTA, proof, en een reden om vandaag te beslissen.</span></li>
+</ol>
+
+<h2>Drie hero-richtingen om mee te beginnen</h2>
+<p class="sub">Uitgeschreven inclusief de formule erachter. Kies er één, bouw hem volledig, en laat hem enkele weken staan.</p>
+
+<div class="finding ok">
+  <div class="fhead"><h3>A — Pijn + mechanisme</h3><span class="pill ok">Aanbevolen start</span></div>
+  <p><strong>Headline:</strong> Overal glad. Zonder sneetjes, zonder rode bultjes.</p>
+  <p><strong>Subheadline:</strong> Keramische SkinSafe-messen glijden over je huid in plaats van erin — ook in de schaamstreek. Vandaag besteld, morgen scheren.</p>
+  <p><strong>CTA:</strong> Bekijk de bestsellers &nbsp;·&nbsp; <strong>Eronder:</strong> 100 dagen proberen · 2 jaar garantie · gratis verzending vanaf €30</p>
+  <p><strong>Proof:</strong> ★ 4,5 op Trustpilot — 800+ reviews &nbsp;|&nbsp; 180.000+ mannen gingen je voor</p>
+  <span class="label">Formule</span>
+  <p>Eindresultaat ("overal glad") + het weggenomen bezwaar ("zonder sneetjes") + mechanisme in de sub ("keramisch, glijdt over de huid") + tijdsbestek ("morgen scheren"). Gebruikt letterlijk de woorden uit je eigen reviews.</p>
+</div>
+
+<div class="finding ok">
+  <div class="fhead"><h3>B — Uitkomst + tijd</h3><span class="pill ok">Variant</span></div>
+  <p><strong>Headline:</strong> Van top tot teen verzorgd in 10 minuten — zonder één sneetje.</p>
+  <p><strong>Subheadline:</strong> Eén apparaat voor je lichaam, baard, neus en hoofd. Waterdicht, dus gewoon onder de douche. 100 dagen proberen, anders geld terug.</p>
+  <span class="label">Formule</span>
+  <p>Eindresultaat + tijdsbestek + emotionele opbrengst. Sterkste kaart voor je bundels, omdat "één apparaat voor alles" meteen de prijs rechtvaardigt.</p>
+</div>
+
+<div class="finding ok">
+  <div class="fhead"><h3>C — Verliesgedreven</h3><span class="pill ok">Variant</span></div>
+  <p><strong>Headline:</strong> Nooit meer sneetjes daar beneden.</p>
+  <p><strong>Subheadline:</strong> 180.000 mannen gooiden hun scheermes weg voor keramische SkinSafe-messen. Vandaag besteld, morgen in huis.</p>
+  <span class="label">Formule</span>
+  <p>Verlies weegt ongeveer twee keer zo zwaar als winst. Deze kop belooft geen voordeel maar het einde van een ongemak — en leunt op sociaal bewijs in de sub. Kortst, dus het sterkst op mobiel.</p>
+</div>
+
+<h2>Volgorde van aanpakken</h2>
+<p class="sub">Impact × inspanning. Bovenaan beginnen, niet cherry-picken.</p>
+
+<ol class="prio">
+  <li><p><strong>Herschrijf het hele hero-blok.</strong> Headline, subheadline, twee proof-elementen, één CTA, FUD-reducers eronder. Richting A.</p><p class="meta">Impact: zeer hoog · Inspanning: laag · Alleen tekst</p></li>
+  <li><p><strong>Vervang het hero-beeld</strong> door een foto met mens, huid en gebruikssituatie. Zet <code>eager</code> + <code>fetchpriority="high"</code>.</p><p class="meta">Impact: zeer hoog · Inspanning: middel · Shoot nodig</p></li>
+  <li><p><strong>Voeg foto's en volledige namen toe aan je reviews</strong> en vervang de kop "Wat klanten over ons zeggen". Trek 700+/800+ recht naar één cijfer.</p><p class="meta">Impact: hoog · Inspanning: laag</p></li>
+  <li><p><strong>Bouw de pijnpunt-sectie</strong> op positie 2, in plaats van de categoriegrid.</p><p class="meta">Impact: hoog · Inspanning: middel</p></li>
+  <li><p><strong>Vervang de twee ingeplakte PDP's</strong> door één compact koopblok.</p><p class="meta">Impact: middel-hoog · Inspanning: middel · Halveert je paginagewicht</p></li>
+  <li><p><strong>Herschrijf de drie waardeproposities</strong> met kenmerk + opbrengst + getal, opbrengst vooraan.</p><p class="meta">Impact: middel · Inspanning: laag</p></li>
+  <li><p><strong>Bouw de afsluiter</strong> onder de FAQ.</p><p class="meta">Impact: middel · Inspanning: laag</p></li>
+  <li><p><strong>Ruim de losse fouten op</strong> — garantie-zin, "Accesoires", de Vaderdag-popup, de Engelse microcopy, de <code>EMPTY DOM</code>-tekst, de dubbele announcement bar.</p><p class="meta">Impact: laag per stuk, samen merkschade · Inspanning: zeer laag</p></li>
+  <li><p><strong>Zet Microsoft Clarity aan</strong> en bekijk 100+ opnames voordat je nog iets bouwt. Twee vragen: klikken mensen waar jij wilt, en scrollen ze waar jij wilt?</p><p class="meta">Impact: indirect, hoog · Inspanning: zeer laag · Gratis</p></li>
+</ol>
+
+<h2>Wat je daarna meet</h2>
+<p>Niet je conversiepercentage in isolatie — 466 add-to-carts per maand is je échte signaal, en dat cijfer beweegt sneller dan omzet. Volg deze drie:</p>
+<ul>
+  <li><strong>Add-to-cart-percentage</strong> (nu 3,1%). Dit is het cijfer waar de homepage direct aan zit. Alles hierboven is bedoeld om dit te bewegen.</li>
+  <li><strong>Doorklik op de hero-CTA</strong> — richt op 3-5%. Meet in Clarity.</li>
+  <li><strong>Scrolldiepte</strong>. Als de sectie waar mensen het langst blijven hangen op 50% van de pagina staat, hoort hij hoger.</li>
+</ul>
+<p>Voer de ingrepen in blokken door en geef elk blok minimaal 1-2 weken, zodat dagelijkse en algoritmische schommelingen eruit middelen. En reken een winst altijd door naar een jaar: van 1,29% naar 1,8% klinkt bescheiden, maar op je huidige verkeer is dat ruim 900 extra bestellingen per jaar.</p>
+
+<footer>
+  <p>Bronnen: live HTML en assets van wellshave.com (19-08-2026), Shopify-sessie- en conversiedata over de laatste 30 dagen. Kaders uit de landing-page-methodiek van Arsh Sanwarwala, aangevuld met Mark (Brand Builder Academy) op marktvolwassenheid en aanbodstructuur. De inschatting dat 3,1% add-to-cart onder de norm ligt voor DTC is een eigen interpretatie van de funneldata, geen cijfer uit die bronnen.</p>
+</footer>
+
+</div>
