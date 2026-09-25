@@ -1,0 +1,471 @@
+<title>Wellshave homepage-teardown</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ground:#FAF8F4; --panel:#F1ECE3; --card:#FFFFFF;
+  --ink:#141210; --ink-2:#5E574F; --ink-3:#8A8177; --line:#E3DCD0;
+  --accent:#8C5A1A; --accent-soft:#F3E6D2;
+  --bad:#B3261E; --bad-soft:#F8E3E0; --warn:#9A5B0E; --warn-soft:#F7EAD6; --good:#3D6B45; --good-soft:#E3EDE3;
+  --band-a:#E6DED1; --band-b:#D6CBBA; --unseen:#F6F3EE;
+  --shadow:0 1px 2px rgba(20,18,16,.06),0 8px 24px rgba(20,18,16,.06);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  color-scheme:dark;
+  --ground:#151311; --panel:#1D1A17; --card:#211E1B;
+  --ink:#EFEAE2; --ink-2:#B4AA9D; --ink-3:#8C8377; --line:#302B26;
+  --accent:#D7A55C; --accent-soft:#3A2E1F;
+  --bad:#F08A7E; --bad-soft:#3A1F1C; --warn:#E3A35A; --warn-soft:#3A2B18; --good:#8CC096; --good-soft:#1E2E21;
+  --band-a:#3A342D; --band-b:#4A4239; --unseen:#1B1815;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+}}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ground:#151311; --panel:#1D1A17; --card:#211E1B;
+  --ink:#EFEAE2; --ink-2:#B4AA9D; --ink-3:#8C8377; --line:#302B26;
+  --accent:#D7A55C; --accent-soft:#3A2E1F;
+  --bad:#F08A7E; --bad-soft:#3A1F1C; --warn:#E3A35A; --warn-soft:#3A2B18; --good:#8CC096; --good-soft:#1E2E21;
+  --band-a:#3A342D; --band-b:#4A4239; --unseen:#1B1815;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+}
+
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);margin:0;
+  font:400 16px/1.62 "Montserrat",-apple-system,"Segoe UI",sans-serif;
+  -webkit-font-smoothing:antialiased;padding-inline:20px}
+.rail{max-width:920px;margin:0 auto;padding-block:56px 96px}
+.mono{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+h1,h2,h3{margin:0;text-wrap:balance;letter-spacing:-.02em}
+h1{font-size:clamp(30px,5vw,44px);font-weight:800;line-height:1.08}
+h2{font-size:clamp(23px,3.4vw,29px);font-weight:800;line-height:1.15}
+h3{font-size:19px;font-weight:700;line-height:1.25}
+p{margin:0;max-width:66ch}
+.lbl{font:500 11px/1.4 "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+section{margin-top:72px}
+section > header{display:grid;gap:10px;margin-bottom:24px}
+section > header p{color:var(--ink-2)}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* kop */
+.top{display:grid;gap:18px}
+.top .meta{display:flex;flex-wrap:wrap;gap:6px 18px}
+.verdict{display:grid;gap:14px;font-size:17.5px;line-height:1.6;margin-top:6px}
+.verdict p:first-child{font-weight:600}
+
+/* data */
+.data{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:36px;align-items:start}
+@media (max-width:760px){.data{grid-template-columns:1fr}}
+.map{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 16px 14px}
+.map svg{display:block;width:100%;height:auto}
+.map .note{font-size:12.5px;color:var(--ink-2);margin-top:10px;line-height:1.5}
+.cijfers{display:grid;gap:0}
+.cijfer{display:grid;grid-template-columns:110px 1fr;gap:18px;padding:16px 0;border-top:1px solid var(--line)}
+.cijfer:last-child{border-bottom:1px solid var(--line)}
+.cijfer b{font-size:30px;font-weight:800;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+.cijfer p{font-size:14.5px;color:var(--ink-2);line-height:1.5}
+.cijfer p strong{color:var(--ink);font-weight:600}
+.bron{font-size:12.5px;color:var(--ink-3);margin-top:14px}
+
+/* matrix */
+.matrix-wrap{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:14px}
+table.matrix{border-collapse:collapse;width:100%;min-width:640px;font-size:14px}
+.matrix th,.matrix td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:center}
+.matrix thead th{font:500 10.5px/1.3 "IBM Plex Mono",monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);vertical-align:bottom}
+.matrix tbody th{text-align:left;font-weight:500;padding-left:16px;min-width:210px}
+.matrix td.n{font:500 13px "IBM Plex Mono",monospace;color:var(--ink-2)}
+.matrix tr:last-child th,.matrix tr:last-child td{border-bottom:0}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--accent)}
+.nil{display:inline-block;width:10px;height:1px;background:var(--line)}
+.matrix tfoot td{font:500 13px "IBM Plex Mono",monospace;color:var(--ink);border-top:1px solid var(--line);border-bottom:0}
+.matrix tfoot th{text-align:left;padding-left:16px;font-weight:600;border-top:1px solid var(--line)}
+.after{display:grid;gap:12px;margin-top:22px}
+
+/* premium-regels */
+.regels{display:grid;border-top:1px solid var(--line)}
+.regel{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:8px 28px;padding:18px 0;border-bottom:1px solid var(--line)}
+@media (max-width:620px){.regel{grid-template-columns:1fr}}
+.regel h3{font-size:16.5px}
+.regel p{font-size:14.5px;color:var(--ink-2);line-height:1.55}
+
+/* blokken */
+.blok{margin-top:56px;padding-top:28px;border-top:1px solid var(--line)}
+.blok:first-of-type{margin-top:0}
+.blok-kop{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 18px;margin-bottom:6px}
+.blok-kop h3{font-size:22px;font-weight:800;letter-spacing:-.02em}
+.pos{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.chip{font:500 11px/1 "IBM Plex Mono",monospace;letter-spacing:.04em;padding:6px 9px;border-radius:6px;background:var(--panel);color:var(--ink-2);white-space:nowrap}
+.chip.hoog{background:var(--bad-soft);color:var(--bad)}
+.chip.mid{background:var(--warn-soft);color:var(--warn)}
+.chip.laag{background:var(--good-soft);color:var(--good)}
+.rol{color:var(--ink-2);font-size:15px;margin-bottom:16px}
+figure{margin:0 0 18px}
+figure img{display:block;width:100%;height:auto;border-radius:10px;border:1px solid var(--line)}
+figcaption{font-size:12.5px;color:var(--ink-3);margin-top:8px}
+.twee{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+@media (max-width:720px){.twee{grid-template-columns:1fr;gap:20px}}
+.kolom h4{margin:0 0 10px;font:500 11px/1.4 "IBM Plex Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+ul.punten{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+ul.punten li{font-size:15px;line-height:1.55;padding-left:0}
+ul.punten li .tag{font:500 10px/1 "IBM Plex Mono",monospace;letter-spacing:.06em;text-transform:uppercase;padding:3px 6px;border-radius:4px;margin-right:7px;vertical-align:2px;background:var(--panel);color:var(--ink-2)}
+.tag.ai{background:var(--accent-soft);color:var(--accent)}
+.tag.feit{background:var(--bad-soft);color:var(--bad)}
+.voorstel li{border-left:2px solid var(--accent);padding-left:12px!important}
+.duo-beeld{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,190px);gap:14px;align-items:start}
+@media (max-width:620px){.duo-beeld{grid-template-columns:1fr}}
+
+/* pdp */
+.bev{display:grid;gap:10px}
+.bev-rij{display:grid;grid-template-columns:86px 1fr;gap:14px;padding:14px 16px;border-radius:10px;background:var(--card);border:1px solid var(--line)}
+.bev-rij .ernst{font:500 10.5px/1.2 "IBM Plex Mono",monospace;letter-spacing:.06em;text-transform:uppercase;padding-top:3px}
+.bev-rij.fout .ernst{color:var(--bad)} .bev-rij.fout{border-left:3px solid var(--bad)}
+.bev-rij.let .ernst{color:var(--warn)} .bev-rij.let{border-left:3px solid var(--warn)}
+.bev-rij.goed .ernst{color:var(--good)} .bev-rij.goed{border-left:3px solid var(--good)}
+.bev-rij p{font-size:15px;line-height:1.55;max-width:none}
+.bev-rij p b{font-weight:600}
+@media (max-width:520px){.bev-rij{grid-template-columns:1fr;gap:4px}}
+
+/* volgorde */
+.volgorde{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+@media (max-width:720px){.volgorde{grid-template-columns:1fr}}
+ol.lijst{margin:0;padding:0;list-style:none;counter-reset:n;display:grid;gap:0}
+ol.lijst li{counter-increment:n;display:grid;grid-template-columns:30px 1fr;gap:10px;padding:12px 0;border-top:1px solid var(--line);font-size:15px;line-height:1.5}
+ol.lijst li:last-child{border-bottom:1px solid var(--line)}
+ol.lijst li::before{content:counter(n);font:500 13px/1.6 "IBM Plex Mono",monospace;color:var(--ink-3)}
+ol.lijst li b{font-weight:700}
+ol.lijst li span{display:block;color:var(--ink-2);font-size:14px}
+.oud li{color:var(--ink-2)}
+.oud li b{font-weight:600}
+.oud li s{color:var(--ink-3)}
+
+/* stappen */
+.stappen{display:grid;gap:14px}
+.stap{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;display:grid;gap:6px}
+.stap .wie{font:500 11px "IBM Plex Mono",monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.stap p{font-size:15px;color:var(--ink-2)}
+.stap p b{color:var(--ink);font-weight:600}
+.slot{margin-top:28px;padding:22px 24px;border-radius:14px;background:var(--panel)}
+.slot p{font-size:16px}
+.klein{font-size:13px;color:var(--ink-3);margin-top:48px;line-height:1.6;max-width:72ch}
+</style>
+
+<div class="rail">
+
+<header class="top">
+  <div class="meta">
+    <span class="lbl">wellshave.com · thema v5 (live sinds 17 sep)</span>
+    <span class="lbl">gemeten 25 sep 2026</span>
+  </div>
+  <h1>De homepage, blok voor blok</h1>
+  <div class="verdict">
+    <p>Je gevoel klopt, en het is aan te wijzen. Elk blok is los ontworpen en gebruikt alle versieringen tegelijk: een label in kapitalen, een gouden tweede kopregel, een goudverloop met gloed, iconen in rondjes, vinkjes. Negen keer hetzelfde trucje leest als sjabloon, niet als merk.</p>
+    <p>Het grotere probleem is de volgorde. De gemiddelde bezoeker op mobiel ziet ongeveer 19% van een pagina van zestien schermen hoog: de hero en de bundels. De keuzehulp, de echte klantvideo's en de productreviews staan daar allemaal onder.</p>
+    <p>Op de productpagina's van je twee best verkochte apparaten staan op dit moment vier placeholder-kaarten met "Lorem ipsum" en €0,00. Dat is het eerste wat ik zou oplossen, vandaag nog.</p>
+  </div>
+</header>
+
+<section id="data">
+  <header>
+    <span class="lbl">Wat de data zegt</span>
+    <h2>Bijna niemand komt voorbij blok 2</h2>
+    <p>Links de mobiele homepage op schaal, blok voor blok. De lijn staat waar de gemiddelde bezoeker ophoudt met scrollen. Alles in het lichte deel ziet de gemiddelde bezoeker niet.</p>
+  </header>
+  <div class="data">
+    <div class="map">{{paginakaart}}
+      <p class="note">Mobiel, 390 px breed. Scrolldiepte en vouwhoogte uit Contentsquare, 17–25 september; bloklengtes uit een render van de live pagina.</p>
+    </div>
+    <div>
+      <div class="cijfers">
+        <div class="cijfer"><b class="mono">19%</b><p><strong>Gemiddelde scrolldiepte op mobiel.</strong> De pagina is 11.376 px hoog, zo'n zestien schermen. Op desktop is het 28%.</p></div>
+        <div class="cijfer"><b class="mono">66,6%</b><p><strong>Bounce op mobiel</strong>, tegen 82,9% in augustus en begin september. De pagina-uitstap daalde van 73,8% naar 58,7%. V5 doet het beter dan wat er stond.</p></div>
+        <div class="cijfer"><b class="mono">2,51%</b><p><strong>Conversie van sessies die op de homepage landen</strong> (11 bestellingen uit 438). De productpagina's van Groom Guard, Groom Guard PRO en Flex Guard halen 3,6 tot 5,8%.</p></div>
+        <div class="cijfer"><b class="mono">~49</b><p><strong>Homepage-landingen per dag.</strong> Voor een echte A/B-test heb je richting 40.000 bezoekers per maand op één pagina nodig. Hier werken grote, gerichte veranderingen die je een paar weken laat lopen, en sessie-opnames.</p></div>
+      </div>
+      <p class="bron">Bronnen: Shopify-analytics (sessies per landingspagina, 17–25 sep tegen 9 aug–16 sep), Contentsquare-project Wellshave (paginagroep Homepage NL). 11 bestellingen is te weinig om de verbetering hard te noemen; de richting is wel duidelijk.</p>
+    </div>
+  </div>
+</section>
+
+<section id="ai">
+  <header>
+    <span class="lbl">Waarom het naar AI ruikt</span>
+    <h2>Negen blokken, steeds dezelfde versieringen</h2>
+    <p>Geen enkel element is op zich fout. Het is de stapeling: elk blok is als los pronkstuk gebouwd, met al het goud en alle labels erop. Een premium merk kiest één of twee van deze middelen en laat de rest weg.</p>
+  </header>
+  <div class="matrix-wrap">
+    <table class="matrix">
+      <thead><tr><th></th><th>Hero</th><th>Sets</th><th>Best&shy;sellers</th><th>Belofte</th><th>Tijdlijn</th><th>Zone&shy;kiezer</th><th>Familie</th><th>Garantie</th><th>Afsluiter</th><th>Totaal</th></tr></thead>
+      <tbody>
+        {{matrix}}
+      </tbody>
+    </table>
+  </div>
+  <div class="after">
+    <p>Daarbij heeft bijna elk blok een eigen kopstijl. De hero zet de derde regel in goud, de belofte gebruikt een dunne kop met één vet woord, de zonekiezer zet een halve zin in goud in de onderregel, de afsluiter kleurt midden in een regel. Dat komt door hoe de pagina gebouwd is: blok voor blok, elk in een eigen ontwerpdocument.</p>
+    <p>Jullie eigen merkregels zeggen het al: <em>"Zand is het signaal, niet goud. Zodra alles brons is, oogt het als een sjabloon met een gouden randje."</em> De live pagina doet het omgekeerde.</p>
+  </div>
+</section>
+
+<section id="premium">
+  <header>
+    <span class="lbl">Wat premium hier betekent</span>
+    <h2>Vijf regels voor de volgende versie</h2>
+  </header>
+  <div class="regels">
+    <div class="regel"><h3>Eén stem</h3><p>Eén kopstijl door de hele pagina: zwart, Montserrat 800, geen goud in de kop. Goud als accent op hooguit drie plekken, en dan betekent het "kopen".</p></div>
+    <div class="regel"><h3>Echt materiaal boven glans</h3><p>Productmacro's, echte badkamers uit de klantvideo's, het team. Geen fotomodel met gouden horloge; dat beeld associëren bezoekers inmiddels met gegenereerde advertenties, echt of niet.</p></div>
+    <div class="regel"><h3>Getallen met bereik</h3><p>"4,8 uit 195 reviews op de Groom Guard" overtuigt meer dan "Uitstekend". Elk getal zegt waar het over gaat: 200.000 bestellingen zijn geen 200.000 mannen.</p></div>
+    <div class="regel"><h3>Rust</h3><p>Geen carrousels met tellers, geen watermerken, geen gloed onder knoppen, geen avatarstapels. Minder blokken, elk met één taak.</p></div>
+    <div class="regel"><h3>Niet openen met korting</h3><p>Korting mag in de meldbalk. De hero verkoopt het apparaat. En "Summer Sale" op 25 september vertelt een bezoeker vooral dat niemand de site bijhoudt.</p></div>
+  </div>
+</section>
+
+<section id="blokken">
+  <header>
+    <span class="lbl">Blok voor blok</span>
+    <h2>De negen blokken, van boven naar beneden</h2>
+    <p>Posities in pixels op mobiel (390 px). Schermafdrukken op desktop (1440 px), zodat de vormgeving leesbaar is. Labels: <span class="chip">AI-look</span> vormgeving die generiek oogt, <span class="chip">CRO</span> kost verkoop, <span class="chip">Trust</span> kost vertrouwen, <span class="chip">Feit</span> een bewering die niet klopt.</p>
+  </header>
+
+  <article class="blok">
+    <div class="blok-kop"><h3>1 · Hero</h3><div class="pos"><span class="chip">134–915 px</span><span class="chip">iedereen ziet dit</span><span class="chip hoog">prioriteit hoog</span></div></div>
+    <p class="rol">Kop, onderregel, Trustpilot-regel, knop en een strook met drie garanties.</p>
+    <div class="duo-beeld">
+      <figure><img src="{{img:hero}}" alt="Hero op desktop: fotomodel met scheerapparaat, Summer Sale-pil, kop met gouden derde regel en goudkleurige knop Shop Wellshave"></figure>
+      <figure><img src="{{img:hero_m}}" alt="Dezelfde hero op 390 px breed"><figcaption>Op 390 px staat de knop op ~770 px. De gemiddelde vouw ligt op 705 px.</figcaption></figure>
+    </div>
+    <div class="twee">
+      <div class="kolom"><h4>Wat schuurt</h4><ul class="punten">
+        <li><span class="tag ai">AI-look</span>Het eerste wat je leest is een gouden pil met zonnetje en glansanimatie: "Summer Sale · tot 40% korting". Op 25 september.</li>
+        <li><span class="tag">CRO</span>"Jij wilt verzorgd de deur uit. Wij regelen de rest." past op elk verzorgingsmerk. Er staat geen uitkomst en geen mechanisme in. Je productpagina doet het wel: <em>"Trim zonder sneetjes. De SkinSafe™-kop pakt het haar, niet je huid."</em></li>
+        <li><span class="tag">CRO</span>De foto toont de Blade Baron, 20 bestellingen in 90 dagen en verder nergens op de homepage. De drie best verkochte apparaten van de laatste 30 dagen zijn alle drie bodygroomers (Flex Guard 104, Groom Guard 68, Groom Guard PRO 53).</li>
+        <li><span class="tag">CRO</span>"Shop Wellshave" noemt het merk en niet wat je krijgt. Op een gemiddelde telefoon valt de knop net onder de vouw.</li>
+      </ul></div>
+      <div class="kolom voorstel"><h4>Voorstel</h4><ul class="punten">
+        <li>Kop op uitkomst en mechanisme, over wat verkoopt: bodygroomen zonder sneetjes. De claim geldt voor bodygroomers en neustrimmers, dus de kop blijft binnen die categorie.</li>
+        <li>Beeld: het apparaat in een echte badkamer, bij voorkeur uit de klantvideo's of een eigen productshoot.</li>
+        <li>Knop "Vind jouw trimmer", die naar de keuzehulp springt. Op 390 px boven de vouw.</li>
+        <li>Sale-pil eruit. Korting alleen in de meldbalk, en met een actuele naam.</li>
+      </ul></div>
+    </div>
+  </article>
+
+  <article class="blok">
+    <div class="blok-kop"><h3>2 · Sets</h3><div class="pos"><span class="chip">915–2.376 px</span><span class="chip">laatste blok dat de gemiddelde bezoeker ziet</span><span class="chip hoog">prioriteit hoog</span></div></div>
+    <p class="rol">Een uitgelichte set en vier kleinere sets.</p>
+    <figure><img src="{{img:bundels}}" alt="Blok Sets: donkere kaart met Barber Pack 3.0 en vier kleinere setkaarten eronder"></figure>
+    <div class="twee">
+      <div class="kolom"><h4>Wat schuurt</h4><ul class="punten">
+        <li><span class="tag">CRO</span>Dit is het tweede blok, dus voor veel bezoekers het laatste. Ze krijgen sets van €75 tot €157 te zien voordat ze één los apparaat, één review of één klantvideo hebben gezien.</li>
+        <li><span class="tag feit">Feit</span>Uitgelicht staat de Barber Pack 3.0 met 7% korting, de kleinste korting van het blok, en 11 bestellingen in 30 dagen. De Barber Bro 2.0 verkocht er 24 en staat er niet. Shave Package Ultimate en Flex-line Bundel komen niet in de top 40 van de laatste 90 dagen.</li>
+        <li><span class="tag ai">AI-look</span>De uitgelichte kaart stapelt een pil, een label in kapitalen, een naam met gouden tweede woord, drie vinkjes en een goudverloopknop met gloed.</li>
+        <li><span class="tag ai">AI-look</span>Productnamen in twee kleuren ("Barber Bro <em>3.0</em>", "Shave Package <em>Ultimate™</em>"). Het maakt de namen onrustig en zegt niets.</li>
+      </ul></div>
+      <div class="kolom voorstel"><h4>Voorstel</h4><ul class="punten">
+        <li>Lager op de pagina, na de productkeuze en het bewijs. Wie een set koopt, weet al wat hij wil.</li>
+        <li>Terug naar drie sets en de set uitlichten die verkoopt.</li>
+        <li>Namen in één kleur, één label per kaart.</li>
+      </ul></div>
+    </div>
+  </article>
+
+  <article class="blok">
+    <div class="blok-kop"><h3>3 · Bestsellers</h3><div class="pos"><span class="chip">2.376–3.169 px</span><span class="chip">net voorbij het gemiddelde</span><span class="chip hoog">prioriteit hoog</span></div></div>
+    <p class="rol">Vier apparaten, één per plek op het lichaam.</p>
+    <figure><img src="{{img:bestsellers}}" alt="Blok Bestsellers: vier productkaarten onder de kop Waar mannen zoals jij deze maand voor kozen"></figure>
+    <div class="twee">
+      <div class="kolom"><h4>Wat schuurt</h4><ul class="punten">
+        <li><span class="tag feit">Feit</span>Het label zegt "Meest verkocht · afgelopen 30 dagen", maar dat klopt voor twee van de vier niet. Lichaam: Flex Guard (104) en Groom Guard (68) verkochten meer dan de getoonde Groom Guard PRO (53). Hoofd: de Tondeuse Elegant had 6 bestellingen, de Barber Bro 2.0 24.</li>
+        <li><span class="tag trust">Trust</span>Geen productbeoordeling op de kaarten. De productpagina van de Groom Guard heeft 4,8 uit 195 reviews; de homepage laat dat nergens zien.</li>
+        <li><span class="tag ai">AI-look</span>"Waar mannen zoals jij deze maand voor kozen." "Mannen zoals jij" staat twee keer op de pagina.</li>
+        <li><span class="tag">CRO</span>Dezelfde vier apparaten staan in blok 6 nog een keer, in de zonekiezer.</li>
+      </ul></div>
+      <div class="kolom voorstel"><h4>Voorstel</h4><ul class="punten">
+        <li>Samenvoegen met de zonekiezer (blok 6) en op plek 2 zetten, direct onder de hero.</li>
+        <li>Per zone het echte nummer 1 van de laatste 30 dagen, uit Shopify en niet met de hand ingevuld, zodat het label altijd klopt.</li>
+        <li>Sterren en aantal reviews per product op elke kaart.</li>
+      </ul></div>
+    </div>
+  </article>
+
+  <article class="blok">
+    <div class="blok-kop"><h3>4 · Belofte</h3><div class="pos"><span class="chip">3.169–3.972 px</span><span class="chip mid">prioriteit middel</span></div></div>
+    <p class="rol">100 dagen proberen als grote kaart, met Trustpilot-reviews eronder.</p>
+    <figure><img src="{{img:belofte}}" alt="Blok Belofte: kop met één vet woord, donkere kaart met ring 100 dagen"><figcaption>De Trustpilot-widgets laden via een script dat in deze render niet draaide. Live staan daar de reviews.</figcaption></figure>
+    <div class="twee">
+      <div class="kolom"><h4>Wat schuurt</h4><ul class="punten">
+        <li><span class="tag">CRO</span>100 dagen proberen staat in acht van de elf onderdelen van de pagina, van meldbalk tot afsluiter. Door de herhaling wordt het behang in plaats van een argument.</li>
+        <li><span class="tag">CRO</span>Blok 8 is een tweede risicoblok ("Jij loopt geen risico"), met bijna dezelfde tekst.</li>
+        <li><span class="tag ai">AI-look</span>Een eigen kopstijl (dun, met één vet woord) die nergens anders op de pagina terugkomt.</li>
+      </ul></div>
+      <div class="kolom voorstel"><h4>Voorstel</h4><ul class="punten">
+        <li>Samen met blok 8 één blok: garantie, een mens en de veelgestelde vragen.</li>
+        <li>Groot op één plek, vlak na de productkeuze, waar de prijs valt. Daarna alleen nog klein, bij de knoppen.</li>
+      </ul></div>
+    </div>
+  </article>
+
+  <article class="blok">
+    <div class="blok-kop"><h3>5 · Tijdlijn</h3><div class="pos"><span class="chip">3.972–4.763 px</span><span class="chip mid">prioriteit middel</span></div></div>
+    <p class="rol">Upgrades per productlijn, als carrousel.</p>
+    <figure><img src="{{img:tijdlijn}}" alt="Blok Tijdlijn: donkere carrousel met gedimde kaarten en teller 03 / 06"></figure>
+    <div class="twee">
+      <div class="kolom"><h4>Wat schuurt</h4><ul class="punten">
+        <li><span class="tag">Goed</span>Het verhaal is echt onderscheidend: apparaten die beter worden omdat klanten iets misten. Geen concurrent vertelt dit.</li>
+        <li><span class="tag ai">AI-look</span>Carrousel met teller "03 / 06", gedimde buren en zwarte apparaten op zwarte vlakken. De producten zijn nauwelijks te zien.</li>
+        <li><span class="tag">Detail</span>De tijdlijn noemt "JUN 2026" en "AUG 2026" elk twee keer.</li>
+        <li><span class="tag trust">Trust</span>"Elke upgrade begon bij een klant die iets terugstuurde, miste of beter wilde." Als dat per upgrade niet na te wijzen is, zachter formuleren.</li>
+      </ul></div>
+      <div class="kolom voorstel"><h4>Voorstel</h4><ul class="punten">
+        <li>Statisch en korter: drie upgrades naast elkaar, apparaten op zand in plaats van zwart, per upgrade één zin en waar het kan het klantcitaat dat erachter zat.</li>
+        <li>Of naar de Over ons-pagina, als de homepage korter moet.</li>
+      </ul></div>
+    </div>
+  </article>
+
+  <article class="blok">
+    <div class="blok-kop"><h3>6 · Zonekiezer</h3><div class="pos"><span class="chip">4.763–5.983 px</span><span class="chip hoog">prioriteit hoog</span></div></div>
+    <p class="rol">Kies een plek op het lichaam en je ziet het apparaat dat erbij hoort.</p>
+    <figure><img src="{{img:zonekiezer}}" alt="Blok Zonekiezer: foto met hotspots per lichaamszone en een productkaart van de Groom Guard PRO"></figure>
+    <div class="twee">
+      <div class="kolom"><h4>Wat schuurt</h4><ul class="punten">
+        <li><span class="tag">Goed</span>Het nuttigste blok van de pagina: een echte keuzehulp, en het antwoord op de vraag waar de meeste bezoekers mee binnenkomen.</li>
+        <li><span class="tag">CRO</span>Het staat op 4.763 px. De gemiddelde bezoeker is dan al vertrokken.</li>
+        <li><span class="tag ai">AI-look</span>"Stap 1 — kies jouw plek" zonder stap 2. Een nummer dat geen volgorde aangeeft.</li>
+        <li><span class="tag">CRO</span>Opnieuw de garantiestrook eronder, en opnieuw de vier apparaten uit blok 3.</li>
+      </ul></div>
+      <div class="kolom voorstel"><h4>Voorstel</h4><ul class="punten">
+        <li>Naar plek 2, met de bestsellers erin: plekken als knoppen bovenaan, daaronder het nummer 1 van die plek met sterren, prijs en knop.</li>
+        <li>De figuur met punten op desktop houden. Op mobiel alleen de rij knoppen, zodat de productkaart direct in beeld staat.</li>
+      </ul></div>
+    </div>
+  </article>
+
+  <article class="blok">
+    <div class="blok-kop"><h3>7 · Familie (klantvideo's)</h3><div class="pos"><span class="chip">5.983–6.946 px</span><span class="chip hoog">prioriteit hoog</span></div></div>
+    <p class="rol">Tien korte video's van klanten, in een carrousel.</p>
+    <figure><img src="{{img:familie}}" alt="Blok Familie: carrousel met klantvideo's, avatarstapel en knop Bekijk Instagram"></figure>
+    <div class="twee">
+      <div class="kolom"><h4>Wat schuurt</h4><ul class="punten">
+        <li><span class="tag trust">Trust</span>Echte mannen in echte badkamers: het sterkste vertrouwensmateriaal dat je hebt, en precies het tegenovergestelde van een AI-look. Het staat op bijna 6.000 px.</li>
+        <li><span class="tag">CRO</span>Bij de video's staat niet welk apparaat je ziet. Op de productpagina wel: "Het apparaat uit deze video's", met prijs en knop.</li>
+        <li><span class="tag">CRO</span>De grootste knop is "Bekijk Instagram" en die stuurt mensen de site af.</li>
+        <li><span class="tag ai">AI-look</span>Teller "04 / 10", gedimde zijkaarten, gouden sterretjes als versiering en een avatarstapel naast het bestelgetal.</li>
+      </ul></div>
+      <div class="kolom voorstel"><h4>Voorstel</h4><ul class="punten">
+        <li>Naar plek 3, direct na de productkeuze, als rij die je veegt zonder teller.</li>
+        <li>Onder elke video het apparaat, de prijs en een knop naar de productpagina.</li>
+        <li>Instagram als kleine link in de voetregel.</li>
+      </ul></div>
+    </div>
+  </article>
+
+  <article class="blok">
+    <div class="blok-kop"><h3>8 · Garantie en veelgestelde vragen</h3><div class="pos"><span class="chip">6.946–8.403 px</span><span class="chip mid">prioriteit middel</span></div></div>
+    <p class="rol">Een contactkaart met het team en een blok veelgestelde vragen.</p>
+    <figure><img src="{{img:garantie}}" alt="Blok Garantie: donkere contactkaart met gouden e-mailknop en een vragenblok met tabbladen"></figure>
+    <div class="twee">
+      <div class="kolom"><h4>Wat schuurt</h4><ul class="punten">
+        <li><span class="tag">Goed</span>De vragen zijn concreet en eerlijk: verzending naar België, wat buiten de garantie valt, dat de retourkosten voor de klant zijn.</li>
+        <li><span class="tag">CRO</span>Tweede risicoblok na blok 4.</li>
+        <li><span class="tag ai">AI-look</span>Watermerk-monogrammen in de hoeken, een label tussen twee lijntjes, een avatarstapel, en de goudverloopknop voor een e-mailadres. Elders betekent die knop "kopen".</li>
+      </ul></div>
+      <div class="kolom voorstel"><h4>Voorstel</h4><ul class="punten">
+        <li>Samenvoegen met blok 4 tot één blok zekerheid.</li>
+        <li>E-mail als zwarte knop of gewone link. Watermerken en lijntjes weg.</li>
+      </ul></div>
+    </div>
+  </article>
+
+  <article class="blok">
+    <div class="blok-kop"><h3>9 · Afsluiter</h3><div class="pos"><span class="chip">8.403–9.240 px</span><span class="chip laag">prioriteit laag</span></div></div>
+    <p class="rol">Laatste oproep, drie trustcijfers en een nieuwsbriefaanmelding.</p>
+    <figure><img src="{{img:afsluiter}}" alt="Afsluiter: gecentreerde kop, goudverloopknop, strook met drie cijfers en nieuwsbriefveld"></figure>
+    <div class="twee">
+      <div class="kolom"><h4>Wat schuurt</h4><ul class="punten">
+        <li><span class="tag feit">Feit</span>"200.000+ mannen gingen je voor sinds 2021." Het getal is het aantal bestellingen, niet het aantal mannen. Blok 7 zegt het wel goed.</li>
+        <li><span class="tag">CRO</span>De nieuwsbrief staat hier en 200 px verder nog eens in de footer.</li>
+        <li><span class="tag ai">AI-look</span>Alles gecentreerd, label tussen twee lijntjes, goud midden in de kopregel, watermerk rechtsboven.</li>
+      </ul></div>
+      <div class="kolom voorstel"><h4>Voorstel</h4><ul class="punten">
+        <li>"200.000+ bestellingen sinds 2021".</li>
+        <li>Eén aanmelding, in de footer.</li>
+        <li>Korter: één zin, één knop naar de keuzehulp.</li>
+      </ul></div>
+    </div>
+  </article>
+</section>
+
+<section id="pdp">
+  <header>
+    <span class="lbl">De productpagina als referentie</span>
+    <h2>Wat de productpagina beter doet, en wat er nu stuk is</h2>
+    <p>Gecontroleerd op de Groom Guard en de Flex Guard, samen 172 bestellingen in de laatste 30 dagen. Beide gebruiken hetzelfde sjabloon.</p>
+  </header>
+  <figure><img src="{{img:pdp_lorem}}" alt="Sectie Dit vindt je ook interresant met vier rode t-shirt-placeholders, Product, Lorem ipsum dolor sit amet en 0,00"><figcaption>Live op beide productpagina's, op ~6.200 px (mobiel). Het staat in de HTML die de server stuurt, dus ook zonder script zichtbaar.</figcaption></figure>
+  <div class="bev">
+    <div class="bev-rij fout"><span class="ernst">Stuk</span><p><b>Vier placeholder-kaarten</b> met rode t-shirts, "Product", "Lorem ipsum dolor sit amet." en 0,00, onder de kop "Dit vindt je ook interresant" (twee taalfouten). De sectie heeft in het productsjabloon geen producten of collectie gekregen.</p></div>
+    <div class="bev-rij fout"><span class="ernst">Stuk</span><p><b>"Zie onze 950+ reviews op"</b> staat nog op de productpagina. Overal elders staat 1000+.</p></div>
+    <div class="bev-rij fout"><span class="ernst">Stuk</span><p><b>"Al door 200.000+ mannen gekozen"</b> bij het koopvak. Bestellingen, geen mannen.</p></div>
+    <div class="bev-rij let"><span class="ernst">Let op</span><p><b>Oplaadtijd drie keer anders</b>: 90 minuten in de vragen, 120 minuten in de specificaties, "ongeveer 2 uur" in de doos-sectie.</p></div>
+    <div class="bev-rij let"><span class="ernst">Let op</span><p><b>Een vraag verwijst naar "de productverpakking of de FAQ-pagina"</b> voor de opzetkammen, terwijl de doos-sectie ze op dezelfde pagina opsomt (1,5 tot 4,5 mm). Samen met "De ultieme oplossing voor..." in de omschrijving is dit de tekst die naar gegenereerd ruikt.</p></div>
+    <div class="bev-rij let"><span class="ernst">Let op</span><p><b>"SUmmer Sale"</b> met twee hoofdletters in het koopvak, en de zomeractie loopt nog.</p></div>
+    <div class="bev-rij goed"><span class="ernst">Overnemen</span><p><b>Kop met uitkomst en mechanisme:</b> "Trim zonder sneetjes. De SkinSafe™-kop pakt het haar, niet je huid." Dat is het niveau dat de homepage-hero mist.</p></div>
+    <div class="bev-rij goed"><span class="ernst">Overnemen</span><p><b>Productreviews met bereik:</b> 4,8 uit 195 op de Groom Guard. Dat getal hoort op de kaarten op de homepage.</p></div>
+    <div class="bev-rij goed"><span class="ernst">Overnemen</span><p><b>Klantvideo's met het apparaat erbij</b>, prijs en knop onder de video's.</p></div>
+    <div class="bev-rij goed"><span class="ernst">Overnemen</span><p><b>Modelvergelijking</b> tussen Groom Guard en PRO, met "Meest gekozen" op één optie.</p></div>
+  </div>
+  <p class="bron">Winkelwagenlade (alle pagina's): de tweede garantieregel toont "levenslang jaar garantie", en de productkaarten erin "4.5 out of 5". Beide zijn thema-instellingen. De Engelse homepage (/en) is de op één na meest gelande pagina en converteert 0,74% tegen 2,51% voor de Nederlandse.</p>
+</section>
+
+<section id="volgorde">
+  <header>
+    <span class="lbl">Voorstel</span>
+    <h2>Van negen blokken naar zeven, met het bewijs bovenin</h2>
+    <p>De keuzehulp, de klantvideo's en de productreviews verhuizen naar het deel dat bezoekers echt zien. Sets en tijdlijn schuiven naar beneden.</p>
+  </header>
+  <div class="volgorde">
+    <div><p class="lbl" style="margin-bottom:10px">Nu</p>
+      <ol class="lijst oud">
+        <li><b>Hero</b><span>generieke kop, sale-pil</span></li>
+        <li><b>Sets</b><span>5 sets, uitgelicht wat niet verkoopt</span></li>
+        <li><b>Bestsellers</b><span>label klopt niet</span></li>
+        <li><b>Belofte</b><span>risicoblok 1</span></li>
+        <li><b>Tijdlijn</b><span>carrousel</span></li>
+        <li><b>Zonekiezer</b><span>op 4.763 px</span></li>
+        <li><b>Familie</b><span>op 5.983 px</span></li>
+        <li><b>Garantie + vragen</b><span>risicoblok 2</span></li>
+        <li><b>Afsluiter</b><span>200.000 "mannen"</span></li>
+      </ol></div>
+    <div><p class="lbl" style="margin-bottom:10px">Voorstel</p>
+      <ol class="lijst">
+        <li><b>Hero</b><span>uitkomst + mechanisme, bodygroomer in beeld, knop naar de keuzehulp</span></li>
+        <li><b>Kies je plek</b><span>zonekiezer en bestsellers samen, echte nummer 1 per zone, sterren per product</span></li>
+        <li><b>Echte badkamers</b><span>de klantvideo's, met apparaat en prijs eronder</span></li>
+        <li><b>Zekerheid</b><span>100 dagen, 2 jaar en een mens, plus de vragen, één keer</span></li>
+        <li><b>Sets</b><span>drie, uitgelicht wat verkoopt</span></li>
+        <li><b>Waarom het beter wordt</b><span>tijdlijn, statisch, drie upgrades</span></li>
+        <li><b>Afsluiter</b><span>één zin, één knop</span></li>
+      </ol></div>
+  </div>
+</section>
+
+<section id="stappen">
+  <header>
+    <span class="lbl">Volgorde van aanpak</span>
+    <h2>Eerst repareren, dan herbouwen</h2>
+    <p>V5 is het live thema, en daar kan ik niet in schrijven. De eerste vier stappen zijn instellingen in de thema-editor; die kosten samen een kwartier.</p>
+  </header>
+  <div class="stappen">
+    <div class="stap"><span class="wie">Vandaag · thema-editor · productsjabloon</span><p><b>De placeholder-kaarten weg.</b> Geef de sectie "Dit vindt je ook interresant" een collectie, of verberg hem, en zet de kop goed: "Dit vind je ook interessant".</p></div>
+    <div class="stap"><span class="wie">Vandaag · thema-editor</span><p><b>Getallen gelijktrekken.</b> 950+ wordt 1000+. "200.000+ mannen" wordt "200.000+ bestellingen", in de afsluiter en bij het koopvak. In de winkelwagen "levenslang jaar garantie" naar "2 jaar garantie" en "4.5 out of 5" naar "4,4 uit 5".</p></div>
+    <div class="stap"><span class="wie">Vandaag · thema-editor</span><p><b>Summer Sale vervangen of weghalen</b> in de meldbalk, de hero, het menu en het koopvak.</p></div>
+    <div class="stap"><span class="wie">Deze week · ik bouw, jij keurt</span><p><b>Hero en de samengevoegde keuzehulp</b> als ontwerp in een artifact, in de nieuwe stijl: één kopstijl, goud alleen op de knop, sterren per product. Daarna in een kopie van v5.</p></div>
+    <div class="stap"><span class="wie">Daarna</span><p><b>De rest van de volgorde</b>, blok voor blok, en na twee tot drie weken scrolldiepte, bounce en conversie vergelijken met de cijfers hierboven.</p></div>
+  </div>
+  <div class="slot"><p>Zeg welke stappen ik mag oppakken. Voor stap 4 heb ik nog één ding van je nodig: mag de hero een beeld uit de klantvideo's gebruiken, of komt er een eigen productfoto?</p></div>
+  <p class="klein">Werkwijze: live HTML van wellshave.com en twee productpagina's opgehaald op 25 september en lokaal gerenderd op 390 en 1440 px. Verkoopcijfers per product uit Shopify-analytics over 30 en 90 dagen. Scrolldiepte, bounce en uitstap uit Contentsquare. De Trustpilot-widgets laden via een extern script en zijn in de render niet te zien; wat daarover staat, gaat over het kader eromheen.</p>
+</section>
+
+</div>
