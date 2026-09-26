@@ -204,7 +204,7 @@ Het menu heeft weinig ruimte. Getest op schermbreedtes van 1000 tot 1440 pixels:
 |---|---|
 | 1400 px en breder | Label op volle grootte |
 | 1240 tot 1400 px | Label en tussenruimte iets kleiner, zodat alles op één regel blijft |
-| Smaller dan 1240 px | Label valt weg; daar is het menu zonder label al krap |
+| Smaller dan 1240 px | Label hangt als klein stickertje rechtsboven HERFST SALE en neemt geen breedte in |
 | Mobiel | Niet aangepast: de lade heeft al de gouden actiebalk en "Tot 40%" onder HERFST SALE |
 
 **Productkaarten.** Linksboven op de foto een zachte badge: crème met roestkleurige tekst
