@@ -207,8 +207,9 @@ Het menu heeft weinig ruimte. Getest op schermbreedtes van 1000 tot 1440 pixels:
 | Smaller dan 1240 px | Label hangt als klein stickertje rechtsboven HERFST SALE en neemt geen breedte in |
 | Mobiel | Niet aangepast: de lade heeft al de gouden actiebalk en "Tot 40%" onder HERFST SALE |
 
-**Productkaarten.** Linksboven op de foto een zachte badge: crème met roestkleurige tekst
-"Herfst Sale" en een blaadje. Staat er al een lint (Nieuw, Bestseller), dan komt de badge
+**Productkaarten.** Linksboven op de foto de Herfst Sale-sticker (`herfst-sale-sticker.webp` in
+Shopify Files), iets scheef, 72 px breed op desktop en 52 px op mobiel. Een ander beeld kies je
+in Thema-instellingen, Herfst Sale; zonder beeld valt hij terug op een crème tekstpil. Staat er al een lint (Nieuw, Bestseller), dan komt de badge
 eronder. De badge staat op de salepagina, de andere collectiepagina's, de bestsellers op de
 homepage, de zoekresultaten en de aanbevelingen in de winkelwagen.
 
