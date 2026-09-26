@@ -255,6 +255,47 @@ rand eromheen weggesneden). Dat geldt los van de Herfst Sale, dus ook na de acti
   `assets/ws-spaar.css`, en een paar regels in `sections/ws-collectie-raster.liquid`,
   `sections/ws-bestsellers.liquid` en `snippets/product-card.liquid`.
 
+### Above the fold van de productpagina (ontwerp 26 september)
+
+Het bovenste deel van het koopvak is in de kopie omgebouwd naar het nieuwe ontwerp. Dit geldt voor
+alle productpagina's met het koopvak, niet alleen voor de Herfst Sale.
+
+| Onderdeel | Was | Is nu |
+|---|---|---|
+| Pil | Capsule | Afgerond label met een wit vak rechts ("Herfst Sale") |
+| Beoordeling | Sterren, "Wellshave · 4,4", "1000+ reviews" | Sterren in een wit kader, "4,4 / 5", haarlijn, "1.000+ reviews op Trustpilot" |
+| Titel | The Gentleman Shaver™ | Hetzelfde, met het ™-teken klein en hoog |
+| Ondertitel | 23 px, zwart | 19 px, grijs |
+| Bespaarlabel | Bruin vlak | Bruine capsule met een prijskaartje; op mobiel zonder kaartje, anders past de prijsregel niet meer op 390 px |
+| Beloftes | Losse regels met een omlijnd vinkje | Elk een eigen kaart met een gouden vinkje, het eerste stuk vet |
+
+- Trustpilot nagekeken op 26 september: 1.036 reviews, score 4,4. "1.000+" en "4,4 / 5" kloppen.
+- Lettertype: het ontwerp gebruikt een ander lettertype; de site houdt Montserrat, zodat het koopvak
+  niet afwijkt van de rest van de pagina.
+- Leesbaarheid: witte letters op het bespaarlabel minstens 4,6:1 (het verloop is daarvoor iets
+  donkerder dan in het ontwerp), tekst op de beloftekaarten 7:1.
+- Getest op 340 tot 1440 px. Vanaf 390 px staat de beoordeling op één regel; smaller staat het
+  aantal reviews op een eigen regel.
+
+**Vet in de beloftes.** Het vette stuk is alles vóór een streepje met spaties (" - ") in de tekst.
+Staat er geen streepje, dan is de hele regel gewoon. Een komma direct voor het streepje komt buiten
+het vet. Het live thema kent dezelfde streepjesregel: daar staat het eerste stuk op een eigen regel
+en de rest eronder.
+
+**Nog niet gedaan, want live data:** de teksten uit het ontwerp staan nog niet in het product. Voor
+The Gentleman Shaver zou dat zijn:
+
+| Veld | Nu | Ontwerp |
+|---|---|---|
+| Belofte 1 | De scheerkop volgt je kaaklijn zonder rode plekken in je nek | Volgt je kaaklijn, - zonder rode plekken in je nek |
+| Belofte 2 | Je hebt geen scheerschuim nodig en de haren blijven in het apparaat | Geen scheerschuim nodig. - Haartjes blijven in het apparaat |
+| Belofte 3 | Scheerkop, precisietrimmer en neustrimmer zitten in één toestel | Alles in één: - scheerkop, precisietrimmer en neustrimmer |
+| Belofte 4 | Het LCD toont je accustand en hij staat op een oplaadstandaard | LCD-accudisplay - en een eigen oplaadstandaard |
+| Ondertitel | 4-in-1; Moeiteloos glad scheren met maximaal huidcomfort | 4-in-1: Moeiteloos glad scheren met maximaal huidcomfort |
+
+Code: `sections/ws-pdp-koopvak.liquid` (beoordeling, titel, bespaarlabel, beloftes), een blok
+onderaan `assets/ws-pdp-koopvak.css`, en in `templates/product.json` de beoordelingsteksten.
+
 ### Twee kopieën
 
 Er staat ook een kopie **"CRO-fixes 25-09"**. Daarin staan dezelfde CRO-aanpassingen, met
