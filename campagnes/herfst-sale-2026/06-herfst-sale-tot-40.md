@@ -234,6 +234,27 @@ Code: `snippets/ws-herfst-badge.liquid` (nieuw), de opmaak onderaan `assets/ws-s
 Groomer (50%) en Men Shaper Gold (53%). "Herfst Sale tot 40%" klopt voor de sale-collectie,
 maar een bezoeker die rondkijkt ziet elders hogere percentages.
 
+### Bestseller-sticker
+
+Elk lint of label dat "Best verkocht", "Bestseller" of "Best seller" zegt, is in de kopie
+vervangen door de nieuwe bestseller-sticker (`bestseller-sticker.webp` in Shopify Files, de lege
+rand eromheen weggesneden). Dat geldt los van de Herfst Sale, dus ook na de actie.
+
+| Waar | Welke producten nu |
+|---|---|
+| Collectiepagina's (lint per groep) | Elk product met "Best verkocht" in het labelveld van de groep, nu de handles `wellshave-scheerapparaat-elite` (The Gentleman Shaver), `wellshave-bodygroomer-groom-guard`, `wellshave-safety-razor-black`, `wellshave-tondeuse-mannen-deluxe`, `6-in-1-baardtrimmer-supreme`, `skull-shaver-deluxe-extra-magnetische-scheerkop` en `wellshave-3-in-1-neustrimmer-advance` |
+| Homepage, bestsellers | Groom Guard PRO |
+| Zoekresultaten en winkelwagen (productlabels) | Producten met het label "Best Seller", zoals Groom Guard en Men Shaper Gold |
+
+- De sticker staat **rechtsboven** op de foto, de Herfst Sale-sticker linksboven. Zo botsen ze
+  nooit. Staat er op de homepage rechtsboven al een keurmerk, dan gaat hij naar rechtsonder.
+- 100 px breed op desktop, 72 px op mobiel. Iets scheef, net als de herfststicker.
+- Andere linten, zoals "Nieuw", blijven gewone linten.
+- **Aan en uit:** Thema-instellingen, Bestseller-sticker. Daar kies je ook een ander beeld.
+- Code: `snippets/ws-bestseller-badge.liquid` (nieuw), de opmaak onderaan
+  `assets/ws-spaar.css`, en een paar regels in `sections/ws-collectie-raster.liquid`,
+  `sections/ws-bestsellers.liquid` en `snippets/product-card.liquid`.
+
 ### Twee kopieën
 
 Er staat ook een kopie **"CRO-fixes 25-09"**. Daarin staan dezelfde CRO-aanpassingen, met
