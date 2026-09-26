@@ -267,13 +267,13 @@ alle productpagina's met het koopvak, niet alleen voor de Herfst Sale.
 | Titel | The Gentleman Shaver™ | Hetzelfde, met het ™-teken klein en hoog |
 | Ondertitel | 23 px, zwart | 19 px, grijs |
 | Bespaarlabel | Bruin vlak | Bruine capsule met een prijskaartje; op mobiel zonder kaartje, anders past de prijsregel niet meer op 390 px |
-| Beloftes | Losse regels met een omlijnd vinkje | Elk een eigen kaart met een gouden vinkje, het eerste stuk vet |
+| Beloftes | Losse regels met een omlijnd vinkje | Losse regels met een gouden vinkje, het eerste stuk vet. De kaarten die er eerst omheen stonden zijn op verzoek weer weg, ook de haarlijnen op mobiel |
 
 - Trustpilot nagekeken op 26 september: 1.036 reviews, score 4,4. "1.000+" en "4,4 / 5" kloppen.
 - Lettertype: het ontwerp gebruikt een ander lettertype; de site houdt Montserrat, zodat het koopvak
   niet afwijkt van de rest van de pagina.
 - Leesbaarheid: witte letters op het bespaarlabel minstens 4,6:1 (het verloop is daarvoor iets
-  donkerder dan in het ontwerp), tekst op de beloftekaarten 7:1.
+  donkerder dan in het ontwerp), tekst van de beloftes 7:1.
 - Getest op 340 tot 1440 px. Vanaf 390 px staat de beoordeling op één regel; smaller staat het
   aantal reviews op een eigen regel.
 
