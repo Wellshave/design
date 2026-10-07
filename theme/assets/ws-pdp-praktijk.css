@@ -3,12 +3,16 @@
 .ws-prk{--p-cream:#F4F2EE;--p-brons:#B0742A;--p-gold:#E9BE72;
   --p-ink:#14120F;--p-ink60:rgba(20,18,15,.6);--p-ink45:rgba(20,18,15,.45);
   --p-lijn:rgba(20,18,15,.10);
-  display:block;background:var(--p-cream);
-  padding:var(--p-top,40px) 16px var(--p-bot,40px);
+  display:block;background:var(--p-grond,#FFFFFF);
+  padding:var(--p-top,40px) clamp(12px,3vw,56px) var(--p-bot,40px);
   font-family:'MontserratEG','Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
 .ws-prk *,.ws-prk *::before,.ws-prk *::after{box-sizing:border-box}
 .ws-prk img,.ws-prk video{max-width:100%}
-.ws-prk-rail{max-width:1000px;margin:0 auto}
+/* Bijna paginabreed, naar het voorbeeld van Well-Shine. De rail was 1000 px
+   en daarmee een smalle strook midden in een breed scherm; de beelden doen
+   het juist goed als ze ruimte krijgen. 1840 px is de grens waarboven een
+   rij hoger wordt dan een scherm. */
+.ws-prk-rail{max-width:1840px;margin:0 auto}
 
 /* ---- kop ---- */
 .ws-prk-hd{text-align:center;margin:0 0 26px}
@@ -19,18 +23,21 @@
   line-height:1.18;color:var(--p-ink)}
 
 /* ---- de kaart ---- */
-/* De strook naast het beeld wisselt om en om van zandtint. Twee kaarten
-   op rij in dezelfde kleur laten het blok als één vlak lezen; zo is elke
-   kaart een eigen stap. */
-.ws-prk-kaart{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-  background:var(--p-zand-a,#FFFFFF);border:1px solid var(--p-lijn);border-radius:16px;
-  overflow:hidden;margin-top:18px}
-.ws-prk-kaart:nth-of-type(even){background:var(--p-zand-b,#F8F6F2)}
+/* Beeld en tekst zijn twee losse tegels met een smalle naad ertussen. Het
+   beeld neemt vijf twaalfde, de tekst zeven: zo blijft het beeld een
+   vierkant en krijgt het kleurvlak de ruimte voor het merkteken. Het
+   tekstvlak wisselt om en om van zandtint, zodat elke kaart een eigen stap
+   is en twee op rij niet als één vlak lezen. */
+.ws-prk-kaart{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:12px;margin-top:12px}
 .ws-prk-kaart:first-of-type{margin-top:0}
+.ws-prk-kaart.ws-om{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
 .ws-prk-kaart.ws-om .ws-prk-md{order:2}
 
 /* ---- beeld ---- */
-.ws-prk-md{position:relative;min-height:320px;background:rgba(20,18,15,.06)}
+/* Een vierkant, maar nooit hoger dan het scherm: op een breed scherm zou een
+   rij anders boven de 900 px uitkomen en zie je beeld en tekst nooit samen. */
+.ws-prk-md{position:relative;overflow:hidden;border-radius:16px;background:rgba(20,18,15,.06);
+  aspect-ratio:1/1;max-height:min(780px,86vh);width:100%}
 .ws-prk-md .ws-prk-f,.ws-prk-md .ws-prk-v{display:block;width:100%;height:100%;object-fit:cover}
 .ws-prk-md video{background:#000}
 
@@ -55,14 +62,20 @@
 .ws-prk-md.ws-handmatig:focus-visible{outline:3px solid var(--p-brons);outline-offset:-3px}
 
 /* ---- tekst ---- */
-.ws-prk-tx{position:relative;overflow:hidden;padding:34px 34px 34px 30px;
-  display:flex;flex-direction:column;justify-content:center}
+.ws-prk-tx{position:relative;overflow:hidden;border-radius:16px;background:var(--p-zand-a,#F2EEE7);
+  padding:clamp(32px,4vw,64px) clamp(26px,5.5vw,96px);
+  display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+.ws-prk-kaart:nth-of-type(even) .ws-prk-tx{background:var(--p-zand-b,#EAE4D9)}
+.ws-prk-tx > *:not(.ws-prk-merk){max-width:30em}
 
-/* Het watermerk lijnt rechts uit op dezelfde marge als de tekst eronder,
-   niet op de rand van de kaart. Anders lijkt het eraf te vallen. */
-.ws-prk-nr{position:absolute;top:26px;right:34px;z-index:0;pointer-events:none;
-  font-size:96px;font-weight:600;letter-spacing:-.05em;line-height:.8;
-  color:rgba(176,116,42,.085)}
+/* Het merkteken: groot, toon-op-toon, rechts en half over de rand. Brons op
+   5,5% leest op beide zandtinten als een tint dieper, niet als een plaatje;
+   op 7% trok het al aandacht weg van de kop. Zo ver naar rechts dat de tekst
+   links vrij blijft. Het staat onder de tekst (z-index 0) en vangt geen
+   klikken. */
+.ws-prk-merk{position:absolute;z-index:0;pointer-events:none;
+  right:-13%;top:50%;height:104%;width:auto;transform:translateY(-50%);
+  color:rgba(138,90,30,.055)}
 
 .ws-prk-kick{position:relative;z-index:1;margin:0;
   font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--p-brons)}
@@ -71,11 +84,11 @@
   border-radius:2px;background:var(--p-gold)}
 
 .ws-prk-tx h3{position:relative;z-index:1;margin:14px 0 0;
-  font-size:clamp(20px,2.3vw,25px);font-weight:500;letter-spacing:-.022em;line-height:1.2;
+  font-size:clamp(21px,2.2vw,32px);font-weight:500;letter-spacing:-.022em;line-height:1.2;
   color:var(--p-ink);max-width:15em}
 
 .ws-prk-body{position:relative;z-index:1;margin-top:11px}
-.ws-prk-body p{margin:0;font-size:14px;line-height:1.6;color:var(--p-ink60);max-width:34em}
+.ws-prk-body p{margin:0;font-size:14.5px;line-height:1.65;color:rgba(20,18,15,.68);max-width:34em}
 .ws-prk-body ul{margin:19px 0 0;padding:0;list-style:none}
 .ws-prk-body li{position:relative;margin-top:11px;padding-left:28px;
   font-size:13.5px;line-height:1.45;color:var(--p-ink)}
@@ -88,15 +101,15 @@
 
 /* ---- telefoon ---- */
 @media (max-width: 820px) {
-  .ws-prk{padding-left:14px;padding-right:14px}
+  .ws-prk{padding-left:12px;padding-right:12px}
   .ws-prk-hd{margin-bottom:20px}
   .ws-prk h2{font-size:clamp(21px,5.6vw,26px)}
-  .ws-prk-kaart{grid-template-columns:1fr;margin-top:14px}
+  .ws-prk-kaart,.ws-prk-kaart.ws-om{grid-template-columns:1fr;gap:8px;margin-top:16px}
   /* Op de telefoon staat het beeld altijd boven; om en om heeft daar geen zin. */
   .ws-prk-kaart.ws-om .ws-prk-md{order:0}
-  .ws-prk-md{min-height:0;aspect-ratio:4/3}
-  .ws-prk-tx{padding:24px 20px 26px}
-  .ws-prk-nr{font-size:70px;top:20px;right:20px}
+  .ws-prk-md{aspect-ratio:4/3;max-height:none}
+  .ws-prk-tx{padding:28px 22px 30px}
+  .ws-prk-merk{right:-18%;height:104%}
   .ws-prk-tx h3{font-size:20px;max-width:none}
   .ws-prk-body p{font-size:13.5px}
   .ws-prk-etiket{left:12px;bottom:12px;padding:8px 13px 8px 9px;font-size:10px}

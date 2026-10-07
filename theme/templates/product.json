@@ -143,7 +143,11 @@
         "desk_indent_bottom": 0,
         "mob_indent_top": 0,
         "mob_indent_bottom": 0,
-        "aanbod_tonen": true
+        "aanbod_tonen": true,
+        "klarna_tonen": true,
+        "klarna_regel": "Of betaal in 3 rentevrije delen van [bedrag]",
+        "klarna_min": 35,
+        "klarna_max": 1500
       }
     },
     "belofte": {
@@ -214,10 +218,12 @@
         "telwoorden": "nul,Eén,Twee,Drie,Vier,Vijf,Zes,Zeven,Acht,Negen,Tien",
         "beeld_links": true,
         "video_label": "Video",
-        "zand_a": "#ffffff",
-        "zand_b": "#f8f6f2",
+        "zand_a": "#F2EEE7",
+        "zand_b": "#EAE4D9",
         "marge_top": 40,
-        "marge_bot": 40
+        "marge_bot": 40,
+        "grond": "#FFFFFF",
+        "merkteken": true
       }
     },
     "ss_payment_icons_Qi6V9R": {

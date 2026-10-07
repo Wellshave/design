@@ -352,6 +352,32 @@
               {%- endif -%}
             {%- endif -%}
           </div>
+
+          {%- comment -%}
+            Betalen in drie delen via Klarna. Het bedrag is de prijs gedeeld door
+            drie, naar boven afgerond op een cent: Klarna legt een restcent bij
+            de eerste termijn, dus dat is wat de klant als eerste betaalt. Lager
+            afronden zou een bedrag noemen dat niet klopt.
+            Staat binnen ProductPrice, zodat het meeverandert met de variant.
+            De meelopende balk kopieert ProductPrice; daar is hij verborgen.
+            Alleen tonen als Klarna in drie delen echt aan staat in de kassa, en
+            binnen de grenzen die Klarna voor dit bedrag hanteert.
+            Het woord voor het bedrag blijft eraan vast (harde spatie): op de
+            telefoon breekt de zin anders net voor het bedrag af en staat
+            "€19,99" alleen op de tweede regel.
+          {%- endcomment -%}
+          {%- liquid
+            assign klarna_min = s.klarna_min | default: 0 | times: 100
+            assign klarna_max = s.klarna_max | default: 100000 | times: 100
+            assign klarna_deel = v.price | plus: 2 | divided_by: 3
+          -%}
+          {%- if s.klarna_tonen and s.klarna_regel != blank and v.price >= klarna_min and v.price <= klarna_max -%}
+            {%- capture klarna_bedrag -%}<b>{% if s.munt != blank %}{{ s.munt }}{% endif %}{% render 'price-formated', price: klarna_deel %}</b>{%- endcapture -%}
+            <p class="ws-klarna">
+              <span class="ws-klarna-merk" aria-hidden="true">Klarna.</span>
+              <span class="ws-klarna-tx"><span class="visually-hidden">Klarna: </span>{{ s.klarna_regel | replace: ' [bedrag]', '&nbsp;[bedrag]' | replace: '[bedrag]', klarna_bedrag }}</span>
+            </p>
+          {%- endif -%}
         </div>
 
         {%- unless product.has_only_default_variant -%}
@@ -1830,6 +1856,11 @@
     { "type": "text", "id": "pil_label", "label": "Linkerhelft van de pil", "info": "Leeg laten betekent: de producttitel." },
     { "type": "text", "id": "pil_z", "label": "Rechterhelft van de pil", "info": "Zegt wat dit product is, niet wat je bespaart. Houd hem anders dan het label linksboven, anders staat dezelfde claim twee keer in beeld. Leeg = alleen de naam.", "default": "Bestseller" },
     { "type": "text", "id": "besparing_regel", "label": "Regel bij het bespaarde bedrag", "default": "Je bespaart" },
+    { "type": "header", "content": "Klarna in drie delen" },
+    { "type": "checkbox", "id": "klarna_tonen", "label": "Regel onder de prijs tonen", "info": "Alleen aanzetten als Klarna 'Betaal in 3 termijnen' echt in de kassa staat.", "default": true },
+    { "type": "text", "id": "klarna_regel", "label": "Tekst", "info": "[bedrag] wordt de prijs gedeeld door drie, naar boven afgerond op een cent.", "default": "Of betaal in 3 rentevrije delen van [bedrag]" },
+    { "type": "number", "id": "klarna_min", "label": "Vanaf (euro)", "info": "Onder dit bedrag biedt Klarna geen drie termijnen aan.", "default": 35 },
+    { "type": "number", "id": "klarna_max", "label": "Tot en met (euro)", "default": 1500 },
     { "type": "text", "id": "munt", "label": "Valutateken voor de prijs", "info": "De winkel zet zelf geen teken voor de prijs (moneyFormat is amount_with_comma_separator). Dit zet het alleen in dit blok. Leeg = geen teken.", "default": "€" },
     { "type": "header", "content": "Trustpilot" },
     { "type": "checkbox", "id": "tp_tonen", "label": "Beoordeling tonen", "default": true },

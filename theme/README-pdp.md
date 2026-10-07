@@ -1965,3 +1965,42 @@ oude Trustpilot-widget (`trustpilot_reviews`), die uit staat maar niet weg is.
   `preview_theme_id`) en laat Node de overige bestanden ophalen via
   `page.route` en `fetch` met `NODE_USE_ENV_PROXY=1`; Node vertrouwt het
   certificaat wel. TLS-controle uitzetten is geen optie.
+
+## Prijs groter, Klarna in drie delen eronder
+
+De prijs staat op 50 px (was 38), op de telefoon op 40 (was 34) en onder
+390 px op 34. Op 390 px blijven prijs, streepprijs en bespaarlabel op één
+regel; gemeten met €59,95 / €85,65 / 30%.
+
+Daaronder een eigen Klarna-regel: het roze Klarna-plaatje en *Of betaal in 3
+rentevrije delen van €19,99*. Het Klarna-appblok (*on-site messaging*) dat in
+het koopvak stond, rendert niets; deze regel komt uit het koopvak zelf.
+
+* **Het bedrag** is de prijs gedeeld door drie, **naar boven** afgerond op een
+  cent. Klarna legt een restcent bij de eerste termijn, dus dat is het bedrag
+  dat de klant als eerste betaalt.
+* Staat in `ProductPrice-…` en verandert dus mee met de variant. De meelopende
+  koopbalk kopieert dat blok; daar is de regel verborgen.
+* **Instellingen** in het koopvak, kop *Klarna in drie delen*: aan/uit, de tekst
+  (`[bedrag]` wordt het bedrag), en vanaf/tot en met in euro (35 en 1500).
+  Alleen aanzetten als *Betaal in 3 termijnen* echt in de kassa staat, en de
+  grenzen gelijk houden aan wat Klarna voor dit account hanteert.
+* Tekst vertaald in en/de/fr. Het woord voor het bedrag zit er met een harde
+  spatie aan vast, anders staat op de telefoon het bedrag alleen op regel twee.
+
+## Praktijk: bijna paginabreed, beeld en tekst als losse tegels
+
+`ws-pdp-praktijk` naar het voorbeeld van Well-Shine:
+
+* De rail is 1840 px in plaats van 1000; aan de zijkant 12 tot 56 px marge.
+* Beeld en tekst zijn twee tegels met een naad van 12 px. Het beeld krijgt 5
+  van de 12 kolommen en is vierkant (nooit hoger dan 780 px of 86% van het
+  scherm), de tekst 7. Om en om wisselt de kant.
+* In het tekstvlak staat het **merkteken** groot en toon-op-toon, rechts en
+  half over de rand: brons op 5,5%. Het grote volgnummer dat daar stond is
+  weg; het nummer staat al klein in de regel boven de kop.
+* Het merkteken komt uit `snippets/ws-merkteken.liquid`: de S uit het
+  logobestand `Group_2.svg`, als vector in één kleur (`currentColor`). Het
+  oude `ws-mark.png` is 160 px en wordt wazig zodra het groter staat.
+* Nieuwe instellingen: achtergrond van de sectie (wit), de twee zandtinten van
+  de tekstvlakken (#F2EEE7 en #EAE4D9) en het merkteken aan/uit.

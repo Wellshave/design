@@ -210,10 +210,24 @@
 .ws-pdp .ws-prijs{display:flex;align-items:baseline;gap:13px;flex-wrap:wrap;margin-top:16px}
 /* -.035em drukte de komma tegen de cijfers aan. Op 38px scheelt elke stap
    ruim een pixel per tekenpaar, dus dit is een zichtbaar verschil. */
-.ws-pdp .ws-prijs .ws-nu{font-size:38px;font-weight:500;letter-spacing:-.01em;color:var(--ws-ink);line-height:1}
+.ws-pdp .ws-prijs .ws-nu{font-size:50px;font-weight:500;letter-spacing:-.015em;color:var(--ws-ink);line-height:1}
 .ws-pdp .ws-prijs .ws-nu .ws-munt{margin-right:.09em;font-weight:500}
 .ws-pdp .ws-was .ws-munt,.ws-pdp .ws-besp .ws-munt{margin-right:.18em}
-.ws-pdp .ws-prijs .ws-was{font-size:17px;color:var(--ws-w38);text-decoration:line-through;font-weight:400}
+.ws-pdp .ws-prijs .ws-was{font-size:20px;color:var(--ws-w38);text-decoration:line-through;font-weight:400}
+
+/* Klarna in drie delen, direct onder de prijs. Het roze plaatje is het
+   merkteken van Klarna zelf (#FFA8CD met zwarte letters); de zin ernaast
+   staat in de gewone grijstint en alleen het bedrag is vet, zodat de prijs
+   erboven de grootste blijft. */
+.ws-pdp .ws-klarna{display:block;margin:11px 0 0;font-size:13px;line-height:1.7;color:var(--ws-w72)}
+/* Het plaatje staat in de regel, niet ernaast als eigen blok: op de telefoon
+   past de zin niet naast het plaatje, en dan loopt de tekst er gewoon achter
+   door naar de volgende regel in plaats van dat de hele zin onder het
+   plaatje valt. */
+.ws-pdp .ws-klarna-merk{display:inline-flex;align-items:center;margin-right:8px;vertical-align:1px;padding:2px 7px;border-radius:5px;
+  background:#FFA8CD;color:#17120F;font-size:11px;font-weight:800;letter-spacing:-.01em;line-height:1.2}
+.ws-pdp .ws-klarna b{font-weight:600;color:var(--ws-ink)}
+.ws-pdp .ws-sticky-pr .ws-klarna{display:none}
 /* Het bespaarde bedrag stond in een eigen kader onder de prijs en staat nu
    achter de prijs, op de plek van het weggehaalde percentage. Een euro is
    concreter dan een procent, en zo staat het er nog maar een keer. Het label
@@ -623,10 +637,13 @@
      390 px vroeg die rij 327 px en kreeg hij er 312, dus viel het label
      eronder. De drie onderdelen leveren elk een paar pixels in in plaats van
      dat er één van de regel valt. wrap blijft staan als vangnet: bij een
-     extreem lang bedrag breekt hij liever af dan dat hij afkapt. */
+     extreem lang bedrag breekt hij liever af dan dat hij afkapt.
+     7 oktober: de prijs van 34 naar 40 px, op verzoek groter. Gemeten op
+     390 px met €59,95 / €85,65 / 30%: blijft op één regel. */
   .ws-pdp .ws-prijs{margin-top:0;gap:8px}
-  .ws-pdp .ws-prijs .ws-nu{font-size:34px}
-  .ws-pdp .ws-prijs .ws-was{font-size:15.5px}
+  .ws-pdp .ws-prijs .ws-nu{font-size:40px}
+  .ws-pdp .ws-prijs .ws-was{font-size:16.5px}
+  .ws-pdp .ws-klarna{flex-basis:100%;margin-top:0;font-size:12.5px}
   .ws-pdp .ws-besp{padding:4px 7px}
   .ws-pdp .ws-besp span{font-size:10px}
 
@@ -634,7 +651,7 @@
      dezelfde drie onderdelen, dus daar gaat er nog een stap af. */
   @media screen and (max-width:389px){
     .ws-pdp .ws-prijs{gap:6px}
-    .ws-pdp .ws-prijs .ws-nu{font-size:29px}
+    .ws-pdp .ws-prijs .ws-nu{font-size:34px}
     .ws-pdp .ws-prijs .ws-was{font-size:14px}
     .ws-pdp .ws-besp{padding:3px 6px}
     .ws-pdp .ws-besp span{font-size:9.5px}
