@@ -247,14 +247,6 @@
 .ws-pdp .ws-besp span{font-size:11px;font-weight:600;line-height:1.25;color:#F7F3EC;white-space:nowrap}
 .ws-pdp .ws-gift p,.ws-pdp .ws-tel{color:var(--ws-w72)}
 
-.ws-pdp .ws-usp{list-style:none;margin:17px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
-.ws-pdp .ws-usp li{display:grid;grid-template-columns:21px minmax(0,1fr);gap:12px;align-items:start}
-.ws-pdp .ws-usp .ws-vk{width:21px;height:21px;border-radius:50%;border:1.4px solid rgba(20,18,15,.16);
-  color:#A76F28;background:transparent;
-  display:flex;align-items:center;justify-content:center;margin-top:1px}
-.ws-pdp .ws-usp .ws-vk svg{width:10px;height:10px}
-.ws-pdp .ws-usp b{display:block;font-size:14px;font-weight:400;color:var(--ws-ink);line-height:1.3}
-.ws-pdp .ws-usp span{display:block;font-size:12.5px;color:var(--ws-w52);line-height:1.35;margin-top:2px}
 
 /* levering: een eigen blokje boven het aanbod. Neutraal omlijnd, want goud is
    van het aanbod en dit is een geruststelling. De drie staan onder elkaar --
@@ -605,7 +597,7 @@
   .ws-pdp .ws-bb > .ws-lead{order:5}
   .ws-pdp .ws-bb > [id^="ProductPrice-"]{order:6}
   .ws-pdp .ws-bb > .ws-opties{order:7}
-  .ws-pdp .ws-bb > .ws-usp{order:8}
+  .ws-pdp .ws-bb > .ws-vd{order:8}
   .ws-pdp .ws-bb > .ws-vrd{order:13}
   .ws-pdp .ws-bb > .ws-gift{order:9}
   .ws-pdp .ws-bb > .ws-vorm{order:12}
@@ -659,9 +651,6 @@
 
   /* de beloftes tussen twee haarlijnen, drie stuks; meer past niet zonder
      dat de knop van het scherm valt */
-  .ws-pdp .ws-usp{margin-top:18px;padding:17px 0;gap:14px;
-    border-top:1px solid rgba(20,18,15,.13);border-bottom:1px solid rgba(20,18,15,.13)}
-  .ws-pdp .ws-usp li:nth-child(n+4){display:none}
 
   /* De voorraadregel staat nu als eigen blok boven het aanbod, dus de
      omkeertruc binnen het formulier is niet meer nodig. Het plakkaat blijft
@@ -933,18 +922,7 @@
 .ws-pdp .ws-besp span{font-size:12px;font-weight:600;color:#fff}
 .ws-pdp .ws-sticky-pr .ws-besp svg{display:none}
 
-/* de beloftes: een lijst met een gouden vinkje, het eerste stuk vet. Elke regel
-   stond eerst in een eigen kaart; die kaarten zijn er op 26 september weer af,
-   de lijst staat nu los op het koopvak. Het vinkje is daarom kleiner dan in
-   de kaart, anders weegt het zwaarder dan de tekst ernaast. */
-.ws-pdp .ws-usp{gap:12px;margin-top:20px}
-.ws-pdp .ws-usp li{grid-template-columns:28px minmax(0,1fr);gap:12px;align-items:center}
-.ws-pdp .ws-usp .ws-vk{width:28px;height:28px;border:0;margin:0;color:#fff;
-  background:radial-gradient(circle at 32% 28%,#D6B67C 0%,#B58D4A 55%,#9A7137 100%);
-  box-shadow:inset 0 1px 0 rgba(255,240,210,.45),0 1px 2px rgba(90,60,20,.35)}
-.ws-pdp .ws-usp .ws-vk svg{width:13px;height:13px}
-.ws-pdp .ws-usp .ws-usp-tx{display:block;margin:0;font-size:14px;line-height:1.4;color:var(--ws-w72)}
-.ws-pdp .ws-usp .ws-usp-tx b{display:inline;font-size:inherit;font-weight:700;line-height:inherit;color:var(--ws-ink)}
+
 
 @media screen and (max-width:749px){
   .ws-pdp .ws-pil .ws-a{padding:6px 6px 6px 12px}
@@ -957,11 +935,6 @@
   .ws-pdp .ws-besp span{font-size:10px}
   /* de lijst staat los, net als op desktop, dus zonder de twee haarlijnen
      die er vroeger op mobiel omheen stonden */
-  .ws-pdp .ws-usp{margin-top:18px;padding:0;border:0;gap:10px}
-  .ws-pdp .ws-usp li{grid-template-columns:26px minmax(0,1fr);gap:11px}
-  .ws-pdp .ws-usp .ws-vk{width:26px;height:26px}
-  .ws-pdp .ws-usp .ws-vk svg{width:11px;height:11px}
-  .ws-pdp .ws-usp .ws-usp-tx{font-size:13.5px}
 }
 @media screen and (max-width:389px){
   .ws-pdp .ws-besp{padding:3px 6px}
@@ -972,7 +945,6 @@
    de prijs. De sterrenregel past vanaf 390 px op één regel; smaller zakt het
    aantal reviews naar een eigen regel, zonder het streepje ervoor. De prijs
    kreeg hierboven een marge die op mobiel dubbel kwam met die van zijn blok. */
-.ws-pdp .ws-usp .ws-vk svg{width:15px;height:15px;stroke-width:2.8}
 @media screen and (max-width:749px){
   .ws-pdp .ws-prijs{margin-top:0}
   .ws-pdp .ws-tp{gap:8px}
@@ -981,9 +953,53 @@
   .ws-pdp .ws-tp .ws-st svg{width:9px;height:9px}
   .ws-pdp .ws-tp .ws-cf{font-size:12.5px}
   .ws-pdp .ws-tp .ws-sc{margin-left:0;padding-left:8px;font-size:11.5px}
-  .ws-pdp .ws-usp .ws-vk svg{width:14px;height:14px}
 }
 @media screen and (max-width:389px){
   .ws-pdp .ws-tp{row-gap:5px}
   .ws-pdp .ws-tp .ws-sc{flex-basis:100%;border-left:0;padding-left:0}
+}
+
+
+/* ---- De voordelen: vier kaarten met een eigen icoon ----
+   Ontwerp 7 oktober. In plaats van een lijst met vinkjes staat elk voordeel
+   in een eigen witte kaart: links een icoon dat bij dat voordeel hoort, rechts
+   een korte kop en een regel uitleg. Twee naast elkaar, dus vier in twee rijen,
+   ook op de telefoon. De oude lijst verborg daar het vierde voordeel.
+
+   Het icoon tekent zichzelf zodra het koopvak in beeld komt: elke lijn heeft
+   pathLength 1, dus dasharray 1 en dashoffset van 1 naar 0 tekent hem van
+   begin tot eind, hoe lang hij ook is. De kaarten volgen elkaar op met 120 ms
+   ertussen. De wachtstand (ws-vd-wacht) zet het script er zelf op; zonder
+   script staat alles er gewoon, en bij minder beweging ook. */
+.ws-pdp .ws-vd{list-style:none;margin:18px 0 0;padding:0;
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.ws-pdp .ws-vd li{display:flex;align-items:center;gap:12px;min-width:0;margin:0;
+  padding:13px 14px;border-radius:12px;background:var(--ws-kaart);
+  border:1px solid rgba(20,18,15,.06);box-shadow:0 1px 3px rgba(20,18,15,.05)}
+.ws-pdp .ws-vd-ic{flex:none;display:block;width:22px;height:22px;color:#A76F28}
+.ws-pdp .ws-vd-svg{display:block;width:100%;height:100%}
+.ws-pdp .ws-vd-tx{display:block;min-width:0}
+.ws-pdp .ws-vd-tx b{display:block;font-size:13.5px;font-weight:600;line-height:1.25;
+  letter-spacing:-.005em;color:var(--ws-ink)}
+.ws-pdp .ws-vd-tx span{display:block;margin-top:2px;font-size:12px;line-height:1.3;color:var(--ws-w52)}
+
+.ws-pdp .ws-vd.ws-vd-wacht .ws-vd-svg path{stroke-dasharray:1;stroke-dashoffset:1}
+.ws-pdp .ws-vd.ws-vd-wacht .ws-vd-tx{opacity:0;transform:translateY(4px)}
+.ws-pdp .ws-vd.ws-in .ws-vd-svg path{stroke-dashoffset:0;
+  transition:stroke-dashoffset .9s cubic-bezier(.65,0,.35,1) calc(var(--i,0) * .12s + .08s)}
+.ws-pdp .ws-vd.ws-in .ws-vd-tx{opacity:1;transform:none;
+  transition:opacity .5s ease calc(var(--i,0) * .12s),transform .5s ease calc(var(--i,0) * .12s)}
+@media (prefers-reduced-motion:reduce){
+  .ws-pdp .ws-vd .ws-vd-svg path{stroke-dasharray:none!important;stroke-dashoffset:0!important;transition:none!important}
+  .ws-pdp .ws-vd .ws-vd-tx{opacity:1!important;transform:none!important;transition:none!important}
+}
+
+/* Op de telefoon staat het icoon boven de tekst: naast elkaar blijft er in een
+   kaart van 160 px te weinig over voor de kop. */
+@media screen and (max-width:749px){
+  .ws-pdp .ws-vd{margin-top:16px;gap:8px}
+  .ws-pdp .ws-vd li{flex-direction:column;align-items:flex-start;gap:8px;padding:12px 12px 13px}
+  .ws-pdp .ws-vd-ic{width:21px;height:21px}
+  .ws-pdp .ws-vd-tx b{font-size:13px}
+  .ws-pdp .ws-vd-tx span{font-size:11.5px}
 }

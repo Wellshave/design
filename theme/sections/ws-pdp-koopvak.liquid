@@ -399,43 +399,72 @@
           </div>
         {%- endunless -%}
 
+        {%- comment -%}
+          De voordelen, ontwerp 7 oktober: vier kaarten met een eigen icoon, een
+          korte kop en een regel uitleg. Ze komen uit custom.voordelen, een lijst
+          metaobjecten van het type ws_voordeel (icoon, kop, tekst). Een voordeel
+          kan op meerdere producten staan; pas je het aan, dan verandert het
+          overal waar het gebruikt wordt.
+
+          Staat custom.voordelen leeg, dan vallen we terug op de oude regels uit
+          custom.product_usp, in dezelfde kaarten: het stuk voor de streep wordt
+          de kop, de rest de uitleg, met een vinkje als icoon.
+        {%- endcomment -%}
+        {%- assign voordelen = mf.voordelen.value -%}
         {%- assign usps = mf.product_usp.value -%}
-        {%- if usps != blank -%}
-          <ul class="ws-usp">
-            {%- for regel in usps limit: 4 -%}
-              {%- liquid
-                assign r = regel | replace: '－', '—' | replace: ' - ', ' — '
-                assign delen = r | split: '—'
-                assign kop = delen[0] | strip
-                assign rest = ''
-                if delen.size > 1
-                  assign rest = r | remove_first: delen[0] | remove_first: '—' | strip
-                endif
-                comment
-                  Ontwerp 26 september: één zin per kaart, met het stuk voor de
-                  streep vet. Een komma aan het eind van dat stuk hoort bij de zin
-                  en niet bij de nadruk, dus die komt buiten het vet; een punt of
-                  dubbele punt blijft erbij, zoals in het ontwerp. Zonder streep
-                  staat de hele regel gewoon, zonder vet.
-                endcomment
-                assign komma = ''
-                if rest != blank
-                  assign laatste = kop | slice: -1
-                  if laatste == ','
-                    assign kop_lengte = kop | size | minus: 1
-                    assign kop = kop | slice: 0, kop_lengte
-                    assign komma = ','
+        {%- if voordelen != blank or usps != blank -%}
+          <ul class="ws-vd" data-ws-vd>
+            {%- if voordelen != blank -%}
+              {%- for vd in voordelen limit: 4 -%}
+                <li style="--i:{{ forloop.index0 }}">
+                  <span class="ws-vd-ic">{%- render 'ws-voordeel-icoon', icoon: vd.icoon.value, klasse: 'ws-vd-svg' -%}</span>
+                  <span class="ws-vd-tx">
+                    <b>{{ vd.kop.value }}</b>
+                    {%- if vd.tekst.value != blank -%}<span>{{ vd.tekst.value }}</span>{%- endif -%}
+                  </span>
+                </li>
+              {%- endfor -%}
+            {%- else -%}
+              {%- for regel in usps limit: 4 -%}
+                {%- liquid
+                  assign r = regel | replace: '－', '—' | replace: ' - ', ' — '
+                  assign delen = r | split: '—'
+                  assign kop = delen[0] | strip | remove: ','
+                  assign rest = ''
+                  if delen.size > 1
+                    assign rest = r | remove_first: delen[0] | remove_first: '—' | strip
                   endif
-                endif
-              -%}
-              <li>
-                <span class="ws-vk"><svg><use href="#ws-pdp-vink-{{ section.id }}"/></svg></span>
-                <span class="ws-usp-tx">
-                  {%- if rest != blank -%}<b>{{ kop }}</b>{{ komma }} {{ rest }}{%- else -%}{{ kop }}{%- endif -%}
-                </span>
-              </li>
-            {%- endfor -%}
+                -%}
+                <li style="--i:{{ forloop.index0 }}">
+                  <span class="ws-vd-ic">{%- render 'ws-voordeel-icoon', icoon: 'vink', klasse: 'ws-vd-svg' -%}</span>
+                  <span class="ws-vd-tx">
+                    <b>{{ kop }}</b>
+                    {%- if rest != blank -%}<span>{{ rest }}</span>{%- endif -%}
+                  </span>
+                </li>
+              {%- endfor -%}
+            {%- endif -%}
           </ul>
+          <script>
+            (function () {
+              var lijst = document.currentScript && document.currentScript.previousElementSibling;
+              if (!lijst || !lijst.hasAttribute('data-ws-vd')) return;
+              try { if (matchMedia('(prefers-reduced-motion: reduce)').matches) return; } catch (e) {}
+              if (!('IntersectionObserver' in window)) return;
+              // Eerst in de wachtstand, dan tekenen zodra de kaarten echt in beeld
+              // staan. Boven de vouw is dat meteen; lager op de telefoon pas als
+              // je ernaartoe scrolt, zodat je de animatie ook ziet.
+              lijst.classList.add('ws-vd-wacht');
+              var kijker = new IntersectionObserver(function (regels) {
+                regels.forEach(function (regel) {
+                  if (!regel.isIntersecting) return;
+                  requestAnimationFrame(function () { requestAnimationFrame(function () { lijst.classList.add('ws-in'); }); });
+                  kijker.disconnect();
+                });
+              }, { threshold: 0.35 });
+              kijker.observe(lijst);
+            })();
+          </script>
         {%- endif -%}
 
         {%- comment -%}

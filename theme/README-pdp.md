@@ -2004,3 +2004,80 @@ het koopvak stond, rendert niets; deze regel komt uit het koopvak zelf.
   oude `ws-mark.png` is 160 px en wordt wazig zodra het groter staat.
 * Nieuwe instellingen: achtergrond van de sectie (wit), de twee zandtinten van
   de tekstvlakken (#F2EEE7 en #EAE4D9) en het merkteken aan/uit.
+
+## Voordelen als kaartjes met een eigen icoon
+
+Onder de prijs stonden de voordelen als vinkjeslijst (`product_usp`, vier
+zinnen met een gedachtestreepje). Nu zijn het **kaartjes**: een korte kop, een
+regel tekst eronder en per voordeel een eigen icoon. Op de computer twee naast
+elkaar, op de telefoon ook twee, met het icoon boven de tekst.
+
+### Waar de tekst staat
+
+* **Metaobject `ws_voordeel`**, velden `icoon` (sleutel, zie hieronder), `kop`
+  en `tekst`. Vertaalbaar, en zichtbaar voor de winkel. Eén voordeel kan bij
+  meerdere producten horen: *Nat of droog* staat er één keer in.
+* **Productmetaveld `custom.voordelen`**: een lijst van zulke voordelen, in de
+  volgorde waarin ze op de pagina staan. Er worden er maximaal vier getoond.
+* **Ingevuld voor 43 producten**, met in totaal 120 voordelen. De teksten zijn
+  herschreven uit `product_usp`: korter en met de kop als belofte, niet als
+  kenmerk (*Raakt je huid niet*, niet *SkinSafe-mesjes*). Daarbij ging er bij
+  twee producten iets mis dat nu klopt: bij het Flex Guard Trio-mes stond
+  *Groom Guard*, en *Bruibaar* is weg.
+* **Vertaald** in en/de/fr (kop en tekst), gecontroleerd op de preview in alle
+  drie de talen.
+* **Valt terug** op `product_usp` als `custom.voordelen` leeg is: elke zin wordt
+  een kaartje, de tekst voor het gedachtestreepje de kop, de rest de regel
+  eronder, met het vinkje als icoon. Een nieuw product zonder kaartjes ziet er
+  dus niet kaal uit.
+* *Snel bekijken* in de collectie en de vergelijktabel lezen nog `product_usp`.
+  Pas je daar een voordeel aan, doe het dan in beide.
+
+### De iconen
+
+`snippets/ws-voordeel-icoon.liquid`, met de sleutel als parameter. Lijnen van
+1,75 op een raster van 24, in brons (#A76F28). Een deel komt uit Lucide
+(ISC-licentie, de vermelding staat in het snippet), de rest is getekend voor
+deze producten.
+
+| Sleutel | Voor |
+|---|---|
+| `schild` | veilig, geen sneetjes, SkinSafe |
+| `veer` | zacht, geen irritatie, trekt niet |
+| `glad` | glad resultaat |
+| `haar` | haar, haarsoort |
+| `licht` | LED-lampje |
+| `druppel`, `douche` | waterdicht, onder de douche |
+| `accu`, `opladen`, `station`, `scherm`, `klok` | accu, laden, laadstation, display, looptijd |
+| `motor`, `knop`, `stil` | vermogen, bediening, stil |
+| `opzetstukken`, `kam`, `fade`, `draai` | opzetstukken, kamlengtes, fade-hendel, lengte draaien |
+| `precisie`, `foil`, `mes`, `magneet` | precisietrimmer, folieblad, mesje, magnetische koppen |
+| `neustrimmer`, `baard`, `hoofd`, `lichaam`, `kapper` | per zone of toepassing |
+| `tas`, `reis`, `doos`, `cadeau`, `medaille` | toilettas, op reis, complete set, cadeau, kwaliteit |
+| `vink` | standaard, ook bij een onbekende sleutel |
+
+Een nieuw icoon toevoegen: tekenen in `scripts/voordeel-iconen.py` en het
+snippet opnieuw laten bouwen (gebruik staat bovenin het script). Het script
+schrijft ook een proefvel met alle iconen naast elkaar.
+
+### Het intekenen
+
+Elk icoon is opgebouwd uit `<path pathLength="1">`. Daardoor is elke lijn,
+hoe lang ook, voor de CSS precies 1 lang, en kan `stroke-dashoffset` hem van
+1 naar 0 laten lopen: het icoon tekent zichzelf.
+
+* Een klein script in het koopvak zet de klasse `ws-vd-wacht` op de lijst en
+  wacht tot een derde ervan in beeld is (`IntersectionObserver`). Dan komt
+  `ws-in` erbij en begint het tekenen: 0,9 s per icoon, elk kaartje 0,12 s na
+  het vorige. De tekst schuift tegelijk zacht in.
+* **Zonder JavaScript, of bij *minder beweging*, staat alles meteen getekend.**
+  De iconen zijn alleen onzichtbaar zolang `ws-vd-wacht` erop staat, en die
+  zet het script alleen als het ook het tekenen kan starten.
+
+### Uploaden en vullen: wat niet mocht
+
+* **Een GraphQL-document mag maximaal 16.384 tekens zijn.** Vertalingen voor
+  twintig metaobjecten in één keer passen er niet in. De teksten gaan daarom
+  in variabelen (`$t0`, `$t1`, …), die tellen niet mee.
+* **`bulkOperationRunMutation` wordt door de MCP geweigerd.** In plaats
+  daarvan: één verzoek met tot 25 mutaties met een alias (`a0:`, `a1:`, …).
