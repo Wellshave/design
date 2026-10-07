@@ -15,10 +15,24 @@
   
   <product-card class="{{ main_class }}">
     <div class="product-card__media-wrapper">
+      {%- comment -%}
+        De kaart toont de eerste productfoto, de rechttoe-rechtaan pakshot.
+        custom.collectie_foto zet er per product een andere foto op, zonder
+        dat de volgorde van de productfoto's verandert: die eerste foto blijft
+        ook de foto in de winkelwagen en in de productfeed. Op de productpagina
+        zelf kan custom.pdp_hoofdfoto weer een andere openingsfoto kiezen.
+      {%- endcomment -%}
+      {%- liquid
+        assign ws_kaartfoto = product_card.featured_image
+        assign ws_eigen_foto = product_card.metafields.custom.collectie_foto.value
+        if ws_eigen_foto != blank
+          assign ws_kaartfoto = ws_eigen_foto.preview_image | default: ws_eigen_foto
+        endif
+      -%}
       <a href="{{ product_card.url }}" class="product-card__media">
-        {%- if product_card.featured_image != blank -%}
+        {%- if ws_kaartfoto != blank -%}
           {%- render 'media', 
-            media: product_card.featured_image, 
+            media: ws_kaartfoto, 
             size: "forth",
             type: "all"
           -%}

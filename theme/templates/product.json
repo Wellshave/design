@@ -349,7 +349,8 @@
         "desk_indent_bottom": 80,
         "mob_indent_top": 40,
         "mob_indent_bottom": 40
-      }
+      },
+      "disabled": true
     },
     "use_case": {
       "type": "use-case",
@@ -545,6 +546,146 @@
         "loox_reviews_loox_card_carousel_section_FKECQz"
       ],
       "settings": {}
+    },
+    "reviewwall": {
+      "type": "ws-pdp-reviewwall",
+      "blocks": {
+        "review_01": {
+          "type": "review",
+          "settings": {
+            "tekst": "Super fijne tondeuse! Hij is makkelijk op te laden, ligt prettig in de hand en de batterij gaat echt lang mee. Werkt goed, is gebruiksvriendelijk en doet precies wat je ervan verwacht. Zeker een aanrader!",
+            "naam": "Yara",
+            "sterren": 5
+          }
+        },
+        "review_02": {
+          "type": "review",
+          "settings": {
+            "tekst": "Bodyshaver van Wellshave gekocht voor een zeer schappelijke prijs en hij werkt prima. Hij trimt alles netjes, zonder bang te hoeven zijn voor wondjes. Top prijs-kwaliteit verhouding!",
+            "naam": "Coen",
+            "sterren": 5,
+            "titel": "Bodyshaver van Wellshave doet netjes wat het moet doen"
+          }
+        },
+        "review_03": {
+          "type": "review",
+          "settings": {
+            "tekst": "Prima scheerapparaat ! Gaat opgeladen heel lang mee en scheert heel glad. De scheerkop beweegt soepel mee met de contouren van de kaak.",
+            "naam": "Pim van der Waal",
+            "sterren": 5,
+            "titel": "Prima scheerapparaat voor een eerlijke prijs !"
+          }
+        },
+        "review_04": {
+          "type": "review",
+          "settings": {
+            "tekst": "Deze trimmer is wat ik zoek. Zo goed als geruisloos. Levering goed en netjes verzorgd. Ben er heel blij mee.",
+            "naam": "Peter de Haan",
+            "sterren": 5,
+            "titel": "Geruisloze neustrimmer"
+          }
+        },
+        "review_05": {
+          "type": "review",
+          "settings": {
+            "tekst": "Scheert tot nu toe goed. Scheert beter dan de Braun 7 (Die ik al Jaren heb). Voelt zachter aan. Ik heb tot nu toe me 3x geschoren. Ben er tot nu toe zeer tevreden mee.",
+            "naam": "anoniem",
+            "sterren": 5
+          }
+        },
+        "review_06": {
+          "type": "review",
+          "settings": {
+            "tekst": "Zeer goeie toestellen en service bij Wellshave! Ik gebruik nu al 3 jaar mijn trimmer bijna dagelijks en heb geen klachten. Perfecte trim- en scheerkwaliteit! En bijkomstig een zeer hulpvaardige service na het afbreken van een nokje van een opzetstukje. Aan te raden!",
+            "naam": "Jari Philibert",
+            "sterren": 5,
+            "titel": "Zeer goede service"
+          }
+        },
+        "review_07": {
+          "type": "review",
+          "settings": {
+            "tekst": "Ik kocht hem voor mijn zoon. Die is er erg blij mee. Werkt prima. Handig met de ingebouwde trimmer. Erg nauwkeurig. De batterij gaat zeer lang mee. Makkelijk schoon te maken. Vriendelijke en behulpzame klantenservice.",
+            "naam": "Veva",
+            "sterren": 5,
+            "titel": "Prima toestel!"
+          }
+        },
+        "review_08": {
+          "type": "review",
+          "settings": {
+            "tekst": "Super fijne fijne tondeuse die ik inmiddels alweer meer dan 2 jaar gebruik. Na 2 jaar was de opzetkam defect geraakt en kreeg hiervoor een nieuwe opgestuurd. Kortom super service.",
+            "naam": "Michiel Marsman",
+            "sterren": 5,
+            "titel": "Super service op een Tondeuse van 2 jaar oud."
+          }
+        },
+        "review_09": {
+          "type": "review",
+          "settings": {
+            "tekst": "Goed apparaat, voelt lekker aan en heeft genoeg extra'tjes, zoals ingebouwd mini scheerapparaat voor bv je bakkebaarden. Levering is ook goed, en kwaliteit ervan ben ik tevreden over",
+            "naam": "T Zijlstra",
+            "sterren": 5
+          }
+        },
+        "review_10": {
+          "type": "review",
+          "settings": {
+            "tekst": "Snelle levering. Zeer goed product vergeleken met alle andere rommel die te vinden is in andere webshops. Eentje voor thuis, eentje voor op reis.",
+            "naam": "Redgy Deschacht",
+            "sterren": 5,
+            "titel": "Topproduct"
+          }
+        },
+        "review_11": {
+          "type": "review",
+          "settings": {
+            "tekst": "Ik zocht een goede neustrimmer en heb hem gevonden. De mail die ik kreeg met de factuur was met een foto van het ganse team. Ik vond dit heel tof en persoonlijk en het product is top!",
+            "naam": "Marc Van Den Driessche",
+            "sterren": 5
+          }
+        },
+        "review_12": {
+          "type": "review",
+          "settings": {
+            "tekst": "Hij ligt fijn in de hand! Erg prettig om mee te werken en daarbij....de service van wellshave is absoluut uitstekend!! Zo heb ik het nog nooit ergens anders ervaren!!",
+            "naam": "AHM De Haan",
+            "sterren": 5,
+            "titel": "Zeer positief over wellshave"
+          }
+        }
+      },
+      "block_order": [
+        "review_01",
+        "review_02",
+        "review_03",
+        "review_04",
+        "review_05",
+        "review_06",
+        "review_07",
+        "review_08",
+        "review_09",
+        "review_10",
+        "review_11",
+        "review_12"
+      ],
+      "settings": {
+        "eyebrow": "Reviews",
+        "titel": "Wat klanten zeggen over Wellshave",
+        "oordeel": "Uitstekend",
+        "sterren": "4.5",
+        "sterren_label": "4,4 van 5 sterren op Trustpilot",
+        "score_regel": "TrustScore 4,4 uit 5 · 1000+ reviews",
+        "link_label": "Lees alle reviews op Trustpilot",
+        "link_url": "https://nl.trustpilot.com/review/wellshave.nl",
+        "snelheid": 60,
+        "pauze_label": "Pauzeer",
+        "speel_label": "Laat lopen",
+        "grond": "#FFFFFF",
+        "paneel": "#F2EEE7",
+        "marge_top": 56,
+        "marge_bot": 56
+      }
     }
   },
   "order": [
@@ -555,6 +696,7 @@
     "ss_payment_icons_Qi6V9R",
     "product-ugc",
     "ugc-videos",
+    "reviewwall",
     "trustpilot_reviews",
     "use_case",
     "ugc",

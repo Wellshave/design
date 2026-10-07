@@ -190,8 +190,21 @@
                 Het vergelijkvinkje en de snelknop liggen op z-index 3 en blijven dus
                 boven deze link liggen.
               {%- endcomment -%}
+              {%- comment -%}
+                De kaart toont de eerste productfoto. custom.collectie_foto zet er per
+                product een andere op, zonder de volgorde van de productfoto's te
+                veranderen: die eerste foto blijft ook de foto in de winkelwagen, in
+                de structured data hieronder en in de productfeed. Kies hier wel een
+                vrijstaande pakshot op licht: de tegel mengt wit weg tegen de
+                achtergrond en zet het monogram erachter.
+              {%- endcomment -%}
+              {%- assign kaartfoto = p.featured_image -%}
+              {%- assign eigen_foto = p.metafields.custom.collectie_foto.value -%}
+              {%- if eigen_foto != blank -%}
+                {%- assign kaartfoto = eigen_foto.preview_image | default: eigen_foto -%}
+              {%- endif -%}
               <a class="wsk-fotolink" href="{{ p.url }}" tabindex="-1" aria-hidden="true">
-                {{ p.featured_image | image_url: width: 600 | image_tag: class: 'wsk-pack', alt: '', loading: 'lazy' }}
+                {{ kaartfoto | image_url: width: 600 | image_tag: class: 'wsk-pack', alt: '', loading: 'lazy' }}
               </a>
               {%- capture ws_bestseller -%}{%- render 'ws-bestseller-badge', label: label -%}{%- endcapture -%}
               {%- if p.available == false -%}

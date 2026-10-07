@@ -1,0 +1,107 @@
+/* Wellshave — productpagina: de reviewwand.
+   Links het Trustpilot-cijfer, rechts twee kolommen reviews die tegen elkaar
+   in schuiven. Elke klasse begint met ws-rw zodat thema-CSS er niet doorheen
+   lekt. Kleuren komen uit het koopvak: inkt, zand, tekstgoud en hetzelfde
+   Trustpilot-groen (#008859, gekozen op contrast tegen zand en wit). */
+.ws-rw{--rw-ink:#14120F;--rw-ink82:rgba(20,18,15,.82);--rw-ink64:rgba(20,18,15,.64);
+  --rw-goud:#8A5A1E;--rw-kaart:#FFFFFF;--rw-lijn:rgba(20,18,15,.10);
+  display:block;background:var(--rw-grond,#FFFFFF);color:var(--rw-ink);
+  padding:var(--rw-top,56px) 16px var(--rw-bot,56px);
+  font-family:'MontserratEG','Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
+.ws-rw *,.ws-rw *::before,.ws-rw *::after{box-sizing:border-box}
+.ws-rw-rail{max-width:1240px;margin:0 auto}
+
+.ws-rw-paneel{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);align-items:center;gap:40px;
+  overflow:hidden;border-radius:18px;background:var(--rw-paneel,#F2EEE7);padding-left:clamp(28px,5vw,72px)}
+
+/* ---- links: het cijfer ---- */
+/* Het bruin van het merk (#B0742A) haalt op zand maar 3,6:1, te weinig voor
+   letters van elf pixel. Het tekstgoud uit het koopvak haalt 5,2:1. */
+.ws-rw-ey{margin:0 0 12px;font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--rw-goud)}
+.ws-rw-kop{margin:0 0 22px;font-family:inherit;font-size:clamp(28px,3vw,40px);font-weight:500;line-height:1.08;
+  letter-spacing:-.025em;text-transform:none;color:var(--rw-ink);text-wrap:balance}
+.ws-rw-cijfer{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;font-size:14px}
+.ws-rw-cijfer b{font-weight:600}
+.ws-rw-tp{display:block;flex:none}
+.ws-rw-merk{display:inline-flex;align-items:center;gap:4px;font-weight:600}
+.ws-rw-sub{margin:10px 0 0;font-size:13.5px;color:var(--rw-ink64);font-variant-numeric:tabular-nums}
+
+.ws-rw-acties{display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px;margin-top:24px}
+.ws-rw-link{color:var(--rw-ink);font-size:14px;font-weight:500;text-decoration:underline;
+  text-decoration-thickness:1px;text-underline-offset:6px}
+.ws-rw-link:hover{text-decoration-thickness:2px}
+.ws-rw-pauze{display:inline-flex;align-items:center;gap:6px;padding:6px 11px 6px 8px;border:1px solid var(--rw-lijn);
+  border-radius:999px;background:transparent;color:var(--rw-ink64);font:inherit;font-size:12px;font-weight:500;cursor:pointer}
+.ws-rw-pauze:hover{color:var(--rw-ink);border-color:rgba(20,18,15,.24)}
+.ws-rw-pauze svg{width:13px;height:13px}
+.ws-rw-pauze .ws-rw-ic-speel{display:none}
+.ws-rw-pauze[aria-pressed="true"] .ws-rw-ic-speel{display:block}
+.ws-rw-pauze[aria-pressed="true"] .ws-rw-ic-pauze{display:none}
+.ws-rw-link:focus-visible,.ws-rw-pauze:focus-visible{outline:2px solid var(--rw-goud);outline-offset:3px}
+
+/* ---- rechts: de wand ---- */
+/* Boven en onder lopen de kaarten weg in het zand, zodat er geen harde rand
+   is waar ze verschijnen en verdwijnen. */
+.ws-rw-wand{display:grid;grid-template-columns:1fr 1fr;gap:16px;height:560px;padding-right:16px;overflow:hidden;
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 12%,#000 88%,transparent 100%);
+          mask-image:linear-gradient(to bottom,transparent 0,#000 12%,#000 88%,transparent 100%)}
+.ws-rw-baan{display:flex;flex-direction:column;min-width:0}
+/* De lijst draagt zijn eigen tussenruimte onderaan mee. Dan zijn de twee
+   kopieën precies even hoog en is een verschuiving van 50% een hele ronde. */
+.ws-rw-lijst{display:flex;flex-direction:column;gap:16px;margin:0;padding:0 0 16px;list-style:none}
+.ws-rw-lijst > li{margin:0;padding:0;list-style:none}
+.ws-rw-omlaag{animation:ws-rw-omlaag var(--rw-tempo,60s) linear infinite}
+.ws-rw-omhoog{animation:ws-rw-omhoog var(--rw-tempo,60s) linear infinite}
+.ws-rw-wand:hover .ws-rw-baan,.ws-rw-wand:focus-within .ws-rw-baan,
+.ws-rw-wand.ws-rw-stil .ws-rw-baan{animation-play-state:paused}
+@keyframes ws-rw-omhoog{from{transform:translateY(0)}to{transform:translateY(-50%)}}
+@keyframes ws-rw-omlaag{from{transform:translateY(-50%)}to{transform:translateY(0)}}
+
+.ws-rw-kaart{display:flex;flex-direction:column;gap:9px;padding:20px;border-radius:14px;background:var(--rw-kaart);
+  box-shadow:0 1px 2px rgba(20,18,15,.05)}
+.ws-rw-kaart-kop{margin:0;font-family:inherit;font-size:14.5px;font-weight:600;line-height:1.3;letter-spacing:-.01em;
+  text-transform:none;color:var(--rw-ink)}
+.ws-rw-kaart-tekst{margin:0;font-size:13.5px;line-height:1.55;color:var(--rw-ink82);
+  display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden}
+/* In een rij op de telefoon worden alle kaarten zo hoog als de langste. De
+   naam schuift dan naar onderen, zodat het verschil tussen tekst en naam valt
+   en niet als een wit gat onder de naam. */
+.ws-rw-kaart-voet{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;padding-top:4px;
+  font-size:12.5px;color:var(--rw-ink64)}
+.ws-rw-wie{display:inline-flex;align-items:center;gap:8px;min-width:0}
+.ws-rw-wie > span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ws-rw-letter{display:grid;place-items:center;width:22px;height:22px;flex:none;border-radius:50%;
+  background:#EAE4D9;color:var(--rw-goud);font-size:10.5px;font-weight:700}
+
+/* ---- telefoon en smal scherm: twee rijen die zijwaarts lopen ---- */
+@media (max-width:899px){
+  .ws-rw-paneel{grid-template-columns:minmax(0,1fr);gap:26px;padding:36px 0 26px}
+  .ws-rw-intro{padding-inline:22px}
+  .ws-rw-wand{display:flex;flex-direction:column;gap:12px;height:auto;padding:0;
+    -webkit-mask-image:linear-gradient(to right,transparent 0,#000 7%,#000 93%,transparent 100%);
+            mask-image:linear-gradient(to right,transparent 0,#000 7%,#000 93%,transparent 100%)}
+  .ws-rw-baan{flex-direction:row;width:max-content}
+  .ws-rw-lijst{flex-direction:row;gap:12px;padding:0 12px 0 0}
+  .ws-rw-lijst > li{width:270px;flex:none}
+  .ws-rw-kaart{height:100%;padding:17px}
+  .ws-rw-kaart-tekst{-webkit-line-clamp:4}
+  .ws-rw-omlaag{animation-name:ws-rw-rechts}
+  .ws-rw-omhoog{animation-name:ws-rw-links}
+}
+@keyframes ws-rw-links{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes ws-rw-rechts{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+@media (max-width:749px){
+  .ws-rw{padding-inline:12px}
+  .ws-rw-kop{font-size:27px}
+}
+
+/* Minder beweging gevraagd: geen schuivende kolommen, wel alle reviews. */
+@media (prefers-reduced-motion:reduce){
+  .ws-rw-baan{animation:none !important}
+  .ws-rw-lijst[aria-hidden]{display:none}
+  .ws-rw-pauze{display:none}
+  .ws-rw-wand{height:auto;max-height:560px;overflow-y:auto}
+}
+@media (prefers-reduced-motion:reduce) and (max-width:899px){
+  .ws-rw-wand{max-height:none;overflow-x:auto}
+}

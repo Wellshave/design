@@ -1901,3 +1901,67 @@ dat op die uitzondering leunde: alles tussen 18 en 24&nbsp;px is volle inkt op
   onder de tweede cadeaudrempel.
 * De secties onder de vouw staan in `product.ws-pdp.json` met lege instellingen,
   dus met hun eigen standaardwaarden. Ze zijn nog niet ingericht.
+
+## Eerste foto op de productpagina, kaartfoto in de collectie
+
+Twee productvelden, allebei een afbeelding en allebei optioneel:
+
+| Veld | Wat het doet | Leeg |
+|---|---|---|
+| `custom.pdp_hoofdfoto` (*Productpagina — eerste foto*) | De foto waarmee de productpagina opent, bijvoorbeeld een sfeerbeeld. Is het een van de productfoto's, dan staat hij niet nog eens verderop in de rij. | De eerste productfoto |
+| `custom.collectie_foto` (*Collectie — kaartfoto*) | De foto op de productkaart in het collectieraster (`ws-collectie-raster`) en op de gewone kaart (`product-card`: aanbevelingen, zoeken). | De eerste productfoto |
+
+De eerste productfoto zelf blijft de rechttoe-rechtaan pakshot. Die gebruiken
+ook de winkelwagen, de structured data en de productfeed voor Google en Meta,
+en daar hoort een rustige foto op wit. Daarom wordt de volgorde van de
+productfoto's niet aangeraakt; de velden zetten er alleen iets voor.
+
+Voor de kaartfoto: kies een vrijstaande pakshot op licht. De tegel in het
+collectieraster mengt wit weg tegen zijn achtergrond (`mix-blend-mode:multiply`)
+en zet het monogram erachter; een sfeerfoto wordt daar donker en vlekkerig.
+
+Dubbel wordt herkend aan het bestandspad, niet aan het id: een foto die je uit
+de productfoto's kiest is hetzelfde bestand en dus hetzelfde pad.
+
+Op 7 oktober staat de Groom Guard™ PRO als voorbeeld op de handdoekfoto als
+eerste foto. Weghalen = het veld leegmaken.
+
+## Reviewwand
+
+`sections/ws-pdp-reviewwall.liquid` + `assets/ws-pdp-reviewwall.css`, naar het
+voorbeeld van Well-Shine. Links het Trustpilot-winkelcijfer, rechts twee
+kolommen echte Trustpilot-reviews die tegen elkaar in schuiven; op de telefoon
+twee rijen die zijwaarts lopen. Staat in het productsjabloon op de plek van de
+oude Trustpilot-widget (`trustpilot_reviews`), die uit staat maar niet weg is.
+
+* **De reviews zijn blokken in de sectie**, één per review, overgenomen van
+  Trustpilot met titel, tekst en naam zoals de klant ze schreef. Alleen de
+  witruimte is opgeschoond. Begint de tekst met dezelfde woorden als de titel,
+  dan blijft de titel leeg; Trustpilot maakt titels vaak van de eerste woorden.
+* **Gekozen op 7 oktober** uit de honderd recentste Nederlandse vijfsterren-
+  reviews: twaalf die over het apparaat gaan (tondeuse, bodygroomer,
+  scheerapparaat, neustrimmer), niet over een defect dat daarna is opgelost.
+  Servicereviews zijn eerlijk en goed, maar op een productpagina zet een
+  kapotte scheerkop in de eerste zin het verkeerde beeld neer.
+* **De reviews zijn Nederlands, in elke taal.** De kop, het cijfer, de link en
+  de knop zijn vertaald (en/de/fr); de reviews niet, want het zijn de woorden
+  van een klant. De oude widget liet per taal reviews in die taal zien.
+* **Bewegen is CSS.** Elke kolom staat er twee keer in, de tweede voor
+  schermlezers verborgen, en schuift precies één lijst op. Stil bij hover en
+  focus; de knop *Pauzeer* zet hem helemaal stil (WCAG 2.2.2). Bij
+  *minder beweging* in het systeem een gewone scrollbare lijst.
+* **Het cijfer** (4,4, 4,5 ster, 1000+) staat in deze sectie los van het
+  koopvak. Verandert de score, pas dan beide aan.
+
+## Uploaden: wat stil mislukt
+
+* **Een sectienaam mag maximaal 25 tekens zijn**, en `"default": ""` mag ook
+  niet. Een upload via een URL (staged upload) die op zo'n schemafout stuit,
+  wordt zonder foutmelding genegeerd: `userErrors` blijft leeg en het bestand
+  blijft oud. Altijd de checksum vergelijken. Een upload als `TEXT` geeft de
+  fout wel terug, dus bij twijfel het schema los als `TEXT` proberen.
+* **Screenshots van de preview**: Chromium in deze omgeving vertrouwt het
+  proxycertificaat niet. Haal de pagina met curl (met cookiejar en
+  `preview_theme_id`) en laat Node de overige bestanden ophalen via
+  `page.route` en `fetch` met `NODE_USE_ENV_PROXY=1`; Node vertrouwt het
+  certificaat wel. TLS-controle uitzetten is geen optie.

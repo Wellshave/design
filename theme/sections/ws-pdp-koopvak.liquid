@@ -148,21 +148,71 @@
           <span class="ws-tg">{{ s.tag }}</span>
         {%- endif -%}
 
+        {%- comment -%}
+          De eerste foto op de productpagina hoeft niet de pakshot te zijn.
+          custom.pdp_hoofdfoto zet er een eigen foto voor, bijvoorbeeld een
+          sfeerbeeld, en die foto komt dan niet nog eens verderop in de rij.
+          De eerste productfoto zelf blijft de pakshot: die gebruiken de
+          collectiekaart, de winkelwagen, de zoekresultaten en de productfeed
+          voor Google en Meta, en die horen een rustige foto op wit te houden.
+          Leeg = de volgorde zoals in Shopify.
+
+          Dubbel wordt herkend aan het pad van het bestand. Een foto uit de
+          productfoto's die je in het veld kiest is hetzelfde bestand, dus
+          hetzelfde pad.
+        {%- endcomment -%}
+        {%- liquid
+          assign held = mf.pdp_hoofdfoto.value
+          assign held_beeld = blank
+          assign held_pad = ''
+          if held != blank
+            assign held_beeld = held.preview_image | default: held
+            assign held_pad = held_beeld.src | split: '?' | first
+          endif
+
+          assign dia_totaal = 0
+          if held_pad != blank
+            assign dia_totaal = 1
+          endif
+          for media in product.media
+            assign media_pad = media.preview_image.src | split: '?' | first
+            if held_pad != blank and media_pad == held_pad
+              continue
+            endif
+            assign dia_totaal = dia_totaal | plus: 1
+          endfor
+          if dia_totaal > 10
+            assign dia_totaal = 10
+          endif
+        -%}
+
         <ul class="ws-baan" id="ws-baan-{{ section.id }}">
-          {%- for media in product.media limit: 10 -%}
+          {%- assign dia_nr = 0 -%}
+          {%- if held_pad != blank -%}
             <li>
-              {%- if forloop.first -%}
+              {{ held_beeld | image_url: width: 1200 | image_tag: class: 'ws-held', alt: held_beeld.alt, loading: 'eager', fetchpriority: 'high', sizes: '(max-width: 749px) 92vw, 46vw', widths: '400,600,900,1200' }}
+            </li>
+            {%- assign dia_nr = 1 -%}
+          {%- endif -%}
+          {%- for media in product.media -%}
+            {%- if dia_nr >= dia_totaal -%}{%- break -%}{%- endif -%}
+            {%- assign media_pad = media.preview_image.src | split: '?' | first -%}
+            {%- if held_pad != blank and media_pad == held_pad -%}{%- continue -%}{%- endif -%}
+            <li>
+              {%- if dia_nr == 0 -%}
                 {{ media.preview_image | image_url: width: 1200 | image_tag: class: 'ws-held', loading: 'eager', fetchpriority: 'high', sizes: '(max-width: 749px) 92vw, 46vw', widths: '400,600,900,1200' }}
               {%- else -%}
                 {{ media.preview_image | image_url: width: 1200 | image_tag: class: 'ws-held', loading: 'lazy', sizes: '(max-width: 749px) 92vw, 46vw', widths: '400,600,900,1200' }}
               {%- endif -%}
             </li>
-          {%- else -%}
-            <li>{{ 'product-1' | placeholder_svg_tag: 'ws-held' }}</li>
+            {%- assign dia_nr = dia_nr | plus: 1 -%}
           {%- endfor -%}
+          {%- if dia_totaal == 0 -%}
+            <li>{{ 'product-1' | placeholder_svg_tag: 'ws-held' }}</li>
+          {%- endif -%}
         </ul>
 
-        {%- if product.media.size > 1 -%}
+        {%- if dia_totaal > 1 -%}
           <button type="button" class="ws-pijl ws-vorige" data-ws-dia-vorige aria-label="Vorige foto">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
           </button>
@@ -170,9 +220,23 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
           </button>
           <div class="ws-th" id="ws-th-{{ section.id }}">
-            {%- for media in product.media limit: 10 -%}
-              <figure{% if forloop.first %} class="ws-on"{% endif %}>
-                <button type="button" class="ws-vk" data-ws-dia="{{ forloop.index0 }}"
+            {%- assign dia_nr = 0 -%}
+            {%- if held_pad != blank -%}
+              <figure class="ws-on">
+                <button type="button" class="ws-vk" data-ws-dia="0"
+                        aria-label="{{ held_beeld.alt | default: product.title | escape }}">
+                  <img src="{{ held_beeld | image_url: width: 300 }}" alt="{{ held_beeld.alt | escape }}"
+                       loading="lazy" width="300" height="300">
+                </button>
+              </figure>
+              {%- assign dia_nr = 1 -%}
+            {%- endif -%}
+            {%- for media in product.media -%}
+              {%- if dia_nr >= dia_totaal -%}{%- break -%}{%- endif -%}
+              {%- assign media_pad = media.preview_image.src | split: '?' | first -%}
+              {%- if held_pad != blank and media_pad == held_pad -%}{%- continue -%}{%- endif -%}
+              <figure{% if dia_nr == 0 %} class="ws-on"{% endif %}>
+                <button type="button" class="ws-vk" data-ws-dia="{{ dia_nr }}"
                         aria-label="{{ media.alt | default: product.title | escape }}">
                   <img src="{{ media.preview_image | image_url: width: 300 }}" alt="{{ media.alt | escape }}"
                        loading="lazy" width="300" height="300">
@@ -188,6 +252,7 @@
                   dat in een eigen veld en niet in alt.
                 {%- endcomment -%}
               </figure>
+              {%- assign dia_nr = dia_nr | plus: 1 -%}
             {%- endfor -%}
           </div>
         {%- endif -%}
