@@ -173,7 +173,7 @@
 .ws-pdp .ws-tp .ws-lb{font-size:12.5px;font-weight:500;color:var(--ws-ink)}
 .ws-pdp .ws-tp .ws-sc{font-size:12.5px;color:var(--ws-w52);font-weight:400}
 
-.ws-pdp .ws-h1{font-size:33px;font-weight:500;letter-spacing:-.025em;color:var(--ws-ink);margin-top:11px;line-height:1.06}
+.ws-pdp .ws-h1{font-family:inherit;font-size:33px;font-weight:500;letter-spacing:-.025em;color:var(--ws-ink);margin-top:11px;line-height:1.06}
 .ws-pdp .ws-sub{font-size:23px;font-weight:400;letter-spacing:-.02em;line-height:1.22;margin-top:9px;color:var(--ws-ink)}
 
 .ws-pdp .ws-rev{margin-top:15px;border:1px solid var(--ws-lijn);border-radius:13px;background:var(--ws-kaart);padding:14px 16px}
@@ -853,3 +853,120 @@
 /* ---- laadstaat op de keuzeknoppen in de vergelijk-pop-up ---- */
 .ws-pop .ws-pop-knop.ws-bezig{opacity:.72;cursor:progress}
 
+/* ---- Herfst: de aanbodbalk in roest en goud ----
+   Aan met "Aanbodbalk kleur" in het koopvak, onder Cadeau. De balk loopt van
+   donkerbruin naar roest. Tekst mag overal in de balk vallen (op mobiel loopt
+   hij tot de rand), dus elke kleur is getoetst tegen het lichtste stuk van
+   het verloop: titel 6,2:1, gouden woorden 4,8:1, onderregel 5,2:1.
+   Het blad rechts is donkerder dan de grond, zodat tekst die eroverheen
+   loopt alleen meer contrast krijgt, nooit minder. */
+.ws-pdp .ws-gift--herfst{position:relative;overflow:hidden;isolation:isolate;
+  border-color:rgba(255,200,130,.28);
+  background:linear-gradient(115deg,#3A1409 0%,#5E240E 34%,#803813 70%,#914313 100%);
+  box-shadow:0 12px 22px -16px rgba(94,36,14,.9),inset 0 1px 0 rgba(255,214,150,.14)}
+.ws-pdp .ws-gift--herfst::after{content:"";position:absolute;z-index:-1;right:-14px;top:50%;
+  width:92px;height:92px;transform:translateY(-50%) rotate(-12deg);pointer-events:none;opacity:.34;
+  background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cmask id='m'%3E%3Crect width='24' height='24' fill='%23fff'/%3E%3Cpath d='M4.4 19.6L16.6 7.4' stroke='%23000' stroke-width='.8' stroke-linecap='round'/%3E%3C/mask%3E%3Cpath d='M5 19C5 11 10.5 5 19 5c0 8.5-6 14-14 14z' fill='%231A0602' mask='url(%23m)'/%3E%3Cpath d='M2.4 21.6L5.6 18.4' stroke='%231A0602' stroke-width='1' stroke-linecap='round'/%3E%3C/svg%3E")}
+.ws-pdp .ws-gift--herfst b{color:#FFF1DE}
+.ws-pdp .ws-gift--herfst b p{color:inherit}
+.ws-pdp .ws-gift--herfst b strong,.ws-pdp .ws-gift--herfst b b{color:#FFD08A}
+.ws-pdp .ws-gift--herfst span{color:#F6DCC0}
+.ws-pdp .ws-gift--herfst .ws-ic{color:#FFD08A}
+.ws-pdp .ws-gift--herfst .ws-ic img{box-shadow:0 0 0 1.5px rgba(255,208,138,.55)}
+
+/* ═══ Het bovenste deel van het koopvak, ontwerp 26 september 2026 ═══
+   Pil, beoordeling, titel, prijs en de vier beloftes naar het nieuwe ontwerp.
+   Dit blok staat onderaan zodat het de regels hierboven overschrijft; de
+   mobiele aanpassingen staan daarom hier opnieuw, onderaan dit blok.
+
+   Contrast: tekst op de pil 5,9:1, witte letters op het bespaarlabel minstens
+   4,6:1 (het verloop is daarvoor iets donkerder dan in het ontwerp), de
+   gewone tekst van de beloftes 7:1, het witte vinkje op goud 3,1:1
+   (een pictogram, daar geldt 3:1). */
+
+/* de pil: een label met een wit vak rechts in plaats van een capsule */
+.ws-pdp .ws-pil{border-radius:11px;padding:4px 4px 4px 0;border:1px solid #E3C387;
+  background:linear-gradient(100deg,#FAEFD3 0%,#EBCB8C 55%,#F2DCAE 100%);
+  box-shadow:0 1px 2px rgba(120,80,20,.08)}
+.ws-pdp .ws-pil b{font-size:10.5px;letter-spacing:.09em}
+.ws-pdp .ws-pil .ws-a{padding:8px 14px 8px 16px;color:#5A4526}
+.ws-pdp .ws-pil .ws-z{padding:9px 14px;border-radius:8px;color:#4A3B28;
+  background:linear-gradient(180deg,#FFFFFF 0%,#F4EFE7 100%);
+  box-shadow:0 1px 2px rgba(90,60,20,.14),inset 0 0 0 1px rgba(255,255,255,.7)}
+
+/* beoordeling: sterren in een wit kader, "4,4 / 5", een haarlijn, het aantal */
+.ws-pdp .ws-tp{gap:10px;margin-top:18px}
+.ws-pdp .ws-tp .ws-st{padding:5px 6px;background:#fff;border:1px solid rgba(20,18,15,.10);border-radius:8px}
+.ws-pdp .ws-tp .ws-st i{width:15px;height:15px}
+.ws-pdp .ws-tp .ws-st svg{width:10px;height:10px}
+.ws-pdp .ws-tp .ws-cf{font-size:13.5px;font-weight:400;color:var(--ws-w52)}
+.ws-pdp .ws-tp .ws-cf b{font-weight:700;color:var(--ws-ink)}
+.ws-pdp .ws-tp .ws-sc{padding-left:10px;border-left:1px solid rgba(20,18,15,.14);line-height:1.2}
+
+/* titel en ondertitel: het merkteken klein en hoog, de belofte rustiger */
+.ws-pdp .ws-h1 .ws-tm{font-size:.36em;line-height:0;vertical-align:super;margin-left:.05em;letter-spacing:0}
+.ws-pdp .ws-sub{font-size:19px;line-height:1.45;letter-spacing:-.01em;color:var(--ws-w72);margin-top:10px}
+
+/* het bespaarlabel: een capsule met een prijskaartje */
+.ws-pdp .ws-prijs{margin-top:18px}
+.ws-pdp .ws-besp{gap:7px;padding:6px 13px 6px 11px;border-radius:100px;
+  background:linear-gradient(100deg,#9C6B30 0%,#8A5C25 55%,#7A4F1B 100%);
+  box-shadow:inset 0 1px 0 rgba(255,225,170,.35),0 2px 6px -2px rgba(90,55,15,.45)}
+.ws-pdp .ws-besp svg{width:15px;height:15px;flex:none;color:#fff}
+.ws-pdp .ws-besp span{font-size:12px;font-weight:600;color:#fff}
+.ws-pdp .ws-sticky-pr .ws-besp svg{display:none}
+
+/* de beloftes: een lijst met een gouden vinkje, het eerste stuk vet. Elke regel
+   stond eerst in een eigen kaart; die kaarten zijn er op 26 september weer af,
+   de lijst staat nu los op het koopvak. Het vinkje is daarom kleiner dan in
+   de kaart, anders weegt het zwaarder dan de tekst ernaast. */
+.ws-pdp .ws-usp{gap:12px;margin-top:20px}
+.ws-pdp .ws-usp li{grid-template-columns:28px minmax(0,1fr);gap:12px;align-items:center}
+.ws-pdp .ws-usp .ws-vk{width:28px;height:28px;border:0;margin:0;color:#fff;
+  background:radial-gradient(circle at 32% 28%,#D6B67C 0%,#B58D4A 55%,#9A7137 100%);
+  box-shadow:inset 0 1px 0 rgba(255,240,210,.45),0 1px 2px rgba(90,60,20,.35)}
+.ws-pdp .ws-usp .ws-vk svg{width:13px;height:13px}
+.ws-pdp .ws-usp .ws-usp-tx{display:block;margin:0;font-size:14px;line-height:1.4;color:var(--ws-w72)}
+.ws-pdp .ws-usp .ws-usp-tx b{display:inline;font-size:inherit;font-weight:700;line-height:inherit;color:var(--ws-ink)}
+
+@media screen and (max-width:749px){
+  .ws-pdp .ws-pil .ws-a{padding:6px 6px 6px 12px}
+  .ws-pdp .ws-pil .ws-z{padding:7px 12px}
+  .ws-pdp .ws-bb > .ws-sub{font-size:17px}
+  /* prijs, streepprijs en label moeten op 390 px op één regel blijven (zie
+     hierboven), dus het prijskaartje valt hier weg en het label blijft klein */
+  .ws-pdp .ws-besp{gap:0;padding:4px 8px}
+  .ws-pdp .ws-besp svg{display:none}
+  .ws-pdp .ws-besp span{font-size:10px}
+  /* de lijst staat los, net als op desktop, dus zonder de twee haarlijnen
+     die er vroeger op mobiel omheen stonden */
+  .ws-pdp .ws-usp{margin-top:18px;padding:0;border:0;gap:10px}
+  .ws-pdp .ws-usp li{grid-template-columns:26px minmax(0,1fr);gap:11px}
+  .ws-pdp .ws-usp .ws-vk{width:26px;height:26px}
+  .ws-pdp .ws-usp .ws-vk svg{width:11px;height:11px}
+  .ws-pdp .ws-usp .ws-usp-tx{font-size:13.5px}
+}
+@media screen and (max-width:389px){
+  .ws-pdp .ws-besp{padding:3px 6px}
+  .ws-pdp .ws-besp span{font-size:9.5px}
+}
+
+/* nagekeken op de pagina: een groter vinkje, en op mobiel de sterrenregel en
+   de prijs. De sterrenregel past vanaf 390 px op één regel; smaller zakt het
+   aantal reviews naar een eigen regel, zonder het streepje ervoor. De prijs
+   kreeg hierboven een marge die op mobiel dubbel kwam met die van zijn blok. */
+.ws-pdp .ws-usp .ws-vk svg{width:15px;height:15px;stroke-width:2.8}
+@media screen and (max-width:749px){
+  .ws-pdp .ws-prijs{margin-top:0}
+  .ws-pdp .ws-tp{gap:8px}
+  .ws-pdp .ws-tp .ws-st{padding:4px 5px;border-radius:7px}
+  .ws-pdp .ws-tp .ws-st i{width:13px;height:13px}
+  .ws-pdp .ws-tp .ws-st svg{width:9px;height:9px}
+  .ws-pdp .ws-tp .ws-cf{font-size:12.5px}
+  .ws-pdp .ws-tp .ws-sc{margin-left:0;padding-left:8px;font-size:11.5px}
+  .ws-pdp .ws-usp .ws-vk svg{width:14px;height:14px}
+}
+@media screen and (max-width:389px){
+  .ws-pdp .ws-tp{row-gap:5px}
+  .ws-pdp .ws-tp .ws-sc{flex-basis:100%;border-left:0;padding-left:0}
+}

@@ -11,15 +11,16 @@ storefront &mdash; of denkt dat de api stuk is terwijl hij juist zijn werk doet.
 
 | | |
 |---|---|
-| **Live thema** | `wellshave/claude-design v4 (Live)` (id **204845515084**) &mdash; rol MAIN sinds 4 september. Dit w&aacute;s het werkthema. **Niet meer in schrijven** |
-| **Werkthema** | `wellshave/claude-design v5 (IN PROGRESS)` (id **205230309708**) &mdash; kopie van het live thema, gemaakt 7 september. **Hierin gaan alle nieuwe aanpassingen** |
-| Voorbeeld | https://wellshave.com/products/groom-guard-pro?preview_theme_id=205230309708 |
-| Vorige | v3 (204575310156), v2 (204412977484) en v1 (204178161996) staan klaar als terugval |
+| **Live thema** | `Herfst Sale 2026 (kopie van v5 LIVE)` (id **206433747276**) &mdash; rol MAIN sinds 26 september. **Niet in schrijven** |
+| **Werkthema** | `wellshave/claude-design v7 (IN PROGRESS)` (id **207339848012**) &mdash; kopie van het live thema, gemaakt 7 oktober. **Hierin gaan alle nieuwe aanpassingen** |
+| Voorbeeld | https://wellshave.com/products/groom-guard-pro?preview_theme_id=207339848012 |
+| Niet als basis gebruiken | `v6 (IN PROGRESS)` (206262862156) is v5 van 10 september en mist de CRO-fixes van 25 september en de Herfst Sale. `CRO-fixes 25-09` (206464352588) is een tussenstap |
+| Vorige | v5 (205230309708), v4 (204845515084), v3 (204575310156), v2 (204412977484) en v1 (204178161996) staan klaar als terugval |
 | Oud | `wellshave-redesign/live` (200936096076) is niet meer gepubliceerd |
 
 De kopie is op het moment van maken gelijk aan het live thema: sectie, stylesheet
 en productsjabloon hebben daar dezelfde checksums. Wie hier verder werkt,
-schrijft dus naar **205230309708** en laat die pas publiceren als het af is.
+schrijft dus naar **207339848012** en laat die pas publiceren als het af is.
 
 `config/settings_data.json` hoort er ook bij. Dat is een themabestand, dus de
 cadeau-instellingen van de winkelwagen zijn op een gepubliceerd thema alleen via

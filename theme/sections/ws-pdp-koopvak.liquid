@@ -236,15 +236,26 @@
         {%- endif -%}
 
 
+        {%- comment -%}
+          Ontwerp 26 september: de sterren in een wit kader, dan het cijfer als
+          "4,4 / 5", een haarlijn en het aantal. Het oordeel (tp_label) staat er
+          alleen nog als het is ingevuld, achter het cijfer.
+        {%- endcomment -%}
         {%- if s.tp_tonen -%}
           <div class="ws-tp">
             <span class="ws-st" aria-hidden="true">{{ tp_ster_rij }}</span>
+            {%- if s.tp_cijfer != blank -%}<span class="ws-cf"><b>{{ s.tp_cijfer }}</b> / 5</span>{%- endif -%}
             {%- if s.tp_label != blank -%}<span class="ws-lb">{{ s.tp_label }}</span>{%- endif -%}
-            {%- if s.tp_cijfer != blank -%}<span class="ws-cf">&middot; {{ s.tp_cijfer }}</span>{%- endif -%}
             {%- if tp_aantal != blank -%}<span class="ws-sc">{{ tp_aantal }}</span>{%- endif -%}
           </div>
         {%- endif -%}
-        <div class="ws-h1">{{ product.title }}</div>
+        {%- comment -%}
+          De producttitel is de h1. Het was een div, en daarmee had de hele
+          productpagina geen h1: zoekmachines en schermlezers misten de kop.
+          De opmaak blijft gelijk; base.css zet op h1 een eigen lettertype,
+          daarom staat er in ws-pdp-koopvak.css font-family:inherit bij.
+        {%- endcomment -%}
+        <h1 class="ws-h1">{{ product.title | replace: '™', '<sup class="ws-tm">™</sup>' }}</h1>
         {%- if belofte != blank -%}<div class="ws-sub">{{ belofte }}</div>{%- endif -%}
         {%- if lead != blank -%}<p class="ws-lead">{{ lead }}</p>{%- endif -%}
 
@@ -270,6 +281,7 @@
               <span class="ws-was">{% if s.munt != blank %}<span class="ws-munt">{{ s.munt }}</span>{% endif %}{% render 'price-formated', price: v.compare_at_price %}</span>
               {%- if korting > 0 -%}
                 <span class="ws-besp">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12.6V4.9c0-.8.6-1.4 1.4-1.4h7.7c.4 0 .7.1 1 .4l7.4 7.4c.6.6.6 1.5 0 2l-7.7 7.7c-.6.6-1.5.6-2 0l-7.4-7.4c-.3-.3-.4-.6-.4-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="8.2" cy="8.2" r="1.6" fill="currentColor"/></svg>
                   <span>{{ s.besparing_regel }} {{ korting }}%</span>
                 </span>
               {%- endif -%}
@@ -308,10 +320,28 @@
                 if delen.size > 1
                   assign rest = r | remove_first: delen[0] | remove_first: '—' | strip
                 endif
+                comment
+                  Ontwerp 26 september: één zin per kaart, met het stuk voor de
+                  streep vet. Een komma aan het eind van dat stuk hoort bij de zin
+                  en niet bij de nadruk, dus die komt buiten het vet; een punt of
+                  dubbele punt blijft erbij, zoals in het ontwerp. Zonder streep
+                  staat de hele regel gewoon, zonder vet.
+                endcomment
+                assign komma = ''
+                if rest != blank
+                  assign laatste = kop | slice: -1
+                  if laatste == ','
+                    assign kop_lengte = kop | size | minus: 1
+                    assign kop = kop | slice: 0, kop_lengte
+                    assign komma = ','
+                  endif
+                endif
               -%}
               <li>
                 <span class="ws-vk"><svg><use href="#ws-pdp-vink-{{ section.id }}"/></svg></span>
-                <span><b>{{ kop }}</b>{% if rest != blank %}<span>{{ rest }}</span>{% endif %}</span>
+                <span class="ws-usp-tx">
+                  {%- if rest != blank -%}<b>{{ kop }}</b>{{ komma }} {{ rest }}{%- else -%}{{ kop }}{%- endif -%}
+                </span>
               </li>
             {%- endfor -%}
           </ul>
@@ -330,6 +360,17 @@
           if aanbod.offer_title != blank or aanbod.product_title != blank or s.gift_titel != blank
             assign toon_aanbod = true
           endif
+          comment
+            Het metaobject kent geen einddatum, dus een actie blijft staan tot
+            iemand hem weghaalt. Zo stond "Summer Sale: tot 40% korting op je
+            bestelling" eind september nog boven de knop, naast een prijs met
+            30%. Met aanbod_tonen gaat de balk in een keer van alle pagina's af
+            die dit sjabloon gebruiken, zonder dat je veertig producten langs
+            hoeft.
+          endcomment
+          unless s.aanbod_tonen
+            assign toon_aanbod = false
+          endunless
           assign gift_regel = aanbod.popup_subtitle | default: aanbod.popup_title
           if aanbod == blank
             assign gift_regel = s.gift_regel
@@ -342,7 +383,7 @@
         {%- endcomment -%}
 
         {%- if toon_aanbod -%}
-          <div class="ws-gift">
+          <div class="ws-gift{% if s.aanbod_kleur == 'herfst' %} ws-gift--herfst{% endif %}">
             <span class="ws-ic">
               {%- if aanbod.image != blank -%}
                 {{ aanbod.image | image_url: width: 120 | image_tag: alt: '', loading: 'lazy' }}
@@ -631,10 +672,20 @@
           "dit staat klaar" al zonder woorden. Het blok komt alleen als de
           variant leverbaar is, dus de stip liegt nooit.
         {%- endcomment -%}
-        {%- if v.available and s.voorraad_regel != blank -%}
+        {%- comment -%}
+          De leverregel is winkelbeleid, geen eigenschap van een product, dus
+          hier wint de sectie-instelling van custom.shipping_information, net
+          als bij het aantal reviews bovenin. Dat productveld stond op veertig
+          producten op "Vandaag besteld, morgen in huis", zonder de voorwaarde
+          uit Verzending & retour (ma t/m vr voor 23:59). In het weekend
+          beloofde de regel dus iets wat de voorwaarden niet dekken. Het veld
+          blijft de terugval als de instelling leeg is.
+        {%- endcomment -%}
+        {%- assign leverregel = s.voorraad_regel | default: mf.shipping_information.value -%}
+        {%- if v.available and leverregel != blank -%}
           <div class="ws-vrd">
             <i aria-hidden="true"></i>
-            <span>{{ mf.shipping_information.value | default: s.voorraad_regel }}</span>
+            <span>{{ leverregel }}</span>
           </div>
         {%- endif -%}
 
@@ -1733,6 +1784,8 @@
     { "type": "text", "id": "citaat_bron", "label": "Herkomst van dit citaat", "info": "Komt onderaan de kaart naast de naam te staan, niet in de kop. Per product te overschrijven met custom.buybox_quote_source. Leeg = alleen de naam." },
     { "type": "header", "content": "Cadeau" },
     { "type": "paragraph", "content": "Komt per product uit custom.limited_offer: de titel uit offer_title, de onderregel uit popup_subtitle en het icoon uit image. Hieronder de terugval." },
+    { "type": "checkbox", "id": "aanbod_tonen", "label": "Aanbodbalk tonen", "info": "Toont de actie uit custom.limited_offer boven de knop. Zet hem uit zodra de actie voorbij is: het metaobject heeft geen einddatum.", "default": true },
+    { "type": "select", "id": "aanbod_kleur", "label": "Aanbodbalk kleur", "options": [ { "value": "zand", "label": "Zand" }, { "value": "herfst", "label": "Herfst: roest met goud" } ], "info": "Herfst hoort bij de Herfst Sale. Zet hem terug op Zand als die actie voorbij is.", "default": "herfst" },
     { "type": "text", "id": "gift_titel", "label": "Cadeauregel" },
     { "type": "text", "id": "gift_regel", "label": "Onderregel", "default": "Wordt vanzelf meegeleverd" },
     { "type": "header", "content": "Cadeaus uit de winkelwagen" },
@@ -1755,7 +1808,7 @@
     { "type": "header", "content": "Meelopende koopbalk" },
     { "type": "checkbox", "id": "sticky_tonen", "label": "Balk onderaan tonen", "default": true, "info": "Verschijnt pas als de koopknop voorbij is gescrold, niet meteen." },
     { "type": "text", "id": "sticky_knop", "label": "Knoptekst in de balk", "default": "In winkelwagen", "info": "De prijs staat er al naast, dus hier hoeft geen bedrag bij." },
-    { "type": "text", "id": "voorraad_regel", "label": "Leverregel (terugval)", "info": "Wordt overruled door custom.shipping_information op het product zelf.", "default": "Vandaag besteld, morgen in huis" },
+    { "type": "text", "id": "voorraad_regel", "label": "Leverregel", "info": "Winkelbeleid, dus deze regel wint van custom.shipping_information op het product. Noem de voorwaarde erbij, zoals ma t/m vr voor 23:59. Leeg = het productveld.", "default": "Ma t/m vr voor 23:59 besteld, morgen in huis" },
     { "type": "text", "id": "veilig_label", "label": "Label bij de betaalmerken", "default": "Veilig afrekenen" },
     { "type": "header", "content": "Vergelijken en teller" },
     { "type": "text", "id": "vergelijk_label", "label": "Knop vergelijken", "default": "Vergelijk de modellen" },
