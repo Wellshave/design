@@ -6,6 +6,13 @@ bestand gaat alleen over de ruggengraat.
 
 Startbestand: `references/startbestand-listicle.html`
 
+**Kies daarna het register.** Een listicle kan in het winkelregister staan of in het
+redactionele: dezelfde punten, maar de ene keer als winkelpagina en de andere keer als
+nieuwsartikel met krantenbalk, persstrook en het aanbod pas onderaan. Belooft de advertentie
+informatie, kies dan het redactionele register en lees `references/redactioneel-register.md`.
+Het startbestand hierboven is het winkelregister. Voor het redactionele register begin je bij
+`references/startbestand-redactioneel.html`.
+
 ---
 
 ## Wat het is

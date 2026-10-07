@@ -6,6 +6,12 @@ bestand gaat alleen over de ruggengraat.
 
 Startbestand: `references/startbestand-advertorial.html`
 
+**Kies daarna het register.** Ook een advertorial kan redactioneel: zelfde betoog, maar dan met
+krantenbalk, serifkop, persstrook en het aanbod pas onderaan. Belooft de advertentie
+informatie in plaats van een aanbod, lees dan `references/redactioneel-register.md`. Het
+startbestand hierboven is het winkelregister. Voor het redactionele register begin je bij
+`references/startbestand-redactioneel.html`.
+
 ---
 
 ## Wat het is
