@@ -1987,6 +1987,12 @@ het koopvak stond, rendert niets; deze regel komt uit het koopvak zelf.
   grenzen gelijk houden aan wat Klarna voor dit account hanteert.
 * Tekst vertaald in en/de/fr. Het woord voor het bedrag zit er met een harde
   spatie aan vast, anders staat op de telefoon het bedrag alleen op regel twee.
+* **Op de telefoon blijft de regel op één regel.** De letter schaalt met de
+  schermbreedte (12,4 px op 390, 11,8 op 375, 10 op 320) en het Klarna-plaatje
+  schaalt in em mee. Gemeten in alle vier de talen van 320 tot 414 px. Engels
+  en Duits zijn daarvoor ingekort: *Or 3 interest-free payments of €19,99* en
+  *Oder in 3 zinsfreien Raten à €19,99*. Maak je de zin in de editor langer,
+  meet dan opnieuw: de rekensom in de CSS gaat uit van de Nederlandse lengte.
 
 ## Praktijk: bijna paginabreed, beeld en tekst als losse tegels
 

@@ -635,7 +635,15 @@
   .ws-pdp .ws-prijs{margin-top:0;gap:8px}
   .ws-pdp .ws-prijs .ws-nu{font-size:40px}
   .ws-pdp .ws-prijs .ws-was{font-size:16.5px}
-  .ws-pdp .ws-klarna{flex-basis:100%;margin-top:0;font-size:12.5px}
+  /* Klarna op één regel. De letter schaalt met de schermbreedte: de regel is
+     het scherm min 62 px breed (de marges), en de Nederlandse zin met €19,99
+     is 26,5 keer de lettergrootte lang, plaatje meegeteld. Daarom schaalt het
+     plaatje in em mee. Gemeten: 12,4 px op 390, 11,8 op 375, 10 op 320, en
+     dan past hij in nl en fr. en/de zijn ingekort tot dezelfde lengte. Een
+     langere tekst in de editor of een bedrag boven de €100 breekt op de
+     kleinste schermen nog af in plaats van over de rand te lopen. */
+  .ws-pdp .ws-klarna{flex-basis:100%;margin-top:0;font-size:clamp(10px,calc((100vw - 62px) / 26.5),12.5px)}
+  .ws-pdp .ws-klarna-merk{font-size:.86em;padding:.17em .5em;margin-right:.45em;border-radius:.4em}
   .ws-pdp .ws-besp{padding:4px 7px}
   .ws-pdp .ws-besp span{font-size:10px}
 
