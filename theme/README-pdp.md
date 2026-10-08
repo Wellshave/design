@@ -2087,3 +2087,12 @@ hoe lang ook, voor de CSS precies 1 lang, en kan `stroke-dashoffset` hem van
   in variabelen (`$t0`, `$t1`, …), die tellen niet mee.
 * **`bulkOperationRunMutation` wordt door de MCP geweigerd.** In plaats
   daarvan: één verzoek met tot 25 mutaties met een alias (`a0:`, `a1:`, …).
+
+## Pil en prijskaartje weg
+
+* **De pil boven de titel** (productnaam links, *Herfst sale* rechts) staat
+  uit. Hij zit nog in de code achter de instelling *Pil tonen* in het koopvak
+  (standaard uit), zodat hij zonder code terug kan.
+* **Het prijskaartje in het bespaarlabel** is weg; het label is nu alleen
+  *Je bespaart 30%*, met gelijke binnenruimte links en rechts. Op de telefoon
+  stond het kaartje al uit, dus daar verandert niets aan de breedte.

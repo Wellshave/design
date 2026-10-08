@@ -921,14 +921,13 @@
 .ws-pdp .ws-h1 .ws-tm{font-size:.36em;line-height:0;vertical-align:super;margin-left:.05em;letter-spacing:0}
 .ws-pdp .ws-sub{font-size:19px;line-height:1.45;letter-spacing:-.01em;color:var(--ws-w72);margin-top:10px}
 
-/* het bespaarlabel: een capsule met een prijskaartje */
+/* het bespaarlabel: een capsule. Het prijskaartje ervoor is 8 oktober
+   weggehaald; alleen de tekst blijft. */
 .ws-pdp .ws-prijs{margin-top:18px}
-.ws-pdp .ws-besp{gap:7px;padding:6px 13px 6px 11px;border-radius:100px;
+.ws-pdp .ws-besp{padding:6px 13px;border-radius:100px;
   background:linear-gradient(100deg,#9C6B30 0%,#8A5C25 55%,#7A4F1B 100%);
   box-shadow:inset 0 1px 0 rgba(255,225,170,.35),0 2px 6px -2px rgba(90,55,15,.45)}
-.ws-pdp .ws-besp svg{width:15px;height:15px;flex:none;color:#fff}
 .ws-pdp .ws-besp span{font-size:12px;font-weight:600;color:#fff}
-.ws-pdp .ws-sticky-pr .ws-besp svg{display:none}
 
 
 
@@ -937,9 +936,8 @@
   .ws-pdp .ws-pil .ws-z{padding:7px 12px}
   .ws-pdp .ws-bb > .ws-sub{font-size:17px}
   /* prijs, streepprijs en label moeten op 390 px op één regel blijven (zie
-     hierboven), dus het prijskaartje valt hier weg en het label blijft klein */
-  .ws-pdp .ws-besp{gap:0;padding:4px 8px}
-  .ws-pdp .ws-besp svg{display:none}
+     hierboven), dus het label blijft hier klein */
+  .ws-pdp .ws-besp{padding:4px 8px}
   .ws-pdp .ws-besp span{font-size:10px}
   /* de lijst staat los, net als op desktop, dus zonder de twee haarlijnen
      die er vroeger op mobiel omheen stonden */

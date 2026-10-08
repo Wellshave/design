@@ -291,9 +291,11 @@
           achter de prijs en in de aanbodbalk stond de campagne ook al --
           drie plekken voor hetzelfde bedrag. De rechterhelft zegt nu wat
           je met dit product koopt en niet wat het kost.
+          8 oktober: op verzoek uit. Staat nog in de instellingen (Pil tonen),
+          zodat hij zonder code terug kan.
         {%- endcomment -%}
         {%- assign pil = s.pil_label | default: product.title -%}
-        {%- if pil != blank or s.pil_z != blank -%}
+        {%- if s.pil_tonen and pil != blank -%}
           <span class="ws-pil">
             {%- if pil != blank -%}<b class="ws-a">{{ pil }}</b>{%- endif -%}
             {%- if s.pil_z != blank -%}<b class="ws-z">{{ s.pil_z }}</b>{%- endif -%}
@@ -346,7 +348,6 @@
               <span class="ws-was">{% if s.munt != blank %}<span class="ws-munt">{{ s.munt }}</span>{% endif %}{% render 'price-formated', price: v.compare_at_price %}</span>
               {%- if korting > 0 -%}
                 <span class="ws-besp">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12.6V4.9c0-.8.6-1.4 1.4-1.4h7.7c.4 0 .7.1 1 .4l7.4 7.4c.6.6.6 1.5 0 2l-7.7 7.7c-.6.6-1.5.6-2 0l-7.4-7.4c-.3-.3-.4-.6-.4-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="8.2" cy="8.2" r="1.6" fill="currentColor"/></svg>
                   <span>{{ s.besparing_regel }} {{ korting }}%</span>
                 </span>
               {%- endif -%}
@@ -1882,6 +1883,7 @@
     { "type": "image_picker", "id": "merk", "label": "Monogram op de achtergrond" },
     { "type": "text", "id": "tag", "label": "Label linksboven", "default": "Meest gekozen" },
     { "type": "header", "content": "De pil en de korting" },
+    { "type": "checkbox", "id": "pil_tonen", "label": "Pil tonen", "info": "De pil boven de titel: links de productnaam, rechts de tekst hieronder.", "default": false },
     { "type": "text", "id": "pil_label", "label": "Linkerhelft van de pil", "info": "Leeg laten betekent: de producttitel." },
     { "type": "text", "id": "pil_z", "label": "Rechterhelft van de pil", "info": "Zegt wat dit product is, niet wat je bespaart. Houd hem anders dan het label linksboven, anders staat dezelfde claim twee keer in beeld. Leeg = alleen de naam.", "default": "Bestseller" },
     { "type": "text", "id": "besparing_regel", "label": "Regel bij het bespaarde bedrag", "default": "Je bespaart" },
