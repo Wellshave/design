@@ -1,0 +1,304 @@
+<title>Het productpagina-plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap">
+<style>
+:root{
+  --ink:#111111;--ink-80:rgba(17,17,17,.8);--ink-60:rgba(17,17,17,.6);
+  --ink-40:rgba(17,17,17,.4);--ink-10:rgba(17,17,17,.10);
+  --paper:#FFFFFF;--sand:#F5F1EA;--sand-deep:#EDE6DA;--carbon:#191816;
+  --bronze:#BC813E;--gold:#F5D18A;--alert:#E61C1C;
+  --tint-rose:#F4E3DE;--tint-sage:#E5EBE1;--tint-amber:#F7EBD3;
+  --grad-gold-tekst:linear-gradient(100deg,#B0742A 0%,#8C5A1A 100%);
+  --r-s:12px;--r-m:18px;--r-l:26px;--rail:1140px;--read:660px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--sand);color:var(--ink);
+  font-family:"Montserrat",-apple-system,BlinkMacSystemFont,Arial,sans-serif;
+  font-size:16.5px;line-height:1.7;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--rail);margin:0 auto;padding:0 24px 110px}
+h1,h2,h3{margin:0;text-wrap:balance;font-weight:900;letter-spacing:-.025em;line-height:1.06}
+.duo{font-size:clamp(25px,3.5vw,38px)}
+.duo .b{display:block;color:#B0742A}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+ .duo .b{background-image:var(--grad-gold-tekst);-webkit-background-clip:text;background-clip:text;
+   -webkit-text-fill-color:transparent;color:transparent}}
+.eyebrow{font-weight:800;letter-spacing:.2em;text-transform:uppercase;font-size:10.5px;color:var(--ink-40)}
+.mast{padding:62px 0 30px;border-bottom:2px solid var(--ink)}
+.mast h1{font-size:clamp(32px,5vw,52px);margin:13px 0 0}
+.mast .lede{max-width:var(--read);margin:17px 0 0;font-size:17.5px;color:var(--ink-80);line-height:1.6}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.chip{font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;background:var(--paper);
+  border:1px solid var(--ink-10);border-radius:100px;padding:6px 13px;color:var(--ink-60)}
+section{padding:52px 0 0}
+.shead{display:flex;align-items:baseline;gap:13px;margin-bottom:6px}
+.snum{font-weight:800;font-size:11px;letter-spacing:.18em;color:var(--bronze);white-space:nowrap}
+.sintro{max-width:var(--read);color:var(--ink-80);margin:15px 0 0}
+/* contract */
+.rules{margin:24px 0 0;display:flex;flex-direction:column;gap:11px}
+.rule{background:var(--paper);border:1px solid var(--ink-10);border-left:3px solid var(--bronze);
+  border-radius:var(--r-m);padding:17px 22px;display:grid;grid-template-columns:26px minmax(0,1fr);gap:14px}
+.rule .n{font-weight:800;font-size:12px;color:var(--bronze);padding-top:3px}
+.rule b{display:block;font-weight:700;font-size:16px;margin-bottom:3px}
+.rule p{margin:0;font-size:15px;line-height:1.55;color:var(--ink-80)}
+/* klassen */
+.cls{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin:24px 0 0}
+.cbox{background:var(--paper);border:1px solid var(--ink-10);border-radius:var(--r-m);padding:19px 21px 21px}
+.cbox.k{border-top:3px solid var(--carbon)}
+.cbox h4{font-size:13px;font-weight:900;letter-spacing:-.01em;margin-bottom:3px}
+.cbox .cnt{font-size:10.5px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;color:var(--bronze);margin-bottom:11px}
+.cbox p{margin:0 0 10px;font-size:14px;line-height:1.5;color:var(--ink-80)}
+.cbox ul{margin:0;padding-left:17px;font-size:13px;line-height:1.45;color:var(--ink-60)}
+.cbox li{margin-bottom:4px}
+/* blokkentabel */
+.tw{overflow-x:auto;border:1px solid var(--ink-10);border-radius:var(--r-m);background:var(--paper);margin:24px 0 0}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:780px}
+th,td{padding:10px 13px;text-align:left;border-bottom:1px solid var(--ink-10);vertical-align:top;line-height:1.45}
+thead th{font-size:9.5px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--ink-40);background:var(--sand-deep);white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+td.i{font-weight:800;color:var(--ink-40);width:34px;font-size:11.5px;white-space:nowrap}
+td b{font-weight:700}
+td code{font-size:11.5px}
+.pill{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
+  padding:3px 8px;border-radius:100px;white-space:nowrap}
+.pill.kern{background:var(--carbon);color:var(--gold)}
+.pill.uit{background:var(--sand-deep);color:var(--ink-60)}
+.pill.nieuw{background:var(--tint-sage);color:#2E6B3E}
+.g{font-size:9px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
+.g.zand{color:#8C6A2A}.g.wit{color:var(--ink-40)}.g.donker{color:var(--carbon)}
+tr.fold td{background:var(--carbon);color:var(--gold);font-size:10px;font-weight:800;
+  letter-spacing:.15em;text-transform:uppercase;padding:7px 13px}
+/* notes */
+.note{margin:24px 0 0;border-radius:var(--r-m);padding:19px 23px;background:var(--paper);
+  border:1px solid var(--ink-10);border-left:3px solid var(--bronze)}
+.note.warn{background:var(--tint-amber);border-left-color:#A8761B;border-color:transparent}
+.note.win{background:var(--tint-sage);border-left-color:#2E6B3E;border-color:transparent}
+.note h4{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--bronze);margin-bottom:8px}
+.note.warn h4{color:#8C5A1A}.note.win h4{color:#2E6B3E}
+.note p{margin:0;font-size:15.5px;line-height:1.6;color:var(--ink-80)}
+.note p+p{margin-top:10px}
+/* fasen */
+.fase{margin:24px 0 0;border:1px solid var(--ink-10);border-radius:var(--r-m);background:var(--paper);overflow:hidden}
+.frow{display:grid;grid-template-columns:96px minmax(0,1fr);border-bottom:1px solid var(--ink-10)}
+.frow:last-child{border-bottom:0}
+.frow .lab{padding:17px 15px;background:var(--sand-deep);font-size:10px;font-weight:800;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--ink-60);border-right:1px solid var(--ink-10)}
+.frow .body{padding:17px 20px}
+.frow .body b{display:block;font-size:16px;font-weight:800;letter-spacing:-.015em;margin-bottom:6px}
+.frow .body p{margin:0 0 8px;font-size:14.5px;line-height:1.55;color:var(--ink-80)}
+.frow .body ul{margin:0;padding-left:18px;font-size:14px;line-height:1.5;color:var(--ink-80)}
+.frow .body li{margin-bottom:4px}
+.frow .body .out{margin-top:10px;padding-top:9px;border-top:1px solid var(--ink-10);font-size:12.5px;
+  font-weight:700;color:var(--bronze);letter-spacing:.01em}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.86em;
+  background:var(--sand-deep);border-radius:4px;padding:1.5px 6px}
+strong{font-weight:700}
+.foot{margin-top:54px;padding-top:22px;border-top:1px solid var(--ink-10);font-size:13px;color:var(--ink-60);line-height:1.75}
+@media (max-width:860px){.cls{grid-template-columns:1fr}.frow{grid-template-columns:1fr}
+  .frow .lab{border-right:0;border-bottom:1px solid var(--ink-10)}}
+</style>
+<div class="wrap">
+
+<header class="mast">
+  <div class="eyebrow">Wellshave · productpagina-sjabloon · het volledige plan</div>
+  <h1>E&eacute;n structuur,<br>dertig producten</h1>
+  <p class="lede">Niet per product ontwerpen. E&eacute;n skelet dat voor elk product hetzelfde is &mdash; boven &eacute;n onder de vouw &mdash; waar alleen de inhoud per product verschilt. Dit is dat skelet, de regels die het overeind houden, en de volgorde waarin het gebouwd wordt.</p>
+  <div class="chips">
+    <span class="chip">9 blokken</span>
+    <span class="chip">30 producten · 93% van de omzet</span>
+    <span class="chip">10 sjablonen nu → 1</span>
+    <span class="chip">21 bestaande metafields</span>
+    <span class="chip">5 nieuwe</span>
+    <span class="chip">4 fasen</span>
+  </div>
+</header>
+
+<section>
+  <div class="shead"><span class="snum">01</span><h2 class="duo">Het contract,<span class="b">in vier regels.</span></h2></div>
+  <p class="sintro">Alles hieronder volgt hieruit. Als een van deze vier sneuvelt, valt het idee van &eacute;&eacute;n sjabloon om en ben je alsnog per product aan het ontwerpen.</p>
+
+  <div class="rules">
+    <div class="rule"><span class="n">1</span><div><b>De volgorde ligt vast en wordt nooit herschikt</b><p>Blok 07 staat op elk product op plek 07. Een bezoeker die van de Groom Guard naar de Flex Guard klikt, krijgt hetzelfde betoog in dezelfde volgorde. Dat is wat &laquo;dezelfde structuur&raquo; betekent en het is niet onderhandelbaar per product.</p></div></div>
+    <div class="rule"><span class="n">2</span><div><b>Structuur zit in het sjabloon, inhoud in de metafields</b><p>Geen enkele tekst, prijs of afbeelding staat in de themacode. Alles komt uit een veld op het product. Dat is de enige manier waarop dertig pagina's van &eacute;&eacute;n wijziging kunnen profiteren.</p></div></div>
+    <div class="rule"><span class="n">3</span><div><b>Kernblokken zijn verplicht, uitbreidingen verbergen zich</b><p>Kernblokken dragen het betoog: zonder die blokken is de pagina stuk. Hun velden m&oacute;&eacute;ten gevuld zijn. Uitbreidingen zijn productspecifiek; is het veld leeg, dan valt het blok weg &mdash; maar de blokken eromheen schuiven niet op. Zie deel 03 voor welk blok wat is.</p></div></div>
+    <div class="rule"><span class="n">4</span><div><b>Nooit een prijs of aantal in een tekstveld</b><p>Overgenomen uit de homepage-tak, waar deze regel al geldt. Prijs, van-prijs, voorraad, reviewscore en aantal komen live uit het product en uit Trustpilot. Een ingetypt cijfer is hoe je aan drie verschillende reviewaantallen komt.</p></div></div>
+  </div>
+
+  <div class="note win">
+    <h4>Waarom dit meer oplevert dan het lijkt</h4>
+    <p>Je 58 actieve producten draaien nu op <strong>tien verschillende productsjablonen</strong>. Vijftien staan op <code>improved-template</code>, vier hebben elk een eigen GemPages-sjabloon met een eigen id, vier hebben een handgemaakt sjabloon op naam (<code>men-shaper-gold</code>, <code>wellshave-groom-guard</code>, <code>dual-groomer</code>, <code>wellshave-shave-package-3</code>) en de resterende 35 staan op het standaardsjabloon.</p>
+    <p>Dat is de echte reden dat je pagina&rsquo;s uit elkaar lopen: er is niets om ze bij elkaar te houden. Elke verbetering moet nu tien keer, of hij landt maar op een deel van je assortiment. E&eacute;n sjabloon betekent dat een verbetering &eacute;&eacute;n keer gebouwd wordt en overal tegelijk staat &mdash; en dat de vier GemPages-sjablonen mee kunnen verdwijnen.</p>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">02</span><h2 class="duo">Drie producttypes,<span class="b">&eacute;&eacute;n skelet.</span></h2></div>
+  <p class="sintro">Je catalogus loopt van een bodygroomer van &euro;59,95 tot een travelbag van een paar euro. Hetzelfde skelet moet die allebei dragen. Dat lukt door het type te bepalen, niet door het skelet te veranderen: het type zet uitbreidingen aan of uit, de volgorde blijft identiek.</p>
+
+  <div class="cls">
+    <div class="cbox k">
+      <h4>Apparaat</h4>
+      <div class="cnt">alle 9 blokken</div>
+      <p>Alles met een motor en een mes. Hier draait het volledige betoog: zones, vergelijking, jaarkosten, specificaties.</p>
+      <ul><li>Groom Guard &amp; PRO</li><li>Flex Guard 3-in-1</li><li>Gentleman Shaver</li><li>Men Shaper-lijn</li><li>Tondeuses, neustrimmers</li></ul>
+    </div>
+    <div class="cbox">
+      <h4>Accessoire</h4>
+      <div class="cnt">11 blokken · 5 verborgen</div>
+      <p>Mesjes, scheerkoppen, tassen. Geen zoneblok, geen modelvergelijking &mdash; wel bewijs, aanbod en garantie.</p>
+      <ul><li>Groom Guard Blade</li><li>Foil shaver, scheerkoppen</li><li>Washbag, Hard Case, Travelbag</li></ul>
+    </div>
+    <div class="cbox">
+      <h4>Bundel</h4>
+      <div class="cnt">13 blokken · aanbod centraal</div>
+      <p>Pakketten. Het aanbodblok wordt hier de hoofdrol: wat zit erin, wat kost het los, wat bespaar je.</p>
+      <ul><li>Shave Package Ultimate</li><li>Skull Deal, Barber Pack</li><li>Flex-line, Essential Flex</li></ul>
+    </div>
+  </div>
+
+  <div class="note">
+    <h4>Hoe het type wordt bepaald</h4>
+    <p>Niet met een nieuw veld, maar met <code>product.type</code> dat je al gebruikt &mdash; «Body groomer», «Nose trimmer», «Bundel», leeg voor accessoires. Het sjabloon leest dat en zet de uitbreidingen aan. E&eacute;n regel Liquid, geen extra beheer.</p>
+    <p>Let op: in de producten die ik uitlas staat <code>productType</code> <strong>bij een aantal leeg</strong> &mdash; onder meer de Foil shaver, de Essential Flex Bundel en de Flex Guard Blade Trio Pack. Loop de catalogus &eacute;&eacute;n keer na en vul hem aan; dat bepaalt welke blokken elk product krijgt.</p>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">03</span><h2 class="duo">Het skelet, blok voor blok,<span class="b">met de bron per blok.</span></h2></div>
+  <p class="sintro">Negen blokken, met vier accordeons in blok 01. Geen van de zes concurrentiepagina&rsquo;s die we naast elkaar legden komt boven de tien; wij zaten op zeventien. Wat vastligt is de vorm en de plek; wat verschilt is de inhoud in de rechterkolom. «Kern» betekent verplicht vullen, «uitbreiding» betekent: leeg is weg, maar de rest verschuift niet.</p>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>&nbsp;</th><th>Blok</th><th>Wat vastligt</th><th>Wat per product verschilt</th><th>Bron</th><th>Klasse</th><th>Grond</th></tr></thead>
+      <tbody>
+        <tr class="fold"><td colspan="7">Boven de vouw</td></tr>
+        <tr><td class="i">01</td><td><b>Koopblok</b><br>gallerij, koopvak, vier accordeons</td><td>De slots, hun volgorde, de knop, de risicostrook. Onderin vier dichtgeklapte accordeons: omschrijving &amp; specificaties, in de doos, verzending &amp; retour, garantie.</td><td>Citaat, titel, belofte, prijs, USP&rsquo;s, beeld, specificaties, doosinhoud</td><td><code>custom.buybox_quote</code><br><code>custom.hero_promise</code><br><code>custom.product_usp</code><br><code>custom.specification</code><br><code>custom.included_box</code><br><code>custom.shipping_information</code></td><td><span class="pill kern">kern</span></td><td class="g zand">zand</td></tr>
+        <tr class="fold"><td colspan="7">Onder de vouw</td></tr>
+        <tr><td class="i">02</td><td><b>Geruststrook</b></td><td>Vier items naast elkaar, rond icoonvlak, vette regel plus onderregel</td><td>Niets &mdash; winkelbreed en identiek</td><td><code>custom.store_usp</code></td><td><span class="pill kern">kern</span></td><td class="g wit">wit</td></tr><tr><td class="i">03</td><td><b>UGC-video&rsquo;s</b></td><td>Band van verticale video&rsquo;s, horizontaal te vegen, koopstrook eronder</td><td>Welke video&rsquo;s bij dit product horen</td><td><code>custom.ugc_videos</code> <span class="pill nieuw">nieuw</span></td><td><span class="pill uit">uitbreiding</span></td><td class="g donker">donker</td></tr><tr><td class="i">04</td><td><b>Toepassing per zone</b></td><td>Rooster van zones met beeld per zone. Neemt &laquo;zie waar je trimt&raquo; in zich op.</td><td>Welke zones dit product aankan</td><td><code>custom.use_case_title</code><br><code>custom.image_with_text</code></td><td><span class="pill uit">uitbreiding</span></td><td class="g wit">wit</td></tr><tr><td class="i">05</td><td><b>Het aanbodblok</b><br>drie kaarten</td><td>Drie kaarten, nooit meer, nooit als lijst. Instap / uitgelicht / beste waarde. Besparing op elke kaart.</td><td>Welke drie producten de ladder vormen</td><td><code>custom.upgrade_products</code><br>live prijzen</td><td><span class="pill kern">kern</span></td><td class="g donker">donker</td></tr><tr><td class="i">06</td><td><b>Vergelijk de modellen</b></td><td>Tabel, wij gemarkeerd, kolom per model. De jaarkosten van mesjes zijn hier een rij.</td><td>Welke modellen vergeleken worden</td><td><code>custom.compare_table</code><br><code>custom.compare_products</code><br><code>custom.yearly_cost</code> <span class="pill nieuw">nieuw</span></td><td><span class="pill uit">uitbreiding</span></td><td class="g zand">zand</td></tr><tr><td class="i">07</td><td><b>Maak het compleet</b><br>accessoires</td><td>Vijf compacte kaarten naast elkaar: foto, naam, prijs, &laquo;+ toevoegen&raquo;. De aanvulling, niet de ladder.</td><td>Welke accessoires erbij horen</td><td><code>custom.cart_upsell</code></td><td><span class="pill uit">uitbreiding</span></td><td class="g wit">wit</td></tr><tr><td class="i">08</td><td><b>Beoordelingen</b></td><td>Muur van reviews, geen carrousel. Score en aantal live gebonden. Zonder foto&rsquo;s &mdash; die heeft Trustpilot niet.</td><td>Niets &mdash; winkelbreed</td><td>Trustpilot-widget</td><td><span class="pill kern">kern</span></td><td class="g zand">zand</td></tr><tr><td class="i">09</td><td><b>Veelgestelde vragen</b></td><td>Uitklappers, bezwaar-eerst gesorteerd. Het laatste blok; daaronder alleen de voettekst en de plakkende koopbalk.</td><td>De vragen</td><td><code>custom.faq</code></td><td><span class="pill kern">kern</span></td><td class="g wit">wit</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note win">
+    <h4>Waarom het aanbodblok van plek 3 naar plek 5 ging</h4>
+    <p>Het stond eerst op negen, ging toen naar drie, en staat nu op vijf. Die laatste stap komt uit het raamwerk van Arsh Sanwarwala en Mark, en hij is te verdedigen met &eacute;&eacute;n zin: <strong>de ladder wint de verkoop niet, hij vergroot een verkoop die al besloten is.</strong> Dat werk doet hij het best n&aacute; overtuiging, niet ervoor.</p>
+    <p>Concreet. Wie op de PDP van de PRO landt, h&eacute;&eacute;ft al een model gekozen. Het aanbodblok vraagt hem die keuze te heroverwegen. Doe je dat voordat hij gelooft dat het apparaat werkt, dan zijn de twee waarschijnlijkste uitkomsten &laquo;dan maar de goedkoopste&raquo; of &laquo;ik denk er nog even over&raquo; &mdash; en dat tweede is een uitstap. Doe je het n&aacute;dat hij overtuigd is, dan zet je overtuiging om in een grotere mand.</p>
+    <p>Wat er op plek drie voor in de plaats komt is de <strong>UGC-band</strong>. Dat volgt de regel voor koud, onderbrekend verkeer: het eerste blok onder de vouw is de laatste kans op iedereen die boven niet klikte, en een vijfde van dat verkeer komt net uit een app waar het precies dit formaat zat te kijken. Het mechanismeblok stond hier eerst; dat is eruit. De <strong>categorie-herkadering</strong> die het advertentieonderzoek opleverde &mdash; Balzac en Balzy openen hun best schalende creatives ermee, en op hun eigen sites doet niemand dat &mdash; blijft overeind, maar als regel boven de vouw, niet als sectie.</p>
+  </div>
+
+  <div class="note warn">
+    <h4>Waar de herkadering nu heen moet</h4>
+    <p>Uit het advertentieonderzoek: de best schalende creatives van Balzac (152.219 bereik, actief) en Balzy (94.223) openen allebei met een <strong>categorie-herkadering</strong> &mdash; «stop met scheren, begin met trimmen» &mdash; en niet met techniek. Op hun eigen sites doet niemand dat.</p>
+    <p>Dat blok is er niet meer &mdash; het mechanisme is uit de pagina gehaald. De herkadering blijft w&eacute;l het gat in deze markt, en die past in &eacute;&eacute;n regel: de ondertitel boven de vouw, nu &laquo;Trim zonder sneetjes op je gevoeligste plekken&raquo;. Dat is de plek waar iedereen hem ziet, ook de 72% die nooit onder de vouw komt.</p>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">04</span><h2 class="duo">Wat je aanmaakt,<span class="b">en wat er al staat.</span></h2></div>
+  <p class="sintro">Uitgelezen per product, niet aangenomen. De Groom Guard en de PRO delen 21 <code>custom.*</code>-velden &mdash; waaronder <code>limited_offer</code>, dat bij alle achttien producten naar hetzelfde record wijst en dus een campagneveld is, geen productveld; de basis heeft er twee extra. Het sjabloon is dus al grotendeels gedekt.</p>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>Veld</th><th>Type</th><th>Waarvoor</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td><code>custom.buybox_quote</code><br><code>custom.buybox_quote_author</code></td><td>single_line_text</td><td>Slot 1 van het koopblok</td><td><span class="pill nieuw">aanmaken</span></td></tr>
+        <tr><td><code>custom.hero_promise</code></td><td>single_line_text</td><td>Slot 3, vervangt de ondertitel boven de vouw</td><td><span class="pill nieuw">aanmaken</span></td></tr>
+        <tr><td><code>custom.risk_strip</code></td><td>list.single_line_text</td><td>Slot 8, onder de knop</td><td><span class="pill nieuw">aanmaken</span></td></tr>
+        <tr><td><code>custom.yearly_cost</code></td><td>metaobject_reference</td><td>Blok 06, de jaarkostenrij in de vergelijkingstabel</td><td><span class="pill nieuw">aanmaken</span></td></tr>
+        <tr><td>&mdash;</td><td>&mdash;</td><td>Slot 10, de betaalrij &mdash; komt uit <code>shop.enabled_payment_types</code>, geen metafield nodig</td><td><span class="pill uit">bestaat al</span></td></tr>
+        <tr><td><code>custom.product_offer</code></td><td>metaobject_reference</td><td>Slot 7, de cadeaubalk &mdash; wijst naar de bestaande definitie <code>limited_offer</code></td><td><span class="pill nieuw">aanmaken</span></td></tr>
+        <tr><td><code>custom.product_usp</code></td><td>list.single_line_text</td><td>Slot 6 &mdash; bestaat, maar moet herschreven</td><td>herschrijven</td></tr>
+        <tr><td><code>compare_table</code> · <code>included_box</code> · <code>image_with_text</code> · <code>ugc_video_list</code> · <code>specification</code> · <code>faq</code> · <code>store_usp</code> · <code>upgrade_products</code> · <code>cart_upsell</code> · <code>use_case_title</code></td><td>diverse</td><td>Blok 01 t/m 09</td><td>staan gevuld</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<section>
+  <div class="shead"><span class="snum">05</span><h2 class="duo">De bouwvolgorde,<span class="b">in vier fasen.</span></h2></div>
+  <p class="sintro">Fase 1 is geen ontwerp en geen test. Doe die los en eerst, anders weet je achteraf niet of de winst uit het herstel kwam of uit de herbouw.</p>
+
+  <div class="fase">
+    <div class="frow">
+      <div class="lab">Fase 1<br>herstel</div>
+      <div class="body">
+        <b>Repareren wat kapot is</b>
+        <p>Geen sjabloonwerk. Dit zijn fouten, geen varianten om te testen.</p>
+        <ul>
+          <li><strong>Cookiebanner naar onderaan</strong> &mdash; dekt nu het koopblok af bij elk eerste bezoek. Instelling in de consent-app.</li>
+          <li>Duits uit <code>global.description_tag</code> van de PRO</li>
+          <li>Lorem ipsum-blok uitzetten, <code>EMPTY DOM REMOVE PROTECTOR</code> weg</li>
+          <li>&laquo;levenslang jaar garantie&raquo; in de winkelwagen</li>
+          <li>Judge.me, Shopify-reviews &eacute;n Loox eruit &mdash; alleen Trustpilot houden</li>
+          <li>Alt-teksten op alle productmedia</li>
+          <li><strong>Mesjes-driepak van &euro;24,95 naar &euro;19,95</strong>, met een jaar in de naam &mdash; beide concurrenten zitten daar</li>
+        </ul>
+        <div class="out">Resultaat: een schone nulmeting om alles daarna tegen af te zetten</div>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="lab">Fase 2<br>sjabloon</div>
+      <div class="body">
+        <b>Het skelet bouwen, op &eacute;&eacute;n product</b>
+        <p>Bouw de negen blokken als Liquid-secties op de Groom Guard PRO, in het testthema. Volg de conventies uit de homepage-tak: <code>ws-</code>-prefix, padding via <code>indent-settings</code>, mobiel op 749px, alle teksten als sectie-instelling.</p>
+        <ul>
+          <li>Vijf nieuwe metafields aanmaken en op de PRO vullen</li>
+          <li>Blok 01 staat er al als ontwerp &mdash; die eerst</li>
+          <li>Per blok controleren op 390px v&oacute;&oacute;r het volgende blok</li>
+          <li><code>productType</code> aanvullen op de vier producten waar hij leeg is</li>
+        </ul>
+        <div class="out">Resultaat: &eacute;&eacute;n complete pagina, en een sjabloon dat de rest kan erven</div>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="lab">Fase 3<br>uitrol</div>
+      <div class="body">
+        <b>Content vullen, product voor product</b>
+        <p>Hier gaat het sjabloon niet meer open. Alleen velden vullen, in volgorde van omzet.</p>
+        <ul>
+          <li><strong>Eerst de vier grootste:</strong> Groom Guard PRO, Groom Guard, Gentleman Shaver, Flex Guard 3-in-1 &mdash; samen &euro;24.356 over 90 dagen</li>
+          <li>Daarna de rest van de top tien</li>
+          <li>Accessoires en bundels als laatste; die hebben minder velden nodig</li>
+          <li>Per product de kernvelden compleet, uitbreidingen alleen waar ze iets toevoegen</li>
+        </ul>
+        <div class="out">Resultaat: dertig pagina's met dezelfde structuur en eigen inhoud</div>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="lab">Fase 4<br>meten</div>
+      <div class="body">
+        <b>Testen wat er te testen valt</b>
+        <p>Met circa 15.600 sessies per maand zit je onder de grens voor klassieke A/B-tests. Grote, brede wijzigingen over enkele weken meten &mdash; niet &eacute;&eacute;n knoptekst tegen een andere.</p>
+        <ul>
+          <li>De belofte boven de vouw tegen de huidige ondertitel</li>
+          <li>Het koopblok als geheel: citaat plus belofte plus risicostrook</li>
+          <li>De volledige nieuwe volgorde tegen de oude, sjabloonbreed</li>
+        </ul>
+        <div class="out">Resultaat: weten of het werkt, in plaats van hopen</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">06</span><h2 class="duo">Wat dit plan niet oplost,<span class="b">en waar het op rust.</span></h2></div>
+
+  <div class="note warn">
+    <h4>Drie dingen waar ik geen data voor heb</h4>
+    <p><strong>Scrolldiepte &mdash; inmiddels w&eacute;l bekend.</strong> Dit stond hier eerst als ontbrekend cijfer. Clarity geeft het nu: <strong>27,52%</strong> gemiddelde scrolldiepte op de productpagina&rsquo;s. Dat heeft de volgorde niet omgegooid maar wel ingekort &mdash; van zeventien blokken naar negen, met vier ervan als accordeon in het koopvak. Zie deel 01, de meting.</p>
+    <p><strong>Het klantcitaat in slot 1.</strong> Voor de Groom Guard staat er een echte in blok 01 (Yven, vijf sterren op Trustpilot, 8 juli 2026). Voor de rest van het assortiment moet dit per product langs: van de honderd recentste Nederlandse Trustpilot-reviews gaan er vijf over het product zelf, de rest over levering en service. Waar geen productreview bestaat, blijft slot 1 leeg.</p>
+    <p><strong>Correctie: die &euro;52,85 klopt w&eacute;l.</strong> Ik schreef dat het bedrag nergens op uitkwam. Fout: de Shave Package Ultimate staat in Shopify op &euro;89,95 met <code>compare_at_price</code> &euro;142,80, en dat verschil is exact &euro;52,85. Ik had alleen de losse artikelprijzen opgeteld en niet de doorgestreepte prijs van het pakket zelf opgehaald. De bundelkaart in blok 05 gebruikt nu gewoon <code>compare_at_price</code>, net als de andere twee kaarten.</p>
+  </div>
+
+  <div class="note">
+    <h4>Waar het w&eacute;l op rust</h4>
+    <p>De Shopify-trechter over 90 dagen, omzet per product en per variant, alle metafields per product uitgelezen, de complete teardown van de ruwe HTML, de apparaat- en browserverdeling uit ContentSquare, TrendTrack op drie concurrenten, en het VoC-dossier van 120+ citaten. Dat is meer dan waar de meeste redesigns op gebouwd worden.</p>
+  </div>
+</section>
+
+<div class="foot">
+  <strong>Waar dit vandaan komt.</strong> Blokvolgorde en koopblok: <code>rapporten/pdp-sjabloon.html</code> en <code>rapporten/blokken/01-above-the-fold.html</code>. Bevindingen op de live pagina: <code>rapporten/productpagina-redesign.html</code>. Concurrentie: <code>rapporten/concurrentie-aanbod-en-ads.html</code> plus <code>audits/concurrentie-analyse.html</code> op de homepage-tak. Themaconventies: <code>theme/README.md</code>, ook op de homepage-tak.<br><br>
+  <strong>Cijfers.</strong> Prijzen, varianten, voorraad, productType en metafields: Shopify Admin API, 23 augustus 2026. Omzet en bestellingen: Shopify-analytics, 90 dagen. Reviewscore en -aantal: Trustpilot &mdash; TrustScore 4,4 &middot; 966 reviews, opgehaald 23 augustus 2026. Concurrentiecijfers: TrendTrack, 23 augustus 2026.
+</div>
+
+</div>

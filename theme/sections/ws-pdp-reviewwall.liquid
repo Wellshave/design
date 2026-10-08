@@ -1,0 +1,221 @@
+{%- comment -%}
+  Wellshave — productpagina: de reviewwand.
+
+  Links het winkelcijfer op Trustpilot, rechts twee kolommen echte reviews die
+  langzaam langs elkaar schuiven, de ene omhoog en de andere omlaag. Op de
+  telefoon worden het twee rijen die zijwaarts lopen.
+
+  De reviews zijn blokken in deze sectie, overgenomen van Trustpilot: titel,
+  tekst en naam zoals de klant ze schreef. Alleen de witruimte is opgeschoond.
+  Begint de tekst met dezelfde woorden als de titel, dan blijft de titel leeg:
+  Trustpilot maakt een titel vaak van de eerste woorden, en dan staat dezelfde
+  zin twee keer op de kaart.
+
+  Het bewegen is CSS. Elke kolom staat er twee keer in, de tweede keer voor
+  schermlezers verborgen, en schuift precies één lijst op; daarna begint hij
+  ongemerkt opnieuw. Met de muis erop of de focus erin staat hij stil, en de
+  knop onder de link zet hem helemaal stil (WCAG 2.2.2: beweging die langer
+  dan vijf seconden duurt moet je kunnen stoppen). Wie in het systeem minder
+  beweging heeft gevraagd, krijgt een gewone lijst om door te scrollen.
+{%- endcomment -%}
+
+{{ 'ws-pdp-reviewwall.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign s = section.settings
+  assign rw_id = section.id
+
+  assign tp_vol = 5
+  assign tp_half = false
+  if s.sterren == '4.5'
+    assign tp_vol = 4
+    assign tp_half = true
+  elsif s.sterren == '4'
+    assign tp_vol = 4
+  endif
+  assign tp_halve = tp_vol | plus: 1
+
+  comment
+    De kaarten gaan om en om naar links en rechts, zodat beide kolommen even
+    vol zijn en de eerste twee reviews bovenaan naast elkaar staan.
+  endcomment
+  assign links = ''
+  assign rechts = ''
+  assign aantal = 0
+  for blok in section.blocks
+    if blok.settings.tekst == blank
+      continue
+    endif
+    assign rest = aantal | modulo: 2
+    if rest == 0
+      assign links = links | append: blok.id | append: ','
+    else
+      assign rechts = rechts | append: blok.id | append: ','
+    endif
+    assign aantal = aantal | plus: 1
+  endfor
+  assign links_ids = links | split: ','
+  assign rechts_ids = rechts | split: ','
+-%}
+
+{%- capture tp_ster_pad -%}M0-10 2.9-3.1 10.5-3.1 4.4 1.6 6.6 9 0 4.6-6.6 9-4.4 1.6-10.5-3.1-2.9-3.1Z{%- endcapture -%}
+
+{%- if aantal > 0 -%}
+<section class="ws-rw"
+         aria-labelledby="ws-rw-kop-{{ rw_id }}"
+         style="--rw-grond:{{ s.grond }};--rw-paneel:{{ s.paneel }};--rw-tempo:{{ s.snelheid }}s;--rw-top:{{ s.marge_top }}px;--rw-bot:{{ s.marge_bot }}px">
+  <div class="ws-rw-rail">
+    <div class="ws-rw-paneel">
+
+      <div class="ws-rw-intro">
+        {%- if s.eyebrow != blank -%}<p class="ws-rw-ey">{{ s.eyebrow }}</p>{%- endif -%}
+        <h2 class="ws-rw-kop" id="ws-rw-kop-{{ rw_id }}">{{ s.titel }}</h2>
+
+        <div class="ws-rw-cijfer">
+          {%- if s.oordeel != blank -%}<b>{{ s.oordeel }}</b>{%- endif -%}
+          <svg class="ws-rw-tp" viewBox="0 0 98 18" width="98" height="18" role="img" aria-label="{{ s.sterren_label | escape }}">
+            <defs>
+              <linearGradient id="ws-rw-half-{{ rw_id }}">
+                <stop offset="50%" stop-color="#008859"/><stop offset="50%" stop-color="#DCDCE6"/>
+              </linearGradient>
+            </defs>
+            {%- for i in (1..5) -%}
+              {%- assign x = forloop.index0 | times: 20 -%}
+              {%- if i <= tp_vol -%}
+                {%- assign vlak = '#008859' -%}
+              {%- elsif tp_half and i == tp_halve -%}
+                {%- capture vlak -%}url(#ws-rw-half-{{ rw_id }}){%- endcapture -%}
+              {%- else -%}
+                {%- assign vlak = '#DCDCE6' -%}
+              {%- endif -%}
+              <g transform="translate({{ x }} 0)"><rect width="18" height="18" fill="{{ vlak }}"/><path transform="translate(9 9) scale(.6)" d="{{ tp_ster_pad }}" fill="#fff"/></g>
+            {%- endfor -%}
+          </svg>
+          <span class="ws-rw-merk">
+            <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path fill="#008859" d="m12 2 2.9 6.9 7.6.1-6 4.6 2.2 7.4L12 16.6 5.3 21l2.2-7.4-6-4.6 7.6-.1L12 2Z"/></svg>Trustpilot
+          </span>
+        </div>
+        {%- if s.score_regel != blank -%}<p class="ws-rw-sub">{{ s.score_regel }}</p>{%- endif -%}
+
+        <div class="ws-rw-acties">
+          {%- if s.link_label != blank and s.link_url != blank -%}
+            <a class="ws-rw-link" href="{{ s.link_url }}" target="_blank" rel="noopener">{{ s.link_label }}</a>
+          {%- endif -%}
+          <button type="button" class="ws-rw-pauze" data-ws-rw-pauze aria-pressed="false"
+                  data-pauze="{{ s.pauze_label | escape }}" data-speel="{{ s.speel_label | escape }}">
+            <svg class="ws-rw-ic-pauze" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13M16 5.5v13" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+            <svg class="ws-rw-ic-speel" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.6v12.8L18.4 12z" fill="currentColor"/></svg>
+            <span>{{ s.pauze_label }}</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="ws-rw-wand" data-ws-rw-wand>
+        {%- for baan in (1..2) -%}
+          {%- if baan == 1 -%}
+            {%- assign ids = links_ids -%}{%- assign richting = 'omlaag' -%}
+          {%- else -%}
+            {%- assign ids = rechts_ids -%}{%- assign richting = 'omhoog' -%}
+          {%- endif -%}
+          {%- if ids.size == 0 -%}{%- continue -%}{%- endif -%}
+
+          {%- capture kaarten -%}
+            {%- for id in ids -%}
+              {%- for blok in section.blocks -%}
+                {%- if blok.id != id -%}{%- continue -%}{%- endif -%}
+                {%- assign b = blok.settings -%}
+                <li>
+                  <article class="ws-rw-kaart" {{ blok.shopify_attributes }}>
+                    {%- if b.titel != blank -%}<h3 class="ws-rw-kaart-kop">{{ b.titel }}</h3>{%- endif -%}
+                    <p class="ws-rw-kaart-tekst">{{ b.tekst }}</p>
+                    <div class="ws-rw-kaart-voet">
+                      <span class="ws-rw-wie">
+                        <span class="ws-rw-letter" aria-hidden="true">{{ b.naam | default: '?' | strip | slice: 0 | upcase }}</span>
+                        <span>{{ b.naam }}</span>
+                      </span>
+                      <svg class="ws-rw-tp ws-rw-tp-klein" viewBox="0 0 98 18" width="74" height="14" role="img" aria-label="{{ b.sterren }}/5">
+                        {%- for i in (1..5) -%}
+                          {%- assign x = forloop.index0 | times: 20 -%}
+                          <g transform="translate({{ x }} 0)"><rect width="18" height="18" fill="{% if i <= b.sterren %}#008859{% else %}#DCDCE6{% endif %}"/><path transform="translate(9 9) scale(.6)" d="{{ tp_ster_pad }}" fill="#fff"/></g>
+                        {%- endfor -%}
+                      </svg>
+                    </div>
+                  </article>
+                </li>
+              {%- endfor -%}
+            {%- endfor -%}
+          {%- endcapture -%}
+
+          <div class="ws-rw-baan ws-rw-{{ richting }}">
+            <ul class="ws-rw-lijst">{{ kaarten }}</ul>
+            <ul class="ws-rw-lijst" aria-hidden="true" inert>{{ kaarten | replace: ' role="img"', ' aria-hidden="true"' }}</ul>
+          </div>
+        {%- endfor -%}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var sectie = document.getElementById('ws-rw-kop-{{ rw_id }}');
+    if (!sectie) return;
+    sectie = sectie.closest('.ws-rw');
+    var knop = sectie.querySelector('[data-ws-rw-pauze]');
+    var wand = sectie.querySelector('[data-ws-rw-wand]');
+    if (!knop || !wand) return;
+    var label = knop.querySelector('span');
+    knop.addEventListener('click', function () {
+      var stil = knop.getAttribute('aria-pressed') !== 'true';
+      knop.setAttribute('aria-pressed', stil ? 'true' : 'false');
+      wand.classList.toggle('ws-rw-stil', stil);
+      label.textContent = stil ? knop.getAttribute('data-speel') : knop.getAttribute('data-pauze');
+    });
+  })();
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "WS PDP — Reviewwand",
+  "tag": "div",
+  "class": "ws-pdp-reviewwall-sectie",
+  "enabled_on": { "templates": ["product"] },
+  "max_blocks": 24,
+  "settings": [
+    { "type": "paragraph", "content": "Echte Trustpilot-reviews, één blok per review. Neem titel, tekst en naam over zoals de klant ze schreef. Begint de tekst met dezelfde woorden als de titel, laat de titel dan leeg. Het cijfer links hoort bij de hele winkel; houd het gelijk aan het koopvak bovenaan." },
+    { "type": "text", "id": "eyebrow", "label": "Bovenregel", "default": "Reviews" },
+    { "type": "text", "id": "titel", "label": "Kop", "default": "Wat klanten zeggen over Wellshave" },
+    { "type": "header", "content": "Trustpilot-cijfer" },
+    { "type": "text", "id": "oordeel", "label": "Oordeel", "default": "Uitstekend" },
+    { "type": "select", "id": "sterren", "label": "Aantal sterren", "info": "Trustpilot rondt af op halve sterren: een 4,4 laat vier hele en een halve zien.", "options": [ { "value": "4", "label": "4" }, { "value": "4.5", "label": "4,5" }, { "value": "5", "label": "5" } ], "default": "4.5" },
+    { "type": "text", "id": "sterren_label", "label": "Sterren voor schermlezers", "default": "4,4 van 5 sterren op Trustpilot" },
+    { "type": "text", "id": "score_regel", "label": "Regel onder de sterren", "default": "TrustScore 4,4 uit 5 · 1000+ reviews" },
+    { "type": "text", "id": "link_label", "label": "Linktekst", "default": "Lees alle reviews op Trustpilot" },
+    { "type": "url", "id": "link_url", "label": "Link", "info": "Het Trustpilot-profiel: https://nl.trustpilot.com/review/wellshave.nl" },
+    { "type": "header", "content": "Beweging" },
+    { "type": "range", "id": "snelheid", "label": "Eén ronde duurt", "min": 30, "max": 120, "step": 5, "unit": "s", "default": 60 },
+    { "type": "text", "id": "pauze_label", "label": "Knop: stilzetten", "default": "Pauzeer" },
+    { "type": "text", "id": "speel_label", "label": "Knop: weer laten lopen", "default": "Laat lopen" },
+    { "type": "header", "content": "Kleur en ruimte" },
+    { "type": "color", "id": "grond", "label": "Achtergrond", "default": "#FFFFFF" },
+    { "type": "color", "id": "paneel", "label": "Paneel", "default": "#F2EEE7" },
+    { "type": "range", "id": "marge_top", "label": "Ruimte boven", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 56 },
+    { "type": "range", "id": "marge_bot", "label": "Ruimte onder", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 56 }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "text", "id": "titel", "label": "Titel", "info": "Leeg laten als de tekst met dezelfde woorden begint." },
+        { "type": "textarea", "id": "tekst", "label": "Tekst" },
+        { "type": "text", "id": "naam", "label": "Naam", "default": "Klant" },
+        { "type": "range", "id": "sterren", "label": "Sterren", "min": 1, "max": 5, "step": 1, "default": 5 }
+      ]
+    }
+  ],
+  "presets": [{ "name": "WS PDP — Reviewwand" }]
+}
+{% endschema %}

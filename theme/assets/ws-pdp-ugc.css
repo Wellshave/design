@@ -1,0 +1,176 @@
+/* Wellshave — productpagina, blok 03: de UGC-band.
+   Bron: rapporten/blokken/02-omschrijving-specs-upsell-betaling.html (.ugc)
+   Elke klasse begint met ws-ugc zodat thema-CSS er niet doorheen lekt. */
+.ws-ugc{--u-zwart:#FFFFFF;--u-cream:#F4F2EE;--u-gold:#E9BE72;--u-gold2:#C79A52;
+  --u-brons:#B0742A;--u-groen:#008859;--u-blauw:#2E7CF6;
+  /* wit blijft wit waar het op vídeo ligt; de doos eromheen krijgt inkt */
+  --u-w72:rgba(255,255,255,.72);--u-w52:rgba(255,255,255,.52);--u-w38:rgba(255,255,255,.38);
+  --u-b72:rgba(20,18,15,.72);--u-b52:rgba(20,18,15,.64);--u-b38:rgba(20,18,15,.60);
+  --u-lijn:rgba(20,18,15,.10);
+  --u-ink:#14120F;--u-ink60:rgba(20,18,15,.62);--u-ink40:rgba(20,18,15,.45);--u-ink10:rgba(20,18,15,.10);
+  display:block;background:var(--u-cream);
+  padding:var(--ws-ugc-top,28px) 16px var(--ws-ugc-bot,28px);
+  font-family:'MontserratEG','Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
+.ws-ugc *,.ws-ugc *::before,.ws-ugc *::after{box-sizing:border-box}
+.ws-ugc img{max-width:100%}
+.ws-ugc-rail{max-width:1240px;margin:0 auto}
+
+/* ---- kop ---- */
+.ws-ugc-hd{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:34px;align-items:end;margin-bottom:20px}
+/* de vertrouwdregel: drie ronde gezichten, een blauw vinkje, een getal */
+.ws-ugc-vt{display:flex;align-items:center;gap:10px;margin:0}
+.ws-ugc-gz{position:relative;display:inline-flex;align-items:center;flex:none}
+.ws-ugc-gz i{display:block;width:30px;height:30px;border-radius:50%;overflow:hidden;
+  border:2px solid var(--u-cream);background:var(--u-ink10)}
+.ws-ugc-gz i + i{margin-left:-10px}
+.ws-ugc-gz img{display:block;width:100%;height:100%;object-fit:cover}
+.ws-ugc-gz em{position:absolute;right:-4px;top:-3px;width:15px;height:15px;border-radius:50%;
+  background:var(--u-blauw);border:2px solid var(--u-cream);display:grid;place-items:center}
+.ws-ugc-gz em svg{width:8px;height:8px;fill:none;stroke:#fff;stroke-width:3.6;
+  stroke-linecap:round;stroke-linejoin:round}
+.ws-ugc-vtt{font-size:13px;font-weight:400;color:var(--u-ink60)}
+.ws-ugc h2{margin:12px 0 0;font-size:clamp(26px,3.6vw,40px);font-weight:500;letter-spacing:-.028em;
+  line-height:1.05;color:var(--u-ink)}
+.ws-ugc h2 b{display:block;font-weight:600;color:var(--u-brons);
+  background-image:linear-gradient(100deg,#B0742A 0%,#8C5A1A 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.ws-ugc-alle{font-size:13.5px;font-weight:600;color:var(--u-ink);text-decoration:none;
+  border-bottom:1.5px solid var(--u-brons);padding-bottom:3px;white-space:nowrap}
+
+/* ---- de donkere doos ---- */
+.ws-ugc-doos{background:var(--u-zwart);border:1px solid var(--u-lijn);border-radius:22px;
+  box-shadow:0 1px 2px rgba(20,18,15,.04),0 18px 40px -30px rgba(20,18,15,.26);
+  padding:24px 24px 20px;position:relative;overflow:hidden}
+.ws-ugc-merk{position:absolute;right:22px;top:20px;width:150px;height:150px;pointer-events:none;
+  background:rgba(20,18,15,.045);
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  -webkit-mask-position:center;mask-position:center;
+  -webkit-mask-size:contain;mask-size:contain}
+
+.ws-ugc-band{position:relative;z-index:1;display:flex;gap:13px;overflow-x:auto;
+  scroll-snap-type:x mandatory;scrollbar-width:none;--h:clamp(330px,31vw,430px)}
+.ws-ugc-band::-webkit-scrollbar{display:none}
+.ws-ugc-band:focus-visible{outline:2px solid var(--u-gold);outline-offset:4px;border-radius:16px}
+
+.ws-ugc-tegel{flex:none;margin:0;position:relative;height:var(--h);width:calc(var(--h)*9/16);
+  border-radius:16px;overflow:hidden;background:#141312;scroll-snap-align:start}
+.ws-ugc-tegel.ws-groot{width:calc(var(--h)*0.79)}
+.ws-ugc-v{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;
+  background:#141312}
+
+/* Zodra hij speelt gaan de sluier, de knop en het tekstvak weg: de bezoeker
+   kijkt dan naar de video, niet naar onze opmaak erbovenop. */
+.ws-ugc-sluier{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(11,11,10,.5) 0%,rgba(11,11,10,0) 30%,
+    rgba(11,11,10,.55) 62%,rgba(11,11,10,.9) 100%)}
+.ws-ugc-tegel.ws-speelt .ws-ugc-sluier,
+.ws-ugc-tegel.ws-speelt .ws-ugc-play,
+.ws-ugc-tegel.ws-speelt .ws-ugc-duur,
+.ws-ugc-tegel.ws-speelt .ws-ugc-vak{opacity:0;pointer-events:none}
+
+.ws-ugc-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:54px;height:54px;border-radius:50%;border:0;padding:0;cursor:pointer;
+  background:var(--u-gold);color:#0B0B0A;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 20px rgba(0,0,0,.4);transition:opacity .18s ease,transform .18s ease}
+.ws-ugc-play svg{width:20px;height:20px;margin-left:3px}
+.ws-ugc-tegel.ws-groot .ws-ugc-play{width:66px;height:66px}
+.ws-ugc-tegel.ws-groot .ws-ugc-play svg{width:24px;height:24px}
+@media (hover:hover){
+  .ws-ugc-play:hover{transform:translate(-50%,-50%) scale(1.06)}
+}
+.ws-ugc-play:focus-visible{outline:2px solid #fff;outline-offset:3px}
+
+.ws-ugc-duur{position:absolute;right:10px;top:10px;font-size:11px;font-weight:700;color:#fff;
+  background:rgba(11,11,10,.66);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);
+  border-radius:100px;padding:4px 9px;font-variant-numeric:tabular-nums;
+  pointer-events:none;transition:opacity .18s ease}
+
+.ws-ugc-vak{position:absolute;left:12px;right:12px;bottom:12px;margin:0;
+  pointer-events:none;transition:opacity .18s ease}
+.ws-ugc-vak b{display:block;font-size:14px;font-weight:700;color:#fff;line-height:1.2}
+.ws-ugc-vak p{margin:5px 0 0;font-size:12.5px;line-height:1.4;color:var(--u-w72)}
+.ws-ugc-tegel.ws-groot .ws-ugc-vak b{font-size:16px}
+.ws-ugc-vak p.ws-ugc-cit{margin:6px 0 0;font-size:17px;font-weight:500;letter-spacing:-.02em;
+  line-height:1.3;color:#fff}
+.ws-ugc-ver{display:flex;align-items:center;gap:7px;margin-top:10px;font-size:12px;color:var(--u-w72)}
+.ws-ugc-ver svg{width:15px;height:15px;flex:none;color:var(--u-blauw)}
+
+/* ---- balk onder de band ---- */
+.ws-ugc-bal{position:relative;z-index:1;display:grid;grid-template-columns:auto minmax(0,1fr) auto;
+  gap:16px;align-items:center;margin-top:18px;padding-top:16px;border-top:1px solid var(--u-lijn)}
+.ws-ugc-pijl{width:42px;height:42px;border-radius:50%;border:1px solid var(--u-lijn);
+  background:#fff;color:var(--u-ink);padding:0;cursor:pointer;
+  display:flex;align-items:center;justify-content:center}
+.ws-ugc-pijl svg{width:17px;height:17px}
+@media (hover:hover){
+  .ws-ugc-pijl:hover{border-color:rgba(20,18,15,.34)}
+}
+.ws-ugc-pijl:focus-visible{outline:2px solid var(--u-brons);outline-offset:2px}
+.ws-ugc-mid{display:flex;align-items:center;gap:14px;min-width:0}
+.ws-ugc-nr{font-size:12.5px;font-weight:600;color:var(--u-ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+.ws-ugc-nr em{font-style:normal}
+.ws-ugc-nr span{color:var(--u-b38);font-weight:400}
+.ws-ugc-voort{flex:1 1 auto;height:4px;border-radius:100px;background:rgba(20,18,15,.12);
+  overflow:hidden;min-width:40px}
+.ws-ugc-voort i{display:block;height:100%;width:22%;border-radius:100px;
+  background:linear-gradient(90deg,#F5D18A,#C79A52)}
+
+/* ---- koopstrook ---- */
+.ws-ugc-koop{position:relative;z-index:1;margin-top:18px;padding-top:18px;
+  border-top:1px solid var(--u-lijn);
+  display:grid;grid-template-columns:56px minmax(0,1fr) auto auto;gap:18px;align-items:center}
+.ws-ugc-thumb{width:56px;height:56px;border-radius:12px;background:#F4F2EE;
+  border:1px solid var(--u-lijn);overflow:hidden;flex:none}
+.ws-ugc-thumb img{width:100%;height:100%;object-fit:contain;display:block}
+.ws-ugc-nm{min-width:0}
+.ws-ugc-nm b{display:block;font-size:16px;font-weight:500;letter-spacing:-.02em;color:var(--u-ink)}
+.ws-ugc-rij{display:flex;align-items:center;gap:7px;margin-top:6px}
+.ws-ugc-tp{width:14px;height:14px;fill:var(--u-groen);flex:none}
+.ws-ugc-rij em{font-style:normal;font-size:12.5px;font-weight:600;color:var(--u-ink)}
+.ws-ugc-nm p{margin:5px 0 0;font-size:12.5px;color:var(--u-b52)}
+.ws-ugc-prijs{text-align:right;white-space:nowrap}
+.ws-ugc-prijs b{display:block;font-size:26px;font-weight:500;letter-spacing:-.02em;color:var(--u-ink)}
+.ws-ugc-prijs .ws-ugc-munt{margin-right:.09em;font-weight:500}
+.ws-ugc-vrd{display:flex;align-items:center;gap:7px;justify-content:flex-end;margin-top:5px;
+  font-size:12px;color:var(--u-b52)}
+.ws-ugc-vrd i{width:7px;height:7px;border-radius:50%;background:var(--u-groen);flex:none}
+.ws-ugc-knop{text-align:center}
+.ws-ugc-knop form{margin:0}
+.ws-ugc-knop button{display:inline-flex;align-items:center;gap:10px;border:0;cursor:pointer;
+  background:linear-gradient(180deg,#F0C97F 0%,#D3A055 100%);color:#0B0B0A;
+  font-family:inherit;font-size:13.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  border-radius:12px;padding:16px 26px;white-space:nowrap}
+.ws-ugc-knop button[disabled]{opacity:.5;cursor:not-allowed}
+.ws-ugc-knop button svg{width:16px;height:16px}
+.ws-ugc-knop > span{display:flex;align-items:center;gap:7px;justify-content:center;margin-top:8px;
+  font-size:11.5px;color:var(--u-b52)}
+.ws-ugc-knop > span svg{width:14px;height:14px;color:var(--u-brons)}
+
+@media (max-width:1080px){
+  .ws-ugc-hd{grid-template-columns:1fr;gap:14px;align-items:start}
+  /* anders rekt de streep onder de link over de hele breedte */
+  .ws-ugc-alle{justify-self:start}
+}
+@media (max-width:900px){
+  .ws-ugc{padding-left:12px;padding-right:12px}
+  .ws-ugc-doos{padding:16px;border-radius:18px}
+  .ws-ugc-merk{width:96px;height:96px;right:14px;top:12px}
+  .ws-ugc-band{--h:clamp(300px,84vw,360px);gap:10px}
+  .ws-ugc-tegel.ws-groot{width:calc(var(--h)*9/16)}
+  .ws-ugc-tegel.ws-groot .ws-ugc-play{top:36%}
+  .ws-ugc-vak p.ws-ugc-cit{font-size:15px}
+  .ws-ugc-koop{grid-template-columns:48px minmax(0,1fr);gap:12px 14px}
+  .ws-ugc-thumb{width:48px;height:48px}
+  .ws-ugc-prijs{grid-column:1/-1;text-align:left;display:flex;align-items:baseline;gap:12px}
+  .ws-ugc-prijs b{font-size:23px}
+  .ws-ugc-vrd{margin-top:0}
+  .ws-ugc-knop{grid-column:1/-1}
+  .ws-ugc-knop button{width:100%;justify-content:center}
+  .ws-ugc-bal{gap:12px}
+  .ws-ugc-pijl{width:38px;height:38px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .ws-ugc *{transition:none!important;scroll-behavior:auto!important}
+}

@@ -1,0 +1,370 @@
+{%- comment -%}
+  Wellshave — productpagina, blok 03: de UGC-band.
+  Bron: rapporten/blokken/02-omschrijving-specs-upsell-betaling.html (.ugc)
+
+  Twee bronnen, in deze volgorde:
+
+  1. custom.ugc_videos — een lijst metaobjecten van het type ugc_video. Die
+     dragen naast het bestand ook de naam, de regel, het vinkje en welke
+     tegel uitgelicht is.
+  2. custom.ugc_video_list — de kale lijst videobestanden die er al ligt.
+     Daar zit geen tekst bij, dus de tegels tonen alleen beeld, duur en
+     speelknop. Zo werkt de band vandaag al, en kan hij per product
+     bijgewerkt worden zonder dat er iets kapotgaat.
+
+  De poster en de duur komen altijd uit het bestand zelf; die hoeft niemand
+  in te typen.
+{%- endcomment -%}
+
+{{ 'ws-pdp-ugc.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign s = section.settings
+  assign mf = product.metafields.custom
+
+  assign rijk = false
+  assign lijst = mf.ugc_videos.value
+  if lijst != blank
+    assign rijk = true
+  else
+    assign lijst = mf.ugc_video_list.value
+  endif
+-%}
+
+{%- if lijst != blank -%}
+  {%- comment -%}
+    Eerst tellen hoeveel er echt een bruikbaar bestand hebben. Een metaobject
+    zonder video zou anders een lege tegel opleveren.
+  {%- endcomment -%}
+  {%- assign aantal = 0 -%}
+  {%- for item in lijst -%}
+    {%- if rijk -%}{%- assign v = item.video.value -%}{%- else -%}{%- assign v = item -%}{%- endif -%}
+    {%- if v != blank -%}{%- assign aantal = aantal | plus: 1 -%}{%- endif -%}
+  {%- endfor -%}
+
+  {%- if aantal > 0 -%}
+    {%- assign uid = section.id -%}
+
+    {%- comment -%}
+      De drie gezichten boven de kop. Staan er geen foto's ingesteld, dan
+      pakt hij de posters van de eerste drie video's: dat zijn de klanten
+      zelf, dus er hoeft niets geupload te worden.
+    {%- endcomment -%}
+    {%- capture posters -%}
+      {%- assign teller_p = 0 -%}
+      {%- for item in lijst -%}
+        {%- if rijk -%}{%- assign vp = item.video.value -%}{%- else -%}{%- assign vp = item -%}{%- endif -%}
+        {%- if vp != blank and teller_p < 3 -%}
+          {%- assign teller_p = teller_p | plus: 1 -%}
+          {%- if teller_p > 1 %},{% endif %}{{ vp.preview_image | image_url: width: 120, height: 120, crop: 'center' }}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+    {%- assign poster_lijst = posters | strip | split: ',' -%}
+
+    {%- liquid
+      if s.foto1 != blank
+        assign gz1 = s.foto1 | image_url: width: 120, height: 120, crop: 'center'
+      else
+        assign gz1 = poster_lijst[0] | strip
+      endif
+      if s.foto2 != blank
+        assign gz2 = s.foto2 | image_url: width: 120, height: 120, crop: 'center'
+      else
+        assign gz2 = poster_lijst[1] | strip
+      endif
+      if s.foto3 != blank
+        assign gz3 = s.foto3 | image_url: width: 120, height: 120, crop: 'center'
+      else
+        assign gz3 = poster_lijst[2] | strip
+      endif
+    -%}
+    <section class="ws-ugc" data-ws-ugc
+             style="--ws-ugc-top:{{ s.marge_top }}px;--ws-ugc-bot:{{ s.marge_bot }}px">
+      <div class="ws-ugc-rail">
+
+        <div class="ws-ugc-hd">
+          <div>
+            {%- comment -%}
+              Boven de kop: drie ronde gezichten met een blauw vinkje, en
+              daarnaast het aantal. Meer niet — de tegels doen de rest.
+            {%- endcomment -%}
+            {%- if gz1 != blank or s.vertrouwd != blank -%}
+              <p class="ws-ugc-vt">
+                {%- if gz1 != blank -%}
+                  <span class="ws-ugc-gz">
+                    <i><img src="{{ gz1 }}" alt="" loading="lazy" width="30" height="30"></i>
+                    {%- if gz2 != blank -%}<i><img src="{{ gz2 }}" alt="" loading="lazy" width="30" height="30"></i>{%- endif -%}
+                    {%- if gz3 != blank -%}<i><img src="{{ gz3 }}" alt="" loading="lazy" width="30" height="30"></i>{%- endif -%}
+                    <em aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.6 4.6 4.6L19 7.4"/></svg></em>
+                  </span>
+                {%- endif -%}
+                {%- if s.vertrouwd != blank -%}<span class="ws-ugc-vtt">{{ s.vertrouwd }}</span>{%- endif -%}
+              </p>
+            {%- endif -%}
+            {%- if s.kop != blank -%}
+              <h2>{{ s.kop }}{% if s.kop2 != blank %}<b>{{ s.kop2 }}</b>{% endif %}</h2>
+            {%- endif -%}
+          </div>
+          {%- if s.alle_label != blank and s.alle_url != blank -%}
+            <a class="ws-ugc-alle" href="{{ s.alle_url }}">{{ s.alle_label }} &rarr;</a>
+          {%- endif -%}
+        </div>
+
+        <div class="ws-ugc-doos">
+          {%- if s.merk != blank -%}
+            <span class="ws-ugc-merk" aria-hidden="true"
+                  style="-webkit-mask-image:url({{ s.merk | image_url: width: 300 }});mask-image:url({{ s.merk | image_url: width: 300 }})"></span>
+          {%- endif -%}
+
+          <div class="ws-ugc-band" data-ws-band tabindex="0"
+               role="group" aria-label="{{ s.kop | default: 'Klantvideo&rsquo;s' | escape }}">
+            {%- assign teller = 0 -%}
+            {%- for item in lijst -%}
+              {%- liquid
+                if rijk
+                  assign v = item.video.value
+                  assign naam = item.name
+                  assign regel = item.line
+                  assign geverifieerd = item.verified
+                  assign groot = item.featured
+                else
+                  assign v = item
+                  assign naam = ''
+                  assign regel = ''
+                  assign geverifieerd = false
+                  assign groot = false
+                endif
+              -%}
+              {%- if v != blank -%}
+                {%- assign teller = teller | plus: 1 -%}
+                {%- comment -%}
+                  Is er niets uitgelicht, dan is de eerste tegel de brede. Zo
+                  heeft de band altijd een begin en niet twaalf gelijke blokjes.
+                {%- endcomment -%}
+                {%- if rijk == false and teller == 1 -%}{%- assign groot = true -%}{%- endif -%}
+
+                {%- comment -%} duur staat in milliseconden {%- endcomment -%}
+                {%- assign sec = v.duration | divided_by: 1000 -%}
+                {%- assign mm = sec | divided_by: 60 -%}
+                {%- assign ss = sec | modulo: 60 -%}
+
+                <figure class="ws-ugc-tegel{% if groot %} ws-groot{% endif %}" data-ws-tegel>
+                  <video class="ws-ugc-v" playsinline preload="none"
+                         {% if v.preview_image != blank %}poster="{{ v.preview_image | image_url: width: 720 }}"{% endif %}
+                         {% if v.alt != blank %}aria-label="{{ v.alt | escape }}"{% endif %}>
+                    {%- for bron in v.sources -%}
+                      {%- if bron.format == 'mp4' -%}
+                        <source src="{{ bron.url }}" type="{{ bron.mime_type }}">
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </video>
+
+                  <span class="ws-ugc-sluier"></span>
+                  {%- if sec > 0 -%}
+                    <span class="ws-ugc-duur">{{ mm }}:{{ ss | prepend: '0' | slice: -2, 2 }}</span>
+                  {%- endif -%}
+
+                  <button type="button" class="ws-ugc-play" data-ws-play
+                          aria-label="{{ s.speel_label | default: 'Speel de video af' | escape }}{% if naam != blank %} — {{ naam | escape }}{% endif %}">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.2v13.6l11-6.8z"/></svg>
+                  </button>
+
+                  {%- if naam != blank or regel != blank -%}
+                    <figcaption class="ws-ugc-vak">
+                      {%- if naam != blank -%}<b>{{ naam }}</b>{%- endif -%}
+                      {%- if regel != blank -%}
+                        <p{% if groot %} class="ws-ugc-cit"{% endif %}>{{ regel }}</p>
+                      {%- endif -%}
+                      {%- if geverifieerd and s.koper_label != blank -%}
+                        <span class="ws-ugc-ver">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.6 14.7 5l3.5-.4 1 3.4 3 1.9-1.5 3.2 1.5 3.2-3 1.9-1 3.4-3.5-.4L12 21.4 9.3 19l-3.5.4-1-3.4-3-1.9L3.3 11 1.8 7.8l3-1.9 1-3.4L9.3 5z"/><path d="m8.6 12.2 2.3 2.3 4.5-4.6"/></svg>
+                          {{ s.koper_label }}
+                        </span>
+                      {%- endif -%}
+                    </figcaption>
+                  {%- endif -%}
+                </figure>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+
+          {%- if aantal > 1 -%}
+            <div class="ws-ugc-bal">
+              <button type="button" class="ws-ugc-pijl" data-ws-vorige aria-label="{{ s.vorige_label | default: 'Vorige video' | escape }}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg>
+              </button>
+              <div class="ws-ugc-mid">
+                <span class="ws-ugc-nr"><em data-ws-nu>01</em> <span>/ {{ aantal | prepend: '0' | slice: -2, 2 }}</span></span>
+                <span class="ws-ugc-voort"><i data-ws-voort></i></span>
+              </div>
+              <button type="button" class="ws-ugc-pijl" data-ws-volgende aria-label="{{ s.volgende_label | default: 'Volgende video' | escape }}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+          {%- endif -%}
+
+          {%- if s.koop_tonen -%}
+            {%- assign cv = product.selected_or_first_available_variant -%}
+            <div class="ws-ugc-koop">
+              <span class="ws-ugc-thumb">
+                {%- if product.featured_image != blank -%}
+                  {{ product.featured_image | image_url: width: 160 | image_tag: alt: '', loading: 'lazy' }}
+                {%- endif -%}
+              </span>
+              <div class="ws-ugc-nm">
+                <b>{{ product.title }}</b>
+                {%- if s.tp_regel != blank -%}
+                  <span class="ws-ugc-rij">
+                    <svg class="ws-ugc-tp" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 6 20.5l1.3-6.8-5-4.6 6.8-.8z"/></svg>
+                    <em>{{ s.tp_regel }}</em>
+                  </span>
+                {%- endif -%}
+                {%- if s.koop_regel != blank -%}<p>{{ s.koop_regel }}</p>{%- endif -%}
+              </div>
+              <div class="ws-ugc-prijs">
+                <b>{% if s.munt != blank %}<span class="ws-ugc-munt">{{ s.munt }}</span>{% endif %}{% render 'price-formated', price: cv.price %}</b>
+                {%- if cv.available and s.voorraad_label != blank -%}
+                  <span class="ws-ugc-vrd"><i></i>{{ s.voorraad_label }}</span>
+                {%- endif -%}
+              </div>
+              <div class="ws-ugc-knop">
+                <form action="{{ routes.cart_add_url }}" method="post">
+                  <input type="hidden" name="id" value="{{ cv.id }}">
+                  <input type="hidden" name="quantity" value="1">
+                  <button type="submit"{% unless cv.available %} disabled{% endunless %}>
+                    {%- if cv.available -%}
+                      {{ s.knop_label }}
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+                    {%- else -%}
+                      {{ s.knop_uitverkocht }}
+                    {%- endif -%}
+                  </button>
+                </form>
+                {%- if s.proberen_label != blank -%}
+                  <span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8 20 5.6v6.6c0 4.6-3.2 8.8-8 11.4-4.8-2.6-8-6.8-8-11.4V5.6z"/><path d="m8.6 12.2 2.3 2.3 4.5-4.6"/></svg>
+                    {{ s.proberen_label }}
+                  </span>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </section>
+
+    <script>
+    (function(){
+      var wortel = document.currentScript.previousElementSibling;
+      if (!wortel || !wortel.hasAttribute('data-ws-ugc')) { return; }
+      var band = wortel.querySelector('[data-ws-band]');
+      if (!band) { return; }
+      var tegels = Array.prototype.slice.call(band.querySelectorAll('[data-ws-tegel]'));
+      var nu = wortel.querySelector('[data-ws-nu]');
+      var voort = wortel.querySelector('[data-ws-voort]');
+
+      /* Een tik op de speelknop start die video en zet de rest stil. Twee
+         video's tegelijk horen is het snelste wat een bezoeker wegjaagt. */
+      tegels.forEach(function (tegel) {
+        var knop = tegel.querySelector('[data-ws-play]');
+        var video = tegel.querySelector('video');
+        if (!knop || !video) { return; }
+        knop.addEventListener('click', function () {
+          tegels.forEach(function (a) {
+            var b = a.querySelector('video');
+            if (b && b !== video) { b.pause(); a.classList.remove('ws-speelt'); }
+          });
+          tegel.classList.add('ws-speelt');
+          video.controls = true;
+          var p = video.play();
+          if (p && p.catch) { p.catch(function () { }); }
+        });
+        video.addEventListener('pause', function () { tegel.classList.remove('ws-speelt'); });
+        video.addEventListener('ended', function () {
+          tegel.classList.remove('ws-speelt');
+          video.controls = false;
+          video.load();
+        });
+      });
+
+      /* De teller en de balk volgen de scrollpositie, niet een eigen index:
+         vegen met de vinger telt dan net zo goed mee als de pijlen. */
+      function bij() {
+        var links = band.scrollLeft;
+        var loop = band.scrollWidth - band.clientWidth;
+        var i = 0, best = Infinity;
+        tegels.forEach(function (t, n) {
+          var d = Math.abs(t.offsetLeft - band.offsetLeft - links);
+          if (d < best) { best = d; i = n; }
+        });
+        if (nu) { nu.textContent = ('0' + (i + 1)).slice(-2); }
+        if (voort) {
+          var deel = loop > 0 ? links / loop : 0;
+          var breed = Math.max(100 / tegels.length, 8);
+          voort.style.width = breed + '%';
+          voort.style.transform = 'translateX(' + (deel * (100 / breed) * 100 - deel * 100) + '%)';
+        }
+      }
+
+      var wacht = null;
+      band.addEventListener('scroll', function () {
+        if (wacht) { return; }
+        wacht = requestAnimationFrame(function () { wacht = null; bij(); });
+      }, { passive: true });
+
+      function stap(richting) {
+        var breedte = tegels[0] ? tegels[0].getBoundingClientRect().width + 13 : band.clientWidth;
+        band.scrollBy({ left: richting * breedte, behavior: 'smooth' });
+      }
+      var vorige = wortel.querySelector('[data-ws-vorige]');
+      var volgende = wortel.querySelector('[data-ws-volgende]');
+      if (vorige) { vorige.addEventListener('click', function () { stap(-1); }); }
+      if (volgende) { volgende.addEventListener('click', function () { stap(1); }); }
+
+      bij();
+    }());
+    </script>
+  {%- endif -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Wellshave PDP — UGC-band",
+  "tag": "section",
+  "class": "ws-pdp-ugc-sectie",
+  "settings": [
+    { "type": "header", "content": "De kop" },
+    { "type": "text", "id": "vertrouwd", "label": "Vertrouwdregel", "info": "Staat boven de kop, naast de drie gezichten. Leeg = geen regel.", "default": "Vertrouwd door 200.000+" },
+    { "type": "image_picker", "id": "foto1", "label": "Gezicht 1", "info": "Leeg = de poster van de eerste video." },
+    { "type": "image_picker", "id": "foto2", "label": "Gezicht 2", "info": "Leeg = de poster van de tweede video." },
+    { "type": "image_picker", "id": "foto3", "label": "Gezicht 3", "info": "Leeg = de poster van de derde video." },
+    { "type": "text", "id": "kop", "label": "Kop — eerste regel", "default": "Geen studio." },
+    { "type": "text", "id": "kop2", "label": "Kop — tweede regel (in goud)", "default": "Gewoon hun badkamer." },
+    { "type": "text", "id": "alle_label", "label": "Link rechtsboven" },
+    { "type": "url", "id": "alle_url", "label": "Link rechtsboven — bestemming" },
+    { "type": "image_picker", "id": "merk", "label": "Watermerk in de doos", "info": "Wordt als vlak van 5% wit getekend. Laat leeg voor geen watermerk." },
+
+    { "type": "header", "content": "De tegels" },
+    { "type": "text", "id": "koper_label", "label": "Vinkje bij een geverifieerde koper", "default": "Geverifieerde koper" },
+    { "type": "text", "id": "speel_label", "label": "Voorleeslabel op de speelknop", "default": "Speel de video af" },
+    { "type": "text", "id": "vorige_label", "label": "Voorleeslabel vorige", "default": "Vorige video" },
+    { "type": "text", "id": "volgende_label", "label": "Voorleeslabel volgende", "default": "Volgende video" },
+
+    { "type": "header", "content": "De koopstrook" },
+    { "type": "checkbox", "id": "koop_tonen", "label": "Koopstrook tonen", "default": true },
+    { "type": "text", "id": "koop_regel", "label": "Regel onder de naam", "default": "Het apparaat uit deze video's" },
+    { "type": "text", "id": "munt", "label": "Valutateken voor de prijs", "info": "Zelfde als in het koopvak. Leeg = geen teken.", "default": "€" },
+    { "type": "text", "id": "tp_regel", "label": "Beoordelingsregel", "info": "Winkelbreed, want per product is er geen score.", "default": "4,4 uit 970+ Trustpilot-reviews" },
+    { "type": "text", "id": "voorraad_label", "label": "Voorraadregel", "default": "Op voorraad" },
+    { "type": "text", "id": "knop_label", "label": "Knop", "default": "In winkelwagen" },
+    { "type": "text", "id": "knop_uitverkocht", "label": "Knop — uitverkocht", "default": "Uitverkocht" },
+    { "type": "text", "id": "proberen_label", "label": "Regel onder de knop", "default": "100 dagen proberen" },
+
+    { "type": "header", "content": "Ruimte" },
+    { "type": "range", "id": "marge_top", "min": 0, "max": 80, "step": 4, "unit": "px", "label": "Ruimte boven", "default": 28 },
+    { "type": "range", "id": "marge_bot", "min": 0, "max": 80, "step": 4, "unit": "px", "label": "Ruimte onder", "default": 28 }
+  ],
+  "presets": [{ "name": "Wellshave PDP — UGC-band" }]
+}
+{% endschema %}

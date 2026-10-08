@@ -1,0 +1,150 @@
+<title>De volgorde</title>
+<style>
+:root{
+  --ink:#111111;--ink-80:rgba(17,17,17,.8);--ink-60:rgba(17,17,17,.6);
+  --ink-40:rgba(17,17,17,.4);--ink-10:rgba(17,17,17,.10);
+  --paper:#FFFFFF;--sand:#F5F1EA;--sand-deep:#EDE6DA;
+  --carbon:#0B0B0A;--gold:#F5D18A;--bronze:#BC813E;--alert:#E61C1C;
+  --grad-gold-tekst:linear-gradient(100deg,#B0742A 0%,#8C5A1A 100%);
+  --r-m:18px;--rail:1140px;--read:660px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--sand);color:var(--ink);
+  font-family:"Montserrat",-apple-system,BlinkMacSystemFont,Arial,sans-serif;
+  font-size:16.5px;line-height:1.7;-webkit-font-smoothing:antialiased}
+h2{margin:0;text-wrap:balance}
+.eyebrow{font-weight:800;letter-spacing:.2em;text-transform:uppercase;font-size:10.5px;color:var(--ink-40)}
+.note{margin:24px 0 0;border-radius:var(--r-m);padding:19px 23px;background:var(--paper);
+  border:1px solid var(--ink-10);border-left:3px solid var(--bronze)}
+.note h4{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--bronze);margin:0 0 8px}
+.note p{margin:0;font-size:15.5px;line-height:1.6;color:var(--ink-80)}
+.note p+p{margin-top:10px}
+strong{font-weight:700}
+.vg{max-width:var(--rail);margin:0 auto;padding:0 24px 110px}
+.vg-mast{padding:60px 0 28px;border-bottom:2px solid var(--ink)}
+.vg-mast h2{font-size:clamp(31px,4.9vw,50px);margin:13px 0 0;font-weight:900;letter-spacing:-.025em;line-height:1.06}
+.vg-mast .lede{max-width:var(--read);margin:17px 0 0;font-size:17.5px;color:var(--ink-80);line-height:1.6}
+.vg-tel{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.vg-tel span{font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;background:var(--paper);
+  border:1px solid var(--ink-10);border-radius:100px;padding:6px 13px;color:var(--ink-60)}
+.vg-tel span.af{background:#E5EBE1;border-color:transparent;color:#2E6B3E}
+
+.vouwlabel{display:flex;align-items:center;gap:14px;margin:34px 0 14px}
+.vouwlabel b{font-size:10.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--bronze);white-space:nowrap}
+.vouwlabel i{flex:1;height:1px;background:var(--ink-10)}
+.vouwlabel.knip b{color:var(--alert)}
+.vouwlabel.knip i{background:repeating-linear-gradient(90deg,var(--alert) 0 7px,transparent 7px 14px);height:2px}
+
+.stapel{display:flex;flex-direction:column;gap:9px}
+.blok{display:grid;grid-template-columns:8px 46px minmax(0,1fr) auto;gap:0 16px;align-items:start;
+  background:var(--paper);border:1px solid var(--ink-10);border-radius:14px;overflow:hidden;
+  transition:border-color .18s ease,transform .18s ease}
+.blok:hover{border-color:rgba(188,129,62,.45);transform:translateY(-1px)}
+.blok .grond{align-self:stretch}
+.blok .grond.wit{background:#EDE9E1}
+.blok .grond.zand{background:#D8C9A8}
+.blok .grond.donker{background:#191816}
+.blok .nr{font-size:13px;font-weight:800;color:var(--ink-40);padding:17px 0 17px 14px;
+  font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.blok .mid{padding:15px 0 16px;min-width:0}
+.blok .mid b{display:block;font-size:16.5px;font-weight:700;letter-spacing:-.02em;line-height:1.25}
+.blok .mid p{margin:4px 0 0;font-size:14px;line-height:1.5;color:var(--ink-60)}
+.blok .mid code{font-size:11.5px;background:var(--sand-deep);border-radius:4px;padding:1.5px 6px;
+  color:var(--ink-60);white-space:nowrap}
+.blok .mid .bron{margin-top:8px;font-size:11.5px;color:var(--ink-40);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  word-break:break-word}
+.blok .mid .bron .nw{font-family:inherit;font-size:9px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
+  background:#E5EBE1;color:#2E6B3E;border-radius:100px;padding:2px 7px;margin-left:4px}
+.blok .rt{display:flex;flex-direction:column;align-items:flex-end;gap:6px;padding:16px 16px 16px 0;white-space:nowrap}
+.blok .rt em{font-style:normal;font-size:9px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
+  padding:4px 9px;border-radius:100px}
+.blok .rt em.kern{background:var(--carbon);color:var(--gold)}
+.blok .rt em.uit{background:var(--sand-deep);color:var(--ink-60)}
+.blok .rt em.af{background:#E5EBE1;color:#2E6B3E}
+.blok .rt em.todo{background:transparent;border:1px solid var(--ink-10);color:var(--ink-40)}
+.blok .rt .gr{font-size:9px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-40)}
+
+@media (max-width:760px){
+  .blok{grid-template-columns:6px minmax(0,1fr);gap:0 13px}
+  .blok .nr{grid-column:2;padding:14px 14px 0 0;font-size:11.5px}
+  .blok .mid{grid-column:2;padding:2px 14px 14px 0}
+  .blok .rt{grid-column:2;flex-direction:row;align-items:center;flex-wrap:wrap;padding:0 14px 14px 0}
+}
+
+/* ---- de heldentoets ---- */
+.held{margin:56px 0 0;padding-top:34px;border-top:2px solid var(--ink)}
+.held > .eyebrow{color:var(--bronze)}
+.held h3{margin:12px 0 0;font-size:clamp(24px,3.4vw,34px);font-weight:900;letter-spacing:-.028em;
+  line-height:1.08}
+.held h3 b{display:block;font-weight:900;color:#B0742A}
+.held .lede2{max-width:var(--read);margin:15px 0 0;font-size:16px;line-height:1.6;color:var(--ink-80)}
+.held-net{display:flex;flex-wrap:wrap;gap:7px;margin:26px 0 0}
+.held-chip{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+  width:60px;height:56px;border-radius:12px;border:1px solid var(--ink-10);background:var(--paper)}
+.held-chip b{font-size:13px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.held-chip span{font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-40)}
+.held-chip.jij{background:#E5EBE1;border-color:transparent}
+.held-chip.jij b{color:#2E6B3E} .held-chip.jij span{color:#2E6B3E}
+.held-chip.wij{background:#F7E0DE;border-color:transparent}
+.held-chip.wij b{color:#C0261C} .held-chip.wij span{color:#C0261C}
+.held-uit{display:flex;gap:16px;flex-wrap:wrap;margin:14px 0 0;font-size:12.5px;color:var(--ink-60)}
+.held-uit span{display:inline-flex;align-items:center;gap:7px}
+.held-uit i{width:11px;height:11px;border-radius:4px;flex:none}
+.held-uit i.j{background:#E5EBE1;box-shadow:inset 0 0 0 1px #2E6B3E}
+.held-uit i.w{background:#F7E0DE;box-shadow:inset 0 0 0 1px #C0261C}
+
+</style>
+<div class="vg">
+<header class="vg-mast"><span class="eyebrow">De volgorde &middot; negen blokken &middot; 24 augustus 2026</span><h2>Zo loopt de pagina,<br>van boven naar beneden.</h2><p class="lede">De volgorde ligt vast en wordt nooit per product herschikt. Blok 06 staat op elk product op plek 06. Wat per product verschilt is de inhoud in de velden rechts &mdash; nooit de plek. Het streepje in de linkerkolom laat de grond zien: zand, wit of donker, om beurten, zodat je bij het scrollen voelt dat er een nieuw blok begint.</p><div class="vg-tel"><span class="af">5 van 9 getekend</span><span>5 kern</span><span>4 uitbreiding</span><span>4 accordeons</span></div></header>
+<div class="vouwlabel"><b>Boven de vouw</b><i></i></div>
+<div class="stapel"><div class="blok"><span class="grond zand"></span><span class="nr">01</span><div class="mid"><b>Koopblok</b><p>Gallerij plus het koopvak, en onderin <strong>vier accordeons</strong>: omschrijving &amp; specificaties, wat er in de doos zit, verzending &amp; retour, garantie en proberen.</p><div class="bron">custom.buybox_quote &middot; hero_promise &middot; product_usp &middot; product_offer &middot; specification &middot; included_box &middot; shipping_information</div></div><div class="rt"><em class="kern">kern</em><em class="af">getekend</em><span class="gr">zand</span></div></div></div><div class="vouwlabel knip"><b>&darr; hier begint de vouw</b><i></i></div>
+<div class="stapel"><div class="blok"><span class="grond wit"></span><span class="nr">02</span><div class="mid"><b>Geruststrook</b><p>Vier items naast elkaar: proberen, garantie, verzending, levertijd. Winkelbreed, op elk product hetzelfde.</p><div class="bron">custom.store_usp</div></div><div class="rt"><em class="kern">kern</em><em class="todo">nog te tekenen</em><span class="gr">wit</span></div></div><div class="blok"><span class="grond donker"></span><span class="nr">03</span><div class="mid"><b>UGC-video&rsquo;s</b><p>Band van verticale video&rsquo;s met de koopstrook eronder. Meteen na de geruststrook, want een vijfde van het verkeer komt uit een app.</p><div class="bron">custom.ugc_videos &middot; nieuw</div></div><div class="rt"><em class="uit">uitbreiding</em><em class="af">getekend</em><span class="gr">donker</span></div></div><div class="blok"><span class="grond wit"></span><span class="nr">04</span><div class="mid"><b>Toepassing per zone</b><p>Rooster van zones met beeld per zone. Laat zien waar het apparaat voor is, zonder er een betoog van te maken.</p><div class="bron">custom.use_case_title &middot; image_with_text</div></div><div class="rt"><em class="uit">uitbreiding</em><em class="todo">nog te tekenen</em><span class="gr">wit</span></div></div><div class="blok"><span class="grond donker"></span><span class="nr">05</span><div class="mid"><b>Het aanbodblok</b><p>Drie kaarten: instap, uitgelicht, beste waarde. Besparing op elke kaart, cadeau op de middelste.</p><div class="bron">custom.upgrade_products</div></div><div class="rt"><em class="kern">kern</em><em class="af">getekend</em><span class="gr">donker</span></div></div><div class="blok"><span class="grond zand"></span><span class="nr">06</span><div class="mid"><b>Vergelijk de modellen</b><p>Tabel, wij gemarkeerd, kolom per model. De jaarkosten van mesjes zijn hier een rij in plaats van een eigen blok.</p><div class="bron">custom.compare_table &middot; compare_products &middot; yearly_cost</div></div><div class="rt"><em class="uit">uitbreiding</em><em class="todo">nog te tekenen</em><span class="gr">zand</span></div></div><div class="blok"><span class="grond wit"></span><span class="nr">07</span><div class="mid"><b>Maak het compleet</b><p>Vijf accessoires naast elkaar. De aanvulling, niet de ladder.</p><div class="bron">custom.cart_upsell</div></div><div class="rt"><em class="uit">uitbreiding</em><em class="af">getekend</em><span class="gr">wit</span></div></div><div class="blok"><span class="grond zand"></span><span class="nr">08</span><div class="mid"><b>Beoordelingen</b><p>De Trustpilot-muur met de sterrenverdeling. Op plek acht, want het korte bewijs staat al in het koopvak en in blok 03.</p><div class="bron">Trustpilot-widget</div></div><div class="rt"><em class="kern">kern</em><em class="af">getekend</em><span class="gr">zand</span></div></div><div class="blok"><span class="grond wit"></span><span class="nr">09</span><div class="mid"><b>Veelgestelde vragen</b><p>Uitklappers, bezwaar-eerst gesorteerd. Het laatste blok; daaronder alleen de voettekst en de plakkende koopbalk.</p><div class="bron">custom.faq</div></div><div class="rt"><em class="kern">kern</em><em class="todo">nog te tekenen</em><span class="gr">wit</span></div></div></div>
+<div class="note" style="margin-top:26px"><h4>Twee regels die de volgorde overeind houden</h4><p><strong>Kernblokken zijn verplicht, uitbreidingen verbergen zich.</strong> Een kernblok zonder inhoud is een gat in het betoog en moet dus gevuld. Een uitbreiding die leeg is, rendert niet &mdash; en de blokken eronder schuiven gewoon op. Voor een vervangmes van &euro;14,95 valt zo de halve pagina weg zonder dat er iets kapotgaat.</p><p><strong>De grond wisselt om beurten.</strong> Zand, wit, donker &mdash; nooit twee dezelfde achter elkaar behalve waar twee donkere blokken bewust aan elkaar plakken (er staan er nu nergens twee dezelfde achter elkaar). Dat ritme is het enige dat een bezoeker vertelt dat hij een nieuw argument in gaat, zonder dat er een streep of een kop voor nodig is.</p></div>
+
+<div class="held">
+  <span class="eyebrow">De heldentoets &middot; 24 augustus 2026</span>
+  <h3>Wie staat er centraal,<b>jij of wij?</b></h3>
+  <p class="lede2">Donald Millers uitgangspunt is dat de klant de held is en het merk de gids. Hieronder staat per blok wie er centraal staat. Van de achttien blokken gingen er zes over ons; van de negen die overblijven is dat er nog <strong>&eacute;&eacute;n</strong>. Dat is geen toeval: de blokken die zijn weggevouwen waren bijna allemaal de blokken over onszelf.</p>
+  <div class="held-net"><span class="held-chip jij" title="Koopblok"><b>01</b><span>jij</span></span><span class="held-chip jij" title="Geruststrook"><b>02</b><span>jij</span></span><span class="held-chip jij" title="UGC-video&rsquo;s"><b>03</b><span>jij</span></span><span class="held-chip jij" title="Zones"><b>04</b><span>jij</span></span><span class="held-chip jij" title="Aanbodblok"><b>05</b><span>jij</span></span><span class="held-chip jij" title="Vergelijken"><b>06</b><span>jij</span></span><span class="held-chip wij" title="Maak compleet"><b>07</b><span>wij</span></span><span class="held-chip jij" title="Beoordelingen"><b>08</b><span>jij</span></span><span class="held-chip jij" title="FAQ"><b>09</b><span>jij</span></span></div>
+  <div class="held-uit"><span><i class="j"></i>gaat over de klant</span><span><i class="w"></i>gaat over ons</span></div>
+
+  <div class="note warn">
+    <h4>Eerst eerlijk over het kader</h4>
+    <p><strong>StoryBrand zit niet in de kennisbank van de landingspagina-skill.</strong> Die draait op Sanwarwala, Mark en Priestley. Wat hieronder over Miller staat is mijn eigen redenering. Waar het samenvalt met de kennisbank noem ik dat erbij &mdash; en dat gebeurt vaker dan je zou denken, want &laquo;cognitieve last&raquo;, &laquo;clear beats clever&raquo; en Marks &laquo;aftrekken werkt vaak beter dan optellen&raquo; zeggen in andere woorden hetzelfde.</p>
+    <p>Je citaat &laquo;te veel reis haakt een klant erop af&raquo; is een parafrase; ik heb het boek niet en kan de zin niet nazoeken. De onderliggende gedachte &mdash; verwarring kost je de klant &mdash; staat w&eacute;l in de kennisbank, letterlijk als &laquo;a confused mind never buys&raquo;.</p>
+  </div>
+
+  <div class="note win">
+    <h4>Van achttien naar negen, en waar de rest gebleven is</h4>
+    <p>Er is niets geschrapt wat een bezwaar wegnam. Vier blokken zijn <strong>accordeons in het koopvak</strong> geworden: omschrijving en specificaties, wat er in de doos zit, verzending en retour, garantie. Ze staan nu bovenaan in plaats van op plek twaalf tot vijftien, maar dichtgeklapt &mdash; wie ze nodig heeft vindt ze meteen, wie ze niet nodig heeft scrolt er niet doorheen. Dat is precies wat vijf van de zes concurrentiepagina&rsquo;s doen.</p>
+    <p>De rest: <em>zie waar je trimt</em> gaat op in de zones (04), de <em>jaarkosten van mesjes</em> worden een rij in de vergelijkingstabel (06), <em>Waarom Wellshave</em> vervalt, en de <em>afsluiter</em> wordt de plakkende koopbalk &mdash; die staat er de hele pagina al.</p>
+  </div>
+
+  <div class="note win">
+    <h4>Het mechanismeblok is helemaal weg</h4>
+    <p>Het ging van 189 woorden naar 35, en nu naar nul. Dat is de derde keer dat dit blok werd bijgesteld en de tweede keer dat je het ruis noemde &mdash; dan is bijstellen niet meer het antwoord. Wat het blok deed, deed het koopvak al: de USP-regel &laquo;SkinSafe&trade; keramische kop &mdash; glijdt over de huid zonder te happen&raquo; staat boven de vouw, met de uitleg in de accordeon eronder voor wie doorleest.</p>
+    <p><strong>E&eacute;n ding uit het blok mag niet meevallen.</strong> De categorie-herkadering &mdash; stop met scheren, begin met trimmen &mdash; is het enige waar Balzac en Balzy hun best schalende advertenties mee openen en waar niemand het op zijn eigen site doet. Die hoort nu in de ondertitel boven de vouw thuis, als regel, niet als sectie.</p>
+  </div>
+
+  <div class="note slecht">
+    <h4>Nergens staat wat het kost om niets te doen</h4>
+    <p>Miller heeft een <em>failure</em>-kant: wat gaat er mis als je niet handelt. Onze negen blokken hebben die niet. De jaarkostenrij in blok 06 komt het dichtst in de buurt, maar gaat over geld, niet over sneetjes. De kennisbank zegt hetzelfde vanuit een andere hoek: verlies voelt ongeveer twee keer zo zwaar als winst.</p>
+    <p>Dat mag geen tiende blok worden &mdash; dat zou de fout zijn die je net aanwees. E&eacute;n zin volstaat, en sinds blok 04 weg is blijft er &eacute;&eacute;n logische plek over: de ondertitel boven de vouw, dezelfde regel die de herkadering moet dragen.</p>
+  </div>
+
+  <div class="note warn">
+    <h4>Het resultaat staat nergens in beeld</h4>
+    <p>Dit is de scherpste bevinding uit de kennisbank zelf. Marks beeldcarrousel zet <strong>voor/na op plek twee</strong>, met de opmerking dat niets zo goed verkoopt. Wij hebben het bewijs (03 en 08) en het aanbod (05) &mdash; maar de bezoeker ziet nergens hoe het er&aacute;na uitziet. Nu het mechanismeblok weg is, is dat het enige beeld dat het verschil nog zou kunnen laten zien.</p>
+    <p>De goedkoopste plek is de gallerij in blok 01, niet een nieuw blok. Voorwaarde: het moet een echte foto zijn. Een gegenereerd voor/na is een verzonnen resultaat, en dat is precies de grens die de merklaag trekt tussen illustreren en bewijs fabriceren.</p>
+  </div>
+
+  <div class="note">
+    <h4>Negen, en dat is er geen te weinig</h4>
+    <p>De zes concurrentiepagina&rsquo;s die we naast elkaar hebben gelegd tellen 10, 8, 8, 6, 8 en 10 blokken onder de vouw. Gemiddeld 8,3, en <strong>geen enkele komt boven de tien</strong>. Wij zaten op zeventien, gingen naar tien, en staan nu op negen &mdash; onder het gemiddelde van de zes. Bij een scrolldiepte van 27,52% is dat geen verlies.</p>
+    <p>Wat buiten de negen valt en nog wel getekend is: <strong>de film in 16:9</strong>. Er is nu een plek vrij, dus als hij erin moet, kan dat zonder dat er iets anders uit hoeft. Dat is jouw keuze, niet de mijne &mdash; de eerlijke afweging blijft de film tegen de zones (04), want dat zijn de twee die hetzelfde doen: laten zien hoe het apparaat gebruikt wordt.</p>
+  </div>
+</div>
+
+</div>
+
+</div>
