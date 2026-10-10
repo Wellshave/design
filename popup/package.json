@@ -1,0 +1,19 @@
+{
+  "name": "wellshave-mystery-korting",
+  "private": true,
+  "type": "module",
+  "description": "Eigen vervanger van de Alia-popup: quiz, e-mail, unieke kortingscode, Klaviyo.",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:init": "wrangler d1 execute mystery-korting --remote --file=schema.sql",
+    "db:init:local": "wrangler d1 execute mystery-korting --local --file=schema.sql",
+    "test": "node --test --no-warnings test/"
+  },
+  "devDependencies": {
+    "wrangler": "^4.40.0"
+  },
+  "engines": {
+    "node": ">=22.13"
+  }
+}

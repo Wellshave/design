@@ -1,0 +1,37 @@
+name = "mystery-korting"
+main = "src/worker.js"
+compatibility_date = "2026-09-01"
+
+# Het popup-script en de beelden. Bestaat een bestand in public/, dan serveert Cloudflare
+# het direct; alles daarbuiten (de /api/-routes) gaat naar de worker.
+[assets]
+directory = "./public"
+binding = "ASSETS"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "mystery-korting"
+# Vul hier het id in dat `wrangler d1 create mystery-korting` teruggeeft.
+database_id = "VUL_IN_NA_WRANGLER_D1_CREATE"
+
+# Elk kwartier: mislukte Klaviyo-synchronisaties opnieuw proberen en codes nalopen
+# waarvan Shopify de aanmaak nog niet had bevestigd.
+[triggers]
+crons = ["*/15 * * * *"]
+
+[vars]
+SHOP = "wellshave.myshopify.com"
+# De korting waar elke unieke code onder komt te hangen (10%, alles combineerbaar,
+# elke code een keer bruikbaar). Zie README, stap 2.
+SHOPIFY_DISCOUNT_ID = "VUL_IN"
+SHOPIFY_API_VERSION = "2026-07"
+# Klaviyo-lijst "Newsletter": deze start de SGL | Welcome Flow.
+KLAVIYO_LIST_ID = "VvhaJW"
+CODE_PREFIX = "WS"
+ALLOWED_ORIGINS = "https://wellshave.com,https://www.wellshave.com,https://wellshave.nl,https://www.wellshave.nl,https://wellshave.myshopify.com"
+
+# Geheimen zet je met `wrangler secret put <NAAM>`, nooit in dit bestand:
+#   SHOPIFY_CLIENT_ID      uit de Shopify Dev Dashboard-app
+#   SHOPIFY_CLIENT_SECRET  idem
+#   KLAVIYO_PRIVATE_KEY    Klaviyo private API key
+#   STATS_KEY              zelfgekozen wachtwoord voor /api/stats
