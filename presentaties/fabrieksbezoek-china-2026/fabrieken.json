@@ -1,15 +1,88 @@
 {
   "bezoek_en": "October 2026",
   "bezoek_cn": "2026 年 10 月",
+  "bron": "bol.com via MarktMentor, 1 januari t/m 15 oktober 2026. Leverancier per EAN uit 'All produts list-WellShave' en 'Wellshave Open order' van WeSourcely.",
   "fabrieken": [
-    { "naam": "Global Bestway", "bestand": "Global-Bestway", "producten": [] },
-    { "naam": "iClipper", "bestand": "iClipper", "producten": [] },
-    { "naam": "FANKE", "bestand": "FANKE", "producten": [] }
-  ],
-  "voorbeeld_product": {
-    "product": "Groom Guard™ PRO",
-    "volume_2026": "12,000 pcs",
-    "prognose_2027": "18,000 pcs",
-    "focus": "Battery life · 电池续航"
-  }
+    {
+      "naam": "Global Best Way",
+      "bestand": "Global-Bestway",
+      "bedrijf_en": "Global Best Way Co., Ltd.",
+      "bedrijf_cn": "温州市贝威贸易有限公司",
+      "contact": "Jenny Huang",
+      "producten": [
+        { "product": "Nose trimmers (7 models)", "model": "WS-NT1 / WS-NT2", "verkocht": 25627, "retour": 2.1 },
+        { "product": "Body groomer Groom Guard", "model": "WS-BG1 / HT-6006", "verkocht": 2116, "retour": 2.3 },
+        { "product": "Head Shaver Deluxe", "model": "WS-SA1 / JK-8588A", "verkocht": 1581, "retour": 4.6 },
+        { "product": "Foil shaver Blade Baron", "model": "FK-706", "verkocht": 1307, "retour": 5.6 },
+        { "product": "Body groomer Flex Guard", "model": "WS-BG3", "verkocht": 1135, "retour": 5.2 },
+        { "product": "G-Series clipper, Shave Package, spare heads", "model": "", "verkocht": 1786, "retour": 4.1 }
+      ],
+      "reviews": {
+        "kritisch": 77,
+        "themas": [
+          { "en": "Weak cutting: hairs not caught", "cn": "修剪力度不足，剪不到毛发", "aantal": 28,
+            "quote_en": "After 10 minutes in my nose, just as many hairs as before.", "quote_cn": "在鼻子里用了10分钟，鼻毛还是和之前一样多。" },
+          { "en": "Broken within weeks or months", "cn": "使用数周或数月后损坏", "aantal": 18,
+            "quote_en": "Used it twice and the head was broken.", "quote_cn": "只用了两次，刀头就坏了。" },
+          { "en": "Caps, attachments, missing parts", "cn": "保护盖、配件安装与缺件", "aantal": 11,
+            "quote_en": "The cap got stuck on the head and was very hard to remove.", "quote_cn": "保护盖卡在刀头上，很难取下来。" },
+          { "en": "Skin irritation", "cn": "皮肤刺激", "aantal": 7,
+            "quote_en": "Welts on the skin right from the first use.", "quote_cn": "第一次使用就在皮肤上留下了红痕。" },
+          { "en": "Battery, charging and heat", "cn": "电池、充电与发热", "aantal": 6,
+            "quote_en": "After 3 months it no longer charges.", "quote_cn": "用了3个月后就无法充电了。" }
+        ]
+      }
+    },
+    {
+      "naam": "iClipper",
+      "bestand": "iClipper",
+      "bedrijf_en": "Ningbo iClipper Electric Appliance Co., Ltd.",
+      "bedrijf_cn": "宁波爱克利浦电器有限公司",
+      "contact": "Joe",
+      "producten": [
+        { "product": "Hair Clipper Pro", "model": "K73S", "verkocht": 2094, "retour": 2.5 },
+        { "product": "Hair Clipper Deluxe", "model": "K80S", "verkocht": 1428, "retour": 1.5 },
+        { "product": "Hair Clipper Elegant", "model": "K81S", "verkocht": 812, "retour": 2.0 },
+        { "product": "Detail Trimmer Sharpline", "model": "I73S", "verkocht": 295, "retour": 6.1 }
+      ],
+      "reviews": {
+        "kritisch": 6,
+        "themas": [
+          { "en": "Weight and grip", "cn": "重量与握感", "aantal": 2,
+            "quote_en": "Heavy for such a small device, and slippery in the hand.", "quote_cn": "机身小却偏重，握在手里还容易打滑。" },
+          { "en": "Battery drains fast", "cn": "电池掉电快", "aantal": 1,
+            "quote_en": "Started at 81%; after 10 minutes only 56% was left.", "quote_cn": "开始时电量为81%，使用10分钟后只剩56%。" },
+          { "en": "Blade gets hot", "cn": "刀头发热", "aantal": 1,
+            "quote_en": "The cutting part gets hot.", "quote_cn": "刀头会发烫。" },
+          { "en": "Comb length not accurate", "cn": "限位梳长度不准", "aantal": 1,
+            "quote_en": "The 3 mm comb is actually 1.5 mm.", "quote_cn": "3毫米的限位梳实际上只有1.5毫米。" }
+        ]
+      }
+    },
+    {
+      "naam": "FANKE",
+      "bestand": "FANKE",
+      "bedrijf_en": "Wenzhou Fanke Electric Appliance Co., Ltd.",
+      "bedrijf_cn": "温州凡科电器有限公司",
+      "contact": "He Ting 何婷",
+      "producten": [
+        { "product": "4-in-1 Shaver Elite", "model": "8600 / WS-SA3", "verkocht": 4567, "retour": 5.2 },
+        { "product": "6-in-1 Beard Trimmer Supreme", "model": "8988 / WS-BTG2", "verkocht": 3143, "retour": 3.5 },
+        { "product": "5-in-1 Beard Trimmer Pro", "model": "8188 / WS-BTG1", "verkocht": 2179, "retour": 4.3 }
+      ],
+      "reviews": {
+        "kritisch": 43,
+        "themas": [
+          { "en": "Shaving and trimming result", "cn": "剃须与修剪效果", "aantal": 25,
+            "quote_en": "It pulls the hairs out instead of cutting them. Painful.", "quote_cn": "它不是把胡须剪断，而是把胡须拔出来，很疼。" },
+          { "en": "Build quality and durability", "cn": "做工与耐用性", "aantal": 11,
+            "quote_en": "The shaving head is loose and falls out of the holder.", "quote_cn": "刀头不牢固，容易从刀架上掉出来。" },
+          { "en": "Battery and charging", "cn": "电池与充电", "aantal": 8,
+            "quote_en": "Runs 60 minutes at most instead of 90, and charging takes an hour longer.", "quote_cn": "最多只能用60分钟，而不是90分钟，充电还要多花一个小时。" },
+          { "en": "Missing or unsuitable accessories", "cn": "配件缺失或不合适", "aantal": 3,
+            "quote_en": "The charging cable was missing from the box.", "quote_cn": "包装里缺少充电线。" }
+        ]
+      }
+    }
+  ]
 }

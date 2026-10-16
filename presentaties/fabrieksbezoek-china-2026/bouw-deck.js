@@ -22,8 +22,13 @@ const CONFIG = JSON.parse(fs.readFileSync(path.join(__dirname, "fabrieken.json")
 const FACTORIES = CONFIG.fabrieken.map((f) => ({
   key: f.bestand,
   name: f.naam,
-  products: f.producten && f.producten.length ? f.producten.map((p) => [p.product, p.volume_2026, p.prognose_2027, p.focus]) : null,
+  companyEn: f.bedrijf_en,
+  companyCn: f.bedrijf_cn,
+  contact: f.contact,
+  products: f.producten,
+  reviews: f.reviews,
 }));
+const nf = (n) => n.toLocaleString("en-US");
 const VISIT_EN = CONFIG.bezoek_en;
 const VISIT_CN = CONFIG.bezoek_cn;
 
@@ -120,7 +125,7 @@ async function build(f) {
   {
     const s = pres.addSlide({ masterName: "Cover", sectionTitle: "Introduction" });
     s.addImage({ objectName: "Cover photo", path: A("cover.jpg"), x: 7.0, y: 0, w: W - 7.0, h: H, altText: "Wellshave hair clipper with battery display" });
-    s.addImage({ objectName: "Logo", path: A("logo_light.png"), x: 0.75, y: 0.75, w: 2.75, h: 0.44 });
+    s.addImage({ objectName: "Logo", path: A("logo_light.png"), x: 0.75, y: 0.75, w: 2.75, h: 0.44, altText: "Wellshave logo" });
     txt(s, "Eyebrow", [en("FACTORY VISIT", { bold: true, charSpacing: 4 }), en("   ·   "), cn("工厂拜访", { bold: true, charSpacing: 2 })],
       { x: 0.75, y: 2.05, w: 5.9, h: 0.35, fontSize: 12, color: C.accent2 });
     txt(s, "Title", "Introducing\nWellshave", { x: 0.75, y: 2.5, w: 6.0, h: 1.75, fontSize: 52, bold: true, color: C.background1, lineSpacingMultiple: 0.92 });
@@ -129,10 +134,12 @@ async function build(f) {
       en("Dutch men's grooming brand  ·  Netherlands & Belgium", { breakLine: true }),
       cn("荷兰男士理容品牌  ·  主营荷兰与比利时市场"),
     ], { x: 0.75, y: 5.1, w: 6.0, h: 0.75, fontSize: 14, color: C.accent3, paraSpaceAfter: 4 });
-    txt(s, "Visit", [
-      en("Prepared for  ", { color: C.accent3 }), en(f.name, { bold: true, color: C.background1 }), en("   ·   " + VISIT_EN, { color: C.accent3, breakLine: true }),
-      cn("拜访工厂：", { color: C.accent3 }), en(f.name, { bold: true, color: C.background1 }), cn("   ·   " + VISIT_CN, { color: C.accent3 }),
-    ], { x: 0.75, y: 6.35, w: 6.0, h: 0.6, fontSize: 12, paraSpaceAfter: 3 });
+    txt(s, "Prepared for", [
+      en("PREPARED FOR", { bold: true, charSpacing: 3, fontSize: 10, color: C.accent2 }), cn("   ·   拜访对象", { bold: true, fontSize: 10, color: C.accent2, breakLine: true }),
+      en(f.companyEn, { bold: true, fontSize: 13, color: C.background1, breakLine: true }),
+      cn(f.companyCn, { fontSize: 12, color: C.accent3 }), cn("   ·   " + f.contact, { fontSize: 12, color: C.accent3, breakLine: true }),
+      en(VISIT_EN, { fontSize: 11, color: C.accent3 }), cn("   ·   " + VISIT_CN, { fontSize: 11, color: C.accent3 }),
+    ], { x: 0.75, y: 5.9, w: 6.0, h: 1.15, paraSpaceAfter: 3 });
     s.addNotes(`Opening. Thank ${f.name} for hosting us. One sentence: who we are and why we came.`);
   }
 
@@ -177,7 +184,7 @@ async function build(f) {
     // right: stat grid
     const RX = 7.25, RW = W - M - RX, gap = 0.2, sw = (RW - gap) / 2, sh = 1.38;
     const stats = [
-      ["2021", "Founded", "成立年份"],
+      ["2021", "Founded in Helmond (NL)", "成立于荷兰海尔蒙德"],
       ["NL + BE", "Main markets", "主要市场"],
       ["≈ €2.5M", "bol.com revenue 2026", "bol.com 2026 年营业额"],
       ["≈ €0.6M", "Own webshop 2026", "自营官网 2026 年营业额"],
@@ -242,7 +249,7 @@ async function build(f) {
     s.addText("今日拜访团队", { placeholder: "cn" });
     const team = [
       ["DG", "Dustin Gibson", "Founder & CEO", "创始人兼首席执行官", "Brand vision, 2027 plans and final decisions", "品牌愿景、2027 年计划与最终决策"],
-      ["W", "Willem", "Creative Strategist & Operations Manager", "创意策略师兼运营经理", "Customer insights, product presentation and operations", "客户洞察、产品呈现与运营"],
+      ["WG", "Willem de Groot", "Creative Strategist & Operations Manager", "创意策略师兼运营经理", "Customer insights, product presentation and operations", "客户洞察、产品呈现与运营"],
       ["L", "Leo", "Supply Chain Manager, China", "中国供应链经理", "Your local contact for orders, quality and follow-up", "订单、品质与后续跟进的本地联系人"],
     ];
     const gap = 0.3, cw = (CW - 2 * gap) / 3, ch = 4.35, y = 1.95;
@@ -251,7 +258,7 @@ async function build(f) {
       card(s, `Team card ${i + 1}`, x, y, cw, ch, HEX.paper);
       s.addShape(pres.shapes.OVAL, { objectName: `Avatar ${i + 1}`, x: x + 0.35, y: y + 0.35, w: 1.0, h: 1.0, fill: { color: C.accent2 }, line: { type: "none" } });
       txt(s, `Initials ${i + 1}`, t[0], { x: x + 0.35, y: y + 0.35, w: 1.0, h: 1.0, fontSize: 24, bold: true, color: C.text2, align: "center", valign: "middle" });
-      txt(s, `Name ${i + 1}`, t[1], { x: x + 0.35, y: y + 1.55, w: cw - 0.7, h: 0.45, fontSize: 22, bold: true, color: C.text1 });
+      txt(s, `Name ${i + 1}`, t[1], { x: x + 0.35, y: y + 1.55, w: cw - 0.7, h: 0.45, fontSize: 20, bold: true, color: C.text1 });
       txt(s, `Role ${i + 1}`, [en(t[2], { bold: true, breakLine: true }), cn(t[3], { color: C.accent1 })],
         { x: x + 0.35, y: y + 2.05, w: cw - 0.7, h: 0.85, fontSize: 13, color: C.text1, paraSpaceAfter: 3 });
       s.addShape(pres.shapes.LINE, { objectName: `Divider ${i + 1}`, x: x + 0.35, y: y + 3.05, w: cw - 0.7, h: 0, line: { color: C.accent3, width: 1 } });
@@ -297,10 +304,87 @@ async function build(f) {
   }
 
   // =====================================================================
-  // 6. THREE PRIORITIES (dark)
+  // 6. YOUR PRODUCTS AT WELLSHAVE (data per factory)
+  // =====================================================================
+  pres.addSection({ title: "Your products" });
+  const sold = f.products.reduce((a, p) => a + p.verkocht, 0);
+  {
+    const s = pres.addSlide({ masterName: "Content Sand", sectionTitle: "Your products" });
+    s.addText("Your products at Wellshave", { placeholder: "title" });
+    s.addText([cn("贵司产品在 "), en("Wellshave", { fontFace: "Montserrat" }), cn(" 的表现")], { placeholder: "cn" });
+
+    const pad = [0.06, 0.15, 0.06, 0.15];
+    const head = (e, c, align = "left") => ({ text: [en(e, { bold: true, breakLine: true }), cn(c, { color: C.accent2 })], options: { fill: { color: C.text2 }, color: C.background1, fontSize: 12, valign: "middle", align, margin: pad } });
+    const cell = (t, o = {}) => ({ text: t, options: { fill: { color: C.background1 }, color: C.text1, fontSize: 13, valign: "middle", margin: pad, ...o } });
+    const tot = { fill: { color: C.accent3 }, bold: true };
+    const rows = [[head("Product", "产品"), head("Model", "型号"), head("Sold in 2026 *", "2026 年销量 *", "right"), head("Return rate *", "退货率 *", "right")]];
+    f.products.forEach((p) => rows.push([
+      cell(p.product, { bold: true }), cell(p.model || "", { color: C.accent6, fontSize: 12 }),
+      cell(nf(p.verkocht), { align: "right" }), cell(p.retour.toFixed(1) + "%", { align: "right" }),
+    ]));
+    rows.push([cell([en("Total  "), cn("合计")], tot), cell("", tot), cell(nf(sold), { ...tot, align: "right" }), cell("", tot)]);
+    const rh = f.products.length <= 4 ? 0.56 : 0.48;
+    s.addTable(rows, {
+      objectName: "Products table", x: M, y: 1.95, w: CW, colW: [5.0, 2.6, 2.3, 2.23], rowH: [0.72, ...rows.slice(1).map(() => rh)],
+      border: { type: "solid", pt: 1, color: HEX.sandDeep }, fontFace: "Montserrat",
+    });
+    const fy = 1.95 + 0.72 + (rows.length - 1) * rh + 0.22;
+    txt(s, "Data source", [
+      en("* bol.com, 1 January to 15 October 2026. Return rate counts all return reasons. Webshop sales not included. We share our 2027 forecast in the meeting.", { breakLine: true }),
+      cn("* 数据来源：bol.com，2026年1月1日至10月15日。退货率包含所有退货原因，不含官网销量。2027年预测将在会议中分享。"),
+    ], { x: M, y: fy, w: CW, h: 0.6, fontSize: 10, color: C.accent6, paraSpaceAfter: 3 });
+    s.addNotes("Only the products we buy through this partner. Sales are bol.com units (about 80% of our revenue).");
+  }
+
+  // =====================================================================
+  // 7. WHAT OUR CUSTOMERS TELL US (critical reviews per factory)
   // =====================================================================
   {
-    const s = pres.addSlide({ masterName: "Content Dark", sectionTitle: "The visit" });
+    const s = pres.addSlide({ masterName: "Content Sand", sectionTitle: "Your products" });
+    s.addText("What our customers tell us", { placeholder: "title" });
+    s.addText("客户反馈", { placeholder: "cn" });
+    const r = f.reviews, top = 1.8, areaH = 4.65;
+
+    // links: drie kerncijfers
+    const LW = 3.5;
+    card(s, "Stats card", M, top, LW, areaH, HEX.paper);
+    const stats = [
+      [nf(sold), "units sold on bol.com in 2026", "2026年bol.com销量"],
+      [String(r.kritisch), "critical reviews (1 to 3 stars)", "差评数（1至3星）"],
+      [(r.kritisch / sold * 1000).toFixed(1), "critical reviews per 1,000 units", "每千件产品的差评数"],
+    ];
+    stats.forEach((st, i) => {
+      const y = top + 0.32 + i * 1.45;
+      txt(s, `Stat value ${i + 1}`, st[0], { x: M + 0.3, y, w: LW - 0.5, h: 0.6, fontSize: 30, bold: true, color: C.text1 });
+      txt(s, `Stat label ${i + 1}`, [en(st[1], { breakLine: true }), cn(st[2], { color: C.accent1 })], { x: M + 0.3, y: y + 0.62, w: LW - 0.5, h: 0.5, fontSize: 11, color: C.accent6 });
+    });
+
+    // rechts: thema's met balk en een citaat
+    const RX = M + LW + 0.4, RW = W - M - RX, n = r.themas.length, rowH = Math.min(1.05, areaH / n);
+    const max = Math.max(...r.themas.map((t) => t.aantal));
+    r.themas.forEach((t, i) => {
+      const y = top + i * rowH;
+      txt(s, `Theme ${i + 1}`, [en(t.en, { bold: true }), cn("   " + t.cn, { color: C.accent1, fontSize: 12.5 })], { x: RX, y, w: RW - 0.9, h: 0.28, fontSize: 13.5, color: C.text1 });
+      txt(s, `Theme count ${i + 1}`, String(t.aantal), { x: RX + RW - 0.9, y: y - 0.02, w: 0.9, h: 0.32, fontSize: 16, bold: true, color: C.text1, align: "right" });
+      s.addShape(pres.shapes.ROUNDED_RECTANGLE, { objectName: `Theme track ${i + 1}`, x: RX, y: y + 0.33, w: RW, h: 0.1, rectRadius: 0.05, fill: { color: C.accent3 }, line: { type: "none" } });
+      s.addShape(pres.shapes.ROUNDED_RECTANGLE, { objectName: `Theme bar ${i + 1}`, x: RX, y: y + 0.33, w: Math.max(0.12, RW * t.aantal / max), h: 0.1, rectRadius: 0.05, fill: { color: C.accent1 }, line: { type: "none" } });
+      txt(s, `Theme quote ${i + 1}`, [
+        en("“" + t.quote_en + "”", { italic: true }), cn(t.quote_cn, { softBreakBefore: true, color: C.accent6 }),
+      ], { x: RX, y: y + 0.47, w: RW, h: 0.36, fontSize: 10, color: C.text1 });
+    });
+    txt(s, "Review source", [
+      en("Source: bol.com reviews with 1 to 3 stars on your products, January to October 2026. One review can mention several topics.", { breakLine: true }),
+      cn("数据来源：2026年1月至10月bol.com上贵司产品的1至3星评价，一条评价可能涉及多个问题。"),
+    ], { x: M, y: top + areaH + 0.1, w: CW, h: 0.36, fontSize: 9, color: C.accent6, paraSpaceAfter: 1 });
+    s.addNotes("Themes are tagged by hand from the bol.com review texts. Quotes are translated from Dutch.");
+  }
+
+  // =====================================================================
+  // 8. THREE PRIORITIES (dark)
+  // =====================================================================
+  pres.addSection({ title: "Working together" });
+  {
+    const s = pres.addSlide({ masterName: "Content Dark", sectionTitle: "Working together" });
     s.addText("What we want to improve together", { placeholder: "title" });
     s.addText("我们希望共同改进的方向", { placeholder: "cn" });
     const cols = [
@@ -351,50 +435,10 @@ async function build(f) {
   }
 
   // =====================================================================
-  // 7. OUR PRODUCTS WITH THIS FACTORY
-  // =====================================================================
-  pres.addSection({ title: "Our products with you" });
-  {
-    const s = pres.addSlide({ masterName: "Content Sand", sectionTitle: "Our products with you" });
-    s.addText(`Our products with ${f.name}`, { placeholder: "title" });
-    s.addText([cn("我们向 "), en(f.name, { fontFace: "Montserrat" }), cn(" 采购的产品")], { placeholder: "cn" });
-
-    const head = (e, c) => ({ text: [en(e, { bold: true, breakLine: true }), cn(c, { color: C.accent2 })], options: { fill: { color: C.text2 }, color: C.background1, fontSize: 12, valign: "middle", margin: [0.08, 0.15, 0.08, 0.15] } });
-    const ph = (t) => ({ text: t, options: { fill: { color: "F7EBD3" }, color: C.accent4, italic: true, fontSize: 13, valign: "middle", margin: [0.08, 0.15, 0.08, 0.15] } });
-    const val = (t) => ({ text: t, options: { fill: { color: C.background1 }, color: C.text1, fontSize: 13, valign: "middle", margin: [0.08, 0.15, 0.08, 0.15] } });
-    const rows = [[
-      head("Product", "产品"), head("Volume 2026", "2026 年采购量"), head("Forecast 2027", "2027 年预测"), head("Focus for this visit", "本次重点"),
-    ]];
-    const prods = f.products || [
-      ["[Product name]", "[pcs]", "[pcs]", "[quality / price / new model]"],
-      ["[Product name]", "[pcs]", "[pcs]", "[quality / price / new model]"],
-      ["[Product name]", "[pcs]", "[pcs]", "[quality / price / new model]"],
-    ];
-    prods.forEach((p) => rows.push(p.map((c) => (f.products ? val(c) : ph(c)))));
-    // Bij meer producten worden de rijen lager; past de toelichting er dan niet meer onder, dan vervalt die.
-    const rh = prods.length <= 4 ? 0.62 : 0.5;
-    s.addTable(rows, {
-      objectName: "Products table", x: M, y: 1.95, w: CW, colW: [4.0, 2.35, 2.35, 3.43], rowH: [0.72, ...prods.map(() => rh)],
-      border: { type: "solid", pt: 1, color: HEX.sandDeep }, fontFace: "Montserrat",
-    });
-
-    const ny = Math.max(4.85, 1.95 + 0.72 + prods.length * rh + 0.35);
-    if (ny + 1.0 <= 6.8) {
-      card(s, "Data note", M, ny, CW, 1.0, HEX.paper);
-      s.addImage({ objectName: "Data icon", data: await ic("MdOutlineInsights", HEX.bronze), x: M + 0.3, y: ny + 0.25, w: 0.5, h: 0.5 });
-      txt(s, "Data text", [
-        en("In the meeting we share the full data per product: ", { bold: true }), en("sales, customer reviews, returns and the main complaints.", { breakLine: true }),
-        cn("会议中我们将分享每款产品的完整数据：", { bold: true, color: C.accent4 }), cn("销量、客户评价、退货情况以及主要问题。", { color: C.accent4 }),
-      ], { x: M + 1.05, y: ny + 0.12, w: CW - 1.35, h: 0.76, valign: "middle", fontSize: 13, color: C.text1, paraSpaceAfter: 4 });
-    }
-    s.addNotes("Fill in the products and volumes for this factory before sharing.");
-  }
-
-  // =====================================================================
   // 8. SAMPLES, RECOMMENDATIONS, THANK YOU (dark)
   // =====================================================================
   {
-    const s = pres.addSlide({ masterName: "Content Dark", sectionTitle: "Our products with you" });
+    const s = pres.addSlide({ masterName: "Content Dark", sectionTitle: "Working together" });
     s.addText("What we would love to see", { placeholder: "title" });
     s.addText("我们最期待看到的", { placeholder: "cn" });
     const asks = [
