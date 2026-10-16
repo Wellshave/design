@@ -11,7 +11,7 @@ goud, Montserrat.
 | 3 | Assortiment in zes categorieën |
 | 4 | Het team: Dustin, Willem, Leo |
 | 5 | Waarom we komen, in vier stappen |
-| 6 | Drie verbeterpunten: kwaliteit (batterijen), prijs, nieuwe modellen |
+| 6 | Drie verbeterpunten: kwaliteit (batterijen, adapter met vaste kabel), prijs, nieuwe modellen |
 | 7 | Onze producten bij deze fabriek, met volumes 2026 en prognose 2027 |
 | 8 | Samples en aanraders, en bedankt |
 

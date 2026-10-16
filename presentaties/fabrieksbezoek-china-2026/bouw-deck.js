@@ -305,8 +305,8 @@ async function build(f) {
     s.addText("我们希望共同改进的方向", { placeholder: "cn" });
     const cols = [
       ["MdBatteryChargingFull", "Better quality", "更好的品质", "Focus: batteries & charging", "重点：电池与充电", [
-        ["Longer battery life per charge", "单次充电续航更长"],
-        ["Longer battery lifespan", "电池使用寿命更长"],
+        ["Longer battery life and lifespan", "续航更长，电池寿命更长"],
+        ["Fixed-cable adapter as standard", "今后标配线缆固定的一体式适配器", "So the right adapter is always used", "确保客户始终使用与设备匹配的适配器"],
         ["Fewer defects and returns", "减少故障和退货"],
       ]],
       ["MdOutlineSell", "Better prices", "更优的价格", "Focus: current range", "重点：现有产品", [
@@ -320,7 +320,7 @@ async function build(f) {
         ["Your newest technology", "贵司的最新技术"],
       ]],
     ];
-    const gap = 0.3, cw = (CW - 2 * gap) / 3, ch = 3.72, y = 1.92;
+    const gap = 0.3, cw = (CW - 2 * gap) / 3, ch = 3.98, y = 1.92;
     for (let i = 0; i < 3; i++) {
       const c = cols[i], x = M + i * (cw + gap);
       card(s, `Priority card ${i + 1}`, x, y, cw, ch, HEX.card);
@@ -331,16 +331,23 @@ async function build(f) {
       txt(s, `Priority focus ${i + 1}`, [en(c[3].toUpperCase(), { bold: true, charSpacing: 1, breakLine: true }), cn(c[4], { bold: true, fontSize: 11 })],
         { x: x + 0.3, y: y + 1.22, w: cw - 0.5, h: 0.5, fontSize: 10, color: C.accent2, paraSpaceAfter: 1 });
       const runs = [];
+      // Een punt kan een korte toelichting in goud meekrijgen (b[2] en b[3]).
       c[5].forEach((b, j) => {
-        runs.push(en(b[0], { paraSpaceAfter: 10 }));
-        runs.push(cn(b[1], { color: C.accent3, fontSize: 13, softBreakBefore: true, breakLine: j < c[5].length - 1 }));
+        const last = j === c[5].length - 1;
+        runs.push(en(b[0], { paraSpaceAfter: 8 }));
+        runs.push(cn(b[1], { color: C.accent3, fontSize: 13, softBreakBefore: true, breakLine: !last && !b[2] }));
+        if (b[2]) {
+          runs.push(en(b[2], { color: C.accent2, fontSize: 11, softBreakBefore: true }));
+          runs.push(cn(b[3], { color: C.accent2, fontSize: 11, softBreakBefore: true, breakLine: !last }));
+        }
       });
-      txt(s, `Priority points ${i + 1}`, runs, { x: x + 0.3, y: y + 1.88, w: cw - 0.5, h: 1.78, fontSize: 14, color: C.background1, paraSpaceAfter: 10 });
+      txt(s, `Priority points ${i + 1}`, runs, { x: x + 0.3, y: y + 1.88, w: cw - 0.5, h: 2.0, fontSize: 14, color: C.background1, paraSpaceAfter: 8 });
     }
     txt(s, "Why it matters", [
       en("Why this matters: ", { bold: true, color: C.accent2 }), en("our customers get a 100-day trial and a 2-year warranty, so every weak battery becomes a return and a bad review.", { breakLine: true }),
       cn("原因：", { bold: true, color: C.accent2 }), cn("我们为客户提供 100 天试用和 2 年保修，每一个电池问题都会变成退货和差评。", { color: C.accent3 }),
-    ], { x: M, y: 5.9, w: CW, h: 0.68, fontSize: 13, color: C.background1, paraSpaceAfter: 3 });
+    ], { x: M, y: 6.08, w: CW, h: 0.68, fontSize: 13, color: C.background1, paraSpaceAfter: 3 });
+    s.addNotes("Fixed-cable adapter: from now on every device ships with a charger whose cable is fixed to the adapter, so customers always charge with the right adapter for that device. Wrong adapters damage batteries and lead to returns.");
   }
 
   // =====================================================================
