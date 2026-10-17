@@ -28,6 +28,8 @@ const FACTORIES = CONFIG.fabrieken.map((f) => ({
   products: f.producten,
   reviews: f.reviews,
   productSlides: f.productslides,
+  standaard: !!f.standaard,
+  upgrades: f.upgrades,
   visual: f.producten.every((p) => p.foto),
   cover: f.cover || { foto: "cover.jpg", alt: "Wellshave hair clipper with battery display" },
   why: f.waarom || {
@@ -635,7 +637,7 @@ async function build(f) {
     const cols = [
       ["MdBatteryChargingFull", "Better quality", "更好的品质", "Focus: batteries & charging", "重点：电池与充电", [
         ["Longer battery life and lifespan", "续航更长，电池寿命更长"],
-        ["Fixed-cable adapter as standard", "今后标配线缆固定的一体式适配器", "So the right adapter is always used", "确保客户始终使用与设备匹配的适配器"],
+        ["Certified adapter with fixed cable", "标配认证的一体式适配器", "So customers always charge correctly", "确保客户始终正确充电"],
         ["Fewer defects and returns", "减少故障和退货"],
       ]],
       ["MdOutlineSell", "Better prices", "更优的价格", "Focus: current range", "重点：现有产品", [
@@ -676,7 +678,100 @@ async function build(f) {
       en("Why this matters: ", { bold: true, color: C.accent2 }), en(f.why.en, { breakLine: true }),
       cn("原因：", { bold: true, color: C.accent2 }), cn(f.why.cn, { color: C.accent3 }),
     ], { x: M, y: 6.08, w: CW, h: 0.68, fontSize: 13, color: C.background1, paraSpaceAfter: 3 });
-    s.addNotes("Fixed-cable adapter: from now on every device ships with a charger whose cable is fixed to the adapter, so customers always charge with the right adapter for that device. Wrong adapters damage batteries and lead to returns.");
+    s.addNotes("Certified adapter: from now on every device ships with a certified adapter whose cable is fixed to it, so customers always charge with the right adapter for that device. Wrong adapters damage batteries and lead to returns.");
+  }
+
+  // =====================================================================
+  // 8b. DE WELLSHAVE-STANDAARD: wat voortaan voor elk product geldt
+  // =====================================================================
+  if (f.standaard) {
+    const s = pres.addSlide({ masterName: "Content Sand", sectionTitle: "Working together" });
+    s.addText("The Wellshave standard for every product", { placeholder: "title" });
+    s.addText("Wellshave 全系产品标准", { placeholder: "cn" });
+    const items = [
+      ["MdOutlinePower", "Certified adapter in every box", "每台标配认证适配器",
+        "CE and GS certified, EU plug, cable fixed to the adapter, output matched to the device.", "通过 CE 和 GS 认证，欧标插头，线缆与适配器一体，输出与设备匹配。"],
+      ["MdBatteryChargingFull", "A battery that keeps the promise", "电池达到承诺的续航",
+        "Branded grade A cell. The real runtime matches what we advertise. At least 500 cycles.", "品牌 A 级电芯，实际续航与宣传一致，循环寿命至少 500 次。"],
+      ["MdOutlineShield", "Safe charging", "安全充电",
+        "Protection against overcharge, deep discharge, short circuit and heat. Over-voltage protection on the input.", "防过充、过放、短路和过热保护，充电输入端过压保护。"],
+      ["MdUsb", "A charging port that lasts", "耐用的充电接口",
+        "USB-C or a stable dock. The plug sits tight, also after a year of daily use.", "USB-C 接口或稳固底座，每天使用一年后插头仍然牢固。"],
+      ["MdOutlineInventory2", "A complete box, every time", "每一台都包装齐全",
+        "Cable, adapter and every attachment checked before sealing. The manual matches the product.", "封箱前检查数据线、适配器和所有配件，说明书与产品一致。"],
+      ["MdOutlineFactCheck", "Tested before shipping", "出货前测试",
+        "100% charge and run test, battery aging test, and our inspection before every shipment.", "100% 充电与运行测试、电池老化测试，每批出货前由我方验货。"],
+    ];
+    const cols = 3, gx = 0.25, gy = 0.22, top = 1.8, cw = (CW - 2 * gx) / cols, ch = 1.72;
+    for (let i = 0; i < items.length; i++) {
+      const it = items[i], x = M + (i % cols) * (cw + gx), y = top + Math.floor(i / cols) * (ch + gy);
+      card(s, `Standard card ${i + 1}`, x, y, cw, ch, HEX.paper);
+      s.addShape(pres.shapes.OVAL, { objectName: `Standard badge ${i + 1}`, x: x + 0.25, y: y + 0.25, w: 0.56, h: 0.56, fill: { color: C.accent1 }, line: { type: "none" } });
+      s.addImage({ objectName: `Standard icon ${i + 1}`, data: await ic(it[0], HEX.paper), x: x + 0.37, y: y + 0.37, w: 0.32, h: 0.32 });
+      txt(s, `Standard title ${i + 1}`, [en(it[1], { bold: true, fontSize: 13.5, breakLine: true }), cn(it[2], { bold: true, fontSize: 12, color: C.accent1 })],
+        { x: x + 0.95, y: y + 0.2, w: cw - 1.1, h: 0.66, color: C.text1, valign: "middle", paraSpaceAfter: 1 });
+      txt(s, `Standard text ${i + 1}`, [en(it[3], { breakLine: true }), cn(it[4], { color: C.accent6, fontSize: 9.5 })],
+        { x: x + 0.25, y: y + 0.92, w: cw - 0.45, h: ch - 1.0, fontSize: 10.5, color: C.text1, paraSpaceAfter: 2 });
+    }
+    const by = top + 2 * ch + gy + 0.2, bh = PT + PH + 0.42 - by;
+    card(s, "Documents box", M, by, CW, bh, HEX.sandDeep);
+    s.addImage({ objectName: "Documents icon", data: await ic("MdOutlineGavel", HEX.bronze), x: M + 0.25, y: by + 0.2, w: 0.36, h: 0.36 });
+    txt(s, "Documents", [
+      en("Please share per product: ", { bold: true }), en("CE (LVD and EMC), RoHS, battery IEC 62133-2, UN38.3 and MSDS, adapter certificates. "),
+      en("New EU rule from 18 February 2027: ", { bold: true }), en("batteries in new products must be replaceable. Let's design the 2027 models for it.", { breakLine: true }),
+      cn("请提供每款产品的 CE（LVD 与 EMC）、RoHS、电池 IEC 62133-2、UN38.3 与 MSDS 报告及适配器认证。欧盟自 2027 年 2 月 18 日起要求新产品电池可更换，2027 年新款请按此设计。", { color: C.accent4 }),
+    ], { x: M + 0.8, y: by + 0.12, w: CW - 1.0, h: bh - 0.22, fontSize: 10.5, color: C.text1, paraSpaceAfter: 3, valign: "middle" });
+    s.addNotes("The adapter: every box gets a certified adapter with the cable fixed to it, so customers never charge with a wrong or fast charger. Today the manuals say 'only use the included charger' while there is none in the box. Battery: the Elite cell is 600 mAh with 60 minutes official runtime, while we advertise 90. EU Battery Regulation: check the final rules for washable devices with our compliance contact.");
+  }
+
+  // =====================================================================
+  // 8c. UPGRADE-IDEEËN PER PRODUCT: eerst oplossen, dan toevoegen of verbeteren
+  // =====================================================================
+  if (f.upgrades) {
+    const byKey = Object.fromEntries(f.products.map((p) => [p.key, p]));
+    for (const g of f.upgrades) {
+      const s = pres.addSlide({ masterName: "Content Sand", sectionTitle: "Working together" });
+      s.addText(g.en, { placeholder: "title" });
+      s.addText(g.cn, { placeholder: "cn" });
+      const PW = 3.0, FX = M + PW + 0.15, FW = (CW - PW - 0.15 - 0.2) / 2, AX = FX + FW + 0.2, top = 1.78;
+      const heads = [["MdOutlineBuild", "FIX FIRST", "优先解决", FX], ["MdOutlineAddCircleOutline", "ADD OR IMPROVE", "新增或改进", AX]];
+      for (const [i, h] of heads.entries()) {
+        s.addImage({ objectName: `Upgrade head icon ${i + 1}`, data: await ic(h[0], HEX.bronze), x: h[3] + 0.2, y: top, w: 0.22, h: 0.22 });
+        txt(s, `Upgrade head ${i + 1}`, [en(h[1], { bold: true, charSpacing: 2 }), cn("  ·  " + h[2], { bold: true })], { x: h[3] + 0.5, y: top, w: FW - 0.5, h: 0.24, fontSize: 10, color: C.accent1 });
+      }
+      // Een groep met "extra" krijgt onder de rijen een blok met een open vraag aan de fabriek.
+      const areaTop = top + 0.36, areaH = PT + PH - areaTop - (g.extra ? 1.3 : 0), rowH = Math.min(g.extra ? 1.0 : 1.2, areaH / g.rijen.length);
+      g.rijen.forEach((r, i) => {
+        const p = byKey[r.key], y = areaTop + i * rowH, h = rowH - 0.1;
+        card(s, `Upgrade row ${i + 1}`, M, y, CW, h, HEX.paper);
+        const img = Math.min(0.72, h - 0.14);
+        s.addImage({ objectName: `Upgrade photo ${i + 1}`, path: A(p.foto), x: M + 0.12, y: y + (h - img) / 2, w: img, h: img, altText: p.titel });
+        txt(s, `Upgrade product ${i + 1}`, [en(p.product, { bold: true, fontSize: 12, breakLine: true }), cn(p.product_cn, { fontSize: 9.5, color: C.accent1 })],
+          { x: M + 0.12 + img + 0.15, y, w: PW - img - 0.3, h, valign: "middle", color: C.text1, paraSpaceAfter: 1 });
+        const cell = (items) => items.flatMap((t, j) => [
+          en(t[0], { bold: j === 0, fontSize: 10.5, breakLine: true }), cn(t[1], { fontSize: 9.5, color: C.accent6, breakLine: j < items.length - 1 }),
+        ]);
+        txt(s, `Upgrade fix ${i + 1}`, cell(r.fix), { x: FX + 0.2, y, w: FW - 0.3, h, valign: "middle", color: C.text1, paraSpaceAfter: 1 });
+        txt(s, `Upgrade add ${i + 1}`, cell(r.add), { x: AX + 0.2, y, w: FW - 0.3, h, valign: "middle", color: C.text1, paraSpaceAfter: 1 });
+        s.addShape(pres.shapes.LINE, { objectName: `Upgrade divider ${i + 1}`, x: AX, y: y + 0.14, w: 0, h: h - 0.28, line: { color: C.accent3, width: 1 } });
+        s.addShape(pres.shapes.LINE, { objectName: `Upgrade divider fix ${i + 1}`, x: FX, y: y + 0.14, w: 0, h: h - 0.28, line: { color: C.accent3, width: 1 } });
+      });
+      if (g.extra) {
+        const ey = areaTop + g.rijen.length * rowH + 0.05, eh = PT + PH - ey;
+        card(s, "Ideas box", M, ey, CW, eh, HEX.sandDeep);
+        s.addShape(pres.shapes.OVAL, { objectName: "Ideas badge", x: M + 0.25, y: ey + (eh - 0.6) / 2, w: 0.6, h: 0.6, fill: { color: C.accent1 }, line: { type: "none" } });
+        s.addImage({ objectName: "Ideas icon", data: await ic("MdOutlineLightbulb", HEX.paper), x: M + 0.39, y: ey + (eh - 0.6) / 2 + 0.14, w: 0.32, h: 0.32 });
+        txt(s, "Ideas", [
+          en(g.extra.en_kop, { bold: true, fontSize: 14 }), cn("  ·  " + g.extra.cn_kop, { bold: true, fontSize: 13, color: C.accent1, breakLine: true }),
+          en(g.extra.en, { fontSize: 11.5, breakLine: true }), cn(g.extra.cn, { fontSize: 10.5, color: C.accent4 }),
+        ], { x: M + 1.1, y: ey + 0.1, w: CW - 1.35, h: eh - 0.2, color: C.text1, valign: "middle", paraSpaceAfter: 3 });
+      }
+      txt(s, "Upgrade source", [
+        en("Sources: Wellshave customer service defect log and bol.com reviews, 1 January to 15 October 2026; battery specifications from the factory pro forma invoices.", { breakLine: true }),
+        cn("数据来源：Wellshave 售后故障记录与 bol.com 评价（2026年1月1日至10月15日）；电池规格来自工厂形式发票。"),
+      ], { x: M, y: PT + PH + 0.08, w: CW, h: 0.34, fontSize: 9, color: C.accent6, paraSpaceAfter: 1 });
+      s.addNotes(g.notes || "");
+    }
   }
 
   // =====================================================================
@@ -687,7 +782,7 @@ async function build(f) {
     s.addText("What we would love to see", { placeholder: "title" });
     s.addText("我们最期待看到的", { placeholder: "cn" });
     const asks = [
-      ["MdOutlineInventory2", "Samples", "样品", "New models and improved batteries. We like to hold and test them ourselves.", "新款产品和改进后的电池。我们希望亲手体验和测试。"],
+      ["MdOutlineInventory2", "Samples", "样品", "Improved batteries, the certified adapter and new models. We like to test them ourselves.", "改进后的电池、认证适配器和新款产品。我们希望亲手测试。"],
       ["MdOutlineRecommend", "Your recommendations", "您的推荐", "What sells well in other markets? What would you change in our products?", "哪些产品在其他市场卖得好？您会如何改进我们的产品？"],
     ];
     const lw = 7.3, ch = 1.85;

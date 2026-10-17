@@ -81,8 +81,8 @@
               "cn": "更牢固、不易损坏的刀头"
             },
             {
-              "en": "Easy caps, complete box",
-              "cn": "保护盖易取下，配件齐全"
+              "en": "Every part in the box",
+              "cn": "每台配件齐全"
             }
           ],
           "defecten": {
@@ -171,12 +171,12 @@
               "cn": "经久耐用的电池"
             },
             {
-              "en": "More power, closer shave",
-              "cn": "更强动力，剃得更干净"
+              "en": "Stronger head clip",
+              "cn": "更牢固的刀头卡扣"
             },
             {
-              "en": "Fixed-cable adapter",
-              "cn": "线缆固定的一体式适配器"
+              "en": "More power, closer shave",
+              "cn": "更强动力，剃得更干净"
             }
           ],
           "defecten": {
@@ -251,8 +251,8 @@
               "cn": "持久耐用的电池与充电"
             },
             {
-              "en": "Even trimming, also on short stubble",
-              "cn": "修剪均匀，短胡茬也能修好"
+              "en": "No self-start: better button and lock",
+              "cn": "杜绝自行开机：改进按键与锁定"
             }
           ],
           "defecten": {
@@ -319,8 +319,8 @@
           ],
           "vragen": [
             {
-              "en": "Battery and charging that last",
-              "cn": "持久耐用的电池与充电"
+              "en": "Li-ion battery instead of NiMH",
+              "cn": "用锂电池替代镍氢电池"
             },
             {
               "en": "Cable and all attachments in the box",
@@ -467,12 +467,12 @@
           ],
           "vragen": [
             {
-              "en": "Battery and charging port that last",
-              "cn": "耐用的电池与充电接口"
+              "en": "Battery and an accurate % display",
+              "cn": "电池与准确的电量显示"
             },
             {
-              "en": "Smoother on the skin",
-              "cn": "对皮肤更顺滑温和"
+              "en": "Sharper blades that last",
+              "cn": "更锋利耐用的刀片"
             }
           ],
           "defecten": {
@@ -684,7 +684,210 @@
       "waarom": {
         "en": "in 2026, 146 of the 215 defect reports on your products were about the battery or charging. Each one costs a new device and a disappointed customer.",
         "cn": "2026 年，贵司产品的 215 起故障报告中有 146 起与电池或充电有关。每一起都意味着一台新机和一位失望的客户。"
-      }
+      },
+      "standaard": true,
+      "upgrades": [
+        {
+          "en": "Upgrade ideas: shavers and beard trimmers",
+          "cn": "升级建议：剃须刀与胡须修剪器",
+          "notes": "Per product: first what must be fixed, then what we would like to add or improve. Ask the factory for their own ideas and a sample.",
+          "rijen": [
+            {
+              "key": "elite",
+              "fix": [
+                [
+                  "Battery or charging: 37 of 54 defects",
+                  "电池或充电：54 起故障中 37 起"
+                ],
+                [
+                  "Head clip, hinge and spring break",
+                  "刀头卡扣、铰链和弹簧易断"
+                ]
+              ],
+              "add": [
+                [
+                  "Bigger battery for a real 90 min (now 60)",
+                  "更大电池，实际续航 90 分钟（现为 60）"
+                ],
+                [
+                  "More power for a closer shave",
+                  "更强动力，剃得更干净"
+                ]
+              ]
+            },
+            {
+              "key": "deluxe",
+              "fix": [
+                [
+                  "Battery: 28 of 39 defects, % drops to 0",
+                  "电池：39 起故障中 28 起，电量骤降为 0"
+                ],
+                [
+                  "Blades go dull, heads come loose",
+                  "刀片变钝，刀头松动"
+                ]
+              ],
+              "add": [
+                [
+                  "Accurate battery display",
+                  "准确的电量显示"
+                ],
+                [
+                  "Own barcode per head, updated manual",
+                  "每款刀头独立条码，更新说明书"
+                ]
+              ]
+            },
+            {
+              "key": "baron",
+              "fix": [
+                [
+                  "Pulls hairs, highest returns (5.6%)",
+                  "拉扯毛发，退货率最高（5.6%）"
+                ]
+              ],
+              "add": [
+                [
+                  "Spare foil and cutter sold separately",
+                  "刀网和刀片单独作为配件"
+                ],
+                [
+                  "Fully waterproof for the shower (IPX7)",
+                  "全身水洗，可在淋浴时使用（IPX7）"
+                ]
+              ]
+            },
+            {
+              "key": "pro",
+              "fix": [
+                [
+                  "Battery: 10 of 15 defects",
+                  "电池：15 起故障中 10 起"
+                ],
+                [
+                  "Heat or smell while charging",
+                  "充电时发热或有异味"
+                ]
+              ],
+              "add": [
+                [
+                  "Li-ion instead of NiMH 2.4 V",
+                  "用锂电池替代 2.4V 镍氢电池"
+                ],
+                [
+                  "Charge in 1.5 h instead of 5 h, battery display",
+                  "充电 1.5 小时（现 5 小时），电量显示"
+                ]
+              ]
+            },
+            {
+              "key": "supreme",
+              "fix": [
+                [
+                  "Battery: 26 of 36 defects",
+                  "电池：36 起故障中 26 起"
+                ],
+                [
+                  "Switches itself on",
+                  "自行开机"
+                ]
+              ],
+              "add": [
+                [
+                  "Short guide combs, 0.5 to 2 mm",
+                  "0.5 至 2 毫米短限位梳"
+                ],
+                [
+                  "More even trimming result",
+                  "修剪更均匀"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "en": "Upgrade ideas: body groomers and nose trimmers",
+          "cn": "升级建议：身体修剪器与鼻毛修剪器",
+          "notes": "Groom Guard: the stand tips over and the ceramic blade breaks. Flex Guard: customers expect the short combs from our listing. Nose trimmers: the manual mentions oil, but there is none in the box.",
+          "rijen": [
+            {
+              "key": "groomguard",
+              "fix": [
+                [
+                  "Battery: 27 of 35 defects",
+                  "电池：35 起故障中 27 起"
+                ],
+                [
+                  "Charging stand tips over",
+                  "充电底座容易倾倒"
+                ]
+              ],
+              "add": [
+                [
+                  "Heavier or magnetic stand",
+                  "更重或磁吸式底座"
+                ],
+                [
+                  "Gentler on sensitive skin",
+                  "对敏感肌肤更温和"
+                ]
+              ]
+            },
+            {
+              "key": "flexguard",
+              "fix": [
+                [
+                  "Combs 3 to 6 mm, customers expect 1.5 to 4",
+                  "限位梳为 3-6 毫米，客户期望 1.5-4 毫米"
+                ],
+                [
+                  "Pulls hairs",
+                  "拉扯毛发"
+                ]
+              ],
+              "add": [
+                [
+                  "Short combs, 1.5 to 4 mm",
+                  "1.5 至 4 毫米短限位梳"
+                ],
+                [
+                  "More power",
+                  "更强动力"
+                ]
+              ]
+            },
+            {
+              "key": "neus",
+              "fix": [
+                [
+                  "Weak cutting: 22 of 55 critical reviews",
+                  "修剪力度不足：55 条差评中 22 条"
+                ],
+                [
+                  "Attachments break, parts missing",
+                  "配件易坏，缺件"
+                ]
+              ],
+              "add": [
+                [
+                  "Blade that reaches short hairs",
+                  "能剪到短毛的刀头"
+                ],
+                [
+                  "Oil in the box, as the manual says",
+                  "按说明书附带润滑油"
+                ]
+              ]
+            }
+          ],
+          "extra": {
+            "en_kop": "Your ideas for 2027",
+            "cn_kop": "贵司的 2027 新功能建议",
+            "en": "Which new features can you offer us? For example USB-C fast charging, fully waterproof (IPX7), a battery display on every model, a travel lock that is easy to understand, and a longer runtime.",
+            "cn": "贵司能为我们提供哪些新功能？例如 USB-C 快充、全身水洗（IPX7）、所有型号配备电量显示、易懂的旅行锁以及更长的续航。"
+          }
+        }
+      ]
     },
     {
       "naam": "iClipper",

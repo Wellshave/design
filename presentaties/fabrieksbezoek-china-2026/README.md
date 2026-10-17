@@ -3,7 +3,7 @@
 Introductiedecks voor de bezoeken in China, in het Engels met vereenvoudigd Chinees eronder.
 Huisstijl van wellshave.com: zand, carbon, brons en goud, Montserrat.
 
-- **Global Best Way en Fanke** bezoeken we tegelijk, dus zij krijgen samen één deck van 13 slides.
+- **Global Best Way en Fanke** bezoeken we tegelijk, dus zij krijgen samen één deck van 16 slides.
 - **iClipper** heeft een eigen deck van 9 slides.
 
 ## Global Best Way en Fanke
@@ -21,8 +21,11 @@ Huisstijl van wellshave.com: zand, carbon, brons en goud, Montserrat.
 | 9 | Baardtrimmers: Pro 8188 en Supreme 8988 |
 | 10 | Scheerapparaten: Head Shaver Deluxe en Blade Baron |
 | 11 | Bodygroomers: Groom Guard en Flex Guard |
-| 12 | Drie verbeterpunten: kwaliteit (batterijen, adapter met vaste kabel), prijs, nieuwe modellen |
-| 13 | Samples en aanraders, en bedankt |
+| 12 | Drie verbeterpunten: kwaliteit (batterijen, gecertificeerde adapter met vaste kabel), prijs, nieuwe modellen |
+| 13 | De Wellshave-standaard voor elk product: adapter, accu, veilig laden, laadpoort, complete doos, testen, plus de documenten die we vragen |
+| 14 | Upgrade-ideeën voor scheerapparaten en baardtrimmers: eerst oplossen, dan toevoegen of verbeteren |
+| 15 | Upgrade-ideeën voor bodygroomers en neustrimmers, met de vraag om hun eigen ideeën voor 2027 |
+| 16 | Samples en aanraders, en bedankt |
 
 Het deck toont alleen producten die we bij deze twee partijen inkopen. Het zegt niet welk
 product via welke partij loopt.
@@ -81,6 +84,9 @@ Elke productslide heeft dezelfde opbouw:
   - De citaten in de donkere vlakken komen uit die meldingen, vertaald uit het Nederlands.
   - Mediaan van aankoop tot accumelding: 5 maanden bij de Elite, tot 13 maanden bij de Pro.
 
+- **Accuspecificaties:** de proforma van Fanke (FK20260702001): Elite 600 mAh Li-ion met 60 minuten,
+  Supreme 600 mAh Li-ion met 80 minuten, Pro 8188 een NiMH-accu van 2,4 V met 5 uur laadtijd.
+
 ## Opnieuw bouwen
 
 ```bash
@@ -105,5 +111,10 @@ wat er vrijwel hetzelfde uitziet.
 - Prognose 2027 per fabriek. Het deck zegt nu dat die in het gesprek gedeeld wordt.
 - Slide 2 noemt de omzet van 2026, ongeveer €2,5M via bol.com en €0,6M via de webshop.
   Haal die twee tegels weg als je die cijfers niet met fabrieken wilt delen.
+- Slide 13 noemt de nieuwe EU-batterijverordening: vanaf 18 februari 2027 moeten accu's in nieuwe
+  producten vervangbaar zijn. Voor apparaten die nat worden gelden uitzonderingen, en er ligt een
+  wijziging klaar. Laat de precieze eisen voor scheerapparaten en trimmers checken.
+- De Elite wordt verkocht met 90 minuten looptijd, maar de fabriek geeft 60 minuten op. Pas de
+  listing aan of laat de accu vergroten.
 - Slide 6 zegt dat we bij 97% van de defectmeldingen een nieuw apparaat sturen. Dat is een
   sterk argument voor betere kwaliteit, maar haal die tegel weg als je dat niet wilt delen.
