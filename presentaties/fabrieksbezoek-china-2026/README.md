@@ -21,10 +21,10 @@ Huisstijl van wellshave.com: zand, carbon, brons en goud, Montserrat.
 | 9 | Baardtrimmers: Pro 8188 en Supreme 8988 |
 | 10 | Scheerapparaten: Head Shaver Deluxe en Blade Baron |
 | 11 | Bodygroomers: Groom Guard en Flex Guard |
-| 12 | Drie verbeterpunten: kwaliteit (batterijen, gecertificeerde adapter met vaste kabel), prijs, nieuwe modellen |
-| 13 | De Wellshave-standaard voor elk product: adapter, accu, veilig laden, laadpoort, complete doos, testen, plus de documenten die we vragen |
+| 12 | Drie verbeterpunten: kwaliteit (veilige mesjes, scheerkoppen voor een baard van drie dagen, accu), prijs, nieuwe modellen (slim lcd-display en nieuwe printplaat, legering, USB-C met siliconen klepje) |
+| 13 | De Wellshave-standaard voor elk product: adapter die past bij het apparaat, accu, veilig laden, USB-C met siliconen klepje, complete doos, testen, plus de documenten die we vragen |
 | 14 | Upgrade-ideeën voor scheerapparaten en baardtrimmers: eerst oplossen, dan toevoegen of verbeteren |
-| 15 | Upgrade-ideeën voor bodygroomers en neustrimmers, met de vraag om hun eigen ideeën voor 2027 |
+| 15 | Upgrade-ideeën voor bodygroomers en neustrimmers, met een schets van het nieuwe veilige mesje |
 | 16 | Samples en aanraders, en bedankt |
 
 Het deck toont alleen producten die we bij deze twee partijen inkopen. Het zegt niet welk
