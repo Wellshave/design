@@ -1,11 +1,13 @@
 // Introductiedeck voor de fabrieksbezoeken in China, Engels + vereenvoudigd Chinees.
 //
 //   npm install
-//   node bouw-deck.js                  bouwt een deck per fabriek uit fabrieken.json
-//   node bouw-deck.js Global-Bestway   bouwt alleen die ene
+//   node bouw-deck.js                       bouwt een deck per bezoek uit fabrieken.json
+//   node bouw-deck.js GlobalBestWay-Fanke   bouwt alleen die ene
 //
-// Producten en volumes per fabriek staan in fabrieken.json. Zolang "producten" leeg is,
-// toont slide 7 gemarkeerde invulvelden.
+// Producten, volumes en reviews per bezoek staan in fabrieken.json. Een bezoek kan meer
+// bedrijven tegelijk hebben ("bedrijven"). Hebben de producten een "foto", dan toont het deck
+// een productoverzicht met foto's en per product een slide uit "productslides" in plaats van
+// het algemene assortiment en het reviewoverzicht.
 const fs = require("fs");
 const path = require("path");
 const pptxgen = require("pptxgenjs");
@@ -22,11 +24,12 @@ const CONFIG = JSON.parse(fs.readFileSync(path.join(__dirname, "fabrieken.json")
 const FACTORIES = CONFIG.fabrieken.map((f) => ({
   key: f.bestand,
   name: f.naam,
-  companyEn: f.bedrijf_en,
-  companyCn: f.bedrijf_cn,
-  contact: f.contact,
+  companies: f.bedrijven || [{ en: f.bedrijf_en, cn: f.bedrijf_cn, contact: f.contact }],
   products: f.producten,
   reviews: f.reviews,
+  productSlides: f.productslides,
+  visual: f.producten.every((p) => p.foto),
+  cover: f.cover || { foto: "cover.jpg", alt: "Wellshave hair clipper with battery display" },
 }));
 const nf = (n) => n.toLocaleString("en-US");
 const VISIT_EN = CONFIG.bezoek_en;
@@ -124,23 +127,28 @@ async function build(f) {
   pres.addSection({ title: "Introduction" });
   {
     const s = pres.addSlide({ masterName: "Cover", sectionTitle: "Introduction" });
-    s.addImage({ objectName: "Cover photo", path: A("cover.jpg"), x: 7.0, y: 0, w: W - 7.0, h: H, altText: "Wellshave hair clipper with battery display" });
+    s.addImage({ objectName: "Cover photo", path: A(f.cover.foto), x: 7.0, y: 0, w: W - 7.0, h: H, altText: f.cover.alt });
     s.addImage({ objectName: "Logo", path: A("logo_light.png"), x: 0.75, y: 0.75, w: 2.75, h: 0.44, altText: "Wellshave logo" });
+    // Elk extra bedrijf schuift de titel omhoog om ruimte te maken voor de naam eronder.
+    const up = 0.5 * (f.companies.length - 1);
     txt(s, "Eyebrow", [en("FACTORY VISIT", { bold: true, charSpacing: 4 }), en("   ·   "), cn("工厂拜访", { bold: true, charSpacing: 2 })],
-      { x: 0.75, y: 2.05, w: 5.9, h: 0.35, fontSize: 12, color: C.accent2 });
-    txt(s, "Title", "Introducing\nWellshave", { x: 0.75, y: 2.5, w: 6.0, h: 1.75, fontSize: 52, bold: true, color: C.background1, lineSpacingMultiple: 0.92 });
-    txt(s, "Title CN", [en("Wellshave ", { bold: true }), cn("品牌介绍", { bold: true })], { x: 0.75, y: 4.3, w: 6.0, h: 0.6, fontSize: 30, color: C.accent2 });
+      { x: 0.75, y: 2.05 - up, w: 5.9, h: 0.35, fontSize: 12, color: C.accent2 });
+    txt(s, "Title", "Introducing\nWellshave", { x: 0.75, y: 2.5 - up, w: 6.0, h: 1.75, fontSize: 52, bold: true, color: C.background1, lineSpacingMultiple: 0.92 });
+    txt(s, "Title CN", [en("Wellshave ", { bold: true }), cn("品牌介绍", { bold: true })], { x: 0.75, y: 4.3 - up, w: 6.0, h: 0.6, fontSize: 30, color: C.accent2 });
     txt(s, "Subtitle", [
       en("Dutch men's grooming brand  ·  Netherlands & Belgium", { breakLine: true }),
       cn("荷兰男士理容品牌  ·  主营荷兰与比利时市场"),
-    ], { x: 0.75, y: 5.1, w: 6.0, h: 0.75, fontSize: 14, color: C.accent3, paraSpaceAfter: 4 });
+    ], { x: 0.75, y: 5.1 - up, w: 6.0, h: 0.75, fontSize: 14, color: C.accent3, paraSpaceAfter: 4 });
+    const guests = f.companies.flatMap((c) => [
+      en(c.en, { bold: true, fontSize: 13, color: C.background1, breakLine: true }),
+      cn(c.cn, { fontSize: 12, color: C.accent3 }), cn("   ·   " + c.contact, { fontSize: 12, color: C.accent3, breakLine: true }),
+    ]);
     txt(s, "Prepared for", [
       en("PREPARED FOR", { bold: true, charSpacing: 3, fontSize: 10, color: C.accent2 }), cn("   ·   拜访对象", { bold: true, fontSize: 10, color: C.accent2, breakLine: true }),
-      en(f.companyEn, { bold: true, fontSize: 13, color: C.background1, breakLine: true }),
-      cn(f.companyCn, { fontSize: 12, color: C.accent3 }), cn("   ·   " + f.contact, { fontSize: 12, color: C.accent3, breakLine: true }),
+      ...guests,
       en(VISIT_EN, { fontSize: 11, color: C.accent3 }), cn("   ·   " + VISIT_CN, { fontSize: 11, color: C.accent3 }),
-    ], { x: 0.75, y: 5.9, w: 6.0, h: 1.15, paraSpaceAfter: 3 });
-    s.addNotes(`Opening. Thank ${f.name} for hosting us. One sentence: who we are and why we came.`);
+    ], { x: 0.75, y: 5.9 - up, w: 6.0, h: 1.15 + up, paraSpaceAfter: 3 });
+    s.addNotes(`Opening. Thank ${f.companies.map((c) => c.contact).join(" and ")} (${f.name}) for hosting us. One sentence: who we are and why we came.`);
   }
 
   // =====================================================================
@@ -207,9 +215,9 @@ async function build(f) {
   }
 
   // =====================================================================
-  // 3. PRODUCT RANGE
+  // 3. PRODUCT RANGE (niet in decks met productfoto's: die tonen alleen de eigen producten)
   // =====================================================================
-  {
+  if (!f.visual) {
     const s = pres.addSlide({ masterName: "Content Sand", sectionTitle: "About Wellshave" });
     s.addText("Our product range", { placeholder: "title" });
     s.addText("我们的产品系列", { placeholder: "cn" });
@@ -308,7 +316,33 @@ async function build(f) {
   // =====================================================================
   pres.addSection({ title: "Your products" });
   const sold = f.products.reduce((a, p) => a + p.verkocht, 0);
-  {
+  if (f.visual) {
+    // productoverzicht met foto's, drie kolommen
+    const s = pres.addSlide({ masterName: "Content Sand", sectionTitle: "Your products" });
+    s.addText("Your products at Wellshave", { placeholder: "title" });
+    s.addText([cn("贵司产品在 "), en("Wellshave", { fontFace: "Montserrat" }), cn(" 的表现")], { placeholder: "cn" });
+    const cols = 3, gx = 0.22, gy = 0.18, top = 1.75, areaH = 4.75, rows = Math.ceil(f.products.length / cols);
+    const cw = (CW - (cols - 1) * gx) / cols, ch = (areaH - (rows - 1) * gy) / rows, img = ch - 0.28;
+    f.products.forEach((p, i) => {
+      const x = M + (i % cols) * (cw + gx), y = top + Math.floor(i / cols) * (ch + gy);
+      card(s, `Product card ${i + 1}`, x, y, cw, ch, HEX.paper);
+      s.addImage({ objectName: `Product photo ${i + 1}`, path: A(p.foto), x: x + 0.14, y: y + 0.14, w: img, h: img, altText: p.titel });
+      const tx = x + 0.14 + img + 0.18;
+      txt(s, `Product text ${i + 1}`, [
+        en(p.product, { bold: true, fontSize: 12.5, breakLine: true }),
+        cn(p.product_cn, { fontSize: 10.5, color: C.accent1, breakLine: true }),
+        en(p.model, { fontSize: 9, color: C.accent6, breakLine: true }),
+        en(nf(p.verkocht), { bold: true, fontSize: 12 }), en(" sold  ·  ", { fontSize: 10 }),
+        en(p.retour.toFixed(1) + "%", { bold: true, fontSize: 12 }), en(" returns", { fontSize: 10, breakLine: true }),
+        cn(`销量 ${nf(p.verkocht)}  ·  退货率 ${p.retour.toFixed(1)}%`, { fontSize: 9, color: C.accent6 }),
+      ], { x: tx, y: y + 0.1, w: x + cw - tx - 0.1, h: ch - 0.2, valign: "middle", color: C.text1, paraSpaceAfter: 2 });
+    });
+    txt(s, "Data source", [
+      en(`Total ${nf(sold)} units sold on bol.com, 1 January to 15 October 2026. Return rate counts all return reasons. Webshop sales not included. We share our 2027 forecast in the meeting.`, { breakLine: true }),
+      cn(`合计 ${nf(sold)} 件。数据来源：bol.com，2026年1月1日至10月15日。退货率包含所有退货原因，不含官网销量。2027年预测将在会议中分享。`),
+    ], { x: M, y: top + areaH + 0.08, w: CW, h: 0.34, fontSize: 9, color: C.accent6, paraSpaceAfter: 1 });
+    s.addNotes("Only the products we buy from you. Sales are bol.com units (about 80% of our revenue). Next slides go product by product.");
+  } else {
     const s = pres.addSlide({ masterName: "Content Sand", sectionTitle: "Your products" });
     s.addText("Your products at Wellshave", { placeholder: "title" });
     s.addText([cn("贵司产品在 "), en("Wellshave", { fontFace: "Montserrat" }), cn(" 的表现")], { placeholder: "cn" });
@@ -337,9 +371,145 @@ async function build(f) {
   }
 
   // =====================================================================
-  // 7. WHAT OUR CUSTOMERS TELL US (critical reviews per factory)
+  // 7. PER PRODUCT: foto, cijfers, focuspunt, klachten en onze vraag
+  //    Een productslide toont een product breed of twee producten naast elkaar.
+  //    Batterijproblemen staan in een donker vlak, zodat ze er altijd uitspringen.
   // =====================================================================
-  {
+  const FOCUS = {
+    batterij: { icon: "MdBatteryAlert", en: "BATTERY", cn: "电池", dark: true },
+    issue: { icon: "MdOutlineReportProblem", en: "MAIN ISSUE", cn: "主要问题" },
+    retour: { icon: "MdOutlineAssignmentReturn", en: "RETURNS", cn: "退货" },
+    kwaliteit: { icon: "MdOutlineBuild", en: "QUALITY", cn: "品质" },
+  };
+  const PT = 1.75, PH = 4.75; // bovenkant en hoogte van het productvlak
+
+  const focusBox = async (s, p, x, y, w, h, wide) => {
+    const fc = FOCUS[p.focus.soort], dark = !!fc.dark;
+    const head = dark ? C.background1 : C.text1, sub = dark ? C.accent2 : C.accent1, qcn = dark ? C.accent3 : C.accent6;
+    card(s, `Focus ${p.key}`, x, y, w, h, dark ? HEX.carbon : HEX.sandDeep);
+    const pad = wide ? 0.25 : 0.18, b = wide ? 0.62 : 0.46;
+    s.addShape(pres.shapes.OVAL, { objectName: `Focus badge ${p.key}`, x: x + pad, y: y + pad, w: b, h: b, fill: { color: dark ? C.accent2 : C.accent1 }, line: { type: "none" } });
+    s.addImage({ objectName: `Focus icon ${p.key}`, data: await ic(fc.icon, dark ? HEX.carbon : HEX.paper), x: x + pad + b * 0.2, y: y + pad + b * 0.2, w: b * 0.6, h: b * 0.6 });
+    const tx = x + pad + b + (wide ? 0.25 : 0.18), tw = x + w - tx - pad;
+    const eyebrow = [en(fc.en, { bold: true, charSpacing: 2, color: sub }), cn("  ·  " + fc.cn, { bold: true, color: sub, breakLine: true })];
+    if (wide) {
+      txt(s, `Focus head ${p.key}`, [
+        ...eyebrow,
+        en(p.focus.en, { bold: true, fontSize: 17, color: head, breakLine: true }),
+        cn(p.focus.cn, { bold: true, fontSize: 15, color: sub }),
+      ], { x: tx, y: y + pad - 0.03, w: tw, h: 0.8, fontSize: 10, paraSpaceAfter: 2 });
+      const qs = p.focus.quotes, qy = y + 1.12, qg = 0.25, qw = (w - 2 * pad - (qs.length - 1) * qg) / qs.length;
+      qs.forEach((q, i) => {
+        const qx = x + pad + i * (qw + qg);
+        s.addShape(pres.shapes.LINE, { objectName: `Focus quote rule ${p.key} ${i + 1}`, x: qx, y: qy + 0.04, w: 0, h: y + h - qy - 0.24, line: { color: sub, width: 1.5 } });
+        txt(s, `Focus quote ${p.key} ${i + 1}`, [
+          en("“" + q.en + "”", { italic: true, color: head }), cn(q.cn, { softBreakBefore: true, color: qcn, fontSize: 9.5 }),
+        ], { x: qx + 0.13, y: qy, w: qw - 0.13, h: y + h - qy - 0.1, fontSize: 10 });
+      });
+    } else {
+      const q = p.focus.quotes[0];
+      txt(s, `Focus text ${p.key}`, [
+        ...eyebrow,
+        en(p.focus.en, { bold: true, fontSize: 13, color: head, breakLine: true }),
+        cn(p.focus.cn, { bold: true, fontSize: 11.5, color: sub, breakLine: true }),
+        en("“" + q.en + "”", { italic: true, fontSize: 10, color: head, breakLine: true }),
+        cn(q.cn, { fontSize: 9.5, color: qcn }),
+      ], { x: tx, y: y + pad - 0.04, w: tw, h: h - 2 * pad + 0.08, fontSize: 9, paraSpaceAfter: 2 });
+    }
+  };
+
+  const reviewsLine = (p) => [
+    en("WHAT CUSTOMERS REPORT", { bold: true, charSpacing: 2, color: C.accent6 }), cn("  ·  客户反馈", { bold: true, color: C.accent6 }),
+    en(`     ${p.kritisch} critical reviews in 2026`, { color: C.accent6 }), cn(`  ·  2026 年差评 ${p.kritisch} 条`, { color: C.accent6 }),
+  ];
+
+  // een product over de volle breedte
+  const productWide = async (s, p) => {
+    const LW = 4.25;
+    card(s, "Product photo card", M, PT, LW, PH, HEX.paper);
+    const img = 3.2;
+    s.addImage({ objectName: "Product photo", path: A(p.foto), x: M + (LW - img) / 2, y: PT + 0.22, w: img, h: img, altText: p.titel });
+    txt(s, "Model", [en("Model  ", { color: C.accent6 }), en(p.model, { bold: true }), cn("   型号", { color: C.accent6 })],
+      { x: M + 0.2, y: PT + 3.52, w: LW - 0.4, h: 0.25, fontSize: 10.5, color: C.text1, align: "center" });
+    const st = [[nf(p.verkocht), "sold in 2026", "2026 年销量"], [p.retour.toFixed(1) + "%", "return rate", "退货率"], [String(p.kritisch), "critical reviews", "差评数"]];
+    const sw = (LW - 0.3) / 3;
+    st.forEach((v, i) => txt(s, `Product stat ${i + 1}`, [
+      en(v[0], { bold: true, fontSize: 19, breakLine: true }), en(v[1], { fontSize: 9.5, color: C.accent6, breakLine: true }), cn(v[2], { fontSize: 9.5, color: C.accent1 }),
+    ], { x: M + 0.15 + i * sw, y: PT + 3.88, w: sw, h: 0.78, align: "center", color: C.text1, paraSpaceAfter: 1 }));
+
+    const RX = M + LW + 0.3, RW = W - M - RX, fh = 2.2;
+    await focusBox(s, p, RX, PT, RW, fh, true);
+
+    const iy = PT + fh + 0.13;
+    txt(s, "Reviews head", reviewsLine(p), { x: RX, y: iy, w: RW, h: 0.24, fontSize: 9.5 });
+    const max = Math.max(...p.klachten.map((k) => k.aantal)), LBL = 4.1;
+    p.klachten.forEach((k, i) => {
+      const ry = iy + 0.29 + i * 0.38, bx = RX + LBL + 0.15, bw = RW - LBL - 0.15 - 0.6;
+      txt(s, `Issue ${i + 1}`, [en(k.en, { bold: true, fontSize: 11.5, breakLine: true }), cn(k.cn, { fontSize: 10, color: C.accent1 })],
+        { x: RX, y: ry, w: LBL, h: 0.4, color: C.text1 });
+      s.addShape(pres.shapes.ROUNDED_RECTANGLE, { objectName: `Issue track ${i + 1}`, x: bx, y: ry + 0.13, w: bw, h: 0.12, rectRadius: 0.06, fill: { color: C.accent3 }, line: { type: "none" } });
+      s.addShape(pres.shapes.ROUNDED_RECTANGLE, { objectName: `Issue bar ${i + 1}`, x: bx, y: ry + 0.13, w: Math.max(0.12, bw * k.aantal / max), h: 0.12, rectRadius: 0.06, fill: { color: C.accent1 }, line: { type: "none" } });
+      txt(s, `Issue count ${i + 1}`, String(k.aantal), { x: RX + RW - 0.5, y: ry + 0.02, w: 0.5, h: 0.32, fontSize: 15, bold: true, color: C.text1, align: "right" });
+    });
+
+    const ay = PT + PH - 0.95, aw = (RW - 0.5 - 0.4) / 3;
+    card(s, "Ask card", RX, ay, RW, 0.95, HEX.paper);
+    txt(s, "Ask head", [en("OUR ASK", { bold: true, charSpacing: 2 }), cn("  ·  我们的期望", { bold: true })], { x: RX + 0.25, y: ay + 0.13, w: RW - 0.5, h: 0.2, fontSize: 9.5, color: C.accent1 });
+    p.vragen.forEach((v, i) => txt(s, `Ask ${i + 1}`, [en(v.en, { bold: true, fontSize: 11, breakLine: true }), cn(v.cn, { fontSize: 10, color: C.accent1 })],
+      { x: RX + 0.25 + i * (aw + 0.2), y: ay + 0.36, w: aw, h: 0.54, color: C.text1, paraSpaceAfter: 1 }));
+  };
+
+  // twee producten naast elkaar
+  const productHalf = async (s, p, x, w) => {
+    card(s, `Product card ${p.key}`, x, PT, w, PH, HEX.paper);
+    const pad = 0.2, img = 1.35;
+    s.addImage({ objectName: `Product photo ${p.key}`, path: A(p.foto), x: x + pad, y: PT + 0.18, w: img, h: img, altText: p.titel });
+    const tx = x + pad + img + 0.2, tw = x + w - tx - 0.18;
+    txt(s, `Product name ${p.key}`, [
+      en(p.titel, { bold: true, fontSize: 14.5, breakLine: true }), cn(p.product_cn, { fontSize: 12, color: C.accent1, breakLine: true }),
+      en("Model " + p.model, { fontSize: 9.5, color: C.accent6 }),
+    ], { x: tx, y: PT + 0.16, w: tw, h: 0.78, color: C.text1, paraSpaceAfter: 1 });
+    const st = [[nf(p.verkocht), "sold in 2026", "2026 年销量"], [p.retour.toFixed(1) + "%", "return rate", "退货率"], [String(p.kritisch), "critical reviews", "差评数"]];
+    const sw = tw / 3;
+    st.forEach((v, i) => txt(s, `Product stat ${p.key} ${i + 1}`, [
+      en(v[0], { bold: true, fontSize: 15, breakLine: true }), en(v[1], { fontSize: 9, color: C.accent6, breakLine: true }), cn(v[2], { fontSize: 9, color: C.accent1 }),
+    ], { x: tx + i * sw, y: PT + 0.98, w: sw, h: 0.62, color: C.text1, paraSpaceAfter: 0 }));
+
+    await focusBox(s, p, x + pad, PT + 1.66, w - 2 * pad, 1.28, false);
+
+    const iy = PT + 3.04;
+    txt(s, `Reviews head ${p.key}`, reviewsLine(p).slice(0, 2), { x: x + pad, y: iy, w: w - 2 * pad, h: 0.2, fontSize: 9 });
+    txt(s, `Issues ${p.key}`, p.klachten.flatMap((k, i) => [
+      en(String(k.aantal), { bold: true, color: C.accent1 }), en("   " + k.en, { bold: true }), cn("   " + k.cn, { color: C.accent6, fontSize: 9.5, breakLine: i < p.klachten.length - 1 }),
+    ]), { x: x + pad, y: iy + 0.22, w: w - 2 * pad, h: 0.7, fontSize: 10.5, color: C.text1, paraSpaceAfter: 3 });
+
+    const ay = PT + PH - 0.74;
+    card(s, `Ask card ${p.key}`, x + pad, ay, w - 2 * pad, 0.6, HEX.sand);
+    txt(s, `Ask ${p.key}`, [
+      en("OUR ASK", { bold: true, charSpacing: 2, fontSize: 9, color: C.accent1 }), cn("  ·  我们的期望", { bold: true, fontSize: 9, color: C.accent1, breakLine: true }),
+      ...p.vragen.flatMap((v, i) => [en("→  " + v.en, { bold: true }), cn("   " + v.cn, { color: C.accent1, fontSize: 9.5, breakLine: i < p.vragen.length - 1 })]),
+    ], { x: x + pad + 0.15, y: ay + 0.08, w: w - 2 * pad - 0.3, h: 0.46, fontSize: 10, color: C.text1, paraSpaceAfter: 1 });
+  };
+
+  if (f.productSlides) {
+    const byKey = Object.fromEntries(f.products.map((p) => [p.key, p]));
+    for (const g of f.productSlides) {
+      const s = pres.addSlide({ masterName: "Content Sand", sectionTitle: "Your products" });
+      s.addText(g.en, { placeholder: "title" });
+      s.addText(g.cn, { placeholder: "cn" });
+      const ps = g.producten.map((k) => byKey[k]);
+      if (ps.length === 1) await productWide(s, ps[0]);
+      else {
+        const gap = 0.3, w = (CW - gap) / 2;
+        for (let i = 0; i < ps.length; i++) await productHalf(s, ps[i], M + i * (w + gap), w);
+      }
+      txt(s, "Review source", [
+        en("Source: bol.com, 1 January to 15 October 2026. Counts are 1 to 3 star reviews; one review can mention several topics. Quotes translated from Dutch.", { breakLine: true }),
+        cn("数据来源：bol.com，2026年1月1日至10月15日。数字为1至3星评价，一条评价可能涉及多个问题。引文译自荷兰语。"),
+      ], { x: M, y: PT + PH + 0.08, w: CW, h: 0.34, fontSize: 9, color: C.accent6, paraSpaceAfter: 1 });
+      s.addNotes(g.notes);
+    }
+  } else {
     const s = pres.addSlide({ masterName: "Content Sand", sectionTitle: "Your products" });
     s.addText("What our customers tell us", { placeholder: "title" });
     s.addText("客户反馈", { placeholder: "cn" });
