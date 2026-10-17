@@ -3,7 +3,7 @@
 Introductiedecks voor de bezoeken in China, in het Engels met vereenvoudigd Chinees eronder.
 Huisstijl van wellshave.com: zand, carbon, brons en goud, Montserrat.
 
-- **Global Best Way en Fanke** bezoeken we tegelijk, dus zij krijgen samen één deck van 12 slides.
+- **Global Best Way en Fanke** bezoeken we tegelijk, dus zij krijgen samen één deck van 13 slides.
 - **iClipper** heeft een eigen deck van 9 slides.
 
 ## Global Best Way en Fanke
@@ -15,22 +15,24 @@ Huisstijl van wellshave.com: zand, carbon, brons en goud, Montserrat.
 | 3 | Het team: Dustin Gibson, Willem de Groot, Leo |
 | 4 | Waarom we komen, in vier stappen |
 | 5 | Hun producten bij Wellshave: foto, verkochte stuks en retourpercentage per product |
-| 6 | Elite: batterij voorop ("Many customers report a broken battery"), klachten en onze vraag |
-| 7 | Neustrimmers |
-| 8 | Baardtrimmers: Pro 8188 en Supreme 8988 |
-| 9 | Scheerapparaten: Head Shaver Deluxe en Blade Baron |
-| 10 | Bodygroomers: Groom Guard en Flex Guard |
-| 11 | Drie verbeterpunten: kwaliteit (batterijen, adapter met vaste kabel), prijs, nieuwe modellen |
-| 12 | Samples en aanraders, en bedankt |
+| 6 | Klantenservice: de accu is defect nummer 1 (146 van de 215 defectmeldingen in 2026) |
+| 7 | Elite: accu voorop, 37 van de 54 defectmeldingen gaan over de accu of het opladen |
+| 8 | Neustrimmers |
+| 9 | Baardtrimmers: Pro 8188 en Supreme 8988 |
+| 10 | Scheerapparaten: Head Shaver Deluxe en Blade Baron |
+| 11 | Bodygroomers: Groom Guard en Flex Guard |
+| 12 | Drie verbeterpunten: kwaliteit (batterijen, adapter met vaste kabel), prijs, nieuwe modellen |
+| 13 | Samples en aanraders, en bedankt |
 
 Het deck toont alleen producten die we bij deze twee partijen inkopen. Het zegt niet welk
 product via welke partij loopt.
 
 Elke productslide heeft dezelfde opbouw:
 
-- foto, model, verkochte stuks, retourpercentage en aantal kritische reviews;
+- foto, model, verkochte stuks, retourpercentage en aantal defectmeldingen;
 - één focuspunt: batterijproblemen staan altijd in een donker vlak, zodat ze eruit springen;
-- de drie meest genoemde klachten;
+- naast elkaar de drie grootste defecten uit de klantenservice en de drie meest genoemde
+  klachten uit de bol.com-reviews;
 - wat we van de fabriek vragen.
 
 ## iClipper
@@ -70,10 +72,14 @@ Elke productslide heeft dezelfde opbouw:
   product in dezelfde periode, met de hand ingedeeld.
   - Een review kan onder meer klachten vallen.
   - De citaten zijn vertaald uit het Nederlands.
-- **Batterij bij de Elite:** de kop "Many customers report a broken battery" komt van Dustin,
-  op basis van de klantmeldingen. In de bol.com-reviews van 2026 gaan 3 van de 28 kritische
-  reviews over de batterij; de meeste gaan over het scheerresultaat. De drie citaten op de
-  slide komen uit die reviews.
+- **Defectmeldingen:** het defectenlogboek van de klantenservice (Service Desk), 1 januari
+  t/m 15 oktober 2026, klanten van de webshop en bol.com samen.
+  - Per melding is de categorie bepaald uit de klachttekst: accu of opladen, start niet of
+    valt uit, aan/uit-problemen, kop of onderdeel kapot, motor of trekken, overig.
+  - Staat er iets over laden, accu, batterij of het percentage in, dan telt de melding als
+    accu of opladen.
+  - De citaten in de donkere vlakken komen uit die meldingen, vertaald uit het Nederlands.
+  - Mediaan van aankoop tot accumelding: 5 maanden bij de Elite, tot 13 maanden bij de Pro.
 
 ## Opnieuw bouwen
 
@@ -99,5 +105,5 @@ wat er vrijwel hetzelfde uitziet.
 - Prognose 2027 per fabriek. Het deck zegt nu dat die in het gesprek gedeeld wordt.
 - Slide 2 noemt de omzet van 2026, ongeveer €2,5M via bol.com en €0,6M via de webshop.
   Haal die twee tegels weg als je die cijfers niet met fabrieken wilt delen.
-- Elite: heeft de klantenservice een aantal of percentage kapotte batterijen? Dan kan dat
-  getal in de kop op slide 6.
+- Slide 6 zegt dat we bij 97% van de defectmeldingen een nieuw apparaat sturen. Dat is een
+  sterk argument voor betere kwaliteit, maar haal die tegel weg als je dat niet wilt delen.

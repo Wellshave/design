@@ -30,6 +30,10 @@ const FACTORIES = CONFIG.fabrieken.map((f) => ({
   productSlides: f.productslides,
   visual: f.producten.every((p) => p.foto),
   cover: f.cover || { foto: "cover.jpg", alt: "Wellshave hair clipper with battery display" },
+  why: f.waarom || {
+    en: "our customers get a 100-day trial and a 2-year warranty, so every weak battery becomes a return and a bad review.",
+    cn: "我们为客户提供 100 天试用和 2 年保修，每一个电池问题都会变成退货和差评。",
+  },
 }));
 const nf = (n) => n.toLocaleString("en-US");
 const VISIT_EN = CONFIG.bezoek_en;
@@ -383,6 +387,22 @@ async function build(f) {
   };
   const PT = 1.75, PH = 4.75; // bovenkant en hoogte van het productvlak
 
+  // categorieën uit het defectenlogboek van de klantenservice
+  const DEFECT = {
+    accu: ["Battery or charging", "电池或充电"],
+    stroom: ["Won't start, cuts out", "无法启动或断电"],
+    schakelaar: ["On/off switch faults", "开关故障"],
+    kop: ["Head or parts break", "刀头或部件损坏"],
+    motor: ["Weak motor, pulls hairs", "动力不足，拉扯毛发"],
+    overig: ["Other", "其他"],
+  };
+  const accuOf = (p) => (p.defecten?.categorieen.find((c) => c.key === "accu") || { aantal: 0 }).aantal;
+  const stats3 = (p) => [
+    [nf(p.verkocht), "sold in 2026", "2026 年销量"],
+    [p.retour.toFixed(1) + "%", "return rate", "退货率"],
+    p.defecten ? [String(p.defecten.totaal), "defect reports", "故障报告"] : [String(p.kritisch), "critical reviews", "差评数"],
+  ];
+
   const focusBox = async (s, p, x, y, w, h, wide) => {
     const fc = FOCUS[p.focus.soort], dark = !!fc.dark;
     const head = dark ? C.background1 : C.text1, sub = dark ? C.accent2 : C.accent1, qcn = dark ? C.accent3 : C.accent6;
@@ -393,12 +413,14 @@ async function build(f) {
     const tx = x + pad + b + (wide ? 0.25 : 0.18), tw = x + w - tx - pad;
     const eyebrow = [en(fc.en, { bold: true, charSpacing: 2, color: sub }), cn("  ·  " + fc.cn, { bold: true, color: sub, breakLine: true })];
     if (wide) {
+      const subline = p.focus.sub_en ? [en(p.focus.sub_en, { fontSize: 10.5, color: qcn }), cn("   ·   " + p.focus.sub_cn, { fontSize: 10, color: qcn })] : [];
       txt(s, `Focus head ${p.key}`, [
         ...eyebrow,
         en(p.focus.en, { bold: true, fontSize: 17, color: head, breakLine: true }),
-        cn(p.focus.cn, { bold: true, fontSize: 15, color: sub }),
-      ], { x: tx, y: y + pad - 0.03, w: tw, h: 0.8, fontSize: 10, paraSpaceAfter: 2 });
-      const qs = p.focus.quotes, qy = y + 1.12, qg = 0.25, qw = (w - 2 * pad - (qs.length - 1) * qg) / qs.length;
+        cn(p.focus.cn, { bold: true, fontSize: 15, color: sub, breakLine: subline.length > 0 }),
+        ...subline,
+      ], { x: tx, y: y + pad - 0.03, w: tw, h: 1.0, fontSize: 10, paraSpaceAfter: 2 });
+      const qs = p.focus.quotes, qy = y + (subline.length ? 1.32 : 1.12), qg = 0.25, qw = (w - 2 * pad - (qs.length - 1) * qg) / qs.length;
       qs.forEach((q, i) => {
         const qx = x + pad + i * (qw + qg);
         s.addShape(pres.shapes.LINE, { objectName: `Focus quote rule ${p.key} ${i + 1}`, x: qx, y: qy + 0.04, w: 0, h: y + h - qy - 0.24, line: { color: sub, width: 1.5 } });
@@ -418,10 +440,27 @@ async function build(f) {
     }
   };
 
-  const reviewsLine = (p) => [
-    en("WHAT CUSTOMERS REPORT", { bold: true, charSpacing: 2, color: C.accent6 }), cn("  ·  客户反馈", { bold: true, color: C.accent6 }),
-    en(`     ${p.kritisch} critical reviews in 2026`, { color: C.accent6 }), cn(`  ·  2026 年差评 ${p.kritisch} 条`, { color: C.accent6 }),
-  ];
+  // Twee lijstjes naast elkaar: wat de klantenservice binnenkrijgt en wat in de bol.com-reviews staat.
+  const twoLists = (s, p, x, y, w, rowH, big) => {
+    const cols = [];
+    if (p.defecten) cols.push({
+      en: "DEFECT REPORTS", cn: "售后故障", n: p.defecten.totaal,
+      rows: p.defecten.categorieen.filter((c) => c.key !== "overig").slice(0, 3).map((c) => ({ en: DEFECT[c.key][0], cn: DEFECT[c.key][1], aantal: c.aantal, accu: c.key === "accu" })),
+    });
+    cols.push({ en: "BOL.COM REVIEWS", cn: "差评", n: p.kritisch, rows: p.klachten.slice(0, 3) });
+    const gap = 0.3, cw = (w - gap * (cols.length - 1)) / cols.length, nw = big ? 0.5 : 0.36;
+    cols.forEach((c, j) => {
+      const cx = x + j * (cw + gap);
+      txt(s, `List head ${p.key} ${j + 1}`, [en(c.en, { bold: true, charSpacing: 1.5 }), cn("  ·  " + c.cn, { bold: true }), en(`   ${c.n}`, { bold: true, color: C.text1 })],
+        { x: cx, y, w: cw, h: 0.2, fontSize: big ? 9.5 : 8.5, color: C.accent6 });
+      c.rows.forEach((r, i) => {
+        const ry = y + 0.25 + i * rowH;
+        txt(s, `List count ${p.key} ${j + 1} ${i + 1}`, String(r.aantal), { x: cx, y: ry, w: nw, h: rowH - 0.04, fontSize: big ? 16 : 12.5, bold: true, color: r.accu ? C.accent1 : C.text1, valign: "middle" });
+        txt(s, `List item ${p.key} ${j + 1} ${i + 1}`, [en(r.en, { bold: true, breakLine: true }), cn(r.cn, { color: C.accent1, fontSize: big ? 10 : 8.5 })],
+          { x: cx + nw + 0.05, y: ry, w: cw - nw - 0.05, h: rowH - 0.04, fontSize: big ? 11 : 9.5, color: C.text1, valign: "middle", paraSpaceAfter: 0 });
+      });
+    });
+  };
 
   // een product over de volle breedte
   const productWide = async (s, p) => {
@@ -431,67 +470,103 @@ async function build(f) {
     s.addImage({ objectName: "Product photo", path: A(p.foto), x: M + (LW - img) / 2, y: PT + 0.22, w: img, h: img, altText: p.titel });
     txt(s, "Model", [en("Model  ", { color: C.accent6 }), en(p.model, { bold: true }), cn("   型号", { color: C.accent6 })],
       { x: M + 0.2, y: PT + 3.52, w: LW - 0.4, h: 0.25, fontSize: 10.5, color: C.text1, align: "center" });
-    const st = [[nf(p.verkocht), "sold in 2026", "2026 年销量"], [p.retour.toFixed(1) + "%", "return rate", "退货率"], [String(p.kritisch), "critical reviews", "差评数"]];
     const sw = (LW - 0.3) / 3;
-    st.forEach((v, i) => txt(s, `Product stat ${i + 1}`, [
+    stats3(p).forEach((v, i) => txt(s, `Product stat ${i + 1}`, [
       en(v[0], { bold: true, fontSize: 19, breakLine: true }), en(v[1], { fontSize: 9.5, color: C.accent6, breakLine: true }), cn(v[2], { fontSize: 9.5, color: C.accent1 }),
     ], { x: M + 0.15 + i * sw, y: PT + 3.88, w: sw, h: 0.78, align: "center", color: C.text1, paraSpaceAfter: 1 }));
 
-    const RX = M + LW + 0.3, RW = W - M - RX, fh = 2.2;
+    const RX = M + LW + 0.3, RW = W - M - RX, fh = 2.25;
     await focusBox(s, p, RX, PT, RW, fh, true);
+    twoLists(s, p, RX, PT + fh + 0.14, RW, 0.38, true);
 
-    const iy = PT + fh + 0.13;
-    txt(s, "Reviews head", reviewsLine(p), { x: RX, y: iy, w: RW, h: 0.24, fontSize: 9.5 });
-    const max = Math.max(...p.klachten.map((k) => k.aantal)), LBL = 4.1;
-    p.klachten.forEach((k, i) => {
-      const ry = iy + 0.29 + i * 0.38, bx = RX + LBL + 0.15, bw = RW - LBL - 0.15 - 0.6;
-      txt(s, `Issue ${i + 1}`, [en(k.en, { bold: true, fontSize: 11.5, breakLine: true }), cn(k.cn, { fontSize: 10, color: C.accent1 })],
-        { x: RX, y: ry, w: LBL, h: 0.4, color: C.text1 });
-      s.addShape(pres.shapes.ROUNDED_RECTANGLE, { objectName: `Issue track ${i + 1}`, x: bx, y: ry + 0.13, w: bw, h: 0.12, rectRadius: 0.06, fill: { color: C.accent3 }, line: { type: "none" } });
-      s.addShape(pres.shapes.ROUNDED_RECTANGLE, { objectName: `Issue bar ${i + 1}`, x: bx, y: ry + 0.13, w: Math.max(0.12, bw * k.aantal / max), h: 0.12, rectRadius: 0.06, fill: { color: C.accent1 }, line: { type: "none" } });
-      txt(s, `Issue count ${i + 1}`, String(k.aantal), { x: RX + RW - 0.5, y: ry + 0.02, w: 0.5, h: 0.32, fontSize: 15, bold: true, color: C.text1, align: "right" });
-    });
-
-    const ay = PT + PH - 0.95, aw = (RW - 0.5 - 0.4) / 3;
-    card(s, "Ask card", RX, ay, RW, 0.95, HEX.paper);
-    txt(s, "Ask head", [en("OUR ASK", { bold: true, charSpacing: 2 }), cn("  ·  我们的期望", { bold: true })], { x: RX + 0.25, y: ay + 0.13, w: RW - 0.5, h: 0.2, fontSize: 9.5, color: C.accent1 });
+    const ah = 0.85, ay = PT + PH - ah, aw = (RW - 0.5 - 0.4) / 3;
+    card(s, "Ask card", RX, ay, RW, ah, HEX.paper);
+    txt(s, "Ask head", [en("OUR ASK", { bold: true, charSpacing: 2 }), cn("  ·  我们的期望", { bold: true })], { x: RX + 0.25, y: ay + 0.12, w: RW - 0.5, h: 0.2, fontSize: 9.5, color: C.accent1 });
     p.vragen.forEach((v, i) => txt(s, `Ask ${i + 1}`, [en(v.en, { bold: true, fontSize: 11, breakLine: true }), cn(v.cn, { fontSize: 10, color: C.accent1 })],
-      { x: RX + 0.25 + i * (aw + 0.2), y: ay + 0.36, w: aw, h: 0.54, color: C.text1, paraSpaceAfter: 1 }));
+      { x: RX + 0.25 + i * (aw + 0.2), y: ay + 0.34, w: aw, h: 0.46, color: C.text1, paraSpaceAfter: 1 }));
   };
 
   // twee producten naast elkaar
   const productHalf = async (s, p, x, w) => {
     card(s, `Product card ${p.key}`, x, PT, w, PH, HEX.paper);
-    const pad = 0.2, img = 1.35;
-    s.addImage({ objectName: `Product photo ${p.key}`, path: A(p.foto), x: x + pad, y: PT + 0.18, w: img, h: img, altText: p.titel });
+    const pad = 0.2, img = 1.3;
+    s.addImage({ objectName: `Product photo ${p.key}`, path: A(p.foto), x: x + pad, y: PT + 0.16, w: img, h: img, altText: p.titel });
     const tx = x + pad + img + 0.2, tw = x + w - tx - 0.18;
     txt(s, `Product name ${p.key}`, [
       en(p.titel, { bold: true, fontSize: 14.5, breakLine: true }), cn(p.product_cn, { fontSize: 12, color: C.accent1, breakLine: true }),
       en("Model " + p.model, { fontSize: 9.5, color: C.accent6 }),
-    ], { x: tx, y: PT + 0.16, w: tw, h: 0.78, color: C.text1, paraSpaceAfter: 1 });
-    const st = [[nf(p.verkocht), "sold in 2026", "2026 年销量"], [p.retour.toFixed(1) + "%", "return rate", "退货率"], [String(p.kritisch), "critical reviews", "差评数"]];
+    ], { x: tx, y: PT + 0.12, w: tw, h: 0.78, color: C.text1, paraSpaceAfter: 1 });
     const sw = tw / 3;
-    st.forEach((v, i) => txt(s, `Product stat ${p.key} ${i + 1}`, [
+    stats3(p).forEach((v, i) => txt(s, `Product stat ${p.key} ${i + 1}`, [
       en(v[0], { bold: true, fontSize: 15, breakLine: true }), en(v[1], { fontSize: 9, color: C.accent6, breakLine: true }), cn(v[2], { fontSize: 9, color: C.accent1 }),
-    ], { x: tx + i * sw, y: PT + 0.98, w: sw, h: 0.62, color: C.text1, paraSpaceAfter: 0 }));
+    ], { x: tx + i * sw, y: PT + 0.92, w: sw, h: 0.6, color: C.text1, paraSpaceAfter: 0 }));
 
-    await focusBox(s, p, x + pad, PT + 1.66, w - 2 * pad, 1.28, false);
+    await focusBox(s, p, x + pad, PT + 1.6, w - 2 * pad, 1.2, false);
+    twoLists(s, p, x + pad, PT + 2.87, w - 2 * pad, 0.29, false);
 
-    const iy = PT + 3.04;
-    txt(s, `Reviews head ${p.key}`, reviewsLine(p).slice(0, 2), { x: x + pad, y: iy, w: w - 2 * pad, h: 0.2, fontSize: 9 });
-    txt(s, `Issues ${p.key}`, p.klachten.flatMap((k, i) => [
-      en(String(k.aantal), { bold: true, color: C.accent1 }), en("   " + k.en, { bold: true }), cn("   " + k.cn, { color: C.accent6, fontSize: 9.5, breakLine: i < p.klachten.length - 1 }),
-    ]), { x: x + pad, y: iy + 0.22, w: w - 2 * pad, h: 0.7, fontSize: 10.5, color: C.text1, paraSpaceAfter: 3 });
-
-    const ay = PT + PH - 0.74;
-    card(s, `Ask card ${p.key}`, x + pad, ay, w - 2 * pad, 0.6, HEX.sand);
+    const ay = PT + PH - 0.66;
+    card(s, `Ask card ${p.key}`, x + pad, ay, w - 2 * pad, 0.55, HEX.sand);
     txt(s, `Ask ${p.key}`, [
-      en("OUR ASK", { bold: true, charSpacing: 2, fontSize: 9, color: C.accent1 }), cn("  ·  我们的期望", { bold: true, fontSize: 9, color: C.accent1, breakLine: true }),
+      en("OUR ASK", { bold: true, charSpacing: 2, fontSize: 8.5, color: C.accent1 }), cn("  ·  我们的期望", { bold: true, fontSize: 8.5, color: C.accent1, breakLine: true }),
       ...p.vragen.flatMap((v, i) => [en("→  " + v.en, { bold: true }), cn("   " + v.cn, { color: C.accent1, fontSize: 9.5, breakLine: i < p.vragen.length - 1 })]),
-    ], { x: x + pad + 0.15, y: ay + 0.08, w: w - 2 * pad - 0.3, h: 0.46, fontSize: 10, color: C.text1, paraSpaceAfter: 1 });
+    ], { x: x + pad + 0.15, y: ay + 0.06, w: w - 2 * pad - 0.3, h: 0.46, fontSize: 10, color: C.text1, paraSpaceAfter: 1 });
+  };
+
+  // Overzicht van het defectenlogboek: per product alle meldingen, met het deel over accu en opladen.
+  const defectSlide = async () => {
+    const ps = f.products.filter((p) => p.defecten).sort((a, b) => accuOf(b) - accuOf(a) || b.defecten.totaal - a.defecten.totaal);
+    const tot = ps.reduce((a, p) => a + p.defecten.totaal, 0), acc = ps.reduce((a, p) => a + accuOf(p), 0), repl = ps.reduce((a, p) => a + p.defecten.vervangen, 0);
+    const med = ps.filter((p) => accuOf(p) >= 5).map((p) => p.defecten.mediaan_mnd);
+    const s = pres.addSlide({ masterName: "Content Sand", sectionTitle: "Your products" });
+    s.addText("Customer service: the battery is the #1 defect", { placeholder: "title" });
+    s.addText("售后数据：电池是头号故障", { placeholder: "cn" });
+
+    const LW = 7.75, top = 1.85;
+    card(s, "Defect chart card", M, top, LW, 4.65, HEX.paper);
+    // legenda
+    const lg = [[HEX.bronze, "Battery or charging", "电池或充电"], [HEX.sandDeep, "Other defects", "其他故障"]];
+    lg.forEach((l, i) => {
+      const lx = M + 0.3 + i * 2.9;
+      s.addShape(pres.shapes.ROUNDED_RECTANGLE, { objectName: `Legend swatch ${i + 1}`, x: lx, y: top + 0.27, w: 0.22, h: 0.14, rectRadius: 0.04, fill: { color: l[0] }, line: { type: "none" } });
+      txt(s, `Legend ${i + 1}`, [en(l[1], { bold: true }), cn("  " + l[2], { color: C.accent6 })], { x: lx + 0.3, y: top + 0.22, w: 2.5, h: 0.24, fontSize: 10, color: C.text1 });
+    });
+    const rowH = (4.65 - 0.75) / ps.length, LBL = 2.35, bx = M + 0.3 + LBL, bwMax = LW - 0.6 - LBL - 0.95;
+    const max = Math.max(...ps.map((p) => p.defecten.totaal));
+    ps.forEach((p, i) => {
+      const ry = top + 0.62 + i * rowH, bh = Math.min(0.24, rowH * 0.5), by = ry + (rowH - bh) / 2;
+      txt(s, `Defect label ${i + 1}`, [en(p.product, { bold: true, breakLine: true }), cn(p.product_cn, { fontSize: 8.5, color: C.accent1 })],
+        { x: M + 0.3, y: ry, w: LBL - 0.1, h: rowH, fontSize: 10.5, color: C.text1, valign: "middle", paraSpaceAfter: 0 });
+      const wAll = Math.max(0.08, bwMax * p.defecten.totaal / max), wAcc = bwMax * accuOf(p) / max;
+      s.addShape(pres.shapes.RECTANGLE, { objectName: `Defect bar all ${i + 1}`, x: bx, y: by, w: wAll, h: bh, fill: { color: C.accent3 }, line: { type: "none" } });
+      if (wAcc > 0) s.addShape(pres.shapes.RECTANGLE, { objectName: `Defect bar battery ${i + 1}`, x: bx, y: by, w: wAcc, h: bh, fill: { color: C.accent1 }, line: { type: "none" } });
+      txt(s, `Defect count ${i + 1}`, [en(String(accuOf(p)), { bold: true, color: C.accent1 }), en(` / ${p.defecten.totaal}`, { color: C.text1 })],
+        { x: bx + wAll + 0.1, y: ry, w: 0.9, h: rowH, fontSize: 11.5, valign: "middle" });
+    });
+
+    const RX = M + LW + 0.3, RW = W - M - RX, gap = 0.18, ch = (4.65 - 2 * gap) / 3;
+    const tiles = [
+      [Math.round(100 * acc / tot) + "%", `${acc} of ${tot} defect reports are about the battery or charging`, `${tot} 起故障报告中有 ${acc} 起与电池或充电有关`],
+      [`${Math.floor(Math.min(...med))} to ${Math.round(Math.max(...med))} months`, "median time from purchase to a battery report", "从购买到电池故障的中位时间"],
+      [Math.round(100 * repl / tot) + "%", "of reports: we send the customer a new device", "的报告需要为客户寄送新机"],
+    ];
+    tiles.forEach((t, i) => {
+      const y = top + i * (ch + gap);
+      card(s, `Defect stat ${i + 1}`, RX, y, RW, ch, i === 0 ? HEX.carbon : HEX.paper);
+      txt(s, `Defect stat text ${i + 1}`, [
+        en(t[0], { bold: true, fontSize: 26, color: i === 0 ? C.accent2 : C.text1, breakLine: true }),
+        en(t[1], { fontSize: 10.5, color: i === 0 ? C.background1 : C.text1, breakLine: true }),
+        cn(t[2], { fontSize: 9.5, color: i === 0 ? C.accent3 : C.accent1 }),
+      ], { x: RX + 0.25, y: y + 0.12, w: RW - 0.45, h: ch - 0.24, valign: "middle", paraSpaceAfter: 2 });
+    });
+    txt(s, "Defect source", [
+      en("Source: Wellshave customer service defect log, 1 January to 15 October 2026, webshop and bol.com customers. Category taken from the customer's complaint.", { breakLine: true }),
+      cn("数据来源：Wellshave 售后故障记录，2026年1月1日至10月15日，含官网和 bol.com 客户。类别依据客户的投诉内容划分。"),
+    ], { x: M, y: top + 4.65 + 0.08, w: CW, h: 0.34, fontSize: 9, color: C.accent6, paraSpaceAfter: 1 });
+    s.addNotes(`Every product we buy from you has the same main defect: the battery or charging. ${acc} of ${tot} defect reports this year. Most fail well within the 2-year warranty, and nearly every report means we send a new device at our cost.`);
   };
 
   if (f.productSlides) {
+    if (f.products.some((p) => p.defecten)) await defectSlide();
     const byKey = Object.fromEntries(f.products.map((p) => [p.key, p]));
     for (const g of f.productSlides) {
       const s = pres.addSlide({ masterName: "Content Sand", sectionTitle: "Your products" });
@@ -504,8 +579,8 @@ async function build(f) {
         for (let i = 0; i < ps.length; i++) await productHalf(s, ps[i], M + i * (w + gap), w);
       }
       txt(s, "Review source", [
-        en("Source: bol.com, 1 January to 15 October 2026. Counts are 1 to 3 star reviews; one review can mention several topics. Quotes translated from Dutch.", { breakLine: true }),
-        cn("数据来源：bol.com，2026年1月1日至10月15日。数字为1至3星评价，一条评价可能涉及多个问题。引文译自荷兰语。"),
+        en("Sources: bol.com sales, returns and 1 to 3 star reviews; Wellshave customer service defect log. All 1 January to 15 October 2026. Quotes translated from Dutch.", { breakLine: true }),
+        cn("数据来源：bol.com 销量、退货及 1 至 3 星评价；Wellshave 售后故障记录。时间均为 2026 年 1 月 1 日至 10 月 15 日。引文译自荷兰语。"),
       ], { x: M, y: PT + PH + 0.08, w: CW, h: 0.34, fontSize: 9, color: C.accent6, paraSpaceAfter: 1 });
       s.addNotes(g.notes);
     }
@@ -598,8 +673,8 @@ async function build(f) {
       txt(s, `Priority points ${i + 1}`, runs, { x: x + 0.3, y: y + 1.88, w: cw - 0.5, h: 2.0, fontSize: 14, color: C.background1, paraSpaceAfter: 8 });
     }
     txt(s, "Why it matters", [
-      en("Why this matters: ", { bold: true, color: C.accent2 }), en("our customers get a 100-day trial and a 2-year warranty, so every weak battery becomes a return and a bad review.", { breakLine: true }),
-      cn("原因：", { bold: true, color: C.accent2 }), cn("我们为客户提供 100 天试用和 2 年保修，每一个电池问题都会变成退货和差评。", { color: C.accent3 }),
+      en("Why this matters: ", { bold: true, color: C.accent2 }), en(f.why.en, { breakLine: true }),
+      cn("原因：", { bold: true, color: C.accent2 }), cn(f.why.cn, { color: C.accent3 }),
     ], { x: M, y: 6.08, w: CW, h: 0.68, fontSize: 13, color: C.background1, paraSpaceAfter: 3 });
     s.addNotes("Fixed-cable adapter: from now on every device ships with a charger whose cable is fixed to the adapter, so customers always charge with the right adapter for that device. Wrong adapters damage batteries and lead to returns.");
   }

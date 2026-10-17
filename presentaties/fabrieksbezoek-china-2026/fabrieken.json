@@ -6,147 +6,685 @@
     {
       "naam": "Global Best Way & Fanke",
       "bestand": "GlobalBestWay-Fanke",
-      "cover": { "foto": "cover_elite.jpg", "alt": "Wellshave Shaver Elite rinsed under the tap" },
+      "cover": {
+        "foto": "cover_elite.jpg",
+        "alt": "Wellshave Shaver Elite rinsed under the tap"
+      },
       "bedrijven": [
-        { "en": "Global Best Way Co., Ltd.", "cn": "温州市贝威贸易有限公司", "contact": "Jenny Huang" },
-        { "en": "Wenzhou Fanke Electric Appliance Co., Ltd.", "cn": "温州凡科电器有限公司", "contact": "He Ting 何婷" }
+        {
+          "en": "Global Best Way Co., Ltd.",
+          "cn": "温州市贝威贸易有限公司",
+          "contact": "Jenny Huang"
+        },
+        {
+          "en": "Wenzhou Fanke Electric Appliance Co., Ltd.",
+          "cn": "温州凡科电器有限公司",
+          "contact": "He Ting 何婷"
+        }
       ],
       "producten": [
-        { "key": "neus", "product": "Nose trimmers", "product_cn": "鼻毛修剪器（7 款）", "titel": "Nose trimmers (7 models)",
-          "model": "7 models · WS-NT1 / WS-NT2", "verkocht": 25627, "retour": 2.1, "foto": "p_wellshave-4-in-1-neustrimmer-ultimate.png",
+        {
+          "key": "neus",
+          "product": "Nose trimmers",
+          "product_cn": "鼻毛修剪器（7 款）",
+          "titel": "Nose trimmers (7 models)",
+          "model": "7 models · WS-NT1 / WS-NT2",
+          "verkocht": 25627,
+          "retour": 2.1,
+          "foto": "p_wellshave-4-in-1-neustrimmer-ultimate.png",
           "kritisch": 55,
-          "focus": { "soort": "issue", "en": "Weak cutting: many hairs are not caught", "cn": "修剪力度不足：很多毛发剪不到",
+          "focus": {
+            "soort": "issue",
+            "en": "Weak cutting: many hairs are not caught",
+            "cn": "修剪力度不足：很多毛发剪不到",
             "quotes": [
-              { "en": "After 10 minutes in my nose, just as many hairs as before.", "cn": "在鼻子里用了10分钟，鼻毛还是和之前一样多。" },
-              { "en": "The blade sits too deep to catch short hairs.", "cn": "刀片藏得太深，剪不到短毛。" },
-              { "en": "Used it twice and the head was broken.", "cn": "只用了两次，刀头就坏了。" }
-            ] },
+              {
+                "en": "After 10 minutes in my nose, just as many hairs as before.",
+                "cn": "在鼻子里用了10分钟，鼻毛还是和之前一样多。"
+              },
+              {
+                "en": "The blade sits too deep to catch short hairs.",
+                "cn": "刀片藏得太深，剪不到短毛。"
+              },
+              {
+                "en": "Used it twice and the head was broken.",
+                "cn": "只用了两次，刀头就坏了。"
+              }
+            ],
+            "sub_en": "22 of 55 critical reviews on bol.com",
+            "sub_cn": "bol.com 55 条差评中有 22 条"
+          },
           "klachten": [
-            { "en": "Weak cutting: hairs not caught", "cn": "修剪力度不足，剪不到毛发", "aantal": 22 },
-            { "en": "Broken within weeks or months", "cn": "使用数周或数月后损坏", "aantal": 15 },
-            { "en": "Caps, attachments, missing parts", "cn": "保护盖、配件安装与缺件", "aantal": 9 }
+            {
+              "en": "Weak cutting",
+              "cn": "修剪力度不足",
+              "aantal": 22
+            },
+            {
+              "en": "Broken within months",
+              "cn": "数月内损坏",
+              "aantal": 15
+            },
+            {
+              "en": "Caps and parts",
+              "cn": "保护盖与配件",
+              "aantal": 9
+            }
           ],
           "vragen": [
-            { "en": "Sharper blades that catch every hair", "cn": "更锋利的刀片，不漏剪" },
-            { "en": "A head that does not break", "cn": "更牢固、不易损坏的刀头" },
-            { "en": "Easy caps and a complete box", "cn": "保护盖易取下，配件齐全" }
-          ] },
-        { "key": "elite", "product": "Shaver Elite", "product_cn": "Elite 四合一剃须刀", "titel": "Shaver Elite 4-in-1",
-          "model": "8600 / WS-SA3", "verkocht": 4567, "retour": 5.2, "foto": "p_wellshave-scheerapparaat-elite.png",
+            {
+              "en": "Sharper blades",
+              "cn": "更锋利的刀片，不漏剪"
+            },
+            {
+              "en": "A head that does not break",
+              "cn": "更牢固、不易损坏的刀头"
+            },
+            {
+              "en": "Easy caps, complete box",
+              "cn": "保护盖易取下，配件齐全"
+            }
+          ],
+          "defecten": {
+            "totaal": 31,
+            "mediaan_mnd": 8.0,
+            "vervangen": 29,
+            "categorieen": [
+              {
+                "key": "accu",
+                "aantal": 16
+              },
+              {
+                "key": "overig",
+                "aantal": 7
+              },
+              {
+                "key": "kop",
+                "aantal": 4
+              },
+              {
+                "key": "stroom",
+                "aantal": 2
+              },
+              {
+                "key": "schakelaar",
+                "aantal": 1
+              },
+              {
+                "key": "motor",
+                "aantal": 1
+              }
+            ]
+          }
+        },
+        {
+          "key": "elite",
+          "product": "Shaver Elite",
+          "product_cn": "Elite 四合一剃须刀",
+          "titel": "Shaver Elite 4-in-1",
+          "model": "8600 / WS-SA3",
+          "verkocht": 4567,
+          "retour": 5.2,
+          "foto": "p_wellshave-scheerapparaat-elite.png",
           "kritisch": 28,
-          "focus": { "soort": "batterij", "en": "Many customers report a broken battery", "cn": "大量客户反馈：电池损坏",
+          "focus": {
+            "soort": "batterij",
+            "en": "Battery fails: 37 of 54 defect reports",
+            "cn": "电池故障：54 起故障报告中有 37 起",
+            "sub_en": "Typically 5 months after purchase",
+            "sub_cn": "通常在购买后约 5 个月",
             "quotes": [
-              { "en": "Stopped charging after 13 months.", "cn": "用了13个月后就无法充电了。" },
-              { "en": "The battery died fast. The replacement also stopped after a few months.", "cn": "电池很快就坏了，换来的新机几个月后也不能用了。" },
-              { "en": "Runs 60 minutes at most instead of 90.", "cn": "最多只能用60分钟，而不是90分钟。" }
-            ] },
+              {
+                "en": "Battery shows 99%, but the shaver does nothing.",
+                "cn": "电量显示 99%，但剃须刀完全不工作。"
+              },
+              {
+                "en": "After two hours of charging, the battery lasts two minutes.",
+                "cn": "充电两个小时，只能用两分钟。"
+              },
+              {
+                "en": "While charging I heard a pop and smelled burning. Now it does nothing.",
+                "cn": "充电时听到“砰”的一声，闻到焦味，之后完全不能用了。"
+              }
+            ]
+          },
           "klachten": [
-            { "en": "Not a close shave, pulls hairs", "cn": "剃不干净，拉扯胡须", "aantal": 22 },
-            { "en": "Shaving head loose or broken", "cn": "刀头松动或损坏", "aantal": 4 },
-            { "en": "Battery and charging", "cn": "电池与充电", "aantal": 3 }
+            {
+              "en": "Pulls hairs, not close",
+              "cn": "剃不干净，拉扯胡须",
+              "aantal": 22
+            },
+            {
+              "en": "Head loose or broken",
+              "cn": "刀头松动或损坏",
+              "aantal": 4
+            },
+            {
+              "en": "Battery and charging",
+              "cn": "电池与充电",
+              "aantal": 3
+            }
           ],
           "vragen": [
-            { "en": "A battery that lasts for years", "cn": "经久耐用的电池" },
-            { "en": "More power for a closer shave", "cn": "更强动力，剃得更干净" },
-            { "en": "Fixed-cable adapter in the box", "cn": "随附线缆固定的一体式适配器" }
-          ] },
-        { "key": "supreme", "product": "Beard Trimmer Supreme", "product_cn": "Supreme 六合一胡须修剪器", "titel": "Beard Trimmer Supreme 6-in-1",
-          "model": "8988 / WS-BTG2", "verkocht": 3143, "retour": 3.5, "foto": "p_6-in-1-baardtrimmer-supreme.png",
+            {
+              "en": "Battery that lasts years",
+              "cn": "经久耐用的电池"
+            },
+            {
+              "en": "More power, closer shave",
+              "cn": "更强动力，剃得更干净"
+            },
+            {
+              "en": "Fixed-cable adapter",
+              "cn": "线缆固定的一体式适配器"
+            }
+          ],
+          "defecten": {
+            "totaal": 54,
+            "mediaan_mnd": 5.1,
+            "vervangen": 54,
+            "categorieen": [
+              {
+                "key": "accu",
+                "aantal": 37
+              },
+              {
+                "key": "stroom",
+                "aantal": 9
+              },
+              {
+                "key": "kop",
+                "aantal": 6
+              },
+              {
+                "key": "motor",
+                "aantal": 1
+              },
+              {
+                "key": "overig",
+                "aantal": 1
+              }
+            ]
+          }
+        },
+        {
+          "key": "supreme",
+          "product": "Beard Trimmer Supreme",
+          "product_cn": "Supreme 六合一胡须修剪器",
+          "titel": "Beard Trimmer Supreme 6-in-1",
+          "model": "8988 / WS-BTG2",
+          "verkocht": 3143,
+          "retour": 3.5,
+          "foto": "p_6-in-1-baardtrimmer-supreme.png",
           "kritisch": 5,
-          "focus": { "soort": "issue", "en": "Uneven trimming", "cn": "修剪不均匀",
-            "quotes": [ { "en": "It takes bites out of the beard and skips other parts.", "cn": "会把胡子剪出缺口，有些地方又剪不到。" } ] },
+          "focus": {
+            "soort": "batterij",
+            "en": "26 of 36 defect reports: battery or charging",
+            "cn": "36 起故障报告中有 26 起与电池或充电有关",
+            "quotes": [
+              {
+                "en": "Won't charge, stays at 0%. Tried several chargers and cables.",
+                "cn": "无法充电，电量一直是 0%。已试过多个充电器和数据线。"
+              }
+            ]
+          },
           "klachten": [
-            { "en": "Uneven trimming", "cn": "修剪不均匀", "aantal": 3 },
-            { "en": "Does not charge well", "cn": "充电不正常", "aantal": 1 },
-            { "en": "Fragile attachments", "cn": "配件易碎", "aantal": 1 }
+            {
+              "en": "Uneven trimming",
+              "cn": "修剪不均匀",
+              "aantal": 3
+            },
+            {
+              "en": "Does not charge well",
+              "cn": "充电不正常",
+              "aantal": 1
+            },
+            {
+              "en": "Fragile attachments",
+              "cn": "配件易碎",
+              "aantal": 1
+            }
           ],
           "vragen": [
-            { "en": "Even trimming, also on short stubble", "cn": "修剪均匀，短胡茬也能修好" },
-            { "en": "Shorter guide combs", "cn": "更短的限位梳" }
-          ] },
-        { "key": "pro", "product": "Beard Trimmer Pro", "product_cn": "Pro 五合一胡须修剪器", "titel": "Beard Trimmer Pro 5-in-1",
-          "model": "8188 / WS-BTG1", "verkocht": 2179, "retour": 4.3, "foto": "p_beard-trimmer-pro.png",
+            {
+              "en": "Battery and charging that last",
+              "cn": "持久耐用的电池与充电"
+            },
+            {
+              "en": "Even trimming, also on short stubble",
+              "cn": "修剪均匀，短胡茬也能修好"
+            }
+          ],
+          "defecten": {
+            "totaal": 36,
+            "mediaan_mnd": 7.7,
+            "vervangen": 34,
+            "categorieen": [
+              {
+                "key": "accu",
+                "aantal": 26
+              },
+              {
+                "key": "stroom",
+                "aantal": 5
+              },
+              {
+                "key": "schakelaar",
+                "aantal": 3
+              },
+              {
+                "key": "overig",
+                "aantal": 2
+              }
+            ]
+          }
+        },
+        {
+          "key": "pro",
+          "product": "Beard Trimmer Pro",
+          "product_cn": "Pro 五合一胡须修剪器",
+          "titel": "Beard Trimmer Pro 5-in-1",
+          "model": "8188 / WS-BTG1",
+          "verkocht": 2179,
+          "retour": 4.3,
+          "foto": "p_beard-trimmer-pro.png",
           "kritisch": 11,
-          "focus": { "soort": "batterij", "en": "4 of 11 critical reviews: battery or charging", "cn": "11 条差评中有 4 条与电池或充电有关",
-            "quotes": [ { "en": "After one use it no longer charges.", "cn": "只用了一次就无法充电了。" } ] },
+          "focus": {
+            "soort": "batterij",
+            "en": "10 of 15 defect reports: battery or charging",
+            "cn": "15 起故障报告中有 10 起与电池或充电有关",
+            "quotes": [
+              {
+                "en": "Fully charged, but it does nothing anymore.",
+                "cn": "已经充满电，但完全不能用了。"
+              }
+            ]
+          },
           "klachten": [
-            { "en": "Battery dies or stops charging", "cn": "电池没电或无法充电", "aantal": 4 },
-            { "en": "Stops working within months", "cn": "数月内停止工作", "aantal": 4 },
-            { "en": "Cable or attachment missing", "cn": "缺少充电线或配件", "aantal": 2 }
+            {
+              "en": "Battery or charging",
+              "cn": "电池或充电",
+              "aantal": 4
+            },
+            {
+              "en": "Stops within months",
+              "cn": "数月内停止工作",
+              "aantal": 4
+            },
+            {
+              "en": "Cable or part missing",
+              "cn": "缺少充电线或配件",
+              "aantal": 2
+            }
           ],
           "vragen": [
-            { "en": "Battery and charging that last", "cn": "持久耐用的电池与充电" },
-            { "en": "Cable and all attachments in the box", "cn": "包装内充电线与配件齐全" }
-          ] },
-        { "key": "groomguard", "product": "Groom Guard", "product_cn": "Groom Guard 身体修剪器", "titel": "Body Groomer Groom Guard",
-          "model": "WS-BG1 / HT-6006", "verkocht": 2116, "retour": 2.3, "foto": "p_groom-guard-pro.png",
+            {
+              "en": "Battery and charging that last",
+              "cn": "持久耐用的电池与充电"
+            },
+            {
+              "en": "Cable and all attachments in the box",
+              "cn": "包装内充电线与配件齐全"
+            }
+          ],
+          "defecten": {
+            "totaal": 15,
+            "mediaan_mnd": 13.2,
+            "vervangen": 14,
+            "categorieen": [
+              {
+                "key": "accu",
+                "aantal": 10
+              },
+              {
+                "key": "overig",
+                "aantal": 2
+              },
+              {
+                "key": "stroom",
+                "aantal": 1
+              },
+              {
+                "key": "schakelaar",
+                "aantal": 1
+              },
+              {
+                "key": "motor",
+                "aantal": 1
+              }
+            ]
+          }
+        },
+        {
+          "key": "groomguard",
+          "product": "Groom Guard",
+          "product_cn": "Groom Guard 身体修剪器",
+          "titel": "Body Groomer Groom Guard",
+          "model": "WS-BG1 / HT-6006",
+          "verkocht": 2116,
+          "retour": 2.3,
+          "foto": "p_groom-guard.png",
           "kritisch": 7,
-          "focus": { "soort": "kwaliteit", "en": "The charging stand is unstable", "cn": "充电底座不稳",
-            "quotes": [ { "en": "It fell off the stand before first use and the ceramic blade broke.", "cn": "第一次使用前就从底座上倒下，陶瓷刀片摔断了。" } ] },
+          "focus": {
+            "soort": "batterij",
+            "en": "27 of 35 defect reports: battery or charging",
+            "cn": "35 起故障报告中有 27 起与电池或充电有关",
+            "quotes": [
+              {
+                "en": "No longer charges. Tried other charging cables.",
+                "cn": "无法充电，已经换过其他充电线。"
+              }
+            ]
+          },
           "klachten": [
-            { "en": "Too sharp: welts, irritation", "cn": "过于锋利：红痕与刺激", "aantal": 2 },
-            { "en": "Misses or pulls hairs", "cn": "漏剪或拉扯毛发", "aantal": 2 },
-            { "en": "Build quality, unstable stand", "cn": "做工问题，底座不稳", "aantal": 2 }
+            {
+              "en": "Too sharp, irritation",
+              "cn": "过于锋利，刺激皮肤",
+              "aantal": 2
+            },
+            {
+              "en": "Misses or pulls hairs",
+              "cn": "漏剪或拉扯毛发",
+              "aantal": 2
+            },
+            {
+              "en": "Unstable stand",
+              "cn": "底座不稳",
+              "aantal": 2
+            }
           ],
           "vragen": [
-            { "en": "A stable charging stand", "cn": "更稳固的充电底座" },
-            { "en": "Gentler on sensitive skin", "cn": "对敏感肌肤更温和" }
-          ] },
-        { "key": "deluxe", "product": "Head Shaver Deluxe", "product_cn": "Deluxe 光头剃须刀", "titel": "Head Shaver Deluxe",
-          "model": "WS-SA1 / JK-8588A", "verkocht": 1581, "retour": 4.6, "foto": "p_head-shaver-deluxe.png",
+            {
+              "en": "Battery and charging that last",
+              "cn": "持久耐用的电池与充电"
+            },
+            {
+              "en": "A stable charging stand",
+              "cn": "更稳固的充电底座"
+            }
+          ],
+          "defecten": {
+            "totaal": 35,
+            "mediaan_mnd": 7.1,
+            "vervangen": 35,
+            "categorieen": [
+              {
+                "key": "accu",
+                "aantal": 27
+              },
+              {
+                "key": "stroom",
+                "aantal": 6
+              },
+              {
+                "key": "motor",
+                "aantal": 1
+              },
+              {
+                "key": "overig",
+                "aantal": 1
+              }
+            ]
+          }
+        },
+        {
+          "key": "deluxe",
+          "product": "Head Shaver Deluxe",
+          "product_cn": "Deluxe 光头剃须刀",
+          "titel": "Head Shaver Deluxe",
+          "model": "WS-SA1 / JK-8588A",
+          "verkocht": 1581,
+          "retour": 4.6,
+          "foto": "p_head-shaver-deluxe.png",
           "kritisch": 9,
-          "focus": { "soort": "batterij", "en": "The battery or charging port fails", "cn": "电池或充电接口出现故障",
-            "quotes": [ { "en": "After 3 months it no longer charges.", "cn": "用了3个月后就无法充电了。" } ] },
+          "focus": {
+            "soort": "batterij",
+            "en": "28 of 39 defect reports: battery or charging",
+            "cn": "39 起故障报告中有 28 起与电池或充电有关",
+            "quotes": [
+              {
+                "en": "The battery suddenly jumps from about 65% to 0%.",
+                "cn": "电量会突然从 65% 左右跳到 0%。"
+              }
+            ]
+          },
           "klachten": [
-            { "en": "Battery or charging port fails", "cn": "电池或充电接口故障", "aantal": 2 },
-            { "en": "Skin irritation or cuts", "cn": "皮肤刺激或划伤", "aantal": 2 },
-            { "en": "Not a smooth result", "cn": "剃得不够干净", "aantal": 2 }
+            {
+              "en": "Battery or charging",
+              "cn": "电池或充电",
+              "aantal": 2
+            },
+            {
+              "en": "Skin irritation, cuts",
+              "cn": "皮肤刺激或划伤",
+              "aantal": 2
+            },
+            {
+              "en": "Not a smooth result",
+              "cn": "剃得不够干净",
+              "aantal": 2
+            }
           ],
           "vragen": [
-            { "en": "Battery and charging port that last", "cn": "耐用的电池与充电接口" },
-            { "en": "Smoother on the skin", "cn": "对皮肤更顺滑温和" }
-          ] },
-        { "key": "baron", "product": "Blade Baron", "product_cn": "Blade Baron 往复式剃须刀", "titel": "Foil Shaver Blade Baron",
-          "model": "FK-706", "verkocht": 1307, "retour": 5.6, "foto": "p_blade-baron.png",
+            {
+              "en": "Battery and charging port that last",
+              "cn": "耐用的电池与充电接口"
+            },
+            {
+              "en": "Smoother on the skin",
+              "cn": "对皮肤更顺滑温和"
+            }
+          ],
+          "defecten": {
+            "totaal": 39,
+            "mediaan_mnd": 10.4,
+            "vervangen": 38,
+            "categorieen": [
+              {
+                "key": "accu",
+                "aantal": 28
+              },
+              {
+                "key": "stroom",
+                "aantal": 4
+              },
+              {
+                "key": "schakelaar",
+                "aantal": 3
+              },
+              {
+                "key": "overig",
+                "aantal": 2
+              },
+              {
+                "key": "kop",
+                "aantal": 1
+              },
+              {
+                "key": "motor",
+                "aantal": 1
+              }
+            ]
+          }
+        },
+        {
+          "key": "baron",
+          "product": "Blade Baron",
+          "product_cn": "Blade Baron 往复式剃须刀",
+          "titel": "Foil Shaver Blade Baron",
+          "model": "FK-706",
+          "verkocht": 1307,
+          "retour": 5.6,
+          "foto": "p_blade-baron.png",
           "kritisch": 2,
-          "focus": { "soort": "retour", "en": "5.6% returns, the highest of these products", "cn": "退货率 5.6%，为这些产品中最高",
-            "quotes": [ { "en": "It shaves, but not completely smooth as described.", "cn": "能剃，但没有描述的那么干净。" } ] },
+          "focus": {
+            "soort": "retour",
+            "en": "5.6% returns, the highest of these products",
+            "cn": "退货率 5.6%，为这些产品中最高",
+            "quotes": [
+              {
+                "en": "It shaves, but not completely smooth as described.",
+                "cn": "能剃，但没有描述的那么干净。"
+              }
+            ]
+          },
           "klachten": [
-            { "en": "Not completely smooth", "cn": "剃得不够干净", "aantal": 2 }
+            {
+              "en": "Not completely smooth",
+              "cn": "剃得不够干净",
+              "aantal": 2
+            }
           ],
           "vragen": [
-            { "en": "A closer shave", "cn": "剃得更干净" },
-            { "en": "Find the return reasons together", "cn": "共同分析退货原因" }
-          ] },
-        { "key": "flexguard", "product": "Flex Guard", "product_cn": "Flex Guard 身体修剪器", "titel": "Body Groomer Flex Guard",
-          "model": "WS-BG3", "verkocht": 1135, "retour": 5.2, "foto": "p_flex-guard.png",
+            {
+              "en": "A closer shave",
+              "cn": "剃得更干净"
+            },
+            {
+              "en": "Find the return reasons together",
+              "cn": "共同分析退货原因"
+            }
+          ],
+          "defecten": {
+            "totaal": 1,
+            "mediaan_mnd": null,
+            "vervangen": 1,
+            "categorieen": [
+              {
+                "key": "motor",
+                "aantal": 1
+              }
+            ]
+          }
+        },
+        {
+          "key": "flexguard",
+          "product": "Flex Guard",
+          "product_cn": "Flex Guard 身体修剪器",
+          "titel": "Body Groomer Flex Guard",
+          "model": "WS-BG3",
+          "verkocht": 1135,
+          "retour": 5.2,
+          "foto": "p_flex-guard.png",
           "kritisch": 4,
-          "focus": { "soort": "issue", "en": "Misses or pulls hairs", "cn": "漏剪或拉扯毛发",
-            "quotes": [ { "en": "The head pulls out more hairs than it shaves.", "cn": "刀头拔掉的毛比剃掉的还多。" } ] },
+          "focus": {
+            "soort": "issue",
+            "en": "Misses or pulls hairs",
+            "cn": "漏剪或拉扯毛发",
+            "quotes": [
+              {
+                "en": "The head pulls out more hairs than it shaves.",
+                "cn": "刀头拔掉的毛比剃掉的还多。"
+              }
+            ]
+          },
           "klachten": [
-            { "en": "Misses or pulls hairs", "cn": "漏剪或拉扯毛发", "aantal": 2 },
-            { "en": "Attachments do not fit or match", "cn": "配件不匹配或与描述不符", "aantal": 2 },
-            { "en": "Cuts and irritation", "cn": "划伤与刺激", "aantal": 1 }
+            {
+              "en": "Misses or pulls hairs",
+              "cn": "漏剪或拉扯毛发",
+              "aantal": 2
+            },
+            {
+              "en": "Parts do not match",
+              "cn": "配件与描述不符",
+              "aantal": 2
+            },
+            {
+              "en": "Cuts and irritation",
+              "cn": "划伤与刺激",
+              "aantal": 1
+            }
           ],
           "vragen": [
-            { "en": "More power, catches every hair", "cn": "动力更强，不漏毛" },
-            { "en": "Combs and attachments as described", "cn": "限位梳与配件与描述一致" }
-          ] },
-        { "key": "overig", "product": "G-Series and more", "product_cn": "G-Series 理发器及其他", "titel": "G-Series clipper, Shave Package, spare heads",
-          "model": "Clipper, Shave Package, spare heads", "verkocht": 1786, "retour": 4.1, "foto": "p_g-series.png" }
+            {
+              "en": "More power, catches every hair",
+              "cn": "动力更强，不漏毛"
+            },
+            {
+              "en": "Combs and attachments as described",
+              "cn": "限位梳与配件与描述一致"
+            }
+          ],
+          "defecten": {
+            "totaal": 4,
+            "mediaan_mnd": 7.8,
+            "vervangen": 3,
+            "categorieen": [
+              {
+                "key": "accu",
+                "aantal": 2
+              },
+              {
+                "key": "stroom",
+                "aantal": 1
+              },
+              {
+                "key": "motor",
+                "aantal": 1
+              }
+            ]
+          }
+        },
+        {
+          "key": "overig",
+          "product": "G-Series and more",
+          "product_cn": "G-Series 理发器及其他",
+          "titel": "G-Series clipper, Shave Package, spare heads",
+          "model": "Clipper, Shave Package, spare heads",
+          "verkocht": 1786,
+          "retour": 4.1,
+          "foto": "p_g-series.png"
+        }
       ],
       "productslides": [
-        { "en": "Product focus: Shaver Elite", "cn": "产品聚焦：Elite 剃须刀", "producten": ["elite"],
-          "notes": "Stress the battery: we get many reports of Elite batteries that break down or stop charging. The quotes are from bol.com reviews. In reviews the most common topic is the shave itself: it pulls hairs instead of cutting them." },
-        { "en": "Product focus: nose trimmers", "cn": "产品聚焦：鼻毛修剪器", "producten": ["neus"],
-          "notes": "Our biggest volume: 25,627 units. Return rate is low, but critical reviews keep saying the blade does not catch the hairs." },
-        { "en": "Product focus: beard trimmers", "cn": "产品聚焦：胡须修剪器", "producten": ["pro", "supreme"],
-          "notes": "Pro 8188: battery and charging is the top complaint. Supreme 8988: few complaints, mostly about an uneven trim." },
-        { "en": "Product focus: shavers", "cn": "产品聚焦：剃须刀", "producten": ["deluxe", "baron"],
-          "notes": "Head Shaver Deluxe: battery and charging port. Blade Baron: few reviews, but the highest return rate of these products." },
-        { "en": "Product focus: body groomers", "cn": "产品聚焦：身体修剪器", "producten": ["groomguard", "flexguard"],
-          "notes": "Groom Guard: the charging stand tips over. Flex Guard: pulls hairs, attachments do not match the description." }
-      ]
+        {
+          "en": "Product focus: Shaver Elite",
+          "cn": "产品聚焦：Elite 剃须刀",
+          "producten": [
+            "elite"
+          ],
+          "notes": "Lead with the battery. Our customer service logged 54 defect reports on the Elite this year; 37 were about the battery or charging, typically 5 months after purchase, and every one got a new device. The quotes are from those reports. In bol.com reviews the most common topic is the shave itself: it pulls hairs instead of cutting them."
+        },
+        {
+          "en": "Product focus: nose trimmers",
+          "cn": "产品聚焦：鼻毛修剪器",
+          "producten": [
+            "neus"
+          ],
+          "notes": "Our biggest volume: 25,627 units. Few defects for that volume, but half of them are battery or charging. In reviews the blade does not catch the hairs."
+        },
+        {
+          "en": "Product focus: beard trimmers",
+          "cn": "产品聚焦：胡须修剪器",
+          "producten": [
+            "pro",
+            "supreme"
+          ],
+          "notes": "Both trimmers: battery and charging is the top defect. Supreme 8988: 26 of 36 reports. Pro 8188: 10 of 15. In reviews the Supreme is mostly about an uneven trim."
+        },
+        {
+          "en": "Product focus: shavers",
+          "cn": "产品聚焦：剃须刀",
+          "producten": [
+            "deluxe",
+            "baron"
+          ],
+          "notes": "Head Shaver Deluxe: 28 of 39 defect reports are battery or charging, the battery percentage drops suddenly. Blade Baron: hardly any defects, but the highest return rate of these products."
+        },
+        {
+          "en": "Product focus: body groomers",
+          "cn": "产品聚焦：身体修剪器",
+          "producten": [
+            "groomguard",
+            "flexguard"
+          ],
+          "notes": "Groom Guard: 27 of 35 defect reports are battery or charging. Reviews also mention the charging stand tipping over. Flex Guard: few reports, pulls hairs, attachments do not match the description."
+        }
+      ],
+      "waarom": {
+        "en": "in 2026, 146 of the 215 defect reports on your products were about the battery or charging. Each one costs a new device and a disappointed customer.",
+        "cn": "2026 年，贵司产品的 215 起故障报告中有 146 起与电池或充电有关。每一起都意味着一台新机和一位失望的客户。"
+      }
     },
     {
       "naam": "iClipper",
@@ -155,22 +693,62 @@
       "bedrijf_cn": "宁波爱克利浦电器有限公司",
       "contact": "Joe",
       "producten": [
-        { "product": "Hair Clipper Pro", "model": "K73S", "verkocht": 2094, "retour": 2.5 },
-        { "product": "Hair Clipper Deluxe", "model": "K80S", "verkocht": 1428, "retour": 1.5 },
-        { "product": "Hair Clipper Elegant", "model": "K81S", "verkocht": 812, "retour": 2.0 },
-        { "product": "Detail Trimmer Sharpline", "model": "I73S", "verkocht": 295, "retour": 6.1 }
+        {
+          "product": "Hair Clipper Pro",
+          "model": "K73S",
+          "verkocht": 2094,
+          "retour": 2.5
+        },
+        {
+          "product": "Hair Clipper Deluxe",
+          "model": "K80S",
+          "verkocht": 1428,
+          "retour": 1.5
+        },
+        {
+          "product": "Hair Clipper Elegant",
+          "model": "K81S",
+          "verkocht": 812,
+          "retour": 2.0
+        },
+        {
+          "product": "Detail Trimmer Sharpline",
+          "model": "I73S",
+          "verkocht": 295,
+          "retour": 6.1
+        }
       ],
       "reviews": {
         "kritisch": 6,
         "themas": [
-          { "en": "Weight and grip", "cn": "重量与握感", "aantal": 2,
-            "quote_en": "Heavy for such a small device, and slippery in the hand.", "quote_cn": "机身小却偏重，握在手里还容易打滑。" },
-          { "en": "Battery drains fast", "cn": "电池掉电快", "aantal": 1,
-            "quote_en": "Started at 81%; after 10 minutes only 56% was left.", "quote_cn": "开始时电量为81%，使用10分钟后只剩56%。" },
-          { "en": "Blade gets hot", "cn": "刀头发热", "aantal": 1,
-            "quote_en": "The cutting part gets hot.", "quote_cn": "刀头会发烫。" },
-          { "en": "Comb length not accurate", "cn": "限位梳长度不准", "aantal": 1,
-            "quote_en": "The 3 mm comb is actually 1.5 mm.", "quote_cn": "3毫米的限位梳实际上只有1.5毫米。" }
+          {
+            "en": "Weight and grip",
+            "cn": "重量与握感",
+            "aantal": 2,
+            "quote_en": "Heavy for such a small device, and slippery in the hand.",
+            "quote_cn": "机身小却偏重，握在手里还容易打滑。"
+          },
+          {
+            "en": "Battery drains fast",
+            "cn": "电池掉电快",
+            "aantal": 1,
+            "quote_en": "Started at 81%; after 10 minutes only 56% was left.",
+            "quote_cn": "开始时电量为81%，使用10分钟后只剩56%。"
+          },
+          {
+            "en": "Blade gets hot",
+            "cn": "刀头发热",
+            "aantal": 1,
+            "quote_en": "The cutting part gets hot.",
+            "quote_cn": "刀头会发烫。"
+          },
+          {
+            "en": "Comb length not accurate",
+            "cn": "限位梳长度不准",
+            "aantal": 1,
+            "quote_en": "The 3 mm comb is actually 1.5 mm.",
+            "quote_cn": "3毫米的限位梳实际上只有1.5毫米。"
+          }
         ]
       }
     }
