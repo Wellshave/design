@@ -288,35 +288,64 @@ async function build(f) {
   }
 
   // =====================================================================
-  // 5. PURPOSE OF THE VISIT
+  // 5. OUR PLANS FOR 2027 (dark): veel nieuwe producten, klein testen, winnaars groot opschalen
   // =====================================================================
   {
-    const s = pres.addSlide({ masterName: "Content Sand", sectionTitle: "The visit" });
-    s.addText("Why we are visiting", { placeholder: "title" });
-    s.addText("本次拜访目的", { placeholder: "cn" });
+    const s = pres.addSlide({ masterName: "Content Dark", sectionTitle: "The visit" });
+    s.addText("Our plans for 2027: more products, faster", { placeholder: "title" });
+    s.addText("2027 年计划：更多新品，更快速度", { placeholder: "cn" });
+    const top = 1.92, rh = 3.25, hw = 3.25;
+
+    // links: het tempo in één getal
+    card(s, "Pace card", M, top, hw, rh, HEX.gold);
+    txt(s, "Pace eyebrow", [en("EVERY MONTH", { bold: true, charSpacing: 2 }), cn("  ·  每月", { bold: true })],
+      { x: M + 0.3, y: top + 0.3, w: hw - 0.5, h: 0.28, fontSize: 10, color: C.accent4 });
+    txt(s, "Pace value", "3 to 5", { x: M + 0.3, y: top + 0.62, w: hw - 0.5, h: 0.85, fontSize: 46, bold: true, color: C.text1 });
+    txt(s, "Pace label", [en("new products", { bold: true, fontSize: 18, breakLine: true }), cn("每月推出 3 至 5 款新品", { fontSize: 14, color: C.accent4 })],
+      { x: M + 0.3, y: top + 1.5, w: hw - 0.5, h: 0.75, color: C.text1, paraSpaceAfter: 2 });
+    s.addShape(pres.shapes.LINE, { objectName: "Pace divider", x: M + 0.3, y: top + 2.38, w: hw - 0.6, h: 0, line: { color: C.accent1, width: 1 } });
+    txt(s, "Pace year", [en("36 to 60 new products in 2027", { bold: true, breakLine: true }), cn("2027 年共推出 36 至 60 款新品", { color: C.accent4 })],
+      { x: M + 0.3, y: top + 2.5, w: hw - 0.5, h: 0.6, fontSize: 12, color: C.text1, paraSpaceAfter: 2 });
+
+    // rechts: zo werken we, in drie stappen
     const steps = [
-      ["Get to know each other", "相互了解", "We introduce Wellshave, our customers and how we work.", "介绍 Wellshave、我们的客户和工作方式。"],
-      ["Review current data", "回顾当前数据", "Sales, reviews and returns of the products we buy from you.", "回顾我们向贵司采购产品的销量、评价和退货情况。"],
-      ["Share our 2027 plans", "分享 2027 年计划", "Our growth plans and what they mean for your factory.", "我们的增长计划及其对贵厂的意义。"],
-      ["Improve the range together", "共同优化产品", "Better quality, better prices and new models.", "更好的品质、更优的价格和新款产品。"],
+      ["MdOutlineScience", "Test small", "小批量试销", "Low MOQ on the first order, so we can test many new products.", "首单低起订量，让我们能测试更多新品。"],
+      ["MdOutlineSpeed", "Learn fast", "快速验证市场", "Fast samples and short lead times. Our sales data quickly shows what works.", "快速打样，交期短。我们的销售数据能很快显示哪款产品受欢迎。"],
+      ["MdOutlineRocketLaunch", "Scale big", "迅速放量", "When a product takes off, we go all in with large bulk orders straight away.", "产品一旦畅销，我们立即全力跟进，下大批量订单。"],
     ];
-    const gap = 0.24, cw = (CW - 3 * gap) / 4, ch = 3.45, y = 1.95;
-    steps.forEach((st, i) => {
-      const x = M + i * (cw + gap);
-      card(s, `Step card ${i + 1}`, x, y, cw, ch, HEX.paper);
-      txt(s, `Step number ${i + 1}`, String(i + 1).padStart(2, "0"), { x: x + 0.28, y: y + 0.28, w: 1.0, h: 0.6, fontSize: 32, bold: true, color: C.accent1 });
-      txt(s, `Step title ${i + 1}`, [en(st[0], { bold: true, fontSize: 16, breakLine: true }), cn(st[1], { bold: true, fontSize: 15, color: C.accent1 })],
-        { x: x + 0.28, y: y + 1.0, w: cw - 0.5, h: 0.95, color: C.text1, paraSpaceAfter: 3 });
-      txt(s, `Step text ${i + 1}`, [en(st[2], { breakLine: true }), cn(st[3], { color: C.accent6 })],
-        { x: x + 0.28, y: y + 2.0, w: cw - 0.45, h: 1.35, fontSize: 13, color: C.text1, paraSpaceAfter: 5 });
-    });
-    const by = y + ch + 0.3;
-    card(s, "Outcome box", M, by, CW, 0.82, HEX.sandDeep);
-    s.addImage({ objectName: "Outcome icon", data: await ic("MdOutlineFlag", HEX.bronze), x: M + 0.28, y: by + 0.22, w: 0.38, h: 0.38 });
-    txt(s, "Outcome", [
-      en("A good visit: ", { bold: true }), en("we leave with samples, your recommendations and clear next steps for 2027.", { breakLine: true }),
-      cn("成功的拜访：", { bold: true, color: C.accent4 }), cn("我们带着样品、您的建议和清晰的 2027 年下一步计划回去。", { color: C.accent4 }),
-    ], { x: M + 0.85, y: by + 0.12, w: CW - 1.1, h: 0.62, fontSize: 13, color: C.text1, paraSpaceAfter: 2 });
+    const SX = M + hw + 0.3, gap = 0.42, cw = (W - M - SX - 2 * gap) / 3;
+    for (const [i, st] of steps.entries()) {
+      const x = SX + i * (cw + gap);
+      card(s, `Plan step ${i + 1}`, x, top, cw, rh, HEX.card);
+      s.addShape(pres.shapes.OVAL, { objectName: `Plan badge ${i + 1}`, x: x + 0.25, y: top + 0.25, w: 0.62, h: 0.62, fill: { color: C.accent2 }, line: { type: "none" } });
+      s.addImage({ objectName: `Plan icon ${i + 1}`, data: await ic(st[0], HEX.carbon), x: x + 0.39, y: top + 0.39, w: 0.34, h: 0.34 });
+      txt(s, `Plan number ${i + 1}`, String(i + 1).padStart(2, "0"), { x: x + cw - 1.0, y: top + 0.28, w: 0.75, h: 0.55, fontSize: 26, bold: true, color: C.accent2, align: "right" });
+      txt(s, `Plan title ${i + 1}`, [en(st[1], { bold: true, fontSize: 17, breakLine: true }), cn(st[2], { bold: true, fontSize: 14, color: C.accent2 })],
+        { x: x + 0.25, y: top + 1.05, w: cw - 0.45, h: 0.75, color: C.background1, paraSpaceAfter: 2 });
+      txt(s, `Plan text ${i + 1}`, [en(st[3], { breakLine: true }), cn(st[4], { color: C.accent3, fontSize: 10.5 })],
+        { x: x + 0.25, y: top + 1.9, w: cw - 0.45, h: 1.25, fontSize: 11.5, color: C.background1, paraSpaceAfter: 5 });
+      if (i < steps.length - 1)
+        s.addImage({ objectName: `Plan arrow ${i + 1}`, data: await ic("MdArrowForward", HEX.gold), x: x + cw + (gap - 0.3) / 2, y: top + rh / 2 - 0.15, w: 0.3, h: 0.3 });
+    }
+
+    // onder: wat we vragen en wat het de fabriek oplevert
+    const by = top + rh + 0.25, bh = 1.33, bw = (CW - 0.3) / 2;
+    const boxes = [
+      ["MdOutlineHandshake", "What we ask from you", "我们希望贵司做到的",
+        "Lower MOQs for test orders, fast samples, short lead times and room to scale up quickly.", "试销订单降低起订量，快速打样，缩短交期，并能快速扩大产能。"],
+      ["MdOutlineTrendingUp", "What it means for you", "对贵司的意义",
+        "More new products every month, and every winner becomes a large repeat order.", "每月更多新品订单，每一款爆品都会变成大批量的持续返单。"],
+    ];
+    for (const [i, b] of boxes.entries()) {
+      const x = M + i * (bw + 0.3);
+      card(s, `Plan box ${i + 1}`, x, by, bw, bh, HEX.card);
+      s.addImage({ objectName: `Plan box icon ${i + 1}`, data: await ic(b[0], HEX.gold), x: x + 0.25, y: by + 0.22, w: 0.38, h: 0.38 });
+      txt(s, `Plan box text ${i + 1}`, [
+        en(b[1], { bold: true, fontSize: 13, color: C.accent2 }), cn("  ·  " + b[2], { bold: true, fontSize: 12, color: C.accent2, breakLine: true }),
+        en(b[3], { breakLine: true }), cn(b[4], { color: C.accent3, fontSize: 10.5 }),
+      ], { x: x + 0.8, y: by + 0.14, w: bw - 1.0, h: bh - 0.28, fontSize: 11.5, color: C.background1, paraSpaceAfter: 3 });
+    }
+    s.addNotes("This is the main message of the visit: in 2027 we launch 3 to 5 new products every month, so 36 to 60 in the year. We test every new product with a small first order, read the sales quickly, and scale the winners straight away with large bulk orders. Questions for the factory: what is the lowest MOQ you can do for a first test order? How fast can you make a sample? How fast can you deliver a large reorder when a product takes off? Which of your new products would you put forward first?");
   }
 
   // =====================================================================
@@ -798,7 +827,7 @@ async function build(f) {
     s.addText("我们最期待看到的", { placeholder: "cn" });
     const asks = [
       ["MdOutlineInventory2", "Samples", "样品", "Improved batteries, the certified adapter and new models. We like to test them ourselves.", "改进后的电池、认证适配器和新款产品。我们希望亲手测试。"],
-      ["MdOutlineRecommend", "Your recommendations", "您的推荐", "What sells well in other markets? Which new features can you offer us?", "哪些产品在其他市场卖得好？贵司能为我们提供哪些新功能？"],
+      ["MdOutlineRecommend", "Your recommendations", "您的推荐", "What sells well in other markets? Which new products and features can you offer us for 2027?", "其他市场什么卖得好？贵司 2027 年有哪些新品和新功能？"],
     ];
     const lw = 7.3, ch = 1.85;
     for (let i = 0; i < 2; i++) {

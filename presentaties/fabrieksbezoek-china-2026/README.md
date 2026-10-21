@@ -13,7 +13,7 @@ Huisstijl van wellshave.com: zand, carbon, brons en goud, Montserrat.
 | 1 | Cover met beide bedrijven (Engels en Chinees), Jenny Huang en He Ting, en een foto van de Elite |
 | 2 | Over Wellshave: opgericht 2021 in Helmond, NL + BE, bol.com en webshop, Trustpilot |
 | 3 | Het team: Dustin Gibson, Willem de Groot, Leo |
-| 4 | Waarom we komen, in vier stappen |
+| 4 | Plannen voor 2027: elke maand 3 tot 5 nieuwe producten. Klein testen met een lage MOQ, snel leren, winnaars direct groot inkopen. Plus wat we van de fabriek vragen en wat het hun oplevert |
 | 5 | Hun producten bij Wellshave: foto, verkochte stuks en retourpercentage per product |
 | 6 | Klantenservice: de accu is defect nummer 1 (146 van de 215 defectmeldingen in 2026) |
 | 7 | Elite: accu voorop, 37 van de 54 defectmeldingen gaan over de accu of het opladen |
@@ -46,7 +46,7 @@ Elke productslide heeft dezelfde opbouw:
 | 2 | Over Wellshave |
 | 3 | Assortiment in zes categorieën |
 | 4 | Het team |
-| 5 | Waarom we komen |
+| 5 | Plannen voor 2027, zelfde slide als in het andere deck |
 | 6 | Hun producten bij Wellshave: verkochte stuks en retourpercentage in 2026 |
 | 7 | Wat klanten zeggen: kritische reviews per thema met een citaat |
 | 8 | Drie verbeterpunten |
