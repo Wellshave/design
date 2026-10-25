@@ -2258,3 +2258,19 @@ header-groep.
   v7-versies zijn eerst apart vastgelegd.
 * Niet aangepast: de filterkolom op de collectiepagina (`ws-collectie.css`,
   `top: 24px`) rekende al niet met de header en valt nu ook onder de balk.
+
+## Tekst in de uitklapblokken
+
+De tekst in *Omschrijving*, *Verzending & retour* en *Garantie en proberen*
+was groter dan de titels erboven: 16 px tegen 13 px. Het thema zet `p` en `ul`
+op 16 px (`base.css`), waardoor de 12,5 px van het blok niet doorkwam. Nu
+volgt alles binnen een uitklapblok de maat van het blok (12,5 px, regelhoogte
+1,55); `li` kreeg van het thema bovendien regelhoogte 1, ook dat is weg.
+
+*Specificaties* werd met `white-space: pre-line` afgedrukt, terwijl
+`metafield_tag` al een `<br>` achter elke regel zet: er stond een lege regel
+tussen elk punt, op de telefoon in twee smalle kolommen. Nu is het een echte
+lijst: per regel een punt, het getypte bolletje (•, -, *) eraf en een klein
+bronzen puntje ervoor. Twee kolommen op de computer, één op de telefoon.
+Gemeten op de Shave Package Ultimate: titels 13 px, tekst en specificaties
+12,5 px, twaalf punten.

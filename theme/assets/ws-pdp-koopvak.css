@@ -587,6 +587,11 @@
 .ws-pdp .ws-acc details.ws-dicht > summary i::after{transform:translate(-50%,-50%)}
 .ws-pdp .ws-acc details[open] summary i::after{transform:translate(-50%,-50%) scaleY(0)}
 .ws-pdp .ws-acc .in{padding:0 0 15px;font-size:12.5px;line-height:1.55;color:rgba(20,18,15,.62)}
+/* Het thema zet p en ul op 16 px en li op regelhoogte 1 (base.css). Daardoor
+   was de tekst in de uitklapblokken groter dan de titels (13 px) en stonden
+   lijstregels op elkaar geplakt. Alles hierbinnen volgt nu het blok. */
+.ws-pdp .ws-acc .in p,.ws-pdp .ws-acc .in ul,.ws-pdp .ws-acc .in ol,
+.ws-pdp .ws-acc .in li,.ws-pdp .ws-acc .in div{font-size:inherit;line-height:inherit}
 .ws-pdp .ws-acc .in p{margin:0 0 8px}
 .ws-pdp .ws-acc .in p:last-child{margin-bottom:0}
 .ws-pdp .ws-acc .sp{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;margin:0}
@@ -795,9 +800,16 @@
    pre-line lopen ze aan elkaar tot een doorlopende zin. En veertien regels
    onder elkaar is nog steeds een kolom van een halve telefoon, dus zet
    multicol ze in twee kolommen; de regels zijn kort genoeg. */
-.ws-pdp .ws-acc .ws-spec{font-size:12px;line-height:1.5}
-.ws-pdp .ws-acc .ws-spec > div{columns:2;column-gap:20px;orphans:1;widows:1}
-.ws-pdp .ws-acc .ws-spec p{margin:0;white-space:pre-line;color:rgba(20,18,15,.72)}
+/* Specificaties als lijst: een klein bronzen puntje, regels dicht op elkaar,
+   op de computer in twee kolommen, op de telefoon in een. */
+.ws-pdp .ws-acc .ws-spec-lijst{list-style:none;margin:0;padding:0;columns:2;column-gap:22px}
+.ws-pdp .ws-acc .ws-spec-lijst li{position:relative;break-inside:avoid;margin:0 0 5px;padding-left:12px;
+  line-height:1.45;color:rgba(20,18,15,.72)}
+.ws-pdp .ws-acc .ws-spec-lijst li::before{content:"";position:absolute;left:0;top:.62em;width:4px;height:4px;
+  border-radius:50%;background:var(--ws-tekstgoud);opacity:.75}
+@media screen and (max-width:749px){
+  .ws-pdp .ws-acc .ws-spec-lijst{columns:1}
+}
 .ws-pdp .ws-acc .in ul{margin:0;padding-left:18px}
 .ws-pdp .ws-acc .in a{color:var(--ws-tekstgoud)}
 

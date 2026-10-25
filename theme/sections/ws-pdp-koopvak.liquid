@@ -1017,13 +1017,29 @@
           {%- comment -%}
             specification is een rijketekstveld. Rechtstreeks afdrukken zet de
             ruwe JSON op het scherm -- {"type":"root","children":[ ... -- dus
-            metafield_tag. De regels staan als losse regels in een alinea; de
-            stylesheet zet er pre-line op en verdeelt ze over twee kolommen.
+            metafield_tag. De regels staan als losse regels in een alinea, elk
+            met een bolletje ervoor getypt.
+            25 oktober: dat werd met pre-line afgedrukt, maar metafield_tag zet
+            al een <br> achter elke regel, dus stond er een lege regel tussen
+            elk punt, in 16 px (de themaregel voor p). Nu wordt het een echte
+            lijst: per regel een <li>, het getypte bolletje eraf; de stylesheet
+            zet een eigen puntje ervoor.
           {%- endcomment -%}
           {%- if mf.specification != blank -%}
+            {%- capture spec_ruw -%}{{ mf.specification | metafield_tag }}{%- endcapture -%}
+            {%- assign spec_regels = spec_ruw | replace: '<br />', '¶' | replace: '<br>', '¶' | replace: '</p>', '¶' | replace: '</li>', '¶' | strip_html | split: '¶' -%}
             <details>
               <summary>{{ s.spec_kop }}<i></i></summary>
-              <div class="in ws-spec">{{ mf.specification | metafield_tag }}</div>
+              <div class="in ws-spec">
+                <ul class="ws-spec-lijst">
+                  {%- for regel in spec_regels -%}
+                    {%- assign r = regel | strip -%}
+                    {%- assign r1 = r | slice: 0 -%}
+                    {%- if r1 == '•' or r1 == '-' or r1 == '*' or r1 == '·' -%}{%- assign r = r | slice: 1, 9999 | strip -%}{%- endif -%}
+                    {%- if r != blank -%}<li>{{ r }}</li>{%- endif -%}
+                  {%- endfor -%}
+                </ul>
+              </div>
             </details>
           {%- endif -%}
 
