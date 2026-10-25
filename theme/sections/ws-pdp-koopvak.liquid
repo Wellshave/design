@@ -1091,6 +1091,51 @@
             </details>
           {%- endif -%}
         </div>
+        {%- comment -%}
+          De uitklapblokken klapten in één frame open en dicht. Dit script laat
+          de hoogte van het <details>-blok geleidelijk meegroeien (en krimpen),
+          ook voor de blokjes in "Wat zit er in de doos". Zonder JavaScript of
+          bij "minder beweging" werken ze zoals altijd, alleen zonder overgang.
+        {%- endcomment -%}
+        <script>
+          (function(){
+            var acc = document.currentScript.previousElementSibling;
+            if (!acc || !acc.classList.contains('ws-acc') || !acc.animate) return;
+            if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            // gelijkmatig op gang en zacht uitlopen, niet alles in de eerste tienden
+            var zacht = 'cubic-bezier(.4,0,.2,1)';
+            acc.querySelectorAll('details').forEach(function(d){
+              var kop = d.querySelector(':scope > summary');
+              if (!kop) return;
+              kop.addEventListener('click', function(e){
+                e.preventDefault();
+                var sluiten = d.open && !d.classList.contains('ws-dicht');
+                var van = d.getBoundingClientRect().height;
+                if (d._ani) d._ani.cancel();
+                d.style.overflow = 'hidden';
+                var naar;
+                if (sluiten) {
+                  d.classList.add('ws-dicht');
+                  naar = kop.getBoundingClientRect().height + (d.offsetHeight - d.clientHeight);
+                } else {
+                  d.classList.remove('ws-dicht');
+                  d.open = true;
+                  naar = d.getBoundingClientRect().height;
+                }
+                var duur = Math.max(340, Math.min(650, Math.abs(naar - van) * 1.2));
+                var ani = d.animate({ height: [van + 'px', naar + 'px'] }, { duration: duur, easing: zacht });
+                d._ani = ani;
+                ani.onfinish = function(){
+                  if (sluiten) d.open = false;
+                  d.classList.remove('ws-dicht');
+                  d.style.overflow = '';
+                  d._ani = null;
+                };
+                ani.oncancel = function(){ d.style.overflow = ''; };
+              });
+            });
+          })();
+        </script>
       </div>
 
     </div>

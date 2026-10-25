@@ -8,11 +8,11 @@
   font-family:'MontserratEG','Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
 .ws-prk *,.ws-prk *::before,.ws-prk *::after{box-sizing:border-box}
 .ws-prk img,.ws-prk video{max-width:100%}
-/* Bijna paginabreed, naar het voorbeeld van Well-Shine. De rail was 1000 px
-   en daarmee een smalle strook midden in een breed scherm; de beelden doen
-   het juist goed als ze ruimte krijgen. 1840 px is de grens waarboven een
-   rij hoger wordt dan een scherm. */
-.ws-prk-rail{max-width:1840px;margin:0 auto}
+/* Breed, maar niet meer paginabreed. Eerst 1000 px (te smal), daarna
+   1840 px naar Well-Shine; op 25 oktober naar het voorbeeld van Achaté
+   terug naar 1360 px: een tikkie smaller en vooral lager, zodat een rij
+   (beeld van ruim 500 px) samen met wat erboven en eronder in beeld past. */
+.ws-prk-rail{max-width:1360px;margin:0 auto}
 
 /* ---- kop ---- */
 .ws-prk-hd{text-align:center;margin:0 0 26px}
@@ -23,21 +23,22 @@
   line-height:1.18;color:var(--p-ink)}
 
 /* ---- de kaart ---- */
-/* Beeld en tekst zijn twee losse tegels met een smalle naad ertussen. Het
-   beeld neemt vijf twaalfde, de tekst zeven: zo blijft het beeld een
+/* Beeld en tekst zijn twee losse tegels met een naad van 24 px ertussen.
+   Het beeld neemt vijf dertiende, de tekst acht (naar Achaté: een vierkant
+   van ruim 500 px naast een tekstvlak van 800): zo blijft het beeld een
    vierkant en krijgt het kleurvlak de ruimte voor het merkteken. Het
    tekstvlak wisselt om en om van zandtint, zodat elke kaart een eigen stap
    is en twee op rij niet als één vlak lezen. */
-.ws-prk-kaart{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:12px;margin-top:12px}
+.ws-prk-kaart{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,8fr);gap:24px;margin-top:24px}
 .ws-prk-kaart:first-of-type{margin-top:0}
-.ws-prk-kaart.ws-om{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
+.ws-prk-kaart.ws-om{grid-template-columns:minmax(0,8fr) minmax(0,5fr)}
 .ws-prk-kaart.ws-om .ws-prk-md{order:2}
 
 /* ---- beeld ---- */
-/* Een vierkant, maar nooit hoger dan het scherm: op een breed scherm zou een
-   rij anders boven de 900 px uitkomen en zie je beeld en tekst nooit samen. */
-.ws-prk-md{position:relative;overflow:hidden;border-radius:16px;background:rgba(20,18,15,.06);
-  aspect-ratio:1/1;max-height:min(780px,86vh);width:100%}
+/* Een vierkant, op de brede rail ruim 500 px, en nooit hoger dan 70% van
+   het scherm, zodat beeld en tekst samen in beeld zijn. */
+.ws-prk-md{position:relative;overflow:hidden;border-radius:22px;background:rgba(20,18,15,.06);
+  aspect-ratio:1/1;max-height:min(540px,70vh);width:100%}
 .ws-prk-md .ws-prk-f,.ws-prk-md .ws-prk-v{display:block;width:100%;height:100%;object-fit:cover}
 .ws-prk-md video{background:#000}
 
@@ -62,8 +63,8 @@
 .ws-prk-md.ws-handmatig:focus-visible{outline:3px solid var(--p-brons);outline-offset:-3px}
 
 /* ---- tekst ---- */
-.ws-prk-tx{position:relative;overflow:hidden;border-radius:16px;background:var(--p-zand-a,#F2EEE7);
-  padding:clamp(32px,4vw,64px) clamp(26px,5.5vw,96px);
+.ws-prk-tx{position:relative;overflow:hidden;border-radius:22px;background:var(--p-zand-a,#F2EEE7);
+  padding:clamp(28px,3vw,48px) clamp(26px,4.5vw,64px);
   display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
 .ws-prk-kaart:nth-of-type(even) .ws-prk-tx{background:var(--p-zand-b,#EAE4D9)}
 .ws-prk-tx > *:not(.ws-prk-merk){max-width:30em}
@@ -104,11 +105,11 @@
   .ws-prk{padding-left:12px;padding-right:12px}
   .ws-prk-hd{margin-bottom:20px}
   .ws-prk h2{font-size:clamp(21px,5.6vw,26px)}
-  .ws-prk-kaart,.ws-prk-kaart.ws-om{grid-template-columns:1fr;gap:8px;margin-top:16px}
+  .ws-prk-kaart,.ws-prk-kaart.ws-om{grid-template-columns:1fr;gap:10px;margin-top:18px}
   /* Op de telefoon staat het beeld altijd boven; om en om heeft daar geen zin. */
   .ws-prk-kaart.ws-om .ws-prk-md{order:0}
-  .ws-prk-md{aspect-ratio:4/3;max-height:none}
-  .ws-prk-tx{padding:28px 22px 30px}
+  .ws-prk-md{aspect-ratio:4/3;max-height:none;border-radius:18px}
+  .ws-prk-tx{padding:24px 22px 26px;border-radius:18px}
   .ws-prk-merk{right:-18%;height:104%}
   .ws-prk-tx h3{font-size:20px;max-width:none}
   .ws-prk-body p{font-size:13.5px}

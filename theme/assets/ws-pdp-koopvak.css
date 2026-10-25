@@ -575,7 +575,14 @@
 .ws-pdp .ws-acc summary i::after{content:'';position:absolute;background:var(--ws-tekstgoud);
   left:50%;top:50%;transform:translate(-50%,-50%)}
 .ws-pdp .ws-acc summary i::before{width:13px;height:1.6px}
-.ws-pdp .ws-acc summary i::after{width:1.6px;height:13px;transition:transform .18s ease}
+.ws-pdp .ws-acc summary i::after{width:1.6px;height:13px;transition:transform .32s cubic-bezier(.22,.61,.36,1)}
+/* Geleidelijk openen: de hoogte loopt via het script in de sectie, de inhoud
+   komt er zacht bij in plaats van in een keer te verschijnen. Bij dichtgaan
+   (ws-dicht) vervaagt hij weer. */
+@keyframes ws-acc-in{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.ws-pdp .ws-acc details[open] > :not(summary){animation:ws-acc-in .4s cubic-bezier(.22,.61,.36,1) both}
+.ws-pdp .ws-acc details.ws-dicht > :not(summary){opacity:0;transition:opacity .2s ease}
+.ws-pdp .ws-acc details.ws-dicht > summary i::after{transform:translate(-50%,-50%)}
 .ws-pdp .ws-acc details[open] summary i::after{transform:translate(-50%,-50%) scaleY(0)}
 .ws-pdp .ws-acc .in{padding:0 0 15px;font-size:12.5px;line-height:1.55;color:rgba(20,18,15,.62)}
 .ws-pdp .ws-acc .in p{margin:0 0 8px}
@@ -586,7 +593,8 @@
 .ws-pdp .ws-acc ul{margin:0;padding-left:16px}
 .ws-pdp .ws-acc li{margin:0 0 4px}
 @media (prefers-reduced-motion:reduce){
-  .ws-pdp .ws-acc summary i::after{transition:none}}
+  .ws-pdp .ws-acc summary i::after{transition:none}
+  .ws-pdp .ws-acc details[open] > :not(summary){animation:none}}
 
 /* ---- de telefoon ----
    Ontwerp: het koopvak als één donkere kaart, van boven naar beneden precies

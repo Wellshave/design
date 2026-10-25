@@ -1998,10 +1998,14 @@ het koopvak stond, rendert niets; deze regel komt uit het koopvak zelf.
 
 `ws-pdp-praktijk` naar het voorbeeld van Well-Shine:
 
-* De rail is 1840 px in plaats van 1000; aan de zijkant 12 tot 56 px marge.
-* Beeld en tekst zijn twee tegels met een naad van 12 px. Het beeld krijgt 5
-  van de 12 kolommen en is vierkant (nooit hoger dan 780 px of 86% van het
-  scherm), de tekst 7. Om en om wisselt de kant.
+* De rail is 1360 px (was 1840, en daarvoor 1000); aan de zijkant 12 tot
+  56 px marge. Op 25 oktober versmald en vooral verlaagd naar het voorbeeld
+  van Achaté.
+* Beeld en tekst zijn twee tegels met een naad van 24 px en hoeken van 22 px.
+  Het beeld krijgt 5 van de 13 kolommen en is vierkant (ruim 500 px, nooit
+  hoger dan 540 px of 70% van het scherm), de tekst 8. Om en om wisselt de
+  kant. Gemeten: op 1920 px beeld 514×514 en tekst 822 breed (was 748×748
+  en 1048); op 1440 px 511 hoog (was 559).
 * In het tekstvlak staat het **merkteken** groot en toon-op-toon, rechts en
   half over de rand: brons op 5,5%. Het grote volgnummer dat daar stond is
   weg; het nummer staat al klein in de regel boven de kop.
@@ -2211,3 +2215,14 @@ Hard Case en Neustrimmer Basic; Flex Guard mesje en Hard Case (Sharpline is
 uitverkocht); Barber Bro 2.0 de Neustrimmer Ultimate; Gentleman Shaver
 scheerkop, Hard Case en Travelbag. Tondeuse Deluxe is zelf uitverkocht en
 toont dan geen add-ons.
+
+## Uitklapblokken openen geleidelijk
+
+*Omschrijving*, *Specificaties*, *Wat zit er in de doos* en de rest klapten
+in één frame open en dicht. Een klein script direct na het blok laat de
+hoogte van elk `<details>` meegroeien en krimpen (ongeveer een halve seconde,
+gelijkmatig, `cubic-bezier(.4,0,.2,1)`), ook voor de blokjes binnen *Wat zit er
+in de doos*. De inhoud komt er zacht bij en vervaagt bij dichtgaan; het plusje
+draait in hetzelfde tempo. Zonder JavaScript of bij *minder beweging* werken ze
+als gewone uitklapblokken, zonder overgang. Gemeten op 390 px: het eerste blok
+groeit van 51 naar 561 px in ongeveer 400 ms.
