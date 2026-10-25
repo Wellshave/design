@@ -1,0 +1,118 @@
+{{ 'announcement.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .section-{{ section.id }} {
+    --section-background: {{ section.settings.background }};
+    --section-color: {{ section.settings.color }};
+  }
+  .section-{{ section.id }} .announcement__aftel {
+    display: inline-flex;
+    align-items: baseline;
+    gap: .3em;
+    margin-left: .6em;
+    padding-left: .65em;
+    border-left: 1px solid rgba(38, 38, 38, .3);
+    font-size: .88em;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    opacity: .85;
+  }
+  .section-{{ section.id }} .announcement__aftel[hidden] { display: none; }
+  @media (max-width: 479px) {
+    .section-{{ section.id }} .announcement__aftel-min { display: none; }
+  }
+</style>
+
+<div class="announcement section-{{ section.id }}">
+  <div class="announcement__wrapper page-width">
+    <p class="announcement__label body-md">
+      {{- section.settings.label -}}
+      {%- if section.settings.aftel_einde != blank -%}
+        <span class="announcement__aftel" data-aftel-einde="{{ section.settings.aftel_einde | escape }}" hidden>
+          <span>{{ section.settings.aftel_label }}</span>
+          <span data-aftel-tijd></span>
+        </span>
+      {%- endif -%}
+    </p>
+  </div>
+</div>
+
+{%- if section.settings.aftel_einde != blank -%}
+  {%- comment -%}
+    Telt af naar het moment in aftel_einde en verdwijnt daarna. De timer begint
+    nooit opnieuw en rekent niet per bezoeker: iedereen ziet hetzelfde eindmoment.
+    Zet hier dus alleen een moment waarop de actie ook echt stopt.
+  {%- endcomment -%}
+  <script>
+    (function () {
+      var el = document.querySelector('.section-{{ section.id }} [data-aftel-einde]');
+      if (!el) return;
+      var einde = Date.parse(el.getAttribute('data-aftel-einde'));
+      var tijd = el.querySelector('[data-aftel-tijd]');
+      if (isNaN(einde) || !tijd) return;
+      function tw(n) { return (n < 10 ? '0' : '') + n; }
+      function tik() {
+        var rest = einde - Date.now();
+        if (rest <= 0) { el.hidden = true; clearInterval(t); return; }
+        var m = Math.floor(rest / 60000);
+        var d = Math.floor(m / 1440);
+        var u = Math.floor((m % 1440) / 60);
+        m = m % 60;
+        tijd.innerHTML = (d > 0 ? d + 'd ' : '') + tw(u) + 'u<span class="announcement__aftel-min"> ' + tw(m) + 'm</span>';
+        el.hidden = false;
+      }
+      var t = setInterval(tik, 30000);
+      tik();
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": "Announcement",
+    "enabled_on": {
+      "groups": ["header"]
+    },
+    "settings": [
+      {
+        "type": "color_background",
+        "id": "background",
+        "label": "Background color",
+        "default": "#000"
+      },
+      {
+        "type": "color",
+        "id": "color",
+        "label": "Color",
+        "default": "#fff"
+      },
+      {
+        "type": "inline_richtext",
+        "id": "label",
+        "label": "Label",
+        "default": "Announcement"
+      },
+      {
+        "type": "header",
+        "content": "Afteltimer"
+      },
+      {
+        "type": "text",
+        "id": "aftel_einde",
+        "label": "Actie stopt op",
+        "info": "Het moment waarop de actie echt stopt, bijvoorbeeld 2026-10-30T23:59:59+01:00. De timer telt hiernaartoe af en verdwijnt daarna; hij begint nooit opnieuw. Leeg laten zet de timer uit."
+      },
+      {
+        "type": "text",
+        "id": "aftel_label",
+        "label": "Tekst voor de timer",
+        "default": "Nog"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Announcement"
+      }
+    ]
+  }
+{% endschema %}
