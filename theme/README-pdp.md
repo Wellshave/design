@@ -2096,3 +2096,32 @@ hoe lang ook, voor de CSS precies 1 lang, en kan `stroke-dashoffset` hem van
 * **Het prijskaartje in het bespaarlabel** is weg; het label is nu alleen
   *Je bespaart 30%*, met gelijke binnenruimte links en rechts. Op de telefoon
   stond het kaartje al uit, dus daar verandert niets aan de breedte.
+
+## Modelkeuze: een keuzelijst in plaats van tegels
+
+De twee modellen onder de Herfst Sale-balk zagen eruit als de voordeelkaartjes
+erboven: twee witte tegels naast elkaar, een klein beeld, een vette kop en een
+grijze regel. Daardoor las de keuze als nog meer uitleg. Nu is het een lijst
+waaruit je kiest:
+
+* **Een kop erboven**, *Kies je model* (instelling *Kop boven de modelkeuze*,
+  vertaald in en/de/fr).
+* **Onder elkaar**, elk model op één regel: keuzerondje, productbeeld, naam
+  met ondertitel, en rechts **de prijs** met de streepprijs eronder. Prijs en
+  rondje staan nergens anders in het koopvak; daaraan zie je dat het een keuze
+  is. De goedkoopste staat boven.
+* **Het model dat je bekijkt** heeft een gevuld goud rondje, een goudrand en
+  een warm wit vlak. Het andere model heeft geen vlak, alleen een haarlijn.
+  Het label *Je bekijkt nu* is daarmee overbodig; het wordt alleen nog
+  voorgelezen.
+* **Meest gekozen** staat als goud label achter de naam, en alleen bij het
+  andere model. In de gegevens (`compare_info.is_popuplar`) staan beide modellen
+  op populair, dus anders stond het label er twee keer.
+* Onder 360 px valt het productbeeld weg, anders liep *Shave Package Ultimate*
+  over drie regels.
+* De link *Vergelijk de opties* eronder is gebleven.
+
+Bij het uploaden van het sjabloon heeft Shopify een uitgeschakeld appblok van
+Section Store (*product add-ons*, toilettas en travelbag) uit `product.json`
+gehaald. Het stond uit en deed niets; het sjabloon in de repo is gelijk
+getrokken met v7.

@@ -12,40 +12,6 @@
     "main": {
       "type": "ws-pdp-koopvak",
       "blocks": {
-        "section_store_block_product_addons_3AFn8F": {
-          "type": "shopify://apps/section-store/blocks/block-product-addons/d7a2e423-ea88-4344-b866-6d0fb487c3dd",
-          "disabled": true,
-          "settings": {
-            "products": [
-              "toiletry-bag",
-              "travelbag"
-            ],
-            "product_list_style": "carousel",
-            "variant_selector": "text",
-            "show_compare_price": true,
-            "use_discount_tag": true,
-            "discount_tag_background": "#f7daa2",
-            "switch_style": "toggle",
-            "switch_size": 19,
-            "switch_position": "last",
-            "switch_vertical_position": "center",
-            "switch_color": "#f7daa2",
-            "font_size": 14,
-            "font_weight": "bold",
-            "item_title_color": "#2d2d2d",
-            "item_subtitle_color": "#2d2d2d",
-            "image_size": 56,
-            "item_border_style": "solid",
-            "item_border_width": 1,
-            "item_border_color": "#d7d7d7",
-            "item_border_radius": 16,
-            "item_bg_color": "#f6f6f6",
-            "background_gradient": "",
-            "item_padding_vertical": 12,
-            "item_padding_horizontal": 16,
-            "custom_css": ""
-          }
-        },
         "selleasy_lb_upsell_addon_block_GeTTn7": {
           "type": "shopify://apps/selleasy/blocks/lb-upsell-addon-block/790c1a03-a71f-4bc1-9869-00dad526d3c2",
           "disabled": true,
@@ -64,7 +30,6 @@
         }
       },
       "block_order": [
-        "section_store_block_product_addons_3AFn8F",
         "selleasy_lb_upsell_addon_block_GeTTn7",
         "klarna_on_site_messaging_app_block_kMpXVH"
       ],
@@ -74,6 +39,10 @@
         "pil_label": "",
         "pil_z": "Herfst Sale",
         "besparing_regel": "Je bespaart",
+        "klarna_tonen": true,
+        "klarna_regel": "Of betaal in 3 rentevrije delen van [bedrag]",
+        "klarna_min": 35,
+        "klarna_max": 1500,
         "munt": "€",
         "tp_tonen": true,
         "tp_label": "",
@@ -85,6 +54,7 @@
         "proberen_label": "100 dagen proberen",
         "citaat": "",
         "citaat_wie": "",
+        "aanbod_tonen": true,
         "gift_titel": "",
         "gift_regel": "Wordt vanzelf meegeleverd",
         "cad_tonen": true,
@@ -125,6 +95,8 @@
         "upg_enmeer1": "en nog één onderdeel",
         "upg_nee": "Nee dank je, ga verder met de [product]",
         "kies_tonen": true,
+        "kies_kop": "Kies je model",
+        "kies_was": "Normaal",
         "kies_nu": "Je bekijkt nu",
         "kies_top": "Meest gekozen",
         "kies_top_kort": "Best verkocht",
@@ -142,12 +114,7 @@
         "desk_indent_top": 0,
         "desk_indent_bottom": 0,
         "mob_indent_top": 0,
-        "mob_indent_bottom": 0,
-        "aanbod_tonen": true,
-        "klarna_tonen": true,
-        "klarna_regel": "Of betaal in 3 rentevrije delen van [bedrag]",
-        "klarna_min": 35,
-        "klarna_max": 1500
+        "mob_indent_bottom": 0
       }
     },
     "belofte": {
@@ -218,12 +185,12 @@
         "telwoorden": "nul,Eén,Twee,Drie,Vier,Vijf,Zes,Zeven,Acht,Negen,Tien",
         "beeld_links": true,
         "video_label": "Video",
+        "grond": "#FFFFFF",
         "zand_a": "#F2EEE7",
         "zand_b": "#EAE4D9",
+        "merkteken": true,
         "marge_top": 40,
-        "marge_bot": 40,
-        "grond": "#FFFFFF",
-        "merkteken": true
+        "marge_bot": 40
       }
     },
     "ss_payment_icons_Qi6V9R": {
@@ -346,6 +313,7 @@
     },
     "trustpilot_reviews": {
       "type": "trustpilot-reviews",
+      "disabled": true,
       "settings": {
         "reviews_label": "Zie onze 1000+ reviews op",
         "title": "Wat klanten over ons zeggen",
@@ -355,8 +323,7 @@
         "desk_indent_bottom": 80,
         "mob_indent_top": 40,
         "mob_indent_bottom": 40
-      },
-      "disabled": true
+      }
     },
     "use_case": {
       "type": "use-case",
@@ -567,28 +534,28 @@
         "review_02": {
           "type": "review",
           "settings": {
+            "titel": "Bodyshaver van Wellshave doet netjes wat het moet doen",
             "tekst": "Bodyshaver van Wellshave gekocht voor een zeer schappelijke prijs en hij werkt prima. Hij trimt alles netjes, zonder bang te hoeven zijn voor wondjes. Top prijs-kwaliteit verhouding!",
             "naam": "Coen",
-            "sterren": 5,
-            "titel": "Bodyshaver van Wellshave doet netjes wat het moet doen"
+            "sterren": 5
           }
         },
         "review_03": {
           "type": "review",
           "settings": {
+            "titel": "Prima scheerapparaat voor een eerlijke prijs !",
             "tekst": "Prima scheerapparaat ! Gaat opgeladen heel lang mee en scheert heel glad. De scheerkop beweegt soepel mee met de contouren van de kaak.",
             "naam": "Pim van der Waal",
-            "sterren": 5,
-            "titel": "Prima scheerapparaat voor een eerlijke prijs !"
+            "sterren": 5
           }
         },
         "review_04": {
           "type": "review",
           "settings": {
+            "titel": "Geruisloze neustrimmer",
             "tekst": "Deze trimmer is wat ik zoek. Zo goed als geruisloos. Levering goed en netjes verzorgd. Ben er heel blij mee.",
             "naam": "Peter de Haan",
-            "sterren": 5,
-            "titel": "Geruisloze neustrimmer"
+            "sterren": 5
           }
         },
         "review_05": {
@@ -602,28 +569,28 @@
         "review_06": {
           "type": "review",
           "settings": {
+            "titel": "Zeer goede service",
             "tekst": "Zeer goeie toestellen en service bij Wellshave! Ik gebruik nu al 3 jaar mijn trimmer bijna dagelijks en heb geen klachten. Perfecte trim- en scheerkwaliteit! En bijkomstig een zeer hulpvaardige service na het afbreken van een nokje van een opzetstukje. Aan te raden!",
             "naam": "Jari Philibert",
-            "sterren": 5,
-            "titel": "Zeer goede service"
+            "sterren": 5
           }
         },
         "review_07": {
           "type": "review",
           "settings": {
+            "titel": "Prima toestel!",
             "tekst": "Ik kocht hem voor mijn zoon. Die is er erg blij mee. Werkt prima. Handig met de ingebouwde trimmer. Erg nauwkeurig. De batterij gaat zeer lang mee. Makkelijk schoon te maken. Vriendelijke en behulpzame klantenservice.",
             "naam": "Veva",
-            "sterren": 5,
-            "titel": "Prima toestel!"
+            "sterren": 5
           }
         },
         "review_08": {
           "type": "review",
           "settings": {
+            "titel": "Super service op een Tondeuse van 2 jaar oud.",
             "tekst": "Super fijne fijne tondeuse die ik inmiddels alweer meer dan 2 jaar gebruik. Na 2 jaar was de opzetkam defect geraakt en kreeg hiervoor een nieuwe opgestuurd. Kortom super service.",
             "naam": "Michiel Marsman",
-            "sterren": 5,
-            "titel": "Super service op een Tondeuse van 2 jaar oud."
+            "sterren": 5
           }
         },
         "review_09": {
@@ -637,10 +604,10 @@
         "review_10": {
           "type": "review",
           "settings": {
+            "titel": "Topproduct",
             "tekst": "Snelle levering. Zeer goed product vergeleken met alle andere rommel die te vinden is in andere webshops. Eentje voor thuis, eentje voor op reis.",
             "naam": "Redgy Deschacht",
-            "sterren": 5,
-            "titel": "Topproduct"
+            "sterren": 5
           }
         },
         "review_11": {
@@ -654,10 +621,10 @@
         "review_12": {
           "type": "review",
           "settings": {
+            "titel": "Zeer positief over wellshave",
             "tekst": "Hij ligt fijn in de hand! Erg prettig om mee te werken en daarbij....de service van wellshave is absoluut uitstekend!! Zo heb ik het nog nooit ergens anders ervaren!!",
             "naam": "AHM De Haan",
-            "sterren": 5,
-            "titel": "Zeer positief over wellshave"
+            "sterren": 5
           }
         }
       },

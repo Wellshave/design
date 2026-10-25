@@ -680,8 +680,17 @@
             endif
           endfor
         -%}
+        {%- comment -%}
+          25 oktober: de modelkeuze leek te veel op de voordeelkaartjes erboven
+          (twee witte tegels, klein icoon, vette kop, grijze regel). Het is nu
+          een keuzelijst: een kop erboven, onder elkaar in plaats van naast
+          elkaar, een keuzerondje vooraan en de prijs rechts. Prijs en rondje
+          staan nergens anders in het koopvak, dus dit leest als iets wat je
+          kiest en niet als iets wat je leest.
+        {%- endcomment -%}
         {%- if s.kies_tonen and kies_aantal == 2 -%}
           <div class="ws-kies">
+            {%- if s.kies_kop != blank -%}<p class="ws-kies-kop">{{ s.kies_kop }}</p>{%- endif -%}
             <ul class="ws-kies-lijst">
               {%- for kp in vergelijk_lijst -%}
                 {%- liquid
@@ -709,18 +718,21 @@
                   kaarten uit de pas. Buiten de link houden, zodat de
                   linknaam alleen het model is.
                 {%- endcomment -%}
+                {%- comment -%}
+                  "Je bekijkt nu" is het gevulde rondje; de tekst staat er
+                  alleen nog voor wie de pagina voorgelezen krijgt. "Meest
+                  gekozen" staat als label achter de naam. Op een telefoon is
+                  daar minder ruimte, dus daar staat de korte tekst; beide staan
+                  in de opmaak en de css kiest er een.
+                {%- endcomment -%}
                 {%- capture kies_vlag -%}
-                  {%- if dit and s.kies_nu != blank -%}
-                    <span class="ws-kies-vlag ws-kies-vlag-nu">{{ s.kies_nu }}</span>
-                  {%- elsif ki.is_popuplar and s.kies_top != blank -%}
-                    {%- comment -%}
-                      Op een telefoon is de kaart nog geen 175 px breed en vult
-                      "Meest gekozen" hem bijna helemaal. Daarom staat er daar
-                      een kortere tekst. Beide staan in de opmaak en de css
-                      kiest er een; met javascript zou de verkeerde eerst even
-                      te zien zijn. Leeg laten = overal dezelfde tekst.
-                    {%- endcomment -%}
-                    <span class="ws-kies-vlag ws-kies-vlag-top">
+                  {%- comment -%}
+                    Niet op het model dat je bekijkt: in de gegevens staan
+                    beide modellen vaak op is_popuplar, en dan stond er twee
+                    keer hetzelfde label. Het rondje zegt daar al genoeg.
+                  {%- endcomment -%}
+                  {%- if ki.is_popuplar and s.kies_top != blank and dit == false -%}
+                    <span class="ws-kies-vlag">
                       {%- if s.kies_top_kort != blank -%}
                         <span class="ws-vlag-breed">{{ s.kies_top }}</span>
                         <span class="ws-vlag-smal">{{ s.kies_top_kort }}</span>
@@ -732,25 +744,32 @@
                 {%- endcapture -%}
                 {%- assign kies_vlag = kies_vlag | strip -%}
                 {%- capture kies_binnen -%}
+                  <span class="ws-kies-rondje" aria-hidden="true"></span>
                   {%- if kbeeld != blank -%}
                     <span class="ws-kies-beeld">
                       {{ kbeeld | image_url: width: 160 | image_tag: alt: '', loading: 'lazy', width: 80, height: 80 }}
                     </span>
                   {%- endif -%}
                   <span class="ws-kies-tekst">
-                    <span class="ws-kies-naam">{{ knaam }}</span>
+                    <span class="ws-kies-naam">{{ knaam }}{{ kies_vlag }}</span>
                     {%- if ki.toggle_subtitle != blank -%}
                       <span class="ws-kies-sub">{{ ki.toggle_subtitle }}</span>
+                    {%- endif -%}
+                    {%- if dit and s.kies_nu != blank -%}<span class="visually-hidden">, {{ s.kies_nu }}</span>{%- endif -%}
+                  </span>
+                  <span class="ws-kies-prijs">
+                    <b>{% if s.munt != blank %}{{ s.munt }}{% endif %}{% render 'price-formated', price: kv.price %}</b>
+                    {%- if kv.compare_at_price > kv.price -%}
+                      <s><span class="visually-hidden">{{ s.kies_was }} </span>{% if s.munt != blank %}{{ s.munt }}{% endif %}{% render 'price-formated', price: kv.compare_at_price %}</s>
                     {%- endif -%}
                   </span>
                 {%- endcapture -%}
                 <li class="ws-kies-kaart{% if kv.price == kies_hoogste %} ws-kies-top{% endif %}{% if dit %} ws-kies-dit{% endif %}">
                   {%- if dit -%}
-                    <span class="ws-kies-in">{{ kies_binnen }}</span>
+                    <span class="ws-kies-in" aria-current="page">{{ kies_binnen }}</span>
                   {%- else -%}
                     <a class="ws-kies-in" href="{{ kp.url }}">{{ kies_binnen }}</a>
                   {%- endif -%}
-                  {{ kies_vlag }}
                 </li>
               {%- endfor -%}
             </ul>
@@ -1962,7 +1981,9 @@
     { "type": "text", "id": "upg_enmeer1", "label": "Diezelfde regel bij precies \u00e9\u00e9n", "default": "en nog \u00e9\u00e9n onderdeel" },
     { "type": "text", "id": "upg_nee", "label": "Doorgaan zonder upgrade", "info": "[product] wordt de producttitel.", "default": "Nee dank je, ga verder met de [product]" },
     { "type": "checkbox", "id": "kies_tonen", "label": "Modelkeuze tonen in plaats van de knop", "info": "Vereist twee producten in custom.compare_products.", "default": true },
-    { "type": "text", "id": "kies_nu", "label": "Vlag op het model dat je bekijkt", "default": "Je bekijkt nu" },
+    { "type": "text", "id": "kies_kop", "label": "Kop boven de modelkeuze", "default": "Kies je model" },
+    { "type": "text", "id": "kies_was", "label": "Voorgelezen bij de streepprijs", "info": "Alleen voor schermlezers.", "default": "Normaal" },
+    { "type": "text", "id": "kies_nu", "label": "Bij het model dat je bekijkt (voorgelezen)", "default": "Je bekijkt nu" },
     { "type": "text", "id": "kies_top", "label": "Vlag op het meest gekozen model", "info": "Verschijnt alleen als compare_info.is_popuplar aan staat.", "default": "Meest gekozen" },
     { "type": "text", "id": "kies_top_kort", "label": "Die vlag op de telefoon", "info": "Kortere tekst voor smalle schermen. Leeg laten om overal dezelfde tekst te tonen.", "default": "Best verkocht" },
     { "type": "text", "id": "vergelijk_anker", "label": "Sleutel van de vergelijkingssectie", "default": "compare_table", "info": "De sleutel uit het sjabloon, niet de volledige id \u2014 die zet Shopify zelf samen. De knop verschijnt alleen als het product custom.compare_table of custom.compare_products heeft." },
