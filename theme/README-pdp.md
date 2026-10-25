@@ -2165,3 +2165,46 @@ Bij de Flex Guard koopt bijna een kwart een extra mesje mee, bij de Groom
 Guard PRO één op de elf. Het mesje staat daarom bij de Groom Guard PRO
 bovenaan. De Shave Package-orders (Groom Guard, foil shaver, neustrimmer,
 tassen en mesje samen) zijn pakketten en niet meegeteld.
+
+### PDP add-ons ingevuld (25 oktober)
+
+Op basis van 1.000 orders van 17 augustus tot 25 oktober. Pakketten die als
+losse regels binnenkomen zijn eruit gefilterd: de Shave Package (Groom Guard,
+foil shaver, neustrimmer en tassen samen) en de Essential Flex Bundel (Flex
+Guard, mesje, Hard Case en washbag samen, herkenbaar aan de verlaagde
+Flex Guard-prijs; 39 van de 48 keer dat die vier samen voorkwamen). Wat
+overblijft, wordt echt los meegekocht:
+
+| Apparaat | Los meegekocht |
+|---|---|
+| Barber Bro 2.0 / 3.0, Barber Pack 3.0 | Neustrimmer Ultimate 20–24% (volle prijs) |
+| Groom Guard PRO | Groom Guard-mesje 12% |
+| The Gentleman Shaver | Scheerkop 13% |
+| Flex Guard | mesje 5%, Hard Case 1% |
+
+Volgorde per product: eerst het onderdeel dat slijt (mesje, scheerkop), dan
+de Hard Case, dan de washbag (wordt overgeslagen zolang hij een cadeau is),
+dan een aanvullend apparaat. Uitverkochte accessoires vallen vanzelf weg.
+
+| Product | PDP add-ons |
+|---|---|
+| Groom Guard PRO, Groom Guard | Groom Guard-mesje, Hard Case, Washbag, Neustrimmer Basic |
+| Flex Guard | Flex Guard-mesje, Hard Case, Washbag, Sharpline |
+| The Gentleman Shaver | Scheerkop, Hard Case, Washbag, Travelbag |
+| Skull Deal 1.0, Head Shaver Deluxe | 7D-scheerkop, Washbag, Travelbag |
+| Tondeuse Deluxe, Tondeuse Elegant | Sharpline, Blade Baron |
+| The Dial Master | Hard Case |
+| Neustrimmer Ultimate | Hard Case, Washbag, Travelbag |
+| Barber Bro 1.0–3.0, Barber Pack 1.0–3.0 | Neustrimmer Ultimate, Washbag |
+
+Niet ingevuld (die vallen terug op `cart_upsell`): de rest. De Elegant
+4-in-1 wordt vaak samen met de Gentleman Shaver gekocht (30%), maar de
+Gentleman staat daar al als upgrade in de pop-up; als add-on zou hij met die
+upgrade concurreren. Om dezelfde reden staat de losse foil shaver niet bij de
+Groom Guard: Groom Guard plus foil shaver kost meer dan de Groom Guard PRO.
+
+Op 25 oktober op de preview gecontroleerd: Groom Guard PRO toont mesje,
+Hard Case en Neustrimmer Basic; Flex Guard mesje en Hard Case (Sharpline is
+uitverkocht); Barber Bro 2.0 de Neustrimmer Ultimate; Gentleman Shaver
+scheerkop, Hard Case en Travelbag. Tondeuse Deluxe is zelf uitverkocht en
+toont dan geen add-ons.
