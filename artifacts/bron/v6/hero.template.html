@@ -34,6 +34,17 @@ body{margin:0;background:var(--g);color:var(--i);font:400 15px/1.6 "Montserrat",
 .noot ul{margin:0;padding-left:18px;display:grid;gap:8px;color:var(--i2)}
 .noot li b{color:var(--i);font-weight:600}
 .noot p{margin:0;color:var(--i2)}
+.bronnen{margin-top:40px;padding-top:28px;border-top:1px solid var(--lijn)}
+.bronnen h2{margin:0 0 8px;font-size:18px;font-weight:800;letter-spacing:-.01em}
+.bronnen-intro{margin:0 0 18px;color:var(--i2);max-width:72ch}
+.bron-rijen{display:grid;border-top:1px solid var(--lijn)}
+.bron-groep{font:500 11px/1.4 "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--i3);padding:18px 0 6px}
+.bron{display:grid;grid-template-columns:minmax(0,210px) minmax(0,1fr) auto;gap:6px 22px;padding:12px 0;border-bottom:1px solid var(--lijn);align-items:baseline}
+.bron b{font-weight:700}
+.bron span{color:var(--i2)}
+.bron a{color:var(--acc)}
+.bron em{font:500 11px/1.3 "IBM Plex Mono",ui-monospace,monospace;font-style:normal;color:var(--i3);white-space:nowrap}
+@media (max-width:720px){.bron{grid-template-columns:1fr}.bron em{white-space:normal}}
 
 /* ── mockup: vaste merklook, los van het thema van de lezer ── */
 .site{container-type:inline-size;background:#FFFFFF;color:#1B1814;font-family:"Montserrat",-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
@@ -69,13 +80,13 @@ body{margin:0;background:var(--g);color:var(--i);font:400 15px/1.6 "Montserrat",
 .m-gezien{background:#FAF8F5;padding:30px 0 36px;border-bottom:1px solid rgba(27,24,20,.06)}
 .m-gezien p{margin:0 0 20px;text-align:center;font-size:11.5px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:rgba(27,24,20,.62)}
 .m-baan{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
-.m-rij{display:flex;align-items:center;gap:92px;width:max-content;animation:m-loop 38s linear infinite;padding-left:92px}
+.m-rij{display:flex;align-items:center;gap:76px;width:max-content;animation:m-loop 52s linear infinite;padding-left:76px}
 .m-baan:hover .m-rij{animation-play-state:paused}
 @keyframes m-loop{to{transform:translateX(-50%)}}
-.m-lg{height:30px;flex:none;background-position:center;background-size:contain;background-repeat:no-repeat;filter:brightness(0);opacity:.74}
+.m-lg{height:calc(var(--h)*1px);flex:none;background-position:center;background-size:contain;background-repeat:no-repeat}
 {{logo_css}}
-.m-tx{flex:none;font-weight:800;font-size:27px;letter-spacing:-.02em;color:#1B1814;opacity:.74;line-height:1;white-space:nowrap}
-.m-tx.krant{font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:31px;letter-spacing:0}
+.m-do{display:flex;align-items:center;gap:9px;flex:none}
+.m-do b{font-weight:700;font-size:21px;letter-spacing:-.015em;color:#3A3734;white-space:nowrap;line-height:1}
 
 /* telefoon: zelfde opmaak, gestuurd op de breedte van de container */
 @container (max-width:749px){
@@ -103,10 +114,10 @@ body{margin:0;background:var(--g);color:var(--i);font:400 15px/1.6 "Montserrat",
   .m-t span{font-size:11.5px}
   .m-gezien{padding:22px 0 26px}
   .m-gezien p{font-size:10px;margin-bottom:16px}
-  .m-rij{gap:52px;padding-left:52px;animation-duration:30s}
-  .m-lg{height:21px}
-  .m-tx{font-size:19px}
-  .m-tx.krant{font-size:22px}
+  .m-rij{gap:44px;padding-left:44px;animation-duration:44s}
+  .m-lg{height:calc(var(--h)*.7px)}
+  .m-do{gap:7px}
+  .m-do b{font-size:15px}
 }
 @media (prefers-reduced-motion:reduce){.m-rij{animation:none}}
 </style>
@@ -153,16 +164,41 @@ body{margin:0;background:var(--g);color:var(--i);font:400 15px/1.6 "Montserrat",
       <h2>Wat ik van je nodig heb</h2>
       <ul>
         <li><b>Serif of Montserrat?</b> Wissel hierboven. Serif oogt het meest zoals je voorbeeld, maar de rest van de site is Montserrat.</li>
-        <li><b>Logo's van AD, ED en De Ondernemer.</b> Die staan nergens in jullie bestanden en staan er nu als tekst. SVG of PNG, plus de link naar het artikel.</li>
+        <li><b>De Ondernemer.</b> Van hun woordmerk is nergens een bestand te vinden; nu staat hun "de"-cirkel met de naam erachter. Heb je het officiële logo, dan zet ik het erin.</li>
         <li><b>De foto is seizoensgebonden.</b> De herfstbomen achter het raam passen nu; voor na de Herfst Sale is een vaste foto met dezelfde opbouw nodig: onderwerp rechts, rustige donkere achtergrond links.</li>
       </ul>
     </div>
     <div class="noot">
       <h2>Gezien op de live site</h2>
       <p>Trustpilot staat nu op <b>4,5 uit 1.087 reviews</b>. De site toont overal nog 4,4. In dit ontwerp staat 4,5.</p>
+      <p style="margin-top:12px">Alle logo's in de strook zijn omgezet naar één donkergrijs (#3A3734) en optisch gelijkgetrokken: een vierkant logo als AD staat kleiner dan een breed woordmerk, zodat ze even zwaar ogen.</p>
       <p style="margin-top:12px">Na jouw akkoord bouw ik de volgende blokken in dezelfde stijl: kies je plek, echte badkamers met reviews, zekerheid, sets en de afsluiter.</p>
     </div>
   </div>
+
+  <section class="bronnen" aria-labelledby="bronnen-kop">
+    <h2 id="bronnen-kop">Waar Wellshave genoemd wordt</h2>
+    <p class="bronnen-intro">Zelf nagezocht op 25 oktober 2026. AD, ED en De Ondernemer horen bij DPG Media, en DPG blokkeert verzoeken vanaf deze server; die drie heb ik daarom niet zelf kunnen openen.</p>
+    <div class="bron-rijen">
+      <div class="bron-groep">Pers</div>
+      <div class="bron"><b>Eindhovens Dagblad</b><span>30 september 2025. "Dustin (26) uit Helmond was eerst loodgieter en verkocht massagematten, maar met zijn neustrimmer slaat hij nu z'n slag." Gevonden in het nieuwsoverzicht van <a href="https://companyinfo.nl/organisatieprofiel/detailhandel-gespecialiseerd-in-overige-nieuwe-artikelen-rest/wellshave-b-v-helmond-91463823-000057139946" target="_blank" rel="noopener">companyinfo.nl</a>.</span><em>bevestigd</em></div>
+      <div class="bron"><b>AD</b><span>Genoemd op jullie eigen Instagram. Waarschijnlijk hetzelfde regionale stuk, dat DPG vaak ook op AD.nl zet. Stuur de link, dan staat de bron vast.</span><em>jouw opgave</em></div>
+      <div class="bron"><b>De Ondernemer</b><span>Niet terug te vinden van hieruit. Stuur de link mee.</span><em>jouw opgave</em></div>
+      <div class="bron"><b>Men's Health</b><span>Genoemd op jullie Instagram en staat al op de huidige site. Geen artikel gevonden op menshealth.nl.</span><em>jouw opgave</em></div>
+      <div class="bron-groep">Reviews en vergelijkers</div>
+      <div class="bron"><b>Baardtips.com</b><span><a href="https://baardtips.com/scheren/beste-neustrimmer/" target="_blank" rel="noopener">De 10 beste neustrimmers van 2026</a>: de Wellshave 3 in 1 Neustrimmer Advance op nummer 1. Bijgewerkt 20 september 2026.</span><em>bevestigd</em></div>
+      <div class="bron"><b>De Betere Wereld</b><span><a href="https://www.debeterewereld.nl/lichaam-geest/neushaartrimmer/" target="_blank" rel="noopener">Beste neushaartrimmer 2026</a>: de Wellshave 4 in 1 Neustrimmer Ultimate als beste keuze. Bijgewerkt 3 september 2026.</span><em>bevestigd</em></div>
+      <div class="bron"><b>Review.nl en Kieskeurig</b><span><a href="https://review.nl/testpanels/resultaten/1501" target="_blank" rel="noopener">Testpanel</a> Neustrimmer Ultra: 8,5, met 20 testers, 18 mei tot 5 juni 2026. Hetzelfde cijfer staat op het Kieskeurig-label dat jullie al gebruiken.</span><em>bevestigd</em></div>
+      <div class="bron"><b>Scheervrienden.nl</b><span><a href="https://scheervrienden.nl/wellshave-bodygroomer-pro-review-veilig-krachtig-en-gemaakt-voor-gevoelige-plekken/" target="_blank" rel="noopener">Review Bodygroomer PRO</a> (voorheen scheren.nl).</span><em>niet in strook</em></div>
+      <div class="bron"><b>Scheerheld.nl</b><span>Reviews van de <a href="https://scheerheld.nl/wellshave-6-in-1-review/" target="_blank" rel="noopener">6-in-1</a> en de <a href="https://scheerheld.nl/wellshave-bodygroomer-mannen-pro-review/" target="_blank" rel="noopener">Bodygroomer Pro</a>.</span><em>niet in strook</em></div>
+      <div class="bron"><b>Bijmeer.nl, Body-groomer.nl, Dehetbeste.nl</b><span><a href="https://www.bijmeer.nl/wellshave-review/" target="_blank" rel="noopener">Merkreview</a>, <a href="https://body-groomer.nl/wellshave-bodygroomer-pro-review/" target="_blank" rel="noopener">review Bodygroomer Pro</a> en <a href="https://dehetbeste.nl/wellshave-bodygroomer-mannen-trimmer-voor/" target="_blank" rel="noopener">review Bodygroomer</a>. Kleine sites zonder herkenbaar logo; in de strook zouden ze hem goedkoper maken.</span><em>niet in strook</em></div>
+      <div class="bron-groep">Winkels</div>
+      <div class="bron"><b>bol</b><span>Tientallen Wellshave-producten, waaronder de <a href="https://www.bol.com/nl/nl/p/wellshave-bodygroomer-mannen-pro-body-trimmer-heren-shaver-voor-schaamstreek-lichaam/9300000107559467/" target="_blank" rel="noopener">Bodygroomer PRO</a>.</span><em>bevestigd</em></div>
+      <div class="bron"><b>BCC</b><span>Neustrimmer Basic, 2-in-1 Premium en <a href="https://www.bcc.nl/product/wellshave-4-in-1-neustrimmer-ultimate-all-in-one-wenkbrauw-en-oorhaar-trimmer-neushaartrimmer-voor-mannen" target="_blank" rel="noopener">4-in-1 Ultimate</a>.</span><em>bevestigd</em></div>
+      <div class="bron"><b>MediaMarkt</b><span>De 4-in-1 Ultra staat met een MediaMarkt-prijs in de Kieskeurig-vergelijking. Op mediamarkt.nl zelf kon ik niet zoeken; die blokkeert deze server.</span><em>bevestigd via Kieskeurig</em></div>
+      <div class="bron"><b>Blokker</b><span>Staat al op jullie site. Zelf niet teruggevonden.</span><em>jouw opgave</em></div>
+    </div>
+  </section>
 </div>
 
 <script>
