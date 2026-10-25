@@ -1968,9 +1968,12 @@ oude Trustpilot-widget (`trustpilot_reviews`), die uit staat maar niet weg is.
 
 ## Prijs groter, Klarna in drie delen eronder
 
-De prijs staat op 50 px (was 38), op de telefoon op 40 (was 34) en onder
-390 px op 34. Op 390 px blijven prijs, streepprijs en bespaarlabel op één
-regel; gemeten met €59,95 / €85,65 / 30%.
+De prijs stond eerst op 50 px (was 38), op de telefoon op 40. Op 25 oktober
+op verzoek ongeveer gehalveerd: 26 px op de computer, 24 op de telefoon en 23
+onder 390 px. Streepprijs (14 / 13 px) en bespaarlabel (10 / 9,5 px) zijn mee
+verkleind; de prijs in de meelopende balk (19 px) is ongewijzigd. Prijs,
+streepprijs en label blijven op één regel, ook op 320 px; gemeten met
+€89,95 / €142,80 / 37%.
 
 Daaronder een eigen Klarna-regel: het roze Klarna-plaatje en *Of betaal in 3
 rentevrije delen van €19,99*. Het Klarna-appblok (*on-site messaging*) dat in
