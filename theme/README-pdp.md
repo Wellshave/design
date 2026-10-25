@@ -2130,8 +2130,9 @@ getrokken met v7.
 
 Onder *In winkelwagen*, na de leverregel en de betaalmethoden, staan twee à
 drie accessoires, elk met een eigen knop **Toevoegen**. Die zet het accessoire
-meteen in de winkelwagen en opent de lade; daarna staat er een vinkje en
-*Toegevoegd*. Naam en beeld linken naar de pagina van het accessoire.
+meteen in de winkelwagen; daarna staat er een vinkje en *Toegevoegd*. De
+lade gaat **niet** open, de klant blijft op de pagina. De lade wordt op de
+achtergrond ververst, inclusief het aantal in de menubalk en de cadeaus. Naam en beeld linken naar de pagina van het accessoire.
 
 * **Eerst stond het blok boven de knop**, als vinkjes die meegingen met het
   apparaat. Daardoor zakte *In winkelwagen* zo'n 270 px de pagina in. Op
@@ -2140,7 +2141,7 @@ meteen in de winkelwagen en opent de lade; daarna staat er een vinkje en
   accessoire is nu zelf toe te voegen, voor of na het apparaat.
 * `base.js` is daarvoor niet meer aangepast: de wijziging voor de vinkjes is
   teruggedraaid naar de v7-versie. Het blok heeft een eigen klein script dat
-  `cart/add.js` aanroept en de lade ververst.
+  `cart/add.js` aanroept en de lade op de achtergrond ververst.
 * **Welke accessoires.** Uit het productveld `custom.pdp_addons`
   (*PDP add-ons*, lijst van producten). Is dat leeg, dan uit
   `custom.cart_upsell`, dezelfde lijst die de winkelwagenlade al gebruikt.

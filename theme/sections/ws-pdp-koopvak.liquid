@@ -843,6 +843,8 @@
           heeft een vinkje geen zin meer (wie van boven naar beneden leest,
           heeft de knop dan al gehad), dus elk accessoire is nu zelf
           toe te voegen, voor of na het apparaat.
+          Toevoegen opent de winkelwagenlade niet; de knop wordt "Toegevoegd"
+          en het aantal in de menubalk loopt op.
 
           De lijst komt uit custom.pdp_addons, en als die leeg is uit
           custom.cart_upsell: dezelfde accessoires die de winkelwagenlade al
@@ -928,7 +930,10 @@
                   .then(function(antw){
                     if (!antw.items) throw new Error(antw.description || 'Toevoegen mislukt');
                     knop.classList.add('ws-klaar');
-                    if (lade && lade.renderContent) { lade.renderContent(antw.sections); if (lade.open) lade.open(); }
+                    // De lade gaat niet open: de klant blijft op de pagina. renderContent
+                    // ververst de lade op de achtergrond, inclusief het aantal in de
+                    // menubalk en de cadeaus; de knop laat zelf zien dat het gelukt is.
+                    if (lade && lade.renderContent) lade.renderContent(antw.sections);
                   })
                   .catch(function(fout){ console.error('Add-on toevoegen mislukt:', fout); })
                   .finally(function(){ knop.classList.remove('ws-bezig'); });
