@@ -1,4 +1,4 @@
-<title>Wellshave v6 hero</title>
+<title>Wellshave v6 homepage</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Montserrat:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap">
@@ -15,6 +15,7 @@ body{margin:0;background:var(--g);color:var(--i);font:400 15px/1.6 "Montserrat",
 .schil{max-width:1320px;margin:0 auto;padding-block:40px 80px}
 .lbl{font:500 11px/1.4 "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--i3)}
 .kop{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:16px 28px;margin-bottom:22px}
+.keuzes{display:flex;flex-wrap:wrap;gap:14px 20px}
 .kop h1{margin:6px 0 0;font-size:clamp(24px,3.2vw,32px);font-weight:800;letter-spacing:-.02em;line-height:1.15}
 .kop p{margin:8px 0 0;color:var(--i2);max-width:62ch}
 .keuze{display:flex;flex-direction:column;gap:6px}
@@ -119,21 +120,31 @@ body{margin:0;background:var(--g);color:var(--i);font:400 15px/1.6 "Montserrat",
   .m-do{gap:7px}
   .m-do b{font-size:15px}
 }
-@media (prefers-reduced-motion:reduce){.m-rij{animation:none}}
+{{blokken_css}}
+@media (prefers-reduced-motion:reduce){.m-rij{animation:none}.k,.k-golf,.k-foto,.z,.z-foto{transition:none}}
 </style>
 
 <div class="schil">
   <div class="kop">
     <div>
-      <span class="lbl">Wellshave · ontwerp v6 · blok 1 en 2</span>
-      <h1>Hero en Gezien bij</h1>
-      <p>Opgebouwd zoals je Wellshine-voorbeeld: één foto over de volle breedte, daarop drie korte kopregels, één knop, één link en vier zekerheden in een rustig raster. Daaronder direct de logostrook.</p>
+      <span class="lbl">Wellshave · ontwerp v6 · hele homepage</span>
+      <h1>Homepage v6</h1>
+      <p>Hero en Gezien bij, en daaronder zes nieuwe blokken in dezelfde rust: bestsellers zoals je Wellshine-voorbeeld, kies jouw plek, reviews, sets, vragen en de afsluiter met footer. Ga op desktop met je muis over een productkaart voor de hover.</p>
     </div>
-    <div class="keuze">
-      <span class="lbl">Kopletter</span>
-      <div class="seg" role="group" aria-label="Kopletter">
-        <button type="button" id="k-serif" aria-pressed="true">Serif, zoals Wellshine</button>
-        <button type="button" id="k-sans" aria-pressed="false">Montserrat, huidig merk</button>
+    <div class="keuzes">
+      <div class="keuze">
+        <span class="lbl">Kopletter</span>
+        <div class="seg" role="group" aria-label="Kopletter">
+          <button type="button" id="k-serif" aria-pressed="true">Serif, zoals Wellshine</button>
+          <button type="button" id="k-sans" aria-pressed="false">Montserrat, huidig merk</button>
+        </div>
+      </div>
+      <div class="keuze">
+        <span class="lbl">Kortingslabel</span>
+        <div class="seg" role="group" aria-label="Kortingslabel">
+          <button type="button" id="l-pct" aria-pressed="true">30% Korting</button>
+          <button type="button" id="l-eur" aria-pressed="false">Bespaar €25,70</button>
+        </div>
       </div>
     </div>
   </div>
@@ -151,28 +162,34 @@ body{margin:0;background:var(--g);color:var(--i);font:400 15px/1.6 "Montserrat",
 
   <div class="noten">
     <div class="noot">
-      <h2>Wat er anders is dan nu</h2>
+      <h2>De nieuwe blokken</h2>
       <ul>
-        <li><b>Geen sale-pil in de hero.</b> De Herfst Sale staat in de balk erboven; de hero verkoopt het merk.</li>
-        <li><b>Eén knop en één link</b>, in gewone zinsletters, zonder goud en zonder gloed.</li>
-        <li><b>Foto over de volle breedte</b>, met de tekst op de donkere tegelwand links, net als in je voorbeeld. Het is de herfst-hero die nu live staat, zonder de sale-pil en de drukte eromheen.</li>
-        <li><b>Zekerheden als stil raster</b> onder een haarlijn, met dunne iconen en geen rondjes.</li>
-        <li>Op de telefoon eindigt de knop rond 690 px, net boven de gemiddelde vouw van 705 px. Nu valt hij eronder.</li>
+        <li><b>Bestsellers.</b> Zoals je voorbeeld: grijze beeldvlakken, naam, prijs met van-prijs en label, drie kenmerken als pilletjes. Bij hover komt het zandgolfje erachter en tilt de kaart op. Erbij: een kleine sterrenregel, omdat reviews jullie sterkste bewijs zijn.</li>
+        <li><b>Kies jouw plek.</b> Vier tegels in zand: lichaam, gezicht en baard, hoofd, neus en oren. Elke tegel noemt hoeveel apparaten er zijn en vanaf welke prijs.</li>
+        <li><b>Reviews.</b> Vier echte Trustpilot-quotes die nu ook op de homepage staan, en daaronder drie klantvideo's. Op de telefoon schuif je de quotes opzij.</li>
+        <li><b>Sets</b> in dezelfde kaart als de bestsellers, met in één zin wat erin zit.</li>
+        <li><b>Vragen.</b> Zeven vragen van de huidige site. Links de weg naar een echt mens, zonder naam erbij.</li>
+        <li><b>Afsluiter en footer</b> donker, zoals de hero, zodat de pagina begint en eindigt in dezelfde sfeer. De footer is in het Nederlands; live staan er nog Engelse links als Shipping Policy en Our Story.</li>
+      </ul>
+    </div>
+    <div class="noot">
+      <h2>Waar de cijfers vandaan komen</h2>
+      <ul>
+        <li><b>Prijzen, van-prijzen en reviews</b> komen live uit Shopify, opgehaald op 25 oktober 2026.</li>
+        <li><b>Bestsellers</b> zijn de vier apparaten met de meeste bestellingen in de laatste 30 dagen: Flex Guard 69, Groom Guard 65, Groom Guard PRO 55, Neustrimmer Advance 44. Washbag, messen en tassen tellen niet mee.</li>
+        <li><b>Het label rondt af naar beneden</b>, net als op de live site. Daarom staat de Groom Guard op 29% en de andere twee op 30%.</li>
+        <li><b>Plekken:</b> aantallen en vanaf-prijzen uit de collecties Bodygroomers, Gezicht &amp; baard, Hoofd en Neustrimmers.</li>
+        <li><b>Trustpilot</b> staat op 4,5 uit 1.087 reviews. De live site toont nog 4,4.</li>
       </ul>
     </div>
     <div class="noot">
       <h2>Wat ik van je nodig heb</h2>
       <ul>
-        <li><b>Serif of Montserrat?</b> Wissel hierboven. Serif oogt het meest zoals je voorbeeld, maar de rest van de site is Montserrat.</li>
-        <li><b>De Ondernemer.</b> Van hun woordmerk is nergens een bestand te vinden; nu staat hun "de"-cirkel met de naam erachter. Heb je het officiële logo, dan zet ik het erin.</li>
-        <li><b>De foto is seizoensgebonden.</b> De herfstbomen achter het raam passen nu; voor na de Herfst Sale is een vaste foto met dezelfde opbouw nodig: onderwerp rechts, rustige donkere achtergrond links.</li>
+        <li><b>Serif of Montserrat</b> en <b>welk kortingslabel</b>? Beide wissel je hierboven.</li>
+        <li><b>Barber Bro 3.0</b> staat op −14 voorraad en wordt doorverkocht. Bij die set klopt "morgen in huis" dus niet. Houden, of een set die op voorraad is ervoor in de plaats, zoals de Body &amp; Nose Bundel?</li>
+        <li><b>Barber Bro 2.0</b> is met 33 bestellingen de best verkochte set, maar heeft geen van-prijs en is opgevolgd door de 3.0. Ik heb hem weggelaten.</li>
+        <li><b>De Ondernemer, AD en de herfstfoto</b> staan nog open, zie de bronnen hieronder.</li>
       </ul>
-    </div>
-    <div class="noot">
-      <h2>Gezien op de live site</h2>
-      <p>Trustpilot staat nu op <b>4,5 uit 1.087 reviews</b>. De site toont overal nog 4,4. In dit ontwerp staat 4,5.</p>
-      <p style="margin-top:12px">Alle logo's in de strook zijn omgezet naar één donkergrijs (#3A3734) en optisch gelijkgetrokken: een vierkant logo als AD staat kleiner dan een breed woordmerk, zodat ze even zwaar ogen.</p>
-      <p style="margin-top:12px">Na jouw akkoord bouw ik de volgende blokken in dezelfde stijl: kies je plek, echte badkamers met reviews, zekerheid, sets en de afsluiter.</p>
     </div>
   </div>
 
@@ -211,6 +228,10 @@ body{margin:0;background:var(--g);color:var(--i);font:400 15px/1.6 "Montserrat",
   function zet(sans){ document.body.classList.toggle('sans',sans); bs.setAttribute('aria-pressed',String(!sans)); bm.setAttribute('aria-pressed',String(sans)); try{localStorage.setItem('ws-kopletter',sans?'sans':'serif')}catch(e){} fit(); }
   bs.addEventListener('click',function(){zet(false)}); bm.addEventListener('click',function(){zet(true)});
   try{ if(localStorage.getItem('ws-kopletter')==='sans') zet(true); }catch(e){}
+  var lp=document.getElementById('l-pct'), le=document.getElementById('l-eur');
+  function label(e){ document.body.classList.toggle('euro',e); lp.setAttribute('aria-pressed',String(!e)); le.setAttribute('aria-pressed',String(e)); try{localStorage.setItem('ws-label',e?'euro':'pct')}catch(x){} fit(); }
+  lp.addEventListener('click',function(){label(false)}); le.addEventListener('click',function(){label(true)});
+  try{ if(localStorage.getItem('ws-label')==='euro') label(true); }catch(x){}
   if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fit);
 })();
 </script>
