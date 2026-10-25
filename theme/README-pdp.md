@@ -2239,8 +2239,14 @@ header-groep.
 
 * `sections/announcement.liquid`: nieuwe instelling *Balk bovenaan
   vastzetten* (standaard aan). De sectie zelf is `position: sticky` (niet de
-  balk erin, anders blijft hij niet over de hele pagina staan), z-index 4:
-  boven de inhoud, onder de header, zodat het mobiele menu er overheen valt.
+  balk erin, anders blijft hij niet over de hele pagina staan), z-index 5,
+  gelijk aan de header. De header staat later in de pagina en wint dus waar
+  ze overlappen, zodat het mobiele menu over de balk valt. Eerst stond hier
+  z-index 4; dan schoven de miniaturen en pijlen van de productgalerij over de
+  balk (gemeld op de telefoon). De galerij (`.ws-stg`) heeft nu bovendien
+  `isolation: isolate`, zodat de z-index van pijlen (5) en miniaturen (4)
+  alleen binnen de galerij geldt. Gecontroleerd op 390 px met de miniaturen
+  precies onder de balk: overal ligt de balk bovenop.
   Een klein script zet de hoogte van de balk in `--ws-balk-h` (42 px; op een
   smal scherm met twee regels houdt een ResizeObserver dat bij).
 * `assets/header.css`: `.header.sticky` staat op `top: var(--ws-balk-h)` in

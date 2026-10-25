@@ -24,12 +24,14 @@
   {%- if section.settings.vastzetten %}
   /* De balk blijft bovenaan staan als je scrolt. De sectie zelf is sticky
      (niet de balk erin), want alleen dan blijft hij over de hele pagina
-     staan. z-index 4: boven de inhoud, onder de header (5), zodat het
-     mobiele menu er gewoon overheen valt. */
+     staan. z-index 5, gelijk aan de header: die staat later in de pagina en
+     wint dus waar ze overlappen (het mobiele menu valt over de balk).
+     Eerst stond hier 4; dan schoven de miniaturen van de galerij (4) en
+     de knop Snel bekijken op de collectiepagina (4) over de balk. */
   #shopify-section-{{ section.id }} {
     position: sticky;
     top: 0;
-    z-index: 4;
+    z-index: 5;
   }
   {%- endif %}
 </style>

@@ -57,7 +57,10 @@
 
 
 /* ---- podium ---- */
-.ws-pdp .ws-stg{position:relative;display:flex;flex-direction:column;background:var(--ws-cream2);
+/* isolation: de z-index van de pijlen (5), miniaturen en labels (4) geldt
+   alleen binnen de galerij. Zonder dit schoven ze over de vaste
+   aankondigingsbalk bovenaan (z-index 5) heen. */
+.ws-pdp .ws-stg{position:relative;isolation:isolate;display:flex;flex-direction:column;background:var(--ws-cream2);
   border:1px solid rgba(17,17,17,.07);border-radius:20px;padding:22px 22px 18px;overflow:hidden;min-width:0}
 /* Het podium blijft staan terwijl het koopvak eronderdoor scrollt, tot de
    onderkant van het blok. Daarna schuift het gewoon mee weg, want sticky
