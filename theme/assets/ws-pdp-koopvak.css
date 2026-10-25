@@ -1021,3 +1021,59 @@
   .ws-pdp .ws-vd-tx b{font-size:13px}
   .ws-pdp .ws-vd-tx span{font-size:11.5px}
 }
+
+/* ---- add-ons boven de knop ----
+   Eén omlijst blok met een kop en regels met een haarlijn ertussen, en
+   vierkante vinkjes. Zo verschilt het van de voordeelkaartjes (losse witte
+   tegels) en van de modelkeuze (losse regels met een rondje): je kiest hier
+   niet tussen, je voegt toe. Aangevinkt wordt het vakje goud en de prijs
+   donker; daaronder verschijnt het totaal. */
+.ws-pdp .ws-add{margin:0 0 14px;border:1px solid rgba(20,18,15,.14);border-radius:12px;
+  background:rgba(255,255,255,.5);overflow:hidden}
+.ws-pdp .ws-add-kop{margin:0;padding:11px 14px 9px;font-size:10.5px;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ws-w72);border-bottom:1px solid rgba(20,18,15,.09)}
+.ws-pdp .ws-add-lijst{list-style:none;margin:0;padding:0}
+.ws-pdp .ws-add-rij{margin:0}
+.ws-pdp .ws-add-rij + .ws-add-rij{border-top:1px solid rgba(20,18,15,.09)}
+.ws-pdp .ws-add-in{position:relative;display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;gap:12px;
+  align-items:center;padding:9px 14px;cursor:pointer;transition:background-color .15s}
+.ws-pdp .ws-add-in:hover{background:rgba(255,255,255,.7)}
+.ws-pdp .ws-add-vink{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
+.ws-pdp .ws-add-box{display:grid;place-items:center;width:18px;height:18px;box-sizing:border-box;border-radius:5px;
+  border:1.5px solid rgba(20,18,15,.32);background:#fff;transition:background-color .15s,border-color .15s}
+.ws-pdp .ws-add-box svg{width:13px;height:13px;fill:none;stroke:#fff;stroke-width:2.8;stroke-linecap:round;
+  stroke-linejoin:round;opacity:0;transform:scale(.6);transition:opacity .15s,transform .15s}
+.ws-pdp .ws-add-in:hover .ws-add-box{border-color:var(--ws-ink)}
+.ws-pdp .ws-add-vink:checked + .ws-add-box{background:var(--ws-tekstgoud);border-color:var(--ws-tekstgoud)}
+.ws-pdp .ws-add-vink:checked + .ws-add-box svg{opacity:1;transform:none}
+.ws-pdp .ws-add-vink:focus-visible + .ws-add-box{outline:2px solid var(--ws-tekstgoud);outline-offset:2px}
+.ws-pdp .ws-add-beeld{width:40px;height:40px;border-radius:8px;overflow:hidden;background:var(--ws-cream2);
+  display:grid;place-items:center}
+.ws-pdp .ws-add-beeld img{width:100%;height:100%;object-fit:contain;display:block}
+.ws-pdp .ws-add-tekst{display:block;min-width:0}
+.ws-pdp .ws-add-naam{display:block;font-size:13.5px;font-weight:600;line-height:1.25;color:var(--ws-ink);overflow-wrap:anywhere}
+.ws-pdp .ws-add-sub{display:block;margin-top:1px;font-size:11.5px;line-height:1.3;color:var(--ws-w72)}
+.ws-pdp .ws-add-prijs{display:flex;flex-direction:column;align-items:flex-end;white-space:nowrap;
+  font-variant-numeric:tabular-nums}
+.ws-pdp .ws-add-prijs b{font-size:13.5px;font-weight:600;color:var(--ws-w72);transition:color .15s}
+.ws-pdp .ws-add-vink:checked ~ .ws-add-prijs b{color:var(--ws-ink)}
+.ws-pdp .ws-add-prijs s{font-size:10.5px;color:var(--ws-w38)}
+.ws-pdp .ws-add-som{margin:0;padding:9px 14px 10px;border-top:1px solid rgba(20,18,15,.09);
+  display:flex;justify-content:space-between;align-items:baseline;font-size:12.5px;color:var(--ws-w72);
+  background:#FFFCF7}
+.ws-pdp .ws-add-som[hidden]{display:none}
+.ws-pdp .ws-add-som b{font-size:14px;font-weight:600;color:var(--ws-ink);font-variant-numeric:tabular-nums}
+@media screen and (max-width:749px){
+  .ws-pdp .ws-add{margin-bottom:12px}
+  .ws-pdp .ws-add-kop{padding:10px 12px 8px;font-size:10px}
+  .ws-pdp .ws-add-in{gap:10px;padding:8px 12px}
+  .ws-pdp .ws-add-beeld{width:34px;height:34px}
+  .ws-pdp .ws-add-naam{font-size:13px}
+  .ws-pdp .ws-add-sub{font-size:11px}
+  .ws-pdp .ws-add-prijs b{font-size:13px}
+  .ws-pdp .ws-add-som{padding:8px 12px 9px}
+}
+@media screen and (max-width:359px){
+  .ws-pdp .ws-add-in{grid-template-columns:auto minmax(0,1fr) auto}
+  .ws-pdp .ws-add-beeld{display:none}
+}

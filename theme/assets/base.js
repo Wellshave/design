@@ -314,13 +314,31 @@ class MainProduct extends HTMLElement {
         {
           id: parseInt(this.querySelector("[name='id']").value),
           quantity: parseInt(this.querySelector("[name='quantity']").value)
-        }
+        },
+        ...this.addonItems()
       ],
       sections: sections,
       sections_url: window.location.pathname
     };
 
     this.addToCart(cartData);
+  }
+
+  // Aangevinkte add-ons uit het koopvak (ws-pdp-koopvak, [data-ws-addon]).
+  // Ze gaan in hetzelfde verzoek mee als het product zelf.
+  addonItems() {
+    return Array.from(this.querySelectorAll("[data-ws-addon]:checked"))
+      .map(vink => ({ id: parseInt(vink.value), quantity: 1 }))
+      .filter(item => item.id);
+  }
+
+  // Na een gelukte toevoeging de vinkjes leegmaken, anders gaan ze bij een
+  // tweede klik op de knop nog een keer mee.
+  clearAddons() {
+    this.querySelectorAll("[data-ws-addon]:checked").forEach(vink => {
+      vink.checked = false;
+      vink.dispatchEvent(new Event("change", { bubbles: true }));
+    });
   }
 
   addToCart(data) {
@@ -342,7 +360,8 @@ class MainProduct extends HTMLElement {
         throw error;
       } else {
         this.toggleLoading();
-        
+        this.clearAddons();
+
         if (this.cart) {
           this.cart.renderContent(response.sections);
           this.cart.open();
@@ -484,13 +503,16 @@ class MainProduct extends HTMLElement {
           case "add-to-cart": 
             this.onFormSubmit();
             break;
-          case "add-product": 
+          case "add-product":
             const cartData = {
               items: [
                 {
                   id: parseInt(e.target.dataset.variant),
                   quantity: 1
-                }
+                },
+                // kiest de klant in de upgrade-pop-up een groter pakket, dan
+                // gaan de aangevinkte add-ons ook mee
+                ...(e.target.closest('[id^="ProductUpgrade-"]') ? this.addonItems() : [])
               ],
               sections_url: window.location.pathname
             };

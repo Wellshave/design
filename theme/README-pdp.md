@@ -2125,3 +2125,43 @@ Bij het uploaden van het sjabloon heeft Shopify een uitgeschakeld appblok van
 Section Store (*product add-ons*, toilettas en travelbag) uit `product.json`
 gehaald. Het stond uit en deed niets; het sjabloon in de repo is gelijk
 getrokken met v7.
+
+## Add-ons boven de knop: *Maak het compleet*
+
+Direct boven *In winkelwagen* staan twee à drie accessoires om aan te vinken.
+Wat aangevinkt is, gaat in één klik mee met het apparaat; eronder verschijnt
+het totaal (*Samen €94,85*).
+
+* **Welke accessoires.** Uit het nieuwe productveld `custom.pdp_addons`
+  (*PDP add-ons*, lijst van producten). Is dat leeg, dan uit
+  `custom.cart_upsell`, dezelfde lijst die de winkelwagenlade al gebruikt.
+  Maximaal drie (instelling *Hoeveel maximaal*). Overgeslagen: niet
+  leverbaar, het product zelf, en zolang de cadeaus aan staan alles uit
+  *upsell_uitsluiten* (de washbag, die je vanaf een bedrag gratis krijgt).
+* **De regel onder de naam** is de kop van het eerste voordeel van dat
+  accessoire (`custom.voordelen`). Zonder voordelen alleen de naam.
+* **Nooit vooraf aangevinkt.** Een vooraf aangevinkt vakje voor een extra
+  betaling mag in de EU niet (richtlijn consumentenrechten, art. 22).
+* **Hoe het meegaat.** `assets/base.js` (`MainProduct.addonItems`) voegt de
+  aangevinkte varianten toe aan hetzelfde `cart/add.js`-verzoek. Dat geldt
+  voor de knop, de meelopende balk, *Nee dank je* in de upgrade-pop-up en het
+  kiezen van een groter pakket in die pop-up. Na het toevoegen gaan de
+  vinkjes weer uit. Getest met een onderschept verzoek: product plus twee
+  add-ons in één keer.
+* `base.js` stond nog niet in de repo; de ongewijzigde v7-versie is eerst
+  apart vastgelegd, zodat de wijziging los te zien is.
+* Kop en totaalregel vertaald in en/de/fr.
+
+### Wat klanten nu al samen kopen (7–25 oktober, 250 orders)
+
+| Apparaat | Orders | Meest meegekocht |
+|---|---|---|
+| Flex Guard 3-in-1 | 39 | mesje 9, Hard Case 8, Washbag 8 |
+| Groom Guard PRO | 33 | mesje 3, Hard Case 1 |
+| Barber Bro 2.0 | 21 | Neustrimmer Ultimate 3 |
+| The Gentleman Shaver | 10 | scheerkop 4 |
+
+Bij de Flex Guard koopt bijna een kwart een extra mesje mee, bij de Groom
+Guard PRO één op de elf. Het mesje staat daarom bij de Groom Guard PRO
+bovenaan. De Shave Package-orders (Groom Guard, foil shaver, neustrimmer,
+tassen en mesje samen) zijn pakketten en niet meegeteld.

@@ -789,6 +789,98 @@
         {%- endif -%}
 
         <div class="ws-vorm">
+          {%- comment -%}
+            Add-ons: accessoires om aan te vinken, direct boven de knop. Wat
+            aangevinkt is gaat in hetzelfde verzoek mee naar de winkelwagen
+            (base.js, MainProduct.addonItems), ook via de upgrade-pop-up en de
+            meelopende balk.
+
+            De lijst komt uit custom.pdp_addons, en als die leeg is uit
+            custom.cart_upsell: dezelfde accessoires die de winkelwagenlade al
+            aanbiedt, maar dan op het moment dat de klant nog beslist.
+            Overgeslagen worden: wat niet leverbaar is, het product zelf, en
+            zolang de cadeaus aan staan alles uit upsell_uitsluiten (de
+            washbag krijg je vanaf een bedrag gratis; die verkopen we hier niet
+            los, net als in de lade).
+
+            Nooit vooraf aangevinkt. Een vooraf aangevinkt vakje voor een
+            extra betaling mag in de EU niet (richtlijn consumentenrechten,
+            art. 22), en het voelt ook als een truc.
+
+            De regel onder de naam is de kop van het eerste voordeel van dat
+            accessoire (custom.voordelen), als het er een heeft.
+          {%- endcomment -%}
+          {%- liquid
+            assign add_lijst = mf.pdp_addons.value | default: mf.cart_upsell.value
+            assign add_weg = ''
+            if settings.enable_gift_rewards and settings.upsell_uitsluiten != blank
+              assign add_weg = settings.upsell_uitsluiten | remove: ' ' | split: ','
+            endif
+            assign add_max = s.add_max | default: 3
+            assign add_n = 0
+          -%}
+          {%- if s.add_tonen and add_lijst != blank and v.available -%}
+            {%- capture add_rijen -%}
+              {%- for ap in add_lijst -%}
+                {%- if add_n >= add_max -%}{%- break -%}{%- endif -%}
+                {%- if ap.id == product.id -%}{%- continue -%}{%- endif -%}
+                {%- if add_weg contains ap.handle -%}{%- continue -%}{%- endif -%}
+                {%- assign av = ap.selected_or_first_available_variant -%}
+                {%- unless av.available -%}{%- continue -%}{%- endunless -%}
+                {%- assign add_n = add_n | plus: 1 -%}
+                {%- assign add_vd = ap.metafields.custom.voordelen.value | first -%}
+                <li class="ws-add-rij">
+                  <label class="ws-add-in">
+                    <input type="checkbox" class="ws-add-vink" data-ws-addon value="{{ av.id }}" data-prijs="{{ av.price }}">
+                    <span class="ws-add-box" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5.5 12.4l4.2 4.2 8.8-9.2"/></svg></span>
+                    {%- if ap.featured_image != blank -%}
+                      <span class="ws-add-beeld">{{ ap.featured_image | image_url: width: 120 | image_tag: alt: '', loading: 'lazy', width: 60, height: 60 }}</span>
+                    {%- endif -%}
+                    <span class="ws-add-tekst">
+                      <span class="ws-add-naam">{{ ap.title }}</span>
+                      {%- if add_vd.kop.value != blank -%}<span class="ws-add-sub">{{ add_vd.kop.value }}</span>{%- endif -%}
+                    </span>
+                    <span class="ws-add-prijs">
+                      <b>+&nbsp;{% if s.munt != blank %}{{ s.munt }}{% endif %}{% render 'price-formated', price: av.price %}</b>
+                      {%- if av.compare_at_price > av.price -%}
+                        <s><span class="visually-hidden">{{ s.kies_was }} </span>{% if s.munt != blank %}{{ s.munt }}{% endif %}{% render 'price-formated', price: av.compare_at_price %}</s>
+                      {%- endif -%}
+                    </span>
+                  </label>
+                </li>
+              {%- endfor -%}
+            {%- endcapture -%}
+            {%- if add_n > 0 -%}
+              <div class="ws-add" data-ws-add data-basis="{{ v.price }}">
+                {%- if s.add_kop != blank -%}<p class="ws-add-kop">{{ s.add_kop }}</p>{%- endif -%}
+                <ul class="ws-add-lijst">{{ add_rijen }}</ul>
+                {%- if s.add_som != blank -%}
+                  <p class="ws-add-som" data-ws-add-som-regel hidden>{{ s.add_som }} <b data-ws-add-som></b></p>
+                {%- endif -%}
+              </div>
+              <script>
+                (function(){
+                  var blok = document.currentScript.previousElementSibling;
+                  if (!blok || !blok.hasAttribute('data-ws-add')) return;
+                  var regel = blok.querySelector('[data-ws-add-som-regel]');
+                  var som = blok.querySelector('[data-ws-add-som]');
+                  if (!regel || !som) return;
+                  var taal = document.documentElement.lang || 'nl';
+                  var geld = new Intl.NumberFormat(taal, { style: 'currency', currency: {{ cart.currency.iso_code | json }} });
+                  function bijwerken(){
+                    var totaal = parseInt(blok.getAttribute('data-basis'), 10) || 0, n = 0;
+                    blok.querySelectorAll('[data-ws-addon]').forEach(function(v){
+                      if (v.checked) { totaal += parseInt(v.getAttribute('data-prijs'), 10) || 0; n++; }
+                    });
+                    som.textContent = geld.format(totaal / 100).replace(/^(\D+)\s/, '$1');
+                    regel.hidden = n === 0;
+                  }
+                  blok.addEventListener('change', bijwerken);
+                  bijwerken();
+                })();
+              </script>
+            {%- endif -%}
+          {%- endif -%}
           {%- assign form_id = 'ProductForm-' | append: section.id -%}
           {%- form 'product', product, id: form_id, class: 'ws-vorm-form', novalidate: 'novalidate' -%}
             <input type="hidden" name="id" value="{{ v.id }}">
@@ -1969,6 +2061,11 @@
     { "type": "text", "id": "pop_bestevoor", "label": "Aanhef bij Beste voor", "default": "Beste voor:" },
     { "type": "text", "id": "pop_knop", "label": "Knoptekst in de pop-up", "default": "Kies" },
     { "type": "text", "id": "pop_inbegrepen", "label": "Label bij de beslissende rij", "default": "Inbegrepen" },
+    { "type": "header", "content": "Add-ons boven de knop" },
+    { "type": "checkbox", "id": "add_tonen", "label": "Add-ons tonen", "info": "Accessoires uit custom.pdp_addons, of anders uit custom.cart_upsell. Nooit vooraf aangevinkt.", "default": true },
+    { "type": "text", "id": "add_kop", "label": "Kop", "default": "Maak het compleet" },
+    { "type": "range", "id": "add_max", "label": "Hoeveel maximaal", "min": 1, "max": 4, "step": 1, "default": 3 },
+    { "type": "text", "id": "add_som", "label": "Regel met het totaal", "info": "Verschijnt zodra er iets is aangevinkt, met het totaal erachter.", "default": "Samen" },
     { "type": "header", "content": "Upgrade-pop-up" },
     { "type": "paragraph", "content": "Verschijnt bij het toevoegen aan de winkelwagen, gevoed uit custom.upgrade_products. Alleen duurdere producten die op voorraad staan komen erin; staat het veld leeg, dan is er geen pop-up." },
     { "type": "checkbox", "id": "upg_tonen", "label": "Upgrade-pop-up aan", "default": true },
