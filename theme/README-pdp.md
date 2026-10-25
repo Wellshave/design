@@ -2126,13 +2126,22 @@ Section Store (*product add-ons*, toilettas en travelbag) uit `product.json`
 gehaald. Het stond uit en deed niets; het sjabloon in de repo is gelijk
 getrokken met v7.
 
-## Add-ons boven de knop: *Maak het compleet*
+## Add-ons onder de knop: *Maak het compleet*
 
-Direct boven *In winkelwagen* staan twee à drie accessoires om aan te vinken.
-Wat aangevinkt is, gaat in één klik mee met het apparaat; eronder verschijnt
-het totaal (*Samen €94,85*).
+Onder *In winkelwagen*, na de leverregel en de betaalmethoden, staan twee à
+drie accessoires, elk met een eigen knop **Toevoegen**. Die zet het accessoire
+meteen in de winkelwagen en opent de lade; daarna staat er een vinkje en
+*Toegevoegd*. Naam en beeld linken naar de pagina van het accessoire.
 
-* **Welke accessoires.** Uit het nieuwe productveld `custom.pdp_addons`
+* **Eerst stond het blok boven de knop**, als vinkjes die meegingen met het
+  apparaat. Daardoor zakte *In winkelwagen* zo'n 270 px de pagina in. Op
+  verzoek staat het nu eronder. Een vinkje onder de knop heeft geen zin (wie
+  van boven naar beneden leest, heeft dan al op de knop gedrukt), dus elk
+  accessoire is nu zelf toe te voegen, voor of na het apparaat.
+* `base.js` is daarvoor niet meer aangepast: de wijziging voor de vinkjes is
+  teruggedraaid naar de v7-versie. Het blok heeft een eigen klein script dat
+  `cart/add.js` aanroept en de lade ververst.
+* **Welke accessoires.** Uit het productveld `custom.pdp_addons`
   (*PDP add-ons*, lijst van producten). Is dat leeg, dan uit
   `custom.cart_upsell`, dezelfde lijst die de winkelwagenlade al gebruikt.
   Maximaal drie (instelling *Hoeveel maximaal*). Overgeslagen: niet
@@ -2140,17 +2149,10 @@ het totaal (*Samen €94,85*).
   *upsell_uitsluiten* (de washbag, die je vanaf een bedrag gratis krijgt).
 * **De regel onder de naam** is de kop van het eerste voordeel van dat
   accessoire (`custom.voordelen`). Zonder voordelen alleen de naam.
-* **Nooit vooraf aangevinkt.** Een vooraf aangevinkt vakje voor een extra
-  betaling mag in de EU niet (richtlijn consumentenrechten, art. 22).
-* **Hoe het meegaat.** `assets/base.js` (`MainProduct.addonItems`) voegt de
-  aangevinkte varianten toe aan hetzelfde `cart/add.js`-verzoek. Dat geldt
-  voor de knop, de meelopende balk, *Nee dank je* in de upgrade-pop-up en het
-  kiezen van een groter pakket in die pop-up. Na het toevoegen gaan de
-  vinkjes weer uit. Getest met een onderschept verzoek: product plus twee
-  add-ons in één keer.
-* `base.js` stond nog niet in de repo; de ongewijzigde v7-versie is eerst
-  apart vastgelegd, zodat de wijziging los te zien is.
-* Kop en totaalregel vertaald in en/de/fr.
+* De knop is omlijnd in brons en wordt pas gevuld na toevoegen, zodat hij niet
+  concurreert met de gouden *In winkelwagen*. Onder 390 px staat alleen het
+  plusje; de voorleesnaam blijft *Toevoegen: [naam]*.
+* Kop en knopteksten vertaald in en/de/fr.
 
 ### Wat klanten nu al samen kopen (7–25 oktober, 250 orders)
 
