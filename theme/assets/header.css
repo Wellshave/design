@@ -4,15 +4,18 @@
   z-index: 5;
   top: 0;
   left: 0;
-  transition: top 0.3s;
 }
 
 .shopify-section:has(.header.sticky) {
   padding-top: var(--header-height);
 }
 
+/* Vast onder de aankondigingsbalk als die vastgezet is (--ws-balk-h, gezet
+   door sections/announcement.liquid); anders gewoon bovenaan. De overgang op
+   top is weg: daardoor schoof de header bij het vastzetten eerst over de balk. */
 .header.sticky {
   position: fixed;
+  top: var(--ws-balk-h, 0px);
 }
 
 .header__inner {
@@ -84,7 +87,7 @@
   top: calc(100% - 20px);
   left: 0;
   width: 100%;
-  max-height: calc(100dvh - var(--header-height));
+  max-height: calc(100dvh - var(--header-height) - var(--ws-balk-h, 0px));
   overflow: auto;
   background-color: #faf5f0;
   padding: 56px 0;

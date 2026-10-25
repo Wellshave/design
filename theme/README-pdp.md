@@ -2229,3 +2229,32 @@ in de doos*. De inhoud komt er zacht bij en vervaagt bij dichtgaan; het plusje
 draait in hetzelfde tempo. Zonder JavaScript of bij *minder beweging* werken ze
 als gewone uitklapblokken, zonder overgang. Gemeten op 390 px: het eerste blok
 groeit van 51 naar 561 px in ongeveer 400 ms.
+
+## Aankondigingsbalk blijft bovenaan staan
+
+De gouden balk (*Herfst Sale tot 40%. – Shop nu → | Nog …*) blijft bij het
+scrollen bovenaan staan; de menubalk zet zich er direct onder vast. Dit geldt
+voor de hele winkel, niet alleen de productpagina, want de balk zit in de
+header-groep.
+
+* `sections/announcement.liquid`: nieuwe instelling *Balk bovenaan
+  vastzetten* (standaard aan). De sectie zelf is `position: sticky` (niet de
+  balk erin, anders blijft hij niet over de hele pagina staan), z-index 4:
+  boven de inhoud, onder de header, zodat het mobiele menu er overheen valt.
+  Een klein script zet de hoogte van de balk in `--ws-balk-h` (42 px; op een
+  smal scherm met twee regels houdt een ResizeObserver dat bij).
+* `assets/header.css`: `.header.sticky` staat op `top: var(--ws-balk-h)` in
+  plaats van 0, en het megamenu rekent de balk mee in zijn maximale hoogte.
+  De overgang op `top` is weg: daardoor schoof de header bij het vastzetten
+  eerst over de balk heen.
+* Alles wat onder de header blijft hangen telt de balk erbij op: de galerij
+  op de productpagina (`ws-pdp-koopvak.css`, `.ws-stg`) en de galerij van het
+  oude productsjabloon (`main-product.css`).
+* De donkere Trustpilot-balk eronder scrolt gewoon weg, onder de gouden balk
+  door.
+* Gemeten op 1440 en 390 px: balk 0–42 px op elke scrollhoogte, header vast
+  op 42 px zodra je voorbij de balk bent.
+* De drie themabestanden stonden nog niet in de repo; de ongewijzigde
+  v7-versies zijn eerst apart vastgelegd.
+* Niet aangepast: de filterkolom op de collectiepagina (`ws-collectie.css`,
+  `top: 24px`) rekende al niet met de header en valt nu ook onder de balk.

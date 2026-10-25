@@ -73,7 +73,7 @@
    de hoogte van de vastgezette balk). 84px is de terugval als dat script niet
    gedraaid heeft. */
 @media screen and (min-width:750px){
-  .ws-pdp .ws-stg{position:sticky;top:calc(var(--header-height, 84px) + 14px);align-self:start}
+  .ws-pdp .ws-stg{position:sticky;top:calc(var(--header-height, 84px) + var(--ws-balk-h, 0px) + 14px);align-self:start}
 }
 
 .ws-pdp .ws-stg .ws-glans{position:absolute;left:50%;top:44%;width:78%;height:52%;transform:translate(-50%,-50%);

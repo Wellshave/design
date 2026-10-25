@@ -21,6 +21,17 @@
   @media (max-width: 479px) {
     .section-{{ section.id }} .announcement__aftel-min { display: none; }
   }
+  {%- if section.settings.vastzetten %}
+  /* De balk blijft bovenaan staan als je scrolt. De sectie zelf is sticky
+     (niet de balk erin), want alleen dan blijft hij over de hele pagina
+     staan. z-index 4: boven de inhoud, onder de header (5), zodat het
+     mobiele menu er gewoon overheen valt. */
+  #shopify-section-{{ section.id }} {
+    position: sticky;
+    top: 0;
+    z-index: 4;
+  }
+  {%- endif %}
 </style>
 
 <div class="announcement section-{{ section.id }}">
@@ -36,6 +47,26 @@
     </p>
   </div>
 </div>
+
+{%- if section.settings.vastzetten -%}
+  {%- comment -%}
+    De hoogte van de balk gaat naar --ws-balk-h. De header zet zich bij het
+    scrollen vast direct onder de balk (header.css: .header.sticky), en
+    alles wat met --header-height rekent om onder de header te blijven
+    (de galerij op de productpagina, het megamenu) telt de balk erbij op.
+    Op een smal scherm loopt de balk over twee regels; de ResizeObserver
+    houdt de waarde bij.
+  {%- endcomment -%}
+  <script>
+    (function () {
+      var balk = document.querySelector('.section-{{ section.id }}');
+      if (!balk) return;
+      function zet() { document.documentElement.style.setProperty('--ws-balk-h', balk.offsetHeight + 'px'); }
+      zet();
+      if (window.ResizeObserver) new ResizeObserver(zet).observe(balk);
+    })();
+  </script>
+{%- endif -%}
 
 {%- if section.settings.aftel_einde != blank -%}
   {%- comment -%}
@@ -91,6 +122,13 @@
         "id": "label",
         "label": "Label",
         "default": "Announcement"
+      },
+      {
+        "type": "checkbox",
+        "id": "vastzetten",
+        "label": "Balk bovenaan vastzetten",
+        "info": "De balk blijft bovenaan staan als je scrolt; de header zet zich eronder vast.",
+        "default": true
       },
       {
         "type": "header",
