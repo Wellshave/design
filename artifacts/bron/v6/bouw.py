@@ -114,7 +114,8 @@ s+=('<section class="a"><div class="a-blok"><p class="s-oog">Nog één stap</p><
     '<div class="f-kol"><h4>Hulp</h4><ul><li>Vragen</li><li>Verzending</li><li>Retourneren</li><li>Contact</li></ul></div>'
     '<div class="f-kol"><h4>Wellshave</h4><ul><li>Ons verhaal</li><li>Blog</li><li>Voorwaarden</li><li>Privacy</li></ul></div></footer>'
     '<div class="f-onder"><span>© 2026 Wellshave · Helmond</span><span>Nederland (EUR €)</span></div></section>')
-site=site.replace('{{rij}}',rij).replace('{{secties}}',muur+s)  # reviewmuur direct onder Gezien bij
+na=s.index('<section',1)  # reviewmuur direct onder de bestsellers
+site=site.replace('{{rij}}',rij).replace('{{secties}}',s[:na]+muur+s[na:])
 
 def svg(x): return 'url("data:image/svg+xml,'+urllib.parse.quote(x,safe=' =:/\',.-')+'")'
 golf=svg("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400' preserveAspectRatio='none'><rect width='400' height='400' fill='#F6F0E7'/>"
