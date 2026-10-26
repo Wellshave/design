@@ -284,6 +284,17 @@ body{margin:0;background:var(--g);color:var(--i);font:400 15px/1.6 "Montserrat",
 .site .knop.klein{background:#fff;color:#111;border:0;border-radius:100px;padding:8px 16px;font-size:11.5px;font-weight:600}
 .site .knop.klein::after{display:none}
 .site .club-link{font-size:12px;font-weight:500;color:rgba(255,255,255,.6);text-decoration:none}
+
+/* voortgangsbalk onder een schuifrij: een dunne lijn, de gouden vulling schuift mee */
+.voortgang{position:relative;height:2px;width:100%;max-width:420px;margin:30px auto 0;background:rgba(17,17,17,.12);border-radius:2px;cursor:pointer}
+.voortgang::before{content:"";position:absolute;left:0;right:0;top:-10px;bottom:-10px}
+.voortgang i{position:absolute;top:0;left:0;height:100%;border-radius:2px;background:linear-gradient(90deg,#D8AC5D,#BC813E);transition:left .12s linear}
+.rij-kaarten{padding-bottom:18px}
+.rij-kaarten .kaart{flex:0 0 calc((100% - 72px) / 4.35);scroll-snap-align:start}
+@container (max-width:749px){
+  .voortgang{max-width:none;margin-top:20px}
+  .rij-kaarten .kaart{flex-basis:62%}
+}
 </style>
 
 <div class="schil">
@@ -314,6 +325,11 @@ body{margin:0;background:var(--g);color:var(--i);font:400 15px/1.6 "Montserrat",
       <li><b>Het S-teken</b> als watermerk in de banners en het donkere blok.</li>
       <li>Kortingslabels als gouden pil, de geruststrook met ronde icoonvlakken en haarlijnen, en de techniek als drie kaarten in wit, carbon en zand.</li>
     </ul></div>
+    <div class="noot"><h2>Glad tot in de kleinste hoek</h2><ul>
+      <li>Nu zes producten voor lichaam en schaamstreek in een schuifrij: Groom Guard PRO, Flex Guard, Groom Guard, Dual Groomer, Shave Package Ultimate en Shave Package 3.0. Prijzen live uit Shopify.</li>
+      <li>Eronder een dunne voortgangsbalk in plaats van de pil, ook bij de plekken. De gouden lijn laat zien hoeveel je ziet en waar je bent; klik op de balk om te springen.</li>
+      <li><b>Alles aanpasbaar:</b> in de theme wordt elk blok een eigen sectie met de producten, teksten, foto's en links als instellingen. Producten kies je uit Shopify, prijzen lopen vanzelf mee.</li>
+    </ul></div>
     <div class="noot"><h2>Geen knoppen</h2><ul>
       <li>Zoals Hears: elke actie is een rustige tekstlink met een dunne onderlijn en een kleine gouden pijl. Bij hover loopt de lijn in goud vol en schuift de pijl op.</li>
       <li>Op donker is de link wit met een lichtgouden pijl. Alleen het aanmeldveld in de footer heeft nog een klein stil vlak, zoals bij Hears.</li>
@@ -323,7 +339,7 @@ body{margin:0;background:var(--g);color:var(--i);font:400 15px/1.6 "Montserrat",
       <li>Met de schakelaar bovenaan zie je de vorige versie met Fraunces en Montserrat.</li>
     </ul></div>
     <div class="noot"><h2>Wat van Manscaped blijft</h2><ul>
-      <li><b>Plekken als schuifrij</b>, zoals hun categorieën: grote foto's, de volgende piekt in beeld, met een gouden pil met pijlen en stippen eronder. Gezicht &amp; baard staat er nu ook in.</li>
+      <li><b>Plekken als schuifrij</b>, zoals hun categorieën: grote foto's, de volgende piekt in beeld, met een dunne voortgangsbalk eronder. Gezicht &amp; baard staat er nu ook in.</li>
       <li>Alleen de volgorde en het ritme: gesplitste hero, uitgelichte producten, plekken, brede banners, techniek, bestsellers, een donker blok. Geen nieuwe blokken toegevoegd.</li>
     </ul></div>
     <div class="noot"><h2>Waar het vandaan komt</h2><ul>
@@ -344,17 +360,13 @@ body{margin:0;background:var(--g);color:var(--i);font:400 15px/1.6 "Montserrat",
   function letter(h){document.body.classList.toggle('hfont',h);lh.setAttribute('aria-pressed',String(h));lf.setAttribute('aria-pressed',String(!h));try{localStorage.setItem('ws-v7-letter',h?'hears':'fraunces')}catch(e){}fit();}
   lh.addEventListener('click',function(){letter(true)});lf.addEventListener('click',function(){letter(false)});
   var lv='hears';try{lv=localStorage.getItem('ws-v7-letter')||'hears'}catch(e){} letter(lv!=='fraunces');
-  /* schuifrij: pijlen en stippen, per rij (desktop en telefoon apart) */
+  /* schuifrij met voortgangsbalk: de gouden lijn toont hoeveel je ziet en waar je bent; klik op de balk om te springen */
   document.querySelectorAll('.schuif').forEach(function(w){
-    var r=w.querySelector('.plekken'),st=w.querySelector('.sk-stippen'),v=w.querySelector('.sk-vorige'),n=w.querySelector('.sk-volgende');
-    var kaarten=r.children,stap=function(){return kaarten[0].getBoundingClientRect().width+parseFloat(getComputedStyle(r).columnGap||0)};
-    for(var i=0;i<kaarten.length;i++) st.appendChild(document.createElement('i'));
-    function bij(){var s=r.scrollLeft,max=r.scrollWidth-r.clientWidth-2,idx=Math.round(s/(r.scrollWidth/kaarten.length*(r.clientWidth?1:1)));
-      idx=Math.min(kaarten.length-1,Math.round(s/stap()));if(s>=max)idx=kaarten.length-1;
-      [].forEach.call(st.children,function(d,k){d.classList.toggle('aan',k===idx)});v.disabled=s<=2;n.disabled=s>=max;}
-    v.addEventListener('click',function(){r.scrollBy({left:-stap(),behavior:'smooth'})});
-    n.addEventListener('click',function(){r.scrollBy({left:stap(),behavior:'smooth'})});
-    r.addEventListener('scroll',bij,{passive:true});bij();
+    var r=w.querySelector('.plekken'),bar=w.querySelector('.voortgang'),f=bar.querySelector('i');
+    function bij(){var zicht=r.clientWidth/r.scrollWidth,max=r.scrollWidth-r.clientWidth,p=max>0?r.scrollLeft/max:0;
+      f.style.width=(zicht*100)+'%';f.style.left=(p*(1-zicht)*100)+'%';}
+    bar.addEventListener('click',function(e){var b=bar.getBoundingClientRect();r.scrollTo({left:(e.clientX-b.left)/b.width*(r.scrollWidth-r.clientWidth),behavior:'smooth'})});
+    r.addEventListener('scroll',bij,{passive:true});window.addEventListener('resize',bij);bij();
   });
 })();
 </script>

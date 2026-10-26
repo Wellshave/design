@@ -15,7 +15,15 @@ IC={
  'klok':'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>',
 }
 # ── live uit Shopify, 26 oktober 2026 ──
-UITGELICHT=[('p-ggpro','Groom Guard™ PRO','Bodygroomer met foil shaver',59.95,85.65),('s-ult','Shave Package Ultimate™','Groom Guard PRO, neustrimmer en twee tassen',89.95,142.80)]
+UITGELICHT=[  # zes producten voor lichaam en schaamstreek, live uit Shopify
+ ('p-ggpro','Groom Guard™ PRO','Bodygroomer met foil shaver',59.95,85.65),
+ ('p-flex','Flex Guard™ 3-in-1','Lichaam en schaamstreek',59.95,85.65),
+ ('p-gg','Groom Guard™','Bodygroomer',49.95,71.35),
+ ('p-dual','Dual Groomer™ 2-in-1','Bodygroomer',39.95,79.92),
+ ('s-ult','Shave Package Ultimate™','Groom Guard PRO, neustrimmer en twee tassen',89.95,142.80),
+ ('s-sp3','Shave Package 3.0','Bodygroomer, neustrimmer en oplaadstation',64.95,99.95),
+]
+VOORTGANG='<div class="voortgang" aria-hidden="true"><i></i></div>'
 PLEKKEN=[('c-lichaam','Lichaam'),('c-gezicht','Gezicht &amp; baard'),('c-hoofd','Hoofd'),('c-neus','Neus &amp; oren'),('c-sets','Sets')]
 BANNERS=[  # beeld, regel 1, regel 2 in brons, tekst, licht/donker, tekst links/rechts
  ('ban-lading','Groom Guard™','Bodygroomer','SkinSafe-messen, vier opzetkammen en een oplaadstandaard.','licht','links'),
@@ -52,11 +60,10 @@ s+=('<section class="hero"><a class="h-groot" href="#"><span class="h-tekst"><sp
     '<div class="h-rechts"><a class="h-tegel im-r-herfst" href="#"><span>Shop de Herfst Sale</span></a><a class="h-tegel im-r-water" href="#"><span>Shop bodygroomers</span></a></div></section>')
 s+=zeker()
 s+=('<section class="sec creme"><h2 class="serif">Glad tot in <span class="b">de kleinste hoek.</span></h2><p class="sub">Gemaakt voor je gevoeligste plekken.</p>'
-    '<div class="duo">'+''.join(kaart(*p,groot=True) for p in UITGELICHT)+'</div></section>')
+    '<div class="schuif"><div class="plekken rij-kaarten" tabindex="0" aria-label="Producten, schuif opzij">'+''.join(kaart(*p,groot=True) for p in UITGELICHT)+'</div>'+VOORTGANG+'</div></section>')
 s+=('<section class="sec creme midden"><h2 class="serif">Verzorgd <span class="b">van top tot teen.</span></h2><a class="knop" href="#">Shop alles</a>'
     '<div class="schuif"><div class="plekken" tabindex="0" aria-label="Plekken, schuif opzij">'+''.join(f'<a class="plek" href="#"><span class="pbeeld im-{k}"></span><b>{n}</b><span class="nu">Shop nu {PIJL}</span></a>' for k,n in PLEKKEN)+'</div>'
-    '<div class="sk"><button type="button" class="sk-vorige" aria-label="Vorige"><svg viewBox="0 0 16 16"><path d="M10 3.5 5.5 8l4.5 4.5"/></svg></button><span class="sk-stippen" aria-hidden="true"></span>'
-    '<button type="button" class="sk-volgende" aria-label="Volgende"><svg viewBox="0 0 16 16"><path d="M6 3.5 10.5 8 6 12.5"/></svg></button></div></div></section>')
+    +VOORTGANG+'</div></section>')
 s+=''.join(f'<section class="ban {lt} {kant} im-{k}"><div class="ban-tekst"><span class="merkteken" aria-hidden="true"></span><h3 class="ban-kop">{a} <span class="b">{b}</span></h3><p>{p}</p><span class="knop">Shop nu</span></div></section>' for k,a,b,p,lt,kant in BANNERS)
 s+=('<section class="sec creme midden"><span class="oog brons">Gemaakt voor jou</span><h2 class="serif">Slimme techniek, <span class="b">simpel in gebruik.</span></h2><div class="tech">'
     +''.join(f'<div class="t{" midden-t" if i==1 else ""}"><span class="tbeeld im-{k}"></span><b>{t}</b><p>{p}</p></div>' for i,(k,t,p) in enumerate(TECH))+'</div></section>')

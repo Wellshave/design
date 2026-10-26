@@ -18,6 +18,7 @@ uit={
  't-messen':fit(f'{H}/gg-c2-1-messen.jpg',800,450,.5,.6),
  't-water':fit(f'{H}/gg-cine-2-waterdicht.jpg',800,450,.5,.55),
  't-led':fit(f'{H}/gg-band-4-led.jpg',800,450,.45,.5),
+ 'p-dual':fit(f'{H}/dual.webp',560,560),
  'c-sets':fit(f'{V}/img/Gemini_Generated_Image_da7jpeda7jpeda7j.png',600,600),
 }
 json.dump(uit,open(f'{B}/beelden.json','w'))
