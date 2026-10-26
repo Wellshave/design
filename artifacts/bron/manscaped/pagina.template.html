@@ -339,11 +339,15 @@ body{margin:0;background:var(--g);color:var(--i);font:400 15px/1.6 "Montserrat",
 .ig-beeld{display:block;aspect-ratio:4/5;background-size:cover;background-position:center;transition:transform .5s ease}
 .ig:hover .ig-beeld{transform:scale(1.03)}
 .ig::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 58%,rgba(0,0,0,.6));pointer-events:none}
-.ig-onder{position:absolute;left:12px;right:12px;bottom:11px;z-index:1;display:flex;flex-direction:column;gap:1px;color:#fff;text-align:left}
+.ig-onder{position:absolute;left:12px;right:12px;bottom:11px;z-index:1;display:flex;flex-direction:row;align-items:center;gap:5px;color:#fff;text-align:left}
 .ig-onder b{font-size:12.5px;font-weight:600}
 .ig-onder small{font-size:10.5px;color:rgba(255,255,255,.75)}
 .midden > .knop:last-child{margin-top:22px;white-space:nowrap}
 @container (max-width:749px){.ig-rij .ig{flex-basis:44%;border-radius:12px}}
+
+/* partnervinkje: rond en blauw zoals een vinkje op Instagram, maar effen (zonder gekartelde rand) en met een dun wit randje */
+.ig-vink{display:grid;place-items:center;width:14px;height:14px;flex:none;border-radius:50%;background:#2F8CFF;box-shadow:0 0 0 1.5px rgba(255,255,255,.9)}
+.ig-vink svg{width:10px;height:10px;fill:none;stroke:#fff;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
 </style>
 
 <div class="schil">
