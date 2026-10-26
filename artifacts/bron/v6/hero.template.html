@@ -1,7 +1,7 @@
 <title>Wellshave v6 homepage</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Montserrat:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Montserrat:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
 /* ── schil: de pagina om de mockup heen, volgt het thema van de lezer ── */
 :root{
@@ -128,15 +128,15 @@ body{margin:0;background:var(--g);color:var(--i);font:400 15px/1.6 "Montserrat",
   <div class="kop">
     <div>
       <span class="lbl">Wellshave · ontwerp v6 · hele homepage</span>
-      <h1>Homepage v6</h1>
+      <h1>Homepage v6, in de Wellshave-huisstijl</h1>
       <p>Hero en Gezien bij, en daaronder zes nieuwe blokken in dezelfde rust: bestsellers zoals je Wellshine-voorbeeld, kies jouw plek, reviews, sets, vragen en de afsluiter met footer. Ga op desktop met je muis over een productkaart voor de hover.</p>
     </div>
     <div class="keuzes">
       <div class="keuze">
-        <span class="lbl">Kopletter</span>
-        <div class="seg" role="group" aria-label="Kopletter">
-          <button type="button" id="k-serif" aria-pressed="true">Serif, zoals Wellshine</button>
-          <button type="button" id="k-sans" aria-pressed="false">Montserrat, huidig merk</button>
+        <span class="lbl">Stijl</span>
+        <div class="seg" role="group" aria-label="Stijl">
+          <button type="button" id="k-sans" aria-pressed="true">Wellshave-merk</button>
+          <button type="button" id="k-serif" aria-pressed="false">Zonder merklaag</button>
         </div>
       </div>
       <div class="keuze">
@@ -162,6 +162,17 @@ body{margin:0;background:var(--g);color:var(--i);font:400 15px/1.6 "Montserrat",
 
   <div class="noten">
     <div class="noot">
+      <h2>Waarom het niet als Wellshave voelde</h2>
+      <ul>
+        <li><b>Een serif die niet van jullie is.</b> Jullie merkregels zeggen: alleen Montserrat, een display-serif breekt de herkenning. V6 stond in een Wellshine-serif.</li>
+        <li><b>De gouden tweede regel ontbrak.</b> Elke kop bestaat bij Wellshave uit twee regels: de eerste stelt vast, de tweede loopt in goud. Dat staat nu op elke kop, in de hero op "Wellshave." zelf.</li>
+        <li><b>Knoppen en hoeken.</b> Merk: gouden pilknoppen en afronding 12, 18 en 26. V6 had rechthoekige crème knoppen en hoeken van 4 pixels.</li>
+        <li><b>Zand en carbon.</b> Zand #F5F1EA is het herkenningssignaal, donkere vlakken zijn carbon. Die staan nu in het ritme: wit, zand, carbon.</li>
+        <li><b>Het S-teken</b> keert terug als klein goud teken voor elk label en als groot watermerk in de reviewmuur, het uitgelichte blok en de afsluiter.</li>
+        <li>De opbouw van v6 blijft: dezelfde blokken, dezelfde rust. Met de schakelaar "Zonder merklaag" bovenaan zie je het verschil.</li>
+      </ul>
+    </div>
+    <div class="noot">
       <h2>De nieuwe blokken</h2>
       <ul>
         <li><b>Bestsellers.</b> Zoals je voorbeeld: grijze beeldvlakken, naam, prijs met van-prijs en label, drie kenmerken als pilletjes. Bij hover wordt het vlak een tint dieper, verschijnt het Wellshave-teken flauw achter het apparaat en tilt de kaart op. Bovenaan elke kaart de Trustpilot-regel.</li>
@@ -186,7 +197,7 @@ body{margin:0;background:var(--g);color:var(--i);font:400 15px/1.6 "Montserrat",
     <div class="noot">
       <h2>Wat ik van je nodig heb</h2>
       <ul>
-        <li><b>Serif of Montserrat</b> en <b>welk kortingslabel</b>? Beide wissel je hierboven.</li>
+        <li><b>Merklaag of niet</b>, en <b>welk kortingslabel</b>? Beide wissel je hierboven.</li>
         <li><b>Barber Bro 3.0</b> staat op −14 voorraad en wordt doorverkocht. Bij die set klopt "morgen in huis" dus niet. Houden, of een set die op voorraad is ervoor in de plaats, zoals de Body &amp; Nose Bundel?</li>
         <li><b>Barber Bro 2.0</b> is met 33 bestellingen de best verkochte set, maar heeft geen van-prijs en is opgevolgd door de 3.0. Ik heb hem weggelaten.</li>
         <li><b>De Ondernemer, AD en de herfstfoto</b> staan nog open, zie de bronnen hieronder.</li>
@@ -226,9 +237,9 @@ body{margin:0;background:var(--g);color:var(--i);font:400 15px/1.6 "Montserrat",
   if(window.ResizeObserver) new ResizeObserver(fit).observe(desk);
   window.addEventListener('load',fit); fit();
   var bs=document.getElementById('k-serif'), bm=document.getElementById('k-sans');
-  function zet(sans){ document.body.classList.toggle('sans',sans); bs.setAttribute('aria-pressed',String(!sans)); bm.setAttribute('aria-pressed',String(sans)); try{localStorage.setItem('ws-kopletter',sans?'sans':'serif')}catch(e){} fit(); }
+  function zet(merk){ document.body.classList.toggle('merk',merk); bm.setAttribute('aria-pressed',String(merk)); bs.setAttribute('aria-pressed',String(!merk)); try{localStorage.setItem('ws-stijl',merk?'merk':'clean')}catch(e){} fit(); }
   bs.addEventListener('click',function(){zet(false)}); bm.addEventListener('click',function(){zet(true)});
-  try{ if(localStorage.getItem('ws-kopletter')==='sans') zet(true); }catch(e){}
+  var st='merk'; try{ st=localStorage.getItem('ws-stijl')||'merk'; }catch(e){} zet(st!=='clean');
   var lp=document.getElementById('l-pct'), le=document.getElementById('l-eur');
   function label(e){ document.body.classList.toggle('euro',e); lp.setAttribute('aria-pressed',String(!e)); le.setAttribute('aria-pressed',String(e)); try{localStorage.setItem('ws-label',e?'euro':'pct')}catch(x){} fit(); }
   lp.addEventListener('click',function(){label(false)}); le.addEventListener('click',function(){label(true)});

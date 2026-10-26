@@ -6,7 +6,7 @@ img2=json.load(open(f'{B}/beelden2.json'))
 L=json.load(open(os.environ.get('WS_LOGOS',f'{B}/../grijs/logos.json')))
 t=open(f'{B}/hero.template.html',encoding='utf-8').read()
 site=open(f'{B}/site.html',encoding='utf-8').read()
-css=open(f'{B}/blokken.css',encoding='utf-8').read()
+css=open(f'{B}/blokken.css',encoding='utf-8').read()+open(f'{B}/merk.css',encoding='utf-8').read()
 
 # ── Gezien bij ──
 volgorde=[('ad','AD',38),('bol','bol',29),('mh',"Men's Health",26),('ed','Eindhovens Dagblad',34),('mm','MediaMarkt',22),
@@ -80,7 +80,7 @@ def kaart(k,naam,nu,van,r,n,chips,inhoud=''):
             '<ul class="k-chips">'+''.join(f'<li>{c}</li>' for c in chips)+'</ul></div></a>')
 
 s=''
-s+=('<section class="s">'+kop('Bestsellers','Wat onze klanten het vaakst kiezen',link('Shop alle bestsellers'))
+s+=('<section class="s">'+kop('Bestsellers','Wat onze klanten <span class="b">het vaakst kiezen.</span>',link('Shop alle bestsellers'))
     +'<div class="k-raster k-scroll">'+''.join(kaart(*p) for p in BESTSELLERS)+'</div></section>')
 def plaknaam(n):  # pijl blijft aan het laatste woord vast
     kop,_,staart=n.rpartition(' ')
@@ -91,17 +91,17 @@ PLEKKEN=[  # sfeerfoto's uit de eigen Shopify-bestanden; teksten van de huidige 
  ('c-hoofd','Hoofd','Van fade tot strak kort. Jij bepaalt hoe kort.'),
  ('c-neus','Neus &amp; oren','Detailwerk zonder trekken of irriteren.'),
 ]
-s+=('<section class="s" style="padding-top:0"><div class="c-kop"><p class="s-oog">Kies jouw plek</p><h2 class="s-h2">Waar wil je trimmen?</h2></div>'
+s+=('<section class="s" style="padding-top:0"><div class="c-kop"><p class="s-oog">Kies jouw plek</p><h2 class="s-h2">Waar wil je trimmen? <span class="b">Wij wijzen het apparaat aan.</span></h2></div>'
     +'<div class="z-raster">'+''.join(
         f'<a class="c im-{k}" href="#"><span class="c-tekst"><b class="c-naam">{plaknaam(naam)}</b><span class="c-sub">{sub}</span></span></a>' for k,naam,sub in PLEKKEN)
     +'</div></section>')
 # uitgelicht: één apparaat, één belofte (specificaties uit de productomschrijving in Shopify)
 s+=('<section class="s s-spot"><div class="sp"><div class="sp-foto im-spot-gg" role="img" aria-label="Macro van de keramische meskop van de Groom Guard"></div>'
-    '<div class="sp-tekst"><p class="s-oog">Gemaakt voor gevoelige huid</p><h2>Trim jij zonder <em>sneetjes</em>?</h2>'
+    '<div class="sp-tekst"><p class="s-oog">Gemaakt voor gevoelige huid</p><h2>Trim jij zonder <span class="b"><em>sneetjes</em>?</span></h2>'
     '<p>Een gewoon mesje pakt je huid bij elke verkeerde hoek. De <b>keramische SkinSafe-messen</b> van de Groom Guard leggen je huid nooit bloot, ook niet bij je schaamstreek. Met LED-licht en <b>IPX7</b>, dus gewoon onder de douche.</p>'
     f'<a class="m-knop" href="#">Ontdek de Groom Guard {PIJL}</a></div></div></section>')
 kolA=''.join(rkaart(*r) for r in REVIEWS[0::2]); kolB=''.join(rkaart(*r) for r in REVIEWS[1::2])
-muur=('<section class="s s-muur"><div class="rw-paneel"><div class="rw-links"><p class="s-oog">Reviews</p><h2 class="s-h2">Wat klanten zeggen over Wellshave</h2>'
+muur=('<section class="s s-muur"><div class="rw-paneel"><div class="rw-links"><p class="s-oog">Reviews</p><h2 class="s-h2">Wat klanten zeggen <span class="b">over Wellshave.</span></h2>'
     '<div class="rw-tp"><b>Uitstekend</b><i class="tp-sterren" style="--r:4.5" role="img" aria-label="4,5 van 5 sterren"></i>'
     '<span class="rw-merk"><svg viewBox="0 0 12 11" aria-hidden="true"><path d="M6 .6l1.6 3.4 3.7.5-2.7 2.6.7 3.7L6 9 2.7 10.8l.7-3.7L.7 4.5l3.7-.5z"/></svg>Trustpilot</span></div>'
     '<p class="rw-score">TrustScore 4,5 uit 5 · 1.088 reviews</p><a class="rw-link" href="#">Lees alle reviews op Trustpilot</a></div>'
@@ -110,14 +110,14 @@ s+=('<section class="s s-video"><div class="u-raster"><div class="u-tekst"><h3>M
     '<p>Elke video staat er met toestemming van de maker. #wellshavefamilie</p><a href="#">Bekijk Instagram</a></div>'
     +''.join(f'<a class="u im-{k}" href="#" aria-label="Video: {wat}, {duur}"><span class="u-play"><svg viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg></span><span class="u-duur">{duur}</span></a>' for k,duur,wat in UGC)
     +'</div></section>')
-s+=('<section class="s">'+kop('Sets','Voordeliger in één set',link('Bekijk alle sets'))
+s+=('<section class="s s-sets">'+kop('Sets','Alles in één keer, <span class="b">voordeliger als set.</span>',link('Bekijk alle sets'))
     +'<div class="k-raster">'+''.join(kaart(k,naam,nu,van,r,n,chips,inhoud) for k,naam,nu,van,r,n,inhoud,chips in SETS)+'</div></section>')
-s+=('<section class="s s-zand"><div class="v"><div><div class="s-kop"><p class="s-oog">Vragen</p><h2 class="s-h2">Wat je wilt weten voordat je bestelt.</h2></div>'
+s+=('<section class="s s-zand"><div class="v"><div><div class="s-kop"><p class="s-oog">Vragen</p><h2 class="s-h2">Wat je wilt weten <span class="b">voordat je bestelt.</span></h2></div>'
     '<p class="v-intro">Staat jouw vraag er niet bij? Je krijgt binnen één werkdag antwoord van een echt mens, geen chatbot. Ook als je nog twijfelt welk apparaat je nodig hebt.</p>'
     f'<div class="v-hulp"><a class="k-knop" href="#">Stuur een bericht {PIJL}</a><span class="v-mail">contact@wellshave.com</span></div></div>'
     '<div class="v-lijst">'+''.join(f'<details{" open" if i==0 else ""}><summary>{v}<i aria-hidden="true"></i></summary><p>{a}</p></details>' for i,(v,a) in enumerate(VRAGEN))
     +'</div></div></section>')
-s+=('<section class="a"><div class="a-blok"><p class="s-oog">Nog één stap</p><h2>Kies het apparaat voor de plek waar jij iets weg wilt hebben.</h2>'
+s+=('<section class="a"><div class="a-blok"><p class="s-oog">Nog één stap</p><h2>Kies het apparaat voor de plek <span class="b">waar jij iets weg wilt hebben.</span></h2>'
     '<p>Weet je welke je wilt? Bestel hem vandaag. Twijfel je nog, dan kiest de quiz in een paar vragen, voor jezelf of als cadeau.</p>'
     f'<div class="m-acties"><a class="m-knop" href="#">Vind jouw apparaat {PIJL}</a><a class="m-link" href="#">Laat de quiz kiezen</a></div>'
     '<p class="a-klein">Vandaag beslissen kost je niets: je hebt honderd dagen om van gedachten te veranderen.</p></div>'
