@@ -2280,3 +2280,95 @@ lijst: per regel een punt, het getypte bolletje (•, -, *) eraf en een klein
 bronzen puntje ervoor. Twee kolommen op de computer, één op de telefoon.
 Gemeten op de Shave Package Ultimate: titels 13 px, tekst en specificaties
 12,5 px, twaalf punten.
+
+## v7: de nieuwe opmaak, voor elk product hetzelfde
+
+Eén `templates/product.json` voor alle producten. Wat per product verschilt,
+komt uit metafields; staat een veld leeg, dan valt het blok weg in plaats van
+leeg te tonen. Aan en uit met de instelling *v7* in het koopvak (header
+"v7: de nieuwe opmaak"); uit is de oude opmaak, ongewijzigd.
+
+### Boven de vouw: het koopvak (`ws-pdp-koopvak`)
+
+* Titel met de belofte (`hero_promise`) in goud, vinkjes, voorraadregel met
+  aftelklok tot 23:59 (op werkdagen), aanbodbalk met aftelklok tot
+  `aanbod_eind`.
+* **Tiers** ("Kies je aanbieding"): het product zelf plus de upgrades uit
+  `custom.upgrade_products` (beschikbaar en duurder, hoogstens `tier_max`).
+  Per upgrade wat je erbij krijgt uit `custom.upgrade_extras`
+  (`{"<product-id>": ["handle", …]}`), en de cadeaus die bij die prijs horen
+  volgens de cadeaudrempels in de thema-instellingen. De keuze zet het
+  formulier-id, de totaalprijs, Klarna, de sticky balk en de afsluiter.
+  Het script zoekt het formulier pas op bij het kiezen: het formulier staat
+  verderop in de pagina dan het script, eerder opzoeken gaf `null` en dan
+  ging bij Ultimate toch de PRO de winkelwagen in.
+* Zonder upgrades: de oude cadeau- en modelkeuze (`tiers_n == 0`), en dan
+  ook pas de upgrade-pop-up.
+* Add-ons met combikorting uit `custom.combi_korting` (`{"handle": pct}`);
+  het percentage moet overeenkomen met een echte automatische korting.
+* **Bundels** onderaan de buybox uit `custom.pdp_bundels`; het product zelf
+  en producten die al als tier staan vallen weg.
+
+### Onder de vouw: de `ws7-pdp-*` secties
+
+| Sectie | Bron |
+|---|---|
+| `ws7-pers` (van de homepage) | 12 logoblokken in het sjabloon |
+| `ws7-pdp-stappen` | `custom.pdp_stappen` (metaobject `ws_pdp_stappen`) |
+| `ws7-pdp-kenmerken` | `image_with_text`-kaarten van het product |
+| `ws7-pdp-doos` | `included_box_image`, `included_box`, `custom.kerncijfers` |
+| `ws7-pdp-vergelijk` | `custom.compare_products` + `compare_info` |
+| `ws-pdp-ugc` (v7 aan) | `ugc_video_list` |
+| `ws7-pdp-reviews` | blokken; *Alleen bij* hangt een review aan producten |
+| `ws7-pdp-vragen` | `custom.faq` |
+| `ws7-pdp-ook` | `pdp_addons`, dan `pdp_bundels`, dan `upgrade_products` |
+| `ws7-pdp-afsluiter` | blokken; de knop klikt de echte koopknop |
+
+De vergelijking geeft een upgrade-kaart ook alle punten van het product zelf:
+de Ultimate *is* de PRO plus drie dingen, maar de vier voordelen in zijn
+`compare_info` noemen alleen de extra's, waardoor de PRO-punten eerst als
+"niet inbegrepen" bij de Ultimate stonden.
+
+Gedeelde homepagebestanden (`ws7.css`, `ws7.js`, `ws7-kop`, `ws7-kaart`, …)
+worden alleen gebruikt, niet aangepast. Wat op de productpagina anders moet,
+staat in `ws7-pdp.css`, dat alleen het koopvak laadt. Voorbeeld: de marges
+van `.ws7-pers` en `.ws7-slot` lieten het wit van de pagina doorschijnen;
+`.ws7p{display:flow-root}` en `.ws7.ws7-pers{margin-top:0}` lossen dat hier
+op zonder de homepage te raken.
+
+### Maximaal 25 secties per sjabloon
+
+Met de negen nieuwe secties kwam `product.json` op 27. De upload gaf geen
+fout, de taak was "klaar", en het bestand bleef gewoon het oude. Weggehaald
+zijn de acht secties die al vóór v7 uit stonden (oude betaaliconen, UGC-,
+Trustpilot-, use-case-, media- en vergelijkingssecties en een lege
+app-sectie); ze staan nog in het live thema en in de git-geschiedenis. De
+secties die v7 vervangt (belofte, logos, praktijk, reviewwall,
+whats_included, featured, faq) staan uit maar staan er nog.
+
+### Vertalen: een standaardwaarde is niet te vertalen
+
+Een instelling die alleen als `default` in het schema staat, verschijnt niet
+in de vertaalbare inhoud van het sjabloon en blijft in elke taal Nederlands.
+Daarom staan alle v7-teksten van het koopvak expliciet in `product.json`.
+Daarna zijn 69 teksten geregistreerd in en, de en fr; de digest is de sha256
+van de Nederlandse tekst. Ook vertaald: de metaobjecten `ws_kerncijfer` en
+`ws_pdp_stappen`. De eenheden van de aftelklok zijn een instelling
+(`klok_eenheden`, "d u m"; en "d h m", de "T h m", fr "j h min").
+Het Engelse Trustpilot-cijfer stond nog op 4.4; nu 4.5 zoals in het
+Nederlands. Reviewteksten blijven Nederlands: het zijn letterlijke citaten.
+
+De link onder de vragen krijgt zelf het voorvoegsel van taal en markt
+(`routes.root_url`, bijvoorbeeld `/en` of `/de-de`), zodat één waarde in
+elke markt werkt.
+
+### Nog open
+
+* Cadeau 2 in de thema-instellingen wijst naar de betaalde
+  `wellshave-4-in-1-neustrimmer-ultimate` (€29,95) in plaats van
+  `gift-neustrimmer-ultra`.
+* De Ultimate kost €89,95, net onder de drempel van €90 voor cadeau 2.
+* Bij de Ultimate staat de washbag zowel als inhoud als als cadeau.
+* `pdp_stappen`, `kerncijfers`, `pdp_bundels` en `combi_korting` zijn gevuld
+  voor de Groom Guard PRO en de Groom Guard; andere producten tonen die
+  blokken pas als hun velden gevuld zijn.

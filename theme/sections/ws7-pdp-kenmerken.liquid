@@ -1,0 +1,81 @@
+{% comment %}
+  Wellshave v7 · productpagina: de kenmerken als schuifrij met een gouden voortgangsbalk,
+  zoals "Glad tot in de kleinste hoek" op de homepage. Leest custom.image_with_text
+  (titel, rijke tekst, foto of video, label) — dezelfde gegevens als de praktijkblokken.
+  Video's spelen zonder geluid zodra de kaart in beeld is en pauzeren daarbuiten.
+{% endcomment %}
+{%- assign lijst = product.metafields.custom.image_with_text.value -%}
+{%- assign aantal = 0 -%}
+{%- for item in lijst -%}
+  {%- if item.image.value != blank or item.video.value != blank -%}{%- assign aantal = aantal | plus: 1 -%}{%- endif -%}
+{%- endfor -%}
+{%- if aantal > 0 -%}
+  {{ 'ws7.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'ws7.js' | asset_url }}" defer></script>
+  <div class="ws7 ws7p">
+    <div class="ws7p-rail ws7p-sec">
+      <div class="ws7-midden">
+        {%- if section.settings.oog != blank -%}<span class="ws7-oog">{{ section.settings.oog }}</span>{%- endif -%}
+        {% render 'ws7-kop', kop: section.settings.kop, goud: section.settings.kop_goud %}
+        {%- if section.settings.sub != blank -%}<p class="ws7-sub ws7p-sub">{{ section.settings.sub | replace: '[product]', product.title }}</p>{%- endif -%}
+        <div class="ws7-schuif">
+          <div class="ws7-rij ws7p-km-rij" data-ws7p-video>
+            {%- for item in lijst -%}
+              {%- assign beeld = item.image.value -%}
+              {%- assign film = item.video.value -%}
+              {%- if beeld == blank and film == blank -%}{%- continue -%}{%- endif -%}
+              <article class="ws7p-km">
+                <div class="ws7p-km__beeld">
+                  {%- if film != blank -%}
+                    <video muted loop playsinline preload="none"
+                           {% if film.preview_image != blank %}poster="{{ film.preview_image | image_url: width: 720 }}"{% endif %}>
+                      {%- for bron in film.sources -%}{%- if bron.format == 'mp4' -%}<source src="{{ bron.url }}" type="{{ bron.mime_type }}">{%- endif -%}{%- endfor -%}
+                    </video>
+                  {%- else -%}
+                    {{ beeld | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360,540,720,900', sizes: '(max-width: 749px) 76vw, 340px', alt: beeld.alt | default: '' }}
+                  {%- endif -%}
+                </div>
+                <div class="ws7p-km__tekst">
+                  {%- if item.label != blank -%}<span class="ws7-oog">{{ item.label }}</span>{%- endif -%}
+                  {%- if item.title != blank -%}<h3>{{ item.title }}</h3>{%- endif -%}
+                  {%- if item.description != blank -%}<div class="ws7p-km__uitleg">{{ item.description | metafield_tag }}</div>{%- endif -%}
+                </div>
+              </article>
+            {%- endfor -%}
+          </div>
+          {% render 'ws7-voortgang' %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var rij = document.currentScript.previousElementSibling.querySelector('[data-ws7p-video]');
+      if (!rij || !('IntersectionObserver' in window)) return;
+      try { if (matchMedia('(prefers-reduced-motion: reduce)').matches) return; } catch (e) {}
+      var kijk = new IntersectionObserver(function (regels) {
+        regels.forEach(function (r) {
+          var v = r.target;
+          if (r.isIntersecting) { v.preload = 'auto'; var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+          else { v.pause(); }
+        });
+      }, { threshold: 0.5 });
+      rij.querySelectorAll('video').forEach(function (v) { kijk.observe(v); });
+    })();
+  </script>
+{%- endif -%}
+{% schema %}
+{
+  "name": "WS7 · PDP kenmerken",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "paragraph", "content": "De kaarten komen uit het product: custom.image_with_text." },
+    { "type": "text", "id": "oog", "label": "Bovenregel" },
+    { "type": "text", "id": "kop", "label": "Kop", "default": "Gemaakt voor" },
+    { "type": "text", "id": "kop_goud", "label": "Kop, regel in goud", "default": "de lastige plekken." },
+    { "type": "text", "id": "sub", "label": "Regel eronder", "info": "[product] wordt de productnaam." }
+  ],
+  "presets": [ { "name": "WS7 · PDP kenmerken" } ]
+}
+{% endschema %}

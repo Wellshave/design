@@ -9,7 +9,19 @@
   ProductGallery- zijn daarvoor verplicht — niet hernoemen.
 {% endcomment %}
 
-{{ 'ws-pdp-koopvak.css' | asset_url | stylesheet_tag }}
+{%- comment -%}
+  v7 (oktober 2026): de productpagina in de merklaag van de nieuwe homepage.
+  Met v7 aan laadt alleen ws7-pdp.css (en ws7.css voor de letters); de
+  oude opmaak blijft in ws-pdp-koopvak.css staan en komt terug zodra je
+  v7 in de instellingen uitzet. Ontwerp: de artifact 'Wellshave PDP v7'.
+{%- endcomment -%}
+{%- assign v7 = section.settings.v7 -%}
+{%- if v7 -%}
+  {{ 'ws7.css' | asset_url | stylesheet_tag }}
+  {{ 'ws7-pdp.css' | asset_url | stylesheet_tag }}
+{%- else -%}
+  {{ 'ws-pdp-koopvak.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
 {% render 'indent-settings', section: section %}
 
 {%- liquid
@@ -118,7 +130,7 @@
   endif
 -%}
 
-<main-product class="ws-pdp" data-section="{{ section.id }}" data-template="{{ template.name }}">
+<main-product class="{% if v7 %}ws-pdp7{% else %}ws-pdp{% endif %}" data-section="{{ section.id }}" data-template="{{ template.name }}">
   <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="ws-pdp-ster-{{ section.id }}" viewBox="0 0 24 24"><path d="M12 2.6l2.9 6.2 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.9l1.2-6.6L2.5 9.7l6.6-.9z"/></symbol>
     <symbol id="ws-pdp-vink-{{ section.id }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 12.4l4.2 4.2 8.8-9.2"/></symbol>
@@ -322,64 +334,16 @@
           De opmaak blijft gelijk; base.css zet op h1 een eigen lettertype,
           daarom staat er in ws-pdp-koopvak.css font-family:inherit bij.
         {%- endcomment -%}
-        <h1 class="ws-h1">{{ product.title | replace: '™', '<sup class="ws-tm">™</sup>' }}</h1>
-        {%- if belofte != blank -%}<div class="ws-sub">{{ belofte }}</div>{%- endif -%}
+        {%- comment -%}
+          v7: de belofte staat als gouden tweede regel in de kop, zoals elke kop
+          op de homepage. Zonder v7 blijft het de losse regel eronder.
+        {%- endcomment -%}
+        <h1 class="ws-h1">{{ product.title | replace: '™', '<sup class="ws-tm">™</sup>' }}
+          {%- if v7 and belofte != blank %} <span class="ws-h1-goud">{{ belofte }}</span>{%- endif -%}
+        </h1>
+        {%- if v7 == false and belofte != blank -%}<div class="ws-sub">{{ belofte }}</div>{%- endif -%}
         {%- if lead != blank -%}<p class="ws-lead">{{ lead }}</p>{%- endif -%}
 
-
-        <div id="ProductPrice-{{ section.id }}">
-          {%- comment -%}
-            De korting staat achter de prijs, in procenten. Hier stond eerst
-            het bedrag, met als redenering dat een euro concreter is dan een
-            procent. Dat klopt op zichzelf, maar het maakt de korting bij ons
-            juist kleiner: van 109,95 naar 49,95 leest als "je bespaart 60,00"
-            terwijl het 54% is, en de hele markt zet er een percentage neer.
-            Naast elkaar in een advertentie of een vergelijking verliest een
-            bedrag het van een procent.
-
-            Delen in liquid kapt af, dus 54,57% wordt 54%. Dat is de goede
-            kant om te missen: we beloven nooit meer korting dan er is.
-          {%- endcomment -%}
-          <div class="ws-prijs">
-            <span class="ws-nu">{% if s.munt != blank %}<span class="ws-munt">{{ s.munt }}</span>{% endif %}{% render 'price-formated', price: v.price %}</span>
-            {%- if v.compare_at_price > v.price -%}
-              {%- assign bedrag = v.compare_at_price | minus: v.price -%}
-              {%- assign korting = bedrag | times: 100 | divided_by: v.compare_at_price -%}
-              <span class="ws-was">{% if s.munt != blank %}<span class="ws-munt">{{ s.munt }}</span>{% endif %}{% render 'price-formated', price: v.compare_at_price %}</span>
-              {%- if korting > 0 -%}
-                <span class="ws-besp">
-                  <span>{{ s.besparing_regel }} {{ korting }}%</span>
-                </span>
-              {%- endif -%}
-            {%- endif -%}
-          </div>
-
-          {%- comment -%}
-            Betalen in drie delen via Klarna. Het bedrag is de prijs gedeeld door
-            drie, naar boven afgerond op een cent: Klarna legt een restcent bij
-            de eerste termijn, dus dat is wat de klant als eerste betaalt. Lager
-            afronden zou een bedrag noemen dat niet klopt.
-            Staat binnen ProductPrice, zodat het meeverandert met de variant.
-            De meelopende balk kopieert ProductPrice; daar is hij verborgen.
-            Alleen tonen als Klarna in drie delen echt aan staat in de kassa, en
-            binnen de grenzen die Klarna voor dit bedrag hanteert.
-            Het woord voor het bedrag blijft eraan vast (harde spatie): op de
-            telefoon breekt de zin anders net voor het bedrag af en staat
-            "€19,99" alleen op de tweede regel.
-          {%- endcomment -%}
-          {%- liquid
-            assign klarna_min = s.klarna_min | default: 0 | times: 100
-            assign klarna_max = s.klarna_max | default: 100000 | times: 100
-            assign klarna_deel = v.price | plus: 2 | divided_by: 3
-          -%}
-          {%- if s.klarna_tonen and s.klarna_regel != blank and v.price >= klarna_min and v.price <= klarna_max -%}
-            {%- capture klarna_bedrag -%}<b>{% if s.munt != blank %}{{ s.munt }}{% endif %}{% render 'price-formated', price: klarna_deel %}</b>{%- endcapture -%}
-            <p class="ws-klarna">
-              <span class="ws-klarna-merk" aria-hidden="true">Klarna.</span>
-              <span class="ws-klarna-tx"><span class="visually-hidden">Klarna: </span>{{ s.klarna_regel | replace: ' [bedrag]', '&nbsp;[bedrag]' | replace: '[bedrag]', klarna_bedrag }}</span>
-            </p>
-          {%- endif -%}
-        </div>
 
         {%- unless product.has_only_default_variant -%}
           <div id="ProductOptions-{{ section.id }}" class="ws-opties">
@@ -400,6 +364,28 @@
           </div>
         {%- endunless -%}
 
+        {%- comment -%}
+          v7: de voordelen als vier korte regels met een vinkje, alleen de kop.
+          Zo staat het aanbod hoger. Zonder v7 de kaarten zoals ze waren.
+        {%- endcomment -%}
+        {%- if v7 and s.vd_compact -%}
+          {%- assign voordelen = mf.voordelen.value -%}
+          {%- assign usps = mf.product_usp.value -%}
+          {%- if voordelen != blank or usps != blank -%}
+            <ul class="ws-vinkjes">
+              {%- if voordelen != blank -%}
+                {%- for vd in voordelen limit: 4 -%}
+                  <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg>{{ vd.kop.value }}</li>
+                {%- endfor -%}
+              {%- else -%}
+                {%- for regel in usps limit: 4 -%}
+                  {%- assign r = regel | replace: '－', '—' | replace: ' - ', ' — ' | split: '—' | first | strip | remove: ',' -%}
+                  <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg>{{ r }}</li>
+                {%- endfor -%}
+              {%- endif -%}
+            </ul>
+          {%- endif -%}
+        {%- else -%}
         {%- comment -%}
           De voordelen, ontwerp 7 oktober: vier kaarten met een eigen icoon, een
           korte kop en een regel uitleg. Ze komen uit custom.voordelen, een lijst
@@ -467,6 +453,37 @@
             })();
           </script>
         {%- endif -%}
+        {%- endif -%}
+
+        {%- comment -%}
+          De leverbelofte staat als groen plakkaat onder de knop, met een
+          kloppende stip ervoor. De kop "Op voorraad" is eruit: de regel is
+          een mededeling van een adem, en het plakkaat en de stip zeggen
+          "dit staat klaar" al zonder woorden. Het blok komt alleen als de
+          variant leverbaar is, dus de stip liegt nooit.
+        {%- endcomment -%}
+        {%- comment -%}
+          De leverregel is winkelbeleid, geen eigenschap van een product, dus
+          hier wint de sectie-instelling van custom.shipping_information, net
+          als bij het aantal reviews bovenin. Dat productveld stond op veertig
+          producten op "Vandaag besteld, morgen in huis", zonder de voorwaarde
+          uit Verzending & retour (ma t/m vr voor 23:59). In het weekend
+          beloofde de regel dus iets wat de voorwaarden niet dekken. Het veld
+          blijft de terugval als de instelling leeg is.
+        {%- endcomment -%}
+        {%- assign leverregel = s.voorraad_regel | default: mf.shipping_information.value -%}
+        {%- if v.available and leverregel != blank -%}
+          {%- comment -%}
+            v7: "Op voorraad" en de leverregel op een regel. Op een werkdag telt
+            het script af tot 23:59 (lever_klok); in het weekend en zonder
+            script blijft de vaste regel staan, die altijd klopt.
+          {%- endcomment -%}
+          <div class="ws-vrd">
+            <i aria-hidden="true"></i>
+            {%- if v7 and s.voorraad_kop != blank -%}<b class="ws-vrd-kop">{{ s.voorraad_kop }}</b><span class="ws-vrd-sep" aria-hidden="true"></span>{%- endif -%}
+            <span{% if v7 and s.lever_klok != blank %} data-ws-lever="{{ s.lever_klok | escape }}"{% endif %}>{{ leverregel }}</span>
+          </div>
+        {%- endif -%}
 
         {%- comment -%}
           De aanbodbalk. Eerst het metaobject waar custom.limited_offer naar wijst,
@@ -522,11 +539,232 @@
                   {{ s.gift_titel }}
                 {%- endif -%}
               </b>
-              {%- if gift_regel != blank -%}<span>{{ gift_regel }}</span>{%- endif -%}
+              {%- if gift_regel != blank -%}<span class="ws-gift-regel">{{ gift_regel }}</span>{%- endif -%}
             </span>
+            {%- if v7 and s.aanbod_eind != blank -%}
+              <span class="ws-gift-klok" data-ws-klok="{{ s.aanbod_eind | escape }}" data-ws-klok-tekst="{{ s.aanbod_klok | escape }}" hidden></span>
+            {%- endif -%}
           </div>
         {%- endif -%}
 
+        {%- comment -%}
+          ---------- v7: de aanbodkeuze ----------
+          Naar het voorbeeld van Hears: het product zelf en daaronder de
+          upgrade, met wat je erbij krijgt. Alles komt uit de winkel:
+
+            custom.upgrade_products   de upgrade(s); alleen duurder en leverbaar
+            custom.upgrade_extras     per upgrade de handles van de onderdelen
+                                      die er bovenop komen en die we los
+                                      verkopen; hun prijs is de "losse prijs"
+            settings.gift_1/2_*       de cadeaus van de winkelwagen: elke keuze
+                                      toont de cadeaus die zijn eigen prijs haalt
+
+          Kiezen zet het id in het formulier om (de knop legt dus de upgrade
+          neer) en werkt de totaalregel en Klarna bij. Staat er geen upgrade,
+          dan komt dit blok er niet en blijven de modelkeuze en het cadeaublok.
+        {%- endcomment -%}
+        {%- liquid
+          assign tiers_n = 0
+          assign tier_ids = ''
+          assign tier_handles = 'BASIS'
+          if v7 and s.tiers_tonen and v.available
+            assign upg_lijst = mf.upgrade_products.value
+            assign tier_max = s.tier_max | default: 1
+            for up in upg_lijst
+              if tiers_n >= tier_max
+                break
+              endif
+              assign uv = up.selected_or_first_available_variant
+              if uv.available and uv.price > v.price
+                assign tiers_n = tiers_n | plus: 1
+                assign tier_handles = tier_handles | append: ',' | append: up.handle
+                assign tier_ids = tier_ids | append: '‹' | append: up.id | append: '›'
+              endif
+            endfor
+          endif
+        -%}
+        {%- if tiers_n > 0 -%}
+          {%- assign extras_kaart = mf.upgrade_extras.value -%}
+          <div class="ws-tiers" data-ws-tiers>
+            <div class="ws-tiers-kop">
+              {%- if s.tier_kop != blank -%}<span>{{ s.tier_kop }}</span>{%- endif -%}
+              {%- if kan_vergelijken and s.vergelijk_label != blank -%}
+                <button type="button" class="ws-tiers-vgl" data-ws-vgl data-ws-anker="{{ s.vergelijk_anker }}">{{ s.vergelijk_label }}</button>
+              {%- endif -%}
+            </div>
+            <fieldset class="ws-tiers-lijst">
+              <legend class="visually-hidden">{{ s.tier_kop | default: product.title }}</legend>
+              {%- assign tier_handle_lijst = tier_handles | split: ',' -%}
+              {%- for th in tier_handle_lijst -%}
+                {%- liquid
+                  if th == 'BASIS'
+                    assign basis = true
+                    assign tp = product
+                    assign tv = v
+                  else
+                    assign basis = false
+                    assign tp = all_products[th]
+                    assign tv = tp.selected_or_first_available_variant
+                  endif
+                  assign ti = tp.metafields.custom.compare_info.value
+                  assign t_pct = 0
+                  if tv.compare_at_price > tv.price
+                    assign t_verschil = tv.compare_at_price | minus: tv.price
+                    assign t_pct = t_verschil | times: 100 | divided_by: tv.compare_at_price
+                  endif
+                  assign t_klarna = tv.price | plus: 2 | divided_by: 3
+                  assign t_sub = ti.toggle_subtitle | default: tp.metafields.custom.subtitle.value
+                -%}
+                {%- capture t_nu -%}{{ s.munt }}{% render 'price-formated', price: tv.price %}{%- endcapture -%}
+                {%- capture t_was -%}{%- if tv.compare_at_price > tv.price -%}{{ s.munt }}{% render 'price-formated', price: tv.compare_at_price %}{%- endif -%}{%- endcapture -%}
+                {%- capture t_kl -%}{{ s.munt }}{% render 'price-formated', price: t_klarna %}{%- endcapture -%}
+
+                {%- comment -%} de extra's van de upgrade, met hun losse prijs {%- endcomment -%}
+                {%- assign t_los = v.price -%}
+                {%- assign t_extra_n = 0 -%}
+                {%- capture t_extra -%}
+                  {%- unless basis -%}
+                    {%- if extras_kaart != blank -%}
+                      {%- assign t_sleutel = tp.id | append: '' -%}
+                      {%- assign t_delen = extras_kaart[t_sleutel] -%}
+                      {%- for losh in t_delen -%}
+                        {%- assign lp = all_products[losh] -%}
+                        {%- if lp == blank -%}{%- continue -%}{%- endif -%}
+                        {%- assign t_los = t_los | plus: lp.price -%}
+                        {%- assign t_extra_n = t_extra_n | plus: 1 -%}
+                        {%- assign lp_vd = lp.metafields.custom.voordelen.value | first -%}
+                        <span class="ws-tx">
+                          <span class="ws-tx-bd">{%- if lp.featured_image != blank -%}{{ lp.featured_image | image_url: width: 96 | image_tag: alt: '', loading: 'lazy', width: 48, height: 48 }}{%- endif -%}</span>
+                          <span class="ws-tx-nm">+ {{ lp.title }}{%- if lp_vd.kop.value != blank -%}<small>{{ lp_vd.kop.value }}</small>{%- endif -%}</span>
+                          <span class="ws-tx-pr"><s>{{ s.munt }}{% render 'price-formated', price: lp.price %}</s>{{ s.tier_inbegrepen }}</span>
+                        </span>
+                      {%- endfor -%}
+                    {%- endif -%}
+                  {%- endunless -%}
+                {%- endcapture -%}
+
+                {%- comment -%} de cadeaus die deze prijs haalt, uit de instellingen van de winkelwagen {%- endcomment -%}
+                {%- assign t_cad_som = 0 -%}
+                {%- assign t_cad_n = 0 -%}
+                {%- capture t_cad -%}
+                  {%- if settings.enable_gift_rewards -%}
+                    {%- for gi in (1..2) -%}
+                      {%- if gi == 1 -%}
+                        {%- assign cad = settings.gift_1_product -%}
+                        {%- assign cad_drempel = settings.gift_1_threshold -%}
+                        {%- assign cad_naam = s.cad_naam_1 | default: settings.gift_1_label -%}
+                      {%- else -%}
+                        {%- assign cad = settings.gift_2_product -%}
+                        {%- assign cad_drempel = settings.gift_2_threshold -%}
+                        {%- assign cad_naam = s.cad_naam_2 | default: settings.gift_2_label -%}
+                      {%- endif -%}
+                      {%- if cad == blank or cad_drempel == blank -%}{%- continue -%}{%- endif -%}
+                      {%- assign cad_v = cad.selected_or_first_available_variant -%}
+                      {%- unless cad_v.available -%}{%- continue -%}{%- endunless -%}
+                      {%- assign cad_grens = cad_drempel | times: 100 -%}
+                      {%- if tv.price < cad_grens -%}{%- continue -%}{%- endif -%}
+                      {%- if cad.handle == tp.handle -%}{%- continue -%}{%- endif -%}
+                      {%- assign t_cad_n = t_cad_n | plus: 1 -%}
+                      {%- assign t_cad_som = t_cad_som | plus: cad_v.compare_at_price -%}
+                      <span class="ws-tx ws-tx-cad">
+                        <span class="ws-tx-bd">{%- if cad.featured_image != blank -%}{{ cad.featured_image | image_url: width: 96 | image_tag: alt: '', loading: 'lazy', width: 48, height: 48 }}{%- endif -%}</span>
+                        <span class="ws-tx-nm">{%- if s.tier_cadeau != blank -%}<em class="ws-tx-chip">{{ s.tier_cadeau }}</em> {% endif -%}{{ cad_naam | default: cad.title }}
+                          {%- if s.tier_cadeau_vanaf != blank -%}{%- assign cad_vanaf = s.munt | append: cad_drempel -%}<small>{{ s.tier_cadeau_vanaf | replace: '[bedrag]', cad_vanaf }}</small>{%- endif -%}
+                        </span>
+                        <span class="ws-tx-pr">{%- if cad_v.compare_at_price > 0 -%}<s>{{ s.munt }}{% render 'price-formated', price: cad_v.compare_at_price %}</s>{%- endif -%}{{ s.cad_chip }}</span>
+                      </span>
+                    {%- endfor -%}
+                  {%- endif -%}
+                {%- endcapture -%}
+
+                {%- assign t_bespaar = t_los | minus: tv.price -%}
+                <label class="ws-tier{% if basis %} ws-tier-basis{% else %} ws-tier-upg{% endif %}">
+                  {%- if basis == false and ti.is_popuplar and s.tier_badge != blank -%}<span class="ws-tier-badge">{{ s.tier_badge }}</span>{%- endif -%}
+                  <input type="radio" name="ws-tier-{{ section.id }}" value="{% unless basis %}{{ tv.id }}{% endunless %}"{% if basis %} checked{% endif %}
+                         data-nu="{{ t_nu | strip | escape }}" data-was="{{ t_was | strip | escape }}"
+                         data-pct="{% if t_pct > 0 %}−{{ t_pct }}%{% endif %}" data-klarna="{{ t_kl | strip | escape }}" data-naam="{{ tp.title | escape }}">
+                  <span class="ws-tier-bd">
+                    {%- if tp.featured_image != blank -%}{{ tp.featured_image | image_url: width: 160 | image_tag: alt: '', loading: 'lazy', width: 80, height: 80 }}{%- endif -%}
+                  </span>
+                  <span class="ws-tier-tx">
+                    <b>{%- if basis -%}{{ tp.title }}{%- else -%}{{ s.tier_upg_kop | replace: '[product]', tp.title }}{%- endif -%}</b>
+                    {%- if t_sub != blank -%}<span class="ws-tier-sub">{{ t_sub }}</span>{%- endif -%}
+                    {%- if basis == false and s.tier_meer != blank -%}
+                      {%- assign t_meer = tv.price | minus: v.price -%}
+                      {%- capture t_meer_tx -%}{{ s.munt }}{% render 'price-formated', price: t_meer %}{%- endcapture -%}
+                      <span class="ws-tier-tag">{{ s.tier_meer | replace: '[bedrag]', t_meer_tx }}</span>
+                    {%- endif -%}
+                  </span>
+                  <span class="ws-tier-pr">
+                    <b>{{ t_nu }}</b>
+                    {%- if t_was != blank -%}<s><span class="visually-hidden">{{ s.kies_was }} </span>{{ t_was }}</s>{%- endif -%}
+                  </span>
+                  {%- assign t_rijen = t_extra | append: t_cad | strip -%}
+                  {%- if t_rijen != blank -%}
+                    <span class="ws-tier-extra">
+                      {{ t_rijen }}
+                      {%- if basis == false and t_extra_n > 0 and t_bespaar > 0 and s.tier_besp != blank -%}
+                        {%- capture t_besp_tx -%}<b>{{ s.munt }}{% render 'price-formated', price: t_bespaar %}</b>{%- endcapture -%}
+                        <span class="ws-tx-som">
+                          {{ s.tier_besp | replace: '[bedrag]', t_besp_tx }}
+                          {%- if t_cad_som > 0 and s.tier_besp_cadeau != blank -%}
+                            {%- capture t_cad_tx -%}<b>{{ s.munt }}{% render 'price-formated', price: t_cad_som %}</b>{%- endcapture -%}
+                            {{ ' ' }}{{ s.tier_besp_cadeau | replace: '[bedrag]', t_cad_tx }}
+                          {%- endif -%}
+                        </span>
+                      {%- endif -%}
+                    </span>
+                  {%- endif -%}
+                </label>
+              {%- endfor -%}
+            </fieldset>
+          </div>
+          <script>
+            (function () {
+              var blok = document.currentScript.previousElementSibling;
+              if (!blok || !blok.hasAttribute('data-ws-tiers')) return;
+              // Het formulier staat verderop in de pagina: pas opzoeken bij het kiezen.
+              function formId() { var vorm = document.getElementById('ProductForm-{{ section.id }}'); return vorm && vorm.querySelector('[name="id"]'); }
+              function prijsvak() { return document.getElementById('ProductPrice-{{ section.id }}'); }
+              function zet(el, html) {
+                if (!el) return;
+                el.innerHTML = html || '';
+                el.hidden = !html;
+              }
+              function kies(r) {
+                var id = formId();
+                if (id) {
+                  if (!id.hasAttribute('data-ws-basis')) id.setAttribute('data-ws-basis', id.value);
+                  id.value = r.value || id.getAttribute('data-ws-basis');
+                }
+                var p = prijsvak();
+                if (!p) return;
+                zet(p.querySelector('[data-ws-nu]'), r.getAttribute('data-nu'));
+                zet(p.querySelector('[data-ws-was]'), r.getAttribute('data-was'));
+                var pct = p.querySelector('[data-ws-pct]');
+                if (pct) { zet(pct.firstElementChild, r.getAttribute('data-pct')); pct.hidden = !r.getAttribute('data-pct'); }
+                var kl = p.querySelector('[data-ws-klarna]');
+                if (kl) kl.innerHTML = r.getAttribute('data-klarna');
+                var nm = document.querySelector('[data-ws-sticky] .ws-sticky-nm');
+                if (nm) nm.textContent = r.getAttribute('data-naam');
+              }
+              blok.addEventListener('change', function (e) {
+                if (e.target && e.target.name === 'ws-tier-{{ section.id }}') kies(e.target);
+              });
+              // Een andere variant kiezen begint weer bij het product zelf:
+              // base.js zet dan het id en de prijs opnieuw.
+              var opties = document.getElementById('ProductOptions-{{ section.id }}');
+              if (opties) opties.addEventListener('change', function () {
+                var eerste = blok.querySelector('input[type="radio"]');
+                if (eerste) eerste.checked = true;
+                var id = formId();
+                if (id) id.removeAttribute('data-ws-basis');
+              });
+            })();
+          </script>
+        {%- endif -%}
+
+        {%- if tiers_n == 0 -%}
         {%- comment -%}
           De cadeaus uit de winkelwageninstellingen.
 
@@ -649,7 +887,9 @@
             </div>
           {%- endif -%}
         {%- endif -%}
+        {%- endif -%}
 
+        {%- if tiers_n == 0 -%}
         {%- comment -%}
           De modelkeuze. Twee kaarten naast elkaar in plaats van een knop die
           alleen belooft dat er iets te vergelijken valt: je ziet meteen welk
@@ -787,6 +1027,66 @@
             <svg><use href="#ws-pdp-vgl-{{ section.id }}"/></svg>{{ s.vergelijk_label }}
           </button>
         {%- endif -%}
+        {%- endif -%}
+
+        <div id="ProductPrice-{{ section.id }}">
+          {%- comment -%}
+            De korting staat achter de prijs, in procenten. Hier stond eerst
+            het bedrag, met als redenering dat een euro concreter is dan een
+            procent. Dat klopt op zichzelf, maar het maakt de korting bij ons
+            juist kleiner: van 109,95 naar 49,95 leest als "je bespaart 60,00"
+            terwijl het 54% is, en de hele markt zet er een percentage neer.
+            Naast elkaar in een advertentie of een vergelijking verliest een
+            bedrag het van een procent.
+
+            Delen in liquid kapt af, dus 54,57% wordt 54%. Dat is de goede
+            kant om te missen: we beloven nooit meer korting dan er is.
+          {%- endcomment -%}
+          {%- comment -%}
+            v7: een totaalregel, net boven de knop. Doorgestreept, de prijs,
+            het percentage. De keuze erboven (product of upgrade) zet deze drie
+            waarden om; daarom staan ze er altijd, ook als ze leeg zijn.
+          {%- endcomment -%}
+          {%- assign korting = 0 -%}
+          {%- if v.compare_at_price > v.price -%}
+            {%- assign bedrag = v.compare_at_price | minus: v.price -%}
+            {%- assign korting = bedrag | times: 100 | divided_by: v.compare_at_price -%}
+          {%- endif -%}
+          <div class="ws-prijs">
+            {%- if v7 and s.totaal_label != blank -%}<span class="ws-tot-lb">{{ s.totaal_label }}</span>{%- endif -%}
+            <span class="ws-tot-bd">
+              <span class="ws-was" data-ws-was{% unless v.compare_at_price > v.price %} hidden{% endunless %}>{% if v.compare_at_price > v.price %}{% if s.munt != blank %}<span class="ws-munt">{{ s.munt }}</span>{% endif %}{% render 'price-formated', price: v.compare_at_price %}{% endif %}</span>
+              <span class="ws-nu" data-ws-nu>{% if s.munt != blank %}<span class="ws-munt">{{ s.munt }}</span>{% endif %}{% render 'price-formated', price: v.price %}</span>
+              <span class="ws-besp" data-ws-pct{% unless korting > 0 %} hidden{% endunless %}><span>{% if v7 %}−{{ korting }}%{% else %}{{ s.besparing_regel }} {{ korting }}%{% endif %}</span></span>
+            </span>
+          </div>
+
+          {%- comment -%}
+            Betalen in drie delen via Klarna. Het bedrag is de prijs gedeeld door
+            drie, naar boven afgerond op een cent: Klarna legt een restcent bij
+            de eerste termijn, dus dat is wat de klant als eerste betaalt. Lager
+            afronden zou een bedrag noemen dat niet klopt.
+            Staat binnen ProductPrice, zodat het meeverandert met de variant.
+            De meelopende balk kopieert ProductPrice; daar is hij verborgen.
+            Alleen tonen als Klarna in drie delen echt aan staat in de kassa, en
+            binnen de grenzen die Klarna voor dit bedrag hanteert.
+            Het woord voor het bedrag blijft eraan vast (harde spatie): op de
+            telefoon breekt de zin anders net voor het bedrag af en staat
+            "€19,99" alleen op de tweede regel.
+          {%- endcomment -%}
+          {%- liquid
+            assign klarna_min = s.klarna_min | default: 0 | times: 100
+            assign klarna_max = s.klarna_max | default: 100000 | times: 100
+            assign klarna_deel = v.price | plus: 2 | divided_by: 3
+          -%}
+          {%- if s.klarna_tonen and s.klarna_regel != blank and v.price >= klarna_min and v.price <= klarna_max -%}
+            {%- capture klarna_bedrag -%}<b data-ws-klarna>{% if s.munt != blank %}{{ s.munt }}{% endif %}{% render 'price-formated', price: klarna_deel %}</b>{%- endcapture -%}
+            <p class="ws-klarna">
+              <span class="ws-klarna-merk" aria-hidden="true">Klarna.</span>
+              <span class="ws-klarna-tx"><span class="visually-hidden">Klarna: </span>{{ s.klarna_regel | replace: ' [bedrag]', '&nbsp;[bedrag]' | replace: '[bedrag]', klarna_bedrag }}</span>
+            </p>
+          {%- endif -%}
+        </div>
 
         <div class="ws-vorm">
           {%- assign form_id = 'ProductForm-' | append: section.id -%}
@@ -805,35 +1105,54 @@
           {%- endform -%}
         </div>
 
-        {%- comment -%}
-          De leverbelofte staat als groen plakkaat onder de knop, met een
-          kloppende stip ervoor. De kop "Op voorraad" is eruit: de regel is
-          een mededeling van een adem, en het plakkaat en de stip zeggen
-          "dit staat klaar" al zonder woorden. Het blok komt alleen als de
-          variant leverbaar is, dus de stip liegt nooit.
-        {%- endcomment -%}
-        {%- comment -%}
-          De leverregel is winkelbeleid, geen eigenschap van een product, dus
-          hier wint de sectie-instelling van custom.shipping_information, net
-          als bij het aantal reviews bovenin. Dat productveld stond op veertig
-          producten op "Vandaag besteld, morgen in huis", zonder de voorwaarde
-          uit Verzending & retour (ma t/m vr voor 23:59). In het weekend
-          beloofde de regel dus iets wat de voorwaarden niet dekken. Het veld
-          blijft de terugval als de instelling leeg is.
-        {%- endcomment -%}
-        {%- assign leverregel = s.voorraad_regel | default: mf.shipping_information.value -%}
-        {%- if v.available and leverregel != blank -%}
-          <div class="ws-vrd">
-            <i aria-hidden="true"></i>
-            <span>{{ leverregel }}</span>
-          </div>
+        {%- if s.tel_waarde != blank -%}
+          <p class="ws-tel">
+            {%- if v7 -%}
+              {%- comment -%}
+                Drie gezichten: eigen foto's uit de instellingen, anders de
+                posters van de eerste drie klantvideo's van dit product.
+              {%- endcomment -%}
+              {%- assign gz_lijst = mf.ugc_video_list.value -%}
+              {%- assign gz_n = 0 -%}
+              <span class="ws-tel-gz" aria-hidden="true">
+                {%- if s.bewijs_foto_1 != blank -%}
+                  {%- for gz in (1..3) -%}
+                    {%- assign gz_sleutel = 'bewijs_foto_' | append: gz -%}
+                    {%- if s[gz_sleutel] != blank -%}
+                      <img src="{{ s[gz_sleutel] | image_url: width: 96, height: 96, crop: 'center' }}" alt="" width="24" height="24" loading="lazy">
+                    {%- endif -%}
+                  {%- endfor -%}
+                {%- elsif gz_lijst != blank -%}
+                  {%- comment -%} Indexeren op een lijst-metafield werkt niet betrouwbaar; daarom een lus. {%- endcomment -%}
+                  {%- for gz_v in gz_lijst limit: 3 -%}
+                    {%- if gz_v.preview_image != blank -%}
+                      <img src="{{ gz_v.preview_image | image_url: width: 96, height: 96, crop: 'center' }}" alt="" width="24" height="24" loading="lazy">
+                    {%- endif -%}
+                  {%- endfor -%}
+                {%- endif -%}
+              </span>
+            {%- else -%}
+              <svg><use href="#ws-pdp-mensen-{{ section.id }}"/></svg>
+            {%- endif -%}
+            <span>{{ s.tel_voor }} <b>{{ s.tel_waarde }}</b> {{ s.tel_na }}</span>
+          </p>
         {%- endif -%}
 
+
+        {%- if v7 -%}
+          {%- comment -%} v7: drie zekerheden onder de knop, met een dunne streep ertussen. {%- endcomment -%}
+          <ul class="ws-zeker">
+            {%- if s.zeker_1 != blank -%}<li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3"/><path d="M4.5 4.5v4h4"/></svg>{{ s.zeker_1 }}</li>{%- endif -%}
+            {%- if s.zeker_2 != blank -%}<li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>{{ s.zeker_2 }}</li>{%- endif -%}
+            {%- if s.zeker_3 != blank -%}<li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5h11v9.5H3zM14 9.5h3.8l3.2 3.3V16H14"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/></svg>{{ s.zeker_3 }}</li>{%- endif -%}
+          </ul>
+        {%- else -%}
         <div class="ws-pay">
           {% render 'payments' %}
           <span class="ws-vl"><svg><use href="#ws-pdp-slot-{{ section.id }}"/></svg>{{ s.veilig_label }}</span>
           {%- if s.proberen_label != blank -%}<span class="ws-pr">{{ s.proberen_label }}</span>{%- endif -%}
         </div>
+        {%- endif -%}
 
         {%- comment -%}
           Add-ons: accessoires onder de knop, elk met een eigen knop
@@ -864,6 +1183,12 @@
           endif
           assign add_max = s.add_max | default: 3
           assign add_n = 0
+          comment
+            Combikorting: custom.combi_korting op dit product, als {"handle": procent}.
+            Alleen invullen voor een automatische korting die echt in Shopify
+            staat; de pagina rekent hem voor, de kassa geeft hem.
+          endcomment
+          assign combi = mf.combi_korting.value
         -%}
         {%- if s.add_tonen and add_lijst != blank -%}
           {%- capture add_rijen -%}
@@ -875,18 +1200,27 @@
               {%- unless av.available -%}{%- continue -%}{%- endunless -%}
               {%- assign add_n = add_n | plus: 1 -%}
               {%- assign add_vd = ap.metafields.custom.voordelen.value | first -%}
+              {%- assign add_pct = 0 -%}
+              {%- if combi != blank and combi[ap.handle] != blank -%}{%- assign add_pct = combi[ap.handle] | plus: 0 -%}{%- endif -%}
+              {%- assign add_prijs = av.price -%}
+              {%- assign add_was = av.compare_at_price -%}
+              {%- if add_pct > 0 -%}
+                {%- assign add_rest = 100 | minus: add_pct -%}
+                {%- assign add_prijs = av.price | times: add_rest | divided_by: 100 -%}
+                {%- assign add_was = av.price -%}
+              {%- endif -%}
               <li class="ws-add-rij">
                 <a class="ws-add-in" href="{{ ap.url }}">
                   {%- if ap.featured_image != blank -%}
                     <span class="ws-add-beeld">{{ ap.featured_image | image_url: width: 120 | image_tag: alt: '', loading: 'lazy', width: 60, height: 60 }}</span>
                   {%- endif -%}
                   <span class="ws-add-tekst">
-                    <span class="ws-add-naam">{{ ap.title }}</span>
+                    <span class="ws-add-naam">{{ ap.title }}{%- if add_pct > 0 and s.add_combi != blank %} <em class="ws-add-combi">{{ s.add_combi | replace: '[pct]', add_pct }}</em>{%- endif -%}</span>
                     {%- if add_vd.kop.value != blank -%}<span class="ws-add-sub">{{ add_vd.kop.value }}</span>{%- endif -%}
                     <span class="ws-add-prijs">
-                      <b>{% if s.munt != blank %}{{ s.munt }}{% endif %}{% render 'price-formated', price: av.price %}</b>
-                      {%- if av.compare_at_price > av.price -%}
-                        <s><span class="visually-hidden">{{ s.kies_was }} </span>{% if s.munt != blank %}{{ s.munt }}{% endif %}{% render 'price-formated', price: av.compare_at_price %}</s>
+                      <b>{% if s.munt != blank %}{{ s.munt }}{% endif %}{% render 'price-formated', price: add_prijs %}</b>
+                      {%- if add_was > add_prijs -%}
+                        <s><span class="visually-hidden">{{ s.kies_was }} </span>{% if s.munt != blank %}{{ s.munt }}{% endif %}{% render 'price-formated', price: add_was %}</s>
                       {%- endif -%}
                     </span>
                   </span>
@@ -992,14 +1326,6 @@
           </div>
         {%- endif -%}
 
-        {%- if s.tel_waarde != blank -%}
-          <p class="ws-tel">
-            <svg><use href="#ws-pdp-mensen-{{ section.id }}"/></svg>
-            <span>{{ s.tel_voor }} <b>{{ s.tel_waarde }}</b> {{ s.tel_na }}</span>
-          </p>
-        {%- endif -%}
-
-
         {%- comment -%} ---------- de vier accordeons ---------- {%- endcomment -%}
         <div class="ws-acc">
           {%- comment -%}
@@ -1044,7 +1370,8 @@
           {%- endif -%}
 
           {%- assign doos = mf.included_box.value -%}
-          {%- if doos != blank -%}
+          {%- comment -%} v7: de doos heeft een eigen sectie onder de vouw. {%- endcomment -%}
+          {%- if doos != blank and s.doos_in_acc -%}
             <details>
               <summary>{{ s.acc2_titel }}<i></i></summary>
               <div class="in">
@@ -1152,6 +1479,100 @@
             });
           })();
         </script>
+
+        {%- comment -%}
+          ---------- v7: bundel en bespaar ----------
+          Onderaan het koopvak, zoals bij Hears: eerst kiezen en kopen, dan de
+          alternatieven. De lijst komt uit custom.pdp_bundels. Overgeslagen
+          worden het product zelf, wat al als upgrade in de keuze staat en wat
+          niet leverbaar is. De kop noemt de hoogste korting van wat er staat.
+        {%- endcomment -%}
+        {%- assign bundels = mf.pdp_bundels.value -%}
+        {%- if v7 and s.bund_tonen and bundels != blank -%}
+          {%- assign bund_n = 0 -%}
+          {%- assign bund_top = 0 -%}
+          {%- assign bund_max = s.bund_max | default: 3 -%}
+          {%- capture bund_kaarten -%}
+            {%- for bp in bundels -%}
+              {%- if bund_n >= bund_max -%}{%- break -%}{%- endif -%}
+              {%- if bp.id == product.id -%}{%- continue -%}{%- endif -%}
+              {%- assign bp_sleutel = '‹' | append: bp.id | append: '›' -%}
+              {%- if tier_ids contains bp_sleutel -%}{%- continue -%}{%- endif -%}
+              {%- assign bv = bp.selected_or_first_available_variant -%}
+              {%- unless bv.available -%}{%- continue -%}{%- endunless -%}
+              {%- assign bund_n = bund_n | plus: 1 -%}
+              {%- assign b_pct = 0 -%}
+              {%- if bv.compare_at_price > bv.price -%}
+                {%- assign b_verschil = bv.compare_at_price | minus: bv.price -%}
+                {%- assign b_pct = b_verschil | times: 100 | divided_by: bv.compare_at_price -%}
+              {%- endif -%}
+              {%- if b_pct > bund_top -%}{%- assign bund_top = b_pct -%}{%- endif -%}
+              {%- assign b_sub = bp.metafields.custom.compare_info.value.toggle_subtitle | default: bp.metafields.custom.subtitle.value -%}
+              <a class="ws-bund-k" href="{{ bp.url }}">
+                <span class="ws-bund-bd">
+                  {%- if b_pct > 0 -%}<span class="ws-bund-lb">−{{ b_pct }}%</span>{%- endif -%}
+                  {%- if bp.featured_image != blank -%}{{ bp.featured_image | image_url: width: 480 | image_tag: alt: '', loading: 'lazy', widths: '240,360,480', sizes: '(max-width: 749px) 44vw, 220px' }}{%- endif -%}
+                </span>
+                <b>{{ bp.title }}</b>
+                {%- if b_sub != blank -%}<span class="ws-bund-sub">{{ b_sub }}</span>{%- endif -%}
+                <span class="ws-bund-pr"><b>{{ s.munt }}{% render 'price-formated', price: bv.price %}</b>{%- if bv.compare_at_price > bv.price -%}<s><span class="visually-hidden">{{ s.kies_was }} </span>{{ s.munt }}{% render 'price-formated', price: bv.compare_at_price %}</s>{%- endif -%}</span>
+              </a>
+            {%- endfor -%}
+          {%- endcapture -%}
+          {%- if bund_n > 0 -%}
+            <div class="ws-bund">
+              <div class="ws-bund-kop">
+                <span>{%- if bund_top > 0 -%}{{ s.bund_kop | replace: '[pct]', bund_top }}{%- else -%}{{ s.bund_kop_kaal }}{%- endif -%}</span>
+                {%- if kan_vergelijken and s.vergelijk_label != blank -%}
+                  <button type="button" class="ws-tiers-vgl" data-ws-vgl data-ws-anker="{{ s.vergelijk_anker }}">{{ s.bund_vgl }}</button>
+                {%- endif -%}
+              </div>
+              <div class="ws-bund-rij" style="--n:{{ bund_n }}">{{ bund_kaarten }}</div>
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+
+        {%- comment -%}
+          v7: de leverregel telt af tot 23:59 en de aanbodbalk tot het einde van
+          de actie. Zonder script blijven de vaste teksten staan.
+        {%- endcomment -%}
+        {%- if v7 -%}
+          <script>
+            (function () {
+              var wortel = document.currentScript.parentNode;
+              var eh = {{ s.klok_eenheden | default: 'd u m' | split: ' ' | json }};
+              function duur(ms) {
+                var d = Math.floor(ms / 864e5), u = Math.floor(ms % 864e5 / 36e5), m = Math.floor(ms % 36e5 / 6e4);
+                return (d > 0 ? d + (eh[0] || 'd') + ' ' : '') + u + (eh[1] || 'u') + ' ' + m + (eh[2] || 'm');
+              }
+              function tik() {
+                var nu = new Date();
+                var lever = wortel.querySelector('[data-ws-lever]');
+                if (lever) {
+                  if (!lever.hasAttribute('data-ws-vast')) lever.setAttribute('data-ws-vast', lever.innerHTML);
+                  var dag = nu.getDay();
+                  if (dag === 0 || dag === 6) { lever.innerHTML = lever.getAttribute('data-ws-vast'); }
+                  else {
+                    var eind = new Date(nu); eind.setHours(23, 59, 0, 0);
+                    lever.innerHTML = lever.getAttribute('data-ws-lever').replace('[tijd]', '<b>' + duur(eind - nu) + '</b>');
+                  }
+                }
+                var klok = wortel.querySelector('[data-ws-klok]');
+                if (klok) {
+                  var tot = new Date(klok.getAttribute('data-ws-klok'));
+                  var rest = tot - nu;
+                  if (isNaN(rest) || rest <= 0) { klok.hidden = true; }
+                  else {
+                    klok.textContent = (klok.getAttribute('data-ws-klok-tekst') || '[tijd]').replace('[tijd]', duur(rest));
+                    klok.hidden = false;
+                  }
+                }
+              }
+              tik();
+              setInterval(tik, 30000);
+            })();
+          </script>
+        {%- endif -%}
       </div>
 
     </div>
@@ -1179,7 +1600,9 @@
         {%- endif -%}
         <span class="ws-sticky-tx">
           <b class="ws-sticky-nm">{{ product.title }}</b>
-          {%- if belofte != blank -%}
+          {%- if v7 and s.sticky_sub != blank -%}
+            <span class="ws-sticky-sub">{{ s.sticky_sub }}</span>
+          {%- elsif belofte != blank -%}
             <span class="ws-sticky-sub">{{ belofte }}</span>
           {%- endif -%}
         </span>
@@ -1943,7 +2366,8 @@
   {%- endcomment -%}
   {%- assign upgrades = mf.upgrade_products.value -%}
   {%- assign extras_kaart = mf.upgrade_extras.value -%}
-  {%- if upgrades != blank and s.upg_tonen -%}
+  {%- comment -%} Staat de upgrade al als keuze in het koopvak, dan geen pop-up die hem nog eens aanbiedt. {%- endcomment -%}
+  {%- if upgrades != blank and s.upg_tonen and tiers_n == 0 -%}
     {%- comment -%}
       Alleen upgrades die duurder zijn dan dit product en op voorraad staan.
       Een goedkopere of uitverkochte optie is geen upgrade.
@@ -2067,6 +2491,40 @@
   "class": "ws-pdp-sectie",
   "settings": [
     { "type": "paragraph", "content": "Titel, prijs, USP's, specificaties en doosinhoud komen uit het product. Alles hieronder is winkelbreed of een terugval." },
+    { "type": "header", "content": "v7: de nieuwe opmaak" },
+    { "type": "checkbox", "id": "v7", "label": "Opmaak van de nieuwe homepage", "info": "Uit = de vorige opmaak, met ws-pdp-koopvak.css.", "default": true },
+    { "type": "checkbox", "id": "vd_compact", "label": "Voordelen als vinkjes", "info": "Alleen de kop van elk voordeel, zodat het aanbod hoger staat.", "default": true },
+    { "type": "text", "id": "voorraad_kop", "label": "Voor de leverregel", "default": "Op voorraad" },
+    { "type": "text", "id": "lever_klok", "label": "Leverregel met aftelklok", "info": "Op werkdagen telt [tijd] af tot 23:59. In het weekend staat de vaste leverregel.", "default": "Bestel binnen [tijd], morgen in huis" },
+    { "type": "text", "id": "aanbod_eind", "label": "Einde van de actie", "info": "Datum en tijd, bijvoorbeeld 2026-10-30T23:59:59+01:00. Leeg = geen aftelklok in de aanbodbalk.", "default": "2026-10-30T23:59:59+01:00" },
+    { "type": "text", "id": "aanbod_klok", "label": "Tekst van de aftelklok", "default": "Nog [tijd]" },
+    { "type": "text", "id": "klok_eenheden", "label": "Eenheden van de klok", "info": "Dagen, uren en minuten, met een spatie ertussen.", "default": "d u m" },
+    { "type": "checkbox", "id": "tiers_tonen", "label": "Aanbodkeuze met upgrade", "info": "Het product en de upgrade uit custom.upgrade_products als keuze, met de extra's (custom.upgrade_extras) en de cadeaus van de winkelwagen. Vervangt dan de modelkeuze en de upgrade-pop-up.", "default": true },
+    { "type": "range", "id": "tier_max", "label": "Hoeveel upgrades", "min": 1, "max": 3, "step": 1, "default": 1 },
+    { "type": "text", "id": "tier_kop", "label": "Kop boven de keuze", "default": "Kies je aanbieding" },
+    { "type": "text", "id": "tier_upg_kop", "label": "Naam van de upgrade", "default": "Upgrade naar [product]" },
+    { "type": "text", "id": "tier_badge", "label": "Label op de rand", "info": "Alleen als compare_info van de upgrade op meest gekozen staat.", "default": "Meest gekozen" },
+    { "type": "text", "id": "tier_meer", "label": "Meerprijs", "default": "Voor [bedrag] extra" },
+    { "type": "text", "id": "tier_inbegrepen", "label": "Achter een extra", "default": "Inbegrepen" },
+    { "type": "text", "id": "tier_cadeau", "label": "Label voor een cadeau", "default": "Cadeau" },
+    { "type": "text", "id": "tier_cadeau_vanaf", "label": "Regel onder een cadeau", "default": "Gratis bij bestellingen vanaf [bedrag]" },
+    { "type": "text", "id": "tier_besp", "label": "Besparing", "default": "Samen [bedrag] goedkoper dan los" },
+    { "type": "text", "id": "tier_besp_cadeau", "label": "Besparing, met cadeau", "default": "plus een cadeau van [bedrag]" },
+    { "type": "text", "id": "totaal_label", "label": "Voor de totaalprijs", "default": "Totaal" },
+    { "type": "text", "id": "zeker_1", "label": "Onder de knop 1", "default": "100 dagen proberen" },
+    { "type": "text", "id": "zeker_2", "label": "Onder de knop 2", "default": "2 jaar garantie" },
+    { "type": "text", "id": "zeker_3", "label": "Onder de knop 3", "default": "Gratis verzending" },
+    { "type": "image_picker", "id": "bewijs_foto_1", "label": "Gezicht 1 bij de teller", "info": "Leeg = de posters van de eerste klantvideo's van het product." },
+    { "type": "image_picker", "id": "bewijs_foto_2", "label": "Gezicht 2 bij de teller" },
+    { "type": "image_picker", "id": "bewijs_foto_3", "label": "Gezicht 3 bij de teller" },
+    { "type": "text", "id": "add_combi", "label": "Label bij een combikorting", "info": "[pct] = het percentage uit custom.combi_korting.", "default": "−[pct]% combikorting" },
+    { "type": "checkbox", "id": "doos_in_acc", "label": "Doosinhoud ook als uitklapper", "info": "In v7 heeft de doos een eigen sectie.", "default": false },
+    { "type": "checkbox", "id": "bund_tonen", "label": "Bundel en bespaar", "info": "Uit custom.pdp_bundels, onderaan het koopvak.", "default": true },
+    { "type": "range", "id": "bund_max", "label": "Hoeveel bundels", "min": 1, "max": 4, "step": 1, "default": 3 },
+    { "type": "text", "id": "bund_kop", "label": "Kop van de bundels", "default": "Bundel en bespaar tot [pct]%" },
+    { "type": "text", "id": "bund_kop_kaal", "label": "Kop zonder korting", "default": "Ook in een bundel" },
+    { "type": "text", "id": "bund_vgl", "label": "Link naast de kop", "default": "Vergelijk" },
+    { "type": "text", "id": "sticky_sub", "label": "Regel in de meelopende balk", "default": "Morgen in huis · 100 dagen proberen" },
     { "type": "header", "content": "Podium" },
     { "type": "image_picker", "id": "merk", "label": "Monogram op de achtergrond" },
     { "type": "text", "id": "tag", "label": "Label linksboven", "default": "Meest gekozen" },

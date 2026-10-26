@@ -1,0 +1,62 @@
+{% comment %}
+  Wellshave v7 · productpagina: wat zit er in de doos, met de kerncijfers eronder.
+  Foto: custom.included_box_image. Lijst: custom.included_box (titel, rijke tekst, foto).
+  Cijfers: custom.kerncijfers (metaobjecten ws_kerncijfer: waarde, eenheid, uitleg).
+  Vervangt de uitklapper "Wat zit er in de doos" en de oude sectie whats-included.
+{% endcomment %}
+{%- assign mf = product.metafields.custom -%}
+{%- assign doos = mf.included_box.value -%}
+{%- assign cijfers = mf.kerncijfers.value -%}
+{%- if doos != blank -%}
+  {{ 'ws7.css' | asset_url | stylesheet_tag }}
+  {%- assign foto = mf.included_box_image.value -%}
+  <div class="ws7 ws7p ws7p-wit">
+    <div class="ws7p-rail ws7p-sec">
+      <div class="ws7p-doos{% if foto == blank %} ws7p-doos--kaal{% endif %}">
+        {%- if foto != blank -%}
+          <div class="ws7p-doos__beeld">
+            {{ foto | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '600,900,1200,1400', sizes: '(max-width: 899px) 92vw, 46vw', alt: foto.alt | default: '' }}
+          </div>
+        {%- endif -%}
+        <div class="ws7p-doos__tekst">
+          {%- if section.settings.oog != blank -%}<span class="ws7-oog">{{ section.settings.oog }}</span>{%- endif -%}
+          {% render 'ws7-kop', kop: section.settings.kop, goud: section.settings.kop_goud %}
+          {%- if section.settings.sub != blank -%}<p class="ws7-sub ws7p-sub">{{ section.settings.sub }}</p>{%- endif -%}
+          <ul class="ws7p-doos__lijst">
+            {%- for item in doos -%}
+              <li>
+                <span class="ws7p-doos__bd">{%- if item.image != blank -%}{{ item.image | image_url: width: 120 | image_tag: alt: '', loading: 'lazy', width: 60, height: 60 }}{%- endif -%}</span>
+                <span>
+                  <b>{{ item.title | strip }}</b>
+                  {%- if item.description != blank -%}<span class="ws7p-doos__uitleg">{{ item.description | metafield_tag | strip_html | truncatewords: 26 }}</span>{%- endif -%}
+                </span>
+              </li>
+            {%- endfor -%}
+          </ul>
+          {%- if cijfers != blank -%}
+            <div class="ws7p-cijfers">
+              {%- for c in cijfers limit: 4 -%}
+                <div><b>{{ c.waarde }}{% if c.eenheid != blank %}<small>{{ c.eenheid }}</small>{% endif %}</b><span>{{ c.label }}</span></div>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+{% schema %}
+{
+  "name": "WS7 · PDP in de doos",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "paragraph", "content": "Foto, inhoud en cijfers komen uit het product: included_box_image, included_box en kerncijfers." },
+    { "type": "text", "id": "oog", "label": "Bovenregel", "default": "In de doos" },
+    { "type": "text", "id": "kop", "label": "Kop", "default": "Alles zit" },
+    { "type": "text", "id": "kop_goud", "label": "Kop, regel in goud", "default": "er meteen bij." },
+    { "type": "text", "id": "sub", "label": "Regel eronder", "default": "Uitpakken, opladen en beginnen. Je hoeft niets los bij te kopen." }
+  ],
+  "presets": [ { "name": "WS7 · PDP in de doos" } ]
+}
+{% endschema %}

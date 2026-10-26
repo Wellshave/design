@@ -79,7 +79,7 @@
         assign gz3 = poster_lijst[2] | strip
       endif
     -%}
-    <section class="ws-ugc" data-ws-ugc
+    <section class="ws-ugc{% if s.v7 %} ws-ugc--v7{% endif %}" data-ws-ugc
              style="--ws-ugc-top:{{ s.marge_top }}px;--ws-ugc-bot:{{ s.marge_bot }}px">
       <div class="ws-ugc-rail">
 
@@ -334,6 +334,7 @@
   "tag": "section",
   "class": "ws-pdp-ugc-sectie",
   "settings": [
+    { "type": "checkbox", "id": "v7", "label": "Opmaak van de nieuwe homepage", "info": "De video's op een donkere plaat, koppen in Inter Tight met goud.", "default": true },
     { "type": "header", "content": "De kop" },
     { "type": "text", "id": "vertrouwd", "label": "Vertrouwdregel", "info": "Staat boven de kop, naast de drie gezichten. Leeg = geen regel.", "default": "Vertrouwd door 200.000+" },
     { "type": "image_picker", "id": "foto1", "label": "Gezicht 1", "info": "Leeg = de poster van de eerste video." },
