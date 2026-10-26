@@ -2513,5 +2513,8 @@ in Files; alleen de koppeling is weg.
 Ik heb niets aangeraakt in de namespaces van apps en Shopify (loox, reviews,
 shopify, mm-google-shopping, mc-facebook, ecomposer, intelligems, blockify,
 addresshero) en ook niet de SEO-velden `global.title_tag` en
-`global.description_tag`. Losse waarden van verwijderde apps (judgeme, GEMPAGES,
-reelUpProductReels, debutify, gp_discount) staan er ook nog. Geen thema leest ze.
+`global.description_tag`.
+
+De losse waarden van verwijderde apps zijn daarna ook weggehaald: judgeme,
+GEMPAGES, reelUpProductReels, debutify en gp_discount, samen 31 waarden. Geen
+thema las ze. De back-up staat in `backups/app-resten-2026-10-26.json`.
