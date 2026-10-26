@@ -2518,3 +2518,20 @@ addresshero) en ook niet de SEO-velden `global.title_tag` en
 De losse waarden van verwijderde apps zijn daarna ook weggehaald: judgeme,
 GEMPAGES, reelUpProductReels, debutify en gp_discount, samen 31 waarden. Geen
 thema las ze. De back-up staat in `backups/app-resten-2026-10-26.json`.
+
+## In de doos: nieuw ontwerp
+
+`ws7-pdp-doos` is opnieuw opgebouwd. De kop staat over de hele breedte. Links
+staat de doos (`included_box_image`) als grote tegel met een witte kern, zodat
+foto's met een witte achtergrond er naadloos in opgaan. Op de tegel staat een
+gouden label met het aantal onderdelen (instelling `teller`, `[n]` wordt het
+aantal; vertaald in en, de en fr). Rechts staat elk onderdeel (`included_box`)
+als witte kaart met een grote foto, de naam en maximaal drie regels uitleg.
+
+* Drie kolommen als het aantal deelbaar is door drie of als er zeven of meer
+  onderdelen zijn, anders twee. Bij twee kolommen en een oneven aantal wordt de
+  laatste kaart breed.
+* De tegel is even hoog als de kaarten ernaast.
+* Mobiel: kop, tegel, en de kaarten als rij om door te vegen, zodat de sectie
+  kort blijft.
+* De kerncijfers staan, als ze er zijn, onder de kaarten.

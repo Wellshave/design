@@ -3,32 +3,47 @@
   Foto: custom.included_box_image. Lijst: custom.included_box (titel, rijke tekst, foto).
   Cijfers: custom.kerncijfers (metaobjecten ws_kerncijfer: waarde, eenheid, uitleg).
   Vervangt de uitklapper "Wat zit er in de doos" en de oude sectie whats-included.
+  Opbouw: kop over de hele breedte; links de doos als grote tegel (even hoog als
+  de kaarten), rechts elk onderdeel als kaart met een groot beeld. Mobiel: kop,
+  doos, en de onderdelen als rij kaarten om door te vegen.
 {% endcomment %}
 {%- assign mf = product.metafields.custom -%}
 {%- assign doos = mf.included_box.value -%}
 {%- assign cijfers = mf.kerncijfers.value -%}
 {%- if doos != blank -%}
   {{ 'ws7.css' | asset_url | stylesheet_tag }}
-  {%- assign foto = mf.included_box_image.value -%}
+  {%- liquid
+    assign foto = mf.included_box_image.value
+    # Drie kolommen als dat precies uitkomt of als de lijst lang is, anders twee.
+    assign rest = doos.size | modulo: 3
+    assign kolommen = 2
+    if rest == 0 or doos.size >= 7
+      assign kolommen = 3
+    endif
+    assign teller = section.settings.teller | replace: '[n]', doos.size
+  -%}
   <div class="ws7 ws7p ws7p-wit">
     <div class="ws7p-rail ws7p-sec">
       <div class="ws7p-doos{% if foto == blank %} ws7p-doos--kaal{% endif %}">
-        {%- if foto != blank -%}
-          <div class="ws7p-doos__beeld">
-            {{ foto | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '600,900,1200,1400', sizes: '(max-width: 899px) 92vw, 46vw', alt: foto.alt | default: '' }}
-          </div>
-        {%- endif -%}
-        <div class="ws7p-doos__tekst">
+        <div class="ws7p-doos__kop">
           {%- if section.settings.oog != blank -%}<span class="ws7-oog">{{ section.settings.oog }}</span>{%- endif -%}
           {% render 'ws7-kop', kop: section.settings.kop, goud: section.settings.kop_goud %}
           {%- if section.settings.sub != blank -%}<p class="ws7-sub ws7p-sub">{{ section.settings.sub }}</p>{%- endif -%}
-          <ul class="ws7p-doos__lijst">
+        </div>
+        {%- if foto != blank -%}
+          <figure class="ws7p-doos__beeld">
+            {%- if section.settings.teller != blank -%}<span class="ws7p-doos__teller">{{ teller }}</span>{%- endif -%}
+            {{ foto | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '600,900,1200,1400', sizes: '(max-width: 899px) 92vw, 40vw', alt: foto.alt | default: '' }}
+          </figure>
+        {%- endif -%}
+        <div class="ws7p-doos__rechts">
+          <ul class="ws7p-doos__lijst ws7p-doos__lijst--{{ kolommen }}">
             {%- for item in doos -%}
-              <li>
-                <span class="ws7p-doos__bd">{%- if item.image != blank -%}{{ item.image | image_url: width: 120 | image_tag: alt: '', loading: 'lazy', width: 60, height: 60 }}{%- endif -%}</span>
-                <span>
+              <li class="ws7p-doos__item">
+                <span class="ws7p-doos__bd">{%- if item.image != blank -%}{{ item.image | image_url: width: 480 | image_tag: alt: '', loading: 'lazy', widths: '240,360,480', sizes: '(max-width: 899px) 44vw, 220px' }}{%- endif -%}</span>
+                <span class="ws7p-doos__tx">
                   <b>{{ item.title | strip }}</b>
-                  {%- if item.description != blank -%}<span class="ws7p-doos__uitleg">{{ item.description | metafield_tag | strip_html | truncatewords: 26 }}</span>{%- endif -%}
+                  {%- if item.description != blank -%}<span class="ws7p-doos__uitleg">{{ item.description | metafield_tag | strip_html | truncatewords: 30 }}</span>{%- endif -%}
                 </span>
               </li>
             {%- endfor -%}
@@ -55,7 +70,8 @@
     { "type": "text", "id": "oog", "label": "Bovenregel", "default": "In de doos" },
     { "type": "text", "id": "kop", "label": "Kop", "default": "Alles zit" },
     { "type": "text", "id": "kop_goud", "label": "Kop, regel in goud", "default": "er meteen bij." },
-    { "type": "text", "id": "sub", "label": "Regel eronder", "default": "Uitpakken, opladen en beginnen. Je hoeft niets los bij te kopen." }
+    { "type": "text", "id": "sub", "label": "Regel eronder", "default": "Uitpakken, opladen en beginnen. Je hoeft niets los bij te kopen." },
+    { "type": "text", "id": "teller", "label": "Label op de foto van de doos", "default": "[n] onderdelen", "info": "[n] wordt het aantal onderdelen. Leeg = geen label." }
   ],
   "presets": [ { "name": "WS7 · PDP in de doos" } ]
 }

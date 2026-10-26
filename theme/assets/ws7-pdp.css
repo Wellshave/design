@@ -429,19 +429,31 @@
 .ws7p-km__uitleg li::before{content:"";position:absolute;left:0;top:.65em;width:5px;height:5px;border-radius:50%;background:#B0742A}
 
 /* in de doos */
-.ws7p-doos{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center}
-.ws7p-doos--kaal{grid-template-columns:minmax(0,760px);justify-content:center}
-.ws7p-doos__beeld{position:relative;aspect-ratio:1/1;border-radius:26px;overflow:hidden;background:var(--zand)}
-.ws7p-doos__beeld img{position:absolute;inset:6%;width:88%;height:88%;object-fit:contain;mix-blend-mode:darken}
-.ws7p-doos__tekst > .ws7-oog + .ws7-kop{margin-top:8px}
-.ws7p-doos__tekst .ws7p-sub{margin-top:10px}
-.ws7p-doos__lijst{list-style:none;margin:26px 0 0;padding:0;border-top:1px solid rgba(17,17,17,.14)}
-.ws7p-doos__lijst li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid rgba(17,17,17,.09)}
-.ws7p-doos__bd{width:44px;height:44px;border-radius:9px;background:var(--zand);overflow:hidden}
-.ws7p-doos__bd img{width:100%;height:100%;object-fit:contain;mix-blend-mode:darken;display:block}
-.ws7p-doos__lijst b{display:block;font-size:13.5px;font-weight:600}
-.ws7p-doos__uitleg{display:block;font-size:12.5px;color:var(--mid);margin-top:2px}
-.ws7p-cijfers{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:26px;background:var(--zand);border-radius:18px}
+/* in de doos: links de doos als tegel, rechts elk onderdeel als kaart */
+.ws7p-doos{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:48px;row-gap:40px;align-items:start}
+.ws7p-doos__kop{grid-column:1/-1;max-width:620px}
+.ws7p-doos__kop > .ws7-oog + .ws7-kop{margin-top:8px}
+.ws7p-doos__kop .ws7p-sub{margin-top:10px}
+/* de tegel is even hoog als de kaarten ernaast; witte kern zodat foto's met een witte achtergrond erin opgaan */
+.ws7p-doos__beeld{position:relative;align-self:stretch;min-height:440px;margin:0;border-radius:24px;overflow:hidden;
+  background:radial-gradient(90% 70% at 50% 50%,#FFFFFF 0%,#FFFFFF 30%,#F6EEDF 70%,#ECDFC6 100%)}
+.ws7p-doos__beeld img{position:absolute;inset:12% 8%;width:84%;height:76%;object-fit:contain;mix-blend-mode:darken;z-index:1}
+.ws7p-doos__teller{position:absolute;top:18px;left:18px;z-index:2;background:var(--goud);color:var(--ink);font-size:10.5px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;padding:6px 11px;border-radius:999px;box-shadow:0 6px 14px -8px rgba(140,90,26,.7)}
+.ws7p-doos__rechts{display:grid;gap:14px;min-width:0}
+.ws7p-doos__lijst{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.ws7p-doos__lijst--3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.ws7p-doos__item{display:grid;grid-template-rows:auto 1fr;gap:12px;background:#fff;border-radius:16px;padding:8px 8px 14px;
+  box-shadow:0 1px 0 rgba(17,17,17,.04),0 14px 30px -22px rgba(60,40,10,.45)}
+.ws7p-doos__lijst--2 .ws7p-doos__item:last-child:nth-child(odd){grid-column:1/-1;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:none;align-items:center;padding-bottom:8px}
+.ws7p-doos__bd{position:relative;display:block;aspect-ratio:4/3;border-radius:11px;background:var(--zand);overflow:hidden}
+.ws7p-doos__bd img{position:absolute;inset:12%;width:76%;height:76%;object-fit:contain;mix-blend-mode:darken}
+.ws7p-doos__tx{display:grid;gap:4px;align-content:start;padding:0 6px}
+.ws7p-doos__tx b{font-size:14px;font-weight:600;line-height:1.3}
+.ws7p-doos__uitleg{font-size:12.5px;line-height:1.45;color:var(--mid);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.ws7p-doos--kaal{grid-template-columns:minmax(0,1fr)}
+.ws7p-doos--kaal .ws7p-doos__lijst--2{grid-template-columns:repeat(3,minmax(0,1fr))}
+.ws7p-cijfers{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));background:var(--zand);border-radius:18px}
 .ws7p-cijfers div{padding:18px 16px;display:grid;gap:4px;align-content:start}
 .ws7p-cijfers div + div{border-left:1px solid rgba(17,17,17,.09)}
 .ws7p-cijfers b{font-family:var(--kopletter);font-size:24px;font-weight:500;line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
@@ -543,7 +555,18 @@
   .ws7p-stap__beeld{min-height:0;aspect-ratio:4/3;border-radius:18px}
   .ws7p-stap__kaart{padding:22px}
   .ws7p-stap__kaart h3{font-size:21px}
-  .ws7p-doos__beeld{border-radius:18px}
+  .ws7p-doos{row-gap:22px}
+  .ws7p-doos__beeld{min-height:0;aspect-ratio:4/3;border-radius:18px}
+  .ws7p-doos__teller{top:12px;left:12px}
+  /* mobiel: de onderdelen als rij om door te vegen, zodat de sectie kort blijft */
+  .ws7p-doos .ws7p-doos__lijst{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:16px;
+    margin:0 -16px;padding:2px 16px 16px;scrollbar-width:none}
+  .ws7p-doos .ws7p-doos__lijst::-webkit-scrollbar{display:none}
+  .ws7p-doos .ws7p-doos__item,.ws7p-doos .ws7p-doos__lijst .ws7p-doos__item:last-child:nth-child(odd){flex:0 0 46%;scroll-snap-align:start;
+    grid-column:auto;grid-template-columns:none;grid-template-rows:auto 1fr;align-items:stretch;gap:10px;padding:6px 6px 12px;border-radius:14px}
+  .ws7p-doos__tx{padding:0 4px}
+  .ws7p-doos__tx b{font-size:13px}
+  .ws7p-doos__uitleg{font-size:11.5px}
   .ws7p-cijfers{grid-template-columns:repeat(2,minmax(0,1fr))}
   .ws7p-cijfers div:nth-child(3){border-left:0}
   .ws7p-cijfers div:nth-child(n+3){border-top:1px solid rgba(17,17,17,.09)}
