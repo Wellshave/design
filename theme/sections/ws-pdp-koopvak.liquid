@@ -338,8 +338,8 @@
           v7: de belofte staat als gouden tweede regel in de kop, zoals elke kop
           op de homepage. Zonder v7 blijft het de losse regel eronder.
         {%- endcomment -%}
-        <h1 class="ws-h1">{{ product.title | replace: '™', '<sup class="ws-tm">™</sup>' }}
-          {%- if v7 and belofte != blank %} <span class="ws-h1-goud">{{ belofte }}</span>{%- endif -%}
+        <h1 class="ws-h1"><span data-ws-titel>{{ product.title | replace: '™', '<sup class="ws-tm">™</sup>' }}</span>
+          {%- if v7 and belofte != blank %} <span class="ws-h1-goud" data-ws-belofte>{{ belofte }}</span>{%- endif -%}
         </h1>
         {%- if v7 == false and belofte != blank -%}<div class="ws-sub">{{ belofte }}</div>{%- endif -%}
         {%- if lead != blank -%}<p class="ws-lead">{{ lead }}</p>{%- endif -%}
@@ -839,6 +839,31 @@
 
                 {%- assign t_bespaar = t_los | minus: tv.price -%}
                 <label class="ws-tier{% if basis %} ws-tier-basis{% else %} ws-tier-upg{% endif %}">
+                  {%- unless basis -%}
+                    {%- comment -%}
+                      Kies je deze kaart, dan wisselt de pagina mee: de foto's, de naam
+                      en de belofte van dit product. In een template, zodat de foto's
+                      pas laden als iemand de kaart kiest.
+                    {%- endcomment -%}
+                    {%- assign t_mf = tp.metafields.custom -%}
+                    {%- assign t_belofte = t_mf.hero_promise.value | default: t_mf.subtitle.value -%}
+                    <template data-ws-tier-pagina data-titel="{{ tp.title | escape }}" data-belofte="{{ t_belofte | escape }}">
+                      <ul>
+                        {%- for media in tp.media limit: 10 -%}
+                          <li>{{ media.preview_image | image_url: width: 1200 | image_tag: class: 'ws-held', alt: media.alt, loading: 'lazy', sizes: '(max-width: 749px) 92vw, 46vw', widths: '400,600,900,1200' }}</li>
+                        {%- endfor -%}
+                      </ul>
+                      <div>
+                        {%- for media in tp.media limit: 10 -%}
+                          <figure{% if forloop.first %} class="ws-on"{% endif %}>
+                            <button type="button" class="ws-vk" data-ws-dia="{{ forloop.index0 }}" aria-label="{{ media.alt | default: tp.title | escape }}">
+                              <img src="{{ media.preview_image | image_url: width: 300 }}" alt="{{ media.alt | escape }}" loading="lazy" width="300" height="300">
+                            </button>
+                          </figure>
+                        {%- endfor -%}
+                      </div>
+                    </template>
+                  {%- endunless -%}
                   {%- if tiers_n > 0 and th == tier_top and s.tier_badge != blank -%}<span class="ws-tier-badge">{{ s.tier_badge }}</span>{%- endif -%}
                   <input type="radio" name="ws-tier-{{ section.id }}" value="{% unless basis %}{{ tv.id }}{% endunless %}"{% if basis %} checked{% endif %}
                          data-nu="{{ t_nu | strip | escape }}" data-was="{{ t_was | strip | escape }}"
@@ -907,6 +932,39 @@
                 if (kl) kl.innerHTML = r.getAttribute('data-klarna');
                 var nm = document.querySelector('[data-ws-sticky] .ws-sticky-nm');
                 if (nm) nm.textContent = r.getAttribute('data-naam');
+                pagina(r);
+              }
+              // De pagina volgt de keuze: foto's, naam en belofte van het gekozen
+              // product; terug naar het product zelf zet alles terug.
+              function tm(t) {
+                var d = document.createElement('div'); d.textContent = t || '';
+                return d.innerHTML.replace(/™/g, '<sup class="ws-tm">™</sup>');
+              }
+              function pagina(r) {
+                var baan = document.getElementById('ws-baan-{{ section.id }}');
+                var strook = document.getElementById('ws-th-{{ section.id }}');
+                var titel = document.querySelector('#shopify-section-{{ section.id }} [data-ws-titel]');
+                var belofte = document.querySelector('#shopify-section-{{ section.id }} [data-ws-belofte]');
+                [baan, strook, titel, belofte].forEach(function (el) {
+                  if (el && el._wsOrig === undefined) el._wsOrig = el.innerHTML;
+                });
+                var tpl = r.value ? r.closest('label').querySelector('template[data-ws-tier-pagina]') : null;
+                var inhoud = tpl ? tpl.content : null;
+                var lijst = inhoud ? inhoud.querySelector('ul') : null;
+                var minis = inhoud ? inhoud.querySelector('div') : null;
+                if (baan) {
+                  baan.innerHTML = (lijst && lijst.children.length) ? lijst.innerHTML : baan._wsOrig;
+                  baan.scrollLeft = 0;
+                }
+                if (strook) strook.innerHTML = (minis && minis.children.length > 1) ? minis.innerHTML : strook._wsOrig;
+                if (titel) titel.innerHTML = tpl ? tm(tpl.getAttribute('data-titel')) : titel._wsOrig;
+                if (belofte) {
+                  var bt = tpl ? tpl.getAttribute('data-belofte') : '';
+                  belofte.innerHTML = bt ? tm(bt) : belofte._wsOrig;
+                }
+                var kenmerk = document.querySelector('#shopify-section-{{ section.id }} .ws-tg');
+                if (kenmerk) kenmerk.classList.toggle('ws-weg', !!tpl);
+                blok._wsGewisseld = !!tpl;
               }
               blok.addEventListener('change', function (e) {
                 if (e.target && e.target.name === 'ws-tier-{{ section.id }}') kies(e.target);
@@ -917,6 +975,7 @@
               if (opties) opties.addEventListener('change', function () {
                 var eerste = blok.querySelector('input[type="radio"][value=""]');
                 if (eerste) eerste.checked = true;
+                if (eerste && blok._wsGewisseld) pagina(eerste);
                 var id = formId();
                 if (id) id.removeAttribute('data-ws-basis');
               });
