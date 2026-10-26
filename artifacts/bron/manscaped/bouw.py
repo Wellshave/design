@@ -30,9 +30,12 @@ BANNERS=[  # beeld, regel 1, regel 2 in brons, tekst, licht/donker, tekst links/
  ('ban-herfst','De Herfst','Sale','Tot 40% korting op geselecteerde apparaten. Tot en met 30 oktober.','donker','links'),
  ('ban-kammen','Vier kammen.','Eén lijn.','Van 1,5 tot 4,5 mm: jij kiest hoe kort, de Groom Guard doet de rest.','donker','rechts'),
 ]
-TECH=[('t-messen','SkinSafe-messen','Afgeronde messen die een verkeerde hoek vergeven, zodat je minder snel een sneetje krijgt.'),
-      ('t-water','Waterdicht','De Groom Guard is IPX7: gewoon mee onder de douche.'),
-      ('t-led','LED-licht','Je ziet elk haartje, ook in een donkere badkamer.')]
+TECH=[  # innovatie, uitleg uit de productomschrijvingen in Shopify, met het product erbij getagd
+ ('t-messen','SkinSafe-messen','Keramische mesjes die je huid nooit blootleggen, ook niet in je gevoelige zones. Trimmen zonder de sneetjes en ingegroeide haren van een gewoon mesje.','p-ggpro','Groom Guard™ PRO',59.95),
+ ('t-water','Waterdicht tot IPX7','Gewoon mee onder de douche. IPX7 betekent dat hij zelfs tegen kort onderdompelen kan.','p-gg','Groom Guard™',49.95),
+ ('t-led','Geïntegreerd LED-licht','Een lampje bij het mes laat elk haartje zien, voor precisie op plekken die je zelf slecht ziet.','p-flex','Flex Guard™ 3-in-1',59.95),
+ ('t-7d','Flexibele 7D-scheerkop','Zeven koppen die los bewegen en iedere contour van je hoofd volgen. Snel en gelijkmatig glad.','p-hsd','Head Shaver Deluxe',54.95),
+]
 PRODUCTEN=[
  ('p-flex','Flex Guard™ 3-in-1','Lichaam en schaamstreek',59.95,85.65),
  ('p-gg','Groom Guard™','Bodygroomer',49.95,71.35),
@@ -65,8 +68,11 @@ s+=('<section class="sec creme midden"><h2 class="serif">Verzorgd <span class="b
     '<div class="schuif"><div class="plekken" tabindex="0" aria-label="Plekken, schuif opzij">'+''.join(f'<a class="plek" href="#"><span class="pbeeld im-{k}"></span><b>{n}</b><span class="nu">Shop nu {PIJL}</span></a>' for k,n in PLEKKEN)+'</div>'
     +VOORTGANG+'</div></section>')
 s+=''.join(f'<section class="ban {lt} {kant} im-{k}"><div class="ban-tekst"><span class="merkteken" aria-hidden="true"></span><h3 class="ban-kop">{a} <span class="b">{b}</span></h3><p>{p}</p><span class="knop">Shop nu</span></div></section>' for k,a,b,p,lt,kant in BANNERS)
-s+=('<section class="sec creme midden"><span class="oog brons">Gemaakt voor jou</span><h2 class="serif">Slimme techniek, <span class="b">simpel in gebruik.</span></h2><div class="tech">'
-    +''.join(f'<div class="t{" midden-t" if i==1 else ""}"><span class="tbeeld im-{k}"></span><b>{t}</b><p>{p}</p></div>' for i,(k,t,p) in enumerate(TECH))+'</div></section>')
+s+=('<section class="sec creme midden"><span class="oog brons">Innovatie</span><h2 class="serif">Anders dan de rest. <span class="b">Dit is waarom.</span></h2>'
+    '<div class="schuif"><div class="plekken tech" tabindex="0" aria-label="Innovaties, schuif opzij">'+''.join(
+    f'<div class="t"><div class="tbeeld im-{k}"><a class="tag" href="#"><span class="tag-foto im-{pk}" aria-hidden="true"></span><span class="tag-t"><b>{pn}</b><small>{eur(pp)}</small></span>'
+    f'<span class="tag-plus" aria-label="In winkelwagen">+</span></a></div><b class="t-kop">{t}</b><p>{p}</p></div>' for k,t,p,pk,pn,pp in TECH)
+    +'</div>'+VOORTGANG+'</div></section>')
 rij=''.join(f'<span class="lg lg-{k}" style="--h:{h}" role="img" aria-label="{n}"></span>' for k,n,h in LOGO)
 s+=f'<section class="pers"><div class="pers-rij">{rij}</div></section>'
 s+=('<section class="sec creme midden"><span class="oog brons">Onze bestsellers</span><h2 class="serif">Alles wat je <span class="b">nodig hebt.</span></h2>'

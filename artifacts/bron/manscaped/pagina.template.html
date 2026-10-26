@@ -295,6 +295,39 @@ body{margin:0;background:var(--g);color:var(--i);font:400 15px/1.6 "Montserrat",
   .voortgang{max-width:none;margin-top:20px}
   .rij-kaarten .kaart{flex-basis:62%}
 }
+
+/* innovatie: grote kaart in het midden, de rest kleiner en stiller; elk beeld tagt het product */
+.tech{align-items:center;gap:28px;padding-left:calc(50% - 27%);padding-right:calc(50% - 27%);scroll-padding-left:0;scroll-snap-type:x mandatory}
+.tech .t{flex:0 0 54%;scroll-snap-align:center;background:none;padding:0;text-align:center;align-items:center;opacity:.45;transform:scale(.78);transition:transform .45s ease,opacity .45s ease}
+.tech .t.actief{opacity:1;transform:none}
+.tech .t:nth-child(n){background:none;color:inherit}
+.tbeeld{position:relative;width:100%;aspect-ratio:16/9;border-radius:18px;background-size:cover;background-position:center;background-color:#111}
+.tag{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.96);border-radius:12px;padding:6px 6px 6px 6px;box-shadow:0 10px 30px rgba(0,0,0,.25);white-space:nowrap;text-align:left}
+.tag-foto{width:40px;height:40px;border-radius:8px;background-color:#F2F2F2;background-size:cover;background-position:center;flex:none}
+.tag-t{display:flex;flex-direction:column;line-height:1.25;padding-right:6px}
+.tag-t b{font-size:12px;font-weight:600;color:#111}
+.tag-t small{font-size:11px;color:#6A635A}
+.tag-plus{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#F5D18A,#BC813E);color:#111;font-size:17px;font-weight:500;line-height:1;transition:transform .2s ease}
+.tag:hover .tag-plus{transform:rotate(90deg)}
+.t-kop{display:block;margin-top:22px;font-family:"Inter Tight",sans-serif;font-size:26px;font-weight:500;letter-spacing:-.025em}
+.tech .t p{margin:8px auto 0;font-size:13px;line-height:1.6;color:var(--mid);max-width:34em}
+@container (max-width:749px){
+  .tech{gap:10px;padding-left:9%;padding-right:9%}
+  .tech .t{flex-basis:82%;transform:scale(.92)}
+  .tbeeld{aspect-ratio:4/3;border-radius:14px}
+  .tag{bottom:10px;gap:8px;padding:5px;border-radius:10px}
+  .tag-foto{width:32px;height:32px}
+  .tag-t b{font-size:11px}.tag-t small{font-size:10px}
+  .tag-plus{width:26px;height:26px;font-size:15px}
+  .t-kop{font-size:20px;margin-top:14px}
+  .tech .t p{font-size:12px}
+}
+
+.plekken.tech{display:flex;max-width:none;width:auto;align-self:stretch;margin:30px -56px 0;grid-template-columns:none}
+.tech .t:nth-child(n) p{color:var(--mid)}
+.tech .tag-t b{margin:0;font-size:12px}
+.tech .t > b.t-kop{margin:22px 0 0}
+@container (max-width:749px){.plekken.tech{margin:22px -16px 0}.tech .t > b.t-kop{margin-top:14px}.tech .tag-t b{font-size:11px}}
 </style>
 
 <div class="schil">
@@ -324,6 +357,11 @@ body{margin:0;background:var(--g);color:var(--i);font:400 15px/1.6 "Montserrat",
       <li><b>Afgeronde vlakken</b> (12, 18, 26 px) in plaats van harde rechthoeken: de hero, de banners en het donkere blok liggen als platen binnen een rand.</li>
       <li><b>Het S-teken</b> als watermerk in de banners en het donkere blok.</li>
       <li>Kortingslabels als gouden pil, de geruststrook met ronde icoonvlakken en haarlijnen, en de techniek als drie kaarten in wit, carbon en zand.</li>
+    </ul></div>
+    <div class="noot"><h2>Innovatie, met het product erbij</h2><ul>
+      <li>"Anders dan de rest. Dit is waarom." Vier innovaties als schuifrij: de kaart in het midden is groot, de rest kleiner en stiller, zoals in je voorbeeld.</li>
+      <li>Op elk beeld staat het product getagd met foto, naam, prijs en een gouden plusje voor de winkelwagen: SkinSafe-messen bij de Groom Guard PRO, IPX7 bij de Groom Guard, LED-licht bij de Flex Guard, de 7D-scheerkop bij de Head Shaver Deluxe.</li>
+      <li>De uitleg komt uit de productomschrijvingen in Shopify. Eén let op: de foto's bij SkinSafe en LED tonen de Groom Guard; de LED-tag staat bij de Flex Guard omdat het LED-licht in diens omschrijving staat.</li>
     </ul></div>
     <div class="noot"><h2>Glad tot in de kleinste hoek</h2><ul>
       <li>Nu zes producten voor lichaam en schaamstreek in een schuifrij: Groom Guard PRO, Flex Guard, Groom Guard, Dual Groomer, Shave Package Ultimate en Shave Package 3.0. Prijzen live uit Shopify.</li>
@@ -366,7 +404,10 @@ body{margin:0;background:var(--g);color:var(--i);font:400 15px/1.6 "Montserrat",
     function bij(){var zicht=r.clientWidth/r.scrollWidth,max=r.scrollWidth-r.clientWidth,p=max>0?r.scrollLeft/max:0;
       f.style.width=(zicht*100)+'%';f.style.left=(p*(1-zicht)*100)+'%';}
     bar.addEventListener('click',function(e){var b=bar.getBoundingClientRect();r.scrollTo({left:(e.clientX-b.left)/b.width*(r.scrollWidth-r.clientWidth),behavior:'smooth'})});
-    r.addEventListener('scroll',bij,{passive:true});window.addEventListener('resize',bij);bij();
+    function actief(){if(!r.classList.contains('tech'))return;var m=r.getBoundingClientRect(),c=m.left+m.width/2,best=null,d=1e9;
+      [].forEach.call(r.children,function(k){var b=k.getBoundingClientRect(),x=Math.abs(b.left+b.width/2-c);if(x<d){d=x;best=k}});
+      [].forEach.call(r.children,function(k){k.classList.toggle('actief',k===best)});}
+    r.addEventListener('scroll',function(){bij();actief()},{passive:true});window.addEventListener('resize',function(){bij();actief()});bij();actief();
   });
 })();
 </script>
