@@ -2521,17 +2521,28 @@ thema las ze. De back-up staat in `backups/app-resten-2026-10-26.json`.
 
 ## In de doos: nieuw ontwerp
 
-`ws7-pdp-doos` is opnieuw opgebouwd. De kop staat over de hele breedte. Links
-staat de doos (`included_box_image`) als grote tegel met een witte kern, zodat
-foto's met een witte achtergrond er naadloos in opgaan. Op de tegel staat een
-gouden label met het aantal onderdelen (instelling `teller`, `[n]` wordt het
-aantal; vertaald in en, de en fr). Rechts staat elk onderdeel (`included_box`)
-als witte kaart met een grote foto, de naam en maximaal drie regels uitleg.
+`ws7-pdp-doos` is kaal, zoals bij Balzac. Bovenaan staat de kop, gecentreerd.
+Daaronder staan alleen de losse onderdelen (`included_box`): een grote foto
+direct op de zandkleurige achtergrond, de naam en maximaal drie regels uitleg,
+alles gecentreerd. De doosfoto (`included_box_image`) en het label met het aantal
+onderdelen zijn er weer uit; de instelling `teller` is verwijderd uit de sectie
+en uit product.json.
 
-* Drie kolommen als het aantal deelbaar is door drie of als er zeven of meer
-  onderdelen zijn, anders twee. Bij twee kolommen en een oneven aantal wordt de
-  laatste kaart breed.
-* De tegel is even hoog als de kaarten ernaast.
-* Mobiel: kop, tegel, en de kaarten als rij om door te vegen, zodat de sectie
-  kort blijft.
-* De kerncijfers staan, als ze er zijn, onder de kaarten.
+* Vier kolommen, of drie als de rijen dan voller zijn (bij 3, 5, 6 en 9
+  onderdelen). Een onvolle laatste rij staat in het midden. Tussen 900 en
+  1099 px drie kolommen, mobiel twee.
+* De achtergrond blijft zand: foto's met een net-niet-witte achtergrond vallen
+  daar weg, op wit zie je die randjes.
+* De kerncijfers staan, als ze er zijn, in een witte balk onder de onderdelen.
+
+## Witte secties
+
+`.ws7p-wit` (twee stappen, vragen) heeft nu een dubbele klasse:
+`.ws7.ws7p-wit{background:#fff}`. ws7.css van de homepage laadt later en zette
+`.ws7` op zand, waardoor de zandkleurige kaarten van de twee stappen wegvielen.
+
+## Secties die alleen verschijnen als de inhoud er is
+
+"Twee stappen" (`pdp_stappen`) is alleen ingevuld voor de Groom Guard PRO; de
+kerncijfers (`kerncijfers`) voor de Groom Guard en de Groom Guard PRO. Bij alle
+andere producten blijven die secties weg.
