@@ -74,12 +74,25 @@
 .prijs s{color:var(--licht);font-size:11px}
 
 .midden .knop{margin-top:18px}
-.plekken{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;width:100%;max-width:1040px;margin-top:30px;text-align:left}
-.plek{background:#fff;border-radius:18px;padding:8px 8px 14px;box-shadow:0 14px 34px rgba(17,17,17,.06)}
-.pbeeld{display:block;aspect-ratio:1;border-radius:12px;background-size:cover;background-position:center 30%;background-color:var(--zand)}
-.plek b{display:block;margin:10px 6px 0;font-size:13px;font-weight:800}
-.nu{display:inline-flex;align-items:center;gap:3px;margin:0 6px;font-size:10.5px;font-weight:600;color:#9A6A2E}
-.nu svg{width:11px;height:11px}
+/* plekken: schuifbare rij, de volgende kaart piekt in beeld */
+.schuif{width:100%;margin-top:30px}
+.plekken{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;margin:0 -56px;padding:0 56px;scroll-padding-left:56px;text-align:left}
+.plekken::-webkit-scrollbar{display:none}
+.plek{flex:0 0 calc((100% - 36px) / 3.3);scroll-snap-align:start;display:flex;flex-direction:column}
+.pbeeld{display:block;aspect-ratio:1;border-radius:18px;background-size:cover;background-position:center 30%;background-color:var(--zand2);transition:transform .5s ease}
+.plek:hover .pbeeld{transform:scale(.985)}
+.plek b{display:block;margin-top:16px;font-size:24px;font-weight:600;letter-spacing:-.015em}
+.nu{display:inline-flex;align-items:center;gap:6px;margin-top:6px;font-size:12px;font-weight:700;color:var(--ink)}
+.nu svg{width:14px;height:14px;color:#B0742A;transition:transform .2s ease}
+.plek:hover .nu svg{transform:translateX(3px)}
+.sk{display:flex;align-items:center;gap:10px;width:max-content;margin:26px auto 0;background:var(--goud);border-radius:100px;padding:5px 8px}
+.sk button{display:grid;place-items:center;width:26px;height:26px;border:0;border-radius:50%;background:none;color:#1A1408;cursor:pointer}
+.sk button:disabled{opacity:.35;cursor:default}
+.sk button:focus-visible{outline:2px solid #1A1408;outline-offset:1px}
+.sk svg{width:15px;height:15px;stroke-width:2.2}
+.sk-stippen{display:flex;gap:5px}
+.sk-stippen i{width:5px;height:5px;border-radius:50%;background:rgba(26,20,8,.35);transition:width .2s ease}
+.sk-stippen i.aan{width:14px;border-radius:4px;background:#1A1408}
 
 /* banners: afgeronde platen binnen de rand, met het S-teken als watermerk */
 .ban{position:relative;height:420px;margin:72px 16px 0;border-radius:26px;overflow:hidden;background-size:cover;background-position:center;display:flex;align-items:center;padding:0 110px}
@@ -166,9 +179,12 @@
   .kaart{border-radius:12px;padding:6px 6px 12px}
   .tegel{border-radius:8px}
   .kaart.groot b{font-size:12.5px}
-  .plekken{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:22px}
-  .plek{border-radius:12px;padding:6px 6px 12px}
-  .pbeeld{border-radius:8px}
+  .schuif{margin-top:22px}
+  .plekken{gap:10px;margin:0 -16px;padding:0 16px;scroll-padding-left:16px}
+  .plek{flex-basis:72%}
+  .pbeeld{border-radius:12px}
+  .plek b{font-size:18px;margin-top:10px}
+  .sk{margin-top:18px}
   .ban{height:auto;min-height:320px;margin:48px 10px 0;border-radius:18px;padding:28px 20px;align-items:flex-end;background-size:auto 100%}
   .ban + .ban{margin-top:8px}
   .ban.licht{background-position:72% center}

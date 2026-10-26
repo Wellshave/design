@@ -16,7 +16,7 @@ IC={
 }
 # ── live uit Shopify, 26 oktober 2026 ──
 UITGELICHT=[('p-ggpro','Groom Guard™ PRO','Bodygroomer met foil shaver',59.95,85.65),('s-ult','Shave Package Ultimate™','Groom Guard PRO, neustrimmer en twee tassen',89.95,142.80)]
-PLEKKEN=[('c-sets','Sets'),('c-lichaam','Lichaam'),('c-hoofd','Hoofd'),('c-neus','Neus &amp; oren')]
+PLEKKEN=[('c-lichaam','Lichaam'),('c-gezicht','Gezicht &amp; baard'),('c-hoofd','Hoofd'),('c-neus','Neus &amp; oren'),('c-sets','Sets')]
 BANNERS=[  # beeld, regel 1, regel 2 in brons, tekst, licht/donker, tekst links/rechts
  ('ban-lading','Groom Guard™','Bodygroomer','SkinSafe-messen, vier opzetkammen en een oplaadstandaard.','licht','links'),
  ('ban-herfst','De Herfst','Sale','Tot 40% korting op geselecteerde apparaten. Tot en met 30 oktober.','donker','links'),
@@ -54,7 +54,9 @@ s+=zeker()
 s+=('<section class="sec creme"><h2 class="serif">Glad tot in <span class="b">de kleinste hoek.</span></h2><p class="sub">Gemaakt voor je gevoeligste plekken.</p>'
     '<div class="duo">'+''.join(kaart(*p,groot=True) for p in UITGELICHT)+'</div></section>')
 s+=('<section class="sec creme midden"><h2 class="serif">Verzorgd <span class="b">van top tot teen.</span></h2><a class="knop" href="#">Shop alles</a>'
-    '<div class="plekken">'+''.join(f'<a class="plek" href="#"><span class="pbeeld im-{k}"></span><b>{n}</b><span class="nu">Shop nu {KLEIN}</span></a>' for k,n in PLEKKEN)+'</div></section>')
+    '<div class="schuif"><div class="plekken" tabindex="0" aria-label="Plekken, schuif opzij">'+''.join(f'<a class="plek" href="#"><span class="pbeeld im-{k}"></span><b>{n}</b><span class="nu">Shop nu {PIJL}</span></a>' for k,n in PLEKKEN)+'</div>'
+    '<div class="sk"><button type="button" class="sk-vorige" aria-label="Vorige"><svg viewBox="0 0 16 16"><path d="M10 3.5 5.5 8l4.5 4.5"/></svg></button><span class="sk-stippen" aria-hidden="true"></span>'
+    '<button type="button" class="sk-volgende" aria-label="Volgende"><svg viewBox="0 0 16 16"><path d="M6 3.5 10.5 8 6 12.5"/></svg></button></div></div></section>')
 s+=''.join(f'<section class="ban {lt} {kant} im-{k}"><div class="ban-tekst"><span class="merkteken" aria-hidden="true"></span><h3 class="ban-kop">{a} <span class="b">{b}</span></h3><p>{p}</p><span class="knop">Shop nu</span></div></section>' for k,a,b,p,lt,kant in BANNERS)
 s+=('<section class="sec creme midden"><span class="oog brons">Gemaakt voor jou</span><h2 class="serif">Slimme techniek, <span class="b">simpel in gebruik.</span></h2><div class="tech">'
     +''.join(f'<div class="t{" midden-t" if i==1 else ""}"><span class="tbeeld im-{k}"></span><b>{t}</b><p>{p}</p></div>' for i,(k,t,p) in enumerate(TECH))+'</div></section>')
@@ -73,7 +75,7 @@ s+=('<footer class="voet">'+zeker()+'<div class="voet-raster">'
     '<div class="nieuws"><h4>Als eerste nieuwe producten</h4><div class="veld"><span>jouw@e-mail.nl</span></div><span class="knop klein">Aanmelden</span><p>10% korting op je eerste bestelling.</p></div></div>'
     '<div class="voet-onder"><span class="logo wit" aria-hidden="true"></span><span>© 2026 Wellshave · Helmond</span></div></footer>')
 
-beeld={**{k:img2[k] for k in ['p-flex','p-gg','p-ggpro','p-adv','s-ult','s-sp3','c-lichaam','c-hoofd','c-neus']},**{k:img3[k] for k in ['p-ult4','p-gent']},**img4}
+beeld={**{k:img2[k] for k in ['p-flex','p-gg','p-ggpro','p-adv','s-ult','s-sp3','c-lichaam','c-gezicht','c-hoofd','c-neus']},**{k:img3[k] for k in ['p-ult4','p-gent']},**img4}
 css_beeld=''.join(f'.im-{k}{{background-image:url({v})}}\n' for k,v in beeld.items())
 css_logo=''.join(f'.lg-{k}{{aspect-ratio:{L[k]["asp"]};background-image:url({L[k]["src"]})}}\n' for k,_,_ in LOGO)
 t=open(f'{B}/pagina.template.html',encoding='utf-8').read()
