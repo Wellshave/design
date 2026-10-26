@@ -138,6 +138,13 @@
         "info": "In volgorde van voorkeur, goedkoop in inkoop eerst. Alleen gratis cadeauproducten (€0). Met een reserve tonen badge en productpagina de naam van de reserve."
       },
       {
+        "type": "product_list",
+        "id": "gift_1_dubbel",
+        "label": "Als het cadeau al in de bestelling zit",
+        "limit": 3,
+        "info": "Zit het cadeau al in een pakket in de winkelwagen (metaveld Zit in het pakket), dan komt eerst dit vervangcadeau en anders een reserve. Alleen gratis cadeauproducten (€0)."
+      },
+      {
         "type": "header",
         "content": "Gift 2"
       },
@@ -173,6 +180,13 @@
         "label": "Reservecadeaus",
         "limit": 4,
         "info": "In volgorde van voorkeur, goedkoop in inkoop eerst. Alleen gratis cadeauproducten (€0). Een reserve die al cadeau 1 is, wordt overgeslagen."
+      },
+      {
+        "type": "product_list",
+        "id": "gift_2_dubbel",
+        "label": "Als het cadeau al in de bestelling zit",
+        "limit": 3,
+        "info": "Zit het cadeau al in een pakket in de winkelwagen (metaveld Zit in het pakket), dan komt eerst dit vervangcadeau en anders een reserve. Alleen gratis cadeauproducten (€0)."
       },
       {
         "type": "header",
@@ -262,6 +276,13 @@
         "type": "text",
         "id": "cart_benefit_3_label",
         "label": "Benefit 3 - label"
+      },
+      {
+        "type": "text",
+        "id": "cart_trustpilot_label",
+        "label": "Trustpilot-regel",
+        "default": "4,5 / 5 op Trustpilot",
+        "info": "Staat onderaan de winkelwagen met een groene ster, naast benefit 2 en benefit 1. Benefit 3 en de iconen hierboven gebruikt de winkelwagen v7 niet meer."
       },
       {
         "type": "header",

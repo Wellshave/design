@@ -11,38 +11,64 @@
   tweede is nodig omdat de gratis cadeauproducten (gift-…) zelf geen voorraad
   bijhouden: zonder die koppeling stonden ze altijd op "op voorraad".
 
+  Zit het cadeau al in de bestelling (parameter al: de handles van wat er al
+  in zit, elk tussen ‹ en ›, uit custom.bevat van de pakketten), dan komt
+  eerst het vervangcadeau (gift_N_dubbel) en anders een reserve. Een cadeau
+  dat al in de bestelling zit, geven we nooit nog eens.
+
   De winkelwagen (cart-rewards-bar) en de productpagina (ws-pdp-koopvak)
   gebruiken allebei deze snippet, zodat wat je ziet en wat er in de
   winkelwagen komt nooit uit elkaar lopen.
 
   Gebruik:
-    {%- capture c1 %}{% render 'ws-cadeau', nr: 1 %}{% endcapture -%}
-    {%- capture c2 %}{% render 'ws-cadeau', nr: 2, niet: c1 %}{% endcapture -%}
+    {%- capture c1 %}{% render 'ws-cadeau', nr: 1, al: al %}{% endcapture -%}
+    {%- capture c2 %}{% render 'ws-cadeau', nr: 2, niet: c1, al: al %}{% endcapture -%}
   niet: een handle die overgeslagen wordt (cadeau 2 is nooit hetzelfde als 1).
 {%- endcomment -%}
 {%- liquid
   if nr == 2
     assign hoofd = settings.gift_2_product
     assign reserves = settings.gift_2_reserve
+    assign dubbels = settings.gift_2_dubbel
   else
     assign hoofd = settings.gift_1_product
     assign reserves = settings.gift_1_reserve
+    assign dubbels = settings.gift_1_dubbel
   endif
   assign overslaan = niet | strip
+  assign al_in = al | default: ''
   assign gekozen = ''
+  assign dubbel_nodig = false
 
   if hoofd != blank
     assign cv = hoofd.selected_or_first_available_variant
     if cv.available and hoofd.handle != overslaan
       assign bron = hoofd.metafields.custom.cadeau_voorraad.value
       if bron == blank or bron.available
-        assign gekozen = hoofd.handle
+        assign echt = bron.handle | default: hoofd.handle
+        assign echt_sl = '‹' | append: echt | append: '›'
+        if al_in contains echt_sl
+          assign dubbel_nodig = true
+        else
+          assign gekozen = hoofd.handle
+        endif
       endif
     endif
   endif
 
-  if gekozen == ''
-    for c in reserves
+  for ronde in (1..2)
+    if gekozen != ''
+      break
+    endif
+    if ronde == 1
+      unless dubbel_nodig
+        continue
+      endunless
+      assign lijst = dubbels
+    else
+      assign lijst = reserves
+    endif
+    for c in lijst
       assign cv = c.selected_or_first_available_variant
       unless cv.available
         continue
@@ -54,10 +80,15 @@
       if bron != blank and bron.available == false
         continue
       endif
+      assign echt = bron.handle | default: c.handle
+      assign echt_sl = '‹' | append: echt | append: '›'
+      if al_in contains echt_sl
+        continue
+      endif
       assign gekozen = c.handle
       break
     endfor
-  endif
+  endfor
 
   echo gekozen
 -%}

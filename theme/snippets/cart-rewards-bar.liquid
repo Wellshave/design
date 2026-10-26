@@ -1,15 +1,23 @@
 {% comment %}
   Cart rewards progress bar — free shipping + up to 2 gift thresholds.
-  Same visual style as the original single-tier bar; badges are spaced evenly (equal segments),
-  while the thumb fills each segment by the real € range of that tier.
+  Badges are spaced evenly (equal segments) and sit at the END of their segment, so the last
+  reward is the end of the bar; the thumb fills each segment by the real € range of that tier.
+  Stijl v7: dunne gouden lijn, punten met een vinkje als ze binnen zijn.
   Gifts auto add/remove via CartDrawer.syncGifts in base.js. "Free" via automatic discount at go-live.
 {% endcomment %}
 {% liquid
   # Threshold base = subtotal of real items, excluding gift lines.
   assign cart_total = 0
+  # Wat er al in de bestelling zit: de producten zelf en wat er in hun pakket
+  # zit (custom.bevat). Een cadeau dat hierin staat, geven we niet nog eens.
+  assign al_in = ''
   for item in cart.items
     unless item.properties._gift_tier
       assign cart_total = cart_total | plus: item.original_line_price
+      assign al_in = al_in | append: '‹' | append: item.product.handle | append: '›'
+      for bp in item.product.metafields.custom.bevat.value
+        assign al_in = al_in | append: '‹' | append: bp.handle | append: '›'
+      endfor
     endunless
   endfor
 
@@ -27,11 +35,11 @@
   assign g2_on = false
   if settings.enable_gift_rewards
     capture g1_handle
-      render 'ws-cadeau', nr: 1
+      render 'ws-cadeau', nr: 1, al: al_in
     endcapture
     assign g1_handle = g1_handle | strip
     capture g2_handle
-      render 'ws-cadeau', nr: 2, niet: g1_handle
+      render 'ws-cadeau', nr: 2, niet: g1_handle, al: al_in
     endcapture
     assign g2_handle = g2_handle | strip
 
@@ -79,7 +87,7 @@
     assign seg = 100.0 | divided_by: tier_count
   endif
 
-  # Badge index among active tiers (for even left position = center of its segment).
+  # Badge index among active tiers (left position = end of its segment).
   assign idx = 0
   assign si = -1
   assign g1i = -1
@@ -98,14 +106,14 @@
   endif
 
   # Thumb interpolates between badge positions, so it reaches a badge exactly when
-  # that tier's threshold is hit (badges sit at segment centers).
+  # that tier's threshold is hit (badges sit at segment ends).
   assign thumb = 100
   assign prev_cents = 0
   assign prev_pos = 0
   assign found = false
   for t in thr_arr
     assign tc = t | plus: 0
-    assign cur_pos = forloop.index0 | plus: 0.5 | times: seg
+    assign cur_pos = forloop.index0 | plus: 1 | times: seg
     unless found
       if cart_total < tc
         assign d = tc | minus: prev_cents
@@ -151,12 +159,15 @@
     assign next_diff = g2_cents | minus: cart_total
     assign next_reward = g2_product.title
   endif
-  assign next_diff_money = next_diff | money
+  capture next_diff_money
+    render 'ws-euro', bedrag: next_diff
+  endcapture
+  assign next_diff_money = next_diff_money | strip
 %}
 
 {%- if show_shipping or g1_on or g2_on -%}
   <div class="cart-drawer__achivements" data-rewards data-cart-total="{{ cart_total }}">
-    <p class="cart-drawer__achivements-label body-lg">
+    <p class="cart-drawer__achivements-label">
       {%- if next_reward != blank -%}
         {{- 'cart_drawer.reward_progress_html' | t: value: next_diff_money, reward: next_reward -}}
       {%- else -%}
@@ -164,48 +175,54 @@
       {%- endif -%}
     </p>
 
+    {%- liquid
+      assign volgende = ''
+      if show_shipping and cart_total < shipping_cents
+        assign volgende = 's'
+      elsif g1_on and cart_total < g1_cents
+        assign volgende = 'g1'
+      elsif g2_on and cart_total < g2_cents
+        assign volgende = 'g2'
+      endif
+    -%}
+    {%- capture vinkje -%}<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m3.5 8.5 3 3 6-7"/></svg>{%- endcapture -%}
+    {%- capture cadeau_icoon -%}<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 6.5h11V9h-11zM3.5 9v4.5h9V9M8 6.5v7M8 6.5C6 6.5 4.5 3 6.6 3 8 3 8 6.5 8 6.5zm0 0c2 0 3.5-3.5 1.4-3.5C8 3 8 6.5 8 6.5z"/></svg>{%- endcapture -%}
+    {%- capture bus_icoon -%}<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 4.5h8v6h-8zM9.5 6.5h3l2 2.2v1.8h-5"/><circle cx="4.5" cy="11.8" r="1.2"/><circle cx="11.5" cy="11.8" r="1.2"/></svg>{%- endcapture -%}
+
     <div class="cart-drawer__progress-bar">
       <span class="cart-drawer__progress-thumb" data-progress="rewards" style="width: {{ thumb }}%;"></span>
 
+      <div class="cart-drawer__punten" data-rewards-punten>
+        {%- if show_shipping -%}
+          {%- assign s_pos = si | plus: 1 | times: seg -%}
+          <span class="cart-drawer__punt{% if cart_total >= shipping_cents %} is-binnen{% elsif volgende == 's' %} is-volgende{% endif %}" style="left: {{ s_pos }}%;">
+            {%- if cart_total >= shipping_cents -%}{{ vinkje }}{%- else -%}{{ bus_icoon }}{%- endif -%}
+          </span>
+        {%- endif -%}
+        {%- if g1_on -%}
+          {%- assign g1_pos = g1i | plus: 1 | times: seg -%}
+          <span class="cart-drawer__punt{% if cart_total >= g1_cents %} is-binnen{% elsif volgende == 'g1' %} is-volgende{% endif %}" style="left: {{ g1_pos }}%;">
+            {%- if cart_total >= g1_cents -%}{{ vinkje }}{%- else -%}{{ cadeau_icoon }}{%- endif -%}
+          </span>
+        {%- endif -%}
+        {%- if g2_on -%}
+          {%- assign g2_pos = g2i | plus: 1 | times: seg -%}
+          <span class="cart-drawer__punt{% if cart_total >= g2_cents %} is-binnen{% elsif volgende == 'g2' %} is-volgende{% endif %}" style="left: {{ g2_pos }}%;">
+            {%- if cart_total >= g2_cents -%}{{ vinkje }}{%- else -%}{{ cadeau_icoon }}{%- endif -%}
+          </span>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="cart-drawer__mijlpalen" data-rewards-mijlpalen>
       {%- if show_shipping -%}
-        {%- assign s_pos = si | plus: 0.5 | times: seg -%}
-        <div class="cart-drawer__progress-badge" style="left: {{ s_pos }}%;">
-          <div class="cart-drawer__progress-icon">
-            <img src="{{ 'icon-cart-delivery.png' | asset_url }}" width="100" height="100">
-          </div>
-          <p class="cart-drawer__progress-price body-sm">{{ shipping_cents | money }}</p>
-          <p class="cart-drawer__progress-label">{{ 'cart_drawer.shipping_badge_label' | t }}</p>
-        </div>
+        <p class="cart-drawer__mijlpaal">{%- capture geld -%}{% render 'ws-euro', bedrag: shipping_cents %}{%- endcapture -%}<b>{{ geld | remove: ',00' }}</b>{{ 'cart_drawer.shipping_badge_label' | t }}</p>
       {%- endif -%}
-
       {%- if g1_on -%}
-        {%- assign g1_pos = g1i | plus: 0.5 | times: seg -%}
-        <div class="cart-drawer__progress-badge" style="left: {{ g1_pos }}%;">
-          <div class="cart-drawer__progress-icon">
-            {%- if settings.gift_1_icon != blank and g1_reserve == false -%}
-              <img src="{{ settings.gift_1_icon | image_url: width: 100 }}" width="100" height="100">
-            {%- else -%}
-              <img src="{{ g1_product.featured_image | image_url: width: 100 }}" width="100" height="100">
-            {%- endif -%}
-          </div>
-          <p class="cart-drawer__progress-price body-sm">{{ g1_cents | money }}</p>
-          <p class="cart-drawer__progress-label">{{ g1_title }}</p>
-        </div>
+        <p class="cart-drawer__mijlpaal">{%- capture geld -%}{% render 'ws-euro', bedrag: g1_cents %}{%- endcapture -%}<b>{{ geld | remove: ',00' }}</b>{{ g1_title }}</p>
       {%- endif -%}
-
       {%- if g2_on -%}
-        {%- assign g2_pos = g2i | plus: 0.5 | times: seg -%}
-        <div class="cart-drawer__progress-badge" style="left: {{ g2_pos }}%;">
-          <div class="cart-drawer__progress-icon">
-            {%- if settings.gift_2_icon != blank and g2_reserve == false -%}
-              <img src="{{ settings.gift_2_icon | image_url: width: 100 }}" width="100" height="100">
-            {%- else -%}
-              <img src="{{ g2_product.featured_image | image_url: width: 100 }}" width="100" height="100">
-            {%- endif -%}
-          </div>
-          <p class="cart-drawer__progress-price body-sm">{{ g2_cents | money }}</p>
-          <p class="cart-drawer__progress-label">{{ g2_title }}</p>
-        </div>
+        <p class="cart-drawer__mijlpaal">{%- capture geld -%}{% render 'ws-euro', bedrag: g2_cents %}{%- endcapture -%}<b>{{ geld | remove: ',00' }}</b>{{ g2_title }}</p>
       {%- endif -%}
     </div>
 

@@ -2452,3 +2452,24 @@ winkelwagen met de oude washbag werd omgeruild. Daarna teruggezet.
 een uitstekende tweede foto, miniaturen overal op één rij, geen JS-fouten.
 De enige afwijking was de uitverkochte Tondeuse Deluxe (oud cadeaublok en
 zwarte modelkeuze); die is hierboven opgelost.
+
+## Geen cadeau dat al in de bestelling zit
+
+* Metaveld `custom.bevat` (lijst van producten) op een pakket: wat er al in
+  zit. Nu: Shave Package Ultimate (washbag, Neustrimmer Advance, Travelbag),
+  Essential Flex Bundel (washbag, Hard Case), Skull Deal 2.0 (washbag),
+  Skull Deal 3.0 (washbag, Travelbag), Shave Package 3.0 (Neustrimmer
+  Advance, Travelbag).
+* Zit het cadeau al in de bestelling, dan komt eerst het vervangcadeau uit
+  `gift_N_dubbel` (thema-instellingen, Cart drawer → Gift 1/2), anders een
+  reserve; nooit iets wat er al in zit. Cadeau 1: `gift-neustrimmer-advance`
+  (€0, adviesprijs €24,95, inkoop €3,74, gekoppeld aan de echte Advance).
+* De winkelwagen kijkt naar alles wat erin ligt (de producten en hun
+  `bevat`), de productpagina per aanbiedingskaart naar dat pakket.
+* Uitkomst nu: Essential Flex Bundel en Skull Deal → Neustrimmer Advance;
+  Shave Package Ultimate (heeft de Advance al) → Neustrimmer Basic; alleen
+  de Flex Guard → Luxe washbag. Getest op de pagina's en in een echte
+  preview-winkelwagen.
+* `cart-rewards-bar.liquid` en `base.js` worden ook door de homepage-sessie
+  aangepast (winkelwagen v7). Mijn regels daarin: het blok `al_in` en de
+  parameter `al:` in de cadeaubalk, en `giftVariants` in `syncGifts`.

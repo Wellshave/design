@@ -574,12 +574,17 @@
           assign cad1_eigen = false
           assign cad2_eigen = false
           if settings.enable_gift_rewards
+            # wat al in dit product zit (custom.bevat): dat geven we niet nog eens cadeau
+            assign p_al = '‹' | append: product.handle | append: '›'
+            for bp in mf.bevat.value
+              assign p_al = p_al | append: '‹' | append: bp.handle | append: '›'
+            endfor
             capture cad1_h
-              render 'ws-cadeau', nr: 1
+              render 'ws-cadeau', nr: 1, al: p_al
             endcapture
             assign cad1_h = cad1_h | strip
             capture cad2_h
-              render 'ws-cadeau', nr: 2, niet: cad1_h
+              render 'ws-cadeau', nr: 2, niet: cad1_h, al: p_al
             endcapture
             assign cad2_h = cad2_h | strip
             if cad1_h != blank
@@ -806,20 +811,55 @@
                   {%- endif -%}
                 {%- endcapture -%}
 
-                {%- comment -%} de cadeaus die deze prijs haalt, uit de instellingen van de winkelwagen {%- endcomment -%}
+                {%- comment -%}
+                  De cadeaus die deze prijs haalt, gekozen voor dit pakket: zit de
+                  washbag er al in, dan komt het vervangcadeau (snippet ws-cadeau).
+                {%- endcomment -%}
+                {%- liquid
+                  assign t_al = '‹' | append: tp.handle | append: '›'
+                  for bp in tp.metafields.custom.bevat.value
+                    assign t_al = t_al | append: '‹' | append: bp.handle | append: '›'
+                  endfor
+                  assign t_cad1 = blank
+                  assign t_cad2 = blank
+                  assign t_c1_eigen = false
+                  assign t_c2_eigen = false
+                  if settings.enable_gift_rewards
+                    capture t_c1
+                      render 'ws-cadeau', nr: 1, al: t_al
+                    endcapture
+                    assign t_c1 = t_c1 | strip
+                    capture t_c2
+                      render 'ws-cadeau', nr: 2, niet: t_c1, al: t_al
+                    endcapture
+                    assign t_c2 = t_c2 | strip
+                    if t_c1 != blank
+                      assign t_cad1 = all_products[t_c1]
+                      if t_c1 == settings.gift_1_product.handle
+                        assign t_c1_eigen = true
+                      endif
+                    endif
+                    if t_c2 != blank
+                      assign t_cad2 = all_products[t_c2]
+                      if t_c2 == settings.gift_2_product.handle
+                        assign t_c2_eigen = true
+                      endif
+                    endif
+                  endif
+                -%}
                 {%- assign t_cad_som = 0 -%}
                 {%- assign t_cad_n = 0 -%}
                 {%- capture t_cad -%}
                   {%- if settings.enable_gift_rewards and tv.available -%}
                     {%- for gi in (1..2) -%}
                       {%- if gi == 1 -%}
-                        {%- assign cad = cad1 -%}
+                        {%- assign cad = t_cad1 -%}
                         {%- assign cad_drempel = settings.gift_1_threshold -%}
-                        {%- if cad1_eigen -%}{%- assign cad_naam = s.cad_naam_1 | default: settings.gift_1_label -%}{%- else -%}{%- assign cad_naam = blank -%}{%- endif -%}
+                        {%- if t_c1_eigen -%}{%- assign cad_naam = s.cad_naam_1 | default: settings.gift_1_label -%}{%- else -%}{%- assign cad_naam = blank -%}{%- endif -%}
                       {%- else -%}
-                        {%- assign cad = cad2 -%}
+                        {%- assign cad = t_cad2 -%}
                         {%- assign cad_drempel = settings.gift_2_threshold -%}
-                        {%- if cad2_eigen -%}{%- assign cad_naam = s.cad_naam_2 | default: settings.gift_2_label -%}{%- else -%}{%- assign cad_naam = blank -%}{%- endif -%}
+                        {%- if t_c2_eigen -%}{%- assign cad_naam = s.cad_naam_2 | default: settings.gift_2_label -%}{%- else -%}{%- assign cad_naam = blank -%}{%- endif -%}
                       {%- endif -%}
                       {%- if cad == blank or cad_drempel == blank -%}{%- continue -%}{%- endif -%}
                       {%- assign cad_v = cad.selected_or_first_available_variant -%}
