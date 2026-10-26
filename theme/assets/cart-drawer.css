@@ -1003,8 +1003,11 @@
   display: none;
 }
 
-.cart-drawer__featured-item {
+.cart-drawer .cart-drawer__featured-item {
   flex: 0 0 176px;
+  width: 176px;
+  min-width: 176px;
+  max-width: 176px;
   display: flex;
   flex-direction: column;
   scroll-snap-align: start;
@@ -1322,7 +1325,10 @@
     padding-right: 20px;
   }
 
-  .cart-drawer__featured-item {
+  .cart-drawer .cart-drawer__featured-item {
     flex-basis: 156px;
+    width: 156px;
+    min-width: 156px;
+    max-width: 156px;
   }
 }
