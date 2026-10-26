@@ -2434,3 +2434,21 @@ winkelwagen met de oude washbag werd omgeruild. Daarna teruggezet.
 * `pdp_stappen`, `kerncijfers`, `pdp_bundels` en `combi_korting` zijn gevuld
   voor de Groom Guard PRO en de Groom Guard; andere producten tonen die
   blokken pas als hun velden gevuld zijn.
+
+## De pagina volgt de keuze, ook bij uitverkocht
+
+* Kies je een bundel of upgrade, dan krijgen galerij, miniaturen, naam en
+  belofte die van dat product (een `<template>` per kaart, pas geladen bij het
+  kiezen). Terug, of een andere variant kiezen, zet alles terug.
+* Is het product zelf uitverkocht maar zijn er alternatieven (upgrades of
+  `compare_products`), dan staan die als kaart. Het product zelf staat er grijs
+  met "Uitverkocht" en is niet te kiezen; het eerste alternatief is gekozen en
+  de knop staat aan. Geen alternatief: geen kaarten en nooit een cadeau voor
+  een product dat niet te koop is.
+
+## Alle productpagina's nagelopen
+
+62 actieve producten op 1440 en 390 px: geen horizontaal scrollen, nergens
+een uitstekende tweede foto, miniaturen overal op één rij, geen JS-fouten.
+De enige afwijking was de uitverkochte Tondeuse Deluxe (oud cadeaublok en
+zwarte modelkeuze); die is hierboven opgelost.
