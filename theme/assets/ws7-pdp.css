@@ -472,9 +472,10 @@
 
 /* vergelijken */
 .ws7p-verg{display:grid;grid-template-columns:repeat(var(--n,2),minmax(0,1fr));gap:16px;max-width:calc(var(--n,2) * 450px);margin:44px auto 0}
-.ws7p-verg__kaart{display:grid;gap:18px;align-content:start;background:#fff;border-radius:18px;padding:10px 10px 22px;box-shadow:0 14px 34px rgba(17,17,17,.07);
-  transition:box-shadow .3s}
-.ws7p-verg__kaart.is-gekozen{box-shadow:0 0 0 1.5px #111,0 14px 34px rgba(17,17,17,.07)}
+.ws7p-verg__kaart{display:grid;gap:18px;align-content:start;border:2px solid transparent;background:#fff padding-box;border-radius:18px;padding:8px 8px 20px;
+  box-shadow:0 14px 34px rgba(17,17,17,.07);transition:box-shadow .3s}
+/* gekozen: een gouden rand (verloop), zoals de gekozen bundel in het koopvak */
+.ws7p-verg__kaart.is-gekozen{background:linear-gradient(#fff,#fff) padding-box,var(--goud) border-box;box-shadow:0 16px 36px -18px rgba(188,129,62,.55)}
 .ws7p-verg__beeld{position:relative;aspect-ratio:16/11;border-radius:12px;overflow:hidden;background:var(--zand)}
 .ws7p-verg__beeld img{position:absolute;inset:4%;width:92%;height:92%;object-fit:contain;mix-blend-mode:darken}
 .ws7p-verg__kop{padding:0 12px;display:grid;gap:4px}
