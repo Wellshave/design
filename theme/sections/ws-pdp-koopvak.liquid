@@ -601,7 +601,9 @@
           assign tier_ids = ''
           assign tier_handles = 'BASIS'
           assign toon_tiers = false
-          if v7 and s.tiers_tonen and v.available
+          # Ook als dit product uitverkocht is: dan staan de alternatieven er als
+          # kaart, met het product zelf als "Uitverkocht", zodat er iets te kopen blijft.
+          if v7 and s.tiers_tonen
             assign upg_lijst = mf.upgrade_products.value
             assign tier_max = s.tier_max | default: 1
             for up in upg_lijst
@@ -651,7 +653,7 @@
             # de andere producten in plaats van in een los blok.
             if tiers_n > 0
               assign toon_tiers = true
-            elsif settings.enable_gift_rewards
+            elsif settings.enable_gift_rewards and v.available
               for gi in (1..2)
                 if gi == 1
                   assign cad = cad1
@@ -713,6 +715,7 @@
             <fieldset class="ws-tiers-lijst">
               <legend class="visually-hidden">{{ s.tier_kop | default: product.title }}</legend>
               {%- assign tier_handle_lijst = tier_handles | split: ',' -%}
+              {%- assign t_eerste_vrij = true -%}
               {%- for th in tier_handle_lijst -%}
                 {%- liquid
                   if th == 'BASIS'
@@ -807,7 +810,7 @@
                 {%- assign t_cad_som = 0 -%}
                 {%- assign t_cad_n = 0 -%}
                 {%- capture t_cad -%}
-                  {%- if settings.enable_gift_rewards -%}
+                  {%- if settings.enable_gift_rewards and tv.available -%}
                     {%- for gi in (1..2) -%}
                       {%- if gi == 1 -%}
                         {%- assign cad = cad1 -%}
@@ -838,7 +841,7 @@
                 {%- endcapture -%}
 
                 {%- assign t_bespaar = t_los | minus: tv.price -%}
-                <label class="ws-tier{% if basis %} ws-tier-basis{% else %} ws-tier-upg{% endif %}">
+                <label class="ws-tier{% if basis %} ws-tier-basis{% if v.available == false %} is-op{% endif %}{% else %} ws-tier-upg{% endif %}">
                   {%- unless basis -%}
                     {%- comment -%}
                       Kies je deze kaart, dan wisselt de pagina mee: de foto's, de naam
@@ -865,16 +868,26 @@
                     </template>
                   {%- endunless -%}
                   {%- if tiers_n > 0 and th == tier_top and s.tier_badge != blank -%}<span class="ws-tier-badge">{{ s.tier_badge }}</span>{%- endif -%}
-                  <input type="radio" name="ws-tier-{{ section.id }}" value="{% unless basis %}{{ tv.id }}{% endunless %}"{% if basis %} checked{% endif %}
+                  {%- liquid
+                    assign t_aan = false
+                    if basis and v.available
+                      assign t_aan = true
+                    elsif basis == false and v.available == false and t_eerste_vrij
+                      assign t_aan = true
+                      assign t_eerste_vrij = false
+                    endif
+                  -%}
+                  <input type="radio" name="ws-tier-{{ section.id }}" value="{% unless basis %}{{ tv.id }}{% endunless %}"{% if t_aan %} checked{% endif %}{% if basis and v.available == false %} disabled{% endif %}
                          data-nu="{{ t_nu | strip | escape }}" data-was="{{ t_was | strip | escape }}"
                          data-pct="{% if t_pct > 0 %}−{{ t_pct }}%{% endif %}" data-klarna="{{ t_kl | strip | escape }}" data-naam="{{ tp.title | escape }}">
                   <span class="ws-tier-bd">
                     {%- if tp.featured_image != blank -%}{{ tp.featured_image | image_url: width: 160 | image_tag: alt: '', loading: 'lazy', width: 80, height: 80 }}{%- endif -%}
                   </span>
                   <span class="ws-tier-tx">
-                    <b>{%- if basis or tv.price <= v.price -%}{{ tp.title }}{%- else -%}{{ s.tier_upg_kop | replace: '[product]', tp.title }}{%- endif -%}</b>
+                    <b>{%- if basis or tv.price <= v.price or v.available == false -%}{{ tp.title }}{%- else -%}{{ s.tier_upg_kop | replace: '[product]', tp.title }}{%- endif -%}</b>
                     {%- if t_sub != blank -%}<span class="ws-tier-sub">{{ t_sub }}</span>{%- endif -%}
-                    {%- if basis == false and tv.price > v.price and s.tier_meer != blank -%}
+                    {%- if basis and v.available == false and s.knop_uitverkocht != blank -%}<span class="ws-tier-op">{{ s.knop_uitverkocht }}</span>{%- endif -%}
+                    {%- if basis == false and v.available and tv.price > v.price and s.tier_meer != blank -%}
                       {%- assign t_meer = tv.price | minus: v.price -%}
                       {%- capture t_meer_tx -%}{{ s.munt }}{% render 'price-formated', price: t_meer %}{%- endcapture -%}
                       <span class="ws-tier-tag">{{ s.tier_meer | replace: '[bedrag]', t_meer_tx }}</span>
@@ -969,6 +982,21 @@
               blok.addEventListener('change', function (e) {
                 if (e.target && e.target.name === 'ws-tier-{{ section.id }}') kies(e.target);
               });
+              {%- unless v.available %}
+              // Dit product is uitverkocht en er staat een alternatief klaar: zet het
+              // formulier, de prijs en de knoppen daar meteen op. Pas als het formulier
+              // er is (het staat verderop in de pagina).
+              function start() {
+                var gekozen = blok.querySelector('input[name="ws-tier-{{ section.id }}"]:checked');
+                if (!gekozen || !gekozen.value) return;
+                kies(gekozen);
+                var knop = document.getElementById('ProductSubmit-{{ section.id }}');
+                if (knop) { knop.disabled = false; knop.textContent = {{ s.knop_label | json }}; }
+                var sticky = document.querySelector('#shopify-section-{{ section.id }} [data-ws-sticky-koop]');
+                if (sticky) { sticky.disabled = false; sticky.textContent = {{ s.sticky_knop | default: s.knop_label | json }}; }
+              }
+              if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
+              {%- endunless %}
               // Een andere variant kiezen begint weer bij het product zelf:
               // base.js zet dan het id en de prijs opnieuw.
               var opties = document.getElementById('ProductOptions-{{ section.id }}');
@@ -997,7 +1025,7 @@
           Een cadeau dat op is tonen we niet: dan zou de pagina iets beloven wat
           de winkelwagen niet meer kan toevoegen.
         {%- endcomment -%}
-        {%- if settings.enable_gift_rewards and s.cad_tonen -%}
+        {%- if settings.enable_gift_rewards and s.cad_tonen and v.available -%}
           {%- assign cad_n = 0 -%}
           {%- assign cad_som = 0 -%}
           {%- capture cad_kaarten -%}
