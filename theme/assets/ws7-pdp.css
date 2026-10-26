@@ -148,11 +148,12 @@
 .ws-pdp7 .ws-tier-badge{position:absolute;top:-11px;right:14px;background:var(--goud);color:var(--ink);font-size:9.5px;font-weight:700;
   letter-spacing:.08em;text-transform:uppercase;border-radius:3px;padding:4px 7px;line-height:1;box-shadow:0 6px 14px -6px rgba(188,129,62,.8)}
 .ws-pdp7 .ws-tier:has(.ws-tier-extra){padding-bottom:0}
-.ws-pdp7 .ws-tier-extra{grid-column:1/-1;display:grid;margin:4px -14px 0 -12px;background:var(--zand);border-radius:0 0 12px 12px;
-  border-top:1px solid var(--lijn);transition:background .3s,color .3s}
+/* het paneel met extra's en cadeau: een eigen lichte goudtint, zodat het niet wegvalt in de zandkleurige pagina */
+.ws-pdp7 .ws-tier-extra{grid-column:1/-1;display:grid;margin:4px -14px 0 -12px;background:#FBF4E4;border-radius:0 0 12px 12px;
+  border-top:1px solid rgba(176,116,42,.2);transition:background .3s,color .3s}
 .ws-pdp7 .ws-tier:has(input:checked) .ws-tier-extra{background:linear-gradient(135deg,#F9E6BF,#F0CF92);border-top-color:rgba(176,116,42,.25)}
 .ws-pdp7 .ws-tx{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px 14px 8px 12px;font-size:12px;font-weight:500}
-.ws-pdp7 .ws-tx + .ws-tx,.ws-pdp7 .ws-tx + .ws-tx-som{border-top:1px solid var(--lijn)}
+.ws-pdp7 .ws-tx + .ws-tx,.ws-pdp7 .ws-tx + .ws-tx-som{border-top:1px solid rgba(140,90,26,.12)}
 .ws-pdp7 .ws-tier:has(input:checked) .ws-tx + .ws-tx,.ws-pdp7 .ws-tier:has(input:checked) .ws-tx + .ws-tx-som{border-top-color:rgba(140,90,26,.16)}
 .ws-pdp7 .ws-tx-bd{width:34px;height:34px;border-radius:8px;background:#fff;overflow:hidden}
 .ws-pdp7 .ws-tier:has(input:checked) .ws-tx-bd{box-shadow:0 2px 6px rgba(140,90,26,.18)}
@@ -169,7 +170,9 @@
   text-transform:uppercase;border-radius:3px;padding:3px 5px;margin-right:2px;vertical-align:1px}
 .ws-pdp7 .ws-tx-cad .ws-tx-pr{color:#24804A}
 .ws-pdp7 .ws-tier:has(input:checked) .ws-tx-cad .ws-tx-pr{color:#1E7A45}
-.ws-pdp7 .ws-tx-som{display:block;padding:9px 14px 10px 12px;font-size:12px;color:var(--mid)}
+.ws-pdp7 .ws-tx-som{display:block;padding:9px 14px 10px 12px;font-size:12px;color:#5C4A33;background:rgba(176,116,42,.09)}
+.ws-pdp7 .ws-tx-som:last-child{border-radius:0 0 12px 12px}
+.ws-pdp7 .ws-tier:has(input:checked) .ws-tx-som{background:rgba(122,74,18,.08)}
 .ws-pdp7 .ws-tx-som b{font-weight:600;color:var(--brons-tekst)}
 .ws-pdp7 .ws-tier:has(input:checked) .ws-tx-som{color:#5C3F17}
 .ws-pdp7 .ws-tier:has(input:checked) .ws-tx-som b{color:#7A4A12}
