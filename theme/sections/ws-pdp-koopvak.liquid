@@ -567,6 +567,7 @@
           assign tiers_n = 0
           assign tier_ids = ''
           assign tier_handles = 'BASIS'
+          assign toon_tiers = false
           if v7 and s.tiers_tonen and v.available
             assign upg_lijst = mf.upgrade_products.value
             assign tier_max = s.tier_max | default: 1
@@ -581,13 +582,87 @@
                 assign tier_ids = tier_ids | append: '‹' | append: up.id | append: '›'
               endif
             endfor
+
+            # Geen upgrade? Dan de andere modellen uit compare_products, in de
+            # volgorde van dat veld (bijvoorbeeld Barber Bro 2.0 naast 3.0).
+            if tiers_n == 0
+              assign model_handles = ''
+              assign basis_gezien = false
+              for cp in mf.compare_products.value
+                if cp.id == product.id
+                  assign model_handles = model_handles | append: ',BASIS'
+                  assign basis_gezien = true
+                  continue
+                endif
+                if tiers_n >= 3
+                  continue
+                endif
+                assign cpv = cp.selected_or_first_available_variant
+                if cpv.available
+                  assign tiers_n = tiers_n | plus: 1
+                  assign model_handles = model_handles | append: ',' | append: cp.handle
+                  assign tier_ids = tier_ids | append: '‹' | append: cp.id | append: '›'
+                endif
+              endfor
+              if tiers_n > 0
+                if basis_gezien
+                  assign tier_handles = model_handles | remove_first: ','
+                else
+                  assign tier_handles = 'BASIS' | append: model_handles
+                endif
+              endif
+            endif
+
+            # Een los product zonder andere keuze krijgt toch de kaart, als zijn
+            # prijs een cadeau haalt: dan staat het cadeau op dezelfde plek als bij
+            # de andere producten in plaats van in een los blok.
+            if tiers_n > 0
+              assign toon_tiers = true
+            elsif settings.enable_gift_rewards
+              for gi in (1..2)
+                if gi == 1
+                  assign cad = settings.gift_1_product
+                  assign cad_drempel = settings.gift_1_threshold
+                else
+                  assign cad = settings.gift_2_product
+                  assign cad_drempel = settings.gift_2_threshold
+                endif
+                if cad == blank or cad_drempel == blank or cad.handle == product.handle
+                  continue
+                endif
+                assign cad_grens = cad_drempel | times: 100
+                if cad.selected_or_first_available_variant.available and v.price >= cad_grens
+                  assign toon_tiers = true
+                endif
+              endfor
+            endif
+          endif
+
+          # Het label Meest gekozen: op de duurste keuze die in compare_info populair is.
+          assign tier_top = ''
+          assign tier_top_prijs = 0
+          if toon_tiers
+            assign tier_handle_lijst = tier_handles | split: ','
+            for th in tier_handle_lijst
+              if th == 'BASIS'
+                assign tp = product
+                assign tpv = v
+              else
+                assign tp = all_products[th]
+                assign tpv = tp.selected_or_first_available_variant
+              endif
+              if tp.metafields.custom.compare_info.value.is_popuplar and tpv.price > tier_top_prijs
+                assign tier_top = th
+                assign tier_top_prijs = tpv.price
+              endif
+            endfor
           endif
         -%}
-        {%- if tiers_n > 0 -%}
+        {%- if toon_tiers -%}
           {%- assign extras_kaart = mf.upgrade_extras.value -%}
           <div class="ws-tiers" data-ws-tiers>
             <div class="ws-tiers-kop">
-              {%- if s.tier_kop != blank -%}<span>{{ s.tier_kop }}</span>{%- endif -%}
+              {%- if s.tier_kop != blank and tiers_n > 0 -%}<span>{{ s.tier_kop }}</span>{%- endif -%}
               {%- if kan_vergelijken and s.vergelijk_label != blank -%}
                 <button type="button" class="ws-tiers-vgl" data-ws-vgl data-ws-anker="{{ s.vergelijk_anker }}">{{ s.vergelijk_label }}</button>
               {%- endif -%}
@@ -679,7 +754,7 @@
 
                 {%- assign t_bespaar = t_los | minus: tv.price -%}
                 <label class="ws-tier{% if basis %} ws-tier-basis{% else %} ws-tier-upg{% endif %}">
-                  {%- if basis == false and ti.is_popuplar and s.tier_badge != blank -%}<span class="ws-tier-badge">{{ s.tier_badge }}</span>{%- endif -%}
+                  {%- if tiers_n > 0 and th == tier_top and s.tier_badge != blank -%}<span class="ws-tier-badge">{{ s.tier_badge }}</span>{%- endif -%}
                   <input type="radio" name="ws-tier-{{ section.id }}" value="{% unless basis %}{{ tv.id }}{% endunless %}"{% if basis %} checked{% endif %}
                          data-nu="{{ t_nu | strip | escape }}" data-was="{{ t_was | strip | escape }}"
                          data-pct="{% if t_pct > 0 %}−{{ t_pct }}%{% endif %}" data-klarna="{{ t_kl | strip | escape }}" data-naam="{{ tp.title | escape }}">
@@ -687,9 +762,9 @@
                     {%- if tp.featured_image != blank -%}{{ tp.featured_image | image_url: width: 160 | image_tag: alt: '', loading: 'lazy', width: 80, height: 80 }}{%- endif -%}
                   </span>
                   <span class="ws-tier-tx">
-                    <b>{%- if basis -%}{{ tp.title }}{%- else -%}{{ s.tier_upg_kop | replace: '[product]', tp.title }}{%- endif -%}</b>
+                    <b>{%- if basis or tv.price <= v.price -%}{{ tp.title }}{%- else -%}{{ s.tier_upg_kop | replace: '[product]', tp.title }}{%- endif -%}</b>
                     {%- if t_sub != blank -%}<span class="ws-tier-sub">{{ t_sub }}</span>{%- endif -%}
-                    {%- if basis == false and s.tier_meer != blank -%}
+                    {%- if basis == false and tv.price > v.price and s.tier_meer != blank -%}
                       {%- assign t_meer = tv.price | minus: v.price -%}
                       {%- capture t_meer_tx -%}{{ s.munt }}{% render 'price-formated', price: t_meer %}{%- endcapture -%}
                       <span class="ws-tier-tag">{{ s.tier_meer | replace: '[bedrag]', t_meer_tx }}</span>
@@ -755,7 +830,7 @@
               // base.js zet dan het id en de prijs opnieuw.
               var opties = document.getElementById('ProductOptions-{{ section.id }}');
               if (opties) opties.addEventListener('change', function () {
-                var eerste = blok.querySelector('input[type="radio"]');
+                var eerste = blok.querySelector('input[type="radio"][value=""]');
                 if (eerste) eerste.checked = true;
                 var id = formId();
                 if (id) id.removeAttribute('data-ws-basis');
@@ -764,7 +839,7 @@
           </script>
         {%- endif -%}
 
-        {%- if tiers_n == 0 -%}
+        {%- unless toon_tiers -%}
         {%- comment -%}
           De cadeaus uit de winkelwageninstellingen.
 
@@ -887,9 +962,9 @@
             </div>
           {%- endif -%}
         {%- endif -%}
-        {%- endif -%}
+        {%- endunless -%}
 
-        {%- if tiers_n == 0 -%}
+        {%- unless toon_tiers -%}
         {%- comment -%}
           De modelkeuze. Twee kaarten naast elkaar in plaats van een knop die
           alleen belooft dat er iets te vergelijken valt: je ziet meteen welk
@@ -1027,7 +1102,7 @@
             <svg><use href="#ws-pdp-vgl-{{ section.id }}"/></svg>{{ s.vergelijk_label }}
           </button>
         {%- endif -%}
-        {%- endif -%}
+        {%- endunless -%}
 
         <div id="ProductPrice-{{ section.id }}">
           {%- comment -%}
@@ -2367,7 +2442,7 @@
   {%- assign upgrades = mf.upgrade_products.value -%}
   {%- assign extras_kaart = mf.upgrade_extras.value -%}
   {%- comment -%} Staat de upgrade al als keuze in het koopvak, dan geen pop-up die hem nog eens aanbiedt. {%- endcomment -%}
-  {%- if upgrades != blank and s.upg_tonen and tiers_n == 0 -%}
+  {%- if upgrades != blank and s.upg_tonen and toon_tiers == false -%}
     {%- comment -%}
       Alleen upgrades die duurder zijn dan dit product en op voorraad staan.
       Een goedkopere of uitverkochte optie is geen upgrade.

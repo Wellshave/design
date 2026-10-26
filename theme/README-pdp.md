@@ -2302,8 +2302,14 @@ leeg te tonen. Aan en uit met de instelling *v7* in het koopvak (header
   Het script zoekt het formulier pas op bij het kiezen: het formulier staat
   verderop in de pagina dan het script, eerder opzoeken gaf `null` en dan
   ging bij Ultimate toch de PRO de winkelwagen in.
-* Zonder upgrades: de oude cadeau- en modelkeuze (`tiers_n == 0`), en dan
-  ook pas de upgrade-pop-up.
+* Zonder upgrades worden de andere modellen uit `custom.compare_products`
+  de kaarten, in de volgorde van dat veld (Barber Bro 2.0 naast 3.0, Shave
+  Package 3.0 naast Ultimate). "Upgrade naar" en "Voor € extra" staan alleen
+  op een duurdere keuze. Een los product zonder andere keuze krijgt één kaart
+  zodra zijn prijs een cadeau haalt, zonder kop. Het oude cadeaublok, de
+  zwarte modelkeuze en de upgrade-pop-up komen alleen nog als er geen kaart
+  is (`toon_tiers`). "Meest gekozen" staat op de duurste kaart die in
+  `compare_info` populair is.
 * Add-ons met combikorting uit `custom.combi_korting` (`{"handle": pct}`);
   het percentage moet overeenkomen met een echte automatische korting.
 * **Bundels** onderaan de buybox uit `custom.pdp_bundels`; het product zelf
