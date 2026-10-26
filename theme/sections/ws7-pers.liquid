@@ -1,16 +1,21 @@
-{% comment %} Wellshave v7 · persstrook: logo's in één donkergrijs, op gelijke optische hoogte. {% endcomment %}
+{% comment %} Wellshave v7 · persstrook: logo's in één donkergrijs, op gelijke optische hoogte, als doorlopende strook. {% endcomment %}
 {{ 'ws7.css' | asset_url | stylesheet_tag }}
 <div class="ws7 ws7-pers{% if section.settings.wit %} ws7-wit{% endif %}">
-  <div class="ws7-pers__rij">
-    {%- for block in section.blocks -%}
-      <span style="--h:{{ block.settings.hoogte }}px" {{ block.shopify_attributes }}>
-        {%- if block.settings.logo != blank -%}
-          {{ block.settings.logo | image_url: height: 80 | image_tag: loading: 'lazy', alt: block.settings.naam }}
-        {%- elsif block.settings.standaard != blank -%}
-          <img src="{{ block.settings.standaard | prepend: 'ws7-logo-' | append: '.png' | asset_url }}" alt="{{ block.settings.naam | escape }}" loading="lazy" height="80">
-        {%- endif -%}
-      </span>
-    {%- endfor -%}
+  <div class="ws7-pers__baan">
+    <div class="ws7-pers__rij">
+      {%- for ronde in (1..2) -%}
+        {%- for block in section.blocks -%}
+          <span class="ws7-pers__logo" style="--h:{{ block.settings.hoogte }}px"{% if ronde == 1 %} {{ block.shopify_attributes }}{% else %} aria-hidden="true"{% endif %}>
+            {%- if block.settings.logo != blank -%}
+              {{ block.settings.logo | image_url: height: 80 | image_tag: loading: 'lazy', alt: block.settings.naam }}
+            {%- elsif block.settings.standaard != blank -%}
+              <img src="{{ block.settings.standaard | prepend: 'ws7-logo-' | append: '.png' | asset_url }}" alt="{% if block.settings.naam_tonen %}{% else %}{{ block.settings.naam | escape }}{% endif %}" loading="lazy" height="80">
+            {%- endif -%}
+            {%- if block.settings.naam_tonen -%}<b>{{ block.settings.naam }}</b>{%- endif -%}
+          </span>
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
   </div>
 </div>
 {% schema %}
@@ -28,7 +33,8 @@
         { "value": "bcc", "label": "BCC" }, { "value": "review", "label": "Review.nl" }, { "value": "blokker", "label": "Blokker" },
         { "value": "baard", "label": "Baardtips.com" }, { "value": "dbw", "label": "De Betere Wereld" }, { "value": "dor", "label": "De Ondernemer" } ] },
       { "type": "image_picker", "id": "logo", "label": "Eigen logo", "info": "Gaat voor het logo uit het thema." },
-      { "type": "range", "id": "hoogte", "label": "Hoogte", "min": 12, "max": 44, "step": 1, "unit": "px", "default": 22 }
+      { "type": "range", "id": "hoogte", "label": "Hoogte", "min": 12, "max": 44, "step": 1, "unit": "px", "default": 22 },
+      { "type": "checkbox", "id": "naam_tonen", "label": "Naam naast het logo", "info": "Voor een beeldmerk zonder woordmerk, zoals De Ondernemer.", "default": false }
     ]}
   ],
   "presets": [ { "name": "WS7 · Pers" } ]

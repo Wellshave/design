@@ -132,10 +132,15 @@
 .ws7-tech__kop{margin-top:22px;font-family:var(--kopletter);font-size:26px;font-weight:500;letter-spacing:-.025em}
 .ws7-tech__tekst{margin-top:8px;font-size:13px;line-height:1.6;color:var(--mid);max-width:34em}
 
-/* 7 · pers */
-.ws7-pers{margin-top:72px;padding:26px 56px;border-top:1px solid rgba(17,17,17,.08);border-bottom:1px solid rgba(17,17,17,.08)}
-.ws7-pers__rij{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:20px 56px}
-.ws7-pers__rij img{width:auto;height:var(--h,22px)}
+/* 7 · pers: doorlopende strook, stopt bij hover */
+.ws7-pers{margin-top:72px;padding:26px 0;border-top:1px solid rgba(17,17,17,.08);border-bottom:1px solid rgba(17,17,17,.08)}
+.ws7-pers__baan{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.ws7-pers__rij{display:flex;align-items:center;gap:64px;width:max-content;padding-left:64px;animation:ws7-loop 55s linear infinite}
+.ws7-pers__baan:hover .ws7-pers__rij{animation-play-state:paused}
+@keyframes ws7-loop{to{transform:translateX(-50%)}}
+.ws7-pers__logo{display:flex;align-items:center;gap:8px;flex:none}
+.ws7-pers__logo img{width:auto;height:var(--h,22px);max-width:none}
+.ws7-pers__logo b{font-size:17px;font-weight:700;letter-spacing:-.015em;color:#3A3734;white-space:nowrap}
 
 /* 8 · afsluiter */
 .ws7-slot{position:relative;margin:88px 16px 0;border-radius:26px;padding:72px 56px 64px;display:flex;flex-direction:column;align-items:center;text-align:center;color:#fff;overflow:hidden;background:var(--donker)}
@@ -208,9 +213,10 @@
   .ws7-tag__plus{width:26px;height:26px;font-size:15px}
   .ws7-tech__kop{font-size:20px;margin-top:14px}
   .ws7-tech__tekst{font-size:12px}
-  .ws7-pers{padding:20px 16px;margin-top:48px}
-  .ws7-pers__rij{gap:16px 26px}
-  .ws7-pers__rij img{height:calc(var(--h,22px) * .65)}
+  .ws7-pers{padding:18px 0;margin-top:48px}
+  .ws7-pers__rij{gap:40px;padding-left:40px;animation-duration:42s}
+  .ws7-pers__logo img{height:calc(var(--h,22px) * .72)}
+  .ws7-pers__logo b{font-size:13px}
   .ws7-slot{margin:56px 10px 0;border-radius:18px;padding:48px 16px}
   .ws7-slot > .ws7-teken{width:340px;height:340px;margin-left:-170px;top:-60px}
   .ws7-slot .ws7-kop{font-size:34px}
@@ -220,5 +226,6 @@
   .ws7-slot__punt span{font-size:9.5px}
 }
 @media (prefers-reduced-motion:reduce){
+  .ws7-pers__rij{animation:none}
   .ws7 *{transition:none!important;scroll-behavior:auto!important}
 }

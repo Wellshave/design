@@ -45,7 +45,8 @@ PRODUCTEN=[
  ('p-gent','The Gentleman Shaver™','Gezicht en baard',49.95,85.65),
  ('s-sp3','Shave Package 3.0','Set',64.95,99.95),
 ]
-LOGO=[('ad','AD',30),('mh',"Men's Health",21),('ed','Eindhovens Dagblad',27),('mm','MediaMarkt',18),('kk','Kieskeurig.nl',20),('bol','bol',23),('bcc','BCC',22)]
+LOGO=[('ad','AD',30),('bol','bol',23),('mh',"Men's Health",21),('ed','Eindhovens Dagblad',27),('mm','MediaMarkt',18),('kk','Kieskeurig.nl',20),
+      ('dor','De Ondernemer',24),('bcc','BCC',22),('review','Review.nl',20),('blokker','Blokker',22),('baard','Baardtips.com',14),('dbw','De Betere Wereld',16)]
 
 def zeker(): return ('<div class="zeker"><span>'+IC['schild']+'100 dagen proberen</span><span>'+IC['bus']+'Gratis verzending vanaf €30</span><span>'+IC['klok']+'Morgen in huis</span></div>')
 def kaart(k,naam,wat,nu,van,groot=False):
@@ -73,8 +74,8 @@ s+=('<section class="sec creme midden"><span class="oog brons">Innovatie</span><
     f'<div class="t"><div class="tbeeld im-{k}"><a class="tag" href="#"><span class="tag-foto im-{pk}" aria-hidden="true"></span><span class="tag-t"><b>{pn}</b><small>{eur(pp)}</small></span>'
     f'<span class="tag-plus" aria-label="In winkelwagen">+</span></a></div><b class="t-kop">{t}</b><p>{p}</p></div>' for k,t,p,pk,pn,pp in TECH)
     +'</div>'+VOORTGANG+'</div></section>')
-rij=''.join(f'<span class="lg lg-{k}" style="--h:{h}" role="img" aria-label="{n}"></span>' for k,n,h in LOGO)
-s+=f'<section class="pers"><div class="pers-rij">{rij}</div></section>'
+rij=''.join((f'<span class="pl"><span class="lg lg-{k}" style="--h:{h}" aria-hidden="true"></span><b>{n}</b></span>' if k=='dor' else f'<span class="lg lg-{k}" style="--h:{h}" role="img" aria-label="{n}"></span>') for k,n,h in LOGO)
+s+=f'<section class="pers"><div class="pers-baan"><div class="pers-rij">{rij}{rij}</div></div></section>'
 s+=('<section class="sec creme midden"><span class="oog brons">Onze bestsellers</span><h2 class="serif">Alles wat je <span class="b">nodig hebt.</span></h2>'
     '<div class="rij7">'+''.join(kaart(*p) for p in PRODUCTEN)+'</div></section>')
 COLLABS=json.load(open(f'{B}/collabs.json'))  # uit het influencersysteem (Supabase, Social Media): Wellshave-collabs die live staan op Instagram

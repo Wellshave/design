@@ -348,6 +348,18 @@ body{margin:0;background:var(--g);color:var(--i);font:400 15px/1.6 "Montserrat",
 /* partnervinkje: rond en blauw zoals een vinkje op Instagram, maar effen (zonder gekartelde rand) en met een dun wit randje */
 .ig-vink{display:grid;place-items:center;width:14px;height:14px;flex:none;border-radius:50%;background:#2F8CFF;box-shadow:0 0 0 1.5px rgba(255,255,255,.9)}
 .ig-vink svg{width:10px;height:10px;fill:none;stroke:#fff;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+
+/* persstrook: doorlopend, twaalf logo's */
+.pers{padding:26px 0}
+.pers-baan{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.pers .pers-rij{display:flex;flex-wrap:nowrap;justify-content:flex-start;gap:64px;width:max-content;padding-left:64px;animation:pers-loop 55s linear infinite}
+.pers-baan:hover .pers-rij{animation-play-state:paused}
+@keyframes pers-loop{to{transform:translateX(-50%)}}
+.pers .lg{flex:none}
+.pl{display:flex;align-items:center;gap:8px;flex:none}
+.pl b{font-size:17px;font-weight:700;letter-spacing:-.015em;color:#3A3734;white-space:nowrap}
+@container (max-width:749px){.pers{padding:18px 0}.pers .pers-rij{gap:40px;padding-left:40px;animation-duration:42s}.pl b{font-size:13px}}
+@media (prefers-reduced-motion:reduce){.pers .pers-rij{animation:none}}
 </style>
 
 <div class="schil">
