@@ -81,8 +81,8 @@ COLLABS=json.load(open(f'{B}/collabs.json'))  # uit het influencersysteem (Supab
 s+=('<section class="sec creme midden"><span class="oog brons">Collabs</span><h2 class="serif">Word deel van <span class="b">de #wellshavefamilie.</span></h2>'
     
     '<div class="schuif"><div class="plekken ig-rij" tabindex="0" aria-label="Collabs op Instagram, schuif opzij">'+''.join(
-    f'<a class="ig" href="https://www.instagram.com/{u}/" target="_blank" rel="noopener"><span class="ig-beeld im-ig-{h.replace(".","-")}"></span>'
-    f'<span class="ig-onder"><b>@{h}</b><i class="ig-vink" role="img" aria-label="Wellshave-partner" title="Wellshave-partner"><svg viewBox="0 0 16 16"><path d="M4.6 8.3l2.2 2.2 4.6-4.8"/></svg></i></span></a>' for h,u,prod,_ in COLLABS)
+    f'<figure class="ig"><span class="ig-beeld im-ig-{h.replace(".","-")}" role="img" aria-label="@{h} met Wellshave"></span>'
+    f'<span class="ig-onder"><b>@{h}</b><i class="ig-vink" role="img" aria-label="Wellshave-partner" title="Wellshave-partner"><svg viewBox="0 0 16 16"><path d="M4.6 8.3l2.2 2.2 4.6-4.8"/></svg></i></span></figure>' for h,u,prod,_ in COLLABS)
     +'</div>'+VOORTGANG+'</div>'
     f'<a class="knop" href="https://www.instagram.com/wellshave/">Volg @wellshave</a></section>')
 s+=('<section class="club"><span class="club-merk" aria-hidden="true"></span><span class="club-oog">Wellshave</span><h2 class="serif wit">Kies. Probeer. <span class="b">Houd hem.</span></h2>'
