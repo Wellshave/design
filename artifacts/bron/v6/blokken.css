@@ -67,6 +67,32 @@
 .r figcaption{display:flex;flex-direction:column;gap:2px;padding-top:14px;border-top:1px solid #EFEBE6;font-size:13px;color:#6B645B}
 .r figcaption b{font-size:14px;font-weight:600;color:#1B1814}
 .f-logo{display:block;height:22px;aspect-ratio:{{kop_r}};background:{{kop_bg}} left center/contain no-repeat;filter:brightness(0) invert(1);margin-bottom:26px}
+/* reviewmuur: twee kolommen die langzaam tegen elkaar in schuiven */
+.rw-paneel{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:56px;align-items:center;background:#F3EBE1;border-radius:14px;padding:0 48px 0 72px;overflow:hidden;position:relative}
+.rw-paneel::before{content:"\201C";position:absolute;left:40px;top:34px;font-family:"EB Garamond",Georgia,serif;font-size:260px;line-height:1;color:rgba(176,122,58,.12);pointer-events:none}
+.rw-links{position:relative;padding:72px 0}
+.rw-links .s-h2{margin-top:16px;font-size:50px}
+.sans .rw-links .s-h2{font-size:38px}
+.rw-tp{display:flex;align-items:center;gap:10px;margin-top:28px;font-size:15px;color:#1B1814}
+.rw-tp b{font-weight:700}
+.rw-merk{display:inline-flex;align-items:center;gap:4px;font-weight:700;font-size:14px}
+.rw-merk svg{width:14px;height:13px;fill:#00B67A}
+.rw-score{margin:10px 0 0;font-size:14px;color:#6B645B}
+.site .rw-link{display:inline-block;margin-top:26px;font-size:15px;font-weight:500;color:#1B1814;border-bottom:1px solid #1B1814;padding-bottom:3px}
+.rw-muur{display:grid;grid-template-columns:1fr 1fr;gap:18px;height:560px;-webkit-mask-image:linear-gradient(180deg,transparent,#000 13%,#000 87%,transparent);mask-image:linear-gradient(180deg,transparent,#000 13%,#000 87%,transparent)}
+.rw-kol{overflow:hidden}
+.rw-baan{display:flex;flex-direction:column;gap:18px;animation:rw-op 46s linear infinite}
+.rw-terug .rw-baan{animation-direction:reverse;animation-duration:52s}
+.rw-muur:hover .rw-baan{animation-play-state:paused}
+@keyframes rw-op{to{transform:translateY(calc(-50% - 9px))}}
+.rw{margin:0;background:#fff;border-radius:10px;padding:22px 22px 18px;box-shadow:0 1px 0 rgba(60,40,20,.04)}
+.rw-prod{display:inline-block;font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#8C6239;margin-bottom:10px}
+.rw h3{margin:0 0 8px;font-size:15px;font-weight:700;line-height:1.35;color:#1B1814}
+.rw blockquote{margin:0;font-size:13.5px;line-height:1.6;color:#4A443D}
+.rw figcaption{display:flex;align-items:center;gap:9px;margin-top:16px;padding-top:14px;border-top:1px solid #F0EAE2;font-size:13px;color:#6B645B}
+.rw-av{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;flex:none;background:linear-gradient(135deg,#F1DDB8,#D6B07C);color:#5E3F17;font-size:11px;font-weight:700}
+.rw .rw-st{margin-left:auto;width:78px;height:15px;-webkit-mask-size:78px 15px;mask-size:78px 15px}
+.rw .rw-st::after{background-size:78px 15px}
 .u-raster{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin-top:24px}
 .u-tekst{display:flex;flex-direction:column;justify-content:space-between;gap:18px;background:#F1EBE2;border-radius:4px;padding:28px 26px}
 .u-tekst h3{margin:0;font-family:"EB Garamond",Georgia,serif;font-weight:500;font-size:30px;line-height:1.1;color:#231C17}
@@ -154,6 +180,27 @@
   .r-raster{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -20px;padding:0 20px 4px;scrollbar-width:none}
   .r{flex:0 0 78%;scroll-snap-align:start;padding:20px 18px 18px;gap:12px}
   .r blockquote{font-size:18px}
+  .rw-paneel{grid-template-columns:1fr;gap:0;padding:0 14px 14px;border-radius:12px}
+  .rw-paneel::before{left:14px;top:18px;font-size:150px}
+  .rw-links{padding:34px 8px 26px}
+  .rw-links .s-h2{font-size:32px;margin-top:10px}
+  .sans .rw-links .s-h2{font-size:26px}
+  .rw-tp{margin-top:16px;gap:7px;font-size:13px;flex-wrap:wrap}
+  .rw-tp .tp-sterren{width:90px;height:17px;-webkit-mask-size:90px 17px;mask-size:90px 17px}
+  .rw-tp .tp-sterren::after{background-size:90px 17px}
+  .rw-merk{font-size:12.5px}
+  .rw-score{font-size:12.5px;margin-top:6px}
+  .site .rw-link{margin-top:14px;font-size:13.5px}
+  .rw-muur{gap:8px;height:470px}
+  .rw-baan{gap:8px;animation-name:rw-op-m}
+  .rw{padding:13px 12px 11px;border-radius:8px}
+  .rw-prod{font-size:8.5px;letter-spacing:.1em;margin-bottom:6px}
+  .rw h3{font-size:12.5px;margin-bottom:5px}
+  .rw blockquote{font-size:11.5px;line-height:1.5}
+  .rw figcaption{gap:6px;margin-top:10px;padding-top:9px;font-size:11px;flex-wrap:wrap}
+  .rw-av{width:18px;height:18px;font-size:9px}
+  .rw .rw-st{margin-left:0;width:60px;height:12px;-webkit-mask-size:60px 12px;mask-size:60px 12px}
+  .rw .rw-st::after{background-size:60px 12px}
   .u-raster{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:10px}
   .u-tekst{padding:16px 14px;gap:10px}
   .u-tekst h3{font-size:21px}
@@ -181,3 +228,4 @@
   .f-kol li{font-size:12.5px}
   .f-onder{font-size:11.5px}
 }
+@keyframes rw-op-m{to{transform:translateY(calc(-50% - 4px))}}

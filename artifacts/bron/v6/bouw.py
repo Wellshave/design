@@ -39,7 +39,17 @@ REVIEWS=[  # echte Trustpilot-quotes zoals ze nu op de homepage staan
  ('Door de keramische bladen geen wondjes bij de schaamstreek. Scheermesjes? Prullenbak in!','Barend P.','Groom Guard™ PRO'),
  ('Geweldig pakket, had ik eerder moeten kopen. Scheren gaat moeiteloos en zonder wondjes, zelfs de schaamstreek wordt super glad.','Rik T.','Shave Package Ultimate™'),
  ('Hele fijne en stille trimmer met accudisplay, dus nooit meer een lege batterij. Direct op de huid te gebruiken zonder sneetjes.','Aiden M.','Shave Package 3.0'),
+ ('Merk was nieuw voor mij, maar door de veelzijdigheid en reviews toch besteld. Snel geleverd en netjes verpakt. Scheerresultaat boven verwachting.','Britt J.','The Gentleman Shaver™'),
+ ('Prettig apparaat, klein en ligt goed in de hand. Ik gebruik hem om mijn hoofd kaal te scheren, doet wat het belooft.','Emma B.','Head Shaver Deluxe'),
+ ('Fijn apparaat, werkt naar behoren. Als je de mesjes goed plat over de huid laat gaan kun je met een gerust hart scheren.','Lisa Z.','Flex Guard™ 3-in-1'),
+ ('Neustrim-opzetstuk kwijtgeraakt en kosteloos nageleverd door de klantenservice.','Aiden M.','Shave Package 3.0'),
 ]
+def titel(q):  # eerste zin van de klant zelf, ingekort zoals Trustpilot
+    z=q.split('. ')[0].rstrip('.!')
+    return z if len(z)<=44 else z[:42].rsplit(' ',1)[0]+'…'
+def rkaart(q,naam,prod):
+    return (f'<figure class="rw"><span class="rw-prod">{prod}</span><h3>{titel(q)}</h3><blockquote>{q}</blockquote>'
+            f'<figcaption><span class="rw-av" aria-hidden="true">{naam[0]}</span>{naam}<i class="tp-sterren rw-st" style="--r:5" role="img" aria-label="5 van 5 sterren"></i></figcaption></figure>')
 UGC=[('u-hoofd','6 sec','Hoofd scheren'),('u-borst','10 sec','Borst trimmen'),('u-neus','8 sec','Neus trimmen')]
 VRAGEN=[
  ('Wat als het me toch niet bevalt?','Je hebt 100 dagen om het apparaat thuis te proberen. Bevalt het niet? Stuur het terug en ontvang het volledige aankoopbedrag. Je hoeft geen reden op te geven.'),
@@ -76,13 +86,13 @@ s+=('<section class="s" style="padding-top:0">'+kop('Kies jouw plek','Waar wil j
         f'<a class="z" href="#"><span class="z-foto im-{k}" aria-hidden="true"></span><span class="z-tekst"><b class="z-naam">{naam}</b>'
         f'<span class="z-meta"><span>{aantal} apparaten</span><span>vanaf {eur(vanaf)}</span></span></span><span class="z-pijl">{PIJL}</span></a>' for k,naam,aantal,vanaf in ZONES)
     +'</div></section>')
-tp=('<div class="tp"><div class="tp-rij"><b>Uitstekend</b><i class="tp-sterren" style="--r:4.5" role="img" aria-label="4,5 van 5 sterren"></i></div>'
-    '<small>4,5 uit 5 · 1.087 reviews op Trustpilot</small></div>')
-s+=('<section class="s s-zand">'+kop('Reviews','Wat mannen vóór jou schreven',tp)
-    +'<div class="r-raster">'+''.join(
-        f'<figure class="r"><p class="k-ster"><i style="--r:5" role="img" aria-label="5 van 5 sterren"></i><span class="r-bron">Trustpilot</span></p><blockquote>“{q}”</blockquote>'
-        f'<figcaption><b>{naam}</b>{prod}</figcaption></figure>' for q,naam,prod in REVIEWS)
-    +'</div><div class="u-raster"><div class="u-tekst"><h3>Mannen zoals jij. Hun routine, zelf gefilmd.</h3>'
+kolA=''.join(rkaart(*r) for r in REVIEWS[0::2]); kolB=''.join(rkaart(*r) for r in REVIEWS[1::2])
+s+=('<section class="s"><div class="rw-paneel"><div class="rw-links"><p class="s-oog">Reviews</p><h2 class="s-h2">Wat klanten zeggen over Wellshave</h2>'
+    '<div class="rw-tp"><b>Uitstekend</b><i class="tp-sterren" style="--r:4.5" role="img" aria-label="4,5 van 5 sterren"></i>'
+    '<span class="rw-merk"><svg viewBox="0 0 12 11" aria-hidden="true"><path d="M6 .6l1.6 3.4 3.7.5-2.7 2.6.7 3.7L6 9 2.7 10.8l.7-3.7L.7 4.5l3.7-.5z"/></svg>Trustpilot</span></div>'
+    '<p class="rw-score">TrustScore 4,5 uit 5 · 1.087 reviews</p><a class="rw-link" href="#">Lees alle reviews op Trustpilot</a></div>'
+    f'<div class="rw-muur"><div class="rw-kol"><div class="rw-baan">{kolA}{kolA}</div></div><div class="rw-kol rw-terug"><div class="rw-baan">{kolB}{kolB}</div></div></div></div>'
+    '<div class="u-raster"><div class="u-tekst"><h3>Mannen zoals jij. Hun routine, zelf gefilmd.</h3>'
     '<p>Elke video staat er met toestemming van de maker. #wellshavefamilie</p><a href="#">Bekijk Instagram</a></div>'
     +''.join(f'<a class="u im-{k}" href="#" aria-label="Video: {wat}, {duur}"><span class="u-play"><svg viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg></span><span class="u-duur">{duur}</span></a>' for k,duur,wat in UGC)
     +'</div></section>')
