@@ -47,22 +47,22 @@ s+=('<div class="balk">Herfst Sale: tot 40% korting op geselecteerde apparaten. 
     '<svg viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20c1.2-3.6 4-5.3 7.5-5.3s6.3 1.7 7.5 5.3"/></svg>'
     '<svg viewBox="0 0 24 24"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg></div></header>'
     '<nav class="nav2"><a>Sets</a><a>Lichaam</a><a>Gezicht &amp; baard</a><a>Hoofd</a><a>Neus &amp; oren</a><a>Messen &amp; accessoires</a><a class="zoek">Zoeken</a></nav>')
-s+=('<section class="hero"><a class="h-groot" href="#"><span class="h-tekst"><span class="oog">Herfst Sale</span><span class="cond">4 Foil Blade Baron™</span>'
-    f'<span class="h-sub">Vier foil-koppen voor je gezicht.</span><span class="knop">Shop nu</span></span></a>'
+s+=('<section class="hero"><a class="h-groot" href="#"><span class="h-tekst"><span class="oog">Herfst Sale · tot 40%</span><span class="h-kop">Jouw huid. Jouw lijn. <span class="b">Wellshave.</span></span>'
+    f'<span class="h-sub">In beeld: de 4 Foil Blade Baron™, vier foil-koppen voor je gezicht.</span><span class="knop">Shop nu</span></span></a>'
     '<div class="h-rechts"><a class="h-tegel im-r-herfst" href="#"><span>Shop de Herfst Sale</span></a><a class="h-tegel im-r-water" href="#"><span>Shop bodygroomers</span></a></div></section>')
 s+=zeker()
-s+=('<section class="sec creme"><h2 class="serif">Glad tot in de kleinste hoek.</h2><p class="sub">Gemaakt voor je gevoeligste plekken.</p>'
+s+=('<section class="sec creme"><h2 class="serif">Glad tot in <span class="b">de kleinste hoek.</span></h2><p class="sub">Gemaakt voor je gevoeligste plekken.</p>'
     '<div class="duo">'+''.join(kaart(*p,groot=True) for p in UITGELICHT)+'</div></section>')
-s+=('<section class="sec creme midden"><h2 class="serif zwart">Verzorgd van top tot teen.</h2><a class="knop" href="#">Shop alles</a>'
+s+=('<section class="sec creme midden"><h2 class="serif">Verzorgd <span class="b">van top tot teen.</span></h2><a class="knop" href="#">Shop alles</a>'
     '<div class="plekken">'+''.join(f'<a class="plek" href="#"><span class="pbeeld im-{k}"></span><b>{n}</b><span class="nu">Shop nu {KLEIN}</span></a>' for k,n in PLEKKEN)+'</div></section>')
-s+=''.join(f'<section class="ban {lt} {kant} im-{k}"><div class="ban-tekst"><span class="cond">{a}<em>{b}</em></span><p>{p}</p><span class="knop">Shop nu</span></div></section>' for k,a,b,p,lt,kant in BANNERS)
-s+=('<section class="sec creme midden"><span class="oog brons">Gemaakt voor jou</span><h2 class="sans">Slimme techniek, simpel in gebruik.</h2><div class="tech">'
+s+=''.join(f'<section class="ban {lt} {kant} im-{k}"><div class="ban-tekst"><span class="merkteken" aria-hidden="true"></span><h3 class="ban-kop">{a} <span class="b">{b}</span></h3><p>{p}</p><span class="knop">Shop nu</span></div></section>' for k,a,b,p,lt,kant in BANNERS)
+s+=('<section class="sec creme midden"><span class="oog brons">Gemaakt voor jou</span><h2 class="serif">Slimme techniek, <span class="b">simpel in gebruik.</span></h2><div class="tech">'
     +''.join(f'<div class="t{" midden-t" if i==1 else ""}"><span class="tbeeld im-{k}"></span><b>{t}</b><p>{p}</p></div>' for i,(k,t,p) in enumerate(TECH))+'</div></section>')
 rij=''.join(f'<span class="lg lg-{k}" style="--h:{h}" role="img" aria-label="{n}"></span>' for k,n,h in LOGO)
 s+=f'<section class="pers"><div class="pers-rij">{rij}</div></section>'
-s+=('<section class="sec creme midden"><span class="oog brons">Onze bestsellers</span><h2 class="serif zwart">Alles wat je nodig hebt.</h2>'
+s+=('<section class="sec creme midden"><span class="oog brons">Onze bestsellers</span><h2 class="serif">Alles wat je <span class="b">nodig hebt.</span></h2>'
     '<div class="rij7">'+''.join(kaart(*p) for p in PRODUCTEN)+'</div></section>')
-s+=('<section class="club"><span class="club-merk" aria-hidden="true"></span><span class="club-oog">Wellshave</span><h2 class="serif wit">Kies. Probeer. Houd hem.</h2>'
+s+=('<section class="club"><span class="club-merk" aria-hidden="true"></span><span class="club-oog">Wellshave</span><h2 class="serif wit">Kies. Probeer. <span class="b">Houd hem.</span></h2>'
     '<p>Je bestelt vandaag, probeert honderd dagen in je eigen badkamer en houdt hem alleen als hij bevalt.</p><div class="club-rij">'
     '<div><b>100 dagen</b><span>proberen, anders geld terug</span></div><div><b>2 jaar</b><span>garantie op het apparaat</span></div><div><b>Voor 23:59</b><span>besteld, morgen in huis</span></div></div>'
     '<a class="knop" href="#">Vind jouw apparaat</a><span class="club-link">Doe de quiz</span></section>')
