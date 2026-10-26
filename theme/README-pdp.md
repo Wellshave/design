@@ -2612,3 +2612,12 @@ eindtitel. Gemaakt is een lus van 22,8 s zonder die teksten:
 Waarom niet de tekst gewoon laten staan: op desktop valt het linkerdeel van de
 film weg in het donkere vlak, dus de regels zouden half afgesneden zijn; en
 op en-, de- en fr-pagina's zou de tekst Nederlands zijn.
+
+## Terug naar om en om: de praktijkkaarten in plaats van de schuifrij
+
+Op verzoek staat `ws-pdp-praktijk` (beeld en tekst om en om) weer op de pagina,
+op de plek van `v7_kenmerken`, direct onder de film. Instellingen gelijk aan
+de live site: geen kop, tekstvlakken wit (`#FFFFFF`) en heel licht zand
+(`#F8F6F2`), merkteken aan. `v7_kenmerken` (de schuifrij "Gemaakt voor de
+lastige plekken.") staat uitgeschakeld in product.json en kan in de editor
+terug aangezet worden. Beide lezen dezelfde gegevens: `custom.image_with_text`.
