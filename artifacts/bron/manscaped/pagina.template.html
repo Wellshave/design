@@ -266,24 +266,24 @@ body{margin:0;background:var(--g);color:var(--i);font:400 15px/1.6 "Montserrat",
   .hfont .club h2{font-size:34px}
 }
 
-/* knoppen zoals de live Wellshave-knop: goudverloop, hoeken van 14 px, hoofdletters met ruime spatiëring, pijl en gouden gloed */
-.site .knop{gap:12px;border-radius:14px;background:linear-gradient(135deg,#F5D18A 0%,#D8AC5D 52%,#BC813E 100%);color:#111;
-  font-family:"Inter",-apple-system,sans-serif;font-size:11.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;padding:16px 24px;
-  box-shadow:0 14px 34px -18px rgba(245,209,138,.9);transition:transform .18s ease,filter .18s ease,box-shadow .18s ease}
-.site .knop::after{content:"";width:15px;height:15px;flex:none;background:currentColor;
-  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8h10M9 4l4 4-4 4'/%3E%3C/svg%3E") center/contain no-repeat;
-  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8h10M9 4l4 4-4 4'/%3E%3C/svg%3E") center/contain no-repeat;transition:transform .18s ease}
-.site .knop:hover{transform:translateY(-1px);filter:brightness(1.04);box-shadow:0 18px 38px -16px rgba(245,209,138,1)}
+/* geen knoppen, zoals hears.com: een rustige tekstlink met pijl; het goud zit in de pijl en de onderlijn bij hover */
+.site .knop{gap:8px;background:none;border-radius:0;box-shadow:none;padding:0 0 4px;color:var(--ink);
+  font-family:"Inter",-apple-system,sans-serif;font-size:13.5px;font-weight:500;letter-spacing:-.005em;text-transform:none;
+  background-image:linear-gradient(90deg,#D8AC5D,#BC813E);background-size:0% 1px;background-position:0 100%;background-repeat:no-repeat;
+  border-bottom:1px solid rgba(17,17,17,.25);transition:background-size .3s ease,border-color .3s ease}
+.site .knop::after{content:"";width:14px;height:14px;flex:none;background:#B0742A;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8h10M9 4l4 4-4 4'/%3E%3C/svg%3E") center/contain no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8h10M9 4l4 4-4 4'/%3E%3C/svg%3E") center/contain no-repeat;transition:transform .2s ease}
+.site .knop:hover{background-size:100% 1px;border-color:transparent}
 .site .knop:hover::after{transform:translateX(3px)}
-.site .knop:focus-visible{outline:3px solid #BC813E;outline-offset:3px}
-.site .knop.klein{padding:12px 18px;font-size:10.5px;border-radius:12px}
-.site .ban.licht .knop,.site .creme .knop,.site .midden .knop{box-shadow:0 12px 28px -16px rgba(188,129,62,.75)}
-/* zachte tweede optie, zoals live: onderstreepte tekstlink */
-.site .club-link{font-size:12.5px;font-weight:600;color:rgba(255,255,255,.8);text-decoration:underline;text-underline-offset:4px;text-decoration-color:rgba(255,255,255,.35)}
-@container (max-width:749px){
-  .site .knop{padding:15px 20px;font-size:11px}
-  .site .h-tekst .knop,.site .club .knop{align-self:stretch;justify-content:center}
-}
+.site .knop:focus-visible{outline:2px solid #BC813E;outline-offset:4px}
+.site .h-tekst .knop,.site .ban.donker .knop,.site .club .knop{color:#fff;border-bottom-color:rgba(255,255,255,.35)}
+.site .h-tekst .knop::after,.site .ban.donker .knop::after,.site .club .knop::after{background:#F5D18A}
+.site .h-tekst .knop:hover,.site .ban.donker .knop:hover,.site .club .knop:hover{background-image:linear-gradient(90deg,#F5D18A,#D8AC5D)}
+/* het aanmeldveld blijft een klein, stil vlak zoals bij Hears */
+.site .knop.klein{background:#fff;color:#111;border:0;border-radius:100px;padding:8px 16px;font-size:11.5px;font-weight:600}
+.site .knop.klein::after{display:none}
+.site .club-link{font-size:12px;font-weight:500;color:rgba(255,255,255,.6);text-decoration:none}
 </style>
 
 <div class="schil">
@@ -314,9 +314,9 @@ body{margin:0;background:var(--g);color:var(--i);font:400 15px/1.6 "Montserrat",
       <li><b>Het S-teken</b> als watermerk in de banners en het donkere blok.</li>
       <li>Kortingslabels als gouden pil, de geruststrook met ronde icoonvlakken en haarlijnen, en de techniek als drie kaarten in wit, carbon en zand.</li>
     </ul></div>
-    <div class="noot"><h2>Knoppen</h2><ul>
-      <li>Overgenomen van de knop die nu live in de hero staat: goudverloop van #F5D18A naar #BC813E, hoeken van 14 px, hoofdletters met ruime spatiëring, een pijl die bij hover opschuift en een zachte gouden gloed eronder.</li>
-      <li>De zachte tweede optie blijft een onderstreepte tekstlink, ook zoals live.</li>
+    <div class="noot"><h2>Geen knoppen</h2><ul>
+      <li>Zoals Hears: elke actie is een rustige tekstlink met een dunne onderlijn en een kleine gouden pijl. Bij hover loopt de lijn in goud vol en schuift de pijl op.</li>
+      <li>Op donker is de link wit met een lichtgouden pijl. Alleen het aanmeldveld in de footer heeft nog een klein stil vlak, zoals bij Hears.</li>
     </ul></div>
     <div class="noot"><h2>Letter</h2><ul>
       <li><b>Hears gebruikt Helvetica Now Display</b>, een betaalde letter van Monotype; hun eigen bestanden mogen we niet gebruiken. <b>Inter Tight</b> voor koppen en <b>Inter</b> voor tekst komen het dichtst bij en zijn gratis. Wil je het echte Helvetica Now, dan moet Wellshave daar zelf een licentie voor nemen.</li>
