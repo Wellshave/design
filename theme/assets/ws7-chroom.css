@@ -1,0 +1,18 @@
+/* Wellshave v7: header, aankondigingsbalk en footer in dezelfde letter als de homepage.
+   Inter Tight voor het logo en de koppen, Inter voor de rest. Alleen binnen de header- en footergroep,
+   zodat productpagina's en collecties hun eigen letter houden. */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600&display=swap");
+.shopify-section-group-header-group,
+.shopify-section-group-footer-group,
+#DrawerMobileMenu{
+  --font-family:"Inter",-apple-system,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family:var(--font-family);
+}
+.shopify-section-group-header-group :where(*:not(svg):not(svg *)),
+.shopify-section-group-footer-group :where(*:not(svg):not(svg *)),
+#DrawerMobileMenu :where(*:not(svg):not(svg *)){font-family:inherit !important}
+.shopify-section-group-header-group :is(.h1,.h2,.h3,.h4,h1,h2,h3,h4),
+.shopify-section-group-footer-group :is(.h1,.h2,.h3,.h4,h1,h2,h3,h4){
+  font-family:"Inter Tight","Helvetica Neue",Helvetica,Arial,sans-serif !important;
+  font-weight:500;letter-spacing:-.02em;
+}

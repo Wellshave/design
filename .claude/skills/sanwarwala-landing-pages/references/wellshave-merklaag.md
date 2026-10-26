@@ -287,6 +287,10 @@ hoofdletters voor productnamen; dat is het handschrift van Manscaped, niet van o
 Montserrat blijft alleen bestaan waar oude pagina's hem nog hebben; nieuwe pagina's gebruiken
 hem niet meer. Het redactionele register heeft zijn eigen serif (deel 2), dat verandert niet.
 
+In het v7-thema staan de header, de aankondigingsbalk en de footer ook in Inter, via
+`assets/ws7-chroom.css`. Dat bestand geldt alleen binnen de header- en footergroep; de
+productpagina's en collecties houden nog de themaletter Montserrat tot ze zelf worden omgezet.
+
 ---
 
 ## 5. Het tweeslags-kopapparaat
