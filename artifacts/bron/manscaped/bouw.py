@@ -79,10 +79,10 @@ s+=('<section class="sec creme midden"><span class="oog brons">Onze bestsellers<
     '<div class="rij7">'+''.join(kaart(*p) for p in PRODUCTEN)+'</div></section>')
 COLLABS=json.load(open(f'{B}/collabs.json'))  # uit het influencersysteem (Supabase, Social Media): Wellshave-collabs die live staan op Instagram
 s+=('<section class="sec creme midden"><span class="oog brons">Collabs</span><h2 class="serif">Word deel van <span class="b">de #wellshavefamilie.</span></h2>'
-    '<p class="sub">Makers die Wellshave in hun eigen routine gebruiken. Tik om de post op Instagram te zien.</p>'
+    
     '<div class="schuif"><div class="plekken ig-rij" tabindex="0" aria-label="Collabs op Instagram, schuif opzij">'+''.join(
     f'<a class="ig" href="https://www.instagram.com/{u}/" target="_blank" rel="noopener"><span class="ig-beeld im-ig-{h.replace(".","-")}"></span>'
-    f'<span class="ig-onder"><b>@{h}</b><small>{prod}</small></span></a>' for h,u,prod,_ in COLLABS)
+    f'<span class="ig-onder"><b>@{h}</b></span></a>' for h,u,prod,_ in COLLABS)
     +'</div>'+VOORTGANG+'</div>'
     f'<a class="knop" href="https://www.instagram.com/wellshave/">Volg @wellshave</a></section>')
 s+=('<section class="club"><span class="club-merk" aria-hidden="true"></span><span class="club-oog">Wellshave</span><h2 class="serif wit">Kies. Probeer. <span class="b">Houd hem.</span></h2>'
