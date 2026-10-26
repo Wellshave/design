@@ -95,6 +95,11 @@ s+=('<section class="s" style="padding-top:0"><div class="c-kop"><p class="s-oog
     +'<div class="z-raster">'+''.join(
         f'<a class="c im-{k}" href="#"><span class="c-tekst"><b class="c-naam">{plaknaam(naam)}</b><span class="c-sub">{sub}</span></span></a>' for k,naam,sub in PLEKKEN)
     +'</div></section>')
+# uitgelicht: één apparaat, één belofte (specificaties uit de productomschrijving in Shopify)
+s+=('<section class="s s-spot"><div class="sp"><div class="sp-foto im-spot-gg" role="img" aria-label="Macro van de keramische meskop van de Groom Guard"></div>'
+    '<div class="sp-tekst"><p class="s-oog">Gemaakt voor gevoelige huid</p><h2>Trim jij zonder <em>sneetjes</em>?</h2>'
+    '<p>Een gewoon mesje pakt je huid bij elke verkeerde hoek. De <b>keramische SkinSafe-messen</b> van de Groom Guard leggen je huid nooit bloot, ook niet bij je schaamstreek. Met LED-licht en <b>IPX7</b>, dus gewoon onder de douche.</p>'
+    f'<a class="m-knop" href="#">Ontdek de Groom Guard {PIJL}</a></div></div></section>')
 kolA=''.join(rkaart(*r) for r in REVIEWS[0::2]); kolB=''.join(rkaart(*r) for r in REVIEWS[1::2])
 muur=('<section class="s s-muur"><div class="rw-paneel"><div class="rw-links"><p class="s-oog">Reviews</p><h2 class="s-h2">Wat klanten zeggen over Wellshave</h2>'
     '<div class="rw-tp"><b>Uitstekend</b><i class="tp-sterren" style="--r:4.5" role="img" aria-label="4,5 van 5 sterren"></i>'

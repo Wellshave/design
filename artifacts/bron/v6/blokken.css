@@ -73,6 +73,18 @@
 .c-nw{white-space:nowrap}
 .c:hover .c-naam svg{transform:translateX(4px)}
 .c-sub{font-size:13.5px;line-height:1.5;color:rgba(255,255,255,.88)}
+/* uitgelicht: foto links, donker vlak rechts */
+.s-spot{padding-top:0}
+.sp{display:grid;grid-template-columns:1fr 1fr;min-height:700px;border-radius:14px;overflow:hidden;background:#141110}
+.sp-foto{background-position:50% 50%;background-size:cover}
+.sp-tekst{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:80px 96px 80px 104px;color:#fff;background:radial-gradient(circle at 88% 14%,rgba(132,92,52,.55),rgba(132,92,52,0) 46%),linear-gradient(160deg,#2B211B 0%,#1B1512 70%)}
+.sp-tekst .s-oog{color:#D7B98E}
+.sp-tekst h2{margin:20px 0 0;font-family:"EB Garamond",Georgia,serif;font-weight:500;font-size:68px;line-height:1.02;letter-spacing:-.01em;color:#F7F1E8;max-width:9em}
+.sp-tekst h2 em{font-style:italic}
+.sans .sp-tekst h2{font-family:"Montserrat",sans-serif;font-weight:700;font-size:48px;letter-spacing:-.03em;line-height:1.08}
+.sp-tekst p:not(.s-oog){margin:26px 0 0;font-size:16px;line-height:1.75;color:rgba(255,255,255,.8);max-width:31em}
+.sp-tekst p b{color:#fff;font-weight:600}
+.sp-tekst .m-knop{margin-top:36px;padding:19px 30px}
 /* reviews */
 .tp{grid-area:link;display:flex;flex-direction:column;align-items:flex-end;gap:7px;padding-bottom:8px}
 .tp-rij{display:flex;align-items:center;gap:10px;font-size:15px;color:#1B1814;white-space:nowrap}
@@ -195,6 +207,13 @@
   .k-scroll .k:hover{transform:none}
   .k-scroll .k-prijs b{flex:0 0 auto}
   .z{aspect-ratio:4/5}
+  .sp{grid-template-columns:1fr;min-height:0;border-radius:12px}
+  .sp-foto{aspect-ratio:4/3}
+  .sp-tekst{padding:32px 22px 30px}
+  .sp-tekst h2{font-size:40px;margin-top:12px}
+  .sans .sp-tekst h2{font-size:30px}
+  .sp-tekst p:not(.s-oog){font-size:14.5px;margin-top:16px;line-height:1.65}
+  .sp-tekst .m-knop{margin-top:24px;align-self:stretch;justify-content:center;padding:17px 20px}
   .c-kop{margin-bottom:24px}
   .c{border-radius:10px}
   .c-tekst{left:12px;right:12px;bottom:12px;gap:4px}
