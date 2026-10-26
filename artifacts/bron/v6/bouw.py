@@ -68,9 +68,10 @@ PIJL='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/
 def kop(oog,h2,rechts):
     return f'<div class="s-kop"><p class="s-oog">{oog}</p><h2 class="s-h2">{h2}</h2>{rechts}</div>'
 def link(tekst): return f'<a class="s-link" href="#"><span>{tekst}</span>{PIJL}</a>'
-def ster(r,n):
-    if not r: return '<p class="k-ster k-leeg" aria-hidden="true"></p>'
-    return f'<p class="k-ster"><i style="--r:{r}" aria-hidden="true"></i>{str(r).replace(".",",")} <span>({n})</span></p>'
+TP_SCORE='4,5'  # Trustpilot TrustScore, live gecontroleerd op 26 oktober 2026 (1.088 reviews)
+def ster(r,n):  # Trustpilot-regel zoals hun Micro TrustScore-widget, gelijk op elke kaart
+    return (f'<p class="k-tp"><b>{TP_SCORE}</b> uit 5 <span class="k-tp-m"><svg viewBox="0 0 12 11" aria-hidden="true">'
+            '<path d="M6 .6l1.6 3.4 3.7.5-2.7 2.6.7 3.7L6 9 2.7 10.8l.7-3.7L.7 4.5l3.7-.5z"/></svg>Trustpilot</span></p>')
 def kaart(k,naam,nu,van,r,n,chips,inhoud=''):
     return (f'<a class="k{" k-set" if inhoud else ""}" href="#"><div class="k-beeld"><span class="k-golf"></span><span class="k-foto im-{k}" role="img" aria-label="{naam}"></span></div>'
             f'<div class="k-body">{ster(r,n)}<h3 class="k-naam">{naam}</h3>'
@@ -90,7 +91,7 @@ kolA=''.join(rkaart(*r) for r in REVIEWS[0::2]); kolB=''.join(rkaart(*r) for r i
 s+=('<section class="s"><div class="rw-paneel"><div class="rw-links"><p class="s-oog">Reviews</p><h2 class="s-h2">Wat klanten zeggen over Wellshave</h2>'
     '<div class="rw-tp"><b>Uitstekend</b><i class="tp-sterren" style="--r:4.5" role="img" aria-label="4,5 van 5 sterren"></i>'
     '<span class="rw-merk"><svg viewBox="0 0 12 11" aria-hidden="true"><path d="M6 .6l1.6 3.4 3.7.5-2.7 2.6.7 3.7L6 9 2.7 10.8l.7-3.7L.7 4.5l3.7-.5z"/></svg>Trustpilot</span></div>'
-    '<p class="rw-score">TrustScore 4,5 uit 5 · 1.087 reviews</p><a class="rw-link" href="#">Lees alle reviews op Trustpilot</a></div>'
+    '<p class="rw-score">TrustScore 4,5 uit 5 · 1.088 reviews</p><a class="rw-link" href="#">Lees alle reviews op Trustpilot</a></div>'
     f'<div class="rw-muur"><div class="rw-kol"><div class="rw-baan">{kolA}{kolA}</div></div><div class="rw-kol rw-terug"><div class="rw-baan">{kolB}{kolB}</div></div></div></div>'
     '<div class="u-raster"><div class="u-tekst"><h3>Mannen zoals jij. Hun routine, zelf gefilmd.</h3>'
     '<p>Elke video staat er met toestemming van de maker. #wellshavefamilie</p><a href="#">Bekijk Instagram</a></div>'
