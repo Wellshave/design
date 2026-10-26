@@ -29,6 +29,15 @@ De homepage v7 is de referentie voor alles wat hierna komt: `theme/sections/ws7-
 - **Alles aanpasbaar** in de theme-editor: producten uit Shopify, teksten, foto's en links als
   instellingen, nooit hard in de code.
 
+**Header, footer en winkelwagen** volgen dezelfde lijn. Header, aankondigingsbalk en footer staan in
+Inter via `theme/assets/ws7-chroom.css`. De winkelwagen-lade (`theme/snippets/cart-drawer.liquid`,
+`cart-rewards-bar.liquid`, `assets/cart-drawer.css`, ontwerp in het canvas *Wellshave winkelwagen v7*)
+is naar Hears: aantal in een zwart rondje, dunne gouden cadeaubalk met vinkjes, van-prijzen
+doorgestreept, cadeaus als eigen regel met een label "Cadeau vanaf €…", verzekerde verzending als
+kaart met een schakelaar (standaard uit; een vooraf aangevinkte betaalde optie mag niet), een
+schuifrij met toevoegingen en onderaan het totaal met een carbon "Bespaar"-label. De afrekenknop is
+de enige echte knop.
+
 **Nog niet omgezet:** `startbestand-advertorial.html` en `startbestand-listicle.html` staan nog
 in Montserrat met pilknoppen. Zet bij de eerstvolgende pagina de letter, links en labels om
 naar deel 4, 6 en 7, en werk dan het startbestand mee bij.
