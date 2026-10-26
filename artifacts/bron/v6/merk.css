@@ -108,3 +108,23 @@
   .merk .sp-tekst::after{width:260px;height:260px;right:-60px;top:-50px}
   .merk .a::before{width:320px;height:320px;margin-left:-160px}
 }
+
+/* proef: Fraunces voor de koppen, de rest blijft Montserrat */
+.merk.fraunces .m-h1,.merk.fraunces .s-h2,.merk.fraunces .sp-tekst h2,.merk.fraunces .a-blok h2,.merk.fraunces .c-naam,.merk.fraunces .u-tekst h3{
+  font-family:"Fraunces",Georgia,serif;font-weight:800;font-variation-settings:"opsz" 48;letter-spacing:-.015em;line-height:1.04}
+.merk.fraunces .m-h1{font-size:80px;line-height:.98}
+.merk.fraunces .s-h2{font-size:54px}
+.merk.fraunces .rw-links .s-h2{font-size:48px}
+.merk.fraunces .sp-tekst h2{font-size:62px}
+.merk.fraunces .a-blok h2{font-size:56px}
+.merk.fraunces .c-naam{font-size:27px;letter-spacing:-.01em}
+.merk.fraunces .u-tekst h3{font-size:25px}
+@container (max-width:749px){
+  .merk.fraunces .m-h1{font-size:46px}
+  .merk.fraunces .s-h2{font-size:34px}
+  .merk.fraunces .rw-links .s-h2{font-size:32px}
+  .merk.fraunces .sp-tekst h2{font-size:40px}
+  .merk.fraunces .a-blok h2{font-size:36px}
+  .merk.fraunces .c-naam{font-size:19px}
+  .merk.fraunces .u-tekst h3{font-size:18px}
+}

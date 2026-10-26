@@ -1,7 +1,7 @@
 <title>Wellshave v6 homepage</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Montserrat:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Fraunces:opsz,wght@9..144,700;9..144,800;9..144,900&family=Montserrat:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
 /* ── schil: de pagina om de mockup heen, volgt het thema van de lezer ── */
 :root{
@@ -136,6 +136,7 @@ body{margin:0;background:var(--g);color:var(--i);font:400 15px/1.6 "Montserrat",
         <span class="lbl">Stijl</span>
         <div class="seg" role="group" aria-label="Stijl">
           <button type="button" id="k-sans" aria-pressed="true">Wellshave-merk</button>
+          <button type="button" id="k-fr" aria-pressed="false">Merk met Fraunces</button>
           <button type="button" id="k-serif" aria-pressed="false">Zonder merklaag</button>
         </div>
       </div>
@@ -170,6 +171,7 @@ body{margin:0;background:var(--g);color:var(--i);font:400 15px/1.6 "Montserrat",
         <li><b>Zand en carbon.</b> Zand #F5F1EA is het herkenningssignaal, donkere vlakken zijn carbon. Die staan nu in het ritme: wit, zand, carbon.</li>
         <li><b>Het S-teken</b> keert terug als klein goud teken voor elk label en als groot watermerk in de reviewmuur, het uitgelichte blok en de afsluiter.</li>
         <li>De opbouw van v6 blijft: dezelfde blokken, dezelfde rust. Met de schakelaar "Zonder merklaag" bovenaan zie je het verschil.</li>
+        <li><b>Merk met Fraunces</b> is een proef: de koppen in Fraunces ExtraBold, een zware display-serif, en de rest in Montserrat. Kleuren, goud, knoppen en het S-teken blijven gelijk. Let op: jullie merkregels schrijven Montserrat als enige letter voor.</li>
       </ul>
     </div>
     <div class="noot">
@@ -236,10 +238,11 @@ body{margin:0;background:var(--g);color:var(--i);font:400 15px/1.6 "Montserrat",
   function fit(){ var s=desk.clientWidth/1440; schaal.style.transform='scale('+s+')'; desk.style.height=Math.ceil(schaal.offsetHeight*s)+'px'; }
   if(window.ResizeObserver) new ResizeObserver(fit).observe(desk);
   window.addEventListener('load',fit); fit();
-  var bs=document.getElementById('k-serif'), bm=document.getElementById('k-sans');
-  function zet(merk){ document.body.classList.toggle('merk',merk); bm.setAttribute('aria-pressed',String(merk)); bs.setAttribute('aria-pressed',String(!merk)); try{localStorage.setItem('ws-stijl',merk?'merk':'clean')}catch(e){} fit(); }
-  bs.addEventListener('click',function(){zet(false)}); bm.addEventListener('click',function(){zet(true)});
-  var st='merk'; try{ st=localStorage.getItem('ws-stijl')||'merk'; }catch(e){} zet(st!=='clean');
+  var knoppen={merk:document.getElementById('k-sans'),fraunces:document.getElementById('k-fr'),clean:document.getElementById('k-serif')};
+  function zet(st){ document.body.classList.toggle('merk',st!=='clean'); document.body.classList.toggle('fraunces',st==='fraunces');
+    for(var k in knoppen) knoppen[k].setAttribute('aria-pressed',String(k===st)); try{localStorage.setItem('ws-stijl',st)}catch(e){} fit(); }
+  for(var k in knoppen)(function(k){knoppen[k].addEventListener('click',function(){zet(k)})})(k);
+  var st='merk'; try{ st=localStorage.getItem('ws-stijl')||'merk'; }catch(e){} zet(knoppen[st]?st:'merk');
   var lp=document.getElementById('l-pct'), le=document.getElementById('l-eur');
   function label(e){ document.body.classList.toggle('euro',e); lp.setAttribute('aria-pressed',String(!e)); le.setAttribute('aria-pressed',String(e)); try{localStorage.setItem('ws-label',e?'euro':'pct')}catch(x){} fit(); }
   lp.addEventListener('click',function(){label(false)}); le.addEventListener('click',function(){label(true)});
