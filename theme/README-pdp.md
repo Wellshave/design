@@ -2310,6 +2310,12 @@ leeg te tonen. Aan en uit met de instelling *v7* in het koopvak (header
   zwarte modelkeuze en de upgrade-pop-up komen alleen nog als er geen kaart
   is (`toon_tiers`). "Meest gekozen" staat op de duurste kaart die in
   `compare_info` populair is.
+* Elke kaart toont wat hij méér heeft dan de goedkoopste kaart, uit
+  `custom.upgrade_extras` van die goedkoopste (`{"<id duurdere>": [handles]}`).
+  Zo staat bij de Barber Bro 3.0 ook op zijn eigen pagina "+ Neustrimmer
+  Essential": dat staat vastgelegd bij de Barber Bro 2.0. Bij upgrades is de
+  goedkoopste het product zelf, dus daar verandert niets. De vergelijking
+  gebruikt dezelfde regel: zo'n kolom krijgt alle punten van de goedkoopste.
 * Add-ons met combikorting uit `custom.combi_korting` (`{"handle": pct}`);
   het percentage moet overeenkomen met een echte automatische korting.
 * **Bundels** onderaan de buybox uit `custom.pdp_bundels`; het product zelf

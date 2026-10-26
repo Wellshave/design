@@ -641,6 +641,10 @@
           # Het label Meest gekozen: op de duurste keuze die in compare_info populair is.
           assign tier_top = ''
           assign tier_top_prijs = 0
+          # De goedkoopste kaart is het vertrekpunt: elke andere kaart toont wat hij
+          # daar bovenop heeft, uit upgrade_extras van die goedkoopste.
+          assign tier_laag = ''
+          assign tier_laag_prijs = 0
           if toon_tiers
             assign tier_handle_lijst = tier_handles | split: ','
             for th in tier_handle_lijst
@@ -650,6 +654,11 @@
               else
                 assign tp = all_products[th]
                 assign tpv = tp.selected_or_first_available_variant
+              endif
+              if tier_laag == '' or tpv.price < tier_laag_prijs
+                assign tier_laag = th
+                assign tier_laag_prijs = tpv.price
+                assign tier_laag_extras = tp.metafields.custom.upgrade_extras.value
               endif
               if tp.metafields.custom.compare_info.value.is_popuplar and tpv.price > tier_top_prijs
                 assign tier_top = th
@@ -694,28 +703,33 @@
                 {%- capture t_was -%}{%- if tv.compare_at_price > tv.price -%}{{ s.munt }}{% render 'price-formated', price: tv.compare_at_price %}{%- endif -%}{%- endcapture -%}
                 {%- capture t_kl -%}{{ s.munt }}{% render 'price-formated', price: t_klarna %}{%- endcapture -%}
 
-                {%- comment -%} de extra's van de upgrade, met hun losse prijs {%- endcomment -%}
-                {%- assign t_los = v.price -%}
+                {%- comment -%}
+                  De extra's van deze kaart ten opzichte van de goedkoopste, met hun
+                  losse prijs. Eerst uit upgrade_extras van de goedkoopste kaart
+                  (Barber Bro 2.0 weet wat er in de 3.0 bij zit), anders uit die van
+                  dit product (de PRO weet wat er in de Ultimate bij zit).
+                {%- endcomment -%}
+                {%- assign t_los = tier_laag_prijs -%}
                 {%- assign t_extra_n = 0 -%}
+                {%- assign t_sleutel = tp.id | append: '' -%}
+                {%- assign t_delen = blank -%}
+                {%- if th != tier_laag -%}
+                  {%- if tier_laag_extras != blank -%}{%- assign t_delen = tier_laag_extras[t_sleutel] -%}{%- endif -%}
+                  {%- if t_delen == blank and basis == false and extras_kaart != blank -%}{%- assign t_delen = extras_kaart[t_sleutel] -%}{%- endif -%}
+                {%- endif -%}
                 {%- capture t_extra -%}
-                  {%- unless basis -%}
-                    {%- if extras_kaart != blank -%}
-                      {%- assign t_sleutel = tp.id | append: '' -%}
-                      {%- assign t_delen = extras_kaart[t_sleutel] -%}
-                      {%- for losh in t_delen -%}
-                        {%- assign lp = all_products[losh] -%}
-                        {%- if lp == blank -%}{%- continue -%}{%- endif -%}
-                        {%- assign t_los = t_los | plus: lp.price -%}
-                        {%- assign t_extra_n = t_extra_n | plus: 1 -%}
-                        {%- assign lp_vd = lp.metafields.custom.voordelen.value | first -%}
-                        <span class="ws-tx">
-                          <span class="ws-tx-bd">{%- if lp.featured_image != blank -%}{{ lp.featured_image | image_url: width: 96 | image_tag: alt: '', loading: 'lazy', width: 48, height: 48 }}{%- endif -%}</span>
-                          <span class="ws-tx-nm">+ {{ lp.title }}{%- if lp_vd.kop.value != blank -%}<small>{{ lp_vd.kop.value }}</small>{%- endif -%}</span>
-                          <span class="ws-tx-pr"><s>{{ s.munt }}{% render 'price-formated', price: lp.price %}</s>{{ s.tier_inbegrepen }}</span>
-                        </span>
-                      {%- endfor -%}
-                    {%- endif -%}
-                  {%- endunless -%}
+                  {%- for losh in t_delen -%}
+                    {%- assign lp = all_products[losh] -%}
+                    {%- if lp == blank -%}{%- continue -%}{%- endif -%}
+                    {%- assign t_los = t_los | plus: lp.price -%}
+                    {%- assign t_extra_n = t_extra_n | plus: 1 -%}
+                    {%- assign lp_vd = lp.metafields.custom.voordelen.value | first -%}
+                    <span class="ws-tx">
+                      <span class="ws-tx-bd">{%- if lp.featured_image != blank -%}{{ lp.featured_image | image_url: width: 96 | image_tag: alt: '', loading: 'lazy', width: 48, height: 48 }}{%- endif -%}</span>
+                      <span class="ws-tx-nm">+ {{ lp.title }}{%- if lp_vd.kop.value != blank -%}<small>{{ lp_vd.kop.value }}</small>{%- endif -%}</span>
+                      <span class="ws-tx-pr"><s>{{ s.munt }}{% render 'price-formated', price: lp.price %}</s>{{ s.tier_inbegrepen }}</span>
+                    </span>
+                  {%- endfor -%}
                 {%- endcapture -%}
 
                 {%- comment -%} de cadeaus die deze prijs haalt, uit de instellingen van de winkelwagen {%- endcomment -%}
@@ -778,7 +792,7 @@
                   {%- if t_rijen != blank -%}
                     <span class="ws-tier-extra">
                       {{ t_rijen }}
-                      {%- if basis == false and t_extra_n > 0 and t_bespaar > 0 and s.tier_besp != blank -%}
+                      {%- if t_extra_n > 0 and t_bespaar > 0 and s.tier_besp != blank -%}
                         {%- capture t_besp_tx -%}<b>{{ s.munt }}{% render 'price-formated', price: t_bespaar %}</b>{%- endcapture -%}
                         <span class="ws-tx-som">
                           {{ s.tier_besp | replace: '[bedrag]', t_besp_tx }}

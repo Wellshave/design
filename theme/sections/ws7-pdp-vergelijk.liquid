@@ -33,6 +33,17 @@
   {%- capture basis_sl %}{% render 'ws-vergelijk-sleutels', p: product %}{% endcapture -%}
   {%- assign upgrades = '' -%}
   {%- for up in product.metafields.custom.upgrade_products.value -%}{%- assign upgrades = upgrades | append: '‹' | append: up.id | append: '›' -%}{%- endfor -%}
+  {%- comment -%}
+    Hetzelfde tussen de kolommen: staat een kolom in upgrade_extras van de
+    goedkoopste kolom (Barber Bro 2.0 → 3.0), dan heeft hij alles van die
+    goedkoopste plus de extra's.
+  {%- endcomment -%}
+  {%- assign laag = blank -%}
+  {%- for cp in lijst -%}
+    {%- if laag == blank or cp.selected_or_first_available_variant.price < laag.selected_or_first_available_variant.price -%}{%- assign laag = cp -%}{%- endif -%}
+  {%- endfor -%}
+  {%- assign laag_extras = laag.metafields.custom.upgrade_extras.value -%}
+  {%- capture laag_sl %}{% render 'ws-vergelijk-sleutels', p: laag %}{% endcapture -%}
   <div class="ws7 ws7p" id="ws7p-vergelijk">
     <div class="ws7p-rail ws7p-sec">
       <div class="ws7-midden">
@@ -55,6 +66,8 @@
           {%- capture eigen %}{% render 'ws-vergelijk-sleutels', p: cp %}{% endcapture -%}
           {%- assign cp_sl = '‹' | append: cp.id | append: '›' -%}
           {%- if upgrades contains cp_sl -%}{%- assign eigen = eigen | append: basis_sl -%}{%- endif -%}
+          {%- assign cp_sleutel = cp.id | append: '' -%}
+          {%- if laag_extras != blank and cp.id != laag.id and laag_extras[cp_sleutel] != blank -%}{%- assign eigen = eigen | append: laag_sl -%}{%- endif -%}
           {%- assign beeld = ci.popup_image | default: cp.featured_image -%}
           {%- assign c_pct = 0 -%}
           {%- if cv.compare_at_price > cv.price -%}{%- assign c_v = cv.compare_at_price | minus: cv.price -%}{%- assign c_pct = c_v | times: 100 | divided_by: cv.compare_at_price -%}{%- endif -%}
