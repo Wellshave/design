@@ -51,6 +51,8 @@
     endif
   endfor
 
+  assign shipping_drempel = settings.free_shipping_requirement | times: 100
+
   # Subtotal shown without gift lines, since gifts are free (discount applies at go-live).
   # totaal_oud telt per regel de van-prijs (of de prijs zonder korting) op, ook die
   # van de cadeaus; het verschil met wat je betaalt is wat je bespaart.
@@ -97,12 +99,76 @@
       <div js-content-items>
         {%- if cart.empty? -%}
           <div class="cart-drawer__empty-block">
-            {{- 'icon-empty-cart.svg' | inline_asset_content -}}
-            <h4 class="cart-drawer__empty-title">{{ 'cart_drawer.empty_title' | t }}</h4>
+            <span class="cart-drawer__empty-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a1 1 0 0 1-1 .8H7.2a1 1 0 0 1-1-.8z"/><path d="M9 10V7a3 3 0 0 1 6 0v3"/></svg>
+            </span>
+            <h3 class="cart-drawer__empty-title">{{ 'cart_drawer.empty_title' | t }}</h3>
+            <p class="cart-drawer__empty-text">{{ 'cart_drawer.empty_text' | t }}</p>
             <a href="{{ routes.all_products_collection_url }}" class="cart-drawer__empty-link">
               {{ 'cart_drawer.empty_button_label' | t }}
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
             </a>
           </div>
+
+          {%- comment -%}
+            Wat er gratis bij komt: dezelfde drempels als de cadeaubalk. Een cadeau dat
+            niet op voorraad is (ook geen reserve, snippet ws-cadeau) laten we weg.
+          {%- endcomment -%}
+          {%- liquid
+            assign leeg_g1 = ''
+            assign leeg_g2 = ''
+            if settings.enable_gift_rewards
+              capture leeg_g1
+                render 'ws-cadeau', nr: 1
+              endcapture
+              assign leeg_g1 = leeg_g1 | strip
+              capture leeg_g2
+                render 'ws-cadeau', nr: 2, niet: leeg_g1
+              endcapture
+              assign leeg_g2 = leeg_g2 | strip
+            endif
+          -%}
+          {%- if settings.enable_free_shipping or leeg_g1 != blank or leeg_g2 != blank -%}
+            {%- capture cadeau_icoon -%}<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 6.5h11V9h-11zM3.5 9v4.5h9V9M8 6.5v7M8 6.5C6 6.5 4.5 3 6.6 3 8 3 8 6.5 8 6.5zm0 0c2 0 3.5-3.5 1.4-3.5C8 3 8 6.5 8 6.5z"/></svg>{%- endcapture -%}
+            <div class="cart-drawer__gratis">
+              <p class="cart-drawer__gratis-titel">{{ 'cart_drawer.empty_perks_title' | t }}</p>
+              {%- if settings.enable_free_shipping -%}
+                {%- capture bedrag -%}{%- render 'ws-euro', bedrag: shipping_drempel -%}{%- endcapture -%}
+                <p class="cart-drawer__gratis-rij">
+                  <span class="cart-drawer__gratis-icoon"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 4.5h8v6h-8zM9.5 6.5h3l2 2.2v1.8h-5"/><circle cx="4.5" cy="11.8" r="1.2"/><circle cx="11.5" cy="11.8" r="1.2"/></svg></span>
+                  <span>{{ 'cart_drawer.perk_shipping_html' | t: value: bedrag | remove: ',00' }}</span>
+                </p>
+              {%- endif -%}
+              {%- if leeg_g1 != blank -%}
+                {%- liquid
+                  assign naam = all_products[leeg_g1].title
+                  if leeg_g1 == settings.gift_1_product.handle
+                    assign naam = settings.gift_1_label | default: naam
+                  endif
+                  assign drempel = settings.gift_1_threshold | times: 100
+                -%}
+                {%- capture bedrag -%}{%- render 'ws-euro', bedrag: drempel -%}{%- endcapture -%}
+                <p class="cart-drawer__gratis-rij">
+                  <span class="cart-drawer__gratis-icoon">{{ cadeau_icoon }}</span>
+                  <span>{{ 'cart_drawer.perk_gift_html' | t: gift: naam, value: bedrag | remove: ',00' }}</span>
+                </p>
+              {%- endif -%}
+              {%- if leeg_g2 != blank -%}
+                {%- liquid
+                  assign naam = all_products[leeg_g2].title
+                  if leeg_g2 == settings.gift_2_product.handle
+                    assign naam = settings.gift_2_label | default: naam
+                  endif
+                  assign drempel = settings.gift_2_threshold | times: 100
+                -%}
+                {%- capture bedrag -%}{%- render 'ws-euro', bedrag: drempel -%}{%- endcapture -%}
+                <p class="cart-drawer__gratis-rij">
+                  <span class="cart-drawer__gratis-icoon">{{ cadeau_icoon }}</span>
+                  <span>{{ 'cart_drawer.perk_gift_html' | t: gift: naam, value: bedrag | remove: ',00' }}</span>
+                </p>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
         {%- else -%}
           <div class="cart-drawer__content-inner">
             <form
@@ -307,6 +373,48 @@
           </div>
         {%- endif -%}
       </div>
+
+      {%- comment -%}
+        Bestsellers bij een lege winkelwagen. Staat buiten js-content-items, zodat de
+        schuifrij niet bij elke wijziging opnieuw opgebouwd wordt; de CSS verbergt hem
+        zodra er iets in de winkelwagen ligt.
+      {%- endcomment -%}
+      {%- if settings.enable_cart_featured and settings.cart_featured_products != blank -%}
+        <slider-component class="cart-drawer__featured">
+          {%- if settings.cart_featured_title != blank -%}
+            <h3 class="cart-drawer__featured-title">{{ settings.cart_featured_title }}</h3>
+          {%- endif -%}
+
+          <ul id="Slider-CartFeatured" class="cart-drawer__featured-list" role="list">
+            {%- for featured_product in settings.cart_featured_products limit: 6 -%}
+              {%- assign fv = featured_product.selected_or_first_available_variant -%}
+              <li id="Slide-CartFeature-{{ forloop.index }}" class="cart-drawer__featured-item">
+                <a href="{{ featured_product.url }}" class="cart-drawer__featured-media">
+                  {%- if featured_product.featured_image != blank -%}
+                    {{ featured_product.featured_image | image_url: width: 360 | image_tag: loading: 'lazy', sizes: '176px' }}
+                  {%- endif -%}
+                  {%- if fv.compare_at_price > fv.price -%}
+                    {%- assign korting = fv.compare_at_price | minus: fv.price | times: 100 | divided_by: fv.compare_at_price -%}
+                    {%- if korting > 0 -%}
+                      <span class="cart-drawer__featured-label">{{ 'cart_drawer.discount_label' | t: value: korting }}</span>
+                    {%- endif -%}
+                  {%- endif -%}
+                </a>
+                <a href="{{ featured_product.url }}" class="cart-drawer__featured-naam">{{ featured_product.title }}</a>
+                <p class="cart-drawer__featured-prijs">
+                  <span>{%- render 'ws-euro', bedrag: fv.price -%}</span>
+                  {%- if fv.compare_at_price > fv.price -%}<s>{%- render 'ws-euro', bedrag: fv.compare_at_price -%}</s>{%- endif -%}
+                </p>
+                {%- if fv.available -%}
+                  <button type="button" class="cart-drawer__featured-button" data-action="add-product" data-variant="{{ fv.id }}">+ {{ 'cart_drawer.add_short' | t }}</button>
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+          </ul>
+
+          <div class="cart-drawer__upsell-balk" slider-scrollbar><span></span></div>
+        </slider-component>
+      {%- endif -%}
     </div>
 
     <div class="cart-drawer__bottom">
@@ -353,25 +461,5 @@
       </div>
     </div>
 
-    {%- if settings.enable_cart_featured and settings.cart_featured_products != blank -%}
-      <slider-component class="cart-drawer__featured">
-        {%- if settings.cart_featured_title != blank -%}
-          <h2 class="cart-drawer__featured-title">{{ settings.cart_featured_title }}</h2>
-        {%- endif -%}
-
-        <ul id="Slider-CartFeatured" class="cart-drawer__featured-list">
-          {%- for featured_product in settings.cart_featured_products limit: 4 -%}
-            <li
-              id="Slide-CartFeature-{{ forloop.index }}"
-              class="cart-drawer__featured-item"
-            >
-              {% render 'product-card', product_card: featured_product, card_size: "small" %}
-            </li>
-          {%- endfor -%}
-        </ul>
-
-        <div class="cart-drawer__featured-pagination" slider-pagination></div>
-      </slider-component>
-    {%- endif -%}
   </div>
 </cart-drawer>

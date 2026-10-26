@@ -828,81 +828,265 @@
 }
 
 /* Lege winkelwagen */
-.cart-drawer__featured {
-  display: block;
-  padding: 28px;
-}
-
-.cart-drawer__featured-title {
-  margin: 0 0 16px;
-  font-family: var(--cd-kop);
-  font-size: 19px;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-}
-
-.cart-drawer__featured-item {
-  width: 160px;
-  min-width: 160px;
-}
-
-.cart-drawer__featured-pagination {
-  display: flex;
-  justify-content: center;
-  gap: 6px;
-  margin-top: 16px;
-}
-
-.cart-drawer__featured-pagination span {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: var(--black-10);
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.cart-drawer__featured-pagination span.active {
-  background-color: var(--cd-goud);
-}
-
+[data-count="0"] .cart-drawer__count,
 [data-count="0"] .cart-drawer__achivements,
-[data-count="0"] .cart-drawer__bottom,
+[data-count="0"] .cart-drawer__subtotal,
+[data-count="0"] .cart-drawer__submit,
 .cart-drawer:not([data-count="0"]) .cart-drawer__featured {
   display: none;
 }
 
+[data-count="0"] .cart-drawer__benefits {
+  margin-top: 0;
+}
+
 [js-content-items] {
-  flex: 1;
   display: flex;
   flex-direction: column;
+}
+
+.cart-drawer:not([data-count="0"]) [js-content-items] {
+  flex: 1;
 }
 
 .cart-drawer__empty-block {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   text-align: center;
-  gap: 16px;
-  flex: 1;
+  padding: 44px 0 36px;
+}
+
+.cart-drawer__empty-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--cd-zand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-drawer__empty-icon svg {
+  width: 28px;
+  height: 28px;
+  fill: none;
+  stroke: var(--cd-goud);
+  stroke-width: 1.5;
 }
 
 .cart-drawer__empty-title {
-  margin: 0;
+  margin: 20px 0 0;
   font-family: var(--cd-kop);
-  font-size: 22px;
+  font-size: 28px;
   font-weight: 500;
+  line-height: 1.15;
   letter-spacing: -0.02em;
 }
 
+.cart-drawer__empty-text {
+  max-width: 300px;
+  margin: 8px 0 0;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--cd-zacht);
+}
+
 .cart-drawer__empty-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--cd-inkt);
   font-size: 14px;
   font-weight: 500;
   color: var(--cd-inkt);
   text-decoration: none;
-  border-bottom: 1px solid var(--cd-goud);
-  padding-bottom: 3px;
+  transition: border-color 0.2s;
+}
+
+.cart-drawer__empty-link:hover {
+  border-color: var(--cd-goud);
+}
+
+.cart-drawer__empty-link svg {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: var(--cd-goud);
+  stroke-width: 1.6;
+  transition: transform 0.2s;
+}
+
+.cart-drawer__empty-link:hover svg {
+  transform: translateX(3px);
+}
+
+.cart-drawer__gratis {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px 20px;
+  border-radius: 10px;
+  background: var(--cd-zand);
+}
+
+.cart-drawer__gratis-titel {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cd-grijs);
+}
+
+.cart-drawer__gratis-rij {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.cart-drawer__gratis-rij b,
+.cart-drawer__gratis-rij strong {
+  font-weight: 600;
+}
+
+.cart-drawer__gratis-icoon {
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-drawer__gratis-icoon svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: var(--cd-goud);
+  stroke-width: 1.5;
+}
+
+/* Bestsellers bij een lege winkelwagen */
+.cart-drawer__featured {
+  display: block;
+  margin-top: 30px;
+}
+
+.cart-drawer__featured-title {
+  margin: 0 0 14px;
+  font-family: var(--cd-kop);
+  font-size: 19px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.cart-drawer__featured-list {
+  display: flex;
+  gap: 10px;
+  margin: 0 -28px 0 0;
+  padding: 0 28px 0 0;
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.cart-drawer__featured-list::-webkit-scrollbar {
+  display: none;
+}
+
+.cart-drawer__featured-item {
+  flex: 0 0 176px;
+  display: flex;
+  flex-direction: column;
+  scroll-snap-align: start;
+}
+
+.cart-drawer__featured-media {
+  position: relative;
+  display: flex;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 6px;
+  background: var(--cd-zand);
+  overflow: hidden;
+}
+
+.cart-drawer__featured-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mix-blend-mode: multiply;
+}
+
+.cart-drawer__featured-label {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  padding: 4px 6px;
+  border-radius: 3px;
+  background: var(--cd-inkt);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.cart-drawer__featured-naam {
+  margin-top: 10px;
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--cd-inkt);
+  text-decoration: none;
+}
+
+.cart-drawer__featured-prijs {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 3px 0 0;
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.cart-drawer__featured-prijs s {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--cd-grijs);
+}
+
+.cart-drawer__featured-button {
+  margin-top: auto;
+  height: 34px;
+  border-radius: 4px;
+  background: var(--cd-inkt);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.cart-drawer__featured-prijs + .cart-drawer__featured-button {
+  margin-top: 10px;
+}
+
+.cart-drawer__featured-button:hover {
+  background: #3A3732;
+}
+
+.cart-drawer__featured-button.loading {
+  opacity: 0.6;
 }
 
 /* ===== MOBIEL ===== */
@@ -1111,12 +1295,34 @@
     height: 16px;
   }
 
-  .cart-drawer__featured {
-    padding: 20px;
+  .cart-drawer__empty-block {
+    padding: 30px 0 26px;
   }
 
-  .cart-drawer__empty-block svg {
-    width: 48px;
-    height: 48px;
+  .cart-drawer__empty-title {
+    margin-top: 18px;
+    font-size: 24px;
+  }
+
+  .cart-drawer__gratis {
+    padding: 16px;
+  }
+
+  .cart-drawer__featured {
+    margin-top: 26px;
+  }
+
+  .cart-drawer__featured-title {
+    margin-bottom: 12px;
+    font-size: 17px;
+  }
+
+  .cart-drawer__featured-list {
+    margin-right: -20px;
+    padding-right: 20px;
+  }
+
+  .cart-drawer__featured-item {
+    flex-basis: 156px;
   }
 }
