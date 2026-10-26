@@ -80,6 +80,12 @@ Dien opnieuw in met dezelfde prompt plus het preset-ID dat je terugkreeg:
 { "declined_preset_id": "24bae836-2c4a-48e0-89b6-49fcc0b21612" }
 ```
 
+Dit gebeurt per batch en over de hele linie: in de Gentleman Shaver-film werden alle acht items
+in één keer onderschept, met hetzelfde preset-ID. Reken er dus op dat je elke batch met donkere
+prompts twee keer indient, en schrik niet van `Submitted 0/8` — er is niets misgegaan en niets
+afgeschreven. De kostenpeiling met `get_cost` ging in dezelfde run wél gewoon door zonder het
+ID, dus een geslaagde peiling voorspelt niet dat de batch erdoorheen komt.
+
 ### De behuizing verkleurt naar goud
 
 Vraag je een warm randlicht zonder begrenzing, dan kleurt het model het hele apparaat
@@ -89,6 +95,25 @@ champagne. Begrens het licht en verbied de verkleuring apart:
 > for the entire shot: the housing never turns gold, bronze, champagne, tan or warm metallic at
 > any moment. […] one thin warm rim highlight confined strictly to the outer edge of the
 > silhouette.
+
+### Als het product zélf een metaalkleur draagt
+
+De regel hierboven gaat mis zodra goud bij het product hoort. The Gentleman Shaver is glanzend
+zwart met gepolijste gouden flankpanelen en een gouden ring om de aan-knop; een verbod op goud
+zou dan het product zelf wegpoetsen.
+
+Verbied in dat geval niet de kleur maar de **verspreiding**. Benoem waar het metaal zit, en zeg
+dat het daar blijft:
+
+> Its body is glossy piano black with polished gold accent panels exactly where the reference
+> has them: the sculpted gold panels running down each side and the gold teardrop bezel around
+> the round power button. The black surfaces stay glossy black for the entire shot and never
+> turn bronze, champagne or warm metallic, and the gold never spreads onto the black.
+
+Die formulering hield stand over acht shots. Wat er wél gebeurde: de gouden vlakken werden
+breder dan op de referentie, en in het warm belichte eindshot ving de behuizing zoveel goud dat
+het zwart nauwelijks meer als zwart leest. Vraag je een gouden lichtsfeer, reken dan op een
+product dat gouder oogt dan het is — en beslis vooraf of dat mag.
 
 ### Tekst kantelt in spiegelbeeld
 
@@ -128,6 +153,27 @@ gaat. Som vervolgens expliciet op wat **niet** mag oplichten — dat laatste doe
 Dezelfde aanpak werkt voor elk onderdeel dat op een vaste plek hoort te zitten: een knop die
 indrukt, een klepje dat opengaat, een indicator die verspringt. Eerst opzoeken, dan positie
 beschrijven, dan opsommen wat er niet mag gebeuren.
+
+### Wat oplicht, licht te laat op
+
+Het model zet het aanspringen graag aan het eind van de clip. Bij de Gentleman Shaver ging het
+LCD pas na 3,5 van de 5 seconden aan, en dan staat de kijker drieënhalve seconde naar een donker
+paneel te kijken terwijl de annotatie er al bij staat.
+
+Schrijven dat het vroeg moet gebeuren helpt niet betrouwbaar; het is een montageprobleem, net
+als het kantelende woordmerk. Zoek op de contactstrook het frame waar het aangaat en **kap de
+kop van het shot af** tot het aanspringen ergens in de eerste twee seconden valt. Reken erop dat
+zo'n shot korter wordt dan de rest, en laat dat zo — een kortere beat op het moment dat er iets
+gebeurt, leest als leestekens.
+
+Let op: `monteer.sh --help` beschrijft `:seconden` als afkappen "vanaf het begin", maar het
+filter is `trim=0:duur` en houdt dus juist de kóp. Voor een kopafkapping maak je vooraf een apart
+bestand:
+
+```bash
+ffmpeg -ss 1.8 -i shot3.mp4 -t 3.2 -c:v libx264 -preset slow -crf 14 -pix_fmt yuv420p -r 24 \
+  shot3-kort.mp4
+```
 
 ### Detailgeometrie wordt herzien
 
