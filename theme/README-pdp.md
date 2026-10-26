@@ -2489,3 +2489,29 @@ geprobeerd. Die gaf een ongelijk beeld, omdat de meeste voordelen geen komma
 hebben. De snippet `snippets/ws-voordeel-regel.liquid` van die versie wordt niet
 meer gebruikt. Hij staat nog in v7, omdat de MCP-koppeling geen themabestanden mag
 verwijderen. Je kunt hem verwijderen in de code-editor, en daarna ook hier.
+
+## Metafields opgeruimd (26 oktober 2026)
+
+Ik heb gescand welke metafields het live thema, v6 en v7 echt lezen. Ik telde
+alleen code die op een pagina staat en geen commentaar is, plus de dynamische
+bronnen in de sjablonen. Tien `custom`-velden werden nergens gelezen. Die zijn
+verwijderd, samen met hun 182 waarden:
+
+* product: `upgrade`, `ugc_gallery_id`, `video`, `use_case_cards`,
+  `use_case_title`, `compare_table`, `new_inventory_label`, `delivery_returns`
+  en `upgrade_details`;
+* collectie: `megamenu_image`.
+
+Daarnaast zijn zes metaobjecttypes verwijderd die alleen aan die velden hingen:
+Upgrade info, Use Case Card, Compare Table, Compare Table Row, Inventory label
+en Upgrade details. Samen waren dat 196 items.
+
+De back-up staat in `backups/metafields-opruimen-2026-10-26.json`, met de
+definities, alle waarden en alle metaobjecten. Video's en beelden zelf staan nog
+in Files; alleen de koppeling is weg.
+
+Ik heb niets aangeraakt in de namespaces van apps en Shopify (loox, reviews,
+shopify, mm-google-shopping, mc-facebook, ecomposer, intelligems, blockify,
+addresshero) en ook niet de SEO-velden `global.title_tag` en
+`global.description_tag`. Losse waarden van verwijderde apps (judgeme, GEMPAGES,
+reelUpProductReels, debutify, gp_discount) staan er ook nog. Geen thema leest ze.
