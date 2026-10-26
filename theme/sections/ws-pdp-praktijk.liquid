@@ -70,6 +70,11 @@
           </header>
         {%- endif -%}
 
+        {%- comment -%}
+          Op de telefoon is dit een rij om opzij te vegen (zie de css); op
+          desktop een gewone stapel, om en om.
+        {%- endcomment -%}
+        <div class="ws-prk-lijst">
         {%- assign teller = 0 -%}
         {%- for item in lijst -%}
           {%- liquid
@@ -146,6 +151,12 @@
             </div>
           </article>
         {%- endfor -%}
+        </div>
+        {%- if aantal > 1 -%}
+          <div class="ws-prk-stip" aria-hidden="true">
+            {%- for i in (1..aantal) -%}<i{% if forloop.first %} class="is-aan"{% endif %}></i>{%- endfor -%}
+          </div>
+        {%- endif -%}
       </div>
     </section>
 
@@ -153,6 +164,23 @@
       (function () {
         var wortel = document.currentScript.previousElementSibling;
         if (!wortel || !wortel.hasAttribute('data-ws-prk')) { return; }
+        // Telefoon: de stip onder de rij volgt de kaart die het meest in beeld is.
+        var rij = wortel.querySelector('.ws-prk-lijst');
+        var stippen = wortel.querySelectorAll('.ws-prk-stip i');
+        if (rij && stippen.length) {
+          var bezig = false;
+          rij.addEventListener('scroll', function () {
+            if (bezig) { return; }
+            bezig = true;
+            requestAnimationFrame(function () {
+              bezig = false;
+              var stap = rij.scrollWidth / stippen.length;
+              var nu = Math.min(stippen.length - 1, Math.round(rij.scrollLeft / stap));
+              if (rij.scrollLeft + rij.clientWidth >= rij.scrollWidth - 4) { nu = stippen.length - 1; }
+              for (var i = 0; i < stippen.length; i++) { stippen[i].classList.toggle('is-aan', i === nu); }
+            });
+          }, { passive: true });
+        }
 
         var films = Array.prototype.slice.call(wortel.querySelectorAll('.ws-prk-v'));
         if (!films.length) { return; }

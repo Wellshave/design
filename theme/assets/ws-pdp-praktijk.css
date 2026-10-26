@@ -114,4 +114,21 @@
   .ws-prk-tx h3{font-size:20px;max-width:none}
   .ws-prk-body p{font-size:13.5px}
   .ws-prk-etiket{left:12px;bottom:12px;padding:8px 13px 8px 9px;font-size:10px}
+
+  /* Een rij om opzij te vegen in plaats van een lange stapel. Elke kaart is
+     84% breed, zodat de rand van de volgende in beeld staat en je ziet dat
+     er meer is. De rij loopt tot de rand van het scherm. Beeld boven, tekst
+     eronder; de tekstvlakken rekken mee tot de hoogste kaart. */
+  .ws-prk-lijst{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;
+    margin:0 -12px;padding:0 12px;scroll-padding:0 12px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .ws-prk-lijst::-webkit-scrollbar{display:none}
+  .ws-prk-kaart,.ws-prk-kaart.ws-om{flex:0 0 84%;margin-top:0;scroll-snap-align:start;
+    grid-template-rows:auto 1fr}
+  .ws-prk-tx{justify-content:flex-start}
+  .ws-prk-stip{display:flex;justify-content:center;gap:6px;margin-top:16px}
+  .ws-prk-stip i{width:6px;height:6px;border-radius:3px;background:rgba(20,18,15,.16);transition:width .25s,background-color .25s}
+  .ws-prk-stip i.is-aan{width:18px;background:var(--p-brons)}
+}
+@media (min-width: 821px) {
+  .ws-prk-stip{display:none}
 }

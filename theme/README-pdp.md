@@ -2621,3 +2621,14 @@ de live site: geen kop, tekstvlakken wit (`#FFFFFF`) en heel licht zand
 (`#F8F6F2`), merkteken aan. `v7_kenmerken` (de schuifrij "Gemaakt voor de
 lastige plekken.") staat uitgeschakeld in product.json en kan in de editor
 terug aangezet worden. Beide lezen dezelfde gegevens: `custom.image_with_text`.
+
+### Op de telefoon: een rij om opzij te vegen
+
+Tot 820 px staan de praktijkkaarten niet meer onder elkaar maar in een rij die
+je opzij veegt (`.ws-prk-lijst`, scroll-snap). Elke kaart is 84 % breed, zodat
+de rand van de volgende in beeld staat; beeld boven, tekst eronder, en de
+tekstvlakken rekken mee tot de hoogste kaart. Onder de rij staan stippen (bij
+twee of meer kaarten); de actieve stip volgt de kaart in beeld. Video's spelen
+alleen als hun kaart in beeld is, net als eerst. Desktop is ongewijzigd: om en
+om. Getest op de Essential Flex Bundel (vier kaarten): geen horizontaal
+schuiven van de pagina, stippen kloppen tot en met de laatste kaart.
