@@ -59,6 +59,20 @@
 .z-pijl{position:absolute;right:22px;top:24px;width:38px;height:38px;border-radius:50%;border:1px solid rgba(27,24,20,.25);display:grid;place-items:center;color:#1B1814;transition:background-color .3s ease,color .3s ease}
 .z:hover .z-pijl{background:#1B1814;color:#fff;border-color:#1B1814}
 
+/* kies jouw plek: sfeerfoto's met de naam erop, zoals de referentie */
+.c-kop{text-align:center;margin-bottom:40px}
+.c-kop .s-h2{margin-top:14px}
+.c{position:relative;display:block;aspect-ratio:4/5;border-radius:12px;overflow:hidden;background-color:#1B1814;background-position:center;background-size:cover;isolation:isolate}
+.c::before{content:"";position:absolute;inset:0;z-index:-1;background:inherit;transition:transform .7s ease}
+.c:hover::before{transform:scale(1.04)}
+.c::after{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(180deg,rgba(20,15,12,0) 45%,rgba(20,15,12,.72) 100%)}
+.c-tekst{position:absolute;left:24px;right:24px;bottom:24px;z-index:1;display:flex;flex-direction:column;gap:8px;color:#fff}
+.c-naam{display:block;font-family:"EB Garamond",Georgia,serif;font-weight:500;font-size:32px;line-height:1.05}
+.sans .c-naam{font-family:"Montserrat",sans-serif;font-weight:700;font-size:24px;letter-spacing:-.02em}
+.c-naam svg{display:inline-block;vertical-align:middle;margin:-3px 0 0 10px;width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex:none;transition:transform .3s ease}
+.c-nw{white-space:nowrap}
+.c:hover .c-naam svg{transform:translateX(4px)}
+.c-sub{font-size:13.5px;line-height:1.5;color:rgba(255,255,255,.88)}
 /* reviews */
 .tp{grid-area:link;display:flex;flex-direction:column;align-items:flex-end;gap:7px;padding-bottom:8px}
 .tp-rij{display:flex;align-items:center;gap:10px;font-size:15px;color:#1B1814;white-space:nowrap}
@@ -181,6 +195,13 @@
   .k-scroll .k:hover{transform:none}
   .k-scroll .k-prijs b{flex:0 0 auto}
   .z{aspect-ratio:4/5}
+  .c-kop{margin-bottom:24px}
+  .c{border-radius:10px}
+  .c-tekst{left:12px;right:12px;bottom:12px;gap:4px}
+  .c-naam{font-size:21px}
+  .sans .c-naam{font-size:16px}
+  .c-naam svg{width:13px;height:13px;margin-left:6px}
+  .c-sub{font-size:11px;line-height:1.4}
   .z-tekst{left:14px;top:14px;right:44px;gap:3px}
   .z-naam{font-size:22px}
   .sans .z-naam{font-size:16px}

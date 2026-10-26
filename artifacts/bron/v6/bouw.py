@@ -82,10 +82,18 @@ def kaart(k,naam,nu,van,r,n,chips,inhoud=''):
 s=''
 s+=('<section class="s">'+kop('Bestsellers','Wat onze klanten het vaakst kiezen',link('Shop alle bestsellers'))
     +'<div class="k-raster k-scroll">'+''.join(kaart(*p) for p in BESTSELLERS)+'</div></section>')
-s+=('<section class="s" style="padding-top:0">'+kop('Kies jouw plek','Waar wil je trimmen?',link('Twijfel je? Doe de quiz'))
+def plaknaam(n):  # pijl blijft aan het laatste woord vast
+    kop,_,staart=n.rpartition(' ')
+    return (kop+' ' if kop else '')+f'<span class="c-nw">{staart}{PIJL}</span>'
+PLEKKEN=[  # sfeerfoto's uit de eigen Shopify-bestanden; teksten van de huidige site
+ ('c-lichaam','Lichaam','Borst, rug en schaamstreek, zonder sneetjes.'),
+ ('c-gezicht','Gezicht &amp; baard','Van strakke kaaklijn tot glad geschoren.'),
+ ('c-hoofd','Hoofd','Van fade tot strak kort. Jij bepaalt hoe kort.'),
+ ('c-neus','Neus &amp; oren','Detailwerk zonder trekken of irriteren.'),
+]
+s+=('<section class="s" style="padding-top:0"><div class="c-kop"><p class="s-oog">Kies jouw plek</p><h2 class="s-h2">Waar wil je trimmen?</h2></div>'
     +'<div class="z-raster">'+''.join(
-        f'<a class="z" href="#"><span class="z-foto im-{k}" aria-hidden="true"></span><span class="z-tekst"><b class="z-naam">{naam}</b>'
-        f'<span class="z-meta"><span>{aantal} apparaten</span><span>vanaf {eur(vanaf)}</span></span></span><span class="z-pijl">{PIJL}</span></a>' for k,naam,aantal,vanaf in ZONES)
+        f'<a class="c im-{k}" href="#"><span class="c-tekst"><b class="c-naam">{plaknaam(naam)}</b><span class="c-sub">{sub}</span></span></a>' for k,naam,sub in PLEKKEN)
     +'</div></section>')
 kolA=''.join(rkaart(*r) for r in REVIEWS[0::2]); kolB=''.join(rkaart(*r) for r in REVIEWS[1::2])
 muur=('<section class="s s-muur"><div class="rw-paneel"><div class="rw-links"><p class="s-oog">Reviews</p><h2 class="s-h2">Wat klanten zeggen over Wellshave</h2>'
