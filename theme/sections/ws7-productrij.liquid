@@ -1,6 +1,7 @@
 {% comment %}
   Wellshave v7 · productrij: een kop in twee regels en een schuifrij met productkaarten en een voortgangsbalk.
   Kies losse producten als blokken; zonder blokken komen de producten uit de gekozen collectie.
+  Per blok kun je een eigen foto kiezen; leeg = de hoofdfoto van het product.
 {% endcomment %}
 {{ 'ws7.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'ws7.js' | asset_url }}" defer></script>
@@ -15,7 +16,7 @@
         {%- if section.blocks.size > 0 -%}
           {%- for block in section.blocks -%}
             {%- if block.settings.product != blank -%}
-              {% render 'ws7-kaart', product: block.settings.product, naam: block.settings.naam, wat: block.settings.wat, label: section.settings.label %}
+              {% render 'ws7-kaart', product: block.settings.product, foto: block.settings.foto, naam: block.settings.naam, wat: block.settings.wat, label: section.settings.label %}
             {%- endif -%}
           {%- endfor -%}
         {%- elsif section.settings.collectie != blank -%}
@@ -48,7 +49,8 @@
   ],
   "blocks": [
     { "type": "product", "name": "Product", "settings": [
-      { "type": "product", "id": "product", "label": "Product", "info": "Prijs, van-prijs, foto en link komen hieruit." },
+      { "type": "product", "id": "product", "label": "Product", "info": "Prijs, van-prijs en link komen hieruit." },
+      { "type": "image_picker", "id": "foto", "label": "Foto", "info": "Leeg = de hoofdfoto van het product. Vierkant werkt het best." },
       { "type": "text", "id": "naam", "label": "Naam", "info": "Leeg = de producttitel." },
       { "type": "text", "id": "wat", "label": "Korte regel onder de naam" }
     ]}
