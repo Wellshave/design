@@ -88,12 +88,12 @@ s+=('<section class="s" style="padding-top:0">'+kop('Kies jouw plek','Waar wil j
         f'<span class="z-meta"><span>{aantal} apparaten</span><span>vanaf {eur(vanaf)}</span></span></span><span class="z-pijl">{PIJL}</span></a>' for k,naam,aantal,vanaf in ZONES)
     +'</div></section>')
 kolA=''.join(rkaart(*r) for r in REVIEWS[0::2]); kolB=''.join(rkaart(*r) for r in REVIEWS[1::2])
-s+=('<section class="s"><div class="rw-paneel"><div class="rw-links"><p class="s-oog">Reviews</p><h2 class="s-h2">Wat klanten zeggen over Wellshave</h2>'
+muur=('<section class="s s-muur"><div class="rw-paneel"><div class="rw-links"><p class="s-oog">Reviews</p><h2 class="s-h2">Wat klanten zeggen over Wellshave</h2>'
     '<div class="rw-tp"><b>Uitstekend</b><i class="tp-sterren" style="--r:4.5" role="img" aria-label="4,5 van 5 sterren"></i>'
     '<span class="rw-merk"><svg viewBox="0 0 12 11" aria-hidden="true"><path d="M6 .6l1.6 3.4 3.7.5-2.7 2.6.7 3.7L6 9 2.7 10.8l.7-3.7L.7 4.5l3.7-.5z"/></svg>Trustpilot</span></div>'
     '<p class="rw-score">TrustScore 4,5 uit 5 · 1.088 reviews</p><a class="rw-link" href="#">Lees alle reviews op Trustpilot</a></div>'
-    f'<div class="rw-muur"><div class="rw-kol"><div class="rw-baan">{kolA}{kolA}</div></div><div class="rw-kol rw-terug"><div class="rw-baan">{kolB}{kolB}</div></div></div></div>'
-    '<div class="u-raster"><div class="u-tekst"><h3>Mannen zoals jij. Hun routine, zelf gefilmd.</h3>'
+    f'<div class="rw-muur"><div class="rw-kol"><div class="rw-baan">{kolA}{kolA}</div></div><div class="rw-kol rw-terug"><div class="rw-baan">{kolB}{kolB}</div></div></div></div></section>')
+s+=('<section class="s s-video"><div class="u-raster"><div class="u-tekst"><h3>Mannen zoals jij. Hun routine, zelf gefilmd.</h3>'
     '<p>Elke video staat er met toestemming van de maker. #wellshavefamilie</p><a href="#">Bekijk Instagram</a></div>'
     +''.join(f'<a class="u im-{k}" href="#" aria-label="Video: {wat}, {duur}"><span class="u-play"><svg viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg></span><span class="u-duur">{duur}</span></a>' for k,duur,wat in UGC)
     +'</div></section>')
@@ -114,7 +114,7 @@ s+=('<section class="a"><div class="a-blok"><p class="s-oog">Nog één stap</p><
     '<div class="f-kol"><h4>Hulp</h4><ul><li>Vragen</li><li>Verzending</li><li>Retourneren</li><li>Contact</li></ul></div>'
     '<div class="f-kol"><h4>Wellshave</h4><ul><li>Ons verhaal</li><li>Blog</li><li>Voorwaarden</li><li>Privacy</li></ul></div></footer>'
     '<div class="f-onder"><span>© 2026 Wellshave · Helmond</span><span>Nederland (EUR €)</span></div></section>')
-site=site.replace('{{rij}}',rij).replace('{{secties}}',s)
+site=site.replace('{{rij}}',rij).replace('{{secties}}',muur+s)  # reviewmuur direct onder Gezien bij
 
 def svg(x): return 'url("data:image/svg+xml,'+urllib.parse.quote(x,safe=' =:/\',.-')+'")'
 golf=svg("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400' preserveAspectRatio='none'><rect width='400' height='400' fill='#F6F0E7'/>"
