@@ -2632,3 +2632,28 @@ twee of meer kaarten); de actieve stip volgt de kaart in beeld. Video's spelen
 alleen als hun kaart in beeld is, net als eerst. Desktop is ongewijzigd: om en
 om. Getest op de Essential Flex Bundel (vier kaarten): geen horizontaal
 schuiven van de pagina, stippen kloppen tot en met de laatste kaart.
+
+## De bewegende reviewwand terug, upsells erachter
+
+`ws-pdp-reviewwall` staat weer op de pagina, op de plek van `v7_reviews` (die
+staat uitgeschakeld): links het Trustpilot-cijfer, rechts twee kolommen reviews
+die langs elkaar schuiven (telefoon: twee rijen zijwaarts), met pauzeknop.
+Paneel nu `#F8F6F2` in plaats van `#F2EEE7` (minder zand). Direct daaronder
+`v7_ook` ("Past goed bij je …", de upsells), en pas daarna de vragen.
+
+Volgorde: … ugc › reviewwall › v7_ook › v7_vragen › apps › v7_afsluiter.
+
+### Reviews per product, en toch altijd een volle wand
+
+Elke review heeft nu een instelling **Alleen bij** (productlijst), overgenomen
+van `v7_reviews`, plus de twee Groom Guard PRO-reviews. De wand vult in drie
+rondes: eerst reviews over dit product, dan de algemene, en alleen als hij dan
+onder de zeven kaarten zit reviews over andere producten (de PRO-reviews staan
+achteraan, die noemen te specifieke dingen). Getest:
+
+* Gentleman Shaver: 4 eigen + 3 algemene, geen aanvulling.
+* Neustrimmer Basic: 2 eigen + 3 algemene + 2 aanvulling.
+* Groom Guard PRO: 3 eigen + 3 algemene + 1 aanvulling.
+
+Reviewteksten blijven Nederlands in elke taal (letterlijke citaten). De twee
+verouderde vertalingen met 4,4 (sterrenlabel en scoreregel) staan nu op 4,5.
