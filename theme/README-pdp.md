@@ -2593,3 +2593,22 @@ krijgen een dunne rand en een zachte schaduw. Zand blijft alleen als accent:
 de iconvakjes van de voordelen, de tegels achter de onderdelen in "In de doos"
 en de kerncijfersbalk. "In de doos" zelf blijft een zandvlak, zodat er ritme in
 de pagina zit.
+
+### The Gentleman Shaver: de tekst eruit gesneden in plaats van eroverheen
+
+De aangeleverde film (36 s) had ingebrande Nederlandse teksten: in vijf shots
+een regel linksonder (y ≈ 72–87 %), in het watershot rechtsboven, plus een
+eindtitel. Gemaakt is een lus van 22,8 s zonder die teksten:
+
+* Opening en held in goudlicht: het hele beeld (daar staat geen tekst).
+* Waterdruppel, display, koppen, precisietrimmer, opzetstukken: per shot een
+  16:9-kader uitgesneden dat de tekstregel mist (bovenste 70 %, voor het
+  watershot de onderste 73 %), terug opgeschaald naar 1080p.
+* Eindtitel weggelaten; de opening komt aan het eind terug, zodat de lus
+  naadloos sluit (PSNR eerste/laatste beeld 35,7 dB).
+* Files: `gid://shopify/Video/77434103791948`, metaobject
+  `film-gentleman-shaver`, vertaald in en, de en fr.
+
+Waarom niet de tekst gewoon laten staan: op desktop valt het linkerdeel van de
+film weg in het donkere vlak, dus de regels zouden half afgesneden zijn; en
+op en-, de- en fr-pagina's zou de tekst Nederlands zijn.
