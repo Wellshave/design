@@ -80,7 +80,7 @@ def kaart(k,naam,nu,van,r,n,chips,inhoud=''):
 
 s=''
 s+=('<section class="s">'+kop('Bestsellers','Wat onze klanten het vaakst kiezen',link('Shop alle bestsellers'))
-    +'<div class="k-raster">'+''.join(kaart(*p) for p in BESTSELLERS)+'</div></section>')
+    +'<div class="k-raster k-scroll">'+''.join(kaart(*p) for p in BESTSELLERS)+'</div></section>')
 s+=('<section class="s" style="padding-top:0">'+kop('Kies jouw plek','Waar wil je trimmen?',link('Twijfel je? Doe de quiz'))
     +'<div class="z-raster">'+''.join(
         f'<a class="z" href="#"><span class="z-foto im-{k}" aria-hidden="true"></span><span class="z-tekst"><b class="z-naam">{naam}</b>'

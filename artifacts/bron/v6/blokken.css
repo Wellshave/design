@@ -163,6 +163,12 @@
   .k-chips{gap:5px;margin-top:2px}
   .k-chips li{font-size:10.5px;padding:5px 8px}
   .k-inhoud{display:none}
+  /* bestsellers: vegen naar links en rechts, de volgende kaart piekt in beeld */
+  .k-scroll{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -20px;padding:0 20px 6px;scroll-padding-left:20px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .k-scroll::-webkit-scrollbar{display:none}
+  .k-scroll .k{flex:0 0 64%;scroll-snap-align:start}
+  .k-scroll .k:hover{transform:none}
+  .k-scroll .k-prijs b{flex:0 0 auto}
   .z{aspect-ratio:4/5}
   .z-tekst{left:14px;top:14px;right:44px;gap:3px}
   .z-naam{font-size:22px}
