@@ -625,11 +625,9 @@
         "wit": false
       }
     },
-    "v7_stappen": {
-      "type": "ws7-pdp-stappen",
-      "settings": {
-        "stap_label": "Stap [n]"
-      }
+    "v7_film": {
+      "type": "ws7-pdp-film",
+      "settings": {}
     },
     "v7_kenmerken": {
       "type": "ws7-pdp-kenmerken",
@@ -999,7 +997,7 @@
   "order": [
     "main",
     "v7_pers",
-    "v7_stappen",
+    "v7_film",
     "v7_kenmerken",
     "v7_doos",
     "v7_vergelijk",

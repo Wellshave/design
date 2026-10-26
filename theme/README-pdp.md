@@ -2546,3 +2546,25 @@ en uit product.json.
 "Twee stappen" (`pdp_stappen`) is alleen ingevuld voor de Groom Guard PRO; de
 kerncijfers (`kerncijfers`) voor de Groom Guard en de Groom Guard PRO. Bij alle
 andere producten blijven die secties weg.
+
+## Film in plaats van twee stappen
+
+`ws7-pdp-film` (naar Hears) vervangt `ws7-pdp-stappen` in product.json, op
+dezelfde plek: direct onder de pers-strook. In een donker vlak staan links de
+kop, een korte tekst en de eerste drie voordelen (`custom.voordelen`) met hun
+icoon. Rechts loopt de productfilm zonder geluid in een lus en loopt aan de
+linkerrand zacht over in het vlak (mask-image). De film start pas als hij in
+beeld is en stopt erbuiten; bij "minder beweging" start hij niet vanzelf en
+krijg je de knoppen. Mobiel: de film staat boven de tekst (16:9) en de
+voordelen staan onder elkaar.
+
+* Data: metaobject `ws_pdp_film` (film, kop, kop_goud, tekst), gekoppeld via
+  `custom.pdp_film`. Zonder film blijft de sectie weg.
+* Gevuld voor 15 producten, met de films die eerder in het verwijderde veld
+  `custom.video` stonden: Groom Guard, Groom Guard PRO, Shave Package 2.0, 3.0
+  en Ultimate, Head Shaver Deluxe (ook met extra kop), Skull Deal 2.0 en 3.0,
+  neustrimmers Basic, Premium, Advance en Ultimate, Baardtrimmer Supreme en
+  Tondeuse Elegant. Kop en tekst zijn vertaald in en, de en fr.
+* De tekst in de films zelf is Nederlands, ook op de en-, de- en fr-pagina's.
+* `ws7-pdp-stappen` en `custom.pdp_stappen` (alleen gevuld voor de PRO) staan
+  niet meer op de pagina; de sectie blijft beschikbaar in de editor.

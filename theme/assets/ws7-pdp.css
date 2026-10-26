@@ -430,6 +430,23 @@
 .ws7p-km__uitleg li::before{content:"";position:absolute;left:0;top:.65em;width:5px;height:5px;border-radius:50%;background:#B0742A}
 
 /* in de doos */
+/* de film (naar Hears): donker vlak, links de kern, rechts de film die erin overloopt */
+.ws7p-film{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);min-height:600px;border-radius:28px;overflow:hidden;
+  background:radial-gradient(90% 100% at 0% 0%,#2A2520 0%,#141311 48%,#0A0A09 100%);color:#fff}
+.ws7p-film__tekst{display:grid;align-content:center;padding:72px 48px 72px 64px;position:relative;z-index:1}
+.ws7p-film .ws7-kop{margin:0;color:#fff;font-size:44px}
+.ws7p-film .ws7-goud{background-image:linear-gradient(135deg,#F8DFAB,#E5BC77 42%,#C8913F)}
+.ws7p-film .ws7p-film__lead{margin:22px 0 0;max-width:46ch;font-size:15px;line-height:1.6;color:rgba(255,255,255,.7)}
+.ws7p-film__vd{list-style:none;margin:44px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px 22px}
+.ws7p-film__vd li{display:grid;gap:6px;align-content:start}
+.ws7p-film__ic{width:40px;height:40px;margin-bottom:8px;border-radius:12px;display:grid;place-items:center;
+  background:rgba(229,188,119,.1);box-shadow:inset 0 0 0 1px rgba(229,188,119,.22);color:#E5BC77}
+.ws7p-film__svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.ws7p-film__vd b{font-family:var(--kopletter);font-size:16px;font-weight:500;line-height:1.25;letter-spacing:-.01em;color:#fff}
+.ws7p-film__vd span:not(.ws7p-film__ic){font-size:12.5px;line-height:1.5;color:rgba(255,255,255,.6)}
+.ws7p-film__beeld{position:relative;min-height:100%}
+.ws7p-film__beeld video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 30%);mask-image:linear-gradient(90deg,transparent 0,#000 30%)}
 /* in de doos: alleen de onderdelen, los op de achtergrond; kop en rijen gecentreerd */
 .ws7p-doos{display:grid;gap:44px;justify-items:center}
 .ws7p-doos__kop{max-width:620px;text-align:center;display:grid;justify-items:center}
@@ -541,6 +558,11 @@
 
 @media (max-width:1099px){
   .ws7p-km,.ws7p-rv{flex-basis:calc((100% - 36px) / 2.6)}
+  .ws7p-film__tekst{padding:56px 36px 56px 44px}
+  .ws7p-film .ws7-kop{font-size:36px}
+  .ws7p-film__vd{grid-template-columns:minmax(0,1fr);gap:16px;margin-top:32px}
+  .ws7p-film__vd li{grid-template-columns:40px minmax(0,1fr);column-gap:14px;row-gap:2px}
+  .ws7p-film__ic{grid-row:span 2;margin:0}
   .ws7p-doos .ws7p-doos__lijst--4{--k:3}
 }
 @media (max-width:899px){
@@ -549,6 +571,13 @@
   .ws7p-stap__beeld{min-height:0;aspect-ratio:4/3;border-radius:18px}
   .ws7p-stap__kaart{padding:22px}
   .ws7p-stap__kaart h3{font-size:21px}
+  .ws7p-film{grid-template-columns:minmax(0,1fr);min-height:0;border-radius:20px}
+  .ws7p-film__beeld{order:-1;min-height:0;aspect-ratio:16/9}
+  .ws7p-film__beeld video{-webkit-mask-image:linear-gradient(0deg,transparent 0,#000 30%);mask-image:linear-gradient(0deg,transparent 0,#000 30%)}
+  .ws7p-film__tekst{padding:26px 22px 32px}
+  .ws7p-film .ws7-kop{font-size:30px}
+  .ws7p-film .ws7p-film__lead{font-size:14px;margin-top:14px}
+  .ws7p-film__vd{margin-top:26px}
   .ws7p-doos{gap:30px}
   .ws7p-doos .ws7p-doos__lijst{--k:2;--gat:16px;row-gap:30px}
   .ws7p-doos__item{gap:10px}
