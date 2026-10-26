@@ -14,7 +14,10 @@
 .k{display:flex;flex-direction:column;background:#fff;border:1px solid #E7E3DE;border-radius:4px;overflow:hidden;transition:box-shadow .35s ease,transform .35s ease}
 .k:hover{box-shadow:0 22px 44px -22px rgba(52,38,24,.32);transform:translateY(-2px)}
 .k-beeld{position:relative;aspect-ratio:1;background:#F1EFEC;overflow:hidden}
-.k-golf{position:absolute;inset:0;opacity:0;transition:opacity .45s ease;background:{{golf}} center/100% 100% no-repeat}
+/* hover: iets diepere grijstint met het Wellshave-teken flauw achter het apparaat */
+.k-golf{position:absolute;inset:0;opacity:0;transition:opacity .45s ease;background:#EAE7E2}
+.k-golf::after{content:"";position:absolute;left:50%;top:50%;width:92%;aspect-ratio:1;transform:translate(-50%,-50%) scale(.94);background:#E1DCD4;-webkit-mask:{{merk}} center/contain no-repeat;mask:{{merk}} center/contain no-repeat;transition:transform .6s ease}
+.k:hover .k-golf::after{transform:translate(-50%,-50%) scale(1)}
 .k:hover .k-golf{opacity:1}
 /* darken: de lichtgrijze fotogrond valt weg tegen het vlak en de golven, zonder rand */
 .k-foto{position:absolute;inset:5%;background-position:center;background-size:contain;background-repeat:no-repeat;mix-blend-mode:darken;transition:transform .5s ease}

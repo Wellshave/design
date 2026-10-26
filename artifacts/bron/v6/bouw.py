@@ -126,8 +126,8 @@ STER='M6 .6l1.6 3.4 3.7.5-2.7 2.6.7 3.7L6 9 2.7 10.8l.7-3.7L.7 4.5l3.7-.5z'
 sterren=svg("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 11'>"+''.join(f"<path transform='translate({i*13},0)' d='{STER}'/>" for i in range(5))+"</svg>")
 vakjes=svg("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 19'>"+''.join(f"<rect x='{i*20.25}' width='19' height='19'/>" for i in range(5))+"</svg>")
 tpster=svg("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 19'>"+''.join(f"<path fill='#fff' transform='translate({i*20.25+3.5},3.6) scale(1)' d='{STER}'/>" for i in range(5))+"</svg>")
-beeld_css=''.join(f'.im-{k}{{background-image:url({v})}}\n' for k,v in img2.items())
-css=css.replace('{{kop_r}}',f'{img["kop_r"]:.3f}').replace('{{kop_bg}}',f'url({img["kop"]})').replace('{{golf}}',golf).replace('{{sterren}}',sterren).replace('{{vakjes}}',vakjes).replace('{{tpster}}',tpster)+beeld_css
+beeld_css=''.join(f'.im-{k}{{background-image:url({v})}}\n' for k,v in img2.items() if k!='ws-mark')
+css=css.replace('{{kop_r}}',f'{img["kop_r"]:.3f}').replace('{{kop_bg}}',f'url({img["kop"]})').replace('{{golf}}',golf).replace('{{merk}}','url('+img2['ws-mark']+')').replace('{{sterren}}',sterren).replace('{{vakjes}}',vakjes).replace('{{tpster}}',tpster)+beeld_css
 
 for k,v in {'{{kop_r}}':f'{img["kop_r"]:.3f}','{{kop_bg}}':f'url({img["kop"]})','{{hero_d_bg}}':f'url({img["hero_d"]})',
             '{{hero_m_url}}':f'url({img["hero_m"]})','{{logo_css}}':logo_css,'{{blokken_css}}':css,'{{site}}':site}.items():
