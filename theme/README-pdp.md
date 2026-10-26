@@ -2473,3 +2473,19 @@ zwarte modelkeuze); die is hierboven opgelost.
 * `cart-rewards-bar.liquid` en `base.js` worden ook door de homepage-sessie
   aangepast (winkelwagen v7). Mijn regels daarin: het blok `al_in` en de
   parameter `al:` in de cadeaubalk, en `giftVariants` in `syncGifts`.
+
+## Voordelen onder de titel: meer nadruk
+
+De vier voordelen onder de titel (`ul.ws-vinkjes` in `ws-pdp-koopvak`) zijn
+het eerste wat je leest na de belofte en vallen nu meer op, zonder druk te worden:
+
+* een gevuld rondje met het merkgoud (`--goud`) en een donker vinkje in plaats
+  van alleen een bronzen streepje;
+* tekst in inkt (`--ink`) in medium gewicht, 13,5 px in plaats van 12,5 px;
+* iets meer ruimte tussen de regels (11 × 20 px).
+
+Een versie met alleen het eerste deel vet ("**Echt glad**, niet kort") is
+geprobeerd. Die gaf een ongelijk beeld, omdat de meeste voordelen geen komma
+hebben. De snippet `snippets/ws-voordeel-regel.liquid` van die versie wordt niet
+meer gebruikt. Hij staat nog in v7, omdat de MCP-koppeling geen themabestanden mag
+verwijderen. Je kunt hem verwijderen in de code-editor, en daarna ook hier.
