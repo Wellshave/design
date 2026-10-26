@@ -1,0 +1,63 @@
+{%- comment -%}
+  Wellshave — welk cadeau hoort bij drempel 1 of 2.
+
+  Geeft de handle terug van het cadeau dat nu echt weggegeven kan worden:
+  eerst het cadeauproduct uit de instellingen, en is dat niet op voorraad,
+  de eerste reserve (instelling gift_N_reserve) die het wel is. Leeg als er
+  niets op voorraad is; dan valt het cadeau overal weg.
+
+  Op voorraad betekent: de variant van het cadeauproduct is te koop, en het
+  echte product uit het metaveld custom.cadeau_voorraad is op voorraad. Dat
+  tweede is nodig omdat de gratis cadeauproducten (gift-…) zelf geen voorraad
+  bijhouden: zonder die koppeling stonden ze altijd op "op voorraad".
+
+  De winkelwagen (cart-rewards-bar) en de productpagina (ws-pdp-koopvak)
+  gebruiken allebei deze snippet, zodat wat je ziet en wat er in de
+  winkelwagen komt nooit uit elkaar lopen.
+
+  Gebruik:
+    {%- capture c1 %}{% render 'ws-cadeau', nr: 1 %}{% endcapture -%}
+    {%- capture c2 %}{% render 'ws-cadeau', nr: 2, niet: c1 %}{% endcapture -%}
+  niet: een handle die overgeslagen wordt (cadeau 2 is nooit hetzelfde als 1).
+{%- endcomment -%}
+{%- liquid
+  if nr == 2
+    assign hoofd = settings.gift_2_product
+    assign reserves = settings.gift_2_reserve
+  else
+    assign hoofd = settings.gift_1_product
+    assign reserves = settings.gift_1_reserve
+  endif
+  assign overslaan = niet | strip
+  assign gekozen = ''
+
+  if hoofd != blank
+    assign cv = hoofd.selected_or_first_available_variant
+    if cv.available and hoofd.handle != overslaan
+      assign bron = hoofd.metafields.custom.cadeau_voorraad.value
+      if bron == blank or bron.available
+        assign gekozen = hoofd.handle
+      endif
+    endif
+  endif
+
+  if gekozen == ''
+    for c in reserves
+      assign cv = c.selected_or_first_available_variant
+      unless cv.available
+        continue
+      endunless
+      if c.handle == overslaan
+        continue
+      endif
+      assign bron = c.metafields.custom.cadeau_voorraad.value
+      if bron != blank and bron.available == false
+        continue
+      endif
+      assign gekozen = c.handle
+      break
+    endfor
+  endif
+
+  echo gekozen
+-%}

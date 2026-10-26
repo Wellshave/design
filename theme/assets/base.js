@@ -1212,10 +1212,12 @@ class CartDrawer extends HTMLElement {
       .then(cart => {
         let total = 0;
         const giftKeys = {};
+        const giftVariants = {};
         cart.items.forEach(item => {
           const tier = item.properties && item.properties._gift_tier;
           if (tier) {
             giftKeys[tier] = item.key;
+            giftVariants[tier] = item.variant_id;
           } else {
             total += item.original_line_price;
           }
@@ -1238,6 +1240,14 @@ class CartDrawer extends HTMLElement {
             return;
           }
           if (!reached && inCart) {
+            this.changeGift({ id: giftKeys[tier], quantity: 0 }, "cart/change.js");
+            return;
+          }
+          // Het cadeau in de winkelwagen is niet meer het gekozen cadeau: het raakte
+          // op en een reserve schoof ervoor (snippet ws-cadeau). Eerst het oude eruit;
+          // de volgende ronde legt het nieuwe erin.
+          if (reached && inCart && data.variant && giftVariants[tier] && giftVariants[tier] !== parseInt(data.variant)) {
+            this.unavailableTiers.delete(tier);
             this.changeGift({ id: giftKeys[tier], quantity: 0 }, "cart/change.js");
             return;
           }

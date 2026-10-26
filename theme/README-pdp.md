@@ -2393,12 +2393,40 @@ rekenen met de gemeten stap tussen twee foto's in plaats van met vaste
 horizontaal scrollbare rij (desktop zes en een half vak; de actieve schuift
 mee in beeld).
 
-### Cadeau 2
+### Cadeaus: nooit een cadeau dat niet op voorraad is
 
-Cadeau 2 stond op de betaalde `wellshave-4-in-1-neustrimmer-ultimate`
-(€29,95), die ook als add-on werd verkocht. Nu `gift-neustrimmer-ultra`
-(€0, adviesprijs €32,95), zoals cadeau 1 met `gift-the-washbag` werkt.
-Alleen in thema v7; MAIN verandert pas bij publiceren.
+Er is geen korting die cadeaus gratis maakt: een cadeau is gratis omdat het
+cadeauproduct zelf €0 kost (`gift-…`, type Gift, Unlisted). Die producten
+houden geen voorraad bij, dus zonder meer stonden ze altijd "op voorraad".
+
+* Elk cadeauproduct wijst met het metaveld `custom.cadeau_voorraad` naar het
+  echte product. Is dat op, dan telt het cadeau als niet op voorraad.
+  gift-the-washbag → toiletry-bag, gift-neustrimmer-ultimate →
+  wellshave-4-in-1-neustrimmer-ultimate, gift-neustrimmer-ultra →
+  neustrimmer-4in1-ultra, gift-neustrimmer-elite → neustrimmer-2in1-elite,
+  gift-neustrimmer-basic → wellshave-neustrimmer-basic, gift-travelbag →
+  travelbag.
+* Per drempel een reservelijst in de thema-instellingen (`gift_1_reserve`,
+  `gift_2_reserve`, Cart drawer → Gift 1/2), goedkoop in inkoop eerst. Nu
+  voor beide: gift-neustrimmer-basic (inkoop €2,87), dan gift-travelbag
+  (€0,50). Die twee zijn hiervoor aangemaakt, in dezelfde opzet als de
+  bestaande cadeauproducten.
+* Snippet `ws-cadeau` kiest: het cadeauproduct, anders de eerste reserve op
+  voorraad, anders niets (dan valt de drempel weg). Cadeau 2 slaat over wat
+  cadeau 1 al is. De cadeaubalk in de winkelwagen (`cart-rewards-bar`), het
+  automatisch toevoegen en de productpagina gebruiken alle drie deze keuze.
+* Ligt er al een cadeau in de winkelwagen dat niet meer gekozen is, dan ruilt
+  `syncGifts` (base.js) het om: eerst het oude eruit, dan het nieuwe erin. Is
+  er helemaal niets meer, dan gaat het cadeau eruit.
+* Wat dit product al als cadeau krijgt (zijn prijs haalt de drempel), staat
+  niet ook onder "Maak het compleet".
+* Cadeau 2 is `gift-neustrimmer-ultimate` (€0): het gratis exemplaar van wat
+  het al was. Het stond op het betaalde product van €29,95.
+
+Getest door de washbag en de Neustrimmer Ultimate tijdelijk aan een
+uitverkocht product te koppelen: Barber Bro 3.0 kreeg Neustrimmer Basic en
+Travelbag, op de pagina, in de balk en in wat er wordt toegevoegd; een
+winkelwagen met de oude washbag werd omgeruild. Daarna teruggezet.
 
 ### Nog open
 * De Ultimate kost €89,95, net onder de drempel van €90 voor cadeau 2.

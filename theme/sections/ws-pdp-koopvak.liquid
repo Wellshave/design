@@ -563,6 +563,39 @@
           neer) en werkt de totaalregel en Klarna bij. Staat er geen upgrade,
           dan komt dit blok er niet en blijven de modelkeuze en het cadeaublok.
         {%- endcomment -%}
+        {%- comment -%}
+          De twee cadeaus, gekozen door snippet ws-cadeau: het cadeauproduct uit de
+          instellingen, of de eerste reserve die op voorraad is. Dezelfde keuze als
+          de cadeaubalk in de winkelwagen, die het cadeau ook echt toevoegt.
+        {%- endcomment -%}
+        {%- liquid
+          assign cad1 = blank
+          assign cad2 = blank
+          assign cad1_eigen = false
+          assign cad2_eigen = false
+          if settings.enable_gift_rewards
+            capture cad1_h
+              render 'ws-cadeau', nr: 1
+            endcapture
+            assign cad1_h = cad1_h | strip
+            capture cad2_h
+              render 'ws-cadeau', nr: 2, niet: cad1_h
+            endcapture
+            assign cad2_h = cad2_h | strip
+            if cad1_h != blank
+              assign cad1 = all_products[cad1_h]
+              if cad1_h == settings.gift_1_product.handle
+                assign cad1_eigen = true
+              endif
+            endif
+            if cad2_h != blank
+              assign cad2 = all_products[cad2_h]
+              if cad2_h == settings.gift_2_product.handle
+                assign cad2_eigen = true
+              endif
+            endif
+          endif
+        -%}
         {%- liquid
           assign tiers_n = 0
           assign tier_ids = ''
@@ -621,17 +654,17 @@
             elsif settings.enable_gift_rewards
               for gi in (1..2)
                 if gi == 1
-                  assign cad = settings.gift_1_product
+                  assign cad = cad1
                   assign cad_drempel = settings.gift_1_threshold
                 else
-                  assign cad = settings.gift_2_product
+                  assign cad = cad2
                   assign cad_drempel = settings.gift_2_threshold
                 endif
                 if cad == blank or cad_drempel == blank or cad.handle == product.handle
                   continue
                 endif
                 assign cad_grens = cad_drempel | times: 100
-                if cad.selected_or_first_available_variant.available and v.price >= cad_grens
+                if v.price >= cad_grens
                   assign toon_tiers = true
                 endif
               endfor
@@ -777,13 +810,13 @@
                   {%- if settings.enable_gift_rewards -%}
                     {%- for gi in (1..2) -%}
                       {%- if gi == 1 -%}
-                        {%- assign cad = settings.gift_1_product -%}
+                        {%- assign cad = cad1 -%}
                         {%- assign cad_drempel = settings.gift_1_threshold -%}
-                        {%- assign cad_naam = s.cad_naam_1 | default: settings.gift_1_label -%}
+                        {%- if cad1_eigen -%}{%- assign cad_naam = s.cad_naam_1 | default: settings.gift_1_label -%}{%- else -%}{%- assign cad_naam = blank -%}{%- endif -%}
                       {%- else -%}
-                        {%- assign cad = settings.gift_2_product -%}
+                        {%- assign cad = cad2 -%}
                         {%- assign cad_drempel = settings.gift_2_threshold -%}
-                        {%- assign cad_naam = s.cad_naam_2 | default: settings.gift_2_label -%}
+                        {%- if cad2_eigen -%}{%- assign cad_naam = s.cad_naam_2 | default: settings.gift_2_label -%}{%- else -%}{%- assign cad_naam = blank -%}{%- endif -%}
                       {%- endif -%}
                       {%- if cad == blank or cad_drempel == blank -%}{%- continue -%}{%- endif -%}
                       {%- assign cad_v = cad.selected_or_first_available_variant -%}
@@ -911,15 +944,15 @@
           {%- capture cad_kaarten -%}
             {%- for i in (1..2) -%}
               {%- if i == 1 -%}
-                {%- assign cad = settings.gift_1_product -%}
+                {%- assign cad = cad1 -%}
                 {%- assign cad_drempel = settings.gift_1_threshold -%}
-                {%- assign cad_label = settings.gift_1_label -%}
-                {%- assign cad_naam = s.cad_naam_1 -%}
+                {%- assign cad_label = blank -%}{%- assign cad_naam = blank -%}
+                {%- if cad1_eigen -%}{%- assign cad_label = settings.gift_1_label -%}{%- assign cad_naam = s.cad_naam_1 -%}{%- endif -%}
               {%- else -%}
-                {%- assign cad = settings.gift_2_product -%}
+                {%- assign cad = cad2 -%}
                 {%- assign cad_drempel = settings.gift_2_threshold -%}
-                {%- assign cad_label = settings.gift_2_label -%}
-                {%- assign cad_naam = s.cad_naam_2 -%}
+                {%- assign cad_label = blank -%}{%- assign cad_naam = blank -%}
+                {%- if cad2_eigen -%}{%- assign cad_label = settings.gift_2_label -%}{%- assign cad_naam = s.cad_naam_2 -%}{%- endif -%}
               {%- endif -%}
               {%- if cad == blank or cad_drempel == blank -%}{%- continue -%}{%- endif -%}
               {%- assign cad_var = cad.selected_or_first_available_variant -%}
@@ -1304,9 +1337,35 @@
         {%- endcomment -%}
         {%- liquid
           assign add_lijst = mf.pdp_addons.value | default: mf.cart_upsell.value
-          assign add_weg = ''
+          assign add_weg_s = ''
           if settings.enable_gift_rewards and settings.upsell_uitsluiten != blank
-            assign add_weg = settings.upsell_uitsluiten | remove: ' ' | split: ','
+            assign add_weg_s = settings.upsell_uitsluiten | remove: ' '
+          endif
+          # Wat dit product al als cadeau krijgt, verkopen we er niet naast:
+          # het echte product achter het cadeau (custom.cadeau_voorraad).
+          for gi in (1..2)
+            if gi == 1
+              assign cad = cad1
+              assign cad_drempel = settings.gift_1_threshold
+            else
+              assign cad = cad2
+              assign cad_drempel = settings.gift_2_threshold
+            endif
+            if cad == blank or cad_drempel == blank
+              continue
+            endif
+            assign cad_grens = cad_drempel | times: 100
+            if v.price >= cad_grens
+              assign add_weg_s = add_weg_s | append: ',' | append: cad.handle
+              assign cad_bron = cad.metafields.custom.cadeau_voorraad.value
+              if cad_bron != blank
+                assign add_weg_s = add_weg_s | append: ',' | append: cad_bron.handle
+              endif
+            endif
+          endfor
+          assign add_weg = add_weg_s | split: ','
+          if add_weg_s == ''
+            assign add_weg = ''
           endif
           assign add_max = s.add_max | default: 3
           assign add_n = 0

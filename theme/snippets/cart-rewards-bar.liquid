@@ -1,0 +1,223 @@
+{% comment %}
+  Cart rewards progress bar — free shipping + up to 2 gift thresholds.
+  Same visual style as the original single-tier bar; badges are spaced evenly (equal segments),
+  while the thumb fills each segment by the real € range of that tier.
+  Gifts auto add/remove via CartDrawer.syncGifts in base.js. "Free" via automatic discount at go-live.
+{% endcomment %}
+{% liquid
+  # Threshold base = subtotal of real items, excluding gift lines.
+  assign cart_total = 0
+  for item in cart.items
+    unless item.properties._gift_tier
+      assign cart_total = cart_total | plus: item.original_line_price
+    endunless
+  endfor
+
+  assign show_shipping = false
+  if settings.enable_free_shipping
+    assign show_shipping = true
+    assign shipping_cents = settings.free_shipping_requirement | times: 100
+  endif
+
+  # Welk cadeau: het cadeauproduct, of de eerste reserve die op voorraad is
+  # (snippet ws-cadeau, dezelfde keuze als op de productpagina). Is niets op
+  # voorraad, dan valt de drempel weg, zodat we nooit een cadeau beloven of
+  # proberen toe te voegen dat er niet is.
+  assign g1_on = false
+  assign g2_on = false
+  if settings.enable_gift_rewards
+    capture g1_handle
+      render 'ws-cadeau', nr: 1
+    endcapture
+    assign g1_handle = g1_handle | strip
+    capture g2_handle
+      render 'ws-cadeau', nr: 2, niet: g1_handle
+    endcapture
+    assign g2_handle = g2_handle | strip
+
+    if g1_handle != blank
+      assign g1_product = all_products[g1_handle]
+      assign g1_on = true
+      assign g1_cents = settings.gift_1_threshold | times: 100
+      assign g1_variant = g1_product.selected_or_first_available_variant.id
+      assign g1_reserve = true
+      assign g1_title = g1_product.title
+      if g1_handle == settings.gift_1_product.handle
+        assign g1_reserve = false
+        assign g1_title = settings.gift_1_label | default: g1_product.title
+      endif
+    endif
+    if g2_handle != blank
+      assign g2_product = all_products[g2_handle]
+      assign g2_on = true
+      assign g2_cents = settings.gift_2_threshold | times: 100
+      assign g2_variant = g2_product.selected_or_first_available_variant.id
+      assign g2_reserve = true
+      assign g2_title = g2_product.title
+      if g2_handle == settings.gift_2_product.handle
+        assign g2_reserve = false
+        assign g2_title = settings.gift_2_label | default: g2_product.title
+      endif
+    endif
+  endif
+
+  # Active thresholds (in order) -> equal visual segments.
+  assign thresholds = ''
+  if show_shipping
+    assign thresholds = thresholds | append: shipping_cents | append: ','
+  endif
+  if g1_on
+    assign thresholds = thresholds | append: g1_cents | append: ','
+  endif
+  if g2_on
+    assign thresholds = thresholds | append: g2_cents | append: ','
+  endif
+  assign thr_arr = thresholds | split: ','
+  assign tier_count = thr_arr.size
+  assign seg = 0
+  if tier_count > 0
+    assign seg = 100.0 | divided_by: tier_count
+  endif
+
+  # Badge index among active tiers (for even left position = center of its segment).
+  assign idx = 0
+  assign si = -1
+  assign g1i = -1
+  assign g2i = -1
+  if show_shipping
+    assign si = idx
+    assign idx = idx | plus: 1
+  endif
+  if g1_on
+    assign g1i = idx
+    assign idx = idx | plus: 1
+  endif
+  if g2_on
+    assign g2i = idx
+    assign idx = idx | plus: 1
+  endif
+
+  # Thumb interpolates between badge positions, so it reaches a badge exactly when
+  # that tier's threshold is hit (badges sit at segment centers).
+  assign thumb = 100
+  assign prev_cents = 0
+  assign prev_pos = 0
+  assign found = false
+  for t in thr_arr
+    assign tc = t | plus: 0
+    assign cur_pos = forloop.index0 | plus: 0.5 | times: seg
+    unless found
+      if cart_total < tc
+        assign d = tc | minus: prev_cents
+        assign num = cart_total | minus: prev_cents | times: 1.0
+        assign f = num | divided_by: d
+        assign span = cur_pos | minus: prev_pos
+        assign add = span | times: f
+        assign thumb = prev_pos | plus: add
+        assign found = true
+      endif
+      assign prev_cents = tc
+      assign prev_pos = cur_pos
+    endunless
+  endfor
+
+  # Gifts already in cart (added by JS) + line keys for removal.
+  assign g1_in_cart = false
+  assign g1_key = ''
+  assign g2_in_cart = false
+  assign g2_key = ''
+  for item in cart.items
+    if item.properties._gift_tier == '1'
+      assign g1_in_cart = true
+      assign g1_key = item.key
+      assign g1_cart_variant = item.variant_id
+    elsif item.properties._gift_tier == '2'
+      assign g2_in_cart = true
+      assign g2_key = item.key
+      assign g2_cart_variant = item.variant_id
+    endif
+  endfor
+
+  # Headline = next still-locked reward (money pre-computed; cannot pipe inside a filter arg).
+  assign next_reward = ''
+  assign next_diff = 0
+  if show_shipping and cart_total < shipping_cents
+    assign next_diff = shipping_cents | minus: cart_total
+    assign next_reward = 'cart_drawer.shipping_badge_label' | t
+  elsif g1_on and cart_total < g1_cents
+    assign next_diff = g1_cents | minus: cart_total
+    assign next_reward = g1_product.title
+  elsif g2_on and cart_total < g2_cents
+    assign next_diff = g2_cents | minus: cart_total
+    assign next_reward = g2_product.title
+  endif
+  assign next_diff_money = next_diff | money
+%}
+
+{%- if show_shipping or g1_on or g2_on -%}
+  <div class="cart-drawer__achivements" data-rewards data-cart-total="{{ cart_total }}">
+    <p class="cart-drawer__achivements-label body-lg">
+      {%- if next_reward != blank -%}
+        {{- 'cart_drawer.reward_progress_html' | t: value: next_diff_money, reward: next_reward -}}
+      {%- else -%}
+        {{- 'cart_drawer.reward_all_unlocked' | t -}}
+      {%- endif -%}
+    </p>
+
+    <div class="cart-drawer__progress-bar">
+      <span class="cart-drawer__progress-thumb" data-progress="rewards" style="width: {{ thumb }}%;"></span>
+
+      {%- if show_shipping -%}
+        {%- assign s_pos = si | plus: 0.5 | times: seg -%}
+        <div class="cart-drawer__progress-badge" style="left: {{ s_pos }}%;">
+          <div class="cart-drawer__progress-icon">
+            <img src="{{ 'icon-cart-delivery.png' | asset_url }}" width="100" height="100">
+          </div>
+          <p class="cart-drawer__progress-price body-sm">{{ shipping_cents | money }}</p>
+          <p class="cart-drawer__progress-label">{{ 'cart_drawer.shipping_badge_label' | t }}</p>
+        </div>
+      {%- endif -%}
+
+      {%- if g1_on -%}
+        {%- assign g1_pos = g1i | plus: 0.5 | times: seg -%}
+        <div class="cart-drawer__progress-badge" style="left: {{ g1_pos }}%;">
+          <div class="cart-drawer__progress-icon">
+            {%- if settings.gift_1_icon != blank and g1_reserve == false -%}
+              <img src="{{ settings.gift_1_icon | image_url: width: 100 }}" width="100" height="100">
+            {%- else -%}
+              <img src="{{ g1_product.featured_image | image_url: width: 100 }}" width="100" height="100">
+            {%- endif -%}
+          </div>
+          <p class="cart-drawer__progress-price body-sm">{{ g1_cents | money }}</p>
+          <p class="cart-drawer__progress-label">{{ g1_title }}</p>
+        </div>
+      {%- endif -%}
+
+      {%- if g2_on -%}
+        {%- assign g2_pos = g2i | plus: 0.5 | times: seg -%}
+        <div class="cart-drawer__progress-badge" style="left: {{ g2_pos }}%;">
+          <div class="cart-drawer__progress-icon">
+            {%- if settings.gift_2_icon != blank and g2_reserve == false -%}
+              <img src="{{ settings.gift_2_icon | image_url: width: 100 }}" width="100" height="100">
+            {%- else -%}
+              <img src="{{ g2_product.featured_image | image_url: width: 100 }}" width="100" height="100">
+            {%- endif -%}
+          </div>
+          <p class="cart-drawer__progress-price body-sm">{{ g2_cents | money }}</p>
+          <p class="cart-drawer__progress-label">{{ g2_title }}</p>
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%}
+      inCartVariant: welk cadeau er nu in de winkelwagen ligt. Is dat een ander
+      dan het gekozen cadeau (het oude raakte op en een reserve schoof ervoor),
+      dan ruilt syncGifts het om.
+    {%- endcomment -%}
+    {%- if g1_on -%}<script type="application/json" data-gift-tier="1">{"threshold":{{ g1_cents }},"variant":{{ g1_variant }},"inCart":{{ g1_in_cart }},"inCartVariant":{{ g1_cart_variant | default: 0 }},"key":{{ g1_key | json }}}</script>{%- endif -%}
+    {%- if g2_on -%}<script type="application/json" data-gift-tier="2">{"threshold":{{ g2_cents }},"variant":{{ g2_variant }},"inCart":{{ g2_in_cart }},"inCartVariant":{{ g2_cart_variant | default: 0 }},"key":{{ g2_key | json }}}</script>{%- endif -%}
+    {%- comment -%} Geen cadeau meer op voorraad maar er ligt er nog een in de winkelwagen: die moet eruit (drempel onbereikbaar). {%- endcomment -%}
+    {%- unless g1_on -%}{%- if g1_in_cart -%}<script type="application/json" data-gift-tier="1">{"threshold":999999999,"variant":0,"inCart":true,"key":{{ g1_key | json }}}</script>{%- endif -%}{%- endunless -%}
+    {%- unless g2_on -%}{%- if g2_in_cart -%}<script type="application/json" data-gift-tier="2">{"threshold":999999999,"variant":0,"inCart":true,"key":{{ g2_key | json }}}</script>{%- endif -%}{%- endunless -%}
+  </div>
+{%- endif -%}
