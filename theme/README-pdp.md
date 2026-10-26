@@ -2568,3 +2568,28 @@ voordelen staan onder elkaar.
 * De tekst in de films zelf is Nederlands, ook op de en-, de- en fr-pagina's.
 * `ws7-pdp-stappen` en `custom.pdp_stappen` (alleen gevuld voor de PRO) staan
   niet meer op de pagina; de sectie blijft beschikbaar in de editor.
+
+### Flex Guard: een film zonder tekst, gemonteerd uit losse shots
+
+De Flex Guard had geen film. Uit acht losse shots zonder tekst (Shopify Files)
+is een lus van 16,8 s gemonteerd met ffmpeg: zachte overgangen (xfade, 0,6 s)
+en het eerste shot nog eens aan het eind, zodat het laatste beeld naadloos op
+het eerste aansluit. Geen geluid, H.264 crf 24, faststart, 4,3 MB. In Files als
+`gid://shopify/Video/77433854165324`. De film met ingebrande annotaties die ook
+is geüpload, is bewust niet gebruikt.
+
+* `film-flex-guard`: "Trimmen, scheren / en neushaar in één." voor de Flex Guard.
+* `film-essential-flex-bundel`: dezelfde film, met een kop over de toilettas
+  en de hard case, voor de Essential Flex Bundel.
+* Beide vertaald in en, de en fr. Omdat er geen tekst in beeld staat, klopt
+  deze film in elke taal.
+
+## Wit als basis, zand alleen als accent
+
+De pagina had te veel zand. Nu is wit de grond: `.ws-pdp7`, `.ws7.ws7p`,
+`.ws7.ws7-pers` en de UGC-band (`.ws-ugc.ws-ugc--v7`, dubbele klasse omdat
+ws-pdp-ugc.css later laadt). Kaarten die eerst los stonden door zand eromheen,
+krijgen een dunne rand en een zachte schaduw. Zand blijft alleen als accent:
+de iconvakjes van de voordelen, de tegels achter de onderdelen in "In de doos"
+en de kerncijfersbalk. "In de doos" zelf blijft een zandvlak, zodat er ritme in
+de pagina zit.

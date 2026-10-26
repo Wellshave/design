@@ -613,3 +613,19 @@
 .ws-pdp7 .ws-tier.is-op{cursor:not-allowed;opacity:.62;filter:grayscale(.6)}
 .ws-pdp7 .ws-tier.is-op input{cursor:not-allowed}
 .ws-pdp7 .ws-tier-op{justify-self:start;margin-top:4px;font-size:10.5px;font-weight:600;color:#8A3B2E;background:rgba(138,59,46,.08);border-radius:999px;padding:2px 8px}
+
+/* ---- wit als basis, zand alleen als accent ----
+   De pagina en alle secties staan op wit. Zand blijft alleen achter productbeelden
+   (galerij, kaartbeelden, onderdelen) en in kleine vlakken. Kaarten die hun contrast
+   aan het zand ontleenden, krijgen een haarlijn. Dit blok staat bewust onderaan. */
+.ws-pdp7{background:#fff}
+.ws7.ws7p,.ws7.ws7-pers{background:#fff}
+/* dubbele klasse: ws-pdp-ugc.css laadt later in de sectie zelf */
+.ws-ugc.ws-ugc--v7{background:#fff}
+.ws-pdp7 .ws-rev,.ws-pdp7 .ws-bund-k,.ws-pdp7 .ws-kies-in,.ws7p-km,.ws7p-rv,.ws7p-rv-score,.ws7p .ws7-kaart{
+  box-shadow:0 0 0 1px rgba(17,17,17,.08),0 16px 36px -24px rgba(17,17,17,.22)}
+.ws7p-verg__kaart:not(.is-gekozen){border-color:rgba(17,17,17,.08);box-shadow:0 16px 36px -24px rgba(17,17,17,.22)}
+.ws-pdp7 .ws-vd-ic,.ws-pdp7 .ws-doos-b{background:var(--zand)}
+.ws7p-doos__bd{background:var(--zand);border-radius:20px}
+.ws7p-doos__bd img{inset:13%;width:74%;height:74%}
+.ws7p-doos .ws7p-cijfers{background:var(--zand)}
