@@ -1,0 +1,58 @@
+{% comment %}
+  Wellshave v7 · productrij: een kop in twee regels en een schuifrij met productkaarten en een voortgangsbalk.
+  Kies losse producten als blokken; zonder blokken komen de producten uit de gekozen collectie.
+{% endcomment %}
+{{ 'ws7.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'ws7.js' | asset_url }}" defer></script>
+<section class="ws7{% if section.settings.wit %} ws7-wit{% endif %}">
+  <div class="ws7-binnen ws7-midden">
+    {%- if section.settings.oog != blank -%}<p class="ws7-oog">{{ section.settings.oog }}</p>{%- endif -%}
+    {% render 'ws7-kop', kop: section.settings.kop, goud: section.settings.kop_goud %}
+    {%- if section.settings.sub != blank -%}<p class="ws7-sub">{{ section.settings.sub }}</p>{%- endif -%}
+    {%- if section.settings.link_label != blank -%}<a class="ws7-link" href="{{ section.settings.link | default: '#' }}">{{ section.settings.link_label }}{% render 'ws7-pijl' %}</a>{%- endif -%}
+    <div class="ws7-schuif">
+      <div class="ws7-rij" tabindex="0" aria-label="{{ section.settings.kop | strip_html | escape }}, schuif opzij">
+        {%- if section.blocks.size > 0 -%}
+          {%- for block in section.blocks -%}
+            {%- if block.settings.product != blank -%}
+              {% render 'ws7-kaart', product: block.settings.product, naam: block.settings.naam, wat: block.settings.wat, label: section.settings.label %}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- elsif section.settings.collectie != blank -%}
+          {%- for p in section.settings.collectie.products limit: section.settings.aantal -%}
+            {% render 'ws7-kaart', product: p, label: section.settings.label %}
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+      {% render 'ws7-voortgang' %}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "WS7 · Productrij",
+  "tag": "div",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "text", "id": "oog", "label": "Bovenregel" },
+    { "type": "text", "id": "kop", "label": "Kop", "default": "Glad tot in" },
+    { "type": "text", "id": "kop_goud", "label": "Kop, regel in goud", "default": "de kleinste hoek." },
+    { "type": "text", "id": "sub", "label": "Onderregel" },
+    { "type": "text", "id": "link_label", "label": "Linktekst" },
+    { "type": "url", "id": "link", "label": "Link" },
+    { "type": "text", "id": "label", "label": "Woord achter het kortingspercentage", "default": "Korting" },
+    { "type": "checkbox", "id": "wit", "label": "Witte achtergrond", "default": false },
+    { "type": "header", "content": "Zonder blokken" },
+    { "type": "collection", "id": "collectie", "label": "Collectie" },
+    { "type": "range", "id": "aantal", "label": "Aantal producten", "min": 2, "max": 12, "step": 1, "default": 6 }
+  ],
+  "blocks": [
+    { "type": "product", "name": "Product", "settings": [
+      { "type": "product", "id": "product", "label": "Product", "info": "Prijs, van-prijs, foto en link komen hieruit." },
+      { "type": "text", "id": "naam", "label": "Naam", "info": "Leeg = de producttitel." },
+      { "type": "text", "id": "wat", "label": "Korte regel onder de naam" }
+    ]}
+  ],
+  "presets": [ { "name": "WS7 · Productrij" } ]
+}
+{% endschema %}

@@ -1,0 +1,119 @@
+{
+  "sections": {
+    "hero": {
+      "type": "ws7-hero",
+      "blocks": {
+        "t1": { "type": "tegel", "settings": { "foto": "shopify://shop_images/herfst-sale-2026-banner.png", "label": "Shop de Herfst Sale", "link": "shopify://collections/summer-sale-deals" } },
+        "t2": { "type": "tegel", "settings": { "foto": "shopify://shop_images/gg-cine-2-waterdicht.jpg", "label": "Shop bodygroomers", "link": "shopify://collections/bodygroomers" } }
+      },
+      "block_order": ["t1", "t2"],
+      "settings": {
+        "foto": "shopify://shop_images/herfst-sale-2026-hero.png",
+        "pos": "60% 34%",
+        "mob_pos": "62% 20%",
+        "oog": "Herfst Sale · tot 40%",
+        "kop": "Jouw huid.\nJouw lijn.",
+        "kop_goud": "Wellshave.",
+        "sub": "In beeld: de 4 Foil Blade Baron™, vier foil-koppen voor je gezicht.",
+        "link_label": "Shop nu",
+        "link": "shopify://collections/summer-sale-deals"
+      }
+    },
+    "zekerheid": {
+      "type": "ws7-zekerheid",
+      "blocks": {
+        "z1": { "type": "item", "settings": { "icoon": "ster", "tekst": "4,5 op Trustpilot" } },
+        "z2": { "type": "item", "settings": { "icoon": "schild", "tekst": "100 dagen proberen" } },
+        "z3": { "type": "item", "settings": { "icoon": "bus", "tekst": "Gratis verzending vanaf €30" } },
+        "z4": { "type": "item", "settings": { "icoon": "klok", "tekst": "Morgen in huis" } }
+      },
+      "block_order": ["z1", "z2", "z3", "z4"],
+      "settings": { "wit": false }
+    },
+    "glad": {
+      "type": "ws7-productrij",
+      "blocks": {
+        "p1": { "type": "product", "settings": { "product": "groom-guard-pro", "wat": "Bodygroomer met foil shaver" } },
+        "p2": { "type": "product", "settings": { "product": "wellshave-flex-guard™", "wat": "Lichaam en schaamstreek" } },
+        "p3": { "type": "product", "settings": { "product": "wellshave-bodygroomer-groom-guard", "wat": "Bodygroomer" } },
+        "p4": { "type": "product", "settings": { "product": "wellshave-2-in-1-bodygroomer-mannen", "wat": "Bodygroomer" } },
+        "p5": { "type": "product", "settings": { "product": "shave-package-ultimate", "wat": "Groom Guard PRO, neustrimmer en twee tassen" } },
+        "p6": { "type": "product", "settings": { "product": "wellshave-shave-package-3-0", "wat": "Bodygroomer, neustrimmer en oplaadstation" } }
+      },
+      "block_order": ["p1", "p2", "p3", "p4", "p5", "p6"],
+      "settings": { "kop": "Glad tot in", "kop_goud": "de kleinste hoek.", "sub": "Gemaakt voor je gevoeligste plekken.", "label": "Korting", "aantal": 6 }
+    },
+    "plekken": {
+      "type": "ws7-plekken",
+      "blocks": {
+        "l1": { "type": "plek", "settings": { "foto": "shopify://shop_images/gg-c2m-2-vertrouwen.jpg", "pos": "50% 30%", "titel": "Lichaam", "link": "shopify://collections/bodygroomers" } },
+        "l2": { "type": "plek", "settings": { "foto": "shopify://shop_images/herfst-sale-2026-banner.png", "pos": "53% 50%", "titel": "Gezicht & baard", "link": "shopify://collections/zone-gezicht" } },
+        "l3": { "type": "plek", "settings": { "foto": "shopify://shop_images/ws-listicle-07-resultaat-badkamer.jpg", "pos": "50% 40%", "titel": "Hoofd", "link": "shopify://collections/zone-hoofd" } },
+        "l4": { "type": "plek", "settings": { "foto": "shopify://shop_images/ws-ugc-neus.webp", "pos": "58% 50%", "titel": "Neus & oren", "link": "shopify://collections/neustrimmers" } },
+        "l5": { "type": "plek", "settings": { "foto": "shopify://shop_images/Gemini_Generated_Image_da7jpeda7jpeda7j.png", "pos": "50% 50%", "titel": "Sets", "link": "shopify://collections/bundels" } }
+      },
+      "block_order": ["l1", "l2", "l3", "l4", "l5"],
+      "settings": { "kop": "Verzorgd", "kop_goud": "van top tot teen.", "link_label": "Shop alles", "link": "shopify://collections/all" }
+    },
+    "banners": {
+      "type": "ws7-banners",
+      "blocks": {
+        "b1": { "type": "banner", "settings": { "foto": "shopify://shop_images/gg-c2-5-lading.jpg", "pos": "45% 50%", "foto_mobiel": "shopify://shop_images/gg-c2m-5-lading.jpg", "mob_pos": "50% 30%", "kop": "Groom Guard™", "kop_goud": "Bodygroomer", "tekst": "SkinSafe-messen, vier opzetkammen en een oplaadstandaard.", "link_label": "Shop nu", "link": "shopify://products/wellshave-bodygroomer-groom-guard", "grond": "licht", "kant": "links", "teken": true } },
+        "b2": { "type": "banner", "settings": { "foto": "shopify://shop_images/herfst-sale-2026-banner.png", "pos": "42% 50%", "mob_pos": "62% 50%", "kop": "De Herfst", "kop_goud": "Sale", "tekst": "Tot 40% korting op geselecteerde apparaten. Tot en met 30 oktober.", "link_label": "Shop nu", "link": "shopify://collections/summer-sale-deals", "grond": "donker", "kant": "links", "teken": true } },
+        "b3": { "type": "banner", "settings": { "foto": "shopify://shop_images/gg-c2-4-kammen.jpg", "pos": "42% 50%", "foto_mobiel": "shopify://shop_images/gg-c2m-4-kammen.jpg", "mob_pos": "50% 40%", "kop": "Vier kammen.", "kop_goud": "Eén lijn.", "tekst": "Van 1,5 tot 4,5 mm: jij kiest hoe kort, de Groom Guard doet de rest.", "link_label": "Shop nu", "link": "shopify://products/wellshave-bodygroomer-groom-guard", "grond": "donker", "kant": "rechts", "teken": true } }
+      },
+      "block_order": ["b1", "b2", "b3"],
+      "settings": {}
+    },
+    "innovatie": {
+      "type": "ws7-innovatie",
+      "blocks": {
+        "i1": { "type": "innovatie", "settings": { "foto": "shopify://shop_images/gg-c2-1-messen.jpg", "pos": "50% 70%", "titel": "SkinSafe-messen", "tekst": "Keramische mesjes die je huid nooit blootleggen, ook niet in je gevoelige zones. Trimmen zonder de sneetjes en ingegroeide haren van een gewoon mesje.", "product": "groom-guard-pro" } },
+        "i2": { "type": "innovatie", "settings": { "foto": "shopify://shop_images/gg-cine-2-waterdicht.jpg", "pos": "50% 55%", "titel": "Waterdicht tot IPX7", "tekst": "Gewoon mee onder de douche. IPX7 betekent dat hij zelfs tegen kort onderdompelen kan.", "product": "wellshave-bodygroomer-groom-guard" } },
+        "i3": { "type": "innovatie", "settings": { "foto": "shopify://shop_images/gg-band-4-led.jpg", "pos": "45% 50%", "titel": "Geïntegreerd LED-licht", "tekst": "Een lampje bij het mes laat elk haartje zien, voor precisie op plekken die je zelf slecht ziet.", "product": "wellshave-flex-guard™" } },
+        "i4": { "type": "innovatie", "settings": { "foto": "shopify://shop_images/ws-listicle-03-macro-7d-scheerkop.jpg", "pos": "50% 50%", "titel": "Flexibele 7D-scheerkop", "tekst": "Zeven koppen die los bewegen en iedere contour van je hoofd volgen. Snel en gelijkmatig glad.", "product": "wellshave-5-in-1-scheerapparaat-mannen-deluxe" } }
+      },
+      "block_order": ["i1", "i2", "i3", "i4"],
+      "settings": { "oog": "Innovatie", "kop": "Anders dan de rest.", "kop_goud": "Dit is waarom." }
+    },
+    "pers": {
+      "type": "ws7-pers",
+      "blocks": {
+        "g1": { "type": "logo", "settings": { "naam": "AD", "standaard": "ad", "hoogte": 30 } },
+        "g2": { "type": "logo", "settings": { "naam": "Men's Health", "standaard": "mh", "hoogte": 21 } },
+        "g3": { "type": "logo", "settings": { "naam": "Eindhovens Dagblad", "standaard": "ed", "hoogte": 27 } },
+        "g4": { "type": "logo", "settings": { "naam": "MediaMarkt", "standaard": "mm", "hoogte": 18 } },
+        "g5": { "type": "logo", "settings": { "naam": "Kieskeurig.nl", "standaard": "kk", "hoogte": 20 } },
+        "g6": { "type": "logo", "settings": { "naam": "bol", "standaard": "bol", "hoogte": 23 } },
+        "g7": { "type": "logo", "settings": { "naam": "BCC", "standaard": "bcc", "hoogte": 22 } }
+      },
+      "block_order": ["g1", "g2", "g3", "g4", "g5", "g6", "g7"],
+      "settings": { "wit": false }
+    },
+    "alles": {
+      "type": "ws7-productrij",
+      "blocks": {
+        "a1": { "type": "product", "settings": { "product": "wellshave-flex-guard™", "wat": "Lichaam en schaamstreek" } },
+        "a2": { "type": "product", "settings": { "product": "wellshave-bodygroomer-groom-guard", "wat": "Bodygroomer" } },
+        "a3": { "type": "product", "settings": { "product": "groom-guard-pro", "wat": "Bodygroomer met foil shaver" } },
+        "a4": { "type": "product", "settings": { "product": "wellshave-3-in-1-neustrimmer-advance", "naam": "Neustrimmer Advance™", "wat": "3-in-1" } },
+        "a5": { "type": "product", "settings": { "product": "wellshave-4-in-1-neustrimmer-ultimate", "naam": "Neustrimmer Ultimate™", "wat": "4-in-1" } },
+        "a6": { "type": "product", "settings": { "product": "wellshave-scheerapparaat-elite", "wat": "Gezicht en baard" } },
+        "a7": { "type": "product", "settings": { "product": "wellshave-shave-package-3-0", "wat": "Set" } }
+      },
+      "block_order": ["a1", "a2", "a3", "a4", "a5", "a6", "a7"],
+      "settings": { "oog": "Onze bestsellers", "kop": "Alles wat je", "kop_goud": "nodig hebt.", "label": "Korting", "aantal": 7 }
+    },
+    "afsluiter": {
+      "type": "ws7-afsluiter",
+      "blocks": {
+        "s1": { "type": "punt", "settings": { "waarde": "100 dagen", "label": "proberen, anders geld terug" } },
+        "s2": { "type": "punt", "settings": { "waarde": "2 jaar", "label": "garantie op het apparaat" } },
+        "s3": { "type": "punt", "settings": { "waarde": "Voor 23:59", "label": "besteld, morgen in huis" } }
+      },
+      "block_order": ["s1", "s2", "s3"],
+      "settings": { "oog": "Wellshave", "kop": "Kies. Probeer.", "kop_goud": "Houd hem.", "tekst": "Je bestelt vandaag, probeert honderd dagen in je eigen badkamer en houdt hem alleen als hij bevalt.", "link_label": "Vind jouw apparaat", "link": "shopify://collections/all", "link2_label": "Doe de quiz", "link2": "/pages/quiz" }
+    }
+  },
+  "order": ["hero", "zekerheid", "glad", "plekken", "banners", "innovatie", "pers", "alles", "afsluiter"]
+}

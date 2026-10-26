@@ -1,0 +1,36 @@
+{% comment %} Wellshave v7 · persstrook: logo's in één donkergrijs, op gelijke optische hoogte. {% endcomment %}
+{{ 'ws7.css' | asset_url | stylesheet_tag }}
+<div class="ws7 ws7-pers{% if section.settings.wit %} ws7-wit{% endif %}">
+  <div class="ws7-pers__rij">
+    {%- for block in section.blocks -%}
+      <span style="--h:{{ block.settings.hoogte }}px" {{ block.shopify_attributes }}>
+        {%- if block.settings.logo != blank -%}
+          {{ block.settings.logo | image_url: height: 80 | image_tag: loading: 'lazy', alt: block.settings.naam }}
+        {%- elsif block.settings.standaard != blank -%}
+          <img src="{{ block.settings.standaard | prepend: 'ws7-logo-' | append: '.png' | asset_url }}" alt="{{ block.settings.naam | escape }}" loading="lazy" height="80">
+        {%- endif -%}
+      </span>
+    {%- endfor -%}
+  </div>
+</div>
+{% schema %}
+{
+  "name": "WS7 · Pers",
+  "tag": "div",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [ { "type": "checkbox", "id": "wit", "label": "Witte achtergrond", "default": false } ],
+  "blocks": [
+    { "type": "logo", "name": "Logo", "settings": [
+      { "type": "text", "id": "naam", "label": "Naam", "default": "AD" },
+      { "type": "select", "id": "standaard", "label": "Logo uit het thema", "default": "ad", "options": [
+        { "value": "ad", "label": "AD" }, { "value": "mh", "label": "Men's Health" }, { "value": "ed", "label": "Eindhovens Dagblad" },
+        { "value": "mm", "label": "MediaMarkt" }, { "value": "kk", "label": "Kieskeurig.nl" }, { "value": "bol", "label": "bol" },
+        { "value": "bcc", "label": "BCC" }, { "value": "review", "label": "Review.nl" }, { "value": "blokker", "label": "Blokker" },
+        { "value": "baard", "label": "Baardtips.com" }, { "value": "dbw", "label": "De Betere Wereld" }, { "value": "dor", "label": "De Ondernemer" } ] },
+      { "type": "image_picker", "id": "logo", "label": "Eigen logo", "info": "Gaat voor het logo uit het thema." },
+      { "type": "range", "id": "hoogte", "label": "Hoogte", "min": 12, "max": 44, "step": 1, "unit": "px", "default": 22 }
+    ]}
+  ],
+  "presets": [ { "name": "WS7 · Pers" } ]
+}
+{% endschema %}

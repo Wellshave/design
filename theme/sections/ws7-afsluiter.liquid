@@ -1,0 +1,44 @@
+{% comment %} Wellshave v7 · afsluiter: donkere plaat met het S-teken, een kop in twee regels, drie zekerheden en een link. {% endcomment %}
+{{ 'ws7.css' | asset_url | stylesheet_tag }}
+<div class="ws7">
+  <div class="ws7-slot ws7-donkergrond">
+    {% render 'ws-merkteken', klasse: 'ws7-teken' %}
+    {% render 'ws-merkteken', klasse: 'ws7-slot__merk' %}
+    {%- if section.settings.oog != blank -%}<span class="ws7-slot__oog">{{ section.settings.oog }}</span>{%- endif -%}
+    {% render 'ws7-kop', kop: section.settings.kop, goud: section.settings.kop_goud %}
+    {%- if section.settings.tekst != blank -%}<p class="ws7-slot__tekst">{{ section.settings.tekst }}</p>{%- endif -%}
+    {%- if section.blocks.size > 0 -%}
+      <div class="ws7-slot__rij">
+        {%- for block in section.blocks -%}<div class="ws7-slot__punt" {{ block.shopify_attributes }}><b>{{ block.settings.waarde }}</b><span>{{ block.settings.label }}</span></div>{%- endfor -%}
+      </div>
+    {%- endif -%}
+    {%- if section.settings.link_label != blank -%}<a class="ws7-link" href="{{ section.settings.link | default: '#' }}">{{ section.settings.link_label }}{% render 'ws7-pijl' %}</a>{%- endif -%}
+    {%- if section.settings.link2_label != blank -%}<a class="ws7-slot__tweede" href="{{ section.settings.link2 | default: '#' }}">{{ section.settings.link2_label }}</a>{%- endif -%}
+  </div>
+  <div class="ws7-slot-ruimte"></div>
+</div>
+{% schema %}
+{
+  "name": "WS7 · Afsluiter",
+  "tag": "div",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "max_blocks": 3,
+  "settings": [
+    { "type": "text", "id": "oog", "label": "Bovenregel", "default": "Wellshave" },
+    { "type": "text", "id": "kop", "label": "Kop", "default": "Kies. Probeer." },
+    { "type": "text", "id": "kop_goud", "label": "Kop, regel in goud", "default": "Houd hem." },
+    { "type": "textarea", "id": "tekst", "label": "Tekst", "default": "Je bestelt vandaag, probeert honderd dagen in je eigen badkamer en houdt hem alleen als hij bevalt." },
+    { "type": "text", "id": "link_label", "label": "Linktekst", "default": "Vind jouw apparaat" },
+    { "type": "url", "id": "link", "label": "Link" },
+    { "type": "text", "id": "link2_label", "label": "Tweede link", "default": "Doe de quiz" },
+    { "type": "url", "id": "link2", "label": "Tweede link, adres" }
+  ],
+  "blocks": [
+    { "type": "punt", "name": "Zekerheid", "settings": [
+      { "type": "text", "id": "waarde", "label": "Groot", "default": "100 dagen" },
+      { "type": "text", "id": "label", "label": "Klein", "default": "proberen, anders geld terug" }
+    ]}
+  ],
+  "presets": [ { "name": "WS7 · Afsluiter" } ]
+}
+{% endschema %}
