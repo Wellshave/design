@@ -2374,11 +2374,33 @@ De link onder de vragen krijgt zelf het voorvoegsel van taal en markt
 (`routes.root_url`, bijvoorbeeld `/en` of `/de-de`), zodat één waarde in
 elke markt werkt.
 
-### Nog open
+### Extra's zonder los product
 
-* Cadeau 2 in de thema-instellingen wijst naar de betaalde
-  `wellshave-4-in-1-neustrimmer-ultimate` (€29,95) in plaats van
-  `gift-neustrimmer-ultra`.
+Staat er voor een kaart niets in `upgrade_extras`, dan toont hij wat in zijn
+`compare_info` staat en niet in die van de goedkoopste, zonder prijs (Barber
+Bro 1.0 → 3.0: shaver en neustrimmer; de shaver is niet los te koop). Een
+lege lijst in `upgrade_extras` (`{"<id>": []}`) betekent: "heeft alles van de
+goedkoopste", zodat de vergelijking die kolom ook alle punten geeft.
+
+### De galerij
+
+De fotobaan heeft binnenruimte (de witte kaart). Een snap-punt lijnt uit op
+de rand van de scrollport, niet op de binnenrand; zonder `scroll-padding`
+schoof elke foto 10 px op en stak de volgende rechts uit. Nu staat
+`scroll-padding-inline` gelijk aan de binnenruimte. Pijlen en miniaturen
+rekenen met de gemeten stap tussen twee foto's in plaats van met vaste
+12/16 px uit de oude opmaak. De miniaturen staan op elke breedte op één
+horizontaal scrollbare rij (desktop zes en een half vak; de actieve schuift
+mee in beeld).
+
+### Cadeau 2
+
+Cadeau 2 stond op de betaalde `wellshave-4-in-1-neustrimmer-ultimate`
+(€29,95), die ook als add-on werd verkocht. Nu `gift-neustrimmer-ultra`
+(€0, adviesprijs €32,95), zoals cadeau 1 met `gift-the-washbag` werkt.
+Alleen in thema v7; MAIN verandert pas bij publiceren.
+
+### Nog open
 * De Ultimate kost €89,95, net onder de drempel van €90 voor cadeau 2.
 * Bij de Ultimate staat de washbag zowel als inhoud als als cadeau.
 * `pdp_stappen`, `kerncijfers`, `pdp_bundels` en `combi_korting` zijn gevuld

@@ -659,6 +659,7 @@
                 assign tier_laag = th
                 assign tier_laag_prijs = tpv.price
                 assign tier_laag_extras = tp.metafields.custom.upgrade_extras.value
+                assign tier_laag_p = tp
               endif
               if tp.metafields.custom.compare_info.value.is_popuplar and tpv.price > tier_top_prijs
                 assign tier_top = th
@@ -730,6 +731,43 @@
                       <span class="ws-tx-pr"><s>{{ s.munt }}{% render 'price-formated', price: lp.price %}</s>{{ s.tier_inbegrepen }}</span>
                     </span>
                   {%- endfor -%}
+                  {%- comment -%}
+                    Geen upgrade_extras? Dan wat in compare_info van deze kaart staat
+                    en niet in die van de goedkoopste (Barber Bro 1.0 → 3.0: shaver en
+                    neustrimmer). Zonder losse prijs, want die bestaat niet altijd.
+                  {%- endcomment -%}
+                  {%- if t_extra_n == 0 and th != tier_laag and tier_laag_p != blank -%}
+                    {%- capture laag_sl %}{% render 'ws-vergelijk-sleutels', p: tier_laag_p %}{% endcapture -%}
+                    {%- assign t_ci = tp.metafields.custom.compare_info.value -%}
+                    {%- for an in (1..4) -%}
+                      {%- liquid
+                        case an
+                          when 1
+                            assign at = t_ci.advantage_1_title
+                            assign asub = t_ci.advantage_1_subtitle
+                          when 2
+                            assign at = t_ci.advantage_2_title
+                            assign asub = t_ci.advantage_2_subtitle
+                          when 3
+                            assign at = t_ci.advantage_3_title
+                            assign asub = t_ci.advantage_3_subtitle
+                          else
+                            assign at = t_ci.advantage_4_title
+                            assign asub = t_ci.advantage_4_subtitle
+                        endcase
+                      -%}
+                      {%- if at == blank -%}{%- continue -%}{%- endif -%}
+                      {%- assign at = at | strip -%}
+                      {%- assign at_sl = '‹' | append: at | append: '›' -%}
+                      {%- if laag_sl contains at_sl -%}{%- continue -%}{%- endif -%}
+                      {%- assign t_extra_n = t_extra_n | plus: 1 -%}
+                      <span class="ws-tx ws-tx-pt">
+                        <span class="ws-tx-bd" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+                        <span class="ws-tx-nm">+ {{ at }}{%- if asub != blank -%}<small>{{ asub }}</small>{%- endif -%}</span>
+                        <span class="ws-tx-pr">{{ s.tier_inbegrepen }}</span>
+                      </span>
+                    {%- endfor -%}
+                  {%- endif -%}
                 {%- endcapture -%}
 
                 {%- comment -%} de cadeaus die deze prijs haalt, uit de instellingen van de winkelwagen {%- endcomment -%}
@@ -2056,17 +2094,29 @@
         for (var n = 0; n < vakken.length; n++) {
           vakken[n].classList.toggle('ws-on', n === i);
         }
+        // de rij miniaturen scrolt mee, zodat de actieve altijd in beeld staat
+        var actief = vakken[i];
+        if (actief && strook.scrollWidth > strook.clientWidth) {
+          var a = actief.getBoundingClientRect(), r = strook.getBoundingClientRect();
+          if (a.left < r.left) strook.scrollBy({ left: a.left - r.left, behavior: 'smooth' });
+          else if (a.right > r.right) strook.scrollBy({ left: a.right - r.right, behavior: 'smooth' });
+        }
       }
 
-      function huidige() {
-        var breedte = baan.children[0] ? baan.children[0].offsetWidth : 1;
-        return Math.round(baan.scrollLeft / (breedte + gat()));
+      // De stap tussen twee foto's, gemeten in plaats van aangenomen: dan klopt
+      // het ook als de baan binnenruimte of een andere tussenruimte heeft.
+      function stap() {
+        var a = baan.children[0], b = baan.children[1];
+        if (!a) return 1;
+        return b ? (b.offsetLeft - a.offsetLeft) : a.offsetWidth;
       }
-      function gat() { return window.innerWidth < 750 ? 12 : 16; }
+      function huidige() {
+        return Math.round(baan.scrollLeft / stap());
+      }
       function naarDia(i) {
         var dia = baan.children[i];
         if (!dia) return;
-        baan.scrollTo({ left: dia.offsetLeft - baan.offsetLeft, behavior: 'smooth' });
+        baan.scrollTo({ left: i * stap(), behavior: 'smooth' });
         markeer(i);
         if (kenmerk) { kenmerk.classList.toggle('ws-weg', i !== 0); }
       }
