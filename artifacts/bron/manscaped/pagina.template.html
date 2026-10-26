@@ -1,7 +1,7 @@
 <title>Wellshave homepage v7</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800&family=Montserrat:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800&family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600&family=Montserrat:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
 /* ── schil om de mockup, volgt het thema van de lezer ── */
 :root{--g:#F6F4F0;--kaart:#FFFFFF;--i:#16140F;--i2:#5F584E;--i3:#8C8478;--lijn:#E2DCD2;--acc:#8C5A1A}
@@ -247,6 +247,24 @@ body{margin:0;background:var(--g);color:var(--i);font:400 15px/1.6 "Montserrat",
   .voet-raster{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px 10px}
   .nieuws{grid-column:1/-1}
 }
+
+/* letter zoals hears.com: Helvetica Now Display is een betaalde letter, Inter Tight en Inter komen het dichtst bij */
+.hfont .site{font-family:"Inter",-apple-system,"Helvetica Neue",Helvetica,Arial,sans-serif;letter-spacing:-.005em}
+.hfont .serif,.hfont .h-kop,.hfont .ban-kop{font-family:"Inter Tight","Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:500;font-variation-settings:normal;letter-spacing:-.035em;line-height:1.04}
+.hfont .serif{font-size:44px}
+.hfont .h-kop{font-size:60px}
+.hfont .ban-kop{font-size:46px}
+.hfont .club h2{font-size:48px}
+.hfont .plek b{font-family:"Inter Tight",sans-serif;font-weight:500;letter-spacing:-.025em}
+.hfont .kaart b,.hfont .t b,.hfont .prijs strong,.hfont .club-rij b,.hfont .voet h4{font-weight:600}
+.hfont .knop,.hfont .label,.hfont .oog,.hfont .club-oog,.hfont .nu,.hfont .nav2{font-weight:600}
+.hfont .oog,.hfont .club-oog{letter-spacing:.14em}
+@container (max-width:749px){
+  .hfont .serif{font-size:30px}
+  .hfont .h-kop{font-size:40px}
+  .hfont .ban-kop{font-size:33px}
+  .hfont .club h2{font-size:34px}
+}
 </style>
 
 <div class="schil">
@@ -255,6 +273,13 @@ body{margin:0;background:var(--g);color:var(--i);font:400 15px/1.6 "Montserrat",
       <span class="lbl">Wellshave · homepage v7 · opbouw geïnspireerd op Manscaped</span>
       <h1>Wellshave v7, eigen gemaakt</h1>
       <p>Dezelfde blokken als de Manscaped-proef, maar alles wat letterlijk van hen was is vervangen door Wellshave: zand, het goudverloop, de tweeslags kop, afgeronde vlakken en het S-teken.</p>
+    </div>
+    <div class="keuze">
+      <span class="lbl">Letter</span>
+      <div class="seg" role="group" aria-label="Letter">
+        <button type="button" id="l-h" aria-pressed="true">Zoals Hears (Inter Tight)</button>
+        <button type="button" id="l-f" aria-pressed="false">Fraunces en Montserrat</button>
+      </div>
     </div>
   </div>
   <div class="weergaven">
@@ -269,6 +294,10 @@ body{margin:0;background:var(--g);color:var(--i);font:400 15px/1.6 "Montserrat",
       <li><b>Afgeronde vlakken</b> (12, 18, 26 px) in plaats van harde rechthoeken: de hero, de banners en het donkere blok liggen als platen binnen een rand.</li>
       <li><b>Het S-teken</b> als watermerk in de banners en het donkere blok.</li>
       <li>Kortingslabels als gouden pil, de geruststrook met ronde icoonvlakken en haarlijnen, en de techniek als drie kaarten in wit, carbon en zand.</li>
+    </ul></div>
+    <div class="noot"><h2>Letter</h2><ul>
+      <li><b>Hears gebruikt Helvetica Now Display</b>, een betaalde letter van Monotype; hun eigen bestanden mogen we niet gebruiken. <b>Inter Tight</b> voor koppen en <b>Inter</b> voor tekst komen het dichtst bij en zijn gratis. Wil je het echte Helvetica Now, dan moet Wellshave daar zelf een licentie voor nemen.</li>
+      <li>Met de schakelaar bovenaan zie je de vorige versie met Fraunces en Montserrat.</li>
     </ul></div>
     <div class="noot"><h2>Wat van Manscaped blijft</h2><ul>
       <li><b>Plekken als schuifrij</b>, zoals hun categorieën: grote foto's, de volgende piekt in beeld, met een gouden pil met pijlen en stippen eronder. Gezicht &amp; baard staat er nu ook in.</li>
@@ -288,6 +317,10 @@ body{margin:0;background:var(--g);color:var(--i);font:400 15px/1.6 "Montserrat",
   if(window.ResizeObserver) new ResizeObserver(fit).observe(desk);
   window.addEventListener('load',fit);fit();
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
+  var lh=document.getElementById('l-h'),lf=document.getElementById('l-f');
+  function letter(h){document.body.classList.toggle('hfont',h);lh.setAttribute('aria-pressed',String(h));lf.setAttribute('aria-pressed',String(!h));try{localStorage.setItem('ws-v7-letter',h?'hears':'fraunces')}catch(e){}fit();}
+  lh.addEventListener('click',function(){letter(true)});lf.addEventListener('click',function(){letter(false)});
+  var lv='hears';try{lv=localStorage.getItem('ws-v7-letter')||'hears'}catch(e){} letter(lv!=='fraunces');
   /* schuifrij: pijlen en stippen, per rij (desktop en telefoon apart) */
   document.querySelectorAll('.schuif').forEach(function(w){
     var r=w.querySelector('.plekken'),st=w.querySelector('.sk-stippen'),v=w.querySelector('.sk-vorige'),n=w.querySelector('.sk-volgende');

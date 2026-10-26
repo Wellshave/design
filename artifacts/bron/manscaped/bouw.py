@@ -47,7 +47,7 @@ s+=('<div class="balk">Herfst Sale: tot 40% korting op geselecteerde apparaten. 
     '<svg viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20c1.2-3.6 4-5.3 7.5-5.3s6.3 1.7 7.5 5.3"/></svg>'
     '<svg viewBox="0 0 24 24"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg></div></header>'
     '<nav class="nav2"><a>Sets</a><a>Lichaam</a><a>Gezicht &amp; baard</a><a>Hoofd</a><a>Neus &amp; oren</a><a>Messen &amp; accessoires</a><a class="zoek">Zoeken</a></nav>')
-s+=('<section class="hero"><a class="h-groot" href="#"><span class="h-tekst"><span class="oog">Herfst Sale · tot 40%</span><span class="h-kop">Jouw huid. Jouw lijn. <span class="b">Wellshave.</span></span>'
+s+=('<section class="hero"><a class="h-groot" href="#"><span class="h-tekst"><span class="oog">Herfst Sale · tot 40%</span><span class="h-kop">Jouw huid.<br>Jouw lijn. <span class="b">Wellshave.</span></span>'
     f'<span class="h-sub">In beeld: de 4 Foil Blade Baron™, vier foil-koppen voor je gezicht.</span><span class="knop">Shop nu</span></span></a>'
     '<div class="h-rechts"><a class="h-tegel im-r-herfst" href="#"><span>Shop de Herfst Sale</span></a><a class="h-tegel im-r-water" href="#"><span>Shop bodygroomers</span></a></div></section>')
 s+=zeker()
