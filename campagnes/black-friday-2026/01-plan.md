@@ -119,6 +119,20 @@ De klok loopt naar `aanbod_eind` (30 november 23:59), dezelfde datum als de aank
 
 Bij "minder beweging" in het besturingssysteem staat alles stil. Alle teksten zijn velden in de sectie (`bf_kicker`, `bf_groot`, `bf_klein`, `bf_eind_label`). Wordt `bf_groot` leeggemaakt of een andere kleur gekozen, dan komt de oude balk terug. De opmaak staat in een eigen bestand `assets/ws-bfb.css`, dat alleen laadt waar de kaart staat, omdat de v7-productpagina `ws-pdp-koopvak.css` niet laadt.
 
+**Update: korting en cadeaus in één kaart.** De kaart heeft nu twee delen die je in één oogopslag uit elkaar houdt:
+
+1. **De korting:** "30% extra op je 2e artikel", met de klok tot maandag 30 november en de regel "Bovenop de prijs die er al staat. Tot en met maandag 30 november." Rechtsboven staat "Als dank voor 2026".
+2. **De cadeaus:** een eigen blok met een plusje ervoor, zodat duidelijk is dat ze er bovenop komen. De kop is "Gratis cadeaus bij je bestelling", met een eigen klok ("nog 31d 08u") tot vrijdag 27 november. Per cadeau staan erbij:
+   - foto en naam;
+   - "Bij een bestelling vanaf €65" of "vanaf €90";
+   - de waarde doorgestreept, met "Gratis" erachter.
+
+   Onderaan staat "Komt vanzelf in je winkelwagen. Vanaf €90 krijg je ze allebei. Alleen tot en met Black Friday, vrijdag 27 november."
+
+De cadeaus komen uit dezelfde keuze als de lijst en de winkelwagen (snippet `ws-cadeau`). Een product dat zelf al een washbag bevat, toont dus het vervangcadeau. Na 27 november verdwijnt het cadeaudeel vanzelf. De losse cadeauklok onder de kaart is weggehaald, omdat die nu in de kaart staat. Teksten: `bf_cadeau_kop`, `bf_cadeau_klok`, `bf_cadeau_vanaf` en `bf_cadeau_regel`.
+
+**Nog te checken bij het aanmaken van de korting:** telt de €65/€90-drempel vóór of ná de 30%? Als hij ná de korting telt, kan een klant met twee artikelen onder een drempel zakken. Stel de korting zo in dat hij samengaat met de cadeaus, en controleer de drempel.
+
 ### Nog te doen vóór de start
 
 1. **De korting zelf aanmaken** in Shopify: automatisch, "Koop 1, krijg 1 met 30% korting". Pas
