@@ -131,6 +131,16 @@ Bij "minder beweging" in het besturingssysteem staat alles stil. Alle teksten zi
 
 De cadeaus komen uit dezelfde keuze als de lijst en de winkelwagen (snippet `ws-cadeau`). Een product dat zelf al een washbag bevat, toont dus het vervangcadeau. Na 27 november verdwijnt het cadeaudeel vanzelf. De losse cadeauklok onder de kaart is weggehaald, omdat die nu in de kaart staat. Teksten: `bf_cadeau_kop`, `bf_cadeau_klok`, `bf_cadeau_vanaf` en `bf_cadeau_regel`.
 
+**Update: de kaart volgt de gekozen optie.** Per cadeau staat er een van drie dingen:
+
+- **Gratis bij deze keuze:** met vinkje, de waarde doorgestreept en "Gratis". De optie haalt de drempel en krijgt het cadeau echt.
+- **Nog €X erbij, bijvoorbeeld met een 2e artikel:** cadeau gedimd, rechts "vanaf €65" of "vanaf €90". Zo is zichtbaar dat de goedkopere optie het cadeau niet vanzelf krijgt, en de 2e-artikelkorting is meteen de manier om het te halen.
+- **Zit al in dit pakket:** voor de washbag bij pakketten die er al een bevatten (Essential Flex Bundel, Shave Package Ultimate).
+
+Wisselen tussen opties werkt de kaart direct bij. Teksten: `bf_cad_ok`, `bf_cad_nog` en `bf_cad_in`.
+
+**Cadeau bij €65 is altijd de washbag.** De vervangregel die bij een pakket met washbag de Travelbag gaf (`gift_1_dubbel` en `gift_1_reserve`), is uit de kopie gehaald. Zit de washbag al in het pakket, dan is er bij €65 geen extra cadeau; vanaf €90 komt de Neustrimmer Ultimate. Getest op Groom Guard, Head Shaver Deluxe, Tondeuse Pro, Essential Flex, Shave Package 3.0/Ultimate en Barber Bro 3.0. Alleen als de Neustrimmer Ultimate uitverkocht raakt, valt `gift_2_reserve` nog terug op Neustrimmer Basic en daarna Travelbag.
+
 **Nog te checken bij het aanmaken van de korting:** telt de €65/€90-drempel vóór of ná de 30%? Als hij ná de korting telt, kan een klant met twee artikelen onder een drempel zakken. Stel de korting zo in dat hij samengaat met de cadeaus, en controleer de drempel.
 
 ### Nog te doen vóór de start
