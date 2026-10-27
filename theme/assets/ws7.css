@@ -104,6 +104,7 @@
 .ws7-ban > img,.ws7-ban > picture,.ws7-ban > picture img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .ws7-ban--h-foto{height:auto;aspect-ratio:var(--ratio,16/9);min-height:420px;max-height:none}
 .ws7-ban--h-breed{height:auto;aspect-ratio:21/9;min-height:420px}
+.ws7-ban--h-panorama{height:auto;aspect-ratio:3/1;min-height:420px}
 .ws7-ban--rechts{justify-content:flex-end}
 .ws7-ban--donker::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(14,12,11,.7),rgba(14,12,11,0) 52%)}
 .ws7-ban--donker.ws7-ban--rechts::before{background:linear-gradient(270deg,rgba(14,12,11,.8),rgba(14,12,11,0) 55%)}
@@ -197,7 +198,7 @@
   .ws7-plek__beeld{border-radius:12px}
   .ws7-plek__naam{font-size:18px;margin-top:10px}
   .ws7-banners{padding:48px 10px 0;gap:8px}
-  .ws7-ban,.ws7-ban--h-foto,.ws7-ban--h-breed{height:auto;aspect-ratio:auto;min-height:320px;border-radius:18px;padding:28px 20px;align-items:flex-end}
+  .ws7-ban,.ws7-ban--h-foto,.ws7-ban--h-breed,.ws7-ban--h-panorama{height:auto;aspect-ratio:auto;min-height:320px;border-radius:18px;padding:28px 20px;align-items:flex-end}
   .ws7-ban > img,.ws7-ban > picture img{object-position:var(--mob-pos,70% 50%)}
   .ws7-ban--licht::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(245,241,234,0) 35%,rgba(245,241,234,.9) 78%)}
   .ws7-ban--donker::before,.ws7-ban--donker.ws7-ban--rechts::before{background:linear-gradient(180deg,rgba(14,12,11,0) 30%,rgba(14,12,11,.85))}
