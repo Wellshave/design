@@ -7,6 +7,7 @@
 {% endcomment %}
 
 {{ 'ws-collectie.css' | asset_url | stylesheet_tag }}
+{{ 'ws7-collectie.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'ws-collectie.js' | asset_url }}" defer></script>
 
 {%- assign nl = '<br />' -%}
@@ -198,9 +199,13 @@
                 vrijstaande pakshot op licht: de tegel mengt wit weg tegen de
                 achtergrond en zet het monogram erachter.
               {%- endcomment -%}
+              {%- comment -%}
+                v7: standaard de gewone productfoto, net als de kaarten op de homepage.
+                De eigen kaartfoto (custom.collectie_foto) alleen als dat in de sectie aanstaat.
+              {%- endcomment -%}
               {%- assign kaartfoto = p.featured_image -%}
               {%- assign eigen_foto = p.metafields.custom.collectie_foto.value -%}
-              {%- if eigen_foto != blank -%}
+              {%- if eigen_foto != blank and section.settings.eigen_kaartfoto -%}
                 {%- assign kaartfoto = eigen_foto.preview_image | default: eigen_foto -%}
               {%- endif -%}
               <a class="wsk-fotolink" href="{{ p.url }}" tabindex="-1" aria-hidden="true">
@@ -209,12 +214,13 @@
               {%- capture ws_bestseller -%}{%- render 'ws-bestseller-badge', label: label -%}{%- endcapture -%}
               {%- if p.available == false -%}
                 <span class="wsk-tag op">{{ section.settings.uitverkocht_label | default: 'Tijdelijk uitverkocht' }}</span>
-              {%- elsif ws_bestseller contains 'ws-bestseller-sticker' -%}
+              {%- elsif section.settings.stickers and ws_bestseller contains 'ws-bestseller-sticker' -%}
                 {{- ws_bestseller -}}
               {%- elsif label != blank -%}
-                <span class="wsk-tag{% if cat == 'app' %} zacht{% endif %}">{{ label }}</span>
+                <span class="wsk-tag">{{ label }}</span>
               {%- endif -%}
-              {%- render 'ws-herfst-badge', product: p, variant: v -%}
+              {%- comment -%} v7: geen stickers op de foto; het zwarte kortingslabel zegt al dat het in de actie zit. {%- endcomment -%}
+              {%- if section.settings.stickers -%}{%- render 'ws-herfst-badge', product: p, variant: v -%}{%- endif -%}
 
               {%- if cat == 'app' -%}
                 {%- if section.settings.vergelijken -%}
@@ -249,7 +255,7 @@
                 met 300, terwijl beide even goed zijn.
               {%- endcomment -%}
               <span class="wsk-tp">
-                <b>{{ section.settings.tp_score | default: '4,4' }}</b>
+                <b>{{ section.settings.tp_score | default: '4,5' }}</b>
                 <span>{{ section.settings.tp_uit | default: 'out of 5' }}</span>
                 <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wsr-ster"/></svg>
                 <i>{{ section.settings.tp_merk | default: 'Trustpilot' }}</i>
@@ -565,10 +571,12 @@
     { "type": "text", "id": "vgl_balk_wis", "label": "Balk: wisknop", "default": "Wis" },
     { "type": "text", "id": "vgl_balk_knop", "label": "Balk: vergelijkknop", "default": "Vergelijk" },
     { "type": "text", "id": "sorteer_label", "label": "Sorteerknop", "default": "Meest relevant" },
+    { "type": "checkbox", "id": "eigen_kaartfoto", "label": "Eigen kaartfoto gebruiken", "info": "Uit (v7): de kaart toont de gewone productfoto, zoals op de homepage. Aan: custom.collectie_foto als die er is.", "default": false },
+    { "type": "checkbox", "id": "stickers", "label": "Stickers op de foto", "info": "Uit (v7): geen Herfst Sale- en bestsellerstickers; bestseller wordt een klein label. Aan: de stickers uit de thema-instellingen.", "default": false },
     { "type": "image_picker", "id": "monogram", "label": "Monogram achter de packshot", "info": "Verschijnt bij hover en blijft staan op de kaart die de keuzehulp aanwijst. Werkt alleen achter een vrijstaande packshot." },
     { "type": "header", "content": "Beoordeling op de kaart" },
     { "type": "paragraph", "content": "Op elke kaart dezelfde winkelscore, niet per product een eigen cijfer. Pas dit alleen aan als de score op Trustpilot verandert — het cijfer hoort te kloppen met wat daar staat." },
-    { "type": "text", "id": "tp_score", "label": "Score", "default": "4,4" },
+    { "type": "text", "id": "tp_score", "label": "Score", "default": "4,5" },
     { "type": "text", "id": "tp_uit", "label": "Tekst achter de score", "info": "Bijvoorbeeld: out of 5, of van de 5.", "default": "out of 5" },
     { "type": "text", "id": "tp_merk", "label": "Naam van de bron", "default": "Trustpilot" },
     { "type": "header", "content": "Op de kaarten" },

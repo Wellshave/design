@@ -2695,3 +2695,65 @@ themabestanden en app-embeds met het live thema.
 * App-embeds **UpPromote** (affiliate) en **Hotjar** staan live aan maar
   ontbreken in v7. Shopify laat app-embeds alleen via de thema-editor aanzetten
   (een upload van settings_data.json met die blokken wordt stil genegeerd).
+* De Booster-cookiebanner (ScriptTag) geeft een 404 maar kan alleen door de app
+  zelf worden verwijderd.
+* Vijf advertorials (loodgieter-naar-scheermerk, gewoonte-uit-loodgietersjaren,
+  groom-guard-ballon, ze-zegt-er-niets-van-b, head-shaver-redenen) noemen
+  Trustpilot 4,4; groom-guard-ballon ook "958 reviews". Bulkbewerking is via
+  deze koppeling geblokkeerd, dus handmatig vervangen door 4,5 en 1000+.
+  De 4,4 en €40 op vaderdag-top-10 gaan over andere producten en blijven.
+
+## Collectiepagina's in v7-stijl
+
+`assets/ws7-collectie.css` is een laag over `ws-collectie.css`. Die laatste
+regelt de opbouw, filters, keuzehulp en vergelijking; de nieuwe laag alleen het
+uiterlijk. Elke `ws-collectie-*`-sectie laadt hem direct na ws-collectie.css.
+ws7.css en de ws7-homepagebestanden zijn niet aangeraakt.
+
+* Inter voor tekst, Inter Tight voor koppen en prijzen; gewicht 500–600 in
+  plaats van 800–900. Bovenregels in #9A6A2E met .14em spatiëring.
+* Knoppen zonder hoofdletters, rond (100px), carbon met gouden pijl.
+* De bovenkant ligt op wit; de hero is een afgeronde kaart (26px, mobiel 18px).
+* Raster op wit; de kaart zoals `.ws7-kaart`: geen rand maar een ring met
+  schaduw, de packshot op een zandvlak met eigen hoeken.
+* Labels zoals `.ws7-label`: klein, zwart, 3px afgerond. Het kortingslabel
+  (`.ws-spaar` uit het gedeelde ws-spaar.css) is op de collecties zwart in
+  plaats van goud; `.wsc` ervoor houdt dat binnen de collecties.
+* Keuzehulp en aanbodstrook op zand als accent.
+* `ws-collectie-raster` kreeg twee schakelaars, beide standaard uit:
+  `eigen_kaartfoto` (de eigen kaartfoto uit het metafield in plaats van de
+  packshot) en `stickers` (de ronde bestseller- en herfststicker). Uit toont de
+  kaart de packshot en een plat label, zoals op de homepage.
+* De actieve zonetegel op mobiel houdt zijn eigen stijl uit ws-collectie.css;
+  een carbon achtergrond daarop maakte er een zwart blok van.
+
+Gecontroleerd op desktop en mobiel: bodygroomers, all, bundels, winter-sale.
+
+## Overige punten uit de lanceercheck
+
+Winkelgegevens (dus ook live meteen goed):
+* Shave Package 2.0: de specificaties beschreven een ander apparaat; nu die van
+  de Groom Guard, met vertalingen.
+* Footermenu's in het Nederlands (Veelgestelde vragen, Verzendbeleid,
+  Retourbeleid, Privacybeleid, Algemene voorwaarden, Contact, Retourneren;
+  Ons verhaal, Blog), met en/de/fr.
+* SEO: titels voor ±26 producten zonder titel; Gentleman Shaver, Flex Guard en
+  Ultimate bijgewerkt; "30 dagen" → 100 dagen in drie omschrijvingen; Duitse
+  en Engelse resten uit twee omschrijvingen gehaald.
+* Redirects: `/products/detailtrimmer-sharpline` en een verwijderd
+  blogartikel wezen naar "/#…" van een SEO-app; nu naar het product en de blog.
+
+Thema v7:
+* Footer: de nieuwsbriefregel was Engels ("By filling in your email…"); nu
+  Nederlands met links naar privacybeleid en contact (`sections/footer-group.json`).
+* Header en footer volledig vertaald in en/de/fr: aankondigingsbalk (Herfst
+  Sale, Trustpilot 4,5, levertijd), megamenu (zones, typen, banners), mobiel
+  menu. De oude Engelse vertalingen spraken nog van "Spring Deals" en 4.4.
+* Homepage, collecties en pagina's houden voor en/de/fr deels Nederlandse
+  tekst: samen ±1.300 unieke zinnen bij ±1% van het verkeer uit DE en vrijwel
+  niets uit FR of Engelstalige landen. Niet vertaald; de kop en voet van elke
+  pagina zijn dat wel.
+
+Na de Herfst Sale (eindigt 30 oktober) moeten de sale-teksten in de
+aankondigingsbalk, het megamenu en het menu-item HERFST SALE worden
+vervangen, net als de vertalingen daarvan.

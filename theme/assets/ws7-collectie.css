@@ -1,0 +1,130 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600&display=swap");
+
+/* Wellshave v7 · collectiepagina's.
+   Een laag over ws-collectie.css: die regelt de opbouw, de filters, de keuzehulp en het
+   vergelijken; dit bestand alleen het uiterlijk, zodat de collecties lezen als de homepage
+   en de productpagina van v7. Inter voor tekst, Inter Tight voor koppen, gewicht 500–600
+   in plaats van 800–900, geen hoofdletterknoppen, wit als grond en zand als accent,
+   het kortingslabel zwart zoals op de homepage. Laadt in elke ws-collectie-sectie direct
+   na ws-collectie.css. ws7.css (homepage) blijft ongemoeid. */
+
+.wsc,.wsc-laag{--kopletter:"Inter Tight","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --letter:"Inter",-apple-system,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  --oog:#9A6A2E;--mid:#6A635A;
+  font-family:var(--letter);font-size:14px;line-height:1.55;letter-spacing:-.005em;
+  -webkit-font-smoothing:antialiased}
+
+/* ── koppen ── */
+.wsc .duo,.wsc .kiescard h2,.wsc .groep-kop h2,.wsc .bewijs-h2,.wsc .cat-tekst h3,.wsc .cat-h3-breed,
+.wsc .mp-info h3,.wsc .aanbod-tekst h3,.wsc-laag .vgl-kop h2,.wsc-laag .vgl-body h3,.wsc .wsk-naam{
+  font-family:var(--kopletter)}
+.wsc .duo{font-weight:500;letter-spacing:-.035em;line-height:1.04}
+.wsc .kiescard h2,.wsc .bewijs-h2{font-weight:500;letter-spacing:-.03em;line-height:1.12}
+.wsc .groep-kop h2{font-weight:500;letter-spacing:-.03em;font-size:26px}
+.wsc .cat-tekst h3,.wsc .cat-h3-breed,.wsc .aanbod-tekst h3{font-weight:500;letter-spacing:-.02em}
+.wsc .mp-info h3,.wsc-laag .vgl-kop h2{font-weight:500;letter-spacing:-.025em}
+.wsc-laag .vgl-body h3{font-weight:600;letter-spacing:-.015em}
+
+/* bovenregels: zoals .ws7-oog */
+.wsc .eyebrow,.wsc .kaartkop .eyebrow,.wsc .bwr-tag,.wsc .stapper-tekst,.wsc .kaartkop span,
+.wsc .mp-kop b,.wsc .mp-waarom,.wsc .wsk-kicker,.wsc .wsk-blik b,.wsc-laag .vgl dt,.wsc .fb-label{
+  font-weight:600;letter-spacing:.14em}
+.wsc .eyebrow,.wsc .kaartkop .eyebrow,.wsc .bwr-tag{color:var(--oog)}
+.wsc .eyebrow.on-dark{color:#F5D18A}
+
+/* alles wat 800 of 900 was, wordt 600: v7 schreeuwt niet met gewicht */
+.wsc .zkaart,.wsc .zkaart-naam{font-weight:600}
+.wsc .zkaart-tel,.wsc .stapbol,.wsc .fb-kiezer-tel,.wsc .filter i,.wsc .vantwoord b,.wsc .zk b,
+.wsc .zekerstrook b,.wsc .fb-uitslag b,.wsc .stapkort b,.wsc .stapkort b::before,.wsc .vknop,
+.wsc .mp-badge,.wsc-laag .vgl-balk-tel b,.wsc .wsk-tp b,.wsc .keuze,.wsc .filter,.wsc .fb-knop,
+.wsc .vraagrij > p,.wsc .hero-hulp,.wsc .vr-antwoord,.wsc .bwr-bron b{font-weight:600}
+.wsc .vknop{font-size:15px;letter-spacing:-.01em}
+
+/* prijzen in de kopletter, zoals op de productpagina */
+.wsc .wsk-prijs b,.wsc .mp-prijs,.wsc .aanbod-prijs,.wsc-laag .vgl-prijs b{
+  font-family:var(--kopletter);font-weight:600;letter-spacing:-.025em;font-variant-numeric:tabular-nums}
+.wsc .wsk-prijs b{font-size:18px}
+
+/* ── knoppen: geen hoofdletters, rond, zoals de pillen op de homepage ── */
+.wsc .wsk-cta,.wsc .mp-knop,.wsc-laag .vgl-balk .knop{text-transform:none;letter-spacing:0;
+  font-weight:600;font-size:13px}
+.wsc .wsk-cta{background:var(--carbon);border-radius:100px;padding:11px 14px;gap:8px;
+  transition:background .25s ease,transform .18s ease}
+.wsc .wsk-cta:hover{background:#000;transform:translateY(-1px)}
+.wsc .wsk-cta svg{color:#F5D18A}
+.wsc .wsk-plus{border-radius:100px}
+.wsc .mp-knop{font-size:13px}
+.wsc .mp-badge{letter-spacing:.06em}
+
+/* ── de bovenkant: geen zwarte band meer, de hero ligt op wit zoals op de homepage ── */
+.wsc .kop{background:var(--paper);padding:12px 0 8px}
+.wsc .hero{border:0;box-shadow:none;border-radius:26px}
+.wsc .kop.kaal .hero{background:var(--grad-dark)}
+.wsc .duo.on-dark .b{background-image:linear-gradient(135deg,#F8DFAB,#E5BC77 42%,#C8913F)}
+.wsc .hero-hulp{color:#F5D18A}
+
+/* ── de zonebalk ── */
+.wsc .zonebalk{box-shadow:none;border-bottom:1px solid rgba(17,17,17,.06)}
+.wsc .zkaart{border-color:rgba(17,17,17,.08);border-radius:14px}
+
+/* ── het raster: wit als grond, zand alleen achter de packshot ── */
+.wsc .zand{background:var(--paper)}
+.wsc .filterbalk{border-color:rgba(17,17,17,.08);box-shadow:0 14px 34px -24px rgba(17,17,17,.22)}
+
+/* de kaart, zoals .ws7-kaart: wit, rond, de foto op een zandvlak met eigen hoeken */
+.wsc .wsk{border:0;border-radius:18px;padding:10px 10px 0;
+  box-shadow:0 0 0 1px rgba(17,17,17,.06),0 14px 34px -22px rgba(17,17,17,.22);
+  transition:box-shadow .3s ease,transform .18s ease}
+.wsc .wsk-shot{border-radius:12px;background:var(--sand)}
+.wsc .groep[data-cat="bundel"] .wsk-shot,.wsc .wsk.match .wsk-shot{background:var(--sand)}
+.wsc .wsk-body{padding:14px 6px 16px}
+@media (hover:hover) and (pointer:fine){
+  .wsc .wsk:hover{background:#fff;transform:translateY(-2px);
+    box-shadow:0 0 0 1px rgba(17,17,17,.06),0 18px 40px -20px rgba(17,17,17,.3)}
+  .wsc .wsk:hover .wsk-shot{background:var(--sand-deep)}
+}
+.wsc .wsk.match{background:#fff;box-shadow:0 0 0 1.5px rgba(188,129,62,.6),0 18px 40px -20px rgba(17,17,17,.3)}
+
+/* labels zoals .ws7-label: klein, zwart, nauwelijks afgerond */
+.wsc .wsk-tag{border-radius:3px;padding:5px 8px;font-size:10px;font-weight:600;letter-spacing:.02em;
+  text-transform:none;top:10px;left:10px}
+.wsc .wsk-tag.zacht{background:#EDE6DA;color:#7A4A12}
+.wsc .wsk-tag.tweede{right:10px}
+
+/* korting: hetzelfde zwarte label als op de homepagekaart, niet langer een goud pilletje.
+   Het raster gebruikt het gedeelde label uit ws-spaar.css; .wsc ervoor houdt dit op de collecties. */
+.wsc .ws-spaar{background:var(--carbon);color:#fff;border-radius:3px;padding:4px 7px;
+  font-size:10px;font-weight:600;letter-spacing:0}
+.wsc .ws-spaar *{color:inherit}
+.wsc .wsk-korting{background:var(--carbon);color:#fff;border-radius:3px;padding:4px 7px;
+  font-size:10px;font-weight:600;letter-spacing:0}
+
+.wsc .wsk-naam{font-size:16px;font-weight:600;letter-spacing:-.015em}
+.wsc .wsk-tp b{font-weight:600}
+.wsc .wsk-voet{border-top-color:rgba(17,17,17,.06)}
+
+/* ── de keuzehulp en de aanbodstrook: zand als accent ── */
+.wsc .kiescard{background:var(--sand);border-color:transparent;box-shadow:none}
+.wsc .stapbol,.wsc .sb{background:#fff}
+.wsc .aanbod{background:var(--sand);border-color:transparent}
+
+/* ── uitleg en bewijs ── */
+.wsc .mech-plaat{box-shadow:0 0 0 1px rgba(17,17,17,.06),0 16px 36px -24px rgba(17,17,17,.22)}
+
+/* ── de vergelijking ── */
+.wsc-laag .vgl-venster{background:#fff}
+.wsc-laag .vgl{box-shadow:0 0 0 1px rgba(17,17,17,.08),0 16px 36px -24px rgba(17,17,17,.22)}
+.wsc-laag .vgl-beeld{background:var(--sand)}
+
+@container (max-width:700px){
+  .wsc .kop{padding:8px 0 6px}
+  .wsc .hero{border-radius:18px}
+  .wsc .groep-kop h2{font-size:21px}
+  .wsc .wsk{padding:6px 6px 0;border-radius:12px}
+  .wsc .wsk-shot{border-radius:8px}
+  .wsc .wsk-body{padding:11px 5px 13px}
+  .wsc .wsk-naam{font-size:14px}
+  .wsc .wsk-prijs b{font-size:16px}
+  .wsc .wsk-cta{font-size:12px;padding:10px 8px}
+  .wsc .wsk-tag{top:7px;left:7px;font-size:9px;padding:3px 6px}
+}
