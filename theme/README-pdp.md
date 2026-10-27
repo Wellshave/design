@@ -2806,3 +2806,16 @@ de knop, terwijl die in de Barber Bro-sets zitten die je erboven kiest.
   Op het pakket zelf slaat de lijst custom.bevat ook over.
 * `ws7-pdp.css`: verborgen rijen en blok `display:none`; de scheidingslijn
   telt alleen zichtbare rijen.
+
+### Winkelwagenlade: dezelfde regel
+
+* `custom.cart_upsell` (de lade, **ook live**) voor dezelfde 40 producten gelijk
+  gezet aan pdp_addons: onderdelen en hard case, washbag, travelbag. Weg zijn de
+  safety razors en de apparaten (Blade Baron, Sharpline, Flex Guard, Gentleman,
+  Neustrimmer Basic, Tondeuse Elegant, Flex-line Bundel). De oude waarden staan
+  in `backups/cart_upsell-voor-2026-10-27.json`. De washbag blijft in beide
+  thema's weg via upsell_uitsluiten.
+* `snippets/cart-drawer.liquid` (v7): de lade slaat over wat al in de
+  winkelwagen ligt of in een pakket daarin zit (custom.bevat). Met een Flex
+  Guard en een Hard Case in de wagen biedt hij geen tweede Hard Case meer aan;
+  bij de Essential Flex Bundel geen Hard Case (die zit erin).
