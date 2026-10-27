@@ -448,8 +448,9 @@
         </div>
 
         <button type="button" class="cart-drawer__submit" data-action="to-checkout">
+          {%- comment -%} Slotje vóór de tekst: veilig afrekenen. Wit, gevuld; schuift niet mee bij hover. {%- endcomment -%}
+          <svg viewBox="0 0 16 16" aria-hidden="true" style="stroke:currentColor;transform:none"><path d="M5.2 7.2V5.4a2.8 2.8 0 0 1 5.6 0v1.8"/><rect x="3" y="7" width="10" height="7.5" rx="1.6" fill="currentColor" stroke="none"/></svg>
           <span>{{ 'cart_drawer.checkout_button_label' | t }}</span>
-          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
         </button>
 
         {%- if settings.enable_benefits -%}

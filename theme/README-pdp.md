@@ -2834,3 +2834,9 @@ twee fixes, klaar om te publiceren. Dezelfde twee staan ook in
   lipje tegen de linkerrand (31×158 px), tekst van onder naar boven, op 74vh,
   zoals bij Hears. Alleen het label wordt geraakt (Alia zet dan `rotate(90deg)`
   op zijn root); de open popup blijft zoals Alia hem maakt.
+* Afrekenknop in de winkelwagenlade: wit, gevuld slotje vóór de tekst (het
+  pijltje erachter is weg) en "Veilig afrekenen" in plaats van "Afrekenen".
+  `cart_drawer.checkout_button_label` in nl/en/de/fr: Veilig afrekenen,
+  Secure checkout, Sicher bezahlen, Paiement sécurisé; de geregistreerde
+  vertalingen (en/de/fr) zijn bijgewerkt. In v8 en het Black Friday-thema;
+  in het BF-thema op zijn eigen cart-drawer (die heeft een cadeauklok extra).
