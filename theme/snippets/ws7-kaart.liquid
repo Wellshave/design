@@ -2,11 +2,14 @@
   Productkaart voor de homepage v7. Naam, prijs, van-prijs, foto en link komen uit het product;
   een eigen foto (foto) gaat voor de productfoto.
   Het label rekent het percentage zoals ws-spaar: in centen, naar beneden afgerond.
+  Hover: het gouden S-teken komt achter het product naar voren en "In winkelwagen" schuift omhoog.
+  De naam is de link en ligt over de hele kaart; de knop ligt daarboven en legt het product in de lade.
   Gebruik: {% render 'ws7-kaart', product: p, foto: block.settings.foto, naam: block.settings.naam, wat: block.settings.wat, label: section.settings.label %}
 {%- endcomment -%}
 {%- assign v = product.selected_or_first_available_variant -%}
-<a class="ws7-kaart" href="{{ product.url | default: '#' }}">
+<div class="ws7-kaart">
   <span class="ws7-kaart__beeld">
+    {%- render 'ws-merkteken', klasse: 'ws7-kaart__merk' -%}
     {%- if v.compare_at_price > v.price -%}
       {%- assign ws7_verschil = v.compare_at_price | minus: v.price -%}
       {%- assign ws7_pct = ws7_verschil | times: 100 | divided_by: v.compare_at_price -%}
@@ -16,8 +19,13 @@
     {%- if ws7_foto -%}
       {{ ws7_foto | image_url: width: 640 | image_tag: loading: 'lazy', widths: '320,480,640', sizes: '(max-width: 749px) 62vw, 320px', alt: ws7_foto.alt | default: product.title }}
     {%- endif -%}
+    {%- if v.available -%}
+      <button type="button" class="ws7-mand" data-ws7-mand="{{ v.id }}" aria-label="{{ naam | default: product.title | escape }} in winkelwagen">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 5.5h10l-.9 8H3.9z"/><path d="M5.8 5.5V4.3a2.2 2.2 0 0 1 4.4 0v1.2"/></svg>In winkelwagen
+      </button>
+    {%- endif -%}
   </span>
-  <span class="ws7-kaart__naam">{{ naam | default: product.title }}</span>
+  <a class="ws7-kaart__naam" href="{{ product.url | default: '#' }}">{{ naam | default: product.title }}</a>
   {%- if wat != blank -%}<span class="ws7-kaart__wat">{{ wat }}</span>{%- endif -%}
   <span class="ws7-kaart__prijs"><b>{% render 'ws-euro', bedrag: v.price %}</b>{%- if v.compare_at_price > v.price -%}<s>{% render 'ws-euro', bedrag: v.compare_at_price %}</s>{%- endif -%}</span>
-</a>
+</div>

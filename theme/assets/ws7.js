@@ -36,4 +36,24 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { alles(); });
   else alles();
   document.addEventListener('shopify:section:load', function (e) { alles(e.target); });
+
+  // "In winkelwagen" op een productkaart: via de winkelwagen-lade van het thema, zodat de lade
+  // opengaat en de cadeaus meetellen. Zonder lade gewoon naar de winkelwagenpagina.
+  // ws7.js staat in meerdere secties; de klik maar één keer afvangen.
+  if (window.ws7MandKlaar) return;
+  window.ws7MandKlaar = true;
+  document.addEventListener('click', function (e) {
+    var k = e.target.closest('[data-ws7-mand]');
+    if (!k) return;
+    e.preventDefault();
+    var id = parseInt(k.getAttribute('data-ws7-mand'), 10), lade = document.querySelector('cart-drawer');
+    k.classList.add('is-bezig');
+    var klaar = function () { k.classList.remove('is-bezig'); };
+    if (lade && typeof lade.addItemToCart === 'function') {
+      Promise.resolve(lade.addItemToCart(id)).then(function () { lade.open(); }).finally(klaar);
+    } else {
+      fetch('/cart/add.js', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ items: [{ id: id, quantity: 1 }] }) })
+        .then(function () { window.location.href = '/cart'; }).catch(klaar);
+    }
+  });
 })();
