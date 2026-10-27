@@ -44,7 +44,7 @@ Testen: `npm test` (regels, JWT, checkout-link, kortingsfunctie).
 Deze stappen vragen een inlog die alleen jij hebt.
 
 1. **App aanmaken.** In het Shopify Dev Dashboard een app "Wellshave Upsell" aanmaken voor de eigen winkel. Daarna in deze map: `npm install`, `npx shopify app config link` (vult `client_id` in) en `npx shopify app deploy`.
-2. **Server.** Op Netlify een site maken vanuit deze map, met de omgevingsvariabelen:
+2. **Server.** Draait al op https://wellshave-upsell.netlify.app (Netlify-project `wellshave-upsell`). Nog toevoegen onder Project configuration > Environment variables:
    - `SHOPIFY_API_KEY` en `SHOPIFY_API_SECRET` uit het Dev Dashboard
    - `STORE_DOMAIN=wellshave.com`
    - `KLAVIYO_PRIVATE_KEY` (alleen nodig voor de herinnering)

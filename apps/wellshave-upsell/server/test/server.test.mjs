@@ -12,6 +12,7 @@ test('jwt: ondertekenen en controleren, met audience en verloop', () => {
   const t = sign({aud: 'key', dest: 'https://wellshave.myshopify.com', exp: now + 60}, 'geheim');
   assert.equal(verify(t, 'geheim', {audience: 'key'}).dest, 'https://wellshave.myshopify.com');
   assert.throws(() => verify(t, 'fout'), /handtekening/);
+  assert.throws(() => verify('x.y.z', 'geheim'), /handtekening/);
   assert.throws(() => verify(t, 'geheim', {audience: 'ander'}), /audience/);
   assert.throws(() => verify(sign({exp: now - 100}, 'geheim'), 'geheim'), /verlopen/);
   const c = verify(signChangeset({referenceId: 'r1', changes: [], apiKey: 'key', secret: 'geheim'}), 'geheim');

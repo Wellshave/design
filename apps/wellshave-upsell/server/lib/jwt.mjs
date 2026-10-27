@@ -17,7 +17,12 @@ export function verify(token, secret, {audience, now = Math.floor(Date.now() / 1
   const parts = String(token || '').split('.');
   if (parts.length !== 3) throw new Error('token heeft geen drie delen');
   const [header, body, sig] = parts;
-  const head = JSON.parse(fromB64url(header).toString());
+  let head;
+  try {
+    head = JSON.parse(fromB64url(header).toString());
+  } catch {
+    throw new Error('ongeldige handtekening');
+  }
   if (head.alg !== 'HS256') throw new Error('onverwacht algoritme');
   const expected = createHmac('sha256', secret).update(`${header}.${body}`).digest();
   const given = fromB64url(sig);
