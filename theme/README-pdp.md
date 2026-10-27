@@ -2699,9 +2699,8 @@ themabestanden en app-embeds met het live thema.
   zelf worden verwijderd.
 * Vijf advertorials (loodgieter-naar-scheermerk, gewoonte-uit-loodgietersjaren,
   groom-guard-ballon, ze-zegt-er-niets-van-b, head-shaver-redenen) noemen
-  Trustpilot 4,4; groom-guard-ballon ook "958 reviews". Bulkbewerking is via
-  deze koppeling geblokkeerd, dus handmatig vervangen door 4,5 en 1000+.
-  De 4,4 en €40 op vaderdag-top-10 gaan over andere producten en blijven.
+  Trustpilot 4,4; groom-guard-ballon ook "958 reviews". Op verzoek blijven
+  de advertorials zoals ze zijn.
 
 ## Collectiepagina's in v7-stijl
 
