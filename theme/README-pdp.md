@@ -2819,3 +2819,12 @@ de knop, terwijl die in de Barber Bro-sets zitten die je erboven kiest.
   winkelwagen ligt of in een pakket daarin zit (custom.bevat). Met een Flex
   Guard en een Hard Case in de wagen biedt hij geen tweede Hard Case meer aan;
   bij de Essential Flex Bundel geen Hard Case (die zit erin).
+
+## Na de livegang (27 oktober): in het Black Friday-thema (209034117452)
+
+Het live thema is niet via de API te beschrijven; deze twee staan klaar in
+"Black Friday 2026 (kopie van v7)" en gaan mee als dat gepubliceerd wordt.
+* `ws7-pdp.css`: de vier vinkjes in het koopvak onder elkaar op elke
+  telefoon (grens 419 → 749 px; brede iPhones zijn 430 px).
+* App-embed Alia (popup "Mystery Korting") uitgezet in settings_data.json.
+  Op het live thema moet dat in de thema-editor (App-embeds → Alia uit).
