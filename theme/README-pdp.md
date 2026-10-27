@@ -2829,9 +2829,8 @@ twee fixes, klaar om te publiceren. Dezelfde twee staan ook in
 * `ws7-pdp.css`: de vier vinkjes in het koopvak onder elkaar op elke
   telefoon (grens 419 → 749 px; brede iPhones zijn 430 px).
 * Alia (popup "Mystery Korting") blijft aan; alleen het label is aangepast.
-  `assets/ws-alia.css`, ingeladen in `layout/theme.liquid`: Alia's verticale
-  strook rechts midden in beeld (60×202 px over foto en koopvak) wordt een klein
-  liggend pilletje linksonder (±131×28 px). Op de telefoon schuift het omhoog
-  zodra de vaste koopbalk in beeld komt (`body:has(.ws-sticky.ws-in)`). Alleen
-  het label wordt geraakt (Alia zet dan `rotate(90deg)` op zijn root); de open
-  popup blijft zoals Alia hem maakt.
+  `assets/ws-alia.css`, ingeladen in `layout/theme.liquid`: Alia's brede strook
+  rechts midden in beeld (60×202 px over foto en koopvak) wordt een smal donker
+  lipje tegen de linkerrand (31×158 px), tekst van onder naar boven, op 74vh,
+  zoals bij Hears. Alleen het label wordt geraakt (Alia zet dan `rotate(90deg)`
+  op zijn root); de open popup blijft zoals Alia hem maakt.

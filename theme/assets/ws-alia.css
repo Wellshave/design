@@ -1,19 +1,15 @@
-/* Alia-label ("Mystery Korting").
-   Alia zet zijn label als brede verticale strook op de rechterrand, midden in beeld,
-   over de productfoto en het koopvak. Hier wordt het een klein liggend label linksonder.
-   Alleen het label: dan staat er rotate(90deg) op de root van Alia. De geopende popup
-   heeft een andere stijl en blijft zoals Alia hem maakt. */
-[id^="alia-root-"][style*="rotate(90deg)"]{top:auto!important;bottom:20px!important;left:16px!important;
-  transform:none!important;transform-origin:center!important}
+/* Alia-label ("Mystery Korting") als smal lipje tegen de linkerrand, zoals bij Hears:
+   staand, tekst van onder naar boven, op ongeveer driekwart van de schermhoogte, ruim
+   boven de vaste koopbalk van de productpagina.
+   Alia zet het label zelf als brede strook rechts midden in beeld, over de foto en het
+   koopvak. Alleen het label wordt geraakt (dan staat er rotate(90deg) op de root van
+   Alia); de geopende popup blijft zoals Alia hem maakt. */
+[id^="alia-root-"][style*="rotate(90deg)"]{left:0!important;top:74vh!important;bottom:auto!important;
+  transform:rotate(-90deg)!important;transform-origin:left top!important}
 [id^="alia-root-"][style*="rotate(90deg)"] button{width:auto!important;height:auto!important;min-height:0!important;
-  padding:7px 12px!important;font-size:12px!important;line-height:1.2!important;border-radius:100px!important;
-  gap:6px!important;box-shadow:0 6px 18px -6px rgba(17,17,17,.35)!important}
-[id^="alia-root-"][style*="rotate(90deg)"] button svg{width:12px!important;height:12px!important;transform:rotate(-90deg)}
-[id^="alia-root-"][style*="rotate(90deg)"]{transition:bottom .3s ease}
-/* telefoon: links onderin, en omhoog zodra de vaste koopbalk van de productpagina
-   in beeld schuift (.ws-sticky.ws-in, ±115 px hoog), zodat het label niet over de
-   knop In winkelwagen valt */
-@media (max-width:749px){
-  [id^="alia-root-"][style*="rotate(90deg)"]{bottom:14px!important;left:12px!important}
-  body:has(.ws-sticky.ws-in:not(.ws-wijk)) [id^="alia-root-"][style*="rotate(90deg)"]{bottom:128px!important}
-}
+  padding:8px 16px!important;font-size:12.5px!important;font-weight:600!important;line-height:1.2!important;
+  letter-spacing:.02em!important;background:#111!important;color:#fff!important;border:0!important;
+  border-radius:0 0 14px 14px!important;gap:7px!important;
+  box-shadow:0 0 0 1px rgba(255,255,255,.14),0 8px 20px -10px rgba(17,17,17,.5)!important}
+[id^="alia-root-"][style*="rotate(90deg)"] button *{color:inherit!important}
+[id^="alia-root-"][style*="rotate(90deg)"] button svg{width:12px!important;height:12px!important;color:#F5D18A!important}
