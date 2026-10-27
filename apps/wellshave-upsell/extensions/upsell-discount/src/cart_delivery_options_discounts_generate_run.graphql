@@ -1,0 +1,13 @@
+query Input {
+  cart {
+    deliveryGroups {
+      id
+    }
+  }
+  discount {
+    discountClasses
+    metafield(namespace: "$app:upsell-discount", key: "function-configuration") {
+      value
+    }
+  }
+}

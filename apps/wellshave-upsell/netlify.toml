@@ -1,0 +1,7 @@
+[build]
+  command = "echo 'alleen functies'"
+  publish = "server/public"
+  functions = "server/functions"
+
+[functions]
+  node_bundler = "esbuild"

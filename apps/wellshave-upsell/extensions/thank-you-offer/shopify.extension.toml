@@ -1,0 +1,16 @@
+api_version = "2026-01"
+
+[[extensions]]
+name = "Wellshave aanbod en bedankt"
+handle = "thank-you-offer"
+type = "ui_extension"
+uid = ""
+
+  # Plaats dit blok in de checkout-editor bovenaan de bedankpagina.
+  [[extensions.targeting]]
+  module = "./src/ThankYou.jsx"
+  target = "purchase.thank-you.block.render"
+
+  [extensions.capabilities]
+  network_access = true
+  api_access = true

@@ -1,0 +1,418 @@
+{
+  "version": 1,
+  "settings": {
+    "code": "SETCOMPLEET",
+    "lcText": "Deze extra korting bestaat alleen op deze pagina. Klik je hem weg, dan komt hij niet meer terug. Niet in je mail, niet in de winkel en niet bij een volgende bestelling.",
+    "lcTitle": "Eenmalig.",
+    "lcTitle2": "Weg is weg.",
+    "noText": "Nee, ik laat deze korting liggen",
+    "remOn": true,
+    "remText": "Herinner me als mijn mesjes aan vervanging toe zijn",
+    "remWeeks": 8,
+    "timerMin": 10,
+    "tyDisc": 15,
+    "tyTitle": "Maak je set compleet"
+  },
+  "rules": [
+    {
+      "id": "flexguard",
+      "order": 0,
+      "active": true,
+      "name": "Flex Guard → reservemesjes",
+      "triggers": [
+        {
+          "handle": "wellshave-flex-guard™"
+        },
+        {
+          "handle": "essential-flex-bundel"
+        },
+        {
+          "handle": "body-beard-kit"
+        }
+      ],
+      "discount": 20,
+      "headline": "Eenmalig bij je {product}.",
+      "headline2": "Nu {korting}% extra korting.",
+      "sub": "Eén mesje gaat 3 tot 4 maanden mee. Met deze set zit je ruim een jaar goed, en het gaat mee in hetzelfde pakket.",
+      "offers": [
+        {
+          "handle": "trio-pack",
+          "variantId": "gid://shopify/ProductVariant/57725814407500"
+        },
+        {
+          "handle": "wellshave-hard-case",
+          "variantId": "gid://shopify/ProductVariant/56529000268108"
+        },
+        {
+          "handle": "travelbag",
+          "variantId": "gid://shopify/ProductVariant/53523403473228"
+        }
+      ],
+      "thanks": [
+        {
+          "handle": "wellshave-hard-case",
+          "variantId": "gid://shopify/ProductVariant/56529000268108"
+        },
+        {
+          "handle": "travelbag",
+          "variantId": "gid://shopify/ProductVariant/53523403473228"
+        }
+      ]
+    },
+    {
+      "id": "groomguardpro",
+      "order": 1,
+      "active": true,
+      "name": "Groom Guard PRO → reservemesjes",
+      "triggers": [
+        {
+          "handle": "groom-guard-pro"
+        }
+      ],
+      "discount": 20,
+      "headline": "Eenmalig bij je {product}.",
+      "headline2": "Nu {korting}% extra korting.",
+      "sub": "Scherp blijft veilig. Wissel elke 3 maanden en je bent een jaar onder de pannen.",
+      "offers": [
+        {
+          "handle": "trio-pack-groom-guard",
+          "variantId": "gid://shopify/ProductVariant/57726215487820"
+        },
+        {
+          "handle": "foil-shaver-groom-guard",
+          "variantId": "gid://shopify/ProductVariant/53414570885452"
+        },
+        {
+          "handle": "wellshave-hard-case",
+          "variantId": "gid://shopify/ProductVariant/56529000268108"
+        }
+      ],
+      "thanks": [
+        {
+          "handle": "wellshave-hard-case",
+          "variantId": "gid://shopify/ProductVariant/56529000268108"
+        },
+        {
+          "handle": "travelbag",
+          "variantId": "gid://shopify/ProductVariant/53523403473228"
+        }
+      ]
+    },
+    {
+      "id": "groomguard",
+      "order": 2,
+      "active": true,
+      "name": "Groom Guard → reservemesjes",
+      "triggers": [
+        {
+          "handle": "wellshave-bodygroomer-groom-guard"
+        }
+      ],
+      "discount": 20,
+      "headline": "Eenmalig bij je {product}.",
+      "headline2": "Nu {korting}% extra korting.",
+      "sub": "Wissel elke 3 maanden voor een gladde, veilige scheerbeurt.",
+      "offers": [
+        {
+          "handle": "trio-pack-groom-guard",
+          "variantId": "gid://shopify/ProductVariant/57726215487820"
+        },
+        {
+          "handle": "foil-shaver-groom-guard",
+          "variantId": "gid://shopify/ProductVariant/53414570885452"
+        },
+        {
+          "handle": "wellshave-hard-case",
+          "variantId": "gid://shopify/ProductVariant/56529000268108"
+        }
+      ],
+      "thanks": [
+        {
+          "handle": "foil-shaver-groom-guard",
+          "variantId": "gid://shopify/ProductVariant/53414570885452"
+        },
+        {
+          "handle": "wellshave-hard-case",
+          "variantId": "gid://shopify/ProductVariant/56529000268108"
+        }
+      ]
+    },
+    {
+      "id": "gentleman",
+      "order": 3,
+      "active": true,
+      "name": "Gentleman Shaver → scheerkop",
+      "triggers": [
+        {
+          "handle": "wellshave-scheerapparaat-elite"
+        }
+      ],
+      "discount": 20,
+      "headline": "Een reservekop voor je {product}.",
+      "headline2": "Nu {korting}% extra korting.",
+      "sub": "Een scheerkop gaat ongeveer een jaar mee. Nu met korting, daarna weer volle prijs.",
+      "offers": [
+        {
+          "handle": "elite-scheerkop",
+          "variantId": "gid://shopify/ProductVariant/53164620415308"
+        },
+        {
+          "handle": "wellshave-hard-case",
+          "variantId": "gid://shopify/ProductVariant/56529000268108"
+        },
+        {
+          "handle": "wellshave-baardbar",
+          "variantId": "gid://shopify/ProductVariant/47857614061900"
+        }
+      ],
+      "thanks": [
+        {
+          "handle": "wellshave-hard-case",
+          "variantId": "gid://shopify/ProductVariant/56529000268108"
+        },
+        {
+          "handle": "wellshave-baardbar",
+          "variantId": "gid://shopify/ProductVariant/47857614061900"
+        }
+      ]
+    },
+    {
+      "id": "menshaper",
+      "order": 4,
+      "active": true,
+      "name": "Men Shaper → Hard Case",
+      "triggers": [
+        {
+          "handle": "6-in-1-baardtrimmer-supreme"
+        },
+        {
+          "handle": "wellshave-5-in-1-baardtrimmer-men-shaper"
+        },
+        {
+          "handle": "wellshave-5-in-1-baardtrimmer-man-shaper-iced"
+        }
+      ],
+      "discount": 15,
+      "headline": "Bescherm je {product}.",
+      "headline2": "Nu {korting}% extra korting.",
+      "sub": "Stevige case met plek voor alle opzetstukken. Gaat mee in hetzelfde pakket.",
+      "offers": [
+        {
+          "handle": "wellshave-hard-case",
+          "variantId": "gid://shopify/ProductVariant/56529000268108"
+        },
+        {
+          "handle": "travelbag",
+          "variantId": "gid://shopify/ProductVariant/53523403473228"
+        },
+        {
+          "handle": "wellshave-baardbar",
+          "variantId": "gid://shopify/ProductVariant/47857614061900"
+        }
+      ],
+      "thanks": [
+        {
+          "handle": "travelbag",
+          "variantId": "gid://shopify/ProductVariant/53523403473228"
+        },
+        {
+          "handle": "wellshave-baardbar",
+          "variantId": "gid://shopify/ProductVariant/47857614061900"
+        }
+      ]
+    },
+    {
+      "id": "headshaver",
+      "order": 5,
+      "active": true,
+      "name": "Head Shaver → 7D scheerkop",
+      "triggers": [
+        {
+          "handle": "skull-deal-3-0"
+        },
+        {
+          "handle": "skull-deal-2-0"
+        },
+        {
+          "handle": "skull-shaver-deluxe-extra-magnetische-scheerkop"
+        },
+        {
+          "handle": "wellshave-5-in-1-scheerapparaat-mannen-deluxe"
+        }
+      ],
+      "discount": 20,
+      "headline": "Een extra 7D-scheerkop.",
+      "headline2": "Nu {korting}% extra korting.",
+      "sub": "Klikt er magnetisch op. Wissel als hij minder glad gaat, zonder te hoeven bestellen.",
+      "offers": [
+        {
+          "handle": "wellshave-scheerkop-7d-vervanging",
+          "variantId": "gid://shopify/ProductVariant/47861391982924"
+        },
+        {
+          "handle": "wellshave-hard-case",
+          "variantId": "gid://shopify/ProductVariant/56529000268108"
+        },
+        {
+          "handle": "wellshave-baardbar",
+          "variantId": "gid://shopify/ProductVariant/47857614061900"
+        }
+      ],
+      "thanks": [
+        {
+          "handle": "wellshave-hard-case",
+          "variantId": "gid://shopify/ProductVariant/56529000268108"
+        },
+        {
+          "handle": "travelbag",
+          "variantId": "gid://shopify/ProductVariant/53523403473228"
+        }
+      ]
+    },
+    {
+      "id": "neustrimmer",
+      "order": 6,
+      "active": true,
+      "name": "Neustrimmer → opzetstuk",
+      "triggers": [
+        {
+          "handle": "wellshave-4-in-1-neustrimmer-ultimate"
+        },
+        {
+          "handle": "wellshave-3-in-1-neustrimmer-advance"
+        },
+        {
+          "handle": "wellshave-2-in-1-neustrimmer-premium"
+        },
+        {
+          "handle": "wellshave-neustrimmer-basic"
+        },
+        {
+          "handle": "neustrimmer-4in1-ultra"
+        },
+        {
+          "handle": "neustrimmer-3in1-platinum"
+        },
+        {
+          "handle": "neustrimmer-2in1-elite"
+        },
+        {
+          "handle": "neustrimmer-essential"
+        }
+      ],
+      "discount": 15,
+      "headline": "Eenmalig bij je {product}.",
+      "headline2": "Nu {korting}% extra korting.",
+      "sub": "Handig om te wisselen, bijvoorbeeld met je partner.",
+      "offers": [
+        {
+          "handle": "vervanging-neustrimmer-opzetstuk",
+          "variantId": "gid://shopify/ProductVariant/53459894174028"
+        },
+        {
+          "handle": "travelbag",
+          "variantId": "gid://shopify/ProductVariant/53523403473228"
+        }
+      ],
+      "thanks": [
+        {
+          "handle": "travelbag",
+          "variantId": "gid://shopify/ProductVariant/53523403473228"
+        },
+        {
+          "handle": "wellshave-hard-case",
+          "variantId": "gid://shopify/ProductVariant/56529000268108"
+        }
+      ]
+    },
+    {
+      "id": "barber",
+      "order": 7,
+      "active": true,
+      "name": "Barber-sets → Hard Case",
+      "triggers": [
+        {
+          "handle": "barber-bro-3-0"
+        },
+        {
+          "handle": "barber-bro-2-0"
+        },
+        {
+          "handle": "barber-bro-1-0"
+        },
+        {
+          "handle": "barber-pack-3-0"
+        },
+        {
+          "handle": "barber-pack-2-0"
+        },
+        {
+          "handle": "barber-pack-1-0"
+        }
+      ],
+      "discount": 15,
+      "headline": "Alles van je {product}.",
+      "headline2": "Nu {korting}% extra korting.",
+      "sub": "De Hard Case past alle apparaten en opzetstukken. Gaat mee in hetzelfde pakket.",
+      "offers": [
+        {
+          "handle": "wellshave-hard-case",
+          "variantId": "gid://shopify/ProductVariant/56529000268108"
+        },
+        {
+          "handle": "travelbag",
+          "variantId": "gid://shopify/ProductVariant/53523403473228"
+        },
+        {
+          "handle": "wellshave-baardbar",
+          "variantId": "gid://shopify/ProductVariant/47857614061900"
+        }
+      ],
+      "thanks": [
+        {
+          "handle": "travelbag",
+          "variantId": "gid://shopify/ProductVariant/53523403473228"
+        },
+        {
+          "handle": "wellshave-baardbar",
+          "variantId": "gid://shopify/ProductVariant/47857614061900"
+        }
+      ]
+    },
+    {
+      "id": "vangnet",
+      "order": 8,
+      "active": true,
+      "name": "Vangnet: elk ander product",
+      "triggers": [
+        {
+          "handle": "*"
+        }
+      ],
+      "discount": 15,
+      "headline": "Eenmalig bij je bestelling.",
+      "headline2": "Nu {korting}% extra korting.",
+      "sub": "Bescherm je apparaat onderweg. Gaat mee in hetzelfde pakket.",
+      "offers": [
+        {
+          "handle": "wellshave-hard-case",
+          "variantId": "gid://shopify/ProductVariant/56529000268108"
+        },
+        {
+          "handle": "travelbag",
+          "variantId": "gid://shopify/ProductVariant/53523403473228"
+        }
+      ],
+      "thanks": [
+        {
+          "handle": "travelbag",
+          "variantId": "gid://shopify/ProductVariant/53523403473228"
+        },
+        {
+          "handle": "wellshave-baardbar",
+          "variantId": "gid://shopify/ProductVariant/47857614061900"
+        }
+      ]
+    }
+  ]
+}
