@@ -105,6 +105,20 @@ Advance) naar voren. In de kopie is dat aangepast:
 - **Let op:** het live thema (v7) heeft deze fout nog. Daar geldt het pas als de kopie live gaat,
   of als de instellingen in v7 worden aangepast (cadeau 1, vervanger en reserves: Travelbag).
 
+### Black Friday-kaart op de productpagina (toegevoegd 27 oktober)
+
+De platte aanbodbalk boven de keuzes is vervangen door een eigen kaart in Wellshave-stijl, zwart en goud met rood voor de actie:
+
+- een rand van goud en rood die langzaam rondloopt;
+- een rood label "Black Friday" met een pulserende stip, en rechts "Eindigt maandag 30 november";
+- "30% extra" groot in goud met een glans die eroverheen schuift, met "op je 2e artikel" ernaast;
+- een klok in vakjes (dagen, uur, min, sec) die elke seconde meetikt, seconden in rood;
+- onderaan "Bovenop de prijs die er al staat. Als dank voor een geweldig 2026."
+
+De klok loopt naar `aanbod_eind` (30 november 23:59), dezelfde datum als de aankondigingsbalk. De cadeauklok eronder loopt apart naar 27 november, omdat de cadeaus alleen tot en met Black Friday gelden.
+
+Bij "minder beweging" in het besturingssysteem staat alles stil. Alle teksten zijn velden in de sectie (`bf_kicker`, `bf_groot`, `bf_klein`, `bf_eind_label`). Wordt `bf_groot` leeggemaakt of een andere kleur gekozen, dan komt de oude balk terug. De opmaak staat in een eigen bestand `assets/ws-bfb.css`, dat alleen laadt waar de kaart staat, omdat de v7-productpagina `ws-pdp-koopvak.css` niet laadt.
+
 ### Nog te doen vóór de start
 
 1. **De korting zelf aanmaken** in Shopify: automatisch, "Koop 1, krijg 1 met 30% korting". Pas
