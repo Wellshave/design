@@ -50,7 +50,8 @@ LOGO=[('ad','AD',30),('bol','bol',23),('mh',"Men's Health",21),('ed','Eindhovens
 
 def zeker(): return ('<div class="zeker"><span>'+IC['schild']+'100 dagen proberen</span><span>'+IC['bus']+'Gratis verzending vanaf €30</span><span>'+IC['klok']+'Morgen in huis</span></div>')
 def kaart(k,naam,wat,nu,van,groot=False):
-    return (f'<a class="kaart{" groot" if groot else ""}" href="#"><span class="tegel"><span class="foto im-{k}"></span><span class="label">{pct(nu,van)}% Korting</span></span>'
+    return (f'<a class="kaart{" groot" if groot else ""}" href="#"><span class="tegel"><span class="tegel-merk" aria-hidden="true"></span><span class="foto im-{k}"></span><span class="label">{pct(nu,van)}% Korting</span>'
+            f'<span class="mand"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 5.5h10l-.9 8H3.9z"/><path d="M5.8 5.5V4.3a2.2 2.2 0 0 1 4.4 0v1.2"/></svg>In winkelwagen</span></span>'
             f'<b>{naam}</b><span class="wat">{wat}</span><span class="prijs"><strong>{eur(nu)}</strong><s>{eur(van)}</s></span></a>')
 
 s=''
