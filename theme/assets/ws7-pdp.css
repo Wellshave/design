@@ -375,8 +375,11 @@
   .ws-pdp7 .ws-sticky-th{width:44px;height:44px}
   .ws-pdp7 .ws-sticky-knop{grid-column:1/-1;padding:14px}
 }
+/* de vinkjes onder elkaar op elke telefoon, ook de brede (430 px) */
+@media (max-width:749px){
+  .ws-pdp7 .ws-vinkjes{grid-template-columns:minmax(0,1fr);gap:9px}
+}
 @media (max-width:419px){
-  .ws-pdp7 .ws-vinkjes{grid-template-columns:minmax(0,1fr)}
   .ws-pdp7 .ws-tier{grid-template-columns:auto 46px minmax(0,1fr) auto;gap:10px}
   .ws-pdp7 .ws-tier-bd{width:46px;height:46px}
   .ws-pdp7 .ws-bund-bd{aspect-ratio:1/1}
