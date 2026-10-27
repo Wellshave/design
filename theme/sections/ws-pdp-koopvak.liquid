@@ -849,6 +849,11 @@
                 -%}
                 {%- assign t_cad_som = 0 -%}
                 {%- assign t_cad_n = 0 -%}
+                {%- comment -%}
+                  t_weg: wat bij deze keuze al in het pakket zit of als cadeau
+                  meekomt. De add-ons onder de knop laten dat weg (data-weg).
+                {%- endcomment -%}
+                {%- assign t_weg = t_al -%}
                 {%- capture t_cad -%}
                   {%- if settings.enable_gift_rewards and tv.available -%}
                     {%- for gi in (1..2) -%}
@@ -869,6 +874,9 @@
                       {%- if cad.handle == tp.handle -%}{%- continue -%}{%- endif -%}
                       {%- assign t_cad_n = t_cad_n | plus: 1 -%}
                       {%- assign t_cad_som = t_cad_som | plus: cad_v.compare_at_price -%}
+                      {%- assign t_weg = t_weg | append: '‹' | append: cad.handle | append: '›' -%}
+                      {%- assign t_cad_bron = cad.metafields.custom.cadeau_voorraad.value -%}
+                      {%- if t_cad_bron != blank -%}{%- assign t_weg = t_weg | append: '‹' | append: t_cad_bron.handle | append: '›' -%}{%- endif -%}
                       <span class="ws-tx ws-tx-cad">
                         <span class="ws-tx-bd">{%- if cad.featured_image != blank -%}{{ cad.featured_image | image_url: width: 96 | image_tag: alt: '', loading: 'lazy', width: 48, height: 48 }}{%- endif -%}</span>
                         <span class="ws-tx-nm">{%- if s.tier_cadeau != blank -%}<em class="ws-tx-chip">{{ s.tier_cadeau }}</em> {% endif -%}{{ cad_naam | default: cad.title }}
@@ -919,7 +927,8 @@
                   -%}
                   <input type="radio" name="ws-tier-{{ section.id }}" value="{% unless basis %}{{ tv.id }}{% endunless %}"{% if t_aan %} checked{% endif %}{% if basis and v.available == false %} disabled{% endif %}
                          data-nu="{{ t_nu | strip | escape }}" data-was="{{ t_was | strip | escape }}"
-                         data-pct="{% if t_pct > 0 %}−{{ t_pct }}%{% endif %}" data-klarna="{{ t_kl | strip | escape }}" data-naam="{{ tp.title | escape }}">
+                         data-pct="{% if t_pct > 0 %}−{{ t_pct }}%{% endif %}" data-klarna="{{ t_kl | strip | escape }}" data-naam="{{ tp.title | escape }}"
+                         data-weg="{{ t_weg | escape }}">
                   <span class="ws-tier-bd">
                     {%- if tp.featured_image != blank -%}{{ tp.featured_image | image_url: width: 160 | image_tag: alt: '', loading: 'lazy', width: 80, height: 80 }}{%- endif -%}
                   </span>
@@ -986,6 +995,21 @@
                 var nm = document.querySelector('[data-ws-sticky] .ws-sticky-nm');
                 if (nm) nm.textContent = r.getAttribute('data-naam');
                 pagina(r);
+                addons(r);
+              }
+              // Maak het compleet volgt de keuze: wat het gekozen pakket al bevat of
+              // als cadeau krijgt, verdwijnt uit de lijst; de volgende schuift door.
+              function addons(r) {
+                var lijst = document.querySelector('#shopify-section-{{ section.id }} [data-ws-add]');
+                if (!lijst) return;
+                var weg = r.getAttribute('data-weg') || '';
+                var max = parseInt(lijst.getAttribute('data-max'), 10) || 3, n = 0;
+                lijst.querySelectorAll('[data-h]').forEach(function (li) {
+                  var uit = n >= max || weg.indexOf(li.getAttribute('data-h')) > -1;
+                  li.hidden = uit;
+                  if (!uit) n++;
+                });
+                lijst.hidden = n === 0;
               }
               // De pagina volgt de keuze: foto's, naam en belofte van het gekozen
               // product; terug naar het product zelf zet alles terug.
@@ -1490,11 +1514,18 @@
               endif
             endif
           endfor
+          # Wat al in dit pakket zit (custom.bevat), verkopen we er niet naast.
+          for bp in mf.bevat.value
+            assign add_weg_s = add_weg_s | append: ',' | append: bp.handle
+          endfor
           assign add_weg = add_weg_s | split: ','
           if add_weg_s == ''
             assign add_weg = ''
           endif
+          # Er worden er tot drie meer gemaakt dan er te zien zijn: kiest de klant
+          # een pakket waar er een van in zit, dan schuift de volgende door.
           assign add_max = s.add_max | default: 3
+          assign add_bouw = add_max | plus: 3
           assign add_n = 0
           comment
             Combikorting: custom.combi_korting op dit product, als {"handle": procent}.
@@ -1506,7 +1537,7 @@
         {%- if s.add_tonen and add_lijst != blank -%}
           {%- capture add_rijen -%}
             {%- for ap in add_lijst -%}
-              {%- if add_n >= add_max -%}{%- break -%}{%- endif -%}
+              {%- if add_n >= add_bouw -%}{%- break -%}{%- endif -%}
               {%- if ap.id == product.id -%}{%- continue -%}{%- endif -%}
               {%- if add_weg contains ap.handle -%}{%- continue -%}{%- endif -%}
               {%- assign av = ap.selected_or_first_available_variant -%}
@@ -1522,7 +1553,7 @@
                 {%- assign add_prijs = av.price | times: add_rest | divided_by: 100 -%}
                 {%- assign add_was = av.price -%}
               {%- endif -%}
-              <li class="ws-add-rij">
+              <li class="ws-add-rij" data-h="‹{{ ap.handle }}›"{% if add_n > add_max %} hidden{% endif %}>
                 <a class="ws-add-in" href="{{ ap.url }}">
                   {%- if ap.featured_image != blank -%}
                     <span class="ws-add-beeld">{{ ap.featured_image | image_url: width: 120 | image_tag: alt: '', loading: 'lazy', width: 60, height: 60 }}</span>
@@ -1549,7 +1580,7 @@
             {%- endfor -%}
           {%- endcapture -%}
           {%- if add_n > 0 -%}
-            <div class="ws-add" data-ws-add>
+            <div class="ws-add" data-ws-add data-max="{{ add_max }}">
               {%- if s.add_kop != blank -%}<p class="ws-add-kop">{{ s.add_kop }}</p>{%- endif -%}
               <ul class="ws-add-lijst">{{ add_rijen }}</ul>
             </div>

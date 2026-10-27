@@ -2779,3 +2779,30 @@ Deluxe in), elk met een eigen filmblok en tekst die bij de set past, vertaald:
 * `film-barber-bro-1-0` (3682006958412): met de precisietrimmer.
 * `film-barber-bro-2-0` (3682007023948): met de foil shaver.
 * `film-barber-bro-3-0` (3682007056716): met foil shaver en neustrimmer.
+
+## Maak het compleet: onderdelen en accessoires, niets wat al in de set zit
+
+Aanleiding: op de Tondeuse Deluxe stonden de Sharpline en de Blade Baron onder
+de knop, terwijl die in de Barber Bro-sets zitten die je erboven kiest.
+
+* `custom.pdp_addons` opnieuw gevuld voor 40 producten: alleen vervangonderdelen
+  van het apparaat zelf en de accessoires The Hard Case, The Washbag en
+  Travelbag; geen apparaten meer. Per groep:
+  Groom Guard (en Body & Nose, Shave Package 3.0) → Groom Guard Blade;
+  Groom Guard PRO en Ultimate → Blade en foil-opzetstuk; Flex Guard en
+  Flex-line → Flex Guard Blade; Essential Flex → Blade en Trio Pack;
+  Head Shaver Deluxe en Skull Deals → 7D Scheerkop; Gentleman → scheerkop;
+  vier neustrimmers → neusopzetstuk (nu uitverkocht, dus overgeslagen);
+  de rest (baardtrimmers, tondeuses, scheerapparaten, Barber Pack/Bro) →
+  alleen de drie accessoires. Live gebruikt dit veld niet; cart_upsell
+  (de winkelwagenlade, ook live) is ongemoeid.
+* De washbag blijft weg zolang de cadeaus aan staan (upsell_uitsluiten): hij is
+  vanaf €65 gratis, en wie hem bij een goedkoper apparaat koopt, gaat over de
+  €65 en krijgt hem dan nog eens cadeau.
+* Koopvak: elke keuzekaart draagt `data-weg` (het product, alles uit
+  custom.bevat en de cadeaus die die prijs haalt). Kies je een kaart, dan
+  verdwijnt wat erin zit uit Maak het compleet en schuift de volgende door;
+  daarvoor worden er drie rijen meer gemaakt dan er te zien zijn (data-max).
+  Op het pakket zelf slaat de lijst custom.bevat ook over.
+* `ws7-pdp.css`: verborgen rijen en blok `display:none`; de scheidingslijn
+  telt alleen zichtbare rijen.
