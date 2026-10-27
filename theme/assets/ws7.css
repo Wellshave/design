@@ -70,6 +70,12 @@
 .ws7-schuif{width:100%;margin-top:30px}
 .ws7-rij{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;margin:0 -56px;padding:0 56px 18px;scroll-padding-left:56px;text-align:left}
 .ws7-rij::-webkit-scrollbar{display:none}
+/* op desktop loopt een schuifrij rechts door tot de rand van het scherm, in plaats van hard af te
+   breken bij het middenstuk; links blijft hij gelijk met de kop. Kaarten houden dezelfde breedte. */
+@media (min-width:750px){
+  .ws7{overflow-x:clip}
+  .ws7-rij:not(.ws7-tech){--rand:max(56px,calc((100vw - 1328px) / 2));margin:0 calc(var(--rand) * -1);padding:0 var(--rand) 18px;scroll-padding-left:var(--rand)}
+}
 .ws7-voortgang{position:relative;height:2px;width:100%;max-width:420px;margin:12px auto 0;background:rgba(17,17,17,.12);border-radius:2px;cursor:pointer}
 .ws7-voortgang::before{content:"";position:absolute;left:0;right:0;top:-10px;bottom:-10px}
 .ws7-voortgang i{position:absolute;top:0;left:0;height:100%;width:30%;border-radius:2px;background:linear-gradient(90deg,#D8AC5D,#BC813E)}
