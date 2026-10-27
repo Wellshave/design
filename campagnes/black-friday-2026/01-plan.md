@@ -41,6 +41,38 @@ Preview: `https://wellshave.com/?preview_theme_id=209034117452`
 | Productpagina | Aanbodbalk zwart met goud: "Black Friday: het 2e artikel 30% korting", met afteltimer. De tekst staat in de kopie zelf (nieuw veld), zodat de live winkeldata niet verandert |
 | Productkaarten | Herfst Sale-sticker uit; bestseller-sticker blijft |
 
+### Cadeaus met een echte einddatum (toegevoegd 27 oktober)
+
+De gratis cadeaus (Washbag vanaf €65, Neustrimmer Ultimate vanaf €90) stoppen in de kopie op
+**vrijdag 27 november, 23.59 uur**. Tot dan telt een klok af ("Gratis cadeaus nog 9d 04u 12m"):
+
+- in de winkelwagen, onder de cadeaubalk;
+- op de productpagina, boven "Kies je aanbieding";
+- in de cadeauregels staat "alleen tot en met Black Friday".
+
+Het eindmoment staat in de thema-instellingen, onder de cadeaus: "Cadeaus stoppen op". Het thema
+zet de cadeaus op dat moment zelf uit: ze verdwijnen van de productpagina, de drempels gaan uit
+de winkelwagen en een cadeau dat er nog in ligt, wordt eruit gehaald. Getest door de datum even
+in het verleden te zetten. Klok en werkelijkheid lopen zo nooit uit elkaar.
+
+Na Black Friday loopt het 2e artikel 30% nog door tot en met Cyber Monday. Dat geeft twee
+momenten van urgentie: de cadeaus op vrijdag, de korting op maandag.
+
+**Voorwaarde:** na 27 november mogen de cadeaus niet stilletjes terugkomen, ook niet als na
+Cyber Monday een ander thema live gaat. Anders was de klok geen echte deadline.
+
+### Bedanktboodschap
+
+De boodschap is "Bedankt voor 2026": "Als dank voor een geweldig jaar krijgt je tweede artikel 30%
+extra korting, bovenop de prijs die er al staat." Dat staat in de hero, de aanbodbalk en op de
+salepagina. De bovenbalk zegt "Black Friday: 30% extra op je 2e artikel."
+
+"Onze beste Black Friday-korting ooit" staat er bewust niet in. Vorig jaar communiceerden we "tot
+50% korting", en in het laatste weekend van Cyber Week liep al "50% korting op 2e artikel". Naast
+dit jaar (30% op het tweede artikel) is "beste ooit" niet hard te maken, en een superlatief dat we
+niet kunnen onderbouwen is misleidend volgens de ACM. "30% extra, bovenop de prijs die er al staat"
+klopt wel en is concreet.
+
 ### Nog te doen vóór de start
 
 1. **De korting zelf aanmaken** in Shopify: automatisch, "Koop 1, krijg 1 met 30% korting". Pas
