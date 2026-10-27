@@ -2711,7 +2711,9 @@ ws7.css en de ws7-homepagebestanden zijn niet aangeraakt.
 
 * Inter voor tekst, Inter Tight voor koppen en prijzen; gewicht 500–600 in
   plaats van 800–900. Bovenregels in #9A6A2E met .14em spatiëring.
-* Knoppen zonder hoofdletters, rond (100px), carbon met gouden pijl.
+* Geen zwarte "Bekijk"-knoppen op de kaarten, zoals op de homepage: de hele
+  kaart is de link (de naam spant er met ::after overheen). Vergelijk, snel
+  bekijken, de foto en de ronde plusknop bij onderdelen liggen erboven.
 * De bovenkant ligt op wit; de hero is een afgeronde kaart (26px, mobiel 18px).
 * Raster op wit; de kaart zoals `.ws7-kaart`: geen rand maar een ring met
   schaduw, de packshot op een zandvlak met eigen hoeken.

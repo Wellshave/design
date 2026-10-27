@@ -46,13 +46,16 @@
 .wsc .wsk-prijs b{font-size:18px}
 
 /* ── knoppen: geen hoofdletters, rond, zoals de pillen op de homepage ── */
-.wsc .wsk-cta,.wsc .mp-knop,.wsc-laag .vgl-balk .knop{text-transform:none;letter-spacing:0;
+.wsc .mp-knop,.wsc-laag .vgl-balk .knop{text-transform:none;letter-spacing:0;
   font-weight:600;font-size:13px}
-.wsc .wsk-cta{background:var(--carbon);border-radius:100px;padding:11px 14px;gap:8px;
-  transition:background .25s ease,transform .18s ease}
-.wsc .wsk-cta:hover{background:#000;transform:translateY(-1px)}
-.wsc .wsk-cta svg{color:#F5D18A}
-.wsc .wsk-plus{border-radius:100px}
+
+/* geen zwarte knop op de kaart, zoals op de homepage: de hele kaart is de link.
+   De naam spant over de kaart; vergelijk, snel bekijken en de plusknop liggen erboven. */
+.wsc .wsk-cta{display:none}
+.wsc .wsk-naam::after{content:"";position:absolute;inset:0;z-index:2}
+.wsc .wsk-shot{z-index:3}
+.wsc .wsk-rij{position:relative;z-index:3;margin-top:6px}
+.wsc .wsk-plus{width:40px;height:40px;border-radius:100px}
 .wsc .mp-knop{font-size:13px}
 .wsc .mp-badge{letter-spacing:.06em}
 
@@ -125,6 +128,5 @@
   .wsc .wsk-body{padding:11px 5px 13px}
   .wsc .wsk-naam{font-size:14px}
   .wsc .wsk-prijs b{font-size:16px}
-  .wsc .wsk-cta{font-size:12px;padding:10px 8px}
   .wsc .wsk-tag{top:7px;left:7px;font-size:9px;padding:3px 6px}
 }
