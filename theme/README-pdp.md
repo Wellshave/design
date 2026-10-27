@@ -2758,3 +2758,18 @@ Thema v7:
 Na de Herfst Sale (eindigt 30 oktober) moeten de sale-teksten in de
 aankondigingsbalk, het megamenu en het menu-item HERFST SALE worden
 vervangen, net als de vertalingen daarvan.
+
+## Film Tondeuse Deluxe
+
+Bron: "Tondeuse Deluxe - cinematic v4 FINAL tekst en logo" (40 s, Shopify Files).
+De teksten staan linksonder vanaf y=838; elk shot met tekst is uitgesneden op
+1440×810 (bovenkant van het beeld) en teruggeschaald naar 1080p. Eindkaart met
+logo niet gebruikt. Lus van 13,5 s: staand in de mist → natte steen → druppel
+op goud → druppels op het mes → display → lengtehendel → met opzetkam →
+opzetkam op de steen → door het haar → motor → staand in de rook → terug.
+
+* Video `gid://shopify/Video/77452395151692` (tondeuse-deluxe-film-loop.mp4)
+* Metaobject `film-tondeuse-deluxe` (3681938309452), gekoppeld via
+  `custom.pdp_film` op Tondeuse Deluxe™; kop, gouden kop en tekst vertaald.
+* De tekst noemt geen motortype: de video zegt "koolstof motor 9000 RPM", de
+  productspecificatie "2838 Brushless motor".
