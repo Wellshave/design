@@ -73,6 +73,38 @@ dit jaar (30% op het tweede artikel) is "beste ooit" niet hard te maken, en een 
 niet kunnen onderbouwen is misleidend volgens de ACM. "30% extra, bovenop de prijs die er al staat"
 klopt wel en is concreet.
 
+### Rode Black Friday-accenten (toegevoegd 27 oktober)
+
+Met één schakelaar in de thema-instellingen (Black Friday, "Rode Black Friday-accenten") krijgt
+alles wat over de actie gaat rood. Het goud blijft het merk; rood is de actie.
+
+| Waar | Wat wordt rood |
+|---|---|
+| Bovenbalk | "Black Friday:" en de klok |
+| Menu | Label "2e -30%" |
+| Homepage | Bovenregel, tweede kopregel en link van de hero; de bundelbanner |
+| Sale- en bundelpagina | Bovenregel en tweede kopregel |
+| Productkaarten | Kortingslabel ("29% Korting") |
+| Productpagina | Aanbodbalk (rand, "30% extra", klok), bespaarlabel, cadeauklok |
+
+Per sectie staat er een vinkje "Black Friday-accent (rood)" in de hero, de banners en de
+collectiekop, zodat alleen de Black Friday-onderdelen rood worden. Na de actie: de schakelaar uit,
+dan is alles weer goud. Rood op donker is #FF5A4F (5,9:1), op licht #C8281F (5,4:1).
+
+### Cadeaulogica: nooit twee neustrimmers
+
+Gemeld op 27 oktober: een bestelling kon bij €65 een Neustrimmer Advance en bij €90 een Neustrimmer
+Ultimate krijgen. Dat gebeurde als de Washbag al in een bundel zat: dan schoof de vervanger (de
+Advance) naar voren. In de kopie is dat aangepast:
+
+- Bij €65 komt nooit een neustrimmer als het cadeau bij €90 een neustrimmer is.
+- Vervanger en reserve bij €65 zijn nu de Travelbag.
+- Getest: Essential Flex Bundel (met Washbag) krijgt nu Travelbag + Neustrimmer Ultimate.
+  Shave Package Ultimate en Skull Deal 3.0 krijgen alleen de Neustrimmer Ultimate: daar zitten
+  Washbag en Travelbag allebei al in.
+- **Let op:** het live thema (v7) heeft deze fout nog. Daar geldt het pas als de kopie live gaat,
+  of als de instellingen in v7 worden aangepast (cadeau 1, vervanger en reserves: Travelbag).
+
 ### Nog te doen vóór de start
 
 1. **De korting zelf aanmaken** in Shopify: automatisch, "Koop 1, krijg 1 met 30% korting". Pas
