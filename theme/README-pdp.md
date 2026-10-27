@@ -2657,3 +2657,41 @@ achteraan, die noemen te specifieke dingen). Getest:
 
 Reviewteksten blijven Nederlands in elke taal (letterlijke citaten). De twee
 verouderde vertalingen met 4,4 (sterrenlabel en scoreregel) staan nu op 4,5.
+
+## Lanceercheck v7 (27 oktober 2026)
+
+Volledige check van v7 tegen live: 460 pagina's (alle producten, collecties,
+pagina's, blog, winkelwagen, zoeken, 404) × nl/en/de/fr, browsertests op
+desktop en mobiel, de koopflow tot in de checkout, en een vergelijking van alle
+themabestanden en app-embeds met het live thema.
+
+### Wat werkt
+* Alle pagina's 200 op v7; geen Liquid-fouten van het thema (de enige fout komt
+  uit het TikTok-pixelblok en staat live ook).
+* Geen JavaScript-fouten uit het thema, geen kapotte afbeeldingen, geen
+  horizontaal scrollen (1440 en 390 px).
+* Koopflow: in winkelwagen → drawer open → cadeau (The Washbag) komt er vanaf
+  €65 vanzelf bij → Afrekenen opent de checkout. Desktop en mobiel.
+* Interne links: alleen twee dode links in één blogartikel (bestond al).
+
+### In v7 gerepareerd tijdens de check
+* EComposer-secties (quickview, voorspellend zoeken) gelijkgetrokken met live:
+  live kreeg op 26 oktober een beveiligingsfix (zoekterm ge-escaped) en eigen
+  assets; die stonden niet in v7.
+* `locales/de.json` en `fr.json`: 17 nieuwe sleutels van de winkelwagen
+  ontbraken; de Duitse en Franse winkelwagen toonde Nederlands.
+* Verouderde vertalingen op de productpagina (o.a. "Bestseller" i.p.v. Herfst
+  Sale, levertijd zonder "ma t/m vr vóór 23:59") en in de winkelwagen
+  (4,4 → 4,5, verzekerde verzending ontbrak) bijgewerkt.
+* Collecties: "4,5 out of 5" op de Nederlandse pagina → "uit 5" (en/de/fr:
+  out of / von / sur 5).
+* Praktijkkaarten, reviewwand en klantvideo's op de productpagina: Montserrat →
+  Inter met Inter Tight voor koppen, zoals de rest van v7.
+* FAQ-antwoorden met "30 dagen proef" (Shave Package 2.0 en Ultimate,
+  Gentleman Shaver, Skull Shaver Deluxe, föhn) → 100 dagen, met vertalingen.
+  Dit zijn winkelgegevens, dus ook live meteen goed.
+
+### Niet via de API te doen
+* App-embeds **UpPromote** (affiliate) en **Hotjar** staan live aan maar
+  ontbreken in v7. Shopify laat app-embeds alleen via de thema-editor aanzetten
+  (een upload van settings_data.json met die blokken wordt stil genegeerd).
