@@ -1,4 +1,4 @@
-# Black Friday 2026: plan (concept)
+# Black Friday 2026: plan
 
 > Opgesteld op 27 oktober 2026, als startpunt om samen uit te werken. Er staat nog niets klaar
 > in de winkel en er is geen korting aangemaakt. Black Friday valt op vrijdag 27 november,
@@ -6,6 +6,63 @@
 
 Doel: **een hogere gemiddelde orderwaarde (AOV)**, met de bundels en een tweede apparaat als
 motor, in plaats van alleen dieper afprijzen.
+
+---
+
+## 0. Besluiten van 27 oktober
+
+| Onderwerp | Besluit |
+|---|---|
+| Prijzen | Blijven zoals ze zijn. De huidige van-prijzen en kortingen lopen door, in een nieuw jasje |
+| Aanbod | Wat de klant erbij krijgt verandert, niet de prijs: het 2e artikel 30% korting, plus de gifting die al loopt |
+| Gifting | Blijft: gratis Washbag vanaf €65, gratis Neustrimmer Ultimate vanaf €90 (thema-instellingen) |
+| Bundels | Alle bundels als cadeau én voor eigen gebruik, met nadruk op het woord cadeau |
+| Hero-product | Barber Bro; de voorraad is tegen de start bijgevuld |
+| Early access | Geen |
+| Start | Rond 14 november: maandag 9 of maandag 16 november |
+| Einde | Cyber Monday, maandag 30 november, 23.59 uur |
+
+Sectie 2 en 3 hieronder zijn het eerste voorstel; waar die afwijken, gelden deze besluiten.
+
+### De Black Friday-themakopie
+
+Kopie van v7: **"Black Friday 2026 (kopie van v7)"**, niet gepubliceerd.
+Preview: `https://wellshave.com/?preview_theme_id=209034117452`
+
+| Plek | Wat er staat |
+|---|---|
+| Bovenbalk | Zwart met goud: "Black Friday: 2e artikel 30% korting. Shop nu", afteltimer tot 30 november 23.59 uur |
+| Menu | "BLACK FRIDAY" met zwart label "2e -30%"; mobiel "2e artikel 30% korting" |
+| Megamenu | Tegel "Black Friday: 2e artikel 30% korting", met de Barber Bro-foto |
+| Homepage, hero | Barber Bro-foto, "Eén voor jou. Eén om te geven.", knop "Shop Black Friday" |
+| Homepage, tegel en banner | "Bundels om te geven"; banner "Een compleet cadeau. In één doos." naar de bundels |
+| Salepagina | Zelfde kop als de hero, einddatum 30 november, vraag "Hoelang loopt deze actie?" bijgewerkt |
+| Bundelpagina | "Een compleet cadeau. In één doos." met de cadeaukant in de tekst |
+| Productpagina | Aanbodbalk zwart met goud: "Black Friday: het 2e artikel 30% korting", met afteltimer. De tekst staat in de kopie zelf (nieuw veld), zodat de live winkeldata niet verandert |
+| Productkaarten | Herfst Sale-sticker uit; bestseller-sticker blijft |
+
+### Nog te doen vóór de start
+
+1. **De korting zelf aanmaken** in Shopify: automatisch, "Koop 1, krijg 1 met 30% korting". Pas
+   op de startdag aanzetten, of vooraf inplannen met begin- en einddatum. Daarbij uitzetten of
+   laten uitlopen: Groom Guard Upgrade (25%), Groomer & Nosetrimmer Basic (25%), 2 Knifes (15%).
+   Te beslissen: telt elk artikel mee, of alleen apparaten en sets (geen losse mesjes)?
+2. **Bundelbanner op de homepage:** de huidige bundelfoto is te klein voor de brede banner en
+   wordt korrelig. Er is een nieuwe foto nodig, bij voorkeur een bundel als cadeau.
+3. **Black Friday-sticker voor de productkaarten** (zoals de herfst- en bestseller-sticker),
+   als we die willen.
+4. **Winkeldata op de startdag** (gaat direct live): titel van de sale-collectie (nu HERFST
+   SALE), en de tekst in het aanbod-metaobject. De kopie heeft die tekst niet nodig, het live
+   thema na 30 oktober wel.
+5. **Kopie publiceren** op de startdag.
+
+### Let op: tussen 30 oktober en de start
+
+De Herfst Sale zegt op de site dat hij op 30 oktober om 23.59 uur stopt, met een afteltimer. Als
+de prijzen daarna gewoon doorlopen, was die deadline niet echt. Dat valt onder de regels van de
+ACM. Tussen 31 oktober en de start van Black Friday moeten de Herfst Sale-teksten dus van de
+live site af, zonder een nieuwe actie of deadline te beloven. Voor volgend jaar: geen einddatum
+noemen als de prijzen daarna blijven.
 
 ---
 
