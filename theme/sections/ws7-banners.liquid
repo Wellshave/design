@@ -9,7 +9,9 @@
     {%- assign ws7_stijl = 'object-position:' | append: block.settings.pos -%}
     {%- assign ws7_hoogte = block.settings.hoogte | default: 'breed' -%}
     {%- assign ws7_ratio = block.settings.foto.aspect_ratio | default: 1.778 -%}
-    <a class="ws7-ban ws7-ban--{{ block.settings.grond }} ws7-ban--{{ block.settings.kant }} ws7-ban--h-{{ ws7_hoogte }}{% if block.settings.grond == 'donker' %} ws7-donkergrond{% endif %}" href="{{ block.settings.link | default: '#' }}" style="--mob-pos:{{ block.settings.mob_pos }};--ratio:{{ ws7_ratio }}" {{ block.shopify_attributes }}>
+    {%- assign ws7_mob = block.settings.mob_indeling | default: 'onder' -%}
+    {%- assign ws7_mratio = block.settings.foto_mobiel.aspect_ratio | default: 0.8 -%}
+    <a class="ws7-ban ws7-ban--{{ block.settings.grond }} ws7-ban--{{ block.settings.kant }} ws7-ban--h-{{ ws7_hoogte }} ws7-ban--m-{{ ws7_mob }}{% if block.settings.grond == 'donker' %} ws7-donkergrond{% endif %}" href="{{ block.settings.link | default: '#' }}" style="--mob-pos:{{ block.settings.mob_pos }};--ratio:{{ ws7_ratio }};--mratio:{{ ws7_mratio }}" {{ block.shopify_attributes }}>
       {%- if block.settings.foto != blank -%}
         <picture>
           {%- if block.settings.foto_mobiel != blank -%}<source media="(max-width: 749px)" srcset="{{ block.settings.foto_mobiel | image_url: width: 900 }}">{%- endif -%}
@@ -37,6 +39,7 @@
       { "type": "text", "id": "pos", "label": "Uitsnede desktop", "default": "50% 50%" },
       { "type": "image_picker", "id": "foto_mobiel", "label": "Foto telefoon", "info": "Leeg = dezelfde foto." },
       { "type": "text", "id": "mob_pos", "label": "Uitsnede telefoon", "default": "70% 50%" },
+      { "type": "select", "id": "mob_indeling", "label": "Indeling op de telefoon", "default": "onder", "options": [ { "value": "onder", "label": "Tekst onderin, vaste hoogte" }, { "value": "boven", "label": "Hele telefoonfoto, tekst bovenin" } ], "info": "Hele telefoonfoto: de banner krijgt de verhouding van de telefoonfoto en de tekst staat bovenin. Gebruik een staande foto met lege ruimte boven het product." },
       { "type": "text", "id": "kop", "label": "Kop", "default": "Groom Guard™" },
       { "type": "text", "id": "kop_goud", "label": "Kop, regel in goud", "default": "Bodygroomer" },
       { "type": "textarea", "id": "tekst", "label": "Tekst" },

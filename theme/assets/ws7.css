@@ -222,6 +222,9 @@
   .ws7-ban--licht::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(245,241,234,0) 35%,rgba(245,241,234,.9) 78%)}
   .ws7-ban--donker::before,.ws7-ban--donker.ws7-ban--rechts::before{background:linear-gradient(180deg,rgba(14,12,11,0) 30%,rgba(14,12,11,.85))}
   .ws7-ban--rechts{justify-content:flex-start}
+  .ws7-ban.ws7-ban--m-boven{aspect-ratio:var(--mratio,.8);align-items:flex-start}
+  .ws7-ban--m-boven.ws7-ban--donker::before,.ws7-ban--m-boven.ws7-ban--donker.ws7-ban--rechts::before{background:linear-gradient(0deg,rgba(14,12,11,0) 45%,rgba(14,12,11,.75))}
+  .ws7-ban--m-boven.ws7-ban--licht::before{background:linear-gradient(0deg,rgba(245,241,234,0) 45%,rgba(245,241,234,.9))}
   .ws7-ban__kop{font-size:33px}
   .ws7-ban__tekst{max-width:260px;gap:10px}
   .ws7-ban .ws7-teken{width:180px;height:180px;left:auto;right:-40px;bottom:auto;top:-40px}
