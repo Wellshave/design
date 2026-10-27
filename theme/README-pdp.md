@@ -2773,3 +2773,9 @@ opzetkam op de steen → door het haar → motor → staand in de rook → terug
   `custom.pdp_film` op Tondeuse Deluxe™; kop, gouden kop en tekst vertaald.
 * De tekst noemt geen motortype: de video zegt "koolstof motor 9000 RPM", de
   productspecificatie "2838 Brushless motor".
+
+Dezelfde video staat ook op de drie Barber Bro-sets (daar zit de Tondeuse
+Deluxe in), elk met een eigen filmblok en tekst die bij de set past, vertaald:
+* `film-barber-bro-1-0` (3682006958412): met de precisietrimmer.
+* `film-barber-bro-2-0` (3682007023948): met de foil shaver.
+* `film-barber-bro-3-0` (3682007056716): met foil shaver en neustrimmer.
