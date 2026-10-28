@@ -50,3 +50,10 @@ test('andere statussen laten we met rust', async () => {
   assert.equal(await settle('s', order(0, {status: 'shown'})), 'shown');
   assert.equal(calls.length, 0);
 });
+
+test('bundel: onderdelen samen precies de aanbiedingsprijs', async () => {
+  const {bundleLines} = await import('../lib/shopify.mjs');
+  const lines = bundleLines([{quantity: 3, productVariant: {id: 'blade', price: '14.95'}}], 19.96);
+  assert.deepEqual(lines.map((l) => [l.variantId, l.quantity]), [['blade', 3]]);
+  assert.equal(Math.round(44.85 * (1 - lines[0].pct / 100) * 100) / 100, 19.96);
+});

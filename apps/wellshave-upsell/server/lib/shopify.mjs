@@ -161,23 +161,41 @@ const userErrors = (p) => {
   return p;
 };
 
-export async function addToOrder(shop, orderId, {variantIds, pct, note}) {
+// Een bundel (zoals de Trio Pack) kan Shopify niet aan een order toevoegen. Dan zetten we de
+// onderdelen erin, met één korting zodat ze samen precies de aanbiedingsprijs kosten.
+export function bundleLines(components, offerPrice) {
+  const full = components.reduce((a, c) => a + Number(c.productVariant.price) * c.quantity, 0);
+  const pct = full > 0 ? Math.round((1 - offerPrice / full) * 1e6) / 1e4 : 0;
+  return components.map((c) => ({variantId: c.productVariant.id, quantity: c.quantity, pct: Math.max(pct, 0)}));
+}
+
+export async function addToOrder(shop, orderId, {items, pct, note}) {
   const before = await admin(shop, `query($id:ID!){ order(id:$id){ lineItems(first:100){ nodes{ id } } } }`, {id: orderId});
   const existing = new Set(before.order.lineItems.nodes.map((l) => l.id));
+  const info = await admin(
+    shop,
+    `query($ids:[ID!]!){ nodes(ids:$ids){ ... on ProductVariant { id productVariantComponents(first:10){ nodes{ quantity productVariant{ id price } } } } } }`,
+    {ids: items.map((i) => i.variantId)},
+  );
+  const comps = Object.fromEntries(info.nodes.filter(Boolean).map((v) => [v.id, v.productVariantComponents.nodes]));
   const b = userErrors((await admin(shop, `mutation($id:ID!){ orderEditBegin(id:$id){ calculatedOrder{ id } userErrors{ message } } }`, {id: orderId})).orderEditBegin);
   const calc = b.calculatedOrder.id;
-  for (const v of variantIds) {
-    const a = userErrors((await admin(
-      shop,
-      `mutation($id:ID!,$v:ID!){ orderEditAddVariant(id:$id, variantId:$v, quantity:1, allowDuplicates:true){ calculatedLineItem{ id } userErrors{ message } } }`,
-      {id: calc, v},
-    )).orderEditAddVariant);
-    if (pct) {
-      userErrors((await admin(
+  for (const item of items) {
+    const parts = comps[item.variantId]?.length ? bundleLines(comps[item.variantId], item.offerPrice) : [{variantId: item.variantId, quantity: 1, pct}];
+    const label = `${item.title}: ${pct}% extra korting (eenmalig aanbod)`;
+    for (const part of parts) {
+      const a = userErrors((await admin(
         shop,
-        `mutation($id:ID!,$l:ID!,$d:OrderEditAppliedDiscountInput!){ orderEditAddLineItemDiscount(id:$id, lineItemId:$l, discount:$d){ userErrors{ message } } }`,
-        {id: calc, l: a.calculatedLineItem.id, d: {percentValue: pct, description: `${pct}% extra korting (eenmalig aanbod)`}},
-      )).orderEditAddLineItemDiscount);
+        `mutation($id:ID!,$v:ID!,$q:Int!){ orderEditAddVariant(id:$id, variantId:$v, quantity:$q, allowDuplicates:true){ calculatedLineItem{ id } userErrors{ message } } }`,
+        {id: calc, v: part.variantId, q: part.quantity},
+      )).orderEditAddVariant);
+      if (part.pct) {
+        userErrors((await admin(
+          shop,
+          `mutation($id:ID!,$l:ID!,$d:OrderEditAppliedDiscountInput!){ orderEditAddLineItemDiscount(id:$id, lineItemId:$l, discount:$d){ userErrors{ message } } }`,
+          {id: calc, l: a.calculatedLineItem.id, d: {percentValue: part.pct, description: label}},
+        )).orderEditAddLineItemDiscount);
+      }
     }
   }
   const c = userErrors((await admin(

@@ -130,7 +130,7 @@ async function acceptCore(shop, orderId, variantIds) {
   // Lukt dat niet, dan valt het terug op een aparte checkout met een unieke code.
   try {
     const r = await addToOrder(shop, order.id, {
-      variantIds: chosen,
+      items: offer.offers.filter((o) => chosen.includes(o.variantId)),
       pct: offer.discount,
       note: `Upsell (${offer.ruleId}): klant betaalt het restbedrag. Niet betaald binnen ${PAY_MINUTES} minuten, dan wordt het automatisch verwijderd.`,
     });
