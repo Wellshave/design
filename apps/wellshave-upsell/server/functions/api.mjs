@@ -67,6 +67,19 @@ async function thankYouOffer(req) {
   return json({mode: 'offer', state: state.status || 'shown', expiresAt, ...offer});
 }
 
+// Voorbeeld voor de checkout-editor (daar bestaat geen echte bestelling).
+async function thankYouPreview(req) {
+  const {shop} = checkoutSession(req);
+  const config = await getConfig(shop);
+  const first = [...(config.rules || [])].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+    .flatMap((r) => (r.triggers || []).map((t) => t.handle || t)).find((h) => h && h !== '*');
+  const d = first ? await admin(shop, 'query($h:String!){ productByIdentifier(identifier:{handle:$h}){ title } }', {h: first}) : null;
+  const offer = await buildOffer(shop, config, {purchasedHandles: [first], purchasedVariantIds: [], dismissed: [], productTitle: d?.productByIdentifier?.title});
+  if (!offer) return json({mode: 'none'});
+  const minutes = offer.settings.timerMin || 0;
+  return json({mode: 'offer', preview: true, state: 'shown', expiresAt: minutes ? new Date(Date.now() + minutes * 60000).toISOString() : null, ...offer});
+}
+
 async function reminderBlock(shop, order) {
   const s = (await getConfig(shop)).settings || {};
   return s.remOn ? {remText: s.remText, remWeeks: s.remWeeks ?? 8} : null;
@@ -295,6 +308,7 @@ async function oauthCallback(req, url) {
 
 const routes = {
   'POST /api/thank-you/offer': thankYouOffer,
+  'POST /api/thank-you/preview': thankYouPreview,
   'POST /api/thank-you/accept': thankYouAccept,
   'POST /api/thank-you/dismiss': thankYouDismiss,
   'POST /api/thank-you/reminder': reminder,

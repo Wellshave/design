@@ -52,15 +52,22 @@ function useCountdown(expiresAt) {
 
 function ThankYou() {
   const orderId = shopify.orderConfirmation.value?.order?.id;
+  // In de checkout-editor bestaat de bestelling niet echt: toon dan een voorbeeld.
+  const inEditor = Boolean(shopify.extension?.editor);
   const [data, setData] = useState(null);
   const [failed, setFailed] = useState(false);
 
   useEffect(() => {
+    if (inEditor) {
+      call('/api/thank-you/preview', {}).then(setData).catch(() => setFailed(true));
+      return;
+    }
     if (!orderId) return;
     call('/api/thank-you/offer', {orderId}).then(setData).catch(() => setFailed(true));
-  }, [orderId]);
+  }, [orderId, inEditor]);
 
-  if (failed || !orderId) return null;
+  if (failed) return inEditor ? <s-banner tone="warning">Wellshave Upsell: de server is niet bereikbaar.</s-banner> : null;
+  if (!orderId && !inEditor) return null;
   if (!data) return <s-skeleton-paragraph />;
   if (data.mode === 'upsell-confirmation') {
     return (
@@ -73,7 +80,7 @@ function ThankYou() {
     <s-stack gap="large">
       {data.mode === 'offer' && data.offers?.length ? <Offer data={data} orderId={orderId} /> : null}
       {data.thanks?.length ? <CrossSell data={data} /> : null}
-      {(data.settings?.remOn || data.reminder) ? <Reminder orderId={orderId} settings={data.settings || data.reminder} /> : null}
+      {(data.settings?.remOn || data.reminder) ? <Reminder orderId={orderId} preview={data.preview} settings={data.settings || data.reminder} /> : null}
     </s-stack>
   );
 }
@@ -99,11 +106,12 @@ function Offer({data, orderId}) {
   };
 
   // Gewone link naar de server: die maakt de unieke code en stuurt door naar de checkout.
-  const goHref = token && chosen.length
+  const goHref = !data.preview && token && chosen.length
     ? `${APP_URL}/api/thank-you/go?${new URLSearchParams({token, order: orderId, v: chosen.map((o) => o.variantId).join(',')})}`
     : undefined;
 
   async function dismiss() {
+    if (data.preview) return;
     setStatus('dismissed');
     call('/api/thank-you/dismiss', {orderId}).catch(() => {});
   }
@@ -215,9 +223,10 @@ function CrossSell({data}) {
 }
 
 // ---------- herinnering voor vervangmesjes ----------
-function Reminder({orderId, settings}) {
+function Reminder({orderId, settings, preview}) {
   const [state, setState] = useState('idle');
   async function ask() {
+    if (preview) return;
     setState('busy');
     try {
       await call('/api/thank-you/reminder', {orderId});
