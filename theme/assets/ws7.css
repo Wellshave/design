@@ -1,0 +1,281 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600&display=swap");
+
+/* Wellshave homepage v7.
+   Opbouw geïnspireerd op Manscaped, rust van Hears, taal van Wellshave:
+   zand als grond, goud alleen als verloop, Inter Tight voor koppen, tekstlinks in plaats van knoppen,
+   kleine donkere labels en het S-teken als watermerk. Ontwerp: artifacts/wellshave-manscaped-stijl.html */
+
+.ws7{--ink:#111111;--mid:#6A635A;--licht:#A39A8E;--zand:#F5F1EA;--zand2:#EDE6DA;--carbon:#191816;
+  --goud:linear-gradient(135deg,#F5D18A 0%,#D8AC5D 52%,#BC813E 100%);
+  --goud-tekst:linear-gradient(100deg,#B0742A 0%,#8C5A1A 100%);
+  --donker:linear-gradient(168deg,#242220 0%,#171614 58%,#0E0D0C 100%);
+  --kopletter:"Inter Tight","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --letter:"Inter",-apple-system,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  background:var(--zand);color:var(--ink);font-family:var(--letter);font-size:14px;line-height:1.55;letter-spacing:-.005em;-webkit-font-smoothing:antialiased}
+/* marges van secties blijven binnen de eigen achtergrond, zodat er geen witte balk tussen secties valt */
+.ws7{display:flow-root}
+.ws7 *{box-sizing:border-box}
+.ws7 a{color:inherit;text-decoration:none}
+.ws7 img{display:block;max-width:100%}
+.ws7 h2,.ws7 h3,.ws7 p{margin:0}
+.ws7-binnen{max-width:1440px;margin:0 auto;padding:72px 56px 0}
+.ws7-midden{display:flex;flex-direction:column;align-items:center;text-align:center}
+.ws7-wit{background:#fff}
+
+/* kop in twee regels: de tweede in goud */
+.ws7-oog{font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#9A6A2E}
+.ws7-kop{font-family:var(--kopletter);font-weight:500;font-size:44px;line-height:1.04;letter-spacing:-.035em;color:var(--ink)}
+.ws7-goud{display:block;padding-bottom:.12em;margin-bottom:-.12em;background:var(--goud-tekst);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:#B0742A}
+.ws7-donkergrond .ws7-goud{background-image:linear-gradient(135deg,#F8DFAB,#E5BC77 42%,#C8913F)}
+.ws7-sub{margin-top:10px;font-size:12.5px;color:var(--mid)}
+.ws7-oog + .ws7-kop{margin-top:8px}
+
+/* tekstlink met gouden pijl, geen knoppen */
+.ws7-link{display:inline-flex;align-items:center;gap:8px;padding-bottom:4px;font-size:13.5px;font-weight:500;color:var(--ink);
+  border-bottom:1px solid rgba(17,17,17,.25);background:linear-gradient(90deg,#D8AC5D,#BC813E) 0 100%/0 1px no-repeat;transition:background-size .3s ease,border-color .3s ease}
+.ws7-link svg{width:14px;height:14px;flex:none;color:#B0742A;transition:transform .2s ease}
+.ws7-link:hover{background-size:100% 1px;border-color:transparent}
+.ws7-link:hover svg{transform:translateX(3px)}
+.ws7-link:focus-visible{outline:2px solid #BC813E;outline-offset:4px}
+.ws7-donkergrond .ws7-link{color:#fff;border-bottom-color:rgba(255,255,255,.35)}
+.ws7-donkergrond .ws7-link svg{color:#F5D18A}
+.ws7-donkergrond .ws7-link{background-image:linear-gradient(90deg,#F5D18A,#D8AC5D)}
+.ws7-midden .ws7-link{margin-top:18px}
+
+/* het S-teken als watermerk */
+.ws7-teken{position:absolute;pointer-events:none;color:#E5BC77;opacity:.14}
+
+/* 1 · hero */
+.ws7-hero{display:grid;grid-template-columns:2fr 1fr;gap:12px;height:600px;padding:12px 16px 0}
+.ws7-hero__groot{position:relative;border-radius:26px;overflow:hidden;background:#191415}
+.ws7-hero__groot img,.ws7-hero__groot picture{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ws7-hero__groot::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,12,11,.72),rgba(14,12,11,.25) 45%,rgba(14,12,11,0) 62%)}
+.ws7-hero__tekst{position:absolute;left:52px;bottom:52px;z-index:1;display:flex;flex-direction:column;align-items:flex-start;gap:14px;max-width:460px;color:#fff}
+.ws7-hero__tekst .ws7-oog{color:#F5D18A}
+.ws7-hero__kop{font-family:var(--kopletter);font-weight:500;font-size:60px;line-height:1.02;letter-spacing:-.035em}
+.ws7-hero__sub{font-size:12.5px;color:rgba(255,255,255,.78)}
+.ws7-hero__rechts{display:grid;grid-auto-rows:1fr;gap:12px}
+.ws7-hero__tegel{position:relative;border-radius:18px;overflow:hidden;background:#191415}
+.ws7-hero__tegel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.ws7-hero__tegel:hover img{transform:scale(1.03)}
+.ws7-hero__tegel::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(0,0,0,.45))}
+.ws7-hero__tegel span{position:absolute;left:18px;bottom:16px;z-index:1;background:rgba(255,255,255,.94);color:var(--ink);font-size:11.5px;font-weight:600;border-radius:100px;padding:6px 13px}
+
+/* 2 · zekerheid */
+.ws7-zeker{display:flex;justify-content:center;flex-wrap:wrap;padding:18px 20px}
+.ws7-zeker__item{display:flex;align-items:center;gap:10px;padding:4px 30px;font-size:11.5px;font-weight:600}
+.ws7-zeker__item + .ws7-zeker__item{border-left:1px solid rgba(17,17,17,.12)}
+.ws7-zeker__item svg{width:30px;height:30px;padding:7px;border-radius:50%;background:#fff;color:#B0742A;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.ws7-zeker__item svg.ws7-ster{fill:currentColor;stroke:none}
+
+/* schuifrij met voortgangsbalk */
+.ws7-schuif{width:100%;margin-top:30px}
+.ws7-rij{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;margin:0 -56px;padding:0 56px 18px;scroll-padding-left:56px;text-align:left}
+.ws7-rij::-webkit-scrollbar{display:none}
+/* op desktop loopt een schuifrij rechts door tot de rand van het scherm, in plaats van hard af te
+   breken bij het middenstuk; links blijft hij gelijk met de kop. Kaarten houden dezelfde breedte. */
+@media (min-width:750px){
+  .ws7{overflow-x:clip}
+  .ws7-rij:not(.ws7-tech){--rand:max(56px,calc((100vw - 1328px) / 2));margin:0 calc(var(--rand) * -1);padding:0 var(--rand) 18px;scroll-padding-left:var(--rand)}
+}
+.ws7-voortgang{position:relative;height:2px;width:100%;max-width:420px;margin:12px auto 0;background:rgba(17,17,17,.12);border-radius:2px;cursor:pointer}
+.ws7-voortgang::before{content:"";position:absolute;left:0;right:0;top:-10px;bottom:-10px}
+.ws7-voortgang i{position:absolute;top:0;left:0;height:100%;width:30%;border-radius:2px;background:linear-gradient(90deg,#D8AC5D,#BC813E)}
+
+/* 3 · productkaart */
+.ws7-kaart{position:relative;flex:0 0 calc((100% - 72px) / 4.35);scroll-snap-align:start;display:flex;flex-direction:column;gap:2px;background:#fff;border-radius:18px;padding:10px 10px 16px;box-shadow:0 14px 34px rgba(17,17,17,.07);transition:transform .18s ease,box-shadow .18s ease}
+.ws7-kaart:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(17,17,17,.11)}
+.ws7-kaart__beeld{position:relative;display:block;aspect-ratio:1;background:var(--zand);border-radius:12px;overflow:hidden;margin-bottom:12px}
+.ws7-kaart__beeld img{position:absolute;z-index:1;inset:7%;width:86%;height:86%;object-fit:contain;mix-blend-mode:darken}
+/* hover: het S-teken komt achter het product naar voren, "In winkelwagen" schuift omhoog */
+.ws7-kaart__merk{position:absolute;left:10%;top:10%;width:80%;height:80%;color:#D8AC5D;opacity:0;transform:scale(.78);transition:transform .7s cubic-bezier(.2,.7,.2,1),opacity .5s ease;pointer-events:none}
+.ws7-kaart:hover .ws7-kaart__merk,.ws7-kaart:focus-within .ws7-kaart__merk{opacity:.22;transform:scale(1.04)}
+.ws7-kaart__naam::after{content:"";position:absolute;inset:0;z-index:2;border-radius:inherit}
+.ws7-kaart__naam:focus-visible{outline:none}
+.ws7-kaart:has(.ws7-kaart__naam:focus-visible){outline:2px solid #BC813E;outline-offset:3px}
+.ws7-mand{position:absolute;z-index:3;left:50%;bottom:12px;display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border:0;border-radius:100px;
+  background:var(--carbon);color:#fff;font:600 11.5px/1 var(--letter);white-space:nowrap;cursor:pointer;opacity:0;transform:translate(-50%,10px);
+  transition:opacity .3s ease,transform .35s cubic-bezier(.2,.7,.2,1),background .2s ease}
+.ws7-mand svg{width:13px;height:13px;fill:none;stroke:#F5D18A;stroke-width:1.5}
+.ws7-mand:hover{background:#3A3732}
+.ws7-kaart:hover .ws7-mand,.ws7-kaart:focus-within .ws7-mand{opacity:1;transform:translate(-50%,0)}
+.ws7-mand.is-bezig{opacity:.6;pointer-events:none}
+.ws7-label{position:absolute;left:10px;top:10px;z-index:1;background:var(--carbon);color:#fff;border-radius:3px;padding:4px 7px;font-size:10px;font-weight:600;line-height:1}
+.ws7-kaart__naam,.ws7-kaart__wat,.ws7-kaart__prijs{padding:0 6px}
+.ws7-kaart__naam{font-size:14px;font-weight:600}
+.ws7-kaart__wat{font-size:11px;color:var(--mid)}
+.ws7-kaart__prijs{display:flex;gap:8px;align-items:baseline;margin-top:6px;font-size:13px;font-variant-numeric:tabular-nums}
+.ws7-kaart__prijs b{font-weight:600}
+.ws7-kaart__prijs s{color:var(--licht);font-size:11.5px}
+
+/* 4 · plekken */
+.ws7-plek{flex:0 0 calc((100% - 36px) / 3.3);scroll-snap-align:start;display:flex;flex-direction:column}
+.ws7-plek__beeld{position:relative;display:block;aspect-ratio:1;border-radius:18px;overflow:hidden;background:var(--zand2)}
+.ws7-plek__beeld img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.ws7-plek:hover .ws7-plek__beeld img{transform:scale(1.025)}
+.ws7-plek__naam{margin-top:16px;font-family:var(--kopletter);font-size:24px;font-weight:500;letter-spacing:-.025em}
+.ws7-plek__nu{display:inline-flex;align-items:center;gap:6px;margin-top:6px;font-size:12px;font-weight:600}
+.ws7-plek__nu svg{width:14px;height:14px;color:#B0742A;transition:transform .2s ease}
+.ws7-plek:hover .ws7-plek__nu svg{transform:translateX(3px)}
+
+/* 5 · banners */
+.ws7-banners{padding:72px 16px 0;display:grid;gap:12px}
+.ws7-ban{position:relative;height:420px;border-radius:26px;overflow:hidden;display:flex;align-items:center;padding:0 110px;background:#191415}
+.ws7-ban > img,.ws7-ban > picture,.ws7-ban > picture img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ws7-ban--h-foto{height:auto;aspect-ratio:var(--ratio,16/9);min-height:420px;max-height:none}
+.ws7-ban--h-breed{height:auto;aspect-ratio:21/9;min-height:420px}
+.ws7-ban--h-panorama{height:auto;aspect-ratio:3/1;min-height:420px}
+.ws7-ban--rechts{justify-content:flex-end}
+.ws7-ban--donker::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(14,12,11,.7),rgba(14,12,11,0) 52%)}
+.ws7-ban--donker.ws7-ban--rechts::before{background:linear-gradient(270deg,rgba(14,12,11,.8),rgba(14,12,11,0) 55%)}
+.ws7-ban .ws7-teken{z-index:1;width:300px;height:300px;left:-60px;bottom:-90px}
+.ws7-ban--rechts .ws7-teken{left:auto;right:-60px}
+.ws7-ban__tekst{position:relative;z-index:2;max-width:320px;display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+.ws7-ban__kop{font-family:var(--kopletter);font-weight:500;font-size:46px;line-height:1.02;letter-spacing:-.035em}
+.ws7 .ws7-ban--donker{color:#fff}
+.ws7 .ws7-ban--licht{color:var(--ink)}
+.ws7-ban__tekst p{font-size:12.5px;line-height:1.6}
+.ws7-ban--licht p{color:#4E463D}
+.ws7-ban--donker p{color:rgba(255,255,255,.78)}
+
+/* 6 · innovatie: grote kaart in het midden, product getagd */
+.ws7-tech{align-items:center;gap:28px;padding-left:23%;padding-right:23%;scroll-padding-left:0}
+.ws7-tech__kaart{flex:0 0 54%;scroll-snap-align:center;display:flex;flex-direction:column;align-items:center;text-align:center;opacity:.45;transform:scale(.78);transition:transform .45s ease,opacity .45s ease}
+.ws7-tech__kaart.is-actief{opacity:1;transform:none}
+.ws7-tech__beeld{position:relative;width:100%;aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:#111}
+.ws7-tech__beeld > img{width:100%;height:100%;object-fit:cover}
+.ws7-tag{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.96);border-radius:12px;padding:6px;box-shadow:0 10px 30px rgba(0,0,0,.25);white-space:nowrap;text-align:left}
+.ws7-tag__foto{width:40px;height:40px;border-radius:8px;background:#F2F2F2;overflow:hidden;flex:none}
+.ws7-tag__foto img{width:100%;height:100%;object-fit:cover}
+.ws7-tag__tekst{display:flex;flex-direction:column;line-height:1.25;padding-right:6px}
+.ws7-tag__tekst b{font-size:12px;font-weight:600;color:#111}
+.ws7-tag__tekst small{font-size:11px;color:var(--mid)}
+.ws7-tag__plus{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--goud);color:#111;font-size:17px;line-height:1;transition:transform .2s ease}
+.ws7-tag__plus:hover{transform:rotate(90deg)}
+.ws7-tech__kop{margin-top:22px;font-family:var(--kopletter);font-size:26px;font-weight:500;letter-spacing:-.025em}
+.ws7-tech__tekst{margin-top:8px;font-size:13px;line-height:1.6;color:var(--mid);max-width:34em}
+
+/* 7 · pers: doorlopende strook, stopt bij hover */
+.ws7-pers{margin-top:72px;padding:26px 0;border-top:1px solid rgba(17,17,17,.08);border-bottom:1px solid rgba(17,17,17,.08)}
+/* de ruimte boven de persstrook hoort bij de zandgrond, niet bij de witte pagina */
+.shopify-section:has(> .ws7-pers){display:flow-root;background:#F5F1EA}
+.shopify-section:has(> .ws7-pers.ws7-wit){background:#fff}
+.ws7-pers__baan{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.ws7-pers__rij{display:flex;align-items:center;gap:64px;width:max-content;padding-left:64px;animation:ws7-loop 55s linear infinite}
+.ws7-pers__baan:hover .ws7-pers__rij{animation-play-state:paused}
+@keyframes ws7-loop{to{transform:translateX(-50%)}}
+.ws7-pers__logo{display:flex;align-items:center;gap:8px;flex:none}
+.ws7-pers__logo img{width:auto;height:var(--h,22px);max-width:none}
+.ws7-pers__logo b{font-size:17px;font-weight:700;letter-spacing:-.015em;color:#3A3734;white-space:nowrap}
+
+/* 8 · afsluiter */
+.ws7-slot{position:relative;margin:88px 16px 0;border-radius:26px;padding:72px 56px 64px;display:flex;flex-direction:column;align-items:center;text-align:center;color:#fff;overflow:hidden;background:var(--donker)}
+.ws7-slot > .ws7-teken{width:560px;height:560px;left:50%;top:-120px;margin-left:-280px;opacity:.07}
+.ws7-slot > *:not(.ws7-teken){position:relative}
+.ws7-slot__merk{width:34px;height:34px;color:#E5BC77}
+.ws7-slot__oog{margin-top:12px;font-size:10.5px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:#F5D18A}
+.ws7-slot .ws7-kop{margin-top:16px;font-size:48px;color:#fff}
+.ws7-slot__tekst{margin-top:12px;font-size:12.5px;color:rgba(255,255,255,.7);max-width:30em}
+.ws7-slot__rij{display:grid;grid-template-columns:repeat(3,210px);gap:12px;margin-top:28px}
+.ws7-slot__punt{border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.1);border-radius:12px;padding:14px 16px;text-align:left;display:flex;flex-direction:column;gap:2px}
+.ws7-slot__punt b{font-size:13px;font-weight:600;color:#F5D18A}
+.ws7-slot__punt span{font-size:11px;color:rgba(255,255,255,.65)}
+.ws7-slot .ws7-link{margin-top:28px}
+.ws7 .ws7-slot__tweede{margin-top:12px;font-size:12px;color:rgba(255,255,255,.6)}
+.ws7-slot-ruimte{height:16px}
+
+/* 9 · collabs */
+.ws7-collab{flex:0 0 calc((100% - 90px) / 5.4);scroll-snap-align:start;position:relative;margin:0;border-radius:14px;overflow:hidden;background:#111}
+.ws7 .ws7-collab img{display:block;width:100%;height:auto;max-height:none;aspect-ratio:4/5;object-fit:cover}
+.ws7 .ws7-rij > .ws7-collab{align-self:flex-start}
+.ws7-collab::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 58%,rgba(0,0,0,.6));pointer-events:none}
+.ws7-collab figcaption{position:absolute;left:12px;right:12px;bottom:11px;z-index:1;display:flex;align-items:center;gap:5px;color:#fff;text-align:left}
+.ws7-collab figcaption b{font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ws7-vink{display:grid;place-items:center;width:14px;height:14px;flex:none;border-radius:50%;background:#2F8CFF;box-shadow:0 0 0 1.5px rgba(255,255,255,.9)}
+.ws7-vink svg{width:10px;height:10px;fill:none;stroke:#fff;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.ws7-midden .ws7-collab-link{margin-top:22px}
+
+/* awards: keurmerken naast een korte uitleg wat ze betekenen */
+.ws7-award{max-width:1440px;margin:0 auto;padding:64px 56px 0}
+.ws7-award__blok{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:auto minmax(0,1fr);gap:56px;align-items:center;background:#fff;border-radius:26px;padding:40px 48px}
+.ws7-wit .ws7-award__blok{background:var(--zand)}
+.ws7-award__badges{display:flex;gap:16px}
+.ws7-award__badge{width:110px;height:auto;filter:drop-shadow(0 10px 18px rgba(193,32,38,.18))}
+.ws7-award__tekst{display:flex;flex-direction:column;align-items:flex-start;gap:12px;text-align:left}
+.ws7-award__tekst .ws7-oog + .ws7-kop{margin-top:0}
+.ws7-award__uitleg{font-size:13px;line-height:1.6;color:var(--mid);max-width:34em}
+.ws7-award__lijst{list-style:none;margin:0;padding:0;display:grid;gap:0;width:100%;max-width:440px}
+.ws7-award__lijst li{display:flex;gap:14px;padding:10px 0;border-top:1px solid rgba(17,17,17,.08);font-size:12.5px}
+.ws7-award__lijst li:last-child{border-bottom:1px solid rgba(17,17,17,.08)}
+.ws7-award__lijst b{flex:0 0 78px;font-weight:600}
+.ws7-award__lijst span{color:var(--mid)}
+.ws7-award .ws7-link{margin-top:6px}
+
+@media (max-width:749px){
+  .ws7-binnen{padding:48px 16px 0}
+  .ws7-kop{font-size:30px}
+  .ws7-hero{grid-template-columns:1fr 1fr;grid-template-rows:520px 150px;height:auto;gap:8px;padding:8px 10px 0}
+  .ws7-hero__groot{grid-column:1/3;border-radius:18px}
+  .ws7-hero__groot img{object-position:var(--mob-pos,50% 20%)}
+  .ws7-hero__groot::after{background:linear-gradient(180deg,rgba(14,12,11,0) 35%,rgba(14,12,11,.88) 78%)}
+  .ws7-hero__tekst{left:18px;right:18px;bottom:22px;gap:10px}
+  .ws7-hero__kop{font-size:40px}
+  .ws7-hero__rechts{grid-column:1/3;grid-auto-rows:auto;grid-template-columns:1fr 1fr;gap:8px}
+  .ws7-hero__tegel{border-radius:12px}
+  .ws7-hero__tegel span{left:8px;bottom:8px;font-size:10px;padding:4px 9px}
+  .ws7-zeker{padding:14px 6px;flex-wrap:nowrap}
+  .ws7-zeker__item{flex-direction:column;gap:5px;padding:0 10px;font-size:9.5px;text-align:center}
+  .ws7-zeker__item svg{width:26px;height:26px;padding:6px}
+  .ws7-schuif{margin-top:22px}
+  .ws7-rij{gap:10px;margin:0 -16px;padding:0 16px 14px;scroll-padding-left:16px}
+  .ws7-voortgang{max-width:none}
+  .ws7-kaart{flex-basis:62%;border-radius:12px;padding:6px 6px 12px}
+  .ws7-kaart__beeld{border-radius:8px}
+  .ws7-label{left:7px;top:7px;font-size:9px;padding:3px 6px}
+  .ws7-mand{display:none}
+  .ws7-plek{flex-basis:72%}
+  .ws7-collab{flex-basis:44%;border-radius:12px}
+  .ws7-plek__beeld{border-radius:12px}
+  .ws7-plek__naam{font-size:18px;margin-top:10px}
+  .ws7-banners{padding:48px 10px 0;gap:8px}
+  .ws7-ban,.ws7-ban--h-foto,.ws7-ban--h-breed,.ws7-ban--h-panorama{height:auto;aspect-ratio:auto;min-height:320px;border-radius:18px;padding:28px 20px;align-items:flex-end}
+  .ws7-ban > img,.ws7-ban > picture img{object-position:var(--mob-pos,70% 50%)}
+  .ws7-ban--licht::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(245,241,234,0) 35%,rgba(245,241,234,.9) 78%)}
+  .ws7-ban--donker::before,.ws7-ban--donker.ws7-ban--rechts::before{background:linear-gradient(180deg,rgba(14,12,11,0) 30%,rgba(14,12,11,.85))}
+  .ws7-ban--rechts{justify-content:flex-start}
+  .ws7-ban.ws7-ban--m-boven{aspect-ratio:var(--mratio,.8);align-items:flex-start}
+  .ws7-ban--m-boven.ws7-ban--donker::before,.ws7-ban--m-boven.ws7-ban--donker.ws7-ban--rechts::before{background:linear-gradient(0deg,rgba(14,12,11,0) 45%,rgba(14,12,11,.75))}
+  .ws7-ban--m-boven.ws7-ban--licht::before{background:linear-gradient(0deg,rgba(245,241,234,0) 45%,rgba(245,241,234,.9))}
+  .ws7-ban__kop{font-size:33px}
+  .ws7-ban__tekst{max-width:260px;gap:10px}
+  .ws7-ban .ws7-teken{width:180px;height:180px;left:auto;right:-40px;bottom:auto;top:-40px}
+  .ws7-tech{gap:10px;padding-left:9%;padding-right:9%}
+  .ws7-tech__kaart{flex-basis:82%;transform:scale(.92)}
+  .ws7-tech__beeld{aspect-ratio:4/3;border-radius:14px}
+  .ws7-tag{bottom:10px;gap:8px;padding:5px;border-radius:10px}
+  .ws7-tag__foto{width:32px;height:32px}
+  .ws7-tag__tekst b{font-size:11px}
+  .ws7-tag__tekst small{font-size:10px}
+  .ws7-tag__plus{width:26px;height:26px;font-size:15px}
+  .ws7-tech__kop{font-size:20px;margin-top:14px}
+  .ws7-tech__tekst{font-size:12px}
+  .ws7-pers{padding:18px 0;margin-top:48px}
+  .ws7-pers__rij{gap:40px;padding-left:40px;animation-duration:42s}
+  .ws7-pers__logo img{height:calc(var(--h,22px) * .72)}
+  .ws7-pers__logo b{font-size:13px}
+  .ws7-slot{margin:56px 10px 0;border-radius:18px;padding:48px 16px}
+  .ws7-slot > .ws7-teken{width:340px;height:340px;margin-left:-170px;top:-60px}
+  .ws7-slot .ws7-kop{font-size:34px}
+  .ws7-slot__rij{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;width:100%}
+  .ws7-slot__punt{padding:10px 8px}
+  .ws7-slot__punt b{font-size:12px}
+  .ws7-slot__punt span{font-size:9.5px}
+  .ws7-award{padding:44px 10px 0}
+  .ws7-award__blok{grid-template-columns:1fr;gap:22px;padding:24px 20px;border-radius:18px}
+  .ws7-award__badges{justify-content:center}
+  .ws7-award__badge{width:92px}
+}
+@media (prefers-reduced-motion:reduce){
+  .ws7-pers__rij{animation:none}
+  .ws7 *{transition:none!important;scroll-behavior:auto!important}
+}

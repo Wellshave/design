@@ -1,0 +1,130 @@
+
+/* ── merklaag: de Wellshave-huisstijl uit wellshave-merklaag.md over de v6-opbouw ──
+   Montserrat als enige letter, de tweeslags kop met gouden tweede regel, zand als signaal,
+   gouden pilknoppen, afronding 12/18/26, donkere vlakken in carbon, het S-teken als motief. */
+.merk .site{--ink:#111111;--sand:#F5F1EA;--sand-deep:#EDE6DA;--carbon:#191816;--bronze:#BC813E;--gold:#F5D18A;
+  --grad-gold:linear-gradient(158deg,#F8DFAB 0%,#E5BC77 42%,#C8913F 100%);
+  --grad-dark:linear-gradient(168deg,#242220 0%,#171614 58%,#0E0D0C 100%);
+  --grad-gold-tekst:linear-gradient(100deg,#B0742A 0%,#8C5A1A 100%);color:var(--ink)}
+
+/* koppen: Montserrat 900, tweede regel in goudverloop */
+.merk .m-h1,.merk .s-h2,.merk .sp-tekst h2,.merk .a-blok h2,.merk .c-naam,.merk .u-tekst h3,.merk .r blockquote{font-family:"Montserrat",-apple-system,sans-serif;font-style:normal}
+.merk .m-h1{font-weight:900;font-size:72px;line-height:1;letter-spacing:-.035em}
+.merk .s-h2{font-weight:900;font-size:50px;line-height:1.02;letter-spacing:-.025em;color:var(--ink);text-wrap:balance}
+.merk .rw-links .s-h2{font-size:44px}
+.merk .sp-tekst h2{font-weight:900;font-size:56px;line-height:1.02;letter-spacing:-.03em;color:#fff}
+.merk .sp-tekst h2 em{font-style:normal}
+.merk .a-blok h2{font-weight:900;font-size:52px;line-height:1.04;letter-spacing:-.03em}
+.merk h2 .b{display:block;color:#B0742A}
+.merk .m-h1 .b,.merk .sp-tekst h2 .b,.merk .a-blok h2 .b{display:inline;color:var(--gold)}
+.merk .sp-tekst h2 .b,.merk .a-blok h2 .b{display:block}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  .merk h2 .b{background-image:var(--grad-gold-tekst);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+  .merk .m-h1 .b,.merk .sp-tekst h2 .b,.merk .a-blok h2 .b{background-image:var(--grad-gold)}
+}
+.merk .c-naam{font-weight:800;font-size:24px;letter-spacing:-.02em}
+.merk .u-tekst h3{font-weight:900;font-size:22px;letter-spacing:-.02em;line-height:1.15}
+.merk .r blockquote{font-size:15px;line-height:1.6}
+
+/* eyebrows: 800, ruim gespatieerd, met het S-teken ervoor */
+.merk .s-oog,.merk .m-oog,.merk .m-gezien p{font-weight:800;letter-spacing:.2em;font-size:11px}
+.merk .s-oog{display:flex;align-items:center;gap:9px;color:rgba(17,17,17,.5)}
+.merk .c-kop .s-oog,.merk .a-blok .s-oog{justify-content:center}
+.merk .s-oog::before{content:"";width:15px;height:15px;flex:none;background:var(--grad-gold);-webkit-mask:{{merk}} center/contain no-repeat;mask:{{merk}} center/contain no-repeat}
+.merk .sp-tekst .s-oog,.merk .a-blok .s-oog{color:rgba(245,209,138,.85)}
+
+/* knoppen: pillen, primair in goudverloop */
+.merk .site .m-knop{border-radius:100px;background:var(--grad-gold);color:#1A1408!important;font-weight:800;padding:19px 34px;transition:filter .18s ease,transform .18s ease}
+.merk .site .m-knop:hover{filter:brightness(1.04);transform:translateY(-1px)}
+.merk .site .k-knop{border-radius:100px;background:var(--ink);border-color:var(--ink);color:#fff;font-weight:800}
+.merk .m-knop svg,.merk .k-knop svg{stroke-width:2.1}
+
+/* hero en meldbalk */
+.merk .m-balk{background:var(--carbon);color:var(--gold)}
+.merk .m-balk b{color:var(--gold);font-weight:800}
+.merk .m-t svg{stroke-width:1.9;stroke:var(--gold)}
+.merk .m-t b{font-weight:700}
+.merk .m-gezien{background:var(--sand)}
+
+/* kaarten: afronding 18, zachte schaduw, beeld op zand */
+.merk .k{border:0;border-radius:18px;box-shadow:0 14px 34px rgba(17,17,17,.09)}
+.merk .k:hover{box-shadow:0 20px 42px rgba(17,17,17,.14);transform:translateY(-1px)}
+.merk .k-beeld{background:var(--sand)}
+.merk .k-golf{background:var(--sand-deep)}
+.merk .k-golf::after{background:linear-gradient(158deg,#EADCC5,#DCC39C)}
+.merk .k-naam{font-weight:800}
+.merk .k-prijs b{font-weight:800}
+.merk .k-chips li{border-color:rgba(17,17,17,.12);color:rgba(17,17,17,.75)}
+
+/* plekken en video's: afronding 18 */
+.merk .c,.merk .u,.merk .u-tekst{border-radius:18px}
+.merk .u-tekst{background:var(--sand)}
+.merk .site .u-tekst a{font-weight:800}
+
+/* reviewmuur: zand als vlak, kaarten afronding 18 */
+.merk .rw-paneel{background:var(--sand);border-radius:26px}
+.merk .rw-paneel::before{content:"";left:auto;right:-60px;top:auto;bottom:-80px;width:420px;height:420px;background:linear-gradient(158deg,rgba(229,188,119,.16),rgba(200,145,63,.10));-webkit-mask:{{merk}} center/contain no-repeat;mask:{{merk}} center/contain no-repeat}
+.merk .rw{border-radius:18px;box-shadow:0 10px 26px rgba(17,17,17,.06)}
+.merk .rw h3{font-weight:800}
+.merk .rw-prod{color:var(--bronze);font-weight:800}
+.merk .rw-av{background:var(--grad-gold);color:#1A1408}
+
+/* uitgelicht en afsluiter: carbon met het S-teken als groot watermerk */
+.merk .sp{border-radius:26px;background:var(--carbon)}
+.merk .sp-tekst{position:relative;overflow:hidden;background:var(--grad-dark)}
+.merk .sp-tekst::after{content:"";position:absolute;right:-90px;top:-70px;width:440px;height:440px;background:linear-gradient(158deg,rgba(248,223,171,.13),rgba(200,145,63,.05));-webkit-mask:{{merk}} center/contain no-repeat;mask:{{merk}} center/contain no-repeat;pointer-events:none}
+.merk .sp-tekst > *{position:relative;z-index:1}
+.merk .a{background:var(--grad-dark);position:relative;overflow:hidden}
+.merk .a::before{content:"";position:absolute;left:50%;top:40px;width:520px;height:520px;margin-left:-260px;background:linear-gradient(158deg,rgba(248,223,171,.08),rgba(200,145,63,.03));-webkit-mask:{{merk}} center/contain no-repeat;mask:{{merk}} center/contain no-repeat;pointer-events:none}
+.merk .a > *{position:relative}
+
+/* ritme: zand op de plekken waar het rustig is */
+.merk .s-sets{background:var(--sand)}
+.merk .s-zand{background:#fff}
+.merk .a-blok{max-width:900px}
+.merk .a-blok h2{text-wrap:balance}
+.merk .f-veld{border-radius:100px}
+.merk .f-veld span{padding-left:22px}
+.merk .f-veld b{background:var(--grad-gold);color:#1A1408;font-weight:800;border-radius:100px;margin:4px;padding:11px 20px}
+.merk .s-sets .k-beeld{background:#fff}
+.merk .v-lijst,.merk .v-lijst details{border-color:rgba(17,17,17,.1)}
+.merk .v-lijst summary{font-weight:700}
+.merk .v-lijst summary i::before,.merk .v-lijst summary i::after{background:var(--bronze);height:2px}
+
+@container (max-width:749px){
+  .merk .m-h1{font-size:42px}
+  .merk .s-h2{font-size:31px}
+  .merk .rw-links .s-h2{font-size:29px}
+  .merk .sp-tekst h2{font-size:36px}
+  .merk .a-blok h2{font-size:33px}
+  .merk .c-naam{font-size:17px}
+  .merk .u-tekst h3{font-size:16px}
+  .merk .r blockquote{font-size:14px}
+  .merk .s-oog{font-size:10px;gap:7px}
+  .merk .s-oog::before{width:12px;height:12px}
+  .merk .k,.merk .c,.merk .u,.merk .u-tekst{border-radius:12px}
+  .merk .rw-paneel,.merk .sp{border-radius:18px}
+  .merk .rw{border-radius:12px}
+  .merk .sp-tekst::after{width:260px;height:260px;right:-60px;top:-50px}
+  .merk .a::before{width:320px;height:320px;margin-left:-160px}
+}
+
+/* proef: Fraunces voor de koppen, de rest blijft Montserrat */
+.merk.fraunces .m-h1,.merk.fraunces .s-h2,.merk.fraunces .sp-tekst h2,.merk.fraunces .a-blok h2,.merk.fraunces .c-naam,.merk.fraunces .u-tekst h3{
+  font-family:"Fraunces",Georgia,serif;font-weight:800;font-variation-settings:"opsz" 48;letter-spacing:-.015em;line-height:1.04}
+.merk.fraunces .m-h1{font-size:80px;line-height:.98}
+.merk.fraunces .s-h2{font-size:54px}
+.merk.fraunces .rw-links .s-h2{font-size:48px}
+.merk.fraunces .sp-tekst h2{font-size:62px}
+.merk.fraunces .a-blok h2{font-size:56px}
+.merk.fraunces .c-naam{font-size:27px;letter-spacing:-.01em}
+.merk.fraunces .u-tekst h3{font-size:25px}
+@container (max-width:749px){
+  .merk.fraunces .m-h1{font-size:46px}
+  .merk.fraunces .s-h2{font-size:34px}
+  .merk.fraunces .rw-links .s-h2{font-size:32px}
+  .merk.fraunces .sp-tekst h2{font-size:40px}
+  .merk.fraunces .a-blok h2{font-size:36px}
+  .merk.fraunces .c-naam{font-size:19px}
+  .merk.fraunces .u-tekst h3{font-size:18px}
+}

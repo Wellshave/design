@@ -1,0 +1,227 @@
+{% comment %}
+  Wellshave — blok 11, goed geregeld.
+  Ontwerp en onderbouwing: audits/blok-11-garantie-faq.template.html
+  Vragen zijn blokken met een onderwerp; de onderwerpknoppen bouwen zichzelf
+  uit de onderwerpen die er zijn. Een onderwerp toevoegen doe je door een vraag
+  toe te voegen met een nieuw onderwerp.
+{% endcomment %}
+
+{{ 'ws-garantie.css' | asset_url | stylesheet_tag }}
+
+{% render 'indent-settings', section: section %}
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="ws-zk-klok" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M12 7.2V12l3.2 2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.6 8.4V5.2M4.6 8.4h3.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-zk-schild" viewBox="0 0 24 24"><path d="M12 3.2l7 2.6v5.4c0 4.4-3 8-7 9.6-4-1.6-7-5.2-7-9.6V5.8z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M8.7 12.2l2.3 2.3 4.3-4.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-zk-bus" viewBox="0 0 24 24"><rect x="2.4" y="7.2" width="12" height="9.4" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M14.4 10.3h3.3l3.7 3.3v3h-7z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="7" cy="18.4" r="1.7" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="18.4" r="1.7" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+  <symbol id="ws-zk-pakje" viewBox="0 0 24 24"><path d="M3.4 7.6L12 3.4l8.6 4.2v8.8L12 20.6l-8.6-4.2z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M3.4 7.6L12 11.8l8.6-4.2M12 11.8v8.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-zk-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="ws-zk-mail" viewBox="0 0 24 24"><rect x="2.8" y="5.4" width="18.4" height="13.2" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.4 7l8.6 6 8.6-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-zk-pijl-r" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-zk-hart" viewBox="0 0 24 24"><path d="M12 20.2s-7.4-4.4-7.4-9.4a4.1 4.1 0 017.4-2.4 4.1 4.1 0 017.4 2.4c0 5-7.4 9.4-7.4 9.4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-zk-praat" viewBox="0 0 24 24"><path d="M20.4 13.6a6.8 6.8 0 01-6.8 6.8H7.2L3.6 23v-9.4a6.8 6.8 0 016.8-6.8h3.2a6.8 6.8 0 016.8 6.8z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+</svg>
+
+{%- assign zekerheden = section.blocks | where: 'type', 'zekerheid' -%}
+{%- assign vragen = section.blocks | where: 'type', 'vraag' -%}
+{%- assign onderwerpen = vragen | map: 'settings' | map: 'onderwerp' | uniq -%}
+
+<div class="ws-zk" data-ws-garantie><div class="ws-zk__rand">
+  {%- if section.settings.merk != blank -%}
+    {{ section.settings.merk | image_url: width: 420 | image_tag: class: 'ws-zk__merk', alt: '' }}
+  {%- endif -%}
+  <div class="ws-zk__in">
+
+    <div class="ws-zk__kop">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="ws-zk__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      {%- if section.settings.kop != blank -%}
+        <h2 class="ws-zk__h2">{{ section.settings.kop }}</h2>
+      {%- endif -%}
+      {%- if section.settings.sub != blank -%}
+        <p class="ws-zk__sub">{{ section.settings.sub }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- if zekerheden.size > 0 -%}
+      <div class="ws-zk__vier">
+        {%- for block in zekerheden -%}
+          <div class="ws-zk__kaart" {{ block.shopify_attributes }}>
+            <span class="ws-zk__zegel"><svg><use href="#ws-zk-{{ block.settings.icoon }}"/></svg></span>
+            <p class="ws-zk__groot">{{ block.settings.groot }}</p>
+            <p class="ws-zk__wat">{{ block.settings.wat }}</p>
+            <p class="ws-zk__mits">{{ block.settings.mits }}</p>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <div class="ws-zk__duo">
+      <div class="ws-zk__hulp">
+        {%- if section.settings.merk != blank -%}
+          {{ section.settings.merk | image_url: width: 420 | image_tag: class: 'ws-zk__merk', alt: '' }}
+        {%- endif -%}
+        {%- if section.settings.hulp_kop != blank -%}
+          <p class="ws-zk__hulpkop">{{ section.settings.hulp_kop }}</p>
+        {%- endif -%}
+        {%- if section.settings.hulp_h != blank -%}
+          <h3 class="ws-zk__hulph">{{ section.settings.hulp_h }}</h3>
+        {%- endif -%}
+        {%- if section.settings.hulp_p != blank -%}
+          <p class="ws-zk__hulpp">{{ section.settings.hulp_p }}</p>
+        {%- endif -%}
+        <div class="ws-zk__team">
+          <span class="ws-zk__koppen">
+            {%- for n in (1..3) -%}
+              {%- assign sleutel = 'team_' | append: n -%}
+              {%- assign foto = section.settings[sleutel] -%}
+              {%- if foto != blank -%}
+                <i>{{ foto | image_url: width: 120 | image_tag: alt: '' }}</i>
+              {%- endif -%}
+            {%- endfor -%}
+          </span>
+          <span><b>{{ section.settings.team_kop }}</b><em>{{ section.settings.team_sub }}</em></span>
+        </div>
+        {%- if section.settings.mail != blank -%}
+          <a class="ws-zk__knop" href="mailto:{{ section.settings.mail }}"><svg><use href="#ws-zk-mail"/></svg>{{ section.settings.mail }}</a>
+        {%- endif -%}
+        {%- if section.settings.knop2 != blank -%}
+          <a class="ws-zk__knop ws-zk__knop--rand" href="{{ section.settings.knop2_link | default: '/pages/neem-contact-op' }}">{{ section.settings.knop2 }}<svg><use href="#ws-zk-pijl-r"/></svg></a>
+        {%- endif -%}
+        {%- if section.settings.hulp_slot != blank -%}
+          <p class="ws-zk__slot"><svg><use href="#ws-zk-hart"/></svg>{{ section.settings.hulp_slot }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="ws-zk__vak">
+        {%- if section.settings.vak_kop != blank -%}
+          <p class="ws-zk__vakkop">{{ section.settings.vak_kop }}</p>
+        {%- endif -%}
+        {%- if section.settings.vak_h != blank -%}
+          <h3 class="ws-zk__vakh">{{ section.settings.vak_h }}</h3>
+        {%- endif -%}
+        {%- if section.settings.vak_p != blank -%}
+          <p class="ws-zk__vakp">{{ section.settings.vak_p }}</p>
+        {%- endif -%}
+        <div class="ws-zk__chips">
+          {%- for onderwerp in onderwerpen -%}
+            <button class="ws-zk__chip{% if forloop.first %} is-aan{% endif %}" type="button" data-cat="{{ onderwerp | handle }}">{{ onderwerp }}</button>
+          {%- endfor -%}
+        </div>
+        <div class="ws-zk__lijst">
+          {%- assign eerste_cat = onderwerpen | first | handle -%}
+          {%- assign open_gehad = false -%}
+          {%- for block in vragen -%}
+            {%- assign cat = block.settings.onderwerp | handle -%}
+            {%- assign hoort_erbij = false -%}
+            {%- if cat == eerste_cat -%}{%- assign hoort_erbij = true -%}{%- endif -%}
+            <article class="ws-zk__vraag{% if hoort_erbij and open_gehad == false %} is-aan{% endif %}" data-cat="{{ cat }}" {% unless hoort_erbij %}hidden{% endunless %} {{ block.shopify_attributes }}>
+              <p class="ws-zk__rij"><b>{{ block.settings.vraag }}</b>
+                <span class="ws-zk__teken"><svg><use href="#ws-zk-plus"/></svg></span></p>
+              <div class="ws-zk__antwoord">{{ block.settings.antwoord }}</div>
+            </article>
+            {%- if hoort_erbij -%}{%- assign open_gehad = true -%}{%- endif -%}
+          {%- endfor -%}
+        </div>
+        {%- if section.settings.vak_slot != blank -%}
+          <p class="ws-zk__vakslot"><svg><use href="#ws-zk-praat"/></svg>{{ section.settings.vak_slot }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+
+  </div>
+</div></div>
+
+<script>
+  (function () {
+    document.querySelectorAll('[data-ws-garantie]').forEach(function (sec) {
+      if (sec.dataset.wsKlaar) return;
+      sec.dataset.wsKlaar = '1';
+      var chips = [].slice.call(sec.querySelectorAll('.ws-zk__chip'));
+      var vragen = [].slice.call(sec.querySelectorAll('.ws-zk__vraag'));
+
+      function toon(cat) {
+        chips.forEach(function (c) { c.classList.toggle('is-aan', c.dataset.cat === cat); });
+        var eerste = true;
+        vragen.forEach(function (v) {
+          var mee = v.dataset.cat === cat;
+          v.hidden = !mee;
+          // de bovenste vraag van het gekozen onderwerp staat open: een lijst die
+          // helemaal dichtklapt ziet eruit alsof er niets gebeurd is
+          v.classList.toggle('is-aan', mee && eerste);
+          if (mee) eerste = false;
+        });
+      }
+      chips.forEach(function (c) {
+        c.addEventListener('click', function () { toon(c.dataset.cat); });
+      });
+      vragen.forEach(function (v) {
+        v.addEventListener('click', function () {
+          var open = v.classList.contains('is-aan');
+          vragen.forEach(function (a) { a.classList.remove('is-aan'); });
+          if (!open) v.classList.add('is-aan');
+        });
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "WS · Goed geregeld",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Bovenregel", "default": "Zeker voor je bestelt" },
+    { "type": "inline_richtext", "id": "kop", "label": "Kop (vet = brons, eigen regel)", "default": "Goed geregeld.<b>Voor én na je aankoop.</b>" },
+    { "type": "textarea", "id": "sub", "label": "Subkop", "default": "Probeer rustig thuis, reken op duidelijke garantie en krijg hulp van echte mensen als je ergens niet uitkomt." },
+    { "type": "image_picker", "id": "merk", "label": "Monogram" },
+    { "type": "header", "content": "Hulp van een mens" },
+    { "type": "text", "id": "hulp_kop", "label": "Bovenregel", "default": "Kom je er niet uit?" },
+    { "type": "inline_richtext", "id": "hulp_h", "label": "Kop (vet = goud, eigen regel)", "default": "Je krijgt antwoord<b>van een echt mens.</b>" },
+    { "type": "textarea", "id": "hulp_p", "label": "Tekst", "default": "Stuur ons je vraag. We denken mee over je bestelling, productkeuze of gebruik." },
+    { "type": "image_picker", "id": "team_1", "label": "Teamfoto 1" },
+    { "type": "image_picker", "id": "team_2", "label": "Teamfoto 2" },
+    { "type": "image_picker", "id": "team_3", "label": "Teamfoto 3" },
+    { "type": "text", "id": "team_kop", "label": "Label bij de foto's", "default": "Persoonlijke hulp" },
+    { "type": "text", "id": "team_sub", "label": "Onderregel", "default": "Binnen één werkdag antwoord" },
+    { "type": "text", "id": "mail", "label": "E-mailadres", "default": "contact@wellshave.com" },
+    { "type": "text", "id": "knop2", "label": "Tweede knop", "default": "Stuur een bericht" },
+    { "type": "url", "id": "knop2_link", "label": "Link tweede knop" },
+    { "type": "text", "id": "hulp_slot", "label": "Slotregel", "default": "Geen chatbot als je een mens nodig hebt." },
+    { "type": "header", "content": "Veelgestelde vragen" },
+    { "type": "text", "id": "vak_kop", "label": "Bovenregel", "default": "Veelgestelde vragen" },
+    { "type": "text", "id": "vak_h", "label": "Kop", "default": "Alles wat je wilt weten." },
+    { "type": "text", "id": "vak_p", "label": "Onderregel", "default": "Kies een onderwerp of open een vraag." },
+    { "type": "text", "id": "vak_slot", "label": "Slotregel", "default": "Staat je vraag er niet bij? Stuur ons een bericht." },
+    { "type": "header", "content": "Indent settings" },
+    { "type": "range", "id": "desk_indent_top", "label": "Indent top (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "desk_indent_bottom", "label": "Indent bottom (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_top", "label": "Indent top (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_bottom", "label": "Indent bottom (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "blocks": [
+    {
+      "type": "zekerheid",
+      "name": "Zekerheid",
+      "settings": [
+        { "type": "select", "id": "icoon", "label": "Icoon", "options": [ { "value": "klok", "label": "Klok" }, { "value": "schild", "label": "Schild" }, { "value": "bus", "label": "Bezorging" }, { "value": "pakje", "label": "Pakje" } ], "default": "klok" },
+        { "type": "text", "id": "groot", "label": "Groot" },
+        { "type": "text", "id": "wat", "label": "Waar het over gaat" },
+        { "type": "text", "id": "mits", "label": "Onderregel" }
+      ]
+    },
+    {
+      "type": "vraag",
+      "name": "Vraag",
+      "settings": [
+        { "type": "text", "id": "onderwerp", "label": "Onderwerp", "info": "Vragen met hetzelfde onderwerp komen samen onder één knop." },
+        { "type": "text", "id": "vraag", "label": "Vraag" },
+        { "type": "richtext", "id": "antwoord", "label": "Antwoord" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "WS · Goed geregeld" } ]
+}
+{% endschema %}

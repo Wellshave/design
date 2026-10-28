@@ -1,0 +1,252 @@
+<title>Wellshave v6 homepage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Fraunces:opsz,wght@9..144,700;9..144,800;9..144,900&family=Montserrat:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* ── schil: de pagina om de mockup heen, volgt het thema van de lezer ── */
+:root{
+  --g:#F6F4F0; --kaart:#FFFFFF; --i:#16140F; --i2:#5F584E; --i3:#8C8478; --lijn:#E2DCD2; --acc:#8C5A1A;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  color-scheme:dark; --g:#141210; --kaart:#1D1A17; --i:#EEE9E1; --i2:#B2A89B; --i3:#887F73; --lijn:#2F2A25; --acc:#D7A55C;}}
+:root[data-theme="dark"]{color-scheme:dark; --g:#141210; --kaart:#1D1A17; --i:#EEE9E1; --i2:#B2A89B; --i3:#887F73; --lijn:#2F2A25; --acc:#D7A55C;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--g);color:var(--i);font:400 15px/1.6 "Montserrat",-apple-system,"Segoe UI",sans-serif;padding-inline:20px;-webkit-font-smoothing:antialiased}
+.schil{max-width:1320px;margin:0 auto;padding-block:40px 80px}
+.lbl{font:500 11px/1.4 "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--i3)}
+.kop{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:16px 28px;margin-bottom:22px}
+.keuzes{display:flex;flex-wrap:wrap;gap:14px 20px}
+.kop h1{margin:6px 0 0;font-size:clamp(24px,3.2vw,32px);font-weight:800;letter-spacing:-.02em;line-height:1.15}
+.kop p{margin:8px 0 0;color:var(--i2);max-width:62ch}
+.keuze{display:flex;flex-direction:column;gap:6px}
+.seg{display:inline-flex;border:1px solid var(--lijn);border-radius:8px;padding:3px;background:var(--kaart)}
+.seg button{font:600 13px "Montserrat",sans-serif;border:0;background:none;color:var(--i2);padding:8px 13px;border-radius:6px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--i);color:var(--g)}
+.seg button:focus-visible,a:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.weergaven{display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:24px;align-items:start}
+@media (max-width:980px){.weergaven{grid-template-columns:minmax(0,1fr)}.mob{justify-self:center}}
+.frame-label{margin:0 0 8px}
+.desk{position:relative;overflow:hidden;border:1px solid var(--lijn);border-radius:8px;background:#fff}
+.desk > .schaal{width:1440px;transform-origin:0 0;transform:scale(.6)}
+.mob{width:390px;max-width:100%}
+.mob > .toestel{width:390px;max-width:100%;overflow:hidden;border:1px solid var(--lijn);border-radius:22px;background:#fff}
+.noten{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px 40px;margin-top:40px;padding-top:28px;border-top:1px solid var(--lijn)}
+.noot h2{margin:0 0 10px;font-size:16px;font-weight:700;letter-spacing:-.01em}
+.noot ul{margin:0;padding-left:18px;display:grid;gap:8px;color:var(--i2)}
+.noot li b{color:var(--i);font-weight:600}
+.noot p{margin:0;color:var(--i2)}
+.bronnen{margin-top:40px;padding-top:28px;border-top:1px solid var(--lijn)}
+.bronnen h2{margin:0 0 8px;font-size:18px;font-weight:800;letter-spacing:-.01em}
+.bronnen-intro{margin:0 0 18px;color:var(--i2);max-width:72ch}
+.bron-rijen{display:grid;border-top:1px solid var(--lijn)}
+.bron-groep{font:500 11px/1.4 "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--i3);padding:18px 0 6px}
+.bron{display:grid;grid-template-columns:minmax(0,210px) minmax(0,1fr) auto;gap:6px 22px;padding:12px 0;border-bottom:1px solid var(--lijn);align-items:baseline}
+.bron b{font-weight:700}
+.bron span{color:var(--i2)}
+.bron a{color:var(--acc)}
+.bron em{font:500 11px/1.3 "IBM Plex Mono",ui-monospace,monospace;font-style:normal;color:var(--i3);white-space:nowrap}
+@media (max-width:720px){.bron{grid-template-columns:1fr}.bron em{white-space:normal}}
+
+/* ── mockup: vaste merklook, los van het thema van de lezer ── */
+.site{container-type:inline-size;background:#FFFFFF;color:#1B1814;font-family:"Montserrat",-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+.site *{box-sizing:border-box}
+.site a{color:inherit;text-decoration:none}
+.m-balk{background:#1B1814;color:#EFE8DD;font-size:12.5px;letter-spacing:.02em;text-align:center;padding:9px 16px}
+.m-balk b{font-weight:600;color:#fff}
+.m-nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:18px 100px;border-bottom:1px solid rgba(27,24,20,.09);background:#fff}
+.m-logo{height:22px;aspect-ratio:{{kop_r}};background:{{kop_bg}} left center/contain no-repeat}
+.m-links{display:flex;gap:34px;font-size:14px;font-weight:500;color:#1B1814}
+.m-iconen{display:flex;gap:20px;justify-content:flex-end;color:#1B1814}
+.m-iconen svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.m-burger{display:none}
+
+.m-hero{position:relative;display:flex;align-items:center;min-height:760px;background:#191415;overflow:hidden}
+.m-foto{position:absolute;inset:0;background:{{hero_d_bg}} 50% 34%/cover no-repeat}
+.m-foto::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(18,14,13,.66) 0%,rgba(18,14,13,.42) 33%,rgba(18,14,13,0) 58%)}
+.m-tekst{position:relative;z-index:1;display:flex;flex-direction:column;padding:72px 40px 72px 100px;max-width:700px}
+.m-oog{font-size:12px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:#FFFFFF;margin:0 0 26px}
+.m-h1{margin:0;color:#FFFFFF;font-family:"EB Garamond",Georgia,"Times New Roman",serif;font-weight:500;font-size:88px;line-height:.98;letter-spacing:-.012em}
+.sans .m-h1{font-family:"Montserrat",-apple-system,sans-serif;font-weight:700;font-size:68px;line-height:1.02;letter-spacing:-.035em}
+.m-sub{margin:28px 0 0;font-size:18.5px;line-height:1.55;color:rgba(255,255,255,.86);max-width:26em}
+.m-acties{display:flex;align-items:center;gap:40px;margin-top:38px;flex-wrap:wrap}
+.m-knop{display:inline-flex;align-items:center;gap:14px;background:#F4EEE7;color:#1B1814!important;font-size:15.5px;font-weight:600;padding:20px 52px 20px 56px;border-radius:3px}
+.m-knop svg,.m-link svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.site .m-link{font-size:15.5px;font-weight:600;color:#FFFFFF;border-bottom:1.5px solid rgba(255,255,255,.9);padding-bottom:3px}
+.m-trust{display:grid;grid-template-columns:repeat(2,minmax(0,max-content));gap:24px 64px;margin-top:44px;padding-top:34px;border-top:1px solid rgba(255,255,255,.22);max-width:600px}
+.m-t{display:grid;grid-template-columns:22px auto;gap:2px 14px;align-items:start}
+.m-t svg{width:20px;height:20px;fill:none;stroke:#FFFFFF;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;grid-row:span 2;margin-top:1px}
+.m-t b{font-size:14.5px;font-weight:600;line-height:1.3;color:#FFFFFF}
+.m-t span{font-size:13px;color:rgba(255,255,255,.7);line-height:1.35}
+
+.m-gezien{background:#FAF8F5;padding:30px 0 36px;border-bottom:1px solid rgba(27,24,20,.06)}
+.m-gezien p{margin:0 0 20px;text-align:center;font-size:11.5px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:rgba(27,24,20,.62)}
+.m-baan{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
+.m-rij{display:flex;align-items:center;gap:76px;width:max-content;animation:m-loop 52s linear infinite;padding-left:76px}
+.m-baan:hover .m-rij{animation-play-state:paused}
+@keyframes m-loop{to{transform:translateX(-50%)}}
+.m-lg{height:calc(var(--h)*1px);flex:none;background-position:center;background-size:contain;background-repeat:no-repeat}
+{{logo_css}}
+.m-do{display:flex;align-items:center;gap:9px;flex:none}
+.m-do b{font-weight:700;font-size:21px;letter-spacing:-.015em;color:#3A3734;white-space:nowrap;line-height:1}
+
+/* telefoon: zelfde opmaak, gestuurd op de breedte van de container */
+@container (max-width:749px){
+  .m-balk{font-size:11.5px;padding:8px 12px}
+  .m-nav{grid-template-columns:auto 1fr auto;padding:14px 18px}
+  .m-links{display:none}
+  .m-burger{display:block}
+  .m-iconen{gap:16px}
+  .m-logo{height:17px}
+  .m-hero{align-items:flex-end;min-height:820px}
+  .m-foto{background-image:{{hero_m_url}};background-size:100% auto;background-position:50% 0}
+  .m-foto::after{background:linear-gradient(180deg,rgba(25,20,21,0) 30%,rgba(25,20,21,.6) 44%,rgba(25,20,21,.9) 60%,#191415 82%)}
+  .m-tekst{padding:0 20px 26px;max-width:none;width:100%}
+  .m-oog{font-size:10.5px;letter-spacing:.26em;margin-bottom:12px}
+  .m-h1{font-size:46px;line-height:.98}
+  .sans .m-h1{font-size:39px;line-height:1.04}
+  .m-sub{font-size:15px;margin-top:14px}
+  .m-acties{flex-direction:column;align-items:stretch;gap:14px;margin-top:20px}
+  .m-knop{justify-content:center;padding:17px 22px}
+  .m-link{align-self:center}
+  .m-trust{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 14px;margin-top:24px;padding-top:20px}
+  .m-t{grid-template-columns:18px auto;gap:1px 9px}
+  .m-t svg{width:17px;height:17px}
+  .m-t b{font-size:13px}
+  .m-t span{font-size:11.5px}
+  .m-gezien{padding:22px 0 26px}
+  .m-gezien p{font-size:10px;margin-bottom:16px}
+  .m-rij{gap:44px;padding-left:44px;animation-duration:44s}
+  .m-lg{height:calc(var(--h)*.7px)}
+  .m-do{gap:7px}
+  .m-do b{font-size:15px}
+}
+{{blokken_css}}
+@media (prefers-reduced-motion:reduce){.m-rij{animation:none}.k,.k-golf,.k-foto,.z,.z-foto{transition:none}.rw-baan{animation:none}}
+</style>
+
+<div class="schil">
+  <div class="kop">
+    <div>
+      <span class="lbl">Wellshave · ontwerp v6 · hele homepage</span>
+      <h1>Homepage v6, in de Wellshave-huisstijl</h1>
+      <p>Hero en Gezien bij, en daaronder zes nieuwe blokken in dezelfde rust: bestsellers zoals je Wellshine-voorbeeld, kies jouw plek, reviews, sets, vragen en de afsluiter met footer. Ga op desktop met je muis over een productkaart voor de hover.</p>
+    </div>
+    <div class="keuzes">
+      <div class="keuze">
+        <span class="lbl">Stijl</span>
+        <div class="seg" role="group" aria-label="Stijl">
+          <button type="button" id="k-sans" aria-pressed="true">Wellshave-merk</button>
+          <button type="button" id="k-fr" aria-pressed="false">Merk met Fraunces</button>
+          <button type="button" id="k-serif" aria-pressed="false">Zonder merklaag</button>
+        </div>
+      </div>
+      <div class="keuze">
+        <span class="lbl">Kortingslabel</span>
+        <div class="seg" role="group" aria-label="Kortingslabel">
+          <button type="button" id="l-pct" aria-pressed="true">30% Korting</button>
+          <button type="button" id="l-eur" aria-pressed="false">Bespaar €25,70</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="weergaven">
+    <div>
+      <p class="lbl frame-label">Desktop · 1440 px</p>
+      <div class="desk" id="desk"><div class="schaal" id="schaal">{{site}}</div></div>
+    </div>
+    <div class="mob">
+      <p class="lbl frame-label">Telefoon · 390 px</p>
+      <div class="toestel">{{site}}</div>
+    </div>
+  </div>
+
+  <div class="noten">
+    <div class="noot">
+      <h2>Waarom het niet als Wellshave voelde</h2>
+      <ul>
+        <li><b>Een serif die niet van jullie is.</b> Jullie merkregels zeggen: alleen Montserrat, een display-serif breekt de herkenning. V6 stond in een Wellshine-serif.</li>
+        <li><b>De gouden tweede regel ontbrak.</b> Elke kop bestaat bij Wellshave uit twee regels: de eerste stelt vast, de tweede loopt in goud. Dat staat nu op elke kop, in de hero op "Wellshave." zelf.</li>
+        <li><b>Knoppen en hoeken.</b> Merk: gouden pilknoppen en afronding 12, 18 en 26. V6 had rechthoekige crème knoppen en hoeken van 4 pixels.</li>
+        <li><b>Zand en carbon.</b> Zand #F5F1EA is het herkenningssignaal, donkere vlakken zijn carbon. Die staan nu in het ritme: wit, zand, carbon.</li>
+        <li><b>Het S-teken</b> keert terug als klein goud teken voor elk label en als groot watermerk in de reviewmuur, het uitgelichte blok en de afsluiter.</li>
+        <li>De opbouw van v6 blijft: dezelfde blokken, dezelfde rust. Met de schakelaar "Zonder merklaag" bovenaan zie je het verschil.</li>
+        <li><b>Merk met Fraunces</b> is een proef: de koppen in Fraunces ExtraBold, een zware display-serif, en de rest in Montserrat. Kleuren, goud, knoppen en het S-teken blijven gelijk. Let op: jullie merkregels schrijven Montserrat als enige letter voor.</li>
+      </ul>
+    </div>
+    <div class="noot">
+      <h2>De nieuwe blokken</h2>
+      <ul>
+        <li><b>Bestsellers.</b> Zoals je voorbeeld: grijze beeldvlakken, naam, prijs met van-prijs en label, drie kenmerken als pilletjes. Bij hover wordt het vlak een tint dieper, verschijnt het Wellshave-teken flauw achter het apparaat en tilt de kaart op. Bovenaan elke kaart de Trustpilot-regel.</li>
+        <li><b>Kies jouw plek</b> zoals je referentie: vier sfeerfoto's met afgeronde hoeken, de plek in serif met een pijl erop en één regel eronder. De foto's komen uit jullie eigen Shopify-bestanden: de Groom Guard voor de spiegel, de herfstfoto met de Gentleman Shaver, het kaalscheren uit de listicle en de neustrimmer-video.</li>
+        <li><b>Reviews als muur, direct onder de bestsellers</b>, zoals je voorbeeld: links de Trustpilot-score, rechts twee kolommen die langzaam tegen elkaar in schuiven en stilstaan als je erop wijst. Acht echte Trustpilot-reviews uit de huidige homepage-instellingen. Het merk zit in de details: de productnaam in goud boven elke review, de initiaal in een goudcirkel en een groot aanhalingsteken op de achtergrond. De sterren blijven Trustpilot-groen.</li>
+        <li><b>Uitgelicht: Groom Guard</b>, onder Waar wil je trimmen?, zoals je referentie: links de macrofoto van de keramische meskop, rechts een donker vlak met een warme gloed, een vraag als kop en één knop. De gouden lijnen uit het voorbeeld heb ik weggelaten, net als de zandgolven eerder. De specificaties komen uit de productomschrijving.</li>
+        <li><b>Sets</b> in dezelfde kaart als de bestsellers, met in één zin wat erin zit.</li>
+        <li><b>Vragen.</b> Zeven vragen van de huidige site. Links de weg naar een echt mens, zonder naam erbij.</li>
+        <li><b>Afsluiter en footer</b> donker, zoals de hero, zodat de pagina begint en eindigt in dezelfde sfeer. De footer is in het Nederlands; live staan er nog Engelse links als Shipping Policy en Our Story.</li>
+      </ul>
+    </div>
+    <div class="noot">
+      <h2>Waar de cijfers vandaan komen</h2>
+      <ul>
+        <li><b>Prijzen, van-prijzen en reviews</b> komen live uit Shopify, opgehaald op 25 oktober 2026.</li>
+        <li><b>Bestsellers</b> zijn de vier apparaten met de meeste bestellingen in de laatste 30 dagen: Flex Guard 69, Groom Guard 65, Groom Guard PRO 55, Neustrimmer Advance 44. Washbag, messen en tassen tellen niet mee.</li>
+        <li><b>Het label rondt af naar beneden</b>, net als op de live site. Daarom staat de Groom Guard op 29% en de andere twee op 30%.</li>
+        
+        <li><b>Trustpilot</b> staat vandaag op 4,5 uit 1.088 reviews. Op elke productkaart staat nu de Trustpilot-regel zoals hun widget ("4,5 uit 5 ★ Trustpilot") in plaats van de productreviews. De live site toont nog 4,4.</li>
+      </ul>
+    </div>
+    <div class="noot">
+      <h2>Wat ik van je nodig heb</h2>
+      <ul>
+        <li><b>Merklaag of niet</b>, en <b>welk kortingslabel</b>? Beide wissel je hierboven.</li>
+        <li><b>Barber Bro 3.0</b> staat op −14 voorraad en wordt doorverkocht. Bij die set klopt "morgen in huis" dus niet. Houden, of een set die op voorraad is ervoor in de plaats, zoals de Body &amp; Nose Bundel?</li>
+        <li><b>Barber Bro 2.0</b> is met 33 bestellingen de best verkochte set, maar heeft geen van-prijs en is opgevolgd door de 3.0. Ik heb hem weggelaten.</li>
+        <li><b>De Ondernemer, AD en de herfstfoto</b> staan nog open, zie de bronnen hieronder.</li>
+      </ul>
+    </div>
+  </div>
+
+  <section class="bronnen" aria-labelledby="bronnen-kop">
+    <h2 id="bronnen-kop">Waar Wellshave genoemd wordt</h2>
+    <p class="bronnen-intro">Zelf nagezocht op 25 oktober 2026. AD, ED en De Ondernemer horen bij DPG Media, en DPG blokkeert verzoeken vanaf deze server; die drie heb ik daarom niet zelf kunnen openen.</p>
+    <div class="bron-rijen">
+      <div class="bron-groep">Pers</div>
+      <div class="bron"><b>Eindhovens Dagblad</b><span>30 september 2025. "Dustin (26) uit Helmond was eerst loodgieter en verkocht massagematten, maar met zijn neustrimmer slaat hij nu z'n slag." Gevonden in het nieuwsoverzicht van <a href="https://companyinfo.nl/organisatieprofiel/detailhandel-gespecialiseerd-in-overige-nieuwe-artikelen-rest/wellshave-b-v-helmond-91463823-000057139946" target="_blank" rel="noopener">companyinfo.nl</a>.</span><em>bevestigd</em></div>
+      <div class="bron"><b>AD</b><span>Genoemd op jullie eigen Instagram. Waarschijnlijk hetzelfde regionale stuk, dat DPG vaak ook op AD.nl zet. Stuur de link, dan staat de bron vast.</span><em>jouw opgave</em></div>
+      <div class="bron"><b>De Ondernemer</b><span>Niet terug te vinden van hieruit. Stuur de link mee.</span><em>jouw opgave</em></div>
+      <div class="bron"><b>Men's Health</b><span>Genoemd op jullie Instagram en staat al op de huidige site. Geen artikel gevonden op menshealth.nl.</span><em>jouw opgave</em></div>
+      <div class="bron-groep">Reviews en vergelijkers</div>
+      <div class="bron"><b>Baardtips.com</b><span><a href="https://baardtips.com/scheren/beste-neustrimmer/" target="_blank" rel="noopener">De 10 beste neustrimmers van 2026</a>: de Wellshave 3 in 1 Neustrimmer Advance op nummer 1. Bijgewerkt 20 september 2026.</span><em>bevestigd</em></div>
+      <div class="bron"><b>De Betere Wereld</b><span><a href="https://www.debeterewereld.nl/lichaam-geest/neushaartrimmer/" target="_blank" rel="noopener">Beste neushaartrimmer 2026</a>: de Wellshave 4 in 1 Neustrimmer Ultimate als beste keuze. Bijgewerkt 3 september 2026.</span><em>bevestigd</em></div>
+      <div class="bron"><b>Review.nl en Kieskeurig</b><span><a href="https://review.nl/testpanels/resultaten/1501" target="_blank" rel="noopener">Testpanel</a> Neustrimmer Ultra: 8,5, met 20 testers, 18 mei tot 5 juni 2026. Hetzelfde cijfer staat op het Kieskeurig-label dat jullie al gebruiken.</span><em>bevestigd</em></div>
+      <div class="bron"><b>Scheervrienden.nl</b><span><a href="https://scheervrienden.nl/wellshave-bodygroomer-pro-review-veilig-krachtig-en-gemaakt-voor-gevoelige-plekken/" target="_blank" rel="noopener">Review Bodygroomer PRO</a> (voorheen scheren.nl).</span><em>niet in strook</em></div>
+      <div class="bron"><b>Scheerheld.nl</b><span>Reviews van de <a href="https://scheerheld.nl/wellshave-6-in-1-review/" target="_blank" rel="noopener">6-in-1</a> en de <a href="https://scheerheld.nl/wellshave-bodygroomer-mannen-pro-review/" target="_blank" rel="noopener">Bodygroomer Pro</a>.</span><em>niet in strook</em></div>
+      <div class="bron"><b>Bijmeer.nl, Body-groomer.nl, Dehetbeste.nl</b><span><a href="https://www.bijmeer.nl/wellshave-review/" target="_blank" rel="noopener">Merkreview</a>, <a href="https://body-groomer.nl/wellshave-bodygroomer-pro-review/" target="_blank" rel="noopener">review Bodygroomer Pro</a> en <a href="https://dehetbeste.nl/wellshave-bodygroomer-mannen-trimmer-voor/" target="_blank" rel="noopener">review Bodygroomer</a>. Kleine sites zonder herkenbaar logo; in de strook zouden ze hem goedkoper maken.</span><em>niet in strook</em></div>
+      <div class="bron-groep">Winkels</div>
+      <div class="bron"><b>bol</b><span>Tientallen Wellshave-producten, waaronder de <a href="https://www.bol.com/nl/nl/p/wellshave-bodygroomer-mannen-pro-body-trimmer-heren-shaver-voor-schaamstreek-lichaam/9300000107559467/" target="_blank" rel="noopener">Bodygroomer PRO</a>.</span><em>bevestigd</em></div>
+      <div class="bron"><b>BCC</b><span>Neustrimmer Basic, 2-in-1 Premium en <a href="https://www.bcc.nl/product/wellshave-4-in-1-neustrimmer-ultimate-all-in-one-wenkbrauw-en-oorhaar-trimmer-neushaartrimmer-voor-mannen" target="_blank" rel="noopener">4-in-1 Ultimate</a>.</span><em>bevestigd</em></div>
+      <div class="bron"><b>MediaMarkt</b><span>De 4-in-1 Ultra staat met een MediaMarkt-prijs in de Kieskeurig-vergelijking. Op mediamarkt.nl zelf kon ik niet zoeken; die blokkeert deze server.</span><em>bevestigd via Kieskeurig</em></div>
+      <div class="bron"><b>Blokker</b><span>Staat al op jullie site. Zelf niet teruggevonden.</span><em>jouw opgave</em></div>
+    </div>
+  </section>
+</div>
+
+<script>
+(function(){
+  var schaal=document.getElementById('schaal'), desk=document.getElementById('desk');
+  function fit(){ var s=desk.clientWidth/1440; schaal.style.transform='scale('+s+')'; desk.style.height=Math.ceil(schaal.offsetHeight*s)+'px'; }
+  if(window.ResizeObserver) new ResizeObserver(fit).observe(desk);
+  window.addEventListener('load',fit); fit();
+  var knoppen={merk:document.getElementById('k-sans'),fraunces:document.getElementById('k-fr'),clean:document.getElementById('k-serif')};
+  function zet(st){ document.body.classList.toggle('merk',st!=='clean'); document.body.classList.toggle('fraunces',st==='fraunces');
+    for(var k in knoppen) knoppen[k].setAttribute('aria-pressed',String(k===st)); try{localStorage.setItem('ws-stijl',st)}catch(e){} fit(); }
+  for(var k in knoppen)(function(k){knoppen[k].addEventListener('click',function(){zet(k)})})(k);
+  var st='merk'; try{ st=localStorage.getItem('ws-stijl')||'merk'; }catch(e){} zet(knoppen[st]?st:'merk');
+  var lp=document.getElementById('l-pct'), le=document.getElementById('l-eur');
+  function label(e){ document.body.classList.toggle('euro',e); lp.setAttribute('aria-pressed',String(!e)); le.setAttribute('aria-pressed',String(e)); try{localStorage.setItem('ws-label',e?'euro':'pct')}catch(x){} fit(); }
+  lp.addEventListener('click',function(){label(false)}); le.addEventListener('click',function(){label(true)});
+  try{ if(localStorage.getItem('ws-label')==='euro') label(true); }catch(x){}
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fit);
+})();
+</script>

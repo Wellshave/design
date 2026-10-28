@@ -1,0 +1,129 @@
+{%- if product_card.id != blank -%}
+  {% liquid
+    assign main_class = "product-card"
+    assign has_quick_add = has_quick_add | default: false
+    assign current_variant = product_card.selected_or_first_available_variant
+  
+    if settings.enable_quick_add and product_card.has_only_default_variant and current_variant.available
+      assign has_quick_add = true
+    endif
+
+    if card_size == "small"
+      assign main_class = "product-card product-card--small"
+    endif
+  %}
+  
+  <product-card class="{{ main_class }}">
+    <div class="product-card__media-wrapper">
+      <a href="{{ product_card.url }}" class="product-card__media">
+        {%- if product_card.featured_image != blank -%}
+          {%- render 'media', 
+            media: product_card.featured_image, 
+            size: "forth",
+            type: "all"
+          -%}
+        {%- else -%}
+          {{ 'product-apparel-1' | placeholder_svg_tag }}
+        {%- endif -%}
+      </a>
+
+      {%- if product_card.metafields.custom.redesign_product_badge != blank -%}
+        <div class="product-card__badge">
+          {{ product_card.metafields.custom.redesign_product_badge | image_url: width: 160 | image_tag }}
+        </div>
+      {%- endif -%}
+
+      {%- if product_card.metafields.custom.tags != blank -%}
+        <div class="product-card__tags">
+          {%- for tag in product_card.metafields.custom.tags.value -%}
+            <div 
+              class="product-card__tag"
+              style="background-color: {{ tag.background }}; color: {{ tag.color }};"
+            >
+              {{- tag.label -}}
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+  
+      {%- if has_quick_add -%}
+        <button 
+          type="button" 
+          name="quick-add" 
+          class="product-card__add" 
+          data-variant="{{ current_variant.id }}"
+        >
+          {{- 'icon-loading.svg' | inline_asset_content -}}
+          {{- 'icon-cart.svg' | inline_asset_content -}}
+        </button>
+      {%- endif -%}
+    </div>
+  
+    <div class="product-card__content">
+      {%- if settings.card_reviews != blank -%}
+        <div class="product-card__reviews body-sm">
+          <span>{{ settings.card_reviews }}</span>
+          {{ 'icon-trustpilot-logo.svg' | inline_asset_content }}
+        </div>
+      {%- endif -%}
+  
+      <a href="{{ product_card.url }}" class="product-card__title body-lg">
+        {{- product_card.title -}}
+      </a>
+  
+      {%- if product_card.metafields.custom.subtitle != blank -%}
+        <p class="product-card__description body-md">
+          {{- product_card.metafields.custom.subtitle -}}
+        </p>
+      {%- endif -%}
+  
+      <p class="product-card__price body-lg">
+        <span class="product-card__price-main">
+          {%- render 'price-formated', price: current_variant.price -%}  
+        </span>
+        {%- if current_variant.compare_at_price > current_variant.price -%}
+          <span class="product-card__price-compare">
+            {%- render 'price-formated', price: current_variant.compare_at_price -%}  
+          </span>
+          {%- comment -%}
+            Hetzelfde kortingslabel als op de homepage en de collectiepagina:
+            een gouden pil met het percentage, naar beneden afgerond.
+            ws-spaar.css staat in de <head>, dus hier niet nog eens inladen.
+          {%- endcomment -%}
+          {% render 'ws-spaar', van: current_variant.compare_at_price, nu: current_variant.price, zonder_css: true %}
+        {%- endif -%}
+      </p>
+    </div>
+  </product-card>
+{%- else -%}
+  <div class="product-card">
+    <div class="product-card__media-wrapper">
+      <div class="product-card__media">
+        {{ 'product-apparel-1' | placeholder_svg_tag }}
+      </div>
+    </div>
+  
+    <div class="product-card__content">
+      {%- if settings.card_reviews != blank -%}
+        <div class="product-card__reviews body-sm">
+          <span>{{ settings.card_reviews }}</span>
+          {{ 'icon-trustpilot-logo.svg' | inline_asset_content }}
+        </div>
+      {%- endif -%}
+  
+      <p class="product-card__title body-lg">
+        {{ 'product_card.placeholder_title' | t }}
+      </p>
+  
+      <p class="product-card__description body-md">
+        {{ 'product_card.placeholder_description' | t }}
+      </p>
+  
+      <p class="product-card__price body-lg">
+        <span class="product-card__price-main">
+          {%- render 'price-formated', price: 0 -%}  
+        </span>
+      </p>
+    </div>
+  </div>
+{%- endif -%}

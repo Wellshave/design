@@ -22,7 +22,7 @@ om als artikel te lezen en te redactioneel om als winkel te overtuigen.
 |---|---|---|
 | Frame | Een landingspagina van de winkel | Een uitgave met masthead en rubrieken |
 | De advertentie belooft | Een product, een aanbod, een resultaat | Informatie, uitleg, een verhaal |
-| Opmaak | Montserrat, kaarten, goudaccenten | Source Serif, hairlines, zandvlakken |
+| Opmaak | Inter Tight en Inter, kaarten, goud als verloop | Source Serif, hairlines, zandvlakken |
 | Boven de vouw | Hero met beeld en koopknop | Kicker, leestijd, deelknoppen |
 | Verkoopmomenten | Vanaf de hero, door de hele pagina | Twee stroken in de tekst, aanbod onderaan |
 | Zijkolom | Nee | Ja: in het kort, feiten, verdieping |
@@ -82,9 +82,10 @@ voordat je bouwt:
 
 ## 5. Wat nooit mag afwijken
 
-- **Tokens en letter.** Montserrat, `--sand:#F5F1EA`, `--ink:#111111`, `--bronze:#BC813E`,
+- **Tokens en letter.** Inter Tight voor koppen en Inter voor tekst (sinds de homepage v7, zie deel 0 en 4 van de merklaag), `--sand:#F5F1EA`, `--ink:#111111`, `--bronze:#BC813E`,
   `--gold:#F5D18A`, `--carbon:#191816`. Het redactionele register is de enige uitzondering en
   argumenteert die zelf.
+- **Labels, links en rijen zoals de homepage v7.** Kortingslabels klein, rechthoekig en carbon; tekstlinks met een gouden pijl in plaats van knoppen, behalve de koopknop; schuifrijen met een dunne voortgangsbalk. Zie deel 6 en 7 van de merklaag.
 - **Nooit base64.** Beelden en stylesheet naar de Shopify CDN.
 - **Alles in `<div class="gg-lp">`** en elke selector daarbinnen gescoopt, anders sloopt de
   reset de themaheader en -footer.

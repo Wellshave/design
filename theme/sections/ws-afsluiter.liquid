@@ -1,0 +1,282 @@
+{% comment %}
+  Wellshave — blok 12, de afsluiter.
+  Ontwerp en onderbouwing: audits/blok-12-afsluiter.template.html
+  Alle teksten zijn instellingen, zodat ze in de thema-editor aanpasbaar zijn
+  zonder de code aan te raken.
+{% endcomment %}
+
+{% render 'indent-settings', section: section %}
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="ws-af-pijl" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-af-quiz" viewBox="0 0 24 24"><path d="M4 6.4h8.6M4 12h8.6M4 17.6h5.4" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M15.4 16.3l2 2 3.6-4.2" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-af-ster" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01z"/></symbol>
+  <symbol id="ws-af-klok" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 7.2V12l3.2 2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-af-doos" viewBox="0 0 24 24"><path d="M3.4 7.6L12 3.4l8.6 4.2v8.8L12 20.6l-8.6-4.2z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M3.4 7.6L12 11.8l8.6-4.2M12 11.8v8.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+</svg>
+
+<div class="ws-af section-{{ section.id }}">
+  {%- if section.settings.merk != blank -%}
+    <div class="ws-af__merk">{{ section.settings.merk | image_url: width: 840 | image_tag: alt: '' }}</div>
+  {%- endif -%}
+  <div class="ws-af__gloed"></div>
+
+  <div class="ws-af__in">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="ws-af__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.kop != blank -%}
+      <h2 class="ws-af__h2">{{ section.settings.kop | replace: '|br|', '<br>' }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.sub != blank -%}
+      <p class="ws-af__sub">{{ section.settings.sub }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.cta1_label != blank or section.settings.cta2_label != blank -%}
+      <div class="ws-af__knoppen">
+        {%- if section.settings.cta1_label != blank -%}
+          <a class="ws-af__cta" href="{{ section.settings.cta1_link | default: '#' }}">
+            {{- section.settings.cta1_label -}}
+            <svg><use href="#ws-af-pijl"/></svg>
+          </a>
+        {%- endif -%}
+        {%- if section.settings.cta2_label != blank -%}
+          <a class="ws-af__cta ws-af__cta--rand" href="{{ section.settings.cta2_link | default: '/pages/quiz' }}">
+            <svg><use href="#ws-af-quiz"/></svg>
+            {{- section.settings.cta2_label -}}
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.reden != blank -%}
+      <p class="ws-af__reden">
+        <svg><use href="#ws-af-klok"/></svg>
+        <span>{{ section.settings.reden }}</span>
+      </p>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="ws-af__bewijs">
+        {%- for block in section.blocks -%}
+          <div class="ws-af__cel" {{ block.shopify_attributes }}>
+            {%- if block.settings.soort == 'sterren' -%}
+              {%- assign heel = block.settings.sterren | floor -%}
+              <span class="ws-af__sterren">
+                {%- for i in (1..5) -%}
+                  <i class="{% if i > heel %}is-half{% endif %}"><svg><use href="#ws-af-ster"/></svg></i>
+                {%- endfor -%}
+              </span>
+            {%- elsif block.settings.waarde != blank -%}
+              <p class="ws-af__groot">
+                {%- if block.settings.icoon != 'geen' -%}
+                  <svg><use href="#ws-af-{{ block.settings.icoon }}"/></svg>
+                {%- endif -%}
+                {{- block.settings.waarde -}}
+              </p>
+            {%- endif -%}
+            {%- if block.settings.label != blank -%}
+              <p class="ws-af__klein">{{ block.settings.label }}</p>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.nieuws_tonen -%}
+      <div class="ws-af__nieuws">
+        <div class="ws-af__nieuwstekst">
+          {%- if section.settings.nieuws_kop != blank -%}<b>{{ section.settings.nieuws_kop }}</b>{%- endif -%}
+          {%- if section.settings.nieuws_sub != blank -%}<em>{{ section.settings.nieuws_sub }}</em>{%- endif -%}
+        </div>
+        {%- form 'customer', class: 'ws-af__veld' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <input
+            type="email"
+            name="contact[email]"
+            required
+            autocomplete="email"
+            aria-label="{{ section.settings.nieuws_placeholder }}"
+            placeholder="{{ section.settings.nieuws_placeholder }}">
+          <button type="submit">{{ section.settings.nieuws_knop }}</button>
+        {%- endform -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "WS · Afsluiter",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Bovenregel", "default": "Klaar om te kiezen" },
+    { "type": "inline_richtext", "id": "kop", "label": "Kop (vet = goud, |br| = regeleinde)", "default": "Eén apparaat voor de plek <b>waar jij iets weg wilt hebben.</b>" },
+    { "type": "textarea", "id": "sub", "label": "Subkop", "default": "Kies zelf het apparaat, of laat de quiz het in een paar vragen voor je doen — voor jezelf of voor iemand anders." },
+    { "type": "header", "content": "Knoppen" },
+    { "type": "text", "id": "cta1_label", "label": "Hoofdknop", "default": "Bekijk alle apparaten" },
+    { "type": "url", "id": "cta1_link", "label": "Link hoofdknop" },
+    { "type": "text", "id": "cta2_label", "label": "Tweede knop", "default": "Start de quiz" },
+    { "type": "url", "id": "cta2_link", "label": "Link tweede knop", "info": "Leeg = /pages/quiz, de quizpagina." },
+    { "type": "header", "content": "Reden om vandaag te beslissen" },
+    { "type": "inline_richtext", "id": "reden", "label": "Regel", "default": "Vandaag beslissen kost je niets: <b>je hebt honderd dagen om van gedachten te veranderen.</b>" },
+    { "type": "header", "content": "Achtergrond" },
+    { "type": "image_picker", "id": "merk", "label": "Monogram", "info": "Wordt groot en zacht achter de tekst gezet." },
+    { "type": "header", "content": "Nieuwsbrief" },
+    { "type": "checkbox", "id": "nieuws_tonen", "label": "Nieuwsbriefregel tonen", "default": true },
+    { "type": "text", "id": "nieuws_kop", "label": "Kop", "default": "Nog niet zover?" },
+    { "type": "text", "id": "nieuws_sub", "label": "Subregel", "default": "10% korting op je eerste bestelling, plus tips die je kunt gebruiken." },
+    { "type": "text", "id": "nieuws_placeholder", "label": "Placeholder", "default": "jouw@e-mail.nl" },
+    { "type": "text", "id": "nieuws_knop", "label": "Knop", "default": "Aanmelden" },
+    { "type": "header", "content": "Indent settings" },
+    { "type": "range", "id": "desk_indent_top", "label": "Indent top (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "desk_indent_bottom", "label": "Indent bottom (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_top", "label": "Indent top (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_bottom", "label": "Indent bottom (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "blocks": [
+    {
+      "type": "bewijs",
+      "name": "Bewijscel",
+      "settings": [
+        { "type": "select", "id": "soort", "label": "Soort", "options": [ { "value": "tekst", "label": "Getal of tekst" }, { "value": "sterren", "label": "Sterren" } ], "default": "tekst" },
+        { "type": "range", "id": "sterren", "label": "Aantal sterren (heel)", "min": 0, "max": 5, "step": 1, "default": 4 },
+        { "type": "select", "id": "icoon", "label": "Icoon", "options": [ { "value": "geen", "label": "Geen" }, { "value": "doos", "label": "Doos" }, { "value": "klok", "label": "Klok" } ], "default": "geen" },
+        { "type": "text", "id": "waarde", "label": "Waarde", "default": "200.000+" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Bestellingen sinds 2021" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "WS · Afsluiter",
+      "blocks": [
+        { "type": "bewijs", "settings": { "soort": "sterren", "sterren": 4, "label": "4,5 uit 950+ beoordelingen" } },
+        { "type": "bewijs", "settings": { "soort": "tekst", "icoon": "doos", "waarde": "200.000+", "label": "Bestellingen sinds 2021" } },
+        { "type": "bewijs", "settings": { "soort": "tekst", "icoon": "klok", "waarde": "Voor 23:59", "label": "Besteld, morgen in huis" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+/* ═══ Wellshave — blok 12, de afsluiter ═══
+   Bron: audits/blok-12-afsluiter.template.html. In de mockup werd mobiel
+   nagebootst met een extra klasse .af-m; hier is dat een echte media query.
+   Alles staat onder .ws-af zodat thema-CSS er niet doorheen kan lekken. */
+
+.ws-af{position:relative;font-family:"Montserrat",sans-serif;background:#0B0B0A;color:#fff;
+  padding:66px 40px 0;overflow:hidden}
+.ws-af *{box-sizing:border-box}
+.ws-af p{margin:0;max-width:none}
+
+/* het monogram groot en zacht achter de tekst, plus een gouden gloed */
+.ws-af__merk{position:absolute;right:-90px;top:-70px;width:420px;opacity:.05;pointer-events:none;
+  filter:brightness(0) invert(1)}
+.ws-af__merk img{width:100%;height:auto;display:block}
+.ws-af__gloed{position:absolute;left:50%;top:-180px;width:760px;height:420px;pointer-events:none;
+  transform:translateX(-50%);
+  background:radial-gradient(closest-side,rgba(245,209,138,.16),transparent 72%)}
+
+.ws-af__in{position:relative;z-index:1;max-width:1180px;margin:0 auto;
+  display:flex;flex-direction:column;align-items:center;gap:22px;text-align:center;min-width:0}
+.ws-af__eyebrow{display:inline-flex;align-items:center;gap:15px;
+  font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#BC813E}
+.ws-af__eyebrow::before,.ws-af__eyebrow::after{content:"";width:40px;height:1px;
+  background:rgba(188,129,62,.55)}
+.ws-af__h2{font-size:46px;line-height:112%;font-weight:700;letter-spacing:-.034em;margin:0;
+  max-width:17ch;color:#fff;text-transform:none}
+.ws-af__h2 b,.ws-af__h2 strong{font-weight:700;color:#F5D18A}
+.ws-af__sub{font-size:16px;line-height:158%;color:rgba(255,255,255,.62);max-width:56ch}
+
+/* de knoppen */
+.ws-af__knoppen{display:flex;flex-wrap:wrap;gap:13px;justify-content:center;margin-top:4px}
+.ws-af__cta{display:inline-flex;align-items:center;gap:13px;
+  background:linear-gradient(135deg,#F5D18A 0%,#D8AC5D 52%,#BC813E 100%);color:#111;
+  font-weight:700;font-size:13.5px;letter-spacing:.12em;text-transform:uppercase;
+  padding:19px 30px;border-radius:100px;text-decoration:none;border:0;
+  box-shadow:0 16px 38px -20px rgba(245,209,138,.9)}
+.ws-af__cta:hover{color:#111;text-decoration:none}
+.ws-af__cta svg{width:17px;height:17px}
+.ws-af__cta--rand{background:transparent;border:1px solid rgba(255,255,255,.3);color:#fff;
+  box-shadow:none}
+.ws-af__cta--rand:hover{color:#fff}
+
+/* de reden om vandaag te beslissen */
+.ws-af__reden{display:inline-flex;align-items:center;gap:12px;margin-top:2px;
+  border:1px solid rgba(245,209,138,.3);background:rgba(245,209,138,.06);
+  border-radius:100px;padding:12px 22px;font-size:13.5px;color:rgba(255,255,255,.78)}
+.ws-af__reden svg{width:17px;height:17px;color:#F5D18A;flex:none}
+.ws-af__reden b,.ws-af__reden strong{color:#fff;font-weight:600}
+.ws-af__reden p{display:inline}
+
+/* de bewijsregel */
+.ws-af__bewijs{display:flex;align-items:stretch;justify-content:center;gap:0;margin-top:16px;
+  border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);
+  width:100%}
+.ws-af__cel{flex:1;padding:22px 26px;display:flex;flex-direction:column;align-items:center;gap:6px;
+  min-width:0}
+.ws-af__cel + .ws-af__cel{border-left:1px solid rgba(255,255,255,.12)}
+.ws-af__groot{font-size:22px;font-weight:700;letter-spacing:-.02em;color:#fff;line-height:1.2;
+  display:flex;align-items:center;gap:9px}
+.ws-af__groot svg{width:19px;height:19px;color:#F5D18A;flex:none}
+.ws-af__klein{font-size:11.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(255,255,255,.5);line-height:150%}
+.ws-af__sterren{display:flex;gap:3px}
+.ws-af__sterren i{width:19px;height:19px;background:#00B67A;display:grid;place-items:center;
+  position:relative}
+.ws-af__sterren i.is-half{background:#3C3A36}
+.ws-af__sterren i.is-half::before{content:"";position:absolute;inset:0;width:50%;background:#00B67A}
+.ws-af__sterren svg{width:12px;height:12px;fill:#fff;color:#fff;position:relative}
+
+/* de nieuwsbriefregel onderaan */
+.ws-af__nieuws{width:100%;margin-top:0;padding:24px 0 30px;
+  display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap}
+.ws-af__nieuwstekst{text-align:left;min-width:0}
+.ws-af__nieuwstekst b{display:block;font-size:14.5px;font-weight:600;color:#fff;line-height:1.35}
+.ws-af__nieuwstekst em{display:block;font-style:normal;font-size:12.5px;
+  color:rgba(255,255,255,.5);margin-top:3px}
+.ws-af__veld{display:flex;align-items:center;gap:9px;background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.16);border-radius:100px;padding:7px 7px 7px 20px;
+  min-width:0;margin:0}
+.ws-af__veld input[type="email"]{flex:1;min-width:0;font-family:inherit;font-size:13.5px;
+  color:#fff;background:none;border:0;outline:0;padding:0 16px 0 0;height:auto;box-shadow:none}
+.ws-af__veld input[type="email"]::placeholder{color:rgba(255,255,255,.4)}
+.ws-af__veld button{flex:none;background:#fff;color:#111;font-family:inherit;font-size:12px;
+  font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:13px 20px;
+  border:0;border-radius:100px;cursor:pointer}
+.ws-af__bedankt{font-size:13px;color:#F5D18A;margin-top:8px}
+
+/* ── mobiel ── */
+@media (max-width:749px){
+  .ws-af{padding:44px 18px 0}
+  .ws-af__merk{width:280px;right:-70px;top:-50px}
+  .ws-af__gloed{width:460px;height:300px;top:-140px}
+  .ws-af__in{gap:18px}
+  .ws-af__eyebrow{font-size:10px;gap:10px}
+  .ws-af__eyebrow::before,.ws-af__eyebrow::after{width:26px}
+  .ws-af__h2{font-size:31px;max-width:none}
+  .ws-af__sub{font-size:14px}
+  .ws-af__knoppen{width:100%;flex-direction:column;gap:10px}
+  .ws-af__cta{justify-content:center;font-size:12.5px;padding:17px 22px}
+  .ws-af__reden{font-size:12.5px;padding:11px 16px;text-align:left}
+  /* de bewijsregel blijft naast elkaar staan: drie cellen onder elkaar is
+     300 pixels op de laatste schermhoogte van de pagina */
+  .ws-af__bewijs{margin-top:12px}
+  .ws-af__cel{padding:16px 8px;gap:5px}
+  .ws-af__groot{font-size:15.5px;gap:6px}
+  .ws-af__groot svg{width:15px;height:15px}
+  .ws-af__klein{font-size:8.5px;letter-spacing:.1em}
+  .ws-af__sterren i{width:13px;height:13px}
+  .ws-af__sterren svg{width:8px;height:8px}
+  .ws-af__nieuws{flex-direction:column;align-items:stretch;gap:12px;padding:20px 0 26px}
+  .ws-af__nieuwstekst{text-align:center}
+  .ws-af__veld{padding:6px 6px 6px 16px}
+  .ws-af__veld input[type="email"]{font-size:12.5px;padding-right:8px}
+  .ws-af__veld button{padding:12px 15px;font-size:11px}
+}
+{% endstylesheet %}

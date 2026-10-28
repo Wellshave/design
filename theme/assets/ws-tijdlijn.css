@@ -1,0 +1,152 @@
+/* ═══ Wellshave — blok 4, de upgradetijdlijn ═══
+   Bron: audits/blok-04-mechanisme.template.html */
+
+.ws-mc{font-family:"Montserrat",sans-serif;background:#0E0D0C;color:#fff;padding:56px 0 0}
+.ws-mc *{box-sizing:border-box}
+.ws-mc p{max-width:none;margin:0}
+.ws-mc__in{max-width:1240px;margin:0 auto;padding:0 40px;min-width:0}
+
+.ws-mc__top{display:flex;align-items:flex-start;justify-content:space-between;gap:56px}
+.ws-mc__eyebrow{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:#C99A4E}
+.ws-mc__h2{font-size:38px;line-height:116%;font-weight:600;letter-spacing:-.028em;margin:14px 0 0;
+  max-width:16ch;text-wrap:balance;color:#fff;text-transform:none}
+.ws-mc__h2 b,.ws-mc__h2 strong{display:block;font-weight:600;color:#E8C88A}
+.ws-mc__right{flex:none;max-width:44ch;padding-top:6px}
+.ws-mc__note{font-size:15px;line-height:158%;color:rgba(255,255,255,.62)}
+.ws-mc__flow{display:inline-flex;align-items:center;gap:12px;margin-top:20px;
+  font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#C99A4E}
+.ws-mc__flow svg{width:22px;height:12px;flex:none}
+
+/* de tijdlijn: één rail met een punt per upgrade, chronologisch.
+   De lijn loopt door het hart van de puntjes (stip 9px, midden op 4,5). */
+.ws-mc__rail{position:relative;margin:38px 0 0;padding:0 40px}
+.ws-mc__raillijn{position:absolute;left:0;right:0;top:4px;height:1px;
+  background:linear-gradient(90deg,rgba(201,154,78,0) 0%,rgba(201,154,78,.45) 6%,
+    rgba(201,154,78,.45) 94%,rgba(201,154,78,0) 100%)}
+.ws-mc__dots{position:relative;display:flex;justify-content:space-between;max-width:1160px;
+  margin:0 auto}
+.ws-mc__dot{display:flex;flex-direction:column;align-items:center;gap:9px;
+  font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.34);white-space:nowrap;cursor:pointer}
+.ws-mc__dot i{width:9px;height:9px;border-radius:100px;background:#0E0D0C;
+  border:1.5px solid rgba(201,154,78,.5);display:block;flex:none}
+.ws-mc__dot.is-aan{color:#fff}
+.ws-mc__dot.is-aan i{background:#E8C88A;border-color:#E8C88A;
+  box-shadow:0 0 0 4px rgba(232,200,138,.16)}
+
+/* de kaartenbaan */
+.ws-mc__wrap{position:relative;overflow:hidden;padding:26px 0 0;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
+.ws-mc__track{display:flex;gap:22px;width:max-content;
+  transition:transform .72s cubic-bezier(.22,.61,.36,1)}
+.ws-mc__kaart{width:358px;flex:none;background:#161514;border:1px solid rgba(255,255,255,.07);
+  border-radius:14px;padding:11px 0 22px;display:flex;flex-direction:column;
+  opacity:.34;transform:scale(.965);
+  transition:opacity .6s ease,border-color .6s ease,box-shadow .6s ease,
+    transform .6s cubic-bezier(.22,.61,.36,1)}
+.ws-mc__kaart.is-aan{opacity:1;border-color:rgba(232,200,138,.55);transform:scale(1);
+  box-shadow:0 0 0 1px rgba(232,200,138,.12),0 20px 50px -24px rgba(0,0,0,.9)}
+/* kaarten zonder badge krijgen dezelfde bovenruimte, anders staat de
+   nieuwste kaart een centimeter hoger dan de rest */
+.ws-mc__badge{align-self:center;margin:-22px 0 0;background:linear-gradient(120deg,#F7DCA4,#C99A4E);
+  color:#141414;font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  padding:6px 15px;border-radius:100px;white-space:nowrap}
+.ws-mc__body{padding:20px 24px 0;display:flex;flex-direction:column;gap:13px;flex:1;min-width:0}
+.ws-mc__lijn{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:#C99A4E}
+.ws-mc__paar{display:flex;align-items:center;gap:12px}
+.ws-mc__stap{flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;min-width:0}
+.ws-mc__shot{width:100%;aspect-ratio:1/1;position:relative;background:#0E0D0C;border-radius:9px;
+  overflow:hidden}
+.ws-mc__shot > img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;
+  padding:10px;display:block}
+.ws-mc__jaar{font-size:10px;font-weight:700;letter-spacing:.12em;color:rgba(255,255,255,.42)}
+.ws-mc__pijl{flex:none;color:rgba(232,200,138,.6)}
+.ws-mc__pijl svg{width:15px;height:15px;margin-bottom:17px}
+.ws-mc__naam{font-size:18px;font-weight:600;letter-spacing:-.02em;line-height:128%;
+  overflow-wrap:anywhere;margin:0;color:#fff;text-transform:none}
+.ws-mc__datum{font-size:11.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  color:#C99A4E;margin-top:-6px}
+.ws-mc__tag{align-self:flex-start;display:inline-flex;align-items:center;gap:7px;
+  border:1px solid rgba(232,200,138,.4);border-radius:100px;padding:6px 13px;
+  font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#E8C88A}
+.ws-mc__tag svg{width:12px;height:12px}
+.ws-mc__wat{display:flex;gap:10px;font-size:13.5px;line-height:150%;color:rgba(255,255,255,.76);
+  margin-top:auto;padding-top:15px;border-top:1px solid rgba(255,255,255,.09)}
+.ws-mc__wat svg{width:16px;height:16px;flex:none;color:#C99A4E;margin-top:1px}
+
+/* bediening */
+.ws-mc__ctrl{display:flex;align-items:center;justify-content:center;gap:26px;margin:26px 0 0}
+.ws-mc__nav{width:46px;height:46px;border-radius:100px;border:1px solid rgba(232,200,138,.35);
+  background:transparent;color:#E8C88A;display:flex;align-items:center;justify-content:center;
+  flex:none;cursor:pointer;transition:background-color .3s ease,border-color .3s ease}
+.ws-mc__nav:hover{background:rgba(232,200,138,.12);border-color:rgba(232,200,138,.6)}
+.ws-mc__nav svg{width:17px;height:17px}
+.ws-mc__nav.is-terug svg{transform:scaleX(-1)}
+.ws-mc__teller{display:flex;flex-direction:column;align-items:center;gap:9px;min-width:230px}
+.ws-mc__teller b{font-size:12px;font-weight:600;letter-spacing:.12em;color:rgba(255,255,255,.62)}
+.ws-mc__teller b em{font-style:normal;color:#fff}
+.ws-mc__balk{width:100%;height:2px;background:rgba(255,255,255,.12);border-radius:2px;
+  overflow:hidden}
+.ws-mc__balk i{display:block;height:100%;background:#E8C88A;border-radius:2px;
+  transition:width .3s linear}
+
+/* cijferrij */
+.ws-mc__bottom{margin-top:46px;border-top:1px solid rgba(255,255,255,.1);background:#0A0908}
+.ws-mc__facts{max-width:1240px;margin:0 auto;padding:30px 40px;
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.ws-mc__fact{display:flex;align-items:center;gap:17px;min-width:0;padding:0 26px}
+.ws-mc__fact + .ws-mc__fact{border-left:1px solid rgba(255,255,255,.1)}
+.ws-mc__fact:first-child{padding-left:0}
+.ws-mc__ico{width:52px;height:52px;border-radius:100px;border:1px solid rgba(232,200,138,.3);
+  display:flex;align-items:center;justify-content:center;flex:none;color:#E8C88A}
+/* de ster heeft geen fill-attribuut, dus zonder deze regel valt hij zwart uit */
+.ws-mc__ico svg{width:23px;height:23px;fill:currentColor}
+/* het tekstblok heeft een eigen klasse: een selector als .fact span pakte ook
+   het icoonvlak en zette dat op display:block, waardoor het icoon uit het
+   midden schoot */
+.ws-mc__txt{min-width:0}
+.ws-mc__txt b{display:block;font-size:25px;font-weight:700;letter-spacing:-.03em;line-height:1.1;
+  color:#E8C88A}
+.ws-mc__txt b em{font-style:normal;font-size:17px;font-weight:600;color:#fff}
+.ws-mc__txt > span{display:block;font-size:13.5px;color:rgba(255,255,255,.6);margin-top:3px}
+
+/* mobiel */
+@media (max-width:749px){
+  .ws-mc{padding:38px 0 0}
+  .ws-mc__in{padding:0 18px}
+  .ws-mc__top{flex-direction:column;gap:18px}
+  .ws-mc__h2{font-size:27px;max-width:none;margin-top:11px}
+  .ws-mc__right{max-width:none;padding-top:0}
+  .ws-mc__note{font-size:14px}
+  .ws-mc__flow{margin-top:15px;font-size:10px;letter-spacing:.12em}
+  .ws-mc__rail{margin-top:28px;padding:0 16px}
+  .ws-mc__dot{font-size:9px;letter-spacing:.06em;gap:7px}
+  .ws-mc__dot i{width:7px;height:7px}
+  .ws-mc__raillijn{top:3px}
+  .ws-mc__wrap{padding-top:20px;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+  .ws-mc__track{gap:14px}
+  .ws-mc__kaart{width:284px}
+  .ws-mc__body{padding:17px 18px 0;gap:11px}
+  .ws-mc__naam{font-size:16px}
+  .ws-mc__wat{font-size:12.5px;padding-top:13px}
+  .ws-mc__ctrl{gap:16px;margin-top:20px}
+  .ws-mc__nav{width:40px;height:40px}
+  .ws-mc__teller{min-width:0;flex:1}
+  .ws-mc__bottom{margin-top:34px}
+  /* op 390px naast elkaar: icoon boven, tekst eronder, gecentreerd. Naast
+     elkaar met het icoon links past niet — dan blijft er per kolom nog geen
+     70px over voor de tekst */
+  .ws-mc__facts{grid-template-columns:repeat(3,minmax(0,1fr));padding:20px 12px;gap:0}
+  .ws-mc__fact{flex-direction:column;align-items:center;text-align:center;gap:9px;padding:0 7px}
+  .ws-mc__fact + .ws-mc__fact{border-left:1px solid rgba(255,255,255,.1);border-top:0}
+  .ws-mc__ico{width:38px;height:38px}
+  .ws-mc__ico svg{width:17px;height:17px}
+  .ws-mc__txt b{font-size:18px}
+  .ws-mc__txt b em{font-size:12.5px}
+  .ws-mc__txt > span{font-size:10.5px;line-height:138%;margin-top:3px}
+}

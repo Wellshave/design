@@ -1,0 +1,692 @@
+<meta charset="utf-8">
+<title>Wellshave Hero Redesign</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
+
+<style>
+:root{
+  /* exact de tokens uit :root van je live theme */
+  --graphite:#191816;
+  --grey:#8E8E8E;
+  --white-100:#FFFFFF;
+  --white-80:rgba(255,255,255,.8);
+  --white-40:rgba(255,255,255,.4);
+  --black-100:#111111;
+  --black-60:rgba(17,17,17,.6);
+  --black-40:rgba(17,17,17,.4);
+  --black-10:rgba(17,17,17,.1);
+  --gold-light-100:#F5D18A;
+  --gold-dark-100:#BC813E;
+  --error-color:#C14A3A;
+  --success-color:#1E7F63;
+
+  /* documentchroom, uit dezelfde tokens */
+  --bg:#FBFAF9; --surface:#FFFFFF; --surface-2:#F2F0ED;
+  --fg:var(--black-100); --fg-soft:var(--black-60); --rule:var(--black-10);
+  --accent:#8F6428;
+  --ok:var(--success-color); --ok-bg:#E6F0EC;
+  --crit:#A3271B; --crit-bg:#F6EAE7;
+  --shadow:0 1px 2px rgba(17,17,17,.05), 0 12px 30px -20px rgba(17,17,17,.35);
+  --frame:#E2DFDA;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141413; --surface:#1C1B1A; --surface-2:#252423;
+    --fg:#EEECE9; --fg-soft:rgba(238,236,233,.62); --rule:rgba(238,236,233,.13);
+    --accent:#D9A557; --ok:#7FBF9F; --ok-bg:#182420; --crit:#E38477; --crit-bg:#2A1C19;
+    --shadow:0 1px 2px rgba(0,0,0,.45), 0 12px 30px -20px rgba(0,0,0,.9);
+    --frame:#312F2C;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141413; --surface:#1C1B1A; --surface-2:#252423;
+  --fg:#EEECE9; --fg-soft:rgba(238,236,233,.62); --rule:rgba(238,236,233,.13);
+  --accent:#D9A557; --ok:#7FBF9F; --ok-bg:#182420; --crit:#E38477; --crit-bg:#2A1C19;
+  --shadow:0 1px 2px rgba(0,0,0,.45), 0 12px 30px -20px rgba(0,0,0,.9);
+  --frame:#312F2C;
+}
+
+*{box-sizing:border-box}
+img{max-width:100%;height:auto;display:block}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font-family:"Montserrat",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:16px;line-height:150%;font-weight:400;-webkit-font-smoothing:antialiased}
+.wrap{max-width:940px;margin:0 auto;padding:0 24px 96px}
+@media(max-width:600px){.wrap{padding:0 16px 64px}}
+
+.masthead{padding:60px 0 28px;border-bottom:1px solid var(--rule)}
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);margin:0 0 18px}
+h1{font-weight:600;font-size:clamp(32px,5.6vw,50px);line-height:115%;letter-spacing:-.015em;
+  margin:0 0 16px;text-wrap:balance}
+.dek{font-size:17px;color:var(--fg-soft);margin:0;max-width:64ch;line-height:160%;text-wrap:pretty}
+.byline{font-size:12.5px;color:var(--fg-soft);margin-top:20px}
+
+h2{font-weight:600;font-size:clamp(22px,3.4vw,30px);line-height:120%;letter-spacing:-.01em;
+  margin:56px 0 8px;text-wrap:balance}
+h2 + .sub{color:var(--fg-soft);margin:0 0 22px;font-size:15px;max-width:66ch;line-height:160%}
+h3{font-size:17px;font-weight:600;margin:26px 0 8px}
+p{margin:0 0 14px;max-width:68ch;line-height:160%}
+ul{margin:0 0 14px;padding-left:20px;max-width:68ch}
+li{margin-bottom:7px}
+strong{font-weight:600}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
+  background:var(--surface-2);padding:1px 5px;border-radius:3px}
+
+/* ── podium ── */
+.devicecap{font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--fg-soft);margin:0 0 8px}
+.scaler{width:100%;overflow:hidden;border:1px solid var(--frame);border-radius:4px;
+  background:#111;box-shadow:var(--shadow)}
+.scaler > .inner{transform-origin:top left}
+.desk-scaler{aspect-ratio:1440/770}
+.desk-scaler > .inner{width:1440px;height:770px}
+.phonecol{max-width:390px;margin:0 auto}
+.phone-scaler{aspect-ratio:390/1210;border-radius:18px}
+.phone-scaler > .inner{width:390px;height:1210px}
+.stage{display:grid;gap:30px;margin:0 0 10px}
+
+.switch{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px}
+.switch button{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  background:transparent;color:var(--fg-soft);border:1px solid var(--rule);border-radius:100px;
+  padding:9px 17px;cursor:pointer;font-family:inherit;transition:.15s}
+.switch button:hover{border-color:var(--accent);color:var(--fg)}
+.switch button[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.switch-note{font-size:14px;color:var(--fg-soft);margin:0 0 24px;max-width:66ch;line-height:160%}
+
+/* ══ MOCKUP — exact de merkkleuren, vast in beide thema's ══ */
+.ws{font-family:"Montserrat",sans-serif;background:#0B0B0A;color:#FFFFFF;
+  display:flex;flex-direction:column;height:100%}
+.ws *{box-sizing:border-box}
+.ws p{margin:0;max-width:none}
+.ws ul{margin:0;padding:0;max-width:none}
+
+/* aankondigingsbalk en navigatie */
+.ws-bar{background:#0B0B0A;color:rgba(255,255,255,.82);font-size:12.5px;font-weight:500;
+  display:flex;justify-content:center;gap:56px;padding:13px 40px;
+  border-bottom:1px solid rgba(245,209,138,.16)}
+.ws-bar span{white-space:nowrap;display:inline-flex;align-items:center;gap:9px}
+.ws-bar svg{width:17px;height:17px;flex:none;color:#BC813E}
+.ws-nav{display:flex;align-items:center;justify-content:space-between;gap:30px;
+  padding:19px 40px;border-bottom:1px solid rgba(245,209,138,.14);position:relative;z-index:3}
+.ws-nav img{height:30px;width:auto}
+.ws-links{display:flex;gap:34px;font-size:13px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:rgba(255,255,255,.88)}
+.ws-icons{display:flex;gap:26px;font-size:12.5px;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:rgba(255,255,255,.88)}
+.ws-icons span{display:inline-flex;align-items:center;gap:8px}
+.ws-icons svg{width:17px;height:17px;color:rgba(255,255,255,.88)}
+
+/* de hero zelf */
+.ws-hero{flex:1;position:relative;min-height:0;overflow:hidden;background:#0B0B0A;display:flex}
+.ws-media{position:absolute;inset:0 0 0 56%;overflow:hidden}
+.ws-hero img.ws-foto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  object-position:50% 34%}
+.ws-scrim{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(90deg,#0B0B0A 0%,rgba(11,11,10,.92) 12%,rgba(11,11,10,.35) 34%,rgba(11,11,10,0) 62%)}
+.ws-merk{position:absolute;left:30%;top:8%;width:26%;opacity:.06;pointer-events:none;
+  filter:brightness(0) invert(1)}
+.ws-bogen{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+.ws-bogen path{fill:none;stroke:url(#goudlijn);stroke-linecap:round}
+.ws-streep{position:absolute;left:57%;top:6%;bottom:10%;width:2px;pointer-events:none;z-index:1;
+  background:linear-gradient(180deg,rgba(245,209,138,0),rgba(245,209,138,.75) 42%,rgba(245,209,138,0));
+  transform:rotate(9deg);filter:blur(.4px)}
+
+.ws-inner{position:relative;z-index:2;display:flex;align-items:center;
+  padding:24px 30px 24px 40px;width:58%}
+.ws-blocks{width:100%;max-width:600px;display:flex;flex-direction:column;
+  gap:19px;align-items:flex-start}
+.ws-badge{font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:#F5D18A;border:1px solid rgba(245,209,138,.45);border-radius:100px;padding:11px 22px;
+  background:rgba(245,209,138,.07)}
+.ws-h1{font-size:58px;line-height:104%;font-weight:700;letter-spacing:-.035em;margin:0;color:#fff}
+.ws-h1 em{font-style:normal;color:#F5D18A}
+.ws-sub{font-size:18px;line-height:158%;font-weight:400;color:rgba(255,255,255,.72);margin:0;
+  max-width:34em}
+
+.ws-knoppen{display:flex;flex-wrap:wrap;gap:14px;align-items:stretch}
+.ws-cta{display:inline-flex;align-items:center;gap:14px;
+  background:linear-gradient(135deg,#F5D18A 0%,#D8AC5D 52%,#BC813E 100%);
+  color:#111111;font-weight:700;font-size:14px;letter-spacing:.13em;text-transform:uppercase;
+  padding:20px 30px;border-radius:100px;text-decoration:none;
+  box-shadow:0 14px 34px -18px rgba(245,209,138,.9)}
+.ws-cta svg{width:17px;height:17px}
+.ws-cta2{display:inline-flex;align-items:center;justify-content:center;
+  border:1px solid rgba(255,255,255,.34);color:#fff;font-weight:700;font-size:14px;
+  letter-spacing:.13em;text-transform:uppercase;padding:20px 30px;border-radius:100px;
+  text-decoration:none;background:rgba(255,255,255,.03)}
+
+/* het label bij het apparaat en het aantal bestellingen */
+.ws-wijzer{position:absolute;left:69%;top:64%;z-index:2;padding-left:52px}
+.ws-wijzer::before{content:"";position:absolute;left:0;top:50%;width:42px;height:1px;
+  background:linear-gradient(90deg,rgba(245,209,138,0),#F5D18A)}
+.ws-wijzer b{display:block;font-size:13px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:#fff}
+.ws-wijzer em{display:block;font-style:normal;font-size:12px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:#F5D18A;margin-top:5px}
+.ws-telling{position:absolute;left:57.5%;right:auto;bottom:30px;top:auto;z-index:2;display:flex;align-items:center;
+  gap:14px;background:rgba(11,11,10,.62);border:1px solid rgba(245,209,138,.32);
+  border-radius:14px;padding:14px 20px;backdrop-filter:blur(8px)}
+.ws-telling svg{width:24px;height:24px;color:#F5D18A;flex:none}
+.ws-telling b{display:block;font-size:19px;font-weight:700;letter-spacing:-.01em;color:#fff}
+.ws-telling em{display:block;font-style:normal;font-size:10.5px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:rgba(255,255,255,.62);margin-top:3px}
+
+/* de garantiestrook onderaan de hero */
+.ws-strook{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  background:#0B0B0A;border-top:1px solid rgba(245,209,138,.16);padding:26px 40px}
+.ws-strook > div{display:flex;align-items:center;justify-content:center;gap:18px;
+  padding:0 26px;min-width:0}
+.ws-strook > div + div{border-left:1px solid rgba(255,255,255,.1)}
+.ws-zegel{width:46px;height:46px;flex:none;border-radius:50%;border:1px solid rgba(245,209,138,.4);
+  display:flex;align-items:center;justify-content:center;color:#F5D18A;
+  font-size:13.5px;font-weight:700;letter-spacing:.02em;line-height:1}
+.ws-zegel svg{width:23px;height:23px}
+.ws-tekst{display:flex;flex-direction:column;gap:5px;min-width:0}
+.ws-tekst b{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:#F5D18A;line-height:130%}
+.ws-tekst em{font-style:normal;font-size:13.5px;color:rgba(255,255,255,.6);line-height:140%}
+
+
+/* Trustpilot */
+.tp{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:14px;
+  color:rgba(255,255,255,.68)}
+.tp-stars{display:flex;gap:3px}
+.tp-stars i{width:25px;height:25px;background:#00B67A;display:grid;place-items:center;position:relative}
+.tp-stars i.half{background:#DCDCE6}
+.tp-stars i.half::before{content:"";position:absolute;inset:0;width:50%;background:#00B67A}
+.tp-stars svg{width:16px;height:16px;fill:#fff;position:relative}
+.tp-score{font-weight:600;color:#fff;font-size:15px}
+.tp-brand{display:inline-flex;align-items:center;gap:6px;font-weight:700;color:#fff;font-size:15px}
+.tp-brand svg{width:18px;height:18px;fill:#00B67A}
+
+/* ── mobiel ── */
+.ws-m{height:auto;min-height:100%}
+.ws-m .ws-hero{flex:0 0 auto}
+.ws-m .ws-wijzer,.ws-m .ws-bogen,.ws-m .ws-streep{display:none}
+.ws-m .ws-merk{display:none}
+.ws-m .ws-bar{gap:0;font-size:11.5px;padding:11px 16px;justify-content:center}
+.ws-m .ws-bar span:not(:first-child){display:none}
+.ws-m .ws-nav{padding:15px 16px}
+.ws-m .ws-links,.ws-m .ws-icons{display:none}
+.ws-m .ws-burger{display:flex;flex-direction:column;gap:5px}
+.ws-m .ws-burger i{display:block;width:22px;height:1.5px;background:rgba(255,255,255,.85)}
+.ws-m .ws-nav img{height:26px}
+.ws-m .ws-hero{flex-direction:column;min-height:0}
+.ws-m .ws-media{position:relative;inset:auto;width:100%;height:330px;flex:none}
+.ws-m .ws-hero img.ws-foto{object-position:52% 26%}
+.ws-m .ws-scrim{background:linear-gradient(180deg,rgba(11,11,10,.1) 0%,rgba(11,11,10,.35) 52%,rgba(11,11,10,.94) 92%,#0B0B0A 100%)}
+.ws-m .ws-merk{left:auto;right:-8%;top:2%;width:52%}
+.ws-m .ws-streep{left:24%;top:4%;bottom:32%}
+.ws-m .ws-inner{width:100%;padding:0 18px 26px;margin-top:-34px}
+.ws-m .ws-blocks{gap:16px;max-width:none}
+.ws-m .ws-badge{font-size:11px;padding:9px 16px}
+.ws-m .ws-h1{font-size:40px;letter-spacing:-.032em}
+.ws-m .ws-sub{font-size:15px;line-height:152%}
+.ws-m .ws-knoppen{width:100%;flex-direction:column;gap:10px}
+.ws-m .ws-cta,.ws-m .ws-cta2{justify-content:center;font-size:13px;padding:18px 22px}
+.ws-m .ws-wijzer{left:16px;top:auto;bottom:176px;padding-left:0}
+.ws-m .ws-wijzer::before{display:none}
+.ws-m .ws-telling{left:16px;right:auto;top:18px;bottom:auto;margin-top:0;padding:10px 14px;gap:10px}
+.ws-m .ws-telling b{font-size:15px}
+.ws-m .ws-telling em{font-size:9px}
+.ws-m .ws-strook{grid-template-columns:1fr;padding:6px 18px 22px;gap:0}
+.ws-m .ws-strook > div{padding:15px 0;gap:14px;justify-content:flex-start}
+.ws-m .ws-strook > div + div{border-left:0;border-top:1px solid rgba(255,255,255,.1)}
+.ws-m .ws-zegel{width:38px;height:38px}
+.ws-m .ws-zegel svg{width:19px;height:19px}
+.ws-m .ws-tekst b{font-size:11.5px}
+.ws-m .ws-tekst em{font-size:12.5px}
+.ws-m .tp{font-size:12px;gap:8px}
+.ws-m .tp-stars i{width:19px;height:19px}
+.ws-m .tp-stars svg{width:13px;height:13px}
+.ws-m .tp-score,.ws-m .tp-brand{font-size:12.5px}
+
+/* ── annotaties ── */
+.anno{background:var(--surface);border:1px solid var(--rule);border-left:2px solid var(--gold-dark-100);
+  border-radius:3px;padding:18px 22px;margin:0 0 13px;box-shadow:var(--shadow)}
+.anno > :last-child{margin-bottom:0}
+.anno h3{margin:0 0 7px;font-size:16.5px}
+.anno p{font-size:15px;margin-bottom:0;color:var(--fg-soft);max-width:66ch}
+.anno p b{color:var(--fg);font-weight:600}
+.anno p + p{margin-top:9px}
+
+.tablewrap{overflow-x:auto;margin:20px 0;border:1px solid var(--rule);border-radius:3px}
+table{border-collapse:collapse;width:100%;min-width:560px;background:var(--surface);font-size:14.5px}
+th,td{text-align:left;padding:12px 15px;border-bottom:1px solid var(--rule);vertical-align:top;line-height:150%}
+th{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--fg-soft);background:var(--surface-2)}
+tr:last-child td{border-bottom:0}
+td b{font-weight:600}
+
+.callout{background:var(--surface-2);border-radius:3px;padding:20px 24px;margin:24px 0}
+.callout > :last-child{margin-bottom:0}
+.callout ul,.callout p{max-width:none}
+.ask{border-left:2px solid var(--crit);background:var(--crit-bg)}
+.fix{border-left:2px solid var(--ok);background:var(--ok-bg)}
+
+.progress{display:flex;flex-wrap:wrap;gap:5px;margin:18px 0 0}
+.progress i{width:26px;height:4px;background:var(--rule);display:block}
+.progress i.done{background:var(--gold-dark-100)}
+.progress-cap{font-size:11.5px;color:var(--fg-soft);margin:10px 0 0}
+
+footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--rule);
+  color:var(--fg-soft);font-size:13px}
+footer p{max-width:none}
+:focus-visible{outline:2px solid var(--gold-dark-100);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01z"/></symbol>
+<symbol id="truck" viewBox="0 0 24 24"><path d="M1.9 6.2h12.2v9.4H1.9zM14.1 9.7h3.9l3.1 3.1v2.8h-7z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.6" cy="18" r="1.9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="17.3" cy="18" r="1.9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="retour" viewBox="0 0 24 24"><path d="M3.6 12a8.4 8.4 0 1 0 2.6-6.1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.4 3.6v4.6h4.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="doos" viewBox="0 0 24 24"><path d="M3.4 7.4 12 3.4l8.6 4v9.2L12 20.6l-8.6-4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.4 7.4 12 11.5l8.6-4.1M12 11.5v9.1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="zoek" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M15.8 15.8 20.4 20.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="account" viewBox="0 0 24 24"><circle cx="12" cy="8.6" r="3.9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.9 20c.6-3.6 3.6-5.9 7.1-5.9s6.5 2.3 7.1 5.9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="tas" viewBox="0 0 24 24"><path d="M5.2 7.6h13.6l1 12.2H4.2z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.8 10V6.6a3.2 3.2 0 0 1 6.4 0V10" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="mensen" viewBox="0 0 24 24"><circle cx="9.2" cy="8.4" r="3.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M2.9 19.4c.5-3.2 3.2-5.2 6.3-5.2s5.8 2 6.3 5.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M15.8 5.4a3.4 3.4 0 0 1 0 6.6M17.4 14.6c2.1.5 3.5 2.2 3.8 4.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="shield" viewBox="0 0 24 24"><path d="M12 2.6l7.2 2.8v6.1c0 4.4-3 8.4-7.2 9.9-4.2-1.5-7.2-5.5-7.2-9.9V5.4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.7 12.1l2.3 2.3 4.3-4.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="arw" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="chk" viewBox="0 0 24 24"><path d="M4 12.5l5.2 5.2L20 6.9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
+
+<div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow">Homepage-redesign · blok 1 van 12 · versie 2</p>
+  <h1>De hero, met mijn advies</h1>
+  <p class="dek">Versie 2 neemt jouw aangeleverde hero over: dieper zwart, veel meer goud, een tweede knop, een label bij het apparaat en een garantiestrook onder de vouw. De kop blijft dezelfde als in versie 1, met dezelfde onderbouwing eronder. De drie losse USP's onder de knoppen zijn eruit.</p>
+  <p class="byline">Ontwerp — nog niets live. Akkoord → dan pas Shopify.</p>
+  <div class="progress" aria-hidden="true">
+    <i class="done"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+  </div>
+  <p class="progress-cap">Blok 1 in ontwerp · 11 blokken volgen</p>
+</header>
+
+<div class="callout fix">
+  <h3 style="margin-top:0">Wat er uit jouw ontwerp is overgenomen, en wat eruit is gehaald</h3>
+  <p><b>Je had gelijk over het goud.</b> Versie 1 gebruikte één gouden knop en verder wit op zwart. Jouw versie zet goud op zes plekken tegelijk — de balk-iconen, de rand van de sale-pil, de derde regel van de kop, het verloop in de knop, de lichtbogen bij het product en de koppen in de strook — en juist door die herhaling wordt het een merkkleur in plaats van een accentje. Dat is één op één overgenomen, inclusief de tweede knop, het label bij het apparaat en de strook met drie garanties onderaan.</p>
+  <p><b>De drie USP's onder de knoppen zijn eruit, zoals je vroeg.</b> Ze zeiden letterlijk hetzelfde als de strook eronder — 100 dagen proberen, 2 jaar garantie, gratis verzending — dus je las hetzelfde twee keer binnen 200 pixels. De strook wint omdat daar ruimte is voor een onderregel: "Niet goed? Geld terug" doet meer dan "100 dagen proberen" alleen.</p>
+  <p style="margin-bottom:0"><b>Het logo moest wel aangepast.</b> Je logobestand heeft een zwart woordmerk met een gouden monogram; op deze zwarte achtergrond verdween het woord volledig. Er staat nu een variant met een wit woordmerk en hetzelfde gouden monogram. Voor het theme betekent dat één extra logobestand voor donkere secties.</p>
+</div>
+
+<div class="callout fix">
+  <h3 style="margin-top:0">De garantiestrook: de inhoud viel uit de rondjes</h3>
+  <p><b>Je zag het goed, en het was dezelfde soort fout als eerder.</b> De regel <code>.ws-strook span</code> gold ook voor de rondjes zelf, want dat zijn ook spans. Hij is één punt specifieker dan <code>.ws-zegel</code>, dus hij won: het rondje werd een blok in plaats van een gecentreerde doos, de "2" en de iconen zakten naar linksboven, ze verloren hun goudkleur, en de hele cirkel schoof vijf pixels omlaag door een marge die voor de onderregel bedoeld was.</p>
+  <p><b>De tekstkolom heeft nu een eigen klasse</b> in plaats van een kale span, dus er is geen selector meer die per ongeluk over het rondje heen gaat. De drie items staan bovendien gecentreerd in hun kolom in plaats van links, zoals in jouw ontwerp.</p>
+  <p style="margin-bottom:0"><b>De controle kon dit niet zien en kan het nu wel.</b> Er zat niets buiten zijn kader en er was geen tekst die overliep — het was gewoon een rondje met iets erin, alleen niet in het midden. <code>verify-layout.mjs</code> meet nu bij elk rond element of de inhoud daadwerkelijk in het midden zit. Ik heb de fout er expres weer ingezet om te controleren dat de meting hem echt vangt; dat doet hij, op alle zes de rondjes tegelijk.</p>
+</div>
+
+<div class="callout ask">
+  <h3 style="margin-top:0">Het getal in het ontwerp klopte niet, en het echte getal is lager</h3>
+  <p>In jouw versie staat <b>"10.000+ mannen trimmen al mee"</b>. Shopify meldt inderdaad minstens 10.000 klantprofielen — dat is waar het getal vandaan komt. Maar een profiel is geen koper: daar zitten ook mensen tussen die alleen een account aanmaakten of zich op de nieuwsbrief inschreven. Het getal dat je wél hard kunt maken is het aantal bestellingen, en dat is over alle verkoopkanalen samen veel hóger dan 10.000: <b>198.738 via bol.com</b> (01 jan 2021 t/m 21 aug 2026), <b>7.027 via de eigen webshop</b>, plus een kleiner aantal via Amazon.</p>
+  <p style="margin-bottom:0"><b>Op de kaart staat nu "200.000+ bestellingen sinds 2021".</b> Dat is bewust een ondergrens: opgeteld staat de teller op ruim 205.000, dus 200.000+ blijft ook staan als je Amazon helemaal buiten beschouwing laat. Twee dingen zitten er met opzet in de formulering. Het gaat om <b>bestellingen</b>, niet om mannen — dat blijft het enige getal dat uit een kassa komt. En het gaat om <b>alle kanalen samen</b>; als je het ooit specifiek over deze webshop hebt, is het getal 7.027 en niet 200.000. Wat in geen enkele vorm kan is "10.000+ mannen", want dat zijn profielen en geen kopers.</p>
+</div>
+
+<div class="callout fix">
+  <h3 style="margin-top:0">Wat er mis was, en wat ervoor in de plaats komt</h3>
+  <p>Ik gebruikte keramische SkinSafe™-messen als merkbreed mechanisme. Dat klopt niet: die zitten alleen op je bodygroomers. Een bezoeker die voor een baardtrimmer of een neustrimmer komt, krijgt dan een belofte voorgeschoteld die zijn product niet waarmaakt.</p>
+  <p>Ik ben je site langsgegaan op wat wél over het hele assortiment geldt. Dat is minder dan je zou denken:</p>
+  <ul>
+    <li><strong>100 dagen proefperiode — geldt voor alles.</strong> Je FAQ: <em>"Alle Wellshave producten worden geleverd met 100 dagen gratis proefperiode."</em></li>
+    <li><strong>IPX7 — geldt níét voor alles.</strong> Je FAQ zegt <em>"de meeste Wellshave apparaten"</em>. Daarom staat het niet meer in de hero.</li>
+    <li><strong>SkinSafe — bodygroomers.</strong> Hoort op de categoriepagina en op de productpagina's, niet op de homepage.</li>
+  </ul>
+  <p style="margin-bottom:0">Wat overblijft als merkbreed mechanisme is je <strong>bouwproces</strong>, en dat is precies je visie: getest op prestaties in plaats van op uiterlijk, verbeterd op echte klantfeedback, 100 dagen om het zelf te proberen. Geen productclaim, wel een reden om je te vertrouwen — en het is over elk product in je winkel waar.</p>
+</div>
+
+<h2>Waar goud écht zit op je site</h2>
+<p class="sub">Nagelopen per themabestand, zodat we het accent gebruiken zoals je het zelf gebruikt en niet zoals ik dacht dat je het gebruikte.</p>
+<div class="tablewrap">
+<table>
+  <thead><tr><th>Onderdeel</th><th>Goudgebruik vandaag</th></tr></thead>
+  <tbody>
+    <tr><td>Hero / banner</td><td><b>Geen goud.</b> Wit op beeld, <code>button--light</code></td></tr>
+    <tr><td>Productkaart</td><td><code>#F5D18A</code> als vlakke badge-achtergrond met zwarte tekst</td></tr>
+    <tr><td>Reviews</td><td><code>#BC813E</code> als vlakke tekstkleur</td></tr>
+    <tr><td>Benefits</td><td><code>#BC813E</code> tekst + één verticaal verloop op een decoratief element</td></tr>
+    <tr><td>Header</td><td><code>#BC813E</code> op 4% als subtiele achtergrondtint</td></tr>
+  </tbody>
+</table>
+</div>
+<p>Conclusie: goud is bij jou een <strong>vlak accent</strong>, geen verlooptekst. In deze hero zit het op twee plekken — de Summer Sale-badge in <code>#F5D18A</code> (identiek aan je "Best Seller"-badge op de productkaart) en de knop in <code>#BC813E</code>. Die knop is de enige bewuste afwijking van je theme: je banner gebruikt vandaag <code>button--light</code>, en op jouw verzoek gaat hij naar de merkkleur.</p>
+
+<h2>Het ontwerp</h2>
+<p class="sub">De hero zoals jij hem hebt aangeleverd, met je eigen foto en de cijfers uit Shopify. De drie losse USP's onder de knoppen zijn eruit; ze stonden dubbel met de strook eronder.</p>
+
+<div class="stage">
+  <div>
+    <p class="devicecap">Desktop — 1440px</p>
+    <div class="scaler desk-scaler"><div class="inner">
+      <div class="ws">
+        <div class="ws-bar">
+          <span><svg><use href="#truck"/></svg>Vandaag besteld, morgen in huis</span>
+          <span><svg><use href="#retour"/></svg>100 dagen zorgeloos retourneren</span>
+          <span><svg><use href="#doos"/></svg>Gratis verzending vanaf €30</span>
+        </div>
+        <div class="ws-nav">
+          <img src="__LOGODONKER__" alt="Wellshave">
+          <div class="ws-links"><span>Shop</span><span>Bundels</span><span>Sale</span><span>Over ons</span><span>FAQ</span></div>
+          <div class="ws-icons"><span>Zoeken<svg><use href="#zoek"/></svg></span><span>Account<svg><use href="#account"/></svg></span><span>Tas (0)<svg><use href="#tas"/></svg></span></div>
+        </div>
+        <div class="ws-hero">
+          <div class="ws-media">
+            <img class="ws-foto" src="__PORTRAIT__" alt="Model met een Wellshave-trimmer en hardcase in de badkamer">
+            <div class="ws-scrim"></div>
+          </div>
+          <img class="ws-merk" src="__MARK__" alt="">
+          <span class="ws-streep"></span>
+          <svg class="ws-bogen" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            <defs><linearGradient id="goudlijn" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#F5D18A" stop-opacity="0"/>
+              <stop offset=".45" stop-color="#F5D18A" stop-opacity=".85"/>
+              <stop offset="1" stop-color="#BC813E" stop-opacity="0"/>
+            </linearGradient></defs>
+            <path d="M92 34 C74 44 66 62 70 84" stroke="url(#goudlijn)" stroke-width=".45"/>
+            <path d="M97 42 C79 52 70 70 74 92" stroke="url(#goudlijn)" stroke-width=".3"/>
+            <path d="M60 96 C64 78 72 68 88 62" stroke="url(#goudlijn)" stroke-width=".35"/>
+          </svg>
+          <div class="ws-inner"><div class="ws-blocks">
+            <span class="ws-badge">Summer Sale · tot 40% korting</span>
+            <h2 class="ws-h1">Elke dag verzorgd.<br>Zonder dat het je<br><em>ochtend kost.</em></h2>
+            <p class="ws-sub">Trimmers, scheerapparaten en neustrimmers die getest zijn op wat ze dóén, niet op hoe ze eruitzien. 100 dagen proberen, morgen in huis.</p>
+            <div class="tp">
+              <span class="tp-stars">
+                <i><svg><use href="#star"/></svg></i><i><svg><use href="#star"/></svg></i>
+                <i><svg><use href="#star"/></svg></i><i><svg><use href="#star"/></svg></i>
+                <i class="half"><svg><use href="#star"/></svg></i>
+              </span>
+              <span class="tp-score">Uitstekend · 4,5</span>
+              <span class="tp-brand"><svg><use href="#star"/></svg>Trustpilot</span>
+              <span>950+ reviews</span>
+            </div>
+            <div class="ws-knoppen">
+              <a class="ws-cta" href="#">Shop de bestsellers<svg><use href="#arw"/></svg></a>
+              <a class="ws-cta2" href="#">Vind jouw tool</a>
+            </div>
+          </div></div>
+          <p class="ws-wijzer"><b>Groom Guard™ PRO</b><em>Meest gekozen</em></p>
+          <p class="ws-telling"><svg><use href="#mensen"/></svg><span><b>200.000+</b><em>bestellingen sinds 2021</em></span></p>
+        </div>
+        <div class="ws-strook">
+          <div><span class="ws-zegel"><svg><use href="#shield"/></svg></span><span class="ws-tekst"><b>100 dagen proberen</b><em>Niet goed? Geld terug.</em></span></div>
+          <div><span class="ws-zegel">2</span><span class="ws-tekst"><b>2 jaar garantie</b><em>Kwaliteit waarop je kunt vertrouwen.</em></span></div>
+          <div><span class="ws-zegel"><svg><use href="#truck"/></svg></span><span class="ws-tekst"><b>Morgen in huis</b><em>Vandaag besteld, morgen in huis.</em></span></div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+  <div class="phonecol">
+    <p class="devicecap">Mobiel — 390px · 73% van je verkeer</p>
+    <div class="scaler phone-scaler"><div class="inner">
+      <div class="ws ws-m">
+        <div class="ws-bar">
+          <span><svg><use href="#truck"/></svg>Vandaag besteld, morgen in huis</span>
+          <span><svg><use href="#retour"/></svg>100 dagen zorgeloos retourneren</span>
+          <span><svg><use href="#doos"/></svg>Gratis verzending vanaf €30</span>
+        </div>
+        <div class="ws-nav">
+          <div class="ws-burger"><i></i><i></i><i></i></div>
+          <img src="__LOGODONKER__" alt="Wellshave">
+          <div class="ws-icons" style="display:flex;gap:14px"><svg><use href="#zoek"/></svg><svg><use href="#tas"/></svg></div>
+        </div>
+        <div class="ws-hero">
+          <div class="ws-media">
+            <img class="ws-foto" src="__PORTRAIT__" alt="Model met een Wellshave-trimmer en hardcase in de badkamer">
+            <div class="ws-scrim"></div>
+          </div>
+          <img class="ws-merk" src="__MARK__" alt="">
+          <span class="ws-streep"></span>
+          <svg class="ws-bogen" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            <defs><linearGradient id="goudlijnm" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#F5D18A" stop-opacity="0"/>
+              <stop offset=".45" stop-color="#F5D18A" stop-opacity=".85"/>
+              <stop offset="1" stop-color="#BC813E" stop-opacity="0"/>
+            </linearGradient></defs>
+            <path d="M92 34 C74 44 66 62 70 84" stroke="url(#goudlijnm)" stroke-width=".45"/>
+            <path d="M97 42 C79 52 70 70 74 92" stroke="url(#goudlijnm)" stroke-width=".3"/>
+            <path d="M60 96 C64 78 72 68 88 62" stroke="url(#goudlijnm)" stroke-width=".35"/>
+          </svg>
+          <div class="ws-inner"><div class="ws-blocks">
+            <span class="ws-badge">Summer Sale · tot 40% korting</span>
+            <h2 class="ws-h1">Elke dag verzorgd.<br>Zonder dat het je<br><em>ochtend kost.</em></h2>
+            <p class="ws-sub">Trimmers, scheerapparaten en neustrimmers die getest zijn op wat ze dóén, niet op hoe ze eruitzien. 100 dagen proberen, morgen in huis.</p>
+            <div class="tp">
+              <span class="tp-stars">
+                <i><svg><use href="#star"/></svg></i><i><svg><use href="#star"/></svg></i>
+                <i><svg><use href="#star"/></svg></i><i><svg><use href="#star"/></svg></i>
+                <i class="half"><svg><use href="#star"/></svg></i>
+              </span>
+              <span class="tp-score">Uitstekend · 4,5</span>
+              <span class="tp-brand"><svg><use href="#star"/></svg>Trustpilot</span>
+              <span>950+ reviews</span>
+            </div>
+            <div class="ws-knoppen">
+              <a class="ws-cta" href="#">Shop de bestsellers<svg><use href="#arw"/></svg></a>
+              <a class="ws-cta2" href="#">Vind jouw tool</a>
+            </div>
+          </div></div>
+          <p class="ws-wijzer"><b>Groom Guard™ PRO</b><em>Meest gekozen</em></p>
+          <p class="ws-telling"><svg><use href="#mensen"/></svg><span><b>200.000+</b><em>bestellingen sinds 2021</em></span></p>
+        </div>
+        <div class="ws-strook">
+          <div><span class="ws-zegel"><svg><use href="#shield"/></svg></span><span class="ws-tekst"><b>100 dagen proberen</b><em>Niet goed? Geld terug.</em></span></div>
+          <div><span class="ws-zegel">2</span><span class="ws-tekst"><b>2 jaar garantie</b><em>Kwaliteit waarop je kunt vertrouwen.</em></span></div>
+          <div><span class="ws-zegel"><svg><use href="#truck"/></svg></span><span class="ws-tekst"><b>Morgen in huis</b><em>Vandaag besteld, morgen in huis.</em></span></div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+</div>
+
+<h2>Alles komt uit je eigen theme</h2>
+<div class="tablewrap">
+<table>
+  <thead><tr><th>Element</th><th>Waarde</th><th>Bron</th></tr></thead>
+  <tbody>
+    <tr><td>Font</td><td>Montserrat</td><td><code>--font-family: "MontserratEG"</code></td></tr>
+    <tr><td>Kop desktop</td><td>44px / 115% / gewicht 600</td><td><code>.h1</code> in base.css</td></tr>
+    <tr><td>Kop mobiel</td><td>32px / 115%</td><td><code>.h1</code> mobiele override</td></tr>
+    <tr><td>Subline</td><td>16px / 150% / gewicht 400</td><td><code>.body-lg</code></td></tr>
+    <tr><td>Garantieregel</td><td>12px / 140%</td><td><code>.body-sm</code></td></tr>
+    <tr><td>Knopvorm</td><td>Pil 100px, uppercase, 18px/24px</td><td><code>.button</code></td></tr>
+    <tr><td>Knopkleur</td><td><code>#BC813E</code> met zwarte tekst</td><td><b>Afwijking</b> — theme gebruikt <code>button--light</code></td></tr>
+    <tr><td>Tekstblok</td><td>max. 560px breed</td><td><code>.banner__blocks</code></td></tr>
+    <tr><td>Contentbreedte</td><td>1400px</td><td><code>--page-width</code></td></tr>
+    <tr><td>Secundaire tekst op beeld</td><td>wit op 80%</td><td><code>--white-80</code></td></tr>
+    <tr><td>Badge</td><td><code>#F5D18A</code> vlak, zwarte tekst</td><td>productkaart-badge</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2>Mijn advies, en waarom</h2>
+<p class="sub">Je vroeg om missie en visie in de kop. Als ik de methodiek strikt volg, kom ik op iets anders uit — en ik denk dat je daar meer aan hebt.</p>
+
+<div class="anno">
+  <h3>Het probleem met een missiekop</h3>
+  <p>De regel is hard: <b>nooit openen met wie je bent, altijd met de kernbelofte.</b> "Wij bouwden het midden" gaat over Wellshave. "Het meeste groominggereedschap voelt goedkoop" gaat over de categorie. Geen van beide vertelt de bezoeker wat híj eraan heeft. Daar komt bij dat de tweede regel het advies "zeg je, nooit wij" schendt — één merk ging van 0 naar 14 leads per week met alleen die omzetting, zonder één designwijziging.</p>
+  <p>Belangrijker nog: <b>het pijnpunt hoort in sectie 2, niet in de hero.</b> Bij koud, onderbrekend verkeer — en dat is jouw verkeer — opent de hero met de belofte en volgt het probleem er direct onder. Die volgorde is niet willekeurig: eerst een reden om te blijven, dan de reden om je serieus te nemen.</p>
+</div>
+
+<div class="anno">
+  <h3>Wat ik in plaats daarvan voorstel</h3>
+  <p style="color:var(--fg);font-size:17px;font-weight:600;margin-bottom:8px">"Elke dag verzorgd. Zonder dat het je ochtend kost."</p>
+  <p style="margin-top:0">Uit elkaar getrokken volgens de formule <em>eindresultaat + tijdsbestek + emotionele opbrengst</em>:</p>
+</div>
+
+<div class="tablewrap">
+<table>
+  <thead><tr><th>Onderdeel</th><th>In de kop</th><th>Waarom</th></tr></thead>
+  <tbody>
+    <tr><td>Eindresultaat</td><td>"verzorgd"</td><td>De staat die je klant wil. Je eigen missie: mannen helpen zich verzorgd en zelfverzekerd te voelen</td></tr>
+    <tr><td>Tijdsbestek</td><td>"elke dag" / "je ochtend"</td><td>Maakt het concreet en dagelijks in plaats van eenmalig</td></tr>
+    <tr><td>Emotionele opbrengst</td><td>"zonder dat het je ochtend kost"</td><td>Geen gedoe. Raakt comfortabel leven en sociale goedkeuring tegelijk</td></tr>
+    <tr><td>Taal</td><td>"je", niet "wij"</td><td>De harde regel uit de methodiek</td></tr>
+    <tr><td>Mechanisme</td><td>In de subline</td><td>Een belofte zonder mechanisme converteert niet</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="anno">
+  <h3>Je missie gaat niet verloren, hij verhuist</h3>
+  <p>"Het meeste groominggereedschap voelt goedkoop, of ligt ongebruikt in de la" is te goed om weg te gooien — het is de scherpste zin die je hebt. <b>Maar het is een pijnpunt, en pijnpunten horen in sectie 2.</b> Daar krijgt hij ook meer ruimte: probleem, agitatie, oplossing, in plaats van één regel boven een knop.</p>
+  <p>Daarmee wordt de opbouw: hero belooft het resultaat → blok 2 legt uit waarom alles wat je tot nu toe kocht dat niet gaf → blok 3 bewijst het met reviews. Dat is de volgorde van een goed verkoopgesprek: eerst laten zien dat je het probleem begrijpt, dan pas de oplossing.</p>
+</div>
+
+<div class="anno">
+  <h3>Wat ik niet kon doen, en dat moet je weten</h3>
+  <p>De methodiek vraagt om <b>hyperspecifieke getallen</b> in de kop — niet "sneller" maar hoeveel sneller, niet "duizenden klanten" maar 50.400. Ik heb er geen die merkbreed én verifieerbaar is. "Zonder dat het je ochtend kost" is daarom een formulering, geen getal.</p>
+  <p><b>Eén van die getallen is er inmiddels wel</b>, en hij staat nu in het ontwerp: 200.000+ bestellingen sinds 2021, opgeteld uit bol.com, de eigen webshop en Amazon. Die staat niet in de kop maar op de kaart in het beeld, want in de kop zou hij het eindresultaat verdringen. Wat nog steeds ontbreekt: <b>hoeveel minuten</b> een complete routine kost en <b>hoeveel procent</b> van je klanten opnieuw bestelt. Met een van die twee wordt de kop zelf sterker.</p>
+</div>
+
+<h2>Wat er verandert en waarom</h2>
+
+<div class="anno">
+  <h3>Dezelfde bannerstructuur, andere inhoud</h3>
+  <p>Beeld full-bleed, tekstblok van maximaal 560px eroverheen, links uitgelijnd — exact <code>.banner__blocks</code> zoals je theme hem al bouwt. <b>Er verandert niets aan de sectiestructuur, alleen aan wat erin staat.</b> Dat maakt de bouw in Shopify straks klein: dezelfde sectie, andere blokken.</p>
+</div>
+
+<div class="anno">
+  <h3>De headline verkoopt een resultaat, geen korting</h3>
+  <p><b>Was:</b> "SUMMER SALE — profiteer van kortingen tot wel 40%". <b>Wordt:</b> een belofte over het resultaat, geldig voor je hele assortiment. De sale verdwijnt niet — die zakt naar de badge boven de kop, in dezelfde vorm en kleur als je "Best Seller"-badge op de productkaart.</p>
+</div>
+
+<div class="anno">
+  <h3>De kop is je missie, niet je bestseller</h3>
+  <p>De vorige versie ging over keramische messen in de schaamstreek — dat is de Groom Guard, één product uit acht categorieën. <b>De kop benoemt nu de valse keuze waar je hele categorie in zit</b>: gereedschap dat goedkoop aanvoelt, of gereedschap dat er goed uitziet en vervolgens in de la belandt. Dat is een pijn die iedere bezoeker herkent, ongeacht of hij voor een baardtrimmer of een bodygroomer komt.</p>
+  <p>De CTA blijft wel naar de bestsellers wijzen. Een knop naar het complete assortiment zet mensen in een lijst van tientallen producten — precies de keuzestress waar je nu al last van hebt. Brede boodschap, smalle landing.</p>
+</div>
+
+<div class="anno">
+  <h3>Het mechanisme is je bouwproces, niet je mes</h3>
+  <p>Een homepage-hero kan geen productmechanisme dragen zolang dat mechanisme niet in elk product zit. SkinSafe zit in je bodygroomers; iemand die voor een neustrimmer komt heeft er niets aan. <b>Wat wél over je hele assortiment waar is, is hóé je bouwt</b> — en dat staat woordelijk in je visie: getest op daadwerkelijke prestaties, verbeterd op echte klantfeedback, niet op trends of gimmicks.</p>
+  <p>Dat is een zwakker mechanisme dan een blad of een materiaal, en dat moet je weten. Het compenseert op twee manieren: het is verifieerbaar, en het wordt afgesloten met de enige harde belofte die je over álles doet — 100 dagen proberen. Dat laatste is meteen je sterkste bezwaarremover.</p>
+</div>
+
+<div class="anno">
+  <h3>De sale-badge boven een missiekop</h3>
+  <p>Er zit spanning tussen "Summer Sale · tot 40%" en een kop over eerlijke keuzes en geen gimmicks. Als kleine pil valt het mee, en commercieel wil je die korting zichtbaar houden. <b>Wil je een zuiver missie-gedreven hero</b>, dan wordt de badge "Gemaakt voor zelfvertrouwen" — je eigen titel van de Over-pagina — en verhuist de sale naar de bovenbalk. Zeg het maar; het is één instelling.</p>
+</div>
+
+<div class="anno">
+  <h3>De knop staat in de merkkleur</h3>
+  <p>Was wit, is nu <code>#BC813E</code>. Dat wijkt af van de <code>button--light</code> die je banner vandaag gebruikt — een bewuste afwijking op jouw verzoek, en het maakt de knop het duidelijkste kleurpunt van de hele pagina.</p>
+  <p><b>De tekst op de knop is zwart, niet wit.</b> Wit op <code>#BC813E</code> haalt ongeveer 3,3:1 aan contrast en zakt daarmee door de toegankelijkheidsnorm; zwart komt op ongeveer 6:1 en leest gewoon. Als je toch wit wilt, dan moet het goud donkerder — dat kan, maar dan is het je merkkleur niet meer.</p>
+  <p>Om te voorkomen dat goud gaat overheersen, zijn de vinkjes in de garantieregel wit geworden. Goud zit nu op twee plekken: de badge en de knop.</p>
+</div>
+
+<div class="anno">
+  <h3>Een verloopfilter in plaats van een leeg zwart vlak</h3>
+  <p>Je huidige mobiele hero-afbeelding heeft onderin ongeveer 35% egaal zwart, zodat de tekst leesbaar is. Dat kost je een derde van je bovenste scherm. Een donker verloop over de foto doet hetzelfde werk zonder dat je beeld weggeeft — de foto blijft heel én de tekst blijft leesbaar.</p>
+</div>
+
+<div class="anno">
+  <h3>Trustpilot als vaste tekst, in hun eigen huisstijl</h3>
+  <p>Groene sterblokken, halve ster voor de 4,5, groene ster naast het woordmerk, <b>950+ reviews</b>. Nu hangt je enige bewijs boven de vouw aan een widget die via JavaScript inlaadt; laadt die traag of wordt hij geblokkeerd, dan staat er niets. Voor de definitieve build het officiële asset uit je Business-portaal gebruiken, met deze vaste tekst eronder als terugval.</p>
+</div>
+
+<div class="anno">
+  <h3>De garanties staan onder de knop</h3>
+  <p>100 dagen, 2 jaar garantie en gratis verzending staan nu in een aparte balk ónder de hero. Ze horen op het punt waar iemand beslist: pal onder de knop. Ze blijven daarnaast in de bovenbalk staan, want die zag ik ook in je huidige opzet.</p>
+</div>
+
+<div class="anno">
+  <h3>Het beeld: model én product, niets uitgerekt</h3>
+  <p>Je had gelijk. Ik perste een vierkante bronfoto in een kader van bijna 3:1 breed, waardoor er niets overbleef dan een stuk rug — geen gezicht, geen apparaat, geen merk.</p>
+  <p><b>Op desktop staat de foto nu in een eigen paneel van 540px</b>, vrijwel vierkant, dus vlak bij de verhouding van het bestand zelf. Daardoor passen het gezicht, de trimmer én de hardcase met het WELLSHAVE-logo allemaal in beeld. De tekst staat links op zwart, met een zachte overgang tussen de twee, zodat er geen tekst over drukke fotostructuur valt.</p>
+  <p><b>Op mobiel blijft de foto full-bleed</b> met een verloop naar onderen — daar werkt een staand bestand juist goed, en de tekst zakt naar de onderste helft. Op beide formaten is de foto nergens opgerekt.</p>
+  <p><b>Ik draai mijn beeldadvies om:</b> de portretshot wordt nu de aanbevolen optie. Jouw eis is dat model én product zichtbaar zijn, en daar wint hij duidelijk — de trimmer en de case staan er herkenbaar in, waar ze op de spiegelshot half buiten beeld vallen.</p>
+</div>
+
+<h2>Voor en na</h2>
+<div class="tablewrap">
+<table>
+  <thead><tr><th>Element boven de vouw</th><th>Nu</th><th>Ontwerp</th></tr></thead>
+  <tbody>
+    <tr><td>Headline met eindresultaat</td><td>Ontbreekt</td><td>Aanwezig</td></tr>
+    <tr><td>Subheadline met mechanisme</td><td>Ontbreekt</td><td>SkinSafe™ in de subline</td></tr>
+    <tr><td>Social proof</td><td>1× JS-widget</td><td>Trustpilot als vaste tekst</td></tr>
+    <tr><td>CTA</td><td>1</td><td>1</td></tr>
+    <tr><td>FUD-reducers onder de knop</td><td>Ontbreekt</td><td>3</td></tr>
+    <tr><td>Beeld met mens en gebruik</td><td>Nee — zes zwarte apparaten op zwart</td><td>Ja</td></tr>
+    <tr><td>Dode ruimte in het beeld</td><td>~35% egaal zwart op mobiel</td><td>Verloopfilter, geen weggegooid beeld</td></tr>
+    <tr><td>Announcement bars</td><td>2 gestapeld</td><td>1</td></tr>
+    <tr><td>Correcte <code>h1</code></td><td>Nee — twee productnamen</td><td>Ja</td></tr>
+    <tr><td>Reviewaantal</td><td>700+ én 800+ door elkaar</td><td>950+, overal gelijk</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2>Bouwnotities voor straks</h2>
+<p class="sub">Niet uitvoeren tot je akkoord bent.</p>
+<ul>
+  <li>De bestaande <code>banner</code>-sectie hergebruiken. Nieuwe bloktypes: badge, subline, proof-regel en garantieregel. Structuur en breedtes blijven.</li>
+  <li>De hero-titel wordt een echte <code>&lt;h1&gt;</code>; de twee productblokken lager op de pagina zakken naar <code>&lt;h2&gt;</code>.</li>
+  <li>Hero-afbeelding op <code>loading="eager"</code> en <code>fetchpriority="high"</code>. Nu staat daar <code>lazy</code>, terwijl dit je Largest Contentful Paint is op mobiel.</li>
+  <li>Verloopfilter als aparte laag boven het beeld, niet ingebakken in het bestand — dan hoef je bij een nieuwe foto niets opnieuw te exporteren.</li>
+  <li>Twee losse beeldbestanden: staand voor mobiel, liggend voor desktop.</li>
+  <li>De tweede announcement bar uit, de overgebleven bar naar één regel op mobiel.</li>
+  <li>Badge als aparte sectie-instelling, zodat je hem buiten actieperiodes uit kunt zetten zonder de kop aan te raken.</li>
+  <li><code>img{max-width:100%;height:auto;display:block}</code> controleren — bij een hoogte-attribuut plus <code>width:100%</code> zonder <code>height:auto</code> wint het attribuut en rekt het beeld uit.</li>
+</ul>
+
+<div class="callout ask">
+  <h3 style="margin-top:0">Wat ik van jou nodig heb</h3>
+  <ul style="margin-bottom:0">
+    <li><strong>Akkoord op deze hero?</strong> Zo ja, dan ontwerp ik blok 2 in dezelfde taal.</li>
+    <li><strong>Welke kop</strong> — missie of pijn?</li>
+    <li><strong>Sale-badge of missiebadge</strong> boven de kop?</li>
+    <li><strong>Welk beeld</strong>, en kunnen we een liggende opname maken voor desktop?</li>
+    <li><strong>Klopt "180.000+"?</strong> Ik heb het weggelaten omdat ik het niet kon verifiëren. Klopt het, dan zet ik het terug onder de garantieregel.</li>
+  </ul>
+</div>
+
+<h2>Wat waar is over wát</h2>
+<p class="sub">Voor de blokken hierna is dit het belangrijkste overzicht van het hele traject: welke claim je waar mag inzetten.</p>
+<div class="tablewrap">
+<table>
+  <thead><tr><th>Claim</th><th>Geldt voor</th><th>Mag op</th></tr></thead>
+  <tbody>
+    <tr><td>100 dagen proefperiode</td><td><b>Alles</b></td><td>Homepage-hero, elke sectie</td></tr>
+    <tr><td>2 jaar garantie</td><td><b>Alles</b></td><td>Homepage-hero, elke sectie</td></tr>
+    <tr><td>Morgen in huis (NL, besteld voor 23:59)</td><td><b>Alles</b></td><td>Homepage-hero, elke sectie</td></tr>
+    <tr><td>Getest op prestaties, verbeterd op klantfeedback</td><td><b>Alles</b> — je visie</td><td>Homepage-hero, over-ons, blok 7</td></tr>
+    <tr><td>Keramische SkinSafe™-messen</td><td><b>Bodygroomers én neustrimmers</b> — bevestigd 19-08-2026: SafeShave™ op de neustrimmers is dezelfde techniek onder een andere naam</td><td>Categoriepagina's en productpagina's. <b>Nog steeds niet de homepage-hero</b>, want baardtrimmers, tondeuses en scheerapparaten vallen erbuiten</td></tr>
+    <tr><td>IPX7 waterdicht</td><td>"De meeste" apparaten</td><td>Per product, nooit merkbreed</td></tr>
+    <tr><td>6.600 RPM, 1,5–4,5 mm opzetkammen</td><td>Groom Guard</td><td>Alleen die productpagina</td></tr>
+  </tbody>
+</table>
+</div>
+<p>Ik heb ook "zonder sneetjes" definitief laten vallen. Los van de reikwijdte schrijft je Groom Guard-pagina dat SkinSafe het risico <em>"sterk reduceert"</em>, niet dat het sneetjes uitsluit.</p>
+<p>De drie blokken op je Over-pagina — "Prestaties die je merkt", "Ontworpen voor dagelijks gebruik", "Kwaliteit waarop je kunt vertrouwen" — zijn te algemeen voor een hero en staan bijna woordelijk al halverwege je homepage. Die horen in blok 7, herschreven mét een kenmerk erbij.</p>
+
+<h2>Wat dit betekent voor de rest</h2>
+<p>Dit raakt blok 4. Ik had daar "Het mechanisme: SkinSafe" gepland als merkbrede sectie — dat kan dus niet. Er zijn twee routes:</p>
+<ul>
+  <li><strong>Eén mechanismeblok per categorie</strong>, dat meebeweegt met waar iemand naartoe klikt. Zuiverder, maar meer bouwwerk.</li>
+  <li><strong>Eén blok over je bouwproces</strong> op de homepage — hoe je test en verbetert — en de technische mechanismen op de categoriepagina's. Sluit direct aan op deze hero.</li>
+</ul>
+<p>Mijn advies is de tweede. De homepage verkoopt het merk en stuurt door; de categoriepagina verkoopt de techniek. Dat houdt elke claim op de plek waar hij ook echt waar is.</p>
+
+<h2>Daarna</h2>
+<p><strong>Blok 2 — de pijnpunt-sectie.</strong> Het blok dat er nu niet is en dat voor koud verkeer het zwaarst weegt. Zelfde werkwijze, zelfde merktaal: ontwerp, jouw feedback, dan pas Shopify.</p>
+
+<footer>
+  <p>Typografie, kleuren, knopvorm, tekstblokbreedte en type-schaal komen uit <code>base.css</code>, <code>banner.css</code>, <code>product-card.css</code>, <code>reviews.css</code>, <code>benefits.css</code> en <code>header.css</code> van je live theme (wellshave.com, 19-08-2026). Specificaties geverifieerd op de Groom Guard-productpagina. Beeld: <code>freepik_lifestyle-photography-of-_2812060866.png</code> en <code>freepik_portrait-lifestyle-shot-o_2812538722.png</code> uit je Shopify-bestanden, beide tijdelijk. De mockup houdt de merkkleuren vast in zowel licht als donker thema; dat is de site, niet deze pagina.</p>
+</footer>
+
+</div>
+
+<script>
+function fit(){
+  document.querySelectorAll('.scaler').forEach(s=>{
+    const inner=s.firstElementChild;
+    const w=parseFloat(getComputedStyle(inner).width);
+    inner.style.transform='scale('+(s.clientWidth/w)+')';
+  });
+}
+new ResizeObserver(fit).observe(document.body);
+window.addEventListener('load',fit); fit();
+</script>

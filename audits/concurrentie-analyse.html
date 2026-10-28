@@ -1,0 +1,244 @@
+<title>Concurrentie in Mannengrooming</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
+
+<style>
+:root{
+  /* exact de tokens uit :root van je live theme */
+  --graphite:#191816;
+  --grey:#8E8E8E;
+  --white-100:#FFFFFF;
+  --white-80:rgba(255,255,255,.8);
+  --white-40:rgba(255,255,255,.4);
+  --black-100:#111111;
+  --black-60:rgba(17,17,17,.6);
+  --black-40:rgba(17,17,17,.4);
+  --black-10:rgba(17,17,17,.1);
+  --gold-light-100:#F5D18A;
+  --gold-dark-100:#BC813E;
+  --error-color:#C14A3A;
+  --success-color:#1E7F63;
+
+  /* documentchroom, uit dezelfde tokens */
+  --bg:#FBFAF9; --surface:#FFFFFF; --surface-2:#F2F0ED;
+  --fg:var(--black-100); --fg-soft:var(--black-60); --rule:var(--black-10);
+  --accent:#8F6428;
+  --ok:var(--success-color); --ok-bg:#E6F0EC;
+  --crit:#A3271B; --crit-bg:#F6EAE7;
+  --shadow:0 1px 2px rgba(17,17,17,.05), 0 12px 30px -20px rgba(17,17,17,.35);
+  --frame:#E2DFDA;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141413; --surface:#1C1B1A; --surface-2:#252423;
+    --fg:#EEECE9; --fg-soft:rgba(238,236,233,.62); --rule:rgba(238,236,233,.13);
+    --accent:#D9A557; --ok:#7FBF9F; --ok-bg:#182420; --crit:#E38477; --crit-bg:#2A1C19;
+    --shadow:0 1px 2px rgba(0,0,0,.45), 0 12px 30px -20px rgba(0,0,0,.9);
+    --frame:#312F2C;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141413; --surface:#1C1B1A; --surface-2:#252423;
+  --fg:#EEECE9; --fg-soft:rgba(238,236,233,.62); --rule:rgba(238,236,233,.13);
+  --accent:#D9A557; --ok:#7FBF9F; --ok-bg:#182420; --crit:#E38477; --crit-bg:#2A1C19;
+  --shadow:0 1px 2px rgba(0,0,0,.45), 0 12px 30px -20px rgba(0,0,0,.9);
+  --frame:#312F2C;
+}
+
+*{box-sizing:border-box}
+img{max-width:100%;height:auto;display:block}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font-family:"Montserrat",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:16px;line-height:150%;font-weight:400;-webkit-font-smoothing:antialiased}
+.wrap{max-width:940px;margin:0 auto;padding:0 24px 96px}
+@media(max-width:600px){.wrap{padding:0 16px 64px}}
+
+.masthead{padding:60px 0 28px;border-bottom:1px solid var(--rule)}
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);margin:0 0 18px}
+h1{font-weight:600;font-size:clamp(32px,5.6vw,50px);line-height:115%;letter-spacing:-.015em;
+  margin:0 0 16px;text-wrap:balance}
+.dek{font-size:17px;color:var(--fg-soft);margin:0;max-width:64ch;line-height:160%;text-wrap:pretty}
+.byline{font-size:12.5px;color:var(--fg-soft);margin-top:20px}
+
+h2{font-weight:600;font-size:clamp(22px,3.4vw,30px);line-height:120%;letter-spacing:-.01em;
+  margin:56px 0 8px;text-wrap:balance}
+h2 + .sub{color:var(--fg-soft);margin:0 0 22px;font-size:15px;max-width:66ch;line-height:160%}
+h3{font-size:17px;font-weight:600;margin:26px 0 8px}
+p{margin:0 0 14px;max-width:68ch;line-height:160%}
+ul{margin:0 0 14px;padding-left:20px;max-width:68ch}
+li{margin-bottom:7px}
+strong{font-weight:600}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
+  background:var(--surface-2);padding:1px 5px;border-radius:3px}
+
+.anno{background:var(--surface);border:1px solid var(--rule);border-left:2px solid var(--gold-dark-100);
+  border-radius:3px;padding:18px 22px;margin:0 0 13px;box-shadow:var(--shadow)}
+.anno > :last-child{margin-bottom:0}
+.anno h3{margin:0 0 7px;font-size:16.5px}
+.anno p{font-size:15px;margin-bottom:0;color:var(--fg-soft);max-width:68ch}
+.anno p b{color:var(--fg);font-weight:600}
+.anno p + p{margin-top:9px}
+.tablewrap{overflow-x:auto;margin:20px 0;border:1px solid var(--rule);border-radius:3px}
+table{border-collapse:collapse;width:100%;min-width:620px;background:var(--surface);font-size:14px}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--rule);vertical-align:top;line-height:150%}
+th{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--fg-soft);background:var(--surface-2);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td b{font-weight:600;color:var(--fg)}
+.us{background:var(--surface-2)}
+.win{color:var(--ok);font-weight:600}
+.lose{color:var(--crit);font-weight:600}
+.callout{background:var(--surface-2);border-radius:3px;padding:20px 24px;margin:24px 0}
+.callout > :last-child{margin-bottom:0}
+.callout ul,.callout p{max-width:none}
+.ask{border-left:2px solid var(--crit);background:var(--crit-bg)}
+.fix{border-left:2px solid var(--ok);background:var(--ok-bg)}
+.brandcard{background:var(--surface);border:1px solid var(--rule);border-radius:4px;
+  padding:22px 24px;margin:0 0 16px;box-shadow:var(--shadow)}
+.brandcard > :last-child{margin-bottom:0}
+.brandcard h3{margin:0;font-size:20px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.brandcard h3 span{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gold-dark-100)}
+.brandcard .dom{font-size:12.5px;color:var(--fg-soft);margin:2px 0 14px}
+.quote{border-left:2px solid var(--gold-dark-100);padding:2px 0 2px 14px;margin:12px 0;
+  font-style:italic;color:var(--fg);font-size:15px;max-width:68ch}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 0}
+.tags i{font-style:normal;font-size:11px;font-weight:600;letter-spacing:.06em;
+  background:var(--surface-2);color:var(--fg-soft);padding:5px 11px;border-radius:100px}
+footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--rule);
+  color:var(--fg-soft);font-size:13px}
+footer p{max-width:none}
+:focus-visible{outline:2px solid var(--gold-dark-100);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+<div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow">Marktonderzoek · voor het homepage-redesign</p>
+  <h1>Wat de concurrentie doet</h1>
+  <p class="dek">Drie Nederlandse concurrenten volledig uitgelezen: elke sectie, elke belofte, elk getal. Met wat het betekent voor de twaalf blokken — inclusief één advies dat ik hierdoor terugdraai.</p>
+  <p class="byline">Balzac, Balzy en Brothers in Style opgehaald op 19-08-2026 · Manscaped niet bereikbaar, zie onderaan</p>
+</header>
+
+<div class="callout ask">
+  <h3 style="margin-top:0">Manscaped heb ik niet kunnen ophalen</h3>
+  <p style="margin-bottom:0">Manscaped.com geeft <code>403 Forbidden</code> op elk geautomatiseerd verzoek, ook met een volledig browserprofiel, en ook via <code>eu.manscaped.com</code>. Een echte browser kan hier vanuit deze omgeving niet naar buiten, en Manscaped staat niet in de shop-database die ik verder gebruik. <strong>Ik ga niet beschrijven wat ik niet heb gezien.</strong> Stuur je een paar schermafdrukken van hun homepage, dan werk ik ze hier alsnog in — je noemt ze als het grote voorbeeld, dus dat is de moeite waard.</p>
+</div>
+
+<h2>De vondst die er het meest toe doet</h2>
+<p class="sub">Voordat we naar de merken kijken: dit is wat op alle drie tegelijk bleek.</p>
+
+<div class="callout fix">
+  <h3 style="margin-top:0">Jullie hero is op dit moment niet te onderscheiden van de concurrentie</h3>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Merk</th><th>Boodschap boven de vouw</th></tr></thead>
+    <tbody>
+      <tr><td><b>Balzac</b></td><td>"Summer Deals — alleen deze week tot 50% korting"</td></tr>
+      <tr><td><b>Balzy</b></td><td>"ZOMER Deals — bespaar tot 50%"</td></tr>
+      <tr class="us"><td><b>Wellshave</b></td><td>"Summer Deals tot 40% — profiteer van kortingen tot wel 40%"</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p style="margin-bottom:0">Zelfde boodschap, zelfde seizoen, zelfde plek — en jullie hebben van de drie het <strong>laagste kortingspercentage</strong>. Wie jullie naast Balzac legt, ziet één verschil: 40 tegenover 50. Dat is een vergelijking die je niet kunt winnen en die je bovendien zelf uitlokt. Dit is het sterkste argument voor de uitkomst-kop die we voor blok 1 hebben gekozen: het is de enige van de drie die niet over korting gaat.</p>
+</div>
+
+<h2>De drie merken</h2>
+
+<div class="brandcard">
+  <h3>Balzy <span>Het scherpst op autoriteit</span></h3>
+  <p class="dom">balzy.nl · opgericht 2020, Amsterdam</p>
+  <p>Van de drie het meest volwassen in hoe ze zichzelf neerzetten. Ze verkopen geen product maar een bedrijf, en dat doen ze met cijfers en details in plaats van bijvoeglijke naamwoorden.</p>
+  <p class="quote">"Begonnen in 2020 met één trimmer. Nu meer dan 20 producten, 200.000+ klanten door heel Europa en een team van 11 man dat elke dag werkt aan hetzelfde doel: mannen helpen zich beter te verzorgen. Van top tot ballen. Geen bullshit. Geen compromissen. Gewoon producten die werken."</p>
+  <p>Hun FAQ is geen serviceonderdeel maar een autoriteitsinstrument. Let op het detailniveau — dit is het soort concreetheid dat vertrouwen koopt:</p>
+  <p class="quote">"Bestel je voor 23:59? Dan ligt het morgen bij je thuis. DHL haalt elke nacht rond 00:30 de laatste rolcontainers op vanuit ons magazijn in Zuid-Holland."</p>
+  <p>Verder: oprichter bij naam genoemd, "Nederlandse klantenservice door ons eigen team, echte mensen, geen bots, binnen 24 uur", en "marktleider intieme verzorging in Nederland sinds 2022".</p>
+  <div class="tags"><i>200.000+ klanten</i><i>Team van 11</i><i>Oprichter bij naam</i><i>Eigen magazijn</i><i>FAQ als autoriteit</i></div>
+</div>
+
+<div class="brandcard">
+  <h3>Balzac <span>Het scherpst op risico-omkering</span></h3>
+  <p class="dom">balzac.nl</p>
+  <p>Bouwt de homepage op als een reeks bundelblokken met een compleet koopvak per stuk — dezelfde opzet die jullie ook hebben, maar consequenter doorgevoerd. Onder elk koopvak staan drie uitklappers, en de eerste is steeds dezelfde:</p>
+  <p class="quote">"Probeer Balzac 90 dagen in je eigen routine. Niet tevreden? Dan kun je hem eenvoudig naar ons terugsturen."</p>
+  <p>Daarnaast schaarste per product ("nog maar 8 items op voorraad"), gratis verzending én retour, en een eigen productnaamsysteem met merkrechten: The Hedgeman® 5.0, The Beardmate®, Ballwash®, Ballguard®, The Edge®. Ze linken ook naar redactionele content vanaf de homepage: "Waar moet je op letten bij het kopen van een baardtrimmer?"</p>
+  <div class="tags"><i>90 dagen proberen</i><i>100.000+ mannen</i><i>Schaarste per product</i><i>Bundelblokken</i><i>Blog vanaf de homepage</i></div>
+</div>
+
+<div class="brandcard">
+  <h3>Brothers in Style <span>Het scherpst op navigatie en bundels</span></h3>
+  <p class="dom">brothersinstyle.com</p>
+  <p>De enige met een echte tekstuele <code>h1</code> boven de vouw: <b>"NUMMER #1 SCHEEROPLOSSINGEN VOOR MANNEN"</b>, met daaronder "Meer dan 100.000 mannen gingen je voor!" en "gratis cadeaus boven de €100,-".</p>
+  <p>Hun bovenbalk roteert vier bewijsregels, en dat is de dichtste stapeling van proof die ik in de set zag:</p>
+  <p class="quote">"Vertrouwd door meer dan 100.000 mannen!" · "Voor 23:00u besteld — morgen in huis" · "Meer dan 5500 reviews — 4.8 / 5 ★★★★★" · "Veilig en achteraf betalen — met Klarna"</p>
+  <p>Het belangrijkste voor jullie zit in hun navigatie. Waar jullie sorteren op apparaattype, sorteren zij op <b>lichaamszone</b>: Hoofd · Hoofd &amp; Gezicht · Lichaam · Barber Pro Line. Verder: "Meest Populaire Bundels — complete bundels voor barbershop-kwaliteit resultaten thuis", een "vaak gekocht met"-blok in de winkelwagen, en een voortgangsbalk naar gratis verzending.</p>
+  <div class="tags"><i>5500 reviews · 4,8</i><i>100.000+ mannen</i><i>Navigatie op lichaamszone</i><i>Klarna</i><i>Cross-sell in de cart</i></div>
+</div>
+
+<h2>Naast elkaar</h2>
+<div class="tablewrap">
+<table>
+  <thead><tr><th>&nbsp;</th><th>Balzy</th><th>Balzac</th><th>Brothers in Style</th><th>Wellshave</th></tr></thead>
+  <tbody>
+    <tr><td><b>Klanten genoemd</b></td><td>200.000+</td><td>100.000+</td><td>100.000+</td><td class="us">180.000+ <span class="lose">onbevestigd</span></td></tr>
+    <tr><td><b>Reviews zichtbaar</b></td><td>—</td><td>—</td><td>5.500 · 4,8</td><td class="us">950 · 4,5</td></tr>
+    <tr><td><b>Proefperiode</b></td><td>—</td><td>90 dagen</td><td>—</td><td class="us"><span class="win">100 dagen</span></td></tr>
+    <tr><td><b>Garantie</b></td><td>—</td><td>—</td><td>—</td><td class="us"><span class="win">2 jaar</span></td></tr>
+    <tr><td><b>Levering</b></td><td>Voor 23:59</td><td>Voor 23:59</td><td>Voor 23:00</td><td class="us">Voor 23:59</td></tr>
+    <tr><td><b>Team zichtbaar</b></td><td>11 man, oprichter bij naam</td><td>—</td><td>—</td><td class="us">6 personen op de over-pagina</td></tr>
+    <tr><td><b>Navigatie</b></td><td>Op producttype</td><td>Op zone en type</td><td><span class="win">Op lichaamszone</span></td><td class="us">Op producttype</td></tr>
+    <tr><td><b>Hero-boodschap</b></td><td>Zomerkorting</td><td>Zomerkorting</td><td>Positionering</td><td class="us">Zomerkorting</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2>Wat dit betekent voor ons plan</h2>
+
+<div class="anno">
+  <h3>1. Ik draai mijn advies voor blok 2 terug</h3>
+  <p>Ik zette daar "4,5 sterren uit 950+ beoordelingen" als kop. <b>Dat is precies de vergelijking die je verliest.</b> Brothers in Style toont 5.500 reviews en een 4,8; jouw 950 en 4,5 zijn in die context het zwakste cijfer op tafel. Een bezoeker die beide sites bekijkt, maakt die vergelijking automatisch.</p>
+  <p><b>Wat je wél wint, is de risico-omkering.</b> Balzac biedt 90 dagen, de andere twee noemen niets, jij hebt er 100 plus twee jaar garantie. Dat is het beste aanbod in de set en het staat nu nergens prominent. Mijn voorstel: de proof-sectie opent met de garantie en de Trustpilot-score staat er wél, maar niet als kop.</p>
+</div>
+
+<div class="anno">
+  <h3>2. Je navigatie sorteert op het verkeerde</h3>
+  <p>Bodygroomers, scheerapparaten, neustrimmers, baardtrimmers, tondeuses, safety razors. <b>Dat is jouw indeling, niet die van je klant.</b> Brothers in Style sorteert op hoofd, gezicht en lichaam — iemand weet welk lichaamsdeel hij wil aanpakken, niet welk apparaattype daarbij hoort. Dit hoort in blok 3 rechtgezet te worden.</p>
+</div>
+
+<div class="anno">
+  <h3>3. Het teamverhaal is inmiddels tafelinzet, geen onderscheid</h3>
+  <p>Ik stelde voor blok 2 een tegel voor met "zes mensen in Helmond, geen callcenter". Balzy doet dat al, en beter: elf man, oprichter bij naam, magazijn in Zuid-Holland, en dat DHL-detail van 00:30 's nachts. <b>Zo'n verhaal werkt alleen nog als het concreter is dan dat van de buurman.</b> Namen, functies, gezichten, een specifiek detail dat niemand verzint. Anders is het ruis.</p>
+</div>
+
+<div class="anno">
+  <h3>4. Iedereen claimt hetzelfde, dus de claim zelf verkoopt niet meer</h3>
+  <p>Huidvriendelijk, geen irritatie, morgen in huis, 100.000+ mannen, eigen Nederlands magazijn — alle drie zeggen het, in vrijwel dezelfde woorden. In zo'n markt verkoopt de belofte niet meer; <b>het mechanisme en het wegnemen van bezwaren doen het werk.</b> Dat is precies waarom jouw "100 dagen" zwaarder weegt dan nóg een keer "huidvriendelijk".</p>
+</div>
+
+<div class="anno">
+  <h3>5. Bundels zijn bij alle drie de motor</h3>
+  <p>Balzac bouwt de halve homepage uit bundelblokken, Brothers in Style heeft een sectie "Meest Populaire Bundels", Balzy verkoopt sets. Dat bevestigt je eigen instinct om producten en bundels subtiel te verkopen. <b>Het verschil zit in hoe.</b> Balzac zet een compleet koopvak per bundel neer met een uitklapper voor de garantie; jullie doen dat ook, maar met de volledige productpagina erin geplakt. Zelfde idee, zwaardere uitvoering.</p>
+</div>
+
+<div class="anno">
+  <h3>6. Eén ding dat niemand doet</h3>
+  <p>Geen van de drie legt uit <b>waarom het apparaat werkt zoals het werkt.</b> Er is geen doorsnede, geen materiaaluitleg, geen vergelijking tussen mestypes — alleen claims. Dat is het gat in deze markt, en jullie hebben er de bouwstenen voor met SkinSafe. Alleen: dat geldt bij jullie alleen op de bodygroomers, dus het hoort op de categoriepagina en niet op de homepage. <b>Het blijft wel de duidelijkste kans om ergens in te winnen waar de rest leeg is.</b></p>
+</div>
+
+<div class="callout ask">
+  <h3 style="margin-top:0">Waar ik jou voor nodig heb</h3>
+  <ul style="margin-bottom:0">
+    <li><strong>Schermafdrukken van Manscaped.</strong> Jij noemt ze als hét voorbeeld en ik kan er niet bij. Een paar beelden van hun homepage en ik werk ze in dit document in.</li>
+    <li><strong>Akkoord op de koerswijziging in blok 2?</strong> Garantie voorop, Trustpilot aanwezig maar niet als kop.</li>
+    <li><strong>Dat klantaantal.</strong> Zolang "180.000+" niet bevestigd is, staat het nergens — terwijl je concurrenten er alle drie mee openen. Dit is het enige cijfer waarmee je in die rij meedoet.</li>
+    <li><strong>Overweeg Klarna.</strong> Brothers in Style zet achteraf betalen in de bovenbalk, naast de reviews. Als jullie dat aanbieden en het staat er niet, laat je bewijs liggen.</li>
+  </ul>
+</div>
+
+<footer>
+  <p>Balzac (balzac.nl), Balzy (balzy.nl) en Brothers in Style (brothersinstyle.com) opgehaald en volledig uitgelezen op 19 augustus 2026; alle geciteerde teksten staan letterlijk op die pagina's. Manscaped.com blokkeert geautomatiseerde verzoeken met een 403 en is niet beoordeeld. Wellshave-cijfers uit het live theme, de Groom Guard-productpagina en de Shopify-analytics van de afgelopen 30 dagen.</p>
+</footer>
+
+</div>

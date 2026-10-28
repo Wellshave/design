@@ -1,0 +1,55 @@
+{% comment %}
+  Wellshave v7 · brede banners: afgeronde platen met foto, kop in twee regels, korte tekst en een link.
+  Hoogte op desktop: standaard Breed (21:9). Panorama (3:1) is de lage, brede plaat zoals bij Manscaped;
+  daar horen foto's bij met het product helemaal in beeld en lege ruimte voor de tekst.
+{% endcomment %}
+{{ 'ws7.css' | asset_url | stylesheet_tag }}
+<div class="ws7 ws7-banners">
+  {%- for block in section.blocks -%}
+    {%- assign ws7_stijl = 'object-position:' | append: block.settings.pos -%}
+    {%- assign ws7_hoogte = block.settings.hoogte | default: 'breed' -%}
+    {%- assign ws7_ratio = block.settings.foto.aspect_ratio | default: 1.778 -%}
+    {%- assign ws7_mob = block.settings.mob_indeling | default: 'onder' -%}
+    {%- assign ws7_mratio = block.settings.foto_mobiel.aspect_ratio | default: 0.8 -%}
+    <a class="ws7-ban ws7-ban--{{ block.settings.grond }} ws7-ban--{{ block.settings.kant }} ws7-ban--h-{{ ws7_hoogte }} ws7-ban--m-{{ ws7_mob }}{% if block.settings.grond == 'donker' %} ws7-donkergrond{% endif %}" href="{{ block.settings.link | default: '#' }}" style="--mob-pos:{{ block.settings.mob_pos }};--ratio:{{ ws7_ratio }};--mratio:{{ ws7_mratio }}" {{ block.shopify_attributes }}>
+      {%- if block.settings.foto != blank -%}
+        <picture>
+          {%- if block.settings.foto_mobiel != blank -%}<source media="(max-width: 749px)" srcset="{{ block.settings.foto_mobiel | image_url: width: 900 }}">{%- endif -%}
+          {{ block.settings.foto | image_url: width: 2000 | image_tag: loading: 'lazy', widths: '750,1100,1500,2000', sizes: '100vw', alt: block.settings.foto.alt, style: ws7_stijl }}
+        </picture>
+      {%- endif -%}
+      {%- if block.settings.teken -%}{% render 'ws-merkteken', klasse: 'ws7-teken' %}{%- endif -%}
+      <span class="ws7-ban__tekst">
+        <span class="ws7-ban__kop">{{ block.settings.kop }}{% if block.settings.kop_goud != blank %} <span class="ws7-goud">{{ block.settings.kop_goud }}</span>{% endif %}</span>
+        {%- if block.settings.tekst != blank -%}<p>{{ block.settings.tekst }}</p>{%- endif -%}
+        {%- if block.settings.link_label != blank -%}<span class="ws7-link">{{ block.settings.link_label }}{% render 'ws7-pijl' %}</span>{%- endif -%}
+      </span>
+    </a>
+  {%- endfor -%}
+</div>
+{% schema %}
+{
+  "name": "WS7 · Banners",
+  "tag": "div",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "blocks": [
+    { "type": "banner", "name": "Banner", "settings": [
+      { "type": "image_picker", "id": "foto", "label": "Foto" },
+      { "type": "select", "id": "hoogte", "label": "Hoogte op desktop", "default": "breed", "options": [ { "value": "panorama", "label": "Panorama (3:1), voor brede foto's" }, { "value": "breed", "label": "Breed (21:9)" }, { "value": "foto", "label": "Hele foto, niets afgesneden" }, { "value": "laag", "label": "Laag (420 px)" } ], "info": "Bij Breed en Laag bepaalt de uitsnede welk deel van de foto je ziet." },
+      { "type": "text", "id": "pos", "label": "Uitsnede desktop", "default": "50% 50%" },
+      { "type": "image_picker", "id": "foto_mobiel", "label": "Foto telefoon", "info": "Leeg = dezelfde foto." },
+      { "type": "text", "id": "mob_pos", "label": "Uitsnede telefoon", "default": "70% 50%" },
+      { "type": "select", "id": "mob_indeling", "label": "Indeling op de telefoon", "default": "onder", "options": [ { "value": "onder", "label": "Tekst onderin, vaste hoogte" }, { "value": "boven", "label": "Hele telefoonfoto, tekst bovenin" } ], "info": "Hele telefoonfoto: de banner krijgt de verhouding van de telefoonfoto en de tekst staat bovenin. Gebruik een staande foto met lege ruimte boven het product." },
+      { "type": "text", "id": "kop", "label": "Kop", "default": "Groom Guard™" },
+      { "type": "text", "id": "kop_goud", "label": "Kop, regel in goud", "default": "Bodygroomer" },
+      { "type": "textarea", "id": "tekst", "label": "Tekst" },
+      { "type": "text", "id": "link_label", "label": "Linktekst", "default": "Shop nu" },
+      { "type": "url", "id": "link", "label": "Link" },
+      { "type": "select", "id": "grond", "label": "Foto", "default": "donker", "options": [ { "value": "donker", "label": "Donker, witte tekst" }, { "value": "licht", "label": "Licht, donkere tekst" } ] },
+      { "type": "select", "id": "kant", "label": "Tekst", "default": "links", "options": [ { "value": "links", "label": "Links" }, { "value": "rechts", "label": "Rechts" } ] },
+      { "type": "checkbox", "id": "teken", "label": "S-teken als watermerk", "default": true }
+    ]}
+  ],
+  "presets": [ { "name": "WS7 · Banners" } ]
+}
+{% endschema %}

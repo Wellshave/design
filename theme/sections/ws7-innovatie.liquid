@@ -1,0 +1,59 @@
+{% comment %}
+  Wellshave v7 · innovatie: een schuifrij waarin de kaart in het midden groot staat.
+  Op elk beeld staat het product getagd: foto, naam, prijs en een plusje voor de winkelwagen.
+{% endcomment %}
+{{ 'ws7.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'ws7.js' | asset_url }}" defer></script>
+<section class="ws7{% if section.settings.wit %} ws7-wit{% endif %}">
+  <div class="ws7-binnen ws7-midden">
+    {%- if section.settings.oog != blank -%}<p class="ws7-oog">{{ section.settings.oog }}</p>{%- endif -%}
+    {% render 'ws7-kop', kop: section.settings.kop, goud: section.settings.kop_goud %}
+    <div class="ws7-schuif">
+      <div class="ws7-rij ws7-tech" tabindex="0" aria-label="Innovaties, schuif opzij">
+        {%- for block in section.blocks -%}
+          {%- assign p = block.settings.product -%}
+          {%- assign v = p.selected_or_first_available_variant -%}
+          <div class="ws7-tech__kaart{% if forloop.first %} is-actief{% endif %}" {{ block.shopify_attributes }}>
+            <div class="ws7-tech__beeld">
+              {%- if block.settings.foto != blank -%}{%- assign ws7_stijl = 'object-position:' | append: block.settings.pos -%}{{ block.settings.foto | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '600,900,1200', sizes: '(max-width: 749px) 82vw, 54vw', alt: block.settings.foto.alt, style: ws7_stijl }}{%- endif -%}
+              {%- if p != blank -%}
+                <span class="ws7-tag">
+                  <a class="ws7-tag__foto" href="{{ p.url }}">{%- if p.featured_image -%}{{ p.featured_image | image_url: width: 120 | image_tag: loading: 'lazy', alt: p.title }}{%- endif -%}</a>
+                  <a class="ws7-tag__tekst" href="{{ p.url }}"><b>{{ block.settings.naam | default: p.title }}</b><small>{% render 'ws-euro', bedrag: v.price %}</small></a>
+                  {%- if v.available -%}<a class="ws7-tag__plus" href="/cart/add?id={{ v.id }}&quantity=1" aria-label="{{ p.title | escape }} in de winkelwagen">+</a>{%- endif -%}
+                </span>
+              {%- endif -%}
+            </div>
+            <h3 class="ws7-tech__kop">{{ block.settings.titel }}</h3>
+            {%- if block.settings.tekst != blank -%}<p class="ws7-tech__tekst">{{ block.settings.tekst }}</p>{%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+      {% render 'ws7-voortgang' %}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "WS7 · Innovatie",
+  "tag": "div",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "text", "id": "oog", "label": "Bovenregel", "default": "Innovatie" },
+    { "type": "text", "id": "kop", "label": "Kop", "default": "Anders dan de rest." },
+    { "type": "text", "id": "kop_goud", "label": "Kop, regel in goud", "default": "Dit is waarom." },
+    { "type": "checkbox", "id": "wit", "label": "Witte achtergrond", "default": false }
+  ],
+  "blocks": [
+    { "type": "innovatie", "name": "Innovatie", "settings": [
+      { "type": "image_picker", "id": "foto", "label": "Foto" },
+      { "type": "text", "id": "pos", "label": "Uitsnede", "default": "50% 50%" },
+      { "type": "text", "id": "titel", "label": "Innovatie", "default": "SkinSafe-messen" },
+      { "type": "textarea", "id": "tekst", "label": "Uitleg" },
+      { "type": "product", "id": "product", "label": "Getagd product" },
+      { "type": "text", "id": "naam", "label": "Naam in het label", "info": "Leeg = de producttitel." }
+    ]}
+  ],
+  "presets": [ { "name": "WS7 · Innovatie" } ]
+}
+{% endschema %}

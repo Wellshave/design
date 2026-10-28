@@ -1,0 +1,282 @@
+{% comment %}
+  Wellshave — blok 5, de zonekiezer.
+  Ontwerp en onderbouwing: audits/blok-05-waardeproposities.template.html
+  Elke zone is een blok. Naam, prijs en link komen uit het gekozen product;
+  het aantal apparaten en de vanaf-prijs uit de gekozen collectie.
+  De positie van de stip op de foto stel je per zone in.
+{% endcomment %}
+
+{{ 'ws-zonekiezer.css' | asset_url | stylesheet_tag }}
+
+{% render 'indent-settings', section: section %}
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="ws-zf-tik" viewBox="0 0 24 24"><path d="M9 11.4V5.6a1.8 1.8 0 013.6 0v5.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.6 10.8V9.4a1.7 1.7 0 013.4 0v1.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 11V10a1.7 1.7 0 013.4 0v4.6c0 3.4-2.4 6.2-5.8 6.2h-1.4c-2 0-3.4-1-4.4-2.6l-2.6-4.3a1.7 1.7 0 012.7-2l1.1 1.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-zf-gauge" viewBox="0 0 24 24"><path d="M3.6 17.4a9.4 9.4 0 1116.8 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 16.4l4-5.1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="17.2" r="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+  <symbol id="ws-zf-parts" viewBox="0 0 24 24"><rect x="3.4" y="4.2" width="6.2" height="15.6" rx="2.4" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="14.4" y="4.2" width="6.2" height="15.6" rx="2.4" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3.4 8.6h6.2M14.4 8.6h6.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+  <symbol id="ws-zf-drop" viewBox="0 0 24 24"><path d="M12 2.9s6 6.4 6 10.4a6 6 0 01-12 0c0-4 6-10.4 6-10.4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9.3 14.1a2.9 2.9 0 002.9 2.9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+  <symbol id="ws-zf-power" viewBox="0 0 24 24"><rect x="2.6" y="7.2" width="15.4" height="9.6" rx="2.4" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M21 10.6v2.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M10.6 9.6l-2.2 3.2h2.8l-2 2.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-zf-scissors" viewBox="0 0 24 24"><circle cx="6" cy="17.6" r="2.6" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="6" cy="6.4" r="2.6" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8.3 7.8L20 17.2M8.3 16.2L20 6.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+  <symbol id="ws-zf-nose" viewBox="0 0 24 24"><path d="M12.6 3.4v5.4l2.8 5.1c.5 1-.1 2.1-1.2 2.1h-1.1c0 1.8-1.3 3.2-3.1 3.2-1.7 0-3-1.2-3.2-2.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.6 8.4c1.5 0 2.7 1.2 2.7 2.7 0 2-1.2 2.4-1.2 4.1 0 1.4.4 2 .4 3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+  <symbol id="ws-zf-arw" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-zf-chk" viewBox="0 0 24 24"><path d="M4 12.5l5.2 5.2L20 6.9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-zf-kalender" viewBox="0 0 24 24"><rect x="3.4" y="5.4" width="17.2" height="15.2" rx="2.6" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3.4 10.4h17.2M8.2 3.2v4.2M15.8 3.2v4.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+  <symbol id="ws-zf-schild" viewBox="0 0 24 24"><path d="M12 2.9l7.4 2.9v5.9c0 4.4-3 8.3-7.4 9.4-4.4-1.1-7.4-5-7.4-9.4V5.8L12 2.9z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M8.8 12.1l2.3 2.3 4.2-4.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ws-zf-veeg" viewBox="0 0 24 24"><path d="M4 12h16M15 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<div class="ws-zf" data-ws-zonekiezer><div class="ws-zf__in">
+
+  <div class="ws-zf__top">
+    <div>
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="ws-zf__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      {%- if section.settings.kop != blank -%}
+        <h2 class="ws-zf__h2">{{ section.settings.kop }}</h2>
+      {%- endif -%}
+      {%- if section.settings.sub != blank -%}
+        <p class="ws-zf__sub">{{ section.settings.sub }}</p>
+      {%- endif -%}
+    </div>
+    {%- if section.settings.note != blank -%}
+      <p class="ws-zf__note">{{ section.settings.note }}</p>
+    {%- endif -%}
+    {%- if section.settings.hint != blank -%}
+      <div class="ws-zf__hint"><span class="ws-zf__hintring"><svg><use href="#ws-zf-tik"/></svg></span>
+        <em>{{ section.settings.hint | replace: '|br|', '<br>' }}</em></div>
+    {%- endif -%}
+  </div>
+
+  <div class="ws-zf__rail">
+    <div class="ws-zf__chips">
+      {%- for block in section.blocks -%}
+        <button class="ws-zf__chip" type="button" data-zone="{{ block.id }}">
+          {%- if block.settings.foto != blank -%}
+            {{ block.settings.foto | image_url: width: 90 | image_tag: class: 'ws-zf__thumb', alt: '' }}
+          {%- endif -%}
+          <span>{{ block.settings.zone }}</span>
+          <i><svg><use href="#ws-zf-chk"/></svg></i>
+        </button>
+      {%- endfor -%}
+    </div>
+    <p class="ws-zf__veeg"><svg><use href="#ws-zf-veeg"/></svg><em>{{ section.settings.veeg }}</em>
+      <span class="ws-zf__schuif"><i></i></span></p>
+  </div>
+
+  <div class="ws-zf__body">
+    <div class="ws-zf__fig">
+      <span class="ws-zf__vlak"></span>
+      {%- if section.settings.figuur != blank -%}
+        {{ section.settings.figuur | image_url: width: 1200 | image_tag: class: 'ws-zf__foto', alt: '' }}
+      {%- endif -%}
+      {%- if section.settings.merk != blank -%}
+        {{ section.settings.merk | image_url: width: 600 | image_tag: class: 'ws-zf__merk', alt: '' }}
+      {%- endif -%}
+      <svg class="ws-zf__lijnen" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        {%- for block in section.blocks -%}
+          <line data-zone="{{ block.id }}" x1="{{ block.settings.lijn_x }}" y1="{{ block.settings.label_y }}" x2="{{ block.settings.pin_x }}" y2="{{ block.settings.pin_y }}"/>
+        {%- endfor -%}
+      </svg>
+      {%- for block in section.blocks -%}
+        <button class="ws-zf__pin" type="button" data-zone="{{ block.id }}"
+          style="left:{{ block.settings.pin_x }}%;top:{{ block.settings.pin_y }}%"
+          aria-label="Zone {{ block.settings.zone }}"><i></i></button>
+        <button class="ws-zf__label" type="button" data-zone="{{ block.id }}"
+          style="left:4%;top:{{ block.settings.label_y }}%">{{ block.settings.zone }}</button>
+      {%- endfor -%}
+      <span class="ws-zf__actief" data-actief></span>
+      {%- if section.settings.fighint != blank -%}
+        <p class="ws-zf__fighint"><svg><use href="#ws-zf-tik"/></svg>{{ section.settings.fighint }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.pijl != blank -%}
+      <p class="ws-zf__pijl"><em>{{ section.settings.pijl }}</em>
+        <span><svg><use href="#ws-zf-arw"/></svg></span></p>
+    {%- endif -%}
+
+    <div class="ws-zf__kaart">
+      {%- for block in section.blocks -%}
+        {%- assign p = block.settings.product -%}
+        {%- assign v = p.selected_or_first_available_variant -%}
+        {%- assign col = block.settings.collectie -%}
+        <div class="ws-zf__paneel" data-zone="{{ block.id }}" data-naam="{{ block.settings.zone | escape }}" {% unless forloop.first %}hidden{% endunless %} {{ block.shopify_attributes }}>
+          <div class="ws-zf__kop">
+            <p class="ws-zf__match">{{ block.settings.match }}</p>
+            {%- if col != blank -%}
+              <p class="ws-zf__aantal">{{ col.all_products_count }} geschikte apparaten</p>
+            {%- endif -%}
+          </div>
+          <h3 class="ws-zf__naam">{{ block.settings.naam | default: p.title }}</h3>
+          {%- if block.settings.claim != blank -%}
+            <p class="ws-zf__claim">{{ block.settings.claim }}</p>
+          {%- endif -%}
+          <div class="ws-zf__mid">
+            <div class="ws-zf__shot">
+              {%- if block.settings.foto != blank -%}
+                {{ block.settings.foto | image_url: width: 600 | image_tag }}
+              {%- elsif p.featured_image -%}
+                {{ p.featured_image | image_url: width: 600 | image_tag }}
+              {%- endif -%}
+              {%- if block.settings.badge != blank -%}
+                <span class="ws-zf__badge">{{ block.settings.badge }}</span>
+              {%- endif -%}
+            </div>
+            <ul class="ws-zf__feiten">
+              {%- for n in (1..3) -%}
+                {%- assign tk = 'feit_' | append: n -%}
+                {%- assign ik = 'feit_' | append: n | append: '_icoon' -%}
+                {%- assign tekst = block.settings[tk] -%}
+                {%- if tekst != blank -%}
+                  <li><span class="ws-zf__well"><svg><use href="#ws-zf-{{ block.settings[ik] }}"/></svg></span><span>{{ tekst }}</span></li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </div>
+          {%- if p != blank -%}
+            <p class="ws-zf__prijs"><b>{% render 'ws-euro', bedrag: v.price %}</b></p>
+            <a class="ws-zf__cta" href="{{ p.url }}">{{ block.settings.cta | default: p.title }}<span><svg><use href="#ws-zf-arw"/></svg></span></a>
+          {%- endif -%}
+          {%- if col != blank -%}
+            {%- capture vanaf %}{% render 'ws-vanaf', collectie: col %}{% endcapture -%}
+            <a class="ws-zf__alle" href="{{ col.url }}">Bekijk alle {{ col.all_products_count }} producten voor {{ block.settings.zone | downcase }}{% if vanaf != blank %} — vanaf {{ vanaf }}{% endif %} <svg><use href="#ws-zf-arw"/></svg></a>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+
+  {%- comment -%} De rondjes droegen eerst de cijfers 100 en 2, terwijl die
+    ook al in de tekst ernaast stonden. Nu dragen ze een icoon en zegt de
+    tekst het getal één keer. {%- endcomment -%}
+  <div class="ws-zf__strip">
+    <div><span class="ws-zf__zegel"><svg><use href="#ws-zf-chk"/></svg></span><span>{{ section.settings.strip_1 }}</span></div>
+    <div><span class="ws-zf__zegel"><svg><use href="#ws-zf-kalender"/></svg></span><span>{{ section.settings.strip_2 }}</span></div>
+    <div><span class="ws-zf__zegel"><svg><use href="#ws-zf-schild"/></svg></span><span>{{ section.settings.strip_3 }}</span></div>
+  </div>
+
+</div></div>
+
+<script>
+  (function () {
+    document.querySelectorAll('[data-ws-zonekiezer]').forEach(function (sec) {
+      if (sec.dataset.wsKlaar) return;
+      sec.dataset.wsKlaar = '1';
+      var panelen = [].slice.call(sec.querySelectorAll('.ws-zf__paneel'));
+      if (!panelen.length) return;
+      var knoppen = [].slice.call(sec.querySelectorAll('.ws-zf__pin, .ws-zf__label, .ws-zf__chip'));
+      var lijnen = [].slice.call(sec.querySelectorAll('.ws-zf__lijnen line'));
+      var actief = sec.querySelector('[data-actief]');
+
+      var traag = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var i = 0, gestuurd = false, klok = null;
+
+      function toon(n) {
+        i = (n + panelen.length) % panelen.length;
+        var zone = panelen[i].dataset.zone;
+        panelen.forEach(function (p) { p.hidden = p.dataset.zone !== zone; });
+        knoppen.forEach(function (k) { k.classList.toggle('is-aan', k.dataset.zone === zone); });
+        lijnen.forEach(function (l) { l.classList.toggle('is-aan', l.dataset.zone === zone); });
+        if (actief) actief.textContent = panelen[i].dataset.naam || '';
+        var chip = sec.querySelector('.ws-zf__chip[data-zone="' + zone + '"]');
+        if (chip && chip.parentElement.scrollWidth > chip.parentElement.clientWidth) {
+          var r = chip.parentElement;
+          var doel = chip.offsetLeft - (r.clientWidth - chip.offsetWidth) / 2;
+          r.scrollTo({ left: Math.max(0, doel), behavior: traag ? 'auto' : 'smooth' });
+        }
+      }
+      function kies(zone) {
+        // zodra iemand zelf kiest stopt het rondlopen: dit is een keuzeblok, en
+        // dan is doorschuiven onder iemands handen weg hinderlijk
+        gestuurd = true;
+        if (klok) { clearInterval(klok); klok = null; }
+        toon(panelen.findIndex(function (p) { return p.dataset.zone === zone; }));
+      }
+      knoppen.forEach(function (k) {
+        k.addEventListener('click', function () { kies(k.dataset.zone); });
+      });
+
+      // de veegbare zonerail: de balk laat zien hoever je bent, en bij een keuze
+      // via de foto schuift de bijbehorende knop vanzelf in beeld
+      var rail = sec.querySelector('.ws-zf__chips');
+      var balk = sec.querySelector('.ws-zf__schuif i');
+      if (rail && balk) {
+        var meet = function () {
+          var deel = rail.clientWidth / rail.scrollWidth;
+          var speling = rail.scrollWidth - rail.clientWidth;
+          balk.style.width = Math.min(100, deel * 100) + '%';
+          balk.style.left = (speling > 0 ? (rail.scrollLeft / speling) * (100 - deel * 100) : 0) + '%';
+          rail.classList.toggle('rand-links', rail.scrollLeft > 6 && speling - rail.scrollLeft > 6);
+          rail.classList.toggle('rand-eind', speling > 0 && speling - rail.scrollLeft <= 6);
+        };
+        rail.addEventListener('scroll', meet);
+        if (window.ResizeObserver) new ResizeObserver(meet).observe(rail);
+        meet();
+      }
+
+      toon(0);
+      if (!traag) klok = setInterval(function () { if (!gestuurd) toon(i + 1); }, 6000);
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "WS · Zonekiezer",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Bovenregel", "default": "Vind je perfecte tool" },
+    { "type": "text", "id": "kop", "label": "Kop", "default": "Waar wil je trimmen?" },
+    { "type": "inline_richtext", "id": "sub", "label": "Subkop (vet = brons)", "default": "<b>Kies de plek.</b> Wij tonen de beste match." },
+    { "type": "textarea", "id": "note", "label": "Tekst ernaast", "default": "Elk gebied vraagt om een andere kop, messtand en vorm. Selecteer een zone en ontdek welke tool ervoor gemaakt is." },
+    { "type": "text", "id": "hint", "label": "Hint rechtsboven (|br| = regeleinde)", "default": "Klik op|br|een zone" },
+    { "type": "header", "content": "De figuur" },
+    { "type": "image_picker", "id": "figuur", "label": "Foto" },
+    { "type": "image_picker", "id": "merk", "label": "Monogram" },
+    { "type": "text", "id": "fighint", "label": "Regel onderin de foto", "default": "Selecteer een hotspot om van zone te wisselen." },
+    { "type": "text", "id": "pijl", "label": "Regel boven de foto (mobiel)", "default": "Kies hieronder je zone" },
+    { "type": "text", "id": "veeg", "label": "Regel onder de zonerail (mobiel)", "default": "Veeg voor alle zones" },
+    { "type": "header", "content": "Garantiestrip" },
+    { "type": "inline_richtext", "id": "strip_1", "label": "Links", "default": "<b>Mes of opzetstuk</b> los verkrijgbaar" },
+    { "type": "inline_richtext", "id": "strip_2", "label": "Midden", "default": "<b>100 dagen</b> proberen" },
+    { "type": "inline_richtext", "id": "strip_3", "label": "Rechts", "default": "<b>2 jaar</b> garantie" },
+    { "type": "header", "content": "Indent settings" },
+    { "type": "range", "id": "desk_indent_top", "label": "Indent top (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "desk_indent_bottom", "label": "Indent bottom (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_top", "label": "Indent top (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "mob_indent_bottom", "label": "Indent bottom (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "blocks": [
+    {
+      "type": "zone",
+      "name": "Zone",
+      "settings": [
+        { "type": "text", "id": "zone", "label": "Naam van de zone" },
+        { "type": "product", "id": "product", "label": "Beste match", "info": "Prijs en link komen hieruit." },
+        { "type": "collection", "id": "collectie", "label": "Collectie", "info": "Aantal apparaten en vanaf-prijs komen hieruit." },
+        { "type": "image_picker", "id": "foto", "label": "Foto", "info": "Leeg = de hoofdafbeelding van het product." },
+        { "type": "text", "id": "match", "label": "Regel boven de naam" },
+        { "type": "text", "id": "naam", "label": "Naam", "info": "Leeg = de producttitel." },
+        { "type": "text", "id": "claim", "label": "Claim" },
+        { "type": "text", "id": "badge", "label": "Badge op de foto" },
+        { "type": "text", "id": "cta", "label": "Knoptekst" },
+        { "type": "header", "content": "Drie feiten" },
+        { "type": "select", "id": "feit_1_icoon", "label": "Icoon 1", "options": [ { "value": "gauge", "label": "Toeren" }, { "value": "parts", "label": "Opzetstukken" }, { "value": "drop", "label": "Waterdicht" }, { "value": "power", "label": "Accu" }, { "value": "scissors", "label": "Messen" }, { "value": "nose", "label": "Neus" } ], "default": "gauge" },
+        { "type": "text", "id": "feit_1", "label": "Feit 1" },
+        { "type": "select", "id": "feit_2_icoon", "label": "Icoon 2", "options": [ { "value": "gauge", "label": "Toeren" }, { "value": "parts", "label": "Opzetstukken" }, { "value": "drop", "label": "Waterdicht" }, { "value": "power", "label": "Accu" }, { "value": "scissors", "label": "Messen" }, { "value": "nose", "label": "Neus" } ], "default": "parts" },
+        { "type": "text", "id": "feit_2", "label": "Feit 2" },
+        { "type": "select", "id": "feit_3_icoon", "label": "Icoon 3", "options": [ { "value": "gauge", "label": "Toeren" }, { "value": "parts", "label": "Opzetstukken" }, { "value": "drop", "label": "Waterdicht" }, { "value": "power", "label": "Accu" }, { "value": "scissors", "label": "Messen" }, { "value": "nose", "label": "Neus" } ], "default": "drop" },
+        { "type": "text", "id": "feit_3", "label": "Feit 3" },
+        { "type": "header", "content": "Plek op de foto" },
+        { "type": "range", "id": "pin_x", "label": "Stip horizontaal", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+        { "type": "range", "id": "pin_y", "label": "Stip verticaal", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+        { "type": "range", "id": "label_y", "label": "Label verticaal", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+        { "type": "range", "id": "lijn_x", "label": "Lijn begint op", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 25 }
+      ]
+    }
+  ],
+  "presets": [ { "name": "WS · Zonekiezer" } ]
+}
+{% endschema %}

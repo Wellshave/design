@@ -1,0 +1,8 @@
+{%- comment -%}
+  Kop in twee regels: de eerste stelt vast, de tweede staat in goud.
+  Gebruik: {% render 'ws7-kop', kop: section.settings.kop, goud: section.settings.kop_goud, tag: 'h2' %}
+{%- endcomment -%}
+{%- assign ws7_tag = tag | default: 'h2' -%}
+{%- if kop != blank or goud != blank -%}
+<{{ ws7_tag }} class="ws7-kop {{ klasse }}">{{ kop }}{% if goud != blank %} <span class="ws7-goud">{{ goud }}</span>{% endif %}</{{ ws7_tag }}>
+{%- endif -%}

@@ -1,0 +1,10 @@
+{%- comment -%}
+  Laagste prijs binnen een collectie. Het collectie-object in Liquid heeft geen
+  price_min — dat bestaat alleen op een product — dus rekenen we het hier uit
+  over de producten die in de collectie zitten.
+  Gebruik: {% render 'ws-vanaf', collectie: mijn_collectie %}
+{%- endcomment -%}
+{%- if collectie != blank -%}
+  {%- assign vanaf = collectie.products | map: 'price_min' | sort | first -%}
+  {%- if vanaf -%}{% render 'ws-euro', bedrag: vanaf %}{%- endif -%}
+{%- endif -%}

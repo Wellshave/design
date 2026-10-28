@@ -1,0 +1,17 @@
+{%- comment -%}
+  Een bedrag mét euroteken, ook als de valutanotatie van de winkel geen
+  symbool bevat. Staat er wél een teken in die notatie, dan laat dit
+  snippet het bedrag met rust — er komen dus nooit twee tekens te staan.
+
+  De echte plek om dit te regelen is Instellingen → Algemeen →
+  Valutanotatie in Shopify; dat geldt voor de hele winkel, ook voor de
+  kassa en de mails. Dit snippet is het vangnet voor onze eigen blokken.
+
+  Gebruik: {% render 'ws-euro', bedrag: variant.price %}
+{%- endcomment -%}
+{%- assign ws_euro_bedrag = bedrag | money -%}
+{%- if ws_euro_bedrag contains '€' or ws_euro_bedrag contains '$' or ws_euro_bedrag contains '£' or ws_euro_bedrag contains 'EUR' -%}
+  {{- ws_euro_bedrag -}}
+{%- else -%}
+  €{{- ws_euro_bedrag -}}
+{%- endif -%}

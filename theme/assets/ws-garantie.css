@@ -1,0 +1,152 @@
+/* ═══ Wellshave — blok 11, goed geregeld ═══
+   Bron: audits/blok-11-garantie-faq.template.html */
+
+.ws-zk{font-family:"Montserrat",sans-serif;background:#F7F2E9;color:#111;padding:44px 34px}
+.ws-zk *{box-sizing:border-box}
+.ws-zk p{margin:0;max-width:none}
+
+/* het hele blok staat in een dun gouden kader op een warm vlak */
+.ws-zk__rand{position:relative;border:1px solid rgba(188,129,62,.32);border-radius:20px;
+  background:linear-gradient(165deg,#FBF7F0 0%,#F6EFE3 55%,#F2E8D8 100%);
+  padding:44px 44px 46px;overflow:hidden}
+.ws-zk__merk{position:absolute;left:-30px;top:-40px;width:210px;height:auto;opacity:.05;
+  pointer-events:none}
+.ws-zk__in{position:relative;z-index:1;max-width:1160px;margin:0 auto;display:flex;
+  flex-direction:column;gap:30px;min-width:0}
+
+/* kop */
+.ws-zk__kop{text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px}
+.ws-zk__eyebrow{display:inline-flex;align-items:center;gap:16px;font-size:11px;font-weight:700;
+  letter-spacing:.22em;text-transform:uppercase;color:#BC813E}
+.ws-zk__eyebrow::before,.ws-zk__eyebrow::after{content:"";width:42px;height:1px;
+  background:rgba(188,129,62,.5)}
+.ws-zk__h2{font-size:40px;line-height:114%;font-weight:600;letter-spacing:-.028em;margin:0;
+  color:#111;text-transform:none}
+.ws-zk__h2 b,.ws-zk__h2 strong{display:block;font-weight:600;color:#BC813E}
+.ws-zk__sub{font-size:15px;line-height:158%;color:rgba(17,17,17,.6);max-width:62ch}
+
+/* de vier zekerheden */
+.ws-zk__vier{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.ws-zk__kaart{background:rgba(255,255,255,.72);border:1px solid rgba(188,129,62,.22);
+  border-radius:14px;padding:26px 22px 24px;text-align:center;display:flex;flex-direction:column;
+  align-items:center;gap:10px;min-width:0}
+.ws-zk__zegel{width:66px;height:66px;border-radius:50%;flex:none;margin-bottom:4px;
+  border:1px solid rgba(188,129,62,.4);background:rgba(255,255,255,.7);display:flex;
+  align-items:center;justify-content:center;color:#BC813E}
+.ws-zk__zegel svg{width:30px;height:30px}
+.ws-zk__groot{font-size:23px;line-height:118%;font-weight:600;letter-spacing:-.022em;color:#111}
+.ws-zk__wat{font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:#BC813E;line-height:150%}
+.ws-zk__mits{font-size:13px;line-height:152%;color:rgba(17,17,17,.55)}
+
+/* de twee panelen onderin */
+.ws-zk__duo{display:grid;grid-template-columns:minmax(0,390px) minmax(0,1fr);gap:20px;
+  align-items:stretch}
+
+/* links: hulp van een mens */
+.ws-zk__hulp{position:relative;background:#141312;color:#fff;border-radius:16px;padding:32px 30px;
+  display:flex;flex-direction:column;gap:18px;overflow:hidden}
+.ws-zk__hulp .ws-zk__merk{left:auto;right:-46px;top:auto;bottom:-56px;width:210px;opacity:.07;
+  filter:brightness(0) invert(1)}
+.ws-zk__hulpkop{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:#BC813E;position:relative;z-index:1}
+.ws-zk__hulph{position:relative;z-index:1;font-size:27px;line-height:120%;font-weight:600;
+  letter-spacing:-.024em;margin:0;color:#fff;text-transform:none}
+.ws-zk__hulph b,.ws-zk__hulph strong{display:block;font-weight:600;color:#F5D18A}
+.ws-zk__hulpp{position:relative;z-index:1;font-size:14px;line-height:158%;
+  color:rgba(255,255,255,.62)}
+.ws-zk__team{position:relative;z-index:1;display:flex;align-items:center;gap:16px}
+.ws-zk__koppen{display:flex;flex:none}
+.ws-zk__koppen i{width:46px;height:46px;border-radius:50%;display:block;flex:none;overflow:hidden;
+  border:2px solid #141312;box-shadow:0 0 0 1px rgba(245,209,138,.4);background:#2A2724;
+  margin-left:-13px}
+.ws-zk__koppen img{width:100%;height:100%;object-fit:cover;display:block}
+.ws-zk__koppen i:first-child{margin-left:0}
+.ws-zk__team b{display:block;font-size:11px;font-weight:700;letter-spacing:.15em;
+  text-transform:uppercase;color:#F5D18A}
+.ws-zk__team em{display:block;font-style:normal;font-size:13px;color:rgba(255,255,255,.6);
+  margin-top:4px}
+.ws-zk__knop{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;
+  gap:12px;border-radius:100px;padding:16px 22px;text-decoration:none;font-size:12.5px;
+  font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  background:linear-gradient(135deg,#F5D18A 0%,#D8AC5D 52%,#BC813E 100%);color:#141312}
+.ws-zk__knop:hover{color:#141312;text-decoration:none}
+.ws-zk__knop svg{width:17px;height:17px}
+.ws-zk__knop--rand{background:transparent;border:1px solid rgba(245,209,138,.42);color:#F5D18A}
+.ws-zk__knop--rand:hover{color:#F5D18A}
+.ws-zk__slot{position:relative;z-index:1;display:flex;align-items:center;gap:11px;font-size:13px;
+  color:rgba(255,255,255,.55)}
+.ws-zk__slot svg{width:17px;height:17px;color:#BC813E;flex:none}
+
+/* rechts: de vragen */
+.ws-zk__vak{background:rgba(255,255,255,.8);border:1px solid rgba(188,129,62,.22);
+  border-radius:16px;padding:28px 28px 24px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.ws-zk__vakkop{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:#BC813E}
+.ws-zk__vakh{font-size:27px;line-height:120%;font-weight:600;letter-spacing:-.024em;margin:0;
+  color:#111;text-transform:none}
+.ws-zk__vakp{font-size:13.5px;line-height:150%;color:rgba(17,17,17,.55)}
+.ws-zk__chips{display:flex;gap:9px;flex-wrap:wrap;margin-top:2px}
+.ws-zk__chip{font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  border:1px solid rgba(188,129,62,.35);border-radius:100px;padding:10px 18px;color:#8F6428;
+  background:rgba(255,255,255,.6);white-space:nowrap;cursor:pointer;font-family:inherit}
+.ws-zk__chip.is-aan{background:linear-gradient(135deg,#D8AC5D,#BC813E);border-color:transparent;
+  color:#fff}
+.ws-zk__lijst{display:flex;flex-direction:column;gap:8px;min-width:0}
+.ws-zk__vraag{background:#fff;border:1px solid rgba(17,17,17,.08);border-radius:11px;
+  padding:15px 18px;min-width:0;cursor:pointer}
+.ws-zk__vraag[hidden]{display:none}
+.ws-zk__vraag.is-aan{border-color:rgba(188,129,62,.45);background:#FFFDF9}
+.ws-zk__rij{display:flex;align-items:center;gap:14px;min-width:0}
+.ws-zk__rij b{font-size:14.5px;font-weight:600;letter-spacing:-.008em;line-height:140%;min-width:0}
+.ws-zk__teken{margin-left:auto;flex:none;width:24px;height:24px;border-radius:50%;
+  border:1px solid rgba(188,129,62,.4);display:flex;align-items:center;justify-content:center;
+  color:#BC813E}
+.ws-zk__teken svg{width:12px;height:12px;transition:transform .35s ease}
+.ws-zk__vraag.is-aan .ws-zk__teken svg{transform:rotate(45deg)}
+.ws-zk__antwoord{font-size:13.5px;line-height:160%;color:rgba(17,17,17,.6);padding:9px 34px 2px 0}
+.ws-zk__antwoord b,.ws-zk__antwoord strong{color:#111;font-weight:600}
+.ws-zk__vraag:not(.is-aan) .ws-zk__antwoord{display:none}
+.ws-zk__vakslot{display:flex;align-items:center;gap:11px;font-size:13px;color:rgba(17,17,17,.55);
+  padding-top:4px;margin-top:auto}
+.ws-zk__vakslot svg{width:17px;height:17px;color:#BC813E;flex:none}
+
+/* ── mobiel ── */
+@media (max-width:749px){
+  .ws-zk{padding:24px 14px}
+  .ws-zk__rand{padding:28px 18px 30px;border-radius:16px}
+  .ws-zk__in{gap:22px}
+  .ws-zk__h2{font-size:27px}
+  .ws-zk__eyebrow{font-size:10px;gap:11px}
+  .ws-zk__eyebrow::before,.ws-zk__eyebrow::after{width:26px}
+  .ws-zk__sub{font-size:13.5px}
+  /* twee naast twee. Eerder was dit een veegbare rij van 58% brede kaarten,
+     maar dan hangt de tweede kaart altijd half buiten beeld met zijn tekst
+     middenin een woord afgekapt — dat leest als kapot, niet als veeg verder.
+     Zo staan alle vier de zekerheden er meteen, volledig leesbaar, en nog
+     steeds naast elkaar. */
+  .ws-zk__vier{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .ws-zk__kaart{padding:18px 12px 16px;gap:7px}
+  .ws-zk__zegel{width:50px;height:50px}
+  .ws-zk__zegel svg{width:23px;height:23px}
+  .ws-zk__groot{font-size:17px}
+  .ws-zk__wat{font-size:9.5px;letter-spacing:.12em}
+  .ws-zk__mits{font-size:11.5px}
+  .ws-zk__duo{grid-template-columns:1fr;gap:14px}
+  .ws-zk__hulp{padding:24px 20px;gap:15px}
+  .ws-zk__hulph{font-size:22px}
+  .ws-zk__koppen i{width:40px;height:40px}
+  .ws-zk__vak{padding:22px 18px 20px}
+  .ws-zk__vakh{font-size:22px}
+  /* de onderwerpknoppen blijven op één regel en schuiven mee; op 390px is er
+     geen ruimte voor drie chips naast elkaar, en twee regels chips leest als
+     twee soorten knoppen */
+  .ws-zk__chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 -18px;
+    padding:1px 18px 3px;
+    -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 22px),transparent);
+    mask-image:linear-gradient(90deg,#000 calc(100% - 22px),transparent)}
+  .ws-zk__chips::-webkit-scrollbar{display:none}
+  .ws-zk__chip{flex:none;padding:9px 14px;font-size:10px}
+  .ws-zk__rij b{font-size:13.5px}
+  .ws-zk__antwoord{font-size:12.5px;padding-right:0}
+}

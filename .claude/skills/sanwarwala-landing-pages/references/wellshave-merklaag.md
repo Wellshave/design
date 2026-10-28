@@ -12,6 +12,38 @@ geldt. Prijzen, bestandsnamen en losse incidenten horen bij het project, niet hi
 
 ---
 
+## 0. Stand van de huisstijl: homepage v7 (oktober 2026)
+
+De homepage v7 is de referentie voor alles wat hierna komt: `theme/sections/ws7-*.liquid`,
+`theme/assets/ws7.css`, ontwerp in `artifacts/wellshave-manscaped-stijl.html`. In het kort:
+
+- **Opbouw** naar Manscaped, **rust** naar Hears, **taal** van Wellshave.
+- **Letter:** Inter Tight 500 voor koppen, Inter voor de rest (deel 4).
+- **Kop in twee regels**, de tweede in goudverloop (deel 5).
+- **Geen knoppen op de website**, tekstlinks met een gouden pijl; alleen de koopactie is een
+  knop (deel 6).
+- **Labels** klein, rechthoekig, carbon (deel 7).
+- **Schuifrijen** met een dunne voortgangsbalk in plaats van pijlen of stippen (deel 7).
+- **Zand** `#F5F1EA` als grond, **carbon** voor donkere platen, afronding 12/18/26, het
+  **S-teken** als watermerk.
+- **Alles aanpasbaar** in de theme-editor: producten uit Shopify, teksten, foto's en links als
+  instellingen, nooit hard in de code.
+
+**Header, footer en winkelwagen** volgen dezelfde lijn. Header, aankondigingsbalk en footer staan in
+Inter via `theme/assets/ws7-chroom.css`. De winkelwagen-lade (`theme/snippets/cart-drawer.liquid`,
+`cart-rewards-bar.liquid`, `assets/cart-drawer.css`, ontwerp in het canvas *Wellshave winkelwagen v7*)
+is naar Hears: aantal in een zwart rondje, dunne gouden cadeaubalk met vinkjes, van-prijzen
+doorgestreept, cadeaus als eigen regel met een label "Cadeau vanaf €…", verzekerde verzending als
+kaart met een schakelaar (standaard uit; een vooraf aangevinkte betaalde optie mag niet), een
+schuifrij met toevoegingen en onderaan het totaal met een carbon "Bespaar"-label. De afrekenknop is
+de enige echte knop.
+
+**Nog niet omgezet:** `startbestand-advertorial.html` en `startbestand-listicle.html` staan nog
+in Montserrat met pilknoppen. Zet bij de eerstvolgende pagina de letter, links en labels om
+naar deel 4, 6 en 7, en werk dan het startbestand mee bij.
+
+---
+
 ## 1. De werkwijze
 
 Van creative tot gepubliceerde pagina. Houd deze volgorde aan; hij is zo gebouwd dat elke stap
@@ -159,7 +191,7 @@ bewijs, FAQ en afsluiter zijn bij advertorial en listicle identiek.
 Het type is niet de hele vraag. Een advertorial en een listicle kunnen in twee registers staan,
 en dat verschil is voor de lezer groter dan het verschil tussen de typen onderling.
 
-- **Winkelregister** &mdash; Montserrat, de gouden tweeslagskop, geruststroken, het aanbodblok
+- **Winkelregister** &mdash; Inter Tight en Inter, de gouden tweeslagskop, geruststroken, het aanbodblok
   midden op de pagina. De pagina oogt als jouw winkel.
 - **Redactioneel register** &mdash; serif met cursief accent, krantenbalk met het woord
   Advertorial, smalle kolom, persstrook, sponsorvermelding boven de vouw, het aanbod pas
@@ -171,7 +203,7 @@ productdemonstratie vraagt om het winkelregister. Een informatieve advertentie g
 winkelpagina breekt de belofte binnen een seconde, en dat is precies waar de klik op stukloopt.
 
 Het redactionele register wijkt bewust af van deel 4: het gebruikt een serif in plaats van
-Montserrat, omdat de pagina juist niet als de eigen winkel mag ogen. Dat is de enige afwijking;
+Inter, omdat de pagina juist niet als de eigen winkel mag ogen. Dat is de enige afwijking;
 kleuren, bewijsregels en publiceerroute gelden onverkort. De inrichting, de eerlijkheidsregels
 die daarbij horen en de reden achter de afwijking staan in `references/redactioneel-register.md`.
 
@@ -227,7 +259,7 @@ andere het ook kunnen gebruiken.
 }
 ```
 
-**Zand is het signaal, niet goud.** `#F5F1EA` met zwarte Montserrat is wat Wellshave
+**Zand is het signaal, niet goud.** `#F5F1EA` met zwarte Inter Tight is wat Wellshave
 herkenbaar maakt. Brons en goud zijn accent en moeten schaars blijven; zodra alles brons is,
 oogt het als een sjabloon met een gouden randje.
 
@@ -238,18 +270,35 @@ oogt het als een sjabloon met een gouden randje.
 
 ## 4. Typografie
 
-**Uitsluitend Montserrat** (400/500/600/700/800/900). Eén familie over het hele merk. Een
-display-serif erbij verzinnen breekt de herkenning direct.
+**Sinds de homepage v7 (oktober 2026): Inter Tight voor koppen, Inter voor al het andere.**
+Rustig en neutraal, in de geest van Helvetica Now Display, de letter van hears.com. Die is een
+betaalde Monotype-letter; Inter Tight en Inter zijn gratis en komen er het dichtst bij. Neemt
+Wellshave ooit een licentie op Helvetica Now, dan vervangt die Inter Tight één op één.
 
-| Rol | Gewicht | Spatiëring | Kleur |
-|---|---|---|---|
-| Sectiekop | 900 | `-.025em` | ink / wit |
-| Subkop in artikel | 900 | `-.022em` | ink |
-| Lopende tekst | 400-500 | normaal, `line-height:1.7` | ink-80 |
-| Eyebrow / label | 800 | `.2em`, uppercase, ~10.5px | ink-40 |
-| Knoptekst | 800 | normaal | zie deel 6 |
+```css
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600&display=swap");
+--kopletter:"Inter Tight","Helvetica Neue",Helvetica,Arial,sans-serif;
+--letter:"Inter",-apple-system,"Helvetica Neue",Helvetica,Arial,sans-serif;
+```
 
-Koppen krijgen `text-wrap:balance`. Lopende tekst blijft binnen `--read`.
+| Rol | Letter | Gewicht | Spatiëring | Kleur |
+|---|---|---|---|---|
+| Sectiekop | Inter Tight | 500 | `-.035em`, `line-height:1.04` | ink / wit |
+| Productnaam, kaartkop | Inter | 600 | normaal | ink |
+| Lopende tekst | Inter | 400 | `-.005em`, `line-height:1.55` | ink-80 of `#6A635A` |
+| Eyebrow / label | Inter | 600 | `.14em`, uppercase, ~10.5px | `#9A6A2E` op licht, `#F5D18A` op donker |
+| Prijs | Inter | 600, `tabular-nums` | normaal | ink, van-prijs doorgestreept in `#A39A8E` |
+
+**Klein en rustig.** Koppen van 44 px op desktop en 30 px op de telefoon, niet zwaarder dan 500.
+Niet schreeuwen met gewicht: de gouden tweede regel (deel 5) doet het werk. Geen smalle
+hoofdletters voor productnamen; dat is het handschrift van Manscaped, niet van ons.
+
+Montserrat blijft alleen bestaan waar oude pagina's hem nog hebben; nieuwe pagina's gebruiken
+hem niet meer. Het redactionele register heeft zijn eigen serif (deel 2), dat verandert niet.
+
+In het v7-thema staan de header, de aankondigingsbalk en de footer ook in Inter, via
+`assets/ws7-chroom.css`. Dat bestand geldt alleen binnen de header- en footergroep; de
+productpagina's en collecties houden nog de themaletter Montserrat tot ze zelf worden omgezet.
 
 ---
 
@@ -302,36 +351,40 @@ De tweede regel draagt de emotie, de eerste de feitelijkheid. Zet het voordeel d
 
 ---
 
-## 6. Knoppen
+## 6. Knoppen en links
 
-Alle knoppen zijn **pillen** (`border-radius:100px`). Nooit rechthoekig, nooit licht
-afgerond — dat is het verschil tussen zacht en technisch.
-
-| Soort | Vulling | Tekst | Waar |
-|---|---|---|---|
-| Primair | `--grad-gold` | `#1A1408` | de hoofdactie, één per schermhoogte |
-| Secundair | `--ink` | wit | nav, herhaalde acties |
-| Op donker | wit 10% + rand wit 20% | wit | kaarten in donkere secties |
-| Op goud vlak | `--carbon` | wit | de uitgelichte kaart |
-| Tekstlink | geen | `--ink-60` met onderlijn | de zachte tweede optie |
+**Op de website zijn er geen knoppen, alleen tekstlinks.** Vastgelegd met de homepage v7, naar
+het voorbeeld van hears.com: een knop schreeuwt, een link nodigt uit. Het goud zit in een kleine
+pijl en in de onderlijn bij hover.
 
 ```css
-.knop{display:inline-flex;align-items:center;gap:9px;border-radius:100px;
-      padding:16px 30px;font-size:14.5px;font-weight:800;text-decoration:none;
-      transition:background .18s ease,transform .18s ease}
-.knop:hover{transform:translateY(-1px)}
-.knop.goud{background:var(--grad-gold);color:#1A1408}
-.knop.goud:hover{filter:brightness(1.04)}
+.link{display:inline-flex;align-items:center;gap:8px;padding-bottom:4px;font-size:13.5px;font-weight:500;color:var(--ink);
+  border-bottom:1px solid rgba(17,17,17,.25);
+  background:linear-gradient(90deg,#D8AC5D,#BC813E) 0 100%/0 1px no-repeat;
+  transition:background-size .3s ease,border-color .3s ease}
+.link svg{width:14px;height:14px;color:#B0742A;transition:transform .2s ease}   /* pijl → */
+.link:hover{background-size:100% 1px;border-color:transparent}                  /* de lijn loopt vol in goud */
+.link:hover svg{transform:translateX(3px)}
+/* op donker: tekst wit, onderlijn wit 35%, pijl #F5D18A, hoverlijn #F5D18A → #D8AC5D */
 ```
 
-**Regels:**
+- Labels in gewone zinsletters: "Shop nu", "Bekijk alle sets", "Vind jouw apparaat".
+- Een tweede, zachtere optie ("Doe de quiz") is gewone tekst in 60% wit of ink-60, zonder pijl.
+- Een invulveld (nieuwsbrief) mag een klein, stil vlak hebben: wit of ink, pil, 11.5px.
+- Toetsenbordfocus: `2px solid #BC813E`, `outline-offset:4px`.
 
-- Eén primaire knop per schermhoogte. Twee gouden knoppen naast elkaar heffen elkaar op.
-- Zet het voordeel of de prijs in het label als dat de drempel verlaagt. "Kies jouw pakket"
-  slaat beter aan dan "Verzenden".
-- Direct onder een koopknop staan de risiconemers: proefperiode, garantie, verzending.
-  Nabijheid tot het klikpunt is wat telt, niet dat ze ergens op de pagina staan.
-- Zichtbare toetsenbordfocus overal: `3px solid var(--bronze)`, `outline-offset:3px`.
+**De koopactie is de uitzondering.** Op een productpagina of landingspagina blijft "In de
+winkelwagen" een echte knop, want daar moet de bezoeker niet zoeken. Dan de live Wellshave-knop:
+
+```css
+.koop{display:inline-flex;align-items:center;gap:12px;border-radius:14px;padding:18px 28px;
+  background:linear-gradient(135deg,#F5D18A 0%,#D8AC5D 52%,#BC813E 100%);color:#111;
+  font-weight:700;font-size:13px;letter-spacing:.13em;text-transform:uppercase;
+  box-shadow:0 14px 34px -18px rgba(245,209,138,.9)}
+```
+
+Eén koopknop per schermhoogte. Direct eronder de risiconemers: proefperiode, garantie,
+verzending.
 
 **Koopknoppen leggen direct in de winkelwagen.** Op een landingspagina is de productpagina
 een omweg: de bezoeker is daar al overtuigd, en nog een pagina met opnieuw kiezen kost
@@ -362,7 +415,37 @@ De kaart is de bouwsteen. Vaste kenmerken: afronding `--r-m`, ruime binnenmarge 
 - **Uitgelichte kaart**: `--grad-gold` als vulling, donkere knop, en een lintje dat over de
   bovenrand valt.
 
-Elke kaart heeft een icoon in een afgerond vierkant of cirkel, een kop van één regel, en
+### Productkaart (vastgelegd met de homepage v7)
+
+Wit vlak met afronding 18 en een zachte schaduw; daarin het beeld op zand (`#F5F1EA`, afronding
+12) met de packshot op `mix-blend-mode:darken`, zodat de lichtgrijze fotogrond wegvalt. Eronder
+de naam (Inter 600), een korte regel in `#6A635A`, en de prijs met de van-prijs doorgestreept.
+
+**Het label is klein, rechthoekig en donker.** Geen gouden pil.
+
+```css
+.label{position:absolute;left:10px;top:10px;background:#191816;color:#fff;border-radius:3px;
+  padding:4px 7px;font-size:10px;font-weight:600;line-height:1}
+```
+
+De tekst is het kortingspercentage plus "Korting" ("30% Korting"), berekend zoals `ws-spaar`:
+in centen en naar beneden afgerond, zodat het nooit meer belooft dan de prijs.
+
+### Schuifrij met voortgangsbalk
+
+Rijen met meer kaarten dan er passen schuiven horizontaal, ook op desktop. De volgende kaart
+piekt in beeld. Eronder geen pijlen of stippen maar een **voortgangsbalk**: een lijn van 2 px
+in ink 12%, max. 420 px breed, met een gouden vulling (`#D8AC5D → #BC813E`) die zo breed is als
+het zichtbare deel en meeschuift. Klikken op de balk springt naar die plek. Zie
+`theme/assets/ws7.js` en `theme/assets/ws7.css`.
+
+### Het S-teken
+
+Het merkteken uit `snippets/ws-merkteken.liquid` (vector, kleur via `currentColor`) als groot,
+zacht watermerk op donkere platen en banners: goud `#E5BC77`, dekking 7 tot 14%. Klein in goud
+boven een afsluitende kop.
+
+Elke kenmerkkaart heeft een icoon in een afgerond vierkant of cirkel, een kop van één regel, en
 tekst die kort genoeg blijft om te scannen. Iconen zijn dunne lijntekeningen
 (`stroke-width:2.1`), geen gevulde vormen en geen emoji.
 

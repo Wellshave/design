@@ -1,0 +1,15 @@
+/* ═══ Wellshave — de voortgangsbalk onder een schuifrij ═══
+   Alleen op de telefoon: op de desktop staat alles al naast elkaar en is
+   er niets te schuiven. Het script zet de balk zelf op hidden zodra een
+   rij toch helemaal past. */
+.ws-baan{display:none}
+@media (max-width:749px){
+  .ws-baan{display:block;position:relative;width:118px;height:3px;margin:14px auto 0;
+    border-radius:3px;background:rgba(17,17,17,.1);overflow:hidden}
+  .ws-baan[hidden]{display:none}
+  .ws-baan i{position:absolute;top:0;bottom:0;left:0;width:40%;border-radius:3px;
+    background:#BC813E;transition:left .18s ease,width .18s ease}
+}
+@media (prefers-reduced-motion:reduce){
+  .ws-baan i{transition:none}
+}
