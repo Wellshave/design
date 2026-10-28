@@ -3,10 +3,10 @@
    direct eronder, de gekozen lichtgoud. Laadt met de lade, op elke pagina. */
 .cart-drawer__dd{display:flex;align-items:center;justify-content:space-between;gap:8px;align-self:stretch;margin-top:10px;
   padding:9px 12px;border:1px solid #D9C8A8;border-radius:10px;background:#fff;color:var(--cd-inkt,#191816);
-  font-size:13px;font-weight:500;cursor:pointer;text-align:left}
+  font-size:13px;font-weight:500;cursor:pointer;text-align:left;transition:border-color .25s,border-radius .25s}
 .cart-drawer__dd:hover{border-color:var(--cd-goud,#BC813E)}
-.cart-drawer__dd svg{flex:none;width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s}
-.cart-drawer__dd[aria-expanded="true"]{border-color:var(--cd-goud,#BC813E);border-radius:10px 10px 0 0}
+.cart-drawer__dd svg{flex:none;width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:transform .35s cubic-bezier(.22,.61,.36,1)}
+.cart-drawer__dd.is-open{border-color:var(--cd-goud,#BC813E);border-radius:10px 10px 0 0}
 .cart-drawer__dd[aria-expanded="true"] svg{transform:rotate(180deg)}
 .cart-drawer__cadkeuze{align-self:stretch;margin-top:-1px;padding:6px;border:1px solid var(--cd-goud,#BC813E);border-top:0;border-radius:0 0 10px 10px;background:#fff}
 .cart-drawer__cadkeuze[hidden]{display:none}

@@ -174,8 +174,8 @@
 .ws-pdp7 .ws-tier:has(input:checked) .ws-tx-pr{color:#7A4A12}
 .ws-pdp7 .ws-tx-pr s{font-weight:400;color:var(--licht)}
 .ws-pdp7 .ws-tier:has(input:checked) .ws-tx-pr s{color:rgba(17,17,17,.38)}
-.ws-pdp7 .ws-tx-chip{display:inline-block;background:#2E9E5B;color:#fff;font-style:normal;font-size:9.5px;font-weight:700;letter-spacing:.06em;
-  text-transform:uppercase;border-radius:3px;padding:3px 5px;margin-right:2px;vertical-align:1px}
+.ws-pdp7 .ws-tx-chip{display:inline-block;background:#2E9E5B;color:#fff;font-style:normal;font-size:7.6px;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;border-radius:3px;padding:2.4px 4px;margin-right:2px;vertical-align:1px}
 .ws-pdp7 .ws-tx-cad .ws-tx-pr{color:#24804A}
 .ws-pdp7 .ws-tier:has(input:checked) .ws-tx-cad .ws-tx-pr{color:#1E7A45}
 .ws-pdp7 .ws-tx-som{display:block;padding:9px 14px 10px 12px;font-size:12px;color:#5C4A33;background:rgba(176,116,42,.09)}
@@ -648,14 +648,14 @@
    vak met een pijltje, het voorgekozen cadeau erin en eronder "Kies zelf je
    cadeau". Openen toont de opties direct eronder; de gekozen is lichtgoud. */
 .ws-pdp7 .ws-tx-kies{position:relative;margin:6px 10px;padding:7px 10px 7px 8px;border-radius:10px;
-  background:rgba(255,255,255,.72);border:1px solid rgba(176,116,42,.38);transition:border-color .15s,background .15s}
+  background:rgba(255,255,255,.72);border:1px solid rgba(176,116,42,.38);transition:border-color .25s,background .25s,border-radius .25s}
 .ws-pdp7 .ws-tx-kies + .ws-tx,.ws-pdp7 .ws-tx + .ws-tx-kies{border-top:0}
 .ws-pdp7 .ws-tx-kies:hover{background:#fff;border-color:#B0742A}
-.ws-pdp7 .ws-tx-kies:has(.ws-tx-dd[aria-expanded="true"]){background:#fff;border-color:#B0742A;border-radius:10px 10px 0 0}
+.ws-pdp7 .ws-tx-kies.is-open{background:#fff;border-color:#B0742A;border-radius:10px 10px 0 0}
 .ws-pdp7 .ws-tx-kies .ws-tx-kiesregel{color:var(--brons-tekst);font-weight:600}
 .ws-pdp7 .ws-tier:has(input:checked) .ws-tx-kies .ws-tx-kiesregel{color:#7A4A12}
 .ws-pdp7 .ws-tx-pijl{display:inline-grid;place-items:center;width:18px;height:18px;align-self:center;color:var(--ink)}
-.ws-pdp7 .ws-tx-pijl svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s}
+.ws-pdp7 .ws-tx-pijl svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:transform .35s cubic-bezier(.22,.61,.36,1)}
 .ws-pdp7 .ws-tx-kies:has(.ws-tx-dd[aria-expanded="true"]) .ws-tx-pijl svg{transform:rotate(180deg)}
 .ws-pdp7 .ws-tx-dd{position:absolute;inset:0;z-index:2;width:100%;border:0;background:none;padding:0;cursor:pointer;border-radius:inherit}
 .ws-pdp7 .ws-tx-dd:focus-visible{outline:2px solid #B0742A;outline-offset:2px}

@@ -1703,18 +1703,56 @@ if (document.querySelector('ugc-videos-carousel')) {
     return lade && lade.enqueueCart ? lade.enqueueCart(taak) : taak();
   }
 
+  // Rustig open- en dichtschuiven: de hoogte loopt van 0 naar de echte hoogte en
+  // de cadeaus komen een voor een in beeld. Wie minder beweging wil, krijgt de
+  // lijst meteen. De rand van het vak (is-open) gaat pas recht als de lijst dicht is.
+  const rustig = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const vakVan = knop => knop && (knop.closest(".ws-tx-kies") || knop);
+  function schuif(paneel, open, klaar) {
+    if (paneel._wsAnim) paneel._wsAnim.cancel();
+    if (rustig || !paneel.animate) { paneel.hidden = !open; if (klaar) klaar(); return; }
+    paneel.hidden = false;
+    const cs = getComputedStyle(paneel);
+    const vol = { height: paneel.getBoundingClientRect().height + "px", paddingTop: cs.paddingTop, paddingBottom: cs.paddingBottom, opacity: 1 };
+    const nul = { height: "0px", paddingTop: "0px", paddingBottom: "0px", opacity: 0 };
+    paneel.style.overflow = "hidden";
+    paneel.style.boxSizing = "border-box";
+    const anim = paneel.animate(open ? [nul, vol] : [vol, nul], { duration: open ? 380 : 260, easing: "cubic-bezier(.22,.61,.36,1)" });
+    paneel._wsAnim = anim;
+    if (open) {
+      paneel.querySelectorAll("[data-ws-cad-optie]:not([hidden])").forEach((b, i) => {
+        b.animate([{ opacity: 0, transform: "translateY(-6px)" }, { opacity: 1, transform: "none" }],
+          { duration: 300, delay: 90 + i * 60, easing: "ease-out", fill: "backwards" });
+      });
+    }
+    anim.onfinish = () => {
+      paneel.style.overflow = "";
+      paneel.style.boxSizing = "";
+      paneel._wsAnim = null;
+      if (!open) paneel.hidden = true;
+      if (klaar) klaar();
+    };
+  }
+
   function sluiten(paneel) {
-    if (!paneel) return;
-    paneel.hidden = true;
-    if (paneel._wsVan) paneel._wsVan.setAttribute("aria-expanded", "false");
+    if (!paneel || paneel.hidden) return;
+    const knop = paneel._wsVan;
+    if (knop) knop.setAttribute("aria-expanded", "false");
     paneel._wsVan = null;
+    schuif(paneel, false, () => { const vak = vakVan(knop); if (vak) vak.classList.remove("is-open"); });
   }
 
   function openen(knop) {
     const paneel = document.getElementById(knop.getAttribute("aria-controls"));
     if (!paneel) return;
     if (!paneel.hidden && paneel._wsVan === knop) { sluiten(paneel); return; }
-    if (paneel._wsVan) paneel._wsVan.setAttribute("aria-expanded", "false");
+    if (paneel._wsVan) {
+      paneel._wsVan.setAttribute("aria-expanded", "false");
+      const oud = vakVan(paneel._wsVan);
+      if (oud) oud.classList.remove("is-open");
+      if (paneel._wsAnim) paneel._wsAnim.cancel();
+      paneel.hidden = true;
+    }
     const rij = knop.closest("[data-ws-cad1]");
     // De lijst klapt open direct onder het cadeau, zoals een keuzelijst.
     if (paneel.hasAttribute("data-verplaats")) {
@@ -1727,9 +1765,10 @@ if (document.querySelector('ugc-videos-carousel')) {
       b.hidden = tokens(b.getAttribute("data-echt")).some(t => al.indexOf(t) > -1);
       if (nu) b.setAttribute("aria-pressed", String(b.getAttribute("data-ws-cad-optie") === nu));
     });
-    paneel.hidden = false;
     paneel._wsVan = knop;
     knop.setAttribute("aria-expanded", "true");
+    vakVan(knop).classList.add("is-open");
+    schuif(paneel, true);
   }
 
   // Klik ernaast of Escape: de open lijst gaat dicht.

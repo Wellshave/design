@@ -2965,3 +2965,8 @@ twee fixes, klaar om te publiceren. Dezelfde twee staan ook in
 * Lade: label "Cadeau naar keuze vanaf €65" (`gift_from_choice`) en eronder een
   keuzevak "Kies een ander cadeau" met dezelfde lijst (`gift_change`, `gift_free`).
 * Zonder keuzekaarten: knop "Kies je cadeau" onder het cadeau (`cad_wijzig`).
+* Openen en dichtgaan gaan geleidelijk (base.js `schuif`): hoogte van 0 naar de
+  echte hoogte in 380 ms, dicht in 260 ms, de cadeaus komen een voor een in beeld;
+  het pijltje draait mee. Met "minder beweging" in het systeem: meteen open.
+  De rand van het vak wordt pas weer rond als de lijst dicht is (`is-open`).
+* Het groene "CADEAU"-label is 20% kleiner (9,5 → 7,6px).
