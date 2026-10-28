@@ -2845,3 +2845,16 @@ twee fixes, klaar om te publiceren. Dezelfde twee staan ook in
   zijn niet meer geïnstalleerd. Daarom laat Shopify ze ook vallen als ze via de
   API in v8 worden gezet. Hotjar terug = de app opnieuw installeren, of de
   trackingcode met het Hotjar-site-ID in layout/theme.liquid.
+
+## Tweede cadeau (vanaf €90): Neustrimmer 3in1 Platinum (28 oktober)
+
+* Nieuw cadeauproduct `gift-neustrimmer-platinum` (Product 16239487156556):
+  kopie van Neustrimmer 3in1 Platinum met dezelfde SKU 8720938021343, prijs €0,
+  waarde €29,95, UNLISTED, type Gift, voorraad niet bijgehouden,
+  custom.cadeau_voorraad → de echte Platinum (15794293473612).
+* settings_data in v8 en het BF-thema: gift_2_product → gift-neustrimmer-platinum,
+  gift_2_label → "Neustrimmer Platinum" (en/de/fr: Nose Trimmer Platinum,
+  Nasenhaartrimmer Platinum, Tondeuse nez Platinum).
+* Getest op beide previews: Barber Bro 2.0 via In winkelwagen → Washbag en
+  Platinum komen er voor €0 bij. Het live thema (v7) geeft tot de publicatie
+  van v8 nog de Ultimate.
