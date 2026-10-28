@@ -349,7 +349,7 @@ function oauthStart(url) {
   const shop = url.searchParams.get('shop');
   if (!/^[a-z0-9-]+\.myshopify\.com$/.test(shop || '')) return new Response('shop ontbreekt', {status: 400});
   const state = randomBytes(12).toString('hex');
-  const scopes = 'read_orders,write_orders,read_customers,write_customers,read_products,write_discounts';
+  const scopes = 'read_orders,write_orders,write_order_edits,read_customers,write_customers,read_products,write_discounts';
   const redirect = `${url.origin}/auth/callback`;
   const to = `https://${shop}/admin/oauth/authorize?client_id=${API_KEY()}&scope=${scopes}&redirect_uri=${encodeURIComponent(redirect)}&state=${state}`;
   return new Response(null, {status: 302, headers: {Location: to, 'Set-Cookie': `ws_state=${state}; HttpOnly; Secure; SameSite=Lax; Path=/auth`}});
