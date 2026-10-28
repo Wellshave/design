@@ -323,6 +323,8 @@ async function health(url) {
     out.configSource = config.source;
     const sc = await admin(shop, '{ currentAppInstallation { accessScopes { handle } } }');
     out.orderEdits = sc.currentAppInstallation.accessScopes.some((a) => a.handle === 'write_order_edits') ? 'goedgekeurd' : 'nog goedkeuren';
+    out.scopes = sc.currentAppInstallation.accessScopes.map((a) => a.handle);
+    out.tokenSource = env('SHOPIFY_ADMIN_TOKEN') ? 'env' : 'blobs';
   } catch (e) {
     out.error = /toegangstoken/.test(e.message) ? 'nog niet geïnstalleerd' : 'Shopify niet bereikbaar';
   }
