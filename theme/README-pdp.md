@@ -2980,3 +2980,4 @@ twee fixes, klaar om te publiceren. Dezelfde twee staan ook in
 * De drie zekerheden (Gratis verzending, 100 dagen proberen, 2 jaar garantie)
   staan nu boven de knop, onder het Klarna-kader, elk met een groen vinkje in drie
   kolommen. Onder de knop blijft alleen de teller (200.000+ bestellingen).
+* Blauw vinkje (geverifieerd) direct achter de drie gezichten bij "Al 200.000+ bestellingen" (`.ws-tel-vink`).
