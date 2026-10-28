@@ -51,7 +51,7 @@ function useCountdown(expiresAt) {
 }
 
 function ThankYou() {
-  const orderId = shopify.orderConfirmation.value?.order?.id;
+  const orderId = shopify.orderConfirmation?.value?.order?.id;
   // In de checkout-editor bestaat de bestelling niet echt: toon dan een voorbeeld.
   const inEditor = Boolean(shopify.extension?.editor) || !orderId;
   const [data, setData] = useState(null);
