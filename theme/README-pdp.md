@@ -2899,3 +2899,13 @@ twee fixes, klaar om te publiceren. Dezelfde twee staan ook in
   puls of tikkende seconden meer; deal 32 → 22px in inkt; rood alleen nog in het
   label; klok in kleine zandkleurige vakjes; cadeauvak op zand, "Gratis" groen
   zoals in de keuzekaarten.
+
+## v8 live (28 oktober, 12:00)
+
+* v8 (209050108236) is nu MAIN; v7 (207339848012) staat ongepubliceerd als terugval.
+* Gecontroleerd op wellshave.com: homepage, collectie, Barber Bro 3.0 (pre-order,
+  "Pre-order nu", totaalprijs 23px, rustige aanbodregel), Groom Guard Pro (gewoon
+  "In winkelwagen"), Duits (ab 9. November). Geen JS-fouten. Alia: launcher.js en
+  ws-alia.css laden; of het tabje verschijnt bepaalt Alia zelf per bezoeker.
+* Het live thema is via de API niet te wijzigen: nieuwe aanpassingen gaan naar een
+  kopie (v9) of het Black Friday-thema.
