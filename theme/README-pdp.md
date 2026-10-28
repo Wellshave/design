@@ -2858,3 +2858,31 @@ twee fixes, klaar om te publiceren. Dezelfde twee staan ook in
 * Getest op beide previews: Barber Bro 2.0 via In winkelwagen → Washbag en
   Platinum komen er voor €0 bij. Het live thema (v7) geeft tot de publicatie
   van v8 nog de Ultimate.
+
+## Pre-order Barber Bro 1.0 / 2.0 / 3.0 met 10% extra (28 oktober)
+
+* Nieuwe productvelden: `custom.preorder_datum` (datum) en `custom.preorder_korting`
+  (geheel getal). Op de drie Barber Bro's: 2026-11-09 en 10. Ze staan op
+  "doorgaan met verkopen", dus bestellen kan gewoon.
+* Snippet `ws-preorder`: geeft "9 november" zolang de datum in de toekomst ligt,
+  anders niets. Na 9 november verdwijnt de pre-order dus vanzelf; leeg maken van
+  het veld kan ook.
+* Koopvak (v8 en BF): de groene leverregel wordt een gouden "Pre-order |
+  levering vanaf 9 november", daaronder een bonusstrook "Pre-order nu en krijg 10%
+  extra korting, automatisch verrekend bij het afrekenen", de knop en de balk zeggen
+  "Pre-order nu", en op elke keuzekaart staat "Pre-order · vanaf 9 november".
+  Kiest iemand een kaart (ook de voorgekozen Barber Bro op de uitverkochte Tondeuse
+  Deluxe), dan schakelt het script alles mee (data-pre op de kaart).
+* De regel gaat als eigenschap mee in winkelwagen en bestelling:
+  "Levering: Pre-order, vanaf 9 november". Daarvoor stuurt base.js nu ook de
+  `properties[...]` uit het formulier mee (stond er niet in).
+* Teksten in product.json (pre_*), vertaald in en/de/fr; Duits krijgt "9. November"
+  via pre_datum "[dag]. [maand]".
+* De korting zelf: automatische korting "Pre-order Barber Bro: 10% extra"
+  (DiscountAutomaticNode/2290792300876), 10% op de drie Barber Bro's, van
+  28 okt 12:00 tot 9 nov 00:00, niet stapelbaar met andere product-/orderkortingen,
+  wel met verzending. Die werkt meteen, ook in het live thema; de teksten op de
+  pagina pas als v8 live staat.
+* Getest: Barber Bro 2.0 €109,95 → €98,96 in cart.js, Barber Bro 3.0 €129,95 →
+  €116,96 in de lade, eigenschap zichtbaar in de lade, nl/de/fr, BF-thema, en
+  Groom Guard Pro ongewijzigd.

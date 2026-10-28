@@ -309,13 +309,23 @@ class MainProduct extends HTMLElement {
     const sections = [];
     if (this.cart) sections.push("cart-drawer");
 
+    const item = {
+      id: parseInt(this.querySelector("[name='id']").value),
+      quantity: parseInt(this.querySelector("[name='quantity']").value)
+    };
+
+    // Regeleigenschappen uit het formulier, zoals "Pre-order: Levering vanaf
+    // 9 november". Alleen velden die aan staan; een uitgeschakeld veld hoort
+    // bij een keuze die de klant niet heeft gemaakt.
+    const properties = {};
+    (this.productForm || this).querySelectorAll('[name^="properties["]:not([disabled])').forEach(veld => {
+      const naam = veld.name.slice(11, -1);
+      if (naam && veld.value) properties[naam] = veld.value;
+    });
+    if (Object.keys(properties).length) item.properties = properties;
+
     const cartData = {
-      items: [
-        {
-          id: parseInt(this.querySelector("[name='id']").value),
-          quantity: parseInt(this.querySelector("[name='quantity']").value)
-        }
-      ],
+      items: [item],
       sections: sections,
       sections_url: window.location.pathname
     };
@@ -1166,7 +1176,7 @@ class CartDrawer extends HTMLElement {
     this.querySelector("[js-content-items]").innerHTML = newCartDrawer.querySelector("[js-content-items]").innerHTML;
     this.querySelector("[js-content-footer]").innerHTML = newCartDrawer.querySelector("[js-content-footer]").innerHTML;
     this.setAttribute("data-count", newCartDrawer.dataset.count);
-    this.querySelector("[cart-count]").textContent = `(${newCartDrawer.dataset.count})`;
+    this.querySelector("[cart-count]").textContent = newCartDrawer.dataset.count;
 
     const newAch = newCartDrawer.querySelector('.cart-drawer__achivements');
     const curAch = this.querySelector('.cart-drawer__achivements');
@@ -1180,6 +1190,13 @@ class CartDrawer extends HTMLElement {
       const newLabel = newAch.querySelector('.cart-drawer__achivements-label');
       const curLabel = curAch.querySelector('.cart-drawer__achivements-label');
       if (newLabel && curLabel) curLabel.innerHTML = newLabel.innerHTML;
+
+      // Punten en bedragen onder de balk: een behaald punt krijgt een vinkje.
+      ['[data-rewards-punten]', '[data-rewards-mijlpalen]'].forEach(sel => {
+        const n = newAch.querySelector(sel);
+        const c = curAch.querySelector(sel);
+        if (n && c) c.innerHTML = n.innerHTML;
+      });
 
       curAch.dataset.cartTotal = newAch.dataset.cartTotal;
     } else if (newAch) {
@@ -1329,6 +1346,9 @@ class CartDrawer extends HTMLElement {
 
   initClickEvents() {
     this.addEventListener("click", (e) => {
+      // Alleen klikken op een actie afvangen; een gewone link (productfoto,
+      // toevoeging) gaat gewoon naar de productpagina.
+      if (!e.target.dataset.action) return;
       e.preventDefault();
 
       const item = e.target.closest("[data-item]");

@@ -30,6 +30,26 @@
   assign mf = product.metafields.custom
 
   comment
+    Pre-order: custom.preorder_datum in de toekomst (snippet ws-preorder geeft
+    dan "9 november"). Knop, leverregel en de meelopende balk zeggen het dan,
+    en de regel gaat als eigenschap mee in de winkelwagen en de bestelling.
+    custom.preorder_korting noemt de extra korting die in Shopify als
+    automatische korting loopt. Kiest de klant een andere keuzekaart, dan
+    zet het script hieronder dit alles om (data-pre op de kaart).
+  endcomment
+  capture pre_dat
+    render 'ws-preorder', p: product, maanden: s.pre_maanden, vorm: s.pre_datum
+  endcapture
+  assign pre_dat = pre_dat | strip
+  unless v.available
+    assign pre_dat = ''
+  endunless
+  assign pre_pct = 0
+  if pre_dat != blank
+    assign pre_pct = mf.preorder_korting.value | default: 0
+  endif
+
+  comment
     De gouden regel en de grijze regel eronder zijn twee velden. Staat
     hero_promise leeg, dan pakt de gouden regel subtitle en blijft de grijze
     regel weg; dan staat er nooit twee keer hetzelfde.
@@ -478,11 +498,26 @@
             het script af tot 23:59 (lever_klok); in het weekend en zonder
             script blijft de vaste regel staan, die altijd klopt.
           {%- endcomment -%}
-          <div class="ws-vrd">
+          <div class="ws-vrd" data-ws-vrd-normaal{% if pre_dat != blank %} hidden{% endif %}>
             <i aria-hidden="true"></i>
             {%- if v7 and s.voorraad_kop != blank -%}<b class="ws-vrd-kop">{{ s.voorraad_kop }}</b><span class="ws-vrd-sep" aria-hidden="true"></span>{%- endif -%}
             <span{% if v7 and s.lever_klok != blank %} data-ws-lever="{{ s.lever_klok | escape }}"{% endif %}>{{ leverregel }}</span>
           </div>
+        {%- endif -%}
+        {%- if v7 -%}
+          {%- comment -%}
+            Pre-order: staat er altijd, verborgen als dit product (of de gekozen
+            keuzekaart) geen pre-order is. Gouden stip in plaats van de groene:
+            het staat niet klaar, het komt eraan.
+          {%- endcomment -%}
+          <div class="ws-vrd ws-vrd-pre" data-ws-pre-regel{% if pre_dat == blank %} hidden{% endif %}>
+            <i aria-hidden="true"></i>
+            <b class="ws-vrd-kop">{{ s.pre_kop }}</b><span class="ws-vrd-sep" aria-hidden="true"></span>
+            <span data-ws-pre-tx data-sjabloon="{{ s.pre_regel | escape }}">{{ s.pre_regel | replace: '[datum]', pre_dat }}</span>
+          </div>
+          <p class="ws-pre-bonus" data-ws-pre-bonus data-sjabloon="{{ s.pre_bonus | escape }}"{% unless pre_dat != blank and pre_pct > 0 %} hidden{% endunless %}>
+            {{- s.pre_bonus | replace: '[pct]', pre_pct -}}
+          </p>
         {%- endif -%}
 
         {%- comment -%}
@@ -924,11 +959,22 @@
                       assign t_aan = true
                       assign t_eerste_vrij = false
                     endif
+                    assign t_pre = ''
+                    assign t_pre_pct = 0
+                    if tv.available
+                      capture t_pre
+                        render 'ws-preorder', p: tp, maanden: s.pre_maanden, vorm: s.pre_datum
+                      endcapture
+                      assign t_pre = t_pre | strip
+                      if t_pre != blank
+                        assign t_pre_pct = tp.metafields.custom.preorder_korting.value | default: 0
+                      endif
+                    endif
                   -%}
                   <input type="radio" name="ws-tier-{{ section.id }}" value="{% unless basis %}{{ tv.id }}{% endunless %}"{% if t_aan %} checked{% endif %}{% if basis and v.available == false %} disabled{% endif %}
                          data-nu="{{ t_nu | strip | escape }}" data-was="{{ t_was | strip | escape }}"
                          data-pct="{% if t_pct > 0 %}−{{ t_pct }}%{% endif %}" data-klarna="{{ t_kl | strip | escape }}" data-naam="{{ tp.title | escape }}"
-                         data-weg="{{ t_weg | escape }}">
+                         data-weg="{{ t_weg | escape }}" data-pre="{{ t_pre | escape }}" data-pre-pct="{{ t_pre_pct }}">
                   <span class="ws-tier-bd">
                     {%- if tp.featured_image != blank -%}{{ tp.featured_image | image_url: width: 160 | image_tag: alt: '', loading: 'lazy', width: 80, height: 80 }}{%- endif -%}
                   </span>
@@ -936,6 +982,7 @@
                     <b>{%- if basis or tv.price <= v.price or v.available == false -%}{{ tp.title }}{%- else -%}{{ s.tier_upg_kop | replace: '[product]', tp.title }}{%- endif -%}</b>
                     {%- if t_sub != blank -%}<span class="ws-tier-sub">{{ t_sub }}</span>{%- endif -%}
                     {%- if basis and v.available == false and s.knop_uitverkocht != blank -%}<span class="ws-tier-op">{{ s.knop_uitverkocht }}</span>{%- endif -%}
+                    {%- if t_pre != blank and s.pre_kaart != blank -%}<span class="ws-tier-pre">{{ s.pre_kaart | replace: '[datum]', t_pre }}</span>{%- endif -%}
                     {%- if basis == false and v.available and tv.price > v.price and s.tier_meer != blank -%}
                       {%- assign t_meer = tv.price | minus: v.price -%}
                       {%- capture t_meer_tx -%}{{ s.munt }}{% render 'price-formated', price: t_meer %}{%- endcapture -%}
@@ -996,6 +1043,33 @@
                 if (nm) nm.textContent = r.getAttribute('data-naam');
                 pagina(r);
                 addons(r);
+                preorder(r);
+              }
+              // Pre-order volgt de keuze: leverregel, bonusregel, knoppen en de
+              // regeleigenschap die mee de winkelwagen in gaat.
+              function preorder(r) {
+                var sec = document.getElementById('shopify-section-{{ section.id }}');
+                if (!sec) return;
+                var dat = r.getAttribute('data-pre') || '';
+                var pct = parseInt(r.getAttribute('data-pre-pct'), 10) || 0;
+                function sj(el, ph, w) { if (el) el.textContent = (el.getAttribute('data-sjabloon') || '').split(ph).join(w); }
+                var regel = sec.querySelector('[data-ws-pre-regel]');
+                if (regel) { regel.hidden = !dat; sj(regel.querySelector('[data-ws-pre-tx]'), '[datum]', dat); }
+                var normaal = sec.querySelector('[data-ws-vrd-normaal]');
+                if (normaal) normaal.hidden = !!dat;
+                var bonus = sec.querySelector('[data-ws-pre-bonus]');
+                if (bonus) { bonus.hidden = !(dat && pct > 0); sj(bonus, '[pct]', pct); }
+                var eig = document.querySelector('#ProductForm-{{ section.id }} [data-ws-pre-eig]');
+                if (eig) { eig.disabled = !dat; eig.value = (eig.getAttribute('data-sjabloon') || '').split('[datum]').join(dat); }
+                var knop = document.getElementById('ProductSubmit-{{ section.id }}');
+                if (knop && !knop.disabled) knop.textContent = dat ? {{ s.pre_knop | json }} : {{ s.knop_label | json }};
+                var sticky = sec.querySelector('[data-ws-sticky-koop]');
+                if (sticky && !sticky.disabled) sticky.textContent = dat ? {{ s.pre_knop | json }} : {{ s.sticky_knop | default: s.knop_label | json }};
+                var sub = sec.querySelector('.ws-sticky-sub');
+                if (sub) {
+                  if (sub._wsOrig === undefined) sub._wsOrig = sub.textContent;
+                  sub.textContent = dat ? {{ s.pre_kop | json }} + ' · ' + {{ s.pre_regel | json }}.split('[datum]').join(dat) : sub._wsOrig;
+                }
               }
               // Maak het compleet volgt de keuze: wat het gekozen pakket al bevat of
               // als cadeau krijgt, verdwijnt uit de lijst; de volgende schuift door.
@@ -1058,6 +1132,7 @@
                 if (knop) { knop.disabled = false; knop.textContent = {{ s.knop_label | json }}; }
                 var sticky = document.querySelector('#shopify-section-{{ section.id }} [data-ws-sticky-koop]');
                 if (sticky) { sticky.disabled = false; sticky.textContent = {{ s.sticky_knop | default: s.knop_label | json }}; }
+                preorder(gekozen);
               }
               if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
               {%- endunless %}
@@ -1068,6 +1143,7 @@
                 var eerste = blok.querySelector('input[type="radio"][value=""]');
                 if (eerste) eerste.checked = true;
                 if (eerste && blok._wsGewisseld) pagina(eerste);
+                if (eerste) preorder(eerste);
                 var id = formId();
                 if (id) id.removeAttribute('data-ws-basis');
               });
@@ -1404,9 +1480,14 @@
           {%- form 'product', product, id: form_id, class: 'ws-vorm-form', novalidate: 'novalidate' -%}
             <input type="hidden" name="id" value="{{ v.id }}">
             <input type="hidden" name="quantity" value="1">
+            {%- comment -%} Pre-order: gaat als regeleigenschap mee (base.js leest properties[...]). {%- endcomment -%}
+            <input type="hidden" name="properties[{{ s.pre_eig_naam | default: 'Levering' | escape }}]" data-ws-pre-eig
+                   data-sjabloon="{{ s.pre_eig | escape }}" value="{{ s.pre_eig | replace: '[datum]', pre_dat | escape }}"{% if pre_dat == blank %} disabled{% endif %}>
             <button id="ProductSubmit-{{ section.id }}" type="submit" class="ws-cta"
                     {% unless v.available %}disabled{% endunless %}>
-              {%- if v.available -%}
+              {%- if v.available and pre_dat != blank -%}
+                {{ s.pre_knop }}
+              {%- elsif v.available -%}
                 {{ s.knop_label }}
               {%- else -%}
                 {{ s.knop_uitverkocht }}
@@ -1944,7 +2025,9 @@
         {%- endif -%}
         <span class="ws-sticky-tx">
           <b class="ws-sticky-nm">{{ product.title }}</b>
-          {%- if v7 and s.sticky_sub != blank -%}
+          {%- if v7 and pre_dat != blank -%}
+            <span class="ws-sticky-sub">{{ s.pre_kop }} · {{ s.pre_regel | replace: '[datum]', pre_dat }}</span>
+          {%- elsif v7 and s.sticky_sub != blank -%}
             <span class="ws-sticky-sub">{{ s.sticky_sub }}</span>
           {%- elsif belofte != blank -%}
             <span class="ws-sticky-sub">{{ belofte }}</span>
@@ -1953,7 +2036,7 @@
         <span class="ws-sticky-pr" data-ws-sticky-prijs></span>
         <button type="button" class="ws-sticky-knop" data-ws-sticky-koop
                 {% unless v.available %}disabled{% endunless %}>
-          {%- if v.available -%}{{ s.sticky_knop }}{%- else -%}{{ s.knop_uitverkocht }}{%- endif -%}
+          {%- if v.available and pre_dat != blank -%}{{ s.pre_knop }}{%- elsif v.available -%}{{ s.sticky_knop }}{%- else -%}{{ s.knop_uitverkocht }}{%- endif -%}
         </button>
       </div>
     </div>
@@ -2852,6 +2935,17 @@
     { "type": "checkbox", "id": "vd_compact", "label": "Voordelen als vinkjes", "info": "Alleen de kop van elk voordeel, zodat het aanbod hoger staat.", "default": true },
     { "type": "text", "id": "voorraad_kop", "label": "Voor de leverregel", "default": "Op voorraad" },
     { "type": "text", "id": "lever_klok", "label": "Leverregel met aftelklok", "info": "Op werkdagen telt [tijd] af tot 23:59. In het weekend staat de vaste leverregel.", "default": "Bestel binnen [tijd], morgen in huis" },
+    { "type": "header", "content": "Pre-order" },
+    { "type": "paragraph", "content": "Staat custom.preorder_datum op het product in de toekomst, dan wordt het een pre-order: knop, leverregel en balk zeggen het, en de regel gaat als eigenschap mee in de bestelling. custom.preorder_korting noemt de extra korting; die korting zelf loopt als automatische korting in Shopify." },
+    { "type": "text", "id": "pre_maanden", "label": "Maandnamen", "info": "Twaalf namen met komma's, in de taal van de pagina.", "default": "januari,februari,maart,april,mei,juni,juli,augustus,september,oktober,november,december" },
+    { "type": "text", "id": "pre_datum", "label": "Datumvorm", "info": "[dag] en [maand]. Duits: [dag]. [maand]", "default": "[dag] [maand]" },
+    { "type": "text", "id": "pre_kop", "label": "Voor de leverregel", "default": "Pre-order" },
+    { "type": "text", "id": "pre_regel", "label": "Leverregel", "info": "[datum] = de leverdatum.", "default": "levering vanaf [datum]" },
+    { "type": "text", "id": "pre_bonus", "label": "Bonusregel", "info": "[pct] = custom.preorder_korting. Leeg of 0 = geen regel.", "default": "Pre-order nu en krijg [pct]% extra korting, automatisch verrekend bij het afrekenen" },
+    { "type": "text", "id": "pre_kaart", "label": "Regel op de keuzekaart", "info": "[datum] = de leverdatum.", "default": "Pre-order · vanaf [datum]" },
+    { "type": "text", "id": "pre_knop", "label": "Knoptekst", "default": "Pre-order nu" },
+    { "type": "text", "id": "pre_eig_naam", "label": "Naam van de eigenschap in de winkelwagen", "default": "Levering" },
+    { "type": "text", "id": "pre_eig", "label": "Waarde van de eigenschap", "info": "[datum] = de leverdatum.", "default": "Pre-order, vanaf [datum]" },
     { "type": "text", "id": "aanbod_eind", "label": "Einde van de actie", "info": "Datum en tijd, bijvoorbeeld 2026-10-30T23:59:59+01:00. Leeg = geen aftelklok in de aanbodbalk.", "default": "2026-10-30T23:59:59+01:00" },
     { "type": "text", "id": "aanbod_klok", "label": "Tekst van de aftelklok", "default": "Nog [tijd]" },
     { "type": "text", "id": "klok_eenheden", "label": "Eenheden van de klok", "info": "Dagen, uren en minuten, met een spatie ertussen.", "default": "d u m" },
