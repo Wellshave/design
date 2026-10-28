@@ -80,6 +80,7 @@ export async function getOrder(shop, orderId) {
   const d = await admin(
     shop,
     `query($id:ID!){ order(id:$id){ id name email tags customAttributes { key value }
+      totalOutstandingSet { shopMoney { amount } }
       customer { id metafield(namespace:"${NS}", key:"dismissed"){ value } }
       metafield(namespace:"${NS}", key:"state"){ value }
       shippingAddress { firstName lastName address1 address2 zip city countryCodeV2 phone }
@@ -150,4 +151,63 @@ export async function createUpsellCode(shop, {order, ruleId, pct, variantIds, mi
   const errs = d.discountCodeAppCreate.userErrors;
   if (errs.length) throw new Error(errs.map((e) => e.message).join('; '));
   return {code, endsAt};
+}
+
+// ---------- toevoegen aan dezelfde order (zoals AfterSell bij iDEAL) ----------
+// Het product komt met korting in de bestaande order. De klant betaalt het restbedrag via
+// Shopify's eigen betaalpagina voor die order (iDEAL, Klarna, kaart): één order, één pakket.
+const userErrors = (p) => {
+  if (p?.userErrors?.length) throw new Error(p.userErrors.map((e) => e.message).join('; '));
+  return p;
+};
+
+export async function addToOrder(shop, orderId, {variantIds, pct, note}) {
+  const before = await admin(shop, `query($id:ID!){ order(id:$id){ lineItems(first:100){ nodes{ id } } } }`, {id: orderId});
+  const existing = new Set(before.order.lineItems.nodes.map((l) => l.id));
+  const b = userErrors((await admin(shop, `mutation($id:ID!){ orderEditBegin(id:$id){ calculatedOrder{ id } userErrors{ message } } }`, {id: orderId})).orderEditBegin);
+  const calc = b.calculatedOrder.id;
+  for (const v of variantIds) {
+    const a = userErrors((await admin(
+      shop,
+      `mutation($id:ID!,$v:ID!){ orderEditAddVariant(id:$id, variantId:$v, quantity:1, allowDuplicates:true){ calculatedLineItem{ id } userErrors{ message } } }`,
+      {id: calc, v},
+    )).orderEditAddVariant);
+    if (pct) {
+      userErrors((await admin(
+        shop,
+        `mutation($id:ID!,$l:ID!,$d:OrderEditAppliedDiscountInput!){ orderEditAddLineItemDiscount(id:$id, lineItemId:$l, discount:$d){ userErrors{ message } } }`,
+        {id: calc, l: a.calculatedLineItem.id, d: {percentValue: pct, description: `${pct}% extra korting (eenmalig aanbod)`}},
+      )).orderEditAddLineItemDiscount);
+    }
+  }
+  const c = userErrors((await admin(
+    shop,
+    `mutation($id:ID!,$n:String){ orderEditCommit(id:$id, notifyCustomer:false, staffNote:$n){
+      order{ id totalOutstandingSet{ shopMoney{ amount } } paymentCollectionDetails{ additionalPaymentCollectionUrl }
+        lineItems(first:100){ nodes{ id } } } userErrors{ message } } }`,
+    {id: calc, n: note},
+  )).orderEditCommit);
+  return {
+    url: c.order.paymentCollectionDetails?.additionalPaymentCollectionUrl || '',
+    outstanding: Number(c.order.totalOutstandingSet.shopMoney.amount),
+    lineItemIds: c.order.lineItems.nodes.map((l) => l.id).filter((id) => !existing.has(id)),
+  };
+}
+
+// Niet betaald binnen de tijd: de toegevoegde regels weer uit de order, voorraad terug.
+export async function removeFromOrder(shop, orderId, lineItemIds, note) {
+  const b = userErrors((await admin(shop, `mutation($id:ID!){ orderEditBegin(id:$id){ calculatedOrder{ id } userErrors{ message } } }`, {id: orderId})).orderEditBegin);
+  const calc = b.calculatedOrder.id;
+  for (const id of lineItemIds) {
+    userErrors((await admin(
+      shop,
+      `mutation($id:ID!,$l:ID!){ orderEditSetQuantity(id:$id, lineItemId:$l, quantity:0, restock:true){ userErrors{ message } } }`,
+      {id: calc, l: id.replace('gid://shopify/LineItem/', 'gid://shopify/CalculatedLineItem/')},
+    )).orderEditSetQuantity);
+  }
+  userErrors((await admin(shop, `mutation($id:ID!,$n:String){ orderEditCommit(id:$id, notifyCustomer:false, staffNote:$n){ userErrors{ message } } }`, {id: calc, n: note})).orderEditCommit);
+}
+
+export async function removeTags(shop, id, tags) {
+  await admin(shop, `mutation($id:ID!,$t:[String!]!){ tagsRemove(id:$id, tags:$t){ userErrors{ message } } }`, {id, t: tags});
 }

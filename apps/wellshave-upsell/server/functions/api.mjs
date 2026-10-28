@@ -3,8 +3,9 @@ import {createHmac, randomBytes, timingSafeEqual} from 'node:crypto';
 import {verify, signChangeset} from '../lib/jwt.mjs';
 import {
   env, saveToken, shopFromDest, getConfig, getOrder, dismissedOf, stateOf, setOrderState,
-  markDismissed, addTags, createUpsellCode, productHandles, admin,
+  markDismissed, addTags, createUpsellCode, productHandles, admin, addToOrder, removeFromOrder,
 } from '../lib/shopify.mjs';
+import {settle, PAY_MINUTES, WAIT_TAG} from '../lib/settle.mjs';
 import {buildOffer, recentlyOffered, checkoutUrl} from '../lib/offers.mjs';
 import {refillsFor} from '../lib/refills.mjs';
 
@@ -46,8 +47,13 @@ async function thankYouOffer(req) {
   if (order.customAttributes?.some((a) => a.key === '_ws_parent')) {
     return json({mode: 'upsell-confirmation', parent: order.customAttributes.find((a) => a.key === '_ws_parent').value});
   }
-  const state = stateOf(order);
-  if (state.status === 'dismissed' || state.status === 'expired') return json({mode: 'none', reminder: await reminderBlock(shop, order)});
+  let state = stateOf(order);
+  if (state.mode === 'edit' && state.status === 'accepted') {
+    await settle(shop, order);
+    state = stateOf(await getOrder(shop, order.id));
+  }
+  if (state.mode === 'edit' && state.status === 'paid') return json({mode: 'upsell-confirmation', parent: order.name, reminder: await reminderBlock(shop, order)});
+  if (state.status === 'dismissed' || state.status === 'expired' || state.status === 'unpaid') return json({mode: 'none', reminder: await reminderBlock(shop, order)});
   const dismissed = dismissedOf(order);
   const config = await getConfig(shop);
   const offer = await buildOffer(shop, config, {...purchasedFrom(order), dismissed});
@@ -120,6 +126,26 @@ async function acceptCore(shop, orderId, variantIds) {
   const allowed = new Set(offer.offers.map((o) => o.variantId));
   const chosen = variantIds.filter((v) => allowed.has(v));
   if (!chosen.length) return {error: 'Kies minstens één product.', status: 400};
+  // Zoals AfterSell: in dezelfde order, de klant betaalt alleen het restbedrag (ook met iDEAL).
+  // Lukt dat niet, dan valt het terug op een aparte checkout met een unieke code.
+  try {
+    const r = await addToOrder(shop, order.id, {
+      variantIds: chosen,
+      pct: offer.discount,
+      note: `Upsell (${offer.ruleId}): klant betaalt het restbedrag. Niet betaald binnen ${PAY_MINUTES} minuten, dan wordt het automatisch verwijderd.`,
+    });
+    if (r.url && r.outstanding > 0) {
+      const at = new Date().toISOString();
+      const endsAt = new Date(Date.now() + PAY_MINUTES * 60000).toISOString();
+      await setOrderState(shop, order.id, {status: 'accepted', mode: 'edit', ruleId: offer.ruleId, lineItemIds: r.lineItemIds, endsAt, url: r.url, at});
+      await markDismissed(shop, order.customer?.id, offer.ruleId, dismissedOf(order), 'accepted');
+      await addTags(shop, order.id, ['upsell-aangeboden', WAIT_TAG]);
+      return {url: r.url};
+    }
+    if (r.lineItemIds.length) await removeFromOrder(shop, order.id, r.lineItemIds, 'Upsell teruggedraaid: geen betaallink.');
+  } catch (e) {
+    console.error('order bewerken mislukt, aparte checkout', e);
+  }
   // Code blijft 30 minuten geldig om af te rekenen (tijd voor de bank-app).
   const {code, endsAt} = await createUpsellCode(shop, {order, ruleId: offer.ruleId, pct: offer.discount, variantIds: chosen, minutes: 30});
   const url = checkoutUrl({domain: STORE_DOMAIN(), variantIds: chosen, code, order});
@@ -295,6 +321,8 @@ async function health(url) {
     out.installed = true;
     out.rules = (config.rules || []).length;
     out.configSource = config.source;
+    const sc = await admin(shop, '{ currentAppInstallation { accessScopes { handle } } }');
+    out.orderEdits = sc.currentAppInstallation.accessScopes.some((a) => a.handle === 'write_order_edits') ? 'goedgekeurd' : 'nog goedkeuren';
   } catch (e) {
     out.error = /toegangstoken/.test(e.message) ? 'nog niet geïnstalleerd' : 'Shopify niet bereikbaar';
   }

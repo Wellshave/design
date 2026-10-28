@@ -188,7 +188,7 @@ function Offer({data, orderId}) {
         <s-button variant="primary" href={goHref} disabled={!goHref}>
           {chosen.length ? `Ja, toevoegen · ${eur(total)}` : 'Kies minstens één product'}
         </s-button>
-        <s-text color="subdued" type="small">Je gegevens staan er al in en verzending is gratis. Betaal je niet, dan verandert er niets aan je bestelling.</s-text>
+        <s-text color="subdued" type="small">Komt in dezelfde bestelling en hetzelfde pakket, zonder extra verzendkosten. Betaal je niet, dan verandert er niets aan je bestelling.</s-text>
 
         <s-box padding="base" borderRadius="large" background="subdued" border="base">
           <s-stack gap="small-200">
