@@ -285,7 +285,22 @@ async function health(url) {
   } catch (e) {
     out.error = /toegangstoken/.test(e.message) ? 'nog niet geïnstalleerd' : 'Shopify niet bereikbaar';
   }
+  out.klaviyo = await klaviyoStatus();
   return json(out, out.installed && out.keys ? 200 : 503);
+}
+
+// Werkt de Klaviyo-sleutel? Alleen de uitkomst, nooit de sleutel zelf.
+async function klaviyoStatus() {
+  const key = env('KLAVIYO_PRIVATE_KEY');
+  if (!key) return 'ontbreekt';
+  try {
+    const res = await fetch('https://a.klaviyo.com/api/metrics?fields[metric]=name', {
+      headers: {Authorization: `Klaviyo-API-Key ${key}`, revision: '2025-01-15', accept: 'application/json'},
+    });
+    return res.ok ? 'werkt' : res.status === 401 ? 'ongeldig' : `fout ${res.status}`;
+  } catch {
+    return 'niet bereikbaar';
+  }
 }
 
 // ---------- installatie (eenmalig) ----------
