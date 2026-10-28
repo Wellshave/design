@@ -1,0 +1,420 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "EcomGrows",
+    "theme_version": "1.0.0",
+    "theme_author": "EcomGrows",
+    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
+    "theme_support_url": "https://support.shopify.com/"
+  },
+  {
+    "name": "General",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Store Reviews"
+      },
+      {
+        "type": "text",
+        "id": "reviews_label",
+        "label": "Reviews label",
+        "default": "4.6 / 5 van 490+ reviews"
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon image",
+        "info": "Will be scaled down to 32 x 32px"
+      }
+    ]
+  },
+  {
+    "name": "Layout",
+    "settings": [
+      {
+        "type": "range",
+        "id": "page_width",
+        "min": 1000,
+        "max": 1600,
+        "step": 20,
+        "default": 1400,
+        "unit": "px",
+        "label": "Sections contaniner width"
+      }
+    ]
+  },
+  {
+    "name": "Product card",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_quick_add",
+        "label": "Enable quick add",
+        "default": true
+      },
+      {
+        "type": "inline_richtext",
+        "id": "card_reviews",
+        "label": "Reviews label"
+      }
+    ]
+  },
+  {
+    "name": "Cart drawer",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Free shipping"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_free_shipping",
+        "label": "Enable free shipping",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "free_shipping_requirement",
+        "label": "Free shipping requirement",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 30
+      },
+      {
+        "type": "header",
+        "content": "Gift rewards"
+      },
+      {
+        "type": "paragraph",
+        "content": "Unlock free gifts when the cart reaches a threshold. The gift is added automatically and removed if the cart drops below the threshold. Kies een gratis cadeauproduct (€0, type Gift). Is dat niet op voorraad, dan schuift de eerste reserve die wel op voorraad is ervoor in de plaats: op de productpagina, in de cadeaubalk en bij het toevoegen. Een cadeauproduct telt als op voorraad als het echte product in het metaveld Cadeau: voorraad van op voorraad is."
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_gift_rewards",
+        "label": "Enable gift rewards",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "Gift 1"
+      },
+      {
+        "type": "range",
+        "id": "gift_1_threshold",
+        "label": "Cart threshold",
+        "unit": "€",
+        "min": 0,
+        "max": 200,
+        "step": 5,
+        "default": 65
+      },
+      {
+        "type": "product",
+        "id": "gift_1_product",
+        "label": "Gift product"
+      },
+      {
+        "type": "text",
+        "id": "gift_1_label",
+        "label": "Badge title",
+        "info": "Custom badge text. Falls back to the product title if empty."
+      },
+      {
+        "type": "image_picker",
+        "id": "gift_1_icon",
+        "label": "Badge icon"
+      },
+      {
+        "type": "product_list",
+        "id": "gift_1_reserve",
+        "label": "Reservecadeaus",
+        "limit": 4,
+        "info": "In volgorde van voorkeur, goedkoop in inkoop eerst. Alleen gratis cadeauproducten (€0). Met een reserve tonen badge en productpagina de naam van de reserve."
+      },
+      {
+        "type": "product_list",
+        "id": "gift_1_dubbel",
+        "label": "Als het cadeau al in de bestelling zit",
+        "limit": 3,
+        "info": "Zit het cadeau al in een pakket in de winkelwagen (metaveld Zit in het pakket), dan komt eerst dit vervangcadeau en anders een reserve. Alleen gratis cadeauproducten (€0)."
+      },
+      {
+        "type": "product_list",
+        "id": "gift_1_keuze",
+        "label": "De klant kiest zelf uit",
+        "limit": 6,
+        "info": "Leeg = geen keuze. Met twee of meer cadeaus kiest de klant op de productpagina en in de winkelwagen zelf welk cadeau hij vanaf de drempel krijgt. Wat al in zijn pakket zit of op is, valt af; zonder keuze geldt het cadeau hierboven. Alleen gratis cadeauproducten (€0)."
+      },
+      {
+        "type": "header",
+        "content": "Gift 2"
+      },
+      {
+        "type": "range",
+        "id": "gift_2_threshold",
+        "label": "Cart threshold",
+        "unit": "€",
+        "min": 0,
+        "max": 200,
+        "step": 5,
+        "default": 90
+      },
+      {
+        "type": "product",
+        "id": "gift_2_product",
+        "label": "Gift product"
+      },
+      {
+        "type": "text",
+        "id": "gift_2_label",
+        "label": "Badge title",
+        "info": "Custom badge text. Falls back to the product title if empty."
+      },
+      {
+        "type": "image_picker",
+        "id": "gift_2_icon",
+        "label": "Badge icon"
+      },
+      {
+        "type": "product_list",
+        "id": "gift_2_reserve",
+        "label": "Reservecadeaus",
+        "limit": 4,
+        "info": "In volgorde van voorkeur, goedkoop in inkoop eerst. Alleen gratis cadeauproducten (€0). Een reserve die al cadeau 1 is, wordt overgeslagen."
+      },
+      {
+        "type": "product_list",
+        "id": "gift_2_dubbel",
+        "label": "Als het cadeau al in de bestelling zit",
+        "limit": 3,
+        "info": "Zit het cadeau al in een pakket in de winkelwagen (metaveld Zit in het pakket), dan komt eerst dit vervangcadeau en anders een reserve. Alleen gratis cadeauproducten (€0)."
+      },
+      {
+        "type": "text",
+        "id": "gift_eind",
+        "label": "Cadeaus stoppen op",
+        "info": "Datum en tijd, bijvoorbeeld 2026-11-27T23:59:59+01:00. Op dat moment vallen de cadeaus overal weg en haalt de winkelwagen ze eruit; tot dan telt een klok af. Leeg = geen einde en geen klok. Zet hier alleen een moment neer waarop de cadeaus echt stoppen."
+      },
+      {
+        "type": "text",
+        "id": "gift_klok_tekst",
+        "label": "Tekst bij de klok",
+        "default": "Gratis cadeaus nog [tijd]"
+      },
+      {
+        "type": "header",
+        "content": "Upsell"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_upsell",
+        "label": "Enable upsell",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "upsell_title",
+        "label": "Upsell title",
+        "default": "Yoy May Also Like"
+      },
+      {
+        "type": "text",
+        "id": "upsell_uitsluiten",
+        "label": "Niet als toevoeging tonen",
+        "info": "Handles, met komma's gescheiden. Voor producten die je ook cadeau geeft: zolang de cadeaus aan staan, verkoopt de winkelwagen ze niet los. Nu de washbag (toiletry-bag), die vanaf 65 euro gratis is."
+      },
+      {
+        "type": "header",
+        "content": "Protection product"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_protection",
+        "label": "Enable protection",
+        "default": true
+      },
+      {
+        "type": "product",
+        "id": "protection_product",
+        "label": "Protection products"
+      },
+      {
+        "type": "text",
+        "id": "protection_title",
+        "label": "Protection title",
+        "default": "Insured Shipping"
+      },
+      {
+        "type": "text",
+        "id": "protection_subtitle",
+        "label": "Protection subtitle",
+        "default": "Includes 2-year standard warranty"
+      },
+      {
+        "type": "header",
+        "content": "Benefits"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_benefits",
+        "label": "Enable benefits",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "cart_benefit_1_icon",
+        "label": "Benefit 1 - icon"
+      },
+      {
+        "type": "text",
+        "id": "cart_benefit_1_label",
+        "label": "Benefit 1 - label"
+      },
+      {
+        "type": "image_picker",
+        "id": "cart_benefit_2_icon",
+        "label": "Benefit 2 - icon"
+      },
+      {
+        "type": "text",
+        "id": "cart_benefit_2_label",
+        "label": "Benefit 2 - label"
+      },
+      {
+        "type": "image_picker",
+        "id": "cart_benefit_3_icon",
+        "label": "Benefit 3 - icon"
+      },
+      {
+        "type": "text",
+        "id": "cart_benefit_3_label",
+        "label": "Benefit 3 - label"
+      },
+      {
+        "type": "text",
+        "id": "cart_trustpilot_label",
+        "label": "Trustpilot-regel",
+        "default": "4,5 / 5 op Trustpilot",
+        "info": "Staat onderaan de winkelwagen met een groene ster, naast benefit 2 en benefit 1. Benefit 3 en de iconen hierboven gebruikt de winkelwagen v7 niet meer."
+      },
+      {
+        "type": "header",
+        "content": "Featured products"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_cart_featured",
+        "label": "Enable Featured",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "cart_featured_title",
+        "label": "Featured title",
+        "default": "Featured products"
+      },
+      {
+        "type": "product_list",
+        "id": "cart_featured_products",
+        "label": "Featured products"
+      }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      {
+        "type": "text",
+        "id": "social_youtube_link",
+        "label": "YouTube"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook_link",
+        "label": "Facebook",
+      },
+      {
+        "type": "text",
+        "id": "social_tiktok_link",
+        "label": "TikTok"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram_link",
+        "label": "Instagram"
+      }
+    ]
+  },
+  {
+    "name": "Herfst Sale",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Het label achter HERFST SALE in het menu staat bij het menu-item zelf: Header, menu-item HERFST SALE, Label naast de naam."
+      },
+      {
+        "type": "checkbox",
+        "id": "herfst_badge_tonen",
+        "label": "Badge op productkaarten",
+        "default": true,
+        "info": "Alleen op producten die op voorraad zijn en echt afgeprijsd: de van-prijs is hoger dan de prijs. Zet hem uit als de actie voorbij is."
+      },
+      {
+        "type": "text",
+        "id": "herfst_badge_tekst",
+        "label": "Tekst op de badge",
+        "default": "Herfst Sale",
+        "info": "Staat als tekst op de badge als er geen beeld is, en anders als alt-tekst voor schermlezers."
+      },
+      {
+        "type": "image_picker",
+        "id": "herfst_badge_beeld",
+        "label": "Beeld van de badge",
+        "info": "Leeg = de sticker herfst-sale-sticker.webp uit Files. Gebruik een beeld met transparante achtergrond."
+      },
+      {
+        "type": "text",
+        "id": "herfst_badge_collectie",
+        "label": "Alleen producten uit deze collectie",
+        "default": "summer-sale-deals",
+        "info": "De handle van de sale-collectie: het laatste stuk van de link, na /collections/. Leeg = elk afgeprijsd product krijgt de badge."
+      }
+    ]
+  },
+  {
+    "name": "Bestseller-sticker",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "bestseller_sticker",
+        "label": "Bestseller-labels als sticker tonen",
+        "default": true,
+        "info": "Elk lint of label met Best verkocht, Bestseller of Best seller wordt deze sticker: op de collectiepagina's, bij de bestsellers op de homepage en in de productlabels. Uit = de gewone labels."
+      },
+      {
+        "type": "image_picker",
+        "id": "bestseller_beeld",
+        "label": "Beeld van de sticker",
+        "info": "Leeg = bestseller-sticker.webp uit Files. Gebruik een beeld met transparante achtergrond."
+      }
+    ]
+  },
+  {
+    "name": "Black Friday",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "bf_rood",
+        "label": "Rode Black Friday-accenten",
+        "default": false,
+        "info": "Rood op alles wat over de actie gaat: bovenbalk, menulabel, kortingslabels, aanbodbalk en de koppen die je per sectie op Black Friday-accent zet. Zet hem uit als de actie voorbij is."
+      }
+    ]
+  },
+]
