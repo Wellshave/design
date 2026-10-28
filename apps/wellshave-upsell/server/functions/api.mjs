@@ -6,6 +6,7 @@ import {
   markDismissed, addTags, createUpsellCode, productHandles, admin,
 } from '../lib/shopify.mjs';
 import {buildOffer, recentlyOffered, checkoutUrl} from '../lib/offers.mjs';
+import {refillsFor} from '../lib/refills.mjs';
 
 export const config = {path: ['/auth', '/auth/callback', '/api/*']};
 
@@ -50,7 +51,7 @@ async function thankYouOffer(req) {
   const dismissed = dismissedOf(order);
   const config = await getConfig(shop);
   const offer = await buildOffer(shop, config, {...purchasedFrom(order), dismissed});
-  if (!offer) return json({mode: 'none'});
+  if (!offer) return json({mode: 'none', reminder: await reminderBlock(shop, order)});
   // De pagina na betaling heeft bij deze bestelling al een aanbod getoond: alleen de cross-sell.
   if (recentlyOffered(dismissed) && !state.status) return json({mode: 'thanks-only', ...offer, offers: []});
   // De klok start bij de eerste keer tonen en loopt door, ook na herladen.
@@ -82,8 +83,10 @@ async function thankYouPreview(req) {
 }
 
 async function reminderBlock(shop, order) {
-  const s = (await getConfig(shop)).settings || {};
-  return s.remOn && env('KLAVIYO_PRIVATE_KEY') ? {remText: s.remText, remWeeks: s.remWeeks ?? 8} : null;
+  const config = await getConfig(shop);
+  const s = config.settings || {};
+  if (!s.remOn || !env('KLAVIYO_PRIVATE_KEY')) return null;
+  return refillsFor(purchasedFrom(order).purchasedHandles, config.refills).length ? {remText: s.remText, remWeeks: s.remWeeks ?? 8} : null;
 }
 
 async function thankYouAccept(req) {
@@ -144,7 +147,10 @@ async function reminder(req) {
   const order = await getOrder(shop, orderId);
   const key = env('KLAVIYO_PRIVATE_KEY');
   if (!key) return json({error: 'Klaviyo is nog niet gekoppeld.'}, 503);
-  const s = (await getConfig(shop)).settings || {};
+  const config = await getConfig(shop);
+  const refills = refillsFor(purchasedFrom(order).purchasedHandles, config.refills);
+  if (!refills.length) return json({error: 'Geen product met vervangmesjes in deze bestelling.'}, 400);
+  const s = config.settings || {};
   const weeks = s.remWeeks ?? 8;
   const remindAt = new Date(Date.now() + weeks * 7 * 864e5).toISOString().slice(0, 10);
   const res = await fetch('https://a.klaviyo.com/api/events', {
@@ -154,7 +160,14 @@ async function reminder(req) {
       data: {
         type: 'event',
         attributes: {
-          properties: {order: order.name, products: order.lineItems.nodes.map((l) => l.product?.title).filter(Boolean), herinner_op: remindAt},
+          properties: {
+            order: order.name,
+            products: order.lineItems.nodes.map((l) => l.product?.title).filter(Boolean),
+            herinner_op: remindAt,
+            // Voor de knop in de mail: wat de klant opnieuw nodig heeft.
+            vervanging: refills,
+            vervanging_url: `https://${STORE_DOMAIN()}/products/${encodeURIComponent(refills[0])}`,
+          },
           metric: {data: {type: 'metric', attributes: {name: 'Herinnering vervangmesjes aangevraagd'}}},
           profile: {data: {type: 'profile', attributes: {email: order.email}}},
           unique_id: `herinnering-${order.id}`,

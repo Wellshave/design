@@ -2,6 +2,7 @@
 // een klant ooit zag (geaccepteerd of weggeklikt) komt voor die klant nooit meer terug.
 import {matchRule, offersFor, thanksFor, fillText, discounted} from './rules.mjs';
 import {variantsInfo, env} from './shopify.mjs';
+import {refillsFor} from './refills.mjs';
 
 export const SEEN_WINDOW_MS = 2 * 60 * 60 * 1000;
 
@@ -52,8 +53,8 @@ export async function buildOffer(shop, config, {purchasedHandles, purchasedVaria
       tyTitle: s.tyTitle,
       tyDisc: tyPct,
       code: s.code,
-      // Zonder Klaviyo-sleutel kan de herinnering niet worden opgeslagen: dan niet tonen.
-      remOn: !!s.remOn && Boolean(env('KLAVIYO_PRIVATE_KEY')),
+      // Alleen bij producten met mesjes of een kop die op raken, en alleen met Klaviyo-sleutel.
+      remOn: !!s.remOn && Boolean(env('KLAVIYO_PRIVATE_KEY')) && refillsFor(purchasedHandles, config.refills).length > 0,
       remText: s.remText,
       remWeeks: s.remWeeks ?? 8,
     },

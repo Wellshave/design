@@ -4,6 +4,7 @@ import {sign, verify, signChangeset} from '../lib/jwt.mjs';
 import {matchRule, offersFor, thanksFor, fillText, discounted} from '../lib/rules.mjs';
 import {recentlyOffered, seenRules, checkoutUrl} from '../lib/offers.mjs';
 import {adminOrderId} from '../lib/shopify.mjs';
+import {refillsFor} from '../lib/refills.mjs';
 import config from '../../config/upsell-config.json' with {type: 'json'};
 
 const V = (n) => `gid://shopify/ProductVariant/${n}`;
@@ -64,4 +65,12 @@ test('checkout-link bevat producten, code, koppeling en ingevulde gegevens', () 
 test('order-id van de bedankpagina wordt de Admin-id', () => {
   assert.equal(adminOrderId('gid://shopify/OrderIdentity/13374787420492'), 'gid://shopify/Order/13374787420492');
   assert.equal(adminOrderId('gid://shopify/Order/1'), 'gid://shopify/Order/1');
+});
+
+test('herinnering alleen bij producten met vervangmesjes', () => {
+  assert.deepEqual(refillsFor(['wellshave-baardbar']), []);
+  assert.deepEqual(refillsFor(['travelbag', 'wellshave-hard-case']), []);
+  assert.deepEqual(refillsFor(['wellshave-scheerapparaat-elite']), ['elite-scheerkop']);
+  assert.ok(refillsFor(['groom-guard-pro', 'wellshave-baardbar']).includes('trio-pack-groom-guard'));
+  assert.deepEqual(refillsFor(['wellshave-neustrimmer-basic', 'neustrimmer-essential']), ['vervanging-neustrimmer-opzetstuk']);
 });
