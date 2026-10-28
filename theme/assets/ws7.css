@@ -12,6 +12,8 @@
   --kopletter:"Inter Tight","Helvetica Neue",Helvetica,Arial,sans-serif;
   --letter:"Inter",-apple-system,"Helvetica Neue",Helvetica,Arial,sans-serif;
   background:var(--zand);color:var(--ink);font-family:var(--letter);font-size:14px;line-height:1.55;letter-spacing:-.005em;-webkit-font-smoothing:antialiased}
+/* marges van secties blijven binnen de eigen achtergrond, zodat er geen witte balk tussen secties valt */
+.ws7{display:flow-root}
 .ws7 *{box-sizing:border-box}
 .ws7 a{color:inherit;text-decoration:none}
 .ws7 img{display:block;max-width:100%}
@@ -23,7 +25,7 @@
 /* kop in twee regels: de tweede in goud */
 .ws7-oog{font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#9A6A2E}
 .ws7-kop{font-family:var(--kopletter);font-weight:500;font-size:44px;line-height:1.04;letter-spacing:-.035em;color:var(--ink)}
-.ws7-goud{display:block;background:var(--goud-tekst);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:#B0742A}
+.ws7-goud{display:block;padding-bottom:.12em;margin-bottom:-.12em;background:var(--goud-tekst);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:#B0742A}
 .ws7-donkergrond .ws7-goud{background-image:linear-gradient(135deg,#F8DFAB,#E5BC77 42%,#C8913F)}
 .ws7-sub{margin-top:10px;font-size:12.5px;color:var(--mid)}
 .ws7-oog + .ws7-kop{margin-top:8px}
@@ -155,6 +157,9 @@
 
 /* 7 · pers: doorlopende strook, stopt bij hover */
 .ws7-pers{margin-top:72px;padding:26px 0;border-top:1px solid rgba(17,17,17,.08);border-bottom:1px solid rgba(17,17,17,.08)}
+/* de ruimte boven de persstrook hoort bij de zandgrond, niet bij de witte pagina */
+.shopify-section:has(> .ws7-pers){display:flow-root;background:#F5F1EA}
+.shopify-section:has(> .ws7-pers.ws7-wit){background:#fff}
 .ws7-pers__baan{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
 .ws7-pers__rij{display:flex;align-items:center;gap:64px;width:max-content;padding-left:64px;animation:ws7-loop 55s linear infinite}
 .ws7-pers__baan:hover .ws7-pers__rij{animation-play-state:paused}
