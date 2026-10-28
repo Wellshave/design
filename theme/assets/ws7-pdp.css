@@ -194,9 +194,16 @@
   -webkit-text-fill-color:transparent;color:#B0742A}
 .ws-pdp7 .ws-besp{display:inline-block;background:rgba(245,209,138,.4);color:#8C5A1A;border-radius:3px;padding:5px 8px;font-size:12px;font-weight:700;line-height:1}
 .ws-pdp7 .ws-besp[hidden],.ws-pdp7 .ws-was[hidden]{display:none}
-.ws-pdp7 .ws-klarna{display:flex;align-items:center;justify-content:center;gap:6px;margin:0;font-size:12px;color:var(--mid);white-space:nowrap}
-.ws-pdp7 .ws-klarna b{color:var(--ink);font-weight:600}
-.ws-pdp7 .ws-klarna-merk{order:2;background:#FFB3C7;color:#17120F;font-weight:700;font-size:10px;border-radius:4px;padding:2px 5px}
+/* Klarna: een wit kader met het roze logo links, de termijnen en "Meer informatie" */
+.ws-pdp7 .ws-klarna{display:flex;align-items:center;gap:14px;margin:0;padding:12px 14px;border:1px solid var(--lijn2);border-radius:10px;
+  background:#fff;font-size:13px;line-height:1.4;color:var(--ink)}
+.ws-pdp7 .ws-klarna b{font-weight:600}
+.ws-pdp7 .ws-klarna-merk{flex:none;background:#FFB3C7;color:#0B051D;font-weight:800;font-size:14px;letter-spacing:-.01em;border-radius:8px;padding:8px 11px;line-height:1}
+.ws-pdp7 .ws-klarna-tx{min-width:0}
+.ws-pdp7 .ws-klarna-meer{display:block;margin-top:2px;padding:0;border:0;background:none;font:inherit;font-size:12.5px;color:var(--ink);
+  text-decoration:underline;text-underline-offset:2px;cursor:pointer}
+.ws-pdp7 .ws-klarna-uitleg{display:block;margin-top:6px;font-size:12px;color:var(--mid)}
+.ws-pdp7 .ws-klarna-uitleg[hidden]{display:none}
 .ws-pdp7 .ws-vorm form{margin:0}
 .ws-pdp7 .ws-cta{display:flex;width:100%;align-items:center;justify-content:center;gap:12px;border:0;cursor:pointer;
   background:var(--goud);color:var(--ink);border-radius:14px;padding:18px 28px;font:700 13px/1 var(--letter);letter-spacing:.13em;
@@ -216,10 +223,10 @@
 .ws-pdp7 .ws-tel-gz{display:flex}
 .ws-pdp7 .ws-tel-gz img{width:24px;height:24px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px var(--zand)}
 .ws-pdp7 .ws-tel-gz img + img{margin-left:-7px}
-.ws-pdp7 .ws-zeker{list-style:none;margin:-6px 0 0;padding:0;display:flex;justify-content:center;flex-wrap:wrap;gap:6px 0;font-size:11.5px;color:var(--mid)}
-.ws-pdp7 .ws-zeker li{display:flex;align-items:center;gap:6px;padding:0 12px}
-.ws-pdp7 .ws-zeker li + li{border-left:1px solid var(--lijn2)}
-.ws-pdp7 .ws-zeker svg{width:14px;height:14px;fill:none;stroke:var(--brons);stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+/* Drie zekerheden met een groen vinkje, boven de knop */
+.ws-pdp7 .ws-zeker{list-style:none;margin:0;padding:0 2px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;font-size:12px;line-height:1.35;color:var(--ink)}
+.ws-pdp7 .ws-zeker li{display:flex;align-items:center;gap:8px;margin:0}
+.ws-pdp7 .ws-zeker svg{flex:none;width:16px;height:16px;fill:none;stroke:#2E9E5B;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .ws-pdp7 .ws-pay{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;font-size:11.5px;color:var(--mid)}
 
 /* ---------- maak het compleet ---------- */

@@ -2970,3 +2970,13 @@ twee fixes, klaar om te publiceren. Dezelfde twee staan ook in
   het pijltje draait mee. Met "minder beweging" in het systeem: meteen open.
   De rand van het vak wordt pas weer rond als de lijst dicht is (`is-open`).
 * Het groene "CADEAU"-label is 20% kleiner (9,5 → 7,6px).
+
+## Klarna-kader en zekerheden boven de knop (28 oktober, v9)
+
+* Klarna is een wit kader met het roze Klarna-logo links, "3 betalingen van €36,65
+  tegen 0% rente met Klarna" en een onderstreepte "Meer informatie" die een korte
+  uitleg op de pagina openklapt (geen link naar buiten). Instellingen
+  `klarna_regel`, `klarna_meer`, `klarna_uitleg`; vertaald in en/de/fr.
+* De drie zekerheden (Gratis verzending, 100 dagen proberen, 2 jaar garantie)
+  staan nu boven de knop, onder het Klarna-kader, elk met een groen vinkje in drie
+  kolommen. Onder de knop blijft alleen de teller (200.000+ bestellingen).

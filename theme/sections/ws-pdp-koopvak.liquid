@@ -1539,12 +1539,35 @@
           -%}
           {%- if s.klarna_tonen and s.klarna_regel != blank and v.price >= klarna_min and v.price <= klarna_max -%}
             {%- capture klarna_bedrag -%}<b data-ws-klarna>{% if s.munt != blank %}{{ s.munt }}{% endif %}{% render 'price-formated', price: klarna_deel %}</b>{%- endcapture -%}
+            {%- comment -%}
+              Een kader met het Klarna-logo, de termijnen en "Meer informatie":
+              dat klapt een korte uitleg open op de pagina zelf, zonder weg te
+              klikken naar Klarna.
+            {%- endcomment -%}
             <p class="ws-klarna">
-              <span class="ws-klarna-merk" aria-hidden="true">Klarna.</span>
-              <span class="ws-klarna-tx"><span class="visually-hidden">Klarna: </span>{{ s.klarna_regel | replace: ' [bedrag]', '&nbsp;[bedrag]' | replace: '[bedrag]', klarna_bedrag }}</span>
+              <span class="ws-klarna-merk" aria-hidden="true">Klarna</span>
+              <span class="ws-klarna-tx">
+                <span class="visually-hidden">Klarna: </span>{{ s.klarna_regel | replace: ' [bedrag]', '&nbsp;[bedrag]' | replace: '[bedrag]', klarna_bedrag }}
+                {%- if s.klarna_meer != blank and s.klarna_uitleg != blank -%}
+                  <button type="button" class="ws-klarna-meer" aria-expanded="false" onclick="var u=this.nextElementSibling;u.hidden=!u.hidden;this.setAttribute('aria-expanded',String(!u.hidden))">{{ s.klarna_meer }}</button>
+                  <span class="ws-klarna-uitleg" hidden>{{ s.klarna_uitleg }}</span>
+                {%- endif -%}
+              </span>
             </p>
           {%- endif -%}
         </div>
+
+        {%- if v7 -%}
+          {%- comment -%}
+            v7: drie zekerheden met een vinkje, net boven de knop, onder het
+            Klarna-kader: wat je zeker weet voordat je klikt.
+          {%- endcomment -%}
+          <ul class="ws-zeker">
+            {%- if s.zeker_3 != blank -%}<li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>{{ s.zeker_3 }}</span></li>{%- endif -%}
+            {%- if s.zeker_1 != blank -%}<li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>{{ s.zeker_1 }}</span></li>{%- endif -%}
+            {%- if s.zeker_2 != blank -%}<li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>{{ s.zeker_2 }}</span></li>{%- endif -%}
+          </ul>
+        {%- endif -%}
 
         <div class="ws-vorm">
           {%- assign form_id = 'ProductForm-' | append: section.id -%}
@@ -1602,20 +1625,13 @@
         {%- endif -%}
 
 
-        {%- if v7 -%}
-          {%- comment -%} v7: drie zekerheden onder de knop, met een dunne streep ertussen. {%- endcomment -%}
-          <ul class="ws-zeker">
-            {%- if s.zeker_1 != blank -%}<li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3"/><path d="M4.5 4.5v4h4"/></svg>{{ s.zeker_1 }}</li>{%- endif -%}
-            {%- if s.zeker_2 != blank -%}<li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>{{ s.zeker_2 }}</li>{%- endif -%}
-            {%- if s.zeker_3 != blank -%}<li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5h11v9.5H3zM14 9.5h3.8l3.2 3.3V16H14"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/></svg>{{ s.zeker_3 }}</li>{%- endif -%}
-          </ul>
-        {%- else -%}
+        {%- unless v7 -%}
         <div class="ws-pay">
           {% render 'payments' %}
           <span class="ws-vl"><svg><use href="#ws-pdp-slot-{{ section.id }}"/></svg>{{ s.veilig_label }}</span>
           {%- if s.proberen_label != blank -%}<span class="ws-pr">{{ s.proberen_label }}</span>{%- endif -%}
         </div>
-        {%- endif -%}
+        {%- endunless -%}
 
         {%- comment -%}
           Add-ons: accessoires onder de knop, elk met een eigen knop
@@ -3056,7 +3072,9 @@
     { "type": "text", "id": "besparing_regel", "label": "Regel bij het bespaarde bedrag", "default": "Je bespaart" },
     { "type": "header", "content": "Klarna in drie delen" },
     { "type": "checkbox", "id": "klarna_tonen", "label": "Regel onder de prijs tonen", "info": "Alleen aanzetten als Klarna 'Betaal in 3 termijnen' echt in de kassa staat.", "default": true },
-    { "type": "text", "id": "klarna_regel", "label": "Tekst", "info": "[bedrag] wordt de prijs gedeeld door drie, naar boven afgerond op een cent.", "default": "Of betaal in 3 rentevrije delen van [bedrag]" },
+    { "type": "text", "id": "klarna_regel", "label": "Tekst", "info": "[bedrag] wordt de prijs gedeeld door drie, naar boven afgerond op een cent.", "default": "3 betalingen van [bedrag] tegen 0% rente met Klarna" },
+    { "type": "text", "id": "klarna_meer", "label": "Link onder de tekst", "default": "Meer informatie" },
+    { "type": "textarea", "id": "klarna_uitleg", "label": "Uitleg achter de link", "default": "Betaal in 3 gelijke delen: de eerste bij je bestelling, de andere twee na 30 en 60 dagen. Zonder rente of extra kosten. Kies Klarna bij het afrekenen." },
     { "type": "number", "id": "klarna_min", "label": "Vanaf (euro)", "info": "Onder dit bedrag biedt Klarna geen drie termijnen aan.", "default": 35 },
     { "type": "number", "id": "klarna_max", "label": "Tot en met (euro)", "default": 1500 },
     { "type": "text", "id": "munt", "label": "Valutateken voor de prijs", "info": "De winkel zet zelf geen teken voor de prijs (moneyFormat is amount_with_comma_separator). Dit zet het alleen in dit blok. Leeg = geen teken.", "default": "€" },
