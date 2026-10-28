@@ -302,3 +302,14 @@ week door. Liever een vaste einddatum die klopt.
 3. **Welke drie bundels**, en krijgen ze een cadeau of een extra prijs?
 4. **Cadeau boven een drempel:** welk product, vanaf welk bedrag, en hoeveel op voorraad?
 5. **Data:** klopt 23 tot en met 30 november, en willen we early access?
+
+---
+
+## Update 28 oktober: v9 Black Friday-kopie
+
+In "Black Friday 2026 (kopie van v9)" (`preview_theme_id=209168925004`), in `assets/ws-spaar.css` onder `.ws-bf`:
+
+- **Black Friday-banner in het menu:**
+  - mobiel: de gouden strook bovenaan het menu is zwart, met een rode rand, een pulserende rode stip in plaats van het zonnetje en een rode pijl;
+  - desktop: de grote megamenu-promo heeft een rood label met stip, een rode knop en een rode gloed. De bundelpromo ernaast blijft goud.
+- **Kortingslabels op de productkaarten** ("31% Korting", ook in de winkelwagen): rood met wit (#C8281F, 5,4:1). Bewust zonder extra Black Friday-badge, om de kaarten rustig te houden.
