@@ -190,6 +190,22 @@
 .ws7-vink svg{width:10px;height:10px;fill:none;stroke:#fff;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
 .ws7-midden .ws7-collab-link{margin-top:22px}
 
+/* awards: keurmerken naast een korte uitleg wat ze betekenen */
+.ws7-award{max-width:1440px;margin:0 auto;padding:64px 56px 0}
+.ws7-award__blok{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:auto minmax(0,1fr);gap:56px;align-items:center;background:#fff;border-radius:26px;padding:40px 48px}
+.ws7-wit .ws7-award__blok{background:var(--zand)}
+.ws7-award__badges{display:flex;gap:16px}
+.ws7-award__badge{width:110px;height:auto;filter:drop-shadow(0 10px 18px rgba(193,32,38,.18))}
+.ws7-award__tekst{display:flex;flex-direction:column;align-items:flex-start;gap:12px;text-align:left}
+.ws7-award__tekst .ws7-oog + .ws7-kop{margin-top:0}
+.ws7-award__uitleg{font-size:13px;line-height:1.6;color:var(--mid);max-width:34em}
+.ws7-award__lijst{list-style:none;margin:0;padding:0;display:grid;gap:0;width:100%;max-width:440px}
+.ws7-award__lijst li{display:flex;gap:14px;padding:10px 0;border-top:1px solid rgba(17,17,17,.08);font-size:12.5px}
+.ws7-award__lijst li:last-child{border-bottom:1px solid rgba(17,17,17,.08)}
+.ws7-award__lijst b{flex:0 0 78px;font-weight:600}
+.ws7-award__lijst span{color:var(--mid)}
+.ws7-award .ws7-link{margin-top:6px}
+
 @media (max-width:749px){
   .ws7-binnen{padding:48px 16px 0}
   .ws7-kop{font-size:30px}
@@ -249,6 +265,10 @@
   .ws7-slot__punt{padding:10px 8px}
   .ws7-slot__punt b{font-size:12px}
   .ws7-slot__punt span{font-size:9.5px}
+  .ws7-award{padding:44px 10px 0}
+  .ws7-award__blok{grid-template-columns:1fr;gap:22px;padding:24px 20px;border-radius:18px}
+  .ws7-award__badges{justify-content:center}
+  .ws7-award__badge{width:92px}
 }
 @media (prefers-reduced-motion:reduce){
   .ws7-pers__rij{animation:none}

@@ -1,0 +1,55 @@
+{% comment %} Wellshave v7 · awards: keurmerken naast een korte uitleg wat ze betekenen, met per maand een regel. {% endcomment %}
+{{ 'ws7.css' | asset_url | stylesheet_tag }}
+<div class="ws7{% if section.settings.wit %} ws7-wit{% endif %}">
+  <div class="ws7-award">
+    <div class="ws7-award__blok">
+      <div class="ws7-award__badges">
+        {%- for block in section.blocks -%}
+          {%- if block.settings.foto != blank -%}
+            {%- assign award_alt = block.settings.alt | default: block.settings.foto.alt -%}
+            {{ block.settings.foto | image_url: width: 300 | image_tag: loading: 'lazy', widths: '150, 220, 300', sizes: '110px', alt: award_alt, class: 'ws7-award__badge' }}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      <div class="ws7-award__tekst">
+        {%- if section.settings.oog != blank -%}<span class="ws7-oog">{{ section.settings.oog }}</span>{%- endif -%}
+        {% render 'ws7-kop', kop: section.settings.kop, goud: section.settings.kop_goud %}
+        {%- if section.settings.tekst != blank -%}<p class="ws7-award__uitleg">{{ section.settings.tekst }}</p>{%- endif -%}
+        {%- if section.blocks.size > 0 -%}
+          <ul class="ws7-award__lijst" role="list">
+            {%- for block in section.blocks -%}
+              <li {{ block.shopify_attributes }}><b>{{ block.settings.maand }}</b><span>{{ block.settings.regel }}</span></li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+        {%- if section.settings.link_label != blank -%}<a class="ws7-link" href="{{ section.settings.link | default: '#' }}">{{ section.settings.link_label }}{% render 'ws7-pijl' %}</a>{%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "WS7 · Awards",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "oog", "label": "Bovenregel", "default": "Bekroond door kopers" },
+    { "type": "text", "id": "kop", "label": "Kop", "default": "Best Reviewed" },
+    { "type": "text", "id": "kop_goud", "label": "Kop, regel in goud", "default": "op Kieskeurig.nl." },
+    { "type": "textarea", "id": "tekst", "label": "Uitleg" },
+    { "type": "text", "id": "link_label", "label": "Linktekst" },
+    { "type": "url", "id": "link", "label": "Link" },
+    { "type": "checkbox", "id": "wit", "label": "Witte achtergrond", "default": false }
+  ],
+  "blocks": [
+    { "type": "award", "name": "Award", "settings": [
+      { "type": "image_picker", "id": "foto", "label": "Keurmerk" },
+      { "type": "text", "id": "alt", "label": "Omschrijving keurmerk" },
+      { "type": "text", "id": "maand", "label": "Maand", "default": "Mei 2026" },
+      { "type": "text", "id": "regel", "label": "Regel" }
+    ]}
+  ],
+  "presets": [ { "name": "WS7 · Awards" } ]
+}
+{% endschema %}

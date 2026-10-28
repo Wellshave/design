@@ -34,9 +34,10 @@
         "t2"
       ],
       "settings": {
-        "foto": "shopify://shop_images/herfst-sale-2026-hero.png",
-        "pos": "60% 34%",
-        "mob_pos": "62% 20%",
+        "foto": "shopify://shop_images/ws7-ban-barber-bro.jpg",
+        "pos": "22% 34%",
+        "foto_mobiel": "shopify://shop_images/ws7-ban-barber-bro.jpg",
+        "mob_pos": "25% 20%",
         "oog": "Herfst Sale · tot 40%",
         "kop": "Jouw huid.\nJouw lijn.",
         "kop_goud": "Wellshave.",
@@ -241,6 +242,7 @@
             "pos": "50% 62%",
             "foto_mobiel": "shopify://shop_images/gg-c2m-5-lading.jpg",
             "mob_pos": "50% 30%",
+            "mob_indeling": "onder",
             "kop": "Groom Guard™",
             "kop_goud": "Bodygroomer",
             "tekst": "SkinSafe-messen, vier opzetkammen en een oplaadstandaard.",
@@ -255,8 +257,10 @@
           "type": "banner",
           "settings": {
             "foto": "shopify://shop_images/herfst-sale-2026-banner.png",
+            "hoogte": "breed",
             "pos": "42% 50%",
             "mob_pos": "62% 50%",
+            "mob_indeling": "onder",
             "kop": "De Herfst",
             "kop_goud": "Sale",
             "tekst": "Tot 40% korting op geselecteerde apparaten. Tot en met 30 oktober.",
@@ -757,6 +761,42 @@
         "link2_label": "Doe de quiz",
         "link2": "/pages/quiz"
       }
+    },
+    "awards": {
+      "type": "ws7-awards",
+      "blocks": {
+        "w1": {
+          "type": "award",
+          "settings": {
+            "foto": "shopify://shop_images/kieskeurig-best-reviewed-mei-2026.png",
+            "alt": "Kieskeurig.nl Best Reviewed mei 2026",
+            "maand": "Mei 2026",
+            "regel": "Neustrimmer 4in1 Ultra™, voor het eerst"
+          }
+        },
+        "w2": {
+          "type": "award",
+          "settings": {
+            "foto": "shopify://shop_images/kieskeurig-best-reviewed-juni-2026.png",
+            "alt": "Kieskeurig.nl Best Reviewed juni 2026, 2 keer",
+            "maand": "Juni 2026",
+            "regel": "Neustrimmer 4in1 Ultra™, voor de tweede keer"
+          }
+        }
+      },
+      "block_order": [
+        "w1",
+        "w2"
+      ],
+      "settings": {
+        "oog": "Bekroond door kopers",
+        "kop": "Best Reviewed",
+        "kop_goud": "op Kieskeurig.nl.",
+        "tekst": "Kieskeurig.nl geeft elke maand het keurmerk Best Reviewed aan producten die kopers zelf het hoogst beoordelen: minimaal drie onafhankelijke reviews en gemiddeld een 8 of hoger.",
+        "link_label": "Bekijk de Neustrimmer 4in1 Ultra™",
+        "link": "shopify://products/neustrimmer-4in1-ultra",
+        "wit": false
+      }
     }
   },
   "order": [
@@ -767,6 +807,7 @@
     "banners",
     "innovatie",
     "pers",
+    "awards",
     "alles",
     "collabs",
     "afsluiter"

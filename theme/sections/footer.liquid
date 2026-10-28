@@ -1,0 +1,261 @@
+{{ 'footer.css' | asset_url | stylesheet_tag }}
+
+<footer class="footer">
+  <div class="page-width">
+    <div class="footer__top">
+      {%- if section.settings.logo != blank -%}
+        <a href="{{ routes.root_url }}" class="footer__logo">
+          {{ section.settings.logo | image_url: width: 400 | image_tag }}
+        </a>
+      {%- endif -%}
+
+      {%- if section.settings.award_1 != blank or section.settings.award_2 != blank -%}
+        {%- capture award_inhoud -%}
+          <span class="footer__award-badges">
+            {%- if section.settings.award_1 != blank -%}{{ section.settings.award_1 | image_url: width: 120 | image_tag: loading: 'lazy', alt: section.settings.award_1.alt }}{%- endif -%}
+            {%- if section.settings.award_2 != blank -%}{{ section.settings.award_2 | image_url: width: 120 | image_tag: loading: 'lazy', alt: section.settings.award_2.alt }}{%- endif -%}
+          </span>
+          <span class="footer__award-tekst">
+            {%- if section.settings.award_titel != blank -%}<b>{{ section.settings.award_titel }}</b>{%- endif -%}
+            {%- if section.settings.award_regel != blank -%}<span>{{ section.settings.award_regel }}</span>{%- endif -%}
+          </span>
+        {%- endcapture -%}
+        {%- if section.settings.award_link != blank -%}
+          <a href="{{ section.settings.award_link }}" class="footer__award">{{ award_inhoud }}</a>
+        {%- else -%}
+          <div class="footer__award">{{ award_inhoud }}</div>
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- if section.settings.reviews_label != blank -%}
+        <p class="footer__reviews body-md">
+          <span>{{ section.settings.reviews_label }}</span>
+          {{- 'icon-trustpilot-logo.svg' | inline_asset_content -}}
+        </p>
+      {%- endif -%}
+    </div>
+
+    <div class="footer__main">
+      <div class="footer__info">
+        {%- if section.settings.enable_newsletter -%}
+          <div class="footer__newsletter">
+            {%- if section.settings.newsletter_title != blank -%}
+              <p class="footer__newsletter-title h4">{{ section.settings.newsletter_title }}</p>
+            {%- endif -%}
+
+            {%- form 'customer', id: 'FooterNewsletterForm', class: 'footer__newsletter-form' -%}
+              <input type="hidden" name="contact[tags]" value="newsletter">
+              <div class="footer__newsletter-fields">
+                <div class="footer__newsletter-field field">
+                  <input
+                    type="email"
+                    name="contact[email]"
+                    value="{{ form.email }}"
+                    aria-required="true"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    autocomplete="email"
+                    {% if form.posted_successfully? %}
+                      aria-describedby="FooterNewsletterForm-success"
+                    {% endif %}
+                    placeholder="{{ 'footer.email_placeholder' | t }}"
+                    required
+                  />
+                  <button
+                    type="submit"
+                    class="footer__newsletter-button button button--light button--small"
+                    name="commit"
+                    aria-label="Subscribe"
+                  >
+                    {{ 'footer.subscribe_button' | t }}
+                  </button>
+                </div>
+              </div>
+
+              {% if form.posted_successfully? %}
+                <p id="ContactFooter-success" class="footer__newsletter-success message message--success">
+                  {{ 'icon-checkmark.svg' | inline_asset_content }}
+                  <span>{{ 'footer.newsletter_success' | t }}</span>
+                </p>
+              {% endif %}
+            {%- endform -%}
+
+            {%- if section.settings.newsletter_note != blank -%}
+              <p class="footer__newsletter-note body-md">{{ section.settings.newsletter_note }}</p>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.enable_social -%}
+          <div class="footer__social">
+            {% render 'social' %}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="footer__blocks">
+        {%- for block in section.blocks -%}
+          <div class="footer__block" {{ block.shopify_attributes }}>
+            <p class="footer__menu-title body-md">
+              {{- block.settings.alternate_title | default: block.settings.menu.title -}}
+            </p>
+
+            <ul class="footer__menu" role="list">
+              {%- for link in block.settings.menu.links -%}
+                <li>
+                  <a href="{{ link.url }}" class="footer__link body-lg">
+                    {{- link.title -}}
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      {%- if section.settings.enable_country_switcher and localization.available_countries.size > 1 -%}
+        <button
+          type="button"
+          name="localization-open"
+          class="footer__localization body-md"
+          data-localization-open
+        >
+          {{ localization.country | image_url: width: 100 | image_tag }}
+          {{- localization.country.iso_code }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol -}})
+        </button>
+      {%- endif -%}
+
+      {%- if section.settings.enable_payments -%}
+        <div class="footer__payments">
+          {% render 'payments' %}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <p class="footer__copyright body-sm">&copy; {{ 'now' | date: "%Y" }}, {{ shop.name | capitalize }}</p>
+  </div>
+</footer>
+
+{% schema %}
+  {
+    "name": "Footer",
+    "enabled_on": {
+      "groups": ["footer"]
+    },
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo"
+      },
+      {
+        "type": "text",
+        "id": "reviews_label",
+        "label": "Reviews label",
+        "default": "Zie onze 1000+ reviews op"
+      },
+      {
+        "type": "header",
+        "content": "Award"
+      },
+      {
+        "type": "image_picker",
+        "id": "award_1",
+        "label": "Keurmerk 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "award_2",
+        "label": "Keurmerk 2"
+      },
+      {
+        "type": "text",
+        "id": "award_titel",
+        "label": "Titel",
+        "default": "Best Reviewed op Kieskeurig.nl"
+      },
+      {
+        "type": "text",
+        "id": "award_regel",
+        "label": "Regel"
+      },
+      {
+        "type": "url",
+        "id": "award_link",
+        "label": "Link"
+      },
+      {
+        "type": "header",
+        "content": "Newsletter settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_newsletter",
+        "label": "Enable newsletter",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "newsletter_title",
+        "label": "Newsletter title",
+        "default": "Grooming tips, exclusive deals & 10% off your first order"
+      },
+      {
+        "type": "inline_richtext",
+        "id": "newsletter_note",
+        "label": "Newsletter note",
+        "default": "Lorem ipsum dolor sit amet."
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_social",
+        "label": "Enable social",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_payments",
+        "label": "Enable payments",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_country_switcher",
+        "label": "Enable country switcher",
+        "default": true
+      }
+    ],
+    "blocks": [
+      {
+        "type": "menu",
+        "name": "Menu",
+        "limit": 4,
+        "settings": [
+          {
+            "type": "link_list",
+            "id": "menu",
+            "label": "Menu",
+            "default": "footer"
+          },
+          {
+            "type": "text",
+            "id": "alternate_title",
+            "label": "Alterante title"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Footer",
+        "blocks": [
+          {
+            "type": "menu"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
