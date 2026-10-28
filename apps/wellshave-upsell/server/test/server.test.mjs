@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {sign, verify, signChangeset} from '../lib/jwt.mjs';
 import {matchRule, offersFor, thanksFor, fillText, discounted} from '../lib/rules.mjs';
 import {recentlyOffered, seenRules, checkoutUrl} from '../lib/offers.mjs';
+import {adminOrderId} from '../lib/shopify.mjs';
 import config from '../../config/upsell-config.json' with {type: 'json'};
 
 const V = (n) => `gid://shopify/ProductVariant/${n}`;
@@ -58,4 +59,9 @@ test('checkout-link bevat producten, code, koppeling en ingevulde gegevens', () 
   assert.equal(url.searchParams.get('attributes[_ws_parent]'), '#SHAVE9451');
   assert.equal(url.searchParams.get('checkout[email]'), 'klant@example.nl');
   assert.equal(url.searchParams.get('checkout[shipping_address][zip]'), '1234 AB');
+});
+
+test('order-id van de bedankpagina wordt de Admin-id', () => {
+  assert.equal(adminOrderId('gid://shopify/OrderIdentity/13374787420492'), 'gid://shopify/Order/13374787420492');
+  assert.equal(adminOrderId('gid://shopify/Order/1'), 'gid://shopify/Order/1');
 });

@@ -73,6 +73,9 @@ export async function productHandles(shop, productIds) {
 }
 
 // ---------- orders en klanten ----------
+// De bedankpagina geeft gid://shopify/OrderIdentity/<id>; de Admin kent dezelfde order als gid://shopify/Order/<id>.
+export const adminOrderId = (id) => String(id || '').replace('gid://shopify/OrderIdentity/', 'gid://shopify/Order/');
+
 export async function getOrder(shop, orderId) {
   const d = await admin(
     shop,
@@ -81,7 +84,7 @@ export async function getOrder(shop, orderId) {
       metafield(namespace:"${NS}", key:"state"){ value }
       shippingAddress { firstName lastName address1 address2 zip city countryCodeV2 phone }
       lineItems(first:50){ nodes { variant { id } product { id handle title } } } } }`,
-    {id: orderId},
+    {id: adminOrderId(orderId)},
   );
   return d.order;
 }

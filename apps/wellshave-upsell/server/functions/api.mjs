@@ -249,10 +249,21 @@ async function ordersCreate(req) {
   if (!parent) return new Response('ok');
   const tag = `upsell-bundel-${parent.replace(/\D/g, '')}`;
   await addTags(shop, o.admin_graphql_api_id, [tag, 'upsell-order']);
-  const d = await admin(shop, `query($q:String!){ orders(first:1, query:$q){ nodes{ id } } }`, {q: `name:${parent}`});
-  const parentId = d.orders.nodes[0]?.id;
-  if (parentId) await addTags(shop, parentId, [tag, 'heeft-upsell']);
+  const d = await admin(shop, `query($q:String!){ orders(first:1, query:$q){ nodes{ id note } } }`, {q: `name:${parent}`});
+  const p = d.orders.nodes[0];
+  // Notitie voor het magazijn: de notitie staat op de pakbon en in de order.
+  await addNote(shop, o.admin_graphql_api_id, o.note, `UPSELL: samen verzenden met ${parent}.`);
+  if (p) {
+    await addTags(shop, p.id, [tag, 'heeft-upsell']);
+    await addNote(shop, p.id, p.note, `UPSELL: wacht op ${o.name}, samen verzenden.`);
+  }
   return new Response('ok');
+}
+
+async function addNote(shop, id, current, line) {
+  if (String(current || '').includes(line)) return;
+  const note = current ? `${current}\n${line}` : line;
+  await admin(shop, `mutation($i:OrderInput!){ orderUpdate(input:$i){ userErrors{ message } } }`, {i: {id, note}});
 }
 
 async function compliance(req) {
