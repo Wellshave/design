@@ -352,11 +352,12 @@ async function setupReminderFlow(url) {
     }
   }
   if (flow && url.searchParams.get('live') === '1') {
-    const actions = await klaviyo(`/flows/${flow.id}/flow-actions`);
-    for (const a of actions.body.data || []) {
-      if (a.attributes.action_type === 'SEND_EMAIL' || a.attributes.definition?.type === 'send-email') {
-        tried.push({action: a.id, ...(await klaviyo(`/flow-actions/${a.id}`, {method: 'PATCH', body: JSON.stringify({data: {type: 'flow-action', id: a.id, attributes: {status: 'live'}}})}))});
-      }
+    const full = await klaviyo(`/flows/${flow.id}?additional-fields[flow]=definition`);
+    for (const a of full.body.data?.attributes?.definition?.actions || []) {
+      if (a.type !== 'send-email' || a.data.status === 'live') continue;
+      const definition = {...a, data: {...a.data, status: 'live'}};
+      const r = await klaviyo(`/flow-actions/${a.id}`, {method: 'PATCH', body: JSON.stringify({data: {type: 'flow-action', id: a.id, attributes: {definition}}})});
+      tried.push({action: a.id, status: r.status, errors: r.body.errors?.map((e) => e.detail)});
     }
     const r = await klaviyo(`/flows/${flow.id}`, {method: 'PATCH', body: JSON.stringify({data: {type: 'flow', id: flow.id, attributes: {status: 'live'}}})});
     tried.push({flowLive: r.status, errors: r.body.errors?.map((e) => e.detail)});
