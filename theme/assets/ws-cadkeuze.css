@@ -1,0 +1,20 @@
+/* Cadeau kiezen in de winkelwagenlade (thema-instelling gift_1_keuze).
+   Dezelfde rijen als op de productpagina: foto, naam en van-prijs, de gekozen
+   rij met een gouden rand. Laadt met de lade, op elke pagina. */
+.cart-drawer__wijzig{margin-top:6px;padding:4px 0;font-size:12px;font-weight:500;color:var(--cd-zacht,#5E5A54);
+  text-decoration:underline;text-underline-offset:3px;cursor:pointer;background:none;border:0}
+.cart-drawer__wijzig:hover{color:var(--cd-inkt,#191816)}
+.cart-drawer__cadkeuze{align-self:stretch;margin-top:8px;padding:10px;border-radius:10px;background:var(--cd-zand,#F5F1EA)}
+.cart-drawer__cadkeuze[hidden]{display:none}
+.cart-drawer .ws-cadkeuze-kop{margin:0 2px 8px;font-size:12.5px;font-weight:600}
+.cart-drawer .ws-cadkeuze-lijst{display:grid;gap:6px}
+.cart-drawer .ws-cko{display:flex;align-items:center;gap:10px;width:100%;padding:6px 10px 6px 6px;border-radius:9px;
+  border:1px solid var(--cd-lijn,#ECE8E1);background:#fff;color:var(--cd-inkt,#191816);text-align:left;cursor:pointer}
+.cart-drawer .ws-cko[aria-pressed="true"]{border-color:#C89543;box-shadow:0 0 0 1px #C89543 inset}
+.cart-drawer .ws-cko-bd{flex:0 0 36px;width:36px;height:36px;border-radius:7px;overflow:hidden;background:var(--cd-zand,#F5F1EA)}
+.cart-drawer .ws-cko-bd img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;display:block}
+.cart-drawer .ws-cko-tx{flex:1;min-width:0;display:flex;flex-direction:column}
+.cart-drawer .ws-cko-tx b{font-size:13px;font-weight:600;line-height:1.25}
+.cart-drawer .ws-cko-pr{display:flex;align-items:baseline;gap:6px;white-space:nowrap;font-size:12px;color:var(--cd-grijs,#7A766F)}
+.cart-drawer .ws-cko-pr::after{content:"✓";font-weight:700;color:#C89543;opacity:0}
+.cart-drawer .ws-cko[aria-pressed="true"] .ws-cko-pr::after{opacity:1}

@@ -642,3 +642,29 @@
 .ws7p-doos__bd{background:var(--zand);border-radius:20px}
 .ws7p-doos__bd img{inset:13%;width:74%;height:74%}
 .ws7p-doos .ws7p-cijfers{background:var(--zand)}
+
+/* ---------- cadeau kiezen (gift_1_keuze) ----------
+   "Wijzig" als tekstlink naast de naam; de lijst klapt onder de kaart open,
+   drie rijen met foto, naam en van-prijs. De gekozen rij krijgt een gouden rand. */
+.ws-pdp7 .ws-tx-wijzig{border:0;background:none;padding:0;margin-left:6px;font:inherit;font-size:11.5px;font-weight:500;
+  color:var(--brons-tekst);text-decoration:underline;text-underline-offset:2px;cursor:pointer}
+.ws-pdp7 .ws-tx-wijzig:hover{color:var(--ink)}
+.ws-pdp7 .ws-cad-k .ws-cad-wijzig{margin:4px 0 0;justify-self:center}
+.ws-pdp7 .ws-cadkeuze{margin:8px 0 2px;padding:10px;border-radius:12px;background:#fff;border:1px solid var(--lijn2)}
+.ws-pdp7 .ws-cadkeuze[hidden]{display:none}
+.ws-pdp7 .ws-cadkeuze-kop{margin:0 2px 8px;font-size:12.5px;font-weight:600;color:var(--ink)}
+.ws-pdp7 .ws-cadkeuze-lijst{display:grid;gap:6px}
+.ws-pdp7 .ws-cko{display:flex;align-items:center;gap:10px;width:100%;padding:7px 10px 7px 7px;border-radius:10px;
+  border:1px solid var(--lijn);background:var(--zand);color:var(--ink);font:inherit;text-align:left;cursor:pointer}
+.ws-pdp7 .ws-cko[hidden]{display:none}
+.ws-pdp7 .ws-cko:hover{border-color:var(--lijn2)}
+.ws-pdp7 .ws-cko[aria-pressed="true"]{border-color:#C89543;box-shadow:0 0 0 1px #C89543 inset;background:#FBF6EC}
+.ws-pdp7 .ws-cko-bd{flex:0 0 40px;width:40px;height:40px;border-radius:8px;overflow:hidden;background:#fff}
+.ws-pdp7 .ws-cko-bd img{width:100%;height:100%;object-fit:contain;mix-blend-mode:darken;display:block}
+.ws-pdp7 .ws-cko-tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.ws-pdp7 .ws-cko-tx b{font-size:13px;font-weight:600;line-height:1.25}
+.ws-pdp7 .ws-cko-tx small{font-size:11px;color:var(--mid)}
+.ws-pdp7 .ws-cko-pr{display:flex;align-items:baseline;gap:6px;white-space:nowrap;font-size:12px}
+.ws-pdp7 .ws-cko-pr s{color:var(--licht)}
+.ws-pdp7 .ws-cko-pr::after{content:"✓";font-weight:700;color:#C89543;opacity:0}
+.ws-pdp7 .ws-cko[aria-pressed="true"] .ws-cko-pr::after{opacity:1}

@@ -1,0 +1,30 @@
+{%- comment -%}
+  Wellshave — de cadeaus waaruit de klant zelf kiest (settings.gift_1_keuze).
+
+  Geeft per cadeau dat nu gekozen kan worden een knop met foto, naam en
+  van-prijs. Een cadeau dat op is, valt weg. Met al (de handles van wat er al
+  in de bestelling zit, elk tussen ‹ en ›) valt ook weg wat er al in zit; zonder
+  al rendert alles en filtert het script per keuzekaart (data-echt).
+
+  gekozen: de handle die nu het cadeau is (krijgt aria-pressed).
+  naam_1:  de naam voor het hoofdcadeau (gift_1_product), zoals "Luxe washbag".
+  vanaf:   regel onder de naam, bijvoorbeeld "Gratis vanaf €65".
+  munt:    het valutateken voor de van-prijs.
+{%- endcomment -%}
+{%- assign al_in = al | default: '' -%}
+{%- for c in settings.gift_1_keuze -%}
+  {%- assign cv = c.selected_or_first_available_variant -%}
+  {%- unless cv.available -%}{%- continue -%}{%- endunless -%}
+  {%- assign bron = c.metafields.custom.cadeau_voorraad.value -%}
+  {%- if bron != blank and bron.available == false -%}{%- continue -%}{%- endif -%}
+  {%- assign echt = bron.handle | default: c.handle -%}
+  {%- assign echt_sl = '‹' | append: echt | append: '›' -%}
+  {%- if al_in contains echt_sl -%}{%- continue -%}{%- endif -%}
+  {%- assign c_naam = c.title -%}
+  {%- if c.handle == settings.gift_1_product.handle and naam_1 != blank -%}{%- assign c_naam = naam_1 -%}{%- endif -%}
+  <button type="button" class="ws-cko" data-ws-cad-optie="{{ c.handle }}" data-echt="‹{{ echt }}›‹{{ c.handle }}›" aria-pressed="{% if c.handle == gekozen %}true{% else %}false{% endif %}">
+    <span class="ws-cko-bd" data-cad-img>{%- if c.featured_image != blank -%}{{ c.featured_image | image_url: width: 120 | image_tag: alt: '', loading: 'lazy', width: 48, height: 48 }}{%- endif -%}</span>
+    <span class="ws-cko-tx"><b data-cad-nm>{{ c_naam }}</b>{%- if vanaf != blank -%}<small>{{ vanaf }}</small>{%- endif -%}</span>
+    <span class="ws-cko-pr" data-cad-was>{%- if cv.compare_at_price > 0 -%}<s>{{ munt }}{% render 'price-formated', price: cv.compare_at_price %}</s>{%- endif -%}</span>
+  </button>
+{%- endfor -%}

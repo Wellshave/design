@@ -1652,3 +1652,102 @@ class UgcVideosCarousel extends HTMLElement {
 if (document.querySelector('ugc-videos-carousel')) {
   customElements.define('ugc-videos-carousel', UgcVideosCarousel);
 }
+// ---------- Cadeau kiezen (thema-instelling gift_1_keuze) ----------
+// De klant kiest zijn eerste cadeau zelf, op de productpagina (knop Wijzig bij
+// het cadeau) en in de winkelwagen. De keuze staat als kenmerk _cadeau_1 op de
+// winkelwagen; de cadeaubalk (snippet ws-cadeau) leest dat en de lade legt dan
+// dat cadeau erin. Wat al in een pakket zit, kan niet gekozen worden.
+(() => {
+  const KENMERK = "_cadeau_1";
+  const tokens = s => (s || "").match(/‹[^›]+›/g) || [];
+
+  // De cadeaukaarten op de pagina laten zien wat er gekozen is. Een kaart
+  // waarvan het pakket dit cadeau al bevat, houdt zijn eigen cadeau.
+  function toepassen(handle) {
+    const optie = document.querySelector('[data-ws-cad-optie="' + CSS.escape(handle) + '"]');
+    if (!optie) return;
+    const echt = optie.getAttribute("data-echt") || "";
+    document.querySelectorAll("[data-ws-cad1]").forEach(rij => {
+      const al = rij.getAttribute("data-al") || "";
+      if (tokens(echt).some(t => al.indexOf(t) > -1)) return;
+      [["[data-cad-img]", "innerHTML"], ["[data-cad-nm]", "textContent"], ["[data-cad-was]", "innerHTML"]].forEach(([sel, veld]) => {
+        const doel = rij.querySelector(sel), bron = optie.querySelector(sel);
+        if (doel && bron) doel[veld] = bron[veld];
+      });
+      rij.setAttribute("data-ws-cad1", handle);
+      // "Maak het compleet" laat weg wat je al krijgt: ook het nieuwe cadeau.
+      const kaart = rij.closest("label");
+      const radio = kaart && kaart.querySelector("input[data-weg1]");
+      if (radio) {
+        const oud = radio.getAttribute("data-weg1");
+        let weg = radio.getAttribute("data-weg") || "";
+        weg = oud ? weg.split(oud).join(echt) : weg + echt;
+        radio.setAttribute("data-weg", weg);
+        radio.setAttribute("data-weg1", echt);
+      }
+    });
+    document.querySelectorAll("[data-ws-cad-optie]").forEach(b => b.setAttribute("aria-pressed", String(b.getAttribute("data-ws-cad-optie") === handle)));
+    document.dispatchEvent(new CustomEvent("ws:cadeau", { detail: { handle } }));
+  }
+
+  function kies(handle) {
+    toepassen(handle);
+    const lade = document.querySelector("cart-drawer");
+    const taak = () => fetch(window.Shopify.routes.root + "cart/update.js", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ attributes: { [KENMERK]: handle }, sections: ["cart-drawer"], sections_url: window.location.pathname })
+    })
+      .then(r => r.json())
+      .then(r => { if (lade && r.sections && lade.renderContent) lade.renderContent(r.sections); });
+    return lade && lade.enqueueCart ? lade.enqueueCart(taak) : taak();
+  }
+
+  function sluiten(paneel) {
+    if (!paneel) return;
+    paneel.hidden = true;
+    if (paneel._wsVan) paneel._wsVan.setAttribute("aria-expanded", "false");
+    paneel._wsVan = null;
+  }
+
+  function openen(knop) {
+    const paneel = document.getElementById(knop.getAttribute("aria-controls"));
+    if (!paneel) return;
+    if (!paneel.hidden && paneel._wsVan === knop) { sluiten(paneel); return; }
+    if (paneel._wsVan) paneel._wsVan.setAttribute("aria-expanded", "false");
+    const rij = knop.closest("[data-ws-cad1]");
+    if (paneel.hasAttribute("data-verplaats")) {
+      const anker = knop.closest("label") || knop.closest(".ws-cad") || rij;
+      if (anker) anker.after(paneel);
+    }
+    const al = rij ? rij.getAttribute("data-al") || "" : "";
+    const nu = rij ? rij.getAttribute("data-ws-cad1") : null;
+    paneel.querySelectorAll("[data-ws-cad-optie]").forEach(b => {
+      b.hidden = tokens(b.getAttribute("data-echt")).some(t => al.indexOf(t) > -1);
+      if (nu) b.setAttribute("aria-pressed", String(b.getAttribute("data-ws-cad-optie") === nu));
+    });
+    paneel.hidden = false;
+    paneel._wsVan = knop;
+    knop.setAttribute("aria-expanded", "true");
+  }
+
+  document.addEventListener("click", e => {
+    const knop = e.target.closest("[data-ws-cad-wijzig]");
+    if (knop) { e.preventDefault(); e.stopPropagation(); openen(knop); return; }
+    const optie = e.target.closest("[data-ws-cad-optie]");
+    if (optie) {
+      e.preventDefault();
+      e.stopPropagation();
+      sluiten(optie.closest("[data-ws-cadkeuze]"));
+      kies(optie.getAttribute("data-ws-cad-optie"));
+    }
+  });
+
+  // Een eerder gekozen cadeau ook tonen als de pagina uit een cache komt.
+  if (document.querySelector("[data-ws-cad1]")) {
+    fetch(window.Shopify.routes.root + "cart.js")
+      .then(r => r.json())
+      .then(c => { const h = c.attributes && c.attributes[KENMERK]; if (h) toepassen(h); })
+      .catch(() => {});
+  }
+})();

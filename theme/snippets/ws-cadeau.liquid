@@ -24,6 +24,10 @@
     {%- capture c1 %}{% render 'ws-cadeau', nr: 1, al: al %}{% endcapture -%}
     {%- capture c2 %}{% render 'ws-cadeau', nr: 2, niet: c1, al: al %}{% endcapture -%}
   niet: een handle die overgeslagen wordt (cadeau 2 is nooit hetzelfde als 1).
+  keuze: (alleen cadeau 1) de handle die de klant zelf koos, uit het
+  winkelwagenkenmerk _cadeau_1. Staat die in settings.gift_1_keuze, is hij op
+  voorraad en zit hij niet al in de bestelling, dan wint hij. Anders gewoon
+  de keuze hieronder.
 {%- endcomment -%}
 {%- liquid
   if nr == 2
@@ -40,7 +44,29 @@
   assign gekozen = ''
   assign dubbel_nodig = false
 
-  if hoofd != blank
+  if nr != 2 and keuze != blank
+    for c in settings.gift_1_keuze
+      if c.handle != keuze or c.handle == overslaan
+        continue
+      endif
+      assign cv = c.selected_or_first_available_variant
+      unless cv.available
+        break
+      endunless
+      assign bron = c.metafields.custom.cadeau_voorraad.value
+      if bron != blank and bron.available == false
+        break
+      endif
+      assign echt = bron.handle | default: c.handle
+      assign echt_sl = '‹' | append: echt | append: '›'
+      unless al_in contains echt_sl
+        assign gekozen = c.handle
+      endunless
+      break
+    endfor
+  endif
+
+  if hoofd != blank and gekozen == ''
     assign cv = hoofd.selected_or_first_available_variant
     if cv.available and hoofd.handle != overslaan
       assign bron = hoofd.metafields.custom.cadeau_voorraad.value

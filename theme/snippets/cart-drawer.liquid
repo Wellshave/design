@@ -1,4 +1,5 @@
 {{ 'cart-drawer.css' | asset_url | stylesheet_tag }}
+{%- if settings.gift_1_keuze.size > 1 -%}{{ 'ws-cadkeuze.css' | asset_url | stylesheet_tag }}{%- endif -%}
 
 {% liquid
   assign cart_total = cart.total_price
@@ -72,9 +73,17 @@
   # van de cadeaus; het verschil met wat je betaalt is wat je bespaart.
   assign gift_total = 0
   assign totaal_oud = 0
+  # lade_al: wat er al in de bestelling zit (producten en hun pakketinhoud), voor
+  # het kiezen van het cadeau: wat erin zit, kan niet nog eens gekozen worden.
+  assign lade_al = ''
   for item in cart.items
     if item.properties._gift_tier
       assign gift_total = gift_total | plus: item.final_line_price
+    else
+      assign lade_al = lade_al | append: '‹' | append: item.product.handle | append: '›'
+      for bp in item.product.metafields.custom.bevat.value
+        assign lade_al = lade_al | append: '‹' | append: bp.handle | append: '›'
+      endfor
     endif
     assign regel_oud = item.final_line_price
     if item.variant.compare_at_price > item.original_price
@@ -133,7 +142,7 @@
             assign leeg_g2 = ''
             if settings.enable_gift_rewards
               capture leeg_g1
-                render 'ws-cadeau', nr: 1
+                render 'ws-cadeau', nr: 1, keuze: cart.attributes._cadeau_1
               endcapture
               assign leeg_g1 = leeg_g1 | strip
               capture leeg_g2
@@ -248,6 +257,23 @@
                           <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.2V3.5a1 1 0 0 1 1-1h4.7l5.3 5.3-5.7 5.7z"/><circle cx="5.5" cy="5.5" r=".9"/></svg>
                           {{- 'cart_drawer.gift_from' | t: value: drempel_geld | remove: ',00' -}}
                         </span>
+                        {%- comment -%}
+                          Het eerste cadeau kiest de klant zelf (thema-instelling gift_1_keuze).
+                          Alleen als er echt iets te kiezen valt: twee of meer cadeaus die op
+                          voorraad zijn en niet al in de bestelling zitten. De knop en de lijst
+                          werken via base.js (Cadeau kiezen).
+                        {%- endcomment -%}
+                        {%- if item.properties._gift_tier == '1' and settings.gift_1_keuze.size > 1 -%}
+                          {%- capture lade_opties -%}{%- render 'ws-cadeau-opties', al: lade_al, gekozen: item.product.handle, naam_1: settings.gift_1_label, munt: '€' -%}{%- endcapture -%}
+                          {%- assign lade_n = lade_opties | split: 'data-ws-cad-optie=' | size | minus: 1 -%}
+                          {%- if lade_n > 1 -%}
+                            <button type="button" class="cart-drawer__wijzig" data-ws-cad-wijzig aria-controls="ws-cadkeuze-lade" aria-expanded="false">{{ 'cart_drawer.gift_change' | t }}</button>
+                            <div class="ws-cadkeuze cart-drawer__cadkeuze" id="ws-cadkeuze-lade" data-ws-cadkeuze hidden>
+                              <p class="ws-cadkeuze-kop">{{ 'cart_drawer.gift_choose' | t }}</p>
+                              <div class="ws-cadkeuze-lijst">{{ lade_opties }}</div>
+                            </div>
+                          {%- endif -%}
+                        {%- endif -%}
                       {%- endif -%}
 
                       <p class="cart-drawer__notification" item-notification></p>

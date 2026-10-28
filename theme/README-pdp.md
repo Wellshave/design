@@ -2925,3 +2925,30 @@ twee fixes, klaar om te publiceren. Dezelfde twee staan ook in
   washbag + Platinum; Groom Guard Pro → geen cadeau (onder €65).
 * BF-thema heeft geen gift_1_dubbel en geen gift_1_reserve: daar krijgt een pakket
   met een washbag geen eerste cadeau (pagina en winkelwagen zijn het wel eens).
+
+## Klant kiest zelf zijn cadeau vanaf €65 (28 oktober, v9)
+
+* Thema-instelling `gift_1_keuze` (De klant kiest zelf uit): washbag, Neustrimmer
+  Basic, travelbag. Leeg of één cadeau = geen keuze, alles zoals voorheen.
+* De keuze staat als winkelwagenkenmerk `_cadeau_1` (met underscore, dus niet
+  zichtbaar in de kassa; het cadeau zelf staat wel als regel in de bestelling).
+* `ws-cadeau` krijgt `keuze:`: is de gekozen handle een keuzecadeau, op voorraad en
+  niet al in de bestelling, dan wint hij; anders de gewone volgorde (hoofdcadeau,
+  vervangcadeau, reserve). Gebruikt door cart-rewards-bar, de keuzekaarten en het
+  cadeaublok, dus pagina en winkelwagen blijven gelijk.
+* Snippet `ws-cadeau-opties`: de knoppen met foto, naam en van-prijs; met `al:` valt
+  weg wat al in de bestelling zit.
+* Productpagina: "Wijzig" naast het cadeau van €65 op elke keuzekaart (alleen als er
+  voor dat pakket twee of meer opties over zijn). De lijst klapt onder de kaart open;
+  kiezen werkt alle kaarten bij, zet het kenmerk en ververst de lade. "Maak het
+  compleet" laat het gekozen cadeau weg (data-weg1).
+* Lade: "Wijzig" onder het cadeau, met de opties die voor deze winkelwagen kunnen;
+  kiezen wisselt het cadeau meteen om (syncGifts).
+* Script in base.js (Cadeau kiezen), opmaak in ws7-pdp.css en `ws-cadkeuze.css`
+  (lade). Teksten: koopvak `cad_wijzig`, `cad_kies_kop`; locales
+  `cart_drawer.gift_change`, `cart_drawer.gift_choose`; nl/en/de/fr.
+* Getest op v9: Barber Bro 2.0 → Wijzig → Neustrimmer Basic → in winkelwagen komen
+  Basic + Platinum; in de lade gewisseld naar travelbag → travelbag + Platinum.
+  Shave Package Ultimate: washbag en travelbag zitten erin, dus geen Wijzig, cadeau
+  Neustrimmer Basic.
+* Nog niet in het BF-thema (eigen koopvak en lade van de andere chat).

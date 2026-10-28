@@ -35,7 +35,7 @@
   assign g2_on = false
   if settings.enable_gift_rewards
     capture g1_handle
-      render 'ws-cadeau', nr: 1, al: al_in
+      render 'ws-cadeau', nr: 1, al: al_in, keuze: cart.attributes._cadeau_1
     endcapture
     assign g1_handle = g1_handle | strip
     capture g2_handle
