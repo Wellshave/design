@@ -53,22 +53,23 @@ function useCountdown(expiresAt) {
 function ThankYou() {
   const orderId = shopify.orderConfirmation.value?.order?.id;
   // In de checkout-editor bestaat de bestelling niet echt: toon dan een voorbeeld.
-  const inEditor = Boolean(shopify.extension?.editor);
+  const inEditor = Boolean(shopify.extension?.editor) || !orderId;
   const [data, setData] = useState(null);
-  const [failed, setFailed] = useState(false);
+  const [failed, setFailed] = useState('');
 
   useEffect(() => {
     if (inEditor) {
-      call('/api/thank-you/preview', {}).then(setData).catch(() => setFailed(true));
+      call('/api/thank-you/preview', {}).then(setData).catch((e) => setFailed(String(e?.message || e)));
       return;
     }
     if (!orderId) return;
-    call('/api/thank-you/offer', {orderId}).then(setData).catch(() => setFailed(true));
+    call('/api/thank-you/offer', {orderId}).then(setData).catch((e) => setFailed(String(e?.message || e)));
   }, [orderId, inEditor]);
 
-  if (failed) return inEditor ? <s-banner tone="warning">Wellshave Upsell: de server is niet bereikbaar.</s-banner> : null;
-  if (!orderId && !inEditor) return null;
-  if (!data) return <s-skeleton-paragraph />;
+  // In de editor altijd iets tonen, zodat zichtbaar is of het blok draait en waarom het eventueel faalt.
+  if (failed) return inEditor ? <s-banner tone="warning" heading="Wellshave Upsell kan de server niet bereiken">{failed}</s-banner> : null;
+  if (!data) return inEditor ? <s-banner tone="info">Wellshave Upsell: voorbeeld laden…</s-banner> : <s-skeleton-paragraph />;
+  if (inEditor && data.mode !== 'offer') return <s-banner tone="info">Wellshave Upsell draait, maar er is geen voorbeeldaanbod.</s-banner>;
   if (data.mode === 'upsell-confirmation') {
     return (
       <s-banner tone="success" heading="Toegevoegd aan je bestelling">
