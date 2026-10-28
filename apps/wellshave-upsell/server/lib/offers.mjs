@@ -1,7 +1,7 @@
 // Bouwt het aanbod dat de extensies tonen. Eén aanbod per bestelling, en een regel die
 // een klant ooit zag (geaccepteerd of weggeklikt) komt voor die klant nooit meer terug.
 import {matchRule, offersFor, thanksFor, fillText, discounted} from './rules.mjs';
-import {variantsInfo} from './shopify.mjs';
+import {variantsInfo, env} from './shopify.mjs';
 
 export const SEEN_WINDOW_MS = 2 * 60 * 60 * 1000;
 
@@ -52,7 +52,8 @@ export async function buildOffer(shop, config, {purchasedHandles, purchasedVaria
       tyTitle: s.tyTitle,
       tyDisc: tyPct,
       code: s.code,
-      remOn: !!s.remOn,
+      // Zonder Klaviyo-sleutel kan de herinnering niet worden opgeslagen: dan niet tonen.
+      remOn: !!s.remOn && Boolean(env('KLAVIYO_PRIVATE_KEY')),
       remText: s.remText,
       remWeeks: s.remWeeks ?? 8,
     },

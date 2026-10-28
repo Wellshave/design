@@ -40,7 +40,8 @@ async function thankYouOffer(req) {
   const {shop} = checkoutSession(req);
   const {orderId} = await req.json();
   const order = await getOrder(shop, orderId);
-  if (!order) return json({mode: 'none'});
+  // De order staat soms pas een paar seconden later in de Admin: laat de pagina het opnieuw proberen.
+  if (!order) return json({mode: 'pending'});
   if (order.customAttributes?.some((a) => a.key === '_ws_parent')) {
     return json({mode: 'upsell-confirmation', parent: order.customAttributes.find((a) => a.key === '_ws_parent').value});
   }
@@ -82,7 +83,7 @@ async function thankYouPreview(req) {
 
 async function reminderBlock(shop, order) {
   const s = (await getConfig(shop)).settings || {};
-  return s.remOn ? {remText: s.remText, remWeeks: s.remWeeks ?? 8} : null;
+  return s.remOn && env('KLAVIYO_PRIVATE_KEY') ? {remText: s.remText, remWeeks: s.remWeeks ?? 8} : null;
 }
 
 async function thankYouAccept(req) {

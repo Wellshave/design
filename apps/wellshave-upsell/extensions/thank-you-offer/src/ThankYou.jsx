@@ -63,7 +63,20 @@ function ThankYou() {
       return;
     }
     if (!orderId) return;
-    call('/api/thank-you/offer', {orderId}).then(setData).catch((e) => setFailed(String(e?.message || e)));
+    // Tot 6 pogingen met 2 seconden ertussen, zolang de order nog niet in de Admin staat.
+    let alive = true;
+    const load = (tries) =>
+      call('/api/thank-you/offer', {orderId})
+        .then((d) => {
+          if (!alive) return;
+          if (d.mode === 'pending' && tries > 0) setTimeout(() => load(tries - 1), 2000);
+          else setData(d.mode === 'pending' ? {mode: 'none'} : d);
+        })
+        .catch((e) => alive && setFailed(String(e?.message || e)));
+    load(6);
+    return () => {
+      alive = false;
+    };
   }, [orderId, inEditor]);
 
   // In de editor altijd iets tonen, zodat zichtbaar is of het blok draait en waarom het eventueel faalt.
