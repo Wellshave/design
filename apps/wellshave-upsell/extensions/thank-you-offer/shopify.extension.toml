@@ -12,5 +12,6 @@ uid = "fb88739d-4c79-40bd-bf04-36636c67e8f6"
   target = "purchase.thank-you.block.render"
 
   [extensions.capabilities]
-  network_access = true
+  # Tijdelijk uit om te testen of de netwerkgoedkeuring het blok tegenhoudt.
+  network_access = false
   api_access = true
