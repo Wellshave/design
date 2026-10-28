@@ -1,5 +1,6 @@
 // Alles wat de server bij Shopify ophaalt of wijzigt, via de Admin GraphQL API.
 import {randomBytes} from 'node:crypto';
+import bundledConfig from '../../config/upsell-config.json' with {type: 'json'};
 
 export const API_VERSION = '2026-01';
 export const NS = 'wellshave_upsell';
@@ -40,7 +41,8 @@ let cache = {at: 0, value: null};
 export async function getConfig(shop) {
   if (cache.value && Date.now() - cache.at < 5 * 60 * 1000) return cache.value;
   const d = await admin(shop, `{ shop { metafield(namespace: "${NS}", key: "config") { value } } }`);
-  const value = JSON.parse(d.shop.metafield?.value || '{"rules":[],"settings":{}}');
+  // De shop-metafield (gezet met sync-config) gaat voor; anders de meegeleverde export.
+  const value = d.shop.metafield?.value ? {...JSON.parse(d.shop.metafield.value), source: 'metafield'} : {...bundledConfig, source: 'bundled'};
   cache = {at: Date.now(), value};
   return value;
 }

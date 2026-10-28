@@ -248,6 +248,21 @@ async function compliance(req) {
   return new Response('ok');
 }
 
+// ---------- status (geen geheimen, alleen of alles aangesloten is) ----------
+async function health(url) {
+  const shop = url.searchParams.get('shop') || 'wellshave.myshopify.com';
+  const out = {keys: Boolean(API_KEY() && SECRET()), installed: false, rules: 0, configSource: null};
+  try {
+    const config = await getConfig(shop);
+    out.installed = true;
+    out.rules = (config.rules || []).length;
+    out.configSource = config.source;
+  } catch (e) {
+    out.error = /toegangstoken/.test(e.message) ? 'nog niet geïnstalleerd' : 'Shopify niet bereikbaar';
+  }
+  return json(out, out.installed && out.keys ? 200 : 503);
+}
+
 // ---------- installatie (eenmalig) ----------
 function oauthStart(url) {
   const shop = url.searchParams.get('shop');
@@ -295,6 +310,7 @@ export default async function handler(req) {
   if (req.method === 'OPTIONS') return new Response(null, {status: 204, headers: CORS});
   if (url.pathname === '/auth') return oauthStart(url);
   if (url.pathname === '/auth/callback') return oauthCallback(req, url);
+  if (req.method === 'GET' && url.pathname === '/api/health') return health(url);
   if (req.method === 'GET' && url.pathname === '/api/thank-you/go') {
     try { return await thankYouGo(url); } catch (e) { console.error(e); return new Response('Deze link is verlopen. Ga terug en probeer het opnieuw.', {status: 401}); }
   }
