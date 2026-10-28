@@ -2840,3 +2840,8 @@ twee fixes, klaar om te publiceren. Dezelfde twee staan ook in
   Secure checkout, Sicher bezahlen, Paiement sécurisé; de geregistreerde
   vertalingen (en/de/fr) zijn bijgewerkt. In v8 en het Black Friday-thema;
   in het BF-thema op zijn eigen cart-drawer (die heeft een cadeauklok extra).
+* Hotjar en UpPromote: hun app-embeds staan in het oude thema, maar Shopify
+  rendert ze daar al niet meer ("app block path … does not exist"): beide apps
+  zijn niet meer geïnstalleerd. Daarom laat Shopify ze ook vallen als ze via de
+  API in v8 worden gezet. Hotjar terug = de app opnieuw installeren, of de
+  trackingcode met het Hotjar-site-ID in layout/theme.liquid.
