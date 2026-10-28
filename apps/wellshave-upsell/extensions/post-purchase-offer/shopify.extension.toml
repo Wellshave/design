@@ -1,0 +1,10 @@
+api_version = "2026-01"
+
+[[extensions]]
+name = "Wellshave aanbod na betaling"
+handle = "post-purchase-offer"
+type = "checkout_post_purchase"
+uid = "37d1995b-bbb3-4674-88a4-1b8b704dba12"
+
+# Werkt alleen nadat Shopify toegang heeft gegeven voor de live winkel,
+# en alleen bij kaart, Shop Pay en PayPal (beperking van Shopify).

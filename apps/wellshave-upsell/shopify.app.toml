@@ -1,0 +1,35 @@
+# Wellshave Upsell: eigen vervanger van Aftersell + ReConvert.
+# client_id en application_url worden ingevuld bij de eerste `shopify app config link`.
+client_id = "d38b221e959211c2f6f0164f419be7a2"
+name = "Wellshave Upsell"
+handle = "wellshave-upsell"
+application_url = "https://wellshave-upsell.netlify.app"
+embedded = false
+
+[build]
+include_config_on_deploy = true
+
+[access_scopes]
+scopes = "read_orders,write_orders,write_order_edits,read_customers,write_customers,read_products,write_discounts"
+
+[auth]
+redirect_urls = ["https://wellshave-upsell.netlify.app/auth/callback"]
+
+[webhooks]
+api_version = "2026-01"
+
+  [[webhooks.subscriptions]]
+  topics = ["orders/create"]
+  uri = "https://wellshave-upsell.netlify.app/api/webhooks/orders-create"
+
+  [[webhooks.subscriptions]]
+  compliance_topics = ["customers/data_request", "customers/redact", "shop/redact"]
+  uri = "https://wellshave-upsell.netlify.app/api/webhooks/compliance"
+
+# Waar de extensies mee praten (bedankpagina en pagina na betaling) en waar de knop heen linkt.
+[network_access]
+allowed_sources = ["https://wellshave-upsell.netlify.app"]
+allowed_navigation_hosts = ["wellshave-upsell.netlify.app"]
+
+[pos]
+embedded = false
