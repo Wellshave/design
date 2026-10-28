@@ -8,8 +8,8 @@
 
   gekozen: de handle die nu het cadeau is (krijgt aria-pressed).
   naam_1:  de naam voor het hoofdcadeau (gift_1_product), zoals "Luxe washbag".
-  vanaf:   regel onder de naam, bijvoorbeeld "Gratis vanaf €65".
   munt:    het valutateken voor de van-prijs.
+  gratis:  het label naast de doorgestreepte prijs, zoals "Gratis".
 {%- endcomment -%}
 {%- assign al_in = al | default: '' -%}
 {%- for c in settings.gift_1_keuze -%}
@@ -22,9 +22,11 @@
   {%- if al_in contains echt_sl -%}{%- continue -%}{%- endif -%}
   {%- assign c_naam = c.title -%}
   {%- if c.handle == settings.gift_1_product.handle and naam_1 != blank -%}{%- assign c_naam = naam_1 -%}{%- endif -%}
-  <button type="button" class="ws-cko" data-ws-cad-optie="{{ c.handle }}" data-echt="‹{{ echt }}›‹{{ c.handle }}›" aria-pressed="{% if c.handle == gekozen %}true{% else %}false{% endif %}">
+  <button type="button" class="ws-cko" role="option" data-ws-cad-optie="{{ c.handle }}" data-echt="‹{{ echt }}›‹{{ c.handle }}›" aria-pressed="{% if c.handle == gekozen %}true{% else %}false{% endif %}">
     <span class="ws-cko-bd" data-cad-img>{%- if c.featured_image != blank -%}{{ c.featured_image | image_url: width: 120 | image_tag: alt: '', loading: 'lazy', width: 48, height: 48 }}{%- endif -%}</span>
-    <span class="ws-cko-tx"><b data-cad-nm>{{ c_naam }}</b>{%- if vanaf != blank -%}<small>{{ vanaf }}</small>{%- endif -%}</span>
-    <span class="ws-cko-pr" data-cad-was>{%- if cv.compare_at_price > 0 -%}<s>{{ munt }}{% render 'price-formated', price: cv.compare_at_price %}</s>{%- endif -%}</span>
+    <span class="ws-cko-tx">
+      <b data-cad-nm>{{ c_naam }}</b>
+      <span class="ws-cko-pr"><span data-cad-was>{%- if cv.compare_at_price > 0 -%}<s>{{ munt }}{% render 'price-formated', price: cv.compare_at_price %}</s>{%- endif -%}</span>{%- if gratis != blank -%}<em class="ws-cko-gratis">{{ gratis }}</em>{%- endif -%}</span>
+    </span>
   </button>
 {%- endfor -%}

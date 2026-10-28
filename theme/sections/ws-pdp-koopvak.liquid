@@ -927,13 +927,24 @@
                         {%- assign t_weg1 = '‹' | append: cad.handle | append: '›' -%}
                         {%- if t_cad_bron != blank -%}{%- assign t_weg1 = t_weg1 | append: '‹' | append: t_cad_bron.handle | append: '›' -%}{%- endif -%}
                       {%- endif -%}
-                      <span class="ws-tx ws-tx-cad"{% if t_kies %} data-ws-cad1="{{ cad.handle }}" data-al="{{ t_al | escape }}"{% endif %}>
+                      {%- comment -%}
+                        Kan de klant hier zelf kiezen, dan is de hele regel een keuzelijst:
+                        het voorgekozen cadeau met een pijltje, en de regel eronder zegt dat
+                        je zelf kiest. De lijst schuift bij openen onder deze regel
+                        (base.js, Cadeau kiezen).
+                      {%- endcomment -%}
+                      {%- assign cad_vanaf = s.munt | append: cad_drempel -%}
+                      <span class="ws-tx ws-tx-cad{% if t_kies %} ws-tx-kies{% endif %}"{% if t_kies %} data-ws-cad1="{{ cad.handle }}" data-al="{{ t_al | escape }}"{% endif %}>
                         <span class="ws-tx-bd" data-cad-img>{%- if cad.featured_image != blank -%}{{ cad.featured_image | image_url: width: 96 | image_tag: alt: '', loading: 'lazy', width: 48, height: 48 }}{%- endif -%}</span>
                         <span class="ws-tx-nm">{%- if s.tier_cadeau != blank -%}<em class="ws-tx-chip">{{ s.tier_cadeau }}</em> {% endif -%}<span data-cad-nm>{{ cad_naam | default: cad.title }}</span>
-                          {%- if t_kies and s.cad_wijzig != blank -%} <button type="button" class="ws-tx-wijzig" data-ws-cad-wijzig aria-controls="ws-cadkeuze-{{ section.id }}" aria-expanded="false">{{ s.cad_wijzig }}</button>{%- endif -%}
-                          {%- if s.tier_cadeau_vanaf != blank -%}{%- assign cad_vanaf = s.munt | append: cad_drempel -%}<small>{{ s.tier_cadeau_vanaf | replace: '[bedrag]', cad_vanaf }}</small>{%- endif -%}
+                          {%- if t_kies and s.cad_kies_regel != blank -%}
+                            <small class="ws-tx-kiesregel">{{ s.cad_kies_regel | replace: '[bedrag]', cad_vanaf }}</small>
+                          {%- elsif s.tier_cadeau_vanaf != blank -%}
+                            <small>{{ s.tier_cadeau_vanaf | replace: '[bedrag]', cad_vanaf }}</small>
+                          {%- endif -%}
                         </span>
-                        <span class="ws-tx-pr"><span data-cad-was>{%- if cad_v.compare_at_price > 0 -%}<s>{{ s.munt }}{% render 'price-formated', price: cad_v.compare_at_price %}</s>{%- endif -%}</span>{{ s.cad_chip }}</span>
+                        <span class="ws-tx-pr"><span data-cad-was>{%- if cad_v.compare_at_price > 0 -%}<s>{{ s.munt }}{% render 'price-formated', price: cad_v.compare_at_price %}</s>{%- endif -%}</span>{{ s.cad_chip }}{%- if t_kies -%}<i class="ws-tx-pijl"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6.2l4 4 4-4"/></svg></i>{%- endif -%}</span>
+                        {%- if t_kies -%}<button type="button" class="ws-tx-dd" data-ws-cad-wijzig aria-controls="ws-cadkeuze-{{ section.id }}" aria-expanded="false"><span class="visually-hidden">{{ s.cad_kies_kop }}</span></button>{%- endif -%}
                       </span>
                     {%- endfor -%}
                   {%- endif -%}
@@ -1036,13 +1047,11 @@
                 (kenmerk _cadeau_1), zodat de winkelwagen dat cadeau toevoegt.
               {%- endcomment -%}
               {%- assign kies_naam1 = s.cad_naam_1 | default: settings.gift_1_label -%}
-              {%- assign kies_vanaf = s.munt | append: settings.gift_1_threshold -%}
-              {%- assign kies_vanaf = s.tier_cadeau_vanaf | replace: '[bedrag]', kies_vanaf -%}
               <div class="ws-cadkeuze" id="ws-cadkeuze-{{ section.id }}" data-ws-cadkeuze data-verplaats hidden>
-                {%- if s.cad_kies_kop != blank -%}<p class="ws-cadkeuze-kop">{{ s.cad_kies_kop }}</p>{%- endif -%}
-                <div class="ws-cadkeuze-lijst">
-                  {%- render 'ws-cadeau-opties', gekozen: cad1_h, naam_1: kies_naam1, vanaf: kies_vanaf, munt: s.munt -%}
+                <div class="ws-cadkeuze-lijst" role="listbox" aria-label="{{ s.cad_kies_kop | escape }}">
+                  {%- render 'ws-cadeau-opties', gekozen: cad1_h, naam_1: kies_naam1, munt: s.munt, gratis: s.cad_chip -%}
                 </div>
+                {%- if s.cad_kies_voet != blank -%}<p class="ws-cadkeuze-voet">{{ s.cad_kies_voet }}</p>{%- endif -%}
               </div>
             {%- endif -%}
           </div>
@@ -1250,7 +1259,7 @@
                   </span>
                   <em class="ws-cad-nul">{{ s.cad_chip }}</em>
                 </span>
-                {%- if k_kies and s.cad_wijzig != blank -%}<button type="button" class="ws-tx-wijzig ws-cad-wijzig" data-ws-cad-wijzig aria-controls="ws-cadkeuze-{{ section.id }}" aria-expanded="false">{{ s.cad_wijzig }}</button>{%- endif -%}
+                {%- if k_kies and s.cad_wijzig != blank -%}<button type="button" class="ws-cad-dd" data-ws-cad-wijzig aria-controls="ws-cadkeuze-{{ section.id }}" aria-expanded="false">{{ s.cad_wijzig }}<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6.2l4 4 4-4"/></svg></button>{%- endif -%}
               </li>
             {%- endfor -%}
           {%- endcapture -%}
@@ -1315,13 +1324,11 @@
                 (kenmerk _cadeau_1), zodat de winkelwagen dat cadeau toevoegt.
               {%- endcomment -%}
               {%- assign kies_naam1 = s.cad_naam_1 | default: settings.gift_1_label -%}
-              {%- assign kies_vanaf = s.munt | append: settings.gift_1_threshold -%}
-              {%- assign kies_vanaf = s.tier_cadeau_vanaf | replace: '[bedrag]', kies_vanaf -%}
               <div class="ws-cadkeuze" id="ws-cadkeuze-{{ section.id }}" data-ws-cadkeuze data-verplaats hidden>
-                {%- if s.cad_kies_kop != blank -%}<p class="ws-cadkeuze-kop">{{ s.cad_kies_kop }}</p>{%- endif -%}
-                <div class="ws-cadkeuze-lijst">
-                  {%- render 'ws-cadeau-opties', gekozen: cad1_h, naam_1: kies_naam1, vanaf: kies_vanaf, munt: s.munt -%}
+                <div class="ws-cadkeuze-lijst" role="listbox" aria-label="{{ s.cad_kies_kop | escape }}">
+                  {%- render 'ws-cadeau-opties', gekozen: cad1_h, naam_1: kies_naam1, munt: s.munt, gratis: s.cad_chip -%}
                 </div>
+                {%- if s.cad_kies_voet != blank -%}<p class="ws-cadkeuze-voet">{{ s.cad_kies_voet }}</p>{%- endif -%}
               </div>
             {%- endif -%}
 
@@ -3082,8 +3089,10 @@
     { "type": "text", "id": "cad_auto", "label": "Plaatje rechtsboven", "info": "Leeg = geen plaatje.", "default": "Automatisch toegevoegd" },
     { "type": "text", "id": "cad_kop_na", "label": "Kop na het bedrag", "info": "Het opgetelde bedrag komt ervoor te staan.", "default": "aan extra's cadeau" },
     { "type": "text", "id": "cad_sub_voor", "label": "Onderregel voor de productnaam", "default": "Gratis bij de" },
-    { "type": "text", "id": "cad_wijzig", "label": "Knop bij het cadeau om zelf te kiezen", "info": "Alleen als er in de thema-instellingen twee of meer keuzecadeaus staan (De klant kiest zelf uit).", "default": "Wijzig" },
-    { "type": "text", "id": "cad_kies_kop", "label": "Kop boven de keuzecadeaus", "default": "Kies je cadeau" },
+    { "type": "text", "id": "cad_kies_regel", "label": "Regel onder een cadeau dat de klant zelf kiest", "info": "Op de keuzekaarten, alleen als er in de thema-instellingen twee of meer keuzecadeaus staan (De klant kiest zelf uit). [bedrag] = de drempel.", "default": "Kies zelf je cadeau · gratis vanaf [bedrag]" },
+    { "type": "text", "id": "cad_wijzig", "label": "Knop in het cadeaublok om zelf te kiezen", "info": "Bij producten zonder keuzekaarten.", "default": "Kies je cadeau" },
+    { "type": "text", "id": "cad_kies_kop", "label": "Naam van de keuzelijst (voor schermlezers)", "default": "Kies je cadeau" },
+    { "type": "text", "id": "cad_kies_voet", "label": "Regel onder de keuzelijst", "default": "*Je cadeau komt vanzelf in je winkelwagen" },
     { "type": "text", "id": "cad_chip", "label": "Plaatje bij de prijs", "default": "Gratis" },
     { "type": "text", "id": "cad_naam_1", "label": "Naam van cadeau 1", "info": "Leeg = het label uit Winkelinstellingen." },
     { "type": "text", "id": "cad_naam_2", "label": "Naam van cadeau 2", "info": "Leeg = het label uit Winkelinstellingen." },

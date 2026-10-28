@@ -1716,8 +1716,9 @@ if (document.querySelector('ugc-videos-carousel')) {
     if (!paneel.hidden && paneel._wsVan === knop) { sluiten(paneel); return; }
     if (paneel._wsVan) paneel._wsVan.setAttribute("aria-expanded", "false");
     const rij = knop.closest("[data-ws-cad1]");
+    // De lijst klapt open direct onder het cadeau, zoals een keuzelijst.
     if (paneel.hasAttribute("data-verplaats")) {
-      const anker = knop.closest("label") || knop.closest(".ws-cad") || rij;
+      const anker = (rij && rij.classList.contains("ws-tx-cad")) ? rij : (knop.closest(".ws-cad") || rij);
       if (anker) anker.after(paneel);
     }
     const al = rij ? rij.getAttribute("data-al") || "" : "";
@@ -1730,6 +1731,16 @@ if (document.querySelector('ugc-videos-carousel')) {
     paneel._wsVan = knop;
     knop.setAttribute("aria-expanded", "true");
   }
+
+  // Klik ernaast of Escape: de open lijst gaat dicht.
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") document.querySelectorAll("[data-ws-cadkeuze]:not([hidden])").forEach(sluiten);
+  });
+  document.addEventListener("click", e => {
+    if (!e.target.closest("[data-ws-cadkeuze], [data-ws-cad-wijzig]")) {
+      document.querySelectorAll("[data-ws-cadkeuze]:not([hidden])").forEach(sluiten);
+    }
+  }, true);
 
   document.addEventListener("click", e => {
     const knop = e.target.closest("[data-ws-cad-wijzig]");

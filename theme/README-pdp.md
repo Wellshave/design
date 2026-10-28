@@ -2952,3 +2952,16 @@ twee fixes, klaar om te publiceren. Dezelfde twee staan ook in
   Shave Package Ultimate: washbag en travelbag zitten erin, dus geen Wijzig, cadeau
   Neustrimmer Basic.
 * Nog niet in het BF-thema (eigen koopvak en lade van de andere chat).
+
+### Keuzelijst in plaats van "Wijzig" (28 oktober)
+
+* Het cadeau van €65 is op de keuzekaarten een keuzevak: wit met een dunne gouden
+  rand en een pijltje, het voorgekozen cadeau erin, eronder in brons
+  "Kies zelf je cadeau · gratis vanaf €65" (`cad_kies_regel`). De hele regel is
+  klikbaar (`.ws-tx-dd`); de lijst klapt er direct onder open met per cadeau foto,
+  naam, doorgestreepte prijs en een groen "Gratis"-label; de gekozen rij is
+  lichtgoud. Onderaan "*Je cadeau komt vanzelf in je winkelwagen" (`cad_kies_voet`).
+  Klik ernaast of Escape sluit de lijst.
+* Lade: label "Cadeau naar keuze vanaf €65" (`gift_from_choice`) en eronder een
+  keuzevak "Kies een ander cadeau" met dezelfde lijst (`gift_change`, `gift_free`).
+* Zonder keuzekaarten: knop "Kies je cadeau" onder het cadeau (`cad_wijzig`).

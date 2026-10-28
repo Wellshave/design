@@ -253,26 +253,34 @@
                           endif
                         -%}
                         {%- capture drempel_geld -%}{%- render 'ws-euro', bedrag: drempel -%}{%- endcapture -%}
-                        <span class="cart-drawer__tag">
-                          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.2V3.5a1 1 0 0 1 1-1h4.7l5.3 5.3-5.7 5.7z"/><circle cx="5.5" cy="5.5" r=".9"/></svg>
-                          {{- 'cart_drawer.gift_from' | t: value: drempel_geld | remove: ',00' -}}
-                        </span>
                         {%- comment -%}
                           Het eerste cadeau kiest de klant zelf (thema-instelling gift_1_keuze).
                           Alleen als er echt iets te kiezen valt: twee of meer cadeaus die op
-                          voorraad zijn en niet al in de bestelling zitten. De knop en de lijst
-                          werken via base.js (Cadeau kiezen).
+                          voorraad zijn en niet al in de bestelling zitten. Het label zegt het
+                          dan meteen, en eronder staat een keuzevak (base.js, Cadeau kiezen).
                         {%- endcomment -%}
+                        {%- assign lade_n = 0 -%}
                         {%- if item.properties._gift_tier == '1' and settings.gift_1_keuze.size > 1 -%}
-                          {%- capture lade_opties -%}{%- render 'ws-cadeau-opties', al: lade_al, gekozen: item.product.handle, naam_1: settings.gift_1_label, munt: '€' -%}{%- endcapture -%}
+                          {%- assign lade_gratis = 'cart_drawer.gift_free' | t -%}
+                          {%- capture lade_opties -%}{%- render 'ws-cadeau-opties', al: lade_al, gekozen: item.product.handle, naam_1: settings.gift_1_label, munt: '€', gratis: lade_gratis -%}{%- endcapture -%}
                           {%- assign lade_n = lade_opties | split: 'data-ws-cad-optie=' | size | minus: 1 -%}
+                        {%- endif -%}
+                        <span class="cart-drawer__tag">
+                          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.2V3.5a1 1 0 0 1 1-1h4.7l5.3 5.3-5.7 5.7z"/><circle cx="5.5" cy="5.5" r=".9"/></svg>
                           {%- if lade_n > 1 -%}
-                            <button type="button" class="cart-drawer__wijzig" data-ws-cad-wijzig aria-controls="ws-cadkeuze-lade" aria-expanded="false">{{ 'cart_drawer.gift_change' | t }}</button>
-                            <div class="ws-cadkeuze cart-drawer__cadkeuze" id="ws-cadkeuze-lade" data-ws-cadkeuze hidden>
-                              <p class="ws-cadkeuze-kop">{{ 'cart_drawer.gift_choose' | t }}</p>
-                              <div class="ws-cadkeuze-lijst">{{ lade_opties }}</div>
-                            </div>
+                            {{- 'cart_drawer.gift_from_choice' | t: value: drempel_geld | remove: ',00' -}}
+                          {%- else -%}
+                            {{- 'cart_drawer.gift_from' | t: value: drempel_geld | remove: ',00' -}}
                           {%- endif -%}
+                        </span>
+                        {%- if lade_n > 1 -%}
+                          <button type="button" class="cart-drawer__dd" data-ws-cad-wijzig aria-controls="ws-cadkeuze-lade" aria-expanded="false">
+                            <span>{{ 'cart_drawer.gift_change' | t }}</span>
+                            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6.2l4 4 4-4"/></svg>
+                          </button>
+                          <div class="ws-cadkeuze cart-drawer__cadkeuze" id="ws-cadkeuze-lade" data-ws-cadkeuze hidden>
+                            <div class="ws-cadkeuze-lijst" role="listbox" aria-label="{{ 'cart_drawer.gift_change' | t | escape }}">{{ lade_opties }}</div>
+                          </div>
                         {%- endif -%}
                       {%- endif -%}
 

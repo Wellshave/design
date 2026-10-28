@@ -644,27 +644,41 @@
 .ws7p-doos .ws7p-cijfers{background:var(--zand)}
 
 /* ---------- cadeau kiezen (gift_1_keuze) ----------
-   "Wijzig" als tekstlink naast de naam; de lijst klapt onder de kaart open,
-   drie rijen met foto, naam en van-prijs. De gekozen rij krijgt een gouden rand. */
-.ws-pdp7 .ws-tx-wijzig{border:0;background:none;padding:0;margin-left:6px;font:inherit;font-size:11.5px;font-weight:500;
-  color:var(--brons-tekst);text-decoration:underline;text-underline-offset:2px;cursor:pointer}
-.ws-pdp7 .ws-tx-wijzig:hover{color:var(--ink)}
-.ws-pdp7 .ws-cad-k .ws-cad-wijzig{margin:4px 0 0;justify-self:center}
-.ws-pdp7 .ws-cadkeuze{margin:8px 0 2px;padding:10px;border-radius:12px;background:#fff;border:1px solid var(--lijn2)}
+   Het cadeau dat de klant zelf kiest, ziet eruit als een keuzelijst: een wit
+   vak met een pijltje, het voorgekozen cadeau erin en eronder "Kies zelf je
+   cadeau". Openen toont de opties direct eronder; de gekozen is lichtgoud. */
+.ws-pdp7 .ws-tx-kies{position:relative;margin:6px 10px;padding:7px 10px 7px 8px;border-radius:10px;
+  background:rgba(255,255,255,.72);border:1px solid rgba(176,116,42,.38);transition:border-color .15s,background .15s}
+.ws-pdp7 .ws-tx-kies + .ws-tx,.ws-pdp7 .ws-tx + .ws-tx-kies{border-top:0}
+.ws-pdp7 .ws-tx-kies:hover{background:#fff;border-color:#B0742A}
+.ws-pdp7 .ws-tx-kies:has(.ws-tx-dd[aria-expanded="true"]){background:#fff;border-color:#B0742A;border-radius:10px 10px 0 0}
+.ws-pdp7 .ws-tx-kies .ws-tx-kiesregel{color:var(--brons-tekst);font-weight:600}
+.ws-pdp7 .ws-tier:has(input:checked) .ws-tx-kies .ws-tx-kiesregel{color:#7A4A12}
+.ws-pdp7 .ws-tx-pijl{display:inline-grid;place-items:center;width:18px;height:18px;align-self:center;color:var(--ink)}
+.ws-pdp7 .ws-tx-pijl svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s}
+.ws-pdp7 .ws-tx-kies:has(.ws-tx-dd[aria-expanded="true"]) .ws-tx-pijl svg{transform:rotate(180deg)}
+.ws-pdp7 .ws-tx-dd{position:absolute;inset:0;z-index:2;width:100%;border:0;background:none;padding:0;cursor:pointer;border-radius:inherit}
+.ws-pdp7 .ws-tx-dd:focus-visible{outline:2px solid #B0742A;outline-offset:2px}
+
+/* de lijst, direct onder het vak */
+.ws-pdp7 .ws-cadkeuze{display:block;margin:-1px 10px 8px;padding:6px;border:1px solid #B0742A;border-top:0;border-radius:0 0 10px 10px;background:#fff}
 .ws-pdp7 .ws-cadkeuze[hidden]{display:none}
-.ws-pdp7 .ws-cadkeuze-kop{margin:0 2px 8px;font-size:12.5px;font-weight:600;color:var(--ink)}
-.ws-pdp7 .ws-cadkeuze-lijst{display:grid;gap:6px}
-.ws-pdp7 .ws-cko{display:flex;align-items:center;gap:10px;width:100%;padding:7px 10px 7px 7px;border-radius:10px;
-  border:1px solid var(--lijn);background:var(--zand);color:var(--ink);font:inherit;text-align:left;cursor:pointer}
+.ws-pdp7 .ws-cad + .ws-cadkeuze,.ws-pdp7 .ws-cad-lijst + .ws-cadkeuze{margin:8px 0 0;border-top:1px solid #B0742A;border-radius:10px}
+.ws-pdp7 .ws-cadkeuze-lijst{display:grid;gap:4px}
+.ws-pdp7 .ws-cko{display:flex;align-items:center;gap:10px;width:100%;padding:7px 8px;border-radius:8px;border:0;
+  background:var(--zand);color:var(--ink);font:inherit;text-align:left;cursor:pointer}
 .ws-pdp7 .ws-cko[hidden]{display:none}
-.ws-pdp7 .ws-cko:hover{border-color:var(--lijn2)}
-.ws-pdp7 .ws-cko[aria-pressed="true"]{border-color:#C89543;box-shadow:0 0 0 1px #C89543 inset;background:#FBF6EC}
-.ws-pdp7 .ws-cko-bd{flex:0 0 40px;width:40px;height:40px;border-radius:8px;overflow:hidden;background:#fff}
-.ws-pdp7 .ws-cko-bd img{width:100%;height:100%;object-fit:contain;mix-blend-mode:darken;display:block}
-.ws-pdp7 .ws-cko-tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
-.ws-pdp7 .ws-cko-tx b{font-size:13px;font-weight:600;line-height:1.25}
-.ws-pdp7 .ws-cko-tx small{font-size:11px;color:var(--mid)}
-.ws-pdp7 .ws-cko-pr{display:flex;align-items:baseline;gap:6px;white-space:nowrap;font-size:12px}
+.ws-pdp7 .ws-cko:hover{background:var(--zand2)}
+.ws-pdp7 .ws-cko[aria-pressed="true"]{background:#FBEBC8;box-shadow:0 0 0 1px rgba(176,116,42,.45) inset}
+.ws-pdp7 .ws-cko-bd{flex:0 0 36px;width:36px;height:36px;border-radius:7px;overflow:hidden;background:#fff}
+.ws-pdp7 .ws-cko-bd img{width:100%;height:100%;object-fit:contain;display:block}
+.ws-pdp7 .ws-cko-tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.ws-pdp7 .ws-cko-tx b{font-size:12.5px;font-weight:600;line-height:1.25}
+.ws-pdp7 .ws-cko-pr{display:flex;align-items:center;gap:7px;font-size:11.5px}
 .ws-pdp7 .ws-cko-pr s{color:var(--licht)}
-.ws-pdp7 .ws-cko-pr::after{content:"✓";font-weight:700;color:#C89543;opacity:0}
-.ws-pdp7 .ws-cko[aria-pressed="true"] .ws-cko-pr::after{opacity:1}
+.ws-pdp7 .ws-cko-gratis{font-style:normal;font-size:10.5px;font-weight:700;color:#fff;background:#2E9E5B;border-radius:4px;padding:2px 6px}
+.ws-pdp7 .ws-cadkeuze-voet{margin:6px 4px 2px;font-size:10.5px;color:var(--mid)}
+/* bij producten zonder keuzekaarten: een knop onder het cadeau */
+.ws-pdp7 .ws-cad-dd{display:inline-flex;align-items:center;gap:4px;margin-top:6px;padding:4px 9px;border-radius:100px;
+  border:1px solid rgba(176,116,42,.45);background:#fff;font:inherit;font-size:11px;font-weight:600;color:var(--brons-tekst);cursor:pointer;justify-self:center}
+.ws-pdp7 .ws-cad-dd svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
