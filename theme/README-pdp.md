@@ -2886,3 +2886,16 @@ twee fixes, klaar om te publiceren. Dezelfde twee staan ook in
 * Getest: Barber Bro 2.0 €109,95 → €98,96 in cart.js, Barber Bro 3.0 €129,95 →
   €116,96 in de lade, eigenschap zichtbaar in de lade, nl/de/fr, BF-thema, en
   Groom Guard Pro ongewijzigd.
+
+## Rustigere actie, grotere totaalprijs (28 oktober)
+
+* Totaalregel ongeveer 20% groter (ws7-pdp.css): prijs 19 → 23px, doorgestreept
+  12,5 → 15px, "Totaal" 13 → 15,5px, kortingslabel 10 → 12px. De meelopende balk
+  houdt zijn eigen maten.
+* Herfst Sale-balk (`.ws-gift`, v8 en BF): geen zwart blok meer maar een regel
+  met een dunne rand, tekst in inkt en brons, klok in grijs.
+* Black Friday-kaart (`assets/ws-bfb.css`, alleen in het BF-thema): wit met
+  dunne rand in plaats van zwart met rondlopende rood-gouden rand; geen glans,
+  puls of tikkende seconden meer; deal 32 → 22px in inkt; rood alleen nog in het
+  label; klok in kleine zandkleurige vakjes; cadeauvak op zand, "Gratis" groen
+  zoals in de keuzekaarten.
