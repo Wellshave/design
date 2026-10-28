@@ -312,6 +312,58 @@ async function compliance(req) {
   return new Response('ok');
 }
 
+
+// ---------- eenmalig: Klaviyo-flow voor de herinnering aanmaken (doet niets als hij al bestaat) ----------
+const REMINDER_FLOW = 'WS | Herinnering vervangmesjes';
+async function klaviyo(path, init = {}, revision = '2025-10-15') {
+  const res = await fetch(`https://a.klaviyo.com/api${path}`, {
+    ...init,
+    headers: {Authorization: `Klaviyo-API-Key ${env('KLAVIYO_PRIVATE_KEY')}`, revision, accept: 'application/json', 'Content-Type': 'application/json'},
+  });
+  return {status: res.status, body: await res.json().catch(() => ({}))};
+}
+
+async function setupReminderFlow(url) {
+  const found = await klaviyo(`/flows?filter=${encodeURIComponent(`equals(name,"${REMINDER_FLOW}")`)}`);
+  let flow = found.body.data?.[0];
+  const tried = [];
+  if (!flow) {
+    const metrics = await klaviyo('/metrics');
+    const metric = (metrics.body.data || []).find((m) => m.attributes.name === 'Herinnering vervangmesjes aangevraagd');
+    if (!metric) return json({error: 'metric niet gevonden'}, 404);
+    const body = {data: {type: 'flow', attributes: {name: REMINDER_FLOW, definition: {
+      triggers: [{type: 'metric', id: metric.id, trigger_filter: null}],
+      profile_filter: null,
+      entry_action_id: 'wacht',
+      actions: [
+        {temporary_id: 'wacht', type: 'time-delay', data: {unit: 'days', value: 56, secondary_value: null, timezone: 'profile'}, links: {next: 'mail'}},
+        {temporary_id: 'mail', type: 'send-email', links: {next: null}, data: {status: 'draft', message: {
+          from_email: 'marketing@wellshave.nl', from_label: 'Wellshave®', reply_to_email: 'contact@wellshave.com', cc_email: null, bcc_email: null,
+          subject_line: 'Tijd voor verse mesjes', preview_text: 'Je vroeg ons om een seintje. Hier is het.',
+          template_id: 'UBtPrv', smart_sending_enabled: false, transactional: false, add_tracking_params: true,
+          custom_tracking_params: null, additional_filters: null, name: 'Herinnering vervangmesjes',
+        }}},
+      ],
+    }}}};
+    for (const rev of ['2025-10-15', '2025-07-15', '2025-04-15', '2025-01-15.pre', '2024-10-15.pre']) {
+      const r = await klaviyo('/flows', {method: 'POST', body: JSON.stringify(body)}, rev);
+      tried.push({rev, status: r.status, errors: r.body.errors?.map((e) => e.detail)});
+      if (r.status < 300) { flow = r.body.data; break; }
+    }
+  }
+  if (flow && url.searchParams.get('live') === '1') {
+    const actions = await klaviyo(`/flows/${flow.id}/flow-actions`);
+    for (const a of actions.body.data || []) {
+      if (a.attributes.action_type === 'SEND_EMAIL' || a.attributes.definition?.type === 'send-email') {
+        tried.push({action: a.id, ...(await klaviyo(`/flow-actions/${a.id}`, {method: 'PATCH', body: JSON.stringify({data: {type: 'flow-action', id: a.id, attributes: {status: 'live'}}})}))});
+      }
+    }
+    const r = await klaviyo(`/flows/${flow.id}`, {method: 'PATCH', body: JSON.stringify({data: {type: 'flow', id: flow.id, attributes: {status: 'live'}}})});
+    tried.push({flowLive: r.status, errors: r.body.errors?.map((e) => e.detail)});
+  }
+  return json({flow: flow ? {id: flow.id, name: flow.attributes?.name, status: flow.attributes?.status} : null, tried});
+}
+
 // ---------- status (geen geheimen, alleen of alles aangesloten is) ----------
 async function health(url) {
   const shop = url.searchParams.get('shop') || 'wellshave.myshopify.com';
@@ -395,6 +447,7 @@ export default async function handler(req) {
   if (url.pathname === '/auth') return oauthStart(url);
   if (url.pathname === '/auth/callback') return oauthCallback(req, url);
   if (req.method === 'GET' && url.pathname === '/api/health') return health(url);
+  if (req.method === 'POST' && url.pathname === '/api/setup/klaviyo-reminder-flow') return setupReminderFlow(url);
   if (req.method === 'GET' && url.pathname === '/api/thank-you/go') {
     try { return await thankYouGo(url); } catch (e) { console.error(e); return new Response('Deze link is verlopen. Ga terug en probeer het opnieuw.', {status: 401}); }
   }
