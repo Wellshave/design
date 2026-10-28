@@ -1198,6 +1198,13 @@ class CartDrawer extends HTMLElement {
         if (n && c) c.innerHTML = n.innerHTML;
       });
 
+      // Welk cadeau erin hoort, hangt af van wat er in de winkelwagen zit: zit
+      // de washbag al in een pakket, dan komt het vervangcadeau. Daarom altijd
+      // de nieuwe cadeaugegevens overnemen, anders blijft de keuze van een lege
+      // winkelwagen staan en komt de washbag er dubbel in.
+      curAch.querySelectorAll('[data-gift-tier]').forEach(n => n.remove());
+      newAch.querySelectorAll('[data-gift-tier]').forEach(n => curAch.appendChild(n));
+
       curAch.dataset.cartTotal = newAch.dataset.cartTotal;
     } else if (newAch) {
       this.querySelector('.cart-drawer__header').appendChild(newAch);

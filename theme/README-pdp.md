@@ -2909,3 +2909,19 @@ twee fixes, klaar om te publiceren. Dezelfde twee staan ook in
   ws-alia.css laden; of het tabje verschijnt bepaalt Alia zelf per bezoeker.
 * Het live thema is via de API niet te wijzigen: nieuwe aanpassingen gaan naar een
   kopie (v9) of het Black Friday-thema.
+
+## Fout: dubbele washbag bij pakketten met een washbag (28 oktober) → v9
+
+* Gemeld op live v8: Shave Package Ultimate (washbag zit erin) kreeg in de
+  winkelwagen toch de washbag als cadeau, terwijl de pagina de Neustrimmer Basic
+  beloofde.
+* Oorzaak: base.js `renderContent` ververste de balk (labels, punten) maar liet de
+  `[data-gift-tier]`-gegevens staan van de eerste render. Bij een lege winkelwagen
+  is cadeau 1 de washbag; de keuze voor het vervangcadeau (ws-cadeau met `al:`)
+  kwam dus nooit bij `syncGifts` aan.
+* Oplossing: na elke render de `[data-gift-tier]`-scripts vervangen door de nieuwe.
+* v9 (209131700556) = kopie van live v8 + deze fix; ook in het BF-thema.
+  Getest op v9: Shave Package Ultimate → Neustrimmer Basic; Barber Bro 2.0 →
+  washbag + Platinum; Groom Guard Pro → geen cadeau (onder €65).
+* BF-thema heeft geen gift_1_dubbel en geen gift_1_reserve: daar krijgt een pakket
+  met een washbag geen eerste cadeau (pagina en winkelwagen zijn het wel eens).
