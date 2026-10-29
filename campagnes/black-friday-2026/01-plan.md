@@ -361,3 +361,14 @@ Getest vanaf de Shave Package Ultimate (€89,95):
 | 2 stuks | −€132,68 |
 | + Groom Guard | −€89,23 |
 | + Groom Guard + Flex Guard | −€114,93 |
+
+**Fix 29 oktober, accessoires in het totaal:** de artikelen uit "Maak het compleet" (mesjes, foil, hoes) tellen nu mee in het totaal, met hun prijs en van-prijs uit die lijst. Ze doen standaard niet mee voor de 30%. Dat is te wijzigen met de instelling "Accessoires tellen mee voor de korting" in de sectie "Black Friday: 2e artikel", en die moet gelijk staan aan de korting in Shopify. De regel met de Black Friday-korting staat er alleen als er ook echt Black Friday-korting is.
+
+Getest op Groom Guard PRO:
+
+| Situatie | Totaal | Was |
+|---|---|---|
+| Start | €59,95 | €85,65 |
+| + Blade | €74,90 | €115,57 |
+| + Foil | €89,85 | €137,15 |
+| + Groom Guard | €124,82 | €208,50 (−€83,68, waarvan €14,98 Black Friday-korting) |
