@@ -333,3 +333,14 @@ In de donkere Black Friday-kaart op de productpagina staan de cadeaus niet meer.
 - Instelbaar in de theme-editor (sectie "Black Friday: 2e artikel"): percentage, teksten, collectie of vaste artikelen, en het aantal artikelen.
 
 **Let op:** de prijzen in de kaart kloppen pas in de winkelwagen als de automatische korting (koop 1, krijg 1 met 30%) in Shopify is aangemaakt. De collectie in de kaart moet dezelfde artikelen bevatten als de korting.
+
+**Update: het totaal telt mee.** Het "Totaal" onder "Kies je aanbieding" (met de doorgestreepte prijs, het percentage en het Klarna-bedrag) gaat omhoog zodra de klant in de kaart een tweede stuk kiest of een ander artikel toevoegt. De korting is gerekend zoals Shopify dat doet: bij n artikelen krijgen de n/2 goedkoopste 30%. Eronder staat bijvoorbeeld "3 artikelen, 1 daarvan met 30% extra." Artikelen die al in de winkelwagen liggen, staan op "Toegevoegd" en tellen mee. Bij aanwijzen wordt de knop "Weghalen" en gaat het artikel er weer uit.
+
+Getest op Groom Guard PRO:
+
+| Situatie | Totaal | Was |
+|---|---|---|
+| Start | €59,95 | €85,65 |
+| 2 stuks | €101,92 | €171,30 |
+| + Groom Guard | €94,92 | €135,60 |
+| Weer weghalen | €59,95 | €85,65 (winkelwagen weer leeg) |
