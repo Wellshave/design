@@ -321,3 +321,15 @@ In "Black Friday 2026 (kopie van v9)" (`preview_theme_id=209168925004`), in `ass
 
   Geen beweging.
 - **Update 29 oktober:** de kaart is nu donker, richting "Black" Friday. Hij is zwart met crème letters, rood voor de actie, een gouden plusje bij de cadeaus en groen voor "Gratis". Hij blijft stil, zonder bewegende rand.
+
+### Kies je 2e artikel in de Black Friday-kaart (v9, 29 oktober)
+
+In de donkere Black Friday-kaart op de productpagina staan de cadeaus niet meer. Daar staat nu **"Kies je 2e artikel"** (nieuwe sectie `sections/ws-bf-tweede.liquid`, geladen vanuit `layout/theme.liquid` op productpagina's):
+
+- **Nog een [product]:** met een plus/min-knop. Die zet het aantal in het koopformulier, dus "In winkelwagen" legt er dan twee neer. Bij 2 staat er "Je bespaart €38,98 op de tweede". De prijs volgt de gekozen optie in "Kies je aanbieding".
+- **Of kies een ander artikel:** drie artikelen uit de Black Friday-collectie, met de gewone prijs doorgestreept en de prijs met 30% erbij, plus een knop "Toevoegen" die het artikel meteen in de winkelwagen legt.
+- Alleen artikelen die niet duurder zijn dan de gekozen optie komen in de lijst. De 30% gaat van het goedkoopste artikel af, dus zo klopt de getoonde prijs ook in de winkelwagen.
+- De cadeaus blijven in "Kies je aanbieding" en in de winkelwagen.
+- Instelbaar in de theme-editor (sectie "Black Friday: 2e artikel"): percentage, teksten, collectie of vaste artikelen, en het aantal artikelen.
+
+**Let op:** de prijzen in de kaart kloppen pas in de winkelwagen als de automatische korting (koop 1, krijg 1 met 30%) in Shopify is aangemaakt. De collectie in de kaart moet dezelfde artikelen bevatten als de korting.
