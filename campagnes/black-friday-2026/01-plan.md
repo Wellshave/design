@@ -346,3 +346,5 @@ Getest op Groom Guard PRO:
 | Weer weghalen | €59,95 | €85,65 (winkelwagen weer leeg) |
 
 **Fix 29 oktober:** "Nog een ..." in de kaart volgt nu de gekozen optie in "Kies je aanbieding": naam, foto en prijs. Kies je op de Groom Guard PRO-pagina de upgrade, dan staat er "Nog een Shave Package Ultimate™" voor €62,97, en bij 2 stuks is het totaal €152,92.
+
+**Volgorde 29 oktober:** in de koopkolom staat nu eerst "Kies je aanbieding" (met de upgrade), dan de Black Friday-kaart met "Kies je 2e artikel", dan het totaal en de knop. Eerst kiest de klant zijn product, dan het 2e artikel, en daaronder ziet hij meteen het totaal. Alleen met CSS (flex-volgorde in `assets/ws-bfb.css`), dus zonder verspringen bij het laden.
