@@ -2987,3 +2987,14 @@ twee fixes, klaar om te publiceren. Dezelfde twee staan ook in
 Thema 209168925004, "Black Friday 2026 (kopie van v9)": v9 met de Black
 Friday-aanpassingen erover. De bestanden die afwijken staan in
 `theme-blackfriday/`, met een eigen README.
+
+## Add-ons weer weghalen (29 oktober, v9 en BF-thema)
+
+* "Maak het compleet": de knop is een schakelaar. Na Toevoegen staat er
+  "Toegevoegd ✓" met eronder klein "Verwijderen" (`add_weg`, vertaald en/de/fr);
+  nog een keer klikken haalt één stuk van dat product uit de winkelwagen
+  (`cart/change.js`, de losse regel, nooit een cadeauregel) en de knop staat weer
+  op Toevoegen. De lade ververst op de achtergrond, zoals bij toevoegen.
+* De stand volgt de echte winkelwagen: bij het laden van de pagina en na elke
+  wijziging in de lade (base.js stuurt `ws:winkelwagen` na `renderContent`).
+  Haal je het product in de lade weg, dan springt de knop terug op Toevoegen.

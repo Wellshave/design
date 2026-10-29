@@ -1745,6 +1745,7 @@
                   <svg class="ws-add-vink" viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 12.4l4.2 4.2 8.8-9.2"/></svg>
                   <span class="ws-add-knop-tx">{{ s.add_knop }}</span>
                   <span class="ws-add-knop-klaar">{{ s.add_klaar }}</span>
+                  <span class="ws-add-knop-weg">{{ s.add_weg | default: 'Verwijderen' }}</span>
                 </button>
               </li>
             {%- endfor -%}
@@ -1759,32 +1760,83 @@
                 var blok = document.currentScript.previousElementSibling;
                 if (!blok || !blok.hasAttribute('data-ws-add')) return;
                 var wortel = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/';
+                var tekst = {
+                  toe: {{ s.add_knop | json }},
+                  weg: {{ s.add_weg | default: 'Verwijderen' | json }}
+                };
+                // De knop is een schakelaar: Toevoegen zet het product in de
+                // winkelwagen, nog een keer klikken (Toegevoegd · Verwijderen) haalt
+                // het er weer uit. De stand volgt de echte winkelwagen, ook als de
+                // klant het in de lade weghaalt of de pagina later opnieuw opent.
+                function zet(knop, aan) {
+                  knop.classList.toggle('ws-klaar', aan);
+                  knop.setAttribute('aria-pressed', aan ? 'true' : 'false');
+                  var naam = knop.getAttribute('data-naam') || '';
+                  knop.setAttribute('aria-label', (aan ? tekst.weg : tekst.toe) + ': ' + naam);
+                }
+                // Een cadeau (_gift_tier) is een eigen regel en telt hier niet mee.
+                function losseRegel(winkelwagen, variant) {
+                  return winkelwagen.items.filter(function(i){
+                    return i.variant_id === variant && !(i.properties && i.properties._gift_tier);
+                  })[0];
+                }
+                function bijwerken() {
+                  fetch(wortel + 'cart.js').then(function(r){ return r.json(); }).then(function(ww){
+                    blok.querySelectorAll('[data-ws-add-variant]').forEach(function(k){
+                      if (k.classList.contains('ws-bezig')) return;
+                      zet(k, !!losseRegel(ww, parseInt(k.getAttribute('data-ws-add-variant'), 10)));
+                    });
+                  }).catch(function(){});
+                }
+                blok.querySelectorAll('[data-ws-add-variant]').forEach(function(k){
+                  k.setAttribute('data-naam', (k.getAttribute('aria-label') || '').split(': ').slice(1).join(': '));
+                  k.setAttribute('aria-pressed', 'false');
+                });
+                bijwerken();
+                var wacht;
+                document.addEventListener('ws:winkelwagen', function(){ clearTimeout(wacht); wacht = setTimeout(bijwerken, 150); });
+
+                function stuur(pad, verzoek, lade) {
+                  verzoek.sections_url = window.location.pathname;
+                  if (lade) verzoek.sections = ['cart-drawer'];
+                  return fetch(wortel + pad, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(verzoek)
+                  }).then(function(r){ return r.json(); });
+                }
                 blok.addEventListener('click', function(e){
                   var knop = e.target.closest('[data-ws-add-variant]');
                   if (!knop || knop.classList.contains('ws-bezig')) return;
                   knop.classList.add('ws-bezig');
                   var lade = document.querySelector('cart-drawer');
-                  var verzoek = {
-                    items: [{ id: parseInt(knop.getAttribute('data-ws-add-variant'), 10), quantity: 1 }],
-                    sections_url: window.location.pathname
-                  };
-                  if (lade) verzoek.sections = ['cart-drawer'];
-                  fetch(wortel + 'cart/add.js', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(verzoek)
-                  })
-                  .then(function(r){ return r.json(); })
-                  .then(function(antw){
-                    if (!antw.items) throw new Error(antw.description || 'Toevoegen mislukt');
-                    knop.classList.add('ws-klaar');
+                  var variant = parseInt(knop.getAttribute('data-ws-add-variant'), 10);
+                  var klus;
+                  if (knop.classList.contains('ws-klaar')) {
+                    // Weghalen: precies één stuk van de losse regel eraf.
+                    klus = fetch(wortel + 'cart.js').then(function(r){ return r.json(); }).then(function(ww){
+                      var regel = losseRegel(ww, variant);
+                      if (!regel) return { weg: true };
+                      return stuur('cart/change.js', { id: regel.key, quantity: regel.quantity - 1 }, lade).then(function(antw){
+                        if (!antw.items) throw new Error(antw.description || 'Verwijderen mislukt');
+                        return { antw: antw, aan: !!losseRegel(antw, variant) };
+                      });
+                    });
+                  } else {
+                    klus = stuur('cart/add.js', { items: [{ id: variant, quantity: 1 }] }, lade).then(function(antw){
+                      if (!antw.items) throw new Error(antw.description || 'Toevoegen mislukt');
+                      return { antw: antw, aan: true };
+                    });
+                  }
+                  klus.then(function(uit){
+                    knop.classList.remove('ws-bezig');
+                    zet(knop, !!uit.aan);
                     // De lade gaat niet open: de klant blijft op de pagina. renderContent
                     // ververst de lade op de achtergrond, inclusief het aantal in de
                     // menubalk en de cadeaus; de knop laat zelf zien dat het gelukt is.
-                    if (lade && lade.renderContent) lade.renderContent(antw.sections);
+                    if (uit.antw && lade && lade.renderContent) lade.renderContent(uit.antw.sections);
                   })
-                  .catch(function(fout){ console.error('Add-on toevoegen mislukt:', fout); })
-                  .finally(function(){ knop.classList.remove('ws-bezig'); });
+                  .catch(function(fout){ console.error('Add-on bijwerken mislukt:', fout); knop.classList.remove('ws-bezig'); });
                 });
               })();
             </script>
@@ -3147,6 +3199,7 @@
     { "type": "range", "id": "add_max", "label": "Hoeveel maximaal", "min": 1, "max": 4, "step": 1, "default": 3 },
     { "type": "text", "id": "add_knop", "label": "Knop", "default": "Toevoegen" },
     { "type": "text", "id": "add_klaar", "label": "Knop na toevoegen", "default": "Toegevoegd" },
+    { "type": "text", "id": "add_weg", "label": "Knop: weer weghalen", "info": "Staat onder Toegevoegd; nog een keer klikken haalt het product uit de winkelwagen.", "default": "Verwijderen" },
     { "type": "header", "content": "Upgrade-pop-up" },
     { "type": "paragraph", "content": "Verschijnt bij het toevoegen aan de winkelwagen, gevoed uit custom.upgrade_products. Alleen duurdere producten die op voorraad staan komen erin; staat het veld leeg, dan is er geen pop-up." },
     { "type": "checkbox", "id": "upg_tonen", "label": "Upgrade-pop-up aan", "default": true },

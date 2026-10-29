@@ -254,10 +254,15 @@
   background:linear-gradient(90deg,#D8AC5D,#BC813E) 0 100%/0 1px no-repeat;transition:background-size .3s ease,border-color .3s ease}
 .ws-pdp7 .ws-add-knop:hover{background-size:100% 1px;border-color:transparent}
 .ws-pdp7 .ws-add-knop svg{width:13px;height:13px;fill:none;stroke:var(--brons);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-.ws-pdp7 .ws-add-vink,.ws-pdp7 .ws-add-knop-klaar{display:none}
-.ws-pdp7 .ws-add-knop.ws-klaar{color:var(--brons-tekst);background-size:100% 1px;border-color:transparent;cursor:default}
+.ws-pdp7 .ws-add-vink,.ws-pdp7 .ws-add-knop-klaar,.ws-pdp7 .ws-add-knop-weg{display:none}
+/* Toegevoegd: vinkje met "Toegevoegd", eronder klein "Verwijderen". Nog een keer klikken haalt het weg. */
+.ws-pdp7 .ws-add-knop.ws-klaar{color:var(--brons-tekst);background:none;border-color:transparent;flex-wrap:wrap;justify-content:flex-start;
+  row-gap:3px;padding-bottom:0;text-align:right}
 .ws-pdp7 .ws-add-knop.ws-klaar .ws-add-plus,.ws-pdp7 .ws-add-knop.ws-klaar .ws-add-knop-tx{display:none}
 .ws-pdp7 .ws-add-knop.ws-klaar .ws-add-vink,.ws-pdp7 .ws-add-knop.ws-klaar .ws-add-knop-klaar{display:inline}
+.ws-pdp7 .ws-add-knop.ws-klaar .ws-add-knop-weg{display:block;flex-basis:100%;font-size:11px;font-weight:400;color:var(--mid);
+  text-decoration:underline;text-underline-offset:2px;text-decoration-color:rgba(17,17,17,.25);transition:color .2s ease}
+.ws-pdp7 .ws-add-knop.ws-klaar:hover .ws-add-knop-weg,.ws-pdp7 .ws-add-knop.ws-klaar:focus-visible .ws-add-knop-weg{color:var(--ink);text-decoration-color:currentColor}
 .ws-pdp7 .ws-add-knop.ws-bezig{opacity:.5}
 .ws-pdp7 .ws-apps:empty,.ws-pdp7 .ws-apps > div:empty{display:none}
 

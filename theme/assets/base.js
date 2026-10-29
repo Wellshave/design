@@ -1215,6 +1215,8 @@ class CartDrawer extends HTMLElement {
     this.syncGifts();
 
     document.querySelectorAll("[cart-item-count]").forEach(countEl => countEl.innerText = newCartDrawer.dataset.count);
+    // Voor wat op de pagina meekijkt, zoals de add-ons op de productpagina.
+    document.dispatchEvent(new CustomEvent("ws:winkelwagen"));
   }
 
   syncGifts() {
