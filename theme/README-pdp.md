@@ -3006,3 +3006,13 @@ Friday-aanpassingen erover. De bestanden die afwijken staan in
 * Automatische korting "Pre-order Barber Bro: 10% extra" loopt nu tot en met
   17 november (eind 2026-11-17 23:00 UTC = middernacht Nederlandse tijd); vanaf
   18 november is de pre-order voorbij en verdwijnt ook de pre-ordertekst.
+* 29 oktober, later: ook op pre-order met levering 18 november (`custom.preorder_datum`
+  2026-11-18, zonder `preorder_korting`, dus zonder bonusregel): Tondeuse Deluxe,
+  Detailtrimmer Sharpline, Flex-line Bundel en Barber Pack 1.0/2.0/3.0. De Barber
+  Packs zijn te bestellen (voorraadbeleid "doorgaan met verkopen"); de Tondeuse
+  Deluxe, Sharpline en Flex-line Bundel staan op "niet verkopen bij 0" en zijn
+  daardoor nu uitverkocht, ook als pre-order.
+* Klaviyo: servicemail "Je Barber Bro komt op 18 november" (template Yh3p6Z,
+  lijst "Service | Pre-order Barber Bro | levering 18 nov") verstuurd aan de 6 open
+  pre-orders van vóór de datumwijziging. Template WKFLHq (Tondeuse Deluxe +
+  Sharpline) staat klaar voor later; er waren geen open bestellingen voor.
