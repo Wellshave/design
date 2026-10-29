@@ -2998,3 +2998,11 @@ Friday-aanpassingen erover. De bestanden die afwijken staan in
 * De stand volgt de echte winkelwagen: bij het laden van de pagina en na elke
   wijziging in de lade (base.js stuurt `ws:winkelwagen` na `renderContent`).
   Haal je het product in de lade weg, dan springt de knop terug op Toevoegen.
+
+## Pre-orderdatum Barber Bro naar 18 november (29 oktober)
+
+* `custom.preorder_datum` op Barber Bro 1.0, 2.0 en 3.0: 2026-11-09 → 2026-11-18.
+  De pagina's, knoppen en de lade nemen de datum vanzelf over (alle thema's, alle talen).
+* Automatische korting "Pre-order Barber Bro: 10% extra" loopt nu tot en met
+  17 november (eind 2026-11-17 23:00 UTC = middernacht Nederlandse tijd); vanaf
+  18 november is de pre-order voorbij en verdwijnt ook de pre-ordertekst.
