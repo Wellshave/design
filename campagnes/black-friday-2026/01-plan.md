@@ -313,3 +313,10 @@ In "Black Friday 2026 (kopie van v9)" (`preview_theme_id=209168925004`), in `ass
   - mobiel: de gouden strook bovenaan het menu is zwart, met een rode rand, een pulserende rode stip in plaats van het zonnetje en een rode pijl;
   - desktop: de grote megamenu-promo heeft een rood label met stip, een rode knop en een rode gloed. De bundelpromo ernaast blijft goud.
 - **Kortingslabels op de productkaarten** ("31% Korting", ook in de winkelwagen): rood met wit (#C8281F, 5,4:1). Bewust zonder extra Black Friday-badge, om de kaarten rustig te houden.
+- **Black Friday-kaart op de productpagina (v9, 29 oktober):** de kaart is in v9 bewust licht en stil gemaakt (`assets/ws-bfb.css`). Die opzet blijft. Erbij gekomen, in dezelfde taal als de menubanner en de labels:
+  - een rode streep links en een rode rand;
+  - het label "Black Friday" als rode pil met witte letters;
+  - "30% extra" in rood;
+  - de seconden en de cadeauklok in rood.
+
+  Geen beweging.
