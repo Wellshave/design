@@ -320,3 +320,4 @@ In "Black Friday 2026 (kopie van v9)" (`preview_theme_id=209168925004`), in `ass
   - de seconden en de cadeauklok in rood.
 
   Geen beweging.
+- **Update 29 oktober:** de kaart is nu donker, richting "Black" Friday. Hij is zwart met crème letters, rood voor de actie, een gouden plusje bij de cadeaus en groen voor "Gratis". Hij blijft stil, zonder bewegende rand.
