@@ -372,3 +372,9 @@ Getest op Groom Guard PRO:
 | + Blade | €74,90 | €115,57 |
 | + Foil | €89,85 | €137,15 |
 | + Groom Guard | €124,82 | €208,50 (−€83,68, waarvan €14,98 Black Friday-korting) |
+
+**Meer keuze in het 2e artikel (29 oktober):**
+
+- **Lijst met knop:** eerst staan er 3 artikelen, daaronder een knop "Bekijk alle 18 artikelen". De lijst klapt dan open en scrollt binnen de kaart, zodat het totaal in beeld blijft. Het aantal is instelbaar: dicht standaard 3, open standaard tot 24.
+- **Ook duurdere artikelen mogen het 2e zijn.** Daarbij staat eerlijk wat er gebeurt: de 30% gaat dan van de gekozen optie af, met de prijs zonder korting en de regel "Dan 30% op je Groom Guard™: −€14,98". Eerst komen de artikelen die zelf de korting krijgen, daarna de duurdere, op prijs van laag naar hoog.
+- **Bron:** de 18 artikelen komen nu uit de Black Friday-collectie (summer-sale-deals). Wil je nog meer keuze, kies dan in de sectie "Black Friday: 2e artikel" een grotere collectie. Die moet wel overeenkomen met de artikelen waar de korting op geldt.
