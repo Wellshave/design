@@ -344,3 +344,5 @@ Getest op Groom Guard PRO:
 | 2 stuks | €101,92 | €171,30 |
 | + Groom Guard | €94,92 | €135,60 |
 | Weer weghalen | €59,95 | €85,65 (winkelwagen weer leeg) |
+
+**Fix 29 oktober:** "Nog een ..." in de kaart volgt nu de gekozen optie in "Kies je aanbieding": naam, foto en prijs. Kies je op de Groom Guard PRO-pagina de upgrade, dan staat er "Nog een Shave Package Ultimate™" voor €62,97, en bij 2 stuks is het totaal €152,92.
