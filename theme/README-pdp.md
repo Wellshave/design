@@ -3016,3 +3016,8 @@ Friday-aanpassingen erover. De bestanden die afwijken staan in
   lijst "Service | Pre-order Barber Bro | levering 18 nov") verstuurd aan de 6 open
   pre-orders van vóór de datumwijziging. Template WKFLHq (Tondeuse Deluxe +
   Sharpline) staat klaar voor later; er waren geen open bestellingen voor.
+* 30 oktober: Tondeuse Deluxe, Detailtrimmer Sharpline en Flex-line Bundel op
+  "doorgaan met verkopen" (pre-order, levering vanaf 18 november). Deadline: op
+  18 november 08:00 staat een geplande taak die ze terugzet op "niet verkopen bij 0".
+  Klaviyo-template "WS | Flow | Pre-order bevestiging | levering 18 nov" (RgZZ5L)
+  voor een flow op Placed Order; de flow zelf wordt in Klaviyo met de hand aangezet.
