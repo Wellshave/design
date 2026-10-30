@@ -1,0 +1,74 @@
+{% comment %}
+  Wellshave v7 · productpagina: veelgestelde vragen. Uit custom.faq (metaobjecten
+  faq_entry: question, answer). Uitklappers met een rustige overgang, zoals in het koopvak.
+{% endcomment %}
+{%- assign vragen = product.metafields.custom.faq.value -%}
+{%- if vragen != blank -%}
+  {{ 'ws7.css' | asset_url | stylesheet_tag }}
+  <div class="ws7 ws7p ws7p-wit">
+    <div class="ws7p-rail ws7p-sec">
+      <div class="ws7-midden">
+        {% render 'ws7-kop', kop: section.settings.kop, goud: section.settings.kop_goud %}
+        {%- if section.settings.sub != blank -%}<p class="ws7-sub ws7p-sub">{{ section.settings.sub }}</p>{%- endif -%}
+      </div>
+      <div class="ws7p-faq" data-ws7p-acc>
+        {%- for v in vragen -%}
+          {%- if v.question == blank -%}{%- continue -%}{%- endif -%}
+          <details>
+            <summary>{{ v.question }}<i aria-hidden="true"></i></summary>
+            <div class="ws7p-faq__in">{{ v.answer | metafield_tag }}</div>
+          </details>
+        {%- endfor -%}
+      </div>
+      {%- if section.settings.link_label != blank -%}
+        <div class="ws7-midden ws7p-faq__voet">
+          {%- if section.settings.voet != blank -%}<span>{{ section.settings.voet }}</span>{%- endif -%}
+          {%- comment -%} Een link binnen de winkel krijgt het voorvoegsel van taal en markt (/en, /de-de). {%- endcomment -%}
+          {%- assign link = section.settings.link | default: '/pages/contact' -%}
+          {%- assign begin = link | slice: 0, 1 -%}
+          {%- if begin == '/' and routes.root_url != '/' -%}{%- assign link = routes.root_url | append: link -%}{%- endif -%}
+          <a class="ws7-link" href="{{ link }}">{{ section.settings.link_label }}{% render 'ws7-pijl' %}</a>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+  <script>
+    (function () {
+      var acc = document.currentScript.previousElementSibling.querySelector('[data-ws7p-acc]');
+      if (!acc || !acc.animate) return;
+      try { if (matchMedia('(prefers-reduced-motion: reduce)').matches) return; } catch (e) {}
+      acc.querySelectorAll('details').forEach(function (d) {
+        var kop = d.querySelector('summary');
+        kop.addEventListener('click', function (e) {
+          e.preventDefault();
+          var dicht = d.open && !d.classList.contains('is-dicht');
+          var van = d.getBoundingClientRect().height, naar;
+          if (d._a) d._a.cancel();
+          d.style.overflow = 'hidden';
+          if (dicht) { d.classList.add('is-dicht'); naar = kop.getBoundingClientRect().height; }
+          else { d.classList.remove('is-dicht'); d.open = true; naar = d.getBoundingClientRect().height; }
+          var a = d.animate({ height: [van + 'px', naar + 'px'] }, { duration: Math.max(340, Math.min(650, Math.abs(naar - van) * 1.2)), easing: 'cubic-bezier(.4,0,.2,1)' });
+          d._a = a;
+          a.onfinish = function () { if (dicht) d.open = false; d.classList.remove('is-dicht'); d.style.overflow = ''; d._a = null; };
+        });
+      });
+    })();
+  </script>
+{%- endif -%}
+{% schema %}
+{
+  "name": "WS7 · PDP vragen",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "paragraph", "content": "De vragen komen uit het product: custom.faq." },
+    { "type": "text", "id": "kop", "label": "Kop", "default": "Nog vragen?" },
+    { "type": "text", "id": "kop_goud", "label": "Kop, regel in goud", "default": "Hier is het antwoord." },
+    { "type": "text", "id": "sub", "label": "Regel eronder" },
+    { "type": "text", "id": "voet", "label": "Regel onderaan", "default": "Staat je vraag er niet bij?" },
+    { "type": "text", "id": "link_label", "label": "Linktekst", "default": "Stel hem aan ons team" },
+    { "type": "url", "id": "link", "label": "Link" }
+  ],
+  "presets": [ { "name": "WS7 · PDP vragen" } ]
+}
+{% endschema %}

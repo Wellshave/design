@@ -1,0 +1,137 @@
+{%- if product_card.id != blank -%}
+  {% liquid
+    assign main_class = "product-card"
+    assign has_quick_add = has_quick_add | default: false
+    assign current_variant = product_card.selected_or_first_available_variant
+  
+    if settings.enable_quick_add and product_card.has_only_default_variant and current_variant.available
+      assign has_quick_add = true
+    endif
+
+    if card_size == "small"
+      assign main_class = "product-card product-card--small"
+    endif
+  %}
+  
+  <product-card class="{{ main_class }}">
+    <div class="product-card__media-wrapper">
+      {%- comment -%}
+        De kaart toont de eerste productfoto, de rechttoe-rechtaan pakshot.
+        custom.collectie_foto zet er per product een andere foto op, zonder
+        dat de volgorde van de productfoto's verandert: die eerste foto blijft
+        ook de foto in de winkelwagen en in de productfeed. Op de productpagina
+        zelf kan custom.pdp_hoofdfoto weer een andere openingsfoto kiezen.
+      {%- endcomment -%}
+      {%- liquid
+        assign ws_kaartfoto = product_card.featured_image
+        assign ws_eigen_foto = product_card.metafields.custom.collectie_foto.value
+        if ws_eigen_foto != blank
+          assign ws_kaartfoto = ws_eigen_foto.preview_image | default: ws_eigen_foto
+        endif
+      -%}
+      <a href="{{ product_card.url }}" class="product-card__media">
+        {%- if ws_kaartfoto != blank -%}
+          {%- render 'media', 
+            media: ws_kaartfoto, 
+            size: "forth",
+            type: "all"
+          -%}
+        {%- else -%}
+          {{ 'product-apparel-1' | placeholder_svg_tag }}
+        {%- endif -%}
+      </a>
+
+      {%- if product_card.metafields.custom.redesign_product_badge != blank -%}
+        <div class="product-card__badge">
+          {{ product_card.metafields.custom.redesign_product_badge | image_url: width: 160 | image_tag }}
+        </div>
+      {%- endif -%}
+
+      {%- assign ws_bestseller = '' -%}
+      {%- capture ws_herfst -%}{% render 'ws-herfst-badge', product: product_card, variant: current_variant %}{%- endcapture -%}
+      {%- if product_card.metafields.custom.tags != blank or ws_herfst contains 'ws-herfst-badge' -%}
+        <div class="product-card__tags">
+          {{- ws_herfst -}}
+          {%- for tag in product_card.metafields.custom.tags.value -%}
+            {%- assign ws_tag_label = tag.label.value | default: tag.label -%}
+            {%- capture ws_bs_tag -%}{%- render 'ws-bestseller-badge', label: ws_tag_label -%}{%- endcapture -%}
+            {%- if ws_bs_tag contains 'ws-bestseller-sticker' -%}
+              {%- assign ws_bestseller = ws_bs_tag -%}
+              {%- continue -%}
+            {%- endif -%}
+            <div 
+              class="product-card__tag"
+              style="background-color: {{ tag.background }}; color: {{ tag.color }};"
+            >
+              {{- tag.label -}}
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+      {{- ws_bestseller -}}
+  
+      {%- if has_quick_add -%}
+        <button 
+          type="button" 
+          name="quick-add" 
+          class="product-card__add" 
+          data-variant="{{ current_variant.id }}"
+        >
+          {{- 'icon-loading.svg' | inline_asset_content -}}
+          {{- 'icon-cart.svg' | inline_asset_content -}}
+        </button>
+      {%- endif -%}
+    </div>
+  
+    <div class="product-card__content">
+      {%- if settings.card_reviews != blank -%}
+        <div class="product-card__reviews body-sm">
+          <span>{{ settings.card_reviews }}</span>
+          {{ 'icon-trustpilot-logo.svg' | inline_asset_content }}
+        </div>
+      {%- endif -%}
+  
+      <a href="{{ product_card.url }}" class="product-card__title body-lg">
+        {{- product_card.title -}}
+      </a>
+  
+      {%- if product_card.metafields.custom.subtitle != blank -%}
+        <p class="product-card__description body-md">
+          {{- product_card.metafields.custom.subtitle -}}
+        </p>
+      {%- endif -%}
+  
+      <p class="product-card__price body-lg">
+        <span class="product-card__price-main">
+          {%- render 'price-formated', price: current_variant.price -%}  
+        </span>
+        {%- if current_variant.compare_at_price > current_variant.price -%}
+          <span class="product-card__price-compare">
+            {%- render 'price-formated', price: current_variant.compare_at_price -%}  
+          </span>
+          {%- comment -%}
+            Hetzelfde kortingslabel als op de homepage en de collectiepagina:
+            een gouden pil met het percentage, naar beneden afgerond.
+            ws-spaar.css staat in de <head>, dus hier niet nog eens inladen.
+          {%- endcomment -%}
+          {% render 'ws-spaar', van: current_variant.compare_at_price, nu: current_variant.price, zonder_css: true %}
+        {%- endif -%}
+      </p>
+    </div>
+  </product-card>
+{%- else -%}
+  {%- comment -%}
+    Lege plaatshouder. Featured-products zet vier van deze kaarten in de html
+    en vervangt ze na het laden door de aanbevelingen. Hier stonden de titel
+    "Product", "Lorem ipsum dolor sit amet." en een prijs van 0,00: elke
+    bezoeker zag dat even, en een crawler ziet het altijd. Nu is het een vlak
+    zonder tekst.
+  {%- endcomment -%}
+  <div class="product-card" aria-hidden="true">
+    <div class="product-card__media-wrapper">
+      <div class="product-card__media">
+        {{ 'product-apparel-1' | placeholder_svg_tag }}
+      </div>
+    </div>
+  </div>
+{%- endif -%}

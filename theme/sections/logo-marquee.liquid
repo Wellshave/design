@@ -1,0 +1,142 @@
+{{ 'logo-marquee.css' | asset_url | stylesheet_tag }}
+
+{% render 'indent-settings', section: section %}
+
+<style>
+  .section-{{ section.id }} {
+    --scroll-duration: {{ section.settings.scroll_duration }}s;
+    {%- comment -%}
+      Zonder grond pakt de band de achtergrond van de pagina, en dat is wit.
+      Op de productpagina staat hij tussen twee zandkleurige blokken in en
+      valt hij daar als witte strook tussenuit. Leeg laten verandert niets,
+      dus de sjablonen die deze sectie verder gebruiken blijven zoals ze zijn.
+    {%- endcomment -%}
+    {%- if section.settings.grond != blank and section.settings.grond != 'rgba(0,0,0,0)' %}
+    background: {{ section.settings.grond }};
+    {%- endif %}
+  }
+</style>
+
+<div class="logo-marquee section-{{ section.id }}">
+  <div class="logo-marquee__list{% if section.settings.hover_stop %} logo-marquee__hover{% endif %}">
+    {% for i in (1..4) %}
+      <div class="logo-marquee__item">
+        {% for block in section.blocks %}
+          <div class="logo-marquee__block" {{ block.shopify_attributes }}>
+            {% if block.settings.logo != blank %}
+              {{ block.settings.logo | image_url: height: 72 | image_tag }}
+            {%- else -%}
+              {{ 'hero-apparel-1' | placeholder_svg_tag }}
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Logo marquee",
+    "disabled_on": {
+      "groups": ["header", "footer"]
+    },
+    "settings": [
+      {
+        "type": "range",
+        "id": "scroll_duration",
+        "label": "Scroll duration",
+        "min": 10,
+        "max": 40,
+        "step": 1,
+        "unit": "s",
+        "default": 20
+      },
+      {
+        "type": "checkbox",
+        "id": "hover_stop",
+        "label": "Stop scrolling on hover",
+        "default": false
+      },
+      {
+        "type": "color",
+        "id": "grond",
+        "label": "Achtergrond",
+        "info": "Leeg laten om de achtergrond van de pagina te gebruiken."
+      },
+      {
+        "type": "header",
+        "content": "Indent settings"
+      },
+      {
+        "type": "range",
+        "id": "desk_indent_top",
+        "label": "Indent top (desktop)",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "desk_indent_bottom",
+        "label": "Indent bottom (desktop)",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "mob_indent_top",
+        "label": "Indent top (mobile)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "mob_indent_bottom",
+        "label": "Indent bottom (mobile)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "default": 0
+      }
+    ],
+    "blocks": [
+      {
+        "type": "logo",
+        "name": "Logo",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "logo",
+            "label": "Logo"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Logo marquee",
+        "blocks": [
+          {
+            "type": "logo"
+          },
+          {
+            "type": "logo"
+          },
+          {
+            "type": "logo"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

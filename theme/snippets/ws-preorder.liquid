@@ -1,0 +1,20 @@
+{%- comment -%}
+  Geeft de leverdatum als tekst ("9 november") als dit product nu pre-order is:
+  custom.preorder_datum staat in de toekomst. Anders niets, ook na de datum,
+  zodat de pre-order vanzelf verdwijnt zodra het product weer leverbaar is.
+  Gebruik: render 'ws-preorder' met p (het product) en maanden, binnen een capture.
+  maanden = twaalf maandnamen met komma's, in de taal van de pagina.
+  vorm = hoe de datum staat, met [dag] en [maand] (Duits: "[dag]. [maand]").
+{%- endcomment -%}
+{%- assign ws_pre_d = p.metafields.custom.preorder_datum.value -%}
+{%- if ws_pre_d != blank -%}
+  {%- assign ws_pre_dag = ws_pre_d | date: '%Y%m%d' | plus: 0 -%}
+  {%- assign ws_pre_nu = 'now' | date: '%Y%m%d' | plus: 0 -%}
+  {%- if ws_pre_dag > ws_pre_nu -%}
+    {%- assign ws_pre_mnd = maanden | split: ',' -%}
+    {%- assign ws_pre_m = ws_pre_d | date: '%-m' | plus: 0 | minus: 1 -%}
+    {%- assign ws_pre_dg = ws_pre_d | date: '%-d' -%}
+    {%- assign ws_pre_mn = ws_pre_mnd[ws_pre_m] | strip -%}
+    {{- vorm | default: '[dag] [maand]' | replace: '[dag]', ws_pre_dg | replace: '[maand]', ws_pre_mn -}}
+  {%- endif -%}
+{%- endif -%}

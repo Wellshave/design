@@ -1,0 +1,134 @@
+/* Wellshave — productpagina, blok 05: in de praktijk. Letters: Inter, koppen Inter Tight (v7).
+   Elke klasse begint met ws-prk zodat thema-CSS er niet doorheen lekt. */
+.ws-prk{--p-cream:#F4F2EE;--p-brons:#B0742A;--p-gold:#E9BE72;
+  --p-ink:#14120F;--p-ink60:rgba(20,18,15,.6);--p-ink45:rgba(20,18,15,.45);
+  --p-lijn:rgba(20,18,15,.10);
+  display:block;background:var(--p-grond,#FFFFFF);
+  padding:var(--p-top,40px) clamp(12px,3vw,56px) var(--p-bot,40px);
+  font-family:'Inter',-apple-system,'Helvetica Neue',Helvetica,Arial,sans-serif}
+.ws-prk *,.ws-prk *::before,.ws-prk *::after{box-sizing:border-box}
+.ws-prk img,.ws-prk video{max-width:100%}
+/* Breed, maar niet meer paginabreed. Eerst 1000 px (te smal), daarna
+   1840 px naar Well-Shine; op 25 oktober naar het voorbeeld van Achaté
+   terug naar 1360 px: een tikkie smaller en vooral lager, zodat een rij
+   (beeld van ruim 500 px) samen met wat erboven en eronder in beeld past. */
+.ws-prk-rail{max-width:1360px;margin:0 auto}
+
+/* ---- kop ---- */
+.ws-prk-hd{text-align:center;margin:0 0 26px}
+.ws-prk-ey{display:inline-block;padding:9px 20px;border:1px solid var(--p-lijn);border-radius:999px;
+  font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--p-brons)}
+.ws-prk-hd > h2:first-child{margin-top:0}
+.ws-prk h2{margin:18px 0 0;font-family:'Inter Tight','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:clamp(23px,3.1vw,31px);font-weight:500;letter-spacing:-.022em;
+  line-height:1.18;color:var(--p-ink)}
+
+/* ---- de kaart ---- */
+/* Beeld en tekst zijn twee losse tegels met een naad van 24 px ertussen.
+   Het beeld neemt vijf dertiende, de tekst acht (naar Achaté: een vierkant
+   van ruim 500 px naast een tekstvlak van 800): zo blijft het beeld een
+   vierkant en krijgt het kleurvlak de ruimte voor het merkteken. Het
+   tekstvlak wisselt om en om van zandtint, zodat elke kaart een eigen stap
+   is en twee op rij niet als één vlak lezen. */
+.ws-prk-kaart{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,8fr);gap:24px;margin-top:24px}
+.ws-prk-kaart:first-of-type{margin-top:0}
+.ws-prk-kaart.ws-om{grid-template-columns:minmax(0,8fr) minmax(0,5fr)}
+.ws-prk-kaart.ws-om .ws-prk-md{order:2}
+
+/* ---- beeld ---- */
+/* Een vierkant, op de brede rail ruim 500 px, en nooit hoger dan 70% van
+   het scherm, zodat beeld en tekst samen in beeld zijn. */
+.ws-prk-md{position:relative;overflow:hidden;border-radius:22px;background:rgba(20,18,15,.06);
+  aspect-ratio:1/1;max-height:min(540px,70vh);width:100%}
+.ws-prk-md .ws-prk-f,.ws-prk-md .ws-prk-v{display:block;width:100%;height:100%;object-fit:cover}
+.ws-prk-md video{background:#000}
+
+/* Een etiket, geen knop: de video speelt vanzelf zodra hij in beeld komt. */
+.ws-prk-etiket{position:absolute;left:16px;bottom:16px;z-index:2;pointer-events:none;
+  display:inline-flex;align-items:center;gap:9px;
+  padding:9px 15px 9px 11px;border-radius:10px;
+  background:rgba(12,11,10,.82);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  color:#fff;font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase}
+.ws-prk-etiket i{display:grid;place-items:center;width:19px;height:19px;border-radius:50%;
+  background:#fff;color:#14120F;flex:none}
+.ws-prk-etiket i svg{width:9px;height:9px;margin-left:1px}
+
+/* Kan de video niet vanzelf starten, dan wordt het hele beeldvlak een knop
+   en groeit het etiket uit tot iets waar je op wilt drukken. */
+.ws-prk-md.ws-handmatig{cursor:pointer}
+.ws-prk-md.ws-handmatig::after{content:"";position:absolute;inset:0;z-index:1;
+  background:rgba(12,11,10,.18)}
+.ws-prk-md.ws-handmatig .ws-prk-etiket{padding:12px 19px 12px 14px;font-size:12px}
+.ws-prk-md.ws-handmatig .ws-prk-etiket i{width:24px;height:24px}
+.ws-prk-md.ws-handmatig .ws-prk-etiket i svg{width:11px;height:11px}
+.ws-prk-md.ws-handmatig:focus-visible{outline:3px solid var(--p-brons);outline-offset:-3px}
+
+/* ---- tekst ---- */
+.ws-prk-tx{position:relative;overflow:hidden;border-radius:22px;background:var(--p-zand-a,#F2EEE7);
+  padding:clamp(28px,3vw,48px) clamp(26px,4.5vw,64px);
+  display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+.ws-prk-kaart:nth-of-type(even) .ws-prk-tx{background:var(--p-zand-b,#EAE4D9)}
+.ws-prk-tx > *:not(.ws-prk-merk){max-width:30em}
+
+/* Het merkteken: groot, toon-op-toon, rechts en half over de rand. Brons op
+   5,5% leest op beide zandtinten als een tint dieper, niet als een plaatje;
+   op 7% trok het al aandacht weg van de kop. Zo ver naar rechts dat de tekst
+   links vrij blijft. Het staat onder de tekst (z-index 0) en vangt geen
+   klikken. */
+.ws-prk-merk{position:absolute;z-index:0;pointer-events:none;
+  right:-13%;top:50%;height:104%;width:auto;transform:translateY(-50%);
+  color:rgba(138,90,30,.055)}
+
+.ws-prk-kick{position:relative;z-index:1;margin:0;
+  font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--p-brons)}
+.ws-prk-kick em{font-style:normal;margin:0 6px;opacity:.55}
+.ws-prk-kick::after{content:"";display:block;width:26px;height:2px;margin-top:11px;
+  border-radius:2px;background:var(--p-gold)}
+
+.ws-prk-tx h3{position:relative;z-index:1;margin:14px 0 0;font-family:'Inter Tight','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-size:clamp(21px,2.2vw,32px);font-weight:500;letter-spacing:-.022em;line-height:1.2;
+  color:var(--p-ink);max-width:15em}
+
+.ws-prk-body{position:relative;z-index:1;margin-top:11px}
+.ws-prk-body p{margin:0;font-size:14.5px;line-height:1.65;color:rgba(20,18,15,.68);max-width:34em}
+.ws-prk-body ul{margin:19px 0 0;padding:0;list-style:none}
+.ws-prk-body li{position:relative;margin-top:11px;padding-left:28px;
+  font-size:13.5px;line-height:1.45;color:var(--p-ink)}
+.ws-prk-body li:first-child{margin-top:0}
+.ws-prk-body li::before{content:"";position:absolute;left:0;top:0;width:18px;height:18px;
+  background:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23B0742A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9.2'/%3E%3Cpath d='m8.2 12.3 2.6 2.6 5-5.4'/%3E%3C/svg%3E") no-repeat center/contain}
+.ws-prk-body ol{margin:19px 0 0;padding-left:20px;font-size:13.5px;line-height:1.5;color:var(--p-ink)}
+.ws-prk-body a{color:var(--p-brons)}
+.ws-prk-body strong{font-weight:600;color:var(--p-ink)}
+
+/* ---- telefoon ---- */
+@media (max-width: 820px) {
+  .ws-prk{padding-left:12px;padding-right:12px}
+  .ws-prk-hd{margin-bottom:20px}
+  .ws-prk h2{font-size:clamp(21px,5.6vw,26px)}
+  .ws-prk-kaart,.ws-prk-kaart.ws-om{grid-template-columns:1fr;gap:10px;margin-top:18px}
+  /* Op de telefoon staat het beeld altijd boven; om en om heeft daar geen zin. */
+  .ws-prk-kaart.ws-om .ws-prk-md{order:0}
+  .ws-prk-md{aspect-ratio:4/3;max-height:none;border-radius:18px}
+  .ws-prk-tx{padding:24px 22px 26px;border-radius:18px}
+  .ws-prk-merk{right:-18%;height:104%}
+  .ws-prk-tx h3{font-size:20px;max-width:none}
+  .ws-prk-body p{font-size:13.5px}
+  .ws-prk-etiket{left:12px;bottom:12px;padding:8px 13px 8px 9px;font-size:10px}
+
+  /* Een rij om opzij te vegen in plaats van een lange stapel. Elke kaart is
+     84% breed, zodat de rand van de volgende in beeld staat en je ziet dat
+     er meer is. De rij loopt tot de rand van het scherm. Beeld boven, tekst
+     eronder; de tekstvlakken rekken mee tot de hoogste kaart. */
+  .ws-prk-lijst{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;
+    margin:0 -12px;padding:0 12px;scroll-padding:0 12px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .ws-prk-lijst::-webkit-scrollbar{display:none}
+  .ws-prk-kaart,.ws-prk-kaart.ws-om{flex:0 0 84%;margin-top:0;scroll-snap-align:start;
+    grid-template-rows:auto 1fr}
+  .ws-prk-tx{justify-content:flex-start}
+  .ws-prk-stip{display:flex;justify-content:center;gap:6px;margin-top:16px}
+  .ws-prk-stip i{width:6px;height:6px;border-radius:3px;background:rgba(20,18,15,.16);transition:width .25s,background-color .25s}
+  .ws-prk-stip i.is-aan{width:18px;background:var(--p-brons)}
+}
+@media (min-width: 821px) {
+  .ws-prk-stip{display:none}
+}

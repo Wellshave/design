@@ -1,0 +1,154 @@
+{%- comment -%}
+  Wellshave — welk cadeau hoort bij drempel 1 of 2.
+
+  Geeft de handle terug van het cadeau dat nu echt weggegeven kan worden:
+  eerst het cadeauproduct uit de instellingen, en is dat niet op voorraad,
+  de eerste reserve (instelling gift_N_reserve) die het wel is. Leeg als er
+  niets op voorraad is; dan valt het cadeau overal weg.
+
+  Op voorraad betekent: de variant van het cadeauproduct is te koop, en het
+  echte product uit het metaveld custom.cadeau_voorraad is op voorraad. Dat
+  tweede is nodig omdat de gratis cadeauproducten (gift-…) zelf geen voorraad
+  bijhouden: zonder die koppeling stonden ze altijd op "op voorraad".
+
+  Zit het cadeau al in de bestelling (parameter al: de handles van wat er al
+  in zit, elk tussen ‹ en ›, uit custom.bevat van de pakketten), dan komt
+  eerst het vervangcadeau (gift_N_dubbel) en anders een reserve. Een cadeau
+  dat al in de bestelling zit, geven we nooit nog eens.
+
+  De winkelwagen (cart-rewards-bar) en de productpagina (ws-pdp-koopvak)
+  gebruiken allebei deze snippet, zodat wat je ziet en wat er in de
+  winkelwagen komt nooit uit elkaar lopen.
+
+  Gebruik:
+    {%- capture c1 %}{% render 'ws-cadeau', nr: 1, al: al %}{% endcapture -%}
+    {%- capture c2 %}{% render 'ws-cadeau', nr: 2, niet: c1, al: al %}{% endcapture -%}
+  niet: een handle die overgeslagen wordt (cadeau 2 is nooit hetzelfde als 1).
+  keuze: (alleen cadeau 1) de handle die de klant zelf koos, uit het
+  winkelwagenkenmerk _cadeau_1. Staat die in settings.gift_1_keuze, is hij op
+  voorraad en zit hij niet al in de bestelling, dan wint hij. Anders gewoon
+  de keuze hieronder.
+{%- endcomment -%}
+{%- liquid
+  if nr == 2
+    assign hoofd = settings.gift_2_product
+    assign reserves = settings.gift_2_reserve
+    assign dubbels = settings.gift_2_dubbel
+  else
+    assign hoofd = settings.gift_1_product
+    assign reserves = settings.gift_1_reserve
+    assign dubbels = settings.gift_1_dubbel
+  endif
+  assign overslaan = niet | strip
+  comment
+    Nooit twee cadeaus van dezelfde soort. Is het hoofdcadeau van drempel 2
+    een neustrimmer, dan komt bij drempel 1 geen neustrimmer, ook niet als
+    vervanger of reserve. Anders kreeg een bestelling met de washbag al in
+    het pakket bij 65 euro een Neustrimmer Advance en bij 90 euro nog een
+    Neustrimmer Ultimate.
+  endcomment
+  assign geen_neus = false
+  if nr != 2 and settings.gift_2_product.handle contains 'neustrimmer'
+    assign geen_neus = true
+  endif
+  assign al_in = al | default: ''
+  assign gekozen = ''
+  assign dubbel_nodig = false
+
+  if nr != 2 and keuze != blank
+    for c in settings.gift_1_keuze
+      if c.handle != keuze or c.handle == overslaan
+        continue
+      endif
+      if geen_neus and c.handle contains 'neustrimmer'
+        break
+      endif
+      assign cv = c.selected_or_first_available_variant
+      unless cv.available
+        break
+      endunless
+      assign bron = c.metafields.custom.cadeau_voorraad.value
+      if bron != blank and bron.available == false
+        break
+      endif
+      assign echt = bron.handle | default: c.handle
+      assign echt_sl = '‹' | append: echt | append: '›'
+      unless al_in contains echt_sl
+        assign gekozen = c.handle
+      endunless
+      break
+    endfor
+  endif
+
+  if hoofd != blank and gekozen == ''
+    assign cv = hoofd.selected_or_first_available_variant
+    assign neus_weg = false
+    if geen_neus and hoofd.handle contains 'neustrimmer'
+      assign neus_weg = true
+    endif
+    if cv.available and hoofd.handle != overslaan and neus_weg == false
+      assign bron = hoofd.metafields.custom.cadeau_voorraad.value
+      if bron == blank or bron.available
+        assign echt = bron.handle | default: hoofd.handle
+        assign echt_sl = '‹' | append: echt | append: '›'
+        if al_in contains echt_sl
+          assign dubbel_nodig = true
+        else
+          assign gekozen = hoofd.handle
+        endif
+      endif
+    endif
+  endif
+
+  for ronde in (1..2)
+    if gekozen != ''
+      break
+    endif
+    if ronde == 1
+      unless dubbel_nodig
+        continue
+      endunless
+      assign lijst = dubbels
+    else
+      assign lijst = reserves
+    endif
+    for c in lijst
+      assign cv = c.selected_or_first_available_variant
+      unless cv.available
+        continue
+      endunless
+      if c.handle == overslaan
+        continue
+      endif
+      if geen_neus and c.handle contains 'neustrimmer'
+        continue
+      endif
+      assign bron = c.metafields.custom.cadeau_voorraad.value
+      if bron != blank and bron.available == false
+        continue
+      endif
+      assign echt = bron.handle | default: c.handle
+      assign echt_sl = '‹' | append: echt | append: '›'
+      if al_in contains echt_sl
+        continue
+      endif
+      assign gekozen = c.handle
+      break
+    endfor
+  endfor
+
+  comment
+    Na het eindmoment uit de instellingen (gift_eind) geven we niets meer
+    weg. Leeg terug betekent overal: geen cadeau op de productpagina, geen
+    drempel in de winkelwagen, en een cadeau dat er nog in ligt gaat eruit.
+  endcomment
+  if settings.gift_eind != blank
+    assign cad_nu = 'now' | date: '%s' | plus: 0
+    assign cad_eind = settings.gift_eind | date: '%s' | plus: 0
+    if cad_eind > 0 and cad_nu >= cad_eind
+      assign gekozen = ''
+    endif
+  endif
+
+  echo gekozen
+-%}

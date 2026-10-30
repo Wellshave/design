@@ -1,0 +1,33 @@
+{%- comment -%}
+  Wellshave — sleutelreeks van een kolom in de vergelijkingstabel.
+
+  Geeft de vier voordeeltitels van een product terug, elk tussen ‹ en ›. Die
+  tekens staan er om te kunnen tellen zonder valse treffers: zonder haakjes
+  telt 'Skin-Safe mes' ook mee binnen 'Skin-Safe mes + Foil Shaver'. De titels
+  gaan door strip, zodat een spatie te veel niet leidt tot twee losse rijen
+  waar er een hoort te staan.
+
+  Gebruik: vang de uitvoer in een capture en haal er strip overheen; de
+  aanroep gaat met p: het product waarvan je de kolom wilt.
+{%- endcomment -%}
+{%- liquid
+  assign ci = p.metafields.custom.compare_info.value
+  assign uit = ''
+  if ci.advantage_1_title != blank
+    assign t = ci.advantage_1_title | strip
+    assign uit = uit | append: '‹' | append: t | append: '›'
+  endif
+  if ci.advantage_2_title != blank
+    assign t = ci.advantage_2_title | strip
+    assign uit = uit | append: '‹' | append: t | append: '›'
+  endif
+  if ci.advantage_3_title != blank
+    assign t = ci.advantage_3_title | strip
+    assign uit = uit | append: '‹' | append: t | append: '›'
+  endif
+  if ci.advantage_4_title != blank
+    assign t = ci.advantage_4_title | strip
+    assign uit = uit | append: '‹' | append: t | append: '›'
+  endif
+  echo uit
+-%}

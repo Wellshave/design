@@ -1,0 +1,65 @@
+{% comment %}
+  Wellshave v7 · productpagina: de productfilm met de kern ernaast (naar Hears).
+  Links kop, korte tekst en drie voordelen met icoon; rechts loopt de film zonder
+  geluid in een lus. Alles komt uit custom.pdp_film, een metaobject van het type
+  ws_pdp_film (film, kop, kop_goud, tekst). De voordelen zijn de eerste drie uit
+  custom.voordelen, met hun icoon. Leeg = geen sectie.
+  Donker vlak: de films zelf zijn donker, zo lopen beeld en vlak in elkaar over.
+  De film start pas als hij in beeld komt en stopt weer als hij eruit gaat; bij
+  "minder beweging" start hij niet vanzelf en krijg je de knoppen.
+{% endcomment %}
+{%- assign film = product.metafields.custom.pdp_film.value -%}
+{%- assign beeld = film.video.value -%}
+{%- if film != blank and beeld != blank -%}
+  {{ 'ws7.css' | asset_url | stylesheet_tag }}
+  {%- assign voordelen = product.metafields.custom.voordelen.value -%}
+  <div class="ws7 ws7p ws7p-wit">
+    <div class="ws7p-rail ws7p-sec">
+      <div class="ws7p-film" data-ws7p-film>
+        <div class="ws7p-film__tekst">
+          {% render 'ws7-kop', kop: film.kop, goud: film.kop_goud %}
+          {%- if film.tekst != blank -%}<p class="ws7p-film__lead">{{ film.tekst | strip | newline_to_br }}</p>{%- endif -%}
+          {%- if voordelen != blank -%}
+            <ul class="ws7p-film__vd">
+              {%- for vd in voordelen limit: 3 -%}
+                <li>
+                  <span class="ws7p-film__ic">{%- render 'ws-voordeel-icoon', icoon: vd.icoon.value, klasse: 'ws7p-film__svg' -%}</span>
+                  <b>{{ vd.kop }}</b>
+                  {%- if vd.tekst != blank -%}<span>{{ vd.tekst }}</span>{%- endif -%}
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </div>
+        <div class="ws7p-film__beeld">
+          {{ beeld | video_tag: muted: true, loop: true, playsinline: true, controls: false, preload: 'none', image_size: '1600x', class: 'ws7p-film__video' }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var v = document.querySelector('[data-ws7p-film] video');
+      if (!v) return;
+      v.muted = true;
+      if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) { v.controls = true; return; }
+      if (!('IntersectionObserver' in window)) { v.play().catch(function () {}); return; }
+      new IntersectionObserver(function (items) {
+        items.forEach(function (it) {
+          if (it.isIntersecting) { v.play().catch(function () {}); } else { v.pause(); }
+        });
+      }, { threshold: 0.25 }).observe(v);
+    })();
+  </script>
+{%- endif -%}
+{% schema %}
+{
+  "name": "WS7 · PDP film",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "paragraph", "content": "Film, kop en tekst komen uit het product: custom.pdp_film (Productpagina — film). De drie voordelen komen uit Voordelen (koopvak). Zonder film blijft de sectie weg." }
+  ],
+  "presets": [ { "name": "WS7 · PDP film" } ]
+}
+{% endschema %}

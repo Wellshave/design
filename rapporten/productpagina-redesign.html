@@ -1,0 +1,651 @@
+<title>Groom Guard PRO Teardown</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap">
+
+<style>
+:root{
+  --bg:#EDF0F1; --surface:#FFFFFF; --surface-2:#F5F7F8;
+  --ink:#11161A; --ink-2:#33424A; --muted:#5B6A71; --line:#D3DBDE; --line-2:#E4EAEC;
+  --accent:#8F6412; --accent-soft:#F3E9D4;
+  --crit:#A02B21; --crit-soft:#F7E4E2;
+  --warn:#7E5A08; --warn-soft:#F6ECD6;
+  --good:#146349; --good-soft:#DFF0E9;
+  --shadow:0 1px 2px rgba(17,22,26,.05),0 8px 24px -16px rgba(17,22,26,.28);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D1113; --surface:#151B1E; --surface-2:#1B2327;
+    --ink:#E4EAEC; --ink-2:#BCC8CD; --muted:#8D9DA4; --line:#283237; --line-2:#202A2F;
+    --accent:#D6A24A; --accent-soft:#2A2317;
+    --crit:#E88176; --crit-soft:#2E1A18;
+    --warn:#D6A24A; --warn-soft:#2A2317;
+    --good:#55C29A; --good-soft:#12271F;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -16px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D1113; --surface:#151B1E; --surface-2:#1B2327;
+  --ink:#E4EAEC; --ink-2:#BCC8CD; --muted:#8D9DA4; --line:#283237; --line-2:#202A2F;
+  --accent:#D6A24A; --accent-soft:#2A2317;
+  --crit:#E88176; --crit-soft:#2E1A18;
+  --warn:#D6A24A; --warn-soft:#2A2317;
+  --good:#55C29A; --good-soft:#12271F;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -16px rgba(0,0,0,.7);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:"Newsreader",Georgia,"Times New Roman",serif;
+  font-size:19px; line-height:1.62; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px 120px}
+.col{max-width:none}
+.prose{max-width:68ch}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;text-wrap:balance;margin:0}
+.mono{font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
+
+/* ---------- masthead ---------- */
+.mast{padding:74px 0 40px;border-bottom:1px solid var(--line)}
+.kicker{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600}
+h1{font-size:clamp(40px,6.4vw,74px);line-height:1.02;font-weight:800;letter-spacing:-.028em;margin:20px 0 0}
+.dek{max-width:60ch;margin:22px 0 0;font-size:21px;line-height:1.55;color:var(--ink-2)}
+.meta{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:34px;font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--muted)}
+.meta b{color:var(--ink);font-weight:500}
+
+/* ---------- sections ---------- */
+section{padding:64px 0 8px;border-bottom:1px solid var(--line-2)}
+section:last-of-type{border-bottom:0}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:16px}
+h2{font-size:clamp(27px,3.5vw,38px);font-weight:700;letter-spacing:-.02em;line-height:1.12}
+h3{font-size:20px;font-weight:700;letter-spacing:-.01em;margin:38px 0 12px}
+h4{font-size:15px;font-weight:700;letter-spacing:-.005em;margin:0 0 8px}
+p{margin:16px 0}
+a{color:var(--accent)}
+strong{font-weight:600;color:var(--ink)}
+.lede{font-size:21px;line-height:1.55;color:var(--ink-2)}
+
+/* ---------- verdict ---------- */
+.verdict{display:grid;grid-template-columns:minmax(0,210px) minmax(0,1fr);gap:36px;align-items:start;
+  background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:34px;margin-top:30px;box-shadow:var(--shadow)}
+.score{text-align:center;padding:20px 8px;border:1px solid var(--line);border-radius:3px;background:var(--surface-2)}
+.score .n{font-family:"Bricolage Grotesque",sans-serif;font-size:64px;font-weight:800;line-height:1;letter-spacing:-.04em;color:var(--crit);font-variant-numeric:tabular-nums}
+.score .d{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted);margin-top:8px;letter-spacing:.08em}
+.score .cap{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+.leaks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:18px}
+.leaks li{display:grid;grid-template-columns:26px 1fr;gap:14px;font-size:17.5px;line-height:1.5}
+.leaks .num{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--accent);font-weight:600;padding-top:5px}
+
+/* ---------- tables ---------- */
+.scroll{overflow-x:auto;margin:26px 0;border:1px solid var(--line);border-radius:3px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-family:"IBM Plex Mono",monospace;font-size:13.5px;min-width:600px}
+th,td{padding:12px 16px;text-align:right;border-bottom:1px solid var(--line-2);white-space:nowrap;font-variant-numeric:tabular-nums}
+th:first-child,td:first-child{text-align:left;white-space:normal}
+thead th{background:var(--surface-2);font-weight:600;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line)}
+tbody tr:last-child td{border-bottom:0}
+tr.total td{background:var(--surface-2);font-weight:600;border-top:1px solid var(--line)}
+td.bad{color:var(--crit);font-weight:600}
+td.ok{color:var(--good);font-weight:600}
+.cmp table{min-width:720px;font-size:13px}
+.cmp td,.cmp th{text-align:left;white-space:normal;vertical-align:top}
+.cmp td:first-child{font-weight:600;color:var(--muted);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+.cmp .us{background:var(--accent-soft)}
+
+.note{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted);line-height:1.6;margin:-10px 0 0;max-width:80ch}
+
+/* ---------- scorecard ---------- */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:14px;margin:28px 0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:18px 20px 20px;display:flex;flex-direction:column;gap:9px}
+.card .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.card .pill{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.card .val{font-family:"Bricolage Grotesque",sans-serif;font-size:22px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.card p{margin:0;font-size:15.5px;line-height:1.5;color:var(--ink-2)}
+.bar{height:4px;background:var(--line-2);border-radius:2px;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:2px}
+.s1 .val,.s2 .val{color:var(--crit)} .s1 .bar i,.s2 .bar i{background:var(--crit)}
+.s3 .val{color:var(--warn)} .s3 .bar i{background:var(--warn)}
+.s4 .val,.s5 .val{color:var(--good)} .s4 .bar i,.s5 .bar i{background:var(--good)}
+
+/* ---------- evidence ---------- */
+.ev{display:flex;flex-direction:column;gap:0;margin:28px 0;border:1px solid var(--line);border-radius:3px;background:var(--surface);overflow:hidden}
+.ev-row{display:grid;grid-template-columns:96px minmax(0,1fr);gap:0;border-bottom:1px solid var(--line-2)}
+.ev-row:last-child{border-bottom:0}
+.ev-tag{padding:18px 14px;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.11em;text-transform:uppercase;font-weight:600;text-align:center;display:flex;align-items:flex-start;justify-content:center;padding-top:20px}
+.ev-tag.c{background:var(--crit-soft);color:var(--crit)}
+.ev-tag.w{background:var(--warn-soft);color:var(--warn)}
+.ev-body{padding:17px 20px 19px;border-left:1px solid var(--line-2);min-width:0}
+.ev-body p{margin:7px 0 0;font-size:16px;line-height:1.5;color:var(--ink-2)}
+code{font-family:"IBM Plex Mono",monospace;font-size:13px;background:var(--surface-2);border:1px solid var(--line-2);border-radius:2px;padding:1.5px 6px;color:var(--ink);word-break:break-word}
+.quote{font-family:"IBM Plex Mono",monospace;font-size:13px;background:var(--surface-2);border-left:2px solid var(--crit);padding:9px 13px;margin:10px 0 0;color:var(--ink);overflow-x:auto;white-space:pre-wrap;word-break:break-word}
+
+/* ---------- section order ---------- */
+.orders{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:30px 0}
+.ord{background:var(--surface);border:1px solid var(--line);border-radius:3px;overflow:hidden}
+.ord>h4{padding:14px 18px;margin:0;background:var(--surface-2);border-bottom:1px solid var(--line);font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+.ord ol{list-style:none;margin:0;padding:8px 0;counter-reset:o}
+.ord li{counter-increment:o;display:grid;grid-template-columns:30px 1fr auto;gap:10px;align-items:baseline;
+  padding:7px 16px;font-family:"IBM Plex Mono",monospace;font-size:12.5px;line-height:1.45;color:var(--ink-2)}
+.ord li::before{content:counter(o);color:var(--muted);font-size:11px;font-variant-numeric:tabular-nums}
+.ord li.dead{color:var(--crit)}
+.ord li.buried{color:var(--muted)}
+.ord li.hero{color:var(--ink);font-weight:600}
+.ord li .mv{font-size:10px;letter-spacing:.06em;color:var(--accent);white-space:nowrap}
+.ord li.new .mv{color:var(--good)}
+.ord li.dead .mv{color:var(--crit)}
+.ord .buybox{padding:10px 16px;margin:6px 10px;background:var(--accent-soft);border:1px dashed var(--accent);border-radius:2px;
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:600}
+
+/* ---------- buy box spec ---------- */
+.spec{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:8px 0;margin:26px 0}
+.spec-row{display:grid;grid-template-columns:150px minmax(0,1fr);gap:20px;padding:13px 22px;border-bottom:1px solid var(--line-2);align-items:start}
+.spec-row:last-child{border-bottom:0}
+.spec-row .k{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);padding-top:4px}
+.spec-row .v{font-size:16.5px;line-height:1.5;min-width:0}
+.spec-row .v .mf{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--accent);display:block;margin-top:5px;word-break:break-word}
+.copy{font-size:17px;color:var(--ink);font-weight:500}
+
+/* ---------- priorities ---------- */
+.prio{margin:26px 0;display:flex;flex-direction:column;gap:10px}
+.p-item{display:grid;grid-template-columns:62px minmax(0,1fr) auto;gap:18px;align-items:start;
+  background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:15px 20px}
+.p-item .lvl{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;font-weight:600;padding:3px 0}
+.p1 .lvl{color:var(--crit)} .p2 .lvl{color:var(--warn)} .p3 .lvl{color:var(--muted)}
+.p-item .txt{font-size:16.5px;line-height:1.5;min-width:0}
+.p-item .txt b{display:block;font-weight:600;margin-bottom:2px}
+.p-item .txt span{color:var(--muted);font-size:15px}
+.p-item .pil{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);
+  border:1px solid var(--line);border-radius:2px;padding:3px 8px;white-space:nowrap}
+
+ul.plain{padding-left:0;list-style:none;display:flex;flex-direction:column;gap:11px;margin:18px 0}
+ul.plain li{display:block;position:relative;padding-left:28px;font-size:17px;line-height:1.52;color:var(--ink-2)}
+ul.plain li::before{content:"—";position:absolute;left:0;top:0;color:var(--accent);font-family:"IBM Plex Mono",monospace;font-size:13px;line-height:1.95}
+
+.callout{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:3px;padding:20px 24px;margin:28px 0}
+.callout h4{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);margin-bottom:9px}
+.callout p{margin:0;font-size:16.5px;line-height:1.55;color:var(--ink-2)}
+.callout p+p{margin-top:12px}
+
+@media (max-width:860px){
+  body{font-size:18px}
+  .wrap{padding:0 18px 90px}
+  .verdict{grid-template-columns:1fr;gap:24px;padding:24px}
+  .orders{grid-template-columns:1fr}
+  .spec-row{grid-template-columns:1fr;gap:6px}
+  .p-item{grid-template-columns:52px 1fr;gap:12px}
+  .p-item .pil{grid-column:2;justify-self:start;margin-top:6px}
+  .ev-row{grid-template-columns:1fr}
+  .ev-tag{justify-content:flex-start;padding:12px 20px 0;text-align:left}
+  .ev-body{border-left:0}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+
+<div class="wrap">
+
+<header class="mast">
+  <div class="kicker">Wellshave · CRO-teardown &amp; redesign</div>
+  <h1>De productpagina verkoopt niet, hij documenteert.</h1>
+  <p class="dek">De Groom Guard&nbsp;PRO doet 4,3% add-to-cart waar 8–12% normaal is. Niet omdat het aanbod zwak is — het is het sterkste van de categorie — maar omdat de pagina begint met verzendvoorwaarden en specificaties, en drie verschillende reviewaantallen toont die geen van alle kloppen.</p>
+  <div class="meta">
+    <span>Pagina&nbsp; <b>wellshave.com/products/groom-guard-pro</b></span>
+    <span>Data&nbsp; <b>Shopify, 90 dagen t/m 20 aug 2026</b></span>
+    <span>Score&nbsp; <b>18/40</b></span>
+  </div>
+</header>
+
+<section>
+  <div class="eyebrow">Het oordeel</div>
+  <h2>Drie lekken, in volgorde van geld</h2>
+  <div class="verdict">
+    <div class="score">
+      <div class="n">18</div>
+      <div class="d">/ 40</div>
+      <div class="cap">Onder 24 = veel<br>laaghangend fruit</div>
+    </div>
+    <ul class="leaks">
+      <li><span class="num mono">01</span><div><strong>De pagina is een specificatieblad.</strong> Direct onder de koopknop staan «Verzending &amp; Retourneren» en «Specificaties». Het bewijs dát het apparaat je niet snijdt — de enige vraag die deze koper heeft — staat op plek 6. Balzac en Balzy openen allebei met «Bundel &amp; Bespaar», dan reviews.</div></li>
+      <li><span class="num mono">02</span><div><strong>Het sociale bewijs staat door elkaar.</strong> De pagina claimt <code>950+ reviews</code>, de vergelijkingstabel <code>650+ reviews</code>, de bundel <code>431 reviews</code>, en Loox heeft er <strong>442</strong>. <em>Correctie, 23 augustus 2026:</em> die 950+ is geen verzinsel &mdash; dat is je <strong>Trustpilot</strong>-aantal (vandaag 966). Twee ware getallen uit twee bronnen, ongelabeld naast elkaar. Nog steeds fout voor de lezer, maar anders fout dan hier stond.</div></li>
+      <li><span class="num mono">03</span><div><strong>Je hebt het beste risico-omkeer van de categorie en verstopt het.</strong> 100 dagen proef tegen Balzac's 90 en Balzy's 30. In de winkelwagen staat het er als <code>levenslang jaar garantie</code>.</div></li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">01 — De data</div>
+  <h2>Waar het lek zit</h2>
+  <div class="prose">
+    <p>De trechter wijst precies één richting op. Van elke 100 bezoekers leggen er 4,3 iets in de mand; vanaf dat punt loopt het juist netjes door. Het lek zit vóór de winkelwagen, dus op de pagina zelf.</p>
+  </div>
+
+  <div class="scroll">
+    <table>
+      <thead><tr>
+        <th>Apparaat</th><th>Sessies</th><th>ATC</th><th>ATC-ratio</th>
+        <th>Checkout</th><th>Checkout afgerond</th><th>Aankopen</th><th>CVR</th>
+      </tr></thead>
+      <tbody>
+        <tr><td>Mobiel</td><td>36.830</td><td>1.635</td><td class="bad">4,44%</td><td>1.156</td><td class="ok">70,5%</td><td>815</td><td>2,21%</td></tr>
+        <tr><td>Desktop</td><td>9.267</td><td>349</td><td class="bad">3,77%</td><td>270</td><td class="bad">44,8%</td><td>121</td><td class="bad">1,31%</td></tr>
+        <tr><td>Tablet</td><td>769</td><td>35</td><td>4,55%</td><td>22</td><td>77,3%</td><td>17</td><td>2,21%</td></tr>
+        <tr class="total"><td>Totaal</td><td>46.889</td><td>2.019</td><td class="bad">4,31%</td><td>1.448</td><td>65,8%</td><td>953</td><td>2,03%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">Bron: Shopify-sessiedata, 90 dagen. <b>Dit is winkelbreed, niet per product</b> — Shopify meet de trechter niet per pagina. Het toont het patroon waarin deze pagina staat. AOV over dezelfde periode: €44,48 over 1.490 bestellingen (€64.601 netto).</p>
+
+  <div class="prose">
+    <h3>Wat er staat</h3>
+    <ul class="plain">
+      <li><strong>ATC 4,31% tegen een norm van 8–12%.</strong> Alles onder 5% is per definitie een productpagina-probleem, niet een verkeersprobleem. Je koopt goed verkeer en zet het op een pagina die het niet omzet.</li>
+      <li><strong>Ná de winkelwagen is het gezond.</strong> 65,8% rondt de checkout af tegen een norm van 65%+. Je checkout is niet stuk. Je hoeft daar niets aan te doen.</li>
+      <li><strong>Behalve op desktop.</strong> 44,8% tegen 70,5% op mobiel — 26 procentpunt verschil op dezelfde checkout. Desktop is 20% van je verkeer en converteert 41% slechter. Dat is een los, afgebakend defect.</li>
+    </ul>
+    <p><strong>Indicatief</strong>, te valideren met een A/B-test: ATC van 4,31% naar 6,0% — nog steeds onder de norm — is bij gelijkblijvende doorstroom circa <strong>+375 bestellingen per 90 dagen</strong>, ofwel ±€16.700. Het desktop-checkoutgat dichten naar mobiel niveau is ±69 bestellingen per 90 dagen, ofwel ±€3.100. Geen belofte; een orde van grootte.</p>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">02 — Scorecard</div>
+  <h2>Acht pijlers</h2>
+  <div class="cards">
+    <div class="card s3"><div class="top"><span class="pill">Boven de vouw</span><span class="val">3/5</span></div><div class="bar"><i style="width:60%"></i></div><p>Prijs, korting, sterren, USP's en bezorgbelofte staan er. Maar de kop is alleen de productnaam, en het reviewgetal ernaast is onjuist.</p></div>
+    <div class="card s2"><div class="top"><span class="pill">Beeld &amp; media</span><span class="val">2/5</span></div><div class="bar"><i style="width:40%"></i></div><p>13 media plus video en UGC in de metafields. Maar <b>0 van de 13</b> heeft alt-tekst; 70 van 161 <code>&lt;img&gt;</code> op de pagina heeft <code>alt=""</code>.</p></div>
+    <div class="card s2"><div class="top"><span class="pill">Copy</span><span class="val">2/5</span></div><div class="bar"><i style="width:40%"></i></div><p>De productbeschrijving is goed — mechanisme-gedreven, on-brand. Daaromheen: Lorem ipsum, een dubbele typfout in een kop, en Duits in de meta-description.</p></div>
+    <div class="card s1"><div class="top"><span class="pill">Sociaal bewijs</span><span class="val">1/5</span></div><div class="bar"><i style="width:20%"></i></div><p>Vier verschillende aantallen op één pagina, uit twee bronnen die nergens worden benoemd: Loox (442) en Trustpilot (966). Reviews staan achter de specificaties.</p></div>
+    <div class="card s2"><div class="top"><span class="pill">Vertrouwen</span><span class="val">2/5</span></div><div class="bar"><i style="width:40%"></i></div><p>100 dagen proef en 2 jaar garantie — het sterkste aanbod van de drie merken. Ondermijnd door «levenslang jaar garantie» in de winkelwagen.</p></div>
+    <div class="card s3"><div class="top"><span class="pill">Aanbod &amp; AOV</span><span class="val">3/5</span></div><div class="bar"><i style="width:60%"></i></div><p>Upsell, cart-upsell en upgradepad bestaan allemaal al. Ze staan alleen op plek 4 in plaats van plek 1. Geen abonnement op vervangmesjes.</p></div>
+    <div class="card s2"><div class="top"><span class="pill">Techniek</span><span class="val">2/5</span></div><div class="bar"><i style="width:40%"></i></div><p>797 KB HTML — 2,4× zwaarder dan Balzac (340 KB) en Balzy (325 KB). TTFB 1,2 s. Themacode lekt zichtbaar naar de pagina.</p></div>
+    <div class="card s3"><div class="top"><span class="pill">Mobiel</span><span class="val">3/5</span></div><div class="bar"><i style="width:60%"></i></div><p>Sticky koopknop aanwezig, en mobiel (78,5% van verkeer) converteert het best. Desktop is hier juist het verwaarloosde apparaat.</p></div>
+  </div>
+  <p class="note">Score per pijler 0–5 volgens het 8-pijlerraamwerk. Laadtijd is gemeten als TTFB en HTML-gewicht, niet als volledige PageSpeed-score — die kon ik hier niet draaien.</p>
+</section>
+
+<section>
+  <div class="eyebrow">03 — Bewijs</div>
+  <h2>Wat er letterlijk op de pagina staat</h2>
+  <div class="prose"><p>Alles hieronder is teruggelezen uit de ruwe HTML van de live pagina, niet uit een samenvatting. De regels tussen aanhalingstekens staan er zo.</p></div>
+
+  <div class="ev">
+    <div class="ev-row"><div class="ev-tag c">Kritiek</div><div class="ev-body">
+      <h4>De op één na best bezochte pagina van de winkel is een 404</h4>
+      <div class="quote">https://wellshave.com/en/balzam-posle-britya/
+    truefitt-hill-sandalwood-balzam-posle-britya-100...
+
+  2.637 paginaweergaven in 30 dagen   →  HTTP 404</div>
+      <p>Uit Microsoft Clarity, dat al in je Shopify-admin draait. Alleen de homepage (5.942) wordt vaker bekeken. Ik heb de URL opgevraagd en hij geeft daadwerkelijk <strong>404 Not Found</strong> terug. <code>/en/</code> is een geldige taalprefix — je hebt nl, en, de en fr gepubliceerd — dus het pad daarna is het probleem: <em>«balzam posle britya»</em> is getranslitereerd Russisch voor aftershavebalsem, en Truefitt &amp; Hill is een Brits scheermerk dat niet in je assortiment zit.</p>
+      <p>Wat het ook is — oude backlinks, een eerdere eigenaar van het domein, een verkeerd ingelezen feed — het is bijna een vijfde van je best bekeken pagina's die op een dood adres landt. Je onderhoudt wél redirects voor oude Wellshave-handles; hiervoor staat er geen. <strong>Eerste stap is niet repareren maar kijken waar het vandaan komt:</strong> filter in Clarity op deze URL en bekijk de verwijzende bronnen. Is het echt verkeer, dan is een 301 naar een relevante collectie gratis winst. Zijn het crawlers, dan weet je dat je bezoekcijfers vervuild zijn.</p>
+    </div></div>
+
+    <div class="ev-row"><div class="ev-tag c">Kritiek</div><div class="ev-body">
+      <h4>De cookiebanner ligt over het koopblok</h4>
+      <div class="quote">Clarity-klikkaart, productpagina:
+  rank  1  →  "Accepteren"   (cookiebanner)
+  rank 10  →  "Afwijzen"     (cookiebanner)
+
+Achter de modal zichtbaar: prijsregel, "BESPAAR __%",
+"Beperkte voorraad beschikbaar", "Kies een optie".</div>
+      <p>De consent-modal staat gecentreerd en dekt daarmee precies het koopblok af — prijs, kortingsbadge en de variantkeuze — bij elk eerste bezoek. Op mobiel, 78,5% van je verkeer, zal dat schermvullend zijn. Dit is geen meetartefact maar een ontwerpfout op de duurste plek van de pagina, en een serieuze kandidaat voor de ATC van 4,31%.</p>
+      <p>Een consent-banner hoort onderaan te plakken, niet over de knop die je wil laten indrukken. Dit is bovendien te repareren in de instellingen van de consent-app, zonder themawerk.</p>
+    </div></div>
+
+    <div class="ev-row"><div class="ev-tag w">Herstel</div><div class="ev-body">
+      <h4>Schaarsteclaim bij 95 stuks voorraad</h4>
+      <div class="quote">"Beperkte voorraad beschikbaar"
+Shopify totalInventory: 95 (PRO en Groom Guard)</div>
+      <p>Niet onwaar, maar niet verdiend. Jullie merklaag is streng op claims die je niet kunt nawijzen, en dit is er een: 95 stuks is geen beperkte voorraad. Zet er een echte drempel onder of haal hem weg.</p>
+    </div></div>
+
+    <div class="ev-row"><div class="ev-tag c">Kritiek</div><div class="ev-body">
+      <h4>Drie reviewaantallen, nul kloppend</h4>
+      <div class="quote">3× "4.5 / 5 van 950+ reviews"
+2× "650+ reviews"      (vergelijkingstabel)
+1× "4.6 · 431 reviews" (bundelkaart)</div>
+      <p>Loox staat op <code>num_reviews: 442</code> en <code>avg_rating: 4.6</code>; Trustpilot op <strong>966</strong> en TrustScore <strong>4,4</strong>. De 950+ is Trustpilot, maar hard ingetypt in een themablok en dus losgezongen van de werkelijke stand &mdash; en zonder erbij te zeggen dat het een ánder soort getal is dan de 442 ernaast. Jullie eigen merklaag zegt het scherper dan ik kan: <em>«Nooit een getal opschrijven dat je niet kunt nawijzen. Een bezoeker die één cijfer betrapt, gelooft de rest ook niet meer.»</em></p>
+    </div></div>
+
+    <div class="ev-row"><div class="ev-tag c">Kritiek</div><div class="ev-body">
+      <h4>Kapotte garantiebelofte in de winkelwagen</h4>
+      <div class="quote">"levenslang jaar garantie"   ← cart drawer
+"2 jaar garantie"            ← productpagina</div>
+      <p>Dit staat in de winkelwagen-lade, dus op het moment dat iemand het dichtst bij afrekenen is. Twee tegenstrijdige garanties, waarvan één grammaticaal stuk.</p>
+    </div></div>
+
+    <div class="ev-row"><div class="ev-tag c">Kritiek</div><div class="ev-body">
+      <h4>Lorem ipsum en €0,00 staan live</h4>
+      <div class="quote">4× "Lorem ipsum dolor sit amet."
+5× "0,00"</div>
+      <p>In het blok «Dit vindt je ook interresant» onderaan de pagina. Het aanbevelingsblok rendert vier lege productkaarten met plaatsvullertekst en nulprijzen. Voor een bezoeker die tot daar scrolt is dat het laatste wat hij van je ziet.</p>
+    </div></div>
+
+    <div class="ev-row"><div class="ev-tag c">Kritiek</div><div class="ev-body">
+      <h4>Themacode lekt naar de voorkant</h4>
+      <div class="quote">2× "EMPTY DOM REMOVE PROTECTOR"</div>
+      <p>Ontwikkelaarsmarkering die zichtbaar in de uitgeleverde HTML staat.</p>
+    </div></div>
+
+    <div class="ev-row"><div class="ev-tag w">Herstel</div><div class="ev-body">
+      <h4>Twee taalfouten in één sectiekop</h4>
+      <div class="quote">"Dit vindt je ook interresant"
+ →  "Dit vind je ook interessant"</div>
+    </div></div>
+
+    <div class="ev-row"><div class="ev-tag w">Herstel</div><div class="ev-body">
+      <h4>Duits in de Google-snippet</h4>
+      <div class="quote">global.description_tag:
+"… SkinSafe keramische Messgeräte, IPX7, 120 Min. Batterie …"</div>
+      <p>Dit is de tekst die Google onder de zoekresultaat-titel toont. Duitse woorden in een Nederlandse snippet kosten je doorklik vóórdat iemand de pagina ziet.</p>
+    </div></div>
+
+    <div class="ev-row"><div class="ev-tag w">Herstel</div><div class="ev-body">
+      <h4>Drie meetscripts tegelijk</h4>
+      <p>Microsoft Clarity, ContentSquare én Hotjar draaien alle drie op de pagina. Dat is drie keer betalen voor grotendeels hetzelfde inzicht, en het is een deel van de 797 KB. Kies er één — zie deel 06.</p>
+    </div></div>
+
+    <div class="ev-row"><div class="ev-tag w">Herstel</div><div class="ev-body">
+      <h4>Geen alt-tekst, nergens</h4>
+      <p>Alle 13 productmedia hebben een lege <code>alt</code>. Dat kost Google Afbeeldingen-verkeer en het maakt de pagina onbruikbaar met een schermlezer.</p>
+    </div></div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">04 — Concurrentie</div>
+  <h2>Balzac en Balzy doen één ding anders</h2>
+  <div class="prose">
+    <p>Ik heb de productpagina's van beide opgehaald en uit elkaar gehaald. Manscaped en Brothers in Style blokkeerden de fetch — die staan er dus niet in. Het opvallende is niet dat ze het beter doen; op aanbod verlies je van niemand. Ze zetten de blokken alleen in een andere volgorde.</p>
+  </div>
+
+  <div class="scroll cmp">
+    <table>
+      <thead><tr><th></th><th class="us">Wellshave · Groom Guard PRO</th><th>Balzac · Hedgeman 5.0</th><th>Balzy · BushBuster 4.0</th></tr></thead>
+      <tbody>
+        <tr><td>Prijs</td><td class="us">€59,95 <s>€85,65</s> −30%</td><td>€54,95 <s>€109,95</s> −50%</td><td>€69,99 <s>€79,99</s> −12%</td></tr>
+        <tr><td>Ondertitel</td><td class="us">Bodygroomer voor Gevoelige Zones</td><td>BODYGROOMER MANNEN</td><td>#1 BEST VERKOCHTE BODY TRIMMER VAN NEDERLAND</td></tr>
+        <tr><td>Sectie 1</td><td class="us">Verzending &amp; Retourneren</td><td>Bundel &amp; Bespaar</td><td>BUNDEL &amp; BESPAAR</td></tr>
+        <tr><td>Sectie 2</td><td class="us">Specificaties</td><td>Wat zeggen onze klanten?</td><td>DE BESTSELLER VOOR BALLS &amp; BODY</td></tr>
+        <tr><td>Sectie 3</td><td class="us">Beoordelingen</td><td>Body &amp; Balls</td><td>CONFIDENCE STARTS BELOW.</td></tr>
+        <tr><td>Proefperiode</td><td class="us"><b>100 dagen</b> — beste van de drie</td><td>90 dagen proefscheren</td><td>30 dagen</td></tr>
+        <tr><td>Garantie</td><td class="us">2 jaar <i>(+ «levenslang jaar»)</i></td><td>30 dagen retour</td><td>2 jaar</td></tr>
+        <tr><td>Sociaal bewijs</td><td class="us">950+ / 650+ / 431 <i>(Loox 442 · Trustpilot 966)</i></td><td>100.000+ mannen</td><td>200.000 mannen · 1000+ reviews</td></tr>
+        <tr><td>HTML-gewicht</td><td class="us">797 KB</td><td>340 KB</td><td>325 KB</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <h4>De les uit deze tabel</h4>
+    <p>Beide concurrenten zetten <strong>het aanbodblok op plek 1</strong> en sociaal bewijs direct daarna. Geen van beide heeft specificaties of verzendinfo in de eerste drie secties. Jij hebt precies die twee op plek 1 en 2.</p>
+    <p>En let op de vorm van hun sociale bewijs: ze tellen <em>mannen</em>, niet reviews. «200.000 mannen» is een groter, geloofwaardiger getal dan welk reviewaantal ook — en het is nawijsbaar als het op bestellingen slaat. Jullie merklaag staat dat expliciet toe, mits je erbij zet waar het getal over gaat.</p>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">05 — Het redesign</div>
+  <h2>Eén standaardvolgorde, aangedreven door de metafields die je al hebt</h2>
+  <div class="prose">
+    <p>Dit is de kern van het voorstel, en het goede nieuws over jullie metafield-architectuur: <strong>je hoeft bijna niets nieuws te vullen.</strong> Van de veertien blokken hieronder bestaan er twaalf al als metafield op het product. Wat er verandert is de <em>volgorde in het template</em> — één keer aanpassen, en elk product erft hem.</p>
+    <p>De regel die de architectuur laat werken: een leeg metafield verbergt zijn sectie. Zo houdt elk product dezelfde standaardpagina, en bepaalt de inhoud vanzelf wat er verschijnt.</p>
+  </div>
+
+  <div class="orders">
+    <div class="ord">
+      <h4>Nu — 12 blokken</h4>
+      <ol>
+        <li class="buried">Verzending &amp; Retourneren<span class="mv">logistiek</span></li>
+        <li class="buried">Specificaties<span class="mv">logistiek</span></li>
+        <li>Beoordelingen</li>
+        <li>Maak het compleet<span class="mv">= aanbod</span></li>
+        <li>Van trimmen naar glad scheren</li>
+        <li>Veilig trimmen waar het telt<span class="mv">= mechanisme</span></li>
+        <li>Zie precies waar je trimt</li>
+        <li>Gemakkelijk opladen</li>
+        <li>Waarom Wellshave de PERFECTE KEUZE is</li>
+        <li>Wat zit er in de doos?</li>
+        <li class="dead">Dit vindt je ook interresant<span class="mv">Lorem ipsum</span></li>
+        <li>Veelgestelde vragen</li>
+      </ol>
+    </div>
+    <div class="ord">
+      <h4>Voorstel — 14 blokken</h4>
+      <div class="buybox">Koopblok — herbouwd, zie hieronder</div>
+      <ol>
+        <li class="hero">Bundel &amp; Bespaar<span class="mv">was 4</span></li>
+        <li class="hero">Beoordelingen met foto's<span class="mv">was 3</span></li>
+        <li class="hero">Veilig trimmen waar het telt<span class="mv">was 6</span></li>
+        <li>Van trimmen naar glad scheren<span class="mv">was 5</span></li>
+        <li>Zie precies waar je trimt<span class="mv">was 7</span></li>
+        <li>Gemakkelijk opladen<span class="mv">was 8</span></li>
+        <li>Vergelijk de modellen<span class="mv">compare_table</span></li>
+        <li>Wat zit er in de doos<span class="mv">was 10</span></li>
+        <li>UGC-video's<span class="mv">ugc_video_list</span></li>
+        <li class="new">Wat kost het je per jaar<span class="mv">nieuw</span></li>
+        <li>Waarom Wellshave<span class="mv">was 9</span></li>
+        <li class="buried">Specificaties<span class="mv">was 2</span></li>
+        <li class="buried">Verzending &amp; Retourneren<span class="mv">was 1</span></li>
+        <li>Veelgestelde vragen<span class="mv">was 12</span></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="prose">
+    <h3>Waarom deze volgorde</h3>
+    <ul class="plain">
+      <li><strong>Aanbod eerst.</strong> «Maak het compleet» bevat al de Shave Package Ultimate-upsell met €52,85 besparing. Dat blok verdient plek 1, zoals bij allebei je concurrenten. Iemand die net op de prijs heeft gekeken is precies dán ontvankelijk voor een betere deal.</li>
+      <li><strong>Bewijs vóór uitleg.</strong> Reviews op plek 2. Sinds het besluit om op Trustpilot over te gaan zonder foto's: Trustpilot heeft ze niet. Dat is de prijs van een onafhankelijke bron.</li>
+      <li><strong>Het mechanisme naar voren.</strong> «Veilig trimmen waar het telt» beantwoordt de enige echte koopvraag bij dit product: gaat dit ding mij snijden. Dat hoort op plek 3, niet op plek 6.</li>
+      <li><strong>Specificaties en verzending naar achteren.</strong> Ze horen op de pagina — ze horen alleen niet op de plek waar de aandacht het hoogst is. Wie tot daar scrolt, is al overtuigd en zoekt bevestiging.</li>
+      <li><strong>Het aanbevelingsblok verdwijnt</strong> tot het echte producten rendert in plaats van Lorem ipsum.</li>
+    </ul>
+  </div>
+
+  <h3>Het koopblok, herbouwd</h3>
+  <div class="prose"><p>De volgorde binnen het koopblok volgt Ezra Firestone's formule: open met een klant, niet met de productnaam. In zijn tests +5% conversie en +$3,25 per bezoeker; de USP-strook direct onder de knop deed daar nog ~10% bovenop. Dat zijn zíjn testresultaten, geen garantie — maar de volgorde kost niets om over te nemen.</p></div>
+
+  <div class="spec">
+    <div class="spec-row"><div class="k">1 · Citaat</div><div class="v">Eén korte klantzin, boven de titel.<span class="mf">nieuw → custom.buybox_quote + custom.buybox_quote_author</span></div></div>
+    <div class="spec-row"><div class="k">2 · Titel</div><div class="v">Groom Guard™ PRO<span class="mf">product.title</span></div></div>
+    <div class="spec-row"><div class="k">3 · Belofte</div><div class="v"><span class="copy">«Vergevend genoeg voor je gevoeligste plekken. Ook als je niet precies bent.»</span><span class="mf">nieuw → custom.hero_promise</span></div></div>
+    <div class="spec-row"><div class="k">4 · Sterren</div><div class="v">Trustpilot-logo · TrustScore 4,4 · 966 reviews — <strong>live uit de Trustpilot-widget</strong>, winkelbreed en op elk product hetzelfde.<span class="mf">business unit 63c511d4e1339e2200c204a1</span></div></div>
+    <div class="spec-row"><div class="k">5 · Prijs</div><div class="v">€59,95 · <s>€85,65</s> · Bespaar 30%<span class="mf">variant.price + compare_at_price</span></div></div>
+    <div class="spec-row"><div class="k">6 · USP's</div><div class="v">De vijf bestaande bullets, ongewijzigd.<span class="mf">custom.product_usp</span></div></div>
+    <div class="spec-row"><div class="k">7 · Knop</div><div class="v">IN WINKELWAGEN — volle breedte, contrasterende kleur.</div></div>
+    <div class="spec-row"><div class="k">8 · Risicostrook</div><div class="v"><span class="copy">100 dagen thuis proberen · 2 jaar garantie · Voor 23:59 besteld = morgen in huis</span><span class="mf">nieuw → custom.risk_strip (list) · vervangt losse shipping_information</span></div></div>
+  </div>
+
+  <div class="callout">
+    <h4>Het citaat kan ik niet voor je schrijven</h4>
+    <p>Slot 1 vraagt om een echte klantzin. Die staat er inmiddels: <em>«Erg fijne trimmer die z’n werk goed doet (…) zeker een aanrader dus als je zonder pijn en gedoe je lichaamshaar wil verwijderen!»</em> — Yven, vijf sterren op Trustpilot, 8 juli 2026, opgehaald via de widget-API. Verzin er nooit een; de merklaag verbiedt precies dat.</p>
+  </div>
+
+  <h3>Het enige echt nieuwe blok</h3>
+  <div class="prose">
+    <p><strong>«Wat kost het je per jaar»</strong> — een eerlijke vergelijking van de vervangmesjes. Jullie VoC-dossier noemt verborgen vervangkosten bij de concurrentie een terugkerende dealbreaker, en volgens de merklaag is dit het meest onderbenutte argument dat je hebt. De cijfers liggen er al: jullie foil-vervanging is €14,95, Balzac vraagt €14,95–19,95 per mesje of 3-pack, Balzy €15,00–19,95. Reken het voor over een jaar en laat de bezoeker zelf de som zien.</p>
+    <p>Dit is ook het blok dat het abonnement rechtvaardigt (P3): een verbruiksartikel van €14,95 zonder herhaalaankoop-route laat marge liggen.</p>
+  </div>
+
+  <h3>Wat je in Shopify moet aanmaken</h3>
+  <div class="prose">
+    <ul class="plain">
+      <li><code>custom.buybox_quote</code> — single_line_text_field</li>
+      <li><code>custom.buybox_quote_author</code> — single_line_text_field</li>
+      <li><code>custom.hero_promise</code> — single_line_text_field</li>
+      <li><code>custom.risk_strip</code> — list.single_line_text_field</li>
+      <li><code>custom.yearly_cost</code> — metaobject_reference (voor het jaarkostenblok)</li>
+      <li>Vervallen: het hardgecodeerde reviewgetal in de themasectie — vervangen door een binding op de Trustpilot-widget. Ook «Zie onze 800+ reviews op» in de sectie <code>trustpilot_reviews</code>: dat waren er op 23 augustus 966.</li>
+    </ul>
+    <p>Vier tekstvelden en één metaobject. De overige twaalf blokken draaien op metafields die al gevuld zijn — <code>product_usp</code>, <code>image_with_text</code>, <code>compare_table</code>, <code>included_box</code>, <code>ugc_video_list</code>, <code>specification</code>, <code>faq</code>, <code>store_usp</code>, <code>upgrade</code>, <code>cart_upsell</code>.</p>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">06 — Gedragsdata koppelen</div>
+  <h2>De connector is aangezet. Vier van de vijf vragen bleven dicht.</h2>
+  <div class="prose">
+    <p><strong>Clarity, ContentSquare én Hotjar draaien alle drie op de pagina</strong> — ik vond <code>clarity.ms/tag/</code> in de uitgeleverde HTML, naast de andere twee. Er wordt dus al gemeten; er werd alleen niet naar gekeken. Deel 01 tot en met 05 komen uit Shopify-analytics en de ruwe HTML, dus zonder gedragsdata. Dat was de grootste blinde vlek van dit rapport.</p>
+    <p>Op 21 augustus is de ContentSquare-connector aangezet en heb ik de meting gedraaid. Wat eruit kwam staat hieronder — maar het bruikbaarste deel is wat er <em>niet</em> uit kwam.</p>
+  </div>
+
+  <div class="callout">
+    <h4>Correctie op de eerste versie van dit deel</h4>
+    <p>Hier stond «Route A — ContentSquare, aanbevolen», met de zin <em>«Je betaalt al voor ContentSquare; dit is het gebruiken.»</em> Dat was onjuist. Het account staat op <strong>«Trial ended»</strong>: de proefperiode is afgelopen en het project is teruggevallen op de gratis laag — 19,03K van 200K sessies, teller reset 30 augustus. De features die tijdens de proef werkten, zijn precies de features die nu geweigerd worden. De vier tools die hier werden aangeprezen — <code>computeFunnel</code>, <code>getTopPageGroupsByLostConversions</code>, <code>getTopPagesBySessionsWithErrors</code> en <code>getTopErrorsByImpactOnGoal</code> — zijn alle vier onbruikbaar op dit project. Route B was al die tijd de hoofdroute.</p>
+  </div>
+
+  <div class="prose">
+    <h3>Waar het op vastliep</h3>
+    <ul class="plain">
+      <li><strong>Er is geen enkele paginagroep aangemaakt, en die kán er ook niet komen.</strong> <code>searchMappings</code>, <code>recommendMappings</code> en <code>recommendPageGroups</code> geven alle drie een lege lijst terug — mappings zitten pas vanaf Growth in het abonnement. Scrolldiepte, trechter, journey en paginavergelijking eisen stuk voor stuk een <code>mappingId</code>. Zonder mapping kan ContentSquare geen enkele uitspraak over een specifieke pagina doen — ook niet over de PDP.</li>
+      <li><strong>Er zijn geen conversiedoelen ingesteld.</strong> <code>searchGoals</code> is leeg. De twee tools die verloren conversies aan fouten koppelen, eisen allebei een <code>goalId</code>.</li>
+      <li><strong>Error Analysis zit niet in het abonnement.</strong> Letterlijk: <em>«Access denied to Error Analysis metrics.»</em> De JS-/API-foutsplitsing per apparaat is daarmee onbereikbaar sinds de proef afliep. Dit is dus een aankoopbeslissing, geen permanente muur.</li>
+      <li><strong>Frustration Score evenmin.</strong> Zelfde weigering. Dat was de enige route naar rage clicks binnen ContentSquare.</li>
+      <li><strong>Het project staat op <code>isEcommerce: false</code>.</strong> Omzet, transacties en winkelwagenwaarde blijven daardoor leeg. Dit is een instelling bij het taggen, geen abonnementskwestie — ook los van de proef te herstellen.</li>
+    </ul>
+    <p>En los van het abonnement: <strong>rage clicks, dead clicks, quickbacks en klikkaarten zitten helemaal niet in het API-oppervlak van ContentSquare.</strong> Dat is zoning-analyse in de interface. Ook op een betaald plan waren vraag 2, 3 en 5 hierlangs niet te beantwoorden. Die aanname klopte niet.</p>
+  </div>
+
+  <div class="prose">
+    <h3>Wat er wél binnenkwam</h3>
+    <p>Sitemetrics zijn basismetrics en die werken wel. 22 dagen, 18.837 sessies — het volledige datavenster dat na de proef nog bewaard wordt.</p>
+  </div>
+
+  <div class="scroll">
+    <table>
+      <thead><tr>
+        <th>Platform</th><th>Sessies</th><th>Bounce</th><th>Pagina's/sessie</th><th>Sessieduur</th>
+      </tr></thead>
+      <tbody>
+        <tr><td>Android</td><td>8.410</td><td>72,9%</td><td>1,67</td><td>105 s</td></tr>
+        <tr><td>iOS</td><td>5.305</td><td class="bad">82,5%</td><td>1,57</td><td>85 s</td></tr>
+        <tr><td>Windows</td><td>2.539</td><td>77,2%</td><td>1,75</td><td>106 s</td></tr>
+        <tr><td>Mac OS</td><td>948</td><td class="ok">72,8%</td><td class="ok">2,20</td><td class="ok">283 s</td></tr>
+        <tr><td>Linux</td><td>1.200</td><td class="bad">94,7%</td><td>1,13</td><td>12 s</td></tr>
+        <tr><td>Cloud</td><td>365</td><td class="bad">98,6%</td><td>1,02</td><td>9 s</td></tr>
+        <tr><td>Overig</td><td>70</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr class="total"><td>Totaal</td><td>18.837</td><td>—</td><td>—</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">Bron: ContentSquare <code>computeSiteMetrics</code>, project 955088, 30 juli – 20 augustus 2026. Dit zijn platformen, geen apparaten.</p>
+
+  <div class="prose">
+    <p>Mac OS springt eruit: 2,20 pagina's en 283 seconden, ruim drie keer zo lang als iOS. Dat lijkt de desktop-these van deel 01 te bevestigen — mensen die dieper kijken maar niet kopen zitten ergens vast. <strong>Die conclusie houdt geen stand.</strong> Uitgesplitst naar browser, alleen desktop:</p>
+  </div>
+
+  <div class="scroll">
+    <table>
+      <thead><tr>
+        <th>Desktopbrowser</th><th>Sessies</th><th>Aandeel</th><th>Bounce</th><th>Pagina's/sessie</th><th>Sessieduur</th>
+      </tr></thead>
+      <tbody>
+        <tr><td>Chrome</td><td>3.068</td><td>80,2%</td><td>78,0%</td><td>1,77</td><td>142 s</td></tr>
+        <tr><td>Edge</td><td>360</td><td>9,4%</td><td>73,3%</td><td>1,90</td><td>156 s</td></tr>
+        <tr><td>Safari</td><td>244</td><td>6,4%</td><td class="ok">61,1%</td><td class="ok">2,65</td><td class="ok">208 s</td></tr>
+        <tr><td>Firefox</td><td>118</td><td>3,1%</td><td>71,2%</td><td>1,80</td><td>133 s</td></tr>
+        <tr><td>Opera</td><td>18</td><td>0,5%</td><td class="bad">88,9%</td><td>1,11</td><td>6 s</td></tr>
+        <tr class="total"><td>Totaal</td><td>3.824</td><td>100%</td><td>—</td><td>—</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">Inclusief 16 sessies van virusscanners en prefetch-bots (Norton, AVG, Avast, CCleaner), hier niet apart uitgesplitst.</p>
+
+  <div class="callout">
+    <h4>Het diepe bezoek zit volledig in Safari, en Safari is 6% van desktop</h4>
+    <p><strong>Chrome is 80% van je desktopverkeer en gedraagt zich volstrekt gewoon</strong> — 78% bounce, 1,77 pagina's, 142 seconden. Het engagement-patroon van Mac OS kan de 44,8% checkout-afronding dus niet verklaren; het geldt voor een zesde van het verkeer.</p>
+    <p>De meting bevestigt de desktop-defectthese van deel 01 <em>niet</em>. Ze weerlegt hem ook niet — zonder conversiedoel is er geen conversie per browser te meten. Wat er wél uit volgt is bruikbaar: <strong>filter die tien opnames op Chrome desktop.</strong> Daar zit het volume en dus het geld. Ga geen Safari-edge-case jagen.</p>
+  </div>
+
+  <div class="prose">
+    <h3>Er zit botverkeer in de cijfers</h3>
+    <p>Linux (1.200) plus Cloud (365) is <strong>8,3% van de sessies met 95–99% bounce en ongeveer tien seconden</strong>. Dat is geen publiek. Shopify filtert dat er grotendeels uit, ContentSquare niet: over dezelfde 22 dagen telt ContentSquare 3.824 desktopsessies waar Shopify er ongeveer 2.265 zou tellen — ruim 60% meer. <strong>Leg de twee datasets nooit naast elkaar.</strong> De trechter in deel 01 blijft Shopify; deze tabellen blijven ContentSquare.</p>
+  </div>
+
+  <div class="callout">
+    <h4>Scrolldiepte is te meten, maar niet via de API</h4>
+    <p>De page-group-metrics (<code>scrollRate</code>, <code>pageHeight</code>, <code>foldHeight</code>) zijn onbereikbaar omdat er nul paginagroepen bestaan — en die zijn er niet omdat <strong>mappings pas vanaf Growth in het abonnement zitten</strong>. Op het gratis plan toont Analysis setup alleen Segments en MCP. Via de API is deze vraag dus dicht, en daar valt niets aan te configureren.</p>
+    <p><strong>Maar de vraag zelf is gewoon te beantwoorden.</strong> Scrolldiepte zit in <strong>Heatmaps</strong>, en Heatmaps zit wél in het gratis plan: Heatmaps → New Heatmap → de URL van de PRO → type «Scroll», apart voor mobiel en desktop. De map tekent een lijn «AVERAGE FOLD» en geeft bij hover het percentage bezoekers dat een bepaalde hoogte haalt. Dat is directer dan één gemiddeld getal uit de API — je leest het per blok af.</p>
+  </div>
+
+  <div class="prose">
+  </div>
+
+  <div class="callout">
+    <h4>Session Replay en Heatmaps staan in je eigen ContentSquare-interface</h4>
+    <p>Wat via de API onbereikbaar is, zit wél in de linkernavigatie van het account: <strong>Session Replay</strong>, <strong>Heatmaps</strong> (zoning, dus klikkaarten) en <strong>Voice of customer</strong>. Vraag 4 en 5 — de desktop-opnames en de klikkaart van het koopblok — zijn daarmee mogelijk gewoon te beantwoorden in de tool die al op je pagina staat, met de 19.030 sessies die er al in zitten. Dat is een kortere weg dan een Clarity-token aanvragen.</p>
+    <p><strong>Bevestigd in het plan-overzicht:</strong> Heatmaps en Session Replay (10K replays per maand) zitten in het gratis plan, samen met funnels, dashboards en de MCP-koppeling. Route B via Clarity is daarmee voor vraag 4 en 5 niet meer nodig — alleen quickbacks (vraag 3) hebben nog een Clarity-token nodig.</p>
+  </div>
+
+  <div class="prose">
+    <h3>Route B — Clarity Data Export API</h3>
+    <p><code>scripts/clarity-pdp-insights.py</code> staat klaar in deze repo. Ik heb geverifieerd dat het endpoint vanuit deze omgeving bereikbaar is; het wacht alleen op een token. Maak er een aan via <strong>Clarity → Instellingen → Data&nbsp;Export → Generate new API token</strong> (alleen projectbeheerders), zet hem als <code>CLARITY_API_TOKEN</code> in de omgeving — <strong>niet in de repo</strong> — en draai het script.</p>
+    <p>De API levert <strong>geaggregeerde cijfers, geen opnames en geen klikkaarten</strong>. Maximaal 10 verzoeken per project per dag, en <strong>alleen de laatste 1 tot 3 dagen</strong>. Wil je een reeks opbouwen, dan moet het script op een cron. De metrics die je krijgt, per dimensie <code>URL</code>, <code>Device</code>, <code>Browser</code>, <code>Source</code>, <code>Medium</code>, <code>Campaign</code>, <code>Channel</code>, <code>OS</code> of <code>Country/Region</code>: Scroll Depth, Engagement Time, Traffic, Popular Pages, Dead Click Count, Rage Click Count, Quickback Click, Excessive Scroll, Script Error Count en Error Click Count.</p>
+    <p>De officiële <code>@microsoft/clarity-mcp-server</code> is inmiddels wél als connector te installeren in de Claude-desktopapp, met het token in de instellingen — dat is getest en het werkt. Hij draait daar lokaal via <code>npx</code>, en dat is meteen de beperking: <strong>een remote Claude Code-sessie kan er niet bij</strong>, want die draait in een container elders. Vragen aan Clarity stel je dus in de desktopapp, niet in een webscessie.</p>
+    <p>Let ook op de rolverdeling. De Data Export API levert <em>getallen</em> — scrolldiepte, rage clicks, quickbacks — over maximaal de laatste 1 tot 3 dagen. De <em>scrollkaart en klikkaart zelf</em> zitten alleen in de Clarity-interface, en die kijkt wel 30 dagen terug. Voor de vraag «waar komt dat 404-verkeer vandaan» is de interface daarom de betere bron; voor een reeks over tijd is het de API.</p>
+    <p><code>scripts/contentsquare-pdp-insights.py</code> staat er ook, maar vereist de Export API en die zit pas vanaf Growth. Laat staan voor later.</p>
+
+    <h3>De vijf vragen, en waar ze nu vandaan komen</h3>
+    <ul class="plain">
+      <li><strong>Scrolldiepte op de PDP, mobiel/desktop gesplitst.</strong> <em>ContentSquare Heatmaps — zit in het gratis plan, kan vandaag.</em> Dit toetst de hele redesign-these direct: haalt iemand plek 6 überhaupt? Ligt de mediaan onder de 50%, dan is het mechanismeblok effectief onzichtbaar en is het naar voren halen een reparatie, geen smaakkwestie. Begin hier.</li>
+      <li><strong>Rage clicks en dead clicks.</strong> <em>De Clarity-API — of visueel in ContentSquare Heatmaps.</em> Met name op de vergelijkingstabel, de gallerij-thumbnails en het kapotte aanbevelingsblok. Dead clicks op productkaarten met €0,00 zou het vermoeden hard maken.</li>
+      <li><strong>Quick-backs op de PDP.</strong> <em>Alleen de Clarity-API.</em> Wie binnen enkele seconden terugklikt, kreeg iets anders dan de advertentie beloofde. Dat toetst of het eerste beeld matcht met de creative.</li>
+      <li><strong>Desktop-opnames van sessies die de checkout bereikten maar niet afrondden.</strong> <em>Session Replay in ContentSquare, anders de Clarity-interface — zit in geen van beide API's.</em> Dit is de gerichtste vraag in de lijst: 44,8% tegen 70,5% is een defect, geen voorkeur. <strong>Filter op Chrome desktop</strong> — 80% van het verkeer. Tien opnames laten waarschijnlijk in vijf minuten zien wát er stukgaat.</li>
+      <li><strong>Klikkaart van het koopblok.</strong> <em>Heatmaps/zoning in ContentSquare, anders de Clarity-interface — zit in geen van beide API's.</em> Hoeveel mensen openen «Verzending &amp; Retourneren» en «Specificaties» op plek 1 en 2 werkelijk? Als dat laag is, kost die plaatsing je alleen maar ruimte.</li>
+    </ul>
+
+    <h3>En kies één meettool</h3>
+    <p>De meting maakt die keuze concreet. <strong>ContentSquare draait mee in je 797 KB met nul mappings, nul doelen, ecommerce uit en de twee interessantste featuresets buiten het abonnement.</strong> Het levert op dit moment letterlijk niets op en kost wel laadtijd. Dat is geen smaakoordeel meer maar een vaststelling: eruit, of binnen een dag configureren. Volgens Chappell kost elke extra seconde ongeveer 7% van je conversie.</p>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">07 — Volgorde van werken</div>
+  <h2>Prioriteiten</h2>
+  <div class="prose"><p>P1 is bijna volledig tekst en instellingen — geen ontwikkelwerk, wel het herstel van de reden om je te geloven. Doe dit eerst, en doe het los, zodat je het effect van het redesign daarna schoon kunt meten.</p></div>
+
+  <div class="prio">
+    <div class="p-item p1"><span class="lvl mono">P1</span><span class="txt"><b>Cookiebanner van het koopblok af</b><span>Nu gecentreerd over prijs en variantkeuze bij elk eerste bezoek. Naar onderaan verplaatsen — instelling in de consent-app, geen themawerk.</span></span><span class="pil">Boven de vouw · Techniek</span></div>
+    <div class="p-item p1"><span class="lvl mono">P1</span><span class="txt"><b>Uitzoeken waar die 2.637 404-weergaven vandaan komen</b><span>De op één na best bezochte pagina van de winkel bestaat niet. Begin in Clarity bij de verwijzende bronnen, niet bij een redirect.</span></span><span class="pil">Techniek · Verkeer</span></div>
+    <div class="p-item p1"><span class="lvl mono">P1</span><span class="txt"><b>Eén reviewgetal, live uit Trustpilot</b><span>950+ / 650+ / 431 / 442 vervangen door TrustScore 4,4 · 966, gebonden aan de widget in plaats van ingetypt. Loox, Judge.me en Shopify-reviews gaan eruit.</span></span><span class="pil">Sociaal bewijs</span></div>
+    <div class="p-item p1"><span class="lvl mono">P1</span><span class="txt"><b>«levenslang jaar garantie» repareren</b><span>In de winkelwagen-lade. Overal «2 jaar garantie», één formulering.</span></span><span class="pil">Vertrouwen</span></div>
+    <div class="p-item p1"><span class="lvl mono">P1</span><span class="txt"><b>Lorem ipsum-blok uitzetten</b><span>Repareer het aanbevelingsblok of verberg het. Nu toont het vier lege kaarten met €0,00.</span></span><span class="pil">Copy · Techniek</span></div>
+    <div class="p-item p1"><span class="lvl mono">P1</span><span class="txt"><b>«EMPTY DOM REMOVE PROTECTOR» verwijderen</b><span>Twee keer zichtbaar in de uitgeleverde HTML.</span></span><span class="pil">Techniek</span></div>
+    <div class="p-item p1"><span class="lvl mono">P1</span><span class="txt"><b>«Dit vindt je ook interresant» → «Dit vind je ook interessant»</b><span>Twee fouten in vier woorden, in een sectiekop.</span></span><span class="pil">Copy</span></div>
+    <div class="p-item p1"><span class="lvl mono">P1</span><span class="txt"><b>Duits uit de meta-description</b><span>«Messgeräte», «120 Min. Batterie» in <code>global.description_tag</code>. Dit is je Google-snippet.</span></span><span class="pil">Copy · SEO</span></div>
+    <div class="p-item p1"><span class="lvl mono">P1</span><span class="txt"><b>Alt-teksten op alle 13 productmedia</b><span>Nu allemaal leeg. Beschrijf wat er te zien is, niet de productnaam herhalen.</span></span><span class="pil">Beeld</span></div>
+
+    <div class="p-item p2"><span class="lvl mono">P2</span><span class="txt"><b>De sectievolgorde omzetten</b><span>Het template één keer aanpassen volgens deel 05. Elk product erft de nieuwe volgorde.</span></span><span class="pil">Boven de vouw · Aanbod</span></div>
+    <div class="p-item p2"><span class="lvl mono">P2</span><span class="txt"><b>Koopblok openen met een klantcitaat + risicostrook onder de knop</b><span>Vier nieuwe metafields aanmaken en vullen.</span></span><span class="pil">Vertrouwen</span></div>
+    <div class="p-item p2"><span class="lvl mono">P2</span><span class="txt"><b>Desktop-checkout uitzoeken</b><span>44,8% tegen 70,5% op mobiel. Tien Clarity-opnames van afgebroken desktop-checkouts, gefilterd op Chrome — 80% van je desktopverkeer.</span></span><span class="pil">Mobiel/desktop</span></div>
+    <div class="p-item p2"><span class="lvl mono">P2</span><span class="txt"><b>Foto's van klanten, buiten het reviewsysteem om</b><span>Trustpilot heeft geen foto's. Wil je ze toch — en een getal overtuigt inderdaad minder dan een foto — dan komen ze uit UGC (blok 10), niet uit een tweede reviewwidget.</span></span><span class="pil">Sociaal bewijs</span></div>
+
+    <div class="p-item p3"><span class="lvl mono">P3</span><span class="txt"><b>Jaarkostenblok bouwen</b><span>Eerlijke vervangmesjes-vergelijking. Onderbenut argument volgens je eigen VoC-dossier.</span></span><span class="pil">Copy · Aanbod</span></div>
+    <div class="p-item p3"><span class="lvl mono">P3</span><span class="txt"><b>Abonnement op vervangmesjes</b><span>€14,95 verbruiksartikel zonder herhaalroute.</span></span><span class="pil">AOV · LTV</span></div>
+    <div class="p-item p3"><span class="lvl mono">P3</span><span class="txt"><b>HTML van 797 KB terugbrengen</b><span>Begin met één meettool in plaats van drie. Doel: onder 400 KB, het niveau van je concurrenten.</span></span><span class="pil">Techniek</span></div>
+    <div class="p-item p3"><span class="lvl mono">P3</span><span class="txt"><b>A/B-test op kortingsdiepte</b><span>Jij −30%, Balzac −50% vanaf een hoger ankerpunt. Test percentage tegen absoluut bedrag.</span></span><span class="pil">Aanbod</span></div>
+  </div>
+
+  <div class="callout">
+    <h4>Eén verandering per test</h4>
+    <p>De verleiding is om P1 en P2 samen uit te rollen. Doe dat niet: dan weet je achteraf niet of de winst uit het herstelde vertrouwen kwam of uit de nieuwe volgorde. P1 is bovendien geen test — kapotte tekst repareer je gewoon.</p>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Verantwoording</div>
+  <h2>Waar deze cijfers vandaan komen</h2>
+  <div class="prose">
+    <ul class="plain">
+      <li><strong>Trechter en AOV:</strong> Shopify-analytics, 90 dagen tot 20 augustus 2026. Winkelbreed, niet per product — Shopify meet sessies niet per pagina.</li>
+      <li><strong>Paginabevindingen:</strong> ruwe HTML van <code>wellshave.com/products/groom-guard-pro</code>, 797.334 bytes, opgehaald op 20 augustus 2026. Elk citaat is een letterlijke tekstvondst.</li>
+      <li><strong>Metafields:</strong> Shopify Admin API — 33 metafields op de PRO.</li>
+      <li><strong>Paginaweergaven en de 404:</strong> Microsoft Clarity, laatste 30 dagen, afgelezen in de Shopify-admin op 23 augustus 2026. De 404-status is apart geverifieerd met een verzoek aan de URL zelf.</li>
+      <li><strong>Omzet per product:</strong> Shopify-analytics, 90 dagen. De PRO is met €8.826 netto over 199 bestellingen je grootste product; de gewone Groom Guard doet €6.168 over <em>meer</em> bestellingen (215) tegen een lagere prijs.</li>
+      <li><strong>Concurrentie:</strong> live HTML van <code>balzac.nl/products/the-hedgeman-5-0</code> en <code>balzy.nl/products/bushbuster-4-0</code>. Manscaped (403) en Brothers in Style (certificaatfout) waren niet bereikbaar.</li>
+      <li><strong>Normen:</strong> ATC 8–12%, CVR 2–4%, checkout 65%+. Genoemde uplifts zijn testresultaten van Firestone en Chappell bij andere winkels — indicatief, geen voorspelling voor Wellshave.</li>
+      <li><strong>Gedragsdata:</strong> ContentSquare-connector, project 955088, 30 juli – 20 augustus 2026 (het volledige venster dat na het aflopen van de proefperiode nog bewaard wordt). Alleen sitemetrics — paginaniveau, fouten en frustratiescore waren niet beschikbaar; zie deel 06. <b>Niet te vergelijken met de Shopify-cijfers:</b> ContentSquare filtert botverkeer niet en telt over dezelfde periode ruim 60% meer desktopsessies.</li>
+      <li><strong>Nog steeds niet gemeten:</strong> scrolldiepte, rage clicks, quickbacks, klikkaarten, volledige PageSpeed-score, weergave op een echt mobiel toestel.</li>
+    </ul>
+  </div>
+</section>
+
+</div>

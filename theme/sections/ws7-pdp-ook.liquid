@@ -1,0 +1,66 @@
+{% comment %}
+  Wellshave v7 · productpagina: "Past goed bij je …", met de productkaart van de homepage.
+  De lijst stelt zichzelf samen uit het product: eerst custom.pdp_addons, dan
+  custom.pdp_bundels, dan custom.upgrade_products. Dubbel, uitverkocht en het product
+  zelf vallen weg. Blijft er niets over, dan komt de sectie er niet.
+{% endcomment %}
+{%- assign mf = product.metafields.custom -%}
+{%- assign gezien = '‹' | append: product.id | append: '›' -%}
+{%- assign n = 0 -%}
+{%- assign max = section.settings.aantal | default: 6 -%}
+{%- capture kaarten -%}
+  {%- for bron in (1..3) -%}
+    {%- liquid
+      if bron == 1
+        assign lijst = mf.pdp_addons.value
+      elsif bron == 2
+        assign lijst = mf.pdp_bundels.value
+      else
+        assign lijst = mf.upgrade_products.value
+      endif
+    -%}
+    {%- for p in lijst -%}
+      {%- if n >= max -%}{%- break -%}{%- endif -%}
+      {%- assign sl = '‹' | append: p.id | append: '›' -%}
+      {%- if gezien contains sl -%}{%- continue -%}{%- endif -%}
+      {%- assign gezien = gezien | append: sl -%}
+      {%- unless p.available -%}{%- continue -%}{%- endunless -%}
+      {%- assign n = n | plus: 1 -%}
+      {%- assign wat = p.metafields.custom.compare_info.value.toggle_subtitle | default: p.metafields.custom.voordelen.value.first.kop.value -%}
+      {% render 'ws7-kaart', product: p, wat: wat, label: section.settings.label %}
+    {%- endfor -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- if n > 0 -%}
+  {{ 'ws7.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'ws7.js' | asset_url }}" defer></script>
+  <div class="ws7 ws7p">
+    <div class="ws7p-rail ws7p-sec">
+      <div class="ws7-midden">
+        {%- assign goud = section.settings.kop_goud | replace: '[product]', product.title -%}
+        {% render 'ws7-kop', kop: section.settings.kop, goud: goud %}
+        {%- if section.settings.sub != blank -%}<p class="ws7-sub ws7p-sub">{{ section.settings.sub }}</p>{%- endif -%}
+        <div class="ws7-schuif">
+          <div class="ws7-rij">{{ kaarten }}</div>
+          {% render 'ws7-voortgang' %}
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+{% schema %}
+{
+  "name": "WS7 · PDP past goed bij",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "paragraph", "content": "Uit het product: pdp_addons, dan pdp_bundels, dan upgrade_products." },
+    { "type": "text", "id": "kop", "label": "Kop", "default": "Past goed" },
+    { "type": "text", "id": "kop_goud", "label": "Kop, regel in goud", "info": "[product] wordt de productnaam.", "default": "bij je [product]." },
+    { "type": "text", "id": "sub", "label": "Regel eronder" },
+    { "type": "text", "id": "label", "label": "Woord achter het percentage", "default": "Korting" },
+    { "type": "range", "id": "aantal", "label": "Hoeveel kaarten", "min": 2, "max": 10, "step": 1, "default": 6 }
+  ],
+  "presets": [ { "name": "WS7 · PDP past goed bij" } ]
+}
+{% endschema %}

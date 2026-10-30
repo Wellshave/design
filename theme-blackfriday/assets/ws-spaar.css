@@ -1,0 +1,164 @@
+/* ═══ Wellshave — het kortingslabel ═══
+   Eén vorm voor de hele winkel: een pil met een gouden waas en een gouden
+   letter, strak om het getal heen. Bewust géén volle gouden vulling — die is
+   voorbehouden aan wat je kunt aanklikken, zodat niemand op het label probeert
+   te drukken. En bewust geen icoontje: het label staat naast de prijs, en daar
+   telt elke pixel breedte.
+
+   Twee huiden, verder identiek: licht voor de witte kaarten, donker voor
+   de zwarte vlakken. Alles wat een blok er zelf omheen wil (marge, uitlijning
+   naast de prijs, een glans bij hover) staat in de css van dat blok, niet hier. */
+.ws-spaar{display:inline-flex;align-items:center;padding:4px 9px;
+  border-radius:100px;color:#8F6428;
+  background:linear-gradient(135deg,rgba(245,209,138,.42) 0%,rgba(188,129,62,.18) 100%);
+  font-size:11px;font-weight:700;letter-spacing:.02em;
+  line-height:1;white-space:nowrap;font-variant-numeric:tabular-nums}
+.ws-spaar--donker{color:#F5D18A;
+  background:linear-gradient(135deg,rgba(245,209,138,.22) 0%,rgba(245,209,138,.09) 100%)}
+
+/* Op een telefoon staan de kaarten met z'n tweeën op een rij en is de prijsregel
+   nog geen 135px breed. "27% Korting" naast "79,95" én "109,95" vraagt 161px —
+   dat past niet, en kleiner zetten haalt het ook niet: met alles op de rand van
+   leesbaar bleef er 153px nodig. Wat wél past: de nieuwe prijs krijgt zijn eigen
+   regel, en de van-prijs en het label staan er samen onder. Dan is de breedste
+   regel 128px, staat het label nog steeds naast een prijs, en blijft het woord
+   staan. Deze regels horen bij het label en niet bij de kaarten, daarom staan ze
+   hier: zonder label zou geen van de drie blokken ze nodig hebben. */
+@media (max-width:749px){
+  .ws-spaar{padding:3px 7px;font-size:10px}
+
+  /* collectiepagina — de prijs en de van-prijs zitten daar in één omhulsel,
+     dat moet dus eerst oplossen in de rij zelf. De selectors dragen .wsc mee
+     omdat ws-collectie.css dat ook doet: zonder die klasse verliezen deze
+     regels de cascade van gelijke specificiteit, en gebeurt er niets. */
+  .wsc .wsk-prijsrij{gap:4px 7px;align-items:center}
+  .wsc .wsk-prijsrij .wsk-prijs{display:contents}
+  .wsc .wsk-prijsrij .wsk-prijs b{flex:0 0 100%}
+
+  /* homepage — de sets en de bestsellers */
+  .ws-bn__prijs .ws-bn__nu{flex:0 0 100%}
+  .ws-bs__prijs .ws-bs__nu{flex:0 0 100%}
+}
+
+/* ═══ Herfst Sale: het menulabel en de badge op de kaarten ═══
+   Allebei een pil, net als het kortingslabel hierboven. Het menulabel is
+   roest met crème, dezelfde kleuren als de aanbodbalk op de productpagina.
+   De badge op de kaart is bewust zacht: crème met roest, zodat hij de gouden
+   kortingspil naast de prijs niet naar de achtergrond drukt.
+   Contrast: crème op roest minstens 6,2:1, roest op crème 7,5:1. */
+
+/* In het menu, achter HERFST SALE. Het menu heeft weinig lucht: onder de
+   1320px brak "HERFST SALE" met het label erbij over twee regels. Daarom
+   worden label en tussenruimte smaller onder de 1400px. Onder de 1240px is
+   het menu zonder label al krap; daar hangt het label als klein stickertje
+   rechtsboven het woord en neemt het geen breedte in. */
+.ws-menu-badge{display:inline-flex;align-items:center;margin-left:6px;padding:4px 7px;border-radius:100px;
+  font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;line-height:1;white-space:nowrap;
+  color:#F5D18A;background:#111}
+@media screen and (max-width:1399px){
+  .header__menu:has(.ws-menu-badge){gap:16px}
+  .ws-menu-badge{margin-left:4px;padding:3px 6px;font-size:9px;letter-spacing:.04em}
+}
+@media screen and (max-width:1239px){
+  .header__menu:has(.ws-menu-badge){gap:24px}
+  .ws-menu-badge{position:absolute;right:-14px;top:-15px;margin:0;padding:3px 5px;font-size:8px;letter-spacing:.04em;pointer-events:none}
+}
+
+/* Op de kaart, linksboven op de foto. Staat daar al een lint (Bestseller,
+   Nieuw), dan schuift de badge eronder. Het vergelijkvinkje en het oog staan
+   op de onderrand en zitten dus niet in de weg. */
+.ws-herfst-badge{position:absolute;z-index:2;top:12px;left:12px;display:inline-flex;align-items:center;gap:5px;
+  font-size:9.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;line-height:1;
+  padding:5px 10px 5px 7px;border-radius:100px;white-space:nowrap;pointer-events:none;
+  color:#8A3614;background:rgba(255,248,240,.94);border:1px solid rgba(145,67,19,.22)}
+.ws-herfst-badge svg{width:11px;height:11px;flex:none;color:#B4561C}
+/* de collectiepagina zet de binnenruimte van alles op nul (.wsc *); hier terug */
+.wsc .ws-herfst-badge{padding:5px 10px 5px 7px}
+.wsk-tag ~ .ws-herfst-badge,.ws-bs__tag ~ .ws-herfst-badge{top:44px}
+/* de algemene productkaart zet zijn labels in een rij; daar loopt de badge mee */
+.product-card__tags .ws-herfst-badge{position:static}
+/* kleine kaarten, zelfde maat als het lint ernaast */
+@container (max-width:700px){
+  .wsc .ws-herfst-badge{top:8px;left:8px;gap:4px;font-size:8px;letter-spacing:.1em;padding:4px 8px 4px 6px}
+  .wsc .ws-herfst-badge svg{width:9px;height:9px}
+  .wsc .wsk-tag ~ .ws-herfst-badge{top:35px}
+}
+@media (max-width:749px){
+  .ws-bs__shot .ws-herfst-badge{top:8px;left:8px}
+  .ws-bs__tag ~ .ws-herfst-badge{top:35px}
+  .ws-bs__shot .ws-herfst-badge,.product-card__tags .ws-herfst-badge{gap:4px;font-size:8px;letter-spacing:.1em;padding:4px 8px 4px 6px}
+  .ws-bs__shot .ws-herfst-badge svg,.product-card__tags .ws-herfst-badge svg{width:9px;height:9px}
+}
+
+/* De sticker: het beeld in plaats van de tekstpil. Klein genoeg om de foto
+   niet af te dekken, groot genoeg om op te vallen. Iets scheef, zoals een
+   sticker die erop is geplakt. "html" ervoor wint van de regels hierboven. */
+html .ws-herfst-badge.ws-herfst-badge--beeld{padding:0;border:0;background:none;border-radius:0;
+  width:72px;top:6px;left:6px;transform:rotate(-8deg);filter:drop-shadow(0 3px 5px rgba(70,22,6,.28))}
+html .ws-herfst-badge--beeld img{display:block;width:100%;height:auto;position:static}
+html .wsk-tag ~ .ws-herfst-badge--beeld,html .ws-bs__tag ~ .ws-herfst-badge--beeld{top:40px}
+html .product-card__tags .ws-herfst-badge--beeld{width:64px;margin:-4px 0 0 -4px}
+@container (max-width:700px){
+  html .wsc .ws-herfst-badge.ws-herfst-badge--beeld{width:52px;top:4px;left:4px}
+  html .wsc .wsk-tag ~ .ws-herfst-badge--beeld{top:30px}
+}
+@media (max-width:749px){
+  html .ws-bs__shot .ws-herfst-badge--beeld,html .product-card__tags .ws-herfst-badge--beeld{width:52px}
+  html .ws-bs__shot .ws-herfst-badge.ws-herfst-badge--beeld{top:4px;left:4px}
+  html .ws-bs__tag ~ .ws-herfst-badge--beeld{top:30px}
+}
+
+/* De bestseller-sticker: vervangt elk lint met Best verkocht of Bestseller.
+   Rechtsboven op de foto, zodat hij nooit botst met de Herfst Sale-sticker
+   linksboven. Het vergelijkvinkje en het oog staan op de onderrand. */
+.ws-bestseller-sticker{position:absolute;z-index:3;top:8px;right:8px;width:100px;pointer-events:none;
+  transform:rotate(4deg);filter:drop-shadow(0 3px 5px rgba(0,0,0,.28))}
+.ws-bestseller-sticker img{display:block;width:100%;height:auto;position:static}
+/* homepage: staat rechtsboven al een keurmerk, dan gaat de sticker naar rechtsonder */
+.ws-bs__shot:has(.ws-bs__zegel) .ws-bestseller-sticker{top:auto;bottom:10px}
+@container (max-width:700px){
+  .wsc .ws-bestseller-sticker{width:72px;top:6px;right:6px}
+}
+@media (max-width:749px){
+  .ws-bs__shot .ws-bestseller-sticker,.product-card__media-wrapper .ws-bestseller-sticker{width:72px;top:6px;right:6px}
+}
+
+/* De klok bij de cadeaus: in de winkelwagen onder de cadeaubalk en op de
+   productpagina in het cadeaublok. Brons op licht, 5,1:1. */
+.ws-cadeau-klok{display:inline-flex;align-items:center;gap:6px;margin:6px 0 0;font-size:12px;font-weight:600;
+  color:#8A5A1E;font-variant-numeric:tabular-nums;letter-spacing:.01em}
+.ws-cadeau-klok::before{content:"";width:7px;height:7px;border-radius:50%;background:#C8281F;flex:none}
+.ws-cadeau-klok[hidden]{display:none}
+.cart-drawer__achivements .ws-cadeau-klok{display:flex;margin:4px 0 16px}
+.ws-tiers .ws-cadeau-klok{display:flex;margin:0 0 10px}
+
+/* ═══ Black Friday: rode accenten ═══
+   Alleen met Thema-instellingen > Black Friday > Rode accenten (klasse ws-bf
+   op body). Rood op alles wat over de actie gaat; het goud blijft het merk.
+   Twee tinten: #C8281F op licht (5,4:1 op wit), #FF5A4F op donker (5,9:1 op
+   #171614). Het kortingslabel krijgt witte letters op #B3261E (6,4:1). */
+.ws-bf .ws-bf-rood,.ws-bf .announcement__label em{color:#FF5A4F;font-weight:700;font-style:normal}
+.ws-bf .ws-menu-badge{background:#C8281F;color:#fff}
+
+/* koppen en banners die op Black Friday-accent staan */
+.ws-bf .ws-bf-accent .ws7-oog,.ws-bf .wsc .ws-bf-accent .eyebrow{color:#FF5A4F}
+.ws-bf .ws-bf-accent .ws7-goud,.ws-bf .wsc .ws-bf-accent .duo .b{background-image:linear-gradient(135deg,#FF7A6B,#FF4A3D 45%,#E0281C);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:#FF5A4F}
+.ws-bf .ws-bf-accent .ws7-link{background-image:linear-gradient(90deg,#FF5A4F,#E0281C);border-bottom-color:#FF5A4F}
+.ws-bf .ws-bf-accent .ws7-link svg{color:#FF5A4F}
+.ws-bf .ws7-hero.ws-bf-accent .ws7-hero__groot,.ws-bf .ws7-ban.ws-bf-accent{box-shadow:inset 0 -3px 0 #E0281C}
+
+/* kortingslabels op de kaarten en op de productpagina */
+.ws-bf .ws-spaar{color:#C8281F;background:linear-gradient(135deg,rgba(230,28,28,.13) 0%,rgba(200,40,31,.07) 100%)}
+.ws-bf .wsc .ws-spaar,.ws-bf .ws-bs__save{background:#C8281F;color:#fff}
+.ws-bf .ws-spaar--donker{color:#FF5A4F;background:rgba(255,90,79,.14)}
+.ws-bf .ws-pdp-grid .ws-besp,.ws-bf .ws-besp{background:#B3261E}
+.ws-bf .ws-besp span{color:#fff}
+
+/* de aanbodbalk op de productpagina */
+.ws-bf .ws-gift--blackfriday{border-color:rgba(255,90,79,.55);box-shadow:0 12px 22px -16px rgba(0,0,0,.8),inset 3px 0 0 #E0281C}
+.ws-bf .ws-gift--blackfriday b strong,.ws-bf .ws-gift--blackfriday b b{color:#FF5A4F}
+.ws-bf .ws-gift--blackfriday .ws-gift-klok{color:#FF5A4F;font-weight:700}
+
+/* de klok bij de cadeaus */
+.ws-bf .ws-cadeau-klok{color:#C8281F}

@@ -1,0 +1,15 @@
+/* Alia-label ("Mystery Korting") als smal lipje tegen de linkerrand, zoals bij Hears:
+   staand, tekst van onder naar boven, op ongeveer driekwart van de schermhoogte, ruim
+   boven de vaste koopbalk van de productpagina.
+   Alia zet het label zelf als brede strook rechts midden in beeld, over de foto en het
+   koopvak. Alleen het label wordt geraakt (dan staat er rotate(90deg) op de root van
+   Alia); de geopende popup blijft zoals Alia hem maakt. */
+[id^="alia-root-"][style*="rotate(90deg)"]{left:0!important;top:74vh!important;bottom:auto!important;
+  transform:rotate(-90deg)!important;transform-origin:left top!important}
+[id^="alia-root-"][style*="rotate(90deg)"] button{width:auto!important;height:auto!important;min-height:0!important;
+  padding:8px 16px!important;font-size:12.5px!important;font-weight:600!important;line-height:1.2!important;
+  letter-spacing:.02em!important;background:#111!important;color:#fff!important;border:0!important;
+  border-radius:0 0 14px 14px!important;gap:7px!important;
+  box-shadow:0 0 0 1px rgba(255,255,255,.14),0 8px 20px -10px rgba(17,17,17,.5)!important}
+[id^="alia-root-"][style*="rotate(90deg)"] button *{color:inherit!important}
+[id^="alia-root-"][style*="rotate(90deg)"] button svg{width:12px!important;height:12px!important;color:#F5D18A!important}

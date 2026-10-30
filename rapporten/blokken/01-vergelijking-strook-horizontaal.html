@@ -1,0 +1,195 @@
+<title>Horizontaal of verticaal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap">
+<style>
+:root{
+  --ink:#111;--ink-80:rgba(17,17,17,.8);--ink-60:rgba(17,17,17,.6);--ink-40:rgba(17,17,17,.4);
+  --ink-10:rgba(17,17,17,.10);--paper:#fff;--sand:#F5F1EA;--sand-deep:#EDE6DA;
+  --carbon:#0B0B0A;--gold:#F5D18A;--bronze:#BC813E;--alert:#E61C1C;
+  --w72:rgba(255,255,255,.72);--w40:rgba(255,255,255,.4);
+  --gline:rgba(245,209,138,.16);--gline-2:rgba(245,209,138,.4);
+  --grad-cta:linear-gradient(135deg,#F5D18A 0%,#D8AC5D 52%,#BC813E 100%);
+  --grad-gold-tekst:linear-gradient(100deg,#B0742A 0%,#8C5A1A 100%);
+  --r-m:18px;--rail:1140px;--read:660px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--sand);color:var(--ink);
+  font-family:"Montserrat",-apple-system,BlinkMacSystemFont,Arial,sans-serif;font-size:16.5px;line-height:1.7}
+.wrap{max-width:var(--rail);margin:0 auto;padding:0 24px 100px}
+h1,h2,h3{margin:0;text-wrap:balance;font-weight:900;letter-spacing:-.025em;line-height:1.06}
+.duo{font-size:clamp(25px,3.6vw,38px)}
+.duo .b{display:block;color:#B0742A}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+ .duo .b{background-image:var(--grad-gold-tekst);-webkit-background-clip:text;background-clip:text;
+   -webkit-text-fill-color:transparent;color:transparent}}
+.eyebrow{font-weight:800;letter-spacing:.2em;text-transform:uppercase;font-size:10.5px;color:var(--ink-40)}
+.mast{padding:60px 0 28px;border-bottom:2px solid var(--ink)}
+.mast h1{font-size:clamp(31px,4.9vw,50px);margin:13px 0 0}
+.mast .lede{max-width:var(--read);margin:17px 0 0;font-size:17.5px;color:var(--ink-80);line-height:1.6}
+section{padding:48px 0 0}
+.shead{display:flex;align-items:baseline;gap:13px;margin-bottom:6px}
+.snum{font-weight:800;font-size:11px;letter-spacing:.18em;color:var(--bronze);white-space:nowrap}
+.sintro{max-width:var(--read);color:var(--ink-80);margin:15px 0 0}
+
+/* drie varianten naast elkaar */
+.vars{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:28px 0 0;align-items:start}
+.var{min-width:0}
+.vhead{display:flex;align-items:baseline;gap:9px;margin-bottom:11px}
+.vhead .lt{font-family:inherit;font-weight:900;font-size:13px;color:var(--bronze)}
+.vhead .nm{font-weight:800;font-size:13.5px;letter-spacing:-.01em}
+.vsub{font-size:12.5px;line-height:1.45;color:var(--ink-60);margin:0 0 12px;min-height:36px}
+.frame{border-radius:20px;overflow:hidden;background:var(--carbon);
+  box-shadow:0 1px 3px rgba(17,17,17,.07),0 16px 36px -26px rgba(17,17,17,.5)}
+.buy{padding:14px 15px 0}
+.cta{display:block;text-align:center;background:var(--grad-cta);color:#111;border-radius:100px;
+  padding:13px;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  box-shadow:0 0 22px -6px rgba(245,209,138,.42)}
+.cta2{display:block;text-align:center;margin-top:8px;border:1px solid rgba(255,255,255,.34);
+  border-radius:100px;padding:12px;color:#fff;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+/* A: risicostrook die omslaat */
+.riskA{display:flex;flex-wrap:wrap;gap:5px 12px;margin:11px 0 14px;justify-content:center}
+.riskA span{font-size:9.5px;font-weight:600;color:var(--w40);display:flex;align-items:center;gap:5px}
+.riskA i{width:3.5px;height:3.5px;border-radius:50%;background:var(--gold);flex:none}
+/* B: risicostrook op een regel */
+.riskB{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin:11px 0 14px;
+  border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08)}
+.riskB span{font-size:8.5px;font-weight:700;color:var(--w40);text-align:center;padding:8px 3px;line-height:1.25}
+.riskB span + span{border-left:1px solid rgba(255,255,255,.08)}
+/* strook verticaal */
+.strV{background:var(--carbon);border-top:1px solid var(--gline);padding:4px 16px 12px}
+.strV > div{display:flex;align-items:center;gap:13px;padding:12px 0}
+.strV > div + div{border-top:1px solid rgba(255,255,255,.1)}
+.zg{width:38px;height:38px;flex:none;border-radius:50%;border:1px solid var(--gline-2);
+  display:flex;align-items:center;justify-content:center;color:var(--gold)}
+.zg svg{width:16px;height:16px}.zg b{font-size:11.5px;font-weight:700}
+.strV .tx b{display:block;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.strV .tx span{font-size:11px;color:var(--w40);line-height:1.35}
+/* strook horizontaal */
+.strH{background:var(--carbon);border-top:1px solid var(--gline);padding:14px 10px 16px;
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.strH > div{display:flex;flex-direction:column;align-items:center;text-align:center;gap:7px;padding:0 6px}
+.strH > div + div{border-left:1px solid rgba(255,255,255,.1)}
+.strH .zg{width:32px;height:32px}.strH .zg svg{width:14px;height:14px}.strH .zg b{font-size:10.5px}
+.strH .tx b{display:block;font-size:8.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);line-height:1.25}
+.strH .tx span{font-size:9px;color:var(--w40);line-height:1.3;display:block;margin-top:2px}
+.meas{margin-top:10px;display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;color:var(--ink-60)}
+.meas .bar{height:5px;border-radius:100px;background:var(--bronze);flex:none}
+.meas .bar.b2{background:#C99A4E}.meas .bar.b3{background:#2E6B3E}
+/* notes */
+.note{margin:24px 0 0;border-radius:var(--r-m);padding:19px 23px;background:var(--paper);
+  border:1px solid var(--ink-10);border-left:3px solid var(--bronze)}
+.note.win{background:#E5EBE1;border-left-color:#2E6B3E;border-color:transparent}
+.note.warn{background:#F7EBD3;border-left-color:#A8761B;border-color:transparent}
+.note h4{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--bronze);margin-bottom:8px}
+.note.win h4{color:#2E6B3E}.note.warn h4{color:#8C5A1A}
+.note p{margin:0;font-size:15.5px;line-height:1.6;color:var(--ink-80)}
+.note p+p{margin-top:10px}
+.note q{display:block;margin:11px 0 0;padding-left:14px;border-left:2px solid var(--bronze);
+  font-style:italic;font-size:15px;color:var(--ink-60);line-height:1.55}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.86em;background:var(--sand-deep);border-radius:4px;padding:1.5px 6px}
+strong{font-weight:700}
+.foot{margin-top:50px;padding-top:22px;border-top:1px solid var(--ink-10);font-size:13px;color:var(--ink-60);line-height:1.75}
+@media (max-width:900px){.vars{grid-template-columns:1fr;max-width:390px}}
+</style>
+<div class="wrap">
+<header class="mast">
+  <div class="eyebrow">Blok 01 &middot; vergelijking &middot; onderkant van het koopblok op 390px</div>
+  <h1>Horizontaal<br>of verticaal</h1>
+  <p class="lede">Je omcirkelde twee dingen, en ze zeggen hetzelfde. Daarom staan er drie varianten in plaats van twee: horizontaal m&eacute;t de dubbeling, en horizontaal z&oacute;nder. Alle drie op 390px, vanaf de koopknop naar beneden.</p>
+</header>
+
+<section>
+  <div class="shead"><span class="snum">DRIE</span><h2 class="duo">Zelfde inhoud,<span class="b">drie hoogtes.</span></h2></div>
+  <p class="sintro">Boven de vouw is verticale ruimte de enige valuta die telt. Elke pixel die de garantiestrook inneemt, krijgt het bewijsblok eronder niet. De hoogtes onder elke variant zijn gemeten op 390px, niet geschat.</p>
+
+  <div class="vars">
+
+    <div class="var">
+      <div class="vhead"><span class="lt">A</span><span class="nm">Nu</span></div>
+      <p class="vsub">Risicostrook slaat om naar twee regels, strook staat verticaal gestapeld.</p>
+      <div class="frame" id="fA">
+        <div class="buy">
+          <span class="cta">In winkelwagen &mdash; &euro;59,95</span>
+          <span class="cta2">Vergelijk de modellen</span>
+          <div class="riskA">
+            <span><i></i>100 dagen thuis proberen</span>
+            <span><i></i>2 jaar garantie</span>
+            <span><i></i>Voor 23:59 = morgen in huis</span>
+          </div>
+        </div>
+        <div class="strV">
+          <div><span class="zg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.6l7.2 2.8v6.1c0 4.4-3 8.4-7.2 9.9-4.2-1.5-7.2-5.5-7.2-9.9V5.4z"/><path d="M8.7 12.1l2.3 2.3 4.3-4.6"/></svg></span><span class="tx"><b>100 dagen proberen</b><span>Niet goed? Geld terug.</span></span></div>
+          <div><span class="zg"><b>2</b></span><span class="tx"><b>2 jaar garantie</b><span>Kwaliteit waarop je kunt vertrouwen.</span></span></div>
+          <div><span class="zg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M1.9 6.2h12.2v9.4H1.9zM14.1 9.7h3.9l3.1 3.1v2.8h-7z"/><circle cx="6.6" cy="18" r="1.9"/><circle cx="17.3" cy="18" r="1.9"/></svg></span><span class="tx"><b>Morgen in huis</b><span>Vandaag besteld, morgen in huis.</span></span></div>
+        </div>
+      </div>
+      <div class="meas"><span class="bar" style="width:100%"></span><span>356&nbsp;px</span></div>
+    </div>
+
+    <div class="var">
+      <div class="vhead"><span class="lt">B</span><span class="nm">Horizontaal</span></div>
+      <p class="vsub">Allebei op &eacute;&eacute;n rij: risicostrook in drie kolommen, strook met het icoon boven de tekst.</p>
+      <div class="frame" id="fB">
+        <div class="buy">
+          <span class="cta">In winkelwagen &mdash; &euro;59,95</span>
+          <span class="cta2">Vergelijk de modellen</span>
+          <div class="riskB">
+            <span>100 dagen<br>proberen</span>
+            <span>2 jaar<br>garantie</span>
+            <span>Morgen<br>in huis</span>
+          </div>
+        </div>
+        <div class="strH">
+          <div><span class="zg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.6l7.2 2.8v6.1c0 4.4-3 8.4-7.2 9.9-4.2-1.5-7.2-5.5-7.2-9.9V5.4z"/><path d="M8.7 12.1l2.3 2.3 4.3-4.6"/></svg></span><span class="tx"><b>100 dagen</b><span>Niet goed? Geld terug.</span></span></div>
+          <div><span class="zg"><b>2</b></span><span class="tx"><b>2 jaar garantie</b><span>Op elk apparaat.</span></span></div>
+          <div><span class="zg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M1.9 6.2h12.2v9.4H1.9zM14.1 9.7h3.9l3.1 3.1v2.8h-7z"/><circle cx="6.6" cy="18" r="1.9"/><circle cx="17.3" cy="18" r="1.9"/></svg></span><span class="tx"><b>Morgen in huis</b><span>Voor 23:59 besteld.</span></span></div>
+        </div>
+      </div>
+      <div class="meas"><span class="bar b2" style="width:75.3%"></span><span>268&nbsp;px &middot; <b style="color:#2E6B3E">&minus;88</b></span></div>
+    </div>
+
+    <div class="var">
+      <div class="vhead"><span class="lt">C</span><span class="nm">Horizontaal, zonder dubbeling</span></div>
+      <p class="vsub">De regel onder de knoppen weg, alleen de strook. Dit is wat je homepage al besloot.</p>
+      <div class="frame" id="fC">
+        <div class="buy" style="padding-bottom:14px">
+          <span class="cta">In winkelwagen &mdash; &euro;59,95</span>
+          <span class="cta2">Vergelijk de modellen</span>
+        </div>
+        <div class="strH">
+          <div><span class="zg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.6l7.2 2.8v6.1c0 4.4-3 8.4-7.2 9.9-4.2-1.5-7.2-5.5-7.2-9.9V5.4z"/><path d="M8.7 12.1l2.3 2.3 4.3-4.6"/></svg></span><span class="tx"><b>100 dagen</b><span>Niet goed? Geld terug.</span></span></div>
+          <div><span class="zg"><b>2</b></span><span class="tx"><b>2 jaar garantie</b><span>Op elk apparaat.</span></span></div>
+          <div><span class="zg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M1.9 6.2h12.2v9.4H1.9zM14.1 9.7h3.9l3.1 3.1v2.8h-7z"/><circle cx="6.6" cy="18" r="1.9"/><circle cx="17.3" cy="18" r="1.9"/></svg></span><span class="tx"><b>Morgen in huis</b><span>Voor 23:59 besteld.</span></span></div>
+        </div>
+      </div>
+      <div class="meas"><span class="bar b3" style="width:61.2%"></span><span>218&nbsp;px &middot; <b style="color:#2E6B3E">&minus;138</b></span></div>
+    </div>
+
+  </div>
+
+  <div class="note warn">
+    <h4>Wat je omcirkelde is twee keer hetzelfde</h4>
+    <p>De regel onder de knoppen zegt «100 dagen thuis proberen &middot; 2 jaar garantie &middot; voor 23:59 = morgen in huis». De strook eronder zegt «100 dagen proberen &middot; 2 jaar garantie &middot; morgen in huis». Woordelijk dezelfde drie beloftes, binnen tweehonderd pixels.</p>
+    <p>Dat is geen nieuwe ontdekking &mdash; het staat al in je eigen homepage-document, bij blok 1:</p>
+    <q>De drie losse USP's onder de knoppen zijn eruit, zoals je vroeg. Ze zeiden letterlijk hetzelfde als de strook eronder &mdash; dus je las hetzelfde twee keer binnen 200 pixels. De strook wint omdat daar ruimte is voor een onderregel: &laquo;Niet goed? Geld terug&raquo; doet meer dan &laquo;100 dagen proberen&raquo; alleen.</q>
+    <p>Ik had die regel op de productpagina laten staan. Dat was inconsequent met wat er op de homepage al besloten is.</p>
+  </div>
+
+  <div class="note win">
+    <h4>Mijn advies: C</h4>
+    <p>Horizontaal is de goede beweging &mdash; drie kolommen lezen sneller dan drie regels en schelen hoogte. Maar het echte probleem is niet de richting, het is dat je hetzelfde twee keer zegt.</p>
+    <p>C houdt de belofte compleet, met de onderregel die de strook zijn waarde geeft, en wint <strong>138 pixels</strong> op A &mdash; dat is bijna veertig procent van dit blok, en op een scherm van 844 pixels is dat zichtbaar. B wint er 88 en is dus een echte verbetering, maar houdt de dubbeling in stand en dwingt de onderregels tot afkortingen die C niet nodig heeft.</p>
+  </div>
+
+  <div class="note">
+    <h4>Wat horizontaal kost aan tekst</h4>
+    <p>Op 390px is elke kolom ongeveer 119 pixels breed. «Kwaliteit waarop je kunt vertrouwen» past daar niet in twee regels, dus die is in B en C ingekort naar «Op elk apparaat» en «Voor 23:59 besteld». Dat is de prijs van horizontaal, en hij is te betalen &mdash; maar het is een keuze, geen bijkomstigheid.</p>
+    <p>Op desktop blijft de strook staan zoals hij is: icoon n&aacute;&aacute;st de tekst, volledige onderregels, drie kolommen met haarlijnen. Daar is de ruimte er wel.</p>
+  </div>
+</section>
+
+<div class="foot">
+  <strong>Gemeten, niet geschat.</strong> De hoogtes onder elke variant zijn de werkelijk gerenderde hoogte van dat blok op 390px, uitgelezen na het renderen. <strong>Herkomst.</strong> Componentwaarden uit <code>ws-hero.css</code> in het testthema (id 204178161996). Het citaat komt uit <code>audits/blok-01-hero.template.html</code> op de tak <code>claude/homepage-analysis-redesign-u38dwu</code>.
+</div>
+</div>
