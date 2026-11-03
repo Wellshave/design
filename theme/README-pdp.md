@@ -3021,3 +3021,20 @@ Friday-aanpassingen erover. De bestanden die afwijken staan in
   18 november 08:00 staat een geplande taak die ze terugzet op "niet verkopen bij 0".
   Klaviyo-template "WS | Flow | Pre-order bevestiging | levering 18 nov" (RgZZ5L)
   voor een flow op Placed Order; de flow zelf wordt in Klaviyo met de hand aangezet.
+
+## Pre-order: "bestel nu, levering 18–21 november" (3 november, v9 en BF-thema)
+
+* Nieuw productmetaveld `custom.preorder_tot` (datum, "Pre-order: levering tot en
+  met"). Staat het naast `custom.preorder_datum`, dan maakt snippet `ws-preorder`
+  er een periode van: "18–21 november" (Duits "18.–21. November"); over twee
+  maanden heen "30 november – 2 december". Gezet op 21 november voor alle 9
+  pre-orderproducten (Barber Bro 1/2/3, Barber Pack 1/2/3, Tondeuse Deluxe,
+  Sharpline, Flex-line Bundel).
+* Teksten zeggen nu dat je nú bestelt en wanneer het komt: leverregel "Pre-order |
+  bestel nu, levering 18–21 november", keuzekaart "Pre-order · levering 18–21
+  november", winkelwagen en bestelling "Levering: Pre-order · 18–21 november".
+  Vertaald in en/de/fr.
+* Klaviyo-template RgZZ5L ("WS | Flow | Pre-order bevestiging | levering 18-21 nov")
+  zegt nu "we bezorgen tussen 18 en 21 november".
+* Live (v8) heeft dit pas na publiceren van v9: het hoofdthema kan via de API
+  niet worden aangepast.
