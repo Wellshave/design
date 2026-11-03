@@ -3038,3 +3038,11 @@ Friday-aanpassingen erover. De bestanden die afwijken staan in
   zegt nu "we bezorgen tussen 18 en 21 november".
 * Live (v8) heeft dit pas na publiceren van v9: het hoofdthema kan via de API
   niet worden aangepast.
+
+## Herfst Sale een week langer: t/m dinsdag 10 november (3 november)
+
+* Live: metaobject limited_offer "voorjaar-sale" (`popup_subtitle`) zegt nu "Tot en met
+  dinsdag 10 november, zolang de voorraad strekt"; en/de/fr stonden nog op "Summer
+  Sale" en zijn nu Autumn Sale / Herbst-Sale / Soldes d'automne t/m 10 november.
+* v9: `aanbod_eind` 2026-11-10T23:59:59+01:00 (de klok telt weer af) en de
+  salepagina (`collection.sale.json`) zegt "dinsdag 10 november".
