@@ -1,0 +1,316 @@
+{%- comment -%}
+  Wellshave — Black Friday: kies je 2e artikel.
+
+  Staat in de Black Friday-kaart op de productpagina (ws-pdp-koopvak, .ws-bfb),
+  op de plek van de cadeaus. Twee manieren om het 2e artikel te pakken:
+
+    1. Nog een van dit product: een plus/min die het aantal in het
+       koopformulier zet (name="quantity"). Bij 2 of meer staat erbij wat
+       het tweede kost met de korting.
+    2. Een ander artikel uit de collectie hieronder, met de prijs met de
+       korting erbij en een knop die het meteen in de winkelwagen legt.
+
+  De korting zelf zit niet hier maar in Shopify (automatische korting "koop 1,
+  krijg 1 met 30%"); die gaat van het goedkoopste artikel af. Daarom tonen we
+  alleen artikelen die niet duurder zijn dan de gekozen optie: dan klopt de
+  prijs die hier staat ook in de winkelwagen. Kies je een goedkopere optie,
+  dan verdwijnen de duurdere artikelen uit de lijst.
+
+  Wordt geladen vanuit layout/theme.liquid op productpagina's. Het blok staat
+  eerst verborgen onderaan de pagina; het script zet het in de kaart. Is er
+  geen Black Friday-kaart, dan blijft het weg.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign v = product.selected_or_first_available_variant
+  assign pct = s.pct | default: 30
+  assign rest = 100 | minus: pct
+  assign max = s.max | default: 3
+  assign max_totaal = s.max_totaal | default: 24
+  assign munt = s.munt | default: '€'
+  assign bron = s.collectie
+  if bron == blank
+    assign bron = collections['summer-sale-deals']
+  endif
+-%}
+{%- if s.tonen and product != blank and v.available -%}
+  {%- capture bft_lijst -%}
+    {%- assign n = 0 -%}
+    {%- assign lijst = s.producten -%}
+    {%- if lijst == blank or lijst.size == 0 -%}{%- assign lijst = bron.products -%}{%- endif -%}
+    {%- for p in lijst limit: 50 -%}
+      {%- if n >= max_totaal -%}{%- break -%}{%- endif -%}
+      {%- if p.id == product.id or p.handle contains 'gift-' or p.available == false -%}{%- continue -%}{%- endif -%}
+      {%- assign pv = p.selected_or_first_available_variant -%}
+      {%- if pv.available == false or pv.price <= 0 -%}{%- continue -%}{%- endif -%}
+      {%- assign nu = pv.price | times: rest | divided_by: 100.0 | round -%}
+      {%- assign n = n | plus: 1 -%}
+      <li class="ws-bft__rij" data-cent="{{ pv.price }}" data-variant="{{ pv.id }}" data-was="{{ pv.compare_at_price | default: pv.price }}" hidden>
+        <a class="ws-bft__beeld" href="{{ p.url }}">{%- if p.featured_image != blank -%}{{ p.featured_image | image_url: width: 96 | image_tag: alt: '', loading: 'lazy', width: 40, height: 40 }}{%- endif -%}</a>
+        <span class="ws-bft__nm"><b>{{ p.title }}</b><small data-ws-bft-r>{{ s.ander_regel | replace: '[pct]', pct }}</small></span>
+        <span class="ws-bft__pr"><s data-ws-bft-r-was>{{ munt }}{% render 'price-formated', price: pv.price %}</s><b data-ws-bft-r-nu>{{ munt }}{% render 'price-formated', price: nu %}</b></span>
+        <button type="button" class="ws-bft__knop" data-ws-bft-add="{{ pv.id }}" aria-label="{{ s.knop | escape }}: {{ p.title | escape }}"><span class="ws-bft__knop-tx">{{ s.knop }}</span><span class="ws-bft__knop-ok">{{ s.klaar }}</span><span class="ws-bft__knop-weg">{{ s.weg }}</span></button>
+      </li>
+    {%- endfor -%}
+  {%- endcapture -%}
+  {%- assign zelf_nu = v.price | times: rest | divided_by: 100.0 | round -%}
+  <div class="ws-bft" id="ws-bft" data-pct="{{ pct }}" data-max="{{ max }}" data-cent="{{ v.price }}" data-was="{{ v.compare_at_price | default: v.price }}" hidden>
+    <p class="ws-bft__kop"><span class="ws-bft__plus" aria-hidden="true">+</span><b>{{ s.kop }}</b><em>{{ s.kop_label | replace: '[pct]', pct }}</em></p>
+
+    <div class="ws-bft__rij ws-bft__zelf">
+      <span class="ws-bft__beeld" data-ws-bft-zelf-beeld>{%- if product.featured_image != blank -%}{{ product.featured_image | image_url: width: 96 | image_tag: alt: '', loading: 'lazy', width: 40, height: 40 }}{%- endif -%}</span>
+      <span class="ws-bft__nm"><b data-ws-bft-zelf-naam data-sjabloon="{{ s.zelf_kop | escape }}">{{ s.zelf_kop | replace: '[product]', product.title }}</b><small data-ws-bft-zelf-regel data-een="{{ s.zelf_regel | escape }}" data-meer="{{ s.zelf_regel_meer | escape }}">{{ s.zelf_regel }}</small></span>
+      <span class="ws-bft__pr"><s data-ws-bft-was>{{ munt }}{% render 'price-formated', price: v.price %}</s><b data-ws-bft-nu>{{ munt }}{% render 'price-formated', price: zelf_nu %}</b></span>
+      <span class="ws-bft__tel" role="group" aria-label="{{ s.aantal_label | escape }}">
+        <button type="button" data-ws-bft-min aria-label="Eén minder">−</button>
+        <output data-ws-bft-aantal aria-live="polite">1</output>
+        <button type="button" data-ws-bft-plus aria-label="Eén meer">+</button>
+      </span>
+    </div>
+
+    {%- if bft_lijst contains 'ws-bft__rij' -%}
+      <p class="ws-bft__of">{{ s.of_kop }}</p>
+      <ul class="ws-bft__lijst">{{ bft_lijst }}</ul>
+      <button type="button" class="ws-bft__meer" data-ws-bft-meer data-meer="{{ s.meer_knop | escape }}" data-minder="{{ s.minder_knop | escape }}" aria-expanded="false" hidden></button>
+    {%- endif -%}
+    {%- if s.regel != blank -%}<p class="ws-bft__regel">{{ s.regel | replace: '[pct]', pct }}</p>{%- endif -%}
+  </div>
+  <script>
+    (function () {
+      var blok = document.getElementById('ws-bft');
+      var kaart = document.querySelector('.ws-bfb .ws-bfb__in');
+      if (!blok || !kaart) { if (blok) blok.remove(); return; }
+      kaart.appendChild(blok);
+      blok.hidden = false;
+      kaart.parentNode.classList.add('ws-bfb--tweede');
+
+      var pct = parseInt(blok.getAttribute('data-pct'), 10) || 30;
+      var max = parseInt(blok.getAttribute('data-max'), 10) || 3;
+      var munt = {{ munt | json }};
+      var wortel = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/';
+      function euro(c) { c = Math.round(c); var e = Math.floor(c / 100), r = c % 100; return munt + e + ',' + (r < 10 ? '0' : '') + r; }
+      function korting(c) { return Math.round(c * (100 - pct) / 100); }
+      function vorm() { return document.querySelector('form[id^="ProductForm-"][action$="/cart/add"]') || document.querySelector('form[id^="ProductForm-"]'); }
+      function aantalVeld() { var f = vorm(); return f && f.querySelector('[name="quantity"]'); }
+      // De prijs van de gekozen optie: de aangevinkte keuze in "Kies je aanbieding",
+      // anders het product zelf.
+      function hoofdCent() {
+        var r = document.querySelector('input[name^="ws-tier-"]:checked');
+        var c = r ? parseInt(r.getAttribute('data-cent'), 10) : NaN;
+        return isNaN(c) ? parseInt(blok.getAttribute('data-cent'), 10) : c;
+      }
+
+      var tel = blok.querySelector('[data-ws-bft-aantal]');
+      var regel = blok.querySelector('[data-ws-bft-zelf-regel]');
+      function zetAantal(n) {
+        n = Math.max(1, Math.min(10, n));
+        var veld = aantalVeld();
+        if (veld) veld.value = n;
+        tel.textContent = n;
+        blok.querySelector('.ws-bft__zelf').classList.toggle('is-aan', n > 1);
+        var c = hoofdCent();
+        regel.textContent = (n > 1 ? regel.getAttribute('data-meer') : regel.getAttribute('data-een'))
+          .split('[bedrag]').join(euro(c - korting(c)));
+      }
+      blok.querySelector('[data-ws-bft-plus]').addEventListener('click', function () { zetAantal(parseInt(tel.textContent, 10) + 1); });
+      blok.querySelector('[data-ws-bft-min]').addEventListener('click', function () { zetAantal(parseInt(tel.textContent, 10) - 1); });
+
+      // Volg de gekozen optie: de prijs van "nog een" en welke andere artikelen
+      // niet duurder zijn (anders gaat de korting van het hoofdproduct af).
+      // "Nog een ..." volgt de gekozen optie: naam en foto van die optie.
+      var zelfNaam = blok.querySelector('[data-ws-bft-zelf-naam]'), zelfBeeld = blok.querySelector('[data-ws-bft-zelf-beeld]');
+      var basisNaam = zelfNaam.textContent, basisBeeld = zelfBeeld.innerHTML;
+      function zelf() {
+        var r = document.querySelector('input[name^="ws-tier-"]:checked');
+        var naam = r && r.value ? r.getAttribute('data-naam') : '';
+        var img = naam ? r.closest('label') && r.closest('label').querySelector('.ws-tier-bd img') : null;
+        zelfNaam.textContent = naam ? zelfNaam.getAttribute('data-sjabloon').split('[product]').join(naam) : basisNaam;
+        zelfBeeld.innerHTML = img ? '<img src="' + (img.currentSrc || img.src).replace(/"/g, '') + '" alt="" width="40" height="40">' : basisBeeld;
+        hoofdNaam = naam || basisTitel;
+      }
+      var basisTitel = {{ product.title | json }}, hoofdNaam = basisTitel, open = false;
+      var regelGoed = {{ s.ander_regel | replace: '[pct]', pct | json }}, regelDuur = {{ s.duur_regel | json }};
+      var lijstEl = blok.querySelector('.ws-bft__lijst'), meer = blok.querySelector('[data-ws-bft-meer]');
+      if (meer) meer.addEventListener('click', function () { open = !open; volg(); });
+      function volg() {
+        zelf();
+        var c = hoofdCent();
+        blok.querySelector('[data-ws-bft-was]').textContent = euro(c);
+        blok.querySelector('[data-ws-bft-nu]').textContent = euro(korting(c));
+        // Elk artikel kan het 2e zijn. Niet duurder dan de gekozen optie: dan krijgt
+        // dat artikel de 30%. Duurder: dan gaat de 30% van de gekozen optie af, en
+        // dat staat er zo bij. Eerst de artikelen die zelf de korting krijgen.
+        var rijen = lijstEl ? [].slice.call(lijstEl.children) : [];
+        rijen.forEach(function (li, i) { if (!li.hasAttribute('data-i')) li.setAttribute('data-i', i); });
+        rijen.sort(function (a, b) {
+          var ca = parseInt(a.getAttribute('data-cent'), 10), cb = parseInt(b.getAttribute('data-cent'), 10);
+          var da = ca > c ? 1 : 0, db = cb > c ? 1 : 0;
+          if (da !== db) return da - db;
+          // de duurdere op prijs, de kleinste stap eerst
+          if (da) return ca - cb;
+          return parseInt(a.getAttribute('data-i'), 10) - parseInt(b.getAttribute('data-i'), 10);
+        });
+        rijen.forEach(function (li, i) {
+          var p = parseInt(li.getAttribute('data-cent'), 10), duur = p > c;
+          li.classList.toggle('is-duur', duur);
+          var was = li.querySelector('[data-ws-bft-r-was]'), nu = li.querySelector('[data-ws-bft-r-nu]'), r = li.querySelector('[data-ws-bft-r]');
+          was.hidden = duur;
+          was.textContent = euro(p);
+          nu.textContent = euro(duur ? p : korting(p));
+          r.textContent = duur ? regelDuur.split('[product]').join(hoofdNaam).split('[pct]').join(pct).split('[bedrag]').join(euro(c - korting(c))) : regelGoed;
+          lijstEl.appendChild(li);
+          li.hidden = !open && i >= max;
+        });
+        var of = blok.querySelector('.ws-bft__of');
+        if (of) of.hidden = rijen.length === 0;
+        if (meer) {
+          meer.hidden = rijen.length <= max;
+          meer.setAttribute('aria-expanded', String(open));
+          meer.textContent = (open ? meer.getAttribute('data-minder') : meer.getAttribute('data-meer')).split('[aantal]').join(rijen.length);
+          lijstEl.classList.toggle('is-open', open);
+        }
+        zetAantal(parseInt(tel.textContent, 10));
+      }
+      document.addEventListener('change', function (e) { if (e.target && /^ws-tier-/.test(e.target.name || '')) volg(); });
+
+      // Het totaal onder "Kies je aanbieding" telt mee: het aantal van dit product
+      // en de artikelen die hier zijn toegevoegd. De korting rekenen we zoals
+      // Shopify: bij n artikelen krijgen de n/2 goedkoopste de korting.
+      var extra = {}; // variant-id -> aantal in de winkelwagen
+      var accMee = {{ s.acc_korting | json }};
+      function cent(t) { var d = String(t || '').replace(/[^0-9]/g, ''); return d ? parseInt(d, 10) : NaN; }
+      function hoofdWas() {
+        var r = document.querySelector('input[name^="ws-tier-"]:checked');
+        var w = r ? cent(r.getAttribute('data-was')) : NaN;
+        if (isNaN(w)) w = parseInt(blok.getAttribute('data-was'), 10);
+        return Math.max(w || 0, hoofdCent());
+      }
+      function totaal() {
+        var vak = document.querySelector('[id^="ProductPrice-"]');
+        if (!vak) return;
+        var aantal = parseInt(tel.textContent, 10) || 1;
+        var prijzen = [], was = hoofdWas() * aantal, n = aantal;
+        for (var i = 0; i < aantal; i++) prijzen.push(hoofdCent());
+        blok.querySelectorAll('.ws-bft__lijst > li').forEach(function (li) {
+          // tegen de van-prijs, net als het hoofdproduct: anders telt de korting
+          // die er al op stond niet mee en lijkt de besparing kleiner dan hij is
+          var q = extra[li.getAttribute('data-variant')] || 0, c = parseInt(li.getAttribute('data-cent'), 10);
+          var w = Math.max(parseInt(li.getAttribute('data-was'), 10) || c, c);
+          for (var j = 0; j < q; j++) { prijzen.push(c); was += w; n++; }
+        });
+        // De accessoires uit "Maak het compleet" tellen ook mee, met hun prijs en
+        // van-prijs uit die lijst. Of ze meedoen voor de korting, hangt af van hoe
+        // de korting in Shopify staat: zie de instelling "Accessoires tellen mee".
+        var vast = 0, gezien = {};
+        blok.querySelectorAll('.ws-bft__lijst > li').forEach(function (li) { gezien[li.getAttribute('data-variant')] = 1; });
+        document.querySelectorAll('[data-ws-add] [data-ws-add-variant]').forEach(function (k) {
+          var vid = k.getAttribute('data-ws-add-variant'), q = extra[vid] || 0;
+          if (!q || gezien[vid]) return;
+          gezien[vid] = 1;
+          var rij = k.closest('li') || k.parentNode, pr = rij.querySelector('.ws-add-prijs');
+          var c = pr ? cent((pr.querySelector('b') || {}).textContent) : NaN;
+          if (isNaN(c)) return;
+          var w = pr.querySelector('s') ? cent(pr.querySelector('s').textContent) : c;
+          if (isNaN(w) || w < c) w = c;
+          for (var j = 0; j < q; j++) { if (accMee) prijzen.push(c); else vast += c; was += w; n++; }
+        });
+        prijzen.sort(function (a, b) { return a - b; });
+        var nu = vast, bf = 0, kort = Math.floor(prijzen.length / 2);
+        prijzen.forEach(function (c, i) { var k = i < kort ? korting(c) : c; bf += c - k; nu += k; });
+        var nuEl = vak.querySelector('[data-ws-nu]'), wasEl = vak.querySelector('[data-ws-was]'), pctEl = vak.querySelector('[data-ws-pct]');
+        if (nuEl) nuEl.innerHTML = '<span class="ws-munt">' + munt + '</span>' + euro(nu).slice(munt.length);
+        if (wasEl) { wasEl.innerHTML = '<span class="ws-munt">' + munt + '</span>' + euro(was).slice(munt.length); wasEl.hidden = was <= nu; }
+        // Eén artikel: het percentage, zoals altijd. Meer artikelen: het bedrag
+        // dat je bespaart. Een percentage over het geheel zakt als er artikelen
+        // bij komen met een kleinere korting, terwijl je in euro's juist meer
+        // bespaart; het bedrag gaat alleen maar omhoog.
+        if (pctEl) {
+          var p = was > nu ? Math.round((was - nu) / was * 100) : 0;
+          if (pctEl.firstElementChild) pctEl.firstElementChild.textContent = n > 1 ? '−' + euro(was - nu) : '−' + p + '%';
+          pctEl.hidden = !p;
+        }
+        var kl = vak.querySelector('[data-ws-klarna]');
+        if (kl) kl.textContent = euro(Math.ceil(nu / 3));
+        var uitleg = vak.querySelector('.ws-bft-tot');
+        if (!uitleg) { uitleg = document.createElement('p'); uitleg.className = 'ws-bft-tot'; var pr = vak.querySelector('.ws-prijs'); if (pr) pr.insertAdjacentElement('afterend', uitleg); }
+        uitleg.hidden = n < 2 || bf <= 0;
+        if (!uitleg.hidden) uitleg.textContent = {{ s.tot_regel | json }}.split('[aantal]').join(n).split('[korting]').join(kort).split('[pct]').join(pct).split('[bespaard]').join(euro(was - nu)).split('[extra]').join(euro(bf));
+      }
+      var zetAantalOud = zetAantal;
+      zetAantal = function (n) { zetAantalOud(n); totaal(); };
+      volg();
+
+      // Wat er al in de winkelwagen ligt, staat op "Toegevoegd" en telt mee.
+      function leesWagen(wagen) {
+        extra = {};
+        (wagen.items || []).forEach(function (it) { extra[String(it.variant_id)] = (extra[String(it.variant_id)] || 0) + it.quantity; });
+        blok.querySelectorAll('[data-ws-bft-add]').forEach(function (k) { k.classList.toggle('is-klaar', !!extra[k.getAttribute('data-ws-bft-add')]); });
+        totaal();
+      }
+      function wagen() { fetch(wortel + 'cart.js').then(function (r) { return r.json(); }).then(leesWagen).catch(function () {}); }
+      wagen();
+      // "Maak het compleet" laat met een klasse op de knop zien dat er iets is
+      // toegevoegd; dan lezen we de winkelwagen opnieuw.
+      var compleet = document.querySelector('[data-ws-add]');
+      if (compleet && window.MutationObserver) {
+        var wacht;
+        new MutationObserver(function () { clearTimeout(wacht); wacht = setTimeout(wagen, 300); })
+          .observe(compleet, { subtree: true, attributes: true, attributeFilter: ['class'] });
+      }
+
+      // Een ander artikel: meteen in de winkelwagen, zoals "Maak het compleet".
+      blok.addEventListener('click', function (e) {
+        var knop = e.target.closest('[data-ws-bft-add]');
+        if (!knop || knop.classList.contains('is-bezig')) return;
+        knop.classList.add('is-bezig');
+        var lade = document.querySelector('cart-drawer');
+        var id = knop.getAttribute('data-ws-bft-add'), weg = knop.classList.contains('is-klaar');
+        var verzoek = weg
+          ? { id: id, quantity: Math.max(0, (extra[id] || 1) - 1), sections_url: window.location.pathname }
+          : { items: [{ id: parseInt(id, 10), quantity: 1 }], sections_url: window.location.pathname };
+        if (lade) verzoek.sections = ['cart-drawer'];
+        fetch(wortel + (weg ? 'cart/change.js' : 'cart/add.js'), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(verzoek) })
+          .then(function (r) { return r.json(); })
+          .then(function (antw) {
+            if (!antw.items) throw new Error(antw.description || 'Mislukt');
+            if (lade && lade.renderContent) lade.renderContent(antw.sections);
+            return fetch(wortel + 'cart.js').then(function (r) { return r.json(); }).then(leesWagen);
+          })
+          .catch(function (fout) { console.error('2e artikel toevoegen mislukt:', fout); })
+          .finally(function () { knop.classList.remove('is-bezig'); });
+      });
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Black Friday: 2e artikel",
+  "settings": [
+    { "type": "checkbox", "id": "tonen", "label": "Tonen in de Black Friday-kaart", "default": true },
+    { "type": "range", "id": "pct", "label": "Korting op het 2e artikel", "min": 5, "max": 50, "step": 5, "unit": "%", "default": 30, "info": "Moet gelijk zijn aan de automatische korting in Shopify." },
+    { "type": "text", "id": "munt", "label": "Valutateken", "default": "€" },
+    { "type": "text", "id": "kop", "label": "Kop", "default": "Kies je 2e artikel" },
+    { "type": "text", "id": "kop_label", "label": "Label naast de kop", "info": "[pct] wordt het percentage.", "default": "[pct]% extra" },
+    { "type": "text", "id": "zelf_kop", "label": "Nog een van dit product", "info": "[product] wordt de naam.", "default": "Nog een [product]" },
+    { "type": "text", "id": "zelf_regel", "label": "Regel bij 1 stuk", "default": "Voor jezelf of om te geven" },
+    { "type": "text", "id": "zelf_regel_meer", "label": "Regel bij 2 of meer", "info": "[bedrag] wordt wat je op het 2e bespaart.", "default": "Je bespaart [bedrag] op de tweede" },
+    { "type": "text", "id": "aantal_label", "label": "Aantal (voor schermlezers)", "default": "Aantal" },
+    { "type": "text", "id": "of_kop", "label": "Kop boven de andere artikelen", "default": "Of kies een ander artikel" },
+    { "type": "text", "id": "ander_regel", "label": "Regel bij een ander artikel", "info": "[pct] wordt het percentage.", "default": "Als 2e artikel [pct]% extra" },
+    { "type": "collection", "id": "collectie", "label": "Collectie voor de andere artikelen", "info": "Leeg: de Black Friday-collectie (summer-sale-deals). Alleen artikelen die niet duurder zijn dan de gekozen optie komen in de lijst." },
+    { "type": "product_list", "id": "producten", "label": "Of: vaste artikelen", "limit": 12, "info": "Vul je hier iets in, dan gaan deze voor de collectie." },
+    { "type": "checkbox", "id": "acc_korting", "label": "Accessoires tellen mee voor de korting", "default": false, "info": "Voor het totaal op de productpagina: tellen de artikelen uit Maak het compleet (mesjes, hoes) mee voor de 30%? Zet dit gelijk aan de korting in Shopify." },
+    { "type": "range", "id": "max", "label": "Aantal andere artikelen (dicht)", "min": 1, "max": 6, "step": 1, "default": 3 },
+    { "type": "range", "id": "max_totaal", "label": "Aantal andere artikelen (open)", "min": 6, "max": 40, "step": 2, "default": 24, "info": "Hoeveel artikelen er na Bekijk alle staan." },
+    { "type": "text", "id": "meer_knop", "label": "Knop om alles te zien", "info": "[aantal] wordt het aantal artikelen.", "default": "Bekijk alle [aantal] artikelen" },
+    { "type": "text", "id": "minder_knop", "label": "Knop om in te klappen", "default": "Minder tonen" },
+    { "type": "text", "id": "duur_regel", "label": "Regel bij een duurder artikel", "info": "Bij een artikel dat duurder is dan de gekozen optie gaat de korting van de gekozen optie af. [product] is die optie, [bedrag] wat je daarop bespaart.", "default": "Dan [pct]% op je [product]: −[bedrag]" },
+    { "type": "text", "id": "knop", "label": "Knop", "default": "Toevoegen" },
+    { "type": "text", "id": "klaar", "label": "Knop na toevoegen", "default": "Toegevoegd" },
+    { "type": "text", "id": "weg", "label": "Knop bij aanwijzen na toevoegen", "default": "Weghalen" },
+    { "type": "text", "id": "tot_regel", "label": "Regel onder het totaal", "info": "[aantal] artikelen, waarvan [korting] met [pct]% korting. [extra] is de Black Friday-korting, [bespaard] alles wat je bespaart ten opzichte van de van-prijzen.", "default": "[aantal] artikelen, [korting] daarvan met [pct]% extra: [extra] Black Friday-korting." },
+    { "type": "text", "id": "regel", "label": "Regel onderaan", "info": "[pct] wordt het percentage.", "default": "De [pct]% gaat automatisch van het goedkoopste artikel af, in je winkelwagen." }
+  ]
+}
+{% endschema %}

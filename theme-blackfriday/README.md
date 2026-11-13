@@ -48,3 +48,23 @@ aankondigingsbalk (stonden in beide BF-thema's nog op "Autumn Sale") en op de
 productpagina (BF-kaart, cadeauregels, `pil_z`, `tier_cadeau_vanaf`,
 `cad_kies_regel`). De homepage en de collectiepagina's bundels en sale zijn in
 geen enkel thema vertaald (ook live niet); daar zien en/de/fr Nederlands.
+
+## Klaar voor livegang (13 november)
+
+* **Automatische korting aangemaakt** in Shopify: "Black Friday 2026: 30% op elk
+  2e artikel (goedkoopste)", koop 1 krijg 1 met 30%, op de collectie Alle
+  Producten (zonder de €0-cadeaus), zonder maximum per bestelling. Loopt van
+  13 november tot en met maandag 30 november 23:59. Bij 2 artikelen krijgt het
+  goedkoopste 30%, bij 4 de twee goedkoopste, bij 6 de drie goedkoopste, enz.
+  Combineert met andere kortingen (zoals vorig jaar de 50%-actie). Getest met
+  een conceptbestelling van 5 artikelen: de twee goedkoopste (€19,95) kregen 30%.
+* In de repo gezet wat alleen nog in Shopify stond (29 oktober):
+  `sections/ws-bf-tweede.liquid` ("Kies je 2e artikel" in de Black Friday-kaart),
+  `assets/ws-bfb.css`, de aanroep in `layout/theme.liquid` en het laatste deel
+  van `assets/ws-spaar.css` (menubanner en kortingslabels in rood).
+* `config/settings_data.json`: de sectie `ws-bf-tweede` heeft nu eigen
+  instellingen. "Accessoires tellen mee" staat aan, gelijk aan de korting in
+  Shopify (die geldt voor alle producten). De teksten staan erin zodat ze
+  vertaalbaar zijn; en/de/fr zijn vertaald (16 teksten per taal).
+* Vergeleken met v9 (live): alle gedeelde bestanden zijn gelijk; pre-order
+  (18–21 november) en verwijderbare upsells zitten erin.

@@ -162,3 +162,25 @@ html .product-card__tags .ws-herfst-badge--beeld{width:64px;margin:-4px 0 0 -4px
 
 /* de klok bij de cadeaus */
 .ws-bf .ws-cadeau-klok{color:#C8281F}
+
+/* de Black Friday-banner in het menu: zwart met een rode rand en een
+   pulserende rode stip in plaats van het zonnetje, zoals de kaart op de
+   productpagina. Mobiel is dat de strook bovenaan het menu, op desktop de
+   grote promo in het megamenu (alleen --groot: de bundelpromo blijft goud). Crème op zwart 15:1, rood #FF5A4F 5,9:1. */
+.ws-bf .wsl-actie{grid-template-columns:10px minmax(0,1fr) 20px;color:#F7EEDD;
+  background-image:radial-gradient(120% 220% at 0% 50%,rgba(224,40,28,.28) 0%,rgba(224,40,28,0) 55%),linear-gradient(100deg,#1B1917 0%,#121110 70%,#0C0B0A 100%);
+  box-shadow:inset 3px 0 0 #E0281C,inset 0 -1px 0 rgba(255,90,79,.35)}
+.ws-bf .wsl-actie-ico{display:none}
+.ws-bf .wsl-actie::before{content:"";width:8px;height:8px;border-radius:50%;background:#FF5A4F;justify-self:center;animation:ws-bf-puls 1.6s ease-out infinite}
+.ws-bf .wsl-actie-pijl{color:#FF5A4F}
+.ws-bf .wsmm-promo--groot{box-shadow:inset 0 0 0 1px rgba(255,90,79,.45),0 16px 30px -22px rgba(224,40,28,.7)}
+.ws-bf .wsmm-promo--groot .wsmm-promo-beeld::after{background-image:radial-gradient(120% 90% at 0% 100%,rgba(224,40,28,.32) 0%,rgba(224,40,28,0) 60%),linear-gradient(rgba(10,9,8,.18),rgba(10,9,8,.86) 70%)}
+.ws-bf .wsmm-promo--groot .wsmm-promo-kicker{justify-self:start;display:inline-flex;align-items:center;gap:6px;padding:5px 9px 5px 8px;border-radius:100px;background:#E0281C;color:#fff}
+.ws-bf .wsmm-promo--groot .wsmm-promo-kicker::before{content:"";width:5px;height:5px;border-radius:50%;background:#fff;animation:ws-bf-puls 1.6s ease-out infinite}
+.ws-bf .wsmm-promo--groot .wsmm-promo-knop{background-image:linear-gradient(135deg,#FF5A4F 0%,#C8281F 100%);color:#fff}
+@keyframes ws-bf-puls{0%{box-shadow:0 0 0 0 rgba(255,90,79,.7)}70%{box-shadow:0 0 0 6px rgba(255,90,79,0)}100%{box-shadow:0 0 0 0 rgba(255,90,79,0)}}
+@media (prefers-reduced-motion:reduce){.ws-bf .wsl-actie::before,.ws-bf .wsmm-promo--groot .wsmm-promo-kicker::before{animation:none}}
+
+/* de kortingslabels op de foto's van de productkaarten (v9) en in de
+   winkelwagen: rood met wit, 5,4:1 */
+.ws-bf .ws7-label,.ws-bf .cart-drawer__featured-label{background:#C8281F;color:#fff}

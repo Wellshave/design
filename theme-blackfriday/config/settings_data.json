@@ -115,6 +115,35 @@
         "disabled": false,
         "settings": {}
       }
+    },
+    "sections": {
+      "ws-bf-tweede": {
+        "type": "ws-bf-tweede",
+        "settings": {
+          "tonen": true,
+          "pct": 30,
+          "munt": "€",
+          "acc_korting": true,
+          "max": 3,
+          "max_totaal": 24,
+          "kop": "Kies je 2e artikel",
+          "kop_label": "[pct]% extra",
+          "zelf_kop": "Nog een [product]",
+          "zelf_regel": "Voor jezelf of om te geven",
+          "zelf_regel_meer": "Je bespaart [bedrag] op de tweede",
+          "aantal_label": "Aantal",
+          "of_kop": "Of kies een ander artikel",
+          "ander_regel": "Als 2e artikel [pct]% extra",
+          "meer_knop": "Bekijk alle [aantal] artikelen",
+          "minder_knop": "Minder tonen",
+          "duur_regel": "Dan [pct]% op je [product]: −[bedrag]",
+          "knop": "Toevoegen",
+          "klaar": "Toegevoegd",
+          "weg": "Weghalen",
+          "tot_regel": "[aantal] artikelen, [korting] daarvan met [pct]% extra: [extra] Black Friday-korting.",
+          "regel": "De [pct]% gaat automatisch van het goedkoopste artikel af, in je winkelwagen."
+        }
+      }
     }
   }
 }

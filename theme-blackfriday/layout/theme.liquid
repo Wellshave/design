@@ -64,6 +64,9 @@
       {{ content_for_layout }}
     </main>
 
+    {%- comment -%} Black Friday: kies je 2e artikel. Zet zichzelf in de Black Friday-kaart op de productpagina. {%- endcomment -%}
+    {%- if template.name == 'product' -%}{% section 'ws-bf-tweede' %}{%- endif -%}
+
     {% sections 'footer-group' %}
   {%- render "ecom_footer"-%}</body>
 </html>
