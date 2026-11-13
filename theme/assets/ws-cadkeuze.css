@@ -1,0 +1,24 @@
+/* Cadeau kiezen in de winkelwagenlade (thema-instelling gift_1_keuze).
+   Onder het cadeau een keuzevak met een pijltje; openen toont de opties
+   direct eronder, de gekozen lichtgoud. Laadt met de lade, op elke pagina. */
+.cart-drawer__dd{display:flex;align-items:center;justify-content:space-between;gap:8px;align-self:stretch;margin-top:10px;
+  padding:9px 12px;border:1px solid #D9C8A8;border-radius:10px;background:#fff;color:var(--cd-inkt,#191816);
+  font-size:13px;font-weight:500;cursor:pointer;text-align:left;transition:border-color .25s,border-radius .25s}
+.cart-drawer__dd:hover{border-color:var(--cd-goud,#BC813E)}
+.cart-drawer__dd svg{flex:none;width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:transform .35s cubic-bezier(.22,.61,.36,1)}
+.cart-drawer__dd.is-open{border-color:var(--cd-goud,#BC813E);border-radius:10px 10px 0 0}
+.cart-drawer__dd[aria-expanded="true"] svg{transform:rotate(180deg)}
+.cart-drawer__cadkeuze{align-self:stretch;margin-top:-1px;padding:6px;border:1px solid var(--cd-goud,#BC813E);border-top:0;border-radius:0 0 10px 10px;background:#fff}
+.cart-drawer__cadkeuze[hidden]{display:none}
+.cart-drawer .ws-cadkeuze-lijst{display:grid;gap:4px}
+.cart-drawer .ws-cko{display:flex;align-items:center;gap:10px;width:100%;padding:7px 8px;border-radius:8px;border:0;
+  background:var(--cd-zand,#F5F1EA);color:var(--cd-inkt,#191816);text-align:left;cursor:pointer}
+.cart-drawer .ws-cko:hover{background:#EDE6DA}
+.cart-drawer .ws-cko[aria-pressed="true"]{background:#FBEBC8;box-shadow:0 0 0 1px rgba(188,129,62,.45) inset}
+.cart-drawer .ws-cko-bd{flex:0 0 36px;width:36px;height:36px;border-radius:7px;overflow:hidden;background:#fff}
+.cart-drawer .ws-cko-bd img{width:100%;height:100%;object-fit:contain;display:block}
+.cart-drawer .ws-cko-tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.cart-drawer .ws-cko-tx b{font-size:13px;font-weight:600;line-height:1.25}
+.cart-drawer .ws-cko-pr{display:flex;align-items:center;gap:7px;font-size:12px}
+.cart-drawer .ws-cko-pr s{color:var(--cd-grijs,#7A766F)}
+.cart-drawer .ws-cko-gratis{font-style:normal;font-size:10.5px;font-weight:700;color:#fff;background:#2E9E5B;border-radius:4px;padding:2px 6px}

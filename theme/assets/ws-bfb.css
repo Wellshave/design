@@ -1,0 +1,74 @@
+/* Wellshave Black Friday-kaart op de PDP. Laadt alleen als de kaart getoond
+   wordt, zodat hij werkt met en zonder v7. */
+/* ═══ Black Friday-kaart: rustig, licht, met rood alleen als accent ═══
+   Eerst was dit een zwart blok met een rondlopende rand, een glans over de
+   deal en een pulserend label. Dat trok de aandacht weg van de keuze en de
+   prijs. Nu: een witte kaart met een dunne rand, de deal in inkt, een klein
+   rood label en een klok in zandkleurige vakjes. Geen beweging meer.
+   Contrast: inkt op wit 18:1, grijs #6A635A 5,9:1, rood #B3261E 6,6:1. */
+.ws-bfb{position:relative;margin-top:14px;border-radius:14px;border:1px solid rgba(17,17,17,.12);background:#fff}
+.ws-bfb__rand{display:none}
+.ws-bfb__in{position:relative;border-radius:14px;padding:12px 14px 12px;color:#111}
+.ws-bfb__top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.ws-bfb__tag{display:inline-flex;align-items:center;gap:6px;color:#B3261E;font-size:10px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;line-height:1}
+.ws-bfb__tag i{width:6px;height:6px;border-radius:50%;background:#B3261E}
+.ws-bfb__eind{font-size:11px;font-weight:500;color:#6A635A;letter-spacing:.01em;white-space:nowrap}
+.ws-bfb__mid{display:flex;align-items:center;justify-content:space-between;gap:10px 14px;flex-wrap:wrap;margin-top:9px}
+.ws-bfb__deal{margin:0;display:flex;align-items:baseline;flex-wrap:wrap;gap:2px 8px;line-height:1}
+.ws-bfb__deal b{font-size:22px;font-weight:700;letter-spacing:-.02em;line-height:1;color:#111}
+.ws-bfb__deal span{font-size:13px;font-weight:500;color:#6A635A}
+.ws-bfb__klok{display:flex;gap:4px}
+.ws-bfb__klok[hidden]{display:none}
+.ws-bfb__klok > span{min-width:34px;padding:4px 3px;border-radius:7px;text-align:center;background:#F5F1EA}
+.ws-bfb__klok b{display:block;font-size:13.5px;font-weight:600;line-height:1.1;color:#111;font-variant-numeric:tabular-nums}
+.ws-bfb__klok small{display:block;margin-top:1px;font-size:8px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#6A635A}
+.ws-bfb__sub{margin:8px 0 0;font-size:12px;line-height:1.45;color:#6A635A}
+@media screen and (max-width:749px){
+  .ws-bfb__in{padding:11px 12px}
+  .ws-bfb__deal b{font-size:20px}
+  .ws-bfb__eind{font-size:10.5px}
+}
+.ws-pdp .ws-bb > .ws-bfb{order:9}
+
+/* Het cadeaudeel: een eigen vak onder de korting, met een plusje ervoor zodat
+   leesbaar is dat het er bovenop komt. Eigen klok, want de cadeaus stoppen eerder. */
+.ws-bfb__cad{margin-top:11px;padding:10px 11px 9px;border-radius:10px;background:#F5F1EA}
+.ws-bfb__cadkop{margin:0;display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12.5px;line-height:1.2;color:#111}
+.ws-bfb__cadkop b{font-weight:600}
+.ws-bfb__plus{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;
+  background:#E9DCC0;color:#111;font-size:13px;font-weight:700;line-height:1}
+.ws-bfb__cadklok{margin-left:auto;font-size:11px;font-weight:500;color:#6A635A;font-variant-numeric:tabular-nums;white-space:nowrap}
+.ws-bfb__cadklok[hidden]{display:none}
+.ws-bfb__cadlijst{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:6px}
+.ws-bfb__cadlijst li{display:flex;align-items:center;gap:10px;margin:0}
+.ws-bfb__cadimg{flex:0 0 36px;width:36px;height:36px;border-radius:8px;overflow:hidden;background:#fff}
+.ws-bfb__cadimg img{width:100%;height:100%;object-fit:cover;display:block}
+.ws-bfb__cadnm{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.ws-bfb__cadnm b{font-size:12.5px;font-weight:600;color:#111;line-height:1.25}
+.ws-bfb__cadnm small{font-size:11px;color:#6A635A;line-height:1.3}
+.ws-bfb__cadpr{display:flex;align-items:baseline;gap:7px;white-space:nowrap}
+.ws-bfb__cadpr s{font-size:11px;color:#A39A8E}
+.ws-bfb__cadpr em{font-style:normal;font-size:12.5px;font-weight:700;color:#24804A}
+.ws-bfb__cadregel{margin:9px 0 0;padding-top:8px;border-top:1px solid rgba(17,17,17,.08);font-size:11px;line-height:1.45;color:#6A635A}
+@media screen and (max-width:749px){
+  .ws-bfb__cad{padding:9px 10px 8px}
+  .ws-bfb__cadkop{row-gap:6px}
+  .ws-bfb__cadklok{margin-left:26px}
+}
+
+/* Status per cadeau, volgt de gekozen optie (data-st: ok, nog, in). */
+.ws-bfb__st,.ws-bfb__cadpr.ws-bfb__st--nog{display:none}
+.ws-bfb__cadlijst li[data-st="ok"] .ws-bfb__st--ok,
+.ws-bfb__cadlijst li[data-st="nog"] .ws-bfb__st--nog,
+.ws-bfb__cadlijst li[data-st="in"] .ws-bfb__st--in{display:flex}
+.ws-bfb__cadlijst li:not([data-st="ok"]) .ws-bfb__cadpr.ws-bfb__st--ok{display:none}
+.ws-bfb__cadlijst li[data-st="ok"] .ws-bfb__st--ok{color:#24804A;font-weight:600}
+.ws-bfb__cadlijst li[data-st="ok"] small.ws-bfb__st--ok::before{content:"\2713";margin-right:5px}
+.ws-bfb__cadlijst li[data-st="nog"] .ws-bfb__cadimg,
+.ws-bfb__cadlijst li[data-st="in"] .ws-bfb__cadimg{opacity:.45}
+.ws-bfb__cadlijst li[data-st="nog"] .ws-bfb__cadnm b,
+.ws-bfb__cadlijst li[data-st="in"] .ws-bfb__cadnm b{color:#6A635A}
+.ws-bfb__cadlijst li[data-st="nog"] small.ws-bfb__st--nog{color:#B3261E}
+.ws-bfb__cadpr i{font-style:normal;font-size:11.5px;font-weight:600;color:#6A635A}
+.ws-bfb__cadlijst li{transition:opacity .25s}

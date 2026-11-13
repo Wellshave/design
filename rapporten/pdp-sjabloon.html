@@ -1,0 +1,359 @@
+<title>Het nieuwe PDP-sjabloon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap">
+
+<style>
+:root{
+  --ink:#111111; --ink-80:rgba(17,17,17,.8); --ink-60:rgba(17,17,17,.6);
+  --ink-40:rgba(17,17,17,.4); --ink-10:rgba(17,17,17,.10);
+  --paper:#FFFFFF; --sand:#F5F1EA; --sand-deep:#EDE6DA; --carbon:#191816;
+  --bronze:#BC813E; --gold:#F5D18A; --alert:#E61C1C;
+  --tint-rose:#F4E3DE; --tint-sage:#E5EBE1; --tint-amber:#F7EBD3;
+  --grad-gold:linear-gradient(158deg,#F8DFAB 0%,#E5BC77 42%,#C8913F 100%);
+  --grad-dark:linear-gradient(168deg,#242220 0%,#171614 58%,#0E0D0C 100%);
+  --grad-gold-tekst:linear-gradient(100deg,#B0742A 0%,#8C5A1A 100%);
+  --r-s:12px; --r-m:18px; --r-l:26px;
+  --rail:1140px; --read:660px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--sand);color:var(--ink);
+  font-family:"Montserrat",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  font-size:16.5px;line-height:1.7;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--rail);margin:0 auto;padding:0 24px 110px}
+h1,h2,h3,h4{margin:0;text-wrap:balance;font-weight:900;letter-spacing:-.025em;line-height:1.06}
+
+/* tweeslags-kop */
+.duo{font-size:clamp(27px,3.9vw,42px)}
+.duo .b{display:block;color:#B0742A}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  .duo .b{background-image:var(--grad-gold-tekst);-webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:transparent}
+}
+.eyebrow{font-weight:800;letter-spacing:.2em;text-transform:uppercase;font-size:10.5px;color:var(--ink-40)}
+
+/* masthead */
+.mast{padding:66px 0 34px;border-bottom:2px solid var(--ink)}
+.mast h1{font-size:clamp(34px,5.4vw,54px);margin:14px 0 0}
+.mast .lede{max-width:var(--read);margin:18px 0 0;font-size:18px;color:var(--ink-80);line-height:1.6}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.tag{font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
+  background:var(--paper);border:1px solid var(--ink-10);border-radius:100px;padding:6px 13px;color:var(--ink-60)}
+
+section{padding:52px 0 0}
+.shead{display:flex;align-items:baseline;gap:13px;margin-bottom:8px}
+.snum{font-weight:800;font-size:11px;letter-spacing:.18em;color:var(--bronze);white-space:nowrap}
+.sintro{max-width:var(--read);color:var(--ink-80);margin:16px 0 0}
+
+/* koopblok-slots */
+.slots{margin:26px 0 0;border:1px solid var(--ink-10);border-radius:var(--r-m);background:var(--paper);overflow:hidden}
+.slot{display:grid;grid-template-columns:38px 128px minmax(0,1fr);gap:0;border-bottom:1px solid var(--ink-10)}
+.slot:last-child{border-bottom:0}
+.slot .n{padding:15px 0 15px 16px;font-weight:800;font-size:12px;color:var(--bronze)}
+.slot .k{padding:15px 12px;font-weight:800;font-size:12.5px;letter-spacing:.03em;color:var(--ink-60);text-transform:uppercase}
+.slot .v{padding:15px 18px 15px 4px;min-width:0}
+.slot .v .q{font-size:16.5px;color:var(--ink);font-weight:500}
+.slot .v .mf{display:block;margin-top:6px;font-size:11.5px;font-weight:700;letter-spacing:.04em;color:var(--bronze);word-break:break-word}
+.slot.new{background:linear-gradient(90deg,rgba(188,129,62,.07),transparent 60%)}
+
+/* usp-vergelijking */
+.usp{margin:24px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.usp-col{border:1px solid var(--ink-10);border-radius:var(--r-m);background:var(--paper);padding:20px 22px 22px}
+.usp-col.was{background:var(--tint-rose);border-color:transparent}
+.usp-col.wordt{background:var(--tint-sage);border-color:transparent}
+.usp-col h4{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-60);margin-bottom:12px}
+.usp-col ul{margin:0;padding-left:19px}
+.usp-col li{margin-bottom:9px;font-size:15px;line-height:1.5}
+.usp-col li:last-child{margin-bottom:0}
+.usp-col.was li{color:var(--ink-60)}
+
+/* aanbodkaarten */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:26px 0 0}
+.card{background:var(--grad-dark);border-radius:var(--r-l);padding:24px 22px 26px;color:#fff;
+  border:1px solid rgba(245,209,138,.16);display:flex;flex-direction:column;gap:11px}
+.card.mid{background:var(--grad-gold);color:var(--ink);border-color:transparent}
+.card.top{border-color:rgba(245,209,138,.55)}
+.lint{align-self:flex-start;font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  border-radius:100px;padding:5px 11px}
+.card.mid .lint{background:var(--carbon);color:var(--gold)}
+.card.top .lint{border:1px solid var(--gold);color:var(--gold)}
+.card .rol{font-size:10.5px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--gold)}
+.card.mid .rol{color:rgba(17,17,17,.55)}
+.card .nm{font-size:16px;font-weight:900;letter-spacing:.02em;text-transform:uppercase;line-height:1.2}
+.card .pr{font-size:30px;font-weight:900;letter-spacing:-.03em}
+.card .pr s{font-size:15px;font-weight:600;opacity:.5;margin-left:8px}
+.card .sv{font-size:12.5px;font-weight:800;color:var(--gold)}
+.card.mid .sv{color:#8C3A15}
+.card ul{margin:2px 0 0;padding-left:17px;font-size:13.5px;line-height:1.55;opacity:.92}
+.card li{margin-bottom:5px}
+
+/* volgorde */
+.ord{margin:26px 0 0;border:1px solid var(--ink-10);border-radius:var(--r-m);overflow:hidden;background:var(--paper)}
+.orow{display:grid;grid-template-columns:34px minmax(0,1fr) 86px;gap:0;border-bottom:1px solid var(--ink-10);align-items:center}
+.orow:last-child{border-bottom:0}
+.orow .i{padding:12px 0 12px 15px;font-weight:800;font-size:11.5px;color:var(--ink-40)}
+.orow .t{padding:12px 10px;font-size:15px}
+.orow .t b{font-weight:700}
+.orow .t em{font-style:normal;font-size:12px;color:var(--ink-40);display:block;margin-top:1px}
+.orow .g{padding:12px 15px;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;text-align:right}
+.g.zand{color:#8C6A2A} .g.wit{color:var(--ink-40)} .g.donker{color:var(--carbon)}
+.orow.nieuw{background:linear-gradient(90deg,rgba(188,129,62,.08),transparent 55%)}
+
+/* notes */
+.note{margin:24px 0 0;border-radius:var(--r-m);padding:19px 23px;background:var(--paper);
+  border:1px solid var(--ink-10);border-left:3px solid var(--bronze)}
+.note.warn{background:var(--tint-amber);border-left-color:#A8761B;border-color:transparent}
+.note h4{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--bronze);margin-bottom:8px}
+.note.warn h4{color:#8C5A1A}
+.note p{margin:0;font-size:15.5px;line-height:1.6;color:var(--ink-80)}
+.note p+p{margin-top:10px}
+
+table{border-collapse:collapse;width:100%;font-size:14px;margin:22px 0 0}
+th,td{padding:10px 14px;text-align:right;border-bottom:1px solid var(--ink-10);font-variant-numeric:tabular-nums}
+th:first-child,td:first-child{text-align:left}
+thead th{font-size:10.5px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-40);background:var(--sand-deep)}
+.tw{overflow-x:auto;border:1px solid var(--ink-10);border-radius:var(--r-m);background:var(--paper)}
+.tw table{margin:0;min-width:520px}
+tbody tr:last-child td{border-bottom:0}
+td.ok{color:#2E6B3E;font-weight:700} td.no{color:#A8321F;font-weight:700}
+
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.86em;
+  background:var(--sand-deep);border-radius:4px;padding:1.5px 6px}
+strong{font-weight:700}
+.foot{margin-top:56px;padding-top:22px;border-top:1px solid var(--ink-10);font-size:13px;color:var(--ink-60);line-height:1.75}
+
+@media (max-width:860px){
+  .usp,.cards{grid-template-columns:1fr}
+  .slot{grid-template-columns:30px minmax(0,1fr)}
+  .slot .k{grid-column:2;padding-bottom:0}
+  .slot .v{grid-column:2;padding-left:12px;padding-top:4px}
+  .orow{grid-template-columns:28px minmax(0,1fr) 70px}
+}
+</style>
+
+<div class="wrap">
+
+<header class="mast">
+  <div class="eyebrow">Wellshave · productpagina-sjabloon</div>
+  <h1>Het nieuwe<br>PDP-sjabloon</h1>
+  <p class="lede">Eén sjabloonwijziging, twaalf producten. Copy eerst geschreven, vorm daarna — met alleen cijfers die uit Shopify en Trustpilot komen. Uitgewerkt op de twee Groom Guards; de rest van het assortiment erft hem.</p>
+  <div class="tags">
+    <span class="tag">Part 4 · e-commerce PDP</span>
+    <span class="tag">Merklaag: tweeslags-kop</span>
+    <span class="tag">5 nieuwe metafields</span>
+    <span class="tag">Geen ontwikkelwerk aan het aanbod</span>
+  </div>
+</header>
+
+<section>
+  <div class="shead"><span class="snum">01</span><h2 class="duo">De aanleiding staat in je eigen data,<span class="b">en hij staat omgekeerd.</span></h2></div>
+  <p class="sintro">Voordat er iets ontworpen wordt: je goedkopere product verkoopt de uitkomst en je duurste verkoopt onderdelen. Dat is precies verkeerd om, en het is met twee tekstvelden te repareren.</p>
+
+  <div class="usp">
+    <div class="usp-col was">
+      <h4>Groom Guard PRO · €59,95 · Loox: 442 · 4,6</h4>
+      <ul>
+        <li>SkinSafe™ keramische messen</li>
+        <li>IPX7 waterdicht</li>
+        <li>LED-precisieverlichting</li>
+        <li>6600RPM motor</li>
+        <li>Foil shaver kop</li>
+      </ul>
+    </div>
+    <div class="usp-col wordt">
+      <h4>Groom Guard · €44,95 · Loox: 192 · 4,9</h4>
+      <ul>
+        <li>Geen sneetjes, ook in je gevoelige zones</li>
+        <li>Geen ingegroeide haren of bultjes</li>
+        <li>IPX7 waterdicht</li>
+        <li>LED-precisieverlichting</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note">
+    <h4>Wat hier misgaat</h4>
+    <p>Links een specificatieblad, rechts een belofte. De duurdere pagina laat de koper zelf uitrekenen wat «6600RPM» voor hem betekent — dat is de «so that»-keten die nooit is doorgetrokken. De ondertitels bevestigen het: de PRO heet «Groom Guard + Foil shaver upgrade», wat een inhoudsopgave is, terwijl de basis «#1 Bodytrimmer voor b*lls en lichaam» heet.</p>
+    <p>Let ook op de sterren. Je <strong>goedkoopste product scoort 4,9 en je duurste 4,6</strong> — meer reviews trekken een gemiddelde altijd omlaag. <em>Vervallen sinds 23 augustus 2026:</em> Loox gaat eruit, dus deze cijfers verdwijnen van de pagina en de score per product met hen. Ze staan hier nog omdat ze de diagnose dragen, niet omdat ze het ontwerp voeden.</p>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">02</span><h2 class="duo">Het koopblok, slot voor slot,<span class="b">met de tekst er al in.</span></h2></div>
+  <p class="sintro">Ezra Firestone's volgorde: open met een klant, niet met de productnaam. Alles hieronder past boven de vouw op 390px. Slot 7 is voorwaardelijk: het staat altijd in het sjabloon, maar rendert niets als het veld leeg is. Slot 10 is de betaalrij &mdash; nu nog een app die zich met JavaScript achter de knop plakt, straks server-side uit Shopify zelf. Gouden regels zijn nieuwe metafields.</p>
+
+  <div class="slots">
+    <div class="slot new"><div class="n">1</div><div class="k">Citaat</div><div class="v"><span class="q">Eén korte klantzin die het snij-bezwaar wegneemt, boven de titel.</span><span class="mf">nieuw → custom.buybox_quote + custom.buybox_quote_author</span></div></div>
+    <div class="slot"><div class="n">2</div><div class="k">Titel</div><div class="v"><span class="q">Groom Guard™ PRO</span><span class="mf">product.title</span></div></div>
+    <div class="slot new"><div class="n">3</div><div class="k">Belofte</div><div class="v"><span class="q">«Vergevend genoeg voor je gevoeligste plekken. Ook als je niet precies bent.»</span><span class="mf">nieuw → custom.hero_promise · vervangt custom.subtitle boven de vouw</span></div></div>
+    <div class="slot"><div class="n">4</div><div class="k">Sterren</div><div class="v"><span class="q">Trustpilot-logo · TrustScore 4,4 · 966 reviews — winkelbreed, op elk product hetzelfde</span><span class="mf">Trustpilot-widget, business unit 63c511d4e1339e2200c204a1 · niet per product</span></div></div>
+    <div class="slot"><div class="n">5</div><div class="k">Prijs</div><div class="v"><span class="q">€59,95 · <s>€85,65</s> · Bespaar 30%</span><span class="mf">variant.price + compare_at_price</span></div></div>
+    <div class="slot"><div class="n">6</div><div class="k">USP's</div><div class="v"><span class="q">Vijf regels, benefit vooraan — zie sectie 03</span><span class="mf">custom.product_usp</span></div></div>
+    <div class="slot new"><div class="n">7</div><div class="k">Cadeaubalk</div><div class="v"><span class="q">&laquo;Gratis Groom Guard&trade; Blade t.w.v. &euro;14,95&raquo; &mdash; omlijnde gouden pil, valt weg als het veld leeg is</span><span class="mf">nieuw &rarr; custom.product_offer (metaobject_reference &rarr; limited_offer)</span></div></div>
+    <div class="slot"><div class="n">8</div><div class="k">Knop</div><div class="v"><span class="q">IN WINKELWAGEN — volle breedte, één actie</span><span class="mf">—</span></div></div>
+    <div class="slot new"><div class="n">9</div><div class="k">Risicostrook</div><div class="v"><span class="q">100 dagen thuis proberen · 2 jaar garantie · Voor 23:59 besteld = morgen in huis</span><span class="mf">nieuw → custom.risk_strip (list) · vervangt losse shipping_information</span></div></div>
+    <div class="slot new"><div class="n">10</div><div class="k">Betaalrij</div><div class="v"><span class="q">Kleine grijze rij onder de risicostrook — iDEAL, Bancontact, PayPal, Klarna, Visa, Mastercard, Maestro, Amex, Apple Pay, Google Pay</span><span class="mf">nieuw → shop.enabled_payment_types · vervangt de app-sectie ss_payment_icons</span></div></div>
+  </div>
+
+  <div class="note warn">
+    <h4>Slot 1 kan ik niet verzinnen — maar hij staat er al</h4>
+    <p>De merklaag verbiedt een citaat schrijven dat geen klant heeft gezegd &mdash; en dat hoeft ook niet. Voor de Groom Guard staat er een op Trustpilot: <em>&laquo;Erg fijne trimmer die z&rsquo;n werk goed doet (&hellip;) zeker een aanrader dus als je zonder pijn en gedoe je lichaamshaar wil verwijderen!&raquo;</em> &mdash; Yven, vijf sterren, 8 juli 2026. Die staat inmiddels in blok 01.</p><p><strong>Let wel op de dekking.</strong> Van de honderd meest recente Nederlandse Trustpilot-reviews gaan er vijf over het bodygroomen zelf; de rest gaat over levering, service en garantie. Voor de apparaten met een eigen review is slot 1 te vullen. Voor een vervangmes van &euro;14,95 niet &mdash; en dan blijft slot 1 leeg, in plaats van een servicecitaat te lenen dat niets over het product zegt.</p>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">03</span><h2 class="duo">De USP's herschreven,<span class="b">voordeel vooraan, mechanisme erachter.</span></h2></div>
+  <p class="sintro">Het VoC-dossier is streng op twee punten: geen getrademarkte techtermen die het argument moeten dragen, en «vergevend» werkt beter dan «veilig» omdat klanten weten dat ze zelf niet nauwkeurig zijn. Beide zitten hierin verwerkt.</p>
+
+  <div class="usp">
+    <div class="usp-col wordt" style="grid-column:1 / -1">
+      <h4>Groom Guard PRO — custom.product_usp, nieuw</h4>
+      <ul>
+        <li><strong>Geen sneetjes op je gevoeligste plekken</strong> — de keramische kop pakt het haar, niet je huid</li>
+        <li><strong>Mee onder de douche</strong> — volledig waterdicht, dus ook nat te gebruiken en zo af te spoelen</li>
+        <li><strong>Zien wat je doet, ook in de schaduw</strong> — ledlicht schijnt precies op de trimlijn</li>
+        <li><strong>Blijft niet haken in dik haar</strong> — 6.600 omwentelingen per minuut trekken niet, ze snijden door</li>
+        <li><strong>Trimmen én glad afwerken met één apparaat</strong> — de foil-kop scheert na waar je glad wil</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note">
+    <h4>Wat er veranderd is en waarom</h4>
+    <p>Elke regel is een «so that»-keten die is doorgetrokken tot iets menselijks. «SkinSafe™ keramische messen» is een onderdeel; «geen sneetjes op je gevoeligste plekken» is de reden dat iemand het apparaat koopt. Het merkteken mag blijven staan in de specificaties, maar het draagt het argument niet meer.</p>
+    <p>De basis-Groom Guard hoeft nauwelijks aangepast: die stond al goed. Alleen dezelfde mechanisme-toevoeging achter het streepje, zodat beide pagina's hetzelfde ritme hebben.</p>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">04</span><h2 class="duo">Drie kaarten, drie echte producten,<span class="b">en één besparing die klopt.</span></h2></div>
+  <p class="sintro">Nooit meer dan drie, nooit onder elkaar als lijst, en elke prijs uit Shopify. Deze ladder bestaat werkelijk — geen van de drie is verzonnen.</p>
+
+  <div class="cards">
+    <div class="card">
+      <span class="rol">De essentials</span>
+      <span class="nm">Groom Guard</span>
+      <span class="pr">€44,95<s>€71,35</s></span>
+      <span class="sv">Je bespaart €26,40</span>
+      <ul><li>Veilig trimmen op elke zone</li><li>Waterdicht, ledlicht</li></ul>
+    </div>
+    <div class="card mid">
+      <span class="lint">Meest gekozen</span>
+      <span class="rol">Trimmen én glad</span>
+      <span class="nm">Groom Guard PRO</span>
+      <span class="pr">€59,95<s>€85,65</s></span>
+      <span class="sv">Je bespaart €25,70</span>
+      <ul><li>Alles uit de Groom Guard</li><li>Plus de foil-kop om na te scheren</li></ul>
+    </div>
+    <div class="card top">
+      <span class="lint">Beste waarde</span>
+      <span class="rol">Van top tot teen</span>
+      <span class="nm">Shave Package Ultimate</span>
+      <span class="pr">€89,95</span>
+      <span class="sv">Minstens €9,90 voordeel</span>
+      <ul><li>Alles uit de PRO</li><li>Plus neustrimmer en extra mes</li><li>Plus toilettas en reistas</li></ul>
+    </div>
+  </div>
+
+  <p class="sintro" style="text-align:center;max-width:none;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap">
+    <span style="display:inline-flex;color:var(--ink)"><svg width="96" height="20" viewBox="0 0 107 22" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M10.5 16.2516L15.0625 15.088L16.9688 21L10.5 16.2516ZM21 8.61006H12.9687L10.5 1L8.03125 8.61006H0L6.5 13.327L4.03125 20.9371L10.5313 16.2201L14.5312 13.327L21 8.61006Z" fill="#31B488"/> <path d="M32.904 17V7.192H29.064V5.8H38.328V7.192H34.488V17H32.904ZM39.6435 17V8.52H41.1155V10.824L40.9715 10.248C41.2062 9.66133 41.6008 9.21333 42.1555 8.904C42.7102 8.59467 43.3928 8.44 44.2035 8.44V9.928C44.1395 9.91733 44.0755 9.912 44.0115 9.912C43.9582 9.912 43.9048 9.912 43.8515 9.912C43.0302 9.912 42.3795 10.1573 41.8995 10.648C41.4195 11.1387 41.1795 11.848 41.1795 12.776V17H39.6435ZM49.774 17.096C49.0487 17.096 48.4087 16.9627 47.854 16.696C47.31 16.4293 46.8833 16.024 46.574 15.48C46.2753 14.9253 46.126 14.232 46.126 13.4V8.52H47.662V13.224C47.662 14.056 47.8593 14.68 48.254 15.096C48.6593 15.512 49.2247 15.72 49.95 15.72C50.4833 15.72 50.9473 15.6133 51.342 15.4C51.7367 15.176 52.0407 14.856 52.254 14.44C52.4673 14.0133 52.574 13.5013 52.574 12.904V8.52H54.11V17H52.654V14.712L52.894 15.32C52.6167 15.8853 52.2007 16.3227 51.646 16.632C51.0913 16.9413 50.4673 17.096 49.774 17.096ZM59.4661 17.096C58.7621 17.096 58.0901 17 57.4501 16.808C56.8208 16.616 56.3248 16.3813 55.9621 16.104L56.6021 14.888C56.9648 15.1333 57.4128 15.3413 57.9461 15.512C58.4795 15.6827 59.0235 15.768 59.5781 15.768C60.2928 15.768 60.8048 15.6667 61.1141 15.464C61.4341 15.2613 61.5941 14.9787 61.5941 14.616C61.5941 14.3493 61.4981 14.1413 61.3061 13.992C61.1141 13.8427 60.8581 13.7307 60.5381 13.656C60.2288 13.5813 59.8821 13.5173 59.4981 13.464C59.1141 13.4 58.7301 13.3253 58.3461 13.24C57.9621 13.144 57.6101 13.016 57.2901 12.856C56.9701 12.6853 56.7141 12.456 56.5221 12.168C56.3301 11.8693 56.2341 11.4747 56.2341 10.984C56.2341 10.472 56.3781 10.024 56.6661 9.64C56.9541 9.256 57.3595 8.96267 57.8821 8.76C58.4155 8.54667 59.0448 8.44 59.7701 8.44C60.3248 8.44 60.8848 8.50933 61.4501 8.648C62.0261 8.776 62.4955 8.96267 62.8581 9.208L62.2021 10.424C61.8181 10.168 61.4181 9.992 61.0021 9.896C60.5861 9.8 60.1701 9.752 59.7541 9.752C59.0821 9.752 58.5808 9.864 58.2501 10.088C57.9195 10.3013 57.7541 10.5787 57.7541 10.92C57.7541 11.208 57.8501 11.432 58.0421 11.592C58.2448 11.7413 58.5008 11.8587 58.8101 11.944C59.1301 12.0293 59.4821 12.104 59.8661 12.168C60.2501 12.2213 60.6341 12.296 61.0181 12.392C61.4021 12.4773 61.7488 12.6 62.0581 12.76C62.3781 12.92 62.6341 13.144 62.8261 13.432C63.0288 13.72 63.1301 14.104 63.1301 14.584C63.1301 15.096 62.9808 15.5387 62.6821 15.912C62.3835 16.2853 61.9621 16.5787 61.4181 16.792C60.8741 16.9947 60.2235 17.096 59.4661 17.096ZM67.9618 17.096C67.1084 17.096 66.4471 16.8667 65.9778 16.408C65.5084 15.9493 65.2738 15.2933 65.2738 14.44V6.664H66.8098V14.376C66.8098 14.8347 66.9218 15.1867 67.1458 15.432C67.3804 15.6773 67.7111 15.8 68.1378 15.8C68.6178 15.8 69.0178 15.6667 69.3378 15.4L69.8178 16.504C69.5831 16.7067 69.3004 16.856 68.9698 16.952C68.6498 17.048 68.3138 17.096 67.9618 17.096ZM63.8338 9.784V8.52H69.2418V9.784H63.8338ZM76.1708 17.096C75.4668 17.096 74.8214 16.936 74.2348 16.616C73.6588 16.2853 73.1948 15.8 72.8428 15.16C72.5014 14.52 72.3307 13.72 72.3307 12.76C72.3307 11.8 72.4961 11 72.8268 10.36C73.1681 9.72 73.6268 9.24 74.2028 8.92C74.7894 8.6 75.4454 8.44 76.1708 8.44C77.0028 8.44 77.7388 8.62133 78.3788 8.984C79.0188 9.34667 79.5254 9.85333 79.8988 10.504C80.2721 11.144 80.4588 11.896 80.4588 12.76C80.4588 13.624 80.2721 14.3813 79.8988 15.032C79.5254 15.6827 79.0188 16.1893 78.3788 16.552C77.7388 16.9147 77.0028 17.096 76.1708 17.096ZM71.6748 20.104V8.52H73.1468V10.808L73.0508 12.776L73.2108 14.744V20.104H71.6748ZM76.0428 15.752C76.5868 15.752 77.0721 15.6293 77.4988 15.384C77.9361 15.1387 78.2774 14.792 78.5228 14.344C78.7788 13.8853 78.9068 13.3573 78.9068 12.76C78.9068 12.152 78.7788 11.6293 78.5228 11.192C78.2774 10.744 77.9361 10.3973 77.4988 10.152C77.0721 9.90667 76.5868 9.784 76.0428 9.784C75.5094 9.784 75.0241 9.90667 74.5868 10.152C74.1601 10.3973 73.8188 10.744 73.5628 11.192C73.3174 11.6293 73.1948 12.152 73.1948 12.76C73.1948 13.3573 73.3174 13.8853 73.5628 14.344C73.8188 14.792 74.1601 15.1387 74.5868 15.384C75.0241 15.6293 75.5094 15.752 76.0428 15.752ZM82.581 17V8.52H84.117V17H82.581ZM83.349 6.888C83.0503 6.888 82.7997 6.792 82.597 6.6C82.405 6.408 82.309 6.17333 82.309 5.896C82.309 5.608 82.405 5.368 82.597 5.176C82.7997 4.984 83.0503 4.888 83.349 4.888C83.6477 4.888 83.893 4.984 84.085 5.176C84.2877 5.35733 84.389 5.58667 84.389 5.864C84.389 6.152 84.293 6.39733 84.101 6.6C83.909 6.792 83.6583 6.888 83.349 6.888ZM87.0498 17V5.128H88.5858V17H87.0498ZM95.1505 17.096C94.2972 17.096 93.5398 16.9093 92.8785 16.536C92.2172 16.1627 91.6945 15.6507 91.3105 15C90.9265 14.3387 90.7345 13.592 90.7345 12.76C90.7345 11.9173 90.9265 11.1707 91.3105 10.52C91.6945 9.86933 92.2172 9.36267 92.8785 9C93.5398 8.62667 94.2972 8.44 95.1505 8.44C95.9932 8.44 96.7452 8.62667 97.4065 9C98.0785 9.36267 98.6012 9.86933 98.9745 10.52C99.3585 11.16 99.5505 11.9067 99.5505 12.76C99.5505 13.6027 99.3585 14.3493 98.9745 15C98.6012 15.6507 98.0785 16.1627 97.4065 16.536C96.7452 16.9093 95.9932 17.096 95.1505 17.096ZM95.1505 15.752C95.6945 15.752 96.1798 15.6293 96.6065 15.384C97.0438 15.1387 97.3852 14.792 97.6305 14.344C97.8758 13.8853 97.9985 13.3573 97.9985 12.76C97.9985 12.152 97.8758 11.6293 97.6305 11.192C97.3852 10.744 97.0438 10.3973 96.6065 10.152C96.1798 9.90667 95.6945 9.784 95.1505 9.784C94.6065 9.784 94.1212 9.90667 93.6945 10.152C93.2678 10.3973 92.9265 10.744 92.6705 11.192C92.4145 11.6293 92.2865 12.152 92.2865 12.76C92.2865 13.3573 92.4145 13.8853 92.6705 14.344C92.9265 14.792 93.2678 15.1387 93.6945 15.384C94.1212 15.6293 94.6065 15.752 95.1505 15.752ZM104.587 17.096C103.733 17.096 103.072 16.8667 102.603 16.408C102.133 15.9493 101.899 15.2933 101.899 14.44V6.664H103.435V14.376C103.435 14.8347 103.547 15.1867 103.771 15.432C104.005 15.6773 104.336 15.8 104.763 15.8C105.243 15.8 105.643 15.6667 105.963 15.4L106.443 16.504C106.208 16.7067 105.925 16.856 105.595 16.952C105.275 17.048 104.939 17.096 104.587 17.096ZM100.459 9.784V8.52H105.867V9.784H100.459Z" fill="currentColor"/> </svg></span>
+    <span><strong>TrustScore 4,4</strong> &middot; 966 reviews <span style="opacity:.55">&mdash; &eacute;&eacute;n keer onder de ladder, niet per kaart</span></span>
+  </p>
+
+  <div class="note warn">
+    <h4>Over die €9,90 — en de correctie op de €52,85</h4>
+    <p>De besparing op het pakket heb ik zelf uitgerekend uit losse prijzen die ik kan nawijzen: Groom Guard PRO €59,95 + Neustrimmer Advance 3-in-1 €24,95 + extra SkinSafe mes €14,95 = <strong>€99,85</strong> tegen €89,95 samen. Dat is €9,90, en de toilettas en reistas zitten er dan nog bovenop — vandaar «minstens».</p>
+    <p><strong>Correctie, 23 augustus 2026.</strong> Ik schreef hier dat ik de €52,85 uit deel 05 nergens op kon uitkomen, «ook niet via de doorgestreepte prijzen». Dat was fout. De Shave Package Ultimate staat op €89,95 met een doorgestreepte prijs van <strong>€142,80</strong>; het verschil is exact €52,85. Ik had de doorgestreepte prijs van het pakket zelf niet opgevraagd, alleen de losse artikelen opgeteld. Beide getallen kloppen dus, ze meten alleen iets anders: €9,90 is wat je bespaart tegenover de losse artikelen kopen, €52,85 is wat de doorgestreepte prijs zegt. Op de kaart hoort de tweede, want die staat in Shopify.</p>
+  </div>
+
+  <div class="note">
+    <h4>Het cadeau op de bovenste kaart kan technisch al</h4>
+    <p>Je hebt de verborgen €0,00-varianten al staan en ze zijn op voorraad: <code>gift-the-washbag</code> (200), <code>gift-neustrimmer-elite</code> (108), <code>gift-neustrimmer-ultra</code> (36). De knop legt het artikel er gewoon bij — geen kortingsregel, niets dat kan verlopen.</p>
+    <p>Eén ding om te controleren voordat je dit inzet: <strong>The Washbag is met 345 bestellingen in 90 dagen je meest verkochte artikel</strong>. Iets weggeven dat op eigen kracht verkoopt, kost omzet. De neustrimmer is waarschijnlijk het slimmere cadeau — hij maakt de routine compleet en neemt een bezwaar weg dat het pakket toch al oplost.</p>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">05</span><h2 class="duo">De sectievolgorde,<span class="b">met licht en donker om beurten.</span></h2></div>
+  <p class="sintro">Zeventien blokken. Dertien bestaan al als metafield, één is nieuw, drie zijn herbouwd. De donkere secties vallen waar het serieus wordt: het mechanisme en het aanbod.</p>
+
+  <div class="ord">
+    <div class="orow"><div class="i">01</div><div class="t"><b>Koopblok</b><em>herbouwd — versie 6, desktop én telefoon</em></div><div class="g zand">zand</div></div>
+    <div class="orow"><div class="i">02</div><div class="t"><b>Geruststrook</b><em>vier items: proefperiode, garantie, verzending, levertijd</em></div><div class="g wit">wit</div></div>
+    <div class="orow"><div class="i">03</div><div class="t"><b>Veilig trimmen waar het telt</b><em>herkadering eerst, mechanisme daarna — het eerste blok onder de vouw</em></div><div class="g donker">donker</div></div>
+    <div class="orow"><div class="i">04</div><div class="t"><b>Beoordelingen</b><em>Trustpilot-muur, zonder foto’s: die heeft Trustpilot niet</em></div><div class="g wit">wit</div></div>
+    <div class="orow"><div class="i">05</div><div class="t"><b>Het aanbodblok</b><em>ná het mechanisme en het bewijs — drie kaarten, zie sectie 04</em></div><div class="g donker">donker</div></div>
+    <div class="orow"><div class="i">06</div><div class="t"><b>Van trimmen naar glad scheren</b><em>de tweede helft van het mechanisme</em></div><div class="g zand">zand</div></div>
+    <div class="orow"><div class="i">07</div><div class="t"><b>Zie precies waar je trimt</b><em>één beeld, één claim, volle breedte</em></div><div class="g zand">zand</div></div>
+    <div class="orow"><div class="i">08</div><div class="t"><b>UGC-video’s</b><em>custom.ugc_video_list — bewijs midden in de uitleg, niet erna</em></div><div class="g wit">wit</div></div>
+    <div class="orow"><div class="i">09</div><div class="t"><b>Vergelijk de modellen</b><em>custom.compare_table — telt zwaarder naarmate de markt volwassener is</em></div><div class="g wit">wit</div></div>
+    <div class="orow nieuw"><div class="i">10</div><div class="t"><b>Wat kost het je per jaar</b><em>nieuw — de eerlijke mesjesvergelijking</em></div><div class="g donker">donker</div></div>
+    <div class="orow"><div class="i">11</div><div class="t"><b>Wat zit er in de doos</b><em>custom.included_box</em></div><div class="g zand">zand</div></div>
+    <div class="orow"><div class="i">12</div><div class="t"><b>Waarom Wellshave</b><em>vier beloftes plus het bestelaantal met bronlabel</em></div><div class="g wit">wit</div></div>
+    <div class="orow"><div class="i">13</div><div class="t"><b>Omschrijving en specificaties</b><em>samen in één blad — betoog links, tabel rechts</em></div><div class="g zand">zand</div></div>
+    <div class="orow"><div class="i">14</div><div class="t"><b>Verzending &amp; Retourneren</b><em>custom.shipping_information</em></div><div class="g wit">wit</div></div>
+    <div class="orow"><div class="i">15</div><div class="t"><b>Veelgestelde vragen</b><em>custom.faq — bezwaar-eerst gesorteerd</em></div><div class="g zand">zand</div></div>
+    <div class="orow nieuw"><div class="i">16</div><div class="t"><b>Maak het compleet</b><em>vijf accessoires uit custom.cart_upsell — de aanvulling, niet de ladder</em></div><div class="g donker">donker</div></div>
+    <div class="orow"><div class="i">17</div><div class="t"><b>Afsluiter</b><em>mini-koopblok: kop, prijs, knop, bewijs, betaalrij</em></div><div class="g donker">donker</div></div>
+  </div>
+
+  <div class="note">
+    <h4>Wat er verdwijnt</h4>
+    <p>Het aanbevelingsblok «Dit vindt je ook interresant» staat er niet in. Zolang het vier kaarten met Lorem ipsum en €0,00 rendert, is het laatste wat een doorscroller van je ziet kapotte software. Repareren of uitzetten — niet verplaatsen.</p>
+    <p>Een <strong>plakkende koopknop</strong> loopt over alle achttien blokken mee, zodat interesse overal om te zetten is. Dat is de enige plek waar de knop twee keer mag staan.</p>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">06</span><h2 class="duo">Wat je in Shopify aanmaakt,<span class="b">en wat er al klaarstaat.</span></h2></div>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>Metafield</th><th>Type</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td><code>custom.buybox_quote</code></td><td>single_line_text</td><td class="no">aanmaken</td></tr>
+        <tr><td><code>custom.buybox_quote_author</code></td><td>single_line_text</td><td class="no">aanmaken</td></tr>
+        <tr><td><code>custom.hero_promise</code></td><td>single_line_text</td><td class="no">aanmaken</td></tr>
+        <tr><td><code>custom.risk_strip</code></td><td>list.single_line_text</td><td class="no">aanmaken</td></tr>
+        <tr><td><code>custom.yearly_cost</code></td><td>metaobject_reference</td><td class="no">aanmaken</td></tr>
+        <tr><td><code>custom.product_offer</code></td><td>metaobject_reference</td><td class="no">aanmaken</td></tr>
+        <tr><td><code>custom.specification</code></td><td>rich_text &rarr; label/waarde</td><td class="ok">herschrijven als «Label: waarde»</td></tr>
+        <tr><td><code>custom.cart_upsell</code></td><td>list.product_reference</td><td class="ok">bestaat, blok 16</td></tr>
+        <tr><td><code>custom.upgrade</code> &middot; <code>custom.upgrade_details</code></td><td>metaobject_reference</td><td class="ok">verwijderen</td></tr>
+        <tr><td><code>custom.product_usp</code></td><td>list.single_line_text</td><td class="ok">herschrijven</td></tr>
+        <tr><td>Trustpilot-widget <span class="mono">63c511d4&hellip;</span></td><td>widget</td><td class="ok">binden i.p.v. intypen</td></tr>
+        <tr><td><code>compare_table</code> · <code>included_box</code> · <code>image_with_text</code> · <code>ugc_video_list</code> · <code>specification</code> · <code>faq</code> · <code>store_usp</code> · <code>upgrade</code> · <code>cart_upsell</code></td><td>diverse</td><td class="ok">staan al gevuld</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note warn">
+    <h4>Drie dingen die eerst weg moeten</h4>
+    <p><strong>Het Duits staat er nog live.</strong> <code>global.description_tag</code> op de PRO luidt nog altijd «SkinSafe keramische <em>Messgeräte</em>, IPX7, 120 <em>Min. Batterie</em>». Dat is je Google-snippet. De basis heeft juist een goede: «De bodygroomer ontworpen voor de zones waar andere trimmers te risicovol zijn.» Neem die toon over.</p>
+    <p><strong>Drie reviewsystemen op één product.</strong> De basis-Groom Guard draagt Judge.me, Loox én Shopify-reviews naast elkaar, plus GemPages. Dat is waar de tegenstrijdige aantallen vandaan komen. Ze gaan alle drie eruit: het sociale bewijs komt voortaan van Trustpilot, één bron, winkelbreed, bij een derde partij. Wat je daarmee inlevert — een score per product en foto-reviews — staat uitgeschreven in blok 01, sectie «sociaal bewijs».</p>
+    <p><strong>«#1 Bodytrimmer voor b*lls en lichaam»</strong> is een claim zonder bron. Of je wijst hem aan, of hij gaat eruit. De merklaag is daar niet soepel in, en terecht: één betrapt cijfer kost het vertrouwen in de rest.</p>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">07</span><h2 class="duo">Wat je als eerste test,<span class="b">en wat je juist niet moet testen.</span></h2></div>
+  <p class="sintro">Met circa 15.600 sessies per maand zit je onder de grens voor klassieke A/B-tests. Dat betekent grote, brede wijzigingen meten over enkele weken — niet één knoptekst tegen een andere.</p>
+
+  <div class="ord">
+    <div class="orow"><div class="i">01</div><div class="t"><b>De belofte boven de vouw</b><em>«Vergevend genoeg…» tegen de huidige ondertitel. Laagste inspanning, hoogste opbrengst.</em></div><div class="g donker">eerst</div></div>
+    <div class="orow"><div class="i">02</div><div class="t"><b>Het hele koopblok als geheel</b><em>citaat + belofte + risicostrook samen. Niet los — daar heb je het verkeer niet voor.</em></div><div class="g donker">daarna</div></div>
+    <div class="orow"><div class="i">03</div><div class="t"><b>De sectievolgorde</b><em>oud tegen nieuw, sjabloonbreed. Dit is de grote.</em></div><div class="g zand">derde</div></div>
+  </div>
+
+  <div class="note">
+    <h4>P1 is geen test</h4>
+    <p>Het Duits, de Lorem ipsum, «levenslang jaar garantie», de drie reviewaantallen, de ontbrekende alt-teksten en de <code>EMPTY DOM REMOVE PROTECTOR</code>: dat zijn geen varianten om tegen elkaar te zetten. Kapotte tekst repareer je gewoon, en je doet het <strong>los van de herbouw</strong> — anders weet je achteraf niet of de winst uit het herstelde vertrouwen kwam of uit de nieuwe volgorde.</p>
+  </div>
+</section>
+
+<div class="foot">
+  <strong>Herkomst van elk cijfer.</strong> Prijzen, doorgestreepte prijzen en voorraad: Shopify Admin API, 23 augustus 2026. Reviewaantal en score: Trustpilot &mdash; TrustScore 4,4 &middot; 966 reviews, opgehaald 23 augustus 2026 via de widget-API op de business unit in je eigen thema. Bestellingen en omzet: Shopify-analytics, 90 dagen. Bestaande metafields: uitgelezen per product, niet aangenomen. De besparing op het pakket is berekend uit losse artikelprijzen die alle drie na te wijzen zijn.<br><br>
+  <strong>Niet gebruikt.</strong> Scrolldiepte, klikkaarten en rage clicks — die zitten in Clarity en zijn vanuit deze sessie niet te bereiken. De volgorde in sectie 05 rust dus op de concurrentievergelijking, op de PDP-anatomie uit de skill en op het VoC-dossier, niet op jouw eigen scrollgedrag. Zodra dat cijfer er is, is sectie 05 het eerste dat het toetst.
+</div>
+
+</div>

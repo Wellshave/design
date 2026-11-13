@@ -1,0 +1,65 @@
+{% comment %}
+  Wellshave v7 · hero: een grote foto met de kop, en rechts twee tegels met een link.
+  Ontwerp: artifacts/wellshave-manscaped-stijl.html
+{% endcomment %}
+{{ 'ws7.css' | asset_url | stylesheet_tag }}
+
+<section class="ws7 ws7-hero{% if section.settings.bf_accent %} ws-bf-accent{% endif %}" style="--mob-pos:{{ section.settings.mob_pos | default: '50% 20%' }}">
+  <a class="ws7-hero__groot ws7-donkergrond" href="{{ section.settings.link | default: '#' }}">
+    {%- if section.settings.foto != blank -%}
+      <picture>
+        {%- if section.settings.foto_mobiel != blank -%}
+          <source media="(max-width: 749px)" srcset="{{ section.settings.foto_mobiel | image_url: width: 900 }}">
+        {%- endif -%}
+        {%- assign ws7_stijl = 'object-position:' | append: section.settings.pos -%}
+        {{ section.settings.foto | image_url: width: 2000 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '750,1100,1500,2000', sizes: '(max-width: 749px) 100vw, 66vw', alt: section.settings.foto.alt, style: ws7_stijl }}
+      </picture>
+    {%- endif -%}
+    <span class="ws7-hero__tekst">
+      {%- if section.settings.oog != blank -%}<span class="ws7-oog">{{ section.settings.oog }}</span>{%- endif -%}
+      <span class="ws7-hero__kop">{{ section.settings.kop | newline_to_br }}{% if section.settings.kop_goud != blank %}<span class="ws7-goud">{{ section.settings.kop_goud }}</span>{% endif %}</span>
+      {%- if section.settings.sub != blank -%}<span class="ws7-hero__sub">{{ section.settings.sub }}</span>{%- endif -%}
+      {%- if section.settings.link_label != blank -%}<span class="ws7-link">{{ section.settings.link_label }}{% render 'ws7-pijl' %}</span>{%- endif -%}
+    </span>
+  </a>
+  {%- if section.blocks.size > 0 -%}
+  <div class="ws7-hero__rechts">
+    {%- for block in section.blocks -%}
+      <a class="ws7-hero__tegel" href="{{ block.settings.link | default: '#' }}" {{ block.shopify_attributes }}>
+        {%- if block.settings.foto != blank -%}{{ block.settings.foto | image_url: width: 900 | image_tag: loading: 'eager', widths: '450,700,900', sizes: '(max-width: 749px) 50vw, 33vw', alt: block.settings.foto.alt }}{%- endif -%}
+        {%- if block.settings.label != blank -%}<span>{{ block.settings.label }}</span>{%- endif -%}
+      </a>
+    {%- endfor -%}
+  </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "WS7 · Hero",
+  "tag": "div",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "max_blocks": 2,
+  "settings": [
+    { "type": "image_picker", "id": "foto", "label": "Foto" },
+    { "type": "text", "id": "pos", "label": "Uitsnede desktop", "default": "60% 34%", "info": "Horizontaal en verticaal in procenten, bijvoorbeeld 60% 34%." },
+    { "type": "image_picker", "id": "foto_mobiel", "label": "Foto telefoon", "info": "Leeg = dezelfde foto." },
+    { "type": "text", "id": "mob_pos", "label": "Uitsnede telefoon", "default": "50% 20%" },
+    { "type": "text", "id": "oog", "label": "Bovenregel", "default": "Herfst Sale · tot 40%" },
+    { "type": "textarea", "id": "kop", "label": "Kop", "default": "Jouw huid.\nJouw lijn." },
+    { "type": "text", "id": "kop_goud", "label": "Kop, regel in goud", "default": "Wellshave." },
+    { "type": "text", "id": "sub", "label": "Onderregel" },
+    { "type": "text", "id": "link_label", "label": "Linktekst", "default": "Shop nu" },
+    { "type": "checkbox", "id": "bf_accent", "label": "Black Friday-accent (rood)", "info": "Alleen zichtbaar als Thema-instellingen > Black Friday > Rode accenten aan staat.", "default": false },
+    { "type": "url", "id": "link", "label": "Link" }
+  ],
+  "blocks": [
+    { "type": "tegel", "name": "Tegel", "settings": [
+      { "type": "image_picker", "id": "foto", "label": "Foto" },
+      { "type": "text", "id": "label", "label": "Label", "default": "Shop de Herfst Sale" },
+      { "type": "url", "id": "link", "label": "Link" }
+    ]}
+  ],
+  "presets": [ { "name": "WS7 · Hero" } ]
+}
+{% endschema %}

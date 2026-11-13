@@ -1,0 +1,18 @@
+{%- comment -%}
+  Wellshave — één voordeel in het koopvak: een goudkleurig vinkje, de kern vet
+  en de rest licht. De kern loopt tot de eerste dubbele punt of komma; die
+  leestekens blijven gewoon staan.
+  Gebruik: {% render 'ws-voordeel-regel', tekst: 'Echt glad, niet alleen kort' %}
+{%- endcomment -%}
+{%- liquid
+  assign kern = tekst
+  assign rest = ''
+  if tekst contains ':'
+    assign kern = tekst | split: ':' | first
+    assign rest = tekst | remove_first: kern
+  elsif tekst contains ','
+    assign kern = tekst | split: ',' | first
+    assign rest = tekst | remove_first: kern
+  endif
+-%}
+<li><span class="ws-vk-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 12.5l3.8 3.8L18 8"/></svg></span><span class="ws-vk-tx"><b>{{ kern }}</b>{{ rest }}</span></li>

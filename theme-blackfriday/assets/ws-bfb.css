@@ -1,0 +1,196 @@
+/* Wellshave Black Friday-kaart op de PDP. Laadt alleen als de kaart getoond
+   wordt, zodat hij werkt met en zonder v7. */
+/* ═══ Black Friday-kaart: rustig, licht, met rood alleen als accent ═══
+   Eerst was dit een zwart blok met een rondlopende rand, een glans over de
+   deal en een pulserend label. Dat trok de aandacht weg van de keuze en de
+   prijs. Nu: een witte kaart met een dunne rand, de deal in inkt, een klein
+   rood label en een klok in zandkleurige vakjes. Geen beweging meer.
+   Contrast: inkt op wit 18:1, grijs #6A635A 5,9:1, rood #B3261E 6,6:1. */
+.ws-bfb{position:relative;margin-top:14px;border-radius:14px;border:1px solid rgba(17,17,17,.12);background:#fff}
+.ws-bfb__rand{display:none}
+.ws-bfb__in{position:relative;border-radius:14px;padding:12px 14px 12px;color:#111}
+.ws-bfb__top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.ws-bfb__tag{display:inline-flex;align-items:center;gap:6px;color:#B3261E;font-size:10px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;line-height:1}
+.ws-bfb__tag i{width:6px;height:6px;border-radius:50%;background:#B3261E}
+.ws-bfb__eind{font-size:11px;font-weight:500;color:#6A635A;letter-spacing:.01em;white-space:nowrap}
+.ws-bfb__mid{display:flex;align-items:center;justify-content:space-between;gap:10px 14px;flex-wrap:wrap;margin-top:9px}
+.ws-bfb__deal{margin:0;display:flex;align-items:baseline;flex-wrap:wrap;gap:2px 8px;line-height:1}
+.ws-bfb__deal b{font-size:22px;font-weight:700;letter-spacing:-.02em;line-height:1;color:#111}
+.ws-bfb__deal span{font-size:13px;font-weight:500;color:#6A635A}
+.ws-bfb__klok{display:flex;gap:4px}
+.ws-bfb__klok[hidden]{display:none}
+.ws-bfb__klok > span{min-width:34px;padding:4px 3px;border-radius:7px;text-align:center;background:#F5F1EA}
+.ws-bfb__klok b{display:block;font-size:13.5px;font-weight:600;line-height:1.1;color:#111;font-variant-numeric:tabular-nums}
+.ws-bfb__klok small{display:block;margin-top:1px;font-size:8px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#6A635A}
+.ws-bfb__sub{margin:8px 0 0;font-size:12px;line-height:1.45;color:#6A635A}
+@media screen and (max-width:749px){
+  .ws-bfb__in{padding:11px 12px}
+  .ws-bfb__deal b{font-size:20px}
+  .ws-bfb__eind{font-size:10.5px}
+}
+.ws-pdp .ws-bb > .ws-bfb{order:9}
+
+/* Het cadeaudeel: een eigen vak onder de korting, met een plusje ervoor zodat
+   leesbaar is dat het er bovenop komt. Eigen klok, want de cadeaus stoppen eerder. */
+.ws-bfb__cad{margin-top:11px;padding:10px 11px 9px;border-radius:10px;background:#F5F1EA}
+.ws-bfb__cadkop{margin:0;display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12.5px;line-height:1.2;color:#111}
+.ws-bfb__cadkop b{font-weight:600}
+.ws-bfb__plus{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;
+  background:#E9DCC0;color:#111;font-size:13px;font-weight:700;line-height:1}
+.ws-bfb__cadklok{margin-left:auto;font-size:11px;font-weight:500;color:#6A635A;font-variant-numeric:tabular-nums;white-space:nowrap}
+.ws-bfb__cadklok[hidden]{display:none}
+.ws-bfb__cadlijst{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:6px}
+.ws-bfb__cadlijst li{display:flex;align-items:center;gap:10px;margin:0}
+.ws-bfb__cadimg{flex:0 0 36px;width:36px;height:36px;border-radius:8px;overflow:hidden;background:#fff}
+.ws-bfb__cadimg img{width:100%;height:100%;object-fit:cover;display:block}
+.ws-bfb__cadnm{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.ws-bfb__cadnm b{font-size:12.5px;font-weight:600;color:#111;line-height:1.25}
+.ws-bfb__cadnm small{font-size:11px;color:#6A635A;line-height:1.3}
+.ws-bfb__cadpr{display:flex;align-items:baseline;gap:7px;white-space:nowrap}
+.ws-bfb__cadpr s{font-size:11px;color:#A39A8E}
+.ws-bfb__cadpr em{font-style:normal;font-size:12.5px;font-weight:700;color:#24804A}
+.ws-bfb__cadregel{margin:9px 0 0;padding-top:8px;border-top:1px solid rgba(17,17,17,.08);font-size:11px;line-height:1.45;color:#6A635A}
+@media screen and (max-width:749px){
+  .ws-bfb__cad{padding:9px 10px 8px}
+  .ws-bfb__cadkop{row-gap:6px}
+  .ws-bfb__cadklok{margin-left:26px}
+}
+
+/* Status per cadeau, volgt de gekozen optie (data-st: ok, nog, in). */
+.ws-bfb__st,.ws-bfb__cadpr.ws-bfb__st--nog{display:none}
+.ws-bfb__cadlijst li[data-st="ok"] .ws-bfb__st--ok,
+.ws-bfb__cadlijst li[data-st="nog"] .ws-bfb__st--nog,
+.ws-bfb__cadlijst li[data-st="in"] .ws-bfb__st--in{display:flex}
+.ws-bfb__cadlijst li:not([data-st="ok"]) .ws-bfb__cadpr.ws-bfb__st--ok{display:none}
+.ws-bfb__cadlijst li[data-st="ok"] .ws-bfb__st--ok{color:#24804A;font-weight:600}
+.ws-bfb__cadlijst li[data-st="ok"] small.ws-bfb__st--ok::before{content:"\2713";margin-right:5px}
+.ws-bfb__cadlijst li[data-st="nog"] .ws-bfb__cadimg,
+.ws-bfb__cadlijst li[data-st="in"] .ws-bfb__cadimg{opacity:.45}
+.ws-bfb__cadlijst li[data-st="nog"] .ws-bfb__cadnm b,
+.ws-bfb__cadlijst li[data-st="in"] .ws-bfb__cadnm b{color:#6A635A}
+.ws-bfb__cadlijst li[data-st="nog"] small.ws-bfb__st--nog{color:#B3261E}
+.ws-bfb__cadpr i{font-style:normal;font-size:11.5px;font-weight:600;color:#6A635A}
+.ws-bfb__cadlijst li{transition:opacity .25s}
+
+/* Black Friday-branding, zelfde taal als de menubanner en de kortingslabels:
+   een rode streep links, een rood label met witte letters, de deal in rood en
+   rood op de seconden en de cadeauklok. De kaart blijft licht en stil.
+   Wit op #C8281F 5,4:1, #B3261E op wit 6,6:1. */
+.ws-bfb{border-color:rgba(200,40,31,.28);box-shadow:inset 3px 0 0 #C8281F}
+.ws-bfb__tag{padding:5px 9px 5px 8px;border-radius:100px;background:#C8281F;color:#fff}
+.ws-bfb__tag i{background:#fff}
+.ws-bfb__deal b{color:#B3261E}
+.ws-bfb__klok > span:last-child{background:rgba(200,40,31,.09)}
+.ws-bfb__klok > span:last-child b{color:#B3261E}
+.ws-bfb__cadklok{color:#B3261E;font-weight:600}
+
+/* Donker, richting "Black" Friday: zwarte kaart met crème letters, rood voor
+   de actie en goud voor de cadeaus. Nog steeds stil, zonder bewegende rand.
+   Contrast op #161412: crème 15:1, grijs-crème 8,2:1, rood #FF5A4F 5,9:1,
+   groen #6FD39A 9,6:1, goud #F5D18A 12:1. */
+.ws-bfb{border-color:rgba(255,90,79,.35);box-shadow:inset 3px 0 0 #E0281C,0 14px 26px -20px rgba(0,0,0,.55);
+  background:radial-gradient(120% 140% at 0% 0%,rgba(224,40,28,.16) 0%,rgba(224,40,28,0) 45%),linear-gradient(160deg,#1C1A17 0%,#141210 70%,#0F0D0C 100%)}
+.ws-bfb__in{color:#F7EEDD}
+.ws-bfb__tag{background:#E0281C}
+.ws-bfb__eind,.ws-bfb__deal span,.ws-bfb__sub,.ws-bfb__klok small{color:rgba(247,238,221,.68)}
+.ws-bfb__deal b{color:#FF5A4F}
+.ws-bfb__klok > span{background:rgba(255,255,255,.07);border:1px solid rgba(245,209,138,.16)}
+.ws-bfb__klok b{color:#FFF6E6}
+.ws-bfb__klok > span:last-child{background:rgba(255,90,79,.12);border-color:rgba(255,90,79,.4)}
+.ws-bfb__klok > span:last-child b{color:#FF5A4F}
+.ws-bfb__cad{background:rgba(255,255,255,.05);border:1px solid rgba(245,209,138,.14)}
+.ws-bfb__cadkop{color:#FFF6E6}
+.ws-bfb__plus{background:#F5D18A;color:#14120F}
+.ws-bfb__cadklok{color:#FF5A4F}
+.ws-bfb__cadimg{background:#F4EFE6}
+.ws-bfb__cadnm b{color:#F7EEDD}
+.ws-bfb__cadnm small,.ws-bfb__cadregel,.ws-bfb__cadpr i{color:rgba(247,238,221,.66)}
+.ws-bfb__cadpr s{color:rgba(247,238,221,.5)}
+.ws-bfb__cadpr em,.ws-bfb__cadlijst li[data-st="ok"] .ws-bfb__st--ok{color:#6FD39A}
+.ws-bfb__cadregel{border-top-color:rgba(255,255,255,.1)}
+.ws-bfb__cadlijst li[data-st="nog"] .ws-bfb__cadnm b,
+.ws-bfb__cadlijst li[data-st="in"] .ws-bfb__cadnm b{color:rgba(247,238,221,.6)}
+.ws-bfb__cadlijst li[data-st="nog"] small.ws-bfb__st--nog{color:#FF8A80}
+
+/* Kies je 2e artikel (sections/ws-bf-tweede.liquid). Neemt in de kaart de plek
+   van de cadeaus in: de cadeaus staan al in "Kies je aanbieding" en in de
+   winkelwagen. Zelfde vak als het cadeaudeel, met een plus/min voor "nog een"
+   en een knop per ander artikel. */
+.ws-bfb--tweede .ws-bfb__cad{display:none}
+.ws-bft{margin-top:11px;padding:10px 11px 9px;border-radius:10px;background:rgba(255,255,255,.05);border:1px solid rgba(245,209,138,.14)}
+.ws-bft[hidden]{display:none}
+.ws-bft__kop{margin:0;display:flex;align-items:center;gap:8px;font-size:12.5px;line-height:1.2;color:#FFF6E6}
+.ws-bft__kop b{font-weight:600}
+.ws-bft__kop em{margin-left:auto;font-style:normal;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:4px 8px;border-radius:100px;background:#E0281C;color:#fff;white-space:nowrap}
+.ws-bft__plus{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;background:#F5D18A;color:#14120F;font-size:13px;font-weight:700;line-height:1}
+.ws-bft__rij{display:flex;align-items:center;gap:10px;margin:0}
+.ws-bft__rij[hidden]{display:none}
+.ws-bft__zelf{margin-top:9px;padding:8px;border-radius:9px;border:1px solid rgba(245,209,138,.16);transition:border-color .2s,background .2s}
+.ws-bft__zelf.is-aan{border-color:rgba(255,90,79,.55);background:rgba(255,90,79,.08)}
+.ws-bft__beeld{flex:0 0 40px;width:40px;height:40px;border-radius:8px;overflow:hidden;background:#F4EFE6;display:block}
+.ws-bft__beeld img{width:100%;height:100%;object-fit:cover;display:block}
+.ws-bft__nm{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.ws-bft__nm b{font-size:12.5px;font-weight:600;color:#F7EEDD;line-height:1.25}
+.ws-bft__nm small{font-size:11px;color:rgba(247,238,221,.66);line-height:1.3}
+.ws-bft__zelf.is-aan .ws-bft__nm small{color:#6FD39A;font-weight:600}
+.ws-bft__pr{display:flex;flex-direction:column;align-items:flex-end;gap:1px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.ws-bft__pr s{font-size:10.5px;color:rgba(247,238,221,.5)}
+.ws-bft__pr b{font-size:13px;font-weight:700;color:#FF5A4F}
+.ws-bft__tel{display:inline-flex;align-items:center;border-radius:100px;border:1px solid rgba(245,209,138,.3);overflow:hidden}
+.ws-bft__tel button{width:28px;height:28px;border:0;background:none;color:#F7EEDD;font-size:16px;line-height:1;cursor:pointer}
+.ws-bft__tel button:hover{background:rgba(255,255,255,.08)}
+.ws-bft__tel output{min-width:18px;text-align:center;font-size:13px;font-weight:700;color:#FFF6E6;font-variant-numeric:tabular-nums}
+.ws-bft__of{margin:10px 0 6px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(247,238,221,.6)}
+.ws-bft__of[hidden]{display:none}
+.ws-bft__lijst{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.ws-bft__knop{flex:none;position:relative;height:30px;padding:0 12px;border-radius:100px;border:1px solid rgba(245,209,138,.45);background:none;
+  color:#F5D18A;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;white-space:nowrap}
+.ws-bft__knop:hover{background:rgba(245,209,138,.1)}
+.ws-bft__knop-ok{display:none}
+.ws-bft__knop.is-klaar{border-color:#6FD39A;color:#6FD39A}
+.ws-bft__knop.is-klaar .ws-bft__knop-tx{display:none}
+.ws-bft__knop.is-klaar .ws-bft__knop-ok{display:inline}
+.ws-bft__knop.is-klaar .ws-bft__knop-ok::before{content:"\2713  "}
+.ws-bft__knop.is-bezig{opacity:.55;pointer-events:none}
+.ws-bft__regel{margin:9px 0 0;padding-top:8px;border-top:1px solid rgba(255,255,255,.1);font-size:11px;line-height:1.45;color:rgba(247,238,221,.66)}
+@media screen and (max-width:749px){
+  .ws-bft{padding:9px 10px 8px}
+  .ws-bft__zelf{flex-wrap:wrap}
+  .ws-bft__zelf .ws-bft__nm{flex-basis:calc(100% - 50px)}
+  .ws-bft__zelf .ws-bft__pr{margin-left:50px;flex-direction:row;align-items:baseline;gap:7px}
+  .ws-bft__zelf .ws-bft__tel{margin-left:auto}
+  .ws-bft__lijst .ws-bft__rij:not(.is-duur) .ws-bft__nm small{display:none}
+  .ws-bft__knop{padding:0 10px}
+}
+
+/* Toegevoegd: bij aanwijzen wordt het "Weghalen". En de regel onder het totaal. */
+.ws-bft__knop-weg{display:none}
+@media (hover:hover){
+  .ws-bft__knop.is-klaar:hover .ws-bft__knop-ok{display:none}
+  .ws-bft__knop.is-klaar:hover .ws-bft__knop-weg{display:inline}
+  .ws-bft__knop.is-klaar:hover{border-color:rgba(255,90,79,.6);color:#FF5A4F}
+}
+.ws-bft-tot{margin:4px 0 0;font-size:12px;line-height:1.4;color:#B3261E;font-weight:600;text-align:right}
+.ws-bft-tot[hidden]{display:none}
+
+/* Volgorde in de koopkolom: eerst "Kies je aanbieding" (met de upgrade), dan
+   de Black Friday-kaart met het 2e artikel, dan het totaal en de knop. De
+   koopkolom is een flex-kolom; alles na de kaart schuift één plek op, behalve
+   de keuzes, die blijven waar ze in de HTML al stonden. */
+.ws-bb > .ws-bfb,.ws-bb > .ws-bfb ~ *{order:1}
+.ws-bb > .ws-bfb ~ .ws-tiers{order:0}
+.ws-bb > .ws-bfb{margin-top:4px;margin-bottom:18px}
+
+/* Meer keuze: eerst een paar, met een knop naar de hele lijst. Open kan de
+   lijst scrollen, zodat de knop eronder en het totaal in beeld blijven. */
+.ws-bft__lijst.is-open{max-height:340px;overflow-y:auto;padding-right:4px;overscroll-behavior:contain;
+  scrollbar-width:thin;scrollbar-color:rgba(245,209,138,.35) transparent}
+.ws-bft__meer{display:block;width:100%;margin:8px 0 0;padding:9px 12px;border-radius:9px;border:1px dashed rgba(245,209,138,.35);
+  background:none;color:#F5D18A;font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+.ws-bft__meer:hover{background:rgba(245,209,138,.08)}
+.ws-bft__meer[hidden]{display:none}
+.ws-bft__rij.is-duur .ws-bft__pr b{color:#F7EEDD}
+.ws-bft__rij.is-duur .ws-bft__nm small{color:#FF8A80}
+.ws-bft__pr s[hidden]{display:none}

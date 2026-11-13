@@ -1,0 +1,348 @@
+<title>De meting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap">
+<style>
+:root{
+  --ink:#111111;--ink-80:rgba(17,17,17,.8);--ink-60:rgba(17,17,17,.6);
+  --ink-40:rgba(17,17,17,.4);--ink-10:rgba(17,17,17,.10);
+  --paper:#FFFFFF;--sand:#F5F1EA;--sand-deep:#EDE6DA;
+  --carbon:#0B0B0A;--gold:#F5D18A;--bronze:#BC813E;
+  --rood:#C0261C;--groen:#2E6B3E;--oranje:#A8761B;
+  --r-m:18px;--r-l:26px;--rail:1140px;--read:660px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--sand);color:var(--ink);
+  font-family:"Montserrat",-apple-system,BlinkMacSystemFont,Arial,sans-serif;
+  font-size:16.5px;line-height:1.7;-webkit-font-smoothing:antialiased}
+h2,h3{margin:0;text-wrap:balance}
+strong{font-weight:700}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.84em;
+  background:var(--sand-deep);border-radius:4px;padding:1.5px 6px;word-break:break-all}
+.mt{max-width:var(--rail);margin:0 auto;padding:0 24px 96px}
+.eyebrow{font-weight:800;letter-spacing:.2em;text-transform:uppercase;font-size:10.5px;color:var(--ink-40)}
+
+.mast{padding:60px 0 30px;border-bottom:2px solid var(--ink)}
+.mast h1{font-size:clamp(31px,4.9vw,50px);margin:13px 0 0;font-weight:900;letter-spacing:-.025em;line-height:1.06}
+.mast .lede{max-width:var(--read);margin:17px 0 0;font-size:17.5px;color:var(--ink-80);line-height:1.6}
+.bron{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.bron span{font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;background:var(--paper);
+  border:1px solid var(--ink-10);border-radius:100px;padding:6px 13px;color:var(--ink-60)}
+.bron span.ge{background:#E5EBE1;border-color:transparent;color:var(--groen)}
+
+section{padding:44px 0 0}
+.shead{display:flex;align-items:baseline;gap:13px;margin-bottom:6px}
+.snum{font-weight:800;font-size:11px;letter-spacing:.18em;color:var(--bronze);white-space:nowrap}
+.duo{font-size:clamp(25px,3.6vw,39px);font-weight:800;letter-spacing:-.03em;line-height:1.08}
+.duo .b{display:block;color:#B0742A}
+.sintro{max-width:var(--read);color:var(--ink-80);margin:15px 0 0}
+
+/* getalkaarten */
+.kpi{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:26px 0 0}
+.kpi .k{background:var(--paper);border:1px solid var(--ink-10);border-radius:var(--r-m);padding:20px 20px 17px;min-width:0}
+.kpi .k b{display:block;font-size:10.5px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-40);line-height:1.3}
+.kpi .k i{display:block;font-style:normal;font-size:clamp(28px,3.4vw,38px);font-weight:800;
+  letter-spacing:-.035em;line-height:1.05;margin-top:9px}
+.kpi .k u{display:block;text-decoration:none;font-size:12.5px;line-height:1.4;color:var(--ink-60);margin-top:6px}
+.kpi .k.sl i{color:var(--rood)}
+.kpi .k.ok i{color:var(--groen)}
+
+/* de trechter */
+.trap{margin:26px 0 0;background:var(--paper);border:1px solid var(--ink-10);border-radius:var(--r-l);
+  padding:28px 28px 24px;overflow:hidden}
+.trap > b{display:block;font-size:10.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--bronze);margin-bottom:20px}
+.tr{display:grid;grid-template-columns:minmax(0,1fr) 142px;gap:18px;align-items:center;padding:9px 0}
+.tr .sp{min-width:0}
+.tr .lb{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:7px}
+.tr .lb b{font-size:14.5px;font-weight:700;letter-spacing:-.015em}
+.tr .lb span{font-size:12.5px;color:var(--ink-60)}
+.tr .bar{height:13px;border-radius:100px;background:var(--sand-deep);overflow:hidden}
+.tr .bar i{display:block;height:100%;border-radius:100px;background:var(--carbon)}
+.tr.a .bar i{background:linear-gradient(90deg,#BC813E,#8C5A1A)}
+.tr .cf{text-align:right;font-size:19px;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.tr .cf em{display:block;font-style:normal;font-size:10.5px;font-weight:700;letter-spacing:.07em;
+  text-transform:uppercase;color:var(--ink-40);margin-top:2px;white-space:nowrap}
+.lek{margin-top:18px;padding-top:16px;border-top:1px solid var(--ink-10);
+  display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.lek b{font-size:26px;font-weight:800;letter-spacing:-.035em;color:var(--rood)}
+.lek span{font-size:14.5px;line-height:1.5;color:var(--ink-80);min-width:0}
+
+/* tabel */
+.tab{width:100%;border-collapse:collapse;margin:22px 0 0;font-size:14.5px}
+.tab th{text-align:left;font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-40);padding:0 12px 9px 0;border-bottom:1px solid var(--ink-10);white-space:nowrap}
+.tab td{padding:11px 12px 11px 0;border-bottom:1px solid var(--ink-10);vertical-align:top;line-height:1.45}
+.tab tr:last-child td{border-bottom:0}
+.tab td.n{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:700}
+.tab td.n .we{display:block;font-weight:500;font-size:12.5px;color:var(--ink-60);margin-top:2px}
+.tab .we{color:var(--ink-60)}
+.tw{overflow-x:auto;margin:0 -24px;padding:0 24px}
+
+/* vlaggetjes */
+.vlag{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:800;letter-spacing:.09em;
+  text-transform:uppercase;border-radius:100px;padding:4px 10px;white-space:nowrap}
+.vlag.r{background:#F7E0DE;color:var(--rood)}
+.vlag.o{background:#F7EBD3;color:var(--oranje)}
+.vlag.g{background:#E5EBE1;color:var(--groen)}
+
+/* apparaten */
+.app{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:24px 0 0}
+.app .a{background:var(--paper);border:1px solid var(--ink-10);border-radius:var(--r-m);padding:20px;min-width:0}
+.app .a.uit{border-color:transparent;background:var(--carbon);color:#fff}
+.app .a b{display:block;font-size:10.5px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-40)}
+.app .a.uit b{color:rgba(245,209,138,.75)}
+.app .a .gr{display:flex;align-items:baseline;gap:9px;margin-top:10px}
+.app .a .gr i{font-style:normal;font-size:30px;font-weight:800;letter-spacing:-.035em;line-height:1}
+.app .a .gr span{font-size:13px;color:var(--ink-60)}
+.app .a.uit .gr span{color:rgba(255,255,255,.6)}
+.app .a p{margin:11px 0 0;font-size:13.5px;line-height:1.5;color:var(--ink-60)}
+.app .a.uit p{color:rgba(255,255,255,.72)}
+
+/* notities */
+.note{margin:24px 0 0;border-radius:var(--r-m);padding:19px 23px;background:var(--paper);
+  border:1px solid var(--ink-10);border-left:3px solid var(--bronze)}
+.note.warn{background:#F7EBD3;border-left-color:#A8761B;border-color:transparent}
+.note.win{background:#E5EBE1;border-left-color:#2E6B3E;border-color:transparent}
+.note.slecht{background:#F7E0DE;border-left-color:var(--rood);border-color:transparent}
+.note h4{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--bronze);margin:0 0 8px}
+.note.warn h4{color:#8C5A1A}.note.win h4{color:var(--groen)}.note.slecht h4{color:var(--rood)}
+.note p{margin:0;font-size:15.5px;line-height:1.6;color:var(--ink-80)}
+.note p+p{margin-top:10px}
+
+/* vragenlijst */
+.vraag{list-style:none;margin:24px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.vraag li{background:var(--paper);border:1px solid var(--ink-10);border-radius:var(--r-m);padding:19px 21px;min-width:0}
+.vraag li b{display:block;font-size:15px;font-weight:700;letter-spacing:-.015em;line-height:1.3}
+.vraag li p{margin:7px 0 0;font-size:13.5px;line-height:1.5;color:var(--ink-60)}
+.vraag li .pad{display:block;margin-top:10px;font-size:11.5px;font-weight:700;color:var(--bronze);line-height:1.4}
+
+@media (max-width:980px){
+  .kpi{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .app{grid-template-columns:1fr}
+  .vraag{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .mt{padding:0 20px 80px}
+  .kpi{grid-template-columns:1fr}
+  .trap{padding:22px 18px 18px}
+  .tr{grid-template-columns:minmax(0,1fr);gap:6px}
+  .tr .cf{text-align:left;order:-1;display:flex;align-items:baseline;gap:9px;font-size:17px}
+  .tr .cf em{margin-top:0}
+  .tw{margin:0 -20px;padding:0 20px}
+}
+</style>
+<div class="mt">
+<header class="mast">
+  <span class="eyebrow">De meting &middot; dertig dagen &middot; 24 augustus 2026</span>
+  <h1>Wat er werkelijk gebeurt,<br>voordat we iets ontwerpen.</h1>
+  <p class="lede">Sinds de audit stond er &eacute;&eacute;n ding open: we hadden nog nooit gemeten hoe ver mensen komen. Dat is nu er. Hieronder staan de cijfers uit Microsoft Clarity naast de cijfers uit Shopify zelf &mdash; want ze zijn het op &eacute;&eacute;n belangrijk punt niet met elkaar eens, en dan wint Shopify.</p>
+  <div class="bron"><span>Clarity &middot; 30 dagen</span><span>Shopify &middot; 30 dagen</span><span class="ge">Twee bronnen tegen elkaar gelegd</span></div>
+</header>
+
+<section>
+  <div class="shead"><span class="snum">METING 01</span><h2 class="duo">Van honderd bezoekers kopen er anderhalf,<span class="b">en zesennegentig raken de knop niet aan.</span></h2></div>
+  <p class="sintro">Dit zijn Shopify&rsquo;s eigen cijfers, niet die van Clarity. Ze zijn het gezag: Shopify telt de winkelwagen aan de bron. Clarity leidt dezelfde gebeurtenissen af uit gedrag en zit er substantieel naast &mdash; zie de waarschuwing onderaan dit blok.</p>
+
+  <div class="trap">
+    <b>De trechter, 30 dagen</b>
+    <div class="tr a">
+      <div class="sp">
+        <div class="lb"><b>Sessies</b><span>14.395</span></div>
+        <div class="bar"><i style="width:100%"></i></div>
+      </div>
+      <div class="cf">100%<em>van sessies</em></div>
+    </div>
+    <div class="tr">
+      <div class="sp">
+        <div class="lb"><b>Product in de winkelwagen</b><span>504 sessies</span></div>
+        <div class="bar"><i style="width:3.5%"></i></div>
+      </div>
+      <div class="cf">3,50%<em>van sessies</em></div>
+    </div>
+    <div class="tr">
+      <div class="sp">
+        <div class="lb"><b>Bij de kassa</b><span>400 sessies</span></div>
+        <div class="bar"><i style="width:2.78%"></i></div>
+      </div>
+      <div class="cf">79,4%<em>van winkelwagen</em></div>
+    </div>
+    <div class="tr">
+      <div class="sp">
+        <div class="lb"><b>Bestelling geplaatst</b><span>202 sessies</span></div>
+        <div class="bar"><i style="width:1.4%"></i></div>
+      </div>
+      <div class="cf">50,5%<em>van kassa</em></div>
+    </div>
+    <div class="lek">
+      <b>96,50%</b>
+      <span>van alle sessies eindigt zonder dat er ooit iets in de winkelwagen komt. Dat is het lek. Alles n&aacute; de winkelwagen loopt namelijk prima: van elke tien die iets toevoegen bestellen er vier.</span>
+    </div>
+  </div>
+
+  <div class="note win">
+    <h4>Waar de redesign wel en niet over gaat</h4>
+    <p>De kassa is niet je probleem. Van winkelwagen naar kassa gaat 79,4%, van kassa naar bestelling 50,5% &mdash; dat laatste is normaal tot goed voor Nederlandse e-commerce. Het hele verlies zit v&oacute;&oacute;r de winkelwagen, en dat is precies het stuk dat de productpagina in handen heeft.</p>
+    <p>Om het in geld te zeggen: 202 bestellingen in dertig dagen. Gaat de stap naar de winkelwagen van 3,50% naar 4,00% &mdash; een half procentpunt, geen verdubbeling &mdash; en blijft de rest gelijk, dan zijn dat ongeveer <strong>29 bestellingen per maand extra</strong>. Dat is het soort verschuiving waar &eacute;&eacute;n goed koopvak toe in staat is.</p>
+  </div>
+
+  <div class="note slecht">
+    <h4>Gebruik Clarity&rsquo;s &laquo;Smart events&raquo; niet voor je trechter</h4>
+    <p>Clarity meldt <strong>250 sessies met Add to cart</strong>; Shopify telt er <strong>504</strong>. Clarity mist dus ongeveer de helft. Tegelijk meldt Clarity <strong>470 keer Begin checkout</strong> terwijl Shopify er <strong>400</strong> ziet &mdash; daar telt Clarity juist te veel. En &laquo;Product viewed&raquo; staat op 1.084 sessies, terwijl alleen de Groom Guard-pagina al 1.713 weergaven heeft.</p>
+    <p>Dat is geen fout van Clarity: die gebeurtenissen worden afgeleid uit gedrag, niet uit de winkelwagen zelf. Ze zijn bruikbaar om te zi&eacute;n waar iets gebeurt, niet om mee te rekenen. <strong>Voor cijfers: Shopify. Voor gedrag: Clarity.</strong></p>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">METING 02</span><h2 class="duo">Zevenentwintig procent scrolldiepte,<span class="b">en dat is het hele budget.</span></h2></div>
+  <p class="sintro">Dit is het getal dat sinds de audit ontbrak. De gemiddelde sessie ziet iets meer dan een kwart van de pagina, blijft 52 seconden actief en bekijkt 1,39 pagina&rsquo;s. Drieennegentig procent is er voor het eerst. Er is dus geen tweede kans en geen opgebouwd vertrouwen.</p>
+
+  <div class="kpi">
+    <div class="k sl"><b>Scrolldiepte</b><i>27,52%</i><u>gemiddeld over alle pagina&rsquo;s</u></div>
+    <div class="k"><b>Pagina&rsquo;s per sessie</b><i>1,39</i><u>de meesten zien &eacute;&eacute;n pagina</u></div>
+    <div class="k"><b>Actieve tijd</b><i>52 sec</i><u>van 1,9 min totaal</u></div>
+    <div class="k"><b>Nieuwe bezoekers</b><i>93,3%</i><u>25.421 van 27.256 sessies</u></div>
+  </div>
+
+  <div class="note warn">
+    <h4>Let op wat dit getal w&eacute;l en niet zegt</h4>
+    <p>27,52% is het gemiddelde over <strong>alle</strong> pagina&rsquo;s: de homepage, de collectiepagina&rsquo;s, de landingspagina en de productpagina&rsquo;s door elkaar. Het is geen productpagina-cijfer. Het is ook een gemiddelde en geen mediaan, dus het wordt omlaag getrokken door iedereen die meteen weer weggaat &mdash; 6,33% van de sessies is een &laquo;quick back&raquo;.</p>
+    <p>Wat het w&eacute;l vaststelt is de orde van grootte, en die is streng genoeg om ontwerpbeslissingen op te baseren. Het echte productpagina-cijfer haal je uit de scroll-heatmap met een paginafilter &mdash; dat staat onderaan in de lijst met wat ik nog wil zien.</p>
+  </div>
+
+  <div class="note">
+    <h4>Wat het betekent voor de achttien blokken</h4>
+    <p>Reken het even door met de hoogtes die we hebben. Boven de vouw is 769 px op een telefoon, de UGC-band 483 px en het mechanisme 1.207 px. Samen ruim 2.400 px. Bij een productpagina van pakweg 8.000 px komt de gemiddelde sessie tot ongeveer 2.200 px &mdash; de vouw, het mechanisme, en het begin van het bewijs.</p>
+    <p>Dat is precies de volgorde die er nu ligt, en dit cijfer steunt hem. Maar het legt ook de rekening op tafel: <strong>alles onder blok vijf is voor de minderheid</strong>. Die blokken zijn niet nutteloos &mdash; ze bedienen de mensen die al bijna om zijn, en dat zijn de mensen die kopen. Ze mogen alleen nooit het werk doen dat blok 01 tot 04 hoort te doen.</p>
+  </div>
+
+  <div class="note warn">
+    <h4>De open vraag die dit cijfer opnieuw opengooit</h4>
+    <p>We hebben de ladder (de bundelkaarten) van plek 3 naar plek 5 verplaatst, en met het UGC-blok erbij staat hij nu op <strong>zes</strong>. Bij 27,52% scrolldiepte is dat niet meer gratis: plek zes ligt vermoedelijk onder de gemiddelde scrollgrens, en de ladder is juist het blok dat de <em>omzet per bezoeker</em> omhoog haalt.</p>
+    <p>Ik ga dat niet op gevoel omdraaien. Dit is een A/B-vraag, en de maat is omzet per bezoeker &mdash; niet conversiepercentage, want de ladder verhoogt vooral de orderwaarde. Tot die test er is blijft de ladder waar hij staat, omdat het argument &laquo;eerst geloven, dan kiezen&raquo; nog steeds het sterkste is dat we hebben. Maar het is nu w&eacute;l de eerste test die ik zou draaien.</p>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">METING 03</span><h2 class="duo">Zeventig procent is mobiel,<span class="b">en mobiel converteert beter dan desktop.</span></h2></div>
+  <p class="sintro">Dit maakt de vouwdiscussie definitief. We hebben het koopvak op 390 px ontworpen en de desktopversie daarvan afgeleid. Dat blijkt de goede volgorde te zijn geweest &mdash; en er zit een detail in dat we nog niet hadden meegenomen.</p>
+
+  <div class="app">
+    <div class="a uit">
+      <b>Mobiel</b>
+      <div class="gr"><i>10.010</i><span>69,5% van de sessies</span></div>
+      <p>Conversie <strong>1,54%</strong> &mdash; de helft h&oacute;ger dan desktop. 154 van de 202 bestellingen komen hiervandaan.</p>
+    </div>
+    <div class="a">
+      <b>Desktop</b>
+      <div class="gr"><i>4.130</i><span>28,7% van de sessies</span></div>
+      <p>Conversie <strong>1,02%</strong>. Meer ruimte, minder resultaat. 42 bestellingen.</p>
+    </div>
+    <div class="a">
+      <b>Tablet</b>
+      <div class="gr"><i>251</i><span>1,7% van de sessies</span></div>
+      <p>Conversie 2,39%, maar op 6 bestellingen. Te weinig om iets van te vinden.</p>
+    </div>
+  </div>
+
+  <div class="note slecht">
+    <h4>Een op de vijf bezoekers zit in een app-browser, en die heeft minder scherm</h4>
+    <p>Clarity splitst het fijner uit dan Shopify: <strong>FacebookApp 14,13%</strong> (3.852 sessies) en <strong>InstagramApp 6,13%</strong> (1.671). Samen <strong>20,26%</strong> &mdash; ruim 5.500 sessies in de ingebouwde browser van Meta. Daarnaast ChromeMobile 31,87% en MobileSafari 18,65%.</p>
+    <p>Die app-browsers hebben een dikkere balk bovenin en onderin dan Safari. Onze vouw ligt nu op <strong>769 px</strong>, gebaseerd op een iPhone 14 in Safari. In de Instagram-browser is dat eerder <strong>700 tot 720 px</strong>. Het leverblokje dat nu op 719&ndash;751 px eindigt valt daar dus mogelijk nog net onder de rand. Dat is te controleren en het is de moeite waard.</p>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">METING 04</span><h2 class="duo">Drie technische lekken,<span class="b">en de eerste kennen we al een dag.</span></h2></div>
+  <p class="sintro">Deze staan los van het ontwerp, maar ze kosten nu geld en ze zijn alle drie te repareren zonder dat er iets herontworpen hoeft te worden. De eerste is de 404 die al in de audit stond &mdash; die staat hier omdat hij er nog steeds is. De andere twee komen uit deze schermafbeeldingen en waren nog niet bekend.</p>
+
+  <div class="tw">
+  <table class="tab">
+    <thead><tr><th>Wat</th><th>Hoeveel</th><th>Wat het is</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>De 404 uit de audit staat er nog</strong><br><code>/en/balzam-posle-britya/truefitt-hill-sandal-wood-balzam-posle-britya-100ml.html</code></td>
+        <td class="n">2.625<br><span class="we">weergaven</span></td>
+        <td>Dit stond al als P1 in de audit, met 2.637 weergaven. Een dag later zijn het er 2.625 en geeft de URL nog steeds <strong>HTTP 404</strong> &mdash; ik heb hem opnieuw opgehaald. Het punt is dus niet dat het nieuw is, maar dat het onveranderd doorloopt: ongeveer zeven procent van al je paginaweergaven loopt tegen een muur.</td>
+        <td><span class="vlag r">Bevestigd</span></td>
+      </tr>
+      <tr>
+        <td><strong>JavaScript-fouten</strong></td>
+        <td class="n">16,74%<br><span class="we">van sessies</span></td>
+        <td>43.221 fouten. Bijna dertig procent daarvan is een <em>syntaxfout</em>: 22,84% &laquo;unexpected token&nbsp;'.'&raquo;, 5,35% &laquo;unexpected reserved word&raquo;, 0,71% &laquo;unexpected token&nbsp;'?'&raquo;. Dat patroon hoort bij moderne JavaScript die niet is omgezet voor oudere browsers. Een syntaxfout sloopt niet &eacute;&eacute;n regel maar het hele bestand.</td>
+        <td><span class="vlag o">Te bekijken</span></td>
+      </tr>
+      <tr>
+        <td><strong>Layout shift</strong> (CLS)</td>
+        <td class="n">0,18<br><span class="we">drempel 0,10</span></td>
+        <td>De pagina springt tijdens het laden. LCP is met 2,2 s prima en INP zit met 230 ms net boven de drempel, maar CLS is bijna het dubbele van wat het mag zijn. Op een productpagina met Loox, Upsell.com, Aftersell en Section Store die allemaal inhoud injecteren is dat te verwachten.</td>
+        <td><span class="vlag o">Ontwerpbeslissing</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="note slecht">
+    <h4>Waarom de syntaxfouten en de app-browsers bij elkaar horen</h4>
+    <p>&laquo;unexpected token&nbsp;'.'&raquo; is wat een browser zegt als hij <code>?.</code> tegenkomt en dat niet kent. &laquo;unexpected token&nbsp;'?'&raquo; hetzelfde voor <code>??</code>. Oudere Safari-versies en de ingebouwde browsers van apps struikelen daarover, en juist dat is een vijfde van je verkeer.</p>
+    <p>Als het bestand dat sneuvelt de winkelwagen aanstuurt, dan doet de koopknop bij die bezoeker niets. Dat zou een deel verklaren van waarom 96,5% de winkelwagen nooit haalt. <strong>Ik weet niet of dat zo is</strong> &mdash; dat is te zien in de opnames: filter op FacebookApp, zoek een sessie met een klik op de koopknop en kijk of er daarna iets gebeurt. Dat is de eerste opname die ik zou bekijken.</p>
+    <p>Ter geruststelling over de rest: &laquo;script error.&raquo; (63,22%) is de nietszeggende melding die je krijgt bij scripts van een ander domein &mdash; daar zit geen informatie in. En <code>_autofillcallbackhandler</code> (5,83%) is een bekend en onschuldig verschijnsel van de wachtwoordinvuller van iOS.</p>
+  </div>
+
+  <div class="note win">
+    <h4>Wat CLS betekent voor wat we aan het tekenen zijn</h4>
+    <p>Een CLS van 0,18 is een gewaarschuwd ontwerp. Elk beeld in de nieuwe blokken krijgt een vaste verhouding mee, de cadeaubalk en de campagnepil krijgen een vaste hoogte ook als het veld leeg is, en het koopvak reserveert de ruimte voor de prijs voordat die geladen is. Anders bouwen we de sprong netjes opnieuw in.</p>
+    <p>Het is bovendien een argument in de discussie over de apps: elke app die na het laden inhoud in de pagina duwt, betaalt daarvoor met layout shift. Loox eruit halen &mdash; wat we al besloten hadden om andere redenen &mdash; helpt hier dus ook.</p>
+  </div>
+
+  <div class="note warn">
+    <h4>Twee verwijzers die ik niet thuis kan brengen</h4>
+    <p><code>tk.codntx.com</code> stuurt 1.878 sessies en <code>lkn.cam-ads.digital</code> 1.511. Samen 3.389 sessies, ruim twaalf procent van je verkeer, uit twee domeinen die eruitzien als doorstuurdomeinen van een advertentienetwerk. Als dat een partij is waar je mee werkt: prima, dan weet je het. Zo niet, dan is het de moeite waard om te kijken wat die sessies doen &mdash; want ze zitten wel in al je gemiddelden.</p>
+    <p>Terzijde, uit dezelfde lijst: de Engelse winkel op <code>/en</code> staat op 24 augustus nog steeds op &laquo;SPRING GROOMING SALE &mdash; up to 40% off&raquo;.</p>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">METING 05</span><h2 class="duo">Wat ik hierna wil zien,<span class="b">en waarom precies dat.</span></h2></div>
+  <p class="sintro">Je vroeg waar je nog schermafbeeldingen van kunt maken. Dit zijn ze, op volgorde van wat ze opleveren. De eerste is er &eacute;&eacute;n die een besluit verandert; de rest scherpt aan.</p>
+
+  <ol class="vraag">
+    <li>
+      <b>1. Zet een paginafilter op de Groom Guard en kijk dan opnieuw naar het dashboard</b>
+      <p>Dit is de belangrijkste. Nu is 27,52% een gemiddelde over de hele site. Met het filter aan krijg je de scrolldiepte, actieve tijd, dode kliks en quick backs <em>van de productpagina zelf</em>. Dat is het getal waar de blokvolgorde op hoort te staan.</p>
+      <span class="pad">Filters &rarr; Page &rarr; bevat <code>/products/wellshave-bodygroomer-groom-guard</code> &rarr; daarna Overview</span>
+    </li>
+    <li>
+      <b>2. De scroll-heatmap van die pagina, op mobiel</b>
+      <p>De scrollkaart laat per hoogte zien welk percentage er nog kijkt. Daarmee kan ik zeggen waar blok 04 en blok 05 in de praktijk landen, in plaats van het te schatten uit een gemiddelde. Dit beslist de ladderdiscussie uit blok 02 hierboven.</p>
+      <span class="pad">Heatmaps &rarr; die URL &rarr; Scroll &rarr; apparaat op Mobile</span>
+    </li>
+    <li>
+      <b>3. De klik-heatmap van diezelfde pagina, op mobiel</b>
+      <p>4,37% dode kliks is 1.192 sessies waarin iemand ergens op drukte waar niets gebeurde. Op een productpagina is dat meestal een foto waar men zoomen verwacht, of een badge die eruitziet als een knop. Elk van die plekken is een gratis verbetering.</p>
+      <span class="pad">Heatmaps &rarr; die URL &rarr; Click &rarr; apparaat op Mobile</span>
+    </li>
+    <li>
+      <b>4. Een opname van een sessie in de Facebook- of Instagram-browser</b>
+      <p>Om te zien of de koopknop het daar doet. Filter op browser, zoek iemand die op de knop drukt, kijk of de winkelwagen opengaat. Als dat misgaat is dat de duurste bug op de site en heeft hij niets met ontwerp te maken.</p>
+      <span class="pad">Recordings &rarr; Filters &rarr; Browser is FacebookApp</span>
+    </li>
+    <li>
+      <b>5. Het tabblad &laquo;Popular products&raquo; naast Top pages</b>
+      <p>Dan zie ik welke productpagina&rsquo;s het verkeer krijgen. We ontwerpen &eacute;&eacute;n sjabloon voor dertig producten; het helpt om te weten welke vijf daarvan het meeste te winnen hebben.</p>
+      <span class="pad">Top pages-kaart &rarr; tabblad Popular products</span>
+    </li>
+    <li>
+      <b>6. Het tabblad &laquo;Devices&raquo; naast Browsers</b>
+      <p>Kleine aanvulling: dan zie ik de schermgroottes in plaats van de browsers. Daarmee kan ik de vouw op 769 px staven of bijstellen voor de app-browsers uit blok 03.</p>
+      <span class="pad">Browsers-kaart &rarr; tabblad Devices</span>
+    </li>
+  </ol>
+
+  <div class="note">
+    <h4>En &eacute;&eacute;n ding dat geen schermafbeelding is</h4>
+    <p>Clarity telt 27.256 sessies waar Shopify er 14.395 telt &mdash; bijna twee keer zoveel. Dat komt doordat ze een sessie anders afbakenen en doordat Clarity ook meetelt op pagina&rsquo;s die Shopify niet als winkelsessie ziet. Het is geen fout, maar het betekent wel dat je de twee nooit door elkaar moet delen. Percentages uit Clarity, absolute aantallen uit Shopify.</p>
+  </div>
+</section>
+</div>

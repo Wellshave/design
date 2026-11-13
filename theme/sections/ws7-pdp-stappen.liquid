@@ -1,0 +1,66 @@
+{% comment %}
+  Wellshave v7 · productpagina: twee stappen ("Eén apparaat. Twee afwerkingen.").
+  Alles komt uit custom.pdp_stappen, een metaobject van het type ws_pdp_stappen.
+  Alleen invullen als een product echt in twee stappen werkt; leeg = geen sectie.
+  Hier mag genummerd worden: het is een volgorde.
+{% endcomment %}
+{%- assign st = product.metafields.custom.pdp_stappen.value -%}
+{%- if st != blank and st.stap1_titel != blank -%}
+  {{ 'ws7.css' | asset_url | stylesheet_tag }}
+  <div class="ws7 ws7p ws7p-wit">
+    <div class="ws7p-rail ws7p-sec">
+      <div class="ws7-midden">
+        {%- if st.oog != blank -%}<span class="ws7-oog">{{ st.oog }}</span>{%- endif -%}
+        {% render 'ws7-kop', kop: st.kop, goud: st.kop_goud %}
+        {%- if st.intro != blank -%}<p class="ws7-sub ws7p-sub">{{ st.intro }}</p>{%- endif -%}
+      </div>
+      <div class="ws7p-stap{% if st.beeld == blank %} ws7p-stap--kaal{% endif %}">
+        {%- if st.beeld != blank -%}
+          <div class="ws7p-stap__beeld">
+            {{ st.beeld | image_url: width: 1600 | image_tag: loading: 'lazy', widths: '600,900,1200,1600', sizes: '(max-width: 899px) 92vw, 50vw', alt: st.beeld.value.alt | default: '' }}
+          </div>
+        {%- endif -%}
+        <div class="ws7p-stap__lijst">
+          {%- for n in (1..2) -%}
+            {%- liquid
+              if n == 1
+                assign t = st.stap1_titel
+                assign x = st.stap1_tekst
+                assign pt = st.stap1_punten.value
+              else
+                assign t = st.stap2_titel
+                assign x = st.stap2_tekst
+                assign pt = st.stap2_punten.value
+              endif
+            -%}
+            {%- if t != blank -%}
+              <article class="ws7p-stap__kaart">
+                <span class="ws7p-stap__nr">{{ section.settings.stap_label | replace: '[n]', n }}</span>
+                <h3>{{ t }}</h3>
+                {%- if x != blank -%}<p>{{ x }}</p>{%- endif -%}
+                {%- if pt != blank -%}
+                  <ul>
+                    {%- for p in pt -%}<li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg>{{ p }}</li>{%- endfor -%}
+                  </ul>
+                {%- endif -%}
+                {% render 'ws-merkteken', klasse: 'ws7p-stap__teken' %}
+              </article>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+{% schema %}
+{
+  "name": "WS7 · PDP twee stappen",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "paragraph", "content": "Tekst en foto komen uit het product: custom.pdp_stappen. Staat dat leeg, dan verschijnt de sectie niet." },
+    { "type": "text", "id": "stap_label", "label": "Label boven een stap", "info": "[n] wordt het nummer.", "default": "Stap [n]" }
+  ],
+  "presets": [ { "name": "WS7 · PDP twee stappen" } ]
+}
+{% endschema %}

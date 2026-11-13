@@ -1,0 +1,40 @@
+{%- comment -%}
+  Geeft de leverdatum als tekst ("9 november") als dit product nu pre-order is:
+  custom.preorder_datum staat in de toekomst. Anders niets, ook na de datum,
+  zodat de pre-order vanzelf verdwijnt zodra het product weer leverbaar is.
+  Staat er ook custom.preorder_tot (laatste leverdag), dan wordt het een periode:
+  "18–21 november", of "30 november – 2 december" over twee maanden heen.
+  Gebruik: render 'ws-preorder' met p (het product) en maanden, binnen een capture.
+  maanden = twaalf maandnamen met komma's, in de taal van de pagina.
+  vorm = hoe de datum staat, met [dag] en [maand] (Duits: "[dag]. [maand]").
+{%- endcomment -%}
+{%- assign ws_pre_d = p.metafields.custom.preorder_datum.value -%}
+{%- if ws_pre_d != blank -%}
+  {%- assign ws_pre_dag = ws_pre_d | date: '%Y%m%d' | plus: 0 -%}
+  {%- assign ws_pre_nu = 'now' | date: '%Y%m%d' | plus: 0 -%}
+  {%- if ws_pre_dag > ws_pre_nu -%}
+    {%- assign ws_pre_mnd = maanden | split: ',' -%}
+    {%- assign ws_pre_vorm = vorm | default: '[dag] [maand]' -%}
+    {%- assign ws_pre_m = ws_pre_d | date: '%-m' | plus: 0 | minus: 1 -%}
+    {%- assign ws_pre_dg = ws_pre_d | date: '%-d' -%}
+    {%- assign ws_pre_mn = ws_pre_mnd[ws_pre_m] | strip -%}
+    {%- assign ws_pre_van = ws_pre_vorm | replace: '[dag]', ws_pre_dg | replace: '[maand]', ws_pre_mn -%}
+    {%- assign ws_pre_t = p.metafields.custom.preorder_tot.value -%}
+    {%- assign ws_pre_tdag = 0 -%}
+    {%- if ws_pre_t != blank -%}{%- assign ws_pre_tdag = ws_pre_t | date: '%Y%m%d' | plus: 0 -%}{%- endif -%}
+    {%- if ws_pre_tdag > ws_pre_dag -%}
+      {%- assign ws_pre_tm = ws_pre_t | date: '%-m' | plus: 0 | minus: 1 -%}
+      {%- assign ws_pre_tdg = ws_pre_t | date: '%-d' -%}
+      {%- assign ws_pre_tmn = ws_pre_mnd[ws_pre_tm] | strip -%}
+      {%- assign ws_pre_tot = ws_pre_vorm | replace: '[dag]', ws_pre_tdg | replace: '[maand]', ws_pre_tmn -%}
+      {%- if ws_pre_tm == ws_pre_m -%}
+        {%- comment -%} Zelfde maand: de maand alleen achteraan, "18–21 november" (Duits "18.–21. November"). {%- endcomment -%}
+        {{- ws_pre_vorm | replace: '[dag]', ws_pre_dg | replace: '[maand]', '' | strip -}}–{{- ws_pre_tot -}}
+      {%- else -%}
+        {{- ws_pre_van }} – {{ ws_pre_tot -}}
+      {%- endif -%}
+    {%- else -%}
+      {{- ws_pre_van -}}
+    {%- endif -%}
+  {%- endif -%}
+{%- endif -%}

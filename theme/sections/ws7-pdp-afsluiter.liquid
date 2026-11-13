@@ -1,0 +1,81 @@
+{% comment %}
+  Wellshave v7 · productpagina: de donkere afsluiter van de homepage, met een koopregel.
+  Dezelfde plaat (.ws7-slot uit ws7.css). De knop is geen tweede formulier: hij klikt de
+  echte koopknop van het koopvak aan, zodat de gekozen optie, de cadeaus en de lade
+  vanzelf meegaan. Naam en prijs volgen de keuze in het koopvak.
+{% endcomment %}
+{{ 'ws7.css' | asset_url | stylesheet_tag }}
+{%- assign v = product.selected_or_first_available_variant -%}
+<div class="ws7 ws7p">
+  <div class="ws7-slot ws7-donkergrond">
+    {% render 'ws-merkteken', klasse: 'ws7-teken' %}
+    {%- if section.settings.oog != blank -%}<span class="ws7-slot__oog">{{ section.settings.oog }}</span>{%- endif -%}
+    {% render 'ws7-kop', kop: section.settings.kop, goud: section.settings.kop_goud %}
+    {%- if section.settings.tekst != blank -%}<p class="ws7-slot__tekst">{{ section.settings.tekst }}</p>{%- endif -%}
+    {%- if section.blocks.size > 0 -%}
+      <div class="ws7-slot__rij ws7p-slot__rij">
+        {%- for block in section.blocks -%}<div class="ws7-slot__punt" {{ block.shopify_attributes }}><b>{{ block.settings.waarde }}</b><strong>{{ block.settings.kop }}</strong><span>{{ block.settings.label }}</span></div>{%- endfor -%}
+      </div>
+    {%- endif -%}
+    {%- if section.settings.koop_tonen and v.available -%}
+      <div class="ws7p-slot__koop" data-ws7p-slotkoop>
+        <span class="ws7p-slot__bd">{%- if product.featured_image -%}{{ product.featured_image | image_url: width: 160 | image_tag: alt: '', loading: 'lazy', width: 64, height: 64 }}{%- endif -%}</span>
+        <span class="ws7p-slot__tx">
+          <b data-ws7p-naam>{{ product.title }}</b>
+          <span data-ws7p-prijs>{% render 'ws-euro', bedrag: v.price %}{% if v.compare_at_price > v.price %} · {{ section.settings.was }} {% render 'ws-euro', bedrag: v.compare_at_price %}{% endif %}</span>
+        </span>
+        <button type="button" class="ws7p-slot__knop" data-ws7p-koop>{{ section.settings.knop }}</button>
+      </div>
+    {%- endif -%}
+    {%- if section.settings.link_label != blank -%}<a class="ws7-link" href="{{ section.settings.link | default: '#ws7p-vergelijk' }}">{{ section.settings.link_label }}{% render 'ws7-pijl' %}</a>{%- endif -%}
+  </div>
+  <div class="ws7-slot-ruimte"></div>
+</div>
+<script>
+  (function () {
+    var regel = document.currentScript.previousElementSibling.querySelector('[data-ws7p-slotkoop]');
+    if (!regel) return;
+    var knop = regel.querySelector('[data-ws7p-koop]');
+    var naam = regel.querySelector('[data-ws7p-naam]'), prijs = regel.querySelector('[data-ws7p-prijs]');
+    var basisNaam = naam.textContent, basisPrijs = prijs.innerHTML;
+    knop.addEventListener('click', function () {
+      var echt = document.querySelector('[id^="ProductSubmit-"]');
+      if (echt) echt.click();
+    });
+    // naam en prijs volgen de keuze in het koopvak
+    document.addEventListener('change', function (e) {
+      var r = e.target;
+      if (!r || !r.name || r.name.indexOf('ws-tier-') !== 0) return;
+      if (!r.value) { naam.textContent = basisNaam; prijs.innerHTML = basisPrijs; return; }
+      naam.textContent = r.getAttribute('data-naam') || basisNaam;
+      prijs.innerHTML = r.getAttribute('data-nu') + (r.getAttribute('data-was') ? ' · {{ section.settings.was | escape }} ' + r.getAttribute('data-was') : '');
+    });
+  })();
+</script>
+{% schema %}
+{
+  "name": "WS7 · PDP afsluiter",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "max_blocks": 3,
+  "settings": [
+    { "type": "text", "id": "oog", "label": "Bovenregel" },
+    { "type": "text", "id": "kop", "label": "Kop", "default": "Kies. Probeer." },
+    { "type": "text", "id": "kop_goud", "label": "Kop, regel in goud", "default": "Houd hem." },
+    { "type": "textarea", "id": "tekst", "label": "Tekst", "default": "Bestel vandaag, probeer hem 100 dagen en beslis daarna pas." },
+    { "type": "checkbox", "id": "koop_tonen", "label": "Koopregel tonen", "default": true },
+    { "type": "text", "id": "knop", "label": "Knop", "default": "In winkelwagen" },
+    { "type": "text", "id": "was", "label": "Voor de oude prijs", "default": "was" },
+    { "type": "text", "id": "link_label", "label": "Linktekst", "default": "Vergelijk de opties" },
+    { "type": "url", "id": "link", "label": "Link", "info": "Leeg = naar de vergelijking op deze pagina." }
+  ],
+  "blocks": [
+    { "type": "punt", "name": "Zekerheid", "settings": [
+      { "type": "text", "id": "waarde", "label": "Groot", "default": "100 dagen" },
+      { "type": "text", "id": "kop", "label": "Kop", "default": "Proberen zonder risico" },
+      { "type": "text", "id": "label", "label": "Klein", "default": "Bevalt hij niet? Geld terug, ook als je hem gebruikt hebt." }
+    ]}
+  ],
+  "presets": [ { "name": "WS7 · PDP afsluiter" } ]
+}
+{% endschema %}

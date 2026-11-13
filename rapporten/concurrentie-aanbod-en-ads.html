@@ -1,0 +1,240 @@
+<title>Wat de concurrentie verkoopt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap">
+
+<style>
+:root{
+  --ink:#111111;--ink-80:rgba(17,17,17,.8);--ink-60:rgba(17,17,17,.6);
+  --ink-40:rgba(17,17,17,.4);--ink-10:rgba(17,17,17,.10);
+  --paper:#FFFFFF;--sand:#F5F1EA;--sand-deep:#EDE6DA;--carbon:#191816;
+  --bronze:#BC813E;--gold:#F5D18A;--alert:#E61C1C;
+  --tint-rose:#F4E3DE;--tint-sage:#E5EBE1;--tint-amber:#F7EBD3;
+  --grad-gold-tekst:linear-gradient(100deg,#B0742A 0%,#8C5A1A 100%);
+  --grad-dark:linear-gradient(168deg,#242220 0%,#171614 58%,#0E0D0C 100%);
+  --r-s:12px;--r-m:18px;--r-l:26px;--rail:1140px;--read:660px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--sand);color:var(--ink);
+  font-family:"Montserrat",-apple-system,BlinkMacSystemFont,Arial,sans-serif;
+  font-size:16.5px;line-height:1.7;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--rail);margin:0 auto;padding:0 24px 110px}
+h1,h2,h3{margin:0;text-wrap:balance;font-weight:900;letter-spacing:-.025em;line-height:1.06}
+.duo{font-size:clamp(26px,3.7vw,40px)}
+.duo .b{display:block;color:#B0742A}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+ .duo .b{background-image:var(--grad-gold-tekst);-webkit-background-clip:text;background-clip:text;
+   -webkit-text-fill-color:transparent;color:transparent}}
+.eyebrow{font-weight:800;letter-spacing:.2em;text-transform:uppercase;font-size:10.5px;color:var(--ink-40)}
+.mast{padding:62px 0 30px;border-bottom:2px solid var(--ink)}
+.mast h1{font-size:clamp(32px,5vw,50px);margin:13px 0 0}
+.mast .lede{max-width:var(--read);margin:17px 0 0;font-size:17.5px;color:var(--ink-80);line-height:1.6}
+.mast .src{margin-top:20px;font-size:12.5px;color:var(--ink-40);font-weight:600;letter-spacing:.01em}
+section{padding:52px 0 0}
+.shead{display:flex;align-items:baseline;gap:13px;margin-bottom:6px}
+.snum{font-weight:800;font-size:11px;letter-spacing:.18em;color:var(--bronze);white-space:nowrap}
+.sintro{max-width:var(--read);color:var(--ink-80);margin:15px 0 0}
+
+.tw{overflow-x:auto;border:1px solid var(--ink-10);border-radius:var(--r-m);background:var(--paper);margin:24px 0 0}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:600px}
+th,td{padding:11px 15px;text-align:right;border-bottom:1px solid var(--ink-10);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+th:first-child,td:first-child{text-align:left;white-space:normal}
+thead th{font-size:10px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--ink-40);background:var(--sand-deep)}
+tbody tr:last-child td{border-bottom:0}
+td.hi{color:#2E6B3E;font-weight:700}
+td.lo{color:#A8321F;font-weight:700}
+tr.us td{background:var(--tint-amber);font-weight:600}
+
+.hooks{margin:24px 0 0;display:flex;flex-direction:column;gap:12px}
+.hook{background:var(--paper);border:1px solid var(--ink-10);border-left:3px solid var(--bronze);
+  border-radius:var(--r-m);padding:18px 22px}
+.hook .m{display:flex;flex-wrap:wrap;gap:6px 14px;margin-bottom:9px;font-size:10.5px;font-weight:800;
+  letter-spacing:.11em;text-transform:uppercase;color:var(--ink-40)}
+.hook .m b{color:var(--bronze)}
+.hook .m .live{color:#2E6B3E}
+.hook q{display:block;font-size:18px;line-height:1.42;font-weight:600;font-style:italic;letter-spacing:-.012em}
+.hook q:before,.hook q:after{content:'«';color:var(--ink-40)}
+.hook q:after{content:'»'}
+.hook .lp{margin:10px 0 0;font-size:12.5px;color:var(--ink-60);word-break:break-all}
+.hook .lp b{color:var(--ink);font-weight:700}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:24px 0 0}
+.pane{background:var(--paper);border:1px solid var(--ink-10);border-radius:var(--r-m);padding:20px 22px 22px}
+.pane h4{font-size:11px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-60);margin-bottom:12px}
+.pane ol{margin:0;padding-left:20px;font-size:14px;line-height:1.5}
+.pane li{margin-bottom:6px}
+.pane li b{font-weight:700}
+.pane li em{font-style:normal;color:var(--bronze);font-weight:700}
+.pane .mark{background:var(--tint-sage);border-radius:4px;padding:1px 5px;margin:0 -2px}
+
+.note{margin:24px 0 0;border-radius:var(--r-m);padding:19px 23px;background:var(--paper);
+  border:1px solid var(--ink-10);border-left:3px solid var(--bronze)}
+.note.warn{background:var(--tint-amber);border-left-color:#A8761B;border-color:transparent}
+.note.win{background:var(--tint-sage);border-left-color:#2E6B3E;border-color:transparent}
+.note h4{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--bronze);margin-bottom:8px}
+.note.warn h4{color:#8C5A1A}.note.win h4{color:#2E6B3E}
+.note p{margin:0;font-size:15.5px;line-height:1.6;color:var(--ink-80)}
+.note p+p{margin-top:10px}
+
+.moves{margin:24px 0 0;border:1px solid var(--ink-10);border-radius:var(--r-m);background:var(--paper);overflow:hidden}
+.mv{display:grid;grid-template-columns:32px minmax(0,1fr) 92px;border-bottom:1px solid var(--ink-10);align-items:start}
+.mv:last-child{border-bottom:0}
+.mv .i{padding:15px 0 15px 15px;font-weight:800;font-size:11.5px;color:var(--bronze)}
+.mv .t{padding:15px 10px}
+.mv .t b{display:block;font-weight:700;font-size:15.5px;margin-bottom:3px}
+.mv .t p{margin:0;font-size:14.5px;line-height:1.52;color:var(--ink-80)}
+.mv .w{padding:15px 15px;font-size:9.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;text-align:right;color:var(--ink-40)}
+.mv .w.now{color:#A8321F}
+
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.86em;
+  background:var(--sand-deep);border-radius:4px;padding:1.5px 6px}
+strong{font-weight:700}
+.foot{margin-top:54px;padding-top:22px;border-top:1px solid var(--ink-10);font-size:13px;color:var(--ink-60);line-height:1.75}
+@media (max-width:820px){.grid2{grid-template-columns:1fr}.mv{grid-template-columns:28px minmax(0,1fr)}.mv .w{grid-column:2;text-align:left;padding-top:0}}
+</style>
+
+<div class="wrap">
+
+<header class="mast">
+  <div class="eyebrow">Marktonderzoek · aanvulling op de homepage-analyse</div>
+  <h1>Wat de concurrentie<br>verkoopt</h1>
+  <p class="lede">Er lag al een analyse van Balzy, Balzac en Brothers in Style, uit de HTML van hun sites. Dit vult de drie gaten die daar open bleven: Manscaped, de productstructuur en het aanbod, en wat er werkelijk aan advertenties draait.</p>
+  <p class="src">Bron: TrendTrack, 23 augustus 2026 · Manscaped, Balzy en Balzac volledig opgehaald</p>
+</header>
+
+<section>
+  <div class="shead"><span class="snum">01</span><h2 class="duo">Manscaped is nu wél gemeten,<span class="b">maar Balzy is je echte probleem.</span></h2></div>
+  <p class="sintro">De vorige analyse liep vast op Manscaped: 403 op elk verzoek. Via TrendTrack staat hij er wel in. Maar het cijfer dat eruit springt is niet van hen.</p>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>&nbsp;</th><th>Bezoek/maand</th><th>Groei 30d</th><th>Actieve ads</th><th>Adverteerders</th><th>Markten</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Balzy</strong></td><td>45.615</td><td class="hi">+72,8%</td><td class="hi">412</td><td>28</td><td>NL/BE 50-50</td></tr>
+        <tr><td><strong>Manscaped</strong></td><td>1.562.194</td><td>+2,7%</td><td>136</td><td>4</td><td>VS 33%, EU breed</td></tr>
+        <tr><td><strong>Balzac</strong></td><td>10.100</td><td>+29,8%</td><td class="lo">13</td><td>1</td><td>NL/BE 50-50</td></tr>
+        <tr class="us"><td><strong>Wellshave</strong></td><td>&plusmn;15.600</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>NL</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note warn">
+    <h4>Balzy is bijna drie keer zo groot en groeit 72,8% per maand</h4>
+    <p>Met <strong>412 actieve advertenties verdeeld over 28 adverteerders</strong> draaien ze een creatieve fabriek waar Balzac er dertien heeft. Dat verklaart het groeiverschil beter dan hun site doet. Manscaped is met 1,56 miljoen bezoeken per maand een andere categorie, maar staat vrijwel stil op +2,7% &mdash; en adverteert wel degelijk in Nederland en Belgi&euml;, via <code>eu.manscaped.com</code>.</p>
+    <p>Wellshave-bezoek is Shopify-sessiedata over 90 dagen omgerekend naar een maand. Niet exact vergelijkbaar met de meting van TrendTrack, maar de orde van grootte klopt.</p>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">02</span><h2 class="duo">Wat er verkocht wordt,<span class="b">op volgorde van bestseller.</span></h2></div>
+  <p class="sintro">Dit is het antwoord op je vraag over productindeling en aanbod. De volgorde is hun eigen bestsellerrangschikking, niet die van mij.</p>
+
+  <div class="grid2">
+    <div class="pane">
+      <h4>Balzy &mdash; top 10</h4>
+      <ol>
+        <li><b>The BushBuster&reg; 4.0</b> &mdash; <em>&euro;69,99</em></li>
+        <li>SafeShave&trade; Blade 4.0 &mdash; &euro;15</li>
+        <li>SnoutScraper&reg; 2.0 &mdash; &euro;29,99</li>
+        <li class="mark"><b>1 Jaar SafeShave&trade; Blades (3-pack)</b> &mdash; <em>&euro;19,95</em></li>
+        <li>NutRub &mdash; Sea Breeze &mdash; &euro;14,99</li>
+        <li>Nose &amp; Balls Bundle &mdash; &euro;89,99</li>
+        <li>The BeardBuster&reg; &mdash; &euro;49,99</li>
+        <li>NutRub &mdash; Orange &amp; Cinnamon &mdash; &euro;12,99</li>
+        <li>FreshFella &mdash; &euro;8,99</li>
+        <li>Balls &amp; Body 2.0 &mdash; &euro;19,99</li>
+      </ol>
+    </div>
+    <div class="pane">
+      <h4>Balzac &mdash; top 10</h4>
+      <ol>
+        <li><b>The Hedgeman&reg; 5.0</b> &mdash; <em>&euro;54,95</em></li>
+        <li>The Refiner&reg; &mdash; &euro;14,95</li>
+        <li>Ballguard&reg; &mdash; &euro;14,95</li>
+        <li><b>Complete Bundle</b> &mdash; <em>&euro;89,95</em></li>
+        <li>Body Scrubber&reg; &mdash; &euro;14,95</li>
+        <li>The Hedgeman&reg; 2.0 &mdash; &euro;39,95</li>
+        <li><b>Beard &amp; Body Bundle</b> &mdash; &euro;79,95</li>
+        <li><b>The Up &amp; Down Bundle</b> &mdash; &euro;79,95</li>
+        <li class="mark"><b>SkinProtect&trade; Blades 3-Pack</b> &mdash; <em>&euro;19,95</em></li>
+        <li><b>Nose &amp; Body Bundle</b> &mdash; &euro;79,95</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="note win">
+    <h4>De vondst: het mesjes-driepak is bij allebei een top-10 bestseller, en allebei op &euro;19,95</h4>
+    <p>Balzy staat er vierde mee, Balzac negende. Zelfde prijs, tot op de cent. Jouw <strong>Groom Guard&trade; Blade Trio Pack kost &euro;24,95</strong> &mdash; vijf euro duurder dan beide concurrenten op het artikel dat de herhaalaankoop draagt.</p>
+    <p>En let op hoe Balzy hem noemt: <strong>&laquo;1 Jaar SafeShave&trade; Blades&raquo;</strong>. Niet drie mesjes, maar een jaar. Dat is dezelfde beweging als het jaarkostenblok dat in deel 05 van het rapport staat, maar zij hebben hem in de productnaam gezet in plaats van in een sectie. Een koper hoeft niets uit te rekenen.</p>
+  </div>
+
+  <div class="note">
+    <h4>Twee structuurverschillen die geld kosten</h4>
+    <p><strong>Balzac heeft vier bundels in de top tien</strong> &mdash; ranks 4, 7, 8 en 10, allemaal tussen &euro;79,95 en &euro;89,95. Hun catalogus is opgebouwd als bundels met losse onderdelen eromheen, niet andersom. Jij hebt Shave Package Ultimate op &euro;89,95 en twee Flex-bundels, maar ze staan niet vooraan.</p>
+    <p><strong>Balzy heeft een verzorgingslijn</strong> die jij niet hebt: NutRub in twee geuren (&euro;12,99 en &euro;14,99), FreshFella (&euro;8,99) en Balls &amp; Body 2.0 (&euro;19,99). Vier van hun tien bestsellers zijn verbruiksartikelen onder de &euro;20. Dat is de herhaalmotor. Jouw enige verbruiksartikel is het mesje &mdash; en dat is er &eacute;&eacute;n, niet vier.</p>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">03</span><h2 class="duo">De advertenties die schalen,<span class="b">gaan geen van drie&euml;n over korting.</span></h2></div>
+  <p class="sintro">Dit is het interessantste deel, en het staat haaks op wat er boven de vouw op alle drie de sites staat. TrendTrack markeert twee hiervan als «scaling hard — worth modeling».</p>
+
+  <div class="hooks">
+    <div class="hook">
+      <div class="m"><b>Balzac</b><span class="live">&#9679; actief &middot; schaalt</span><span>152.219 bereik</span><span>video</span></div>
+      <q>Je moet stoppen met het scheren van je lichaamshaar en starten met trimmen.</q>
+      <p class="lp"><b>Landt op:</b> balzac.nl<b>/products/the-hedgeman-5-0</b> &mdash; recht op de productpagina, volledig getagd met UTM's.</p>
+    </div>
+    <div class="hook">
+      <div class="m"><b>Balzy</b><span>94.223 bereik</span><span>video &middot; stijgend</span></div>
+      <q>Dit is waarom ik gestopt ben met mijn normale scheermesje.</q>
+      <p class="lp"><b>Landt op:</b> de homepage.</p>
+    </div>
+    <div class="hook">
+      <div class="m"><b>Manscaped</b><span class="live">&#9679; actief &middot; schaalt</span><span>303.646 bereik</span><span>video</span></div>
+      <q>Meet The Lawn Mower&reg; 3.0 Plus White Hot!</q>
+      <p class="lp"><b>Landt op:</b> een Facebook-canvas. Hun uitgezette advertenties wezen naar <b>eu.manscaped.com/products/&hellip;</b></p>
+    </div>
+  </div>
+
+  <div class="note win">
+    <h4>Twee van de drie zijn dezelfde beweging: stop met X, begin met Y</h4>
+    <p>Balzac en Balzy openen allebei met een <strong>categorie-herkadering</strong>, niet met een aanbod. Scheren is het probleem, trimmen is de oplossing &mdash; en pas daarna komt het product. Dat is precies het gat dat in de vorige analyse als punt 6 stond: niemand legt uit w&aacute;&aacute;rom het apparaat werkt. Blijkt dat hun best schalende advertenties dat w&eacute;l doen, alleen op Meta en niet op hun eigen site.</p>
+    <p>Manscaped doet iets anders: een <strong>productonthulling</strong> van een kleurvariant. Dat werkt alleen bij een merk dat al bekend is. Voor jou is dat geen model.</p>
+  </div>
+
+  <div class="note warn">
+    <h4>En dit raakt jouw productpagina direct</h4>
+    <p>Balzac stuurt zijn best schalende advertentie <strong>recht naar de productpagina</strong>. Geen homepage, geen tussenpagina. Dat betekent dat hun PDP hun landingspagina is, en dat elke euro advertentiegeld door dat koopblok heen moet.</p>
+    <p>Bij jou geldt hetzelfde zodra je Meta-verkeer op <code>/products/groom-guard-pro</code> zet. Het maakt de herbouw uit blok 01 geen cosmetische exercitie maar de plek waar je advertentiebudget rendeert of verdampt.</p>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">04</span><h2 class="duo">Wat ik meeneem naar de PDP,<span class="b">en wat uit de homepage komt.</span></h2></div>
+  <p class="sintro">Je homepage-tak staat verder dan ik dacht: twaalf blokken, werkende Liquid-secties en een testthema. Daar hoef ik niets opnieuw uit te vinden.</p>
+
+  <div class="moves">
+    <div class="mv"><div class="i">01</div><div class="t"><b>Het mesjes-driepak herprijzen en hernoemen</b><p>Van &euro;24,95 naar de marktprijs van &euro;19,95, en van «Trio Pack» naar iets met een jaar erin. Dit is bij allebei je concurrenten een top-10 bestseller en bij jou niet.</p></div><div class="w now">nu</div></div>
+    <div class="mv"><div class="i">02</div><div class="t"><b>Categorie-herkadering in het mechanismeblok</b><p>&laquo;Stoppen met scheren, beginnen met trimmen&raquo; is wat er schaalt op Meta. Zet die redenering in blok 04 van de PDP in plaats van alleen de techniek van de kop.</p></div><div class="w">blok 04</div></div>
+    <div class="mv"><div class="i">03</div><div class="t"><b>Het jaarkostenblok krijgt een tegenstander</b><p>Balzy &euro;19,95 en Balzac &euro;19,95 per jaar aan mesjes. Dat is de eerlijke vergelijking waar je VoC-dossier om vraagt, met echte bedragen in plaats van een suggestie.</p></div><div class="w">blok 08</div></div>
+    <div class="mv"><div class="i">04</div><div class="t"><b>Bundels naar voren, zoals bij Balzac</b><p>Vier van hun tien bestsellers zijn bundels. De drie-kaartenladder uit het sjabloon doet dit al &mdash; maar hij moet niet op plek negen belanden.</p></div><div class="w">blok 09</div></div>
+    <div class="mv"><div class="i">05</div><div class="t"><b>De themaconventies uit de homepage overnemen</b><p>Klassen met <code>ws-</code>, padding via <code>indent-settings</code>, mobiel als echte media query op 749px, alle teksten als sectie-instelling. En de harde regel uit blok 2: <strong>nooit een prijs in een tekstveld</strong>, altijd live uit het product.</p></div><div class="w">bouw</div></div>
+    <div class="mv"><div class="i">06</div><div class="t"><b>Het bestelaantal dat je al bevestigd hebt</b><p>De homepage-tak corrigeerde «7.400+ sinds 2022» naar <strong>200.000+ bestellingen sinds 2021</strong>. Dat is het enige cijfer waarmee je in de rij van Balzy (200.000+ klanten) en Balzac (100.000+) meedoet. Het hoort ook op de productpagina, mét het label erbij dat het over bestellingen gaat en niet over dit ene apparaat.</p></div><div class="w">blok 03</div></div>
+  </div>
+
+  <div class="note">
+    <h4>Wat ik níét overneem</h4>
+    <p>De aanpak van Manscaped. Ze zijn honderd keer groter, staan qua groei stil, en hun schalende creative is een kleurvariant van een product dat iedereen in de VS al kent. Dat is een merkenspel dat je op dit formaat niet speelt. Balzy is het interessantere voorbeeld en die staat drie straten verderop.</p>
+  </div>
+</section>
+
+<div class="foot">
+  <strong>Herkomst.</strong> Bezoek, groei, actieve advertenties, adverteerders, productrangschikking, prijzen, advertentieteksten, bereik en landingspagina's: TrendTrack, opgehaald 23 augustus 2026. Alle geciteerde advertentieteksten zijn letterlijke hooks uit de transcripten of de primaire advertentietekst. Wellshave-bezoek: Shopify-sessiedata over 90 dagen, omgerekend naar een maand.<br><br>
+  <strong>Wat dit níét vervangt.</strong> De bestaande <code>audits/concurrentie-analyse.html</code> op de homepage-tak leest de sites zelf uit — sectievolgorde, letterlijke beloftes, FAQ-teksten, navigatie. Dit document vult aan met wat je in de HTML niet ziet: het aanbod op volgorde van verkoop, en wat er aan advertenties draait. Lees ze naast elkaar.<br><br>
+  <strong>Verbruik.</strong> 60 TrendTrack-credits van de 8.296 die er stonden.
+</div>
+
+</div>

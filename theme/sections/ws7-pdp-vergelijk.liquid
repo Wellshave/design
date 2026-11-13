@@ -1,0 +1,160 @@
+{% comment %}
+  Wellshave v7 · productpagina: vergelijken als kaarten in plaats van een tabel.
+  Kolommen: custom.compare_products. Per product uit custom.compare_info: beeld, rol
+  (toggle_subtitle), is_popuplar en de vier voordelen. De rijen zijn alle voordelen van
+  alle kolommen samen, ontdubbeld; per kaart een vinkje of een streep.
+  "Kies" zet de keuze in het koopvak (product of upgrade) en gaat terug naar de knop;
+  staat het andere product daar niet als keuze, dan is het een link naar dat product.
+{% endcomment %}
+{%- assign lijst = product.metafields.custom.compare_products.value -%}
+{%- assign kolommen = 0 -%}
+{%- assign anderen = 0 -%}
+{%- assign alle = '' -%}
+{%- for cp in lijst -%}
+  {%- assign kolommen = kolommen | plus: 1 -%}
+  {%- unless cp.id == product.id -%}{%- assign anderen = anderen | plus: 1 -%}{%- endunless -%}
+  {%- capture sl %}{% render 'ws-vergelijk-sleutels', p: cp %}{% endcapture -%}
+  {%- assign alle = alle | append: sl | strip -%}
+{%- endfor -%}
+{%- if kolommen > 1 and anderen > 0 -%}
+  {{ 'ws7.css' | asset_url | stylesheet_tag }}
+  {%- assign rijen = alle | remove_first: '‹' | split: '›' -%}
+  {%- assign uniek = '' -%}
+  {%- for r in rijen -%}
+    {%- assign t = r | remove: '‹' | strip -%}
+    {%- if t == blank -%}{%- continue -%}{%- endif -%}
+    {%- assign sleutel = '‹' | append: t | append: '›' -%}
+    {%- unless uniek contains sleutel -%}{%- assign uniek = uniek | append: sleutel -%}{%- endunless -%}
+  {%- endfor -%}
+  {%- assign uniek_lijst = uniek | remove_first: '‹' | split: '›‹' -%}
+  {%- assign hoogste = 0 -%}
+  {%- for cp in lijst -%}{%- if cp.selected_or_first_available_variant.price > hoogste -%}{%- assign hoogste = cp.selected_or_first_available_variant.price -%}{%- endif -%}{%- endfor -%}
+  {%- comment -%} Een upgrade is dit product plus meer: die kaart krijgt ook alle punten van dit product. {%- endcomment -%}
+  {%- capture basis_sl %}{% render 'ws-vergelijk-sleutels', p: product %}{% endcapture -%}
+  {%- assign upgrades = '' -%}
+  {%- for up in product.metafields.custom.upgrade_products.value -%}{%- assign upgrades = upgrades | append: '‹' | append: up.id | append: '›' -%}{%- endfor -%}
+  {%- comment -%}
+    Hetzelfde tussen de kolommen: staat een kolom in upgrade_extras van de
+    goedkoopste kolom (Barber Bro 2.0 → 3.0), dan heeft hij alles van die
+    goedkoopste plus de extra's. Een lege lijst telt ook: "alles van de
+    goedkoopste, maar de extra's zijn niet los te koop" (Barber Bro 1.0 → 3.0).
+  {%- endcomment -%}
+  {%- assign laag = blank -%}
+  {%- for cp in lijst -%}
+    {%- if laag == blank or cp.selected_or_first_available_variant.price < laag.selected_or_first_available_variant.price -%}{%- assign laag = cp -%}{%- endif -%}
+  {%- endfor -%}
+  {%- assign laag_extras = laag.metafields.custom.upgrade_extras.value -%}
+  {%- capture laag_sl %}{% render 'ws-vergelijk-sleutels', p: laag %}{% endcapture -%}
+  <div class="ws7 ws7p" id="ws7p-vergelijk">
+    <div class="ws7p-rail ws7p-sec">
+      <div class="ws7-midden">
+        {%- assign ei = product.metafields.custom.compare_info.value -%}
+        {%- assign kop = ei.popup_main_title | default: section.settings.kop -%}
+        {%- if kop contains ',' -%}
+          {%- assign kop1 = kop | split: ',' | first | append: ',' -%}
+          {%- assign kop2 = kop | remove_first: kop1 | strip -%}
+        {%- else -%}
+          {%- assign kop1 = kop -%}{%- assign kop2 = section.settings.kop_goud -%}
+        {%- endif -%}
+        {% render 'ws7-kop', kop: kop1, goud: kop2 %}
+        {%- assign lead = ei.popup_lead | default: section.settings.sub -%}
+        {%- if lead != blank -%}<p class="ws7-sub ws7p-sub">{{ lead }}</p>{%- endif -%}
+      </div>
+      <div class="ws7p-verg" style="--n:{{ kolommen }}">
+        {%- for cp in lijst -%}
+          {%- assign ci = cp.metafields.custom.compare_info.value -%}
+          {%- assign cv = cp.selected_or_first_available_variant -%}
+          {%- capture eigen %}{% render 'ws-vergelijk-sleutels', p: cp %}{% endcapture -%}
+          {%- assign cp_sl = '‹' | append: cp.id | append: '›' -%}
+          {%- if upgrades contains cp_sl -%}{%- assign eigen = eigen | append: basis_sl -%}{%- endif -%}
+          {%- assign cp_sleutel = cp.id | append: '' -%}
+          {%- if laag_extras != blank and cp.id != laag.id and laag_extras[cp_sleutel] != nil -%}{%- assign eigen = eigen | append: laag_sl -%}{%- endif -%}
+          {%- assign beeld = ci.popup_image | default: cp.featured_image -%}
+          {%- assign c_pct = 0 -%}
+          {%- if cv.compare_at_price > cv.price -%}{%- assign c_v = cv.compare_at_price | minus: cv.price -%}{%- assign c_pct = c_v | times: 100 | divided_by: cv.compare_at_price -%}{%- endif -%}
+          <article class="ws7p-verg__kaart{% if cp.id == product.id %} is-gekozen{% endif %}" data-ws7p-kolom="{% if cp.id == product.id %}basis{% else %}{{ cv.id }}{% endif %}">
+            <div class="ws7p-verg__beeld">
+              {%- if ci.is_popuplar and cv.price == hoogste and section.settings.label != blank -%}<span class="ws7-label">{{ section.settings.label }}</span>{%- endif -%}
+              {%- if beeld != blank -%}{{ beeld | image_url: width: 900 | image_tag: loading: 'lazy', widths: '420,640,900', sizes: '(max-width: 749px) 84vw, 440px', alt: cp.title }}{%- endif -%}
+            </div>
+            <div class="ws7p-verg__kop">
+              <h3>{{ ci.toggle_title | default: cp.title }}</h3>
+              {%- if ci.toggle_subtitle != blank -%}<span>{{ ci.toggle_subtitle }}</span>{%- endif -%}
+              <p class="ws7p-verg__prijs"><b>{% render 'ws-euro', bedrag: cv.price %}</b>{%- if cv.compare_at_price > cv.price -%}<s>{% render 'ws-euro', bedrag: cv.compare_at_price %}</s>{%- endif -%}{%- if ci.best_for != blank and section.settings.beste != blank -%}<em>{{ section.settings.beste }} {{ ci.best_for }}</em>{%- endif -%}</p>
+            </div>
+            <ul class="ws7p-verg__rijen">
+              {%- for t in uniek_lijst -%}
+                {%- assign tt = t | remove: '‹' | remove: '›' | strip -%}
+                {%- if tt == blank -%}{%- continue -%}{%- endif -%}
+                {%- assign sl = '‹' | append: tt | append: '›' -%}
+                <li{% unless eigen contains sl %} class="is-weg"{% endunless %}>{{ tt }}
+                  {%- if eigen contains sl -%}<svg viewBox="0 0 24 24" aria-label="{{ section.settings.ja | escape }}"><path d="M5 12.5l4.2 4.2L19 7"/></svg>{%- else -%}<span aria-label="{{ section.settings.nee | escape }}">—</span>{%- endif -%}
+                </li>
+              {%- endfor -%}
+            </ul>
+            <div class="ws7p-verg__voet">
+              {%- if cp.id == product.id -%}
+                <button type="button" class="ws7-link" data-ws7p-kies="basis">{{ section.settings.kies | replace: '[product]', cp.title }}{% render 'ws7-pijl' %}</button>
+              {%- else -%}
+                <a class="ws7-link" href="{{ cp.url }}" data-ws7p-kies="{{ cv.id }}">{{ section.settings.kies | replace: '[product]', cp.title }}{% render 'ws7-pijl' %}</a>
+              {%- endif -%}
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var blok = document.getElementById('ws7p-vergelijk');
+      if (!blok) return;
+      function keuze(waarde) {
+        var radio = waarde === 'basis'
+          ? document.querySelector('input[name^="ws-tier-"][value=""]')
+          : document.querySelector('input[name^="ws-tier-"][value="' + waarde + '"]');
+        return radio;
+      }
+      function markeer() {
+        var gekozen = document.querySelector('input[name^="ws-tier-"]:checked');
+        var w = gekozen ? (gekozen.value || 'basis') : 'basis';
+        blok.querySelectorAll('[data-ws7p-kolom]').forEach(function (k) {
+          k.classList.toggle('is-gekozen', k.getAttribute('data-ws7p-kolom') === w);
+        });
+      }
+      blok.addEventListener('click', function (e) {
+        var knop = e.target.closest('[data-ws7p-kies]');
+        if (!knop) return;
+        var radio = keuze(knop.getAttribute('data-ws7p-kies'));
+        var vak = document.querySelector('main-product');
+        if (!radio) { if (knop.tagName === 'BUTTON' && vak) vak.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
+        e.preventDefault();
+        radio.checked = true;
+        radio.dispatchEvent(new Event('change', { bubbles: true }));
+        markeer();
+        if (vak) vak.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      document.addEventListener('change', function (e) {
+        if (e.target && e.target.name && e.target.name.indexOf('ws-tier-') === 0) markeer();
+      });
+    })();
+  </script>
+{%- endif -%}
+{% schema %}
+{
+  "name": "WS7 · PDP vergelijken",
+  "tag": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "paragraph", "content": "Kolommen en punten komen uit custom.compare_products en compare_info. De kop komt uit compare_info (popup_main_title); de velden hieronder zijn de terugval." },
+    { "type": "text", "id": "kop", "label": "Kop", "default": "Welke past bij jou?" },
+    { "type": "text", "id": "kop_goud", "label": "Kop, regel in goud", "info": "Gebruikt als de kop geen komma heeft." },
+    { "type": "text", "id": "sub", "label": "Regel eronder" },
+    { "type": "text", "id": "label", "label": "Label op de duurste kaart", "default": "Meest gekozen" },
+    { "type": "text", "id": "beste", "label": "Voor 'beste voor'", "default": "Beste voor" },
+    { "type": "text", "id": "kies", "label": "Link onder een kaart", "default": "Kies [product]" },
+    { "type": "text", "id": "ja", "label": "Vinkje, voorgelezen", "default": "Inbegrepen" },
+    { "type": "text", "id": "nee", "label": "Streep, voorgelezen", "default": "Niet inbegrepen" }
+  ],
+  "presets": [ { "name": "WS7 · PDP vergelijken" } ]
+}
+{% endschema %}
