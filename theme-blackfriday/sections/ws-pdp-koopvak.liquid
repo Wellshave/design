@@ -1733,6 +1733,25 @@
         {%- endif -%}
         {%- endunless -%}
 
+        {%- if v7 and s.knop_onder_prijs -%}
+          {%- comment -%}
+            Knop direct onder de prijs (alleen Black Friday-thema): totaal, dan de
+            knop, dan "200.000+ bestellingen", dan Klarna en de drie vinkjes.
+            ProductPrice blijft één blok in de html (de prijsscripts en de
+            meelopende balk lezen het zo), maar laat zijn kinderen meedoen in de
+            koopkolom (display: contents), zodat de volgorde hier kan wisselen.
+          {%- endcomment -%}
+          <style>
+            .ws-pdp7 .ws-bb > #ProductPrice-{{ section.id }}{display:contents}
+            .ws-pdp7 .ws-bb > #ProductPrice-{{ section.id }} ~ *{order:6}
+            .ws-pdp7 .ws-bb > #ProductPrice-{{ section.id }} > .ws-prijs,.ws-pdp7 .ws-bb > #ProductPrice-{{ section.id }} > .ws-bft-tot{order:1}
+            .ws-pdp7 .ws-bb > #ProductPrice-{{ section.id }} > .ws-bft-tot{margin-top:-14px}
+            .ws-pdp7 .ws-bb > #ProductPrice-{{ section.id }} ~ .ws-vorm{order:2}
+            .ws-pdp7 .ws-bb > #ProductPrice-{{ section.id }} ~ .ws-tel{order:3;margin-top:-8px}
+            .ws-pdp7 .ws-bb > #ProductPrice-{{ section.id }} > .ws-klarna{order:4}
+            .ws-pdp7 .ws-bb > #ProductPrice-{{ section.id }} ~ .ws-zeker{order:4}
+          </style>
+        {%- endif -%}
         <div id="ProductPrice-{{ section.id }}">
           {%- comment -%}
             De korting staat achter de prijs, in procenten. Hier stond eerst
@@ -3339,6 +3358,7 @@
     { "type": "checkbox", "id": "tiers_tonen", "label": "Aanbodkeuze met upgrade", "info": "Het product en de upgrade uit custom.upgrade_products als keuze, met de extra's (custom.upgrade_extras) en de cadeaus van de winkelwagen. Vervangt dan de modelkeuze en de upgrade-pop-up.", "default": true },
     { "type": "range", "id": "tier_max", "label": "Hoeveel upgrades", "min": 1, "max": 3, "step": 1, "default": 1 },
     { "type": "text", "id": "tier_kop", "label": "Kop boven de keuze", "default": "Kies je aanbieding" },
+    { "type": "checkbox", "id": "knop_onder_prijs", "label": "Knop direct onder de prijs", "default": true, "info": "Totaal, knop, 200.000+ bestellingen, dan Klarna en de vinkjes." },
     { "type": "checkbox", "id": "tier_naast", "label": "Keuzes naast elkaar", "default": true, "info": "Compacte kaarten naast elkaar; de cadeaus staan één keer onder de kaarten, voor de gekozen keuze." },
     { "type": "text", "id": "tier_cad_kop", "label": "Kop boven de cadeaus (naast elkaar)", "default": "Gratis bij je bestelling" },
     { "type": "text", "id": "tier_upg_kop", "label": "Naam van de upgrade", "default": "Upgrade naar [product]" },

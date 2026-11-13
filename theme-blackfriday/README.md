@@ -87,3 +87,7 @@ geen enkel thema vertaald (ook live niet); daar zien en/de/fr Nederlands.
   deiner Bestellung / Offert avec ta commande.
 * De 2e-artikelkorting combineert niet meer met kortingscodes of andere
   product- en orderkortingen; alleen met verzendkortingen.
+* Knop direct onder de prijs (instelling `knop_onder_prijs`, standaard aan):
+  Totaal → Bestel nu → "Al 200.000+ bestellingen" → Klarna → vinkjes. Alleen
+  css-volgorde (ProductPrice krijgt display: contents); de html en de scripts
+  blijven gelijk.
