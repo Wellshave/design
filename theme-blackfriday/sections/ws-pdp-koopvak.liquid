@@ -915,7 +915,53 @@
         -%}
         {%- if toon_tiers -%}
           {%- assign extras_kaart = mf.upgrade_extras.value -%}
-          <div class="ws-tiers" data-ws-tiers>
+          {%- liquid
+            assign naast = false
+            if s.tier_naast and tiers_n > 0
+              assign naast = true
+            endif
+            assign naast_cad = ''
+            assign naast_n = tier_handles | split: ',' | size
+          -%}
+          {%- if naast -%}
+            {%- comment -%}
+              Kies je aanbieding naast elkaar (alleen in het Black Friday-thema): elke
+              keuze een smalle kaart met de foto groot en gecentreerd bovenaan, het
+              rondje linksboven, dan naam, wat erin zit en de prijs. De cadeaus staan
+              één keer onder de kaarten. Drie of meer keuzes op een telefoon: een rij
+              die je opzij veegt.
+            {%- endcomment -%}
+            <style>
+              .ws-pdp7 .ws-tiers--naast .ws-tiers-lijst{grid-template-columns:repeat(var(--ws-n,2),minmax(0,1fr));gap:8px;align-items:stretch;padding-top:4px}
+              .ws-pdp7 .ws-tiers--naast .ws-tier,.ws-pdp7 .ws-tiers--naast .ws-tier:has(.ws-tier-extra){display:flex;flex-direction:column;align-items:stretch;gap:6px;padding:12px 10px 11px}
+              .ws-pdp7 .ws-tiers--naast .ws-tier input{position:absolute;top:11px;left:10px;z-index:1}
+              .ws-pdp7 .ws-tiers--naast .ws-tier-bd{order:1;align-self:center;width:84px;height:84px;background:transparent}
+              .ws-pdp7 .ws-tiers--naast .ws-tier:has(input:checked) .ws-tier-bd{background:transparent}
+              .ws-pdp7 .ws-tiers--naast .ws-tier-tx{order:2;gap:3px}
+              .ws-pdp7 .ws-tiers--naast .ws-tier-tx b{font-size:13.5px;font-weight:700;line-height:1.2}
+              .ws-pdp7 .ws-tiers--naast .ws-tier-sub{font-size:11px;line-height:1.3}
+              .ws-pdp7 .ws-tiers--naast .ws-tier-pre,.ws-pdp7 .ws-tiers--naast .ws-tier-tag{font-size:10px;line-height:1.3}
+              .ws-pdp7 .ws-tiers--naast .ws-tier-extra,.ws-pdp7 .ws-tiers--naast .ws-tier:has(input:checked) .ws-tier-extra{order:3;display:grid;gap:2px;margin:0;padding:0;background:none;border:0;border-radius:0}
+              .ws-pdp7 .ws-tiers--naast .ws-tier-extra .ws-tx{display:block;padding:0;border:0;font-size:10.5px;font-weight:600;line-height:1.3}
+              .ws-pdp7 .ws-tiers--naast .ws-tier-extra .ws-tx-bd,.ws-pdp7 .ws-tiers--naast .ws-tier-extra .ws-tx-nm small,.ws-pdp7 .ws-tiers--naast .ws-tier-extra .ws-tx-pr s{display:none}
+              .ws-pdp7 .ws-tiers--naast .ws-tier-extra .ws-tx-pr,.ws-pdp7 .ws-tiers--naast .ws-tier:has(input:checked) .ws-tier-extra .ws-tx-pr{display:inline;margin-left:4px;font-weight:600;color:#24804A}
+              .ws-pdp7 .ws-tiers--naast .ws-tier-pr{order:4;margin-top:auto;padding-top:2px;text-align:left;display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 7px}
+              .ws-pdp7 .ws-tiers--naast .ws-tier-pr b,.ws-pdp7 .ws-tiers--naast .ws-tier-pr s{display:inline}
+              .ws-pdp7 .ws-tiers--naast .ws-tier-badge{top:-9px;right:10px}
+              .ws-pdp7 .ws-tiers-cad{border-radius:12px;background:var(--zand,#F5F1EA);padding:6px 0 4px}
+              .ws-pdp7 .ws-tiers-cad[hidden],.ws-pdp7 .ws-tiers-cadvak[hidden]{display:none}
+              .ws-pdp7 .ws-tiers-cad-kop{margin:3px 12px 1px;font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid,#6A635A)}
+              .ws-pdp7 .ws-tiers-cadvak{display:grid}
+              .ws-pdp7 .ws-tiers-cadvak .ws-tx + .ws-tx{border-top:1px solid rgba(140,90,26,.12)}
+              .ws-pdp7 .ws-tiers-cadvak .ws-tx-kies{background:#fff}
+              @media screen and (max-width:749px){
+                .ws-pdp7 .ws-tiers--drie .ws-tiers-lijst{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:46%;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px 2px 4px;scrollbar-width:none}
+                .ws-pdp7 .ws-tiers--drie .ws-tier{scroll-snap-align:start}
+                .ws-pdp7 .ws-tiers--naast .ws-tier-bd{width:72px;height:72px}
+              }
+            </style>
+          {%- endif -%}
+          <div class="ws-tiers{% if naast %} ws-tiers--naast{% if naast_n > 2 %} ws-tiers--drie{% endif %}{% endif %}" data-ws-tiers{% if naast %} style="--ws-n: {{ naast_n }}"{% endif %}>
             <div class="ws-tiers-kop">
               {%- if s.tier_kop != blank and tiers_n > 0 -%}<span>{{ s.tier_kop }}</span>{%- endif -%}
               {%- if kan_vergelijken and s.vergelijk_label != blank -%}
@@ -1188,11 +1234,22 @@
                     <b>{{ t_nu }}</b>
                     {%- if t_was != blank -%}<s><span class="visually-hidden">{{ s.kies_was }} </span>{{ t_was }}</s>{%- endif -%}
                   </span>
-                  {%- assign t_rijen = t_extra | append: t_cad | strip -%}
+                  {%- if naast -%}
+                    {%- comment -%}
+                      Naast elkaar: de kaart houdt alleen wat erin zit; de cadeaus staan
+                      één keer onder de kaarten (naast_cad), voor de gekozen kaart.
+                    {%- endcomment -%}
+                    {%- assign t_rijen = t_extra | strip -%}
+                    {%- assign t_cad_s = t_cad | strip -%}
+                    {%- capture naast_vak -%}<div class="ws-tiers-cadvak" data-ws-tier-cad="{{ forloop.index0 }}"{% unless t_aan %} hidden{% endunless %}>{{ t_cad_s }}</div>{%- endcapture -%}
+                    {%- if t_cad_s != blank -%}{%- assign naast_cad = naast_cad | append: naast_vak -%}{%- endif -%}
+                  {%- else -%}
+                    {%- assign t_rijen = t_extra | append: t_cad | strip -%}
+                  {%- endif -%}
                   {%- if t_rijen != blank -%}
                     <span class="ws-tier-extra">
                       {{ t_rijen }}
-                      {%- if t_extra_n > 0 and t_bespaar > 0 and s.tier_besp != blank -%}
+                      {%- if naast == false and t_extra_n > 0 and t_bespaar > 0 and s.tier_besp != blank -%}
                         {%- capture t_besp_tx -%}<b>{{ s.munt }}{% render 'price-formated', price: t_bespaar %}</b>{%- endcapture -%}
                         <span class="ws-tx-som">
                           {{ s.tier_besp | replace: '[bedrag]', t_besp_tx }}
@@ -1207,6 +1264,12 @@
                 </label>
               {%- endfor -%}
             </fieldset>
+            {%- if naast and naast_cad != blank -%}
+              <div class="ws-tiers-cad" data-ws-tiers-cad>
+                {%- if s.tier_cad_kop != blank -%}<p class="ws-tiers-cad-kop">{{ s.tier_cad_kop }}</p>{%- endif -%}
+                {{ naast_cad }}
+              </div>
+            {%- endif -%}
             {%- if kies_aan -%}
               {%- comment -%}
                 Het cadeau kiezen: een lijst met de keuzecadeaus. Het script in
@@ -1254,6 +1317,20 @@
                 pagina(r);
                 addons(r);
                 preorder(r);
+                cadvak(r);
+              }
+              // Naast elkaar: het cadeauvak onder de kaarten toont de cadeaus van de
+              // gekozen kaart. Een open keuzelijst gaat eerst dicht.
+              function cadvak(r) {
+                var vakken = blok.querySelectorAll('[data-ws-tier-cad]');
+                if (!vakken.length) return;
+                var radios = [].slice.call(blok.querySelectorAll('input[name="ws-tier-{{ section.id }}"]'));
+                var i = String(radios.indexOf(r)), zicht = false;
+                var open = blok.querySelector('[data-ws-cadkeuze]:not([hidden])');
+                if (open) { open.hidden = true; blok.querySelectorAll('.ws-tx-kies.is-open').forEach(function (k) { k.classList.remove('is-open'); }); }
+                vakken.forEach(function (v) { var aan = v.getAttribute('data-ws-tier-cad') === i; v.hidden = !aan; if (aan) zicht = true; });
+                var vak = blok.querySelector('[data-ws-tiers-cad]');
+                if (vak) vak.hidden = !zicht;
               }
               // Pre-order volgt de keuze: leverregel, bonusregel, knoppen en de
               // regeleigenschap die mee de winkelwagen in gaat.
@@ -3262,6 +3339,8 @@
     { "type": "checkbox", "id": "tiers_tonen", "label": "Aanbodkeuze met upgrade", "info": "Het product en de upgrade uit custom.upgrade_products als keuze, met de extra's (custom.upgrade_extras) en de cadeaus van de winkelwagen. Vervangt dan de modelkeuze en de upgrade-pop-up.", "default": true },
     { "type": "range", "id": "tier_max", "label": "Hoeveel upgrades", "min": 1, "max": 3, "step": 1, "default": 1 },
     { "type": "text", "id": "tier_kop", "label": "Kop boven de keuze", "default": "Kies je aanbieding" },
+    { "type": "checkbox", "id": "tier_naast", "label": "Keuzes naast elkaar", "default": true, "info": "Compacte kaarten naast elkaar; de cadeaus staan één keer onder de kaarten, voor de gekozen keuze." },
+    { "type": "text", "id": "tier_cad_kop", "label": "Kop boven de cadeaus (naast elkaar)", "default": "Gratis bij je bestelling" },
     { "type": "text", "id": "tier_upg_kop", "label": "Naam van de upgrade", "default": "Upgrade naar [product]" },
     { "type": "text", "id": "tier_badge", "label": "Label op de rand", "info": "Alleen als compare_info van de upgrade op meest gekozen staat.", "default": "Meest gekozen" },
     { "type": "text", "id": "tier_meer", "label": "Meerprijs", "default": "Voor [bedrag] extra" },

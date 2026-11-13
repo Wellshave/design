@@ -68,3 +68,22 @@ geen enkel thema vertaald (ook live niet); daar zien en/de/fr Nederlands.
   vertaalbaar zijn; en/de/fr zijn vertaald (16 teksten per taal).
 * Vergeleken met v9 (live): alle gedeelde bestanden zijn gelijk; pre-order
   (18–21 november) en verwijderbare upsells zitten erin.
+
+## Kies je aanbieding naast elkaar, knop "Bestel nu" (13 november)
+
+* `sections/ws-pdp-koopvak.liquid`: nieuwe instelling `tier_naast` (standaard aan).
+  De keuzes staan als smalle kaarten naast elkaar: foto groot en gecentreerd
+  bovenaan, rondje linksboven, dan naam, omschrijving, levering, wat erin zit
+  en de prijs. De cadeaus staan één keer onder de kaarten (kop `tier_cad_kop`,
+  "Gratis bij je bestelling") en volgen de gekozen kaart; de keuzelijst voor het
+  cadeau werkt daar zoals voorheen. Drie of meer keuzes op een telefoon: een rij
+  die je opzij veegt. De css staat in de sectie zelf, alleen als `tier_naast`
+  aan staat, zodat de gedeelde ws7-pdp.css gelijk blijft aan v9.
+  Ontwerp: artifact "Kies je aanbieding · Black Friday", voorstel A.
+* `templates/product.json`: `pre_knop` "Bestel nu" (was "Pre-order nu"), voor
+  alle pre-order producten (Barber Bro, Barber Packs, Sharpline, Tondeuse Deluxe,
+  Body & Beard Kit). De leverregel op de kaart blijft. Vertaald: Order now /
+  Jetzt bestellen / Commander; de cadeaukop: Free with your order / Gratis zu
+  deiner Bestellung / Offert avec ta commande.
+* De 2e-artikelkorting combineert niet meer met kortingscodes of andere
+  product- en orderkortingen; alleen met verzendkortingen.
