@@ -9,10 +9,17 @@ Elke week vier artikelen die gevonden worden op wat mannen werkelijk intypen, di
 eerlijk oplossen, en die eindigen bij een Wellshave-product dat dat probleem aanpakt. Ze komen als
 **concept** in Shopify; publiceren doet een mens.
 
-Wat specifiek Wellshave is (kleuren, toon, cijferregels, beeld) staat in de merklaag:
-`../sanwarwala-landing-pages/references/wellshave-merklaag.md`. Lees deel 3 tot 5, 11, 12 en 13
-voor je schrijft. Bij tegenspraak wint de merklaag, behalve waar dit bestand iets blogspecifieks
-zegt.
+**Het ontwerp volgt wellshave.com zelf**, het ws7-systeem van het thema (`assets/ws7.css`):
+Inter Tight 500 voor koppen met een strakke spatiëring en een gouden tweede regel, Inter voor
+tekst, het gouden oog (10,5px, kapitalen, `#9a6a2e`), zandvlakken, kaarten met ruime afronding,
+donkere pil met gouden pijl, tekstlinks met pijl en de donkere afsluiter met de drie beloftes.
+**Niet** Montserrat 900, geen gouden verloopknoppen en geen pastelkaarten: dat is de oude
+werkwijze. Verandert de site, haal dan `ws7.css` opnieuw op, pas `assets/wellshave-blog.css` aan
+en upload hem onder een nieuwe naam.
+
+Toon, cijferregels en beeldregels komen uit de merklaag:
+`../sanwarwala-landing-pages/references/wellshave-merklaag.md`, deel 11, 12 en 13. De typografie
+en knoppen in die merklaag (deel 4 tot 6) zijn ouder dan de site en gelden hier niet.
 
 ## Bestanden
 
@@ -85,6 +92,8 @@ artikelbeeld er zelf boven; begin de body dus nooit met een H1 of een eigen hero
 Componenten om te gebruiken waar ze passen: `wsb-tints` (probleem, probleem, oplossing),
 `wsb-steps` (genummerde stappen), `wsb-tabel` (vergelijking, met `td.wij` voor de Wellshave-kolom),
 `wsb-keuze` (kies dit als / kies dat als), `wsb-note` (wanneer naar de huisarts), `figure`.
+De afsluiter eindigt met `ul.wsb-beloftes` (100 dagen proberen, 2 jaar garantie, voor 23:59
+besteld morgen in huis), dezelfde drie als op de homepage.
 
 ## Harde regels
 
