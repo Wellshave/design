@@ -1,0 +1,171 @@
+/* Wellshave blog — componenten voor artikelen binnen het bloggle-sjabloon.
+   Alles hangt onder #wsb, zodat niets de themaheader of -footer raakt en we de
+   .bloggle_rte-regels (14px tekst) winnen op specificiteit. Tokens uit de merklaag. */
+
+#wsb{
+  --ink:#111111;--ink-80:rgba(17,17,17,.8);--ink-60:rgba(17,17,17,.6);
+  --ink-40:rgba(17,17,17,.4);--ink-10:rgba(17,17,17,.10);
+  --paper:#FFFFFF;--sand:#F5F1EA;--sand-deep:#EDE6DA;--carbon:#191816;
+  --bronze:#BC813E;--gold:#F5D18A;
+  --tint-rose:#F4E3DE;--tint-amber:#F7EBD3;--tint-sage:#E5EBE1;
+  --grad-gold:linear-gradient(158deg,#F8DFAB 0%,#E5BC77 42%,#C8913F 100%);
+  --grad-dark:linear-gradient(168deg,#242220 0%,#171614 58%,#0E0D0C 100%);
+  --grad-gold-tekst:linear-gradient(100deg,#B0742A 0%,#8C5A1A 100%);
+  --r-s:12px;--r-m:18px;--r-l:26px;
+  font-family:Montserrat,system-ui,sans-serif;color:var(--ink-80);
+  max-width:720px;margin:0 auto;font-size:16.5px;line-height:1.72;
+}
+#wsb *{box-sizing:border-box}
+#wsb p,#wsb li{font-size:16.5px;line-height:1.72;color:var(--ink-80);margin:0 0 1em}
+#wsb p:last-child{margin-bottom:0}
+#wsb strong{color:var(--ink);font-weight:700}
+#wsb a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--bronze);
+  text-underline-offset:3px;text-decoration-thickness:1.5px}
+#wsb a:hover{text-decoration-color:var(--ink)}
+#wsb :focus-visible{outline:3px solid var(--bronze);outline-offset:3px}
+#wsb img{max-width:100%;height:auto;display:block;border-radius:var(--r-m)}
+#wsb ul,#wsb ol{margin:0 0 1.1em;padding-left:1.3em}
+#wsb li{margin:0 0 .45em}
+#wsb li::marker{color:var(--bronze)}
+
+/* koppen: tweeslags apparaat, op leesmaat */
+#wsb h2{font-family:Montserrat,sans-serif;font-weight:900;letter-spacing:-.022em;
+  line-height:1.1;font-size:clamp(25px,3.4vw,33px);color:var(--ink);
+  margin:2.1em 0 .7em;text-wrap:balance;text-align:left}
+#wsb h2 .b{display:block;color:#B0742A}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  #wsb h2 .b{background-image:var(--grad-gold-tekst);-webkit-background-clip:text;
+    background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+}
+#wsb h3{font-family:Montserrat,sans-serif;font-weight:800;font-size:19px;line-height:1.3;
+  color:var(--ink);margin:1.6em 0 .5em;letter-spacing:-.01em}
+#wsb .wsb-eyebrow{display:block;font-size:10.5px;font-weight:800;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--ink-40);margin:0 0 10px}
+
+/* opening */
+#wsb .wsb-lede{font-size:19px;line-height:1.6;color:var(--ink);font-weight:500}
+
+/* kort antwoord: het blok dat Google en AI-overzichten oppakken */
+#wsb .wsb-answer{background:var(--sand);border-radius:var(--r-m);padding:22px 24px;
+  margin:1.6em 0;border-left:4px solid var(--bronze)}
+#wsb .wsb-answer p{color:var(--ink)}
+#wsb .wsb-answer ul{margin-bottom:0}
+
+/* inhoud */
+#wsb .wsb-toc{border:1px solid var(--ink-10);border-radius:var(--r-m);padding:18px 22px;margin:1.6em 0}
+#wsb .wsb-toc ol{margin:0;padding-left:1.2em}
+#wsb .wsb-toc li{margin:.25em 0;font-size:15px}
+#wsb .wsb-toc a{text-decoration:none;color:var(--ink-80)}
+#wsb .wsb-toc a:hover{color:var(--ink);text-decoration:underline}
+
+/* beeld */
+#wsb figure{margin:1.8em 0}
+#wsb figure img{width:100%;aspect-ratio:4/3;object-fit:cover}
+#wsb figure.breed img{aspect-ratio:16/9}
+#wsb figcaption{font-size:13px;color:var(--ink-60);margin-top:8px;line-height:1.5}
+
+/* drie tintkaarten: probleem, probleem, oplossing */
+#wsb .wsb-tints{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:1.6em 0}
+#wsb .wsb-tint{border-radius:var(--r-m);padding:18px}
+#wsb .wsb-tint:nth-child(1){background:var(--tint-rose)}
+#wsb .wsb-tint:nth-child(2){background:var(--tint-amber)}
+#wsb .wsb-tint:nth-child(3){background:var(--tint-sage)}
+#wsb .wsb-tint b{display:block;color:var(--ink);font-weight:800;font-size:15px;margin-bottom:6px;line-height:1.3}
+#wsb .wsb-tint p{font-size:14.5px;line-height:1.55;margin:0}
+
+/* stappen */
+#wsb .wsb-steps{list-style:none;padding:0;counter-reset:st;margin:1.4em 0}
+#wsb .wsb-steps>li{counter-increment:st;position:relative;padding:0 0 0 52px;margin:0 0 1.2em}
+#wsb .wsb-steps>li::before{content:counter(st);position:absolute;left:0;top:0;width:36px;height:36px;
+  border-radius:50%;background:var(--sand);color:var(--ink);font-weight:900;font-size:15px;
+  display:flex;align-items:center;justify-content:center}
+#wsb .wsb-steps>li b{display:block;color:var(--ink);font-weight:800}
+
+/* productaanbeveling: donkere plaat */
+#wsb .wsb-product{background:var(--grad-dark);border-radius:var(--r-l);padding:24px;margin:2em 0;
+  display:grid;grid-template-columns:200px 1fr;gap:24px;align-items:center;color:#fff;
+  box-shadow:0 14px 34px rgba(17,17,17,.14)}
+#wsb .wsb-product img{border-radius:var(--r-m);aspect-ratio:1/1;object-fit:cover;width:100%;background:#fff}
+#wsb .wsb-product .wsb-eyebrow{color:var(--gold);margin-bottom:6px}
+#wsb .wsb-product .naam{font-size:23px;font-weight:900;letter-spacing:-.02em;line-height:1.15;color:#fff;margin:0 0 6px}
+#wsb .wsb-product p{color:rgba(255,255,255,.78);font-size:15px;line-height:1.55;margin:0 0 12px}
+#wsb .wsb-product ul{list-style:none;padding:0;margin:0 0 16px}
+#wsb .wsb-product li{color:rgba(255,255,255,.9);font-size:14.5px;line-height:1.45;margin:0 0 7px;
+  padding-left:26px;position:relative}
+#wsb .wsb-product li::before{content:"";position:absolute;left:0;top:2px;width:16px;height:16px;
+  border-radius:50%;border:1.6px solid var(--gold);
+  background:radial-gradient(circle at 50% 50%,var(--gold) 0 3px,transparent 3.5px)}
+#wsb .wsb-product .gerust{font-size:12.5px;color:rgba(255,255,255,.62);margin:12px 0 0}
+
+/* knoppen: altijd pillen */
+#wsb .wsb-knop{display:inline-flex;align-items:center;gap:8px;border-radius:100px;padding:14px 26px;
+  font-size:14.5px;font-weight:800;text-decoration:none;line-height:1.2;
+  transition:transform .18s ease,filter .18s ease}
+#wsb .wsb-knop:hover{transform:translateY(-1px)}
+#wsb .wsb-knop.goud{background:var(--grad-gold);color:#1A1408}
+#wsb .wsb-knop.goud:hover{filter:brightness(1.04)}
+#wsb .wsb-knop.zwart{background:var(--ink);color:#fff}
+
+/* vergelijkingstabel */
+#wsb .wsb-tabel{overflow-x:auto;margin:1.6em 0;border-radius:var(--r-m);border:1px solid var(--ink-10)}
+#wsb table{width:100%;border-collapse:collapse;table-layout:auto;font-size:14.5px;min-width:520px}
+#wsb th,#wsb td{padding:12px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--ink-10);line-height:1.45}
+#wsb thead th{background:var(--sand);color:var(--ink);font-weight:800;font-size:13px}
+#wsb tbody th{color:var(--ink);font-weight:700;width:30%}
+#wsb tr:last-child td,#wsb tr:last-child th{border-bottom:0}
+#wsb td.wij{background:rgba(245,209,138,.16)}
+
+/* twee kolommen: kies dit als */
+#wsb .wsb-keuze{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:1.6em 0}
+#wsb .wsb-keuze>div{background:var(--sand);border-radius:var(--r-m);padding:20px}
+#wsb .wsb-keuze>div.uit{background:var(--grad-gold)}
+#wsb .wsb-keuze b{display:block;color:var(--ink);font-weight:900;font-size:16px;margin-bottom:8px}
+#wsb .wsb-keuze ul{margin:0;padding-left:1.1em}
+#wsb .wsb-keuze li{font-size:14.5px;line-height:1.5;color:var(--ink)}
+
+/* huisarts / let op */
+#wsb .wsb-note{border:1.5px solid var(--ink-10);border-radius:var(--r-m);padding:18px 22px;margin:1.6em 0;
+  background:#fff}
+#wsb .wsb-note b:first-child{display:block;color:var(--ink);font-weight:800;margin-bottom:6px}
+#wsb .wsb-note p,#wsb .wsb-note li{font-size:15px}
+
+/* veelgestelde vragen */
+#wsb .wsb-faq{margin:1.2em 0 2em}
+#wsb details{border-bottom:1px solid var(--ink-10);padding:4px 0}
+#wsb summary{cursor:pointer;list-style:none;font-weight:800;color:var(--ink);font-size:16.5px;
+  padding:14px 36px 14px 0;position:relative;line-height:1.4}
+#wsb summary::-webkit-details-marker{display:none}
+#wsb summary::after{content:"+";position:absolute;right:4px;top:10px;font-size:24px;font-weight:500;color:var(--bronze)}
+#wsb details[open] summary::after{content:"\2212"}
+#wsb details>div{padding:0 0 14px}
+
+/* verder lezen */
+#wsb .wsb-related{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:1.2em 0;padding:0;list-style:none}
+#wsb .wsb-related li{margin:0}
+#wsb .wsb-related a{display:block;background:var(--sand);border-radius:var(--r-s);padding:14px 16px;
+  text-decoration:none;font-weight:700;font-size:14.5px;line-height:1.4;color:var(--ink);height:100%}
+#wsb .wsb-related a:hover{background:var(--sand-deep)}
+
+/* afsluiter */
+#wsb .wsb-end{background:var(--grad-dark);border-radius:var(--r-l);padding:34px 28px;margin:2.4em 0 1em;text-align:center}
+#wsb .wsb-end h2{color:#fff;margin:0 0 .5em;text-align:center}
+#wsb .wsb-end h2 .b{color:var(--gold)}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  #wsb .wsb-end h2 .b{background-image:var(--grad-gold)}
+}
+#wsb .wsb-end p{color:rgba(255,255,255,.78);max-width:520px;margin:0 auto 18px}
+#wsb .wsb-end .gerust{font-size:12.5px;color:rgba(255,255,255,.6);margin:14px auto 0}
+
+#wsb .wsb-bron{font-size:12.5px;color:var(--ink-60);line-height:1.55;border-top:1px solid var(--ink-10);
+  padding-top:14px;margin-top:2em}
+#wsb .wsb-bron p{font-size:12.5px;color:var(--ink-60)}
+
+@media (max-width:640px){
+  #wsb{font-size:16px}
+  #wsb p,#wsb li{font-size:16px}
+  #wsb .wsb-tints,#wsb .wsb-keuze,#wsb .wsb-related{grid-template-columns:1fr}
+  #wsb .wsb-product{grid-template-columns:1fr;padding:20px;gap:16px}
+  #wsb .wsb-product img{max-width:220px}
+  #wsb .wsb-knop{width:100%;justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){#wsb .wsb-knop{transition:none}}
