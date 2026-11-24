@@ -22,6 +22,7 @@ zegt.
 | `blogs/<jaar>-w<week>/<onderwerp>.html` | Bron per artikel: `<!--meta {json}-->` plus de inhoud |
 | `scripts/keywords.py` | Zoekvraag ophalen uit Google-autocomplete (NL) |
 | `scripts/bouw.py` | Bouwt body, preview en payload, en controleert alles |
+| `scripts/linkcheck.py` | 404-controle op alle gepubliceerde artikelen, ook omleidingen naar de homepage |
 | `assets/wellshave-blog.css` | Alle componenten, op de Shopify-CDN als `wellshave-blog-N.css` |
 | `data/config.json` | CSS-URL op de CDN, blog-ID, auteur, sjabloon |
 | `data/seeds.txt`, `data/keywords-*.json` | Zaadwoorden en ruwe zoekdata |
@@ -55,6 +56,11 @@ component in gebruik; kopieer de structuur en vervang de inhoud.
    negeren: Shopify formatteert die). Tel H2's, productkaarten, FAQ's, beelden en links.
 9. **Werk het contentplan bij** (status `concept`), commit, en meld de admin-links:
    `https://admin.shopify.com/store/wellshave/content/articles/<numeriek id>`.
+10. **Draai de 404-controle** op de live blog: `python3 scripts/linkcheck.py`. Meld alles wat
+    `KAPOT` of `HOMEPAGE` is, met het artikel waarin het staat. Repareer een dood adres bij voorkeur
+    met een omleiding naar de best passende pagina (`urlRedirectUpdate` als er al een omleiding
+    naar `/#gbaid…` staat, anders `urlRedirectCreate`). Een omleiding vangt ook externe links op en
+    overleeft het opnieuw opslaan van een artikel in Bloggle.
 
 ## Opbouw van een artikel
 
@@ -108,6 +114,25 @@ Het bouwscript bewaakt de meeste; de rest is aan jou.
 - **Beeld:** eigen fotografie uit Shopify Files of de productbeelden. Geen beelden met ingebakken
   advertentietekst in de lopende tekst. Nooit gegenereerd beeld als bewijs (voor-en-na, huid).
   Bekijk een beeld voordat je het gebruikt; de bestandsnaam zegt niets.
+
+## Omleidingen en 404's
+
+- **Een app zet dode adressen om naar de homepage** (doel `/#gbaid…`). Op 24 november 2026 waren dat
+  er 5.470 van de 5.715. Google behandelt dat als soft 404 en de bezoeker komt nergens; de
+  `linkcheck` meldt het als `HOMEPAGE`. Alles onder `/blogs/` is toen naar een passend artikel of
+  een passende collectie gezet; de rest (vooral producten, oude talen en adressen met
+  trackingparameters) is nog niet nagelopen.
+- **Een omleiding mag niet naar een adres wijzen dat zelf omgeleid wordt.** Shopify weigert dat.
+  `/collections/ladyshave` is zo'n adres (niet online), dus daar `/collections/all`.
+- **Taalvoorvoegsels** (`/nl-de/…`) volgen de omleiding van het kale pad, behalve waar er een eigen
+  omleiding voor het voorvoegselpad bestaat.
+- **Bloggle-artikelen** worden opnieuw gegenereerd als iemand ze in de Bloggle-app bewaart. Een
+  wijziging die je via de API in de body zet, kan dan verdwijnen. Zet linkreparaties daarom liever
+  in een omleiding, en controleer na een Bloggle-bewerking of de tekst nog klopt.
+
+## Auteur
+
+Alle artikelen staan op naam van **Team Wellshave**, ook de oudere. Gebruik geen persoonsnaam.
 
 ## Technisch
 
