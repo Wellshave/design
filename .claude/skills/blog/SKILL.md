@@ -151,8 +151,15 @@ Alle artikelen staan op naam van **Team Wellshave**, ook de oudere. Gebruik geen
   bedoeling.
 - **Alles hangt onder `#wsb`.** Het ID wint van de `.bloggle_rte p`-regel van het thema (14px) en
   laat de rest van de winkel ongemoeid.
-- **Sjabloon `bloggle-custom`** geeft dezelfde kop, datum, leestijd en artikelbeeld als de
-  bestaande artikelen. Het artikelbeeld (liggend) is het `image`-veld, niet een beeld in de body.
+- **Geen Bloggle meer.** Wellshave stopt met de Bloggle-app; de blog wordt hier beheerd. Schrijf
+  nooit Bloggle-opmaak (`bggle--block`, `data-src`, scripts van cloudfront). Oude Bloggle-artikelen
+  zijn omgezet met `scripts/migreer_bloggle.py`; de originelen staan in
+  `blogs/migratie/backup-bloggle-2026-11-24.json`.
+- **Sjabloon.** Zolang het eigen artikelsjabloon van de theme (`templates/article.json`, sectie
+  `main-article`) nog niet in de ws7-stijl staat, blijft `templateSuffix` op `bloggle-custom`. Is
+  die theme-aanpassing gedaan, dan krijgen alle artikelen `templateSuffix: ""` en zet
+  `data/config.json` het sjabloon op leeg. Het artikelbeeld (liggend) is het `image`-veld, niet
+  een beeld in de body; het sjabloon zet titel, datum en beeld er zelf boven.
 - **Links naar artikelen uit dezelfde week** geven een 404 tot ze live staan; het bouwscript slaat
   die over. Publiceer een week dus in zijn geheel, of haal de link weg.
 - **SEO-velden** gaan als metafields `global.title_tag` en `global.description_tag`.
